@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2015                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -235,7 +235,7 @@ function statut_texte_instituer($objet,$statut){
  * Hack de compatibilite: les appels directs ont un  $type != 'auteur'
  * si l'auteur ne peut pas se connecter
  *
- * http://code.spip.net/@puce_statut_auteur_dist
+ * http://doc.spip.org/@puce_statut_auteur_dist
  *
  * @param int $id
  * @param string $statut
@@ -264,7 +264,7 @@ function puce_statut_auteur_dist($id, $statut, $id_parent, $type, $ajax='', $men
 }
 
 
-// http://code.spip.net/@puce_statut_rubrique_dist
+// http://doc.spip.org/@puce_statut_rubrique_dist
 function puce_statut_rubrique_dist($id, $statut, $id_rubrique, $type, $ajax='',$menu_rapide=_ACTIVER_PUCE_RAPIDE) {
 	return http_img_pack('rubrique-16.png', '');
 }
@@ -313,11 +313,8 @@ function puce_statut_changement_rapide($id, $statut, $id_rubrique, $type='articl
 	$desc = lister_tables_objets_sql($table);
 	if (!isset($desc['statut_textes_instituer']))
 		return $inser_puce;
-
-	if (!function_exists('autoriser')) {
-		include_spip('inc/autoriser');
-	}
-
+	
+	include_spip('inc/autoriser');
 	// cas ou l'on a un parent connu (devrait disparaitre au profit du second cas plus generique)
 	if ($id_rubrique){
 		if (!autoriser('publierdans', 'rubrique', $id_rubrique))
@@ -365,7 +362,7 @@ function puce_statut_changement_rapide($id, $statut, $id_rubrique, $type='articl
 	}
 }
 
-// http://code.spip.net/@afficher_script_statut
+// http://doc.spip.org/@afficher_script_statut
 function afficher_script_statut($id, $type, $n, $img, $statut, $titre, $act='') {
 	$h = generer_action_auteur("instituer_objet","$type-$id-$statut");
 	$h = "selec_statut('$id', '$type', $n, jQuery('img',this).attr('src'), '$h');return false;";
@@ -375,7 +372,7 @@ function afficher_script_statut($id, $type, $n, $img, $statut, $titre, $act='') 
 
 // compat
 // La couleur du statut
-// http://code.spip.net/@puce_statut
+// http://doc.spip.org/@puce_statut
 
 function puce_statut($statut, $atts='') {
 	$src = statut_image('article',$statut);
