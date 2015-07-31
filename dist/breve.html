@@ -40,7 +40,7 @@
 			<INCLURE{fond=inc-forum}{id_breve}>
 			[<p class="forum-repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_breve:></a></p>]
 
-		</div><!-- fin contenu -->
+		</div><!--#contenu-->
 
 		[(#REM) Menu de navigation laterale ]
 		<div id="navigation">
@@ -50,7 +50,7 @@
 
 			[(#REM) Breves dans la meme rubrique ]
 			<B_breves>
-			<div class="menu breves">
+			<div class="menu">
 				<h2><:autres_breves:></h2>
 				<ul>
 					<BOUCLE_breves(BREVES) {id_rubrique} {par date}{inverse} {0,10}>
@@ -62,7 +62,7 @@
 
 			[(#REM) Menu de navigation mots-cles ]
 			<B_mots>
-			<div class="menu divers">
+			<div class="menu">
 				<h2><:mots_clefs:></h2>
 				<ul>
 				<BOUCLE_mots(MOTS) {id_breve} {par titre}>
@@ -72,14 +72,14 @@
 			</div>
 			</B_mots>
 
-		</div><!-- fin navigation -->
+		</div><!--#navigation-->
 
-	</div><!-- fin conteneur -->
+	</div><!--#conteneur-->
 
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
-</div><!-- fin page -->
+</div><!--#page-->
 </body>
 </html>
 </BOUCLE_breve_principal>

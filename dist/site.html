@@ -40,7 +40,7 @@
 				<ul>
 					<BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {pagination 5}>
 					<li>
-						<h3 class="titre"><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></h3>
+						<h3><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></h3>
 						[<div class="enclosures">(#TAGS|afficher_enclosures)</div>]
 						<small>[(#DATE|affdate_court)][, <:par_auteur:> (#LESAUTEURS)][ &mdash; <em>(#TAGS|afficher_tags)</em>]</small>
 						[<div class="texte">(#DESCRIPTIF|image_reduire{300})</div>]
@@ -54,7 +54,7 @@
 
 			[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
 
-		</div><!-- fin contenu -->
+		</div><!--#contenu-->
 
 		[(#REM) Menu de navigation laterale ]
 		<div id="navigation">
@@ -64,7 +64,7 @@
 
 			[(#REM) Autres sites web ]
 			<B_sites>
-			<div class="menu syndic">
+			<div class="menu">
 				#ANCRE_PAGINATION
 				<h2><:sites_web:></h2>
 				<ul>
@@ -78,7 +78,7 @@
 
 			[(#REM) Menu de navigation mots-cles ]
 			<B_mots>
-			<div class="menu divers">
+			<div class="menu">
 				<h2><:mots_clefs:></h2>
 				<ul>
 					<BOUCLE_mots(MOTS) {id_syndic} {par titre}>
@@ -88,14 +88,14 @@
 			</div>
 			</B_mots>
 
-		</div><!-- fin navigation -->
+		</div><!--#navigation-->
 
-	</div><!-- fin conteneur -->
+	</div><!--#conteneur-->
 
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
-</div><!-- fin page -->
+</div><!--#page-->
 </body>
 </html>
 </BOUCLE_site>
