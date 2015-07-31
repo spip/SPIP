@@ -78,8 +78,14 @@ AND ($GLOBALS['spip_version_base'] != (str_replace(',','.',$GLOBALS['meta']['ver
 // sinon c'est qu'elle a ete interrompue et il faut la reprendre
 
 elseif (isset($GLOBALS['meta']["admin"])) {
-	$n = preg_match('/^(.*)_(\d+)_/', $GLOBALS['meta']["admin"], $l);
-	if (_AJAX OR !isset($_COOKIE['spip_admin'])) {
+	if (preg_match('/^(.*)_(\d+)_/', $GLOBALS['meta']["admin"], $l))
+		list(,$var_f,$n) = $l;
+	if (_AJAX 
+		OR !(
+			isset($_COOKIE['spip_admin'])
+			OR (isset($GLOBALS['visiteur_session']) AND $GLOBALS['visiteur_session']['statut']=='0minirezo')
+			)
+		) {
 		spip_log("Quand la meta admin vaut " .
 			 $GLOBALS['meta']["admin"] .
 			 " seul un admin peut se connecter et sans AJAX." .
