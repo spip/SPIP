@@ -17,37 +17,52 @@ include_ecrire('inc_admin');
 
 
 function demander_conversion($tables_a_convertir, $action) {
-
+	global $spip_lang_right;
 
 	$charset_orig = $GLOBALS['meta']['charset'];
 
-	if ($charset_orig == 'utf-8')
-		$commentaire = 'Votre site est d&eacute;j&agrave; en utf-8, inutile de le convertir...';
-	else {
-		$commentaire = _L("Vous vous appr&ecirc;tez &agrave; convertir le contenu de votre base de donn&eacute;es (articles, br&egrave;ves, etc) du jeu de caract&egrave;res ".("<b>".$GLOBALS['meta']['charset']."</b>")." vers le jeu de caract&egrave;res universel <b>utf-8</b>.");
-		$commentaire .= _L("<p>N'oubliez pas de faire auparavant une sauvegarde compl&egrave;te de votre site. Vous devrez aussi v&eacute;rifier que vos squelettes et fichiers de langue sont compatibles utf-8.");
-		$commentaire .= _L("<p>Note&nbsp;: en cas de timeout, veuillez simplement recharger la page jusqu'&agrave; ce qu'elle indique 'termin&eacute;'.");
-	}
-
 	// tester si le charset d'origine est connu de spip
 	if (!load_charset($charset_orig))
-		$commentaire = _L("Erreur : le jeu de caract&egrave;res ".("<b>".$charset_orig."</b>")." n'est pas support&eacute;.");
+		$message = _L("Erreur : le jeu de caract&egrave;res ".("<b>".$charset_orig."</b>")." n'est pas support&eacute;.");
 
+	// ne pas convertir si deja utf8
+	else if ($charset_orig == 'utf-8')
+		$message = 'Votre site est d&eacute;j&agrave; en utf-8, inutile de le convertir...';
 
-	debut_admin(generer_url_post_ecrire("convert_utf8"), $action, $commentaire);
+	else {
+		$commentaire = _L("Vous vous appr&ecirc;tez &agrave; convertir le contenu de votre base de donn&eacute;es (articles, br&egrave;ves, etc) du jeu de caract&egrave;res ".("<b>".$GLOBALS['meta']['charset']."</b>")." vers le jeu de caract&egrave;res universel <b>utf-8</b>.");
+		$commentaire .=  "<p><small>"
+		. http_img_pack('warning.gif', _T('info_avertissement'), "width='48' height='48' align='right'");
+		$commentaire .= _L("N'oubliez pas de faire auparavant une sauvegarde compl&egrave;te de votre site. Vous devrez aussi v&eacute;rifier que vos squelettes et fichiers de langue sont compatibles utf-8. D'autre part le suivi des r&eacute;visions, s'il est activ&eacute;, sera endommag&eacute;.</small>");
+		$commentaire .= _L("<p><b>Important&nbsp;:</b> en cas de timeout, veuillez recharger la page jusqu'&agrave; ce qu'elle indique 'termin&eacute;'.");
+		$commentaire .= "<hr />\n";
 
-	// noter dans les meta qu'on veut convertir
-	ecrire_meta('conversion_charset', time());
-	ecrire_meta('charset', 'utf-8');
-	ecrire_metas();
-	foreach ($tables_a_convertir as $table => $champ) {
-		spip_log("demande update charset table $table ($champ)");
-		echo _L("demande update charset table $table ($champ)<br>\n");
-		spip_query("UPDATE $table
-		SET $champ = CONCAT('<CONVERT ".$charset_orig.">', $champ)
-		WHERE $champ NOT LIKE '<CONVERT %'");
+		debut_admin(generer_url_post_ecrire("convert_utf8"),
+			$action, $commentaire);
+
+		// noter dans les meta qu'on veut convertir
+		ecrire_meta('conversion_charset', time());
+		ecrire_meta('charset', 'utf-8');
+		ecrire_metas();
+		foreach ($tables_a_convertir as $table => $champ) {
+			spip_log("demande update charset table $table ($champ)");
+			echo _L("demande update charset table $table ($champ)<br>\n");
+			spip_query("UPDATE $table
+			SET $champ = CONCAT('<CONVERT ".$charset_orig.">', $champ)
+			WHERE $champ NOT LIKE '<CONVERT %'");
+		}
+		return;
 	}
 
+	// Ici en cas d'erreur, une page admin normale avec bouton de retour
+	install_debut_html($action);
+	echo '<p>'.$message;
+
+	echo "<p align='right'> <a href='" . generer_url_ecrire("config_lang")
+	. "'> &gt;&gt; "._T('icone_retour')."</a>";
+
+	install_fin_html();
+	exit;
 }
 
 function convert_utf8_dist() {
@@ -86,8 +101,12 @@ function convert_utf8_dist() {
 
 	install_debut_html($action);
 
+	// preparer un fichier de sauvegarde au cas ou
+	$f = @fopen(_DIR_SESSIONS.'backup_conversion.sql', 'w');
+
+
 	foreach ($tables_a_convertir as $table => $champ) {
-		echo "<br>$table ($champ) :<br>";
+		echo "<br /><b>$table</b> &nbsp; ";
 		$s = spip_query("SELECT * FROM $table
 		WHERE $champ LIKE '<CONVERT %'");
 
@@ -111,21 +130,27 @@ function convert_utf8_dist() {
 
 			// Cette query ne fait que retablir les donnees existantes
 			$query = "UPDATE $table SET ".join(',', $query)."
-			WHERE $id_champ = ".$t[$id_champ]
-			. " AND $champ LIKE '<CONVERT %'"; # eviter une double conversion
+			WHERE $id_champ = ".$t[$id_champ];
+
+			// On l'enregistre telle quelle sur le fichier de sauvegarde
+			if ($f) fwrite($f, $query.";\n");
 
 			// Mais on la transcode
 			if ($charset_source != 'utf-8') {
 				$query = unicode_to_utf_8(
 					charset2unicode($query, $charset_source));
-				spip_query($query);
-				echo '.                                           '; flush();
+				spip_query($query
+				." AND $champ LIKE '<CONVERT %'" # eviter une double conversion
+				);
+				echo '.           '; flush();
 			}
 		}
 		spip_free_result($s);
 	}
 
-	echo "<br />Termin&eacute; !";
+	if ($f) fclose($f);
+
+	echo _L("<p><b>C'est termin&eacute;&nbsp;!</b>");
 	effacer_meta('conversion_charset');
 	ecrire_metas();
 
@@ -133,6 +158,9 @@ function convert_utf8_dist() {
 	fin_admin($action);
 	
 	// bouton "retour au site" + redirige_par_entete
+	echo "<p align='right'> <a href='" . generer_url_ecrire("config_lang")
+	. "'> &gt;&gt; "._T('icone_retour')."</a>";
+
 	install_fin_html();
 }
 
