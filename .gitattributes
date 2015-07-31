@@ -244,12 +244,14 @@ ecrire/plugins/verifie_conformite.php -text
 ecrire/prive.php -text
 ecrire/public/aiguiller.php -text
 ecrire/public/decompiler.php -text
+ecrire/public/evaluer_page.php -text
 ecrire/public/format_html.php -text
 ecrire/public/index.php -text
 ecrire/public/iterateur.php -text
 ecrire/public/jointures.php -text
 ecrire/public/normaliser.php -text
 ecrire/public/quete.php -text
+ecrire/public/sandbox.php -text
 ecrire/public/styliser_par_z.php -text
 ecrire/public/tracer.php -text
 ecrire/req/pg.php -text

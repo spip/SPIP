@@ -492,25 +492,9 @@ function evaluer_fond ($fond, $contexte=array(), $connect=null) {
 	$page = inclure_page($fond, $contexte, $connect);
 
 	if (!$page) return $page;
-
-	if ($page['process_ins'] != 'html') {
-		// restaurer l'etat des notes
-		if (isset($page['notes'])
-		  AND $page['notes']
-		  AND $notes = charger_fonction("notes", "inc", true)){
-			$notes($page['notes'],'restaurer_etat');
-		}
-
-		ob_start();
-		xml_hack($page, true);
-		eval('?' . '>' . $page['texte']);
-		$page['texte'] = ob_get_contents();
-		xml_hack($page);
-		$page['process_ins'] = 'html';
-		ob_end_clean();
-	}
-	page_base_href($page['texte']);
-
+	// eval $page et affecte $res
+	include _ROOT_RESTREINT."public/evaluer_page.php";
+	
 	// Lever un drapeau (global) si le fond utilise #SESSION
 	// a destination de public/parametrer
 	// pour remonter vers les inclusions appelantes
@@ -523,15 +507,6 @@ function evaluer_fond ($fond, $contexte=array(), $connect=null) {
 	return $page;
 }
 
-
-// Appeler avant et apres chaque eval()
-// http://doc.spip.org/@xml_hack
-function xml_hack(&$page, $echap = false) {
-	if ($echap)
-		$page['texte'] = str_replace('<'.'?xml', "<\1?xml", $page['texte']);
-	else
-		$page['texte'] = str_replace("<\1?xml", '<'.'?xml', $page['texte']);
-}
 
 // http://doc.spip.org/@page_base_href
 function page_base_href(&$texte){
