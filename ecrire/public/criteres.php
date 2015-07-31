@@ -603,7 +603,7 @@ function kwote($lisp)
 function critere_IN_dist ($idb, &$boucles, $crit)
 {
 
-	list($arg, $op, $val, $col)= calculer_critere_infixe($idb, $boucles, $crit);
+	list($arg, $op, $val, $col, $where_complement)= calculer_critere_infixe($idb, $boucles, $crit);
 	$in = critere_IN_cas($idb, $boucles, $crit->not ? 'NOT' : '', $arg, $op, $val, $col);
 //	inserer la condition; exemple: {id_mot ?IN (66, 62, 64)}
 	$where = !$crit->cond ? $in :
@@ -619,6 +619,8 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 			$where = array("'NOT'",array("'IN'","'".$boucles[$idb]->id_table.".".$boucles[$idb]->primary."'" ,array("'SELF'","'".$boucles[$idb]->id_table.".".$boucles[$idb]->primary."'",$where)));
 
 	$boucles[$idb]->where[] = $where;
+	if ($where_complement) // condition annexe du type "AND (objet='article')"
+		$boucles[$idb]->where[]= $where_complement;
 }
 
 // http://doc.spip.org/@critere_IN_cas
@@ -665,7 +667,7 @@ function critere_IN_cas ($idb, &$boucles, $crit2, $arg, $op, $val, $col)
 // http://doc.spip.org/@calculer_critere_DEFAUT
 function calculer_critere_DEFAUT($idb, &$boucles, $crit)
 {
-	list($arg, $op, $val, $col)= calculer_critere_infixe($idb, $boucles, $crit);
+	list($arg, $op, $val, $col, $where_complement)= calculer_critere_infixe($idb, $boucles, $crit);
 
 	$where = array("'$op'", "'$arg'", $val[0]);
 
@@ -693,6 +695,8 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit)
 	}
 
 	$boucles[$idb]->where[]= $where;
+	if ($where_complement) // condition annexe du type "AND (objet='article')"
+		$boucles[$idb]->where[]= $where_complement;
 }
 
 // http://doc.spip.org/@calculer_critere_infixe
@@ -710,6 +714,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	list($fct, $col, $op, $val, $args_sql) =
 	  calculer_critere_infixe_ops($idb, $boucles, $crit);
 	$col_alias = $col;
+	$where_complement =false;
 //var_dump(array($fct, $col, $op, $val, $args_sql));
 	// Cas particulier : id_enfant => utiliser la colonne id_objet
 	if ($col == 'id_enfant')
@@ -728,7 +733,13 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	else if (($col == 'id_secteur')&& ($type == 'forums')) {
 		$table = critere_secteur_forum($idb, $boucles, $val, $crit);
 	}
-
+	
+	// cas id_article=xx qui se mappe en id_objet=xx AND objet=article
+	else if (count(trouver_champs_decomposes($col,$desc))>1){
+		$decompose = decompose_champ_id_objet($col);
+		$col = array_shift($decompose);
+		$where_complement = array("'='","'$table.".reset($decompose)."'","sql_quote('".end($decompose)."')");
+	}
 	// Cas particulier : expressions de date
 	else if ($date = tester_param_date($boucle->type_requete, $col)) {
 		list($col, $table) =
@@ -754,6 +765,12 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 			else $t =''; // jointure non declaree. La trouver.
 			$table = $calculer_critere_externe($boucle, $boucle->jointures, $col, $desc, ($crit->cond OR $op !='='), $t);
 			list($nom, $desc) = trouver_champ_exterieur($col, $boucle->jointures, $boucle);
+			if (count(trouver_champs_decomposes($col,$desc))>1){
+				$decompose = decompose_champ_id_objet($col);
+				$col_alias = $col; // id_article devient juste le nom d'origine
+				$col = array_shift($decompose);
+				$where_complement = array("'='","'$table.".reset($decompose)."'","sql_quote('".end($decompose)."')");
+			}
 		}
 	}
 	// Si la colonne SQL est numerique ou le critere est une date relative
@@ -770,6 +787,8 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	}
 	// tag du critere pour permettre aux boucles de modifier leurs requetes par defaut en fonction de ca
 	$boucles[$idb]->modificateur['criteres'][$col] = true;
+	if ($col_alias!=$col)
+		$boucles[$idb]->modificateur['criteres'][$col_alias] = true;
 	
 	// ajout pour le cas special d'une condition sur le champ statut:
 	// il faut alors interdire a la fonction de boucle
@@ -795,7 +814,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	// inserer la fonction SQL
 	if ($fct) $arg = "$fct($arg$args_sql)";
 
-	return array($arg, $op, $val, $col_alias);
+	return array($arg, $op, $val, $col_alias, $where_complement);
 }
 
 
@@ -832,15 +851,22 @@ function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $eg, $che
 	$cle = trouver_champ_exterieur($col, $joints, $boucle, $checkarrivee);
 	if ($cle) {
 		$t = array_search($cle[0], $boucle->from);
+		// transformer eventuellement id_xx en (id_objet,objet)
+		$cols = trouver_champs_decomposes($col,$cle[1]); 
 		if ($t) {
-		  $c = '/\b' . $t  . ".$col" . '\b/';
-		  if (!trouver_champ($c, $boucle->where)) {
-		    // mais ca peut etre dans le FIELD pour le Having
-		    $c = "/FIELD.$t" .".$col,/";
-		    if (!trouver_champ($c, $boucle->select)) return $t;
-		  }
+			$joindre = false;
+			foreach($cols as $col){
+			  $c = '/\b' . $t  . ".$col" . '\b/';
+			  if (trouver_champ($c, $boucle->where)) $joindre = true;
+			  else {
+			    // mais ca peut etre dans le FIELD pour le Having
+			    $c = "/FIELD.$t" .".$col,/";
+			    if (trouver_champ($c, $boucle->select)) $joindre = true;
+			  }
+			}
+		  if (!$joindre) return $t;
 		}
-		$cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle, $col, $eg);
+		$cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle, $cols, $eg);
 		if ($cle) return $cle;
 	}
 
