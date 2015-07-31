@@ -12,18 +12,19 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// Drapeau d'edition : on regarde qui a ouvert quel article en edition,
-// et on le signale aux autres redacteurs pour eviter de se marcher sur
-// les pieds
+// Drapeau d'edition : on regarde qui a ouvert quel objet editorial en 
+// edition, et on le signale aux autres redacteurs pour eviter de se marcher 
+// sur les pieds
 
 // Le format est une meta drapeau_edition qui contient un tableau
-// serialise id_article => (id_auteur_modif, date_modif)
+// serialise
+// type_objet => (id_objet => (id_auteur => (nom_auteur => (date_modif))))
 
 // a chaque mise a jour de ce tableau on oublie les enregistrements datant
 // de plus d'une heure
 
 // Attention ce n'est pas un verrou "bloquant", juste un drapeau qui signale
-// que l'on bosse sur un article ; les autres peuvent passer outre
+// que l'on bosse sur cet objet editorial ; les autres peuvent passer outre
 // (en cas de communication orale c'est plus pratique)
 
 
@@ -107,60 +108,57 @@ function mention_qui_edite ($id, $type='article') {
 	}
 }
 
-// Quels sont les articles en cours d'edition par X ?
+// Quels sont les objets en cours d'edition par X ?
 // http://doc.spip.org/@liste_drapeau_edition
-function liste_drapeau_edition ($id_auteur, $type = 'article') {
+function liste_drapeau_edition ($id_auteur) {
 	$edition = lire_tableau_edition();
-	$articles_ouverts = array();
+	$objets_ouverts = array();
 
 	foreach ($edition as $objet => $data)
-	if ($objet == 'article')
-	foreach ($data as $id => $auteurs)
-	{
-		if (isset($auteurs[$id_auteur])
-		AND (array_pop($auteurs[$id_auteur]) > time()-3600)) {
-			$row = sql_fetsel("titre, statut", "spip_articles", "id_article=".$id);
-			$articles_ouverts[] = array(
-				'id_article' => $id,
-				'titre' => typo($row['titre']),
-				'statut' => typo($row['statut'])
-			);
+		foreach ($data as $id => $auteurs)
+		{
+			if (isset($auteurs[$id_auteur])
+			AND (array_pop($auteurs[$id_auteur]) > time()-3600)) {
+				$objets_ouverts[] = array(
+					'objet'=>$objet,
+					'id_objet' => $id,
+				);
+			}
 		}
-	}
-	return $articles_ouverts;
+	return $objets_ouverts;
 }
 
-// Quand l'auteur veut liberer tous ses articles
+// Quand l'auteur veut liberer tous ses objets (tous types)
 // http://doc.spip.org/@debloquer_tous
 function debloquer_tous($id_auteur) {
 	$edition = lire_tableau_edition();
-	foreach ($edition as $objet => $data)
-	if ($objet == 'article')
-	foreach ($data as $id => $auteurs)
-	{
-		if (isset($auteurs[$id_auteur])) {
-			unset ($edition[$objet][$id][$id_auteur]);
-			ecrire_tableau_edition($edition);
+	foreach ($edition as $objet => $data) {
+		foreach ($data as $id => $auteurs)
+		{
+			if (isset($auteurs[$id_auteur])) {
+				unset ($edition[$objet][$id][$id_auteur]);
+				ecrire_tableau_edition($edition);
+			}
 		}
 	}
 }
 
-// quand l'auteur libere un article precis
+// quand l'auteur libere un objet precis
 // http://doc.spip.org/@debloquer_edition
-function debloquer_edition($id_auteur, $debloquer_article, $type='article') {
+function debloquer_edition($id_auteur, $id_objet, $type='article') {
 	$edition = lire_tableau_edition();
 
-	foreach ($edition as $objet => $data)
-	if ($objet == $type)
-	foreach ($data as $id => $auteurs)
-	{
-		if ($id == $debloquer_article
-		AND isset($auteurs[$id_auteur])) {
-			unset ($edition[$objet][$id][$id_auteur]);
-			ecrire_tableau_edition($edition);
+	foreach ($edition as $objet => $data){
+		if ($objet == $type) {
+			foreach ($data as $id => $auteurs)
+			{
+				if ($id == $id_objet
+				AND isset($auteurs[$id_auteur])) {
+					unset ($edition[$objet][$id][$id_auteur]);
+					ecrire_tableau_edition($edition);
+				}
+			}
 		}
 	}
 }
-
-
 ?>

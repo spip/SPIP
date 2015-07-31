@@ -9,6 +9,8 @@
 </li>
 </BOUCLE_objets>
 </ul>
-	[(#BOUTON_ACTION{<:lien_liberer_tous:>,#URL_ACTION_AUTEUR{debloquer_edition,tout,#SELF},ajax})]
+	[(#COMPTEUR_BOUCLE|>{1}|oui)
+		[(#BOUTON_ACTION{<:lien_liberer_tous:>,#URL_ACTION_AUTEUR{debloquer_edition,tous,#SELF},ajax})]
+	]
 #BOITE_FERMER
 </B_objets>

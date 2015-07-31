@@ -24,15 +24,8 @@ include_spip('inc/autoriser'); // necessaire si appel de l'espace public
 function inc_article_select_dist($id_article, $id_rubrique=0, $lier_trad=0) {
 	global $connect_id_rubrique, $spip_lang; 
 
-	if (is_numeric($id_article)) {
-		// marquer le fait que l'article est ouvert en edition par toto
-		// a telle date ; une alerte sera donnee aux autres redacteurs
-		if ($GLOBALS['meta']['articles_modif'] != 'non') {
-			include_spip('inc/drapeau_edition');
-			signale_edition ($id_article,  $GLOBALS['visiteur_session'], 'article');
-		}
+	if (is_numeric($id_article))
 		return sql_fetsel("*", "spip_articles", "id_article=$id_article");
-	}
 
 	// id_article non numerique, c'est une demande de creation.
 	// Si c'est une demande de nouvelle traduction, init specifique
