@@ -17,9 +17,10 @@ function action_preferer_dist() {
 	//
 	// Preferences de presentation de l'espace prive
 	//
-	
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+	if ($_GET['arg'] !== 'display:4') {
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
+	} else $arg = $_GET['arg'];
 
 	if (!preg_match(",^(.+):(.+)$,", $arg, $r))
 		spip_log("action_preferer_dist: $arg pas compris");
