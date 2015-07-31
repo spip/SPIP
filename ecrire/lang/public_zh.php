@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => '评论站点',
+'contact' => 'Contact', # NEW
 'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 // D
@@ -64,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meme_rubrique' => '同一专栏',
 'memes_auteurs' => '同一作者',
 'message' => '消息',
-'messages_forum' => '论坛消息',
+'messages_forum' => '论坛消息', # MODIF
 'messages_recents' => '最近论坛消息',
 'mots_clef' => 'Mot-clé', # NEW
 'mots_clefs' => '关键词',

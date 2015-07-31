@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'Kommentera sajten',
+'contact' => 'Contact', # NEW
 'copie_document_impossible' => 'Det går inte att kopiera dokumentet',
 
 // D
@@ -64,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meme_rubrique' => 'Inom samma avdelning',
 'memes_auteurs' => 'Av samma författare',
 'message' => 'Meddelande',
-'messages_forum' => 'Forum-meddelande',
+'messages_forum' => 'Forum-meddelande', # MODIF
 'messages_recents' => 'Senaste forum-meddelandena',
 'mots_clef' => 'Mot-clé', # NEW
 'mots_clefs' => 'Nyckelord',

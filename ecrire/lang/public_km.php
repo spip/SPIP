@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'ដាក់វិចារ សៃថ៍នេះ',
+'contact' => 'Contact', # NEW
 'copie_document_impossible' => 'គ្មានអាច ចំលងឯកសារ',
 
 // D
@@ -64,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meme_rubrique' => 'ក្នុង​ផ្នែក​ដដែល',
 'memes_auteurs' => '​អ្នកនិពន្ធ​ដដែល',
 'message' => 'សារ',
-'messages_forum' => 'សារ​វេទិកា',
+'messages_forum' => 'សារ​វេទិកា', # MODIF
 'messages_recents' => 'សារ​វេទិកា​ ថ្មី​ៗ',
 'mots_clef' => 'Mot-clé', # NEW
 'mots_clefs' => 'ពាក្យ​គន្លឹះ',

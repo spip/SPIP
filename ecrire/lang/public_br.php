@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'Ober evezhiadennoù diwar-benn al lec\'hienn-mañ',
+'contact' => 'Contact', # NEW
 'copie_document_impossible' => 'N\'eo ket posupl eilañ an teul',
 
 // D
@@ -64,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meme_rubrique' => 'Er rubrikenn-mañ',
 'memes_auteurs' => 'Gant ar skridaozerien-mañ',
 'message' => 'Kemennadenn',
-'messages_forum' => 'Kemennadennoù forom',
+'messages_forum' => 'Kemennadennoù forom', # MODIF
 'messages_recents' => 'Kemennadennoù forom diwezhañ',
 'mots_clef' => 'Mot-clé', # NEW
 'mots_clefs' => 'Gerioù-stur',

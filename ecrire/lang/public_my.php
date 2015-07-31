@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'ဝဘ်ဆိုက်ပေါ် မှတ်ချက်များ',
+'contact' => 'Contact', # NEW
 'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 // D
@@ -64,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meme_rubrique' => 'နဂို​အခန်းကဏ္ဍထဲမှာ',
 'memes_auteurs' => 'နဂိုစာရေးသူများ',
 'message' => 'အ​ချက်အလက်',
-'messages_forum' => 'ဖိုရမ်အချက်အလက်များ',
+'messages_forum' => 'ဖိုရမ်အချက်အလက်များ', # MODIF
 'messages_recents' => 'နောက်ဆုံးရ ဖိုရမ်အချက်အလက်များ',
 'mots_clef' => 'Mot-clé', # NEW
 'mots_clefs' => 'စကားစုများ',

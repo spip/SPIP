@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'Phê bình trang Web này',
+'contact' => 'Contact', # NEW
 'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 // D
@@ -64,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meme_rubrique' => 'Trong cùng đề mục',
 'memes_auteurs' => 'Cùng tác giả',
 'message' => 'Thư tín',
-'messages_forum' => 'Thư tín diễn đàn',
+'messages_forum' => 'Thư tín diễn đàn', # MODIF
 'messages_recents' => 'Tin mới nhất trong diễn đàn',
 'mots_clef' => 'Mot-clé', # NEW
 'mots_clefs' => 'Từ then chốt',

@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'Comentar aqueu sit',
+'contact' => 'Contact', # NEW
 'copie_document_impossible' => 'Impossible de copiar lo document',
 
 // D
@@ -64,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meme_rubrique' => 'Dins la mema rubrica',
 'memes_auteurs' => 'Dei memes autors',
 'message' => 'Messatge',
-'messages_forum' => 'Messatges de fòro',
+'messages_forum' => 'Messatges de fòro', # MODIF
 'messages_recents' => 'Lu messatges de fòros mai recents',
 'mots_clef' => 'Mot-clé', # NEW
 'mots_clefs' => 'Mòts claus',

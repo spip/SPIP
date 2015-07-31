@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'Коментарии к этому сайту',
+'contact' => 'Contact', # NEW
 'copie_document_impossible' => 'Невозможно скопировать документ',
 
 // D
@@ -64,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meme_rubrique' => 'В той же рубрике',
 'memes_auteurs' => 'Теми же авторами',
 'message' => 'Сообщение',
-'messages_forum' => 'Сообщения форума',
+'messages_forum' => 'Сообщения форума', # MODIF
 'messages_recents' => 'Новые сообщения форума',
 'mots_clef' => 'Кейворд',
 'mots_clefs' => 'Ключевые слова',
