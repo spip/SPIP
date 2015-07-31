@@ -228,6 +228,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_via_le_site' => 'ارسال از طريق سايت',
 	'erreur' => 'اشتباه',
 	'erreur_balise_non_fermee' => 'آخرین برچسب (Tag) بسته نشده:',
+	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
 	'erreur_technique_enregistrement_champs' => 'يك خطاي فني از حق ثبت نام ميدان @champs@ جلوگيري كرده است.',
 	'erreur_technique_enregistrement_impossible' => 'يك خطاي فني مانع از ثبت نام است. ',
 	'erreur_texte' => 'اشتباه',

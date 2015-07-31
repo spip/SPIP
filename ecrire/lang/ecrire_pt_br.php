@@ -782,7 +782,8 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 
 	// S
 	'sans_heure' => 'sem hora',
-	'statut_admin_restreint' => '(admin limitado)',
+	'statut_admin_restreint' => '(admin limitado)', # MODIF
+	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Tarefa CRON @function@ (ASAP)',

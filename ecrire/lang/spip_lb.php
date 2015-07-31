@@ -233,6 +233,7 @@ Dës Prozedur ass am Detail am Installatiouns-Guide beschriwwen.<p>
 	'envoi_via_le_site' => 'Via äre Site schécken',
 	'erreur' => 'Fehler',
 	'erreur_balise_non_fermee' => 'Läschten Tag dee net zou ass:',
+	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
 	'erreur_technique_enregistrement_champs' => 'En technesche Problem verhënnert d\'Späichere vum Feld @champs@.',
 	'erreur_technique_enregistrement_impossible' => 'En technesche Problem verhënnert d\'Späicheren.',
 	'erreur_texte' => 'Fehler(en)',

@@ -234,6 +234,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_via_le_site' => 'Отправить при помощи сайта',
 	'erreur' => 'Ошибка',
 	'erreur_balise_non_fermee' => 'последний тэг не закрыт:',
+	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
 	'erreur_technique_enregistrement_champs' => 'Из-за технической ошибки не удалось правильно зарегистрировать поле @champs@.',
 	'erreur_technique_enregistrement_impossible' => 'Не удается зарегистрировать из-за технической ошибки.',
 	'erreur_texte' => 'Ошибка(и)',

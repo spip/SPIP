@@ -53,8 +53,8 @@ Ez balidatu inportazio galdera hau.
 	'bouton_ajouter_participant' => 'PARTEHARTZAILE BAT GEHITU:',
 	'bouton_annonce' => 'IRAGARKIA',
 	'bouton_annuler' => 'Ezeztatu',
-	'bouton_cache_activer' => 'Réactiver le cache', # NEW
-	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
+	'bouton_cache_activer' => 'Cachea berraktibatu',
+	'bouton_cache_desactiver' => 'Cachea aldi baterako desaktibatu',
 	'bouton_checkbox_envoi_message' => 'mezu bat bidaltzeko aukera',
 	'bouton_checkbox_indiquer_site' => 'Web toki bat derrigorrezadierazi',
 	'bouton_checkbox_signature_unique_email' => 'Posta elektroniko bakoitzeko sinadura bana',
@@ -163,7 +163,7 @@ Ez balidatu inportazio galdera hau.
 	'entree_url_2' => 'Gunearen helbidea (URL)',
 	'erreur_connect_deja_existant' => 'Izen bereko zerbitzari bat badago jadanik',
 	'erreur_nom_connect_incorrect' => 'Zerbitzari izen hori debekatua da',
-	'erreur_plugin_desinstalation_echouee' => 'Pluginaren desinstalazioak huts egin du. Halere, desaktibatzen ahal duzu.', # MODIF
+	'erreur_plugin_desinstalation_echouee' => 'Pluginaren desinstalazioak huts egin du. Halere, desaktibatzen ahal duzu.',
 	'erreur_plugin_fichier_absent' => 'Fitxategia ez dago',
 	'erreur_plugin_fichier_def_absent' => 'Definizio fitxategia ez dago',
 	'erreur_plugin_nom_fonction_interdit' => 'Funtzio izena debekatuta',
@@ -288,7 +288,7 @@ Seguritate hobetzeko, konfigurazio hau aldatu behar zenuke, edo @constantes@ kon
 	'info_barre_outils' => 'bere tresna-barrarekin ?',
 	'info_base_installee' => 'Zure datubasearen egitura instalatua izan da',
 	'info_bio' => 'Biografia',
-	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
+	'info_cache_desactive' => 'Cachea aldi baterako desaktibatua dago.',
 	'info_chapeau' => 'Idazpurua',
 	'info_chapeau_2' => 'Epigrafea:',
 	'info_chemin_acces_1' => 'Aukerak: sarbidea urtekarian',
@@ -310,7 +310,7 @@ Seguritate hobetzeko, konfigurazio hau aldatu behar zenuke, edo @constantes@ kon
 	'info_conflit_edition_votre_version' => 'Zure bersioa :',
 	'info_connexion_base' => 'Bigarren etapa: basera konektatzeko saialdia ',
 	'info_connexion_base_donnee' => 'Zure datu-basearekin konexioa',
-	'info_connexion_ldap_ok' => 'LDAP konexioak funtzionatu egin du.<p>Hurrengo urratsera pasa zaitezke.</p>', # MODIF
+	'info_connexion_ldap_ok' => '<b>LDAP konexioak funtzionatu egin du.</b><p>Hurrengo urratsera pasa zaitezke.</p>',
 	'info_connexion_mysql' => 'Lehenengo etapa: Zure SQL konexioa',
 	'info_connexion_ok' => 'Konexioa ondo dabil',
 	'info_contact' => 'Kontaktua',
@@ -417,7 +417,7 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 	'info_nb_visiteurs' => '@nb@ bisitari',
 	'info_nom' => 'Izena',
 	'info_nom_destinataire' => 'Hartzailearen izena',
-	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
+	'info_nom_pas_conforme' => 'HTML etiketak ez dira onartuak',
 	'info_nom_site' => 'Zure gunearen izena',
 	'info_nombre_articles' => '@nb_articles@ artikulu,',
 	'info_nombre_partcipants' => 'Debatean parte-hartzaile...',
@@ -586,7 +586,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'install_select_langue' => 'Hizkuntza bat aukeratu eta « hurrengoa » botoian klikatu instalazio-prozedura hasteko.',
 	'install_select_type_db' => 'Zehaztu datu-base mota :',
 	'install_select_type_mysql' => 'MySQL',
-	'install_select_type_mysqli' => 'MySQLi', # NEW
+	'install_select_type_mysqli' => 'MySQLi',
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',
@@ -667,7 +667,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'lien_retirer_auteur' => 'Egile hau baztertu',
 	'lien_retirer_rubrique' => 'Atala kendu',
 	'lien_retirer_tous_auteurs' => 'Autore guziak kendu',
-	'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
+	'lien_retirer_toutes_rubriques' => 'Atal guziak kendu',
 	'lien_retrait_particpant' => 'Parte-hartzailehau baztertu',
 	'lien_site' => 'lekua',
 	'lien_supprimer_rubrique' => 'Atal hau kendu',
@@ -711,7 +711,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'page_pas_proxy' => 'Orri hau ez da proxy-tik pasa behar',
 	'pas_de_proxy_pour' => 'Beharrez, zehaztu zein tresna edo eremuentzat proxy hau ez den aplikatu behar (adibidez :@exemple@)',
 	'plugin_charge_paquet' => '@name@ paketearen kargatzea',
-	'plugin_charger' => 'Télécharger', # NEW
+	'plugin_charger' => 'Behera kargatu',
 	'plugin_erreur_charger' => 'errorea : @zip@ kargatzea ezinezkoa da',
 	'plugin_erreur_droit1' => '<code>@dest@</code> direktorioan ezin da idatzi.',
 	'plugin_erreur_droit2' => 'Direktorio hunen eskubideak baiezta itzazu (sortuz beharrez), edo fitxategiak FTParen bidez instala itzazu.',
@@ -734,10 +734,10 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'plugin_info_automatique_liste_update' => 'Zerrendak gaurkotu',
 	'plugin_info_automatique_ou' => 'edo...',
 	'plugin_info_automatique_select' => 'Plugin bat aukera ezazu beherago : SPIPek deskargatuko du eta <code>@rep@</code> direktorioan instalatuko du ; plugin hau jadanik existitzen bada, gaurkotua izanen da.',
-	'plugin_info_credit' => 'Crédits', # NEW
+	'plugin_info_credit' => 'Kredituak',
 	'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 	'plugin_info_install_ok' => 'Installation réussie', # NEW
-	'plugin_info_necessite' => 'Necessite :', # NEW
+	'plugin_info_necessite' => 'Behar dira :',
 	'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 	'plugin_info_plugins_dist_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
 	'plugin_info_plugins_dist_2' => 'Elles ne sont pas désactivables.', # NEW
@@ -792,7 +792,8 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 
 	// S
 	'sans_heure' => 'ordurik gabe',
-	'statut_admin_restreint' => '(admin mugatua)',
+	'statut_admin_restreint' => 'admin mugatua',
+	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
