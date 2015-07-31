@@ -1179,15 +1179,12 @@ function agenda_memo($date=0 , $descriptif='', $titre='', $url='', $cal='')
 // http://doc.spip.org/@agenda_affiche
 function agenda_affiche($i)
 {
-	include_spip('inc/agenda');
 	$args = func_get_args();
-	// date ou nombre d'evenements (on pourrait l'afficher)
+	// date (ou nombre d'evenements qu'on pourrait alors afficher)
 	$nb = array_shift($args);
 	$evt = array_shift($args);
 	$type = array_shift($args);
-	if (!$nb) {
-		$d = array(date("Ymd", time()));
-	} else {
+	if ($nb) {
 		$agenda = agenda_memo(0);
 		$evt = array();
 		foreach (($args ? $args : array_keys($agenda)) as $k) {
@@ -1196,22 +1193,49 @@ function agenda_affiche($i)
 					$evt[$d] = $evt[$d] ? (array_merge($evt[$d], $v)) : $v;
 				}
 		}
-		$d = array_keys($evt);
 	}
-	$start = http_calendrier_controle_date(_request('jour'), _request('mois'), _request('annee'));
+	return agenda_periode($type, $nb, $evt);
+}
+
+function agenda_periode($type, $nb, $avec, $sans='')
+{
+	include_spip('inc/agenda');
+	$start = agenda_controle();
 	if ($start<0) $start = time();
 	$mindate = date("Ymd", $start);
 
 	if ($type != 'periode')
-		$evt = array('', $evt);
+		$evt = array($sans, $avec);
 	else {
 		$min = substr($mindate,6,2);
-		$max = $min + ((strtotime(max($d)) - $start) / (3600 * 24));
+		$max = !$nb ? time() : strtotime(max(array_keys($avec)));
+		$max = $min + (($max - $start) / (3600 * 24));
 		if ($max < 31) $max = 0;
-		$evt = array('', $evt, $min, $max);
+		$evt = array($sans, $avec, $min, $max);
 		$type = 'mois';
 	}
 	return http_calendrier_init($start, $type,  _request('echelle'), _request('partie_cal'), self('&'), $evt);
+}
+
+
+// Controle la coherence des 3 nombres d'une date et retourne le temps Unix,
+// sinon retourne un code d'erreur, toujours negatif
+function agenda_controle($date='date', $jour='jour', $mois='mois', $annee='annee')
+{
+	$jour = _request($jour);
+	$mois = _request($mois);
+	$annee = _request($annee);
+	
+	if (!($jour||$mois||$anne)) {
+		if ($date = recup_date(_request($date))) {
+			list($annee, $mois, $jour ) = $date;
+		} else  return -1;
+	}
+	if (!$d = mktime(0,0,0, $mois, $jour, $annee)) return -2;
+	if ($jour != date("d", $d)) return -3;
+	if ($mois != date("m", $d)) return -4;
+	if ($annee != date("Y", $d)) return -5;
+	return $d;
 }
 
 //

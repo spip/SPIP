@@ -17,26 +17,21 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_calendrier_dist
 function exec_calendrier_dist()
 {
-	if ($date = recup_date(_request('date'))) {
-		list($annee, $mois, $jour ) = $date;
-	} else {
-		$jour = _request('jour');
-		$mois = _request('mois');
-		$annee = _request('annee');
-	}
+	exec_calendrier_args(agenda_controle(), _request('type'), _request('echelle'), _request('partie_cal'));
+}
 
-	$time = http_calendrier_controle_date($jour, $mois, $annee);
+function exec_calendrier_args($time, $type, $echelle, $partie_cal)
+{
 	if ($time < 0) $time = time();
 
-	if (!($type = _request('type')))
+	if (!$type)
 		$type = 'mois';
-
 	elseif ($type == 'semaine')
 		$GLOBALS['afficher_bandeau_calendrier_semaine'] = true;
 
 	$ancre = 'calendrier-1';
 	$r = generer_url_ecrire('calendrier', "type=$type") . "#$ancre";
-	$r = http_calendrier_init($time, $type, _request('echelle'), _request('partie_cal'), $r);
+	$r = http_calendrier_init($time, $type, $echelle, $partie_cal, $r);
 
 	if (_AJAX) {
 		ajax_retour($r);
