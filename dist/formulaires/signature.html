@@ -49,12 +49,14 @@
 
 	[(#ENV{_message})
 		<fieldset>
-			<legend><:form_pet_message_commentaire:></legend><ul>
-			<li class='saisie_message'>
-				<label for="message"><:info_texte_message:></label>
-				<textarea name="message" id="message" rows="3" cols="20">#ENV{message}</textarea>
-			</li>
-		</ul></fieldset>]
+			<legend><:form_pet_message_commentaire:></legend>
+			<ul>
+				<li class='saisie_message'>
+					<label for="message"><:info_texte_message:></label>
+					<textarea name="message" id="message" rows="3" cols="20">#ENV{message}</textarea>
+				</li>
+			</ul>
+		</fieldset>]
 
 	<p class="boutons"><input type="submit" value="<:bouton_valider:>" /></p>
 </form>

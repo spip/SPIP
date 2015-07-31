@@ -7,10 +7,10 @@
 	<fieldset>
 		[(#REM) on affiche plus ce message en cas d'erreur pour eviter d'allonger trop le formulaire]
 		[(#ENV*{message_erreur}|non)
-		[<h3 class='legend'><:pass_vousinscrire:></h3>
+		[<legend><:pass_vousinscrire:></legend>
 		<p class='explication'>(#ENV*{_commentaire})</p>]
 		]
-		<h3 class='legend'><:form_forum_identifiants:></h3>
+		<legend><:form_forum_identifiants:></legend>
 		<p class='explication'><:form_forum_indiquer_nom_email:></p>
 		<ul>
 		  <li class='saisie_nom_inscription[ (#ENV*{erreurs}|table_valeur{nom_inscription}|oui)erreur]'>
