@@ -142,16 +142,6 @@ function optimiser_base_disparus($attente = 86400) {
 
 	$n+= optimiser_sansref('spip_auteurs_rubriques', 'id_rubrique', $res);
 
-	# les liens des documents qui sont dans une id_rubrique inexistante
-	# (meme remarque)
-	$res = sql_select("documents_rubriques.id_rubrique AS id",
-		      "spip_documents_liens AS documents_rubriques
-		        LEFT JOIN spip_rubriques AS rubriques
-		          ON documents_rubriques.id_rubrique=rubriques.id_rubrique",
-			"rubriques.id_rubrique IS NULL");
-
-	$n+= optimiser_sansref('spip_documents_liens', 'id_rubrique', $res);
-
 	# les liens des mots affectes a une id_rubrique inexistante
 	$res = sql_select("mots_rubriques.id_rubrique AS id",
 		      "spip_mots_rubriques AS mots_rubriques
@@ -175,15 +165,6 @@ function optimiser_base_disparus($attente = 86400) {
 			"articles.id_article IS NULL");
 
 	$n+= optimiser_sansref('spip_auteurs_articles', 'id_article', $res);
-
-	# les liens de documents d'articles effaces
-	$res = sql_select("documents_articles.id_article AS id",
-		      "spip_documents_liens AS documents_articles
-		        LEFT JOIN spip_articles AS articles
-		          ON documents_articles.id_article=articles.id_article",
-			"articles.id_article IS NULL");
-
-	$n+= optimiser_sansref('spip_documents_liens', 'id_article', $res);
 
 	# les liens de mots affectes a des articles effaces
 	$res = sql_select("mots_articles.id_article AS id",
@@ -210,15 +191,6 @@ function optimiser_base_disparus($attente = 86400) {
 
 	sql_delete("spip_breves", "statut='refuse' AND maj < $mydate");
 
-
-	# les liens de documents sur des breves effacees
-	$res = sql_select("documents_breves.id_breve AS id",
-		      "spip_documents_liens AS documents_breves
-		        LEFT JOIN spip_breves AS breves
-		          ON documents_breves.id_breve=breves.id_breve",
-			"breves.id_breve IS NULL");
-
-	$n+= optimiser_sansref('spip_documents_liens', 'id_breve', $res);
 
 	# les liens de mots affectes a des breves effacees
 	$res = sql_select("mots_breves.id_breve AS id",
@@ -320,6 +292,12 @@ function optimiser_base_disparus($attente = 86400) {
 	# au mail de confirmation (45 jours pour repondre, ca devrait suffire)
 	sql_delete("spip_auteurs", "statut='nouveau' AND maj < ". sql_quote(date('Y-m-d', time()-45*24*3600)));
 
+
+	//
+	// Documents
+	//
+	# liens de documents avec des objets inexistants
+	# TODO
 
 	//
 	// Messages prives
