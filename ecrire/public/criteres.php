@@ -214,6 +214,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 
 	foreach ($crit->param as $tri) {
 
+	  $fct = ""; // en cas de fonction SQL
 	// tris specifies dynamiquement
 	  if ($tri[0]->type != 'texte') {
 	      $order = 
@@ -238,7 +239,6 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 		  $boucle->select[] = $texte . " AS $as";
 		  $order = "'$as'";
 	      } else {
-	      $fct = "";
 	      if (!ereg("^" . CHAMP_SQL_PLUS_FONC . '$', $par, $match)) 
 		erreur_squelette(_T('zbug_info_erreur_squelette'), "{par $par} BOUCLE$idb");
 	      else {
@@ -510,9 +510,7 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 		  // on repere l'utilisation brute de #ENV**{X}, 
 		  // c'est-a-dire sa  traduction en ($PILE[0][X]).
 		  // et on deballe mais en rajoutant l'anti XSS
-		  $t = preg_match(",^(\n//.*\n)?\\\$Pile.0,", $v) ? 
-		    "array_map('spip_abstract_quote', $v)" : $v;
-		  $x .= "\n\tif (!(is_array($v)))\n\t\t$var" ."[]= spip_abstract_quote($v);\n\telse $var = array_merge($var, $t);";
+		  $x .= "\n\tif (!(is_array($v)))\n\t\t$var" ."[]= $v;\n\telse $var = array_merge($var, $v);";
 		}
 	}
 
