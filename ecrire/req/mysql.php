@@ -364,6 +364,7 @@ function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=fals
 		$character_set .= " COLLATE ".$GLOBALS['meta']['charset_collation_sql_base'];
 
 	foreach($champs as $k => $v) {
+		$v = _mysql_remplacements_definitions_table($v);
 		if (preg_match(',([a-z]*\s*(\(\s*[0-9]*\s*\))?(\s*binary)?),i',$v,$defs)){
 			if (preg_match(',(char|text),i',$defs[1]) AND !preg_match(',binary,i',$defs[1]) ){
 				$v = $defs[1] . $character_set . ' ' . substr($v,strlen($defs[1]));
@@ -383,6 +384,27 @@ function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=fals
 	."\n";
 	return spip_mysql_query($q, $serveur);
 }
+
+
+/**
+ * $query est une requete ou une liste de champs
+ *
+ * @param  $query
+ * @return mixed
+ */
+function _mysql_remplacements_definitions_table($query){
+	// quelques remplacements
+	$num = "(\s*\([0-9]*\))?";
+	$enum = "(\s*\([^\)]*\))?";
+
+	$remplace = array(
+		'/VARCHAR(\s*[^\s\(])/is' => 'VARCHAR(255)\\1',
+	);
+
+	$query = preg_replace(array_keys($remplace), $remplace, $query);
+	return $query;
+}
+
 
 function spip_mysql_create_base($nom, $serveur='',$requeter=true) {
   return spip_mysql_query("CREATE DATABASE `$nom`", $serveur, $requeter);
@@ -583,7 +605,7 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc='', $serveur='',$req
 	} else $t = 0 ;
 
 	$connexion['last'] = $query;
-	spip_log($query, 'mysql.'._LOG_DEBUG);
+	#spip_log($query, 'mysql.'._LOG_DEBUG);
 	if (mysql_query($query, $link))
 		$r = mysql_insert_id($link);
 	else {
