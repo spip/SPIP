@@ -99,7 +99,7 @@ form, fieldset, legend, label, input, textarea, select, option {
 #contenu .formulaire_spip * *{ font-size: 1em; }
 
 .formulaire_spip p {  
-    margin: 4px 0;  
+    margin: 0.5em 0;  
     padding: 0; }
 
 .formulaire_spip fieldset, .spip_encadrer {
@@ -113,19 +113,21 @@ form, fieldset, legend, label, input, textarea, select, option {
 .spip_sanscadre { border: 0; }
 .spip_sanscadre legend { display: none; }
 
+.formulaire_spip label {}
 .forml {
 	width: 99%;
 	background: #FCFCF0;
 	padding: 1px;
-	border: 1px solid #666;
-	color: #000; }
+	border: 1px solid #666666;
+	color: #333333; }
+.forml:focus { background: #FFF; border: 1px solid #000; color: #000; }
 
 input.spip_bouton {
 	float: right;
-	background: #666;
+	background: #666666;
 	margin: 3px 0;
 	padding: 1px 2px;
-	border: 2px outset #666;
+	border: 2px outset #666666;
 	font-weight: bold;
 	color: #FFF; }
 
@@ -140,13 +142,13 @@ fieldset.reponse_formulaire legend { font-weight: normal; }
 fieldset.reponse_formulaire p { padding: 4px; }
 
 /* * Previsualisation du message */
-.previsu {  
+fieldset.previsu {  
 	background: #FFF;  
 	margin-bottom: 16px;  
 	padding: 12px;  
-	border: 1px solid #666;  
+	border: 1px solid #666666;  
 	color: #000; } 
-.previsu .titre {  
+fieldset.previsu .titre {  
 	font-weight: bold;  
 	font-size: 1.18em; } 
 
@@ -186,14 +188,17 @@ div.choix_mots label { display: inline; }
 	float: right;
 	text-align: left;
 	width: 12em;
-	font-size: 0.71em; }
+	/*font-size: 0.71em;*/ }
 .formulaire_menu_lang label { display: none; }
+.formulaire_menu_lang select { padding: 0; margin: 0; }
 
 /* Formulaire de login
 ----------------------------------------------- */
-.formulaire_login { clear: both; font-size: 0.88em; }
-.formulaire_login .forml { width: 12em; }
-.formulaire_login .spip_logos { float: right; padding-left: 10px; }
+.formulaire_login { clear: both; font-size: 0.90em; text-align: center; width: 400px; margin: 0 auto; padding: 3em 0; }
+.formulaire_login fieldset { width: 100%; clear: both; text-align: left; }
+.formulaire_login .forml, .formulaire_login_forum .forml { width: 12em; }
+.formulaire_login .spip_logos, .formulaire_login_forum .spip_logos { float: right; padding-left: 10px; }
+.formulaire_login a { color: #e86519; }
 
 /*  ------------------------------------------ */
 /*  Couleurs des liens
