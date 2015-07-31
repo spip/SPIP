@@ -888,7 +888,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 		$trouver_table = charger_fonction('trouver_table', 'base');
 
 	foreach($boucles as $id => $boucle) {
-		$type = $boucle->type_requete;
+		if (!($type = $boucle->type_requete)) continue;
 		if (!$descr['documents'] AND (
 			(($type == 'documents') AND $boucle->doublons) OR
 				compile_inclure_doublons($boucle->avant) OR

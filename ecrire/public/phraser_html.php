@@ -583,6 +583,7 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne=
 
 	while (($pos_boucle = strpos($texte, BALISE_BOUCLE)) !== false) {
 
+		$msg = ''; // indiquera s'il y a eu une erreur
 		$result = new Boucle;
 		$result->id_parent = $id_parent;
 		$result->descr = $descr;
@@ -711,6 +712,9 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne=
 		$result->altern = public_phraser_html_dist($result->altern,$id_parent,$boucles, $descr, $result->ligne+$a+$m+$b);
 		$result->milieu = public_phraser_html_dist($milieu, $id_boucle,$boucles, $descr, $result->ligne+$b);
 
+		// Prevenir le generateur de code que le squelette est faux
+		if ($msg) $result->type_requete = false;
+
 		// Verifier qu'il n'y a pas double definition
 		// apres analyse des sous-parties (pas avant).
 		
@@ -718,6 +722,8 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne=
 			$msg = array('zbug_erreur_boucle_double',
 				 	array('id'=>$id_boucle));
 			erreur_squelette($msg, $result);
+		// Prevenir le generateur de code que le squelette est faux
+			$boucles[$id_boucle]->type_requete = false;
 		} else
 			$boucles[$id_boucle] = $result;
 		$all_res = phraser_champs_etendus($debut, $ligne, $all_res);
