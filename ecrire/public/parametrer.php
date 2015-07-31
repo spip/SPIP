@@ -21,7 +21,8 @@ include_spip('inc/lang');
 
 // NB: Ce fichier peut initialiser $dossier_squelettes (old-style)
 // donc il faut l'inclure "en globals"
-if ($f = include_spip('mes_fonctions', false)) {
+if ($f = find_in_path('mes_fonctions.php')
+OR $f = find_in_path('mes_fonctions.php3')) {
 	global $dossier_squelettes;
 	@include ($f); 
 }
