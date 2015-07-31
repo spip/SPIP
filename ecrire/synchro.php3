@@ -27,9 +27,6 @@ debut_gauche();
 	$adresse_site=lire_meta("adresse_site");
 	$adresse_suivi_inscription=lire_meta("adresse_suivi_inscription");
 
-if ($connect_statut == "0minirezo" AND strlen($adresse_suivi_inscription) < 3) {
-	icone_horizontale(_T("info_config_suivi_lien"), "config-contenu.php3", "administration-24.gif", "");
-}
 
 
 debut_droite();
