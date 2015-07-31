@@ -628,7 +628,7 @@ function date_relative($date, $decalage_maxi=0) {
 
 
 // http://doc.spip.org/@affdate_base
-function affdate_base($numdate, $vue) { 
+function affdate_base($numdate, $vue, $param = '') { 
 	global $spip_lang;
 	$date_array = recup_date($numdate);
 	if ($date_array)
@@ -705,7 +705,7 @@ function affdate_base($numdate, $vue) {
 		if (!$mois OR !$jour) return '';
 		$nom = mktime(1,1,1,$mois,$jour,$annee);
 		$nom = 1+date('w',$nom);
-		return _T('date_jour_'.$nom);
+		return _T('date_jour_'.$nom.'_'.$param);
 
 	case 'mois_annee':
 		if ($avjc) return $annee;
@@ -722,8 +722,9 @@ function affdate_base($numdate, $vue) {
 }
 
 // http://doc.spip.org/@nom_jour
-function nom_jour($numdate) {
-	return affdate_base($numdate, 'nom_jour');
+function nom_jour($numdate, $forme = '') {
+	if(!($forme == 'abbr' OR $forme == 'initiale')) $forme = '';
+	return affdate_base($numdate, 'nom_jour', $forme);
 }
 
 // http://doc.spip.org/@jour
