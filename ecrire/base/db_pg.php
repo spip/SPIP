@@ -46,7 +46,7 @@ function spip_pg_query($query)
 	$query = preg_replace('/([,\s])spip_/', '\1'.$table_prefix.'_', $query) . $suite;
 
 	$r = pg_query($spip_pg_link, $query);
-#	if (!$r) echo $query;
+#	if (!$r) echo $query, '<br>';
 	return $r;
 }
 
@@ -78,7 +78,7 @@ function spip_pg_select($select, $from, $where,
                            $table='', $id='', $serveur=''){
 	global $spip_pg_link;
 
-	$limit = preg_match("/^(([0-9]+),)?\s*([0-9]+)$/", $limit,$limatch);
+	$limit = preg_match("/^\s*(([0-9]+),)?\s*([0-9]+)\s*$/", $limit,$limatch);
 	if ($limit) {
 		$offset = $limatch[2];
 		$count = $limatch[3];
@@ -94,9 +94,9 @@ function spip_pg_select($select, $from, $where,
 	  (!$from ? '' :
 			("\nFROM " .
 			(!is_array($from) ? $from : spip_pg_select_as($from))))
-	  . (!$where ? '' : ("\nWHERE " . (!is_array($where) ? $where : (join("\n\tAND ", array_map('calculer_pg_where', $where))))))
+	  . (!$where ? '' : ("\nWHERE " . spip_pg_nocast(calculer_pg_where($where))))
 	  . spip_pg_groupby($groupby, $from, $select)
-	  . (!$having ? '' : "\nHAVING " . (!is_array($having) ? $having : (join("\n\tAND ", array_map('calculer_pg_where', $having)))))
+	  . (!$having ? '' : "\nHAVING $having")
 	  . ($orderby ? ("\nORDER BY " . spip_pg_nocast($orderby)) :'')
 	  . (!$limit ? '' : (" LIMIT $count" . (!$offset ? '' : " OFFSET $offset")));
 		$q = " SELECT ". $q;
@@ -128,17 +128,23 @@ function spip_pg_groupby($groupby, $from, $select)
 {
 	$join = is_array($from) ? (count($from) > 1) : strpos($from, ",");
 	if ($join) $join = !is_array($select) ? $select : join(", ", $select);
+	if ($join) {
+	  $join = preg_replace('/(SUM|COUNT)\([^)]+\)\s*,?/','', $join);
+	  $join = preg_replace('/,?\s*(SUM|COUNT)\([^)]+\)/','', $join);
+	}
 	if ($join) $groupby = $groupby ? "$groupby, $join" : $join;
 	if (!$groupby) return '';
 	$groupby = spip_pg_nocast($groupby);
 	$groupby = preg_replace('/\s+AS\s+\w+/','', $groupby);
-	$groupby = trim(preg_replace('/SUM\(\w+\)\s*,/','', $groupby));
+
 	return "\nGROUP BY $groupby"; 
 }
 
 // 0+x avec un champ x commencant par des chiffres est converti par MySQL
 // en le nombre qui commence x. PG ne sait pas faire, on elimine.
 // Comme SPIP utilise systematiquement 0+t,t on ne garde que le 2e.
+// Pour les operations sur date, on s'en sort pour les expressions d'un seul
+// niveau, mais c'est a generaliser.
 
 // http://doc.spip.org/@spip_pg_nocast
 function spip_pg_nocast($arg)
@@ -149,7 +155,15 @@ function spip_pg_nocast($arg)
 	$res = preg_replace('/\b0[+]([^, ]+\b)/', '\1', $res);
 	if ($res != $arg)
 	  spip_log("SPIP-PG ne sait pas traduire $arg"); # a revoir
-	
+	$res = preg_replace('/DATE_SUB\s*[(]([^,]*),/', '(\1 -', $res);
+	$res = preg_replace('/DATE_ADD\s*[(]([^,]*),/', '(\1 +', $res);
+	$res = preg_replace('/INTERVAL\s+(\d+\s+\w+)/', 'INTERVAL \'\1\'', $res);
+	$res = preg_replace('/([+<>-]=?)\s*(\'\d+-\d+-\d+\s+\d+:\d+(:\d+)\')/', '\1 timestamp \2', $res);
+	$res = preg_replace('/(\'\d+-\d+-\d+\s+\d+:\d+(:\d+)\')\s*([+<>-]=?)/', 'date \1 \2', $res);
+
+	$res = preg_replace('/([+<>-]=?)\s*(\'\d+-\d+-\d+\')/', '\1 date \2', $res);
+	$res = preg_replace('/(\'\d+-\d+-\d+\')\s*([+<>-]=?)/', 'date \1 \2', $res);
+
 	return str_replace('REGEXP', '~', $res);
 }
 
@@ -158,7 +172,7 @@ function spip_pg_nocast($arg)
 function calculer_pg_where($v)
 {
 	if (!is_array($v))
-	  return $v ;
+	  return $v;
 
 	$op = str_replace('REGEXP', '~', array_shift($v));
 	if (!($n=count($v)))
@@ -243,7 +257,16 @@ function spip_pg_update($table, $exp, $where='') {
 		$table = preg_replace('/^spip/',
 				    $GLOBALS['table_prefix'],
 				    $table);
-	pg_query($spip_pg_link, "UPDATE $table SET $exp" . ($where ? " WHERE $where" : ''));
+	pg_query($spip_pg_link, "UPDATE $table SET " . spip_pg_nocast($exp) .($where ? (" WHERE " . spip_pg_nocast($where)) : ''));
+}
+
+function spip_pg_delete($table, $where='') {
+	global $spip_pg_link, $table_prefix;
+	if ($GLOBALS['table_prefix'])
+		$table = preg_replace('/^spip/',
+				    $GLOBALS['table_prefix'],
+				    $table);
+	pg_query($spip_pg_link, "DELETE FROM $table " . ($where ? (" WHERE " . spip_pg_nocast($where)) : ''));
 }
 
 

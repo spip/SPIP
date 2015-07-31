@@ -1297,17 +1297,18 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 
 	$table = $type . 's';
 	$key = 'id_' . $type;
-	$where = ($GLOBALS['auteur_session']['statut'] == '0minirezo')
-	? ''
-	:  " AND (statut = 'publie' OR statut = 'prop')"; 
+	$where = (($GLOBALS['auteur_session']['statut'] == '0minirezo')
+		  ? ''
+		  :  "(statut = 'publie' OR statut = 'prop') AND ") 
+	. "id_rubrique=$id_rubrique AND ($key != $id)";
 
-	$query = "SELECT $key AS id, titre, statut FROM spip_$table WHERE id_rubrique=$id_rubrique$where AND ($key != $id)";
+	$select = "$key AS id, titre, statut";
 
-	$n = spip_num_rows(spip_query($query));
+	$n = spip_num_rows(spip_abstract_select($select, "spip_$table", $where));
 
 	if (!$n) return '';
 
-	$voss = spip_query($query . " ORDER BY $order DESC LIMIT $limit");
+	$voss = spip_abstract_select($select, "spip_$table", $where, '', "$order DESC", $limit);
 
 	$limit = $n - $limit;
 	$retour = '';

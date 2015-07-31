@@ -124,10 +124,7 @@ function determiner_auteurs_objet($type, $id, $cond='', $limit='')
 	if (!preg_match(',^[a-z]*$,',$type)) return $les_auteurs; 
 
 	$jointure = table_jointure('auteur', $type);
-	$result = spip_query("SELECT id_auteur FROM spip_{$jointure} WHERE id_{$type}="._q($id) 
-	. ($cond ? " AND $cond" : '')
-	. ($limit? " LIMIT $limit": '')
-	);
+	$result = spip_abstract_select("id_auteur", "spip_{$jointure}", "id_{$type}="._q($id) . ($cond ? " AND $cond" : ''),'','', $limit);
 
 	return $result;
 }
