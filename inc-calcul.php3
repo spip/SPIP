@@ -52,25 +52,31 @@ function transformer_lien_logo($contexte, $lien) {
 // Retrouver l'image d'un objet (et son survol)
 //
 
-function cherche_image($id_objet, $type_objet) {
+// chercher une image nommee dans tous les formats
+function cherche_image_nommee($nom) {
 	$formats = array ('gif', 'jpg', 'png');
+	while (list(, $format) = each($formats))
+		if (file_exists('IMG/'.$nom.'.'.$format))
+			return ($nom.'.'.$format);
+}
+
+function cherche_image($id_objet, $type_objet) {
 	$image = array('', '');
-	while (list(, $format) = each($formats)) {
-		if (file_exists('IMG/'.$type_objet.'on'.$id_objet.'.'.$format)) {
-			$image[0]=$type_objet.'on'.$id_objet.'.'.$format;
-			break;
-		}
+
+	// cherche l'image liee a l'objet
+	$image[0] = cherche_image_nommee($type_objet.'on'.$id_objet);
+
+	// sinon eventuellement une image par defaut
+	if (!$image[0]) {
+		$id_objet = '-defaut';
+		$image[0] = cherche_image_nommee($type_objet.'on'.$id_objet);
 	}
 
+	// cherche un survol
 	if ($image[0]) {
-		reset ($formats);
-		while (list(, $format) = each($formats)) {
-			if (file_exists('IMG/'.$type_objet.'off'.$id_objet.'.'.$format)) {
-				$image[1] = $type_objet.'off'.$id_objet.'.'.$format;
-				break;
-			}
-		}
+		$image[1] = cherche_image_nommee($type_objet.'off'.$id_objet);
 	}
+
 	return $image;
 }
 
