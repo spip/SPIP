@@ -537,21 +537,8 @@ function autoriser_auteur_iconifier_dist($faire,$quoi,$id,$qui,$opts){
 
 // http://doc.spip.org/@autoriser_article_iconifier_dist
 function autoriser_iconifier_dist($faire,$quoi,$id,$qui,$opts){
-	// On reprend le code de l'ancien iconifier pour definir les autorisations pour les autres
-	// objets SPIP. De ce fait meme de nouveaux objets bases sur cet algorithme peuvent continuer
-	// a fonctionner. Cependant il est recommander de leur definir une autorisation specifique
-	$table = table_objet_sql($quoi);
-	$id_objet = id_table_objet($quoi);
-	$row = sql_fetsel("id_rubrique, statut", $table, "$id_objet=$id");
-	$droit = autoriser('publierdans','rubrique',$row['id_rubrique']);
-
-	if (!$droit AND  ($row['statut'] == 'prepa' OR $row['statut'] == 'prop' OR $row['statut'] == 'poubelle')) {
-	  $jointure = table_jointure('auteur', 'article');
-	  if ($droit = sql_fetsel("id_auteur", "spip_$jointure", "id_article=".sql_quote($id) . " AND id_auteur=$connect_id_auteur"))
-		$droit = true;
-	}
-
-	return $droit;
+	// par defaut, on a le droit d'iconifier si on a le droit de modifier
+	return autoriser('modifier', $quoi, $id, $qui, $opts);
 }
 
 // Deux fonctions sans surprise pour permettre les tests
