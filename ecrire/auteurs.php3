@@ -20,10 +20,10 @@ if ($tri) {
 }
 
 if ($visiteurs == "oui") {
-	debut_page(_T('titre_page_auteurs'),"redacteurs","redacteurs");
+	debut_page(_T('titre_page_auteurs'),"documents","redacteurs");
 	$retour .= '&visiteurs=oui';
 } else
-	debut_page(_T('info_auteurs_par_tri', array('partri' => $partri)),"redacteurs","redacteurs");
+	debut_page(_T('info_auteurs_par_tri', array('partri' => $partri)),"documents","redacteurs");
 
 debut_gauche();
 

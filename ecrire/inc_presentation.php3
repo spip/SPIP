@@ -1444,6 +1444,8 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			icone_bandeau_secondaire (_T('icone_breves'), "breves.php3", "breve-24.gif", "breves", $sous_rubrique);
 		}
 
+		icone_bandeau_secondaire (_T('icone_auteurs'), "auteurs.php3", "redacteurs-24.gif", "redacteurs", $sous_rubrique);
+
 		if ($options == "avancees"){
 			$articles_mots = lire_meta('articles_mots');
 			if ($articles_mots != "non") {
@@ -1463,8 +1465,6 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		icone_bandeau_secondaire (_T('titre_forum'), "forum.php3", "forum-interne-24.gif", "forum-interne", $sous_rubrique);
 		if ($connect_statut == "0minirezo" AND lire_meta('forum_prive_admin') == 'oui')
 			icone_bandeau_secondaire (_T('icone_forum_administrateur'), "forum_admin.php3", "forum-admin-24.gif", "forum-admin", $sous_rubrique);
-		bandeau_barre_verticale();
-		icone_bandeau_secondaire (_T('icone_tous_auteur'), "auteurs.php3", "redacteurs-24.gif", "redacteurs", $sous_rubrique);
 		
 		if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non") {
 			bandeau_barre_verticale();
