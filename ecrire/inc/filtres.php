@@ -1379,7 +1379,7 @@ function extraire_attribut($balise, $attribut, $complet = false) {
 		} else {
 			$r[4] = trim($r[2]); 
 		}
-		$att = (str_replace("&#39;", "'", $r[4]));
+		$att = filtrer_entites(str_replace("&#39;", "'", $r[4]));
 	}
 	else
 		$att = NULL;
