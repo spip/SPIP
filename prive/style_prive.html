@@ -260,45 +260,52 @@ div.messages ul {text-align:left;}
 
 div.en_lignes { font-size: 10px;}
 
-.icone36 { border: 0; padding: 5px 0; margin: 0; text-align: center; text-decoration: none; font-size: x-small; width:72px; }
-.icone36 a, .icone36 a,a.icone36, a.icone36:hover { text-decoration: none; }
-.icone36 a img, a.icone36 img { margin: 0 auto; display: inline; padding: 4px; background-color: #eee; border: 2px solid #GET{foncee}; }
-.icone36 a:hover img,a.icone36:hover img { background-color: #fff; border: 2px solid #666; }
-.icone36.danger img { background-color: #fff; border: 2px solid #ff9999; }
-.icone36.danger a:hover img,a.icone36.danger:hover img { background-color: #fff; border: 2px solid red; }
-.icone36 span { font-weight: bold; color: #GET{foncee}; display: block; margin: 2px auto; width: 100%; height: 3em; }
-.icone36 a:hover span,a.icone36:hover span { color: #000; }
-.icone36.danger span { color: #ff9999; }
-.icone36.danger a:hover span,a.icone36.danger:hover span { color: red; }
-a.icone36.historique-24 { width: 90px; }
-a.icone36.suivi-forum-24 { width: 100px; }
-
-
-/* * Icones horizontales */
-/* a revoir */
-a.cellule-h { display: block; }
-a.cellule-h { font-size: 10px; font-weight: bold; text-align: #GET{left}; text-decoration: none; color: #666; }
-a.cellule-h:hover, a.cellule-h:hover a.cellule-h, a.cellule-h a.cellule-h:hover { font-size: 10px; font-weight: bold; text-align: #GET{left}; text-decoration: none; color: #000; }
-a.cellule-h div.cell-i { padding: 0; border: 1px solid #fff; margin: 0; margin-#GET{right}: 3px; }
-a.cellule-h:hover div.cell-i { background-color: #[(#ENV{couleur_claire}|couleur_eclaircir)]; margin: 0; margin-#GET{right}: 3px; padding: 0; border: 1px solid #GET{foncee}; }
-table.cellule-h-table { margin: 0; padding: 0; border: 0; }
-a.cellule-h img { width: 24px; height: 24px; border: 0; margin: 3px; background-repeat: no-repeat; background-position: center center; }
-a.cellule-h a.aide img { width: 12px; height: 12px; }
-a.cellule-h-texte { display: block; clear: both; text-align: #GET{left}; font-family: Trebuchet Sans MS, Arial, Sans, sans-serif; font-weight: bold; font-size: 11px; color: #606060; padding: 4px; margin: 3px; border: 1px solid #ddd; background-color: #f0f0f0; width: 92%; }
-.danger, a.cellule-h-texte { background: url(#CHEMIN_IMAGE{rayures-sup.gif}); }
-a.cellule-h-texte:hover { text-decoration: none; color: #000; border-#GET{right}: solid 1px #fff; border-bottom: solid 1px #fff; border-#GET{left}: solid 1px #666; border-top: solid 1px #666; background-color: #eee; }
-
-
 /* * Style des icones */
-/*
-.fondgris { cursor: pointer; padding: 4px; margin: 1px; }
-.fondgrison { cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999; background-color: #e4e4e4; }
-.fondgrison2 { cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999; background-color: #fff; }
-.bouton36gris { padding: 6px; margin-top: 2px; border: 1px solid #ccc; background-color: #eee; }
-.bouton36blanc { padding: 6px; margin-top: 2px; border: 1px solid #999; background-color: #fff; }
-.bouton36rouge { padding: 6px; margin-top: 2px; border: 1px solid red; background-color: #fff; }
-.bouton36off { padding: 6px; margin-top: 2px; width: 24px; height: 24px; }
-*/
+/* structure html : <span class="icone danger horizontale s24 left"><a><img><b>texte</b></span> */
+.icone { display:block; margin:0;padding:0;text-align: center; font-size: 10px;}
+.icone a {display:block;margin:0 auto;width:72px;padding: 5px 0; }
+.icone a:hover {text-decoration:none;}
+.icone a img {margin: 0 auto; display: inline; padding: 4px; background-color: #eee; border: 2px solid #GET{foncee}; }
+.icone a:hover img { background-color: #fff; border-color: #666; }
+.icone a b { font-weight: bold; color: #GET{foncee}; display: block; margin: 2px auto; width: 100%; height: 3em; }
+.icone a:hover b { color: #000;}
+
+/* alignement */
+.icone.left {float:#GET{left};}
+.icone.right {float:#GET{right};}
+.icone.center a {margin:0 auto;}
+
+/* icone horizontale */
+.icone.horizontale { display:block; clear: both;position:relative;margin:0;padding:2px;text-align: #GET{left};padding-#GET{left}:32px;}
+.icone.horizontale a {display:inline;width:auto;}
+.icone.horizontale.right {text-align: #GET{right};padding-#GET{right}:32px;padding-#GET{left}:2px;}
+.icone.horizontale a img {padding:0;border:0;background:none;position:absolute;#GET{left}:4px;top:50%;margin-top:-12px;}
+.icone.horizontale a b {color:#666;}
+.icone.horizontale a:hover b { color: #000;}
+
+/* variantes sans texte ou sans image */
+.icones_img .icone.verticale b {display:none;}
+.icones_texte .icone img {display:none;}
+
+.icones_texte .icone.horizontale {padding:2px;}
+.icones_texte .icone.horizontale a {display:block;padding:4px;color: #606060;border: 1px solid #ddd; background-color: #f0f0f0;}
+.icones_texte .icone.horizontale a:hover { text-decoration: none; color: #000; border-#GET{right}: solid 1px #fff; border-bottom: solid 1px #fff; border-#GET{left}: solid 1px #666; border-top: solid 1px #666; background-color: #eee; }
+
+/* danger */
+.icone.danger {background:none;}
+.icone.danger a { background: url(#CHEMIN_IMAGE{rayures-sup.gif}); }
+.icone.danger a img { background-color: #fff; border-color: #ff9999; }
+.icone.danger a:hover img { background-color: #fff; border-color: red; }
+.icone.horizontale.danger a { background: none; }
+.icone.horizontale.danger { background: url(#CHEMIN_IMAGE{rayures-sup.gif}); }
+.icones_texte .icone.horizontale.danger {background:none;}
+.icones_texte .icone.horizontale.danger a { background: url(#CHEMIN_IMAGE{rayures-sup.gif}); }
+
+/* cas particuliers */
+.icone.verticale.historique-24 { width: 90px; }
+.icone.verticale.suivi-forum-24 { width: 100px; }
+
+/* * Style des onglets historiques */
 
 div.onglet { font-family: Verdana, Arial, Sans, sans-serif; font-size: 11px; font-weight: bold; border: 1px solid #GET{foncee}; margin-#GET{right}: 3px; padding: 5px; background-color: #fff; }
 div.onglet a { color: #GET{foncee}; }

@@ -923,6 +923,9 @@ ondblclick=\'storeCaret(this);\'>$texte</textarea>";
 	$retour = "<div style=\'padding-top: 20px;width:100px\' class=\'icone36\'>" . icone_inline($texte, $lien, $fond, $fonction, $align) . "</div>";
 	if ($echo) echo_log(\'icone\',$retour); else return $retour;}',
 
+	'icone_horizontale_display'=> '($texte, $lien, $fond = "", $fonction = "", $af = true, $js=\'\') {
+	return icone_horizontale($texte, $lien, $fond, $fonction, $af, $js);}',
+
 	 	
 ) as $f => $def) {
 	if (!function_exists($f)) {

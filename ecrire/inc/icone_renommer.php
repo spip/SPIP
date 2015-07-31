@@ -16,14 +16,23 @@ include_spip('inc/boutons');
 
 function inc_icone_renommer_dist($fond,$fonction){
 	$size = 24;
-	if (preg_match("/-([0-9]{1,3})[.](gif|png)$/i",$fond,$match))
-		$size = $match[1];
-	$type = preg_replace("/(-[0-9]{1,3})?[.](gif|png)$/i","",$fond);
+	if (preg_match("/(?:-([0-9]{1,3}))?([.](gif|png))?$/i",$fond,$match)
+		AND ($match[0] OR $match[1])) {
+		if ($match[1])
+			$size = $match[1];
+		$type = substr($fond,0,-strlen($match[0]));
+		if (!$match[2])
+			$fond .= ".png";
+	}
+	else {
+		$type = $fond;
+		$fond .= ".png";
+	}
 
 	$rtl = false;
-	if (preg_match(',[-_]rtl$,i',$type)){
+	if (preg_match(',[-_]rtl$,i',$type,$match)){
 		$rtl = true;
-		$type = preg_replace(',[-_]rtl$,i','',$type);
+		$type = substr($type,0,-strlen($match[0]));
 	}
 
 	$remplacement = array(
