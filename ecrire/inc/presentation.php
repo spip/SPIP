@@ -492,7 +492,7 @@ function envoi_link($nom_site_spip, $minipres=false) {
 			'ico'),
 		'src');
 	}
-	$favicon = $fid ? $fid : find_in_path('spip.ico'));
+	$favicon = $fid ? $fid : find_in_path('spip.ico');
 
 	// favicon.ico
 	$res .= '<link rel="shortcut icon" href="'
