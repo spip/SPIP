@@ -4,14 +4,14 @@
 //
 
 global $balise_FORMULAIRE_SIGNATURE_collecte;
-$balise_FORMULAIRE_SIGNATURE_collecte = array('petition', 'nom_email', 'adresse_email', 'message', 'signature_nom_site', 'signature_url_site', 'url_page', 'val_confirm');
+$balise_FORMULAIRE_SIGNATURE_collecte = array('petition', 'id_article', 'nom_email', 'adresse_email', 'message', 'signature_nom_site', 'signature_url_site', 'url_page', 'val_confirm');
 
 function balise_FORMULAIRE_SIGNATURE_stat($args, $filtres)
 {
   return ($args[0] ? $args : '');
 }
 
-function balise_FORMULAIRE_SIGNATURE_dyn($id_article, $nom_email, $adresse_email, $message, $nom_site, $url_site, $url_page, $val_confirm) {
+function balise_FORMULAIRE_SIGNATURE_dyn($texte, $id_article, $nom_email, $adresse_email, $message, $nom_site, $url_site, $url_page, $val_confirm) {
 
 	include_local(_FILE_CONNECT);
 	if ($val_confirm)
@@ -25,7 +25,6 @@ function balise_FORMULAIRE_SIGNATURE_dyn($id_article, $nom_email, $adresse_email
 }
 
 
-//
 // Retour a l'ecran du lien de confirmation d'une signature de petition.
 // Si val_confirm est non vide, c'est l'appel en debut de inc-public
 // pour vider le cache au demarrage afin que la nouvelle signature apparaisse.
