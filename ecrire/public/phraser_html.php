@@ -226,8 +226,9 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
       if (($suite && ($suite[0] != '{')) || ($fonc  && $fonc[0] == '/')) { 
 	// si pas d'argument, alors il faut une fonction ou un double |
 	if (!$match[1]) {
-	    erreur_squelette(_T('zbug_info_erreur_squelette'), $texte);
-	    $texte = '';
+		$msg = _T('zbug_erreur_filtre', array('filtre' => $texte));
+		erreur_squelette($msg, $pointeur_champ);
+		$texte = '';
 	} else 	$texte = $suite;
 	  if ($fonc!=='') $pointeur_champ->param[] = $res;
 	  // pour les balises avec faux filtres qui boudent ce dur larbeur
@@ -245,9 +246,10 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 		  preg_match("/^([[:space:]]*)([^,([{}]*([(\[{][^])}]*[])}])?[^,}]*)([,}].*)$/ms", $args, $regs);
 		  if (!strlen($regs[2]))
 		    {
-		      erreur_squelette(_T('zbug_info_erreur_squelette'), $args);
-		      $champ->apres = $champ->avant = $args = "";
-		      break;
+			$msg = _T('zbug_erreur_filtre', array('filtre' => $args));
+			erreur_squelette($msg, $pointeur_champ);
+			$champ->apres = $champ->avant = $args = "";
+			break;
 		      }   
 		}
 		$arg = $regs[2];
@@ -538,8 +540,9 @@ function phraser_criteres($params, &$result) {
 			    $crit->cond = $m[5];
 			  }
 			  else {
-			    erreur_squelette(_T('zbug_critere_inconnu',
-						array('critere' => $param)));
+			    $msg = _T('zbug_critere_inconnu', 
+					array('critere' => $param));
+			    erreur_squelette($msg, $result);
 			  }
 			  if ((!preg_match(',^!?doublons *,', $param)) || $crit->not)
 			    $args[] = $crit;
@@ -572,7 +575,7 @@ function phraser_critere_infixe($arg1, $arg2, $args, $op, $not, $cond)
 	return $crit;
 }
 
-function public_phraser_html_dist($texte, $id_parent, &$boucles, $nom, $ligne=1) {
+function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne=1) {
 
 	$all_res = array();
 
@@ -609,8 +612,10 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $nom, $ligne=1)
 				       strlen(BALISE_PRE_BOUCLE),
 				       $k - strlen(BALISE_PRE_BOUCLE));
 
-		  if (!preg_match(",".BALISE_BOUCLE . $id_boucle . "[[:space:]]*\(,", $milieu, $r))
-			erreur_squelette(_T('zbug_erreur_boucle_syntaxe'), $id_boucle);
+		  if (!preg_match(",".BALISE_BOUCLE . $id_boucle . "[[:space:]]*\(,", $milieu, $r)) {
+			$msg = _T('zbug_erreur_boucle_syntaxe', array('id' => $id_boucle));
+			erreur_squelette($msg, $result);
+		  }
 		  $pos_boucle = $n;
 		  $n = strpos($milieu, $r[0]);
 		  $result->avant = substr($milieu, $k+1, $n-$k-1);
@@ -650,9 +655,9 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $nom, $ligne=1)
 			$s = BALISE_FIN_BOUCLE . $id_boucle . ">";
 			$p = strpos($milieu, $s);
 			if ($p === false) {
-				erreur_squelette(_T('zbug_erreur_boucle_syntaxe'),
-					 _T('zbug_erreur_boucle_fermant',
-						array('id'=>$id_boucle)));
+				$msg = _T('zbug_erreur_boucle_fermant',
+					array('id' => $id_boucle));
+				erreur_squelette($msg, $result);
 			}
 
 			$suite = substr($milieu, $p + strlen($s));
@@ -706,18 +711,19 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $nom, $ligne=1)
 			$result->param = $args;
 		}
 
-		$result->avant = public_phraser_html_dist($result->avant, $id_parent,$boucles, $nom, $result->ligne);
-		$result->apres = public_phraser_html_dist($result->apres, $id_parent,$boucles, $nom, $result->ligne+$b+$m);
-		$result->altern = public_phraser_html_dist($result->altern,$id_parent,$boucles, $nom, $result->ligne+$a+$m+$b);
-		$result->milieu = public_phraser_html_dist($milieu, $id_boucle,$boucles, $nom, $result->ligne+$b);
+		$result->avant = public_phraser_html_dist($result->avant, $id_parent,$boucles, $descr, $result->ligne);
+		$result->apres = public_phraser_html_dist($result->apres, $id_parent,$boucles, $descr, $result->ligne+$b+$m);
+		$result->altern = public_phraser_html_dist($result->altern,$id_parent,$boucles, $descr, $result->ligne+$a+$m+$b);
+		$result->milieu = public_phraser_html_dist($milieu, $id_boucle,$boucles, $descr, $result->ligne+$b);
 
 		// Verifier qu'il n'y a pas double definition
 		// apres analyse des sous-parties (pas avant).
 		
 		if (isset($boucles[$id_boucle])) {
-			erreur_squelette(_T('zbug_erreur_boucle_syntaxe'),
-					 _T('zbug_erreur_boucle_double',
-					 	array('id'=>$id_boucle)));
+			$msg = _T('zbug_erreur_boucle_double',
+				 	array('id'=>$id_boucle));
+			$result->descr = $descr;
+			erreur_squelette($msg, $result);
 		} else
 			$boucles[$id_boucle] = $result;
 		$all_res = phraser_champs_etendus($debut, $ligne, $all_res);
