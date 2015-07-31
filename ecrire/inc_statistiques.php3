@@ -209,6 +209,10 @@ function calculer_visites($date = "") {
 	if (lire_meta('activer_statistiques_ref') == 'oui') {
 		calculer_referers($date);
 	}
+	else {
+		$query = "UPDATE spip_articles SET popularite = 0";
+		$result = spip_query($query);
+	}
 }
 
 

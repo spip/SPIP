@@ -58,7 +58,7 @@
 	<FONT FACE="arial,helvetica,sans-serif" SIZE=3>
 	<p align='right'><font size='4'><b>Les articles les plus populaires</b></font>
 
-	<BOUCLE_articles(ARTICLES){tout}{par popularite}{inverse}{0,7}> 
+	<BOUCLE_articles(ARTICLES){tout}{par popularite}{popularite > 0}{inverse}{0,7}> 
 		<P align="right">
 		<FONT SIZE=2>
 		[(#SURTITRE)<BR>]
@@ -70,6 +70,19 @@
 		</FONT>
 		[<BR><small>Popularité: (#POPULARITE)%</small>]
 	</BOUCLE_articles>
+	<BOUCLE_articles_visites(ARTICLES){tout}{par visites}{visites > 0}{inverse}{0,7}> 
+		<P align="right">
+		<FONT SIZE=2>
+		[(#SURTITRE)<BR>]
+		<FONT SIZE=3><A HREF="#URL_ARTICLE"[ TITLE="(#DESCRIPTIF|textebrut|attribut_html)"]>#TITRE</A></FONT>
+		[<BR>(#SOUSTITRE)]
+		<B_auteurs_visites><BR><B>par 
+		<BOUCLE_auteurs_visites(AUTEURS){id_article}{", "}{par nom}>#NOM</BOUCLE_auteurs_visites>
+		</B></B_auteurs_visites>
+		</FONT>
+		[<BR><small>(#VISITES) visites</small>]
+	</BOUCLE_articles_visites>
+	<//B_articles>
 
 	[
 	<P>
