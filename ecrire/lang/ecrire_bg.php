@@ -45,10 +45,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_operation_echec' => 'Операцията пропадна.',
 'avis_operation_impossible' => 'Opération impossible', # NEW
 'avis_probleme_archive' => 'Грешка при четене на файла @archive@',
-'avis_site_introuvable' => 'Страницата не е намерена',
-'avis_site_syndique_probleme' => 'Предупреждение: проблем при обединението на сайта; в  следствие на това системата е временно прекъсната. Моля, проверете файла за обединяване (<b>@url_syndic@</b>) и опитайте отново да възстановите информацията. ', # MODIF
-'avis_sites_probleme_syndication' => 'Проблем при обединението на сайтовете',
-'avis_sites_syndiques_probleme' => 'Проблем при обединяването на сайтовете',
 'avis_suppression_base' => 'ПРЕДУПРЕЖДЕНИЕ: изтриването на данните е необратимо',
 'avis_version_mysql' => 'С Вашата SQL версия: (@version_mysql@) е невъзможно да се осъществи автоматична поправка в таблиците с бази данни.',
 
@@ -84,11 +80,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_envoi_liste_nouveautes' => 'Изпращане на списък с новини',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Изключване от списъка на текущо свързаните редактори',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Отказ от изпращане на редакторски съобщения',
-'bouton_radio_non_syndication' => 'Без обединяване',
 'bouton_radio_pas_petition' => 'Без молба',
 'bouton_radio_petition_activee' => 'Молбата е активирана',
 'bouton_radio_supprimer_petition' => 'Изтриване на молбата',
-'bouton_radio_syndication' => 'Обединеняване на сайтове:',
 'bouton_redirection' => 'ПРЕНАСОЧВАНЕ',
 'bouton_relancer_installation' => 'Подновяване на инсталацията',
 'bouton_suivant' => 'По-нататък',
@@ -129,15 +123,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Адрес на директорията',
 'entree_adresse_email' => 'Електронен адрес (е-mail)',
-'entree_adresse_fichier_syndication' => 'Адрес на файла за обединяване:',
-'entree_adresse_site' => '<b>Уеб-адрес (URL) на сайта</b> [Задължително]',
 'entree_base_donnee_1' => 'Адрес на базата данни',
 'entree_base_donnee_2' => '(Често адресът съвпада с адрес от Вашия сайт, понякога съответства на името «localhost», а понякога се оставя празен.)',
 'entree_biographie' => 'Кратка биография с няколко думи.',
 'entree_chemin_acces' => '<b>Въвеждане</b> на път:',
 'entree_cle_pgp' => 'PGP ключ',
 'entree_contenu_rubrique' => '(Кратко съдържание на рубриката.)',
-'entree_description_site' => 'Описание на сайта',
 'entree_identifiants_connexion' => 'Идентефикатори за свързване',
 'entree_informations_connexion_ldap' => 'Моля, попълнете бланката с информацията за LDAP връзка. Тази информация ще получите от системния или мрежовия администратор.',
 'entree_infos_perso' => 'Кой си ти?',
@@ -212,9 +203,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_modifier_article' => 'Промяна на статията',
 'icone_modifier_message' => 'Промяна на съобщението',
 'icone_modifier_rubrique' => 'Промяна на рубриката',
-'icone_modifier_site' => 'Промяна на страницата',
 'icone_publication' => 'Publication', # NEW
-'icone_referencer_nouveau_site' => 'Свързване на нов сайт',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => 'Обратно',
 'icone_retour_article' => 'Обратно към статията',
@@ -224,7 +213,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_supprimer_rubrique' => 'Изтриване на рубриката',
 'icone_supprimer_signature' => 'Изтриване на записа',
 'icone_valider_signature' => 'Одобряване на записа',
-'icone_voir_sites_references' => 'Показване на свързани сайтове',
 'image_administrer_rubrique' => 'Управление на рубриката',
 'info_1_article' => '1 статия',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -289,7 +277,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Предупреждение',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Структурата на Вашата база данни е инсталирана.',
-'info_bloquer' => 'блокиране',
 'info_chapeau' => 'Преглед',
 'info_chapeau_2' => 'Въведение:',
 'info_chemin_acces_1' => 'Опции: <b>Път за достъп до директорията</b>',
@@ -326,7 +313,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_date_publication_anterieure' => 'Дата на предишно публикуване:',
 'info_date_referencement' => 'ДАТА НА СВЪРЗВАНЕ НА САЙТА:',
 'info_derniere_etape' => 'Последна стъпка: <b>Приключено!',
-'info_derniere_syndication' => 'Последното обединяване на този сайт бе на',
 'info_derniers_articles_publies' => 'Вашите най-нови публикувани статии',
 'info_desactiver_messagerie_personnelle' => 'От тази страница можете да включите/ изключите системата за изпращане на лични съобщения.',
 'info_descriptif' => 'Описание:',
@@ -391,8 +377,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_langues' => 'Езици на сайта',
 'info_ldap_ok' => 'Инсталирана е аутентификация за LDAP.',
 'info_lien_hypertexte' => 'Хипертекстова препратка:',
-'info_liens_syndiques_1' => 'обединени връзки',
-'info_liens_syndiques_2' => 'очакват одобрение.',
 'info_liste_redacteurs_connectes' => 'Списък на свързаните редактори',
 'info_login_existant' => 'Потребителското име вече съществува.',
 'info_login_trop_court' => 'Потребителското име е твърде кратко.',
@@ -436,7 +420,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_nom' => 'Име',
 'info_nom_destinataire' => 'Име на получателя',
 'info_nom_site' => 'Име на сайта Ви',
-'info_nom_site_2' => '<b>Име на сайта</b> [Задължително]',
 'info_nombre_articles' => '@nb_articles@ статии,',
 'info_nombre_partcipants' => 'УЧАСТНИЦИ В ДИСКУСИЯТА:',
 'info_nombre_rubriques' => '@nb_rubriques@ рубрики,',
@@ -503,7 +486,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   доставчици спират съобщения, изпратени
   до техни сървъри: в този случай автоматичната регистрация
   не би могла да се осъществи.', # MODIF
-'info_question_proposer_site' => 'Кой може да предложи свързани сайтове?',
 'info_question_utilisation_moteur_recherche' => 'Желаете ли да използвате търсещата машина под СПИП?
  (при отказване действието й увеличавате скоростта на действие на системата.)',
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
@@ -536,14 +518,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_site' => 'Сайт',
 'info_site_2' => 'сайт:',
 'info_site_min' => 'сайт',
-'info_site_propose' => 'Сайтът е изпратен на:',
 'info_site_reference_2' => 'Свързан сайт',
-'info_site_syndique' => 'Този сайт е обединен.',
-'info_site_valider' => 'Сайтове, очакващи одобрение за публикуване',
 'info_sites' => 'сайтове',
 'info_sites_lies_mot' => 'Свързани сайтове, асоциирани с ключовата дума',
 'info_sites_proxy' => 'Използване на прокси',
-'info_sites_refuses' => 'Отхвърлени сайтове',
 'info_sites_trouves' => 'Намерени сайтове',
 'info_sites_trouves_dans_texte' => 'Намерени сайтове (в текста)',
 'info_sous_titre' => 'Подзаглавие:',
@@ -553,10 +531,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_statut_auteur_autre' => 'Друг статус:',
 'info_statut_efface' => 'Изтрит',
 'info_statut_redacteur' => 'Редактор',
-'info_statut_site_1' => 'Сайтът е:',
-'info_statut_site_2' => 'Публикуван',
-'info_statut_site_3' => 'Изпратен',
-'info_statut_site_4' => 'За изтриване',
 'info_statut_utilisateurs_1' => 'Статус "по подразбиране" на вписаните потребители',
 'info_statut_utilisateurs_2' => 'Изберете статус за хората, вписани в LDAP-директорията при свързването им за първи път. По-късно ще можете да променяте тази характеристика за всеки автор по отделно.',
 'info_suivi_activite' => 'Дейности на редакторите',
@@ -635,14 +609,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'item_autoriser_documents_joints' => 'Одобряване на документи, прикрепени към статии',
 'item_autoriser_documents_joints_rubriques' => 'Одобряване на документи в рубриките',
 'item_autoriser_syndication_integrale' => 'Включване на цели статии във файловете за обединяване',
-'item_bloquer_liens_syndiques' => 'Блокиране на обединените връзки за одобрение',
 'item_choix_administrateurs' => 'администратори',
 'item_choix_generation_miniature' => 'Автоматично генериране на умалени образи.',
 'item_choix_non_generation_miniature' => 'Без генериране на умалени образи.',
 'item_choix_redacteurs' => 'редактори',
 'item_choix_visiteurs' => 'посетители на публичния сайт',
 'item_creer_fichiers_authent' => 'Създаване на файлове от типа .htpasswd',
-'item_gerer_annuaire_site_web' => 'Управление на директорията на уеб сайта',
 'item_gerer_statistiques' => 'Управление на статистиката',
 'item_limiter_recherche' => 'Ограничаване търсенето на информация, съдържаща се само във Вашия сайт',
 'item_login' => 'Потребителско име',
@@ -657,23 +629,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'item_non_autoriser_documents_joints' => 'Забрана за одобряване на документи в статии',
 'item_non_autoriser_documents_joints_rubriques' => 'Забрана за одобряване на документи в рубриките',
 'item_non_autoriser_syndication_integrale' => 'Изпращане на резюме',
-'item_non_bloquer_liens_syndiques' => 'Без блокиране на връзките - следствия от обединяване',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
 'item_non_creer_fichiers_authent' => 'Забрана за създаване на файловете',
-'item_non_gerer_annuaire_site_web' => 'Деактивиране на директорията на уеб сайта',
 'item_non_gerer_statistiques' => 'Без управление на статистиката',
 'item_non_limiter_recherche' => 'Разширяване на търсенето в текстове от свързаните сайтове',
 'item_non_messagerie_agenda' => 'Désactiver la messagerie et l’agenda', # NEW
 'item_non_publier_articles' => 'Забраняване публикуването на статии преди техните дати на публикуване.',
 'item_non_utiliser_moteur_recherche' => 'Без търсачка',
-'item_non_utiliser_syndication' => 'Без използване на автоматично обединяване',
 'item_nouvel_auteur' => 'Нов автор',
 'item_nouvelle_rubrique' => 'Нова рубрика',
 'item_oui' => 'Да',
 'item_publier_articles' => 'Публикуване на статиите независимо от техните дати на публикуване.',
 'item_reponse_article' => 'Отговор на статията',
 'item_utiliser_moteur_recherche' => 'Използване на търсачката',
-'item_utiliser_syndication' => 'Използване на автоматично обединяване',
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => 'посетител',
@@ -698,9 +666,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lien_ajouter_auteur' => 'Добавяне на автора',
 'lien_ajouter_participant' => 'Добавяне на участник',
 'lien_email' => 'Електронен адрес',
-'lien_mise_a_jour_syndication' => 'Актуализация',
 'lien_nom_site' => 'ИМЕ НА САЙТА:',
-'lien_nouvelle_recuperation' => 'Опитайте да направите ново възстановяване на данните ',
 'lien_retirer_auteur' => 'Премахване на автор',
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'премахване на участника',
@@ -817,15 +783,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // S
 'sans_heure' => 'sans heure', # NEW
 'statut_admin_restreint' => '(ограничен администратор)',
-'syndic_choix_moderation' => 'Какво да се направи със следващите препратки от сайта?',
-'syndic_choix_oublier' => 'Какво да се направи с препратките, които вече не присъстват във файла за обединение?',
-'syndic_choix_resume' => 'Някои сайтове предлагат пълен текст на статиите. Когато се предлага пълен текст, искате ли да направите обединение:',
-'syndic_lien_obsolete' => 'излязла от употреба препратка',
-'syndic_option_miroir' => 'автоматично да се блокират',
-'syndic_option_oubli' => 'автоматично да се изтриват (след @mois@ месец(а))',
-'syndic_option_resume_non' => 'пълно съдържание на статиите (във формат HTML)',
-'syndic_option_resume_oui' => 'само резюме (текстов формат)',
-'syndic_options' => 'Опции за обединение:',
 
 // T
 'taille_cache_image' => 'Изображенията, изчислени автоматично от СПИП (умалени изображения, заглавия, преобразени в графики, математически формули в TeX формат и др.) заемат общо @taille@ в директорията @dir@.',
@@ -907,20 +864,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_jeu_caractere_4' => 'Ако това не отговаря на ситуацията, която имате с данните си (например след възстановяване на базата от данни от архива) или ако <em>правите настройка на сайта си в момента</em> и желаете да използвате различна кодировка на символите, моля да обозначите кодировката тук:',
 'texte_jeu_caractere_conversion' => 'Забележка: Можете да да промените всичките текстове на сайта (статии, новини, форуми и др.) в кодировка на символите  <tt>utf-8</tt>. За целта, преминете към: <a href="@url@">страница за преобразуване в UTF-8</a>.',
 'texte_lien_hypertexte' => '(Ако съобщението се отнася до статия, публикувана в Интернет или до страница с повече информация, въведете заглавието на страницата и нейния уеб-адрес.)',
-'texte_liens_sites_syndiques' => 'Препратките, идващи от обединените сайтове
-   може да бъдат предварително блокирани.
-     Следната настройка показва обединените
-    сайтове след тяхното създаване в обичаен вид
-   След това е възможно да се блокира
-   индивидуално всяка препратка поотделно или да
-   се избере от всеки сайт, да се блокира препратката,
-   идваща от него.',
 'texte_login_ldap_1' => '(Оставете празно поле за потребител за анонимен достъп или попълнете пълния път за достъп, например «<tt>uid=smith, ou=users, dc=my-domain, dc=com</tt>».)',
 'texte_login_precaution' => 'Внимание! Това е потребителското име, с което в момента сте се свързали.
  Предпазливо използвайте формата ...',
 'texte_message_edit' => 'Внимание: това съобщение може да бъде променяно от всички администратори на сайта. То се чете от редакторите. Използвайте съобщенията само за подчертаване на важни за съществуването на сайта събития. ',
 'texte_messagerie_agenda' => 'Une messagerie permet aux rédacteurs du site de communiquer entre eux directement dans l’espace privé du site. Elle est associée à un agenda.', # NEW
-'texte_messages_publics' => 'Публични съобщения към статията:',
 'texte_mise_a_niveau_base_1' => 'СПИП файловете са актуализирани.
  Сега остава да обновите базата данни на
  сайта.',
@@ -934,7 +882,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_multilinguisme' => 'Ако желаете да боравите със статии на няколко езика с усложнена навигация, можете да добавите меню "избор на език" към статиите и/или към рубриките, в зависимост от организацията на сайта Ви.',
 'texte_multilinguisme_trad' => 'Също така, можете да активирате система за управление на препратките към различните преводи на статията.',
 'texte_non_compresse' => '<i>uncompressed</i> (сървърът ви не поддрържа това свойство)',
-'texte_non_fonction_referencement' => 'Можете да изберете да не използвате автоматичното свойство и да въвжедате ръчно елементите, свързани със сайта.',
 'texte_nouveau_message' => 'Ново съобщение',
 'texte_nouvelle_version_spip_1' => 'Току-що инсталирахте нова версия на СПИП.',
 'texte_nouvelle_version_spip_2' => 'Тази нова версия налага по-сериозна от обикновената актуализация. Ако сте администратор на сайта, изтрийте файла <tt>inc_connect.php3</tt> от директория <tt>ecrire</tt> и стартирайте отново инсталацията, с цел да актуализирате параметрите на базата данни за връзка. <p>(NB: ако сте забравили параметрите на базата данни за връзка, погледнете следния файл <tt>inc_connect.php3</tt> преди да го изтриете).', # MODIF
@@ -958,8 +905,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_recapitiule_liste_documents' => 'Тази страница обобщава списъка с документи, намиращи се из секциите. За да промените информацията в даден документ, преминете чрез препратката към страницата на неговата рубрика.',
 'texte_recuperer_base' => 'Поправка на базата данни',
 'texte_reference_mais_redirige' => 'свързана статия на Вашия СПИП сайт, но пренасочена към друг URL адрес.',
-'texte_referencement_automatique' => '<b>Автоматично свързване на сайт</b><br />Можете лесно да свъжетете уеб страници чрез обозначаване по-долу на желания URL на страницата или адресът на нейния файл за обединение. СПИП автоматично ще събере нужната информация, отнасяща се до сайта (наименование, описание и т.н.).',
-'texte_referencement_automatique_verifier' => 'Veuillez vérifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.', # NEW
 'texte_requetes_echouent' => '<b>Когато някои SQL справки
   системно и без налична причина заочнат да се развалят, възможно е
   базата данни сама да
@@ -990,11 +935,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  файлове в кеш-паметта на СПИП. Това позволява да се актуализират принудително всички страници, в
  случаи, когато са направени важни изменения в графиките или структурата на сайта.',
 'texte_sur_titre' => 'Челно заглавие',
-'texte_syndication' => 'Ако сайтът го позволява, възможно е автоматично да възстановява
-  списъка с най-новия материал. За да постигнете това, нужно е да активирате обединяване. 
-  <blockquote><i>Някои доставчици деактивират тази функция; 
-  ако случаят е този, няма да можете да използвате обединяването на съдържание
-  от Вашия сайт.</i></blockquote>', # MODIF
 'texte_table_ok' => ' : тази таблица е добра.',
 'texte_tables_indexation_vides' => 'Таблиците с индекси на търсачката са празни.',
 'texte_tentative_recuperation' => 'Опит за поправка',
@@ -1024,7 +964,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_admin_vider' => 'Техническа поддръжка',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
-'titre_articles_syndiques' => 'Обединени статии, изтеглени от този сайт',
 'titre_cadre_afficher_article' => 'Показване на статиите:',
 'titre_cadre_afficher_traductions' => 'Показване статуса на превод на следния език:',
 'titre_cadre_ajouter_auteur' => 'ДОБАВЯНЕ НА АВТОР:',
@@ -1041,7 +980,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Възможности: <b>Вашата LDAP-връзка</b>',
-'titre_dernier_article_syndique' => 'Най-новите обединени статии',
 'titre_evolution_visite' => 'Развитие на посещенията',
 'titre_groupe_mots' => 'ГРУПА ОТ КЛЮЧОВИ ДУМИ:',
 'titre_identite_site' => 'Identité du site', # NEW
@@ -1069,7 +1007,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_page_message_edit' => 'Писане на съобщение',
 'titre_page_messagerie' => 'Вашите съобщения',
 'titre_page_recherche' => 'Резултати от търсенето @recherche@',
-'titre_page_sites_tous' => 'Свързани сайтове',
 'titre_page_statistiques' => 'Статистика по рубрики',
 'titre_page_statistiques_referers' => 'Статистика (входящи препратки)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
@@ -1077,17 +1014,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_page_statistiques_visites' => 'Статистика на посещенията',
 'titre_page_upgrade' => 'Актуализация на СПИП',
 'titre_publication_articles_post_dates' => 'Публикуване на статии с отминала дата',
-'titre_referencement_sites' => 'Свързване и обединение на сайтове',
 'titre_referencer_site' => 'Свързване на сайта:',
 'titre_rendez_vous' => 'СРЕЩИ:',
 'titre_reparation' => 'Поправка',
-'titre_site_numero' => 'НОМЕР НА СТРАНИЦАТА:',
-'titre_sites_proposes' => 'Изпратени сайтове',
-'titre_sites_references_rubrique' => 'Свързани сайтове в рубриката',
-'titre_sites_syndiques' => 'Обединени сайтове',
-'titre_sites_tous' => 'Свързани сайтове',
 'titre_suivi_petition' => 'Допълнения на молбите',
-'titre_syndication' => 'Обединяване на сайтовете',
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
 'trad_article_inexistant' => 'Не съществува статия с такъв номер',

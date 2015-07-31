@@ -40,10 +40,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'avis_operation_echec' => 'Thao tác thất bại.',
 'avis_operation_impossible' => 'Operation impossible', # NEW
 'avis_probleme_archive' => 'Có lỗi khi đọc hồ sơ @archive@',
-'avis_site_introuvable' => 'Không tìm được trang web',
-'avis_site_syndique_probleme' => 'Cảnh báo: gặp trở ngại khi syndicate website này; thành ra hệ thống bị gián đoạn tạm thời. Xin xem lại địa chỉ của hồ sơ syndication của website (<b>@url_syndic@</b>), và làm lại việc thu hồi dữ kiện. Báo Động: lúc syndicate trang web này thì gặp vấn đề; vì vậy mà hệ thống bị gián đoạn tạm thời. Xin xem lại địa chỉ của hồ sơ syndication của trang web này (<b>@url_syndic@</b>), và tìm cách thâu hồi dữ kiện lại.', # MODIF
-'avis_sites_probleme_syndication' => 'Trang web này gặp phải vấn đề khi xuất bản',
-'avis_sites_syndiques_probleme' => 'Những website xuất bản song hành này cho biết có vấn đề',
 'avis_suppression_base' => 'BÁO ĐỘNG, xóa dữ kiện rồi sẽ không lấy lại được',
 'avis_version_mysql' => 'Ấn bản SQL này (@version_mysql@) không cho phép sửa chữa tự động các bản trong database.',
 
@@ -79,11 +75,9 @@ Hồ sơ SPIP</a>.', # MODIF
 'bouton_radio_envoi_liste_nouveautes' => 'Gửi các tin tức mới nhất',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Không hiện tên ra  ',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Đừng gửi bất cứ thông báo xã luận nào',
-'bouton_radio_non_syndication' => 'Không có syndication',
 'bouton_radio_pas_petition' => 'Không dùng',
 'bouton_radio_petition_activee' => 'Thỉnh nguyện thư được mở lên',
 'bouton_radio_supprimer_petition' => 'Xóa thỉnh nguyện thư',
-'bouton_radio_syndication' => 'Syndication:',
 'bouton_redirection' => 'CHUYỂN TỚI',
 'bouton_relancer_installation' => 'Thiết trí lại',
 'bouton_suivant' => 'Kế tiếp',
@@ -124,15 +118,12 @@ Hồ sơ SPIP</a>.', # MODIF
 'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Địa chỉ ngăn',
 'entree_adresse_email' => 'Điạ chỉ email của bạn',
-'entree_adresse_fichier_syndication' => 'Địa chỉ của hồ sơ «backend» để syndicate:', # MODIF
-'entree_adresse_site' => '<b>Địa chỉ Website</b> [Bắt buộc]',
 'entree_base_donnee_1' => 'Địa chỉ database',
 'entree_base_donnee_2' => '(Thông thường, địa chỉ này giống địa chỉ website của bạn, đôi khi nó mang tên «localhost», và có khi nó để trống.)',
 'entree_biographie' => 'Tiểu sử ngắn gọn (một vài chữ).',
 'entree_chemin_acces' => '<b>Xin cho biết</b> tên ngăn:',
 'entree_cle_pgp' => 'Khóa PGP của bạn',
 'entree_contenu_rubrique' => '(Mô tả ngắn gọn nội dung của đề mục)',
-'entree_description_site' => 'Mô tả website',
 'entree_identifiants_connexion' => 'Tên gọi lúc nối vào của bạn...',
 'entree_informations_connexion_ldap' => 'Xin điền vào mẫu này với các dữ kiện móc nối LDAP. Bạn sẽ được người quản lý mạng hoặc hệ điều hành cho biết các dữ kiện này.',
 'entree_infos_perso' => 'Bạn là ai?',
@@ -207,9 +198,7 @@ Hồ sơ SPIP</a>.', # MODIF
 'icone_modifier_article' => 'Sửa bài này',
 'icone_modifier_message' => 'Sửa thư tín này',
 'icone_modifier_rubrique' => 'Sửa đề mục này',
-'icone_modifier_site' => 'Sửa liên kết này',
 'icone_publication' => 'Publication', # NEW
-'icone_referencer_nouveau_site' => 'Thêm một điểm nối vào trang Web khác',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => 'Trở lại',
 'icone_retour_article' => 'Trở về bài trước',
@@ -219,7 +208,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'icone_supprimer_rubrique' => 'Xoá đề mục này',
 'icone_supprimer_signature' => 'Xoá chữ ký này',
 'icone_valider_signature' => 'Chấp thuận',
-'icone_voir_sites_references' => 'Xem những liên kết',
 'image_administrer_rubrique' => 'Bạn có thể quản trị đề mục này',
 'info_1_article' => '1 bài',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -280,7 +268,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_avertissement' => 'Báo động',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Cấu trúc database của bạn đã được thiết trí.',
-'info_bloquer' => 'ngăn chận',
 'info_chapeau' => 'Dẫn nhập',
 'info_chapeau_2' => 'Dẫn nhập:',
 'info_chemin_acces_1' => ' Chọn lựa: <b>ngõ vào trong thư mục</b>',
@@ -317,7 +304,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_date_publication_anterieure' => 'Ngày tháng của bài đã đăng:',
 'info_date_referencement' => 'NGÀY NỐI KẾT WEBSITE NÀY:',
 'info_derniere_etape' => 'Bước chót: <b>Hoàn tất!</b>',
-'info_derniere_syndication' => 'Xuất bản song hành chót của website này xảy ra vào ',
 'info_derniers_articles_publies' => 'Những bài phát hành mới nhất của bạn',
 'info_desactiver_messagerie_personnelle' => 'Bạn có thể tắt/mở hộp thư tín cá nhân của bạn.',
 'info_descriptif' => 'Tóm lược:',
@@ -370,8 +356,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_langues' => 'Ngôn ngữ của website',
 'info_ldap_ok' => 'Đặc điểm xác nhận LDAP được thiết trí.',
 'info_lien_hypertexte' => 'Điểm kết nối:',
-'info_liens_syndiques_1' => 'điểm kết nối syndicated',
-'info_liens_syndiques_2' => 'chờ thông qua.',
 'info_liste_redacteurs_connectes' => 'Danh sách các chủ bút đang nối vào',
 'info_login_existant' => 'Login này đã có.',
 'info_login_trop_court' => 'Login ngắn quá.',
@@ -411,7 +395,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_nom' => 'Tên',
 'info_nom_destinataire' => 'Tên người nhận',
 'info_nom_site' => 'Tên website của bạn',
-'info_nom_site_2' => '<b>Tên website</b> [Bắt buộc]',
 'info_nombre_articles' => '@nb_articles@ bài,',
 'info_nombre_partcipants' => 'THAM DỰ VIÊN VÀO CUỘC THẢO LUẬN:',
 'info_nombre_rubriques' => '@nb_rubriques@ đề mục, ',
@@ -468,7 +451,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_question_accepter_visiteurs' => 'Nếu trang web cho phép khách ghi danh mà không cần phải vào vùng riêng, thì xin hãy mở lên những chọn lựa sau:',
 'info_question_gerer_statistiques' => 'Có muốn quản trị các con số thống kê?',
 'info_question_inscription_nouveaux_redacteurs' => 'Bạn có cho phép ghi danh các chủ bút mới từ website công cộng không? Nếu đồng ý, khách có thể ghi danh qua một mẫu tự động, và sẽ được phép vào vùng riêng của họ để soạn bài. <blockquote><i>Trong quá trình ghi danh, người dùng sẽ nhận được email cho biết login/mật mã vào chỗ riêng của họ. Một số máy chủ tắt đặc điểm này: trong trường hợp đó, ghi danh tự động không dùng được.</i>', # MODIF
-'info_question_proposer_site' => 'Ai có quyền đề nghị các website nối kết?',
 'info_question_utilisation_moteur_recherche' => 'Bạn có muốn dùng cơ phận tìm kiếm có sẵn của SPIP? (<i>Nếu tắt nó đi sẽ làm hệ thống chạy lẹ hơn</i>) ',
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
@@ -500,14 +482,10 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_site' => 'Website',
 'info_site_2' => 'website: ',
 'info_site_min' => 'website',
-'info_site_propose' => 'website đã nộp lúc:',
 'info_site_reference_2' => 'Website nối kết',
-'info_site_syndique' => 'Website này được syndicated...',
-'info_site_valider' => 'Website chờ chấp thuận',
 'info_sites' => 'website',
 'info_sites_lies_mot' => 'Những website nối kết liên đới với từ then chốt này',
 'info_sites_proxy' => 'Dùng một proxy',
-'info_sites_refuses' => 'Website bị từ chối',
 'info_sites_trouves' => 'Tìm thấy website',
 'info_sites_trouves_dans_texte' => 'Tìm thấy website (trong văn tự)',
 'info_sous_titre' => 'Tựa đề phụ:',
@@ -517,10 +495,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_statut_auteur_autre' => 'Other status:', # NEW
 'info_statut_efface' => 'Xóa',
 'info_statut_redacteur' => 'Chủ bút',
-'info_statut_site_1' => 'Website này là:',
-'info_statut_site_2' => 'Đã phát hành',
-'info_statut_site_3' => 'Đã nộp vào',
-'info_statut_site_4' => 'Vô thùng rác',
 'info_statut_utilisateurs_1' => 'Trạng thái định sẵn của người dùng được đưa vào',
 'info_statut_utilisateurs_2' => 'Chọn trạng thái cho những người liệt kê trong thư mục LDAP khi họ nối vào lần đầu. Về sau, bạn có thể sửa đổi trị giá này cho từng tác giả theo từng trường hợp một.',
 'info_suivi_activite' => 'Thông tin cho Ban Biên Tập',
@@ -600,14 +574,12 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'item_autoriser_documents_joints' => 'Cho phép đính kèm tài liệu vào bài vở',
 'item_autoriser_documents_joints_rubriques' => 'Cho phép đính kèm tài liệu trong đề mục',
 'item_autoriser_syndication_integrale' => 'Include entire articles in the syndication files', # NEW
-'item_bloquer_liens_syndiques' => 'Ngăn lại, không chấp thuận các điểm nối syndicated',
 'item_choix_administrateurs' => 'quản trị viên',
 'item_choix_generation_miniature' => 'Tự động tạo ra các hình mẫu.',
 'item_choix_non_generation_miniature' => 'Đừng tạo ra hình mẫu.',
 'item_choix_redacteurs' => 'chủ bút',
 'item_choix_visiteurs' => 'Khách của website công',
 'item_creer_fichiers_authent' => 'Lập ra hồ sơ .htpasswd',
-'item_gerer_annuaire_site_web' => 'Quản trị thư mục website',
 'item_gerer_statistiques' => 'Quản trị số thống kê',
 'item_limiter_recherche' => 'Giới hạn việc tìm kiếm trong khối lượng tin của website bạn',
 'item_login' => 'Login',
@@ -622,23 +594,19 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'item_non_autoriser_documents_joints' => 'Không cho phép đính kèm tài liệu vào bài vở',
 'item_non_autoriser_documents_joints_rubriques' => 'Không cho phép đính kèm tài liệu trong đề mục',
 'item_non_autoriser_syndication_integrale' => 'Only send a summary', # NEW
-'item_non_bloquer_liens_syndiques' => 'Không ngăn chặn các điểm nối kết từ syndication',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
 'item_non_creer_fichiers_authent' => 'Đừng lập ra các hồ sơ này',
-'item_non_gerer_annuaire_site_web' => 'Tắt thư mục websites',
 'item_non_gerer_statistiques' => 'Không quản trị các thống kê',
 'item_non_limiter_recherche' => 'Nới rộng việc tìm kiếm qua đến nội dung của các website nối kết',
 'item_non_messagerie_agenda' => 'Désactiver la messagerie et l’agenda', # NEW
 'item_non_publier_articles' => 'Không đăng tải bài trước ngày được phép đăng.',
 'item_non_utiliser_moteur_recherche' => 'Đừng dùng',
-'item_non_utiliser_syndication' => 'Đừng dùng syndication tự động',
 'item_nouvel_auteur' => 'Tác giả mới',
 'item_nouvelle_rubrique' => 'Đề mục mới',
 'item_oui' => 'Dùng',
 'item_publier_articles' => 'Cứ đăng tải bài bất kể ngày ghi.',
 'item_reponse_article' => 'Hồi đáp bài ',
 'item_utiliser_moteur_recherche' => 'Dùng cơ phận tìm kiếm',
-'item_utiliser_syndication' => 'Dùng syndication tự động',
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => 'khách',
@@ -663,9 +631,7 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'lien_ajouter_auteur' => 'Thêm tác giả này',
 'lien_ajouter_participant' => 'Thêm một tham dự viên',
 'lien_email' => 'email',
-'lien_mise_a_jour_syndication' => 'Cập nhật bây giờ',
 'lien_nom_site' => 'TÊN WEBSITE:',
-'lien_nouvelle_recuperation' => 'Thử tìm cách thu hồi dữ kiện',
 'lien_retirer_auteur' => 'Loại bỏ tác giả',
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'Loại bỏ tham dự viên này',
@@ -782,15 +748,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 // S
 'sans_heure' => 'sans heure', # NEW
 'statut_admin_restreint' => '(Quản trị viên có giới hạn)',
-'syndic_choix_moderation' => 'Các nối kết sắp tới từ trang web này được giải quyết ra sao?',
-'syndic_choix_oublier' => 'Giải quyết ra sao với các nối kết không còn nằm trong tập hồ sơ syndication?',
-'syndic_choix_resume' => 'Some sites offer the full text of their articles. When the full text is available, do you wish to syndicate:', # NEW
-'syndic_lien_obsolete' => 'nối kết không dùng nữa',
-'syndic_option_miroir' => 'tự động ngăn chúng',
-'syndic_option_oubli' => 'xoá chúng (sau @mois@ tháng)',
-'syndic_option_resume_non' => 'the full content of the articles (HTML format)', # NEW
-'syndic_option_resume_oui' => 'just a summary (text format)', # NEW
-'syndic_options' => 'Các đặc tính syndication:',
 
 // T
 'taille_cache_image' => 'Các hình được tính toán tự động bởi SPIP (hình nhỏ, tựa đề được đổi thành hình, công thức toán học dưới dạng TeX, v.v...) chiếm tổng cộng @taille@ trong ngăn @dir@.',
@@ -852,12 +809,10 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'texte_jeu_caractere_4' => 'If that does not correspond to the situation you have with your data (for example, after restoring your database from a backup), or if <em>you are setting up this site</em> and wish to use a different character set, please indicate the character set here:', # NEW
 'texte_jeu_caractere_conversion' => 'Note: You can decide to convert all the texts (articles, news items, forums, etc.) of your site once and for all to the character set <tt>utf-8</tt>. To do this, go to the <a href="@url@">UTF-8 conversion page</a>.', # NEW
 'texte_lien_hypertexte' => '(Nếu thư tín có đề cập đến bài đã đăng tải trên web, hay đề cập đến một trang web có thêm dữ kiện, xin điền vào đây tựa đề và địa chỉ.)',
-'texte_liens_sites_syndiques' => 'Những điểm nối từ website syndicated có thể được chặn trước; lối bố trí sau đây cho thấy cách bố trí định sẵn cho những website syndicated khi được lập ra. Có thể ngăn chặn từng điểm nối một, hoặc chặn tất cả các điểm nối đến từ bất cứ website nào.',
 'texte_login_ldap_1' => '(Để trống nếu muốn ra/vào ẩn danh hoặc cho biết trọn vẹn lộ tuyến, lấy thí dụ &laquo;<tt>uid=smith, ou=users, dc=my-domain, dc=com</tt>&raquo;.)',
 'texte_login_precaution' => 'Cảnh báo! Đây là login bạn dùng để vào. Dùng mẫu này cẩn thận...',
 'texte_message_edit' => 'Cảnh báo: thư tín này có thể được sửa bởi bất cứ người quản lý nào, và mọi chủ bút đều xem được. Chỉ nên thông báo để nhấn mạnh những việc quan trọng đối với website.',
 'texte_messagerie_agenda' => 'Une messagerie permet aux rédacteurs du site de communiquer entre eux directement dans l’espace privé du site. Elle est associée à un agenda.', # NEW
-'texte_messages_publics' => 'Thư tín công cộng của bài:',
 'texte_mise_a_niveau_base_1' => 'Bạn vừa cập nhật hồ sơ SPIP. Bây giờ bạn phải nâng cấp database của website.',
 'texte_modifier_article' => 'Sửa bài:',
 'texte_moteur_recherche_active' => '<b>Cơ phận tìm kiếm được chạy.</b> Dùng mệnh lệnh này nếu bạn muốn re-indexing cho lẹ (sau khi phục hồi các hồ sơ dự trữ chẳng hạn). Lưu ý là trong trường hợp bài được sửa đổi một cách bình thường (dùng giao diện SPIP) thì bài đó được tự động đánh chỉ số (index) lần nữa: do đó mệnh lệnh này chỉ hữu dụng trong trường hợp rất ư đặc biệt. ',
@@ -865,7 +820,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'texte_multilinguisme' => 'Nếu bạn muốn quản trị các bài vỡ này trong nhiều ngôn ngữ, bạn có thể thêm vào bài/đề mục một mục lục chọn ngôn ngữ.',
 'texte_multilinguisme_trad' => 'Đồng thời, bạn có thể mở lên một hệ thống quản trị cho các bản dịch của một bài.',
 'texte_non_compresse' => '<i>Giản ra</i> (server của bạn không dùng đặc tính này)',
-'texte_non_fonction_referencement' => 'Bạn có thể chọn không dùng đặc điểm tự động này, và tự tay cho vào dữ kiện... ',
 'texte_nouveau_message' => 'Thư tín mới',
 'texte_nouvelle_version_spip_1' => 'Bạn vừa thiết trí ấn bản mới của SPIP.',
 'texte_nouvelle_version_spip_2' => 'Ấn bản mới này cần cập nhật
@@ -891,8 +845,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'texte_recapitiule_liste_documents' => 'Trang này tóm tắt danh sách các tài liệu bạn để trong các đề mục. Để tu sửa dữ kiện của mỗi tài liệu, theo điểm nối để đến trang của đề mục đó.',
 'texte_recuperer_base' => 'Sữa chữa database',
 'texte_reference_mais_redirige' => 'Bài nối kết trong website SPIP, nhưng chuyển hướng qua địa chỉ URL khác.',
-'texte_referencement_automatique' => '<b>Nối kết website tự động</b> Bạn có thể nối kết một website nhanh chóng bằng cách cho vào dưới đây địa chỉ URL, hay địa chỉ của hồ sơ backend. SPIP sẽ tự động thu thập lấy các dữ kiện liên hệ đến website đó (tựa đề, mô tả ...).', # MODIF
-'texte_referencement_automatique_verifier' => 'Veuillez vérifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.', # NEW
 'texte_requetes_echouent' => '<b>Khi một số hỏi-đáp SQL trượt hàng loạt và có vẻ như không có lý do gì cả, điều đó cho thấy có thể chính database là thủ phạm. </b><p>SQL có một đặc điểm sửa chữa các bản của nó khi chúng bị hư hại. Bạn có thể thử dùng đặc điểm sửa chữa này, trong trường hợp thất bại, bạn nên giữ lại một bản sao của màn ảnh để giúp soi sáng vấn đề ... <p> Nếu vấn đề vẫn tiếp tục xảy ra, liên lạc với chủ nhân của máy.', # MODIF
 'texte_selection_langue_principale' => 'Bạn chọn một "ngôn ngữ chính" sau đây cho website. Điều này không có nghĩa là bạn chỉ có thể dùng ngôn ngữ đó cho các bài vở, mà bạn muốn dùng ngôn ngữ nào trong bài cũng được. Chọn ngôn ngữ chính cho web site chỉ để
 <ul>
@@ -909,7 +861,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'texte_statut_refuses' => 'bị từ chối',
 'texte_suppression_fichiers' => 'Dùng mệnh lệnh này để xóa tất cả hồ sơ trong SPIP cache. Làm vậy để buộc làm mới lại mọi trang web, trong trường hợp bạn vừa có một số thay đổi về đồ họa hay cấu trúc của website.',
 'texte_sur_titre' => 'Đầu đề',
-'texte_syndication' => 'Nếu website cho phép, bạn có thể truy tìm tự động danh sách các dữ liệu mới nhất. Để làm chuyện này, bạn phải mở đặc điểm syndication lên. <blockquote><i>Một số máy không cho phép dùng chức năng này, trong trường hợp đó, bạn không dùng đặc điểm syndication từ website của bạn được.</i></blockquote>', # MODIF
 'texte_table_ok' => ': bản này OK.',
 'texte_tables_indexation_vides' => 'Bản indexing của máy trống rỗng. ',
 'texte_tentative_recuperation' => 'Tìm cách sửa chữa',
@@ -933,7 +884,6 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_admin_vider' => 'Bảo trì kỹ thuật',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
-'titre_articles_syndiques' => 'Những bài vỡ từng xuất bản bị thu hồi ra khỏi trang web.',
 'titre_cadre_afficher_article' => 'Liệt kê những bài',
 'titre_cadre_afficher_traductions' => 'Cho xem tình trạng dịch thuật của ngôn ngữ này.',
 'titre_cadre_ajouter_auteur' => 'THÊM MỘT TÁC GIẢ:',
@@ -950,7 +900,6 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Tùy chọn: <b>Kết nối vào LDAP</b>',
-'titre_dernier_article_syndique' => 'Những bài vừa được liên kết',
 'titre_evolution_visite' => 'Thống Kê',
 'titre_groupe_mots' => 'NHÓM TỪ THEN CHỐT:',
 'titre_identite_site' => 'Identité du site', # NEW
@@ -978,7 +927,6 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_page_message_edit' => 'Viết thư tín',
 'titre_page_messagerie' => 'Thư tín của bạn',
 'titre_page_recherche' => 'Kết quả tìm kiếm @recherche@',
-'titre_page_sites_tous' => 'Trang nối kết',
 'titre_page_statistiques' => 'Thống kê theo từng đề mục',
 'titre_page_statistiques_referers' => 'Thống kê (các điểm nối vào)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
@@ -986,17 +934,10 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_page_statistiques_visites' => 'Thống kê về thăm viếng',
 'titre_page_upgrade' => 'nâng cấp SPIP',
 'titre_publication_articles_post_dates' => 'Đăng tải bài vở có đề ngày',
-'titre_referencement_sites' => 'Nối kết và syndicate website',
 'titre_referencer_site' => 'Nối qua website:',
 'titre_rendez_vous' => 'VÔ SỔ LỊCH:',
 'titre_reparation' => 'Sửa chữa',
-'titre_site_numero' => 'SỐ THỨ TỰ WEBSITE:',
-'titre_sites_proposes' => 'Trang đã nộp',
-'titre_sites_references_rubrique' => 'Các trang tham khảo trong mục này',
-'titre_sites_syndiques' => 'Trang đã xuất bản',
-'titre_sites_tous' => 'Trang tham khảo',
 'titre_suivi_petition' => 'Quản trị Thỉnh nguyện thư',
-'titre_syndication' => 'Syndicate trang web',
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
 'trad_article_inexistant' => 'Không có bài nào với số này',

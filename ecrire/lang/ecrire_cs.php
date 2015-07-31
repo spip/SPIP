@@ -44,10 +44,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_operation_echec' => 'Došlo k selhání operace.',
 'avis_operation_impossible' => 'Operation impossible', # NEW
 'avis_probleme_archive' => 'Chyba při čtení ze souboru @archive@',
-'avis_site_introuvable' => 'Web nenalezen',
-'avis_site_syndique_probleme' => 'Varování: při syndikalizaci tohoto webu došlo k potížím. Systém je proto nefunkční. Zkontrolujte adresu syndikalizačního souborutohoto webu(<b>@url_syndic@</b>) a zkuste znovu provést obnovu informací.', # MODIF
-'avis_sites_probleme_syndication' => 'Na těchto webech došlo k problémům se syndikalizací',
-'avis_sites_syndiques_probleme' => 'Problém pochází z těchto syndikovaných webů',
 'avis_suppression_base' => 'VAROVÁNÍ! Odstranění dat je nevratné',
 'avis_version_mysql' => 'Ve vaší verzi databáze SQL (@version_mysql@) nelze automaticky opravovat databázové tabulky.', # MODIF
 
@@ -83,11 +79,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_envoi_liste_nouveautes' => 'Zasílat seznam novinek',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Nezobrazovat v seznamu redaktorů',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Nezasílat redaktorská oznámení',
-'bouton_radio_non_syndication' => 'Bez syndikace',
 'bouton_radio_pas_petition' => 'Bez petice',
 'bouton_radio_petition_activee' => 'Petice zapnuta',
 'bouton_radio_supprimer_petition' => 'Odstranit petici',
-'bouton_radio_syndication' => 'Syndikace:',
 'bouton_redirection' => 'PŘESMĚROVÁNÍ',
 'bouton_relancer_installation' => 'Znovu spustit instalaci',
 'bouton_suivant' => 'Další',
@@ -128,15 +122,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Adresa seznamu',
 'entree_adresse_email' => 'Váš email',
-'entree_adresse_fichier_syndication' => 'Adresa souboru pro syndikaci:',
-'entree_adresse_site' => '<b>Adresa webu</b> [povinný údaj]',
 'entree_base_donnee_1' => 'Adresa databáze',
 'entree_base_donnee_2' => '(Tato adresa většinou odpovídá adrese vašeho webu někdy výrazu "localhost", někdy je prázdná.)',
 'entree_biographie' => 'Stručný životopis.',
 'entree_chemin_acces' => '<b>Zadejte</b> cestu:', # MODIF
 'entree_cle_pgp' => 'Váš klíč PGP',
 'entree_contenu_rubrique' => '(Stručný obsah sekce.)',
-'entree_description_site' => 'Popis webu',
 'entree_identifiants_connexion' => 'Vaše přihlašovací údaje pro připojení...',
 'entree_informations_connexion_ldap' => 'Zde zadejte údaje pro připojení k adresáří LDAP.
  Tyto údaje by vám měl sdělit správce systému nebo sítě.',
@@ -212,9 +203,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_modifier_article' => 'Změnit článek',
 'icone_modifier_message' => 'Změnit zprávu',
 'icone_modifier_rubrique' => 'Změnit sekci',
-'icone_modifier_site' => 'Změnit web',
 'icone_publication' => 'Publication', # NEW
-'icone_referencer_nouveau_site' => 'Zveřejnit odkaz na nový web',
 'icone_relancer_signataire' => 'Contact the signatory again', # NEW
 'icone_retour' => 'Zpět',
 'icone_retour_article' => 'Zpět k článku',
@@ -224,7 +213,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_supprimer_rubrique' => 'Odstranit sekci',
 'icone_supprimer_signature' => 'Odstranit podpis',
 'icone_valider_signature' => 'Potvrdit podpis',
-'icone_voir_sites_references' => 'Zobrazit odkazovaný web',
 'image_administrer_rubrique' => 'Máte právo správy této sekce',
 'info_1_article' => '1 článek',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -289,7 +277,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Upozornění',
 'info_barre_outils' => 'with its toolbar?', # NEW
 'info_base_installee' => 'Struktura vaší databáze byla nainstalována.',
-'info_bloquer' => 'zablokovat',
 'info_chapeau' => 'Stříška',
 'info_chapeau_2' => 'Stříška:',
 'info_chemin_acces_1' => 'Volitelný údaj: <b>Přístup k adresáři</b>', # MODIF
@@ -326,7 +313,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_date_publication_anterieure' => 'Datum poslední úpravy:',
 'info_date_referencement' => 'Datum vytvoření odkazu na tento web:',
 'info_derniere_etape' => 'Poslední krok: <b>byl dokončen!', # MODIF
-'info_derniere_syndication' => 'Poslední syndikace tohoto webu byla pro vedena ',
 'info_derniers_articles_publies' => 'Vaše poslední publikované články.',
 'info_desactiver_messagerie_personnelle' => 'U tohoto webu můžete zapnout nebo vypnout systém interních zpráv.',
 'info_descriptif' => 'Popis:',
@@ -389,8 +375,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_langues' => 'Jazyk webu',
 'info_ldap_ok' => 'Byla nainstalována autentifikace LDAP.',
 'info_lien_hypertexte' => 'Hypertextový odkaz:',
-'info_liens_syndiques_1' => 'syndikovaný odkaz',
-'info_liens_syndiques_2' => 'čekající na schválení.',
 'info_liste_redacteurs_connectes' => 'Seznam připojených redaktorů',
 'info_login_existant' => 'Toto uživatelské jméno již existuje.',
 'info_login_trop_court' => 'Uživatelské jeméno je příliš krátké.',
@@ -434,7 +418,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_nom' => 'Jméno',
 'info_nom_destinataire' => 'Jméno příjemce',
 'info_nom_site' => 'Název webu',
-'info_nom_site_2' => '<b>Název webu</b> [povinný údaj]',
 'info_nombre_articles' => '@nb_articles@ články,',
 'info_nombre_partcipants' => 'ÚČASTNÍCI DISKUSE:',
 'info_nombre_rubriques' => '@nb_rubriques@ sekce,',
@@ -500,7 +483,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
   Někteří poskytovatelé prostoru pro web odesílání emailů ze svých serverů
   vypínají. Automatické přihlášení je v takovém případě
   nemožné.', # MODIF
-'info_question_proposer_site' => 'Kdo může navrhovat odkazy na weby?',
 'info_question_utilisation_moteur_recherche' => 'Chcete používat vyhledávač, který je součástí systému SPIP?
  (je-li vyhledávač vypnut, zrychluje to chod systému.)',
 'info_question_vignettes_referer' => 'When you consult the statistics, you can see a preview of the originating sites of the visits. ', # NEW
@@ -533,14 +515,10 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_site' => 'Web',
 'info_site_2' => 'web:',
 'info_site_min' => 'web',
-'info_site_propose' => 'Web navržen dne:',
 'info_site_reference_2' => 'Web, na nějž vede odkaz',
-'info_site_syndique' => 'Toto je syndikovaný web...',
-'info_site_valider' => 'Weby ke schválení',
 'info_sites' => 'weby',
 'info_sites_lies_mot' => 'Weby, na něž vedou odkazy, a které jsou spojeny s tímto klíčovým slovem',
 'info_sites_proxy' => 'Používat proxy',
-'info_sites_refuses' => 'Odmítnuté weby',
 'info_sites_trouves' => 'Nalezené weby',
 'info_sites_trouves_dans_texte' => 'Nalezené weby (v textu)',
 'info_sous_titre' => 'Dílčí nadpis:',
@@ -550,10 +528,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_statut_auteur_autre' => 'Další status:',
 'info_statut_efface' => 'Odstraněno',
 'info_statut_redacteur' => 'Redaktor',
-'info_statut_site_1' => 'Tento web je:',
-'info_statut_site_2' => 'Publikováno',
-'info_statut_site_3' => 'Připraveno',
-'info_statut_site_4' => 'Do koše',
 'info_statut_utilisateurs_1' => 'Standardní statut importovaných uživatelů',
 'info_statut_utilisateurs_2' => 'Zadejte statut, který mají osoby uvedené v adresáři LDAP, když se poprvé připojí. Tuto hodnotu můžete u každého jednotlivého autora následně změnit.',
 'info_suivi_activite' => 'Sledování redaktorské činnosti',
@@ -633,14 +607,12 @@ ukazuje jejich stav:',
 'item_autoriser_documents_joints' => 'Povolit dokumenty přiložené k článku',
 'item_autoriser_documents_joints_rubriques' => 'Povolit dokumenty v sekcích',
 'item_autoriser_syndication_integrale' => 'Vložit kompletní články do syndikačních souborů',
-'item_bloquer_liens_syndiques' => 'Zablokovat syndikované odkazy pro schválení',
 'item_choix_administrateurs' => 'administrátoři',
 'item_choix_generation_miniature' => 'Automaticky generovat náhledy obrázků.',
 'item_choix_non_generation_miniature' => 'Negenerovat náhledy obrázků.',
 'item_choix_redacteurs' => 'redaktoři',
 'item_choix_visiteurs' => 'návštěvníci veřejného webu',
 'item_creer_fichiers_authent' => 'Vytvořit soubory .htpasswd',
-'item_gerer_annuaire_site_web' => 'Správa adresáře webů',
 'item_gerer_statistiques' => 'Správa statistik',
 'item_limiter_recherche' => 'Omezit vyhledávání na údaje obsažené na vašem webu',
 'item_login' => 'Uživatelské jméno',
@@ -655,23 +627,19 @@ ukazuje jejich stav:',
 'item_non_autoriser_documents_joints' => 'Nepovolit dokumenty v článcích',
 'item_non_autoriser_documents_joints_rubriques' => 'Nepovolit dokumenty v sekcích',
 'item_non_autoriser_syndication_integrale' => 'Poslat pouze shrnutí',
-'item_non_bloquer_liens_syndiques' => 'Neblokovat odkazy, které jsou výsledkem syndikace',
 'item_non_compresseur' => 'Deactivate compression', # NEW
 'item_non_creer_fichiers_authent' => 'Nevytvářet tyto soubory',
-'item_non_gerer_annuaire_site_web' => 'Vypnout adresář webu',
 'item_non_gerer_statistiques' => 'Bez správy statistik',
 'item_non_limiter_recherche' => 'Rozšířit hledání na obsah webů, na něž vedou odkazy',
 'item_non_messagerie_agenda' => 'Deactivate the messaging system and the calendar', # NEW
 'item_non_publier_articles' => 'Nezveřejňovat články před stanoveným datem.',
 'item_non_utiliser_moteur_recherche' => 'Nepoužívat vyhledávač',
-'item_non_utiliser_syndication' => 'Nepoužívat automatickou syndikaci',
 'item_nouvel_auteur' => 'Nový autor',
 'item_nouvelle_rubrique' => 'Nová sekce',
 'item_oui' => 'Ano',
 'item_publier_articles' => 'Zveřejnit články bez ohledu na datum.',
 'item_reponse_article' => 'Odpověď na článek',
 'item_utiliser_moteur_recherche' => 'Používat vyhledávač',
-'item_utiliser_syndication' => 'Používat automatickou syndikaci',
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => 'návštěvník',
@@ -696,9 +664,7 @@ ukazuje jejich stav:',
 'lien_ajouter_auteur' => 'Přidat autora',
 'lien_ajouter_participant' => 'Přidat účastníka',
 'lien_email' => 'email',
-'lien_mise_a_jour_syndication' => 'Aktualizovat',
 'lien_nom_site' => 'NÁZEV WEBU:',
-'lien_nouvelle_recuperation' => 'Pokusit se znovu získat data',
 'lien_retirer_auteur' => 'Odstanit autora',
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'odstranit účastníka',
@@ -815,15 +781,6 @@ ukazuje jejich stav:',
 // S
 'sans_heure' => 'time unspecified', # NEW
 'statut_admin_restreint' => '(admin - vyhrazeno)',
-'syndic_choix_moderation' => 'Co se má udělat s budoucími odkazy z tohoto webu?',
-'syndic_choix_oublier' => 'Co s odkazy, které už nejsou v syndikačním souboru?',
-'syndic_choix_resume' => 'Některé weby publikují celé texty článků. Je-li tato funkce k dispozici, chcete syndikovat:',
-'syndic_lien_obsolete' => 'zastaralý odkaz',
-'syndic_option_miroir' => 'automaticky blokovat',
-'syndic_option_oubli' => 'odstranit (po @mois@ měsíci/měsících)',
-'syndic_option_resume_non' => 'celý obsah článků (ve formátu HTML)',
-'syndic_option_resume_oui' => 'stručný obsah (v textovém formátu)',
-'syndic_options' => 'Možnosti syndikace:',
 
 // T
 'taille_cache_image' => 'Obrázky, automaticky vypočtené systémem SPIP (náhledy dokumentů, názvy zobrazené graficky, matematické funkce ve formátu TeX...) zabírají v adresáři @dir@ celkem @taille@.',
@@ -903,17 +860,11 @@ systém SPIP, abyste vytvořili novou databázi a první přístup pro správce.
 'texte_jeu_caractere_4' => 'Pokud toto neodpovídá vaší situaci (například po obnovení dat ze zálohy), nebo <em>pokud konfigurujete tento web</em> a chcete použít jinou znakovou sadu, prosím označte znakovou sadu:',
 'texte_jeu_caractere_conversion' => 'Můžete se rozhodnout zkonvertovat všechny texty (články, novinky, diskuse, ...) jednou provždy do <tt>UTF-8</tt>. Použijte <a href="@url@">UTF-8 konverzní stránku</a>.',
 'texte_lien_hypertexte' => '(Jestliže se vaše zpráva vztahuje k nějakému článku na webu nebo jiné stránce s dalšími informacemi, vložte zde její titulek a URL.)',
-'texte_liens_sites_syndiques' => 'Odkazy ze syndikovaných webů lze předem zablokovat.
-   Níže uvedené nastavení je standardním
-   nastavením syndikovaných webů po jejich vytvoření.
-   Jednotlivé odkazy můžete vždy následně odblokovat,
-   případně se rozhodnout zablokovat odkazy pocházející z konkrétních webů.',
 'texte_login_ldap_1' => '(V případě anonymního přístupu ponechte prázdné, případně zadejte kompletní cestu "<tt>uid=dupont, ou=users, dc=mon-domaine, dc=com</tt>".)',
 'texte_login_precaution' => 'Pozor! Pod tímto uživatelským jménem jste právě přihlášeni!
  Tento formulář používejte opatrně...',
 'texte_message_edit' => 'Pozor! Tuto zprávu může měnit kdokoli ze správců webu. Zobrazuje se všem redaktorům. Oznámení používejte pouze, pokud chcete zveřejnit významné události týkající se činnosti webu.',
 'texte_messagerie_agenda' => 'A messaging system allows the authors of the site to communicate directly in the editing area of the site. It is linked to a calendar.', # NEW
-'texte_messages_publics' => 'Veřejné zprávy k článku:',
 'texte_mise_a_niveau_base_1' => 'Aktualizovali jste soubory systému SPIP.
  Nyní musíte aktualizovat databázi webu.',
 'texte_modifier_article' => 'Změnit článek:',
@@ -926,7 +877,6 @@ systém SPIP, abyste vytvořili novou databázi a první přístup pro správce.
 'texte_multilinguisme' => 'Chcete-li správu článků v několika jazycích se složitou navigací, můžete k článkům, resp. sekcím (záleží na organizační struktuře vašeho webu) přidat nabídku pro výběr jazyka.',
 'texte_multilinguisme_trad' => 'Rovněž můžete zapnout systém správy odkazů mezi překlady jednotlivých článků.',
 'texte_non_compresse' => '<i>nekomprimováno</i> (váš server tuto funkci nepodporuje)',
-'texte_non_fonction_referencement' => 'Tuto automatickou funkci nemusíte použít a parametry webu můžete zadat sami...',
 'texte_nouveau_message' => 'Nová zpráva',
 'texte_nouvelle_version_spip_1' => 'Nainstalovali jste novou verzi systému SPIP.',
 'texte_nouvelle_version_spip_2' => 'Tato verze vyžaduje rozsáhlejší aktualizaci než je obvyklé. Jste-li správcem tohoto webu, odstraňte soubor @connect@ a spusťte instalaci. Tím dojde k aktualizaci parametrů pro připojení k databázi.<p> (Pozn.: Pokud jste parametry pro připojení zapomněli, podívejte se nejprve do souboru @connect@, a teprve poté jej odstraňte...)</p>', # MODIF
@@ -949,8 +899,6 @@ přejděte raději do veřejné části a použijte tlačítko "znovu vypočíta
 'texte_recapitiule_liste_documents' => 'Na této stránkce je přehled dokumentů umístněných v sekcích. Informace o dokumentech změníte klepnutím na odkaz na stránku příslušné sekce.',
 'texte_recuperer_base' => 'Opravit databázi',
 'texte_reference_mais_redirige' => 'Na článek je na vašem webu SPIP odkaz, ale je přesměrován na jinou adresu URL.',
-'texte_referencement_automatique' => '<b>Automatický odkaz na web</b><br />Odkaz na web snadno vytvoříte zadáním požadované adresy URL nebo adresy jeho syndikačního souboru. Systém SPIP automaticky převezme údaje o takovém webu (název, popis...).', # MODIF
-'texte_referencement_automatique_verifier' => 'Please, verify the information provided by <tt>@url@</tt> before saving.', # NEW
 'texte_requetes_echouent' => '<b>Pokud některé dotazy SQL neustále
   selhávají bez zjevné příčiny, může to být kvůli samotné databázi.</b><p>
   Databáze SQL umožňuje opravu náhodně poškozených databázových tabulek.
@@ -974,10 +922,6 @@ přejděte raději do veřejné části a použijte tlačítko "znovu vypočíta
 Tím například vynutíte obnovu všech stránek poté, co provedete významné
 změny grafického uspořádání nebo struktury vašeho webu.',
 'texte_sur_titre' => 'Podtitul',
-'texte_syndication' => 'Pokud to web umožňuje, můžete automaticky získat seznam na něm zveřejněných
-  novinek. K tomu je nutno zapnout syndikaci.
-  <blockquote><i>Někteří poskytovatelé webového prostoru tuto funkcni vypínají.
-  V takovém případě nemůžete syndikaci ze svého webu použít.</i></blockquote>', # MODIF
 'texte_table_ok' => ': tato tabulka je v pořádku.',
 'texte_tables_indexation_vides' => 'Tabulky indexů vyhledávače jsou prázdné.',
 'texte_tentative_recuperation' => 'Pokus o opravu',
@@ -1013,7 +957,6 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 'titre_admin_vider' => 'Technická údržba',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
-'titre_articles_syndiques' => 'Syndikované články, přenesené z tohoto webu',
 'titre_cadre_afficher_article' => 'Zobrazit články',
 'titre_cadre_afficher_traductions' => 'Zobrazit stav překladu v následujících jazycích:',
 'titre_cadre_ajouter_auteur' => 'PŘIDAT AUTORA:',
@@ -1030,7 +973,6 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflict while editing', # NEW
 'titre_connexion_ldap' => 'Možnost: <b>Vaše připojení LDAP</b>',
-'titre_dernier_article_syndique' => 'Poslední syndikované články',
 'titre_evolution_visite' => 'Vývoj návštěvnosti',
 'titre_groupe_mots' => 'SKUPINA SLOV:',
 'titre_identite_site' => 'Identité du site', # NEW
@@ -1058,7 +1000,6 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 'titre_page_message_edit' => 'Upravit zprávu',
 'titre_page_messagerie' => 'Váš systém zpráv',
 'titre_page_recherche' => 'Výsledky vyhledávání @recherche@',
-'titre_page_sites_tous' => 'Odkazované weby',
 'titre_page_statistiques' => 'Statistiky podle sekcí',
 'titre_page_statistiques_referers' => 'Statistiky (příchozí odkazy)',
 'titre_page_statistiques_signatures_jour' => 'Signatures count by day', # NEW
@@ -1066,17 +1007,10 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 'titre_page_statistiques_visites' => 'Statistiky návštěvnosti',
 'titre_page_upgrade' => 'Aktualizace systému SPIP',
 'titre_publication_articles_post_dates' => 'Zveřejnění post-datovaných článků',
-'titre_referencement_sites' => 'Odkazy na weby a syndikace',
 'titre_referencer_site' => 'Zadat odkaz na web:',
 'titre_rendez_vous' => 'SCHŮZKA:',
 'titre_reparation' => 'Oprava',
-'titre_site_numero' => 'ČÍSLO WEBU:',
-'titre_sites_proposes' => 'Navržené weby',
-'titre_sites_references_rubrique' => 'Weby, na něž jsou v této sekci odkazy',
-'titre_sites_syndiques' => 'Syndikované weby',
-'titre_sites_tous' => 'Odkazované weby',
 'titre_suivi_petition' => 'Sledování peticí',
-'titre_syndication' => 'Syndikace webů',
 'titre_type_urls' => 'Typ adres URL',
 'tls_ldap' => 'Transport Layer Security :',
 'trad_article_inexistant' => 'Článek tohoto čísla neexistuje.',

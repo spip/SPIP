@@ -45,10 +45,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_operation_echec' => 'Opgaven mislykkedes.',
 'avis_operation_impossible' => 'Opération impossible', # NEW
 'avis_probleme_archive' => 'Læsefejl i filen @archive@',
-'avis_site_introuvable' => 'Webstedet ikke fundet',
-'avis_site_syndique_probleme' => 'Advarsel: syndikering med dette websted er stødt på et problem; derfor afbrydes systemet midlertidigt. Kontroller adressen på webstedets syndikeringsfil (<b>@url_syndic@</b>), og prøv at få adgang til data igen.', # MODIF
-'avis_sites_probleme_syndication' => 'Disse websteder har problemer med syndikering',
-'avis_sites_syndiques_probleme' => 'Disse syndikerede sider giver problemer',
 'avis_suppression_base' => 'ADVARSEL, sletning kan ikke omgøres',
 'avis_version_mysql' => 'Din version af SQL (@version_mysql@) tillader ikke automatisk reparation af tabeller.',
 
@@ -84,11 +80,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_envoi_liste_nouveautes' => 'Send seneste nyhedsliste',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Medtag ikke i listen over tilknyttede redaktører',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Send ingen redaktionelle nyheder',
-'bouton_radio_non_syndication' => 'Ingen syndikering',
 'bouton_radio_pas_petition' => 'Ingen appeller',
 'bouton_radio_petition_activee' => 'Appelfunktion slået til',
 'bouton_radio_supprimer_petition' => 'Slet appellen',
-'bouton_radio_syndication' => 'Syndikering:',
 'bouton_redirection' => 'VIDERESTIL',
 'bouton_relancer_installation' => 'Gentag installationen',
 'bouton_suivant' => 'Næste',
@@ -129,15 +123,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Adresse på kataloget',
 'entree_adresse_email' => 'Din e-mail-adresse',
-'entree_adresse_fichier_syndication' => 'Adresse på syndikeringsfil:',
-'entree_adresse_site' => '<b>URL på websted</b> [Skal oplyses]',
 'entree_base_donnee_1' => 'Adresse på database',
 'entree_base_donnee_2' => '(Ofte svarer denne adresse til adressen på webstedet, undertiden er den navngivet «localhost», og undertiden skal den være blank.)',
 'entree_biographie' => 'Kort præsentation.',
 'entree_chemin_acces' => '<b>Angiv</b> stien:',
 'entree_cle_pgp' => 'Din PGP nøgle',
 'entree_contenu_rubrique' => '(Kort beskrivelse af afsnittets indhold.)',
-'entree_description_site' => 'Beskrivelse af websted',
 'entree_identifiants_connexion' => 'Dine opkoblingsinformationer...',
 'entree_informations_connexion_ldap' => 'Udfyld denne side med LDAP opkoblingsinformation. Du kan indhente oplysningerne hos din system- eller netværskadministrator.',
 'entree_infos_perso' => 'Hvem er du?',
@@ -212,9 +203,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_modifier_article' => 'Ret denne artikel',
 'icone_modifier_message' => 'Ret denne meddelelse',
 'icone_modifier_rubrique' => 'Ret dette afsnit',
-'icone_modifier_site' => 'Ret dette websted',
 'icone_publication' => 'Publication', # NEW
-'icone_referencer_nouveau_site' => 'Ny webstedshenvisning',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => 'Tilbage',
 'icone_retour_article' => 'Tilbage til artikel',
@@ -224,7 +213,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_supprimer_rubrique' => 'Slet dette afsnit',
 'icone_supprimer_signature' => 'Slet denne signatur',
 'icone_valider_signature' => 'Godkend signatur',
-'icone_voir_sites_references' => 'Vis links',
 'image_administrer_rubrique' => 'Du kan administrere dette afsnit',
 'info_1_article' => '1 artikel',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -288,7 +276,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Advarsel',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Din databasestruktur er installeret.',
-'info_bloquer' => 'bloquer', # NEW
 'info_chapeau' => 'Hoved',
 'info_chapeau_2' => 'Indledning:',
 'info_chemin_acces_1' => 'Valgmuligheder: <b>Adgangsvej til katalog</b>',
@@ -325,7 +312,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_date_publication_anterieure' => 'Dato for tidligere offentliggørelse:',
 'info_date_referencement' => 'DATO FOR HENVISNING TIL DETTE WEBSTED:',
 'info_derniere_etape' => 'Sidste skridt: <b>Det er overstået!',
-'info_derniere_syndication' => 'Sidste syndikering af dette websted blev udført den',
 'info_derniers_articles_publies' => 'Dine senest offentliggjorte artikler',
 'info_desactiver_messagerie_personnelle' => 'Du kan åbne eller lukke for personlige meddelelser på dette websted.',
 'info_descriptif' => 'Beskrivelse:',
@@ -379,8 +365,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_langues' => 'Webstedets sprog',
 'info_ldap_ok' => 'LDAP adgangskontrol er installeret.',
 'info_lien_hypertexte' => 'Hypertekst link:',
-'info_liens_syndiques_1' => 'syndikerede links',
-'info_liens_syndiques_2' => 'afventer godkendelse.',
 'info_liste_redacteurs_connectes' => 'Oversigt over tilknyttede reaktører',
 'info_login_existant' => 'Dette login findes allerede.',
 'info_login_trop_court' => 'Login for kort.',
@@ -421,7 +405,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_nom' => 'Navn',
 'info_nom_destinataire' => 'Navn på modtager',
 'info_nom_site' => 'Dit websteds navn',
-'info_nom_site_2' => '<b>Webstedets navn</b> [Skal udfyldes]',
 'info_nombre_articles' => '@nb_articles@ artikler,',
 'info_nombre_partcipants' => 'DELTAGERE I DISKUSSIONEN:',
 'info_nombre_rubriques' => '@nb_rubriques@ afsnit',
@@ -484,7 +467,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		<blockquote><i>Under tilmeldingen modtager brugerne en automatisk dannet e-mail med deres adgangskode til det
 		private websted. Nogle webhoteller tillader ikke at der sendes e-mails fra deres servere. I så fald kan automatisk
 		tilmelding ikke finde sted.', # MODIF
-'info_question_proposer_site' => 'Hvem kan foreslå henvisninger til websteder?',
 'info_question_utilisation_moteur_recherche' => 'Ønsker du at anvende den søgefunktion, der findes i SPIP?
 	(At fravælge søgefunktionen gør webstedet hurtigere.)',
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
@@ -517,14 +499,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_site' => 'Websted',
 'info_site_2' => 'websted:',
 'info_site_min' => 'websted',
-'info_site_propose' => 'Websted sendt til godkendelse den:',
 'info_site_reference_2' => 'Henvisning',
-'info_site_syndique' => 'Dette websted er syndikeret...',
-'info_site_valider' => 'Websteder der afventer godkendelse',
 'info_sites' => 'websteder',
 'info_sites_lies_mot' => 'Links til websteder knyttet til dette nøgleord',
 'info_sites_proxy' => 'Brug proxy',
-'info_sites_refuses' => 'Afviste websteder',
 'info_sites_trouves' => 'Websteder fundet',
 'info_sites_trouves_dans_texte' => 'Websteder fundet (i teksten)',
 'info_sous_titre' => 'Underrubrik:',
@@ -534,10 +512,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_statut_auteur_autre' => 'Autre statut :', # NEW
 'info_statut_efface' => 'Slettet',
 'info_statut_redacteur' => 'Redaktør',
-'info_statut_site_1' => 'Dette websted er:',
-'info_statut_site_2' => 'Offentliggjort',
-'info_statut_site_3' => 'Indsendt',
-'info_statut_site_4' => 'I papirkurven',
 'info_statut_utilisateurs_1' => 'Importerede brugeres standardstatus',
 'info_statut_utilisateurs_2' => 'Vælg den status som skal tildeles personerne i LDAP kataloget, når de logger ind første gang. Senere kan du ændre værdien for hver forfatter fra sag til sag.',
 'info_suivi_activite' => 'Opfølgning på redaktionelle aktiviteter',
@@ -617,14 +591,12 @@ i en farve, der angiver deres status:',
 'item_autoriser_documents_joints' => 'Tillad at vedhæfte dokumenter til artikler',
 'item_autoriser_documents_joints_rubriques' => 'Tillad dokumenter i afsnit',
 'item_autoriser_syndication_integrale' => 'Diffuser l\'intégralité des articles dans les fichiers de syndication', # NEW
-'item_bloquer_liens_syndiques' => 'Afspær syndikerede links indtil de er godkendt',
 'item_choix_administrateurs' => 'administratorer',
 'item_choix_generation_miniature' => 'Dan miniaturepiktogrammer automatisk.',
 'item_choix_non_generation_miniature' => 'Dan ikke miniaturebilleder.',
 'item_choix_redacteurs' => 'redaktører',
 'item_choix_visiteurs' => 'besøgende på den offentlige websted',
 'item_creer_fichiers_authent' => 'Dan .htpasswd filer',
-'item_gerer_annuaire_site_web' => 'Vedligehold katalog over websteder',
 'item_gerer_statistiques' => 'Dan statistik',
 'item_limiter_recherche' => 'Begræns søgning til information på din eget websted',
 'item_login' => 'Login',
@@ -639,23 +611,19 @@ i en farve, der angiver deres status:',
 'item_non_autoriser_documents_joints' => 'Tillad ikke vedhæftning af dokumenter til artikler',
 'item_non_autoriser_documents_joints_rubriques' => 'Tillad ikke dokumenter i afsnit',
 'item_non_autoriser_syndication_integrale' => 'Ne diffuser qu\'un résumé', # NEW
-'item_non_bloquer_liens_syndiques' => 'Undlad at spærre links til syndikerede websteder',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
 'item_non_creer_fichiers_authent' => 'Dan ikke disse filer',
-'item_non_gerer_annuaire_site_web' => 'Vedligehold ikke katalog over websteder',
 'item_non_gerer_statistiques' => 'Dan ikke statistik',
 'item_non_limiter_recherche' => 'Udvid søgning til indholdet i linkede websteder',
 'item_non_messagerie_agenda' => 'Désactiver la messagerie et l’agenda', # NEW
 'item_non_publier_articles' => 'Vent med at offentliggøre artikler til deres publiceringsdato.',
 'item_non_utiliser_moteur_recherche' => 'Benyt ikke søgefunktion',
-'item_non_utiliser_syndication' => 'Benyt ikke automatisk syndikering',
 'item_nouvel_auteur' => 'Ny forfatter',
 'item_nouvelle_rubrique' => 'Nyt afsnit',
 'item_oui' => 'Ja',
 'item_publier_articles' => 'Offentliggør artikler uden hensyn til deres publiceringsdato.',
 'item_reponse_article' => 'Kommenter artiklen',
 'item_utiliser_moteur_recherche' => 'Benyt søgefunktion',
-'item_utiliser_syndication' => 'Benyt automatisk syndikering',
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => 'besøgende',
@@ -680,9 +648,7 @@ i en farve, der angiver deres status:',
 'lien_ajouter_auteur' => 'Tilføj denne forfatter',
 'lien_ajouter_participant' => 'Tilføj modtager',
 'lien_email' => 'e-mail',
-'lien_mise_a_jour_syndication' => 'Opdater nu',
 'lien_nom_site' => 'WEBSTEDETS NAVN:',
-'lien_nouvelle_recuperation' => 'Forsøg at hente data igen',
 'lien_retirer_auteur' => 'Fjern forfatter',
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'fjern denne modtager',
@@ -799,15 +765,6 @@ i en farve, der angiver deres status:',
 // S
 'sans_heure' => 'sans heure', # NEW
 'statut_admin_restreint' => '(begrænset admin)',
-'syndic_choix_moderation' => 'Que faire des prochains liens en provenance de ce site ?', # NEW
-'syndic_choix_oublier' => 'Que faire des liens qui ne figurent plus dans le fichier de syndication ?', # NEW
-'syndic_choix_resume' => 'Certains sites diffusent le texte complet des articles. Lorsque celui-ci est disponible souhaitez-vous syndiquer :', # NEW
-'syndic_lien_obsolete' => 'lien obsolète', # NEW
-'syndic_option_miroir' => 'les bloquer automatiquement', # NEW
-'syndic_option_oubli' => 'les effacer (après @mois@ mois)', # NEW
-'syndic_option_resume_non' => 'le contenu complet des articles (au format HTML)', # NEW
-'syndic_option_resume_oui' => 'un simple résumé (au format texte)', # NEW
-'syndic_options' => 'Options de syndication :', # NEW
 
 // T
 'taille_cache_image' => 'Les images calculées automatiquement par SPIP (vignettes des documents, titres présentés sous forme graphique, fonctions mathématiques au format TeX...) occupent dans le répertoire @dir@ un total de @taille@.', # NEW
@@ -882,14 +839,11 @@ i en farve, der angiver deres status:',
 'texte_jeu_caractere_4' => 'Si cela ne correspond pas à la réalité de vos données (suite, par exemple, à une restauration de base de données), ou si <em>vous démarrez ce site</em> et souhaitez partir sur un autre jeu de caractères, veuillez indiquer ce dernier ici :', # NEW
 'texte_jeu_caractere_conversion' => 'Note : vous pouvez décider de convertir une fois pour toutes l\'ensemble des textes de votre site (articles, brèves, forums, etc.) vers l\'alphabet <tt>utf-8</tt>, en vous rendant sur <a href="@url@">la page de conversion vers l\'utf-8</a>.', # NEW
 'texte_lien_hypertexte' => '(Hvis din meddelelse henviser til en artikel der er offentliggjort på webben, eller til en side der giver flere oplysninger, så indtast her artiklens overskrift og dens URL.)',
-'texte_liens_sites_syndiques' => 'Links til syndikerede sider kan spærres på forhånd; følgende indstilling er standardindstillingen for syndikerede websteder, når de er oprettet.
-			Det er således på trods heraf muligt at spærre hvert link individuelt eller at vælge for hver websted at spærre de links der kommer fra en givet websted.',
 'texte_login_ldap_1' => '(Efterlad tom for anonym adgang eller indtast en fuldstændig sti, f.eks. «<tt>uid=hansen, ou=brugere, dc=mit-domæne, dc=dk</tt>».)',
 'texte_login_precaution' => 'Advarsel! Dette er den login, du er koblet på med nu.
 	Brug denne formular med forsigtighed ...',
 'texte_message_edit' => 'Advarsel: Denne meddelelse kan ændres af alle webstedets administratorer, og den er synlig for alle redaktører. Benyt kun annonceringer til at gøre opmærksom på vigtige begivenheder på webstedet.',
 'texte_messagerie_agenda' => 'Une messagerie permet aux rédacteurs du site de communiquer entre eux directement dans l’espace privé du site. Elle est associée à un agenda.', # NEW
-'texte_messages_publics' => 'Offentlige bidrag til artiklen:',
 'texte_mise_a_niveau_base_1' => 'Du har netop opdateret SPIP\'s filer.
 	Du skal nu opdatere webstedets database.',
 'texte_modifier_article' => 'Ret artiklen:',
@@ -900,7 +854,6 @@ i en farve, der angiver deres status:',
 'texte_multilinguisme' => 'Hvis du ønsker at administrere artikler på flere sprog med den deraf følgende større kompleksitet, kan du forsyne afsnit og/eller artikler med en sprogvalgsmenu. Denne funktion er afhængig af strukturen på websiden.',
 'texte_multilinguisme_trad' => 'Du kan også vælge at have link mellem de forskellige sprogversioner af en artikel.',
 'texte_non_compresse' => '<i>ukomprimeret</i> (din server understøtter ikke denne funktion)',
-'texte_non_fonction_referencement' => 'Du kan vælge ikke at bruge denne automatiske funktion, og selv angive de elementer, der er vigtige for webstedet...',
 'texte_nouveau_message' => 'Ny meddelelse',
 'texte_nouvelle_version_spip_1' => 'Du har netop installeret en ny version af SPIP.',
 'texte_nouvelle_version_spip_2' => 'Denne nye version kræver en mere omfattende opdatering end sædvanligt. Hvis du er webmaster på webstedet, så slet venligst filen <tt>inc_connect.php3</tt> i kataloget <tt>ecrire</tt> og genstart installationen for at opdatere dine opkoblingsparametre til databasen. <p>(NB.: hvis du har glemt dine opkoblingsparametre, så kast et blik på indholdet af filen <tt>inc_connect.php3</tt> før du sletter den...)', # MODIF
@@ -921,10 +874,6 @@ i en farve, der angiver deres status:',
 'texte_recapitiule_liste_documents' => 'Denne side er en oversigt over de dokumenter, du har anbragt i afsnittene. For at ændre oplysningerne om et dokument, skal du følge linket til dets afsnitsside.',
 'texte_recuperer_base' => 'Reparer databasen',
 'texte_reference_mais_redirige' => 'artikler der refereres til på dit SPIP websted, men som viderestiller til en anden URL.',
-'texte_referencement_automatique' => '<b>Automatiserede webstedshenvisninger</b><br />
-		Du kan hurtigt henvise til et websted ved nedenfor at angive dens URL eller adressen på dens datakilde. 
-		SPIP vil automatisk indhente oplysninger om webstedet (titel, beskrivelse...).',
-'texte_referencement_automatique_verifier' => 'Veuillez vérifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.', # NEW
 'texte_requetes_echouent' => '<b>Når nogle SQL forespørgsler systematisk og uden tilsyneladende grund går galt, er det muligt at fejlen ligger i selve databasen.</b>
 		<p>SQL har en funktion, der reparerer dens tabeller, hvis de er blevet ødelagt ved et uheld. 
 		Her kan du forsøge at igangsætte denne reparationsfunktion; 
@@ -952,10 +901,6 @@ i en farve, der angiver deres status:',
 		Dette giver dig bl.a. mulighed for at gennemtvinge opdatering af alle sider i tilfælde af 
 		at du har lavet væsentlige grafiske eller strukturelle ændringer på webstedet.',
 'texte_sur_titre' => 'Hovedoverskrift',
-'texte_syndication' => 'Hvis webstedet tillader det, er det muligt automatisk at hente en oversigt over det
-		seneste materiale. For at gøre dette, skal du igangsætte syndikering.
-		<blockquote><i>Nogle webhoteller tillader ikke denne funktion.
-		I så fald kan du ikke foretage indholdssyndikering fra dit websted.</i></blockquote>', # MODIF
 'texte_table_ok' => ': denne tabel er OK.',
 'texte_tables_indexation_vides' => 'Søgefunktionens indekstabeller er tomme.',
 'texte_tentative_recuperation' => 'Reparationsforsøg',
@@ -985,7 +930,6 @@ i en farve, der angiver deres status:',
 'titre_admin_vider' => 'Teknisk vedligeholdelse',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
-'titre_articles_syndiques' => 'Syndikerede artikler hentet på dette websted',
 'titre_cadre_afficher_article' => 'Vis artikler som er',
 'titre_cadre_afficher_traductions' => 'Vis oversættelsesstatus for følgende sprog:',
 'titre_cadre_ajouter_auteur' => 'TILFØJ FORFATTER:',
@@ -1002,7 +946,6 @@ i en farve, der angiver deres status:',
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Indstillinger: <b>Din LDAP forbindelse</b>',
-'titre_dernier_article_syndique' => 'Senest syndikerede artikler',
 'titre_evolution_visite' => 'Udvikling i besøgstal',
 'titre_groupe_mots' => 'NØGLEORDSGRUPPE:',
 'titre_identite_site' => 'Identité du site', # NEW
@@ -1030,7 +973,6 @@ i en farve, der angiver deres status:',
 'titre_page_message_edit' => 'Skriv meddelelse',
 'titre_page_messagerie' => 'Din meddelelsesfunktion',
 'titre_page_recherche' => 'Søgeresultater @recherche@',
-'titre_page_sites_tous' => 'Links til websteder',
 'titre_page_statistiques' => 'Statistik pr. afsnit',
 'titre_page_statistiques_referers' => 'Statistik (indkommende links)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
@@ -1038,17 +980,10 @@ i en farve, der angiver deres status:',
 'titre_page_statistiques_visites' => 'Besøgsstatistik',
 'titre_page_upgrade' => 'SPIP opgradering',
 'titre_publication_articles_post_dates' => 'Offentliggørelse af fremdaterede artikler',
-'titre_referencement_sites' => 'Henvisning og syndikering til websteder',
 'titre_referencer_site' => 'Henvis til webstedet:',
 'titre_rendez_vous' => 'AFTALER:',
 'titre_reparation' => 'Reparer',
-'titre_site_numero' => 'WEBSTEDSNUMMER:',
-'titre_sites_proposes' => 'Indsendte websteder',
-'titre_sites_references_rubrique' => 'Websteder der henvises til i dette afsnit',
-'titre_sites_syndiques' => 'Syndikerede websteder',
-'titre_sites_tous' => 'Websteder der henvises til',
 'titre_suivi_petition' => 'Opfølgning på appeller',
-'titre_syndication' => 'Webstedssyndikering',
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
 'trad_article_inexistant' => 'Der findes ingen artikel med dette nummer.',

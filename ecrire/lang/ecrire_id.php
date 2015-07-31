@@ -45,10 +45,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_operation_echec' => 'Operasi gagal.',
 'avis_operation_impossible' => 'Operasi tidak mungkin dijalankn',
 'avis_probleme_archive' => 'Kesalahan membaca pada berkas @archive@',
-'avis_site_introuvable' => 'Situs tidak ditemukan',
-'avis_site_syndique_probleme' => 'Peringatan: sindikasi situs ini mengalami gangguan; oleh karena itu sistem dihentikan untuk sementara waktu. Silakan verifikasi alamat berkas sindikasi situs (<b>@url_syndic@</b>), dan coba sekali lagi untuk melanjutkan proses pengambilan informasi.', # MODIF
-'avis_sites_probleme_syndication' => 'Situs-situs ini mengalami gangguan sindikasi',
-'avis_sites_syndiques_probleme' => 'Situs-situs tersindikasi ini menimbulkan sebuah permasalahan',
 'avis_suppression_base' => 'PERINGATAN, data yang dihapus tidak dapat dikembalikan lagi',
 'avis_version_mysql' => 'Versi SQL anda (@version_mysql@) tidak mengizinkan perbaikan otomatis tabel-tabel database.',
 
@@ -84,11 +80,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_envoi_liste_nouveautes' => 'Kirim daftar berita terbaru',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Jangan muncul di daftar editor-editor yang terkoneksi',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Jangan kirim pengumuman editorial apapun juga',
-'bouton_radio_non_syndication' => 'Tidak ada sindikasi',
 'bouton_radio_pas_petition' => 'Tidak ada petisi',
 'bouton_radio_petition_activee' => 'Petisi diaktifkan',
 'bouton_radio_supprimer_petition' => 'Hapus petisi',
-'bouton_radio_syndication' => 'Sindikasi:',
 'bouton_redirection' => 'MENGALIHKAN TUJUAN	',
 'bouton_relancer_installation' => 'Menjalankan instalasi kembali',
 'bouton_suivant' => 'Selanjutnya',
@@ -129,15 +123,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Alamat direktori',
 'entree_adresse_email' => 'Alamat e-mail anda',
-'entree_adresse_fichier_syndication' => 'Alamat berkas untuk sindikasi:',
-'entree_adresse_site' => '<b>URL Situs</b> [Diperlukan]',
 'entree_base_donnee_1' => 'Alamat database',
 'entree_base_donnee_2' => '(Sering kali, alamat ini sesuai dengan alamat situs anda, kadangkala ia berkaitan dengan nama «localhost», dan bisa juga dibiarkan tidak terisi sama sekali.)',
 'entree_biographie' => 'Biografi singkat dalam beberapa kata.',
 'entree_chemin_acces' => '<b>Isi</B> path:',
 'entree_cle_pgp' => 'Kunci PGP anda',
 'entree_contenu_rubrique' => '(Isi bagian dalam beberapa kata.)',
-'entree_description_site' => 'Deskripsi situs',
 'entree_identifiants_connexion' => 'Pengidentifikasi koneksi anda...',
 'entree_informations_connexion_ldap' => 'Silakan isi formulir ini dengan informasi koneksi LDAP. Anda akan memperoleh informasi yang diminta melalui administrator jaringan atau sistem anda.',
 'entree_infos_perso' => 'Siapa anda?',
@@ -212,9 +203,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_modifier_article' => 'Modifikasi artikel ini',
 'icone_modifier_message' => 'Modifikasi pesan ini',
 'icone_modifier_rubrique' => 'Modifikasi bagian ini',
-'icone_modifier_site' => 'Modifikasi situs ini',
 'icone_publication' => 'Publication', # NEW
-'icone_referencer_nouveau_site' => 'Referensi sebuah situs baru',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => 'Kembali',
 'icone_retour_article' => 'Kembali ke artikel',
@@ -224,7 +213,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_supprimer_rubrique' => 'Hapus bagian ini',
 'icone_supprimer_signature' => 'Hapus tanda tangan ini',
 'icone_valider_signature' => 'Validasi tanda tangan ini',
-'icone_voir_sites_references' => 'Tampilkan situs-situs referensi',
 'image_administrer_rubrique' => 'Anda dapat mengelola bagian ini',
 'info_1_article' => '1 artikel',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -289,7 +277,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Peringatan',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Struktur database anda telah diinstal.',
-'info_bloquer' => 'blok',
 'info_chapeau' => 'Dek',
 'info_chapeau_2' => 'Introduksi:',
 'info_chemin_acces_1' => 'Pilihan: <b>Path akses dalam direktori</b>',
@@ -326,7 +313,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_date_publication_anterieure' => 'Tanggal publikasi sebelumnya:',
 'info_date_referencement' => 'TANGGAL REFERENSI SITUS INI:',
 'info_derniere_etape' => 'Langkah terakhir: <b>Selesai!',
-'info_derniere_syndication' => 'Sindikasi terakhir situs ini dijalankan pada',
 'info_derniers_articles_publies' => 'Artikel-artikel terakhir anda yang dipublikasi',
 'info_desactiver_messagerie_personnelle' => 'Anda dapat mengaktifkan atau menonaktifkan sistem pesan pribadi anda di situs ini.',
 'info_descriptif' => 'Deskripsi:',
@@ -385,8 +371,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_langues' => 'Bahasa-bahasa situs',
 'info_ldap_ok' => 'Ototentikasi LDAP diinstal.',
 'info_lien_hypertexte' => 'Tautan web:',
-'info_liens_syndiques_1' => 'tautan tersindikasi',
-'info_liens_syndiques_2' => 'validasi tertunda.',
 'info_liste_redacteurs_connectes' => 'Daftar editor-editor terkoneksi',
 'info_login_existant' => 'Log masuk ini sudah ada.',
 'info_login_trop_court' => 'Log masuk terlalu pendek.',
@@ -430,7 +414,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_nom' => 'Nama',
 'info_nom_destinataire' => 'Nama penerima',
 'info_nom_site' => 'Nama situs anda',
-'info_nom_site_2' => '<b>Nama situs</b> [Dibutuhkan]',
 'info_nombre_articles' => '@nb_articles@ artikel,',
 'info_nombre_partcipants' => 'PESERTA DISKUSI:',
 'info_nombre_rubriques' => '@nb_rubriques@ bagian,',
@@ -497,7 +480,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   hosting menonaktifkan pengiriman e-mail di server mereka:
   dalam hal ini ini registrasi terotomasi tidak dapat
   diimplementasikan.', # MODIF
-'info_question_proposer_site' => 'Siapa yang dapat menyarankan situs-situs referensi?',
 'info_question_utilisation_moteur_recherche' => 'Apakah anda ingin mengunakan mesin pencari yang terintegrasi dengan SPIP?
 	(Menonaktifkannya akan meningkatkan kinerja sistem.)',
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
@@ -530,14 +512,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_site' => 'Situs',
 'info_site_2' => 'situs:',
 'info_site_min' => 'situs',
-'info_site_propose' => 'Situs dikirim pada:',
 'info_site_reference_2' => 'Situs referensi',
-'info_site_syndique' => 'Situs ini disindikasi...',
-'info_site_valider' => 'Situs-situs yang akan divalidasi',
 'info_sites' => 'situs',
 'info_sites_lies_mot' => 'Situs-situs referensi yang terasosiasi dengan kata kunci ini',
 'info_sites_proxy' => 'Menggunakan proxy',
-'info_sites_refuses' => 'Situs-situs yang ditolak',
 'info_sites_trouves' => 'Situs ditemukan',
 'info_sites_trouves_dans_texte' => 'Situs ditemukan (dalam teks)',
 'info_sous_titre' => 'Sub judul:',
@@ -547,10 +525,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_statut_auteur_autre' => 'Status lainnya:',
 'info_statut_efface' => 'Dihapus',
 'info_statut_redacteur' => 'Editor',
-'info_statut_site_1' => 'Situs ini adalah:',
-'info_statut_site_2' => 'Dipublikasi',
-'info_statut_site_3' => 'Dikirim',
-'info_statut_site_4' => 'Dalam keranjang sampah',
 'info_statut_utilisateurs_1' => 'Status standar para pengguna yang diimpor',
 'info_statut_utilisateurs_2' => 'Pilih status yang diberikan kepada orang-orang yang terdapat di direktori LDAP ketika terkoneksi pertama kali. Nanti anda dapat memodifikasi status tersebut untuk setiap penulis berdasarkan kasus per kasus.',
 'info_suivi_activite' => 'Tindak lanjut aktivitas editorial',
@@ -630,14 +604,12 @@ dalam warna yang menunjukkan statusnya:',
 'item_autoriser_documents_joints' => 'Otorisasi dokumen yang terlampir di artikel',
 'item_autoriser_documents_joints_rubriques' => 'Otorisasi dokumen dalam bagian',
 'item_autoriser_syndication_integrale' => 'Ikut sertakan semua artikel dalam berkas sindikasi',
-'item_bloquer_liens_syndiques' => 'Blokir tautan sindikasi untuk validasi',
 'item_choix_administrateurs' => 'administrator',
 'item_choix_generation_miniature' => 'Buat gambar-gambar kecil secara otomatis.',
 'item_choix_non_generation_miniature' => 'Jangan buat gambar-gambar kecil.',
 'item_choix_redacteurs' => 'editor',
 'item_choix_visiteurs' => 'pengunjung situs umum',
 'item_creer_fichiers_authent' => 'Buat berkas .htpasswd',
-'item_gerer_annuaire_site_web' => 'Kelola direktori situs-situs web',
 'item_gerer_statistiques' => 'Kelola statistik',
 'item_limiter_recherche' => 'Batasi pencarian pada informasi yang terdapat di situs anda',
 'item_login' => 'Log masuk',
@@ -652,23 +624,19 @@ dalam warna yang menunjukkan statusnya:',
 'item_non_autoriser_documents_joints' => 'Jangan otorisasi dokumen dalam artikel',
 'item_non_autoriser_documents_joints_rubriques' => 'Jangan otorisasi dokumen dalam bagian',
 'item_non_autoriser_syndication_integrale' => 'Kirim ringkasan saja',
-'item_non_bloquer_liens_syndiques' => 'Jangan blokir tautan web yang berasal dari sindikasi',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
 'item_non_creer_fichiers_authent' => 'Jangan buat berkas-berkas ini',
-'item_non_gerer_annuaire_site_web' => 'Non aktifkan direktori situs-situs web',
 'item_non_gerer_statistiques' => 'Jangan kelola statistik',
 'item_non_limiter_recherche' => 'Perluas pencarian isi dari situs-situs referensi',
 'item_non_messagerie_agenda' => 'Désactiver la messagerie et l’agenda', # NEW
 'item_non_publier_articles' => 'Jangan publikasi artikel sebelum tanggal publikasinya.',
 'item_non_utiliser_moteur_recherche' => 'Jangan gunakan sistem',
-'item_non_utiliser_syndication' => 'Jangan gunakan sindikasi terotomasi',
 'item_nouvel_auteur' => 'Penulis baru',
 'item_nouvelle_rubrique' => 'Bagian baru',
 'item_oui' => 'Ya',
 'item_publier_articles' => 'Publikasi artikel tanpa menghiraukan tanggal publikasinya.',
 'item_reponse_article' => 'Balasan pada artikel',
 'item_utiliser_moteur_recherche' => 'Gunakan mesin pencari',
-'item_utiliser_syndication' => 'Gunakan sindikasi terotomasi',
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => 'pengunjung',
@@ -693,9 +661,7 @@ dalam warna yang menunjukkan statusnya:',
 'lien_ajouter_auteur' => 'Tambahkan penulis ini',
 'lien_ajouter_participant' => 'Tambahkan seorang peserta',
 'lien_email' => 'e-mail',
-'lien_mise_a_jour_syndication' => 'Perbaharui sekarang',
 'lien_nom_site' => 'NAMA SITUS:',
-'lien_nouvelle_recuperation' => 'Mencoba melakukan pengambilan data baru',
 'lien_retirer_auteur' => 'Hapus penulis',
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'Hapus peserta ini',
@@ -812,15 +778,6 @@ dalam warna yang menunjukkan statusnya:',
 // S
 'sans_heure' => 'sans heure', # NEW
 'statut_admin_restreint' => '(admin terbatas)',
-'syndic_choix_moderation' => 'Apa yang akan dilakukan dengan tautan berikut dari situs ini?',
-'syndic_choix_oublier' => 'Apa yang akan dilakukan dengan tautan yang tidak ada lagi dalam berkas sindikasi?',
-'syndic_choix_resume' => 'Sejumlah situs menawarkan teks penuh dari artikel-artikel mereka. Ketika teks penuh tersedia, apakah anda ingin mensindikasikannya:',
-'syndic_lien_obsolete' => 'tautan yang tidak perlu',
-'syndic_option_miroir' => 'blokir secara otomatis',
-'syndic_option_oubli' => 'hapus (setelah @mois@ bulan)',
-'syndic_option_resume_non' => 'isi penuh dari artikel (format HTML)',
-'syndic_option_resume_oui' => 'sekedar ringkasan (format teks)',
-'syndic_options' => 'Opsi sindikasi:',
 
 // T
 'taille_cache_image' => 'Gambar-gambar dikalkulasi secara otomatis oleh SPIP (gambar kecil, judul yang ditransformasi ke dalam grafik, formula matematika dalam format Tex, dll.) dengan jumlah keseluruhan @taille@ di direktori @dir@ .',
@@ -901,20 +858,11 @@ menginstal kembali SPIP untuk membuat database baru dan akses administrator pert
 'texte_jeu_caractere_4' => 'Jika itu tidak berkaitan dengan situasi yang anda miliki dengan data anda (sebagai contoh, setelah pemulihan database anda dari backup), atau jika <em>anda mengkonfigurasi situs ini</em> dan berkeinginan menggunakan set karakter yang berbeda, silakan tunjukkan set karakter di sini:',
 'texte_jeu_caractere_conversion' => 'Catatan: Anda dapat memutuskan untuk mengubah semua teks (artickel, berita, forum, dll.) situs anda dan semua set karakter ke <tt>utf-8</tt>. Untuk melakukan ini, silakan kunjungi <a href="@url@">halaman konversi UTF-8</a>.',
 'texte_lien_hypertexte' => '(Jika pesan anda merujuk pada sebuah artikel yang dipublikasi di Web, atau ke halaman yang berisikan informasi lebih banyak, silakan memasukkan judul halaman dan URL nya di sini.)',
-'texte_liens_sites_syndiques' => 'Tautan yang berasal dari situs-situs tersindikasi
-			dapat diblok sebelumnya; pengaturan berikut
-			menampilkan pengaturan standar dari situs-
-			situs tersindikasi setelah dibuat. Ini
-			memungkinkan untuk memblokir setiap tautan
-			secara individual, atau memilih, untuk setiap
-			situs, memblokir tautan yang berasal dari
-			situs-situs tertentu.',
 'texte_login_ldap_1' => '(Biarkan kosong untuk akses anonim atau masukkan path lengkap, sebagai contoh «<tt>uid=smith, ou=users, dc=my-domain, dc=com</tt>».)',
 'texte_login_precaution' => 'Peringatan! Ini adalah log masuk yang anda gunakan untuk terkoneksi sekarang.
 	Gunakan formulir ini dengan hati-hati...',
 'texte_message_edit' => 'Peringatan: pesan ini dapat dimodifikasi oleh semua administrator situs, dan muncul di hadapan semua editor. Gunakan pengumuman hanya untuk menekankan pentingnya sebuah kejadian dalam siklus hidup situs.',
 'texte_messagerie_agenda' => 'Une messagerie permet aux rédacteurs du site de communiquer entre eux directement dans l’espace privé du site. Elle est associée à un agenda.', # NEW
-'texte_messages_publics' => 'Pesan umum artikel:',
 'texte_mise_a_niveau_base_1' => 'Anda harus memperbaharui berkas-berkas SPIP.
 	Sekarang anda harus memperbaharui database situs.',
 'texte_modifier_article' => 'Modifikasi artikel:',
@@ -928,7 +876,6 @@ menginstal kembali SPIP untuk membuat database baru dan akses administrator pert
 'texte_multilinguisme' => 'Jika anda ingin mengelola artikel-artikel dalam beberapa bahasa, dengan navigasi yang kompleks, anda dapat menambah sebuah menu pemilih bahasa di artikel dan/atau bagian, sesuai dengan organisasi dari situs anda.',
 'texte_multilinguisme_trad' => 'Selain itu, anda juga dapat mengaktifkan sistem manajemen tautan di antara terjemahan yang berbeda dari sebuah artikel.',
 'texte_non_compresse' => '<i>tidak dikompresi</i> (server anda tidak mendukung fitur ini)',
-'texte_non_fonction_referencement' => 'Anda dapat memilih untuk tidak menggunakan fitur terotomasi ini, dan masukkan elemen-elemen yang berkaitan dengan situs secara manual...',
 'texte_nouveau_message' => 'Pesan baru',
 'texte_nouvelle_version_spip_1' => 'Anda baru saja menginstal versi terbaru SPIP.',
 'texte_nouvelle_version_spip_2' => 'Versi terbaru ini membutuhkan pembaharuan secara menyeluruh daripada biasanya. Jika anda adalah webmaster situs ini, silakan hapus berkas @connect@ dan jalankan kembali instalasi untuk memperbaharui paramater-parameter koneksi database anda. <p>(Catatan: Jika anda lupa paramater-parameter koneksi database anda, silakan lihat berkas @connect@ sebelum menghapusnya!)</p>', # MODIF
@@ -952,8 +899,6 @@ memperbaharui satu halaman, anda sebaiknya melakukannya dari area umum dan gunak
 'texte_recapitiule_liste_documents' => 'Halaman ini menampilkan daftar dari dokumen-dokumen yang anda tempatkan di bagian-bagian. Untuk memodifikasi informasi setiap dokumen, ikuti tautan ke halaman bagiannya.',
 'texte_recuperer_base' => 'Perbaiki database',
 'texte_reference_mais_redirige' => 'artikel referensi di situs SPIP anda, tapi mengarah ke URL lain.',
-'texte_referencement_automatique' => '<b>Referensi situs terotomasi</b><br>Anda dapat mereferensi sebuah situs web secara cepat dengan memberikan di bawah URL yang dimaksud, atau alamat berkas sindikasinya. SPIP secara otomatis akan mengambil informasi yang berkaitan dengan situs tersebut (judul, deskripsi...).',
-'texte_referencement_automatique_verifier' => 'Veuillez vérifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.', # NEW
 'texte_requetes_echouent' => '<b>Wetika sejumlah query SQL gagal
   secara sistematis dan tanpa alasan yang jelas, bisa jadi
   permasalahannya adalah database itu sendiri.</b><p>
@@ -982,11 +927,6 @@ memperbaharui satu halaman, anda sebaiknya melakukannya dari area umum dan gunak
 dalam cache SPIP. Ini mengizinkan anda, antara lain, untuk memaksa semua halaman diperbaharui jika
 anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'texte_sur_titre' => 'Judul atas',
-'texte_syndication' => 'Jika sebuah situs mengizinkannya, daftar isi terbaru dari situs tersebut
-  dapat diambil secara otomatis. Untuk melakukannya, anda harus mengaktifkan sindikasi.
-  <blockquote><i>Sejumlah hosting menonaktifkan fungsi ini; 
-  dalam hal ini, anda tidak dapat menggunakan sindikasi isi
-  dari situs anda.</i></blockquote>', # MODIF
 'texte_table_ok' => ': tabel ini OK.',
 'texte_tables_indexation_vides' => 'Tabel terindeksasi mesin kosong.',
 'texte_tentative_recuperation' => 'Usaha perbaikan',
@@ -1011,7 +951,6 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'titre_admin_vider' => 'Pemeliharaan teknis',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
-'titre_articles_syndiques' => 'Artikel-artikel tersindikasi ditarik dari situs ini',
 'titre_cadre_afficher_article' => 'Tampilkan artikel:',
 'titre_cadre_afficher_traductions' => 'Tampikan status terjemahan dari bahasa-bahasa berikut:',
 'titre_cadre_ajouter_auteur' => 'TAMBAH SEORANG PENULIS:',
@@ -1028,7 +967,6 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Opsi: <b>Koneksi LDAP anda</b>',
-'titre_dernier_article_syndique' => 'Artikel-artikel sindikasi terbaru',
 'titre_evolution_visite' => 'Tingkat kunjungan',
 'titre_groupe_mots' => 'KELOMPOK KATA KUNCI:',
 'titre_identite_site' => 'Identité du site', # NEW
@@ -1056,7 +994,6 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'titre_page_message_edit' => 'Tulis sebuah pesan',
 'titre_page_messagerie' => 'Sistem pesan anda',
 'titre_page_recherche' => 'Hasil pencarian @recherche@',
-'titre_page_sites_tous' => 'Situs-situs referensi',
 'titre_page_statistiques' => 'Statistik berdasarkan bagian',
 'titre_page_statistiques_referers' => 'Statistik (tautan masuk)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
@@ -1064,17 +1001,10 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'titre_page_statistiques_visites' => 'Statistik kunjungan',
 'titre_page_upgrade' => 'Pembaharuan SPIP',
 'titre_publication_articles_post_dates' => 'Publikasi artikel terjadwal',
-'titre_referencement_sites' => 'Referensi dan sindikasi situs',
 'titre_referencer_site' => 'Referensi situs:',
 'titre_rendez_vous' => 'JANJI:',
 'titre_reparation' => 'Perbaikan',
-'titre_site_numero' => 'NOMOR SITUS:',
-'titre_sites_proposes' => 'Situs-situs yang dikirim',
-'titre_sites_references_rubrique' => 'Situs-situs referensi dalam bagian ini',
-'titre_sites_syndiques' => 'Situs-situs tersindikasi',
-'titre_sites_tous' => 'Situs-situs referensi',
 'titre_suivi_petition' => 'Tindak lanjut petisi',
-'titre_syndication' => 'Sindikasi situs',
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Pengamanan layer transportasi:',
 'trad_article_inexistant' => 'Tidak ada artikel dengan nomor ini',

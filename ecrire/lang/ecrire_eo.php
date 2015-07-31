@@ -44,10 +44,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_operation_echec' => 'La ago malsukcesis.',
 'avis_operation_impossible' => 'Faro ne ebla',
 'avis_probleme_archive' => 'Problemo por legi la dosieron @archive@',
-'avis_site_introuvable' => 'Netrovebla retejo',
-'avis_site_syndique_probleme' => 'Atentu, okazis problemo pri abonrilato de tiu ĉi retejo ; la sistemo estas portempe ĉesigita. Kontrolu la retadreson de la abondosiero de tiu ĉi retejo (@url_syndic@), kaj provu novan reakiron de la informoj.',
-'avis_sites_probleme_syndication' => 'Okazis problemo pri abonrilato inter tiuj retejoj',
-'avis_sites_syndiques_probleme' => 'Tiuj abonligitaj retejoj okazigis problemon',
 'avis_suppression_base' => 'ATENTU, forviŝo de datenoj estas definitiva',
 'avis_version_mysql' => 'Via SQL-versio (@version_mysql@) ne ebligas memriparon de datenbazaj tabeloj.',
 
@@ -83,11 +79,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_envoi_liste_nouveautes' => 'Sendi la novaĵoj-liston',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Ne aperi en la listo de redaktantoj',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Ne sendi anoncojn pri ĉefartikoloj',
-'bouton_radio_non_syndication' => 'Neniu abonrilato',
 'bouton_radio_pas_petition' => 'Neniu petskribo',
 'bouton_radio_petition_activee' => 'Aktivigita petskribo',
 'bouton_radio_supprimer_petition' => 'Forviŝi la petskribon',
-'bouton_radio_syndication' => 'Abonrilato:',
 'bouton_redirection' => 'ALIDIREKTIGO',
 'bouton_relancer_installation' => 'Relanĉi la instaladon',
 'bouton_suivant' => 'Sekvanta',
@@ -128,15 +122,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Adreso al la dosierujilo',
 'entree_adresse_email' => 'Via retpoŝtadreso',
-'entree_adresse_fichier_syndication' => 'Retadreso de la abondosiero :',
-'entree_adresse_site' => '<b>Adreso de la retejo</b> [Deviga]',
 'entree_base_donnee_1' => 'Adreso de la datenbazo',
 'entree_base_donnee_2' => '(Tiu adreso ofte estas tiu de via retejo, foje estas "localhost", alifoje la entajpujo restas malplena.)',
 'entree_biographie' => 'Mallonga kelkvorta biografio.',
 'entree_chemin_acces' => '<b>Entajpi</b> alirvojon :',
 'entree_cle_pgp' => 'Via PGP-ŝlosilo ',
 'entree_contenu_rubrique' => '(Enhavo de la rubriko per kelkaj vortoj.)',
-'entree_description_site' => 'Priskribo de la retejo',
 'entree_identifiants_connexion' => 'Viaj ensalutiloj...',
 'entree_informations_connexion_ldap' => 'En tiun formularon, bonvolu entajpi informojn por konekti al via LDAP-dosierujilo. Tiujn informojn disponigu al vi la sistema aŭ reta mastrumanto.',
 'entree_infos_perso' => 'Kiu vi estas ?',
@@ -211,9 +202,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_modifier_article' => 'Modifi tiun ĉi artikolon',
 'icone_modifier_message' => 'Modifi tiun ĉi mesaĝon',
 'icone_modifier_rubrique' => 'Modifi tiun ĉi rubrikon',
-'icone_modifier_site' => 'Modifi tiun ĉi retejon',
 'icone_publication' => 'Publication', # NEW
-'icone_referencer_nouveau_site' => 'Referencigi novan retejon',
 'icone_relancer_signataire' => 'Reinstigi tiun ĉi subskribinton',
 'icone_retour' => 'Reen',
 'icone_retour_article' => 'Reen al la artikolo',
@@ -223,7 +212,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_supprimer_rubrique' => 'Forviŝi tiun rubrikon',
 'icone_supprimer_signature' => 'Forviŝi tiun subskribon',
 'icone_valider_signature' => 'Validigi tiun subskribon',
-'icone_voir_sites_references' => 'Vidi la referencigitajn retejojn',
 'image_administrer_rubrique' => 'Vi povas mastrumi tiun rubrikon',
 'info_1_article' => '1 artikolo',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -286,7 +274,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Averto',
 'info_barre_outils' => 'ĉu per ĝia ilobreto?',
 'info_base_installee' => 'La strukturo de via datenbazo estas instalita.',
-'info_bloquer' => 'bloki',
 'info_chapeau' => 'Ĉapo',
 'info_chapeau_2' => 'Ĉapo :',
 'info_chemin_acces_1' => 'Opcioj : <b>Alirvojo en la LDAP-dosierujilo</b>',
@@ -323,7 +310,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_date_publication_anterieure' => 'Dato de antaŭa redakto :',
 'info_date_referencement' => 'REFERENCIGO-DATO DE TIU RETEJO :',
 'info_derniere_etape' => 'Finite !',
-'info_derniere_syndication' => 'La lasta abonĝisdatigo de tiu retejo estis farita la ',
 'info_derniers_articles_publies' => 'Viaj artikoloj laste rete publikigitaj',
 'info_desactiver_messagerie_personnelle' => 'Vi povas aktivigi aŭ malaktivigi vian personan mesaĝilon ĉe tiu retejo.',
 'info_descriptif' => 'Priskribo:',
@@ -380,8 +366,6 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_langues' => 'Lingvoj de la retejo',
 'info_ldap_ok' => 'La LDAP-aŭtentokontrolilo estas instalita.',
 'info_lien_hypertexte' => 'Hiperligilo:',
-'info_liens_syndiques_1' => 'abonligiloj',
-'info_liens_syndiques_2' => 'estas validigotaj.',
 'info_liste_redacteurs_connectes' => 'Listo de la konektitaj redaktantoj',
 'info_login_existant' => 'Tiu salutnomo jam ekzistas.',
 'info_login_trop_court' => 'Tro mallonga salutnomo.',
@@ -422,7 +406,6 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_nom' => 'Nomo',
 'info_nom_destinataire' => 'Nomo de la adresato',
 'info_nom_site' => 'Nomo de via retejo',
-'info_nom_site_2' => '<b>Nomo de la retejo</b> [Deviga]',
 'info_nombre_articles' => '@nb_articles@ artikoloj,',
 'info_nombre_partcipants' => 'PARTOPRENANTOJ EN LA DISKUTO:',
 'info_nombre_rubriques' => '@nb_rubriques@ rubrikoj,',
@@ -487,7 +470,6 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
   alir-kodoj al la privata spaco. Iuj
   retejgastigantoj malaktivigas la sendadon de retleteroj el siaj
   serviloj : tiukaze la aŭtomata aliĝo ne eblos.', # MODIF
-'info_question_proposer_site' => 'Kiu povas proponi referencigitajn retejojn ?',
 'info_question_utilisation_moteur_recherche' => 'Ĉu vi deziras uzi la SPIP-internan serĉilon ?
  (malaktivigi ĝin rapidigas la funkciadon de la sistemo.)',
 'info_question_vignettes_referer' => 'Kiam vi konsultas statistikojn, vi povas havi superrigardon pri tio, de kiuj retejoj venas vizitantoj',
@@ -520,14 +502,10 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_site' => 'Retejo',
 'info_site_2' => 'retejo :',
 'info_site_min' => 'retejo',
-'info_site_propose' => 'Retejo proponita la :',
 'info_site_reference_2' => 'Referencigita retejo',
-'info_site_syndique' => 'Tiu ĉi retejo estas abonligita...',
-'info_site_valider' => 'Validigotaj retejoj',
 'info_sites' => 'retejoj',
 'info_sites_lies_mot' => 'La referencigitaj retejoj ligitaj al tiu ĉi ŝlosilvorto',
 'info_sites_proxy' => 'Uzi prokuran servilon',
-'info_sites_refuses' => 'La rifuzitaj retejoj',
 'info_sites_trouves' => 'Retejoj trovitaj',
 'info_sites_trouves_dans_texte' => 'Retejoj trovitaj (en la teksto)',
 'info_sous_titre' => 'Subtitolo:',
@@ -537,10 +515,6 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_statut_auteur_autre' => 'Alia statuso :',
 'info_statut_efface' => 'forviŝita',
 'info_statut_redacteur' => 'Redaktanto',
-'info_statut_site_1' => 'Tiu retejo estas :',
-'info_statut_site_2' => 'Publikigita',
-'info_statut_site_3' => 'Proponita',
-'info_statut_site_4' => 'En rubujo',
 'info_statut_utilisateurs_1' => 'Defaŭlta statuso de la importitaj uzantoj',
 'info_statut_utilisateurs_2' => 'Elektu la statuson atribuotan al la personoj ĉeestantaj en LDAP-dosierujilo, kiam ili unuafoje konektiĝas. Poste vi povos modifi tiun valoron por ĉiu aŭtoro laŭkaze.',
 'info_suivi_activite' => 'Superrigardo de la redakta agado',
@@ -619,14 +593,12 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'item_autoriser_documents_joints' => 'Permesi alkroĉon de dokumentoj al la artikoloj',
 'item_autoriser_documents_joints_rubriques' => 'Permesi dokumentojn en la rubrikoj',
 'item_autoriser_syndication_integrale' => 'Disponigi la tuton de la artikoloj en la abondosieroj',
-'item_bloquer_liens_syndiques' => 'Bloki la abonligilojn por validigo',
 'item_choix_administrateurs' => 'la mastrumantoj',
 'item_choix_generation_miniature' => 'Aŭtomatigi miniaturigadon de la bildoj.',
 'item_choix_non_generation_miniature' => 'Ne generi bildajn miniaturojn.',
 'item_choix_redacteurs' => 'la redaktantoj',
 'item_choix_visiteurs' => 'la vizitantoj de la publika spaco',
 'item_creer_fichiers_authent' => 'Krei la dosierojn .htpasswd',
-'item_gerer_annuaire_site_web' => 'Mastrumi retej-adresaron',
 'item_gerer_statistiques' => 'Mastrumi statistikojn',
 'item_limiter_recherche' => 'Limigi la serĉprocezon al informoj entenataj ĉe via retejo',
 'item_login' => 'Salutnomo',
@@ -641,23 +613,19 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'item_non_autoriser_documents_joints' => 'Ne permesi dokumentojn en la artikoloj',
 'item_non_autoriser_documents_joints_rubriques' => 'Ne permesi dokumentojn en la rubrikoj',
 'item_non_autoriser_syndication_integrale' => 'Nur disponigi po unu resumo',
-'item_non_bloquer_liens_syndiques' => 'Ne bloki la ligilojn naskitajn de abonrilato',
 'item_non_compresseur' => 'Malaktivigi la densigon',
 'item_non_creer_fichiers_authent' => 'Ne krei tiujn ĉi dosierojn',
-'item_non_gerer_annuaire_site_web' => 'Malaktivigi la retej-adresaron',
 'item_non_gerer_statistiques' => 'Ne mastrumi statistikojn',
 'item_non_limiter_recherche' => 'Etendi la serĉadon al la enhavo de la referencigitaj retejoj',
 'item_non_messagerie_agenda' => 'Malaktivigi la mesaĝilon kaj la agendon',
 'item_non_publier_articles' => 'Ne publikigi la artikolojn antaŭ la fiksita publikig-dato.',
 'item_non_utiliser_moteur_recherche' => 'Ne uzi la serĉilon',
-'item_non_utiliser_syndication' => 'Ne uzi la aŭtomatan abonrilaton',
 'item_nouvel_auteur' => 'Nova aŭtoro',
 'item_nouvelle_rubrique' => 'Nova rubriko',
 'item_oui' => 'Jes',
 'item_publier_articles' => 'Publikigi la artikolojn, kiu ajn estas ties publikig-dato.',
 'item_reponse_article' => 'Respondo al la artikolo',
 'item_utiliser_moteur_recherche' => 'Uzi la serĉilon',
-'item_utiliser_syndication' => 'Uzi la aŭtomatan abonrilaton',
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => 'vizitanto',
@@ -682,9 +650,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'lien_ajouter_auteur' => 'Aldoni tiun aŭtoron',
 'lien_ajouter_participant' => 'Aldoni partoprenanton',
 'lien_email' => 'retpoŝtadreso',
-'lien_mise_a_jour_syndication' => 'Ĝisdatigi nun',
 'lien_nom_site' => 'NOMO DE LA RETEJO:',
-'lien_nouvelle_recuperation' => 'Provi novan reakiron de la datenoj',
 'lien_retirer_auteur' => 'Forviŝi la aŭtoron',
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'Forviŝi tiun ĉi partoprenanton',
@@ -801,15 +767,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 // S
 'sans_heure' => 'sen horo',
 'statut_admin_restreint' => '(etrajta mastrumanto)',
-'syndic_choix_moderation' => 'Kion fari el la ligiloj venontaj el tiu retejo ?',
-'syndic_choix_oublier' => 'Kion fari el la ligiloj, kiuj ne plu aperas en la abondosiero ?',
-'syndic_choix_resume' => 'Iuj retejoj disponigas la tutan tekston de la artikoloj. Kiam tiu ĉi disponeblas, ĉu vi deziras abonligi :',
-'syndic_lien_obsolete' => 'eks-uzita ligilo',
-'syndic_option_miroir' => 'aŭtomate bloki ilin',
-'syndic_option_oubli' => 'forviŝi ilin (post @mois@ monatoj)',
-'syndic_option_resume_non' => 'la kompleta enhavo de la artikoloj (HTML-formate)',
-'syndic_option_resume_oui' => 'simpla resumo (tekt-formate)',
-'syndic_options' => 'Abon-agordoj :',
 
 // T
 'taille_cache_image' => 'La bildoj aŭtomate komputitaj de SPIP (vijnetoj de dokumentoj, titoloj prezentitaj laŭ grafika formo, matematikaj funkcioj laŭ TeX-formato...) okupas en dosierujo @dir@ spacon je @taille@.',
@@ -890,19 +847,11 @@ SPIP-reinstalon por rekrei novan bazon kaj unuan mastrumulan alirrajton.',
 'texte_jeu_caractere_4' => 'Se tio ne kongruas kun la realo de viaj datenoj (ekzemple, sekve de datenbazo-restaŭro), aŭ se <em>vi ĵus ekkreis tiun retejon</em> kaj deziras ekuzi novan litertiparon, bonvolu indiki ĝin ĉi tie :',
 'texte_jeu_caractere_conversion' => 'Noto : vi povas decidi konverti definitive ĉiujn tekstojn de via retejo (artikoloj, fulm-informoj, forumoj, ktp...) en alfabeton <tt>utf-8</tt>, irante ĉe <a href="@url@"> la al-utf-8-konvertan paĝon</a>.',
 'texte_lien_hypertexte' => 'Se via mesaĝo rilatas al artikolo publikigita ĉe la reto, aŭ al paĝo donanta pli da informoj, bonvolu indiki ĉi-poste la titolon de la paĝo kaj ties URL-adreson.)',
-'texte_liens_sites_syndiques' => 'Abonligoj povas
-   esti blokataj apriore; la ĉi-suba agordo
-   indikas la defaŭltan agordon de la
-   abonligitaj retejoj je ties kreo. Poste
-   eblas ĉiukaze malbloki ĉiun
-   ligilon unuope, aŭ elekti, retejon post retejo, bloki estigotajn
-ligilojn al jena aŭ alia retejo.',
 'texte_login_ldap_1' => 'Lasu malplena por sennoma aliro, aŭ entajpu la kompletan vojon, ekzemple « <tt>uid=nomo, ou=uzanto, dc=mia-domajno, dc=com</tt> ».)',
 'texte_login_precaution' => 'Atentu ! Tio ĉi estas la salutnomo laŭ kiu vi ensalutis.
  Uzu tiun ĉi formularon prudente...',
 'texte_message_edit' => 'Atentu : tiu ĉi mesaĝo povas esti modifita de ĉiuj mastrumantoj de la retejo, kaj estas videbla de ĉiuj redaktantoj. Uzu la anoncojn nur por sciigi eventojn gravajn pri la vivo de la retejo.',
 'texte_messagerie_agenda' => 'Une messagerie permet aux rédacteurs du site de communiquer entre eux directement dans l’espace privé du site. Elle est associée à un agenda.', # NEW
-'texte_messages_publics' => 'Publikaj mesaĝoj de la artikolo:',
 'texte_mise_a_niveau_base_1' => 'Vi ĵus ĝisdatigis la SPIP-dosierojn.
  Necesas nun alniveligi la datenbazon
  de la retejo.',
@@ -916,7 +865,6 @@ ligilojn al jena aŭ alia retejo.',
 'texte_multilinguisme' => 'Se vi deziras mastrumi la artikolojn en pluraj lingvoj, per kompleksa retumado, vi povas aldoni menuon pri lingvoelekto en la artikoloj kaj/aŭ en la rubrikoj, konforme al la organizo de via retejo.',
 'texte_multilinguisme_trad' => 'Vi povas ankaŭ aktivigi sistemon por mastrumi la ligilojn inter la diversaj tradukoj de artikolo.',
 'texte_non_compresse' => '<i>ne densigita</i> (ĉar via servilo ne eltenas tiun funkcion)',
-'texte_non_fonction_referencement' => 'Vi povas preferi ne uzi tiun aŭtomatan funkcion kaj indiki mem la elementojn koncernantajn tiun ĉi retejon...',
 'texte_nouveau_message' => 'Nova mesaĝo',
 'texte_nouvelle_version_spip_1' => 'Vi instalis novan version de SPIP.',
 'texte_nouvelle_version_spip_2' => 'Tiu ĉi nova versio bezonas pli kompletan ĝisdatigon ol kutime. Se vi estas mastrumanto de la retejo, bonvolu forviŝi la dosieron @connect@ kaj restarigi la instalprocezon por ĝisdatigi viajn konekt-parametrojn al la datenbazo.<p> (Notu : se vi forgesis viajn konektparametrojn, legu la dosieron @connect@ antaŭ ol forviŝi ĝin...)', # MODIF
@@ -939,8 +887,6 @@ rekalkuli ununuran paĝon, pasu prefere tra la publika spaco kaj tie uzu la buto
 'texte_recapitiule_liste_documents' => 'Tiu ĉi paĝo montras la liston de dokumentoj, kiujn vi metis en la rubrikojn. Por modifi la informojn pri ĉiu dokumento, sekvu la ligilon al la paĝo de ties rubriko.',
 'texte_recuperer_base' => 'Ripari la datenbazon',
 'texte_reference_mais_redirige' => 'artikolo referencigita ĉe via SPIP-retejo, sed redirektita al alia URL.',
-'texte_referencement_automatique' => '<b>Aŭtomata retej-referenciga procezo</b><br />Vi povas rapide referencigi retejon indikante ĉi-sube la deziratan retadreson aŭ ties abonligon. SPIP aŭtomate abonŝutos la informojn kiuj koncernas tiun retejon (titolon, priskribon...).',
-'texte_referencement_automatique_verifier' => 'Veuillez vérifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.', # NEW
 'texte_requetes_echouent' => '<b>Kiam iuj SQL-serĉpetoj ĉiufoje
 kaj senkiale malsukcesas, estas eble
 ke tio okazas pro la datenbazo
@@ -967,11 +913,6 @@ vian retgastiganton.<p>', # MODIF
 en la SPIP-staplo. Tio ebligas ekzemple devigi la sistemon rekalkuli ĉiujn paĝojn, se vi
 faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 'texte_sur_titre' => 'Surtitolo',
-'texte_syndication' => 'Eblas elpreni aŭtomate la liston de novaĵoj de iu retejo,
-  se tiu retejo tion permesas. Por tio, vi devas aktivigi la abonrilaton.
-  <blockquote><i>Iuj retgastigantoj malaktivigas tiun funkcion ;
-  tiukaze vi ne povas abonligi la enhavon
-  ekde via retejo.</i></blockquote>', # MODIF
 'texte_table_ok' => ': tiu tabelo estas en ordo.',
 'texte_tables_indexation_vides' => 'La indeksaj tabeloj de la serĉilo estas malplenaj.',
 'texte_tentative_recuperation' => 'Ripar-provo',
@@ -1012,7 +953,6 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 'titre_admin_vider' => 'Teknika bontenado',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
-'titre_articles_syndiques' => 'Artikoloj abonŝutitaj el tiu retejo',
 'titre_cadre_afficher_article' => 'Afiŝi la artikolojn',
 'titre_cadre_afficher_traductions' => 'Afiŝi la traduk-staton por tiuj lingvoj :',
 'titre_cadre_ajouter_auteur' => 'ALDONI AŬTORON:',
@@ -1029,7 +969,6 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Opcioj: <b>Via konekto LDAP</b>',
-'titre_dernier_article_syndique' => 'Laste abonŝutitaj artikoloj',
 'titre_evolution_visite' => 'Evoluo de la vizitoj',
 'titre_groupe_mots' => 'GRUPO DE VORTOJ:',
 'titre_identite_site' => 'Identité du site', # NEW
@@ -1057,7 +996,6 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 'titre_page_message_edit' => 'Skribi mesaĝon',
 'titre_page_messagerie' => 'Via mesaĝilo',
 'titre_page_recherche' => 'Serĉrezulto @recherche@',
-'titre_page_sites_tous' => 'La referencigitaj retejoj',
 'titre_page_statistiques' => 'Statistikoj laŭ rubrikoj',
 'titre_page_statistiques_referers' => 'Statistikoj (eniraj ligoj)',
 'titre_page_statistiques_signatures_jour' => 'Subskribnombro en tago',
@@ -1065,17 +1003,10 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 'titre_page_statistiques_visites' => 'Statistikoj de la vizitoj',
 'titre_page_upgrade' => 'SPIP-alniveligo',
 'titre_publication_articles_post_dates' => 'Publikigo de la postdatitaj artikoloj',
-'titre_referencement_sites' => 'Referencigado de retejoj kaj abonrilato',
 'titre_referencer_site' => 'Referencigi la retejon:',
 'titre_rendez_vous' => 'RENDEVUO:',
 'titre_reparation' => 'Riparo',
-'titre_site_numero' => 'RETEJO NUMERO :',
-'titre_sites_proposes' => 'La proponitaj retejoj',
-'titre_sites_references_rubrique' => 'La retejoj referencigitaj en tiu ĉi rubriko',
-'titre_sites_syndiques' => 'La abonligitaj retejoj',
-'titre_sites_tous' => 'La referencigitaj retejoj',
 'titre_suivi_petition' => 'Kontrolo de la petskriboj',
-'titre_syndication' => 'Reteja abonligo',
 'titre_type_urls' => 'Tipo de retadreso',
 'tls_ldap' => 'Transŝuta tavolsekureco (TLS):',
 'trad_article_inexistant' => 'Neniu artikolo kun tiu numero.',
