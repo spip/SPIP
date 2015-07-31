@@ -147,7 +147,7 @@ EOF;
 
 }
 
-function tree_open_close_dir(&$current,$target,$visible = false){
+function tree_open_close_dir(&$current,$target,$deplie=array()){
 	if ($current == $target) return "";
 	$tcur = explode("/",$current);
 	$ttarg = explode("/",$target);
@@ -168,6 +168,7 @@ function tree_open_close_dir(&$current,$target,$visible = false){
 		$chemin .= implode("/",$tcom)."/";
 	// ouvrir les repertoires jusqu'a la cible
 	while($open = array_shift($ttarg)){
+		$visible = @in_array($chemin.$open,$deplie);
 		$chemin .= $open . "/";
 		$output .= "<li>";
 		$output .= $visible? bouton_block_visible($chemin):bouton_block_invisible($chemin);
@@ -205,9 +206,9 @@ function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 	while (count($liste_plugins) && $maxiter--){
 		// le rep suivant
 		$dir = dirname(reset($liste_plugins));
-		$visible = @in_array($dir,$deplie);
+		#$visible = @in_array($dir,$deplie);
 		if ($dir != $current_dir)
-			echo tree_open_close_dir($current_dir,$dir,$visible);
+			echo tree_open_close_dir($current_dir,$dir,$deplie);
 			
 		// d'abord tous les plugins du rep courant
 		if (isset($dir_index[$current_dir]))
