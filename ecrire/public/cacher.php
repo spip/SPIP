@@ -172,7 +172,7 @@ function creer_cache(&$page, &$chemin_cache) {
 
 
 // purger un petit cache (tidy ou recherche) qui ne doit pas contenir de
-// vieux fichiers
+// vieux fichiers ; (cette fonction ne sert que dans des plugins obsoletes)
 // http://doc.spip.org/@nettoyer_petit_cache
 function nettoyer_petit_cache($prefix, $duree = 300) {
 	// determiner le repertoire a purger : 'tmp/CACHE/rech/'
