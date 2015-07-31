@@ -729,7 +729,8 @@ prive/squelettes/contenu/page-debug.html -text
 prive/squelettes/extra/dist.html -text
 prive/squelettes/head/dist.html -text
 prive/squelettes/hierarchie/dist.html -text
-prive/squelettes/hierarchie/dist_fonctions.php -text
+prive/squelettes/hierarchie/objet.html -text
+prive/squelettes/hierarchie/objet_fonctions.php -text
 prive/squelettes/inclure/admin_autres_bases.html -text
 prive/squelettes/inclure/admin_autres_bases_fonctions.php -text
 prive/squelettes/inclure/admin_vider_cache.html -text
