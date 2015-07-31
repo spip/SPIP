@@ -2332,7 +2332,7 @@ function init_entete($titre, $rubrique, $css) {
 function init_body($rubrique = "asuivre", $sous_rubrique = "asuivre") {
 	global $couleur_foncee;
 	global $couleur_claire;
-	global $REQUEST_URI;
+	global $REQUEST_URI, $HTTP_HOST;
 	global $connect_id_auteur;
 	global $connect_statut;
 	global $connect_activer_messagerie;
