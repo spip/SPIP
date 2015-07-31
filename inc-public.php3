@@ -82,18 +82,16 @@ else {
 		$var_debug = false;
 
 	// Faut-il preparer les boutons d'admin ?
-	if ($affiche_boutons_admin = (!$flag_preserver
-	AND ($HTTP_COOKIE_VARS['spip_admin'] OR $HTTP_COOKIE_VARS['spip_debug']))) {
-		include_local('inc-admin.php3');
-	}
+	$affiche_boutons_admin = (!$flag_preserver
+				  AND ($HTTP_COOKIE_VARS['spip_admin']
+				       OR $HTTP_COOKIE_VARS['spip_debug']));
 
+	// inc-admin contient aussi le traitement d'erreur
+	include_local('inc-admin.php3');
 	include_local ("inc-public-global.php3");
 
+	$tableau_des_erreurs = array();
 	$page = afficher_page_globale ($fond, $delais, $use_cache);
-
-	// Demarrer un buffer pour le content-length (ou le debug)
-	if ($flag_ob)
-		ob_start();
 
 	// Afficher la page ; le cas PHP est assez rigolo avec le traitement
 	// d'erreurs
@@ -103,60 +101,47 @@ else {
 		// dans le eval : on envoie le bouton debug, et on le supprime
 		// de l'autre cote ; de cette facon, si on traverse sans encombre,
 		// on est propre, et sinon on a le bouton
+
 		if ($affiche_boutons_admin) {
 
 			// recuperer les parse errors etc., type "FATAL" (cf. infra)
 			if ($auteur_session['statut'] == '0minirezo') {
-				$tableau_des_erreurs = array();
 				$page_principale = $page;
 				if (function_exists('set_error_handler'))
 					set_error_handler('spip_error_handler');
 			}
 
-			if ($flag_ob)
-				echo afficher_boutons_admin('', 'debug').'<!-- @@START@@ -->';
 		}
 
 		//
 		// Evaluer la page php
 		//
-		$s = eval('?' . '>' . $page['texte']); // page 'php'
-
+		if (!$var_debug)
+		  $res = eval('?' . '>' . $page['texte']); 
+		else {
+		  	ob_start(); 
+			$res = eval('?' . '>' . $page['texte']);
+		  	$contenu = ob_get_contents(); 
+			ob_end_clean();
+		}
+                      
 		// en cas d'erreur afficher un message + demander les boutons de debug
 		if ($affiche_boutons_admin
-		AND $auteur_session['statut'] == '0minirezo') {
+			AND $auteur_session['statut'] == '0minirezo') {
 			if (function_exists('restore_error_handler'))
-				restore_error_handler();
-			if ($s === false
-			OR count($tableau_des_erreurs) > 0)
-				affiche_erreurs_execution_page ();
+		  		restore_error_handler();
+			if ($res === false)
+			  spip_error_handler(1,'erreur de compilation','','','');
 		}
 
-		// supprimer les boutons de debug type "FATAL"
-		if ($affiche_boutons_admin AND $flag_ob) {
-			$contenu = ob_get_contents();
-			ob_end_clean();
-			$contenu = preg_replace('/^(.*?)<!-- @@START@@ -->/ms', '',
-				$contenu);
-			ob_start();
-			echo $contenu;
-		}
+	} else $contenu = $page['texte'];
 
-	} else
-		echo $page['texte']; // page tout 'html'
-
-	// Passer la main au debuggueur le cas echeant
-	if ($var_debug)
-		debug_page();
-
-	//
-	// Et l'envoyer si on est bufferise (ce qu'il faut souhaiter)
-	// avec les entetes de cache
-	//
-	if ($flag_ob) {
-		// recuperer le contenu final de la page
-		$contenu = ob_get_contents();
-		@ob_end_clean();
+	// Passer la main au debuggueur le cas echeant 
+	if ($var_debug)	
+	  debug_dumpfile('');
+	else {
+		if (count($tableau_des_erreurs) > 0)
+			affiche_erreurs_execution_page ();
 
 		// Traiter var_recherche pour surligner les mots
 		if ($var_recherche) {
@@ -170,7 +155,7 @@ else {
 
 		// Interdire au client de cacher un login, un admin ou un recalcul
 		if ($flag_dynamique OR ($recalcul == 'oui')
-		OR $HTTP_COOKIE_VARS['spip_admin']) {
+			OR $HTTP_COOKIE_VARS['spip_admin']) {
 			@header("Cache-Control: no-cache,must-revalidate");
 			@header("Pragma: no-cache");
 		// Pour les autres donner l'heure de modif
@@ -181,15 +166,7 @@ else {
 		@header('Content-Length: '.strlen($contenu)); # ca donne quoi en gzip ?
 		@header('Connection: close');
 		echo $contenu;
-
-		// Masquer la suite en ne renvoyant rien meme en cas d'affichage
-		// Voir commentaire dans inc-public-global.php3
-		if (masquer_les_bugs(true)) ob_start('masquer_les_bugs');
 	}
-
-	// en absence de buffering on ajoute les boutons en fin de page
-	else if ($affiche_boutons_admin)
-		echo afficher_boutons_admin($use_cache);
 
 	terminer_public_global($use_cache, $page['cache']);
 }

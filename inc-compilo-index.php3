@@ -171,9 +171,10 @@ function applique_filtres($p) {
 				        $arglist = filtres_arglist($regs[2],$p);
 				}
 				if (!function_exists($fonc))
-					$code = "'".texte_script(
+					$code = "spip_error_handler(1,'".
+					  texte_script(
 						_T('erreur_filtre', array('filtre' => $fonc))
-					)."'";
+					)."','','','')";
 				else $code = "$fonc($code$arglist)";
 			}
 		}
