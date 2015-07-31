@@ -71,12 +71,15 @@ function spip_mysql_timing($m1, $m2, $query, $result)
 // traite_query pourrait y est fait d'avance, à moindre cout.
 // Les \n et \t sont utiles au debusqueur.
 
+// La parametre sous_requete n'est plus utilise
+
 function spip_mysql_select($select, $from, $where,
 			   $groupby, $orderby, $limit,
 			   $sousrequete, $having,
 			   $table, $id, $serveur) {
 
-	$query = (!$from ? '' :
+	$query = (!is_array($select) ? $select : join(", ", $select)) .
+		(!$from ? '' :
 			("\nFROM " .
 			(!is_array($from) ? $from : spip_select_as($from))))
 		. (!$where ? '' : ("\nWHERE " . (!is_array($where) ? $where : (join("\n\tAND ", array_map('calculer_where', $where))))))
@@ -84,14 +87,6 @@ function spip_mysql_select($select, $from, $where,
 		. ($having ? "\nHAVING $having" : '')
 		. ($orderby ? ("\nORDER BY " . join(", ", $orderby)) : '')
 		. ($limit ? "\nLIMIT $limit" : '');
-
-	if (!$sousrequete)
-		$query = (!is_array($select) ? $select : join(", ", $select)) . $query;
-	else
-		$query = "S_" . join(", S_", $select)
-		. " FROM (" . join(", ", $select)
-		. ", COUNT(" . $sousrequete . ") AS compteur " . $query
-		. ") AS S_$table WHERE compteur=" . $cpt;
 
 	// Erreur ? C'est du debug de squelette, ou une erreur du serveur
 
@@ -154,7 +149,7 @@ function traite_query($query) {
 	if (preg_match('/\s(SET|VALUES|WHERE)\s/i', $query, $regs)) {
 		$suite = strstr($query, $regs[0]);
 		$query = substr($query, 0, -strlen($suite));
-	}
+	} else $suite ='';
 	return preg_replace('/([,\s])spip_/', '\1'.$db.$table_pref, $query) . $suite;
 }
 

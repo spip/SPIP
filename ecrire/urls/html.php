@@ -65,8 +65,8 @@ function generer_url_document($id_document) {
 		return '';
 	if (($GLOBALS['meta']["creer_htaccess"]) == 'oui')
 		return generer_url_action('autoriser', "arg=$id_document");
-	if ($row = @spip_fetch_array(spip_query("SELECT fichier FROM spip_documents WHERE id_document = $id_document")))
-		return ($row['fichier']);
+	$row = @spip_fetch_array(spip_query("SELECT fichier FROM spip_documents WHERE id_document = $id_document"));
+	if ($row) return ($row['fichier']);
 	return '';
 }
 
@@ -86,18 +86,15 @@ function recuperer_parametres_url($fond, $url) {
 	if ($url_propre = $GLOBALS['_SERVER']['REDIRECT_url_propre']
 	OR $url_propre = $GLOBALS['HTTP_ENV_VARS']['url_propre']
 	AND preg_match(',^(article|breve|rubrique|mot|auteur|site)$,', $fond)) {
-		$url_propre = preg_replace('/^[_+-]{0,2}(.*?)[_+-]{0,2}(\.html)?$/',
-			'$1', $url_propre);
-		if ($r = spip_query("SELECT ".id_table_objet($fond)." AS id
-		FROM spip_".table_objet($fond)."
-		WHERE url_propre = '".addslashes($url_propre)."'")
-		AND $t = spip_fetch_array($r))
-			$contexte[id_table_objet($fond)] = $t['id'];
+	  $url_propre = addslashes(preg_replace('/^[_+-]{0,2}(.*?)[_+-]{0,2}(\.html)?$/',
+			'$1', $url_propre));
+		$r = "spip_" . table_objet($fond);
+		$id = id_table_objet($fond);
+		$r = spip_query("SELECT $id AS id FROM $r WHERE url_propre = '$url_propre'");
+		if ($r AND $r = spip_fetch_array($r))
+			$contexte[$id] = $r['id'];
 	}
 	/* Fin du bloc compatibilite url-propres */
-
-
-	return;
 }
 
 
