@@ -27,7 +27,6 @@ function inc_meta_dist()
 	    AND lire_fichier(_FILE_META, $meta))
 		$GLOBALS['meta'] = @unserialize($meta);
 	// sinon lire en base
-	spip_log("meta $new");
 	if (!$GLOBALS['meta']) $new = !lire_metas();
 	// renouveller l'alea au besoin
 	if (test_espace_prive()
@@ -42,7 +41,6 @@ function inc_meta_dist()
 		} else spip_log("impossible d'ecrire dans " . _FILE_META);
 	}
 	// et refaire le cache si on a du lire en base
-	spip_log("metareturn $new");
 	if (!$new) ecrire_fichier(_FILE_META, serialize($GLOBALS['meta']));
 }
 
