@@ -34,18 +34,19 @@ debut_gauche();
 
 
 debut_boite_info();
-	if ($visiteurs == "oui")
-		echo "<p class='arial1'>".propre("Vous trouverez ici les visiteurs enregistr&eacute;s
-		dans l'espace public du site (forums sur abonnement).");
-	else {
-		echo "<p class='arial1'>".propre("Vous trouverez ici tous les auteurs du site.
-		Leur statut est indiqu&eacute; par la couleur de leur icone (r&eacute;dacteur = vert; administrateur = jaune). ");
+if ($visiteurs == "oui")
+	echo "<p class='arial1'>".propre("Vous trouverez ici les visiteurs enregistr&eacute;s
+	dans l'espace public du site (forums sur abonnement).");
+else {
+	echo "<p class='arial1'>".propre("Vous trouverez ici tous les auteurs du site.
+	Leur statut est indiqu&eacute; par la couleur de leur icone (r&eacute;dacteur = vert; administrateur = jaune). ");
 
-		if ($connect_statut == '0minirezo')
-			echo '<br>'. propre ("Les auteurs ext&eacute;rieurs, sans acc&egrave;s au site, sont indiqu&eacute;s par une icone bleue&nbsp;;
-			les auteurs effac&eacute;s par une poubelle.");
-	}
+	if ($connect_statut == '0minirezo')
+		echo '<br>'. propre ("Les auteurs ext&eacute;rieurs, sans acc&egrave;s au site, sont indiqu&eacute;s par une icone bleue&nbsp;;
+		les auteurs effac&eacute;s par une poubelle.");
+}
 fin_boite_info();
+
 
 if ($connect_statut == '0minirezo') {
 	$query = "SELECT id_auteur FROM spip_auteurs WHERE statut='6forum' LIMIT 0,1";
@@ -84,20 +85,20 @@ if (($visiteurs == "oui") AND ($connect_statut == '0minirezo')) {
 
 // tri
 switch ($tri) {
-	case 'nombre':
-		$sql_order = ' ORDER BY compteur DESC, unom';
-		$type_requete = 'nombre';
-		break;
+case 'nombre':
+	$sql_order = ' ORDER BY compteur DESC, unom';
+	$type_requete = 'nombre';
+	break;
 
-	case 'statut':
-		$sql_order = ' ORDER BY auteurs.statut, unom';
-		$type_requete = 'auteur';
-		break;
+case 'statut':
+	$sql_order = ' ORDER BY auteurs.statut, unom';
+	$type_requete = 'auteur';
+	break;
 
-	case 'nom':
-	default:
-		$sql_order = ' ORDER BY unom';
-		$type_requete = 'auteur';
+case 'nom':
+default:
+	$sql_order = ' ORDER BY unom';
+	$type_requete = 'auteur';
 }
 
 
@@ -192,7 +193,7 @@ if ($connect_statut == '0minirezo') { // recuperer les admins restreints
 // Affichage
 //
 
-echo "<br><br><br>";
+echo "<br>";
 if ($visiteurs=='oui')
 	gros_titre("Visiteurs");
 else
@@ -200,7 +201,7 @@ else
 echo "<p>";
 
 // reglage du debut
-$max_par_page = 50;
+$max_par_page = 30;
 if ($debut > $nombre_auteurs - $max_par_page)
 	$debut = max(0,$nombre_auteurs - $max_par_page);
 $fin = min($nombre_auteurs, $debut + $max_par_page);
@@ -227,19 +228,19 @@ echo "</td><td>";
 	else
 		echo "<a href='auteurs.php3?tri=nom' title='Trier par nom'>Nom</a>";
 
-echo "</td><td colspan='2'>Contact";
+if ($options == 'avancees') echo "</td><td colspan='2'>Contact";
 echo "</td><td>";
 	if ($visiteurs != 'oui') {
 		if ($tri=='nombre')
 			echo '<b>Articles</b>';
 		else
-			echo "<a href='auteurs.php3?tri=nombre' title=\"Trier par nombre d'articles\">Articles</a>";
+			echo "<a href='auteurs.php3?tri=nombre' title=\"Trier par nombre d'articles\">Articles</a>"; //'
 	}
 echo "</td></tr>\n";
 
 if ($nombre_auteurs > $max_par_page) {
-	echo "<tr bgcolor='white'><td colspan=5>";
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
+	echo "<tr bgcolor='white'><td colspan='".($options == 'avancees' ? 5 : 3)."'>";
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
 	for ($j=0; $j < $nombre_auteurs; $j+=$max_par_page) {
 		if ($j > 0) echo " | ";
 
@@ -258,9 +259,9 @@ if ($nombre_auteurs > $max_par_page) {
 	echo "</font>";
 	echo "</td></tr>\n";
 
-	if ($tri == 'nom' OR !$tri) {
+	if (($tri == 'nom' OR !$tri) AND $options == 'avancees') {
 		// affichage des lettres
-		echo "<tr bgcolor='white'><td colspan=5>";
+		echo "<tr bgcolor='white'><td colspan='5'>";
 		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 		while (list($key,$val) = each($lettre)) {
 			if ($val == $debut)
@@ -271,23 +272,12 @@ if ($nombre_auteurs > $max_par_page) {
 		echo "</font>";
 		echo "</td></tr>\n";
 	}
-
-
-	$debut_prec = max($debut - $max_par_page,0);
-	if ($debut > 0) {
-		echo "<tr bgcolor='white'><td colspan=5>";
-		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
-		echo "<a href='$myretour&debut=$debut_prec'><<<</a>";
-		echo "</font>";
-		echo "</td></tr>\n";
-	}
+	echo "<tr height='5'></tr>";
 }
 
 
 
-
 while ($i++ <= $fin && (list(,$row) = each ($auteurs))) {
-
 	// couleur de ligne
 	$couleur = ($i % 2) ? '#FFFFFF' : $couleur_claire;
 	echo "<tr bgcolor='$couleur'>";
@@ -305,20 +295,22 @@ while ($i++ <= $fin && (list(,$row) = each ($auteurs))) {
 
 
 	// contact
-	echo '</td><td>';
-	if ($row['messagerie'] == 'oui' AND $row['login']
-	AND $activer_messagerie != "non" AND $connect_activer_messagerie != "non" AND $messagerie != "non")
-		echo bouton_imessage($row['id_auteur'],"force")."&nbsp;";
-	if ($connect_statut=="0minirezo")
-		if (strlen($row['email'])>3)
-			echo "<A HREF='mailto:".$row['email']."'>email</A>";
-		else
-			echo "&nbsp;";
+	if ($options == 'avancees') {
+		echo '</td><td>';
+		if ($row['messagerie'] == 'oui' AND $row['login']
+		AND $activer_messagerie != "non" AND $connect_activer_messagerie != "non" AND $messagerie != "non")
+			echo bouton_imessage($row['id_auteur'],"force")."&nbsp;";
+		if ($connect_statut=="0minirezo")
+			if (strlen($row['email'])>3)
+				echo "<A HREF='mailto:".$row['email']."'>email</A>";
+			else
+				echo "&nbsp;";
 
-	if (strlen($row['url_site'])>3)
-		echo "</td><td><A HREF='".$row['url_site']."'>site</A>";
-	else
-		echo "</td><td>&nbsp;";
+		if (strlen($row['url_site'])>3)
+			echo "</td><td><A HREF='".$row['url_site']."'>site</A>";
+		else
+			echo "</td><td>&nbsp;";
+	}
 
 	// nombre d'articles
 	echo '</td><td>';
@@ -332,16 +324,38 @@ while ($i++ <= $fin && (list(,$row) = each ($auteurs))) {
 	echo "</td></tr>\n";
 }
 
+echo "</table>\n";
+
+
+echo "<a name='bas'>";
+echo "<table width='100%' border='0'>";
+
 $debut_suivant = $debut + $max_par_page;
-if ($debut_suivant < $nombre_auteurs) {
-		echo "<tr bgcolor='white'><td colspan=5>";
-		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
-	echo "<div align='right'><a href='$myretour&debut=$debut_suivant'>>>></a></div>";
-		echo "</font>";
-		echo "</td></tr>\n";
+if ($debut_suivant < $nombre_auteurs OR $debut > 0) {
+	echo "<tr height='10'></tr>";
+	echo "<tr bgcolor='white'><td align='left'>";
+	if ($debut > 0) {
+		$debut_prec = strval(max($debut - $max_par_page, 0));
+		$link = new Link;
+		$link->addVar('debut', $debut_prec);
+		echo $link->getForm('GET', 'bas');
+		echo "<input type='submit' name='submit' value='&lt;&lt;&lt;' class='fondo'>";
+		echo "</form>";
+		//echo "<a href='$myretour&debut=$debut_prec'>&lt;&lt;&lt;</a>";
+	}
+	echo "</td><td align='right'>";
+	if ($debut_suivant < $nombre_auteurs) {
+		$link = new Link;
+		$link->addVar('debut', $debut_suivant);
+		echo $link->getForm('GET', 'bas');
+		echo "<input type='submit' name='submit' value='&gt;&gt;&gt;' class='fondo'>";
+		echo "</form>";
+		//echo "<a href='$myretour&debut=$debut_suivant'>&gt;&gt;&gt;</a>";
+	}
+	echo "</td></tr>\n";
 }
 
-echo "</TABLE>\n";
+echo "</table>\n";
 
 
 

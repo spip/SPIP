@@ -1324,7 +1324,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			icone_bandeau_principal ('Informations personnelles', "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-48.gif", "redacteurs", $rubrique);
 		}
 		if ($options == "avancees") {
-			if ($connect_statut == "0minirezo") 
+			if ($connect_statut == "0minirezo")
 				icone_bandeau_principal ("Forums et p&eacute;titions", "forum.php3", "messagerie-48.gif", "messagerie", $rubrique);
 			else
 				icone_bandeau_principal ("Forum interne", "forum.php3", "messagerie-48.gif", "messagerie", $rubrique);
@@ -1389,8 +1389,8 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		}
 	}
 	else if ($rubrique == "redacteurs"){
-		if ($options == "avancees")
-			icone_bandeau_secondaire ("Les auteurs", "auteurs.php3", "redacteurs-24.gif", "redacteurs", $sous_rubrique);
+		if ($options == "avancees" OR $connect_statut == "0minirezo")
+			icone_bandeau_secondaire ("Tous les auteurs", "auteurs.php3", "redacteurs-24.gif", "redacteurs", $sous_rubrique);
 
 		icone_bandeau_secondaire ("Informations personnelles", "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-24.gif", "perso", $sous_rubrique);
 	}
