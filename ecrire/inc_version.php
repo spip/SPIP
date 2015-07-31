@@ -128,7 +128,7 @@ $type_urls = 'page';
 
 // Creation des images avec ImageMagick : definir la constante de facon
 // a preciser le chemin du binaire et les options souhaitees. Par defaut :
-// define('_CONVERT_COMMAND', 'convert -quality 85 -resize %xx%y %src %dest');
+// define('_CONVERT_COMMAND', 'convert -quality 85 -resize %xx%y! %src %dest');
 
 // Creation des vignettes avec netpbm/pnmscale
 // Note: plus facile a installer par FTP,
