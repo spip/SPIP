@@ -59,8 +59,11 @@ function init_config() {
 
 		'creer_htpasswd' => 'non',
 		
-		'langue_site' => $lang
+		'langue_site' => $lang,
 		
+		'multi_articles' => 'non',
+		'multi_rubriques' => 'non'
+
 	);
 	while (list($nom, $valeur) = each($liste_meta)) {
 		if (!lire_meta($nom)) {
@@ -211,7 +214,10 @@ function appliquer_modifs_config() {
 		'documents_article',
 		'documents_rubrique',
 
-		'charset'
+		'charset',
+		'multi_articles',
+		'multi_rubriques'
+		
 	);
 	while (list(,$i) = each($liste_meta))
 		if (isset($GLOBALS[$i])) ecrire_meta($i, $GLOBALS[$i]);

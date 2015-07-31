@@ -436,4 +436,32 @@ function extra ($letexte,$champ) {
 	return interdire_scripts($champs[$champ]);
 }
 
+
+//
+// Fonctions de langue
+//
+
+// <body[ dir="(#LANG|lang_rtl)"]> pour l'ecriture droite->gauche
+function lang_rtl ($lang) {
+	include_ecrire('inc_lang.php3');
+	if ($lang=='fa' OR $lang=='ar')
+		return 'rtl';
+}
+
+// selectionner une langue
+function lang_select ($lang='') {
+	global $pile_langues, $spip_lang;
+	include_ecrire('inc_lang.php3');
+	array_push($pile_langues, $spip_lang);
+	changer_langue($lang);
+}
+
+// revenir a la langue precedente
+function lang_dselect ($rien='') {
+	global $pile_langues;
+	include_ecrire('inc_lang.php3');
+	changer_langue(array_pop($pile_langues));
+}
+
+
 ?>

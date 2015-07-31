@@ -228,7 +228,7 @@ function parser_boucle($texte, $id_parent) {
 				if ($type == 'articles') {
 					$s = "$table.id_article,$table.id_rubrique,$table.id_secteur,".
 						"$table.surtitre,$table.titre,$table.soustitre,$table.date,$table.date_redac,$table.date_modif,".
-						"$table.visites,$table.popularite,$table.statut,$table.accepter_forum";
+						"$table.visites,$table.popularite,$table.statut,$table.accepter_forum,$table.lang";
 					if (ereg('\#(TEXTE|INTRODUCTION)', $milieu)) {
 						$s .= ",$table.texte";
 					}
@@ -835,7 +835,7 @@ function parser($texte) {
 		'ID_ARTICLE', 'ID_RUBRIQUE', 'ID_BREVE', 'ID_FORUM', 'ID_PARENT', 'ID_SECTEUR', 'ID_DOCUMENT', 'ID_TYPE',
 		'ID_AUTEUR', 'ID_MOT', 'ID_SYNDIC_ARTICLE', 'ID_SYNDIC', 'ID_SIGNATURE', 'ID_GROUPE',
 		'TITRE', 'SURTITRE', 'SOUSTITRE', 'DESCRIPTIF', 'CHAPO', 'TEXTE', 'PS', 'NOTES', 'INTRODUCTION', 'MESSAGE',
-		'DATE', 'DATE_REDAC', 'DATE_MODIF', 'DATE_NOUVEAUTES', 'INCLUS',
+		'DATE', 'DATE_REDAC', 'DATE_MODIF', 'DATE_NOUVEAUTES', 'INCLUS', 'LANG',
 		'LESAUTEURS', 'EMAIL', 'NOM_SITE', 'LIEN_TITRE', 'URL_SITE', 'LIEN_URL', 'NOM', 'BIO', 'TYPE', 'PGP',
 		'FORMULAIRE_ECRIRE_AUTEUR', 'FORMULAIRE_FORUM', 'FORMULAIRE_SITE', 'PARAMETRES_FORUM', 'FORMULAIRE_RECHERCHE', 'RECHERCHE', 'FORMULAIRE_INSCRIPTION', 'FORMULAIRE_SIGNATURE',
 		'LOGO_MOT', 'LOGO_RUBRIQUE', 'LOGO_RUBRIQUE_NORMAL', 'LOGO_RUBRIQUE_SURVOL',
@@ -932,6 +932,7 @@ function parser($texte) {
 		'CHAPO' => 'chapo',
 		'TEXTE' => 'texte',
 		'PS' => 'ps',
+		'LANG' => 'lang',
 		'DATE' => 'date',
 		'DATE_REDAC' => 'date_redac',
 		'DATE_MODIF' => 'date_modif',
@@ -946,6 +947,7 @@ function parser($texte) {
 		'NOM_SITE' => 'nom_site',
 		'URL_SITE' => 'url_site',
 		'PGP' => 'pgp',
+		'LANG' => 'lang',
 		'POINTS' => 'points'
 	);
 	$rows_breves = array(
@@ -1015,6 +1017,7 @@ function parser($texte) {
 		'TITRE' => 'titre',
 		'DESCRIPTIF' => 'descriptif',
 		'TEXTE' => 'texte',
+		'LANG' => 'lang',
 		'DATE' => 'date',
 		'POINTS' => 'points'
 	);

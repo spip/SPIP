@@ -370,6 +370,23 @@ if (strlen($texte) > 1) {
 	echo "&nbsp;</font></div>";
 }
 
+//
+// Langue de la rubrique
+//
+if ((lire_meta('multi_rubriques') <> 'non') AND ($connect_statut == '0minirezo')) {
+	if ($changer_lang)
+		spip_query("UPDATE spip_rubriques SET lang='".addslashes($changer_lang)."' WHERE id_rubrique=$coll");
+
+	$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$coll"));
+	$langue_rubrique = $row['lang'];
+
+	$langue_default = ($langue_rubrique ? $langue_rubrique : '--');
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='1'>";
+	echo menu_langues('changer_lang', $langue_default, _T('info_multi_cette_rubrique').' ');
+	echo "</font>\n";
+}
+
+
 fin_cadre_relief();
 
 

@@ -1270,6 +1270,23 @@ afficher_documents_non_inclus($id_article, "article", $flag_editable);
 
 
 //
+// Langue de l'article
+//
+if ((lire_meta('multi_articles') <> 'non') AND ($connect_statut == '0minirezo')) {
+	if ($changer_lang)
+		spip_query("UPDATE spip_articles SET lang='".addslashes($changer_lang)."' WHERE id_article=$id_article");
+
+	$row = spip_fetch_array(spip_query("SELECT lang FROM spip_articles WHERE id_article=$id_article"));
+	$langue_article = $row['lang'];
+
+	$langue_default = ($langue_article ? $langue_article : '--');
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='1'>";
+	echo menu_langues('changer_lang', $langue_default, _T('info_multi_cet_article').' ');
+	echo "</font>\n";
+}
+
+
+//
 // "Demander la publication"
 //
 
