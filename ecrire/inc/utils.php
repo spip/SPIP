@@ -1358,8 +1358,8 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 	// charger les meta si possible et renouveller l'alea au besoin
 	// charge aussi effacer_meta et ecrire_meta
-	$init_meta = charger_fonction('meta', 'inc'); 
-	$init_meta();
+	$base_meta = charger_fonction('meta', 'base'); 
+	$base_meta();
 
 	// nombre de repertoires depuis la racine
 	// on compare a l'adresse donnee en meta ; si celle-ci est fausse

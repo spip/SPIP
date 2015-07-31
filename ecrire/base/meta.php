@@ -16,13 +16,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Recopie dans le tableau PHP global meta, car on en a souvent besoin
 
 // http://doc.spip.org/@inc_meta_dist
-function inc_meta_dist()
+function base_meta_dist()
 {
 	// Lire les meta, en cache si present, valide et lisible
-	if ($old = (jeune_fichier(_FILE_META, 1<<24)
-			AND lire_fichier(_FILE_META, $meta)))
+	if ($old = jeune_fichier(_FILE_META, 1<<24)
+#   AND (@filemtime(_FILE_META) > @filemtime(_DIR_RESTREINT . '.svn/entries'))
+	    AND lire_fichier(_FILE_META, $meta))
 		$GLOBALS['meta'] = @unserialize($meta);
 	// sinon lire en base
+
 	if (!$GLOBALS['meta']) $old = !lire_metas();
 	// renouveller l'alea au besoin
 	if (test_espace_prive()
