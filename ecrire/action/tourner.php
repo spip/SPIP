@@ -103,7 +103,7 @@ function action_tourner_post($r)
 					'spip_table_objet' => 'spip_documents',
 					'type' =>'document',
 					'id_objet' => $arg,
-					'champs' => array('rotation'=>$var_rot,'fichier'=>$row),
+					'champs' => array('rotation'=>$r[2],'orientation'=>$var_rot,'fichier'=>$row),
 					'serveur' => $serveur,
 					'action'=>'tourner',
 				),
