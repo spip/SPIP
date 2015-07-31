@@ -2196,10 +2196,10 @@ function init_body($rubrique='asuivre', $sous_rubrique='asuivre', $onLoad='', $i
 
 	$id_rubrique = intval($id_rubrique);
 
-	echo "<body ". _ATTRIBUTES_BODY
+	echo pipeline('body_prive',"<body ". _ATTRIBUTES_BODY
 		. 'onLoad="'
 		. "setActiveStyleSheet('invisible');$browser_verifForm$onLoad"
-		. '">';
+		. '">');
 
 	if ($spip_ecran == "large") $largeur = 974;
 	else $largeur = 750;
