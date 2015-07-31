@@ -1,5 +1,5 @@
 ##############################################################
-# Fichier .htaccess                                SPIP v1.8 #
+# Fichier .htaccess                                SPIP v1.9 #
 #                                                            #
 # Permet de controler les URLs et la version de php utilisee #
 # Compatible avec les URLs 'html', 'propres' et 'propres2'   #

@@ -614,19 +614,17 @@ function critere_optimisation($table) {
 
 function effectuer_une_indexation($nombre_indexations = 1) {
 	global $INDEX_iteration_nb_maxi;
-	// chercher un objet a indexer dans chacune des tables d'objets
 	$vu = array();
-	$tables = liste_index_tables();
 
-	while (list(,$table) = each($tables)) {
-		$table_index = 'spip_index';
+	// chercher un objet a indexer dans chacune des tables d'objets
+	foreach (liste_index_tables() as $table) {
+
 		$table_primary = primary_index_table($table);
-
 		$critere = critere_indexation($table);
 
 		$limit = $nombre_indexations;
 		if (isset($INDEX_iteration_nb_maxi[$table]))
-		  $limit = min($limit,$INDEX_iteration_nb_maxi[$table]);
+			$limit = min($limit,$INDEX_iteration_nb_maxi[$table]);
 
 		// indexer en priorite les '1' (a reindexer), ensuite les ''
 		// (statut d'indexation inconnu), enfin les 'idx' (ceux dont
@@ -637,7 +635,7 @@ function effectuer_une_indexation($nombre_indexations = 1) {
 				$vu[$table] .= $t['id'].", ";
 				indexer_objet($table, $t['id'], $mode);
 			}
-			if ($vu) break;
+			if ($vu[$table]) break;
 		}
 	}
 	return $vu;
