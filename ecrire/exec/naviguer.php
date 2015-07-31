@@ -321,8 +321,8 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 		if ($id_rubrique == 0 
 		AND autoriser('publierdans','rubrique',$id_rubrique)) {
 	
-			$cpt = sql_fetsel("COUNT(*) AS n", "spip_syndic_articles", "statut='dispo'");
-			if ($cpt = $cpt['n'])
+			$cpt = sql_countsel("spip_syndic_articles", "statut='dispo'");
+			if ($cpt)
 				$res .= "<br /><small><a href='" .
 					generer_url_ecrire("sites_tous") .
 					"' style='color: black;'>" .

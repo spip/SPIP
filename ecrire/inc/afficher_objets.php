@@ -189,8 +189,8 @@ function afficher_complement_site($row){
 	}
 	if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		$id_syndic = $row['id_syndic'];
-		$total_art = sql_fetsel("COUNT(*) AS n", "spip_syndic_articles", "id_syndic=$id_syndic");
-		$s .= " " . $total_art['n'] . " " . _T('info_syndication_articles');
+		$total_art = sql_countsel("spip_syndic_articles", "id_syndic=$id_syndic");
+		$s .= " " . $total_art . " " . _T('info_syndication_articles');
 	} else {
 			$s .= "&nbsp;";
 	}

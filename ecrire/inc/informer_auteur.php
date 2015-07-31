@@ -27,11 +27,11 @@ function inc_informer_auteur_dist($id)
 		$nom = typo(extraire_multi($row["nom"]));
 		$bio = propre($row["bio"]);
 		$mail = formater_auteur_mail($row, $id);
-		$nb = sql_fetsel("COUNT(*) AS n", "spip_auteurs_articles", "id_auteur=$id");
-		if ($nb['n'] > 1)
-		  $nb = $nb['n']."&nbsp;"._T('info_article_2');
-		else if($nb['n'] == 1)
-		  $nb = "1&nbsp;"._T('info_article');
+		$nb = sql_countsel("spip_auteurs_articles", "id_auteur=$id");
+		if ($nb > 1)
+		  $nb = $nb . "&nbsp;" . _T('info_article_2');
+		else if($nb == 1)
+		  $nb = "1&nbsp;" . _T('info_article');
 		else $nb = "&nbsp;";
 	} else {
 		$nom = "<span style='color:red'>"

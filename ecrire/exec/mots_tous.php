@@ -102,8 +102,7 @@ function exec_mots_tous_dist()
 		// Afficher les mots-cles du groupe
 		//
 
-		$groupe = sql_fetsel("COUNT(*) AS n", "spip_mots", "id_groupe=$id_groupe");
-		$groupe = $groupe['n'];
+		$groupe = sql_countsel("spip_mots", "id_groupe=$id_groupe");
 
 		echo "<div\nid='editer_mots-$id_groupe' style='position: relative;'>";
 

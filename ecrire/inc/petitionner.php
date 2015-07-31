@@ -72,8 +72,7 @@ function petitionner_choisir($petition)
 // http://doc.spip.org/@petitionner_decompte
 function petitionner_decompte($id_article, $petition)
 {
-	$signatures = sql_fetsel("COUNT(*) AS count", "spip_signatures", "id_article=$id_article AND statut IN ('publie', 'poubelle')");
-	$signatures = $signatures['count'];
+	$signatures = sql_countsel("spip_signatures", "id_article=$id_article AND statut IN ('publie', 'poubelle')");
 	if (!$signatures) return '';
 
 	return '<!-- visible -->' // message pour l'appelant

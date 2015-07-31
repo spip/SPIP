@@ -29,9 +29,9 @@ function action_referencer_traduction_dist() {
 	  // supprimer le lien de traduction
 		sql_updateq("spip_articles", array("id_trad" => 0), "id_article=" . $r[1]);
 		// Verifier si l'ancien groupe ne comporte plus qu'un seul article. Alors mettre a zero.
-		$cpt = sql_fetsel("COUNT(*) AS n", "spip_articles", "id_trad=" . $r[2]);
+		$cpt = sql_countsel("spip_articles", "id_trad=" . $r[2]);
 
-		if ($cpt['n'] == 1)
+		if ($cpt == 1)
 			sql_updateq("spip_articles", array("id_trad" => 0), "id_trad=" . $r[2]);
 	} elseif (preg_match(",^(\d+)\D(\d+)\D(\d+)$,", $arg, $r)) {
 	  // modifier le groupe de traduction de $r[1] (SQL le trouvera)
