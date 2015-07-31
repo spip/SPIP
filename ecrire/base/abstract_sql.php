@@ -603,8 +603,8 @@ function description_table($nom){
 	if (isset($tables_auxiliaires[$nom]))
 		return $tables_auxiliaires[$nom];
 
-	if (!$f) $f = charger_fonction('trouver_table', 'base');
-	return $f($nom);
+	if (!$trouver_table) $trouver_table = charger_fonction('trouver_table', 'base');
+	return $trouver_table($nom);
 }
 
 
