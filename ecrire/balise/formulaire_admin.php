@@ -150,36 +150,43 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	} else
 		$lang = '';
 
+	// Preparer le #ENV des boutons
+	$env = array(
+		'ecrire' => $ecrire,
+		'action' => self(),
+		'divclass' => $float,
+		'lang' => $lang,
+		'calcul' => (_request('var_mode') ? 'recalcul' : 'calcul'),
+	);
 
-	return array('formulaires/formulaire_admin', 0,
-		array(
-			'id_article' => $id_article,
-			'id_rubrique' => $id_rubrique,
-			'id_auteur' => $id_auteur,
-			'id_breve' => $id_breve,
-			'id_mot' => $id_mot,
-			'id_syndic' => $id_syndic,
-			'voir_article' => str_replace('&amp;', '&', generer_url_ecrire_article($id_article, 'prop')),
-			'voir_breve' => str_replace('&amp;', '&', generer_url_ecrire_breve($id_breve, 'prop')),
-			'voir_rubrique' => str_replace('&amp;', '&', generer_url_ecrire_rubrique($id_rubrique, 'prop')),
-			'voir_mot' => str_replace('&amp;', '&', generer_url_ecrire_mot($id_mot, 'prop')),
-			'voir_site' => str_replace('&amp;', '&', generer_url_ecrire_site($id_syndic, 'prop')),
-			'voir_auteur' => str_replace('&amp;', '&', generer_url_ecrire_auteur($id_auteur, 'prop')),
-			'ecrire' => $ecrire,
-			'action' => self(),
-			'preview' => $preview?parametre_url(self(),'var_mode','preview','&'):'',
-			'debug' => $debug,
-			'popularite' => $popularite,
-			'statistiques' => $statistiques,
-			'visites' => $visites,
-			'use_cache' => ($use_cache ? '' : ' *'),
-			'divclass' => $float,
-			'analyser' => $analyser,
-			'lang' => $lang,
-			'calcul' => (_request('var_mode') ? 'recalcul' : 'calcul'),
-			'xhtml_error' => isset($GLOBALS['xhtml_error']) ? $GLOBALS['xhtml_error'] : ''
-			)
-		     );
+	if ($preview)
+		$env['preview']=parametre_url(self(),'var_mode','preview','&');
+	if ($debug)
+		$env['debug'] = $debug;
+	if ($statistiques) {
+		$env['popularite'] = $popularite;
+		$env['statistiques'] = $statistiques;
+		$env['visites'] = $visites;
+	}
+	if (!$use_cache)
+		$env['use_cache'] = ' *';
+	if ($analyser)
+		$env['analyser'] = $analyser;
+	if (isset($GLOBALS['xhtml_error']))
+		$env['xhtml_error'] = $GLOBALS['xhtml_error'];
+
+	foreach (array('article','rubrique','auteur','breve','mot','syndic'=>'site')
+	as $id => $obj) {
+		if (is_int($id)) $id = $obj;
+		if (${'id_'.$id}) {
+			$env['id_'.$id] = ${'id_'.$id};
+			$g = 'generer_url_ecrire_'.$obj;
+			$env['voir_'.$obj] = str_replace('&amp;', '&',
+				$g(${'id_'.$id}, 'prop'));
+		}
+	}
+
+	return array('formulaires/formulaire_admin', 0, $env);
 }
 
 ?>
