@@ -36,7 +36,7 @@ function boutons_admin_debug () {
 		$link = $GLOBALS['clean_link'];
 		if ($link->getvar('var_afficher_debug') != '') {
 			$link->delvar('var_afficher_debug');
-			$link->delvar('recalcul');
+			$link->addvar('recalcul', 'oui');
 			$ret .= bouton_admin(_T('icone_retour'), $link->getUrl());
 		}
 	}
@@ -110,6 +110,22 @@ function afficher_boutons_admin($pop) {
 	return $ret;
 }
 
+function calcul_admin_page($cached, $texte) {
+	$a = '<'.'?php echo afficher_boutons_admin("'. ($cached ? ' *' : '').'"); ?'.'>';
+
+	// La constante doit etre definie a l'identique dans inc-form-squel
+	// balise #FORMULAIRE_ADMIN ? sinon ajouter en fin de page
+	if (!(strpos($texte, '<!-- @@formulaire_admin@@45609871@@ -->') === false))
+		$texte = str_replace('<!-- @@formulaire_admin@@45609871@@ -->', $a, $texte);
+	else if (eregi('</(body|html)>', $texte, $regs))
+		$texte = str_replace($regs[0], $a.$regs[0], $texte);
+	else
+		$texte .= $a;
+
+	return $texte;
+}
+
+
 function page_debug($type,$texte,$fichier) {
 	@header('Content-Type: text/html; charset='.lire_meta('charset'));
 	echo "<html><head><title>Debug $type : $fichier</title>
@@ -124,5 +140,6 @@ function page_debug($type,$texte,$fichier) {
 	echo "</ul></div><hr />\n";
 	highlight_string($texte);
 }
+
 
 ?>
