@@ -98,6 +98,7 @@ if ($GLOBALS["recherche"]) {
 	$recherche = $GLOBALS["recherche"];
 
 
+
 	$query_articles = "SELECT * FROM spip_articles WHERE";
 	$query_breves = "SELECT * FROM spip_breves WHERE ";
 	$query_rubriques = "SELECT * FROM spip_rubriques WHERE ";

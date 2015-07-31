@@ -294,8 +294,7 @@ fin_cadre_relief();
 
 
 ///// Afficher les rubriques 
-afficher_enfant_rub($id_rubrique, $flag_editable);
-
+ afficher_enfant_rub($id_rubrique, $flag_editable);
 
 
 //echo "<div align='$spip_lang_left'>";

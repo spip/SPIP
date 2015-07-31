@@ -1073,7 +1073,7 @@ function afficher_rubriques($titre_table, $requete) {
 	global $connect_id_auteur;
 	global $spip_lang_rtl;
 
-	$tranches = afficher_tranches_requete($requete, 2);
+	$tranches = afficher_tranches_requete($requete, 3);
 
 	if (strlen($tranches)) {
 
@@ -1098,25 +1098,35 @@ function afficher_rubriques($titre_table, $requete) {
 			$id_parent = $row['id_parent'];
 			$tous_id[] = $id_rubrique;
 			$titre = $row['titre'];
+			$lang = traduire_nom_langue($row['lang']);
+			$langue_choisie = $row['langue_choisie'];
+			
+			if ($langue_choisie == "oui") $lang = "<b>$lang</b>";
+			else $lang = "($lang)";
 			
 			if ($id_parent == 0) $puce = "secteur-12.gif";
 			else $puce = "rubrique-12.gif";
 
+			$s = http_img_pack($puce, '- ', "border='0'");
+			$vals[] = $s;
+	
 			$s = "<b><a href=\"naviguer.php3?id_rubrique=$id_rubrique\">";
-			$s .= http_img_pack($puce, '- ', "border='0'");
 			$s .= typo($titre);
 			$s .= "</A></b>";
 			$vals[] = $s;
 
 			$s = "<div align=\"right\">";
+			if  (lire_meta('multi_rubriques') == 'oui') {
+				$s .= ($lang);
+			}
 			$s .= "</div>";
 			$vals[] = $s;
 			$table[] = $vals;
 		}
 		spip_free_result($result);
 
-		$largeurs = array('', '');
-		$styles = array('arial2', 'arial2');
+		$largeurs = array('12','', '');
+		$styles = array('', 'arial2', 'arial11');
 		afficher_liste($largeurs, $table, $styles);
 
 		echo "</TABLE>";
