@@ -255,7 +255,7 @@ wird Ihre Adresse beibehalten):
 	'form_email_non_valide' => 'Ihre E-Mail-Adresse ist ungültig.',
 	'form_forum_access_refuse' => 'Sie haben keinen Zugang mehr zu dieser Website.',
 	'form_forum_bonjour' => 'Hallo @nom@,',
-	'form_forum_confirmer_email' => 'Bitte öffnen sie folgenden URL zum Bestätigen ihrer Maiadresse: @url_confirm@',
+	'form_forum_confirmer_email' => 'Bitte öffnen sie folgenden URL zum Bestätigen ihrer Mailadresse: @url_confirm@',
 	'form_forum_email_deja_enregistre' => 'Diese E-Mail-Adresse ist bereits eingetragen. Sie können also Ihr normals Passwort verwenden.',
 	'form_forum_identifiant_mail' => 'Ihre neuen Zugangsdaten wurden Ihnen per Mail zugestellt.',
 	'form_forum_identifiants' => 'Persönliche Zugangsdaten',
