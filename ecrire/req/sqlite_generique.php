@@ -837,10 +837,10 @@ function spip_sqlite_optimize($table, $serveur='', $requeter=true) {
 
 // avoir le meme comportement que _q()
 function spip_sqlite_quote($v, $type=''){
+	if (is_array($v)) return join(",", array_map('spip_sqlite_quote', $v));
 	if (is_int($v)) return strval($v);
 	if (strncmp($v,'0x',2)==0 AND ctype_xdigit(substr($v,2))) return hexdec(substr($v,2));
 	if ($type === 'int' AND !$v) return '0';
-	if (is_array($v)) return join(",", array_map('spip_sqlite_quote', $v));
 
 	if (function_exists('sqlite_escape_string')) {
 		return "'" . sqlite_escape_string($v) . "'";
