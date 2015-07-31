@@ -503,7 +503,9 @@ function spip_optim_select ($select = array(), $from = array(),
 	for($k = count($join); $k > 0; $k--) {
 		list($t,$c) = $join[$k];
 		$cle = "L$k";
-		if (!$menage OR spip_optim_joint($cle, $join, $where))
+		if (!$menage
+		OR spip_optim_joint($cle, $join)
+		OR spip_optim_joint($cle, $where))
 			$where[]= "$t.$c=$cle.$c";
 		else { unset($from[$cle]); unset($join[$k]);}
 	}
@@ -517,15 +519,15 @@ function spip_optim_select ($select = array(), $from = array(),
 
 //condition suffisante (mais non necessaire) pour qu'une jointure soit inutile
 
-function spip_optim_joint($cle, $join, $where)
+function spip_optim_joint($cle, $exp)
 {
-	foreach($where as $v) {
-		if (strpos($v, "$cle.") !== false) return true;
+	if (!is_array($exp))
+		return	(strpos($exp, "$cle.") === false) ? false : true;
+	else {
+		foreach($exp as $v) {
+			if (spip_optim_joint($cle, $v)) return true;
+		}
+		return false;
 	}
-	foreach($join as $k => $v) {
-		list($t,$c) = $v;
-		if ($t == $cle) return true;
-	}
-	return false;
 }
 ?>
