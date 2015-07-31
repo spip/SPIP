@@ -54,6 +54,7 @@ function spip_query_db($query) {
 
 	if ($s = mysql_error()) {
 		if ($my_debug) {
+			include_spip('public/debug');
 			echo _T('info_erreur_requete')." ".htmlentities($query)."<br>";
 			echo "&laquo; ".htmlentities($s)." &raquo;<p>";
 		}
@@ -102,7 +103,7 @@ function spip_mysql_select($select, $from, $where,
 	}
 
 	if (!($res = @spip_query($q))) {
-		include_spip('inc/debug');
+		include_spip('public/debug');
 		erreur_requete_boucle($q, $id, $table,
 				      spip_sql_errno(),
 				      spip_sql_error());
