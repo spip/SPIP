@@ -105,6 +105,8 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 	} else if ($login == '-1')
 		$login = '';
 
+	$flag_autres_sources = $GLOBALS['ldap_present'];
+
 	// quels sont les aleas a passer ?
 	if ($login) {
 		$login = addslashes($login);
@@ -112,9 +114,10 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 		$result = spip_query($query);
 		if ($row = mysql_fetch_array($result)) {
 			$id_auteur = $row['id_auteur'];
+			$source_auteur = $row['source'];
 			$alea_actuel = $row['alea_actuel'];
 			$alea_futur = $row['alea_futur'];
-		} else {
+		} else if (!$flag_autres_sources) {
 			$erreur = "L'identifiant &laquo; $login &raquo; est inconnu.";
 			$login = '';
 			@setcookie("spip_admin", "", time() - 3600);
@@ -140,10 +143,12 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 	}
 
 	if ($login) {
-		// affiche formulaire de login en incluant le javascript MD5
-		echo "<script type=\"text/javascript\" src=\"ecrire/md5.js\"></script>";
+		// Affiche formulaire de login en incluant le javascript MD5
+		$flag_challenge_md5 = ($source_auteur == 'spip');
+
+		if ($flag_challenge_md5) echo "<script type=\"text/javascript\" src=\"ecrire/md5.js\"></script>";
 		echo "<form name='form_login' action='./spip_cookie.php3' method='post'";
-		echo " onSubmit='if (this.session_password.value) {
+		if ($flag_challenge_md5) echo " onSubmit='if (this.session_password.value) {
 				this.session_password_md5.value = calcMD5(\"$alea_actuel\" + this.session_password.value);
 				this.next_session_password_md5.value = calcMD5(\"$alea_futur\" + this.session_password.value);
 				this.session_password.value = \"\";
@@ -152,21 +157,24 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 		echo "<div class='spip_encadrer'>";
 		if ($erreur) echo "<div class='reponse_formulaire'><b>$erreur</b></div><p>";
 
-		// si jaja actif, on affiche le login en 'dur', et on le passe en champ hidden
-		echo "<script type=\"text/javascript\"><!--\n" .
-			"document.write('Login : <b>$login</b> <br><font size=\\'2\\'>[<a href=\\'spip_cookie.php3?cookie_admin=non&url=".rawurlencode($clean_link->getUrl())."\\'>se connecter sous un autre identifiant</a>]</font>');\n" .
-			"//--></script>\n";
-		echo "<input type='hidden' name='session_login_hidden' value='$login'>";
-
-		// si jaja inactif, le login est modifiable (puisque le challenge n'est pas utilise)
-		echo "<noscript>";
-		echo "<font face='Georgia, Garamond, Times, serif' size='3'>";
-		echo "Attention, ce formulaire n'est pas s&eacute;curis&eacute;. ";
-		echo "Si vous ne voulez pas que votre mot de passe puisse &ecirc;tre ";
-		echo "intercept&eacute; sur le r&eacute;seau, veuillez activer Javascript ";
-		echo "dans votre navigateur et <a href=\"".$clean_link->getUrl()."\">recharger cette page</a>.<p></font>\n";
+		if ($flag_challenge_md5) {
+			// si jaja actif, on affiche le login en 'dur', et on le passe en champ hidden
+			echo "<script type=\"text/javascript\"><!--\n" .
+				"document.write('Login : <b>$login</b> <br><font size=\\'2\\'>[<a href=\\'spip_cookie.php3?cookie_admin=non&url=".rawurlencode($clean_link->getUrl())."\\'>se connecter sous un autre identifiant</a>]</font>');\n" .
+				"//--></script>\n";
+			echo "<input type='hidden' name='session_login_hidden' value='$login'>";
+	
+			// si jaja inactif, le login est modifiable (puisque le challenge n'est pas utilise)
+			echo "<noscript>";
+			echo "<font face='Georgia, Garamond, Times, serif' size='3'>";
+			echo "Attention, ce formulaire n'est pas s&eacute;curis&eacute;. ";
+			echo "Si vous ne voulez pas que votre mot de passe puisse &ecirc;tre ";
+			echo "intercept&eacute; sur le r&eacute;seau, veuillez activer Javascript ";
+			echo "dans votre navigateur et <a href=\"".$clean_link->getUrl()."\">recharger cette page</a>.<p></font>\n";
+		}
 		echo "<label><b>Login (identifiant de connexion au site)&nbsp;:</b><br></label>";
-		echo "<input type='text' name='session_login' class='forml' value=\"$login\" size='40'></noscript>\n";
+		echo "<input type='text' name='session_login' class='forml' value=\"$login\" size='40'>\n";
+		if ($flag_challenge_md5) echo "</noscript>\n";
 
 		echo "<br><br>\n<label><b>Mot de passe&nbsp;:</b><br></label>";
 		echo "<input type='password' name='session_password' class='forml' value=\"\" size='40'>\n";

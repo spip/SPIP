@@ -81,7 +81,7 @@ if ($id_auteur) {
 // Modification (et creation si besoin)
 //
 if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
-	if ($connect_statut == '0minirezo' AND ereg("^(0minirezo|1comite|5poubelle)$",$statut))	// changer le statut
+	if ($connect_statut == '0minirezo' AND ereg("^(0minirezo|1comite|5poubelle|6forum)$",$statut))	// changer le statut
 		$auteur['statut'] = $statut;
 
 	if ($nom)	// pas de nom vide
@@ -90,19 +90,23 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 	// login et mot de passe
 	unset ($modif_login);
 	$old_login = $auteur['login'];
-	if ($login) {
-		if (strlen($login) < 4)
-			$echec .= "<p>Login trop court.";
-		else if (mysql_num_rows(spip_query("SELECT * FROM spip_auteurs WHERE login='".addslashes($login)."' AND id_auteur!=$id_auteur AND statut!='5poubelle'")))
-			$echec .= "<p>Ce login existe d&eacute;j&agrave;.";
-		else if ($login != $old_login) {
-			$modif_login = true;
-			$auteur['login'] = $login;
+	if ($connect_statut == '0minirezo' AND $auteur['source'] == 'spip') {
+		if ($login) {
+			if (strlen($login) < 4)
+				$echec .= "<p>Login trop court.";
+			else if (mysql_num_rows(spip_query("SELECT * FROM spip_auteurs WHERE login='".addslashes($login)."' AND id_auteur!=$id_auteur AND statut!='5poubelle'")))
+				$echec .= "<p>Ce login existe d&eacute;j&agrave;.";
+			else if ($login != $old_login) {
+				$modif_login = true;
+				$auteur['login'] = $login;
+			}
 		}
-	} else if ($connect_statut == '0minirezo') // suppression du login
-			$auteur['login'] = '';
+		// suppression du login
+		else if ($connect_statut == '0minirezo') $auteur['login'] = '';
+	}
 
-	if ($new_pass AND ($statut != '5poubelle') AND $auteur['login']) { // changement de pass, a securiser en jaja ?
+	// changement de pass, a securiser en jaja ?
+	if ($new_pass AND ($statut != '5poubelle') AND $auteur['login'] AND $auteur['source'] == 'spip') {
 		if ($new_pass != $new_pass2)
 			$echec .= "<p>Les deux mots de passe ne sont pas identiques.";
 		else if ($new_pass AND strlen($new_pass) < 6)
@@ -146,7 +150,7 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 
 	// l'entrer dans la base
 	if (!$echec) {
-		if (! $auteur['id_auteur']) { // creation si pas d'id
+		if (!$auteur['id_auteur']) { // creation si pas d'id
 			spip_query("INSERT INTO spip_auteurs (nom) VALUES ('temp')");
 			$auteur['id_auteur'] = mysql_insert_id();
 			$id_auteur = $auteur['id_auteur'];
@@ -231,9 +235,11 @@ debut_cadre_formulaire();
 echo "<FORM ACTION='auteur_infos.php3?id_auteur=$id_auteur' METHOD='post'>";
 echo "<INPUT TYPE='Hidden' NAME='id_auteur' VALUE=\"$id_auteur\">";
 
+
 //
 // Infos personnelles
 //
+
 echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
 
 debut_cadre_relief("fiche-perso-24.gif");
@@ -275,35 +281,48 @@ echo "<INPUT TYPE='text' NAME='url_site' CLASS='forml' VALUE=\"".entites_html($a
 fin_cadre_relief();
 
 
+//
+// Login et mot de passe :
+// accessibles seulement aux admins non restreints et l'auteur lui-meme
+//
 
-///////
-// login modifiable ?
-if (($connect_statut == "0minirezo" AND $connect_toutes_rubriques) OR $connect_id_auteur == $id_auteur) {
-	debut_cadre_relief("base-24.gif");
+$edit_login = ($connect_statut == "0minirezo" AND $connect_toutes_rubriques AND $auteur['source'] == 'spip');
+$edit_pass = ((($connect_statut == "0minirezo" AND $connect_toutes_rubriques) OR $connect_id_auteur == $id_auteur)
+	AND $auteur['source'] == 'spip');
 
-	if ($connect_id_auteur == $id_auteur) {
-		debut_cadre_enfonce();	
-		echo '<img src="img_pack/warning.gif" alt="Avertissement" width="48" height="48" align="right">';
-		echo "<b>Attention&nbsp;! Ceci est le login sous lequel vous &ecirc;tes connect&eacute; actuellement.
-		<font color=\"red\">Utilisez ce formulaire avec pr&eacute;caution&nbsp;: si vous oubliez votre mot de passe, il sera impossible de le retrouver (seul un administrateur pourra vous en attribuer un nouveau).</font></b>\n";
-		fin_cadre_enfonce();	
-		echo "<p>";
-	}
+debut_cadre_relief("base-24.gif");
 
+// Avertissement en cas de modifs de ses propres donnees
+if (($edit_login OR $edit_pass) AND $connect_id_auteur == $id_auteur) {
+	debut_cadre_enfonce();	
+	echo '<img src="img_pack/warning.gif" alt="Avertissement" width="48" height="48" align="right">';
+	echo "<b>Attention&nbsp;! Ceci est le login sous lequel vous &ecirc;tes connect&eacute; actuellement.
+	<font color=\"red\">Utilisez ce formulaire avec pr&eacute;caution&nbsp;: si vous oubliez votre mot de passe, il sera impossible de le retrouver (seul un administrateur pourra vous en attribuer un nouveau).</font></b>\n";
+	fin_cadre_enfonce();	
+	echo "<p>";
+}
+
+// Un redacteur n'a pas le droit de modifier son login !
+if ($edit_login) {
 	echo "<B>Login</B> ";
 	echo "<font color='red'>(plus de 3 caract&egrave;res)</font> :<BR>";
 	echo "<INPUT TYPE='text' NAME='login' CLASS='formo' VALUE=\"".entites_html($auteur['login'])."\" SIZE='40'><P>\n";
+}
+else {
+	echo "<fieldset style='padding:5'><legend><B>Login</B><BR></legend><br><b>".$auteur['login']."</b> ";
+	echo "<i> (ne peut pas &ecirc;tre modifi&eacute;)</i>";
+}
+
+// On ne peut modifier le mot de passe en cas de source externe (par exemple LDAP)
+if ($edit_pass) {
 	echo "<B>Nouveau mot de passe</B> ";
 	echo "<font color='red'>(plus de 5 caract&egrave;res)</font> :<BR>";
 	echo "<INPUT TYPE='password' NAME='new_pass' CLASS='formo' VALUE=\"\" SIZE='40'><BR>\n";
 	echo "Confirmer ce nouveau mot de passe :<BR>";
 	echo "<INPUT TYPE='password' NAME='new_pass2' CLASS='formo' VALUE=\"\" SIZE='40'><P>\n";
-	fin_cadre_relief();
-} else {
-	if ($connect_id_auteur == $id_auteur) {
-		echo "<fieldset style='padding:5'><legend><B>Login</B><BR></legend><br><b>$login</b><p>\n";
-	}
 }
+fin_cadre_relief();
+
 
 //
 // Seuls les admins voient le menu 'statut', mais les admins restreints ne
@@ -323,9 +342,7 @@ AND $connect_id_auteur != $id_auteur) {
 		echo "<OPTION".mySel("0minirezo",$statut).">administrateur";
 
 	echo "<OPTION".mySel("1comite",$statut).">r&eacute;dacteur";
-
-	/* if ($statut=="6forum") */ echo "<OPTION".mySel("6forum",$statut).">visiteur";
-
+	echo "<OPTION".mySel("6forum",$statut).">visiteur";
 	echo "<OPTION".mySel("5poubelle",$statut).">&gt; &agrave; la poubelle";
 
 	echo "</SELECT></center>\n";
