@@ -1531,6 +1531,9 @@ function spip_fetch_array($r, $t=NULL) {
 	if (!isset($t)) {
 		if ($r) return sql_fetch($r);
 	} else {
+		if ($t=='SPIP_NUM') $t = MYSQL_NUM;
+		if ($t=='SPIP_BOTH') $t = MYSQL_BOTH;
+		if ($t=='SPIP_ASSOC') $t = MYSQL_ASSOC;
 		spip_log("appel deprecie de spip_fetch_array(..., $t)", 'vieilles_defs');
 		if ($r) return mysql_fetch_array($r, $t);
 	}
