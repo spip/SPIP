@@ -59,7 +59,7 @@
 
 #BOITE_FERMER
 [(#EVAL{_AJAX}|oui)
-	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation');/*\]\]>*/</script>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>
 ]
 </BOUCLE_article>
 [(#ENV**{exec}|=={article_edit}|?{#INCLURE{fond=prive/squelettes/contenu/article_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]

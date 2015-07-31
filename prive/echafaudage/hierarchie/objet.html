@@ -1,5 +1,5 @@
 <!-- hierarchie -->
-<div id="chemin"><a href="#URL_ECRIRE{rubriques}"><:info_racine_site:></a>
+<a href="#URL_ECRIRE{rubriques}"><:info_racine_site:></a>
 <BOUCLE_rub(RUBRIQUES){id_rubrique=#ENV{id_parent}}{statut?}>
 <BOUCLE_ariane(HIERARCHIE){id_rubrique}{tout}> &gt;
 [(#ID_RUBRIQUE|generer_url_entite{rubrique}|lien_ou_expose{#TITRE|couper{80}|sinon{<:ecrire:info_sans_titre:>},#ENV{objet}|non|et{#ID_RUBRIQUE|=={#ENV{id_parent}}}})]
@@ -20,4 +20,3 @@
 	</div>
 	]
 ]
-</div>

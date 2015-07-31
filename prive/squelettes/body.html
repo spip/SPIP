@@ -5,7 +5,9 @@
 		<INCLURE{fond=prive/objets/liste/auteurs_enligne}>
 		<div class="largeur">
 			<div id="haut">
-				<INCLURE{fond=prive/squelettes/hierarchie/#ENV{type},ajax=hierarchie,env}>
+				<div id="chemin">
+					<INCLURE{fond=prive/squelettes/hierarchie/#ENV{type},ajax=hierarchie,env}>
+				</div>
 				[(#REM)<!--
 				Ici, # INCLURE car top/xx peut affecter la globale 'pleine_largeur'
 				-->]
