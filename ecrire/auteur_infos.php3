@@ -22,35 +22,6 @@ include_ecrire ("inc_abstract_sql.php3");
 $id_auteur = floor($id_auteur);
 
 
-//
-// Auteurs a acces restreint
-//
-function afficher_auteur_rubriques($leparent){
-	global $id_parent;
-	global $id_rubrique;
-	global $toutes_rubriques;
-	global $i;
-	
-	$i++;
- 	$query="SELECT * FROM spip_rubriques WHERE id_parent=$leparent ORDER BY 0+titre, titre";
- 	$result=spip_query($query);
-
-	while($row=spip_fetch_array($result)){
-		$my_rubrique=$row['id_rubrique'];
-		$titre=typo($row['titre']);
-	
-		if (!ereg(",$my_rubrique,","$toutes_rubriques")){
-			$espace = str_repeat("&nbsp", $i*2) . "|";
-			if ($i==1)
-				$espace = "*";
-
-			echo "<OPTION VALUE='$my_rubrique'>$espace ".supprimer_tags($titre)."\n";
-			afficher_auteur_rubriques($my_rubrique);
-		}
-	}
-	$i=$i-1;
-}
-
 // securite
 if ($connect_statut != "0minirezo" AND $connect_id_auteur != $id_auteur) {
 	gros_titre(_T('info_acces_interdit'));
@@ -195,7 +166,7 @@ if (strval($nom)!='') {
 }
 
 // Appliquer des modifications de statut
-modifier_statut_auteur($auteur, $_POST['statut'], $_POST['add_rub'], $_GET['supp_rub']);
+modifier_statut_auteur($auteur, $_POST['statut'], $_POST['id_rubrique'], $_GET['supp_rub']);
 
 
 // Si on modifie la fiche auteur, reindexer et modifier htpasswd

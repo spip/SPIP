@@ -88,6 +88,59 @@ function effacer_low_sec($id_auteur) {
 }
 
 
+
+function ajax_rubriques_acces($id_parent)
+{
+	$query = spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_parent");
+	if ($row = spip_fetch_array($query)) {
+		$titre_parent = entites_html(typo($row["titre"])); 
+	} else {
+		$titre_parent = entites_html(_T("info_racine_site"));
+	}
+	
+	return  "<table width='100%'><tr width='100%'><td width='45'>" . 
+	  "<a href='#' onClick=\"javascript:if(findObj('selection_rubrique').style.display=='none') {charger_id_url_si_vide('ajax_page.php?fonction=aff_rubrique&id_rubrique=$id_rubrique','selection_rubrique');} else {findObj('selection_rubrique').style.display='none';} return true;\"><img src='img_pack/loupe.png' style='border: 0px; vertical-align: middle;' /></a> " . 
+	  "<img src='img_pack/searching.gif' id='img_selection_rubrique' style='visibility: hidden;' />" . 
+	  "</td><td>" . 
+	  "<input type='text' id='titreparent' name='titreparent' disabled='disabled' class='forml' value=\"$titre_parent\" />" . 
+	  "<input type='hidden' id='id_rubrique' name='id_rubrique' value='$id_rubrique' />" . 
+	  "</td></tr></table><div id='selection_rubrique' style='display: none;'></div>";
+
+}
+
+function choix_statut_auteur($statut)
+{
+	global $connect_toutes_rubriques;
+	return "<select name='statut' size=1 class='fondl'
+		onChange=\"setvisibility('changer_statut_auteur', this.selectedIndex ? 'hidden' : 'visible');\">" .
+
+		(!$connect_toutes_rubriques ? "" :
+			("\n<option" .
+			mySel("0minirezo",$statut) .
+			 ">" .
+			 _T('item_administrateur_2') .
+			 '</option>')) .
+	  "\n<option" .
+	  mySel("1comite",$statut) .
+	  ">" .
+	  _T('intem_redacteur') .
+	  '</option>' .
+	  (!(($statut == '6forum')
+		      OR (lire_meta('accepter_visiteurs') == 'oui')
+		      OR (lire_meta('forums_publics') == 'abo')
+	     OR spip_num_rows(spip_query("SELECT statut FROM spip_auteurs WHERE statut='6forum'"))) ? "" :
+	   ("\n<option" .
+	    mySel("6forum",$statut) .
+	    ">" .
+	    _T('item_visiteur') .
+	    '</option>')) .
+	  "\n<option" .
+	  mySel("5poubelle",$statut) .
+	  " style='background:url(" . _DIR_IMG_PACK . "rayures-sup.gif)'>&gt; "._T('texte_statut_poubelle') .
+	  '</option>' .
+	  "</select>\n";
+}
+
 // Une fonction service qui affiche le statut de l'auteur dans l'espace prive
 function afficher_formulaire_statut_auteur ($id_auteur, $statut, $post='') {
 	global $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
@@ -118,44 +171,28 @@ function afficher_formulaire_statut_auteur ($id_auteur, $statut, $post='') {
 		debut_cadre_relief();
 
 		if ($droit) {
-
-		  if ($statut == '0minirezo') {
-			if ($admin_restreint)
-				echo bouton_block_visible("statut$id_auteur");
-			else
-				echo bouton_block_invisible("statut$id_auteur");
-		  }
-
+		  /* Neutralisation momentanee des couches. A revoir.
+		  $couches = $admin_restreint ? 
+		    bouton_block_visible("statut$id_auteur") :
+		    bouton_block_invisible("statut$id_auteur");
+		  echo $couches;
+		  */
 		  echo "<b>"._T('info_statut_auteur')." </b> ";
-		  echo "<select name='statut' size=1 class='fondl'>";
-
-		  if ($connect_toutes_rubriques)
-			echo "<OPTION".mySel("0minirezo",$statut).">"._T('item_administrateur_2');
-
-		  echo "<OPTION".mySel("1comite",$statut).">"._T('intem_redacteur');
-
-		  if (($statut == '6forum')
-		      OR (lire_meta('accepter_visiteurs') == 'oui')
-		      OR (lire_meta('forums_publics') == 'abo')
-		      OR spip_num_rows(spip_query("SELECT statut
-		FROM spip_auteurs WHERE statut='6forum'")))
-			echo "<OPTION".mySel("6forum",$statut).">"._T('item_visiteur');
-		  echo "<OPTION".mySel("5poubelle",$statut).
-		    " style='background:url(" . _DIR_IMG_PACK . "rayures-sup.gif)'>&gt; "._T('texte_statut_poubelle');
-
-		  echo "</select>\n";
+		  echo choix_statut_auteur($statut);
 		}
-		//
-		// Gestion restreinte des rubriques
-		//
-		if ($statut == '0minirezo') {
-		  echo debut_block_visible("statut$id_auteur");
-			if (!$admin_restreint) {
-#				echo debut_block_invisible("statut$id_auteur");
-				echo "<p /><div style='arial2'>\n";
+
+		// si pas admin au chargement, rien a montrer. 
+		echo "<div id='changer_statut_auteur'",
+		  (($statut == '0minirezo') ? '' : " style='visibility: hidden'"),
+		  '>';
+
+		echo "\n<p /><div style='arial2'>";
+		// si pas admin restreint au chargement, rien a calculer
+		if (!$admin_restreint) {
+			if ($statut == '0minirezo') {
 				echo _T('info_admin_gere_toutes_rubriques');
-			} else {
-				echo "<p /><div style='arial2'>\n";
+			}
+		} else {
 				echo _T('info_admin_gere_rubriques')."\n";
 				echo "<ul style='list-style-image: url(" . _DIR_IMG_PACK . "rubrique-12.gif)'>";
 				while ($row_admin = spip_fetch_array($result_admin)) {
@@ -174,32 +211,32 @@ function afficher_formulaire_statut_auteur ($id_auteur, $statut, $post='') {
 				$toutes_rubriques = ",$toutes_rubriques";
 
 				echo "</ul>";
-			}
-			if ($connect_toutes_rubriques
-			AND $connect_id_auteur != $id_auteur) {
-				echo "</div><br /><div class='arial1'>";
+		}
+		echo "</div>\n";
+		// si on a le droit de donner des droits, prevoir Ajax.
+		echo debut_block_visible("statut$id_auteur");
+		if ($connect_toutes_rubriques AND $connect_id_auteur != $id_auteur) {
+				echo "\n<div id='ajax_rubrique' class='arial1'><br />\n";
 				if (spip_num_rows($result_admin) == 0) {
 					echo "<b>"._T('info_restreindre_rubrique')."</b><br />";
 				} else {
 					echo "<b>"._T('info_ajouter_rubrique')."</b><br />";
 				}
-				echo "<INPUT NAME='id_auteur' VALUE='$id_auteur' TYPE='hidden'>";
-				echo "<SELECT NAME='add_rub' SIZE=1 CLASS='formo'>";
-				echo "<OPTION VALUE='0'>\n";
-				afficher_auteur_rubriques("0");
-				echo "</SELECT>";
+				echo "\n<input name='id_auteur' value='$id_auteur' TYPE='hidden' />";
+				echo ajax_rubriques_acces(0);
+				echo "</div>\n";
 			}
+		echo fin_block();
 
-			echo "</div>\n";
-			echo fin_block();
-		}
-
+		echo '</div>'; // fin de la balise a visibilite conditionnelle
 
 		if ($post && $droit) {
-			echo "<div align='$spip_lang_right'><input type='submit'
-			class='fondo' name='Valider'
-			value=\""._T('bouton_valider')."\" /></div>"; 
-			echo "</form>\n";
+		  echo "<div align='",
+		    $spip_lang_right,
+		    "'><input type='submit' class='fondo' value=\"",
+		    _T('bouton_valider'),
+		    "\" /></div>",
+		    "</form>\n";
 		}
 
 		fin_cadre_relief();
