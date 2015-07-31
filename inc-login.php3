@@ -114,7 +114,7 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 		$query = "SELECT * FROM spip_auteurs WHERE login='$login'";
 		$result = spip_query($query);
 		if ($row = spip_fetch_array($result)) {
-			if ($row['statut'] == '5poubelle' OR ($source == 'spip' AND $row['pass'] == '')) {
+			if ($row['statut'] == '5poubelle' OR ($row['source'] == 'spip' AND $row['pass'] == '')) {
 				$statut_login = -1; // refus
 			} else {
 
