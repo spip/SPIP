@@ -92,7 +92,7 @@ function ecrire_acces() {
 	global $htaccess, $htpasswd;
 
 	// si .htaccess existe, outrepasser spip_meta
-	if ((lire_meta('creer_htpasswd') == 'non') AND !file_exists($htaccess)) {
+	if ((lire_meta('creer_htpasswd') == 'non') AND !@file_exists($htaccess)) {
 		@unlink($htpasswd);
 		@unlink($htpasswd."-admin");
 		return;

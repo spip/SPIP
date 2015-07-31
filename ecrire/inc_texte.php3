@@ -70,28 +70,28 @@ function vignette_par_defaut($type_extension) {
 	$filename = "$img/$type_extension";
 
 	// Glurps !
-	if (file_exists($filename.'.png')) {
+	if (@file_exists($filename.'.png')) {
 		$vig = "$filename.png";
 	}
-	else if (file_exists($filename.'.gif')) {
+	else if (@file_exists($filename.'.gif')) {
 		$vig = "$filename.gif";
 	}
-	else if (file_exists($filename.'-dist.png')) {
+	else if (@file_exists($filename.'-dist.png')) {
 		$vig = "$filename-dist.png";
 	}
-	else if (file_exists($filename.'-dist.gif')) {
+	else if (@file_exists($filename.'-dist.gif')) {
 		$vig = "$filename-dist.gif";
 	}
-	else if (file_exists("$img/defaut.png")) {
+	else if (@file_exists("$img/defaut.png")) {
 		$vig = "$img/defaut.png";
 	}
-	else if (file_exists("$img/defaut.gif")) {
+	else if (@file_exists("$img/defaut.gif")) {
 		$vig = "$img/defaut.gif";
 	}
-	else if (file_exists("$img/defaut-dist.png")) {
+	else if (@file_exists("$img/defaut-dist.png")) {
 		$vig = "$img/defaut-dist.png";
 	}
-	else if (file_exists("$img/defaut-dist.gif")) {
+	else if (@file_exists("$img/defaut-dist.gif")) {
 		$vig = "$img/defaut-dist.gif";
 	}
 
@@ -409,9 +409,9 @@ function extraire_lien ($regs) {
 	$lien_interne = false;
 	if (ereg('^(art(icle)?|rub(rique)?|br(.ve)?|aut(eur)?|mot|site|doc(ument)?|im(age|g))? *([[:digit:]]+)$', $lien_url, $match)) {
 		// Traitement des liens internes
-		if (file_exists('inc-urls.php3')) {
+		if (@file_exists('inc-urls.php3')) {
 			include_local('inc-urls.php3');
-		} elseif (file_exists('inc-urls-dist.php3')) {
+		} elseif (@file_exists('inc-urls-dist.php3')) {
 			include_local('inc-urls-dist.php3');
 		} else {
 			include_ecrire('inc_urls.php3');

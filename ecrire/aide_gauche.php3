@@ -8,7 +8,7 @@ if ($var_lang) {
 	if ($headers_only) exit;
 }
 
-if (file_exists($flag_ecrire ? "inc_connect.php3" : "ecrire/inc_connect.php3")) {
+if (@file_exists($flag_ecrire ? "inc_connect.php3" : "ecrire/inc_connect.php3")) {
 	include_ecrire("inc_auth.php3");
 	$aide_statut = ($connect_statut == '1comite') ? 'redac' : 'admin';
 }

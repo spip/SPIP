@@ -48,14 +48,14 @@ function utiliser_cache($chemin_cache, $delais) {
 	$use_cache = true;
 
 	// Existence du fichier
-	if (!file_exists($chemin_cache)) {
-		if (file_exists($chemin_cache.'.NEW')) {
+	if (!@file_exists($chemin_cache)) {
+		if (@file_exists($chemin_cache.'.NEW')) {
 			// Deuxieme acces : le fichier est marque comme utilise
 			@rename($chemin_cache.'.NEW', $chemin_cache);
 		}
-		// Double verification (cas renommage/suppression entre les deux file_exists)
+		// Double verification (cas renommage/suppression entre les deux @file_exists)
 		clearstatcache();
-		$use_cache = file_exists($chemin_cache);
+		$use_cache = @file_exists($chemin_cache);
 	}
 
 	// Date de creation du fichier
@@ -105,7 +105,7 @@ function ecrire_fichier_cache($fichier, $contenu) {
 	if (!$ok) {
 		spip_release_lock($fichier_tmp);
 		clearstatcache();
-		return file_exists($fichier_new) ? $fichier_new : $fichier;
+		return @file_exists($fichier_new) ? $fichier_new : $fichier;
 	}
 
 	// Finaliser
@@ -127,9 +127,9 @@ function ecrire_fichier_cache($fichier, $contenu) {
 //
 
 function creer_repertoire($base, $subdir) {
-	if (file_exists("$base/.plat")) return false;
+	if (@file_exists("$base/.plat")) return false;
 	$path = $base.'/'.$subdir;
-	if (file_exists($path)) return true;
+	if (@file_exists($path)) return true;
 
 	@mkdir($path, 0777);
 	@chmod($path, 0777);

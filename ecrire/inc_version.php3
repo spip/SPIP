@@ -137,14 +137,14 @@ $ignore_remote_user = false;
 //
 
 
-$flag_ecrire = !file_exists('./ecrire/inc_version.php3');
+$flag_ecrire = !@file_exists('./ecrire/inc_version.php3');
 
 if ($flag_ecrire) {
-	if (file_exists('mes_options.php3')) {
+	if (@file_exists('mes_options.php3')) {
 		include('mes_options.php3');
 	}
 } else {
-	if (file_exists('ecrire/mes_options.php3')) {
+	if (@file_exists('ecrire/mes_options.php3')) {
 		include('ecrire/mes_options.php3');
 	}
 }
@@ -335,7 +335,7 @@ function include_ecrire($file) {
 }
 
 
-$flag_connect = file_exists(($flag_ecrire ? "" : "ecrire/")."inc_connect.php3");
+$flag_connect = @file_exists(($flag_ecrire ? "" : "ecrire/")."inc_connect.php3");
 
 function spip_query($query) {
 	if ($GLOBALS['flag_connect']) {
@@ -758,7 +758,7 @@ if (count($GLOBALS['HTTP_POST_VARS'])) {
 // Lire les meta cachees
 //
 $inc_meta_cache = ($flag_ecrire ? '' : 'ecrire/').'data/inc_meta_cache.php3';
-if (file_exists($inc_meta_cache) AND !defined('_ECRIRE_INC_META_CACHE')  AND !defined('_ECRIRE_INC_META')) {
+if (@file_exists($inc_meta_cache) AND !defined('_ECRIRE_INC_META_CACHE')  AND !defined('_ECRIRE_INC_META')) {
 	include_ecrire('data/inc_meta_cache.php3');
 }
 if (!defined("_ECRIRE_INC_META_CACHE")) {

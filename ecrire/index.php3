@@ -230,7 +230,7 @@ if ($meta["debut_restauration"]) {
 
 	$archive = $meta["fichier_restauration"];
 	$my_pos = $meta["status_restauration"];
-	$ok = file_exists($archive);
+	$ok = @file_exists($archive);
 
 	if ($ok) {
 		if (ereg("\.gz$", $archive)) {

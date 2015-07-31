@@ -1,6 +1,6 @@
 <?php
 
-if (!file_exists("ecrire/inc_connect.php3")) {
+if (!@file_exists("ecrire/inc_connect.php3")) {
 	$db_ok = 0;
 	include ("ecrire/inc_version.php3");
 	include_ecrire ("inc_presentation.php3");
