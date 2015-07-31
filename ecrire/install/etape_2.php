@@ -24,7 +24,7 @@ function install_etape_2_dist()
 	$db_connect = mysql_errno();
 	echo "-->";
 
-	if (($db_connect=="0") && $link){
+	if (($db_connect==="0") && $link){
 		echo "<p><b>"._T('info_connexion_ok')."</b></p><p> "._T('info_etape_suivante_2')."</p>";
 
 		echo generer_post_ecrire('install', (

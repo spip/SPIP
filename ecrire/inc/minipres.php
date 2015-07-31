@@ -84,7 +84,7 @@ label {}
 	text-align: center; 
 	margin: 1em auto 1em auto;
 	padding:1em;
-	background:#cccc99;
+	background:#ffffcc;
 }
 .petit-centre { font-family: Verdana,Arial,Sans,sans-serif; font-size: 1em; }
 .petit-centre p { text-align: center; }
