@@ -26,6 +26,7 @@ if (!defined('_ACTIVER_PUCE_RAPIDE'))
  * @param string $type
  * @param bool $ajax
  *   indique qu'il ne faut renvoyer que le coeur du menu car on est dans la requete ajax post changement rapide
+ * @param bool $menu_rapide
  * @return string
  */
 function inc_puce_statut_dist($id_objet, $statut, $id_parent, $type, $ajax=false, $menu_rapide=_ACTIVER_PUCE_RAPIDE) {
