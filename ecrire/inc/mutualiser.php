@@ -22,7 +22,8 @@ function demarrer_site($site, $options = array()) {
 		array(
 			'creer_site' => false,
 			'cookie_prefix' => true,
-			'table_prefix' => true
+			'table_prefix' => true,
+			'repertoire' => 'sites'
 		),
 		$options
 	);
@@ -37,7 +38,7 @@ function demarrer_site($site, $options = array()) {
 			$GLOBALS['table_prefix'] = $prefix;
 	}
 
-	if (!is_dir($e = _DIR_RACINE . 'sites/' . $site . '/')) {
+	if (!is_dir($e = _DIR_RACINE . $options['repertoire'].'/' . $site . '/')) {
 		spip_initialisation();
 		echec_init_mutualisation($e, $options);
 		exit;
