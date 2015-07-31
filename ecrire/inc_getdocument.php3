@@ -164,19 +164,17 @@ function callback_deballe_fichier($p_event, &$p_header) {
 }
 
 function verifier_compactes($zip) {
-	if ($list = $zip->listContent()) {
+	if (!$list = $zip->listContent()) return array();
 	// si pas possible de decompacter: installer comme fichier zip joint
 	// Verifier si le contenu peut etre uploade (verif extension)
-		$aff_fichiers = array();
-		foreach ($list as $file) {
-			if (accepte_fichier_upload($f = $file['stored_filename']))
-				$aff_fichiers[]= $f;
-			else
-				spip_log("chargement de $f interdit");
+	$aff_fichiers = array();
+	foreach ($list as $file) {
+		if (accepte_fichier_upload($f = $file['stored_filename']))
+			$aff_fichiers[]= $f;
+		else spip_log("chargement de $f interdit");
 		}
-		sort($aff_fichiers);
-		return $aff_fichiers;
-	}
+	sort($aff_fichiers);
+	return $aff_fichiers;
 }
 
 //
