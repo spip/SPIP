@@ -22,14 +22,13 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/plugin');
-
+include_spip('inc/actions');
 
 // http://doc.spip.org/@formulaire_charger_plugin
 function formulaire_charger_plugin($retour='') {
 	global $spip_lang_left, $spip_lang_right;
 
 	include_spip('inc/filtres');
-	include_spip('inc/actions');
 	include_spip('inc/presentation');
 
 	// Si defini comme non-existant
