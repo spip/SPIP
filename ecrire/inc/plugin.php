@@ -104,10 +104,13 @@ function is_plugin_dir($dir,$dir_plugins = null){
 	return '';
 }
 
+// Regexp d'extraction des informations d'un inetervalle de compatibilite
+define('_EXTRAIRE_INTERVALLE', ',^[\[\(\]]([0-9.a-zRC\s\-]*)[;]([0-9.a-zRC\s\-\*]*)[\]\)\[]$,');
+
 // http://doc.spip.org/@plugin_version_compatible
 function plugin_version_compatible($intervalle,$version){
 	if (!strlen($intervalle)) return true;
-	if (!preg_match(',^[\[\(\]]([0-9.a-zRC\s\-]*)[;]([0-9.a-zRC\s\-\*]*)[\]\)\[]$,',$intervalle,$regs)) return false;
+	if (!preg_match(_EXTRAIRE_INTERVALLE,$intervalle,$regs)) return false;
 	// Extraction des bornes et traitement de * pour la borne sup :
 	// -- on autorise uniquement les ecritures 3.0.*, 3.*
 	$minimum = $regs[1];
