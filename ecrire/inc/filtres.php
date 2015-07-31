@@ -2041,7 +2041,10 @@ function extraire_attribut($balise, $attribut, $complet = false) {
 		} else {
 			$r[4] = trim($r[2]); 
 		}
-		$att = filtrer_entites(str_replace("&#39;", "'", $r[4]));
+		$att = $r[4];
+		if (strpos($att,"&#")!==false)
+			$att = str_replace(array("&#039;","&#39;","&#034;","&#34;"), array("'","'",'"','"'), $att);
+		$att = filtrer_entites($att);
 	}
 	else
 		$att = NULL;
