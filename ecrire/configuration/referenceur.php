@@ -44,7 +44,7 @@ function configuration_referenceur_dist()
 		. "</div>"
 		. "</div>";
 	} else
-		$res .= "<input type='hidden' name='multi_secteurs' value='".$GLOBALS['meta']['multi_secteurs']."' />";
+		$res .= "<input type='hidden' name='multi_secteurs' id='multi_secteurs' value='".$GLOBALS['meta']['multi_secteurs']."' />";
 
 	if (($GLOBALS['meta']['multi_rubriques'] == 'oui') OR ($GLOBALS['meta']['multi_articles'] == 'oui')) {
 		$res .= "<hr />"
@@ -56,7 +56,7 @@ function configuration_referenceur_dist()
 			array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ")
 		. "</div>";
 	} else
-		$res .= "<input type='hidden' name='gerer_trad' value='".$GLOBALS['meta']['gerer_trad']."' />";
+		$res .= "<input type='hidden' name='gerer_trad' id='gerer_trad' value='".$GLOBALS['meta']['gerer_trad']."' />";
 
 	$res = debut_cadre_couleur("traductions-24.gif", true, "", _T('info_multilinguisme'))
 	. ajax_action_post('configurer', 'referenceur', 'config_multilang', '', $res)

@@ -23,9 +23,11 @@ function configuration_transcodeur_dist()
 	  . _T('texte_jeu_caractere_3') .
 	  "</p>\n<div style='text-align: center'><b><tt>"
 	  .entites_html($charset)
-	  ."</tt></b></div><p>" .
-	  _T('texte_jeu_caractere_4') .
-	  " &nbsp; <input type='text' name='charset'
+	  ."</tt></b></div><p>" 
+	  ."<label for='charset'>" 
+	  ._T('texte_jeu_caractere_4') 
+	  ."</label>"
+	  ." &nbsp; <input type='text' name='charset' id='charset'
 			value=\"".entites_html($charset)."\" />" .
 	  "<br />\n(".
 	  _T('texte_jeu_caractere_2').")" .

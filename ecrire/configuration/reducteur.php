@@ -105,8 +105,11 @@ function format_choisi()
 
 	if ($creer_preview == "oui") $style = "block;"; else $style = "none;";
 	
-	$res .= "<div id='config-preview' class='verdana2' style='display: $style margin-$spip_lang_left: 40px;'>"._T('info_taille_maximale_vignette');
-	$res .= "<br /><input type='text' name='taille_preview' value='$taille_preview' class='fondl' size='5' />";
+	$res .= "<div id='config-preview' class='verdana2' style='display: $style margin-$spip_lang_left: 40px;'>"
+	  . "<label for='taille_preview'>"
+	  ._T('info_taille_maximale_vignette')
+	  . "</label>"
+	  . "<br /><input type='text' name='taille_preview' id='taille_preview' value='$taille_preview' class='fondl' size='5' />";
 	$res .= " "._T('info_pixels');
 		
 	if ($creer_preview == "oui"){

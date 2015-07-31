@@ -31,10 +31,12 @@ function configuration_relayeur_dist($retour_proxy)
 		$http_proxy=entites_html(no_password_proxy_url($http_proxy));
 		if ($http_proxy) {
 			$res = "\n<p style='text-align: $spip_lang_left;' class='verdana1 spip_small'>"
+			. "<label for='test_proxy'>" 
 			. _T('texte_test_proxy')
+			. "</label>"
 			. "</p>"
 			. "\n<p>"
-			. "<input type='text' name='test_proxy' value='http://www.spip.net/' size='40' class='forml' />"
+			. "<input type='text' name='test_proxy' id='test_proxy' value='http://www.spip.net/' size='40' class='forml' />"
 			. "</p>";
 
 			if($retour_proxy) {
@@ -50,15 +52,18 @@ function configuration_relayeur_dist($retour_proxy)
 	$encours = $http_proxy ? $http_proxy : "http://proxy:8080";
 	$exemple = $http_noproxy ? $http_noproxy : "127.0.0.1 .mondomaine.net";
 	$res = "\n<div class='verdana2'>"
+	  . "<label for='http_proxy'>"
 	  . propre(_T('texte_proxy', array('proxy_en_cours' => "<b><tt><html>$encours</html></tt></b>")))
-	. "</div>"
-	. "\n<div class='verdana2'>"
-	. "<input type='text' name='http_proxy' size='40' class='forml' value='$http_proxy' />"
-	. "<br />"
+	  . "</label></div>"
+	  . "\n<div class='verdana2'>"
+	  . "<input type='text' name='http_proxy' id='http_proxy' size='40' class='forml' value='$http_proxy' />"
+	  . "<br />"
+	  . "<label for='http_noproxy'>"
 	  . propre(_T('pas_de_proxy_pour', array('exemple' => "<b><tt><html>$exemple</html></tt></b>")))
-	. "<input type='text' name='http_noproxy' size='40' class='forml' value='$http_noproxy' />"
-	. $res
-	. "</div>";
+	  . "</label>"
+	  . "<input type='text' name='http_noproxy' id='http_noproxy' size='40' class='forml' value='$http_noproxy' />"
+	  . $res
+	  . "</div>";
 
 	$res = debut_cadre_trait_couleur("base-24.gif", true, "", _T('info_sites_proxy').aide ("confhttpproxy"))
 	.  ajax_action_post('configurer_relayeur', 0, 'config_fonctions', '', $res, $submit)

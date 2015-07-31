@@ -50,9 +50,9 @@ function configuration_locuteur_dist()
 		if ($langues_trad[$code_langue]) $nom_langue = "<span style='text-decoration: underline'>$nom_langue</span>";
 
 		$res .= "\n<div class='langues_bloquees'>";
-		$res .= "\n<input type='hidden' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue' />";
+		$res .= "\n<input type='hidden' name='langues_auth[]' id='langue_auth_$code_langue' value='$code_langue' />";
 		$res .= "\n<input type='checkbox' checked='checked' disabled='disabled' />";
-		$res .=  $nom_langue ."\n&nbsp; &nbsp;<span style='color: #777777'>[$code_langue]</span>";
+		$res .= "<label for='langue_auth_$code_langue'>" . $nom_langue ."\n&nbsp; &nbsp;<span style='color: #777777'>[$code_langue]</span></label>";
 		$res .= "</div>";
 
 		if ($i == $cesure) $res .= "\n</td><td style='width: 50%' class='verdana1'>";
@@ -67,13 +67,13 @@ function configuration_locuteur_dist()
 		if ($langues_trad[$code_langue]) $nom_langue = "<span style='text-decoration: underline'>$nom_langue</span>";
 
 		if ($langues_auth[$code_langue]) {
-			$res .= "<input type='checkbox' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue' checked='checked' />";
+			$res .= "<input type='checkbox' name='langues_auth[]' id='langue_auth_$code_langue' value='$code_langue' checked='checked' />";
 			$nom_langue = "<b>$nom_langue</b>";
 		}
 		else {
-			$res .= "<input type='checkbox' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue' />";
+			$res .= "<input type='checkbox' name='langues_auth[]' id='langue_auth_$code_langue' value='$code_langue' />";
 		}
-		$res .=  "\n<label for='langue_auth_$code_langue'>$nom_langue</label> &nbsp; &nbsp;<span style='color: #777777'>[$code_langue]</span>";
+		$res .=  "\n<label for='langue_auth_$code_langue'>$nom_langue &nbsp; &nbsp;<span style='color: #777777'>[$code_langue]</span></label>";
 
 		$res .= "</div>";
 
