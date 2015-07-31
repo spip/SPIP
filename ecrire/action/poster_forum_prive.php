@@ -72,6 +72,7 @@ function action_poster_forum_prive_post($r)
 	   // une redirection d'un POST doit etre en POST et pas en GET
 	   // on n'aurait pas a faire l'horreur ci-dessous.
 		  
+	   set_request('action', '');
 	   set_request('exec', 'poster_forum_prive');
 	   set_request('id', $id);
 	   set_request('id_parent', $id_parent);
