@@ -687,27 +687,24 @@ function post_autobr($texte, $delim="\n_ ") {
 
 // renvoie la traduction d'un bloc multi dans la langue demandee
 function multi_trad ($lang, $trads) {
-	// si la traduction existe, genial
-	if (isset($trads[$lang]))
-		$retour = $trads[$lang];
-
-	// cas des langues xx_yy
-	else if (ereg('^([a-z]+)_', $lang, $regs) AND isset($trads[$regs[1]]))
-			$retour = $trads[$regs[1]];
-
-	// sinon, renvoyer la premiere du tableau
-	// remarque : on pourrait aussi appeler un service de traduction externe
-	// ou permettre de choisir une langue "plus proche",
-	// par exemple le francais pour l'espagnol, l'anglais pour l'allemand, etc.
-	else {
-		list (,$trad) = each($trads);
-		$retour = $trad;
-	}
-
-
-	// dans l'espace prive, mettre un popup multi
-	if ($GLOBALS['flag_ecrire']) {
-		$retour = ajoute_popup_multi($trads, $retour);
+	global $flag_ecrire;
+	
+	if ($flag_ecrire) {
+		$retour = ajoute_popup_multi($trads);
+	} else {
+		// si la traduction existe, genial
+		if (isset($trads[$lang]))
+			$retour = $trads[$lang];
+	
+		// cas des langues xx_yy
+		else if (ereg('^([a-z]+)_', $lang, $regs) AND isset($trads[$regs[1]]))
+				$retour = $trads[$regs[1]];
+	
+		// sinon, le texte par defaut
+		// ainsi, possibilite de ne rien afficher
+		else {
+			$retour = $trads["defaut"];
+		}
 	}
 
 	return $retour;
@@ -717,6 +714,18 @@ function multi_trad ($lang, $trads) {
 function extraire_trad ($langue_demandee, $bloc) {
 	$lang = '';
 
+	while (preg_match("/<([a-z_]+)>(.*?)<\/([a-z_]+)>/si", $bloc, $regs)) {
+		$lang = $regs[1];
+		$texte = trim($regs[2]);
+		$trads[$lang] = $texte;
+		//echo "<li>$lang: $texte";
+		$bloc = ereg_replace("<$lang>.*</$lang>", "", $bloc);
+	}
+	
+	$trads["defaut"] = $bloc;
+	
+
+	/*	
 	while (preg_match("/^(.*?)\[([a-z_]+)\]/si", $bloc, $regs)) {
 		$texte = trim($regs[1]);
 		if ($texte OR $lang)
@@ -725,6 +734,7 @@ function extraire_trad ($langue_demandee, $bloc) {
 		$lang = $regs[2];
 	}
 	$trads[$lang] = $bloc;
+	*/
 
 	// faire la traduction avec ces donnees
 	return multi_trad($langue_demandee, $trads);
@@ -744,16 +754,18 @@ function extraire_multi ($letexte) {
 }
 
 // popup des blocs multi dans l'espace prive (a ameliorer)
-function ajoute_popup_multi($trads, $texte) {
+function ajoute_popup_multi($trads) {
 	global $popups_multi, $compteur_multi;
-	while (list($lang,$bloc) = each($trads)) 
-		$popup .= "[$lang] ".supprimer_tags(couper($bloc,20))."\n";
 
-	if ($popup) {
-		$texte .= " <img src=\"img_pack/langues-modif-12.gif\" alt=\"(multi)\" title=\"$popup\" height=\"12\" width=\"12\" border=\"0\" />";
+	while (list($lang,$bloc) = each($trads)) 
+		$retour .= "<div>[$lang] $bloc</div>\n";
+
+
+	if ($retour) {
+		$retour = "<div style='padding-left: 16px; background: url(img_pack/langues-modif-12.gif) top left no-repeat;'>$retour</div>";
 	}
 
-	return $texte;
+	return $retour;
 }
 
 ?>
