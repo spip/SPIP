@@ -1023,7 +1023,7 @@ function http_calendrier_invisible($annee, $mois, $jour, $script, $ancre, $id)
 // agenda mensuel 
 
 function http_calendrier_agenda ($annee, $mois, $jour_ved, $mois_ved, $annee_ved, $semaine = false,  $script='', $ancre='', $evt='') {
-
+  spip_log("hcaclic $script");
   if (!$script) $script =  $GLOBALS['PHP_SELF'] ;
   if (!strpos($script, '?')) $script .= '?';
   if (!$mois) {$mois = 12; $annee--;}
@@ -1148,7 +1148,7 @@ function http_calendrier_rv($messages, $type) {
 		if (ereg("^=([^[:space:]]+)$",$row['texte'],$match))
 			$url = quote_amp($match[1]);
 		else
-			$url = http_php_script("message", "id_message=".$row['id_message']);
+			$url = http_php_scriptnq("message", "id_message=".$row['id_message']);
 
 		$rv = ($row['rv'] == 'oui');
 		$date = $row['date_heure'];

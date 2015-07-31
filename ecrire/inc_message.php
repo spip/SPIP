@@ -497,7 +497,7 @@ function affiche_message_dist($id_message, $cherche_auteur, $nouv_auteur)
 	debut_gauche();
 	
 	if ($rv != 'non')
-	  echo http_calendrier_agenda ($lannee, $lemois, $lejour, $lemois, $lannee,false, http_php_script('calendrier'));
+	  echo http_calendrier_agenda ($lannee, $lemois, $lejour, $lemois, $lannee,false, http_php_scriptnq('calendrier'));
 	
 	echo "<br />";
 	
