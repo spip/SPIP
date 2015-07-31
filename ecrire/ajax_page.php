@@ -30,20 +30,44 @@ echo "<"."?xml version='1.0' encoding='$charset'?>";
 		// echo "$type - $id - $rac";
 		
 		if ($type == "rubrique") {
-			$res = spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique = $id");
+			$res = spip_query("SELECT titre, descriptif FROM spip_rubriques WHERE id_rubrique = $id");
 			if ($row = spip_fetch_array($res)) {
 				$titre = addslashes(typo($row["titre"]));
+				$descriptif = propre($row["descriptif"]);
+			} else {
+			$titre = addslashes(_T('info_racine_site'));
 			}
-		}
+		} 
 		
 		echo "<div style='display: none;'>";
 		echo "<input type='text' id='".$rac."_sel' value='$id' />";
 		echo "<input type='text' id='".$rac."_sel2' value='$titre' />";
 		echo "</div>";
-		echo "<b>$titre</b>";
+
+		include_ecrire ("inc_logos.php3");
+
+
+		echo "<div class='arial2' style='padding: 5px; background-color: white; border: 1px solid $couleur_foncee; border-top: 0px;'>";
+
+		if ($type == "rubrique" AND $spip_display != 1 AND $spip_display!=4 AND lire_meta('image_process') != "non") {
+			include_ecrire("inc_logos.php3");
+			$logo = decrire_logo("rubon$id");
+			if ($logo) {
+				$fichier = $logo[0];
+					echo  "<div style='float: $spip_lang_right; margin-$spip_lang_right: -5px; margin-top: -5px;'>";
+					echo reduire_image_logo(_DIR_IMG.$fichier, 100, 48);
+					echo "</div>";
+			}
+		}
+
+
+
+		echo "<div><p><b>$titre</b></p></div>";
+		if (strlen($descriptif) > 0) echo "<div>$descriptif</div>";
+		echo "</div>";
 		
 		echo "<div style='text-align: $spip_lang_right;'>";
-		echo "<input type='button' value='Choisir' class='fondo' onClick=\"sel=findObj_forcer('".$rac."_sel').value; sel2=findObj_forcer('".$rac."_sel2').value; func = findObj('".$rac."_fonc').value; func = func.replace('::sel::', sel); func = func.replace('::sel2::', sel2); eval(func);\">";
+		echo "<input type='button' value='"._T('bouton_choisir')."' class='fondo' onClick=\"sel=findObj_forcer('".$rac."_sel').value; sel2=findObj_forcer('".$rac."_sel2').value; func = findObj('".$rac."_fonc').value; func = func.replace('::sel::', sel); func = func.replace('::sel2::', sel2); eval(func);\">";
 		echo "</div>";
 	}
 

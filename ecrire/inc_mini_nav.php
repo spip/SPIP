@@ -138,7 +138,8 @@ function mini_nav ($sel, $rac="", $fonction="document.location='naviguer.php3?id
 	$ret .= "</div>\n";
 	
 	if ($aff_racine) {
-		$ret .= "<div class='arial11 petite-rubrique' style='background-image: url(" . _DIR_IMG_PACK . "racine-site-12.gif); background-color: white; border: 1px solid $couleur_foncee; border-bottom: 0px;'><div class='pashighlight'>";
+		$onClick .= " aff_selection('rubrique','$rac', '0');";
+		$ret .= "<div class='arial11 petite-rubrique' onclick=\"$onClick\" style='background-image: url(" . _DIR_IMG_PACK . "racine-site-12.gif); background-color: white; border: 1px solid $couleur_foncee; border-bottom: 0px;'><div class='pashighlight'>";
 		$ret .= _T("info_racine_site");
 		$ret .= "</div></div>";
 	}
