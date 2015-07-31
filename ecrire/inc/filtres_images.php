@@ -166,7 +166,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 function image_imagepng($img,$fichier) {
 	$tmp = $fichier.".tmp";
 	$ret = imagepng($img,$tmp);
-	@unlink($fichier); // le fichier peut deja exister
+	spip_unlink($fichier); // le fichier peut deja exister
 	@rename($tmp, $fichier);
 	return $ret;
 }
@@ -175,7 +175,7 @@ function image_imagepng($img,$fichier) {
 function image_imagegif($img,$fichier) {
 	$tmp = $fichier.".tmp";
 	$ret = imagegif($img,$tmp);
-	@unlink($fichier); // le fichier peut deja exister
+	spip_unlink($fichier); // le fichier peut deja exister
 	@rename($tmp, $fichier);
 	return $ret;
 }
@@ -183,7 +183,7 @@ function image_imagegif($img,$fichier) {
 function image_imagejpg($img,$fichier,$qualite=85) {
 	$tmp = $fichier.".tmp";
 	$ret = imagejpeg($img,$tmp, $qualite);
-	@unlink($fichier); // le fichier peut deja exister
+	spip_unlink($fichier); // le fichier peut deja exister
 	@rename($tmp, $fichier);
 	return $ret;
 }
@@ -215,7 +215,7 @@ function reconstruire_image_intermediaire($fichier_manquant){
 		AND $valeurs=unserialize($source)
     AND ($fichier = $valeurs['fichier']) # l'origine est connue (on ne verifie pas son existence, qu'importe ...)
     ) {
-			@unlink($src); // si jamais on a un timeout pendant la reconstruction, elle se fera naturellement au hit suivant
+			spip_unlink($src); // si jamais on a un timeout pendant la reconstruction, elle se fera naturellement au hit suivant
 			$reconstruire[] = $valeurs['reconstruction'];
    }
 	while (count($reconstruire)){
@@ -233,7 +233,7 @@ function reconstruire_image_intermediaire($fichier_manquant){
 function ramasse_miettes($fichier){
 	if (!lire_fichier($src = "$fichier.src",$source) 
 		OR !$valeurs=unserialize($source)) return;
-	@unlink($src); # on supprime la reference a sa source pour marquer cette image comme non intermediaire
+	spip_unlink($src); # on supprime la reference a sa source pour marquer cette image comme non intermediaire
 	while (
 	     ($fichier = $valeurs['fichier']) # l'origine est connue (on ne verifie pas son existence, qu'importe ...)
 		AND (substr($fichier,0,strlen(_DIR_VAR))==_DIR_VAR) # et est dans local
@@ -241,9 +241,9 @@ function ramasse_miettes($fichier){
 		AND ($valeurs=unserialize($source))  # et valide
 		) {
 		# on efface le fichier
-		@unlink($fichier);
+		spip_unlink($fichier);
 		# mais laisse le .src qui permet de savoir comment reconstruire l'image si besoin
-		#@unlink($src);
+		#spip_unlink($src);
 	}
 }
 
@@ -471,7 +471,7 @@ function image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO', 
 				$jpegtopnm_command = str_replace("pnmscale", "jpegtopnm", _PNMSCALE_COMMAND);
 				exec("$jpegtopnm_command $image | "._PNMSCALE_COMMAND." -width $destWidth | $pnmtojpeg_command > $vignette");
 				if (!($s = @filesize($vignette)))
-					@unlink($vignette);
+					spip_unlink($vignette);
 				if (!@file_exists($vignette)) {
 					spip_log("echec netpbm-jpg sur $vignette");
 					return;
@@ -480,7 +480,7 @@ function image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO', 
 				$giftopnm_command = str_replace("pnmscale", "giftopnm", _PNMSCALE_COMMAND);
 				exec("$giftopnm_command $image | "._PNMSCALE_COMMAND." -width $destWidth | $pnmtojpeg_command > $vignette");
 				if (!($s = @filesize($vignette)))
-					@unlink($vignette);
+					spip_unlink($vignette);
 				if (!@file_exists($vignette)) {
 					spip_log("echec netpbm-gif sur $vignette");
 					return;
@@ -489,7 +489,7 @@ function image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO', 
 				$pngtopnm_command = str_replace("pnmscale", "pngtopnm", _PNMSCALE_COMMAND);
 				exec("$pngtopnm_command $image | "._PNMSCALE_COMMAND." -width $destWidth | $pnmtojpeg_command > $vignette");
 				if (!($s = @filesize($vignette)))
-					@unlink($vignette);
+					spip_unlink($vignette);
 				if (!@file_exists($vignette)) {
 					spip_log("echec netpbm-png sur $vignette");
 					return;

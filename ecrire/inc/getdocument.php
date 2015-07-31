@@ -40,7 +40,7 @@ function effacer_repertoire_temporaire($nom) {
 	$d = opendir($nom);
 	while (($f = readdir($d)) !== false) {
 		if (is_file("$nom/$f"))
-			@unlink("$nom/$f");
+			spip_unlink("$nom/$f");
 		else if ($f <> '.' AND $f <> '..'
 		AND is_dir("$nom/$f"))
 			effacer_repertoire_temporaire("$nom/$f");
@@ -97,7 +97,7 @@ function deplacer_fichier_upload($source, $dest, $move=false) {
 			include_spip('inc/flock');
 			raler_fichier($dest);
 		}
-		@unlink($dest);
+		spip_unlink($dest);
 	}
 	return $ok;
 }

@@ -39,7 +39,7 @@ function test_ecrire($my_dir) {
 	// avec celle du script et du repertoire courant
 	if(!$chmod) {
 		@rmdir('test');
-		@unlink('test'); // effacer au cas ou
+		spip_unlink('test'); // effacer au cas ou
 		@touch('test');
 		if ($uid > 0 && $uid == $uid2 && @fileowner('test') == $uid)
 			$chmod = 0700;
@@ -52,7 +52,7 @@ function test_ecrire($my_dir) {
 			$perms = ($perms & 0777) | (($perms & 0444) >> 2);
 			$chmod |= $perms;
 		}
-		@unlink('test');
+		spip_unlink('test');
 	}
 	// Verifier que les valeurs sont correctes
 	$f = @fopen($my_dir.'test.php', 'w');
@@ -62,7 +62,7 @@ function test_ecrire($my_dir) {
 		@chmod($my_dir.'test.php', $chmod);
 		include($my_dir.'test.php');
 	}
-	@unlink($my_dir.'test.php');
+	spip_unlink($my_dir.'test.php');
 	return $ok?$chmod:false;
 }
 

@@ -32,7 +32,7 @@ function action_purger_dist()
 
 	case 'cache': 
 		supprime_invalideurs();
-		@unlink(_CACHE_RUBRIQUES);
+		spip_unlink(_CACHE_RUBRIQUES);
 		purger_repertoire(_DIR_CACHE);
 		break;
 

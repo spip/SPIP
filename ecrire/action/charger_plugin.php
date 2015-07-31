@@ -96,7 +96,7 @@ function action_charger_plugin_dist() {
 			)
 		);
 		if (_request('extract')) {
-			@unlink($fichier);
+			spip_unlink($fichier);
 		}
 	}
 

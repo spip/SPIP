@@ -24,7 +24,7 @@ function convert_utf8_init($tables_a_convertir)
 		spip_query("UPDATE $table SET $champ = CONCAT('<CONVERT ".$charset_source.">', $champ)	WHERE $champ NOT LIKE '<CONVERT %'");
 	}
 
-	@unlink(_DIR_TMP.'convert_utf8_backup.sql');
+	spip_unlink(_DIR_TMP.'convert_utf8_backup.sql');
 
 	// convertir spip_meta
 

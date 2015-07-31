@@ -68,8 +68,8 @@ function base_delete_all_dist($titre)
 	// un pipeline pour detruire les tables installees par les plugins
 	pipeline('delete_tables', '');
 
-	@unlink(_ACCESS_FILE_NAME);
-	@unlink(_FILE_CONNECT);
+	spip_unlink(_ACCESS_FILE_NAME);
+	spip_unlink(_FILE_CONNECT);
 	spip_log("destruction operee redirige vers " . _request('redirect'));
 }
 ?>

@@ -28,7 +28,7 @@ function exec_install_dist()
 
 	// On va supprimer les eventuelles vieilles valeurs de meta,
 	// on perd l'init des langues, mais elle est refaite par menu_langue
-	@unlink(_FILE_META);
+	spip_unlink(_FILE_META);
 	$GLOBALS['meta'] = array();
 	include_spip('base/create');
 	$fonc = charger_fonction("etape_$etape", 'install');

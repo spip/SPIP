@@ -223,7 +223,7 @@ function inc_joindre6_dist($path, $mode, $type, $id, $id_document,$hash, $redire
 {
 	$x = joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
 	//  suppression de l'archive en zip
-	@unlink($path);
+	spip_unlink($path);
 	return $x;
 }
 

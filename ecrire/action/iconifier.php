@@ -38,7 +38,7 @@ function action_iconifier_dist()
 function action_spip_image_effacer_dist($arg) {
 
 	if (!strstr($arg, ".."))
-		@unlink(_DIR_LOGOS . $arg);
+		spip_unlink(_DIR_LOGOS . $arg);
 }
 
 //
@@ -83,7 +83,7 @@ function action_spip_image_ajouter_dist($arg,$sousaction2,$source) {
 
 			if (_LOGO_MAX_SIZE > 0
 			AND $poids > _LOGO_MAX_SIZE*1024) {
-				@unlink ($f);
+				spip_unlink ($f);
 				check_upload_error(6,
 				_T('info_logo_max_poids',
 					array('maxi' => taille_en_octets(_LOGO_MAX_SIZE*1024),
@@ -93,7 +93,7 @@ function action_spip_image_ajouter_dist($arg,$sousaction2,$source) {
 			if (_LOGO_MAX_WIDTH * _LOGO_MAX_HEIGHT
 			AND ($size[0] > _LOGO_MAX_WIDTH
 			OR $size[1] > _LOGO_MAX_HEIGHT)) {
-				@unlink ($f);
+				spip_unlink ($f);
 				check_upload_error(6, 
 				_T('info_logo_max_taille',
 					array(
@@ -110,7 +110,7 @@ function action_spip_image_ajouter_dist($arg,$sousaction2,$source) {
 			@rename ($f, _DIR_LOGOS . $arg . ".$type");
 		}
 		else {
-			@unlink ($f);
+			spip_unlink ($f);
 			check_upload_error(6,_T('info_logo_format_interdit',
 						array('formats' => join(', ', $formats_logos))));
 		}

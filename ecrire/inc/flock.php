@@ -113,7 +113,7 @@ function ecrire_fichier ($fichier, $contenu, $ecrire_quand_meme = false, $trunca
 	include_spip('inc/autoriser');
 	if (autoriser('chargerftp'))
 		raler_fichier($fichier);
-	@unlink($fichier);
+	spip_unlink($fichier);
 	return false;
 }
 
@@ -155,9 +155,13 @@ function supprimer_fichier($fichier) {
 	@fclose($fp);
 
 	// supprimer
-	@unlink($fichier);
+	spip_unlink($fichier);
 }
-
+// Supprimer brutalement, si le fichier existe
+function spip_unlink($fichier) {
+	if (file_exists($fichier))
+		unlink($fichier);
+}
 
 //
 // Retourne $base/${subdir}/ si le sous-repertoire peut etre cree,
@@ -196,7 +200,7 @@ function sous_repertoire($base, $subdir='', $nobase = false, $tantpis=false) {
 		@fputs($test, '<'.'?php $ok = true; ?'.'>');
 		@fclose($test);
 		@include("$path/dir_test.php");
-		@unlink("$path/dir_test.php");
+		spip_unlink("$path/dir_test.php");
 	}
 	if ($ok) {
 		@touch ("$path/.ok");

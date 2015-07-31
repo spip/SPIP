@@ -142,8 +142,8 @@ function ecrire_acces() {
 	// si .htaccess existe, outrepasser spip_meta
 	if (($GLOBALS['meta']['creer_htpasswd'] != 'oui')
 	AND !@file_exists($htaccess)) {
-		@unlink($htpasswd);
-		@unlink($htpasswd."-admin");
+		spip_unlink($htpasswd);
+		spip_unlink($htpasswd."-admin");
 		return;
 	}
 
@@ -214,7 +214,7 @@ function gerer_htaccess() {
 		if (is_dir($dir = _DIR_IMG . $e['extension'])) {
 			if ($GLOBALS['meta']['creer_htaccess'] == 'oui')
 				verifier_htaccess($dir);
-			else @unlink("$dir/" . _ACCESS_FILE_NAME);
+			else spip_unlink("$dir/" . _ACCESS_FILE_NAME);
 		}
 	}
 	return $GLOBALS['meta']['creer_htaccess'];
