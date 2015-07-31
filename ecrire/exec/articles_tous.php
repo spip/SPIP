@@ -114,7 +114,7 @@ function texte_articles_tous(&$sel_lang, $flag_trad, $aff_art,$spip_lang_dir){
 	if (autoriser('publierdans', 'rubrique', 0))
 		$result = sql_select("id_article, titre, statut, id_rubrique, lang, id_trad, date_modif", "spip_articles", "", "", "date DESC");
 	else 
-		$result = sql_select("A.id_article, A.titre, A.statut, A.id_rubrique, A.lang, A.id_trad, A.date_modif", "spip_articles AS A LEFT JOIN spip_auteurs_liens AS L ON (L.objet='article' AND A.id_article=L.id_objet)", "A.statut = 'publie' OR A.statut =	'prop' OR (A.statut = 'prepa'  AND L.id_auteur=" . intval($GLOBALS['visiteur_session']['id_auteur']) . ")", "id_article", "A.date DESC");
+		$result = sql_select("A.id_article, A.titre, A.statut, A.id_rubrique, A.lang, A.id_trad, A.date_modif", "spip_articles AS A LEFT JOIN spip_auteurs_liens AS L ON (L.objet='article' AND A.id_article=L.id_objet)", "A.statut = 'publie' OR A.statut =	'prop' OR (A.statut = 'prepa'  AND L.id_auteur=" . sql_quote($GLOBALS['visiteur_session']['id_auteur']) . ")", "id_article", "A.date DESC");
 
 	while($row = sql_fetch($result)) {
 		$id_rubrique=$row['id_rubrique'];

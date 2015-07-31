@@ -30,7 +30,7 @@ function action_instituer_article_dist($arg=null) {
 		// si on passe un statut_old, le controler
 		// http://trac.rezo.net/trac/spip/ticket/1932
 		if ($old = _request('statut_old')
-		AND $s = sql_fetsel('statut', 'spip_articles', 'id_article='.intval($id_article))
+		AND $s = sql_fetsel('statut', 'spip_articles', 'id_article='.sql_quote($id_article))
 		AND $s['statut'] != $old)
 			return;
 
