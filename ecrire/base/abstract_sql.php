@@ -557,16 +557,16 @@ function sql_test_date($type, $serveur='', $option=true)
 // http://doc.spip.org/@description_table
 function description_table($nom){
 
-        global $tables_principales, $tables_auxiliaires;
+	global $tables_principales, $tables_auxiliaires;
 	static $f;
 
-        include_spip('base/serial');
-        if (isset($tables_principales[$nom]))
-                return $tables_principales[$nom];
+	include_spip('base/serial');
+	if (isset($tables_principales[$nom]))
+		return $tables_principales[$nom];
 
-        include_spip('base/auxiliaires');
-        if (isset($tables_auxiliaires[$nom]))
-                return $tables_auxiliaires[$nom];
+	include_spip('base/auxiliaires');
+	if (isset($tables_auxiliaires[$nom]))
+		return $tables_auxiliaires[$nom];
 
 	if (!$f) $f = charger_fonction('trouver_table', 'base');
 	return $f($nom);
