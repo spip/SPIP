@@ -10,6 +10,7 @@
 // voulu ; dans le cas contraire le document sera lu comme s'il etait
 // dans le charset iso-8859-1
 
+// http://doc.spip.org/@extracteur_rtf
 function extracteur_rtf($fichier, &$charset) {
 
 	$charset = 'iso-8859-1';
