@@ -34,8 +34,10 @@ function exec_admin_tech_dist()
 		echo  _T('info_gauche_admin_tech');
 		echo fin_boite_info(true);
 		$repertoire = _DIR_DUMP;
-		if(!@file_exists($repertoire)) {
-			$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
+		if (!@file_exists($repertoire)
+			AND !$repertoire = sous_repertoire(_DIR_DUMP,'',false,true)
+		) {
+			$repertoire = preg_replace(','._DIR_TMP.',', '', _DIR_DUMP);
 			$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
 		}
 		$dir_dump = $repertoire;
