@@ -151,7 +151,7 @@ $revisions .= "<a href='".generer_url_ecrire('suivi_revisions', "debut=$next&id_
 							if (!$rss) $revisions .= "<blockquote class='serif1'>";
 							$aff = propre_diff($t);
 							if ($GLOBALS['les_notes']) {
-								$aff .= '<p>'.$GLOBALS['les_notes'];
+								$aff .= '<p>'.$GLOBALS['les_notes'].'</p>';
 								$GLOBALS['les_notes'] = '';
 							}
 							if (!$rss) {
