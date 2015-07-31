@@ -99,7 +99,7 @@ function spip_mysql_alter($query, $serveur=''){
 	return spip_mysql_query("ALTER ".$query); # i.e. que PG se debrouille
 }
 
-// http://doc.spip.org/@spip_mysql_alter
+// http://doc.spip.org/@spip_mysql_explain
 function spip_mysql_explain($query, $serveur=''){
 	if (strpos($query, 'SELECT') !== 0) return array();
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];

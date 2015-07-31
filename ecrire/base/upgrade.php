@@ -69,6 +69,7 @@ function maj_base($version_cible = 0) {
 
 // Appliquer une serie de spip_query() qui risquent de partir en timeout
 // cf. maj/v019.php
+// http://doc.spip.org/@serie_upgrade
 function serie_upgrade($serie, $q = array()) {
 	$etape = intval($GLOBALS['meta']['upgrade_etape_'.$serie]);
 	foreach ($q as $i => $req) {
@@ -133,6 +134,7 @@ function convertir_un_champ_blob_en_text($table,$champ,$type){
 }
 
 // A refaire pour PG
+// http://doc.spip.org/@upgrade_test
 function upgrade_test() {
 	spip_query("DROP TABLE IF EXISTS spip_test");
 	spip_query("CREATE TABLE spip_test (a INT)");
