@@ -55,11 +55,12 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 		AND ($fichier_cache_time > @filemtime(_DIR_LANG .$module.'_'.$lang.'.php3'))
 		AND ($fichier_cache_time > @filemtime(_DIR_LANG . 'perso.php3'))) {
 			$GLOBALS['idx_lang'] = 'i18n_'.$module.'_'.$lang;
-			if (lire_fichier($fichier_cache,	$contenu, array('phpcheck' => 'oui'))) {
+			if (lire_fichier($fichier_cache,
+			$contenu, array('phpcheck' => 'oui'))) {
 				eval ('?'.'>'.$contenu);
 				return;
 			}
-	  }
+		}
 		else $GLOBALS['cache_lang_modifs'][$module][$lang] = true;
 	}
 
@@ -68,14 +69,20 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 		include_lang($fichier_lang);
 	} else {
 		// si le fichier de langue du module n'existe pas, on se rabat sur
-		// le francais, qui *par definition* doit exister, et on copie le
-		// tableau 'fr' dans la var liee a la langue
-		$fichier_lang = $module.'_fr.php3';
-		if (@is_readable(_DIR_LANG . $fichier_lang)) {
-			$GLOBALS['idx_lang']='i18n_'.$module.'_fr';
+		// la langue par defaut du site -- et au pire sur le francais, qui
+		// *par definition* doit exister, et on copie le tableau dans la
+		// var liee a la langue
+		$l = lire_meta('langue_site');
+		if (!is_readable(_DIR_LANG . $module.'_'.$l.'.php3'))
+			$l = 'fr';
+		$fichier_lang = $module.'_' .$l. '.php3';
+		if (is_readable(_DIR_LANG . $fichier_lang)) {
 			include_lang($fichier_lang);
+			$GLOBALS['idx_lang']='i18n_'.$module.'_' .$l;
+			$GLOBALS['i18n_'.$module.'_'.$lang]
+				= &$GLOBALS['i18n_'.$module.'_'.$l];
+			spip_log("module de langue : ${module}_$l.php3");
 		}
-		$GLOBALS['i18n_'.$module.'_'.$lang] = $GLOBALS['i18n_'.$module.'_fr'];
 	}
 
 	// surcharge perso
@@ -134,8 +141,13 @@ function traduire_chaine($code, $args) {
 	global $spip_lang;
 	global $cache_lang;
 
-	// liste des modules a parcourir
-	$modules = array('spip');
+	// modules par defaut
+	if (_DIR_RESTREINT)
+		$modules = array('spip');
+	else
+		$modules = array('spip', 'ecrire');
+
+	// modules demandes explicitement
 	if (strpos($code, ':')) {
 		if (ereg("^([a-z/]+):(.*)$", $code, $regs)) {
 			$modules = explode("/",$regs[1]);

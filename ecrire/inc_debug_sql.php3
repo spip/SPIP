@@ -230,7 +230,8 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	  echo "</fieldset></div>";
 	}
 	echo "\n</div>";
-	echo inclure_balise_dynamique(balise_formulaire_admin_dyn('','','','','',$debug_objets));
+	echo inclure_balise_dynamique(balise_formulaire_admin_dyn('','','','','','',
+		$debug_objets));
 	echo '</body></html>';
 	exit;
 }
