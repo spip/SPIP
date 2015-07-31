@@ -77,7 +77,8 @@ function urls_html_dist($i, $entite, $args='', $ancre='') {
 		$_id = id_table_objet($regs[1]);
 		$id_objet = $regs[2];
 		$suite = $regs[3];
-		$contexte = array($_id => $id_objet);
+		$contexte[$_id] = $id_objet;
+		if ($type == 'syndic') $type = 'site';
 		return array($contexte, $type, null, $type);
 	}
 
