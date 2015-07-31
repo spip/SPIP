@@ -53,7 +53,7 @@ function objet_associable($objet){
  * En cas de lot de liens, c'est la meme qualification qui est appliquee a tous
  *
  * @param array $objets_source
- * @param array $objets_lies
+ * @param array|string $objets_lies
  * @param array $qualif
  * @return string
  */
@@ -82,7 +82,7 @@ function objet_associer($objets_source, $objets_lies, $qualif = null){
  *
  *
  * @param array $objets_source
- * @param array $objets_lies
+ * @param array|string $objets_lies
  * @return string
  */
 function objet_dissocier($objets_source,$objets_lies){
@@ -105,7 +105,7 @@ function objet_dissocier($objets_source,$objets_lies){
  * seul le type de l'objet source ne peut pas accepter de joker et doit etre explicite
  *
  * @param array $objets_source
- * @param array $objets_lies
+ * @param array|string $objets_lies
  * @param array $qualif
  */
 function objet_qualifier_liens($objets_source,$objets_lies,$qualif){
@@ -126,12 +126,12 @@ function objet_qualifier_liens($objets_source,$objets_lies,$qualif){
  * un * pour $objet,$id_objet permet de traiter par lot
  * seul le type de l'objet source ne peut pas accepter de joker et doit etre explicite
  *
- * @param <type> $objets_source
- * @param <type> $objets_lies
- * @return <type>
+ * @param array $objets_source
+ * @param array|string $objets_lies
+ * @return array
  */
 function objet_trouver_liens($objets_source,$objets_lies){
-	return objet_traiter_laisons('lien_find',$objets_source,$objets_lies,$qualif);
+	return objet_traiter_laisons('lien_find',$objets_source,$objets_lies);
 }
 
 
@@ -149,7 +149,7 @@ function objet_trouver_liens($objets_source,$objets_lies){
  * seul le type de l'objet source ne peut pas accepter de joker et doit etre explicite
  *
  * @param array $objets_source
- * @param array $objets_lies
+ * @param array|string $objets_lies
  * @return int
  */
 function objet_optimiser_liens($objets_source,$objets_lies){
@@ -157,6 +157,40 @@ function objet_optimiser_liens($objets_source,$objets_lies){
 }
 
 
+/**
+ * Dupliquer tous les liens entrant ou sortants d'un objet
+ * vers un autre (meme type d'objet, mais id different)
+ *
+ * Renvoie le nombre de liens copies
+ * 
+ * @param string $objet
+ * @param int $id_source
+ * @param int $id_cible
+ * @return int
+ */
+function objet_dupliquer_liens($objet,$id_source,$id_cible){
+	include_spip('base/objets');
+	$tables = lister_tables_objets_sql();
+	$n = 0;
+	foreach($tables as $table_sql => $infos){
+		if (objet_associable($infos['type'])){
+			$liens = (($infos['type']==$objet)?
+					objet_trouver_liens(array($objet=>$id_source),'*')
+				:
+					objet_trouver_liens(array($infos['type']=>'*'),array($objet=>$id_source)));
+			foreach($liens as $lien){
+				$n++;
+				if ($infos['type']==$objet){
+					objet_associer(array($objet=>$id_cible),array($lien['objet']=>$lien[$lien['objet']]),$lien);
+				}
+				else {
+					objet_associer(array($infos['type']=>$lien[$infos['type']]),array($objet=>$id_cible),$lien);
+				}
+			}
+		}
+	}
+	return $n;
+}
 
 /**
  * Fonctions techniques
