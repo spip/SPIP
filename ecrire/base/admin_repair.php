@@ -15,9 +15,31 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@base_admin_repair_dist
 function base_admin_repair_dist() {
 
-  $connexion = $GLOBALS['connexions'][0];
-  $prefixe = $connexion['prefixe'];
-  $res1= spip_query("SHOW TABLES LIKE " . _q("$prefixe%"));
+	$connexion = $GLOBALS['connexions'][0];
+	if ($connexion['type'] == 'mysql')
+	  $res = admin_repair_tables();
+	else {
+	  spip_log("Pas d'instruction REPAIR dans ce serveur SQL");
+	  $res = '     ';
+	}
+
+	if (!$res) {
+		$res = "<br /><br /><span style='color: red; font-weight: bold;'><tt>"._T('avis_erreur_mysql').' '.sql_errno().': '.sql_error() ."</tt></span><br /><br /><br />\n";
+	} else {
+		include_spip('inc/rubriques');
+		calculer_rubriques();
+		propager_les_secteurs();
+	}
+	include_spip('inc/minipres');
+	echo minipres(_T('texte_tentative_recuperation'),
+			$res . generer_form_ecrire('accueil', '','',_T('public:accueil_site')));
+}
+
+function admin_repair_tables() {
+
+	$connexion = $GLOBALS['connexions'][0];
+	$prefixe = $connexion['prefixe'];
+	$res1= spip_query("SHOW TABLES LIKE " . _q("$prefixe%"));
 	$res = "";
 	if ($res1) { while ($r = sql_fetch($res1)) {
 		$tab = array_shift($r);
@@ -46,15 +68,6 @@ function base_admin_repair_dist() {
 			$res .= " "._T('texte_table_ok')."<br />\n";
 	  }
 	}
-	if (!$res) {
-		$res = "<br /><br /><span style='color: red; font-weight: bold;'><tt>"._T('avis_erreur_mysql').' '.sql_errno().': '.sql_error() ."</tt></span><br /><br /><br />\n";
-	} else {
-		include_spip('inc/rubriques');
-		calculer_rubriques();
-		propager_les_secteurs();
-	}
-	include_spip('inc/minipres');
-	echo minipres(_T('texte_tentative_recuperation'),
-			$res . generer_form_ecrire('accueil', '','',_T('public:accueil_site')));
+	  return $res;
 }
 ?>
