@@ -281,12 +281,12 @@ function bloc_des_raccourcis($bloc) {
 	. creer_colonne_droite('',true)
 	. debut_cadre_enfonce('',true)
 	. (($spip_display != 4)
-	     ? ("<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"
+	     ? ("<div style='font-family: Verdana,Arial,Sans,sans-serif; font-size: x-small'><b>"
 		._T('titre_cadre_raccourcis')
-		."</b><p />")
+		."</b>")
 	       : ( "<h3>"._T('titre_cadre_raccourcis')."</h3><ul>"))
 	. $bloc
-	. (($spip_display != 4) ? "</font>" :  "</ul>")
+	. (($spip_display != 4) ? "</div>" :  "</ul>")
 	. fin_cadre_enfonce(true);
 }
 
@@ -333,7 +333,7 @@ function afficher_liste($largeurs, $table, $styles = '') {
 // http://doc.spip.org/@afficher_liste_display_neq4
 function afficher_liste_display_neq4($largeurs, $t, $styles = '') {
 
-	global $spip_lang_left;
+	global $spip_lang_left,$browser_name;
 	$res = '';
 	$evt = (eregi("msie", $browser_name) ? " onmouseover=\"changeclass(this,'tr_liste_over');\" onmouseout=\"changeclass(this,'tr_liste');\"" :'');
 

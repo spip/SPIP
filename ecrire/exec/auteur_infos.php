@@ -17,7 +17,7 @@ include_spip('inc/acces');
 // http://doc.spip.org/@exec_auteur_infos_dist
 function exec_auteur_infos_dist()
 {
-	global $id_auteur, $redirect, $echec, $initial,
+	global $id_auteur, $redirect, $echec, $initial, $spip_display,
 	  $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
 
 	$id_auteur = intval($id_auteur);

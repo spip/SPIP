@@ -209,23 +209,8 @@ function inc_auth_dist() {
 		}
 	}
 
-	// ceci n'arrive qu'a la premiere connexion il me semble
-	// si oui ce serait mieux de le mettre a la creation de l'auteur
-	if (! isset($prefs['display'])) auth_prefs();
-
 	// vide = pas de message d'erreur (cf exit(0) Unix)
 	return "";
-}
-
-// http://doc.spip.org/@auth_prefs
-function auth_prefs()
-{
-	if (!$GLOBALS['set_disp'] = $_COOKIE['spip_display'])
-		$GLOBALS['set_disp'] = 2;
-	if (!$GLOBALS['set_couleur'] = $_COOKIE['spip_couleur'])
-		$GLOBALS['set_couleur'] = 6;
-	if (!$GLOBALS['set_options'] = $_COOKIE['spip_options'])
-		$GLOBALS['set_options'] = 'basiques';
 }
 
 // Cas ou l'auteur a ete identifie mais on n'a pas d'info sur lui

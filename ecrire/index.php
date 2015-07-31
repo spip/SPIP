@@ -80,7 +80,6 @@ if (!preg_match(',^[a-z][0-9a-z_]*$,i', $exec)) $exec = "accueil";
 
 if (autoriser_sans_cookie($exec)) {
 	if (!isset($reinstall)) $reinstall = 'non';
-	$GLOBALS['prefs'] = array('couleur' =>1, 'display'=>0, 'options'=>'avancees');
 	$var_auth = true;
 } else {
 	$var_auth = charger_fonction('auth', 'inc');
@@ -92,14 +91,16 @@ if (autoriser_sans_cookie($exec)) {
 // Preferences de presentation
 //
 
+if (!isset($GLOBALS['prefs']))
+	$GLOBALS['prefs'] = array('couleur' =>1, 'display'=>0, 'options'=>'avancees');
 $prefs_mod = false;
 
 if (isset($_GET['set_couleur'])) {
 	$GLOBALS['prefs']['couleur'] = floor($_GET['set_couleur']);
 	$prefs_mod = true;
 }
-if (isset($_GET['set_display'])) {
-	$GLOBALS['prefs']['display'] = floor($_GET['set_display']);
+if (isset($_GET['set_disp'])) {
+	$GLOBALS['prefs']['display'] = floor($_GET['set_disp']);
 	$prefs_mod = true;
 }
 if (isset($_GET['set_options']) AND ($_GET['set_options'] == 'avancees' OR $_GET['set_options'] == 'basiques')) {
