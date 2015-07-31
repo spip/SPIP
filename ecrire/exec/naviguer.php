@@ -142,7 +142,7 @@ function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $in
 	$onglet_interactivite = "";
 
 	return
-	  pipeline('afficher_fiche_objet',array('args'=>array('type'=>'article','id'=>$id_article),'data'=>
+	  pipeline('afficher_fiche_objet',array('args'=>array('type'=>'rubrique','id'=>$id_rubrique),'data'=>
 	  	"<div class='fiche_objet'>" .
 			$haut.
 			(_INTERFACE_ONGLETS?
