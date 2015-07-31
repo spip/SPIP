@@ -19,14 +19,13 @@ function exec_admin_tech_dist()
 {
   global $flag_gz;
 
+ if (!autoriser('sauvegarder')){
+	echo minipres();
+	exit;
+ }
  $commencer_page = charger_fonction('commencer_page', 'inc');
  echo $commencer_page(_T('titre_admin_tech'), "configuration", "base");
 
- if (!autoriser('sauvegarder')){
-	echo _T('avis_non_acces_page');
-	echo fin_gauche(), fin_page();
-	exit;
- }
 
  if ($GLOBALS['connect_toutes_rubriques']) {
 

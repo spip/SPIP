@@ -21,8 +21,7 @@ function exec_configuration_dist(){
 	global $spip_display;
 
 	if (!autoriser('configurer', 'configuration')) {
-		echo _T('avis_non_acces_page');
-		echo fin_gauche(), fin_page();
+		echo minipres();
 		exit;
 	}
 

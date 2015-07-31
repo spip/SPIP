@@ -20,8 +20,7 @@ include_spip('inc/meta');
 function exec_config_fonctions_dist()
 {
 	if (!autoriser('configurer', 'fonctions')) {
-		echo _T('avis_non_acces_page');
-		echo fin_gauche(), fin_page();
+		echo minipres();
 		exit;
 	}
 

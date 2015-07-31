@@ -21,8 +21,7 @@ function exec_config_multilang_dist()
 {
 
 	if (!autoriser('configurer', 'multilang')) {
-		echo _T('avis_non_acces_page');
-		echo fin_gauche(), fin_page();
+		echo minipres();
 		exit;
 	}
 

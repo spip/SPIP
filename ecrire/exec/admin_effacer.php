@@ -21,6 +21,11 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_admin_effacer_dist
 function exec_admin_effacer_dist()
 {
+	if (!autoriser('detruire')) {
+		echo minipres();
+		exit;
+	}
+
 	pipeline('exec_init',array('args'=>array('exec'=>'admin_effacer'),'data'=>''));
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -44,14 +49,6 @@ function exec_admin_effacer_dist()
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'admin_effacer'),'data'=>''));	  
 	
 	debut_droite();
-
-
-	if (!autoriser('detruire')) {
-		echo _T('avis_non_acces_page');
-		echo fin_gauche(), fin_page();
-		exit;
-	}
-
 	debut_cadre_relief();
 
 	$res .= "\n<input type='hidden' name='reinstall' value='non' />";

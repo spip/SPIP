@@ -20,8 +20,7 @@ function exec_config_lang_dist()
 { 
 
 	if (!autoriser('configurer', 'lang')) {
-		echo _T('avis_non_acces_page');
-		echo fin_gauche(), fin_page();
+		echo minipres();
 		exit;
 	}
 	pipeline('exec_init',array('args'=>array('exec'=>'config_lang'),'data'=>''));
