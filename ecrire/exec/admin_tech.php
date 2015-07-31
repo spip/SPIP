@@ -46,7 +46,7 @@ function exec_admin_tech_dist()
 		$dir_dump = $repertoire;
 
 	} else {
-		echo debut_gauche(true);
+		echo debut_gauche('', true);
 		$dir_dump = determine_upload();
 	}
 
