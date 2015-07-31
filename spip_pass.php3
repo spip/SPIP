@@ -107,20 +107,19 @@ else if ($inscriptions_ecrire || forums_sur_abo()) {
 	install_debut_html("Vous inscrire sur ce site");
 	echo "<p>";
 
-	if ($inscriptions_ecrire) {
+	if ($inscriptions_ecrire)
 		echo propre ("L'espace priv&eacute; de ce site est ouvert aux
 		visiteurs, apr&egrave;s inscription. Une fois enregistr&eacute;,
 		vous pourrez consulter les articles en cours de r&eacute;daction,
 		proposer des articles et participer &agrave; tous les forums.");
-		formulaire_inscription('forum');
-	} else {
+	else
 		echo propre("Vous avez demand&eacute; &agrave; intervenir sur un forum
 		r&eacute;serv&eacute; aux visiteurs enregistr&eacute;s.");
 	echo "\n<p>".propre ("Indiquez ici votre nom et votre adresse email.
 	Votre identifiant personnel vous parviendra rapidement, par courrier
 	&eacute;lectronique.");
 
-	formulaire_inscription($inscriptions_ecrire ? 'redac' : 'forum');
+	formulaire_inscription(($inscriptions_ecrire)? 'redac' : 'forum');
 }
 
 echo "<p align='right'><script type='text/javascript'><!--
