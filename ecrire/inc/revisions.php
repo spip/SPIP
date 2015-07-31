@@ -378,9 +378,14 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 	// Eviter les validations entremelees
 	$lock = "ajout_version $id_article";
 	spip_get_lock($lock, 10);
-	
+
+	// Attention a une edition anonyme (type wiki): id_auteur n'est pas
+	// definie, on enregistre alors le numero IP
+	if (!$id_auteur = intval($id_auteur))
+		$id_auteur = $GLOBALS['ip'];
+
 	// Examiner la derniere version
-	$result = spip_query("SELECT id_version, (id_auteur=$id_auteur AND date > DATE_SUB(NOW(), INTERVAL 1 HOUR) AND permanent!='oui') AS flag FROM spip_versions WHERE id_article=$id_article ORDER BY id_version DESC LIMIT 0,1");
+	$result = spip_query("SELECT id_version, (id_auteur='$id_auteur' AND date > DATE_SUB(NOW(), INTERVAL 1 HOUR) AND permanent!='oui') AS flag FROM spip_versions WHERE id_article=$id_article ORDER BY id_version DESC LIMIT 0,1");
 
 	if ($row = spip_fetch_array($result)) {
 		$nouveau = !$row['flag'];
@@ -440,7 +445,7 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 
 	}
 	else {
-		spip_query("UPDATE spip_versions SET date=NOW(), id_auteur=$id_auteur, champs=" . spip_abstract_quote($codes) . ", permanent='$permanent', titre_version=" . spip_abstract_quote($titre_version) . " WHERE id_article=$id_article AND id_version=$id_version");
+		spip_query("UPDATE spip_versions SET date=NOW(), id_auteur='$id_auteur', champs=" . spip_abstract_quote($codes) . ", permanent='$permanent', titre_version=" . spip_abstract_quote($titre_version) . " WHERE id_article=$id_article AND id_version=$id_version");
 
 	}
 	spip_query("UPDATE spip_articles SET id_version=$id_version_new WHERE id_article=$id_article");
@@ -470,7 +475,12 @@ function propre_diff($texte) {
 	$texte = preg_replace(',(^|[^[])[[]([^[\]]*@@@SPIP_DIFF[0-9]+@@),',
 		'\1&#91;\2', $texte);
 
+	$tex = $GLOBALS['traiter_math']; // desactiver TeX
+	$GLOBALS['traiter_math'] = '';
+	
 	$texte = propre($texte);
+
+	$GLOBALS['traiter_math'] = $tex;
 
 	// un blockquote mal ferme peut gener l'affichage, et title plante safari
 	$texte = preg_replace(',<(/?(blockquote|title)[^>]*)>,i', '&lt;\1>', $texte);
