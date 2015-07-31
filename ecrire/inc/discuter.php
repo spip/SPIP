@@ -61,6 +61,6 @@ function inc_discuter_dist($id_article, $flag, $debut=1)
 		$res = formulaire_discuter($forum, $res, $debut, $total_afficher, 'articles', "id_article=$id_article");
 	} else $res ='';
 
-	return ajax_action_greffe("forum", '', $res);
+	return $res ? ajax_action_greffe("forum", '', $res): "";
 }
 ?>
