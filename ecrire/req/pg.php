@@ -118,9 +118,7 @@ function spip_pg_trace_query($query, $serveur='')
  
 	$r = spip_pg_query_simple($link, $query);
 
-	if ($e = spip_pg_errno())	// Log de l'erreur eventuelle
-		$e .= spip_pg_error($query); // et du fautif
-	return $t ? trace_query_end($query, $t, $r, $e, $serveur) : $r;
+	return $t ? trace_query_end($query, $t, $r, $serveur) : $r;
 }
 
 // Fonction de requete generale quand on est sur que c'est SQL standard.

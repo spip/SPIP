@@ -26,7 +26,7 @@ function trace_query_start()
 }
 
 // http://doc.spip.org/@trace_query_end
-function trace_query_end($query, $start, $result, $err, $serveur='')
+function trace_query_end($query, $start, $result, $serveur='')
 {
 	global $tableau_des_erreurs;
 	if ($start)
