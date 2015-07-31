@@ -233,6 +233,27 @@ class IterateurDATA implements Iterator {
 			}
 		}
 
+		// tri {par x}
+		if ($this->command['orderby']) {
+			$sortfunc = '';
+			foreach($this->command['orderby'] as $tri) {
+				if (preg_match(',^\.?(\w+)( DESC)?$,S', $tri, $r)) {
+					$sortfunc .= '
+					$a = table_valeur($aa, "'.$r[1].'");
+					$b = table_valeur($bb, "'.$r[1].'");
+					if ($a <> $b)
+						return ($a ' . ($r[2] ? '>' : '<').' $b) ? -1 : 1;';
+				}
+			}
+
+			if ($sortfunc) {
+				uasort($this->tableau, create_function('$aa,$bb',
+					$sortfunc.'
+					return 0;'
+				));
+			}
+		}
+
 		// critere {2,7}
 		if ($this->command['limit']) {
 			$limit = explode(',',$this->command['limit']);
