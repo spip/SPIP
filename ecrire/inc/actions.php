@@ -99,7 +99,7 @@ function generer_action_auteur($action, $arg, $redirect="", $mode=false, $att=''
 	if ($redirect)
 		$redirect = "\n\t\t<input name='redirect' type='hidden' value='$redirect' />";
 	// Attention, JS n'aime pas le melange de param GET/POST
-	return "\n<form action='" .
+	return "\n<form style='margin:0px' action='" .
 		generer_url_public('') .
 		"'$att>\n\t<div>
 		<input name='hash' type='hidden' value='$hash' />
