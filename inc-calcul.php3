@@ -165,7 +165,7 @@ function cherche_page ($cache, $contexte, $fond)  {
 			debug_dumpfile ($page['texte'], $fonc, 'resultat');
 		  }
 	}
-	spip_log("page " . strlen($page['texte']) . " $skel .  $fonc");
+#	spip_log("page " . strlen($page['texte']) . " $skel .  $fonc");
 	// Retourner la structure de la page
 
 	return $page;
