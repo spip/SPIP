@@ -452,9 +452,7 @@ function http_calendrier_semaine_noms($annee, $mois, $jour, $script, $ancre){
 			     " " .
 			     $num .
 			     (($num == 1) ? 'er' : '') .
-			     ($ancre  ? ('/' . $numois) : '')),
-			    '',
-			    'color:black;') .
+			     ($ancre  ? ('/' . $numois) : ''))) .
 		  "</th>";
 	}
 	return "\n<tr" .
@@ -1204,14 +1202,10 @@ function http_calendrier_rv($messages, $type) {
 		"<td valign='middle'>" .
 		((!$rv) ? '' :
 		((affdate($date) == affdate($date_fin)) ?
-		 ("<div class='calendrier-arial9'" . 
-		  http_style_background('fond-agenda.gif', 
-					"$spip_lang_right center no-repeat; float: $spip_lang_left; line-height: 12px; color: #666666; margin-$spip_lang_right: 3px; padding-$spip_lang_right: 4px;") .'>'
+		 ("<div class='calendrier-arial9 fond-agenda'>"
 		  . heures($date).":".minutes($date)."<br />"
 		  . heures($date_fin).":".minutes($date_fin)."</div>") :
-		( "<div class='calendrier-arial9'" . 
-		  http_style_background('fond-agenda.gif', 
-					"$spip_lang_right center no-repeat; float: $spip_lang_left; line-height: 12px; color: #666666; margin-$spip_lang_right: 3px; padding-$spip_lang_right: 4px; text-align: center;") . '>'
+		( "<div class='calendrier-arial9 fond-agenda' style='text-align: center;'>"
 		  . heures($date).":".minutes($date)."<br />...</div>" ))) .
 		"<div><b>" .
 		  http_href($url, typo($row['titre']), '', '', 'calendrier-verdana10') .

@@ -1394,3 +1394,12 @@ table.spip td {
 	text-decoration: none;
 	margin: 0;
 }
+
+.fond-agenda {
+	background: url<?php echo '(', http_img_pack('fond-agenda.gif'), ') ', $right; ?> center no-repeat;
+	float: <?php echo $left; ?>; 
+	margin-<?php echo $right; ?>: 3px;
+	padding-<?php echo $right; ?>: 4px;
+	line-height: 12px;
+	color: #666666; 
+ }
