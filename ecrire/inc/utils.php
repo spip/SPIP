@@ -370,12 +370,6 @@ function self($root = false) {
 	return $url;
 }
 
-
-// Fonction abandonnee. . Ne plus utiliser, remplacer par son contenu
-// http://doc.spip.org/@lire_meta
-function lire_meta($nom) { global $meta; return $meta[$nom];}
-
-
 //
 // Traduction des textes de SPIP
 //
