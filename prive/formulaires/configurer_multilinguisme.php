@@ -30,13 +30,19 @@ function formulaires_configurer_multilinguisme_charger_dist(){
 
 function formulaires_configurer_multilinguisme_traiter_dist(){
 	$res = array('editable'=>true);
-	foreach(array('multi_secteurs') as $m)
-		if (!is_null($v=_request($m)))
-			ecrire_meta($m, $v=='oui'?'oui':'non');
-	foreach(array('multi_objets','gerer_trad_objets') as $m)
-		if (!is_null($v=_request($m)))
+	// un checkbox seul de name X non coche n'est pas poste.
+	// on verifie le champ X_check qui indique que la checkbox etait presente dans le formulaire.
+	foreach(array('multi_secteurs') as $m) {
+		if (!is_null(_request($m . '_check'))) {
+			ecrire_meta($m, _request($m) ? 'oui' : 'non');
+		}
+	}
+	foreach(array('multi_objets','gerer_trad_objets') as $m) {
+		if (!is_null($v=_request($m))) {
 			// join et enlever la valeur vide ''
 			ecrire_meta($m, implode(',',array_diff($v,array(''))));
+		}
+	}
 
 	if ($i = _request('langues_auth') AND is_array($i)) {
 		$i = array_unique(array_merge($i,explode(',',$GLOBALS['meta']['langues_utilisees'])));
