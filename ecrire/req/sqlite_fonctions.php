@@ -13,7 +13,10 @@
 
 /*
  * Des fonctions pour les requetes SQL
- *  
+ * 
+ * Voir la liste des fonctions natives : http://www.sqlite.org/lang_corefunc.html
+ * Et la liste des evolutions pour : http://sqlite.org/changes.html
+ * 
  */
 // http://doc.spip.org/@_sqlite_init_functions
 function _sqlite_init_functions(&$sqlite){
@@ -54,6 +57,7 @@ function _sqlite_init_functions(&$sqlite){
 #		'RTRIM'			=> array( 'rtrim'						,1), // present en theorie
 
 		'SETTYPE'		=> array( 'settype'						,2), // CAST present en v3.2.3
+		'SUBSTRING'		=> array( 'substr'						,3), 
 		
 		'TO_DAYS'		=> array( '_sqlite_func_to_days'		,1),
 #		'TRIM'			=> array( 'trim'						,1), // present en theorie

@@ -391,7 +391,7 @@ function maj_1_952() {
 			$vignettes[] = intval($t['id_document']);
 
 		$ok &= spip_query("UPDATE spip_documents SET `mode`='image' WHERE `mode`='vignette'");
-		$ok &= spip_query("UPDATE spip_documents SET `mode`='vignette' WHERE `mode`='image' AND ".calcul_mysql_in('id_document', $vignettes));
+		$ok &= spip_query("UPDATE spip_documents SET `mode`='vignette' WHERE `mode`='image' AND ".sql_in('id_document', $vignettes));
 	}
 	if (!$ok) die('echec sur maj_1_952()');
 }
