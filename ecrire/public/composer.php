@@ -356,6 +356,7 @@ function table_from_primary($id) {
 // fonction appelee par la balise #LOGO_DOCUMENT
 // http://doc.spip.org/@calcule_logo_document
 function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier, $lien, $align, $params) {
+	include_spip('inc/documents');
 
 	if (!$id_document) return '';
 	if ($doubdoc) $doublons["documents"] .= ','.$id_document;
@@ -367,7 +368,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	$row = spip_abstract_fetch($row);
 	$id_type = $row['id_type'];
 	$id_vignette = $row['id_vignette'];
-	$fichier = $row['fichier'];
+	$fichier = get_spip_doc($row['fichier']);
 	$mode = $row['mode'];
 
 	// Y a t il une vignette personnalisee ?
@@ -376,7 +377,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 				array('spip_documents'),
 				array("id_document = $id_vignette"))) {
 			$vignette = spip_abstract_fetch($res);
-			if (@file_exists(_DIR_RACINE.$vignette['fichier']))
+			if (@file_exists(get_spip_doc($vignette['fichier'])))
 				$logo = generer_url_document($id_vignette);
 		}
 	} else if ($mode == 'vignette') {
@@ -438,8 +439,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 
 	// flag_fichier : seul le fichier est demande
 	if ($flag_fichier)
-		return substr(extraire_attribut($logo, 'src'), strlen(_DIR_IMG));
-
+		return set_spip_doc(extraire_attribut($logo, 'src'));
 
 	// Calculer le code html complet (cf. calcule_logo)
 	$logo = inserer_attribut($logo, 'alt', '');
