@@ -528,10 +528,16 @@ function unicode_to_javascript($texte) {
 	return $texte;
 }
 
-// convertit les %uxxxx (envoyes par javascript) en unicode
-function javascript_to_unicode($texte) {
+// convertit les %uxxxx (envoyes par javascript)
+function javascript_to_unicode ($texte) {
 	while (ereg("%u([0-9A-F][0-9A-F][0-9A-F][0-9A-F])", $texte, $regs))
-		$texte = str_replace($regs[0],"&#x".$regs[1].";", $texte);
+		$texte = str_replace($regs[0],"&#".hexdec($regs[1]).";", $texte);
+	return $texte;
+}
+// convertit les %E9 (envoyes par le browser) en chaine du charset du site (binaire)
+function javascript_to_binary ($texte) {
+	while (ereg("%([0-9A-F][0-9A-F])", $texte, $regs))
+		$texte = str_replace($regs[0],chr(hexdec($regs[1])), $texte);
 	return $texte;
 }
 

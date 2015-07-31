@@ -70,10 +70,12 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 	$keywords = '';
 	$found = false;
 
-	if (strpos('-'.$kw_referer, $url_site)) {
-		if (eregi("recherche=([^&]+)", $kw_referer, $regs)) {
-			$keywords = $regs[1];
-			$kw_referer_host = "Recherche SPIP";
+	if (strpos('-'.$kw_referer, eregi_replace("^(https?:?/?/?)?(www\.)?", "",$url_site))) {
+		if (eregi("(s|search|r|recherche)=([^&]+)", $kw_referer, $regs)) {
+			$keywords = $regs[2];
+			include_ecrire('inc_charsets.php3');
+			$keywords = javascript_to_binary($keywords);	// nettoyer les %A3
+			$kw_referer_host = "SPIP";
 		} else
 			return '';
 	} else
