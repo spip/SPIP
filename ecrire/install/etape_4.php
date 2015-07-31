@@ -87,6 +87,14 @@ function install_etape_4_dist()
 
 		// inserer email comme email webmaster principal
 		spip_query("REPLACE spip_meta (nom, valeur) VALUES ('email_webmaster', " . _q($email) . ")");
+
+		// Ici on va connecter directement celui qui vient de creer son login
+		// on ne lui met ni cookie d'admin ni connexion longue
+		if ($auth_spip = charger_fonction('auth_spip', 'inc', true)
+		AND $row_auteur = $auth_spip($login, $pass)
+		AND $session = charger_fonction('session', 'inc')
+		AND $cookie_session = $session($row_auteur))
+			spip_setcookie('spip_session', $cookie_session);
 	}
 
 	$config = charger_fonction('config', 'inc');
@@ -106,6 +114,7 @@ function install_etape_4_dist()
 		@unlink(_FILE_CHMOD_INS . _FILE_TMP . '.php');
 	}
 
+	// et on l'envoie dans l'espace prive
 	echo generer_form_ecrire('accueil', bouton_suivant());
 	echo info_progression_etape(4,'etape_','install/');
 	echo install_fin_html();
