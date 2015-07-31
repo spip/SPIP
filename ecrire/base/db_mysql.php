@@ -79,7 +79,8 @@ function spip_mysql_trace($query, $start, $result)
 
 	if ($s) {
 		// 2006 MySQL server has gone away
-		if ($s == 2006)
+		// 2013 Lost connection to MySQL server during query
+		if (in_array($s) array(2006,2013))
 			define('spip_interdire_cache', true);
 		$s .= ' '.mysql_error();
 		if ($GLOBALS['mysql_debug']
