@@ -1347,7 +1347,7 @@ function inserer_attribut($balise, $attribut, $val, $proteger=true, $vider=false
 	if ($proteger) $val = attribut_html($val,false);
 
 	// echapper les ' pour eviter tout bug
-	$val = str_replace("'", "&#39;", $val);
+	$val = str_replace("'", "&#039;", $val);
 	if ($vider AND strlen($val)==0)
 		$insert = '';
 	else
