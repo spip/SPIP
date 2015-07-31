@@ -34,6 +34,7 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $checked, $actif, $
 	$cfg = "";
 	$checkable = ($dir_plugins!==_DIR_PLUGINS_DIST);
 	$nom = plugin_nom($info,$dir_plugins,$plug_file);
+	$erreur = "";
 
 	if (!plugin_version_compatible($info['compatibilite'], $GLOBALS['spip_version_branche'],'spip')){
 		$info['slogan'] = _T('plugin_info_non_compatible_spip');
@@ -79,7 +80,7 @@ function plugin_bouton_config($nom, $infos, $dir)
 	// il faut donc n'utiliser que des minuscules, par convention
 	$prefix = strtolower($infos['prefix']);
 	// si plugin.xml fournit un squelette, le prendre
-	if ($infos['config'])
+	if (isset($infos['config']) and $infos['config'])
 		return recuperer_fond("$dir$nom/" . $infos['config'],
 				array('script' => 'configurer_' . $prefix,
 					'nom' => $nom));
