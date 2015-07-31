@@ -374,7 +374,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 				array('spip_documents'),
 				array("id_document = $id_vignette"))) {
 			$vignette = spip_abstract_fetch($res);
-			if (@file_exists($vignette['fichier']))
+			if (@file_exists(_DIR_RACINE.$vignette['fichier']))
 				$logo = generer_url_document($id_vignette);
 		}
 	} else if ($mode == 'vignette') {
