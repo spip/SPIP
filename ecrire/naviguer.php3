@@ -253,6 +253,20 @@ if ($coll > 0) {
 	fin_boite_info();
 }
 
+//
+// Logos de la rubrique
+//
+
+$rubon = "rubon$coll";
+$ruboff = "ruboff$coll";
+
+if ($connect_statut == '0minirezo' AND acces_rubrique($coll)) {
+	if ($coll > 0)
+		afficher_boite_logo($rubon, $ruboff, "LOGO DE LA RUBRIQUE ".aide ("rublogo"), "LOGO POUR SURVOL");
+	else
+		afficher_boite_logo($rubon, $ruboff, "LOGO STANDARD DES RUBRIQUES ".aide ("rublogo"), "LOGO POUR SURVOL");
+}
+
 
 //
 // Afficher les boutons de creation d'article et de breve
@@ -285,21 +299,6 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($coll)) {
 }
 
 fin_raccourcis();
-
-
-//
-// Logos de la rubrique
-//
-
-$rubon = "rubon$coll";
-$ruboff = "ruboff$coll";
-
-if ($connect_statut == '0minirezo' AND acces_rubrique($coll)) {
-	if ($coll > 0)
-		afficher_boite_logo($rubon, $ruboff, "LOGO DE LA RUBRIQUE ".aide ("rublogo"), "LOGO POUR SURVOL");
-	else
-		afficher_boite_logo($rubon, $ruboff, "LOGO STANDARD DES RUBRIQUES ".aide ("rublogo"), "LOGO POUR SURVOL");
-}
 
 
 
@@ -483,9 +482,8 @@ if ($coll > 0 AND ($connect_statut == '0minirezo' OR $proposer_sites > 0)) {
 
 /// Documents associes a la rubrique
 
-if ($coll>0){
-	afficher_documents_non_inclus($coll, "rubrique", $flag_editable);
-}
+if ($coll>0)
+	 afficher_documents_non_inclus($coll, "rubrique", $flag_editable);
 
 
 
