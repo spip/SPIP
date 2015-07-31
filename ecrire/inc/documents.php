@@ -246,12 +246,12 @@ function parametrer_embed_document($fichier, $id_document, $hauteur, $largeur, $
 				}
 			}
 		}
-				
+
 		$params = "<param name='movie' value='$fichier' />\n"
 		  . "<param name='src' value='$fichier' />\n"
 		  . $inserer_vignette;
 
-	// Pour Flash
+		// Pour Flash
 		if ((!ereg("^controls", $les_parametres)) AND ($extension=='swf'))
 
 			return "<object "
@@ -260,8 +260,20 @@ function parametrer_embed_document($fichier, $id_document, $hauteur, $largeur, $
 			  . $params
 			  . "</object>\n";
 		else {
-			$emb = "<embed src='$fichier' $param_emb width='$largeur' height='$hauteur'></embed>\n";
-			if ($extension == 'svg') return $emb;
+			$emb = "<embed src='$fichier' $param_emb width='$largeur' height='$hauteur'>$alt</embed>\n";
+
+			// Cas particulier du SVG : pas d'object
+			if ($extension == 'svg')
+				return $emb;
+
+			/* 
+			// essai pour compatibilite descendante (helas ca ne marche pas)
+			// cf. http://www.yoyodesign.org/doc/w3c/svg1/backward.html
+			if ($extension == 'svg') return 
+			"<object type='image/svg+xml' data='$fichier'
+			$param_emb width='$largeur' height='$hauteur'>$alt</object>\n";
+			*/
+
 			return "<object width='$largeur' height='$hauteur'>\n"
 			  . $params
 			  . $emb
