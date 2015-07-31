@@ -451,7 +451,7 @@ function joli_repertoire($rep) {
 // spip_timer : on l'appelle deux fois et on a la difference, affichable
 //
 // http://doc.spip.org/@spip_timer
-function spip_timer($t='rien') {
+function spip_timer($t='rien', $raw = false) {
 	static $time;
 	$a=time(); $b=microtime();
 	// microtime peut contenir les microsecondes et le temps
@@ -461,6 +461,7 @@ function spip_timer($t='rien') {
 	if (isset($time[$t])) {
 		$p = $a + $b - $time[$t];
 		unset($time[$t]);
+		if ($raw) return $p;
 		if ($p>0.01)	return sprintf("%.3fs", $p);
 		else					return sprintf("%.1fms", $p*1000);
 	} else
@@ -606,7 +607,6 @@ function _chemin($dir_path=NULL){
 		if (strlen($GLOBALS['dossier_squelettes']))
 			foreach (array_reverse(explode(':', $GLOBALS['dossier_squelettes'])) as $d)
 				array_unshift($path_full, ($d[0] == '/' ? '' : _DIR_RACINE) . $d . '/');
-
 	}
 	if ($dir_path===NULL) return $path_full;
 
@@ -678,15 +678,23 @@ function chemin($file, $dirname='', $include=false){
 // chercher un fichier $file dans le SPIP_PATH
 // si on donne un sous-repertoire en 2e arg optionnel, il FAUT le / final
 // si 3e arg vrai, on inclut si ce n'est fait.
+define('_ROOT_CWD', getcwd().'/');
 
 // http://doc.spip.org/@find_in_path
 function find_in_path ($file, $dirname='', $include=false) {
 	static $files=array(), $dirs=array();
-
+	static $inc = array();
+#if ($include) $GLOBALS['cpt_include']++;
+#spip_timer('include');
 	if (isset($files[$dirname][$file])) {
-		if ($include) include_once $files[$dirname][$file];
+		if ($include) {
+			include_once _ROOT_CWD . $files[$dirname][$file];
+			$inc[$dirname][$file] = $inc[''][$dirname . $file] = true;
+		}
+#$GLOBALS['time_include']+=spip_timer('include',true);
 		return  $files[$dirname][$file];
 	}
+
 	$a = strrpos($file,'/');
 	if ($a !== false) {
 		$dirname .= substr($file, 0, ++$a);
@@ -695,10 +703,14 @@ function find_in_path ($file, $dirname='', $include=false) {
 
 	foreach(creer_chemin() as $dir) {
 		if (!isset($dirs[$a = $dir . $dirname]))
-			$dirs[$a] = (is_dir($a) || !$a) ;
+			$dirs[$a] = (is_dir(_ROOT_CWD . $a) || !$a) ;
 		if ($dirs[$a]) {
-			if (is_readable($a .= $file)) {
-				if ($include) include_once $a;
+			if (file_exists(_ROOT_CWD . ($a .= $file))) {
+				if ($include) {
+					include_once _ROOT_CWD . $a;
+					$inc[$dirname][$file] = $inc[''][$dirname . $file] = true;
+				}
+#$GLOBALS['time_include']+=spip_timer('include',true);
 				return $files[$dirname][$file] = $files[''][$dirname . $file] = $a;
 			}
 		}
@@ -1045,7 +1057,7 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	static $too_late = 0;
 	if ($too_late++) return;
-
+	
 	// Declaration des repertoires
 
 	// le nom du repertoire plugins/ activables/desactivables
@@ -1121,6 +1133,7 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 	// Le charset par defaut lors de l'installation
 	define('_DEFAULT_CHARSET', 'utf-8');
+	define('_ROOT_PLUGINS', _ROOT_RACINE . "plugins/");
 
 	// La taille des Log
 	define('_MAX_LOG', 100);

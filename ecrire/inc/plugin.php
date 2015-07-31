@@ -315,7 +315,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 				}
 				if (isset($info[$charge])){
 					foreach($info[$charge] as $file){
-						$s .= "include_once _DIR_PLUGINS.'$plug/".trim($file)."';\n";
+						$s .= "include_once _ROOT_PLUGINS.'$plug/".trim($file)."';\n";
 						$liste_fichier_verif[] = "_DIR_PLUGINS.'$plug/".trim($file)."'";
 					}
 				}
@@ -381,7 +381,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	// dans le cas d'un plugin non declare, spip etant mis devant le fait accompli
 	// hackons donc avec un "../" en dur dans ce cas, qui ne manquera pas de nous embeter un jour...
 	foreach ($liste_fichier_verif as $k => $f)
-		$liste_fichier_verif[$k] = (_DIR_RACINE?"":"../") . _DIR_PLUGINS . preg_replace(",(_DIR_PLUGINS\.)?',", "", $f);
+		$liste_fichier_verif[$k] = (_DIR_RACINE?"":"../") . _DIR_PLUGINS . preg_replace(",(_(DIR|ROOT)_PLUGINS\.)?',", "", $f);
 	ecrire_fichier(_CACHE_PLUGINS_VERIF,
 		serialize($liste_fichier_verif));
 }
@@ -411,7 +411,7 @@ function pipeline_precompile(){
 					$f = "";
 					if ($p)
 						$f .= "'".substr($file,0,$p)."'.";
-					$f .= "_DIR_PLUGINS.";
+					$f .= "_ROOT_PLUGINS.";
 					$f .= "'".substr($file,$p+12)."'";
 					$s_inc .= $f;
 					$liste_fichier_verif[] = $f;
@@ -495,7 +495,7 @@ function desinstalle_un_plugin($plug,$infos){
 	// faire les include qui vont bien
 	foreach($infos['install'] as $file){
 		$file = trim($file);
-		if (file_exists($f = _DIR_PLUGINS."$plug/$file")){
+		if (file_exists($f = _ROOT_PLUGINS."$plug/$file")){
 			include_once($f);
 		}
 	}
@@ -520,7 +520,7 @@ function installe_un_plugin($plug,$infos){
 	// faire les include qui vont bien
 	foreach($infos['install'] as $file){
 		$file = trim($file);
-		if (file_exists($f = _DIR_PLUGINS."$plug/$file")){
+		if (file_exists($f = _ROOT_PLUGINS."$plug/$file")){
 			include_once($f);
 		}
 	}
