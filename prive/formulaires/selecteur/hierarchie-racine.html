@@ -1,14 +1,6 @@
 <div class="chemin">
-	<strong class="on"><:info_racine_site:></strong>
+	<h3 class="on"><:info_racine_site:></h3>
 </div>
-<div class="frame total_0 frame_0">
-	<h2>
-		[(#ENV{racine}|oui)
-		<a href="#" onclick="jQuery(this).item_pick('racine|0','#ENV{name,id_item}','<:info_racine_site:>','racine');return false;">
-		<img class="add" src="#CHEMIN_IMAGE{ajouter-16.png}" alt="ajouter" width="16" height="16" />
-		</a>
-		]
-		<:info_racine_site:>
-	</h2>
+<div class="liste">
 	#INCLURE{fond=formulaires/selecteur/lister, quoi=racine, env}
 </div>

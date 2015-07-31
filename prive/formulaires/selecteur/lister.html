@@ -1,7 +1,16 @@
-<BOUCLE_objets(POUR){tableau #ENV{objets}|table_valeur{afficher}}>
+[(#ENV{quoi}|in_array{#ENV{objets/selectionner}}|ou{#ENV{quoi}|=={racine}|et{#ENV{racine}|oui}})
+[(#SET{titre,[(#ENV{quoi}|=={racine}|?{<:info_racine_site:>,#INFO_TITRE{#ENV{quoi},#ENV{id_objet}}})]})]
+<a
+	href="#"
+	class="choisir_ici"
+	title="<:bouton_choisir:> : #GET{titre}"
+	onclick="jQuery(this).item_pick('#ENV{quoi}|#ENV{id_objet}','#ENV{name,id_item}','#GET{titre}','#ENV{quoi}');return false;"
+><span><:bouton_choisir:></span></a>
+]
+<BOUCLE_objets(POUR){tableau #ENV{objets/afficher}}>
 [(#CHEMIN{formulaires/selecteur/lister-#ENV{quoi}-#VALEUR.html}|oui)
-	[(#SET{bouton_selectionner, [(#VALEUR|in_array{[(#ENV{objets}|table_valeur{selectionner})]}|?{' ',''})]})]
-	[[<strong>(#VALEUR|table_objet_sql|lister_tables_objets_sql|table_valeur{texte_objets}|_T)</strong>]
-	(#INCLURE{fond=formulaires/selecteur/lister-#ENV{quoi}-#VALEUR, bouton_selectionner=#GET{bouton_selectionner}, env})]
+	#SET{bouton_selectionner, #VALEUR|in_array{#ENV{objets/selectionner}}|oui}
+	[<div class="#VALEUR">[<h4 class="type_objet">(#VALEUR|table_objet_sql|lister_tables_objets_sql|table_valeur{texte_objets}|_T)</h4>]
+	(#INCLURE{fond=formulaires/selecteur/lister-#ENV{quoi}-#VALEUR, bouton_selectionner=#GET{bouton_selectionner}, env})</div>]
 ]
 </BOUCLE_objets>

@@ -55,25 +55,41 @@ div.rub-ouverte, a.rub-ouverte { padding-#GET{right}: 10px; background: url([(#C
 /* Les éléments propres à chaque objet */
 <BOUCLE_objets(POUR){tableau (#REM|lister_tables_objets_sql)}>
 [(#SET{petite_icone, [(#CHEMIN_IMAGE{#VALEUR{icone_objet}-12.png}|sinon{[(#CHEMIN_IMAGE{#VALEUR{icone_objet}-16.png}|image_reduire{12}|extraire_attribut{src})]})]})]
-.item_picker .frame ul li.#VALEUR{type} {background:url(#GET{petite_icone}) no-repeat[ (#GET{left}) ]2px;}
 ul.item_picked li.#VALEUR{type} {padding-#GET{left}:15px;background-image:url(#GET{petite_icone});}
+.item_picker .[(#VALEUR{table_objet})] .type_objet {padding-#GET{left}:15px; background:url(#GET{petite_icone}) no-repeat[ (#GET{left}) ]center;}
+.item_picker .frame ul li.#VALEUR{type} {background:url(#GET{petite_icone}) no-repeat[ (#GET{left}) ]2px;}
 </BOUCLE_objets>
 
+/* Styles des éléments déjà sélectionnés */
 ul.item_picked,fieldset ul.item_picked {list-style:none;margin:0;padding:0;float:left;}
 ul.item_picked li {margin:0 2px 2px;padding:2px;background:#eee;border:1px solid #GET{claire};float:#GET{left};clear:none;background-repeat:no-repeat;background-position: [(#GET{left}) ]center;}
 ul.item_picked li span.sep {display:none;}
 ul.item_picked li label {margin:0;display:inline;float:none;}
 .js ul.item_picked li .checkbox {display: none;}
 
-
 ul.item_picked.select li {padding:2px 0;border:0;font-weight:bold;background:none;float:none;}
 ul.item_picked.select ul > li {float:#GET{left};}
 ul.item_picked.changing {}
 
+/* Le bouton pour ouvrir le sélecteur */
 .picker_bouton {float:#GET{right};clear:both;}
 
+/* Styles de la partie contenant le sélecteur */
 .item_picker {clear:#GET{left};font-size:0.95em;}
-.item_picker .chemin {border-bottom:1px solid #GET{claire};margin:0.5em 0 0.25em;clear:both;}
+.item_picker .navigateur{border:1px solid #GET{claire};padding:0.2em;width:20em;} /* pas trop large pour une meilleure lecture */
+.item_picker .chemin {background:#GET{claire}; margin:0 0 0.25em 0;padding:0.3em;clear:both;}
+.item_picker .chemin .on {margin:0;}
+.item_picker a.choisir_ici {display:block;text-align:center;margin:0.2em 0;}
+.item_picker a.choisir_ici span{padding-#GET{left}:18px;background:transparent url('#CHEMIN_IMAGE{ajouter-16.png}') no-repeat [ (#GET{left}) ] center;}
+.item_picker .liste {margin:0;max-height:300px;overflow:auto;}
+.item_picker .liste .type_objet {margin:0;}
+.selecteur_type_unique .item_picker .liste .type_objet{display:none;}
+.item_picker .liste ul {list-style:none;margin:0;padding:0;}
+.item_picker .liste li {display:block;clear:both;line-height:1.1em;list-style:none;margin:0;padding:0;position:relative;}
+.item_picker .liste li:hover {background-color:[#(#GET{claire}|couleur_eclaircir)];}
+.item_picker .liste a.ouvrir {color:black;text-decoration:none;display:block;line-height:16px;margin-#GET{right}:20px;padding:0.3em 0;padding-#GET{left}:2px;padding-#GET{right}:20px;background:transparent url('#CHEMIN_IMAGE{fleche-droite-16.png}') no-repeat [ (#GET{right}) ] 0.3em;}
+.item_picker .liste a.choisir {display:block;width:16px;height:16px;position:absolute;#GET{right}:0;top:0;padding:0.3em 2px;text-indent:-10000px;background:url('#CHEMIN_IMAGE{ajouter-16.png}') no-repeat center center;}
+.item_picker .liste a:hover,.item_picker .liste a:focus {background-color:#GET{claire};}
 
 .item_picker .frame {background:#fff;border:1px solid #GET{foncee};width:159px;height:400px;float:#GET{left};overflow:auto;position:relative;}
 .cadre .cadre_padding .item_picker .frame {width:153px;}
