@@ -1795,6 +1795,7 @@ function regledetrois($a,$b,$c)
 function form_hidden($action) {
 	static $uri = '';
 
+	$action = str_replace("&amp;", "&", $action);
 	if (!$uri) $uri = url_absolue(nettoyer_uri());
 	$contexte = array();
 	if ($uri == url_absolue($action)
