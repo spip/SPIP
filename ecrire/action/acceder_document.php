@@ -39,7 +39,7 @@ function action_acceder_document_dist() {
 		$where = "documents.fichier=".sql_quote(set_spip_doc($file))
 		. ($arg ? " AND documents.id_document=".intval($arg): '');
 
-		$doc = sql_fetsel("documents.id_document, documents.titre, documents.fichier, types.mime_type, types.inclus", "spip_documents AS documents LEFT JOIN spip_types_documents AS types ON documents.extension=types.extension",$where);
+		$doc = sql_fetsel("documents.id_document, documents.titre, documents.fichier, types.mime_type, types.inclus, documents.extension", "spip_documents AS documents LEFT JOIN spip_types_documents AS types ON documents.extension=types.extension",$where);
 		if (!$doc) {
 			$status = 404;
 		} else {
@@ -94,9 +94,10 @@ function action_acceder_document_dist() {
 		  // ou si c'est un nom bien connu d'Unix, le prendre
 		  // sinon l'ignorer car certains navigateurs pataugent
 
-			$f = @$doc['titre'];
-			if (!preg_match('/\.\w+$/', $f) AND $f !== 'Makefile')
-				$f = basename($file);
+			$f = basename($file);
+			if (isset($doc['titre'])
+				AND (preg_match('/^\w+[.]'.$doc['extension'].'$/', $f) OR $f == 'Makefile'))
+				$f = $doc['titre'];
 
 			// ce content-type est necessaire pour eviter des corruptions de zip dans ie6
 			header('Content-Type: application/octet-stream');
