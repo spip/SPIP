@@ -87,7 +87,7 @@ function import_insere($values, $table, $desc, $request, $trans) {
 	}
 	// et memoriser la correspondance dans la table auxiliaire
 	// si different et pas de recherche dessus plus tard
-	if (($n != $values[$type_id]) OR $table != 'id_groupe') {
+	if (($n != $values[$type_id]) OR $type_id == 'id_groupe') {
 		if (is_array($n))
 		  list($id, $titre) = $n; 
 		else {$id = $n; $titre = "";}
@@ -97,8 +97,18 @@ function import_insere($values, $table, $desc, $request, $trans) {
 	}
 }
 
+
+// Renumerotation des entites collectees
+// Le tableau de correspondance est passe en reference pour que le nouveau
+// numero d'une entite soit calcule une seule fois, a sa premiere occurrence.
+// Si une allocation est finalement necessaire, la renumerotation
+// est repercutee sur la table SQL temporaire pour qu'en cas de reprise
+// sur Time-Out il n'y ait pas reallocation.
+// Autrement on evite cet acces SQL, quitte a recalculer le nouveau numero
+// si une autre occurrence est rencontree a la reprise. Pas dramatique.
+
 // http://doc.spip.org/@import_translate
-function import_translate($values, $table, $desc, $request, $trans) {
+function import_translate($values, $table, $desc, $request, &$trans) {
 	$vals = '';
 
 	foreach ($values as $k => $v) {
@@ -107,17 +117,13 @@ function import_translate($values, $table, $desc, $request, $trans) {
 		if (isset($trans[$k]) AND isset($trans[$k][$v])) {
 			list($g, $titre, $ajout) = $trans[$k][$v];
 			if ($g < 0) {
-			  // cas du  parent a verifier en plus du titre
-			  // pour l'instant il n'y a que spip_mots
-				if (!($g = import_identifie_mot_si_groupe(0-$g, $titre, $trans))) {
-					$g = spip_abstract_insert('spip_mots', '', '()');
-					$trans[$k][$v][2]=1;
-					
-				}
-			// Memoriser le nouveau numero pour ne pas recalculer
-			// Mise a jour de spip_translate pas indispensable,
-			// on evite: si vraiment une interrupt a lieu et
-			// retombe dessus, elle recalculera, pas dramatique
+				$f = 'import_identifie_parent_' . $k;
+				$g = $f(0-$g, $titre, $trans, $v);
+				if ($g > 0)
+				  // memoriser qu'on insere
+				  $trans[$k][$v][2]=1;
+				else $g = (0-$g);
+
 				$trans[$k][$v][0] = $g;
 			}
 			$v = $g;
@@ -125,8 +131,7 @@ function import_translate($values, $table, $desc, $request, $trans) {
 
 		$vals .= "," . _q($v);
 	}
-	// si le champ titre est la, c'est une equivalence avec un existant
-	// pas la peine d'ecraser avec les memes valerurs
+	// pas la peine d'ecraser avec les memes valeurs si rien de neuf
 	$p = $desc['key']["PRIMARY KEY"];
 	$v = $values[$p];
 	if (!isset($trans[$p]) OR !isset($trans[$p][$v]) OR $trans[$p][$v][2])
@@ -135,7 +140,7 @@ function import_translate($values, $table, $desc, $request, $trans) {
 
 
 // deux groupes de mots ne peuvent avoir le meme titre ==> identification
-function import_identifie_id_groupe($values, $table, $desc, $request, $trans) {
+function import_identifie_id_groupe($values, $table, $desc, $request, $trans)  {
 	$r = spip_fetch_array(spip_query($q = "SELECT id_groupe, titre FROM spip_groupes_mots WHERE titre=" . _q($values['titre'])), SPIP_NUM);
 	return $r;
 }
@@ -147,17 +152,19 @@ function import_identifie_id_mot($values, $table, $desc, $request, $trans) {
 }
 
 // mot de meme titre et de meme groupe ==> identification
-function import_identifie_mot_si_groupe($id_groupe, $titre, $trans)
+// mot de meme titre et de meme groupe ==> identification
+function import_identifie_parent_id_mot($id_groupe, $titre, $trans, $v)
 {
-	if (!(isset($trans['id_groupe'])
-	AND isset($trans['id_groupe'][$id_groupe])))
-		return false;
+	$titre = _q($titre);
+	if (isset($trans['id_groupe'])
+	AND isset($trans['id_groupe'][$id_groupe])) {
+		$new = $trans['id_groupe'][$id_groupe][0];
+		$r = spip_fetch_array(spip_query("SELECT id_mot FROM spip_mots WHERE titre=$titre AND id_groupe=$new" ));
+		if ($r) return  (0 - $r['id_mot']);
+	}
+	$r = spip_abstract_insert('spip_mots', '', '()');
+	spip_query("REPLACE spip_translate (id_old, id_new, titre, type, ajout) VALUES ($v,$r,$titre,'id_mot',1)");
 
-	$new = $trans['id_groupe'][$id_groupe][0];
-
-	$r = spip_fetch_array(spip_query("SELECT id_mot FROM spip_mots WHERE titre=" . _q($titre) . " AND id_groupe=$new" ));
-
-	return !$r ? false  : $r['id_mot'];
 }
 ?>
 
