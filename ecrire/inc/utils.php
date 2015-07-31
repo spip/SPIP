@@ -714,7 +714,9 @@ function generer_url_ecrire($script, $args="", $no_entities=false, $rel=false) {
 		$rel = _DIR_RESTREINT ? _DIR_RESTREINT : './';
 
 	// Les anciens IIS n'acceptent pas les POST sur ecrire/ (#419)
-	if (strstr($_SERVER['SERVER_SOFTWARE'], 'IIS')) $rel .= 'index.php';
+	// meme pb sur thttpd cf. http://forum.spip.org/fr_184153.html
+	if (preg_match(',IIS|thttpd,',$_SERVER['SERVER_SOFTWARE']))
+		$rel .= 'index.php';
 
 	if ($script AND $script<>'accueil') 
 		$args = "?exec=$script" . (!$args ? '' : "&$args");
@@ -961,12 +963,10 @@ function spip_initialisation() {
 	//
 
 	// Compatibilite avec serveurs ne fournissant pas $REQUEST_URI
-	if (!$GLOBALS['REQUEST_URI']) {
+	if (!$GLOBALS['REQUEST_URI'])
 		$GLOBALS['REQUEST_URI'] = $_SERVER['PHP_SELF'];
-		if ($_SERVER['QUERY_STRING'] AND !strpos($_SERVER['REQUEST_URI'], '?'))
-			$GLOBALS['REQUEST_URI'] .= '?'.$_SERVER['QUERY_STRING'];
-	}
-
+	if ($_SERVER['QUERY_STRING'] AND !strpos($_SERVER['REQUEST_URI'], '?'))
+		$GLOBALS['REQUEST_URI'] .= '?'.$_SERVER['QUERY_STRING'];
 
 	// tidy en ligne de commande (si on ne l'a pas en module php,
 	// ou si le module php ne marche pas)
