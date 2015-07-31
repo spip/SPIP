@@ -1215,33 +1215,36 @@ function agenda_memo($date=0 , $descriptif='', $titre='', $url='', $cal='')
 // et affiche selon le type les elements indexes par N dans ce tableau.
 // Si le suite de noms est vide, tout le tableau est pris
 // Ces noms N sont aussi des classes CSS utilisees par http_calendrier_init
+// Cette fonction recupere aussi par _request les parametres
+// jour, mois, annee, echelle, partie_cal (a ameliorer)
 
 // http://doc.spip.org/@agenda_affiche
 function agenda_affiche($i)
 {
 	include_spip('inc/agenda');
 	$args = func_get_args();
-	$nb = array_shift($args); // nombre d'evenements (on pourrait l'afficher)
-	$sinon = array_shift($args);
+	// date ou nombre d'evenements (on pourrait l'afficher)
+	$nb = array_shift($args); 
+	$evt = array_shift($args);
 	$type = array_shift($args);
-	if (!$nb){ 
-		return http_calendrier_init('', ($type != 'periode') ? $type : 'mois', '', '', self('&'), $sinon);
-	}	
-	$agenda = agenda_memo(0);
-	$evt = array();
-	foreach (($args ? $args : array_keys($agenda)) as $k) {  
-		if (is_array($agenda[$k]))
-		foreach($agenda[$k] as $d => $v) { 
-			$evt[$d] = $evt[$d] ? (array_merge($evt[$d], $v)) : $v;
+		spip_log("evt $nb");
+	if (!$nb) { 
+		$d = array(time());
+	} else {
+		$agenda = agenda_memo(0);
+		$evt = array();
+		foreach (($args ? $args : array_keys($agenda)) as $k) {  
+			if (is_array($agenda[$k]))
+				foreach($agenda[$k] as $d => $v) { 
+					$evt[$d] = $evt[$d] ? (array_merge($evt[$d], $v)) : $v;
+				}
 		}
+		$d = array_keys($evt);
 	}
-	$d = array_keys($evt);
-
 	if (count($d)){
 		$mindate = min($d);
 		$start = strtotime($mindate);
-	}
-	else {  
+	} else {  
 		$mindate = ($j=_request('jour')) * ($m=_request('mois')) * ($a=_request('annee'));  
   		if ($mindate)
 			$start = mktime(0,0,0, $m, $j, $a);
@@ -1256,7 +1259,7 @@ function agenda_affiche($i)
 		$evt = array('', $evt, $min, $max);
 		$type = 'mois';
 	}
-	return http_calendrier_init($start, $type, '', '', self('&'), $evt);
+	return http_calendrier_init($start, $type,  _request('echelle'), _request('partie_cal'), self('&'), $evt);
 }
 
 //
