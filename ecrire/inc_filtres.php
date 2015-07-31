@@ -1438,36 +1438,54 @@ function couleur_extraire($img, $x=10, $y=6) {
 
 	if (!file_exists($fichier)) return "F26C4E";
 
-	if (!$GLOBALS["couleur_extraite"]["$fichier-$x-$y"]) {	
-		if (file_exists($fichier)) {
-			list($width, $height) = getimagesize($fichier);
-		
-		
-			$newwidth = 20;
-			$newheight = 20;
-		
-			$thumb = imagecreate($newwidth, $newheight);
-
-			if (ereg("\.jpg", $fichier)) $source = imagecreatefromjpeg($fichier);
-			if (ereg("\.gif", $fichier)) $source = imagecreatefromgif($fichier);
-			if (ereg("\.png", $fichier)) $source = imagecreatefrompng($fichier);
-
-			imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-		
-			// get a color
-			$color_index = imagecolorat($thumb, $x, $y);
+	$cache = valeurs_image_trans($img, "coul-$x-$y", "php");
+	
+	$dest = $cache["fichier_dest"];
+	
+	$creer = $cache["creer"];
+	if ($creer) {
+		if (!$GLOBALS["couleur_extraite"]["$fichier-$x-$y"]) {	
+			if (file_exists($fichier)) {
+				list($width, $height) = getimagesize($fichier);
 			
-			// make it human readable
-			$color_tran = imagecolorsforindex($thumb, $color_index);
 			
-			$couleur = couleur_dec_to_hex($color_tran["red"], $color_tran["green"], $color_tran["blue"]);
+				$newwidth = 20;
+				$newheight = 20;
+			
+				$thumb = imagecreate($newwidth, $newheight);
+	
+				if (ereg("\.jpg", $fichier)) $source = imagecreatefromjpeg($fichier);
+				if (ereg("\.gif", $fichier)) $source = imagecreatefromgif($fichier);
+				if (ereg("\.png", $fichier)) $source = imagecreatefrompng($fichier);
+	
+				imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+			
+				// get a color
+				$color_index = imagecolorat($thumb, $x, $y);
+				
+				// make it human readable
+				$color_tran = imagecolorsforindex($thumb, $color_index);
+				
+				$couleur = couleur_dec_to_hex($color_tran["red"], $color_tran["green"], $color_tran["blue"]);
+			}
+			else {
+				$couleur = "F26C4E";
+			}
+			$GLOBALS["couleur_extraite"]["$fichier-$x-$y"] = $couleur;
+
+			$handle = fopen($dest, 'w');
+			fwrite($handle, "<"."?php \$GLOBALS[\"couleur_extraite\"][\"".$fichier."-".$x."-".$y."\"] = \"".$couleur."\"; ?>");
+			fclose($handle);
+		
 		}
-		else {
-			$couleur = "F26C4E";
-		}
-		$GLOBALS["couleur_extraite"]["$fichier"] = $couleur;
+		// Mettre en cache le resultat
+		
+	} else {
+		include("$dest");
 	}
-	return $GLOBALS["couleur_extraite"]["$fichier"];
+	
+	
+	return $GLOBALS["couleur_extraite"]["$fichier-$x-$y"];
 }
 
 function couleur_dec_to_hex($red, $green, $blue) {
