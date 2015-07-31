@@ -149,7 +149,9 @@ WHERE messagerie<>'non' AND id_auteur<>'$connect_id_auteur' AND pass<>'' AND log
       $bio_auteur = $row['bio'];
       $res .= "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><b><FONT SIZE=3>$nom_auteur</FONT></b>" .
 	($email_auteur ? " ($email_auteur)" : '') .
-	" | <A HREF=\"message.php3?id_message=$id_message&ajout_auteur=oui&nouv_auteur=$id_auteur\">" .
+	" | <A href=" .
+	http_php_script('message', "id_message=$id_message&ajout_auteur=oui&nouv_auteur=$id_auteur") .
+	">" .
 	_T('lien_ajout_destinataire').
 	"</A>" .
 	(!trim($bio_auteur) ? '' :
@@ -184,7 +186,7 @@ function http_ajouter_participants($ze_auteurs, $id_message)
 
     if (spip_num_rows($result_ajout_auteurs) > 0) {
 
-      echo "<FORM action=" . http_php_script("message","") . " METHOD='post'>";
+      echo "<FORM action=" . http_php_script("message") . " METHOD='post'>";
       echo "<DIV align=left><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><b>"._T('bouton_ajouter_participant')." &nbsp; </b></FONT>\n";
       echo "<input TYPE='Hidden' NAME='id_message' VALUE=\"$id_message\">";
 
@@ -241,7 +243,7 @@ function http_afficher_forum_perso($id_message, $titre)
 	$forum_retour = urlencode(http_php_scriptnq("message","id_message=$id_message"));
 
 	echo "<br /><br />\n<div align='center'>";
-	icone(_T('icone_poster_message'), "forum_envoi.php3?statut=perso&adresse_retour=".$forum_retour."&id_message=$id_message&titre_message=".urlencode($titre), "forum-interne-24.gif", "creer.gif");
+	icone(_T('icone_poster_message'), http_php_scriptnq("forum_envoi","statut=perso&adresse_retour=".$forum_retour."&id_message=$id_message&titre_message=".urlencode($titre)), "forum-interne-24.gif", "creer.gif");
 	echo "</div>\n<p align='left'>";
 
 	$query_forum = "SELECT * FROM spip_forum WHERE statut='perso' AND id_message='$id_message' AND id_parent=0 ORDER BY date_heure DESC LIMIT 20";
