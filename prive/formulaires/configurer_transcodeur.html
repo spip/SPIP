@@ -22,11 +22,6 @@
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<input type="text" class="text" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}" />
 	    </li>
-			[(#ENV{charset}|=={utf-8}|non|et{#GET{erreurs}|non})
-			<li>
-				<p class="explication"><:texte_jeu_caractere_conversion{url=#URL_ECRIRE{convert_utf8}}:></p>
-			</li>
-			]
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
