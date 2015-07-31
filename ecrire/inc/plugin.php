@@ -452,7 +452,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	// on charge les fichiers d'options qui peuvent completer 
 	// la globale spip_pipeline egalement
 	if (@is_readable(_CACHE_PLUGINS_PATH))
-		include_once(_CACHE_PLUGINS_PATH); // avait peut etre deja ete fait
+		include_once(_CACHE_PLUGINS_PATH); // securite : a priori n'a pu etre fait plus tot 
 	if (@is_readable(_CACHE_PLUGINS_OPT)) {
 		include_once(_CACHE_PLUGINS_OPT);
 	} else {
