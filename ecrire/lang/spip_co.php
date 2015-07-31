@@ -1,6 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://trac.rezo.net/spip/spip/ecrire/lang/
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -260,7 +262,7 @@ l\'indirizzu qu&igrave; sottu (o sinn&ograve;, ser&agrave; rifiutata a vostra du
 &Agrave; ringrazi&agrave; vi
 ',
 'form_pet_message_commentaire' => 'Qualch&igrave; messagiu o cummentu&nbsp;?',
-'form_pet_nom_site2' => 'Nome di u vostru situ Web', 
+'form_pet_nom_site2' => 'Nome di u vostru situ Web',
 'form_pet_probleme_liens' => 'Ripigliate puru u vostru messagiu caccendu e lee ipertestu.',
 'form_pet_probleme_technique' => 'Problemu t&egrave;cnicu, e zifre s&ograve; suspese per qualch&igrave; tempu.',
 'form_pet_signature_pasprise' => '&Ugrave;n h&egrave; stata pigliata in contu a vostra zifra.',
@@ -290,7 +292,7 @@ l\'indirizzu qu&igrave; sottu (o sinn&ograve;, ser&agrave; rifiutata a vostra du
 'forum_avez_selectionne' => 'Avete sceltu&nbsp;:',
 'forum_cliquer_retour' => 'Cliccate <a href=\'@retour_forum@\'>qu&igrave;</a> per cuntinu&agrave;.',
 'forum_forum' => 'foru',
-'forum_info_modere' => 'Stu foru h&egrave; muderatu prima&nbsp;: u vostru cuntributu cumpariscer&agrave;à solu dopu esse statu accunsentutu da un amministratore di u situ.',
+'forum_info_modere' => 'Stu foru h&egrave; muderatu prima&nbsp;: u vostru cuntributu cumpariscer&agrave;? solu dopu esse statu accunsentutu da un amministratore di u situ.',
 'forum_lien_hyper' => '<b>Lea ipertestu</b> (micca ubbligatoria)',
 'forum_message_definitif' => 'Messagiu definitivu : mand&agrave; &agrave; u situ',
 'forum_message_trop_long' => 'U vostru messagiu h&egrave; troppu longu. A taglia m&agrave;sima h&egrave; di 20 000 car&agrave;tteri.',
@@ -299,7 +301,7 @@ l\'indirizzu qu&igrave; sottu (o sinn&ograve;, ser&agrave; rifiutata a vostra du
 'forum_page_url' => '(S&igrave; u vostru messagiu siriferisce &agrave; un art&igrave;culu pubblicatu nant\'&agrave; u web, o &agrave; una p&agrave;gina 
 	ch&igrave; furnisce di pi&ugrave; infurmazioni, pudete puru rinsign&agrave; cust&igrave; u t&igrave;tulu di a p&agrave;gina c&ugrave; u so indirizzu.)',
 'forum_par_auteur' => 'da @auteur@',
-'forum_poste_par' => 'Messagiu postdatatu@parauteur@ in coda di l\art&igrave;culu &laquo; @titre@ &raquo;.',
+'forum_poste_par' => 'Messagiu postdatatu@parauteur@ in coda di l\\art&igrave;culu &laquo; @titre@ &raquo;.',
 'forum_probleme_database' => 'Prublemu di basa di dati, &ugrave;n h&egrave; statu arregistratu u vostru messagiu.',
 'forum_qui_etes_vous' => '<b>Quale site ?</b> (micca ubbligatoriu)',
 'forum_texte' => 'Testu di u vostru messagiu :',
@@ -361,7 +363,7 @@ l\'indirizzu qu&igrave; sottu (o sinn&ograve;, ser&agrave; rifiutata a vostra du
 'icone_suivi_actualite' => 'Evuluzione di u&nbsp;situ',
 'icone_suivi_forums' => 'Seguit&agrave;/gestisce i fori',
 'icone_suivi_pettions' => 'Seguit&agrave;/gestisce e petizioni',
-'icone_suivi_revisions' => 'Mud&igrave;fiche di l\art&igrave;culi',
+'icone_suivi_revisions' => 'Mud&igrave;fiche di l\\art&igrave;culi',
 'icone_supprimer_document' => 'Sguass&agrave; stu ducumentu',
 'icone_supprimer_image' => 'Sguass&agrave; st\'im&agrave;gine',
 'icone_supprimer_message' => 'Sguass&agrave; stu messagiu',
@@ -549,7 +551,6 @@ l\'indirizzu qu&igrave; sottu (o sinn&ograve;, ser&agrave; rifiutata a vostra du
 'lien_afficher_icones_seuls' => 'F&agrave; cumparisce solu l\'icone',
 'lien_afficher_texte_icones' => 'F&agrave; cumparisce l\'icone c&ugrave; u testu',
 'lien_afficher_texte_seul' => 'F&agrave; cumparisce solu u testu',
-'lien_icones_interface' => 'L\'icone di l\'interfaccia s&ograve; state fatte da <a href=\'http://jimmac.musichall.cz/\'>Jakub \'Jimmac\' Steiner</a>.',
 'lien_liberer' => 'liber&agrave;',
 'lien_liberer_tous' => 'liber&agrave; st\'art&igrave;culi',
 'lien_nouvea_pense_bete' => 'NUVELLU AIUTAMEMORIA',

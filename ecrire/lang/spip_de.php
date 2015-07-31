@@ -201,7 +201,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p>Um das Problem zu l&ouml;sen, verwenden Sie bitte Ihren FTP-Client, um die Zugriffsrechte f&uuml;r diese
 Verzeichnisse zu setzen.Die Installationsanleitung erl&auml;utert die Details dazu.</p>
 <p>Wenn Sie diesen Vorgang abgeschlossen haben, k&ouml;nnen Sie',
-'double_occurrence' => '<MODIF>Dublette',
+'double_occurrence' => 'Dublette von @balise@',
 
 // E
 'en_cours' => 'l&auml;uft',
@@ -714,7 +714,7 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: Tag B muss vor der Schleife stehen',
-'zbug_balise_inexistante' => '<MODIF>Fehler @from@: Der Tag @balise@ existiert nicht.',
+'zbug_balise_inexistante' => 'Fehler: Der Tag @balise@ wurde nicht richtig f&uuml;r  @from@ deklariert.',
 'zbug_balise_sans_argument' => 'Dem Tag @balise@ fehlt ein Parameter',
 'zbug_boucle' => 'Schleife',
 'zbug_boucle_recursive_undef' => 'Die rekursive Schleife @nom@ ist nicht definiert',
@@ -738,7 +738,7 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 'zbug_info_erreur_squelette' => 'Irrtum auf der Seite',
 'zbug_inversion_ordre_inexistant' => 'Umkehrung einer inexistenten Sortierung ',
 'zbug_pagination_sans_critere' => '#PAGINATION ohne Kriterium {pagination} oder in rekursiver Schleife',
-'zbug_parametres_inclus_incorrects' => '<MODIF>INCLUDE-Parameter @param@ fehlerhaft',
+'zbug_parametres_inclus_incorrects' => 'INCLUDE-Parameter fehlerhaft: @param@',
 'zbug_profile' => 'Rechenzeit: @time@',
 'zbug_resultat' => 'Ergebnis',
 'zbug_serveur_indefini' => 'SQL-Server nicht definiert',
