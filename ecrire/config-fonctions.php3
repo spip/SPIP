@@ -473,7 +473,7 @@ debut_cadre_relief();
 	if ($http_proxy) {
 		echo "<p align='left'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>"
 			. propre("Pour faire un essai de ce proxy, indiquez ici l'adresse d'un {backend}
-			que vous souhaitez syndiquer -~par exemple celui du site {uZine}~, et v&eacute;rifiez que vous y avez
+			que vous souhaitez syndiquer -~par exemple celui du site {uZine}~-, et v&eacute;rifiez que vous y avez
 			acc&egrave;s.");
 		echo "</TD></TR>";
 
