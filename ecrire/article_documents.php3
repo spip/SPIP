@@ -31,12 +31,14 @@ $result = mysql_query($query);
 if ($art = mysql_fetch_object($result)) {
 	$titre_art = "&laquo; ".typo($art->titre)." &raquo;";
 	$lien_art = " <a href='articles.php3?id_article=$id_article' target='spip_normal'><font color='ffffff'>$titre_art</font></a>";
-} else {
+}
+else {
 	$titre_art = '';
 	$lien_art = '';
 }
 
 debut_html("Images et documents li&eacute;s &agrave; l'article $titre_art");
+
 
 echo "<table width='100%' border='0' cellpadding='6' cellspacing='0'>\n";
 
@@ -92,10 +94,13 @@ if ($images_liees) {
 
 echo "<tr><td height='5'>&nbsp;</td></tr>\n";
 
-echo "<tr bgcolor='$couleur_foncee'>\n";
-echo "<td><font face='Verdana,Arial,Helvetica,sans-serif' size='4' color='#FFFFFF'>";
+//echo "<tr bgcolor='$couleur_foncee'>\n";
+echo "<tr bgcolor='#EEEECC'>\n";
+echo "<td><font face='Verdana,Arial,Helvetica,sans-serif' size='4' color='#000000'>";
 echo "Ajouter une image ou un document";
 echo "</td></tr>\n";
+echo "</td></tr></table>\n";
+
 echo debut_boite_info();
 
 $link = new Link('../spip_image.php3');
@@ -104,13 +109,12 @@ $link->addVar('hash_id_auteur', $connect_id_auteur);
 $link->addVar('ajout_doc', 'oui');
 $link->addVar('id_article', $id_article);
 
-afficher_upload($link, 'T&eacute;l&eacute;charger une image ou un document&nbsp;:');
+afficher_upload($link, 'T&eacute;l&eacute;charger depuis votre ordinateur&nbsp;:');
 
 echo "</font>\n";
 
 echo fin_boite_info();
 
-echo "</td></tr></table>\n";
 
 fin_html();
 

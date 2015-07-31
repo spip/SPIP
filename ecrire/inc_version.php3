@@ -13,7 +13,7 @@ define("_ECRIRE_INC_VERSION", "1");
 //
 
 $spip_version = 1.409; // version de la base
-$spip_version_affichee = "1.4 beta 2"; // version de SPIP
+$spip_version_affichee = "1.4 beta 3"; // version de SPIP
 
 
 //
