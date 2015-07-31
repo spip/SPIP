@@ -2009,7 +2009,7 @@ function afficher_menu_rubriques() {
 
 function afficher_javascript ($html) {
 	  return http_script("
-document.write(\"" . addslashes(str_replace("\n", " ", $html))."\")");
+document.write(\"" . addslashes(strtr($html, "\n\r", "  "))."\")");
 }
 
 function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivre", $onLoad = "") {

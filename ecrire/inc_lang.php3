@@ -507,7 +507,6 @@ function verifier_lang_url() {
 		$lang_demandee = $_GET['lang'];
 
 	// Verifier que la langue demandee existe
-	include_ecrire('inc_lang.php3');
 	lang_select($lang_demandee);
 	$lang_demandee = $spip_lang;
 

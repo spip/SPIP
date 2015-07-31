@@ -214,7 +214,7 @@ function trouve_boucle_debug($n, $nom, $debut=0, $boucle = "")
 
 	$id = $nom . $boucle;
 	foreach($debug_objets['sequence'][$id] as $v) {
-	  if (!ereg('^(.*)(<\?.*\?>)(.*)$', $v[2],$r))
+	  if (!preg_match('/^(.*)(<\?.*\?>)(.*)$/', $v[2],$r))
 	    $y = substr_count($v[2], "\n");
 	  else {
 	    if ($v[1][0] == '#')
