@@ -347,5 +347,6 @@ Le programme est n&eacute; en 2001 d'une initiative du minir&eacute;zo, un colle
 	<pipeline><nom>trig_calculer_langues_rubriques</nom><action></action></pipeline>
 	<pipeline><nom>trig_propager_les_secteurs</nom><action></action></pipeline>
 	<pipeline><nom>trig_supprimer_objets_lies</nom><action></action></pipeline>
+	<pipeline><nom>trig_purger</nom><action></action></pipeline>
 
 </plugin>
