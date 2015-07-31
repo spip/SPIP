@@ -179,10 +179,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 .cartouche .traductions p { float: left; }
 .cartouche .traductions li { float: left; margin-left: 1em; }
 
-#contenu .surtitre, #contenu .soustitre {
-	font-size: 0.82em;
-	font-variant: small-caps;
-	font-family: Georgia, Garamond, Times, serif; }
+#contenu .surtitre, #contenu .soustitre { font-size: 0.82em; }
 
 
 /*  Mise en forme des textes du contenu
