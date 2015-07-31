@@ -730,8 +730,8 @@ and connect again to the site.
   <b>@auth_login@</b>, but it does not exist in the database (anymore).
   Try to',
 'texte_inc_auth_2' => 'reconnect',
-'texte_inc_auth_3' => 'having quit then
-		restarted your browser if necessary.',
+'texte_inc_auth_3' => ', having quit then
+  restarted your browser if necessary.',
 'texte_inc_config' => 'Changes made to the options on these pages have a great effect on
   the functioning of the site. You are advised not to make any changes unless you are
  familiar with how SPIP works. <br /><br /><b>In
