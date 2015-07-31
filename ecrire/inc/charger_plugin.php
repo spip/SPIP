@@ -129,7 +129,7 @@ function interface_plugins_auto($retour) {
 			var li = jQuery(this).parents('li').eq(0);
 			if (!jQuery('div.details',li).html()) {
 				jQuery('div.details',li).prepend(ajax_image_searching).load(
-					jQuery(this).attr('href').replace(/admin_plugin|plugins/, 'info_plugin_distant'), {}, function(){
+					jQuery(this).attr('href').replace(/admin_plugin|plugins|charger_plugin/, 'info_plugin_distant'), {}, function(){
 						li.addClass('on');
 					}
 				);
