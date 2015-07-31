@@ -103,9 +103,11 @@ function traduire_statut_auteur($statut){
 		return $recom[$statut];
 	
 	// retrouver directement par le statut sinon
-	if ($t = array_search($statut, $GLOBALS['liste_des_statuts'])
-	  AND isset($recom[$t]))
-		return $recom[$t];
+	if ($t = array_search($statut, $GLOBALS['liste_des_statuts'])){
+	  if (isset($recom[$t]))
+			return $recom[$t];
+		return $t;
+	}
 	
 	return '';
 }
@@ -128,7 +130,7 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 		       null, array('statut' => '0minirezo')))
 		unset($droits["info_administrateurs"]);
 
-	if (!avoir_visiteurs())
+	if (!avoir_visiteurs() AND $statut!==$droits['info_visiteurs'])
 		unset($droits['info_visiteurs']);
 
 	$menu = '';
