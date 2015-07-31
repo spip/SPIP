@@ -829,10 +829,11 @@ function reduire_image($texte, $taille = -1, $taille_y = -1) {
 	}
 
 	// Cas general : trier toutes les images, avec eventuellement leur <span>
-	if (preg_match_all(',(<span [^<>]*spip_documents[^<>]*>)?(<img\s.*>),Uims',
+	if (preg_match_all(
+	',(<(span|div) [^<>]*spip_documents[^<>]*>)?(<img\s.*>),Uims',
 	$texte, $tags, PREG_SET_ORDER)) {
 		foreach ($tags as $tag) {
-			if ($reduit = reduire_une_image($tag[2], $taille, $taille_y))
+			if ($reduit = reduire_une_image($tag[3], $taille, $taille_y))
 
 				// En cas de span spip_documents, modifier le style=...width:
 				if($tag[1]
@@ -843,7 +844,7 @@ function reduire_image($texte, $taille = -1, $taille_y = -1) {
 						extraire_attribut($tag[1], 'style'))), $texte);
 				}
 
-				$texte = str_replace($tag[2], $reduit, $texte);
+				$texte = str_replace($tag[3], $reduit, $texte);
 		}
 	}
 	
