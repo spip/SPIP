@@ -197,7 +197,7 @@ function depublier_rubrique_if($id_rubrique,$date=null){
 		if ($n)
 			return false;
 
-	sql_updateq("spip_rubriques", array("statut" => '0'), "id_rubrique=".intval($id_rubrique));
+	sql_updateq("spip_rubriques", array("statut" => 'prepa'), "id_rubrique=".intval($id_rubrique));
 #		spip_log("depublier_rubrique $id_pred");
 	return true;
 }
@@ -251,7 +251,7 @@ function calculer_rubriques() {
 function calculer_rubriques_publiees() {
 
 	// Mettre les compteurs a zero
-	sql_updateq('spip_rubriques', array('date_tmp' => '0000-00-00 00:00:00', 'statut_tmp' => 'prive'));
+	sql_updateq('spip_rubriques', array('date_tmp' => '0000-00-00 00:00:00', 'statut_tmp' => 'prepa'));
 
 	//
 	// Publier et dater les rubriques qui ont un article publie
@@ -779,7 +779,7 @@ function creer_rubrique_nommee($titre, $id_parent=0, $serveur='') {
 			$id_rubrique = sql_insertq('spip_rubriques', array(
 				'titre' => $titre,
 				'id_parent' => $id_parent,
-				'statut' => 'prive')
+				'statut' => 'prepa')
 				,$desc=array(), $serveur);
 			if ($id_parent > 0) {
 				$data = sql_fetsel("id_secteur,lang", "spip_rubriques", "id_rubrique=$id_parent",

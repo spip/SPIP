@@ -78,7 +78,7 @@ function rubrique_inserer($id_parent, $set=null) {
 	$champs = array(
 		'titre' => _T('item_nouvelle_rubrique'),
 		'id_parent' => intval($id_parent),
-		'statut' => 'new');
+		'statut' => 'prepa');
 
 	if ($set)
 		$champs = array_merge($champs, $set);
