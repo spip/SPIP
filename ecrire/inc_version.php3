@@ -359,6 +359,7 @@ $spip_pipeline = array(
 	'post_typo' => array('quote_amp'),
 	'pre_propre' => array('extraire_multi'),
 	'post_propre' => array(),
+	'pre_indexation' => array(),
 	'post_syndication' => array()
 );
 # la matrice standard (fichiers definissant les fonctions a inclure)
