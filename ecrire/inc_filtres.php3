@@ -78,8 +78,8 @@ function corriger_caracteres($texte) {
 		$trans['iso-8859-1'] = array(
 			chr(146) => "'",
 			chr(180) => "'",
-			chr(147) => '"',
-			chr(148) => '"',
+			chr(147) => '&#8220;',
+			chr(148) => '&#8221;',
 			chr(150) => '-',
 			chr(151) => '-',
 			chr(133) => '...'
@@ -87,8 +87,8 @@ function corriger_caracteres($texte) {
 		$trans['utf-8'] = array(
 			chr(194).chr(146) => "'",
 			chr(194).chr(180) => "'",
-			chr(194).chr(147) => '"',
-			chr(194).chr(148) => '"',
+			chr(194).chr(147) => '&#8220;',
+			chr(194).chr(148) => '&#8221;',
 			chr(194).chr(150) => '-',
 			chr(194).chr(151) => '-',
 			chr(194).chr(133) => '...'
