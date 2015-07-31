@@ -658,7 +658,7 @@ td.icone a img {
 	border: 0px;
 }
 
-a.bouton_rotation img {
+a.bouton_rotation img, div.bouton_rotation img {
 	padding: 1px;
 	margin-bottom: 1px;
 	background-color: #eeeeee;
