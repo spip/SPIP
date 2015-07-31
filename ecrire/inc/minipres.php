@@ -124,19 +124,30 @@ function install_fin_html() {
  *   Titre de la page
  * @param string $corps
  *   Corps de la page
- * @param string $onload
- *   Attribut onload de `<body>`
- * @param bool $all_inline
- *   Inliner les css et js dans la page (limiter le nombre de hits)
+ * @param array $options
+ *   string onload : Attribut onload de `<body>`
+ *   bool all_inline : Inliner les css et js dans la page (limiter le nombre de hits)
+ *   int status : status de la page
  * @return string
  *   HTML de la page
  */
-function minipres($titre='', $corps="", $onload='', $all_inline = false)
-{
+function minipres($titre='', $corps="", $options = array()){
+
+	// compat signature old
+	// minipres($titre='', $corps="", $onload='', $all_inline = false)
+	$args = func_get_args();
+	if (is_string($args[2])){$options = array('onload' => $args[2]);}
+	if ($args[3]){$options['all_inline'] = $args[3];}
+
+	$options = array_merge(array(
+		'onload' => '',
+		'all_inline' => false,
+	),$options);
+
 	if (!defined('_AJAX')) define('_AJAX', false); // par securite
 	if (!$titre) {
-		if (!_AJAX)
-			http_status(403);
+		if (!isset($options['status']))
+			$options['status'] = 403;
 		if (!$titre = _request('action')
 		AND !$titre = _request('exec')
 		AND !$titre = _request('page'))
@@ -157,10 +168,13 @@ function minipres($titre='', $corps="", $onload='', $all_inline = false)
 		spip_log($nom . " $titre " . $_SERVER['REQUEST_URI']);
 	}
 
-	if (!_AJAX)
-		return install_debut_html($titre, $onload, $all_inline)
+	if (!_AJAX){
+		if (isset($options['status']))
+			http_status($options['status']);
+		return install_debut_html($titre, $options['onload'], $options['all_inline'])
 		. $corps
 		. install_fin_html();
+	}
 	else {
 		include_spip('inc/headers');
 		include_spip('inc/actions');
