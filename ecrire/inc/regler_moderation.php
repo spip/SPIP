@@ -43,7 +43,6 @@ function inc_regler_moderation_dist($id_article, $script, $args) {
 		$opt .= " value='$val'>"._T($desc)."</option>";
 	}
 
-
 	$nb_forums = sql_countsel("spip_forum", "id_article=$id_article AND statut IN ('publie', 'off', 'prop', 'spam')");
 
 	if ($nb_forums) {
@@ -55,8 +54,8 @@ function inc_regler_moderation_dist($id_article, $script, $args) {
 			"",
 			false
 		);
-	} else
-		$res = '';
+	} elseif ($statut_forum != 'non')
+		$res = bouton_spip_rss('forums_public', array("id_article" => $id_article));
 
 	$res .= "\n\t<label for='change_accepter_forum'>"
 	. _T('info_fonctionnement_forum') ."</label>"
