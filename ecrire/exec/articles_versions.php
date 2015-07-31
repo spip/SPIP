@@ -276,7 +276,7 @@ if ($id_version) {
 	
 		if ($les_notes) {
 			echo debut_cadre_relief('', true);
-			echo "<div  dir='$lang_dir'><span class='spip_small'>", justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes), "</span></div>";
+			echo "<div  dir='$lang_dir'><span class='spip_xx-small'>", justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes), "</span></div>";
 			echo fin_cadre_relief(true);
 		}
 	
