@@ -89,31 +89,9 @@ if ($modif_document == 'oui' AND $flag_editable) {
 //
 
 $suivi_edito = lire_meta("suivi_edito");
-$reindexer = false;
 
 $ok_nouveau_statut = false;
 
-function terminer_changement_statut() {
-	global $ok_nouveau_statut, $statut_nouv, $statut_ancien, $id_article, $reindexer;
-
-	if ($ok_nouveau_statut) {
-		calculer_rubriques();
-		if ($statut_nouv == 'publie' AND $statut_ancien != $statut_nouv) {
-			include_ecrire("inc_mail.php3");
-			envoyer_mail_publication($id_article);
-		}
-		if ($statut_nouv == "prop" AND $statut_ancien != $statut_nouv AND $statut_ancien != 'publie') {
-			include_ecrire("inc_mail.php3");
-			envoyer_mail_proposition($id_article);
-		}
-		if ($statut_nouv == 'publie' AND $statut_nouv != $statut_ancien) $reindexer = true;
-	}
-
-	if ($reindexer AND (lire_meta('activer_moteur') == 'oui')) {
-		include_ecrire ("inc_index.php3");
-		indexer_article($id_article);
-	}
-}
 
 if ($statut_nouv) {
 	if (acces_rubrique($rubrique_article)) $ok_nouveau_statut = true;
@@ -134,15 +112,13 @@ if ($statut_nouv) {
 		$statut_article = $statut_nouv;
 		$flag_editable = (acces_rubrique($rubrique_article)
 			OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop')));
-
-		if ($methode == 'image') {
-			spip_log ("statut article $id_article : $statut_article");
-			header ("Content-Type: image/gif");
-			readfile ("img_pack/puce-".puce_statut($statut_article).".gif");
-			terminer_changement_statut();
-			exit;
-		}
 	}
+}
+
+// reindexer
+if ($ok_nouveau_statut AND $statut_nouv == 'publie' AND $statut_nouv != $statut_ancien AND (lire_meta('activer_moteur') == 'oui')) {
+	include_ecrire ("inc_index.php3");
+	indexer_article($id_article);
 }
 
 if ($jour && $flag_editable) {
@@ -256,8 +232,11 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	$query = "UPDATE spip_articles SET surtitre=\"$surtitre\", titre=\"$titre\", soustitre=\"$soustitre\", $change_rubrique descriptif=\"$descriptif\", chapo=\"$chapo\", texte=\"$texte\", ps=\"$ps\", url_site=\"$url_site\", nom_site=\"$nom_site\" $add_extra WHERE id_article=$id_article";
 	$result = spip_query($query);
 	calculer_rubriques();
-	if ($statut_article == 'publie') $reindexer = true;
-	
+	if ($statut_article == 'publie' AND lire_meta('activer_moteur') == 'oui') {
+		include_ecrire ("inc_index.php3");
+		indexer_article($id_article);
+	}
+
 	// -- Experimental --
 	// Stockage des versions
 	if ($articles_versions) {
@@ -1047,12 +1026,20 @@ if ($ajout_auteur && $flag_editable) {
 		$query="INSERT INTO spip_auteurs_articles (id_auteur,id_article) VALUES ('$nouv_auteur','$id_article')";
 		$result=spip_query($query);
 	}
+
+	if (lire_meta('activer_moteur') == 'oui') {
+		include_ecrire ("inc_index.php3");
+		indexer_article($id_article);
+	}
 }
 
 if ($supp_auteur && $flag_editable) {
 	$query="DELETE FROM spip_auteurs_articles WHERE id_auteur='$supp_auteur' AND id_article='$id_article'";
 	$result=spip_query($query);
-
+	if (lire_meta('activer_moteur') == 'oui') {
+		include_ecrire ("inc_index.php3");
+		indexer_article($id_article);
+	}
 }
 
 
@@ -1660,10 +1647,18 @@ echo "</div>\n";
 
 fin_page();
 
-
-if ($ok_nouveau_statut || $reindexer) {
+// Taches lentes
+if ($ok_nouveau_statut) {
 	@flush();
-	terminer_changement_statut();
+	calculer_rubriques();
+	if ($statut_nouv == 'publie' AND $statut_ancien != $statut_nouv) {
+		include_ecrire("inc_mail.php3");
+		envoyer_mail_publication($id_article);
+	}
+	if ($statut_nouv == "prop" AND $statut_ancien != $statut_nouv AND $statut_ancien != 'publie') {
+		include_ecrire("inc_mail.php3");
+		envoyer_mail_proposition($id_article);
+	}
 }
 
 ?>
