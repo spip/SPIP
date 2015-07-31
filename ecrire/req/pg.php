@@ -1084,7 +1084,7 @@ function spip_pg_showtable($nom_table, $serveur='',$requeter=true)
 {
 	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$link = $connexion['link'];
-	$connexion['last'] = "SELECT column_name, column_default, data_type FROM information_schema.columns WHERE table_name ILIKE " . _q($nom_table);
+	$connexion['last'] = $q = "SELECT column_name, column_default, data_type FROM information_schema.columns WHERE table_name ILIKE " . _q($nom_table);
 
 	$res = spip_pg_query_simple($link, $q);
 	if (!$res) return false;
