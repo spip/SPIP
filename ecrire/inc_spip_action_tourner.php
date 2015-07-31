@@ -17,7 +17,7 @@ include_ecrire("inc_abstract_sql");# spip_insert / spip_fetch...
 
 function spip_action_tourner_dist() {
 	
-	global $arg, $var_rot, $convert_command;
+  global $arg, $var_rot, $convert_command, $redirect;
 	$var_rot = intval($var_rot);
 	$arg = intval($arg);
 
@@ -65,9 +65,11 @@ function spip_action_tourner_dist() {
 		spip_query("UPDATE spip_documents SET largeur=$largeur, hauteur=$hauteur WHERE id_document=$arg");
 
 	}
-        $GLOBALS['redirect'] = _DIR_RESTREINT_ABS . $GLOBALS['redirect'];
-	$GLOBALS['redirect'] .=	'&show_docs='.$arg;
-        if ($GLOBALS['ancre'])  $GLOBALS['redirect'] .= '#'. $GLOBALS['ancre'];
+	$redirect .= '&show_docs=' . $args;
+     
+     if ($ancre) {
+	$redirect .= '#' . $ancre;
+     }
 }
 
 
