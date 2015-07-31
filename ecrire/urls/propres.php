@@ -23,7 +23,7 @@ que vous pourriez avoir mis dans ce fichier) ; si votre site est en
 "sous-repertoire", vous devrez aussi editer la ligne "RewriteBase" ce fichier.
 Les URLs definies seront alors redirigees vers les fichiers de SPIP.
 
-Definissez ensuite dans ecrire/mes_options.php3 :
+Definissez ensuite dans ecrire/mes_options.php :
 	< ?php $type_urls = 'propres'; ? >
 SPIP calculera alors ses liens sous la forme "Mon-titre-d-article".
 
@@ -136,7 +136,7 @@ function generer_url_article($id_article) {
 	if ($url)
 		return _debut_urls_propres . $url . _terminaison_urls_propres;
 	else
-		return "article.php3?id_article=$id_article";
+		return get_spip_script('./')."?page=article&id_article=$id_article";
 }
 
 function generer_url_rubrique($id_rubrique) {
@@ -144,7 +144,7 @@ function generer_url_rubrique($id_rubrique) {
 	if ($url)
 		return _debut_urls_propres . '-'.$url.'-'._terminaison_urls_propres;
 	else
-		return "rubrique.php3?id_rubrique=$id_rubrique";
+		return get_spip_script('./')."?page=rubrique&id_rubrique=$id_rubrique";
 }
 
 function generer_url_breve($id_breve) {
@@ -152,7 +152,7 @@ function generer_url_breve($id_breve) {
 	if ($url)
 		return _debut_urls_propres . '+'.$url.'+'._terminaison_urls_propres;
 	else
-		return "breve.php3?id_breve=$id_breve";
+		return get_spip_script('./')."?page=breve&id_breve=$id_breve";
 }
 
 function generer_url_forum($id_forum, $show_thread=false) {
@@ -165,7 +165,7 @@ function generer_url_mot($id_mot) {
 	if ($url)
 		return _debut_urls_propres . '+-'.$url.'-+'._terminaison_urls_propres;
 	else
-		return "mot.php3?id_mot=$id_mot";
+		return get_spip_script('./')."?page=mot&id_mot=$id_mot";
 }
 
 function generer_url_auteur($id_auteur) {
@@ -173,7 +173,7 @@ function generer_url_auteur($id_auteur) {
 	if ($url)
 		return _debut_urls_propres . '_'.$url.'_'._terminaison_urls_propres;
 	else
-		return "auteur.php3?id_auteur=$id_auteur";
+		return get_spip_script('./')."?page=auteur&id_auteur=$id_auteur";
 }
 
 function generer_url_site($id_syndic) {
@@ -181,7 +181,7 @@ function generer_url_site($id_syndic) {
 	if ($url)
 		return _debut_urls_propres . '@'.$url.'@'._terminaison_urls_propres;
 	else
-		return "site.php3?id_syndic=$id_syndic";
+		return get_spip_script('./')."?page=site&id_syndic=$id_syndic";
 }
 
 function generer_url_document($id_document) {
@@ -203,9 +203,6 @@ function recuperer_parametres_url(&$fond, $url) {
 	(preg_match(
 	',(^|/)(article|breve|rubrique|mot|auteur|site)(\.php3?|[0-9]+\.html)'
 	.'([?&].*)?$,', $url, $regs)
-	OR preg_match(
-	',(^|/)page\.php3?[?]fond=(article|breve|rubrique|mot|auteur|site)'
-	.'&id_(\2|syndic)=[0-9]+([&].*)?$,', $url, $regs)
 	)) {
 		$type = $regs[3];
 		$id_objet = intval($GLOBALS[$id_table_objet = id_table_objet($type)]);
