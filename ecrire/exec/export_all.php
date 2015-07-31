@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('base/serial');
 include_spip('base/auxiliaires');
-include_spip('inc/indexation'); // pour la fonction primary_index_table 
+include_spip('public/interfaces'); // pour table_des_tables
 include_spip('inc/flock');
 include_spip('inc/actions');
 include_spip('inc/export');
@@ -102,6 +102,20 @@ function exec_export_all_dist()
 		$reprise = '';
 	} else	$reprise = " (" . $status_dump[2] . ", " . $status_dump[3] . ")";
 
+	list($tables_for_dump, $tables_for_link) = export_all_list_tables();
+
+	$status_dump = explode("::",$GLOBALS['meta']["status_dump"]);
+	$etape = $status_dump[2];
+
+	// Pour avoir les valeurs de _DIR_IMG etc relatives a l'espace public
+	// la phase finale de reunion des fichiers en un seul est faite la-bas
+	$href = generer_action_auteur("export_all",$archive,'',true);
+
+	if ($etape >= count($tables_for_dump)){ // au timeout
+		include_spip('inc/headers');
+		redirige_par_entete($href);
+	}
+
 	echo install_debut_html(_T('info_sauvegarde'));
 	echo "<p>",_T("info_sauvegarde"), $reprise, "</p>\n";
 	$f = ($gz) ? gzopen($file, "ab") : fopen($file, "ab");
@@ -116,51 +130,43 @@ function exec_export_all_dist()
 	$_fputs = ($gz) ? gzputs : fputs;
 	if ($gz) gzclose($f); else fclose($f);
 
-	list($tables_for_dump, $tables_for_link) = export_all_list_tables();
-
 	if ($GLOBALS['flag_ob_flush']) ob_flush();
 	flush();
 
-	$status_dump = explode("::",$GLOBALS['meta']["status_dump"]);
-	$etape = $status_dump[2];
-
-	if ($etape < count($tables_for_dump)){
-
-		if (!($timeout = ini_get('max_execution_time')*1000));
-			$timeout = 30000; // parions sur une valeur tellement courante ...
-		if ($start) $timeout = round($timeout/2);
+	if (!($timeout = ini_get('max_execution_time')*1000));
+	$timeout = 30000; // parions sur une valeur tellement courante ...
+	if ($start) $timeout = round($timeout/2);
 		// script de rechargement auto sur timeout
-		echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".generer_url_ecrire("export_all","archive=$archive&gz=$gz",true)."\";',$timeout);</script>\n");
-		$cpt = 0;
-		$paquets = 400; // nombre d'enregistrements dans chaque paquet
-		echo "<div style='text-align: left'>\n";
-		foreach($tables_for_dump as $i=>$table){
-			// par paquets
-			list($string,$status_dump)=export_objets($table, primary_index_table($table), $tables_for_link[$table],0, false, $i, _T("info_sauvegarde").", $table",$paquets);
-			while ($string!=''){
+	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".generer_url_ecrire("export_all","archive=$archive&gz=$gz",true)."\";',$timeout);</script>\n");
+	$cpt = 0;
+	$paquets = 400; // nombre d'enregistrements dans chaque paquet
+	echo "<div style='text-align: left'>\n";
+	foreach($tables_for_dump as $i=>$table){
 
-				// on ecrit dans un fichier generique
+		while (1){ // on ne connait pas le nb de paquets d'avance
+
+			list($string,$status_dump)=export_objets($table, $tables_for_link[$table],0, false, $i, _T("info_sauvegarde").", $table",$paquets);
+
+			if ($string) { 
+// on ecrit dans un fichier generique
+// puis on le renomme pour avoir une operation atomique 
 				ecrire_fichier ($partfile, $string);
-				// on le renomme avec un numero -> operation atomique en linux
 				rename($partfile,$partfile.".$cpt");
 				$cpt ++;
-				ecrire_meta("status_dump", implode("::",$status_dump),'non');
-				#lire_metas();
-				list($string,$status_dump)=export_objets($table, primary_index_table($table), $tables_for_link[$table],0, false, $i, _T("info_sauvegarde").", $table",$paquets);
 			}
+	// on se contente d'une ecriture en base pour aller plus vite
+	// a la relecture on en profitera pour mettre le cache a jour
 			ecrire_meta("status_dump", implode("::",$status_dump),'non');
-			#lire_metas();
+			// attention $string vide ne suffit pas a sortir
+			// car les admins restreints peuvent parcourir
+			// une portion de table vide pour eux.
+			if (!$status_dump[3]) break;
 		}
-		echo "</div>\n";
 	}
-		
-	// Reunir les fichiers en un seul, mais dans l'espace public
-	// pour avoir les valeurs de _DIR_IMG etc relatif a lui
-	$href = generer_action_auteur("export_all",$archive,'',true);
-
+	echo "</div>\n";
+	// si Javascript est dispo, anticiper le Time-out
 	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"$href\";',0);</script>\n");
 	echo install_fin_html();
-
 }
 
 // construction de la liste des tables pour le dump :
@@ -168,7 +174,6 @@ function exec_export_all_dist()
 // + toutes les tables auxiliaires hors relations
 // + les tables relations dont les deux tables liees sont dans la liste
 
-// http://doc.spip.org/@export_all_list_tables
 function export_all_list_tables()
 {
 	$tables_for_dump = array();
@@ -217,7 +222,8 @@ function export_all_list_tables()
 				$connecte = false;
 		if ($connecte)
 			# on ajoute les liaisons en premier
-			# si une restauration est interrompue, cela se verra mieux si il manque des objets
+			# si une restauration est interrompue,
+			# cela se verra mieux si il manque des objets
 			# que des liens
 			array_unshift($tables_for_dump,$link_table);
 	}

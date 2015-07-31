@@ -16,7 +16,6 @@ include_spip('inc/export');
 include_spip('inc/actions');
 include_spip('inc/minipres');
 
-// http://doc.spip.org/@action_export_all_dist
 function action_export_all_dist()
 {
 	global $gz, $connect_toutes_rubriques ;
@@ -30,17 +29,15 @@ function action_export_all_dist()
 		$dir = _DIR_DUMP;
 
 	$file =  $dir . $arg;
-	spip_log("actionexp $file");
-	$f = ($gz) ? gzopen($file, "ab") : fopen($file, "ab");
-	$_fputs = ($gz) ? gzputs : fputs;
-	$_fputs($f, export_entete());
 
 	if ($GLOBALS['flag_ob_flush']) ob_flush();
 	flush();
 
+	$f = ($gz) ? gzopen($file, "ab") : fopen($file, "ab");
+	$_fputs = ($gz) ? gzputs : fputs;
+	$_fputs($f, export_entete());
 	$files = ramasse_parties($file, $gz, $file . ".part");
-
-	$_fputs ($f, build_end_tag("SPIP")."\n");
+	$_fputs($f, export_enpied());
 	if ($gz) gzclose($f); else fclose($f);
 		
 	effacer_meta("status_dump");
