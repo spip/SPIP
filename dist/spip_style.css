@@ -64,8 +64,8 @@ img, .spip_logos { margin: 0; padding: 0; border: 0; }
 .spip_documents_center { clear: both; width: 100%; margin: auto; }
 .spip_documents_left { float: left; margin-right: 15px; margin-bottom: 5px; }
 .spip_documents_right { float: right; margin-left: 15px; margin-bottom: 5px; }
-.spip_doc_titre { font-weight: bold; font-size: 0.77em; }
-.spip_doc_descriptif { clear: both; font-size: 0.71em; }
+.spip_doc_titre { font-weight: bold; font-size: 0.85em; }
+.spip_doc_descriptif { clear: both; font-size: 0.85em; }
 
 /* Images typographiques (via image_typo), URL a revoir... */
 .format_png { behavior: url(../win_png.htc); }
@@ -79,7 +79,7 @@ img, .spip_logos { margin: 0; padding: 0; border: 0; }
 .formulaire_spip {
 	text-align: left;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 0.77em; }
+}
 .formulaire_spip p {
 	margin: 0.5em 0;
 	padding: 0; }
@@ -89,7 +89,11 @@ img, .spip_logos { margin: 0; padding: 0; border: 0; }
 	margin: 0.77em 0;
 	padding: 0.77em;
 	border: 1px dotted; }
-.formulaire_spip legend { font-weight: bold; }
+.formulaire_spip legend { 
+	font-weight: bold; 
+	padding: 3px;
+	background-color: white; /* Sinon, superposition dans MSIE */
+}
 
 .formulaire_spip label {}
 .formulaire_spip .forml {
