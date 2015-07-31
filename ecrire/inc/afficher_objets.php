@@ -78,7 +78,6 @@ function afficher_numero_edit($id, $key, $type,$row=NULL) {
 	. $numero
 	. $id
 	. "</b></$bal>";
-	return "";
 }
 
 // libelle du titre de l'objet :

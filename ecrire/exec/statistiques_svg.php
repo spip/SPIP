@@ -17,7 +17,6 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_statistiques_svg_dist
 function exec_statistiques_svg_dist()
 {
-;
 	$aff_jours = intval(_request('aff_jours'));
 	$id_article = intval(_request('id_article'));
 	$visites_today = intval(_request('visites_today'));
@@ -81,7 +80,14 @@ function exec_statistiques_svg_dist()
 	}
 	
 	$result = sql_select('UNIX_TIMESTAMP(date) AS date_unix, visites', $table, "$where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY)", '', "date");
-
+	
+	$i=0;
+	$n=0;
+	$test_agreg=0;
+	$decal=0;
+	$jour_prec =0;
+	$hauteur_moyenne=0;
+	$hauteur_moyenne_prec=0;
 	while ($row = sql_fetch($result)) {
 		$date = $row['date_unix'];
 		$visites = $row['visites'];

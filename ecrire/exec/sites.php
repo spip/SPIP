@@ -57,6 +57,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 
 	$cherche_mot = _request('cherche_mot');
 	$select_groupe = _request('select_groupe');
+	$id_secteur = $row["id_secteur"];
 	$url_site = $row["url_site"];
 	$url_syndic = $row["url_syndic"];
 	$descriptif = $row["descriptif"];
