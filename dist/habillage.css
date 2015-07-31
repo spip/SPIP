@@ -316,7 +316,7 @@ q, blockquote, .liste-articles li .texte, h3.spip, .voirskel {
 
 /* Boutons */
 .spip_bouton { text-align: right; }
-.spip_bouton input {}
+.spip_bouton input { float: right; }
 
 /* Reponse du formulaire */
 .reponse_formulaire { font-weight: bold; color: #e86519; }
