@@ -2219,9 +2219,9 @@ function image_couleur_extraire($img, $x=10, $y=6) {
 			
 				$thumb = imagecreate($newwidth, $newheight);
 
-				if (eregi("\.je?pg$", $fichier)) $source = imagecreatefromjpeg($fichier);
-				if (eregi("\.gif$", $fichier)) $source = imagecreatefromgif($fichier);
-				if (eregi("\.png$", $fichier)) $source = imagecreatefrompng($fichier);
+				if (preg_match(",\.jpe?g$,i", $fichier)) $source = imagecreatefromjpeg($fichier);
+				if (preg_match(",\.gif$,i", $fichier)) $source = imagecreatefromgif($fichier);
+				if (preg_match(",\.png$,i", $fichier)) $source = imagecreatefrompng($fichier);
 				imagepalettetotruecolor($source);
 
 				imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
@@ -2625,8 +2625,8 @@ function rtl_reverse($mot, $rtl_global) {
 
 		
 
-	for ($i = 0; $i < mb_strlen($mot); $i++) {
-		$lettre = mb_substr($mot, $i, 1);
+	for ($i = 0; $i < spip_strlen($mot); $i++) {
+		$lettre = spip_substr($mot, $i, 1);
 		
 		
 		$code = rtl_mb_ord($lettre);
@@ -2889,7 +2889,7 @@ function rtl_visuel($texte, $rtl_global) {
 			"ﭻ")
 	);
 	
-	if(mb_regex_encoding() !== "UTF-8") echo "Attention: dans php.ini, il faut indiquer:<br /><strong>mbstring.internal_encoding = UTF-8</strong>";
+	if(init_mb_string() AND mb_regex_encoding() !== "UTF-8") echo "Attention: dans php.ini, il faut indiquer:<br /><strong>mbstring.internal_encoding = UTF-8</strong>";
 	
 	
 	$texte = explode(" ", $texte);
@@ -2902,9 +2902,9 @@ function rtl_visuel($texte, $rtl_global) {
 		// Inserer des indicateurs de debut/fin
 		$mot = "^".$mot."^";
 
-		$mot = mb_ereg_replace("&nbsp;", " ", $mot);
-		$mot = mb_ereg_replace("&#171;", "«", $mot);
-		$mot = mb_ereg_replace("&#187;", "»", $mot);
+		$mot = preg_replace(",&nbsp;,u", " ", $mot);
+		$mot = preg_replace(",&#171;,u", "«", $mot);
+		$mot = preg_replace(",&#187;,u", "»", $mot);
 
 
 
@@ -2916,51 +2916,51 @@ function rtl_visuel($texte, $rtl_global) {
 		}
 
 		// lettres forcant coupure
-		$mot = mb_ereg_replace("ا", "ا^", $mot);
-		$mot = mb_ereg_replace("د", "د^", $mot);
-		$mot = mb_ereg_replace("أ", "أ^", $mot);
-		$mot = mb_ereg_replace("إ", "إ^", $mot);
-		$mot = mb_ereg_replace("أ", "أ^", $mot);
-		$mot = mb_ereg_replace("ر", "ر^", $mot);
-		$mot = mb_ereg_replace("ذ", "ذ^", $mot);
-		$mot = mb_ereg_replace("ز", "ز^", $mot);
-		$mot = mb_ereg_replace("و", "و^", $mot);
-		$mot = mb_ereg_replace("و", "و^", $mot);
-		$mot = mb_ereg_replace("ؤ", "ؤ^", $mot);
-		$mot = mb_ereg_replace("ة", "ة^", $mot);
-//		$mot = mb_ereg_replace("ل", "^ل", $mot);
-//		$mot = mb_ereg_replace("", "^", $mot);
+		$mot = preg_replace(",ا,u", "ا^", $mot);
+		$mot = preg_replace(",د,u", "د^", $mot);
+		$mot = preg_replace(",أ,u", "أ^", $mot);
+		$mot = preg_replace(",إ,u", "إ^", $mot);
+		$mot = preg_replace(",أ,u", "أ^", $mot);
+		$mot = preg_replace(",ر,u", "ر^", $mot);
+		$mot = preg_replace(",ذ,u", "ذ^", $mot);
+		$mot = preg_replace(",ز,u", "ز^", $mot);
+		$mot = preg_replace(",و,u", "و^", $mot);
+		$mot = preg_replace(",و,u", "و^", $mot);
+		$mot = preg_replace(",ؤ,u", "ؤ^", $mot);
+		$mot = preg_replace(",ة,u", "ة^", $mot);
+		//		$mot = preg_replace(",ل,u", "^ل", $mot);
+		//		$mot = preg_replace(",,", "^", $mot);
 
 
-		$mot = mb_ereg_replace("٠", "^٠^", $mot);
-		$mot = mb_ereg_replace("١", "^١^", $mot);
-		$mot = mb_ereg_replace("٢", "^٢^", $mot);
-		$mot = mb_ereg_replace("٣", "^٣^", $mot);
-		$mot = mb_ereg_replace("٤", "^٤^", $mot);
-		$mot = mb_ereg_replace("٥", "^٥^", $mot);
-		$mot = mb_ereg_replace("٦", "^٦^", $mot);
-		$mot = mb_ereg_replace("٧", "^٧^", $mot);
-		$mot = mb_ereg_replace("٨", "^٨^", $mot);
-		$mot = mb_ereg_replace("٩", "^٩^", $mot);
+		$mot = preg_replace(",٠,u", "^٠^", $mot);
+		$mot = preg_replace(",١,u", "^١^", $mot);
+		$mot = preg_replace(",٢,u", "^٢^", $mot);
+		$mot = preg_replace(",٣,u", "^٣^", $mot);
+		$mot = preg_replace(",٤,u", "^٤^", $mot);
+		$mot = preg_replace(",٥,u", "^٥^", $mot);
+		$mot = preg_replace(",٦,u", "^٦^", $mot);
+		$mot = preg_replace(",٧,u", "^٧^", $mot);
+		$mot = preg_replace(",٨,u", "^٨^", $mot);
+		$mot = preg_replace(",٩,u", "^٩^", $mot);
 
 
 		// Ligatures
-		$mot = mb_ereg_replace("لا", "ﻻ", $mot);
-		$mot = mb_ereg_replace("لأ", "ﻷ", $mot);
+		$mot = preg_replace(",لا,u", "ﻻ", $mot);
+		$mot = preg_replace(",لأ,u", "ﻷ", $mot);
 		
 		
 		foreach ($arabic_letters as $a_l) {
-			$mot = mb_ereg_replace("([^\^])".$a_l[0]."([^\^])", "\\1".$a_l[3]."\\2", $mot);
-			$mot = mb_ereg_replace("\^".$a_l[0]."([^\^])", "^".$a_l[2]."\\1", $mot);
-			$mot = mb_ereg_replace("([^\^])".$a_l[0]."\^", "\\1".$a_l[4]."^", $mot);
+			$mot = preg_replace(",([^\^])".$a_l[0]."([^\^]),u", "\\1".$a_l[3]."\\2", $mot);
+			$mot = preg_replace(",\^".$a_l[0]."([^\^]),u", "^".$a_l[2]."\\1", $mot);
+			$mot = preg_replace(",([^\^])".$a_l[0]."\^,u", "\\1".$a_l[4]."^", $mot);
 			// il semble qu'il ne soit pas necessaire de remplacer
 			// la lettre isolee
-//			$mot = mb_ereg_replace("\^".$a_l[0]."\^", "^".$a_l[1]."^", $mot);
+			//			$mot = preg_replace(",\^".$a_l[0]."\^,u", "^".$a_l[1]."^", $mot);
 		}
 		
 		
 
-		$mot = mb_ereg_replace("\^", "", $mot);
+		$mot = preg_replace(",\^,u", "", $mot);
 		
 		$res = $mot;
 		$res = rtl_reverse($mot, $rtl_global);
