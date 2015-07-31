@@ -205,7 +205,7 @@ function gerer_htaccess() {
 	// Cette variable de configuration peut etre posee par un plugin
 	// par exemple acces_restreint
 	$GLOBALS['meta']['creer_htaccess'];
-	$r = spip_query("SELECT extension FROM spip_types_documents");
+	$r = sql_select('extension', 'spip_types_documents');
 	while ($e = sql_fetch($r)) {
 		if (is_dir($dir = _DIR_IMG . $e['extension'])) {
 			if ($GLOBALS['meta']['creer_htaccess'] == 'oui')

@@ -51,6 +51,7 @@ function base_db_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
 		'optimize' => 'spip_mysql_optimize',
 		'query' => 'spip_mysql_query',
 		'replace' => 'spip_mysql_replace',
+		'repair' => 'spip_mysql_repair',
 		'select' => 'spip_mysql_select',
 		'selectdb' => 'spip_mysql_selectdb',
 		'set_charset' => 'spip_mysql_set_charset',
@@ -311,6 +312,11 @@ function spip_mysql_showbase($match, $serveur='')
 	return spip_mysql_query("SHOW TABLES LIKE '$match'", $serveur);
 }
 
+function spip_mysql_repair($table, $serveur='')
+{
+	return spip_mysql_query("REPAIR TABLE $table", $serveur);
+}
+
 // http://doc.spip.org/@spip_mysql_showtable
 function spip_mysql_showtable($nom_table, $serveur='')
 {
@@ -507,7 +513,7 @@ function spip_mysql_multi ($objet, $lang) {
 	return $retour;
 }
 
-// Ces deux fonctions n'ont pas d'�quivalent exact PostGres
+// Ces deux fonctions n'ont pas d'equivalent exact PostGres
 // et ne sont la que pour compatibilite avec les extensions de SPIP < 1.9.3
 
 //
@@ -524,7 +530,7 @@ function spip_get_lock($nom, $timeout = 0) {
 	$db = $connexion['db'];
 	$nom = "$bd:$prefix:$nom" .  _LOCK_TIME;
 
-	$q = spip_query("SELECT GET_LOCK(" . _q($nom) . ", $timeout) AS n");
+	$q = mysql_query("SELECT GET_LOCK(" . _q($nom) . ", $timeout) AS n");
 	$q = @sql_fetch($q);
 	if (!$q) spip_log("pas de lock sql pour $nom");
 	return $q['n'];
@@ -538,7 +544,7 @@ function spip_release_lock($nom) {
 	$db = $connexion['db'];
 	$nom = "$bd:$prefix:$nom" . _LOCK_TIME;
 
-	@spip_query("SELECT RELEASE_LOCK(" . _q($nom) . ")");
+	@mysql_query("SELECT RELEASE_LOCK(" . _q($nom) . ")");
 }
 
 // http://doc.spip.org/@spip_mysql_cite
