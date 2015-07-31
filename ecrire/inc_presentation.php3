@@ -3221,7 +3221,7 @@ function afficher_hierarchie($id_rubrique, $parents="") {
 
 
 			$parents = "<div class='verdana3' ". 
-			  http_style_background($logo, "padding-$spip_lang_left: 15px; $spip_lang_left center no-repeat"). 
+			  http_style_background($logo, " $spip_lang_left center no-repeat; padding-$spip_lang_left: 15px;"). 
 			  "<a href='naviguer.php3?coll=$id_rubrique'>".typo($titre)."</a></div>\n<div style='margin-$spip_lang_left: 15px;'>".$parents."</div>";
 
 
@@ -3231,7 +3231,7 @@ function afficher_hierarchie($id_rubrique, $parents="") {
 	else {
 		$logo = "racine-site-12.gif";
 		$parents = "<div class='verdana3' " .
-		  http_style_background($logo, "padding-$spip_lang_left: 15px; $spip_lang_left center no-repeat"). 
+		  http_style_background($logo, " $spip_lang_left center no-repeat; padding-$spip_lang_left: 15px;"). 
 		  "<a href='naviguer.php3?coll=$id_rubrique'><b>"._T('lien_racine_site')."</b></a>".aide ("rubhier")."</div>\n<div style='margin-$spip_lang_left: 15px;'>".$parents."</div>";
 	
 		echo $parents;
