@@ -463,7 +463,8 @@ function inclure_modele($type, $id, $params, $lien) {
 
 	// Si un lien a ete passe en parametre, ex: [<modele1>->url]
 	if ($lien) {
-		$contexte['lien'] = $lien[0];
+		# un eventuel guillemet (") sera reechappe par #ENV
+		$contexte['lien'] = str_replace("&quot;",'"', $lien[0]);
 		$contexte['lien_class'] = $lien[1];
 	}
 	
