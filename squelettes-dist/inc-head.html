@@ -17,6 +17,9 @@
 [(#REM) Feuille de style par defaut pour les formulaires de SPIP ]
 [<link rel="stylesheet" href="(#CHEMIN{spip_formulaires.css}|direction_css)" type="text/css" media="projection, screen, tv" />]
 
+[(#REM) Balise permettant aux plugins d'inserer des CSS ]
+#INSERT_HEAD_CSS
+
 [(#REM) Feuille de style CSS pour l'affichage du site a l'ecran ]
 [<link rel="stylesheet" href="(#CHEMIN{habillage.css}|direction_css)" type="text/css" media="projection, screen, tv" />]
 
@@ -28,7 +31,7 @@
 ]
 [<link rel="stylesheet" href="(#CHEMIN{perso.css}|direction_css)" type="text/css" media="all" />]
 
-[(#REM) Balise permettant aux plugins d'inserer des appels javascript ou css ;
+[(#REM) Balise permettant aux plugins d'inserer des appels javascript ;
 	C'est ici que SPIP va inserer l'appel de la librairie jQuery
 	Et appeler a la fin compacte_head pour agreger et compacter tout le head dans des fichiers statiques
 	si l'option est cochee dans Configuration
