@@ -70,11 +70,6 @@ $spip_meta = array(
 $spip_meta_key = array(
 		"PRIMARY KEY"	=> "nom");
 
-$tables_auxiliaires['spip_petitions'] = array(
-	'field' => &$spip_petitions,
-	'key' => &$spip_petitions_key
-);
-
 $tables_auxiliaires['spip_auteurs_articles'] = array(
 	'field' => &$spip_auteurs_articles,
 	'key' => &$spip_auteurs_articles_key);
