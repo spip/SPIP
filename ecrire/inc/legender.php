@@ -179,7 +179,7 @@ function legender_corps($ancre, $flag, $id, $id_document, $script, $type, $docum
 //
 function legender_image_doc($document, $id_document, $id, $type, $s, $script, $ancre)
 {
-	define('_INTERFACE_DOCUMENTS', false);
+	define('_INTERFACE_DOCUMENTS', true);
 	define('_BOUTON_MODE_IMAGE', true);
 	if (!_INTERFACE_DOCUMENTS) return '';
 	if (!_BOUTON_MODE_IMAGE
