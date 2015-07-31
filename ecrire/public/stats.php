@@ -25,17 +25,11 @@ function public_stats_dist() {
 	$_SERVER['HTTP_USER_AGENT']))
 		return;
 
-	// Ne pas compter les visiteurs sur les flux rss (qui sont pourtant
-	// des pages web comme les autres) [hack pourri en attendant de trouver
-	// une meilleure idee ?]
-	if (preg_match(',^backend,', $GLOBALS['fond']))
-		return;
-
-
 	// Identification du client
 	$client_id = substr(md5(
 		$GLOBALS['ip'] . $_SERVER['HTTP_USER_AGENT']
-		. $_SERVER['HTTP_ACCEPT'] . $_SERVER['HTTP_ACCEPT_LANGUAGE']
+//		. $_SERVER['HTTP_ACCEPT'] # HTTP_ACCEPT peut etre present ou non selon que l'on est dans la requete initiale, ou dans les hits associes
+		. $_SERVER['HTTP_ACCEPT_LANGUAGE']
 		. $_SERVER['HTTP_ACCEPT_ENCODING']
 	), 0,10);
 

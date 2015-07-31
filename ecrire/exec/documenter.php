@@ -50,7 +50,7 @@ function exec_documenter_dist()
 	if(_request("iframe")=="iframe") { 
 	 $res = $documenter($id, $type, "portfolio", 'ajax', '', $script).
 	        $documenter($id, $type, "documents", 'ajax', '', $script);
-	 echo "<div class='upload_answer upload_document_added'>".$res."</div>";
+	 ajax_retour("<div class='upload_answer upload_document_added'>".$res."</div>",false);
 	}	else 
 	 ajax_retour($documenter($id, $type, $album, 'ajax', '', $script));
 }

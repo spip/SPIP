@@ -47,11 +47,11 @@ function install_etape_5_dist()
 		array(
 			'nom' => array(
 				'label' => "<b>"._T('entree_signature')."</b><br />\n"._T('entree_nom_pseudo_1')."\n",
-				'value' => $nom
+				'valeur' => $nom
 			),
 			'email' => array(
 				'label' => "<b>"._T('entree_adresse_email')."</b>\n",
-				'value' => $email
+				'valeur' => $email
 			)
 		)
 	);
@@ -60,15 +60,15 @@ function install_etape_5_dist()
 		array(
 			'login' => array(
 				'label' => "<b>"._T('entree_login')."</b><br />\n"._T('info_plus_trois_car')."\n",
-				'value' => $login
+				'valeur' => $login
 			),
 			'pass' => array(
 				'label' => "<b>"._T('entree_mot_passe')."</b><br />\n"._T('info_plus_cinq_car_2')."\n",
-				'value' => $pass
+				'valeur' => $pass
 			),
 			'pass_verif' => array(
 				'label' => "<b>"._T('info_confirmer_passe')."</b><br />\n",
-				'value' => $pass
+				'valeur' => $pass
 			)
 		)
 	);

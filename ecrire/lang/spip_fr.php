@@ -193,7 +193,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   V&eacute;rifiez que les minuscules et majuscules de ces r&eacute;pertoires concordent bien avec ce qui est affich&eacute;
   ci-dessus ; si ce n\'est pas le cas, renommez les r&eacute;pertoires avec votre logiciel FTP de fa&ccedil;on &agrave; corriger l\'erreur.</p>
   <p>Une fois cette manipulation effectu&eacute;e, vous pourrez ',
-'dirs_repertoires_suivants' => '<p><b>Les r&eacute;pertoires suivants ne sont pas accessibles en &eacute;criture&nbsp;:</b></p> <ul>@bad_dirs@.</ul>
+'dirs_repertoires_suivants' => '<p><b>Les r&eacute;pertoires suivants ne sont pas accessibles en &eacute;criture&nbsp;:</b></p> <ul>@bad_dirs@</ul>
   <p>Pour y rem&eacute;dier, utilisez votre client FTP afin de r&eacute;gler les droits d\'acc&egrave;s de chacun
   de ces r&eacute;pertoires. La proc&eacute;dure est expliqu&eacute;e en d&eacute;tail dans le guide d\'installation.</p>
   <p>Une fois cette manipulation effectu&eacute;e, vous pourrez ',

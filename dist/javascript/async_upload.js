@@ -79,7 +79,7 @@ function async_upload_article_edit(res,jForm){
 	      else
 	        cont = jQuery("#liste_documents");
 	      cont
-	      .prepend(res.html());
+	      .prepend(res.clone());
 	      //find added documents, remove label and show them nicely
 	      cont.
 	      find("div.documents_added")

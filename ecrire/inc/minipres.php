@@ -99,14 +99,14 @@ function info_etape($titre, $complement = ''){
 function fieldset($legend, $champs = array(), $horchamps='') {
 	$fieldset = "<fieldset>\n" .
 	($legend ? "<legend>".$legend."</legend>\n" : '');
-	foreach($champs as $nom => $contenu) {
+	foreach ($champs as $nom => $contenu) {
 		$type = $contenu['hidden'] ? 'hidden' : (preg_match(',^pass,', $nom) ? 'password' : 'text');
 		$class = $contenu['hidden'] ? '' : "class='formo' size='40' ";
 		$fieldset .= "<label for='".$nom."'>".$contenu['label']."</label>\n";
 		if(is_array($contenu['alternatives'])) {
 			foreach($contenu['alternatives'] as $valeur => $label) {
 				$fieldset .= "<input type='radio' name='".$nom .
-				"'\nvalue='".$valeur."' ".($valeur==$contenu['valeur']?"checked='checked'":'')."/>\n";
+				"'\nvalue='".$valeur."' ".(($valeur==$contenu['valeur'])?"checked='checked'":'')."/>\n";
 				$fieldset .= "<label for='".$valeur."'>".$label."</label>\n";
 			}
 			$fieldset .= "<br />\n";

@@ -231,6 +231,7 @@ $spip_pipeline = array(
 	'exec_init' => '',
 	'header_prive' => '|f_jQuery',
 	'insert_head' => '|f_jQuery',
+	'mots_indexation' => '',
 	'nettoyer_raccourcis_typo' => '',
 	'pre_propre' => '|extraire_multi',
 	'post_propre' => '',
@@ -241,6 +242,7 @@ $spip_pipeline = array(
 	'pre_syndication' => '',
 	'post_syndication' => '',
 	'pre_indexation' => '',
+	'requete_dico' => '',
 	'agenda_rendu_evenement' => '',
 	'taches_generales_cron' => '',
 	'calculer_rubriques' => ''
@@ -283,7 +285,7 @@ $tables_des_serveurs_sql['localhost'] =  &$tables_principales;
 // (utilise pour les modifs de la base de donnees)
 
 // version de la base
-$spip_version = 1.925;
+$spip_version = 1.926;
 
 // version de spip en chaine
 // et en numerique a incrementer sur les evolutions qui cassent la compatibilite descendante

@@ -2,7 +2,7 @@
 (#REM) on trouvera plusieurs variable de hauteur/largeur
 - les balises #HAUTEUR et #LARGEUR
 - #ENV{hauteur} et {largeur} correspondant <emb|hauteur=xx...>
-- #GET{hauteur} et #GET{largeur} correspondent prioritairemnt a #ENV,
+- #GET{hauteur} et #GET{largeur} correspondent prioritairement a #ENV,
   puis #LARGEUR/HAUTEUR sauf si il y a un controleur
 ]
 #SET{hauteur,#ENV{hauteur,#HAUTEUR}} #SET{largeur,#ENV{largeur,#LARGEUR}}
@@ -12,10 +12,10 @@
  (#ENV{controls}=={PositionSlider}|?{#SET{largeur,#GET{largeur}|moins{40}},''})
 ][(#INCLUS|=={embed}|?{[(#ENV{controls,''}|?{'',' '})
 <div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})]'[
-style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})[width:(#LARGEUR|max{120})px]']>
+style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})[width:(#GET{largeur}|intval|max{120})px]']>
 ]})
 ][(#EXTENSION|=={svg}|?{' '})
-<embed src='#URL_DOCUMENT' [(#ENV*|env_to_attributs)] width='#LARGEUR' height='#HAUTEUR' />
+<embed src='#URL_DOCUMENT' [(#ENV*|env_to_attributs)] width='#GET{largeur}' height='#GET{hauteur}' />
 #SET{done,1}
 ][(#EXTENSION|match{^(rm|ram|ra)$}|?{' '})
 [(#ENV{controls,''}|?{'',' '})
