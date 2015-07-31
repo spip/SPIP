@@ -26,7 +26,7 @@ function auth_http($url) {
 			     _T('login_retour_site'),
 			     "url=".rawurlencode($url),
 			     _T('login_nouvelle_tentative'),
-			     (ereg(_DIR_RESTREINT_ABS, $url)));
+			     (preg_match(',' . _DIR_RESTREINT_ABS . ',', $url)));
 		exit;
 	}
 }
@@ -105,7 +105,7 @@ if ($essai_login == "oui") {
 
 	// Marche pas, renvoyer le formulaire avec message d'erreur si 2e fois
 	if (!$row_auteur) {
-		if (ereg(_DIR_RESTREINT_ABS, $redirect))
+		if (preg_match(',' . _DIR_RESTREINT_ABS . ',', $redirect))
 			$redirect = generer_url_public('login',
 				"var_login=$session_login", true);
 		if ($session_password || $session_password_md5)
@@ -116,7 +116,7 @@ if ($essai_login == "oui") {
 		spip_log("login de $session_login vers $redirect");
 		// Si on se connecte dans l'espace prive, 
 		// ajouter "bonjour" (repere a peu pres les cookies desactives)
-		if (ereg(_DIR_RESTREINT_ABS, $redirect)) {
+		if (preg_match(',' . _DIR_RESTREINT_ABS . ',', $redirect)) {
 			$redirect .= ((false !== strpos($redirect, "?")) ? "&" : "?")
 				. 'bonjour=oui';
 		}

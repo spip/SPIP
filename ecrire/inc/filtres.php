@@ -344,7 +344,7 @@ function supprimer_tags($texte, $rempl = "") {
 // Convertit les <...> en la version lisible en HTML
 // http://doc.spip.org/@echapper_tags
 function echapper_tags($texte, $rempl = "") {
-	$texte = ereg_replace("<([^>]*)>", "&lt;\\1&gt;", $texte);
+	$texte = preg_replace(",<([^>]*)>,", "&lt;\\1&gt;", $texte);
 	return $texte;
 }
 
@@ -566,7 +566,7 @@ function vider_date($letexte) {
 function recup_heure($numdate){
 	if (!$numdate) return '';
 
-	if (ereg('([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})', $numdate, $regs)) {
+	if (preg_match('@([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})@', $numdate, $regs)) {
 		$heures = $regs[1];
 		$minutes = $regs[2];
 		$secondes = $regs[3];
@@ -606,7 +606,7 @@ function heures_minutes($numdate) {
 // http://doc.spip.org/@recup_date
 function recup_date($numdate){
 	if (!$numdate) return '';
-	if (ereg('([0-9]{1,2})/([0-9]{1,2})/([0-9]{1,2}|[0-9]{4})', $numdate, $regs)) {
+	if (preg_match('@([0-9]{1,2})/([0-9]{1,2})/([0-9]{1,2}|[0-9]{4})@', $numdate, $regs)) {
 		$jour = $regs[1];
 		$mois = $regs[2];
 		$annee = $regs[3];
@@ -616,12 +616,12 @@ function recup_date($numdate){
 			$annee = 1900 + $annee ;
 		}
 	}
-	elseif (ereg('([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})',$numdate, $regs)) {
+	elseif (preg_match('@([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})@',$numdate, $regs)) {
 		$annee = $regs[1];
 		$mois = $regs[2];
 		$jour = $regs[3];
 	}
-	elseif (ereg('([0-9]{4})-([0-9]{2})', $numdate, $regs)){
+	elseif (preg_match('@([0-9]{4})-([0-9]{2})@', $numdate, $regs)){
 		$annee = $regs[1];
 		$mois = $regs[2];
 	}
@@ -1422,9 +1422,9 @@ function email_valide($adresses) {
 	foreach (explode(',', $adresses) as $v) {
 		// nettoyer certains formats
 		// "Marie Toto <Marie@toto.com>"
-		$adresse = trim(eregi_replace("^[^<>\"]*<([^<>\"]+)>$", "\\1", $v));
+		$adresse = trim(preg_replace(",^[^<>\"]*<([^<>\"]+)>$,i", "\\1", $v));
 		// RFC 822
-		if (!eregi('^[^()<>@,;:\\"/[:space:]]+(@([-_0-9a-z]+\.)*[-_0-9a-z]+)$', $adresse))
+		if (!preg_match('#^[^()<>@,;:\\"/[:space:]]+(@([-_0-9a-z]+\.)*[-_0-9a-z]+)$#i', $adresse))
 			return false;
 	}
 	return $adresse;

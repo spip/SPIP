@@ -57,7 +57,7 @@ function lire_fichier ($fichier, &$contenu, $options=false) {
 		// Verifications
 		$ok = true;
 		if ($options['phpcheck'] == 'oui')
-			$ok &= (ereg("[?]>\n?$", $contenu));
+			$ok &= (preg_match(",[?]>\n?$,", $contenu));
 
 		#spip_log("$fread $fichier ".spip_timer('lire_fichier'));
 		if (!$ok)

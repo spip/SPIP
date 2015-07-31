@@ -19,7 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 // http://doc.spip.org/@spip_setcookie
 function spip_setcookie ($name='', $value='', $expire=0, $path='AUTO', $domain='', $secure='') {
-	$name = ereg_replace ('^spip_', $GLOBALS['cookie_prefix'].'_', $name);
+	$name = preg_replace ('/^spip_/', $GLOBALS['cookie_prefix'].'_', $name);
 	if ($path == 'AUTO') $path=$GLOBALS['cookie_path'];
 
 	if ($secure)
@@ -47,7 +47,7 @@ function recuperer_cookies_spip($cookie_prefix) {
 	}
 	foreach ($_COOKIE as $name => $value) {
 		if (substr($name,0,$prefix_long)==$cookie_prefix) {
-			$spipname = ereg_replace ('^'.$cookie_prefix.'_', 'spip_', $name);
+			$spipname = preg_replace ('/^'.$cookie_prefix.'_/', 'spip_', $name);
 			$_COOKIE[$spipname] = $value;
 			$GLOBALS[$spipname] = $value;
 		}

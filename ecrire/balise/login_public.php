@@ -108,11 +108,12 @@ function login_pour_tous($login, $cible, $action) {
 	$pose_cookie = generer_url_public('spip_cookie');
 	$auth_http = '';	
 	if ($echec_cookie AND !$ignore_auth_http) {
-		if (($GLOBALS['flag_sapi_name']
-		     AND eregi("apache", @php_sapi_name()))
-		OR ereg("^Apache.* PHP", $_SERVER['SERVER_SOFTWARE']))
-			$auth_http = $pose_cookie;
+                if (($GLOBALS['flag_sapi_name']
+                     AND preg_match("/apache/i", @php_sapi_name()))
+                OR preg_match("/^Apache.* PHP/", $_SERVER['SERVER_SOFTWARE']))
+		  $auth_http = $pose_cookie;
 	}
+
 	// Attention dans le cas 'intranet' la proposition de se loger
 	// par auth_http peut conduire a l'echec.
 	if (isset($_SERVER['PHP_AUTH_USER']) AND isset($_SERVER['PHP_AUTH_PW']))
@@ -120,7 +121,7 @@ function login_pour_tous($login, $cible, $action) {
 
 	// Le login est memorise dans le cookie d'admin eventuel
 	if (!$login) {
-		if (ereg("^@(.*)$", $_COOKIE['spip_admin'], $regs))
+		if (preg_match("/^@(.*)$/", $_COOKIE['spip_admin'], $regs))
 			$login = $regs[1];
 	} else if ($login == '-1')
 		$login = '';

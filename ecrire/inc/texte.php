@@ -280,11 +280,11 @@ function couper($texte, $taille=50) {
 	$texte = str_replace("\r", "\n", $texte);
 
 	// sauts de ligne et paragraphes
-	$texte = ereg_replace("\n\n+", "\r", $texte);
-	$texte = ereg_replace("<(p|br)( [^>]*)?".">", "\r", $texte);
+	$texte = preg_replace(",\n\n+,", "\r", $texte);
+	$texte = preg_replace(",<(p|br)( [^>]*)?".">,", "\r", $texte);
 
 	// supprimer les traits, lignes etc
-	$texte = ereg_replace("(^|\r|\n)(-[-#\*]*|_ )", "\r", $texte);
+	$texte = preg_replace(",(^|\r|\n)(-[-#\*]*|_ ),", "\r", $texte);
 
 	// supprimer les tags
 	$texte = supprimer_tags($texte);
@@ -308,14 +308,14 @@ function couper($texte, $taille=50) {
 
 	// couper au mot precedent
 	$long = spip_substr($texte, 0, max($taille-4,1));
-	$court = ereg_replace("([^[:space:]][[:space:]]+)[^[:space:]]*\n?$", "\\1", $long);
+	$court = preg_replace(",([^[:space:]][[:space:]]+)[^[:space:]]*\n?$,", "\\1", $long);
 	$points = '&nbsp;(...)';
 
 	// trop court ? ne pas faire de (...)
 	if (spip_strlen($court) < max(0.75 * $taille,2)) {
 		$points = '';
 		$long = spip_substr($texte, 0, $taille);
-		$texte = ereg_replace("([^[:space:]][[:space:]]+)[^[:space:]]*$", "\\1", $long);
+		$texte = preg_replace(",([^[:space:]][[:space:]]+)[^[:space:]]*$,", "\\1", $long);
 		// encore trop court ? couper au caractere
 		if (spip_strlen($texte) < 0.75 * $taille)
 			$texte = $long;
@@ -326,7 +326,7 @@ function couper($texte, $taille=50) {
 		$points = '';
 
 	// remettre les paragraphes
-	$texte = ereg_replace("\r+", "\n\n", $texte);
+	$texte = preg_replace(",\r+,", "\n\n", $texte);
 
 	// supprimer l'eventuelle entite finale mal coupee
 	$texte = preg_replace('/&#?[a-z0-9]*$/S', '', $texte);
@@ -518,7 +518,7 @@ function typo_en($letexte) {
 	$letexte = preg_replace($cherche1, $remplace1, $letexte);
 
 	$letexte = str_replace("&nbsp;", "~", $letexte);
-	$letexte = ereg_replace(" *~+ *", "~", $letexte);
+	$letexte = preg_replace(", *~+ *,", "~", $letexte);
 
 	$cherche2 = array(
 		'/([^-\n]|^)--([^-]|$)/',
@@ -1425,7 +1425,7 @@ function traiter_raccourcis($letexte) {
 	$letexte = "\n".trim($letexte);
 
 	// les listes
-	if (ereg("\n-[*#]", $letexte))
+	if (preg_match(",\n-[*#],", $letexte))
 		$letexte = traiter_listes($letexte);
 
 	// Puce

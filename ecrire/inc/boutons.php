@@ -387,7 +387,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 
 	$class_select = ($sous_rubrique_icone == $sous_rubrique) ? " class='selection'" : '';
 
-	if (eregi("^javascript:",$lien)) {
+	if (preg_match(",^javascript:,i",$lien)) {
 		$a_href = "\nonclick=\"$lien; return false;\" href='$lien_noscript' ";
 	}
 	else {
