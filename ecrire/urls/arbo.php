@@ -189,12 +189,15 @@ function declarer_url_arbo($type, $id_objet) {
 	if (!isset($urls[$type][$id_objet]) OR $modifier_url) {
 		$trouver_table = charger_fonction('trouver_table', 'base');
 		$desc = $trouver_table(table_objet($type));
-		$table = $desc['table'];
+		$champ_titre = $desc['titre'];
 		$col_id =  @$desc['key']["PRIMARY KEY"];
-		if (!$col_id) return false; // Quand $type ne reference pas une table
+		//  $type doit designer une table, avec champ indiquant un titre
+		if (!$col_id OR !$champ_titre) return false; 
+
+		$table = $desc['table'];
 		$id_objet = intval($id_objet);
 	
-		$champ_titre = $desc['titre'] ? $desc['titre'] : 'titre';
+
 		// parent
 		$champ_parent = url_arbo_parent($type);
 		$sel_parent = ($champ_parent)?", O.".reset($champ_parent).' as parent':'';
