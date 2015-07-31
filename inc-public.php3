@@ -54,7 +54,7 @@ $use_cache = true;
 
 if (file_exists($chemin_cache)) {
 	$lastmodified = filemtime($chemin_cache);
-	$ledelais = date("U") - $lastmodified;
+	$ledelais = time() - $lastmodified;
 	$use_cache &= ($ledelais < $delais AND $ledelais > 0);
 }
 else {
@@ -79,7 +79,7 @@ if ($use_cache) {
 	}
 }
 else {
-	$lastmodified = date("U");
+	$lastmodified = time();
 	include_local ("ecrire/inc_meta.php3");
 	$t = time();
 	if (($t - lire_meta('date_purge_cache')) > 24 * 3600) {
@@ -144,8 +144,7 @@ else {
 //
 
 if (file_exists($chemin_cache)) {
-	$lastmodified = mktime(0,0,$lastmodified,1,1,1970);
-	@Header ("Last-Modified: ".date("D, d M Y H:i:s \\G\\M\\T", $lastmodified));
+	@Header ("Last-Modified: ".gmdate("D, d M Y H:i:s T", $lastmodified));
 	include ($chemin_cache);
 	if ($flag_apc) {
 		apc_rm($chemin_cache);
