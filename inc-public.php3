@@ -74,7 +74,7 @@ else {
 	if ($affiche_boutons_admin = (!$flag_preserver
 	AND ($HTTP_COOKIE_VARS['spip_admin']
 	OR $HTTP_COOKIE_VARS['spip_debug'])))
-		include_local('inc-admin.php3');
+		include_local('inc-formulaire_admin.php3');
 
 	$tableau_des_erreurs = array();
 	$page = afficher_page_globale ($fond, $delais, $use_cache);
