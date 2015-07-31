@@ -669,6 +669,7 @@ prive/squelettes/contenu/configurer_langage.html -text
 prive/squelettes/contenu/configurer_langue.html -text
 prive/squelettes/contenu/configurer_multilang.html -text
 prive/squelettes/contenu/configurer_preferences.html -text
+prive/squelettes/contenu/infos_perso.html -text
 prive/squelettes/contenu/mes_articles.html -text
 prive/squelettes/contenu/navigation.html -text
 prive/squelettes/contenu/recherche.html -text
@@ -700,7 +701,10 @@ prive/squelettes/navigation/auteur.html -text
 prive/squelettes/navigation/auteur_edit.html -text
 prive/squelettes/navigation/auteurs.html -text
 prive/squelettes/navigation/configurer.html -text
+prive/squelettes/navigation/configurer_langage.html -text
+prive/squelettes/navigation/configurer_preferences.html -text
 prive/squelettes/navigation/dist.html -text
+prive/squelettes/navigation/infos_perso.html -text
 prive/squelettes/navigation/visiteurs.html -text
 prive/squelettes/objet.html -text
 prive/squelettes/page.html -text
@@ -708,6 +712,7 @@ prive/squelettes/structure.html -text
 prive/squelettes/top/configurer_langage.html -text
 prive/squelettes/top/configurer_preferences.html -text
 prive/squelettes/top/dist.html -text
+prive/squelettes/top/infos_perso.html -text
 prive/style_prive.html -text
 prive/style_prive_defaut.css -text
 prive/themes/spip/bando.css.html -text
