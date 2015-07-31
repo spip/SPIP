@@ -221,18 +221,19 @@ function lignes_longues($texte, $l = 70) {
 	// Passer en utf-8 pour ne pas avoir de coupes trop courtes avec les &#xxxx;
 	// qui prennent 7 caracteres
 	include_ecrire('inc_charsets.php3');
-	$texte = unicode_to_utf_8(filtrer_entites($texte));
+	$texte = unicode_to_utf_8(charset2unicode(
+		filtrer_entites($texte), lire_meta('charset'), true));
 
 	// echapper les tags (on ne veut pas casser les a href=...)
 	$tags = array();
-	if (preg_match_all('/<.*>/Ums', $texte, $t, PREG_SET_ORDER)) {
+	if (preg_match_all('/<.*>/Uums', $texte, $t, PREG_SET_ORDER)) {
 		foreach ($t as $n => $tag) {
 			$tags[$n] = $tag[0];
 			$texte = str_replace($tag[0], " @@SPIPTAG$n@@ ", $texte);
 		}
 	}
 	// casser les mots longs qui restent
-	if (preg_match_all("/\S{".$l."}/ms", $texte, $longs, PREG_SET_ORDER)) {
+	if (preg_match_all("/\S{".$l."}/ums", $texte, $longs, PREG_SET_ORDER)) {
 		foreach ($longs as $long) {
 			$texte = str_replace($long[0], $long[0].' ', $texte);
 		}
