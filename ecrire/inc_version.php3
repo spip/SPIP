@@ -987,8 +987,8 @@ function supprimer_fichier ($fichier) {
 		return false;
 
 	if ($fl = @fopen($fichier, 'r')) {
-		while(!spip_flock($fl, LOCK_EX));
-		spip_flock($fl, LOCK_UN);
+		while(!spip_flock($fl, LOCK_EX, $fichier));
+		spip_flock($fl, LOCK_UN, $fichier);
 		@fclose($fl);
 		@unlink($fichier);
 	}
