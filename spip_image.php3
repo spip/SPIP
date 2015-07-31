@@ -44,7 +44,8 @@ function effacer_image($nom) {
 }
 
 function tester_vignette ($test_vignette) {
-// verifier les formats acceptes par GD
+	global $djpeg_command, $cjpeg_command, $pnmscale_command;
+	// verifier les formats acceptes par GD
 	if ($test_vignette == "gd1") {
 		$gd_formats = Array();
 		if (function_exists('ImageCreateFromJPEG')) {
@@ -68,6 +69,41 @@ function tester_vignette ($test_vignette) {
 				ImageDestroy( $srcImage );
 			}
 		}
+
+		if ($gd_formats) $gd_formats = join(",", $gd_formats);
+		ecrire_meta("gd_formats", $gd_formats);
+		ecrire_metas();
+	}
+	// verifier les formats netpbm
+	else if ($test_vignette == "netpbm") {
+		$gd_formats = Array();
+
+		$vignette = _DIR_IMG . "test.jpg";
+		$dest = _DIR_IMG . "test-10.jpg";
+		exec("$djpeg_command $vignette | $pnmscale_command -width 10 | $cjpeg_command -outfile $dest");
+		if ($taille = @getimagesize($dest)) {
+			if ($taille[1] == 10) $gd_formats[] = "jpg";
+		}
+		ImageDestroy( $dest );
+	
+		
+		$giftopnm_command = ereg_replace("pnmscale", "giftopnm", $pnmscale_command);
+		$vignette = _DIR_IMG . "test.gif";
+		$dest = _DIR_IMG . "test-gif.jpg";
+		exec("$giftopnm_command $vignette | $pnmscale_command -width 10 | $cjpeg_command -outfile $dest");
+		if ($taille = @getimagesize($dest)) {
+			if ($taille[1] == 10) $gd_formats[] = "gif";
+		}
+		ImageDestroy( $dest );
+		$pngtopnm_command = ereg_replace("pnmscale", "pngtopnm", $pnmscale_command);
+		$vignette = _DIR_IMG . "test.png";
+		$dest = _DIR_IMG . "test-gif.jpg";
+		exec("$pngtopnm_command $vignette | $pnmscale_command -width 10 | $cjpeg_command -outfile $dest");
+		if ($taille = @getimagesize($dest)) {
+			if ($taille[1] == 10) $gd_formats[] = "png";
+		}
+		ImageDestroy( $dest );
+		
 
 		if ($gd_formats) $gd_formats = join(",", $gd_formats);
 		ecrire_meta("gd_formats", $gd_formats);

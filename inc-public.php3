@@ -12,12 +12,10 @@ if (defined("_INC_PUBLIC")) {
 	if ($page['lang_select'])
 		lang_dselect();
 }
-
 // Premier appel inc-public
 else {
 	define("_INC_PUBLIC", "1");
 	include ("ecrire/inc_version.php3");
-
 	//
 	// Initialisations
 	//
