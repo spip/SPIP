@@ -17,10 +17,6 @@ function install_etape_ldap4_dist()
 
 	echo install_debut_html();
 
-	$statut_ldap = defined('_INSTALL_STATUT_LDAP')
-		? _INSTALL_STATUT_LDAP
-		: '1comite';
-
 	if (!$base_ldap) $base_ldap = $base_ldap_text;
 
 	$ldap_link = @ldap_connect("$adresse_ldap", "$port_ldap");
@@ -57,6 +53,10 @@ function install_etape_ldap4_dist()
 		}
 		$conn .= "?".">";
 		ecrire_fichier(_FILE_CONNECT_INS . _FILE_TMP . '.php', $conn);
+		$statuts = liste_statuts_ldap();
+		$statut_ldap = defined('_INSTALL_STATUT_LDAP')
+		? _INSTALL_STATUT_LDAP
+		  : $GLOBALS['liste_des_statuts']['info_redacteurs'];
 
 		echo generer_form_ecrire('install', (
 		"<input type='hidden' name='etape' value='ldap5' />"
@@ -66,7 +66,7 @@ function install_etape_ldap4_dist()
 				'statut_ldap' => array(
 					'label' => _T('info_statut_utilisateurs_2').'<br />',
 					'valeur' => $statut_ldap,
-					'alternatives' => liste_statuts_ldap()
+					'alternatives' => $statuts
 					)
 				)
 			   )

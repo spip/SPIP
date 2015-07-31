@@ -140,10 +140,9 @@ function determiner_non_auteurs($type, $id, $cond_les_auteurs, $order)
 		while ($row = spip_fetch_array($res))
 			$cond .= ",".$row['id_auteur'];
 	}
-	if (strlen($cond))
-		$cond = "id_auteur NOT IN (" . substr($cond,1) . ') AND ';
+	if ($cond) $cond = "id_auteur NOT IN (" . substr($cond,1) . ')  ';
 
-	return spip_query("SELECT * FROM spip_auteurs WHERE $cond" . "statut='0minirezo' OR statut='1comite' ORDER BY $order");
+	return auteurs_autorises($cond, $order);
 }
 
 // http://doc.spip.org/@rechercher_auteurs_objet
@@ -250,7 +249,6 @@ function afficher_auteurs_objet($type, $id, $flag_editable, $cond_les_auteurs, $
 // http://doc.spip.org/@ajouter_auteurs_objet
 function ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_ajax)
 {
-
 	if (!$determiner_non_auteurs = charger_fonction('determiner_non_auteurs_'.$type,'inc',true))
 		$determiner_non_auteurs = 'determiner_non_auteurs';
 
@@ -281,23 +279,16 @@ function ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_
 // http://doc.spip.org/@objet_auteur_select
 function objet_auteur_select($result)
 {
-	global $connect_statut ;
-
 	$statut_old = $premiere_old = $res = '';
-
+	$t = 'info_administrateurs';
 	while ($row = spip_fetch_array($result)) {
 		$id_auteur = $row["id_auteur"];
 		$nom = $row["nom"];
 		$email = $row["email"];
-		$statut = $row["statut"];
-
-		$statut=str_replace("0minirezo", _T('info_administrateurs'), $statut);
-		$statut=str_replace("1comite", _T('info_redacteurs'), $statut);
-		$statut=str_replace("6visiteur", _T('info_visiteurs'), $statut);
-				
+		$statut = array_search($row["statut"], $GLOBALS['liste_des_statuts']);
 		$premiere = strtoupper(substr(trim($nom), 0, 1));
 
-		if ($connect_statut != '0minirezo')
+		if (!autoriser('voir', 'auteur'))
 			if ($p = strpos($email, '@'))
 				  $email = substr($email, 0, $p).'@...';
 		if ($email)
@@ -305,10 +296,10 @@ function objet_auteur_select($result)
 
 		if ($statut != $statut_old) {
 			$res .= "\n<option value=\"x\" />";
-			$res .= "\n<option value=\"x\" class='option_separateur_statut_auteur'> $statut</option>";
+			$res .= "\n<option value=\"x\" class='option_separateur_statut_auteur'> " . _T($statut) . "</option>";
 		}
 
-		if ($premiere != $premiere_old AND ($statut != _T('info_administrateurs') OR !$premiere_old))
+		if ($premiere != $premiere_old AND ($statut != $t OR !$premiere_old))
 			$res .= "\n<option value=\"x\" />";
 				
 		$res .= "\n<option value=\"$id_auteur\">&nbsp;&nbsp;&nbsp;&nbsp;" . supprimer_tags(couper(typo("$nom$email"), 40)) . '</option>';

@@ -139,7 +139,7 @@ function cadre_auteur_infos($id_auteur, $auteur)
 
 	if ($n)
 	  $res .= voir_en_ligne ('auteur', $id_auteur, 'publie', 'racine-24.gif', false);
-	else if ($connect_statut == '0minirezo')
+	else if (autoriser('voir', 'auteur'))
 	  $res .= voir_en_ligne ('auteur', $id_auteur, 'prop', 'racine-24.gif', false);
 
 	return debut_boite_info(true) . $res . fin_boite_info(true);
@@ -155,14 +155,14 @@ function auteurs_interventions($auteur) {
 
 	include_spip('inc/message_select');
 
-	if ($connect_statut == "0minirezo") $aff_art = "'prepa','prop','publie','refuse'";
+	if (autoriser('voir', 'article')) $aff_art = "'prepa','prop','publie','refuse'";
 	else if ($connect_id_auteur == $id_auteur) $aff_art = "'prepa','prop','publie'";
 	else $aff_art = "'prop','publie'";
 
 	echo afficher_objets('article',_T('info_articles_auteur'),  array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien",  "WHERE" => "lien.id_auteur='$id_auteur' AND lien.id_article=articles.id_article AND articles.statut IN ($aff_art)",  'ORDER BY' => "articles.date DESC"));
 
 	if ($id_auteur != $connect_id_auteur
-	    AND ($statut == '0minirezo' OR $statut == '1comite')) {
+	AND autoriser('ecrire', $auteur)) {
 		echo "<div class='nettoyeur'>&nbsp;</div>";
 		debut_cadre_couleur();
 
