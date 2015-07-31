@@ -185,7 +185,7 @@ document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'sp
 	}
 	else { // demander seulement le login
 
-		$url = urlencode($cible->getUrl());
+		$url = $cible->getUrl();
 		$action = $clean_link->getUrl();
 
 		echo "<form name='form_login' action='$action' method='post' class='spip_encadrer'>\n";
