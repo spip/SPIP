@@ -661,7 +661,6 @@ function charger_generer_url() {
 // l'URL de base du site, sans se fier a meta(adresse_site) qui peut etre fausse
 // (sites a plusieurs noms d'hotes, deplacements, erreurs)
 function url_de_base() {
-	global $_SERVER;
 	global $REQUEST_URI;
 
 	static $url;
@@ -669,9 +668,12 @@ function url_de_base() {
 	if ($url)
 		return $url;
 
-	$http = (substr($_SERVER["SCRIPT_URI"],0,5) == 'https') ? 'https' : 'http';
+	$http = (
+		substr($_SERVER["SCRIPT_URI"],0,5) == 'https'
+		OR $_SERVER['HTTPS']
+	) ? 'https' : 'http';
 	# note : HTTP_HOST contient le :port si necessaire
-	$myself = $http.'://' .$_SERVER['HTTP_HOST'].$REQUEST_URI;
+	$myself = $http.'://'.$_SERVER['HTTP_HOST'].$REQUEST_URI;
 
 	# supprimer (ecrire/)?xxxxx
 	$url = preg_replace(',/('._DIR_RESTREINT_ABS.')?[^/]*$,', '/', $myself);
