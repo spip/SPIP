@@ -75,33 +75,28 @@ else {
 
 	afficher_page_si_demande_admin ('page', $page['texte'], $page['cache']);
 
-	// Recuperer la resultat dans un buffer
-	// a la fois pour le content-length et le var_recherche
-	if ($flag_ob)
-		ob_start();
-
-	// envoyer la page
+	// Afficher la page
 	if ($page['process_ins'] == 'php')
 		eval('?' . '>' . $page['texte']); // page 'php'
 	else
 		echo $page['texte']; // page tout 'html'
 
-	// surlignement des mots recherches
-	unset ($envoi);
+	//
+	// Et l'envoyer si on est bufferise (ce qu'il faut souhaiter)
+	// avec les entetes de cache
+	//
 	if ($flag_ob) {
-		$envoi = ob_get_clean();
-		if ($var_recherche AND $flag_pcre AND !$flag_preserver) {
-			include_ecrire("inc_surligne.php3");
-			$envoi = surligner_mots($envoi, $var_recherche);
-		}
-	}
+		// Interdire au client de cacher un login, un admin ou un recalcul
+		if ($flag_dynamique OR ($recalcul == 'oui')
+		OR $HTTP_COOKIE_VARS['spip_admin']) {
+			@header("Cache-Control: no-cache,must-revalidate");
+			@header("Pragma: no-cache");
+		// Pour les autres donner l'heure de modif
+		} else if ($lastmodified)
+			@Header ("Last-Modified: ".http_gmoddate($lastmodified)." GMT");
 
-	if ($envoi) {
-#		avec la compression cet entete provoque la mort de
-#		la commande 'ab -n100 -c10 http://....'
-#		@header("Content-Length: ".strlen($envoi));
-		@header("Connection: close");
-		echo $envoi;
+		// Appeler le buffer (var_recherche + compression)
+		@ob_end_flush();
 	}
 
 	terminer_public_global($use_cache, $page['cache']);

@@ -215,10 +215,11 @@ $hash_recherche_strict = '';
 // (doit etre au moins egale a 3.0.8)
 //
 
-$php_version = explode('.', phpversion());
-$php_version_maj = intval($php_version[0]);
-$php_version_med = intval($php_version[1]);
-if (ereg('([0-9]+)', $php_version[2], $match)) $php_version_min = intval($match[1]);
+$php_version = phpversion();
+$php_version_tab = explode('.', $php_version);
+$php_version_maj = intval($php_version_tab[0]);
+$php_version_med = intval($php_version_tab[1]);
+if (ereg('([0-9]+)', $php_version_tab[2], $match)) $php_version_min = intval($match[1]);
 
 $flag_levenshtein = ($php_version_maj >= 4);
 $flag_uniqid2 = ($php_version_maj > 3 OR $php_version_min >= 13);
@@ -231,7 +232,8 @@ $flag_gz = function_exists("gzopen");
 $flag_ob = ($flag_ini_get
 	&& !ereg("ob_", ini_get('disable_functions'))
 	&& function_exists("ob_start"));
-$flag_obgz = ($flag_ob && function_exists("ob_gzhandler"));
+$flag_obgz = ($flag_ob && ($php_version<>'4.0.4')
+	&& function_exists("ob_gzhandler"));
 $flag_pcre = function_exists("preg_replace");
 $flag_crypt = function_exists("crypt");
 $flag_wordwrap = function_exists("wordwrap");
@@ -418,8 +420,11 @@ function http_status($status) {
 	else Header("HTTP/1.0 ".$status_string[$status]);
 }
 
+function http_gmoddate($lastmodified) {
+	return gmdate("D, d M Y H:i:s", $lastmodified);
+}
 function http_last_modified($lastmodified, $expire = 0) {
-	$gmoddate = gmdate("D, d M Y H:i:s", $lastmodified);
+	$gmoddate = http_gmoddate($lastmodified);
 	if ($GLOBALS['HTTP_IF_MODIFIED_SINCE']) {
 		$if_modified_since = ereg_replace(';.*$', '', $GLOBALS['HTTP_IF_MODIFIED_SINCE']);
 		$if_modified_since = trim(str_replace('GMT', '', $if_modified_since));
@@ -430,7 +435,7 @@ function http_last_modified($lastmodified, $expire = 0) {
 	}
 	@Header ("Last-Modified: ".$gmoddate." GMT");
 	if ($expire) 
-		@Header ("Expires: ".gmdate("D, d M Y H:i:s", $expire)." GMT");
+		@Header ("Expires: ".http_gmoddate($expire)." GMT");
 	return $headers_only;
 }
 
@@ -446,38 +451,46 @@ function tester_upload() {
 // compressee pour economiser de la bande passante
 //
 
-if ($auto_compress && $flag_obgz) {
-	$use_gz = true;
-
-	// si un buffer est deja ouvert, stop
-	if (ob_get_contents())
-		$use_gz = false;
-
-	// si la compression est deja commencee, stop
-	else if (@ini_get("zlib.output_compression") || @ini_get("output_handler"))
-		$use_gz = false;
-
-	// special bug de proxy
-	else if (eregi("NetCache|Hasd_proxy", $HTTP_VIA))
-		$use_gz = false;
-
-	// special bug Netscape Win 4.0x
-	else if (eregi("Mozilla/4\.0[^ ].*Win", $HTTP_USER_AGENT))
-		$use_gz = false;
-
-	// special bug Apache2x
-	else if (eregi("Apache(-[^ ]+)?/2", $SERVER_SOFTWARE))
-		$use_gz = false;
-	else if ($flag_sapi_name && ereg("^apache2", @php_sapi_name()))
-		$use_gz = false;
-		
-	if ($use_gz) {
-		@ob_start("ob_gzhandler");
-	}
+// si un buffer est deja ouvert, stop
+if ($flag_ob AND !strlen(@ob_get_contents())) {
 	@header("Vary: Cookie, Accept-Encoding");
-}
-else {
+	@ob_start("spip_ob_function");
+} else {
+	$flag_ob = false;
 	@header("Vary: Cookie");
+}
+
+//
+// La fonction elle-meme
+//
+function spip_ob_function ($page) {
+	global $var_recherche, $flag_pcre, $flag_preserver, $flag_ecrire;
+
+	// Surligner les mots sur le site public
+	if ($var_recherche AND $flag_pcre AND !$flag_preserver AND !$flag_ecrire) {
+		include_ecrire("inc_surligne.php3");
+		if ($page_surligne = surligner_mots($page, $var_recherche))
+			$page = $page_surligne;
+	}
+
+	// Tests compression
+	$use_gz = $GLOBALS['auto_compress'] && $GLOBALS['flag_obgz']
+	// special bug de proxy
+	&& !eregi("NetCache|Hasd_proxy", $HTTP_VIA)
+	// special bug Netscape Win 4.0x
+	&& !eregi("Mozilla/4\.0[^ ].*Win", $HTTP_USER_AGENT)
+	// special bug Apache2x
+	&& !eregi("Apache(-[^ ]+)?/2", $SERVER_SOFTWARE)
+	&& !($flag_sapi_name && ereg("^apache2", @php_sapi_name()))
+	// si la compression est deja commencee, stop
+	&& !@ini_get("zlib.output_compression") && !@ini_get("output_handler");
+
+	if ($use_gz AND ($page_gz = @ob_gzhandler($page,5)) !== false)
+		$page = $page_gz;
+
+	@header('Content-Length: '.strlen($page));
+	@header('Connection: close');
+	return $page;
 }
 
 class Link {
