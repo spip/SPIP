@@ -18,7 +18,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function calcule_header_et_page ($fond) {
 	  global $auteur_session, $forcer_lang, $ignore_auth_http,
 	  $var_confirm, $var_mode;
-	  global $_GET, $_POST, $_COOKIE, $_SERVER;
 
 	// multilinguisme
 	if ($forcer_lang AND ($forcer_lang!=='non') AND !count($_POST)) {
@@ -86,7 +85,6 @@ function is_preview()
 function afficher_page_globale ($fond) {
 	global $flag_dynamique, $flag_ob, $flag_preserver,$lastmodified,
 		$use_cache, $var_mode, $var_preview;
-	global $_COOKIE, $_SERVER;
 
 	include_spip('public/cache');
 
@@ -200,8 +198,8 @@ function auto_expire($code)
 }
 
 function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
-
 	global $lastmodified;
+
 	// Peut-on utiliser un fichier cache ?
 	list($chemin_cache, $page, $lastinclude) = 
 		determiner_cache($use_cache, $contexte_inclus, $fond);

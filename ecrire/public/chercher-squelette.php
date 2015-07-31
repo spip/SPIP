@@ -24,7 +24,7 @@ function chercher_squelette($fond, $id_rubrique, $lang) {
 		// erreur webmaster : $fond ne correspond a rien
 		erreur_squelette(_T('info_erreur_squelette2',
 			 array('fichier'=>$fond)),
-			 $dossier);
+			 $GLOBALS['dossier_squelettes']);
 		return '';
 	}
 
