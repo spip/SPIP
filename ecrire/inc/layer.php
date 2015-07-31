@@ -58,7 +58,7 @@ function renomme_block($nom_block)
 
 // http://doc.spip.org/@debut_block_visible
 function debut_block_visible($nom_block){
-	global $numero_block, $compteur_block, $browser_layer;
+	global $browser_layer;
 	if (!$browser_layer) return '';
 	return "<div id='Layer".renomme_block($nom_block)."' style='display: block;'>";
 
@@ -66,7 +66,7 @@ function debut_block_visible($nom_block){
 
 // http://doc.spip.org/@debut_block_invisible
 function debut_block_invisible($nom_block){
-
+	global $browser_layer;
 	if (!$browser_layer) return '';
 
 	// si on n'accepte pas js, ne pas fermer
