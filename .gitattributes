@@ -529,4 +529,5 @@ ecrire/xml/rss.php -text
 /spip.php -text
 tmp/remove.txt -text
 tmp/sessions/remove.txt -text
+tmp_img/remove.txt -text
 /win_png.htc -text
