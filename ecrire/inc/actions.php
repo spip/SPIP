@@ -187,8 +187,8 @@ function determine_upload()
 //
 // http://doc.spip.org/@verifier_php_auth
 function verifier_php_auth() {
-	if ($_SERVER['PHP_AUTH_USER'] && $_SERVER['PHP_AUTH_PW']
-	&& !$GLOBALS['ignore_auth_http']) {
+	if (@$_SERVER['PHP_AUTH_USER'] && $_SERVER['PHP_AUTH_PW']
+	&& !@$GLOBALS['ignore_auth_http']) {
 		$result = spip_query("SELECT * FROM spip_auteurs WHERE login=" . _q($_SERVER['PHP_AUTH_USER']));
 
 		$row = @spip_fetch_array($result);

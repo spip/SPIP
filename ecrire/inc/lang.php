@@ -21,7 +21,7 @@ include_spip('inc/actions');
 function changer_langue($lang) {
 	global $all_langs, $spip_lang_rtl, $spip_lang_right, $spip_lang_left, $spip_lang_dir, $spip_dir_lang;
 
-	$liste_langues = $all_langs.','.$GLOBALS['meta']['langues_multilingue'];
+	$liste_langues = $all_langs.','.@$GLOBALS['meta']['langues_multilingue'];
 
 	// Si la langue demandee n'existe pas, on essaie d'autres variantes
 	// Exemple : 'pt-br' => 'pt_br' => 'pt'
@@ -257,7 +257,7 @@ function verifier_lang_url() {
 	// Renvoyer si besoin (et si la langue demandee existe)
 	if ($spip_lang != $lang_demandee
 	AND changer_langue($lang_demandee)
-	AND $lang_demandee != $_GET['lang']) {
+	AND $lang_demandee != @$_GET['lang']) {
 		$destination = parametre_url(self(),'lang', $lang_demandee, '&');
 		if (isset($GLOBALS['var_mode']))
 			$destination = parametre_url($destination, 'var_mode', $GLOBALS['var_mode'], '&');
@@ -324,7 +324,7 @@ function init_langues() {
 	global $all_langs, $langue_site;
 	global $pile_langues, $lang_objet, $lang_dir;
 
-	$all_langs = $GLOBALS['meta']['langues_proposees'];
+	$all_langs = @$GLOBALS['meta']['langues_proposees'];
 	$pile_langues = array();
 	$lang_objet = '';
 	$lang_dir = '';

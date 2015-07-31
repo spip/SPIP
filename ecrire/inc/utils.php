@@ -1096,9 +1096,10 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	}
 
 	// en cas d'echec refaire le fichier
-	if (!is_array($GLOBALS['meta']) AND _FILE_CONNECT) {
+	if (!isset($GLOBALS['meta']) AND _FILE_CONNECT) {
 		include_spip('inc/meta');
 		ecrire_metas();
+		$GLOBALS['langue_site'] = $GLOBALS['meta']['langue_site'];
 	}
 
 	// supprimer le noyau si on recalcule
@@ -1106,8 +1107,8 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 		$GLOBALS['noyau'] = array();
 
 	// Langue principale du site
-	$GLOBALS['langue_site'] = $GLOBALS['meta']['langue_site'];
-	if (!$GLOBALS['langue_site']) include_spip('inc/lang');
+
+	if (!isset($GLOBALS['langue_site'])) include_spip('inc/lang');
 	$GLOBALS['spip_lang'] = $GLOBALS['langue_site'];
 
 	// Verifier le visiteur

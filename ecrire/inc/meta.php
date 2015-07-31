@@ -77,7 +77,7 @@ if (!isset($GLOBALS['meta']))
 
 // On force le renouvellement de l'alea de l'espace prive toutes les 4 heures
 
-if ((!_DIR_RESTREINT) AND _FILE_CONNECT AND abs(time() -  $GLOBALS['meta']['alea_ephemere_date']) > (3600<<2)) {
+if ((!_DIR_RESTREINT) AND _FILE_CONNECT AND abs(time() -  @$GLOBALS['meta']['alea_ephemere_date']) > (3600<<2)) {
 	include_spip('inc/acces');
 	renouvelle_alea();
 }
