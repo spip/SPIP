@@ -10,6 +10,10 @@
 # sort the list according your visits (see your referrers).
 # -----------------------------------------------------------------------------
 
+[IP]
+rien=
+[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+
+
 [Google]
 q=
 www\.google\.(.*)

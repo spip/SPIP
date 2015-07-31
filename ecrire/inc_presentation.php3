@@ -927,7 +927,7 @@ function debut_html($titre = "") {
 	$titre = textebrut(typo($titre));
 
 	if (!$nom_site_spip) $nom_site_spip="SPIP";
-	$charset = lire_meta('charset');
+	if (!$charset = lire_meta('charset')) $charset = 'utf-8';
 
 	@Header("Expires: 0");
 	@Header("Cache-Control: no-cache,no-store");
@@ -1064,7 +1064,7 @@ function barre_onglets($rubrique, $onglet){
 		if (lire_meta('multi_articles') == 'oui' OR lire_meta('multi_rubriques') == 'oui') onglet(_T('onglet_repartition_lang'), "statistiques_lang.php3", "replang", $onglet, "langues-24.gif");
 		
 		$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
-		if ($activer_statistiques_ref != "non")	onglet(_T('onglet_origine_visites'), "statistiques_referers.php3", "referers", $onglet, "referers-24.gif");
+		if ($activer_statistiques_ref != "non")	onglet(_T('onglet_origine_visites'), "statistiques_visites.php3?origine=oui", "referers", $onglet, "referers-24.gif");
 	}
 
 	if ($rubrique == "administration"){
@@ -2080,8 +2080,7 @@ function install_debut_html($titre='AUTO', $onload='') {
 	if ($titre=='AUTO')
 		$titre=_T('info_installation_systeme_publication');
 
-	if (!$charset = lire_meta('charset'))
-		$charset = 'iso-8859-1';
+	if (!$charset = lire_meta('charset')) $charset = 'utf-8';
 	@Header("Content-Type: text/html; charset=$charset");
 
 	echo "<html><head>
