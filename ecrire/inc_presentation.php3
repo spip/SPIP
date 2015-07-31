@@ -409,7 +409,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 				$les_auteurs = substr($les_auteurs, 2);
 			}
 
-			$s = "<A HREF=\"articles.php3?id_article=$id_article\">";
+			$s = "<a href=\"articles.php3?id_article=$id_article\">";
 			if ($statut=='publie') $puce = 'verte';
 			else if ($statut == 'prepa') $puce = 'blanche';
 			else if ($statut == 'prop') $puce = 'orange';
@@ -420,8 +420,8 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			else
 				$puce = "puce-$puce.gif";
 
-			$s .= "<img src=\"img_pack/$puce\" alt='-' width=\"13\" height=\"14\" border=\"0\">";
-			$s .= "&nbsp;&nbsp;".typo($titre)."</A>";
+			$s .= "<img src=\"img_pack/$puce\" alt='-' width=\"13\" height=\"14\" border=\"0\"></a>&nbsp;&nbsp;";
+			$s .= "<a href=\"articles.php3?id_article=$id_article\">".typo($titre)."</a>";
 			if ($petition) $s .= " <Font size=1 color='red'>P&Eacute;TITION</font>";
 
 			$vals[] = $s;
@@ -497,10 +497,11 @@ function afficher_breves($titre_table, $requete) {
 			else if ($statut == 'publie') $puce = "puce-verte";
 			else if ($statut == 'refuse') $puce = "puce-rouge";
 
-			$s = "<a href=\"breves_voir.php3?id_breve=$id_breve\">";
-			$s .= "<img src='img_pack/$puce.gif' alt='o' width=\"8\" height=\"9\" border=\"0\"> ";
+			$s = "<a href='breves_voir.php3?id_breve=$id_breve'>";
+			$s .= "<img src='img_pack/$puce.gif' alt='o' width='8' height='9' border='0'></a>&nbsp;&nbsp;";
+			$s .= "<a href='breves_voir.php3?id_breve=$id_breve'>";
 			$s .= typo($titre);
-			$s .= "</A>";
+			$s .= "</a>";
 			$vals[] = $s;
 
 			$s = "<div align=\"right\"><font size='2'>";
