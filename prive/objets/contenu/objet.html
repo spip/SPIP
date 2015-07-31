@@ -1,0 +1,12 @@
+<BOUCLE_champs(DATA){source table,#ENV{objet}|objet_info{champs_contenu}}>
+#SET{value,#ENV{id}|generer_info_entite{#ENV{objet},#VALEUR}}
+<div class="champ contenu_#VALEUR[ (#GET{value}|strlen|?{'',vide})]">
+<div class='label'>[(#ENV{objet}|concat{':info_',#VALEUR}|_T)]</div>
+<div class='#VALEUR'>#GET{value}</div>
+</div>
+</BOUCLE_champs>
+[<div class="champ contenu_notes">
+<div class='label'><:info_notes:></div>
+<div dir='#LANG_DIR' class='notes'>(#NOTES)</div>
+</div>]
+</B_champs>

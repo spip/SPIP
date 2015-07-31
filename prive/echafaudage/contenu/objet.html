@@ -3,7 +3,7 @@
 
 	[(#BOITE_OUVRIR{[
 
-		[(#AUTORISER{modifier,#OBJET,#ID_OBJET})
+		[(#AUTORISER{modifier,#OBJET,#ID_OBJET}|et{#OBJET|objet_info{editable}}|oui)
 
 			[(#ID_OBJET|afficher_qui_edite{#OBJET}|non)
 				[(#ID_OBJET|generer_url_ecrire_entite_edit{#OBJET}|icone_verticale{[(#OBJET|objet_info{texte_modifier}|_T)],#OBJET,edit,right ajax preload})]
