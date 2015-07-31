@@ -900,11 +900,14 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO',
 				return; 
 			} 
 
-			// Initialisation de l'image destination 
-				if ($process == 'gd2' AND $destFormat != "gif") 
-				$destImage = ImageCreateTrueColor($destWidth, $destHeight); 
-			if (!$destImage) 
-				$destImage = ImageCreate($destWidth, $destHeight); 
+			// Initialisation de l'image destination
+			$destImage = null;
+			if ($process == 'gd2' AND $destFormat != "gif") {
+				$destImage = ImageCreateTrueColor($destWidth, $destHeight);
+			}
+			if (!$destImage) {
+				$destImage = ImageCreate($destWidth, $destHeight);
+			}
 
 			// Recopie de l'image d'origine avec adaptation de la taille 
 			$ok = false; 
