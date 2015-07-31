@@ -2,13 +2,10 @@
 
 include ("inc_version.php3");
 
-
 include_ecrire ("inc_auth.php3");
 include_ecrire ("inc_export.php3");
 include_ecrire ("inc_admin.php3");
 include_ecrire ("inc_presentation.php3");
-include_ecrire ("inc_lang.php3");
-utiliser_langue_visiteur();
 
 if (!$archive) {
 	if ($gz) $archive = "dump.xml.gz";

@@ -5,6 +5,9 @@
 if (defined("_ECRIRE_INC_PRESENTATION")) return;
 define("_ECRIRE_INC_PRESENTATION", "1");
 
+include_ecrire ("inc_lang.php3");
+utiliser_langue_visiteur();
+
 
 //
 // Aide

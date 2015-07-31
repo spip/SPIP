@@ -7,7 +7,7 @@ define("_INC_LOGIN", "1");
 
 
 include_ecrire ("inc_meta.php3");
-include_ecrire ("inc_presentation.php3");
+//include_ecrire ("inc_presentation.php3");
 include_ecrire ("inc_session.php3");
 include_ecrire ("inc_filtres.php3");
 include_ecrire ("inc_texte.php3");
@@ -37,11 +37,11 @@ function auth_http($cible, $essai_auth_http) {
 }
 
 function ouvre_login($titre) {
-	
+
 	$retour .= "<div>";
-	
+
 	if ($titre) $retour .= "<h3 class='spip'>$titre</h3>";
-	
+
 	$retour .= '<font size="2" face="Verdana,arial,helvetica,sans-serif">';
 	return $retour;
 }
@@ -164,7 +164,7 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 				"document.write('"._T('login_login')." <b>$login</b> <br><font size=\\'2\\'>[<a href=\\'spip_cookie.php3?cookie_admin=non&url=".rawurlencode($clean_link->getUrl())."\\'>"._T('login_autre_identifiant')."</a>]</font>');\n" .
 				"//--></script>\n";
 			echo "<input type='hidden' name='session_login_hidden' value='$login'>";
-	
+
 			// si jaja inactif, le login est modifiable (puisque le challenge n'est pas utilise)
 			echo "<noscript>";
 			echo "<font face='Georgia, Garamond, Times, serif' size='3'>";

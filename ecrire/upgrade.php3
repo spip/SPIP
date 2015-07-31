@@ -13,8 +13,6 @@ if ($reinstall == 'oui') {
 	@copy("inc_connect.php3", "inc_connect_install.php3");
 
 	include_ecrire("inc_presentation.php3");
-	include_ecrire ("inc_lang.php3");
-	utiliser_langue_visiteur();
 	install_debut_html(_T('titre_page_upgrade'));
 	echo "<p><b>"._T('texte_nouvelle_version_spip_1')."</b><p> ";
 	echo _T('texte_nouvelle_version_spip_2');

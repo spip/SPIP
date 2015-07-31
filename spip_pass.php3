@@ -14,6 +14,8 @@ include_ecrire ("inc_acces.php3");
 
 include_local("inc-formulaires.php3");
 
+utiliser_langue_site();
+
 $inscriptions_ecrire = (lire_meta("accepter_inscriptions") == "oui") ;
 
 // recuperer le cookie de relance

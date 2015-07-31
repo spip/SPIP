@@ -3,7 +3,6 @@
 include ("inc_version.php3");
 include_ecrire("inc_lang.php3");
 utiliser_langue_visiteur();
-gerer_menu_langues();
 
 if (file_exists($flag_ecrire ? "inc_connect.php3" : "ecrire/inc_connect.php3")) {
 	include_ecrire("inc_auth.php3");
@@ -198,8 +197,6 @@ for ($i=0; $i<=count($texte); $i++) {
 }
 
 echo '</TABLE>';
-
-echo "<br><div align='center'>". menu_langues()."</div>";
 
 ?>
 </BODY>

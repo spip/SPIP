@@ -198,8 +198,6 @@ function auth() {
 		// notamment, une restauration de base de donnees dans laquelle
 		// il n'existe pas.
 		include_ecrire('inc_presentation.php3');
-		include_ecrire("inc_lang.php3");
-		utiliser_langue_visiteur();
 		include_ecrire('inc_texte.php3');
 		install_debut_html(_T('avis_erreur_connexion'));
 		echo "<br><br><p>"._T('texte_inc_auth_1', array('auth_login' => $auth_login))." <A HREF='../spip_cookie.php3?logout=$auth_login'>".
