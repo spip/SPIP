@@ -1682,59 +1682,7 @@ faris gravajn &#349;an&#285;ojn en la grafika a&#365; struktura flanko de la tek
 'trad_delier' => 'Ne plu ligi tiun artikolon kun &#285;iaj tradukoj',
 'trad_lier' => 'Tiu artikolo estas traduko de la artikolo numerita&nbsp;:',
 'trad_new' => 'Skribi novan tradukon de tiu artikolo',
-'trad_reference' => '(artikolo referenca)',
-
-
-// PLUS_UTILISE
-'avis_erreur_cookie' => '<PLUS_UTILISE>problemo de kuketo',
-'barre_aide_rac' => '<PLUS_UTILISE>Pli scii pri la tipografiaj &#349;parvojoj',
-'icone_calendrier_messagerie' => '<PLUS_UTILISE>Agendo kaj mesa&#285;ilo',
-'icone_etat_traductions' => '<PLUS_UTILISE>Stato de tradukoj',
-'icone_forum_interne' => '<PLUS_UTILISE>Interna forumo',
-'icone_forums_petitions' => '<PLUS_UTILISE>Forumoj kaj subskriblistoj',
-'icone_modifier_informations_personnelles' => '<PLUS_UTILISE>Modifi viajn personajn datenojn',
-'info_dans_espace_prive' => '<PLUS_UTILISE>[en la privata spaco]',
-'info_en_test_1' => '<PLUS_UTILISE> (testata)',
-'info_en_test_2' => '<PLUS_UTILISE> (testata)',
-'info_langue_defaut' => '<PLUS_UTILISE>Defa&#365;lta lingvo:',
-'info_langue_interface' => '<PLUS_UTILISE>Lingvo de la interfaco',
-'info_langues_proposees' => '<PLUS_UTILISE>Proponitaj lingvoj:',
-'info_lettre_heures' => '<PLUS_UTILISE>H',
-'info_lien' => '<PLUS_UTILISE>ligilo:',
-'info_nouveau' => '<PLUS_UTILISE>(Nova)',
-'info_remplacer_vignette_defaut' => '<PLUS_UTILISE>Anstata&#365;igi la defa&#365;ltan vinjeton per propra vinjeto&nbsp;:',
-'info_sur_site_public' => '<PLUS_UTILISE>[en la publika spaco]',
-'info_tous_redacteur' => '<PLUS_UTILISE>Anonco al &#265;iu redaktisto',
-'info_tout_site1' => '<PLUS_UTILISE>Lingvo de la artikolo.',
-'item_administrateur' => '<PLUS_UTILISE>Administranto',
-'item_efface' => '<PLUS_UTILISE>Forigita',
-'item_premier' => '<PLUS_UTILISE>1-a',
-'item_redacteur' => '<PLUS_UTILISE>Redaktisto',
-'lien_modifer_date' => '<PLUS_UTILISE>&#348;an&#285;i la daton',
-'lien_rendez_vous' => '<PLUS_UTILISE>RENDEVUON',
-'lien_rendez_vous_02' => '<PLUS_UTILISE>@total_messages@ RENDEVUOJ',
-'lien_test_format_image' => '<PLUS_UTILISE>Testi la bildformatojn kiujn tiu teksejo povas uzi por krei vinjetojn',
-'lnfo_liens' => '<PLUS_UTILISE>ligoj :',
-'login_identification' => '<PLUS_UTILISE>identigo',
-'onglet_agenda' => '<PLUS_UTILISE>Agendo',
-'onglet_bilan_traductions' => '<PLUS_UTILISE>Bilanco de tradukoj',
-'onglet_calendrier' => '<PLUS_UTILISE>Kalendaro',
-'onglet_detail_traductions' => '<PLUS_UTILISE>La tradukotaj artikoloj',
-'onglet_langues' => '<PLUS_UTILISE>Lingvoj',
-'onglet_messagerie_personnelle' => '<PLUS_UTILISE>Persona mesa&#285;ilo',
-'texte_bilan_traductions' => '<PLUS_UTILISE>En tiu grafika&#309;o, verdaj strekoj reprezentas tradukitajn kaj &#285;isdatigitajn artikolojn, kaj ru&#285;aj strekoj la &#285;isdatigotajn tradukojn.',
-'texte_choix_langue_defaut' => '<PLUS_UTILISE>Bonvolu elekti &#265;i-sube la defa&#365;ltan lingvon de via eksejo, kaj anka&#365; la lingvojn kiuj estu proponitaj al la redaktistoj.',
-'texte_plan_trad' => '<PLUS_UTILISE>Tiu pa&#285;o prezentas la staton de tradukoj por elektita lingvo.
-  La pa&#285;o afi&#349;as la artikolojn kiuj estas tradukataj, tiujn kies traduko necesas &#285;isdatigon, kaj tiujn kiujn estas tradukotaj.',
-'texte_plan_trad_en_cours' => '<PLUS_UTILISE>Tiu simbolo indikas ke artikolo estas tradukata&nbsp;: tio signifas ke la traduko 
-  ekis sed ne estas jam publikigita. Alklaku tiun simbolon por iri
-  al la traduko.',
-'texte_plan_trad_modif' => '<PLUS_UTILISE>Tiu simbolo indikas ke origina artikolo de tradukita artikolo estis modifita. En tiu kazo, vi devas &#285;isdatigi la tradukon rilate alla &#349;an&#285;oj en la origina artikolo.',
-'texte_plan_trad_note' => '<PLUS_UTILISE>Noto&nbsp;: nur la publikigitaj artikoloj estas afi&#349;itaj en tiu pa&#285;o.',
-'titre_articles_populaires' => '<PLUS_UTILISE>La plej popularaj artikoloj',
-'titre_articles_visites' => '<PLUS_UTILISE>La plej vizititaj artikoloj',
-'titre_page_admin_vider' => '<PLUS_UTILISE>Teknika bontenado: mastrumado de la tenejo',
-'titre_page_etat_traductions' => '<PLUS_UTILISE>Stato de tradukoj'
+'trad_reference' => '(artikolo referenca)'
 
 );
 

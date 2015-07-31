@@ -6,10 +6,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // 0
-'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
+'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-hu',
 '0_langue' => 'Magyar [hu]',
-'0_liste' => 'spip-dev@rezo.net',
-'0_mainteneur' => 'spip-dev@rezo.net',
+'0_liste' => 'spip-hu@rezo.net',
+'0_mainteneur' => 'trucy@freemail.hu',
 
 
 // A
@@ -181,10 +181,10 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.',
 'date_de_mois_7' => '@j@ @nommois@',
 'date_de_mois_8' => '@j@ @nommois@',
 'date_de_mois_9' => '@j@ @nommois@',
-'date_fmt_heures_minutes' => '@h@h@m@min',
-'date_fmt_jour_heure' => '@jour@ , @heure@ &oacute;rakor',
+'date_fmt_heures_minutes' => '@h@:@m@',
+'date_fmt_jour_heure' => '@jour@ @heure@',
 'date_fmt_jour_mois' => '@jour@ @nommois@',
-'date_fmt_jour_mois_annee' => '@annee@ @nommois@ @jour@  ',
+'date_fmt_jour_mois_annee' => '@annee@. @nommois@ @jour@  ',
 'date_fmt_mois_annee' => '@annee@ @nommois@',
 'date_fmt_nomjour_date' => '@date@ @nomjour@',
 'date_jnum1' => '1.',
