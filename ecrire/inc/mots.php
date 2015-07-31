@@ -303,7 +303,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	// On recupere le typo_mot ici, et non dans le mot-cle lui-meme; sinon bug avec arabe
 			$type_mot = typo($row_groupe['titre']);
 			$obligatoire = $row_groupe['obligatoire'];
-			$flag_groupe = ($connect_statut == '1comite' AND $row_groupe['comite'] == 'oui') OR ($connect_statut == '0minirezo' AND $row_groupe['minirezo'] == 'oui');
+			$flag_groupe = (($connect_statut == '1comite' AND $row_groupe['comite'] == 'oui') OR ($connect_statut == '0minirezo' AND $row_groupe['minirezo'] == 'oui'));
 			// Changer
 			if (($row_groupe['unseul'] == "oui") AND ($flag_editable AND $flag_groupe)) {
 
