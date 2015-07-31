@@ -54,39 +54,9 @@ function style_menu_rubriques($i) {
 		for ($count = 0; $count <= $i; $count ++)
 			$espace .= "&nbsp;&nbsp;&nbsp;&nbsp;";
 	}
-	switch ($i) {
-		case 1:
-			$espace= "";
-			$style .= "font-weight: bold;";
-			break;
-		case 2:
-			$style .= "color: #202020;";
-			break;
-		case 3:
-			$style .= "color: #404040;";
-			break;
-		case 4:
-			$style .= "color: #606060;";
-			break;
-		case 5:
-			$style .= "color: #808080;";
-			break;
-		default:
-			$style .= "color: #A0A0A0;";
-			break;
-	}
-
-	if ($i==1) {
-		$style .= "background-image: url(" . _DIR_IMG_PACK. "secteur-12.gif);";
-		$style .= "font-weight: bold;";
-		$class = "toile_claire";
-	}
-	else if ($i==2) {
-		$style .= "font-weight: bold;";
-		$style .= "bordure_claire_basse";
-	} else $class = '';
-
-
+	if ($i ==1)
+		$espace= "";
+	$class = "niveau_$i";
 	return array($class,$style,$espace);
 }
 
