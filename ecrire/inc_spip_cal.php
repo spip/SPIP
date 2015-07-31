@@ -24,11 +24,12 @@ function ligne ($texte) {
 	echo filtrer_ical($texte)."\n";
 }
 
-function spip_cal_dist($id_auteur, $cle)
+function spip_action_ical_dist()
 {
-	  if (verifier_low_sec($id_auteur, $cle, 'ical')) {
-		$query = "SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur";
-		$result = spip_query($query);
+	global $id_auteur, $arg, $action;
+	spip_log("fonction spipcal $id_auteur, $arg, $action");
+	if (verifier_low_sec($id_auteur, $arg, $action)) {
+		$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=" . intval($id_auteur));
 
 		if ($row = spip_fetch_array($result)) {
 			$id_utilisateur=$row['id_auteur'];
@@ -38,7 +39,7 @@ function spip_cal_dist($id_auteur, $cle)
 		}
 	  }
 	if (!$id_utilisateur) {
-		spip_log("spip_cal: acces interdit a $id_auteur par $cle");
+		spip_log("spip_cal: acces interdit a $id_auteur par $arg");
 		echo _T('info_acces_interdit');
 		exit;
 	}

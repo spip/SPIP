@@ -10,23 +10,18 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-// prendre $var_* comme variables pour eviter les conflits avec les http_vars
-
 include ("ecrire/inc_version.php3");
+include_ecrire('inc_spip_cal');
 
-$var_nom = "spip_cal";
-
-$var_f = find_in_path('inc_' . $var_nom . '.php');
-
-if ($var_f) 
-	include($var_f);
-else
-	include_ecrire('inc_' . $var_nom);
+$id_auteur = $id;
+$arg = $cle;
+$action = 'ical';
+$var_nom = "spip_action_ical";
 
 if (function_exists($var_nom))
-	$var_nom($id, $cle);
+	$var_nom();
 elseif (function_exists($var_f = $var_nom .  "_dist"))
-	$var_f($id, $cle);
+	$var_f();
  else
-	spip_log("fonction $nom indisponible");
+	spip_log("fonction $var_nom indisponible");
 ?>
