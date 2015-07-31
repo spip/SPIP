@@ -330,6 +330,10 @@ function interdire_scripts($source) {
 function safehtml($t) {
 	static $process, $test;
 
+	# attention safehtml nettoie deux ou trois caracteres de plus. A voir
+	if (strpos($t,'<')===false)
+		return str_replace("\x00", '', $t);
+
 	if (!$test) {
 		define_once('XML_HTMLSAX3', _DIR_RESTREINT."safehtml/classes/");
 		if (@file_exists(XML_HTMLSAX3.'safehtml.php')) {
@@ -343,7 +347,15 @@ function safehtml($t) {
 	}
 
 	if ($test > 0) {
-		$process->clear(); # vider le buffer _xhtml de safehtml
+		# reset ($process->clear() ne vide que _xhtml...),
+		# on doit pouvoir programmer ca plus propremement
+		$process->$_xhtml = '';
+		$process->$_counter = array();
+		$process->$_stack = array();
+		$process->$_dcCounter = array();
+		$process->$_dcStack = array();
+		$process->$_listScope = 0; 
+		$process->$_liStack = array();
 		$t = $process->parse($t);
 	}
 
