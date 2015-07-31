@@ -382,9 +382,9 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 		if ($charge=='options'){
 			$s .= "function boutons_plugins(){return unserialize('".str_replace("'","\'",serialize($liste_boutons))."');}\n";
 			$s .= "function onglets_plugins(){return unserialize('".str_replace("'","\'",serialize($liste_onglets))."');}\n";
-		}
-		ecrire_fichier(_DIR_TMP."charger_plugins_$charge.php",
-			$start_file . $splugs . $s . $end_file);
+			$f = _CACHE_PLUGINS_OPT;
+		} else  $f = _CACHE_PLUGINS_FCT;
+		ecrire_fichier($f, $start_file . $splugs . $s . $end_file);
 	}
 
 	if (is_array($infos)){
