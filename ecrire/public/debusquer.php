@@ -49,6 +49,13 @@ function public_debusquer_dist($message='', $lieu='', $quoi='') {
 	if ($message) {
 		if (is_array($message)) list($message, $lieu) = $message;
 		elseif ($quoi) $message = debusquer_requete($message, $lieu, $quoi);
+		elseif (is_object($lieu))
+			$lieu = _T('squelette') 
+			. ' <b> ' . $lieu->descr['sourcefile'] . '</b> '
+			. (!$lieu->id_boucle ? '' :
+				(' ' . _T('zbug_boucle') . ' <b>' . $lieu->id_boucle . '</b>'))
+			. ' ' . _T('ligne') . ' <b>' . $lieu->ligne . '</b>';
+			       
 		spip_log("Debug: $message | $lieu (" . $GLOBALS['fond'] .")" );
 		$GLOBALS['bouton_admin_debug'] = true;
 		$tableau_des_erreurs[] = array($message, $lieu);

@@ -113,7 +113,9 @@ class Champ {
 	var $id_boucle;
 	var $boucles;
 	var $type_requete;
-	var $code;	// code du calcul
+	// resultat de la compilation:  toujours une expression PHP.
+	// Chaine vide comme valeur par defaut (pour balise indefinie etc)
+	var $code ="''"; 
 	var $interdire_scripts = true; // false si on est sur de cette balise
 	// tableau pour la production de code dependant du contexte
 	// id_mere;  pour TOTAL_BOUCLE hors du corps
@@ -138,7 +140,9 @@ class Idiome {
 	var $id_boucle;
 	var $boucles;
 	var $type_requete;
-	var $code;
+	// resultat de la compilation:  toujours une expression PHP.
+	// Chaine vide comme valeur par defaut (n'arrive pas normalement)
+	var $code = "''";
 	var $interdire_scripts = false;
 	var $descr = array();
 	var $ligne = 0;
