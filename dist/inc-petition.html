@@ -7,10 +7,8 @@
 
 	#ANCRES_PAGINATION
 
-	<h2>#GRAND_TOTAL <:signatures_petition:></h2>
-
 	<table summary="<:signatures_petition:>">
-	<caption class="invisible"><:signatures_petition:></caption>
+	<caption><h2>#GRAND_TOTAL <:signatures_petition:></h2></caption>
 	<thead>
 		<tr>
 		<th scope="col"><:date:></th>
@@ -19,7 +17,7 @@
 		</tr>
 	</thead>
 	<tbody>
-<BOUCLE_signatures(SIGNATURES){id_article} {par date}{inverse} {pagination 20}>
+<BOUCLE_signatures(SIGNATURES) {id_article} {par date}{inverse} {pagination 20}>
 		<tr>
 		<td class="signature-date">[(#DATE|affdate)]</td>
 		<td class="signature-nom">#NOM[<br /><a href="(#URL_SITE)" class="spip_out"><small>[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})</small>]</a>]</td>
