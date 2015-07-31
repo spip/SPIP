@@ -238,20 +238,12 @@ $controler_dates_rss = true;
 $class_spip =  '';  /*' class="spip"'*/
 $class_spip_plus =  ' class="spip"';
 $toujours_paragrapher =  true;
-$ligne_horizontale =  "\n<hr$class_spip_plus />\n";
-$debut_intertitre =  "\n<h3$class_spip_plus>";
-$fin_intertitre =  "</h3>\n";
-$debut_gras =  "<strong$class_spip>";
-$fin_gras =  '</strong>';
-$debut_italique =  "<i$class_spip>";
-$fin_italique =  '</i>';
-$ouvre_ref =  '&nbsp;[';
-$ferme_ref =  ']';
-$ouvre_note =  '[';
-$ferme_note =  '] ';
 $les_notes =  '';
 $compt_note =  0;
 $notes_vues =  array();
+
+# assurer que ces variables sont null
+$ligne_horizontale = $debut_intertitre = $fin_intertitre = $debut_gras = $fin_gras = $debut_italique = $fin_italique = $ouvre_ref = $ferme_ref = $ouvre_note = $ferme_note = null;
 
 
 //
