@@ -62,7 +62,7 @@
 				[(#REM) Rubriques liees au mot-cle ]
 				<B_rubriques>
 				<div class="rubriques">
-					<h2 class="titre"><:rubriques:></h2>
+					<h2 class="menu-titre"><:rubriques:></h2>
 					<ul>
 						<BOUCLE_rubriques(RUBRIQUES) {id_mot} {par titre}>
 						<li><a href="#URL_RUBRIQUE">#TITRE</a></li>
@@ -74,7 +74,7 @@
 				[(#REM) Breves liees au mot-cle ]
 				<B_breves>
 				<div class="breves">
-					<h2 class="titre"><:breves:></h2>
+					<h2 class="menu-titre"><:breves:></h2>
 					<ul>
 						<BOUCLE_breves(BREVES) {id_mot} {par titre}>
 						<li><a href="#URL_BREVE">#TITRE</a></li>
@@ -86,7 +86,7 @@
 				[(#REM) Liens des forums ]
 				<B_forums_liens>
 				<div class="forums">
-					<h2 class="titre"><:messages_forum:></h2>
+					<h2 class="menu-titre"><:messages_forum:></h2>
 					<ul>
 						<BOUCLE_forums_liens(FORUMS) {id_mot} {plat} {par date}{inverse}>
 						<li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_FORUM">#TITRE</a></li>
@@ -97,8 +97,8 @@
 
 				[(#REM) Sites web lies au mot-cle ]
 				<B_sites>
-				<div class="syndic">
-					<h2 class="titre"><:sites_web:></h2>
+				<div class="forums">
+					<h2 class="menu-titre"><:sites_web:></h2>
 					<ul>
 						<BOUCLE_sites(SITES) {id_mot} {par nom_site}>
 						<li><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a></li>
@@ -123,9 +123,11 @@
 				[(#REM) Menu de navigation mots-cles : les autres mots cles du meme groupe ]
 				<B_mots_freres>
 				<div class="divers">
-					<BOUCLE_groupe(GROUPES_MOTS) {id_groupe} {doublons}><h2 class="titre"[ title="(#TITRE|couper{80}|texte_backend)"]><:mots_clefs_meme_groupe:></h2></BOUCLE_groupe>
+					#ANCRE_PAGINATION
+					<h2 class="menu-titre"><:mots_clefs_meme_groupe:></h2>
+					[<p class="pagination">(#PAGINATION)</p>]
 					<ul>
-						<BOUCLE_mots_freres(MOTS) {type} {par titre}>
+						<BOUCLE_mots_freres(MOTS) {type} {par titre} {pagination 20}>
 						<li><a href="#URL_MOT"[ class="(#EXPOSE)"]>#TITRE</a></li>
 						</BOUCLE_mots_freres>
 					</ul>
@@ -135,7 +137,7 @@
 				[(#REM) Menu de navigation mots-cles : les autres groupes avec un lien sur le premier mot du groupe ]
 				<B_groupes_freres>
 				<div class="divers">
-					<h2 class="titre"><:autres_groupes_mots_clefs:></h2>
+					<h2 class="menu-titre"><:autres_groupes_mots_clefs:></h2>
 					<ul>
 						<BOUCLE_groupes_freres(GROUPES_MOTS) {par titre} {doublons}>
 						<BOUCLE_mot_cousin(MOTS) {id_groupe} {par titre} {0,1}>

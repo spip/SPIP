@@ -61,10 +61,12 @@
 
 			[(#REM) Breves dans la meme rubrique ]
 			<B_breves>
-			<div class="breves" >
-				<h2 class="titre"><:autres_breves:></h2>
+			<div class="breves">
+				#ANCRE_PAGINATION
+				<h2 class="menu-titre"><:autres_breves:></h2>
+				[<p class="pagination">(#PAGINATION)</p>]
 				<ul>
-					<BOUCLE_breves(BREVES) {id_rubrique} {par date}{inverse}>
+					<BOUCLE_breves(BREVES) {id_rubrique} {par date}{inverse} {pagination 20}>
 					<li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_BREVE"[ class="(#EXPOSE)"]>#TITRE</a></li>
 					</BOUCLE_breves>
 				</ul>
@@ -74,7 +76,7 @@
 			[(#REM) Menu de navigation mots-cles ]
 			<B_mots>
 			<div class="divers">
-				<h2 class="titre"><:mots_clefs:></h2>
+				<h2 class="menu-titre"><:mots_clefs:></h2>
 				<ul>
 				<BOUCLE_mots(MOTS) {id_breve} {par titre}>
 					<li><a href="#URL_MOT" rel="tag">#TITRE</a></li>

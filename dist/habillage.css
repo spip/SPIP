@@ -58,7 +58,6 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 #conteneur #navigation {
 	float: right;
 	width: 12em;
-	text-align: center;
 }
 
 /*  Blocs du contenu (c-a-d. la colonne principale)
@@ -112,47 +111,44 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 /*  Habillage general des menus de navigation
 ---------------------------------------------- */
 .rubriques, .breves, .syndic, .forums, .divers {
-	text-align: left;
+	min-width: 10em;
 	border: 1px solid #CCC;
 	margin-bottom: 1em;
-	min-width: 10em;
 	font-size: 0.77em;
 }
 
-.rubriques .titre, .breves .titre, .syndic .titre, .forums .titre, .divers .titre {
-	padding: 3px 4px 2px 4px;
+.rubriques .menu-titre, .breves .menu-titre, .syndic .menu-titre, .forums .menu-titre, .divers .menu-titre {
+	padding: 0.2em 0.4em;
 	border-bottom: 1px dotted #CCC;
 	text-align: center;
-	font-size: 1.2em;
 	font-weight: bold;
 }
 
-.rubriques p, .breves p, .syndic p, .forums p, .divers p { margin: 2px 4px; }
+.rubriques p, .breves p, .syndic p, .forums p, .divers p { margin: 0; padding: 0.2em 0.7em;  }
 
 .rubriques ul, .breves ul, .syndic ul, .forums ul, .divers ul {
 	display: block;
-	padding: 2px 0;
-	padding-right: 0.7em;
+	padding: 0.2em 0;
 }
 
-.rubriques li, .breves li, .syndic li, .forums li, .divers li { padding-left: 0.7em; }
+.rubriques li, .breves li, .syndic li, .forums li, .divers li { padding: 0 0.7em; }
 
 /*  Des couleurs specifiques selon les types de menus
 ---------------------------------------------- */
 .rubriques { background: #EAFFEA;}
-.rubriques .titre { background: #F2FFF2; }
+.rubriques .menu-titre { background: #F2FFF2; }
 
 .breves { background: #FFEAEA; }
-.breves .titre { background: #FFF2F2; }
+.breves .menu-titre { background: #FFF2F2; }
 
 .syndic { background: #E8F8F8; }
-.syndic .titre { background: #F0FCFC; }
+.syndic .menu-titre { background: #F0FCFC; }
 
 .forums { background: #EAEAFF; }
-.forums .titre { background: #F2F2FF; }
+.forums .menu-titre { background: #F2F2FF; }
 
 .divers { background: #F8F8E8; }
-.divers .titre { background: #FCFCF0; }
+.divers .menu-titre { background: #FCFCF0; }
 
 /*  ------------------------------------------
 /*  Habillage du contenu
@@ -265,7 +261,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	font-size: 0.82em;
 	line-height: 1.4em; }
 
-.pagination { font-size: 0.71em; margin-top: 0; padding-top: 0; }
+.pagination { font-size: 0.90em; margin-top: 0; padding-top: 0; }
 
 /*  ------------------------------------------
 /*  Habillage specifique du plan du site
