@@ -11,10 +11,7 @@
 \***************************************************************************/
 
 include ("ecrire/inc_version.php3");
-spip_log(join(',', $_REQUEST));
-spip_log("$action $arg $id_auteur $redirect");
 $var_f = include_fonction('spip_action_' . $action);
 $var_f();
-spip_log("$action $arg $id_auteur $redirect");
 if ($redirect) redirige_par_entete($redirect);
 ?>
