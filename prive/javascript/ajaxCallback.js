@@ -111,7 +111,7 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 	if (this.length)
 		initReaderBuffer();
   return this.each(function() {
-	var cible = target || this;
+		var cible = target || this;
 		jQuery('form:not(.noajax)', this).each(function(){
 		var leform = this;
 		jQuery(this).prepend("<input type='hidden' name='var_ajax' value='form' />")
@@ -169,56 +169,77 @@ var ajaxbloc_selecteur;
 jQuery.fn.ajaxbloc = function() {
 	if (this.length)
 		initReaderBuffer();
+		
   return this.each(function() {
-  jQuery('div.ajaxbloc',this).ajaxbloc(); // traiter les enfants d'abord
-	var blocfrag = jQuery(this);
-	
-	var on_pagination = function(c) {
-		jQuery(blocfrag)
-		.html(c)
-		.removeClass('loading')
-		.positionner();
-		updateReaderBuffer();
-	}
-
-	var ajax_env = (""+blocfrag.attr('class')).match(/env-([^ ]+)/);
-	if (!ajax_env || ajax_env==undefined) return;
-	ajax_env = ajax_env[1];
-	if (ajaxbloc_selecteur==undefined)
-		ajaxbloc_selecteur = '.pagination a,a.ajax';
-	jQuery(ajaxbloc_selecteur,this).not('.noajax').each(function(){
-		var url = this.href.split('#');
-		url[0] += (url[0].indexOf("?")>0 ? '&':'?')+'var_ajax=1&var_ajax_env='+encodeURIComponent(ajax_env);
-		if (jQuery(this).is('.preload') && !preloaded_urls[url[0]]) {
-			jQuery.ajax({"url":url[0],"success":function(r){preloaded_urls[url[0]]=r;}});
-		}
-		jQuery(this).click(function(){
-			if (!ajax_confirm) {
-				// on rearme pour le prochain clic
-				ajax_confirm=true;
-				var d = new Date();
-				// seule une annulation par confirm() dans les 2 secondes precedentes est prise en compte
-				if ((d.getTime()-ajax_confirm_date)<=2)
-					return false;
-			}
+	  jQuery('div.ajaxbloc',this).ajaxbloc(); // traiter les enfants d'abord
+		var blocfrag = jQuery(this);
+		
+		var on_pagination = function(c) {
 			jQuery(blocfrag)
-			.animeajax()
-			.addClass('loading');
-			if (preloaded_urls[url[0]]) {
-				on_pagination(preloaded_urls[url[0]]);
-				triggerAjaxLoad(document);
-			} else {
-				jQuery.ajax({
-					url: url[0],
-					success: function(c){
-						on_pagination(c);
-						preloaded_urls[url[0]] = c;
-					}
-				});
+			.html(c)
+			.removeClass('loading')
+			.positionner();
+			updateReaderBuffer();
+		}
+	
+		var ajax_env = (""+blocfrag.attr('class')).match(/env-([^ ]+)/);
+		if (!ajax_env || ajax_env==undefined) return;
+		ajax_env = ajax_env[1];
+		if (ajaxbloc_selecteur==undefined)
+			ajaxbloc_selecteur = '.pagination a,a.ajax';
+	
+		jQuery(ajaxbloc_selecteur,this).not('.noajax').each(function(){
+			var url = this.href.split('#');
+			url[0] += (url[0].indexOf("?")>0 ? '&':'?')+'var_ajax=1&var_ajax_env='+encodeURIComponent(ajax_env);
+			if (jQuery(this).is('.preload') && !preloaded_urls[url[0]]) {
+				jQuery.ajax({"url":url[0],"success":function(r){preloaded_urls[url[0]]=r;}});
 			}
-			return false;
+			jQuery(this).click(function(){
+				if (!ajax_confirm) {
+					// on rearme pour le prochain clic
+					ajax_confirm=true;
+					var d = new Date();
+					// seule une annulation par confirm() dans les 2 secondes precedentes est prise en compte
+					if ((d.getTime()-ajax_confirm_date)<=2)
+						return false;
+				}
+				jQuery(blocfrag)
+				.animeajax()
+				.addClass('loading');
+				if (preloaded_urls[url[0]]) {
+					on_pagination(preloaded_urls[url[0]]);
+					triggerAjaxLoad(document);
+				} else {
+					jQuery.ajax({
+						url: url[0],
+						success: function(c){
+							on_pagination(c);
+							preloaded_urls[url[0]] = c;
+						}
+					});
+				}
+				return false;
+			});
+		}).addClass('noajax'); // previent qu'on ajax pas deux fois le meme lien
+		jQuery('form.bouton_action_post.ajax:not(.noajax)', this).each(function(){
+			var leform = this;
+			jQuery(this).prepend("<input type='hidden' name='var_ajax' value='1' /><input type='hidden' name='var_ajax_env' value='"+(ajax_env)+"' />")
+			.ajaxForm({
+				beforeSubmit: function(){
+					jQuery(blocfrag).addClass('loading').animeajax();
+				},
+				success: function(c){
+					on_pagination(c);
+					preloaded_urls = {}; // on vide le cache des urls car on a fait une action en bdd
+					// on le refait a la main ici car onAjaxLoad intervient sur une iframe dans IE6 et non pas sur le document
+					jQuery(blocfrag)
+					.ajaxbloc();
+				},
+				iframe: jQuery.browser.msie
+			})
+			.addClass('noajax') // previent qu'on n'ajaxera pas deux fois le meme formulaire en cas de ajaxload
+			;
 		});
-	}).addClass('noajax'); // previent qu'on ajax pas deux fois le meme lien
   });
 };
 
