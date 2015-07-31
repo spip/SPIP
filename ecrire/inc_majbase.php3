@@ -994,6 +994,13 @@ function maj_base() {
 	if ($version_installee < 1.816) {
 		maj_version(1.816);
 	}
+	if ($version_installee < 1.817) {
+		spip_query("ALTER TABLE spip_groupes_mots
+		ADD descriptif text NOT NULL AFTER titre");
+		spip_query("ALTER TABLE spip_groupes_mots
+		ADD COLUMN texte longblob NOT NULL AFTER descriptif");
+		maj_version(1.817);
+	}
 
 
 	return true;

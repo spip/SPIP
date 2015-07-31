@@ -36,6 +36,8 @@ if ($connect_statut == '0minirezo' AND $new == "oui") {
 		$type = $row['titre'];
 		$ancien_type = $type;
 		$titre = typo($type);
+		$descriptif = $row['descriptif'];
+		$texte = $row['texte'];
 		$unseul = $row['unseul'];
 		$obligatoire = $row['obligatoire'];
 		$articles = $row['articles'];
@@ -83,6 +85,26 @@ if ($connect_statut =="0minirezo"){
 	debut_cadre_formulaire();
 	echo "<b>"._T('info_changer_nom_groupe')."</b><br>\n";
 	echo "<INPUT TYPE='Text' SIZE=40 CLASS='formo' NAME='change_type' VALUE=\"$type\" $onfocus>\n";
+
+	if ($options == 'avancees' OR $descriptif) {
+		echo "<B>"._T('texte_descriptif_rapide')."</B><BR>";
+		echo "<TEXTAREA NAME='descriptif' CLASS='forml' ROWS='4' COLS='40' wrap=soft>";
+		echo $descriptif;
+		echo "</TEXTAREA><P>\n";
+	}
+	else
+		echo "<INPUT TYPE='hidden' NAME='descriptif' VALUE=\"$descriptif\">";
+
+	if ($options == 'avancees' OR $texte) {
+		echo "<B>"._T('info_texte_explicatif')."</B><BR>";
+		echo "<TEXTAREA NAME='texte' ROWS='8' CLASS='forml' COLS='40' wrap=soft>";
+		echo $texte;
+		echo "</TEXTAREA><P>\n";
+	}
+	else
+		echo "<INPUT TYPE='hidden' NAME='texte' VALUE=\"$texte\">";
+
+
 	echo "<p><div align='right'><INPUT TYPE='submit' CLASS='fondo' NAME='Valider' VALUE='"._T('bouton_valider')."'></div>";
 	fin_cadre_formulaire();
 }

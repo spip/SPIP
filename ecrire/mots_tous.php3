@@ -57,18 +57,20 @@ if ($connect_statut == '0minirezo') {
 	if ($modifier_groupe == "oui") {
 		$change_type = addslashes(corriger_caracteres($change_type));
 		$ancien_type = addslashes(corriger_caracteres($ancien_type));
+		$texte = addslashes(corriger_caracteres($texte));
+		$descriptif = addslashes(corriger_caracteres($descriptif));
 
 		if ($ancien_type) {	// modif groupe
 			$query = "UPDATE spip_mots SET type='$change_type' WHERE id_groupe='$id_groupe'";
 			spip_query($query);
 
-			$query = "UPDATE spip_groupes_mots SET titre='$change_type', unseul='$unseul', obligatoire='$obligatoire',
+			$query = "UPDATE spip_groupes_mots SET titre='$change_type', texte='$texte', descriptif='$descriptif', unseul='$unseul', obligatoire='$obligatoire',
 				articles='$articles', breves='$breves', rubriques='$rubriques', syndic='$syndic',
 				0minirezo='$acces_minirezo', 1comite='$acces_comite', 6forum='$acces_forum'
 				WHERE id_groupe='$id_groupe'";
 			spip_query($query);
 		} else {	// creation groupe
-			$query = "INSERT INTO spip_groupes_mots SET titre='$change_type', unseul='$unseul', obligatoire='$obligatoire',
+			$query = "INSERT INTO spip_groupes_mots SET titre='$change_type', texte='$texte', descriptif='$descriptif', unseul='$unseul', obligatoire='$obligatoire',
 				articles='$articles', breves='$breves', rubriques='$rubriques', syndic='$syndic',
 				0minirezo='$acces_minirezo', 1comite='$acces_comite', 6forum='$acces_forum'";
 			spip_query($query);
@@ -188,6 +190,8 @@ $result_groupes = spip_query($query_groupes);
 while ($row_groupes = spip_fetch_array($result_groupes)) {
 	$id_groupe = $row_groupes['id_groupe'];
 	$titre_groupe = typo($row_groupes['titre']);
+	$descriptif = $row_groupes['descriptif'];
+	$texte = $row_groupes['texte'];
 	$unseul = $row_groupes['unseul'];
 	$obligatoire = $row_groupes['obligatoire'];
 	$articles = $row_groupes['articles'];
@@ -217,6 +221,21 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 	if ($acces_forum == "oui") echo "> "._T('info_visiteurs_02')." &nbsp;&nbsp;";
 
 	echo "</font>";
+	if ($descriptif) {
+		echo "<p><div align='left' border: 1px dashed #aaaaaa;'>";
+		echo "<font size=2 face='Verdana,Arial,Sans,sans-serif'>";
+		echo "<b>"._T('info_descriptif')."</b> ";
+		echo propre($descriptif);
+		echo "&nbsp; ";
+		echo "</font>";
+		echo "</div>";
+	}
+
+	if (strlen($texte)>0){
+		echo "<FONT FACE='Verdana,Arial,Sans,sans-serif'>";
+		echo "<P>".propre($texte);
+		echo "</FONT>";
+	}
 
 	//
 	// Afficher les mots-cles du groupe
