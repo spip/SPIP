@@ -168,10 +168,14 @@ function http_calendrier_tout($mois, $annee, $premier_jour, $dernier_jour)
 		sql_calendrier_interval_mois($annee,$mois, $premier_jour);
 	if ($articles)
 		foreach($articles as $d => $v) 
-			{ $messages[$d] = array_merge($messages[$d], http_calendrier_image_et_typo($v));}
+			{ $r = http_calendrier_image_et_typo($v);
+			  $messages[$d] = !$messages[$d] ? $r : 
+			     array_merge($messages[$d], $r); }
 	if ($breves)
 		foreach($breves as $d => $v) 
-			{ $messages[$d] = array_merge($messages[$d], http_calendrier_image_et_typo($v));}
+			{ $r = http_calendrier_image_et_typo($v);
+			  $messages[$d] = !$messages[$d] ?  
+			    $r : array_merge($messages[$d], $r); }
 
 	$total = "<div>&nbsp;</div>" .
 		"<table cellpadding=0 cellspacing=0 border=0 width='$largeur_table'>" .
