@@ -202,6 +202,13 @@ function import_objet_1_2($f, $gz=false) {
 		spip_query("DELETE FROM spip_auteurs_articles WHERE id_article=$id_objet");
 		spip_query("DELETE FROM spip_documents_articles WHERE id_article=$id_objet");
 	}
+	else if ($type == 'rubrique') {
+		spip_query("DELETE FROM spip_auteurs_rubriques WHERE id_rubrique=$id_objet");
+		spip_query("DELETE FROM spip_documents_rubriques WHERE id_rubrique=$id_objet");
+	}
+	else if ($type == 'breve') {
+		spip_query("DELETE FROM spip_documents_breves WHERE id_breve=$id_objet");
+	}
 	else if ($type == 'mot') {
 		spip_query("DELETE FROM spip_mots_articles WHERE id_mot=$id_objet");
 		spip_query("DELETE FROM spip_mots_breves WHERE id_mot=$id_objet");
@@ -448,6 +455,10 @@ function import_all($f, $gz=false) {
 	$query = "DELETE FROM spip_petitions WHERE maj < $my_date";
 	spip_query($query);
 	$query = "DELETE FROM spip_signatures WHERE maj < $my_date";
+	spip_query($query);
+	$query = "DELETE FROM spip_visites WHERE maj < $my_date";
+	spip_query($query);
+	$query = "DELETE FROM spip_visites_referers WHERE maj < $my_date";
 	spip_query($query);
 
 	import_fin();

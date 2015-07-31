@@ -268,7 +268,8 @@ function creer_base() {
 	$query = "CREATE TABLE spip_visites (
 		date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		type varchar(16) NOT NULL,
-		visites bigint(21) DEFAULT '0' NOT NULL)";
+		visites bigint(21) DEFAULT '0' NOT NULL,
+		maj TIMESTAMP)";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_visites_referers (
@@ -278,6 +279,7 @@ function creer_base() {
 		referer_md5 varchar(16) NOT NULL,
 		type varchar(16) NOT NULL,
 		visites bigint(21) DEFAULT '0' NOT NULL,
+		maj TIMESTAMP, 
 		PRIMARY KEY (id_referer),
 		KEY type (type),
 		KEY referer_md5 (referer_md5))";
@@ -855,6 +857,11 @@ function maj_base() {
 	if ($version_installee < 1.436) {
 		$query = "ALTER TABLE spip_documents ADD date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL";
 		spip_query($query);
+	}
+
+	if ($version_installee < 1.437) {
+		spip_query("ALTER TABLE spip_visites ADD maj TIMESTAMP");
+		spip_query("ALTER TABLE spip_visites_referers ADD maj TIMESTAMP");
 	}
 
 
