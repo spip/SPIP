@@ -117,7 +117,6 @@ ecrire/exec/documents_liste.php -text
 ecrire/exec/editer_auteurs.php -text
 ecrire/exec/fond.php -text
 ecrire/exec/fond_monobloc.php -text
-ecrire/exec/iconifier.php -text
 ecrire/exec/index.php -text
 ecrire/exec/info_plugin.php -text
 ecrire/exec/informer.php -text

@@ -16,13 +16,10 @@ include_spip('inc/actions');
 
 // http://doc.spip.org/@inc_iconifier_dist
 function inc_iconifier_dist($objet, $id,  $script, $visible=false, $flag_modif=true) {
-	global $logo_libelles;
 	// compat avec anciens appels
-	if (substr($objet,0,3)=='id_')
-		$objet = substr($objet,3);
-
+	$objet = objet_type($objet);
+	
 	return recuperer_fond('prive/editer/logo',array('objet'=>$objet,'id_objet'=>$id,'editable'=>$flag_modif));
-
 }
 
 ?>
