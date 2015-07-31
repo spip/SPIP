@@ -188,7 +188,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_2' => 'spring',
 'date_saison_3' => 'summer',
 'date_saison_4' => 'autumn',
+'date_secondes' => 'seconds',
 'date_semaines' => 'weeks',
+'date_un_mois' => 'month',
+'date_une_heure' => 'hour',
+'date_une_minute' => 'minute',
+'date_une_seconde' => 'second',
+'date_une_semaine' => 'week',
 'dirs_commencer' => ' in order to really start the installation',
 'dirs_preliminaire' => 'Preliminary: <b>Setting up access permissions</b>',
 'dirs_probleme_droits' => 'Problem in access permissions',
@@ -201,7 +207,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p>To change this, use your FTP client to set access permissions for each
  of these directories. The procedure is detailed in the installation guide.</p>
   <p>Once you have done this, you can ',
-'double_occurrence' => '<MODIF>Two instances',
+'double_occurrence' => 'Two instances of @balise@',
 
 // E
 'en_cours' => 'processing',
@@ -743,7 +749,7 @@ and connect again to the site.
 
 // Z
 'zbug_balise_b_aval' => ': B tag too late in loop',
-'zbug_balise_inexistante' => '<MODIF>error @from@: the tag @balise@ does not exist',
+'zbug_balise_inexistante' => 'Tag @balise@ wrongly declared for @from@',
 'zbug_balise_sans_argument' => 'Missing argument in the @balise@ tag',
 'zbug_boucle' => 'loop',
 'zbug_boucle_recursive_undef' => 'undefined recursive loop: @nom@',
@@ -767,7 +773,7 @@ and connect again to the site.
 'zbug_info_erreur_squelette' => '&#1615;Error in the site',
 'zbug_inversion_ordre_inexistant' => 'Reversion of non-existent order',
 'zbug_pagination_sans_critere' => '#PAGINATION tag without {pagination} criterion, or used in a recursive loop',
-'zbug_parametres_inclus_incorrects' => '<MODIF>Wrong inclusion parameters: @param@',
+'zbug_parametres_inclus_incorrects' => 'Wrong inclusion parameter: @param@',
 'zbug_profile' => 'Calculation time: @time@',
 'zbug_resultat' => 'result',
 'zbug_serveur_indefini' => 'Undefined SQL server',

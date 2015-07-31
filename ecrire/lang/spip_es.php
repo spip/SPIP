@@ -188,7 +188,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_2' => 'primavera',
 'date_saison_3' => 'verano',
 'date_saison_4' => 'oto&ntilde;o',
+'date_secondes' => 'segundos',
 'date_semaines' => 'semanas',
+'date_un_mois' => 'mes',
+'date_une_heure' => 'hora',
+'date_une_minute' => 'minuto',
+'date_une_seconde' => 'segundo',
+'date_une_semaine' => 'semana',
 'dirs_commencer' => 'Para empezar realmente la instalaci&oacute;n',
 'dirs_preliminaire' => 'Preliminar: <b>Regular los derechos de acceso</b>',
 'dirs_probleme_droits' => 'Problema de derechos de acceso',
@@ -200,7 +206,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p>Para solucionar el problema debes utilizar un cliente FTP para cambiar los derechos de acceso a cada una
 de las carpetas mencionadas. El procedimiento se explica detalladamente en la gu&iacute;a de instalaci&oacute;n.</p>
 <p>Una vez terminado este proceso, podr&aacute;s ',
-'double_occurrence' => '<MODIF>Doble ocurrencia',
+'double_occurrence' => 'Doble ocurrencia de @balise@',
 
 // E
 'en_cours' => 'en curso',
@@ -528,7 +534,7 @@ se puede activar o desactivar .',
 'info_telecharger_ordinateur' => 'Subir desde tu ordenador:',
 'info_tous_resultats_enregistres' => '[todos los resultados son registrados]',
 'info_tout_afficher' => 'Mostrar todo',
-'info_travaux_texte' => 'Este sitio todav&iacute;a no est&aacute; configurado. Vuelve m&aacute;s adelante…',
+'info_travaux_texte' => 'Este sitio todav&iacute;a no est&aacute; configurado. Vuelve m&aacute;s adelante...',
 'info_travaux_titre' => 'Sitio en curso de modificaci&oacute;n',
 'info_trop_resultat' => 'Demasiados resultados para la b&uacute;squeda de "@cherche_mot@" . Precise los criterios.',
 'info_utilisation_messagerie_interne' => 'Utilizas la mensajer&iacute;a interna del sitio.',
@@ -726,8 +732,8 @@ Intenta',
 'trad_reference' => '(art&iacute;culo de referencia)',
 
 // Z
-'zbug_balise_b_aval' => ': balize de bucle B m&aacute;s adelante',
-'zbug_balise_inexistante' => '<MODIF>error @from@: la baliza #@balise@ no existe',
+'zbug_balise_b_aval' => ': baliza de bucle B m&aacute;s adelante',
+'zbug_balise_inexistante' => 'Baliza @balise@  mal declarada para @from@',
 'zbug_balise_sans_argument' => 'Falta un argumento en la baliza @balise@',
 'zbug_boucle' => 'bucle',
 'zbug_boucle_recursive_undef' => 'Bucle recursivo no defindo&nbsp;: @nom@',
