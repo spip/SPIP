@@ -230,6 +230,8 @@ function exec_controle_forum_dist()
 	$limitdeb = ($debut > $enplus) ? $debut-$enplus : 0;
 	$limitnb = $debut + $enplus - $limitdeb;
 	$args =  (!$id_rubrique ? "" : "id_rubrique=$id_rubrique&") . 'type=';
+	if ($recherche)
+		$args = 'recherche='.rawurlencode($recherche).'&'.$args;
 
 	$query = spip_abstract_select("F.id_forum, F.id_parent, F.id_rubrique, F.id_article, F.id_breve, F.date_heure, F.titre, F.texte, F.auteur, F.email_auteur, F.nom_site, F.url_site, F.statut, F.ip, F.id_auteur", $from,  $where,'', "F.date_heure DESC", "$limitdeb, $limitnb");
 # LIMIT $limitnb OFFSET $limitdeb" #PG
@@ -252,17 +254,17 @@ function exec_controle_forum_dist()
 		echo gros_titre(_T('titre_forum_suivi'),'',false);
 
 		echo debut_onglet();
-		echo onglet(_T('onglet_messages_publics'), generer_url_ecrire('controle_forum', $args . "public"), "public", '', "forum-public-24.gif");
-		echo onglet(_T('onglet_messages_internes'), generer_url_ecrire('controle_forum', $args . "interne"), "interne", '', "forum-interne-24.gif");
+		echo onglet(_T('onglet_messages_publics'), generer_url_ecrire('controle_forum', $args . "public"), "public", $type=='public', "forum-public-24.gif");
+		echo onglet(_T('onglet_messages_internes'), generer_url_ecrire('controle_forum', $args . "interne"), "interne", $type=='interne', "forum-interne-24.gif");
 
 		list($from,$where) = critere_statut_controle_forum('vide', $id_rubrique);
 		$n = spip_abstract_fetch(spip_query("SELECT id_forum FROM $from WHERE $where LIMIT 1"));
-		if ($n) echo onglet(_T('onglet_messages_vide'), generer_url_ecrire('controle_forum', $args . "vide"), "vide", '');
+		if ($n) echo onglet(_T('onglet_messages_vide'), generer_url_ecrire('controle_forum', $args . "vide"), "vide", $type=='vide');
 
 		list($from,$where) = critere_statut_controle_forum('prop', $id_rubrique);
 		$f = spip_abstract_fetch(spip_query("SELECT F.id_forum FROM $from " . (!$where ? '' : "WHERE $where ") . " LIMIT 1"));
 		if ($f)
-			echo onglet(_T('texte_statut_attente_validation'), generer_url_ecrire('controle_forum', $args . "prop"), "prop", '');
+			echo onglet(_T('texte_statut_attente_validation'), generer_url_ecrire('controle_forum', $args . "prop"), "prop", $type=='prop');
 
 		echo fin_onglet();
 

@@ -190,8 +190,14 @@ function critere_statut_controle_forum($type, $id_rubrique=0, $recherche='') {
 		break;
 	}
 
-	if ($recherche) 
-		$and .= " AND F.texte REGEXP " . _q($recherche);
+	if ($recherche) {
+		include_spip('inc/rechercher');
+		if ($a = recherche_en_base($recherche, 'forum'))
+			$and .= " AND ".calcul_mysql_in('id_forum',
+				array_keys(array_pop($a)));
+		else
+			$and .= " 0=1";
+	}
 
 	return array($from, "$where$and");
 }

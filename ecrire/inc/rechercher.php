@@ -15,38 +15,70 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 // Donne la liste des champs/tables ou l'on sait chercher/remplacer
+// avec un poids pour le score
 // http://doc.spip.org/@liste_des_champs
 function liste_des_champs() {
 	return
 	pipeline('rechercher_liste_des_champs',
 		array(
 			'article' => array(
-				'surtitre', 'titre', 'soustitre', 'chapo', 'texte', 'ps', 'nom_site', 'url_site'
+				'surtitre' => 5, 'titre' => 8, 'soustitre' => 5, 'chapo' => 3,
+				'texte' => 1, 'ps' => 1, 'nom_site' => 1, 'url_site' => 1,
+				'descriptif' => 4
 			),
 			'breve' => array(
-				'titre', 'texte', 'lien_titre', 'lien_url'
+				'titre' => 8, 'texte' => 2, 'lien_titre' => 1, 'lien_url' => 1
 			),
 			'rubrique' => array(
-				'titre', 'descriptif', 'texte'
+				'titre' => 8, 'descriptif' => 5, 'texte' => 1
 			),
 			'site' => array(
-				'nom_site', 'url_site', 'descriptif'
+				'nom_site' => 5, 'url_site' => 1, 'descriptif' => 3
 			),
 			'mot' => array(
-				'titre', 'texte', 'descriptif'
+				'titre' => 8, 'texte' => 1, 'descriptif' => 5
 			),
 			'auteur' => array(
-				'nom', 'bio', 'email', 'nom_site', 'url_site', 'login'
+				'nom' => 5, 'bio' => 1, 'email' => 1, 'nom_site' => 1, 'url_site' => 1, 'login' => 1
 			),
 			'forum' => array(
-				'titre', 'texte', 'auteur', 'email_auteur', 'nom_site', 'url_site'
+				'titre' => 3, 'texte' => 1, 'auteur' => 2, 'email_auteur' => 2, 'nom_site' => 1, 'url_site' => 1
 			),
 			'document' => array(
-				'titre', 'descriptif'
+				'titre' => 3, 'descriptif' => 1, 'fichier' => 1
+			),
+			'syndic_article' => array(
+				'titre' => 5, 'descriptif' => 1
 			)
 		)
 	);
 }
+
+
+// Recherche des auteurs et mots-cles associes
+// en ne regardant que le titre ou le nom
+function liste_des_jointures() {
+	return array(
+		'article' => array(
+			'auteur' => array('nom' => 10),
+			'mot' => array('titre' => 3),
+			'document' => array('titre' => 2, 'descriptif' => 1)
+		),
+		'breve' => array(
+			'mot' => array('titre' => 3),
+			'document' => array('titre' => 2, 'descriptif' => 1)
+		),
+		'rubrique' => array(
+			'mot' => array('titre' => 3),
+			'document' => array('titre' => 2, 'descriptif' => 1)
+		),
+		'documents' => array(
+			'mot' => array('titre' => 3)
+		)
+	);
+}
+
+
 
 
 // Effectue une recherche sur toutes les tables de la base de donnees
@@ -55,10 +87,24 @@ function liste_des_champs() {
 // - flags pour eviter les flags regexp par defaut (UimsS)
 // - champs pour retourner les champs concernes
 // - score pour retourner un score
+// On peut passer les tables, ou une chaine listant les tables souhaitees
 // http://doc.spip.org/@recherche_en_base
 function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
-	if (!is_array($tables))
-		$tables = liste_des_champs();
+	include_spip('base/abstract_sql');
+
+	if (!is_array($tables)) {
+		$liste = liste_des_champs();
+
+		if (is_string($tables)
+		AND $tables != '') {
+			$toutes = array();
+			foreach(explode(',', $tables) as $t)
+				$toutes[$t] = $liste[$t];
+			$tables = $toutes;
+			unset($toutes);
+		} else
+			$tables = $liste;
+	}
 
 	include_spip('inc/autoriser');
 
@@ -68,7 +114,8 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 		'toutvoir' => false,
 		'champs' => false,
 		'score' => false,
-		'matches' => false
+		'matches' => false,
+		'jointures' => false
 		),
 		$options
 	);
@@ -93,6 +140,10 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 
 	$preg = '/'.$recherche.'/' . $options['preg_flags'];
 
+	$jointures = $options['jointures']
+		? liste_des_jointures()
+		: array();
+
 	foreach ($tables as $table => $champs) {
 		$requete = array(
 		"SELECT"=>array(),
@@ -101,16 +152,17 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 		"GROUPBY"=>array(),
 		"ORDERBY"=>array(),
 		"LIMIT"=>"",
-		"HAVING"=>array(),
+		"HAVING"=>array()
 		);
 
 		$_id_table = id_table_objet($table);
 		$requete['SELECT'][] = "t.".$_id_table;
-		$a = "";
+		$a = array();
 		// Recherche fulltext
-		foreach ($champs as $champ){
+		foreach ($champs as $champ => $poids) {
 			// il est possible de passer des elements de requete par la table des champs
 			// (jointure par exemple)
+			// pourquoi pas, mais pas vu ou ca sert... ??
 			if (is_array($champ)){
 				foreach($champ as $sousreq=>$partie)
 					foreach($partie as $elt)
@@ -120,16 +172,18 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 				if (strpos($champ,".")===FALSE)
 					$champ = "t.$champ";
 				$requete['SELECT'][] = $champ;
-				$a .= " OR ".$champ.' '.$methode.' '.$q;
+				$a[] = $champ.' '.$methode.' '.$q;
 			}
 		}
-		$requete['WHERE'][] = substr($a,4);
+		$requete['WHERE'][] = join(" OR ", $a);
 		$requete['FROM'][] = 'spip_'.table_objet($table).' AS t';
 
 		$s = spip_abstract_select (
-		  $requete['SELECT'],$requete['FROM'],$requete['WHERE'],
-		 implode(" ",$requete['GROUPBY']),$requete['ORDERBY'],$requete['LIMIT'],'',
-		  $requete['HAVING']);
+			$requete['SELECT'], $requete['FROM'], $requete['WHERE'],
+			implode(" ",$requete['GROUPBY']),
+			$requete['ORDERBY'], $requete['LIMIT'], '',
+			$requete['HAVING']
+		);
 
 		while ($t = spip_abstract_fetch($s)) {
 			$id = intval($t[$_id_table]);
@@ -141,7 +195,7 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 				$matches = array();
 
 				$vu = false;
-				foreach ($champs as $champ) {
+				foreach ($champs as $champ => $poids) {
 					$champ = explode('.',$champ);
 					$champ = end($champ);
 					if ($n = 
@@ -154,7 +208,7 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 						if ($options['champs'])
 							$champs_vus[$champ] = $t[$champ];
 						if ($options['score'])
-							$score += $n; // * valeur du champ
+							$score += $n * $poids;
 						if ($options['matches'])
 							$matches[$champ] = $regs;
 
@@ -175,6 +229,39 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 						$results[$table][$id]['score'] = $score;
 					if ($matches)
 						$results[$table][$id]['matches'] = $matches;
+				}
+			}
+		}
+
+
+		// Gerer les donnees associees
+		if (isset($jointures[$table])
+		AND $joints = recherche_en_base(
+				$recherche,
+				$jointures[$table],
+				array_merge($options, array('jointures' => false))
+			)
+		) {
+			foreach ($joints as $jtable => $jj) {
+				$s = spip_query(
+				"SELECT ".id_table_objet($table).", ".id_table_objet($jtable)
+				." FROM spip_${jtable}s_${table}s"
+				." WHERE ". calcul_mysql_in('id_'.${jtable}, array_keys($jj)));
+				while ($t = spip_fetch_array($s)) {
+					$id = $t[id_table_objet($table)];
+					$joint = $jj[$t[id_table_objet($jtable)]];
+					if (!isset($results[$table]))
+						$results[$table] = array();
+					if (!isset($results[$table][$id]))
+						$results[$table][$id] = array();
+					if ($joint['score'])
+						$results[$table][$id]['score'] += $joint['score'];
+					if ($joint['champs'])
+					foreach($joint['champs'] as $c => $val)
+						$results[$table][$id]['champs'][$jtable.'.'.$c] = $val;
+					if ($joint['matches'])
+					foreach($joint['matches'] as $c => $val)
+						$results[$table][$id]['matches'][$jtable.'.'.$c] = $val;
 				}
 			}
 		}
