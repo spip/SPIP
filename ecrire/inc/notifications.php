@@ -208,6 +208,7 @@ function email_notification_forum ($t, $email) {
 // dans ecrire/inc/forum_insert.php ; ici on va notifier ceux qui ne l'ont
 // pas ete a la notification forumposte (sachant que les deux peuvent se
 // suivre si le forum est valide directement ('pos' ou 'abo')
+// http://doc.spip.org/@notifications_forumvalide_dist
 function notifications_forumvalide_dist($quoi, $id_forum) {
 	$s = spip_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum));
 	if (!$t = spip_fetch_array($s))
