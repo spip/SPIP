@@ -548,7 +548,7 @@ function code_boucle(&$boucles, $id, $nom)
 	$pretty = "BOUCLE$id(".strtoupper($boucle->type_requete) . ")" .
 		ereg_replace("[\r\n]", " ", $pretty);
 
-	return $pretty;	
+	return $pretty;
 }
 
 
@@ -569,6 +569,12 @@ function code_boucle(&$boucles, $id, $nom)
 function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
   global  $table_des_tables, $tables_des_serveurs_sql, $tables_principales,
     $tables_jointures;
+
+	// Pre-traitement : reperer le charset du squelette, et le convertir
+	// Bonus : supprime le BOM
+	include_ecrire('inc_charsets');
+	$squelette = transcoder_page($squelette);
+
 	// Phraser le squelette, selon sa grammaire
 	// pour le moment: "html" seul connu (HTML+balises BOUCLE)
 	$boucles = array();
