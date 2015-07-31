@@ -62,6 +62,11 @@ function action_supprimer_dist() {
 		}
 	}
 
-	redirige_par_entete(rawurldecode($redirect));
+	$redirect = rawurldecode($redirect);
+	if (strpos($redirect, 'id_rubrique=')) {
+		include_spip('inc/rubriques');
+		calculer_rubriques();
+	}
+	redirige_par_entete($redirect);
 }
 ?>
