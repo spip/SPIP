@@ -139,7 +139,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 				$s = sql_select("id_objet as $it, $ij", "spip_${jtable}s_liens", array("objet='$table'",sql_in('id_'.${jtable}, array_keys($jj))), '','','','',$serveur);
 			else
 				$s = sql_select("$it,$ij", "spip_${jtable}s_${table}s", sql_in('id_'.${jtable}, array_keys($jj)), '','','','',$serveur);
-			while ($t = sql_fetch($s)) {
+			while ($t = sql_fetch($s,$serveur)) {
 				$id = $t[$it];
 				$joint = $jj[$t[$ij]];
 				if (!isset($r))
