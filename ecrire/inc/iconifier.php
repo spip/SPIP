@@ -35,7 +35,7 @@ function inc_iconifier_dist($id_objet, $id,  $script, $iframe_script='') {
 	} else {
 		list($img, $clic) = decrire_logo($id_objet,'on',$id, 170, 170, $logo, $texteon, $script);
 
-		$masque = block_parfois_visible('on', "<b>$texteon</b><p>$img</p>", $clic, 'margin-bottom: -2px');
+		$masque = block_parfois_visible('on', "<b>$texteon</b><br />$img", $clic, 'margin-bottom: -2px');
 
 		$res = "<center>$masque</center><br /><br />";;
 		$texteoff = _T('logo_survol');
@@ -44,7 +44,7 @@ function inc_iconifier_dist($id_objet, $id,  $script, $iframe_script='') {
 
 			list($img, $clic) = decrire_logo($id_objet, 'off', $id, 170, 170, $logo, $texteoff, $script);
 
-			$masque = block_parfois_visible('off', "<b>$texteoff</b><p>$img</p>", $clic, 'margin-bottom: -2px');
+			$masque = block_parfois_visible('off', "<b>$texteoff</b><br />$img", $clic, 'margin-bottom: -2px');
 
 			$res .= "<center>$masque</center>";
 		} else {

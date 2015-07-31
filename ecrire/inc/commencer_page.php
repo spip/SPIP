@@ -219,7 +219,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 
 	$res .= bandeau_gadgets($largeur, $options, $id_rubrique)
 	. "</div>"
-	. "</div>";
+	. "</div>\n";
 
 	if ($options != "avancees") $res .= "<div style='height: 18px;'>&nbsp;</div>";
 	return $res;

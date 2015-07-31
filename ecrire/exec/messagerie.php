@@ -74,10 +74,10 @@ fin_cadre_relief();
  echo
     debut_cadre_enfonce('',true) .
     "<div class='verdana1'>"._T("calendrier_synchro") .
-    "<table  class='cellule-h-table' cellpadding='0' valign='middle'><tr>\n" .
-    "<td><a href='" . generer_url_ecrire("synchro","") . "'><div class='cell-i'>"
+    "<table  class='cellule-h-table' cellpadding='0'><tr>\n" .
+    "<td><a href='" . generer_url_ecrire("synchro","") . "'><span class='cell-i'>"
     . http_img_pack("rien.gif", ' ', http_style_background('synchro-24.gif', "; background-repeat: no-repeat; background-position: center center;"))
-    . "</div></a></td>\n"
+    . "</span></a></td>\n"
     . "<td class='cellule-h-lien'><a href='" . generer_url_ecrire("synchro","") . "' class='cellule-h'>" 
     . _T("icone_suivi_activite")
     . "</a></td>\n</tr></table>\n" ."</div>" .
