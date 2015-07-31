@@ -193,9 +193,9 @@ function ajah(method, url, flux, rappel)
         xhr.open(method, url, true);
 	// Necessaire au mode POST
 	// Il manque la specification du charset
+	// mais le mode_security d'Apache n'admet rien de plus
 	if (flux) {
-		xhr.setRequestHeader("Content-Type",
-		       "application/x-www-form-urlencoded; ");
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	}
 	xhr.send(flux);
 	return true;
