@@ -336,20 +336,12 @@ function image_ecrire_tag($valeurs,$surcharge){
 		$src = $surcharge['src'];
 		unset($surcharge['src']);
 	}
-	
-	// regarder la class pour gerer le 'format_png' en fonction du format de l'image
-	// (et le remettre sinon)
+
 	$class = $valeurs['class'];
 	if (isset($surcharge['class'])){
 		$class = $surcharge['class'];
 		unset($surcharge['class']);
 	}
-	$is_png = preg_match(',[.]png($|\?),i',$src);
-	$p = strpos($class,'format_png');
-	if ($is_png && $p===FALSE)
-		$class .= " format_png";
-	if (!$is_png && $p!==FALSE)
-		$class = preg_replace(",\s*format_png,","",$class);
 	if(strlen($class))
 		$tag = inserer_attribut($tag,'class',$class);
 
@@ -2516,7 +2508,7 @@ function produire_image_typo() {
 	$dimensions = getimagesize($image);
 	$largeur = $dimensions[0];
 	$hauteur = $dimensions[1];
-	return inserer_attribut("<img src='$image' width='$largeur' height='$hauteur' style='width:".$largeur."px;height:".$hauteur."px;' class='format_png' />", 'alt', $alt);
+	return inserer_attribut("<img src='$image' width='$largeur' height='$hauteur' style='width:".$largeur."px;height:".$hauteur."px;' />", 'alt', $alt);
 }
 
 ?>

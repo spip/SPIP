@@ -134,7 +134,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 		. "<li id='bandeau_couleur3' class='bandeau_couleur'><div class='menu-item'>";
 
 		// Choix du layout
-		$res .= http_img_pack("choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".gif", _T('choix_interface'), "class='format_png' style='vertical-align: middle' width='59' height='15' usemap='#map_layout'")
+		$res .= http_img_pack("choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".gif", _T('choix_interface'), " style='vertical-align: middle' width='59' height='15' usemap='#map_layout'")
 		. http_img_pack("rien.gif", "", "width='10' height='1'");
 			// grand ecran
 		if ($spip_ecran == "large") {
