@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Akey sit la',
+'article' => 'Article', # NEW
 'articles' => 'Atik yo',
 'articles_auteur' => 'Tout atik lot&egrave; a',
 'articles_populaires' => 'Atik yo ki plis popil&egrave;',
@@ -18,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'Gen pa oken sit sou ladr&egrave;s la',
 'aucune_breve' => 'Gen pa oken tinouv&egrave;l sou ladr&egrave;s la',
 'aucune_rubrique' => 'Gen pa oken ribrik sou ladr&egrave;s la',
+'auteur' => 'Auteur', # NEW
 'autres' => '<NEW>Ot',
 'autres_breves' => 'L&ograve;t tinouv&egrave;l yo',
 'autres_groupes_mots_clefs' => 'L&ograve;t gwoup mokle yo',
@@ -25,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bonjour' => 'Bonjou',
+'breve' => 'Br&egrave;ve', # NEW
 'breves' => 'Tinouv&egrave;l yo',
 
 // C
@@ -38,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'D&egrave;nye atik yo',
 'derniers_commentaires' => 'D&egrave;nye komant&egrave; yo',
 'derniers_messages_forum' => 'D&egrave;nye mesaj yo ki te piblye nan fowom yo',
-'documents_interdits_forum' => '<NEW>Documents interdits dans le forum',
+'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
 'edition_mode_texte' => 'Ledisyon modt&egrave;ks pou',
@@ -48,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_prive' => 'Espas priv&eacute;',
 
 // F
-'formats_acceptes' => '<NEW>Formats accept&#233;s : @formats@.',
+'formats_acceptes' => 'Formats accept&#233;s : @formats@.', # NEW
 'forum' => 'Fowom',
 
 // H
@@ -58,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'jours' => 'jou yo',
 
 // L
-'lien_connecter' => '<NEW>Se connecter',
+'lien_connecter' => 'Se connecter', # NEW
 
 // M
 'meme_auteur' => 'M&egrave;m lot&egrave; ki ekri ank&ograve;',
@@ -67,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Mesaj',
 'messages_forum' => 'Mesaj yo nan fowom ',
 'messages_recents' => 'Mesaj yo nan fowom ki plis resan',
+'mots_clef' => 'Mot-cl&eacute;', # NEW
 'mots_clefs' => 'Mokle yo',
 'mots_clefs_meme_groupe' => 'Mokle yo nan m&egrave;m gwoup',
 
@@ -102,7 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'site_realise_avec_spip' => 'Sit la  se sit ki te f&egrave; ak SPIP',
 'sites_web' => 'Sitw&egrave;b yo',
 'sous_rubriques' => 'Souribrik yo',
-'spam' => '<NEW>Spam',
+'spam' => 'Spam', # NEW
 'suite' => 'swit',
 'sur_web' => 'Sou w&egrave;b',
 'syndiquer_rubrique' => 'Sindike ribrik la',

@@ -222,6 +222,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'fichier_introuvable' => 'Restr @fichier@ dibosupl da gavout',
+'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
+'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
+'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
+'form_auteur_mail_confirmation' => 'Bonjour,
+
+Vous avez demand&eacute; &agrave; changer votre adresse email.
+Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
+l\'adresse ci-dessous (dans le cas contraire, votre demande
+sera ignor&eacute;e) :
+
+    @url@
+', # NEW
 'form_deja_inscrit' => 'Enskrivet oc\'h c\'hoazh.',
 'form_email_non_valide' => 'N\'eo ket reizh ho postel.',
 'form_forum_access_refuse' => 'N\'oc\'h ket aotreet da vont war al lec\'hienn-ma&ntilde; ken.',
@@ -395,12 +407,16 @@ Trugarez da gemer perzh
 'info_article_supprime' => 'Pennad diverket',
 'info_articles' => 'Pennado&ugrave;',
 'info_articles_a_valider' => 'Ar pennado&ugrave; da gadarnaat',
+'info_articles_nb' => '@nb@ articles', # NEW
 'info_articles_proposes' => 'Pennado&ugrave; kinniget',
+'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'skridaozer(ien)&nbsp;:',
 'info_authentification_ftp' => 'Gwiria&ntilde; (dre FTP).',
 'info_bloquer_lien' => 'Stanka&ntilde; al liamm-ma&ntilde;',
 'info_breves_02' => 'Berrskrido&ugrave;',
 'info_breves_2' => 'berrskrido&ugrave;',
+'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
+'info_breves_un' => '1 br&egrave;ve', # NEW
 'info_breves_valider' => 'Berrskrido&ugrave; da gadarnaat',
 'info_connexion_refusee' => 'Kevrea&ntilde; nac\'het',
 'info_contact_developpeur' => 'Kit e darempred gant un diorroer.',
@@ -421,6 +437,8 @@ Trugarez da gemer perzh
 'info_document' => 'Teul',
 'info_document_indisponible' => 'N\'eo ket hegerz an teul-ma&ntilde;',
 'info_documents' => 'Teulio&ugrave;',
+'info_documents_nb' => '@nb@ documents', # NEW
+'info_documents_un' => '1 document', # NEW
 'info_echange_message' => 'SPIP a ginnig eskemm kemennadenno&ugrave; ha sevel foromo&ugrave; prevez etre izili al lec\'hienn. Gallout a rit ober gant ar servij-ma&ntilde;, pe get.',
 'info_ecire_message_prive' => 'Skriva&ntilde; ur gerig prevez;',
 'info_email_invalide' => 'Postel direizh.',
@@ -465,6 +483,8 @@ Trugarez da gemer perzh
 'info_mail_fournisseur' => 'hoc\'hanv@herberc\'hier.com',
 'info_message_2' => 'KEMENNADENN',
 'info_message_supprime' => 'KEMENNADENN BET DIVERKET',
+'info_messages_nb' => '@nb@ messages', # NEW
+'info_messages_un' => '1 message', # NEW
 'info_mise_en_ligne' => 'Lakaet war ar rouedad d\'an&nbsp;:',
 'info_modification_parametres_securite' => 'kemm an arventenno&ugrave; surentez',
 'info_mois_courant' => 'E-kerzh ar miz :',
@@ -509,6 +529,8 @@ Trugarez da gemer perzh
 'info_retablir_lien' => 'adlakaat al liamm-ma&ntilde;',
 'info_retirer_mot' => 'Tenna&ntilde; ar ger-ma&ntilde;',
 'info_retirer_mots' => 'Tenna&ntilde; an holl c\'herio&ugrave;',
+'info_rubriques_nb' => '@nb@ rubriques', # NEW
+'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'titl ebet',
 'info_selectionner_fichier' => 'Gallout a rit diuza&ntilde; ur restr eus an teuliad @upload@',
 'info_selectionner_fichier_2' => 'Diuza&ntilde; ur restr&nbsp;:',
@@ -517,7 +539,9 @@ Trugarez da gemer perzh
 'info_site_attente' => 'Lec\'hienn a c\'hortoz beza&ntilde; kadarnaet',
 'info_site_reference' => 'Lec\'hienn menegeret enlinenn',
 'info_site_refuse' => 'Lec\'hienn bet nac\'het',
+'info_sites_nb' => '@nb@ sites', # NEW
 'info_sites_referencer' => 'Menegeri&ntilde; ul lec\'hienn',
+'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'diverka&ntilde; ar skeudennig',
 'info_symbole_bleu' => 'Talvezout a ra an arouez <b>glas</b> evit un <b>notennig-e&ntilde;vor</b>: da lavaret eo ur gemennadenn evidoc\'h hepken.',
 'info_symbole_jaune' => 'Talvezout a ra an arouez <b>melen</b> evit ur <b>c\'hemenn d\'an holl skridaozerien</b>&nbsp;: a c\'hell beza&ntilde; kemmet gant ur merour ha lennet gant an holl skridaozerien.',
@@ -541,7 +565,7 @@ Trugarez da gemer perzh
 'info_visites' => 'gweladenn :',
 'info_vos_rendez_vous' => 'Hoc\'h emgavio&ugrave; da zont',
 'info_zoom' => 'zoum',
-'infos_vos_pense_bete' => 'Ho notennigo&ugrave;-e&ntilde;vor',
+'infos_vos_pense_bete' => 'Ho notennigo&ugrave;-e&ntilde;vor', # MODIF
 'item_breve_proposee' => 'Berrskrid bet kinniget',
 
 // L
@@ -590,6 +614,7 @@ Trugarez da gemer perzh
 'login_retour_site' => 'Distrei&ntilde; d\'al lodenn foran',
 'login_retoursitepublic' => 'distrei&ntilde;&nbsp;d\'al&nbsp;lodenn&nbsp;foran',
 'login_sans_cookiie' => 'Kevrea&ntilde; hep toupino&ugrave;',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'en em enskriva&ntilde;',
 'login_test_navigateur' => 'taol-arnod merdeer/adkevrea&ntilde;',
 'login_verifiez_navigateur' => '(Gwiriit memes tra n\'eo ket bet memoret ho ker-tremen gant ar merdeer...)',
@@ -622,7 +647,6 @@ Trugarez da gemer perzh
 'onglet_repartition_rubrique' => 'Dasparzh diouzh ar rummad',
 'onglet_save_restaur_base' => 'Savetei&ntilde;/Assevel an diaz',
 'onglet_vider_cache' => 'Goullonderi&ntilde; ar grubuilh',
-'ortho_trop_de_fautes2' => 'Klaskit reizha&ntilde; ar fazio&ugrave; brasa&ntilde; ha klaskit en-dro da c\'houde.',
 
 // P
 'pass_choix_pass' => 'Dibabit ho ker-tremen nevez :',

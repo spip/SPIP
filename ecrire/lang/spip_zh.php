@@ -25,8 +25,8 @@ Zhen QIN (zhen_q@21cn.com)',
 'admin_modifier_rubrique' => '&#20462;&#25913;&#27492;&#26639;',
 'admin_recalculer' => '&#21047;&#26032;&#39029;&#38754;',
 'afficher_trad' => '&#26174;&#31034;&#35793;&#25991;',
-'alerte_maj_impossible' => '<MODIF><b>&#35686;&#21578;!</b> &#26356;&#26032;SQL&#21040;&#29256;&#26412; @version@&#22833;&#36133;, &#21487;&#33021;&#26159;&#25968;&#25454;&#24211;&#26435;&#38480;&#38382;&#39064;. &#35831;&#32852;&#31995;&#24744;&#30340;ISP(INTERNET&#26381;&#21153;&#25552;&#20379;&#21830;) .',
-'alerte_modif_info_concourante' => '<MODIF>&#27880;&#24847;:&#36825;&#26465;&#20449;&#24687;&#22312;&#21035;&#22788;&#34987;&#26356;&#25913;&#12290;&#30446;&#21069;&#20540;&#20026;&nbsp;:',
+'alerte_maj_impossible' => '<b>&#35686;&#21578;!</b> &#26356;&#26032;SQL&#21040;&#29256;&#26412; @version@&#22833;&#36133;, &#21487;&#33021;&#26159;&#25968;&#25454;&#24211;&#26435;&#38480;&#38382;&#39064;. &#35831;&#32852;&#31995;&#24744;&#30340;ISP(INTERNET&#26381;&#21153;&#25552;&#20379;&#21830;) .', # MODIF
+'alerte_modif_info_concourante' => '&#27880;&#24847;:&#36825;&#26465;&#20449;&#24687;&#22312;&#21035;&#22788;&#34987;&#26356;&#25913;&#12290;&#30446;&#21069;&#20540;&#20026;&nbsp;:', # MODIF
 'analyse_xml' => 'XML&#20998;&#26512;',
 'annuler' => '&#21462;&#28040;',
 'antispam_champ_vide' => '&#35831;&#20445;&#30041;&#27492;&#26684;&#31354;&#30333;:',
@@ -41,8 +41,8 @@ Zhen QIN (zhen_q@21cn.com)',
 'avis_erreur' => '&#38169;&#35823;: &#21442;&#35265;&#20197;&#19979;',
 'avis_erreur_connexion' => '&#36830;&#25509;&#22833;&#36133;',
 'avis_erreur_cookie' => 'cookie&#38169;&#35823;',
-'avis_erreur_fonction_contexte' => '<MODIF>&#31243;&#24207;&#22833;&#36133;. &#35813;&#21151;&#33021;&#19981;&#33021;&#22312;&#27492;&#35843;&#29992;.',
-'avis_erreur_mysql' => '<MODIF>SQL&#38169;&#35823;',
+'avis_erreur_fonction_contexte' => '&#31243;&#24207;&#22833;&#36133;. &#35813;&#21151;&#33021;&#19981;&#33021;&#22312;&#27492;&#35843;&#29992;.', # MODIF
+'avis_erreur_mysql' => 'SQL&#38169;&#35823;', # MODIF
 'avis_erreur_sauvegarde' => '@type@ @id_objet@&#22791;&#20221;&#22833;&#36133;!',
 'avis_erreur_visiteur' => '&#35775;&#38382;&#20010;&#20154;&#31354;&#38388;&#20986;&#38169;',
 
@@ -63,13 +63,13 @@ Zhen QIN (zhen_q@21cn.com)',
 'barre_note' => '&#36716;&#20026;[[&#39029;&#23614;&#26631;&#21495;]]',
 'barre_paragraphe' => '<modif>&#26032;&#24314;&#27573;&#33853;',
 'barre_quote' => '<quote>&#24341;&#29992;&#19968;&#20010;&#28040;&#24687;</quote>',
-'bouton_ajouter_document' => '<MODIF>&#28155;&#21152;&#25991;&#26723;',
-'bouton_ajouter_image' => '<MODIF>&#28155;&#21152;&#22270;&#29255;',
+'bouton_ajouter_document' => '&#28155;&#21152;&#25991;&#26723;', # MODIF
+'bouton_ajouter_image' => '&#28155;&#21152;&#22270;&#29255;', # MODIF
 'bouton_ajouter_image_document' => '&#28155;&#21152;&#22270;&#29255;&#25110;&#25991;&#20214;',
 'bouton_changer' => '&#20462;&#25913;',
 'bouton_chercher' => '&#25628;&#32034;',
 'bouton_choisir' => '&#36873;&#25321;',
-'bouton_download' => '<NEW>T&eacute;l&eacute;charger',
+'bouton_download' => 'T&eacute;l&eacute;charger', # NEW
 'bouton_enregistrer' => '&#20445;&#23384;',
 'bouton_radio_desactiver_messagerie_interne' => '&#20572;&#29992;&#20869;&#37096;&#28040;&#24687;',
 'bouton_radio_envoi_annonces' => '&#21457;&#36865;&#21487;&#32534;&#36753;&#30340;&#22768;&#26126;',
@@ -157,19 +157,19 @@ Zhen QIN (zhen_q@21cn.com)',
 'date_jour_2_initiale' => 'l.',
 'date_jour_3' => '&#26143;&#26399;&#20108;',
 'date_jour_3_abbr' => '&#26143;&#26399;&#20108;',
-'date_jour_3_initiale' => '<NEW>m.',
+'date_jour_3_initiale' => 'm.', # NEW
 'date_jour_4' => '&#26143;&#26399;&#19977;',
-'date_jour_4_abbr' => '<NEW>mer.',
-'date_jour_4_initiale' => '<NEW>m.',
+'date_jour_4_abbr' => 'mer.', # NEW
+'date_jour_4_initiale' => 'm.', # NEW
 'date_jour_5' => '&#26143;&#26399;&#22235;',
-'date_jour_5_abbr' => '<NEW>jeu.',
-'date_jour_5_initiale' => '<NEW>j.',
+'date_jour_5_abbr' => 'jeu.', # NEW
+'date_jour_5_initiale' => 'j.', # NEW
 'date_jour_6' => '&#26143;&#26399;&#20116;',
-'date_jour_6_abbr' => '<NEW>ven.',
-'date_jour_6_initiale' => '<NEW>v.',
+'date_jour_6_abbr' => 'ven.', # NEW
+'date_jour_6_initiale' => 'v.', # NEW
 'date_jour_7' => '&#26143;&#26399;&#20845;',
-'date_jour_7_abbr' => '<NEW>sam.',
-'date_jour_7_initiale' => '<NEW>s.',
+'date_jour_7_abbr' => 'sam.', # NEW
+'date_jour_7_initiale' => 's.', # NEW
 'date_jours' => '&#22825;',
 'date_minutes' => '&#20998;&#38047;',
 'date_mois' => '&#26376;',
@@ -189,34 +189,52 @@ Zhen QIN (zhen_q@21cn.com)',
 'date_saison_2' => '&#26149;&#23395;',
 'date_saison_3' => '&#22799;&#23395;',
 'date_saison_4' => '&#31179;&#23395;',
+'date_secondes' => 'secondes', # NEW
 'date_semaines' => '&#21608;',
+'date_un_mois' => 'mois', # NEW
+'date_une_heure' => 'heure', # NEW
+'date_une_minute' => 'minute', # NEW
+'date_une_seconde' => 'seconde', # NEW
+'date_une_semaine' => 'semaine', # NEW
 'dirs_commencer' => '&#20026;&#20102;&#24320;&#22987;&#23433;&#35013;',
 'dirs_preliminaire' => '&#21021;&#27493;: <b>&#35774;&#32622;&#35775;&#38382;&#26435;&#38480;</b>',
-'dirs_probleme_droits' => '<MODIF>&#35775;&#38382;&#26435;&#38480;&#38382;&#39064;',
-'dirs_repertoires_absents' => '<MODIF><b>&#26410;&#25214;&#21040;&#19979;&#21015;&#30446;&#24405;: <ul>@bad_dirs@.</ul> </b>
+'dirs_probleme_droits' => '&#35775;&#38382;&#26435;&#38480;&#38382;&#39064;', # MODIF
+'dirs_repertoires_absents' => '<b>&#26410;&#25214;&#21040;&#19979;&#21015;&#30446;&#24405;: <ul>@bad_dirs@.</ul> </b>
   <p>&#21487;&#33021;&#30001;&#20110;&#36755;&#20837;&#22823;&#23567;&#20889;&#26377;&#35823;.
   &#35831;&#30830;&#35748;&#30446;&#24405;&#30340;&#22823;&#23567;&#20889;&#27491;&#30830;; &#22914;&#26524;&#19981;&#27491;&#30830;, &#21487;&#36890;&#36807;FTP&#36719;&#20214;&#20462;&#25913;&#30446;&#24405;&#21517;&#23383;&#20197;&#32416;&#38169;.
-  <p>&#19968;&#26086;&#23436;&#25104;,&#24744;&#21487;&#20197;',
-'dirs_repertoires_suivants' => '<MODIF><b>&#20197;&#19979;&#30446;&#24405;&#26080;&#20889;&#26435;&#38480;: <ul>@bad_dirs@.</ul> </b>
+  <p>&#19968;&#26086;&#23436;&#25104;,&#24744;&#21487;&#20197;', # MODIF
+'dirs_repertoires_suivants' => '<b>&#20197;&#19979;&#30446;&#24405;&#26080;&#20889;&#26435;&#38480;: <ul>@bad_dirs@.</ul> </b>
 
   <p>&#20462;&#25913;&#26435;&#38480;&#35831;&#20351;&#29992;FTP&#23458;&#25143;&#31471;&#20026;&#27599;&#20010;&#30446;&#24405;&#35774;&#23450;&#35775;&#38382;&#26435;&#38480;. &#35813;&#25805;&#20316;&#22312;&#29992;&#25143;&#25351;&#21335;&#20013;&#26377;&#35814;&#32454;&#20171;&#32461;.
 
-  <p>&#19968;&#26086;&#23436;&#25104;,&#24744;&#21487;&#20197;',
-'double_occurrence' => '<MODIF>Double occurrence',
+  <p>&#19968;&#26086;&#23436;&#25104;,&#24744;&#21487;&#20197;', # MODIF
+'double_occurrence' => 'Double occurrence', # MODIF
 
 // E
-'en_cours' => '<NEW>en cours',
+'en_cours' => 'en cours', # NEW
 'entree_dimensions' => '&#22823;&#23567;:',
 'entree_titre_document' => '&#25991;&#20214;&#26631;&#39064;:',
 'entree_titre_image' => '&#22270;&#20687;&#26631;&#39064;:',
 'envoi_via_le_site' => '&#36890;&#36807;&#26412;&#32593;&#31449;&#21457;&#36865;',
-'erreur' => '<NEW>Erreur',
-'erreur_balise_non_fermee' => '<NEW>derni&egrave;re balise non referm&eacute;e :',
-'erreur_texte' => '<NEW>erreur(s)',
-'etape' => '<NEW>&Eacute;tape',
+'erreur' => 'Erreur', # NEW
+'erreur_balise_non_fermee' => 'derni&egrave;re balise non referm&eacute;e :', # NEW
+'erreur_texte' => 'erreur(s)', # NEW
+'etape' => '&Eacute;tape', # NEW
 
 // F
 'fichier_introuvable' => '&#25214;&#19981;&#21040;@fichier@&#25991;&#20214;',
+'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
+'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
+'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
+'form_auteur_mail_confirmation' => 'Bonjour,
+
+Vous avez demand&eacute; &agrave; changer votre adresse email.
+Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
+l\'adresse ci-dessous (dans le cas contraire, votre demande
+sera ignor&eacute;e) :
+
+    @url@
+', # NEW
 'form_deja_inscrit' => '&#24744;&#24050;&#27880;&#20876;.',
 'form_email_non_valide' => '&#24744;&#30340;&#30005;&#23376;&#37038;&#20214;&#26080;&#25928;.',
 'form_forum_access_refuse' => '&#24744;&#26080;&#26435;&#32487;&#32493;&#35775;&#38382;&#35813;&#31449;&#28857;.',
@@ -231,8 +249,8 @@ Zhen QIN (zhen_q@21cn.com)',
 'form_forum_probleme_mail' => '&#37038;&#20214;&#38382;&#39064;: &#26631;&#35782;&#31526;&#19981;&#33021;&#34987;&#21457;&#36865;.',
 'form_forum_voici1' => '<MODIF>&#36825;&#26159;&#24744;&#21152;&#20837;&#31449;&#28857;&#32593;&#31449;&#32534;&#36753;&#21644;&#35770;&#22363;&#30340;&#26631;&#35782;&#31526;
 "@nom_site_spip@" (@adresse_site@):',
-'form_forum_voici2' => '<MODIF>&#36825;&#26159;&#24744;&#25552;&#20132;&#25991;&#31456;&#30340;&#26631;&#35782;&#31526;
- "@nom_site_spip@" (@adresse_login@):',
+'form_forum_voici2' => '&#36825;&#26159;&#24744;&#25552;&#20132;&#25991;&#31456;&#30340;&#26631;&#35782;&#31526;
+ "@nom_site_spip@" (@adresse_login@):', # MODIF
 'form_indiquer_email' => '&#35831;&#36755;&#20837;&#24744;&#30340;&#30005;&#23376;&#37038;&#20214;&#22320;&#22336;.',
 'form_indiquer_nom' => '&#35831;&#36755;&#20837;&#24744;&#30340;&#21517;&#23383;.',
 'form_indiquer_nom_site' => '&#35831;&#36755;&#20837;&#24744;&#30340;&#31449;&#28857;&#21517;&#23383;.',
@@ -241,8 +259,8 @@ Zhen QIN (zhen_q@21cn.com)',
 'form_pet_confirmation' => '&#35831;&#30830;&#23450;&#31614;&#21517;:',
 'form_pet_deja_enregistre' => '&#31449;&#28857;&#24050;&#32463;&#27880;&#20876;',
 'form_pet_deja_signe' => '&#24744;&#24050;&#32463;&#31614;&#32626;&#35813;&#25991;.',
-'form_pet_envoi_mail_confirmation' => '<MODIF>&#19968;&#23553;&#30830;&#35748;&#20449;&#24050;&#32463;&#21457;&#36865;&#32473;&#24744;,&#35831;&#35775;&#38382;&#37038;&#20214;&#20013;&#30340;&#38142;&#25509;&#30830;&#35748;&#24744;&#30340;&#31614;&#21517;.',
-'form_pet_mail_confirmation' => '<MODIF>&#24744;&#22909;,
+'form_pet_envoi_mail_confirmation' => '&#19968;&#23553;&#30830;&#35748;&#20449;&#24050;&#32463;&#21457;&#36865;&#32473;&#24744;,&#35831;&#35775;&#38382;&#37038;&#20214;&#20013;&#30340;&#38142;&#25509;&#30830;&#35748;&#24744;&#30340;&#31614;&#21517;.', # MODIF
+'form_pet_mail_confirmation' => '&#24744;&#22909;,
 
 &#24744;&#35201;&#27714;&#22312;&#35831;&#27714;:@titre@&#19978;&#31614;&#21517;.
 
@@ -255,13 +273,13 @@ Zhen QIN (zhen_q@21cn.com)',
     @url@
 
 &#24863;&#35874;&#24744;&#30340;&#21442;&#19982;
-',
+', # MODIF
 'form_pet_message_commentaire' => '&#20854;&#23427;&#28040;&#24687;&#21644;&#35780;&#35770;?',
 'form_pet_nom_site2' => '&#24744;&#30340;&#31449;&#28857;&#21517;',
-'form_pet_probleme_liens' => '<NEW>Veuillez reprendre votre message en supprimant les liens hypertexte.',
+'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
 'form_pet_probleme_technique' => '&#25216;&#26415;&#38382;&#39064;,&#31614;&#21517;&#34987;&#21363;&#21051;&#20013;&#26029;.',
 'form_pet_signature_pasprise' => '&#31614;&#21517;&#34987;&#24573;&#30053;.',
-'form_pet_signature_validee' => '<MODIF>&#24744;&#30340;&#31614;&#21517;&#26377;&#25928;,&#31449;&#28857;&#26356;&#26032;&#21518;&#23558;&#26174;&#31034;.&#35874;&#35874;!',
+'form_pet_signature_validee' => '&#24744;&#30340;&#31614;&#21517;&#26377;&#25928;,&#31449;&#28857;&#26356;&#26032;&#21518;&#23558;&#26174;&#31034;.&#35874;&#35874;!', # MODIF
 'form_pet_site_deja_enregistre' => '&#31449;&#28857;&#24050;&#32463;&#27880;&#20876;',
 'form_pet_url_invalide' => '&#24744;&#36755;&#20837;&#30340;URL&#26080;&#25928;.',
 'form_pet_votre_email' => '&#24744;&#30340;&#30005;&#23376;&#37038;&#20214;&#22320;&#22336;',
@@ -280,9 +298,9 @@ Zhen QIN (zhen_q@21cn.com)',
 'form_prop_sujet' => '&#26631;&#39064;',
 'form_prop_url_site' => '&#31449;&#28857;URL',
 'forum_acces_refuse' => '&#24744;&#24050;&#32463;&#26080;&#26435;&#35775;&#38382;&#36825;&#20123;&#35770;&#22363;.',
-'forum_attention_dix_caracteres' => '<MODIF><b>&#35686;&#21578;!</b> &#24744;&#30340;&#28040;&#24687;&#23569;&#20110;&#21313;&#20010;&#23383;&#31526;.',
-'forum_attention_trois_caracteres' => '<MODIF><b>&#35686;&#21578;!</b> &#24744;&#30340;&#26631;&#39064;&#23569;&#20110;&#19977;&#20010;&#23383;&#31526;.',
-'forum_attention_trop_caracteres' => '<NEW><b>Attention&nbsp;!</b> votre message est trop long (@compte@ caract&egrave;res)&nbsp;: pour pouvoir &ecirc;tre enregistr&eacute;, il ne doit pas d&eacute;passer @max@ caract&egrave;res.',
+'forum_attention_dix_caracteres' => '<b>&#35686;&#21578;!</b> &#24744;&#30340;&#28040;&#24687;&#23569;&#20110;&#21313;&#20010;&#23383;&#31526;.', # MODIF
+'forum_attention_trois_caracteres' => '<b>&#35686;&#21578;!</b> &#24744;&#30340;&#26631;&#39064;&#23569;&#20110;&#19977;&#20010;&#23383;&#31526;.', # MODIF
+'forum_attention_trop_caracteres' => '<b>Attention&nbsp;!</b> votre message est trop long (@compte@ caract&egrave;res)&nbsp;: pour pouvoir &ecirc;tre enregistr&eacute;, il ne doit pas d&eacute;passer @max@ caract&egrave;res.', # NEW
 'forum_avez_selectionne' => '&#24744;&#24050;&#36873;&#25321;:',
 'forum_cliquer_retour' => '&#21333;&#20987;  <a href=\'@retour_forum@\'>&#36825;&#37324;</a> &#32487;&#32493;.',
 'forum_forum' => '&#35770;&#22363;',
@@ -292,11 +310,11 @@ Zhen QIN (zhen_q@21cn.com)',
 'forum_message_trop_long' => '&#24744;&#30340;&#28040;&#24687;&#36807;&#38271;. &#26368;&#22823;&#38271;&#24230;&#20026;20000&#20010;&#23383;&#31526;.',
 'forum_ne_repondez_pas' => '&#35831;&#21247;&#22238;&#22797;&#35813;&#20449;&#20214;,&#35831;&#21040;&#22914;&#19979;&#22320;&#22336;&#30340;&#35770;&#22363;&#22238;&#22797;:',
 'forum_non_inscrit' => '&#21487;&#33021;&#24744;&#36824;&#27809;&#26377;&#27880;&#20876;&#25110;&#32773;&#24744;&#36755;&#20837;&#30340;&#22320;&#22336;&#25110;&#23494;&#30721;&#38169;&#35823;.',
-'forum_page_url' => '<MODIF>(&#22914;&#26524;&#24744;&#30340;&#28040;&#24687;&#24341;&#29992;&#20102;web&#19978;&#21457;&#34920;&#30340;&#25991;&#31456;&#35831;&#25552;&#20379;&#36827;&#19968;&#27493;&#30340;&#28040;&#24687;, &#35831;&#36755;&#20837;&#39029;&#22836;&#21644;&#23427;&#30340;URL).',
+'forum_page_url' => '(&#22914;&#26524;&#24744;&#30340;&#28040;&#24687;&#24341;&#29992;&#20102;web&#19978;&#21457;&#34920;&#30340;&#25991;&#31456;&#35831;&#25552;&#20379;&#36827;&#19968;&#27493;&#30340;&#28040;&#24687;, &#35831;&#36755;&#20837;&#39029;&#22836;&#21644;&#23427;&#30340;URL).', # MODIF
 'forum_par_auteur' => '&#25353; @auteur@',
-'forum_poste_par' => '<MODIF>&#24744;&#25991;&#31456;@parauteur@&#20043;&#21518;&#21518;&#21457;&#34920;&#30340;&#20449;&#24687;.',
+'forum_poste_par' => '&#24744;&#25991;&#31456;@parauteur@&#20043;&#21518;&#21518;&#21457;&#34920;&#30340;&#20449;&#24687;.', # MODIF
 'forum_probleme_database' => '&#25968;&#25454;&#24211;&#38382;&#39064;,&#24744;&#30340;&#28040;&#24687;&#26410;&#33021;&#20445;&#23384;.',
-'forum_qui_etes_vous' => '<MODIF><b>&#24744;&#26159;&#35841;?</b> (&#21487;&#36873;)',
+'forum_qui_etes_vous' => '<b>&#24744;&#26159;&#35841;?</b> (&#21487;&#36873;)', # MODIF
 'forum_texte' => '&#28040;&#24687;&#27491;&#25991;:',
 'forum_titre' => '&#26631;&#39064;:',
 'forum_titre_erreur' => '&#38169;&#35823;...',
@@ -349,7 +367,7 @@ Zhen QIN (zhen_q@21cn.com)',
 'icone_site_entier' => '&#25972;&#20010;&#31449;&#28857;',
 'icone_sites_references' => '&#21442;&#32771;&#31449;&#28857;',
 'icone_statistiques' => '&#31449;&#28857;&#32479;&#35745;',
-'icone_statistiques_visites' => '<MODIF>&#35775;&#38382;&#32479;&#35745;',
+'icone_statistiques_visites' => '&#35775;&#38382;&#32479;&#35745;', # MODIF
 'icone_suivi_activite' => '&#36319;&#36394;&#31449;&#28857;&#30340;&#27963;&#21160;',
 'icone_suivi_actualite' => '&#31449;&#28857;&#35780;&#20272;',
 'icone_suivi_forums' => '&#36319;&#36394;/&#31649;&#29702;&#35770;&#22363;',
@@ -367,7 +385,7 @@ Zhen QIN (zhen_q@21cn.com)',
 'image_tourner_droite' => '&#21521;&#21491;&#26059;&#36716;90&deg; ',
 'image_tourner_gauche' => '&#21521;&#24038;&#26059;&#36716; 90&deg;',
 'img_indisponible' => '&#24517;&#38656;&#22270;&#20687;',
-'impossible' => '<NEW>impossible',
+'impossible' => 'impossible', # NEW
 'info_a_suivre' => '&#36319;&#36394;&nbsp;&raquo;',
 'info_a_valider' => '[&#20351;&#26377;&#25928;]',
 'info_acces_interdit' => '&#35775;&#38382;&#31105;&#27490;',
@@ -386,19 +404,23 @@ Zhen QIN (zhen_q@21cn.com)',
 'info_article_supprime' => '&#21024;&#38500;&#30340;&#25991;&#31456;',
 'info_articles' => '&#25991;&#31456;',
 'info_articles_a_valider' => '&#38656;&#35201;&#30830;&#35748;&#30340;&#25991;&#31456;',
+'info_articles_nb' => '@nb@ articles', # NEW
 'info_articles_proposes' => '&#25552;&#20132;&#30340;&#25991;&#31456;',
+'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => '&#20316;&#32773;:',
 'info_authentification_ftp' => '(&#36890;&#36807; FTP)&#39564;&#35777;.',
 'info_bloquer_lien' => '&#38459;&#27490;&#36825;&#20010;&#36830;&#25509;',
 'info_breves_02' => '&#31616;&#35201;',
 'info_breves_2' => '&#31616;&#35201;',
+'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
+'info_breves_un' => '1 br&egrave;ve', # NEW
 'info_breves_valider' => '&#38656;&#30830;&#35748;&#30340;&#31616;&#35201;',
 'info_connexion_refusee' => '&#36830;&#25509;&#31105;&#27490;',
 'info_contact_developpeur' => '&#35831;&#32852;&#31995;&#24320;&#21457;&#32773;.',
 'info_contenance' => '&#31449;&#28857;&#21253;&#25324;:',
 'info_contribution' => '&#35770;&#22363;&#25237;&#31295;',
 'info_copyright' => '@spip@&#26159;&#19968;&#27454;&#20813;&#36153;&#36719;&#20214;@lien_gpl@&#12290;',
-'info_copyright_doc' => '<MODIF>&#35814;&#32454;&#20449;&#24687;,&#35831;&#35775;&#38382;&#31449;&#28857; <a href="@spipnet@">http://www.spip.net/zh</a>.',
+'info_copyright_doc' => '&#35814;&#32454;&#20449;&#24687;,&#35831;&#35775;&#38382;&#31449;&#28857; <a href="@spipnet@">http://www.spip.net/zh</a>.', # MODIF
 'info_copyright_gpl' => '&#26681;&#25454;GPL&#21327;&#35758;',
 'info_cours_edition' => '&#36827;&#23637;&#20013;&#25991;&#31456;',
 'info_creer_repertoire' => '&#35831;&#21019;&#24314;&#19968;&#20010;&#25991;&#20214;&#25110;&#30446;&#24405;&#21483;:',
@@ -412,6 +434,8 @@ Zhen QIN (zhen_q@21cn.com)',
 'info_document' => '&#25991;&#26723;',
 'info_document_indisponible' => '<modif>&#26080;&#27861;&#33719;&#24471;&#27492;&#25991;&#20214;',
 'info_documents' => '&#25991;&#20214;',
+'info_documents_nb' => '@nb@ documents', # NEW
+'info_documents_un' => '1 document', # NEW
 'info_echange_message' => 'SPIP &#20801;&#35768;&#22312;&#35752;&#35770;&#32773;&#20013;&#20132;&#25442;&#28040;&#24687;&#21644;&#31169;&#26377;&#35752;&#35770;&#35770;&#22363;
   . &#20320;&#21487;&#28608;&#27963;&#25110;
   &#20351;&#36825;&#20010;&#29305;&#24615;&#19981;&#21487;&#29992;.',
@@ -450,7 +474,7 @@ Zhen QIN (zhen_q@21cn.com)',
 'info_la_breve' => '&#26032;&#38395;',
 'info_la_rubrique' => '&#19987;&#26639;',
 'info_langue_principale' => '&#20027;&#31449;&#28857;&#35821;&#35328;',
-'info_largeur_vignette' => '<MODIF>@largeur_vignette@ x @hauteur_vignette@ &#20687;&#32032;',
+'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ &#20687;&#32032;', # MODIF
 'info_les_auteurs_1' => '&#25353; @les_auteurs@',
 'info_logo_format_interdit' => '&#20165;@formats@&#26684;&#24335;&#20043;&#25991;&#20214;&#34987;&#20801;&#35768;&#20316;&#26631;&#24535;',
 'info_logo_max_poids' => 'Les logos doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).',
@@ -458,12 +482,14 @@ Zhen QIN (zhen_q@21cn.com)',
 'info_mail_fournisseur' => 'you@isp.com',
 'info_message_2' => '&#28040;&#24687;',
 'info_message_supprime' => '&#21024;&#38500;&#30340;&#28040;&#24687;',
+'info_messages_nb' => '@nb@ messages', # NEW
+'info_messages_un' => '1 message', # NEW
 'info_mise_en_ligne' => '&#22312;&#32447;&#20986;&#29256;&#29289;&#30340;&#26085;&#26399;:',
 'info_modification_parametres_securite' => '&#20462;&#25913;&#23433;&#20840;&#21442;&#25968;',
 'info_mois_courant' => '&#22312;&#26376;&#20013;:',
 'info_mot_cle_ajoute' => '&#19979;&#21015;&#20851;&#38190;&#34987;&#21152;&#36827;',
 'info_multi_herit' => '&#32570;&#30465;&#35821;&#35328;',
-'info_multi_langues_soulignees' => '<MODIF><u>&#21152;&#19979;&#21010;&#32447;&#30340;&#35821;&#35328;</u> &#25552;&#20379;&#20102;&#25152;&#26377;&#30028;&#38754;&#30340;&#35821;&#35328;&#30340;&#32763;&#35793;. &#22914;&#26524;&#20320;&#36873;&#25321;&#35821;&#35328;, &#20844;&#20849;&#31449;&#28857;&#30340;&#25152;&#26377;&#20803;&#32032; (&#26085;&#26399;, &#35770;&#22363;) &#23558;&#34987;&#33258;&#21160;&#32763;&#35793;. &#20316;&#20026;&#27809;&#26377;&#19979;&#21010;&#32447;&#30340;&#35821;&#35328;, &#36825;&#20123;&#20803;&#32032;&#23558;&#20986;&#29616;&#22312;&#31449;&#28857;&#30340;&#20027;&#35821;&#35328;&#30028;&#38754;&#19978;.',
+'info_multi_langues_soulignees' => '<u>&#21152;&#19979;&#21010;&#32447;&#30340;&#35821;&#35328;</u> &#25552;&#20379;&#20102;&#25152;&#26377;&#30028;&#38754;&#30340;&#35821;&#35328;&#30340;&#32763;&#35793;. &#22914;&#26524;&#20320;&#36873;&#25321;&#35821;&#35328;, &#20844;&#20849;&#31449;&#28857;&#30340;&#25152;&#26377;&#20803;&#32032; (&#26085;&#26399;, &#35770;&#22363;) &#23558;&#34987;&#33258;&#21160;&#32763;&#35793;. &#20316;&#20026;&#27809;&#26377;&#19979;&#21010;&#32447;&#30340;&#35821;&#35328;, &#36825;&#20123;&#20803;&#32032;&#23558;&#20986;&#29616;&#22312;&#31449;&#28857;&#30340;&#20027;&#35821;&#35328;&#30028;&#38754;&#19978;.', # MODIF
 'info_multilinguisme' => '&#22810;&#35821;&#35328;',
 'info_nom_non_utilisateurs_connectes' => '&#20320;&#30340;&#21517;&#23383;&#19981;&#26174;&#31034;&#22312;&#36830;&#25509;&#29992;&#25143;&#30340;&#21015;&#34920;&#20013;.',
 'info_nom_utilisateurs_connectes' => '&#20320;&#30340;&#21517;&#23383;&#26174;&#31034;&#22312;&#36830;&#25509;&#29992;&#25143;&#30340;&#21015;&#34920;&#20013;.',
@@ -473,11 +499,11 @@ Zhen QIN (zhen_q@21cn.com)',
 'info_nouveau_message' => '&#20320;&#26377;&#26032;&#28040;&#24687;',
 'info_nouveaux_messages' => '&#20320;&#26377; @total_messages@ &#26465;&#26032;&#28040;&#24687;',
 'info_numero_abbreviation' => '&#31532;&nbsp;',
-'info_obligatoire' => '<NEW>Cette information est obligatoire',
+'info_obligatoire' => 'Cette information est obligatoire', # NEW
 'info_panne_site_syndique' => '&#32852;&#21512;&#31449;&#28857;&#27425;&#24207;&#39072;&#20498;',
 'info_pense_bete' => '&#24536;&#22791;',
 'info_petit_ecran' => '&#23567;&#22270;&#26174;&#31034;',
-'info_petition_close' => '<NEW>P&eacute;tition close',
+'info_petition_close' => 'P&eacute;tition close', # NEW
 'info_pixels' => '&#20687;&#32032;',
 'info_plusieurs_mots_trouves' => '&#20960;&#20010;&#20851;&#38190;&#35789;&#25214;&#21040;&#20102; "@cherche_mot@":',
 'info_popularite_5' => '&#27969;&#34892;:',
@@ -502,15 +528,19 @@ Zhen QIN (zhen_q@21cn.com)',
 'info_retablir_lien' => '&#24674;&#22797;&#36825;&#20010;&#36830;&#25509;',
 'info_retirer_mot' => '&#31227;&#21160;&#36825;&#20010;&#20851;&#38190;&#35789;',
 'info_retirer_mots' => '&#31227;&#21435;&#25152;&#26377;&#30340;&#20851;&#38190;&#35789;',
+'info_rubriques_nb' => '@nb@ rubriques', # NEW
+'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => '&#26080;&#26631;&#39064;',
 'info_selectionner_fichier' => '<MODIF>&#20174;@upload@&#25991;&#20214;&#20013;&#36873;&#25321;&#19968;&#20010;&#25991;&#20214;',
 'info_selectionner_fichier_2' => '&#36873;&#25321;&#19968;&#20010;&#25991;&#20214;:',
-'info_signature_supprimee' => '<NEW>Signature supprim&eacute;e',
-'info_signature_supprimee_erreur' => '<NEW>Erreur&nbsp;: ce code de suppression ne correspond a aucune signature',
+'info_signature_supprimee' => 'Signature supprim&eacute;e', # NEW
+'info_signature_supprimee_erreur' => 'Erreur&nbsp;: ce code de suppression ne correspond a aucune signature', # NEW
 'info_site_attente' => '&#26410;&#30830;&#35748;&#30340;&#31449;&#28857;',
 'info_site_reference' => '&#22312;&#32447;&#24341;&#29992;&#30340;&#31449;&#28857;',
 'info_site_refuse' => '&#20002;&#24323;&#30340;&#31449;&#28857;',
+'info_sites_nb' => '@nb@ sites', # NEW
 'info_sites_referencer' => '&#21442;&#32771;&#31449;&#28857;',
+'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => '&#21024;&#38500;&#23567;&#25554;&#22270;',
 'info_symbole_bleu' => '<MODIF><b>&#34013;&#33394;</b>&#26631;&#24535;<b>&#22791;&#27880;</b>&#65306;&#20363;&#22914;&#20010;&#20154;&#20351;&#29992;&#30340;&#28040;&#24687;.',
 'info_symbole_jaune' => '<MODIF><b>&#40644;&#33394;</b>&#34920;&#31034;<b>&#23545;&#25152;&#26377;&#32534;&#36753;&#32773;&#22768;&#26126;</b>&nbsp;&#65306;&#25152;&#26377;&#31449;&#28857;&#31649;&#29702;&#32773;&#37117;&#33021;&#30475;&#35265;&#24182;&#32534;&#36753;&#12290;',
@@ -534,7 +564,7 @@ Zhen QIN (zhen_q@21cn.com)',
 'info_visites' => '&#35775;&#38382;:',
 'info_vos_rendez_vous' => '&#23558;&#26469;&#30340;&#32422;&#20250;',
 'info_zoom' => '&#32553;&#25918;',
-'infos_vos_pense_bete' => '&#22791;&#27880;',
+'infos_vos_pense_bete' => '&#22791;&#27880;', # MODIF
 'item_breve_proposee' => '&#26032;&#38395;&#25552;&#20132;',
 
 // L
@@ -556,8 +586,8 @@ Zhen QIN (zhen_q@21cn.com)',
 'lien_visite_site' => '&#35775;&#38382;&#31449;&#28857;',
 'lien_visites' => '@visites@ &#35775;&#38382;',
 'lien_voir_auteur' => '&#26816;&#26597;&#20316;&#32773;',
-'ligne' => '<NEW>Ligne',
-'login' => '<NEW>Connexion',
+'ligne' => 'Ligne', # NEW
+'login' => 'Connexion', # NEW
 'login_acces_prive' => '&#35775;&#38382;&#31169;&#26377;&#21306;',
 'login_autre_identifiant' => '&#29992;&#21478;&#19968;&#20010;&#26631;&#35782;&#31526;',
 'login_cookie_accepte' => '&#35831;&#35774;&#23450;&#20320;&#30340;&#27983;&#35272;&#22120;&#25509;&#21463;&#23427;&#20204; (&#33267;&#23569;&#26159;&#36825;&#20010;&#31449;&#28857;a).',
@@ -584,21 +614,22 @@ Zhen QIN (zhen_q@21cn.com)',
 'login_retour_site' => '&#36820;&#22238;&#20844;&#20849;&#31449;&#28857;',
 'login_retoursitepublic' => '&#36820;&#22238;&#20844;&#20849;&#31449;&#28857;',
 'login_sans_cookiie' => '&#26080;COOKIE&#30340;&#26631;&#35782;',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => '&#27880;&#20876;',
 'login_test_navigateur' => '&#27979;&#35797;&#27983;&#35272;/&#37325;&#26032;&#36830;&#25509;',
 'login_verifiez_navigateur' => '(&#26080;&#35770;&#22914;&#20309;, &#35831;&#30830;&#35748;&#20320;&#30340;&#27983;&#35272;&#22120;&#19981;&#20250;&#35760;&#20303;&#20320;&#30340;&#23494;&#30721;...)',
 
 // M
-'masquer_colonne' => '<NEW>Masquer cette colonne',
-'masquer_trad' => '<NEW>masquer les traductions',
+'masquer_colonne' => 'Masquer cette colonne', # NEW
+'masquer_trad' => 'masquer les traductions', # NEW
 'module_fichiers_langues' => '&#35821;&#35328;&#25991;&#20214;',
 
 // N
 'navigateur_pas_redirige' => '&#22914;&#26524;&#24744;&#30340;&#27983;&#35272;&#22120;&#27809;&#26377;&#36339;&#36716;,&#35831;&#25353;&#36825;&#37324;&#32487;&#32493;.',
-'numero' => '<NEW>Num&eacute;ro',
+'numero' => 'Num&eacute;ro', # NEW
 
 // O
-'occurence' => '<NEW>Occurrence',
+'occurence' => 'Occurrence', # NEW
 'onglet_affacer_base' => '&#21024;&#38500;&#25968;&#25454;&#24211;',
 'onglet_auteur' => '&#20316;&#32773;',
 'onglet_contenu_site' => '&#31449;&#28857;&#20869;&#23481;',
@@ -616,7 +647,6 @@ Zhen QIN (zhen_q@21cn.com)',
 'onglet_repartition_rubrique' => '&#25353;&#19987;&#26639;&#21457;&#24067;',
 'onglet_save_restaur_base' => '&#22791;&#20221;/&#24674;&#22797;&#25968;&#25454;&#24211;',
 'onglet_vider_cache' => '&#28165;&#31354;&#32531;&#23384;',
-'ortho_trop_de_fautes2' => '&#35831;&#20462;&#25913;&#26368;&#26126;&#26174;&#30340;&#38169;&#35823;&#65292;&#28982;&#21518;&#20877;&#35797;&#12290;',
 
 // P
 'pass_choix_pass' => '&#35831;&#36873;&#25321;&#26032;&#23494;&#30721;:',
@@ -664,13 +694,13 @@ Zhen QIN (zhen_q@21cn.com)',
 'previsualiser' => '&#39044;&#35272;',
 
 // R
-'retour' => '<NEW>Retour',
+'retour' => 'Retour', # NEW
 
 // S
-'spip_conforme_dtd' => '<NEW>SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :',
-'squelette' => '<NEW>squelette',
-'squelette_inclus_ligne' => '<NEW>squelette inclus, ligne',
-'squelette_ligne' => '<NEW>squelette, ligne',
+'spip_conforme_dtd' => 'SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :', # NEW
+'squelette' => 'squelette', # NEW
+'squelette_inclus_ligne' => 'squelette inclus, ligne', # NEW
+'squelette_ligne' => 'squelette, ligne', # NEW
 'stats_visites_et_popularite' => '@visites@ &#35775;&#38382;&#32773;; &#27969;&#34892;: @popularite@',
 'suivant' => '&#21518;&#19968;&#20010;',
 
@@ -691,21 +721,21 @@ Zhen QIN (zhen_q@21cn.com)',
 &#35748;&#30495;&#38405;&#35835;&#27492;&#21442;&#32771;&#20869;&#23481;&#65292;
 &#20877;&#35797;&#25972;&#29702;&#36807;&#31243;&#65292;
 &#24182;&#27880;&#24847;&#22270;&#20687;&#22987;&#32456;&#26174;&#31034;&#22312;&#20320;&#30340;&#25991;&#20214;&#20013;&#12290;',
-'texte_erreur_visiteur' => '<NEW>Vous avez tent&eacute; d\'acc&eacute;der &agrave; l\'espace priv&eacute; avec un login qui ne le permet pas.',
-'texte_inc_auth_1' => '<MODIF>&#29992;&#30331;&#24405;&#21517;&#26631;&#35782;&#20320;&#33258;&#24049;
+'texte_erreur_visiteur' => 'Vous avez tent&eacute; d\'acc&eacute;der &agrave; l\'espace priv&eacute; avec un login qui ne le permet pas.', # NEW
+'texte_inc_auth_1' => '&#29992;&#30331;&#24405;&#21517;&#26631;&#35782;&#20320;&#33258;&#24049;
   <b>@auth_login@</b>, &#20294;&#26159;&#22312;&#25968;&#25454;&#24211;&#20013;&#19981;&#23384;&#22312; (&#19981;&#20877;&#23384;&#22312;). 
-  &#35797;',
+  &#35797;', # MODIF
 'texte_inc_auth_2' => '&#37325;&#26032;&#36830;&#25509;',
 'texte_inc_auth_3' => '&#36864;&#20986;&#28982;&#21518;
   &#37325;&#26032;&#21551;&#21160;&#20320;&#30340;&#27983;&#35272;&#22120;.',
-'texte_inc_config' => '<MODIF>&#20197;&#19979;&#30340;&#36755;&#20837;&#30340;&#20462;&#25913;&#26174;&#33879;&#30340;&#24433;&#21709;&#20102;&#31449;&#28857;&#30340;&#21151;&#33021;
+'texte_inc_config' => '&#20197;&#19979;&#30340;&#36755;&#20837;&#30340;&#20462;&#25913;&#26174;&#33879;&#30340;&#24433;&#21709;&#20102;&#31449;&#28857;&#30340;&#21151;&#33021;
   . &#20180;&#32454;&#23427;&#38500;&#38750;&#20320;&#29087;&#24713;SPIP&#31995;&#32479;&#30340;&#21151;&#33021;
   . <br /><br /><b>&#26356;&#19968;&#33324;&#22320;
  , &#24378;&#28872;&#24314;&#35758;&#20320;&#30340;WEB&#31449;&#28857;&#31649;&#29702;&#21592;
- &#22788;&#29702;&#36825;&#39029;.</b>',
-'texte_inc_meta_1' => '<MODIF>&#31995;&#32479;&#20877;&#20889;&#20837;&#25991;&#20214;<code>@fichier@</code>&#26102;&#36935;&#21040;&#38169;&#35823;&#12290;&#20316;&#20026;&#31449;&#28857;&#31649;&#29702;&#21592;&#35831;',
-'texte_inc_meta_2' => '<MODIF>&#30830;&#35748;&#20889;&#26435;&#38480;',
-'texte_inc_meta_3' => '<MODIF>&#30446;&#24405; ecrire/ &#20043;&#19978;',
+ &#22788;&#29702;&#36825;&#39029;.</b>', # MODIF
+'texte_inc_meta_1' => '&#31995;&#32479;&#20877;&#20889;&#20837;&#25991;&#20214;<code>@fichier@</code>&#26102;&#36935;&#21040;&#38169;&#35823;&#12290;&#20316;&#20026;&#31449;&#28857;&#31649;&#29702;&#21592;&#35831;', # MODIF
+'texte_inc_meta_2' => '&#30830;&#35748;&#20889;&#26435;&#38480;', # MODIF
+'texte_inc_meta_3' => '&#30446;&#24405; ecrire/ &#20043;&#19978;', # MODIF
 'texte_statut_en_cours_redaction' => '&#32534;&#36753;&#20013;',
 'texte_statut_poubelle' => '&#21040;&#22403;&#22334;&#31665;',
 'texte_statut_propose_evaluation' => '&#25552;&#20132;&#35780;&#20272;',
@@ -726,65 +756,65 @@ Zhen QIN (zhen_q@21cn.com)',
 'titre_image_redacteur_02' => '&#32534;&#36753;&#32773;',
 'titre_image_visiteur' => '&#35775;&#38382;&#32773;',
 'titre_joindre_document' => '&#38468;&#21152;&#25991;&#26723;',
-'titre_liens_entrants' => '<MODIF>&#35775;&#38382;&#38142;&#25509;',
+'titre_liens_entrants' => '&#35775;&#38382;&#38142;&#25509;', # MODIF
 'titre_mots_cles' => '&#20851;&#38190;&#35789;',
-'titre_probleme_technique' => '<MODIF>&#35686;&#21578;:&#25216;&#26415;&#38382;&#39064; MYSQL &#21046;&#27490;&#35775;&#38382;&#31449;&#28857;&#30340;&#36825;&#37096;&#20998;,&#35874;&#35874;&#29702;&#35299; .',
+'titre_probleme_technique' => '&#35686;&#21578;:&#25216;&#26415;&#38382;&#39064; MYSQL &#21046;&#27490;&#35775;&#38382;&#31449;&#28857;&#30340;&#36825;&#37096;&#20998;,&#35874;&#35874;&#29702;&#35299; .', # MODIF
 'titre_publier_document' => '&#22312;&#27492;&#26639;&#19979;&#21457;&#24067;&#25991;&#26723;',
 'titre_signatures_attente' => '<modif>&#31614;&#21517;&#31561;&#24453;&#35748;&#35777;',
-'titre_signatures_confirmees' => '<NEW>Signatures confirm&eacute;es',
+'titre_signatures_confirmees' => 'Signatures confirm&eacute;es', # NEW
 'titre_statistiques' => '&#31449;&#28857;&#32479;&#35745;',
 'titre_titre_document' => '&#25991;&#31456;&#26631;&#39064;:',
-'todo' => '<NEW>&agrave; venir',
+'todo' => '&agrave; venir', # NEW
 'trad_reference' => '(&#21442;&#32771;&#25991;&#31456;)',
 
 // Z
-'zbug_balise_b_aval' => '<NEW>&nbsp;: balise B en aval',
-'zbug_balise_inexistante' => '<MODIF>erreur @from@: la balise #@balise@ n\'existe pas',
-'zbug_balise_sans_argument' => '<NEW>Argument manquant dans la balise @balise@',
-'zbug_boucle' => '<NEW>boucle',
-'zbug_boucle_recursive_undef' => '<MODIF>boucle r&eacute;cursive non d&eacute;finie',
-'zbug_calcul' => '<NEW>calcul',
-'zbug_champ_hors_boucle' => '<NEW>Champ @champ@ hors boucle',
-'zbug_champ_hors_motif' => '<MODIF>Champ @champ@ hors d\'une boucle de motif @motif@',
+'zbug_balise_b_aval' => '&nbsp;: balise B en aval', # NEW
+'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n\'existe pas', # MODIF
+'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@', # NEW
+'zbug_boucle' => 'boucle', # NEW
+'zbug_boucle_recursive_undef' => 'boucle r&eacute;cursive non d&eacute;finie', # MODIF
+'zbug_calcul' => 'calcul', # NEW
+'zbug_champ_hors_boucle' => 'Champ @champ@ hors boucle', # NEW
+'zbug_champ_hors_motif' => 'Champ @champ@ hors d\'une boucle de motif @motif@', # MODIF
 'zbug_code' => '&#20195;&#30721;',
-'zbug_critere_inconnu' => '<MODIF>crit&egrave;re inconnu @critere@',
-'zbug_distant_interdit' => '<MODIF>externe interdit',
-'zbug_doublon_table_sans_cle_primaire' => '<MODIF>doublons sur une table sans clef primaire atomique',
-'zbug_doublon_table_sans_index' => '<MODIF>doublons sur une table sans index',
-'zbug_erreur_boucle_double' => '<MODIF>&#29615;@id@: &#37325;&#22797;&#23450;&#20041;',
-'zbug_erreur_boucle_fermant' => '<MODIF>&#29615;@id@: &#32570;&#23569;&#35821;&#21477;&#32467;&#23614;&#26631;&#24535;',
-'zbug_erreur_boucle_syntaxe' => '<MODIF>&#21477;&#27861;&#20013;&#20986;&#29616;&#38169;&#35823;&#30340;&#29615;',
-'zbug_erreur_compilation' => '<NEW>Erreur de compilation',
-'zbug_erreur_execution_page' => '<MODIF>erreur d\'ex&eacute;cution de la page',
-'zbug_erreur_filtre' => '<MODIF>&#38169;&#35823;: &#36807;&#28388;<b>&laquo; @filtre@ &raquo;</b>&#26410;&#23450;&#20041;',
-'zbug_erreur_meme_parent' => '<MODIF>{meme_parent} ne s\'applique qu\'aux boucles (FORUMS) ou (RUBRIQUES)',
-'zbug_erreur_squelette' => '<NEW>Erreur(s) dans le squelette',
-'zbug_hors_compilation' => '<NEW>Hors Compilation',
+'zbug_critere_inconnu' => 'crit&egrave;re inconnu @critere@', # MODIF
+'zbug_distant_interdit' => 'externe interdit', # MODIF
+'zbug_doublon_table_sans_cle_primaire' => 'doublons sur une table sans clef primaire atomique', # MODIF
+'zbug_doublon_table_sans_index' => 'doublons sur une table sans index', # MODIF
+'zbug_erreur_boucle_double' => '&#29615;@id@: &#37325;&#22797;&#23450;&#20041;', # MODIF
+'zbug_erreur_boucle_fermant' => '&#29615;@id@: &#32570;&#23569;&#35821;&#21477;&#32467;&#23614;&#26631;&#24535;', # MODIF
+'zbug_erreur_boucle_syntaxe' => '&#21477;&#27861;&#20013;&#20986;&#29616;&#38169;&#35823;&#30340;&#29615;', # MODIF
+'zbug_erreur_compilation' => 'Erreur de compilation', # NEW
+'zbug_erreur_execution_page' => 'erreur d\'ex&eacute;cution de la page', # MODIF
+'zbug_erreur_filtre' => '&#38169;&#35823;: &#36807;&#28388;<b>&laquo; @filtre@ &raquo;</b>&#26410;&#23450;&#20041;', # MODIF
+'zbug_erreur_meme_parent' => '{meme_parent} ne s\'applique qu\'aux boucles (FORUMS) ou (RUBRIQUES)', # MODIF
+'zbug_erreur_squelette' => 'Erreur(s) dans le squelette', # NEW
+'zbug_hors_compilation' => 'Hors Compilation', # NEW
 'zbug_info_erreur_squelette' => '&#31449;&#28857;&#38169;&#35823;',
-'zbug_inversion_ordre_inexistant' => '<MODIF>inversion d\'un ordre inexistant',
-'zbug_pagination_sans_critere' => '<MODIF>#PAGINATION sans crit&egrave;re {pagination} ou employ&eacute; dans une boucle recursive',
-'zbug_parametres_inclus_incorrects' => '<MODIF>Param&egrave;tres d\'inclusion incorrects',
-'zbug_profile' => '<NEW>Temps de calcul&nbsp;: @time@',
-'zbug_resultat' => '<NEW>r&eacute;sultat',
-'zbug_serveur_indefini' => '<MODIF>serveur SQL ind&eacute;fini',
-'zbug_statistiques' => '<NEW>Statistiques des requ&ecirc;tes SQL class&eacute;es par dur&eacute;e',
+'zbug_inversion_ordre_inexistant' => 'inversion d\'un ordre inexistant', # MODIF
+'zbug_pagination_sans_critere' => '#PAGINATION sans crit&egrave;re {pagination} ou employ&eacute; dans une boucle recursive', # MODIF
+'zbug_parametres_inclus_incorrects' => 'Param&egrave;tres d\'inclusion incorrects', # MODIF
+'zbug_profile' => 'Temps de calcul&nbsp;: @time@', # NEW
+'zbug_resultat' => 'r&eacute;sultat', # NEW
+'zbug_serveur_indefini' => 'serveur SQL ind&eacute;fini', # MODIF
+'zbug_statistiques' => 'Statistiques des requ&ecirc;tes SQL class&eacute;es par dur&eacute;e', # NEW
 'zbug_table_inconnue' => 'SQL&#34920;&#26684; &laquo; @table@ &raquo; &#26410;&#30693;',
-'zxml_connus_attributs' => '<NEW>attributs connus',
-'zxml_de' => '<NEW>de',
-'zxml_inconnu_attribut' => '<NEW>attribut inconnu',
-'zxml_inconnu_balise' => '<NEW>balise inconnue',
-'zxml_inconnu_entite' => '<NEW>entit&eacute; inconnue',
-'zxml_inconnu_id' => '<NEW>ID inconnu',
-'zxml_mais_de' => '<NEW>mais de',
-'zxml_non_conforme' => '<NEW>n\'est pas conforme au motif',
-'zxml_non_fils' => '<NEW>n\'est pas un fils de',
-'zxml_nonvide_balise' => '<NEW>balise non vide',
-'zxml_obligatoire_attribut' => '<NEW>attribut obligatoire mais absent dans',
-'zxml_succession_fils_incorrecte' => '<NEW>succession des fils incorrecte',
-'zxml_survoler' => '<NEW>survoler pour voir les corrects',
-'zxml_valeur_attribut' => '<NEW>valeur de l\'attribut',
-'zxml_vide_balise' => '<NEW>balise vide',
-'zxml_vu' => '<NEW>vu auparavant'
+'zxml_connus_attributs' => 'attributs connus', # NEW
+'zxml_de' => 'de', # NEW
+'zxml_inconnu_attribut' => 'attribut inconnu', # NEW
+'zxml_inconnu_balise' => 'balise inconnue', # NEW
+'zxml_inconnu_entite' => 'entit&eacute; inconnue', # NEW
+'zxml_inconnu_id' => 'ID inconnu', # NEW
+'zxml_mais_de' => 'mais de', # NEW
+'zxml_non_conforme' => 'n\'est pas conforme au motif', # NEW
+'zxml_non_fils' => 'n\'est pas un fils de', # NEW
+'zxml_nonvide_balise' => 'balise non vide', # NEW
+'zxml_obligatoire_attribut' => 'attribut obligatoire mais absent dans', # NEW
+'zxml_succession_fils_incorrecte' => 'succession des fils incorrecte', # NEW
+'zxml_survoler' => 'survoler pour voir les corrects', # NEW
+'zxml_valeur_attribut' => 'valeur de l\'attribut', # NEW
+'zxml_vide_balise' => 'balise vide', # NEW
+'zxml_vu' => 'vu auparavant', # NE
 );
 
 ?>

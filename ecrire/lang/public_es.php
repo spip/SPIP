@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Portada del sitio',
+'article' => 'Art&iacute;culo',
 'articles' => 'Art&iacute;culos',
 'articles_auteur' => 'Art&iacute;culos de esta autora o autor',
 'articles_populaires' => 'Los art&iacute;culos m&aacute;s populares',
@@ -18,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'No hay ning&uacute;n sitio en esta direcci&oacute;n',
 'aucune_breve' => 'No hay ninguna breve en esta direcci&oacute;n',
 'aucune_rubrique' => 'No hay ninguna secci&oacute;n en esta direcci&oacute;n',
+'auteur' => 'Autor o autora',
 'autres' => 'Otros',
 'autres_breves' => 'Otros breves',
 'autres_groupes_mots_clefs' => 'Otros grupos de palabras clave',
@@ -25,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bonjour' => 'Hola',
+'breve' => 'Breve',
 'breves' => 'Breves',
 
 // C
@@ -67,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Mensaje',
 'messages_forum' => 'Mensajes del foro',
 'messages_recents' => 'Los mensajes m&aacute;s recientes del foro',
+'mots_clef' => 'Palabra clave',
 'mots_clefs' => 'Palabras clave',
 'mots_clefs_meme_groupe' => 'Palabras claves en el mismo grupo',
 
@@ -79,7 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nouvelles_breves' => 'Nuevas breves',
 
 // P
-'page_precedente' => 'P&aacute;gina precedente',
+'page_precedente' => 'P&aacute;gina anterior',
 'page_suivante' => 'P&aacute;gina siguiente',
 'par_auteur' => 'por ',
 'participer_site' => 'Puedes participar en la vida de este sitio y proponer art&iacute;culos inscribi&eacute;ndote aqui. De inmediato recibir&aacute;s un correo electr&oacute;nico con tus claves de acceso al espacio privado del sitio.',

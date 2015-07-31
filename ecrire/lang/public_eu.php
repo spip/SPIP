@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Ataria',
+'article' => 'Article', # NEW
 'articles' => 'Artikuluak',
 'articles_auteur' => 'Egile honen artikuluak',
 'articles_populaires' => 'artikulu arrakastatsuenak',
@@ -18,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'ez dago gunerik helbide honetan',
 'aucune_breve' => 'Ez dago laburrik helbide honetan',
 'aucune_rubrique' => 'Ez dago gairik helbide honetan',
+'auteur' => 'Auteur', # NEW
 'autres' => 'Beste',
 'autres_breves' => 'beste laburrak',
 'autres_groupes_mots_clefs' => 'Beste gako-hitz multzoak',
@@ -25,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bonjour' => 'Agur',
+'breve' => 'Br&egrave;ve', # NEW
 'breves' => 'Laburrak',
 
 // C
@@ -67,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Mezua',
 'messages_forum' => 'Berri-taldeetako mezuak',
 'messages_recents' => 'Berri-taldeetako azken mezuak',
+'mots_clef' => 'Mot-cl&eacute;', # NEW
 'mots_clefs' => 'Gako-hitz',
 'mots_clefs_meme_groupe' => 'Talde bereko hitz-gakoak',
 

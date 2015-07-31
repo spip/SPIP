@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Degemer al lec\'hienn',
+'article' => 'Article', # NEW
 'articles' => 'Pennado&ugrave;',
 'articles_auteur' => 'Pennado&ugrave; all ar skridaozer-ma&ntilde;',
 'articles_populaires' => 'Pennado&ugrave; lennet ar muia&ntilde;',
@@ -18,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'N\'eus lec\'hienn ebet er chomlec\'h-ma&ntilde;',
 'aucune_breve' => 'N\'eus berrskrid ebet er chomlec\'h-ma&ntilde;',
 'aucune_rubrique' => 'N\'eus rubrikenn ebet er chomlec\'h-ma&ntilde;',
+'auteur' => 'Auteur', # NEW
 'autres' => 'Re all',
 'autres_breves' => 'Berrskrido&ugrave; all',
 'autres_groupes_mots_clefs' => 'Strollado&ugrave; gerio&ugrave;-stur all',
@@ -25,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bonjour' => 'Demat deoc\'h',
+'breve' => 'Br&egrave;ve', # NEW
 'breves' => 'Berrskrido&ugrave;',
 
 // C
@@ -67,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Kemennadenn',
 'messages_forum' => 'Kemennadenno&ugrave; forom',
 'messages_recents' => 'Kemennadenno&ugrave; forom diwezha&ntilde;',
+'mots_clef' => 'Mot-cl&eacute;', # NEW
 'mots_clefs' => 'Gerio&ugrave;-stur',
 'mots_clefs_meme_groupe' => 'Gerio&ugrave;-stur er strollad-ma&ntilde;',
 

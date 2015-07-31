@@ -26,12 +26,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Wichtege Grupp:</b> &euml;t ass wiirklech ugeroden e Schl&euml;sselwuert aus d&euml;sem Grupp ze wielen.',
 'avis_deplacement_rubrique' => 'Opgepasst! D&euml;s Rubrik huet @contient_breves@ br&egrave;ve@scb@: wann der se r&eacute;ckelt, klickt d&euml;st Konfirmatiouns-Feld un.',
 'avis_destinataire_obligatoire' => 'Dir musst d&euml;n Empf&auml;nger uginn ier der d&euml;sen Message fortsch&eacute;ckt.',
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;me ?', # NEW
 'avis_erreur_connexion_mysql' => 'Fehler bei der SQL-Verbindung',
 'avis_erreur_version_archive' => 'Opgepasst! De Fichier @archive@ korrespond&eacute;iert zu enger anerer SPIP-Versioun w&eacute;i d&eacute;i install&eacute;iert.
 Dir kommt an grouss Schwieregkeeten:
-Risiko dass &auml;r Datebank zerst&eacute;iert g&euml;t, generellen Disfonktionnement vum Site, asw. Best&auml;tegt d&euml;sen Import n&euml;t.<p />Fir m&eacute;i Informatiounen kuckt an <a href="@spipnet@">
-der Dokumentatioun vu SPIP</a>.',
-'avis_espace_interdit' => '<b>Gespaarten Deel</b><p />SPIP ass schon install&eacute;iert.',
+Risiko dass &auml;r Datebank zerst&eacute;iert g&euml;t, generellen Disfonktionnement vum Site, asw. Best&auml;tegt d&euml;sen Import n&euml;t.<p>Fir m&eacute;i Informatiounen kuckt an <a href="@spipnet@">
+der Dokumentatioun vu SPIP</a>.</p>', # MODIF
+'avis_espace_interdit' => '<b>Gespaarten Deel</b><p>SPIP ass schon install&eacute;iert.</p>',
 'avis_lecture_noms_bases_1' => 'Den Installatiouns-Programm konnt d\'Nimm vun den install&eacute;iertent Datebanken n&euml;t liesen.',
 'avis_lecture_noms_bases_2' => 'Etweder steet keng Datebank zur Verf&uuml;gung, oder d\'Fonktioun fir d\'Datebanken opzel&euml;schten ass aus S&euml;cherheetsgr&euml;nn ausgeschalt ginn (dat ass esou bei villen Provider\'en).',
 'avis_lecture_noms_bases_3' => 'Am zweeten Fall ass et m&eacute;iglech dass eng Datebank mam selwechten Numm w&eacute;i &auml;ren Login ka benotzt ginn:',
@@ -142,6 +143,7 @@ der Dokumentatioun vu SPIP</a>.',
 // E
 'email' => 'Email',
 'email_2' => 'Email:',
+'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Adress vun der Sammlung',
 'entree_adresse_email' => '&Auml;r Email-Adress',
 'entree_adresse_fichier_syndication' => 'Adress vum Fichier fir d\'Syndicatioun:',
@@ -178,6 +180,7 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'entree_texte_breve' => 'Text vun der Kuerzmeldung',
 'entree_titre_obligatoire' => '<b>Titel</b> [Obligatoresch]<br />',
 'entree_url' => 'D\'Adress (URL) vun &auml;rem Site',
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Fichier fehlt',
 'erreur_plugin_fichier_def_absent' => 'Definitiouns-Fichier fehlt',
 'erreur_plugin_nom_fonction_interdit' => 'Fonktiouns-Numm verbueden',
@@ -188,6 +191,10 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 
 // F
 'forum_info_original' => 'Original',
+
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
 'ical_info1' => 'D&euml;s S&auml;it bitt verschidde M&eacute;igl&euml;chkeeten fir mam Liewen vun d&euml;sem Site a Kontakt ze bleiwen.',
@@ -203,16 +210,12 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Mailing-L&euml;scht',
 'ical_titre_rss' => 'Syndicatiouns-Fichier\'en',
-'icone_accueil' => 'Degemer',
 'icone_activer_cookie' => 'De Korrespondenz-Cookie activ&eacute;ieren',
-'icone_activite' => 'Oberiantiz',
 'icone_admin_plugin' => 'Plugin\'en verwalten',
-'icone_administration' => 'Mera&ntilde;',
 'icone_afficher_auteurs' => 'Auteuren weisen',
 'icone_afficher_visiteurs' => 'Visiteuren weisen',
 'icone_arret_discussion' => 'N&euml;t m&eacute;i un d&euml;ser Diskussioun deelhuelen',
 'icone_calendrier' => 'Kalenner',
-'icone_configuration' => 'Kefluniadur',
 'icone_creation_groupe_mots' => 'E Schl&euml;sselwierder-Grupp maachen',
 'icone_creation_mots_cles' => 'E Schl&euml;sselwuert maachen',
 'icone_creer_auteur' => 'E neien Auteur derb&auml;i setzen an un d&euml;sen Artikel bannen',
@@ -222,12 +225,8 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'icone_creer_mot_cle_site' => 'E neit Schl&euml;sselwuert maachen an et un d&euml;se Site bannen',
 'icone_creer_rubrique_2' => 'Nei Rubrik derb&auml;i setzen',
 'icone_ecrire_nouvel_article' => 'Kuerzmeldungen aus d&euml;ser Rubrik',
-'icone_edition' => 'Aoza&ntilde;',
 'icone_envoyer_message' => 'D&euml;se Message sch&eacute;cken',
 'icone_evolution_visites' => 'Evolutioun vun den Visiten<br />@visites@ Visiten',
-'icone_ma_langue' => 'Ma yezh',
-'icone_mes_infos' => 'Ma zitouro&ugrave;',
-'icone_mes_preferences' => 'Ma fenndibabo&ugrave;',
 'icone_modif_groupe_mots' => 'D&euml;se Schl&euml;sselwierder-Grupp &auml;nneren',
 'icone_modifier_article' => 'D&euml;sen Artikel &auml;nneren',
 'icone_modifier_breve' => 'D&euml;s Kuerzmeldung &auml;nneren',
@@ -236,7 +235,6 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'icone_modifier_rubrique' => 'D&euml;s Rubrik &auml;nneren',
 'icone_modifier_site' => 'D&euml;se Site &auml;nneren',
 'icone_poster_message' => 'Message sch&eacute;cken',
-'icone_publication' => 'Embann',
 'icone_publier_breve' => 'D&euml;s Kuerzmeldung publiz&eacute;ieren',
 'icone_referencer_nouveau_site' => 'Neie Site uginn',
 'icone_refuser_breve' => 'D&euml;s Kuerzmeldung refus&eacute;ieren',
@@ -244,13 +242,11 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'icone_retour' => 'Zer&euml;ck',
 'icone_retour_article' => 'Zer&euml;ck bei den Artikel',
 'icone_suivi_forum' => 'Den &ouml;ffentlechen Forum verfolgen: @nb_forums@&nbsp;Beitr&auml;g',
-'icone_suivi_publication' => 'Heulia&ntilde; an embann',
 'icone_supprimer_cookie' => 'Korrespondenz-Cookie l&auml;schen',
 'icone_supprimer_groupe_mots' => 'D&euml;se Grupp l&auml;schen',
 'icone_supprimer_rubrique' => 'D&euml;s Rubrik l&auml;schen',
 'icone_supprimer_signature' => 'D&euml;s &Euml;nnerschr&euml;ft l&auml;schen',
 'icone_valider_signature' => 'D&euml;s &Euml;nnerschr&euml;ft valid&eacute;ieren',
-'icone_visiter_site' => 'Gwelet al lec\'hienn foran',
 'icone_voir_sites_references' => 'Referenz&eacute;iert Siten weisen',
 'icone_voir_tous_mots_cles' => 'All d\'Schl&euml;sselwierder weisen',
 'image_administrer_rubrique' => 'Dir k&euml;nnt d&euml;s Rubrik administr&eacute;ieren',
@@ -261,6 +257,8 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'info_activer_forum_public' => '<i>Fir d&eacute;i &ouml;ffentl&euml;ch Forum\'en anzeschalten, wielt d\'Default-Moderatiouns-Method:</i>',
 'info_admin_gere_rubriques' => 'D&euml;sen Administrateur k&euml;nmert s&euml;ch &euml;m folgend Rubriken:',
 'info_admin_gere_toutes_rubriques' => 'D&euml;sen Administrateur k&euml;mmert s&euml;ch &euml;m <b>all Rubriken</b>.',
+'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
+'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Administrateur',
 'info_administrateur_1' => 'Administrateur',
 'info_administrateur_2' => 'vum Site (<i>oppassen beim benotzen)',
@@ -333,7 +331,7 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'info_conflit_edition_votre_version' => '&Auml;r Versioun:',
 'info_connexion_base' => 'Versichen mat der Datebank ze verbannen',
 'info_connexion_base_donnee' => 'Verbannen mat &auml;rer Datebank',
-'info_connexion_ldap_ok' => 'D\'LDAP-Verbindung huet geklappt.</b><p />Weider bei de n&auml;chsten Schr&euml;tt.',
+'info_connexion_ldap_ok' => 'D\'LDAP-Verbindung huet geklappt.</b><p>Weider bei de n&auml;chsten Schr&euml;tt.</p>', # MODIF
 'info_connexion_mysql' => '&Auml;r SQL-Verbindung',
 'info_connexion_ok' => 'D\'Verbindung huet geklappt.',
 'info_contact' => 'Kontakt',
@@ -378,9 +376,9 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'info_forum_ouvert' => 'Am privaten Deel vum Site g&euml;t &euml;t e Forum fir d\'Redakteren. Dir k&euml;nnt hei nach e Forum, just fir d\'Administrateuren, aschalten.',
 'info_forum_statistiques' => 'Statistik vun de Visiten',
 'info_forums_abo_invites' => '&Auml;re Site huet Forum\'en wou een sech umelden muss; d\'Visiteuren ginn also agelueden s&euml;ch ze enregistr&eacute;ieren.',
-'info_gauche_admin_effacer' => '<b>D&euml;s S&auml;it ass fir d&eacute;i Responsabel vum Site reserv&eacute;iert.</b><p />Si erlaabt d\'Maintenance-Aarbechten. Bei verschiddene Prozeduren muss een s&euml;ch iwwer FTP identifiz&eacute;ieren k&euml;nnen.',
-'info_gauche_admin_tech' => '<b>D&euml;s S&auml;it ass fir d&eacute;i Responsabel vum Site reserv&eacute;iert.</b><p />Si erlaabt d\'Maintenance-Aarbechten. Bei verschiddene Prozeduren muss een s&euml;ch iwwer FTP identifiz&eacute;ieren k&euml;nnen.',
-'info_gauche_admin_vider' => '<b>D&euml;s S&auml;it ass fir d&eacute;i Responsabel vum Site reserv&eacute;iert.</b><p />Si erlaabt d\'Maintenance-Aarbechten. Bei verschiddene Prozeduren muss een s&euml;ch iwwer FTP identifiz&eacute;ieren k&euml;nnen.',
+'info_gauche_admin_effacer' => '<b>D&euml;s S&auml;it ass fir d&eacute;i Responsabel vum Site reserv&eacute;iert.</b><p>Si erlaabt d\'Maintenance-Aarbechten. Bei verschiddene Prozeduren muss een s&euml;ch iwwer FTP identifiz&eacute;ieren k&euml;nnen.</p>', # MODIF
+'info_gauche_admin_tech' => '<b>D&euml;s S&auml;it ass fir d&eacute;i Responsabel vum Site reserv&eacute;iert.</b><p>Si erlaabt d\'Maintenance-Aarbechten. Bei verschiddene Prozeduren muss een s&euml;ch iwwer FTP identifiz&eacute;ieren k&euml;nnen.</p>', # MODIF
+'info_gauche_admin_vider' => '<b>D&euml;s S&auml;it ass fir d&eacute;i Responsabel vum Site reserv&eacute;iert.</b><p>Si erlaabt d\'Maintenance-Aarbechten. Bei verschiddene Prozeduren muss een s&euml;ch iwwer FTP identifiz&eacute;ieren k&euml;nnen.</p>', # MODIF
 'info_gauche_auteurs' => 'Hei fannt dir all d\'Auteur\'en vum Site.
 Hiren Zoustand ass duerch d\'Faarw ugewisen (Administrateur = gr&eacute;ng; Redakter = giel).',
 'info_gauche_auteurs_exterieurs' => 'D&eacute;i extern Auteuren ouni Zougang zum Site sinn mat enger bloer Ikone mark&eacute;iert, d&eacute;i gel&auml;schten Auteuren mat enger Drecksk&euml;scht.',
@@ -492,7 +490,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'info_pas_de_forum' => 'keen Forum',
 'info_passe_trop_court' => 'Passwuert ze kuerz.',
 'info_passes_identiques' => 'D&eacute;i zwee Passwierder si n&euml;t selwecht.',
-'info_pense_bete_ancien' => '&Auml;r al Notizen',
+'info_pense_bete_ancien' => '&Auml;r al Notizen', # MODIF
 'info_plus_cinq_car' => 'm&eacute;i w&eacute;i 5 Buchstawen',
 'info_plus_cinq_car_2' => '(M&eacute;i w&eacute;i 5 Buchstawen)',
 'info_plus_trois_car' => '(M&eacute;i w&eacute;i 3 Buchstawen)',
@@ -519,7 +517,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'info_question_activer_compactage_js' => 'W&euml;llt dir d\'Kompressioun vun de Skripter (Javascript) aschalten?',
 'info_question_activer_compresseur' => 'W&euml;llt dir d\'Kompressioun vum HTTP-Flow aschalten?',
 'info_question_gerer_statistiques' => 'Soll &auml;re Site d\'Statistik vun de Visiten g&eacute;r&eacute;ieren?',
-'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Accept&eacute;iert dier d\'Aschreiwe vu neie Redakteren direkt vum &ouml;ffentl&euml;che Site? Wa jo, da k&euml;nnen d\'Visiteuren s&euml;ch iwert een automat&euml;sche Formulaire aschreiwen an esou Zougang op de privaten Deel kr&eacute;ien fir hir Artikelen ze propos&eacute;ieren. <blockquote><i>W&auml;hrend der Aschreiwungs-Phase kr&eacute;ien d\'Benotzer automat&euml;sch en Email mat hieren Zougangsinformatiounen. Verschidde Provideren verbidden d\'Sch&eacute;cken vun Email vun hieren Serveren aus: an deem Fall ass d\'automat&euml;scht Aschreiwen onm&eacute;iglech.',
+'info_question_inscription_nouveaux_redacteurs' => 'Accept&eacute;iert dier d\'Aschreiwe vu neie Redakteren direkt vum &ouml;ffentl&euml;che Site? Wa jo, da k&euml;nnen d\'Visiteuren s&euml;ch iwert een automat&euml;sche Formulaire aschreiwen an esou Zougang op de privaten Deel kr&eacute;ien fir hir Artikelen ze propos&eacute;ieren. <blockquote><i>W&auml;hrend der Aschreiwungs-Phase kr&eacute;ien d\'Benotzer automat&euml;sch en Email mat hieren Zougangsinformatiounen. Verschidde Provideren verbidden d\'Sch&eacute;cken vun Email vun hieren Serveren aus: an deem Fall ass d\'automat&euml;scht Aschreiwen onm&eacute;iglech.', # MODIF
 'info_question_mots_cles' => 'W&euml;llt dir Schl&euml;sselwierder op &auml;rem Site benotzen?',
 'info_question_proposer_site' => 'Wie kann e Site propos&eacute;ieren?',
 'info_question_utilisation_moteur_recherche' => 'W&euml;llt dir de Sich-Motor vu SPIP benotzen?
@@ -628,6 +626,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'info_total' => 'Total:',
 'info_tous_articles_en_redaction' => 'All d\'Artikelen an der Aarbecht',
 'info_tous_articles_presents' => 'All d\'Artikelen d&eacute;i an d&euml;ser Rubrik publiz&eacute;iert sinn',
+'info_tous_articles_refuses' => 'Tous les articles refus&eacute;s', # NEW
 'info_tous_les' => 'all:',
 'info_tous_redacteurs' => 'Annoncen un all d\'Redakteren',
 'info_tout_site' => 'De ganzen Site',
@@ -666,7 +665,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'install_select_langue' => 'Wielt eng Sprooch a klickt op de Kn&auml;ppchen "Weider" fir d\'Installatioun ze starten.',
 'install_select_type_db' => 'Gidd den Typ vun der Datebank un:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pg' => 'PostgreSQL',
+'install_select_type_pg' => 'PostgreSQL', # NEW
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Datebankserver vum Hosting zougewisen',
@@ -749,11 +748,9 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'jour_non_connu_nc' => '?',
 
 // L
-'label_choix_langue' => 'Dibabit ho yezh',
-'label_slogan_site' => 'Lugan al lec\'hienn',
-'label_taille_ecran' => 'Ledander ar skramm',
-'label_texte_et_icones_navigation' => 'La&ntilde;ser merdei&ntilde;',
-'label_texte_et_icones_page' => 'Diskwel e diabarzh ar bajenn',
+'ldap_correspondance' => 'h&eacute;ritage du champ @champ@', # NEW
+'ldap_correspondance_1' => 'H&eacute;ritage des champs LDAP', # NEW
+'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Destinataire derb&auml;i setzen',
 'lien_ajouter_auteur' => 'D&euml;sen Auteur derb&auml;i setzen',
 'lien_ajouter_participant' => 'E Mataarbechter derb&auml;i setzen',
@@ -781,7 +778,6 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'logo_article' => 'LOGO VUM ARTIKEL',
 'logo_auteur' => 'LOGO VUM AUTEUR',
 'logo_breve' => 'LOGO VUN DER KUERZMELDUNG',
-'logo_groupe' => 'LOGO VUN D&Euml;SEM GROUP',
 'logo_mot_cle' => 'LOGO VUM SCHL&Euml;SSELWUERT',
 'logo_rubrique' => 'LOGO VUN DER RUBRIK',
 'logo_site' => 'LOGO VUM SITE',
@@ -797,6 +793,9 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'module_texte_traduction' => 'De Sprooche-Fichier &laquo;&nbsp;@module@&nbsp;&raquo; g&euml;tt et op:',
 'mois_non_connu' => 'onbekannt',
 
+// N
+'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
+
 // O
 'onglet_contenu' => 'Inhalt',
 'onglet_declarer_une_autre_base' => 'Eng aner Datebank d&eacute;clar&eacute;ieren',
@@ -806,24 +805,12 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'onglet_proprietes' => 'Propri&eacute;t&eacute;iten',
 'onglet_repartition_actuelle' => 'elo',
 'onglet_sous_rubriques' => '&Euml;nner-Rubriken',
-'ortho_ajouter_ce_mot' => 'D&euml;st Wuert an den Dictionnaire derb&auml;i setzen',
-'ortho_aucune_suggestion' => 'Keng Suggestioun fonnt fir d&euml;st Wuert.',
-'ortho_avis_privacy' => 'En Orthographie-Korrektor ass a SPIP integr&eacute;ert. Ier dier d&euml;s Fonktionnalit&eacute;it aschalt, liest w.e.g. de n&auml;chsten Abschnit:',
-'ortho_avis_privacy2' => 'Fir d\'Orthographie vun engem Text ze kontroll&eacute;ieren, sch&eacute;ckt de Site d\'L&euml;scht vun de Wierder op en externen "Orthographie-Server" deen vun de Membere vun der SPIP-Communaut&eacute;it bereed gestalt g&euml;tt. D\'Wierder ginn duergerneen gesch&eacute;ckt fir e Minimum vun Vertraul&euml;chkeet ze garant&eacute;ieren. Wann dir &euml;m &auml;r Daten besuergt sidd, da schalt d&euml;s Optioun n&euml;t an (an huelt direkt &auml;r Informationen vum Internet erof).',
-'ortho_ce_mot_connu' => 'D&euml;st Wuert g&euml;t &euml;t am Dictionnaire vum Site.',
-'ortho_dico_absent' => 'Fir d&euml;s Sprooch gouf keen Dictionnaire fonnt.',
-'ortho_mode_demploi' => 'D&eacute;i onbekannte Wierder si roud mark&eacute;iert. Dir k&euml;nnt op all Wuert klicken fir Viirsch&eacute;i fir d\'Korrektur ze gesinn.',
-'ortho_mots_a_corriger' => 'Wierder ze verbesseren',
-'ortho_orthographe' => 'Orthographie',
-'ortho_supprimer_ce_mot' => 'D&euml;st Wuert aus dem Dictionnaire l&auml;schen',
-'ortho_trop_de_fautes' => 'Opgepasst: &auml;ren Text huet zevill Fehler, &euml;t g&euml;t keng Korrektur virgeschlo&euml;n fir de System n&euml;t ze iwwerlaaschten.',
-'ortho_verif_impossible' => 'De System kann d\'Orthographie vun d&euml;sem Text n&euml;t kontroll&eacute;ieren.',
-'ortho_verifier' => 'Orthographie kontroll&eacute;ieren',
 
 // P
 'page_pas_proxy' => 'D&euml;s S&auml;it d&auml;rf n&euml;t duerch de Proxy',
 'pas_de_proxy_pour' => 'Wa n&eacute;ideg dann gidd d&eacute;i Maschinen oder Domainer un fir d&eacute;i d&euml;se Proxy n&euml;t zielt (z.B.: @exemple@)',
 'plugin_charge_paquet' => 'De Package @name@ lueden',
+'plugin_charger' => 'T&#233;l&#233;charger', # NEW
 'plugin_erreur_charger' => 'Fehler: onm&eacute;iglech @zip@ ze lueden',
 'plugin_erreur_droit1' => 'D\'Directory <code>@dest@</code> ass n&euml;t schreiwbar.',
 'plugin_erreur_droit2' => 'Kontroll&eacute;iert d\'Rechter op d&euml;ser Directory oder install&eacute;iert d\'Fichier\'en via FTP.',
@@ -834,6 +821,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'plugin_etat_test' => 'am Test',
 'plugin_impossible_activer' => 'De Plugin @plugin@ ka n&euml;t aktiv&eacute;iert ginn',
 'plugin_info_automatique1' => 'Wann dir d\'automat&euml;sch Installatioun vun Plugin\'e erlaabt, dann:',
+'plugin_info_automatique1_lib' => 'Si vous souhaitez autoriser l\'installation automatique de cette librairie, veuillez&nbsp;:', # NEW
 'plugin_info_automatique2' => 'erstellt de R&eacute;pertoire <code>@rep@</code>;',
 'plugin_info_automatique3' => 'kontroll&eacute;iert op de Server kann an d&euml;se Repertoire schreiwen.',
 'plugin_info_automatique_creer' => 'am Root-Repertoire vum Site ze erstellen.',
@@ -845,6 +833,8 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'plugin_info_automatique_liste_update' => 'L&euml;schten updaten',
 'plugin_info_automatique_ou' => 'oder...',
 'plugin_info_automatique_select' => 'Wielt e Plugin: SPIP lued en erof an install&eacute;iert en am Repertoire <code>@rep@</code>; wann de Plugin schons do ass g&euml;tt en Update gemaach.',
+'plugin_info_extension_1' => 'Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@.', # NEW
+'plugin_info_extension_2' => 'Elles ne sont pas d&#233;sactivables.', # NEW
 'plugin_info_telecharger' => 'Eroflueden vun @url@ an Installatioun an @rep@',
 'plugin_librairies_installees' => 'Install&eacute;iert Librairie\'en',
 'plugin_necessite_lib' => 'D&euml;se Plugin brauch d\'Librairie @lib@',
@@ -853,6 +843,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'plugin_source' => 'Quell:&nbsp;',
 'plugin_titre_automatique' => 'Automat&euml;sch Installatioun',
 'plugin_titre_automatique_ajouter' => 'Plugin\'e derb&auml;i setzen',
+'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
 'plugin_zip_active' => 'Fuert weider fir ze aktiv&eacute;ieren',
 'plugin_zip_adresse' => 'gidd hei d\'Adress vun engem Plugin-Zip-Fichier un, oder d\'Adress vun enger L&euml;scht vu Plugin\'e.',
 'plugin_zip_adresse_champ' => 'Adress vum Plugin oder vun der L&euml;scht&nbsp;',
@@ -861,11 +852,17 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'plugin_zip_installe_rep_finie' => 'De Fichier @zip@ ass entpackt an am Repertoire @rep@ install&eacute;iert ginn',
 'plugin_zip_installer' => 'Dir k&euml;nnt en elo install&eacute;ieren.',
 'plugin_zip_telecharge' => 'De Fichier @zip@ ass erofgeluede ginn',
+'plugins_actif_aucun' => 'Aucun plugin activ&#233;.', # NEW
+'plugins_actif_un' => 'Un plugin activ&#233;.', # NEW
 'plugins_actifs' => '@count@ aktiv&eacute;iert Plugin\'e.',
+'plugins_actifs_liste' => 'Plugins actifs', # NEW
 'plugins_compte' => '@count@ Plugin\'e',
+'plugins_disponible_un' => 'Un plugin disponible.', # NEW
 'plugins_disponibles' => '@count@ Plugin\'e verf&uuml;gbar.',
 'plugins_erreur' => 'Fehler an de Plugin\'e: @plugins@',
 'plugins_liste' => 'L&euml;scht vun de Plugin\'en',
+'plugins_liste_extensions' => 'Extensions', # NEW
+'plugins_recents' => 'Plugins r&eacute;cents.', # NEW
 'plugins_vue_hierarchie' => 'Hi&eacute;rarchie',
 'plugins_vue_liste' => 'L&euml;scht',
 'protocole_ldap' => 'Versioun vum Protokol:',
@@ -942,7 +939,7 @@ Benotzt d\'L&euml;scht hei dr&euml;nner fir unzegin w&eacute;i eng Elementer e k
 'texte_date_publication_article' => 'PUBLIZ&Eacute;IRT DEN:',
 'texte_descriptif_petition' => 'Beschreiwung vun der Petitioun',
 'texte_descriptif_rapide' => 'Kuerz Beschreiwung',
-'texte_documents_joints' => 'Dir k&euml;nnt Dokumenter (Fichier\'en, Biller, Multimedia, asw) bei den Artikelen an/oder de Rubriken erlaben. D&euml;s Fichier\'en k&euml;nnen dann am Artikel gelinkt oder separat ugewisen ginn.<p />',
+'texte_documents_joints' => 'Dir k&euml;nnt Dokumenter (Fichier\'en, Biller, Multimedia, asw) bei den Artikelen an/oder de Rubriken erlaben. D&euml;s Fichier\'en k&euml;nnen dann am Artikel gelinkt oder separat ugewisen ginn.', # MODIF
 'texte_documents_joints_2' => 'D&euml;s Astellung verh&euml;nnert n&euml;t Biller direkt an den Artikel derb&auml;i ze setzen.',
 'texte_effacer_base' => 'D\'SPIP-Datebank l&auml;schen',
 'texte_effacer_donnees_indexation' => 'Den Index l&auml;schen',
@@ -950,9 +947,9 @@ Benotzt d\'L&euml;scht hei dr&euml;nner fir unzegin w&eacute;i eng Elementer e k
 'texte_en_cours_validation' => 'D&euml;s Artikelen a Kuerzmeldungen sinn fir d\'Publikatioun propos&eacute;iert.',
 'texte_en_cours_validation_forum' => 'Gidd &auml;r Meenung am Forum deen dozou geheiert of.',
 'texte_enrichir_mise_a_jour' => 'Dir k&euml;nnt de Layout verbesseren mat "typographeschen Ofkiirzungen".',
-'texte_fichier_authent' => '<b>Soll SPIP d&eacute;i speziell Fichier\'en <tt>.htpasswd</tt> an <tt>.htpasswd-admin</tt> am Dossier @dossier@ maachen?</b><p />
-D&euml;s Fichier\'en k&euml;nnen den Zougang vun den Redakteren an Administrateuren op verschidden Deeler vum Site kontroll&eacute;ieren (z.B. externe Statistik-Program).<p />
-Wann dir dat n&euml;t braucht, da loosst d&euml;s Optioun op sengem Default (k&eacute;ng Fichier\'en maachen).',
+'texte_fichier_authent' => '<b>Soll SPIP d&eacute;i speziell Fichier\'en <tt>.htpasswd</tt> an <tt>.htpasswd-admin</tt> am Dossier @dossier@ maachen?</b><p>
+D&euml;s Fichier\'en k&euml;nnen den Zougang vun den Redakteren an Administrateuren op verschidden Deeler vum Site kontroll&eacute;ieren (z.B. externe Statistik-Program).</p><p>
+Wann dir dat n&euml;t braucht, da loosst d&euml;s Optioun op sengem Default (k&eacute;ng Fichier\'en maachen).</p>', # MODIF
 'texte_informations_personnelles_1' => 'De System g&euml;t Iech elo e personnalis&eacute;ierten Zougang zum Site.',
 'texte_informations_personnelles_2' => '(N.B.: wann &euml;t eng Re-Installatioun ass, a wann &auml;ren Zougang nach fonktionn&eacute;iert,',
 'texte_introductif_article' => '(Aleedung vum Artikel.)',
@@ -983,7 +980,7 @@ Elo muss d\'Datebank vum Site ugepasst ginn.',
 'texte_nouveau_message' => 'Neie Message',
 'texte_nouveau_mot' => 'Neit Wuert',
 'texte_nouvelle_version_spip_1' => 'Dir hut eng nei Versioun vu SPIP install&eacute;iert.',
-'texte_nouvelle_version_spip_2' => 'D&euml;s nei Versioun verlaangt e m&eacute;i kompletten Update w&eacute;i normalerweis. Wann dir de Webmaster vum Site sidd, l&auml;scht de Fichier @connect@ a fuert mat der Installatioun weider fir &auml;r Zougangsparameteren un d\'Datebank unzepassen.<p />(N.B.: wann dir &auml;r Parameteren vergiess hutt, kuckt am Fichier @connect@ ier d&euml;r e l&auml;scht...)',
+'texte_nouvelle_version_spip_2' => 'D&euml;s nei Versioun verlaangt e m&eacute;i kompletten Update w&eacute;i normalerweis. Wann dir de Webmaster vum Site sidd, l&auml;scht de Fichier @connect@ a fuert mat der Installatioun weider fir &auml;r Zougangsparameteren un d\'Datebank unzepassen.<p>(N.B.: wann dir &auml;r Parameteren vergiess hutt, kuckt am Fichier @connect@ ier d&euml;r e l&auml;scht...)</p>', # MODIF
 'texte_operation_echec' => 'Gidd op d&eacute;i l&auml;scht S&auml;it zer&euml;ck, wielt eng aner Datebank oder setzt eng derb&auml;i. Kontroll&eacute;iert d\'Informatiounen vun &auml;rem Provider.',
 'texte_plus_trois_car' => 'm&eacute;i w&eacute;i 3 Buchstawen',
 'texte_plusieurs_articles' => 'E puer Artikelen fonnt vum "@cherche_auteur@":',
@@ -999,7 +996,7 @@ Elo muss d\'Datebank vum Site ugepasst ginn.',
 'texte_reference_mais_redirige' => 'Artikel aus dem SPIP-Site, awer op eng aner URL &euml;mgeleed.',
 'texte_referencement_automatique' => '<b>Automat&euml;scht Referenz&eacute;ieren vun engem Site</b><br />Dir k&euml;nnt e Site s&eacute;ier referenz&eacute;ieren an dem der hei d\'URL oder d\'Adress vun sengem Syndicatiouns-Fichier ugitt. SPIP kritt dann automatesch d\'Informatiounen (Titel, Beschreiwung...).',
 'texte_referencement_automatique_verifier' => 'Kontroll&eacute;iert d\'Informatiounen d&eacute;i vun <tt>@url@</tt> koum sinn ier d&euml;r sp&auml;ichert.',
-'texte_requetes_echouent' => '<b>Wa verschidden SQL-Query\'en systematesch an ouni sichtbar Ursaach fehlschlo&euml;n, ass &euml;t m&eacute;iglech dat &euml;t un der Datebank h&auml;ngt.</b><p /> SQL kann seng Tabellen fl&eacute;cken wann se futti sinn. Dir k&euml;nnt hei eng Reparatur prob&eacute;ieren; wann &euml;t n&euml;t geet, kop&eacute;iert den Affichage, do sinn vill&auml;icht Hinweiser op dat wat n&euml;t fonktionn&eacute;iert...<p /> Wann de Problem weider besteet, kontakt&eacute;iert &auml;ren Hosting.<p />',
+'texte_requetes_echouent' => '<b>Wa verschidden SQL-Query\'en systematesch an ouni sichtbar Ursaach fehlschlo&euml;n, ass &euml;t m&eacute;iglech dat &euml;t un der Datebank h&auml;ngt.</b><p> SQL kann seng Tabellen fl&eacute;cken wann se futti sinn. Dir k&euml;nnt hei eng Reparatur prob&eacute;ieren; wann &euml;t n&euml;t geet, kop&eacute;iert den Affichage, do sinn vill&auml;icht Hinweiser op dat wat n&euml;t fonktionn&eacute;iert...</p><p> Wann de Problem weider besteet, kontakt&eacute;iert &auml;ren Hosting.</p>', # MODIF
 'texte_restaurer_base' => 'E Backup restaur&eacute;ieren',
 'texte_restaurer_sauvegarde' => 'D&euml;s Fonktioun erlaabt d\'Restauratioun vun engem Backup vun der Datebank. Duerfir muss de Backup-Fichier am Dossier @dossier@ sinn.
 Passt op mat d&euml;ser Prozedur: <b>d\'&Auml;nnerungen k&euml;nnen n&euml;t r&euml;ckg&auml;ngeg gemaach ginn.</b>',
@@ -1060,9 +1057,7 @@ D&euml;s Optioun ass par d&eacute;faut ausgeschalt fir n&euml;t andauernd Warnun
 'titre_config_fonctions' => 'Astellen vum Site',
 'titre_config_forums_prive' => 'Forumen vum privaten Deel',
 'titre_config_groupe_mots_cles' => 'Astellen vun de Schl&euml;sselwierder-Gruppen',
-'titre_config_langage' => 'Keflunia&ntilde; ar yezh',
 'titre_configuration' => 'Astellen vum Site',
-'titre_configurer_preferences' => 'Keflunia&ntilde; ho penndibabo&ugrave;',
 'titre_conflit_edition' => 'Konflikt w&auml;rend der Editioun',
 'titre_connexion_ldap' => 'Optiounen: <b>&Auml;r LDAP-Verbindung</b>',
 'titre_dernier_article_syndique' => 'L&auml;scht syndiqu&eacute;iert Artikelen',
@@ -1071,7 +1066,6 @@ D&euml;s Optioun ass par d&eacute;faut ausgeschalt fir n&euml;t andauernd Warnun
 'titre_forum_suivi' => 'Suivi vun de Forum\'en',
 'titre_gauche_mots_edit' => 'WUERT NUMMER:',
 'titre_groupe_mots' => 'WUERT-GRUPP:',
-'titre_identite_site' => 'Identelezh al lec\'hienn',
 'titre_langue_article' => 'SPROOCH VUM ARTIKEL',
 'titre_langue_breve' => 'SPROOCH VUN DER KUERZMELDUNG',
 'titre_langue_rubrique' => 'SPROOCH VUN DER RUBRIK',

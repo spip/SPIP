@@ -24,11 +24,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Chanje ribwik-la (pati-a nan sit sa-a)',
 'admin_recalculer' => 'Kalkil ank&ograve; paj-la',
 'afficher_trad' => 'afiche twadiksyon yo',
-'alerte_maj_impossible' => '<MODIF><<b>Atansyon&nbsp;!</b> Larnouv&egrave;lman pou baz SQL sou @version@ se pa posib, pet&egrave;t ka gen yon pwobl&egrave;m ek drwa pou chanje bazdone-a. Tanpri souple kontak l&eacute;b&egrave;j&egrave; ou.',
-'alerte_modif_info_concourante' => '<MODIF>ATTENTION : Cette information a &eacute;t&eacute; modifi&eacute; par ailleurs. La valeur actuelle est&nbsp;:',
+'alerte_maj_impossible' => '<<b>Atansyon&nbsp;!</b> Larnouv&egrave;lman pou baz SQL sou @version@ se pa posib, pet&egrave;t ka gen yon pwobl&egrave;m ek drwa pou chanje bazdone-a. Tanpri souple kontak l&eacute;b&egrave;j&egrave; ou.', # MODIF
+'alerte_modif_info_concourante' => 'ATTENTION : Cette information a &eacute;t&eacute; modifi&eacute; par ailleurs. La valeur actuelle est&nbsp;:', # MODIF
 'analyse_xml' => 'Analiz XML',
-'annuler' => '<NEW>Annuler',
-'antispam_champ_vide' => '<NEW>Veuillez laisser ce champ vide&nbsp;:',
+'annuler' => 'Annuler', # NEW
+'antispam_champ_vide' => 'Veuillez laisser ce champ vide&nbsp;:', # NEW
 'articles_recents' => 'Atik yo ki plis resan',
 'avis_archive_incorrect' => 'fichye achiv-a se pa fichye SPIP',
 'avis_archive_invalide' => 'fichye achiv-a se pa kor&egrave;k',
@@ -40,8 +40,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur' => 'Er&egrave; : tanpri gad isit anba',
 'avis_erreur_connexion' => 'Er&egrave; ak koneksyon',
 'avis_erreur_cookie' => 'pwobl&egrave;m &egrave;k gatomakro (kouki)',
-'avis_erreur_fonction_contexte' => '<MODIF>Er&egrave; ak pwogwmasyon. Fok w pa rele fonksyon-nan andan kont&egrave;ks-la.',
-'avis_erreur_mysql' => '<MODIF>Er&egrave; SQL',
+'avis_erreur_fonction_contexte' => 'Er&egrave; ak pwogwmasyon. Fok w pa rele fonksyon-nan andan kont&egrave;ks-la.', # MODIF
+'avis_erreur_mysql' => 'Er&egrave; SQL', # MODIF
 'avis_erreur_sauvegarde' => 'Er&egrave; nan sovgad (@type@ @id_objet@) !',
 'avis_erreur_visiteur' => 'Pwobl&egrave;m pou antre nan lespas priv&eacute;',
 
@@ -60,14 +60,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_lien' => 'Chanje pou yon [lyen ipet&egrave;ks->http://...]',
 'barre_lien_input' => 'Tanpri souple enskri ladr&egrave;s lyen ou (posib enskri yon ladr&egrave;s w&egrave;b nan f&ograve;ma http://www.monsite/com osnon senpman enskri nimewo atik-la nan sit sa-a.',
 'barre_note' => 'Chanje pou m&egrave;t yon [[Not enba la paj]]',
-'barre_paragraphe' => '<NEW>Cr&#233;er un paragraphe',
+'barre_paragraphe' => 'Cr&#233;er un paragraphe', # NEW
 'barre_quote' => '<quote>Rap&ograve;t yon mesaj</quote>',
-'bouton_ajouter_document' => '<MODIF>AJOUTE YON DOKIMAN',
-'bouton_ajouter_image' => '<MODIF>AJOUTE YON IMAJ',
-'bouton_ajouter_image_document' => '<NEW>Ajouter une image ou&nbsp;un&nbsp;document',
+'bouton_ajouter_document' => 'AJOUTE YON DOKIMAN', # MODIF
+'bouton_ajouter_image' => 'AJOUTE YON IMAJ', # MODIF
+'bouton_ajouter_image_document' => 'Ajouter une image ou&nbsp;un&nbsp;document', # NEW
 'bouton_changer' => 'Chanje',
 'bouton_chercher' => 'Ch&egrave;che',
 'bouton_choisir' => 'Chwazi',
+'bouton_download' => 'T&eacute;l&eacute;charger', # NEW
 'bouton_enregistrer' => 'Enskri',
 'bouton_radio_desactiver_messagerie_interne' => 'Rete kazmodekri',
 'bouton_radio_envoi_annonces' => 'Voye anons leditoyal ',
@@ -86,7 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_semaine' => 'kalandrye pa sem&egrave;n',
 'choix_couleur_interface' => 'koul&egrave;',
 'choix_interface' => 'pou chwazi lentefas',
-'colonne' => '<NEW>Colonne',
+'colonne' => 'Colonne', # NEW
 'confirm_changer_statut' => 'Atansyon. W te domann chanje lestati eleman nan. Eske w gen kontinye ?',
 'correcte' => 'korek',
 
@@ -187,7 +188,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_2' => ' prentan',
 'date_saison_3' => 'l&eacute;t&eacute;',
 'date_saison_4' => 'lot&ograve;n',
+'date_secondes' => 'secondes', # NEW
 'date_semaines' => 'sem&egrave;n yo',
+'date_un_mois' => 'mois', # NEW
+'date_une_heure' => 'heure', # NEW
+'date_une_minute' => 'minute', # NEW
+'date_une_seconde' => 'seconde', # NEW
+'date_une_semaine' => 'semaine', # NEW
 'dirs_commencer' => 'pou koumanse vreman lenstalasyon',
 'dirs_preliminaire' => 'Dab&ograve; : <b> ann swen drwa aks&egrave;</b>',
 'dirs_probleme_droits' => 'Pwobl&egrave;m ak drwa laks&egrave;',
@@ -196,25 +203,37 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   Gad yo ap mache kom kisa ap par&egrave;t isit anl&egrave;
  ; sinon, f&ograve;k w rele yon l&ograve;t fwa tout repertwar sa-yo nan ou logisy&egrave;l FTP pou korij er&egrave;-a.</p>
   <p>Kan laf&egrave; ke fini, w ke kapab',
-'dirs_repertoires_suivants' => '<MODIF><b>Pa posib ekri sou rep&egrave;twa sa-yo&nbsp;: <ul>@bad_dirs@.</ul> </b>
-  <p />Pou swen bagay-la, ann itilize logisy&egrave;l FTP ou pou don drwa laks&eacute; chak
+'dirs_repertoires_suivants' => '<b>Pa posib ekri sou rep&egrave;twa sa-yo&nbsp;: <ul>@bad_dirs@.</ul> </b>
+  <p>Pou swen bagay-la, ann itilize logisy&egrave;l FTP ou pou don drwa laks&eacute; chak
  rep&egrave;twa. Guid lenstalasyon ap di kouman w ke kapab f&egrave; bagay-la.
-  <p />Kan w ke fini w ke kapab',
-'double_occurrence' => '<MODIF>Double occurrence',
+  </p><p>Kan w ke fini w ke kapab</p>', # MODIF
+'double_occurrence' => 'Double occurrence', # MODIF
 
 // E
-'en_cours' => '<NEW>en cours',
+'en_cours' => 'en cours', # NEW
 'entree_dimensions' => 'Tay&nbsp;:',
 'entree_titre_document' => 'Kouman dokiman i rele&nbsp;:',
 'entree_titre_image' => 'Kouman imaj i rele&nbsp;:',
 'envoi_via_le_site' => 'Voye ek sit-la',
-'erreur' => '<NEW>Erreur',
-'erreur_balise_non_fermee' => '<NEW>derni&egrave;re balise non referm&eacute;e :',
-'erreur_texte' => '<NEW>erreur(s)',
-'etape' => '<NEW>&Eacute;tape',
+'erreur' => 'Erreur', # NEW
+'erreur_balise_non_fermee' => 'derni&egrave;re balise non referm&eacute;e :', # NEW
+'erreur_texte' => 'erreur(s)', # NEW
+'etape' => '&Eacute;tape', # NEW
 
 // F
 'fichier_introuvable' => 'Oken fisy&eacute; @fichier@ konsa',
+'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
+'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
+'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
+'form_auteur_mail_confirmation' => 'Bonjour,
+
+Vous avez demand&eacute; &agrave; changer votre adresse email.
+Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
+l\'adresse ci-dessous (dans le cas contraire, votre demande
+sera ignor&eacute;e) :
+
+    @url@
+', # NEW
 'form_deja_inscrit' => 'W se deja enskri.',
 'form_email_non_valide' => 'Ladr&egrave;s lim&egrave;l ou se pa bon.',
 'form_forum_access_refuse' => 'W pli ap gen lakse sou sit-la.',
@@ -227,10 +246,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_message_auto' => '(mesaj-la se yon mesaj otomatik)',
 'form_forum_pass' => 'modpas :',
 'form_forum_probleme_mail' => 'Pwobl&egrave;m pou lim&egrave;l&nbsp;: lidantifyan pa posib anvway w.',
-'form_forum_voici1' => '<MODIF>Lidantifyan y perm&eacute; w soutni lavi
- sit-la "@nom_site_spip@" (@adresse_site@) :',
-'form_forum_voici2' => '<MODIF>Lidantifyan ou pou pwopoze atik yo sou
-sit "@nom_site_spip@" (@adresse_login@) :',
+'form_forum_voici1' => 'Lidantifyan y perm&eacute; w soutni lavi
+ sit-la "@nom_site_spip@" (@adresse_site@) :', # MODIF
+'form_forum_voici2' => 'Lidantifyan ou pou pwopoze atik yo sou
+sit "@nom_site_spip@" (@adresse_login@) :', # MODIF
 'form_indiquer_email' => 'M&egrave;si enskri ladr&egrave;s lim&egrave;l ou.',
 'form_indiquer_nom' => 'M&egrave;si enskri kouman w rele',
 'form_indiquer_nom_site' => 'M&egrave;si enskri kouman sit ou-a li rele',
@@ -239,8 +258,8 @@ sit "@nom_site_spip@" (@adresse_login@) :',
 'form_pet_confirmation' => 'M&egrave;si konfime siyati ou :',
 'form_pet_deja_enregistre' => 'Sit-la se deja enskri',
 'form_pet_deja_signe' => 'W te deja sinye t&egrave;ks-la.',
-'form_pet_envoi_mail_confirmation' => '<MODIF>Yon lim&egrave;l pou konfine te fin voye a w. F&ograve;k w vizite ladr&egrave;s w&egrave;b te done nan lim&egrave;l pou w konfime siyati ou.',
-'form_pet_mail_confirmation' => '<MODIF>Bonjou,
+'form_pet_envoi_mail_confirmation' => 'Yon lim&egrave;l pou konfine te fin voye a w. F&ograve;k w vizite ladr&egrave;s w&egrave;b te done nan lim&egrave;l pou w konfime siyati ou.', # MODIF
+'form_pet_mail_confirmation' => 'Bonjou,
 
 W la domman m&egrave;t siyati nan petisyon-nan :
 @titre@.
@@ -255,10 +274,10 @@ Pou konfime siyati-a, f&ograve;k s&egrave;lman w ab&ograve;d ladr&egrave;s anba 
     @url@
 
 M&egrave;si  w soutni petisyon-nan
-',
+', # MODIF
 'form_pet_message_commentaire' => 'Gen yon mesaj, yon komant&eacute; pou di&nbsp;?',
 'form_pet_nom_site2' => 'Kouman sitw&egrave;b ou rele',
-'form_pet_probleme_liens' => '<NEW>Veuillez reprendre votre message en supprimant les liens hypertexte.',
+'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
 'form_pet_probleme_technique' => 'Pwobl&egrave;m teknik, siyati se pa posib kounye-a. Tann pwobl&egrave;m-la ke aranje pou rete sispann a yo.',
 'form_pet_signature_pasprise' => 'Siyati ou se pa aksepte.',
 'form_pet_signature_validee' => 'Siyati ou se konfime. M&egrave;si&nbsp;!',
@@ -294,7 +313,7 @@ M&egrave;si  w soutni petisyon-nan
 'forum_non_inscrit' => 'W ap pa enskri ank&ograve;, oubyen ladr&egrave;s osinon modpas ou se pa kor&egrave;k.',
 'forum_page_url' => '(Si mesaj ou ka voye sou yon tik sou W&egrave;b d&eacute;&ograve; ou yon l&ograve;t paj pli konpl&eacute;, m&egrave;si m&egrave;t anba kouman paj la  ka rele &egrave;k ladr&egrave;s URL.)',
 'forum_par_auteur' => 'se @auteur@ te ekri',
-'forum_poste_par' => '<MODIF>Mesaj te poste @parauteur@ anba atik ou-a.',
+'forum_poste_par' => 'Mesaj te poste @parauteur@ anba atik ou-a.', # MODIF
 'forum_probleme_database' => 'Pwobl&egrave;m ak bazdone, mesaj ou te pa enskri.',
 'forum_qui_etes_vous' => '<b>Kouman w rele ?</b> (pa oblij&eacute;)',
 'forum_texte' => 'Teks mesaj ou :',
@@ -388,23 +407,27 @@ M&egrave;si  w soutni petisyon-nan
 'info_article_supprime' => 'Atik ki kraze',
 'info_articles' => 'Atik yo',
 'info_articles_a_valider' => 'Atik yo ki pou konfime',
+'info_articles_nb' => '@nb@ articles', # NEW
 'info_articles_proposes' => 'Atik sa-yo se atik yo moun ki pwopoz&eacute;',
+'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'lot&egrave; (yo)&nbsp;:',
 'info_authentification_ftp' => 'Lotantifikasyon (pa FTP).',
 'info_bloquer_lien' => 'blok lyen nan',
 'info_breves_02' => 'Tinouv&egrave;l yo',
 'info_breves_2' => 'tinouv&egrave;l yo',
+'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
+'info_breves_un' => '1 br&egrave;ve', # NEW
 'info_breves_valider' => 'Tinouv&egrave;l yo ki tann yon komand&egrave; konfime',
 'info_connexion_refusee' => 'Koneksyon te fin refize',
 'info_contact_developpeur' => 'M&egrave;si kotenouye yon devlop&egrave;r.',
 'info_contenance' => 'Kisa ap kontni nan sit-la&nbsp;:',
 'info_contribution' => 'mesaj andan fowom',
 'info_copyright' => '@spip@ se yon logisy&egrave;l lib ki done @lien_gpl@.',
-'info_copyright_doc' => '<MODIF>Si w vle plis enf&ograve;masyon, ann gad sit sa-a <a href="@spipnet@">http://www.spip.net/cpf</a>.',
+'info_copyright_doc' => 'Si w vle plis enf&ograve;masyon, ann gad sit sa-a <a href="@spipnet@">http://www.spip.net/cpf</a>.', # MODIF
 'info_copyright_gpl' => 'nan lisans GPL',
 'info_cours_edition' => 'Tout atik yo w ka ekri ank&ograve;',
 'info_creer_repertoire' => 'Kreye yon fichye ousinon yon r&eacute;p&egrave;twa sak i rele&nbsp;:',
-'info_creer_repertoire_2' => '<MODIF>nan sou-rep&egrave;twa <b>@repertoire@</b>, epi&nbsp;:',
+'info_creer_repertoire_2' => 'nan sou-rep&egrave;twa <b>@repertoire@</b>, epi&nbsp;:', # MODIF
 'info_creer_vignette' => 'kreyasyon viy&egrave;t otomatik ',
 'info_deplier' => 'Etann',
 'info_descriptif_nombre' => 'dekrisyon(yo)&nbsp;:',
@@ -412,8 +435,10 @@ M&egrave;si  w soutni petisyon-nan
 'info_description_2' => 'Dekrisyon&nbsp;:',
 'info_dimension' => 'Tay&nbsp;:',
 'info_document' => 'Dokiman',
-'info_document_indisponible' => '<NEW>Ce document n\'est pas disponible',
+'info_document_indisponible' => 'Ce document n\'est pas disponible', # NEW
 'info_documents' => 'Dokiman yo',
+'info_documents_nb' => '@nb@ documents', # NEW
+'info_documents_un' => '1 document', # NEW
 'info_echange_message' => 'SPIP ka p&eacute;m&egrave; lechanj mesaj ek kreyasyon fowom kozman priv&eacute;
  ant tout moun ka soutni sit la. W kap m&egrave;t oubyen kraze fonksyonalite a.',
 'info_ecire_message_prive' => 'Ekri yon mesaj prive',
@@ -424,23 +449,23 @@ M&egrave;si  w soutni petisyon-nan
 'info_erreur_requete' => 'Er&egrave; nan rek&egrave;t :',
 'info_erreur_squelette2' => 'Oken leskel&egrave;t <b>@fichier@</b> se pa disponib...',
 'info_erreur_systeme' => 'Er&egrave; sist&egrave;m (errno @errsys@)',
-'info_erreur_systeme2' => '<MODIF>Disk&eacute;dir se pet&egrave;t plen osnon bazdon&eacute; gen domaj <br />
+'info_erreur_systeme2' => 'Disk&eacute;dir se pet&egrave;t plen osnon bazdon&eacute; gen domaj <br />
  <font color=\'red\'>Esey w<a href=\'@script@\'>aranje baz-la</a>,
- osnon kontak l&eacute;b&egrave;j&egrave; ou.</font>',
+ osnon kontak l&eacute;b&egrave;j&egrave; ou.</font>', # MODIF
 'info_fini' => 'W gen fin fini !',
 'info_format_image' => 'K&egrave;k s&ograve;t imaj SPIP kapab itilize pou kreye viny&egrave;t&nbsp;: @gd_formats@.',
 'info_format_non_defini' => 'f&ograve;ma ki pa defini',
 'info_grand_ecran' => 'Gran l&eacute;kran',
 'info_image_aide' => 'ED',
 'info_image_process_titre' => 'Kouman f&egrave; pou kreye k&egrave;k viny&egrave;t',
-'info_impossible_lire_page' => '<MODIF><b>Er&egrave; !</b> F&egrave; lekti paj <tt><html>@test_proxy@</html></tt> pa proksi ou-a se pa posib  <tt>',
+'info_impossible_lire_page' => '<b>Er&egrave; !</b> F&egrave; lekti paj <tt><html>@test_proxy@</html></tt> pa proksi ou-a se pa posib  <tt>', # MODIF
 'info_inclusion_directe' => 'Enklizyon dir&egrave;k&nbsp;:',
 'info_inclusion_vignette' => 'Enklizyon viy&egrave;t sa-a&nbsp;:',
 'info_installation_systeme_publication' => 'Enstalasyon sist&egrave;m de piblikasyon...',
-'info_installer_documents' => '<MODIF>W kap enstal&eacute; otomatikman tout dokiman yo ki kontni nan dosy&eacute;-a @upload@.',
-'info_installer_ftp' => '<MODIF>Tankou komand&egrave;, w kap enstal&eacute;(pa FTP)k&egrave;k fichy&eacute; nn dosy&eacute;-a @upload@ pou apr&egrave; w kap chwazi yo isit-la direkman.',
+'info_installer_documents' => 'W kap enstal&eacute; otomatikman tout dokiman yo ki kontni nan dosy&eacute;-a @upload@.', # MODIF
+'info_installer_ftp' => 'Tankou komand&egrave;, w kap enstal&eacute;(pa FTP)k&egrave;k fichy&eacute; nn dosy&eacute;-a @upload@ pou apr&egrave; w kap chwazi yo isit-la direkman.', # MODIF
 'info_installer_images' => 'W kapab enstale k&egrave;k imaj nan f&ograve;ma sa-yo JPEG, GIF ak PNG.',
-'info_installer_images_dossier' => '<MODIF>Enstal imaj nan dosye @upload@ pou w ke kapab swazi yo isit apr&egrave;.',
+'info_installer_images_dossier' => 'Enstal imaj nan dosye @upload@ pou w ke kapab swazi yo isit apr&egrave;.', # MODIF
 'info_installer_tous_documents' => 'Enstal tout dokiman',
 'info_interface_complete' => 'ent&egrave;fas konpl&eacute;',
 'info_interface_simple' => 'Ent&egrave;fas senp',
@@ -459,12 +484,14 @@ M&egrave;si  w soutni petisyon-nan
 'info_mail_fournisseur' => 'w@fournisseur.com',
 'info_message_2' => 'MESAJ',
 'info_message_supprime' => 'MESAJ KRAZE',
+'info_messages_nb' => '@nb@ messages', # NEW
+'info_messages_un' => '1 message', # NEW
 'info_mise_en_ligne' => 'Ladat piblikasyon&nbsp;:',
 'info_modification_parametres_securite' => 'chanjman sou param&egrave;t pou sekirite',
 'info_mois_courant' => 'Nan tan mwa-a :',
 'info_mot_cle_ajoute' => 'Mokle-a te fin ajoute sou',
 'info_multi_herit' => 'Lalang ka par&egrave;t otomatikman',
-'info_multi_langues_soulignees' => '<MODIF>Tout <u>lang souliy&eacute; sa-yo</u> ap gen yon tradiksyon tout t&egrave;ks sa-yo nan lent&egrave;fas. Si w chwazi lang sa-yo, genyen plen &eacute;l&eacute;man sou sit piblik (dat, f&ograve;mul&egrave;)ki tradwi otomatikman. Pou tout lang ki pa souliy&eacute; an,  tout &eacute;l&eacute;man sa-yo ke par&egrave;t nan lang prensipal sit ou.',
+'info_multi_langues_soulignees' => 'Tout <u>lang souliy&eacute; sa-yo</u> ap gen yon tradiksyon tout t&egrave;ks sa-yo nan lent&egrave;fas. Si w chwazi lang sa-yo, genyen plen &eacute;l&eacute;man sou sit piblik (dat, f&ograve;mul&egrave;)ki tradwi otomatikman. Pou tout lang ki pa souliy&eacute; an,  tout &eacute;l&eacute;man sa-yo ke par&egrave;t nan lang prensipal sit ou.', # MODIF
 'info_multilinguisme' => 'Miltilengwism',
 'info_nom_non_utilisateurs_connectes' => 'Kouman ou rele pap par&egrave;t nan lis zitilizat&egrave; an liy.',
 'info_nom_utilisateurs_connectes' => 'Kouman w rele ap par&egrave;t nan lis zitilizat&egrave;  an liy.',
@@ -474,11 +501,11 @@ M&egrave;si  w soutni petisyon-nan
 'info_nouveau_message' => 'W GEN YON NOUVO MESAJ',
 'info_nouveaux_messages' => 'W GEN @total_messages@ NOUVO MESAJ YO',
 'info_numero_abbreviation' => 'N&deg;&nbsp;',
-'info_obligatoire' => '<NEW>Cette information est obligatoire',
+'info_obligatoire' => 'Cette information est obligatoire', # NEW
 'info_panne_site_syndique' => 'Sit sendike a se pa mache',
 'info_pense_bete' => 'RAPLE-W',
 'info_petit_ecran' => 'Piti l&eacute;kran',
-'info_petition_close' => '<NEW>P&eacute;tition close',
+'info_petition_close' => 'P&eacute;tition close', # NEW
 'info_pixels' => 'piks&egrave;l yo',
 'info_plusieurs_mots_trouves' => 'K&egrave;k mokle te fin s&ograve;ti pou "@cherche_mot@":',
 'info_popularite_5' => 'Kouman se popil&egrave;&nbsp;:',
@@ -503,19 +530,23 @@ M&egrave;si  w soutni petisyon-nan
 'info_retablir_lien' => 'Rom&egrave;t lyen-nan',
 'info_retirer_mot' => 'Kraze mokle-a',
 'info_retirer_mots' => 'Kraze tout mokle yo',
+'info_rubriques_nb' => '@nb@ rubriques', # NEW
+'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'ki pa rele',
-'info_selectionner_fichier' => '<MODIF>W kapab chwazi yon fichye nan dosy&eacute; @upload@',
+'info_selectionner_fichier' => 'W kapab chwazi yon fichye nan dosy&eacute; @upload@', # MODIF
 'info_selectionner_fichier_2' => 'Chwazi yon fichye&nbsp;:',
-'info_signature_supprimee' => '<NEW>Signature supprim&eacute;e',
-'info_signature_supprimee_erreur' => '<NEW>Erreur&nbsp;: ce code de suppression ne correspond a aucune signature',
+'info_signature_supprimee' => 'Signature supprim&eacute;e', # NEW
+'info_signature_supprimee_erreur' => 'Erreur&nbsp;: ce code de suppression ne correspond a aucune signature', # NEW
 'info_site_attente' => 'Sit web ki tann yon komand&egrave; konfime ali',
 'info_site_reference' => 'Sit referanse an liy',
 'info_site_refuse' => 'Sit we ki te fin refize',
+'info_sites_nb' => '@nb@ sites', # NEW
 'info_sites_referencer' => 'Referanse yon sit',
+'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'kraze viy&egrave;t-la',
-'info_symbole_bleu' => '<MODIF>Senbol <b>ble</b> ki endik <b>yon pansb&egrave;t</b>: yon mesaj ou pou izaj p&egrave;son&egrave;l ou.',
-'info_symbole_jaune' => '<MODIF>Senbol <b>jon</b> ki endik <b>yon anons pou tout redakt&egrave;</b>&nbsp;: ki visib pout tout redakt&egrave; nan espas prive, ak ki komand&egrave; kapab chanje selman.',
-'info_symbole_vert' => '<MODIF>Senbol <b>v&egrave;r</b> ki endik <b> yon mesaj  voye ant zot zitilizat&egrave;</b> sit la.',
+'info_symbole_bleu' => 'Senbol <b>ble</b> ki endik <b>yon pansb&egrave;t</b>: yon mesaj ou pou izaj p&egrave;son&egrave;l ou.', # MODIF
+'info_symbole_jaune' => 'Senbol <b>jon</b> ki endik <b>yon anons pou tout redakt&egrave;</b>&nbsp;: ki visib pout tout redakt&egrave; nan espas prive, ak ki komand&egrave; kapab chanje selman.', # MODIF
+'info_symbole_vert' => 'Senbol <b>v&egrave;r</b> ki endik <b> yon mesaj  voye ant zot zitilizat&egrave;</b> sit la.', # MODIF
 'info_syndication' => 'sendikasyon&nbsp;:',
 'info_syndication_articles' => 'atik (yo)',
 'info_telecharger' => 'Telechaj sou l&ograve;dinat&egrave; ou&nbsp;:',
@@ -535,7 +566,7 @@ M&egrave;si  w soutni petisyon-nan
 'info_visites' => 'vizit yo :',
 'info_vos_rendez_vous' => 'W ke rannkont',
 'info_zoom' => 'gwoplan',
-'infos_vos_pense_bete' => 'Mesaj yo pou w raple-w',
+'infos_vos_pense_bete' => 'Mesaj yo pou w raple-w', # MODIF
 'item_breve_proposee' => 'Tinouv&egrave;l pwopoze pou par&egrave;t ',
 
 // L
@@ -557,8 +588,8 @@ M&egrave;si  w soutni petisyon-nan
 'lien_visite_site' => 'vizite sit sa-a',
 'lien_visites' => '@visites@&nbsp;vizite yo',
 'lien_voir_auteur' => 'Gad lot&egrave;-a',
-'ligne' => '<NEW>Ligne',
-'login' => '<NEW>Connexion',
+'ligne' => 'Ligne', # NEW
+'login' => 'Connexion', # NEW
 'login_acces_prive' => 'akse nan espas prive',
 'login_autre_identifiant' => 'kon&egrave;k w sou sit-la ek yon l&ograve;t idantifyan',
 'login_cookie_accepte' => 'M&egrave;si r&egrave;g navigat&egrave; ou po li as&egrave;pt (pou sit la omwen)',
@@ -584,21 +615,22 @@ M&egrave;si  w soutni petisyon-nan
 'login_retour_site' => 'Tounyen sou sit piblik',
 'login_retoursitepublic' => 'tounyen&nbsp;d&egrave;y&egrave;&nbsp;sou&nbsp;sit&nbsp;piblik',
 'login_sans_cookiie' => 'Idantifikasyon ki gen pa pa oken gatomakro',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'enskri w',
 'login_test_navigateur' => 'test navigat&egrave;/rekoneksyon',
 'login_verifiez_navigateur' => '(Gad pou si navigat&egrave; ou li te pa raple modpas ou...)',
 
 // M
-'masquer_colonne' => '<NEW>Masquer cette colonne',
+'masquer_colonne' => 'Masquer cette colonne', # NEW
 'masquer_trad' => 'kache tradiksyon yo',
 'module_fichiers_langues' => 'Fichye-lang yo',
 
 // N
 'navigateur_pas_redirige' => 'Si navigat&egrave; ou se pa tounyen taptap sou yon l&ograve;t ladr&egrave;s web, m&egrave;si klik isit pou kontinye.',
-'numero' => '<NEW>Num&eacute;ro',
+'numero' => 'Num&eacute;ro', # NEW
 
 // O
-'occurence' => '<NEW>Occurrence',
+'occurence' => 'Occurrence', # NEW
 'onglet_affacer_base' => 'Kraze labaz',
 'onglet_auteur' => 'Lot&egrave;',
 'onglet_contenu_site' => 'Kisa sit-la ka kontni',
@@ -616,7 +648,6 @@ M&egrave;si  w soutni petisyon-nan
 'onglet_repartition_rubrique' => 'Repatisyon ant ribrik',
 'onglet_save_restaur_base' => 'S&ograve;vgad/aranje labaz',
 'onglet_vider_cache' => 'Vide kach-la',
-'ortho_trop_de_fautes2' => 'Komans korije pli gwo f&ograve;t lotogwaf ek es&egrave;y apr&egrave; yon lot fwa.',
 
 // P
 'pass_choix_pass' => 'M&egrave;si chwazi nouvo modpas ou :',
@@ -636,7 +667,7 @@ M&egrave;si  w soutni petisyon-nan
 W
    ke genyen yon limel ki di w kouman w ke kapab rekip&egrave; laks&eacute; ou.
 ',
-'pass_mail_passcookie' => '<MODIF>(Tala se mesaj otomatik)
+'pass_mail_passcookie' => '(Tala se mesaj otomatik)
 Pou w genyen ank&ograve; lakse ou sou sit-la
 @nom_site_spip@ (@adresse_site@)
 
@@ -647,7 +678,7 @@ M&egrave;si f&egrave; yon vir&eacute; sou ladr&egrave;s la :
 W ke kapab al&ograve; enskri yon nouvo modpas
 ak tounyen d&eacute;y&eacute; konekte sou sit-la.
 
-',
+', # MODIF
 'pass_mot_oublie' => 'Modpas ki oubliye',
 'pass_nouveau_enregistre' => 'Nouvo modpas ou-a se enskri nan m&eacute;mwar.',
 'pass_nouveau_pass' => 'Nouvo modpas',
@@ -664,10 +695,10 @@ ak tounyen d&eacute;y&eacute; konekte sou sit-la.
 'previsualiser' => 'Gade avan pibliy&eacute;',
 
 // R
-'retour' => '<NEW>Retour',
+'retour' => 'Retour', # NEW
 
 // S
-'spip_conforme_dtd' => '<NEW>SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :',
+'spip_conforme_dtd' => 'SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :', # NEW
 'squelette' => 'eskelet',
 'squelette_inclus_ligne' => 'eskelet enkli, liy',
 'squelette_ligne' => 'eskelet,liy',
@@ -685,25 +716,25 @@ ak tounyen d&eacute;y&eacute; konekte sou sit-la.
 'texte_documents_associes' => 'Dokiman swivan sa-yo se asosye ek atik-la,
     poutan yo genyen pa dir&egrave;kman par&egrave;t nan atik-la. Kiswa kouman paj ou rosanm sou sit piblik,
     yo ki par&egrave;t nan f&ograve;m dokiman jwen.',
-'texte_erreur_mise_niveau_base' => '<MODIF>Ere ek bazdone pou m&egrave;t nan nivo.
+'texte_erreur_mise_niveau_base' => 'Ere ek bazdone pou m&egrave;t nan nivo.
   imaj <b>@fichier@</b>  sa-a ki pa rive (article @id_article@).
   Ekri r&eacute;f&eacute;rans-la, ek esey yon lot fwa
   aranje nivo, epi gade si imaj yo ki kapab par&egrave;t
-  byen toujou nan atik yo.',
-'texte_erreur_visiteur' => '<MODIF>W t eseye antre nan lespas priv&eacute; ak yon lidantifyan an ki pa rive p&egrave;m&egrave;t aksyon la.',
-'texte_inc_auth_1' => '<MODIF>Kouman w rele pou genyen idantifye w 
+  byen toujou nan atik yo.', # MODIF
+'texte_erreur_visiteur' => 'W t eseye antre nan lespas priv&eacute; ak yon lidantifyan an ki pa rive p&egrave;m&egrave;t aksyon la.', # MODIF
+'texte_inc_auth_1' => 'Kouman w rele pou genyen idantifye w 
  <b>@auth_login@</b>, soman li pli/pa egsite nan bazdone. 
-  Esey',
+  Esey', # MODIF
 'texte_inc_auth_2' => 'kon&egrave;k w ank&ograve; yon lot fwa',
 'texte_inc_auth_3' => ', apr&egrave; w p&egrave;t&egrave;t lage &eacute;pi
  r&egrave;t ek d&eacute;mar yon lot fwa navigat&egrave; ou.',
-'texte_inc_config' => '<MODIF>Tout chanjman nan paj sa-yo genyen gran enflians si manyen sit-la ka mache.
+'texte_inc_config' => 'Tout chanjman nan paj sa-yo genyen gran enflians si manyen sit-la ka mache.
  L&egrave;s azot bagay-la sou kote kounyen-a, si w genyen p&ograve;k&ograve; gran abitid ak manyen kouman SPIP mache.
 <br /><br /><b> Ann
-l&egrave;s plit&ograve; jestyon paj sa-yo pou w&egrave;bm&egrave;t prensipal sou sit-la.</b>',
-'texte_inc_meta_1' => '<MODIF>Sist&egrave;m la ki genyen yon er&egrave; ak l&eacute;kriti fichye <code>@fichier@</code>. M&egrave;si, w ki komand&egrave; sit-la,',
+l&egrave;s plit&ograve; jestyon paj sa-yo pou w&egrave;bm&egrave;t prensipal sou sit-la.</b>', # MODIF
+'texte_inc_meta_1' => 'Sist&egrave;m la ki genyen yon er&egrave; ak l&eacute;kriti fichye <code>@fichier@</code>. M&egrave;si, w ki komand&egrave; sit-la,', # MODIF
 'texte_inc_meta_2' => 'gade tout drwa l&eacute;kriti se korek',
-'texte_inc_meta_3' => '<MODIF>nan r&eacute;p&egrave;twa <code>@repertoire@</code>.',
+'texte_inc_meta_3' => 'nan r&eacute;p&egrave;twa <code>@repertoire@</code>.', # MODIF
 'texte_statut_en_cours_redaction' => 'ank&ograve; pou ekri',
 'texte_statut_poubelle' => 'nan bwat poub&egrave;l',
 'texte_statut_propose_evaluation' => 'pwopoze pou jijman',
@@ -726,63 +757,63 @@ l&egrave;s plit&ograve; jestyon paj sa-yo pou w&egrave;bm&egrave;t prensipal sou
 'titre_joindre_document' => 'JWENN YON DOKIMAN',
 'titre_liens_entrants' => 'Lyen sa-yo ka rive',
 'titre_mots_cles' => 'MOKLE YO',
-'titre_probleme_technique' => '<MODIF>Atansyon&nbsp;: yon pxobl&egrave;m teknik (s&egrave;rv&egrave;r SQL) fe entediksyon antre nan pati a nan sit sa a. M&eacute;si konprann.',
+'titre_probleme_technique' => 'Atansyon&nbsp;: yon pxobl&egrave;m teknik (s&egrave;rv&egrave;r SQL) fe entediksyon antre nan pati a nan sit sa a. M&eacute;si konprann.', # MODIF
 'titre_publier_document' => 'PIBLIYE YON DOKIMAN NAN PATI A NAN SIT SA A',
-'titre_signatures_attente' => '<NEW>Signatures en attente de validation',
-'titre_signatures_confirmees' => '<NEW>Signatures confirm&eacute;es',
+'titre_signatures_attente' => 'Signatures en attente de validation', # NEW
+'titre_signatures_confirmees' => 'Signatures confirm&eacute;es', # NEW
 'titre_statistiques' => 'Estatistik sit la',
 'titre_titre_document' => 'Kouman rele dokiman a&nbsp;:',
-'todo' => '<NEW>&agrave; venir',
+'todo' => '&agrave; venir', # NEW
 'trad_reference' => '(atik pou referans)',
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: baliz B anba',
-'zbug_balise_inexistante' => '<MODIF>erreur @from@: la balise #@balise@ n\'existe pas',
-'zbug_balise_sans_argument' => '<NEW>Argument manquant dans la balise @balise@',
+'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n\'existe pas', # MODIF
+'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@', # NEW
 'zbug_boucle' => 'boukle',
-'zbug_boucle_recursive_undef' => '<MODIF>boukle rekisiv ki pa d&eacute;fini',
-'zbug_calcul' => '<NEW>calcul',
+'zbug_boucle_recursive_undef' => 'boukle rekisiv ki pa d&eacute;fini', # MODIF
+'zbug_calcul' => 'calcul', # NEW
 'zbug_champ_hors_boucle' => 'Chan @champ@ ki pa nan boukle',
-'zbug_champ_hors_motif' => '<MODIF>Chan @champ@ ki pa nan boukle-motif @motif@',
+'zbug_champ_hors_motif' => 'Chan @champ@ ki pa nan boukle-motif @motif@', # MODIF
 'zbug_code' => 'kod',
-'zbug_critere_inconnu' => '<MODIF>krit&egrave; sa-a se pa koni @critere@',
-'zbug_distant_interdit' => '<MODIF>d&eacute;&ograve; ent&egrave;di',
-'zbug_doublon_table_sans_cle_primaire' => '<MODIF>doublons sur une table sans clef primaire atomique',
-'zbug_doublon_table_sans_index' => '<MODIF>doublons sur une table sans index',
-'zbug_erreur_boucle_double' => '<MODIF>BOUCLE@id@: d&eacute;finisyon doub',
-'zbug_erreur_boucle_fermant' => '<MODIF>BOUCLE@id@: tag pou f&egrave;me ap pa egsiste ',
-'zbug_erreur_boucle_syntaxe' => '<MODIF>Sintaks boukl pa kor&egrave;k',
-'zbug_erreur_compilation' => '<NEW>Erreur de compilation',
-'zbug_erreur_execution_page' => '<MODIF>er&egrave; nan leks&eacute;kisyon paj la',
-'zbug_erreur_filtre' => '<MODIF>Er&egrave;: fil <b>&laquo; @filtre@ &raquo;</b> se pa defini ',
-'zbug_erreur_meme_parent' => '<MODIF>{meme_parent} ki pa mache ak (FORUMS) oubyen (RUBRIQUES)',
+'zbug_critere_inconnu' => 'krit&egrave; sa-a se pa koni @critere@', # MODIF
+'zbug_distant_interdit' => 'd&eacute;&ograve; ent&egrave;di', # MODIF
+'zbug_doublon_table_sans_cle_primaire' => 'doublons sur une table sans clef primaire atomique', # MODIF
+'zbug_doublon_table_sans_index' => 'doublons sur une table sans index', # MODIF
+'zbug_erreur_boucle_double' => 'BOUCLE@id@: d&eacute;finisyon doub', # MODIF
+'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: tag pou f&egrave;me ap pa egsiste ', # MODIF
+'zbug_erreur_boucle_syntaxe' => 'Sintaks boukl pa kor&egrave;k', # MODIF
+'zbug_erreur_compilation' => 'Erreur de compilation', # NEW
+'zbug_erreur_execution_page' => 'er&egrave; nan leks&eacute;kisyon paj la', # MODIF
+'zbug_erreur_filtre' => 'Er&egrave;: fil <b>&laquo; @filtre@ &raquo;</b> se pa defini ', # MODIF
+'zbug_erreur_meme_parent' => '{meme_parent} ki pa mache ak (FORUMS) oubyen (RUBRIQUES)', # MODIF
 'zbug_erreur_squelette' => 'Er&egrave; nan l&egrave;skel&egrave;t',
-'zbug_hors_compilation' => '<NEW>Hors Compilation',
+'zbug_hors_compilation' => 'Hors Compilation', # NEW
 'zbug_info_erreur_squelette' => 'Er&egrave; sou sit-la',
-'zbug_inversion_ordre_inexistant' => '<MODIF>yon ord ki pa egziste genyen lanv&egrave;',
-'zbug_pagination_sans_critere' => '<MODIF>#PAGINATION sans crit&egrave;re {pagination} ou employ&eacute; dans une boucle recursive',
-'zbug_parametres_inclus_incorrects' => '<MODIF>Param&egrave;t pou enklizyon se pa korek',
-'zbug_profile' => '<NEW>Temps de calcul&nbsp;: @time@',
+'zbug_inversion_ordre_inexistant' => 'yon ord ki pa egziste genyen lanv&egrave;', # MODIF
+'zbug_pagination_sans_critere' => '#PAGINATION sans crit&egrave;re {pagination} ou employ&eacute; dans une boucle recursive', # MODIF
+'zbug_parametres_inclus_incorrects' => 'Param&egrave;t pou enklizyon se pa korek', # MODIF
+'zbug_profile' => 'Temps de calcul&nbsp;: @time@', # NEW
 'zbug_resultat' => 'r&eacute;zilta',
-'zbug_serveur_indefini' => '<MODIF>s&egrave;v&egrave; SQL ki pa defini',
-'zbug_statistiques' => '<NEW>Statistiques des requ&ecirc;tes SQL class&eacute;es par dur&eacute;e',
+'zbug_serveur_indefini' => 's&egrave;v&egrave; SQL ki pa defini', # MODIF
+'zbug_statistiques' => 'Statistiques des requ&ecirc;tes SQL class&eacute;es par dur&eacute;e', # NEW
 'zbug_table_inconnue' => 'Tab SQL &laquo; @table@ &raquo; se pa koni',
-'zxml_connus_attributs' => '<NEW>attributs connus',
-'zxml_de' => '<NEW>de',
-'zxml_inconnu_attribut' => '<NEW>attribut inconnu',
-'zxml_inconnu_balise' => '<NEW>balise inconnue',
-'zxml_inconnu_entite' => '<NEW>entit&eacute; inconnue',
-'zxml_inconnu_id' => '<NEW>ID inconnu',
-'zxml_mais_de' => '<NEW>mais de',
-'zxml_non_conforme' => '<NEW>n\'est pas conforme au motif',
-'zxml_non_fils' => '<NEW>n\'est pas un fils de',
-'zxml_nonvide_balise' => '<NEW>balise non vide',
-'zxml_obligatoire_attribut' => '<NEW>attribut obligatoire mais absent dans',
-'zxml_succession_fils_incorrecte' => '<NEW>succession des fils incorrecte',
-'zxml_survoler' => '<NEW>survoler pour voir les corrects',
-'zxml_valeur_attribut' => '<NEW>valeur de l\'attribut',
-'zxml_vide_balise' => '<NEW>balise vide',
-'zxml_vu' => '<NEW>vu auparavant'
+'zxml_connus_attributs' => 'attributs connus', # NEW
+'zxml_de' => 'de', # NEW
+'zxml_inconnu_attribut' => 'attribut inconnu', # NEW
+'zxml_inconnu_balise' => 'balise inconnue', # NEW
+'zxml_inconnu_entite' => 'entit&eacute; inconnue', # NEW
+'zxml_inconnu_id' => 'ID inconnu', # NEW
+'zxml_mais_de' => 'mais de', # NEW
+'zxml_non_conforme' => 'n\'est pas conforme au motif', # NEW
+'zxml_non_fils' => 'n\'est pas un fils de', # NEW
+'zxml_nonvide_balise' => 'balise non vide', # NEW
+'zxml_obligatoire_attribut' => 'attribut obligatoire mais absent dans', # NEW
+'zxml_succession_fils_incorrecte' => 'succession des fils incorrecte', # NEW
+'zxml_survoler' => 'survoler pour voir les corrects', # NEW
+'zxml_valeur_attribut' => 'valeur de l\'attribut', # NEW
+'zxml_vide_balise' => 'balise vide', # NEW
+'zxml_vu' => 'vu auparavant', # NE
 );
 
 ?>

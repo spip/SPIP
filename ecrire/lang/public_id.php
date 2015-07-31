@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Halaman Depan',
+'article' => 'Article', # NEW
 'articles' => 'Artikel-artikel',
 'articles_auteur' => 'Artikel-artikel penulis ini',
 'articles_populaires' => 'Artikel-artikel yang paling banyak dibaca',
@@ -18,16 +19,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'Tidak ada situs di alamat ini',
 'aucune_breve' => 'Tidak ada berita di alamat ini',
 'aucune_rubrique' => 'Tidak ada bagian di alamat ini',
+'auteur' => 'Auteur', # NEW
+'autres' => 'Autres', # NEW
 'autres_breves' => 'Berita lainnya',
 'autres_groupes_mots_clefs' => 'Kelompok-kelompok kata kunci lainnya',
 'autres_sites' => 'Situs-situs lainnya',
 
 // B
 'bonjour' => 'Halo',
+'breve' => 'Br&egrave;ve', # NEW
 'breves' => 'Artikel-artikel berita',
 
 // C
 'commenter_site' => 'Komentar di situs ini',
+'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 // D
 'date' => 'Tanggal',
@@ -36,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Artikel-artikel terbaru',
 'derniers_commentaires' => 'Komentar-komentar terbaru',
 'derniers_messages_forum' => 'Pesan-pesan terbaru yang dipublikasikan di forum ini',
+'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
 'edition_mode_texte' => 'Tampilan teks saja',
@@ -45,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_prive' => 'Area pribadi',
 
 // F
+'formats_acceptes' => 'Formats accept&#233;s : @formats@.', # NEW
 'forum' => 'Forum',
 
 // H
@@ -53,6 +60,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // J
 'jours' => 'hari',
 
+// L
+'lien_connecter' => 'Se connecter', # NEW
+
 // M
 'meme_auteur' => 'Oleh penulis yang sama',
 'meme_rubrique' => 'Dalam bagian yang sama',
@@ -60,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Pesan',
 'messages_forum' => 'Pesan-pesan forum',
 'messages_recents' => 'Pesan-pesan forum terbaru',
+'mots_clef' => 'Mot-cl&eacute;', # NEW
 'mots_clefs' => 'Kata-kata kunci',
 'mots_clefs_meme_groupe' => 'Kata-kata kunci dalam kelompok yang sama',
 
@@ -95,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'site_realise_avec_spip' => 'Situs dibuat dengan SPIP',
 'sites_web' => 'Situs-situs web',
 'sous_rubriques' => 'Sub-sub bagian',
+'spam' => 'Spam', # NEW
 'suite' => 'lanjut',
 'sur_web' => 'Di Web',
 'syndiquer_rubrique' => 'Sindikasi bagian ini',
