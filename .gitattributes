@@ -271,6 +271,9 @@ prive/echafaudage/contenu/objet_edit.html -text
 prive/echafaudage/contenu/objet_edit.sans_rubrique.html -text
 prive/echafaudage/contenu/objets.html -text
 prive/echafaudage/extra/objet.html -text
+prive/echafaudage/hierarchie/objet.html -text
+prive/echafaudage/hierarchie/objet.sans_rubrique.html -text
+prive/echafaudage/hierarchie/objet_fonctions.php -text
 prive/echafaudage/navigation/objet.html -text
 prive/echafaudage/navigation/objet_edit.html -text
 prive/formulaires/configurer_annonces.html -text
@@ -776,8 +779,6 @@ prive/squelettes/head/dist.html -text
 prive/squelettes/hierarchie/auteur.html -text
 prive/squelettes/hierarchie/auteur_edit.html -text
 prive/squelettes/hierarchie/dist.html -text
-prive/squelettes/hierarchie/objet.html -text
-prive/squelettes/hierarchie/objet_fonctions.php -text
 prive/squelettes/inclure/accueil-information.html -text
 prive/squelettes/inclure/admin_autres_bases.html -text
 prive/squelettes/inclure/admin_autres_bases_fonctions.php -text
