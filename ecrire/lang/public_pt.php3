@@ -81,8 +81,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // P
-'page_precedente' => '<NEW> page pr&eacute;c&eacute;dente',
-'page_suivante' => '<NEW> page suivante',
+'page_precedente' => 'P&aacute;gina anterior',
+'page_suivante' => 'p&aacute;gina seguinte',
 'par_auteur' => 'por',
 'participer_site' => 'Pode participar na vida deste s&iacute;tio e propor os seus pr&oacute;prios artigos, inscrevendo-se mais abaixo. Receber&aacute; imediatamente um email que indica os seus c&oacute;digos de acesso ao espa&ccedil;o privado do s&iacute;tio.',
 'plan_site' => 'Planta do s&iacute;tio',
@@ -117,7 +117,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // V
-'ver_imprimer' => '<NEW> Version &agrave; imprimer',
+'ver_imprimer' => 'Vers&atilde;o para imprimir',
 'voir_en_ligne' => 'Ver em linha'
 
 );

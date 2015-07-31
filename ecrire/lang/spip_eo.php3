@@ -243,7 +243,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => 'por vere komenci la instaladon',
 'dirs_preliminaire' => 'Anta&#365;e: <B>&#284;ustigu la alirrajtojn</B>',
 'dirs_probleme_droits' => '<b>Problemo de alirrajtoj</b>',
-'dirs_repertoires_absents' => '<MODIF> <B>La jenaj dosierujoj ne estis trovitaj&nbsp;: <ul>@bad_dirs@.</ul> </B>
+'dirs_repertoires_absents' => '<B>La jenaj dosierujoj ne estis trovitaj&nbsp;: <ul>@bad_dirs@.</ul> </B>
   <P>Kulpas ver&#349;ajne mal&#285;usta uskleco.
   Certigu ke la uskleco akordas kun la afi&#349;ado &#265;i-supre;
   se ili ne akordas, bonvolu renomi la dosierujon per via FTP-programo por korekti la eraron.
@@ -294,11 +294,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_image' => 'Bildtitolo:',
 'entree_titre_obligatoire' => '<B>Titolo</b> [Deviga]<BR>',
 'entree_url' => 'Retadreso de via teksejo',
-'erreur_boucle_double' => '<NEW>BOUCLE@id@: double d&eacute;finition',
-'erreur_boucle_fermant' => '<NEW>BOUCLE@id@: tag fermant manquant',
-'erreur_boucle_syntaxe' => '<NEW>Syntaxe boucle incorrecte',
-'erreur_boucle_syntaxe2' => '<NEW>La boucle @milieu@ est incorrecte.',
-'erreur_filtre' => '<NEW>Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
+'erreur_boucle_double' => 'BOUCLE@id@: duobla difino',
+'erreur_boucle_fermant' => 'BOUCLE@id@: ne fermigita marko',
+'erreur_boucle_syntaxe' => 'Mal&#285;usta sintakso de ma&#349;o',
+'erreur_boucle_syntaxe2' => 'La ma&#349;o @milieu@ ne estas &#285;usta.',
+'erreur_filtre' => 'Eraro : filtro <b>&laquo; @filtre@ &raquo;</b> nedifinita',
 
 
 // F
@@ -654,12 +654,11 @@ Dankon pro via partopreno
 'info_envoyer_message_prive' => 'Sendi privatan mesa&#285;on al tiu a&#365;toro',
 'info_erreur_requete' => 'Eraro ene de la peto: ',
 'info_erreur_restauration' => 'Eraro de &#349;ar&#285;o: neekzistanta dosiero.',
-'info_erreur_squelette' => '<NEW>Erreur sur le site',
-'info_erreur_squelette2' => '<NEW>Aucun squelette <b>@fichier@</b> n\'est disponible...',
-'info_erreur_systeme' => '<NEW>Erreur syst&egrave;me (errno @errsys@) ',
-'info_erreur_systeme2' => '<NEW><b>Le disque dur est peut-&ecirc;tre plein, ou la base de donn&eacute;es endommag&eacute;e. <br>
-	<font color=\'red\'>Essayez de <a href=\'ecrire/admin_repair.php3\'>r&eacute;parer la base</a>,
-	ou contactez votre h&eacute;bergeur.</font><br></b>',
+'info_erreur_squelette' => 'Eraro en la teksejo',
+'info_erreur_squelette2' => 'Nenia skeleto <b>@fichier@</b> disponeblas...',
+'info_erreur_systeme' => 'Eraro de la sistemo (errno @errsys@)',
+'info_erreur_systeme2' => '<b>Eble la fiksdisko estas plena, a&#365; dama&#285;is la datenbazo. <br>
+ <font color=\'red\'><a href=\'ecrire/admin_repair.php3\'>Provu repari la datenbazon</a>, a&#365; kontaktu vian gastiganton.</font></br></b>',
 'info_etape_suivante' => 'Transpasi al sekvanta etapo',
 'info_etape_suivante_1' => 'Vi povas transpasi al sekvanta etapo.',
 'info_etape_suivante_2' => 'Vi povas transpasi al sekvanta etapo.',
@@ -697,7 +696,7 @@ Dankon pro via partopreno
 'info_hier' => 'hiera&#365;:',
 'info_identification_publique' => 'Via publika identeco...',
 'info_image_aide' => 'HELPILO',
-'info_image_process' => '<NEW>Veuillez s&eacute;lectionner la meilleure m&eacute;thode de fabrication des vignettes en cliquant sur l\'image correspondante.',
+'info_image_process' => 'Bonvolu elekti la pli bonan metodon por fabriki vinjetojn alklakante la tiurilatan bildon.',
 'info_impossible_lire_page' => '<B>Eraro!</b> Ne eblas legi la pa&#285;on <tt> <html>@test_proxy@</html> </tt> tra la prokura servilo <tt>',
 'info_inclusion_directe' => 'Rekta inkludo:',
 'info_inclusion_vignette' => 'Inkludo de la vinjeto:',
