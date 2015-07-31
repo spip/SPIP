@@ -48,6 +48,7 @@ $GLOBALS['spip_mysql_functions_1'] = array(
 		'count' => 'spip_mysql_count',
 		'countsel' => 'spip_mysql_countsel',
 		'create' => 'spip_mysql_create',
+		'create_base' => 'spip_mysql_create_base',
 		'create_view' => 'spip_mysql_create_view',
 		'delete' => 'spip_mysql_delete',
 		'drop_table' => 'spip_mysql_drop_table',
@@ -365,6 +366,9 @@ function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=fals
 	return spip_mysql_query($q, $serveur);
 }
 
+function spip_mysql_create_base($nom, $serveur='',$requeter=true) {
+  return spip_mysql_query("CREATE DATABASE `$nom`", $serveur, $requeter);
+}
 
 // Fonction de creation d'une vue SQL nommee $nom
 // http://doc.spip.org/@spip_mysql_create_view

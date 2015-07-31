@@ -72,6 +72,7 @@ $GLOBALS['spip_pg_functions_1'] = array(
 		'count' => 'spip_pg_count',
 		'countsel' => 'spip_pg_countsel',
 		'create' => 'spip_pg_create',
+		'create_base' => 'spip_pg_create_base',
 		'create_view' => 'spip_pg_create_view',
 		'delete' => 'spip_pg_delete',
 		'drop_table' => 'spip_pg_drop_table',
@@ -1169,6 +1170,9 @@ function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false, 
 }
 
 
+function spip_pg_create_base($nom, $serveur='',$requeter=true) {
+  return spip_pg_query("CREATE DATABASE $nom", $serveur, $requeter);
+}
 
 // Fonction de creation d'une vue SQL nommee $nom
 // http://doc.spip.org/@spip_pg_create_view
