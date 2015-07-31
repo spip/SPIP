@@ -293,6 +293,7 @@ ecrire/inc_export_all.php -text
 ecrire/inc_forum_admin.php -text
 ecrire/inc_forum_envoi.php -text
 ecrire/inc_headers.php -text
+ecrire/inc_import_all.php -text
 ecrire/inc_install.php -text
 ecrire/inc_js_menu_rubriques.php -text
 ecrire/inc_lang_liste.php -text
