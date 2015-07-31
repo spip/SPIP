@@ -593,18 +593,7 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 					."&titre_message=".rawurlencode($titre);
 				echo "<b><a href=\"$url\">R&eacute;pondre &agrave; ce message</a></b></font>";
 			}
-			
-			if ($mots_cles_forums == "oui"){
-				$query_mots = "SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot";
-				$result_mots = mysql_query($query_mots);
-				while ($row_mots = mysql_fetch_array($result_mots)) {
-					$id_mot = $row_mots['id_mot'];
-					$titre_mot = propre($row_mots['titre']);
-					$type_mot = propre($row_mots['type']);
-					echo "<li> <b>$type_mot :</b> $titre_mot";
-				}
-			}
-			
+
 			echo "</font>";
 			echo "</td></tr></table>";
 			if ($statut == "off" OR $statut == "prop") {
