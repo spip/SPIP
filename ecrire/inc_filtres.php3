@@ -171,15 +171,30 @@ function http_href($href, $clic, $title='', $style='', $class='', $evt='') {
 		'</a>';
 }
 
-// produit une balise img avec un champ alt d'office (et different) si vide
+// produit une balise img avec un champ alt d'office si vide
 // attention le htmlentities et la traduction doivent etre appliques avant.
 
 function http_img_pack($img, $alt, $att, $title='') {
-	static $num = 0;
 	return "<img src='" . _DIR_IMG_PACK . $img
-		. ("'\nalt=\"" . ($alt ? $alt : ('img_pack' . $num++)) . '" ')
-		. ($title ? " title=\"$title\"" : '')
-		. $att . " />";
+	  . ("'\nalt=\"" .
+	     ($alt ? $alt : ($title ? $title : ereg_replace('\..*$','',$img)))
+	     . '" ')
+	  . ($title ? " title=\"$title\"" : '')
+	  . $att . " />";
+}
+
+// variante avec un label et un checkbox
+
+function http_label_img($statut, $etat, $var, $img, $texte) {
+  return "<label for='$statut'>". 
+    "<input type='checkbox' " .
+    (($etat !== false) ? ' checked="checked"' : '') .
+    " name='$var" .
+    "[]' value='$statut' id='$statut'>&nbsp;" .
+    http_img_pack($img, $texte, "width='8' height='9' border='0'", $texte) .
+    " " .
+    $texte .
+    "</label><br />";
 }
 
 function http_href_img($href, $img, $att, $title='', $style='', $class='', $evt='') {

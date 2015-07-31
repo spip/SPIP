@@ -72,7 +72,7 @@ function bouton_imessage($destinataire, $row = '') {
 	if ($destinataire) $title = _T('info_envoyer_message_prive');
 	else $title = _T('info_ecire_message_prive');
 
-	$texte_bouton = http_img_pack("m_envoi$spip_lang_rtl.gif", "m&gt;", "width='14' height='7' border='0' title='$title'");
+	$texte_bouton = http_img_pack("m_envoi$spip_lang_rtl.gif", "m&gt;", "width='14' height='7' border='0'", $title);
 		
 	
 	$ret .= "<a href='". $url->getUrl() ."' title=\"$title\">";
@@ -809,8 +809,8 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$s = "<div>";
 				
 			if (acces_restreint_rubrique($id_rubrique))
-				$s .= http_img_pack("admin-12.gif", "", "width='12' height='12' title='"._T('titre_image_admin_article')."'") . "&nbsp;";
-			$s .= "<a href=\"articles.php3?id_article=$id_article\"$descriptif$dir_lang style=\"display:block;\">";
+			  $s .= http_img_pack("admin-12.gif", "", "width='12' height='12'", _T('titre_image_admin_article'))
+			    . "&nbsp;<a href=\"articles.php3?id_article=$id_article\"$descriptif$dir_lang style=\"display:block;\">";
 			
 			if ($spip_display != 1 AND $spip_display != 4 AND lire_meta('image_process') != "non") {
 				include_ecrire("inc_logos.php3");
@@ -1086,27 +1086,26 @@ function bonhomme_statut($row) {
 
 	switch($row['statut']) {
 		case "0minirezo":
-			$image = http_img_pack("admin-12.gif", "", "title='"._T('titre_image_administrateur')."' border='0'");
+			return http_img_pack("admin-12.gif", "", "border='0'",
+					_T('titre_image_administrateur'));
 			break;
 		case "1comite":
 			if ($connect_statut == '0minirezo' AND ($row['source'] == 'spip' AND !($row['pass'] AND $row['login'])))
-				$image = http_img_pack("visit-12.gif", "", "title='"._T('titre_image_redacteur')."' border='0'");
+			  return http_img_pack("visit-12.gif",'', "border='0'", _T('titre_image_redacteur'));
 			else
-				$image = http_img_pack("redac-12.gif", "", "title='"._T('titre_image_redacteur_02')."' border='0'");
+			  return http_img_pack("redac-12.gif",'', "border='0'", _T('titre_image_redacteur_02'));
 			break;
 		case "5poubelle":
-			$image = http_img_pack("poubelle.gif", "", "title='"._T('titre_image_auteur_supprime')."' border='0'");
+		  return http_img_pack("poubelle.gif", '', "border='0'",_T('titre_image_auteur_supprime'));
 			break;
 		case "6forum":
-			$image = http_img_pack("visit-12.gif", "", "title='"._T('titre_image_visiteur')."' border='0'");
+		  return http_img_pack("visit-12.gif", '', "border='0'",_T('titre_image_visiteur'));
 			break;
 		case "nouveau":
 		default:
-			$image = '';
+			return '';
 			break;
 	}
-
-	return $image;
 }
 
 // La couleur du statut

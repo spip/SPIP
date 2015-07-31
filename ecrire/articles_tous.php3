@@ -140,65 +140,40 @@ debut_boite_info();
 
 echo "<B>"._T('titre_cadre_afficher_article')."&nbsp;:</B><BR>";
 
+if ($aff_statut['prepa'])
+	echo http_label_img('prepa',
+			    strpos($aff_art, 'prepa'),
+			    'aff_art',
+			    'puce-blanche-breve.gif',
+			    _T('texte_statut_en_cours_redaction'));
 
-
-
-
-if ($aff_statut["prepa"]) {
-	if (ereg('prepa', $aff_art)) {
-		echo "<input type='checkbox' CHECKED name='aff_art[]' value='prepa' id='prepa'>";
-	}
-	else {
-		echo "<input type='checkbox' name='aff_art[]' value='prepa' id='prepa'>";
-	}
-	echo " <label for='prepa'>". http_img_pack('puce-blanche-breve.gif', "", "width='8' height='9' border='0'");
-	echo "  "._T('texte_statut_en_cours_redaction')."</label><BR>";
-}
-
-
-if ($aff_statut["prop"]) {
-	if (ereg('prop', $aff_art)) {
-		echo "<input type='checkbox' CHECKED name='aff_art[]' value='prop' id='prop'>";
-	}
-	else {
-		echo "<input type='checkbox' name='aff_art[]' value='prop' id='prop'>";
-	}
-	echo " <label for='prop'>". http_img_pack('puce-orange-breve.gif', "", "width='8' height='9' border='0'");
-	echo "  "._T('texte_statut_attente_validation')."</label><BR>";
-}
+if ($aff_statut['prop'])
+	echo http_label_img('prop',
+			    strpos($aff_art, 'prop'),
+			    'aff_art',
+			    'puce-orange-breve.gif',
+			    _T('texte_statut_attente_validation'));
 	
-if ($aff_statut["publie"]) {
-	if (ereg('publie', $aff_art)) {
-		echo "<input type='checkbox' CHECKED name='aff_art[]' value='publie' id='publie'>";
-	}
-	else {
-		echo "<input type='checkbox' name='aff_art[]' value='publie' id='publie'>";
-	}
-	echo " <label for='publie'>". http_img_pack('puce-verte-breve.gif', "", "width='8' height='9' border='0'");
-	echo "  "._T('texte_statut_publies')."</label><BR>";
-}
+if ($aff_statut['publie'])
+	echo http_label_img('publie',
+			    strpos($aff_art, 'publie'),
+			    'aff_art',
+			    'puce-verte-breve.gif',
+			    _T('texte_statut_refuse'));
 
-if ($aff_statut["refuse"]) {
-	if (ereg("refuse",$aff_art)) {
-		echo "<input type='checkbox' CHECKED name='aff_art[]' value='refuse' id='refuse'>";
-	}
-	else {
-		echo "<input type='checkbox' name='aff_art[]' value='refuse' id='refuse'>";
-	}
-	echo " <label for='refuse'>" . http_img_pack('puce-rouge-breve.gif', "", "width='8' height='9' border='0'");
-	echo "  "._T('texte_statut_refuses')."</label><BR>";
-}
+if ($aff_statut['refuse'])
+	echo http_label_img('refuse',
+			    strpos($aff_art, 'refuse'),
+			    'aff_art',
+			    'puce-rouge-breve.gif',
+			    _T('texte_statut_refuses'));
 
-if ($aff_statut["poubelle"]) {
-	if (ereg('poubelle',$aff_art)) {
-		echo "<input type='checkbox' CHECKED name='aff_art[]' value='poubelle' id='poubelle'>";
-	}
-	else {
-		echo "<input type='checkbox' name='aff_art[]' value='poubelle' id='poubelle'>";
-	}
-	echo " <label for='poubelle'>" . http_img_pack('puce-poubelle-breve.gif', "", "width='8' height='9' border='0'");
-	echo "  "._T('texte_statut_poubelle')."</label>";
-}
+if ($aff_statut['poubelle'])
+	echo http_label_img('poubelle',
+			    strpos($aff_art, 'poubelle'),
+			    'aff_art',
+			    'puce-poubelle-breve.gif',
+			    _T('texte_statut_poubelle'));
 
 echo "<div align='$spip_lang_right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."'></div>";
 
