@@ -376,7 +376,7 @@ if (strlen($texte) > 1) {
 //
 // Langue de la rubrique
 //
-if ($coll>0 AND (lire_meta('multi_rubriques') == 'oui') AND (lire_meta('multi_secteurs' == 'non') OR ($id_parent == 0)) AND $flag_editable) {
+if ($coll>0 AND lire_meta('multi_rubriques') == 'oui' AND (lire_meta('multi_secteurs') == 'non' OR $id_parent == 0) AND $flag_editable) {
 	if ($changer_lang) {
 		if ($changer_lang != "herit") {
 			spip_query("UPDATE spip_rubriques SET lang='".addslashes($changer_lang)."', langue_choisie='oui' WHERE id_rubrique=$coll");
@@ -395,14 +395,18 @@ if ($coll>0 AND (lire_meta('multi_rubriques') == 'oui') AND (lire_meta('multi_se
 	$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_rubriques WHERE id_rubrique=$coll"));
 	$langue_rubrique = $row['lang'];
 	$langue_choisie_rubrique = $row['langue_choisie'];
-
-	$herit = ($langue_choisie_rubrique != 'oui');
+	if ($id_parent) {
+		$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_parent"));
+		$langue_parent = $row[0];
+	}
+	else $langue_parent = lire_meta('langue_site');
 
 	debut_cadre_enfonce("langues-24.gif");
-		echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
-		echo menu_langues('changer_lang', $langue_rubrique, _T('info_multi_cette_rubrique').' ', $herit);
-		echo "</font></center>\n";
-	fin_cadre_enfonce();}
+	echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
+	echo menu_langues('changer_lang', $langue_rubrique, _T('info_multi_cette_rubrique').' ', $langue_parent);
+	echo "</font></center>\n";
+	fin_cadre_enfonce();
+}
 
 
 fin_cadre_relief();

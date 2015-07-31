@@ -219,8 +219,6 @@ if ($titre && !$ajout_forum && $flag_editable) {
 		}
 	}
 
-
-
 	// afficher le nouveau titre dans la barre de fenetre
 	$titre_article = stripslashes($titre);
 
@@ -1165,12 +1163,13 @@ if ((lire_meta('multi_articles') == 'oui')
 
 	// Choix langue article
 	if (lire_meta('multi_articles') == 'oui' AND $flag_editable) {
+		$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+		$langue_parent = $row['lang'];
+
 		if ($changer_lang) {
 			if ($changer_lang != "herit")
 				spip_query("UPDATE spip_articles SET lang='".addslashes($changer_lang)."', langue_choisie='oui' WHERE id_article=$id_article");
 			else {
-				$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-				$langue_parent = $row['lang'];
 				spip_query("UPDATE spip_articles SET lang='".addslashes($langue_parent)."', langue_choisie='non' WHERE id_article=$id_article");
 			}
 		}
@@ -1184,7 +1183,7 @@ if ((lire_meta('multi_articles') == 'oui')
 
 		debut_cadre_enfonce();
 		echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
-		echo menu_langues('changer_lang', $langue_article, _T('info_multi_cet_article').' ', $herit);
+		echo menu_langues('changer_lang', $langue_article, _T('info_multi_cet_article').' ', $langue_parent);
 		echo "</font></center>\n";
 		fin_cadre_enfonce();
 	}

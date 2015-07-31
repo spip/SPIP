@@ -60,18 +60,6 @@ function calculer_dates_rubriques($id_rubrique = 0, $date_parent = "0000-00-00")
 			if ($date_sites > $date_rubrique) $date_rubrique = $date_sites;
 		}
 
-/*		// recuperer l'article le plus recent syndique dans un site reference dans cette rubrique (ouf)
-		$result = spip_query("SELECT id_syndic FROM spip_syndic WHERE id_rubrique=$id_rubrique AND statut='publie'");
-		$syndic = '';
-		while ($row = spip_fetch_array($result))
-			$syndic[] = $row['id_syndic'];
-		if ($syndic) {
-			$row = spip_fetch_array (spip_query ("SELECT MAX(date) AS date_h FROM spip_syndic_articles WHERE id_syndic IN(".join(',',$syndic).") AND statut='publie'"));
-			$date_syndic_article = $row['date_h'];
-			if ($date_syndic_article > $date_rubrique) $date_rubrique = $date_syndic_article;
-		}
-*/
-
 		// articles post-dates
 		$post_dates = lire_meta("post_dates");
 		if ($post_dates != "non") {
@@ -178,11 +166,10 @@ function calculer_langues_rubriques_etape() {
 
 function calculer_langues_rubriques() {
 	// rubriques (recursivite)
-	
+
 	$langue_site = addslashes(lire_meta('langue_site'));
 	spip_query ("UPDATE spip_rubriques SET lang='$langue_site', langue_choisie='non' WHERE id_parent='0' AND langue_choisie != 'oui'");
-	
-	
+
 	while (calculer_langues_rubriques_etape());
 
 	// articles
@@ -197,7 +184,7 @@ function calculer_langues_rubriques() {
 		spip_debug ("article $id_article = .$lang");
 		spip_query ("UPDATE spip_articles SET lang='$lang', langue_choisie='non' WHERE id_article=$id_article");
 	}
-	
+
 	// breves
 	$s = spip_query ("SELECT fils.id_breve AS id_breve, mere.lang AS lang
 		FROM spip_breves AS fils, spip_rubriques AS mere
@@ -210,7 +197,7 @@ function calculer_langues_rubriques() {
 		spip_debug ("breve $id_breve = .$lang");
 		spip_query ("UPDATE spip_breves SET lang='$lang', langue_choisie='non' WHERE id_breve=$id_breve");
 	}
-	
+
 	if (lire_meta('multi_rubriques') == 'oui') {
 		// Ecrire meta liste langues utilisees dans rubriques
 		$s = spip_query ("SELECT lang FROM spip_rubriques WHERE lang != '' GROUP BY lang");
