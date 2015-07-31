@@ -949,8 +949,9 @@ function agenda_affiche($i)
 	$nb = array_shift($args); // nombre d'evenements (on pourrait l'afficher)
 	$sinon = array_shift($args);
 	$type = array_shift($args);
-	if (!$nb) 
+	if (!$nb){ 
 		return http_calendrier_init('', $type, '', '', str_replace('&amp;', '&', self()), $sinon);
+	}	
 	$agenda = agenda_memo(0);
 	$evt = array();
 	foreach (($args ? $args : array_keys($agenda)) as $k) {  
@@ -960,19 +961,20 @@ function agenda_affiche($i)
 		}
 	}
 	$d = array_keys($evt);
-	if (count($d))
+
+	if (count($d)){
 		$mindate = min($d);
-	else {
-	  $mindate = (_request('jour')."/"._request('mois')."/"._request('annee'));
-	  if ($mindate !='//')
-	  	$mindate = date_ical($mindate);
-	  else  $mindate = date("Ymd\THis");
+		$start = strtotime($mindate);
 	}
-	$start = strtotime($mindate);
+	else {  
+		$mindate = ($j=_request('jour')) * ($m=_request('mois')) * ($a=_request('annee'));  
+  		if ($mindate)
+			$start = mktime(0,0,0, $j, $m, $a);
+  		else $start = mktime(0,0,0);
+	}
 	if ($type != 'periode')
 		$evt = array('', $evt);
-	else
-	{
+	else {
 		$min = substr($mindate,6,2);
 		$max = $min + ((strtotime(max($d)) - $start) / (3600 * 24));
 		if ($max < 31) $max = 0;
