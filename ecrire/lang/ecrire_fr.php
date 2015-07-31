@@ -319,6 +319,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_config_suivi_explication' => 'Vous pouvez vous abonner &agrave; la mailing-list de ce site. Vous recevrez alors par courrier &eacute;lectronique les annonces d\'articles et de br&egrave;ves propos&eacute;s &agrave; la publication.',
 'info_confirmer_passe' => 'Confirmer ce nouveau mot de passe :',
 'info_connexion_base' => 'Essai de connexion &agrave; la base',
+'info_connexion_base_donnee' => 'Connexion &agrave; votre base de donn&eacute;es',
 'info_connexion_ldap_ok' => 'La connexion LDAP a r&eacute;ussi.</b><p /> Vous pouvez passer &agrave; l\'&eacute;tape suivante.',
 'info_connexion_mysql' => 'Votre connexion SQL',
 'info_connexion_ok' => 'La connexion a r&eacute;ussi.',
