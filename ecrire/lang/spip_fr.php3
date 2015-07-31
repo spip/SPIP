@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_echec_syndication_02' => 'La syndication a &eacute;chou&eacute; : impossible d\'acc&eacute;der au backend de ce site.',
 'avis_erreur' => 'Erreur: voir ci-dessous',
 'avis_erreur_connexion' => 'Erreur de connexion',
+'avis_erreur_cookie' => 'probl&egrave;me de cookie',
 'avis_erreur_fonction_contexte' => 'Erreur de programmation. Cette fonction ne doit pas etre appelee dans ce contexte.',
 'avis_erreur_mysql' => 'Erreur MySQL',
 'avis_erreur_sauvegarde' => 'Erreur dans la sauvegarde (@type@ @id_objet@) !',
