@@ -701,7 +701,7 @@ function http_calendrier_ics($annee, $mois, $jour,$echelle, $partie_cal,  $large
 			$perso = substr($evenement['ATTENDEE'], 0,strpos($evenement['ATTENDEE'],'@'));
 			$lieu = isset($evenement['LOCATION']) ?
 				$evenement['LOCATION'] : '';
-			$sum = preg_replace('/ \+/','&nbsp;', typo($evenement['SUMMARY']));
+			$sum = preg_replace('/\s+/','&nbsp;', typo($evenement['SUMMARY']));
 			if (!$sum) { $sum = $desc; $desc = '';}
 			if (!$sum) { $sum = $lieu; $lieu = '';}
 			if (!$sum) { $sum = $perso; $perso = '';}
@@ -866,7 +866,7 @@ function http_calendrier_avec_heure($evenement, $amj)
 	
 	$desc = propre($evenement['DESCRIPTION']);
 	$sum = $evenement['SUMMARY'];
-	$sum = preg_replace('/ \+/','&nbsp;', typo($sum));
+	$sum = preg_replace('/\s+/','&nbsp;', typo($sum));
 	if (!$sum) $sum = $desc;
 	if ($lieu = $evenement['LOCATION'])
 	  $sum .= '<br />' . $lieu;
