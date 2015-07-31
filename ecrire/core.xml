@@ -104,8 +104,13 @@
 	</bouton>
 	<bouton id='configurer_langue' parent="bando_configuration">
 		<icone>images/langue-16.png</icone>
-		<titre>icone_gestion_langues</titre>		
+		<titre>info_langue_principale</titre>
 	</bouton>
+	<bouton id='configurer_multilang' parent="bando_configuration">
+		<icone>images/traduction-16.png</icone>
+		<titre>info_multilinguisme</titre>
+	</bouton>
+
 	<bouton id='config_contenu' parent="bando_configuration">
 		<icone>images/config-contenu-16.png</icone>
 		<titre>onglet_contenu_site</titre>		
@@ -203,14 +208,6 @@
 		<url>charger_plugin</url>
 	</onglet>
 
-	<onglet id='configurer_langue' parent="config_lang">
-		<icone>images/langue-24.png</icone>
-		<titre>info_langue_principale</titre>
-	</onglet>
-	<onglet id='configurer_multilang' parent="config_lang">
-		<icone>images/traduction-24.png</icone>
-		<titre>info_multilinguisme</titre>
-	</onglet>
 
 
 	<pipeline><nom>accueil_encours</nom><action></action></pipeline>
