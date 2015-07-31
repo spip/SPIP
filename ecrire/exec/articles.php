@@ -295,7 +295,7 @@ function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode,
 		. "<span class='arial1 spip_small'>$mode</span>"
 		. aide("artmodif");
 	}
-	else return icone_inline(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), "article-24.gif", "edit.gif", $align, false);
+	else return icone_inline(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), "article-24.gif", "edit.gif", $align);
 }
 
 // http://doc.spip.org/@titres_articles
@@ -306,6 +306,9 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 	$lang_dir = lang_dir($lang_objet);
 
 	$res = '';
+	if ($flag_editable) {
+		$res .= bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.gif", "edit.gif",$spip_lang_right);
+	}
 
 	if ($surtitre) {
 		$res .= "<span  dir='$lang_dir' class='arial1 spip_medium'><b>" . typo($surtitre) . "</b></span>\n";
@@ -316,7 +319,7 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 	if ($soustitre) {
 		$res .= "<span  dir='$lang_dir' class='arial1 spip_medium'><b>" . typo($soustitre) . "</b></span>\n";
 	}
-	
+	$res .= "<div class='nettoyeur'></div>";
 	if ($descriptif OR $url_site OR $nom_site) {
 
 		$texte_case = ($descriptif) ? "{{"._T('info_descriptif')."}} $descriptif\n\n" : '';
@@ -331,18 +334,7 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 	if ($statut_article == 'prop')
 		$res .= "<p style='color: red' class='verdana1 spip_small'><b>"._T('text_article_propose_publication')."</b></p>";
 	
-	$res = "\n<td valign='top'>$res</td>";
-
-	if ($flag_editable) {
-		$res .= "\n<td style='width: 36px;' valign='top'>"
-		  . bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.gif", "edit.gif",$spip_lang_right)
-		. "</td>\n";
-	}
-
-	return "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>"
-	. "\n<tr>"
-	. $res
-	. "</tr></table>\n";
+	return $res;
 }
 
 // http://doc.spip.org/@afficher_corps_articles

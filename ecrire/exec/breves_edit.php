@@ -19,7 +19,7 @@ include_spip ('inc/barre');
 // http://doc.spip.org/@exec_breves_edit_dist
 function exec_breves_edit_dist()
 {
-	global $connect_statut, $connect_id_rubrique;
+	global $connect_statut, $connect_id_rubrique,$spip_lang_right;
 	$id_breve = intval(_request('id_breve'));
 	$id_rubrique  = intval(_request('id_rubrique'));
 	$new = _request('new');
@@ -107,17 +107,10 @@ debut_cadre_formulaire();
 
 
 if ($new != "oui") {
-	echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
-	echo "\n<tr>";
-	echo "<td>";
-	echo icone_inline(_T('icone_retour'), generer_url_ecrire("breves_voir","id_breve=$id_breve"), "breve-24.gif", "rien.gif");
-	
-	echo "</td>";
-	echo "\n<td>", http_img_pack("rien.gif", ' ', "width='10'"), "</td>\n";
-	echo "<td style='width: 100%'>";
+	echo icone_inline(_T('icone_retour'), generer_url_ecrire("breves_voir","id_breve=$id_breve"), "breve-24.gif", "rien.gif",$spip_lang_right);
 	echo _T('info_modifier_breve');
 	gros_titre($titre);
-	echo "</td></tr></table><br />";
+	echo "<br class='nettoyeur' />";
 }
 
 if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
