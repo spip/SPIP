@@ -776,11 +776,8 @@ function _sqlite_calculer_expression($expression, $v, $join = 'AND'){
 
 
 
-// pour conversion 0x ?
+// pour conversion 0+x ? (pas la peine en sqlite)
 function _sqlite_calculer_order($orderby) {
-	//if (!is_array($orderby)) $orderby = explode(',', $orderby);
-	//array_walk($orderby, '_sqlite_mettre_quote');
-	//return join(", ", $orderby);
 	return (is_array($orderby)) ? join(", ", $orderby) :  $orderby;
 }
 
@@ -1033,6 +1030,7 @@ class sqlite_analyse_query {
 		$this->corrigerTablesFrom();
 		$this->corrigerZeroAsX();
 		$this->corrigerAntiquotes();
+		$this->corrigerRegexp();
 	}
 	
 	
@@ -1082,7 +1080,13 @@ class sqlite_analyse_query {
 			$this->query = 'INSERT ' . substr($this->query,'13');	
 		}				
 	}	
-		
+	
+	// critere REGEXP non reconnu en sqlite2
+	function corrigerRegexp(){
+		if (($this->sqlite_version == 2) && (strpos($this->query, 'REGEXP')!==false)){
+			$this->query = preg_replace('/([^\s\(]*)(\s*)REGEXP(\s*)([^\s\)]*)/', 'REGEXP_MATCH($1, $4)', $this->query);
+		}
+	}
 	
 	// mettre les bons noms de table dans from, update, insert, replace...
 	function corrigerTablesFrom(){	
