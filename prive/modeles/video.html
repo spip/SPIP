@@ -6,6 +6,18 @@
   puis #LARGEUR/HAUTEUR sauf si il y a un controleur
 ]
 #SET{hauteur,#ENV{hauteur,#HAUTEUR}} #SET{largeur,#ENV{largeur,#LARGEUR}}
+[(#REM)
+
+	Si la taille est zero, mettre une valeur par defaut 320x240
+
+][(#GET{hauteur}|plus{#GET{largeur}}|?{'',
+	[(#SET{largeur,320})][(#SET{hauteur,240})]
+})]
+[(#REM)
+	Pour quicktime il faut ajouter 16 pixels en hauteur
+	cf. http://article.gmane.org/gmane.comp.web.spip.zone/9231/match=quicktime
+
+][(#EXTENSION|=={mov}|?{#SET{hauteur,#GET{hauteur}|plus{16}}})]
 [(#ENV{controls}=={PlayButton}|?{#SET{hauteur,25},''})][
  (#ENV{controls}=={PlayButton}|?{#SET{largeur,40},''})][
  (#ENV{controls}=={PositionSlider}|?{#SET{hauteur,25},''})][
