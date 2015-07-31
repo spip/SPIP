@@ -76,7 +76,9 @@ td {
 	background-position: center bottom; 
 	float: none;
 	behavior: url("win_width.htc");
- }
+ 	font-size: 12px;
+	font-family: Verdana,Arial,Sans,sans-serif; 
+}
 .formo { 
 	width: 100%; 
 	display: block;
@@ -85,6 +87,8 @@ td {
 	border: 1px solid <?php echo $couleur_claire; ?>; 
 	background-position: center bottom; float: none; 
 	behavior: url("win_width.htc");
+ 	font-size: 12px;
+	font-family: Verdana,Arial,Sans,sans-serif; 
 }
 .fondl { 
 	padding: 3px; 
@@ -92,9 +96,14 @@ td {
 	border: 1px solid <?php echo $couleur_claire; ?>; 
 	background-position: center bottom; 
 	float: none;
+ 	font-size: 11px;
+	font-family: Verdana,Arial,Sans,sans-serif; 
 }
 .fondo { background-color: <?php echo $couleur_foncee; ?>; 
 	background-position: center bottom; float: none; color: #FFFFFF;
+ 	font-size: 11px;
+	font-family: Verdana,Arial,Sans,sans-serif; 
+	font-weight: bold;
 }
 .fondf { background-color: #FFFFFF; border-style: solid ; border-width: 1px; border-color: #E86519; color: #E86519; 
 }
