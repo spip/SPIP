@@ -335,6 +335,7 @@ Le programme est n&eacute; en 2001 d'une initiative du minir&eacute;zo, un colle
 		<action>cvtmulti_styliser</action>
 		<inclure>inc/cvt_multietapes.php</inclure>
 	</pipeline>
+	<pipeline><nom>trig_auth_trace</nom><action></action></pipeline>
 	<pipeline><nom>trig_calculer_prochain_postdate</nom><action></action></pipeline>
 	<pipeline><nom>trig_calculer_langues_rubriques</nom><action></action></pipeline>
 	<pipeline><nom>trig_propager_les_secteurs</nom><action></action></pipeline>

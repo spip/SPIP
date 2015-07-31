@@ -297,7 +297,10 @@ function auth_trace($row, $date=null)
 
 	if (abs(strtotime($date) - $connect_quand)  >= 60) {
 		sql_updateq("spip_auteurs", array("en_ligne" => $date), "id_auteur=" .$row['id_auteur']);
+		$row['en_ligne'] = $date;
 	}
+
+	pipeline('trig_auth_trace',array('args'=>array('row'=>$row,'date'=>$date)));
 }
 
 
