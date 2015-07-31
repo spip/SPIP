@@ -114,7 +114,6 @@ $filtrer_javascript = 0;
 // 'html': article123.html
 // 'propres': Titre-de-l-article <http://lab.spip.net/spikini/UrlsPropres>
 // 'propres2' : Titre-de-l-article.html (base sur 'propres')
-// 'standard': article.php3?id_article=123 [urls SPIP < 1.9]
 $type_urls = 'page';
 
 
@@ -129,17 +128,6 @@ if (isset($_SERVER['REMOTE_ADDR'])) $ip = $_SERVER['REMOTE_ADDR'];
 // numero IP, ni temporairement lors des visites (pour gerer les statistiques
 // ou dans spip.log), ni dans les forums (responsabilite)
 # $ip = substr(md5($ip),0,16);
-
-// Creation des images avec ImageMagick : definir la constante de facon
-// a preciser le chemin du binaire et les options souhaitees. Par defaut :
-// define('_CONVERT_COMMAND', 'convert');
-// define('_RESIZE_COMMAND', _CONVERT_COMMAND.' -quality 85 -resize %xx%y! %src %dest');
-
-// Creation des vignettes avec netpbm/pnmscale
-// Note: plus facile a installer par FTP,
-// voir http://gallery.menalto.com/modules.php?op=modload&name=GalleryFAQ&file=index&myfaq=yes&id_cat=2#43
-// par defaut :
-// define('_PNMSCALE_COMMAND', 'pnmscale');
 
 // faut-il passer les connexions MySQL en mode debug ?
 $mysql_debug = false;
@@ -163,22 +151,14 @@ $champs_extra_proposes = false;
 $ignore_auth_http = false;
 $ignore_remote_user = true; # methode obsolete et risquee
 
-// Faut-il "invalider" les caches quand on depublie ou modifie un article ?
-# NB: cette option ne concerne pas les forums et petitions qui sont toujours
-# invalidants. (fonctionnalite experimentale : decommenter ci-dessous)
-#$invalider_caches = 'id_article,id_breve,id_rubrique,id_syndic';
-$invalider_caches = '';
-
-// Autre approche : tout invalider si modif
+// Invalider les caches a chaque modification du contenu ?
 // Si votre site a des problemes de performance face a une charge tres elevee,
-// il est recommande de mettre cette globale a false (dans mes_options).
+// vous pouvez mettre cette globale a false (dans mes_options).
 $derniere_modif_invalide = true;
 
 // Quota : la variable $quota_cache, si elle est > 0, indique la taille
-// totale maximale desiree des fichiers contenus dans le CACHE/ ;
-// ce quota n'est pas "dur", il ne s'applique qu'une fois par heure et
-// fait redescendre le cache a la taille voulue ; valeur en Mo
-// Si la variable vaut 0 aucun quota ne s'applique
+// totale maximale desiree des fichiers contenus dans le cache ; ce quota n'est
+// pas "dur" : si le site necessite un espace plus important, il le prend
 $quota_cache = 10;
 
 //
@@ -325,8 +305,7 @@ $meta = $connect_id_rubrique = array();
 //
 // Definitions des fonctions (charge aussi inc/flock)
 //
-
-require_once(_DIR_RESTREINT . 'inc/utils.php');
+require_once _DIR_RESTREINT . 'inc/utils.php';
 
 // Definition personnelles eventuelles
 
@@ -405,13 +384,12 @@ OR _request('action') == 'test_dirs')) {
 // prive car sinon ca rame a l'affichage (a revoir...)
 //
 
+@header("Vary: Cookie, Accept-Encoding");
 // si un buffer est deja ouvert, stop
 if (!test_espace_prive()
 AND $flag_ob
 AND strlen(ob_get_contents())==0
 AND !headers_sent()) {
-	@header("Vary: Cookie, Accept-Encoding");
-
 	if (
 	$GLOBALS['auto_compress']
 	&& function_exists('ob_gzhandler')
@@ -430,8 +408,6 @@ AND !headers_sent()) {
 	)
 		ob_start('ob_gzhandler');
 }
-else
-	@header("Vary: Cookie");
 
 // Vanter notre art de la composition typographique
 // La globale $spip_header_silencieux permet de rendre le header minimal pour raisons de securite
