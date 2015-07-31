@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_connexion_echec_1' => 'A conexão com a base de dados falhou.',
 	'avis_connexion_echec_2' => 'Volte para a página anterior e verifique as informações que você forneceu.',
 	'avis_connexion_echec_3' => '<b>N.B.</b> Em diversos servidores, você precisa <b>solicitar</b> a ativação do seu acesso à base de dados antes de poder utilizá-la. Se você não consegue se conectar, verifique se você efetuou esse pedido.',
+	'avis_connexion_erreur_creer_base' => 'Não foi possível criar a base de dados.',
 	'avis_connexion_erreur_nom_base' => 'O nome da base só pode conter letras, números e traços',
 	'avis_connexion_ldap_echec_1' => 'A conexão ao servidor LDAP falhou.',
 	'avis_connexion_ldap_echec_2' => 'Volte para a página anterior e verifique as informações que você forneceu.',
