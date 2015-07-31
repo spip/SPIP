@@ -396,10 +396,12 @@ function calculer_rubriques_publiques()
 			if ($row['id_parent']) $rubriques[] = $row['id_parent'];
 		}
 	}
-	$query = "UPDATE spip_rubriques SET statut='prive' WHERE id_rubrique NOT IN ($rubriques_publiques)";
-	spip_query($query);
-	$query = "UPDATE spip_rubriques SET statut='publie' WHERE id_rubrique IN ($rubriques_publiques)";
-	spip_query($query);
+	if ($rubriques_publiques) {
+		$query = "UPDATE spip_rubriques SET statut='prive' WHERE id_rubrique NOT IN ($rubriques_publiques)";
+		spip_query($query);
+		$query = "UPDATE spip_rubriques SET statut='publie' WHERE id_rubrique IN ($rubriques_publiques)";
+		spip_query($query);
+	}
 }
 
 
