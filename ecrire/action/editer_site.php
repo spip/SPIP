@@ -13,10 +13,12 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@action_editer_site_dist
-function action_editer_site_dist() {
+function action_editer_site_dist($arg=null) {
 
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+	if (is_null($arg)){
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
+	}
 	$resyndiquer = false;
 
 	include_spip('inc/filtres'); // pour vider_url()
