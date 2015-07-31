@@ -263,6 +263,15 @@ $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic) {
 	$bouton = _T('forum_message_definitif');
 	include_spip('public/assembler');
 	include_spip('public/composer');
+
+	// appliquer les traitements de #TEXTE a la previsu
+	// comme on voit c'est complique... y a peut-etre plus simple ?
+	$evaltexte = isset($table_des_traitements['TEXTE']['forums'])
+		? $table_des_traitements['TEXTE']['forums']
+		: $table_des_traitements['TEXTE'][0];
+	$evaltexte = '$tmptexte = '.str_replace('%s', '$texte', $evaltexte).';';
+	eval($evaltexte);
+
 	// supprimer les <form> de la previsualisation
 	// (sinon on ne peut pas faire <cadre>...</cadre> dans les forums)
 	return preg_replace("@<(/?)form\b@ism",
@@ -271,7 +280,7 @@ $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic) {
 		      0,
 		      array(
 			'titre' => safehtml(typo($titre)),
-			'texte' => safehtml(propre($texte)),
+			'texte' => $tmptexte,
 			'notes' => safehtml(calculer_notes()),
 			'url_site' => vider_url($url_site),
 			'nom_site' => safehtml(typo($nom_site)),
