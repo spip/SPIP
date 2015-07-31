@@ -214,7 +214,7 @@ function spip_connect($serveur='') {
 	static $t = array();
 
 // Assimiler spip_connect() et spip_connect('') [PHP les distingue].
-// Tous deux designent le serveur SQL std (moche mais historique)
+// Tous deux designent le serveur SQL std "db_mysql" (obscur mais historique)
 
 	if (!$serveur) $serveur = 'db_mysql';
 
@@ -222,9 +222,7 @@ function spip_connect($serveur='') {
 
 	$f = charger_fonction($serveur, 'base', true);
 
-	$t[$serveur] = ($f ? $f() : false);
-	spip_log("spip_connect($serveur) $f " . $t[$serveur]);
-	return $t[$serveur];
+	return ($t[$serveur] = ($f ? $f() : false));
 }
 
 // http://doc.spip.org/@spip_query
