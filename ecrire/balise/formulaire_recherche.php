@@ -31,16 +31,10 @@ function balise_FORMULAIRE_RECHERCHE_stat($args, $filtres) {
 }
  
 function balise_FORMULAIRE_RECHERCHE_dyn($lien, $rech) {
-	include_spip('inc/filtres');
-	if (!$recherche = _request('recherche')
-	AND !$recherche = $rech) {
-		include_spip('inc/charsets');
-		$recherche = html2unicode(_T('info_rechercher'));
-	}
-
 	return array('formulaire_recherche', 3600, 
 		     array('lien' => ($lien ? $lien : generer_url_public('recherche')),
-			'recherche' => $recherche
+			'recherche' => (
+				_request('recherche') ? _request('recherche') : $rech )
 		));
 }
 

@@ -5,6 +5,6 @@
 			id="formulaire_recherche"
 			class="formrecherche"
 			name="recherche"
-			value="[(#ENV{recherche})]" />
+			value="[(#ENV{recherche}|sinon{<:info_rechercher:>})]" />
 	</div>
 </form>
