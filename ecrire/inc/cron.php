@@ -141,8 +141,8 @@ function taches_generales() {
 	// Optimisation de la base
 	$taches_generales['optimiser'] = 3600*48;
 
-	// cache
-	$taches_generales['invalideur'] = 3600;
+	// cache (chaque 20 minutes => 1/16eme du repertoire cache)
+	$taches_generales['invalideur'] = 1200;
 
 	// nouveautes
 	if ($GLOBALS['meta']['adresse_neuf'] AND $GLOBALS['meta']['jours_neuf']
