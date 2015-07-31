@@ -215,7 +215,8 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 						// sinon nettoyer les br ajaxie
 						d.siblings('br.bugajaxie').remove();
 						// desemboiter d'un niveau pour manger le div que l'on a insere
-						jQuery(":first",cible).unwrap();
+						cible = jQuery(":first",cible);
+						cible.unwrap();
 					}
 					// chercher une ancre en debut de html pour positionner la page
 					if (a.length
@@ -264,7 +265,7 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
   });
 }
 
-jQuery.fn.formulaire_verifier = function(callback){
+jQuery.fn.formulaire_verifier = function(callback, champ){
 	var erreurs = {'message_erreur':'form non ajax'};
 	var me=this;
 	// si on est aussi en train de submit pour de vrai, abandonner
@@ -273,27 +274,35 @@ jQuery.fn.formulaire_verifier = function(callback){
 			jQuery(me).ajaxSubmit({
 				dataType:"json",
 				data:{formulaire_action_verifier_json:true},
-				success:function(){
+				success:function(errs){
+					var args = [errs, champ]
 					// si on est aussi en train de submit pour de vrai, abandonner
 					if (jQuery(me).closest('.ariaformprop').attr('aria-busy')!='true')
-						callback.apply(me,arguments);
+						callback.apply(me,args);
 				}
 			});
 		}
 		else
-			callback.apply(me,[erreurs]);
+			callback.apply(me,[erreurs, champ]);
 	}
 	return this;
 }
 
-jQuery.fn.formulaire_activer_verif_auto = function(){
+jQuery.fn.formulaire_activer_verif_auto = function(callback){
+	callback = callback || formulaire_actualiser_erreurs;
 	var me = jQuery(this).closest('.ariaformprop');
+	var check = function(){
+		var name=jQuery(this).attr('name');
+		// declencher apres 50ms pour ne pas double submit sur sequence saisie+submit
+		setTimeout(function(){me.find('form').formulaire_verifier(callback,name);},50);
+	}
 	var activer = function(){
 		if (me.find('form').attr('data-verifjson')!='on'){
-			me.find('form').attr('data-verifjson','on').find('input,select,textare').bind('change',function(){
-				// declencher apres 50ms pour ne pas double submit sur sequence saisie+submit
-				setTimeout(function(){me.find('form').formulaire_verifier(formulaire_actualiser_erreurs);},50);
-			});
+			me
+				.find('form')
+				.attr('data-verifjson','on')
+				.find('input,select,textarea')
+				.bind('change',check);
 		}
 	}
 	jQuery(activer);
