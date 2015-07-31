@@ -32,29 +32,23 @@
 
 			<br class="nettoyeur" />
 
-			[<div class="encart">
-			(#FORMULAIRE_ECRIRE_AUTEUR)
-			</div><!-- fin encart -->]
+			#FORMULAIRE_ECRIRE_AUTEUR
 
 			[(#REM) Articles de l'auteur ]
 			<B_articles>
-			<div class="contre-encart">
-
-				<div class="liste-articles">
-					#ANCRE_PAGINATION
-					<h2><:articles_auteur:></h2>
-					<ul>
-						<BOUCLE_articles(ARTICLES) {id_auteur} {par date}{inverse} {pagination 10}>
-						<li>
-							<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
-							<small>[(#DATE|affdate_jourcourt)]</small>
-						</li>
-						</BOUCLE_articles>
-					</ul>
-					[<p class="pagination">(#PAGINATION)</p>]
-				</div>
-
-			</div><!-- fin contre-encart -->
+            <div class="liste-articles">
+                #ANCRE_PAGINATION
+                <h2><:articles_auteur:></h2>
+                <ul>
+                    <BOUCLE_articles(ARTICLES) {id_auteur} {par date}{inverse} {pagination 10}>
+                    <li>
+                        <h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+                        <small>[(#DATE|affdate_jourcourt)]</small>
+                    </li>
+                    </BOUCLE_articles>
+                </ul>
+                [<p class="pagination">(#PAGINATION)</p>]
+            </div>
 			</B_articles>
 
 			[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]

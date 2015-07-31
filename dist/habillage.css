@@ -37,11 +37,6 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 
 #conteneur #navigation { float: right; width: 12em; text-align: center; }
 
-/* Blocs du contenu (c-a-d. la colonne principale) */
-#contenu .contre-encart { float: left; width: 21em; }
-
-#contenu .encart { float: right; width: 11em; margin: 0; margin-bottom: 1em; }
-
 /* Entete */
 #entete { width: 100%; border-bottom: 2px solid #333; }
 #entete #nom_site_spip, #entete a .spip_logos { display: block; float: left; font-weight: bold; font-size: 1.5em; }
@@ -67,7 +62,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 ---------------------------------------------- */
 
 /* Typo pour les menus et la navigation */
-body, #navigation, .encart, .formulaire_spip { font-family: Verdana, Tahoma, Geneva, sans-serif; }
+body, #navigation, .formulaire_spip { font-family: Verdana, Tahoma, Geneva, sans-serif; }
 
 /* Typo pour le contenu */
 #contenu { font-family: "Trebuchet MS", Helvetica, sans-serif; }
@@ -82,11 +77,11 @@ q, blockquote, .introduction, h3.spip, .voirskel { font-family: Georgia, Times, 
 /* Habillage general des menus de navigation */
 .rubriques, .breves, .syndic, .forums, .divers { min-width: 10em; border: 1px solid #CCC; margin-bottom: 1em; font-size: 0.77em; }
 
-.menu-titre { padding: 0.2em 0.4em; border-bottom: 1px dotted #CCC; text-align: center; font-weight: bold; }
+/*.menu-titre { padding: 0.2em 0.4em; border-bottom: 1px dotted #CCC; text-align: center; font-weight: bold; }*/
 
-#navigation p, .encart p { margin: 0; padding: 0.2em 0.7em; text-align: left; }
-#navigation ul, .encart ul { margin: 0; padding: 0.2em 0; text-align: left; list-style: none; }
-#navigation li, .encart li { margin: 0; padding: 0 0.7em; }
+#navigation p { margin: 0; padding: 0.2em 0.7em; text-align: left; }
+#navigation ul { margin: 0; padding: 0.2em 0; text-align: left; list-style: none; }
+#navigation li { margin: 0; padding: 0 0.7em; }
 
 /* Des couleurs specifiques selon les types de menus */
 .rubriques { background: #EAFFEA; }
@@ -164,8 +159,6 @@ h1 { font-size: 1.27em; font-weight: bold; color: #000; }
 
 .page_plan .cartouche { display: none; }
 .page_plan #contenu h2 { clear: both; background: #EEE; border: 1px solid #CCC; padding: 0.5em; margin-bottom: 1em; font-weight: bold; text-align: center; }
-.page_plan #contenu .contre-encart ul { display: block; clear: left; margin-top: 0; margin-bottom: 1em; padding-top: 0; }
-.page_plan #contenu .contre-encart li {}
 
 /* Habillage des formulaires
 ---------------------------------------------- */
