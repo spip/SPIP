@@ -87,10 +87,9 @@ function export_all_fin($file, $meta, $rub)
 			._T('info_sauvegarde_reussi_04')
 			. "</p>\n";
 			
-			$corps .= "<p style='text-align: $spip_lang_right'>".
-			  " <a href='" . generer_url_ecrire() . "'>" .
-			  _T("retour") .
-			  "</a></p>";
+			$corps .= "<div style='text-align: $spip_lang_right'>"
+				. bouton_action(_T("retour"), generer_url_ecrire())
+			  . "</div>";
 						
 			// afficher la liste des tables qu'on a sauvegarde
 			sort($tables_sauvegardees);
