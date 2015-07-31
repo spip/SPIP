@@ -79,6 +79,10 @@ debut_cadre_couleur("racine-site-24.gif");
 	echo "<input type='text' name='adresse_site' value=\"$adresse_site/\" size='40' CLASS='forml'>";
 	fin_cadre_relief();
 
+	debut_cadre_relief("", false, "", _T('entree_description_site'));
+	echo "<textarea name='descriptif_site' CLASS='forml' ROWS='4' COLS='40' wrap=soft>$descriptif_site</textarea>";
+	fin_cadre_relief();
+
 	if ($options == "avancees") {
 		echo "<div>&nbsp;</div>";
 	
@@ -86,11 +90,6 @@ debut_cadre_couleur("racine-site-24.gif");
 		echo "<input type='text' name='email_webmaster' value=\"$email_webmaster\" size='40' CLASS='formo'>";
 		fin_cadre_relief();
 	}
-
-	debut_cadre_relief("", false, "", _T('entree_description_site'));
-	echo "<textarea name='descriptif_site' CLASS='forml' ROWS='4' COLS='40' wrap=soft>$descriptif_site</textarea>";
-	fin_cadre_relief();
-
 
 	echo "<div style='text-align:right;'><input type='submit' name='Valider' value='"._T('bouton_enregistrer')."' CLASS='fondo'></div>";
 

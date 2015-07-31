@@ -548,7 +548,7 @@ function redirige_par_entete($url, $fin="") {
 	if ($url[0]=='?')
 		$url = url_de_base().$url;
 
-	header("Location: " . strtr("$url$fin", "\n\r", "  "));
+	@header("Location: " . strtr("$url$fin", "\n\r", "  "));
 
 	echo '<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
 <html><head>
