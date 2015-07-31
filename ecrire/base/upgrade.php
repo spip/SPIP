@@ -51,10 +51,13 @@ function upgrade_vers($version, $version_installee, $version_cible = 0){
 function convertir_un_champ_blob_en_text($table,$champ,$type){
 	$res = spip_query("SHOW FULL COLUMNS FROM $table LIKE '$champ'");
 	if ($row = spip_fetch_array($res)){
-		if (strtolower($row['Type'])!=strtolower($type))
+		if (strtolower($row['Type'])!=strtolower($type)) {
 			$default = $row2['Default']?(" DEFAULT "._q($row2['Default'])):"";
 			$notnull = ($row2['Null']=='YES')?"":" NOT NULL";
-			spip_query("ALTER TABLE $table CHANGE $champ $champ $type $default $notnull");
+			$q = "ALTER TABLE $table CHANGE $champ $champ $type $default $notnull";
+			spip_log($q);
+			spip_query($q);
+		}
 	}
 }
 
