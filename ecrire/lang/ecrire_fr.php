@@ -299,7 +299,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => '<sup>e</sup> sur @liste@',
 'info_code_acces' => 'N\'oubliez pas vos propres codes d\'accès !',
 'info_compatibilite_html' => 'Norme HTML à suivre',
-'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@',
+'info_compresseur_gzip' => 'Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@',
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.',
 'info_config_suivi' => 'Si cette adresse correspond à une mailing-list, vous pouvez indiquer ci-dessous l\'adresse à laquelle les participants au site peuvent s\'inscrire. Cette adresse peut être une URL (par exemple la page d\'inscription à la liste par le Web), ou une adresse email dotée d\'un sujet spécifique (par exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Vous pouvez vous abonner à la mailing-list de ce site. Vous recevrez alors par courrier électronique les annonces d\'articles et de brèves proposés à la publication.',
@@ -332,7 +332,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ecrire_article' => 'Avant de pouvoir écrire des articles, vous devez créer au moins une rubrique.',
 'info_email_envoi' => 'Adresse email d\'envoi (optionnel)',
 'info_email_envoi_txt' => 'Indiquez ici l\'adresse à utiliser pour envoyer les emails (à défaut, l\'adresse destinataire sera utilisée comme adresse d\'envoi) :',
-'info_email_webmestre' => 'Adresse e-mail du webmestre (optionnel)',
+'info_email_webmestre' => 'Adresse e-mail du webmestre',
 'info_entrer_code_alphabet' => 'Entrez le code de l\'alphabet à utiliser :',
 'info_envoi_email_automatique' => 'Envoi de mails automatique',
 'info_envoyer_maintenant' => 'Envoyer maintenant',
@@ -377,7 +377,7 @@ exige d\'avoir un accès FTP au site Web.</p>',
 'info_historique_texte' => 'Le suivi des révisions permet de conserver un historique de toutes les modifications apportées au contenu d\'un article, et d\'afficher les différences entre les versions successives.',
 'info_identification_publique' => 'Votre identité publique...',
 'info_image_process' => 'Veuillez sélectionner la meilleure méthode de fabrication des vignettes en cliquant sur l\'image correspondante.',
-'info_image_process2' => '<b>N.B.</b> <i>Si aucune image n\'apparaît, alors le serveur qui héberge votre site n\'a pas été configuré pour utiliser de tels outils. Si vous souhaitez utiliser ces fonctions, contactez le responsable technique et demandez les extensions «GD» ou «Imagick».</i>',
+'info_image_process2' => 'Si aucune image n\'apparaît, alors le serveur qui héberge votre site n\'a pas été configuré pour utiliser de tels outils. Si vous souhaitez utiliser ces fonctions, contactez le responsable technique et demandez les extensions «GD» ou «Imagick».',
 'info_images_auto' => 'Images calculées automatiquement',
 'info_informations_personnelles' => 'Informations personnelles',
 'info_inscription_automatique' => 'Inscription automatique de nouveaux rédacteurs',
@@ -488,12 +488,12 @@ exige d\'avoir un accès FTP au site Web.</p>',
 'info_question_inscription_nouveaux_redacteurs' => 'Acceptez-vous les inscriptions de nouveaux rédacteurs à
   partir du site public ? Si vous acceptez, les visiteurs pourront s\'inscrire
   depuis un formulaire automatisé et accéderont alors à l\'espace privé pour
-  proposer leurs propres articles. <blockquote><i>Lors de la phase d\'inscription,
+  proposer leurs propres articles. <div class="notice">Lors de la phase d\'inscription,
   les utilisateurs reçoivent un courrier électronique automatique
   leur fournissant leurs codes d\'accès au site privé. Certains
   hébergeurs désactivent l\'envoi de mails depuis leurs
   serveurs : dans ce cas, l\'inscription automatique est
-  impossible.</i></blockquote>',
+  impossible.</div>',
 'info_question_utilisation_moteur_recherche' => 'Souhaitez-vous utiliser le moteur de recherche intégré à SPIP ?
 	(le désactiver accélère le fonctionnement du système.)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites',
