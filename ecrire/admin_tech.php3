@@ -8,7 +8,9 @@ debut_page("Maintenance technique", "administration", "base");
 
 echo "<br><br><br>";
 gros_titre("Maintenance technique");
-barre_onglets("administration", "sauver");
+
+if ($options == "avancees")
+	barre_onglets("administration", "sauver");
 
 
 debut_gauche();
@@ -122,29 +124,29 @@ echo "</TABLE>";
 // Lien vers la reparation
 //
 
-$res = spip_query("SELECT version()");
-if (($row = spip_fetch_array($res)) AND ($row[0] >= '3.23.14')) {
+if ($options == "avancees") {
+	$res = spip_query("SELECT version()");
+	if (($row = spip_fetch_array($res)) AND ($row[0] >= '3.23.14')) {
+		echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=8 WIDTH=\"100%\">";
+		echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND=''><B>";
+		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>";
+		echo "R&eacute;parer la base de donn&eacute;es</FONT></B></TD></TR>";
 
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=8 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND=''><B>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>";
-	echo "R&eacute;parer la base de donn&eacute;es</FONT></B></TD></TR>";
+		echo "<TR><TD BACKGROUND=''>";
 
-	echo "<TR><TD BACKGROUND=''>";
+		echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
+		echo "\n<FORM ACTION='admin_repair.php3' METHOD='get'>";
 
-	echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
-	echo "\n<FORM ACTION='admin_repair.php3' METHOD='get'>";
+		echo "\n<p align='justify'>Si votre base de donn&eacute;es a
+			crash&eacute;, vous pouvez tenter une r&eacute;paration
+			automatique.";
 
-	echo "\n<p align='justify'>Si votre base de donn&eacute;es a
-		crash&eacute;, vous pouvez tenter une r&eacute;paration
-		automatique.";
+		echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE='Tenter une r&eacute;paration'></DIV></FORM>";
 
-	echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE='Tenter une r&eacute;paration'></DIV></FORM>";
-
-	echo "</FONT>";
-	echo "</TD></TR>";
-	echo "</TABLE>";
-
+		echo "</FONT>";
+		echo "</TD></TR>";
+		echo "</TABLE>";
+	}
 }
 
 
