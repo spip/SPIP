@@ -15,6 +15,7 @@ utiliser_langue_site();
 utiliser_langue_visiteur();
 
 unset($erreur);
+
 $mode = $GLOBALS['mode'];
 
 // recuperer le cookie de relance
@@ -94,19 +95,20 @@ if ($mode == 'oubli_pass') {
 		echo '  <input type=submit class="fondl" value="'._T('pass_ok').'"></div></form>';
 	}
 }
- else {
+else {
 	$inscriptions_ecrire = (lire_meta("accepter_inscriptions") == "oui");
-	if ($inscriptions_ecrire || (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo')) {
+	if ($inscriptions_ecrire OR (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo')) {
 	// debut presentation
 
 		install_debut_html(_T('pass_vousinscrire'));
 		echo "<p>";
-		
-		if ($mode != 'forum')
-		  echo _T('pass_espace_prive_bla');
-		else
-		  echo _T('pass_forum_bla');
-		echo "\n<p>";
+
+		if ($mode != 'forum') {
+			$mode = 'redac';
+			echo _T('pass_espace_prive_bla');
+		} else
+			echo _T('pass_forum_bla');
+		echo "\n</p>";
 
 		include_local("inc-inscription.php3");
 		echo inscription_dyn($mode);
@@ -115,12 +117,13 @@ if ($mode == 'oubli_pass') {
 		install_debut_html(_T('pass_erreur'));
 		echo "<p>"._T('pass_rien_a_faire_ici');
 	}
- }
-echo "<p align='right'>",
-  http_script("if (window.opener) document.write(\"<a href='javascript:close();'>\");
-	else document.write(\"<a href='./'>\");
-	document.write(\""._T('pass_quitter_fenetre')."</a>\");"),
-  "<noscript>[<a href='./'>"._T('pass_retour_public')."</a>]</noscript>
+}
+
+echo "<p align='right'>" .
+http_script("if (window.opener) document.write(\"<a href='javascript:close();'>\");
+else document.write(\"<a href='./'>\");
+document.write(\""._T('pass_quitter_fenetre')."</a>\");"),
+"<noscript>[<a href='./'>"._T('pass_retour_public')."</a>]</noscript>
 </p>";
 
 install_fin_html();
