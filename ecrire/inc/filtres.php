@@ -2543,7 +2543,7 @@ function bando_images_background(){
  */
 function bando_style_prive_theme() {
 	if ($f = find_in_theme('style_prive_theme.html'))
-	var_dump($f);
+#	var_dump($f);
 		return preg_replace(',[.]html$,Ui','',$f);
 	return '';
 }
