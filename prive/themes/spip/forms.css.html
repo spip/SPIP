@@ -53,23 +53,26 @@ h3.titrem {position:relative;}
 .formulaire_spip h3.titrem {background-color: [#(#ENV{foncee}|couleur_eclaircir)];color: #4A4A4A;}
 
 /* ul li -----*/
-.formulaire_spip fieldset {padding-left:10px;padding-right:10px;}
-.formulaire_spip ul {padding: [(#ENV{margin-bottom}|div{4})em] 0;}
-.formulaire_spip ul ul,.formulaire_spip .fieldset fieldset {margin:0;}
-.formulaire_spip ul,.formulaire_spip fieldset,.formulaire_spip fieldset ul, .formulaire_spip .boutons,.formulaire_spip .titrem,.formulaire_spip .legend {margin-left: -10px;margin-right: -10px;}
+.formulaire_spip fieldset {padding-left:10px;padding-right:10px;margin-bottom:[(#ENV{margin-bottom}|div{4})em]}
+.formulaire_spip .editer-groupe {padding: [(#ENV{margin-bottom}|div{4})em] 0;}
+.formulaire_spip .editer-groupe .editer-groupe,.formulaire_spip .fieldset fieldset {margin:0;}
+.formulaire_spip .editer-groupe,
+.formulaire_spip fieldset,
+.formulaire_spip fieldset .editer-groupe,
+.formulaire_spip .boutons,
+.formulaire_spip .titrem,
+.formulaire_spip .legend {margin-left: -10px;margin-right: -10px;}
 
-.formulaire_spip li {padding: [(#ENV{margin-bottom}|div{2})em] 10px;clear:both;overflow:hidden;}
+.formulaire_spip .editer {padding: [(#ENV{margin-bottom}|div{2})em] 10px;clear:both;overflow:hidden;}
 
 /* label -----*/
 
 /* Formulaires alignes a gauche c'est le par defaut des formulaires de Spip */
-.formulaire_spip li,
-.formulaire_spip li.gauche {padding-#ENV{left}:140px;}
-/* et le redefaire pour les listes spip :( */
-.formulaire_spip .spip li {padding:0;clear:none;overflow:visible;}
+.formulaire_spip .editer,
+.formulaire_spip .editer.gauche {padding-#ENV{left}:140px;}
 
-.formulaire_spip li label,
-.formulaire_spip li.gauche label {
+.formulaire_spip .editer label,
+.formulaire_spip .editer.gauche label {
 	color: #4444;
 	width: 114px;
 	float:#ENV{left};
@@ -77,7 +80,7 @@ h3.titrem {position:relative;}
 	text-align: #ENV{left};
 	/*vertical-align: top;*/
 }
-.ie6 .formulaire_spip li label,.ie6 .formulaire_spip li.gauche label {position:relative;display:inline;}
+.ie6 .formulaire_spip .editer label,.ie6 .formulaire_spip .editer.gauche label {position:relative;display:inline;}
 
 .formulaire_spip .long_label {padding-#ENV{left}:270px;}
 .formulaire_spip .long_label label {width: 250px;margin-#ENV{left}:-260px;}
@@ -102,8 +105,8 @@ h3.titrem {position:relative;}
 .formulaire_spip .haut label,
 .formulaire_spip .pleine_largeur label {display: block;float: none;width:auto;margin-#ENV{left}: 0;}
 
-.formulaire_spip li.obligatoire label,
-.formulaire_spip li.obligatoire.gauche label {color: black;font-weight: bold;}
+.formulaire_spip .editer.obligatoire label,
+.formulaire_spip .editer.obligatoire.gauche label {color: black;font-weight: bold;}
 
 /* cas exotique d'un label dans une erreur (ie confirmez que vous etes sur ) */
 .formulaire_spip .erreur_message label { float:none;display:inline;font-weight:normal;margin-#ENV{left}: 0;}
@@ -129,11 +132,11 @@ h3.titrem {position:relative;}
 
 .formulaire_spip input.placeholder,
 .formulaire_spip textarea.placeholder {color:#888;}
-.formulaire_spip li.obligatoire input.text {font-weight: bold;}
+.formulaire_spip .editer.obligatoire input.text {font-weight: bold;}
 
 
 .formulaire_spip .erreur {background-color:#FBE3E4;}
-.formulaire_spip li .erreur_message {	display: block;color: #8A1F11;font-weight:bold;}
+.formulaire_spip .editer .erreur_message {	display: block;color: #8A1F11;font-weight:bold;}
 .formulaire_spip .erreur input.text,
 .formulaire_spip .erreur input.password,
 .formulaire_spip .erreur textarea {border:2px solid #FBC2C4;}
@@ -154,8 +157,9 @@ h3.titrem {position:relative;}
 
 /* Explications */
 .formulaire_spip p {}
-.formulaire_spip .explication {display:block;padding: 5px;background-color: #e9e9e9;margin:0;}
-.formulaire_spip li .explication a {}
+.formulaire_spip .explication {display:block;padding: 5px;background-color: #e9e9e9;}
+.formulaire_spip .editer .explication {margin-bottom: 0;margin-top: 0;}
+.formulaire_spip .editer .explication a {}
 
 /* Remarques importantes */
 .formulaire_spip .attention { display: block; margin-bottom: #ENV{margin-bottom}; font-weight: normal; }
@@ -169,17 +173,17 @@ h3.titrem {position:relative;}
 }
 
 /* icone d'aide */
-.formulaire_spip li .aide {padding-top: 0px;}
+.formulaire_spip .editer .aide {padding-top: 0px;}
 
 
 /* Fieldset */
-.formulaire_spip li.fieldset {padding:0;}
+.formulaire_spip .editer.fieldset {padding:0;}
 .formulaire_spip fieldset {border: 0;width:auto;border-top: 1px solid #ccc;margin-top: [(#ENV{margin-bottom}|div{4})em];padding-bottom:[(#ENV{margin-bottom}|div{4})em];}
 
 .formulaire_spip h3.legend,
-.formulaire_spip legend {display: block;padding-top: 7px;padding-bottom: 7px;background-color: #eee;color: black;font-weight: normal;padding-#ENV{left}: 10px;padding-#ENV{right}: 5px;}
+.formulaire_spip legend {display: block;padding-top: 7px;padding-bottom: 7px;background-color: #eee;color: black;font-weight: normal;padding-#ENV{left}: 10px;padding-#ENV{right}: 5px;margin-bottom:[(#ENV{margin-bottom}|div{2})em]}
 
-.formulaire_spip li fieldset label {color: #444444;}
+.formulaire_spip .editer fieldset label {color: #444444;}
 
 /* boutons */
 .formulaire_spip .boutons { margin-bottom:0;clear:both;padding: [(#ENV{margin-bottom}|div{2})em] 10px;text-align: #ENV{right};background-color: #[(#ENV{claire}|couleur_eclaircir)];border-top: 1px solid [(#ENV{claire})];}
@@ -201,21 +205,21 @@ input[type="submit"],input[type="reset"] {font-size: inherit;}
  * Formulaires compactes en colonnes laterales
  */
 .lat .formulaire_spip,.lat .formulaire_spip fieldset {padding:0 5px;}
-.lat .formulaire_spip ul,.lat .formulaire_spip fieldset,.lat .formulaire_spip .boutons,.lat .formulaire_spip .titrem,.lat .formulaire_spip .legend {margin-left: -5px;margin-right: -5px;}
+.lat .formulaire_spip .editer-groupe,.lat .formulaire_spip fieldset,.lat .formulaire_spip .boutons,.lat .formulaire_spip .titrem,.lat .formulaire_spip .legend {margin-left: -5px;margin-right: -5px;}
 
 .lte7 .lat .formulaire_spip input.text,.lte7 .lat .formulaire_spip textarea {margin-left: 5px;} /* BUG IE7 */
 .lat .formulaire_spip {}
 .lat .formulaire_spip h3.titrem {font-size:1em;/*padding:[(#ENV{margin-bottom}|div{4})em] 5px;*/}
 
-.lat .formulaire_spip li {padding: [(#ENV{margin-bottom}|div{4})em] 5px;}
+.lat .formulaire_spip .editer {padding: [(#ENV{margin-bottom}|div{4})em] 5px;}
 
-.lat .formulaire_spip li label {text-transform: none;color: #444444;display:block;font-weight: normal;float:none;padding: 0;width:auto;margin-#ENV{left}:0;}
+.lat .formulaire_spip .editer label {text-transform: none;color: #444444;display:block;font-weight: normal;float:none;padding: 0;width:auto;margin-#ENV{left}:0;}
 .lat .formulaire_spip select { width:auto;padding:1px 0;}
 .lat .formulaire_spip input {padding: 1px 0;}
 .lat .formulaire_spip textarea {padding: 2px;}
 .lat .formulaire_spip input.file {font-size: 0.9em;}
 
-.lat .formulaire_spip li .choix label {display:inline;}
+.lat .formulaire_spip .editer .choix label {display:inline;}
 
 /* Champs particuliers, trans-forms */
 .formulaire_spip .editer_parent,
@@ -223,21 +227,21 @@ input[type="submit"],input[type="reset"] {font-size: inherit;}
 .formulaire_editer_auteur .editer_statut {background-color: [#(#ENV{couleur_claire}|couleur_eclaircir)];margin-top:5px;padding-bottom:[(#ENV{margin-bottom}|div{2})em];}
 .formulaire_spip .editer_parent .rubrique_actuelle {clear:#ENV{left};}
 
-.formulaire_spip li.editer_parent label,
-.formulaire_spip li.editer_groupe_mot label {
+.formulaire_spip .editer.editer_parent label,
+.formulaire_spip .editer.editer_groupe_mot label {
 	color: black;
 	font-weight: bold;
 }
 
 
 /* Formulaires particuliers ----------------------------------------------------------------*/
-.formulaire_editer_article li.editer_liens_sites {border-bottom: 1px solid #ccc;}
+.formulaire_editer_article .editer.editer_liens_sites {border-bottom: 1px solid #ccc;}
 
 /* edition d'un auteur */
 .formulaire_editer_auteur .editer_identification fieldset{[background-color: #(#ENV{claire}|couleur_eclaircir|couleur_eclaircir);]}
-.formulaire_editer_auteur li.editer_statut {	padding-top:10px;}
-.formulaire_editer_auteur li.editer_statut .instituer_auteur {margin-#ENV{left}:-130px;margin-top:10px;}
-.formulaire_editer_auteur li.editer_statut .rubriques_restreintes > p {margin-#ENV{left}:0;margin-bottom:0;margin-top:10px;}
+.formulaire_editer_auteur .editer.editer_statut {	padding-top:10px;}
+.formulaire_editer_auteur .editer.editer_statut .instituer_auteur {margin-#ENV{left}:-130px;margin-top:10px;}
+.formulaire_editer_auteur .editer.editer_statut .rubriques_restreintes > p {margin-#ENV{left}:0;margin-bottom:0;margin-top:10px;}
 
 
 .formulaire_spip .toggle_box_link {position:absolute;top:5px;#ENV{right}:5px;}
@@ -249,8 +253,8 @@ input[type="submit"],input[type="reset"] {font-size: inherit;}
 }
 .formulaire_editer_logo .taille {font-size: 0.9em;}
 
-.formulaire_configurer_multilinguisme #langues_bloquees li,
-.formulaire_configurer_multilinguisme #langues_proposees li { padding:0 5px;margin-#ENV{right}:10px;float:#ENV{left};width:45%;clear:none;}
+.formulaire_configurer_multilinguisme #langues_bloquees .editer,
+.formulaire_configurer_multilinguisme #langues_proposees .editer { padding:0 5px;margin-#ENV{right}:10px;float:#ENV{left};width:45%;clear:none;}
 .formulaire_configurer_multilinguisme .traduite label {text-decoration:underline;}
 .formulaire_configurer_multilinguisme #langues_bloquees label {color: #ENV{foncee};font-weight: bold; }
 
@@ -261,8 +265,8 @@ input[type="submit"],input[type="reset"] {font-size: inherit;}
 .formulaire_configurer_reducteur .vignette_reducteur.on:hover {border-color:#ENV{foncee};}
 
 /* dater */
-.formulaire_dater li {padding-bottom:0;padding-top:0;}
-.formulaire_dater li label {font-weight: bold;text-transform: uppercase;font-size:0.9em;}
+.formulaire_dater .editer {padding-bottom:0;padding-top:0;}
+.formulaire_dater .editer label {font-weight: bold;text-transform: uppercase;font-size:0.9em;}
 .formulaire_dater .aide {float:#GET{right}}
 .lte7 .formulaire_dater a.aide {margin-top: -16px;position: relative;display: inline;}
 .formulaire_dater .affiche {font-weight: bold;text-transform: uppercase;}
