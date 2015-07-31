@@ -98,7 +98,7 @@ function deplacer_fichier_upload($source, $dest) {
 
 	$ok = @copy($source, $dest);
 	if (!$ok) $ok = @move_uploaded_file($source, $dest);
-	@chmod($loc, 0666);
+	if ($ok) @chmod($dest, 0666);
 	return $ok;
 }
 
