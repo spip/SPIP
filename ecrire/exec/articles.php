@@ -18,9 +18,9 @@ include_spip('inc/rubriques');
 include_spip('inc/mots');
 include_spip('inc/date');
 include_spip('inc/documents');
-include_spip('inc/forum');
 include_spip('inc/petition');
 include_spip('exec/virtualiser');
+include_spip('exec/discuter');
 include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@exec_articles_dist
@@ -270,9 +270,16 @@ if ($flag_editable) {
  echo "</div>";
  fin_cadre_relief();
 
- affiche_forums_article($id_article, $id_rubrique, $titre, $debut);
+  echo "<br /><br />";
+  
+  $tm = rawurlencode($titre);
+  echo "\n<div align='center'>";
+  icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi","statut=prive&id_article=$id_article&titre_message=$tm&url=" . generer_url_retour("articles","id_article=$id_article")), "forum-interne-24.gif", "creer.gif");
+  echo "</div><br />";
+  
+  echo exec_discuter_dist($id_article, $debut);
 
-fin_page();
+  fin_page();
 
 }
 
@@ -1031,62 +1038,6 @@ function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 			extra_affichage($extra, "articles");
 		}
 	}
-}
-
-// http://doc.spip.org/@affiche_forums_article
-function affiche_forums_article($id_article, $id_rubrique, $titre, $debut, $mute=false)
-{
-  global $spip_lang_left;
-
-  echo "<br /><br />";
-  
-  if (!$mute) {
-    $tm = rawurlencode($titre);
-    echo "\n<div align='center'>";
-    icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi","statut=prive&id_article=$id_article&titre_message=$tm&url=" . generer_url_retour("articles","id_article=$id_article")), "forum-interne-24.gif", "creer.gif");
-    echo "</div>";
-  }
-
-  echo "<p align='$spip_lang_left'>";
-
-  $row = spip_fetch_array(spip_query("SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0"));
-
-  $total = $row ?  $row["cnt"] : 0;
-
-  if (!$debut) $debut = 0;
-  $total_afficher = 8;
-  if ($total > $total_afficher) {
-	echo "<div class='serif2' align='center'>";
-	for ($i = 0; $i < $total; $i = $i + $total_afficher){
-		$y = $i + $total_afficher - 1;
-		if ($i == $debut)
-			echo "<font size='3'><b>[$i-$y]</b></font> ";
-		else
-			echo "[<a href='" . generer_url_ecrire("articles","id_article=$id_article&debut=$i") . "'>$i-$y</a>] ";
-	}
-	echo "</div>";
-}
-
-	$result_forum = spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0 ORDER BY date_heure DESC" .   " LIMIT $debut,$total_afficher"   );
-#				   " LIMIT $total_afficher OFFSET $debut" # PG
-
-	afficher_forum($result_forum, "articles","id_article=$id_article", $mute);
-
-	if (!$debut) $debut = 0;
-	$total_afficher = 8;
-	if ($total > $total_afficher) {
-	  echo "<div class='serif2' align='center'>";
-	  for ($i = 0; $i < $total; $i = $i + $total_afficher){
-		$y = $i + $total_afficher - 1;
-		if ($i == $debut)
-			echo "<FONT SIZE=3><B>[$i-$y]</B></FONT> ";
-		else
-			echo "[<A href='" . generer_url_ecrire("articles","id_article=$id_article&debut=$i") . "'>$i-$y</A>] ";
-	  }
-	  echo "</div>";
-	}
-
-	echo "</div>\n";
 }
 
 // http://doc.spip.org/@formulaire_instituer_article

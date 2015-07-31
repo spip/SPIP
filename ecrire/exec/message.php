@@ -247,7 +247,7 @@ function http_afficher_forum_perso($id_message, $titre)
 	echo  "</div>\n<p align='left'>";
 
 	$query_forum = spip_query("SELECT * FROM spip_forum WHERE statut='perso' AND id_message='$id_message' AND id_parent=0 ORDER BY date_heure DESC LIMIT 20");
-	afficher_forum($query_forum, "message","id_message=$id_message");
+	echo afficher_forum($query_forum, "message","id_message=$id_message");
 	echo "\n</p>";
 }
 
