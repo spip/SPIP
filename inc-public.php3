@@ -91,14 +91,11 @@ if (defined("_INC_PUBLIC")) {
 	if (trim($page) AND $xhtml AND !$flag_preserver AND !headers_sent()) {
 		if ($xhtml === true) $xhtml = 'tidy';
 		$file = 'inc_' . $xhtml. ".php";
-		spip_log(_DIR_RESTREINT . $file);
-		if (is_readable(_DIR_RESTREINT . $file))
-		  include_ecrire($file);
+#		spip_log(_DIR_RESTREINT . $file);
+		if (is_readable(_DIR_RESTREINT . $file)) { include_ecrire($file); }
 		if (function_exists($xhtml))
-		  {
 			$page = $xhtml($page);
-		  }
-		elseif (function_exists('xhtml'))
+		else if (function_exists('xhtml'))
 			$page = xhtml($page);
 	}
 

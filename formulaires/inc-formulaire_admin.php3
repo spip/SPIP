@@ -93,7 +93,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	$analyser = !$xhtml ? "" :
 	  (($xhtml === 'spip_sax') ?
 	   ($action . "var_mode=debug&var_mode_affiche=validation") :
-	   $xhtml_check); // cas tidy
+	   $GLOBALS['xhtml_check']); // cas tidy
 	// hack - ne pas avoir la rubrique si un autre bouton est deja present
 	if ($id_article OR $id_breve) unset ($id_rubrique);
 

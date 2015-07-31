@@ -52,13 +52,15 @@ function xhtml($buffer) {
 
 /** ici commence la petite usine a gaz des traitements d'erreurs de tidy **/
 	## NB: seul tidy en ligne de commande sait gerer ses erreurs,
+
+	// Conserver une liste des URLs en erreur tidy
+	lire_fichier($f = _DIR_SESSIONS.'w3c-go-home.txt', $liste);
+	$url = "http://".$_SERVER['HTTP_HOST'].nettoyer_uri();
+
 	if (defined('_erreur_tidy')) {
 
 		if (defined('_calcul_tidy')) {
 			spip_log("Erreur tidy : $url\n"._erreur_tidy, 'tidy');
-
-			// Conserver une liste des URLs en erreur tidy
-			lire_fichier($f = _DIR_SESSIONS.'w3c-go-home.txt', $liste);
 			if (strpos($liste, "- $url -\n") === false) {
 				$liste = substr($liste, - 8*1024); # anti-explosions
 				ecrire_fichier($f, $liste."- $url -\n");
@@ -75,9 +77,7 @@ function xhtml($buffer) {
 	{
 		// Nettoyer la liste des URLs pourries, si maintenant on est correct
 		if (defined('_calcul_tidy')) {
-			lire_fichier($f = _DIR_SESSIONS.'w3c-go-home.txt', $liste);
-			$url = "- http://".$_SERVER['HTTP_HOST'].nettoyer_uri()." -\n";
-			if (($liste2 = str_replace($url, '', $liste)) != $liste)
+			if (($liste2 = str_replace("- $url -\n", '', $liste)) != $liste)
 				ecrire_fichier($f, $liste2);
 		}
 
@@ -89,12 +89,9 @@ function xhtml($buffer) {
 #			entetes_xhtml();
 
 	}
-	// Ajouter un pseudo bouton d'admin
-	include_ecrire('inc_filtres.php3') ; # pour entites_html
-	$GLOBALS['xhtml_check'] = 'http://validator.w3.org/check?uri=' .
-	  stripslashes(preg_quote(entites_html("http://" .
-					       $_SERVER['HTTP_HOST'].
-					       nettoyer_uri())));
+	// Ajouter un bouton d'admin "Analyser"
+	$GLOBALS['xhtml_check'] = 'http://validator.w3.org/check?uri='
+		. urlencode("http://" . $_SERVER['HTTP_HOST'] . nettoyer_uri());
 /** fin de l'usine a gaz **/
 
 
