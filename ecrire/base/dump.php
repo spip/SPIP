@@ -359,6 +359,7 @@ function base_preparer_table_dest($table, $desc, $serveur_dest, $init=false) {
 			if ($table=='spip_meta'){
 				// virer les version base qui vont venir avec l'import
 				sql_delete($table, "nom like '%_base_version'",$serveur_dest);
+				// hum casse la base si pas version_installee a l'import ...
 				sql_delete($table, "nom='version_installee'",$serveur_dest);
 			}
 		}
