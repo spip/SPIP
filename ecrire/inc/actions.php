@@ -34,8 +34,28 @@ function redirige_action_post($action, $arg, $ret, $gra, $corps, $att = ''){
 }
 
 
-// http://doc.spip.org/@ajax_retour
-function ajax_retour($corps, $xml = true){
+/**
+ * Fonction de formatage du contenu renvoye en ajax
+ *
+ * http://doc.spip.org/@ajax_retour
+ *
+ * @param string $corps
+ * @param string $content_type
+ *   permet de definir le type de contenu renvoye.
+ *   Si rien de précisé, ou si true c'est "text/html" avec un entete xml en plus.
+ *   La valeur speciale false fournit text/html sans entete xml. Elle equivaut a
+ *   passer "text/html" comme $content_type
+ */
+function ajax_retour($corps, $content_type = null){
+	$xml = false;
+	if (is_null($content_type) OR $content_type===true){
+		$xml = true;
+		$content_type = 'text/html';
+	}
+	elseif (!$content_type OR !is_string($content_type) OR strpos($content_type,'/')===false) {
+		$content_type = 'text/html';
+	}
+	
 	$e = "";
 	if (isset($_COOKIE['spip_admin'])
 	    AND ((_request('var_mode')=='debug') OR !empty($GLOBALS['tableau_des_temps'])))
@@ -50,7 +70,7 @@ function ajax_retour($corps, $xml = true){
 
 	} else {
 		$c = $GLOBALS['meta']["charset"];
-		header('Content-Type: text/html; charset='.$c);
+		header('Content-Type: '.$content_type.'; charset='.$c);
 		$debut = (($xml AND strlen(trim($corps))) ? '<'."?xml version='1.0' encoding='".$c."'?".">\n" : '');
 	}
 	echo $debut, $corps, $fin, $e;
