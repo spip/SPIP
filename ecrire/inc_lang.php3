@@ -67,16 +67,16 @@ function traduire_chaine($text, $args) {
 
 function traduire_nom_langue($lang) {
 	$retour = _T("langue_".$lang);
-	
+
 	if (strlen($retour) == 0) {
 		include_ecrire("inc_liste_lang.php3");
 		$retour = $GLOBALS['codes_langues'][$lang];
 	}
-	
+
 	if (strlen($retour) == 0) {
 		$retour = $lang;
 	}
-	
+
 	return $retour;
 }
 
@@ -94,8 +94,6 @@ if (!regler_langue_navigateur())
 	changer_langue(lire_meta('langue_site'));
 if ($GLOBALS['prefs']['spip_lang'])
 	changer_langue($GLOBALS['prefs']['spip_lang']);
-
-
 
 
 ?>
