@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuler' => 'Zrušiť',
 	'antispam_champ_vide' => 'Toto pole, prosím, nevypĺňajte:',
 	'articles_recents' => 'Najnovšie články',
+	'avis_1_erreur_saisie' => 'Vo vašom zadaní je 1 chyba, skontrolujte si údaje.',
 	'avis_archive_incorrect' => 'archívny súbor nie je platný súbor SPIPu',
 	'avis_archive_invalide' => 'archívny súbor nie je platný',
 	'avis_attention' => 'POZOR!',
@@ -43,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_mysql' => 'Chyba SQL',
 	'avis_erreur_sauvegarde' => 'Chyba v zálohe (@type@ @id_objet@)!',
 	'avis_erreur_visiteur' => 'Problém pri vstupe do súkromnej zóny',
+	'avis_nb_erreurs_saisie' => 'Vo vašom zadaní je @nb@ chýb, skontrolujte si údaje.',
 
 	// B
 	'barre_a_accent_grave' => 'Vložiť veľké A s opačným dĺžňom',
