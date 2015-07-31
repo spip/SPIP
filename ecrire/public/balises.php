@@ -478,7 +478,7 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	// s'il n'y a pas de nom de boucle, on ne peut pas paginer
 	if ($b === '') {
 		$msg = array('zbug_champ_hors_boucle',
-			array('champ' => $liste ? 'PAGINATION' : 'ANCRE_PAINATION')
+			array('champ' => $liste ? 'PAGINATION' : 'ANCRE_PAGINATION')
 			  );
 		erreur_squelette($msg, $p);
 		return $p;
