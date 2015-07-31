@@ -58,17 +58,20 @@
 [(#REM) javascript qui gere la securite du login en evitant de faire circuler le pass en clair]
 <script type="text/javascript" src="#EVAL{_DIR_JAVASCRIPT}md5.js"></script>
 <script type="text/javascript" src="#EVAL{_DIR_JAVASCRIPT}login.js"></script>
-<script type='text/javascript'>
-var alea_actuel='#ENV{_alea_actuel}';
-var alea_futur='#ENV{_alea_futur}';
-var login='#ENV{var_login,''}';
-var page_auteur = '#URL_PAGE{informer_auteur}';
-var informe_auteur_en_cours = false;
-var attente_informe = 0;
-
-jQuery('#password')
-.after("<em id='pass_securise'><img src='#EVAL{_DIR_IMG_PACK}securise.gif' width='16' height='16' alt='<:login_securise:>' title='<:login_securise:>' \/><\/em>");
-affiche_login_secure();
-jQuery('#var_login').change(actualise_auteur);
-jQuery('form#formulaire_login').submit(login_submit);
-</script>
+<script type='text/javascript'>/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
+	var alea_actuel='#ENV{_alea_actuel}';
+	var alea_futur='#ENV{_alea_futur}';
+	var login='#ENV{var_login,''}';
+	var page_auteur = '#URL_PAGE{informer_auteur}';
+	var informe_auteur_en_cours = false;
+	var attente_informe = 0;
+	
+	(function($){
+		$('#password')
+			.after("<em id='pass_securise'><img src='#EVAL{_DIR_IMG_PACK}securise.gif' width='16' height='16' alt='<:login_securise:>' title='<:login_securise:>' \/><\/em>");
+		affiche_login_secure();
+		$('#var_login').change(actualise_auteur);
+		$('form#formulaire_login').submit(login_submit);
+	}(jQuery));
+	
+/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
