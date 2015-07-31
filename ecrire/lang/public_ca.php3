@@ -10,9 +10,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'articles' => ' Articles',
 'articles_populaires' => 'Els articles m&eacute;s populars',
 'articles_recents' => 'Els articles m&eacute;s recents',
+'aucun_article' => 'No hi ha cap article en aquesta adre&ccedil;a',
+'aucun_auteur' => 'No hi ha cap autor/a a aquesta adre&ccedil;a',
+'aucun_site' => 'No hi ha cap lloc web en aquesta adre&ccedil;a',
+'aucune_breve' => 'No hi ha cap breu a aquesta adre&ccedil;a',
+'aucune_rubrique' => 'No hi ha cap secci&oacute; a aquesta adre&ccedil;a',
 'autres_breves' => 'Altres breus',
-'autres_groupes_de_mots_clefs' => 'Altres grups de paraules clau',
-'autres_sites' => 'Altres webs',
+'autres_groupes_mots_clefs' => 'Altres grups de paraules clau',
+'autres_sites' => 'Altres llocs webs',
 
 
 // B
@@ -21,24 +26,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
-'commenter_site' => 'Comentar aquesta web',
+'commenter_site' => 'Comentar aquest lloc web',
 
 
 // D
-'dans_meme_rubrique' => 'A la mateixa secci&oacute;',
 'date' => ' Data',
 'dernier_ajout' => 'Darrer afegit',
 'dernieres_breves' => 'Darreres breus',
 'derniers_articles' => 'Darrers articles',
 'derniers_commentaires' => 'Darrers comentaris',
-'derniers_messages_des_forums' => '&Uacute;ltims missatges publicats als f&ograve;rums',
+'derniers_messages_forum' => 'Darrers missatges publicats als f&ograve;rums',
 
 
 // E
 'edition_mode_texte' => 'Edici&oacute; en mode text de ',
 'en_reponse' => 'En resposta a:',
 'en_resume' => 'En resum',
-'envoyer_un_message' => 'Enviar un missatge',
+'envoyer_message' => 'Enviar un missatge',
 'espace_prive' => 'Espai privat',
 
 
@@ -56,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // M
 'meme_auteur' => 'Del mateix/a autor/a',
+'meme_rubrique' => 'A la mateixa secci&oacute;',
 'memes_auteurs' => 'Dels mateixos autors',
 'message' => 'Missatge',
 'messages_forum' => 'Missatges al f&ograve;rum',
@@ -68,22 +73,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'navigation' => 'Navegaci&oacute;',
 'nom' => ' Nom',
 'nouveautes' => 'Les novetats',
-'nouveautes_web' => 'Novetats al web',
+'nouveautes_web' => 'Novetats a la Web',
 'nouveaux_articles' => 'Articles nous',
 'nouvelles_breves' => 'Noves breus',
 
 
 // P
 'par_auteur' => 'per',
-'participer_site' => 'Pot participar a la creaci&oacute; de la web proposant articles si previament fa la inscripci&oacute; que hi ha a continuaci&oacute;. Inmediatament rebreu un correu electr&ograve;nic on s\'hi indicaran els codis d\'acc&eacute;s a l\'espai privat de la web.',
-'pas_d_article' => 'No hi ha cap article a aquesta adre&ccedil;a',
-'pas_d_auteur' => 'No hi ha cap autor a aquesta adre&ccedil;a',
-'pas_de_breve' => 'No hi ha cap breu a aquesta adre&ccedil;a',
-'pas_de_rubrique' => 'No hi ha cap secci&oacute; a aquesta adre&ccedil;a',
-'pas_de_site' => 'No hi ha cap lloc a aquesta adre&ccedil;a',
-'plan_du_site' => 'Mapa de la p&agrave;gina',
+'participer_site' => 'Podeu participar en la vida d\'aquest lloc web i proposar els vostres articles si ompliu la inscripci&oacute; que hi ha a continuaci&oacute;. Immediatament rebreu un correu electr&ograve;nic indicant-vos els codis d\'acc&eacute;s a l\'espai privat de la web.',
+'plan_site' => 'Mapa del lloc Web',
 'popularite' => 'Popularitat',
-'poster_un_message' => 'Escriure un missatge',
+'poster_message' => 'Escriure un missatge',
 
 
 // R
@@ -98,24 +98,38 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // S
 'signatures_petition' => 'Signatures',
-'site_realise_avec_spip' => 'Lloc web fet amb SPIP',
+'site_realise_avec_spip' => 'Lloc Web fet amb l\'SPIP',
 'sites_web' => 'Llocs Web',
 'sous_rubriques' => 'Subseccions',
 'suite' => 'Seguiment',
-'sur_web' => 'Sobre la p&agrave;gina',
+'sur_web' => 'Sobre la p&agrave;gina Web',
 'syndiquer_rubrique' => 'Sindicar aquesta secci&oacute;',
-'syndiquer_site' => 'Sindicar tot el lloc web',
+'syndiquer_site' => 'Sindicar tot el lloc Web',
 
 
 // T
-'test' => '-buit-',
-'test2' => '-Buit-',
-'texte_lettre_information' => 'Veure la carta de presentaci&oacute; del lloc web',
+'texte_lettre_information' => 'Veure la carta de presentaci&oacute; del lloc Web',
 'texte_lettre_information_2' => 'Aquesta carta recull i conta els articles i els breus publicades des de',
 
 
 // V
-'voir_en_ligne' => 'Veure el l&iacute;nia'
+'voir_en_ligne' => 'Veure el l&iacute;nia',
+
+
+// PLUS_UTILISE
+'autres_groupes_de_mots_clefs' => 'Altres grups de paraules clau',
+'dans_meme_rubrique' => 'en la mateixa secci&oacute;',
+'derniers_messages_des_forums' => '&Uacute;ltims missatges publicats als f&ograve;rums',
+'envoyer_un_message' => 'Enviar un missatge',
+'pas_d_article' => 'No hi ha cap article a aquesta adre&ccedil;a',
+'pas_d_auteur' => 'No hi ha cap autor a aquesta adre&ccedil;a',
+'pas_de_breve' => 'No hi ha cap breu a aquesta adre&ccedil;a',
+'pas_de_rubrique' => 'No hi ha cap secci&oacute; a aquesta adre&ccedil;a',
+'pas_de_site' => 'No hi ha cap lloc a aquesta adre&ccedil;a',
+'plan_du_site' => 'Mapa de la p&agrave;gina',
+'poster_un_message' => 'Escriure un missatge',
+'test' => '-buit-',
+'test2' => '-Buit-'
 
 );
 

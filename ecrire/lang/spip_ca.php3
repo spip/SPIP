@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Modificar aquesta signatura',
 'admin_recalculer' => 'Recalcular aquesta p&agrave;gina',
 'aide_non_disponible' => 'Aquesta part de l\'ajuda en l&iacute;nia no est&agrave; encara disponible en Catal&agrave;.',
-'alerte_maj_impossible' => '<b>Alerta&nbsp;!</b> L\'actualitzaci&oacute;  de la base de dades MySQL cap a  la versi&oacute; @version@ &eacute;s impossible, pot ser degut a un problema amb els drets de modificaci&oacute; de la base de dades. Si us plau contacteu amb l\'administrador del vostre hospedatge.',
+'alerte_maj_impossible' => '<b>Alerta&nbsp;!</b> L\'actualitzaci&oacute;  de la base de dades MySQL cap a  la versi&oacute; @version@ &eacute;s impossible, pot ser degut a un problema amb els drets de modificaci&oacute; de la base de dades. Si us plau contacteu amb el vostre prove&iuml;dor d\'hostatge.',
 'avis_acces_interdit' => 'Acc&egrave;s prohibit',
 'avis_archive_incorrect' => 'el fitxer no &eacute;s pas un fitxer SPIP',
 'avis_archive_invalide' => 'el fitxer no &eacute;s pas v&agrave;lid',
@@ -59,8 +59,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
                                 la documentaci&oacute; d\'SPIP</A>.',
 'avis_espace_interdit' => '<B>Zona prohibida</B><p>SPIP ja est&agrave; instal&middot;lat.',
 'avis_lecture_noms_bases_1' => 'El programa d\'instal&middot;laci&oacute; no ha pogut llegir els noms de les bases de dades instal&middot;lades.',
-'avis_lecture_noms_bases_2' => 'O b&eacute; cap base no est&agrave; disponible, o b&eacute; la funci&oacute; que permet de llistar les bases ha estat
-desactivada per raons de seguretat (cosa normal en molts servidors d\'allotjament).',
+'avis_lecture_noms_bases_2' => 'O b&eacute; cap base de dades no est&agrave; disponible, o b&eacute; la funci&oacute; que permet de llistar les bases ha estat
+desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'hostatge).',
 'avis_lecture_noms_bases_3' => 'En la segona alternativa, &eacute;s probable que una base que porti el vostre nom d\'usuari sigui utilitzable:',
 'avis_non_acces_message' => 'No teniu acc&eacute;s a aquest missatge.',
 'avis_non_acces_page' => 'No teniu acc&eacute;s a aquesta p&agrave;gina.',
@@ -219,7 +219,7 @@ desactivada per raons de seguretat (cosa normal en molts servidors d\'allotjamen
 'email' => 'correu electr&ograve;nic',
 'email_2' => 'correu electr&ograve;nic:',
 'entree_adresse_annuaire' => 'Adre&ccedil;a del directori',
-'entree_adresse_email' => 'La seva adre&ccedil;a electr&ograve;nica ',
+'entree_adresse_email' => 'L\'adre&ccedil;a electr&ograve;nica ',
 'entree_adresse_fichier_syndication' => 'Adre&ccedil;a del fitxer &laquo;&nbsp;backend&nbsp;&raquo; per la sindicaci&oacute;&nbsp;:',
 'entree_adresse_site' => '<b>Adre&ccedil;a del lloc</b> [Obligat&ograve;ria]',
 'entree_base_donnee_1' => 'Adre&ccedil;a de la base de dades',
@@ -371,6 +371,7 @@ Gr&agrave;cies per indicar a continuaci&oacute; l\'identifcador que us ha estat 
 'icone_auteurs' => 'Autors',
 'icone_breves' => 'Breus',
 'icone_calendrier' => 'Calendari',
+'icone_calendrier_messagerie' => ' Agenda',
 'icone_configuration_site' => 'Configuraci&oacute; del lloc',
 'icone_configurer_site' => 'Configurar el vostre lloc',
 'icone_creation_groupe_mots' => 'Crear un nou grup de paraules',
@@ -540,7 +541,7 @@ Gr&agrave;cies per indicar a continuaci&oacute; l\'identifcador que us ha estat 
 'info_contribution' => 'contribucions del f&ograve;rum',
 'info_copyright' => '&eacute;s un programari lliure distribu&iuml;t <a href=\'copyright_fr.html\'>sota llic&egrave;ncia GPL.</a>',
 'info_copyright_doc' => 'Per a m&eacute;s informaci&oacute;, veure el lloc <a href=\'http://www.spip.net/fr\'>http://www.spip.net/fr</a>.',
-'info_cours_edition' => 'Els vostres articles en curs',
+'info_cours_edition' => 'Els vostres articles en proc&eacute;s d\'edici&oacute;',
 'info_creation_mots_cles' => 'Crear i configurar aqu&iacute; les paraules clau del lloc',
 'info_creation_paragraphe' => '(Per crear par&agrave;grafs, deixeu simplement  unes l&iacute;nies buides.)',
 'info_creation_rubrique' => 'Abans de poder crear articles, <BR> heu de crear com a m&iacute;nim una secci&oacute;.<BR>',
@@ -565,7 +566,7 @@ Gr&agrave;cies per indicar a continuaci&oacute; l\'identifcador que us ha estat 
 'info_desactiver_forum_public' => 'Inhabilitar l\'&uacute;s dels f&ograve;rums p&uacute;blics.
   Els f&ograve;rums p&uacute;blics es podran permetre, cas per cas, en els articles;
   estar&aacute;n prohibits en les seccions, breus, etc.',
-'info_desactiver_messagerie_personnelle' => 'Podeu habilitar o deshabilitar la vostra missatgeria personal en aquest lloc.',
+'info_desactiver_messagerie_personnelle' => 'Podeu habilitar o inhabilitar la missatgeria personal en aquest lloc.',
 'info_descriptif' => 'Descripci&oacute;:',
 'info_descriptif_nombre' => 'descripci&oacute;(ns):',
 'info_description' => 'Descripci&oacute;:',
@@ -573,7 +574,6 @@ Gr&agrave;cies per indicar a continuaci&oacute; l\'identifcador que us ha estat 
 'info_dimension' => 'Mida:',
 'info_discussion_cours' => 'Discussions en curs',
 'info_document' => 'Document',
-'info_donner_rendez_vous' => 'Aquest bot&oacute; us permet de fixar una cita amb un altre participant.',
 'info_echange_message' => 'SPIP permet l\'intercanvi de missatges i la creaci&oacute; de f&ograve;rums de discussi&oacute;
   privats entre els participants d\'un lloc. Podeu habilitar o
   deshabilitar aquesta funcionalitat.',
@@ -583,7 +583,7 @@ Gr&agrave;cies per indicar a continuaci&oacute; l\'identifcador que us ha estat 
 'info_email_envoi_txt' => 'Introduiu aqu&iacute; l\'adre&ccedil;a a fer servir per enviar els correus electr&ograve;nics (per defecte, l\'adre&ccedil;a del destinatari ser&agrave; utilitzada com a adre&ccedil;a del remitent):',
 'info_email_invalide' => 'L\'adre&ccedil;a electr&ograve;nica no &eacute;s v&agrave;lida.',
 'info_email_webmestre' => 'Adre&ccedil;a electr&ograve;nica del webmestre (opcional)',
-'info_en_cours_validation' => 'Els vostres articles en curs de redacci&oacute;',
+'info_en_cours_validation' => 'Articles en proc&eacute;s de redacci&oacute;',
 'info_en_ligne' => 'Actualment en l&iacute;nia:',
 'info_en_test_1' => '&nbsp;(en prova)',
 'info_en_test_2' => '(en prova)',
@@ -641,7 +641,7 @@ t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oac
 'info_gerer_trad' => 'Gestionar els enlla&ccedil;os de traducci&oacute;?',
 'info_grand_ecran' => 'Pantalla gran',
 'info_groupe_important' => 'Grup important',
-'info_hebergeur_desactiver_envoi_email' => 'Alguns allotjadors desactiven l\'enviament autom&agrave;tic de correus electr&ograve;nics des dels seus servidors. En aquest cas, les seg&uuml;ents funcions d\'SPIP no funcionaran. ',
+'info_hebergeur_desactiver_envoi_email' => 'Alguns prove&iuml;dors d\'hostatge desactiven l\'enviament autom&agrave;tic de correus electr&ograve;nics des dels seus servidors. En aquest cas, les seg&uuml;ents funcions d\'SPIP no funcionen. ',
 'info_hier' => 'ahir:',
 'info_identification_publique' => 'La vostra identitat p&uacute;blica...',
 'info_image_aide' => 'AJUDA',
@@ -709,7 +709,7 @@ t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oac
 'info_mot_cle_ajoute' => 'La paraula clau seg&uuml;ent ha estat afegida',
 'info_mot_sans_groupe' => '(Paraules sense grup...)',
 'info_moteur_recherche' => 'Motor de cerca integrat',
-'info_mots_cles' => 'Les paraules clau<NEW> Les mots-cl&eacute;s',
+'info_mots_cles' => 'Les paraules clau',
 'info_mots_cles_association' => 'Les paraules clau d\'aquest grup poden ser associades:',
 'info_moyenne' => 'mitjana:',
 'info_multi_articles' => 'Activar el men&uacute; d\'idioma pels articles?',
@@ -720,7 +720,7 @@ t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oac
 'info_multi_rubriques' => 'Activar el men&uacute; d\'idioma a les seccions?',
 'info_multi_secteurs' => '... nom&eacute;s per les seccions situades a l\'arrel?',
 'info_multilinguisme' => 'Multiling&uuml;isme',
-'info_nexen_1' => 'El vostre allotjador &eacute;s Nexen Services.',
+'info_nexen_1' => 'El vostre prove&iuml;dor d\'hostatge &eacute;s Nexen Services.',
 'info_nexen_2' => 'La protecci&oacute; del directori <tt>ecrire/data/</tt> s\'ha de fer a trav&eacute;s de',
 'info_nexen_3' => 'l\'espai webmestres',
 'info_nexen_4' => 'Vulgueu crear manualment la protecci&oacute; per aquest directori (la parella usuari/contrasenya es necess&agrave;ria).',
@@ -747,7 +747,6 @@ t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oac
 'info_notes' => 'Notes',
 'info_nouveau' => '(Nou)',
 'info_nouveau_message' => 'TENIU UN NOU MISSATGE',
-'info_nouveau_pense_bete' => 'Aquest bot&oacute; permet crear un nou recordatori personal.',
 'info_nouveaux_message' => 'Nous missatges',
 'info_nouveaux_messages' => 'TENIU @total_messages@ NOUS MISSATGES',
 'info_nouvel_article' => 'Nou article',
@@ -801,9 +800,7 @@ t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oac
 ----------------',
 'info_publies' => 'Els vostres articles publicats en l&iacute;nia',
 'info_question_gerer_statistiques' => 'El vostre lloc ha de gestionar les estad&iacute;stiques de les visites?',
-'info_question_inscription_nouveaux_redacteurs' => 'Accepteu les inscripcions de nous redactors a partir del lloc p&uacute;blic? Si
-  ho accepteu, els visitants es podran inscriure mitjan&ccedil;ant un formulari autom&agrave;tic i accediran a l\'espai privat per tal de proposar els seus propis articles. <blockquote><i>Durant el proc&eacute;s d\'inscripci&oacute;,
-  els usuaris reben un correu electr&ograve;nic autom&agrave;tic en el que se\'ls d&oacute;na els seus codis d\'acc&eacute;s al lloc privat. Alguns allotjadors desactiven l\'enviament de mails des dels seus servidors: en aquest cas, la inscripci&oacute; autom&agrave;tica &eacute;s impossible.',
+'info_question_inscription_nouveaux_redacteurs' => 'Accepteu les inscripcions de nous redactors a partir del lloc p&uacute;blic? Si ho accepteu, els visitants es podran inscriure mitjan&ccedil;ant un formulari automatitzat i accediran a l\'espai privat per proposar els seus propis articles. <blockquote><i>Durant el proc&eacute;s d\'inscripci&oacute;, els usuaris reben un correu electr&ograve;nic autom&agrave;tic en el que se\'ls d&oacute;na els seus codis d\'acc&eacute;s al lloc privat. Alguns prove&iuml;dors d\'hostatge desactiven l\'enviament de correus electr&ograve;nics des dels seus servidors: en aquest cas, la inscripci&oacute; autom&agrave;tica &eacute;s impossible.',
 'info_question_mots_cles' => 'Voleu utilitzar les paraules clau en la vostra web&nbsp;?',
 'info_question_proposer_site' => 'Qui pot proposar llocs referenciats?',
 'info_question_referers' => 'El vostre lloc ha de conservar les <i>refer&egrave;ncies</i>
@@ -822,7 +819,7 @@ t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oac
 'info_redacteur_1' => 'Redactor',
 'info_redacteur_2' => 'tenint acc&eacute;s a l\'espai privat (<i>recomanat</i>)',
 'info_redacteurs' => 'Redactors',
-'info_redaction_en_cours' => 'EN PROC&Eacute;S DE REDACCI&Oacute;',
+'info_redaction_en_cours' => 'En proc&eacute;s de redacci&oacute;',
 'info_redirection' => 'Redireccionament',
 'info_refuses' => 'Els vostres articles rebutjats',
 'info_reglage_ldap' => 'Opcions: <B>Posta a punt de l\'importaci&oacute; LDAP</B>',
@@ -1113,7 +1110,7 @@ t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oac
 'logo_rubrique' => 'LOGOTIP DE LA SECCI&Oacute;',
 'logo_site' => 'LOGOTIP D\'AQUEST LLOC',
 'logo_standard_rubrique' => 'LOGOTIP EST&Agrave;NDARD DE LES SECCIONS',
-'logo_survol' => 'LOGOTIP QUAN PASSES EL RATOL&Iacute;',
+'logo_survol' => 'Logotip canviant',
 
 
 // M
@@ -1124,7 +1121,7 @@ t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oac
 'menu_aide_articles_date' => 'Data',
 'menu_aide_articles_date_anterieure' => 'Data de publicaci&oacute; anterior',
 'menu_aide_articles_descriptif_rapide' => 'Descripci&oacute; r&agrave;pida',
-'menu_aide_articles_en_cours_modification' => 'Articles en curs de modificaci&oacute;',
+'menu_aide_articles_en_cours_modification' => 'Articles en proc&eacute;s de modificaci&oacute;',
 'menu_aide_articles_logos' => 'Logotip de l\'article',
 'menu_aide_articles_proposer' => 'Proposar el seu article',
 'menu_aide_articles_raccourcis_typo' => 'Les dreceres tipogr&agrave;fiques',
@@ -1216,7 +1213,7 @@ t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oac
 'pass_erreur_non_enregistre' => '<b>Error:</b> l\'adre&ccedil;a <tt>@email_oubli@</tt> no est&agrave; registrada en aquest lloc.',
 'pass_erreur_non_valide' => '<b>Error:</b> aquest correu electr&ograve;nic <tt>@email_oubli@</tt> no &eacute;s v&agrave;lid!',
 'pass_erreur_probleme_technique' => '<b>Error:</b> per culpa d\'un problema t&egrave;cnic, el correu electr&ograve;nic no s\'ha pogut enviar.',
-'pass_espace_prive_bla' => 'L\'espai privat d\'aquest lloc est&agrave; obert als visitants, un cop s\'han inscrit. Una vegada registrats, podeu consultar els articles en curs de redacci&oacute;, proposar articles i participar en tots els f&ograve;rums. ',
+'pass_espace_prive_bla' => 'L\'espai privat d\'aquest lloc est&agrave; obert als visitants, un cop s\'han inscrit. Una vegada registrats, podeu consultar els articles en proc&eacute;s de redacci&oacute;, proposar articles i participar en tots els f&ograve;rums. ',
 'pass_forum_bla' => 'Heu demanat d\'intervenir en un f&ograve;rum reservat als visitants registrats.',
 'pass_indiquez_cidessous' => 'Indiqueu a sota l\'adre&ccedil;a electr&ograve;nica amb la que us heu registrat anteriorment. Rebreu un correu electr&ograve;nic indicant-vos els passos a seguir per recuperar el vostre acc&eacute;s. ',
 'pass_mail_passcookie' => '(aquest &eacute;s un missatge autom&agrave;tic)
@@ -1273,15 +1270,15 @@ d\'SPIP... Per m&eacute;s detalls consultar <a href="http://www.spip.net/fr_arti
 'texte_article_virtuel' => ' Article virtual',
 'texte_article_virtuel_reference' => ' <b>Article virtual:</b> article referenciat en la web amb SPIP, per&ograve; redigerit cap un altre URL. Per suprimir la redirecci&oacute;, esborre l\'URL que apareix dalt.',
 'texte_aucun_resultat_auteur' => 'Cap resultat per "@cherche_auteur@"',
-'texte_auteur_messagerie' => 'Aquest lloc pot indicar quins autors es troben connectats ara mateix, a&ccedil;&ograve; permet d\'intercanviar missatges de forma directa (mentres la missatgeria estiga desactivada, la llista de redactors resta tamb&eacute; desactivada). Es pot triar de no apareixer a aquesta llista (permaneixer "invisible" per als altres usuaris).',
-'texte_auteur_messagerie_1' => 'Aquest lloc permet el intercanvi de missatges i la constituci&oacute; de f&ograve;rums privats entre els participants. Es pot evitar participar en aquests f&ograve;rums.',
+'texte_auteur_messagerie' => 'Aquest lloc us pot mostrar permanentment la llista dels redactors que estan connectats, permetent-vos intercanviar missatges en directe (quan la missatgeria est&agrave; desactivada a sota, la llista de redactors queda tamb&eacute; desactivada). Podeu decidir no apar&egrave;ixer en aquesta llista (sou &laquo;invisibles&raquo; pels altres usuaris).',
+'texte_auteur_messagerie_1' => 'Aquest lloc permet l\'intercanvi de missatges i la constituci&oacute; de f&ograve;rums privats entre els participants. Podeu decidir no participar en aquests f&ograve;rums.',
 'texte_auteurs' => 'ELS AUTORS',
 'texte_breves' => 'Els breus son textes curts i simples que permeten de
  posar en l&iacute;nia r&agrave;pidament informacions consices, generar
   una revista de premsa, un calendari d\'esveniments...',
 'texte_choix_base_1' => 'Trie la seua base:',
 'texte_choix_base_2' => 'El servidor MySQL cont&eacute; diverses  bases de dades.',
-'texte_choix_base_3' => '<B>Selectioneu</B> d\'ac&iacute; baix quina vos ha atribuit el vostre servidor:',
+'texte_choix_base_3' => '<B>Seleccioneu</B> d\'aqu&iacute; sota quina us ha atribu&iuml;t el vostre prove&iuml;dor d\'hostatge:',
 'texte_choix_langue_defaut' => 'Trieu de les d\'ac&iacute; baix la llengua per defecte de la vostra web, aix&iacute; com les llengues que ser&agrave;n proposades als redactors.',
 'texte_commande_vider_tables_indexation' => 'Utiliceu aquesta comanda per buidar les taules d\'indexaci&oacute; emprades
  pel motor de recerca integrat en SPIP. Aix&ograve; vos permetr&agrave;
@@ -1296,7 +1293,7 @@ d\'SPIP... Per m&eacute;s detalls consultar <a href="http://www.spip.net/fr_arti
 'texte_config_groupe_mots_cles' => 'Desitja activar la configuraci&oacute; avan&ccedil;ada de les paraules clau,
  indicant per exemple que es pot seleccionar un mot &uacute;nic
  per grup, quin grup &eacute;s important...?',
-'texte_connexion_mysql' => 'Consulteu les informacions aportades pel vostre servidor: ha de saber si el vostre servidor dona suport per MyQSL, els codis de connexi&oacute; al servidor MySQL.',
+'texte_connexion_mysql' => 'Consulteu les informacions aportades pel vostre prove&iuml;dor d’hostatge: heu de trobar-hi, si el vostre prove&iuml;dor d&oacute;na suport MyQSL, els codis de connexi&oacute; al servidor MySQL.',
 'texte_contenu_article' => ' (Contingut de l\'article en poques paraules.)',
 'texte_contenu_articles' => 'Segons l\'esquelet triat per la vostra web, podeu decidir
  que certs elements dels articles  no siguen emprats.
@@ -1312,9 +1309,7 @@ d\'SPIP... Per m&eacute;s detalls consultar <a href="http://www.spip.net/fr_arti
  procedents d\'aquest lloc ser&agrave;n bloquejats a priori.',
 'texte_descriptif_petition' => 'Descripci&oacute; de la petici&oacute;',
 'texte_descriptif_rapide' => 'Descripci&oacute; r&agrave;pida',
-'texte_documents_associes' => 'Els documents seg&uuml;ents estan associats a l\'article,
- per&ograve; no han estat directament inclossos. Sols a la vista del p&ugrave;blic,
- apareixeran baix la forma de documents adjunts.',
+'texte_documents_associes' => 'Els documents seg&uuml;ents estan associats a l\'article, per&ograve; no han estat directament inclosos. Segons la compaginaci&oacute; del lloc p&uacute;blic, es podran mostrar com a documents adjunts.',
 'texte_documents_joints' => 'Es pot permetre que els articles tinguen documents adjunts (fitxers ofim&agrave;tics, imatges,
 sons, video, etc.) als articles i/o a les seccions. Aquests fitxers
  poden deseguida ser inclosos a l\'article, o afegits de forma separada.<p>',
@@ -1322,7 +1317,7 @@ sons, video, etc.) als articles i/o a les seccions. Aquests fitxers
 'texte_effacer_base' => 'Esborrar la base de dades SPIP',
 'texte_effacer_donnees_indexation' => 'Borrar les dades d\'indexaci&oacute;',
 'texte_en_cours_validation' => 'Els articles i breus d\'ac&iacute; sota estan proposats per a la seua publicaci&oacute;. No vos estigueu de fer-ne algun comentari al respecte als f&ograve;rums que tenen assignats.',
-'texte_enrichir_mise_a_jour' => 'Es pot enriquir el format del text emprant les "dreceres tipogr&agrave;fiques".',
+'texte_enrichir_mise_a_jour' => 'Podeu enriquir la compaginaci&oacute; del text emprant "dreceres tipogr&agrave;fiques".',
 'texte_erreur_mise_niveau_base' => 'Error de la base de dades durant la seua actualitzaci&oacute;.
  L\'imatge<B>@fichier@</B> no ha passat (article @id_article@).
   Apunteu aquesta refer&egrave;ncia, reintenteu l\'actualitzaci&oacute; i finalment verifiqueu que les imatges apareixen
@@ -1364,7 +1359,7 @@ possible inmediatament desbloquejar cada enlla&ccedil; de forma individual, o
 triar, web per web, bloquejar els enlla&ccedil;os que vinguen d\'un o altre web.',
 'texte_liens_syndication' => 'Els pr&ograve;xims enlla&ccedil;os que provinguen d\'aquesta web seran afegits inmediatament al lloc p&uacute;blic.',
 'texte_login_ldap_1' => '(Deixar buit per un acc&eacute;s an&ograve;nim, o ficar l\'ordre sencera, per exemple "&nbsp;<tt>uid=Ferrer, ou=users, dc=el-meu-domini, dc=com</tt>".)',
-'texte_login_precaution' => 'Atenci&oacute;! Aquest &eacute;s el login o nom d\'usuari baix el qual esteu connectats actualment.
+'texte_login_precaution' => 'Atenci&oacute;! Aquest &eacute;s el login o nom d\'usuari amb el qual esteu connectats actualment.
 Useu aquest formulari amb precauci&oacute;...',
 'texte_message_edit' => 'Atenci&oacute;: aquest missatge pot ser modificat per tots els administradors del lloc, i &eacute;s invisible per a tots els redactors. No feu servir els anuncis per a res que no siga realment important pel manteniment del site.',
 'texte_messages_publics' => 'Missatges p&uacute;blics de l\'article:',
@@ -1390,7 +1385,7 @@ enriquir la navegaci&oacute; del vostre lloc, incl&uacute;s utilitzar aquestes p
 'texte_nouveau_mot' => 'Nova paraula',
 'texte_nouvelle_version_spip_1' => 'Heu instal.lat una nova versi&oacute; d\'SPIP.',
 'texte_nouvelle_version_spip_2' => 'Per a aquesta nova versi&oacute; cal una actualitzaci&oacute; m&eacute;s completa que la normal. Si vost&eacute; &eacute;s webmestre/webmestressa del lloc,  si us plau borre el fitxer <tt>inc_connect.php3</tt> del directori <tt>ecrire</tt> i reprendre la instal.laci&oacute; per actualitzar els par&agrave;metres de la base de dades.<p> (NB.:<tt>inc_connect.php3</tt> abans de suprimir...)',
-'texte_operation_echec' => 'Tornar a la p&agrave;gina precedent, seleccionar una altra base o crear una de nova. Verificar les dades donades pel servidor web.',
+'texte_operation_echec' => 'Torneu a la p&agrave;gina anterior, seleccioneu una altra base o creeu-ne una de nova. Verifiqueu les dades donades pel vostre prove&iuml;dor d\'hostatge.',
 'texte_plus_trois_car' => 'm&eacute;s de 3 car&agrave;cters',
 'texte_plusieurs_articles' => 'Diversos autors trobats per  "@cherche_auteur@":',
 'texte_port_annuaire' => ' (El valor indicat per defecte es en general convenient.)',
@@ -1409,7 +1404,7 @@ En aquest cas, indiqueu a continuaci&oacute; la seua adre&ccedil;a, baix la form
 'texte_referencement_automatique' => '<b>Referenciament automatitzat d\'un web</b><br> Es pot referenciar r&agrave;pidament un lloc Web nom&eacute;s indicant ac&iacute; baix l\'adre&ccedil;a URL desitjada, o l\'adre&ccedil;a del fitxer final. SPIP recuperar&agrave; autom&agrave;ticament les dades que referents a aquesta web (T&iacute;tol, descripci&oacute;...)',
 'texte_requetes_echouent' => '<b>Quan algunes peticions MySQL fracassen sistem&agrave;ticament i sense ra&oacute; aparent, &eacute;s possible que sigui per culpa de la pr&ograve;pia base de dades.</b><p>
   MySQL disposa d\'una facultat de reparaci&oacute; de les seves taules quan aquestes han estat deteriorades per accident. Aqu&iacute; podeu provar aquesta reparaci&oacute;; en cas de frac&agrave;s, conserveu una c&ograve;pia del resultat, que possiblement cont&eacute; indicis de quines coses no funcionen...<p>
-  Si el problema persisteix, poseu-vos en contacte amb el vostre allotjador.<p>',
+  Si el problema persisteix, poseu-vos en contacte amb el vostre prove&iuml;dor d’hostatge.<p>',
 'texte_restaurer_base' => 'Restaurar el contingut d\'una c&ograve;pia de seguritat de la base',
 'texte_restaurer_sauvegarde' => 'Aquesta opci&oacute; permet restaurar una c&ograve;pia de seguretat de la base de dades realitzada anteriorment. Perqu&egrave; aix&iacute; sigui, el fitxer que cont&eacute; la c&ograve;pia de seguretat s\'ha d\'haver situat en el directori <i>ecrire/data/</i>.
 Sigueu prudents amb aquesta funcionalitat: <b>les modificacions o p&egrave;rdues eventuals s&oacute;n irreversibles.</b>',
@@ -1437,7 +1432,7 @@ a la cach&eacute; d\'SPIP. Aix&ograve; permet per exemple for&ccedil;ar un rec&a
 fet modificacions importants gr&agrave;ficament o estructurals del lloc web.',
 'texte_sur_titre' => 'Sobret&iacute;tol',
 'texte_syndication' => '&Eacute;s possible recuperar autom&agrave;ticament, quan el lloc Web ho permet, la llista de novetats. Per aix&ograve;, heu d\'activar la sindicaci&oacute;.
-<blockquote><i>Alguns allotjadors desactiven aquesta funcionalitat; en aquest cas, no podreu utilitzar la sindicaci&oacute; de contingut des del vostre lloc.</i></blockquote>',
+<blockquote><i>Alguns prove&iuml;dors d’hostatge desactiven aquesta funcionalitat; en aquest cas, no podreu utilitzar la sindicaci&oacute; de contingut des del vostre lloc.</i></blockquote>',
 'texte_table_ok' => ': aquesta taula est&agrave; OK.',
 'texte_tables_indexation_vides' => 'Les taules d\'indexaci&oacute; del motor estan buides.',
 'texte_tentative_recuperation' => 'Intent de reparaci&oacute;',
@@ -1475,7 +1470,7 @@ el que pot provocar un lleuger alentiment de la vostra pr&ograve;pia web.',
 'titre_cadre_interieur_rubrique' => 'A l\'interior de la secci&oacute;',
 'titre_cadre_numero_auteur' => 'AUTOR N&Uacute;MERO',
 'titre_cadre_raccourcis' => 'DRECERES',
-'titre_cadre_signature_obligatoire' => '<B>Signature</B> [Obligatoria]<BR>',
+'titre_cadre_signature_obligatoire' => '<B>Signatura</B> [Obligatoria]<BR>',
 'titre_changer_couleur_interface' => 'Canviar el color de l\'interficie',
 'titre_config_fonctions' => 'Configuraci&oacute; del web',
 'titre_config_groupe_mots_cles' => 'Configuraci&oacute; dels grups de paraules clau',

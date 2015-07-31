@@ -6,12 +6,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
-'accueil_site' => '<NEW> Accueil du site',
+'accueil_site' => 'Beginpagina',
 'articles' => 'Artikels',
 'articles_populaires' => 'Meest bekeken artikels',
 'articles_recents' => 'Meest recente artikels',
+'aucun_article' => 'Op dit adres is geen artikel te vinden',
+'aucun_auteur' => 'Op dit adres is geen auteur te vinden',
+'aucun_site' => 'Op dit adres is geen site te vinden',
+'aucune_breve' => 'Op dit adres is geen nieuwsbericht te vinden',
+'aucune_rubrique' => 'Op dit adres is geen rubriek te vinden',
 'autres_breves' => 'Andere nieuwsberichten',
-'autres_groupes_de_mots_clefs' => 'Andere groepen trefwoorden',
+'autres_groupes_mots_clefs' => 'Andere groepen trefwoorden',
 'autres_sites' => 'Andere sites',
 
 
@@ -25,20 +30,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // D
-'dans_meme_rubrique' => 'In dezelfde rubriek',
 'date' => 'Datum',
 'dernier_ajout' => 'Laatste toevoeging',
 'dernieres_breves' => 'Laatste nieuwsberichten',
 'derniers_articles' => 'Laatste artikels',
 'derniers_commentaires' => 'Laatste commentaren',
-'derniers_messages_des_forums' => 'Meest recente bijdragen in de forums',
+'derniers_messages_forum' => 'Laatst gepubliceerde berichten in het forum',
 
 
 // E
 'edition_mode_texte' => '<NEW> &Eacute;dition en mode texte de',
 'en_reponse' => 'Als antwoord op&nbsp;:',
 'en_resume' => 'Samengevat',
-'envoyer_un_message' => 'Een bericht verzenden',
+'envoyer_message' => 'Een bericht sturen',
 'espace_prive' => 'Priv&eacute;-site',
 
 
@@ -56,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // M
 'meme_auteur' => 'Van dezelfde auteur',
+'meme_rubrique' => 'In dezelfde rubriek',
 'memes_auteurs' => 'Van dezelfde auteurs',
 'message' => 'Bericht',
 'messages_forum' => 'Berichten van het forum',
@@ -75,48 +80,54 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // P
 'par_auteur' => 'door',
-'participer_site' => '<NEW> Vous pouvez participer &agrave; la vie de ce site et proposer vos propres articles en vous inscrivant ci-dessous. Vous recevrez imm&eacute;diatement un email vous indiquant vos codes d\'acc&egrave;s &agrave; l\'espace priv&eacute; du site.',
+'participer_site' => 'Je kan bijdragen tot deze site door je eigen artikels voor te stellen als je je hieronder inschrijft. Je krijgt meteen een e-mail met daarin de toegangscode voor de priv&eacute;-deel van de site.',
+'plan_site' => 'Overzicht van de site',
+'popularite' => 'Populariteit',
+'poster_message' => 'Een bericht plaatsen',
+
+
+// R
+'repondre_article' => 'Dit artikel beantwoorden',
+'repondre_breve' => 'Dit nieuwsbericht beantwoorden',
+'repondre_message' => 'Dit bericht beantwoorden',
+'resultats_recherche' => 'Resultaten van de zoekopdracht',
+'retour_debut_forums' => 'Terug naar de startpagina van de forums',
+'rubrique' => 'Rubriek',
+'rubriques' => 'Rubrieken',
+
+
+// S
+'signatures_petition' => 'Ondertekeningen',
+'site_realise_avec_spip' => 'Site gebouwd met SPIP',
+'sites_web' => 'Websites',
+'sous_rubriques' => 'Subrubrieken',
+'suite' => 'vervolg',
+'sur_web' => 'Op het web',
+'syndiquer_rubrique' => 'Nieuws overnemen uit deze rubriek',
+'syndiquer_site' => 'Nieuws overnemen van de hele site',
+
+
+// T
+'texte_lettre_information' => 'Ziehier de nieuwsbrief van de site',
+'texte_lettre_information_2' => 'De nieuwsbrief vermedlt alle artikels en berichten gepubliceerd sinds',
+
+
+// V
+'voir_en_ligne' => 'Online bekijken',
+
+
+// CONFLIT
+'autres_groupes_de_mots_clefs' => 'Andere groepen trefwoorden',
+'dans_meme_rubrique' => 'In dezelfde rubriek',
+'derniers_messages_des_forums' => 'Meest recente bijdragen in de forums',
+'envoyer_un_message' => 'Een bericht verzenden',
 'pas_d_article' => 'Op dit adres is geen artikel te vinden',
 'pas_d_auteur' => 'Op dit adres is geen auteur te vinden',
 'pas_de_breve' => 'Op dit adres is geen nieuwsbericht te vinden',
 'pas_de_rubrique' => '<NEW> Il n\'y a pas de rubrique &agrave; cette adresse',
 'pas_de_site' => '<NEW> Il n\'y a pas de site &agrave; cette adresse',
 'plan_du_site' => 'Overzicht van de site',
-'popularite' => '<NEW> Popularit&eacute;',
 'poster_un_message' => '<NEW> Poster un message',
-
-
-// R
-'repondre_article' => '<NEW> RŽpondre ˆ cet article',
-'repondre_breve' => '<NEW> R&eacute;pondre &agrave; cette br&egrave;ve',
-'repondre_message' => '<NEW> R&eacute;pondre &agrave; ce message',
-'resultats_recherche' => '<NEW> R&eacute;sultats de la recherche',
-'retour_debut_forums' => '<NEW> Retour au d&eacute;but des forums',
-'rubrique' => '<NEW> Rubrique',
-'rubriques' => '<NEW> Rubriques',
-
-
-// S
-'signatures_petition' => '<NEW> Signatures',
-'site_realise_avec_spip' => '<NEW> Site r&eacute;alis&eacute; avec SPIP',
-'sites_web' => '<NEW> Sites Web',
-'sous_rubriques' => '<NEW> Sous-rubriques',
-'suite' => '<NEW> suite',
-'sur_web' => '<NEW> Sur le Web',
-'syndiquer_rubrique' => '<NEW> Syndiquer cette rubrique',
-'syndiquer_site' => '<NEW> Syndiquer tout le site',
-
-
-// T
-'texte_lettre_information' => '<NEW> Voici la lettre d\'information du site',
-'texte_lettre_information_2' => '<NEW> Cette lettre recense les articles et les br&egrave;ves publi&eacute;s depuis',
-
-
-// V
-'voir_en_ligne' => '<NEW> Voir en ligne',
-
-
-// CONFLIT
 'test' => '<NEW> ',
 'test2' => '<NEW> <NEW> <NEW> '
 

@@ -80,6 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_e_accent_aigu' => 'Hoofdletter E met accent aigu toevoegen',
 'barre_eo' => 'O gekoppeld aan E (ligatuur) toevoegen',
 'barre_eo_maj' => 'Hoofdletter O gekoppeld aan E (ligatuur) toevoegen',
+'barre_euro' => '&euro; teken invoegen',
 'barre_gras' => 'In het {{vet}} zetten',
 'barre_guillemets' => 'Met &laquo; Franse haakjes &raquo; omringen',
 'barre_guillemets_simples' => 'Van „haakjes“ voorzien',
