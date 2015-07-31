@@ -185,7 +185,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour){
 				# normalement on n'arrive pas ici : pas d'upload si aucun format
 				if (!$formats = join(', ',$acceptes))
 					$formats = '-'; //_L('aucun');
-				$erreurs['document_forum'] = _T('formats_acceptes', array('formats' => $formats));
+				$erreurs['document_forum'] = _T('public:formats_acceptes', array('formats' => $formats));
 			}
 			else {
 				include_spip('inc/getdocument');
