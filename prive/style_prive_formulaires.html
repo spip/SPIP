@@ -45,7 +45,7 @@
 
 	border: 1px solid #GET{foncee};
 	color: #333;
-	background: #fff [url((#CHEMIN{images/formulaire-editer.jpg}|image_sepia{#[(#GET{claire}|couleur_eclaircir)]}|image_aplatir{jpg}|extraire_attribut{src})) repeat-x bottom];
+	background-color: #GET{claire};
 }
 
 
@@ -59,6 +59,7 @@
 	margin: 0;
 	padding: 0;
 	list-style: none;
+	background-color: #f0f0f0;
 }
 .formulaire_spip li {
 	margin: 0;
@@ -66,18 +67,28 @@
 	padding-#GET{left}:130px;
 	clear:both;
 	overflow:auto;
-	border-top: 1px solid #[(#GET{foncee}|couleur_eclaircir|couleur_eclaircir)];
 }
-.formulaire_spip li fieldset li {border:0; padding-top:5px; padding-bottom:5px;}
+.formulaire_spip li fieldset li {
+	border:0; 
+	padding: 5px 10px 5px 10px;
+	background-color: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];
+}
 
 /* elements du formulaire */
 .formulaire_spip input.text,
 .formulaire_spip input.password,
 .formulaire_spip textarea,
 .formulaire_spip select {
-	width: 96%;
+	display: block;
 	font-size:1em;
 	margin:0;
+	width: 96%;
+	border: 1px solid #GET{claire};
+	padding: 3px;
+}
+.formulaire_spip textarea {
+	width: 93.6%;
+	padding: 10px;
 }
 .formulaire_spip input.submit, 
 .formulaire_spip input.reset, 
@@ -87,18 +98,116 @@
 
 
 /* intitules (label) */
-.formulaire_spip label {
-	width: 120px;
-	float:#GET{left};
-	margin-#GET{left}:-125px; 
-	text-align: #GET{left};
-	vertical-align: top;
-	color:#555;
-	font-weight:bold;
-	/* for IE */
-	position:relative;
-	display:inline;
+
+.formulaire_spip li {
+	padding-#GET{left}: 10px;
 }
+
+.formulaire_spip li.editer_titre,
+.formulaire_spip li.editer_groupe_mot,
+.formulaire_spip li.editer_nom_site,
+.formulaire_spip li.editer_url_site,
+.formulaire_spip li.editer_surtitre,
+.formulaire_spip li.editer_soustitre ,
+.formulaire_spip li.editer_nom,
+.formulaire_spip li.editer_email,
+.formulaire_spip li.editer_new_login,
+.formulaire_spip li.editer_new_pass,
+.formulaire_spip li.editer_new_pass2,
+.formulaire_spip li.editer_statut
+	{
+	padding-#GET{left}: 130px;
+
+}
+.formulaire_spip label {
+		font-size: 80%;
+		display: -moz-inline-box;
+		display: inline-block;
+		color: white;
+		line-height: 11px;
+		text-transform: uppercase;
+		font-family: verdana, arial, helvetica, sans;
+
+		width: auto;
+
+		padding-top: 6px;
+		padding-bottom: 9px;
+		padding-#GET{left}: 5px;
+		padding-#GET{right}: 20px;
+
+		[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_claire})], bottom [(#GET{left})] no-repeat })]
+
+		color: #[(#GET{foncee}|couleur_foncer)];
+}
+.formulaire_spip li.editer_texte label {
+	font-weight: bold;
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee}|couleur_foncer)], bottom [(#GET{left})] no-repeat })]
+	color: white;
+}
+
+.formulaire_spip li.editer_titre label,
+.formulaire_spip li.editer_groupe_mot label,
+.formulaire_spip li.editer_nom_site label,
+.formulaire_spip li.editer_url_site label,
+.formulaire_spip li.editer_surtitre label,
+.formulaire_spip li.editer_soustitre label,
+.formulaire_spip li.editer_nom label,
+.formulaire_spip li.editer_email label,
+.formulaire_spip li.editer_new_login label,
+.formulaire_spip li.editer_new_pass label,
+.formulaire_spip li.editer_new_pass2 label,
+.formulaire_spip li.editer_statut label
+{
+	display: block;
+
+	width: 100px;
+
+	float: #GET{left};
+	margin-#GET{left}: -120px;
+	
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_claire,3874b0})], center [(#GET{right})] no-repeat })]
+
+	color: #[(#GET{foncee}|couleur_foncer)];
+	line-height: 11px;
+	text-transform: uppercase;
+	font-family: verdana, arial, helvetica, sans;
+
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-#GET{left}: 5px;
+	padding-#GET{right}: 20px;
+
+}
+
+.formulaire_spip li.editer_parent, 
+.formulaire_spip li.editer_groupe_mot {
+	background-color: [#(#GET{claire}|couleur_eclaircir)];
+}
+.formulaire_spip li.editer_parent label,
+.formulaire_spip li fieldset legend, 
+.formulaire_spip li fieldset h3.legend {
+	display: -moz-inline-box;
+	display: inline-block;
+	margin: 0px;
+	padding-top: 6px;
+	padding-bottom: 9px;
+	padding-#GET{left}: 5px;
+	padding-#GET{right}: 20px;
+	text-transform: uppercase;
+	font-family: verdana, arial, helvetica, sans;
+	color: white;
+	font-weight: normal;
+	font-size: 80%;
+	line-height: 11px;
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee}|couleur_foncer)], bottom [(#GET{left})] no-repeat })]
+
+}
+.formulaire_spip li fieldset legend, 
+.formulaire_spip li fieldset h3.legend {
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
 
 .formulaire_spip li p {
 	margin-top:0;
@@ -108,35 +217,14 @@
 /* fieldset */
 .formulaire_spip fieldset {
 	margin:0;
-	padding:0 0 5px 0;
+	padding:0 0 0px 0;
 	border:0;
 }
 .formulaire_spip li fieldset {
-	border:1px #aaa dashed;
-	background:transparent;
-	margin-left:-125px; /* redecalage vers la gauche... IE <= 7 ne le prend pas en compte */
+	margin: -10px;
+	border-top: 1px solid #GET{foncee};
+	background-color: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];
 }
-.formulaire_spip fieldset legend {
-	padding:0.5em;
-	font-weight:bold;
-	font-style:italic;
-	font-size:1.2em;
-}
-.formulaire_spip li fieldset legend {
-	font-style:normal;
-	font-size:1em;
-	margin-#GET{left}:0px;
-	background:#GET{claire};
-	line-height:0.6em;
-}
-.formulaire_spip li fieldset h3.legend {
-	font-size:1.1em;
-	color:#333;
-	margin-top:0;
-	background:#GET{claire};
-	padding:2px 5px;
-}
-
 /* champ des radio/checkbox
 *  on annule les decalages de label/champs
 *  lorsqu'ils sont inclus dans une class .champ
@@ -145,35 +233,44 @@
 *  pour l'avoir horizontale, il faut specifier :
 *  .formulaire_spip .formulaire_editer .editer_qqc .champ{display:inline;}
 */
-.formulaire_spip .choix label{float:none; margin-left:5px; display:inline;font-weight:normal;}
+.formulaire_spip .choix label{float:none; margin-#GET{left}:5px; display:inline;font-weight:normal; background: none;}
 .formulaire_spip .choix input.radio,
 .formulaire_spip .choix input.checkbox {width:auto;}
 
 /* icone d'aide */
-.formulaire_spip li em.aide { float:right;margin-right:-10px;}
+.formulaire_spip li em.aide {
+	display: -moz-inline-box;
+	display: inline-block;
+	margin-#GET{left}:-28px; 
+	margin-top: 4px;
+	height: 12px;
+	vertical-align: center;
+}
 
+.formulaire_spip li.editer_titre em.aide,
+.formulaire_spip li.editer_surtitre em.aide,
+.formulaire_spip li.editer_soustitre em.aide {
+	float: #GET{left}; 
+	margin-#GET{left}:-30px; 
+	padding-top: 0px;
+}
 /* boutons */
 .formulaire_spip .boutons {
 	margin:0; clear:both;
 	text-align: #GET{right};
-	font-size: 1.2em;
 	margin: 7px 1em;
 }
 .formulaire_spip .boutons input.submit {
-	margin-#GET{right}: 1em;
-	padding: 0 1em;
-	font-weight:normal;
 }
 
 
 /* obligatoire */
 .formulaire_spip li.obligatoire {
-	background-color: #CDDF3F;
-	background-color: #GET{claire};
 }
 .formulaire_spip li.obligatoire label {
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee}|couleur_foncer)], center [(#GET{right})] no-repeat })]
+	color: white;
 	font-weight: bold;
-	color:#000;
 }
 
 
@@ -203,7 +300,14 @@
 
 /* commentaires */
 .formulaire_spip .explication{
+	display: -moz-inline-box;
+	display: inline-block;
+	width: 96%;
+	border: 1px solid #GET{claire};
+	border-bottom: 0px;
+	padding: 3px;
 	font-size:10px;
+	background-color: #dddddd;
 }
 /* remarques importantes */
 .formulaire_spip em.attention{
@@ -213,22 +317,6 @@
 }
 
 
-/* barre d'outil */
-.formulaire_spip table.spip_barre{
-	background:#aaa;
-	border: 1px solid #666;
-	width:90%; /* pour mettre a la meme taille que les champs de formulaire */
-	background:none; border:0; margin:0; padding:0;/**/
-}
-.formulaire_spip table.spip_barre a img { 
-	background-color:#ccc;
-	padding: 2px;
-	border: 1px solid #666;
-	margin-right:1px;
-}
-.formulaire_spip table.spip_barre a:hover img{
-	background:white;
-}
 
 
 
@@ -246,10 +334,10 @@
 /* pour mettre les text-area en grand...* /
 .formulaire_editer .editer_texte,
 .formulaire_editer .editer_chapo,
-.formulaire_editer .editer_descriptif {padding-left:20px;}
+.formulaire_editer .editer_descriptif {padding-#GET{left}:20px;}
 .formulaire_editer .editer_texte label,
 .formulaire_editer .editer_chapo label,
-.formulaire_editer .editer_descriptif label {margin-left:-15px;margin-bottom:5px; display:block; float:none;}
+.formulaire_editer .editer_descriptif label {margin-#GET{left}:-15px;margin-bottom:5px; display:block; float:none;}
 .formulaire_editer .editer_texte textarea,
 .formulaire_editer .editer_chapo textarea,
 .formulaire_editer .editer_descriptif textarea {width:97%;}
@@ -264,17 +352,17 @@
 
 .formulaire_editer .editer_redacteurs_connectes p.explication{margin:0.5em;}
 
-/* si on enleve le: ul fieldset{margin-left:-125px;} il faut remettre ceci : * /
-.formulaire_editer .editer_identification{padding-left:5px;}
-.formulaire_editer .editer_redacteurs_connectes{padding-left:5px;}
-.formulaire_editer .editer_referencement_automatise {padding-left:5px;}
-.formulaire_editer .editer_syndications {padding-left:5px;}
-.formulaire_editer .editer_liens_sites {padding-left:5px;}
+/* si on enleve le: ul fieldset{margin-#GET{left}:-125px;} il faut remettre ceci : * /
+.formulaire_editer .editer_identification{padding-#GET{left}:5px;}
+.formulaire_editer .editer_redacteurs_connectes{padding-#GET{left}:5px;}
+.formulaire_editer .editer_referencement_automatise {padding-#GET{left}:5px;}
+.formulaire_editer .editer_syndications {padding-#GET{left}:5px;}
+.formulaire_editer .editer_liens_sites {padding-#GET{left}:5px;}
 /* */
 
 /* sites */
-.formulaire_editer .editer_referencement_automatise label {margin-left:0px;}
-.formulaire_editer .editer_referencement_automatise li {padding-left:5px;}
+.formulaire_editer .editer_referencement_automatise label {margin-#GET{left}:0px;}
+.formulaire_editer .editer_referencement_automatise li {padding-#GET{left}:5px;}
 .formulaire_editer .editer_referencement_automatise li label {display:block; float:none; width:auto;}
 
 
@@ -291,14 +379,33 @@
 
 /* barre typo */
 
-table.spip_barre {
-	background-color: #GET{foncee};
-	border-left: 1px solid #GET{claire};
-	border-right: 1px solid #GET{claire};
-	padding: 3px;
+.formulaire_spip table.spip_barre {
+	background-color: #GET{claire};
+	width: 97.4%;
+	padding: 5px;
 	padding-bottom: 0px;
-}
 
-table.spip_barre a img {padding: 3px; border: 1px outset #GET{claire}; }
-table.spip_barre a:hover img { background: #FFF; border: 1px solid #CC9; }
-table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #F57900; }
+
+
+}
+.formulaire_spip table.spip_barre tr {
+	width: 98%;
+}
+.formulaire_spip table.spip_barre a img { 
+	[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|image_bg{[(#ENV{couleur_claire}|couleur_eclaircir)], center center })]
+	padding: 3px; border: 1px outset #GET{claire}; 
+}
+.formulaire_spip table.spip_barre a:hover img { background: #FFF; border: 1px solid #CC9; }
+.formulaire_spip table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #F57900; }
+
+
+
+
+
+/* Bouton de validation */
+input[type="submit"] {
+	[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|image_bg{[(#ENV{couleur_foncee}|couleur_foncer)], center center })]
+	border: 1px outset [(#GET{couleur_foncee}|couleur_foncer)];
+	font-weight: bold;
+	color: white;
+}
