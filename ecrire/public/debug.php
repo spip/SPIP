@@ -716,7 +716,7 @@ function trace_query_start()
 		// gare au bouclage sur calcul de droits au premier appel
 		// A fortiori quand on demande une trace
 		$trace = !isset($_GET['var_profile']);
-		$trace = autoriser('debug');
+		$trace = isset($_GET['var_profile']) AND (autoriser('debug'));
 	}
 	return  $trace ?  microtime() : 0;
 }
