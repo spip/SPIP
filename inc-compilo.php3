@@ -275,7 +275,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 function calculer_from(&$boucle)
 {
   $res = "";
-  foreach($boucle->from as $k => $v) $res .= "\", \"$v AS $k";
+  foreach($boucle->from as $k => $v) $res .= "\", \"$v AS `$k`";
   return 'array(' . substr($res,3) . '")';
 }
 
