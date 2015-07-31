@@ -2,7 +2,9 @@
 	<nom>SPIP</nom>
 	<version></version>
 	<prefix>spip</prefix>
-	
+
+	<procure id="iterateurs" version="0.3.0" />
+
 	<bouton id="bando_accueil">
 		<icone>images/accueil-48.png</icone>
 		<titre>icone_accueil</titre>

@@ -91,6 +91,7 @@ function plugins_get_infos_dist($plug, $force_reload=false, $dir_plugins = _DIR_
 	if (isset($arbre['version_base']))
 		$ret['version_base'] = trim(end($arbre['version_base']));
 	$ret['necessite'] = $arbre['necessite'];
+	$ret['procure'] = $arbre['procure'];
 	$ret['utilise'] = $arbre['utilise'];
 	$ret['path'] = $arbre['path'];
 	if (isset($arbre['noisette']))

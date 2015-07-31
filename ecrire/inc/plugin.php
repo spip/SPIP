@@ -191,6 +191,16 @@ function liste_plugin_valides($liste_plug, $force = false){
 	)
 	);
 
+	// les procure de core.xml sont consideres comme des plugins installes
+	foreach($infos['_DIR_RESTREINT']['']['procure'] as $procure) {
+		$procure['nom'] = $procure['id'];
+		$procure['etat'] = '?';
+		$procure['dir_type'] = '_DIR_RESTREINT';
+		$procure['dir'] = '';
+		$procure['etat'] = '?';
+		$liste_non_classee[strtoupper($procure['id'])] = $procure;
+	}
+
 	foreach($listes as $dir_type=>$l){
 		foreach($l as $k=>$plug) {
 			// renseigner ce plugin

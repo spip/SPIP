@@ -143,6 +143,15 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 		else
 			$path = array(array('dir'=>'')); // initialiser par defaut
 		$arbre['path'] = $path;
+		// procureures
+		$procure = array();
+		if (spip_xml_match_nodes(',^procure,',$arbre,$needs)){
+			foreach(array_keys($needs) as $tag){
+				list($tag,$att) = spip_xml_decompose_tag($tag);
+				$procure[] = $att;
+			}
+		}
+		$arbre['procure'] = $procure;
 		// exposer les noisettes
 		if (isset($arbre['noisette'])){
 			foreach($arbre['noisette'] as $k=>$nut){
