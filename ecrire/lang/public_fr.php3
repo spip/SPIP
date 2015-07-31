@@ -14,9 +14,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'articles_rubrique' => 'Articles de cette rubrique',
 'aucun_article' => 'Il n\'y a pas d\'article &agrave; cette adresse',
 'aucun_auteur' => 'Il n\'y a pas d\'auteur &agrave; cette adresse',
+'aucun_site' => 'Il n\'y a pas de site &agrave; cette adresse',
 'aucune_breve' => 'Il n\'y a pas de br&egrave;ve &agrave; cette adresse',
 'aucune_rubrique' => 'Il n\'y a pas de rubrique &agrave; cette adresse',
-'aucun_site' => 'Il n\'y a pas de site &agrave; cette adresse',
 'autres_breves' => 'Autres br&egrave;ves',
 'autres_groupes_mots_clefs' => 'Autres groupes de mots-cl&eacute;s',
 'autres_sites' => 'Autres sites',
@@ -32,7 +32,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // D
-'meme_rubrique' => 'Dans la m&ecirc;me rubrique',
 'date' => 'Date',
 'dernier_ajout' => 'Dernier ajout',
 'dernieres_breves' => 'Derni&egrave;res br&egrave;ves',
@@ -63,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // M
 'meme_auteur' => 'Du m&ecirc;me auteur',
+'meme_rubrique' => 'Dans la m&ecirc;me rubrique',
 'memes_auteurs' => 'Des m&ecirc;mes auteurs',
 'message' => 'Message',
 'messages_forum' => 'Messages de forum',
@@ -81,6 +81,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // P
+'page_precedente' => 'page pr&eacute;c&eacute;dente',
+'page_suivante' => 'page suivante',
 'par_auteur' => 'par ',
 'participer_site' => 'Vous pouvez participer &agrave; la vie de ce site et proposer vos propres articles en vous inscrivant ci-dessous. Vous recevrez imm&eacute;diatement un email vous indiquant vos codes d\'acc&egrave;s &agrave; l\'espace priv&eacute; du site.',
 'plan_site' => 'Plan du site',
