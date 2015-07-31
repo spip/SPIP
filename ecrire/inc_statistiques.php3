@@ -6,6 +6,9 @@ if (defined("_ECRIRE_INC_STATISTIQUES")) return;
 define("_ECRIRE_INC_STATISTIQUES", "1");
 
 
+// Les deux fonctions suivantes sont adaptees du code des "Visiteurs",
+// par Jean-Paul Dezelus (http://www.phpinfo.net/applis/visiteurs/)
+
 function stats_load_engines() {
 	$file_name = 'data/engines-list.ini';
 	if ($fp = @fopen($file_name, 'r'))
