@@ -151,7 +151,8 @@ function appliquer_quota_cache() {
 		.(intval(16*$total_cache/(1024*1024/10))/10)." Mo","invalideur");
 
 	// Nombre max de fichiers a supprimer
-	if ($taille > 0 AND $quota_cache > 0) {
+	if ($quota_cache > 0
+	AND $taille > 0) {
 		$trop = $total_cache - ($quota_cache/16)*1024*1024;
 		$trop = 3 * intval($trop / $taille);
 		if ($trop > 0) {
