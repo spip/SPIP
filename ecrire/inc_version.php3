@@ -126,6 +126,10 @@ $type_urls = 'standard';
 // le chemin complet '/bin/convert' (Linux) ou '/sw/bin/convert' (fink/Mac OS X)
 // Note : preferer GD2 ou le module php imagick s'ils sont disponibles
 $convert_command = 'convert';
+// creation des vignettes avec djpeg/pnmscale/cjpeg
+$djpeg_command = 'djpeg';
+$cjpeg_command = 'cjpeg';
+$pnmscale_command = 'pnmscale';
 
 // faut-il passer les connexions MySQL en mode debug ?
 $mysql_debug = false;

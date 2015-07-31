@@ -85,6 +85,9 @@ else {
 				case 'gd2':
 					$formats_graphiques = lire_meta('gd_formats');
 					break;
+				case 'netpbm':
+					$formats_graphiques = 'jpg';
+					break;
 				case 'convert':
 					$formats_graphiques = 'gif,jpg,png';
 					break;
@@ -109,10 +112,16 @@ else {
 				}
 			}
 
+			afficher_choix_vignette($p = 'netpbm');
+			$nb_process ++;
+
+
 			if ($convert_command) {
 				afficher_choix_vignette($p = 'convert');
 				$nb_process ++;
 			}
+			
+			
 
 			echo "</tr></table>\n";
 	
