@@ -241,13 +241,11 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 	return isset($exposer[$m][$prim]) ? isset($exposer[$m][$prim][$id]) : '';
 }
 
-function quete_debut_pagination($primary,$valeur,$pas,$rows){
+function quete_debut_pagination($primary,$valeur,$pas,$res){
 	$pos = 0;
-	foreach($rows as $row){
-		if ($row[$primary]==$valeur)
-			break;
+	while ($row = sql_fetch($res) AND $row[$primary]!==$valeur)
 		$pos++;
-	}
+	sql_free($res);
 	// si on a pas trouve
 	if ($row[$primary]!==$valeur)
 		return 0;
