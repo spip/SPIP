@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Chanje ribwik la (pati a nan sit sa a)',
 'admin_recalculer' => 'Kalkil ank&ograve; paj la',
 'alerte_maj_impossible' => '<<b>Atansyon&nbsp;!</b> Larnouv&egrave;lman pou baz MySQL sou @version@ se pa posib, pet&egrave;t ka genyen yon pwobl&egrave;m ek drwa pou chanje bazdone-sa a. Tanpri souple kontak ou l&eacute;berg&egrave;.',
+'analyse_xml' => 'Analiz XML',
 'avis_archive_incorrect' => 'fichye achiv a se pa fichye SPIP',
 'avis_archive_invalide' => 'fichye achiv la se pa bon',
 'avis_attention' => 'ATANSYON&nbsp;!',
@@ -32,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_echec_syndication_02' => 'Sendikasyon te pa mache : gen enposib aksede "backend" sit-la.',
 'avis_erreur' => 'Er&egrave; : gad isit anba',
 'avis_erreur_connexion' => 'Er&egrave; ak koneksyon',
+'avis_erreur_cookie' => 'pwobl&egrave;m &egrave;k gatomakro (kouki)',
 'avis_erreur_fonction_contexte' => 'Er&egrave; ak pwogwmasyon. Fok w pa rele fonksyon-nan andnan kont&egrave;ks la.',
 'avis_erreur_mysql' => 'Er&egrave; MySQL',
 'avis_erreur_sauvegarde' => 'Er&egrave; nan sovgad (@type@ @id_objet@) !',
@@ -58,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Chanje',
 'bouton_chercher' => 'Ch&egrave;che',
 'bouton_choisir' => 'Chwazi',
+'bouton_enregistrer' => 'Enskri',
 'bouton_radio_desactiver_messagerie_interne' => 'Rete kazmodekri',
 'bouton_radio_envoi_annonces' => 'Voye anons leditoyal ',
 'bouton_radio_non_envoi_annonces' => 'Rete voye anons yo',
@@ -183,6 +186,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // F
+'fichier_introuvable' => 'Okin fisy&eacute; @fichier@ konsa',
 'form_deja_inscrit' => 'Ou se deja enskri.',
 'form_email_non_valide' => 'Ou ladr&egrave;s lim&egrave;l se pa bon.',
 'form_forum_access_refuse' => 'Ou pli genyen akse sou sit la.',
@@ -247,8 +251,8 @@ M&egrave;si a w soutni petisyon-nan
 'form_prop_sujet' => 'Sije',
 'form_prop_url_site' => 'Ladr&egrave;s (URL) sitw&egrave;b',
 'forum_acces_refuse' => 'Ou ap pli enskri pou fowom-nan.',
-'forum_attention_dix_caracteres' => '<b>Atansyon&nbsp;!</b> mesaj ou se mwen di l&egrave;t.',
-'forum_attention_trois_caracteres' => '<b>Atansyon&nbsp;!</b> Kouman i rele se mwen trwa l&egrave;t.',
+'forum_attention_dix_caracteres' => '<b>Atansyon&nbsp;!</b> mesaj aou li se mwen di l&egrave;t.',
+'forum_attention_trois_caracteres' => '<b>Atansyon&nbsp;!</b> Kouman i rele sit_la se mwen trwa l&egrave;t. F&ocirc;k w m&egrave;t trwa l&egrave;t omwen',
 'forum_avez_selectionne' => 'Ou te chwazi&nbsp;:',
 'forum_cliquer_retour' => 'Klik <a href=\'@retour_forum@\'>isit</a> pou kontinye.',
 'forum_forum' => 'fowom',

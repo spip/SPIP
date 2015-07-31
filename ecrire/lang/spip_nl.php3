@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Rubriek wijzigen',
 'admin_recalculer' => 'Pagina vernieuwen',
 'alerte_maj_impossible' => '<b>Waarshuwing&nbsp;!</b> Het updaten van de MySQL-gegevensbank naar versie @version@ is niet mogelijk. Mogelijk is dit te wijten aan onvoldoende schrijfrechten op de gegevensbank. Contacteer hiervoor je provider.',
+'analyse_xml' => 'XML Analyse',
 'avis_archive_incorrect' => 'Het bewaarde bestand is geen SPIP-bestand',
 'avis_archive_invalide' => 'Het bewaarde bestand is niet bruikbaar',
 'avis_attention' => 'OPGELET!',
@@ -59,7 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Wijzigen',
 'bouton_chercher' => 'Zoeken',
 'bouton_choisir' => 'Selecteren',
-'bouton_enregistrer' => '<NEW>Enregistrer',
+'bouton_enregistrer' => 'Behouden',
 'bouton_radio_desactiver_messagerie_interne' => 'Intern berichtensysteem desactiveren',
 'bouton_radio_envoi_annonces' => 'versturen van editoriale aankondigingen',
 'bouton_radio_non_envoi_annonces' => 'Geen aankondigingen versturen',
@@ -185,7 +186,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // F
-'fichier_introuvable' => '<NEW>Fichier @fichier@ introuvable',
+'fichier_introuvable' => 'Bestand @fichier@ onvindbaar',
 'form_deja_inscrit' => 'Je bent reeds ingeschreven.',
 'form_email_non_valide' => 'Je e-mailadres is niet geldig.',
 'form_forum_access_refuse' => 'Je hebt geen toegang meer tot deze website.',
@@ -253,8 +254,8 @@ Bedankt voor je deelname
 'form_prop_sujet' => 'Onderwerp',
 'form_prop_url_site' => 'Website-adres (URL)',
 'forum_acces_refuse' => 'Je hebt geen toegang meer tot deze forums.',
-'forum_attention_dix_caracteres' => '<MODIF><b>Opgelet!</b> : je bericht telt minder dan 10 tekens.',
-'forum_attention_trois_caracteres' => '<MODIF><b>Opgelet!</b> : je bericht telt minder dan 3 tekens.',
+'forum_attention_dix_caracteres' => '<b>Opgelet!</b> : je bericht moet minstens 10 tekens bevatten.',
+'forum_attention_trois_caracteres' => '<b>Opgelet!</b> : je bericht moet minstens 3 tekens bevatten.',
 'forum_avez_selectionne' => 'Je hebt gekozen:',
 'forum_cliquer_retour' => 'Klik <a href=\'@retour_forum@\'>hier</a> om door te gaan.',
 'forum_forum' => 'forum',
