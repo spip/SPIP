@@ -12,67 +12,69 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
-include_spip('inc/syndic');
-include_spip('inc/mots');
 include_spip('inc/date');
 include_spip('inc/config');
 
 // http://doc.spip.org/@exec_sites_dist
 function exec_sites_dist()
 {
-	global $spip_lang_left,  $spip_lang_right, $spip_display;
-
-	$cherche_mot = _request('cherche_mot');
-	$select_groupe = _request('select_groupe');
 	$id_syndic = intval(_request('id_syndic'));
 
-	$commencer_page = charger_fonction('commencer_page', 'inc');
 	if (!autoriser('voir','site',$id_syndic)){
-		echo $commencer_page("$titre_page","naviguer","sites", $id_rubrique);
-		echo "<strong>"._T('avis_acces_interdit')."</strong>";
-		echo fin_page();
+		include_spip('inc/minipres');
+		echo minipres();
 		exit;
 	}
 
 	$result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic=$id_syndic");
 
 	if ($row = spip_fetch_array($result)) {
-		$id_syndic = $row["id_syndic"];
 		$id_rubrique = $row["id_rubrique"];
 		$nom_site = $row["nom_site"];
-		$url_site = $row["url_site"];
-		$url_syndic = $row["url_syndic"];
-		$descriptif = $row["descriptif"];
-		$syndication = $row["syndication"];
-		$statut = $row["statut"];
-		$date_heure = $row["date"];
-		$date_syndic = $row['date_syndic'];
-		$mod = $row['moderation'];
-		$extra=$row["extra"];
-
-		$flag_administrable = autoriser('modifier','site',$id_syndic);
-
-		$flag_editable = ($flag_administrable OR ($GLOBALS['meta']["proposer_sites"] > 0 AND ($statut == 'prop')));
-	
-	} else {$id_syndic = 0; $nom_site='';}
-
-	if ($nom_site)
 		$titre_page = "&laquo; $nom_site &raquo;";
-	else
+	} else {
+		$id_syndic = $id_rubrique = $nom_site = '';
 		$titre_page = _T('info_site');
+	}
 
 	pipeline('exec_init',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
 
-
+	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page("$titre_page","naviguer","sites", $id_rubrique);
+
+	if (!$id_syndic)
+	  echo _T('public:aucun_site'); 
+	else afficher_site($id_syndic, $id_rubrique, $nom_site, $row);
+	echo fin_page();
+}
+
+
+function afficher_site($id_syndic, $id_rubrique, $nom_site, $row)
+{
+
+	global $spip_lang_left,  $spip_lang_right, $spip_display;
+
+	$cherche_mot = _request('cherche_mot');
+	$select_groupe = _request('select_groupe');
+	$url_site = $row["url_site"];
+	$url_syndic = $row["url_syndic"];
+	$descriptif = $row["descriptif"];
+	$syndication = $row["syndication"];
+	$statut = $row["statut"];
+	$date_heure = $row["date"];
+	$date_syndic = $row['date_syndic'];
+	$mod = $row['moderation'];
+	$extra=$row["extra"];
+
+	$flag_administrable = autoriser('modifier','site',$id_syndic);
+
+	$flag_editable = ($flag_administrable OR ($GLOBALS['meta']["proposer_sites"] > 0 AND ($statut == 'prop')));
 
 	debut_grand_cadre();
 
 	echo afficher_hierarchie($id_rubrique);
 
 	fin_grand_cadre();
-
-	if (!$id_syndic) {echo _T('public:aucun_site'); exit;}
 
 	debut_gauche();
 
@@ -317,9 +319,9 @@ fin_cadre_relief();
 // Forums
 //
 
- echo "<br /><br />\n<div class='centered'>";
+ echo "<div class='centered'>\n";
 
- echo icone (_T('icone_poster_message'), generer_url_ecrire('forum_envoi', "id=$id_syndic&statut=prive&script=sites") . '#formulaire', "forum-interne-24.gif", "creer.gif");
+ echo icone_inline (_T('icone_poster_message'), generer_url_ecrire('forum_envoi', "id=$id_syndic&statut=prive&script=sites") . '#formulaire', "forum-interne-24.gif", "creer.gif");
 
  echo "</div>\n";
 
@@ -327,7 +329,7 @@ fin_cadre_relief();
 
  echo afficher_forum($result_forum, "sites","id_syndic=$id_syndic");
 
- echo fin_gauche(), fin_page();
+ echo fin_gauche();
 }
 
 
