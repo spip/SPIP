@@ -87,7 +87,7 @@ function modifier_contenu($type, $id, $options, $c=false) {
 
 }
 
-// http://doc.spip.org/@revisions_documents
+// http://doc.spip.org/@revision_document
 function revision_document($id_document, $c=false) {
 
 	return modifier_contenu('document', $id_document,
@@ -98,5 +98,20 @@ function revision_document($id_document, $c=false) {
 		$c);
 
 }
+
+
+// http://doc.spip.org/@revision_auteur
+function revision_auteur($id_auteur, $c=false) {
+	include_spip('inc/modifier');
+
+	return modifier_contenu('auteur', $id_auteur,
+		array(
+			'champs' => array('nom', 'bio', 'pgp', 'nom_site', 'lien_site', 'email'),
+			'nonvide' => array('nom' => _T('ecrire:item_nouvel_auteur'))
+		),
+		$c);
+
+}
+
 
 ?>

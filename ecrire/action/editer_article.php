@@ -116,12 +116,12 @@ function revisions_articles ($id_article, $c=false) {
 	global $flag_revisions;
 	include_spip('inc/filtres');
 
+	// unifier $texte en cas de texte trop long (sur methode POST seulement)
+	if (!is_array($c)) trop_longs_articles();
+
 	// Ces champs seront pris nom pour nom (_POST[x] => spip_articles.x)
 	$champs_normaux = array('surtitre', 'titre', 'soustitre', 'descriptif',
 		'nom_site', 'url_site', 'chapo', 'texte', 'ps');
-
-	// unifier $texte en cas de texte trop long (sur methode POST seulement)
-	if (!is_array($c)) trop_longs_articles();
 
 	// ne pas accepter de titre vide
 	if (_request('titre', $c) === '')
