@@ -194,7 +194,9 @@ function corriger_caracteres_windows($texte, $charset='AUTO', $charset_cible='un
 				$trans[$charset][$charset_cible][$k] = unicode2charset($c, $charset_cible);
 		}
 	}
-	return str_replace(array_keys($trans[$charset]),array_values($trans[$charset]),$texte);
+
+	return @str_replace(array_keys($trans[$charset]),
+			   array_values($trans[$charset]),$texte);
 }
 
 
