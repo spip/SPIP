@@ -212,7 +212,7 @@ function recuperer_parametres_url(&$fond, $url) {
 	$id_objet = 0;
 
 	// Migration depuis anciennes URLs ?
-	if ($GLOBALS['_SERVER']['REQUEST_METHOD'] != 'POST' AND
+	if ($_SERVER['REQUEST_METHOD'] != 'POST' AND
 	(preg_match(
 	',(^|/)(article|breve|rubrique|mot|auteur|site)(\.php3?|[0-9]+\.html)'
 	.'([?&].*)?$,', $url, $regs)
@@ -239,6 +239,9 @@ function recuperer_parametres_url(&$fond, $url) {
 			// recuperer les arguments supplementaires (&debut_xxx=...)
 			$reste = preg_replace('/^&/','?',
 				preg_replace("/[?&]$id_table_objet=$id_objet/",'',$regs[5]));
+			$reste .= preg_replace('/&/','?',
+				preg_replace('/[?&]'.$type.'[=]?'.$id_objet.'/','',
+				substr($url, strpos($url,'?'))));
 			redirige_par_entete("$url_propre$reste");
 		}
 	}
@@ -246,8 +249,8 @@ function recuperer_parametres_url(&$fond, $url) {
 
 
 	// Chercher les valeurs d'environnement qui indiquent l'url-propre
-	if (isset($GLOBALS['_SERVER']['REDIRECT_url_propre']))
-		$url_propre = $GLOBALS['_SERVER']['REDIRECT_url_propre'];
+	if (isset($_SERVER['REDIRECT_url_propre']))
+		$url_propre = $_SERVER['REDIRECT_url_propre'];
 	elseif (isset($GLOBALS['HTTP_ENV_VARS']['url_propre']))
 		$url_propre = $GLOBALS['HTTP_ENV_VARS']['url_propre'];
 	else {

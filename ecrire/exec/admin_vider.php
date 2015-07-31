@@ -24,10 +24,11 @@ function calculer_taille_dossier ($dir) {
 	while (($fichier = @readdir($handle)) !== false) {
 		// Eviter ".", "..", ".htaccess", etc.
 		if ($fichier[0] == '.') continue;
-		if ($regexp AND !ereg($regexp, $fichier)) continue;
-		if (is_file("$dir/$fichier")) {
-			$taille += filesize("$dir/$fichier");
+		if (is_file($d = "$dir/$fichier")) {
+			$taille += filesize($d);
 		}
+		else if (is_dir($d))
+			$taille += calculer_taille_dossier($d);
 	}
 	closedir($handle);
 	return $taille;
@@ -37,20 +38,7 @@ function calculer_taille_dossier ($dir) {
 
 // http://doc.spip.org/@afficher_taille_cache_vignettes
 function afficher_taille_cache_vignettes() {
-	$handle = @opendir(_DIR_VAR);
-	if (!$handle) return;
-
-	$taille = 0;
-	while (($fichier = @readdir($handle)) !== false) {
-		// Eviter ".", "..", ".htaccess", etc.
-		if ($fichier[0] == '.') continue;
-		if ($regexp AND !ereg($regexp, $fichier)) continue;
-		if (is_dir($d = _DIR_VAR . $fichier) AND ereg("^cache-", $fichier)) {
-			$taille += calculer_taille_dossier($d);
-		}
-	}
-	closedir($handle);
-	
+	$taille = calculer_taille_dossier(_DIR_VAR);
 	return _T('ecrire:taille_cache_image',
 		array(
 			'dir' => joli_repertoire(_DIR_VAR),

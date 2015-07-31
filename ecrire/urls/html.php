@@ -91,8 +91,8 @@ function recuperer_parametres_url($fond, $url) {
 	 */
 	// Si on est revenu en mode html, mais c'est une ancienne url_propre
 	// on ne redirige pas, on assume le nouveau contexte (si possible)
-	$url_propre = isset($GLOBALS['_SERVER']['REDIRECT_url_propre']) ?
-		$GLOBALS['_SERVER']['REDIRECT_url_propre'] :
+	$url_propre = isset($_SERVER['REDIRECT_url_propre']) ?
+		$_SERVER['REDIRECT_url_propre'] :
 		(isset($GLOBALS['HTTP_ENV_VARS']['url_propre']) ?
 			$GLOBALS['HTTP_ENV_VARS']['url_propre'] :
 			'');

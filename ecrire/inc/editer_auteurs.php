@@ -61,7 +61,7 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 //
 	if ($cherche_auteur) {
 
-		$reponse ="<p align='$spip_lang_left'>"
+		$reponse ="<div style='text-align: $spip_lang_left'>"
 		. debut_boite_info(true)
 		. rechercher_auteurs_objet($cherche_auteur, $ids, $type, $id,$script_edit_objet, $arg_ajax);
 
@@ -77,7 +77,7 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 		}
 
 		$reponse .= fin_boite_info(true)
-		. '</p>';
+		. '</div>';
 	} else $reponse ='';
 
 	$reponse .= $les_auteurs;
@@ -112,7 +112,7 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 			: bouton_block_invisible("auteurs$type")))
 	. $titre_boite;
 
-	$res = '<div>&nbsp;</div>' // pour placer le gif patienteur
+	$res = '<div><div>&nbsp;</div>' // pour placer le gif patienteur
 	. debut_cadre_enfonce("auteur-24.gif", true, "", $bouton)
 	. $reponse
 	.  ($flag === 'ajax' ?
@@ -120,7 +120,8 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 		debut_block_invisible("auteurs$type"))
 	. $res
 	. fin_block()
-	. fin_cadre_enfonce(true);
+	. fin_cadre_enfonce(true)
+        . '</div>';
 
 	return ajax_action_greffe("editer_auteurs-$id", $res);
 }

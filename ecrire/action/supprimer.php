@@ -51,6 +51,20 @@ function action_supprimer_document($arg) {
 function action_supprimer_rubrique($id_rubrique)
 {
 	spip_query("DELETE FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
+	// Les admin restreints qui n'administraient que cette rubrique
+	// deviennent redacteurs
+	// (il y a sans doute moyen de faire ca avec un having)
+
+	$q = spip_query("SELECT id_auteur FROM spip_auteurs_rubriques WHERE id_rubrique=$id_rubrique");
+
+	while ($r = spip_fetch_array($q)) {
+		$id_auteur = $r['id_auteur'];
+		spip_query("DELETE FROM spip_auteurs_rubriques WHERE id_rubrique=$id_rubrique AND id_auteur=$id_auteur");
+		$n = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_rubriques WHERE id_auteur=$id_auteur LIMIT 1"));
+		if (!$n)
+			spip_query("UPDATE spip_auteurs SET statut='1comite' WHERE id_auteur=$id_auteur");
+	}
+
 	include_spip('inc/rubriques');
 	calculer_rubriques();
 	calculer_langues_rubriques();
