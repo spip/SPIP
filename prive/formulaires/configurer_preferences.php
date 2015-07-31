@@ -18,8 +18,9 @@ function formulaires_configurer_preferences_charger_dist(){
 	lire_metas();
 
 	$valeurs = array();
-	foreach(array('display_navigation','display','couleur') as $k)
-		$valeurs[$k] = isset($GLOBALS['visiteur_session']['prefs'][$k])?$GLOBALS['visiteur_session']['prefs'][$k]:'';
+	$valeurs['display_navigation'] = isset($GLOBALS['visiteur_session']['prefs']['display_navigation'])?$GLOBALS['visiteur_session']['prefs']['display_navigation']:'navigation_avec_icones';
+	$valeurs['display'] = (isset($GLOBALS['visiteur_session']['prefs']['display']) AND $GLOBALS['visiteur_session']['prefs']['display']>0)?$GLOBALS['visiteur_session']['prefs']['display']:1;
+	$valeurs['couleur'] = (isset($GLOBALS['visiteur_session']['prefs']['couleur']) AND $GLOBALS['visiteur_session']['prefs']['couleur']>0)?$GLOBALS['visiteur_session']['prefs']['couleur']:1;
 	$valeurs['spip_ecran'] = $GLOBALS['spip_ecran'];
 
 	$couleurs = charger_fonction('couleurs','inc');
@@ -35,20 +36,6 @@ function formulaires_configurer_preferences_charger_dist(){
 	$valeurs['imessage'] = $GLOBALS['visiteur_session']['imessage'];
 	return $valeurs;
 }
-/*
-function formulaires_configurer_preferences_verifier_dist(){
-	$erreurs = array();
-
-	foreach(array('nom_site','adresse_site') as $obli)
-		if (!_request($obli))
-			$erreurs[$obli] = _T('info_obligatoire');
-
-	if ($email = _request('email_webmaster') AND !email_valide($email))
-		$erreurs['email_webmaster'] = _T('info_email_invalide');
-	
-	return $erreurs;
-}
-*/
 
 function formulaires_configurer_preferences_traiter_dist(){
 
@@ -78,7 +65,7 @@ function formulaires_configurer_preferences_traiter_dist(){
 		include_spip('inc/cookie');
 		spip_setcookie('spip_ecran', $_COOKIE['spip_ecran'] = $spip_ecran, time() + 365 * 24 * 3600);
 	}
-	
+
 	return array('message_ok'=>_T('config_info_enregistree'),'editable'=>true);
 }
 
