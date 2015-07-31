@@ -277,6 +277,14 @@ $table_date = array();
 $tables_jointures = array();
 $tables_des_serveurs_sql['localhost'] =  &$tables_principales;
 
+// Liste des statuts. 
+$liste_des_statuts = array(
+			   "info_administrateurs" => '0minirezo',
+			   "info_redacteurs" =>'1comite',
+			   "info_visiteurs" => '6forum',
+			   "info_statut_site_4" => '5poubelle'
+			   );
+
 // Experimental : pour supprimer systematiquement l'affichage des numeros
 // de classement des titres, recopier la ligne suivante dans mes_options :
 # $table_des_traitements['TITRE'][]= 'typo(supprimer_numero(%s))';

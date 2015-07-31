@@ -369,24 +369,33 @@ function etat_base_accueil()
 		if (isset($cpt['publie'])) $res .= "<li><b>"._T("texte_statut_publies").": ".$cpt2['publie'] .$cpt['publie'] . "</b>" .'</li>';
 		$res .= "</ul>";
 	}
+	
+	$res .= acceuil_liste_participants()
+	. "</div>";
 
-	$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_auteurs GROUP BY statut HAVING cnt <>0");
+	return $res ;
+}
+
+function acceuil_liste_participants()
+{
+	$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_auteurs GROUP BY statut HAVING cnt <>0 AND statut IN ('" . join("','", $GLOBALS['liste_des_statuts']) . "')");
 
 	$cpt = array();
 	while($row=spip_fetch_array($q)) $cpt[$row['statut']] = $row['cnt']; 
 
-	if ($cpt) {
-		$res .= afficher_plus(generer_url_ecrire("auteurs",""))."<b>"._T('icone_auteurs')."</b>";
-		$res .= "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
-		if (isset($cpt['0minirezo'])) $res .= "<li>" ._T("info_administrateurs") .": " .$cpt['0minirezo'] . '</li>';
-		if (isset($cpt['1comite'])) $res .= "<li>" ._T("info_redacteurs") .": " .$cpt['1comite'] . '</li>';
-		if (isset($cpt['6forum'])) $res .= "<li>" ._T("info_visiteurs") .": " .$cpt['6forum'] . '</li>';
-		$res .= "</ul>";
+	if (!$cpt) return '';
+
+	       
+	$res = afficher_plus(generer_url_ecrire("auteurs"))."<b>"._T('icone_auteurs')."</b>"
+	. "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
+		
+	foreach($GLOBALS['liste_des_statuts'] as $k => $v) {
+	  if (isset($cpt[$v])) $res .= "<li>" . _T($k) . ": " .$cpt[$v] . '</li>';
 	}
 
-	$res .= "</div>";
+	$res .= "</ul>";
 
-	return $res ;
+	return $res; 
 }
 
 // http://doc.spip.org/@exec_accueil_dist
