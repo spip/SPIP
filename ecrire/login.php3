@@ -9,18 +9,25 @@ include_local ("inc_session.php3");
 $nom_site = lire_meta('nom_site');
 $url_site = lire_meta('adresse_site');
 
-install_debut_html("$nom_site : identification");
+install_debut_html("$nom_site : acc&egrave;s &agrave; l'espace priv&eacute;");
 
-// reconnaitre un login du cookie d'admin
-if (ereg("^@([^@]+)", $GLOBALS['spip_admin'], $regs))
-	$login = $regs[1];
+// Le login est memorise dans le cookie d'admin eventuel
+if (ereg("^@(.*)$", $spip_admin, $regs)) $login = $regs[1];
+else $login = "";
 
-echo "<p><b>Pour acc&eacute;der &agrave; l'espace priv&eacute; de ce site, ";
-echo "vous devez entrer vos codes d'identification.</b> Ceux-ci vous ont &eacute;t&eacute; ";
-echo "fournis lors de votre inscription en tant qu'auteur.";
+if ($echec_cookie == "oui") {
+	echo "<p><b>Vous devez accepter les cookies pour ce site afin d'acc&eacute;der ";
+	echo "&agrave; l'espace priv&eacute;.</b> Le r&eacute;glage se fait dans la ";
+	echo "configuration de votre navigateur Web.";
+}
+else {
+	echo "<p>Pour acc&eacute;der &agrave; l'espace priv&eacute; de ce site, ";
+	echo "vous devez entrer les codes d'identification qui vous ont &eacute;t&eacute; ";
+	echo "fournis lors de votre inscription.";
+}
 
 echo "<p>";
-affiche_formulaire_login($login, './ecrire/index.php3');
+affiche_formulaire_login($login, './ecrire/index.php3?essai_cookie=oui', './ecrire/login.php3');
 
 if ($url_site) {
 	echo "<p><font size='2' face='Verdana, Arial, Helvetica, sans-serif'>";

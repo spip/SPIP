@@ -276,12 +276,10 @@ if ($connect_statut == "0minirezo") {
 		echo "Vous pouvez activer un cookie, ce qui vous permettra d'&eacute;diter directement les articles depuis le site public.";
 		echo aide ("cookie");
 
-		bouton("Placer un cookie", "../spip_cookie.php3?cookie_admin=@".$connect_login."&redirect=./ecrire/index.php3");
+		bouton("Placer un cookie", "../spip_cookie.php3?cookie_admin=@$connect_login&redirect=./ecrire/index.php3");
 		echo "<p><hr><p>";
 	}
 }
-
-
 
 
 //
