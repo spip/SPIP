@@ -40,7 +40,7 @@ function plugins_afficher_liste_dist($url_page,$liste_plugins, $liste_plugins_ac
 		// le rep suivant
 		$actif = @isset($fast_liste_plugins_actifs[$plug]);
 		$block_actif = $block_actif | $actif;
-		$expose = (urldecode(_request('plugin'))==$plug OR urldecode(_request('plugin'))==substr($dir_plugins,strlen(_DIR_RACINE)) . $plug);
+		$expose = (urldecode(_request('plugin'))==$plug OR urldecode(_request('plugin'))==$dir_plugins . $plug);
 		$block .= $ligne_plug($url_page, $plug, $actif, $expose, "item", $dir_plugins)."\n";
 	}
 	$res .= $block_par_lettre ? affiche_block_initiale($initiale,$block,$block_actif): $block;

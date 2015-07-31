@@ -20,8 +20,19 @@ function exec_info_plugin_dist() {
 		echo minipres();
 	} else {
 		$plug = _request('plugin');
+		$dir_plugins = _DIR_PLUGINS;
+		if (strncmp($plug, _DIR_EXTENSIONS,strlen(_DIR_EXTENSIONS)) === 0) {
+			$dir_plugins = _DIR_EXTENSIONS;
+			$plug = substr($plug,strlen(_DIR_EXTENSIONS));
+		}
+		else if (strncmp($plug, _DIR_PLUGINS,strlen(_DIR_PLUGINS)) === 0) {
+			$dir_plugins = _DIR_PLUGINS;
+			$plug = substr($plug,strlen(_DIR_PLUGINS));
+		}
+		// sinon c'est louche, mais on essaye quand meme
+
 		$get_infos = charger_fonction('get_infos','plugins');
-		$info = $get_infos($plug);
+		$info = $get_infos($plug, false, $dir_plugins);
 		$afficher_plugin = charger_fonction("afficher_plugin","plugins");
 		ajax_retour(affiche_bloc_plugin($plug, $info));
 	}
