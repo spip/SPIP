@@ -27,7 +27,7 @@ function cvtconf_formulaire_charger($flux){
 	) {
 		// Pour tous les formulaires CONFIGURER, ayant une fonction charger ou pas, on teste si autorisé
 		include_spip('inc/autoriser');
-		if (!autoriser('configurer', "_$form")) {
+		if (!autoriser('configurer', '_'.substr($form,11))) {
 			return false;
 		}
 		
