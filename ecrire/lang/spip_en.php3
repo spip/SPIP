@@ -699,7 +699,6 @@ requiring an FTP access to the Web site.',
 'info_moyenne' => 'average:',
 'info_multi_articles' => 'Enable the language menu for the articles?',
 'info_multi_cet_article' => '<MODIF> This article is in:',
-'info_multi_cette_rubrique' => '<MODIF> This section is in:',
 'info_multi_herit' => '<MODIF> parent\'s language',
 'info_multi_langues_choisies' => 'Please select below the languages to be available to the editors of your site.
   Languages already used by your site (on top of the list) cannot be disabled.',
@@ -1548,6 +1547,7 @@ entered important modifications on the graphics or the structure of the site.',
 'titre_joindre_document' => 'ATTACH A DOCUMENT',
 'titre_langue_article' => 'ARTICLE LANGUAGE',
 'titre_langue_breve' => 'NEWS ITEM LANGUAGE',
+'titre_langue_rubrique' => 'SECTION LANGUAGE',
 'titre_langue_trad_article' => 'ARTICLE LANGUAGE AND TRANSLATIONS',
 'titre_les_articles' => 'ARTICLES',
 'titre_liens_entrants' => 'Incoming links of the day',
@@ -1610,6 +1610,7 @@ entered important modifications on the graphics or the structure of the site.',
 'trad_lier' => 'This article is a translation of the article number',
 'trad_new' => 'Write a new translation of this article',
 'trad_reference' => '(reference article)'
+
 
 );
 
