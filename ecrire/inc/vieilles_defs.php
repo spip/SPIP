@@ -386,8 +386,8 @@ spip_log('spip_free_result() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NA
 }
 
 // http://doc.spip.org/@creer_objet_multi
-function creer_objet_multi($r) {
+function creer_objet_multi($r, $l) {
 spip_log('creer_objet_multi() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
-	spip_abstract_multi($r);
+ spip_abstract_multi($r, $l);
 }
 ?>

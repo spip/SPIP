@@ -277,10 +277,11 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 	
 	// si on n'est pas minirezo, ignorer les auteurs sans article
 	// sauf les admins, toujours visibles.
+
 	// limiter les statuts affiches
 	if ($connect_statut == '0minirezo') {
 		if (!$statut) {
-			$sql_visible = "en_ligne <> 0";
+			$sql_visible = "aut.statut IN ('0minirezo','1comite','5poubelle')";
 			$visit = false;
 		} else {
 			if ($statut[0]=='!') {
