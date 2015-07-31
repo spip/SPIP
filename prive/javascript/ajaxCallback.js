@@ -59,30 +59,6 @@ if(!jQuery.load_handlers) {
 
 }
 
-// animation du bloc cible pour faire patienter
-jQuery.fn.animeajax = function(end) {
-	this.children().css('opacity', 0.5);
-	if (typeof ajax_image_searching != 'undefined'){
-		var i = (this).find('.image_loading');
-		if (i.length) i.eq(0).html(ajax_image_searching);
-		else this.prepend('<span class="image_loading">'+ajax_image_searching+'</span>');
-	}
-	return this; // don't break the chain
-}
-
-jQuery.fn.animeRemove = function(){
-	$(this).addClass('remove').animate({opacity: "0.0"}, 'fast');
-	return this; // don't break the chain
-}
-jQuery.fn.animeAppend = function(){
-	$(this).css('opacity','0.0').animate({opacity: "1.0"}, 1000,function(){
-		jQuery(this).animate({backgroundColor: '#ffffff'}, 3000,function(){
-				jQuery(this).removeClass('append').parents('.append').removeClass('append');
-				jQuery(this).css({backgroundColor: ''});
-		});
-	});
-}
-
 // s'il n'est pas totalement visible, scroller pour positionner
 // le bloc cible en haut de l'ecran
 // si force = true, scroller dans tous les cas
@@ -372,6 +348,45 @@ function ajaxReload(ajaxid, callback){
 }
 
 /**
+ * animation du bloc cible pour faire patienter
+ *
+ */
+jQuery.fn.animateLoading = function() {
+	this.children().css('opacity', 0.5);
+	if (typeof ajax_image_searching != 'undefined'){
+		var i = (this).find('.image_loading');
+		if (i.length) i.eq(0).html(ajax_image_searching);
+		else this.prepend('<span class="image_loading">'+ajax_image_searching+'</span>');
+	}
+	return this; // don't break the chain
+}
+// compatibilite avec ancien nommage
+jQuery.fn.animeajax = jQuery.fn.animateLoading;
+
+/**
+ * animation d'un item que l'on supprime :
+ * rouge puis fading vers opacity 0  
+ */
+jQuery.fn.animateRemove = function(){
+	$(this).addClass('remove').animate({opacity: "0.0"}, 'fast');
+	return this; // don't break the chain
+}
+
+/**
+ * animation d'un item que l'on ajoute :
+ * fading vers opacity 1 en fond vert,
+ * puis suppression progressive du fond vert
+ */
+jQuery.fn.animateAppend = function(){
+	$(this).css('opacity','0.0').animate({opacity: "1.0"}, 1000,function(){
+		jQuery(this).animate({backgroundColor: '#ffffff'}, 3000,function(){
+				jQuery(this).removeClass('append').parents('.append').removeClass('append');
+				jQuery(this).css({backgroundColor: ''});
+		});
+	});
+}
+
+/**
  * Equivalent js de parametre_url php de spip
  *
  * Exemples :
@@ -458,9 +473,9 @@ function parametre_url(url,c,v,sep){
 
 	// recomposer l'adresse
 	if (na.length){
-                if (!sep) sep='&';
-		a = a+"?"+na.join(sep);
-        }
+		if (!sep) sep='&';
+			a = a+"?"+na.join(sep);
+	}
 
 	return a + ancre;
 }
