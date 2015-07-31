@@ -68,10 +68,13 @@ function exec_auteur_infos_args($id_auteur, $nom, $new, $echec='', $redirect='')
 // http://doc.spip.org/@auteur_infos_ok
 function auteur_infos_ok($auteur, $id_auteur, $echec, $new, $redirect)
 {
+	$associer_objet = _request('associer_objet');
+	if (!preg_match(',^\w+\|[0-9]+$,',$associer_objet))
+		$associer_objet = '';
 	$auteur_infos = charger_fonction('auteur_infos', 'inc');
-	$fiche = $auteur_infos($auteur, $new, $echec, _request('edit'), intval(_request('lier_id_article')), $redirect, 'infos');
+	$fiche = $auteur_infos($auteur, $new, $echec, _request('edit'), $associer_objet, $redirect, 'infos');
 	if ($fiche) 
-		$form_auteur = $auteur_infos($auteur, $new, $echec, _request('edit'), intval(_request('lier_id_article')), $redirect, 'edit');
+		$form_auteur = $auteur_infos($auteur, $new, $echec, _request('edit'), $associer_objet, $redirect, 'edit');
 	else $form_auteur = '';
 
 	echo cadre_auteur_infos($id_auteur, $auteur);

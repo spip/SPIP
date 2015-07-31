@@ -130,9 +130,6 @@ function auteurs_set($id_auteur, $set = null) {
 
 	$err .= instituer_auteur($id_auteur, $c);
 
-	// Un lien auteur a prendre en compte ?
-	$err .= auteur_associer($id_auteur, array('article' => _request('lier_id_article',$set)));
-
 	return $err;
 }
 

@@ -9,12 +9,9 @@ function instituer_auteur_ici($auteur=array()){
 }
 
 // http://doc.spip.org/@inc_editer_mot_dist
-function formulaires_editer_auteur_charger_dist($id_auteur='new', $retour='', $lier_id_article=0, $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_auteur_charger_dist($id_auteur='new', $retour='', $associer_objet='', $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('auteur',$id_auteur,0,0,$retour,$config_fonc,$row,$hidden);
-	if ($lier_id_article) $valeurs['lier_id_article'] = $lier_id_article;
-	// forcer la prise en compte du post, sans verifier si c'est bien le meme formulaire,
-	// c'est trop hasardeux selon le contenud de $row
-	$valeurs['_forcer_request'] = true;
+
 	return $valeurs;
 }
 
@@ -22,8 +19,8 @@ function formulaires_editer_auteur_charger_dist($id_auteur='new', $retour='', $l
  * Identifier le formulaire en faisant abstraction des parametres qui
  * ne representent pas l'objet edite
  */
-function formulaires_editer_auteur_identifier_dist($id_auteur='new', $retour='', $lier_id_article=0, $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
-	return serialize(array($id_auteur,$lier_id_article,$row));
+function formulaires_editer_auteur_identifier_dist($id_auteur='new', $retour='', $associer_objet='', $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
+	return serialize(array($id_auteur,$associer_objet));
 }
 
 
@@ -55,7 +52,7 @@ function auteurs_edit_config($row)
 	return $config;
 }
 
-function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $lier_article=0, $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $associer_objet='', $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
 	$erreurs = formulaires_editer_objet_verifier('auteur',$id_auteur,array('nom'));
 
 	$auth_methode = sql_getfetsel('source','spip_auteurs','id_auteur='.intval($id_auteur));
@@ -98,7 +95,7 @@ function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $
 }
 
 // http://doc.spip.org/@inc_editer_mot_dist
-function formulaires_editer_auteur_traiter_dist($id_auteur='new', $retour='', $lier_article=0, $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_auteur_traiter_dist($id_auteur='new', $retour='', $associer_objet='', $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
 	if (_request('saisie_webmestre') OR _request('webmestre'))
 		set_request('webmestre',_request('webmestre')?_request('webmestre'):'non');
 	$retour = parametre_url($retour, 'email_confirm','');
@@ -124,6 +121,24 @@ function formulaires_editer_auteur_traiter_dist($id_auteur='new', $retour='', $l
 	}
 
 	$res = formulaires_editer_objet_traiter('auteur',$id_auteur,0,0,$retour,$config_fonc,$row,$hidden);
+
+	// Un lien auteur a prendre en compte ?
+	if ($associer_objet AND $id_auteur=$res['id_auteur']){
+		$objet = '';
+		if (intval($associer_objet)){
+			$objet='article';
+			$id_objet = intval($associer_objet);
+		}
+		elseif(preg_match(',^\w+\|[0-9]+$,',$associer_objet)){
+			list($objet,$id_objet) = explode('|',$associer_objet);
+		}
+		if ($objet AND $id_objet){
+			include_spip('action/editer_auteur');
+			auteur_associer($id_auteur, array($objet => $id_objet));
+		}
+	}
+
+
 	return $res;
 }
 

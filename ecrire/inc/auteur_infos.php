@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // $quoi introduit pour pouvoir demander simplement les infos ou la partie editable
 // ""=>tout, "infos"=>infos simplement, "edit"=>formulaire d'edition simplement
 // http://doc.spip.org/@inc_auteur_infos_dist
-function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redirect, $quoi="") {
+function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $associer_objet, $redirect, $quoi="") {
 
 	if (!$new AND $quoi!="edit") {
 		$infos = legender_auteur_voir($auteur);
@@ -62,7 +62,7 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 		'titre'=>($auteur['nom']?$auteur['nom']:_T('nouvel_auteur')),
 		'new'=>$new == "oui"?$new:$id_auteur,
 		'config_fonc'=>'auteurs_edit_config',
-		'lier_id_article' => $id_article,
+		'associer_objet' => $associer_objet,
 		'auteur' => $auteur
 	);
 
