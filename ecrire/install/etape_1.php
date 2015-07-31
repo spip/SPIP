@@ -46,9 +46,9 @@ function install_etape_1_dist()
 		}
 	}
 	echo generer_url_post_ecrire('install');
-	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='2' />";
-	echo "<INPUT TYPE='hidden' NAME='chmod' VALUE='$chmod' />";
-	echo fieldset(_T('entree_base_donnee_1'),
+	echo "<input type='hidden' name='etape' value='2' />";
+	echo "<input type='hidden' name='chmod' value='$chmod' />";
+	echo fieldset(_t('entree_base_donnee_1'),
 		array(
 			'adresse_db' => array(
 				'label' => _T('entree_base_donnee_2'),
@@ -76,7 +76,7 @@ function install_etape_1_dist()
 	);
 
 	echo bouton_suivant();
-	echo "</FORM>";
+	echo "</form>";
 
 	install_fin_html();
 }

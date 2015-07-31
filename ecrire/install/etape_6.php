@@ -15,7 +15,7 @@ function install_etape_6_dist()
 {
 	global $email,$login,$nom,$pass,$spip_lang_right;
 
-	install_debut_html();
+	install_debut_html('AUTO', ' onLoad="document.getElementById(\'suivant\').focus();return false;"');
 
 	echo info_etape(_T('info_derniere_etape'),
 		"<b>"._T('info_code_acces')."</b></p><p>" .
