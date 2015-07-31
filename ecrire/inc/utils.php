@@ -330,9 +330,13 @@ function spip_query($query, $serveur='') {
 
 function spip_connect_ldap($serveur='') {
 	$connexion = spip_connect($serveur);
-	if (!$connexion['ldap']) return false;
-	include_once( _DIR_CONNECT . $connexion['ldap']);
-	return $GLOBALS['ldap_link'];
+	if ($connexion['ldap'] AND is_string($connexion['ldap'])) {
+		include_once( _DIR_CONNECT . $connexion['ldap']);
+		if ($GLOBALS['ldap_link'])
+		  $connexion['ldap'] = array('link' => $GLOBALS['ldap_link'],
+					'base' => $GLOBALS['ldap_base']);
+	}
+	return $connexion['ldap'];
 }
 
 // 1 interface de abstract_sql a demenager dans base/abstract_sql a terme

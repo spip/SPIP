@@ -17,6 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@inc_auth_ldap_dist
 function inc_auth_ldap_dist ($login, $pass) {
 
+	#spip_log("ldap $login " . ($pass ? "mdp fourni" : "mdp absent"));
 	// Securite contre un serveur LDAP laxiste
 	if (!$login || !$pass) return array();
 
@@ -36,7 +37,9 @@ function inc_auth_ldap_dist ($login, $pass) {
 // http://doc.spip.org/@auth_ldap_search
 function auth_ldap_search($login, $pass)
 {
-	global $ldap_link, $ldap_base;
+	$ldap = spip_connect_ldap();
+	$ldap_link = $ldap['link'];
+	$ldap_base = $ldap['base'];
 
 	// Attributs testes pour egalite avec le login
 	$atts = array('sAMAccountName', 'uid', 'login', 'userid', 'cn', 'sn');
@@ -69,7 +72,8 @@ function auth_ldap_search($login, $pass)
 // http://doc.spip.org/@auth_ldap_inserer
 function auth_ldap_inserer($dn, $statut)
 {
-	global $ldap_link;
+	$ldap_link = spip_connect_ldap();
+	$ldap_link = $ldap_link['link'];
 
 	// refuser d'importer n'importe qui 
 	if (!$statut) return false;
