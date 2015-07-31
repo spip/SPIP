@@ -132,7 +132,7 @@ function f_afficher_blocs_ecrire($flux) {
  * Trouver l'objet qui correspond
  * a l'exec de l'espace prive passe en argument
  * renvoie false si pas d'objet en cours, ou un tableau associatif
- * contenant les informations table_objet_sql,table,type,edition
+ * contenant les informations table_objet_sql,table,type,id_table_objet,edition
  *
  * @param string $exec
  *   nom de la page testee

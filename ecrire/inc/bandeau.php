@@ -19,14 +19,15 @@ function definir_barre_contexte($contexte = null){
 		$contexte = $_GET;
 	elseif(is_string($contexte))
 		$contexte = unserialize($contexte);
-	if (!isset($contexte['id_rubrique'])){
-		foreach(array('article','site','breve') as $type) {
-			$_id = id_table_objet($type);
-			if ($id = _request($_id,$contexte)){
-				$table = table_objet_sql($type);
-				$id_rubrique = sql_getfetsel('id_rubrique',$table,"$_id=".intval($id));
-				$contexte['id_rubrique'] = $id_rubrique;
-				continue;
+	if (!isset($contexte['id_rubrique']) AND isset($contexte['exec'])){
+		include_spip('inc/pipelines_ecrire');
+		if ($e=trouver_objet_exec($contexte['exec'])){
+			$_id = $e['id_table_objet'];
+			if (isset($contexte[$_id]) AND $id=intval($contexte[$_id])){
+				$table = $e['table_objet_sql'];
+				$row = sql_fetsel('*',$table,"$_id=".intval($id));
+				if (isset($row['id_rubrique']))
+				$contexte['id_rubrique'] = $row['id_rubrique'];
 			}
 		}
 	}

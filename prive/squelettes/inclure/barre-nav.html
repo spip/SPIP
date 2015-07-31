@@ -5,7 +5,8 @@
   Distribue sous licence GPL
 
 ]
-#SET{boutons,#ENV**|definir_barre_contexte|definir_barre_boutons{0}}
+#SET{contexte,#ENV**|definir_barre_contexte}
+#SET{boutons,#GET{contexte}|definir_barre_boutons{0}}
 <div id='bando_haut'>
 	<div id='bando_liens_rapides'>
 		<div class='largeur clearfix'>
@@ -49,10 +50,10 @@
 					{cle!=outils_rapides}
 					{cle!=outils_collaboratifs}>[<li (#CLE|=={bando_accueil}|ou{#VALEUR{sousmenu}}|?{' ',#SET{li,''}}) #SET{li,'</li>'}
 						[class="(#VAL{first}|unique)"]><a
-						href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#ENV**})]"
+						href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
 						id="bando1_#CLE">[(#VALEUR{libelle}|_T)]</a>]<B_sous><ul><BOUCLE_sous(POUR)
 						{tableau #VALEUR{sousmenu}}>[<li><a
-								href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#ENV**})]"
+								href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
 								class="bando2_#CLE">(#VALEUR{libelle}|_T)</a></li>]</BOUCLE_sous></ul></B_sous>#GET{li}</BOUCLE_boutons></ul>
 			</B_boutons>
 			[(#SESSION{prefs}|table_valeur{display_outils}|is_null|non)
@@ -99,7 +100,7 @@
 					<BOUCLE_creer(POUR)
 						{tableau #GET{boutons}}
 						{cle=outils_rapides}><BOUCLE_creersous(POUR){tableau #VALEUR{sousmenu}}>[<li class="bouton"><a
-						href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#ENV**})]"
+						href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
 						title="[(#VALEUR{libelle}|_T|attribut_html)]"
 						class="bando2_#CLE"><span>(#VALEUR{libelle}|_T)</span></a></li>]</BOUCLE_creersous></BOUCLE_creer>
 				</ul>
@@ -110,7 +111,7 @@
 					<BOUCLE_collaborer(POUR)
 						{tableau #GET{boutons}}
 						{cle=outils_collaboratifs}><BOUCLE_collaborersous(POUR){tableau #VALEUR{sousmenu}}>[<li class="bouton"><a
-							href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#ENV**})]"
+							href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
 							title="[(#VALEUR{libelle}|_T|attribut_html)]"
 							class="bando2_#CLE"><span>(#VALEUR{libelle}|_T)</span></a></li>]</BOUCLE_collaborersous></BOUCLE_collaborer>
 					</ul>
