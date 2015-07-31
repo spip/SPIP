@@ -142,6 +142,12 @@ function sql_insertq($table, $couples=array(), $desc=array(), $serveur='',$reque
 	return $f($table, $couples, $desc, $serveur, $requeter);
 }
 
+function sql_insertq_multi($table, $tab_couples=array(), $desc=array(), $serveur='',$requeter=true)
+{
+	$f = sql_serveur('insertq_multi', $serveur);
+	return $f($table, $tab_couples, $desc, $serveur, $requeter);
+}
+
 // http://doc.spip.org/@sql_update
 function sql_update($table, $exp, $where='', $desc=array(), $serveur='',$requeter=true)
 {
@@ -167,10 +173,17 @@ function sql_delete($table, $where='', $serveur='',$requeter=true)
 }
 
 // http://doc.spip.org/@sql_replace
-function sql_replace($table, $values, $desc=array(), $serveur='',$requeter=true)
+function sql_replace($table, $couples, $desc=array(), $serveur='',$requeter=true)
 {
 	$f = sql_serveur('replace', $serveur);
-	return $f($table, $values, $desc, $serveur, $requeter);
+	return $f($table, $couples, $desc, $serveur, $requeter);
+}
+
+
+function sql_replace_multi($table, $tab_couples, $desc=array(), $serveur='',$requeter=true)
+{
+	$f = sql_serveur('replace_multi', $serveur);
+	return $f($table, $tab_couples, $desc, $serveur, $requeter);
 }
 
 // http://doc.spip.org/@sql_drop_table

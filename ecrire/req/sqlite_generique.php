@@ -509,6 +509,17 @@ function spip_sqlite_insertq($table, $couples=array(), $desc=array(), $serveur='
 }
 
 
+
+function spip_sqlite_insertq_multi($table, $tab_couples=array(), $desc=array(), $serveur='',$requeter=true) {
+	foreach ($tab_couples as $couples) {
+		$retour = spip_sqlite_insertq($table, $couples, $desc, $serveur, $requeter);
+	}
+	// renvoie le dernier id d'autoincrement ajoute
+	return $retour;
+}
+
+
+
 function spip_sqlite_listdbs($serveur='',$requeter=true) {
 	_sqlite_init();
 	
@@ -571,13 +582,25 @@ function spip_sqlite_repair($table, $serveur='',$requeter=true){
 }
 
 
-function spip_sqlite_replace($table, $values, $keys=array(), $serveur='',$requeter=true) {
+function spip_sqlite_replace($table, $couples, $desc=array(), $serveur='',$requeter=true) {
 	
 	// recherche de champs 'timestamp' pour mise a jour auto de ceux-ci
-	$values = array_map('spip_sqlite_quote', $values);
-	$values = _sqlite_ajouter_champs_timestamp($table, $values, '', $serveur);
+	$values = array_map('spip_sqlite_quote', $couples);
+	$values = _sqlite_ajouter_champs_timestamp($table, $couples, '', $serveur);
 	
-	return spip_sqlite_query("REPLACE INTO $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',',$values) . ')', $serveur);
+	return spip_sqlite_query("REPLACE INTO $table (" . join(',',array_keys($couples)) . ') VALUES (' .join(',',$couples) . ')', $serveur);
+}
+
+
+
+function spip_sqlite_replace_multi($table, $tab_couples, $desc=array(), $serveur='',$requeter=true) {
+	
+	// boucler pour trainter chaque requete independemment
+	foreach ($tab_couples as $couples){
+		$retour = spip_sqlite_replace($table, $couples, $desc, $serveur,$requeter);
+	}
+	// renvoie le dernier id	
+	return $retour; 
 }
 
 
@@ -1068,12 +1091,14 @@ function _sqlite_ref_fonctions(){
 		'in' => 'spip_sqlite_in', 
 		'insert' => 'spip_sqlite_insert',
 		'insertq' => 'spip_sqlite_insertq',
+		'insertq_multi' => 'spip_sqlite_insertq_multi',
 		'listdbs' => 'spip_sqlite_listdbs',
 		'multi' => 'spip_sqlite_multi',
 		'optimize' => 'spip_sqlite_optimize',
 		'query' => 'spip_sqlite_query',
 		'quote' => 'spip_sqlite_quote',
 		'replace' => 'spip_sqlite_replace',
+		'replace_multi' => 'spip_sqlite_replace_multi',
 		'repair' => 'spip_sqlite_repair',
 		'select' => 'spip_sqlite_select',
 		'selectdb' => 'spip_sqlite_selectdb',

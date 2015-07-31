@@ -56,12 +56,14 @@ $GLOBALS['spip_mysql_functions_1'] = array(
 		'in' => 'spip_mysql_in', 
 		'insert' => 'spip_mysql_insert',
 		'insertq' => 'spip_mysql_insertq',
+		'insertq_multi' => 'spip_mysql_insertq_multi',
 		'listdbs' => 'spip_mysql_listdbs',
 		'multi' => 'spip_mysql_multi',
 		'optimize' => 'spip_mysql_optimize',
 		'query' => 'spip_mysql_query',
 		'quote' => 'spip_mysql_quote',
 		'replace' => 'spip_mysql_replace',
+		'replace_multi' => 'spip_mysql_replace_multi',
 		'repair' => 'spip_mysql_repair',
 		'select' => 'spip_mysql_select',
 		'selectdb' => 'spip_mysql_selectdb',
@@ -494,7 +496,27 @@ function spip_mysql_insertq($table, $couples=array(), $desc=array(), $serveur=''
 		$couples[$champ]= spip_mysql_cite($val, $fields[$champ]);
 	}
 
-	return spip_mysql_insert($table, "(".join(',',array_keys($couples)).")", "(".join(',', $couples).")", $desc, $serveur);
+	return spip_mysql_insert($table, "(".join(',',array_keys($couples)).")", "(".join(',', $couples).")", $desc, $serveur, $requeter);
+}
+
+
+function spip_mysql_insertq_multi($table, $tab_couples=array(), $desc=array(), $serveur='',$requeter=true) {
+
+	if (!$desc) $desc = description_table($table);
+	if (!$desc) die("$table insertion sans description");
+	$fields =  isset($desc['field'])?$desc['field']:array();
+	
+	$cles = "(" . join(',',array_keys($tab_couples[0])) . ')';
+	$valeurs = array();
+	foreach ($tab_couples as $couples) {
+		foreach ($couples as $champ => $val){
+			$couples[$champ]= spip_mysql_cite($val, $fields[$champ]);
+		}
+		$valeurs[] = '(' .join(',', $couples) . ')';
+	}
+	$valeurs = implode(', ',$valeurs);
+
+	return	spip_mysql_insert($table, $cles, $valeurs, $desc, $serveur, $requeter);
 }
 
 // http://doc.spip.org/@spip_mysql_update
@@ -539,9 +561,21 @@ function spip_mysql_delete($table, $where='', $serveur='',$requeter=true) {
 }
 
 // http://doc.spip.org/@spip_mysql_replace
-function spip_mysql_replace($table, $values, $keys=array(), $serveur='',$requeter=true) {
-	return spip_mysql_query("REPLACE $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',',array_map('_q', $values)) . ')', $serveur, $requeter);
+function spip_mysql_replace($table, $couples, $desc=array(), $serveur='',$requeter=true) {
+	return spip_mysql_query("REPLACE $table (" . join(',',array_keys($couples)) . ') VALUES (' .join(',',array_map('_q', $couples)) . ')', $serveur, $requeter);
 }
+
+
+function spip_mysql_replace_multi($table, $tab_couples, $desc=array(), $serveur='',$requeter=true) {
+	$cles = "(" . join(',',array_keys($tab_couples[0])). ')';
+	$valeurs = array();
+	foreach ($tab_couples as $couples) {
+		$valeurs[] = '(' .join(',',array_map('_q', $couples)) . ')';
+	}
+	$valeurs = implode(', ',$valeurs);
+	return spip_mysql_query("REPLACE $table $cles VALUES $valeurs", $serveur, $requeter);
+}
+
 
 // http://doc.spip.org/@spip_mysql_multi
 function spip_mysql_multi ($objet, $lang) {
