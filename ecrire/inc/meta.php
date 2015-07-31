@@ -19,63 +19,67 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define('_META_CACHE_TIME', 1<<24);
 
 // http://doc.spip.org/@inc_meta_dist
-function inc_meta_dist()
+function inc_meta_dist($table='meta')
 {
 	// Lire les meta, en cache si present, valide et lisible
 	// en cas d'install ne pas faire confiance au meta_cache eventuel
-	if ((_request('exec')!=='install' OR !test_espace_prive())
-	AND $new = jeune_fichier(_FILE_META, _META_CACHE_TIME)
-	AND lire_fichier_securise(_FILE_META,$meta)
-	AND $meta = @unserialize($meta))
-		$GLOBALS['meta'] = $meta;
+	$cache = cache_meta($table);
 
-	if (isset($GLOBALS['meta']['touch']) && ($GLOBALS['meta']['touch']<time()-_META_CACHE_TIME))
-		unset($GLOBALS['meta']);
+	if ((_request('exec')!=='install' OR !test_espace_prive())
+	AND $new = jeune_fichier($cache, _META_CACHE_TIME)
+	AND lire_fichier_securise($cache, $meta)
+	AND $meta = @unserialize($meta))
+		$GLOBALS[$table] = $meta;
+
+	if (isset($GLOBALS[$table]['touch']) 
+	AND ($GLOBALS[$table]['touch']<time()-_META_CACHE_TIME))
+		$GLOBALS[$table] = array();
 	// sinon lire en base
-	if (!$GLOBALS['meta']) $new = !lire_metas();
-	// renouveller l'alea au besoin
+	if (!$GLOBALS[$table]) $new = !lire_metas($table);
+
+	// renouveller l'alea general si trop vieux ou sur demande explicite
 	if ((test_espace_prive() || isset($_GET['renouvelle_alea']))
-	AND $GLOBALS['meta']
-	AND (time() > _RENOUVELLE_ALEA + @$GLOBALS['meta']['alea_ephemere_date'])) {
+	AND isset($GLOBALS['meta']['alea_ephemere_date'])
+	AND (time() > _RENOUVELLE_ALEA + $GLOBALS['meta']['alea_ephemere_date'])) {
 		// si on n'a pas l'acces en ecriture sur le cache,
 		// ne pas renouveller l'alea sinon le cache devient faux
-		if (supprimer_fichier(_FILE_META)) {
+		if (supprimer_fichier($cache)) {
 			include_spip('inc/acces');
 			renouvelle_alea();
 			$new = false; 
-		} else spip_log("impossible d'ecrire dans " . _FILE_META);
+		} else spip_log("impossible d'ecrire dans " . $cache);
 	}
 	// et refaire le cache si on a du lire en base
-	if (!$new) touch_meta();
+	if (!$new) touch_meta(false, $table);
 }
 
 // fonctions aussi appelees a l'install ==> spip_query en premiere requete 
 // pour eviter l'erreur fatale (serveur non encore configure)
 
 // http://doc.spip.org/@lire_metas
-function lire_metas() {
+function lire_metas($table='meta') {
 
-	if ($result = spip_query("SELECT nom,valeur FROM spip_meta")) {
+	if ($result = spip_query("SELECT nom,valeur FROM spip_$table")) {
 		include_spip('base/abstract_sql');
-		$GLOBALS['meta'] = array();
+		$GLOBALS[$table] = array();
 		while ($row = sql_fetch($result))
-			$GLOBALS['meta'][$row['nom']] = $row['valeur'];
+			$GLOBALS[$table][$row['nom']] = $row['valeur'];
 
-		if (!$GLOBALS['meta']['charset']
-		  OR $GLOBALS['meta']['charset']=='_DEFAULT_CHARSET' // hum, correction d'un bug ayant abime quelques install
+		if (!$GLOBALS[$table]['charset']
+		  OR $GLOBALS[$table]['charset']=='_DEFAULT_CHARSET' // hum, correction d'un bug ayant abime quelques install
 		)
-			ecrire_meta('charset', _DEFAULT_CHARSET);
+			ecrire_meta('charset', _DEFAULT_CHARSET, NULL, $table);
 	}
-	return $GLOBALS['meta'];
+	return $GLOBALS[$table];
 }
 
 // Mettre en cache la liste des meta, sauf les valeurs sensibles 
 // pour qu'elles ne soient pas visibiles dans un fichier.souvent en 777
 // http://doc.spip.org/@touch_meta
-function touch_meta($antidate= false){
-
-	if (!$antidate OR !@touch(_FILE_META, $antidate)) {
-		$r = $GLOBALS['meta'];
+function touch_meta($antidate= false, $table='meta'){
+	$file = cache_meta($table);
+	if (!$antidate OR !@touch($file, $antidate)) {
+		$r = $GLOBALS[$table];
 		unset($r['alea_ephemere']);
 		unset($r['alea_ephemere_ancien']);
 		// le secret du site est utilise pour encoder les contextes ajax que l'on considere fiables
@@ -83,52 +87,57 @@ function touch_meta($antidate= false){
 		// meme si son squelette est en cache
 		//unset($r['secret_du_site']);
 		if ($antidate) $r['touch']= $antidate;
-		ecrire_fichier_securise(_FILE_META, serialize($r));
+		ecrire_fichier_securise($file, serialize($r));
 	}
 }
 
 // http://doc.spip.org/@effacer_meta
-function effacer_meta($nom) {
+function effacer_meta($nom, $table='meta') {
 	// section critique sur le cache:
 	// l'invalider avant et apres la MAJ de la BD
-	// c'est un peu moints bien qu'un vrai verrou mais ca suffira
+	// c'est un peu moins bien qu'un vrai verrou mais ca suffira
 	// et utiliser une statique pour eviter des acces disques a repetition
-	static $touch = true;
+	static $touch = array();
 	$antidate = time() - (_META_CACHE_TIME<<4);
-	if ($touch) {touch_meta($antidate);}
-	sql_delete("spip_meta", "nom='$nom'");
-	unset($GLOBALS['meta'][$nom]);
-	if ($touch) {touch_meta($antidate); $touch = false;}
+	if (!isset($touch[$table])) {touch_meta($antidate, $table);}
+	sql_delete('spip_' . $table, "nom='$nom'");
+	unset($GLOBALS[$table][$nom]);
+	if (!isset($touch[$table])) {touch_meta($antidate, $table); $touch[$table] = false;}
 }
 
 // http://doc.spip.org/@ecrire_meta
-function ecrire_meta($nom, $valeur, $importable = NULL) {
+function ecrire_meta($nom, $valeur, $importable = NULL, $table='meta') {
 
-	static $touch = true;
+	static $touch = array();
 	if (!$nom) return;
 	include_spip('base/abstract_sql');
-	$res = sql_select("*","spip_meta","nom=" . sql_quote($nom),'','','','','','continue');
+	$res = sql_select("*",'spip_' . $table,"nom=" . sql_quote($nom),'','','','','','continue');
 	// table pas encore installee, travailler en php seulement
 	if (!$res) {
-		$GLOBALS['meta'][$nom] = $valeur;
+		$GLOBALS[$table][$nom] = $valeur;
 		return;
 	}
 	$res = sql_fetch($res);
 	// ne pas invalider le cache si affectation a l'identique
 	// (tant pis si impt aurait du changer)
-	if ($res AND $valeur == $res['valeur'] AND $GLOBALS['meta'][$nom] == $valeur) return;
-	$GLOBALS['meta'][$nom] = $valeur;
+	if ($res AND $valeur == $res['valeur'] AND $GLOBALS[$table][$nom] == $valeur) return;
+	$GLOBALS[$table][$nom] = $valeur;
 	// cf effacer pour comprendre le double touch
 	$antidate = time() - (_META_CACHE_TIME<<1);
-	if ($touch) {touch_meta($antidate);}
+	if (!isset($touch[$table])) {touch_meta($antidate, $table);}
 	$r = array('nom' => $nom, 'valeur' => $valeur);
-	// Gerer les vieilles versions ou impt n'existait pas
+	// Gaffe aux tables sans impt (vieilles versions de SPIP notamment)
 	if ($importable AND isset($res['impt'])) $r['impt'] = $importable;
 	if ($res) {
-		sql_updateq('spip_meta', $r,"nom=" . sql_quote($nom));
+		sql_updateq('spip_' . $table, $r,"nom=" . sql_quote($nom));
 	} else {
-		sql_insertq('spip_meta', $r);
+		sql_insertq('spip_' . $table, $r);
 	}
-	if ($touch) {touch_meta($antidate); $touch = false;}
+	if (!isset($touch[$table])) {touch_meta($antidate, $table); $touch[$table] = false;}
+}
+
+function cache_meta($table='meta')
+{
+	return ($table=='meta') ? _FILE_META : (_DIR_CACHE . $table . '.php');
 }
 ?>
