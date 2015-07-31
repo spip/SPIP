@@ -13,10 +13,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// Ce fichier doit imperativement contenir la fonction chercher-squelette
-// (cf commentaires dans inc-calcul)
+// Ce fichier doit imperativement definir la fonction ci-dessous:
 
-function chercher_squelette($fond, $id_rubrique, $lang) {
+function public_trouver_squelette($fond, $id_rubrique, $lang) {
 	$ext = $GLOBALS['extension_squelette'];
 
 	// Accrocher un squelette de base dans le chemin, sinon erreur
