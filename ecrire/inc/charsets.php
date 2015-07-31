@@ -687,7 +687,7 @@ function spip_substr($c, $start=0, $end='') {
 		if($start<0) {
 			$start= ($l=spip_strlen($c))+$start;
 		}
-		$re_start= "(?:$re_char\{$start})";
+		$re_start= "$re_char\{$start}";
 	}
 	
 	if($end===null) {
@@ -699,7 +699,7 @@ function spip_substr($c, $start=0, $end='') {
 		$re_end="($re_char\{0,$end})";
 	}
 
-	if(preg_match("/^${re_start}${re_end}/", $c, $m)) {
+	if(preg_match("/^${re_start}${re_end}/s", $c, $m)) {
 		return $m[1];
 	}
 	return FALSE;
