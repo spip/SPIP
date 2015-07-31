@@ -508,7 +508,7 @@ function spip_touch($fichier, $duree=0, $touch=true) {
 	|| (@filemtime($fichier) < time() - $duree)) {
 		if ($touch) {
 			if (!@touch($fichier)) { @unlink($fichier); @touch($fichier); };
-			if (!$exists) @chmod($fichier, 0666);
+			if (!$exists) @chmod($fichier, _DIR_CHMOD & ~0111);
 		}
 		return true;
 	}

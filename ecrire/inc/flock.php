@@ -163,7 +163,7 @@ function sous_repertoire($base, $subdir, $nobase = false) {
 		return "$baseaff$subdir/";
 
 	@mkdir($path, 0777);
-	@chmod($path, 0777);
+	@chmod($path, _DIR_CHMOD);
 
 	$ok = false;
 	if ($f = @fopen("$path/dir_test.php", "w")) {
