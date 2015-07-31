@@ -1806,7 +1806,7 @@ function form_hidden($action) {
 			.'"'
 			. (is_null($val)
 				? ''
-				: ' value="'.entites_html($val).'"'
+				: ' value="'.str_replace("'","&#39;",entites_html($val)).'"'
 				)
 			. ' type="hidden" />';
 	}
