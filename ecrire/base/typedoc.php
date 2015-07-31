@@ -36,6 +36,7 @@ $tables_sequences = array(
 			  'axv' => 'Annodex Video',
 			  'asf' => 'Windows Media',
 			  'avi' => 'AVI',
+				'flac' => 'Free Lossless Audio Codec',
 			  'flv' => 'Flash Video',
 			  'mid' => 'Midi',
 			  'mng' => 'MNG',
