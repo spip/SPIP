@@ -227,7 +227,7 @@ function parser_boucle($texte, $id_parent) {
 					if (ereg('\#(CHAPO|INTRODUCTION)', $milieu)) {
 						$s .= ",$table.chapo";
 					}
-					if (ereg('\#(DESCRIPTIF)', $milieu)) {
+					if (ereg('\#(DESCRIPTIF|INTRODUCTION)', $milieu)) {
 						$s .= ",$table.descriptif";
 					}
 					if (ereg('\#(PS)', $milieu)) {
@@ -1278,7 +1278,12 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	case 'INTRODUCTION':
 		switch ($boucles[$id_boucle]->type_requete) {
 		case 'articles':
-			$code = "PtoBR(propre(supprimer_tags(couper_intro(\$pile_boucles[\$id_instance]->row['chapo'].\"\\n\\n\\n\".\$pile_boucles[\$id_instance]->row['texte'], 500))))";
+			$milieu = 'if (strlen($pile_boucles[$id_instance]->row["descriptif"]) > 0) {
+				$'.$nom_var.' = propre($pile_boucles[$id_instance]->row["descriptif"]);
+				}
+				else {
+				$'.$nom_var.' = PtoBR(propre(supprimer_tags(couper_intro($pile_boucles[$id_instance]->row["chapo"]."\n\n\n".$pile_boucles[$id_instance]->row["texte"], 500))));
+				}';
 			break;
 		case 'breves':
 			$code = "PtoBR(propre(supprimer_tags(couper_intro(\$pile_boucles[\$id_instance]->row['texte'], 300))))";
