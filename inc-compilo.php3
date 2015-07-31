@@ -370,8 +370,7 @@ function calculer_parties($partie, $mode_partie, $total_parties, $id_boucle) {
 function calculer_liste($tableau, $descr, &$boucles, $id_boucle='') {
 	if (!$tableau) return "''";
         $codes = array();
-	spip_log($id_boucle);
-	$type = $id_boucle ? $boucles[$id_boucle]->type_requete : '';
+	$type = (is_array($id_boucle) ? $id_boucle[0] : $boucles[$id_boucle]->type_requete) ;
 	$descr['niv']++;
 	for ($i=0; $i<=$descr['niv']; $i++) $tab .= "\t";
 
@@ -495,20 +494,29 @@ function code_boucle($boucle, $id, $nom, $sourcefile)
 	// Indiquer la boucle en commentaire
 	$pretty = '';
 
-	// Resynthetiser les criteres
-	foreach ($boucle->param as $param) {
-	  $c = $param[1][0];
-	  $s = $c->apres ;
-	  if ($s)
-	    $s = ($s . $c->texte . $s);
-	  else {
-	    // faudrait decompiler aussi les balises...
-	    if (is_array($t = $param[1]))
-	      foreach ($t as $c)
-		$s .= ($c->type == 'texte') ? $c->texte : '#...';
+	if ($boucle->type_requete != 'boucle')
+	  {
+	    // Resynthetiser les criteres
+	    foreach ($boucle->param as $param) {
+	      $s = "";
+	      $sep = "";
+	      foreach ($param as $t) {
+		if (is_array($t)) { // toujours vrai normalement
+		  $s .= $sep;
+		  $c = $t[0];
+		  if ($c->apres)
+		    $s .= ($c->apres . $c->texte . $c->apres);
+		  else {
+		// faudrait decompiler aussi les balises...
+		    foreach ($t as $c)
+		      $s .=  ($c->type == 'texte') ? $c->texte : '#...';
+		  }
+		  $sep = ", ";
+		}
+	      }
+	      $pretty .= ' {' . $s . '}';
+	    }
 	  }
-	  $pretty .= ' {' . $s . '}';
-	}
 
 	$pretty = "BOUCLE$id(".strtoupper($boucle->type_requete) . ")" .
 		ereg_replace("[\r\n]", " ", $pretty);
