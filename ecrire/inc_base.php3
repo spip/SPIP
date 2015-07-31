@@ -953,13 +953,33 @@ function maj_base() {
 		$result = spip_query("SELECT type FROM spip_mots GROUP BY type");
 		while ($row = mysql_fetch_array($result)) {
 			$type = addslashes($row['type']);
-			spip_query("INSERT IGNORE INTO spip_groupes_mots 
-				(titre, unseul, obligatoire, articles, breves, rubriques, syndic, 0minirezo, 1comite, 6forum)
-				VALUES ('$type', 'non', 'non', 'oui', 'oui', 'non', 'oui', 'oui', 'oui', 'non')");
-			if ($id_groupe = mysql_insert_id()) 
-				spip_query("UPDATE spip_mots SET id_groupe = '$id_groupe' WHERE type='$type'");
+			$res = spip_query("SELECT * FROM spip_groupes_mots
+				WHERE titre='$type'");
+			if (mysql_num_rows($res) == 0) {
+				spip_query("INSERT IGNORE INTO spip_groupes_mots 
+					(titre, unseul, obligatoire, articles, breves, rubriques, syndic, 0minirezo, 1comite, 6forum)
+					VALUES ('$type', 'non', 'non', 'oui', 'oui', 'non', 'oui', 'oui', 'oui', 'non')");
+				if ($id_groupe = mysql_insert_id()) 
+					spip_query("UPDATE spip_mots SET id_groupe = '$id_groupe' WHERE type='$type'");
+			}
 		}
 		spip_query("UPDATE spip_articles SET popularite=0");
+	}
+
+	if ($version_installee < 1.460) {
+		// remettre les mots dans les groupes dupliques par erreur
+		// dans la precedente version du paragraphe de maj 1.459
+		// et supprimer ceux-ci
+		$result = spip_query("SELECT * FROM spip_groupes_mots ORDER BY id_groupe");
+		while ($row = mysql_fetch_array($result)) {
+			$titre = addslashes($row['titre']);
+			if (! $vu[$titre] ) {
+				$vu[$titre] = true;
+				$id_groupe = $row['id_groupe'];
+				spip_query ("UPDATE spip_mots SET id_groupe=$id_groupe WHERE type='$titre'");
+				spip_query ("DELETE FROM spip_groupes_mots WHERE titre='$titre' AND id_groupe<>$id_groupe");
+			}
+		}
 	}
 
 	//
