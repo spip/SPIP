@@ -209,6 +209,9 @@ function propager_les_secteurs()
 	$r = sql_select("fille.id_syndic AS id, maman.id_secteur AS secteur", "spip_syndic AS fille, spip_rubriques AS maman", "fille.id_rubrique = maman.id_rubrique AND fille.id_secteur <> maman.id_secteur");
 	while ($row = sql_fetch($r))
 		sql_update("spip_syndic", array("id_secteur" => $row['secteur']), "id_syndic=".$row['id']);
+
+	// avertir les plugins qui peuvent faire leur mises a jour egalement
+	pipeline('trig_propager_les_secteurs','');
 }
 
 //
