@@ -59,6 +59,7 @@ ecrire/auth/sha256.inc.php -text
 ecrire/balise/configurer_metas.php -text
 ecrire/balise/formulaire_.php -text
 ecrire/balise/index.php -text
+ecrire/balise/info_.php -text
 ecrire/balise/logo_.php -text
 ecrire/balise/url_.php -text
 ecrire/base/admin_repair.php -text

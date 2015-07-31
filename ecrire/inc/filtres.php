@@ -2606,4 +2606,78 @@ function tri_champ_select($t){
 	}
 	return "''";
 }
+
+
+/**
+ * Donner n'importe quelle information sur un objet de maniere generique.
+ *
+ * La fonction va gerer en interne deux cas particuliers les plus utilises :
+ * l'URL et le titre (qui n'est pas forcemment le champ SQL "titre").
+ *
+ * On peut ensuite personnaliser les autres infos en creant une fonction
+ * generer_<nom_info>_entite($id_objet, $type_objet, $ligne).
+ * $ligne correspond a la ligne SQL de tous les champs de l'objet, les fonctions
+ * de personnalisation n'ont donc pas a refaire de requete.
+ *
+ * @param int $id_objet
+ * @param string $type_objet
+ * @param string $info
+ * @return string
+ */
+function generer_info_entite($id_objet, $type_objet, $info){
+	// On verifie qu'on a tout ce qu'il faut
+	$id_objet = intval($id_objet);
+	if (!($id_objet and $type_objet and $info))
+		return '';
+
+	// Si on demande l'url, on retourne direct la fonction
+	if ($info == 'url')
+		return generer_url_entite($id_objet, $type_objet);
+
+	// Si on demande le titre, on le gere en interne
+	if ($demande_titre = ($info == 'titre')){
+		global $table_titre;
+		$champ_titre = $table_titre[table_objet($type_objet)];
+		if (!$champ_titre) $champ_titre = 'titre';
+		$champ_titre = ", $champ_titre";
+	}
+
+	// Sinon on va tout chercher dans la table et on garde en memoire
+	static $objets;
+
+	// On ne fait la requete que si on a pas deja l'objet ou si on demande le titre mais qu'on ne l'a pas encore
+	if (!$objets[$type_objet][$id_objet] or ($demande_titre and !$objets[$type_objet][$id_objet]['titre'])){
+		include_spip('base/abstract_sql');
+		include_spip('base/connect_sql');
+		$objets[$type_objet][$id_objet] = sql_fetsel(
+			'*'.$champ_titre,
+			table_objet_sql($type_objet),
+			id_table_objet($type_objet).' = '.intval($id_objet)
+		);
+	}
+	$ligne = $objets[$type_objet][$id_objet];
+
+	if ($demande_titre)
+		$info_generee = $objets[$type_objet][$id_objet]['titre'];
+	// Si la fonction generer_TRUC_entite existe, on l'utilise
+	else if ($generer = charger_fonction("generer_${info}_entite", '', true))
+		$info_generee = $generer($id_objet, $type_objet, $ligne);
+	// Sinon on prend le champ SQL
+	else
+		$info_generee = $ligne[$info];
+
+	// On va ensuite chercher les traitements automatiques a faire
+	global $table_des_traitements;
+	$maj = strtoupper($info);
+	$traitement = $table_des_traitements[$maj];
+	$table_objet = table_objet($type_objet);
+
+	if (is_array($traitement)){
+		$traitement = $traitement[isset($traitement[$table_objet]) ? $table_objet : 0];
+		$traitement = str_replace('%s', '"'.str_replace('"', '\\"', $info_generee).'"', $traitement);
+		eval("\$info_generee = $traitement;");
+	}
+
+	return $info_generee;
+}
 ?>
