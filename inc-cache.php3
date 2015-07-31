@@ -148,19 +148,17 @@ function cache_valide($chemin_cache) {
 // et affecte le param use_cache selon les specs de la fonction cache_valide
 
 function determiner_cache(&$use_cache, $contexte,$fond) {
-	global $_SERVER, $recherche;
+	global $_SERVER;
 
 	// pour tester si la base est dispo
 
 	include_ecrire('inc_connect.php3');
 
 	// cas ignorant le cache car complement dynamique
-
-	if ($recherche || $_SERVER['REQUEST_METHOD'] == 'POST')
-	  {
+	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$use_cache = -1;
 		return "";
-	  }
+	}
 	
 	$chemin_cache = generer_nom_fichier_cache($contexte, $fond);
 
