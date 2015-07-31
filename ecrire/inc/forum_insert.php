@@ -128,8 +128,7 @@ function inc_forum_insert_dist() {
 
 	# retour a calculer (cf. inc-formulaire_forum)
 	if ($retour_forum == '!') {
-		$retour_forum = new Link();
-		$retour_forum = $retour_forum->getUrl(); # en cas d'echec du post
+		$retour_forum = self(); # en cas d'echec du post
 		$calculer_retour = true;
 	}
 	// initialisation de l'eventuel visiteur connecte
@@ -140,7 +139,12 @@ function inc_forum_insert_dist() {
 	if ($GLOBALS['afficher_texte'] <> 'non') {
 		include_spip('inc/session');
 
+		// Calculer la signature de securite de ce forum ; attention le hachage
+		// doit etre le meme ici et dans formulaires/inc-formulaire-forum
+		// id_rubrique est parfois passee pour les articles => on n'en veut pas
 		$ids = array();
+		if ($id_rubrique > 0 AND ($id_article OR $id_breve OR $id_syndic))
+			$id_rubrique = 0;
 		foreach (array('article', 'breve', 'forum', 'rubrique', 'syndic') as $o)
 			$ids['id_'.$o] = ($x = intval(${'id_'.$o})) ? $x : '';
 
