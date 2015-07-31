@@ -218,7 +218,7 @@ function inclure_previsu($texte,$titre, $email_auteur, $auteur, $url_site, $nom_
 			'email_auteur' => safehtml($email_auteur),
 			'auteur' => safehtml(typo($auteur)),
 			'texte' => safehtml(propre($texte)),
-			'url_site' => htmlspecialchars(vider_url($url_site)),
+			'url_site' => vider_url($url_site),
 			'nom_site_forum' => safehtml(typo($nom_site_forum)),
 			'ajouter_mot' => (is_array($ajouter_mot) ? $ajouter_mot : array($ajouter_mot)),
 			'erreur' => $erreur,

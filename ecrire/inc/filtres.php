@@ -403,14 +403,17 @@ function attribut_html($texte) {
 }
 
 // Vider les url nulles comme 'http://' ou 'mailto:'
+// et leur appliquer un htmlspecialchars() + gerer les &amp;
 // http://doc.spip.org/@vider_url
-function vider_url($url) {
+function vider_url($url, $entites = true) {
 	# un message pour abs_url
 	$GLOBALS['mode_abs_url'] = 'url';
 
 	$url = trim($url);
-	if (eregi("^(http:?/?/?|mailto:?)$", $url))
+	if (preg_match(",^(http:?/?/?|mailto:?)$,iS", $url))
 		return '';
+
+	if ($entites) $url = entites_html($url);
 
 	return $url;
 }

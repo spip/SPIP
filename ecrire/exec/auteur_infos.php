@@ -140,7 +140,7 @@ if (strval($nom)!='') {
 	$auteur['bio'] = corriger_caracteres($bio);
 	$auteur['pgp'] = corriger_caracteres($pgp);
 	$auteur['nom_site'] = corriger_caracteres($nom_site_auteur); // attention mix avec $nom_site_spip ;(
-	$auteur['url_site'] = vider_url($url_site);
+	$auteur['url_site'] = vider_url($url_site, false);
 
 	if ($new_pass) {
 		$htpass = generer_htpass($new_pass);

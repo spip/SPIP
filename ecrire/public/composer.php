@@ -63,7 +63,6 @@ function public_composer_dist($squelette, $mime_type, $gram, $sourcefile) {
 	}
 
 	// Tester si le compilateur renvoie une erreur
-
 	if (is_array($skel_code))
 		erreur_squelette($skel_code[0], $skel_code[1]);
 	else {
