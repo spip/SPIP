@@ -127,7 +127,7 @@ function traiter_echap_code_dist($regs) {
 	$echap = entites_html($regs[3]);
 	// supprimer les sauts de ligne debut/fin
 	// (mais pas les espaces => ascii art).
-	$echap = ereg_replace("^\n+|\n+$", "", $echap);
+	$echap = preg_replace(",^\n+|\n+$,", "", $echap);
 
 	// ne pas mettre le <div...> s'il n'y a qu'une ligne
 	if (is_int(strpos($echap,"\n"))) {

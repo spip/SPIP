@@ -28,9 +28,9 @@ function stats_load_engines() {
 		{
 			$data = trim(chop($data));
 
-			if (!ereg('^#', $data) && $data != '')
+			if (!preg_match(',^#,', $data) && $data != '')
 			{
-				if (ereg('^\[(.*)\]$', $data, $engines))
+				if (preg_match(',^\[(.*)\]$,', $data, $engines))
 				{
 					// engine
 					$engine = $engines[1];

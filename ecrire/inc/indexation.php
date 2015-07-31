@@ -188,7 +188,7 @@ function mots_indexation($texte, $min_long = 3) {
 
 	// Supprimer les caracteres de ponctuation, les guillemets...
 	$e = "],:;*\"!\r\n\t\\/)}{[|@<>$%'`?\~.^(";
-	$texte = strtr($texte, $e, ereg_replace('.', ' ', $e));
+	$texte = strtr($texte, $e, preg_replace('/./', ' ', $e));
 
 	//delete  +\- not at the beginning of a word
 	$texte = preg_replace(",(?:\S)[\-+],"," ",$texte);
@@ -898,11 +898,11 @@ function prepare_recherche($recherche, $primary = 'id_article', $id_table='artic
 
 		$strict = array();
 		if ($hash_recherche_strict)
-			foreach (split(',',$hash_recherche_strict) as $h)
+			foreach (preg_split('/,/',$hash_recherche_strict) as $h)
 				$strict[$h] = 99;
 		
 		if ($hash_recherche_strict_and)
-			foreach (split(',',$hash_recherche_strict_and) as $h)
+			foreach (preg_split('/,/',$hash_recherche_strict_and) as $h)
 				$strict[$h] = 99;
 
 		$index_id_table = id_index_table($nom_table);
