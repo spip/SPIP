@@ -108,7 +108,7 @@ onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
 		.  "</b>";
 
 		$masque = 
- "<div style='float: $spip_lang_left; width: 80%;'>" .
+ "<div style='float: $spip_lang_left; width: 80%;position:relative;display:inline;'>" .
  '<input type="radio" name="avec_redac" value="non" id="avec_redac_on"' .
  ($possedeDateRedac ? '' : ' checked="checked"') .
  " onclick=$js" .
