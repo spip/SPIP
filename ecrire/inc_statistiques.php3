@@ -62,7 +62,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 		$arr_engines = stats_load_engines();
 
 		// initialiser la recherche interne
-		$url_site = lire_meta('adresse_site');
+		$url_site = $GLOBALS['meta']['adresse_site'];
 		$url_site = strtolower(eregi_replace("^((https?|ftp)://)?(www\.)?", "", $url_site));
 	}
 

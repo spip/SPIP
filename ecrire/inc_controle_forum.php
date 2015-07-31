@@ -176,7 +176,7 @@ function controle_un_forum($row, $rappel) {
 
 	$controle .= safehtml($suite);
 
-	if (lire_meta("mots_cles_forums") == "oui") {
+	if ($GLOBALS['meta']["mots_cles_forums"] == "oui") {
 		$query_mots = "SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot";
 		$result_mots = spip_query($query_mots);
 

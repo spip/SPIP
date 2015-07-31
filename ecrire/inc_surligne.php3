@@ -35,7 +35,7 @@ function surligner_sans_accents ($mot) {
 		/* u */ chr(249).chr(250).chr(251).chr(252).
 		/* yNn */ chr(255).chr(209).chr(241);
 
-	if (lire_meta('charset') == 'utf-8') {
+	if ($GLOBALS['meta']['charset'] == 'utf-8') {
 		include_ecrire('inc_charsets.php3');
 		$mot = unicode2charset(utf_8_to_unicode($mot), 'iso-8859-1');
 	}
@@ -66,7 +66,7 @@ function surligner_regexp_accents ($mot) {
 	);
 
 	$mot = surligner_sans_accents ($mot);
-	if (lire_meta('charset') == 'utf-8') {
+	if ($GLOBALS['meta']['charset'] == 'utf-8') {
 		while(list($k,$s) = each ($accents_regexp)) {
 			$accents_regexp_utf8[$k] = "(".join("|", split_by_char(ereg_replace("\]|\[","",$accents_regexp[$k]))).")";
 		}

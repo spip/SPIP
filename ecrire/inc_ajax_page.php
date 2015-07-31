@@ -21,7 +21,7 @@ function ajax_page_dist($fonction, $id, $exclus, $col, $id_ajax_fonc, $type, $ra
 	else {
 		if ($flag_ob) {
 			ob_start();
-			$charset = lire_meta("charset");
+			$charset = $GLOBALS['meta']["charset"];
 		}
 		@header('Content-type: text/html; charset=$charset');
 		echo "<"."?xml version='1.0' encoding='$charset'?".">\n";
@@ -212,7 +212,7 @@ function ajax_page_aff_info($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 
 
 		echo "<div class='arial2' style='padding: 5px; background-color: white; border: 1px solid $couleur_foncee; border-top: 0px;'>";
-		if ($type == "rubrique" AND $spip_display != 1 AND $spip_display!=4 AND lire_meta('image_process') != "non") {
+		if ($type == "rubrique" AND $spip_display != 1 AND $spip_display!=4 AND $GLOBALS['meta']['image_process'] != "non") {
 			include_ecrire("inc_logos.php3");
 			$logo = decrire_logo("rubon$id");
 			if ($logo) {

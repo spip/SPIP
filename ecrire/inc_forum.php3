@@ -226,14 +226,14 @@ function generer_url_forum_dist($id_forum, $show_thread=false) {
 
 // Recuperer le reglage des forums publics de l'article x
 function get_forums_publics($id_article=0) {
-	$forums_publics = lire_meta("forums_publics");
+	$forums_publics = $GLOBALS['meta']["forums_publics"];
 	if ($id_article) {
 		$query = "SELECT accepter_forum FROM spip_articles WHERE id_article=$id_article";
 		$res = spip_query($query);
 		if ($obj = spip_fetch_array($res))
 			$forums_publics = $obj['accepter_forum'];
 	} else { // dans ce contexte, inutile
-		$forums_publics = substr(lire_meta("forums_publics"),0,3);
+		$forums_publics = substr($GLOBALS['meta']["forums_publics"],0,3);
 	}
 	return $forums_publics;
 }

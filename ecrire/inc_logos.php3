@@ -86,7 +86,7 @@ function afficher_logo($racine, $titre, $logo, $id_objet, $id) {
 	global $connect_id_auteur;
 	global $clean_link, $spip_lang_right;
 
-	include_ecrire('inc_admin.php3');
+	include_ecrire('inc_session.php3');
  
 	$redirect = $clean_link->getUrl();
 
@@ -193,10 +193,10 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 		$formats_sortie = array('jpg','png','gif');
 		
 	if ($process == 'AUTO')
-		$process = lire_meta('image_process');
+		$process = $GLOBALS['meta']['image_process'];
 
 	// liste des formats qu'on sait lire
-	$formats_graphiques = lire_meta('formats_graphiques');
+	$formats_graphiques = $GLOBALS['meta']['formats_graphiques'];
 
 	// si le doc n'est pas une image, refuser
 	if (!$force AND !eregi(",$format,", ",$formats_graphiques,"))
@@ -318,7 +318,7 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 			// - pour le GIF : les GD recentes peuvent le lire mais pas l'ecrire
 			# bug : gd_formats contient la liste des fichiers qu'on sait *lire*,
 			# pas *ecrire*
-			$gd_formats = lire_meta("gd_formats");
+			$gd_formats = $GLOBALS['meta']["gd_formats"];
 			foreach ($formats_sortie as $fmt) {
 				if (ereg($fmt, $gd_formats)) {
 					if ($format <> "gif" OR function_exists('ImageGif'))
@@ -428,7 +428,7 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
 
 	// Determiner la taille x,y maxi
 	if ($taille == -1) {
-		$taille = lire_meta('taille_preview');
+		$taille = $GLOBALS['meta']['taille_preview'];
 		if (!$taille)
 			$taille = 150;
 	}

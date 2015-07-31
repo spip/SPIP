@@ -57,10 +57,10 @@ echo "</div>";
 fin_boite_info();
 
 
-$suivi_edito=lire_meta("suivi_edito");
-$adresse_suivi=lire_meta("adresse_suivi");
-$adresse_site=lire_meta("adresse_site");
-$adresse_suivi_inscription=lire_meta("adresse_suivi_inscription");
+$suivi_edito=$GLOBALS['meta']["suivi_edito"];
+$adresse_suivi=$GLOBALS['meta']["adresse_suivi"];
+$adresse_site=$GLOBALS['meta']["adresse_site"];
+$adresse_suivi_inscription=$GLOBALS['meta']["adresse_suivi_inscription"];
 
 debut_droite();
 
@@ -139,7 +139,7 @@ echo "<p>"._T("ical_texte_rss_articles2")."</p>";
 	}
 	
 
-	$activer_breves = lire_meta('activer_breves');
+	$activer_breves = $GLOBALS['meta']['activer_breves'];
 	
 	if ($activer_breves == "oui") {
 		

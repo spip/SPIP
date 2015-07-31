@@ -26,7 +26,7 @@ function creer_repertoire_documents($ext) {
 		exit;
 	}
 
-	if (lire_meta("creer_htaccess") == 'oui') {
+	if ($GLOBALS['meta']["creer_htaccess"] == 'oui') {
 		include_ecrire('inc_acces.php3');
 		verifier_htaccess($rep);
 	}
@@ -265,7 +265,7 @@ function recuperer_infos_distantes($source, $max=0) {
 		if ($max == 0
 		    AND $a['taille'] < 1024*1024
 		AND ereg(",".$a['extension'].",",
-		','.lire_meta('formats_graphiques').',')){
+		','.$GLOBALS['meta']['formats_graphiques'].',')){
 			$a = recuperer_infos_distantes($source, 1024*1024);
 		}
 		else if ($a['body']) {
@@ -485,7 +485,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 	DESACTIVE CAR UTILISATION PAR DEFAUT DES IMAGES REDUITES
 
 	// Creer la vignette des images
-	if (ereg(",$ext,", ','.lire_meta('formats_graphiques').',')
+	if (ereg(",$ext,", ','.$GLOBALS['meta']['formats_graphiques'].',')
 	AND $mode == 'document'
 	AND $type_image)
 		creer_fichier_vignette($fichier);
@@ -743,10 +743,10 @@ function corriger_extension($ext) {
 
 // Creation
 function creer_fichier_vignette($vignette, $test_cache_only=false) {
-	if ($vignette && lire_meta("creer_preview") == 'oui') {
+	if ($vignette && $GLOBALS['meta']["creer_preview"] == 'oui') {
 		eregi('\.([a-z0-9]+)$', $vignette, $regs);
 		$ext = $regs[1];
-		$taille_preview = lire_meta("taille_preview");
+		$taille_preview = $GLOBALS['meta']["taille_preview"];
 		if ($taille_preview < 10) $taille_preview = 120;
 		include_ecrire('inc_logos.php3');
 
@@ -845,7 +845,7 @@ function gdRotate ($imagePath,$rtt){
 
 	// Creer l'image destination (hauteur x largeur) et la parcourir
 	// pixel par pixel (un truc de fou)
-	$process = lire_meta('image_process');
+	$process = $GLOBALS['meta']['image_process'];
 	if ($process == "gd2")
 		$dst_img=ImageCreateTrueColor($size[1],$size[0]);
 	else

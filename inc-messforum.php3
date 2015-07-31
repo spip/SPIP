@@ -41,11 +41,11 @@ function prevenir_auteurs($auteur, $email_auteur, $id_forum, $id_article, $texte
 		$url = generer_url_article($id_article);
 	}
 
-	$adresse_site = lire_meta("adresse_site");
+	$adresse_site = $GLOBALS['meta']["adresse_site"];
 	$url = $adresse_site .'/' .  ereg_replace('^/', '', $url);
 
 	$sujet = "[" .
-	  entites_html(textebrut(typo(lire_meta("nom_site")))) .
+	  entites_html(textebrut(typo($GLOBALS['meta']["nom_site"]))) .
 	  "] ["._T('forum_forum')."] $titre";
 
 	$parauteur = (strlen($auteur) <= 2) ? '' :
@@ -91,7 +91,7 @@ function controler_forum($id_article, $retour) {
 
 	// Valeur par defaut
 	if (!$forums_publics)
-		$forums_publics = substr(lire_meta("forums_publics"),0,3);
+		$forums_publics = substr($GLOBALS['meta']["forums_publics"],0,3);
 
 	if ($forums_publics == "abo") {
 		if ($auteur_session) {
@@ -234,7 +234,7 @@ function enregistre_forum() {
 	if (is_array($ajouter_mot)) mots_du_forum($ajouter_mot, $id_message);
 
 	// Prevenir les auteurs de l'article
-	if (lire_meta("prevenir_auteurs") == "oui" AND ($afficher_texte != "non"))
+	if ($GLOBALS['meta']["prevenir_auteurs"] == "oui" AND ($afficher_texte != "non"))
 		prevenir_auteurs($auteur, $email_auteur, $id_message, $id_article, $texte, $titre, $statut);
 
 	// Poser un cookie pour ne pas retaper le nom / email

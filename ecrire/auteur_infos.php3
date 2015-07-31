@@ -171,7 +171,7 @@ modifier_statut_auteur($auteur, $_POST['statut'], $_POST['id_parent'], $_GET['su
 
 // Si on modifie la fiche auteur, reindexer et modifier htpasswd
 if ($nom OR $statut) {
-	if (lire_meta('activer_moteur') == 'oui') {
+	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 		include_ecrire ("inc_index.php3");
 		marquer_indexer('auteur', $id_auteur);
 	}

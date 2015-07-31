@@ -61,7 +61,7 @@ debut_cadre_couleur("traductions-24.gif", false, "", _T('info_multilinguisme'));
 	echo "<div>";
 	echo _T('info_multi_articles');
 	echo "<div style='text-align: $spip_lang_right';>";
-	afficher_choix('multi_articles', lire_meta('multi_articles'),
+	afficher_choix('multi_articles', $GLOBALS['meta']['multi_articles'],
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 	echo "</div>";
 	echo "</div>";
@@ -69,40 +69,40 @@ debut_cadre_couleur("traductions-24.gif", false, "", _T('info_multilinguisme'));
 	echo "<div>";
 	echo _T('info_multi_rubriques');
 	echo "<div style='text-align: $spip_lang_right';>";
-	afficher_choix('multi_rubriques', lire_meta('multi_rubriques'),
+	afficher_choix('multi_rubriques', $GLOBALS['meta']['multi_rubriques'],
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 	echo "</div>";
 	echo "</div>";
 
-	if  (lire_meta('multi_rubriques') == 'oui') {
+	if  ($GLOBALS['meta']['multi_rubriques'] == 'oui') {
 		echo "<div>";
 		echo _T('info_multi_secteurs');
 		echo "<div style='text-align: $spip_lang_right';>";
-		afficher_choix('multi_secteurs', lire_meta('multi_secteurs'),
+		afficher_choix('multi_secteurs', $GLOBALS['meta']['multi_secteurs'],
 			array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 		echo "</div>";
 		echo "</div>";
 	} else
-		echo "<input type='hidden' name='multi_secteurs' value='".lire_meta('multi_secteurs')."'>";
+		echo "<input type='hidden' name='multi_secteurs' value='".$GLOBALS['meta']['multi_secteurs']."'>";
 
-	if ((lire_meta('multi_rubriques') == 'oui') OR (lire_meta('multi_articles') == 'oui')) {
+	if (($GLOBALS['meta']['multi_rubriques'] == 'oui') OR ($GLOBALS['meta']['multi_articles'] == 'oui')) {
 		echo "<hr>";
 		echo "<p>"._T('texte_multilinguisme_trad')."</p>";
 
 		echo _T('info_gerer_trad');
 		echo "<div style='text-align: $spip_lang_right';>";
-		afficher_choix('gerer_trad', lire_meta('gerer_trad'),
+		afficher_choix('gerer_trad', $GLOBALS['meta']['gerer_trad'],
 			array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 		echo "</div>";
 	} else
-		echo "<input type='hidden' name='gerer_trad' value='".lire_meta('gerer_trad')."'>";
+		echo "<input type='hidden' name='gerer_trad' value='".$GLOBALS['meta']['gerer_trad']."'>";
 
 
 	echo "<div style='text-align: $spip_lang_right;'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
 
 fin_cadre_couleur();
 
-	if (lire_meta('multi_articles') == "oui" OR lire_meta('multi_rubriques') == "oui") {
+	if ($GLOBALS['meta']['multi_articles'] == "oui" OR $GLOBALS['meta']['multi_rubriques'] == "oui") {
 		echo "<p>";
 		debut_cadre_relief("langues-24.gif");
 		echo "<p class='verdana2'>";
@@ -114,7 +114,7 @@ fin_cadre_couleur();
 		$cesure = floor((count($langues) + 1) / 2);
 
 		$langues_installees = explode(',', $GLOBALS['all_langs']);
-		$langues_autorisees = explode(',', lire_meta('langues_multilingue'));
+		$langues_autorisees = explode(',', $GLOBALS['meta']['langues_multilingue']);
 
 		while (list(,$l) = each ($langues_installees)) {
 			$langues_trad[$l] = true;
@@ -124,7 +124,7 @@ fin_cadre_couleur();
 			$langues_auth[$l] = true;
 		}
 
-		$langues_bloquees[lire_meta('langue_site')] = 1;
+		$langues_bloquees[$GLOBALS['meta']['langue_site']] = 1;
 		$query = "SELECT DISTINCT lang FROM spip_articles WHERE statut='publie'";
 		$result = spip_query($query);
 		while ($row = spip_fetch_array($result)) {

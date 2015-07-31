@@ -111,7 +111,7 @@ if (defined("_INC_PUBLIC")) {
 	echo $page;
 
 	// Gestion des statistiques du site public
-	if (lire_meta("activer_statistiques") != "non") {
+	if ($GLOBALS['meta']["activer_statistiques"] != "non") {
 		include_local ("inc-stats.php3");
 		ecrire_stats();
 	}

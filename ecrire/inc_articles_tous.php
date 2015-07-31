@@ -53,8 +53,8 @@ while($row = spip_fetch_array($result)) {
 	$GLOBALS['langues_utilisees'][$lang] = true;
 
 
-		$langues = explode(',', lire_meta('langues_multilingue'));
-		if ((lire_meta('multi_rubriques') == 'oui' OR lire_meta('multi_articles') == 'oui') AND lire_meta('gerer_trad') == 'oui') {
+		$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
+		if (($GLOBALS['meta']['multi_rubriques'] == 'oui' OR $GLOBALS['meta']['multi_articles'] == 'oui') AND $GLOBALS['meta']['gerer_trad'] == 'oui') {
 			if (count($langues) > 1) {
 				while (list(, $l) = each ($langues)) {
 				  if (in_array($l, $sel_lang)) $text_article[$id_article]["trad"]["$l"] =  "<span class='creer'>$l</span>";
@@ -187,10 +187,10 @@ echo "<div align='$spip_lang_right'><INPUT TYPE='submit' NAME='Changer' CLASS='f
 
 
 // GERER LE MULTILINGUISME
-if ((lire_meta('multi_rubriques') == 'oui' OR lire_meta('multi_articles') == 'oui') AND lire_meta('gerer_trad') == 'oui') {
+if (($GLOBALS['meta']['multi_rubriques'] == 'oui' OR $GLOBALS['meta']['multi_articles'] == 'oui') AND $GLOBALS['meta']['gerer_trad'] == 'oui') {
 
 	// bloc legende
-	$lf = lire_meta('langue_site');
+	$lf = $GLOBALS['meta']['langue_site'];
 	echo "<hr /><div class='verdana2'>";
 	echo _T('info_tout_site6');
 	echo "<div><span class='lang_base'>$lf</span> ". _T('info_tout_site5') ." </div>";
@@ -200,7 +200,7 @@ if ((lire_meta('multi_rubriques') == 'oui' OR lire_meta('multi_articles') == 'ou
 	echo "</div>\n";
 
 	// bloc choix de langue
-	$langues = explode(',', lire_meta('langues_multilingue'));
+	$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
 	if (count($langues) > 1) {
 		sort($langues);
 		echo "<br /><div class='verdana2'><b>"._T('titre_cadre_afficher_traductions')."</b><br />";
@@ -295,7 +295,7 @@ function afficher_rubriques_filles($id_parent) {
 							//echo "<div style='position: relative;'$direction_generale>";
 							if (strlen($traductions)>0) echo "<div class='trad_float'>$traductions</div>";
 							echo "<a class='".$text_article[$zarticle]["statut"]."' href='articles.php3?id_article=$zarticle'>";
-							if ((lire_meta('multi_rubriques') == 'oui' OR lire_meta('multi_articles') == 'oui') AND lire_meta('gerer_trad') == 'oui') echo "<span class='lang_base'$direction_generale>".$text_article[$zarticle]["lang"]."</span> ";
+							if (($GLOBALS['meta']['multi_rubriques'] == 'oui' OR $GLOBALS['meta']['multi_articles'] == 'oui') AND $GLOBALS['meta']['gerer_trad'] == 'oui') echo "<span class='lang_base'$direction_generale>".$text_article[$zarticle]["lang"]."</span> ";
 							echo "<span>".$text_article[$zarticle]["titre"]."</span></a>";	
 							//echo "</div>\n";
 						}

@@ -96,7 +96,7 @@ function xhtml($buffer) {
 function traite_xhtml ($buffer) {
 
 	// Seuls les charsets iso-latin et utf-8 sont concernes
-	$charset = lire_meta('charset');
+	$charset = $GLOBALS['meta']['charset'];
 	if ($charset == "iso-8859-1")
 		$enc_char = "latin1";
 	else if ($charset == "utf-8")
@@ -250,10 +250,10 @@ function entetes_xhtml() {
 	// mais permet d'afficher du MathML directement dans le texte
 	// (et sauf erreur, c'est la bonne facon de declarer du xhtml)
 	if (strpos($_SERVER['HTTP_ACCEPT'], "application/xhtml+xml")) {
-		@header("Content-Type: application/xhtml+xml; charset=".lire_meta('charset'));
+		@header("Content-Type: application/xhtml+xml; charset=".$GLOBALS['meta']['charset']);
 	} else {
-		@header("Content-Type: text/html; charset=".lire_meta('charset'));
-		echo '<'.'?xml version="1.0" encoding="'. lire_meta('charset').'"?'.">\n";
+		@header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
+		echo '<'.'?xml version="1.0" encoding="'. $GLOBALS['meta']['charset'].'"?'.">\n";
 	}
 }
 

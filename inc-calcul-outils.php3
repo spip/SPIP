@@ -298,7 +298,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 		if (!$extension) $extension = 'txt';
 
 		// Pas de vignette, mais un fichier image -- creer la vignette
-		if (strstr(lire_meta('formats_graphiques'), $extension)) {
+		if (strstr($GLOBALS['meta']['formats_graphiques'], $extension)) {
 			if ($img = copie_locale($fichier)
 			AND @file_exists($img)) {
 				if (!$x AND !$y) {
@@ -514,7 +514,7 @@ function sql_rubrique_fond($contexte) {
 function lang_parametres_forum($s) {
 
 	// ne pas se fatiguer si le site est unilingue (plus rapide)
-	if (strstr(lire_meta('langues_utilisees'), ',')
+	if (strstr($GLOBALS['meta']['langues_utilisees'], ',')
 	// chercher l'identifiant qui nous donnera la langue
 	AND preg_match(',id_(article|breve|rubrique|syndic)=([0-9]+),', $s, $r)){
 		$objet = $r[1];
@@ -523,7 +523,7 @@ function lang_parametres_forum($s) {
 			"SELECT lang FROM spip_${objet}s WHERE id_$objet=$id"
 		));
 		// Si ce n'est pas la meme que celle du site, l'ajouter aux parametres
-		if ($lang AND $lang <> lire_meta('langue_site'))
+		if ($lang AND $lang <> $GLOBALS['meta']['langue_site'])
 			$s .= "&lang=$lang";
 	}
 

@@ -23,7 +23,7 @@ include_ecrire ("inc_date.php3");
 include_ecrire ("inc_abstract_sql.php3");
 include_ecrire ("inc_config.php3");
 
-$proposer_sites = lire_meta("proposer_sites");
+$proposer_sites = $GLOBALS['meta']["proposer_sites"];
 
 $id_rubrique = intval($id_parent);
 
@@ -52,7 +52,7 @@ if ($new == 'oui') {
 		$query = "DELETE FROM spip_syndic WHERE (statut = 'refuse') && (maj < $mydate)";
 		$result = spip_query($query);
 	
-		$moderation = (lire_meta("moderation_sites") == "oui")? 'oui' : 'non';
+		$moderation = ($GLOBALS['meta']["moderation_sites"] == "oui")? 'oui' : 'non';
 	
 		$id_syndic = spip_abstract_insert("spip_syndic",
 					 "(nom_site, id_rubrique, id_secteur, date, date_syndic, statut, syndication, moderation)",
@@ -117,7 +117,7 @@ if ($nouveau_statut AND $flag_administrable) {
 
 	calculer_rubriques();
 	if ($statut == 'publie') {
-		if (lire_meta('activer_moteur') == 'oui') {
+		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_ecrire ("inc_index.php3");
 			marquer_indexer('syndic', $id_syndic);
 		}
@@ -163,7 +163,7 @@ if (strval($nom_site)!='' AND $modifier_site == 'oui' AND $flag_editable) {
 			include_ecrire ("inc_invalideur.php3");
 			suivre_invalideur("id='id_syndic/$id_syndic'");
 		}
-		if (lire_meta('activer_moteur') == 'oui') {
+		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_ecrire ("inc_index.php3");
 			marquer_indexer('syndic', $id_syndic);
 		}

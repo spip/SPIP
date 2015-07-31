@@ -36,7 +36,7 @@ function calculer_rubriques() {
 
 	// Afficher les articles post-dates ?
 	include_ecrire('inc_meta.php3');
-	$postdates = (lire_meta("post_dates") == "non") ?
+	$postdates = ($GLOBALS['meta']["post_dates"] == "non") ?
 		"AND fille.date <= NOW()" : '';
 
 	$r = spip_query("SELECT rub.id_rubrique AS id, max(fille.date) AS date_h
@@ -174,7 +174,7 @@ function calculer_langues_rubriques_etape() {
 function calculer_langues_rubriques() {
 
 	// rubriques (recursivite)
-	$langue_site = addslashes(lire_meta('langue_site'));
+	$langue_site = addslashes($GLOBALS['meta']['langue_site']);
 	spip_query ("UPDATE spip_rubriques
 	SET lang='$langue_site', langue_choisie='non'
 	WHERE id_parent=0 AND langue_choisie != 'oui'");
@@ -206,7 +206,7 @@ function calculer_langues_rubriques() {
 		SET lang='$lang', langue_choisie='non' WHERE id_breve=$id_breve");
 	}
 
-	if (lire_meta('multi_rubriques') == 'oui') {
+	if ($GLOBALS['meta']['multi_rubriques'] == 'oui') {
 		// Ecrire meta liste langues utilisees dans rubriques
 		include_ecrire('inc_meta.php3');
 		$s = spip_query ("SELECT lang FROM spip_rubriques
@@ -257,7 +257,7 @@ function enfant_rub($collection){
 		
 		if ($spip_display != 1
 		AND $spip_display!=4
-		AND lire_meta('image_process') != "non") {
+		AND $GLOBALS['meta']['image_process'] != "non") {
 			include_ecrire("inc_logos.php3");
 			$logo = decrire_logo("rubon$id_rubrique");
 			if ($logo) {
@@ -524,7 +524,7 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint) {
 		$titre = couper(supprimer_tags(typo(extraire_multi(
 			$r['titre']
 		)))." ", 50);
-		if (lire_meta('multi_rubriques') == 'oui'
+		if ($GLOBALS['meta']['multi_rubriques'] == 'oui'
 		AND ($r['langue_choisie'] == "oui" OR $r['id_parent'] == 0))
 			$titre .= ' ['.traduire_nom_langue($r['lang']).']';
 		$data[$r['id_rubrique']] = $titre;

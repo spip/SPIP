@@ -229,7 +229,7 @@ function boite_info_articles($id_article, $statut_article, $visites, $articles_v
 	voir_en_ligne ('article', $id_article, $statut_article);
 
 
-	$activer_statistiques = lire_meta("activer_statistiques");
+	$activer_statistiques = $GLOBALS['meta']["activer_statistiques"];
 
 	if ($connect_statut == "0minirezo" AND $statut_article == 'publie' AND $visites > 0 AND $activer_statistiques != "non" AND $options == "avancees"){
 	icone_horizontale(_T('icone_evolution_visites', array('visites' => $visites)), "statistiques_visites.php3?id_article=$id_article", "statistiques-24.gif","rien.gif");
@@ -240,7 +240,7 @@ function boite_info_articles($id_article, $statut_article, $visites, $articles_v
 }
 
 	// Correction orthographique
-	if (lire_meta('articles_ortho') == 'oui') {
+	if ($GLOBALS['meta']['articles_ortho'] == 'oui') {
 		$js_ortho = "onclick=\"window.open(this.href, 'spip_ortho', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;\"";
 		icone_horizontale(_T('ortho_verifier'), "articles_ortho.php?id_article=$id_article", "ortho-24.gif", "rien.gif", 'echo', $js_ortho);
 	}
@@ -505,7 +505,7 @@ function cron_articles($id_article, $statut, $statut_ancien)
 	calculer_rubriques();
 
 	if ($statut == 'publie') {
-		if (lire_meta('activer_moteur') == 'oui') {
+		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_ecrire ("inc_index.php3");
 			marquer_indexer('article', $id_article);
 		}
@@ -610,7 +610,7 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 		echo "<td align='center'>";
 	
 		// Recuperer les donnees de l'article
-		if (lire_meta('articles_modif') != 'non') {
+		if ($GLOBALS['meta']['articles_modif'] != 'non') {
 			$query = "SELECT auteur_modif, UNIX_TIMESTAMP(date_modif) AS modification, UNIX_TIMESTAMP(NOW()) AS maintenant FROM spip_articles WHERE id_article='$id_article'";
 			$result = spip_query($query);
 	
@@ -754,12 +754,12 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 
   global $connect_statut, $couleur_claire, $options, $connect_toutes_rubriques;
 
-  if ((lire_meta('multi_articles') == 'oui')
-	OR ((lire_meta('multi_rubriques') == 'oui') AND (lire_meta('gerer_trad') == 'oui'))) {
+  if (($GLOBALS['meta']['multi_articles'] == 'oui')
+	OR (($GLOBALS['meta']['multi_rubriques'] == 'oui') AND ($GLOBALS['meta']['gerer_trad'] == 'oui'))) {
 
 	list($langue_article) = spip_fetch_array(spip_query("SELECT lang FROM spip_articles WHERE id_article=$id_article"));
 
-	if (lire_meta('gerer_trad') == 'oui')
+	if ($GLOBALS['meta']['gerer_trad'] == 'oui')
 		$titre_barre = _T('titre_langue_trad_article');
 	else
 		$titre_barre = _T('titre_langue_article');
@@ -770,7 +770,7 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 
 
 	// Choix langue article
-	if (lire_meta('multi_articles') == 'oui' AND $flag_editable) {
+	if ($GLOBALS['meta']['multi_articles'] == 'oui' AND $flag_editable) {
 		echo debut_block_invisible('languesarticle');
 
 		$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
@@ -787,7 +787,7 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 
 
 	// Gerer les groupes de traductions
-	if (lire_meta('gerer_trad') == 'oui') {
+	if ($GLOBALS['meta']['gerer_trad'] == 'oui') {
 		if ($flag_editable AND $supp_trad == 'oui') { // Ne plus lier a un groupe de trad
 			spip_query("UPDATE spip_articles SET id_trad = '0' WHERE id_article = $id_article");
 
@@ -1054,7 +1054,7 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $ajout_auteur
 		$result=spip_query($query);
 	}
 
-	if (lire_meta('activer_moteur') == 'oui') {
+	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 		include_ecrire ("inc_index.php3");
 		marquer_indexer('article', $id_article);
 	}
@@ -1064,7 +1064,7 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $ajout_auteur
   if ($supp_auteur && $flag_editable) {
 	$query="DELETE FROM spip_auteurs_articles WHERE id_auteur='$supp_auteur' AND id_article='$id_article'";
 	$result=spip_query($query);
-	if (lire_meta('activer_moteur') == 'oui') {
+	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 		include_ecrire ("inc_index.php3");
 		marquer_indexer('article', $id_article);
 	}

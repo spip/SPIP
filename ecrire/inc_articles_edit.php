@@ -389,18 +389,18 @@ else if ($new=='oui') {
 			}
 			$extra = $row["extra"];
 		}
-		$langues_autorisees = lire_meta('langues_multilingue');
+		$langues_autorisees = $GLOBALS['meta']['langues_multilingue'];
 		
 		// Regler la langue, si possible
 		if (ereg(",$spip_lang,", ",$langues_autorisees,")) {
-			if (lire_meta('multi_articles') == 'oui') {
+			if ($GLOBALS['meta']['multi_articles'] == 'oui') {
 				// Si le menu de langues est autorise sur les articles,
 				// on peut changer la langue quelle que soit la rubrique
 				$changer_lang = $spip_lang;
 			}
-			else if (lire_meta('multi_rubriques') == 'oui') {
+			else if ($GLOBALS['meta']['multi_rubriques'] == 'oui') {
 				// Chercher la rubrique la plus adaptee pour accueillir l'article
-				if (lire_meta('multi_secteurs') == 'oui') 
+				if ($GLOBALS['meta']['multi_secteurs'] == 'oui') 
 					$id_parent = 0;
 				else {
 					$query = "SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique";
@@ -436,15 +436,15 @@ spip_query("UPDATE spip_articles SET date_modif=NOW(), auteur_modif=$connect_id_
 
 affiche_articles_edit_dist($flag_editable, $id_article, $id_rubrique, $titre, $soustitre, $surtitre, $descriptif, $url, $chapo, $texte, $ps, $new, $nom_site, $url_site, $champs_extra, $extra, $id_secteur, $date, $onfocus, $lier_trad, 
 	array(
-		'articles_surtitre' => lire_meta("articles_surtitre"),
-		'articles_soustitre' => lire_meta("articles_soustitre"),
-		'articles_descriptif' => lire_meta("articles_descriptif"),
-		'articles_urlref' => lire_meta("articles_urlref"),
-		'articles_chapeau' => lire_meta("articles_chapeau"),
-		'articles_ps' => lire_meta("articles_ps"),
-		'articles_redac' => lire_meta("articles_redac"),
-		'articles_mots' => lire_meta("articles_mots"),
-		'articles_modif' => lire_meta("articles_modif")
+		'articles_surtitre' => $GLOBALS['meta']["articles_surtitre"],
+		'articles_soustitre' => $GLOBALS['meta']["articles_soustitre"],
+		'articles_descriptif' => $GLOBALS['meta']["articles_descriptif"],
+		'articles_urlref' => $GLOBALS['meta']["articles_urlref"],
+		'articles_chapeau' => $GLOBALS['meta']["articles_chapeau"],
+		'articles_ps' => $GLOBALS['meta']["articles_ps"],
+		'articles_redac' => $GLOBALS['meta']["articles_redac"],
+		'articles_mots' => $GLOBALS['meta']["articles_mots"],
+		'articles_modif' => $GLOBALS['meta']["articles_modif"]
 		));
 }
 

@@ -131,7 +131,7 @@ if ($connect_statut =="0minirezo"){
 		if ($articles == "oui") $checked = "checked";
 		else $checked = "";
 		echo "<input type='checkbox' name='articles' value='oui' $checked id='articles'> <label for='articles'>"._T('item_mots_cles_association_articles')."</label><br>";
-		$activer_breves = lire_meta("activer_breves");
+		$activer_breves = $GLOBALS['meta']["activer_breves"];
 		if ($activer_breves != "non"){
 			if ($breves == "oui") $checked = "checked";
 			else $checked = "";
@@ -150,7 +150,7 @@ if ($connect_statut =="0minirezo"){
 	echo "</div>";
 
 
-	$config_precise_groupes = lire_meta("config_precise_groupes");
+	$config_precise_groupes = $GLOBALS['meta']["config_precise_groupes"];
 	if ($config_precise_groupes == "oui" OR $unseul == "oui" OR $obligatoire == "oui"){
 		echo "<p><div style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #dddddd;'>";
 
@@ -186,8 +186,8 @@ if ($connect_statut =="0minirezo"){
 		else $checked = "";
 		echo "<input type='checkbox' name='acces_comite' value='oui' $checked id='comite'> <label for='comite'>"._T('bouton_checkbox_qui_attribue_mot_cle_redacteurs')."</label><br>";
 	
-		$mots_cles_forums = lire_meta("mots_cles_forums");
-		$forums_publics=lire_meta("forums_publics");
+		$mots_cles_forums = $GLOBALS['meta']["mots_cles_forums"];
+		$forums_publics=$GLOBALS['meta']["forums_publics"];
 		
 		if (($mots_cles_forums == "oui" OR $acces_forum == "oui") AND $forums_publics != "non"){
 			if ($acces_forum == "oui") $checked = "checked";

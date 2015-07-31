@@ -22,13 +22,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 	if ($charset == 'AUTO')
-		$charset = lire_meta('charset');
+		$charset = $GLOBALS['meta']['charset'];
 	$charset = trim(strtolower($charset));
 	if (is_array($GLOBALS['CHARSET'][$charset]))
 		return $charset;
 
 	if ($langue_site == 'AUTO')
-		$langue_site = lire_meta('langue_site');
+		$langue_site = $GLOBALS['meta']['langue_site'];
 
 	if ($charset == 'utf-8') {
 		$GLOBALS['CHARSET'][$charset] = array();
@@ -66,7 +66,7 @@ function init_mb_string() {
 		AND function_exists('mb_encode_mimeheader')
 		AND function_exists('mb_encode_numericentity')
 		AND function_exists('mb_decode_numericentity')
-		AND mb_detect_order(lire_meta('charset'))
+		AND mb_detect_order($GLOBALS['meta']['charset'])
 		) {
 			mb_internal_encoding('utf-8');
 			$mb = 1;
@@ -173,7 +173,7 @@ function charset2unicode($texte, $charset='AUTO', $forcer = false) {
 	static $trans;
 
 	if ($charset == 'AUTO')
-		$charset = lire_meta('charset');
+		$charset = $GLOBALS['meta']['charset'];
 
 	if ($charset == '') $charset = 'iso-8859-1';
 	$charset = strtolower($charset);
@@ -241,7 +241,7 @@ function charset2unicode($texte, $charset='AUTO', $forcer = false) {
 function unicode2charset($texte, $charset='AUTO') {
 	static $CHARSET_REVERSE;
 	if ($charset == 'AUTO')
-		$charset = lire_meta('charset');
+		$charset = $GLOBALS['meta']['charset'];
 
 	switch($charset) {
 	case 'utf-8':
@@ -457,7 +457,7 @@ function javascript_to_binary ($texte) {
 function translitteration($texte, $charset='AUTO', $complexe='') {
 	static $trans;
 	if ($charset == 'AUTO')
-		$charset = lire_meta('charset');
+		$charset = $GLOBALS['meta']['charset'];
 
 	$table_translit ='translit'.$complexe;
 

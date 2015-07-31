@@ -63,7 +63,7 @@ class Auth_spip {
 	function activer() {
 		if ($this->statut == 'nouveau') { // nouvel inscrit
 			$connect_statut =
-			(lire_meta('accepter_inscriptions') == 'oui') ?
+			($GLOBALS['meta']['accepter_inscriptions'] == 'oui') ?
 				'1comite' : '6forum';
 			spip_query("UPDATE spip_auteurs SET statut='$connect_statut'
 				WHERE login='".addslashes($this->login)."'");

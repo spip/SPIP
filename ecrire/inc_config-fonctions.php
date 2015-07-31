@@ -106,7 +106,7 @@ function afficher_choix_vignette($process) {
 	//global $taille_preview;
 	$taille_preview = 120;
 
-	if ($process == lire_meta('image_process'))
+	if ($process == $GLOBALS['meta']['image_process'])
 		$border = 2;
 	else
 		$border=0;
@@ -129,7 +129,7 @@ function vignettes_config()
 
 	debut_cadre_trait_couleur("image-24.gif");
 
-	$formats_graphiques = lire_meta("formats_graphiques");
+	$formats_graphiques = $GLOBALS['meta']["formats_graphiques"];
 
 	debut_cadre_relief("", false, "", _T("info_image_process_titre"));
 
@@ -140,16 +140,16 @@ function vignettes_config()
 		// application du choix de vignette
 	if ($image_process) {
 		ecrire_meta('image_process', $image_process);
-		ecrire_metas(); // Puisque le switch se fait par lire_meta.
+		ecrire_metas(); // a cause du switch ci-dessous
 						
 			// mettre a jour les formats graphiques lisibles
-		switch (lire_meta('image_process')) {
+		switch ($GLOBALS['meta']['image_process']) {
 				case 'gd1':
 				case 'gd2':
-					$formats_graphiques = lire_meta('gd_formats_read');
+					$formats_graphiques = $GLOBALS['meta']['gd_formats_read'];
 					break;
 				case 'netpbm':
-					$formats_graphiques = lire_meta('netpbm_formats');
+					$formats_graphiques = $GLOBALS['meta']['netpbm_formats'];
 					break;
 				case 'convert':
 				case 'imagick':
@@ -206,8 +206,8 @@ function vignettes_config()
 	// Une fois le process choisi, proposer vignettes
 	//
 	
-	$creer_preview = lire_meta("creer_preview");
-	$taille_preview = lire_meta("taille_preview");
+	$creer_preview = $GLOBALS['meta']["creer_preview"];
+	$taille_preview = $GLOBALS['meta']["taille_preview"];
 	if ($taille_preview < 10) $taille_preview = 120;
 
 	if (strlen($formats_graphiques) > 0) {
@@ -250,7 +250,7 @@ function moteur_config()
 	debut_cadre_trait_couleur("racine-site-24.gif", false, "", _T('info_moteur_recherche').aide ("confmoteur"));
 
 
-	$activer_moteur = lire_meta("activer_moteur");
+	$activer_moteur = $GLOBALS['meta']["activer_moteur"];
 
 	echo "<div class='verdana2'>";
 		echo _T('info_question_utilisation_moteur_recherche');
@@ -274,7 +274,7 @@ function statistiques_config()
 
 	debut_cadre_trait_couleur("statistiques-24.gif", false, "", _T('info_forum_statistiques').aide ("confstat"));
 
-	$activer_statistiques = lire_meta("activer_statistiques");
+	$activer_statistiques = $GLOBALS['meta']["activer_statistiques"];
 
 	echo "<div class='verdana2'>";
 	echo _T('info_question_gerer_statistiques');
@@ -297,7 +297,7 @@ function notification_config()
 	global $spip_lang_right;
 
 	debut_cadre_trait_couleur("article-24.gif", false, "", _T('info_travail_colaboratif').aide("artmodif"));
-	$articles_modif = lire_meta("articles_modif");
+	$articles_modif = $GLOBALS['meta']["articles_modif"];
 
 
 	echo "<div class='verdana2'>";
@@ -321,7 +321,7 @@ function versions_config()
 	global $spip_lang_right;
 
 	debut_cadre_trait_couleur("historique-24.gif", false, "", _T('info_historique_titre').aide("suivimodif"));
-	$articles_versions = lire_meta("articles_versions");
+	$articles_versions = $GLOBALS['meta']["articles_versions"];
 
 
 	echo "<div class='verdana2'>";
@@ -346,7 +346,7 @@ function correcteur_config()
 
 	global $spip_lang_right;
 	debut_cadre_trait_couleur("ortho-24.gif", false, "", _T('ortho_orthographe').aide("corrortho"));
-	$articles_ortho = lire_meta("articles_ortho");
+	$articles_ortho = $GLOBALS['meta']["articles_ortho"];
 
 	echo "<div class='verdana2'>";
 	echo _T('ortho_avis_privacy');
@@ -375,7 +375,7 @@ function previsu_config()
 	global $spip_lang_right;
 
 	debut_cadre_trait_couleur("naviguer-site.png", false, "", _T('previsualisation').aide("previsu"));
-	$preview = lire_meta("preview");
+	$preview = $GLOBALS['meta']["preview"];
 	# non = personne n'est autorise a previsualiser (defaut)
 	# oui = les admins
 	# 1comite = admins et redacteurs
@@ -406,7 +406,7 @@ function proxy_config()
 	debut_cadre_trait_couleur("base-24.gif", false, "", _T('info_sites_proxy').aide ("confhttpproxy"));
 
 	// Masquer un eventuel password authentifiant
-	if ($http_proxy = lire_meta("http_proxy")) {
+	if ($http_proxy = $GLOBALS['meta']["http_proxy"]) {
 		include_ecrire ("inc_sites.php3");
 		$http_proxy=entites_html(no_password_proxy_url($http_proxy));
 	}
@@ -448,7 +448,7 @@ function htpasswd_config()
 	debut_cadre_trait_couleur("cadenas-24.gif", false, "",
 		_T('info_fichiers_authent'));
 
-	$creer_htpasswd = lire_meta("creer_htpasswd");
+	$creer_htpasswd = $GLOBALS['meta']["creer_htpasswd"];
 
 	echo "<div class='verdana2'>", _T('texte_fichier_authent'), "</div>";
 

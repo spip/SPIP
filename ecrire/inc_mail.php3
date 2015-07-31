@@ -78,7 +78,7 @@ function nettoyer_caracteres_mail($t) {
 
 	$t = filtrer_entites($t);
 
-	if (lire_meta('charset') <> 'utf-8') {
+	if ($GLOBALS['meta']['charset'] <> 'utf-8') {
 		$t = str_replace(
 			array("&#8217;","&#8220;","&#8221;"),
 			array("'",      '"',      '"'),
@@ -102,7 +102,7 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 	if ($headers && $headers[strlen($headers)-1] != "\n")
 	  $headers = "\n";
 	if (!$from) {
-		$email_envoi = lire_meta("email_envoi");
+		$email_envoi = $GLOBALS['meta']["email_envoi"];
 		$from = email_valide($email_envoi) ? $email_envoi : $email;
 	} else {
 	  // pour les sites qui colle d'office From: serveur-http
@@ -110,7 +110,7 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 	}
 	spip_log("mail ($email): $sujet". ($from ?", from <$from>":''));
 
-	$charset = lire_meta('charset');
+	$charset = $GLOBALS['meta']['charset'];
 
 	// Ajouter au besoin le \n final dans les $headers passes en argument
 	if ($headers = trim($headers)) $headers .= "\n";
@@ -166,7 +166,7 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 function extrait_article($row) {
 	include_ecrire("inc_texte.php3");
 
-	$adresse_site = lire_meta("adresse_site");
+	$adresse_site = $GLOBALS['meta']["adresse_site"];
 
 	$id_article = $row[0];
 	$titre = $row[2];
@@ -202,9 +202,9 @@ function nettoyer_titre_email($titre) {
 
 function envoyer_mail_publication($id_article) {
 	global $connect_nom;
-	$adresse_suivi = lire_meta("adresse_suivi");
-	$nom_site_spip = lire_meta("nom_site");
-	$suivi_edito = lire_meta("suivi_edito");
+	$adresse_suivi = $GLOBALS['meta']["adresse_suivi"];
+	$nom_site_spip = $GLOBALS['meta']["nom_site"];
+	$suivi_edito = $GLOBALS['meta']["suivi_edito"];
 
 	if ($suivi_edito == "oui") {
 		$query = "SELECT * FROM spip_articles WHERE id_article = $id_article";
@@ -232,10 +232,10 @@ function envoyer_mail_publication($id_article) {
 }
 
 function envoyer_mail_proposition($id_article) {
-	$adresse_suivi = lire_meta("adresse_suivi");
-	$adresse_site = lire_meta("adresse_site");
-	$nom_site_spip = lire_meta("nom_site");
-	$suivi_edito = lire_meta("suivi_edito");
+	$adresse_suivi = $GLOBALS['meta']["adresse_suivi"];
+	$adresse_site = $GLOBALS['meta']["adresse_site"];
+	$nom_site_spip = $GLOBALS['meta']["nom_site"];
+	$suivi_edito = $GLOBALS['meta']["suivi_edito"];
 
 	if ($suivi_edito == "oui") {
 		if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article = $id_article"))) {

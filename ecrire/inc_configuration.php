@@ -37,7 +37,7 @@ if ($changer_config == 'oui') {
 	appliquer_modifs_config();
 }
 else {
-	$forums_publics = lire_meta("forums_publics");
+	$forums_publics = $GLOBALS['meta']["forums_publics"];
 	if (!$forums_publics) {
 		ecrire_meta("forums_publics", "posteriori");
 		ecrire_metas();
@@ -67,9 +67,9 @@ echo "<form action='configuration.php3' method='post'>";
 echo "<input type='hidden' name='changer_config' value='oui'>";
 debut_cadre_couleur("racine-site-24.gif");
 
-	$nom_site = entites_html(lire_meta("nom_site"));
-	$adresse_site = entites_html(lire_meta("adresse_site"));
-	$email_webmaster = entites_html(lire_meta("email_webmaster"));
+	$nom_site = entites_html($GLOBALS['meta']["nom_site"]);
+	$adresse_site = entites_html($GLOBALS['meta']["adresse_site"]);
+	$email_webmaster = entites_html($GLOBALS['meta']["email_webmaster"]);
 
 	debut_cadre_relief("", false, "", _T('info_nom_site').aide ("confnom"));
 	echo "<input type='text' name='nom_site' value=\"$nom_site\" size='40' CLASS='forml'>";
@@ -108,13 +108,13 @@ if ($options == 'avancees') {
 
 	debut_cadre_relief("", false, "", _T('info_contenu_articles').aide ("confart"));
 
-	$articles_surtitre = lire_meta("articles_surtitre");
-	$articles_soustitre = lire_meta("articles_soustitre");
-	$articles_descriptif = lire_meta("articles_descriptif");
-	$articles_chapeau = lire_meta("articles_chapeau");
-	$articles_ps = lire_meta("articles_ps");
-	$articles_redac = lire_meta("articles_redac");
-	$articles_urlref = lire_meta("articles_urlref");
+	$articles_surtitre = $GLOBALS['meta']["articles_surtitre"];
+	$articles_soustitre = $GLOBALS['meta']["articles_soustitre"];
+	$articles_descriptif = $GLOBALS['meta']["articles_descriptif"];
+	$articles_chapeau = $GLOBALS['meta']["articles_chapeau"];
+	$articles_ps = $GLOBALS['meta']["articles_ps"];
+	$articles_redac = $GLOBALS['meta']["articles_redac"];
+	$articles_urlref = $GLOBALS['meta']["articles_urlref"];
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 
@@ -198,7 +198,7 @@ if ($options == 'avancees') {
 
 	debut_cadre_relief("", false, "", _T('titre_publication_articles_post_dates').aide ("confdates"));
 
-	$post_dates = lire_meta("post_dates");
+	$post_dates = $GLOBALS['meta']["post_dates"];
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 	echo "<TR><TD class='verdana2'>";
@@ -232,7 +232,7 @@ echo "<p>";
 
 debut_cadre_trait_couleur("breve-24.gif", false, "", _T('titre_breves').aide ("confbreves"));
 
-$activer_breves = lire_meta("activer_breves");
+$activer_breves = $GLOBALS['meta']["activer_breves"];
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 echo "<TR><TD class='verdana2'>";
@@ -265,10 +265,10 @@ if ($options == "avancees") {
 
 	debut_cadre_trait_couleur("mot-cle-24.gif", false, "", _T('info_mots_cles'));
 
-	$articles_mots = lire_meta("articles_mots");
-	$config_precise_groupes = lire_meta("config_precise_groupes");
-	$mots_cles_forums = lire_meta("mots_cles_forums");
-	$forums_publics = lire_meta("forums_publics");
+	$articles_mots = $GLOBALS['meta']["articles_mots"];
+	$config_precise_groupes = $GLOBALS['meta']["config_precise_groupes"];
+	$mots_cles_forums = $GLOBALS['meta']["mots_cles_forums"];
+	$forums_publics = $GLOBALS['meta']["forums_publics"];
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 	echo "<TR><TD class='verdana2'>";
@@ -350,11 +350,11 @@ if ($options == "avancees") {
 
 debut_cadre_trait_couleur("site-24.gif", false, "", _T('titre_referencement_sites').aide ("reference"));
 
-$activer_sites = lire_meta('activer_sites');
-$activer_syndic = lire_meta("activer_syndic");
-$proposer_sites = lire_meta("proposer_sites");
-$visiter_sites = lire_meta("visiter_sites");
-$moderation_sites = lire_meta("moderation_sites");
+$activer_sites = $GLOBALS['meta']['activer_sites'];
+$activer_syndic = $GLOBALS['meta']["activer_syndic"];
+$proposer_sites = $GLOBALS['meta']["proposer_sites"];
+$visiter_sites = $GLOBALS['meta']["visiter_sites"];
+$moderation_sites = $GLOBALS['meta']["moderation_sites"];
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 
@@ -426,7 +426,7 @@ else $style = "display: none;";
 	
 			// Si indexation, activer/desactiver pages recuperees
 	
-			$activer_moteur = lire_meta("activer_moteur");
+			$activer_moteur = $GLOBALS['meta']["activer_moteur"];
 			if ($activer_moteur == "oui") {
 				echo "<p><hr><p align='$spip_lang_left'>";
 				echo _T('texte_utilisation_moteur_syndiques')." ";
@@ -465,8 +465,8 @@ echo "<p>";
 
 debut_cadre_trait_couleur("doc-24.gif", false, "", _T('titre_documents_joints'));
 
-$documents_rubrique = lire_meta("documents_rubrique");
-$documents_article = lire_meta("documents_article");
+$documents_rubrique = $GLOBALS['meta']["documents_rubrique"];
+$documents_article = $GLOBALS['meta']["documents_article"];
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 

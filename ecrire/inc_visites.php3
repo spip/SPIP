@@ -219,7 +219,7 @@ function calculer_popularites() {
 	include_ecrire('inc_meta.php3');
 
 	// Si c'est le premier appel, ne pas calculer
-	$t = lire_meta('date_popularites');
+	$t = $GLOBALS['meta']['date_popularites'];
 	ecrire_meta('date_popularites', time());
 	ecrire_metas();
 	if (!$t)
@@ -254,7 +254,7 @@ function calculer_popularites() {
 	// peut etre appele par deux bases SPIP ne partageant pas le meme
 	// _DIR_SESSIONS, sans tout casser...
 	$aujourdhui = date("Y-m-d");
-	if ($date = lire_meta('date_statistiques')
+	if ($date = $GLOBALS['meta']['date_statistiques']
 	AND $date != $aujourdhui) {
 		spip_query("UPDATE spip_referers SET visites_veille=visites_jour, visites_jour=0");
 	}

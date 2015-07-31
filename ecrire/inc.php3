@@ -12,11 +12,13 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) include ("inc_version.php3");
 
+include_ecrire ("inc_connect.php3");
+include_ecrire ("inc_session.php3");
+
 $var_f = include_fonction('auth');
 if (!$var_f()) exit;
 
 include_ecrire("inc_minipres.php"); // choisit la langue
-include_ecrire('inc_admin.php3');
 include_ecrire('inc_cookie.php');
 
 //
@@ -124,6 +126,10 @@ topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'" .
 // Gestion de version, sauf si justement on est en train de le faire
 //
 
-if (!isset($reinstall)) if (demande_maj_version()) exit;
+if ($reinstall != 'oui') {
+	include_ecrire('inc_admin.php3');
+	// ... ou qu'il s'agit d'une autre intervention avec debut_admin
+	if ((!isset($reinstall)) && (demande_maj_version())) exit;
+ }
 
 ?>

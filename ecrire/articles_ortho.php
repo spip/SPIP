@@ -49,7 +49,7 @@ if ($row = spip_fetch_array($result)) {
 	$id_trad = $row["id_trad"];
 	$lang_article = $row["lang"];
 }
-if (!$lang_article) $lang_article = lire_meta('langue_site');
+if (!$lang_article) $lang_article = $GLOBALS['meta']['langue_site'];
 changer_typo($lang_article); # pour l'affichage du texte
 
 // pour l'affichage du virtuel

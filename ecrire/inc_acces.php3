@@ -51,7 +51,7 @@ function creer_pass_aleatoire($longueur = 8, $sel = "") {
 function low_sec($id_auteur) {
 	// Pas d'id_auteur : low_sec
 	if (!$id_auteur = intval($id_auteur)) {
-		if (!$low_sec = lire_meta('low_sec')) {
+		if (!$low_sec = $GLOBALS['meta']['low_sec']) {
 			include_ecrire('inc_meta.php3');
 			ecrire_meta('low_sec', $low_sec = creer_pass_aleatoire());
 			ecrire_metas();
@@ -108,7 +108,7 @@ function ecrire_acces() {
 	$htpasswd = _DIR_SESSIONS . _AUTH_USER_FILE;
 
 	// si .htaccess existe, outrepasser spip_meta
-	if ((lire_meta('creer_htpasswd') == 'non') AND !@file_exists($htaccess)) {
+	if (($GLOBALS['meta']['creer_htpasswd'] == 'non') AND !@file_exists($htaccess)) {
 		@unlink($htpasswd);
 		@unlink($htpasswd."-admin");
 		return;
@@ -180,7 +180,7 @@ function verifier_htaccess($rep) {
 }
 
 function gerer_htaccess() {
-	$mode = lire_meta('creer_htaccess');
+	$mode = $GLOBALS['meta']['creer_htaccess'];
 	$r = spip_query("SELECT extension FROM spip_types_documents");
 	while ($e = spip_fetch_array($r)) {
 		if (is_dir($dir = _DIR_DOC . $e['extension'])) {

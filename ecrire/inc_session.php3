@@ -49,7 +49,7 @@ function fichier_session($id_session, $alea) {
 //
 function ajouter_session($auteur, $id_session) {
 	renouvelle_alea();
-	$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere'));
+	$fichier_session = fichier_session($id_session, $GLOBALS['meta']['alea_ephemere']);
 	$vars = array('id_auteur', 'nom', 'login', 'email', 'statut', 'lang', 'ip_change', 'hash_env');
 
 	$texte = "<"."?php\n";
@@ -63,7 +63,7 @@ function ajouter_session($auteur, $id_session) {
 		fputs($f, $texte);
  		fclose($f);
 	} else {
-		redirige_par_entete(lire_meta("adresse_site") .
+		redirige_par_entete($GLOBALS['meta']["adresse_site"] .
 				    "/spip_test_dirs.php3");
 	}
 }
@@ -76,14 +76,14 @@ function verifier_session($id_session) {
 	// Tester avec alea courant
 	$ok = false;
 	if ($id_session) {
-		$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere'));
+		$fichier_session = fichier_session($id_session, $GLOBALS['meta']['alea_ephemere']);
 		if (@file_exists($fichier_session)) {
 			include($fichier_session);
 			$ok = true;
 		}
 		else {
 			// Sinon, tester avec alea precedent
-			$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere_ancien'));
+			$fichier_session = fichier_session($id_session, $GLOBALS['meta']['alea_ephemere_ancien']);
 			if (@file_exists($fichier_session)) {
 				// Renouveler la session (avec l'alea courant)
 				include($fichier_session);
@@ -107,11 +107,11 @@ function verifier_session($id_session) {
 // Supprimer une session
 //
 function supprimer_session($id_session) {
-	$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere'));
+	$fichier_session = fichier_session($id_session, $GLOBALS['meta']['alea_ephemere']);
 	if (@file_exists($fichier_session)) {
 		@unlink($fichier_session);
 	}
-	$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere_ancien'));
+	$fichier_session = fichier_session($id_session, $GLOBALS['meta']['alea_ephemere_ancien']);
 	if (@file_exists($fichier_session)) {
 		@unlink($fichier_session);
 	}
@@ -156,7 +156,7 @@ function zap_sessions ($id_auteur, $zap) {
 
 	// ne pas se zapper soi-meme
 	if ($s = $GLOBALS['spip_session'])
-		$fichier_session = fichier_session($s, lire_meta('alea_ephemere'));
+		$fichier_session = fichier_session($s, $GLOBALS['meta']['alea_ephemere']);
 
 	$dir = opendir(_DIR_SESSIONS);
 	$t = time();
@@ -244,15 +244,43 @@ function verifier_visiteur() {
 //
 function renouvelle_alea()
 {
-	if (abs(time() -  lire_meta('alea_ephemere_date')) > 2 * 24*3600) {
+	if (abs(time() -  $GLOBALS['meta']['alea_ephemere_date']) > 2 * 24*3600) {
 	  	spip_log("renouvellement de l'alea_ephemere");
 		include_ecrire("inc_session.php3");
 		$alea = md5(creer_uniqid());
-		ecrire_meta('alea_ephemere_ancien', lire_meta('alea_ephemere'));
+		ecrire_meta('alea_ephemere_ancien', $GLOBALS['meta']['alea_ephemere']);
 		ecrire_meta('alea_ephemere', $alea);
 		ecrire_meta('alea_ephemere_date', time());
 		ecrire_metas();
 	}
+}
+
+
+function _action_auteur($action, $id_auteur, $nom_alea) {
+	if (!$id_auteur) {
+		global $connect_id_auteur, $connect_pass;
+		$id_auteur = $connect_id_auteur;
+		$pass = $connect_pass;
+	}
+	else {
+		$result = spip_query("SELECT pass FROM spip_auteurs WHERE id_auteur=$id_auteur");
+		if ($result) if ($row = spip_fetch_array($result)) $pass = $row['pass'];
+	}
+	return md5($action.$id_auteur.$pass .$GLOBALS['meta'][$nom_alea]);
+}
+
+function calculer_action_auteur($action, $id_auteur = 0) {
+	renouvelle_alea();
+	return _action_auteur($action, $id_auteur, 'alea_ephemere');
+}
+
+function verifier_action_auteur($action, $valeur, $id_auteur = 0) {
+	if ($valeur == _action_auteur($action, $id_auteur, 'alea_ephemere'))
+		return true;
+	if ($valeur == _action_auteur($action, $id_auteur, 'alea_ephemere_ancien'))
+		return true;
+	spip_log("verifier action $action $id_auteur : echec");
+	return false;
 }
 
 ?>

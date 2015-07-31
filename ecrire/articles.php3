@@ -19,15 +19,9 @@ if ($var_f)
  else
    include_ecrire("inc_articles.php");
 
-$articles_surtitre = lire_meta("articles_surtitre");
-$articles_soustitre = lire_meta("articles_soustitre");
-$articles_descriptif = lire_meta("articles_descriptif");
-$articles_urlref = lire_meta("articles_urlref");
-$articles_chapeau = lire_meta("articles_chapeau");
-$articles_ps = lire_meta("articles_ps");
-$articles_redac = lire_meta("articles_redac");
-$articles_mots = lire_meta("articles_mots");
-$articles_versions = (lire_meta("articles_versions")=='oui') && $flag_revisions;
+$articles_redac = $GLOBALS['meta']["articles_redac"];
+$articles_mots = $GLOBALS['meta']["articles_mots"];
+$articles_versions = ($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions;
 
 if ($id_article==0) {
 	if ($new!='oui')  redirige_par_entete("./index.php3");
@@ -44,10 +38,10 @@ if ($id_article==0) {
 	if ($row = spip_fetch_array($result_lang_rub))
 			$langue_new = $row["lang"];
 
-	if (!$langue_new) $langue_new = lire_meta('langue_site');
+	if (!$langue_new) $langue_new = $GLOBALS['meta']['langue_site'];
 	$langue_choisie_new = 'non';
 	
-	$forums_publics = substr(lire_meta('forums_publics'),0,3);
+	$forums_publics = substr($GLOBALS['meta']['forums_publics'],0,3);
 
 	$id_article = spip_abstract_insert("spip_articles",
 			"(id_rubrique, statut, date, accepter_forum, lang, langue_choisie)", 
@@ -144,7 +138,7 @@ if ($jour_redac && $flag_editable) {
 
 
 // Appliquer la modification de langue
-if (lire_meta('multi_articles') == 'oui' AND $flag_editable) {
+if ($GLOBALS['meta']['multi_articles'] == 'oui' AND $flag_editable) {
 	list($langue_parent) = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=" . intval($rubrique_article)));
 
 	if ($changer_lang) {

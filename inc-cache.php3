@@ -104,7 +104,7 @@ function retire_caches($chemin = '') {
 	}
 
 	// Et puis une centaine d'autres
-	if (lire_meta('invalider_caches')) {
+	if ($GLOBALS['meta']['invalider_caches']) {
 		$compte = 1;
 		effacer_meta('invalider_caches'); # concurrence
 		ecrire_metas();

@@ -41,7 +41,7 @@ function ecrire_stats() {
 	// Analyse du referer
 	if ($log_referer = $GLOBALS['HTTP_REFERER']) {
 		$url_site_spip = preg_replace(',^((https?|ftp)://)?(www\.)?,i', '',
-			lire_meta('adresse_site'));
+			$GLOBALS['meta']['adresse_site']);
 		if (($url_site_spip<>'')
 		AND strpos('-'.strtolower($log_referer), strtolower($url_site_spip))
 		AND !$_GET['var_recherche'])

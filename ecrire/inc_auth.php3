@@ -14,9 +14,6 @@
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire ("inc_connect.php3");
-include_ecrire ("inc_session.php3");
-
 define("_DIR_LOGIN", _DIR_RESTREINT ? "" : "../");
 define("_DIR_LOGED_IN",   _DIR_RESTREINT ? "" : _DIR_RESTREINT_ABS);
 
@@ -223,7 +220,7 @@ function auth_dist() {
 	// (code presque mort, utilise peut-etre encore sous .htpasswd ?)
 	if ($connect_statut == 'nouveau') {
 		$connect_statut =
-		(lire_meta('accepter_inscriptions') == 'oui') ? '1comite' : '6forum';
+		($GLOBALS['meta']['accepter_inscriptions'] == 'oui') ? '1comite' : '6forum';
 		spip_query("UPDATE spip_auteurs SET statut='$connect_statut'
 			WHERE id_auteur=$connect_id_auteur");
 	}

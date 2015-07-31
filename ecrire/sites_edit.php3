@@ -20,7 +20,7 @@ include_ecrire("inc_rubriques.php3");
 
 include_ecrire ("inc_sites.php3");
 
-$proposer_sites = lire_meta("proposer_sites");
+$proposer_sites = $GLOBALS['meta']["proposer_sites"];
 
 function premiere_rubrique(){
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='0' ORDER BY titre LIMIT 1";
@@ -34,7 +34,7 @@ function premiere_rubrique(){
 }
 
 
-$proposer_sites = lire_meta("proposer_sites");
+$proposer_sites = $GLOBALS['meta']["proposer_sites"];
 
 $query = "SELECT * FROM spip_syndic WHERE id_syndic='$id_syndic'";
 $result = spip_query($query);
@@ -90,7 +90,7 @@ echo "<p>";
 
 if ($new == 'oui'){
 
-	$proposer_sites = lire_meta("proposer_sites");
+	$proposer_sites = $GLOBALS['meta']["proposer_sites"];
 	if ($connect_statut == '0minirezo' OR $proposer_sites > 0) {
 		debut_cadre_relief("site-24.gif");
 		
@@ -160,7 +160,7 @@ echo "<textarea name='descriptif' rows='8' class='forml' cols='40' wrap=soft>";
 echo $descriptif;
 echo "</textarea>\n";
 
-$activer_syndic = lire_meta("activer_syndic");
+$activer_syndic = $GLOBALS['meta']["activer_syndic"];
 
 echo "<input type='hidden' name='syndication_old' value=\"$syndication\">";
 

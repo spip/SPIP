@@ -57,7 +57,7 @@ function boucle_ARTICLES_dist($id_boucle, &$boucles) {
 	if (!$boucle->statut) {
 		if (!$GLOBALS['var_preview']) {
 			$boucle->where[] ="$id_table.statut='publie'";
-			if (lire_meta("post_dates") == 'non')
+			if ($GLOBALS['meta']["post_dates"] == 'non')
 				$boucle->where[] = "$id_table.date < NOW()";
 		} else
 			$boucle->where[] = "$id_table.statut IN ('publie','prop')";
