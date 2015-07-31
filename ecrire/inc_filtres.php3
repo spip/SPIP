@@ -299,12 +299,27 @@ function nom_jour($numdate) {
 }
 
 function jour($numdate) {
+	global $lang;
 	$date_array = recup_date($numdate);
 	if ($date_array)
 		list($annee,$mois,$jour) = $date_array;
-	else
-		return '';
-	if ($jour=="1") $jour="1er";
+	if ($jour=="1") switch($lang) {
+		case 'en':
+			$jour = "1st";
+			break;
+		
+		case 'fr':
+		default:
+			$jour = "1er";
+	}
+	return $jour;
+}
+
+// la meme... mais avec '1' au lieu de '1er'
+function journum($numdate) {
+	$date_array = recup_date($numdate);
+	if ($date_array)
+		list($annee,$mois,$jour) = $date_array;
 	return $jour;
 }
 
