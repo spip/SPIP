@@ -24,8 +24,12 @@ function help_frame ($aide) {
 
 	echo "</head>\n";
 
-	$frame_menu = "<frame src=\"aide_index.php3?aide=$aide&var_lang=$spip_lang&frame=menu\" name=\"gauche\" scrolling=\"auto\" noresize>\n";
-	$frame_body = "<frame src=\"aide_index.php3?aide=$aide&var_lang=$spip_lang&frame=body\" name=\"droite\" scrolling=\"auto\" noresize>\n";
+	$frame_menu = "<frame src=" .
+	  http_php_script('aide_index', "aide=$aide&var_lang=$spip_lang&frame=menu") . 
+	  " name=\"gauche\" scrolling=\"auto\" noresize>\n";
+	$frame_body = "<frame src=" .
+	  http_php_script('aide_index', "aide=$aide&var_lang=$spip_lang&frame=body") .
+	  " name=\"droite\" scrolling=\"auto\" noresize>\n";
 
 	if ($GLOBALS['spip_lang_rtl']) {
 		echo '<frameset cols="*,160" border="0" frameborder="0" framespacing="0">';
@@ -131,13 +135,12 @@ function help_body($aide, $html) {
 	while (preg_match("@(<img([^<>]* +)? src=['\"])"
 		. "((AIDE|IMG)/([-_a-zA-Z0-9]*/?)([^'\"<>]*))@i",
 	$suite, $r)) {
-
-		$image = $r[3];
-		$image_plat = str_replace('/', '-', $image);
-		$f = "aide_index.php3?img=$image_plat";
-
 		$p = strpos($suite, $r[0]);
-		$html .= substr($suite, 0, $p) . $r[1].$f;
+		$html .= substr($suite, 0, $p) .
+		  ($r[1] . 
+		   http_php_script("aide_index",
+				   ("img=" . str_replace('/', '-', $r[3]))));
+
 		$suite = substr($suite, $p + strlen($r[0]));
 	}
 
@@ -207,9 +210,10 @@ table.spip td {
 		echo '<TABLE BORDER=0 WIDTH=100% HEIGHT=60%>
 <TR WIDTH=100% HEIGHT=60%>
 <TD WIDTH=100% HEIGHT=60% ALIGN="center" VALIGN="middle">
-
 <CENTER>
-<img src="aide_index.php3?img=AIDE--logo-spip.gif" alt="SPIP" width="300" height="170" border="0">
+<img src=',
+		  http_php_script("aide_index", "img=AIDE--logo-spip.gif"),
+		  ' alt="SPIP" width="300" height="170" border="0">
 </CENTER>
 </TD></TR></TABLE>';
 	}
@@ -410,7 +414,7 @@ function article($titre, $lien, $statut = "redac") {
 		
 		$texte[$ligne] = '';
 		$id = "ligne$ligne";
-		$url = "aide_index.php3?aide=$lien&frame=body&var_lang=$spip_lang";
+
 		if ($aide == $lien) {
 			$ouvrir_rubrique = 1;
 			$class = "article-actif";
@@ -419,8 +423,9 @@ function article($titre, $lien, $statut = "redac") {
 		else {
 			$class = "article-inactif";
 		}
-		$texte[$ligne] .= "<a class='$class' id='$id' href='$url' target='droite' ".
-			"onClick=\"activer_article('$id');return true;\">$titre</a><br style='clear:both;'>\n";
+		$texte[$ligne] .= "<a class='$class' id='$id' href=" .
+		  http_php_script("aide_index", "aide=$lien&frame=body&var_lang=$spip_lang") .
+		  " target='droite' onClick=\"activer_article('$id');return true;\">$titre</a><br style='clear:both;'>\n";
 	}
 }
 
