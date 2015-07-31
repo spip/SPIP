@@ -55,7 +55,7 @@ function login_explicite($login, $cible, $accepter_visiteurs = false) {
 		$cible = parametre_url($cible, 'var_erreur', '', '&');
 		$cible = parametre_url($cible, 'var_login', '', '&');
 	} else {
-		if (ereg("[?&]url=([^&]*)", $action, $m))
+		if (preg_match("/[?&]url=([^&]*)/", $action, $m))
 			$cible = rawurldecode($m[1]);
 		else
 			$cible = _DIR_RESTREINT ;
