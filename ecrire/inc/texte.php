@@ -524,7 +524,7 @@ function typo($letexte, $echapper=true) {
 function extraire_lien ($regs) {
 	$lien_texte = $regs[1];
 
-	$lien_url = entites_html(trim($regs[3]));
+	$lien_url = entites_html(vider_url($regs[3]));
 	$compt_liens++;
 	$lien_interne = false;
 	if (ereg('^[[:space:]]*(art(icle)?|rub(rique)?|br(.ve)?|aut(eur)?|mot|site|doc(ument)?|im(age|g))?[[:space:]]*([[:digit:]]+)(#.*)?[[:space:]]*$', $lien_url, $match)) {
