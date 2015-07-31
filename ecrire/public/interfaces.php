@@ -27,12 +27,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Cette structure est nécessaire au traitement d'erreur à l'exécution.
  * 
  * Le champ code est inutilisé dans cette classe seule, mais harmonise
- * le traitement d'erreurs. Par contre, un noeud étendant cette classe
- * stocke dedans le code issu de la compilation du noeud.
+ * le traitement d'erreurs.
+ *
+ * @package SPIP\Compilateur\AST
  */
 class Contexte {
 	/**
 	 * Description du squelette
+	 *
+	 * Sert pour la gestion d'erreur et la production de code dependant du contexte
 	 *
 	 * Peut contenir les index :
 	 * - nom : Nom du fichier de cache
@@ -40,80 +43,217 @@ class Contexte {
 	 * - sourcefile : Chemin du squelette
 	 * - squelette : Code du squelette
 	 * - id_mere : Identifiant de la boucle parente
+	 * - documents : Pour embed et img dans les textes
+	 * - session : Pour un cache sessionné par auteur
 	 * - niv : Niveau de tabulation
 	 *
-	 * @var array 
-	**/
-	var $descr = array();
-	/** @var string Identifiant de la boucle */
-	var $id_boucle = '';
-	/** @var int Numéro de ligne dans le code source du squelette */
-	var $ligne = 0;
-	/** @var string Langue d'exécution */
-	var $lang = '';
-	/** @var string Résultat de la compilation: toujours une expression PHP */
-	var $code = '';
+	 * @var array */
+	public $descr = array();
+
+	/**
+	 * Identifiant de la boucle
+	 * @var string */
+	public $id_boucle = '';
+
+	/**
+	 * Numéro de ligne dans le code source du squelette
+	 * @var int */
+	public $ligne = 0;
+
+	/**
+	 * Langue d'exécution
+	 * @var string */
+	public $lang = '';
+
+	/**
+	 * Résultat de la compilation: toujours une expression PHP
+	 * @var string */
+	public $code = '';
 }
 
 
 /**
- *  Description d'un texte
+ * Description d'un texte
+ *
+ * @package SPIP\Compilateur\AST
 **/
 class Texte {
-	/** @var string Type de noeud */
+	/**
+	 * Type de noeud 
+	 * @var string */
 	public $type = 'texte';
 
-	/** @var string Le texte */
+	/**
+	 * Le texte
+	 * @var string */
 	public $texte;
 
 	/**
-	 * @var string
-	 *    Contenu avant le texte. Vide ou apostrophe simple ou double
-	 *    si le texte en était entouré
-	 */
+	 * Contenu avant le texte.
+	 *
+	 * Vide ou apostrophe simple ou double si le texte en était entouré
+	 * @var string|array */
 	public $avant = "";
 
 	/**
-	 * @var string
-	 *    Contenu après le texte. Vide ou apostrophe simple ou double
-	 *    si le texte en était entouré
-	 */
+	 * Contenu après le texte.
+	 *
+	 * Vide ou apostrophe simple ou double si le texte en était entouré
+	 * @var string|array */
 	public $apres = "";
 
-	/** @var int Numéro de ligne dans le code source du squelette */
+	/**
+	 * Numéro de ligne dans le code source du squelette
+	 * @var int  */
 	public $ligne = 0;
 }
 
 /**
- *  Description d'une inclusion de squelette
+ * Description d'une inclusion de squelette
+ *
+ * @package SPIP\Compilateur\AST
 **/
 class Inclure {
-	var $type = 'include';
-	var $texte;
-	var $avant, $apres = ''; // inutilises mais generiques
-	var $ligne = 0;
-	var $param = array();  //  valeurs des params
+	/**
+	 * Type de noeud 
+	 * @var string */
+	public $type = 'include';
+
+	/**
+	 * Nom d'un fichier inclu
+	 * 
+	 * - Objet Texte si inclusion d'un autre squelette
+	 * - chaîne si inclusion d'un fichier PHP directement
+	 * @var string|Texte */
+	public $texte;
+
+	/**
+	 * Inutilisé, propriété générique de l'AST
+	 * @var string|array */
+	public $avant = '';
+
+	/**
+	 * Inutilisé, propriété générique de l'AST
+	 * @var string|array */
+	public $apres = '';
+
+	/**
+	 * Numéro de ligne dans le code source du squelette
+	 * @var int  */
+	public $ligne = 0;
+
+	/**
+	 * Valeurs des paramètres
+	 * @var array */
+	public $param = array();
 }
 
 
 /**
  * Description d'une boucle
+ *
+ * @package SPIP\Compilateur\AST
 **/
 class Boucle {
-	var $type = 'boucle';
-	var $id_boucle;
-	var $id_parent ='';
-	var $avant, $milieu, $apres, $altern = '';
-	var $lang_select;
-	var $type_requete;
-	var $table_optionnelle = false; # si ? dans <BOUCLE_x(table ?)>
-	var $sql_serveur = '';
-	var $param = array();
-	var $criteres = array();
-	var $separateur = array();
-	var $jointures = array();
-	var $jointures_explicites = false;
-	var $doublons;
+	/**
+	 * Type de noeud 
+	 * @var string */
+	public $type = 'boucle';
+
+	/**
+	 * Identifiant de la boucle
+	 * @var string */
+	public $id_boucle;
+
+	/**
+	 * Identifiant de la boucle parente
+	 * @var string */
+	public $id_parent ='';
+
+	/**
+	 * Partie optionnelle avant
+	 * @var string|array */
+	public $avant = '';
+
+	/**
+	 * Pour chaque élément
+	 * @var string|array */
+	public $milieu = '';
+
+	/**
+	 * Partie optionnelle après
+	 * @var string|array */
+	public $apres = '';
+
+	/**
+	 * Partie alternative, si pas de résultat dans la boucle
+	 * @var string|array */
+	public $altern = '';
+
+	/**
+	 * La boucle doit-elle sélectionner la langue ?
+	 * @var string|null */
+	public $lang_select;
+
+	/**
+	 * Alias de table d'application de la requête ou nom complet de la table SQL
+	 * @var string|null */
+	public $type_requete;
+
+	/**
+	 * La table est elle optionnelle ?
+	 * 
+	 * Si oui, aucune erreur ne sera générée si la table demandée n'est pas présente
+	 * @var bool */
+	public $table_optionnelle = false;
+
+	/**
+	 * Nom du fichier de connexion
+	 * @var string */
+	public $sql_serveur = '';
+
+	/**
+	 * Paramètres de la boucle
+	 * 
+	 * Description des paramètres passés à la boucle, qui servent ensuite
+	 * au calcul des critères
+	 *
+	 * @var array */
+	public $param = array();
+
+	/**
+	 * Critères de la boucle
+	 * @var Critere[] */
+	public $criteres = array();
+
+	/**
+	 * Textes insérés entre 2 éléments de boucle (critère inter)
+	 * @var string[] */
+	public $separateur = array();
+
+	/**
+	 * Liste des jointures possibles avec cette table
+	 *
+	 * Les jointures par défaut de la table sont complétées en priorité
+	 * des jointures déclarées explicitement sur la boucle
+	 * @see base_trouver_table_dist()
+	 * @var array */
+	public $jointures = array();
+
+	/**
+	 * Jointures explicites avec cette table
+	 *
+	 * Ces jointures sont utilisées en priorité par rapport aux jointures
+	 * normales possibles pour retrouver les colonnes demandées extérieures
+	 * à la boucle.
+	 * @var string|bool */
+	public $jointures_explicites = false;
+
+	/**
+	 * Nom de la variable PHP stockant le noms de doublons utilisés "$doublons_index"
+	 * @var string|null */
+	public $doublons;
+
 	var $partie, $total_parties,$mode_partie='';
 	var $externe = ''; # appel a partir d'une autre boucle (recursion)
 	// champs pour la construction de la requete SQL
@@ -140,8 +280,30 @@ class Boucle {
 	var $return;
 	var $numrows = false;
 	var $cptrows = false;
-	var $ligne = 0;
-	var $descr =  array(); # noms des fichiers source et but etc
+
+	/**
+	 * Description du squelette
+	 *
+	 * Sert pour la gestion d'erreur et la production de code dependant du contexte
+	 *
+	 * Peut contenir les index :
+	 * - nom : Nom du fichier de cache
+	 * - gram : Nom de la grammaire du squelette (détermine le phraseur à utiliser)
+	 * - sourcefile : Chemin du squelette
+	 * - squelette : Code du squelette
+	 * - id_mere : Identifiant de la boucle parente
+	 * - documents : Pour embed et img dans les textes
+	 * - session : Pour un cache sessionné par auteur
+	 * - niv : Niveau de tabulation
+	 *
+	 * @var array */
+	public $descr = array();
+
+	/**
+	 * Numéro de ligne dans le code source du squelette
+	 * @var int */
+	public $ligne = 0;
+
 
 	var $modificateur = array(); // table pour stocker les modificateurs de boucle tels que tout, plat ..., utilisable par les plugins egalement
 
@@ -157,43 +319,149 @@ class Boucle {
  * Description d'un critère de boucle
  *
  * Sous-noeud de Boucle
+ *
+ * @package SPIP\Compilateur\AST
 **/
 class Critere {
-	var $op;
-	var $not;
-	var $exclus;
+	/**
+	 * Type de noeud 
+	 * @var string */
+	public $type = 'critere';
+
+	/**
+	 * Opérateur (>, <, >=, IN, ...) 
+	 * @var null|string */
+	public $op;
+
+	/**
+	 * Présence d'une négation (truc !op valeur)
+	 * @var null|string */
+	public $not;
+
+	/**
+	 * Présence d'une exclusion (!truc op valeur)
+	 * @var null|string */
+	public $exclus;
+
+	/**
+	 * Paramètres du critère
+	 * - $param[0] : élément avant l'opérateur
+	 * - $param[1..n] : éléments après l'opérateur
+	 * @var array */
 	var $param = array();
-	var $ligne = 0;
+
+	/**
+	 * Numéro de ligne dans le code source du squelette
+	 * @var int */
+	public $ligne = 0;
 }
 
 /**
  * Description d'un champ (balise SPIP)
+ *
+ * @package SPIP\Compilateur\AST
 **/
 class Champ {
-	var $type = 'champ';
-	var $nom_champ;
-	var $nom_boucle= ''; // seulement si boucle explicite
-	var $avant, $apres; // tableaux d'objets
-	var $etoile;
-	var $param = array();  // filtre explicites
-	var $fonctions = array();  // source des filtres (compatibilite)
-	// champs pour la production de code
-	var $id_boucle;
-	var $boucles;
-	var $type_requete;
-	// resultat de la compilation:  toujours une expression PHP.
-	// Chaine vide comme valeur par defaut (pour balise indefinie etc)
-	var $code = ''; 
-	var $interdire_scripts = true; // false si on est sur de cette balise
-	// tableau pour la production de code dependant du contexte
-	// id_mere;  pour TOTAL_BOUCLE hors du corps
-	// document; pour embed et img dans les textes
-	// sourcefile; pour DOSSIER_SQUELETTE
-	var $descr = array();
-	// pour localiser les erreurs
-	var $ligne = 0;
-	// un flag pour reperer les balises calculees par une fonction explicite
-	var $balise_calculee = false;
+	/**
+	 * Type de noeud 
+	 * @var string */
+	public $type = 'champ';
+
+	/**
+	 * Nom du champ demandé. Exemple 'ID_ARTICLE' 
+	 * @var string|null */
+	public $nom_champ;
+
+	/**
+	 * Identifiant de la boucle parente si explicité
+	 * @var string|null */
+	public $nom_boucle= '';
+
+	/**
+	 * Partie optionnelle avant
+	 * @var null|string|array */
+	public $avant;
+
+	/**
+	 * Partie optionnelle après
+	 * @var null|string|array */
+	public $apres;
+
+	/**
+	 * Étoiles : annuler des automatismes
+	 *
+	 * - '*' annule les filtres automatiques
+	 * - '**' annule en plus les protections de scripts
+	 * @var null|string */
+	public $etoile;
+
+	/**
+	 * Arguments et filtres explicites sur la balise
+	 * - $param[0] contient les arguments de la balise
+	 * - $param[1..n] contient les filtres à appliquer à la balise
+	 * @var array */
+	public $param = array(); 
+
+	/**
+	 * Source des filtres  (compatibilité) (?)
+	 * @var array|null */
+	public $fonctions = array();
+
+	/**
+	 * Identifiant de la boucle
+	 * @var string */
+	public $id_boucle = '';
+
+	/**
+	 * AST du squelette, liste de toutes les boucles
+	 * @var Boucles[] */
+	public $boucles;
+
+	/**
+	 * Alias de table d'application de la requête ou nom complet de la table SQL
+	 * @var string|null */
+	public $type_requete;
+
+	/**
+	 * Résultat de la compilation: toujours une expression PHP
+	 * @var string */
+	public $code = '';
+
+	/**
+	 * Interdire les scripts
+	 * 
+	 * false si on est sûr de cette balise
+	 * @see interdire_scripts()
+	 * @var bool */
+	public $interdire_scripts = true;
+
+	/**
+	 * Description du squelette
+	 *
+	 * Sert pour la gestion d'erreur et la production de code dependant du contexte
+	 *
+	 * Peut contenir les index :
+	 * - nom : Nom du fichier de cache
+	 * - gram : Nom de la grammaire du squelette (détermine le phraseur à utiliser)
+	 * - sourcefile : Chemin du squelette
+	 * - squelette : Code du squelette
+	 * - id_mere : Identifiant de la boucle parente
+	 * - documents : Pour embed et img dans les textes
+	 * - session : Pour un cache sessionné par auteur
+	 * - niv : Niveau de tabulation
+	 *
+	 * @var array */
+	public $descr = array();
+
+	/**
+	 * Numéro de ligne dans le code source du squelette
+	 * @var int */
+	public $ligne = 0;
+
+	/**
+	 * Drapeau pour reperer les balises calculées par une fonction explicite
+	 * @var bool */
+	public $balise_calculee = false;
 }
 
 
@@ -201,32 +469,118 @@ class Champ {
  * Description d'une chaîne de langue
 **/
 class Idiome {
-	var $type = 'idiome';
-	var $nom_champ = ""; // la chaine a traduire
-	var $module = ""; // son module de definition
-	var $arg = array(); // les arguments a passer a la chaine
-	var $param = array(); // les filtres a appliquer au resultat
-	var $fonctions = array(); // source des filtres  (compatibilite)
-	var $avant, $apres; // inutilises mais faut = ci-dessus
-	// champs pour la production de code, cf ci-dessus
-	var $id_boucle;
-	var $boucles;
-	var $type_requete;
-	// resultat de la compilation:  toujours une expression PHP.
-	// Chaine vide comme valeur par defaut (n'arrive pas normalement)
-	var $code = '';
-	var $interdire_scripts = false;
-	var $descr = array();
-	var $ligne = 0;
+	/**
+	 * Type de noeud 
+	 * @var string */
+	public $type = 'idiome';
+
+	/**
+	 * Clé de traduction demandée. Exemple 'item_oui'
+	 * @var string */
+	public $nom_champ = "";
+
+	/**
+	 * Module de langue où chercher la clé de traduction. Exemple 'medias'
+	 * @var string */
+	public $module = "";
+
+	/**
+	 * Arguments à passer à la chaîne
+	 * @var array */
+	public $arg = array();
+
+	/**
+	 * Filtres à appliquer au résultat
+	 * @var array */
+	public $param = array();
+
+	/**
+	 * Source des filtres  (compatibilité) (?)
+	 * @var array|null */
+	public $fonctions = array();
+
+	/**
+	 * Inutilisé, propriété générique de l'AST
+	 * @var string|array */
+	public $avant = '';
+
+	/**
+	 * Inutilisé, propriété générique de l'AST
+	 * @var string|array */
+	public $apres = '';
+
+	/**
+	 * Identifiant de la boucle
+	 * @var string */
+	public $id_boucle = '';
+
+	/**
+	 * AST du squelette, liste de toutes les boucles
+	 * @var Boucles[] */
+	public $boucles;
+
+	/**
+	 * Alias de table d'application de la requête ou nom complet de la table SQL
+	 * @var string|null */
+	public $type_requete;
+
+	/**
+	 * Résultat de la compilation: toujours une expression PHP
+	 * @var string */
+	public $code = '';
+
+	/**
+	 * Interdire les scripts
+	 * @see interdire_scripts()
+	 * @var bool */
+	public $interdire_scripts = false;
+
+	/**
+	 * Description du squelette
+	 *
+	 * Sert pour la gestion d'erreur et la production de code dependant du contexte
+	 *
+	 * Peut contenir les index :
+	 * - nom : Nom du fichier de cache
+	 * - gram : Nom de la grammaire du squelette (détermine le phraseur à utiliser)
+	 * - sourcefile : Chemin du squelette
+	 * - squelette : Code du squelette
+	 * - id_mere : Identifiant de la boucle parente
+	 * - documents : Pour embed et img dans les textes
+	 * - session : Pour un cache sessionné par auteur
+	 * - niv : Niveau de tabulation
+	 *
+	 * @var array */
+	public $descr = array();
+
+	/**
+	 * Numéro de ligne dans le code source du squelette
+	 * @var int */
+	public $ligne = 0;
 }
 
 /**
  * Description d'un texte polyglotte (<multi>)
+ *
+ * @package SPIP\Compilateur\AST
 **/
 class Polyglotte {
-	var $type = 'polyglotte';
-	var $traductions = array(); // les textes ou choisir
-	var $ligne = 0;
+	/**
+	 * Type de noeud 
+	 * @var string */
+	public $type = 'polyglotte';
+
+	/**
+	 * Tableau des traductions possibles classées par langue
+	 *
+	 * Tableau code de langue => texte
+	 * @var array */
+	var $traductions = array();
+
+	/**
+	 * Numéro de ligne dans le code source du squelette
+	 * @var int */
+	public $ligne = 0;
 }
 
 

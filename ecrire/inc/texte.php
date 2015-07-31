@@ -75,12 +75,28 @@ function echappe_js($t,$class=' class="echappe-js"') {
 }
 
 
-// Securite : empecher l'execution de code PHP, en le transformant en joli code
-// dans l'espace prive, cette fonction est aussi appelee par propre et typo
-// si elles sont appelees en direct
-// il ne faut pas desactiver globalement la fonction dans l'espace prive car elle protege
-// aussi les balises des squelettes qui ne passent pas forcement par propre ou typo apres
-// http://doc.spip.org/@interdire_scripts
+
+/**
+ * Empêcher l'exécution de code PHP et JS
+ *
+ * Sécurité : empêcher l'exécution de code PHP, en le transformant en joli code
+ * dans l'espace privé. Cette fonction est aussi appelée par propre et typo.
+ * 
+ * De la même manière, la fonction empêche l'exécution de JS mais selon le mode
+ * de protection déclaré par la globale filtrer_javascript :
+ * - -1 : protection dans l'espace privé et public
+ * - 0  : protection dans l'espace public
+ * - 1  : aucune protection
+ * 
+ * Il ne faut pas désactiver globalement la fonction dans l'espace privé car elle protège
+ * aussi les balises des squelettes qui ne passent pas forcement par propre ou typo après
+ * si elles sont appelées en direct
+ * 
+ * @param string $arg
+ *     Code à protéger
+ * @return string
+ *     Code protégé
+**/
 function interdire_scripts($arg) {
 	// on memorise le resultat sur les arguments non triviaux
 	static $dejavu = array();
