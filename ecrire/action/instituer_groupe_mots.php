@@ -80,8 +80,7 @@ function action_instituer_groupe_mots_post($id_groupe)
 function action_instituer_groupe_mots_get($table)
 {
 	$titre = _T('info_mot_sans_groupe');
-	spip_log("creation groupe $table");
-	$id_groupe = sql_insert("spip_groupes_mots", array(
+	$id_groupe = sql_insertq("spip_groupes_mots", array(
 		'titre' => $titre,
 		'unseul' => 'non',
 		'obligatoire' => 'non',
