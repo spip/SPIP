@@ -300,7 +300,7 @@ fin_boite_info();
 
 
 echo "<p><center>";
-	icone (_T('icone_voir_sites_references'), "sites_tous.php3", "site-24.gif","rien.gif");
+	icone (_T('icone_voir_sites_references'), http_php_scriptnq("sites_tous",""), "site-24.gif","rien.gif");
 echo "</center>";
 
 if ($id_syndic AND $flag_administrable)

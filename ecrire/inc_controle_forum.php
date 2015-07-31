@@ -37,7 +37,7 @@ SELECT id_article, titre, statut FROM spip_articles WHERE id_article='$forum_id_
 	  $statut = $row['statut'];
 	  if ($forum_stat == "prive" OR $forum_stat == "privoff") {
 	    return array('pref' => _T('item_reponse_article'),
-			 'url' => "articles.php3?id_article=$id_article",
+			 'url' => http_php_scriptnq("articles","id_article=$id_article"),
 			 'type' => 'id_article',
 			 'valeur' => $id_article,
 			 'titre' => $titre);
@@ -68,7 +68,7 @@ SELECT * FROM spip_syndic WHERE id_syndic='$forum_id_syndic'"));
 	  $titre = $row['nom_site'];
 	  $statut = $row['statut'];
 	  return array('pref' => _T('lien_reponse_site_reference'),
-		       'url' => "sites.php3?id_syndic=$id_syndic",
+		       'url' => http_php_scriptnq("sites","id_syndic=$id_syndic"),
 		       'type' => 'id_syndic',
 		       'valeur' => $id_syndic,
 		       'titre' => $titre);
@@ -81,7 +81,7 @@ SELECT * FROM spip_breves WHERE id_breve='$forum_id_breve'"));
 	  $titre = $row['titre'];
 	  if ($forum_stat == "prive") {
 	    return array('pref' => _T('lien_reponse_breve'),
-			 'url' => "breves_voir.php3?id_breve=$id_breve",
+			 'url' => http_php_scriptnq("breves_voir","id_breve=$id_breve"),
 			 'type' => 'id_breve',
 			 'valeur' => $id_breve,
 			 'titre' => $titre);

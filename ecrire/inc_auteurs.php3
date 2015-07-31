@@ -96,14 +96,14 @@ fin_boite_info();
 if ($connect_statut == '0minirezo') {
 
 	debut_raccourcis();
-	icone_horizontale(_T('icone_creer_nouvel_auteur'), "auteur_infos.php3?new=oui", "auteur-24.gif", "creer.gif");
-	icone_horizontale(_T('icone_informations_personnelles'), "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-24.gif","rien.gif");
+	icone_horizontale(_T('icone_creer_nouvel_auteur'), http_php_scriptnq("auteur_infos","new=oui"), "auteur-24.gif", "creer.gif");
+	icone_horizontale(_T('icone_informations_personnelles'), http_php_scriptnq("auteurs_edit","id_auteur=$connect_id_auteur"), "fiche-perso-24.gif","rien.gif");
 
 	if (spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE statut='6forum' LIMIT 1"))) {
 		if ($visiteurs == "oui")
-			icone_horizontale (_T('icone_afficher_auteurs'), "auteurs.php3", "auteur-24.gif", "");
+			icone_horizontale (_T('icone_afficher_auteurs'), http_php_scriptnq("auteurs",""), "auteur-24.gif", "");
 		else
-			icone_horizontale (_T('icone_afficher_visiteurs'), "auteurs.php3?visiteurs=oui", "auteur-24.gif", "");
+			icone_horizontale (_T('icone_afficher_visiteurs'), http_php_scriptnq("auteurs","visiteurs=oui"), "auteur-24.gif", "");
 	}
 	fin_raccourcis();
 }

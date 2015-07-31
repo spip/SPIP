@@ -414,7 +414,7 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 
 	if ($statut == 'publie' AND $type == 'normal') {
 	  echo "\n<table align='left'><tr><td>";
-	  icone (_T('icone_arret_discussion'), "messagerie.php3?id_message=$id_message&supp_dest=$connect_id_auteur", "messagerie-24.gif", "supprimer.gif");
+	  icone (_T('icone_arret_discussion'), http_php_scriptnq("messagerie","id_message=$id_message&supp_dest=$connect_id_auteur"), "messagerie-24.gif", "supprimer.gif");
 	  echo "</td></tr></table>";
 	}
 

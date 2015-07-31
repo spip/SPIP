@@ -79,7 +79,7 @@ if ($new != "oui") {
 	echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 	echo "<tr width='100%'>";
 	echo "<td>";
-		icone(_T('icone_retour'), "breves_voir.php3?id_breve=$id_breve", "breve-24.gif", "rien.gif");
+		icone(_T('icone_retour'), http_php_scriptnq("breves_voir","id_breve=$id_breve"), "breve-24.gif", "rien.gif");
 	
 	echo "</td>";
 	echo "<td>", http_img_pack("rien.gif", ' ', "width='10'"), "</td>\n";

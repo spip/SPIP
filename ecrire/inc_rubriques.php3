@@ -343,8 +343,8 @@ function afficher_enfant_rub($id_rubrique, $afficher_bouton_creer=false) {
 	
 	echo "<tr><td style='text-align: $spip_lang_right;' valign='bottom'><div align='$spip_lang_right'>";
 	if ($afficher_bouton_creer) {
-		if ($id_rubrique == "0") icone(_T('icone_creer_rubrique'), "rubriques_edit.php3?new=oui&retour=nav", "secteur-24.gif", "creer.gif");
-		else  icone(_T('icone_creer_sous_rubrique'), "rubriques_edit.php3?new=oui&retour=nav&id_parent=$id_rubrique", "rubrique-24.gif", "creer.gif");
+		if ($id_rubrique == "0") icone(_T('icone_creer_rubrique'), http_php_scriptnq("rubriques_edit","new=oui&retour=nav"), "secteur-24.gif", "creer.gif");
+		else  icone(_T('icone_creer_sous_rubrique'), http_php_scriptnq("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.gif", "creer.gif");
 		echo "<p>";
 	}
 	echo "</div></td></tr>";

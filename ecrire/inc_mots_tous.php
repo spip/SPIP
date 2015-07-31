@@ -216,17 +216,17 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 		echo "\n<table cellpadding=0 cellspacing=0 border=0 width=100%>";
 		echo "<tr>";
 		echo "<td>";
-		icone(_T('icone_modif_groupe_mots'), "mots_type.php3?id_groupe=$id_groupe", "groupe-mot-24.gif", "edit.gif");
+		icone(_T('icone_modif_groupe_mots'), http_php_scriptnq("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif");
 		echo "</td>";
 		if ($supprimer_groupe) {
 			echo "<td>";
-			icone(_T('icone_supprimer_groupe_mots'), "mots_tous.php3?supp_group=$id_groupe", "groupe-mot-24.gif", "supprimer.gif");
+			icone(_T('icone_supprimer_groupe_mots'), http_php_scriptnq("mots_tous","supp_group=$id_groupe"), "groupe-mot-24.gif", "supprimer.gif");
 			echo "</td>";
 			echo "<td> &nbsp; </td>"; // Histoire de forcer "supprimer" un peu plus vers la gauche
 		}
 		echo "<td>";
 		echo "<div align='$spip_lang_right'>";
-		icone(_T('icone_creation_mots_cles'), "mots_edit.php3?new=oui&redirect=mots_tous.php3&id_groupe=$id_groupe", "mot-cle-24.gif", "creer.gif");
+		icone(_T('icone_creation_mots_cles'), http_php_scriptnq("mots_edit","new=oui&redirect=mots_tous.php3&id_groupe=$id_groupe"), "mot-cle-24.gif", "creer.gif");
 		echo "</div>";
 		echo "</td></tr></table>";
 	}	
@@ -237,7 +237,7 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 
 if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques  AND !$conf_mot){
 	echo "<p>&nbsp;</p><div align='right'>";
-	icone(_T('icone_creation_groupe_mots'), "mots_type.php3?new=oui", "groupe-mot-24.gif", "creer.gif");
+	icone(_T('icone_creation_groupe_mots'), http_php_scriptnq("mots_type","new=oui"), "groupe-mot-24.gif", "creer.gif");
 	echo "</div>";
 }
 

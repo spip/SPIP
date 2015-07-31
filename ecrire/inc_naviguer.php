@@ -215,15 +215,15 @@ function raccourcis_naviguer($id_rubrique, $id_parent)
 
 	debut_raccourcis();
 	
-	icone_horizontale(_T('icone_tous_articles'), "articles_page.php3", "article-24.gif");
+	icone_horizontale(_T('icone_tous_articles'), http_php_scriptnq("articles_page",""), "article-24.gif");
 	
 	if (spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1")) > 0) {
 		if ($id_rubrique > 0)
-			icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?id_rubrique=$id_rubrique&new=oui", "article-24.gif","creer.gif");
+			icone_horizontale(_T('icone_ecrire_article'), http_php_scriptnq("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.gif","creer.gif");
 	
 		$activer_breves = $GLOBALS['meta']["activer_breves"];
 		if ($activer_breves != "non" AND $id_parent == "0" AND $id_rubrique != "0") {
-			icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?id_rubrique=$id_rubrique&new=oui", "breve-24.gif","creer.gif");
+			icone_horizontale(_T('icone_nouvelle_breve'), http_php_scriptnq("breves_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.gif","creer.gif");
 		}
 	}
 	else {
@@ -366,7 +366,7 @@ if ($relief) {
 
 	if ($id_rubrique > 0){
 	  echo "<div align='$spip_lang_right'>";
-	  icone(_T('icone_ecrire_article'), "articles_edit.php3?id_rubrique=$id_rubrique&new=oui", "article-24.gif", "creer.gif");
+	  icone(_T('icone_ecrire_article'), http_php_scriptnq("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.gif", "creer.gif");
 	  echo "</div><p>";
 	}
 
@@ -378,7 +378,7 @@ if ($relief) {
 
 	if ($id_parent == "0" AND $id_rubrique != "0" AND $activer_breves!="non"){
 	  echo "<div align='$spip_lang_right'>";
-	  icone(_T('icone_nouvelle_breve'), "breves_edit.php3?id_rubrique=$id_rubrique&new=oui", "breve-24.gif", "creer.gif");
+	  icone(_T('icone_nouvelle_breve'), http_php_scriptnq("breves_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.gif", "creer.gif");
 	  echo "</div><p>";
 	}
 
@@ -428,7 +428,7 @@ function montre_naviguer($id_rubrique, $titre, $descriptif, $logo, $flag_editabl
   if ($id_rubrique > 0 AND $flag_editable) {
 	echo "<td>", http_img_pack("rien.gif", ' ', "width='5'") ."</td>\n";
 	echo "<td  align='$spip_lang_right' valign='top'>";
-	icone(_T('icone_modifier_rubrique'), "rubriques_edit.php3?id_rubrique=$id_rubrique&retour=nav", $logo, "edit.gif");
+	icone(_T('icone_modifier_rubrique'), http_php_scriptnq("rubriques_edit","id_rubrique=$id_rubrique&retour=nav"), $logo, "edit.gif");
 	echo "</td>";
 }
   echo "</tr>\n";

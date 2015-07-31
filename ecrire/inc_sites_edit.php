@@ -54,7 +54,7 @@ echo "<tr width='100%'>";
 
 if ($new != 'oui') {
 	echo "<td>";
-	icone(_T('icone_retour'), "sites.php3?id_syndic=$id_syndic", 'site-24.gif', "rien.gif");
+	icone(_T('icone_retour'), http_php_scriptnq("sites","id_syndic=$id_syndic"), 'site-24.gif', "rien.gif");
 	echo "</td>";
 	echo "<td>". http_img_pack('rien.gif', " ", "width='10'") . "</td>\n";
 }

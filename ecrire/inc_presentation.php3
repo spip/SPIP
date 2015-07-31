@@ -1971,19 +1971,19 @@ function barre_onglets($rubrique, $onglet){
 	debut_onglet();
 
 	if ($rubrique == "statistiques") {
-	//	onglet(_T('onglet_evolution_visite_mod'), "statistiques_visites.php3", "evolution", $onglet, "statistiques-24.gif");
-	//	onglet(_T('titre_liens_entrants'), "statistiques_referers.php3", "referers", $onglet, "referers-24.gif");
+	//	onglet(_T('onglet_evolution_visite_mod'), http_php_scriptnq("statistiques_visites",""), "evolution", $onglet, "statistiques-24.gif");
+	//	onglet(_T('titre_liens_entrants'), http_php_scriptnq("statistiques_referers",""), "referers", $onglet, "referers-24.gif");
 	}
 	if ($rubrique == "repartition") {
 		if ($GLOBALS['meta']['multi_articles'] == 'oui' OR $GLOBALS['meta']['multi_rubriques'] == 'oui') {
 			onglet(_T('onglet_repartition_rubrique'), "statistiques_repartition.php", "rubriques", $onglet, "rubrique-24.gif");
-			onglet(_T('onglet_repartition_lang'), "statistiques_lang.php3", "langues", $onglet, "langues-24.gif");
+			onglet(_T('onglet_repartition_lang'), http_php_scriptnq("statistiques_lang",""), "langues", $onglet, "langues-24.gif");
 		}
 	}
 
 	if ($rubrique == "rep_depuis") {
-		onglet(_T('icone_repartition_actuelle'), "statistiques_lang.php3", "popularite", $onglet);
-		onglet(_T('onglet_repartition_debut'), "statistiques_lang.php3?critere=debut", "debut", $onglet);
+		onglet(_T('icone_repartition_actuelle'), http_php_scriptnq("statistiques_lang",""), "popularite", $onglet);
+		onglet(_T('onglet_repartition_debut'), http_php_scriptnq("statistiques_lang","critere=debut"), "debut", $onglet);
 
 	}
 
@@ -1994,47 +1994,47 @@ function barre_onglets($rubrique, $onglet){
 	}
 
 	if ($rubrique == "stat_referers") {
-		onglet(ucfirst(_T('date_aujourdhui')), "statistiques_referers.php3", "jour", $onglet);
-		onglet(ucfirst(_T('date_hier')), "statistiques_referers.php3?jour=veille", "veille", $onglet);
+		onglet(ucfirst(_T('date_aujourdhui')), http_php_scriptnq("statistiques_referers",""), "jour", $onglet);
+		onglet(ucfirst(_T('date_hier')), http_php_scriptnq("statistiques_referers","jour=veille"), "veille", $onglet);
 	}
 
 	if ($rubrique == "administration"){
-		onglet(_T('onglet_save_restaur_base'), "admin_tech.php3", "sauver", $onglet, "base-24.gif");
-		onglet(_T('onglet_affacer_base'), "admin_effacer.php3", "effacer", $onglet, "supprimer.gif");
+		onglet(_T('onglet_save_restaur_base'), http_php_scriptnq("admin_tech",""), "sauver", $onglet, "base-24.gif");
+		onglet(_T('onglet_affacer_base'), http_php_scriptnq("admin_effacer",""), "effacer", $onglet, "supprimer.gif");
 	}
 
 	if ($rubrique == "auteur"){
-		onglet(_T('onglet_auteur'), "auteurs_edit.php3?id_auteur=$id_auteur", "auteur", $onglet, "auteur-24.gif");
-		onglet(_T('onglet_informations_personnelles'), "auteur_infos.php3?id_auteur=$id_auteur", "infos", $onglet, "fiche-perso-24.gif");
+		onglet(_T('onglet_auteur'), http_php_scriptnq("auteurs_edit","id_auteur=$id_auteur"), "auteur", $onglet, "auteur-24.gif");
+		onglet(_T('onglet_informations_personnelles'), http_php_scriptnq("auteur_infos","id_auteur=$id_auteur"), "infos", $onglet, "fiche-perso-24.gif");
 	}
 
 	if ($rubrique == "configuration"){
-		onglet(_T('onglet_contenu_site'), "configuration.php3", "contenu", $onglet, "racine-site-24.gif");
-		onglet(_T('onglet_interactivite'), "config-contenu.php3", "interactivite", $onglet, "forum-interne-24.gif");
-		onglet(_T('onglet_fonctions_avances'), "config-fonctions.php3", "fonctions", $onglet, "image-24.gif");
+		onglet(_T('onglet_contenu_site'), http_php_scriptnq("configuration",""), "contenu", $onglet, "racine-site-24.gif");
+		onglet(_T('onglet_interactivite'), http_php_scriptnq("config-contenu",""), "interactivite", $onglet, "forum-interne-24.gif");
+		onglet(_T('onglet_fonctions_avances'), http_php_scriptnq("config-fonctions",""), "fonctions", $onglet, "image-24.gif");
 	}
 
 	if ($rubrique == "config_lang") {
-		onglet(_T('info_langue_principale'), "config-lang.php3", "langues", $onglet, "langues-24.gif");
-		onglet(_T('info_multilinguisme'), "config-multilang.php3", "multi", $onglet, "traductions-24.gif");
+		onglet(_T('info_langue_principale'), http_php_scriptnq("config-lang",""), "langues", $onglet, "langues-24.gif");
+		onglet(_T('info_multilinguisme'), http_php_scriptnq("config-multilang",""), "multi", $onglet, "traductions-24.gif");
 		if ($GLOBALS['meta']['multi_articles'] == "oui" OR $GLOBALS['meta']['multi_rubriques'] == "oui") {
-			onglet(_T('module_fichiers_langues'), "lang_raccourcis.php3", "fichiers", $onglet, "traductions-24.gif");
+			onglet(_T('module_fichiers_langues'), http_php_scriptnq("lang_raccourcis",""), "fichiers", $onglet, "traductions-24.gif");
 		}
 	}
 
 	if ($rubrique == "suivi_forum"){
-		onglet(_T('onglet_messages_publics'), "controle_forum.php3?page=public", "public", $onglet, "forum-public-24.gif");
-		onglet(_T('onglet_messages_internes'), "controle_forum.php3?page=interne", "interne", $onglet, "forum-interne-24.gif");
+		onglet(_T('onglet_messages_publics'), http_php_scriptnq("controle_forum","page=public"), "public", $onglet, "forum-public-24.gif");
+		onglet(_T('onglet_messages_internes'), http_php_scriptnq("controle_forum","page=interne"), "interne", $onglet, "forum-interne-24.gif");
 
 		$query_forum = "SELECT * FROM spip_forum WHERE statut='publie' AND texte='' LIMIT 1";
 		$result_forum = spip_query($query_forum);
 		if ($row = spip_fetch_array($result_forum))
-			onglet(_T('onglet_messages_vide'), "controle_forum.php3?page=vide", "vide", $onglet);
+			onglet(_T('onglet_messages_vide'), http_php_scriptnq("controle_forum","page=vide"), "vide", $onglet);
 
 		$query_forum = "SELECT * FROM spip_forum WHERE statut='prop' LIMIT 1";
 		$result_forum = spip_query($query_forum);
 		if ($row = spip_fetch_array($result_forum))
-			onglet(_T('texte_statut_attente_validation'), "controle_forum.php3?page=prop", "prop", $onglet);
+			onglet(_T('texte_statut_attente_validation'), http_php_scriptnq("controle_forum","page=prop"), "prop", $onglet);
 
 	}
 
@@ -2388,16 +2388,16 @@ else {
 	echo "<div class='bandeau-icones'>\n";
 	echo "<table width='$largeur' cellpadding='0' cellspacing='0' border='0' align='center'><tr>\n";
 
-	icone_bandeau_principal (_T('icone_a_suivre'), "index.php3", "asuivre-48.png", "asuivre", $rubrique, "", "asuivre", $sous_rubrique);
-	icone_bandeau_principal (_T('icone_edition_site'), "naviguer.php3", "documents-48$spip_lang_rtl.png", "documents", $rubrique, "", "rubriques", $sous_rubrique);
-	icone_bandeau_principal (_T('titre_forum'), "forum_admin.php3", "messagerie-48.png", "redacteurs", $rubrique, "", "forum-interne", $sous_rubrique);
-	icone_bandeau_principal (_T('icone_auteurs'), "auteurs.php3", "redacteurs-48.png", "auteurs", $rubrique, "", "redacteurs", $sous_rubrique);
+	icone_bandeau_principal (_T('icone_a_suivre'), http_php_scriptnq("index",""), "asuivre-48.png", "asuivre", $rubrique, "", "asuivre", $sous_rubrique);
+	icone_bandeau_principal (_T('icone_edition_site'), http_php_scriptnq("naviguer",""), "documents-48$spip_lang_rtl.png", "documents", $rubrique, "", "rubriques", $sous_rubrique);
+	icone_bandeau_principal (_T('titre_forum'), http_php_scriptnq("forum_admin",""), "messagerie-48.png", "redacteurs", $rubrique, "", "forum-interne", $sous_rubrique);
+	icone_bandeau_principal (_T('icone_auteurs'), http_php_scriptnq("auteurs",""), "redacteurs-48.png", "auteurs", $rubrique, "", "redacteurs", $sous_rubrique);
 	if ($connect_statut == "0minirezo"  AND $GLOBALS['meta']["activer_statistiques"] != 'non') {
 		//bandeau_barre_verticale();
-		icone_bandeau_principal (_T('icone_statistiques_visites'), "statistiques_visites.php3", "statistiques-48.png", "suivi", $rubrique, "", "statistiques", $sous_rubrique);
+		icone_bandeau_principal (_T('icone_statistiques_visites'), http_php_scriptnq("statistiques_visites",""), "statistiques-48.png", "suivi", $rubrique, "", "statistiques", $sous_rubrique);
 	}
 	if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
-		icone_bandeau_principal (_T('icone_configuration_site'), "configuration.php3", "administration-48.png", "administration", $rubrique, "", "configuration", $sous_rubrique);
+		icone_bandeau_principal (_T('icone_configuration_site'), http_php_scriptnq("configuration",""), "administration-48.png", "administration", $rubrique, "", "configuration", $sous_rubrique);
 	}
 
 	echo "<td> &nbsp; </td>";
@@ -2405,7 +2405,7 @@ else {
 	icone_bandeau_principal (_T('icone_aide_ligne'),
 		"javascript:window.open('aide_index.php3?var_lang=$spip_lang', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580');",
 		"aide-48".aide_lang_dir($spip_lang,$spip_lang_rtl).".png",
-		"vide", "", "aide_index.php3?var_lang=$spip_lang",
+		"vide", "", http_php_scriptnq("aide_index","var_lang=$spip_lang"),
 		"aide-en-ligne", $sous_rubrique);
 
 	icone_bandeau_principal (_T('icone_visiter_site'), "$adresse_site/", "visiter-48$spip_lang_rtl.png", "visiter","", "visiter", $sous_rubrique);
@@ -2439,11 +2439,11 @@ else {
 	}
 	if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques) {
 		echo "<div class='$class' id='bandeaudocuments' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
-		//icone_bandeau_secondaire (_T('icone_rubriques'), "naviguer.php3", "rubrique-24.gif", "rubriques", $sous_rubrique);
+		//icone_bandeau_secondaire (_T('icone_rubriques'), http_php_scriptnq("naviguer",""), "rubrique-24.gif", "rubriques", $sous_rubrique);
 
 		$nombre_articles = spip_num_rows(spip_query("SELECT art.id_article FROM spip_articles AS art, spip_auteurs_articles AS lien WHERE lien.id_auteur = '$connect_id_auteur' AND art.id_article = lien.id_article LIMIT 1"));
 		if ($nombre_articles > 0) {
-			icone_bandeau_secondaire (_T('icone_tous_articles'), "articles_page.php3", "article-24.gif", "articles", $sous_rubrique);
+			icone_bandeau_secondaire (_T('icone_tous_articles'), http_php_scriptnq("articles_page",""), "article-24.gif", "articles", $sous_rubrique);
 		}
 
 		/*if ($options == "avancees") {
@@ -2454,27 +2454,27 @@ else {
 				FROM spip_versions AS versions, spip_articles AS articles 
 				WHERE versions.id_article = articles.id_article AND versions.id_version > 1$req_where LIMIT 1"));
 			if ($nombre_versions > 0 OR 1==1) {
-				icone_bandeau_secondaire (_T('icone_suivi_revisions'), "suivi_revisions.php3", "historique-24.gif", "revisions", $sous_rubrique);
+				icone_bandeau_secondaire (_T('icone_suivi_revisions'), http_php_scriptnq("suivi_revisions",""), "historique-24.gif", "revisions", $sous_rubrique);
 			}
 		}*/
 
 		$activer_breves=$GLOBALS['meta']["activer_breves"];
 		if ($activer_breves != "non"){
-			icone_bandeau_secondaire (_T('icone_breves'), "breves.php3", "breve-24.gif", "breves", $sous_rubrique);
+			icone_bandeau_secondaire (_T('icone_breves'), http_php_scriptnq("breves",""), "breve-24.gif", "breves", $sous_rubrique);
 		}
 
 		if ($options == "avancees"){
 			$articles_mots = $GLOBALS['meta']['articles_mots'];
 			if ($articles_mots != "non") {
-				icone_bandeau_secondaire (_T('icone_mots_cles'), "mots_tous.php3", "mot-cle-24.gif", "mots", $sous_rubrique);
+				icone_bandeau_secondaire (_T('icone_mots_cles'), http_php_scriptnq("mots_tous",""), "mot-cle-24.gif", "mots", $sous_rubrique);
 			}
 
 			$activer_sites = $GLOBALS['meta']['activer_sites'];
 			if ($activer_sites<>'non')
-				icone_bandeau_secondaire (_T('icone_sites_references'), "sites_tous.php3", "site-24.gif", "sites", $sous_rubrique);
+				icone_bandeau_secondaire (_T('icone_sites_references'), http_php_scriptnq("sites_tous",""), "site-24.gif", "sites", $sous_rubrique);
 
 			if (@spip_num_rows(spip_query("SELECT * FROM spip_documents_rubriques LIMIT 1")) > 0) {
-				icone_bandeau_secondaire (_T('icone_doc_rubrique'), "documents_liste.php3", "doc-24.gif", "documents", $sous_rubrique);
+				icone_bandeau_secondaire (_T('icone_doc_rubrique'), http_php_scriptnq("documents_liste",""), "doc-24.gif", "documents", $sous_rubrique);
 			}
 		}
 		echo "</tr></table></div></div>";
@@ -2493,10 +2493,10 @@ else {
 		}
 
 			echo "<div class='$class' id='bandeauredacteurs' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
-				if ($GLOBALS['meta']['forum_prive_admin'] == 'oui') icone_bandeau_secondaire (_T('icone_forum_administrateur'), "forum_admin.php3?admin=admin", "forum-admin-24.gif", "privadm", $sous_rubrique);
+				if ($GLOBALS['meta']['forum_prive_admin'] == 'oui') icone_bandeau_secondaire (_T('icone_forum_administrateur'), http_php_scriptnq("forum_admin","admin=admin"), "forum-admin-24.gif", "privadm", $sous_rubrique);
 
-				icone_bandeau_secondaire (_T('icone_suivi_forums'), "controle_forum.php3", "suivi-forum-24.gif", "forum-controle", $sous_rubrique);
-				icone_bandeau_secondaire (_T('icone_suivi_pettions'), "controle_petition.php3", "suivi-petition-24.gif", "suivi-petition", $sous_rubrique);
+				icone_bandeau_secondaire (_T('icone_suivi_forums'), http_php_scriptnq("controle_forum",""), "suivi-forum-24.gif", "forum-controle", $sous_rubrique);
+				icone_bandeau_secondaire (_T('icone_suivi_pettions'), http_php_scriptnq("controle_petition",""), "suivi-petition-24.gif", "suivi-petition", $sous_rubrique);
 
 			echo "</tr></table></div></div>";
 	
@@ -2511,8 +2511,8 @@ else {
 			$class = "invisible_au_chargement";
 		}
 		echo "<div class='$class' id='bandeauauteurs' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
-		icone_bandeau_secondaire (_T('icone_informations_personnelles'), "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-24.gif", "perso", $sous_rubrique);
-		icone_bandeau_secondaire (_T('icone_creer_nouvel_auteur'), "auteur_infos.php3?new=oui", "auteur-24.gif", "xxx", $sous_rubrique);
+		icone_bandeau_secondaire (_T('icone_informations_personnelles'), http_php_scriptnq("auteurs_edit","id_auteur=$connect_id_auteur"), "fiche-perso-24.gif", "perso", $sous_rubrique);
+		icone_bandeau_secondaire (_T('icone_creer_nouvel_auteur'), http_php_scriptnq("auteur_infos","new=oui"), "auteur-24.gif", "xxx", $sous_rubrique);
 	
 		echo "</tr></table></div></div>";
 	}	
@@ -2535,8 +2535,8 @@ else {
 
 		icone_bandeau_secondaire (_T('icone_repartition_visites'), "statistiques_repartition.php", "rubrique-24.gif", "repartition", $sous_rubrique);
 		if ($GLOBALS['meta']['multi_articles'] == 'oui' OR $GLOBALS['meta']['multi_rubriques'] == 'oui')
-			icone_bandeau_secondaire (_T('onglet_repartition_lang'), "statistiques_lang.php3", "langues-24.gif", "repartition-langues", $sous_rubrique);
-		icone_bandeau_secondaire (_T('titre_liens_entrants'), "statistiques_referers.php3", "referers-24.gif", "referers", $sous_rubrique);
+			icone_bandeau_secondaire (_T('onglet_repartition_lang'), http_php_scriptnq("statistiques_lang",""), "langues-24.gif", "repartition-langues", $sous_rubrique);
+		icone_bandeau_secondaire (_T('titre_liens_entrants'), http_php_scriptnq("statistiques_referers",""), "referers-24.gif", "referers", $sous_rubrique);
 
 		echo "</tr></table></div></div>";
 
@@ -2552,15 +2552,15 @@ else {
 			$class = "invisible_au_chargement";
 		}
 			echo "<div class='$class' id='bandeauadministration' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
-			icone_bandeau_secondaire (_T('icone_gestion_langues'), "config-lang.php3", "langues-24.gif", "langues", $sous_rubrique);
+			icone_bandeau_secondaire (_T('icone_gestion_langues'), http_php_scriptnq("config-lang",""), "langues-24.gif", "langues", $sous_rubrique);
 	
 			bandeau_barre_verticale();
 			if ($options == "avancees") {
-				icone_bandeau_secondaire (_T('icone_maintenance_site'), "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
-				icone_bandeau_secondaire (_T('onglet_vider_cache'), "admin_vider.php3", "cache-24.gif", "cache", $sous_rubrique);
+				icone_bandeau_secondaire (_T('icone_maintenance_site'), http_php_scriptnq("admin_tech",""), "base-24.gif", "base", $sous_rubrique);
+				icone_bandeau_secondaire (_T('onglet_vider_cache'), http_php_scriptnq("admin_vider",""), "cache-24.gif", "cache", $sous_rubrique);
 			}
 			else {
-				icone_bandeau_secondaire (_T('icone_sauver_site'), "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
+				icone_bandeau_secondaire (_T('icone_sauver_site'), http_php_scriptnq("admin_tech",""), "base-24.gif", "base", $sous_rubrique);
 			}
 			echo "</tr></table></div></div>";
 
@@ -2811,26 +2811,26 @@ if (true /*$gadgets*/) {
 			if ($connect_statut == "0minirezo") {	
 				$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
 				if ($id_rubrique > 0)
-					$gadget .= icone_horizontale(_T('icone_creer_sous_rubrique'), "rubriques_edit.php3?new=oui$dans_parent", "rubrique-24.gif", "creer.gif", false);
+					$gadget .= icone_horizontale(_T('icone_creer_sous_rubrique'), http_php_scriptnq("rubriques_edit","new=oui$dans_parent"), "rubrique-24.gif", "creer.gif", false);
 				else 
-					$gadget .= icone_horizontale(_T('icone_creer_rubrique'), "rubriques_edit.php3?new=oui", "rubrique-24.gif", "creer.gif", false);
+					$gadget .= icone_horizontale(_T('icone_creer_rubrique'), http_php_scriptnq("rubriques_edit","new=oui"), "rubrique-24.gif", "creer.gif", false);
 				$gadget .= "</div>";
 			}		
 			$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
-			$gadget .= icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?new=oui$dans_rub", "article-24.gif","creer.gif", false);
+			$gadget .= icone_horizontale(_T('icone_ecrire_article'), http_php_scriptnq("articles_edit","new=oui$dans_rub"), "article-24.gif","creer.gif", false);
 			$gadget .= "</div>";
 			
 			$activer_breves = $GLOBALS['meta']["activer_breves"];
 			if ($activer_breves != "non") {
 				$gadget .= "<div style='width: 140px;  float: $spip_lang_left;'>";
-				$gadget .= icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?new=oui$dans_rub", "breve-24.gif","creer.gif", false);
+				$gadget .= icone_horizontale(_T('icone_nouvelle_breve'), http_php_scriptnq("breves_edit","new=oui$dans_rub"), "breve-24.gif","creer.gif", false);
 				$gadget .= "</div>";
 			}
 			
 			if ($GLOBALS['meta']["activer_sites"] == 'oui') {
 				if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
 					$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
-					$gadget .= icone_horizontale(_T('info_sites_referencer'), "sites_edit.php3?new=oui&target=sites.php3$dans_parent", "site-24.gif","creer.gif", false);
+					$gadget .= icone_horizontale(_T('info_sites_referencer'), http_php_scriptnq("sites_edit","new=oui&target=sites.php3$dans_parent"), "site-24.gif","creer.gif", false);
 					$gadget .= "</div>";
 				}
 			}
@@ -3422,7 +3422,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 	}
 
 	if ($message)
-		icone_horizontale($message, "../spip_redirect.php3?id_$type=$id&var_mode=$en_ligne", $image, "rien.gif");
+		icone_horizontale($message, http_php_scriptnq("../spip_redirect","id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif");
 }
 
 

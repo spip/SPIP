@@ -62,7 +62,7 @@ debut_droite();
 echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'>";
 echo "<td>";
-	icone(_T('icone_retour'), "articles.php3?id_article=$id_article", "article-24.gif", "rien.gif");
+	icone(_T('icone_retour'), http_php_scriptnq("articles","id_article=$id_article"), "article-24.gif", "rien.gif");
 
 echo "</td>";
 echo "<td>" . http_img_pack('rien.gif', " ", "width='10'") ."</td>\n";

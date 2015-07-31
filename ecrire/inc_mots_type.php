@@ -73,7 +73,7 @@ echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'>";
 
 	echo "<td  align='right' valign='top'>";
-	icone(_T('icone_retour'), "mots_tous.php3", "mot-cle-24.gif", "rien.gif");
+	icone(_T('icone_retour'), http_php_scriptnq("mots_tous",""), "mot-cle-24.gif", "rien.gif");
 	echo "</td>";
 	echo "<td>". http_img_pack('rien.gif', " ", "width='5'") . "</td>\n";
 
