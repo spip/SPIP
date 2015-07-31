@@ -2,7 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-include(_FILE_CONNECT);
+include_local(_FILE_CONNECT);
 include_ecrire("inc_meta.php3");
 include_ecrire("inc_session.php3");
 include_ecrire("inc_filtres.php3");

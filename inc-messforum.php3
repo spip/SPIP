@@ -11,6 +11,8 @@
 \***************************************************************************/
 
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_ecrire('inc_meta.php3');
 include_ecrire('inc_forum.php3');
 include_ecrire('inc_filtres.php3');

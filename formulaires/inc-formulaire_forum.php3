@@ -40,6 +40,11 @@ function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 
 	// recuperer les donnees du forum auquel on repond, false = forum interdit
 	list ($idr, $idf, $ida, $idb, $ids) = $args;
+	$idr = intval($idr);
+	$idf = intval($idf);
+	$ida = intval($ida);
+	$idb = intval($idb);
+	$ids = intval($ids);
 	if (!$r = sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids))
 		return '';
 
