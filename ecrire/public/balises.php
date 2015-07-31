@@ -1211,6 +1211,8 @@ function balise_HTTP_HEADER_dist($p) {
 // #CACHE
 // definit la duree de vie ($delais) du squelette
 // #CACHE{24*3600}
+// parametre(s) supplementaire(s) :
+// #CACHE{24*3600, cache-client} autorise gestion du IF_MODIFIED_SINCE
 // http://doc.spip.org/@balise_CACHE_dist
 function balise_CACHE_dist($p) {
 	$duree = valeur_numerique($p->param[0][1][0]->texte);
@@ -1220,17 +1222,24 @@ function balise_CACHE_dist($p) {
 		. $duree
 		. '"); ?'.'>\'';
 
-	// remplir le header Cache-Control
-	if ($duree > 0)
-		$p->code .= '.\'<'.'?php header("Cache-Control: max-age='
-			. $duree
-			. '"); ?'.'>\'';
-	else
+	// Remplir le header Cache-Control
+	// cas #CACHE{0}
+	if ($duree == 0)
 		$p->code .= '.\'<'
 		.'?php header("Cache-Control: no-store, no-cache, must-revalidate"); ?'
 		.'><'
 		.'?php header("Pragma: no-cache"); ?'
 		.'>\'';
+
+	// cas #CACHE{360, cache-client}
+	if (isset($p->param[0][2])) {
+		$second = ($p->param[0][2][0]->texte);
+		if ($second == 'cache-client'
+		AND $duree > 0)
+			$p->code .= '.\'<'.'?php header("Cache-Control: max-age='
+				. $duree
+				. '"); ?'.'>\'';
+	}
 
 	$p->interdire_scripts = false;
 	return $p;

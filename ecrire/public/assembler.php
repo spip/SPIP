@@ -95,20 +95,21 @@ function assembler_page ($fond) {
 
 	$headers_only = ($_SERVER['REQUEST_METHOD'] == 'HEAD');
 
-	// une perennite valide a meme reponse qu'une requete HEAD
-
-	if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) AND !$var_mode
-	AND $chemin_cache AND !$flag_dynamique
-	// l'admin connecte veut voir ses boutons a jour
-	AND (!$_COOKIE['spip_admin'] OR (_request('var_fragment')!==null))) {
-		if (!strstr('IIS/', $_SERVER['SERVER_SOFTWARE'])) {
-			$since = preg_replace('/;.*/', '',
-				$_SERVER['HTTP_IF_MODIFIED_SINCE']);
-			$since = str_replace('GMT', '', $since);
-			if (trim($since) == gmdate("D, d M Y H:i:s", $lastmodified)) {
-				$page['status'] = 304;
-				$headers_only = true;
-			}
+	// Pour les pages non-dynamiques (indiquees par #CACHE{duree,cache-client})
+	// une perennite valide a meme reponse qu'une requete HEAD (par defaut les
+	// pages sont dynamiques)
+	if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
+	AND !$var_mode
+	AND $chemin_cache
+	AND !$flag_dynamique
+	AND !strstr('IIS/', $_SERVER['SERVER_SOFTWARE'])
+	) {
+		$since = preg_replace('/;.*/', '',
+			$_SERVER['HTTP_IF_MODIFIED_SINCE']);
+		$since = str_replace('GMT', '', $since);
+		if (trim($since) == gmdate("D, d M Y H:i:s", $lastmodified)) {
+			$page['status'] = 304;
+			$headers_only = true;
 		}
 	}
 
