@@ -32,8 +32,12 @@ function install_bases_sup($adresse_db, $login_db, $pass_db,  $server_db, $sup_d
 		$tables .= "<li>" . array_shift($r) . "</li>\n";
 	}
 	
-	$res = _L('Tables de la base')
-	. "<ol style='text-align: left'>" . $tables . "</ol>\n";
+	if (!$tables)
+	  $res = _L('Base actuellement sans tables');
+	else {
+	  $res = _L('Tables de la base')
+	    . "<ol style='text-align: left'>" . $tables . "</ol>\n";
+	}
 
 	if (preg_match(',(.*):(.*),', $adresse_db, $r))
 		list(,$adresse_db, $port) = $r;
@@ -47,7 +51,7 @@ function install_bases_sup($adresse_db, $login_db, $pass_db,  $server_db, $sup_d
 
 	install_fichier_connexion(_DIR_CONNECT . $sup_db . '.php', $conn);
 
-	return $res;
+	return '<div style="background-color: #eeeeee">' . $res . '</div>';
 }
 
 function install_etape_sup2_dist()
@@ -106,7 +110,7 @@ function install_etape_sup2_dist()
 			. predef_ou_cache($adresse_db,$login_db,$pass_db, $server_db)
 			. bouton_suivant());
 
-	echo install_debut_html();
+	echo install_debut_html(_L("D&eacute;claration d'une base suppl&eacute;mentaire"));
 	echo $res;
 	echo install_fin_html();
 }

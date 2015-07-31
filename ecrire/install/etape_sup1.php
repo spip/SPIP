@@ -45,12 +45,13 @@ function install_etape_sup1_dist()
 	if (!$server_d AND  defined('_INSTALL_SERVER_DB'))
 		$server_d = _INSTALL_NAME_DB;
 
-	echo install_debut_html();
+	echo install_debut_html(_L("D&eacute;claration d'une base suppl&eacute;mentaire"));
 
 	$link = spip_connect_db($adresse_db, 0, $login_db, $pass_db, '', $server_db);
 	if ($link) {
 		$GLOBALS['connexions'][$server_db] = $link;
 
+		echo '<div style="background-color: #eeeeee">';
 		echo "\n<!--\n", join(', ', $link), " $login_db ";
 		echo join(', ', $GLOBALS['connexions'][$server_db]);
 		echo "\n-->\n<p class='resultat'><b>";
@@ -66,6 +67,7 @@ function install_etape_sup1_dist()
 		     : ("\n<input type='hidden' name='sel_db' value='$sel_db' />\n"));
 
 		echo install_etape_sup1_form($hidden, $checked, $res, 'sup2');
+		echo '</div>';
 	} else  {
 		echo info_etape(_T('info_connexion_base'));
 		echo "<p class='resultat'><b>",
