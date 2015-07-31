@@ -130,17 +130,16 @@ fin_grand_cadre();
 
 debut_gauche();
 
-debut_boite_info();
-	echo "<center>";
-	echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"._T('titre_site_numero')."</b></font>";
-	echo "<br /><font face='Verdana,Arial,Sans,sans-serif' size='6'><b>$id_syndic</b></font>\n";
+	debut_boite_info();
 
-	echo "</center>";
-
+	$res = "\n<div style='font-famuily: Verdana,Arial,Sans,sans-serif; font-size: 10x; font-weight: bold; text-align: center'>"
+		  .  _T('titre_site_numero')
+		  . "<br /><span style='font-size: 32px;'>"
+		  . $id_syndic
+		  . '</span></div>';
+	echo $res;
 	voir_en_ligne ('site', $id_syndic, $statut);
-
-
-fin_boite_info();
+	fin_boite_info();
 
 
 echo "<br /><center>";

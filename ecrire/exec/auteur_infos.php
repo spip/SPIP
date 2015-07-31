@@ -114,10 +114,11 @@ function cadre_auteur_infos($id_auteur, $auteur)
 
 	if (!$id_auteur) return '';
 
-	$res = "<center>"
-	.  "<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"._T('titre_cadre_numero_auteur')."&nbsp;:</b></font>"
-	. "<br /><font face='Verdana,Arial,Sans,sans-serif' size='6'><b>$id_auteur</b></font>"
-	. "</center>";
+	$res = "\n<div style='font-famuily: Verdana,Arial,Sans,sans-serif; font-size: 10x; font-weight: bold; text-align: center'>" 
+	. _T('titre_cadre_numero_auteur')
+	. "<br /><span style='font-size: 32px;'>"
+	. $id_auteur
+	. '</span></div>';
 
 // "Voir en ligne" si l'auteur a un article publie
 // seuls les admins peuvent "previsualiser" une page auteur
