@@ -86,6 +86,7 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "", $id="", $
 	$style_cadre = " style='";
 	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
 		$style_gauche = "padding-$spip_lang_left: 38px;";
+		$style_cadre .= "'";
 	} else {
 		$style_cadre .= "'";
 		$style_gauche = '';
