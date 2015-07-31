@@ -104,9 +104,9 @@ function creer_chaine_url($x) {
 		}
 	}
 
-	// S'il reste trop peu, on retombe sur article,12
+	// S'il reste trop peu, on retombe sur article12
 	if (strlen($url) < _URLS_PROPRES_MIN) {
-		$url = $objet['type'].','.$objet['id_objet'];
+		$url = $objet['type'].$objet['id_objet'];
 	}
 
 	// Sinon couper les mots et les relier par des tirets
@@ -362,7 +362,7 @@ function urls_propres_dist($i, $entite, $args='', $ancre='') {
 		}
 	}
 	if ($id_objet) {
-		$contexte = array($_id => $id_objet);
+		$contexte[$_id] = $id_objet;
 		$url_propre = generer_url_entite($id_objet, $type);
 		if (strlen($url_propre)
 		AND !strstr($url,$url_propre)) {
