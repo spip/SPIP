@@ -168,8 +168,17 @@ if ($nom_site AND $modifier_site == 'oui' AND $flag_editable) {
 	$descriptif = addslashes($descriptif);
 	if (strlen($url_syndic) < 8) $syndication = "non";
 	$url_syndic = addslashes($url_syndic);
-
-	$query = "UPDATE spip_syndic SET id_rubrique='$id_rubrique', nom_site='$nom_site', url_site='$url_site', url_syndic='$url_syndic', descriptif='$descriptif', syndication='$syndication', statut='$statut' WHERE id_syndic=".intval($id_syndic);
+	
+	// recoller les champs du extra
+	if ($champs_extra) {
+		include_ecrire("inc_extra.php3");
+		$add_extra = ", extra = '".addslashes(extra_recup_saisie("sites", $id_secteur))."'";
+	} else
+		$add_extra = '';
+	
+	
+	
+	$query = "UPDATE spip_syndic SET id_rubrique='$id_rubrique', nom_site='$nom_site', url_site='$url_site', url_syndic='$url_syndic', descriptif='$descriptif', syndication='$syndication', statut='$statut' $add_extra WHERE id_syndic=".intval($id_syndic);
 	$result = spip_query($query);
 
 	if ($syndication_old != $syndication OR $url_syndic != $old_syndic) {
@@ -245,7 +254,10 @@ if ($row = spip_fetch_array($result)) {
 	$date_heure = $row["date"];
 	$date_syndic = $row['date_syndic'];
 	$mod = $row['moderation'];
-}
+
+	$extra=$row["extra"];
+	
+	}
 
 if ($nom_site)
 	$titre_page = "&laquo; $nom_site &raquo;";
@@ -448,6 +460,11 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 	}
 	echo "</font>";
 }
+
+if ($champs_extra AND $extra) {
+		include_ecrire("inc_extra.php3");
+		extra_affichage($extra, "sites");
+	}
 
 fin_cadre_relief();
 

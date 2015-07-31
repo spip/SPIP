@@ -131,6 +131,7 @@ if ($row = spip_fetch_array($result)) {
 	$url_syndic = $row["url_syndic"];
 	$descriptif = $row["descriptif"];
 	$syndication = $row["syndication"];
+	$extra=$row["extra"];
 }
 else {
 	$syndication = 'non';
@@ -280,6 +281,13 @@ else {
 	echo "<INPUT TYPE='Hidden' NAME='syndication' VALUE=\"$syndication\">";
 	echo "<INPUT TYPE='hidden' NAME='url_syndic' VALUE=\"$url_syndic\"";
 }
+
+
+if ($champs_extra) {
+		include_ecrire("inc_extra.php3");
+		extra_saisie($extra, 'sites', $id_secteur);
+	}
+
 
 echo "<div ALIGN='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
 echo "</FORM>";
