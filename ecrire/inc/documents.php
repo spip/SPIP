@@ -571,7 +571,7 @@ function formulaire_taille($document) {
 		// ou formats dont la taille ne peut etre lue par getimagesize
 		OR $extension=='rm' OR $extension=='mov' OR $extension=='flv'
 	)) {
-		return "<br /><b>"._T('entree_dimensions')."</b><br />\n" .
+		return "\n<br /><b>"._T('entree_dimensions')."</b><br />\n" .
 		  "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"".$document['largeur']."\" size='5' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" />" .
 		  " &#215; <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"".$document['hauteur']."\" size='5' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /> "._T('info_pixels');
 	}
@@ -582,9 +582,8 @@ function formulaire_taille($document) {
 //
 
 // http://doc.spip.org/@formulaire_upload
-function formulaire_upload($id, $intitule='', $inclus = '', $mode='', $type="", $ancre='', $id_document=0) {
+function formulaire_upload($id, $script, $intitule='', $inclus = '', $mode='', $type="", $ancre='', $id_document=0) {
 	global $spip_lang_right;
-	static $num_form = 0; $num_form ++;
 
 	$vignette_de_doc = ($mode == 'vignette' AND $id_document>0);
 
@@ -595,11 +594,10 @@ function formulaire_upload($id, $intitule='', $inclus = '', $mode='', $type="", 
 		// s'il n'y en a pas, on affiche un message d'aide
 		// en mode document, mais pas en mode vignette
 		if ($l OR ($mode == 'document'))
-			$dir_ftp = afficher_transferer_upload($type, $l);
+			$dir_ftp = afficher_transferer_upload($l);
 		else
 			$dir_ftp = '';
 	}
-
 
 	$res = "<input name='fichier' type='file' style='font-size: 10px;' class='forml' size='15' />" .
 		"\n\t\t<div align='" .
@@ -612,9 +610,10 @@ function formulaire_upload($id, $intitule='', $inclus = '', $mode='', $type="", 
 
 	$test_distant = ($mode == 'document' AND $type);
 	if ($dir_ftp OR $test_distant OR $vignette_de_doc) {
+		$bloc = "ftp_$mode" .'_'. intval($id_document);
 		$debut = "<div style='float:".$GLOBALS['spip_lang_left'].";'>"
-			. bouton_block_invisible("ftp$num_form") ."</div>\n";
-		$milieu = debut_block_invisible("ftp$num_form");
+			. bouton_block_invisible($bloc) ."</div>\n";
+		$milieu = debut_block_invisible($bloc);
 		$fin = fin_block();
 
 		if ($vignette_de_doc)
@@ -647,13 +646,6 @@ function formulaire_upload($id, $intitule='', $inclus = '', $mode='', $type="", 
 		"\n\t\t<input type='hidden' name='ancre' value='$ancre' />" .
 		"\n\t$fin</div>";
 
-	// a cause d'ajax, on ne peut pas faire confiance au script "documenter"
-	// pour reafficher la page apres upload de la vignette... donc il faut
-	// hacker
-	$script = $GLOBALS['exec'];
-	if ($script == 'documenter')
-		$script = ($type == 'rubriques') ? 'naviguer' : 'articles';
-
 	return generer_action_auteur('joindre',
 		$mode,
 		generer_url_ecrire($script, "id_$type=$id"),
@@ -681,7 +673,7 @@ function construire_upload($corps, $args, $enctype='')
 }
 
 // http://doc.spip.org/@afficher_transferer_upload
-function afficher_transferer_upload($type, $texte_upload)
+function afficher_transferer_upload($texte_upload)
 {
 	$doc = array('upload' => '<b>' . joli_repertoire(determine_upload()) . '</b>');
 	if (!$texte_upload) {
@@ -708,7 +700,7 @@ function afficher_transferer_upload($type, $texte_upload)
 
 //
 // Afficher les documents non inclus
-// (page des articles)
+// 
 
 // http://doc.spip.org/@afficher_portfolio
 function afficher_portfolio(
@@ -716,7 +708,8 @@ function afficher_portfolio(
 	$type = "article",	# article ou rubrique ?
 	$album = 'portfolio',	# album d'images ou de documents ?
 	$flag_modif = false,	# a-t-on le droit de modifier ?
-	$couleur		# couleur des cases du tableau
+	$couleur,		# couleur des cases du tableau
+	$appelant =''		# pour le rappel
 ) {
 	charger_generer_url();
 	global $connect_id_auteur, $connect_statut;
@@ -730,13 +723,11 @@ function afficher_portfolio(
 	foreach ($documents as $document) {
 		$id_document = $document['id_document'];
 
-		# script pour l'action des formulaires
 		if (isset($document['script']))
-			$script = $document['script']; # jamais utilise !?
-		elseif ($type == "rubrique")
-			$script = 'naviguer';
+			$script = $document['script']; # pour plugin Cedric
 		else
-			$script = 'articles';
+		  // ref a $exec inutilise en standard
+		  $script = $appelant ? $appelant : $GLOBALS['exec'];
 
 		$style = "";
 		if (!$case)
@@ -748,7 +739,7 @@ function afficher_portfolio(
 		echo formulaire_tourner($id_document, $document, $script, $flag_modif, $type);
 
 		if ($flag_modif)
-			echo formulaire_documenter($id_document, $document, $type, $document["id_$type"], $album);
+		  echo formulaire_documenter($id_document, $document, $script, $type, $document["id_$type"], $album);
 
 		if (isset($document['info']))
 			echo "<div class='verdana1'>".$document['info']."</div>";
@@ -878,6 +869,10 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	global $couleur_claire, $connect_id_auteur, $connect_statut;
 	global $options, $spip_lang_left, $spip_lang_right;
 
+	if ($type == "rubrique")
+			$script = 'naviguer'; // seul cas actuellement
+	else
+			$script = 'articles'; // seul cas actuellement
 
 	// Afficher portfolio
 	/////////
@@ -933,10 +928,10 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			echo "<div>";
 		else 	 {
 			echo "\n<div align='right'>";
-			echo "<table width='50%' cellpadding='0' cellspacing='0' border='0'><tr><td style='text-align: $spip_lang_left;'>";
+			echo "\n<table width='50%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td style='text-align: $spip_lang_left;'>\n";
 		}
 		echo debut_cadre_relief("image-24.gif", false, "", _T('titre_joindre_document'));
-		echo formulaire_upload($id_article, _T('info_telecharger_ordinateur'), '', 'document', $type);
+		echo formulaire_upload($id_article, $script, _T('info_telecharger_ordinateur'), '', 'document', $type);
 		echo fin_cadre_relief();
 		if ($browser_name!=="MSIE") // eviter le formulaire upload qui se promene sur la page a cause des position:relative
 			echo "</td></tr></table>";
@@ -953,11 +948,14 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 	global $connect_id_auteur, $connect_statut, $options, $id_doc_actif;
 
+	// seuls cas connus:
+	$script = ($type== 'article') ? 'articles_edit' : 'breves_edit';
+
 	/// Ajouter nouvelle image
 	echo "<a name='images'></a>\n";
 	$titre_cadre = _T('bouton_ajouter_image').aide("ins_img");
 	debut_cadre_relief("image-24.gif", false, "creer.gif", $titre_cadre);
-	echo formulaire_upload($id, _T('info_telecharger'),'','vignette',$type);
+	echo formulaire_upload($id, $script, _T('info_telecharger'),'','vignette',$type);
 
 	fin_cadre_relief();
 
@@ -983,7 +981,7 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 	echo "\n<p />";
 	while ($document = spip_fetch_array($images_liees)) {
 		$id_document = $document['id_document'];
-		afficher_case_document($id_document, $id, $type, $id_doc_actif == $id_document);
+		afficher_case_document($id_document, $id, $script, $type, $id_doc_actif == $id_document);
 	}
 
 	/// Ajouter nouveau document
@@ -991,7 +989,7 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 	if ($type == "article" AND $GLOBALS['meta']["documents_$type"] != 'non') {
 		$titre_cadre = _T('bouton_ajouter_document').aide("ins_doc");
 		debut_cadre_enfonce("doc-24.gif", false, "creer.gif", $titre_cadre);
-		echo formulaire_upload($id,_T('info_telecharger_ordinateur'), '','document',$type);
+		echo formulaire_upload($id, $script, _T('info_telecharger_ordinateur'), '','document',$type);
 		fin_cadre_enfonce();
 	}
 
@@ -1001,14 +999,14 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 		if ($documents_lies) {
 			reset($documents_lies);
 			while (list(, $id_document) = each($documents_lies)) {
-			  afficher_case_document($id_document, $id, $type, $id_doc_actif == $id_document);
+			  afficher_case_document($id_document, $id, $script, $type, $id_doc_actif == $id_document);
 			}
 		}
 	}
 }
 
 //
-// Affiche le raccourci &lt;doc123|left&gt;
+// Affiche le raccourci <doc123|left>
 // et l'insere quand on le clique
 //
 // http://doc.spip.org/@affiche_raccourci_doc
@@ -1029,7 +1027,7 @@ function affiche_raccourci_doc($doc, $id, $align) {
 //
 
 // http://doc.spip.org/@afficher_case_document
-function afficher_case_document($id_document, $id, $type, $deplier = false) {
+function afficher_case_document($id_document, $id, $script, $type, $deplier = false) {
 	global $connect_id_auteur, $connect_statut;
 	global $options, $couleur_foncee, $spip_lang_left, $spip_lang_right;
 
@@ -1126,7 +1124,7 @@ function afficher_case_document($id_document, $id, $type, $deplier = false) {
 			  "</font></div>";
 		}
 
-		echo formulaire_documenter($id_document, $document, $type, $id, "document$id_document");
+		echo formulaire_documenter($id_document, $document, $script, $type, $id, "document$id_document");
 
 		fin_cadre_enfonce();
 		}
@@ -1173,7 +1171,7 @@ function afficher_case_document($id_document, $id, $type, $deplier = false) {
 		if (ereg(",$id_document,", $doublons))
 			echo $raccourci_doc;
 
-		echo formulaire_documenter($id_document, $document, $type, $id, "document$id_document");
+		echo formulaire_documenter($id_document, $document, $script, $type, $id, "document$id_document");
 		
 		fin_cadre_relief();
 	}
@@ -1212,10 +1210,13 @@ function date_formulaire_documenter($date, $id_document) {
 // (surtout si c'est un portfolio)
 
 // http://doc.spip.org/@formulaire_documenter
-function formulaire_documenter($id_document, $document, $type, $id, $ancre) {
+function formulaire_documenter($id_document, $document, $script, $type, $id, $ancre) {
 
 	// + securite (avec le script exec=documenter ca vient de dehors)
-	if (!preg_match('/^(article|rubrique)$/',$type, $r)) return;
+	if (!preg_match('/^\w+$/',$type, $r)) {
+	  spip_log("formulaire_documenter: type '$type' ?");
+	  return;
+	}
 
 	if ($document) {
 		// premier appel
@@ -1225,7 +1226,7 @@ function formulaire_documenter($id_document, $document, $type, $id, $ancre) {
 		$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
 		$flag_deplie = 'ajax';
 	} else {
-		spip_log("erreur dans formulaire_documenter()");
+		spip_log("formulaire_documenter; id_document $id_document ?");
 		return;
 	}
 
@@ -1233,30 +1234,23 @@ function formulaire_documenter($id_document, $document, $type, $id, $ancre) {
 	$titre = $document['titre'];
 	$date = $document['date'];
 
-	// vers ou rediriger
-	// a cause d'ajax, on ne peut pas faire confiance au script "documenter"
-	// pour reafficher la page apres upload de la vignette... donc il faut
-	// hacker
-	$script = $GLOBALS['exec'];
-	if ($script == 'documenter')
-		$script = ($type == 'rubrique') ? 'naviguer' : 'articles';
- 
 	if ($document['mode'] == 'vignette') {
-
-	  $label = _T('entree_titre_image');
-	  $taille ='';
-	  $vignette = '';
-	  $supp = 'image-24.gif';
+		$label = _T('entree_titre_image');
+		$taille = $vignette = '';
+		$supp = 'image-24.gif';
+	  
 	} else {
-	  $label = _T('entree_titre_document');
-	  $taille = formulaire_taille($document);
-	  $supp = 'doc-24.gif';
+		$label = _T('entree_titre_document');
+		$taille = formulaire_taille($document);
+		$supp = 'doc-24.gif';
 
-	  $id_vignette = $document['id_vignette'];
-	  $vignette = "<hr style='margin-left: -5px; margin-right: -5px; height: 1px; border: 0px; color: #eeeeee; background-color: white;' />" .
-	    ($id_vignette ?
-	     icone_horizontale (_T('info_supprimer_vignette'), redirige_action_auteur('supprimer', "document-$id_vignette", $script, "id_$type=$id&show_docs=$id_document#$ancre"), "vignette-24.png", "supprimer.gif", false) :
-	     formulaire_upload($id,_T('info_vignette_personnalisee'), false, 'vignette', $type, $ancre, $id_document));
+		$id_vignette = $document['id_vignette'];
+		$vignette = "<hr style='margin-left: -5px; margin-right: -5px; height: 1px; border: 0px; color: #eeeeee; background-color: white;' />" .
+			($id_vignette ?
+	     // pourrait faire partie de l'ajax de tout le bloc
+				icone_horizontale (_T('info_supprimer_vignette'), redirige_action_auteur('supprimer', "document-$id_vignette", $script, "id_$type=$id&show_docs=$id_document#$ancre"), "vignette-24.png", "supprimer.gif", false) :
+	     // mais pas ca, dommage.
+				formulaire_upload($id, $script, _T('info_vignette_personnalisee'), false, 'vignette', $type, $ancre, $id_document));
 	}
 
 	$entete = basename($document['fichier']);
