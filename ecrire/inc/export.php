@@ -248,7 +248,7 @@ function build_while($debut, $table, $prim, $les_rubriques, $les_meres, $save=''
 	$save = 'inc_export_' . ($save ? $save : 'xml');
 	while ($r = sql_fetch($result, $serveur)) {
 		if (export_select($r, $les_rubriques, $les_meres)) {
-			if ($s = $save($r, $table, $prim)) $res[]=$s; else $i++;
+			if ($s = $save($r, $table, $prim, $serveur)) $res[]=$s; else $i++;
 		}
 	}
 	sql_free($result, $serveur);
@@ -256,7 +256,7 @@ function build_while($debut, $table, $prim, $les_rubriques, $les_meres, $save=''
 }
 
 // Construit la version xml des champs d'une table
-function inc_export_xml($row, $table, $prim) {
+function inc_export_xml($row, $table, $prim, $serveur) {
 	global  $chercher_logo ;
 	if ($chercher_logo) {
 		$on = $chercher_logo($row[$prim], $prim, 'on');
