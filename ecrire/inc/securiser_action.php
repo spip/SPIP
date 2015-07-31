@@ -58,7 +58,7 @@ function securiser_action_auteur($action, $arg, $redirect="", $mode=false, $att=
 <input name='hash' type='hidden' value='$hash' />
 <input name='arg' type='hidden' value='$arg' />";
 
-	return generer_form_public($action, $mode, $att);
+	return generer_form_action($action, $mode, $att);
 }
 
 // http://doc.spip.org/@caracteriser_auteur

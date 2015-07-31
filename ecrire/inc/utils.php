@@ -348,7 +348,7 @@ function self($amp = '&amp;', $root = false) {
 	// supprimer les variables sans interet
 	if (test_espace_prive()) {
 		$url = preg_replace (',([?&])('
-		.'lang|set_options|set_couleur|set_disp|set_ecran|show_docs|'
+		.'lang|show_docs|'
 		.'changer_lang|var_lang|action)=[^&]*,i', '\1', $url);
 		$url = preg_replace(',([?&])[&]+,', '\1', $url);
 		$url = preg_replace(',[&]$,', '\1', $url);
@@ -920,9 +920,8 @@ function generer_form_ecrire($script, $corps, $atts='', $submit='') {
 // On n'applique pas la recommandation ci-dessus pour les scripts publics
 // qui ne sont pas destines a etre mis en signets
 
-// http://doc.spip.org/@generer_form_public
-function generer_form_public($script, $corps, $atts='') {
-	return "\n<form action='" . generer_url_public() .
+function generer_form_action($script, $corps, $atts='') {
+	return "\n<form action='" . (_DIR_RACINE  ? generer_url_ecrire() :  generer_url_public()) .
 	  "'" .
 	  $atts .
 	  ">\n" .
@@ -934,10 +933,15 @@ function generer_form_public($script, $corps, $atts='') {
 
 // http://doc.spip.org/@generer_url_action
 function generer_url_action($script, $args="", $no_entities=false ,$rel = false) {
-
-        return  generer_url_public('',
-                                  "action=$script" .($args ? "&$args" : ''),
-                                  $no_entities);
+	$url = _DIR_RACINE  ? generer_url_ecrire() :  generer_url_public();
+	$url = parametre_url($url,'action',$script);
+	if ($args) $url .= quote_amp('&'.$args);
+	
+	if ($no_entities) $url = str_replace('&amp;','&',$url);
+	return $url;
+	return  generer_url_public('',
+	                        "action=$script" .($args ? "&$args" : ''),
+	                        $no_entities);
 }
 
 

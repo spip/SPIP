@@ -90,7 +90,7 @@ onblur="changestyle(\'bandeauinterface\');"';
 		foreach ($couleurs_spip as $key => $val) {
 			$bloc .=
 			'<a href="'
-				. parametre_url(self(), 'set_couleur', $key)
+				. generer_url_action('preferer',"set_couleur=$key&redirect=".urlencode(self()))
 				. '"'
 			. ' rel="'.generer_url_public('style_prive','ltr='
 				. $GLOBALS['spip_lang_left'] . '&'

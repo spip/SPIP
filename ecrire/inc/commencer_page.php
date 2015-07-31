@@ -90,9 +90,9 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 /*
 	if ($menu)
 		$res .= "\n<div><map name='map_layout' id='map_layout'>"
-		. lien_change_var (self(), 'set_disp', 1, '1,0,18,15', _T('lien_afficher_texte_seul'), "onmouseover=\"changestyle('bandeauvide');\" onfocus=\"changestyle('bandeauvide');\" onblur=\"changestyle('bandeauvide');\"")
-		. lien_change_var (self(), 'set_disp', 2, '19,0,40,15', _T('lien_afficher_texte_icones'), "onmouseover=\"changestyle('bandeauvide');\" onfocus=\"changestyle('bandeauvide');\" onblur=\"changestyle('bandeauvide');\"")
-		. lien_change_var (self(), 'set_disp', 3, '41,0,59,15', _T('lien_afficher_icones_seuls'), "onmouseover=\"changestyle('bandeauvide');\" onfocus=\"changestyle('bandeauvide');\" onblur=\"changestyle('bandeauvide');\"")
+		. lien_change_var (generer_url_action('preferer',"set_disp=1&redirect=".urlencode(self())), '1,0,18,15', _T('lien_afficher_texte_seul'), "onmouseover=\"changestyle('bandeauvide');\" onfocus=\"changestyle('bandeauvide');\" onblur=\"changestyle('bandeauvide');\"")
+		. lien_change_var (generer_url_action('preferer',"set_disp=2&redirect=".urlencode(self())), '19,0,40,15', _T('lien_afficher_texte_icones'), "onmouseover=\"changestyle('bandeauvide');\" onfocus=\"changestyle('bandeauvide');\" onblur=\"changestyle('bandeauvide');\"")
+		. lien_change_var (generer_url_action('preferer',"set_disp=3&redirect=".urlencode(self())), '41,0,59,15', _T('lien_afficher_icones_seuls'), "onmouseover=\"changestyle('bandeauvide');\" onfocus=\"changestyle('bandeauvide');\" onblur=\"changestyle('bandeauvide');\"")
 		. "\n</map></div>";
 */
 	if ($spip_display == "4") {
@@ -141,14 +141,14 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 			// grand ecran
 		if ($spip_ecran == "large") {
 			$i = _T('info_petit_ecran');
-			$res .= "<a href='". parametre_url(self(),'set_ecran', 'etroit') ."' class='icone26' onmouseover=\"changestyle('bandeauecran');\" title=\"$i\" onfocus=\"changestyle('bandeauecran');\" onblur=\"changestyle('bandeauecran');\">" .
+			$res .= "<a href='". generer_url_action('preferer',"set_ecran=etroit&redirect=".urlencode(self())) ."' class='icone26' onmouseover=\"changestyle('bandeauecran');\" title=\"$i\" onfocus=\"changestyle('bandeauecran');\" onblur=\"changestyle('bandeauecran');\">" .
 			  http_img_pack("set-ecran-etroit.png", $i, "width='26' height='20'") . "</a>";
-			$ecran = "<div><a href='".parametre_url(self(),'set_ecran', 'etroit')."' class='lien_sous'>"._T('info_petit_ecran')."</a>/<b>"._T('info_grand_ecran')."</b></div>";
+			$ecran = "<div><a href='".generer_url_action('preferer',"set_ecran=etroit&redirect=".urlencode(self()))."' class='lien_sous'>"._T('info_petit_ecran')."</a>/<b>"._T('info_grand_ecran')."</b></div>";
 		} else {
 			$i = _T('info_grand_ecran');
-			$res .= "<a href='".parametre_url(self(),'set_ecran', 'large')."' class='icone26' onmouseover=\"changestyle('bandeauecran');\" title=\"$i\" onfocus=\"changestyle('bandeauecran');\" onblur=\"changestyle('bandeauecran');\">" .
+			$res .= "<a href='".generer_url_action('preferer',"set_ecran=large&redirect=".urlencode(self()))."' class='icone26' onmouseover=\"changestyle('bandeauecran');\" title=\"$i\" onfocus=\"changestyle('bandeauecran');\" onblur=\"changestyle('bandeauecran');\">" .
 			  http_img_pack("set-ecran.png", $i, "width='26' height='20'") ."</a>";
-			$ecran = "<div><b>"._T('info_petit_ecran')."</b>/<a href='".parametre_url(self(),'set_ecran', 'large')."' class='lien_sous'>"._T('info_grand_ecran')."</a></div>";
+			$ecran = "<div><b>"._T('info_petit_ecran')."</b>/<a href='".generer_url_action('preferer',"set_ecran=large&redirect=".urlencode(self()))."' class='lien_sous'>"._T('info_grand_ecran')."</a></div>";
 		}
 
 		// Choix de la couleur
