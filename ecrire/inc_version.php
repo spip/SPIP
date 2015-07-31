@@ -17,16 +17,16 @@ define("_ECRIRE_INC_VERSION", "1");
 # compatibilite anciennes versions
 # si vous n'avez aucun fichier .php3, redefinissez a ""
 # ca fera foncer find_in_path
-@define('_EXTENSION_PHP', '.php3');
+define('_EXTENSION_PHP', '.php3');
 #@define('_EXTENSION_PHP', '');
 
 # le nom du repertoire ecrire/
-@define('_DIR_RESTREINT_ABS', 'ecrire/');
+define('_DIR_RESTREINT_ABS', 'ecrire/');
 # sommes-nous dans ecrire/ ?
-@define('_DIR_RESTREINT',
- (!@is_dir(_DIR_RESTREINT_ABS) ? "" : _DIR_RESTREINT_ABS));
+define('_DIR_RESTREINT',
+ (!is_dir(_DIR_RESTREINT_ABS) ? "" : _DIR_RESTREINT_ABS));
 # ou inversement ?
-@define('_DIR_RACINE', _DIR_RESTREINT ? '' : '../');
+define('_DIR_RACINE', _DIR_RESTREINT ? '' : '../');
 
 // nombre de repertoires depuis la racine
 $profondeur_url = _DIR_RESTREINT ? 0 : 1;
@@ -118,7 +118,8 @@ $type_urls = 'page';
 //
 // On note le numero IP du client dans la variable $ip
 //
-($ip = @$_SERVER['HTTP_X_FORWARDED_FOR']) OR $ip = @$_SERVER['REMOTE_ADDR'];
+if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+if (isset($_SERVER['REMOTE_ADDR'])) $ip = $_SERVER['REMOTE_ADDR'];
 
 // Pour renforcer la privacy, decommentez la ligne ci-dessous (ou recopiez-la
 // dans le fichier config/mes_options) : SPIP ne pourra alors conserver aucun
@@ -259,9 +260,6 @@ $plugins = array();  // voir le contenu du repertoire /plugins/
 # les surcharges de include_spip()
 $surcharges = array(); // format 'inc_truc' => '/plugins/chose/inc_truc2.php'
 
-// Masquer les warning
-error_reporting(E_ALL ^ E_NOTICE);
-
 // Variables du compilateur de squelettes
 
 $exceptions_des_tables = array();
@@ -292,8 +290,8 @@ $spip_version = 1.926;
 // 1.xxyy : xx00 versions stables publiees, xxyy versions de dev
 // (ce qui marche pour yy ne marchera pas forcement sur une version plus ancienne)
 // type nouvelles fonctionnalites, deplacement de fonctions ...
-$spip_version_affichee = '1.9.2 ++';
-$spip_version_code = 1.9206;
+$spip_version_affichee = '1.9.3 dev';
+$spip_version_code = 1.9207;
 
 // ** Securite **
 $auteur_session = $connect_statut = $connect_toutes_rubriques =  $hash_recherche = $hash_recherche_strict = '';
@@ -310,6 +308,10 @@ require_once(_DIR_RESTREINT . 'inc/utils.php');
 // Definition personnelles eventuelles
 
 if (_FILE_OPTIONS) include_once _FILE_OPTIONS;
+
+// Masquer les warning
+define('SPIP_ERREUR_REPORT',E_ALL ^ E_NOTICE);
+error_reporting(SPIP_ERREUR_REPORT);
 
 //
 // INITIALISER LES REPERTOIRES NON PARTAGEABLES ET LES CONSTANTES
