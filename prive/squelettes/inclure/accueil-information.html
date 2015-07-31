@@ -1,7 +1,7 @@
 <div class='accueil_informations articles liste'>
 	[(#SET{titre,#ARRAY{prepa,<:texte_statut_en_cours_redaction:>,prop,<:texte_statut_attente_validation:>,publie,<:texte_statut_publies:>}})]
 <B_cpt>
-	<h4>[(#URL_ECRIRE{articles}|afficher_plus_info{<:info_articles_2:>})]<:info_articles:></h4>
+	<h4><a href="#URL_ECRIRE{articles}"><:info_articles:></a></h4>
 	<ul class="liste-items">
 		<BOUCLE_cpt(DATA){liste prepa,prop,publie}><BOUCLE_arts(ARTICLES){statut=#VALEUR}{pagination 1}>
 			<li class="item[(#STATUT|=={publie}|oui)on]">
@@ -20,7 +20,7 @@
 
 <div class='accueil_informations auteurs liste'>
 	<B_cpta>
-		<h4>[(#URL_ECRIRE{auteurs}|afficher_plus_info{<:icone_auteurs:>})]<:icone_auteurs:></h4>
+		<h4><a href="#URL_ECRIRE{auteurs}"><:icone_auteurs:></a></h4>
 		<ul class="liste-items">
 			<BOUCLE_cpta(POUR){tableau #EVAL{$GLOBALS['liste_des_statuts']}}><BOUCLE_auts(AUTEURS){statut=#VALEUR}{tout} />
 			[(#TOTAL_BOUCLE|oui)
