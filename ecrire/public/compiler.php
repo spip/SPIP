@@ -642,15 +642,26 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle){
 
 			case 'idiome':
 				$l = array();
-				$cpl = '';
+				$code = '';
 				foreach ($p->arg as $k => $v){
 					$_v = calculer_liste($v, $descr, $boucles, $id_boucle);
 					if ($k) 
 					  $l[] = _q($k) . ' => ' . $_v;
-					else $cpl = " . $_v";
+					else $code = $_v;
 				}
-				$l = !$l ? '' : (", array(" . implode(",\n", $l) . ")");
-				$code = "_T('" . $p->module . ":" . $p->nom_champ . "'$cpl$l)";
+				/// Si le module n'est pas fourni,
+				/// l'expliciter sauf si calcule
+				if ($p->module) {
+					$m = $p->module .':'.$p->nom_champ;
+				} elseif ($p->nom_champ) {
+					$m = MODULES_IDIOMES .':'.$p->nom_champ;
+				} else  $m = '';
+
+				$code = (!$code ? "'$m'" :
+						($m ? "'$m' . $code" : 
+							("(strpos(\$x=$code, ':') ? \$x : ('" . MODULES_IDIOMES . ":' . \$x))")))
+				. (!$l ? '' : (", array(" . implode(",\n", $l) . ")"));
+				$code = "_T($code)";
 				if ($p->param){
 					$p->id_boucle = $id_boucle;
 					$p->boucles = &$boucles;
