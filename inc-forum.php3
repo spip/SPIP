@@ -381,7 +381,7 @@ function ajout_forum() {
 	global $forum_id_rubrique, $forum_id_parent, $forum_id_article, $forum_id_breve, $forum_id_auteur, $forum_id_syndic, $alea, $hash;
 	global $auteur_session;
 	global $ajouter_mot, $new;
-	global $HTTP_HOST, $REQUEST_URI, $HTTP_COOKIE_VARS, $REMOTE_ADDR;
+	global $REQUEST_URI, $HTTP_COOKIE_VARS, $REMOTE_ADDR;
 	$afficher_texte = $GLOBALS['afficher_texte'];
 	
 	if (!$GLOBALS['db_ok']) {
@@ -510,10 +510,10 @@ function ajout_forum() {
 				$adresse_site = lire_meta("adresse_site");
 				$nom_site_spip = lire_meta("nom_site");
 				if ($url[0] == '/') {
-					$url = "http://$HTTP_HOST$url";
+					$url = "$adresse_site$url";
 				}
 				else {
-					$url = "http://$HTTP_HOST".substr($REQUEST_URI, 0, strrpos($REQUEST_URI, '/') + 1).$url;
+					$url = "$adresse_site".substr($REQUEST_URI, 0, strrpos($REQUEST_URI, '/') + 1).$url;
 				}
 				$courr = "(ceci est un message automatique)\n\n";
 				$courr .= "Message poste ";
