@@ -129,6 +129,7 @@ function traduire_chaine($code, $args) {
 		$modules = array('spip', 'ecrire');
 
 	// modules demandes explicitement
+	$code_ori = $code; # le garder pour le fallback plus tard
 	if (strpos($code, ':')) {
 		if (ereg("^([a-z/]+):(.*)$", $code, $regs)) {
 			$modules = explode("/",$regs[1]);
@@ -145,13 +146,13 @@ function traduire_chaine($code, $args) {
 		$text = $GLOBALS[$var][$code];
 	}
 
-	// langues pas finies ou en retard (eh oui, c'est moche...)
+	// fallback langues pas finies ou en retard (eh oui, c'est moche...)
 	if ($spip_lang<>'fr') {
 		$text = ereg_replace("^<(NEW|MODIF)>","",$text);
 		if (!$text) {
 			$spip_lang_temp = $spip_lang;
 			$spip_lang = 'fr';
-			$text = traduire_chaine($code, $args);
+			$text = traduire_chaine($code_ori, $args);
 			$spip_lang = $spip_lang_temp;
 		}
 	}

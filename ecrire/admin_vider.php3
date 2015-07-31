@@ -93,18 +93,14 @@ if ($quota_cache) {
 } else {
 	echo _T('taille_cache_infinie');
 }
-
-	echo "\n";
-	echo $flag_gz ? _T('cache_mode_compresse') :
-		_T('cache_mode_non_compresse');
-	echo ' ('._T('cache_modifiable_webmestre').')</p>';
+echo ' ('._T('cache_modifiable_webmestre').')</p>';
 
 fin_cadre_relief();
 
 
-debut_cadre_relief("image-24.gif", false, "", "Images calcul&eacute;es automatiquement");
+debut_cadre_relief("image-24.gif", false, "", _T('info_images_auto'));
 	echo "<div style='text-align: center;'>";
-	echo "<iframe width='100px' height='40px' src='../spip_cache.php3?id_auteur=$connect_id_auteur&hash=".calculer_action_auteur("afficher_cache_images")."&afficher_cache_images=oui'></iframe>";
+	echo "<iframe width='530px' height='65px' src='../spip_cache.php3?id_auteur=$connect_id_auteur&hash=".calculer_action_auteur("afficher_cache_images")."&afficher_cache_images=oui&lang=$spip_lang'></iframe>";
 	echo "</div>";
 
 echo "\n<FORM ACTION='../spip_cache.php3' METHOD='post'>";

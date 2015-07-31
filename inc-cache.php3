@@ -264,14 +264,19 @@ function calculer_cache_vignettes() {
 		// Eviter ".", "..", ".htaccess", etc.
 		if ($fichier[0] == '.') continue;
 		if ($regexp AND !ereg($regexp, $fichier)) continue;
-		if (is_dir(_DIR_IMG."/$fichier") AND ereg("^cache-", $fichier)) {
-			$taille += calculer_taille_dossier(_DIR_IMG."/$fichier");
+		if (is_dir(_DIR_IMG.$fichier) AND ereg("^cache-", $fichier)) {
+			$taille += calculer_taille_dossier(_DIR_IMG.$fichier);
 		}
 	}
 	closedir($handle);
 	
 	include_ecrire("inc_filtres.php3");
-	echo "<html><body><div style='font-family: verdana, arial, sans; font-size: 12px;'><b>".taille_en_octets($taille)."</b></div></body></html>";
+	echo "<html><body>\n";
+	echo "<div style='font-family: verdana, arial, sans; font-size: 12px;'>";
+	echo "<p align='justify'>\n";
+	echo _T('ecrire:taille_cache_image', array('dir' => _DIR_IMG,
+		'taille' => "<b>".taille_en_octets($taille)."</b>"));
+	echo "</p></div></body></html>";
 
 }
 

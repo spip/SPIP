@@ -386,7 +386,7 @@ define_once('_FILE_GARBAGE', _DIR_SESSIONS . '.poubelle');
 
 define_once('_DIR_IMG_ICONES', _DIR_IMG . "icones/");
 define_once('_DIR_IMG_ICONES_BARRE', _DIR_IMG . "icones_barre/");
-define_once('_DIR_TeX', _DIR_IMG . "TeX/");
+define_once('_DIR_TeX', _DIR_IMG . "cache-TeX/");
 
 // pour ceux qui n'aiment pas nos icones et notre vocabulaire, tout est prevu
 
