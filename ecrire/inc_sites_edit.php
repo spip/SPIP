@@ -71,19 +71,22 @@ if ($new == 'oui'){
 	if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
 		debut_cadre_relief("site-24.gif");
 		
-		$link = new Link(http_php_scriptnq('sites'));
-		$link->addVar('id_rubrique', $id_rubrique);
-		$link->addVar('new', 'oui');
-		$link->addVar('redirect', $clean_link->getUrl());
-		$link->addVar('analyser_site', 'oui');
-		echo $link->getForm();
-		
-		echo "<font face='Verdana,Arial,Sans,sans-serif' size=2>"._T('texte_referencement_automatique')."</font>";
-		echo "<div align='right'><input type=\"text\" name=\"url\" class='fondl' value=\"http://\">";
-		echo "<input type=\"submit\" name=\"submit\" value=\""._T('bouton_ajouter')."\" class='fondo'>";
-		
+		echo '<form action=',
+		  http_php_script('sites'),
+		  ">\n",
+		  "<input type='hidden' name='id_rubrique' value='$id_rubrique' />\n",
+		  "<input type='hidden' name='new' value='oui' />\n",
+		  "<input type='hidden' name='analyser_site' value='oui' />\n",
+		  "<input type='hidden' name='redirect' value='",
+		  ($clean_link->getUrl()),
+		  "' />\n",
+		  "<font face='Verdana,Arial,Sans,sans-serif' size=2>",
+		  _T('texte_referencement_automatique'),
+		  "</font>",
+		  "\n<div align='right'><input type=\"text\" name=\"url\" class='fondl' value=\"http://\" />\n",
+		  "<input type=\"submit\"  value=\""._T('bouton_ajouter')."\" class='fondo' />\n",
+		  "</form>";		
 		fin_cadre_relief();
-		echo "</form>";
 		
 		echo "<p><blockquote><b>"._T('texte_non_fonction_referencement')."</b>";
 		$cadre_ouvert = true;
