@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Accueil du site',
+'article' => 'Article',
 'articles' => 'Articles',
 'articles_auteur' => 'Articles de cet auteur',
 'articles_populaires' => 'Articles les plus populaires',
@@ -16,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'Il n\'y a pas de site &agrave; cette adresse',
 'aucune_breve' => 'Il n\'y a pas de br&egrave;ve &agrave; cette adresse',
 'aucune_rubrique' => 'Il n\'y a pas de rubrique &agrave; cette adresse',
+'auteur' => 'Auteur',
 'autres' => 'Autres',
 'autres_breves' => 'Autres br&egrave;ves',
 'autres_groupes_mots_clefs' => 'Autres groupes de mots-cl&eacute;s',
@@ -23,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bonjour' => 'Bonjour',
+'breve' => 'Br&egrave;ve',
 'breves' => 'Br&egrave;ves',
 
 // C
@@ -65,6 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Message',
 'messages_forum' => 'Messages de forum',
 'messages_recents' => 'Messages de forums les plus r&eacute;cents',
+'mots_clef' => 'Mot-cl&eacute;',
 'mots_clefs' => 'Mots-cl&eacute;s',
 'mots_clefs_meme_groupe' => 'Mots-cl&eacute;s dans le m&ecirc;me groupe',
 
