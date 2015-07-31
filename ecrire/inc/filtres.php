@@ -2349,7 +2349,7 @@ function singulier_ou_pluriel($nb,$chaine_un,$chaine_plusieurs,$var='nb'){
  * @param string $fonction
  * @return string
  */
-function filtre_icone_dist($lien, $texte, $fond, $align="", $fonction="", $class=""){
+function filtre_icone_dist($lien, $texte, $fond, $align="", $fonction="", $class="",$javascript=""){
 	if ($icone_renommer = charger_fonction('icone_renommer','inc',true))
 		list($fond,$fonction) = $icone_renommer($fond,$fonction);
 
