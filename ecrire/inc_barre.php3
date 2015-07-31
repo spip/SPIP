@@ -41,9 +41,10 @@ function bouton_barre_racc($action, $img, $help, $formulaire, $texte) {
 	global $flag_ecrire;
 	$champ = "document.$formulaire.$texte";
 	$champhelp = "document.$formulaire.helpbox$texte";
-	return "<a href=\"".$action."\" class='spip_barre' tabindex='1000' title=\"".attribut_html($help)."\" "
-		."onMouseOver=\"helpline('".addslashes($help)."',$champhelp)\" onMouseOut=\"helpline('"._T('barre_aide')."', $champhelp)\">"
-		."<img src='".($flag_ecrire ? "../" : "")."IMG/icones_barre/".$img."' border='0' height='16' width='16'></a>";
+	$retour = "<a href=\"".$action."\" class='spip_barre' tabindex='1000' title=\"".attribut_html($help)."\"";
+	if (!$flag_ecrire) $retour .= " onMouseOver=\"helpline('".addslashes($help)."',$champhelp)\" onMouseOut=\"helpline('"._T('barre_aide')."', $champhelp)\"";
+	$retour .= "><img src='".($flag_ecrire ? "../" : "")."IMG/icones_barre/".$img."' border='0' height='16' width='16'></a>";
+	return $retour;
 }
 
 function afficher_barre($formulaire='',$texte='', $forum=false) {
@@ -109,10 +110,7 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		$ret .= "</td>";
 
 		if ($flag_ecrire) {
-			$ret .= "<td> &nbsp; </td>";
-			$col++;
-
-			$ret .= "<td align='$spip_lang_right' onMouseOver=\"helpline(_T('barre_aide_rac'),helpbox$texte)\" onMouseOut=\"helpline('Utilisez les raccourcis typographiques pour enrichir votre mise en page', $champhelp)\">";
+			$ret .= "<td align='$spip_lang_right'>";
 			$col++;
 			$ret .= "&nbsp;&nbsp;&nbsp;";
 			$ret .= aide("raccourcis");
