@@ -40,7 +40,7 @@ function action_tester_taille_dist() {
 
 	// si l'intervalle est assez petit, on garde la valeur min
 	if ($GLOBALS['taille_max']*$GLOBALS['taille_max']-$GLOBALS['taille_min']*$GLOBALS['taille_min']<50000){
-		ecrire_meta('max_taille_vignettes',$t=$GLOBALS['taille_min']*$GLOBALS['taille_min'],'non');
+		ecrire_meta('max_taille_vignettes',$t=($GLOBALS['taille_min']*$GLOBALS['taille_min'])*0.9,'non');
 		echo round($t/1000000,3).' Mpx';
 		die();
 	}
