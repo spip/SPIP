@@ -78,6 +78,7 @@ function action_spip_image_effacer_dist($arg) {
  *     - true pour le passer en 3e paramètre
  * @param string $source
  *     Chemin du logo uploadé sur le serveur en attente d'utilisation
+ * @return void
 **/
 function action_spip_image_ajouter_dist($arg,$sousaction2,$source,$return=false) {
 	global $formats_logos;

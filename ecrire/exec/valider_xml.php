@@ -178,7 +178,25 @@ function valider_resultats($res, $mode)
 		     . "</table>");
 }
 
-// http://doc.spip.org/@valider_script
+/**
+ * Valide l'existence d'un script ou d'une fonction
+ * 
+ * S'il y a l'attribut minipres, le test est non significatif
+ * Le script nécessite peut-être des arguments, on lui en donne,
+ * en appelant la fonction _args associée si elle existe.
+ * Si ça ne marche toujours pas, les arguments n'étaient pas bons
+ * ou c'est une authentification pour action d'administration;
+ * Tant pis, on signale le cas par un résultat négatif.
+ * 
+ * @param string $transformer_xml
+ * @param string $script
+ *  Nom de la fonction à charger
+ * @param string $dir
+ *  Nom du répertoire qui contiendrait le fichier et/ou la fonction à chercher/charger.
+ * @param string $ext
+ *  Nom de l'extension du fichier contenant la fonction à vérifier.
+ * @return array
+ */
 function valider_script($transformer_xml, $script, $dir, $ext)
 {
 	$script = basename($script, '.php');
@@ -216,7 +234,15 @@ function valider_script($transformer_xml, $script, $dir, $ext)
 	return array(count($err), $res, $err, $script, $appel);
 }
 
-// http://doc.spip.org/@valider_pseudo_url
+/**
+ * Construire la bonne URL selon l'endroit où on se trouve.
+ * 
+ * @param string $dir
+ *     Par défaut, on vérifie si on est sur une page `?exec=XX`
+ * @param string $script
+ * @param string $args [description]
+ * @return string
+ */
 function valider_pseudo_url($dir, $script, $args='')
 {
 	return  ($dir == 'exec')
@@ -224,9 +250,16 @@ function valider_pseudo_url($dir, $script, $args='')
 	: ("./?$dir=$script" . ($args ? "&$args" : ''));
 }
 
-// On essaye de valider un texte meme sans Doctype
-// a moins qu'un Content-Type dise clairement que ce n'est pas du XML
-// http://doc.spip.org/@valider_skel
+/**
+ * Essayer de valider un texte même sans Doctype
+ * à moins qu'un Content-Type dise clairement que ce n'est pas du XML
+ * 
+ * @param string $transformer_xml
+ * @param string $file
+ * @param string $dir
+ * @param string $ext
+ * @return array
+ */
 function valider_skel($transformer_xml, $file, $dir, $ext)
 {
 	if (!lire_fichier ($file, $text)) return array('/', '/', $file,''); 
@@ -259,12 +292,20 @@ function valider_skel($transformer_xml, $file, $dir, $ext)
 	return array(count($res->err), strlen($res->page), $res->err, $script, $url);
 }
 
-// Analyser le code pour construire un contexte plausible complet
-// i.e. ce qui est fourni par $Pile[0]
-// en eliminant les exceptions venant surtout des Inclure
-// Il faudrait trouver une typologie pour generer un contexte parfait:
-// actuellement ca produit parfois des erreurs SQL a l'appel de $skel_nom
-// http://doc.spip.org/@valider_contexte
+/**
+ * Analyser le code pour construire un contexte plausible complet
+ * 
+ * i.e. ce qui est fourni par `$Pile[0]`
+ * en éliminant les exceptions venant surtout des Inclure
+ *
+ * Il faudrait trouver une typologie pour générer un contexte parfait:
+ * actuellement ça produit parfois des erreurs SQL à l'appel de $skel_nom
+ * 
+ * @see valider_skel()
+ * @param string $code
+ * @param string $file
+ * @return array
+ */
 function valider_contexte($code, $file)
 {
 	static $exceptions = array('action', 'doublons', 'lang');
