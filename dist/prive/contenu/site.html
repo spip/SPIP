@@ -1,5 +1,5 @@
 <BOUCLE_afficher_contenu(SYNDIC){id_syndic=#ENV{id}}{statut?}>
-<div class="champ contenu_nom_site[ (#NOM_SITE*|?{'',vide})]">
+<div class="champ contenu_nom_site[ (#NOM_SITE*|sinon{#URL_SITE*}|?{'',vide})]">
 <div class='label'><:form_prop_nom_site:></div>
 <div dir='#LANG_DIR' class='#EDIT{hyperlien} nom_site'><a href='#URL_SITE'>#NOM_SITE</a></div>
 </div>
