@@ -1542,11 +1542,12 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	if ($code) echo $code."\n";
 
 	// Supprime pour l'instant: pas de creation mathml
-	// <script type="text/javascript" src="../mathmlinHTML.js"></script>
+	// < script type="text/javascript" src="../mathmlinHTML.js"></script>
+	// Supprime pour l'instant: pas de detection des plugin
+	// < script type="text/javascript" src="js_detectplugins.js"></script>
 
+	echo $GLOBALS['browser_layer'];
 ?>
-<!-- <script type="text/javascript" src="js_detectplugins.js"></script> -->
-<script type='text/javascript' src="layer.js"></script>
 <script type='text/javascript'><!--
 	var init_gauche = true;
 
@@ -1821,9 +1822,6 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	var antifocus=false; // effacement titre quand new=oui
 	
 //--></script>
-
-	<?php afficher_script_layer(); ?>
-
 
 	<link rel="alternate stylesheet" href="spip_style_invisible.css" type="text/css" title="invisible" />
 	<link rel="stylesheet" href="spip_style_visible.css" type="text/css" title="visible" />
@@ -2219,7 +2217,7 @@ function afficher_menu_rubriques() {
 	global $spip_lang_rtl, $spip_ecran;
 	$date_maj = lire_meta("date_calcul_rubriques");
 
-	echo "<script type='text/javascript' src='js_menu_rubriques.php?date=$date_maj&spip_ecran=$spip_ecran&dir=$spip_lang_rtl'></script>";
+	echo http_script('',"js_menu_rubriques.php?date=$date_maj&spip_ecran=$spip_ecran&dir=$spip_lang_rtl",'');
 }
 
 
@@ -2598,9 +2596,8 @@ else {
 	// Barre des gadgets
 	//
 	function afficher_javascript ($html) {
-		return "<script type='text/javascript'><!--\ndocument.write(\""
-		.addslashes(str_replace("\n", " ", $html))
-		."\");\n// -->\n</script>\n";
+	  return http_script("
+document.write(\"" . addslashes(str_replace("\n", " ", $html))."\")");
 	}
 
 	echo "<table width='$largeur' cellpadding='0' cellspacing='0' align='center'><tr><td>";
@@ -3151,8 +3148,8 @@ function fin_html() {
 	if ($GLOBALS['spip_session'] && $GLOBALS['auteur_session']['ip_change']) {
 		echo 
 		  http_img_pack('rien.gif', "name='img_session' width='0' height='0' alt='' /"),
-		  "\n<script type='text/javascript'><!-- \n",
-		  "document.img_session.src='../spip_cookie.php3?change_session=oui';\n", "// --></script>\n";
+		  http_script("
+document.img_session.src='../spip_cookie.php3?change_session=oui'");
 	}
 
 	echo "</body></html>\n";

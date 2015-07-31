@@ -165,7 +165,7 @@ function login_pour_tous($cible, $prive, $message, $action) {
 				this.next_session_password_md5.value = calcMD5(\"$alea_futur\" + this.session_password.value);
 				this.session_password.value = \"\";
 			}'");
-			echo http_script('', _DIR_RESTREINT_ABS . 'md5.js');
+			echo http_script('', _DIR_INCLUDE . 'md5.js');
 		}
 		echo "<form name='form_login' action='spip_cookie.php3' method='post'",
 		  $challenge,

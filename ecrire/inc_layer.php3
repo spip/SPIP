@@ -4,129 +4,81 @@
 if (defined("_INC_LAYER")) return;
 define("_INC_LAYER", "1");
 
-
-
-
-function test_layer(){
-	global $browser_name, $browser_version, $browser_description;
-
-	if (
-	(eregi("msie", $browser_name) AND $browser_version >= 5)
-	|| (eregi("mozilla", $browser_name) AND $browser_version >= 5)
-	|| (eregi("opera", $browser_name) AND $browser_version >= 7)
-		|| (eregi("safari", $browser_name))
-	)
-		return true;
-}
-
-
-function afficher_script_layer(){
-
-	if (test_layer()){
-		echo '<script type="text/javascript" src="' . _DIR_RESTREINT . 'layer.js">';
-		echo "</script>\n";
-	}
-}
-
-
 function debut_block_visible($nom_block){
-	if (test_layer()){
-		global $numero_block;
-		global $compteur_block;
-
-		if (!$numero_block["$nom_block"] > 0){
-			$compteur_block++;
-			$numero_block["$nom_block"] = $compteur_block;
-		}
-		$retour .= "<div id='Layer".$numero_block["$nom_block"]."' style='display: block'>";
+	global $numero_block, $compteur_block, $browser_layer;
+	if (!$browser_layer) return '';
+	if (!$numero_block["$nom_block"] > 0){
+		$compteur_block++;
+		$numero_block["$nom_block"] = $compteur_block;
 	}
-	return $retour;
+	return "<div id='Layer".$numero_block["$nom_block"]."' style='display: block'>";
+
 }
 
 function debut_block_invisible($nom_block){
-	if (test_layer()){
-		global $numero_block;
-		global $compteur_block;
+	global $numero_block, $compteur_block, $browser_layer;
+	if (!$browser_layer) return '';
+	if (!$numero_block["$nom_block"] > 0){
+		$compteur_block++;
+		$numero_block["$nom_block"] = $compteur_block;
+	}
+
+	return http_script("
+vis['".$numero_block["$nom_block"]."'] = 'hide';
+document.write('<div id=\"Layer".$numero_block["$nom_block"]."\" style=\"display: none; margin-top: 1;\">');",
+			      '',
+			   "<div id='Layer".$numero_block["$nom_block"]."' style='display: block;'>");
+
+}
+
+function fin_block() {
+  return (!$GLOBALS['browser_layer'] ? '' : "<div style='clear: both;'></div></div>");
+}
+
+function bouton_block_invisible($nom_block) {
+	global $numero_block, $compteur_block, $browser_layer, $spip_lang_rtl;
+
+	$num_triangle = $compteur_block + 1;
+
+	if (!$browser_layer) return '';
+	$blocks = explode(",", $nom_block);
+
+	for ($index=0; $index < count($blocks); $index ++){
+		$nom_block = $blocks[$index];
 
 		if (!$numero_block["$nom_block"] > 0){
 			$compteur_block++;
 			$numero_block["$nom_block"] = $compteur_block;
 		}
 
-		$retour = "\n<script type='text/javascript'><!--\n";
-		$retour .= "vis['".$numero_block["$nom_block"]."'] = 'hide';\n";
-		$retour .= "document.write('<div id=\"Layer".$numero_block["$nom_block"]."\" style=\"display: none; margin-top: 1;\">');\n";
-		$retour .= "//-->\n";
-		$retour .= "</script>\n";
-
-		$retour .= "<noscript><div id='Layer".$numero_block["$nom_block"]."' style='display: block;'></noscript>\n";
-	}
-	return $retour;
-}
-
-function fin_block() {
-	if (test_layer()) {
-		return "<div style='clear: both;'></div></div>";
-	}
-}
-
-function bouton_block_invisible($nom_block) {
-	global $numero_block;
-	global $compteur_block;
-	global $spip_lang_rtl;
-
-	$num_triangle = $compteur_block + 1;
-
-	if (test_layer()) {
-		$blocks = explode(",", $nom_block);
-
-		for ($index=0; $index < count($blocks); $index ++){
-			$nom_block = $blocks[$index];
-
-			if (!$numero_block["$nom_block"] > 0){
-				$compteur_block++;
-				$numero_block["$nom_block"] = $compteur_block;
-			}
-
-			$javasc .= "swap_couche(\\'".$numero_block[$nom_block]."\\', \\'$spip_lang_rtl\\',\\'" . _DIR_IMG_PACK . "\\');";
+		$javasc .= "swap_couche(\\'".$numero_block[$nom_block]."\\', \\'$spip_lang_rtl\\',\\'" . _DIR_IMG_PACK . "\\');";
 		}
-		$retour = "\n<script type='text/javascript'><!--\n";
-		$retour .= "document.write('<a class=\"triangle_block\" href=\"javascript:$javasc\"><img name=\"triangle".$numero_block["$nom_block"]."\" src=\"". _DIR_IMG_PACK . "deplierhaut$spip_lang_rtl.gif\" alt=\"\" title=\"".addslashes(_T('info_deplier'))."\" width=\"10\" height=\"10\" border=\"0\"></a>');\n";
-		$retour .= "//-->\n";
-		$retour .= "</script>\n";
-
-		return $retour;
-	}
+	return http_script("
+document.write('<a class=\"triangle_block\" href=\"javascript:$javasc\"><img name=\"triangle".$numero_block["$nom_block"]."\" src=\"". _DIR_IMG_PACK . "deplierhaut$spip_lang_rtl.gif\" alt=\"\" title=\"".addslashes(_T('info_deplier'))."\" width=\"10\" height=\"10\" border=\"0\"></a>');\n");
 }
 
 
 function bouton_block_visible($nom_block){
-	global $numero_block;
-	global $compteur_block;
-	global $spip_lang_rtl;
+	global $numero_block, $compteur_block, $browser_layer, $spip_lang_rtl;
 
 	$num_triangle = $compteur_block + 1;
 
-	if (test_layer()) {
-		$blocks = explode(",", $nom_block);
+	if (!$browser_layer) return '';
+	$blocks = explode(",", $nom_block);
 
-		for ($index=0; $index < count($blocks); $index ++){
-			$nom_block = $blocks[$index];
+	for ($index=0; $index < count($blocks); $index ++){
+		$nom_block = $blocks[$index];
 
-			if (!$numero_block["$nom_block"] > 0){
-				$compteur_block++;
-				$numero_block["$nom_block"] = $compteur_block;
-			}
-
-			$javasc .= "swap_couche(\\'".$numero_block[$nom_block]."\\', \\'$spip_lang_rtl\\',\\'" . _DIR_IMG_PACK . "\\');";
+		if (!$numero_block["$nom_block"] > 0){
+			$compteur_block++;
+			$numero_block["$nom_block"] = $compteur_block;
 		}
-		$retour = "\n<script type='text/javascript'><!--\n";
-		$retour .= "document.write('<a class=\"triangle_block\" href=\"javascript:$javasc\"><img name=\"triangle".$numero_block["$nom_block"]."\" src=\"". _DIR_IMG_PACK . "deplierbas.gif\" alt=\"\" title=\"".addslashes(_T('info_deplier'))."\" width=\"10\" height=\"10\" border=\"0\"></a>');\n";
-		$retour .= "//-->\n";
-		$retour .= "</script>\n";
 
-		return $retour;
-	}
+		$javasc .= "swap_couche(\\'".$numero_block[$nom_block]."\\', \\'$spip_lang_rtl\\',\\'" . _DIR_IMG_PACK . "\\');";
+		}
+
+	return http_script("
+document.write('<a class=\"triangle_block\" href=\"javascript:$javasc\"><img name=\"triangle".$numero_block["$nom_block"]."\" src=\"". _DIR_IMG_PACK . "deplierbas.gif\" alt=\"\" title=\"".addslashes(_T('info_deplier'))."\" width=\"10\" height=\"10\" border=\"0\"></a>');\n");
 }
 
 verif_butineur();
