@@ -217,7 +217,6 @@ else {
 
 		echo "</div>";
 		echo "</div>";
-		echo "</div>";
 	}
 
 
@@ -247,6 +246,7 @@ else {
 				}
 		}
 		echo "</ol>";
+		echo "</div>";
 		echo "</div>";
 	}
 

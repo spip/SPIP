@@ -23,12 +23,10 @@ function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubri
 	include_spip('inc/headers');
 
 	http_no_cache();
-  
-	if ($spip_ecran == "large") $largeur = 974; else $largeur = 750;
-  
+   
 	return init_entete($titre, $id_rubrique, $minipres)
 	. init_body($rubrique, $sous_rubrique, $id_rubrique,$menu)
-	. "<div id='page'>"
+	. "<div id='page' class='$spip_ecran'>"
 	. alertes_auteur()
 	. auteurs_recemment_connectes();
 }

@@ -44,10 +44,10 @@ function block_parfois_visible($nom, $invite, $masque, $style='', $visible=false
 
 // http://doc.spip.org/@debut_block_depliable
 function debut_block_depliable($deplie,$id=""){
-	$class=' deplie';
+	$class=' blocdeplie';
 	// si on n'accepte pas js, ne pas fermer
 	if (_SPIP_AJAX AND !$deplie)
-		$class=" replie";
+		$class=" blocreplie";
 	return "<div ".($id?"id='$id' ":"")."class='bloc_depliable$class'>";	
 }
 // http://doc.spip.org/@fin_block
@@ -72,12 +72,12 @@ function bouton_block_depliable($texte,$deplie,$ids=""){
 	$extra_js = "";
 	if ($a = extraire_balise($texte,'a')){
 		$ar = inserer_attribut($a,'onclick','return false;',false);
-		$ar = inserer_attribut($a,'onclick','return false;',false);
 		$texte = str_replace($a,$ar,$texte);
 		$extra_js .= "\njQuery('#$bouton_id a').dblclick(function(){window.location.replace($(this).attr('href'));});";
 	}
 	if ($deplie==='incertain')
 		$extra_js .= "\nif (jQuery('$cible').is(':visible')) $('#$bouton_id').addClass('deplie').removeClass('replie');";
+	//$extra_js .= "\njQuery('#$bouton_id').hover(function(){jQuery(this).addClass('hover');},function(){jQuery(this).removeClass('hover');});";
 
 	return "<div "
 	  .($bouton_id?"id='$bouton_id' ":"")
@@ -85,7 +85,8 @@ function bouton_block_depliable($texte,$deplie,$ids=""){
 	  . (($deplie===-1)?"":
 	  " onclick=\"toggleBouton(jQuery(this),jQuery('$cible'));\""
 	  ." onmouseover=\"jQuery(this).addClass('hover');\""
-	  ." onmouseout=\"jQuery(this).removeClass('hover');\"")
+	  ." onmouseout=\"jQuery(this).removeClass('hover');\""
+	  )
 	  .">$texte</div>"
 	  . (strlen($extra_js)?"<script><!--
 	  jQuery(document).ready(function(){ $extra_js

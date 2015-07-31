@@ -86,14 +86,15 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	
 	return $ret
 	 //. "</div>\n"
-	."<div class='cadre-padding' style='overflow:hidden'>"
+	."<div class='cadre_padding'>"
 	;
 }
 
 // http://doc.spip.org/@fin_cadre
 function fin_cadre($style='') {
 
-	$ret = "</div></div>\n";
+	$ret = "</div><div class='nettoyeur'></div>".
+	"</div>\n";
 
 	/*if ($style != "forum" AND $style != "thread-forum")
 		$ret .= "<div style='height: 5px;'></div>\n";*/
@@ -1046,11 +1047,7 @@ function gros_titre($titre, $ze_logo='', $aff=true){
 
 // http://doc.spip.org/@debut_grand_cadre
 function debut_grand_cadre($return=false){
-	global $spip_ecran;
-	
-	if ($spip_ecran == "large") $largeur = 974;
-	else $largeur = 750;
-	$res =  "\n<br /><br />\n<div class='table_page' style='width:${largeur}px;'>\n";
+	$res =  "\n<br /><br />\n<div class='table_page'>\n";
 	if ($return) return $res; else echo $res;
 }
 
@@ -1084,25 +1081,13 @@ function fin_cadre_formulaire($return=false){
 // http://doc.spip.org/@debut_gauche
 function debut_gauche($rubrique = "accueil", $return=false) {
 	global $spip_display;
-	global $spip_ecran;
+	global $spip_ecran, $spip_lang_rtl, $spip_lang_left;
 
-	// Ecran panoramique ?
-	if ($spip_ecran == "large") {
-		$largeur_ecran = 974;
-		$rspan = " rowspan='2'";
-	}
-	else {
-		$largeur_ecran = 750;
-		$rspan = '';
-	}
-
-	// table fermee par fin_gauche()
+	// div conteneur fermee par fin_gauche()
 	// div fermee par debut_droite() ou creer_colonne_droite
 
-	$res = "<br /><table class='table_page' width='$largeur_ecran' cellpadding='0' cellspacing='0' border='0'>
-		<tr>\n<td style='width: 200px' class='colonne_etroite serif' valign='top' $rspan>
-		\n<div id='navigation' style='width: 200px; overflow:hidden;'>
-\n";
+	$res = "<br /><div id='conteneur'>
+		\n<div id='navigation'>\n";
 		
 	if ($spip_display == 4) $res .= "<!-- ";
 
@@ -1112,7 +1097,7 @@ function debut_gauche($rubrique = "accueil", $return=false) {
 // http://doc.spip.org/@fin_gauche
 function fin_gauche()
 {
-	return "</td></tr></table>";
+	return "</div><br class='nettoyeur' />";
 }
 
 //
@@ -1127,26 +1112,7 @@ function creer_colonne_droite($rubrique="", $return= false){
 	if ((!($spip_ecran == "large")) OR $deja_colonne_droite) return '';
 	$deja_colonne_droite = true;
 
-	if  (formulaire_large()) {
-			$espacement = 17;
-			$largeur = 140;
-	} else {
-			$espacement = 37;
-			$largeur = 200;
-	}
-
-	$res = "\n</div></td><td style='width: "
-	.  $espacement
-	.  "px' rowspan='2' class='colonne_etroite'>&nbsp;</td>"
-	. "\n<td rowspan='1' class='colonne_etroite'></td>"
-	. "\n<td style='width: "
-	.  $espacement
-	.  "px ' rowspan='2' class='colonne_etroite'>&nbsp;</td>"
-	. "\n<td style='width: "
-	. $largeur 
-	. "px' rowspan='2' align='"
-	. $spip_lang_left
-	. "' valign='top' class='colonne_etroite'><div id='extra' style='width:$largeur'>";
+	$res = "\n</div><div id='extra'>";
 
 	if ($return) return $res; else echo $res;
 }
@@ -1167,20 +1133,10 @@ function debut_droite($rubrique="", $return= false) {
 
 	$res .= liste_articles_bloques();
 
-	if ($spip_ecran != "large") {
-		$res .= "</div></td><td style='width: 50px'>&nbsp;</td>";
-	}
-	else {
-		$res .= creer_colonne_droite($rubrique, true)
-		. "</div></td></tr>\n<tr>";
-	}
+	$res .= creer_colonne_droite($rubrique, true)
+	. "</div>";
 
-	if ($spip_ecran == 'large' AND formulaire_large())
-		$largeur = 600;
-	else
-		$largeur = 500;
-
-	$res .= "\n<td id='contenu' style='width:" . $largeur. "px' valign='top' align='" . $spip_lang_left."' rowspan='1' class='serif'>";
+	$res .= "\n<div id='contenu' class='serif'>";
 
 	// touche d'acces rapide au debut du contenu : z
 	// Attention avant c'etait 's' mais c'est incompatible avec
@@ -1525,7 +1481,7 @@ function sous_enfant_rub($collection2){
 
 // http://doc.spip.org/@afficher_enfant_rub
 function afficher_enfant_rub($id_rubrique, $bouton=false, $return=false) {
-	global  $spip_lang_right, $spip_display;
+	global  $spip_lang_left,$spip_lang_right, $spip_display;
 	
 	$les_enfants = enfant_rub($id_rubrique);
 	$n = strlen($les_enfants);
@@ -1542,26 +1498,22 @@ function afficher_enfant_rub($id_rubrique, $bouton=false, $return=false) {
 	}
 
 	$res = "\n<div>&nbsp;</div>"
-	. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>"
-	. "\n<tr><td style='width: 50%' valign='top' rowspan='2'>"
+	. "<div style='float:$spip_lang_left;width:49%;position:relative;'>"
 	. $les_enfants
-	. "</td>\n<td style='width: 20px;' rowspan='2'>"
-	. http_img_pack("rien.gif", ' ', "width='20'")
-	. "</td>"
-	. "\n<td style='width: 50%' valign='top'>"
+	. "</div>"
+	. "<div style='float:$spip_lang_right;width:49%;position:relative;'>"
 	. $les_enfants2
+	. "</div>"
 	. "&nbsp;"
-	. "</td></tr>"
-	. "\n<tr><td style='text-align: "
+	. "<div style='float:"
 	. $spip_lang_right
-	. ";' valign='bottom'>\n<div style='float:"
-	. $spip_lang_right
-	. "'>"
+	. ";position:relative;'>"
 	. (!$bouton ? ''
 		 : (!$id_rubrique
 		    ? icone(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.gif", "creer.gif",$spip_lang_right, false)
 		    : icone(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.gif", "creer.gif",$spip_lang_right,false)))
-	. "</div></td></tr></table>";
+	. "</div>"
+	. "<br class='nettoyeur' />";
 
 	if ($return) return $res; else echo $res;
 }

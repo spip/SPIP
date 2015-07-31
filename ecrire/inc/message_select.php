@@ -39,8 +39,12 @@ function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_aute
 		$messages_vus[$r]= $r;
 	}
 	
-	if (!$important) return $res;
-	else return "<div class='cadre-couleur'><div class='cadre-padding'>$res</div></div>";
+	if (!$important OR !strlen($res)) return $res;
+	else
+		return
+			debut_cadre_couleur('',true)
+			. $res
+			. fin_cadre_couleur(true);
 }
 
 // http://doc.spip.org/@afficher_message_boucles

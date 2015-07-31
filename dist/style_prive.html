@@ -991,11 +991,8 @@ td.icone a img {
 * Cadre couleur foncee
 */
 
-.cadre-padding {
-	/*font-family: Verdana, Geneva, helvetica, sans;
-	font-size: 12px;*/
+.cadre_padding {
 	padding: 6px;
-	/*position: relative;*/
 }
 /*
 .cadre-titre {
@@ -1219,7 +1216,7 @@ div.liste,div.cadre-liste {
 	margin-bottom: 3px;
 	background:white;
 }
-div.cadre-liste .cadre-padding{padding:0;}
+div.cadre-liste .cadre_padding {padding:0;}
 div.cadre-liste .tranches{border-top:1px solid black;}
 
 	
@@ -1679,16 +1676,22 @@ a.ical {
 	background-repeat: no-repeat;
 	background-position: [(#ENV{ltr}|choixsiegal{left,left,right})] 6px;
 	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 16px;
+
 	}
+
 .cadre-couleur-foncee .titrem {background-color:##ENV{couleur_foncee,3874b0};color:#fff;}
 .cadre-couleur-foncee .cadre .titrem {color:#000;}
 
 .cadre-trait-couleur .titrem {background-color:##ENV{couleur_foncee,3874b0};color:#fff;}
 .cadre-trait-couleur .cadre .titrem {background-color: #eee;color:#000;}
 
-.ajax-action {padding-top:1px;}
+.ajax-action {padding-top:1px;clear:both;position:relative;}
+
+.dater {position:relative;}
 .dater,.dater .titrem {background-color:##ENV{couleur_claire,edf3fe};}
-.dater .titrem.hover {background-color:##ENV{couleur_foncee,3874b0};}
+.dater .titrem {}
+.dater .hover {background-color:##ENV{couleur_foncee,3874b0};}
+
 #contenu .ajax-action .cadre .titrem {background-color:##ENV{couleur_claire,edf3fe};}
 #contenu .ajax-action .titrem.hover {background-color:##ENV{couleur_foncee,3874b0};}
 .mots_tous #contenu .titrem.impliable {background-color:##ENV{couleur_claire,edf3fe};}
@@ -1708,13 +1711,14 @@ a.ical {
 #navigation .titrem {text-align:center;}
 #extra .titrem {text-align:center;}
 
+
 /* Deplier / Replier */
 .replie { background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierhaut[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif); }
 .hover { background-color: ##ENV{couleur_claire,edf3fe}; }
 .deplie { background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierbas.gif); }
 .impliable {}
-.bloc_depliable.replie { display: none; }
-.bloc_depliable.deplie { display: block; background: none; }
+.blocreplie { display: none; }
+.blocdeplie { display: block; background: none; }
 
 td.pense-bete, a.pense-bete {
 	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=m_envoi_bleu[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) center left no-repeat;
@@ -1730,3 +1734,15 @@ td.message, a.message {
 	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=m_envoi[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) center left no-repeat;
 	padding-left: 10px;
 }
+
+/* ecran etroit*/
+#conteneur,.table_page {margin:0 auto;text-align:left;overflow:hidden;width:750px;}
+#navigation {float:left;width:200px;overflow:hidden;min-height:100px;}
+#contenu {float:left;overflow:hidden;margin-left:35px;width:500px;}
+#extra {float:left;overflow:hidden;width:200px;}
+
+/* ecran large*/
+.large #conteneur,.large .table_page {margin:0 auto;text-align:left;overflow:hidden;width:950px;}
+.large #navigation {float:left;width:200px;overflow:hidden;}
+.large #contenu {float:left;overflow:hidden;margin-left:17px;width:570px;}
+.large #extra {float:right;width:140px;overflow:hidden;}

@@ -75,14 +75,17 @@ function encours_accueil()
 
 	if (!$res) return '';
 
-	return debut_cadre_couleur_foncee("",true, "", _T('texte_en_cours_validation'))
+	return 
+	"<div style='position:relative;display:inline;'>" 
+	. debut_cadre_couleur_foncee("",true, "", _T('texte_en_cours_validation'))
 	. $res
 	. "\n<div style='text-align: "
 	. $GLOBALS['spip_lang_right']
 	. ";'>"
 	. bouton_spip_rss('a-suivre',array())
 	. "</div>"
-	. fin_cadre_couleur_foncee(true);
+	. fin_cadre_couleur_foncee(true)
+	. "</div>";
 }
 
 //

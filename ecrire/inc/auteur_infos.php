@@ -244,10 +244,6 @@ function legender_auteur_saisir($auteur, $auteur_infos_voir, $bloc_statut, $redi
 	$arg = intval($id_auteur);
 	$ret .= generer_action_auteur('editer_auteur', $arg, $redirect, $corps, ' method="POST"');
 
-	$ret .= fin_cadre_relief(true)
-		. '</div>';
-
-
 	return $ret;
 }
 
