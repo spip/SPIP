@@ -113,7 +113,7 @@ function auth() {
 		}
 	}
 	else if ($GLOBALS['bonjour'] == 'oui') { // tentative de login echec
-		@header("Location: ../spip_login.php3?echec_cookie=oui");
+		@header("Location: ../spip_login.php3?var_echec_cookie=oui");
 		exit;
 	}
 
