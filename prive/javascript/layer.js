@@ -162,11 +162,13 @@ function onkey_rechercher(valeur, rac, url, img, nid, init) {
 // * utiliser ctrl-s, F8 etc comme touches de sauvegarde
 var verifForm_clicked=false;
 function verifForm(racine) {
+	verifForm_clicked = false; // rearmer quand on passe ici (il y a eu de l'ajax par exemple)
+	if (!jQuery) return; // appels ajax sur iframe
 	// Clavier pour sauver (cf. crayons)
 	// cf http://www.quirksmode.org/js/keys.html
 	if (!jQuery.browser.msie)
 		// keypress renvoie le charcode correspondant au caractere frappe (ici s)
-		jQuery('form', racine||document)
+		jQuery('form:not(.bouton_action_post)', racine||document).not('.verifformok')
 		.keypress(function(e){
 			if (
 				((e.ctrlKey && (
@@ -184,10 +186,10 @@ function verifForm(racine) {
 				.click();
 				return false;
 			}
-		});
+		}).addClass('verifformok');
 	else
 		// keydown renvoie le keycode correspondant a la touche pressee (ici F8)
-		jQuery('form', racine||document)
+		jQuery('form:not(.bouton_action_post)', racine||document).not('.verifformok')
 		.keydown(function(e){
 			//jQuery('#ps').after("<div>ctrl:"+e.ctrlKey+"<br />charcode:"+e.charCode+"<br />keycode:"+e.keyCode+"<hr /></div>");
 			if (!e.charCode && e.keyCode == 119 /* F8, windows */ && !verifForm_clicked){
@@ -196,10 +198,8 @@ function verifForm(racine) {
 				.click();
 				return false;
 			}
-		});
-
+		}).addClass('verifformok');
 }
-
 
 // La fonction qui fait vraiment le travail decrit ci-dessus.
 // Son premier argument est deja le noeud du DOM
@@ -352,3 +352,9 @@ function charger_node_url_si_vide(url, noeud, gifanime, jjscript,event) {
 	}
   return false;
 }
+
+// Lancer verifForm
+jQuery(document).ready(function(){
+	verifForm();
+	onAjaxLoad(verifForm);
+});
