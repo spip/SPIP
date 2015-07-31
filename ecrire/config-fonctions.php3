@@ -71,8 +71,6 @@ function afficher_choix_vignette($process) {
 
 
 // Si Imagick est present, alors c'est imagick automatiquement
-
-
 if ($flag_gd OR $flag_imagick OR $convert_command)
 	debut_cadre_trait_couleur("image-24.gif");
 
@@ -82,6 +80,12 @@ if ($flag_imagick) {
 		$formats_graphiques = "gif,jpg,png";
 		ecrire_meta('formats_graphiques', 'gif,jpg,png');
 		ecrire_metas();
+
+	debut_cadre_relief("", false, "", _T("info_image_process_titre"));
+	echo "<table width='100%' align='center'><tr>";
+	afficher_choix_vignette('imagick');
+	echo "</tr></table>\n";
+	fin_cadre_relief();
 }
 else {
 	if ($flag_gd OR $convert_command) {
