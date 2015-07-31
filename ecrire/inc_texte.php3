@@ -203,7 +203,7 @@ function echappe_html($letexte,$source) {
 			$rempl = embed_document($id_document, $align);
 		else
 			$rempl = integre_image($id_document, $align, $match[1]);
-		$letexte = ereg_replace($letout, $rempl, $letexte);
+		$letexte = ereg_replace($letout, "@@SPIP_$source$num_echap@@", $letexte);
 		$les_echap[$num_echap] = $rempl;
 	}
 
