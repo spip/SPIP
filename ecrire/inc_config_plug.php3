@@ -36,16 +36,11 @@ function installer_plugins () {
 	$plugs = "<"."?php\n\n";
 	$plugs .= "if(defined('_ECRIRE_INC_PLUGINS')) return;\n";
 	$plugs .= "define('_ECRIRE_INC_PLUGINS', '1');\n\n";
-	while (list(, $nom_fichier) = each($fichiers)) {
+	foreach($fichiers as $nom_fichier)
 		$plugs .= "include_plug('$nom_fichier');\n";
-	}
 	$plugs .= "\n?".">";
 
-
-	if ($f = @fopen($GLOBALS['dir_ecrire'].'data/inc_plugins.php3', 'w')) {
-		@fwrite($f, $plugs);
-		@fclose($f);
-	}
+	ecrire_fichier($GLOBALS['dir_ecrire'].'data/inc_plugins.php3', $plugs);
 }
 
 
