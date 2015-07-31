@@ -149,8 +149,8 @@ article(_T('menu_aide_sites_articles_syndiques'),"artsyn");
 article(_T('menu_aide_sites_proxy'),"confhttpproxy","admin");
 
 rubrique(_T('menu_aide_messagerie'));
-article("<img src='img_pack/m_envoi.gif' align='left' border=0> "._T('menu_aide_messagerie_utilisateurs'),"messut");
-article("<img src='img_pack/m_envoi_bleu.gif' align='left' border=0> "._T('menu_aide_messagerie_pense_bete'),"messpense");
+article("<img src='img_pack/m_envoi$spip_lang_rtl.gif' align='left' border=0> "._T('menu_aide_messagerie_utilisateurs'),"messut");
+article("<img src='img_pack/m_envoi_bleu$spip_lang_rtl.gif' align='left' border=0> "._T('menu_aide_messagerie_pense_bete'),"messpense");
 article(_T('menu_aide_messagerie_calendrier'),"messcalen");
 article(_T('menu_aide_messagerie_configuration_perso'),"messconf");
 
