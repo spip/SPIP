@@ -1507,10 +1507,14 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	case 'FORMULAIRE_INSCRIPTION':
 		$milieu = '
 		$request_uri = $GLOBALS["REQUEST_URI"];
+		$spip_lang = $GLOBALS["spip_lang"];
 		$accepter_inscriptions = lire_meta("accepter_inscriptions");
-
 		if ($accepter_inscriptions == "oui") {
-			$'.$nom_var.' = "<"."?php include_local(\"inc-formulaires.php3\"); formulaire_inscription(\"redac\"); ?".">";
+			$'.$nom_var.' = "<"."?php
+				include_local(\"inc-formulaires.php3\");
+				lang_select(\"$spip_lang\");
+				formulaire_inscription(\"redac\");
+				lang_dselect(); ?".">";
 		}
 		else {
 			$'.$nom_var.' = "";
@@ -1527,8 +1531,12 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$milieu = '
 		if (email_valide($row[\'email\'])) {
 			$email = trim($row[\'email\']);
+			$spip_lang = $GLOBALS["spip_lang"];
 			$'.$nom_var.' = "<'.'?php
-				include (\'inc-formulaires.php3\'); formulaire_ecrire_auteur(".$row[\'id_auteur\'].",\'$email\');
+				include (\'inc-formulaires.php3\');
+				lang_select(\"$spip_lang\");
+				formulaire_ecrire_auteur(".$row[\'id_auteur\'].",\'$email\');
+				lang_dselect();
 			?'.'>";
 		}
 		';
@@ -1543,12 +1551,18 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$milieu = '
 		$request_uri = $GLOBALS["REQUEST_URI"];
 		$accepter_inscriptions = lire_meta("accepter_inscriptions");
+		$spip_lang = $GLOBALS["spip_lang"];
 
 		$query_petition = "SELECT * FROM spip_petitions WHERE id_article=$contexte[id_article]";
  		$result_petition = spip_query($query_petition);
 
 		if ($row_petition = spip_fetch_array($result_petition)) {
-			$'.$nom_var.' = "<"."?php include_local(\"inc-formulaires.php3\"); formulaire_signature($contexte[id_article]); ?".">";
+			$'.$nom_var.' = "<"."?php
+				include_local(\"inc-formulaires.php3\");
+				lang_select(\"$spip_lang\");
+				formulaire_signature($contexte[id_article]);
+				lang_dselect();
+				?".">";
 		}
 		else {
 			$'.$nom_var.' = "";
@@ -1565,9 +1579,15 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$milieu = '
 		$request_uri = $GLOBALS["REQUEST_URI"];
 		$proposer_sites = lire_meta("proposer_sites");
+		$spip_lang = $GLOBALS["spip_lang"];
 
 		if ($proposer_sites == "2") {
-			$'.$nom_var.' = "<"."?php include_local(\"inc-formulaires.php3\"); formulaire_site($contexte[id_rubrique]); ?".">";
+			$'.$nom_var.' = "<"."?php
+				include_local(\"inc-formulaires.php3\");
+				lang_select(\"$spip_lang\");
+				formulaire_site($contexte[id_rubrique]);
+				lang_dselect();
+				?".">";
 		}
 		else {
 			$'.$nom_var.' = "";

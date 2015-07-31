@@ -22,6 +22,14 @@ function afficher_boutons_admin() {
 	global $id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur;
 	include_ecrire("inc_filtres.php3");
 
+	// regler les boutons dans la langue de l'admin (sinon tant pis)
+	if ($login = addslashes(ereg_replace('^@','',$GLOBALS['spip_admin']))) {
+		$q = spip_query("SELECT lang FROM spip_auteurs WHERE login='$login'");
+		$row = spip_fetch_array($q);
+		$lang = $row['lang'];
+	}
+	lang_select($lang);
+
 	echo '<div class="spip-admin">';
 	if ($id_article) {
 		bouton_admin(_T('admin_modifier_article')." ($id_article)", "./ecrire/articles.php3?id_article=$id_article");
@@ -53,6 +61,8 @@ function afficher_boutons_admin() {
 	}
 
 	echo "</div>";
+
+	lang_dselect();
 }
 
 
