@@ -276,6 +276,12 @@ function spip_mysql_showtable($nom_table)
 // Recuperation des resultats
 //
 
+// interface de abstract_sql.
+
+function spip_mysql_fetch($r, $t=SPIP_ASSOC) {
+	if ($r) return mysql_fetch_array($r, $t);
+}
+
 // http://doc.spip.org/@spip_fetch_array
 function spip_fetch_array($r, $t=SPIP_ASSOC) {
 	if ($r) return mysql_fetch_array($r, $t);
@@ -291,16 +297,26 @@ function spip_sql_errno() {
 	return mysql_errno();
 }
 
-// http://doc.spip.org/@spip_num_rows
-function spip_num_rows($r) {
-	if ($r)
-		return mysql_num_rows($r);
+// Interface de abstract_sql
+function spip_mysql_count($r) {
+	if ($r)	return mysql_num_rows($r);
 }
 
+// http://doc.spip.org/@spip_num_rows
+function spip_num_rows($r) {
+	if ($r)	return mysql_num_rows($r);
+}
+
+// Interface de abstract_sql (on est sur de l'argument, c'est le compilateur)
+
+function spip_mysql_free($r) {
+	return mysql_free_result($r);
+}
+
+// Vieux nom a laisser tomber
 // http://doc.spip.org/@spip_free_result
 function spip_free_result($r) {
-	if ($r)
-		return mysql_free_result($r);
+	if ($r)	return mysql_free_result($r);
 }
 
 // http://doc.spip.org/@spip_mysql_insert
