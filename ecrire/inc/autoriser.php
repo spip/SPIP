@@ -1085,7 +1085,7 @@ function autoriser_rubriques_menu_dist($faire, $type, $id, $qui, $opt){return tr
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_articlecreer_menu_dist($faire, $type, $id, $qui, $opt){
-	return sql_countsel('spip_rubriques')>0;
+	return verifier_table_non_vide();
 }
 
 /**
@@ -1187,5 +1187,21 @@ function acces_restreint_rubrique($id_rubrique) {
 	global $connect_id_rubrique;
 
 	return (isset($connect_id_rubrique[$id_rubrique]));
+}
+
+
+/**
+ * Verifier qu'il existe au moins un parent
+ * 
+ * Fonction utilisee dans des autorisations des boutons / menus du prive des objets enfants (articles, breves, sites)
+ *
+ * @param string $table  	la table a verifier
+ * @return bool             true si un parent existe
+ */
+function verifier_table_non_vide($table='spip_rubriques') {
+	static $done = array();
+	if (!isset($done[$table]))
+		 $done[$table] = sql_countsel($table)>0;
+	return $done[$table];
 }
 ?>
