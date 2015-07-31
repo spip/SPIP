@@ -885,9 +885,9 @@ function calculer_critere_parties($idb, &$boucles, $crit){
  * boucle en cours de lecture appartient bien à la plage autorisée.
  * Trop tôt, passe à l'élément suivant, trop tard, sort de l'itération de boucle.
  * 
- * @param string $idb     Identifiant de la boucle
- * @param array $boucles  AST du squelette
- * @param string $debut   Valeur ou code pour trouver le début (i dans {i,j})
+ * @param array $boucles     AST du squelette
+ * @param string $id_boucle  Identifiant de la boucle
+ * @param string $debut      Valeur ou code pour trouver le début (i dans {i,j})
  * @param string $mode
  *     Mode (++, p+, +- ...) : 2 signes début & fin
  *     - le signe - indique
