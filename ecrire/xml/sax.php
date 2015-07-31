@@ -25,6 +25,8 @@ function xml_entites_html($texte){
 	OR strpbrk($texte, "&\"'<>")==false
 	) return $texte;
 
+	if (!function_exists('spip_htmlspecialchars'))
+		include_spip("inc/filtres_mini");
 	$texte = spip_htmlspecialchars($texte,ENT_QUOTES);
 	return $texte;
 }
