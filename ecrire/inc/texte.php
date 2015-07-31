@@ -1412,9 +1412,9 @@ function traiter_raccourcis($letexte) {
 	else $puce = '';
 
 	// Proteger les caracteres actifs a l'interieur des tags html
-	$protege = "{}-_";
+	$protege = "{}_-";
 	$illegal = "\x1\x2\x3\x4";
-	if (preg_match_all(",</?[a-z!][^<>]*[$protege][^<>]*>,imsS",
+	if (preg_match_all(",</?[a-z!][^<>]*[".preg_quote($protege)."][^<>]*>,imsS",
 	$letexte, $regs, PREG_SET_ORDER)) {
 		foreach ($regs as $reg) {
 			$insert = $reg[0];
