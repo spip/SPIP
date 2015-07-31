@@ -334,7 +334,7 @@ function formulaire_recherche($page, $complement=""){
 	} else $onfocus = '';
 
 	$form = '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="recherche" accesskey="r"' . $onfocus . ' />';
-	$form .= "<input type='image' src='" . chemin_image('loupe.png') . "' name='submit' class='submit' alt='"._T('info_rechercher')."' />";
+	$form .= "<input type='image' src='" . chemin_image('rechercher-20.png') . "' name='submit' class='submit' alt='"._T('info_rechercher')."' />";
 	return "<div class='spip_recherche'>".generer_form_ecrire($page, $form . $complement, " method='get'")."</div>";
 }
 
