@@ -685,7 +685,7 @@ function date_anneemois($d)  {
 function date_debut_semaine($annee, $mois, $jour) {
   $w_day = date("w", mktime(0,0,0,$mois, $jour, $annee));
   if ($w_day == 0) $w_day = 7; // Gaffe: le dimanche est zero
-  $debut = $jour-$w_day;
+  $debut = $jour-$w_day+1;
   return date("Ymd", mktime(0,0,0,$mois,$debut,$annee));
 }
 
@@ -745,7 +745,7 @@ function agenda_affiche($i)
   $self = new Link();
   $self = $self->getUrl();
   if (!$nb) 
-    return http_calendrier_init('', $type, '', '', $self, "<tr><td>$sinon</td></tr>");
+    return http_calendrier_init('', $type, '', '', $self, $sinon);
   $agenda = agenda_memo(0);
   $evt = array();
   foreach (($args ? $args : array_keys($agenda)) as $k) {  
@@ -2092,7 +2092,7 @@ function url_reponse_forum($parametres) {
 
 // Nettoyer une URL contenant des ../
 //
-// echo resolve_url('/.././/truc/chose/machin/./.././.././hopla/..');
+// resolve_url('/.././/truc/chose/machin/./.././.././hopla/..');
 // inspire (de loin) par PEAR:NetURL:resolvePath
 //
 function resolve_path($url) {
@@ -2107,7 +2107,7 @@ function resolve_path($url) {
 // 
 // Suivre un lien depuis une adresse donnee -> nouvelle adresse
 //
-// echo suivre_lien('http://rezo.net/sous/dir/../ect/ory/fi.html..s#toto',
+// suivre_lien('http://rezo.net/sous/dir/../ect/ory/fi.html..s#toto',
 // 'a/../../titi.coco.html/tata#titi');
 function suivre_lien($url, $lien) {
 	# lien absolu ? ok

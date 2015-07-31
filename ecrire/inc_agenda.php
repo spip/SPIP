@@ -33,6 +33,8 @@ define(DEFAUT_D_ECHELLE,120); # 1 pixel = 2 minutes
 // et de retrait des arguments a remplacer
 // (a mon avis cette fonction ne sert a rien, puisque parametre_url()
 // sait remplacer les arguments au bon endroit -- Fil)
+// Pas si simple: certains param ne sont pas remplaces 
+// et doivent reprendre leur valeur par defaut -- esj.
 function calendrier_retire_args_ancre($script)
 {
 	$script = str_replace('&amp;', '&', $script);
@@ -175,7 +177,7 @@ function http_calendrier_mois($annee, $mois, $jour, $echelle, $partie_cal, $scri
 	  $evt = 
 	    http_calendrier_mois_noms($annee, $mois, $jour, $script, $ancre) .
 	    http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$evenements, $script, "&amp;echelle=$echelle&amp;partie_cal=$partie_cal$ancre") ;
-	    }
+	} else $evt = "<tr><td>$evt</td></tr>";
 
 	return 
 	  "<table class='calendrier-table-$spip_ecran' cellspacing='0' cellpadding='0'>" .
@@ -347,7 +349,7 @@ function http_calendrier_semaine($annee, $mois, $jour, $echelle, $partie_cal, $s
 	    $evt =
 	      http_calendrier_semaine_noms($annee, $mois, $init, $script, $finurl) .
 	      http_calendrier_semaine_sept($annee, $mois, $init, $echelle, $partie_cal, $evt);
-	  }
+	  } else $evt = "<tr><td>$evt</td></tr>";
 
 	return 
 	  "\n<table class='calendrier-table-$spip_ecran' cellspacing='0' cellpadding='0'>" .
@@ -396,7 +398,7 @@ function http_calendrier_semaine_noms($annee, $mois, $jour, $script, $ancre){
 	global $couleur_claire;
 
 	$bandeau = '';
-	$script .= (ereg('[?&]$', $script) ? "" : (strpos($script,'?') ? '&amp;' : '?'));
+
 	for ($j=$jour; $j<$jour+7;$j++){
 		$nom = mktime(0,0,0,$mois,$j,$annee);
 		$num = intval(date("d", $nom)) ;
@@ -456,7 +458,7 @@ function http_calendrier_jour($annee, $mois, $jour, $echelle, $partie_cal, $scri
 	  "</td>" .
 	  "<td class='calendrier-td-droit calendrier-arial10'></td>" .
 	  "</tr>" .
-	  (!is_array($evt) ? $evt :
+	  (!is_array($evt) ? ("<tr><td>$evt</td></tr>") :
 	   (http_calendrier_jour_noms($annee, $mois, $jour, $echelle, $partie_cal, $script, $ancre) .
 	    http_calendrier_jour_sept($annee, $mois, $jour, $echelle,  $partie_cal, $script, $ancre, $evt))) .
 	  "</table>";
@@ -952,7 +954,7 @@ function http_calendrier_invisible($annee, $mois, $jour, $script, $ancre, $id)
 function http_calendrier_agenda ($annee, $mois, $jour_ved, $mois_ved, $annee_ved, $semaine = false,  $script='', $ancre='', $evt='') {
 
   if (!$script) $script =  $GLOBALS['PHP_SELF'] ;
-  if (!strpos($script, '?')) $script .= '?';
+
   if (!$mois) {$mois = 12; $annee--;}
   elseif ($mois==13) {$mois = 1; $annee++;}
   if (!$evt) $evt = sql_calendrier_agenda($annee, $mois);
