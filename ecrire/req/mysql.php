@@ -639,6 +639,7 @@ function spip_mysql_repair($table, $serveur='',$requeter=true)
 	return spip_mysql_query("REPAIR TABLE `$table`", $serveur, $requeter);
 }
 
+define('_MYSQL_RE_SHOW_TABLE', '/^[^(),]*\(((?:[^()]*\((?:[^()]*\([^()]*\))?[^()]*\)[^()]*)*)\)[^()]*$/');
 // Recupere la definition d'une table ou d'une vue MySQL
 // colonnes, indexes, etc.
 // au meme format que la definition des tables de SPIP
@@ -656,11 +657,11 @@ function spip_mysql_showtable($nom_table, $serveur='',$requeter=true)
 	if (!$requeter) return $s;
 
 	list(,$a) = mysql_fetch_array($s ,MYSQL_NUM);
-	if (preg_match("/^[^(),]*\((([^()]*\([^()]*\)[^()]*)*)\)[^()]*$/", $a, $r)){
+	if (preg_match(_MYSQL_RE_SHOW_TABLE, $a, $r)){
 		$desc = $r[1];
 		// extraction d'une KEY éventuelle en prenant garde de ne pas
 		// relever un champ dont le nom contient KEY (ex. ID_WHISKEY)
-		if (preg_match("/^(.*?),([^,]*KEY[ (].*)$/s", $desc, $r)) {
+		if (preg_match("/^(.*?),([^,]*\sKEY[ (].*)$/s", $desc, $r)) {
 		  $namedkeys = $r[2];
 		  $desc = $r[1];
 		}
@@ -674,8 +675,8 @@ function spip_mysql_showtable($nom_table, $serveur='',$requeter=true)
 		}
 		$keys = array();
 
-		foreach(preg_split('/\)\s*,?/',$namedkeys) as $v) {
-		  if (preg_match("/^\s*([^(]*)\((.*)$/",$v,$r)) {
+		foreach(preg_split('/\)\s*(,|$)/',$namedkeys) as $v) {
+		  if (preg_match("/^\s*([^(]*)\(([^(]*(\(\d+\))?)$/",$v,$r)) {
 			$k = str_replace("`", '', trim($r[1]));
 			$t = strtolower(str_replace("`", '', $r[2]));
 			if ($k && !isset($keys[$k])) $keys[$k] = $t; else $keys[] = $t;
