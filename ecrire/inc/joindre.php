@@ -107,7 +107,7 @@ function joindre_formulaire(&$v) {
 			"\n</div>";
 	}
 
-	$res = "<input name='fichier' id='fichier_$mode' type='file' class='forml spip_xx-small' size='15' />"
+	$res = "<input name='fichier' id='fichier_$mode" .'_'. strval($v['id_document']) . "' type='file' class='forml spip_xx-small' size='15' />"
 	. ($v['ancre']
 		? "\n\t\t<input type='hidden' name='ancre' value='".$v['ancre']."' />"
 		: ''
