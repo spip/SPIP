@@ -59,7 +59,7 @@ function action_tourner_post($r)
 		else if ($process == "gd2") { // theoriquement compatible gd1, mais trop forte degradation d'image
 			gdRotate ($src, $dest, $var_rot);
 		}
-		else if ($process = "convert") {
+		else if ($process == "convert") {
 			if (_CONVERT_COMMAND!='') {
 				define ('_CONVERT_COMMAND', 'convert');
 				define ('_ROTATE_COMMAND', _CONVERT_COMMAND.' -rotate %t %src %dest');

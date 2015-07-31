@@ -11,6 +11,7 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('public/interfaces');
 
 // Trouve la description d'une table, en particulier celle d'une boucle
 // Si on ne la trouve pas, on demande au serveur SQL

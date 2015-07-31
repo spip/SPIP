@@ -31,7 +31,7 @@ function action_dater_post($r)
 	$type = $r[2];
 	$id = $r[1];
 	if (!isset($_REQUEST['avec_redac'])) {
-		dater_table($id, $type);
+		$date = dater_table($id, $type);
 	} else {
 		if (_request('avec_redac') == 'non')
 			$annee_redac = $mois_redac = $jour_redac = $heure_redac = $minute_redac = 0;
@@ -81,5 +81,6 @@ function dater_table($id, $type)
 	if (!$champ) $champ = 'date';
 	$date = format_mysql_date(_request('annee'), _request('mois'), _request('jour'), _request('heure'), _request('minute'));
 	sql_updateq($table, array($champ => $date), "$col_id=$id");
+	return $date;
 }
 ?>
