@@ -153,7 +153,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 	// faudrait expanser le foreach a la compil, car y en a souvent qu'un 
 	// et puis faire un [] plutot qu'un "','."
 	if ($boucle->doublons)
-		$corps .= "		foreach(" . $boucle->doublons . ' as $k) $doublons[$k] .= "," . ' .
+		$corps .= "\n\t\t\tforeach(" . $boucle->doublons . ' as $k) $doublons[$k] .= "," . ' .
 		index_pile($id_boucle, $primary, $boucles)
 		. "; // doublons\n";
 
@@ -230,12 +230,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 		  $fin ;
 	}
 
-	return '
-	$t0 = "";
-	$SP++;'
-		. (!$flag_cpt  ? "" :
-			"\n	\$Numrows['$id_boucle']['compteur_boucle'] = 0;")
-		. ($boucle->mode_partie ? 
+	return ($boucle->mode_partie ? 
 		   calculer_parties($boucles, $id_boucle) :
 		   (!$boucle->numrows ? '' :
 		    ( "\n	\$Numrows['" .
@@ -243,6 +238,12 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 			"']['total'] = @spip_abstract_count(\$result,'" .
 			$boucle->sql_serveur .
 		      "');"))) .
+		(!$flag_cpt  ? "" :
+			"\n	\$Numrows['$id_boucle']['compteur_boucle'] = 0;")
+		. '
+	$t0 = "";
+	$SP++;'
+		.
 		$corps .
 		"\n	@spip_abstract_free(\$result,'" .
 		$boucle->sql_serveur . "');";
