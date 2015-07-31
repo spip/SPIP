@@ -2010,12 +2010,13 @@ class sqlite_traducteur {
 			$this->query = str_replace("''", $this->codeEchappements, $this->query);
 
 		# peupler $textes
-		$textes = array();
-		if (preg_match_all("/'[^']*'/S",$this->query,$textes)){
+		if (preg_match_all("/(['\"])[^']*(\\1)/S",$this->query,$textes)){
 			$textes = reset($textes); // indice 0 du match
 			$this->query = str_replace($textes,"%s",$this->query);
 		}
-		
+		else
+			$textes = array();
+
 		//
 		// 2) Corrections de la requete
 		//
@@ -2036,7 +2037,7 @@ class sqlite_traducteur {
 		// Correction des dates avec INTERVAL
 		// utiliser sql_date_proche() de preference
 		if (strpos($this->query, 'INTERVAL')!==false){
-			$this->query = preg_replace_callback("/DATE_(ADD|SUB).*INTERVAL\s+(\d+)\s+([a-zA-Z]+)\)/U",
+			$this->query = preg_replace_callback("/DATE_(ADD|SUB)(.*)INTERVAL\s+(\d+)\s+([a-zA-Z]+)\)/U",
 			                                     array(&$this, '_remplacerDateParTime'),
 			                                     $this->query);
 		}
@@ -2118,6 +2119,12 @@ class sqlite_traducteur {
 		if (strpos($this->query,'`')!==false)
 			$this->query = str_replace('`','', $this->query);
 
+		# debug de la substitution
+		#if (($c1=substr_count($this->query,"%"))!=($c2=count($textes))){
+		#	spip_log("$c1 ::". $this->query,"tradsqlite"._LOG_ERREUR);
+		#	spip_log("$c2 ::". var_export($textes,1),"tradsqlite"._LOG_ERREUR);
+		#	spip_log("ini ::". $qi,"tradsqlite"._LOG_ERREUR);
+		#}
 		switch (count($textes)){
 			case 0:break;
 			case 1:$this->query=sprintf($this->query,$textes[0]);break;
@@ -2148,7 +2155,7 @@ class sqlite_traducteur {
 	 */
 	function _remplacerDateParTime($matches){
 		$op = strtoupper($matches[1]=='ADD') ? '+' : '-';
-		return "datetime('".date("Y-m-d H:i:s")."', '$op$matches[2] $matches[3]')";
+		return "datetime$matches[2] '$op$matches[3] $matches[4]')";
 	}
 
 	/**
