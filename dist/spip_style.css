@@ -53,7 +53,7 @@ table.spip tr.row_even { background: #EEE; }
 table.spip th, table.spip td { padding: 3px; text-align: left; vertical-align: middle; }
 
 /* Logos, documents et images */
-img, .spip_logos { margin: 0; padding: 0; border: none; }
+img, .spip_logos { margin: 0; padding: 0; border: 0; }
 
 .spip_documents { text-align: center; }
 .spip_documents p { margin-top: 1px; margin-bottom: 2px; }
