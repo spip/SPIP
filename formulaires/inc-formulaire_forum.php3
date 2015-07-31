@@ -243,17 +243,17 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 
 	return array('formulaire_forum', 0,
 	array(
-		'auteur' => entites_html($auteur),
+		'auteur' => $auteur,
 		'disabled' => ($forums_publics == "abo")? " disabled='disabled'" : '',
 		'email_auteur' => $email_auteur,
 		'modere' => (($forums_publics != 'pri') ? '' : _T('forum_info_modere')),
-		'nom_site_forum' => entites_html($nom_site_forum),
+		'nom_site_forum' => $nom_site_forum,
 		'previsu' => $previsu,
 		'table' => $table,
 		'texte' => $texte,
-		'titre' => entites_html(extraire_multi($titre)),
-		'url' =>  entites_html($url),
-		'url_site' => ($url_site ? entites_html($url_site) : "http://"),
+		'titre' => extraire_multi($titre),
+		'url' =>  $url,
+		'url_site' => ($url_site ? $url_site : "http://"),
 		'parametres_forum' => $parametres_forum,
 
 		## gestion des la variable de personnalisation $afficher_texte
@@ -274,8 +274,6 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 
 function barre_forum($texte) {
 	include_ecrire('inc_layer');
-
-	$texte = entites_html($texte);
 
 	if (!$GLOBALS['browser_barre'])
 		return "<textarea name='texte' rows='12' class='forml' cols='40'>$texte</textarea>";

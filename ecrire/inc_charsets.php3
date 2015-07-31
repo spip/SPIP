@@ -483,9 +483,22 @@ function translitteration($texte, $charset='AUTO', $complexe='') {
 	return strtr($texte, $trans[$complexe]);
 }
 
-function translitteration_complexe($texte) {
-	return translitteration($texte,'AUTO','complexe');
+// &agrave; est retourne sous la forme "a`" et pas "a"
+// mais si $chiffre=true, on retourne "a8" (vietnamien)
+function translitteration_complexe($texte, $chiffres=false) {
+	$texte = translitteration($texte,'AUTO','complexe');
+
+	if ($chiffres) {
+		$texte = preg_replace("/[aeiuoyd]['`?~.^+(-]{1,2}/e",
+			"translitteration_chiffree('\\0')", $texte);
+	}
+	
+	return $texte;
 }
+function translitteration_chiffree($car) {
+	return strtr($car, "'`?~.^+(-", "123456789");
+}
+
 
 // Reconnaitre le BOM utf-8 (0xEFBBBF)
 function bom_utf8($texte) {
