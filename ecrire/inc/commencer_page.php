@@ -126,7 +126,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 		. (($spip_ecran == "large") ? 300 : 110)
 		. "px; height: 14px; overflow: hidden;'>"
 		. "<a href='"
-		. generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur&initial=-1") 
+		. generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur") 
 		. "' class='icone26' title=\""
 		. entites_html(_T('icone_informations_personnelles'))
 		. '">'

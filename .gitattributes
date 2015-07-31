@@ -341,6 +341,7 @@ ecrire/action/dater.php -text
 ecrire/action/desinstaller_plugin.php -text
 ecrire/action/documenter.php -text
 ecrire/action/editer_article.php -text
+ecrire/action/editer_auteur.php -text
 ecrire/action/editer_auteurs.php -text
 ecrire/action/editer_breve.php -text
 ecrire/action/editer_message.php -text
@@ -364,7 +365,6 @@ ecrire/action/instituer_rubrique_breves.php -text
 ecrire/action/instituer_syndic.php -text
 ecrire/action/joindre.php -text
 ecrire/action/legender.php -text
-ecrire/action/legender_auteur.php -text
 ecrire/action/logout.php -text
 ecrire/action/petitionner.php -text
 ecrire/action/poster_forum_prive.php -text
@@ -407,7 +407,6 @@ ecrire/exec/articles_tous.php -text
 ecrire/exec/articles_versions.php -text
 ecrire/exec/auteur_infos.php -text
 ecrire/exec/auteurs.php -text
-ecrire/exec/auteurs_edit.php -text
 ecrire/exec/breves.php -text
 ecrire/exec/breves_edit.php -text
 ecrire/exec/breves_voir.php -text
@@ -444,7 +443,6 @@ ecrire/exec/install.php -text
 ecrire/exec/instituer_auteur.php -text
 ecrire/exec/lang_raccourcis.php -text
 ecrire/exec/legender.php -text
-ecrire/exec/legender_auteur.php -text
 ecrire/exec/meme_rubrique.php -text
 ecrire/exec/memoriser.php -text
 ecrire/exec/menu_agenda.php -text
@@ -486,6 +484,7 @@ ecrire/inc/agenda.php -text
 ecrire/inc/aider.php -text
 ecrire/inc/ajouter_documents.php -text
 ecrire/inc/article_select.php -text
+ecrire/inc/auteur_infos.php -text
 ecrire/inc/autoriser.php -text
 ecrire/inc/boutons.php -text
 ecrire/inc/chercher_logo.php -text
@@ -523,7 +522,6 @@ ecrire/inc/instituer_auteur.php -text
 ecrire/inc/joindre.php -text
 ecrire/inc/lang_liste.php -text
 ecrire/inc/legender.php -text
-ecrire/inc/legender_auteur.php -text
 ecrire/inc/maintenance.php -text
 ecrire/inc/message_select.php -text
 ecrire/inc/minipres.php -text

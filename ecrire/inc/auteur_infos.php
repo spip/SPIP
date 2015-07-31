@@ -13,44 +13,77 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-// http://doc.spip.org/@inc_legender_auteur_dist
-function inc_legender_auteur_dist($id_auteur, $auteur, $initial, $echec='', $redirect='')
-{
+// Affiche la fiche de renseignements d'un auteur
+// eventuellement editable
+function inc_auteur_infos_dist($auteur, $redirect) {
+	if (!$auteur['id_auteur']) {
+		if (_request('new') == 'oui') {
+			$new = true;
+		} else {
+			include_spip('inc/headers');
+			redirige_par_entete(generer_url_ecrire('auteurs'));
+		}
+	}
 
-	$corps = (($initial < 0) OR !statut_modifiable_auteur($id_auteur, $auteur))
-	? legender_auteur_voir($auteur, $redirect)
-	: legender_auteur_saisir($id_auteur, $auteur, $initial, $echec, $redirect);
-	
-	return  $redirect ? $corps :
-	  ajax_action_greffe("legender_auteur-$id_auteur", $corps);
+	if (!$new) {
+		$corps = "<div id='auteur_infos_voir'>"
+			. legender_auteur_voir($auteur, $redirect)
+			. "</div>\n";
+	} else
+		$corps = '';
+
+	if (_request('echec'))
+		$corps .= afficher_erreurs_auteur(_request('echec'));
+
+
+	// Calculer le bloc de statut (modifiable ou non selon)
+	$instituer_auteur = charger_fonction('instituer_auteur', 'inc');
+	$bloc_statut = $instituer_auteur($auteur);
+
+	// Calculer le formulaire general
+	if (autoriser('modifier', 'auteur', $auteur['id_auteur'])) {
+		$corps = legender_auteur_saisir($auteur, $corps, $bloc_statut, $redirect);
+	} else {
+		// Indiquer le bloc statut (cas non modifiable) ?
+		$corps .= $bloc_statut;
+	}
+
+	return $corps;
 
 }
 
+function afficher_erreurs_auteur($echec) {
+	foreach (split('@@@',$echec) as $e)
+		$corps .= '<p>' . _T($e) . "</p>\n";
+
+	$corps = debut_cadre_relief('', true)
+	.  "<span style='color: red; left-margin: 5px'>"
+	.  http_img_pack("warning.gif", _T('info_avertissement'), "style='width: 48px; height: 48px; float: left; margin: 5px;'")
+	. $corps
+	.  _T('info_recommencer')
+	.  "</span>\n"
+	. fin_cadre_relief(true);
+
+	return $corps;
+}
+
+
 // http://doc.spip.org/@legender_auteur_saisir
-function legender_auteur_saisir($id_auteur, $auteur, $initial, $echec='', $redirect='')
-{
+function legender_auteur_saisir($auteur, $auteur_infos_voir, $bloc_statut, $redirect) {
 	global $options, $connect_statut, $connect_id_auteur, $connect_toutes_rubriques;
-	$corps = '';
 
-	if ($echec){
+	$id_auteur = $auteur['id_auteur'];
 
-		foreach (split('@@@',$echec) as $e)
-			$corps .= '<p>' . _T($e) . "</p>\n";
-		
-		$corps = debut_cadre_relief('', true)
-		.  "<span style='color: red; left-margin: 5px'>"
-		.  http_img_pack("warning.gif", _T('info_avertissement'), "style='width: 48px; height: 48px; float: left; margin: 5px;'")
-		. $corps
-		.  _T('info_recommencer')
-		.  "</span>\n"
-		. fin_cadre_relief(true);
-	}
+
 
 	$setmail = ($connect_statut == "0minirezo"
 		AND ($connect_toutes_rubriques OR $auteur['statut']<>'0minirezo'));
 
 	$setconnecte = ($connect_id_auteur == $id_auteur);
 
+
+	// Elaborer le formulaire
+	$corps = '';
 	$corps .= _T('titre_cadre_signature_obligatoire')
 	. "("
 	. _T('entree_nom_pseudo')
@@ -92,16 +125,13 @@ function legender_auteur_saisir($id_auteur, $auteur, $initial, $echec='', $redir
 	. fin_cadre_enfonce(true)
 	. "\n<br />";
 
-	if ($options == "avancees") {
+	if ($options == "avancees"
+	OR strlen($auteur['pgp'])) {
 		$corps .= debut_cadre_enfonce("cadenas-24.gif", true, "", _T('entree_cle_pgp'))
 		. "<textarea name='pgp' class='forml' rows='4' cols='40'>"
 		. entites_html($auteur['pgp'])
 		. "</textarea>\n"
 		. fin_cadre_enfonce(true);
-	} else {
-		$corps .= "<input type='hidden' name='pgp' value=\""
-		. entites_html($auteur['pgp'])
-		. "\" />";
 	}
 
 	$corps .= "\n<br />";
@@ -165,26 +195,64 @@ function legender_auteur_saisir($id_auteur, $auteur, $initial, $echec='', $redir
 		$corps .= $res;
 	}
 
-	$corps .= fin_cadre_relief(true)
-	. "<br />"
-	  . (!$setconnecte ? '' : apparait_auteur_infos($id_auteur, $auteur));
+	$corps .= fin_cadre_relief(true);
 
-	$att = " style='float: 	"
-	.  $GLOBALS['spip_lang_right']
-	. "' class='fondo'";
 
-	$arg = intval($id_auteur) . '/';
+	
+	//
+	// Retour
+	//
 
-	return '<div>&nbsp;</div>'
-	. "\n<div class='serif'>"
-	. debut_cadre_relief("fiche-perso-24.gif", true, "", _T("icone_informations_personnelles"))
-	. (
-	$redirect
-	     ? generer_action_auteur('legender_auteur', $arg, $redirect,
-	     	$corps . "<div align='right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></div>")
-	   : ajax_action_post('legender_auteur', $arg, 'auteur_infos', "id_auteur=$id_auteur&initial=-1", $corps, _T('bouton_enregistrer'), $att))
-	. fin_cadre_relief(true)
-	. '</div>';
+	$corps = $auteur_infos_voir
+		. "<div id='auteur_infos_edit'>\n"
+		. '<div>&nbsp;</div>'
+		. "\n<div class='serif'>"
+		. debut_cadre_relief("fiche-perso-24.gif",
+			true, "", _T("icone_informations_personnelles"))
+		. $corps
+		. fin_cadre_relief(true)
+		. (!$setconnecte ? '' : apparait_auteur_infos($id_auteur, $auteur))
+		. "</div>\n" # /serif
+		. "</div>\n"; # /auteur_infos_edit
+
+	// Installer la fiche "auteur_infos_voir"
+	// et masquer le formulaire si on n'en a pas besoin
+	$new = ($auteur_infos_voir == '');
+	if (!$new
+	AND !_request('echec')
+	AND !_request('edit')) {
+		$corps .= "<script>jQuery('#auteur_infos_edit').hide()</script>\n";
+	} else {
+		$corps .= "<script>jQuery('#auteur_infos_voir').hide()</script>\n";
+	}
+
+
+	// Formulaire de statut
+	$corps .= $bloc_statut;
+
+
+	// Lier a un article (creation d'un auteur depuis un article)
+	if ($id_article = intval(_request('lier_id_article')))
+		$corps .= "<input type='hidden' name='lier_id_article' value='$id_article' />\n";
+
+	// Redirection apres enregistrement ?
+	if ($redirect)
+		$corps .= "<input type='hidden' name='redirect' value=\"".attribut_html($redirect)."\" />\n";
+
+	$corps .= "<div align='right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></div>";
+
+
+	if (!$redirect)
+		$redirect = generer_url_ecrire('auteur_infos', "id_auteur=$id_auteur", '&');
+
+	$arg = intval($id_auteur);
+	$ret .= generer_action_auteur('editer_auteur', $arg, $redirect, $corps, ' method="POST"');
+
+	$ret .= fin_cadre_relief(true)
+		. '</div>';
+
+
+	return $ret;
 }
 
 //
@@ -192,8 +260,7 @@ function legender_auteur_saisir($id_auteur, $auteur, $initial, $echec='', $redir
 //
 
 // http://doc.spip.org/@apparait_auteur_infos
-function apparait_auteur_infos($id_auteur, $auteur)
-{
+function apparait_auteur_infos($id_auteur, $auteur) {
 
 	if ($auteur['imessage']=="non"){
 		$res = "<input type='radio' name='perso_activer_imessage' value='oui' id='perso_activer_imessage_on'>"
@@ -211,86 +278,84 @@ function apparait_auteur_infos($id_auteur, $auteur)
 		. "</label> ";
 	}
 
-	return 	debut_cadre_formulaire('', true)
-	. debut_cadre_relief("messagerie-24.gif", true, "", _T('info_liste_redacteurs_connectes'))
-	. "\n<div>"
-	. _T('texte_auteur_messagerie')
-	. "</div>"
-	. $res
-	. fin_cadre_relief(true)
-	. "<br />"
-	. fin_cadre_formulaire(true);
+	return
+		"<br />"
+		.debut_cadre_formulaire('', true)
+		. debut_cadre_relief("messagerie-24.gif", true, "", _T('info_liste_redacteurs_connectes'))
+		. "\n<div>"
+		. _T('texte_auteur_messagerie')
+		. "</div>"
+		. $res
+		. fin_cadre_relief(true)
+		. "<br />"
+		. fin_cadre_formulaire(true);
 }
 
 
 // http://doc.spip.org/@legender_auteur_voir
-function legender_auteur_voir($auteur, $redirect)
-{
-	global $connect_toutes_rubriques, $connect_statut, $connect_id_auteur, $champs_extra, $options,$spip_lang_right ;
+function legender_auteur_voir($auteur) {
+	global $connect_toutes_rubriques, $connect_statut, $connect_id_auteur, $champs_extra, $options, $spip_lang_right;
 
-	$id_auteur=$auteur['id_auteur'];
-	$nom=$auteur['nom'];
-	$bio=$auteur['bio'];
-	$email=$auteur['email'];
-	$nom_site_auteur=$auteur['nom_site'];
-	$url_site=$auteur['url_site'];
-	$statut=$auteur['statut'];
-	$pgp=$auteur["pgp"];
-	$extra = $auteur["extra"];
+	if (!$id_auteur = $auteur['id_auteur']) {
+		$new = true;
+	}
 
 	$res = "<table width='100%' cellpadding='0' border='0' cellspacing='0'>"
 	. "<tr>"
 	. "<td  style='width: 100%' valign='top'>"
-	. gros_titre($nom,'',false)
+	. gros_titre(
+		sinon($auteur['nom'],_T('item_nouvel_auteur')),
+		'',false)
 	. "<div>&nbsp;</div>";
 
-	if (strlen($email) > 2)
-		$res .= "<div>"._T('email_2')." <b><a href='mailto:$email'>$email</a></b></div>";
+	if (strlen($auteur['email']))
+		$res .= "<div>"._T('email_2')
+			." <b><a href='mailto:".htmlspecialchars($auteur['email'])."'>"
+			.$auteur['email']."</a></b></div>";
 
-	if ($url_site) {
-		if (!$nom_site_auteur) $nom_site_auteur = _T('info_site');
-		$res .= propre(_T('info_site_2')." [{{".$nom_site_auteur."}}->".$url_site."]");
+	if ($auteur['url_site']) {
+		if (!$auteur['nom_site'])
+			$auteur['nom_site'] = _T('info_site');
+		$res .= propre(_T('info_site_2')." [{{".$auteur['nom_site']."}}->".$auteur['url_site']."]");
 	}
-		
-	$res .= "</td>"
-	.  "<td>";
-	
-	if (statut_modifiable_auteur($id_auteur, $auteur)) {
-		$ancre = "legender_auteur-$id_auteur";
+
+	// Bouton "modifier" ?
+	if (autoriser('modifier', 'auteur', $id_auteur)) {
+		$res .= "</td>\n<td id='bouton_modifier_auteur'>";
 		$clic = _T("admin_modifier_auteur");
-		$h = generer_url_ecrire("auteur_infos","id_auteur=$id_auteur");
-		if ((_SPIP_AJAX === 1 ) AND !$redirect) {
-		  $evt = "\nonclick=" . ajax_action_declencheur($h,$ancre);
-		  $h = "<a\nhref='$h#$ancre'$evt>$clic</a>";
-		}
-	  $res .= icone($clic, $h, "redacteurs-24.gif", "edit.gif", '', '',true);
+		$h = generer_url_ecrire("auteur_infos","id_auteur=$id_auteur&edit=oui");
+		$h = "<a\nhref='$h'>$clic</a>";
+		$res .= icone($clic, $h, "redacteurs-24.gif", "edit.gif", '', '',true);
+
+		$res .= "<script type='text/javascript'><!--
+		jQuery('#bouton_modifier_auteur a')
+		.click(function() {
+			jQuery('#auteur_infos_edit')
+			.show();
+			jQuery('#auteur_infos_voir')
+			.hide();
+			return false;
+		});
+		// --></script>\n";
 	}
+
 	$res .= "</td></tr></table>";
 
-	if (strlen($bio) > 0) { $res .= "<div>".propre("<quote>".$bio."</quote>")."</div>"; }
-	if (strlen($pgp) > 0) { $res .= "<div>".propre("PGP:<cadre>".$pgp."</cadre>")."</div>"; }
+	if (strlen($auteur['bio'])) {
+		$res .= propre("<quote>".$auteur['bio']."</quote>");
+	}
 
-	if ($champs_extra AND $extra) {
+	if (strlen($auteur['pgp'])) {
+		$res .= propre("PGP: <cadre>".$auteur['pgp']."</cadre>");
+	}
+
+	if ($GLOBALS['champs_extra'] AND $auteur['extra']) {
 		include_spip('inc/extra');
-		$res .= extra_affichage($extra, "auteurs");
+		$res .= extra_affichage($auteur['extra'], 'auteurs');
 	}
 
 	return $res;
 
-}
-
-// http://doc.spip.org/@statut_modifiable_auteur
-function statut_modifiable_auteur($id_auteur, $auteur)
-{
-	global $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
-
-// on peut se changer soi-meme
-	  return  (($connect_id_auteur == $id_auteur) ||
-  // sinon on doit etre admin
-  // et pas admin restreint pour changer un autre admin ou creer qq
-		(($connect_statut == "0minirezo") &&
-		 ($connect_toutes_rubriques OR 
-		  ($id_auteur AND ($auteur['statut'] != "0minirezo")))));
 }
 
 ?>

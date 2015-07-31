@@ -26,11 +26,10 @@ function exec_editer_auteurs_dist()
 		echo minipres();
 		exit;
 	}
-	$script_aut = _request('script_aut');
 	$script = _request('script');
 	$titre = ($titre=_request('titre'))?urldecode($titre):$titre;
 
 	$editer_auteurs = charger_fonction('editer_auteurs', 'inc');
-	ajax_retour($editer_auteurs($type, $id, 'ajax', _request('cherche_auteur'), _request('ids'),$titre,$script,$script_aut));
+	ajax_retour($editer_auteurs($type, $id, 'ajax', _request('cherche_auteur'), _request('ids'),$titre,$script));
 }
 ?>

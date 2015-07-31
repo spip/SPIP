@@ -66,7 +66,8 @@ function generer_url_ecrire_auteur($id_auteur, $statut='') {
 	$args = "id_auteur=" . intval($id_auteur);
 	if (!$statut)
 		return generer_url_action('redirect', $args);
-	else	return generer_url_ecrire('auteurs_edit',$args);
+	else
+		return generer_url_ecrire('auteur_infos',$args);
 }
 
 // http://doc.spip.org/@generer_url_ecrire_forum
