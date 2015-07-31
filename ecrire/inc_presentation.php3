@@ -1798,8 +1798,7 @@ function envoi_link($nom_site_spip, $rubrique="")
 	}
 
 	return $res .
-	  '<link rel="stylesheet" type="text/css" href=\'' . generer_url_public('spip_action.php', "action=style&$args_color") .
-	  "'>\n" .
+	  '<link rel="stylesheet" type="text/css" href=\'' . generer_url_action('style', $args_color) . "'>\n" .
 	  debut_javascript($connect_statut == "0minirezo" AND $connect_toutes_rubriques, ($GLOBALS['meta']["activer_statistiques"] != 'non')) .
 
 	// CSS calendrier
@@ -3375,7 +3374,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 	}
 
 	if ($message)
-		icone_horizontale($message, generer_url_public('spip_action.php', "action=redirect&id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif");
+	  icone_horizontale($message, generer_url_action('redirect', "id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif");
 }
 
 

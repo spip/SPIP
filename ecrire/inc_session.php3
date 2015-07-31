@@ -10,7 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire ("inc_meta");
@@ -23,7 +22,6 @@ include_ecrire ("inc_meta");
  */
 
 $GLOBALS['auteur_session'] = '';
-
 
 //
 // On verifie l'IP et le nom du navigateur
@@ -63,7 +61,7 @@ function ajouter_session($auteur, $id_session) {
 		fputs($f, $texte);
  		fclose($f);
 	} else {
-		redirige_par_entete(generer_url_public('spip_action.php'), '?action=test_dirs');
+	  redirige_par_entete(generer_url_action('test_dirs','',true));
 	}
 }
 
@@ -284,6 +282,7 @@ function generer_action_auteur($action, $arg, $redirect="", $no_entites=false)
 	global $connect_id_auteur;
 	$hash = calculer_action_auteur("$action $arg");
 	if ($redirect) $redirect = "&redirect=" . urlencode($redirect);
-	return generer_url_public("spip_action.php", "action=$action&arg=$arg&id_auteur=$connect_id_auteur&hash=$hash$redirect", $no_entites);
+	return generer_url_action($action, "arg=$arg&id_auteur=$connect_id_auteur&hash=$hash$redirect", $no_entites);
 }
+
 ?>

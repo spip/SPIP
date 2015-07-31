@@ -127,7 +127,7 @@ if ($quota_cache) {
 
  echo "<div style='text-align: center;'>",
    "<iframe width='530px' height='65px' src='",
-   generer_url_public("spip_action.php", "action=$action&arg=$arg&lang=$spip_lang&id_auteur=$connect_id_auteur&hash=$hash"),
+   generer_action_auteur($action, $arg) . "&lang=$spip_lang",
    "'></iframe>",
    "</div>";
 

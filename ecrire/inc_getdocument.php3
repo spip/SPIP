@@ -85,7 +85,7 @@ function deplacer_fichier_upload($source, $dest) {
 		if ($f) {
 			fclose ($f);
 		} else {
-			redirige_par_entete(generer_url_public('spip_action.php'), "?action=test_dirs&test_dir=". dirname($dest));
+		  redirige_par_entete(generer_url_action("test_dirs", "test_dir=". dirname($dest), true));
 		}
 		@unlink($dest);
 	}
@@ -393,7 +393,7 @@ function afficher_compactes($action) {
 }
 
 //
-// Traiter la liste des fichiers (spip_action_joindre3)
+// Traiter la liste des fichiers (action joindre3)
 //
 
 function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $id_auteur, $redirect, &$actifs)

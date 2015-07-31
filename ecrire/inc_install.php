@@ -492,7 +492,7 @@ function install_()
 
 	$menu_langues = menu_langues('var_lang_ecrire');
 	if (!$menu_langues)
-		redirige_par_entete(generer_url_public('spip_action.php'), '?action=test_dirs');
+		redirige_par_entete(generer_url_action('test_dirs'));
 	else {
 		install_debut_html();
 	
@@ -504,8 +504,7 @@ function install_()
 		  "<p><div align='center'>",
 		  $menu_langues,
 		  "</div>",
-		  "<p><form action='",
-		  generer_url_public('spip_action.php'),
+		  "<p><form action='", generer_url_public('spip_action.php'),
 		  "'>",
 		  '<input type="hidden" name="action" value="test_dirs" />',
 		  "<div align='$spip_lang_right'><input type='submit' class='fondl'  VALUE='",

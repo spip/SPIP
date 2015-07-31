@@ -186,16 +186,13 @@ function extrait_article($row) {
 	$extrait .= "\n\n".textebrut(propre(couper_intro("$chapo<p>$texte", 700)))."\n\n";
 	if ($statut == 'publie') 
 		$extrait .= "-> ".
-		  // surtout pas de &amp; dans ce cas la.
-		  generer_url_public('spip_action.php') . "?action=redirect&id_article=$id_article" .
+		  generer_url_action("redirect", "id_article=$id_article", true) .
 		  "\n\n";
 	return $extrait;
 }
 
-
 function nettoyer_titre_email($titre) {
-	$titre = ereg_replace("\n", ' ', supprimer_tags($titre));
-	return ($titre);
+	return ereg_replace("\n", ' ', supprimer_tags($titre));
 }
 
 function envoyer_mail_publication($id_article) {

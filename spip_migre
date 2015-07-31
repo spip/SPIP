@@ -67,3 +67,6 @@ sed 's/inc_version.php3/inc_version.php/;s/$SCRIPT_NAME/"accueil"/' inc.php3 > i
 
 sed 's/inc_version.php3/inc_version.php/;s%SCRIPT_NAME%_REQUEST["exec"]) OR (substr(basename($SCRIPT_NAME),0,11) == "spip_cookie"%'  inc_version > inc_version.php
 
+# pour continuer le service des .php3: changer inc pour qu'il appelle index
+# (tous les scripts .php3 valent "include('inc.php3')" a present)
+sed 's/include.*$/$_REQUEST["exec"] = $SCRIPT_NAME; include("index.php");/' info.php3  > inc.php3

@@ -91,14 +91,13 @@ function afficher_logo($racine, $titre, $logo, $redirect) {
 
 	if ($logo) {
 		list ($fichier, $taille) =  $logo;
-		$hash = calculer_action_auteur("iconifier $fichier");
 
 		echo "<p><center><div><a href='"._DIR_IMG.$fichier."'>";
 		echo reduire_image_logo(_DIR_IMG.$fichier, 170);
 		echo "</a></div>";
 		echo debut_block_invisible(md5($titre));
 		echo $taille;
-		echo "\n<br />[<a href='", generer_url_public('spip_action.php', "action=iconifier&arg=$fichier&id_auteur=$connect_id_auteur&hash=$hash&redirect=".urlencode($redirect)), "'>",_T('lien_supprimer'),"</a>]";
+		echo "\n<br />[<a href='", generer_action_auteur("iconifier", $fichier,$redirect), "'>",_T('lien_supprimer'),"</a>]";
 		echo fin_block();
 		echo "</center></p>";
 	}

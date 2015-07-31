@@ -301,8 +301,8 @@ function appliquer_modifs_config() {
 	  $action = 'purger';
 	  $arg = 'squelettes';
 	  $hash = calculer_action_auteur("$action $arg");
-	  $args = "action=$action&arg=$arg&id_auteur=$connect_id_auteur&hash=$hash&redirect=" . _DIR_RESTREINT_ABS . urlencode($clean_link->getUrl());
-	  redirige_par_entete(generer_url_public("spip_action.php", $args, true));
+	  $args = "arg=$arg&id_auteur=$connect_id_auteur&hash=$hash&redirect=" . _DIR_RESTREINT_ABS . urlencode($clean_link->getUrl());
+	  redirige_par_entete(generer_url_action($action, $args, true));
 
 	}
 }

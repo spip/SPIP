@@ -115,8 +115,7 @@ function afficher_choix_vignette($process) {
 	} */
 
 	echo "<td  width='",($taille_preview+4),"'><div align='center' valign='bottom' width='",($taille_preview+4),"'><a href='" , generer_url_ecrire("config-fonctions","image_process=$process"), 
-	  "'><img src='",
-	  generer_url_public('spip_action.php', "action=tester&arg=$process"),
+	  "'><img src='", generer_url_action("tester", "arg=$process"),
 	  "' border='$border' /></a><br />";
 	if ($border) echo "<b>$process</b>";
 	else echo "$process";
