@@ -984,17 +984,17 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc=array(), $serveur=''
  *     - False en cas d'erreur,
  *     - Tableau de description de la requête et du temps d'exécution, si var_profile activé
 **/
-function spip_mysqli_insertq($table, $couples=array(), $desc=array(), $serveur='',$requeter=true) {
+function spip_mysql_insertq($table, $couples=array(), $desc=array(), $serveur='',$requeter=true) {
 
 	if (!$desc) $desc = description_table($table, $serveur);
 	if (!$desc) $couples = array();
 	$fields =  isset($desc['field'])?$desc['field']:array();
 
 	foreach ($couples as $champ => $val) {
-		$couples[$champ]= spip_mysqli_cite($val, $fields[$champ]);
+		$couples[$champ]= spip_mysql_cite($val, $fields[$champ]);
 	}
 
-	return spip_mysqli_insert($table, "(".join(',',array_keys($couples)).")", "(".join(',', $couples).")", $desc, $serveur, $requeter);
+	return spip_mysql_insert($table, "(".join(',',array_keys($couples)).")", "(".join(',', $couples).")", $desc, $serveur, $requeter);
 }
 
 
@@ -1443,7 +1443,6 @@ function spip_get_lock($nom, $timeout = 0) {
  * 
  * @param string $nom
  *     Inutilisé. Le nom est calculé en fonction de la connexion principale
- * @param int $timeout
  * @return string|bool
  *     True si réussite, false sinon.
  */
@@ -1459,7 +1458,7 @@ function spip_release_lock($nom) {
 }
 
 /**
- * Teste si on a les fonctions MySQLi (pour l'install)
+ * Teste si on a les fonctions MySQL (pour l'install)
  * 
  * @return bool
  *     True si on a les fonctions, false sinon
