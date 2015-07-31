@@ -95,9 +95,21 @@ function deplacer_fichier_upload($source, $dest) {
 		exit;
 	}
 
+	umask('0000');
 	$ok = @copy($source, $dest);
 	if (!$ok) $ok = @move_uploaded_file($source, $dest);
-	@chmod($loc, 0666);
+	if ($ok)
+		@chmod($dest, '0666');
+	else {
+		$f = @fopen($dest,'w');
+		if ($f)
+			fclose ($f);
+		else {
+			@header ("Location: spip_test_dirs.php3?test_dir=".dirname($dest));
+			exit;
+		}
+	}
+
 	return $ok;
 }
 

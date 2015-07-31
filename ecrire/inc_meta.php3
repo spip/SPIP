@@ -84,9 +84,15 @@ function lire_meta_maj($nom) {
 	}
 	$s .= '?'.'>';
 
-	$f = fopen("inc_meta_cache.php3", "wb");
-	fputs($f, $s);
-	fclose($f);
+	$f = @fopen("inc_meta_cache.php3", "wb");
+	if ($f) {
+		fputs($f, $s);
+		fclose($f);
+	} else {
+		global $connect_statut;
+		if ($connect_statut == '0minirezo')
+			echo "<h4 font color=red>Veuillez, en tant qu'administrateur du site, <a href='../spip_test_dirs.php3'>v&eacute;rifier les droits d'ecriture</a> sur le r&eacute;pertoire ecrire/ </h4>\n";
+	}
 }
 
 
