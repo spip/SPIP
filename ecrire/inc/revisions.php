@@ -236,6 +236,17 @@ function recuperer_fragments($id_article, $id_version) {
 		$fragment = unserialize($fragment);
 		for ($i = $id_version; $i >= $version_min; $i--) {
 			if (isset($fragment[$i])) {
+
+				## hack destine a sauver les archives des sites iso-8859-1
+				## convertis en utf-8 (les archives ne sont pas converties
+				## mais ce code va les nettoyer ; pour les autres charsets
+				## la situation n'est pas meilleure ni pire qu'avant)
+				if ($GLOBALS['meta']['charset'] == 'utf-8'
+				AND !is_utf8($fragment[$i])) {
+					include_spip('inc/charsets');
+					$fragment[$i] = importer_charset($fragment[$i], 'iso-8859-1');
+				}
+
 				$fragments[$id_fragment] = $fragment[$i];
 				break;
 			}
