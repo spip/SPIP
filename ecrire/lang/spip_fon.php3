@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'access_interface_graphique' => 'L&#603;k&#596; yi&#768; at&#603; bi ji&#769;',
 'access_mode_texte' => '&#598;&egrave; t&#603;m&#603; nu wiwlant&#596;n xl&#603;  do at&#603; &#596; ji ',
+'admin_debug' => '<NEW>debug',
 'admin_modifier_article' => 'H&#596;ntogbo&#769;',
 'admin_modifier_auteur' => '&#598;i&#596; ny&#596;wlant&#596; &eacute; l&#596;',
 'admin_modifier_breve' => '&#598;i&#596; xogb&egrave; kl&eacute;wun &eacute; l&#596;',
@@ -67,6 +68,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
+'cal_apresmidi' => '<NEW>apr&egrave;s-midi',
+'cal_jour_entier' => '<NEW>jour entier',
+'cal_matin' => '<NEW>matin',
+'cal_par_jour' => '<NEW>calendrier par jour',
+'cal_par_mois' => '<NEW>calendrier par mois',
+'cal_par_semaine' => '<NEW>calendrier par semaine',
 'confirm_changer_statut' => 'vl&#603; mi&#772; by&#596; &#598;&#596; &eacute; m&iacute; j&aacute;n &#598;y&#596; nu&#780; &eacute; l&#596;. M&igrave; &#598;&ograve; bib&agrave; &#598;&#596; az&#596; n&aacute; l&#603; v&#596; y&igrave; n&ugrave; k&#596;n a ',
 
 
@@ -299,6 +306,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_valider_message' => 's&#596; k&#603;n n&uacute; w&#603;n &eacute; l&#596;',
 'icone_visiter_site' => 'J&oacute;n&#596;',
 'icone_voir_en_ligne' => 'Mi kp&#596;n &#598;&ograve; &agrave;t&#603; &#596; j&iacute; ',
+'img_indisponible' => '<NEW>image indisponible',
 'info_a_suivre' => 'mi n&aacute; kp&#596;n',
 'info_a_valider' => '[s&#596; k&#603;n n&aacute;]',
 'info_acces_interdit' => 'y&eacute; n&aacute; gb&egrave; &aacute;',
@@ -333,6 +341,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_cours_edition' => 'mi kp&oacute; &#598;&ograve; w&eacute;kp&aacute; l&#603; wl&aacute;n w&#603; ',
 'info_creer_repertoire' => 'mi k&#603;nkl&#603;n b&oacute; gb&egrave;t&agrave;x&oacute;kpl&eacute; b&oacute; n&aacute; ny&iacute;k&#596; &#603;:',
 'info_creer_repertoire_2' => '&agrave;kp&aacute;xw&eacute;',
+'info_creer_vignette' => '<NEW>cr&eacute;ation automatique de la vignette',
 'info_deplier' => 'mi vl&#596;n',
 'info_descriptif_nombre' => '&#598;&igrave;&#598;&egrave;m&#603;:',
 'info_description' => '&#598;&igrave;&#598;&egrave;m&#603;:',
@@ -447,6 +456,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_visite' => 'j&oacute;n&#596; b&igrave;b&aacute; :',
 'info_visites' => 'j&oacute;n&#596; b&igrave;b&aacute;:',
 'info_vos_rendez_vous' => 'mi n&aacute; kp&eacute; m&igrave; &#598;e&#770;',
+'info_zoom' => '<NEW>zoom',
 'infos_vos_pense_bete' => 't&agrave;m&#603; l&igrave;n &agrave;g&uacute;&#598;&aacute;g&#596;',
 'item_breve_proposee' => '&#598;&#596; x&oacute; kl&eacute;w&uacute;n',
 
@@ -560,12 +570,14 @@ N&uacute; mi n&aacute; &#598;&oacute; m&#596; n&#596;t&#603;n gblogbloj&iacute; 
 'pass_retour_public' => 'gblogbloj&iacute;',
 'pass_rien_a_faire_ici' => '&#331; &#598;&eacute; &#598;&ograve; f&iacute; &aacute;.',
 'pass_vousinscrire' => 'ny&iacute;k&#596; mi t&#596;n',
+'precedent' => '<NEW>pr&eacute;c&eacute;dent',
 'previsualisation' => 'kp&#596;n',
 'previsualiser' => 'kp&#596;n',
 
 
 // S
 'stats_visites_et_popularite' => '@visites@ j&oacute;n&#596; &nbsp;; t&ograve;b&iacute;t&ugrave;n&nbsp;: @popularite@',
+'suivant' => '<NEW>suivant',
 
 
 // T
@@ -624,11 +636,28 @@ N&uacute; mi n&aacute; &#598;&oacute; m&#596; n&#596;t&#603;n gblogbloj&iacute; 
 
 
 // Z
+'zbug_balise_b_aval' => '<NEW>&nbsp;: balise B en aval',
+'zbug_boucle' => '<NEW>boucle',
+'zbug_boucle_recursive_undef' => '<NEW>boucle r&eacute;cursive non d&eacute;finie',
+'zbug_champ_argument_manquant' => '<NEW>Champ @champ@&nbsp;: argument manquant',
+'zbug_champ_hors_boucle' => '<NEW>Champ @champ@ hors boucle',
+'zbug_champ_hors_motif' => '<NEW>Champ @champ@ hors d\'une boucle de motif @motif@',
+'zbug_code' => '<NEW>code',
+'zbug_critere_inconnu' => '<NEW>crit&egrave;re inconnu @critere@',
+'zbug_distant_interdit' => '<NEW>externe interdit',
 'zbug_erreur_boucle_double' => 't&ograve;b&ograve;t&ograve;b&ograve;@id@:t&iacute;m&#603; &agrave;z&#596;n w&egrave;',
 'zbug_erreur_boucle_fermant' => 't&ograve;b&ograve;t&ograve;b&ograve;@:c&aacute;v&igrave; &eacute; n&uacute; &#596; &#598;&egrave; &aacute;',
 'zbug_erreur_boucle_syntaxe' => 't&ograve;b&ograve;t&ograve;b&ograve; &#596; s&#596; gb&egrave; &aacute;',
+'zbug_erreur_execution_page' => '<NEW>erreur d\'ex&eacute;cution de la page',
 'zbug_erreur_filtre' => 'kl&#603;n &agrave;f&#596; ',
-'zbug_info_erreur_squelette' => '&agrave;f&#596;kikl&#603;n &#598;&ograve; gblogbloj&iacute;'
+'zbug_erreur_meme_parent' => '<NEW>{meme_parent} ne s\'applique qu\'aux boucles (FORUMS) ou (RUBRIQUES)',
+'zbug_erreur_squelette' => '<NEW>Erreur(s) dans le squelette',
+'zbug_info_erreur_squelette' => '&agrave;f&#596;kikl&#603;n &#598;&ograve; gblogbloj&iacute;',
+'zbug_inversion_ordre_inexistant' => '<NEW>inversion d\'un ordre inexistant',
+'zbug_parametres_inclus_incorrects' => '<NEW>Param&egrave;tres d\'inclusion incorrects',
+'zbug_resultat' => '<NEW>r&eacute;sultat',
+'zbug_serveur_indefini' => '<NEW>serveur SQL ind&eacute;fini',
+'zbug_table_inconnue' => '<NEW>Table SQL &laquo; @table@ &raquo; inconnue'
 
 );
 
