@@ -308,6 +308,7 @@ function autoriser_webmestre_dist($faire, $type, $id, $qui, $opt) {
 
 // Modifier un auteur ?
 // Attention tout depend de ce qu'on veut modifier
+// http://doc.spip.org/@autoriser_auteur_modifier_dist
 function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 	// Ni admin ni redacteur => non
 	if (!in_array($qui['statut'], array('0minirezo', '1comite')))
