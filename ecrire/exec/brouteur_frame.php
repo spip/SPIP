@@ -63,7 +63,7 @@ function exec_brouteur_frame_dist() {
 	echo "\n<div class='arial2'>";
 
 	if ($special == "redac") {
-		$result=sql_select("articles.id_article, articles.id_rubrique, articles.titre, articles.statut", "spip_articles AS articles LEFT JOIN spip_auteurs_articles AS lien USING (id_article)", "articles.statut = 'prepa' AND lien.id_auteur = $connect_id_auteur ", " id_article ", " articles.date DESC");
+		$result=sql_select("articles.id_article, articles.id_rubrique, articles.titre, articles.statut", "spip_articles AS articles LEFT JOIN spip_auteurs_articles AS lien ON articles.id_article=lien.id_article", "articles.statut = 'prepa' AND lien.id_auteur = $connect_id_auteur ", " id_article ", " articles.date DESC");
 		$res = '';
 		while($row=sql_fetch($result)){
 			$id_article=$row['id_article'];

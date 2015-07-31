@@ -679,7 +679,7 @@ function spip_mysql_multi ($objet, $lang) {
 		"               TRIM(RIGHT(".$objet.", ( LENGTH(".$objet.") - (INSTR(".$objet.", '[".$lang."]')+ LENGTH('[".$lang."]')-1) ) )) ".
 		"          ) ".
 		"     ) ".
-		"))) AS multi ";
+		"))) AS multi";
 
 	return $retour;
 }
