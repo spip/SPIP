@@ -56,7 +56,7 @@ function spip_file_get_contents ($fichier) {
 		if (function_exists('file_get_contents')
 		AND ( 
 		  ($contenu = @file_get_contents ($fichier)) # windows retourne '' ?
-		  OR $os_serveur != 'windows')
+		  OR _OS_SERVEUR != 'windows')
 		)
 			return $contenu;
 		else
