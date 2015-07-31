@@ -167,7 +167,9 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 			$titre_select = "SELECT titre FROM spip_breves WHERE id_breve = $id_breve";
 		else if ($id_syndic)
 			$titre_select = "SELECT nom_site AS titre FROM spip_syndic WHERE id_syndic = $id_syndic";
-	
+
+		$titre_select .= " AND statut='publie'";
+
 		$res = mysql_fetch_object(spip_query($titre_select));
 		$titre = '> ' . ereg_replace ('^[>[:space:]]*', '', $res->titre);
 	}
