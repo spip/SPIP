@@ -80,8 +80,9 @@ function calculer_boucle($id_boucle, &$boucles)
 		if ($x = $PileRow[$SP]["lang"]) $GLOBALS["spip_lang"] = $x;')) .
 	  $invalide .
 	  ((!$boucle->doublons) ? "" : 
-	   ("\n\t\t\$doublons['$type_boucle'] .= ','. \$PileRow[\$SP]['" .
-	    $primary_key . "'];")).
+	   ("\n\t\t\$doublons['$type_boucle'] .= ','. " .
+	    index_pile($id_boucle, $primary_key, $boucles) .
+	    ";")).
 	  $corps .
 	  (($return == "''") ? "" :
 	   ((!$boucle->separateur) ? 
@@ -127,7 +128,7 @@ function calculer_boucle($id_boucle, &$boucles)
 				   $boucle->total_parties,
 				   $id_boucle) :
 		  ((!$boucle->numrows) ? '' : "
-	\$PileNum['$id_boucle'] = @spip_num_rows(\$result);")) .
+	\$Numrows['$id_boucle'] = @spip_num_rows(\$result);")) .
 		 ((!$flag_cpt) ? '' : "\n\t\$compteur_boucle = 0;") .
 		 ((!$corps) ? "" :
 		  (
@@ -183,7 +184,7 @@ function calculer_parties($partie, $mode_partie, $total_parties, $id_boucle)
 	$fin_boucle -= ' . 
 		    ($partie - $total_parties)) .
 		   ';'))  . '
-	$PileNum[$SP] = $fin_boucle - $debut_boucle + 1;');
+	$Numrows[$SP] = $fin_boucle - $debut_boucle + 1;');
 }
 
 
@@ -236,7 +237,7 @@ function calculer_liste($tableau, $prefix, $id_boucle, $niv, &$boucles, $id_mere
 	      
 	      $c = $prefix .
 		ereg_replace("-","_", $nom) .
-		'($Cache, $PileRow, $doublons, $PileNum, $SP)';
+		'($Cache, $PileRow, $doublons, $Numrows, $SP)';
 	      $m = "";
 	    } else {
 	      list($c,$m) = 
@@ -388,13 +389,13 @@ function calculer_squelette($squelette, $nom, $gram) {
       foreach($boucles as $id => $boucle) 
 	{
 	  $code .= "\n\nfunction $nom" . ereg_replace("-","_",$id) .
-		'(&$Cache, &$PileRow, &$doublons, &$PileNum, $SP) {' .
+		'(&$Cache, &$PileRow, &$doublons, &$Numrows, $SP) {' .
 	    $boucle->return .
 	    "\n}\n";
 	}
     }
   return $code . '
-function ' . $nom . '($Cache, $PileRow, $doublons, $PileNum="", $SP=0)
+function ' . $nom . '($Cache, $PileRow, $doublons, $Numrows="", $SP=0)
  {
 ' .
     $corps . "\n \$t0 = " . $return . ';

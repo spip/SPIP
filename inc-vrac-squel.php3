@@ -128,7 +128,7 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
 	      include_local("inc-debug-squel.php3");
 	      erreur_squelette(_L("Champ #TOTAL_BOUCLE hors boucle"), '', $id_boucle);
 	    }
-	$code = "\$PileNum[$id_mere]";
+	$code = "\$Numrows['$id_mere']";
 	$boucles[$id_mere]->numrows = true;
 		break;
 
