@@ -205,6 +205,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 // http://doc.spip.org/@afficher_documents_colonne
 function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	include_spip('inc/autoriser');
+	
 	// il faut avoir les droits de modif sur l'article pour pouvoir uploader !
 	if (!autoriser('joindredocument',$type,$id))
 		return "";
@@ -331,7 +332,7 @@ function est_inclus($id_document) {
 // http://doc.spip.org/@afficher_case_document
 function afficher_case_document($id_document, $id, $script, $type, $deplier=false) {
 	global $spip_lang_right;
-
+	
 	charger_generer_url();
 	$document = sql_fetsel("docs.id_document, docs.id_vignette,docs.extension,docs.titre,docs.descriptif,docs.fichier,docs.largeur,docs.hauteur,docs.taille,docs.mode,docs.distant, docs.date, L.vu", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document", "L.id_objet=".intval($id)." AND objet=".sql_quote($type)." AND L.id_document=".sql_quote($id_document));
 
@@ -359,7 +360,6 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 		$type_inclus = $letype['inclus'];
 		$type_titre = $letype['titre'];
 	}
-
 	//
 	// Afficher un document
 	//
