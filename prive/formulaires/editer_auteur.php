@@ -135,6 +135,8 @@ function formulaires_editer_auteur_traiter_dist($id_auteur='new', $retour='', $a
 		if ($objet AND $id_objet){
 			include_spip('action/editer_auteur');
 			auteur_associer($id_auteur, array($objet => $id_objet));
+			if (isset($res['redirect']))
+				$res['redirect'] = parametre_url ($res['redirect'], "id_lien_ajoute", $id_auteur, '&');
 		}
 	}
 

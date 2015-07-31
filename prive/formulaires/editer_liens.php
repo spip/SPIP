@@ -38,7 +38,7 @@ function formulaires_editer_liens_charger_dist($table_source,$objet,$id_objet){
 		'id'=>"$table_source-$objet-$id_objet", // identifiant unique pour les id du form
 		'_vue_liee' => $table_source."_lies",
 		'_vue_ajout' => $table_source."_associer",
-		'id_new'=>0,
+		'id_lien_ajoute'=>_request('id_lien_ajoute'),
 		'objet'=>$objet,
 		'id_objet'=>$id_objet,
 		'objet_source'=>$objet_source,
@@ -138,8 +138,8 @@ function formulaires_editer_liens_traiter_dist($table_source,$objet,$id_objet){
 					$ajout_ok = true;
 					$ajouter_lien($lien);
 					$lien = explode("-",$lien);
-					list(,$id_new,,) = $lien;
-					set_request('id_new',$id_new);
+					list(,$id_lien_ajoute,,) = $lien;
+					set_request('id_lien_ajoute',$id_lien_ajoute);
 				}
 			}
 			# oups ne persiste que pour la derniere action, si suppression
