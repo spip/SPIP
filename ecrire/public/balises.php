@@ -685,7 +685,7 @@ function balise_PARAMETRES_FORUM_dist($p) {
 			// passer par la rubrique pour avoir un champ Lang
 			// la table syndic n'en ayant pas
 			$c =  '"id_syndic=".' . champ_sql('id_syndic', $p);
-			if ($lang) $lang = 'quete_lang(' . champ_sql('id_rubrique', $p) . ',"rubrique")';
+			if ($lang) $lang = 'sql_getfetsel("lang", "spip_rubriques", ("id_rubrique=" . intval("' . champ_sql('id_rubrique', $p) . '")))';
 			break;
 		case 'forums':
 		default:

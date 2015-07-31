@@ -475,10 +475,14 @@ function calculer_notes() {
 // determiner la table a la compil, on le fait maintenant.
 // Il faudrait encore completer: on ne connait pas la langue
 // pour une boucle forum sans id_article ou id_rubrique donné par le contexte
+// et c'est signale par un message d'erreur abscons: "table inconnue forum".
+// 
 // http://doc.spip.org/@lang_parametres_forum
 function lang_parametres_forum($qs, $lang) {
 	if ($lang == -1 AND preg_match(',id_(\w+)=([0-9]+),', $qs, $r)) {
-		$lang = quete_lang($r[2], $r[1]);
+		$desc = trouver_table(table_objet($r[1]));
+		if (!$desc OR !isset($desc['field']['lang'])) return '';
+		$lang = sql_getfetsel('lang', $desc['table'], ("id_$r[1]=" . intval($r[2])));
 	}
   // Si ce n'est pas la meme que celle du site, l'ajouter aux parametres
 	if ($lang AND $lang <> $GLOBALS['meta']['langue_site'])
