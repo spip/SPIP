@@ -1058,6 +1058,128 @@ function image_flip_horizontal($im)
 }
 
 
+function image_masque($im, $masque) {
+	// Passer, en plus de l'image d'origine,
+	// une image de "masque": un fichier PNG24 transparent.
+	// Le decoupage se fera selon la transparence du "masque",
+	// et les couleurs seront eclaircies/foncees selon de couleur du masque.
+	// Pour ne pas modifier la couleur, le masque doit etre en gris 50%.
+	//
+	// Si l'image source est plus grande que le masque, alors cette image est reduite a la taille du masque.
+	// Sinon, c'est la taille de l'image source qui est utilisee.
+
+	include_ecrire('inc_logos');
+	
+	$nom = ereg_replace("\.png", "", $masque);
+	$image = valeurs_image_trans($im, "$nom", "png");
+	if (!$image) return("");
+
+	$x_i = $image["largeur"];
+	$y_i = $image["hauteur"];
+	
+	$im = $image["fichier"];
+	$dest = $image["fichier_dest"];
+	
+	$creer = $image["creer"];
+
+
+	if ($creer OR 1==1) {
+	
+		$masque = find_in_path($masque);	
+		$mask = valeurs_image_trans($masque,"");
+		$im_m = $mask["fichier"];
+		$x_m = $mask["largeur"];
+		$y_m = $mask["hauteur"];
+	
+	
+		$rapport = $x_i / $x_m;
+		if (($y_i / $y_m) < $rapport ) {
+			$rapport = $y_i / $y_m;
+		}
+			
+		$x_d = ceil($x_i / $rapport);
+		$y_d = ceil($y_i / $rapport);
+		
+
+		if ($x_i < $x_m OR $y_i < $y_m) {
+			$x_dest = $x_i;
+			$y_dest = $y_i;
+			$x_dec = 0;
+			$y_dec = 0;
+		} else {
+			$x_dest = $x_m;
+			$y_dest = $y_m;
+			$x_dec = round(($x_d - $x_m) /2);
+			$y_dec = round(($y_d - $y_m) /2);
+		}
+
+
+		$nouveau = valeurs_image_trans(reduire_image($im, $x_d, $y_d),"");
+		$im_n = $nouveau["fichier"];
+		
+	
+		$im = $nouveau["fonction_imagecreatefrom"]($im_n);
+		$im2 = $mask["fonction_imagecreatefrom"]($masque);
+		$im_ = imagecreatetruecolor($x_dest, $y_dest);
+		@imagealphablending($im_, false);
+		@imagesavealpha($im_,true);
+		$color_t = ImageColorAllocateAlpha( $im_, 255, 255, 255 , 127 );
+		imagefill ($im_, 0, 0, $color_t);
+
+
+		for ($x = 0; $x < $x_dest; $x++) {
+			for ($y=0; $y < $y_dest; $y++) {
+				$rgb = ImageColorAt($im2, $x, $y);
+				$a = ($rgb >> 24) & 0xFF;
+				$r = ($rgb >> 16) & 0xFF;
+				$g = ($rgb >> 8) & 0xFF;
+				$b = $rgb & 0xFF;
+				
+
+				$rgb2 = ImageColorAt($im, $x+$x_dec, $y+$y_dec);
+				$a2 = ($rgb2 >> 24) & 0xFF;
+				$r2 = ($rgb2 >> 16) & 0xFF;
+				$g2 = ($rgb2 >> 8) & 0xFF;
+				$b2 = $rgb2 & 0xFF;
+				
+				$r2 = $r2 + 1 * ($r - 127);
+				if ($r2 > 254) $r2 = 254;
+				if ($r2 < 0) $r2 = 0;
+				$g2 = $g2 + 1 * ($g - 127);
+				if ($g2 > 254) $g2 = 254;
+				if ($g2 < 0) $g2 = 0;
+				$b2 = $b2 + 1 * ($b - 127);
+				if ($b2 > 254) $b2 = 254;
+				if ($b2 < 0) $b2 = 0;
+				
+				$a_ = $a + $a2 - round($a*$a2/127);
+
+
+
+
+				$color = ImageColorAllocateAlpha( $im_, $r2, $g2, $b2 , $a_ );
+				imagesetpixel ($im_, $x, $y, $color);			
+			}
+		}
+
+
+
+		$image["fonction_image"]($im_, "$dest");
+
+	}
+
+	$class = $image["class"];
+	if (strlen($class) > 1) $tags=" class='$class'";
+	$tags = "$tags alt='".$image["alt"]."'";
+	$style = $image["style"];
+	if (strlen($style) > 1) $tags="$tags style='$style'";
+	return "<img src='$dest'$tags />";
+
+
+
+}
+
+
 function image_nb($im)
 {
 	include_ecrire('inc_logos');
