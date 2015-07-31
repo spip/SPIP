@@ -1504,7 +1504,9 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'titre_admin_tech' => 'Mantenen&ccedil;a tecnica',
 'titre_admin_vider' => 'Mantenen&ccedil;a tecnica',
 'titre_ajouter_mot_cle' => 'APONDRE UN MOT CLAU:',
+'titre_articles_populaires' => 'Los articles mai populars',
 'titre_articles_syndiques' => 'Articles sindicats tirats de queu sit',
+'titre_articles_visites' => 'Los articles mai vesitats',
 'titre_breve_proposee' => 'Breva prepausada',
 'titre_breve_publiee' => 'Breva publicada',
 'titre_breve_refusee' => 'Breva refusada',
@@ -1543,6 +1545,7 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'titre_langue_trad_article' => 'LENGA E REVIRADAS DE L\'ARTICLE',
 'titre_les_articles' => 'LOS ARTICLES',
 'titre_liens_entrants' => 'Los liams entrants per uei',
+'titre_liens_entrants_total' => '<NEW> <NEW> Les liens entrants depuis le d&eacute;but',
 'titre_mots_cles' => 'MOTS CLAUS',
 'titre_mots_cles_dans_forum' => 'Mots claus dins los forums dau sit public',
 'titre_mots_tous' => 'Los mots claus',
@@ -1602,7 +1605,6 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'trad_lier' => 'Queste article es una revirada de l\'article numero:',
 'trad_new' => 'Escriure una revirada novela de queste article',
 'trad_reference' => '(article de refer&eacute;ncia)'
-
 
 );
 
