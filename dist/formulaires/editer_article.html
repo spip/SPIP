@@ -3,7 +3,7 @@
 	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
 	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
-	<form method='post' action='#ENV{action}' enctype='multipart/form-data' >
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data' class='noajax'>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
@@ -16,7 +16,7 @@
 	      <input type='text' name='surtitre' id='surtitre' class='forml' value="[(#ENV**{surtitre})]" />
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{surtitre})</span>]
 	    </li>]
-	    <li class="gauche gauche_obligatoire">
+	    <li class="gauche obligatoire">
 	      <label for="titre"><:info_titre:><em>#AIDER{arttitre}</em></label>
 	      <input type='text' name='titre' id='titre' class='formo' value="[(#ENV**{titre,#REM|concat{info_nouvel_article}|_T})]"
 				[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
@@ -68,6 +68,7 @@
 	  	[(#ENV**{config}|table_valeur{articles_texte}|=={non}|?{#ENV**{texte,''},' '}|?{' '})
 	    <li class="haut">
 	      <label for="text_area"><:info_texte:><em>#AIDER{arttexte}</em></label>
+	    	[(#ENV**{_texte_trop_long,''})]
 	      <div class="commentaire"><:texte_enrichir_mise_a_jour:><em>#AIDER{raccourcis}</em></div>
 	      [(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{text_area}|barre_typo{#LANG}})]
 	      <textarea name='texte' id='text_area' class='formo barre_inserer' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[

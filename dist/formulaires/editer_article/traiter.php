@@ -14,7 +14,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions');
 include_spip('inc/editer');
-include_spip('inc/editer_article');
 
 // http://doc.spip.org/@inc_editer_article_dist
 function formulaires_editer_article_traiter_dist($id_article='new', $id_rubrique=0, $lier_trad=0, $retour='', $config_fonc='articles_edit_config', $row=array(), $hidden=''){
