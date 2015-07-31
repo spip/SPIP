@@ -116,7 +116,7 @@ französischen SPIP-Dokumentation</a>.',
 'date_mot_heures' => 'Stunden',
 
 // E
-'ecran_securite' => ' + écran de sécurité @version@', # NEW
+'ecran_securite' => ' + Sicherheitsschirm @version@',
 'email' => 'E-Mail',
 'email_2' => 'E-Mail:',
 'en_savoir_plus' => 'Weitere Informationen',
@@ -773,7 +773,7 @@ in einer Farbe, die den Status anzeigt :',
 'texte_choix_table_prefix' => 'Prefix der Tabellen:',
 'texte_commande_vider_tables_indexation' => 'Verwenden Sie diese Funktion, um die Tabellen der integrierten Suchmaschine zu löschen. Damit sparen Sie Speicherplatz.',
 'texte_compatibilite_html' => 'Sie können SPIP so einstellen, daß die öffentlichen Seiten in <i>HTML4</i> erstellt werden, oder in <i>HTML5</i> mit seinen erweiterten Leistungsmerkmalen.',
-'texte_compatibilite_html_attention' => 'Die Verwendung von <i>HTML5</i> ist völlig ungefährlich, nur müssen ihre Seiten dann mit der folgenden Zeile beginnen, um der HTML-Norm zu entsprechen: <code><!DOCTYPE html></code>.',
+'texte_compatibilite_html_attention' => 'Die Aktivierung von <i>HTML5</i> ist völlig ungefährlich, nur müssen ihre Seiten dann mit der folgenden Zeile beginnen, um der HTML-Norm zu entsprechen: <code>&lt;!DOCTYPE html&gt;</code>.',
 'texte_compresse_ou_non' => '(kann komprimiert oder unkomprimiert sein)',
 'texte_compte_element' => '@count@ Element',
 'texte_compte_elements' => '@count@ Elemente',
