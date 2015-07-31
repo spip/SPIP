@@ -666,6 +666,7 @@ function puce_statut_breve($id, $statut, $type, $droit) {
 
 function afficher_script_statut($id, $type, $n, $img, $statut, $title, $act)
 {
+  include_spip('inc/actions');
   return http_href_img("javascript:selec_statut('$id', '$type', -1, '" .
 		      http_wrapper($img) .
 		      "', '" .
