@@ -68,15 +68,25 @@ function spip_cron($taches = array()) {
 
 	// Quelle est la tache la plus urgente ?
 	$tache = '';
+	$tmin = $t;
 	clearstatcache();
 	foreach ($taches as $nom => $periode) {
 		$lock = _DIR_SESSIONS . $nom . '.lock';
 		$date_lock = @filemtime($lock);
-		if ($date_lock + $periode < $t) {
-			$t = $date_lock + $periode;
+
+		if ($date_lock + $periode < $tmin) {
+			$tmin = $date_lock + $periode;
 			$tache = $nom;
 			$last = $date_lock;
 		}
+		// debug : si la date du fichier est superieure a l'heure actuelle,
+		// c'est que le serveur a (ou a eu) des problemes de reglage horaire
+		// qui peuvent mettre en peril les taches cron : signaler dans le log
+		// (On laisse toutefois flotter sur une heure, pas la peine de s'exciter
+		// pour si peu)
+		else if ($date_lock > $t + 3600)
+			spip_log("Erreur de date du fichier $lock : $date_lock > $t !");
+
 	}
 	if (!$tache) return;
 
