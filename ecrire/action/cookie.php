@@ -17,7 +17,7 @@ include_spip('inc/cookie');
 
 // http://doc.spip.org/@action_cookie_dist
 function action_cookie_dist() {
-var_dump($_POST);die();
+
 	// La cible de notre operation de connexion
 	$url = _request('url');
 	$redirect = isset($url) ? $url : _DIR_RESTREINT_ABS;
