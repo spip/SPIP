@@ -160,12 +160,12 @@ function exec_naviguer_dist()
 	$onglet_enfants = 
 	  afficher_enfant_rub($id_rubrique, false, true)
 	  .(_INTERFACE_ONGLETS?"":
-	   (autoriser('creerrubriquedans','rubrique',$id_rubrique)?
+	   (autoriser('creerrubriquedans','rubrique',$id_rubrique)?"<div style='clear:$spip_lang_right;'>" .
 	    (!$id_rubrique
 		    ? icone_inline(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.gif", "creer.gif",$spip_lang_right)
 		    : icone_inline(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.gif", "creer.gif",$spip_lang_right))
 		    :"")
-		. "<br class='nettoyeur' />"
+		. "</div><br class='nettoyeur' />"
 	  . contenu_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable))
 	;
 
