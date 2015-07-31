@@ -18,6 +18,7 @@ dist/formulaires/mot_de_passe.html -text
 dist/formulaires/mot_de_passe.php -text
 dist/formulaires/oubli.php -text
 dist/formulaires/recherche.php -text
+dist/formulaires/signature.php -text
 dist/formulaires/site.php -text
 dist/identifiants.html -text
 dist/inc-documents.html -text

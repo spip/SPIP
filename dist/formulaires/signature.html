@@ -1,48 +1,61 @@
-<div class="formulaire_spip formulaire_signature" id="sp#ENV{id_article}">
-
-[<p class="reponse_formulaire">(#ENV*{reponse})</p>]
-
-[<form method="post" action="(#ENV{self})[#sp(#ENV{id_article})]">
-<input type="hidden" name="url_page" value="#URL_SITE_SPIP/#SELF" />
-
-[<fieldset>
-	<legend><:info_descriptif:></legend>
-	(#ENV*{texte}|propre)
-</fieldset>]
-
-<fieldset>
-	<legend><:form_forum_identifiants:></legend>
-	<p><label for="nom_email"><:form_pet_votre_nom:></label>
-	<input type="text" class="forml" name="nom_email" id="nom_email" value="" size="20" /></p>
-	<p><label for="adresse_email"><:form_pet_votre_email:></label>
-	<input type="text" class="forml" name="adresse_email" id="adresse_email" value="" size="20" /></p>
-</fieldset>
-
-<fieldset>
-	<legend><:info_lien_hypertexte:></legend>
-	[<p>(#ENV{site_obli})<:form_pet_votre_site:></p>]
-	<p><label for="signature_nom_site"><:form_pet_nom_site2:></label>
-	<input type="text" class="forml" name="signature_nom_site" id="signature_nom_site" value="" size="20" /></p>
-	<p><label for="signature_url_site"><:form_pet_adresse_site:></label>
-	<input type="text" class="forml" name="signature_url_site" id="signature_url_site" style="text-align: left;" dir="ltr" value="http://" size="20" /></p>
-</fieldset>
+<div class="formulaire_spip formulaire_signature ajax" id="sp#ENV{id_article}">
+[<p class="formulaire_message">(#ENV*{message_ok,#ENV*{_reponse}})</p>]
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+[(#ENV{editable})
+<form method="post" action="#ENV{action}">
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<fieldset>
+	<input type="hidden" name="url_page" value="#URL_SITE_SPIP/#SELF" />
+	[<fieldset>
+		<legend><:info_descriptif:></legend>
+		<div class='explication'>(#ENV*{_texte}|propre)</div>
+	</fieldset>]
+	<fieldset>
+		<legend><:form_forum_identifiants:></legend>
+		<ul>
+      <li class='saisie_nom_email[ (#ENV*{erreurs}|table_valeur{nom_email}|oui)erreur]'>
+          <label for="nom_email"><:form_pet_votre_nom:></label>
+						[<span class="erreur">(#ENV*{erreurs}|table_valeur{nom_email})</span>]
+          <input type="text" class="text" name="nom_email" id="nom_email" value="#ENV{nom_email}" size="30" />
+      </li>
+      <li class='saisie_adresse_email[ (#ENV*{erreurs}|table_valeur{adresse_email}|oui)erreur]'>
+          <label for="adresse_email"><:form_pet_votre_email:></label>
+						[<span class="erreur">(#ENV*{erreurs}|table_valeur{adresse_email})</span>]
+          <input type="text" class="text" name="adresse_email" id="adresse_email" value="#ENV{adresse_email}" size="30" />
+      </li>
+		</ul>
+	</fieldset>
+	<fieldset>
+		<legend><:info_lien_hypertexte:></legend>
+		[<p class='explication'>(#ENV{site_obli})<:form_pet_votre_site:></p>]
+		<ul>
+		  <li class='saisie_signature_nom_site[ (#ENV*{erreurs}|table_valeur{signature_nom_site}|oui)erreur]'>
+		      <label for="signature_nom_site"><:form_pet_nom_site2:></label>
+					[<span class="erreur">(#ENV*{erreurs}|table_valeur{signature_nom_site})</span>]
+		      <input type="text" class="text" name="signature_nom_site" id="signature_nom_site" value="#ENV{signature_nom_site}" size="30" />
+		  </li>
+		  <li class='saisie_signature_url_site[ (#ENV*{erreurs}|table_valeur{signature_url_site}|oui)erreur]'>
+		      <label for="signature_url_site"><:form_pet_adresse_site:></label>
+					[<span class="erreur">(#ENV*{erreurs}|table_valeur{signature_url_site})</span>]
+		      <input type="text" class="text" name="signature_url_site" id="signature_url_site" value="#ENV{signature_url_site}" size="30" />
+		  </li>
+	  </ul>
+	</fieldset>
 
 	[(#REM) Piege a robots spammeurs ]
 	<p style="display: none;"><label for="nobot"><:antispam_champ_vide:></label>
 	<input type="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" /></p>
 
+	[(#ENV{_message})
+		<fieldset>
+			<legend><:form_pet_message_commentaire:></legend><ul>
+			<li class='saisie_message'>
+				<label for="message"><:info_texte_message:></label>
+				<textarea name="message" id="message" rows="3" cols="20">#ENV{message}</textarea>
+			</li>
+		</ul></fieldset>]
 
-[(#ENV{message})
-	<fieldset>
-		<legend><:form_pet_message_commentaire:></legend>
-		<p><label for="message"><:info_texte_message:></label>
-		<textarea class="forml" name="message" id="message" rows="3" cols="20"></textarea></p>
-	</fieldset>]
-
-
-<p class="spip_bouton"><input type="submit" value="<:bouton_valider:>" /></p>
+	<p class="boutons"><input type="submit" value="<:bouton_valider:>" /></p>
 </form>
 ]
-
-
 </div>
