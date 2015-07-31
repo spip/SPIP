@@ -170,17 +170,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_4' => 'tardor',
 'date_semaines' => 'setmanes',
 'dirs_commencer' => 'per comen&ccedil;ar realment la instal&middot;laci&oacute;',
-'dirs_preliminaire' => 'Preliminar: <B>Regular els drets d\'acc&eacute;s</B>',
+'dirs_preliminaire' => 'Preliminar: <b>Regular els drets d\'acc&eacute;s</b>',
 'dirs_probleme_droits' => 'Problema de drets d\'acc&eacute;s',
-'dirs_repertoires_absents' => '<B>No s\'han trobat els seg&uuml;ents directoris&nbsp;: <ul>@bad_dirs@.</ul> </b>
-  <P>&Eacute;s probable que la causa sigui un problema d\'escriptura de les maj&uacute;scules o les min&uacute;scules.
+'dirs_repertoires_absents' => '<b>No s\'han trobat els seg&uuml;ents directoris&nbsp;: <ul>@bad_dirs@.</ul> </b>
+  <p />&Eacute;s probable que la causa sigui un problema d\'escriptura de les maj&uacute;scules o les min&uacute;scules.
   Verifiqueu que les min&uacute;scules i les maj&uacute;scules d\'aquests directoris coincideixen exactament amb el que es mostra
   m&eacute;s amunt; si aquest no &eacute;s el cas, canvieu el nom dels directoris amb l\'ajuda del vostre programa d\'FTP per tal de corregir l\'error.
-  <P>Un cop feta aquesta manipulaci&oacute;, podreu ',
-'dirs_repertoires_suivants' => '<B>Els seg&uuml;ents directoris no s&oacute;n accessibles a l\'escriptura&nbsp;: <ul>@bad_dirs@.</ul> </B>
-  <P>Per solucionar el problema feu servir el vostre client FTP per tal de regular els drets d\'acc&eacute;s de cadascun d\'aquests directoris.
+  <p />Un cop feta aquesta manipulaci&oacute;, podreu ',
+'dirs_repertoires_suivants' => '<b>Els seg&uuml;ents directoris no s&oacute;n accessibles a l\'escriptura&nbsp;: <ul>@bad_dirs@.</ul> </b>
+  <p />Per solucionar el problema feu servir el vostre client FTP per tal de regular els drets d\'acc&eacute;s de cadascun d\'aquests directoris.
   El procediment s\'explica detalladament a la guia d\'instal&middot;laci&oacute;.
-  <P>Un cop feta la manipulaci&oacute;, podreu ',
+  <p />Un cop feta la manipulaci&oacute;, podreu ',
 
 
 // E
@@ -265,7 +265,7 @@ Gr&agrave;cies per la participaci&oacute;
 'forum_cliquer_retour' => 'Premeu <a href=\'@retour_forum@\'>ici</a> per continuar.',
 'forum_forum' => 'f&ograve;rum',
 'forum_info_modere' => 'Aquest f&ograve;rum &eacute;s moderat a priori: la seva contribuci&oacute; no es mostrar&agrave; fins que no hagi estat validada per l\'administrador del lloc. ',
-'forum_lien_hyper' => '<B>Enlla&ccedil; hipertext</B> (opcional)',
+'forum_lien_hyper' => '<b>Enlla&ccedil; hipertext</b> (opcional)',
 'forum_message_definitif' => 'Missatge definitiu: enviar al lloc',
 'forum_message_trop_long' => 'El vostre missatge &eacute;s massa llarg. La mida m&agrave;xima s&oacute;n 20000 car&agrave;cters.',
 'forum_ne_repondez_pas' => 'No respongueu a aquest correu electr&ograve;nic, feu-ho al f&ograve;rum que trobareu a la seg&uuml;ent adre&ccedil;a: ',
@@ -274,7 +274,7 @@ Gr&agrave;cies per la participaci&oacute;
 'forum_par_auteur' => 'per @auteur@',
 'forum_poste_par' => 'Missatge enviat@parauteur@ a continuaci&oacute; del vostre article.',
 'forum_probleme_database' => 'Problema de la base de dades, el vostre missatge no s\'ha registrat.',
-'forum_qui_etes_vous' => '<B>Qui s&oacute;u?</B> (opcional)',
+'forum_qui_etes_vous' => '<b>Qui s&oacute;u?</b> (opcional)',
 'forum_texte' => 'Text del vostre missatge:',
 'forum_titre' => 'Titol:',
 'forum_titre_erreur' => 'Error...',
@@ -499,10 +499,10 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_tout_afficher' => 'Mostrar-ho tot',
 'info_travaux_texte' => 'Aquest lloc encara no est&aacute; configurat. Torneu m&eacute;s endavant...',
 'info_travaux_titre' => 'Lloc en construcci&oacute;',
-'info_trop_resultat' => 'Massa resultats per "@cherche_mot@"; vulgueu afinar la cerca.',
+'info_trop_resultat' => 'Massa resultats per "@cherche_mot@"; si voleu afinar la cerca.',
 'info_utilisation_messagerie_interne' => 'Utilitzeu la missatgeria interna d\'aquest lloc.',
 'info_valider_lien' => 'validar aquest enlla&ccedil;',
-'info_verifier_image' => 'vulgueu verificar que les vostres imatges han estat transferides correctament.',
+'info_verifier_image' => ', voleu verificar que les vostres imatges han estat transferides correctament.',
 'info_vignette_defaut' => 'Icona per defecte',
 'info_vignette_personnalisee' => 'Icona personalitzada',
 'info_visite' => 'visita:',

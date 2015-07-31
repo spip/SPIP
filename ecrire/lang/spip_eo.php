@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'Rekalkulu tiun &#265;i pa&#285;on',
 'alerte_maj_impossible' => '<b>Alarmo&nbsp;!</b> La &#285;isdatigo de la MySQL-datenbazo al versio @version@ ne eblas pro datenbazo-modif-rajtaj kialoj. Bonvolu kontakti vian retgastiganton.',
 'analyse_xml' => 'XML analizo',
-'antispam_champ_vide' => '<NEW>Veuillez laisser ce champ vide&nbsp;:',
+'antispam_champ_vide' => 'Bonvolu forlasi tiun kampon malplena&nbsp;:',
 'avis_archive_incorrect' => 'Tiu arkivo ne estas SPIP-dosiero',
 'avis_archive_invalide' => 'Tiu arkiva dosiero ne validas',
 'avis_attention' => 'ATENTU&nbsp;!',
@@ -634,7 +634,7 @@ kaj ensaluti.
 'pass_retour_public' => 'Reen al la publika spaco',
 'pass_rien_a_faire_ici' => 'Nenion por fari &#265;i tie.',
 'pass_vousinscrire' => 'Registri&#285;i &#265;e tiu retejo',
-'precedent' => '<MODIF>anta&#365;an',
+'precedent' => 'anta&#365;an',
 'previsualisation' => 'Anta&#365;vido',
 'previsualiser' => 'Anta&#365;vidi',
 
@@ -644,7 +644,7 @@ kaj ensaluti.
 'squelette_inclus_ligne' => 'skeleto inkluzivita, linio',
 'squelette_ligne' => 'skeleto, linio',
 'stats_visites_et_popularite' => '@visites@ vizitoj&nbsp;; populareco&nbsp;: @popularite@',
-'suivant' => '<MODIF>postan',
+'suivant' => 'postan',
 
 
 // T
