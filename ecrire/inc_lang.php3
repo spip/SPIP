@@ -5,14 +5,40 @@ if (defined("_ECRIRE_INC_LANG")) return;
 define("_ECRIRE_INC_LANG", "1");
 
 
+//
+// Ecrire un fichier cache langue
+//
+function ecrire_cache_lang($lang, $module) {
+	include_ecrire('inc_filtres.php3');
+
+	$fichier_lang = $module.'_'.$lang.'.php3';
+	if ($t = @fopen('CACHE/i18n_'.$fichier_lang.'_'.getmypid(), "wb")) {
+		@fwrite($t, "<"."?php\n\n// Ceci est le CACHE d'un fichier langue spip\n\n");
+		if (is_array($cache = $GLOBALS['cache_lang'][$lang])) {
+			@fwrite($t, "\$GLOBALS['i18n_${module}_$lang'] = array(\n");
+			while (list(,$code) = each($cache))
+				$texte .= ",\n\t'".$code."' => '".texte_script($GLOBALS['i18n_'.$module.'_'.$lang][$code])."'";
+			@fwrite($t, substr($texte,2)."\n);\n\n");
+			@fwrite($t, "\$GLOBALS['cache_lang']['$lang'] = array(\n\t'".join("',\n\t'",$cache)."'\n);\n");
+		}
+		@fwrite($t, "\n\n?".">\n");
+		@fclose($t);
+		@rename('CACHE/i18n_'.$fichier_lang.'_'.getmypid(), 'CACHE/i18n_'.$fichier_lang);
+	}
+}
 
 //
 // Charger un fichier langue
 //
-function charger_langue($lang, $module='spip') {
+function charger_langue($lang, $module='spip', $forcer=false) {
 	global $dir_ecrire;
 
+	// chercher dans le fichier cache ?
+	if ($dir_ecrire AND !$forcer AND @file_exists('CACHE/i18n_'.$module.'_'.$lang.'.php3'))
+		return include_local('CACHE/i18n_'.$module.'_'.$lang.'.php3');
+
 	$fichier_lang = 'lang/'.$module.'_'.$lang.'.php3';
+
 	if (file_exists($dir_ecrire.$fichier_lang)) {
 		include_ecrire ($fichier_lang);
 	} else {
@@ -26,6 +52,14 @@ function charger_langue($lang, $module='spip') {
 	// surcharge perso
 	if (file_exists($dir_ecrire.'lang/perso.php3')) {
 		include_ecrire('lang/perso.php3');
+	}
+
+	// mettre en cache les morceaux de langue utilises dans le site public
+	if ($dir_ecrire AND !@file_exists('CACHE/i18n_'.$module.'_'.$lang.'.php3')) {
+		ecrire_cache_lang($lang, $module);
+	} else if ($forcer) {
+		$GLOBALS['cache_lang'][$lang][] = $forcer;
+		ecrire_cache_lang($lang, $module);
 	}
 }
 
@@ -90,6 +124,7 @@ function traduire_chaine($code, $args) {
 
 	$var = "i18n_".$module."_".$spip_lang;
 	if (!$GLOBALS[$var]) charger_langue($spip_lang, $module);
+	if (!isset($GLOBALS[$var][$code])) charger_langue($spip_lang, $module, $code);
 
 	$text = $GLOBALS[$var][$code];
 
