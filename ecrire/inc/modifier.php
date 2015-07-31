@@ -255,7 +255,7 @@ function objet_modifier_champs($objet, $id_objet, $options, $c=null, $serveur=''
 	// journaliser l'affaire
 	// message a affiner :-)
 	include_spip('inc/filtres_mini');
-	$qui = sinon($GLOBALS['visiteur_session']['nom'], $GLOBALS['ip']);
+	$qui = isset($GLOBALS['visiteur_session']['nom']) AND $GLOBALS['visiteur_session']['nom'] ? $GLOBALS['visiteur_session']['nom'] : $GLOBALS['ip'];
 	journal(_L($qui.' a &#233;dit&#233; l&#8217;'.$objet.' '.$id_objet.' ('.join('+',array_diff(array_keys($champs), array('date_modif'))).')'), array(
 		'faire' => 'modifier',
 		'quoi' => $objet,
