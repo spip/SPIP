@@ -60,7 +60,6 @@ $GLOBALS['codes_langues'] = array(
 	'en_sm' => "Smurf",
 	'eo' => "Esperanto",
 	'es' => "Espa&#241;ol",
-	'es_mx_pop' => "Mexicano a lo g&#252;ey",
 	'es_co' => "Colombiano",
 	'es_mx_pop' => "Mexicano a lo g&#252;ey",
 	'et' => "eesti",
