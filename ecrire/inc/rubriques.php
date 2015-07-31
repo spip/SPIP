@@ -292,4 +292,50 @@ function cron_rubriques($t) {
 	return 1;
 }
 
+
+// creer_rubrique_nommee('truc/machin/chose') va creer
+// une rubrique truc, une sous-rubrique machin, et une sous-sous-rubrique
+// chose, sans creer de rubrique si elle existe deja
+// a partir de id_rubrique (par defaut, a partir de la racine)
+// NB: cette fonction est tres pratique, mais pas utilisee dans le core
+// pour rester legere elle n'appelle pas calculer_rubriques()
+function creer_rubrique_nommee($titre, $id_parent=0) {
+
+	// eclater l'arborescence demandee
+	$arbo = explode('/', preg_replace(',^/,', '', $titre));
+
+	foreach ($arbo as $titre) {
+		$s = spip_query("SELECT id_rubrique, id_parent, id_secteur, titre FROM spip_rubriques
+		WHERE titre = "._q($titre)."
+		AND id_parent=".intval($id_parent));
+		if (!$t = spip_fetch_array($s)) {
+			include_spip('base/abstract_sql');
+			$id_rubrique = spip_abstract_insert('spip_rubriques',
+				'(titre, id_parent, statut)',
+				'('._q($titre).", $id_parent, 'prive')"
+			);
+			if ($id_parent > 0) {
+				$data = spip_fetch_array(spip_query(
+					"SELECT id_secteur,lang FROM spip_rubriques
+					WHERE id_rubrique=$id_parent"));
+				$id_secteur = $data['id_secteur'];
+				$lang = $data['lang'];
+			} else {
+				$id_secteur = $id_rubrique;
+				$lang = $GLOBALS['meta']['langue_site'];
+			}
+
+			spip_query("UPDATE spip_rubriques SET id_secteur=$id_secteur, lang="._q($lang)."
+			WHERE id_rubrique=$id_rubrique");
+		} else {
+			$id_rubrique = $t['id_rubrique'];
+		}
+
+		// pour la recursion
+		$id_parent = $id_rubrique;
+	}
+
+	return intval($id_rubrique);
+}
+
 ?>
