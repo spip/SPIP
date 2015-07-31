@@ -185,8 +185,6 @@ function valider_pseudo_url($dir, $script, $args='')
 
 // On essaye de valider tout squelette meme sans Doctype
 // a moins qu'un Content-Type dise clairement que ce n'est pas du XML
-// Il faudrait fournir une autre DTD que XHTML si le Content-Type y aide.
-// (en particulier les RSS; voir si tous les agregateurs acceptent le DOCTYPE)
 // http://doc.spip.org/@valider_skel
 function valider_skel($transformer_xml, $file, $dir)
 {
@@ -205,12 +203,14 @@ function valider_skel($transformer_xml, $file, $dir)
 	$page = $skel_nom(array('cache'=>''), array($contexte));
 	list($texte, $err) = $transformer_xml($page['texte']);
 	$res = strlen($texte);
-	$url = '';
-	foreach($contexte as $k => $v) $url .= '&' . $k . '=' . $v;
-	// URL a l'ouest pour les squelettes internes, a revoir.
 	$script = basename($file,'.html');
-	$appel = generer_url_public($script, substr($url,1));
-	return array(count($err), $res, $err, $script, $appel);
+	$url = '';
+	// pas de validation solitaire pour les squelettes internes, a revoir.
+	if (substr_count($dir, '/') <= 1) {
+		foreach($contexte as $k => $v) $url .= '&' . $k . '=' . $v;
+		$url = generer_url_public($script, substr($url,1));
+	}
+	return array(count($err), $res, $err, $script, $url);
 }
 
 // Analyser le code pour construire un contexte plausible complet
