@@ -447,7 +447,15 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 		}
 
 	}
-	$cadre = lignes_longues(typo($titre ? $titre : basename($fichier)), 20);
+	if ($titre)
+	  $cadre = $titre;
+	elseif (!$distant)
+	  $cadre = basename($fichier);
+	else {
+	  preg_match('@^[^/]*/*([^/]*)@', $fichier, $cadre);
+	  $cadre = $cadre[1];
+	}
+	$cadre = lignes_longues($cadre, 20);
 	// encapsuler chaque document dans un container pour permettre son remplacement en ajax
 	return  '<div>'
 		. debut_cadre($style, $icone, '', $cadre, "document$id_document")
@@ -461,7 +469,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 		       ( _T('info_document').' '.majuscules($extension)))
 		    . "</div>"))
 		. $apercu
-		. "\n<div style='padding:2px; ' class='arial1 spip_xx-small'>"
+		. "\n<div style='padding:2px;' class='arial1 spip_xx-small'>"
 		. $raccourci
 		. "</div>\n"
 		. $legender($id_document, $document, $script, $type, $id, "document$id_document", $deplier)
