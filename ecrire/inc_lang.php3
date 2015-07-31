@@ -269,18 +269,19 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 			else
 				$site = '..';
 
+		$args = "";
 		if (!_DIR_RESTREINT) {
 			$cible = _DIR_RESTREINT_ABS . 
 			  (is_object($lien) ? $lien->getUrl() : $lien);
-			$lien = "$site/spip_cookie.php3";
 			if (_FILE_CONNECT) {
 			  include_ecrire('inc_session');
-			  $lien .= "?id_auteur=$connect_id_auteur&amp;valeur=".calculer_action_auteur('var_lang_ecrire', $connect_id_auteur);
+			  $args = "?id_auteur=$connect_id_auteur&amp;valeur=".calculer_action_auteur('var_lang_ecrire', $connect_id_auteur);
 			}
+
 		} else {
 			$cible = $lien->getUrl();
-			$lien = "$site/spip_cookie.php3";
 		}
+		$lien = http_php_scriptnq("$site/spip_cookie", $args);
 	}
 
 	if (!$cible)
@@ -412,7 +413,7 @@ function init_langues() {
 	if (!$all_langs || !$langue_site || !_DIR_RESTREINT) {
 		if (!$d = @opendir(_DIR_LANG)) return;
 		while (($f = readdir($d)) !== false) {
-			if (ereg('^spip_([a-z_]+)\.php3?$', $f, $regs))
+			if (ereg('^spip_([a-z_]+)\.php[3]?$', $f, $regs))
 				$toutes_langs[] = $regs[1];
 		}
 		closedir($d);
