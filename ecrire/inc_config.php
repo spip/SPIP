@@ -289,7 +289,7 @@ function appliquer_modifs_config() {
 	if ($modif_secu) {
 		$admin = _T('info_modification_parametres_securite');
 		include_ecrire ("inc_admin");
-		debut_admin(generer_url_post_ecrire($_GET['exec']),$admin); # si ca se trouve ca marche ...
+		debut_admin(generer_url_post_ecrire($_POST['exec'], cache_post()),$admin);
 		reset($liste_meta);
 		while (list(,$i) = each($liste_meta))
 			if (isset($GLOBALS[$i])) ecrire_meta($i, $GLOBALS[$i]);
@@ -304,6 +304,15 @@ function appliquer_modifs_config() {
 	}
 }
 
+// faudrait essayer d'etre plus malin
+
+function cache_post()
+{
+  $res = "";
+  foreach ($_POST as $k => $v) if ($k != 'exec') $res .= "&$k=$v";
+  return substr($res,1);
+}
+    
 
 // Ne pas afficher la partie 'password' du proxy
 function no_password_proxy_url($http_proxy) {
