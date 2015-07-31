@@ -156,6 +156,27 @@ function autoriser_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 		!==false;
 }
 
+function autoriser_dater_dist($faire, $type, $id, $qui, $opt) {
+	if (!isset($opt['statut'])){
+		$table = table_objet($type);
+		$trouver_table = charger_fonction('trouver_table','base');
+		$desc = $trouver_table($table);
+		if (!$desc)
+			return false;
+		if (isset($desc['field']['statut'])){
+			$statut = sql_getfetsel("statut", $desc['table'], id_table_objet($type)."=".intval($id));
+		}
+		else
+			$statut = 'publie'; // pas de statut => publie
+	}
+	else
+		$statut = $opt['statut'];
+
+	if ($statut == 'publie'
+	 OR ($statut == 'prop' AND $type=='article' AND $GLOBALS['meta']["post_dates"] == "non"))
+		return autoriser('modifier', $type, $id);
+	return false;
+}
 // Autoriser a publier dans la rubrique $id
 // http://doc.spip.org/@autoriser_rubrique_publierdans_dist
 function autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt) {
