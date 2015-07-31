@@ -299,8 +299,7 @@ if ($relief) {
 	//
 	// Les articles a valider
 	//
-	afficher_articles(_T('info_articles_proposes'),
-		"WHERE id_rubrique='$id_rubrique' AND statut='prop' ORDER BY date DESC");
+	afficher_articles(_T('info_articles_proposes'),	"WHERE id_rubrique='$id_rubrique' AND statut='prop' ORDER BY date DESC");
 
 	//
 	// Les breves a valider
@@ -347,16 +346,14 @@ if ($relief) {
 /////////////////////////
 
 	if ($connect_statut == "0minirezo" AND $options == 'avancees') {
-	  afficher_articles(_T('info_tous_articles_en_redaction'),
-		"WHERE statut='prepa' AND id_rubrique='$id_rubrique' ORDER BY date DESC");
+	  afficher_articles(_T('info_tous_articles_en_redaction'), "WHERE statut='prepa' AND id_rubrique='$id_rubrique' ORDER BY date DESC");
 	}
 
 
 //////////  Les articles publies
 /////////////////////////
 
-	afficher_articles(_T('info_tous_articles_presents'),
-			  "WHERE statut='publie' AND id_rubrique='$id_rubrique' ORDER BY date DESC", true);
+	afficher_articles(_T('info_tous_articles_presents'),  "WHERE statut='publie' AND id_rubrique='$id_rubrique' ORDER BY date DESC", true);
 
 
 
