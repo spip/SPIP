@@ -56,7 +56,7 @@ function init_entete($titre='', $id_rubrique=0, $minipres=false) {
 		verifForm();
 		$("#page,#bandeau-principal")
 		.mouseover(function(){
-			if (window.changestyle) changestyle("garder-recherche");
+			if (typeof(window["changestyle"])!=="undefined") window.changestyle("garder-recherche");
 		});
 	'
 	.
