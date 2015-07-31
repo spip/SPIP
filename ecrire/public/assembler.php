@@ -527,7 +527,7 @@ function evaluer_fond ($fond, $contexte=array(), $connect=null) {
 
 	if (!$page) return $page;
 
-	if ($GLOBALS['flag_ob'] AND ($page['process_ins'] != 'html')) {
+	if ($page['process_ins'] != 'html') {
 		ob_start();
 		xml_hack($page, true);
 		eval('?' . '>' . $page['texte']);
