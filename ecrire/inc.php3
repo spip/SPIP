@@ -10,16 +10,14 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) {
-	include ("inc_version.php3");
-}
+if (!defined('_ECRIRE_INC_VERSION')) include ("inc_version.php3");
 
 $var_nom = "auth";
 $var_f = find_in_path('inc_' . $var_nom . '.php');
 
 if ($var_f) 
       include($var_f);
-else  include_ecrire('inc_' . $var_nom . '.php3');
+else  include_ecrire($var_f = 'inc_' . $var_nom . '.php3');
     
 if (function_exists($var_nom))
         $var_res = $var_nom();
@@ -36,12 +34,6 @@ include_ecrire('inc_cookie.php');
 //
 // Preferences de presentation
 //
-
-# teste la capacite ajax : on envoie un cookie -1
-# et un script ajax ; si le script reussit le cookie passera a +1
-if (!$GLOBALS['_COOKIE']['spip_accepte_ajax']) {
-	spip_setcookie('spip_accepte_ajax', -1);
-}
 
 if ($spip_lang_ecrire = $GLOBALS['_COOKIE']['spip_lang_ecrire']
 AND $spip_lang_ecrire <> $auteur_session['lang']

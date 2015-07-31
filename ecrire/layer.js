@@ -157,9 +157,9 @@ function charger_id_url(myUrl, myField, jjscript)
 {
 	var Field = findObj_forcer(myField); // selects the given element
 	if (!Field) return;
-		
+
 	if (xmlhttp[myField]) xmlhttp[myField].abort();
-	
+
 	if (url_chargee['mem_'+myUrl]) {
 		Field.innerHTML = url_chargee['mem_'+myUrl];
 		Field.style.visibility = "visible";
@@ -169,9 +169,9 @@ function charger_id_url(myUrl, myField, jjscript)
 		image_search[myField] = findObj_forcer('img_'+myField);
 		if (image_search[myField]) image_search[myField].style.visibility = "visible";
 
+
 		if (!(xmlhttp[myField] = createXmlHttp())) return false;
 		xmlhttp[myField].open("GET", myUrl, true);
-
 		// traiter la reponse du serveur
 		xmlhttp[myField].onreadystatechange = function() {
 			if (xmlhttp[myField].readyState == 4) { 
