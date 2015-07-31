@@ -78,7 +78,7 @@ function image_math($tex) {
 
 
 // Fonction appelee par propre() s'il repere un mode <math>
-function traiter_math($letexte, &$les_echap, &$num_echap, $source) {
+function traiter_math($letexte, $source='') {
 
 	$texte_a_voir = $letexte;
 	while (($debut = strpos($texte_a_voir, "<math>")) !== false) {
@@ -91,23 +91,27 @@ function traiter_math($letexte, &$les_echap, &$num_echap, $source) {
 		$texte_fin = substr($texte_a_voir,
 			$fin+strlen("</math>"), strlen($texte_a_voir));
 
+		// Les doubles $$x^2$$ en mode 'div'
 		while((ereg("[$][$]([^$]+)[$][$]",$texte_milieu, $regs))) {
-			$num_echap++;
-			$les_echap[$num_echap] = "\n<p class=\"spip\" style=\"text-align: center;\">".image_math($regs[1])."</p>\n";
+			$echap = "\n<p class=\"spip\" style=\"text-align: center;\">".image_math($regs[1])."</p>\n";
 			$pos = strpos($texte_milieu, $regs[0]);
-			$texte_milieu = substr($texte_milieu,0,$pos)."@@SPIP_$source$num_echap@@"
-				.substr($texte_milieu,$pos+strlen($regs[0]));
+			$texte_milieu = substr($texte_milieu,0,$pos)
+				. code_echappement($echap, 'div', $source)
+				. substr($texte_milieu,$pos+strlen($regs[0]));
 		}
+
+		// Les simples $x^2$ en mode 'span'
 		while((ereg("[$]([^$]+)[$]",$texte_milieu, $regs))) {
-			$num_echap++;
-			$les_echap[$num_echap] = image_math($regs[1]);
+			$echap = image_math($regs[1]);
 			$pos = strpos($texte_milieu, $regs[0]);
-			$texte_milieu = substr($texte_milieu,0,$pos)."@@SPIP_$source$num_echap@@"
-				.substr($texte_milieu,$pos+strlen($regs[0]));
+			$texte_milieu = substr($texte_milieu,0,$pos)
+				. code_echappement($echap, 'span', $source)
+				. substr($texte_milieu,$pos+strlen($regs[0]));
 		}
 
 		$texte_a_voir = $texte_debut.$texte_milieu.$texte_fin;
 	}
+
 	return $texte_a_voir;
 }
 

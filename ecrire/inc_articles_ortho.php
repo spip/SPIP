@@ -171,11 +171,10 @@ foreach ($champs as $champ) {
 	case 'descriptif':
 	case 'ps':
 		// Mettre de cote les <code>, <cadre>, etc.
-		list($$champ, $echap) = echappe_html($$champ, "ORTHO");
+		$$champ = echappe_html($$champ,'ORTHO');
 		$$champ = propre($$champ);
 		break;
 	default:
-		$echap = "";
 		$$champ = typo($$champ);
 		break;
 	}
@@ -185,8 +184,7 @@ foreach ($champs as $champ) {
 		$$champ = souligner_ortho($$champ, $lang_article, $result_ortho);
 	// Et on repasse dans le charset original pour remettre les echappements
 	$$champ = afficher_ortho($$champ);
-	if ($echap)
-		$$champ = echappe_retour($$champ, $echap, "ORTHO");
+	$$champ = echappe_retour($$champ, 'ORTHO');
 }
 // Traitement identique pour les notes de bas de page
 if ($les_notes) {

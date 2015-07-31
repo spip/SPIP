@@ -362,7 +362,7 @@ function traiter_doublons_documents(&$doublons, $letexte) {
 
 // les balises dynamiques et EMBED ont des filtres sans arguments 
 // car en fait ce sont des arguments pas des filtres.
-// Si le besoin s'en fait sentir, il faudra récuperer la 2e moitie du tableau 
+// Si le besoin s'en fait sentir, il faudra recuperer la 2e moitie du tableau 
 
 function argumenter_balise($fonctions, $sep) {
   $res = array();

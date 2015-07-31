@@ -26,19 +26,18 @@ function vignette_par_defaut($type_extension, $size=true) {
 	if (!$type_extension)
 		$type_extension = 'txt';
 
-	$filename = _DIR_IMG_ICONES . "$type_extension";
+	$filename = _DIR_IMG_ICONES . $type_extension;
 
-	// Glurps !
-	// je dirais meme plus: Glurps ! (esj)
+	// Chercher la vignette correspondant a ce type de document
 	if (!@file_exists($v = $filename.'.png'))
 	if (!@file_exists($v = $filename.'.gif'))
 	if (!@file_exists($v = $filename.'-dist.png'))
 	if (!@file_exists($v = $filename.'-dist.gif'))
-	if (!@file_exists($v = _DIR_IMG_ICONES . "/defaut.png")) 
-	if (!@file_exists($v = _DIR_IMG_ICONES . "/defaut.gif")) 
-	if (!@file_exists($v = _DIR_IMG_ICONES . "/defaut-dist.png")) 
-	if (!@file_exists($v = _DIR_IMG_ICONES . "/defaut-dist.gif")) 
-	$v = _DIR_IMG_ICONES . "/defaut-dist.gif";
+	if (!@file_exists($v = _DIR_IMG_ICONES . "defaut.png")) 
+	if (!@file_exists($v = _DIR_IMG_ICONES . "defaut.gif")) 
+	if (!@file_exists($v = _DIR_IMG_ICONES . "defaut-dist.png")) 
+	if (!@file_exists($v = _DIR_IMG_ICONES . "defaut-dist.gif")) 
+	$v = _DIR_IMG_ICONES . "defaut-dist.gif";
 
 	if (!$size) return $v;
 
@@ -48,6 +47,20 @@ function vignette_par_defaut($type_extension, $size=true) {
 	}
 
 	return array($v, $largeur, $hauteur);
+}
+
+
+// Quels documents a-t-on deja vu ? (gestion des doublons dans l'espace prive)
+function document_vu($id_document=0) {
+	static $vu = array();
+
+	if (_DIR_RESTREINT)
+		return;
+
+	if ($id_document)
+		$vu[$id_document]++;
+	else
+		return join(',', array_keys($vu));
 }
 
 
@@ -111,9 +124,8 @@ function document_et_vignette($document, $url, $portfolio=false) {
 //
 
 function embed_document($id_document, $les_parametres="", $afficher_titre=true) {
-	global $id_doublons;
+	document_vu($id_document);
 	charger_generer_url();
-	$id_doublons['documents'] .= ",$id_document";
 
 	if ($les_parametres) {
 		$parametres = explode("|",$les_parametres);
@@ -243,9 +255,8 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 //
 
 function integre_image($id_document, $align, $type_aff) {
-	global $id_doublons;
+	document_vu($id_document);
 	charger_generer_url();
-	$id_doublons['documents'] .= ",$id_document";
 
 	$s = spip_query("SELECT * FROM spip_documents
 		WHERE id_document = " . intval($id_document));
@@ -376,6 +387,11 @@ function integre_image($id_document, $align, $type_aff) {
 // Traitement des images et documents <IMGxx|right> pour inc_texte
 //
 function inserer_documents($letexte, $matches) {
+	# HACK: empecher les boucles infernales lorsqu'un document est mentionne
+	# dans son propre descriptif (on peut citer un document dans un autre,
+	# mais il faut pas trop pousser...)
+	static $pile = 0;
+	if (++$pile > 5) return '';
 
 	foreach ($matches as $match) {
 		$type = strtoupper($match[1]);
@@ -384,29 +400,32 @@ function inserer_documents($letexte, $matches) {
 		else
 			$rempl = integre_image($match[2], $match[4], $type);
 
-		// Remplacer par une <div onclick> le lien dans le cas [<docXX>->lien]
-		// (si le document est deja une <div> et pas une simple image) car sinon
-		// on est illegal en XHTML
+		// XHTML : remplacer par une <div onclick> le lien
+		// dans le cas [<docXX>->lien] (en fait, on recherche
+		// <a href="lien"><docXX></a> ; sachant qu'il n'existe
+		// pas de bonne solution en XHTML pour produire un lien
+		// sur une div (!!)...)
 		if (preg_match(',<div ,', $rempl)
-		AND
-		preg_match_all(
+		AND preg_match_all(
 		',<a\s[^>]*>([^>]*'.preg_quote($match[0]).'[^>]*)</a>,ims',
-		$letexte, $mm, PREG_SET_ORDER))
+		$letexte, $mm, PREG_SET_ORDER)) {
 			foreach ($mm as $m) {
 				$url = extraire_attribut($m[0],'href');
 				$re = '<div onclick="document.location=\''.$url
 					.'\'"'
-##					.' href="'.$url.'"' # note: href sera legal en XHTML2
+##					.' href="'.$url.'"' # note: href deviendrait legal en XHTML2
 					.'>'
 					.$m[0] # $m[1] si on veut eliminer le <a> (tidy le fait)
 					."</div>\n";
 				$letexte = str_replace($m[0], $re, $letexte);
 			}
+		}
 
 		// Installer le document
 		$letexte = str_replace($match[0], $rempl, $letexte);
 	}
 
+	$pile--;
 	return $letexte;
 }
 
@@ -595,7 +614,8 @@ function construire_upload($corps, $args, $action, $enc='')
 	  $res .= "\n<input type='hidden' name='$k' value='$v' />";
 	$res .= "\n<input type='hidden' name='action' value='joindre' />";
 
-	$link = new Link ($action);
+	$link = new Link ($action);  # ici enlever $action pour uploader directemet dans l'espace prive (UPLOAD_DIRECT)
+#	$link = new Link ();
 
 	return "\n" . $link->getForm('POST', '', $enc) . "<div>" .
 	  $res . $corps . "</div></form>";
@@ -647,7 +667,7 @@ function afficher_portfolio(
 ) {
 	charger_generer_url();
 	global $connect_id_auteur, $connect_statut;
-	global $id_doublons, $options,  $couleur_foncee;
+	global $options,  $couleur_foncee;
 	global $spip_lang_left, $spip_lang_right;
 
 	// la derniere case d'une rangee
@@ -789,16 +809,18 @@ entites_html($document['fichier'])."\" />\n";
 					$query = '?id_article='.$document['id_article'];
 				if ($document['id_rubrique'])
 					$query = '?id_rubrique='.$document['id_rubrique'];
+				$query .= '&show_docs='.$id_document;
 
 				echo $link->getForm('POST', "$query#$album");
 				echo "<b>"._T('titre_titre_document')."</b><br />\n";
 				echo "<input type='text' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" name='titre_document' class='formo' style='font-size:11px;' value=\"".entites_html($titre)."\" size='40'><br />\n";
 
-				// modifier la date (seulement dans les rubriques - et encore)
-				if ($type == 'rubrique'
-				AND $options == "avancees"
-				AND $connect_statut == '0minirezo') {
-					if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)) {
+				// modifier la date
+				if (
+				#$type == 'rubrique' AND  // (seulement dans les rubriques?)
+				$options == "avancees" AND
+				$connect_statut == '0minirezo') {
+					if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)){
 						$mois = $regs[2];
 						$jour = $regs[3];
 						$annee = $regs[1];
@@ -852,7 +874,7 @@ entites_html($document['fichier'])."\" />\n";
 				echo "</tr>\n";
 			}
 			
-			$id_doublons['documents'] .= ",$id_document";
+			document_vu($id_document);
 		}
 
 		// fermer la derniere ligne
@@ -927,7 +949,7 @@ function bloc_gerer_vignette($document, $image_url, $redirect_url, $album) {
 function afficher_documents_non_inclus($id_article, $type = "article", $flag_modif) {
 	global $couleur_claire;
 	global $connect_id_auteur, $connect_statut;
-	global $id_doublons, $options;
+	global $options;
 	global $spip_lang_left, $spip_lang_right;
 
 	$image_url = generer_url_ecrire('../spip_image',
@@ -946,7 +968,8 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		"AND docs.mode='document'".
 		" AND docs.id_type=lestypes.id_type AND lestypes.extension IN ('gif', 'jpg', 'png')";
 
-	if ($id_doublons['documents']) $query .= " AND docs.id_document NOT IN (0".$id_doublons['documents'].") ";
+	if ($doublons = document_vu())
+		$query .= " AND docs.id_document NOT IN ($doublons) ";
 	$query .= " ORDER BY docs.id_document";
 
 	//
@@ -975,7 +998,9 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		"WHERE l.id_$type=$id_article AND l.id_document=docs.id_document ".
 		"AND docs.mode='document'";
 
-	if ($id_doublons['documents']) $query .= " AND docs.id_document NOT IN (0".$id_doublons['documents'].") ";
+	if ($doublons = document_vu())
+		$query .= " AND docs.id_document NOT IN ($doublons) ";
+
 	$query .= " ORDER BY docs.id_document";
 
 	$documents_lies = spip_query($query);
@@ -1031,8 +1056,8 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 	$image_url = generer_url_ecrire('../spip_image',
 					(!$id_article ? "" : ('id_article='.$id_article)));
 
-	# HACK!!! simule une mise en page pour affecter la globale id_doublons
-	# referencee dans afficher_case_document appelee plus loin :
+	# HACK!!! simule une mise en page pour affecter les document_vu()
+	# utilises dans afficher_case_document appelee plus loin :
 	# utile pour un affichage differencie des image "libres" et des images
 	# integrees via <imgXX|left> dans le texte
 	propre($GLOBALS['descriptif']." ".$GLOBALS['texte']." ".$GLOBALS['chapo']);
@@ -1129,13 +1154,12 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 	global $connect_id_auteur, $connect_statut;
 	global $clean_link;
 	global $options;
-	global $id_doublons;
 	global $couleur_foncee, $spip_lang_left, $spip_lang_right;
 
 	charger_generer_url();
 	$flag_deplie = teste_doc_deplie($id_document);
 
- 	$doublons = $id_doublons['documents'].",";
+	$doublons = ','.document_vu().',';
 
 	if (!$redirect_url) $redirect_url = $clean_link->getUrl();
 
@@ -1168,6 +1192,7 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 	//
 
 	if ($mode == 'document') {
+		echo "<a id='document$id_document' name='document$id_document'></a>\n";
 		$titre_cadre = lignes_longues(typo($titre).typo($titre_fichier), 30);
 		debut_cadre_enfonce("doc-24.gif", false, "", $titre_cadre);
 
@@ -1251,14 +1276,18 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 		$link->addVar('modif_document', 'oui');
 		$link->addVar('id_document', $id_document);
 		$link->addVar('show_docs', $id_document);
-		echo $link->getForm('POST');
+
+		echo $link->getForm('POST',
+			$clean_link->getUrl()."#document$id_document");
 
 		echo "<b>"._T('entree_titre_document')."</b><br />\n";
-		echo "<input type='text' name='titre_document' class='formo' value=\"".entites_html($titre)."\" size='40'><br />\n";
+		echo "<input type='text' name='titre_document' class='formo' value=\"".entites_html($titre)."\" size='40'
+	onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"><br />\n";
 
 		if ($descriptif OR $options == "avancees") {
 			echo "<b>"._T('info_description_2')."</b><br />\n";
-			echo "<textarea name='descriptif_document' rows='4' class='formo' cols='*' wrap='soft'>";
+			echo "<textarea name='descriptif_document' rows='4' class='formo' cols='*' wrap='soft'
+	onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">";
 			echo entites_html($descriptif);
 			echo "</textarea>\n";
 		}
@@ -1266,7 +1295,7 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 		if ($options == "avancees")
 			afficher_formulaire_taille($document, $type_inclus);
 
-		echo "<div align='".$GLOBALS['spip_lang_right']."'>";
+		echo "<div class='display_au_chargement' id='valider_doc$id_document' align='".$GLOBALS['spip_lang_right']."'>";
 		echo "<input TYPE='submit' class='fondo' style='font-size:9px;' ' VALUE='"._T('bouton_enregistrer')."'>";
 		echo "</div>";
 		echo "</form>";
