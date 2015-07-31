@@ -56,10 +56,6 @@ function ecrire_metas() {
 	lire_metas();
 
 	if (is_array($GLOBALS['meta'])) {
-
-		if (_DIR_RESTREINT && is_array($GLOBALS['noyau']))
-			$GLOBALS['meta']['noyau'] = $GLOBALS['noyau'];
-
 		$ok = ecrire_fichier (_FILE_META, serialize($GLOBALS['meta']));
 		if (!$ok && $GLOBALS['connect_statut'] == '0minirezo') {
 			include_spip('inc/headers');
