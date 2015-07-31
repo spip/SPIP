@@ -777,6 +777,22 @@ function generer_url_public($script, $args="", $no_entities=false) {
 	return url_de_base() . $action;
 }
 
+function generer_url_prive($script, $args="", $no_entities=false) {
+
+	$action = 'prive.php';
+	if ($script)
+		$action = parametre_url($action, 'page', $script, '&');
+
+	if ($args)
+		$action .=
+			(strpos($action, '?') !== false ? '&' : '?') . $args;
+
+	if (!$no_entities)
+		$action = quote_amp($action);
+
+	return url_de_base() . _DIR_RESTREINT_ABS . $action;
+}
+
 function generer_url_action($script, $args="", $no_entities=false) {
 
 	return  generer_url_public('',
