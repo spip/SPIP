@@ -470,20 +470,12 @@ function spip_mysql_update($table, $champs, $where='', $desc='', $serveur='') {
 function spip_mysql_updateq($table, $champs, $where='', $desc=array(), $serveur='') {
 
 	if (!$champs) return;
-	if (!$desc) {
-		global $tables_principales;
-		include_spip('base/serial');
-		$desc = $tables_principales[$table];
-	}
-	$fields = $desc['field'];
+	if (!$desc) $desc = description_table($table);
+	if (!$desc) die("$table insertion sans description");
+	$fields =  $desc['field'];
 	$r = '';
 	foreach ($champs as $champ => $val) {
-		$t = $fields[$champ];
-		if (((strpos($t, 'datetime')!==0)
-		     AND (strpos($t, 'TIMESTAMP')!==0))
-		OR strpos("012345678", $val[0]) !==false)
-			$val = _q($val);
-		$r .= ',' . $champ . '=' . $val;
+		$r .= ',' . $champ . '=' . spip_mysql_cite($val, $fields[$champ]);
 	}
 	$r = "UPDATE $table SET " . substr($r, 1) . ($where ? " WHERE $where" : '');
 	spip_mysql_query($r, $serveur);
