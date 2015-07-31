@@ -18,36 +18,40 @@ function inc_legender_auteur($id_auteur, $auteur, $initial, $ajouter_id_article,
 {
 	global $connect_statut, $connect_toutes_rubriques,$connect_id_auteur, $options, $champs_extra  ;
 
-	$onfocus = $initial ? '' : " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+	$setmail = ($connect_statut == "0minirezo"
+		AND ($connect_toutes_rubriques OR $auteur['statut']<>'0minirezo'));
 
-	$corps = generer_url_post_ecrire('auteur_infos', (!$id_auteur ? "" : "id_auteur=$id_auteur"));
+	$setconnecte = ($connect_id_auteur == $id_auteur);
 
-	if ($ajouter_id_article)
-		$corps .= "<input name='ajouter_id_article' value='$ajouter_id_article' type='hidden'>\n"
-		. "\n<input name='redirect' value='$redirect' type='hidden' />";
 	$corps .= "\n<div class='serif'>"
 	. debut_cadre_relief("fiche-perso-24.gif", true, "", _T("icone_informations_personnelles"))
 	. _T('titre_cadre_signature_obligatoire')
-	. "("._T('entree_nom_pseudo').")<br />\n"
-	. "<input type='text' name='nom' class='formo' value=\""
+	. "("
+	. _T('entree_nom_pseudo')
+	. ")<br />\n"
+	. "<input type='text' name='nom' class='formo' size='40' value=\""
 	. entites_html($auteur['nom'])
-	. "\" size='40' $onfocus />\n<p>"
+	. "\" "
+	. (!$initial ? '' : ' onfocus="if(!antifocus){this.value=\'\';antifocus=true;}"')
+	. " />\n<p>"
 	. "<b>"._T('entree_adresse_email')."</b>";
 
-	if ($connect_statut == "0minirezo"
-	AND ($connect_toutes_rubriques OR $auteur['statut']<>'0minirezo')) {
-		$corps .= "<br /><input type='text' name='email' class='formo' value=\"".entites_html($auteur['email'])."\" size='40' />\n<p>\n";
+	if ($setmail) {
+		$corps .= "<br /><input type='text' name='email' class='formo' size='40' value=\""
+		. entites_html($auteur['email'])
+		. "\"  />\n<p>\n";
 	} else {
 		$corps .= "&nbsp;: <tt>".$auteur['email']."</tt>"
-		. "<br>("._T('info_reserve_admin').")\n"
+		. "<br />("._T('info_reserve_admin').")\n"
 		. "\n<p>";
 	}
 
 	$corps .= "<b>"._T('entree_infos_perso')."</b><br />\n"
-	. "("._T('entree_biographie').")<br />\n"
-	. "<textarea name='bio' class='forml' rows='4' cols='40' wrap=soft>"
+	. "("._T('entree_biographie')
+	. ")<br />\n"
+	. "<textarea name='bio' class='forml' rows='4' cols='40'>"
 	. entites_html($auteur['bio'])
-	. "</textarea>\n"
+	. "</textarea><br />\n"
 	. debut_cadre_enfonce("site-24.gif", true, "", _T('info_site_web'))
 	. "<b>"._T('entree_nom_site')."</b><br />\n"
 	. "<input type='text' name='nom_site_auteur' class='forml' value=\""
@@ -108,7 +112,7 @@ else {
 
 // Avertissement en cas de modifs de ses propres donnees
 	if (($edit_login OR $edit_pass) AND $connect_id_auteur == $id_auteur) {
-		$corps .= debut_cadre_enfonce(true)
+		$corps .= debut_cadre_enfonce('', true)
 		.  http_img_pack("warning.gif", _T('info_avertissement'), "width='48' height='48' align='right'")
 		. "<b>"._T('texte_login_precaution')."</b>\n"
 		. fin_cadre_enfonce(true)
@@ -134,29 +138,26 @@ else {
 		. "<input type='password' name='new_pass2' class='formo' value=\"\" size='40'><p>\n";
 		$corps .= $res;
 	}
-	$corps .= fin_cadre_relief(true);
 
-	$res = "<p />";
-
-	if ($GLOBALS['connect_id_auteur'] == $id_auteur)
-		$res .= apparait_auteur_infos($id_auteur, $auteur);
-
-	$res .= "\n<div align='right'>"
+	$corps .= fin_cadre_relief(true)
+	. "<p />"
+	. (!$setconnecte ? '' : apparait_auteur_infos($id_auteur, $auteur))
+	. "\n<div align='right'>"
 	. "\n<input type='submit' class='fondo' value='"
 	. _T('bouton_enregistrer')
 	. "'></div>"
-
 	. pipeline('affiche_milieu',
 		array('args' => array(
 			'exec'=>'auteur_infos',
 			'id_auteur'=>$id_auteur),
-			'data'=>''));
+			'data'=>''))
 
-	$corps .= $res
-	. "</div>"
-	. fin_cadre_relief(true);
+	. fin_cadre_relief(true)
+	. "</div>";
 
-	return $corps;
+	$arg = intval($id_auteur) . '/' . intval($ajouter_id_article);
+
+	return generer_action_auteur('legender_auteur', $arg, $redirect, $corps);
 }
 
 //

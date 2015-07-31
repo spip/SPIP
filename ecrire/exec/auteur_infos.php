@@ -13,218 +13,50 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/acces');
-include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@exec_auteur_infos_dist
 function exec_auteur_infos_dist()
 {
-global $ajouter_id_article,
-  $bio,
-  $champs_extra,
-  $connect_id_auteur,
-  $connect_statut,
-  $connect_toutes_rubriques,
-  $email,
-  $id_auteur,
-  $new_login,
-  $new_pass,
-  $new_pass2,
-  $nom,
-  $nom_site_auteur,
-  $perso_activer_imessage,
-  $pgp,
-  $redirect,
-  $statut,
-  $url_site;
+	global $id_auteur, $redirect, $echec, $initial,
+	  $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
 
 	$id_auteur = intval($id_auteur);
-	$ajouter_id_article = intval($ajouter_id_article);
+
 	pipeline('exec_init',
 		array('args' => array(
 			'exec'=>'auteur_infos',
 			'id_auteur'=>$id_auteur),
-		'data'=>'')
-	);
+			'data'=>'')	);
 
-	list($echec, $auteur) = action_auteur_infos_dist($id_auteur, $ajouter_id_article);
-// Redirection
 
-	if (!$echec AND $_SERVER['REQUEST_METHOD'] == "POST") {
-		redirige_par_entete($redirect ? rawurldecode($redirect) : generer_url_ecrire("auteurs_edit", "id_auteur=$id_auteur", true));
-}
-	exec_affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, $ajouter_id_article);
-}
-
-function action_auteur_infos_dist($id_auteur, $ajouter_id_article)
-{
-global $bio,
-  $champs_extra,
-  $connect_id_auteur,
-  $connect_statut,
-  $connect_toutes_rubriques,
-  $email,
-  $id_auteur,
-  $new_login,
-  $new_pass,
-  $new_pass2,
-  $nom,
-  $nom_site_auteur,
-  $perso_activer_imessage,
-  $pgp,
-  $redirect,
-  $statut,
-  $url_site;
-
-//
-// Recuperer id_auteur ou se preparer a l'inventer
-//
-	if ($id_auteur) {
-		$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
-		if (!$auteur) exit;
-	} else {
-		$auteur['nom'] = filtrer_entites(_T('item_nouvel_auteur'));
-
-		$auteur['statut'] = '1comite'; // statut par defaut a la creation
-		$auteur['source'] = 'spip';
+	// id_auteur nul ==> creation, et seuls les admins complets creent
+	if (!$id_auteur AND $connect_toutes_rubriques) {
+		$arg = "0/";
+		redirige_par_entete(generer_action_auteur('legender_auteur', $arg, $redirect, true));
+		exit;
 	}
 
+	$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
 
 // on peut se changer soi-meme
-	if  (!(($connect_id_auteur == $id_auteur) ||
+	if  (!($auteur AND 
+	       (($connect_id_auteur == $id_auteur) ||
   // sinon on doit etre admin
-  // et pas admin restreint pour changer un autre admin ou creer qq
+  // et si on est admin restreint on ne peut pas changer un autre admin
 		(($connect_statut == "0minirezo") &&
 		 ($connect_toutes_rubriques OR 
-		  ($id_auteur AND ($auteur['statut'] != "0minirezo")))))) {
+		  ($auteur['statut'] != "0minirezo")))))) {
 
 		gros_titre(_T('info_acces_interdit'));
 		exit;
 	}
 
-//
-// Modification (et creation si besoin)
-//
-
-// si on poste un nom, c'est qu'on modifie une fiche auteur
-if (strval($nom)!='') {
-	$auteur['nom'] = corriger_caracteres($nom);
-
-	// login et mot de passe
-	$modif_login = false;
-	$old_login = $auteur['login'];
-	if (($new_login<>$old_login) AND $connect_toutes_rubriques AND $auteur['source'] == 'spip') {
-		if ($new_login) {
-			if (strlen($new_login) < 4)
-				$echec .= "\n<p>"._T('info_login_trop_court');
-			else {
-			  $n = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs WHERE login=" . spip_abstract_quote($new_login) . " AND id_auteur!=$id_auteur AND statut!='5poubelle'"));
-			  if ($n['n'])
-				$echec .= "\n<p>"._T('info_login_existant');
-			  else if ($new_login != $old_login) {
-				$modif_login = true;
-				$auteur['login'] = $new_login;
-			  }
-			}
-		}
-		// suppression du login
-		else {
-			$auteur['login'] = '';
-			$modif_login = true;
-		}
-	}
-
-	// changement de pass, a securiser en jaja ?
-	if ($new_pass AND ($statut != '5poubelle') AND $auteur['login'] AND $auteur['source'] == 'spip') {
-		if ($new_pass != $new_pass2)
-			$echec .= "\n<p>"._T('info_passes_identiques');
-		else if ($new_pass AND strlen($new_pass) < 6)
-			$echec .= "\n<p>"._T('info_passe_trop_court');
-		else {
-			$modif_login = true;
-			$auteur['new_pass'] = $new_pass;
-		}
-	}
-
-	if ($modif_login) {
-		$var_f = charger_fonction('session', 'inc');
-		$var_f($auteur['id_auteur']);
-	}
-
-	// email
-	// seuls les admins peuvent modifier l'email
-	// les admins restreints peuvent modifier l'email des redacteurs
-	// mais pas des autres admins
-	if ($connect_statut == '0minirezo'
-	AND ($connect_toutes_rubriques OR $statut<>'0minirezo')) { 
-	  if (isset($email)) {
-		$email = trim($email);	 
-		if ($email !='' AND !email_valide($email)) 
-			$echec .= "\n<p>"._T('info_email_invalide');
-		$auteur['email'] = $email;
-	  }
-	}
-
-	if ($connect_id_auteur == $id_auteur) {
-		if ($perso_activer_imessage) {
-			spip_query("UPDATE spip_auteurs SET imessage='$perso_activer_imessage' WHERE id_auteur=$id_auteur");
-			$auteur['imessage'] = $perso_activer_imessage;
-		}
-	}
-
-	// variables sans probleme
-	$auteur['bio'] = corriger_caracteres($bio);
-	$auteur['pgp'] = corriger_caracteres($pgp);
-	$auteur['nom_site'] = corriger_caracteres($nom_site_auteur); // attention mix avec $nom_site_spip ;(
-	$auteur['url_site'] = vider_url($url_site, false);
-
-	if ($new_pass) {
-		$htpass = generer_htpass($new_pass);
-		$alea_actuel = creer_uniqid();
-		$alea_futur = creer_uniqid();
-		$pass = md5($alea_actuel.$new_pass);
-		$query_pass = " pass='$pass', htpass='$htpass', alea_actuel='$alea_actuel', alea_futur='$alea_futur', ";
-		if ($auteur['id_auteur'])
-		  effacer_low_sec($auteur['id_auteur']);
-	} else
-		$query_pass = '';
-
-	// recoller les champs du extra
-	if ($champs_extra) {
-		include_spip('inc/extra');
-		$extra = extra_recup_saisie("auteurs");
-	} else
-		$extra = '';
-
-	// l'entrer dans la base
-	if (!$echec) {
-		if (!$auteur['id_auteur']) { // creation si pas d'id
-			$auteur['id_auteur'] = $id_auteur = spip_abstract_insert("spip_auteurs", "(nom)", "('temp')");
-
-			if ($ajouter_id_article)
-				spip_abstract_insert("spip_auteurs_articles", "(id_auteur, id_article)", "($id_auteur, $ajouter_id_article)");
-		}
-
-		$n = spip_query("UPDATE spip_auteurs SET $query_pass		nom=" . spip_abstract_quote($auteur['nom']) . ",						login=" . spip_abstract_quote($auteur['login']) . ",					bio=" . spip_abstract_quote($auteur['bio']) . ",						email=" . spip_abstract_quote($auteur['email']) . ",					nom_site=" . spip_abstract_quote($auteur['nom_site']) . ",				url_site=" . spip_abstract_quote($auteur['url_site']) . ",				pgp=" . spip_abstract_quote($auteur['pgp']) .					(!$extra ? '' : (", extra = " . spip_abstract_quote($extra) . "")) .			" WHERE id_auteur=".$auteur['id_auteur']);
-		if (!$n) die('UPDATE');
-	}
- }
-
-
-// Si on modifie la fiche auteur, reindexer et modifier htpasswd
-if ($nom OR $statut) {
-	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-		include_spip("inc/indexation");
-		marquer_indexer('spip_auteurs', $id_auteur);
-	}
-
-	// Mettre a jour les fichiers .htpasswd et .htpasswd-admin
-	ecrire_acces();
- }
- return array($echec, $auteur);
+	affiche_auteur_info_dist($initial, $auteur,  $echec, $redirect, $ajouter_id_article);
 }
 
+
 // http://doc.spip.org/@exec_affiche_auteur_info_dist
-function exec_affiche_auteur_info_dist($initial, $auteur,  $echec, $redirect, $ajouter_id_article)
+function affiche_auteur_info_dist($initial, $auteur,  $echec, $redirect, $ajouter_id_article)
 {
 	global $connect_id_auteur;
 
@@ -260,202 +92,26 @@ function exec_affiche_auteur_info_dist($initial, $auteur,  $echec, $redirect, $a
 	debut_droite();
 
 	if ($echec){
+		$m = '';
+		foreach (split('%%%',$echec) as $e)
+			$m .= '<p>' . _T($e) . "</p>\n";
 		debut_cadre_relief();
-		echo http_img_pack("warning.gif", _T('info_avertissement'), "width='48' height='48' align='left'");
-		echo "<font color='red'>$echec \n<p>"._T('info_recommencer')."</font>";
+		echo http_img_pack("warning.gif", _T('info_avertissement'), "width='48' height='48' align='left'"),
+		  "<div style='color: red; left-margin: 5px'>",$m,"<p>",_T('info_recommencer'),"</p></div>\n";
 		fin_cadre_relief();
 		echo "\n<p>";
 	}
 
+	$legender_auteur = charger_fonction('legender_auteur', 'inc');
 	debut_cadre_formulaire();
 
-	echo formulaire_auteur_infos($id_auteur, $auteur, $initial, $ajouter_id_article, $redirect);
-	echo "</form>";
+	echo $legender_auteur($id_auteur, $auteur, $initial, $ajouter_id_article, $redirect);
+
 	echo $instituer_auteur($id_auteur, $auteur['statut'], "auteurs_edit");
 
 	fin_cadre_formulaire();
-	echo "&nbsp;<p />";
 
 	echo fin_page();
 }
 
-
-// http://doc.spip.org/@formulaire_auteur_infos
-function formulaire_auteur_infos($id_auteur, $auteur, $initial, $ajouter_id_article, $redirect)
-{
-	global $connect_statut, $connect_toutes_rubriques,$connect_id_auteur, $options, $champs_extra  ;
-
-	$onfocus = $initial ? '' : " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
-
-	$corps = generer_url_post_ecrire('auteur_infos', (!$id_auteur ? "" : "id_auteur=$id_auteur"));
-
-	if ($ajouter_id_article)
-		$corps .= "<input name='ajouter_id_article' value='$ajouter_id_article' type='hidden'>\n"
-		. "\n<input name='redirect' value='$redirect' type='hidden' />";
-	$corps .= "\n<div class='serif'>"
-	. debut_cadre_relief("fiche-perso-24.gif", true, "", _T("icone_informations_personnelles"))
-	. _T('titre_cadre_signature_obligatoire')
-	. "("._T('entree_nom_pseudo').")<br />\n"
-	. "<input type='text' name='nom' class='formo' value=\""
-	. entites_html($auteur['nom'])
-	. "\" size='40' $onfocus />\n<p>"
-	. "<b>"._T('entree_adresse_email')."</b>";
-
-	if ($connect_statut == "0minirezo"
-	AND ($connect_toutes_rubriques OR $auteur['statut']<>'0minirezo')) {
-		$corps .= "<br /><input type='text' name='email' class='formo' value=\"".entites_html($auteur['email'])."\" size='40' />\n<p>\n";
-	} else {
-		$corps .= "&nbsp;: <tt>".$auteur['email']."</tt>"
-		. "<br>("._T('info_reserve_admin').")\n"
-		. "\n<p>";
-	}
-
-	$corps .= "<b>"._T('entree_infos_perso')."</b><br />\n"
-	. "("._T('entree_biographie').")<br />\n"
-	. "<textarea name='bio' class='forml' rows='4' cols='40' wrap=soft>"
-	. entites_html($auteur['bio'])
-	. "</textarea>\n"
-	. debut_cadre_enfonce("site-24.gif", true, "", _T('info_site_web'))
-	. "<b>"._T('entree_nom_site')."</b><br />\n"
-	. "<input type='text' name='nom_site_auteur' class='forml' value=\""
-	. entites_html($auteur['nom_site'])
-	. "\" size='40'><P>\n"
-	. "<b>"
-	. _T('entree_url')
-	. "</b><br />\n"
-	. "<input type='text' name='url_site' class='forml' value=\""
-	. entites_html($auteur['url_site'])
-	. "\" size='40'>\n"
-	. fin_cadre_enfonce(true)
-	. "\n<p>";
-
-	if ($options == "avancees") {
-		$corps .= debut_cadre_enfonce("cadenas-24.gif", true, "", _T('entree_cle_pgp'))
-		. "<textarea name='pgp' class='forml' rows='4' cols='40' wrap=soft>"
-		. entites_html($auteur['pgp'])
-		. "</textarea>\n"
-		. fin_cadre_enfonce(true)
-		. "\n<p>";
-	} else {
-		$corps .= "<input type='hidden' name='pgp' value=\""
-		. entites_html($auteur['pgp'])
-		. "\" />";
-	}
-
-	$corps .= "\n<p>";
-
-	if ($champs_extra) {
-		include_spip('inc/extra');
-		$corps .= extra_saisie($auteur['extra'], 'auteurs', $auteur['statut'],'', false);
-	}
-
-//
-// Login et mot de passe :
-// accessibles seulement aux admins non restreints et l'auteur lui-meme
-//
-
-if ($auteur['source'] != 'spip') {
-	$edit_login = false;
-	$edit_pass = false;
-}
-else if (($connect_statut == "0minirezo") AND $connect_toutes_rubriques) {
-	$edit_login = true;
-	$edit_pass = true;
-}
-else if ($connect_id_auteur == $id_auteur) {
-	$edit_login = false;
-	$edit_pass = true;
-}
-else {
-	$edit_login = false;
-	$edit_pass = false;
-}
-
-	$corps .= debut_cadre_relief("base-24.gif", true);
-
-// Avertissement en cas de modifs de ses propres donnees
-	if (($edit_login OR $edit_pass) AND $connect_id_auteur == $id_auteur) {
-		$corps .= debut_cadre_enfonce(true)
-		.  http_img_pack("warning.gif", _T('info_avertissement'), "width='48' height='48' align='right'")
-		. "<b>"._T('texte_login_precaution')."</b>\n"
-		. fin_cadre_enfonce(true)
-		. "\n<p>";
-	}
-
-// Un redacteur n'a pas le droit de modifier son login !
-	if ($edit_login) {
-		$corps .= "<b>"._T('item_login')."</b> "
-		. "<font color='red'>("._T('texte_plus_trois_car').")</font> :<br />\n"
-		. "<input type='text' name='new_login' class='formo' value=\"".entites_html($auteur['login'])."\" size='40' /><p>\n";
-	} else {
-		$corps .= "<fieldset style='padding:5'><legend><B>"._T('item_login')."</B><br />\n</legend><br><b>".$auteur['login']."</b> "
-		. "<i> ("._T('info_non_modifiable').")</i>\n<p>";
-	}
-
-// On ne peut modifier le mot de passe en cas de source externe (par exemple LDAP)
-	if ($edit_pass) {
-		$res = "<b>"._T('entree_nouveau_passe')."</b> "
-		. "<font color='red'>("._T('info_plus_cinq_car').")</font> :<br />\n"
-		. "<input type='password' name='new_pass' class='formo' value=\"\" size='40' /><br />\n"
-		. _T('info_confirmer_passe')."<br />\n"
-		. "<input type='password' name='new_pass2' class='formo' value=\"\" size='40'><p>\n";
-		$corps .= $res;
-	}
-	$corps .= fin_cadre_relief(true);
-
-	$res = "<p />";
-
-	if ($GLOBALS['connect_id_auteur'] == $id_auteur)
-		$res .= apparait_auteur_infos($id_auteur, $auteur);
-
-	$res .= "\n<div align='right'>"
-	. "\n<input type='submit' class='fondo' value='"
-	. _T('bouton_enregistrer')
-	. "'></div>"
-
-	. pipeline('affiche_milieu',
-		array('args' => array(
-			'exec'=>'auteur_infos',
-			'id_auteur'=>$id_auteur),
-			'data'=>''));
-
-	$corps .= $res
-	. "</div>"
-	. fin_cadre_relief(true);
-
-	return $corps;
-}
-
-//
-// Apparaitre dans la liste des redacteurs connectes
-//
-
-// http://doc.spip.org/@apparait_auteur_infos
-function apparait_auteur_infos($id_auteur, $auteur)
-{
-
-	if ($auteur['imessage']=="non"){
-		$res = "<input type='radio' name='perso_activer_imessage' value='oui' id='perso_activer_imessage_on'>"
-		. " <label for='perso_activer_imessage_on'>"._T('bouton_radio_apparaitre_liste_redacteurs_connectes')."</label> "
-		. "<br />\n<input type='radio' name='perso_activer_imessage' value='non' checked id='perso_activer_imessage_off'>"
-		. " <b><label for='perso_activer_imessage_off'>"._T('bouton_radio_non_apparaitre_liste_redacteurs_connectes')."</label></b> ";
-	} else {
-		$res = "<input type='radio' name='perso_activer_imessage' value='oui' id='perso_activer_imessage_on' checked>"
-		. " <b><label for='perso_activer_imessage_on'>"
-		. _T('bouton_radio_apparaitre_liste_redacteurs_connectes')
-		. "</label></b> "
-		. "<br />\n<input type='radio' name='perso_activer_imessage' value='non' id='perso_activer_imessage_off'>"
-		. " <label for='perso_activer_imessage_off'>"
-		. _T('bouton_radio_non_apparaitre_liste_redacteurs_connectes')
-		. "</label> ";
-	}
-
-	return debut_cadre_relief("messagerie-24.gif", true, "", _T('info_liste_redacteurs_connectes'))
-	. "\n<div>"
-	. _T('texte_auteur_messagerie')
-	. "</div>"
-	. $res
-	. fin_cadre_relief(true)
-	. "<p />";
-}
 ?>

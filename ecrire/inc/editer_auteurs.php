@@ -36,6 +36,7 @@ function editer_auteurs_article($id_article, $flag, $cherche_auteur, $ids, $les_
 // complement de action/editer_auteurs.php pour notifier la recherche d'auteur
 //
 	$bouton_creer_auteur =  $GLOBALS['connect_toutes_rubriques'];
+	$clic = _T('icone_creer_auteur');
 
 	if ($cherche_auteur) {
 
@@ -45,8 +46,10 @@ function editer_auteurs_article($id_article, $flag, $cherche_auteur, $ids, $les_
 
 		if ($bouton_creer_auteur) {
 
+			$legender = redirige_action_auteur("legender_auteur","0/$id_article/" . rawurlencode($cherche_auteur), "articles","id_article=$id_article", array($clic));
+
 			$reponse .="<div style='width: 200px;'>"
-			. icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","ajouter_id_article=$id_article&nom=" . rawurlencode($cherche_auteur). "&redirect=" . generer_url_retour("articles","id_article=$id_article")), "redacteurs-24.gif", "creer.gif", false)
+			. icone_horizontale($clic, $legender, "redacteurs-24.gif", "creer.gif", false)
 			. "</div> ";
 
 			$bouton_creer_auteur = false;
@@ -68,8 +71,10 @@ function editer_auteurs_article($id_article, $flag, $cherche_auteur, $ids, $les_
 
 		if ($bouton_creer_auteur) {
 
+			$legender = redirige_action_auteur("legender_auteur","0/$id_article", "articles","id_article=$id_article", array($clic));
+
 			$res = "<div style='width:170px;'><span class='verdana1'><b>"
-			. icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","ajouter_id_article=$id_article&redirect=" .generer_url_retour("articles","id_article=$id_article")), "redacteurs-24.gif", "creer.gif", false)
+			. icone_horizontale($clic, $legender, "redacteurs-24.gif", "creer.gif", false)
 			. "</b></span></div>\n";
 		}
 
