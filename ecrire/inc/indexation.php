@@ -528,29 +528,21 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 		// on indexe le thread comme un tout
 		if ($table=='spip_forum') {
 
-			// 1. chercher la racine du thread
+			// 1. prendre le thread
 			$id_forum = $id_objet;
-			while ($row['id_parent']) {
-				$id_forum = $row['id_parent'];
-				$s = spip_query("SELECT id_forum,id_parent FROM spip_forum WHERE id_forum=$id_forum");
-				$row = spip_fetch_array($s);
-			}
+			$id_thread = $row['id_thread'];
 
 			// 2. chercher tous les forums du thread
 			// (attention le forum de depart $id_objet n'appartient pas forcement
 			// a son propre thread car il peut etre le fils d'un forum non 'publie')
 			$thread="$id_forum";
-			$fini = false;
-			while (!$fini) {
-				$s = spip_query("SELECT id_forum FROM spip_forum WHERE id_parent IN ($thread) AND id_forum NOT IN ($thread) AND statut='publie'");
-				if (spip_num_rows($s) == 0) $fini = true;
-				while ($t = spip_fetch_array($s))
-					$thread.=','.$t['id_forum'];
-			}
+			$s = spip_query("SELECT id_forum FROM spip_forum WHERE id_thread=$id_thread AND id_forum!=$id_forum AND statut='publie'");
+			while ($t = spip_fetch_array($s))
+				$thread.=','.$t['id_forum'];
 
 			// 3. marquer le thread comme "en cours d'indexation"
 			spip_log("-> indexation thread $thread");
-			spip_query("UPDATE spip_forum SET idx='idx' WHERE id_forum IN ($thread,$id_objet) AND idx!='non'");
+			spip_query("UPDATE spip_forum SET idx='idx' WHERE id_forum IN ($thread) AND idx!='non'");
 
 			// 4. Indexer le thread
 			$s = spip_query("SELECT * FROM spip_forum WHERE id_forum IN ($thread) AND idx!='non'");
@@ -558,15 +550,14 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 		    indexer_les_champs($row,$INDEX_elements_objet[$table],1,$min_long);
 		    if (isset($INDEX_objet_associes[$table]))
 		      foreach($INDEX_objet_associes[$table] as $quoi=>$poids)
-						indexer_elements_associes($table, $id_objet, $quoi, $poids, $min_long);
-				break;
+						indexer_elements_associes($table, $id_thread, $quoi, $poids, $min_long);
 			}
 
 			// 5. marquer le thread comme "indexe"
-			spip_query("UPDATE spip_forum SET idx='oui' WHERE id_forum IN ($thread,$id_objet) AND idx!='non'");
+			spip_query("UPDATE spip_forum SET idx='oui' WHERE id_forum IN ($thread) AND idx!='non'");
 
 			// 6. Changer l'id_objet en id_forum de la racine du thread
-			$id_objet = $id_forum;
+			$id_objet = $id_thread;
 		} else {
 			indexer_les_champs($row,$INDEX_elements_objet[$table],1,$min_long);
 			if (isset($INDEX_objet_associes[$table]))
