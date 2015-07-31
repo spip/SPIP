@@ -28,6 +28,7 @@ function inc_lien_dist($type,$id,$args,$ancre,$texte='',$pour='url',$connect='')
 		$g = 'generer_url_' . $type;
 		if (function_exists($g) OR function_exists($g .= '_dist')) 
 			$g = $g($id, $args, $ancre);
+		else $g = false;
 		if (!$g) $g = generer_url_entite($id, $type, $args, $ancre);
 		if (!$g) return false;
 		$res = $g;
