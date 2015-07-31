@@ -56,9 +56,9 @@ ecrire/action/tourner.php -text
 ecrire/action/virtualiser.php -text
 ecrire/auth/sha256.inc.php -text
 ecrire/balise/formulaire_.php -text
-ecrire/balise/formulaire_configurer_plugin.php -text
 ecrire/balise/index.php -text
 ecrire/balise/logo_.php -text
+ecrire/balise/remplir.php -text
 ecrire/balise/url_.php -text
 ecrire/base/admin_repair.php -text
 ecrire/base/connect_sql.php -text
@@ -451,7 +451,6 @@ prive/formulaires/configurer_identite.html -text
 prive/formulaires/configurer_identite.php -text
 prive/formulaires/configurer_langage.html -text
 prive/formulaires/configurer_langage.php -text
-prive/formulaires/configurer_plugin.php -text
 prive/formulaires/configurer_preferences.html -text
 prive/formulaires/configurer_preferences.php -text
 prive/formulaires/editer_article.html -text
@@ -471,6 +470,7 @@ prive/formulaires/editer_site.php -text
 prive/formulaires/editer_site_fonctions.php -text
 prive/formulaires/inc-logo_auteur.html -text
 prive/formulaires/login.php -text
+prive/formulaires/remplir.php -text
 prive/formulaires/selecteur_groupe_mot.html -text
 prive/formulaires/selecteur_groupe_mot_fonctions.php -text
 prive/ical_prive.html -text

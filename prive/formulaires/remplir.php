@@ -12,36 +12,37 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function formulaires_configurer_plugin_charger_dist($form)
+function formulaires_remplir_charger_dist($form)
 {
 	$f = charger_fonction('charger', "formulaires/$form", true);
 	if ($f)
 		return $f($form);
 	else {
-		$infos = formulaires_configurer_plugin_infos($form);
+		$infos = formulaires_remplir_infos($form);
 		if (!is_array($infos)) return $infos;
 		return $GLOBALS[$infos['meta']];
 	}
 }
 
-function formulaires_configurer_plugin_verifier_dist($form)
+function formulaires_remplir_verifier_dist($form)
 {
 	$f = charger_fonction('verifier', "formulaires/$form", true);
 	return $f ? $f($form) : array();
 }
 
-function formulaires_configurer_plugin_traiter_dist($form)
+function formulaires_remplir_traiter_dist($form)
 {
 	$f = charger_fonction('traiter', "formulaires/$form", true);
 	if ($f)
 		return $f($form);
 	else {
-		$infos = formulaires_configurer_plugin_infos($form);
+		$infos = formulaires_remplir_infos($form);
 		if (!is_array($infos)) return $infos; // fait ci-dessus en fait
-		$vars = formulaires_configurer_plugin_recense($infos['path']);
+		$vars = formulaires_remplir_recense($infos['path']);
 		$meta = $infos['meta'];
 		foreach ($vars as $regs) {
 			$k = $regs[2];
+			spip_log("ecrirt dans $meta $k vaut " . _request($k));
 			ecrire_meta($k, _request($k), 'oui', $meta);
 		}
 		return !isset($infos['prefix']) ? array()
@@ -55,7 +56,7 @@ define('_EXTRAIRE_SAISIES',
 
 // determiner la liste des noms des saisies d'un formulaire
 // (a refaire avec SAX)
-function formulaires_configurer_plugin_recense($form)
+function formulaires_remplir_recense($form)
 {
 	$f = file_get_contents($form);
 	if (preg_match_all(_EXTRAIRE_SAISIES, $f, $r, PREG_SET_ORDER))
@@ -66,10 +67,9 @@ define('_EXTRAIRE_PLUGIN', '@(?:' . _DIR_PLUGINS . '|' . _DIR_EXTENSIONS .')/?([
 
 // Recuperer la version compilee de plugin.xml et normaliser
 // Si ce n'est pas un plugin, dire qu'il faut prendre la table std des meta.
-function formulaires_configurer_plugin_infos($form){
+function formulaires_remplir_infos($form){
 
-	include_spip("balise/formulaire_");
-	$path = existe_formulaire($form);
+	$path = find_in_path($form.'.' . _EXTENSION_SQUELETTES, 'formulaires/');
 	if (!$path) return ''; // cas traite en amont normalement.
 	if (!preg_match(_EXTRAIRE_PLUGIN, $path, $plugin))
 		return array('path' => $path, 'meta' => 'meta');
