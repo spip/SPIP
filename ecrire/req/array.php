@@ -16,6 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 global $array_server;
 
 // fonction pour la premiere connexion a un serveur array
+// http://doc.spip.org/@req_array_dist
 function req_array_dist($host, $port, $login, $pass, $db='', $prefixe='', $ldap='') {
 	$GLOBALS['array_rappel_nom_base'] = false;
 #	spip_log("Connexion vers $host, base $db, prefixe $prefixe "
@@ -29,6 +30,7 @@ function req_array_dist($host, $port, $login, $pass, $db='', $prefixe='', $ldap=
 		);
 }
 
+// http://doc.spip.org/@array_get_var
 function array_get_var($table){
 	// $table doit toujours etre un array
 	if (!is_array($table)) return null;
@@ -41,6 +43,7 @@ function array_get_var($table){
 	return $var;
 }
 
+// http://doc.spip.org/@array_where_sql2php
 function array_where_sql2php($where){
 	$where = preg_replace(",(^|\()([\w.]+)\s*REGEXP\s*(.+)($|\)),Uims","\\1preg_match('/'.preg_quote(\\3).'/Uims',\\2)\\4",$where); // == -> preg_match
 	$where = preg_replace(",([\w.]+)\s*=,Uims","\\1==",$where); // = -> ==
@@ -48,6 +51,7 @@ function array_where_sql2php($where){
 	return $where;
 }
 
+// http://doc.spip.org/@array_where_teste
 function array_where_teste($cle,$valeur,$table,$where){
 	if (is_array($valeur))
 		$valeur = serialize($valeur);
@@ -67,6 +71,7 @@ function array_where_teste($cle,$valeur,$table,$where){
 }
 
 
+// http://doc.spip.org/@calculer_array_where
 function calculer_array_where($v)
 {
 	if (!is_array($v))
@@ -89,6 +94,7 @@ function calculer_array_where($v)
 }
 
 
+// http://doc.spip.org/@array_query_filter
 function array_query_filter($cle,$valeur,$table,$where){
 	static $wherec = array();
 	$hash = md5(serialize($where));
@@ -101,6 +107,7 @@ function array_query_filter($cle,$valeur,$table,$where){
 	return array_where_teste($cle,$valeur,$table,$wherec[$hash]);
 }
 
+// http://doc.spip.org/@array_results
 function &array_results($hash,$store='get'){
 	static $array_results = array();
 	if (is_array($store)){
@@ -116,6 +123,7 @@ function &array_results($hash,$store='get'){
 		unset($array_results[$hash]);
 }
 // emulations array
+// http://doc.spip.org/@array_query
 function array_query($query){
 	// pas de jointure, que des requetes simples
 	// trouver le tableau de base, fourni en condition having
@@ -202,16 +210,19 @@ $GLOBALS['spip_array_functions_1'] = array(
 		);
 
 
+// http://doc.spip.org/@spip_array_set_charset
 function spip_array_set_charset($charset, $serveur=''){
 	#spip_log("changement de charset sql : "."SET NAMES "._q($charset));
 	return true;
 }
 
+// http://doc.spip.org/@spip_array_get_charset
 function spip_array_get_charset($charset=array(), $serveur=''){
 	return false;
 }
 
 // Fonction de requete generale, munie d'une trace a la demande
+// http://doc.spip.org/@spip_array_query
 function spip_array_query($query, $serveur='') {
 
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
@@ -231,6 +242,7 @@ function spip_array_query($query, $serveur='') {
 // fonction  instance de sql_select, voir ses specs dans abstract.php
 // Les \n et \t sont utiles au debusqueur.
 
+// http://doc.spip.org/@spip_array_select
 function spip_array_select($select, $from, $where='',
 			   $groupby='', $orderby='', $limit='', $having='',
 			   $serveur='') {
@@ -271,12 +283,14 @@ function spip_array_select($select, $from, $where='',
 // Pas portable malheureusement, on laisse pour le moment.
 
 
+// http://doc.spip.org/@spip_array_order
 function spip_array_order($orderby)
 {
 	return (is_array($orderby)) ? join(", ", $orderby) :  $orderby;
 }
 
 
+// http://doc.spip.org/@spip_array_select_as
 function spip_array_select_as($args)
 {
 	$argsas = "";
@@ -288,6 +302,7 @@ function spip_array_select_as($args)
 }
 
 
+// http://doc.spip.org/@spip_array_selectdb
 function spip_array_selectdb($db) {
 	return true;
 }
@@ -297,12 +312,14 @@ function spip_array_selectdb($db) {
 // Attention on n'a pas toujours les droits
 
 
+// http://doc.spip.org/@spip_array_listdbs
 function spip_array_listdbs($serveur='') {
 	return false;
 }
 
 
 
+// http://doc.spip.org/@spip_array_showbase
 function spip_array_showbase($match, $serveur='')
 {
 	return false;
@@ -310,6 +327,7 @@ function spip_array_showbase($match, $serveur='')
 
 
 // pas fe SHOW en array, on renvoie une declaration type si la variable existe
+// http://doc.spip.org/@spip_array_showtable
 function spip_array_showtable($nom_table, $serveur='')
 {
 	if (in_array($nom_table,array('tableau')))
@@ -322,6 +340,7 @@ function spip_array_showtable($nom_table, $serveur='')
 //
 
 
+// http://doc.spip.org/@spip_array_fetch
 function spip_array_fetch($r, $t='', $serveur='') {
 	if ($r AND $each = array_results($r)) {
 		list($cle,$valeur) = $each;
@@ -330,6 +349,7 @@ function spip_array_fetch($r, $t='', $serveur='') {
 	return false;
 }
 
+// http://doc.spip.org/@spip_array_error
 function spip_array_error($query='') {
 	spip_log("Erreur - $query", 'array');
 	return false;
@@ -337,24 +357,28 @@ function spip_array_error($query='') {
 
 // A transposer dans les portages
 
+// http://doc.spip.org/@spip_array_errno
 function spip_array_errno() {
 	return false;
 }
 
 // Interface de abstract_sql
 
+// http://doc.spip.org/@spip_array_count
 function spip_array_count($r, $serveur='') {
 	return array_results($r,'count');
 }
 
 
 
+// http://doc.spip.org/@spip_array_free
 function spip_array_free($r, $serveur='') {
 	array_results($r,'free');
 	return true;
 }
 
 
+// http://doc.spip.org/@spip_array_multi
 function spip_array_multi ($objet, $lang) {
 	$retour = "(TRIM(IF(INSTR(".$objet.", '<multi>') = 0 , ".
 		"     TRIM(".$objet."), ".
@@ -380,17 +404,20 @@ function spip_array_multi ($objet, $lang) {
 	return $retour;
 }
 
+// http://doc.spip.org/@spip_array_hex
 function spip_array_hex($v)
 {
 	return "0x" . $v;
 }
 
+// http://doc.spip.org/@spip_array_quote
 function spip_array_quote($v)
 {
 	return _q($v);
 }
 
 // pour compatibilite
+// http://doc.spip.org/@spip_array_in
 function spip_array_in($val, $valeurs, $not='', $serveur='') {
 	return calcul_array_in($val, $valeurs, $not);
 }
@@ -399,6 +426,7 @@ function spip_array_in($val, $valeurs, $not='', $serveur='') {
 // IN (...) est limite a 255 elements, d'ou cette fonction assistante
 //
 
+// http://doc.spip.org/@calcul_array_in
 function calcul_array_in($val, $valeurs, $not='') {
 	if (is_array($valeurs))
 		$valeurs = join(',', array_map('_q', $valeurs));
@@ -422,6 +450,7 @@ function calcul_array_in($val, $valeurs, $not='') {
 }
 
 
+// http://doc.spip.org/@spip_array_cite
 function spip_array_cite($v, $type) {
 	if (sql_test_date($type) AND preg_match('/^\w+\(/', $v)
 	OR (sql_test_int($type)
