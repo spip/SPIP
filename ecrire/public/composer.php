@@ -288,6 +288,11 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 	@define('_INTRODUCTION_SUITE', '&nbsp;(...)');
 	$texte = couper($texte, $longueur, _INTRODUCTION_SUITE);
 
+	// et reparagrapher si necessaire (coherence avec le cas descriptif)
+	if ($GLOBALS['toujours_paragrapher'])
+		// Fermer les paragraphes
+		$texte = paragrapher($texte, $GLOBALS['toujours_paragrapher']);
+
 	return $texte;
 }
 
