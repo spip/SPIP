@@ -1110,11 +1110,7 @@ function barre_onglets($rubrique, $onglet){
 		onglet(_T('info_multilinguisme'), "config-multilang.php3", "multi", $onglet, "traductions-24.gif");
 		if (lire_meta('multi_articles') == "oui" OR lire_meta('multi_rubriques') == "oui") {
 			onglet(_T('module_fichiers_langues'), "lang_raccourcis.php3", "fichiers", $onglet, "traductions-24.gif");
-	
 		}
-
-		
-
 	}
 
 	if ($rubrique == "suivi_forum"){
