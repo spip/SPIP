@@ -9,7 +9,8 @@
 <meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
 
 [(#REM) Lien vers l'icone destinee a la barre de bookmarks ]
-[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
+[<link rel="shortcut icon" type="image/x-icon" href="(#CHEMIN{favicon.ico})" />]
+[<link rel="icon" type="image/png" href="(#LOGO_SITE_SPIP||image_passe_partout{32,32}|image_recadre{32,32,center}|extraire_attribut{src}|sinon{[(#CHEMIN{favicon.ico})]})" />]
 
 [(#REM) Lien vers le flux RSS du site ]
 [<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="(#URL_PAGE{backend})" />]
