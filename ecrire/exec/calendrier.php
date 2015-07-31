@@ -43,6 +43,7 @@ function exec_calendrier_dist()
   } else {
 	  $commencer_page = charger_fonction('commencer_page', 'inc');
 	  echo $commencer_page($titre, "accueil", "calendrier");
+		echo barre_onglets("calendrier", "calendrier"); // ne produit rien par defaut, mais est utilisee par le plugin agenda
 	  echo debut_grand_cadre(true);
 	  echo "\n<div>&nbsp;</div>\n<div id='", $ancre, "'>",$r,'</div>';
 	  echo fin_grand_cadre(true);
