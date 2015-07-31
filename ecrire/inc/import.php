@@ -102,15 +102,10 @@ function import_debut($f, $gz=false) {
 		}
 		$b = "";
 	}
-	return false;
+	// improbable: fichier correct avant le debut_admin et plus apres
+	import_all_fin();
+	die(_T('info_erreur_restauration'));
 }
-
-//
-// $f = handle fichier
-// $gz = flag utilisation zlib
-//
-// importe un objet depuis le fichier, retourne true si ok, false si erreur ou fin de fichier
-//
 
 // on conserve ce tableau pour faire des translations
 // de table eventuelles
@@ -155,91 +150,66 @@ function detruit_restaurateur()
 
 // http://doc.spip.org/@import_tables
 function import_tables($request, $dir, $trans=array()) {
-	global $import_ok, $abs_pos, $my_pos;
-	global $affiche_progression_pourcent;
+	global $import_ok, $abs_pos,  $affiche_progression_pourcent;
 	static $time_javascript;
 
-	$my_pos = $GLOBALS['meta']["status_restauration"];
-	$archive = $dir . ($request['archive'] ? $request['archive'] : $request['archive_perso']);
-	$size = @filesize($archive);
+	$my_pos = (!isset($GLOBALS['meta']["status_restauration"])) ? 0 :
+		$GLOBALS['meta']["status_restauration"];
 
-	// attention : si $request['archive']=="", alors archive='data/' 
-	// le test is_readable n'est donc pas suffisant
-	if (!@is_readable($archive)||is_dir($archive) || !$size) {
-		$texte_boite = _T('info_erreur_restauration');
-		echo debut_boite_alerte();
-		echo "<font face='Verdana,Arial,Sans,sans-serif' size='4' color='black'><b>$texte_boite</b></font>";
-		echo fin_boite_alerte();
-// renvoyer True pour effacer les meta sans refaire calculer_rubriques:
-// la restauration n'a pas encore commence, on peut eviter de tout casser
-		return $texte_boite;
+	// au premier appel destruction des tables a restaurer
+	// ou initialisation de la table des translations,
+	// mais pas lors d'une reprise.
+
+	if ($request['insertion']=='on') {
+		$request['init'] = (!$my_pos) ? 'insere_1_init' : 'insere_2_init';		$request['boucle'] = 'import_insere';
+	} elseif ($request['insertion']=='passe2') {
+		$request['init'] = 'insere_2_init';
+		$request['boucle'] = 'import_translate';
+	} else {
+		$request['init'] = (!$my_pos) ? 'import_init_tables' : 'import_table_choix';
+		$request['boucle'] = 'import_replace';
 	}
+
+	$archive = $dir . ($request['archive'] ? $request['archive'] : $request['archive_perso']);
 
 	if (ereg("\.gz$", $archive)) {
 			$size = false;
 			$taille = taille_en_octets($my_pos);
-			$_fopen = 'gzopen';
+			$file = gzopen($archive, 'rb');
 			$gz = true;
 	} else {
+			$size = @filesize($archive);
 			$taille = floor(100 * $my_pos / $size)." %";
-			$_fopen = 'fopen';
+			$file = fopen($archive, 'rb');
 			$gz = false;
 	}
+
+	if ($my_pos==0) {
+//  Pour les anciennes archives, indiquer le charset par defaut:
+		ecrire_meta('charset_restauration', 'iso-8859-1'); 
+//  les + recentes l'ont en debut de fichier et import_debut fera ecrire_meta
+		list($tag, $r) = import_debut($file, $gz);
+// tag ouvrant du Dump:
+// 'SPIP' si fait par spip, nom de la base source si fait par  phpmyadmin
+		$version_archive = $r['version_archive'];
+		ecrire_meta('version_archive_restauration', $version_archive);
+		ecrire_meta('tag_archive_restauration', $tag);
+		ecrire_metas();
+	} else {
+		// Reprise de l'importation
+		$_fseek = ($gz) ? gzseek : fseek;
+		$_fseek($file, $my_pos);
+		$version_archive = $GLOBALS['meta']['version_archive_restauration'];
+	}
+
+	$fimport = import_charge_version($version_archive);
 
 	import_affiche_javascript($taille);
 
 	if ($GLOBALS['flag_ob_flush']) ob_flush();
 	flush();
 
-	list($my_date) = spip_fetch_array(spip_query("SELECT UNIX_TIMESTAMP(maj) AS d FROM spip_meta WHERE nom='debut_restauration'"), SPIP_NUM);
-
-	if (!$my_date) return false;
-
-	if ($request['insertion']=='on') {
-		$request['init'] = 'insere_1_init';
-		$request['boucle'] = 'import_insere';
-	} elseif ($request['insertion']=='passe2') {
-		$request['init'] = 'insere_2_init';
-		$request['boucle'] = 'import_translate';
-	} else {
-		$request['init'] = 'import_init';
-		$request['boucle'] = 'import_replace';
-	}
-
-	$f = $_fopen($archive, "rb");
-	$my_pos = (!isset($GLOBALS['meta']["status_restauration"])) ? 0 :
-		$GLOBALS['meta']["status_restauration"];
-
-	if ($my_pos==0) {
-// par defaut pour les anciens sites
-// il est contenu dans le xml d'import et sera reecrit dans import_debut
-		ecrire_meta('charset_restauration', 'iso-8859-1'); 
-		if ($r = import_debut($f, $gz)) {
-// tag ouvrant :
-// 'SPIP' pour un dump xml spip, nom de la base source pour un dump phpmyadmin
-			$tag_archive = $r[0];
-			$version_archive = $r[1]['version_archive'];
-		}
-		ecrire_meta('version_archive_restauration', $version_archive);
-		ecrire_meta('tag_archive_restauration', $tag_archive);
-		ecrire_metas();
-	} else {
-		// Reprise de l'importation
-		$_fseek = ($gz) ? gzseek : fseek;
-		$_fseek($f, $my_pos);
-		$version_archive = $GLOBALS['meta']['version_archive_restauration'];
-		$tag_archive = $GLOBALS['meta']['tag_archive_restauration'];
-		// a completer pour les insertions
-		$request['init'] = 'import_table_choix';
-	}
-
-	$fimport = import_charge_version($version_archive);
-
-	// Normalement c'est controle par import_all auparavant
-	// c'est pour se proteger des reprises avortees
-	if (!$fimport) return _T('avis_archive_incorrect');
-
-	while ($table = $fimport($f, $request, $gz, $trans)) {
+	while ($table = $fimport($file, $request, $gz, $trans)) {
 	// Pas d'ecriture SQL car sinon le temps double.
 	// Il faut juste faire attention a bien lire_metas()
 	// au debut de la restauration
@@ -249,18 +219,36 @@ function import_tables($request, $dir, $trans=array()) {
 			affiche_progression_javascript($abs_pos,$size,$table);
 			$time_javascript = time();
 		}
-
-		$my_pos = true;
 	}
 
-	if (!$import_ok) return  _T('avis_archive_invalide');
+	if (!$import_ok) 
+		$res =  _T('avis_archive_invalide');
+	else {
 
-	affiche_progression_javascript('100 %', $size);
+		affiche_progression_javascript('100 %', $size);
 
-	return false;
+		if ($request['insertion'] == 'on') {
+
+			$request['insertion'] = 'passe2';
+			import_all_debut($request);
+			$trans = translate_init($request);
+			spip_log("import_all passe 2");
+			import_tables($request, $dir, $trans);
+			spip_query("DROP TABLE spip_translate");
+		}
+		detruit_restaurateur();
+		ecrire_acces();	// Mise a jour du fichier htpasswd
+		if ($charset = $GLOBALS['meta']['charset_restauration']) {
+			ecrire_meta('charset', $charset);
+			ecrire_metas();
+		}
+		include_spip('inc/rubriques');
+		calculer_rubriques();
+		$res = '';
+	}
+	return $res . "</body></html>\n";;
 }
 
-// http://doc.spip.org/@import_affiche_javascript
 function import_affiche_javascript($taille)
 {
 	$max_time = ini_get('max_execution_time')*1000;
@@ -373,6 +361,4 @@ function import_table_choix()
 	}
 	return $tables_for_dump;
 }	
-
-
 ?>

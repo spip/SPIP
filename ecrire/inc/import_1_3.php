@@ -36,15 +36,9 @@ function description_table($nom){
 	return array($nom,array());
 }
 
-// http://doc.spip.org/@import_init
-function import_init($request, $my_pos) {
-
-	// au premier appel destruction des tables a restaurer
-	return (!$my_pos) ? import_init_tables() : import_table_choix();
-}
 
 // http://doc.spip.org/@insere_2_init
-function insere_2_init($request, $my_pos) {
+function insere_2_init($request) {
 
 	// l'insertion ne porte que sur les tables principales
 	$t = array_keys($GLOBALS['tables_principales']);
@@ -57,7 +51,7 @@ function insere_2_init($request, $my_pos) {
 }
 
 // http://doc.spip.org/@insere_1_init
-function insere_1_init($request, $my_pos) {
+function insere_1_init($request) {
 
   //  preparation de la table des translations
 	$spip_translate = array(
@@ -73,11 +67,11 @@ function insere_1_init($request, $my_pos) {
 	spip_create_table('spip_translate', $spip_translate, $spip_translate_key, true);
 	// au cas ou la derniere fois ce serait terminee anormalement
 	spip_query("DELETE FROM spip_translate");
-	return insere_2_init($request, $my_pos);
+	return insere_2_init($request);
 }
 
 // http://doc.spip.org/@translate_init
-function translate_init($request, $my_pos=0) {
+function translate_init($request) {
   /* 
    construire le tableau PHP de la table spip_translate
    (on l'a mis en table pour pouvoir reprendre apres interruption
@@ -93,7 +87,7 @@ function translate_init($request, $my_pos=0) {
 
 // http://doc.spip.org/@inc_import_1_3_dist
 function inc_import_1_3_dist($lecteur, $request, $gz=false, $trans=array()) {
-	global $import_ok, $abs_pos, $my_pos, $tables_trans;
+	global $import_ok, $abs_pos, $tables_trans;
 	static $tables = '';
 	static $phpmyadmin, $fin;
 	static $field_desc = array ();
@@ -103,7 +97,7 @@ function inc_import_1_3_dist($lecteur, $request, $gz=false, $trans=array()) {
 
 	if (!$tables OR $trans) {
 		$init = $request['init'];
-		$tables = $init($request, $my_pos);
+		$tables = $init($request);
 		$phpmyadmin = preg_match("{^phpmyadmin::}is",
 			$GLOBALS['meta']['version_archive_restauration'])
 			? array(array('&quot;','&gt;'),array('"','>'))

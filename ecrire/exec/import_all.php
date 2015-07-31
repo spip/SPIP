@@ -38,34 +38,16 @@ if ($f = include_spip('mes_fonctions', false)) {
 }
 
 // http://doc.spip.org/@verifier_version_sauvegarde
-function verifier_version_sauvegarde ($archive) {
+function verifier_sauvegarde ($archive, $dir) {
 	global $spip_version;
-	global $flag_gz, $connect_toutes_rubriques;
 
-	if ($connect_toutes_rubriques) {
-		$repertoire = _DIR_DUMP;
-		if(!@file_exists($repertoire)) {
-			$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
-			$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
-		}
-		$dir = $repertoire;
-	} else {
-		$repertoire = _DIR_TRANSFERT;
-		if(!@file_exists($repertoire)) {
-			$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
-			$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
-		}
-		if(!@file_exists($repertoire.$connect_login)) {
-			$sous_rep = sous_repertoire($repertoire, $connect_login);
-		}
-		$dir = $sous_rep . '/';
-	}
-	$_fopen = ($flag_gz) ? gzopen : fopen;
-	$_fread = ($flag_gz) ? gzread : fread;
+	$g = ereg("\.gz$", $archive);
+	$_fopen = ($g) ? gzopen : fopen;
+	$_fread = ($g) ? gzread : fread;
 	$buf_len = 1024; // la version doit etre dans le premier ko
+	$g = $dir . $archive;
 
-	if (@file_exists($f = $dir . $archive)) {
-		$f = $_fopen($f, "rb");
+	if (@file_exists($g) AND $f = $_fopen($g, "rb")) {
 		$buf = $_fread($f, $buf_len);
 
 		if (ereg('<SPIP [^>]* version_base="([0-9.]+)".*version_archive="([^"]+)"', $buf, $regs)
@@ -75,7 +57,7 @@ function verifier_version_sauvegarde ($archive) {
 		else
 			return _T('avis_erreur_version_archive', array('archive' => $archive));
 	} else
-		return _T('avis_probleme_archive', array('archive' => $archive));
+		return _T('avis_probleme_archive', array('archive' => $g));
 }
 
 
@@ -93,16 +75,17 @@ function import_charge_version($version_archive)
 // http://doc.spip.org/@exec_import_all_dist
 function exec_import_all_dist()
 {
+	$dir = import_queldir();
+
 	// si l'appel est explicite, 
 	// passer par l'authentification ftp et attendre d'etre rappele
 	if (!$GLOBALS['meta']["debut_restauration"]) {
-	// cas de l'appel apres demande de confirmation
 		$archive=_request('archive');
 		$insertion=_request('insertion');
 		if (!strlen($archive)) $archive=_request('archive_perso');
 		if ($archive) {
 			$action = _T('info_restauration_sauvegarde', array('archive' => $archive));
-			$commentaire = verifier_version_sauvegarde ($archive);
+			$commentaire = verifier_sauvegarde($archive, $dir);
 		}
 
 		// au tout premier appel, on ne revient pas de debut_admin
@@ -112,16 +95,9 @@ function exec_import_all_dist()
 		// si on est revenu c'est que l'authentification ftp est ok
 		// sinon il reste le meta request_restau; a ameliorer.
 		fin_admin($action);
-		// dire qu'on commence
-		ecrire_meta("request_restauration", serialize($_REQUEST));
-		ecrire_meta("debut_restauration", "debut");
-		ecrire_meta("status_restauration", "0");
-		ecrire_metas();
-		// se rappeler pour montrer illico ce qu'on fait 
-		header('Location: ./');
-		exit();
-	}
-
+		import_all_debut($_REQUEST);
+		$request = $_REQUEST;
+	} else $request = unserialize($GLOBALS['meta']['request_restauration']);
 	// au rappel, on commence (voire on continue)
 	@ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
 	// utiliser une version fraiche des metas (ie pas le cache)
@@ -136,55 +112,35 @@ function exec_import_all_dist()
 	debut_gauche();
 
 	debut_droite();
-	$request = unserialize($GLOBALS['meta']['request_restauration']);
-	spip_log("import_all " . $GLOBALS['meta']['request_restauration']);
-	$dir = import_queldir();
-	$r = import_tables($request, $dir);
+	
+	// precaution inutile I think (esj)
+	list($my_date) = spip_fetch_array(spip_query("SELECT UNIX_TIMESTAMP(maj) AS d FROM spip_meta WHERE nom='debut_restauration'"), SPIP_NUM);
 
-	if ($r) {
-		spip_log("Erreur: $r");
-	}
-	else {
-		if ($request['insertion']== 'on') {
-			$request['insertion'] = 'passe2';
-			ecrire_meta("request_restauration", serialize($request));
-			ecrire_meta("debut_restauration", "debut");
-			ecrire_meta("status_restauration", "0");
-			ecrire_metas();
-			spip_log("import_all passe 2");
-			$trans = translate_init($request);
-			$r = import_tables($request, $dir, $trans);
-			if ($r) spip_log("Erreur: $r");
-			spip_query("DROP TABLE spip_translate");
-		} 
-		ecrire_acces();	// Mise a jour du fichier htpasswd
-		detruit_restaurateur();
-		if ($charset = $GLOBALS['meta']['charset_restauration']) {
-				ecrire_meta('charset', $charset);
-				ecrire_metas();
-		}
-		import_fin();
-		include_spip('inc/rubriques');
-		calculer_rubriques();
-	}
-	echo "</body></html>\n";
+	if ($my_date) echo import_tables($request, $dir);
+
+	import_all_fin();
 }
 
-// http://doc.spip.org/@import_fin
-function import_fin() {
+function import_all_debut($request) {
+	ecrire_meta("request_restauration", serialize($request));
+	ecrire_meta("debut_restauration", "debut");
+	ecrire_meta("status_restauration", "0");
+	ecrire_metas();
+}
+
+function import_all_fin() {
 
 	effacer_meta("charset_restauration");
 	effacer_meta("status_restauration");
 	effacer_meta("debut_restauration");
 	effacer_meta("date_optimisation");
 	effacer_meta('request_restauration');
-	effacer_meta('fichier_restauration');
 	effacer_meta('version_archive_restauration');
 	effacer_meta('tag_archive_restauration');
 	ecrire_metas();
 }
 
-// http://doc.spip.org/@import_queldir
+// http://doc.spip.org/@import_all_continue
 function import_queldir()
 {
 	global $connect_toutes_rubriques;
