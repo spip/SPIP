@@ -53,7 +53,7 @@ if ($connect_statut == '0minirezo') {
 	}
 			
 	$activer_stats = lire_meta("activer_statistiques");
-	if ($activer_stats != "non") icone_horizontale("ƒvolution des visites", "statistiques_visites.php3", "statistiques-24.gif", "rien.gif");
+	if ($activer_stats != "non") icone_horizontale("Evolution des visites", "statistiques_visites.php3", "statistiques-24.gif", "rien.gif");
 	
 	fin_raccourcis();
 }
