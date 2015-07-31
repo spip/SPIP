@@ -12,8 +12,8 @@
 
 //
 // Ce fichier ne sera execute qu'une fois
-if (defined("_INC_BARRE")) return;
-define("_INC_BARRE", "1");
+if (defined("_INC_BARRE_SPIP")) return;
+define("_INC_BARRE_SPIP", "1");
 
 // construit un bouton (ancre) de raccourci avec icone et aide
 
@@ -22,12 +22,12 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 	return "<a\nhref=\"javascript:"
 		.$action
 		."\" class='spip_barre' tabindex='1000'\ntitle=\""
-		.addslashes(attribut_html($help))
+		.attribut_html($help)
 		."\"" 
 		.(!_DIR_RESTREINT ? '' :  "\nonMouseOver=\"helpline('"
 		  .addslashes(attribut_html($help))
 		  ."',$champhelp)\"\nonMouseOut=\"helpline('"
-		  .addslashes(attribut_html(_T('barre_aide')))
+		  .attribut_html(_T('barre_aide'))
 		  ."', $champhelp)\"")
 		."><img\nsrc='"
 		._DIR_IMG_ICONES_BARRE
@@ -37,7 +37,7 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 
 // construit un tableau de raccourcis pour un noeud de DOM 
 
-function afficher_barre($champ, $forum=false) {
+function afficher_barre_spip($champ, $forum=false) {
 	static $num_barre = 0;
 	include_ecrire ("inc_layer.php3");
 	if (!$GLOBALS['browser_barre']) return '';
