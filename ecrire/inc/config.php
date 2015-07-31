@@ -31,7 +31,7 @@ function inc_config_dist() {
  * @param string $cfg
  * @return array
  */
-function explique_config($cfg){
+function expliquer_config($cfg){
 	// par defaut, sur la table des meta
 	$table = 'meta';
 	$casier = null;
@@ -99,7 +99,7 @@ function lire_config($cfg='', $def=null, $unserialize=true) {
 		return $lire_config(substr($cfg,$p+2),$def,$unserialize);
 	}
 
-	list($table,$casier,$sous_casier) = explique_config($cfg);
+	list($table,$casier,$sous_casier) = expliquer_config($cfg);
 
 	if (!isset($GLOBALS[$table]))
 			return $def;
@@ -156,7 +156,7 @@ function ecrire_config($cfg,$store) {
 		return $ecrire_config(substr($cfg,$p+2),$store);
 	}
 	
-	list($table,$casier,$sous_casier) = explique_config($cfg);
+	list($table,$casier,$sous_casier) = expliquer_config($cfg);
 	// il faut au moins un casier pour ecrire
 	if (!$casier) return false;
 
