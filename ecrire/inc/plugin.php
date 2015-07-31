@@ -34,9 +34,9 @@ function liste_plugin_files(){
 
 //  à utiliser pour initialiser ma variable globale $plugin
 function liste_plugin_actifs(){
-  $meta_plugin = lire_meta('plugin');
+  $meta_plugin = isset($GLOBALS['meta']['plugin'])?$GLOBALS['meta']['plugin']:'';
   if (strlen($meta_plugin)>0)
-		return explode(",",lire_meta('plugin')); // mieux avec un unserialize ?
+		return explode(",",$meta_plugin); // mieux avec un unserialize ?
 	else
 		return array();
 }
