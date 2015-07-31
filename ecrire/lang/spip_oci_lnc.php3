@@ -533,7 +533,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_contenance' => 'Aquel sit conten:',
 'info_contenu_articles' => 'Contengut dels articles',
 'info_contribution' => 'Contribucions de forum',
-'info_copyright' => 'es un logicial liure distribuit per<a href=\'copyright_fr.html\'>jos lic&eacute;ncia GPL.</a>',
+'info_copyright' => 'es un logicial liure distribuit <a href=\'copyright_fr.html\'>jos lic&eacute;ncia GPL.</a>',
 'info_copyright_doc' => ' Per mai d\'informacions, veire lo sit <a href=\'http://www.spip.net/oci\'>http://www.spip.net/oci</a>.',
 'info_cours_edition' => 'V&ograve;stres articles en cors d\'edicion',
 'info_creation_mots_cles' => 'Creatz e configuratz aic&iacute; los mots claus del sit',

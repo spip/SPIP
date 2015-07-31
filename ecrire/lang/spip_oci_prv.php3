@@ -533,7 +533,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'info_contenance' => 'Aqueu sit conten:',
 'info_contenu_articles' => 'Contengut deis articles',
 'info_contribution' => 'Contribucions de forum',
-'info_copyright' => 'es un logiciau liure distribuit per <a href=\'copyright_fr.html\'> sota lic&eacute;ncia GPL.</a>',
+'info_copyright' => 'es un logiciau liure distribuit <a href=\'copyright_fr.html\'>sota lic&eacute;ncia GPL.</a>',
 'info_copyright_doc' => 'Per mai d\'informacions, veire lo sit <a href=\'http://www.spip.net/oci\'>http://www.spip.net/oci</a>.',
 'info_cours_edition' => 'V&ograve;streis articles en cors d\'edicion',
 'info_creation_mots_cles' => 'Creatz e configuratz aic&iacute; lei mots claus dau sit',

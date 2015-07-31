@@ -533,7 +533,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_contenance' => 'Aqueth sit que contien:',
 'info_contenu_articles' => 'Contengut deus articles',
 'info_contribution' => 'Contribucions de forum',
-'info_copyright' => 'qu\'ei un logiciau liure distribuit per<a href=\'copyright_fr.html\'>devath lic&eacute;ncia GPL.</a>',
+'info_copyright' => 'qu\'ei un logiciau liure distribuit <a href=\'copyright_fr.html\'>devath lic&eacute;ncia GPL.</a>',
 'info_copyright_doc' => 'Per mei informacions, v&eacute;der lo sit <a href=\'http://www.spip.net/oci\'>http://www.spip.net/oci</a>.',
 'info_cours_edition' => 'Los v&ograve;stes articles en cors d\'edicion',
 'info_creation_mots_cles' => 'Creatz e configuratz ac&iacute; los mots claus deu sit',
