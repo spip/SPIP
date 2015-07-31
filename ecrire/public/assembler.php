@@ -64,11 +64,9 @@ function public_assembler_dist($fond) {
 // http://doc.spip.org/@is_preview
 function is_preview()
 {
-	global $var_mode;
-	if ($var_mode !== 'preview') return false;
-	$statut = $GLOBALS['auteur_session']['statut'];
-	return ($statut=='0minirezo' OR
-		($GLOBALS['meta']['preview']=='1comite' AND $statut=='1comite'));
+	if ($GLOBALS['var_mode'] !== 'preview') return false;
+	include_spip('inc/autoriser');
+	return autoriser('previsualiser'); 
 }
 
 //
