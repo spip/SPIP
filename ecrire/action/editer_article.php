@@ -213,10 +213,10 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 		$champs['id_rubrique'] = $id_parent;
 
 		// si l'article etait publie
-		// et que le demandeur n'est pas admin de la rubrique
+		// et que le demandeur n'est pas admin de la rubrique de destinaton
 		// repasser l'article en statut 'propose'.
 		if ($statut == 'publie'
-		AND !autoriser('publierdans', 'rubrique', $id_rubrique))
+		AND !autoriser('publierdans', 'rubrique', $id_parent))
 			$champs['statut'] = 'prop';
 	}
 
