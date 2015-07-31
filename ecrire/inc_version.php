@@ -377,14 +377,14 @@ if (@is_readable(_CACHE_PLUGINS_OPT) AND @is_readable(_CACHE_PLUGINS_PATH)){
 	// chargement optimise precompile
 	include_once(_CACHE_PLUGINS_OPT);
 } else {
-	@spip_initialisation_suite();
+	spip_initialisation_suite();
 	include_spip('inc/plugin');
 	// generer les fichiers php precompiles
 	// de chargement des plugins et des pipelines
 	actualise_plugins_actifs();
 }
 // Initialisations non critiques surchargeables par les plugins
-@spip_initialisation_suite();
+spip_initialisation_suite();
 
 if (!defined('_OUTILS_DEVELOPPEURS'))
 	define('_OUTILS_DEVELOPPEURS',false);
