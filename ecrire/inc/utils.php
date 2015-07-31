@@ -934,6 +934,62 @@ function spip_register_globals() {
 	}
 }
 
+
+// Fonction definissant les repertoires et fichiers non partageables
+// Elle indique dans $test_dirs ceux devant etre accessibles en ecriture
+// mais ne touche pas a cette variable si elle est deja definie
+// afin que mes_options.php puisse en specifier d'autres.
+function spip_initialisation_parametree($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL){
+	static $too_late = 0;
+	if ($too_late++) return;
+
+
+	// Quatre repertoires modifiables par les scripts de SPIP
+	# Repertoire des fichiers Permanents Inaccessibles par http://
+	isset($pi) OR $pi = _DIR_RACINE.'config/';
+	# Repertoire des fichiers Permanents Accessibles par http://
+	isset($pa) OR $pa = _DIR_RACINE.'IMG/';
+	# Repertoire des fichiers Temporaires Inaccessibles par http://
+	isset($ti) OR $ti = _DIR_RACINE.'tmp/';
+	# Repertoire des fichiers Temporaires Accessibles par http://
+	isset($ta) OR $ta = _DIR_RACINE.'IMG/'; # provisoire ?
+
+	define('_DIR_IMG', $pa);
+	define('_DIR_DOC', $pa);
+	define('_DIR_LOGOS', $pa);
+	define('_DIR_IMG_ICONES', $pa . "icones/");
+
+	define('_DIR_DUMP', $ti . "data/");
+	define('_DIR_SESSIONS', $ti . "sessions/");
+	define('_DIR_TRANSFERT', $ti . "upload/");
+	define('_DIR_CACHE', $ti . "CACHE/");
+	define('_DIR_SKELS', $ti . "CACHE/skel/");
+	define('_DIR_TMP', $ti);
+
+	define('_FILE_META', $ti . 'meta_cache.txt');
+
+	define('_DIR_TMP_IMG', $ta);
+
+	define('_DIR_CONFIG', $pi);
+
+	// Definition des droits d'acces en ecriture
+	if (@is_readable($f = _DIR_CONFIG . 'chmod.php')) {
+		include_once $f;
+	} else
+		define('_SPIP_CHMOD', 0777);
+
+	// Le fichier de connexion a la base de donnees
+	define('_FILE_CONNECT',
+		(@is_readable($f = _DIR_CONFIG . 'connect.php') ? $f
+	:	(@is_readable($f = _DIR_RESTREINT . 'inc_connect.php') ? $f
+	:	(@is_readable($f = _DIR_RESTREINT . 'inc_connect.php3') ? $f
+	:	false))));
+
+	if (!isset($GLOBALS['test_dirs']))
+		$GLOBALS['test_dirs'] =  array($pa, $ti, $ta);
+}
+
+
 // http://doc.spip.org/@spip_initialisation
 function spip_initialisation() {
 
