@@ -70,22 +70,21 @@ function login_submit(){
 			return false;
 		}
 
-		// il ne faut pas injecter le pass hashe directement dans l'input password visible car
-		// - cela est perturbant
-		// - certains navigateurs memorisent le hash au lieu du pass ...
-		// on cree un input hidden a cote, on lui met le name="password"
-		// et on vide le champ visible
-		inputpass.after('<input name="password" type="hidden" value="" />');
-		inputpass.attr('name','nothing').attr('value','');
-
 		// Si on a l'alea, on peut lancer le submit apres avoir hashe le pass
 		if (alea_actuel || alea_futur) {
+			// il ne faut pas injecter le pass hashe directement dans l'input password visible car
+			// - cela est perturbant
+			// - certains navigateurs memorisent le hash au lieu du pass ...
+			// on cree un input hidden a cote, on lui met le name="password"
+			// et on vide le champ visible
+			inputpass.after('<input name="password" type="hidden" value="'+pass+'" />');
+			inputpass.attr('name','nothing').attr('value','');
 			calcule_hash_pass(pass);
 		}
-		// si on arrive pas a avoir une reponse, vider le pass pour forcer un passage en 2 fois
-		//else if(informe_auteur_en_cours)
-		//	jQuery('input[name=password]').attr('value','');
+		// si on arrive pas a avoir une reponse ajax, vider le pass pour forcer un passage en 2 fois
+		else if(informe_auteur_en_cours)
+			jQuery('input[name=password]').attr('value','');
 		// sinon c'est que l'auteur n'existe pas
-		// OU qu'il sera accepte par LDAP ou autre auth
+		// OU qu'il sera accepte par LDAP ou autre auth avec mot de passe en clair
 	}
 }
