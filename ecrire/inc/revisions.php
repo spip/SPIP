@@ -497,12 +497,17 @@ function propre_diff($texte) {
 	$texte = preg_replace(',(^|[^[])[[]([^[\]]*@@@SPIP_DIFF[0-9]+@@),',
 		'\1&#91;\2', $texte);
 
-	$tex = $GLOBALS['traiter_math']; // desactiver TeX
+	// desactiver TeX & toujours-paragrapher
+	$tex = $GLOBALS['traiter_math'];
 	$GLOBALS['traiter_math'] = '';
+	$mem = $GLOBALS['toujours_paragrapher'];
+	$GLOBALS['toujours_paragrapher'] = false;
 	
 	$texte = propre($texte);
 
+	// retablir
 	$GLOBALS['traiter_math'] = $tex;
+	$GLOBALS['toujours_paragrapher'] = $mem;
 
 	// un blockquote mal ferme peut gener l'affichage, et title plante safari
 	$texte = preg_replace(',<(/?(blockquote|title)[^>]*)>,i', '&lt;\1>', $texte);
