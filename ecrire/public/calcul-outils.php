@@ -199,7 +199,7 @@ function calculer_hierarchie($id_rubrique, $exclure_feuille = false) {
 	$hierarchie = ",$id_rubrique";
 
 	do {
-		list($id_rubrique) = spip_fetch_array(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+		$id_rubrique = sql_parent($id_rubrique);
 		$hierarchie = "," . $id_rubrique . $hierarchie;
 	} while ($id_rubrique);
 
@@ -397,10 +397,10 @@ function sql_profondeur($id) {
 
 
 function sql_parent($id_rubrique) {
-	$row = spip_abstract_fetsel(array(id_parent), 
+	list($id) = spip_abstract_fetsel(array(id_parent), 
 			array('spip_rubriques'), 
 			array("id_rubrique=" . intval($id_rubrique)));
-	return $row['id_parent'];
+	return $id;
 }
 
 function sql_rubrique($id_article) {
@@ -526,19 +526,17 @@ function sql_rubrique_fond($contexte) {
 
 // Ajouter "&lang=..." si la langue de base n'est pas celle du site
 function lang_parametres_forum($s) {
-
 	// ne pas se fatiguer si le site est unilingue (plus rapide)
 	if (strstr($GLOBALS['meta']['langues_utilisees'], ',')
 	// chercher l'identifiant qui nous donnera la langue
-	AND preg_match(',id_(article|breve|rubrique|syndic)=([0-9]+),', $s, $r)){
-		$objet = $r[1];
-		$id = $r[2];
-		list($lang) = spip_fetch_array(spip_query(
-			"SELECT lang FROM spip_${objet}s WHERE id_$objet=$id"
-		));
-		// Si ce n'est pas la meme que celle du site, l'ajouter aux parametres
+	AND preg_match(',(id_(article|breve|rubrique|syndic)=([0-9]+)),', $s, $r)){
+		list($lang) = spip_abstract_fetsel(array('lang'),
+						   array("spip_" . $r[2] .'s'),
+						   array($r[1]));
+
+	// Si ce n'est pas la meme que celle du site, l'ajouter aux parametres
 		if ($lang AND $lang <> $GLOBALS['meta']['langue_site'])
-			$s .= "&lang=$lang";
+			return $s . "&lang=$lang";
 	}
 
 	return $s;
