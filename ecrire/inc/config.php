@@ -65,9 +65,6 @@ function init_config() {
 		'charset' => _DEFAULT_CHARSET,
 		'syndication_integrale' => 'oui',
 
-		'creer_htpasswd' => 'non',
-		'creer_htaccess' => 'non',
-
 		'multi_articles' => 'non',
 		'multi_rubriques' => 'non',
 		'multi_secteurs' => 'non',
@@ -180,6 +177,9 @@ function appliquer_modifs_config() {
 	if (preg_match(',:\*\*\*\*@,', $http_proxy))
 		$http_proxy = $GLOBALS['meta']['http_proxy'];
 
+	// Un globale qui servira soit en ajax soit en direct pour afficher un 
+	// message de statut du proxy.
+	// Cf. action/configurer et configuration/relayeur
 	$retour_proxy = '';
 	if ($tester_proxy) {
 		if (!$test_proxy) {
@@ -296,25 +296,6 @@ function appliquer_modifs_config() {
 	}
 
 	ecrire_metas();
-
-	// modifs de secu (necessitent une authentification ftp)
-	$liste_meta = array(
-			    'creer_htpasswd',
-			    'creer_htaccess'
-	);
-	while (list(,$i) = each($liste_meta))
-	  if (isset($GLOBALS[$i]) AND ($GLOBALS[$i] != $GLOBALS['meta'][$i]))
-			$modif_secu=true;
-	if ($modif_secu) {
-		$admin = _T('info_modification_parametres_securite');
-		include_spip('inc/admin');
-		debut_admin($_POST['exec'], $admin);
-		reset($liste_meta);
-		while (list(,$i) = each($liste_meta))
-			if (isset($GLOBALS[$i])) ecrire_meta($i, $GLOBALS[$i]);
-		ecrire_metas();
-		fin_admin($admin);
-	}
 
 	if ($purger_skel) {
 		include_spip('inc/invalideur');

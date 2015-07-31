@@ -44,6 +44,9 @@ function generer_url_document_dist($id_document) {
 		return '';
 	$row = spip_fetch_array(spip_query("SELECT fichier,distant FROM spip_documents WHERE id_document="._q($id_document)));
 	if ($row) {
+
+		// Cette variable de configuration peut etre posee par un plugin
+		// par exemple acces_restreint
 		if ($GLOBALS['meta']["creer_htaccess"] == 'oui'
 		AND $row['distant'] != 'oui')
 			return parametre_url(

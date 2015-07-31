@@ -19,6 +19,9 @@ include_spip('inc/headers');
 // soit que le document est publie, c'est-a-dire
 // joint a au moins 1 article, breve ou rubrique publie
 
+// Cette variable de configuration peut etre posee par un plugin
+// par exemple acces_restreint
+
 // Definir une fonction d'autorisation specifique
 // sauf si on a deja eu cette idee
 // TODO: ne devrait pas figurer dans ce fichier
