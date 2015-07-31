@@ -58,6 +58,7 @@ function import_all_check() {
 	ecrire_meta("status_restauration", "0");
 	ecrire_metas();
 	// se rappeler pour montrer illico ce qu'on fait 
+	header('Location: ./');
 	exit;
 }
 

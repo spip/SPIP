@@ -16,6 +16,7 @@ define("_ECRIRE_INSTALL", "1");
 define('_FILE_TMP', '_install');
 include_ecrire ("inc_minipres");
 include_ecrire ("inc_base");
+include_ecrire("inc_db_mysql");
 
 function install_dist()
 {
@@ -278,6 +279,8 @@ function install_4()
 		spip_query("INSERT INTO spip_meta (nom, valeur) VALUES ('nouvelle_install', 'oui')");
 		$result_ok = !spip_sql_errno();
 	} else {
+	  // en cas de reinstall sur mise a jour mal passee
+	  	spip_query("DELETE FROM spip_meta WHERE nom='debut_restauration'");
 		$result = spip_query("SELECT COUNT(*) FROM spip_articles");
 		$result_ok = (spip_num_rows($result) > 0);
 	}
