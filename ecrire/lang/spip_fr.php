@@ -288,7 +288,7 @@ Merci de votre participation
 'forum_non_inscrit' => 'Vous n\'&ecirc;tes pas inscrit, ou l\'adresse ou le mot de passe sont erron&eacute;s.',
 'forum_page_url' => '(Si votre message se r&eacute;f&egrave;re &agrave; un article publi&eacute; sur le Web, ou &agrave; une page fournissant plus d\'informations, vous pouvez indiquer ci-apr&egrave;s le titre de la page et son adresse.)',
 'forum_par_auteur' => 'par @auteur@',
-'forum_poste_par' => 'Message poste@parauteur@ a la suite de votre article.',
+'forum_poste_par' => 'Message post&eacute;@parauteur@ &agrave; la suite de l\'article &laquo; @titre@ &raquo;.',
 'forum_probleme_database' => 'Probl&egrave;me de base de donn&eacute;es, votre message n\'a pas &eacute;t&eacute; enregistr&eacute;.',
 'forum_qui_etes_vous' => '<b>Qui &ecirc;tes-vous ?</b> (optionnel)',
 'forum_texte' => 'Texte de votre message :',
