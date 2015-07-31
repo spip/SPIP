@@ -128,16 +128,34 @@ echo "<p>";
 
 //
 // Fonctionnement de la messagerie interne
-//
+// devient forcement active
+
+// Activer forum admins
 
 if ($options == "avancees") {
-	debut_cadre_trait_couleur("messagerie-24.gif");
+	
+	debut_cadre_trait_couleur("forum-admin-24.gif", false, "", _T('titre_cadre_forum_administrateur'));
+	
+	echo "<div class='verdana2'>";
+
+	echo _T('info_forum_ouvert');
+	echo "<br />";
+	afficher_choix('forum_prive_admin', lire_meta('forum_prive_admin'),
+		array('oui' => _T('item_activer_forum_administrateur'),
+			'non' => _T('item_desactiver_forum_administrateur')));
+
+	echo "</div>";
+	echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+
+	fin_cadre_trait_couleur();
+	echo "<p />";
+
+
+/*	debut_cadre_trait_couleur("messagerie-24.gif");
 
 	$activer_messagerie = lire_meta("activer_messagerie");
 	$activer_imessage = lire_meta("activer_imessage");
 
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
 	echo _T('info_messagerie_interne')."</FONT></B> ".aide ("confmessagerie")." </TD></TR>";
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
 	echo _T('info_echange_message');
@@ -151,22 +169,11 @@ if ($options == "avancees") {
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
 	echo "<hr>\n";
-	echo _T('info_forum_ouvert');
 	echo "</TD></TR>";
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-	afficher_choix('forum_prive_admin', lire_meta('forum_prive_admin'),
-		array('oui' => _T('item_activer_forum_administrateur'),
-			'non' => _T('item_desactiver_forum_administrateur')));
-	echo "</TD></TR>\n";
-
-
-	echo "<TR><td style='text-align:$spip_lang_right;'>";
-	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
-	echo "</TD></TR>";
-	echo "</TABLE>\n";
 
 	fin_cadre_trait_couleur();
-	echo "<p>";
+	echo "<p>";*/
 }
 
 

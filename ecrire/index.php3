@@ -28,18 +28,7 @@ if ($spip_display != 4) {
 	
 	if ($bonjour == "oui" OR $spip_ecran == "large") echo debut_block_visible("info_perso");
 	else echo debut_block_invisible("info_perso");
-	
-	if (lire_meta('activer_messagerie') != 'non') {
-		if ($connect_activer_messagerie != "non") {
-			echo _T('info_utilisation_messagerie_interne')." ";
-			if ($connect_activer_imessage != "non")
-				echo _T('info_nom_utilisateurs_connectes');
-			else
-				echo _T('info_nom_non_utilisateurs_connectes');
-		} else
-			echo _T('info_non_utilisation_messagerie');
-	}
-	
+		
 	//
 	// Supprimer le cookie, se deconnecter...
 	//
@@ -55,16 +44,15 @@ if ($spip_display != 4) {
 	//
 	// Annonces
 	//
-echo    http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces");
-echo    http_calendrier_rv(sql_calendrier_taches_pb(),"pb") ;
-echo    http_calendrier_rv(sql_calendrier_taches_rv(), "rv");
+	echo    http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces");
+	echo    http_calendrier_rv(sql_calendrier_taches_pb(),"pb") ;
+	echo    http_calendrier_rv(sql_calendrier_taches_rv(), "rv");
 
 	
 	//
 	// Afficher le calendrier du mois s'il y a des rendez-vous
 	//
 	
-	if (lire_meta('activer_messagerie') != 'non' AND $connect_activer_messagerie != "non" AND $options == "avancees") {
 		$today = getdate(time());
 		$jour_today = $today["mday"];
 		$mois_today = $today["mon"];
@@ -92,7 +80,6 @@ echo    http_calendrier_rv(sql_calendrier_taches_rv(), "rv");
 			echo "<p />";
 		echo http_calendrier_jour($jour_today,$mois_today,$annee_today, "col");
 		}
-	}
 }
 
 //

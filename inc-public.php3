@@ -13,6 +13,7 @@ if (defined("_INC_PUBLIC")) { // inclusion différée
 } else {
 	// premier appel
 	define("_INC_PUBLIC", "1");
+	
 
 	# Variable indiquant l'extension du fichier du squelette 
 	# (peut etre changé dans mes_option via inc_version; en 'xml' pour + tard)
@@ -141,7 +142,7 @@ if (defined("_INC_PUBLIC")) { // inclusion différée
 					@header("Content-Type: application/xhtml+xml; charset=".lire_meta('charset'));
 				else 
 					@header("Content-Type: text/html; charset=".lire_meta('charset'));
-	
+					
 				echo '<'.'?xml version="1.0" encoding="'.lire_meta('charset').'"?'.">\n";
 			} else {
 				@header("Content-Type: text/html; charset=".lire_meta('charset'));

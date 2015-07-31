@@ -136,16 +136,17 @@ function auth() {
 		$connect_login = $row['login'];
 		$connect_pass = $row['pass'];
 		$connect_statut = $row['statut'];
-		$connect_activer_messagerie = $row["messagerie"];
-		$connect_activer_imessage = $row["imessage"];
+		$connect_activer_messagerie = "oui"; //$row["messagerie"];
+		$connect_activer_imessage = "oui "; //$row["imessage"];
 
 		// Special : si dans la fiche auteur on modifie les valeurs
 		// de messagerie, utiliser ces valeurs plutot que celle de la base.
 		// D'ou leger bug si on modifie la fiche de quelqu'un d'autre.
-		if ($GLOBALS['perso_activer_messagerie']) {
+		/*if ($GLOBALS['perso_activer_messagerie']) {
 			$connect_activer_messagerie = $GLOBALS['perso_activer_messagerie'];
 			$connect_activer_imessage = $GLOBALS['perso_activer_imessage'];
-		}
+		}*/
+		// (1.8: La messagerie est toujours active)
 
 		// regler les preferences de l'auteur
 		$prefs = unserialize($row['prefs']);
