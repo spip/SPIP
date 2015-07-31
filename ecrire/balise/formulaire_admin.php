@@ -208,19 +208,6 @@ function admin_stats($id, $id_type, $var_preview)
 	) {
 		$row = sql_fetsel("visites, popularite", "spip_articles", "id_article=$id_type AND statut='publie'");
 
-		// compter les visites pas encore terminees (lent)
-		if (_request('var_stats'))
-		foreach(preg_files(sous_repertoire(_DIR_TMP, 'visites'), '.*') as $v) {
-			if (lire_fichier($v, $tmp) AND $tmp = @unserialize($tmp))
-				foreach (array_keys($tmp) as $k) {
-					$k = explode("\t", $k);
-					if ($k[0] == $id AND $k[1] == $id_type) {
-						$row['visites'] ++;
-						$row['popularite'] ++;
-					}
-				}
-		}
-
 		if ($row) {
 			return array(intval($row['visites']),
 			       ceil($row['popularite']),
