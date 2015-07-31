@@ -119,8 +119,7 @@ function marquer_doublons_documents($champs,$id,$id_table_objet,$table_objet){
 		// on repasse par une requete sur spip_documents pour verifier que les documents existent bien !
 		$in_liste = calcul_mysql_in('id_document',
 			$GLOBALS['doublons_documents_inclus']);
-		$res = spip_query("SELECT id_document FROM spip_documents WHERE "
-			. $in_liste);
+		$res = sql_select("id_document", "spip_documents", $in_liste);
 		while ($row = sql_fetch($res)) {
 			spip_query("UPDATE spip_documents_$table_objet SET vu='oui' WHERE $id_table_objet=$id AND id_document=" . $row['id_document']);
 		}
