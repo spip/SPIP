@@ -5,10 +5,9 @@
 if (defined("_ECRIRE_INC_MAJBASE")) return;
 define("_ECRIRE_INC_MAJBASE", "1");
 
-include_ecrire('inc_meta.php3');
-
 function maj_version ($version, $test = true) {
 	if ($test) {
+		include_ecrire('inc_meta.php3');
 		ecrire_meta('version_installee', $version);
 		ecrire_metas();
 		spip_log("mise a jour de la base vers $version");
@@ -36,6 +35,7 @@ function maj_base() {
 	//
 	// $version_installee = 1.702; quand on a besoin de forcer une MAJ
 	if (!$version_installee) {
+		include_ecrire('inc_meta.php3');
 		ecrire_meta('version_installee', $spip_version);
 		ecrire_metas();
 		return true;
