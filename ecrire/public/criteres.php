@@ -160,7 +160,7 @@ function critere_pagination_dist($idb, &$boucles, $crit){
 		."\t".'$debut_boucle = intval($debut_boucle)';
 
 	$boucle->hash .= '
-	$command[\'pagination\'] = array($Pile[0]['.$debut.'], ' . $pas . ');';
+	$command[\'pagination\'] = array((isset($Pile[0]['.$debut.']) ? $Pile[0]['.$debut.'] : null), ' . $pas . ');';
 
 	$boucle->total_parties = $pas;
 	calculer_parties($boucles, $idb, $partie, 'p+');

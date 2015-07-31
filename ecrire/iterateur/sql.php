@@ -34,6 +34,20 @@ class IterateurSQL implements Iterator {
 	protected $firstseek = false;
 
 	/**
+	 * Erreur presente ? 
+	 *
+	 * @var bool
+	**/
+	public $err = false;
+
+	/**
+	 * Calcul du total des elements 
+	 *
+	 * @var int|null
+	**/
+	public $total = null;
+
+	/**
 	 * selectionner les donnees, ie faire la requete SQL
 	 * @return void
 	 */
