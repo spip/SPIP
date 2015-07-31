@@ -203,7 +203,7 @@ function analyser_backend($rss, $url_syndic='') {
 		# ou <media:category> (flickr)
 		# ou <itunes:category> (apple)
 		# on cree nos tags microformat <a rel="directory" href="url">titre</a>
-		# http://microformats.org/wiki/rel-directory
+		# http://microformats.org/wiki/rel-directory-fr
 		$tags = array();
 		if (preg_match_all(
 		',<(([a-z]+:)?(subject|category|directory|keywords?|tags?|type))[^>]*>'
