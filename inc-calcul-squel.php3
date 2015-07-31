@@ -65,8 +65,9 @@ function parser_boucle($texte, $id_parent) {
 
 	if (!ereg("^(<BOUCLE([0-9]+|[-_][-_.a-zA-Z0-9]*)[[:space:]]*(\([^)]*\)([[:space:]]*\{[^}]*\})*)[[:space:]]*>)", $milieu, $match)) {
 		include_ecrire ("inc_presentation.php3");
-		install_debut_html("Syntaxe boucle incorrecte");
-		echo '<p>La boucle ' . entites_html($milieu) . ' est incorrecte.';
+		install_debut_html(_T('erreur_boucle_syntaxe'));
+		$milieu = entites_html($milieu);
+		echo '<p>'._T('erreur_boucle_syntaxe2', array('milieu' => $milieu));
 		install_fin_html();
 		exit;
 	}
@@ -90,7 +91,13 @@ function parser_boucle($texte, $id_parent) {
 	$milieu = substr($milieu, strlen($commande));
 	$s = "</BOUCLE$id_boucle>";
 	$p = strpos($milieu, $s);
-	if ((!$p) && (substr($milieu, 0, strlen($s)) != $s)) die("<h2>BOUCLE$id_boucle: tag fermant manquant</h2>");
+	if ((!$p) && (substr($milieu, 0, strlen($s)) != $s)) {
+		include_ecrire ("inc_presentation.php3");
+		install_debut_html(_T('erreur_boucle_syntaxe'));
+		echo '<p>'._T('erreur_boucle_fermant', array('id'=>$id_boucle));
+		install_fin_html();
+		exit;
+	}
 
 	$fin = substr($milieu, $p + strlen($s));
 	$milieu = substr($milieu, 0, $p);
@@ -777,7 +784,14 @@ function parser_texte($texte, $id_boucle) {
 			$i++;
 			if (!$boucles[$boucle->id_boucle])
 				$boucles[$boucle->id_boucle] = $boucle;
-			else die ('<h2>BOUCLE'.$boucle->id_boucle.': double definition</h2>');
+			else {
+				include_ecrire ("inc_presentation.php3");
+				install_debut_html(_T('erreur_boucle_syntaxe'));
+				$id = $boucle->id_boucle;
+				echo '<p>'._T('erreur_boucle_double', array('id'=>$id));
+				install_fin_html();
+				exit;
+			}
 		}
 	}
 

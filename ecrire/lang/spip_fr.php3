@@ -308,8 +308,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_image' => 'Titre de l\'image&nbsp;:',
 'entree_titre_obligatoire' => '<B>Titre</B> [Obligatoire]<BR>',
 'entree_url' => 'L\'adresse (URL) de votre site',
+'erreur_boucle_double' => 'BOUCLE@id@: double d&eacute;finition',
+'erreur_boucle_fermant' => 'BOUCLE@id@: tag fermant manquant',
+'erreur_boucle_syntaxe' => 'Syntaxe boucle incorrecte',
+'erreur_boucle_syntaxe2' => 'La boucle @milieu@ est incorrecte.',
 'erreur_filtre' => 'Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
-
 
 // F
 'form_deja_inscrit' => 'Vous &ecirc;tes d&eacute;j&agrave; inscrit.',
