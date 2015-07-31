@@ -1,0 +1,126 @@
+<traduction module="spip" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://trac.rezo.net/spip/spip/ecrire/lang/" reference="fr">
+	<langue code="ar">
+		<traducteur nom="kandalaft" />
+	</langue>
+	<langue code="ast">
+		<traducteur nom="xuacu" />
+	</langue>
+	<langue code="ay">
+		<traducteur nom="gaspard" />
+	</langue>
+	<langue code="bg" />
+	<langue code="br" />
+	<langue code="bs" />
+	<langue code="ca">
+		<traducteur nom="merce" />
+	</langue>
+	<langue code="co" />
+	<langue code="cpf" />
+	<langue code="cpf_hat" />
+	<langue code="cs" />
+	<langue code="da" />
+	<langue code="de">
+		<traducteur nom="klaus" />
+	</langue>
+	<langue code="el">
+		<traducteur nom="yann7" />
+	</langue>
+	<langue code="en">
+		<traducteur nom="squonk" />
+		<traducteur nom="paolo2" />
+		<traducteur nom="filou" />
+		<traducteur nom="kandalaft" />
+		<traducteur nom="jaro" />
+	</langue>
+	<langue code="en_hx" />
+	<langue code="eo" />
+	<langue code="es">
+		<traducteur nom="severo" />
+	</langue>
+	<langue code="eu">
+		<traducteur nom="otalazt" />
+	</langue>
+	<langue code="fa">
+		<traducteur nom="davood" />
+	</langue>
+	<langue code="fi" />
+	<langue code="fon" />
+	<langue code="fr_tu">
+		<traducteur nom="beatnick" />
+		<traducteur nom="orlammd" />
+	</langue>
+	<langue code="gl">
+		<traducteur nom="webmaster3" />
+		<traducteur nom="berio" />
+	</langue>
+	<langue code="hac">
+		<traducteur nom="akomarani" />
+	</langue>
+	<langue code="he" />
+	<langue code="hr">
+		<traducteur nom="alex6" />
+	</langue>
+	<langue code="hu" />
+	<langue code="id" />
+	<langue code="is" />
+	<langue code="it">
+		<traducteur nom="renatoformato" />
+	</langue>
+	<langue code="it_fem" />
+	<langue code="ja">
+		<traducteur nom="renatoformato" />
+		<traducteur nom="jtt777" />
+	</langue>
+	<langue code="km" />
+	<langue code="la" />
+	<langue code="lb" />
+	<langue code="lt" />
+	<langue code="my" />
+	<langue code="nap" />
+	<langue code="nb" />
+	<langue code="ne" />
+	<langue code="nl">
+		<traducteur nom="michelpossoz" />
+	</langue>
+	<langue code="no" />
+	<langue code="oc_auv" />
+	<langue code="oc_gsc" />
+	<langue code="oc_lms" />
+	<langue code="oc_lnc" />
+	<langue code="oc_ni" />
+	<langue code="oc_ni_la" />
+	<langue code="oc_prv" />
+	<langue code="oc_va" />
+	<langue code="pl">
+		<traducteur nom="dpaszkiewicz" />
+	</langue>
+	<langue code="pt">
+		<traducteur nom="fernando" />
+	</langue>
+	<langue code="pt_br">
+		<traducteur nom="rporto" />
+		<traducteur nom="joao1315" />
+	</langue>
+	<langue code="ro">
+		<traducteur nom="vmurariu" />
+	</langue>
+	<langue code="roa" />
+	<langue code="ru">
+		<traducteur nom="papa_troll" />
+	</langue>
+	<langue code="sk">
+		<traducteur nom="jaro" />
+	</langue>
+	<langue code="sq">
+		<traducteur nom="minijack" />
+	</langue>
+	<langue code="sv" />
+	<langue code="tr" />
+	<langue code="vi" />
+	<langue code="wo">
+		<traducteur nom="usmaanfaati" />
+	</langue>
+	<langue code="zh">
+		<traducteur nom="jing_yan" />
+	</langue>
+</traduction>

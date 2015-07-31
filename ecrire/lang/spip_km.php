@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -539,7 +539,7 @@ sera ignorée) :
 'onglet_evolution_visite_mod' => 'ការវិវត្ត',
 'onglet_fonctions_avances' => 'មុខងារ កំរិតខ្ពស់',
 'onglet_informations_personnelles' => 'ពត៌មាន​ផ្ទាល់ខ្លួន',
-'onglet_interactivite' => 'អន្ដរ​កម្ម',
+'onglet_interactivite' => 'អន្ដរកម្ម',
 'onglet_messagerie' => 'បញ្ញើសារ',
 'onglet_repartition_rubrique' => 'បំណែងចែក តាមមាតិកា',
 'onglet_save_restaur_base' => 'បង្កើតច្បាប់ចំលង/​ធ្វើអោយដូចដើម ឃ្លាំង​ទិន្នន័យ',

@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -50,10 +50,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_e_accent_aigu' => 'Wstaw dużą literę E z akcentem acute',
 'barre_eo' => 'Wstaw ligaturę oe',
 'barre_eo_maj' => 'Wstaw dużą ligaturę EO',
-'barre_euro' => 'Umie&#347;&#263; symbol &euro;€',
+'barre_euro' => 'Umieść symbol €€',
 'barre_gras' => 'Wstaw w {{boldzie}}',
 'barre_guillemets' => 'Umieść w "cudzysłowie"',
-'barre_guillemets_simples' => 'Umie&#347;&#263; w innym “cudzys&#322;owie”',
+'barre_guillemets_simples' => 'Umieść w innym “cudzysłowie”',
 'barre_intertitre' => 'Przekształć w {{{śródtytuł}}}',
 'barre_italic' => 'Wstaw w {italiku}',
 'barre_lien' => 'Zmień w [hiperłącze->http://...]',

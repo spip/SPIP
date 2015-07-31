@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_euro' => 'Insertar el símbolo €',
 'barre_gras' => 'Poner en {{negrita}}',
 'barre_guillemets' => 'Poner entre «comillas»',
-'barre_guillemets_simples' => 'Poner entre &#147;comillas de segundo nivel”',
+'barre_guillemets_simples' => 'Poner entre comillas de segundo nivel”',
 'barre_intertitre' => 'Transformar en {{{inter-título}}}',
 'barre_italic' => 'Poner en {cursiva}',
 'barre_lien' => 'Transformar en [enlace hipertexto->http://...]',
