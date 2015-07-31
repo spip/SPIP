@@ -186,9 +186,9 @@ if ($options == "avancees") {
 	if ($connect_statut == "0minirezo") {
 		icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.gif","rien.gif");
 	}
-	if ($activer_message != "non") {
+/*	if ($activer_message != "non") {
 		icone_horizontale("Votre messagerie interne", "messagerie.php3", "messagerie-24.gif","rien.gif");
-	}
+	}*/
 	if ($connect_statut == "0minirezo") {
 		echo "<p>";
 		icone_horizontale("Statistiques du site", "statistiques_visites.php3", "statistiques-24.gif","rien.gif");
