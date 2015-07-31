@@ -138,3 +138,10 @@ a.icone26:hover {
 a.icone26 img {
 	vertical-align: middle;
 }
+
+
+/* Cadre */
+
+div.cadre-padding {
+	overflow: hidden;
+}
