@@ -1,0 +1,40 @@
+#CACHE{0}
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+
+h2.titrem { display: block; padding-top: 6px; padding-bottom: 4px; background-repeat: no-repeat;padding-[(#GET{left})]:16px;background-color: #GET{claire};font-size:14px;}
+
+
+/* listes */
+.liste_items {list-style:none;margin:1em 0;padding:0;border-top:1px solid #ddd;clear:both;}
+.liste_items li.item {border-bottom:1px solid #ddd;padding:0.4em 0; font-size: 10px;}
+.liste_items li.item:hover {background-color:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];}
+.liste_items li.court:hover {background-color:#eee;}
+.liste_items li.item.on {background-color:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];font-weight:normal;}
+.liste_items li.item.on:hover {background-color:[#(#GET{claire}|couleur_eclaircir)];}
+
+.pagination {background:#eee;border-top:1px solid #ddd;border-bottom:1px solid #ddd; margin: 0;padding:2px 0; font-size: 0.9em; font-weight: bold; text-align: right; white-space: nowrap; }
+.pagination .on { background:#ccc;padding:2px 3px;color:#fff; }
+
+.clicable {cursor:hand;cursor:pointer;}
+
+[(#INCLURE{fond=#VAL{prive/}|tous_les_fonds{/style_prive_plugin_}}{couleur_claire}{couleur_foncee}{lang}{ltr})]
