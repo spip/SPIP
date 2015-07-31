@@ -19,7 +19,7 @@ function action_iconifier_dist()
 	$var_f = charger_fonction('controler_action_auteur', 'inc');
 	$var_f();
 	$arg = _request('arg');
-  $iframe_redirect = _request('iframe_redirect');
+	$iframe_redirect = _request('iframe_redirect');
 
 	$arg = rawurldecode($arg);
 	if (!preg_match(',^\d*(\D)(.*)$,',$arg, $r))
@@ -76,12 +76,11 @@ function action_spip_image_ajouter_dist($arg) {
 	if (!$source)
 		spip_log("pb de copie pour $f");
 	else {
-
 		$size = @getimagesize($f);
-		$type = decoder_type_image($size[2], true);
-
+		$type = !$size ? '': ($size[2] > 3 ? '' : $formats_logos[$size[2]-1]);
 		if ($type) {
 			$poids = filesize($f);
+
 			if (_LOGO_MAX_SIZE > 0
 			AND $poids > _LOGO_MAX_SIZE*1024) {
 				@unlink ($f);
