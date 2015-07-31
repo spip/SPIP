@@ -558,6 +558,17 @@ function autoriser_base_reparer_dist($faire, $type, $id, $qui, $opts) {
 	return true;
 }
 
+// Autorisations pour les onglets de la page auteur
+function autoriser_infosperso_onglet_dist($faire,$quoi,$id,$qui,$opts) {
+	return true;
+}
+function autoriser_configurerlangage_onglet_dist($faire,$quoi,$id,$qui,$opts) {
+	return true;
+}
+function autoriser_configurerpreference_onglet_dist($faire,$quoi,$id,$qui,$opts) {
+	return true;
+}
+
 function autoriser_articles_bouton_dist($faire, $type, $id, $qui, $opts){return true;}
 function autoriser_rubriques_bouton_dist($faire, $type, $id, $qui, $opts){return true;}
 
