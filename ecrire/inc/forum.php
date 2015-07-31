@@ -28,7 +28,7 @@ function affiche_navigation_forum($script, $args, $debut, $i, $pack, $ancre, $qu
 				$nav .= "<font size=3><b>$i</b></font> |\n";
 			else {
 				$h = generer_url_ecrire($script, $args . "&debut=$i", $evt);
-				if ($evt) $evt = "\nonclick='return !AjaxSqueeze(\"$h\",\n\t\"$ancre\")'";
+				if ($evt) $evt = "\nonclick='return AjaxSqueeze(\"$h\",\n\t\"$ancre\")'";
 				$nav .= "<a href='$h'$evt>$i</a> |\n";
 			}
 		}
@@ -37,7 +37,7 @@ function affiche_navigation_forum($script, $args, $debut, $i, $pack, $ancre, $qu
 
 	$h = generer_url_ecrire($script, $args . "&debut=$i");
 
-	if ($evt) $evt = "\nonclick='return !AjaxSqueeze(\"$h\",\n\t\"$ancre\")'";
+	if ($evt) $evt = "\nonclick='return AjaxSqueeze(\"$h\",\n\t\"$ancre\")'";
 
 	return "$nav<a href='$h'$evt>...</a> |";
 }

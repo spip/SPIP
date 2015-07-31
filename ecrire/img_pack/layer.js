@@ -194,7 +194,7 @@ function AjaxSqueeze(trig, id, f)
 {
 	var i, s, g;
 	var u = '';
-	
+
 	// position du demandeur dans le DOM (le donner direct serait mieux)
 	var noeud = document.getElementById(id);
 	if (!noeud) return true;
@@ -210,7 +210,7 @@ function AjaxSqueeze(trig, id, f)
 	if (!f) f = function(r) { noeud.innerHTML = r;}
 
 	if (typeof(trig) == 'string') {
-		return ajah('GET', trig+'&var_ajaxcharset=utf-8', null, f);
+		return !ajah('GET', trig+'&var_ajaxcharset=utf-8', null, f);
 	}
 
 	for (i=0;i < trig.elements.length;i++) {
