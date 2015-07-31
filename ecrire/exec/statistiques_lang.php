@@ -93,7 +93,7 @@ function statistiques_lang_ok()
 				}
 	
 				echo "\n<tr style='background-color: $couleur'>";
-				$dir=lang_dir($lang,'',' dir=rtl');
+				$dir=lang_dir($lang,'',' dir="rtl"');
 				echo "<td style='width: 100%; border-bottom: 1px solid #cccccc;'><span class='verdana2'$dir><span style='float: $spip_lang_right;'>$pourcent%</span>".traduire_nom_langue($lang)."</span></td>";
 				
 				echo "<td style='border-bottom: 1px solid #cccccc;'>";

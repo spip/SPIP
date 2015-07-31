@@ -54,7 +54,7 @@ function fichier_aide($lang_aide = '') {
 	global $help_server;
 
 	if (!$lang_aide) $lang_aide = $GLOBALS['spip_lang'];
-	$fichier_aide = _DIR_CACHE . "aide-$lang_aide-aide.html";
+	$fichier_aide = _DIR_AIDE . "$lang_aide-aide.html";
 	$lastm = @filemtime($fichier_aide);
 	$lastversion = @filemtime(_DIR_RESTREINT . 'inc_version.php');
 
@@ -68,6 +68,7 @@ function fichier_aide($lang_aide = '') {
 			include_spip('inc/distant');
 			if ($contenu = recuperer_page("$help_server/$lang_aide-aide.html")) {
 			  // mettre en cache (tant pis si on peut pas)
+			  sous_repertoire(_DIR_AIDE,'','',true);
 				ecrire_fichier ($fichier_aide, $contenu);
 				$lastm = time();
 			}
@@ -223,17 +224,18 @@ function help_img($regs) {
 	if ($rep=="IMG" AND $lang=="cache"
 	AND @file_exists($img_tex = _DIR_VAR.'cache-TeX/'.preg_replace(',^TeX-,', '', $file))) {
           readfile($img_tex);
-	} else if (@file_exists($img = _DIR_CACHE . 'aide-'.$cache)) {
+	} else if (@file_exists($img = _DIR_AIDE . $cache)) {
 		readfile($img);
 	} else if (@file_exists($img = _DIR_RACINE . 'AIDE/aide-'.$cache)) {
 		readfile($img);
 	} else if ($help_server) {
 		include_spip('inc/distant');
-		if (ecrire_fichier(_DIR_CACHE . 'aide-test', "test")
+		sous_repertoire(_DIR_AIDE,'','',true);
+		if (ecrire_fichier(_DIR_AIDE . "test")
 		AND ($contenu =
 		recuperer_page("$help_server/$rep/$lang/$file"))) {
 			echo $contenu;
-			ecrire_fichier (_DIR_CACHE . 'aide-'.$cache, $contenu);
+			ecrire_fichier (_DIR_AIDE . $cache, $contenu);
 		} else
 			redirige_par_entete("$help_server/$rep/$lang/$file");
 	}
