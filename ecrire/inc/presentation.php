@@ -457,7 +457,6 @@ function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, 
 	if ($titre) $res .= "\n<div style='height: 12px;'></div>";
 	$res .= "\n<div class='liste'>";
 	$res .= bandeau_titre_boite2($titre, $icone, $fg, $bg, false);
-	$res .= "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
 	if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
 
 	$deb_aff = intval(_request($tmp_var));
@@ -475,11 +474,12 @@ function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, 
 		$table[]= $skel($row, $tous_id, $voir_logo, $own);
 	}
 	spip_free_result($result);
-		
-	$res .= afficher_liste($largeurs, $table, $styles);
-	$res .= "</table>";
-	$res .= "</div>\n";
-	return $res;
+
+	return $res
+	. "<table width='100%' cellpadding='2' cellspacing='0' border='0'>"
+	. afficher_liste($largeurs, $table, $styles)
+	. "</table>"
+	. "</div>\n";
 }
 
 
