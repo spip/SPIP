@@ -2693,6 +2693,13 @@ function boutonne($t, $n, $v, $a='') {
 	. " value=\"$v\" $a />";
 }
 
+// retourne la premiere balise du type demande
+// ex: [(#DESCRIPTIF|extraire_balise{img})]
+function extraire_balise($texte, $tag) {
+	if (preg_match(",<$tag\\s.*>,Uims", $texte, $regs))
+		return $regs[0];
+}
+
 // construit une balise textarea avec la barre de raccourcis std de Spip.
 // ATTENTION: cette barre injecte un script JS que le squelette doit accepter
 // donc ce filtre doit IMPERATIVEMENT assurer la securite a sa place
