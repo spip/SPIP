@@ -409,7 +409,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		$block = "document $id_document";
 
 		echo debut_block_invisible($block);
-		echo "<p></p><div style='border: 1px dashed #666666; padding: 0px; background-color: #f0f0f0;'>";	
+		echo "<p></p><div style='border: 1px solid #666666; padding: 0px; background-color: #f0f0f0;'>";	
 
 		echo "<div style='padding: 5px;'>";	
 		if (strlen($descriptif)>0) echo propre($descriptif)."<br>";
@@ -767,7 +767,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			echo "<div align=center>&lt;doc$id_document&gt;</div>\n";
 			echo "</font></div>";
 		}
-		echo "<div style='border: 1px dashed #666666; padding: 0px; background-color: #f0f0f0;'>";	
+		echo "<div style='border: 1px solid #666666; padding: 0px; background-color: #f0f0f0;'>";	
 			
 			
 			

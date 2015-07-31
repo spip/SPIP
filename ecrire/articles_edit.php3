@@ -47,7 +47,7 @@ if ($id_article) {
 		        $annee_redac = $regs[1];
 		        if ($annee_redac > 4000) $annee_redac -= 9000;
 		}
-
+		
 		$query = "SELECT * FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur";
 		$result_auteur = spip_query($query);
 		$flag_auteur = (mysql_num_rows($result_auteur) > 0);
