@@ -201,7 +201,7 @@ function init_codes_langues() {
 	'cpf_dom' => "Krey&ograve;l",
 	'cpf_hat' => "Krey&ograve;l ayisyen",
 	'cs' => "&#269;e&#353;tina",
-	'cy' => "Welsh",
+	'cy' => "Cymraeg",	# welsh, gallois
 	'da' => "dansk",
 	'de' => "Deutsch",
 	'dz' => "Bhutani",
@@ -214,7 +214,7 @@ function init_codes_langues() {
 	'et' => "eesti",
 	'eu' => "euskara",
 	'fa' => "&#1601;&#1575;&#1585;&#1587;&#1609;",
-	'ff' => "Fulah", /* Peul */
+	'ff' => "Fulah", // peul
 	'fi' => "suomi",
 	'fj' => "Fiji",
 	'fo' => "f&#248;royskt",
@@ -337,7 +337,7 @@ function init_codes_langues() {
 	'wo' => "Wolof",
 	'xh' => "Xhosa",
 	'yi' => "Yiddish",
-	'yor' => "Yoruba",
+	'yo' => "Yoruba",
 	'za' => "Zhuang",
 	'zh' => "&#20013;&#25991;",
 	'zu' => "Zulu");
