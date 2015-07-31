@@ -266,11 +266,10 @@ function supprimer_dico_ortho($mot, $lang) {
 
 // http://doc.spip.org/@gerer_dico_ortho
 function gerer_dico_ortho($lang) {
-	global $ajout_ortho, $supp_ortho;
-	if ($mot = strval($ajout_ortho)) {
+	if ($mot = strval(_request('ajout_ortho'))) {
 		ajouter_dico_ortho($mot, $lang);
 	}
-	if ($mot = strval($supp_ortho)) {
+	if ($mot = strval(_request('supp_ortho'))) {
 		supprimer_dico_ortho($mot, $lang);
 	}
 }
@@ -571,7 +570,7 @@ function panneau_ortho($ortho_result) {
 		$panneau .= "<br />";
 		$lien = parametre_url(self(), 'ajout_ortho', '');
 		$lien = parametre_url($lien, 'supp_ortho', $mot);
-		$panneau .= icone_horizontale(_T('ortho_supprimer_ce_mot'), $lien, "ortho-24.gif", "supprimer.gif");
+		$panneau .= icone_horizontale(_T('ortho_supprimer_ce_mot'), $lien, "ortho-24.gif", "supprimer.gif", false);
 		$panneau .= "</div>\n";
 		$panneau .= "</div>\n";
 	}
