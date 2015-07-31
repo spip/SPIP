@@ -454,7 +454,7 @@ function aide_index_dist()
 global $img, $frame, $aide, $var_lang, $lang;
 // Eviter les calculs evitables (surtout en client/serveur sans cache !)
 
-if (http_last_modified(filemtime(http_php_scriptnq("aide_index","")), time() + 24 * 3600))
+ if (http_last_modified(filemtime("aide_index" . _EXTENSION_PHP), time() + 24 * 3600))
   exit;
 
 // Recuperer les infos de langue (preferences auteur), si possible

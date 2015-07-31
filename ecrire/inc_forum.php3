@@ -22,10 +22,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref, $forum_ip) {
 	$controle = '';
 
-	$link = new Link();
-	$link = $link->geturl() . "#id$id_forum";
-	$ulink = urlencode($link);
-	$action = "iframe_action.php3?action=forum_admin&amp;id=$id_forum";
 
 	// selection du logo et des boutons correspondant a l'etat du forum
 	switch ($forum_stat) {
@@ -88,26 +84,31 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			return;
 	}
 
+	$link = new Link();
+	$link = $link->geturl() . "#id$id_forum";
+	$ulink = urlencode($link);
+
 	if ($supprimer)
 		$controle .= icone(_T('icone_supprimer_message'), 
-			$action ."&amp;statut=$supprimer&amp;redirect=$ulink",
+				   http_php_scriptnq('iframe_action', "action=forum_admin&id=$id_forum&statut=$supprimer&redirect=$ulink"),
 			$logo,
 			"supprimer.gif", 'right', 'non');
 
 	if ($valider)
 		$controle .= icone(_T('icone_valider_message'), 
-			$action ."&amp;statut=$valider&amp;redirect=$ulink",
+				   http_php_scriptnq('iframe_action', "action=forum_admin&id=$id_forum&statut=$valider&redirect=$ulink"),
 			$logo,
 			"creer.gif", 'right', 'non');
 
 	if ($valider_repondre) {
 
-		$retour = urlencode("../forum.php3?$ref&id_forum=$id_forum&retour=" .
-			      urlencode(_DIR_RESTREINT_ABS . $link));
 		$controle .= icone(_T('icone_valider_message') 
 				   . " &amp; " .
 				   _T('lien_repondre_message'),
-				   $action ."&amp;statut=$valider&amp;redirect=$retour",
+				   http_php_scriptnq('iframe_action',
+						     "action=forum_admin&id=$id_forum&statut=$valider&redirect=", 
+						     "../forum",
+						     "$ref&id_forum=$id_forum&retour=" . urlencode(_DIR_RESTREINT_ABS . $link)),
 				   $logo,
 				   "creer.gif", 'right', 'non');
 	}
