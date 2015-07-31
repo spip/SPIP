@@ -8,7 +8,7 @@ include_ecrire ("inc_session.php3");
 if ($url)
 	$cible = new Link($url);
 else
-	$cible = new Link('ecrire/index.php3');
+	$cible = new Link('ecrire/');
 
 // rejoue le cookie pour renouveler spip_session
 if ($change_session == 'oui') {
