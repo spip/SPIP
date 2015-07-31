@@ -1194,7 +1194,9 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	if (_FILE_CONNECT) verifier_visiteur();
 
 	# nombre de pixels maxi pour calcul de la vignette avec gd
-	define('_IMG_GD_MAX_PIXELS', isset($GLOBALS['meta']['max_taille_vignettes'])?$GLOBALS['meta']['max_taille_vignettes']:0);
+	# au dela de 5500000 on considere que php n'est pas limite en memoire pour cette operation
+	# les configurations limitees en memoire ont un seuil plutot vers 1MPixel
+	define('_IMG_GD_MAX_PIXELS', (isset($GLOBALS['meta']['max_taille_vignettes'])&&$GLOBALS['meta']['max_taille_vignettes']<5500000)?$GLOBALS['meta']['max_taille_vignettes']:0);
 	define('_IMG_GD_QUALITE', 85);
 }
 
