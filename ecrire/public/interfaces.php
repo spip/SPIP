@@ -155,6 +155,13 @@ class Polyglotte {
 	var $ligne = 0;
 }
 
+class Contexte {
+	var $descr = array();
+	var $id_boucle = '';
+	var $ligne = 0;
+	var $lang = '';
+}
+
 global $table_criteres_infixes;
 $table_criteres_infixes = array('<', '>', '<=', '>=', '==', '===', '!=', '!==', '<>',  '?');
 

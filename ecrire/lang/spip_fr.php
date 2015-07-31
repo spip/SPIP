@@ -750,7 +750,7 @@ et vous reconnecter au site.
 'zbug_boucle_recursive_undef' => 'Boucle r&eacute;cursive non d&eacute;finie&nbsp;: @nom@',
 'zbug_calcul' => 'calcul',
 'zbug_champ_hors_boucle' => 'Champ @champ@ hors boucle',
-'zbug_champ_hors_motif' => 'Champ @champ@ hors d\'une boucle de motif @motif@',
+'zbug_champ_hors_motif' => 'Champ @champ@ hors d\'un contexte @motif@',
 'zbug_code' => 'code',
 'zbug_critere_inconnu' => 'Crit&egrave;re inconnu @critere@',
 'zbug_distant_interdit' => 'Externe interdit', # Contexte : une base de donn&eacute;es "externe", pas g&eacute;r&eacute;e par SPIP, mais que SPIP 1.8 sait utiliser dans ses boucles -- seul probl&egrave;mes certaines manipulations sont interdites sur ces bases-l&agrave;.
