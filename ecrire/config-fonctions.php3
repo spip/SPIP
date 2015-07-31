@@ -207,7 +207,7 @@ if ($options == 'avancees') {
 		echo "</TD></TR>";
 
 		echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='center'>";
-		echo "<INPUT TYPE='text' NAME='test_proxy' VALUE='http://rezo.net/spip-dev/' size='40' class='forml'>";
+		echo "<INPUT TYPE='text' NAME='test_proxy' VALUE='http://www.spip.net/' size='40' class='forml'>";
 		echo "</TD></TR>";
 
 		echo "<TR><td style='text-align:$spip_lang_right;'>";

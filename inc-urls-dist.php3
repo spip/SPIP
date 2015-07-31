@@ -6,7 +6,7 @@
 
 // Pour selectionner un autre type d'urls :
 // 1- preparez votre serveur de maniere a ce qu'il active spip pour les
-//     URLs en question, cf. http://www.uzine.net/article765.html
+//     URLs en question, cf. http://www.spip.net/fr_article765.html
 // 2- modifiez la ligne ci-dessous
 //    (par exemple "html" pour des URLs en /article1.html)
 // 3- renommez ce fichier "inc-urls.php3" pour ne pas risquer de
