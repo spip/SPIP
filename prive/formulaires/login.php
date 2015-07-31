@@ -10,10 +10,24 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion du formulaire d'identification / de connexion à SPIP
+ *
+ * @package SPIP\Core\Formulaires
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('base/abstract_sql');
 
+/**
+ * Teste si une URL est une URL de l'espace privé (administration de SPIP)
+ * ou de l'espace public
+ *
+ * @param string $cible URL
+ * @return bool
+ *     true si espace privé, false sinon.
+**/
 function is_url_prive($cible){
 	include_spip('inc/filtres_mini');
 	$path = parse_url(tester_url_absolue($cible)?$cible:url_absolue($cible));
@@ -21,6 +35,27 @@ function is_url_prive($cible){
 	return strncmp(substr($path,-strlen(_DIR_RESTREINT_ABS)), _DIR_RESTREINT_ABS, strlen(_DIR_RESTREINT_ABS))==0;
 }
 
+/**
+ * Chargement du formulaire de login
+ *
+ * Si on est déjà connecté, on redirige directement sur l'URL cible !
+ *
+ * @use auth_informer_login()
+ * @use is_url_prive()
+ * @use login_auth_http()
+ * 
+ * @param string $cible
+ *     URL de destination après identification.
+ *     Cas spécifique : la valeur `@page_auteur` permet d'être redirigé
+ *     après connexion sur le squelette public de l'auteur qui se connecte.
+ * @param string $login
+ *     Login de la personne à identifier (si connu)
+ * @param null|bool
+ *     Identifier pour l'espace privé (true), public (false)
+ *     ou automatiquement (null) en fonction de la destination de l'URL cible.
+ * @return array
+ *     Environnement du formulaire
+**/
 function formulaires_login_charger_dist($cible="",$login="",$prive=null)
 {
 	$erreur = _request('var_erreur');
@@ -99,9 +134,16 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null)
 }
 
 
-// Gerer le cas ou un utilisateur ne souhaite pas de cookie
-// on propose alors un formulaire pour s'authentifier via http
-
+/**
+ * Identification via HTTP (si pas de cookie)
+ * 
+ * Gére le cas où un utilisateur ne souhaite pas de cookie :
+ * on propose alors un formulaire pour s'authentifier via http
+ * 
+ * @return string
+ *     - Si connection possible en HTTP : URL pour réaliser cette identification,
+ *     - chaîne vide sinon.
+**/
 function login_auth_http()
 {
 	if (!$GLOBALS['ignore_auth_http']
@@ -117,6 +159,27 @@ function login_auth_http()
 	else 	return '';
 }
 
+/**
+ * Vérifications du formulaire de login
+ *
+ * Connecte la personne si l'identification réussie.
+ * 
+ * @use auth_identifier_login()
+ * @use auth_loger()
+ * @use login_autoriser()
+ * 
+ * @param string $cible
+ *     URL de destination après identification.
+ *     Cas spécifique : la valeur `@page_auteur` permet d'être redirigé
+ *     après connexion sur le squelette public de l'auteur qui se connecte.
+ * @param string $login
+ *     Login de la personne à identifier (si connu)
+ * @param null|bool
+ *     Identifier pour l'espace privé (true), public (false)
+ *     ou automatiquement (null) en fonction de la destination de l'URL cible.
+ * @return array
+ *     Erreurs du formulaire
+**/
 function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 	
 	$session_login = _request('var_login');
@@ -160,6 +223,17 @@ function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 	?  login_autoriser() : array();
 }
 
+/**
+ * Teste l'autorisation d'accéder à l'espace privé une fois une connexion
+ * réussie, si la cible est une URL privée.
+ *
+ * Dans le cas contraire, un message d'erreur est retourné avec un lien
+ * pour se déconnecter.
+ *
+ * @return array
+ *     - Erreur si un connecté n'a pas le droit d'acceder à l'espace privé
+ *     - tableau vide sinon.
+**/
 function login_autoriser()
 {
 	include_spip('inc/autoriser');
@@ -175,6 +249,24 @@ function login_autoriser()
 	return array();
 }
 
+/**
+ * Traitements du formulaire de login
+ *
+ * On arrive ici une fois connecté.
+ * On redirige simplement sur l'URL cible désignée.
+ * 
+ * @param string $cible
+ *     URL de destination après identification.
+ *     Cas spécifique : la valeur `@page_auteur` permet d'être redirigé
+ *     après connexion sur le squelette public de l'auteur qui se connecte.
+ * @param string $login
+ *     Login de la personne à identifier (si connu)
+ * @param null|bool
+ *     Identifier pour l'espace privé (true), public (false)
+ *     ou automatiquement (null) en fonction de la destination de l'URL cible.
+ * @return array
+ *     Retours du traitement
+**/
 function formulaires_login_traiter_dist($cible="",$login="",$prive=null){
 	$res = array();
 	// Si on se connecte dans l'espace prive, 

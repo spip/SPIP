@@ -20,17 +20,18 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Inscrire un nouvel auteur sur la base de son nom et son email
- * L'email est utilise pour reperer si il existe deja ou non
- * => identifiant par defaut
+ * 
+ * L'email est utilisé pour repérer si il existe déjà ou non
+ * => identifiant par défaut
  *
  * @param string $statut
  * @param string $mail_complet
  * @param string $nom
  * @param array $options
- *   login : login precalcule
- *   id : id_rubrique fournit en second arg de #FORMULAIRE_INSCRIPTION
- *   from : email de l'envoyeur pour l'envoi du mail d'inscription
- *   force_nouveau : forcer le statut nouveau sur l'auteur inscrit, meme si il existait deja en base
+ *   - login : login precalcule
+ *   - id : id_rubrique fournit en second arg de #FORMULAIRE_INSCRIPTION
+ *   - from : email de l'envoyeur pour l'envoi du mail d'inscription
+ *   - force_nouveau : forcer le statut nouveau sur l'auteur inscrit, meme si il existait deja en base
  * @return array|string
  */
 function action_inscrire_auteur_dist($statut, $mail_complet, $nom, $options = array()){
@@ -94,21 +95,22 @@ function action_inscrire_auteur_dist($statut, $mail_complet, $nom, $options = ar
 
 
 /**
- * fonction qu'on peut redefinir pour filtrer les adresses mail et les noms,
- * et donner des infos supplementaires
- * Std: controler que le nom (qui sert a calculer le login) est plausible
- * et que l'adresse est valide. On les normalise au passage (trim etc).
- * Retour:
- * - si ok un tableau avec au minimum email, nom, mode (redac / forum)
- * - si ko une chaine de langue servant d'argument a  _T expliquant le refus
+ * Contrôler que le nom (qui sert à calculer le login) est plausible
+ * et que l'adresse courriel est valide.
  *
- * http://doc.spip.org/@test_inscription_dist
- *
+ * On les normalise au passage (trim etc).
+ * 
+ * On peut redéfinir cette fonction pour filtrer les adresses mail et les noms,
+ * et donner des infos supplémentaires
+ * 
  * @param string $statut
  * @param string $mail
  * @param string $nom
- * @param string $options
+ * @param array $options
  * @return array|string
+ *     - array : si ok, tableau avec au minimum email, nom, mode (redac / forum)
+ *     - string : si ko, chaîne de langue servant d'argument au filtre `_T` expliquant le refus
+ *
  */
 function test_inscription_dist($statut, $mail, $nom, $options) {
 	include_spip('inc/filtres');
@@ -130,8 +132,6 @@ function test_inscription_dist($statut, $mail, $nom, $options) {
  * On enregistre le demandeur comme 'nouveau', en memorisant le statut final
  * provisoirement dans le champ prefs, afin de ne pas visualiser les inactifs
  * A sa premiere connexion il obtiendra son statut final.
- *
- * http://doc.spip.org/@inscription_nouveau
  *
  * @param array $desc
  * @return mixed|string
@@ -205,8 +205,6 @@ function test_login($nom, $mail) {
  * fonction redefinissable qui doit retourner un tableau
  * dont les elements seront les arguments de inc_envoyer_mail
  *
- * http://doc.spip.org/@envoyer_inscription_dist
- *
  * @param array $desc
  * @param string $nom
  * @param string $mode
@@ -232,8 +230,6 @@ function envoyer_inscription_dist($desc, $nom, $mode, $options=array()) {
 /**
  * Creer un mot de passe initial aleatoire
  * 
- * http://doc.spip.org/@creer_pass_pour_auteur
- *
  * @param int $id_auteur
  * @return string
  */
@@ -286,8 +282,6 @@ function tester_statut_inscription($statut_tmp){
  * Le statut a ete memorise dans prefs (cf test_inscription_dist).
  * On le verifie, car la config a peut-etre change depuis,
  * et pour compatibilite avec les anciennes versions qui n'utilisaient pas "prefs".
- *
- * http://doc.spip.org/@acces_statut
  *
  * @param array $auteur
  * @return array

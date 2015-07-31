@@ -10,20 +10,52 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Ce fichier gère la balise dynamique `#FORMULAIRE_ECRIRE_AUTEUR`
+ * 
+ * @package SPIP\Core\Compilateur\Balises
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('base/abstract_sql');
 
-// On prend l'email dans le contexte de maniere a ne pas avoir a le
-// verifier dans la base ni a le devoiler au visiteur
-
-
-// http://doc.spip.org/@balise_FORMULAIRE_ECRIRE_AUTEUR
+/**
+ * Compile la balise dynamique `#FORMULAIRE_ECRIRE_AUTEUR` qui permet
+ * très logiquement d'afficher un formulaire pour écrire à un auteur
+ *
+ * Cette balise récupère l'id_auteur (et son email) ou l'id_article de
+ * la boucle AUTEURS ou ARTICLES englobante.
+ *
+ * Le ou les emails correspondants à l'auteur ou aux auteurs de l'article
+ * sont transmis au formulaire CVT (mais ils ne seront pas dévoilés
+ * au visiteur).
+ * 
+ * @balise FORMULAIRE_ECRIRE_AUTEUR
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée du code compilé
+**/
 function balise_FORMULAIRE_ECRIRE_AUTEUR ($p) {
 	return calculer_balise_dynamique($p,'FORMULAIRE_ECRIRE_AUTEUR', array('id_auteur', 'id_article', 'email'));
 }
 
-// http://doc.spip.org/@balise_FORMULAIRE_ECRIRE_AUTEUR_stat
+/**
+ * Calculs de paramètres de contexte automatiques pour la balise FORMULAIRE_ECRIRE_AUTEUR
+ *
+ * Retourne le contexte du formulaire uniquement si l'email de l'auteur
+ * est valide, sinon rien (pas d'exécution/affichage du formulaire)
+ * 
+ * @param array $args
+ *   Liste des arguments demandés obtenus du contexte (id_auteur, id_article, email)
+ * @param array $context_compil
+ *   Tableau d'informations sur la compilation
+ * @return array|string
+ *   - Liste (id_auteur, id_article, email) des paramètres du formulaire CVT
+ *   - chaîne vide sinon (erreur ou non affichage).
+ */
 function balise_FORMULAIRE_ECRIRE_AUTEUR_stat($args, $context_compil) {
 	include_spip('inc/filtres');
 	// Pas d'id_auteur ni d'id_article ? Erreur de contexte
