@@ -982,7 +982,7 @@ function calculer_critere_DEFAUT_args($idb, &$boucles, $crit, $args)
 		  $where = array("'?'", "(is_array($pred))", 
 				 critere_IN_cas ($idb, $boucles, 'COND', $arg, $op, array($pred), $col), 
 				 $where);
-		$where = array("'?'", "!$pred","''", $where);
+		$where = array("'?'", "!isset($pred)","''", $where);
 		if ($where_complement) // condition annexe du type "AND (objet='article')"
 			$where_complement = array("'?'", "!$pred","''", $where_complement);
 	}
