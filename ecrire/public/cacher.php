@@ -353,7 +353,9 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	// pour toutes les pages sans #CACHE{} hors modeles/ et espace privé
 	// qui sont a cache nul par defaut
 	if (!isset($GLOBALS['delais'])) {
-		define('_DUREE_CACHE_DEFAUT', 24*3600);
+		if (!defined('_DUREE_CACHE_DEFAUT')) {
+			define('_DUREE_CACHE_DEFAUT', 24*3600);
+		}
 		$GLOBALS['delais'] = _DUREE_CACHE_DEFAUT;
 	}
 
