@@ -35,7 +35,7 @@ else {
 }
 
 debut_page(_T('titre_page_statistiques_referers'), "suivi", "referers");
-echo "<br><br><br>";
+echo "<br /><br /><br />";
 
 	gros_titre(_T('titre_liens_entrants'));
 
@@ -75,7 +75,7 @@ barre_onglets("stat_referers", $jour);
  $result = spip_query("SELECT referer, visites_$jour AS vis FROM spip_referers WHERE visites_$jour>0 ORDER BY vis DESC LIMIT $limit");
 
  echo "<br /><div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'>";
- echo aff_referers ($result, $limit, generer_url_ecrire('statistiques_referers', ("jour=&jour&limit=" . strval($limit+200))));
+ echo aff_referers ($result, $limit, generer_url_ecrire('statistiques_referers', ("jour=$jour&limit=" . strval($limit+200))));
 
  echo "</div><br />";
 
