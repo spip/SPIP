@@ -498,7 +498,7 @@ function phraser_criteres($params, &$result) {
 				$not = "";
 			} else {
 				// Le debut du premier argument est l'operateur
-				preg_match("/^([!]?)([a-zA-Z][a-zA-Z0-9]*)[[:space:]]*(.*)$/ms", $param, $m);
+				preg_match("/^([!]?)([a-zA-Z][a-zA-Z0-9_]*)[[:space:]]*(.*)$/ms", $param, $m);
 				$op = $m[2];
 				$not = $m[1];
 				// virer le premier argument,
