@@ -85,6 +85,8 @@ function inc_import_1_3_dist($lecteur, $request, $gz=false, $trans=array()) {
 					$b[$p]= $desc['field'][$p];
 				if (isset($desc['field'][$p='id_groupe']))
 					$b[$p]= $desc['field'][$p];
+				if (isset($desc['field'][$p='id_parent']))
+					$b[$p]= $desc['field'][$p];
 				$p = $desc['key']["PRIMARY KEY"];
 				$b[$p] = $desc['field'][$p];
 				$desc['field'] = $b; 
