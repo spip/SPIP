@@ -80,7 +80,7 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 
 	// surcharge perso
 	if (@is_readable(_DIR_LANG .'perso.php3')) {
-	  include_lang('perso.php3');
+		include_lang('perso.php3');
 	}
 
 }
@@ -93,7 +93,7 @@ function changer_langue($lang) {
 
 	$liste_langues = $all_langs.','.lire_meta('langues_multilingue');
 
- 	if ($lang && ereg(",$lang,", ",$liste_langues,")) {
+	if ($lang && ereg(",$lang,", ",$liste_langues,")) {
 		$GLOBALS['spip_lang'] = $lang;
 
 		$spip_lang_rtl =   lang_dir($lang, '', '_rtl');
@@ -391,14 +391,14 @@ function changer_typo($lang = '', $source = '') {
 // selectionner une langue
 function lang_select ($lang='') {
 	global $pile_langues, $spip_lang;
-	php3_array_push($pile_langues, $spip_lang);
+	array_push($pile_langues, $spip_lang);
 	changer_langue($lang);
 }
 
 // revenir a la langue precedente
 function lang_dselect ($rien='') {
 	global $pile_langues;
-	changer_langue(php3_array_pop($pile_langues));
+	changer_langue(array_pop($pile_langues));
 }
 
 
@@ -592,53 +592,5 @@ function init_langues() {
 init_langues();
 utiliser_langue_site();
 
-
-//
-// array_push et array_pop pour php3 (a virer si on n'a pas besoin de la compatibilite php3
-// et a passer dans inc_version si on a besoin de ces fonctions ailleurs qu'ici)
-//
-/*
- * Avertissement : Cette librairie de fonctions PHP est distribuee avec l'espoir
- * qu'elle sera utile, mais elle l'est SANS AUCUNE GARANTIE; sans meme la garantie de
- * COMMERCIALISATION ou d'UTILITE POUR UN BUT QUELCONQUE.
- * Elle est librement redistribuable tant que la presente licence, ainsi que les credits des
- * auteurs respectifs de chaque fonctions sont laisses ensembles.
- * En aucun cas, Nexen.net ne pourra etre tenu responsable de quelques consequences que ce soit
- * de l'utilisation ou la mesutilisation de ces fonctions PHP.
- */
-/****
- * Titre : array_push() et array_pop() pour PHP3
- * Auteur : Cedric Fronteau
- * Email : charlie@nexen.net
- * Url :
- * Description : Implementation de array_push() et array_pop pour PHP3
-****/
-// Le code qui suit est encore un peu trop leger. Y a personne pour le coder en Java (ou en Flash) ?
-function php3_array_push(&$stack,$value){
-	if (!is_array($stack))
-		return FALSE;
-	end($stack);
-	do {
-		$k = key($stack);
-		if (is_long($k));
-			break;
-	} while(prev($stack));
-
-	if (is_long($k))
-		$stack[$k+1] = $value;
-	else
-		$stack[0] = $value;
-	return count($stack);
-}
-
-function php3_array_pop(&$stack){
-	if (!is_array($stack) || count($stack) == 0)
-		return NULL;
-	end($stack);
-	$v = current($stack);
-	$k = key($stack);
-	unset($stack[$k]);
-	return $v;
-}
 
 ?>
