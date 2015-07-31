@@ -1352,6 +1352,11 @@ function evaluer_fond ($fond, $contexte=array(), $options=array(), $connect=null
 		$fond = $contexte['fond'];
 
 	$page = inclure_page($fond, $contexte, $connect);
+	// Lever un drapeau (global) si le fond utilise #SESSION
+	// a destination de public/parametrer
+	if (isset($page['invalideurs'])
+	AND isset($page['invalideurs']['session']))
+		$GLOBALS['cache_utilise_session'] = $page['invalideurs']['session'];
 	if ($GLOBALS['flag_ob'] AND ($page['process_ins'] != 'html')) {
 		ob_start();
 		xml_hack($page, true);
