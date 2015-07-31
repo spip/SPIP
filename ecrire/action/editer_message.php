@@ -48,32 +48,27 @@ function action_editer_message_dist($arg=null) {
 // http://doc.spip.org/@action_editer_message_post_supprimer
 function action_editer_message_post_supprimer($id_message) {
 	sql_delete("spip_messages", "id_message=".sql_quote($id_message));
-	sql_delete("spip_auteurs_liens", "objet='message' AND id_message=".sql_quote($id_message));
-	pipeline('trig_supprimer_objets_lies',array(
-		array('type'=>'message','id'=>$id_message)
-	));
+	include_spip('action/editer_auteur');
+	auteur_dissocier('*', array('message'=>$id_message));
 }
 
 // http://doc.spip.org/@action_editer_message_post_vu
 function action_editer_message_post_vu($id_message, $id_auteur) {
-	sql_updateq("spip_auteurs_liens", array("vu" => 'oui'), "objet='message' AND id_objet=$id_message AND id_auteur=$id_auteur");
+	include_spip('action/editer_auteur');
+	auteur_qualifier($id_auteur,array('message'=>$id_message),array("vu" => 'oui'));
 
 }
 
 // http://doc.spip.org/@action_editer_message_post_retirer
 function action_editer_message_post_retirer($id_message, $id_auteur) {
-	sql_delete("spip_auteurs_liens", "objet='message' AND id_objet=$id_message AND id_auteur=$id_auteur");
+	include_spip('action/editer_auteur');
+	auteur_dissocier($id_auteur, array('message'=>$id_message));
 }
 
 // http://doc.spip.org/@action_editer_message_post_ajouter
 function action_editer_message_post_ajouter($id_message, $id_auteur) {
-	sql_delete("spip_auteurs_liens", "id_auteur=$id_auteur AND objet='message' AND id_objet=$id_message");
-	sql_insertq('spip_auteurs_liens',
-		   array('id_auteur' => $id_auteur,
-			 'id_objet' => $id_message,
-			 'objet'=>'message',
-			 'vu' =>'non'));
-
+	include_spip('action/editer_auteur');
+	auteur_associer($id_auteur, array('message'=>$id_message),array('vu'=>'non'));
 	// Ne pas notifier ici, car si on se trompe d'auteur, on veut avoir le temps
 	// de supprimer celui qu'on vient d'ajouter... c'est fait en cron
 }
@@ -145,19 +140,12 @@ function action_editer_message_post_nouveau($type, $dest='', $rv='')
 
 	$id_message = sql_insertq("spip_messages", $vals);
 
+	include_spip('action/editer_auteur');
+
 	if ($type != "affich"){
-		sql_insertq('spip_auteurs_liens',
-		   array('id_auteur' => $id_auteur,
-			 'id_objet' => $id_message,
-			 'objet' => 'message',
-			 'vu' =>'oui'));
-		if ($dest) {
-			sql_insertq('spip_auteurs_liens',
-				    array('id_auteur' => $dest,
-					  'id_objet' => $id_message,
-						'objet' => 'message',
-					  'vu' =>'non'));
-		}
+		auteur_associer($id_auteur, array('message'=>$id_message),array('vu'=>'oui'));
+		if ($dest)
+			auteur_associer($dest, array('message'=>$id_message),array('vu'=>'non'));
 	}
 
 	redirige_url_ecrire('message_edit', "id_message=$id_message&new=oui&dest=$dest");
