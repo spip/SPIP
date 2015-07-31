@@ -320,8 +320,6 @@ function maj_liens($pivot,$l='') {
 	}
 }
 
-//TODO : upgrades a activer
-/*
 $GLOBALS['maj'][17311] = array(
 	array('ecrire_meta',"multi_objets",implode(',',
 				 array_diff(
@@ -334,6 +332,9 @@ $GLOBALS['maj'][17311] = array(
 					 array('')
 				 ))),
 );
-*/
+$GLOBALS['maj'][17555] = array(
+	array('sql_alter',"TABLE spip_resultats ADD table_objet varchar(30) DEFAULT '' NOT NULL"),
+	array('sql_alter',"TABLE spip_resultats ADD serveur char(16) DEFAULT '' NOT NULL"),
+);
 
 ?>

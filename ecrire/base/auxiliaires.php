@@ -19,6 +19,8 @@ $spip_resultats = array(
  		"recherche"	=> "char(16) DEFAULT '' NOT NULL",
 		"id"	=> "INT UNSIGNED NOT NULL",
  		"points"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
+		"table_objet"	=> "varchar(30) DEFAULT '' NOT NULL",
+		"serveur"	=> "char(16) DEFAULT '' NOT NULL", // hash md5 partiel du serveur de base ('' pour le serveur principal)
 		"maj"	=> "TIMESTAMP" );
 
 $spip_resultats_key = array(
