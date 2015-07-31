@@ -47,4 +47,21 @@ function maj_11276 () {
 }
 $GLOBALS['maj'][11276] = array(array('maj_11276'));
 
+// reparer les referers d'article, qui sont vides depuis [10572]
+function maj_11388 () {
+	$s = sql_select('referer_md5', 'spip_referers_articles', "referer='' OR referer IS NULL");
+	while ($t = sql_fetch($s)) {
+		$k = sql_fetsel('referer', 'spip_referers', 'referer_md5='.sql_quote($t['referer_md5']));
+		if ($k['referer']) {
+			spip_query('UPDATE spip_referers_articles
+			SET referer='.sql_quote($k['referer']).'
+			WHERE referer_md5='.sql_quote($t['referer_md5'])
+			." AND (referer='' OR referer IS NULL)"
+			);
+		}
+	}
+}
+$GLOBALS['maj'][11388] = array(array('maj_11388'));
+
+
 ?>
