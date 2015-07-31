@@ -149,20 +149,20 @@ function sql_rubrique_fond($contexte) {
 # retourne le chapeau d'un article, et seulement s'il est publie
 
 function sql_chapo($id_article) {
-	list ($chapo)= spip_abstract_fetsel(array('chapo'),
+	$chapo= spip_abstract_fetsel(array('chapo'),
 		array('spip_articles'),
 		array("id_article=".intval($id_article),
 		"statut='publie'"));
-	return $chapo;
+	return $chapo['chapo'];
 }
 
 # retourne le parent d'une rubrique
 
 function sql_parent($id_rubrique) {
-	list($id) = spip_abstract_fetsel(array('id_parent'), 
+	$id_parent = spip_abstract_fetsel(array('id_parent'), 
 			array('spip_rubriques'), 
 			array("id_rubrique=" . intval($id_rubrique)));
-	return $id;
+	return $id_parent['id_parent'];
 }
 
 # retourne la profondeur d'une rubrique
@@ -179,10 +179,10 @@ function sql_profondeur($id) {
 # retourne la rubrique d'un article
 
 function sql_rubrique($id_article) {
-	list($id) = spip_abstract_fetsel(array('id_rubrique'),
+	$id_rubrique = spip_abstract_fetsel(array('id_rubrique'),
 			array('spip_articles'),
 			array("id_article=" . intval($id_article)));
-	return $id;
+	return $id_rurbique['id_rubrique'];
 }
 
 function sql_auteurs($id_article, $table, $id_boucle, $serveur='') {

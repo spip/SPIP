@@ -91,13 +91,13 @@ function retire_caches($chemin = '') {
 
 	// En priorite le cache qu'on appelle maintenant
 	if ($chemin) {
-		list($f) = spip_abstract_fetsel(array("fichier"),
+		$f = spip_abstract_fetsel(array("fichier"),
 				    array("spip_caches"),
 				    array("fichier = '".addslashes($chemin)."' ",  "type='x'"),
 				    "",
 				    array(),
 				    1);
-		if ($f)	$suppr[$f] = true;
+		if ($f['fichier']) $suppr[$f['fichier']] = true;
 	}
 
 	// Et puis une centaine d'autres
@@ -106,13 +106,13 @@ function retire_caches($chemin = '') {
 		effacer_meta('invalider_caches'); # concurrence
 		ecrire_metas();
 
-		$q = list($f) = spip_abstract_select(array("fichier"),
+		$q = spip_abstract_select(array("fichier"),
 				    array("spip_caches"),
 				    array("type='x'"),
 				    "",
 				    array(),
 				    100);
-		while ($r = spip_fetch_array($q)) {
+		while ($r = spip_abstract_fetch($q)) {
 			$compte ++;	# compte le nombre de resultats vus (y compris doublons)
 			$suppr[$r['fichier']] = true;
 		}
