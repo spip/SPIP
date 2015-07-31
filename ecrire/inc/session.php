@@ -117,21 +117,21 @@ function ajouter_session($auteur) {
 		if (isset($auteur_verif['hash_env'])) unset($auteur_verif['hash_env']);
 		if (isset($auteur_verif['ip_change'])) unset($auteur_verif['ip_change']);
 		if (isset($auteur_verif['date_session'])) unset($auteur_verif['date_session']);
-		
+
 		// Les variables vraiment nulle ne sont pas à prendre en compte non plus
 		foreach($auteur_verif as $variable=>$valeur){
 			if ($valeur === null){
 				unset($auteur_verif[$variable]);
 			}
 		}
-		
+
 		// Si après ça la session est vide alors on supprime l'éventuel fichier et on arrête là
 		if (!$auteur_verif){
 			if (@file_exists($fichier_session)) spip_unlink($fichier_session);
 			return false;
 		}
 	}
-	
+
 	// Maintenant on sait qu'on a des choses à écrire
 	// On s'assure d'avoir au moins ces valeurs
 	$auteur['id_auteur'] = $id_auteur;
@@ -339,7 +339,7 @@ function ecrire_fichier_session($fichier, $auteur) {
 			unset($auteur[$variable]);
 		}
 	}
-	
+
 	// enregistrer les autres donnees du visiteur
 	$texte = "<"."?php\n";
 	foreach ($auteur as $var => $val)
@@ -382,13 +382,14 @@ function fichier_session($alea, $tantpis=false) {
 
 
 /**
- * Code a inserer par inc/presentation pour rejouer la session
- * Voir action/cookie qui sera appele.
- * Pourquoi insere-t-on le src par js et non directement en statique dans le HTML ?
- * Historiquement, insere par une balise <script> en r424
- * puis modifie par <img> statique + js en r427
+ * Code à insérer par `inc/presentation` pour rejouer la session
  *
- * http://doc.spip.org/@rejouer_session
+ * @note
+ *   Pourquoi insère-t-on le src par js et non directement en statique dans le HTML ?
+ *   Historiquement, inséré par une balise `<script>` en r424
+ *   puis modifié par `<img>` statique + js en r427
+ *
+ * @see action_cookie_dist() qui sera appelé
  *
  * @return string
  */
