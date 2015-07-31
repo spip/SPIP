@@ -1362,11 +1362,11 @@ if ((lire_meta('multi_articles') == 'oui')
 				$vals[] = http_img_pack("puce-".puce_statut($statut_trad).'.gif', "alt='' width='7' height='7' border='0' NAME='statut'");
 				
 				if ($id_article_trad == $id_trad) {
-				  $vals[] = http_img_pack(langues-'12.gif', "width='12' height='12' alt='' border='0'");
+				  $vals[] = http_img_pack('langues-12.gif', "width='12' height='12' alt='' border='0'");
 					$titre_trad = "<b>$titre_trad</b>";
 				} else {
 				  if ($connect_statut=='0minirezo') $vals[] = "<a href='articles.php3?id_article=$id_article&id_trad_old=$id_trad&id_trad_new=$id_article_trad'>". http_img_pack('langues-off-12.gif', "width='12' height='12' alt='' border='0'") . "</a>";
-				  else $vals[] = http_img_pack(langues-off-'12.gif', "width='12' height='12' alt='' border='0'");
+				  else $vals[] = http_img_pack('langues-off-12.gif', "width='12' height='12' alt='' border='0'");
 				}
 
 				$ret .= "</td>";

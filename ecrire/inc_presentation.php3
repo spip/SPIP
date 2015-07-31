@@ -749,7 +749,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$s = "<div>";
 				
 			if (acces_restreint_rubrique($id_rubrique))
-				$s .= http_img_pack("admin-12.gif", "alt='' width='12' height='12' title='"._T('titre_image_admin_article')."'") . ">&nbsp;";
+				$s .= http_img_pack("admin-12.gif", "alt='' width='12' height='12' title='"._T('titre_image_admin_article')."'") . "&nbsp;";
 			$s .= "<a href=\"articles.php3?id_article=$id_article\"$descriptif$dir_lang style=\"display:block;\">";
 			
 			if ($spip_display != 1 AND $spip_display != 4 AND lire_meta('image_process') != "non") {
