@@ -175,8 +175,8 @@ class IterateurDATA implements Iterator {
 								// erreur
 							}
 						break;
-					case 'cle':
-					case 'valeur':
+					case 'clex':
+					case 'valeurx':
 						unset($op);
 						if ($com[0] == 'REGEXP')
 							$this->filtre[] = 'preg_match("/". '.str_replace('\"', '"', $com[2]).'."/", $'.$com[1].')';
