@@ -128,9 +128,11 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 
 	$nom_fichier = substr($fichier, 0, strlen($fichier) - 4);
 	$fichier_dest = $nom_fichier;
-
-	if (@file_exists($f = $fichier) OR ($find_in_path AND find_in_path($f = $fichier))){
-		list ($ret["hauteur"],$ret["largeur"]) = taille_image($img);
+	if (($find_in_path AND $f=find_in_path($fichier) AND $fichier=$f)
+		OR @file_exists($f = $fichier)){
+		// on passe la balise img a taille image qui exraira les attributs si possible
+		// au lieu de faire un acces disque sur le fichier
+		list ($ret["hauteur"],$ret["largeur"]) = taille_image($find_in_path?$f:$img);
 		$date_src = @filemtime($f);
 	}
 	elseif (@file_exists($f = "$fichier.src")
