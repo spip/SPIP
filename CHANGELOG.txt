@@ -16,6 +16,8 @@ r20527 | denisb    |  (ven. 17 mai 2013) | prive/formulaires/login.html : ajout 
 r20541 | cedric    |  (mer. 22 mai 2013) | Inscription d'un auteur : le commentaire dit "Si mode inconnu laisser faire, c'est une extension non std", mais passer quand meme par une autorisation, qui par défaut sera a false (puisque l'auteur est non connu, donc non identifié, il n'a aucun droit par defaut).Il suffit que autoriser("inscrireauteur","xxx") renvoie true pour permettre l'inscription d'un auteur avec le statut xxx
 r20552 | esj       |  (jeu. 23 mai 2013) | Retour sur r20451, révision des autorisations d'inscriptions. La fonction tester_config devient un appel à une fonction surchargeable autoriser_inscrire prenant en argument le type d'inscription et éventuellement l'ID d'une rubrique. Par défaut cette fonction n'accepte que les types 6forum et 1comite, et ignore la rubrique.
 r20555 | cedric    |  (ven. 24 mai 2013) | Suite de r20552 et r20541 : on nomme l'autorisation autoriser('inscrireauteur',$mode,$id_rubrique) pour plus de lisibilite et eviter toute collision avec un autre type d'inscription
+r20558 | ben       |  (ven. 24 mai 2013) | SPIP 2.1.22
+r20560 | cedric    |  (ven. 24 mai 2013) | suite à r20552 #FORMULAIRE_INSCRIPTION sans argument utilisé dans la page sommaire de squelettes-dist n'était plus fonctionnel.On rétablit le meilleur choix possible (1comite ou 6forum) au niveau de la fonction de la balise dans ce cas particulier (et on enleve la valeur par defaut sur la page identifiants car elle n'est pas equivalente)
 
 
 
