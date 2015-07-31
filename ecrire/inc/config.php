@@ -10,26 +10,37 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Fonctions utilitaires pour le stockage et lecture de configuration
+ *
+ * @package SPIP\Core\Config
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 /**
- * Appliquer les valeurs par defaut pour les options non initialisees
+ * Appliquer les valeurs par défaut pour les options non initialisées
  * (pour les langues c'est fait)
  *
- * @return null
+ * @return void
  */
-// http://doc.spip.org/@inc_config_dist
 function inc_config_dist() {
 	actualise_metas(liste_metas());
 }
 
 /**
- * Expliquer une configuration :
- * analyser le cfg pour determiner la table, le casier et le sous-casier eventuel
+ * Expliquer une clé de configuration
+ * 
+ * Analyser la clé de configuration pour déterminer
+ * - la table (ex: spip_metas),
+ * - le casier, la clé principale (ex: dada)
+ * - et le sous-casier éventuel, chemin dans la clé principale (ex: truc/muche)
  *
  * @param string $cfg
+ *     Clé de configuration, tel que 'dada/truc/muche' 
  * @return array
+ *     Liste (table, casier, sous_casier)
  */
 function expliquer_config($cfg){
 	// par defaut, sur la table des meta
@@ -68,10 +79,15 @@ function expliquer_config($cfg){
  *
  * $unserialize est mis par l'histoire
  *
- * @param  string  $cfg          la config
- * @param  mixed   $def          un défaut optionnel
- * @param  boolean $unserialize  n'affecte que le dépôt 'meta'
- * @return string
+ * @param string  $cfg
+ *    Clé de configuration
+ * @param mixed $def
+ *    Valeur par défaut 
+ * @param boolean $unserialize
+ *    N'affecte que le dépôt 'meta' :
+ *    True pour désérialiser automatiquement la valeur
+ * @return mixed
+ *    Contenu de la configuration obtenue
  */
 function lire_config($cfg='', $def=null, $unserialize=true) {
 	// lire le stockage sous la forme /table/valeur
