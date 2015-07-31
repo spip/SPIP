@@ -490,7 +490,8 @@ function spip_mysql_fetch($r, $t='', $serveur='',$requeter=true) {
 function spip_mysql_countsel($from = array(), $where = array(),
 			     $groupby = '', $limit = '', $sousrequete = '', $having = array(), $serveur='',$requeter=true)
 {
-	$r = spip_mysql_select('COUNT(*)', $from, $where,$groupby, '', $limit,
+	$c = !$groupby ? '*' : ('DISTINCT ' . (is_string($groupby) ? $groupby : join(',', $groupby)));
+	$r = spip_mysql_select("COUNT($c)", $from, $where,'', '', $limit,
 			$having, $serveur, $requeter);
 	if (!$r OR !$requeter) return $r;
 	list($c) = mysql_fetch_array($r, MYSQL_NUM);

@@ -25,9 +25,7 @@ function enfants($id_parent, $critere){
 	while($row = sql_fetch($result)) {
 		$id_rubrique = $row['id_rubrique'];
 
-		$row2 = sql_fetsel("SUM(".$critere.") AS cnt", "spip_articles", "id_rubrique=$id_rubrique");
-
-		$visites = !$row2 ? 0 : $row2['cnt'];
+		$visites = intval(sql_getfetsel("SUM(".$critere.")", "spip_articles", "id_rubrique=$id_rubrique"));
 		$nombre_abs[$id_rubrique] = $visites;
 		$nombre_vis[$id_rubrique] = $visites;
 		$nombre += $visites + enfants($id_rubrique, $critere);

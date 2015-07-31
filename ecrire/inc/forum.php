@@ -19,10 +19,7 @@ function affiche_navigation_forum(&$query, $script, $args, $debut, $pas, $enplus
 	if (!$pas) $pas = 10;
 	if (!$enplus) $enplus = 100;
 
-	// A revoir: ceci n'est pas equivalent a sql_countsel
-	// a cause du GroupBy
-	$total = sql_count(sql_select($query['SELECT'], $query['FROM'], $query['WHERE'], $query['GROUP BY']));
-
+	$total = sql_countsel($query['FROM'], $query['WHERE'], $query['GROUP BY']);
 	// pas de navigation si tout tient
 	if ($total > $pas) {
 		if ($total <= $debut) $debut = $total-$pas;
