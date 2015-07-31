@@ -81,7 +81,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 			echo "</div>";
 		}
 	
-		while ($row = mysql_fetch_array($result)) {
+		while ($row = spip_fetch_array($result)) {
 			$id_version = $row['id_version'];
 			$id_auteur = $row['id_auteur'];
 			$date = date_relative($row['date']);
@@ -120,7 +120,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 					WHERE id_article=$id_article AND id_version<$id_version 
 					ORDER BY id_version DESC LIMIT 0,1";
 					if ($result_diff = spip_query($query_diff)) {
-						$row_diff = mysql_fetch_array($result_diff);
+						$row_diff = spip_fetch_array($result_diff);
 						$id_diff = $row_diff['id_version'];
 				}
 		

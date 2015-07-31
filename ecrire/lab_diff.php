@@ -228,16 +228,19 @@ class DiffTexte {
 		return separer_paras($texte);
 	}
 
+	// NB :  rem=\"diff-\" est un signal pour la fonction "afficher_para_modifies"
 	function ajouter($p) {
-		$this->r .= "\n\n\n<div class=\"diff-para-ajoute\" title=\""._T('diff_para_ajoute')."\">".$p."</div>";
+		$p = trim($p);
+		$this->r .= "\n\n\n<div class=\"diff-para-ajoute\" title=\""._T('diff_para_ajoute')."\">".$p."</div rem=\"diff-\">";
 	}
 	function supprimer($p_old) {
-		$this->r .= "\n\n\n<div class=\"diff-para-supprime\" title=\""._T('diff_para_supprime')."\">".$p_old."</div>";
+		$p_old = trim($p_old);
+		$this->r .= "\n\n\n<div class=\"diff-para-supprime\" title=\""._T('diff_para_supprime')."\">".$p_old."</div rem=\"diff-\">";
 	}
 	function deplacer($p, $p_old) {
 		$this->r .= "\n\n\n<div class=\"diff-para-deplace\" title=\""._T('diff_para_deplace')."\">";
-		$this->r .= $this->_diff($p, $p_old);
-		$this->r .= "</div>";
+		$this->r .= trim($this->_diff($p, $p_old));
+		$this->r .= "</div rem=\"diff-\">";
 	}
 	function comparer($p, $p_old) {
 		$this->r .= "\n\n\n".$this->_diff($p, $p_old);
@@ -276,13 +279,13 @@ class DiffPara {
 	}
 
 	function ajouter($p) {
-		$this->r .= "<span class=\"diff-ajoute\" title=\""._T('diff_texte_ajoute')."\">".$p."</span>";
+		$this->r .= "<span class=\"diff-ajoute\" title=\""._T('diff_texte_ajoute')."\">".$p."</span rem=\"diff-\">";
 	}
 	function supprimer($p_old) {
-		$this->r .= "<span class=\"diff-supprime\" title=\""._T('diff_texte_supprime')."\">".$p_old."</span>";
+		$this->r .= "<span class=\"diff-supprime\" title=\""._T('diff_texte_supprime')."\">".$p_old."</span rem=\"diff-\">";
 	}
 	function deplacer($p, $p_old) {
-		$this->r .= "<span class=\"diff-deplace\" title=\""._T('diff_texte_deplace')."\">".$this->_diff($p, $p_old)."</span>";
+		$this->r .= "<span class=\"diff-deplace\" title=\""._T('diff_texte_deplace')."\">".$this->_diff($p, $p_old)."</span rem=\"diff-\">";
 	}
 	function comparer($p, $p_old) {
 		$this->r .= $this->_diff($p, $p_old);
@@ -350,10 +353,10 @@ class DiffPhrase {
 	}
 
 	function ajouter($p) {
-		$this->r .= "<span class=\"diff-ajoute\" title=\""._T('diff_texte_ajoute')."\">".$p."</span> ";
+		$this->r .= "<span class=\"diff-ajoute\" title=\""._T('diff_texte_ajoute')."\">".$p."</span rem=\"diff-\"> ";
 	}
 	function supprimer($p_old) {
-		$this->r .= "<span class=\"diff-supprime\" title=\""._T('diff_texte_supprime')."\">".$p_old."</span> ";
+		$this->r .= "<span class=\"diff-supprime\" title=\""._T('diff_texte_supprime')."\">".$p_old."</span rem=\"diff-\"> ";
 	}
 	function comparer($p, $p_old) {
 		$this->r .= $p;
