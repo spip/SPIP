@@ -171,11 +171,17 @@ function critere_traduction_dist($idb, &$boucles, $crit) {
 	$table = $boucle->id_table;
 	$arg = kwote(calculer_argument_precedent($idb, 'id_trad', $boucles));
 	$dprim = kwote(calculer_argument_precedent($idb, $prim, $boucles));
-	$boucle->where[]= array("'AND'",
-		array("'>'", "'$table.". "id_trad'", 0),
+	$boucle->where[]=
 		array("'OR'",
-			array("'='", "'$table." . "id_trad'", $arg),
-			array("'='", "'$table.$prim'", $dprim)));
+			array("'AND'",
+				array("'='", "'$table.id_trad'", 0),
+				array("'='", "'$table.$prim'", $dprim)
+			),
+			array("'AND'",
+				array("'>'", "'$table.id_trad'", 0),
+				array("'='", "'$table.id_trad'", $arg)
+			)
+		);
 }
 
 // {origine_traduction}
