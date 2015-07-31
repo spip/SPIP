@@ -131,9 +131,9 @@ function determiner_auteurs_objet($type, $id, $cond='', $limit=200)
 }
 
 // http://doc.spip.org/@determiner_non_auteurs
-function determiner_non_auteurs($type, $id, $auteurs)
+function determiner_non_auteurs($type, $id, $andcond='')
 {
-	return auteurs_autorises(determiner_auteurs_objet($type, $id, $auteurs));
+	return auteurs_autorises(determiner_auteurs_objet($type, $id, $andcond));
 }
 
 // http://doc.spip.org/@rechercher_auteurs_objet

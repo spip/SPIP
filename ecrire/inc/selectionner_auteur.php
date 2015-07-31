@@ -27,7 +27,7 @@ function inc_selectionner_auteur_dist($id_article)
     if (!$determiner_non_auteurs = charger_fonction('determiner_non_auteurs_article','inc',true))
         $determiner_non_auteurs = 'determiner_non_auteurs';
 
-	$futurs = selectionner_auteur_boucle($determiner_non_auteurs('article',$id_article,'', "nom, statut"), $idom);
+	$futurs = selectionner_auteur_boucle($determiner_non_auteurs('article',$id_article), $idom);
 
 	// url completee par la fonction JS onkeypress_rechercher
 	$url = generer_url_ecrire('rechercher_auteur', "idom=$idom&nom=");
@@ -36,12 +36,12 @@ function inc_selectionner_auteur_dist($id_article)
 }
 
 // http://doc.spip.org/@selectionner_auteur_boucle
-function selectionner_auteur_boucle($query, $idom)
+function selectionner_auteur_boucle($where, $idom)
 {
 	$info = generer_url_ecrire('informer_auteur', "id=");
 	$args = "'$idom" . "_selection', '$info', event";
 	$res = '';
-
+	$query = sql_select("nom, id_auteur", "spip_auteurs", $where, '', "nom, statut");
 	while ($row = sql_fetch($query)) {
 
 		$id = $row["id_auteur"];
