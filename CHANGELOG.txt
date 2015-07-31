@@ -1,3 +1,15 @@
+Core 2.1.7->2.1.8 (14/01/2011) 
+
+r16959 | cedric    | 2011-01-13 18:39:26 +0100 (jeu, 13 jan 2011) | la balise formulaire_admin est sur toutes les pages,ne pas provoquer l'inclusion de abstract_sql pour autant, si le visiteur est anonyme,cela laisse a penser qu'on a une connexion sql a chaque hit.On retarde l'inclusion au cas ou le visiteur aura acces aux boutons d'admin
+r16960 | cedric    | 2011-01-13 23:04:34 +0100 (jeu, 13 jan 2011) | lorsque la redirection sur une action est absolue, il s'agit le plus souvent de l'adresse du site lui meme : transformer en url relative plutot que tout vider (cas de l'auth openid)
+r16961 | cedric    | 2011-01-13 23:26:31 +0100 (jeu, 13 jan 2011) | Redirection en cas d'echec sur authentification : il faut utiliser & et non &amp; sur l'url
+r16962 | cedric    | 2011-01-14 09:39:52 +0100 (ven, 14 jan 2011) | inclusion manquante (bmr)
+r16963 | cedric    | 2011-01-14 09:49:45 +0100 (ven, 14 jan 2011) | parse_url n'accepte un deuxieme argument qu'a partir de PHP 5.1, corriger la syntaxe pour utiliser la version avec un seul argument.
+
+Extensions 2.1.7->2.1.8 (14/01/2011)
+
+r43547 | cedric    | 2011-01-13 19:11:18 +0100 (jeu, 13 jan 2011) | declarer les pipelines dans plugin.xml plutot que dans un fichier options charge a chaque hit
+
 Core 2.1.6 -> 2.1.7 ( 13/01/2011) 
 r16893 | fil       | 2011-01-05 09:50:20 +0100 (mer, 05 jan 2011) | eviter un Warning: Division by zero in ecrire/inc/invalideur.php on line 156
 r16897 | cedric    | 2011-01-06 09:13:31 +0100 (jeu, 06 jan 2011) | report de r16734 : Evacuer les eventuelles clauses group vide au calcul des requetes dans un squelette.Permet a un critere d'injecter une clause group dynamique, evaluee au calcul, qui rendra '' si pas de group a faire.
