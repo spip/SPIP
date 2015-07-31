@@ -26,7 +26,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@inc_formater_auteur_dist
 function inc_formater_auteur_dist($id_auteur) {
 
-  global $connect_id_auteur, $spip_lang_rtl, $connect_statut;
+  global $connect_id_auteur, $connect_statut;
 
 	$id_auteur = intval($id_auteur);
 
@@ -54,12 +54,20 @@ function inc_formater_auteur_dist($id_auteur) {
 	if ($url_site_auteur = $row["url_site"]) $vals[] =  "<a href='$url_site_auteur'>"._T('info_site_min')."</a>";
 	else $vals[] =  "&nbsp;";
 
-	$cpt = spip_fetch_array(spip_query("SELECT COUNT(articles.id_article) AS n FROM spip_auteurs_articles AS lien, spip_articles AS articles WHERE lien.id_auteur=$id_auteur AND articles.id_article=lien.id_article AND articles.statut IN " . ($connect_statut == "0minirezo" ? "('prepa', 'prop', 'publie', 'refuse')" : "('prop', 'publie')") . " GROUP BY lien.id_auteur"));
+	if ($row['statut'] != '6forum') {
+	  $cpt = spip_fetch_array(spip_query("SELECT COUNT(articles.id_article) AS n FROM spip_auteurs_articles AS lien, spip_articles AS articles WHERE lien.id_auteur=$id_auteur AND articles.id_article=lien.id_article AND articles.statut IN " . ($connect_statut == "0minirezo" ? "('prepa', 'prop', 'publie', 'refuse')" : "('prop', 'publie')") . " GROUP BY lien.id_auteur"), SPIP_NUM);
+	  $t = _T('info_article_2');
+	  $t1 = _T('info_1_article'); 
+	} else {
+	  $cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_forum AS F WHERE F.id_auteur=$id_auteur"), SPIP_NUM);
+	  $t = _T('public:messages_forum');
+	  $t1 = '1 ' . _T('public:message');
+	}
 
-	$nombre_articles = intval($cpt['n']);
-
-	if ($nombre_articles > 1) $vals[] =  $nombre_articles.' '._T('info_article_2');
-	elseif ($nombre_articles == 1) $vals[] =  _T('info_1_article');
+	$cpt= $cpt[0];
+	if ($cpt > 1) $vals[] =  $cpt.' '.$t;
+	// manque "1 message de forum"
+	elseif ($cpt == 1) $vals[] =  $t1;
 	else $vals[] =  "&nbsp;";
 
 	return $vals;
@@ -75,9 +83,7 @@ function formater_auteur_mail($row, $id_auteur)
 		$href= 'mailto:' . $email;
 	else $href = generer_action_auteur("editer_message","normal/$id_auteur");
 	return "<a href='$href' title=\""
-		  . _T('email')
-		  . '">'
-		. http_img_pack("m_envoi$spip_lang_rtl.gif", "m&gt;", " width='14' height='7'", _T('info_envoyer_message_prive'))
-		  . '</a>';
+	  .  _T('info_envoyer_message_prive')
+	  . "\" class='message'>&nbsp;</a>";
 }
 ?>

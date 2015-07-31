@@ -142,37 +142,37 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 {
 	global $spip_lang_right;
 
-	$res ="\n<tr style='background-color: #dbe1c5'>"
+	$arg = $statut ? "&statut=$statut" : '';
+	$res ="\n<tr class='toile_gris_moyen'>"
 	. "\n<td style='width: 20px'>";
 
-	if ($tri=='statut')
+	if ($tri=='statut' OR $statut !='')
   		$res .= http_img_pack('admin-12.gif','', " class='lang'");
 	else {
 	  $t =  _T('lien_trier_statut');
-	  $res .= auteurs_href(http_img_pack('admin-12.gif', $t, "class='lang'"),'tri=statut', " title=\"$t\"");
+	  $res .= auteurs_href(http_img_pack('admin-12.gif', $t, "class='lang'"),"tri=statut$arg", " title=\"$t\"");
 	}
 
 	$res .= "</td><td style='width: 20px'></td><td colspan='2'>";
 
-	if ($tri == '' OR $tri=='nom')
+	if ($tri=='nom')
 		$res .= '<b>'._T('info_nom').'</b>';
 	else
-		$res .= auteurs_href(_T('info_nom'), "tri=nom", " title='"._T('lien_trier_nom'). "'");
+		$res .= auteurs_href(_T('info_nom'), "tri=nom$arg", " title='"._T('lien_trier_nom'). "'");
 
 
 	$res .= "</td><td>";
 
-	if ($statut != '6forum') {
-		if ($tri=='nombre')
-			$res .= '<b>'._T('info_articles').'</b>';
-		else
-			$res .= auteurs_href(_T('info_articles_2'), "tri=nombre", " title=\""._T('lien_trier_nombre_articles'). '"');
-	}
+	$col = ($statut == '6forum') ? _T('message') : _T('info_articles');
+	if ($tri=='nombre')
+		$res .= '<b>' . $col .'</b>';
+	else
+		$res .= auteurs_href($col, "tri=nombre$arg", " title=\""._T('lien_trier_nombre_articles'). '"');
 
 	$res .= "</td></tr>\n";
 
 	if ($nombre_auteurs > $max_par_page) {
-		$res .= "\n<tr style='background-color: white'><td class='arial1' colspan='5'>";
+		$res .= "\n<tr class='toile_blanche'><td class='arial1' colspan='5'>";
 
 		for ($j=0; $j < $nombre_auteurs; $j+=$max_par_page) {
 			if ($j > 0) 	$res .= " | ";
@@ -190,7 +190,7 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 		$res .= "</td></tr>\n";
 
 		if ($tri == 'nom') {
-			$res .= "\n<tr style='background-color: white'><td class='arial11' colspan='5'>";
+			$res .= "\n<tr class='toile_blanche'><td class='arial11' colspan='5'>";
 			foreach ($lettre as $key => $val) {
 				if ($val == $debut)
 					$res .= "<b>$key</b>\n";
@@ -205,7 +205,7 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 	$debut_suivant = $debut + $max_par_page;
 	if ($debut_suivant < $nombre_auteurs OR $debut > 0) {
 		$nav = "\n<table id='bas' style='width: 100%' border='0'>"
-		. "\n<tr style='background-color: white'><td align='left'>";
+		. "\n<tr class='toile_blanche'><td align='left'>";
 
 		if ($debut > 0) {
 			$debut_prec = max($debut - $max_par_page, 0);
@@ -254,7 +254,6 @@ function requete_auteurs($tri, $statut)
 if ($connect_statut == '0minirezo') {
 	if ($statut) {
 		$sql_visible = "aut.statut IN ('$statut')";
-		$tri = 'nom';
 	} else {
 		$sql_visible = "aut.statut IN ('0minirezo','1comite','5poubelle')";
 	}
@@ -287,9 +286,10 @@ default:
 
 //
 // La requete de base est tres sympa
-//
+// (pour les visiteurs, ca postule que les messages concernent des articles)
 
- $row = spip_query("SELECT							aut.id_auteur AS id_auteur,							aut.statut AS statut,								aut.nom AS nom,								UPPER(aut.nom) AS unom,							count(lien.id_article) as compteur						$sql_sel									FROM spip_auteurs as aut							LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur	LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)		WHERE	$sql_visible								GROUP BY aut.id_auteur	 ORDER BY		$sql_order");
+ $row = spip_query($q = "SELECT							aut.id_auteur AS id_auteur,							aut.statut AS statut,								aut.nom AS nom,								UPPER(aut.nom) AS unom,							count(lien.id_article) as compteur							$sql_sel									FROM spip_auteurs as aut " . (($statut == '6forum') ? 			"LEFT JOIN spip_forum AS lien ON aut.id_auteur=lien.id_auteur " :		("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur	 LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)")) .	" WHERE $sql_visible GROUP BY aut.id_auteur ORDER BY $sql_order");
+ spip_log($q);
  return $row;
 }
 
@@ -301,7 +301,7 @@ function afficher_n_auteurs($auteurs) {
 	foreach ($auteurs as $row) {
 
 		list($s, $mail, $nom, $w, $p) = $formater_auteur($row['id_auteur']);
-		$res .= "\n<tr style='background-color: #eeeeee;'>"
+		$res .= "\n<tr class='toile_gris_leger'>"
 		. "\n<td style='border-top: 1px solid #cccccc;'>"
 		. $s
 		. "</td><td class='arial1' style='border-top: 1px solid #cccccc;'>"
