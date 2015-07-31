@@ -579,37 +579,43 @@ function liste_rubriques_auteur($id_auteur, $raz=false) {
 
 // Autoriser a modifier l'URL d'un objet (cf. action=redirect)
 // http://doc.spip.org/@autoriser_modifierurl_dist
-function autoriser_modifierurl_dist($faire, $type, $id, $qui, $opt) {
-	return autoriser('modifier', $type, $id, $qui, $opt);
+function autoriser_modifierurl_dist($faire, $quoi, $id, $qui, $opt) {
+	return autoriser('modifier', $quoi, $id, $qui, $opt);
 }
 
 // http://doc.spip.org/@autoriser_rubrique_editermots_dist
 function autoriser_rubrique_editermots_dist($faire,$quoi,$id,$qui,$opts){
-	// par defaut, on verifie juste que le champ de droit passe en opts colle bien
+	// on verifie que le champ de droit passe en opts colle bien
 	$droit = substr($GLOBALS['visiteur_session']['statut'],1);
 	if (!isset($opts['groupe_champs'][$droit])){
 		if (!$id_groupe = $opts['id_groupe'])
 			return false;
 		include_spip('base/abstract_sql');
-		$droit = sql_getfetsel($droit, "spip_groupes_mots", "id_groupe=".intval($id_groupe));		
+		$droit = sql_getfetsel($droit, "spip_groupes_mots", "id_groupe=".intval($id_groupe));
 	}
 	else
 		$droit = $opts['groupe_champs'][$droit];
-	
-	if ($droit=='oui') return true;
-	return false;
+
+	return
+		($droit == 'oui')
+		AND
+		// on verifie que l'objet demande est bien dans les tables liees
+		in_array(
+			table_objet($quoi),
+			explode(',', $opts['groupe_champs']['tables_liees'])
+		);
 }
 // http://doc.spip.org/@autoriser_article_editermots_dist
 function autoriser_article_editermots_dist($faire,$quoi,$id,$qui,$opts){
-	return autoriser_rubrique_editermots_dist($faire,'rubrique',0,$qui,$opts);
+	return autoriser_rubrique_editermots_dist($faire,'article',0,$qui,$opts);
 }
 // http://doc.spip.org/@autoriser_breve_editermots_dist
 function autoriser_breve_editermots_dist($faire,$quoi,$id,$qui,$opts){
-	return autoriser_rubrique_editermots_dist($faire,'rubrique',0,$qui,$opts);
+	return autoriser_rubrique_editermots_dist($faire,'breve',0,$qui,$opts);
 }
 // http://doc.spip.org/@autoriser_syndic_editermots_dist
 function autoriser_syndic_editermots_dist($faire,$quoi,$id,$qui,$opts){
-	return autoriser_rubrique_editermots_dist($faire,'rubrique',0,$qui,$opts);
+	return autoriser_rubrique_editermots_dist($faire,'syndic',0,$qui,$opts);
 }
 
 // Deux fonctions sans surprise pour permettre les tests
