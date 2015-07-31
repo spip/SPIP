@@ -5,7 +5,7 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '1.0.0'); // 7 fev 2011
+define('_ECRAN_SECURITE', '1.0.1'); // 24 mars 2011
 
 /*
  * Documentation : http://www.spip.net/fr_article4200.html
@@ -81,7 +81,7 @@ AND $_REQUEST['echelle'] !== htmlentities((string)$_REQUEST['echelle']))
  *     - espace prive
  */
 if (isset($_REQUEST['exec'])
-AND !preg_match(',^[\w-]+$,', (string)$_REQUEST['exec']))
+AND !preg_match(',^\w+$,', (string)$_REQUEST['exec']))
 	$ecran_securite_raison = "exec";
 if (isset($_REQUEST['cherche_auteur'])
 AND preg_match(',[<],', (string)$_REQUEST['cherche_auteur']))
@@ -146,6 +146,9 @@ if (isset($_REQUEST['page'])) {
 		$ecran_securite_raison = "test_cfg";
 	if ($_REQUEST['page'] !== htmlspecialchars((string)$_REQUEST['page']))
 		$ecran_securite_raison = "xsspage";
+	if ($_REQUEST['page'] == '404'
+	AND isset($_REQUEST['erreur']))
+		$ecran_securite_raison = "xss404";
 }
 
 /*
