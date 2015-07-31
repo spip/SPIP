@@ -1,3 +1,20 @@
+SPIP-Core spip-3.0.6 -> spip-3.0.7  22 mars 2013
+-------------------------------------------------------------
+
+r20333 | cedric    |  (mar. 19 mars 2013) | oups, inclusion manquante dans certains cas (Nicolas H.)
+r20337 | marcimat  |  (mer. 20 mars 2013) | Coquille, qui devait je suppose empêchait un auteur de voir «Ses articles» en préparation sur cette page.
+r20340 | marcimat  |  (mer. 20 mars 2013) | Report de r20339 : recuperer_numero() peut retourner 0, si un titre a un zéro pointé devant lui (0. titre). Il faut donc l'afficher celui là. (Bertrandbbbb)
+r20344 | cedric    |  (jeu. 21 mars 2013) | Ferme #2962. Retour et complement de r20066 : il faut être un peu plus malin lors de la reinjection des where Lx.objet='truc' dans la sous requete.Pour cela on la construit une première fois pour tenir compte des simplifications, et on regarde ensuite seulement les jointures encore présentes. On y ajoute alors les clauses where complémentaires si nécessaire, et on reconstruit la sous requete si besoin.
+r20347 | ben       |  (jeu. 21 mars 2013) | Report de langues ... avec en particulier le polonais
+r20349 | ben       |  (ven. 22 mars 2013) | langues
+
+SPIP-plugins-dist spip-3.0.6 -> spip-3.0.7  22 mars 2013
+-------------------------------------------------------------
+
+r70982 | ben       |  (jeu. 21 mars 2013) | Hop les langues
+r70993 | marcimat  |  (ven. 22 mars 2013) | Fermeture de balise absente (freebsnet)
+r71001 | b_b       |  (ven. 22 mars 2013) | éviter qu'un titre de document trop long déborde de sa boîte
+r71003 | marcimat  |  (ven. 22 mars 2013) | Validité XHTML, suite de r70994  qui ne convenait pas ! (freebsnet)
 
 SPIP-Core spip-3.0.5 -> spip-3.0.6  18 mars 2013
 -------------------------------------------------------------
