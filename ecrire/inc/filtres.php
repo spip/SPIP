@@ -342,11 +342,12 @@ function filtrer_entites($texte) {
 // caracteres de controle - http://www.w3.org/TR/REC-xml/#charsets
 // http://doc.spip.org/@supprimer_caracteres_illegaux
 function supprimer_caracteres_illegaux($texte) {
+	static $from = "\x0\x1\x2\x3\x4\x5\x6\x7\x8\xB\xC\xE\xF\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1A\x1B\x1C\x1D\x1E\x1F";
+	static $to = null;
+	
 	if (is_array($texte)) {
 		return array_map('supprimer_caracteres_illegaux', $texte);
 	}
-	static $from = "\x0\x1\x2\x3\x4\x5\x6\x7\x8\xB\xC\xE\xF\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1A\x1B\x1C\x1D\x1E\x1F";
-	static $to = null;
 	if (!$to) $to = str_repeat('-', strlen($from));
 	return strtr($texte, $from, $to);
 }
