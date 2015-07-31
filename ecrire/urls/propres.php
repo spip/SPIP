@@ -136,69 +136,82 @@ function _generer_url_propre($type, $id_objet) {
 }
 
 // http://doc.spip.org/@generer_url_article
-function generer_url_article($id_article) {
+function generer_url_article($id_article, $args='', $ancre='') {
+  spip_log("generer_url_article($id_article, $args='', $ancre");
 	$url = _generer_url_propre('article', $id_article);
 	if ($url)
-		return _debut_urls_propres . $url . _terminaison_urls_propres;
+		$url = _debut_urls_propres . $url . _terminaison_urls_propres  . ($args ? "?$args" : '');
 	else
-		return get_spip_script('./')."?page=article&id_article=$id_article";
+		$url = get_spip_script('./')."?page=article&id_article=$id_article" . ($args ? "&$args" : '');
+	if ($ancre) $url .= "#$ancre";
+	return $url;
 }
 
 // http://doc.spip.org/@generer_url_rubrique
-function generer_url_rubrique($id_rubrique) {
+function generer_url_rubrique($id_rubrique, $args='', $ancre='') {
 	$url = _generer_url_propre('rubrique', $id_rubrique);
 	if ($url)
-		return _debut_urls_propres . '-'.$url.'-'._terminaison_urls_propres;
+		$url = _debut_urls_propres . '-'.$url.'-'._terminaison_urls_propres . ($args ? "?$args" : '');
 	else
-		return get_spip_script('./')."?page=rubrique&id_rubrique=$id_rubrique";
+		$url = get_spip_script('./')."?page=rubrique&id_rubrique=$id_rubrique" . ($args ? "&$args" : '');
+	if ($ancre) $url .= "#$ancre";
+	return $url;
 }
 
 // http://doc.spip.org/@generer_url_breve
-function generer_url_breve($id_breve) {
+function generer_url_breve($id_breve, $args='', $ancre='') {
 	$url = _generer_url_propre('breve', $id_breve);
 	if ($url)
-		return _debut_urls_propres . '+'.$url.'+'._terminaison_urls_propres;
+		$url = _debut_urls_propres . '+'.$url.'+'._terminaison_urls_propres . ($args ? "?$args" : '');
 	else
-		return get_spip_script('./')."?page=breve&id_breve=$id_breve";
+		$url = get_spip_script('./')."?page=breve&id_breve=$id_breve"  . ($args ? "&$args" : '');
+	if ($ancre) $url .= "#$ancre";
+	return $url;
 }
 
 // http://doc.spip.org/@generer_url_forum
-function generer_url_forum($id_forum, $show_thread=false) {
+function generer_url_forum($id_forum, $args='', $ancre='') {
 	include_spip('inc/forum');
-	return generer_url_forum_dist($id_forum, $show_thread);
+	return generer_url_forum_dist($id_forum, $args, $ancre);
 }
 
 // http://doc.spip.org/@generer_url_mot
-function generer_url_mot($id_mot) {
+function generer_url_mot($id_mot, $args='', $ancre='') {
 	$url = _generer_url_propre('mot', $id_mot);
 	if ($url)
-		return _debut_urls_propres . '+-'.$url.'-+'._terminaison_urls_propres;
+		$url = _debut_urls_propres . '+-'.$url.'-+'._terminaison_urls_propres . ($args ? "?$args" : '');
 	else
-		return get_spip_script('./')."?page=mot&id_mot=$id_mot";
+		$url = get_spip_script('./')."?page=mot&id_mot=$id_mot" . ($args ? "&$args" : '');
+	if ($ancre) $url .= "#$ancre";
+	return $url;
 }
 
 // http://doc.spip.org/@generer_url_auteur
-function generer_url_auteur($id_auteur) {
+function generer_url_auteur($id_auteur, $args='', $ancre='') {
 	$url = _generer_url_propre('auteur', $id_auteur);
 	if ($url)
-		return _debut_urls_propres . '_'.$url.'_'._terminaison_urls_propres;
+		$url = _debut_urls_propres . '_'.$url.'_'._terminaison_urls_propres . ($args ? "?$args" : '');
 	else
-		return get_spip_script('./')."?page=auteur&id_auteur=$id_auteur";
+		$url = get_spip_script('./')."?page=auteur&id_auteur=$id_auteur" . ($args ? "&$args" : '');
+	if ($ancre) $url .= "#$ancre";
+	return $url;
 }
 
 // http://doc.spip.org/@generer_url_site
-function generer_url_site($id_syndic) {
+function generer_url_site($id_syndic, $args='', $ancre='') {
 	$url = _generer_url_propre('site', $id_syndic);
 	if ($url)
-		return _debut_urls_propres . '@'.$url.'@'._terminaison_urls_propres;
+		$url = _debut_urls_propres . '@'.$url.'@'._terminaison_urls_propres . ($args ? "?$args" : '');
 	else
-		return get_spip_script('./')."?page=site&id_syndic=$id_syndic";
+		$url = get_spip_script('./')."?page=site&id_syndic=$id_syndic" . ($args ? "&$args" : '');
+	if ($ancre) $url .= "#$ancre";
+	return $url;
 }
 
 // http://doc.spip.org/@generer_url_document
-function generer_url_document($id_document) {
+function generer_url_document($id_document, $args='', $ancre='') {
 	include_spip('inc/documents');
-	return generer_url_document_dist($id_document);
+	return generer_url_document_dist($id_document, $args, $ancre);
 }
 
 // http://doc.spip.org/@recuperer_parametres_url

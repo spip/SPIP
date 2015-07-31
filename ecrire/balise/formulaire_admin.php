@@ -185,7 +185,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 			$env['id_'.$id] = ${'id_'.$id};
 			$g = 'generer_url_ecrire_'.$obj;
 			$env['voir_'.$obj] = str_replace('&amp;', '&',
-				$g(${'id_'.$id}, 'prop'));
+				$g(${'id_'.$id}, '','', 'prop'));
 		}
 	}
 

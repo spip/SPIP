@@ -20,38 +20,40 @@ charger_generer_url();
 // http://doc.spip.org/@action_redirect_dist
 function action_redirect_dist()
 {
-  global $id_article, $id_auteur, $id_breve, $id_forum, $id_mot, $id_rubrique, $id_site, $id_syndic, $var_mode;
+  global $var_mode, $redirect;
 
-
-  if ($id_article = intval($id_article)) {
-	$url = generer_url_article($id_article);
+  if ($id_article = intval(_request('id_article'))) {
+	$redirect = generer_url_article($id_article,'',_request('ancre'));
 }
-  else if ($id_breve = intval($id_breve)) {
-	$url = generer_url_breve($id_breve);
+  else if ($id_breve = intval(_request('id_breve'))) {
+	$redirect = generer_url_breve($id_breve,'',_request('ancre'));
 }
-  else if ($id_forum = intval($id_forum)) {
-	$url = generer_url_forum($id_forum);
+  else if ($id_forum = intval(_request('id_forum'))) {
+	$redirect = generer_url_forum($id_forum,'',_request('ancre'));
 }
-  else if ($id_rubrique = intval($id_rubrique)) {
-	$url = generer_url_rubrique($id_rubrique);
+  else if ($id_rubrique = intval(_request('id_rubrique'))) {
+	$redirect = generer_url_rubrique($id_rubrique,'',_request('ancre'));
 }
-  else if ($id_mot = intval($id_mot)) {
-	$url = generer_url_mot($id_mot);
+  else if ($id_mot = intval(_request('id_mot'))) {
+	$redirect = generer_url_mot($id_mot,'',_request('ancre'));
 }
-  else if ($id_auteur = intval($id_auteur)) {
-	$url = generer_url_auteur($id_auteur);
+  else if ($id_auteur = intval(_request('id_auteur'))) {
+	$redirect = generer_url_auteur($id_auteur,'',_request('ancre'));
 }
-  else if ($id_syndic = intval($id_syndic) OR $id_syndic = intval($id_site)) {
-	$url = generer_url_site($id_syndic);
+  else if ($id_syndic = intval(_request('id_syndic')) OR $id_syndic = intval(_request('id_site'))) {
+	$redirect = generer_url_site($id_syndic,'',_request('ancre'));
 }
 else {
-	$url = _DIR_RESTREINT_ABS;
-}
-
 // Ne pas masquer cette eventuelle erreur (aide a detecter des lignes vides
 // dans inc-urls ou mes_fonctions/mes_options)
- header("Location: " . (!$var_mode ?  $url : ($url . (strpos($url,'?') ? '&' : '?') ."var_mode=" . $var_mode)));
+	$redirect = _DIR_RESTREINT_ABS;
 }
-
-
+	if ($var_mode) {
+		$var_mode = (strpos($redirect,'?') ? '&' : '?') ."var_mode="
+		. $var_mode;
+		$redirect = strpos($redirect,'#')
+		  ? str_replace('#', "$var_mode#", $redirect)
+		  : "$redirect$var_mode";
+	}
+}
 ?>

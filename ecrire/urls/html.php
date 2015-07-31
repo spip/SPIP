@@ -37,39 +37,39 @@ if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 if (!function_exists('generer_url_article')) { // si la place n'est pas prise
 
 // http://doc.spip.org/@generer_url_article
-function generer_url_article($id_article) {
-	return "article$id_article.html";
+function generer_url_article($id_article, $args='', $ancre='') {
+	return "article$id_article.html" . ($args ? "?$args" : '') . ($ancre ? "#$ancre" : '');
 }
 
 // http://doc.spip.org/@generer_url_rubrique
-function generer_url_rubrique($id_rubrique) {
-	return "rubrique$id_rubrique.html";
+function generer_url_rubrique($id_rubrique, $args='', $ancre='') {
+	return "rubrique$id_rubrique.html" . ($args ? "?$args" : '') . ($ancre ? "#$ancre" : '');
 }
 
 // http://doc.spip.org/@generer_url_breve
-function generer_url_breve($id_breve) {
-	return "breve$id_breve.html";
+function generer_url_breve($id_breve, $args='', $ancre='') {
+	return "breve$id_breve.html" . ($args ? "?$args" : '') .($ancre ? "#$ancre" : '');
 }
 
 // http://doc.spip.org/@generer_url_mot
-function generer_url_mot($id_mot) {
-	return "mot$id_mot.html";
+function generer_url_mot($id_mot, $args='', $ancre='') {
+	return "mot$id_mot.html" . ($args ? "?$args" : '') .($ancre ? "#$ancre" : '');
 }
 
 // http://doc.spip.org/@generer_url_site
-function generer_url_site($id_syndic) {
-	return "site$id_syndic.html";
+function generer_url_site($id_syndic, $args='', $ancre='') {
+	return "site$id_syndic.html" . ($args ? "?$args" : '') .($ancre ? "#$ancre" : '');
 }
 
 // http://doc.spip.org/@generer_url_auteur
-function generer_url_auteur($id_auteur) {
-	return "auteur$id_auteur.html";
+function generer_url_auteur($id_auteur, $args='', $ancre='') {
+	return "auteur$id_auteur.html" . ($args ? "?$args" : '') .($ancre ? "#$ancre" : '');
 }
 
 // http://doc.spip.org/@generer_url_document
-function generer_url_document($id_document) {
+function generer_url_document($id_document, $args='', $ancre='') {
 	include_spip('inc/documents');
-	return generer_url_document_dist($id_document);
+	return generer_url_document_dist($id_document, $args, $ancre);
 }
 
 
@@ -108,9 +108,9 @@ function recuperer_parametres_url($fond, $url) {
 //
 
 // http://doc.spip.org/@generer_url_forum
-function generer_url_forum($id_forum, $show_thread=false) {
+function generer_url_forum($id_forum, $args='', $ancre='') {
 	include_spip('inc/forum');
-	return generer_url_forum_dist($id_forum, $show_thread);
+	return generer_url_forum_dist($id_forum, $args, $ancre);
 }
  }
 ?>

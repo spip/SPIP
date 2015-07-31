@@ -39,23 +39,18 @@ function get_spip_doc($fichier) {
 }
 
 // http://doc.spip.org/@generer_url_document_dist
-function generer_url_document_dist($id_document) {
+function generer_url_document_dist($id_document, $args='', $ancre='') {
 	if (intval($id_document) <= 0)
 		return '';
 	$row = spip_fetch_array(spip_query("SELECT fichier,distant FROM spip_documents WHERE id_document="._q($id_document)));
-	if ($row) {
-
-		// Cette variable de configuration peut etre posee par un plugin
-		// par exemple acces_restreint
-		if ($GLOBALS['meta']["creer_htaccess"] == 'oui'
-		AND $row['distant'] != 'oui')
-			return parametre_url(
-				generer_url_action('acceder_document', "arg=$id_document"),
-				'file', $row['fichier'], '&');
-		else
-			return get_spip_doc($row['fichier']);
-	}
-	return '';
+	if (!$row) return '';
+	// Cette variable de configuration peut etre posee par un plugin
+	// par exemple acces_restreint
+	if ($GLOBALS['meta']["creer_htaccess"] == 'oui'
+	AND $row['distant'] != 'oui') {
+	  $args .= ($args ? "&" : '') . "arg=$id_document&file=" . $row['fichier'] . ($ancre ? "&ancre=$ancre" : '');
+		return generer_url_action('acceder_document', $args);
+	} else	return get_spip_doc($row['fichier']);
 }
 
 //
