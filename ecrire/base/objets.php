@@ -312,7 +312,11 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 		}
 		// repercuter les proprietes generales communes a tous les objets
 		foreach(array_keys($infos_tables) as $t) {
-			$infos_tables[$t] = array_merge_recursive($infos_tables[$t],$all);
+			foreach($all as $i=>$v)
+				if (in_array($i,array('tables_jointures','champs_versionnes')))
+					$infos_tables[$t][$i] = array_merge(isset($infos_tables[$t][$i])?$infos_tables[$t][$i]:array(),$all[$i]);
+				else
+					$infos_tables[$t][$i] = array_merge_recursive(isset($infos_tables[$t][$i])?$infos_tables[$t][$i]:array(),$all[$i]);
 		}
 
 		// completer les tables principales et auxiliaires
