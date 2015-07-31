@@ -471,7 +471,7 @@ Merci de votre participation
 'info_adresse_email' => 'ADRESSE EMAIL&nbsp;:',
 'info_adresse_non_indiquee' => 'Vous n\'avez pas indiqu&eacute; d\'adresse &agrave; tester&nbsp;!',
 'info_adresse_url' => 'Adresse (URL) du site public',
-'info_afficher_visites' => 'Afficher les visites pour:',
+'info_afficher_visites' => 'Afficher les visites pour&nbsp;:',
 'info_affichier_visites_articles_plus_visites' => 'Afficher les visites pour <b>les articles les plus visit&eacute;s depuis le d&eacute;but&nbsp;:</b>',
 'info_aide' => 'AIDE :',
 'info_aide_en_ligne' => 'Aide en ligne SPIP',

@@ -38,7 +38,7 @@ function agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved) {
 	$jour_semaine = date("w",$nom);
 	$nom_mois = nom_mois('2000-'.sprintf("%02d", $mois).'-01');
 	
-	echo "<div align='center' style='padding: 5px;'><b class='verdana1'><a href='calendrier.php3?mois=$mois&&annee=$annee' style='color: black;'>$nom_mois $annee</a></b></div>";
+	echo "<div align='center' style='padding: 5px;'><b class='verdana1'><a href='calendrier.php3?mois=$mois&&annee=$annee' style='color: black;'>".affdate_mois_annee("$annee-$mois-1")."</a></b></div>";
 	
 	echo "<table width='100%' cellspacing='1' cellpadding='2'>";
 
