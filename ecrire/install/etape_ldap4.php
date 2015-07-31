@@ -59,7 +59,7 @@ function install_etape_ldap4_dist()
 		
 		echo fieldset(_T('info_statut_utilisateurs_1'),
 			array(
-				'$statut_ldap' => array(
+				'statut_ldap' => array(
 					'label' => _T('info_statut_utilisateurs_2').'<br />',
 					'valeur' => '1comite',
 					'alternatives' => array(
