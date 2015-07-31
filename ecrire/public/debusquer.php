@@ -587,6 +587,7 @@ function debusquer_entete($titre, $corps)
 	global $debug_objets;
 	include_spip('balise/formulaire_admin');
 	include_spip('public/assembler'); // pour inclure_balise_dynamique
+	include_spip('inc/texte'); // pour corriger_typo
 
 	return _DOCTYPE_ECRIRE .
 	  html_lang_attributes() .
