@@ -13,7 +13,7 @@
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]
 				<span class="affiche"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]>[(#ENV*{afficher_#GET{name}}|affdate)]</span>
-				<span[(#ENV{_saisie_en_cours}|oui)style="display:none;"]>&#91;<a href="#"
+				<span class="toggle_box_link"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]>&#91;<a href="#"
 						onclick="var f=jQuery(this).parents('form').eq(0);f.find('li .input').show('fast').siblings('span').hide('fast');f.find('.boutons').show('fast');f.find('input.date').eq(0).focus();return false;"
 						><:bouton_changer:></a>&#93;</span>
 				<span class="input"[(#ENV{_saisie_en_cours}|non)style="display:none;"]>

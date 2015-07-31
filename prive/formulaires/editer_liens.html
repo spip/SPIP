@@ -23,21 +23,21 @@
 							|parametre_url{associer,#ENV{objet}|concat{'|',#ENV{id_objet}}}
 							|icone_horizontale{[(#VAL{creer_et_associer_un_}|concat{#ENV{objet_source}}|_T)],#ENV{objet_source},new})]
 				]
-				<div class="toggle">
+				<div class="toggle_box_link">
 					&#91;<a href="#"
-						onclick="jQuery(this).parents('div.selecteur').hide('fast').siblings('.toggle').show();jQuery('#visible-#ENV{id}').attr('value',0);return false;"
+						onclick="jQuery(this).parents('div.selecteur').hide('fast').siblings('.toggle_box_link').show();jQuery('#visible-#ENV{id}').attr('value',0);return false;"
 						><:bouton_fermer:></a>&#93;
 				</div>
 			</div>
-			<div class="toggle" style="display:none;">
+			<div class="toggle_box_link" style="display:none;">
 					&#91;<a href="#"
-						onclick="jQuery(this).parents('div.toggle').hide('fast').siblings('.selecteur').show('fast');jQuery('#visible-#ENV{id}').attr('value',1);return false;"
+						onclick="jQuery(this).parents('div.toggle_box_link').hide('fast').siblings('.selecteur').show('fast');jQuery('#visible-#ENV{id}').attr('value',1);return false;"
 						>[(#VAL{titre_ajouter_un_}|concat{#ENV{objet_source}}|_T)]</a>&#93;
 			</div>
 		]
 	[(#ENV{editable})
 		[(#ENV{visible,0}|non)
-		<div class="toggle">
+		<div class="toggle_box_link">
 			&#91;<button class="link" name="visible" value="1">[(#VAL{titre_ajouter_un_}|concat{#ENV{objet_source}}|_T)]</button>&#93;
 		</div>
 		]
