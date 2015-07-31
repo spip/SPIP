@@ -29,41 +29,57 @@ while($row = mysql_fetch_array($result_groupes)) {
 
 }
 
+debut_page("&laquo; $titre &raquo;", "documents", "mots");
 
-debut_page($titre_breve);
 debut_gauche();
 
 
 
 debut_droite();
 
+debut_cadre_enfonce("groupe-mot-24.png");
 
-echo "<A HREF='mots_tous.php3' onMouseOver=\"retour.src='IMG2/retour-on.gif'\" onMouseOut=\"retour.src='IMG2/retour-off.gif'\"><img src='IMG2/retour-off.gif' alt='Retour' width='49' height='46' border='0' name='retour' align='left'></A>";
 
-echo "&nbsp; <font face='verdana,arial,helvetica' size=1><b>GROUPE DE MOTS :</b><br></font>";
-echo "&nbsp; <font face='verdana,arial,helvetica' size=5><b>$titre</b></font>";
-echo aide("motsgroupes")."<p><br><p>";
 
+echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
+echo "<tr width='100%'>";
+
+	echo "<td  align='right' valign='top'>";
+	icone("Retour", "mots_tous.php3", "mot-cle-24.png", "rien.gif");
+	echo "</td>";
+	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
+
+
+echo "<td width='100%' valign='top'>";
+echo "<font face='verdana,arial,helvetica' size=1><b>GROUPE DE MOTS :</b><br></font>";
+gros_titre($titre);
+echo aide("motsgroupes");
 
 if ($connect_statut =="0minirezo"){
-
 	$type=htmlspecialchars(urldecode($type));
-	
-	
-	echo "<font face='verdana,arial,helvetica'>";
+	echo "<p><font face='verdana,arial,helvetica'>";
 	echo "<FORM ACTION='mots_tous.php3' METHOD='post'>\n";
 	echo "<INPUT TYPE='Hidden' NAME='modifier_groupe' VALUE=\"oui\">\n";
 	echo "<INPUT TYPE='Hidden' NAME='id_groupe' VALUE=\"$id_groupe\">\n";
 	echo "<INPUT TYPE='Hidden' NAME='ancien_type' VALUE=\"$titre\">\n";
-
-
-	debut_cadre_relief();
-	echo "<b>Titre de ce groupe :</b><br>\n";
+	debut_cadre_formulaire();
+	echo "<b>Changer le titre de ce groupe :</b><br>\n";
 	echo "<INPUT TYPE='Text' SIZE=40 CLASS='formo' NAME='change_type' VALUE=\"$titre\">\n";
-	fin_cadre_relief();
+	echo "<p><div align='right'><INPUT TYPE='submit' CLASS='fondo' NAME='Valider' VALUE='Valider'></div>";
+	fin_cadre_formulaire();
+}
 
 
-	echo "<p><div class='forml' style='padding:5px; border: solid black 1px'>";
+echo "</td></tr></table>";
+
+
+
+fin_cadre_enfonce();
+
+if ($connect_statut =="0minirezo"){
+	echo "<p>";
+	debut_cadre_formulaire();
+	echo "<div style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #dddddd;'>";
 		echo "<b>Les mots-cl&eacute;s de ce groupe peuvent &ecirc;tre associ&eacute;s&nbsp;:</b>";
 		echo "<ul>";
 		
@@ -92,7 +108,7 @@ if ($connect_statut =="0minirezo"){
 	$config_precise_groupes = lire_meta("config_precise_groupes");
 	if ($config_precise_groupes == "oui" OR $unseul == "oui" OR $obligatoire == "oui"){
 		echo "<p>";
-		echo "<div class='forml' style='padding:5px; border: solid black 1px'>";
+	echo "<div style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #dddddd;'>";
 			
 			if ($unseul == "oui") $checked = "checked";
 			else $checked = "";
@@ -109,7 +125,7 @@ if ($connect_statut =="0minirezo"){
 
 	
 	echo "<p>";
-	echo "<div class='forml' style='padding:5px; border: solid black 1px'>";
+	echo "<div style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #dddddd;'>";
 		echo "<b>Les mots de ce groupe peuvent être attribués par&nbsp;:</b>";
 		echo "<ul>";
 		
@@ -138,9 +154,9 @@ if ($connect_statut =="0minirezo"){
 	
 	
 
-	echo "<p><div align='right'><INPUT TYPE='submit' CLASS='fondo' NAME='Valider' VALUE='Valider'>";
+	echo "<p><div align='right'><INPUT TYPE='submit' CLASS='fondo' NAME='Valider' VALUE='Valider'></div>";
 	echo "</FORM><P>";
-	
+	fin_cadre_formulaire();	
 	echo "</font>";
 
 

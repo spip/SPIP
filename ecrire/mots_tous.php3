@@ -72,7 +72,7 @@ if ($connect_statut == '0minirezo') {
 }
 
 
-debut_page("Mots-cl&eacute;s");
+debut_page("Mots-cl&eacute;s", "documents", "mots");
 debut_gauche();
 
 echo aide ("mots");
@@ -82,20 +82,6 @@ debut_droite();
 
 
 /////
-
-if ($connect_statut =="0minirezo" AND !$conf_mot){
-	echo "<P align='right'>";
-	
-	$query_groupes = "SELECT * FROM spip_groupes_mots ORDER BY titre";
-	$nb_groupes = mysql_num_rows(spip_query($query_groupes));
-
-	if ($nb_groupes > 0)
-		echo "<A HREF='mots_edit.php3?new=oui&redirect=mots_tous.php3' onMouseOver=\"creer_mot.src='IMG2/creer-mot-on.gif'\" onMouseOut=\"creer_mot.src='IMG2/creer-mot-off.gif'\"><img src='IMG2/creer-mot-off.gif' alt='Creer un nouveau mot-cle' width='86' height='56' border='0' name='creer_mot'></A>";
-	else
-		echo "Avant de pouvoir cr&eacute;er des mots-cl&eacute;s,<br> vous devez d'abord cr&eacute;er un groupe de mots&nbsp;:<p align='right'>";
-
-	echo " &nbsp; <A HREF='mots_type.php3?new=oui' onMouseOver=\"creer_groupe.src='IMG2/creer-groupe-on.gif'\" onMouseOut=\"creer_groupe.src='IMG2/creer-groupe-off.gif'\"><img src='IMG2/creer-groupe-off.gif' alt='Creer un nouveau groupe' width='82' height='56' border='0' name='creer_groupe'></A>";
-}
 
 if ($conf_mot>0) {
 	if ($nb_articles == 1) {
@@ -209,18 +195,20 @@ while($row_groupes = mysql_fetch_array($result_groupes)) {
 	$ifond=0;
 	
 	// Afficher le titre du groupe
-	echo "<p><table border=0 cellspacing=0 cellpadding=3 width=\"100%\" style='border: solid black 1px'>";
-	echo "<tr><td bgcolor='#eeeecc' colspan=2><font face='verdana,arial,helvetica,sans-serif' size=3 color='#000000'><b>$titre_groupe</b>";
+	debut_cadre_enfonce("groupe-mot-24.png");
+	echo "<p><table border=0 cellspacing=0 cellpadding=3 width=\"100%\">";
+	echo "<tr><td bgcolor='$couleur_foncee' colspan=2><font face='verdana,arial,helvetica,sans-serif' size=3 color='#ffffff'><b>$titre_groupe</b>";
 	echo "</font></td>";
-	echo "<td bgcolor='#eeeecc' align='right'><font face='verdana,arial,helvetica,sans-serif' size=1>";
-	if ($connect_statut == "0minirezo"){
+	echo "<td bgcolor='$couleur_foncee' align='right'><font face='verdana,arial,helvetica,sans-serif' size=1>";
+	/*if ($connect_statut == "0minirezo"){
 		echo " [<a href=\"mots_type.php3?id_groupe=$id_groupe\">modifier</a>]";
 	}else echo "&nbsp;";
+	*/
 	echo "</font></td></tr>";
 
 
 	
-	echo "<tr><td bgcolor='#eeeeee' colspan=3><font face='verdana,arial,helvetica,sans-serif' size=1>";
+	echo "<tr><td colspan=3><font face='verdana,arial,helvetica,sans-serif' size=1>";
 		if ($articles == "oui") echo "> Articles &nbsp;&nbsp;";
 		if ($breves == "oui") echo "> Br&egrave;ves &nbsp;&nbsp;";
 		if ($rubriques == "oui") echo "> Rubriques &nbsp;&nbsp;";
@@ -239,7 +227,7 @@ while($row_groupes = mysql_fetch_array($result_groupes)) {
 		if ($acces_comite == "oui") echo "> R&eacute;dacteurs &nbsp;&nbsp;";
 		if ($acces_forum == "oui") echo "> Visiteurs du site public &nbsp;&nbsp;";
 		
-	echo "</font></td></tr>";	
+	echo "</font></td></tr></table>";	
 	
 	
 	
@@ -249,7 +237,8 @@ while($row_groupes = mysql_fetch_array($result_groupes)) {
 	$result = spip_query($query);
 
 	if (mysql_num_rows($result) > 0) {
-
+		debut_cadre_relief("mot-cle-24.png");
+		echo "<table border=0 cellspacing=0 cellpadding=3 width=\"100%\">";
 		// Afficher les mots-cles
 		while($row = mysql_fetch_array($result)) {
 			$id_mot = $row['id_mot'];
@@ -278,9 +267,9 @@ while($row_groupes = mysql_fetch_array($result_groupes)) {
 				echo "<TR BGCOLOR='$couleur'>";
 				echo "<TD>";
 				if ($connect_statut == "0minirezo" OR $nombre_mots>0){
-					echo "<A HREF='mots_edit.php3?id_mot=$id_mot&redirect=mots_tous.php3'><img src='IMG2/petite-cle.gif' alt='X' width='23' height='12' border='0'></A>";
+					echo "<A HREF='mots_edit.php3?id_mot=$id_mot&redirect=mots_tous.php3'><img src='img_pack/petite-cle.gif' alt='X' width='23' height='12' border='0'></A>";
 				}else{
-					echo "<img src='IMG2/petite-cle.gif' alt='X' width='23' height='12' border='0'>";
+					echo "<img src='img_pack/petite-cle.gif' alt='X' width='23' height='12' border='0'>";
 				}
 				echo "</TD>";
 				echo "<TD WIDTH=\"50%\">";
@@ -336,19 +325,25 @@ while($row_groupes = mysql_fetch_array($result_groupes)) {
 					echo "<FONT SIZE=1>[<A HREF='mots_tous.php3?conf_mot=$id_mot'>supprimer&nbsp;ce&nbsp;mot</A>]</FONT>";
 				} else echo "&nbsp;";
 
-				//echo "<IMG SRC='IMG2/rien.gif' WIDTH=100 HEIGHT=1 BORDER=0>";
+				//echo "<IMG SRC='img_pack/rien.gif' WIDTH=100 HEIGHT=1 BORDER=0>";
 				echo "</FONT>";
 				echo "</TD>";
 				echo "</TR>\n";
 			}
 		}
 
+	echo "</table>";
+	fin_cadre_relief();
+	
+	$supprimer_groupe = false;
 
 
 	} 
 	else {
+		
 		if ($connect_statut =="0minirezo"){
-			echo "<TR><TD ALIGN='right' COLSPAN=3><A HREF='mots_tous.php3?supp_group=$id_groupe'>Supprimer ce groupe</A></TD></TR>";
+			$supprimer_groupe = true;
+			//echo "<A HREF='mots_tous.php3?supp_group=$id_groupe'>Supprimer ce groupe</A>";
 		}
 	}
 	
@@ -356,11 +351,35 @@ while($row_groupes = mysql_fetch_array($result_groupes)) {
 	
 	
 	
-	echo "</table>";
-
-
+	
+	if ($connect_statut =="0minirezo" AND !$conf_mot){
+		echo "\n<table cellpadding=0 cellspacing=0 border=0 width=100%>";
+		echo "<tr>";
+		echo "<td>";
+		icone("Modifier ce groupe de mots", "mots_type.php3?id_groupe=$id_groupe", "groupe-mot-24.png", "edit.gif");
+		echo "</td>";
+		if ($supprimer_groupe){
+			echo "<td>";
+			icone("Supprimer ce groupe", "mots_tous.php3?supp_group=$id_groupe", "groupe-mot-24.png", "supprimer.gif");
+			echo "</td>";
+			echo "<td> &nbsp; </td>"; // Histoire de forcer "supprimer" un peu plus vers la gauche
+		}
+		echo "<td align='right'>";
+		icone("Cr&eacute;er un nouveau mot-cl&eacute;", "mots_edit.php3?new=oui&redirect=mots_tous.php3&id_groupe=$id_groupe", "mots-cle-24.png", "creer.gif");
+		echo "</td></tr></table>";
+	}	
+	fin_cadre_enfonce();
 
 }
+
+
+
+if ($connect_statut =="0minirezo" AND !$conf_mot){
+	echo "<p>&nbsp;</p><div align='right'>";
+	icone("Cr&eacute;er un nouveau groupe de mots", "mots_type.php3?new=oui", "groupe-mot-24.png", "creer.gif");
+	echo "</div>";
+}
+
 
 
 fin_page();

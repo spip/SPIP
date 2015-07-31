@@ -61,9 +61,9 @@ function texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_
 	}
 	
 	if (strlen($fichier_document)>0)
-		return "<a href='../$fichier_document'><img src='../$fichier_vignette' border='0' height='$hauteur_vignette' width='$largeur_vignette'></a>\n";
+		return "<a href='../$fichier_document'><img src='../$fichier_vignette' border='0' height='$hauteur_vignette' width='$largeur_vignette' align='top'></a>\n";
 	else
-		return "<img src='../$fichier_vignette' border='0' height='$hauteur_vignette' width='$largeur_vignette'>\n";
+		return "<img src='../$fichier_vignette' border='0' height='$hauteur_vignette' width='$largeur_vignette' align='top'>\n";
 }
 
 function texte_vignette_previ($largeur_vignette, $hauteur_vignette, $fichier_vignette,$fichier_document) {
@@ -124,34 +124,35 @@ function afficher_upload($link, $intitule, $inclus = '', $afficher_texte_ftp = t
 	if (tester_upload()) {
 		echo "<b>$intitule</b>";
 		echo aide ("artimg");
-		echo "<br><small><input name='image' type='File'  class='fondgris' style='width:100%'>\n";
-		echo "<div align='right'><input name='ok' type='Submit' VALUE='T&eacute;l&eacute;charger' CLASS='fondgris'></div></small>\n";
+		echo "<br><small><input name='image' type='File'  class='fondl' style='font-size: 9px; width: 100%;'>\n";
+		echo "<div align='right'><input name='ok' type='Submit' VALUE='T&eacute;l&eacute;charger' CLASS='fondo' style='font-size: 9px;'></div></small>\n";
 	}
 
-	if ($connect_statut == '0minirezo' AND $afficher_texte_ftp) {
-		echo "<p><div style='border: 1px #303030 dashed; padding: 2px;'>";
+	if ($connect_statut == '0minirezo') {
 		$texte_upload = texte_upload_manuel("upload", $inclus);
-		echo "<font color='#505050'>";
-		if ($forcer_document) echo '<input type="hidden" name="forcer_document" value="oui">';
 		if ($texte_upload) {
-			echo "\nUn fichier du dossier ecrire/upload&nbsp;:";
-			echo "\n<select name='image2' size='1' class='fondgris' style='width:100%'>";
+			echo "<p><div style='border: 1px #303030 dashed; padding: 2px;'>";
+			echo "<font color='#505050'>";
+			if ($forcer_document) echo '<input type="hidden" name="forcer_document" value="oui">';
+			echo "\nVous pouvez s&eacute;lectionner un fichier du dossier <i>upload</i>&nbsp;:";
+			echo "\n<select name='image2' size='1' class='fondl' style='width:100%; font-size: 9px;'>";
 			echo $texte_upload;
 			echo "\n</select>";
-			echo "\n  <div align='right'><input name='ok' type='Submit' value='Choisir' class='fondgris'></div>";
+			echo "\n  <div align='right'><input name='ok' type='Submit' value='Choisir' class='fondo' style='font-size: 9px;'></div>";
 			
-			
-			if ($dossier_complet){
-				echo "\n<p><b>Portfolio automatique&nbsp;:</b>";
-				echo "\n<br>Vous pouvez installer automatiquement tous les documents contenus dans le dossier <i>upload</i>.";
-				echo "\n<div align='right'><input name='dossier_complet' type='Submit' value='Installer tous les documents' class='fondl'></div>";
+			if ($afficher_texte_ftp){
+				if ($dossier_complet){
+					echo "\n<p><b>Portfolio automatique&nbsp;:</b>";
+					echo "\n<br>Vous pouvez installer automatiquement tous les documents contenus dans le dossier <i>upload</i>.";
+					echo "\n<div align='right'><input name='dossier_complet' type='Submit' value='Installer tous les documents' class='fondo' style='font-size:9px;'></div>";
+				}
 			}
+			echo "</font></div>\n";
 			
 		}
-		else {
+		else if ($afficher_texte_ftp) {
 			echo "En tant qu'administrateur, vous pouvez installer (par FTP) des fichiers dans le dossier ecrire/upload pour ensuite les s&eacute;lectionner directement ici.";
 		}
-		echo "</font></div>\n";
 	}
 	echo "</form>\n";
 	echo "</font>\n";
@@ -166,6 +167,7 @@ function afficher_document($id_document, $image_link, $redirect_url = "", $depli
 	global $connect_id_auteur, $connect_statut;
 	global $couleur_foncee, $couleur_claire;
 	global $this_link;
+	global $options;
 	
 	
 
@@ -277,7 +279,7 @@ function afficher_document($id_document, $image_link, $redirect_url = "", $depli
 
 	// Si pas image, lien vers le document
 	if ($type_inclus != "image") {
-		afficher_icone("../$fichier", 'Voir le document', 'IMG2/voir.gif', 40, 28, 'right');
+		icone ("Voir le document", "../$fichier", "racine-24.png");
 	}
 
 	if ($descriptif) {
@@ -416,20 +418,19 @@ function afficher_documents_non_inclus($id_article) {
 		
 		$documents_lies = fetch_document($query);
 
-		echo "<p><div style='padding: 5px; border : solid 1px black; background-color: #e4e4e4; text-align: left; color: black;'>";	
+		echo "<p>";	
+		debut_cadre_enfonce("doc-24.png");
 		if ($documents_lies) {
 
-			echo "<div style='padding: 5px; border : dashed 1px black; background-color: #aaaaaa; text-align: left; color: black;'>";
-			echo "<font size=1>Les documents suivants sont associ&eacute;s &agrave; votre article. Vous ne les avez pas ins&eacute;r&eacute;s directement dans le texte de votre article, ils appara&icirc;tront sur le site public sous forme de &laquo;documents attach&eacute;s&raquo;.</font>";
-			echo "</div>\n";
+			echo "<font size=2 face='verdana,arial,helvetica,sans-serif'>Les documents suivants sont associ&eacute;s &agrave; votre article. Vous ne les avez pas ins&eacute;r&eacute;s directement dans le texte de votre article, ils appara&icirc;tront sur le site public sous forme de &laquo;documents attach&eacute;s&raquo;.</font>";
 
 
 			$case = "gauche";
-			echo "<table width=100% cellpadding=0 cellspacing=5>";
+			echo "<table width=100% cellpadding=0 cellspacing=0>";
 			reset($documents_lies);
 			while (list(, $id_document) = each($documents_lies)) {
-				if ($case == "gauche") echo "<tr><td width=50% valign='top'>";
-				else echo "</td><td width=50% valign='top'>";
+				if ($case == "gauche") echo "<tr><td><img src='img_pack/rien.gif' height=5></td></tr><tr><td width=50% valign='top'>";
+				else echo "</td><td><img src='img_pack/rien.gif' width=5></td><td width=50% valign='top'>";
 				echo "\n";
 				afficher_horizontal_document($id_document, $image_link, $redirect_url, $id_doc_actif == $id_document);
 				if ($case == "gauche") {
@@ -444,6 +445,7 @@ function afficher_documents_non_inclus($id_article) {
 			}
 			if ($case == "gauche") echo "<td width=50%> </td></tr>";
 			else echo "</tr>";
+			echo "<tr><td><img src='img_pack/rien.gif' height=5></td></tr>";
 			echo "</table>";
 		}
 
@@ -451,16 +453,13 @@ function afficher_documents_non_inclus($id_article) {
 	
 		/// Ajouter nouveau document/image
 		
-		echo "<div style='padding: 2px; border : dashed 1px black; background-color: #aaaaaa; text-align: left; color: black;'>";
+		echo debut_cadre_enfonce("doc-24.png",false,"creer.gif");
+		echo "<div style='padding: 2px; background-color: #aaaaaa; text-align: left; color: black;'>";
 		echo bouton_block_invisible("ajouter_document");	
 		echo "<b><font size=1>AJOUTER UN DOCUMENT</font></b>";
 		echo "</div>\n";
 		echo debut_block_invisible("ajouter_document");
-
-		echo "<p><font face='verdana,arial,helvetica,sans-serif' size=2 color='red'>";
-		echo propre("{{Notez bien:}} seuls apparaissent sur cette page les {{documents}} (et non les simples images), qui n'ont pas &eacute;t&eacute; ins&eacute;r&eacute;s &agrave; l'int&eacute;rieur du texte du document (avec les codes de type &lt;IMGxxx|yy&gt; ou &lt;DOCxxx|yy&gt;).");
-		echo "</font>";
-
+		
 		echo "<p><table width='100%' cellpadding=0 cellspacing=0 border=0>";
 		echo "<tr>";
 		echo "<td width='200' valign='top'>";
@@ -506,8 +505,9 @@ function afficher_documents_non_inclus($id_article) {
 		echo "</font>\n";
 		echo "</td></tr></table>";
 		echo fin_block();
+		fin_cadre_enfonce();
 		
-		echo "</div>";
+		fin_cadre_enfonce();
 
 	}
 
@@ -523,6 +523,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 	global $connect_id_auteur, $connect_statut;
 	global $couleur_foncee, $couleur_claire;
 	global $this_link;
+	global $options;
 
 
 
@@ -554,7 +555,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 
 
 	if ($mode == 'document') {
-		echo "<div style='border: 1px dashed black; padding: 4px; background-color: #fdf4e8;'>\n";
+		echo "<div style='border: 1px dashed #aaaaaa; padding: 4px; background-color: #e4e4e4;'>\n";
 
 		if ($id_vignette) $vignette = fetch_document($id_vignette);
 		if ($vignette) {
@@ -581,8 +582,8 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 			$link->addVar('hash_id_auteur', $connect_id_auteur);
 			$link->addVar('doc_supp', $id_vignette);
 			echo debut_block_invisible($block);
-			echo "<center><b>Vignette personnalis&eacute;e</b><br>";
-			echo "$largeur_vignette x $hauteur_vignette pixels</center>";
+			echo "<b>Vignette personnalis&eacute;e</b>";
+			echo "<center>$largeur_vignette x $hauteur_vignette pixels</center>";
 			echo "<center><font face='verdana,arial,helvetica,sans-serif'><b>[<a ".$link->getHref().">supprimer la vignette</a>]</b></font></center>\n";
 			echo fin_block();
 			echo "</div>\n";
@@ -594,15 +595,11 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 			echo bouton_block_invisible("doc_vignette $id_document,document $id_document");
 			list($icone, $largeur_icone, $hauteur_icone) = vignette_par_defaut($type_extension);
 			if ($icone) {
-				echo "<a href='../$fichier'><img src='$icone' width='$largeur_icone' height='$hauteur_icone'></a>\n";
+				echo "<a href='../$fichier'><img src='$icone' border=0 width='$largeur_icone' align='top' height='$hauteur_icone'></a>\n";
 			}
-			//echo "<font size='2'>VIGNETTE PAR D&Eacute;FAUT</font>";
 			echo "</div>\n";
-
-			//echo "<p>".$raccourci_doc;
-
-			echo "<div align='left'>\n";
 			echo "<font size='2'>\n";
+			echo "<div align='left'>\n";
 			$hash = calculer_action_auteur("ajout_doc");
 
 			$link = $image_link;
@@ -612,20 +609,23 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 			$link->addVar('ajout_doc', 'oui');
 			$link->addVar('id_document', $id_document);
 			$link->addVar('mode', 'vignette');
-
-
-			echo debut_block_invisible($block);
-			echo "<center><b>Vignette par d&eacute;faut</b></center>";
 	
-			echo "<font size=1>";
-			afficher_upload($link, 'Remplacer la vignette par d&eacute;faut par un logo personnalis&eacute;&nbsp;:', 'image', false);
-			echo "</font>";
-			echo fin_block();
+			if ($options == "avancees"){
+				echo debut_block_invisible($block);
+				echo "<b>Vignette par d&eacute;faut</b>";
+	
+				debut_cadre_relief("image-24.png", false, "creer.gif");	
+				echo "<font size=1>";
+				afficher_upload($link, 'Remplacer la vignette par d&eacute;faut par un logo personnalis&eacute;&nbsp;:', 'image', false);
+				echo "</font>";
+				fin_cadre_relief();
+				echo fin_block();
+			}
 			echo "</div>\n";
 		}
 			
 			
-		echo "<p></p><div style='border: 1px dashed #aaaaaa; padding: 0px;'>";	
+		echo "<p></p><div style='border: 1px dashed #666666; padding: 0px;'>";	
 			
 			$block = "document $id_document";
 			echo "<div style='padding: 5px; background-color: #aaaaaa; text-align: left; color: black;'>";	
@@ -633,17 +633,15 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 			echo "<b><font size=2>".propre($titre)."</font></b>";
 			echo "</div>\n";
 			
-			echo debut_block_invisible($block);
-			echo "<div style='padding: 5px; background-color: #ffffff;'>";	
+			echo "<div style='padding: 5px; background-color: #e4e4e4;'>";	
 			if (strlen($descriptif)>0) echo propre($descriptif)."<br>";
 			
-			echo "<font size=1 face='arial,helvetica,sans-serif'>";
+			echo debut_block_invisible($block);
 			if ($type_titre){
 				echo "$type_titre";
 			} else {
 				echo "Document ".majuscules($type_extension);
 			}
-			
 			echo " : <a href='../$fichier'>".taille_en_octets($taille)."</a>";
 
 			$link = new Link($redirect_url);
@@ -652,20 +650,19 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 			echo $link->getForm('POST');
 		
 			echo "<b>Titre&nbsp;:</b><br>\n";
-			echo "<input type='text' name='titre_document' class='forml' value=\"".htmlspecialchars($titre)."\" size='40'><br>";
+			echo "<input type='text' name='titre_document' class='formo' style='font-size:9px;' value=\"".htmlspecialchars($titre)."\" size='40'><br>";
 		
 			echo "<b>Description&nbsp;:</b><br>\n";
-			echo "<textarea name='descriptif_document' rows='6' class='forml' cols='*' wrap='soft'>";
+			echo "<textarea name='descriptif_document' rows='4' class='formo' style='font-size:9px;' cols='*' wrap='soft'>";
 			echo htmlspecialchars($descriptif);
 			echo "</textarea>\n";
 		
 			echo "<div align='right'>";
-			echo "<input class='fondgris' TYPE='submit' NAME='Valider' VALUE='Valider'>";
+			echo "<input TYPE='submit' class='fondo' style='font-size:9px;' NAME='Valider' VALUE='Valider'>";
 			echo "</div>";
 			echo "</form>";
 
 
-			echo "<hr noshade size=1><font size='1'><center>";
 		
 			$link = $image_link;
 			$link->addVar('redirect', $redirect_url);
@@ -673,17 +670,20 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 			$link->addVar('hash_id_auteur', $connect_id_auteur);
 			$link->addVar('doc_supp', $id_document);
 		
-			echo "<p>[<b><a ".$link->getHref().">SUPPRIMER CE DOCUMENT</a></b>]\n";
+			echo "<div align='center'>";
+			icone("Supprimer ce document", $link->getUrl(), "doc-24.png", "supprimer.gif");
+			echo "</div>";
+		
 			echo "</font></center>\n";
-			echo "</font>";
-
-
 			echo "</div>";	
-			echo fin_block();
 
 
 			
+
+			echo fin_block();
 		echo "</div>";	
+
+
 			
 
 		echo "</div>\n";
@@ -741,7 +741,7 @@ function afficher_documents_colonne($id_article) {
 		
 		/// Ajouter nouvelle image
 		echo "\n<p>";
-		debut_cadre_relief();
+		debut_cadre_relief("image-24.png");
 		if ($images_liees) {
 			reset($images_liees);
 		
@@ -752,12 +752,10 @@ function afficher_documents_colonne($id_article) {
 		}
 	
 
+		debut_cadre_relief("image-24.png", false, "creer.gif");
 		
-		echo "<div style='padding: 2px; border : dashed 1px black; background-color: #aaaaaa; text-align: center; color: black;'>";	
-
+		echo "<div style='padding: 2px; background-color: #aaaaaa; text-align: center; color: black;'>";	
 		echo bouton_block_invisible("ajouter_image");
-
-
 		echo "<b><font size=1>AJOUTER UNE IMAGE</font></b>";
 		echo "</div>\n";
 		
@@ -777,12 +775,13 @@ function afficher_documents_colonne($id_article) {
 		echo fin_block();
 	
 		echo "</font>\n";
+		fin_cadre_relief();
 		
 		fin_cadre_relief();
 
 
 		echo "\n<p>";
-		debut_cadre_relief();
+		debut_cadre_enfonce("doc-24.png");
 		if ($documents_lies) {
 		
 			reset($documents_lies);
@@ -796,17 +795,16 @@ function afficher_documents_colonne($id_article) {
 	
 		/// Ajouter nouveau document
 		
-		echo "<div style='padding: 2px; border : dashed 1px black; background-color: #aaaaaa; text-align: center; color: black;'>";	
-
+		
+		debut_cadre_enfonce("doc-24.png", false, "creer.gif");
+		echo "<div style='padding: 2px;background-color: #aaaaaa; text-align: center; color: black;'>";	
 		echo bouton_block_invisible("ajouter_document");
-
-
 		echo "<b><font size=1>AJOUTER UN DOCUMENT</font></b>";
 		echo "</div>\n";
 		
 		echo debut_block_invisible("ajouter_document");
-		echo "<p><font size=1>";
-		echo "<p><b>Vous pouvez joindre &agrave; votre article des documents de type&nbsp;:</b>";
+		echo "<font size=1>";
+		echo "<b>Vous pouvez joindre &agrave; votre article des documents de type&nbsp;:</b>";
 		$query_types_docs = "SELECT extension FROM spip_types_documents ORDER BY extension";
 		$result_types_docs = spip_query($query_types_docs);
 		
@@ -828,8 +826,9 @@ function afficher_documents_colonne($id_article) {
 		echo fin_block();
 		
 		echo "</font>\n";
+		fin_cadre_enfonce();
 		
-		fin_cadre_relief();
+		fin_cadre_enfonce();
 	}
 
 }
@@ -843,9 +842,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 	global $connect_id_auteur, $connect_statut;
 	global $couleur_foncee, $couleur_claire;
 	global $this_link;
-
-
-
+	global $options;
 
 	if (!$redirect_url) $redirect_url = $this_link->getUrl();
 
@@ -860,6 +857,9 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 	$hauteur = $document->get('hauteur');
 	$taille = $document->get('taille');
 	$mode = $document->get('mode');
+	if (!$titre) {
+		$titre = "fichier : ".ereg_replace("^[^\/]*\/[^\/]*\/","",$fichier);
+	}
 
 	$result = spip_query("SELECT * FROM spip_types_documents WHERE id_type=$id_type");
 	if ($type = @mysql_fetch_array($result))	{
@@ -871,7 +871,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 
 
 	if ($mode == 'document') {
-		echo "<div style='border: 1px dashed black; padding: 4px; background-color: #fdf4e8;'>\n";
+		echo "<div style='border: 1px dashed #aaaaaa; padding: 4px; background-color: #e4e4e4;'>\n";
 
 		if ($id_vignette) $vignette = fetch_document($id_vignette);
 		if ($vignette) {
@@ -885,6 +885,8 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			echo "<div align='left'>\n";
 			//echo "<font size='2'>VIGNETTE DE PR&Eacute;VISUALISATION</font>";
 			echo "<div align='center'>";
+			$block = "doc_vignette $id_document";
+			echo bouton_block_invisible("doc_vignette $id_document,document $id_document");
 			echo texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, "$fichier");
 			echo "</div>";
 			echo "<font size='2'>\n";
@@ -895,10 +897,8 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			$link->addVar('hash', calculer_action_auteur("supp_doc ".$id_vignette));
 			$link->addVar('hash_id_auteur', $connect_id_auteur);
 			$link->addVar('doc_supp', $id_vignette);
-			$block = "doc_vignette $id_document";
-			echo bouton_block_invisible("doc_vignette $id_document,document $id_document");
-			echo "<b>Vignette personnalis&eacute;e</b>";
 			echo debut_block_invisible($block);
+			echo "<b>Vignette personnalis&eacute;e</b>";
 			echo "<center>$largeur_vignette x $hauteur_vignette pixels</center>";
 			echo "<center><font face='verdana,arial,helvetica,sans-serif'><b>[<a ".$link->getHref().">supprimer la vignette</a>]</b></font></center>\n";
 			echo fin_block();
@@ -907,14 +907,14 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		else {
 			// pas de vignette
 			echo "<div align='center'>\n";
+			$block = "doc_vignette $id_document";
+			echo bouton_block_invisible("doc_vignette $id_document,document $id_document");
 			list($icone, $largeur_icone, $hauteur_icone) = vignette_par_defaut($type_extension);
 			if ($icone) {
-				echo "<a href='../$fichier'><img src='$icone' width='$largeur_icone' height='$hauteur_icone'></a>\n";
+				echo "<a href='../$fichier'><img src='$icone' border=0 width='$largeur_icone' align='top' height='$hauteur_icone'></a>\n";
 			}
-			//echo "<font size='2'>VIGNETTE PAR D&Eacute;FAUT</font>";
 			echo "</div>\n";
-
-			//echo "<p>".$raccourci_doc;
+			echo "<font size='2'>\n";
 
 			echo "<div align='left'>\n";
 			$hash = calculer_action_auteur("ajout_doc");
@@ -926,65 +926,63 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			$link->addVar('ajout_doc', 'oui');
 			$link->addVar('id_document', $id_document);
 			$link->addVar('mode', 'vignette');
-
-
-			$block = "doc_vignette $id_document";
-			echo bouton_block_invisible("doc_vignette $id_document,document $id_document");
-			echo "<b>Vignette par d&eacute;faut</b>";
-			//echo "<font size=1 face='arial,helvetica,sans-serif' color='#666666'><div align=left>&lt;img$id_document|left&gt;</div><div align=center>&lt;img$id_document|center&gt;</div><div align=right>&lt;img$id_document|right&gt;</div></font>\n";
+			
+			if ($options == 'avancees'){
+				echo debut_block_invisible($block);
+				echo "<b>Vignette par d&eacute;faut</b>";
 	
-			echo debut_block_invisible($block);
-			echo "<font size=1>";
-			afficher_upload($link, 'Remplacer la vignette par d&eacute;faut par un logo personnalis&eacute;&nbsp;:', 'image', false);
-			echo "</font>";
-			echo fin_block();
+				debut_cadre_relief("image-24.png", false, "creer.gif");	
+				echo "<font size=1>";
+				afficher_upload($link, 'Remplacer la vignette par d&eacute;faut par un logo personnalis&eacute;&nbsp;:', 'image', false);
+				echo "</font>";
+				fin_cadre_relief();
+				echo fin_block();
+			}
 			echo "</div>\n";
 		}
 			
 			
-		echo "<p></p><div style='border: 1px dashed #aaaaaa; padding: 0px;'>";	
+		echo "<p></p><div style='border: 1px dashed #666666; padding: 0px;'>";	
 			
 			$block = "document $id_document";
 			echo "<div style='padding: 5px; background-color: #aaaaaa; text-align: left; color: black;'>";	
-			//echo bouton_block_invisible($block);
 			echo "<b><font size=2>".propre($titre)."</font></b>";
 			echo "</div>\n";
 			
-			echo "<div style='padding: 5px; background-color: #ffffff;'>";	
+			echo "<div style='padding: 5px; background-color: #e4e4e4;'>";	
 			if (strlen($descriptif)>0) echo propre($descriptif)."<br>";
 			
 			echo "<font size=1 face='arial,helvetica,sans-serif'>";
+			echo "<font color='666666'><div align=left>&lt;doc$id_document|left&gt;</div><div align=center>&lt;doc$id_document|center&gt;</div><div align=right>&lt;doc$id_document|right&gt;</div></font>\n";
+			echo "</font>";
+
+			echo debut_block_invisible($block);
 			if ($type_titre){
 				echo "$type_titre";
 			} else {
 				echo "Document ".majuscules($type_extension);
 			}
-			
 			echo " : <a href='../$fichier'>".taille_en_octets($taille)."</a>";
-			echo "<font color='666666'><div align=left>&lt;doc$id_document|left&gt;</div><div align=center>&lt;doc$id_document|center&gt;</div><div align=right>&lt;doc$id_document|right&gt;</div></font>\n";
-			echo "</font>";
 
-			echo debut_block_invisible($block);
 			$link = new Link($redirect_url);
 			$link->addVar('modif_document', 'oui');
 			$link->addVar('id_document', $id_document);
 			echo $link->getForm('POST');
 		
 			echo "<b>Titre&nbsp;:</b><br>\n";
-			echo "<input type='text' name='titre_document' class='forml' value=\"".htmlspecialchars($titre)."\" size='40'><br>";
+			echo "<input type='text' name='titre_document' class='formo' style='font-size:9px;' value=\"".htmlspecialchars($titre)."\" size='40'><br>";
 		
 			echo "<b>Description&nbsp;:</b><br>\n";
-			echo "<textarea name='descriptif_document' rows='6' class='forml' cols='*' wrap='soft'>";
+			echo "<textarea name='descriptif_document' rows='4' class='formo' style='font-size:9px;' cols='*' wrap='soft'>";
 			echo htmlspecialchars($descriptif);
 			echo "</textarea>\n";
 		
 			echo "<div align='right'>";
-			echo "<input class='fondgris' TYPE='submit' NAME='Valider' VALUE='Valider'>";
+			echo "<input TYPE='submit' class='fondo' style='font-size:9px;' NAME='Valider' VALUE='Valider'>";
 			echo "</div>";
 			echo "</form>";
 
 
-			echo "<hr noshade size=1><font size='1'><center>";
 		
 			$link = $image_link;
 			$link->addVar('redirect', $redirect_url);
@@ -992,8 +990,12 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			$link->addVar('hash_id_auteur', $connect_id_auteur);
 			$link->addVar('doc_supp', $id_document);
 		
-			echo "<p>[<b><a ".$link->getHref().">SUPPRIMER CE DOCUMENT</a></b>]\n";
+			echo "<div align='center'>";
+			icone_horizontale("Supprimer ce document", $link->getUrl(), "doc-24.png", "supprimer.gif");
+			echo "</div>";
+		
 			echo "</font></center>\n";
+			echo "</div>";	
 
 
 
@@ -1001,7 +1003,6 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 
 
 			
-			echo "</div>";	
 		echo "</div>";	
 			
 
@@ -1009,7 +1010,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 	}
 
 	else if ($mode == 'vignette') {
-		echo "<div style='border: 1px dashed black; padding: 4px; background-color: #ffffff;'>\n";
+		echo "<div style='border: 1px dashed #aaaaaa; padding: 4px; background-color: #f0f0f0;'>\n";
 
 	
 		//
@@ -1030,36 +1031,22 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 
 		if ($type_inclus == 'image') {
 			echo "<div style='text-align: center'>\n";
+			echo bouton_block_invisible($block);
 			echo texte_vignette_document($largeur, $hauteur, $fichier,"");
+			echo "<font face='verdana, arial, helvetica, sans-serif' size='2'>";
 			if (strlen($titre)>0)
 			echo "</div>\n";
-			echo bouton_block_invisible($block);
 			echo "<b>$titre</b><br>";
 			if (strlen($descriptif)>0)
-				echo propre($descriptif)."<br>";
-			echo "<font face='verdana, arial, helvetica, sans-serif' size='1'>$largeur x $hauteur pixels<br></font>\n";
+				echo propre($descriptif);
 	
 			if ($mode == 'vignette')// le raccourci pour une image-document est propose avec la vignette
 				echo $raccourci_doc;
 	
 		}
 	
-		if ($type_inclus == 'image') {
-			if ($mode == 'vignette') {
-				$link = new Link($redirect_url);
-				$link->addVar('transformer_image', 'document');
-				$link->addVar('id_document', $id_document);
-				$link_transformer = "<font size='1'>[<b><a ".$link->getHref().">Transformer en document</a></b>]</font>\n";
-			} else if ($mode == 'document') {
-				$link = new Link($redirect_url);
-				$link->addVar('transformer_image', 'vignette');
-				$link->addVar('id_document', $id_document);
-				$link_transformer = "<font size='1'>[<b><a ".$link->getHref().">Transformer en image affichable</a></b>]</font>\n";
-			}
-		}
-
 		echo debut_block_invisible($block);
-
+			echo "\n<div align='center'><font face='verdana, arial, helvetica, sans-serif' size='1'>$largeur x $hauteur pixels<br></font></div>\n";
 
 			$link = new Link($redirect_url);
 			$link->addVar('modif_document', 'oui');
@@ -1068,10 +1055,10 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		
 			echo "<p></p><div style='border: 1px dashed black; padding: 5px;'>";	
 			echo "<b>Titre de l'image&nbsp;:</b><br>\n";
-			echo "<input type='text' name='titre_document' class='formo' value=\"".htmlspecialchars($titre)."\" size='40'><br>";
+			echo "<input type='text' name='titre_document' class='formo' style='font-size:9px;' value=\"".htmlspecialchars($titre)."\" size='40'><br>";
 		
 			echo "<b>Description&nbsp;:</b><br>\n";
-			echo "<textarea name='descriptif_document' rows='6' class='formo' cols='*' wrap='soft'>";
+			echo "<textarea name='descriptif_document' rows='4' class='formo' cols='*' style='font-size:9px;' wrap='soft'>";
 			echo htmlspecialchars($descriptif);
 			echo "</textarea>\n";
 		
@@ -1081,42 +1068,41 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			echo "</div>";
 			echo "</form>";
 
-			echo "<font size='1'><center>";
-		
+			echo "<center>";
 			$link = $image_link;
 			$link->addVar('redirect', $redirect_url);
 			$link->addVar('hash', calculer_action_auteur("supp_doc ".$id_document));
 			$link->addVar('hash_id_auteur', $connect_id_auteur);
 			$link->addVar('doc_supp', $id_document);
-		
-			echo "<p>[<b><a ".$link->getHref().">SUPPRIMER CETTE IMAGE</a></b>]\n";
-			echo "</font></center><br><br>\n";
+			icone_horizontale ("Supprimer cette image", $link->getUrl(), "image-24.png", "supprimer.gif");
+			echo "</center>\n";
 
 
 			echo "<font size='1'>";
 
-
-			echo "<div style='border: 1px dashed black; padding: 0px;'>";	
-			
-			echo "<div style='padding: 5px; background-color: #333333; text-align: center; color: white;'>";	
-			echo "<b><font size=1>JOINDRE UN DOCUMENT</font></b>";
-			echo "</div>\n";
-			
-			echo "<div style='padding: 5px; background-color: #fdf4e8;'>";	
-
-
-			$link = $image_link;
-			$link->addVar('redirect', $redirect_url);
-			$link->addVar('hash', calculer_action_auteur("ajout_doc"));
-			$link->addVar('hash_id_auteur', $connect_id_auteur);
-			$link->addVar('doc_vignette', $id_document);
-			$link->addVar('titre_vignette', $titre);
-			$link->addVar('descriptif_vignette', $descriptif);
-			$link->addVar('joindre_doc', 'oui');
-			
-			afficher_upload($link, 'Vous pouvez associer un document &agrave; cette image&nbsp;:','',false);
-
-			echo "</div></div>";
+			if ($options == 'avancees'){
+				debut_cadre_enfonce("doc-24.png", false, "creer.gif");
+				echo "<div style='padding: 5px; background-color: #999999; text-align: center; color: white;'>";	
+				echo "<b><font size=1>JOINDRE UN DOCUMENT</font></b>";
+				echo "</div>\n";
+				
+				echo "<div>";	
+	
+	
+				$link = $image_link;
+				$link->addVar('redirect', $redirect_url);
+				$link->addVar('hash', calculer_action_auteur("ajout_doc"));
+				$link->addVar('hash_id_auteur', $connect_id_auteur);
+				$link->addVar('doc_vignette', $id_document);
+				$link->addVar('titre_vignette', $titre);
+				$link->addVar('descriptif_vignette', $descriptif);
+				$link->addVar('joindre_doc', 'oui');
+				
+				afficher_upload($link, 'Vous pouvez associer un document &agrave; cette image&nbsp;:','',false);
+	
+				echo "</div>";
+			fin_cadre_enfonce();
+			}
 
 		echo fin_block();
 
@@ -1126,61 +1112,5 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 	}
 }
 
-
-
-
-//
-// Resume et lien vers les documents lies a l'article
-//
-
-
-
-
-
-function boite_documents_article($id_article) {
-	global $puce;
-
-	$result_doc = spip_query("SELECT type.extension AS extension, COUNT(doc.id_document) AS cnt
-		FROM spip_types_documents AS type, spip_documents AS doc, spip_documents_articles AS lien
-		WHERE lien.id_article=$id_article AND doc.id_document = lien.id_document AND doc.id_type = type.id_type
-		GROUP BY doc.id_type");
-	while ($type = mysql_fetch_object($result_doc)) {
-		$documents .= $puce.$type->cnt." ".$type->extension."<br>";
-		$nbdoc += $type->cnt;
-	}
-
-	$a = "<a href=\"javascript:window.open('article_documents.php3?id_article=$id_article',
-		'docs_article', 'scrollbars=yes,resizable=yes,toolbar=yes,width=630,height=550'); void(0);\">";
-
-	if ($nbdoc)
-		$icone = "documents-directory.png";
-	else
-		$icone = "download-dir.png";
-	$txticone = "$a<img src='IMG2/$icone' width='48' height='48' border='0'></a>";
-
-	if ($nbdoc == 0) {
-		$txtdoc .= $a."<b>Lier une image ou un document &agrave; cet article</b></a>";
-	}
-	else {
-		$txtdoc .= $a."<b>";
-		if ($nbdoc == 1)
-			$txtdoc .= "Un document li&eacute; &agrave; l'article</b></a><br>\n";
-		else {
-			$txtdoc .= "$nbdoc documents li&eacute;s &agrave; l'article</b></a><br>\n";
-		}
-		$txtdoc .= $documents;
-	}
-
-	debut_boite_info();
-	echo "<table border='0' align='center' valign='center'><tr>\n";
-	echo "<td align='right'>\n";
-	echo $txticone;
-	echo "</td>\n";
-	echo "<td align='center'><font size='2'>\n";
-	echo $txtdoc;
-	echo "</font></td>\n";
-	echo "</tr></table>\n";
-	fin_boite_info();
-}
 
 ?>

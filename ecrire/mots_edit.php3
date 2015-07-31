@@ -20,7 +20,7 @@ function mySel($varaut, $variable) {
 //
 if ($connect_statut == '0minirezo') {
 	if ($new == 'oui') {
-		$query = "INSERT INTO spip_mots (titre) VALUES ('')";
+		$query = "INSERT INTO spip_mots (titre,id_groupe) VALUES ('','$id_groupe')";
 		$result = spip_query($query);
 		$id_mot = mysql_insert_id();
 	}
@@ -75,7 +75,7 @@ if ($row = mysql_fetch_array($result)) {
 	$type = $row['type'];
 }
 
-debut_page("&laquo; $titre &raquo;");
+debut_page("&laquo; $titre &raquo;", "documents", "mots");
 debut_gauche();
 
 
@@ -85,13 +85,19 @@ debut_gauche();
 
 debut_boite_info();
 echo "<CENTER>";
-echo "<A HREF='../spip_redirect.php3?id_mot=$id_mot&recalcul=oui'><img src='IMG2/voirenligne.gif' alt='voir en ligne' width='48' height='48' border='0' align='right'></A>";
-
 echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><B>MOT NUM&Eacute;RO :</B></FONT>";
 echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=6><B>$id_mot</B></FONT>";
 echo "</CENTER>";
 fin_boite_info();
 
+echo "<p><center>";
+if ($new == 'oui') {
+	$adresse_retour = "mots_edit.php3?redirect=$redirect&redirect_ok=oui&supp_mot=$id_mot";
+}else {
+	$adresse_retour = "mots_edit.php3?redirect=$redirect&redirect_ok=oui";
+}
+icone("Voir tous les mots-cl&eacute;s", $adresse_retour, "mot-cle-24.png", "rien.gif");
+echo "</center>";
 
 //////////////////////////////////////////////////////
 // Logos du mot-clef
@@ -115,27 +121,41 @@ if ($connect_statut == '0minirezo' AND ($options == 'avancees' OR $arton_ok)) {
 
 debut_droite();
 
-if ($new == 'oui') {
-	echo "<A HREF='mots_edit.php3?redirect=$redirect&redirect_ok=oui&supp_mot=$id_mot' onMouseOver=\"retour.src='IMG2/retour-on.gif'\" onMouseOut=\"retour.src='IMG2/retour-off.gif'\"><img src='IMG2/retour-off.gif' alt='Annuler le nouveau mot-cl&eacute;' width='49' height='46' border='0' name='retour' align='middle'></A>";
-}else {
-	echo "<A HREF='mots_edit.php3?redirect=$redirect&redirect_ok=oui' onMouseOver=\"retour.src='IMG2/retour-on.gif'\" onMouseOut=\"retour.src='IMG2/retour-off.gif'\"><img src='IMG2/retour-off.gif' alt='Retour' width='49' height='46' border='0' name='retour' align='middle'></A>";
-	
+debut_cadre_enfonce("groupe-mot-24.png");
+
+
+echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
+echo "<tr width='100%'>";
+echo "<td width='100%' valign='top'>";
+gros_titre($titre);
+
+
+if (strlen($descriptif) > 1) {
+	echo "<p><div align='left' style='padding: 5px; border: 1px dashed #aaaaaa;'>";
+	echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
+	echo "<b>Descriptif :</b> ";
+	echo propre($descriptif);
+	echo "&nbsp; ";
+	echo "</font>";
+	echo "</div>";
 }
+echo "</td>";
 
-echo "<FONT SIZE=5 FACE='Verdana,Arial,Helvetica,sans-serif'><B>$titre</B></FONT>";
+	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
+	echo "<td  align='right' valign='top'>";
+	icone("Voir en ligne", "../spip_redirect.php3?id_mot=$id_mot&recalcul=oui", "racine-24.png", "rien.gif");
+	echo "</td>";
 
-if (strlen($descriptif)>0 OR strlen($texte)>0){
-	debut_boite_info();
+echo "</tr></table>\n";
 
+
+if (strlen($texte)>0){
 	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif'>";
-	
-	echo "<P><B>$descriptif</B>";
 	echo "<P>$texte";
-	
 	echo "</FONT>";
-
-	fin_boite_info();
 }
+
+
 
 echo "<P>";
 
@@ -159,10 +179,14 @@ afficher_breves("Les br&egrave;ves li&eacute;es &agrave; ce mot-cl&eacute;",
 afficher_sites("Les sites r&eacute;f&eacute;renc&eacute;s li&eacute;es &agrave; ce mot-cl&eacute;",
 "SELECT syndic.* FROM spip_syndic AS syndic, spip_mots_syndic AS lien WHERE lien.id_mot='$id_mot' AND lien.id_syndic=syndic.id_syndic ORDER BY syndic.nom_site DESC LIMIT 0,10");
 
+fin_cadre_enfonce();
+
+
+
 
 if ($connect_statut =="0minirezo"){
 	echo "<P>";
-	debut_cadre_relief();
+	debut_cadre_formulaire();
 
 
 
@@ -191,11 +215,13 @@ if ($connect_statut =="0minirezo"){
 		echo "<B>Nom ou titre du mot-cl&eacute;</B> [Obligatoire]";
 		echo aide ("mots");
 
-		echo "<BR><INPUT TYPE='text' NAME='titre' CLASS='formo' VALUE=\"$titre\" SIZE='40'><P>";
+		echo "<BR><INPUT TYPE='text' NAME='titre' CLASS='formo' VALUE=\"$titre\" SIZE='40'>";
 
+
+		debut_cadre_relief("groupe-mot-24.png");
 		echo  "Dans le groupe :</label>\n";
 		echo aide ("motsgroupes");
-		echo  "<UL><SELECT NAME='id_type'>\n";
+		echo  " &nbsp; <SELECT NAME='id_type' class='fondl'>\n";
 
 		$query_groupes = "SELECT * FROM spip_groupes_mots ORDER BY titre";
 		$result = spip_query($query_groupes);
@@ -206,7 +232,8 @@ if ($connect_statut =="0minirezo"){
 		}			
 
 
-		echo  "</SELECT></UL>";
+		echo  "</SELECT>";
+		fin_cadre_relief();
 
 		
 	
@@ -214,7 +241,7 @@ if ($connect_statut =="0minirezo"){
 
 		if ($options == 'avancees' OR $descriptif) {
 			echo "<B>Descriptif rapide</B><BR>";
-			echo "<TEXTAREA NAME='descriptif' CLASS='forml' ROWS='2' COLS='40' wrap=soft>";
+			echo "<TEXTAREA NAME='descriptif' CLASS='forml' ROWS='4' COLS='40' wrap=soft>";
 			echo $descriptif;
 			echo "</TEXTAREA><P>\n";
 		}
@@ -224,7 +251,7 @@ if ($connect_statut =="0minirezo"){
 
 		if ($options == 'avancees' OR $texte) {
 			echo "<B>Texte explicatif</B><BR>";
-			echo "<TEXTAREA NAME='texte' ROWS='5' CLASS='forml' COLS='40' wrap=soft>";
+			echo "<TEXTAREA NAME='texte' ROWS='8' CLASS='forml' COLS='40' wrap=soft>";
 			echo $texte;
 			echo "</TEXTAREA><P>\n";
 		}
@@ -236,7 +263,7 @@ if ($connect_statut =="0minirezo"){
 		echo "</FORM>";
 	}
 
-fin_cadre_relief();
+	fin_cadre_formulaire();
 }
 
 

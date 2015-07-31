@@ -106,7 +106,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 	if ($nombre_mots > 0 OR ($nombre_groupes > 0 AND $flag_editable)) {
 
-		debut_cadre_relief();
+		debut_cadre_relief("mot-cle-24.png");
 	
 		echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC'>";
 		if ($flag_editable){
@@ -266,7 +266,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 			echo "<TR WIDTH=\"100%\">";
 			echo "<TD BGCOLOR='$couleur'>";
-			echo "<A HREF='$url'><img src='IMG2/petite-cle.gif' alt='X' width='23' height='12' border='0'></A>";
+			echo "<A HREF='$url'><img src='img_pack/petite-cle.gif' alt='X' width='23' height='12' border='0'></A>";
 			echo "</TD>";
 			echo "<TD BGCOLOR='$couleur' width='100%'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>";
 			
@@ -319,7 +319,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	
 			$les_mots[] = $id_mot;
 		}
-		echo "<tr><td></td><td></td><td><img src='IMG2/rien.gif' width=100 height=1></td><td><img src='IMG2/rien.gif' width=90 height=1></td></tr>";
+		echo "<tr><td></td><td></td><td><img src='img_pack/rien.gif' width=100 height=1></td><td><img src='img_pack/rien.gif' width=90 height=1></td></tr>";
 		echo "</TABLE>";
 		
 		if ($les_mots) $les_mots = join($les_mots, ",");

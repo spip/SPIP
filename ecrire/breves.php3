@@ -2,7 +2,7 @@
 
 include ("inc.php3");
 
-debut_page("Br&egrave;ves");
+debut_page("Br&egrave;ves", "documents", "breves");
 debut_gauche();
 
 echo "<P align=left>";
@@ -56,7 +56,7 @@ function aff_breves($id_rubrique){
 
 	if (mysql_num_rows($result)>0){
 		echo "<TABLE BORDER=0 CELLPADDING=3 CELLSPACING=0 WIDTH=100% BACKGROUND=''>";
-		echo "<TR><TD COLSPAN=2><IMG SRC='IMG2/rien.gif' WIDTH=150 HEIGHT=1 BORDER=0></TD><TD BACKGROUND='IMG2/rien.gif'><IMG SRC='IMG2/rien.gif' WIDTH=150 HEIGHT=1 BORDER=0></TD></TR>";
+		echo "<TR><TD COLSPAN=2><IMG SRC='img_pack/rien.gif' WIDTH=150 HEIGHT=1 BORDER=0></TD><TD BACKGROUND='img_pack/rien.gif'><IMG SRC='img_pack/rien.gif' WIDTH=150 HEIGHT=1 BORDER=0></TD></TR>";
 	
 	 	while($row=mysql_fetch_array($result)){
 			$id_breve=$row[0];
@@ -77,13 +77,13 @@ function aff_breves($id_rubrique){
 			echo "<A HREF='breves_voir.php3?id_breve=$id_breve'>";
 				switch($statut){
 					case "prop":
-						echo "<img src='IMG2/breve-prop.gif' alt='X' width='8' height='9' border='0'>";
+						echo "<img src='img_pack/puce-blanche.gif' alt='X' width='8' height='9' border='0'>";
 						break;					
 					case "refuse":
-						echo "<img src='IMG2/breve-refuse.gif' alt='X' width='8' height='9' border='0'>";
+						echo "<img src='img_pack/puce-rouge.gif' alt='X' width='8' height='9' border='0'>";
 						break;					
 					case "publie":
-						echo "<img src='IMG2/breve-publie.gif' alt='X' width='8' height='9' border='0'>";
+						echo "<img src='img_pack/puce-verte.gif' alt='X' width='8' height='9' border='0'>";
 						break;					
 					default:
 						echo "&nbsp;";
@@ -128,12 +128,12 @@ function enfant($leparent){
 		$descriptif=$row[3];
 		$texte=$row[4];
 
-		debut_cadre_relief();
+		debut_cadre_enfonce();
 
 		if  (acces_restreint_rubrique($id_rubrique))
-			echo "<IMG SRC='IMG2/triangle-anim.gif' WIDTH=16 HEIGHT=14 BORDER=0> ";
+			echo "<IMG SRC='img_pack/triangle-anim.gif' WIDTH=16 HEIGHT=14 BORDER=0> ";
 		else
-			echo "<IMG SRC='IMG2/triangle.gif' WIDTH=16 HEIGHT=14 BORDER=0> ";
+			echo "<IMG SRC='img_pack/secteur-24.png' WIDTH=24 HEIGHT=24 BORDER=0 align='middle'> ";
 
 		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>";
 		echo "<B>$titre</B></FONT>\n";
@@ -147,9 +147,11 @@ function enfant($leparent){
 		$query = "SELECT id_breve, date_heure, titre, statut FROM spip_breves ".
 			"WHERE id_rubrique='$id_rubrique' AND statut IN ($statuts) ORDER BY date_heure DESC";
 		afficher_breves('', $query);
-		echo "<P align='right'><A HREF='./breves_edit.php3?new=oui&id_rubrique=$id_rubrique' onMouseOver=\"ecrire_breve$id_rubrique.src='IMG2/ecrire-breve-on.gif'\" onMouseOut=\"ecrire_breve$id_rubrique.src='IMG2/ecrire-breve-off.gif'\"><img src='IMG2/ecrire-breve-off.gif' alt='Ecrire une nouvelle breve' width='75' height='53' border='0' name='ecrire_breve$id_rubrique'></A>";
+		echo "<div align='right'>";
+		icone("&Eacute;crire une nouvelle br&egrave;ve", "breves_edit.php3?new=oui&id_rubrique=$id_rubrique", "breve-24.png", "creer.gif");
+		echo "</div>";
 	
-		fin_cadre_relief();	
+		fin_cadre_enfonce();	
 
 	}
 }

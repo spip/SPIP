@@ -218,9 +218,10 @@ function afficher_sites($titre_table, $requete) {
 	$tranches = afficher_tranches_requete($requete, 3);
 
 	if ($tranches) {
-		echo "<P><TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0><TR><TD WIDTH=100% BACKGROUND=''>";
-		echo "<TABLE WIDTH=100% CELLPADDING=3 CELLSPACING=0 BORDER=0>";
+		//echo "<P><TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0><TR><TD WIDTH=100% BACKGROUND=''>";
+		debut_cadre_relief("site-24.png");
 
+		echo "<TABLE WIDTH=100% CELLPADDING=3 CELLSPACING=0 BORDER=0>";
 		bandeau_titre_boite($titre_table, true);
 
 		echo $tranches;
@@ -277,7 +278,7 @@ function afficher_sites($titre_table, $requete) {
 					$puce = 'puce-orange-anim.gif';
 			}
 
-			echo "<img src='IMG2/$puce' width='7' height='7' border='0'>";
+			echo "<img src='img_pack/$puce' width='7' height='7' border='0'>";
 			echo "&nbsp;&nbsp;".typo($nom_site)."</A>";
 
 			echo " &nbsp;&nbsp; <font size='1'>[<a href='$url_site'>visiter ce site</a>]</font>";
@@ -302,7 +303,9 @@ function afficher_sites($titre_table, $requete) {
 			echo "</td>";					
 			echo "</tr></n>";
 		}
-		echo "</TABLE></TD></TR></TABLE>";
+		echo "</TABLE>";
+		//echo "</TD></TR></TABLE>";
+		fin_cadre_relief();
 	}
 }
 
@@ -396,7 +399,7 @@ function afficher_syndic_articles($titre_table, $requete) {
 							$puce = 'puce-rouge-anim.gif';
 					}
 
-					echo "<img src='IMG2/$puce' width='7' height='7' border='0'>";
+					echo "<img src='img_pack/$puce' width='7' height='7' border='0'>";
 					if ($statut == "refuse") echo "<font color='black'>";
 					if ($statut == "off") echo "<font color='red'>";
 					echo "&nbsp;&nbsp;".$titre;

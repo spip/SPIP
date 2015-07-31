@@ -47,7 +47,7 @@ function rubrique($titre, $statut = "redac") {
 		$larubrique++;
 		$ligne++;
 		
-		$texte[$ligne]="<TR><TD><IMG SRC='IMG2/rien.gif' BORDER=0 WIDTH=10 HEIGHT=1></TD></TR><TD BGCOLOR='#044476' COLSPAN=2><A HREF='#LIEN'>#IMG</A>	<B><A HREF='#LIEN'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#FFFFFF'>$titre</FONT></A></B></TD></TR>";
+		$texte[$ligne]="<TR><TD><IMG SRC='img_pack/rien.gif' BORDER=0 WIDTH=10 HEIGHT=1></TD></TR><TD BGCOLOR='#044476' COLSPAN=2><A HREF='#LIEN'>#IMG</A>	<B><A HREF='#LIEN'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#FFFFFF'>$titre</FONT></A></B></TD></TR>";
 		$rubrique[$ligne]=$larubrique;
 		
 		if (ereg(",$larubrique,","$les_rub")){
@@ -78,10 +78,10 @@ function article($titre, $lien, $statut = "redac") {
 		
 		if ($aide==$lien) {
 			$afficher[$larubrique]=1;
-			$texte[$ligne]= "<TR><TD BGCOLOR='#DDDDDD' ALIGN='right' COLSPAN=2><FONT FACE='Arial,Helvetica,sans-serif' SIZE=2>$titre</font> <IMG SRC='IMG2/triangle.gif' BORDER=0 ALIGN='middle'></TD></TR>";
+			$texte[$ligne]= "<TR><TD BGCOLOR='#DDDDDD' ALIGN='right' COLSPAN=2><FONT FACE='Arial,Helvetica,sans-serif' SIZE=2>$titre</font> <IMG SRC='img_pack/triangle.gif' BORDER=0 ALIGN='middle'></TD></TR>";
 		}
 		else {
-			$texte[$ligne]= "<TR><TD><FONT FACE='Arial,Helvetica,sans-serif' SIZE=2><B><A HREF='aide_index.php3?aide=$lien&les_rub=$les_rub' TARGET='_top'><IMG SRC='IMG2/triangle.gif' BORDER=0></A></B></font></TD><TD BGCOLOR='#FFFFFF'><FONT FACE='Arial,Helvetica,sans-serif' SIZE=2><A HREF='aide_index.php3?aide=$lien&les_rub=$les_rub' TARGET='_top'>$titre</A></font></TD></TR>";
+			$texte[$ligne]= "<TR><TD><FONT FACE='Arial,Helvetica,sans-serif' SIZE=2><B><A HREF='aide_index.php3?aide=$lien&les_rub=$les_rub' TARGET='_top'><IMG SRC='img_pack/triangle.gif' BORDER=0></A></B></font></TD><TD BGCOLOR='#FFFFFF'><FONT FACE='Arial,Helvetica,sans-serif' SIZE=2><A HREF='aide_index.php3?aide=$lien&les_rub=$les_rub' TARGET='_top'>$titre</A></font></TD></TR>";
 		}
 	}
 }
@@ -145,8 +145,8 @@ article("Articles syndiqu&eacute;s","artsyn");
 
 
 rubrique("La messagerie interne");
-article("<img src='IMG2/m_envoi.gif' align='left' border=0> Les messages entre utilisateurs","messut");
-article("<img src='IMG2/m_envoi_bleu.gif' align='left' border=0> Les pense-b&ecirc;te","messpense");
+article("<img src='img_pack/m_envoi.gif' align='left' border=0> Les messages entre utilisateurs","messut");
+article("<img src='img_pack/m_envoi_bleu.gif' align='left' border=0> Les pense-b&ecirc;te","messpense");
 article("Le calendrier","messcalen");
 article("Configuration personnelle de la messagerie","messconf");
 
@@ -179,12 +179,12 @@ for ($i=0; $i<=count($texte); $i++) {
 		if ($aff == 1) {
 			$supp_rub="$larubrique";
 			
-			$texte[$i]=ereg_replace("#IMG","<img src='IMG2/triangle-bleu-bas.gif' alt='&gt;' width='14' height='14' border='0'>",$texte[$i]);
+			$texte[$i]=ereg_replace("#IMG","<img src='img_pack/triangle-bleu-bas.gif' alt='&gt;' width='14' height='14' border='0'>",$texte[$i]);
 			$texte[$i]=ereg_replace("#LIEN","aide_gauche.php3?les_rub=$les_rub&supp_rub=$supp_rub&aide=$aide",$texte[$i]);
 		}
 		else {
 			$ajouter_rub="$larubrique";
-			$texte[$i]=ereg_replace("#IMG","<img src='IMG2/triangle-bleu.gif' alt='&gt;' width='14' height='14' border='0'>",$texte[$i]);
+			$texte[$i]=ereg_replace("#IMG","<img src='img_pack/triangle-bleu.gif' alt='&gt;' width='14' height='14' border='0'>",$texte[$i]);
 //			$texte[$i]=ereg_replace("#LIEN","aide_gauche.php3?les_rub=$les_rub&add_rub=$add_rub&aide=$aide",$texte[$i]);
 			$texte[$i]=ereg_replace("#LIEN","aide_gauche.php3?les_rub=$les_rub&addrub=$ajouter_rub&aide=$aide",$texte[$i]);
 

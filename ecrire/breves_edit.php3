@@ -3,10 +3,6 @@
 include ("inc.php3");
 
 
-debut_page();
-debut_gauche();
-debut_droite();
-
 
 if ($new=="oui") {
 	if (!$id_rubrique) $id_rubrique=0;
@@ -62,6 +58,41 @@ while($row=mysql_fetch_array($result)){
 	if ($new == "oui") $statut = "prop";
 }
 
+
+
+debut_page("Modifier la br&egrave;ve : &laquo; $titre_breve &raquo;", "documents", "breves");
+
+
+debut_grand_cadre();
+
+afficher_parents($id_rubrique);
+$parents="~ <img src='img_pack/racine-24.png' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
+
+$parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
+$parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
+
+echo "$parents";
+
+fin_grand_cadre();
+debut_gauche();
+debut_droite();
+debut_cadre_formulaire();
+
+
+echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
+echo "<tr width='100%'>";
+echo "<td>";
+	icone("Retour", "breve_voir.php3?id_breve=$id_breve", "breve-24.png", "rien.gif");
+
+echo "</td>";
+	echo "<td><img src='img_pack/rien.gif' width=10></td>\n";
+echo "<td width='100%'>";
+echo "Modifier la br&egrave;ve :";
+gros_titre($titre);
+echo "</td></tr></table>";
+echo "<p>";
+
+
 if ($connect_statut=="0minirezo" OR $statut=="prop") {
 	echo "<FORM ACTION='breves_voir.php3?id_breve=$id_breve' METHOD='post'>";
 
@@ -77,11 +108,29 @@ if ($connect_statut=="0minirezo" OR $statut=="prop") {
 
 		echo "<B>&Agrave; l'int&eacute;rieur de la rubrique&nbsp;:</B>".aide ("brevesrub")."<BR>\n";
 
+
+
+	/// Dans la rubrique....
+
+	if ($id_rubrique == 0) $logo_parent = "racine-24.png";
+	else {
+		$query = "SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique'";
+		$result=spip_query($query);
+		while($row=mysql_fetch_array($result)){
+			$parent_parent=$row['id_parent'];
+		}
+		if ($parent_parent == 0) $logo_parent = "secteur-24.png";
+		else $logo_parent = "rubrique-24.png";
+	}
+
+	debut_cadre_relief("$logo_parent");
+
 		echo "<SELECT NAME='id_rubrique' CLASS='forml' SIZE=1>\n";
 		enfant(0);
 		echo "</SELECT><P>\n";
 
-
+	fin_cadre_relief();
+	
 	echo "<B>Texte de la br&egrave;ve</B><BR>";
 	echo "<TEXTAREA NAME='texte' ROWS='15' CLASS='formo' COLS='40' wrap=soft>";
 	echo $texte;
@@ -98,6 +147,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop") {
 
 
 	if ($connect_statut=="0minirezo" AND acces_rubrique($id_rubrique)) {
+		debut_cadre_relief();
 		echo "<B>Cette br&egrave;ve doit-elle &ecirc;tre publi&eacute;e ?</B>\n";
 
 		echo "<SELECT NAME='statut' SIZE=1 CLASS='fondl'>\n";
@@ -107,6 +157,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop") {
 		echo "<OPTION".mySel("publie",$statut).">OUI - Br&egrave;ve valid&eacute;e\n";		
 
 		echo "</SELECT>".aide ("brevesstatut")."<P>\n";
+		fin_cadre_relief();
 	}
 	else {
 		echo "<INPUT TYPE='Hidden' NAME='statut' VALUE=\"$statut\">";
@@ -116,6 +167,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop") {
 }
 else echo "<H2>Page interdite</H2>";
 
+fin_cadre_formulaire();
 fin_page();
 
 ?>

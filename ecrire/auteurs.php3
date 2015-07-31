@@ -4,7 +4,12 @@ include ("inc.php3");
 include_local ("inc_acces.php3");
 
 
-debut_page("Auteurs");
+$choix = join($aff_art,"");
+
+if (ereg("5poubelle",$choix)) debut_page("Auteurs","redacteurs","redac-poubelle");
+else if (ereg("0minirezo",$choix)) debut_page("Auteurs","redacteurs","administrateurs");
+else debut_page("Auteurs","redacteurs","redacteurs");
+
 debut_gauche();
 
 if (!$aff_art) $aff_art[] = "0minirezo,1comite,2redac";
@@ -20,60 +25,6 @@ if ($liste_lettres) $liste_lettres=ereg_replace(",+", ",", $liste_lettres);
 
 echo "<form action='auteurs.php3' method='get'>";
 
-debut_boite_info();
-	echo "<FONT FACE='arial,helvetica,sans-serif'>";
-
-	echo "<B>Afficher les auteurs&nbsp;:</B><BR>";
-	echo "<input type='hidden' name='class' value='$class'>";
-	echo "<input type='hidden' name='liste_lettres' value='$liste_lettres'>";
-
-	if (ereg("0minirezo",$aff_art)){
-		echo "<input type='checkbox' CHECKED name='aff_art[]' value='0minirezo' id='minirezo'>";
-	}else{
-		echo "<input type='checkbox' name='aff_art[]' value='0minirezo' id='minirezo'>";
-	}
-	echo " <label for='minirezo'><img src='IMG2/bonhomme-noir.gif' alt='Admin' width='23' height='12' border='0'>";
-	echo "  Administrateurs</label><BR>";
-
-	if (ereg("2redac",$aff_art) OR ereg("1comite",$aff_art)){
-		echo "<input type='checkbox' CHECKED name='aff_art[]' value='1comite,2redac' id='2redac'>";
-	}else{
-		echo "<input type='checkbox' name='aff_art[]' value='1comite,2redac' id='2redac'>";
-	}
-	echo " <label for='2redac'><img src='IMG2/bonhomme-bleu.gif' alt='Admin' width='23' height='12' border='0'>";
-	echo "  R&eacute;dacteurs</label><BR>";
-
-	if ($connect_statut=="0minirezo"){
-	if (ereg("5poubelle",$aff_art)){
-		echo "<input type='checkbox' CHECKED name='aff_art[]' value='5poubelle' id='5poubelle'>";
-	}else{
-		echo "<input type='checkbox' name='aff_art[]' value='5poubelle' id='5poubelle'>";
-	}
-	echo " <label for='5poubelle'><img src='IMG2/bonhomme-rouge.gif' alt='Admin' width='23' height='12' border='0'>";
-	echo "  A la poubelle</label><BR>";
-	}
-
-
-	if ($publies=="oui"){
-		echo "<input type='checkbox' CHECKED name='publies' value='oui' id='publies'>";
-	}else{
-		echo "<input type='checkbox' name='publies' value='oui' id='publies'>";
-	}
-	echo " <label for='publies'>";
-	echo "  Ayant &eacute;crit des articles</label><BR>";
-
-
-
-
-	echo "<DIV ALIGN='right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer'>";
-	echo "</FONT>";
-fin_boite_info();
-echo "</form>";
-
-
-
-
-
 
 debut_droite();
 
@@ -84,7 +35,7 @@ $flag_editable = ($connect_statut == '0minirezo');
 
 function supp_auteur($id_auteur) {
 	$query="UPDATE spip_auteurs SET statut='5poubelle' WHERE id_auteur=$id_auteur";
-	$result=spip_query($query);
+	$result=mysql_query($query);
 }
 
 if ($supp && $flag_editable) {
@@ -180,10 +131,10 @@ function afficher_auteurs($classement) {
 
 			if (eregi(",".quotemeta($premiere_lettre).",",$liste_lettres) OR $liste_lettres=="tout"){
 				$new_lettres=eregi_replace(quotemeta($premiere_lettre),"",$liste_lettres);
-				echo "<TR><TD BGCOLOR='$couleur' COLSPAN=5><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3><B><A HREF='auteurs.php3?class=$classement&aff_art[]=$aff_art&liste_lettres=$new_lettres&publies=$publies'><img src='IMG2/triangle-bas.gif' alt='&gt;' width='16' height='14' border='0'></A> $premiere_lettre</B></FONT></TD></TR>";
+				echo "<TR><TD BGCOLOR='$couleur' COLSPAN=5><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3><B><A HREF='auteurs.php3?class=$classement&aff_art[]=$aff_art&liste_lettres=$new_lettres&publies=$publies'><img src='img_pack/triangle-bas.gif' alt='&gt;' width='16' height='14' border='0'></A> $premiere_lettre</B></FONT></TD></TR>";
 			}else{
 				$new_lettres=urlencode("$liste_lettres,$premiere_lettre,");
-				echo "<TR><TD BGCOLOR='$couleur' COLSPAN=5><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3><B><A HREF='auteurs.php3?class=$classement&aff_art[]=$aff_art&liste_lettres=$new_lettres&publies=$publies'><img src='IMG2/triangle.gif' alt='&gt;' width='16' height='14' border='0'></A> $premiere_lettre</B></FONT></TD></TR>";
+				echo "<TR><TD BGCOLOR='$couleur' COLSPAN=5><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3><B><A HREF='auteurs.php3?class=$classement&aff_art[]=$aff_art&liste_lettres=$new_lettres&publies=$publies'><img src='img_pack/triangle.gif' alt='&gt;' width='16' height='14' border='0'></A> $premiere_lettre</B></FONT></TD></TR>";
 			
 			}
 		}
@@ -205,7 +156,7 @@ function afficher_auteurs($classement) {
 			echo "<TR>";
 
 			echo "<TD BGCOLOR='$couleur' WIDTH=50>";
-				if ($classement=="auteurs") echo "<IMG SRC='IMG2/rien.gif' WIDTH=24 HEIGHT=12 BORDER=0>";
+				if ($classement=="auteurs") echo "<IMG SRC='img_pack/rien.gif' WIDTH=24 HEIGHT=12 BORDER=0>";
 
 		
 				if ($nombre_articles>0 OR $connect_statut=="0minirezo"){
@@ -213,16 +164,16 @@ function afficher_auteurs($classement) {
 				}
 				switch($statut){
 					case "0minirezo":
-						echo "<img src='IMG2/bonhomme-noir.gif' alt='Admin' width='23' height='12' border='0'>";
+						echo "<img src='img_pack/bonhomme-noir.gif' alt='Admin' width='23' height='12' border='0'>";
 						break;					
 					case "2redac":
-						echo "<img src='IMG2/bonhomme-bleu.gif' alt='Admin' width='23' height='12' border='0'>";
+						echo "<img src='img_pack/bonhomme-bleu.gif' alt='Admin' width='23' height='12' border='0'>";
 						break;					
 					case "1comite":
-						echo "<img src='IMG2/bonhomme-bleu.gif' alt='Admin' width='23' height='12' border='0'>";
+						echo "<img src='img_pack/bonhomme-bleu.gif' alt='Admin' width='23' height='12' border='0'>";
 						break;					
 					case "5poubelle":
-						echo "<img src='IMG2/bonhomme-rouge.gif' alt='Admin' width='23' height='12' border='0'>";
+						echo "<img src='img_pack/bonhomme-rouge.gif' alt='Admin' width='23' height='12' border='0'>";
 						break;					
 					case "nouveau":
 						echo "&nbsp;";
@@ -291,7 +242,7 @@ else $aff_articles="prop,publie";
 
 
 	 	$query="SELECT auteurs.*, COUNT(articles.id_article) AS compteur FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien, spip_articles AS articles WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_article=articles.id_article AND FIND_IN_SET(auteurs.statut,'$aff_art')>0 AND FIND_IN_SET(articles.statut,'$aff_articles') GROUP BY auteurs.id_auteur";
-		calculer_auteurs(spip_query($query));
+		calculer_auteurs(mysql_query($query));
 
 
 	if($nombre_auteurs<30) $liste_lettres="tout";
@@ -301,19 +252,8 @@ else $aff_articles="prop,publie";
 			$ze_auteurs=substr($les_auteurs,1,strlen($les_auteurs));
 
 			$query="SELECT *, 0 AS compteur FROM spip_auteurs WHERE FIND_IN_SET(id_auteur,'$ze_auteurs')=0 AND FIND_IN_SET(statut,'$aff_art')>0";
-			calculer_auteurs(spip_query($query));
+			calculer_auteurs(mysql_query($query));
 		}
-
-
-
-if ($connect_statut =="0minirezo"){
-	echo "<P align='right'><A HREF='auteurs_edit.php3?new=oui&redirect=$retour' onMouseOver=\"creer_auteur.src='IMG2/creer-auteur-on.gif'\" onMouseOut=\"creer_auteur.src='IMG2/creer-auteur-off.gif'\"><img src='IMG2/creer-auteur-off.gif' alt='Creer un nouvel auteur' width='71' height='56' border='0' name='creer_auteur'></A>";
-
-}
-
-
-
-
 
 
 
@@ -323,27 +263,27 @@ if ($connect_statut =="0minirezo"){
 
 $ifond=0;
 
-
+debut_cadre_relief("redacteur-24.png");
 echo "<TABLE BORDER=0 CELLPADDING=3 CELLSPACING=0 WIDTH=\"100%\">";
 echo "<TR>";
 if ($class=="statut"){
-	echo "<TD BGCOLOR='$couleur_foncee'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><IMG SRC='IMG2/rien.gif' BORDER=0 WIDTH=50 HEIGHT=2><BR><img src='IMG2/triangle-bleu-bas.gif' alt='X' width='14' height='14' border='0'></FONT></TD>";
+	echo "<TD BGCOLOR='$couleur_foncee'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><IMG SRC='img_pack/rien.gif' BORDER=0 WIDTH=50 HEIGHT=2><BR><img src='img_pack/triangle-bleu-bas.gif' alt='X' width='14' height='14' border='0'></FONT></TD>";
 }else{
-	echo "<TD BGCOLOR='#DBE1C5'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><IMG SRC='IMG2/rien.gif' BORDER=0 WIDTH=50 HEIGHT=2><BR><A HREF='auteurs.php3?aff_art[]=$aff_art&class=statut&liste_lettres=$liste_lettres&publies=$publies'><img src='IMG2/bonhomme-noir.gif' alt='Admin' width='23' height='12' border='0'></A></FONT></TD>";
+	echo "<TD BGCOLOR='#DBE1C5'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><IMG SRC='img_pack/rien.gif' BORDER=0 WIDTH=50 HEIGHT=2><BR><A HREF='auteurs.php3?aff_art[]=$aff_art&class=statut&liste_lettres=$liste_lettres&publies=$publies'><img src='img_pack/bonhomme-noir.gif' alt='Admin' width='23' height='12' border='0'></A></FONT></TD>";
 }
 
 if ($class=="auteurs"){
-	echo "<TD BGCOLOR='$couleur_foncee'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#FFFFFF'><img src='IMG2/triangle-bleu-bas.gif' alt='X' width='14' height='14' border='0'> <B>Nom</B></FONT></TD>";
+	echo "<TD BGCOLOR='$couleur_foncee'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#FFFFFF'><img src='img_pack/triangle-bleu-bas.gif' alt='X' width='14' height='14' border='0'> <B>Nom</B></FONT></TD>";
 }else{
 	echo "<TD BGCOLOR='#DBE1C5'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><A HREF='auteurs.php3?aff_art[]=$aff_art&class=auteurs&liste_lettres=$liste_lettres&publies=$publies'>Nom</A></FONT></TD>";
 
 }
 if ($connect_statut=="0minirezo"){
-	echo "<TD BGCOLOR='#DBE1C5'><IMG SRC='IMG2/rien.gif' BORDER=0 WIDTH=50 HEIGHT=2></TD>";
+	echo "<TD BGCOLOR='#DBE1C5'><IMG SRC='img_pack/rien.gif' BORDER=0 WIDTH=50 HEIGHT=2></TD>";
 }
-echo "<TD BGCOLOR='#DBE1C5'><IMG SRC='IMG2/rien.gif' BORDER=0 WIDTH=40 HEIGHT=2></TD>";
+echo "<TD BGCOLOR='#DBE1C5'><IMG SRC='img_pack/rien.gif' BORDER=0 WIDTH=40 HEIGHT=2></TD>";
 if ($class=="articles"){
-	echo "<TD BGCOLOR='$couleur_foncee'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#FFFFFF'><img src='IMG2/triangle-bleu-bas.gif' alt='X' width='14' height='14' border='0'>&nbsp;<B>Articles</B></FONT></TD>";
+	echo "<TD BGCOLOR='$couleur_foncee'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#FFFFFF'><img src='img_pack/triangle-bleu-bas.gif' alt='X' width='14' height='14' border='0'>&nbsp;<B>Articles</B></FONT></TD>";
 }else{
 	echo "<TD BGCOLOR='#DBE1C5'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><A HREF='auteurs.php3?aff_art[]=$aff_art&class=articles&liste_lettres=$liste_lettres&publies=$publies'>Articles</A></FONT></TD>";
 
@@ -357,6 +297,13 @@ echo "</TR>";
 
 
 echo "</TABLE>";
+fin_cadre_relief();
+
+if ($connect_statut =="0minirezo"){
+	echo "<div align='right'>";
+	icone ("Cr&eacute;er un nouvel auteur", "auteurs_infos.php3?new=oui&redirect=$retour", "redacteur-24.png", "creer.gif");
+	echo "</div>";
+}
 
 
 fin_page();

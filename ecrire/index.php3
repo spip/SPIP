@@ -2,7 +2,7 @@
 
 include ("inc.php3");
 
-debut_page("Votre espace priv&eacute;");
+debut_page("Votre espace priv&eacute;", "asuivre", "asuivre");
 
 debut_gauche();
 
@@ -16,29 +16,67 @@ if($options != 'avancees') {
 }
 
 
-//
-// Annonces
-//
-$query = "SELECT * FROM spip_messages WHERE type = 'affich' AND statut = 'publie' ORDER BY date_heure DESC";
-$result = spip_query($query);
 
-if (mysql_num_rows($result) > 0){
-	echo "<p><table cellpadding=1 cellspacing=0 border=0 width=100%><tr><td width=100% bgcolor='black'>";
-	echo "<table cellpadding=5 cellspacing=0 border=0 width=100%><tr><td width=100% bgcolor='yellow'>";
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='1'>";
-	while ($row = mysql_fetch_object($result)) {
-		if (ereg("^=([^[:space:]]+)$",$row->texte,$match))
-			$url = $match[1];
-		else
-			$url = "message.php3?id_message=".$row->id_message;
-		$titre = typo($row->titre);
-		echo "<li> <a href='$url'>$titre</a>\n";
+function enfant($collection){
+	global $les_enfants;
+	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection\" ORDER BY titre";
+	$result2 = mysql_query($query2);
+	
+	while($row=mysql_fetch_array($result2)){
+		$id_rubrique=$row[0];
+		$id_parent=$row[1];
+		$titre=$row[2];
+		$descriptif=propre($row[3]);
+	
+		$bouton_layer = bouton_block_invisible("enfants$id_rubrique");
+		$les_sous_enfants = sous_enfant($id_rubrique);
+
+		$les_enfants.= "<P>";
+		if ($id_parent == "0") $les_enfants .= debut_cadre_relief("secteur-24.png", true);
+		else  $les_enfants .= debut_cadre_relief("rubrique-24.png", true);
+		$les_enfants.= "<FONT FACE=\"verdana,arial,helvetica,sans-serif\">";
+
+		if (strlen($les_sous_enfants) > 0){
+			$les_enfants.= $bouton_layer;
+		}
+		if  (acces_restreint_rubrique($id_rubrique)){
+			$les_enfants.= "<B><A HREF='naviguer.php3?coll=$id_rubrique'><font color='red'>".typo($titre)."</font></A></B>";
+		}else{
+			$les_enfants.= "<B><A HREF='naviguer.php3?coll=$id_rubrique'>".typo($titre)."</A></B>";
+		}
+		if (strlen($descriptif)>1)
+			$les_enfants.="<BR><FONT SIZE=1>$descriptif</FONT>";
+
+		$les_enfants.= "</FONT>";
+
+		$les_enfants.="<FONT FACE='arial, helvetica'>";
+		$les_enfants .= $les_sous_enfants;
+		$les_enfants .="</FONT>&nbsp;";
+		$les_enfants .= fin_cadre_relief(true);
 	}
-	echo "</font>";
-	echo "</div>";
-	echo "</td></tr></table>";
-	echo "</td></tr></table>";
 }
+
+function sous_enfant($collection2){
+	$query3 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection2\" ORDER BY titre";
+	$result3 = mysql_query($query3);
+
+	if (mysql_num_rows($result3) > 0){
+		$retour = debut_block_invisible("enfants$collection2")."\n\n<FONT SIZE=1><ul style='list-style-image: url(img_pack/rubrique-12.png)'>";
+		while($row=mysql_fetch_array($result3)){
+			$id_rubrique2=$row[0];
+			$id_parent2=$row[1];
+			$titre2=$row[2];
+			
+			$retour.="<LI><A HREF='naviguer.php3?coll=$id_rubrique2'>$titre2</A>\n";
+		}
+		$retour .= "</FONT></ul>\n\n".fin_block()."\n\n";
+	}
+	
+	return $retour;
+}
+
+
+
 
 
 
@@ -48,7 +86,7 @@ if (mysql_num_rows($result) > 0){
 
 echo "<p align='left'>";
 
-debut_boite_info();
+debut_cadre_relief("fiche-perso-24.png");
 echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
 echo bouton_block_invisible("info_perso");
 echo "<font size='1' color='black'><b>".majuscules($connect_nom)."</b></font>";
@@ -70,11 +108,7 @@ else {
 	echo "<br>Vous n'utilisez pas la messagerie interne de ce site.";
 }
 
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1>";
-echo "<br><IMG SRC='IMG2/triangle.gif' WIDTH=16 HEIGHT=14 BORDER=0>";
-echo " <b><a HREF='auteurs_edit.php3?id_auteur=$connect_id_auteur&redirect=index.php3'>MODIFIER VOS INFORMATIONS PERSONNELLES</a></b>";
-echo "</FONT>";
-
+icone_horizontale("Modifier les informations personnelles", "auteurs_edit.php3?id_auteur=$connect_id_auteur&redirect=index.php3", "fiche-perso-24.png","rien.gif");
 
 //
 // Supprimer le cookie, se deconnecter...
@@ -83,7 +117,7 @@ echo "</FONT>";
 if ($connect_statut == "0minirezo" AND $cookie_admin) {
 	echo "<hr>";
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
-	echo "<img src='IMG2/triangle.gif' width=16 height=14 border=0>";
+	echo "<img src='img_pack/triangle.gif' width=16 height=14 border=0>";
 	echo " <a href='../spip_cookie.php3?supp_cookie=oui'><B>SUPPRIMER LE COOKIE</B></A>";
 		echo aide ("cookie");
 	echo "</font>";
@@ -92,40 +126,96 @@ if ($connect_statut == "0minirezo" AND $cookie_admin) {
 if ($auth_can_disconnect) {
 	echo "<hr>";
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
-	echo "<img src='IMG2/triangle.gif' width=16 height=14 border=0>";
+	echo "<img src='img_pack/triangle.gif' width=16 height=14 border=0>";
 	echo " <a href='?logout=$connect_login'><b>SE D&Eacute;CONNECTER</b></a>";
 	echo "</font>";
 }
 
 echo fin_block();
 
-fin_boite_info();
+fin_cadre_relief();
 
 
 //
-// Afficher les principales rubriques
+// Annonces
 //
-
-echo "<P align=left>";
-
-echo "<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=0 WIDTH=\"100%\">";
-
-$query = "SELECT id_rubrique, titre FROM spip_rubriques WHERE id_parent=0 ORDER BY titre";
+$query = "SELECT * FROM spip_messages WHERE type = 'affich' AND statut = 'publie' ORDER BY date_heure DESC";
 $result = spip_query($query);
-while ($row = mysql_fetch_array($result)) {
-	$id_rubrique = $row['id_rubrique'];
-	$titre_rubrique = typo($row['titre']);
-	if  (acces_restreint_rubrique($id_rubrique))
-		echo "<TR><TD BACKGROUND='IMG2/rien.gif'><A HREF='naviguer.php3?coll=$id_rubrique'><IMG SRC='IMG2/triangle-anim.gif' WIDTH=16 HEIGHT=14 BORDER=0></A></TD>";
-	else
-		echo "<TR><TD BACKGROUND='IMG2/rien.gif'><A HREF='naviguer.php3?coll=$id_rubrique'><IMG SRC='IMG2/triangle.gif' WIDTH=16 HEIGHT=14 BORDER=0></A></TD>";
 
-	echo "<TD BACKGROUND='IMG2/rien.gif' WIDTH=\"100%\"><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><B>";
-	echo "<A HREF='naviguer.php3?coll=$id_rubrique'>$titre_rubrique</A>";
-	echo "</B></FONT></TD></TR>";
+if (mysql_num_rows($result) > 0){
+	debut_cadre_enfonce("messagerie-24.png");
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='1'>";
+	echo "<div style='background-color: yellow; padding: 3px;'>";
+	echo "<b>Annonces g&eacute;n&eacute;rales :</b>";
+	echo "</div>";
+	while ($row = mysql_fetch_object($result)) {
+		if (ereg("^=([^[:space:]]+)$",$row->texte,$match))
+			$url = $match[1];
+		else
+			$url = "message.php3?id_message=".$row->id_message;
+		$titre = typo($row->titre);
+		echo "<div style='padding-top: 2px;'><img src='img_pack/m_envoi_jaune.gif' border=0> <a href='$url'>$titre</a></div>\n";
+	}
+	echo "</font>";
+	fin_cadre_enfonce();
 }
 
-echo "</TABLE>";
+
+
+
+
+debut_cadre_enfonce();
+echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
+echo "<b>RACCOURCIS :</b><p>";
+
+
+//
+// Afficher les boutons de creation d'article et de breve
+//
+
+$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
+$result = spip_query($query);
+
+if (mysql_num_rows($result) > 0) {
+	icone_horizontale("&Eacute;crire un nouvel article", "articles_edit.php3?new=oui", "article-24.png","creer.gif");
+
+	$activer_breves = lire_meta("activer_breves");
+	if ($activer_breves != "non") {
+		icone_horizontale("&Eacute;crire une nouvelle br&egrave;ve", "breves_edit.php3?new=oui", "breve-24.png","creer.gif");
+	}
+}
+else {
+	if ($connect_statut == '0minirezo') {
+		echo "<p>Avant de pouvoir &eacute;crire des articles,<BR> vous devez cr&eacute;er au moins une rubrique.<BR>";
+	}
+}
+if ($connect_statut == '0minirezo') {
+	icone_horizontale("Cr&eacute;er une nouvelle rubrique", "rubriques_edit.php3?new=oui", "rubrique-24.png","creer.gif");
+}
+
+
+
+echo "<p>";
+$activer_messagerie = lire_meta("activer_messagerie");
+
+icone_horizontale("Forum interne", "forum.php3", "forum-interne-24.png","rien.gif");
+
+if ($connect_statut == "0minirezo")	{
+	icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.png","rien.gif");
+}
+if ($activer_messagerie != 'non' AND $connect_activer_messagerie != 'non') {
+	icone_horizontale("Messagerie interne", "messagerie.php3", "messagerie-24.png","rien.gif");
+}
+
+if ($connect_statut == "0minirezo")	{
+	echo "<p>";
+	icone_horizontale("Statistiques du site", "statistiques.php3", "statistiques-24.png","rien.gif");
+	icone_horizontale("Suivi des forums", "controle_forum.php3", "suivi-forum-24.png","rien.gif");
+}
+
+echo "</font>";
+fin_cadre_enfonce();
+
 
 
 debut_droite();
@@ -154,6 +244,7 @@ if ($meta["debut_restauration"]) {
 	else {
 		$texte_boite = "Erreur de restauration : fichier inexistant.";
 	}
+	
 	debut_boite_alerte();
 	echo "<font FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=4 color='black'><B>$texte_boite</B></font>";
 	fin_boite_alerte();
@@ -191,31 +282,6 @@ if ($connect_statut == "0minirezo") {
 }
 
 
-//
-// Afficher les boutons de creation d'article et de breve
-//
-
-$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
-$result = spip_query($query);
-
-if (mysql_num_rows($result) > 0) {
-
-	echo "<P align=right>";
-	echo "<A HREF='./articles_edit.php3?new=oui' onMouseOver=\"ecrire_article.src='IMG2/ecrire-article-on.gif'\" onMouseOut=\"ecrire_article.src='IMG2/ecrire-article-off.gif'\"><img src='IMG2/ecrire-article-off.gif' alt='Ecrire un nouvel article' width='69' height='53' border='0' name='ecrire_article'></A>";
-
-	$activer_breves = lire_meta("activer_breves");
-	if ($activer_breves != "non") {
-		echo " &nbsp; ";
-		echo "<A HREF='./breves_edit.php3?new=oui' onMouseOver=\"ecrire_breve.src='IMG2/ecrire-breve-on.gif'\" onMouseOut=\"ecrire_breve.src='IMG2/ecrire-breve-off.gif'\"><img src='IMG2/ecrire-breve-off.gif' alt='Ecrire une nouvelle breve' width='75' height='53' border='0' name='ecrire_breve'></A>";
-	}
-}
-else {
-	if ($connect_statut == '0minirezo') {
-		echo "<P align=right>";
-		echo "Avant de pouvoir &eacute;crire des articles,<BR> vous devez <A HREF='rubriques_edit.php3?new=oui&retour=nav' onMouseOver=\"creer_rubrique.src='IMG2/creer-rubrique-on.gif'\" onMouseOut=\"creer_rubrique.src='IMG2/creer-rubrique-off.gif'\">cr&eacute;er au moins une rubrique</A>.<BR>";
-		echo "<A HREF='rubriques_edit.php3?new=oui&retour=nav' onMouseOver=\"creer_rubrique.src='IMG2/creer-rubrique-on.gif'\" onMouseOut=\"creer_rubrique.src='IMG2/creer-rubrique-off.gif'\"><img src='IMG2/creer-rubrique-off.gif' alt='Creer une nouvelle sous-rubrique' width='95' height='56' border='0' name='creer_rubrique' ALIGN='top'></A>";
-	}
-}
 
 
 //
@@ -276,7 +342,7 @@ if (!$relief AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 
 if ($relief) {
 	echo "<p>";
-	debut_cadre_relief();
+	debut_cadre_enfonce();
 
 	//
 	// Les articles a valider
@@ -305,8 +371,34 @@ if ($relief) {
 			"SELECT * FROM spip_syndic WHERE syndication='off' ORDER BY nom_site");
 	}
 	
-	fin_cadre_relief();	
+	fin_cadre_enfonce();	
 }	
+
+
+enfant(0);
+
+
+$les_enfants2=substr($les_enfants,round(strlen($les_enfants)/2),strlen($les_enfants));
+if (strpos($les_enfants2,"<P>")){
+	$les_enfants2=substr($les_enfants2,strpos($les_enfants2,"<P>"),strlen($les_enfants2));
+	$les_enfants1=substr($les_enfants,0,strlen($les_enfants)-strlen($les_enfants2));
+}else{
+	$les_enfants1=$les_enfants;
+	$les_enfants2="";
+}
+
+
+// Afficher les sous-rubriques
+	echo "<p><table cellpadding=0 cellspacing=0 border=0 width='100%'>";
+	echo "<tr><td valign='top' width=50%>$les_enfants1</td>";
+	echo "<td width=20><img src='img_pack/rien.gif' width=20></td>";
+	echo "<td valign='top' width=50%>$les_enfants2 &nbsp;";
+	if (strlen($les_enfants2) > 0) echo "<p>";
+	echo "</td></tr>";
+	echo "</table>";
+
+
+
 
 
 //
@@ -331,15 +423,6 @@ if ($options == 'avancees') {
 		"FROM spip_articles AS articles, spip_auteurs_articles AS lien ".
 		"WHERE articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut=\"publie\" ORDER BY articles.date DESC", true);
 
-	//
-	//  Vos articles refuses
-	//
-
-	echo "<p>";
-	afficher_articles("Vos articles refus&eacute;s",
-		"SELECT articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
-		"FROM spip_articles AS articles, spip_auteurs_articles AS lien ".
-		"WHERE articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut=\"refuse\" ORDER BY articles.date DESC");
 
 }
 

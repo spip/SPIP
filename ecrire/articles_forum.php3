@@ -6,15 +6,33 @@ include_local ("inc_logos.php3");
 
 
 
-$query = "SELECT * FROM spip_articles WHERE id_article='$id_article'";
+$query = "SELECT titre, id_rubrique FROM spip_articles WHERE id_article='$id_article'";
 $result = spip_query($query);
 
 while($row = mysql_fetch_array($result)) {
 	$titre = $row["titre"];
+	$id_rubrique = $row["id_rubrique"];
 }
 
 
-debut_page($titre);
+debut_page($titre, "documents", "articles");
+
+
+
+debut_grand_cadre();
+
+afficher_parents($id_rubrique);
+$parents="~ <img src='img_pack/racine-24.png' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
+
+$parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
+$parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
+
+echo "$parents";
+
+fin_grand_cadre();
+
+
+
 debut_gauche();
 
 
@@ -32,10 +50,21 @@ fin_boite_info();
 debut_droite();
 
 
-echo "<A HREF='articles.php3?id_article=$id_article' onMouseOver=\"retour.src='IMG2/retour-on.gif'\" onMouseOut=\"retour.src='IMG2/retour-off.gif'\"><img src='IMG2/retour-off.gif' alt='Retour &agrave; l article' width='49' height='46' border='0' name='retour' align='left'></A>";
-echo "Messages publics de l'article :<BR><FONT SIZE=5 COLOR='$couleur_foncee' FACE='Verdana,Arial,Helvetica,sans-serif'><B>".typo($titre)."</B></FONT>";
+echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
+echo "<tr width='100%'>";
+echo "<td>";
+	icone("Retour", "articles.php3?id_article=$id_article", "article-24.png", "rien.gif");
 
-echo "<BR><BR>";
+echo "</td>";
+	echo "<td><img src='img_pack/rien.gif' width=10></td>\n";
+echo "<td width='100%'>";
+echo "Messages publics de l'article :";
+gros_titre($titre);
+echo "</td></tr></table>";
+echo "<p>";
+
+
+
 
 $mots_cles_forums = lire_meta("mots_cles_forums");
 
