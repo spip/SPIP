@@ -22,7 +22,7 @@ define("_INC_URLS2", "1");
 Il faut recopier le fichier htaccess-propres.txt sous le nom .htaccess
 dans le repertoire de base du site SPIP (attention a ne pas ecraser
 d'autres reglages que vous pourriez avoir mis dans ce fichier) ; si votre site
-est en "sous-repertoire", pensez a editer la ligne "RewriteBase" ce fichier.
+est en "sous-repertoire", vous devrez editer la ligne "RewriteBase" ce fichier.
 
 definissez ensuite dans ecrire/mes_options.php3 :
 	type_urls = 'propres';
