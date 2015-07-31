@@ -359,8 +359,8 @@ function balise_POPULARITE_MAX_dist($p) {
 }
 
 function balise_EXPOSE_dist($p) {
-	$on = 'on';
-	$off= '';
+	$on = "'on'";
+	$off= "''";
 
 	if ($p->param && !$p->param[0][0]) {
 		$on =  calculer_liste($p->param[0][1],
