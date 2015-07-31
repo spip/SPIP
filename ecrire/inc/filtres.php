@@ -28,9 +28,9 @@ function chercher_filtre($fonc, $default=NULL) {
 		return $default;
 }
 
-function appliquer_filtre($arg, $filtre) {
-	$f = chercher_filtre(preg_replace('/\W/','_', $filtre),'filtre_text_txt_dist');
-	return $f($arg);
+function appliquer_filtre($arg, $filtre, $default=NULL) {
+	$f = chercher_filtre(preg_replace('/\W/','_', $filtre), $default);
+	return !$f ? '' : $f($arg);
 }
 
 function filtre_text_txt_dist($t) {
@@ -42,6 +42,16 @@ function filtre_text_csv_dist($t)
 	return propre("\n|" .
 		      str_replace(';','|',preg_replace('/\r?\n/', "|\n|",$t))
 		      . "|\n");
+}
+
+function filtre_audio_x_pn_realaudio($id)
+{
+  return "
+	<param name='controls' value='PositionSlider' />
+	<param name='controls' value='ImageWindow' />
+	<param name='controls' value='PlayButton' />
+	<param name='console' value='Console$id' />
+	<param name='nojava' value='true' />";
 }
 
 // http://doc.spip.org/@spip_version
@@ -1935,7 +1945,7 @@ function env_to_params ($texte, $ignore_params=array()) {
 	$texte = "";
 	foreach ($tableau as $i => $j)
 		if (!in_array($i,$ignore_params))
-			$texte .= "<param name='".$i."' value='".$j."' />";
+			$texte .= "<param name='".$i."'\n\tvalue='".$j."' />";
 	return $texte;
 }
 // A partir d'un #ENV, retourne des attributs

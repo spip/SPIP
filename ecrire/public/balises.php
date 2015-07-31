@@ -1068,6 +1068,7 @@ function balise_MODELE_dist($p) {
 		if ($primary = $p->boucles[$idb]->primary) {
 			$id = champ_sql($primary, $p);
 			$code_contexte[] = "'$primary='.".$id;
+			$code_contexte[] = "'id='.".$id;
 		}
 	}
 
