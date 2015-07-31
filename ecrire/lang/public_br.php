@@ -11,13 +11,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'accueil_site' => 'Degemer al lec\'hienn',
 'articles' => 'Pennado&ugrave;',
 'articles_auteur' => 'Pennado&ugrave; all ar skridaozer-ma&ntilde;',
-'articles_populaires' => 'Pennadao&ugrave; muia&ntilde; lennet',
-'articles_rubrique' => 'Pennado&ugrave; ar rummad-ma&ntilde;',
+'articles_populaires' => 'Pennado&ugrave; lennet ar muia&ntilde;',
+'articles_rubrique' => 'Pennado&ugrave; ar rubrikenn-ma&ntilde;',
 'aucun_article' => 'N\'eus pennad ebet er chomlec\'h-ma&ntilde;',
 'aucun_auteur' => 'N\'eus skridaozer ebet er chomlec\'h-ma&ntilde;',
 'aucun_site' => 'N\'eus lec\'hienn ebet er chomlec\'h-ma&ntilde;',
 'aucune_breve' => 'N\'eus berrskrid ebet er chomlec\'h-ma&ntilde;',
-'aucune_rubrique' => 'N\'eus rummad ebet er chomlec\'h-ma&ntilde;',
+'aucune_rubrique' => 'N\'eus rubrikenn ebet er chomlec\'h-ma&ntilde;',
 'autres' => 'Re all',
 'autres_breves' => 'Berrskrido&ugrave; all',
 'autres_groupes_mots_clefs' => 'Strollado&ugrave; gerio&ugrave;-stur all',
@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'Ober evezhiadenno&ugrave; diwar-benn al lec\'hienn-ma&ntilde;',
-'copie_document_impossible' => 'N\'eo ket posupl eila&ntilde; an teuliad',
+'copie_document_impossible' => 'N\'eo ket posupl eila&ntilde; an teul',
 
 // D
 'date' => 'Deiziad',
@@ -38,17 +38,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Pennado&ugrave; diwezha&ntilde;',
 'derniers_commentaires' => 'Evezhiadenno&ugrave; diwezha&ntilde;',
 'derniers_messages_forum' => 'Kemennadenno&ugrave; diwezha&ntilde; embannet er foromo&ugrave;',
-'documents_interdits_forum' => 'Diaotre eo an teuliado&ugrave; er forom',
+'documents_interdits_forum' => 'Teulio&ugrave; difennet er forom',
 
 // E
-'edition_mode_texte' => 'Embann er stumm-testenn',
+'edition_mode_texte' => 'Aoza&ntilde; e mod testenn',
 'en_reponse' => 'O respont da&nbsp;:',
 'en_resume' => 'Berr-ha-berr',
 'envoyer_message' => 'Kas ur gemennadenn',
 'espace_prive' => 'Lodenn brevez',
 
 // F
-'formats_acceptes' => 'Stummo&ugrave; aotreet : @formats@.',
+'formats_acceptes' => 'Furmado&ugrave; aotreet : @formats@.',
 'forum' => 'Forom',
 
 // H
@@ -58,15 +58,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'jours' => 'deizio&ugrave;',
 
 // L
-'lien_connecter' => 'Kennaska&ntilde;',
+'lien_connecter' => 'Kevrea&ntilde;',
 
 // M
 'meme_auteur' => 'Gant ar skridaozer-ma&ntilde;',
-'meme_rubrique' => 'Er rummad-ma&ntilde;',
+'meme_rubrique' => 'Er rubrikenn-ma&ntilde;',
 'memes_auteurs' => 'Gant ar skridaozerien-ma&ntilde;',
 'message' => 'Kemennadenn',
 'messages_forum' => 'Kemennadenno&ugrave; forom',
-'messages_recents' => 'Kemennadenno&ugrave; forom an nevesha&ntilde;',
+'messages_recents' => 'Kemennadenno&ugrave; forom diwezha&ntilde;',
 'mots_clefs' => 'Gerio&ugrave;-stur',
 'mots_clefs_meme_groupe' => 'Gerio&ugrave;-stur er strollad-ma&ntilde;',
 
@@ -80,41 +80,41 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // P
 'page_precedente' => 'Pajenn kent',
-'page_suivante' => 'Pajenn da heul',
+'page_suivante' => 'Pajenn war-lerc\'h',
 'par_auteur' => 'gant',
-'participer_site' => 'Gallout a rit kemer perzh e buhez al lec\'hienn ha kinnig pennado&ugrave; oc\'h emezela&ntilde; ama&ntilde;-dindan. Diouzhtu e vo kaset ur postel deoc\'h, enna&ntilde; ar c\'hodo&ugrave; ret evit dont-tre.',
+'participer_site' => 'Gallout a rit kemer perzh e buhez al lec\'hienn ha kinnig pennado&ugrave; oc\'h emezela&ntilde; ama&ntilde; dindan. Diouzhtu e vo kaset ur postel deoc\'h, enna&ntilde; ar c\'hodo&ugrave; ret evit dont-tre.',
 'plan_site' => 'Steu&ntilde;v al lec\'hienn',
 'popularite' => 'Brud vat',
-'poster_message' => 'Kas ur c\'hemennadenn',
-'proposer_site' => 'Gallout a rit kinnig ul lec\'hienn da ouzhpenna&ntilde; er rummad-ma&ntilde;&nbsp;:',
+'poster_message' => 'Kas ur gemennadenn',
+'proposer_site' => 'Gallout a rit kinnig ul lec\'hienn da ouzhpenna&ntilde; er rubrikenn-ma&ntilde;&nbsp;:',
 
 // R
 'repondre_article' => 'Respont d\'ar pennad-ma&ntilde;',
 'repondre_breve' => 'Respont d\'ar berrskrid-ma&ntilde;',
-'repondre_message' => 'Respont d\'ar c\'hemennadenn-ma&ntilde;',
+'repondre_message' => 'Respont d\'ar gemennadenn-ma&ntilde;',
 'resultats_recherche' => 'Disoc\'ho&ugrave; an enklask',
-'retour_debut_forums' => 'Distro da benn-kenta&ntilde; ar foromo&ugrave;',
-'rubrique' => 'Rummad',
-'rubriques' => 'Rummado&ugrave;',
+'retour_debut_forums' => 'Distrei&ntilde; e dero&ugrave; ar foromo&ugrave;',
+'rubrique' => 'Rubrikenn',
+'rubriques' => 'Rubrikenno&ugrave;',
 
 // S
 'signatures_petition' => 'Sinadurio&ugrave;',
 'site_realise_avec_spip' => 'Lec\'hienn bet savet gant SPIP',
 'sites_web' => 'Lec\'hienno&ugrave;',
-'sous_rubriques' => 'Is-rummado&ugrave;',
-'spam' => 'Spam',
+'sous_rubriques' => 'Isrummado&ugrave;',
+'spam' => 'Strob',
 'suite' => 'kenderc\'hel',
-'sur_web' => 'War ar gwiad',
-'syndiquer_rubrique' => 'Listenna&ntilde; ar rubrik-ma&ntilde; dre RSS',
-'syndiquer_site' => 'Listenna&ntilde; al lec\'hienn a-bezh dre RSS',
+'sur_web' => 'War ar Gwiad',
+'syndiquer_rubrique' => 'Sindikada&ntilde; ar rubrikenn-ma&ntilde;',
+'syndiquer_site' => 'Sindikada&ntilde; al lec\'hienn a-bezh',
 
 // T
-'texte_lettre_information' => 'Setu lizher keleier al lec\'hienn',
+'texte_lettre_information' => 'Setu lizher kelaoui&ntilde; al lec\'hienn',
 'texte_lettre_information_2' => 'Enni ema&ntilde; ar pennado&ugrave; hag ar berrskrido&ugrave; embannet abaoe',
 
 // V
-'ver_imprimer' => 'Stumm evit ar moula&ntilde;',
-'voir_en_ligne' => 'Gwelet en-linenn',
+'ver_imprimer' => 'Stumm da voulla&ntilde;',
+'voir_en_ligne' => 'Gwelet enlinenn',
 'voir_squelette' => 'Gwelet framm ar bajenn-ma&ntilde;'
 );
 

@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'Neniu retejo &#265;e tiu adreso',
 'aucune_breve' => 'Neniu fulm-informo &#265;e tiu adreso',
 'aucune_rubrique' => 'Neniu rubriko &#265;e tiu adreso',
+'autres' => 'Aliaj',
 'autres_breves' => 'Neniu fulm-informo',
 'autres_groupes_mots_clefs' => 'Aliaj grupoj de &#349;losilvortoj',
 'autres_sites' => 'Aliaj retejoj',
@@ -28,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'Komenti tiun retejon',
+'copie_document_impossible' => 'Estas neeble kopii la dokumenton',
 
 // D
 'date' => 'Dato',
@@ -36,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Lastaj artikoloj',
 'derniers_commentaires' => 'Lastaj komentoj',
 'derniers_messages_forum' => 'Lastaj mesa&#285;oj publikigitaj en la forumoj',
+'documents_interdits_forum' => 'Dokumentoj malpermesitaj en la forumo',
 
 // E
 'edition_mode_texte' => 'Teksta eldono de',
@@ -45,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_prive' => 'Privata spaco',
 
 // F
+'formats_acceptes' => 'Formatoj akceptitaj : @formats@.',
 'forum' => 'Forumo',
 
 // H
@@ -52,6 +56,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // J
 'jours' => 'tagoj',
+
+// L
+'lien_connecter' => 'Ensaluti',
 
 // M
 'meme_auteur' => 'De la sama a&#365;toro',
@@ -95,6 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'site_realise_avec_spip' => 'Retejo pelata de SPIP',
 'sites_web' => 'Retejoj',
 'sous_rubriques' => 'Sub-rubrikoj',
+'spam' => 'Trudmesa&#285;o',
 'suite' => 'sekvo',
 'sur_web' => '&#264;e la reto',
 'syndiquer_rubrique' => 'Abonrilatigi tiun rubrikon',

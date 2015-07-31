@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'Ne postoje stranice na ovoj adresi',
 'aucune_breve' => 'Ne postoje novosti na ovoj adresi',
 'aucune_rubrique' => 'Ne postoje rubrike na ovoj adresi',
+'autres' => '<NEW>Autres',
 'autres_breves' => 'Ostale kratke poruke',
 'autres_groupes_mots_clefs' => 'Ostale grupe kljucnih rijeci',
 'autres_sites' => 'Ostale stranice',
@@ -28,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'Dodaj komentar',
+'copie_document_impossible' => '<NEW>Impossible de copier le document',
 
 // D
 'date' => 'Datum',
@@ -36,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Posljedni clanci',
 'derniers_commentaires' => 'Posljednji komentari',
 'derniers_messages_forum' => 'Posljednje poruke u forumu',
+'documents_interdits_forum' => '<NEW>Documents interdits dans le forum',
 
 // E
 'edition_mode_texte' => 'Obradjivanje u text modu',
@@ -45,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_prive' => 'Privatni prostor',
 
 // F
+'formats_acceptes' => '<NEW>Formats accept&#233;s : @formats@.',
 'forum' => 'Forum',
 
 // H
@@ -52,6 +56,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // J
 'jours' => 'Dani',
+
+// L
+'lien_connecter' => '<NEW>Se connecter',
 
 // M
 'meme_auteur' => 'Isti autor',
@@ -95,6 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'site_realise_avec_spip' => 'Stranica realizovana sa SPIP-om',
 'sites_web' => 'Web stranice',
 'sous_rubriques' => 'Podrubrike',
+'spam' => '<NEW>Spam',
 'suite' => 'nastavi',
 'sur_web' => 'Na web-u',
 'syndiquer_rubrique' => 'Sindikuj ovu rubriku',
@@ -106,7 +114,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // V
 'ver_imprimer' => 'Verzija za printanje',
-'voir_en_ligne' => 'Pogledati online'
+'voir_en_ligne' => 'Pogledati online',
+'voir_squelette' => '<NEW>voir le squelette de cette page'
 );
 
 ?>
