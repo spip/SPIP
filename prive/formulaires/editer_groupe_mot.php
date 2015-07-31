@@ -21,8 +21,11 @@ function formulaires_editer_groupe_mot_charger_dist($id_groupe='new',$retour='',
 	$valeurs['tables_liees'] = explode(',',$valeurs['tables_liees']);
 
 	// par defaut a la creation de groupe
-	if ($id_groupe == 'oui')
+	if (!intval($id_groupe)) {
 		$valeurs['tables_liees'] = array('articles');
+		$valeurs['minirezo'] = 'oui';
+		$valeurs['comite'] = 'oui';
+	}
 
 	return $valeurs;
 }
