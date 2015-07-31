@@ -475,6 +475,8 @@ Merci de votre participation
 'info_mail_fournisseur' => 'vous@fournisseur.com',
 'info_message_2' => 'MESSAGE',
 'info_message_supprime' => 'MESSAGE SUPPRIM&Eacute;',
+'info_messages_nb' => '@nb@ messages',
+'info_messages_un' => '1 message',
 'info_mise_en_ligne' => 'Date de mise en ligne&nbsp;:',
 'info_modification_parametres_securite' => 'modifications des param&egrave;tres de s&eacute;curit&eacute;',
 'info_mois_courant' => 'Dans le courant du mois :',
