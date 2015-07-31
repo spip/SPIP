@@ -88,13 +88,6 @@ function analyser_site($url) {
 			$result['descriptif'] = $r[1];
 		}
 	}
-	/* else if (ereg("document\.write", $texte)){
-		$result['nom_site'] = "Nouveau site";
-		$result['url_site'] = $url;
-		$result['url_syndic'] = $url;
-		$result['syndic'] = true ;
-	
-	}*/
 	else {
 		$result['syndic'] = false;
 		$result['url_site'] = $url;

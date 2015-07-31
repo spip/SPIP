@@ -187,11 +187,6 @@ if ($options == "avancees") {
 	
 	if ($connect_statut == "0minirezo") {
 		icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.gif","rien.gif");
-	}
-/*	if ($activer_message != "non") {
-		icone_horizontale("Votre messagerie interne", "messagerie.php3", "messagerie-24.gif","rien.gif");
-	}*/
-	if ($connect_statut == "0minirezo") {
 		echo "<p>";
 		icone_horizontale("Statistiques du site", "statistiques_visites.php3", "statistiques-24.gif","rien.gif");
 		icone_horizontale("Suivi des forums", "controle_forum.php3", "suivi-forum-24.gif","rien.gif");
@@ -446,14 +441,6 @@ $maj_alea = $meta_maj['alea_ephemere'];
 $t_jour = substr($maj_alea, 6, 2);
 if ($t_jour != date('d')) {
 	include_ecrire("inc_session.php3");
-
-/*	$seed = (double) (microtime() + 1) * time();
-	@mt_srand($seed);
-	$alea = @mt_rand();
-	if (!$alea) {
-		srand($seed);
-		$alea = rand();
-	}*/
 	$alea = md5(creer_uniqid());
 	ecrire_meta('alea_ephemere_ancien', lire_meta('alea_ephemere'));
 	ecrire_meta('alea_ephemere', $alea);
