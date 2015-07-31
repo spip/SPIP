@@ -194,7 +194,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 	// Cas {1/3} {1,4} {n-2,1}...
 
 	$flag_cpt = $boucle->mode_partie || // pas '$compteur' a cause du cas 0
-		strpos($return,'compteur_boucle');
+	  strpos($return,'compteur_boucle');
 
 	//
 	// Creer le debut du corps de la boucle :
@@ -224,6 +224,11 @@ function calculer_boucle($id_boucle, &$boucles) {
 		index_pile($id_boucle, $primary, $boucles)
 		. "; // doublons";
 
+
+	spip_log($boucle->separateur);
+	if ($boucle->separateur)
+	  $code_sep = ("'" . ereg_replace("'","\'",join('',$boucle->separateur)) . "'"); 
+	spip_log($code_sep);
 	// gestion optimale des separateurs et des boucles constantes
 
 	$corps = $debut . 
@@ -235,8 +240,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 			 (".=" . substr($return,4)) :
 			 ('= ' . $return)) .
 		  ";\n\t\t" .
-		  '$t0 .= (($t1 && $t0) ? \'' . $boucle->separateur .
-		  "' : '') . \$t1;"));
+		  '$t0 .= (($t1 && $t0) ? ' . $code_sep . " : '') . \$t1;"));
      
 	// Fin de parties
 	if ($boucle->mode_partie)
@@ -626,9 +630,10 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 		    if ($boucle->param && is_array($boucle->param)) 
 				$pretty .= " {".join("} {", $boucle->param)."}";
 			// sans oublier les parametres traites en amont
-			if ($boucle->separateur)
-			  $pretty .= '{"' . $boucle->separateur . '"}';
-			if ($boucle->tout)
+		    if ($boucle->separateur)
+		      foreach($boucle->separateur as $v)
+			$pretty .= ' {"'. htmlspecialchars($v) . '"}';
+		    if ($boucle->tout)
 			  $pretty .= '{tout}';
 			if ($boucle->plat)
 			  $pretty .= '{plat}';
