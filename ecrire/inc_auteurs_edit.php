@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_presentation");
 include_ecrire("inc_logos");
-include_ecrire("inc_auteur_infos");
+include_ecrire("inc_auteur_voir");
 
 function auteurs_edit_dist()
 {
