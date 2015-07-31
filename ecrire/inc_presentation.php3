@@ -23,7 +23,7 @@ function aide ($aide) {
 	"\n// --></script><noscript>".
 	'<a href="'.$dir_ecrire.'aide_index.php3?aide='.
 	$aide.
-	'" target="_blank"></noscript><img src="'.$dir_ecrire.'img_pack/aide.gif" alt="AIDE" title="De l\'aide sur cet &eacute;l&eacute;ment" width="20" height="16" border="0" align="middle"></a>';
+	'" target="_blank"></noscript><img src="'.$dir_ecrire.'img_pack/aide.gif" alt="AIDE" title="De l\'aide sur cet &eacute;l&eacute;ment" width="20" height="16" border="0" align="top"></a>';
 }
 
 
@@ -51,9 +51,12 @@ function bouton_imessage($destinataire, $row = '') {
 	}
 	$url .= "dest=$destinataire&";
 	$url .= "new=oui&type=normal";
-	
-	$texte_bouton = "<IMG SRC='img_pack/m_envoi.gif' WIDTH='14' HEIGHT='7' BORDER='0' alt='-'>";
-	return "<a href='$url'>$texte_bouton</a>";
+
+	if ($destinataire) $title = "Envoyer un message priv&eacute; &agrave; cet auteur";
+	else $title = "Ecrire un message priv&eacute;";
+
+	$texte_bouton = "<img src='img_pack/m_envoi.gif' width='14' height='7' border='0'>";
+	return "<a href='$url' title=\"$title\">$texte_bouton</a>";
 }
 
 //
