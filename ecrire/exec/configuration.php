@@ -95,6 +95,7 @@ function exec_configuration_dist(){
 	echo fin_gauche(), fin_page();
 }
 
+// http://doc.spip.org/@configuration_bloc_votre_site
 function configuration_bloc_votre_site($bouton = true){
 	debut_cadre_couleur("racine-site-24.gif");
 
@@ -134,6 +135,7 @@ function configuration_bloc_votre_site($bouton = true){
 //
 // Options des articles
 //
+// http://doc.spip.org/@configuration_bloc_les_articles
 function configuration_bloc_les_articles(){
 	debut_cadre_trait_couleur("article-24.gif", false, "", _T('titre_les_articles'));
 	//
@@ -258,6 +260,7 @@ function configuration_bloc_les_articles(){
 //
 // Actives/desactiver les breves
 //
+// http://doc.spip.org/@configuration_bloc_les_breves
 function configuration_bloc_les_breves(){
 	debut_cadre_trait_couleur("breve-24.gif", false, "", _T('titre_breves').aide ("confbreves"));
 
@@ -286,6 +289,7 @@ function configuration_bloc_les_breves(){
 //
 // Gestion des mots-cles
 //
+// http://doc.spip.org/@configuration_bloc_mots_cles
 function configuration_bloc_mots_cles(){
 	debut_cadre_trait_couleur("mot-cle-24.gif", false, "", _T('info_mots_cles'));
 
@@ -365,6 +369,7 @@ function configuration_bloc_mots_cles(){
 //
 // Actives/desactiver systeme de syndication
 //
+// http://doc.spip.org/@configuration_bloc_syndication
 function configuration_bloc_syndication(){
 	debut_cadre_trait_couleur("site-24.gif", false, "", _T('titre_referencement_sites').aide ("reference"));
 	
@@ -496,6 +501,7 @@ function configuration_bloc_syndication(){
 //
 // Gestion des documents joints
 //
+// http://doc.spip.org/@configuration_bloc_documents_joints
 function configuration_bloc_documents_joints(){
 	debut_cadre_trait_couleur("doc-24.gif", false, "", _T('titre_documents_joints'));
 	
