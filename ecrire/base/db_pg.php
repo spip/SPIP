@@ -151,34 +151,36 @@ function spip_pg_alter_change($table, $arg, $serveur='')
 
 // http://doc.spip.org/@spip_pg_alter_add
 function spip_pg_alter_add($table, $arg, $serveur='') {
-	if (!preg_match('/^(INDEX|KEY|PRIMARY\s+KEY|)\s*`?(\w+)`?(.*)$/', $arg, $r))
-	  spip_log("drop $arg  incompris", 'pg');
-	else {
-	    if (!$r[1])
-	      return spip_pg_query("ALTER TABLE $table ADD " . $r[2] . ' ' . mysql2pg_type($r[3]),  $serveur);
-	    elseif ($r[1][0] = 'P')
-	      return spip_pg_query("ALTER TABLE $table ADD PRIMARY KEY " . $r[2], $serveur);
-	    else {
-		return spip_pg_query("CREATE INDEX " . $table . '_' . $r[2] . "ON $table",  $serveur);
-	    }
+	if (!preg_match('/^(INDEX|KEY|PRIMARY\s+KEY|)\s*(.*)$/', $arg, $r)) {
+		spip_log("alter add $arg  incompris", 'pg');
+		return NULL;
+	}
+	if (!$r[1]) {
+		preg_match('/`?(\w+)`?(.*)/',$r[2], $m);
+		return spip_pg_query("ALTER TABLE $table ADD " . $m[1] . ' ' . mysql2pg_type($m[2]),  $serveur);
+	} elseif ($r[1][0] == 'P') {
+		preg_match('/\(`?(\w+)`?\)/',$r[2], $m);
+		return spip_pg_query("ALTER TABLE $table ADD CONSTRAINT $table" .'_pkey PRIMARY KEY (' . $m[1] . ')', $serveur);
+	} else {
+		preg_match('/`?(\w+)`?\s*(\([^)]*\))/',$r[2], $m);
+		return spip_pg_query("CREATE INDEX " . $table . '_' . $m[1] . " ON $table " . str_replace("`","",$m[2]),  $serveur);
 	}
 }
 
 // http://doc.spip.org/@spip_pg_alter_drop
 function spip_pg_alter_drop($table, $arg, $serveur='') {
-	if (!preg_match('/^(INDEX|KEY|PRIMARY\s+KEY|)\s*`?(\w+)`?/', $arg, $r))
+	if (!preg_match('/^(INDEX|KEY|PRIMARY\s+KEY|)\s*`?(\w*)`?/', $arg, $r))
 	  spip_log("alter drop: $arg  incompris", 'pg');
 	else {
 	    if (!$r[1])
 	      return spip_pg_query("ALTER TABLE $table DROP " . $r[2],  $serveur);
-	    elseif ($r[1][0] = 'P')
-	      return spip_pg_query("ALTER TABLE $table DROP CONSTRAINT PRIMARY", $serveur);
+	    elseif ($r[1][0] == 'P')
+	      return spip_pg_query("ALTER TABLE $table DROP CONSTRAINT $table" . '_pkey', $serveur);
 	    else {
 		return spip_pg_query("DROP INDEX " . $table . '_' . $r[2],  $serveur);
 	    }
 	}
 }
-
 
 // http://doc.spip.org/@spip_pg_explain
 function spip_pg_explain($query, $serveur=''){

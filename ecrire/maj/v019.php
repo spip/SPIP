@@ -378,7 +378,7 @@ function maj_1_952() {
 	if (!$ok) die('echec sur maj_1_952()'); 
 }
 
-$GLOBALS['maj'][1][952] = array('maj_1_952');
+$GLOBALS['maj'][1][952] = array(array('maj_1_952'));
 
 function maj_1_953()
 {
@@ -387,7 +387,7 @@ function maj_1_953()
 	creer_base_types_doc($tables_principales['spip_types_documents']);
 }
 
-$GLOBALS['maj'][1][953] = array('maj_1_953');
+$GLOBALS['maj'][1][953] = array(array('maj_1_953'));
 
 $GLOBALS['maj'][1][954] = array(
 

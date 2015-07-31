@@ -104,13 +104,16 @@ function maj_while($version_installee, $version_cible)
 // http://doc.spip.org/@serie_alter
 function serie_alter($serie, $q = array()) {
 	$etape = intval(@$GLOBALS['meta']['upgrade_etape_'.$serie]);
-	foreach ($q as $i => $req) {
+	foreach ($q as $i => $r) {
 		if ($i >= $etape) {
-			$f = array_shift($req);
-			spip_log("maj $serie etape $i: $f ".join(',',$req),'maj');
-			if (function_exists($f)) {
-			  call_user_func_array($f, $req);
-			  ecrire_meta('upgrade_etape_'.$serie, $i+1);
+			if (is_array($r)
+			AND function_exists($f = array_shift($r))) {
+				spip_log("$serie/$i: $f " . join(',',$r),'maj');
+				call_user_func_array($f, $r);
+				ecrire_meta('upgrade_etape_'.$serie, $i+1);
+			} else {
+			  echo "maj $serie etape $i incorrecte";
+			  exit;
 			}
 		}
 	}
