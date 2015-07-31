@@ -256,6 +256,13 @@ ecrire/polices/dustismo_bold.ttf -text
 ecrire/puce.gif -text
 ecrire/puce_rtl.gif -text
 ecrire/rien.gif -text
+ecrire/safehtml/classes/HTMLSax3.php -text
+ecrire/safehtml/classes/HTMLSax3/Decorators.php -text
+ecrire/safehtml/classes/HTMLSax3/States.php -text
+ecrire/safehtml/classes/safehtml.php -text
+ecrire/safehtml/license.txt -text
+ecrire/safehtml/readme-SPIP.txt -text
+ecrire/safehtml/readme.txt -text
 /puce.gif -text
 /puce_rtl.gif -text
 /rien.gif -text

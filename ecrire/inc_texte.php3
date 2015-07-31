@@ -384,6 +384,43 @@ function interdire_scripts($source) {
 	return $source;
 }
 
+// Securite : utiliser SafeHTML s'il est present dans ecrire/safehtml/
+function safehtml($t) {
+	static $process, $test;
+
+	# attention safehtml nettoie deux ou trois caracteres de plus. A voir
+	if (strpos($t,'<')===false)
+		return str_replace("\x00", '', $t);
+
+	if (!$test) {
+		define('XML_HTMLSAX3', _DIR_INCLUDE."safehtml/classes/");
+		if (@file_exists(XML_HTMLSAX3.'safehtml.php')) {
+			include_local(XML_HTMLSAX3.'safehtml');
+			$process = new safehtml();
+		}
+		if ($process)
+			$test = 1; # ok
+		else
+			$test = -1; # se rabattre sur interdire_scripts
+	}
+
+	if ($test > 0) {
+		# reset ($process->clear() ne vide que _xhtml...),
+		# on doit pouvoir programmer ca plus propremement
+		$process->_counter = array();
+		$process->_stack = array();
+		$process->_dcCounter = array();
+		$process->_dcStack = array();
+		$process->_listScope = 0;
+		$process->_liStack = array();
+#		$process->parse(''); # cas particulier ?
+		$process->clear();
+		$t = $process->parse($t);
+	}
+
+	return interdire_scripts($t); # gere le < ?php > en plus
+}
+
 
 // Correction typographique francaise
 function typo_fr($letexte) {

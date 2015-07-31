@@ -69,6 +69,23 @@ function champs_traitements ($p) {
 			str_replace('typo(', 'typo_doublon($doublons,', $ps));
 	}
 
+	// Passer |safehtml sur les boucles "sensibles"
+	// sauf sur les champs dont on est surs
+	switch ($p->type_requete) {
+		case 'forums':
+		case 'signatures':
+		case 'syndic_articles':
+			$champs_surs = array(
+			'date', 'date_heure', 'statut', 'ip', 'url_article', 'maj', 'idx',
+			'parametres_forum');
+			if (!in_array(strtolower($p->nom_champ), $champs_surs)
+			AND !preg_match(',^ID_,', $p->nom_champ))
+				$ps = 'safehtml('.$ps.')';
+			break;
+		default:
+			break;
+	}
+
 	// on supprime les < IMGnnn > tant qu'on ne rapatrie pas
 	// les documents distants joints..
 	// il faudrait aussi corriger les raccourcis d'URL locales
@@ -293,7 +310,7 @@ function balise_NOTES_dist($p) {
 // Qu'afficher en cas d'erreur 404 ?
 function balise_ERREUR_AUCUN_dist($p) {
 	$p->code = '$Pile[0]["erreur_aucun"]';
-	$p->statut = 'php';
+	$p->statut = 'html';
 	return $p;
 }
 
