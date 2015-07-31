@@ -1651,16 +1651,8 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'trad_delier' => 'Pas mai liar queste article a sas reviradas ',
 'trad_lier' => 'Queste article es una revirada de l\'article numero:',
 'trad_new' => 'Escriure una revirada novela de queste article',
-'trad_reference' => '(article de refer&eacute;ncia)',
+'trad_reference' => '(article de refer&eacute;ncia)'
 
-
-// PLUS_UTILISE
-'calendrier_synchro_lien' => 'Anar querre lo fichier <i>iCal</i>',
-'calendrier_synchro_prive' => 'Lo chalendier seguent, d\'usatge estrictament personau, vos informa subre l\'activitat editoriala privada de queu sit (pretzfachs et rendetz-vos personaus, articles et brevas prepausats...).',
-'calendrier_synchro_public' => 'Lo chalendier seguent vos permet de s&egrave;gre l\'activitat publica de queu sit (articles e br&egrave;vas publicats).',
-'calendrier_synchro_sync' => 'Sincronizar lo fichier <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
-'info_config_suivi_lien' => '<NEW> <NEW> En tant qu\'administrateur, vous pouvez indiquer, dans la configuration du site, l\'adresse d\'une mailing-list &agrave; laquelle les participants &agrave; l\'espace priv&eacute; pourront s\'abonner.',
-'titre_liens_entrants_total' => '<NEW> <NEW> Les liens entrants depuis le d&eacute;but'
 
 );
 

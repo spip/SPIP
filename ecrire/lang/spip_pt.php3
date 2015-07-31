@@ -577,7 +577,7 @@ Obrigado pela sua participa&ccedil;&atilde;o
 'info_contenu_articles' => 'Conte&uacute;do dos artigos',
 'info_contribution' => 'contribui&ccedil;&otilde;es de f&oacute;rum',
 'info_copyright' => '&eacute; um software livre distribuido <a href=\'copyright_fr.html\'>sob licen&ccedil;a GPL.</a>',
-'info_copyright_doc' => 'Para mais informa&ccedil;&otilde;es, ver o s&iacute;tio <a href=\'http://www.spip.net/fr\'>http://www.spip.net/fr</a>.',
+'info_copyright_doc' => 'Para mais informa&ccedil;&otilde;es, ver o s&iacute;tio <a href=\'http://www.spip.net/pt\'>http://www.spip.net/pt</a>.',
 'info_cours_edition' => '<MODIF> Os seus artigos em curso de edi&ccedil;&atilde;o',
 'info_creation_mots_cles' => 'Crie e configure aqui as palavras-chave do s&iacute;tio',
 'info_creation_paragraphe' => '(Para criar par&aacute;grafos, deixe simplesmente linhas vazias.)',

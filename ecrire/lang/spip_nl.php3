@@ -1674,11 +1674,7 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'trad_delier' => 'Dit artikel niet meer koppelen aan zijn vertalingen',
 'trad_lier' => 'Dit artikel is een vertaling van artikelnummer:',
 'trad_new' => 'Een nieuwe vertaling maken van dit artikel',
-'trad_reference' => '(referentie-artikel)',
-
-
-// PLUS_UTILISE
-'calendrier_synchro_lien' => 'Het bestand <i>iCal</i> ophalen'
+'trad_reference' => '(referentie-artikel)'
 
 );
 
