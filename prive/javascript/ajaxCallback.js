@@ -751,7 +751,7 @@ jQuery.fn.animateAppend = function(callback){
  * parametre_url(url,suite,18) (ajout)
  * parametre_url(url,suite,'') (supprime)
  * parametre_url(url,suite) (lit la valeur suite)
- * parametre_url(url,suite[],1) (tableau valeux multiples)
+ * parametre_url(url,suite[],1) (tableau valeurs multiples)
  * @param url
  *   url
  * @param c
@@ -762,6 +762,11 @@ jQuery.fn.animateAppend = function(callback){
  *  separateur '&' par defaut
  */
 function parametre_url(url,c,v,sep){
+	// Si l'URL n'est pas une chaine, on ne peut pas travailler dessus et on quitte
+	if (typeof(url) != 'string'){
+		return url;
+	}
+	
 	var p;
 	// lever l'#ancre
 	var ancre='';
