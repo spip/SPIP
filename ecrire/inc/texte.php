@@ -969,6 +969,12 @@ function traiter_modeles($texte) {
 				}
 
 				$texte = str_replace($cherche, $rempl, $texte);
+
+				// Hack: dans l'espace prive on veut savoir quels sont les 
+				// docs inclus sans se repayer l'analyse du texte complet:
+				if (!_DIR_RESTREINT
+				AND strstr($modele, 'spip_document_'.$regs[2]))
+					$GLOBALS['doublons_documents_inclus'][] = $regs[2];
 			}
 		}
 	}
