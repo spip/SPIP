@@ -64,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_quote' => '<quote>Citar unha mensaxe</quote>',
 'bouton_ajouter_document' => 'Engadir un documento',
 'bouton_ajouter_image' => 'Engadir unha imaxe',
+'bouton_ajouter_image_document' => 'Engadir umha imaxe ou&nbsp;un&nbsp;documento',
 'bouton_changer' => 'Trocar',
 'bouton_chercher' => 'Buscar',
 'bouton_choisir' => 'Elexir',
