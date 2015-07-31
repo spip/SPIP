@@ -146,6 +146,8 @@ function cherche_page ($cache, $contexte, $fond)  {
 	// Charger le squelette et recuperer sa fonction principale
 	// (compilation automatique au besoin) et calculer
 
+	$page = array();
+
 	if ($skel) {
 		if ($fonc = charger_squelette($skel))
 		  $page = $fonc(array('cache' => $cache), array($contexte));
@@ -170,6 +172,7 @@ function cherche_page ($cache, $contexte, $fond)  {
 	}
 
 	// Retourner la structure de la page
+
 	return $page;
 }
 

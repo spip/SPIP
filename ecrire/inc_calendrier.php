@@ -217,7 +217,6 @@ function http_calendrier_aide_mess()
 function http_calendrier_retire_args($script, $args)
 {
 	foreach($args as $arg) {
-	  spip_log("args $arg: $script");
 		$script = ereg_replace("$arg=[^&]*&",'', $script);
 		$script = ereg_replace("$arg=[^#]*#",'#', $script);
 		$script = ereg_replace("$arg=[^&#]*$",'', $script);

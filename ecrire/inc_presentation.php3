@@ -1479,7 +1479,6 @@ function bouton($titre,$lien) {
 	echo "</form>";
 }
 
-
 //
 // Presentation de l'interface privee, debut du HTML
 //
@@ -1502,25 +1501,12 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	$titre = textebrut(typo($titre));
 
 	if (!$nom_site_spip) $nom_site_spip="SPIP";
-	if (!$charset = lire_meta('charset')) $charset = 'utf-8';
+	$adresse_site=lire_meta("adresse_site");
 
 	@Header("Expires: 0");
 	@Header("Cache-Control: no-cache,no-store");
 	@Header("Pragma: no-cache");
-	@Header("Content-Type: text/html; charset=$charset");
-	echo "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n";
-//	echo '<html xmlns:m="http://www.w3.org/1998/Math/MathML">'."\n".'<head>'."\n";
-
-/*	if (eregi("msie", $browser_name)) {
-		echo '<object id="mathplayer" classid="clsid:32F66A20-7614-11D4-BD11-00104BD3F987">'."\n".'</object>'."\n";
-		echo '<'.'?import namespace="m" implementation="#mathplayer"?'.'>'."\n"; 
-	}
-*/
-	echo "<title>[$nom_site_spip] $titre</title>\n";
-	echo '<meta http-equiv="Content-Type" content="text/html; charset='.$charset.'">';
-
-	$adresse_site=lire_meta("adresse_site");
-	
+	echo debut_entete("[$nom_site_spip] $titre");
 	if ($spip_display != 4) {
 		echo "<link rel='alternate' type='application/rss+xml' title='".addslashes($nom_site_spip)."' href='$adresse_site/backend.php3' />";
 		$activer_breves=lire_meta("activer_breves");
@@ -3291,16 +3277,10 @@ function install_debut_html($titre = 'AUTO') {
 	if ($titre=='AUTO')
 		$titre=_T('info_installation_systeme_publication');
 
-	if (!$charset = lire_meta('charset')) $charset = 'utf-8';
-	@Header("Content-Type: text/html; charset=$charset");
-
-	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
-	echo "\n<html><head>
-	<title>$titre</title>
-	<meta http-equiv='Expires' content='0'>
+	echo debut_entete($titre, '',''),
+	  "<meta http-equiv='Expires' content='0'>
 	<meta http-equiv='cache-control' content='no-cache,no-store'>
 	<meta http-equiv='pragma' content='no-cache'>
-	<meta http-equiv='Content-Type' content='text/html; charset=$charset'>
 	<style type='text/css'>
 	<!--
 	a {text-decoration: none; }

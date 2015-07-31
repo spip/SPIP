@@ -5,11 +5,12 @@
 if (defined("_INC_DEBUG_SQL")) return;
 define("_INC_DEBUG_SQL", "1");
 
+include_ecrire('inc_presentation.php3');
+
 // Si le code php produit des erreurs, on les affiche en surimpression
 // sauf pour un visiteur non admin (lui ne voit rien de special)
 // ajouter &var_debug=oui pour voir les erreurs et en parler sur spip@rezo.net
 function affiche_erreurs_page($tableau_des_erreurs) {
-	include_ecrire('inc_presentation.php3');
 
 	echo "<div id='spip-debug' style='position: absolute; top: 20;",
 	" z-index: 1000;'><ul><li>",
@@ -35,8 +36,6 @@ function affiche_erreurs_page($tableau_des_erreurs) {
 // avec son code d'erreur
 //
 function erreur_requete_boucle($query, $id_boucle, $type) {
-
-	include_ecrire("inc_presentation.php3");
 
 	// Calmer le jeu avec MySQL (si jamais on est en saturation)
 	@touch(_FILE_MYSQL_OUT);	// pour spip_cron
@@ -99,6 +98,7 @@ function erreur_squelette($message='', $lieu='') {
 		if ($HTTP_COOKIE_VARS['spip_admin'] OR
 		$auteur_session['statut'] == '0minirezo' OR
 		$GLOBALS['var_debug']) {
+			echo debut_entete('Debug'), '</head><body>';
 			die(affiche_erreurs_page($tableau_des_erreurs));
 		}
 	}
@@ -142,13 +142,12 @@ function boucle_debug ($id, $nom, $boucle) {
 
 // l'environnement graphique du debuggueur 
 function debug_dumpfile ($texte) {
-
+  spip_log("dump $texte");
 	global $debug_objets, $debug_objet, $debug_affiche;
-	if (!headers_sent())
-	  header("Content-Type: text/html; charset=".lire_meta('charset'));
 	if (!$GLOBALS['debug_objets']['sourcefile']) return;
 	spip_setcookie('spip_debug', 'oui', time()+12*3600);
-        $page = "<html><head><title>Debug</title></head>\n<body>";
+	echo debut_entete('Debug');
+        $page = "</head>\n<body>";
         echo calcul_admin_page('', $page),
 	  "<div id='spip-debug' style='position: absolute; top: 20; z-index: 1000;'><ul>\n"; 
 

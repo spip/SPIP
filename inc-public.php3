@@ -106,17 +106,20 @@ else {
 			@header("Cache-Control: no-cache,must-revalidate");
 			@header("Pragma: no-cache");
 		// Pour les autres donner l'heure de modif
-		} else if ($lastmodified)
+	} else if ($lastmodified)
 			@Header ("Last-Modified: ".http_gmoddate($lastmodified)." GMT");
 
+	// si le squelette est nul se rabattre sur l'entete standard
+	spip_log("Page: " . $page['texte']);
+	if ($page['texte'])
 		@header("Content-Type: text/html; charset=".lire_meta('charset'));
-
+	else echo debut_entete($fond);
 		// Faudra-t-il post-traiter la page ?
-		define('spip_active_ob', $flag_ob AND
+	define('spip_active_ob', $flag_ob AND
 		($var_debug OR $var_recherche OR $affiche_boutons_admin));
 
 		// Cas d'une page contenant uniquement du HTML :
-		if ($page['process_ins'] == 'html') {
+	if ($page['process_ins'] == 'html') {
 			if (!spip_active_ob) {
 				echo $page['texte'];
 				$contenu = '';
@@ -125,7 +128,7 @@ else {
 		}
 
 		// Cas d'une page contenant du PHP :
-		else {
+	else {
 
 			// Evaluer la page
 			if (!spip_active_ob) {
