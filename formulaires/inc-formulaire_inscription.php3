@@ -30,14 +30,19 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus) {
 		return _T('pass_rien_a_faire_ici');
 
 	// recuperer les donnees envoyees
-	$mail_inscription = _request('mail_inscription');
+	$mail_inscription = trim(_request('mail_inscription'));
 	$nom_inscription = _request('nom_inscription');
 
 	if (!$nom_inscription) 
 		$message = '';
 	elseif (!test_mail_ins($mode, $mail_inscription))
 		$message = _T('info_email_invalide');
-	else	$message = message_inscription($mail_inscription, $nom_inscription, $mode);
+	else	$message = message_inscription($mail_inscription,
+					       $nom_inscription,
+					       false,
+					       ($mode == 'forum')  ?
+					       'form_forum_voici1' :
+					       'form_forum_voici2');
 
 	return array("formulaire_inscription", 0,
 			array('focus' => $focus,
@@ -53,63 +58,63 @@ function test_mail_ins($mode, $mail) {
 	return  ($mail = trim($mail)) AND email_valide($mail);
 }
 
+// creer un nouvel utilisateur et lui envoyer un mail avec ses identifiants
 
-function message_inscription($mail_inscription, $nom_inscription, $mode)
+function message_inscription($mail_inscription, $nom_inscription, $force, $mode)
 {
-  // envoyer les identifiants si l'abonne n'existe pas deja.
+
   $row = spip_fetch_array(spip_query("SELECT statut, id_auteur, login
 FROM spip_auteurs WHERE email='".addslashes($mail_inscription)."'"));
 
   if (!$row) {
+  // il n'existe pas, creer les identifiants 
     $login = test_login($nom_inscription, $mail_inscription);
     $pass = creer_pass_pour_auteur(spip_abstract_insert('spip_auteurs', 
 				'(nom, email, login, statut)',
 				"('".
 				addslashes($nom_inscription) .
-				"',' ".
+				"', '".
 				addslashes($mail_inscription) .
 				"', '" .
 				$login .
 				"', 'nouveau')"));
 
-    $message = envoyer_inscription($mail_inscription, 'nouveau', $mode, $login, $pass, $nom_inscription);
+    return envoyer_inscription($mail_inscription, 'nouveau', $mode, $login, $pass, $nom_inscription);
   } else {
-	// existant mais encore muet, renvoyer les infos
-    if ($row['statut'] == 'nouveau') {
+	// existant mais encore muet, ou ressucite: renvoyer les infos
+    if ((($row['statut'] == 'nouveau') && !$force) ||
+	(($row['statut'] == '5poubelle') && $force)) {
       // recreer le pass
       $pass = creer_pass_pour_auteur($row['id_auteur']);
-      $message = envoyer_inscription($mail_inscription, $row['statut'], $mode,
+      return envoyer_inscription($mail_inscription, $row['statut'], $mode,
 				     $row['login'], $pass, $nom_inscription);
     } else {
-      // dead
+      // irrecuperable
       if ($row['statut'] == '5poubelle')
-	$message = _T('form_forum_access_refuse');
+	return_T('form_forum_access_refuse');
       else
       // deja inscrit
-	$message = _T('form_forum_email_deja_enregistre');
+	return _T('form_forum_email_deja_enregistre');
     }
   }
 }
 
 
 // envoyer identifiants par mail
-function envoyer_inscription($mail, $statut, $type, $login, $pass, $nom) {
+function envoyer_inscription($mail, $statut, $mode, $login, $pass, $nom) {
 	$nom_site_spip = lire_meta("nom_site");
 	$adresse_site = lire_meta("adresse_site");
 	
 	$message = _T('form_forum_message_auto')."\n\n"
-	._T('form_forum_bonjour', array('nom'=>$nom))."\n\n";
-	if ($type == 'forum') {
-		$message .= _T('form_forum_voici1', array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site)) . "\n\n";
-	} else {
-		$message .= _T('form_forum_voici2', array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site)) . "\n\n";
-	}
-	$message .= "- "._T('form_forum_login')." $login\n";
-	$message .= "- "._T('form_forum_pass')." $pass\n\n";
+	  . _T('form_forum_bonjour', array('nom'=>$nom))."\n\n"
+	  . _T($mode, array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site)) . "\n\n"
+	  . "- "._T('form_forum_login')." $login\n"
+	  . "- "._T('form_forum_pass')." $pass\n\n";
 
 	include_ecrire("inc_mail.php3");
 	if (envoyer_mail($mail,
-	"[$nom_site_spip] "._T('form_forum_identifiants'), $message))
+			 "[$nom_site_spip] "._T('form_forum_identifiants'),
+			 $message))
 		return _T('form_forum_identifiant_mail');
 	else
 		return _T('form_forum_probleme_mail');
@@ -138,9 +143,7 @@ function test_login($nom, $mail) {
 	$login = $login_base;
 
 	for ($i = 1; ; $i++) {
-		$s = spip_query("SELECT id_auteur FROM spip_auteurs
-		WHERE login='$login'");
-		if (!spip_num_rows($s))
+	  if (!spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE login='$login' LIMIT 1")))
 			return $login;
 		$login = $login_base.$i;
 	}
