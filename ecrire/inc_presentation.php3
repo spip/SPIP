@@ -1357,13 +1357,20 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	
 	function decalerCouche(id_couche) {
 		if (!(layer = findObj(id_couche))) return;
+				
+		<?php 
+		$effectuer_decalage = true;				
+		if ($spip_lang_left != "left") $effectuer_decalage = false;
+		if ($browser_name == "MSIE" AND $browser_version < 6) $effectuer_decalage = false; // bug offsetwidth
 		
-		<?php if ($spip_lang_left == "left") {  /* uniquement affichage ltr: bug Mozilla dans offsetWidth quand ecran inverse! */  ?>
+		if ($effectuer_decalage) {  /* uniquement affichage ltr: bug Mozilla dans offsetWidth quand ecran inverse! */  ?>
 		
 		if ( parseInt(layer.style.<?php echo $spip_lang_left; ?>) > 0) {
+
+
 			gauche = parseInt(layer.style.<?php echo $spip_lang_left; ?>) - Math.floor( layer.offsetWidth / 2 ) + Math.floor(<?php echo largeur_icone_bandeau_principal(_T('icone_a_suivre')); ?> / 2);
 			if (gauche < 0) gauche = 0;
-		 
+
 			layer.style.<?php echo $spip_lang_left; ?> = gauche+"px";
 		}
 		
@@ -1990,7 +1997,7 @@ else {
 	echo "<div id='haut-page'>";
 
 	echo "<div class='bandeau-principal' align='center'>\n";
-	echo "<div class='bandeau-icones' >\n";
+	echo "<div class='bandeau-icones'>\n";
 	echo "<table width='$largeur' cellpadding='0' cellspacing='0' border='0' align='center'><tr>\n";
 
 	icone_bandeau_principal (_T('icone_a_suivre'), "index.php3", "asuivre-48.png", "asuivre", $rubrique, "", "asuivre", $sous_rubrique);
@@ -2020,6 +2027,7 @@ else {
 
 	echo "</div>\n";
 	
+	echo "<table width='$largeur' cellpadding='0' cellspacing='0'' align='center'><tr><td>";
 	echo "<div style='text-align: $spip_lang_left; width: ".$largeur."px; position: relative; z-index: 2000;'>";
 	
 	// Icones secondaires
@@ -2152,6 +2160,9 @@ else {
 	}	
 	
 	echo "</div>";
+	
+	echo "</td></tr></table>";
+	
 	echo "</div>\n";
 
 	// Bandeau
