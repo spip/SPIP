@@ -27,13 +27,13 @@ function exec_editer_mot_dist()
 		$droit = autoriser('publierdans','rubrique',$id_objet);
 	else {
 		if ($objet == 'breve')
-			$droit = spip_query("SELECT id_rubrique FROM spip_breves WHERE id_breve='$id_objet'");
-		else $droit = spip_query("SELECT id_rubrique FROM spip_syndic WHERE id_syndic=$id_objet");
+			$droit = spip_query("SELECT id_rubrique FROM spip_breves WHERE id_breve="._q($id_objet));
+		else
+			$droit = spip_query("SELECT id_rubrique FROM spip_syndic WHERE id_syndic="._q($id_objet));
 		$droit = autoriser('publierdans','rubrique',$droit['id_rubrique']);
 	}
 
 	if (!$droit) {
-
 		echo minipres();
 		exit;
 	}
