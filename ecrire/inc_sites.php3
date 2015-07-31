@@ -41,15 +41,15 @@ function recuperer_page($url) {
 
 		if ($f) {
 			if ($http_proxy)
-				fputs($f, "GET http://$host" . (($port != 80) ? ":$port" : "") . $path . ($query ? "?$query" : "") . " HTTP/1.0\n");
+				fputs($f, "GET http://$host" . (($port != 80) ? ":$port" : "") . $path . ($query ? "?$query" : "") . " HTTP/1.0\r\n");
 			else
-				fputs($f, "GET $path" . ($query ? "?$query" : "") . " HTTP/1.0\n");
+				fputs($f, "GET $path" . ($query ? "?$query" : "") . " HTTP/1.0\r\n");
 
-			fputs($f, "Host: $host\n");
-			fputs($f, "User-Agent: SPIP-".$GLOBALS['spip_version_affichee']." (http://www.uzine.net/spip)\n");
+			fputs($f, "Host: $host\r\n");
+			fputs($f, "User-Agent: SPIP-".$GLOBALS['spip_version_affichee']." (http://www.uzine.net/spip)\r\n");
 			if ($referer = lire_meta("adresse_site"))
-				fputs($f, "Referer: $referer/\n");
-			fputs($f,"\n");
+				fputs($f, "Referer: $referer/\r\n");
+			fputs($f,"\r\n");
 
 			$s = trim(fgets($f, 16384));
 			if (ereg('^HTTP/[0-9]+\.[0-9]+ ([0-9]+)', $s, $r)) {
@@ -67,7 +67,7 @@ function recuperer_page($url) {
 			fclose($f);
 		}
 		else {
-			if (! $GLOBALS['tester_proxy'])
+			if (!$GLOBALS['tester_proxy'])
 				$f = @fopen($url, "rb");
 			break;
 		}
