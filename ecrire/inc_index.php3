@@ -253,7 +253,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true /* f
 		while ($row = spip_fetch_array($s)) {
 			indexer_chaine($row['titre'], 3);
 			indexer_chaine($row['texte'], 1);
-			indexer_chaine($row['auteur'], 2, 1);
+			indexer_chaine($row['auteur'], 2, 2);
 			indexer_chaine($row['email_auteur'], 2);
 			indexer_chaine($row['nom_site'], 2);
 			indexer_chaine($row['url_site'], 1);
