@@ -111,6 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_titre_base_sup_choix' => 'Kiest een aanvullende basis',
 'connexion_ldap' => 'Aansluiten :',
 'copier_en_local' => 'Plaatselijk kopiëren',
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'uur',
@@ -275,6 +276,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Waarschuwing',
 'info_barre_outils' => 'met zijn werktuigen staaf ?',
 'info_base_installee' => 'De structuur van je databank is geïnstalleerd.',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'Kop',
 'info_chapeau_2' => 'Kop :',
 'info_chemin_acces_1' => 'Opties : <b>Toegang tot het adresboek</b>',

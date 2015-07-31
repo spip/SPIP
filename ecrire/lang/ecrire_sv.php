@@ -110,6 +110,7 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'config_titre_base_sup_choix' => 'Välj ytterligare en databas',
 'connexion_ldap' => 'ldapuppkoppling:',
 'copier_en_local' => 'Kopiera till den lokala sajten',
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'h',
@@ -273,6 +274,7 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'info_avertissement' => 'Varning',
 'info_barre_outils' => 'med dess verktygsfält?',
 'info_base_installee' => 'Databasen är skapad',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'Ingress',
 'info_chapeau_2' => 'Introduktion:',
 'info_chemin_acces_1' => 'inställningar: <b>sökväg i katalogen</b>',

@@ -109,6 +109,7 @@ Bu ithal istemini onaylamayın.
 'config_titre_base_sup_choix' => 'Ek bir veri tabanı seçiniz',
 'connexion_ldap' => 'Bağlantı :',
 'copier_en_local' => 'Yerel olarak kopyala',
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'saat ',
@@ -272,6 +273,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_avertissement' => 'Uyarı',
 'info_barre_outils' => 'alet çubuğuyla birlikte mi ?',
 'info_base_installee' => 'Veritabanınızın yapısı kuruldu.',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'Giriş',
 'info_chapeau_2' => 'Giriş :',
 'info_chemin_acces_1' => 'Seçenekler : <b>Rehbere erişim yolu</b>',

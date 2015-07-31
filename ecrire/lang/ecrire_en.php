@@ -112,6 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_titre_base_sup_choix' => 'Choose an additional database',
 'connexion_ldap' => 'Connection:',
 'copier_en_local' => 'Copy to local site',
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'H',
@@ -275,6 +276,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Warning',
 'info_barre_outils' => 'with its toolbar?',
 'info_base_installee' => 'Your database structure has been installed.',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'Introduction',
 'info_chapeau_2' => 'Introduction:',
 'info_chemin_acces_1' => 'Options: <b>Access path in directory</b>',

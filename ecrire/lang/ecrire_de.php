@@ -111,6 +111,7 @@ französischen SPIP-Dokumentation</a>.',
 'config_titre_base_sup_choix' => 'Wählen Sie eine zusätzliche Datenbank',
 'connexion_ldap' => 'Verbindung:',
 'copier_en_local' => 'Lokale Koipe',
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'Stunden',
@@ -270,6 +271,7 @@ französischen SPIP-Dokumentation</a>.',
 'info_avertissement' => 'Warnung',
 'info_barre_outils' => 'mit Symbolleiste?',
 'info_base_installee' => 'Die Struktur Ihrer Datenbank wurde angelegt.',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'Kopf',
 'info_chapeau_2' => 'Kopf:',
 'info_chemin_acces_1' => 'Optionen: <b>Pfad im Verzeichnis</b>',

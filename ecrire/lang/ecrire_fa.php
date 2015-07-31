@@ -104,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_titre_base_sup_choix' => 'يك پايگاه مكمل انتخاب كنيد',
 'connexion_ldap' => 'ارتباط',
 'copier_en_local' => 'در local کپی کنید',
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'ساعت',
@@ -265,6 +266,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'تذكر',
 'info_barre_outils' => 'با ميل ابزار آن؟',
 'info_base_installee' => '.ساختار داده پى هايتان نصب شده',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'سر متن',
 'info_chapeau_2' => ':سر متن',
 'info_chemin_acces_1' => 'گزینش: <b>مسير ورود به راهنما</b>',

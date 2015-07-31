@@ -111,6 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_titre_base_sup_choix' => 'Choisissez une base supplémentaire', # NEW
 'connexion_ldap' => 'Connexion :', # NEW
 'copier_en_local' => 'Copier en local', # NEW
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'èr yo',
@@ -277,6 +278,7 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'info_avertissement' => 'Mesaj pou atansyon',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Strikti bazdone se enstale.',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'Chapo',
 'info_chapeau_2' => 'Chapo :',
 'info_chemin_acces_1' => 'Opsyion sa-yo: <b>Chemen pou laksè nan laniyè</b>',

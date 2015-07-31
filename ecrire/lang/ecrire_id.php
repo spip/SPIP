@@ -112,6 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_titre_base_sup_choix' => 'Choisissez une base supplémentaire', # NEW
 'connexion_ldap' => 'Koneksi:',
 'copier_en_local' => 'Kopi ke situs lokal',
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'H',
@@ -275,6 +276,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Peringatan',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Struktur database anda telah diinstal.',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'Dek',
 'info_chapeau_2' => 'Introduksi:',
 'info_chemin_acces_1' => 'Pilihan: <b>Path akses dalam direktori</b>',

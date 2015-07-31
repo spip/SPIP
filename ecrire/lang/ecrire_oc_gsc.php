@@ -106,6 +106,7 @@ la documentacion d\'SPIP</a>.', # MODIF
 'config_titre_base_sup_choix' => 'Choisissez une base supplémentaire', # NEW
 'connexion_ldap' => 'Connexion :', # NEW
 'copier_en_local' => 'Copier en local', # NEW
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'òras',
@@ -267,6 +268,7 @@ L\'administrator deu sistèma o de l\'arret que\'vs deu poder hornir
 'info_avertissement' => 'Avís',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'L\'estructura de la vòsta basa de dadas qu\'ei installada.',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'Capèth',
 'info_chapeau_2' => 'Capèth:',
 'info_chemin_acces_1' => 'Opcions: <b>camin d\'accès dens l\'annuari</b>',

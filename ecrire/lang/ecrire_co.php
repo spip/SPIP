@@ -112,6 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_titre_base_sup_choix' => 'Sceglie una basa di dati in soprapiù',
 'connexion_ldap' => 'Cunnessione :',
 'copier_en_local' => 'Cupià versu u lucale',
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'ore',
@@ -280,6 +281,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Avertimentu',
 'info_barre_outils' => 'cù a tàvula di strumenti?',
 'info_base_installee' => 'Hè stallata a struttura di a vostra basa di dati.',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'Cappellu',
 'info_chapeau_2' => 'Cappellu :',
 'info_chemin_acces_1' => 'Opzioni : <b>Percorsu d\'accessu à i dati in l\'annuariu</b>',

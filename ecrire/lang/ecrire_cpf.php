@@ -136,6 +136,7 @@ Ni konsèy aou kofirm pa ladomann linportasyon-la<p> Si ou néna bezwin inn pé 
 'config_titre_base_sup_choix' => 'Choisissez une base supplémentaire', # NEW
 'connexion_ldap' => 'Connexion :', # NEW
 'copier_en_local' => 'Copier en local', # NEW
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'èr',
@@ -301,6 +302,7 @@ inn liv-zimaz (sédir inn galri).',
 'info_avertissement' => 'Lavi',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Lastriktir out bazdodné lé instalé.',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'Sapo',
 'info_chapeau_2' => 'Sapo :',
 'info_chemin_acces_1' => 'Bann lopsyon : <b>Somin laksè dann karné</b>',

@@ -106,6 +106,7 @@ risco de destruição da sua base de dados, mal funcionamento generalizado do si
 'config_titre_base_sup_choix' => 'Escolha uma base suplementar',
 'connexion_ldap' => 'Conexão:',
 'copier_en_local' => 'Copiar localmente',
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'horas',
@@ -266,6 +267,7 @@ Estas informações deverão ser fornecidas pelo administrador do sistema ou da 
 'info_avertissement' => 'Aviso',
 'info_barre_outils' => 'com sua barra de ferramentas?',
 'info_base_installee' => 'A estrutura da sua base de dados foi instalada.',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'Introdução',
 'info_chapeau_2' => 'Introdução:',
 'info_chemin_acces_1' => 'Opções: <b>Caminho de acesso no diretório</b>',

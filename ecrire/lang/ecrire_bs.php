@@ -104,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_titre_base_sup_choix' => 'Choisissez une base supplémentaire', # NEW
 'connexion_ldap' => 'Connexion :', # NEW
 'copier_en_local' => 'Copier en local', # NEW
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'sati',
@@ -263,6 +264,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Upozorenje',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Struktura vase baze podatake je instalirana.',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'Uvod',
 'info_chapeau_2' => 'Uvod:',
 'info_chemin_acces_1' => 'Opcije: <b>Putanja pristupa u direktorij</b>', # MODIF

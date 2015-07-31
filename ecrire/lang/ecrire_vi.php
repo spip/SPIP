@@ -107,6 +107,7 @@ Hồ sơ SPIP</a>.', # MODIF
 'config_titre_base_sup_choix' => 'Choisissez une base supplémentaire', # NEW
 'connexion_ldap' => 'Connection:', # NEW
 'copier_en_local' => 'Copy to local site', # NEW
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'Giờ',
@@ -266,6 +267,7 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_avertissement' => 'Báo động',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Cấu trúc database của bạn đã được thiết trí.',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'Dẫn nhập',
 'info_chapeau_2' => 'Dẫn nhập:',
 'info_chemin_acces_1' => ' Chọn lựa: <b>ngõ vào trong thư mục</b>',

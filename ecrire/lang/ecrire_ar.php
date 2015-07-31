@@ -112,6 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_titre_base_sup_choix' => 'اختيار قاعدة اضافية',
 'connexion_ldap' => 'اتصال:',
 'copier_en_local' => 'نسخ محلياً',
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'ساعات',
@@ -277,6 +278,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'تحذير',
 'info_barre_outils' => 'مع شريط أدواته؟',
 'info_base_installee' => '<b>تم تثبيت بنية قاعدة البيانات. ',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'المقدمة',
 'info_chapeau_2' => 'المقدمة:',
 'info_chemin_acces_1' => 'خيارات: <b>مسار الدخول في الدليل</b>',

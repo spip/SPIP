@@ -111,6 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_titre_base_sup_choix' => 'Elektu kroman datumbazon',
 'connexion_ldap' => 'Konektiĝo :',
 'copier_en_local' => 'Kopii en lokan komputilon',
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'horoj',
@@ -272,6 +273,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Averto',
 'info_barre_outils' => 'ĉu per ĝia ilobreto?',
 'info_base_installee' => 'La strukturo de via datenbazo estas instalita.',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'Ĉapo',
 'info_chapeau_2' => 'Ĉapo :',
 'info_chemin_acces_1' => 'Opcioj : <b>Alirvojo en la LDAP-dosierujilo</b>',

@@ -107,6 +107,7 @@ der Dokumentatioun vu SPIP</a>.</p>', # MODIF
 'config_titre_base_sup_choix' => 'Wielt eng zousätzlech Datebank aus',
 'connexion_ldap' => 'Verbindung:',
 'copier_en_local' => 'Lokal kopéieren',
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'h',
@@ -267,6 +268,7 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'info_avertissement' => 'Warnung',
 'info_barre_outils' => 'mat senger Toolbar?',
 'info_base_installee' => 'D\'Struktur vun ärer Datebank ass installéiert.',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'Chapeau',
 'info_chapeau_2' => 'Chapeau:',
 'info_chemin_acces_1' => 'Optiounen: <b>Wee an der Lëscht</b>',
