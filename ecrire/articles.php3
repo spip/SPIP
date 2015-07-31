@@ -1194,32 +1194,28 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
 // Corps de l'article
 //
 
-echo "<DIV align=justify>";
+echo "\n\n<DIV align=justify>";
 
-echo "<P align=justify><B>";
+echo "<B>";
 echo justifier(propre($chapo));
-echo "</B>";
+echo "</B>\n\n";
 
-echo "<P align=justify>";
 echo justifier(propre($texte));
 
 if ($ps) {
-	echo "<FONT SIZE=2><P align=justify><B>P.S.</B> ";
+	echo "\n\n<FONT SIZE=2><P align=justify><B>P.S.</B> ";
 	echo justifier(propre($ps));
 	echo "</FONT>";
 }
 
 
 if ($les_notes) {
-	echo "<FONT SIZE=2><P align=justify>";
-	echo propre($les_notes);
+	echo "\n\n<FONT SIZE=2>";
+	echo justifier($les_notes);
 	echo "</FONT>";
 }
 
-
-
-
-echo "<DIV align=right>";
+echo "\n\n<DIV align=right>";
 
 //
 // Bouton "modifier cet article"
