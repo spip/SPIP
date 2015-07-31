@@ -81,20 +81,20 @@ function spip_mysql_select($select, $from, $where,
 	foreach($where as $k => $v)
 	  { if (!$v) unset($where[$k]);}
 
-	$q = ($from  ?("\nFROM " . join(",\n\t", $from)) : '')
-	  .  ($where ? ("\nWHERE " . join("\n\tAND ", $where)) : '')
-	  .  ($groupby ? "\nGROUP BY $groupby" : '')
-	  .  ($having  ? "\nHAVING $having" : '')
-	  .  ($orderby ? ("\nORDER BY " . join(", ", $orderby)) : '')
-	  .  ($limit ? "\nLIMIT $limit" : '');
+	$q = ($from ? ("\nFROM " . join(",\n\t", $from)) : '')
+		. ($where ? ("\nWHERE " . join("\n\tAND ", $where)) : '')
+		. ($groupby ? "\nGROUP BY $groupby" : '')
+		. ($having ? "\nHAVING $having" : '')
+		. ($orderby ? ("\nORDER BY " . join(", ", $orderby)) : '')
+		. ($limit ? "\nLIMIT $limit" : '');
 
 	if (!$sousrequete)
 		$q = " SELECT ". join(", ", $select) . $q;
 	else
 		$q = " SELECT S_" . join(", S_", $select)
 		. " FROM (" . join(", ", $select)
-		. ", COUNT(".$sousrequete.") AS compteur " . $q
-		.") AS S_$table WHERE compteur=" . $cpt;
+		. ", COUNT(" . $sousrequete . ") AS compteur " . $q
+		. ") AS S_$table WHERE compteur=" . $cpt;
 
 	// Erreur ? C'est du debug de squelette, ou une erreur du serveur
 
@@ -159,10 +159,11 @@ function spip_connect_db($host, $port, $login, $pass, $db) {
 	// En cas d'erreur marquer le fichier mysql_out
 	if (!$GLOBALS['db_ok']
 	AND !defined('_ECRIRE_INSTALL')) {
-		spip_log("La connexion MySQL est out!");
 		@touch(_FILE_MYSQL_OUT);
+		$err = 'Echec connexion MySQL '.spip_sql_errno().' '.spip_sql_error();
+		spip_log($err);
+		spip_log($err, 'mysql');
 	}
-
 	return $GLOBALS['db_ok'];
 }
 
@@ -211,18 +212,6 @@ function spip_fetch_array($r, $t=SPIP_BOTH) {
                 return mysql_fetch_array($r, $t);
 }
 
-/* Appels obsoletes
-function spip_fetch_object($r) {
-	if ($r)
-		return mysql_fetch_object($r);
-}
-
-function spip_fetch_row($r) {
-	if ($r)
-		return mysql_fetch_row($r);
-}
-*/
-
 function spip_sql_error() {
 	return mysql_error();
 }
@@ -259,7 +248,8 @@ function spip_get_lock($nom, $timeout = 0) {
 	if ($spip_mysql_db) $nom = "$spip_mysql_db:$nom";
 
 	// Changer de nom toutes les heures en cas de blocage MySQL (ca arrive)
-	$nom = intval(time()/3600-316982).$nom;
+	define('_LOCK_TIME', intval(time()/3600-316982));
+	$nom .= _LOCK_TIME;
 
 	$nom = addslashes($nom);
 	$q = spip_query("SELECT GET_LOCK('$nom', $timeout)");
@@ -273,6 +263,8 @@ function spip_release_lock($nom) {
 	global $spip_mysql_db, $table_prefix;
 	if ($table_prefix) $nom = "$table_prefix:$nom";
 	if ($spip_mysql_db) $nom = "$spip_mysql_db:$nom";
+
+	$nom .= _LOCK_TIME;
 
 	$nom = addslashes($nom);
 	spip_query("SELECT RELEASE_LOCK('$nom')");
