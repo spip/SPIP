@@ -194,6 +194,7 @@ function racine_forum($id_forum){
 } 
 
 function generer_url_forum_dist($id_forum, $show_thread=false) {
+	if (!$id_forum) return '';
 	list($type, $id, $id_thread) = racine_forum($id_forum);
 	if ($id_thread>0 AND $show_thread)
 		$id_forum = $id_thread;
@@ -211,7 +212,7 @@ function generer_url_forum_dist($id_forum, $show_thread=false) {
 			return generer_url_site($id)."#forum$id_forum";
 			break;
 		default:
-		  return generer_url_ecrire("forum_admin", "id_forum=".$id_forum);
+		  return '';
 	}
 }
 
