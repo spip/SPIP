@@ -1692,16 +1692,24 @@ function debut_droite() {
 	<?php
 
 	// proposer un zap_session le cas echeant lors d'un login reussi
-	if ($GLOBALS['spip_session'] && $GLOBALS['zap']=='oui' && zap_sessions($GLOBALS['auteur_session']['login'], false)) {
+	if ($GLOBALS['spip_session'] && $GLOBALS['zap']=='oui' && $zapnum = zap_sessions($GLOBALS['auteur_session']['login'], false)) {
 		debut_cadre_enfonce();
-		echo propre('<img src="img_pack/warning.gif" align="left" hspace="5" vspace="5"> Attention: une autre connexion
-			&agrave; votre nom est en cours. Probablement est-ce parce que vous ne vous
+		if ($zapnum == 1) {
+			$uneautre="une autre connexion";
+			$lautre="l'autre connexion";
+		} else {
+			$uneautre="$zapnum autres connexions";
+			$lautre="les autres connexions";
+		}
+		echo propre('<img src="img_pack/warning.gif" align="left" hspace="5" vspace="5">
+			Attention: il y a '.$uneautre.'
+			&agrave; votre nom. Probablement est-ce parce que vous ne vous
 			&ecirc;tes pas d&eacute;connect&eacute; apr&egrave;s votre dernier passage,
 			ou parce que vous vous connectez simultan&eacute;ment avec deux navigateurs.
 			Si tel est le cas, cela ne pr&ecirc;te pas &agrave; cons&eacute;quence.
 
 			En cas de doute, toutefois, [cliquez sur ce texte pour supprimer
-			l\'autre session->../spip_cookie.php3?zap_session=oui&redirect=./ecrire/].');
+			'.$lautre.'->../spip_cookie.php3?zap_session=oui&redirect=./ecrire/].');
 		fin_cadre_enfonce();
 	}
 }
