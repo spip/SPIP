@@ -75,5 +75,7 @@ $GLOBALS['all_langs'] = $GLOBALS['langues_ok'].",".$GLOBALS['langues_tests'];
 $GLOBALS['spip_lang'] = 'zg';
 if (!regler_langue_navigateur())
 	changer_langue(lire_meta('langue_site'));
+if ($GLOBALS['prefs']['spip_lang'])
+	changer_langue($GLOBALS['prefs']['spip_lang']);
 
 ?>

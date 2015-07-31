@@ -1459,7 +1459,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "</tr></table>";
 	echo "</td></tr></table>";
 
-		
+
 	// Bandeau
 	echo "\n<table cellpadding='0' bgcolor='$couleur_foncee' style='border-bottom: solid 1px white; border-top: solid 1px #666666;' width='100%'><tr width='100%'><td width='100%' align='center'>";
 	echo "<table cellpadding='0' background='' width='$largeur'><tr width='$largeur'><td>";
@@ -1476,7 +1476,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			if ($total_messages > 1) echo "<a href='messagerie.php3'><font color='$couleur_claire'>"._T('info_nouveaux_messages', array('total_messages' => $total_messages))."</font></a>";
 			$result_messages = spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur='$connect_id_auteur' AND messages.statut='publie' AND lien.id_message=messages.id_message AND messages.rv='oui' AND messages.date_heure>DATE_SUB(NOW(),INTERVAL 1 DAY) GROUP BY messages.id_message");
 			$total_messages = @spip_num_rows($result_messages);
-			
+
 			if ($total_messages == 1) {
 				while ($row = @spip_fetch_array($result_messages)) {
 					$ze_message = $row['id_message'];
@@ -1531,15 +1531,22 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	// choix de la langue
 	//
 	if (strpos(lire_meta('langues_proposees'), ',')) {
-		echo "<td align='center'><font face='arial,helvetica,sans-serif' size=2><img src='img_pack/langues-24.png' align='center'>";
+		//echo "<td align='center'><font face='arial,helvetica,sans-serif' size=2><img src='img_pack/langues-24.png' align='center'>";
+		echo "<td align='center'><font face='arial,helvetica,sans-serif' size=2>";
 		$langues = explode(',', lire_meta('langues_proposees'));
 		while (list(,$langue) = each ($langues)) {
 			$lien = $clean_link;
 			$lien->addVar('set_lang', $langue);
-			if ($langue <> $GLOBALS['spip_lang'])
-				echo " <a href='". $lien->getUrl() ."' title='"._T("langue_$langue")."'><font color='#ffffff'>$langue</font></a>";
-			else
-				echo " <font color='#ffffff'>[$langue]</font>";
+			if ($langue != $GLOBALS['spip_lang']) {
+				//echo "<span class='fondgris' color='white' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\">";
+				echo "<a href='". $lien->getUrl() ."' title='"._T("langue_$langue")."'><font color='white'>$langue</font></a>";
+				//echo "</span>";
+			}
+			else {
+				echo "<span class='fondgrison2'><b>$langue</b></span>";
+				//echo " <font color='#ffffff'>[$langue]</font>";
+			}
+			echo "&nbsp;";
 		}
 		echo "</font></td>";
 	}
@@ -1552,7 +1559,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "</td>";
 	echo "</tr></table>";
 	echo "</td></tr></table>";
-	
+
 	echo "<center>";
 }
 
