@@ -69,10 +69,12 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 
 	$keywords = '';
 	$found = false;
-
+	
 	if (strpos('-'.$kw_referer, eregi_replace("^(https?:?/?/?)?(www\.)?", "",$url_site))) {
 		if (eregi("(s|search|r|recherche)=([^&]+)", $kw_referer, $regs))
 			$keywords = urldecode($regs[2]);
+			
+			
 		else
 			return '';
 	} else
@@ -81,8 +83,22 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 		if ($found = (ereg($arr_engines[$cnt][2], $host)))
 		{
 			$kw_referer_host = $arr_engines[$cnt][0];
-			$keywords = ereg('=', $arr_engines[$cnt][1])
-				? ${str_replace('=', '', $arr_engines[$cnt][1])}:'';
+			
+			if (ereg('=', $arr_engines[$cnt][1])) {
+			
+				// Fonctionnement simple: la variable existe
+				$keywords = ${str_replace('=', '', $arr_engines[$cnt][1])};
+				
+				// Si on a defini le nom de la variable en expression reguliere, chercher la bonne variable
+				if (! strlen($keywords) > 0) {
+					if (ereg($arr_engines[$cnt][1]."([^\&]*)", $query, $vals)) {
+						$keywords = urldecode($vals[2]);
+					}
+				}
+			} else {
+				$keywords = "";
+			}
+						
 			if ((($kw_referer_host == "Google" &&
 				ereg('[io]e=([-a-z0-9]+)', strtolower($query), $regs))
 				|| ($kw_referer_host == "AOL" && !ereg('enc=iso', $query))
@@ -388,7 +404,7 @@ function aff_referers ($query, $limit=10, $plus = true) {
 		$tmp = "";
 		
 		$buff = stats_show_keywords($referer, $referer);
-
+		
 		if ($buff["host"]) {
 			$numero = substr(md5($buff["hostname"]),0,8);
 	
