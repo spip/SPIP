@@ -9,6 +9,7 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	global $les_breves;
 	global $spip_lang_rtl;
 	global $spip_ecran;
+	global $couleur_claire, $couleur_foncee;
 
 	// calculer de nouveau la date du jour pour affichage en blanc
 	$ce_jour=date("Y-m-d");
@@ -21,18 +22,66 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	
 	if ($spip_ecran == "large") {
 		$largeur_table = 974;
+		$largeur_gauche = 130;
 	} else {
-		$largeur_table = 700;
+		$largeur_table = 750;
+	$largeur_gauche = 100;
 	}
-	
+	$largeur_table = $largeur_table - ($largeur_gauche+20);
 	$largeur_col = round($largeur_table/7);
 	
-	echo "<TABLE border=0 CELLSPACING=1 CELLPADDING=3 WIDTH='$largeur_table'>";
+	
+	
+	echo "<table cellpadding=0 cellspacing=0 border=0 width='".($largeur_table+10+$largeur_gauche)."'><tr>";
+	
+	echo "<td width='$largeur_gauche' class='verdana1' valign='top'>";
+		echo "<br />";
+		
+		$annee_avant = $annee_today - 1;
+		$annee_apres = $annee_today + 1;
+		
+		
+		if ($mois_today <=6) {
+			debut_boite_info();
+			echo "<div><b>$annee_avant</b></div>";
+			for ($i=9; $i < 13; $i++) {
+				echo "<div><a href='calendrier.php3?mois=$i&annee=$annee_avant'>".nom_mois("$annee_avant-$i-1")."</a></div>";
+			}
+			fin_boite_info();
+		}
+		
+		debut_boite_info();
+		echo "<div><b>$annee_today</b></div>";
+		for ($i=1; $i < 13; $i++) {
+			if ($i == $mois_today) {
+				echo "<div><b>".nom_mois("$annee_today-$i-1")."</b></div>";
+			}
+			else {
+				echo "<div><a href='calendrier.php3?mois=$i&annee=$annee_today'>".nom_mois("$annee_today-$i-1")."</a></div>";
+			}
+		}
+		fin_boite_info();
 
-		$mois_suiv=$mois_today+1;
-		$annee_suiv=$annee_today;
-		$mois_prec=$mois_today-1;
-		$annee_prec=$annee_today;
+		if ($mois_today >=7) {
+			debut_boite_info();
+			echo "<div><b>$annee_apres</b></div>";
+			for ($i=1; $i < 7; $i++) {
+				echo "<div><a href='calendrier.php3?mois=$i&annee=$annee_apres'>".nom_mois("$annee_apres-$i-1")."</a></div>";
+			}
+			fin_boite_info();
+		}
+	
+	echo "</td>";
+	echo "<td width='20'>&nbsp;</td>";
+	
+	echo "<td width='$largeur_table' valign='top'>";
+	
+	echo "<TABLE border=0 CELLSPACING=0 CELLPADDING=3 WIDTH='$largeur_table'>";
+
+	$mois_suiv=$mois_today+1;
+	$annee_suiv=$annee_today;
+	$mois_prec=$mois_today-1;
+	$annee_prec=$annee_today;
 
 	if ($mois_today==1){
 		$mois_prec=12;
@@ -101,18 +150,18 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	}
 
 
-	echo "<TR><TD><A HREF='calendrier.php3?mois=$mois_prec&annee=$annee_prec'><<<</A></TD>";
+	echo "<TR><TD><A HREF='calendrier.php3?mois=$mois_prec&annee=$annee_prec'><img src='img_pack/fleche-avant.png' alt='&lt;&lt;&lt;' width='12' height='12' border='0'></A></TD>";
 	echo "<TD ALIGN='center' COLSPAN=5><FONT FACE='arial,helvetica,sans-serif' SIZE=3><B>$nom_mois $annee_today ".aide ("messcalen")."</B></FONT></TD>";
-	echo "<TD ALIGN=right><A HREF='calendrier.php3?mois=$mois_suiv&annee=$annee_suiv'>>>></A></TD></TR>";
+	echo "<TD ALIGN=right><A HREF='calendrier.php3?mois=$mois_suiv&annee=$annee_suiv'><img src='img_pack/fleche-apres.png' alt='&gt;&gt;&gt;' width='12' height='12' border='0'></A></TD></TR>";
 
 	echo "<TR>";
-	echo "<TD ALIGN='center' BGCOLOR='#044476'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('date_jour_2')."</B></TD>";
-	echo "<TD ALIGN='center' BGCOLOR='#044476'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('date_jour_3')."</B></TD>";
-	echo "<TD ALIGN='center' BGCOLOR='#044476'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('date_jour_4')."</B></TD>";
-	echo "<TD ALIGN='center' BGCOLOR='#044476'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('date_jour_5')."</B></TD>";
-	echo "<TD ALIGN='center' BGCOLOR='#044476'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('date_jour_6')."</B></TD>";
-	echo "<TD ALIGN='center' BGCOLOR='#044476'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('date_jour_7')."</B></TD>";
-	echo "<TD ALIGN='center' BGCOLOR='#044476'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('date_jour_1')."</B></TD>";
+	echo "<TD ALIGN='center' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('date_jour_2')."</B></TD>";
+	echo "<TD ALIGN='center' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('date_jour_3')."</B></TD>";
+	echo "<TD ALIGN='center' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('date_jour_4')."</B></TD>";
+	echo "<TD ALIGN='center' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('date_jour_5')."</B></TD>";
+	echo "<TD ALIGN='center' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('date_jour_6')."</B></TD>";
+	echo "<TD ALIGN='center' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('date_jour_7')."</B></TD>";
+	echo "<TD ALIGN='center' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('date_jour_1')."</B></TD>";
 
 	echo "</TR><TR>";
 	
@@ -132,7 +181,7 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 			if ("$annee_today-$mois_today-$jour"==$ce_jour){
 				echo "<TD width='$largeur_col' HEIGHT=80 BGCOLOR='#FFFFFF' VALIGN='top'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='red'><B>$jour</B></FONT>";
 			}else{		
-				echo "<TD width='$largeur_col' HEIGHT=80 BGCOLOR='#E4E4E4' VALIGN='top'><FONT FACE='arial,helvetica,sans-serif' SIZE=3><B>$jour</B></FONT>";
+				echo "<TD width='$largeur_col' HEIGHT=80 BGCOLOR='#E4E4E4' VALIGN='top' style='border-bottom: 1px solid white; border-right: 1px solid white; border-left: 1px solid #aaaaaa; border-top: 1px solid #aaaaaa;'><FONT FACE='arial,helvetica,sans-serif' SIZE=3><B>$jour</B></FONT>";
 			}
 
 			$activer_messagerie = lire_meta("activer_messagerie");
@@ -162,6 +211,7 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	}
 
 	echo "</TR></TABLE>";
+	echo "</td></tr></table>";
 
 }
 
