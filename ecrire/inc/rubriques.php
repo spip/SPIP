@@ -264,8 +264,8 @@ function enfant_rub($collection){
 			 baliser_logo("rub", $id_rubrique, 48, 36, $voir_logo)) .
 		  (!$les_sous_enfants ? "" : bouton_block_invisible("enfants$id_rubrique")) .
 		  (acces_restreint_rubrique($id_rubrique) ? "" :
-		   http_img_pack("admin-12.gif", '', "width='12' height='12'", _T('image_administrer_rubrique'))) .
-		  "<span dir='$lang_dir'><B><A href='" . 
+		   http_img_pack("admin-12.gif", '', " width='12' height='12'", _T('image_administrer_rubrique'))) .
+		  " <span dir='$lang_dir'><B><A href='" . 
 		  generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") .
 		  "'><font color='$couleur_foncee'>".
 		  typo($titre) .
