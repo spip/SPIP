@@ -28,7 +28,7 @@ function inc_install_unpack()
   else if (@file_exists(_DIR_RESTREINT . 'inc/install_unpack.php'))
 	redirige_par_entete(generer_action_auteur('unpack','','',true));
   else // c'est qui lui ???? 
-	redirige_par_entete(generer_action_auteur('loader','','',true)
+    redirige_par_entete(generer_action_auteur('loader','','',true));
 }
 
 ?>
