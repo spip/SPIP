@@ -61,7 +61,7 @@ function spip_connect($serveur='', $version='') {
 		if (!isset($GLOBALS['db_ok'])) {
 		  // fera mieux la prochaine fois
 			if ($install) return false;
-			if ($f AND $readable)
+			if ($f AND is_readable($f))
 				spip_log("spip_connect: fichier de connexion '$f' OK.", _LOG_INFO_IMPORTANTE);
 			else
 				spip_log("spip_connect: fichier de connexion '$f' non trouve", _LOG_INFO_IMPORTANTE);
