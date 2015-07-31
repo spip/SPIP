@@ -1199,7 +1199,7 @@ function extraire_multi($letexte, $lang=null, $echappe_span=false) {
 				$l = key($trads);
 				$trad = $trads[$l];
 				$typographie = charger_fonction(lang_typo($l), 'typographie');
-				$trad = traiter_retours_chariots($typographie($trad));
+				$trad = $typographie($trad);
 				include_spip('inc/texte');
 				// Tester si on echappe en span ou en div
 				// il ne faut pas echapper en div si propre produit un seul paragraphe
