@@ -41,7 +41,7 @@ function exec_articles_versions_dist()
 
 	$id_article = $row["id_article"];
 	$id_rubrique = $row["id_rubrique"];
-	$titre = $row["titre"];
+	$titre_defaut = $titre = $row["titre"];
 	$date = $row["date"];
 	$statut_article = $row["statut"];
 	$maj = $row["maj"];
@@ -51,8 +51,10 @@ function exec_articles_versions_dist()
 	$extra = $row["extra"];
 	$id_trad = $row["id_trad"];
 
+	$last_version = false;
 	if (!($id_version = intval($id_version))) {
 		$id_version = $row['id_version'];
+		$last_version = true;
 	}
 	$id_diff = intval($id_diff);
 
@@ -143,7 +145,7 @@ if (autoriser('modifier', 'article', $id_article))
 	icone(
 		_T('icone_modifier_article').'<br />('._T('version')." $id_version)",
 		generer_url_ecrire("articles_edit",
-			"id_article=$id_article&id_version=$id_version"),
+			"id_article=$id_article".((!$last_version)?"&id_version=$id_version":"")),
 		"article-24.gif",
 		"edit.gif"
 	);

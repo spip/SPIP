@@ -233,14 +233,24 @@ function recuperer_fragments($id_article, $id_version) {
 
 	if ($id_version == 0) return array();
 
-	$result = spip_query("SELECT id_fragment, version_min, compress, fragment FROM spip_versions_fragments WHERE id_article=$id_article AND version_min<=$id_version AND version_max>=$id_version");
+	$result = spip_query("SELECT id_fragment, version_min, version_max, compress, fragment FROM spip_versions_fragments WHERE id_article=$id_article AND version_min<=$id_version AND version_max>=$id_version");
 
 	while ($row = spip_fetch_array($result)) {
 		$id_fragment = $row['id_fragment'];
 		$version_min = $row['version_min'];
 		$fragment = $row['fragment'];
-		if ($row['compress'] > 0) $fragment = @gzuncompress($fragment);
-		$fragment = unserialize($fragment);
+		if ($row['compress'] > 0){
+			$fragment_ = @gzuncompress($fragment);
+			if (strlen($fragment) && $fragment_===false)
+				$fragment=serialize(array($row['version_max']=>_T('fragment_corrompu')));
+			else
+			 $fragment = $fragment_;
+		}
+		$fragment_ = unserialize($fragment);
+		if (strlen($fragment) && $fragment_===false)
+			$fragment=array($row['version_max']=>_T('fragment_corrompu'));
+		else
+		 $fragment = $fragment_;
 		for ($i = $id_version; $i >= $version_min; $i--) {
 			if (isset($fragment[$i])) {
 
@@ -356,7 +366,7 @@ function recuperer_version($id_article, $id_version) {
 		$textes[$nom_champ] = "";
 		$code = explode(' ', $code);
 		foreach ($code as $id_fragment) {
-			$textes[$nom_champ] .= $fragments[$id_fragment];
+			$textes[$nom_champ] .= isset($fragments[$id_fragment])?$fragments[$id_fragment]:_T('fragment_manquant');
 		}
 	}
 	return $textes;
