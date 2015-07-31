@@ -69,7 +69,8 @@ function action_legender_post($r)
 		$modifs['descriptif'] = $t;
 
 	include_spip('inc/modifier');
-
 	revision_document($id_document, $modifs);
+
 }
+
 ?>

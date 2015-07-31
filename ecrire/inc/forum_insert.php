@@ -192,14 +192,19 @@ function inc_forum_insert_dist($force_statut = NULL) {
 	// Entree du contenu et invalidation des caches
 	//
 	include_spip('inc/modifier');
-	// Injecter les bonnes valeurs dans le contexte $c
-	$auteur = sinon($GLOBALS['visiteur_session']['nom'],
+
+	$c = array();
+	foreach (array(
+		'titre', 'texte', 'nom_site', 'url_site'
+	) as $champ)
+		$c[$champ] = _request($champ);
+
+	$c['auteur'] = sinon($GLOBALS['visiteur_session']['nom'],
 		$GLOBALS['visiteur_session']['session_nom']);
-	$email_auteur = sinon($GLOBALS['visiteur_session']['email'],
+	$c['email_auteur'] = sinon($GLOBALS['visiteur_session']['email'],
 		$GLOBALS['visiteur_session']['session_email']);
-	set_request('auteur', $auteur);
-	set_request('email_auteur', $email_auteur);
-	revision_forum($id_message);
+
+	revision_forum($id_message, $c);
 
 	// Notification
 	if ($notifications = charger_fonction('notifications', 'inc'))

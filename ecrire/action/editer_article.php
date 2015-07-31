@@ -46,17 +46,37 @@ function action_editer_article_dist() {
 // Appelle toutes les fonctions de modification d'un article
 // $err est de la forme '&trad_err=1'
 // http://doc.spip.org/@articles_set
-function articles_set($id_article, $c=false) {
+function articles_set($id_article) {
 	$err = '';
 
-	// Edition du contenu ?
-	$err .= revisions_articles($id_article, $c);
+	// unifier $texte en cas de texte trop long
+	trop_longs_articles();
+
+	$c = array();
+	foreach (array(
+		'surtitre', 'titre', 'soustitre', 'descriptif',
+		'nom_site', 'url_site', 'chapo', 'texte', 'ps'
+	) as $champ)
+		$c[$champ] = _request($champ);
+
+	if (_request('changer_virtuel') == 'oui') {
+		$r = _request('virtuel');
+		$c['chapo'] = (strlen($r) ? '='.$r : '');
+	}
+
+	include_spip('inc/modifier');
+	revision_article($id_article, $c);
 
 	// Modification de statut, changement de rubrique ?
+	$c = array();
+	foreach (array(
+		'date', 'statut', 'id_parent'
+	) as $champ)
+		$c[$champ] = _request($champ);
 	$err .= instituer_article($id_article, $c);
 
 	// Un lien de trad a prendre en compte
-	$err .= article_referent($id_article, $c);
+	$err .= article_referent($id_article, _request('id_trad'));
 
 	return $err;
 }
@@ -110,44 +130,6 @@ function insert_article($id_rubrique) {
 	return $id_article;
 }
 
-// Enregistre une revision d'article
-// $c est un contenu (par defaut on prend le contenu via _request())
-// http://doc.spip.org/@revisions_articles
-function revisions_articles ($id_article, $c=false) {
-	include_spip('inc/modifier');
-
-	// unifier $texte en cas de texte trop long (sur methode POST seulement)
-	if (!is_array($c)) trop_longs_articles();
-
-	// Si l'article est publie, invalider les caches et demander sa reindexation
-	$t = sql_getfetsel("statut", "spip_articles", "id_article=$id_article");
-	if ($t == 'publie') {
-		$invalideur = "id='id_article/$id_article'";
-		$indexation = true;
-	}
-
-	if (_request('changer_virtuel') == 'oui') {
-		$r = _request('virtuel');
-		if ($r) $r = "=$r";
-		set_request('chapo', $r);
-	}
-
-	modifier_contenu('article', $id_article,
-		array(
-			'champs' => array(
-				'surtitre', 'titre', 'soustitre', 'descriptif',
-				'nom_site', 'url_site', 'chapo', 'texte', 'ps','date','date_redac'
-			),
-			'nonvide' => array('titre' => _T('info_sans_titre')),
-			'invalideur' => $invalideur,
-			'indexation' => $indexation,
-			'date_modif' => 'date_modif' // champ a mettre a NOW() s'il y a modif
-		),
-		$c);
-
-	return ''; // pas d'erreur
-}
-
 
 // $c est un array ('statut', 'id_parent' = changement de rubrique)
 //
@@ -164,9 +146,9 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 	$id_rubrique = $row['id_rubrique'];
 	$statut_ancien = $statut = $row['statut'];
 	$champs = array();
-	$date = _request('date', $c);
+	$date = $c['date'];
 
-	$s = _request('statut', $c);
+	$s = $c['statut'];
 
 	// cf autorisations dans inc/instituer_article
 	if ($s AND $s != $statut) {
@@ -184,7 +166,7 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 		OR ($champs['statut'] == 'prop'
 			AND !in_array($statut_ancien, array('publie', 'prop'))
 		)) {
-			if ($date)
+			if (!is_null($date))
 				$champs['date'] = $date;
 			else {
 				# on prend la date de MySQL pour eviter un decalage cf. #975
@@ -196,7 +178,7 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 
 	// Verifier que la rubrique demandee existe et est differente
 	// de la rubrique actuelle
-	if ($id_parent = _request('id_parent', $c)
+	if ($id_parent = $c['id_parent']
 	AND $id_parent != $id_rubrique
 	AND (sql_fetsel('1', "spip_rubriques", "id_rubrique=$id_parent"))) {
 		$champs['id_rubrique'] = $id_parent;
@@ -306,9 +288,9 @@ function trop_longs_articles() {
 
 // Poser un lien de traduction vers un article de reference
 // http://doc.spip.org/@article_referent
-function article_referent ($id_article, $c) {
+function article_referent ($id_article, $lier_trad) {
 
-	if (!$lier_trad = intval(_request('lier_trad', $c))) return;
+	if (!$lier_trad = intval($c['lier_trad'])) return;
 
 	// selectionner l'article cible, qui doit etre different de nous-meme,
 	// et quitter s'il n'existe pas
@@ -333,6 +315,15 @@ function article_referent ($id_article, $c) {
 	}
 
 	return ''; // pas d'erreur
+}
+
+
+
+// obsolete, utiliser revision_article dans inc/modifier
+// http://doc.spip.org/@revisions_articles
+function revisions_articles ($id_article, $c=false) {
+	include_spip('inc/modifier');
+	return revision_article($id_article,$c);
 }
 
 
