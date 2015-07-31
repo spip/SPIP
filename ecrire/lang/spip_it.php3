@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_colonne_inexistante' => 'La colonna @col@ non esiste',
 'avis_connexion_echec_1' => 'il collegamento al server MySQL &egrave; fallito.',
 'avis_connexion_echec_2' => 'torna alla pagina precedente e verifica le informazioni fornite.',
-'avis_connexion_echec_3' => '<B>N.B.</B> Spesso sul server si deve <B>chiedere</B> l\'attivazione dell\'accesso al database MySQL prima di poterlo utilizzare. Se non puoi collegarti, verifica la configurazione per la connessione con l\'amministratore del sistema.',
+'avis_connexion_echec_3' => '<B>N.B.</B> Spesso sul server si deve <B>chiedere</B> l\'attivazione dell\'accesso al database MySQL prima di poterlo utilizzare. Se &egrave; impossibile collegarsi, verificare la configurazione per la connessione con l\'amministratore del sistema.',
 'avis_connexion_ldap_echec_1' => 'La connessione al server LDAP &egrave; fallita.',
 'avis_connexion_ldap_echec_2' => 'Torna alla pagina precedente e verifica le informazioni fornite. ',
 'avis_connexion_ldap_echec_3' => 'In alternativa, non utilizzare il supporto LDAP per importare utenti.',
@@ -53,9 +53,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 una versione di SPIP diversa da quella installata.</b> Potranno sorgere dei problemi:
 rischio di distruzione del database, malfunzionamenti diversi del sito ecc.
 Non confermare questa richiesta d\'importazione!
-<p>Per ulteriori informazioni, vedere <A HREF=\'http://www.spip.net/fr_article1489.html\'>
+<p />Per ulteriori informazioni, vedere <A HREF=\'http://www.spip.net/fr_article1489.html\'>
 la documentazione di SPIP</a>.',
-'avis_espace_interdit' => '<B>Area vietata</B><p>SPIP &egrave; gi&agrave; installato.</p>',
+'avis_espace_interdit' => '<B>Area vietata</B><p />SPIP &egrave; gi&agrave; installato.</p>',
 'avis_lecture_noms_bases_1' => 'Il programma di installazione non ha potuto leggere i nomi dei database installati nel server.',
 'avis_lecture_noms_bases_2' => 'Nessun database &egrave; disponibile, o la funzione che permette di accedere alla lista database &egrave;
 disattivata per motivi sicurezza (verifica con l\'amministratore di sistema).',
@@ -253,14 +253,14 @@ problemi di compatibilit&agrave; con le applicazioni usate per modificare i prop
 'dirs_preliminaire' => 'Prima di iniziare: <B>impostare i diritti di accesso</b>',
 'dirs_probleme_droits' => '<b>Problema nei diritti di accesso</b>',
 'dirs_repertoires_absents' => '<B>Le seguenti cartelle non sono state trovate: <ul>@bad_dirs@.</ul> </B>
-  <P>Probabilmente ci&ograve; &egrave; dovuto ad un\'errata formattazione delle lettere maiuscole o minuscole.
-  Verifica che le minuscole e le maiuscole delle cartelle coincidano con quelle visualizzate
+  <p />Probabilmente ci&ograve; &egrave; dovuto a un\'errata formattazione delle lettere maiuscole o minuscole.
+  Verificare che le maiuscole e le minuscole delle cartelle coincidano con quelle visualizzate
   qui sopra; se non &egrave; cos&igrave;, rinomina le cartelle utilizzando il tuo software FTP.
-  <P>Una volta effettuata questa correzione, potrai ',
+  <p />Una volta effettuata questa correzione, si potr&agrave;',
 'dirs_repertoires_suivants' => '<B>Le seguenti cartelle non sono accessibili in scrittura: <ul>@bad_dirs@.</ul></b>
-<P>Utilizza un client FTP o un comando di shell [chmod] per impostare i diritti di accesso
-di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nella guida di installazione.
-<P>Una volta attribuiti i permessi, potrai ',
+<p />Utilizzare un client FTP o un comando di shell [chmod] per impostare i diritti di accesso
+di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nella guida d\'installazione.
+<p />Una volta attribuiti i permessi, si potr&agrave; ',
 
 
 // E
@@ -606,7 +606,7 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_config_suivi_explication' => '&Egrave; possibile abbonarsi alla mailing-list di questo sito. Verranno spedite per email le notifiche degli articoli e delle brevi proposte per la pubblicazione.',
 'info_confirmer_passe' => 'Conferma la nuova password:',
 'info_connexion_base' => 'Seconda fase: <B>Prova di connessione al database</b>',
-'info_connexion_ldap_ok' => 'La connessione LDAP &egrave; riuscita.</B><P> Potete passare alla fase successiva.',
+'info_connexion_ldap_ok' => 'La connessione LDAP &egrave; riuscita.</b><p /> &Egrave; possibile passare alla fase successiva.',
 'info_connexion_mysql' => 'Prima fase: <B>La connessione a MySQL</b>',
 'info_connexion_ok' => 'La connessione &egrave; riuscita.',
 'info_connexion_refusee' => 'Connessione rifiutata',
@@ -694,9 +694,9 @@ pubblicazione e di convalida degli articoli.',
 tutti i redattori registrati. &Egrave; anche possibile attivare un
 secondo forum riservato ai soli amministratori.',
 'info_forum_statistiques' => 'Statistiche delle visite',
-'info_gauche_admin_effacer' => '<B>Questa pagina &egrave; accessibile solo ai responsabili del sito.</B><P> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie ad un accesso FTP.',
-'info_gauche_admin_tech' => '<B>Questa pagina &egrave; accessibile solo ai responsabili del sito.</B><P> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie ad un accesso FTP.',
-'info_gauche_admin_vider' => '<B>Questa pagina &egrave; accessibile solo ai responsabili del sito.</B><P> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie ad un accesso FTP.',
+'info_gauche_admin_effacer' => '<B>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p /> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie a un accesso FTP.',
+'info_gauche_admin_tech' => '<B>Questa pagina &egrave; accessibile solo ai responsabili del sito.</B><p /> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie a un accesso FTP.',
+'info_gauche_admin_vider' => '<B>Questa pagina &egrave; accessibile solo ai responsabili del sito.</B><p /> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie ad un accesso FTP.',
 'info_gauche_auteurs' => 'Trovi qui tutti gli autori del sito.
 Il loro status &egrave; indicato dal colore dell\'icona (redattore = verde; amministratore = giallo).',
 'info_gauche_auteurs_exterieurs' => 'Gli autori esterni, senza accesso al sito, sono indicati da un\'icona blu;
@@ -716,9 +716,15 @@ pubblico del sito (forum su abbonamento).',
 'info_hebergeur_desactiver_envoi_email' => 'Alcuni hoster disattivano  l\'invio automatico di email
 dai loro server. In questo caso, le funzionalit&agrave; di SPIP di seguito riportate non funzioneranno.',
 'info_hier' => 'ieri:',
+'info_historique_activer' => 'Attivare la gestione delle revisioni',
+'info_historique_desactiver' => 'Disattivare la gestione delle revisioni',
+'info_historique_texte' => 'La gestione delle revisioni permette di conservare traccia di tutte le modifiche effettuate su un articolo, mostrando le differenze fra le sue versioni successive.',
+'info_historique_titre' => 'Gestione delle revisioni (versioni) degli articoli',
 'info_identification_publique' => 'La tua identit&agrave; pubblica...',
 'info_image_aide' => 'AIUTO',
 'info_image_process' => 'Seleziona il metodo migliore per la creazione delle anteprime cliccando sull\'immagine corrispondente.',
+'info_image_process2' => '<b>N.B.</b> <i>Se non appare alcuna immagine, ci&ograve; significa che la configurazione del server non permette l\'uso di alcune funzioni grafiche. Se si desidera utilizzarle, rivolgersi al responsabile tecnico chiedendo di installare le estensioni "GD" o "Imagick".</i>',
+'info_image_process_titre' => 'Metodo per generare thumbnail',
 'info_impossible_lire_page' => '<B>Errore!</B> Impossibile  leggere la pagina <tt><html>@test_proxy@</html></tt> attraverso il proxy <tt>',
 'info_inclusion_directe' => 'Inclusione diretta:',
 'info_inclusion_vignette' => 'Inclusione dell\'immagine:',
@@ -1434,7 +1440,7 @@ provenienza da questo sito saranno bloccati a priori.',
 ma non vi sono stati inseriti direttamente.
 A seconda delle impostazioni di pubblicazione del sito,
 potranno essere disponibili sotto forma di documenti allegati.',
-'texte_documents_joints' => 'Puoi autorizzare l\'aggiunta di documenti (file di testo, fogli elettronici, immagini, file multimediali, ecc.) agli articoli e/o alle rubriche. Questi file possono poi essere richiamati dalla pagina dell\'articolo, o pubblicati separatamente.<p>',
+'texte_documents_joints' => '&Egrave; possibile autorizzare l\'aggiunta di documenti (file di testo, fogli elettronici, immagini, file multimediali, ecc.) agli articoli e/o alle rubriche. Questi file possono poi essere richiamati nel testo dell\'articolo, o visualizzati separatamente.<p />',
 'texte_documents_joints_2' => 'Questa impostazione non impedisce l\'inserimento diretto di immagini negli articoli.',
 'texte_effacer_base' => 'Cancella il database SPIP',
 'texte_effacer_donnees_indexation' => 'Cancella i dati d\'indicizzazione',
@@ -1447,10 +1453,10 @@ e verifica che le immagini si vedano ancora
 negli articoli.',
 'texte_fichier_authent' => '<b>SPIP deve creare i file speciali <tt>.htpasswd</tt>
 e <tt>.htpasswd-admin</tt> nella cartella <tt>ecrire/data/</tt>?</b><p>
-Questi file possono servire a ristringere l\'accesso agli autori
+Questi file possono servire a limitare l\'accesso agli autori
 e agli amministratori in particolari aree del sito
-(per esempio, per un programma esterno di statistiche).<p>
-Se non ne hai necessit&agrave;, puoi lasciare quest\'opzione
+(per esempio, per un programma esterno di statistiche).<p />
+Se ci&ograve; non &egrave; necessario, lasciare quest\'opzione
 al suo valore predefinito (nessuna creazione di file).',
 'texte_inc_auth_1' => 'Sei identificato con il
 login <B>@auth_login@</B>, ma non esiste pi&ugrave; nel database. 
@@ -1541,12 +1547,12 @@ una sola pagina, utilizza piuttosto lo spazio pubblico e clicca sul pulsante &la
 'texte_referencement_automatique' => '<b>Inserimento automatizzato in repertorio</b><br>Se si desidera, &egrave; possibile repertoriare rapidamente un sito Web indicandone qui sotto l\'indirizzo URL, o l\'indirizzo del file di backend. SPIP recuperer&agrave; automaticamente le informazioni riguardanti il sito (titolo, descrizione...).',
 'texte_requetes_echouent' => '<B>Quando alcune query MySQL falliscono
 ripetutamente e senza un chiaro motivo, &egrave; possibile
-che sia per colpa del database stesso.</B><p>
+che sia per colpa del database stesso.</B><p />
 MySQL dispone di una funzione di ripristino delle tabelle
-danneggiate inavvertitamente. Puoi tentare il ripristino;
-in caso di errore, conserva una copia del messaggio visualizzato,
-contenente forse delle informazioni preziose...<p>
-Se il problema persiste, contatta il webmaster.<p>',
+danneggiate inavvertitamente. &Egrave; possibile tentare il ripristino;
+in caso di errore, conservare una copia del messaggio visualizzato,
+contenente forse delle informazioni preziose...<p />
+Se il problema persiste, contattare il webmaster.<p />',
 'texte_restaurer_base' => 'Ripristina un backup del database',
 'texte_restaurer_sauvegarde' => 'Quest\'opzione permette il ripristino di un backup del database.
 Il file di salvataggio deve trovarsi nella cartella <i>ecrire/data/</i>.
@@ -1631,7 +1637,7 @@ in tal caso si pu&ograve; verificare un leggero rallentamento del tuo sito.',
 'titre_config_fonctions' => 'Configurazione del sito',
 'titre_config_groupe_mots_cles' => 'Configurazione dei gruppi di parole chiave',
 'titre_configuration' => 'Configurazione del sito',
-'titre_connexion_ldap' => 'Opzioni: <B>La tua connessione LDAP</b>',
+'titre_connexion_ldap' => 'Opzioni: <B>La connessione LDAP</b>',
 'titre_dernier_article_syndique' => 'Ultimi articoli in syndication',
 'titre_documents_joints' => 'Documenti allegati',
 'titre_evolution_visite' => 'Evoluzione delle visite',

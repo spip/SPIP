@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_colonne_inexistante' => 'A columna @col@ non existe',
 'avis_connexion_echec_1' => 'A conexi&oacute;n ao servidor MySQL fallou.',
 'avis_connexion_echec_2' => 'Volva &aacute; p&aacute;xina anterior, e verifique as informaci&oacute;ns introducidas.',
-'avis_connexion_echec_3' => '<B>N.B.</B> En moitos servidores, ter&aacute; que <B>pedir</B> a activaci&oacute;n do seu acceso &aacute; base MySQL antes de podela usar. Se non d&aacute; conectado, verifique ter feito a solicitude e activado o acceso.',
+'avis_connexion_echec_3' => '<B>N.B.</B> En moitos servidores, ter&aacute; que <B>pedir</B> a activaci&oacute;n do seu acceso &aacute; base MySQL antes de podela usar. Se non d&aacute; conectado, verifique ter dado ese paso.',
 'avis_connexion_ldap_echec_1' => 'A conexi&oacute;n ao servidor LDAP fallou.',
 'avis_connexion_ldap_echec_2' => 'Volva &aacute; p&aacute;xina anterior, e verifique as informaci&oacute;ns introducidas.',
 'avis_connexion_ldap_echec_3' => 'Como alternativa, non empregue o sistema LDAP para importar redactores.',
@@ -51,9 +51,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_sauvegarde' => 'Erro gardando (@type@ @id_objet@)!',
 'avis_erreur_version_archive' => '<B>Atenci&oacute;n! O ficheiro @arquivo@ corresponde a
   outra versi&oacute;n de SPIP que non &eacute; a que ten instalada.</B>
-  Pode estar en graves problemas: hai risco de destruci&oacute;n masiva
+  Pode estar ante graves problemas: hai risco de destruci&oacute;n
   da s&uacute;a base de datos, fallos no funcionamento do web, etc.
-  Non valide esta petici&oacute;n de importaci&oacute;n.<p>Para m&aacute;is
+  Non valide esta solicitude de importaci&oacute;n.<p>Para m&aacute;is
   informaci&oacute;ns, consulte <A HREF=\'http://www.spip.net/fr_article1489.html\'>
   a documentaci&oacute;n de SPIP</A>.',
 'avis_espace_interdit' => '<B>Espazo prohibido</B><p>SPIP xa est&aacute; instalado.',
@@ -250,11 +250,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_preliminaire' => 'Preliminar: <B>Regular os permisos de acceso</B>',
 'dirs_probleme_droits' => '<b>Problema de permisos de acceso</b>',
 'dirs_repertoires_absents' => '<B>Os directorios seguintes non foron encontrados&nbsp;: <ul>@bad_dirs@.</ul> </B>
-  <P>&Eacute; probable que iso se deba a un problema de mal formato de mai&uacute;sculas ou min&uacute;sculas.
+  <P>&Eacute; probable que iso se deba a un problema de uso de mai&uacute;sculas ou min&uacute;sculas.
   Verifique que as min&uacute;sculas e mai&uacute;sculas destes directorios concorden ben co que se amosa
  aqu&iacute; abaixo; se non &eacute; ese o caso, renomee os directorios co seu programa de FTP de xeito que se corrixa o erro.
   <P>Logo de facer este cambio, poder&aacute; ',
-'dirs_repertoires_suivants' => '<B>Non se pode escribir nos directorios seguintes: <ul>@bad_dirs@.</ul></B>
+'dirs_repertoires_suivants' => '<B>Non se pode acceder para escribir nos directorios seguintes: <ul>@bad_dirs@.</ul></B>
   <P>Para arranxalo, empregue o seu cliente de FTP e cambia os permisos de acceso de cada un
   deles. O procedemento est&aacute; explicado polo mi&uacute;do na gu&iacute;a de instalaci&oacute;n.
   <P>Unha vez feito isto, poder&aacute; ',
@@ -394,7 +394,7 @@ Gracias pola s&uacute;a participaci&oacute;n
 'forum_par_auteur' => 'por @auteur@',
 'forum_poste_par' => 'Mensaxe enviada @parauteur@ en resposta &oacute; teu artigo.',
 'forum_probleme_database' => 'Problema da base de datos, a t&uacute;a mensaxe non foi rexistrada.',
-'forum_qui_etes_vous' => '<B>Quen es?</B> (opcional)',
+'forum_qui_etes_vous' => '<B>Quen &eacute; vostede?</B> (opcional)',
 'forum_texte' => 'Texto da s&uacute;a mensaxe:',
 'forum_titre' => 'T&iacute;tulo:',
 'forum_titre_erreur' => 'Erro...',
@@ -1379,7 +1379,7 @@ e reconectar co web.
 'taille_octets' => '@taille@ bytes',
 'text_article_propose_publication' => 'Artigo proposto para a publicaci&oacute;n. Non dubide en deixar un aviso no foro que leva engadido este artigo (embaixo da p&aacute;xina).',
 'texte_acces_ldap_anonyme_1' => 'Alg&uacute;ns servidores LDAP non aceptan ning&uacute;n acceso an&oacute;nimo. En tal caso hai que especificar un identificador de acceso inicial para poder procurar informaci&oacute;ns na gu&iacute;a. Na meirande parte dos casos poder&aacute;s deixar os seguintes campos baleiros.',
-'texte_actualite_site_1' => 'Esta p&aacute;xina glosa a actualidade do web e permite seguir a s&uacute;a contribuci&oacute;n. Nela atopar&aacute; os seus artigos en proceso de redacci&oacute;n, os artigos e as breves nos que fose convidado/a a achegar a s&uacute;a opini&oacute;n, e asemade un resumo das s&uacute;as contribuci&oacute;ns anteriores.<p><hr><p>Cando xa estea familiarizado/a coa interface, poder&aacute; premer sobre &laquo;',
+'texte_actualite_site_1' => 'Cando xa estea familiarizado/a coa interface, poder&aacute; premer sobre &laquo;',
 'texte_actualite_site_2' => 'interface completa',
 'texte_actualite_site_3' => '&raquo; para obter m&aacute;is posibilidades.',
 'texte_admin_effacer_01' => 'Este comando elimina <i>todo</i> o contido da base de datos,
@@ -1647,7 +1647,7 @@ e reconectar co web.
 'titre_config_fonctions' => 'Configuraci&oacute;n do lugar',
 'titre_config_groupe_mots_cles' => 'Configuraci&oacute;n dos grupos de palabras chave',
 'titre_configuration' => 'Configuraci&oacute;n do lugar',
-'titre_connexion_ldap' => 'Opci&oacute;ns: <B>A t&uacute;a conexi&oacute;n LDAP</B>',
+'titre_connexion_ldap' => 'Opci&oacute;ns: <B>A s&uacute;a conexi&oacute;n LDAP</B>',
 'titre_dernier_article_syndique' => '&Uacute;ltimos artigos afiliados',
 'titre_documents_joints' => 'Documentos adxuntos',
 'titre_evolution_visite' => 'Evoluci&oacute;n das visitas',
