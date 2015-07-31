@@ -17,7 +17,7 @@ function aide ($aide='') {
 
 	if (!$aide) return;
 
-	return "&nbsp;&nbsp;<script><!--\n".
+/*	return "&nbsp;&nbsp;<script><!--\n".
 	'document.write("<a href=\"javascript:window.open(\''.$dir_ecrire.'aide_index.php3?aide='.
 	$aide.
 	"', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); ".
@@ -26,6 +26,13 @@ function aide ($aide='') {
 	'<a href="'.$dir_ecrire.'aide_index.php3?aide='.
 	$aide.
 	'" target="_blank"></noscript><img src="'.$dir_ecrire.'img_pack/aide'.$spip_lang_rtl.'.gif" alt="'._T('info_image_aide').'" title="'._T('titre_image_aide').'" width="12" height="12" border="0" align="middle"></a>'; // "
+	*/
+	return "&nbsp;&nbsp;<script><!--\n".
+	'document.write("<a href=\"javascript:window.open(\''.$dir_ecrire.'aide_index.php3?aide='.
+	$aide.
+	"', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); ".
+	'void(0);\"><img src=\"'.$dir_ecrire.'img_pack/aide'.$spip_lang_rtl.'.gif\" alt=\"'._T('info_image_aide').'\" title=\"'._T('titre_image_aide').'\" width=\"12\" height=\"12\" border=\"0\" align=\"middle\"></a>");'.
+	"\n// --></script>";
 }
 
 

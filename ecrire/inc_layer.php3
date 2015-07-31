@@ -98,7 +98,7 @@ function bouton_block_invisible($nom_block) {
 		$retour .= "//-->\n";
 		$retour .= "</script>\n";
 
-		$retour .= "<noscript><img name='triangle$num_triangle' src='img_pack/deplierbas$spip_lang_rtl.gif' alt='' width='16' height='14' border='0'></noscript>\n";
+		//$retour .= "<noscript><img name='triangle$num_triangle' src='img_pack/deplierbas$spip_lang_rtl.gif' alt='' width='16' height='14' border='0'></noscript>\n";
 		return $retour;
 	}
 }
