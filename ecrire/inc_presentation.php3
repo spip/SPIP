@@ -805,14 +805,12 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 
 			}
 
-
-
 			echo "</font>";
 			echo "</td></tr></table>";
 			if ($compteur_forum == 1) echo fin_cadre_relief();
 			if ($statut == "off" OR $statut == "prop") {
 				echo "</td></tr></table>";
-			}			
+			}
 			echo "</td></tr></table>\n";
 
 			if ($recurrence == "oui") forum($id_forum,$adresse_retour,$controle);
