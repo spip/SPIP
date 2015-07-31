@@ -1,18 +1,18 @@
-<BOUCLE_article_principal(ARTICLES) {id_article}><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<BOUCLE_article_principal(ARTICLES) {id_article}><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
 <title>[(#TITRE|textebrut)]</title>
-<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET">
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
 <!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
-<link rel="stylesheet" href="spip_style.css" type="text/css">
+<link rel="stylesheet" href="spip_style.css" type="text/css" />
 
 <!-- Les feuilles de style specifiques aux presents squelettes -->
-<link rel="stylesheet" href="#DOSSIER_SQUELETTE/typographie.css" type="text/css">
+<link rel="stylesheet" href="#DOSSIER_SQUELETTE/typographie.css" type="text/css" />
 
 <!-- media="..." permet de ne pas utiliser ce style sous Netscape 4 (sinon plantage) -->
-<link rel="stylesheet" href="#DOSSIER_SQUELETTE/habillage.css" type="text/css" media="projection, screen, tv">
+<link rel="stylesheet" href="#DOSSIER_SQUELETTE/habillage.css" type="text/css" media="projection, screen, tv" />
 <!-- media="print" permet d'utiliser cette feuille de style quand vous imprimez depuis votre navigateur -->
-<link rel="stylesheet" href="#DOSSIER_SQUELETTE/impression.css" type="text/css" media="print">
+<link rel="stylesheet" href="#DOSSIER_SQUELETTE/impression.css" type="text/css" media="print" />
 </head>
 
 <body>
@@ -118,12 +118,12 @@
 <div class="contenu" id="principal">
 
 <div class="cartouche">
-#DEBUT_SURLIGNE[
+[
 (#LOGO_ARTICLE|left||reduire_image{120,120})][
-<div class="surtitre">(#SURTITRE)</div>
-]<h1 class="titre-texte">#TITRE</h1>[
-<div class="surtitre">(#SOUSTITRE)</div>
-]#FIN_SURLIGNE
+<div class="surtitre">#DEBUT_SURLIGNE(#SURTITRE)#FIN_SURLIGNE</div>
+]<h1 class="titre-texte">#DEBUT_SURLIGNE#TITRE#FIN_SURLIGNE</h1>[
+<div class="surtitre">#DEBUT_SURLIGNE(#SOUSTITRE)#FIN_SURLIGNE</div>
+]
 [(#DATE|nom_jour)] [(#DATE|affdate).]
 </div>
 
@@ -185,12 +185,12 @@
   </div>]
 	</div>
 
-#DEBUT_SURLIGNE[
-<div class="chapo">(#CHAPO)</div>
-][<div class="texte">(#TEXTE)</div>
-][<div class="ps">(#PS)</div>][
-<div class="notes">(#NOTES)</div>
-]#FIN_SURLIGNE
+[
+<div class="chapo">#DEBUT_SURLIGNE(#CHAPO)#FIN_SURLIGNE</div>
+][<div class="texte">#DEBUT_SURLIGNE(#TEXTE)#FIN_SURLIGNE</div>
+][<div class="ps">#DEBUT_SURLIGNE(#PS)#FIN_SURLIGNE</div>][
+<div class="notes">#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>
+]
 
 
 <BOUCLE_afficher_document(DOCUMENTS){id_document}{mode=document}{extension==(png|jpg|gif)$}{doublons}>
@@ -254,7 +254,7 @@
 
 <!-- Forums -->
 
-[<div class="forum-repondre"><B><A  HREF="forum.php3?(#PARAMETRES_FORUM)"><:repondre_article:></A></B></div>]
+[<div class="forum-repondre"><b><a  href="forum.php3?(#PARAMETRES_FORUM)"><:repondre_article:></a></b></div>]
 <br />
 
 <B_forums>
