@@ -1252,10 +1252,11 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	// s'il y a un cookie ou PHP_AUTH, initialiser visiteur_session
 	if (_FILE_CONNECT) verifier_visiteur();
 
-	// Gestion AJAX sauf pour le mode oo espace prive
+	// Gestion AJAX sauf pour le mode oo (et en espace prive)
 
 	if (isset($GLOBALS['visiteur_session']['prefs'])AND !_DIR_RESTREINT) {
-		$x = unserialize($GLOBALS['visiteur_session']['prefs']);
+		$x = $GLOBALS['visiteur_session']['prefs'];
+		if (!is_array($x)) $x = unserialize($x); // prive.php l'a fait
 		if ($x['display'] == 4) {
 			define('_SPIP_AJAX', -1);
 			if (isset($_COOKIE['spip_accepte_ajax']))
