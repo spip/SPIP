@@ -121,7 +121,7 @@ function controle_petition_page($id_article, $titre, $type,  $corps, $count)
 		    $title = affdate_jourcourt($r['date']) . "\n" .$r['titre'];
 		    $rac .= "<li><a href='$h' title=\"" .  attribut_html($title).  '">' . _T('info_numero_abbreviation') . " $id" . '</a>&nbsp;: '. $r['n'] . ' ' . _T('signatures') . "</li>";
 		  }
-		  $rac = "<ul>$rac</ul>";
+		  if ($rac) $rac = "<ul>$rac</ul>";
 		  $rac = debut_cadre_enfonce('',true)
 		    . "\n<div style='font-size: x-small' class='verdana1'><b>"
 		    ._T('public:articles_populaires')
