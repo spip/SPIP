@@ -55,7 +55,7 @@ function parametres_css_prive(){
 	parse_str($couleurs($c),$c);
 	$args = array_merge($args, $c);
 
-	if (_request('var_mode')=='recalcul' OR _VAR_MODE=='recalcul')
+	if (_request('var_mode')=='recalcul' OR (defined('_VAR_MODE') AND _VAR_MODE=='recalcul'))
 		$args['var_mode'] = 'recalcul';
 
 	return http_build_query($args);

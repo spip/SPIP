@@ -62,21 +62,22 @@ function definir_barre_boutons($contexte=array(),$icones = true, $autorise = tru
 		$liste_boutons = &$liste_boutons_plugins;
 
 	foreach($liste_boutons as $id => $infos){
+		$parent = "";
 		// les boutons principaux ne sont pas soumis a autorisation
-		if (!($parent = $infos['parent']) OR !$autorise OR autoriser('menu',"_$id",0,NULL,array('contexte'=>$contexte))){
+		if (!isset($infos['parent']) OR !($parent = $infos['parent']) OR !$autorise OR autoriser('menu',"_$id",0,NULL,array('contexte'=>$contexte))){
 			if ($parent
 			  AND $parent = preg_replace(',^bando_,','menu_',$parent)
 			  AND isset($boutons_admin[$parent])){
 				if (!is_array($boutons_admin[$parent]->sousmenu))
 					$boutons_admin[$parent]->sousmenu = array();
-				$position = (strlen($infos['position'])?intval($infos['position']):count($boutons_admin[$parent]->sousmenu));
+				$position = (isset($infos['position']) AND strlen($infos['position']) ? intval($infos['position']) : count($boutons_admin[$parent]->sousmenu));
 				if ($position<0) $position = count($boutons_admin[$parent]->sousmenu)+1+$position;
 				$boutons_admin[$parent]->sousmenu = array_slice($boutons_admin[$parent]->sousmenu,0,$position)
 				+ array($id=> new Bouton(
 					($icones AND $infos['icone'])?find_in_theme($infos['icone']):'',  // icone
 					$infos['titre'],	// titre
-					$infos['action']?$infos['action']:null,
-					$infos['parametres']?$infos['parametres']:null
+					(isset($infos['action']) AND $infos['action'])?$infos['action']:null,
+					(isset($infos['parametres']) AND $infos['parametres'])?$infos['parametres']:null
 					))
 				+ array_slice($boutons_admin[$parent]->sousmenu,$position,100);
 			}
@@ -85,13 +86,13 @@ function definir_barre_boutons($contexte=array(),$icones = true, $autorise = tru
 			AND (!in_array($id,array('forum','statistiques_visites')))
 
 			) {
-				$position = $infos['position']?$infos['position']:count($boutons_admin);
+				$position = (isset($infos['position']) and $infos['position']) ? $infos['position'] : count($boutons_admin);
 				$boutons_admin = array_slice($boutons_admin,0,$position)
 				+array($id=> new Bouton(
 					($icones AND $infos['icone'])?find_in_theme($infos['icone']):'',  // icone
 					$infos['titre'],	// titre
-					$infos['action']?$infos['action']:null,
-					$infos['parametres']?$infos['parametres']:null
+					(isset($infos['action']) AND $infos['action'])?$infos['action']:null,
+					(isset($infos['parametres']) AND $infos['parametres'])?$infos['parametres']:null
 					))
 				+ array_slice($boutons_admin,$position,100);
 			}
