@@ -254,7 +254,7 @@ function auteurs_lister_statuts($quoi='tous',$en_base=true) {
 				$retire = array_diff($statut,$check);
 				$statut = array_diff($statut,$retire);
 			}
-			return $statut;
+			return array_unique($statut);
 			break;
 		case "visiteurs":
 			$statut = array();
@@ -265,7 +265,7 @@ function auteurs_lister_statuts($quoi='tous',$en_base=true) {
 				$statut = array_diff(array_values($GLOBALS['liste_des_statuts']),$exclus);
 			}
 			$s_complement = array_map('reset',sql_allfetsel('DISTINCT statut','spip_auteurs',sql_in('statut',$exclus,'NOT')));
-			return array_merge($statut,$s_complement);
+			return array_unique(array_merge($statut,$s_complement));
 			break;
 		default:
 		case "tous":
@@ -277,7 +277,7 @@ function auteurs_lister_statuts($quoi='tous',$en_base=true) {
 				$retire = array_diff($statut,$check);
 				$statut = array_diff($statut,$retire);
 			}
-			return $statut;
+			return array_unique($statut);
 			break;
 	}
 
