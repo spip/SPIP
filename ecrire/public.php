@@ -52,16 +52,18 @@ if (defined('_INC_PUBLIC')) {
 
 	// Est-ce une action ?
 	if ($action = _request('action')) {
+		define('_ESPACE_PRIVE', true);
 		include_spip('inc/autoriser'); // chargement systematique pour les actions
 		include_spip('inc/headers');
 		$var_f = charger_fonction($action, 'action');
 		$var_f();
-		define('_ESPACE_PRIVE', true);
 		if ($GLOBALS['redirect']
 		OR $GLOBALS['redirect'] = _request('redirect'))
 			redirige_par_entete(urldecode($GLOBALS['redirect']));
-		if (!headers_sent())
-			http_status(204); // No Content
+
+#		# pour un appel ajax ca provoque une erreur 500
+#		if (!headers_sent())
+#			http_status(204); // No Content
 		exit;
 	}
 
