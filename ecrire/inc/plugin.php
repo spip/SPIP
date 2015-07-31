@@ -20,7 +20,8 @@ include_spip('plugins/installer');
 
 // lecture des sous repertoire plugin existants
 // $dir_plugins pour forcer un repertoire (ex: _DIR_EXTENSIONS)
-// _DIR_PLUGINS_SUPPL pour aller en chercher ailleurs (separes par des ":")
+// _DIR_PLUGINS_SUPPL pour aller en chercher ailleurs
+// (chemins relatifs a la racine du site, separes par des ":")
 // http://doc.spip.org/@liste_plugin_files
 function liste_plugin_files($dir_plugins = null){
 	static $plugin_files=array();
@@ -32,15 +33,20 @@ function liste_plugin_files($dir_plugins = null){
 		foreach (fast_find_plugin_dirs($dir_plugins) as $plugin) {
 			$plugin_files[$dir_plugins][] = substr($plugin,strlen($dir_plugins));
 		}
-		// hack affreux pour avoir le bon chemin pour les repertoires
-		// supplementaires ; chemin calcule par rapport a _DIR_PLUGINS.
-		if (isset($dir_plugins_suppl)) {
+
+		// traitement des repertoires de plugins supplementaires (mutu)
+		// avec un hack affreux pour avoir le bon chemin
+		// puisqu'il est calcule par rapport a _DIR_PLUGINS.		
+		if ($dir_plugins == _DIR_PLUGINS AND defined('_DIR_PLUGINS_SUPPL')) {
+			$dir_plugins_suppl = array_filter(explode(':',_DIR_PLUGINS_SUPPL));
 			foreach($dir_plugins_suppl as $suppl) {
+				$suppl = _DIR_RACINE.$suppl;
 				foreach (fast_find_plugin_dirs($suppl) as $plugin) {
-					$plugin_files[$dir_plugins][] = (_DIR_RACINE ?'': '../') .$plugin;
+					$plugin_files[$dir_plugins][] = $plugin;
 				}
 			}
 		}
+		
 		sort($plugin_files[$dir_plugins]);
 		// et on lit le XML de tous les plugins pour le mettre en cache
 		// et en profiter pour nettoyer ceux qui n'existent plus du cache
