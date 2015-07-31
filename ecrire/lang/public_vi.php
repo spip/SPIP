@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accueil_site' => 'Trang nhà', # MODIF
-	'article' => 'Article', # NEW
 	'articles' => 'Bài',
 	'articles_auteur' => 'Bài vở của tác giả này',
 	'articles_populaires' => 'Những bài được chuộng nhất',
@@ -19,8 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_site' => 'Không có trang Web tại địa chì này ',
 	'aucune_breve' => 'Không có tin ngắn tại địa chì này',
 	'aucune_rubrique' => 'Không có đề mục tại địa chì này',
-	'auteur' => 'Auteur', # NEW
-	'autres' => 'Autres', # NEW
 	'autres_breves' => 'Những tin ngằn khác ',
 	'autres_groupes_mots_clefs' => 'Những nhóm từ then chốt khác ',
 	'autres_sites' => 'Những trang Web khác',
@@ -30,8 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'Phê bình trang Web này',
-	'contact' => 'Contact', # NEW
-	'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 	// D
 	'date' => 'Ngày',
@@ -48,17 +43,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoyer_message' => 'Gửi thư tín mới',
 	'espace_prive' => 'Mạng cá nhân',
 
-	// F
-	'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
-
 	// H
 	'hierarchie_site' => 'Cấu trúc thứ bậc của trang web',
 
 	// J
 	'jours' => 'ngày',
-
-	// L
-	'lien_connecter' => 'Se connecter', # NEW
 
 	// M
 	'meme_auteur' => 'Cùng tác giả',
@@ -67,7 +56,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => 'Thư tín',
 	'messages_forum' => 'Thư tín diễn đàn', # MODIF
 	'messages_recents' => 'Tin mới nhất trong diễn đàn',
-	'mots_clef' => 'Mot-clé', # NEW
 	'mots_clefs' => 'Từ then chốt',
 	'mots_clefs_meme_groupe' => 'Từ then chốt cùng nhòm  ',
 
@@ -102,7 +90,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'site_realise_avec_spip' => 'Trang web được soạn bằng SPIP',
 	'sites_web' => 'Trang web',
 	'sous_rubriques' => 'Đề mục phụ',
-	'spam' => 'Spam', # NEW
 	'suite' => 'tiếp tục',
 	'sur_web' => 'Trên trang web',
 	'syndiquer_rubrique' => 'Phổ biến đề mục này',
@@ -114,8 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// V
 	'ver_imprimer' => 'Kiểu dể in',
-	'voir_en_ligne' => 'Xem online',
-	'voir_squelette' => 'voir le squelette de cette page' # NEW
+	'voir_en_ligne' => 'Xem online'
 );
 
 ?>

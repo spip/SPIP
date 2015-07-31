@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accueil_site' => 'Pocetna stranica', # MODIF
-	'article' => 'Article', # NEW
 	'articles' => 'Clanci',
 	'articles_auteur' => 'Clanci ovog autora',
 	'articles_populaires' => 'Najpopularniji clanci',
@@ -19,8 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_site' => 'Ne postoje stranice na ovoj adresi',
 	'aucune_breve' => 'Ne postoje novosti na ovoj adresi',
 	'aucune_rubrique' => 'Ne postoje rubrike na ovoj adresi',
-	'auteur' => 'Auteur', # NEW
-	'autres' => 'Autres', # NEW
 	'autres_breves' => 'Ostale kratke poruke',
 	'autres_groupes_mots_clefs' => 'Ostale grupe kljucnih rijeci',
 	'autres_sites' => 'Ostale stranice',
@@ -30,8 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'Dodaj komentar',
-	'contact' => 'Contact', # NEW
-	'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 	// D
 	'date' => 'Datum',
@@ -48,17 +43,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoyer_message' => 'Posalji poruku',
 	'espace_prive' => 'Privatni prostor',
 
-	// F
-	'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
-
 	// H
 	'hierarchie_site' => 'Hierarhija stranice',
 
 	// J
 	'jours' => 'Dani',
-
-	// L
-	'lien_connecter' => 'Se connecter', # NEW
 
 	// M
 	'meme_auteur' => 'Isti autor',
@@ -67,7 +56,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => 'Poruka',
 	'messages_forum' => 'Poruke iz foruma', # MODIF
 	'messages_recents' => 'Recentne poruke iz foruma',
-	'mots_clef' => 'Mot-clé', # NEW
 	'mots_clefs' => 'Kljucne rijeci',
 	'mots_clefs_meme_groupe' => 'Kljucne rijeci u istoj grupi',
 
@@ -102,7 +90,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'site_realise_avec_spip' => 'Stranica realizovana sa SPIP-om',
 	'sites_web' => 'Web stranice',
 	'sous_rubriques' => 'Podrubrike',
-	'spam' => 'Spam', # NEW
 	'suite' => 'nastavi',
 	'sur_web' => 'Na web-u',
 	'syndiquer_rubrique' => 'Sindikuj ovu rubriku',
@@ -114,8 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// V
 	'ver_imprimer' => 'Verzija za printanje',
-	'voir_en_ligne' => 'Pogledati online',
-	'voir_squelette' => 'voir le squelette de cette page' # NEW
+	'voir_en_ligne' => 'Pogledati online'
 );
 
 ?>

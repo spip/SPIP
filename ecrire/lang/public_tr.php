@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accueil_site' => 'Ana sayfa', # MODIF
-	'article' => 'Article', # NEW
 	'articles' => 'Makaleler',
 	'articles_auteur' => 'Bu yazarın makaleleri',
 	'articles_populaires' => 'En popüler makaleler',
@@ -19,7 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_site' => 'Bu adreste site yok',
 	'aucune_breve' => 'Bu adreste kısa haber yok',
 	'aucune_rubrique' => 'Bu adreste bölüm yok',
-	'auteur' => 'Auteur', # NEW
 	'autres' => 'Diğer',
 	'autres_breves' => 'Diğer kısa haberler',
 	'autres_groupes_mots_clefs' => 'Diğer anahtar sözcük grupları',
@@ -30,7 +28,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'Bu siteye yorum ekle',
-	'contact' => 'Contact', # NEW
 	'copie_document_impossible' => 'Belgeyi kopyalamak olanaksız',
 
 	// D
@@ -67,7 +64,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => 'İleti',
 	'messages_forum' => 'Forum mesajları', # MODIF
 	'messages_recents' => 'Son forum mesajları',
-	'mots_clef' => 'Mot-clé', # NEW
 	'mots_clefs' => 'Anahtar sözcük',
 	'mots_clefs_meme_groupe' => 'Aynı grupta anahtar sözcük',
 

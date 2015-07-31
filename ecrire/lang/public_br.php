@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accueil_site' => 'Degemer al lec\'hienn', # MODIF
-	'article' => 'Article', # NEW
 	'articles' => 'Pennadoù',
 	'articles_auteur' => 'Pennadoù all ar skridaozer-mañ',
 	'articles_populaires' => 'Pennadoù lennet ar muiañ',
@@ -19,7 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_site' => 'N\'eus lec\'hienn ebet er chomlec\'h-mañ',
 	'aucune_breve' => 'N\'eus berrskrid ebet er chomlec\'h-mañ',
 	'aucune_rubrique' => 'N\'eus rubrikenn ebet er chomlec\'h-mañ',
-	'auteur' => 'Auteur', # NEW
 	'autres' => 'Re all',
 	'autres_breves' => 'Berrskridoù all',
 	'autres_groupes_mots_clefs' => 'Strolladoù gerioù-stur all',
@@ -30,7 +28,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'Ober evezhiadennoù diwar-benn al lec\'hienn-mañ',
-	'contact' => 'Contact', # NEW
 	'copie_document_impossible' => 'N\'eo ket posupl eilañ an teul',
 
 	// D
@@ -67,7 +64,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => 'Kemennadenn',
 	'messages_forum' => 'Kemennadennoù forom', # MODIF
 	'messages_recents' => 'Kemennadennoù forom diwezhañ',
-	'mots_clef' => 'Mot-clé', # NEW
 	'mots_clefs' => 'Gerioù-stur',
 	'mots_clefs_meme_groupe' => 'Gerioù-stur er strollad-mañ',
 

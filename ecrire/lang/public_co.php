@@ -67,7 +67,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => 'Messagiu',
 	'messages_forum' => 'Messagi di foru', # MODIF
 	'messages_recents' => 'Messagi di fori i più recenti',
-	'mots_clef' => 'Mot-clé', # NEW
 	'mots_clefs' => 'Segni',
 	'mots_clefs_meme_groupe' => 'Segni in u listessu gruppu',
 

@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accueil_site' => 'ホーム', # MODIF
-	'article' => 'Article', # NEW
 	'articles' => '記事',
 	'articles_auteur' => 'この記事の著者',
 	'articles_populaires' => '最も読まれている記事',
@@ -19,8 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_site' => 'このアドレスにサイトはありません',
 	'aucune_breve' => 'このアドレスにニュースはありません',
 	'aucune_rubrique' => 'このアドレスにセクションはありません',
-	'auteur' => 'Auteur', # NEW
-	'autres' => 'Autres', # NEW
 	'autres_breves' => '他のニュース',
 	'autres_groupes_mots_clefs' => 'キーワードの他のグループ',
 	'autres_sites' => '他のサイト',
@@ -30,8 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'このサイトについてコメントして下さい',
-	'contact' => 'Contact', # NEW
-	'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 	// D
 	'date' => '日付',
@@ -48,17 +43,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoyer_message' => 'メッセージを送る',
 	'espace_prive' => 'プライベートエリア',
 
-	// F
-	'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
-
 	// H
 	'hierarchie_site' => 'サイトの階層',
 
 	// J
 	'jours' => '日付け',
-
-	// L
-	'lien_connecter' => 'Se connecter', # NEW
 
 	// M
 	'meme_auteur' => '同じ著者によって',
@@ -67,7 +56,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => 'メッセージ',
 	'messages_forum' => 'フォーラムメッセージ', # MODIF
 	'messages_recents' => '最も新しいフォーラムのメッセージ',
-	'mots_clef' => 'Mot-clé', # NEW
 	'mots_clefs' => 'キーワード',
 	'mots_clefs_meme_groupe' => '同じグループのキーワード',
 
@@ -102,7 +90,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'site_realise_avec_spip' => 'SPIPによってサイトは作られました',
 	'sites_web' => 'ウェブサイト',
 	'sous_rubriques' => 'サブセクション',
-	'spam' => 'Spam', # NEW
 	'suite' => '次の',
 	'sur_web' => 'ウェブ上',
 	'syndiquer_rubrique' => 'このセクションを供給する',
