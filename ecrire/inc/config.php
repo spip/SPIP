@@ -156,62 +156,58 @@ function afficher_choix($nom, $valeur_actuelle, $valeurs, $sep = "<br />") {
 
 // http://doc.spip.org/@appliquer_modifs_config
 function appliquer_modifs_config() {
-	global $email_webmaster, $descriptif_site, $email_envoi, $post_dates;
-	global $forums_publics, $forums_publics_appliquer;
-	global $charset, $charset_custom, $langues_auth;
-	global $envoi_now, $activer_moteur;
 
-	if (_request('adresse_site'))
-		$_POST['adresse_site'] = preg_replace(",/?\s*$,", "", _request('adresse_site'));
+	if ($i = _request('adresse_site'))
+		$_POST['adresse_site'] = preg_replace(",/?\s*$,", "", $i);
 
 	// provoquer l'envoi des nouveautes en supprimant le fichier lock
-	if ($envoi_now) {
+	if (_request('envoi_now')) {
 		@unlink(_DIR_TMP . 'mail.lock');
 	}
+
 	// Purger les squelettes si un changement de meta les affecte
-	if ($post_dates AND ($post_dates != $GLOBALS['meta']["post_dates"]))
+	if ($i = _request('post_dates') AND ($i != $GLOBALS['meta']["post_dates"]))
 		$purger_skel = true;
-	if ($forums_publics AND ($forums_publics != $GLOBALS['meta']["forums_publics"]))
+
+	if ($accepter_forum = _request('forums_publics')
+	AND ($accepter_forum != $GLOBALS['meta']["forums_publics"])) {
 		$purger_skel = true;
+		$accepter_forum = substr($accepter_forum,0,3);
+	}
 
 	// Appliquer les changements de moderation forum
 	// forums_publics_appliquer : futur, saufnon, tous
-	$accepter_forum = substr($forums_publics,0,3);
-	if ($forums_publics_appliquer == 'saufnon')
-	spip_query("UPDATE spip_articles SET accepter_forum='$accepter_forum'	WHERE accepter_forum != 'non'");
-	else if ($forums_publics_appliquer == 'tous')
-		spip_query("UPDATE spip_articles SET accepter_forum='$accepter_forum'");
+	
+	$sauf = _request('forums_publics_appliquer') == 'saufnon'
+	? " WHERE accepter_forum != 'non'"
+	: '';
+	
+	spip_query("UPDATE spip_articles SET accepter_forum='$accepter_forum'$sauf");
 
 	if ($accepter_forum == 'abo')
 		ecrire_meta('accepter_visiteurs', 'oui');
 
-	// Test du proxy : $tester_proxy est le bouton "submit"
-	include_spip('configuration/relayeur');
-	configuration_relayeur_post(_request('http_proxy'), _request('http_noproxy'), _request('test_proxy'), _request('tester_proxy'));
-
 	// Activer le moteur : dresser la liste des choses a indexer
-	if ($activer_moteur == 'oui' AND ($activer_moteur != $GLOBALS['meta']["activer_moteur"])) {
+	if (($i = _request('activer_moteur')) == 'oui' AND ($i != $GLOBALS['meta']["activer_moteur"])) {
 		include_spip('inc/indexation');
 		creer_liste_indexation();
 	}
 
-	if ($langues_auth) {
-		set_request('langues_multilingue', join($langues_auth, ","));
+	if ($i = _request('langues_auth') AND is_array($i)) {
+		set_request('langues_multilingue', join($i, ","));
 	}
 
-	if (isset($email_webmaster))
-		ecrire_meta("email_webmaster", $email_webmaster);
-	if (isset($email_envoi))
-		ecrire_meta("email_envoi", $email_envoi);
-	if ($charset == 'custom') $charset = $charset_custom;
+	if ($i = _request('email_webmaster'))
+		ecrire_meta("email_webmaster", $i);
+	if ($i = _request('email_envoi'))
+		ecrire_meta("email_envoi", $i);
 
 	$liste_meta = array_keys(liste_metas());
 
 	// Modification du reglage accepter_inscriptions => vider le cache
 	// (pour repercuter la modif sur le panneau de login)
-	if (isset($GLOBALS['accepter_inscriptions'])
-	AND ($GLOBALS['accepter_inscriptions']
-	!= $GLOBALS['meta']['accepter_inscriptions'])) {
+	if ($i = _request('accepter_inscriptions')
+	AND $i != $GLOBALS['meta']['accepter_inscriptions']) {
 		include_spip('inc/invalideur');
 		suivre_invalideur("1"); # tout effacer
 	}
@@ -231,7 +227,6 @@ function appliquer_modifs_config() {
 	}
 
 	ecrire_metas();
-
 	if ($purger_skel) {
 		include_spip('inc/invalideur');
 		purger_repertoire(_DIR_SKELS);
