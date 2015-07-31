@@ -844,11 +844,11 @@ class Link {
 $clean_link = new Link();
 
 
-// URLs avec passage & -> &amp;
-function quote_amp ($url) {
-	$url = str_replace("&amp;", "&", $url);
-	$url = str_replace("&", "&amp;", $url);
-	return $url;
+// transformation XML des "&" en "&amp;"
+function quote_amp($u) {
+	return preg_replace(
+		"/&(?![a-z]{0,4}\w{2,3};|#x?[0-9a-f]{2,5};)/i",
+		"&amp;",$u);
 }
 
 

@@ -103,7 +103,7 @@ function spip_apres_typo ($letexte) {
 	if (function_exists('apres_typo'))
 		$letexte = apres_typo($letexte);
 
-	return $letexte;
+	return quote_amp($letexte);
 }
 
 
