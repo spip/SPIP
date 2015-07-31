@@ -18,11 +18,14 @@ include_spip('inc/autoriser');
 // http://doc.spip.org/@exec_auteur_infos_dist
 function exec_auteur_infos_dist() {
 
-	$id_auteur = intval(_request('id_auteur'));
-	$redirect = _request('redirect');
-	$echec = _request('echec');
-	$new = _request('new');
+	exec_auteur_infos_args(intval(_request('id_auteur')),
+		_request('echec'),
+		_request('redirect'),
+		_request('new'));
+}
 
+function exec_auteur_infos_args($id_auteur, $echec, $new, $redirect)
+{
 	pipeline('exec_init',
 		array('args' => array(
 			'exec'=> 'auteur_infos',

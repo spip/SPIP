@@ -19,11 +19,12 @@ include_spip('inc/mots');
 // http://doc.spip.org/@exec_message_dist
 function exec_message_dist()
 {
-	global  $connect_id_auteur;
+	exec_message_args(intval(_request('id_message')),_request('forcer_dest'),  _request('cherche_auteur'));
+}
 
-	$id_message = intval(_request('id_message'));
-	$forcer_dest = _request('forcer_dest');
-	$cherche_auteur = _request('cherche_auteur');
+function exec_message_args($id_message, $forcer_dest, $cherche_auteur)
+{
+	global  $connect_id_auteur;
 
 	$res = sql_getfetsel("type", "spip_messages", "id_message=$id_message");
 

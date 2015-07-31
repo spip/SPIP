@@ -71,7 +71,7 @@ function forum_affiche($debut, $admin=false)
 	$total = sql_countsel("spip_forum", "statut='$statutforum' AND id_parent=0");
 
 	if ($total > 10)
-		echo '<small>'.liste_numeros_forum($script, $debut, $total).'</small>';
+	  echo liste_numeros_forum($script, $debut, $total);
 
 	echo "\n<div class='centered'>\n";
 	echo icone_inline (_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=$statutforum&script=$script"), $logo, "creer.gif");

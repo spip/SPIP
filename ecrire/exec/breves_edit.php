@@ -19,11 +19,14 @@ include_spip ('inc/barre');
 // http://doc.spip.org/@exec_breves_edit_dist
 function exec_breves_edit_dist()
 {
-	global $connect_id_rubrique;
-	$id_breve = intval(_request('id_breve'));
-	$id_rubrique  = intval(_request('id_rubrique'));
-	$new = _request('new');
+	exec_breves_edit_args(intval(_request('id_breve')),
+		intval(_request('id_rubrique')),
+		_request('new'));
+}
 
+function exec_breves_edit_args($id_breve, $id_rubrique, $new)
+{
+	global $connect_id_rubrique;
 	// appel du script a la racine, faut choisir 
 	// on prend le dernier secteur cree
 	// dans une liste restreinte si admin restreint

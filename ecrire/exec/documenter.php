@@ -17,22 +17,24 @@ function exec_documenter_dist()
 {
 	$type = _request("type");
 	$script = _request("script"); // generalisation a tester
-	$album = !_request("s") ? 'documents' :  'portfolio';
 	$id = intval(_request(id_table_objet($type)));
+	exec_documenter_args($id, $type, $script, _request('s'));
+}
 
+function exec_documenter_args($id, $type, $script, $album)
+{
 	if (!$id OR !autoriser('modifier', $type, $id)) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-
-	include_spip('inc/actions');
-	$documenter = charger_fonction('documenter', 'inc');
-	if(_request("iframe")=="iframe") { 
-	 $res = $documenter($id, $type, "portfolio", 'ajax', '', $script).
-	        $documenter($id, $type, "documents", 'ajax', '', $script);
-	 ajax_retour("<div class='upload_answer upload_document_added'>".$res."</div>",false);
-	}	else 
-	 ajax_retour($documenter($id, $type, $album, 'ajax', '', $script));
+		$album = !$album ? 'documents' :  'portfolio';
+		include_spip('inc/actions');
+		$documenter = charger_fonction('documenter', 'inc');
+		if(_request("iframe")=="iframe") { 
+			$res = $documenter($id, $type, "portfolio", 'ajax', '', $script).
+			  $documenter($id, $type, "documents", 'ajax', '', $script);
+			ajax_retour("<div class='upload_answer upload_document_added'>".$res."</div>",false);
+		} else ajax_retour($documenter($id, $type, $album, 'ajax', '', $script));
 	}
 }
 ?>

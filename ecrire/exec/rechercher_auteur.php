@@ -17,7 +17,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@exec_rechercher_auteur_dist
 function exec_rechercher_auteur_dist()
 {
-	$idom = _request('idom');
+	exec_rechercher_auteur_args(_request('idom'));
+}
+
+function exec_rechercher_auteur_args($idom)
+{
 	if (!preg_match('/\w+/',$idom))
 	      {
 		include_spip('inc/minipres');

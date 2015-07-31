@@ -18,8 +18,11 @@ include_spip('inc/actions');
 // http://doc.spip.org/@exec_articles_dist
 function exec_articles_dist()
 {
-	$id_article= intval(_request('id_article'));
+	exec_articles_args(intval(_request('id_article')));
+}
 
+function exec_articles_args($id_article)
+{
 	pipeline('exec_init',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
 
 	$row = sql_fetsel("*", "spip_articles", "id_article=$id_article");

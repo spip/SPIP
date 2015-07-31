@@ -15,10 +15,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@exec_documents_colonne_dist
 function exec_documents_colonne_dist()
 {
-	$id = intval(_request('id'));
-	$show = _request('show_docs');
-	$type = _request('type');
+	exec_documents_colonne_args(intval(_request('id')),
+		_request('type'),
+		_request('show_docs'));
+}
 
+function exec_documents_colonne_args($id, $type, $show)
+{
 	if (!$type OR !autoriser('joindredocument', $type, $id)) {
 		include_spip('inc/minipres');
 		echo minipres();
@@ -35,5 +38,4 @@ function exec_documents_colonne_dist()
 		ajax_retour("<div class='upload_answer upload_document_added'>". $res.	"</div>",false);
 	}
 }
-
 ?>
