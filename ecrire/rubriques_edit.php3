@@ -155,10 +155,10 @@ echo "<p>";
 
 if ($id_rubrique>0)
 	echo "<FORM ACTION='naviguer.php3?id_rubrique=$id_rubrique' METHOD='post'>";
-else
+ else
+   {
 	echo "<FORM ACTION='naviguer.php3' METHOD='post'>";
-
-echo "<INPUT TYPE='Hidden' NAME='id_rubrique' VALUE=\"$id_rubrique\">";
+   }
 
 $titre = entites_html($titre);
 
@@ -232,7 +232,7 @@ if ($options == "avancees" OR $descriptif) {
 	echo "</TEXTAREA><P>\n";
 }
 else {
-	echo "<INPUT TYPE='Hidden' NAME='descriptif' VALUE=\"".entites_html($descriptif)."\">";
+	echo "<INPUT TYPE='Hidden' NAME='descriptif' VALUE=\"".entites_html($descriptif)."\" />";
 }
 
 echo "<B>"._T('info_texte_explicatif')."</B>";
@@ -246,8 +246,11 @@ echo "</TEXTAREA>\n";
 		extra_saisie($extra, 'rubriques', $id_secteur);
 	}
 
-if ($new == "oui") echo "<INPUT TYPE='Hidden' NAME='action' VALUE='creer'>";
-echo "<p align='right'><INPUT TYPE='submit' VALUE='"._T('bouton_enregistrer')."' CLASS='fondo'>\n</p></form>";
+echo "<input type='hidden' name='action' value='",
+	  (($new == "oui") ? 'creer' : 'modifier'),
+	  "' />";
+
+echo "\n<p align='right'><input type='submit' value='"._T('bouton_enregistrer')."' CLASS='fondo' />\n</p></form>";
 
 fin_cadre_formulaire();
 
