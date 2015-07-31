@@ -333,18 +333,29 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true){
 				$do = "ADD".substr($do, 10);
 			case 'ADD':
 			default:
-				if (_sqlite_is_version(3, '', $serveur)){
+				if (_sqlite_is_version(3, '', $serveur) AND !preg_match(',primary\s+key,i',$do)){
 					if (!spip_sqlite::executer_requete("$debut $do", $serveur)){
 						spip_log("SQLite : Erreur ALTER TABLE / ADD : $query", 'sqlite.'._LOG_ERREUR);
 						return false;
 					}
 					break;
-					// artillerie lourde pour sqlite2 !
-				} else {
+
+				}
+				// artillerie lourde pour sqlite2 !
+				// ou si la colonne est aussi primary key
+				// cas du add id_truc int primary key
+				// ajout d'une colonne qui passe en primary key directe
+				else {
 					$def = trim(substr($do, 3));
 					$colonne_ajoutee = substr($def, 0, strpos($def, ' '));
 					$def = substr($def, strlen($colonne_ajoutee)+1);
-					if (!_sqlite_modifier_table($table, array($colonne_ajoutee), array('field' => array($colonne_ajoutee => $def)), $serveur)){
+					$opts = array();
+					if (preg_match(',primary\s+key,i',$def)){
+						$opts['key'] = array('PRIMARY KEY' => $colonne_ajoutee);
+						$def = preg_replace(',primary\s+key,i','',$def);
+					}
+					$opts['field'] = array($colonne_ajoutee => $def);
+					if (!_sqlite_modifier_table($table, array($colonne_ajoutee), $opts, $serveur)){
 						spip_log("SQLite : Erreur ALTER TABLE / ADD : $query", 'sqlite.'._LOG_ERREUR);
 						return false;
 					}
