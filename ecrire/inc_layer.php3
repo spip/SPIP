@@ -155,12 +155,12 @@ function verif_butineur() {
 function flag_svg() {
 	global $HTTP_USER_AGENT, $browser_name, $browser_version;
 	global $browser_description, $browser_rev, $browser_layer, $browser_barre;
+	if (!$browser_name) verif_butineur();
 
 	$flag = false;
-	
-	
+		
 	if ($browser_name == "Safari" AND $browser_version >= 400) $flag = true;
-	if ($browser_name == "Mozilla" AND $browser_version >= 5) $flag = true;
+	if ($browser_name == "Mozilla" AND $browser_rev >= 1.8) $flag = true;
 			
 	return $flag;
 }
