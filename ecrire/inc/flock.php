@@ -181,8 +181,8 @@ function ecrire_fichier ($fichier, $contenu, $ignorer_echec = false, $truncate=t
 		// liberer le verrou et fermer le fichier
 		@chmod($fichier, _SPIP_CHMOD & 0666);
 		if ($ok) {
-			if (function_exists('opcache_invalidate'))
-				opcache_invalidate($fichier,true);
+			if (!defined('_OPCACHE_BUG') AND function_exists('opcache_invalidate'))
+				opcache_invalidate($fichier, true);
 			return $ok;
 		}
 	}
