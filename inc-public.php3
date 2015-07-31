@@ -57,12 +57,6 @@ if (defined("_INC_PUBLIC")) {
 		}
 	}
 
-	// Inserer au besoin les boutons admins
-	if ($affiche_boutons_admin) {
-		include_local("inc-admin.php3");
-		$page = affiche_boutons_admin($page);
-	}
-
 	// Passer la main au debuggueur le cas echeant 
 	if ($var_mode == 'debug') {
 		include_ecrire("inc_debug_sql.php3");
@@ -75,6 +69,12 @@ if (defined("_INC_PUBLIC")) {
 	if ($var_recherche) {
 		include_ecrire("inc_surligne.php3");
 		$page = surligner_mots($page, $var_recherche);
+	}
+
+	// Inserer au besoin les boutons admins
+	if ($affiche_boutons_admin) {
+		include_local("inc-admin.php3");
+		$page = affiche_boutons_admin($page);
 	}
 
 	// Affichage final s'il en reste
