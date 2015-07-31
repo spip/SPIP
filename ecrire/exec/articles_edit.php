@@ -88,7 +88,7 @@ function articles_edit($id_article, $id_rubrique, $lier_trad, $id_version, $new,
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
 	echo debut_droite("",true);
 	
-	echo debut_cadre_formulaire("", true);
+	echo debut_cadre_formulaire("", true,true);
 	echo articles_edit_presentation($new, $row['id_rubrique'], $lier_trad, $row['id_article'], $row['titre'],$config_fonc);
 	echo fin_cadre_formulaire(true);
 
