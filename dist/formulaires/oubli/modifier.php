@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // la saisie a ete validee, on peut agir
 function formulaires_oubli_modifier_dist(){
-echo 'plop';
+
 	$message = "";
 	if (
 	    ($p = _request('p'))
