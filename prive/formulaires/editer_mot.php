@@ -16,7 +16,9 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 // http://doc.spip.org/@inc_editer_mot_dist
-function formulaires_editer_mot_charger_dist($id_mot='new', $id_groupe=0, $retour='', $ajouter_id_article=0, $table='', $table_id=0, $config_fonc='mots_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_mot_charger_dist($id_mot='new', $id_groupe=0, $retour='', $ajouter_id_article=0, $table='', $table_id=0, $config_fonc='mots_edit_config', $titre = null, $row=array(), $hidden=''){
+	if (isset($titre))
+		$row['titre'] = $titre;
 	$valeurs = formulaires_editer_objet_charger('mot',$id_mot,$id_groupe,'',$retour,$config_fonc,$row,$hidden);
 	if ($valeurs['id_parent'] && !$valeurs['id_groupe'])
 		$valeurs['id_groupe'] = $valeurs['id_parent'];

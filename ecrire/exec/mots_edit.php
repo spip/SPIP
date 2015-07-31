@@ -67,10 +67,6 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 		} else {
 			$id_mot = 0;
 			$descriptif = $texte = '';
-			if (!$titre_mot = $titre) {
-				$titre_mot = filtrer_entites(_T('texte_nouveau_mot'));
-				$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
-			}
 			$row = sql_countsel('spip_groupes_mots', 
 			($table ? "tables_liees REGEXP '(^|,)$table($|,)'" : '')
 			//($table ? "$table='oui'" : '')
@@ -94,7 +90,7 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 		pipeline('exec_init',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
 		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		$out = $commencer_page("&laquo; $titre_mot &raquo;", "naviguer", "mots") . debut_gauche('',true);
+		$out = $commencer_page("&laquo; ".sinon($titre_mot,_T('texte_nouveau_mot'))." &raquo;", "naviguer", "mots") . debut_gauche('',true);
 
 
 		//////////////////////////////////////////////////////
@@ -139,7 +135,7 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 	
 	$out .= debut_cadre_relief("mot-cle-24.gif",true,'','','mot-voir',$editer?'none':'');
 	$out .= icone_inline(_T('icone_modifier_mot'), generer_url_ecrire('mots_edit',"id_mot=$id_mot&edit=oui"), "mot-cle-24.gif", "rien.gif",$spip_lang_right,false," onclick=\"$('#mot-editer').show();$('#mot-voir').hide();return false;\"");
-	$out .= gros_titre($titre_mot,'',false);
+	$out .= gros_titre(sinon($titre_mot,_T('texte_nouveau_mot')),'',false);
 	$out .= "<div class='nettoyeur'></div>";
 	
 	$contenu_mot = "";
@@ -206,7 +202,7 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 		$contexte = array(
 			'icone_retour'=>icone_inline(_T('icone_retour'),($editer&$redirect)?rawurldecode($redirect): generer_url_ecrire('mots_edit','id_mot='.$id_mot,false,true), "mot-cle-24.gif", "rien.gif",$GLOBALS['spip_lang_left'],false,($editer&$redirect)?"":" onclick=\"$('#mot-editer').hide();$('#mot-voir').show();return false;\""),
 			'redirect'=>$redirect?rawurldecode($redirect):generer_url_ecrire('mots_edit','id_mot='.$id_mot,'&',true),
-			'titre'=>$titre_mot,
+			'titre'=>sinon($titre_mot,$titre),
 			'new'=>$new == "oui"?$new:$id_mot,
 			'id_groupe'=>$id_groupe,
 			'config_fonc'=>'mots_edit_config',
