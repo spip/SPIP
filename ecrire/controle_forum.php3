@@ -49,7 +49,7 @@ SELECT id_article, titre, statut FROM spip_articles WHERE id_article='$forum_id_
 	}
 	else if ($forum_id_rubrique > 0) {
 	  $row = spip_fetch_array(spip_query("
-SELECT * FROM spip_rubriques WHERE id_rubrique=\"$forum_id_rubrique\""));
+SELECT * FROM spip_rubriques WHERE id_rubrique='$forum_id_rubrique'"));
 	  $id_rubrique = $row['id_rubrique'];
 	  $titre = $row['titre'];
 	  return array('pref' => _T('lien_reponse_rubrique'),
@@ -60,7 +60,7 @@ SELECT * FROM spip_rubriques WHERE id_rubrique=\"$forum_id_rubrique\""));
 	}
 	else if ($forum_id_syndic > 0) {
 	  $row = spip_fetch_array(spip_query("
-SELECT * FROM spip_syndic WHERE id_syndic=\"$forum_id_syndic\""));
+SELECT * FROM spip_syndic WHERE id_syndic='$forum_id_syndic'"));
 	  $id_syndic = $row['id_syndic'];
 	  $titre = $row['nom_site'];
 	  $statut = $row['statut'];
@@ -72,7 +72,7 @@ SELECT * FROM spip_syndic WHERE id_syndic=\"$forum_id_syndic\""));
 	}
 	else if ($forum_id_breve > 0) {
 	  $row = spip_fetch_array(spip_query("
-SELECT * FROM spip_breves WHERE id_breve=\"$forum_id_breve\""));
+SELECT * FROM spip_breves WHERE id_breve='$forum_id_breve'"));
 	  $id_breve = $row['id_breve'];
 	  $date_heure = $row['date_heure'];
 	  $titre = $row['titre'];
@@ -156,7 +156,7 @@ function controle_forum($row, $rappel) {
 	  "</span>";
 	if ($forum_auteur) {
 		if ($forum_email_auteur)
-			$forum_auteur="<a href=\"mailto:$forum_email_auteur?SUBJECT=".rawurlencode($forum_titre)."\">$forum_auteur</A>";
+			$forum_auteur="<a href='mailto:$forum_email_auteur?SUBJECT=".rawurlencode($forum_titre)."'>$forum_auteur</A>";
 		$controle .= "<span class='arial2'> / <B>$forum_auteur</B></span>";
 	}
 
