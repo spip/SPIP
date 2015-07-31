@@ -31,7 +31,7 @@ function exec_articles_tous_dist()
 		OR $GLOBALS['meta']['multi_articles'] == 'oui') 
 		AND $GLOBALS['meta']['gerer_trad'] == 'oui');
 
-	list($article,$text_article,$aff_statut) = texte_articles_tous($sel_lang, $flag_trad, $aff_art);
+	list($article,$text_article,$aff_statut) = texte_articles_tous($sel_lang, $flag_trad, $aff_art, lang_dir($spip_lang));
 	if (_request('var_ajaxcharset')&&_request('id_rubrique')) 
 		ajax_retour(afficher_contenu_rubrique($article, $enfant, $text_article, _request('id_rubrique'), $flag_trad, 2));
 	else {
@@ -108,8 +108,8 @@ function arbo_articles_tous()
 }
 
 // http://doc.spip.org/@texte_articles_tous
-function texte_articles_tous(&$sel_lang, $flag_trad, $aff_art){
-	global $connect_id_auteur, $connect_statut, $spip_lang_dir;
+function texte_articles_tous(&$sel_lang, $flag_trad, $aff_art,$spip_lang_dir){
+	global $connect_id_auteur, $connect_statut ;
 
 	if ($flag_trad)
 		$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
