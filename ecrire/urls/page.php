@@ -69,6 +69,7 @@ function generer_url_document($id_document, $args='', $ancre='') {
 }
 
 // retrouve le fond et les parametres d'une URL abregee
+// http://doc.spip.org/@urls_page_dist
 function urls_page_dist(&$fond, $url) {
 	global $contexte;
 

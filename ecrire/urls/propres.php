@@ -64,6 +64,7 @@ define ('_marqueur_mot_f', '');
 
 // Retire les marqueurs de type dans une URL propre ancienne maniere
 
+// http://doc.spip.org/@retirer_marqueurs_url_propre
 function retirer_marqueurs_url_propre($url_propre)
 {
 	if (preg_match(',^\+\-(.*?)\-\+$,', $url_propre, $regs)) {
@@ -271,6 +272,7 @@ function generer_url_document($id_document, $args='', $ancre='') {
 }
 
 // retrouve le fond et les parametres d'une URL propre
+// http://doc.spip.org/@urls_propres_dist
 function urls_propres_dist(&$fond, $url) {
 	global $contexte;
 	$id_objet = $type = 0;
