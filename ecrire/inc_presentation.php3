@@ -331,6 +331,10 @@ function afficher_liste($largeurs, $table, $styles = '') {
 			echo "<td";
 			if ($largeur) echo " width=\"$largeur\"";
 			if ($style) echo " class=\"$style\"";
+			if (eregi("<a href=[\"\']([^\"\']*)[\"\']", $texte, $regs)) {
+				$lien = $regs[1];
+				echo " style=\"cursor: pointer;\" onClick=\"document.location='$lien';\"";
+			}
 			echo ">$texte</td>";
 		}
 		echo "</tr>\n";
