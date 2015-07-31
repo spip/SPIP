@@ -522,7 +522,9 @@ function calculer_parties($boucles, $id_boucle, $count) {
 	// {pagination}
 	elseif ($op1 == 'p') {
 		$retour .= "\n	"
-			. '$debut_boucle = ' . $partie . ';';
+			. '$debut_boucle = ' . $partie . ';'
+			. "\n\t".'if ($tout=($debut_boucle == -1)) $debut_boucle = 0;';
+		$total_parties = "(\$tout ? \$nombre_boucle - 1 : $total_parties)";
 	}
 
 	// {x,1}
