@@ -143,10 +143,12 @@
 
 #plan {
 	position: absolute;
-	left: 0px;
+	left: 2em;
 	top: 0px;
-	margin: 1.8em;
+	margin: 0px;
 	padding: 0px;
+	margin-right: 2em;
+	margin-top: 2em;
 }
 
 #navigation {
