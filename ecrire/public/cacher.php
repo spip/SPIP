@@ -94,6 +94,15 @@ function gunzip_page(&$page) {
 /// http://doc.spip.org/@cache_valide
 function cache_valide(&$page, $date) {
 
+	// Apparition d'un nouvel article post-date ?
+	if ($GLOBALS['meta']['post_dates'] == 'non'
+	  AND isset($GLOBALS['meta']['date_prochain_postdate'])
+	  AND time() > $GLOBALS['meta']['date_prochain_postdate']) {
+		spip_log('Un article post-date invalide le cache');
+		include_spip('inc/rubriques');
+		calculer_prochain_postdate(true);
+	}
+
 	if (isset($GLOBALS['var_nocache']) AND $GLOBALS['var_nocache']) return -1;
 	if (defined('_NO_CACHE')) return (_NO_CACHE==0 AND !isset($page['texte']))?1:_NO_CACHE;
 	if (!$page OR !isset($page['texte']) OR !isset($page['entetes']['X-Spip-Cache'])) return 1;
@@ -108,17 +117,6 @@ function cache_valide(&$page, $date) {
 		AND $GLOBALS['derniere_modif_invalide']
 		AND $date < $GLOBALS['meta']['derniere_modif'])
 			return 1;
-
-		// Apparition d'un nouvel article post-date ?
-		if ($GLOBALS['meta']['post_dates'] == 'non'
-		AND isset($GLOBALS['meta']['date_prochain_postdate'])
-		AND time() > $GLOBALS['meta']['date_prochain_postdate']) {
-			spip_log('Un article post-date invalide le cache');
-			include_spip('inc/rubriques');
-			ecrire_meta('derniere_modif', time());
-			calculer_prochain_postdate();
-			return 1;
-		}
 
 	}
 
