@@ -311,7 +311,7 @@ function calcul_branche ($generation) {
 function calcul_branche_in ($id) {
 	$branche = $id;
 	while ($id = sql_allfetsel('id_rubrique', 'spip_rubriques', sql_in('id_parent', $id))) {
-		$branche .= ',' . join(',', array_map('array_shift', $id));
+		$branche .= ',' . ($id = join(',', array_map('array_shift', $id)));
 	}
 	return $branche;
 }
