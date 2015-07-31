@@ -29,7 +29,11 @@ function exec_articles_ortho_dist()
 // Lire l'article
 //
   $id_article = intval($id_article);
-  if (!autoriser('voir', 'article', $id_article)) die('interdit');
+  if (!autoriser('voir', 'article', $id_article))
+	      {include_spip('minipres');
+		minipres();
+		exit;
+	      }
 
   $result = spip_query("SELECT * FROM spip_articles WHERE id_article='$id_article'");
 

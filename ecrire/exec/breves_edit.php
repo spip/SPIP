@@ -38,7 +38,11 @@ function exec_breves_edit_dist()
 		$statut=$row['statut'];
 		$id_rubrique=$row['id_rubrique'];
 		$extra = $row['extra'];
-	} else die ("<h3>"._T('info_acces_interdit')."</h3>");
+	} else 
+	      {include_spip('minipres');
+		minipres();
+		exit;
+	      }
 
     } else {
 	$titre = filtrer_entites(_T('titre_nouvelle_breve'));

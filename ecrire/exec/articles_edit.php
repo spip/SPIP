@@ -35,7 +35,11 @@ function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new,
 	pipeline('exec_init',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
 	
 	$row = article_select($id_article ? $id_article : $new, $id_rubrique,  $lier_trad, $id_version);
-	if (!$row) die ("<h3>"._T('info_acces_interdit')."</h3>");
+	if (!$row) 
+	      {include_spip('minipres');
+		minipres();
+		exit;
+	      }
 
 	$id_article = $row['id_article'];
 	$id_rubrique = $row['id_rubrique'];

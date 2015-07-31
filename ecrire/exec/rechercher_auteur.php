@@ -18,7 +18,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function exec_rechercher_auteur_dist()
 {
 	$idom = _request('idom');
-	if (!preg_match('/\w+/',$idom)) die('Tu nous prend pour qui?');
+	if (!preg_match('/\w+/',$idom))
+	      {include_spip('minipres');
+		minipres();
+		exit;
+	      }
 
 	$where = split("[[:space:]]+", _request('nom'));
 	if ($where) {
