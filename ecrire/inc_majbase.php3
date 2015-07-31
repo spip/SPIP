@@ -24,8 +24,9 @@ function maj_base() {
 	//
 	// Lecture de la version installee
 	//
+	// spip_query_db car on est peut-etre en cours d'installation
 	$version_installee = 0.0;
-	$result = spip_query("SELECT valeur FROM spip_meta WHERE nom='version_installee'");
+	$result = spip_query_db ("SELECT valeur FROM spip_meta WHERE nom='version_installee'");
 	if ($result) if ($row = spip_fetch_array($result)) $version_installee = (double) $row['valeur'];
 
 	//
@@ -34,10 +35,10 @@ function maj_base() {
 	//   => ne pas passer par le processus de mise a jour
 	//
 	// $version_installee = 1.702; quand on a besoin de forcer une MAJ
+
 	if (!$version_installee) {
-		include_ecrire('inc_meta.php3');
-		ecrire_meta('version_installee', $spip_version);
-		ecrire_metas();
+		spip_query_db("REPLACE spip_meta (nom, valeur)
+			VALUES ('version_installee', '$spip_version')");
 		return true;
 	}
 

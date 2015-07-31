@@ -391,7 +391,12 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 		$cible = '';
 	} else {
 		$site = lire_meta("adresse_site");
-		if (!$site) $site = '..';
+		if (!$site)
+			if (_DIR_RESTREINT)
+				$site = '.';
+			else
+				$site = '..';
+
 		if (!_DIR_RESTREINT) {
 			include_ecrire('inc_admin.php3');
 			$cible = _DIR_RESTREINT_ABS . $lien->getUrl();
