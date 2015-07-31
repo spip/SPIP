@@ -563,7 +563,7 @@ function affiche_tranche_bandeau($requete, $icone, $col, $fg, $bg, $tmp_var,  $t
 
 	$deb_aff = intval(_request($tmp_var));
 	$nb_aff = floor(1.5 * _TRANCHES);
-	$tranches = '';
+
 	if ($cpt > $nb_aff) {
 		$nb_aff = (_TRANCHES); 
 		echo afficher_tranches_requete($cpt, $col, $tmp_var, '', $nb_aff);

@@ -24,7 +24,7 @@ function action_joindre_dist()
 	  $sousaction1,
 	  $sousaction2,
 	  $sousaction3,
-	  #    $sousaction4,  # sousaction4 = code mort a supprimer
+	  $sousaction4,
 	  $sousaction5,
 	  $_FILES,  $HTTP_POST_FILES;
 
@@ -139,10 +139,26 @@ function spip_action_joindre5($path, $mode, $type, $id, $id_document,$hash, $id_
   	ajouter_un_document($path, basename($path), $type, $id, $mode, $id_document, $actifs);
 }
 
-// cas du zip a deballer. On ressort la bibli 
+// Zip a deballer.
 
 // http://doc.spip.org/@spip_action_joindre6
 function spip_action_joindre6($path, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
+{
+	joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, $actifs);
+	//  suppression de l'archive en zip
+	@unlink($path);
+}
+
+// Zip avec les 2 options a la fois
+
+function spip_action_joindre4($path, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
+{
+	joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, $actifs);
+	spip_action_joindre5($path, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, $actifs);
+}
+
+// http://doc.spip.org/@spip_action_joindre6
+function joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
 {
 	    define('_tmp_dir', creer_repertoire_documents($hash));
 	    if (_tmp_dir == _DIR_DOC) die(_L('Op&eacute;ration impossible'));
@@ -153,8 +169,6 @@ function spip_action_joindre6($path, $mode, $type, $id, $id_document,$hash, $id_
 			      PCLZIP_CB_PRE_EXTRACT, 'callback_deballe_fichier'
 			      );
 	    $contenu = verifier_compactes($archive);
-	    //  on supprime la copie temporaire
-	    @unlink($path);
 	    
 	    foreach ($contenu as $fichier)
 		ajouter_un_document(_tmp_dir.basename($fichier),
@@ -162,5 +176,4 @@ function spip_action_joindre6($path, $mode, $type, $id, $id_document,$hash, $id_
 				    $type, $id, $mode, $id_document, $actifs);
 	    effacer_repertoire_temporaire(_tmp_dir);
 }
-
 ?>
