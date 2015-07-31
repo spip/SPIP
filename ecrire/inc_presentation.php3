@@ -1425,32 +1425,7 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 
 ?>
 <script type="text/javascript" src="../mathmlinHTML.js"></script>
-
-<script type='text/javascript'><!--
-// Boolean variable to keep track of user's SVG support
-var hasSVGSupport = false;
-
-// Boolean to determine if we need to use VB Script method or not to find SVG support
-var useVBMethod = false;
-
-/* Internet Explorer returns 0 as the number of MIME types,
-   so this code will not be executed by it. This is our indication
-  to use VBScript to detect SVG support.  */ 
-if (navigator.mimeTypes != null && navigator.mimeTypes.length > 0) {
-        if (navigator.mimeTypes["image/svg-xml"] != null)
-                hasSVGSupport = true;
-}else{
-        useVBMethod = true;
-}
---></script>
-
-<script language="VBScript"><!--
-On Error Resume Next
-If useVBMethod = true Then
-        hasSVGSupport = IsObject(CreateObject("Adobe.SVGCtl"))
-End If
---></script>
-
+<script type="text/javascript" src="js_detectplugins.js"></script>
 
 <script type='text/javascript'><!--
 	var init_gauche = true;
@@ -1653,12 +1628,13 @@ End If
 	
 	
 	function verifForm() {
-		<?php	
-		if (!$_COOKIE["spip_svg_support"]) { ?>
-			document.cookie = "spip_svg_support="+hasSVGSupport;
-		<?php } ?>
+		if (pluginlist.indexOf("SVG")!=-1)
+			document.cookie = "spip_svg_plugin=oui";
+		else
+			document.cookie = "spip_svg_plugin=non";
+			
 	
-	convert2math();
+		convert2math();
 	<?php
 		// Hack pour forcer largeur des formo/forml sous Mozilla >= 1.7
 		// meme principe que le behavior win_width.htc pour MSIE
