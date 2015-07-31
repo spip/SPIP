@@ -111,6 +111,7 @@ ecrire/inc/cvt_multietapes.php -text
 ecrire/inc/distant.php -text
 ecrire/inc/drapeau_edition.php -text
 ecrire/inc/editer.php -text
+ecrire/inc/editer_select.php -text
 ecrire/inc/envoyer_mail.php -text
 ecrire/inc/filtres_boites.php -text
 ecrire/inc/filtres_ecrire.php -text
