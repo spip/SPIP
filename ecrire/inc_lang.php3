@@ -224,25 +224,26 @@ function traduire_nom_langue($lang) {
 // Afficher un menu de selection de langue
 //
 function menu_langues() {
-		$lien = $GLOBALS['clean_link'];
-		$lien->delVar('var_lang');
-		$lien = $lien->getUrl();
+	global $couleur_foncee;
 
-		$amp = (strpos(' '.$lien,'?') ? '&' : '?');
+	$lien = $GLOBALS['clean_link'];
+	$lien->delVar('var_lang');
+	$lien = $lien->getUrl();
 
-		$ret = "<form action='$lien' method='get' style='margin:0px; padding:0px;'>";
-		$ret .= "\n<select name='var_lang' class='verdana1' style='background-color: $couleur_foncee; color: white;' onChange=\"document.location.href='". $lien . $amp."var_lang='+this.options[this.selectedIndex].value\">\n";
-		$langues = explode(',', $GLOBALS['all_langs']);
-		while (list(,$l) = each ($langues)) {
-			if ($l == $GLOBALS['spip_lang']) $selected = " selected";
-			else $selected = "";
+	$amp = (strpos(' '.$lien,'?') ? '&' : '?');
 
-			$ret .= "<option value='$l'$selected>".traduire_nom_langue($l)."</option>\n";
-		}
-		$ret .= "</select>\n";
-		$ret .= "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='>>' class='verdana1' style='background-color: $couleur_foncee; color: white; height: 19px;'></noscript>";
-		$ret .= "</form>";
-		return $ret;
+	$ret = "<form action='$lien' method='get' style='margin:0px; padding:0px;'>";
+	$ret .= "\n<select name='var_lang' class='verdana1' style='background-color: $couleur_foncee; color: white;' onChange=\"document.location.href='". $lien . $amp."var_lang='+this.options[this.selectedIndex].value\">\n";
+	$langues = explode(',', $GLOBALS['all_langs']);
+	while (list(,$l) = each ($langues)) {
+		if ($l == $GLOBALS['spip_lang']) $selected = " selected";
+		else $selected = "";
+		$ret .= "<option value='$l'$selected>".traduire_nom_langue($l)."</option>\n";
+	}
+	$ret .= "</select>\n";
+	$ret .= "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='>>' class='verdana1' style='background-color: $couleur_foncee; color: white; height: 19px;'></noscript>";
+	$ret .= "</form>";
+	return $ret;
 }
 
 // menu dans l'espace public
