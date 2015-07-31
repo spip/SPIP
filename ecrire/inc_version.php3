@@ -997,25 +997,24 @@ function supprimer_fichier ($fichier) {
 	@unlink($fichier);
 }
 
+
 //
 // Lire les meta cachees
 //
-if (!defined('_ECRIRE_INC_META_CACHE') AND !defined('_ECRIRE_INC_META')
-AND lire_fichier ($dir_ecrire.'data/inc_meta_cache.php3', $contenu,
+function lire_meta($nom) {
+	global $meta;
+	return $meta[$nom];
+}
+function lire_meta_maj($nom) {
+	global $meta_maj;
+	return $meta_maj[$nom];
+}
+
+if (!defined('_DATA_META_CACHE') AND !defined('_ECRIRE_INC_META')
+AND lire_fichier ($dir_ecrire.'data/meta_cache.php3', $contenu,
 array('phpcheck' => 'oui')))
 	eval('?'.'>'.$contenu);
 
-if (!defined("_ECRIRE_INC_META_CACHE")) {
-	function lire_meta($nom) {
-		global $meta;
-		return $meta[$nom];
-	}
-	function lire_meta_maj($nom) {
-		global $meta_maj;
-		return $meta_maj[$nom];
-	}
-	define("_ECRIRE_INC_META_CACHE", "1");
-}
 
 // Verifier la conformite d'une ou plusieurs adresses email
 function email_valide($adresse) {

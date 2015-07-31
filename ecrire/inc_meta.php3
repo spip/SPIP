@@ -40,18 +40,8 @@ function ecrire_metas() {
 
 	$s = '<'.'?php
 
-if (defined("_ECRIRE_INC_META_CACHE")) return;
-define("_ECRIRE_INC_META_CACHE", "1");
-
-function lire_meta($nom) {
-	global $meta;
-	return $meta[$nom];
-}
-
-function lire_meta_maj($nom) {
-	global $meta_maj;
-	return $meta_maj[$nom];
-}
+if (defined("_DATA_META_CACHE")) return;
+define("_DATA_META_CACHE", "1");
 ';
 	if ($meta) {
 		reset($meta);
@@ -73,7 +63,7 @@ function lire_meta_maj($nom) {
 	$s .= '?'.'>';
 
 	// ecrire le fichier
-	$ok = ecrire_fichier ($dir_ecrire . 'data/inc_meta_cache.php3', $s);
+	$ok = ecrire_fichier ($dir_ecrire . 'data/meta_cache.php3', $s);
 	if (!$ok) {
 		global $connect_statut;
 		if ($connect_statut == '0minirezo')
