@@ -27,6 +27,7 @@ function gerer_deplacements($deplacements){
 	}
 }
 
+// http://doc.spip.org/@reorganiser_article_rubrique
 function reorganiser_article_rubrique($id_article, $id_rubrique)
 {
 	if ($id_rubrique
@@ -44,6 +45,7 @@ function reorganiser_article_rubrique($id_article, $id_rubrique)
 	}
 }
 
+// http://doc.spip.org/@reorganiser_rubrique_rubrique
 function reorganiser_rubrique_rubrique($id_quoi, $id_cible)
 {
 	if (($id_quoi != $id_cible)

@@ -259,6 +259,7 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 
 // fabrique la requete de modification de l'article, avec champs herites
 
+// http://doc.spip.org/@editer_article_heritage
 function editer_article_heritage($id_article, $id_rubrique, $statut, $champs, $cond=true) {
 
 	// Si on deplace l'article
