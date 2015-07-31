@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuler' => 'Cancel',
 	'antispam_champ_vide' => 'Please leave this field empty:',
 	'articles_recents' => 'Most recent articles',
+	'avis_1_erreur_saisie' => 'Your entry contains an error, please check your information.',
 	'avis_archive_incorrect' => 'archive is not a valid SPIP file',
 	'avis_archive_invalide' => 'archive file is not valid',
 	'avis_attention' => 'CAUTION!',
@@ -43,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_mysql' => 'SQL error',
 	'avis_erreur_sauvegarde' => 'Error in backup (@type@ @id_objet@)!',
 	'avis_erreur_visiteur' => 'Problem entering the private area',
-	'avis_nb_erreurs_saisie' => 'There are @nb@ errors in your entry, check the information.', # RELIRE
+	'avis_nb_erreurs_saisie' => 'Your entry contains @nb@ errors, please check your information.',
 
 	// B
 	'barre_a_accent_grave' => 'Insert a capital A with grave accent',
