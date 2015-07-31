@@ -59,6 +59,7 @@ $GLOBALS['flag_ob_flush'] = function_exists('ob_flush');
 function exec_export_all_dist()
 {
 	global $connect_toutes_rubriques;
+	$start = false;
 
 	if ($connect_toutes_rubriques AND file_exists(_DIR_DUMP))
 		$dir = _DIR_DUMP;
@@ -95,6 +96,7 @@ function exec_export_all_dist()
 			spip_log("menage d'une sauvegarde inachevee: " . join(',', $l));
 			foreach($l as $dummy)@unlink($dummy);
 		}
+		$start = true; //  utilise pour faire un premier hit moitie moins long
 	}
 
 	list($tables_for_dump, $tables_for_link) = export_all_list_tables();
@@ -108,6 +110,7 @@ function exec_export_all_dist()
 	  // l'appel precedent avait fini le boulot. mettre l'en-pied.
 		ecrire_fichier($file, export_enpied(),false,false);
 		include_spip('inc/headers');
+		echo 'toto';
 		redirige_par_entete(generer_action_auteur("export_all","end,$gz,$archive",'',true));
 	}
 
@@ -115,11 +118,14 @@ function exec_export_all_dist()
 
 	if (!($timeout = ini_get('max_execution_time')*1000));
 	$timeout = 30000; // parions sur une valeur tellement courante ...
+	// le premier hit est moitie moins long car seulement une phase d'ecriture de morceaux
+	// sans ramassage
+	// sinon grosse ecriture au 1er hit, puis gros rammassage au deuxieme avec petite ecriture,... ca oscille
 	if ($start) $timeout = round($timeout/2);
 	// script de rechargement auto sur timeout
-	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".$redirect."\";',$timeout);</script>\n");
+	//echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".$redirect."\";',$timeout);</script>\n");
 
-	if ($GLOBALS['flag_ob_flush']) ob_flush();
+	if ($GLOBALS['flag_ob_flush']) @ob_flush();
 	flush();
 
 	echo "<div style='text-align: left'>\n";
@@ -139,7 +145,7 @@ function exec_export_all_dist()
 		  if (!$r) echo _T('texte_vide');
 		  else
 		    export_objets($table, $etape, $sous_etape,$dir, $archive, $gz, $r);
-		  if ($GLOBALS['flag_ob_flush']) ob_flush();
+		  if ($GLOBALS['flag_ob_flush']) @ob_flush();
 		  flush();
 		  $sous_etape = 0;
 		}
@@ -151,7 +157,7 @@ function exec_export_all_dist()
 	}
 	echo "</div>\n";
 	// si Javascript est dispo, anticiper le Time-out
-	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"$redirect\";',0);</script>\n");
+	//echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"$redirect\";',0);</script>\n");
 	echo install_fin_html();
 }
 

@@ -49,7 +49,7 @@ if (defined('_INC_PUBLIC')) {
 		include_spip('inc/headers');
 		$var_f = charger_fonction($action, 'action');
 		$var_f();
-		if ($redirect) redirige_par_entete(urldecode($redirect));
+		if (isset($redirect) && $redirect) redirige_par_entete(urldecode($redirect));
 		exit;
 	}
 
