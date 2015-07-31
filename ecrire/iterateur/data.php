@@ -566,19 +566,19 @@ function inc_ls_to_array_dist($u) {
 function ObjectToArray($object){
 	$xml_array = array();
 	for( $object->rewind(); $object->valid(); $object->next() ) {
-		if(!array_key_exists($object->key(), $xml_array)){
-			$xml_array[$object->key()] = array();
+		if(array_key_exists($key = $object->key(), $xml_array)){
+			$key .= '-'.uniqid();
 		}
 		$vars = get_object_vars($object->current());
 		if (isset($vars['@attributes']))
 			foreach($vars['@attributes'] as $k => $v)
-			$xml_array[$object->key()][$k] = $v;
+			$xml_array[$key][$k] = $v;
 		if($object->hasChildren()){
-			$xml_array[$object->key()][] = ObjectToArray(
+			$xml_array[$key][] = ObjectToArray(
 				$object->current());
 		}
 		else{
-			$xml_array[$object->key()][] = strval($object->current());
+			$xml_array[$key][] = strval($object->current());
 		}
 	}
 	return $xml_array;
