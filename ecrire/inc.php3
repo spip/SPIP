@@ -136,9 +136,14 @@ if ($envoi_now) {
 if (!$adresse_site) {
 	$nom_site_spip = lire_meta("nom_site");
 	$adresse_site = lire_meta("adresse_site");
+}
+if (!$activer_breves){
 	$activer_breves = lire_meta("activer_breves");
-	$activer_statistiques = lire_meta("activer_statistiques");
 	$articles_mots = lire_meta("articles_mots");
+}
+
+if ($activer_statistiques){
+	$activer_statistiques = lire_meta("activer_statistiques");
 }
 
 if (!$nom_site_spip) {
