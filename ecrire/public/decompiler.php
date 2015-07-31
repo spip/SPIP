@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Decompilation de l'arbre de syntaxe abstraite d'un squelette SPIP
 
-function decompiler_boucle($struct, $fmt, $prof=0, $next='')
+function decompiler_boucle($struct, $fmt, $prof=0)
 {
 	$nom = $struct->id_boucle;
 	$avant = public_decompiler($struct->avant, $fmt, $prof);
@@ -42,7 +42,7 @@ function decompiler_boucle($struct, $fmt, $prof=0, $next='')
 	return $f($avant, $nom, $type, $crit, $milieu, $apres, $altern, $prof);
 }
 	
-function decompiler_include($struct, $fmt, $prof=0, $next='')
+function decompiler_include($struct, $fmt, $prof=0)
 {
 	$res = array();
 	$fond = '';
@@ -55,22 +55,23 @@ function decompiler_include($struct, $fmt, $prof=0, $next='')
 			else $res[]= $a;
 		}
 	}
-	$f = 'format_include_' . ($fmt ? $fmt : _EXTENSION_SQUELETTES);
+	$f = 'format_inclure_' . ($fmt ? $fmt : _EXTENSION_SQUELETTES);
 	return $f($struct->texte, $fond, $res, $prof);
 }
 
-function decompiler_texte($struct, $fmt, $prof=0, $next='')
+function decompiler_texte($struct, $fmt, $prof=0)
 {
-	return $struct->texte;
+	$f = 'format_texte_' . ($fmt ? $fmt : _EXTENSION_SQUELETTES);
+	return strlen($struct->texte) ? $f($struct->texte, $prof) : '';
 }
 
-function decompiler_polyglotte($struct, $fmt, $prof=0, $next='')
+function decompiler_polyglotte($struct, $fmt, $prof=0)
 {
 	$f = 'format_polyglotte_' . ($fmt ? $fmt : _EXTENSION_SQUELETTES);
 	return $f($struct->traductions, $prof);
 }
 
-function decompiler_idiome($struct, $fmt, $prof=0, $next='')
+function decompiler_idiome($struct, $fmt, $prof=0)
 {
 	$module = ($struct->module == 'public/spip/ecrire')? ''
 	  : $struct->module;
@@ -83,10 +84,10 @@ function decompiler_idiome($struct, $fmt, $prof=0, $next='')
 	$filtres =  decompiler_liste($struct->param, $fmt, $prof);
 
 	$f = 'format_idiome_' . ($fmt ? $fmt : _EXTENSION_SQUELETTES);
-	return $f($struct->nom_champ, $module, $args, $filtres, $next, $prof);
+	return $f($struct->nom_champ, $module, $args, $filtres, $prof);
 }
 
-function decompiler_champ($struct, $fmt, $prof=0, $next='')
+function decompiler_champ($struct, $fmt, $prof=0)
 {
 	$avant = public_decompiler($struct->avant, $fmt, $prof);
 	$apres = public_decompiler($struct->apres, $fmt, $prof);
@@ -96,9 +97,8 @@ function decompiler_champ($struct, $fmt, $prof=0, $next='')
 		  $args = decompiler_liste(array(array_shift($p)), $fmt, $prof);
 		$filtres = decompiler_liste($p, $fmt, $prof);
 	}
-
 	$f = 'format_champ_' . ($fmt ? $fmt : _EXTENSION_SQUELETTES);
-	return $f($struct->nom_champ, $struct->nom_boucle, $struct->etoile, $avant, $apres, $args, $filtres, $next, $prof);
+	return $f($struct->nom_champ, $struct->nom_boucle, $struct->etoile, $avant, $apres, $args, $filtres, $prof);
 }
 
 function decompiler_liste($sources, $fmt, $prof=0) {
@@ -129,9 +129,9 @@ function decompiler_liste($sources, $fmt, $prof=0) {
 // - le champ apres signale le critere {"separateur"} ou {'separateur'}
 // - les champs sont implicitement etendus (crochets implicites mais interdits)
 function decompiler_criteres($sources, $comp, $fmt='', $prof=0) {
+	if (!is_array($sources)) return '';
 	$res = '';
 	$f = 'format_critere_' . ($fmt ? $fmt : _EXTENSION_SQUELETTES);
-
 	foreach($sources as $crit) {
 		if (!is_array($crit)) continue; // boucle recursive
 		array_shift($crit);
@@ -157,12 +157,14 @@ function decompiler_criteres($sources, $comp, $fmt='', $prof=0) {
 	return $res;
 }
 
+
 function public_decompiler($liste, $fmt='', $prof=0, $suite=' ')
 {
+	if (!is_array($liste))  return '';
 	include_spip('public/format_' . ($fmt ? $fmt : _EXTENSION_SQUELETTES));
-	$contenu = '';
 	$prof2 = ($prof < 0) ? ($prof-1) : ($prof+1);
-	if (is_array($liste)) foreach($liste as $k => $p) {
+	$contenu = array();
+	foreach($liste as $k => $p) {
 	    if (!isset($p->type)) continue; #??????
 	    $d = 'decompiler_' . $p->type;
 	    $next = isset($liste[$k+1]) ? $liste[$k+1] : false;
@@ -181,12 +183,11 @@ function public_decompiler($liste, $fmt='', $prof=0, $suite=' ')
 		$p->apres = substr($next->texte, 0, $n);
 		$next->texte = substr($next->texte, $n);
 	      }
-	      }
-	    // preciser le suivant pour permettre le raccourci [(#X)] ==> #X
-	    $contenu .= $d($p, $fmt, $prof2, $next);
+	    }
+	    $contenu[] = array($d($p, $fmt, $prof2), $p->type);
 
 	}
-
-	return $contenu;
+	$f = 'format_suite_' . ($fmt ? $fmt : _EXTENSION_SQUELETTES);
+	return $f($contenu);
 }
 ?>

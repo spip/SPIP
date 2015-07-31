@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function format_boucle_html($avant, $nom, $type, $crit, $corps, $apres, $altern, $prof)
+function format_boucle_html ($avant, $nom, $type, $crit, $corps, $apres, $altern, $prof)
 {
 	$avant = $avant ? "<B$nom>$avant" : "";
 	$apres = $apres ? "$apres</B$nom>" : "";
@@ -21,30 +21,30 @@ function format_boucle_html($avant, $nom, $type, $crit, $corps, $apres, $altern,
 	return "$avant<BOUCLE$nom($type)$crit$corps$apres$altern";
 }
 
-function format_include_html($file, $fond, $args, $prof)
+function format_inclure_html ($file, $fond, $args, $prof)
 {
  	$t = $file ? ("(" . $file . ")") : "" ;
 	if ($fond) array_unshift($args, "fond=" . $fond);
 	if ($args) $args = "{" . join(", ",$args) . "}";
-	return "<INCLURE" . $t . $args  . ">";
+	return ("<INCLURE" . $t . $args  . ">");
 }
 
-function format_polyglotte_html($args, $prof)
+function format_polyglotte_html ($args, $prof)
 {
 	$contenu = array(); 
 	foreach($args as $l=>$t)
 		$contenu[]= ($l ? "[$l]" : '') . $t;
-	return "<multi>" . join(" ", $contenu) . "</multi>";
+	return ("<multi>" . join(" ", $contenu) . "</multi>");
 }
 
-function format_idiome_html($nom, $module, $args, $filtres, $next, $prof)
+function format_idiome_html ($nom, $module, $args, $filtres, $prof)
 {
 	foreach ($args as $k => $v) $args[$k] = "$k=$v";
 	$args = (!$args ? '' : ('{' . join(',', $args) . '}'));
-	return "<:" . ($module ? "$module:" : "") . $nom . $args . $filtres . ":>";
+	return ("<:" . ($module ? "$module:" : "") . $nom . $args . $filtres . ":>");
 }
 
-function format_champ_html($nom, $boucle, $etoile, $avant, $apres, $args, $filtres, $next, $prof)
+function format_champ_html ($nom, $boucle, $etoile, $avant, $apres, $args, $filtres, $prof)
 {
 	$nom = "#"
 	. ($boucle ? ($boucle . ":") : "")
@@ -54,42 +54,66 @@ function format_champ_html($nom, $boucle, $etoile, $avant, $apres, $args, $filtr
 	. $filtres;
 
 	// Determiner si c'est un champ etendu, 
-	// notamment pour éviter que le lexeme suivant s'agrege au champ
-	// si pas d'etoile terminale, pas d'arg et suivi d'une ambiguite
 
 	$s = ($avant OR $apres OR $filtres
-	      OR ($prof < 0) 
-	      OR (strpos($args, '(#') !==false)
-	      OR (!$args
-		    AND !$etoile
-		    AND	$next
-		    AND ($next->type == 'texte')
-		  AND preg_match(',^[\w\d|{*],', $next->texte)));
+	      OR (strpos($args, '(#') !==false));
 
-	return $s ? "[$avant($nom)$apres]" : $nom;
+	return ($s ? "[$avant($nom)$apres]" : $nom);
 }
 
-function format_liste_html($fonc, $args, $prof)
+function format_critere_html ($critere)
 {
-  return (($fonc!=='') ? "|$fonc" : $fonc)
-	. (!$args ? "" : ("{" . join(",", $args) . "}"));
-}
-
-function format_critere_html($criteres)
-{
-	foreach ($criteres as $k => $crit) {
+	foreach ($critere as $k => $crit) {
 		$crit_s = '';
 		foreach ($crit as $operande) {
 			list($type, $valeur) = $operande;
 			if ($type == 'champ' AND $valeur[0]=='[') {
 			  $valeur = substr($valeur,1,-1);
 			  if (preg_match(',^[(](#[^|]*)[)]$,sS', $valeur))
-			    $valeur = substr($valeur,1,-1);
+				$valeur = substr($valeur,1,-1);
 			}
 			$crit_s .= $valeur;
 		}
-		$criteres[$k] = $crit_s;
+		$critere[$k] = $crit_s;
 	}
-	return (!$criteres ? "" : ("{" . join(",", $criteres) . "}"));
+	return (!$critere ? "" : ("{" . join(",", $critere) . "}"));
 }
 
+function format_liste_html ($fonc, $args, $prof)
+{
+	return ((($fonc!=='') ? "|$fonc" : $fonc)
+	. (!$args ? "" : ("{" . join(",", $args) . "}")));
+}
+
+// Concatenation sans separateur: verifier qu'on ne cree pas de faux lexemes
+function format_suite_html ($args)
+{
+	for($i=0; $i < count($args)-1; $i++) {
+		list($texte, $type) = $args[$i];
+		list($texte2, $type2) = $args[$i+1];
+		if (!$texte OR !$texte2) continue; 
+		$c1 = substr($texte,-1);
+		if ($type2 !== 'texte') {
+		  // si un texte se termine par ( et est suivi d'un champ
+		  // ou assimiles, forcer la notation pleine
+			if ($c1 == '(' AND substr($texte2,0,1) == '#')
+				$args[$i+1][0] = '[(' . $texte2 . ')]';
+		} else {
+			if ($type == 'texte') continue;
+			// si un champ ou assimiles est suivi d'un texte
+			// et si celui-ci commence par un caractere de champ
+			// forcer la notation pleine
+			if (($c1 == '}' AND substr(ltrim($texte2),0,1) == '|')
+			OR (preg_match('/[\w\d_*]/', $c1) AND preg_match('/^[\w\d_*{|]/', $texte2)))
+				$args[$i][0] = '[(' . $texte . ')]';
+		}
+	}
+	return join("", array_map('array_shift', $args));
+}
+
+function format_texte_html ($texte)
+{
+	return $texte;
+}
+
+?>
