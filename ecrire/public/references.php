@@ -352,7 +352,6 @@ function champs_traitements ($p) {
 	// dans la globale table_des_traitements
 	switch ($p->type_requete) {
 		case 'signatures':
-		case 'syndic_articles':
 			$champs_surs = array(
 			'date', 'date_heure', 'statut', 'ip', 'url_article', 'maj', 'idx'
 			);
