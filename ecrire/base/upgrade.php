@@ -1310,6 +1310,22 @@ function maj_base($version_cible = 0) {
 		maj_version('1.931');
 	}
 
+	// Ajout de spip_forum.date_thread, et on essaie de le remplir
+	// a coup de table temporaire (est-ce autorise partout... sinon
+	// tant pis, ca ne marchera que pour les forums recemment modifies)
+	if (upgrade_vers(1.932, $version_installee, $version_cible)) {
+		spip_query("ALTER TABLE spip_forum ADD date_thread datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
+		spip_query("ALTER TABLE spip_forum ADD INDEX date_thread (date_thread)");
+
+		spip_query("DROP TABLE IF EXISTS spip_tmp");
+		spip_query("CREATE TEMPORARY TABLE spip_tmp SELECT id_thread,MAX(date_heure) AS dt FROM spip_forum GROUP BY id_thread");
+		spip_query("ALTER TABLE spip_tmp ADD INDEX p (id_thread)");
+		spip_query("UPDATE spip_forum JOIN spip_tmp ON spip_forum.id_thread=spip_tmp.id_thread SET spip_forum.date_thread=spip_tmp.dt");
+		spip_query("DROP TABLE spip_tmp");
+
+		maj_version('1.932');
+	}
+
 }
 
 ?>

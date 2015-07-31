@@ -292,6 +292,7 @@ $spip_forum = array(
 		"id_article"	=> "bigint(21) DEFAULT '0' NOT NULL",
 		"id_breve"	=> "bigint(21) DEFAULT '0' NOT NULL",
 		"date_heure"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+		"date_thread"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 		"titre"	=> "text NOT NULL",
 		"texte"	=> "mediumtext NOT NULL",
 		"auteur"	=> "text NOT NULL",
@@ -315,7 +316,8 @@ $spip_forum_key = array(
 		"KEY id_syndic"	=> "id_syndic",
 		"KEY id_rubrique"	=> "id_rubrique",
 		"KEY idx"	=> "idx",
-		"KEY statut"	=> "statut, date_heure");
+		"KEY statut"	=> "statut, date_heure",
+		"KEY date_thread" => "date_thread");
 
 $spip_signatures = array(
 		"id_signature"	=> "bigint(21) NOT NULL",

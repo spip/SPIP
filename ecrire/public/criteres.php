@@ -362,22 +362,6 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 		  $boucle->select[]= $par . " AS alea";
 		  $order = "'alea'";
 		}
-	// par date_thread
-	// (date la plus recente d'un message dans un fil de discussion)
-		else if ($par == 'date_thread') {
-			if ($boucle->type_requete == 'forums') {
-			  $t = 'forum';
-			} else {
-			  $t = critere_par_jointure($boucle, array('spip_forum','id_thread'));
-			  $t = substr($t, 1, strpos($t,'.')-1);
-			}
-			$boucle->select[] = "MAX($t" . ".".
-				$GLOBALS['table_date']['forums']
-				.") AS date_thread";
-			$boucle->group[] = $t . ".id_thread";
-			$order = "'date_thread'";
-			$boucle->modificateur['plat'] = true;
-		}
 	// par titre_mot ou type_mot voire d'autres
 		else if (isset($exceptions_des_jointures[$par])) {
 			$order = critere_par_jointure($boucle, $exceptions_des_jointures[$par]);
