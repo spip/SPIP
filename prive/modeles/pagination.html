@@ -33,7 +33,5 @@
 	class='sep'>(#GET*{sep})</span>]</span><a
 	href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}})]##ENV{ancre}'
 	class='lien_pagination'
-	rel='nofollow'>(#GET{derniere}|<{#ENV{nombre_pages}}|?{#ENV{nombre_pages}})</a>]</span>[
-	(#SET{item, #ENV{page_courante}|mult{#ENV{pas}} })
-	]
+	rel='nofollow'>(#GET{derniere}|<{#ENV{nombre_pages}}|?{#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}})</a>]</span>
 </B_pages>
