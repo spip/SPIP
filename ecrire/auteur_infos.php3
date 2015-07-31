@@ -5,7 +5,7 @@ include_ecrire ("inc_acces.php3");
 include_ecrire ("inc_index.php3");
 include_ecrire ("inc_logos.php3");
 include_ecrire ("inc_session.php3");
-
+include_ecrire ("inc_filtres.php3");
 
 // securite
 $id_auteur = floor($id_auteur);
