@@ -2387,7 +2387,8 @@ function compacte_head_js($flux) {
 		AND (
 			preg_match(',^('.$dir.')(.*)$,', $src, $r)
 			OR (
-				!preg_match(',(^/|\.\.),', substr($src,strlen(_DIR_RACINE)))
+				$src = preg_replace(',^'.preg_quote(url_de_base(),',').',', '', $src)
+				AND !preg_match(',(^/|\.\.),', substr($src,strlen(_DIR_RACINE)))
 				AND @is_readable($src)
 			)
 		)) {
