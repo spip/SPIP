@@ -749,16 +749,19 @@ function http_calendrier_suite_heures($jour_today,$mois_today,$annee_today,
 	foreach($intitul as $k => $v) {
 		$d = $v['date'];
 		$total .= "\n<td style='width: 14%; vertical-align: top'>" .
-		  http_calendrier_jour_trois(http_calendrier_jour_ics($debut,$fin,$largeur, $echelle, $evenements[$d], $d), 
-					     $articles[$d], 0,
+		  "<div class='calendrier-verdana10' style='color: #999999; background-color: " .
 					     (($v['index'] == 0) ? 
 					      $couleur_claire :
 					      (($v['jour'] == $jour_t AND 
 						$v['mois'] == $mois_t AND
 						$v['annee'] == $annee_t) ? 
 					       "white" :
-					       "#eeeeee")),
-					     $dimjour, $fontsize, $couleur_claire) . 
+					       "#eeeeee")) .
+"; position: relative; height: ${dimjour}px; font-size: ${fontsize}px;\n" .
+" border-$spip_lang_left: 1px solid $couleur_claire; border-bottom: 1px solid $couleur_claire;'>" . 
+http_calendrier_jour_ics($debut,$fin,$largeur, $echelle, $evenements[$d], $d).
+"</div>" .
+		  http_calendrier_jour_trois($articles[$d], 0, $dimjour, $fontsize, $couleur_claire) . 
 			"\n</td>";
 	}
 	return 
@@ -842,12 +845,12 @@ function http_calendrier_agenda_rv ($annee, $mois, $les_rv, $fclic, $perso='',
 		if ($jour_semaine==0) $jour_semaine=7;
 
 		if ($j == $jour_ved AND $mois == $mois_ved AND $annee == $annee_ved) {
-		  $class= 'calendrier-arial11 calendrier-demijour';
+		  $class= 'calendrier-arial11 calendrier-demiagenda';
 		  $style = $style0;
 		  $type = 'jour';
 		  $couleur = "black";
 		  } else if ($semaine AND $nom >= $debut AND $nom <= $fin) {
-		  $class= 'calendrier-arial11 calendrier-demijour' . 
+		  $class= 'calendrier-arial11 calendrier-demiagenda' . 
  		      (($jour_semaine==1) ? " calendrier-$spip_lang_left"  :
 		       (($jour_semaine==7) ? " calendrier-$spip_lang_right" :
 			''));
@@ -871,7 +874,7 @@ function http_calendrier_agenda_rv ($annee, $mois, $les_rv, $fclic, $perso='',
 			  $couleur = "black";
 			}
 		  }
-		  $class= 'calendrier-arial11 calendrier-jour';
+		  $class= 'calendrier-arial11 calendrier-agenda';
 		  $type = ($semaine ? 'semaine' : 'jour') ;
 		}
 		$ligne .= "\n\t<td><div class='$class' style='$style'>" .
@@ -909,36 +912,25 @@ function http_calendrier_image_et_typo($evenements)
 # si la largeur le permet, les evenements sans duree, 
 # se placent a cote des autres, sinon en dessous
 
-function http_calendrier_jour_trois($rdv, $evt, $largeur, $couleur, $dimjour, $fontsize, $border)
+function http_calendrier_jour_trois($evt, $largeur, $dimjour, $fontsize, $border)
 {
 	global $spip_lang_left,  $couleur_claire; 
-	if ($evt)
-	  {
-	    $types = array();
-	    foreach($evt as $v)	$types[$v['CATEGORIES']][] = $v;
-	    $res = '';
-	    foreach ($types as $k => $v)
-	      {
+	if (!$evt) return '';
+	$types = array();
+	foreach($evt as $v)	$types[$v['CATEGORIES']][] = $v;
+	$res = '';
+	foreach ($types as $k => $v) {
 		$res .= "\n<div class='calendrier-verdana10 calendrier-titre'>".
 		  _T($k) .
 		  "</div>" .
 		  http_calendrier_ics(http_calendrier_image_et_typo($v));
-	      }
-		
-	    $pos = ((_DIR_RESTREINT || $largeur) ? "-$dimjour" : 0);
-	    if ($largeur) $largeur += (5*$fontsize);
-	    else if (_DIR_RESTREINT) $largeur = (3*$fontsize);
-	  
-	    $res = "\n<div style='position: relative; z-index: 2; top: ${pos}px; margin-$spip_lang_left: " . $largeur . "px'>$res</div>";
 	}
-	return  "<div class='calendrier-verdana10'
-style='color: #999999; background-color: $couleur; position: relative; height: ${dimjour}px; font-size: ${fontsize}px;\n" .
- (!$border ? 
-" border-left: 1px solid #aaaaaa; border-right: 1px solid #aaaaaa;
-border-bottom: 1px solid #aaaaaa; border-top: 1px solid #aaaaaa;" :
-  " border-$spip_lang_left: 1px solid $border; border-bottom: 1px solid $border;") . 
-"'>$rdv
-</div>$res" ;
+		
+	$pos = ((_DIR_RESTREINT || $largeur) ? "-$dimjour" : 0);
+	if ($largeur) $largeur += (5*$fontsize);
+	else if (_DIR_RESTREINT) $largeur = (3*$fontsize);
+	  
+	return "\n<div style='position: relative; z-index: 2; top: ${pos}px; margin-$spip_lang_left: " . $largeur . "px'>$res</div>";
 }
 
 # Affiche une grille horaire 
@@ -1260,10 +1252,12 @@ function http_calendrier_jour($jour,$mois,$annee,$largeur, $partie_cal, $echelle
 	$calendrier_message_fermeture = $le_message;
 
 	return
-	  http_calendrier_jour_trois(http_calendrier_jour_ics($debut_cal,$fin_cal,$largeur, $echelle, $messages[$j], $j), $articles[$j], $largeur, 'white', $dimjour, $fontsize, '');
+ "<div	class='calendrier-verdana10 calendrier-jour' 
+	style='position: relative; height: ${dimjour}px; font-size: ${fontsize}px'>\n" .
+	  http_calendrier_jour_ics($debut_cal,$fin_cal,$largeur, $echelle, $messages[$j], $j) .
+	  "</div>" .
+	  http_calendrier_jour_trois($articles[$j], $largeur, $dimjour, $fontsize, '');
 }
-
-
 
 // Fonction pour la messagerie et ecrire/index.php
 

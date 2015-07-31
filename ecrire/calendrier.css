@@ -92,17 +92,27 @@ a.calendrier-annee:hover {
  }
 
 .calendrier-jour { 
+	color: #999999;
+	background-color: white;
+	border-left: 1px solid #aaaaaa;
+	border-right: 1px solid #aaaaaa;
+	border-bottom: 1px solid #aaaaaa;
+	border-top: 1px solid #aaaaaa;
+}
+
+.calendrier-agenda { 
 	margin-left: 1px;
 	margin-top: 1px;
-	padding: 2px;
+	padding: 1px;
 	text-align: center; 
 	background-color: white;
 	-moz-border-radius: 5px;
  }
 
-.calendrier-demijour { 
-	margin: 0px;
-	padding: 3px;
+.calendrier-demiagenda { 
+	margin-left: 0px;
+	margin-top: 0px;
+	padding: 0px;
 	text-align: center; 
 	background-color: white;
 	-moz-border-radius: 5px;
