@@ -335,6 +335,7 @@ dist/prive/infos/breve_fonctions.php -text
 dist/prive/infos/rubrique.html -text
 dist/prive/infos/site.html -text
 dist/prive/infos/site_fonctions.php -text
+dist/prive/stats/echelle.html -text
 dist/prive/transmettre/forum_article.html -text
 dist/prive/transmettre/signatures_article.html -text
 dist/prive/transmettre/statistiques.html -text
