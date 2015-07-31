@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -158,7 +158,7 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 		// Si #CACHE{} n'etait pas la, le mettre a $delais
 		if (!isset($page['entetes']['X-Spip-Cache'])){
 			// Dans l'espace prive ou dans un modeles/ on pose un cache 0 par defaut
-			// si aucun #CACHE{} spécifié
+			// si aucun #CACHE{} spÃ©cifiÃ©
 			// le contexte implicite qui conditionne le cache assure qu'on retombe pas sur le meme
 			// entre public et prive
 			if (test_espace_prive() OR strncmp($fond,'modeles/',8)==0)
