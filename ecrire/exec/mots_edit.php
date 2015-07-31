@@ -19,7 +19,7 @@ include_spip('base/abstract_sql');
 function exec_mots_edit_dist()
 {
 // attention, ajouter_id_article n'est pas forcement un id d'article
-global $ajouter_id_article, $champs_extra, $connect_statut, $descriptif, $id_groupe,  $id_mot, $table_id, $new, $options, $redirect, $spip_display, $table, $texte, $titre, $titre_mot, $les_notes;
+global $ajouter_id_article, $champs_extra, $connect_statut, $descriptif, $id_groupe,  $id_mot, $table_id, $new, $redirect, $spip_display, $table, $texte, $titre, $titre_mot, $les_notes;
 
  $id_groupe = intval($id_groupe);
  $id_mot = intval($id_mot);
@@ -192,7 +192,7 @@ global $ajouter_id_article, $champs_extra, $connect_statut, $descriptif, $id_gro
 		$res .= determine_groupe_mots($table, $id_groupe);
 
 
-		if ($options == 'avancees' OR $descriptif) {
+		if ($descriptif) {
 			$res .= "<b>"._T('texte_descriptif_rapide')."</b><br />";
 			$res .= "<textarea name='descriptif' class='forml' rows='4' cols='40'>";
 			$res .= $descriptif;
@@ -201,7 +201,7 @@ global $ajouter_id_article, $champs_extra, $connect_statut, $descriptif, $id_gro
 		else
 			$res .= "<input type='hidden' name='descriptif' value=\"$descriptif\" />";
 
-		if ($options == 'avancees' OR $texte) {
+		if ($texte) {
 			$res .= "<b>"._T('info_texte_explicatif')."</b><br />";
 			$res .= "<textarea name='texte' rows='8' class='forml' cols='40'>";
 			$res .= $texte;

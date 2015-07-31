@@ -17,7 +17,7 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@inc_referencer_traduction_dist
 function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_trad, $trad_err='')
 {
-	global $options, $spip_display;
+	global $spip_display;
 
 	if (! (($GLOBALS['meta']['multi_articles'] == 'oui')
 		OR (($GLOBALS['meta']['multi_rubriques'] == 'oui') 
@@ -82,7 +82,7 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 	if ($spip_display == 4) $form =''; else {
 	$form = "<table width='100%'><tr>";
 
-	if ($flag AND $options == "avancees" AND !$table) {
+	if ($flag  AND !$table) {
 			// Formulaire pour lier a un article
 		$form .= "<td style='width: 60%' class='arial2'>"
 		. ajax_action_post("referencer_traduction",
@@ -103,7 +103,7 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 	. icone_horizontale(_T('trad_new'), generer_url_ecrire("articles_edit","new=oui&lier_trad=$id_article&id_rubrique=$id_rubrique"), "traductions-24.gif", "creer.gif", false)
 	. "</td>";
 
-	if ($flag AND $options == "avancees" AND $table) {
+	if ($flag AND $table) {
 		$clic = _T('trad_delier');
 		$form .= "<td style='width: 10px'> &nbsp; </td>"
 		. "<td style='width: 2px; background: url(" . _DIR_IMG_PACK . "tirets-separation.gif)'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>"

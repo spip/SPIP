@@ -104,23 +104,21 @@ function definir_barre_boutons() {
 		  new Bouton('breve-24.gif', 'icone_breves');
 	}
 
-	if ($GLOBALS['options'] == "avancees"){
-		$articles_mots = $GLOBALS['meta']['articles_mots'];
-		if ($articles_mots != "non") {
+	$articles_mots = $GLOBALS['meta']['articles_mots'];
+	if ($articles_mots != "non") {
 			$sousmenu['mots_tous']=
 			  new Bouton('mot-cle-24.gif', 'icone_mots_cles');
-		}
+	}
 
-		$activer_sites = $GLOBALS['meta']['activer_sites'];
-		if ($activer_sites<>'non')
+	$activer_sites = $GLOBALS['meta']['activer_sites'];
+	if ($activer_sites<>'non')
 			$sousmenu['sites_tous']=
 			  new Bouton('site-24.gif', 'icone_sites_references');
 
-		$n = spip_num_rows(spip_query("SELECT id_document FROM spip_documents_rubriques LIMIT 1"));
-		if ($n) {
+	$n = spip_num_rows(spip_query("SELECT id_document FROM spip_documents_rubriques LIMIT 1"));
+	if ($n) {
 			$sousmenu['documents_liste']=
 			  new Bouton('doc-24.gif', 'icone_doc_rubrique');
-		}
 	}
 	$boutons_admin['naviguer']->sousmenu= $sousmenu;
 
@@ -185,18 +183,13 @@ function definir_barre_boutons() {
 		'espacement' => null
 	);
 
-	if ($GLOBALS['options'] == "avancees") {
-		$sousmenu['admin_tech']= 
+	$sousmenu['admin_tech']= 
 			new Bouton("base-24.gif", "icone_maintenance_site");
-		$sousmenu['admin_vider']=
+	$sousmenu['admin_vider']=
 			new Bouton("cache-24.gif", "onglet_vider_cache");
   	if ((@file_exists(_DIR_PLUGINS))&&(is_dir(_DIR_PLUGINS)))
 			$sousmenu['admin_plugin']=
 				new Bouton("plugin-24.gif", "icone_admin_plugin");
-	} else {
-		$sousmenu['admin_tech']=
-			new Bouton("base-24.gif", "icone_sauver_site");
-	}
 
 	$boutons_admin['configuration']->sousmenu= $sousmenu;
 

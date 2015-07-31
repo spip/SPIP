@@ -21,7 +21,7 @@ include_spip('inc/config');
 // http://doc.spip.org/@exec_sites_dist
 function exec_sites_dist()
 {
-	global $options,   $spip_lang_left,  $spip_lang_right, $spip_display;
+	global $spip_lang_left,  $spip_lang_right, $spip_display;
 
 	global $cherche_mot, $select_groupe, $id_syndic;
 
@@ -144,7 +144,7 @@ function exec_sites_dist()
 	}
 	echo "</tr></table><br />\n";
 
-	if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
+	if ($flag_editable AND ($statut == 'publie')) {
 		if ($statut == 'publie') {
 
 			debut_cadre_enfonce();
@@ -227,7 +227,7 @@ function exec_sites_dist()
 		echo "</div><br />\n";
 
 	// Options
-		if ($flag_administrable && $options=='avancees') {
+		if ($flag_administrable) {
 
 			$moderation = $mod;
 			if ($moderation != 'oui') $moderation='non';

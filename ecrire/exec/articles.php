@@ -202,8 +202,6 @@ $(\"form.form_upload\").async_upload(async_upload_portfolio_documents);
 // http://doc.spip.org/@boite_info_articles
 function boite_info_articles($id_article, $statut_article, $visites, $id_version)
 {
-	global $options;
-
 	$res = "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>" 
 	. _T('info_numero_article')
 	.  "<br /><span class='spip_xx-large'>"
@@ -214,13 +212,12 @@ function boite_info_articles($id_article, $statut_article, $visites, $id_version
 	if ($statut_article == 'publie'
 	AND $visites > 0
 	AND $GLOBALS['meta']["activer_statistiques"] != "non"
-	AND $options == "avancees"
 	AND autoriser('voirstats', 'article', $id_article)) {
 		$res .= icone_horizontale(_T('icone_evolution_visites', array('visites' => $visites)), generer_url_ecrire("statistiques_visites","id_article=$id_article"), "statistiques-24.gif","rien.gif", false);
 	}
 
 	if (($GLOBALS['meta']["articles_versions"]=='oui')
-	AND $id_version>1 AND $options == "avancees"
+	AND $id_version>1 
 	AND autoriser('voirrevisions', 'article', $id_article))
 		$res .= icone_horizontale(_T('info_historique_lien'), generer_url_ecrire("articles_versions","id_article=$id_article"), "historique-24.gif", "rien.gif", false);
 

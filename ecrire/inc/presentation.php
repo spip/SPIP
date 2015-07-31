@@ -293,9 +293,9 @@ function bloc_des_raccourcis($bloc) {
 
 // http://doc.spip.org/@afficher_plus
 function afficher_plus($lien) {
-	global $options, $spip_lang_right, $spip_display;
+	global $spip_lang_right, $spip_display;
 	
-	if ($options == "avancees" AND $spip_display != 4) {
+	if ($spip_display != 4) {
 			return "\n<a href='$lien' style='float:$spip_lang_right; padding-right: 10px;'>" .
 			  http_img_pack("plus.gif", "+", "") ."</a>";
 	}
@@ -497,7 +497,7 @@ function afficher_liste_fin_tableau() {
 
 // http://doc.spip.org/@puce_statut_article
 function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax = false) {
-	global $spip_lang_left, $lang_objet, $options;
+	global $lang_objet;
 	
 	$lang_dir = lang_dir($lang_objet);
 	if (!$id) {
@@ -576,7 +576,7 @@ function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax 
 
 // http://doc.spip.org/@puce_statut_breve
 function puce_statut_breve($id, $statut, $id_rubrique, $type) {
-	global $spip_lang_left, $lang_objet;
+	global $lang_objet;
 
 	$lang_dir = lang_dir($lang_objet);
 	$puces = array(
@@ -695,7 +695,7 @@ function afficher_articles($titre, $requete, $formater='') {
 // http://doc.spip.org/@afficher_articles_trad
 function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $hash, $cpt, $trad=0) {
 
-	global $options, $spip_lang_right;
+	global $spip_lang_right;
 
 	if ($trad) {
 		$formater = 'afficher_articles_trad_boucle';
@@ -850,7 +850,6 @@ function afficher_articles_trad_boucle($row)
 
 // http://doc.spip.org/@afficher_breves
 function afficher_breves($titre_table, $requete, $affrub=false) {
-	global  $options;
  
 	if (($GLOBALS['meta']['multi_rubriques'] == 'oui'
 	     AND (!isset($GLOBALS['id_rubrique'])))
@@ -864,15 +863,9 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 
 	$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
 
-	if ($options == "avancees") {
-		if ($affrub) $largeurs = array('7', '', '188', '38');
-		else $largeurs = array('7','', '100', '38');
-		$styles = array('', 'arial11', 'arial1', 'arial1');
-	} else {
-		if ($affrub) $largeurs = array('7','', '188');
-		else  $largeurs = array('7','', '100');
-		$styles = array('','arial11', 'arial1');
-	}
+	if ($affrub) $largeurs = array('7', '', '188', '38');
+	else $largeurs = array('7','', '100', '38');
+	$styles = array('', 'arial11', 'arial1', 'arial1');
 
 	return affiche_tranche_bandeau($requete, "breve-24.gif", 'toile_foncee', "ligne_blanche", $tmp_var, $titre_table, false, $largeurs, $styles, 'afficher_breves_boucle', array( $afficher_langue, $affrub, $langue_defaut));
 
@@ -881,8 +874,8 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 // http://doc.spip.org/@afficher_breves_boucle
 function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 {
-	global $options, $connect_statut, $spip_lang_right;
-	$droit = ($connect_statut == '0minirezo' && $options == 'avancees');
+	global $connect_statut, $spip_lang_right;
+	$droit = ($connect_statut == '0minirezo');
 	list($afficher_langue, $affrub, $langue_defaut) = $own;
 
 	$vals = '';
@@ -936,9 +929,7 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 				$s .= _T('info_a_valider');
 		$vals[] = $s;
 				
-		if ($options == "avancees") {
-			$vals[] = afficher_numero_edit($id_breve, 'id_breve', 'breve');
-		}
+		$vals[] = afficher_numero_edit($id_breve, 'id_breve', 'breve');
 	}
 	return $vals;
 }
@@ -950,7 +941,6 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 
 // http://doc.spip.org/@afficher_rubriques
 function afficher_rubriques($titre_table, $requete) {
-	global $options;
 
         $tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
 	$largeurs = array('12','', '');
@@ -1653,7 +1643,7 @@ function formulaire_large()
 
 // http://doc.spip.org/@debut_droite
 function debut_droite($rubrique="", $return= false) {
-	global $options, $spip_ecran, $spip_display, $spip_lang_left; 
+	global $spip_ecran, $spip_display, $spip_lang_left; 
 
 	$res = '';
 

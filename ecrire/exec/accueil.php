@@ -396,7 +396,7 @@ function etat_base_accueil()
 // http://doc.spip.org/@exec_accueil_dist
 function exec_accueil_dist()
 {
-  global $id_rubrique, $connect_statut, $options, $connect_id_auteur, $spip_display, $connect_id_rubrique;
+  global $id_rubrique, $connect_statut, $connect_id_auteur, $spip_display, $connect_id_rubrique;
 
 	$id_rubrique =  intval($id_rubrique);
  	pipeline('exec_init',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
@@ -426,7 +426,7 @@ function exec_accueil_dist()
 
 	debut_droite();
 
-	if ($GLOBALS['meta']["post_dates"] == "non" AND $connect_statut == '0minirezo' AND $options == 'avancees') {
+	if ($GLOBALS['meta']["post_dates"] == "non" AND $connect_statut == '0minirezo') {
 		echo afficher_articles(_T('info_article_a_paraitre'), array("WHERE" => "statut='publie' AND date>NOW()", 'ORDER BY' => "date"));
 }
 
@@ -452,8 +452,7 @@ function exec_accueil_dist()
  	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'accueil'),'data'=>''));
 
 	// Dernieres modifications d'articles
-	if ($options == 'avancees'
-	AND ($GLOBALS['meta']['articles_versions'] == 'oui')) {
+	if (($GLOBALS['meta']['articles_versions'] == 'oui')) {
 		include_spip('inc/suivi_versions');
 		echo afficher_suivi_versions (0, 0, false, "", true);
 	}

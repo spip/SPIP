@@ -18,13 +18,7 @@ include_spip('inc/documents');
 // http://doc.spip.org/@exec_rubriques_edit_dist
 function exec_rubriques_edit_dist()
 {
-	global
-	  $champs_extra,
-	  $connect_statut,
-	  $id_parent,
-	  $id_rubrique,
-	  $new,
-	  $options;
+	global $champs_extra, $connect_statut, $id_parent, $id_rubrique, $new;
 
 	if ($new == "oui") {
 		$id_rubrique = 0;
@@ -142,7 +136,7 @@ function exec_rubriques_edit_dist()
 	$form .= fin_cadre_couleur(true)
 	. "<br />";
 
-	if ($options == "avancees" OR $descriptif) {
+	if ($descriptif) {
 		$form .= "<b>"._T('texte_descriptif_rapide')."</b><br />"
 		. _T('entree_contenu_rubrique')."<br />"
 		. "<textarea name='descriptif' class='forml' rows='4' cols='40'>"

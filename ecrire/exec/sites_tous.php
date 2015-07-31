@@ -18,7 +18,7 @@ include_spip('inc/sites_voir');
 // http://doc.spip.org/@exec_sites_tous_dist
 function exec_sites_tous_dist()
 {
-	global $connect_statut, $options;
+	global $connect_statut;
 
 pipeline('exec_init',array('args'=>array('exec'=>'sites_tous'),'data'=>''));
 $commencer_page = charger_fonction('commencer_page', 'inc');
@@ -46,7 +46,7 @@ echo pipeline('affiche_milieu',array('args'=>array('exec'=>'sites_tous'),'data'=
 
  echo afficher_sites('<b>' . _T('avis_sites_probleme_syndication') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "syndication='off' AND statut='publie'", 'ORDER BY' => "nom_site"));
 
-if ($options == 'avancees' AND $connect_statut == '0minirezo') {
+if ($connect_statut == '0minirezo') {
   echo afficher_sites('<b>' . _T('info_sites_refuses') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "statut='refuse'", 'ORDER BY' => "nom_site"));
 }
 

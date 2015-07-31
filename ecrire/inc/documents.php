@@ -279,7 +279,7 @@ function est_inclus($id_document) {
 
 // http://doc.spip.org/@afficher_case_document
 function afficher_case_document($id_document, $id, $script, $type, $deplier=false) {
-	global $options, $spip_lang_left, $spip_lang_right;
+	global $spip_lang_right;
 
 	charger_generer_url();
 	$res = spip_query("SELECT docs.*,l.vu FROM spip_documents AS docs JOIN spip_documents_".$type."s AS l ON l.id_document=docs.id_document WHERE l.id_$type="._q($id)." AND l.id_document="._q($id_document));
@@ -315,9 +315,9 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 	//
 	$ret = "";
 	if ($mode == 'document') {
-		if ($options == "avancees") {
-			# 'extension', a ajouter dans la base quand on supprimera spip_types_documents
-			switch ($id_type) {
+
+		# 'extension', a ajouter dans la base quand on supprimera spip_types_documents
+		switch ($id_type) {
 				case 1:
 					$document['extension'] = "jpg";
 					break;
@@ -351,7 +351,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 
 		// Affichage du raccourci <doc...> correspondant
 		$raccourci = '';
-		if ($options == "avancees" AND ($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
+		if (($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
 			$raccourci .= "<b>"._T('info_inclusion_vignette')."</b><br />";
 		}
 		$raccourci .= "<div style='color: 333333'>"
@@ -360,7 +360,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 		. affiche_raccourci_doc('doc', $id_document, 'right')
 		. "</div>\n";
 
-		if ($options == "avancees" AND ($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
+		if (($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
 			$raccourci .= "<div style='padding:2px; ' class='arial1 spip_xx-small'>";
 			$raccourci .= "<b>"._T('info_inclusion_directe')."</b><br />";
 			$raccourci .= "<div style='color: 333333'>"
@@ -382,13 +382,12 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 		$ret .= $legender($id_document, $document, $script, $type, $id, "document$id_document", $deplier);
 
 		$ret .= fin_cadre_enfonce(true);
-		}
-	}
+
+	} else if ($mode == 'vignette') {
 
 	//
 	// Afficher une image inserable dans l'article
 	//
-	else if ($mode == 'vignette') {
 	
 		$ret .= debut_cadre_relief("image-24.gif", true, "", lignes_longues(typo($cadre),20));
 

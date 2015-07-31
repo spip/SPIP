@@ -42,8 +42,6 @@ function forum_envoi(
 		     $url_site,
 		     $script)
 {
-	global     $options, $spip_lang_rtl;
-
 	// Chercher a quoi on repond pour preremplir le titre
 	// et le bouton "retour"
 	if ($id_parent) {
@@ -206,8 +204,6 @@ function forum_envoi_forum_admin($id, $row, $retour) {
 // http://doc.spip.org/@forum_envoi_formulaire
 function forum_envoi_formulaire($id, $retour, $statut, $texte, $titre_page, $nom_site, $url_site)
 {
-	global $options;
-
 	if ($statut == "prive") $logo = "forum-interne-24.gif";
 	else if ($statut == "privadm") $logo = "forum-admin-24.gif";
 	else if ($statut == "privrac") $logo = "forum-interne-24.gif";
@@ -231,7 +227,7 @@ function forum_envoi_formulaire($id, $retour, $statut, $texte, $titre_page, $nom
 	  "<br />\n" .
 	  afficher_textarea_barre($texte, true) .
 	  "<input type='hidden' name='modif_forum' value='oui' />\n" .
-	  (!($statut != 'perso' AND $options == "avancees")
+	  (!($statut != 'perso')
 	   ? ''
 	   : ("<b>"._T('info_lien_hypertexte')."</b><br />\n"
 		. _T('texte_lien_hypertexte')."<br />\n"

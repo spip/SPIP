@@ -21,7 +21,7 @@ function exec_articles_versions_dist()
 {
 	include_spip('inc/suivi_versions');
 
-	global $champs_extra, $chapo, $descriptif, $id_article, $id_diff, $id_version, $les_notes, $nom_site, $options, $ps, $soustitre, $surtitre, $texte, $titre, $url_site, $spip_lang_left, $spip_lang_right;
+	global $champs_extra, $chapo, $descriptif, $id_article, $id_diff, $id_version, $les_notes, $nom_site, $ps, $soustitre, $surtitre, $texte, $titre, $url_site, $spip_lang_left, $spip_lang_right;
 
 
 //
@@ -229,7 +229,6 @@ if ($id_version) {
 	}
 	else {
 		echo "<div  dir='$lang_dir'><b>";
-		$revision_nbsp = ($options == "avancees");	// a regler pour relecture des nbsp dans les articles
 		echo justifier(propre_diff($chapo));
 		echo "</b></div>\n\n";
 	
@@ -242,7 +241,6 @@ if ($id_version) {
 			echo "<div  dir='$lang_dir' class='verdana1 spip_small'>", justifier("<b>"._T('info_ps')."</b> ".propre_diff($ps)), "</div>";
 			echo fin_cadre_enfonce();
 		}
-		$revision_nbsp = false;
 	
 		if ($les_notes) {
 			echo debut_cadre_relief();

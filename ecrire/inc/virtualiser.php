@@ -16,9 +16,9 @@ include_spip('inc/actions');
 // http://doc.spip.org/@inc_virtualiser_dist
 function inc_virtualiser_dist($id_article, $flag, $virtuel, $script, $args)
 {
-	global $spip_lang_right, $options, $connect_statut;
+	global $spip_lang_right, $connect_statut;
 
-	if (!($options == "avancees" && $connect_statut=='0minirezo' && $flag))
+	if (!($connect_statut=='0minirezo' && $flag))
 	  return '';
 
 	$res = "<input type='text' name='virtuel' class='formo spip_xx-small' value='"

@@ -19,8 +19,7 @@ include_spip('inc/config');
 // http://doc.spip.org/@exec_config_contenu_dist
 function exec_config_contenu_dist()
 {
-	global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_right, $spip_lang_left ;
-
+	global $connect_statut, $connect_toutes_rubriques ;
 
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 		echo _T('avis_non_acces_page');

@@ -20,7 +20,7 @@ include_spip('inc/date');
 // http://doc.spip.org/@inc_dater_dist
 function inc_dater_dist($id, $flag, $statut, $type, $script, $date, $date_redac='')
 {
-	global $spip_lang_left, $spip_lang_right, $options;
+	global $spip_lang_left, $spip_lang_right;
 
 	if (preg_match("/([0-9]{4})-([0-9]{2})-([0-9]{2})( ([0-9]{2}):([0-9]{2}))?/", $date_redac, $regs)) {
 		$annee_redac = $regs[1];
@@ -41,7 +41,7 @@ function inc_dater_dist($id, $flag, $statut, $type, $script, $date, $date_redac=
 		$minute = $regs[6];
 	}
 
-  if ($flag AND $options == 'avancees') {
+  if ($flag) {
 
 	if ($statut == 'publie') {
 
@@ -87,7 +87,7 @@ onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
 	}
 
 	if (($type == 'article')
-	AND (($options == 'avancees' AND $GLOBALS['meta']["articles_redac"] != 'non')
+	AND ($GLOBALS['meta']["articles_redac"] != 'non'
 		OR $possedeDateRedac)) {
 		if ($possedeDateRedac)
 			$date_affichee = majuscules(affdate($date_redac))
