@@ -1333,8 +1333,6 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 			include_spip('inc/acces');
 			renouvelle_alea();
 		}
-		// s'il y a un cookie ou PHP_AUTH, initialiser auteur_session
-		verifier_visiteur();
 	}
 
 	// nombre de repertoires depuis la racine
@@ -1345,6 +1343,9 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 			- substr_count($GLOBALS['meta']['adresse_site'],'/') + 1;
 	else
 		$GLOBALS['profondeur_url'] = _DIR_RESTREINT ? 0 : 1;
+
+	// s'il y a un cookie ou PHP_AUTH, initialiser auteur_session
+	if (test_espace_prive())	verifier_visiteur();
 
 	# nombre de pixels maxi pour calcul de la vignette avec gd
 	define('_IMG_GD_MAX_PIXELS', isset($GLOBALS['meta']['max_taille_vignettes'])?$GLOBALS['meta']['max_taille_vignettes']:0); 
