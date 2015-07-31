@@ -26,11 +26,12 @@ function install_etape_3b_dist()
 		? _INSTALL_SERVER_DB
 		: _request('server_db');
 
+	if (!defined('_PASS_LONGUEUR_MINI')) define('_PASS_LONGUEUR_MINI',6);
 	if($login) {
 		$echec = ($pass!=$pass_verif) ?
 		  _T('info_passes_identiques')
-		  : ((strlen($pass)<6) ?
-		     _T('info_passe_trop_court')
+		  : ((strlen($pass)<_PASS_LONGUEUR_MINI) ?
+		     _T('info_passe_trop_court_car_pluriel',array('nb'=>_PASS_LONGUEUR_MINI))
 		     : ((strlen($login)<3) ?
 			_T('info_login_trop_court')
 			: ''));

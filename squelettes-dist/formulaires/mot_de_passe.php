@@ -70,8 +70,8 @@ function formulaires_mot_de_passe_verifier_dist($id_auteur=null, $jeton=null){
 	$erreurs = array();
 	if (!_request('oubli'))
 		$erreurs['oubli'] = _T('info_obligatoire');
-	else if (strlen($p=_request('oubli')) < 6)
-		$erreurs['oubli'] = _T('info_passe_trop_court');
+	else if (strlen($p=_request('oubli')) < _PASS_LONGUEUR_MINI)
+		$erreurs['oubli'] = _T('info_passe_trop_court_car_pluriel',array('nb'=>_PASS_LONGUEUR_MINI));
 	else {
 		if (!is_null($c = _request('oubli_confirm'))){
 			if (!$c)
