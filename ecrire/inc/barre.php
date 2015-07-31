@@ -23,7 +23,7 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 		."\" tabindex='1000'\ntitle=\""
 		. $a
 		."\"" 
-		.(!_DIR_RESTREINT ? '' :  "\nonmouseover=\"helpline('"
+		.(test_espace_prive() ? '' :  "\nonmouseover=\"helpline('"
 		  .addslashes(str_replace('&#39;',"'",$a))
 		  ."',$champhelp)\"\nonmouseout=\"helpline('"
 		  .attribut_html(_T('barre_aide'))
@@ -105,7 +105,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$ret .= "</td>";
 	$col++;
 
-	if (!_DIR_RESTREINT) {
+	if (test_espace_prive()) {
 		$ret .= "\n<td style='text-align:$spip_lang_right;' valign='middle'>";
 		$col++;
 	//	$ret .= "&nbsp;&nbsp;&nbsp;";
@@ -116,7 +116,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$ret .= "</tr>";
 
 	// Sur les forums publics, petite barre d'aide en survol des icones
-	if (_DIR_RESTREINT)
+	if (!test_espace_prive())
 		$ret .= "\n<tr>\n<td colspan='$col'><input disabled='disabled' type='text' class='barre' id='barre_$num_barre' size='45' maxlength='100'\nvalue=\"".attribut_html(_T('barre_aide'))."\" /></td></tr>";
 
 	$ret .= "</table>";

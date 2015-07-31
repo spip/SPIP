@@ -103,7 +103,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	. ($flag == 'ajax' ? ';display:block' : "")
 	. "'";
 
-	if (!_DIR_RESTREINT)
+	if (test_espace_prive())
 		$corps = ajax_action_post("legender", $id_document, $script, "show_docs=$id_document&id_$type=$id#legender-$id_document", $corps, _T('bouton_enregistrer'), $att_bouton, $att_span, "&id_document=$id_document&id=$id&type=$type&ancre=$ancre")
 		  . "<br class='nettoyeur' />";
 	else {
@@ -132,7 +132,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 			$action = redirige_action_auteur('documenter', "$s$id/$type/$id_document", $script, "id_$type=$id&type=$type&s=$s#$ancre");
 	}
 	else {
-		if (!_DIR_RESTREINT)
+		if (test_espace_prive())
 			$action = ajax_action_auteur('documenter', "$s$id/$type/$id_document", $script, "id_$type=$id&type=$type&s=$s#$ancre", array($texte));
 		else{
 			$redirect = str_replace('&amp;','&',$script);

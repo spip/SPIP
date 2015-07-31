@@ -47,7 +47,7 @@ if (defined('_INC_PUBLIC')) {
 			include_once _DIR_RESTREINT.'inc_version.php';
 		}
 		else
-			die('stupid death...');
+			die('inc_version absent ?');
 
 
 	// Est-ce une action ?
@@ -64,6 +64,15 @@ if (defined('_INC_PUBLIC')) {
 		exit;
 	}
 
+/*	// Code experimental pour faire marcher ecrire/ a partir de spip.php
+	// pour tester decommenter et indiquer dans mes_options :
+	// define('_SPIP_ECRIRE_SCRIPT', '../spip.php');
+	else if ($exec = _request('exec')) {
+		include _DIR_RESTREINT.'index.php';
+		exit;
+	}
+*/
+
 	// cas normal, $fond defini dans le fichier d'appel
 	// note : securise anti-injection par inc/utils.php
 	else if (isset($fond)) { }
@@ -73,7 +82,6 @@ if (defined('_INC_PUBLIC')) {
 		$fond = $_GET['page'];
 		// Securite
 		if (strstr($fond, '/')) {
-			$_GET['action'] = $_GET['page']; // pour voir le nom
 			include_spip('inc/minipres');
 			echo minipres();
 			exit;

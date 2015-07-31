@@ -173,7 +173,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	// seuls cas connus : article, breve ou rubrique
 	if ($script==NULL){
 		$script = $type.'s_edit';
-		if (_DIR_RESTREINT)
+		if (!test_espace_prive())
 			$script = parametre_url(self(),"show_docs",'');
 	}
 	$id_document_actif = _request('show_docs');
@@ -234,7 +234,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 		$ret .= afficher_case_document($doc, $id, $script, $type, $deplier);
 	}
 	$ret .= "</div>";
-  if (!_DIR_RESTREINT){
+  if (test_espace_prive()){
 	  $ret .= "<script src='"._DIR_JAVASCRIPT."async_upload.js' type='text/javascript'></script>\n";
 	  $ret .= <<<EOF
 	    <script type='text/javascript'>

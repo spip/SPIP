@@ -64,11 +64,17 @@ function minipres($titre='', $corps="", $onload='')
 {
 	if (!$titre) {
 		http_status(403);
-		$titre = _request(_DIR_RESTREINT ? 'action' : 'exec');
+		if (!$titre = _request('action')
+		AND !$titre = _request('exec')
+		AND !$titre = _request('page'))
+			$titre = '?';
+
+		$titre = htmlspecialchars($titre);
+
 		$titre = ($titre == 'install')
 		  ?  _T('avis_espace_interdit')
 		  : $titre . '&nbsp;: '. _T('info_acces_interdit');
-		$corps = generer_form_ecrire('accueil', '','',_T('ecrire:accueil_site'));
+		$corps = generer_form_ecrire('accueil', '','',_T('public:accueil_site'));
 		spip_log($GLOBALS['auteur_session']['nom'] . " $titre " . $_SERVER['REQUEST_URI']);
 	}
 

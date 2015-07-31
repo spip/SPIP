@@ -102,7 +102,10 @@ function editer_article_texte($texte, $config, $aider)
 	.  "<textarea id='text_area' name='texte'$att_text>"
 	.  $texte
 	. "</textarea>\n"
-	. (_DIR_RESTREINT ? '' : "<script type='text/javascript'><!--\njQuery(hauteurTextarea);\n//--></script>\n");
+	. (test_espace_prive()
+		? "<script type='text/javascript'><!--\njQuery(hauteurTextarea);\n//--></script>\n"
+		: ''
+	);
 }
 
 // http://doc.spip.org/@editer_article_titre

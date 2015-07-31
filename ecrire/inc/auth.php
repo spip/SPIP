@@ -170,6 +170,7 @@ function inc_auth_dist() {
 	// A noter : le premier appel a autoriser() a le bon gout
 	// d'initialiser $GLOBALS['auteur_session']['restreint'],
 	// qui ne figure pas dans le fichier de session
+	include_spip('inc/autoriser');
 	if (!autoriser('ecrire'))
 		return $connect_statut;
 
