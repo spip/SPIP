@@ -47,7 +47,7 @@ function exec_articles_forum_dist()
 	. '<br />'
 	. afficher_forum($res,"", '', $id_article);
 
-	$droit= $connect_statut=='0minirezo' AND acces_rubrique($id_rubrique);
+	$droit= acces_rubrique($id_rubrique);
 
 	if (_request('var_ajaxcharset') AND $droit) return $mess;
 
@@ -55,7 +55,7 @@ function exec_articles_forum_dist()
 
 	debut_page($titre, "naviguer", "articles", "", "", $id_rubrique);
 
-	articles_forum_cadres($id_rubrique, $titre, 'articles', "id_article=$id_article");
+	articles_forum_cadres($id_rubrique, $id_article, $titre, 'articles', "id_article=$id_article");
 
 	if (!$droit) return;
 
@@ -67,7 +67,7 @@ function exec_articles_forum_dist()
 }
 
 // http://doc.spip.org/@articles_forum_cadres
-function articles_forum_cadres($id_rubrique, $titre, $script, $args)
+function articles_forum_cadres($id_rubrique, $id_article, $titre, $script, $args)
 {
 	debut_grand_cadre();
 
@@ -84,6 +84,12 @@ function articles_forum_cadres($id_rubrique, $titre, $script, $args)
 	  _T('info_gauche_suivi_forum'),
 	  aide ("suiviforum"),
 	  "</font></p>";
+
+	echo "<div style='text-align: "
+	  . $GLOBALS['spip_lang_right']
+	  . ";'>"
+	  . bouton_spip_rss('forum', array('id_article' => $id_article))
+	  . "</div>";
 
 	fin_boite_info();
 
