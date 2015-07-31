@@ -363,7 +363,7 @@ function image_graver($img){
 // Transforme une image a palette indexee (256 couleurs max) en "vraies" couleurs RGB
 // http://doc.spip.org/@imagepalettetotruecolor
  function imagepalettetotruecolor(&$img) {
-	if (!imageistruecolor($img) AND function_exists(imagecreatetruecolor)) {
+	if (!imageistruecolor($img) AND function_exists('imagecreatetruecolor')) {
 		$w = imagesx($img);
 		$h = imagesy($img);
 		$img1 = imagecreatetruecolor($w,$h);
