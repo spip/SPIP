@@ -1309,10 +1309,10 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 
 	$compteur_survol ++;
 	if ($spip_display == 1) {
-		$icone .= "\n<table cellpadding=0 cellspacing=0 border=0 $aligner width=$largeur class='$style' onMouseOver=\"changeclass(this,'iconeon');\" onMouseOut=\"changeclass(this,'$style');\" onClick=\"document.location='$lien'\">";
+		$icone .= "\n<table cellpadding=0 cellspacing=0 border=0 $aligner width=$largeur class='$style' onMouseOver=\"changeclass(this,'iconeon');\" onMouseOut=\"changeclass(this,'$style');\">";
 		$icone .= "<tr><td background='' align='center' valign='middle' width=$largeur height=$hauteur>";
 	}
-	$icone .= "\n<table cellpadding=0 class='pointeur' cellspacing=0 border=0 $aligner width=$largeur onMouseOver=\"changesurvol('survol$compteur_survol','bouton36blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','$classe_image');\" onClick=\"document.location='$lien'\">";
+	$icone .= "\n<table cellpadding=0 class='pointeur' cellspacing=0 border=0 $aligner width=$largeur onMouseOver=\"changesurvol('survol$compteur_survol','bouton36blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','$classe_image');\">";
 	if ($spip_display != 1){
 		$icone .= "<tr><td background='' align='center'>";
 		if ($fonction != "rien.gif"){
@@ -1365,10 +1365,10 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "") {
 
 	echo "<div align='left'>";
 	if ($spip_display == 1) {
-		echo "\n<table class=\"$style\" onMouseOver=\"changeclass(this,'icone-h-on');\" onMouseOut=\"changeclass(this,'$style');\" onClick=\"document.location='$lien'\">";
+		echo "\n<table class=\"$style\" onMouseOver=\"changeclass(this,'icone-h-on');\" onMouseOut=\"changeclass(this,'$style');\">";
 		echo "<tr>";
 	} else {
-		echo "\n<table cellpadding='0' class='pointeur' cellspacing='1' border='0' onMouseOver=\"changesurvol('survol$compteur_survol','bouton24blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','$classe_image');\" onClick=\"document.location='$lien'\">";
+		echo "\n<table cellpadding='0' class='pointeur' cellspacing='1' border='0' onMouseOver=\"changesurvol('survol$compteur_survol','bouton24blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','$classe_image');\">";
 		echo "<tr>";
 	}
 
