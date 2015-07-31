@@ -297,6 +297,7 @@ function spip_connect($serveur='') {
 // - la 0.2 fait un include_ecrire('inc_db_mysql.php3')
 // - la version 0.5 indique le serveur comme 5e arg
 
+// http://doc.spip.org/@spip_connect_main
 function spip_connect_main($connexion)
 {
 	if ($GLOBALS['spip_connect_version']< 0.1 AND _DIR_RESTREINT){

@@ -170,6 +170,7 @@ function raler_fichier($fichier)
 // Retourne Vrai si son premier argument a ete cree il y a moins de N secondes
 //
 
+// http://doc.spip.org/@jeune_fichier
 function jeune_fichier($fichier, $n)
 {
 	if (!file_exists($fichier)) return false;
