@@ -28,7 +28,8 @@ function nombre_de_fichiers_repertoire($dir) {
 	if (!$h = @opendir($dir)) return false;
 	$total = 0;
 	while (($fichier = @readdir($h)) !== false)
-		$total++;
+		if ($fichier[0]!='.')
+			$total++;
 	closedir($h);
 	return $total;
 }
