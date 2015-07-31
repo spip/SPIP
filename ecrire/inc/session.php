@@ -137,7 +137,10 @@ function verifier_session($change=false) {
 		$auteur_session['ip_change'] = false;
 		unset($spip_session);
 		$cookie= ajouter_session($auteur_session);
-		spip_setcookie('spip_session', $cookie);
+		preg_match(',^[^/]*//[^/]*(.*)/$,',
+			   url_de_base(),
+			   $r);
+		spip_setcookie('spip_session', $cookie,$r[1]);
 	  }
 	}
 	return 	$auteur_session['id_auteur'];
