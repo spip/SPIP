@@ -1573,7 +1573,8 @@ if ($total > $total_afficher) {
 
 
 
-$query_forum = "SELECT * FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0 ORDER BY date_heure DESC LIMIT $total_afficher OFFSET $debut";
+$query_forum = "SELECT * FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0 ORDER BY date_heure DESC LIMIT " 
+  . (!$debut ?  $total_afficher : "$debut,$total_afficher");
 $result_forum = spip_query($query_forum);
 afficher_forum($result_forum, $forum_retour);
 

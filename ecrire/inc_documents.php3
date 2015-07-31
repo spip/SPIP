@@ -862,7 +862,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 
 	$redirect_url = new Link();
 	if ($type == "rubrique")
-		$redirect_url->addVar('modifier_rubrique', 'oui');
+		$redirect_url->addVar('action', 'calculer_rubriques');
 	$redirect_url = $redirect_url->getUrl();
 
 	// Afficher portfolio
