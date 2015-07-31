@@ -52,6 +52,7 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 	global $spip_lang_right, $spip_lang_left;
 	global $abs_total;
 	global $taille;
+	$visites_abs = 0;
 
 	$result = sql_select("id_rubrique, titre, descriptif", "spip_rubriques", "id_parent=$id_parent",'', '0+titre,titre');
 

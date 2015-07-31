@@ -69,7 +69,7 @@ function forum_envoi(
 	$form =  forum_envoi_formulaire($id, generer_url_ecrire($script, $retour), $statut, $texte, $titre_message, $nom_site, $url_site);
 
 	// afficher le tout
-	forum_envoi_affiche($id, $id_parent, $script, $statut, $titre_message, $row['texte'] . $corps, $id_message, $form, $num, $objet, $retour);
+	forum_envoi_affiche($id, $id_parent, $script, $statut, $titre_message, $row['texte'] . $corps, $row['id_message'], $form, $num, $objet, $retour);
 }
 
 // Chercher a quoi on repond pour l'afficher au debut
