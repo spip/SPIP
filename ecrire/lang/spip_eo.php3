@@ -647,6 +647,7 @@ Dankon pro via partopreno
 'info_mois_courant' => 'Dum la monato:',
 'info_mon_site_spip' => 'Mia SPIP-a teksejo',
 'info_mot_cle_ajoute' => 'La jena &#349;losilvorto estas aldonita al',
+'info_mot_sans_groupe' => '<NEW> (Mots sans groupe...)',
 'info_moteur_recherche' => 'Integrita ser&#265;ilo',
 'info_mots_cles' => 'La &#349;losilvortoj',
 'info_mots_cles_association' => 'Eblas ligi la &#349;losilvortojn de tiu grupo kun:',

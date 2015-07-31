@@ -147,7 +147,7 @@ non &egrave; riconosciuto da tutti i browser.',
 'bouton_telecharger' => 'Upload',
 'bouton_tenter_recuperation' => 'Tentare un ripristino',
 'bouton_test_proxy' => 'Testare il proxy',
-'bouton_valider' => 'Salva',
+'bouton_valider' => 'Salva le modifiche',
 'bouton_vider_cache' => 'Svuota la cache',
 'bouton_voir_message' => 'Anteprima messaggio',
 
@@ -363,12 +363,12 @@ che ti &egrave; stato fornito.  Se non sei registrato, devi',
 'icone_evolution_visites_2' => 'Evoluzione delle visite',
 'icone_forum_administrateur' => 'Forum degli amministratori',
 'icone_forum_interne' => 'Forum interno',
-'icone_forum_suivi' => 'Gestione dei forum',
+'icone_forum_suivi' => 'Monitoraggio dei forum',
 'icone_forums_petitions' => 'Forum e petizioni',
 'icone_informations_personnelles' => 'Dati personali',
 'icone_interface_complet' => 'Interfaccia completa',
 'icone_interface_simple' => 'Interfaccia semplificata',
-'icone_maintenance_site' => 'Manutenzione del sito',
+'icone_maintenance_site' => 'Manutenzione tecnica',
 'icone_messagerie_personnelle' => 'Messaggi personali',
 'icone_modif_groupe_mots' => 'Modifica questo gruppo di parole',
 'icone_modifier_article' => 'Modifica l\'articolo',
@@ -403,7 +403,7 @@ che ti &egrave; stato fornito.  Se non sei registrato, devi',
 'icone_supprimer_message' => 'Elimina il messaggio',
 'icone_supprimer_rubrique' => 'Elimina la rubrica',
 'icone_supprimer_signature' => 'Cancella l\'adesione',
-'icone_tous_articles' => 'I tuoi articoli',
+'icone_tous_articles' => 'Tutti i tuoi articoli',
 'icone_tous_auteur' => 'Tutti gli autori',
 'icone_valider_message' => 'Convalida il messaggio',
 'icone_valider_signature' => 'Conferma l\'adesione',
@@ -415,7 +415,7 @@ che ti &egrave; stato fornito.  Se non sei registrato, devi',
 'info_1_article' => '1 articolo',
 'info_1_breve' => '1 breve',
 'info_1_site' => '1 sito',
-'info_a_suivre' => 'CONTINUA&nbsp;&raquo;',
+'info_a_suivre' => 'PANNELLO DI CONTROLLO&nbsp;&raquo;',
 'info_a_valider' => '[da convalidare]',
 'info_acces_interdit' => 'Accesso vietato',
 'info_acces_refuse' => 'Accesso rifiutato',
@@ -537,9 +537,8 @@ di eliminare la parola chiave
 'info_deplier' => 'Sfoglia',
 'info_derniere_etape' => 'Ultima fase: <B>Finito!',
 'info_derniere_syndication' => 'L\'ultima <em>syndication</em> di questo sito &egrave; stata effettuata il',
-'info_derniers_articles_publies' => 'Gli ultimi articoli pubblicati in linea',
+'info_derniers_articles_publies' => 'I tuoi ultimi articoli pubblicati',
 'info_desactiver_forum_public' => 'Disattivare l\'uso dei forum pubblici.
-
 I forum pubblici potranno essere autorizzati di volta in volta
 sui singoli articoli; saranno invece proibiti nelle rubriche, nelle brevi, ecc',
 'info_desactiver_messagerie_personnelle' => 'Puoi attivare o disattivare il sistema di messaggistica personale su questo sito.',
@@ -750,7 +749,6 @@ avvertiti via email. Desideri utilizzare quest\'opzione?',
 'info_probleme_grave' => 'problema di',
 'info_procedez_par_etape' => 'procedere passo dopo passo',
 'info_procedure_maj_version' => '&egrave; necessario avviare la procedura di aggiornamento per adattare
-
 il database alla nuova versione di SPIP.',
 'info_propose_1' => '[@nom_site_spip@] Propone: @titre@',
 'info_propose_2' => 'Articolo proposto
@@ -1054,13 +1052,7 @@ siti esterni che puntano con un link al tuo?',
 'login_login_pass_incorrect' => '(Login o password errati.)',
 'login_motpasseoublie' => 'password&nbsp;dimenticata?',
 'login_non_securise' => 'Attenzione, questo modulo non &egrave; sicuro.
-
-
-
 Se non vuoi che la tua password possa essere intercettata sulla rete,
-
-
-
 devi attivare Javascript nel tuo browser e',
 'login_nouvelle_tentative' => 'Nuovo tentativo',
 'login_par_ici' => 'Sei registrato... per di qua...',
@@ -1087,69 +1079,69 @@ devi attivare Javascript nel tuo browser e',
 // M
 'menu_aide_articles' => 'Gli articoli',
 'menu_aide_articles_auteurs' => 'Gli autori',
-'menu_aide_articles_chapeau' => 'Capello',
-'menu_aide_articles_choix_rubrique' => 'Scegli la sezione',
+'menu_aide_articles_chapeau' => 'Introduzione',
+'menu_aide_articles_choix_rubrique' => 'Scegliere la rubrica',
 'menu_aide_articles_date' => 'Data',
-'menu_aide_articles_date_anterieure' => 'Data di pubblicazione anteriore',
+'menu_aide_articles_date_anterieure' => 'Data di pubblicazione precedente',
 'menu_aide_articles_descriptif_rapide' => 'Descrizione rapida',
-'menu_aide_articles_en_cours_modification' => 'Articoli in corso di modificazione',
+'menu_aide_articles_en_cours_modification' => 'Articoli in corso di modifica',
 'menu_aide_articles_logos' => 'Logo dell\'articolo',
 'menu_aide_articles_proposer' => 'Proporre il proprio articolo',
 'menu_aide_articles_raccourcis_typo' => 'Le scorciatoie tipografiche',
-'menu_aide_articles_redirection' => 'Ridirezione dell\'articolo',
+'menu_aide_articles_redirection' => 'Reindirizzamento di un articolo',
 'menu_aide_articles_statut' => 'Lo status dell\'articolo',
-'menu_aide_articles_texte' => 'Texte',
-'menu_aide_articles_titres' => 'Titre, surtitre, soustitre',
+'menu_aide_articles_texte' => 'Testo',
+'menu_aide_articles_titres' => 'Titolo, occhiello, sottotitolo',
 'menu_aide_breves' => 'Le brevi',
 'menu_aide_breves_breves' => 'Le brevi',
-'menu_aide_breves_choix' => 'Scegli la sezione',
+'menu_aide_breves_choix' => 'Scegliere la rubrica',
 'menu_aide_breves_lien' => 'Il link ipertestuale',
-'menu_aide_breves_logo' => 'Il logo della breve',
+'menu_aide_breves_logo' => 'Logo della breve',
 'menu_aide_breves_statut' => 'Lo status della breve',
 'menu_aide_images_doc' => 'Immagini e documenti',
-'menu_aide_images_doc_ftp' => 'Installare dei file con FTP',
+'menu_aide_images_doc_ftp' => 'Installare dei file via FTP',
 'menu_aide_images_doc_inserer' => 'Inserire delle immagini',
 'menu_aide_images_doc_joindre' => 'Allegare dei documenti',
-'menu_aide_installation_choix_base' => 'Scelta della vostra base',
-'menu_aide_installation_connexion_mysql' => 'Vostro collegamento MySQL',
-'menu_aide_installation_ftp' => 'Verifica con FTP',
+'menu_aide_installation_choix_base' => 'Scegliere il database',
+'menu_aide_installation_connexion_mysql' => 'La connessione MySQL',
+'menu_aide_installation_ftp' => 'L\'identificazione via FTP',
 'menu_aide_installation_informations_personnelles' => 'Dati personali',
-'menu_aide_installation_probleme_squelette' => 'Un problema di fondo?',
+'menu_aide_installation_probleme_squelette' => 'Un problema nel modello di layout?',
 'menu_aide_installation_reactuliser_droits' => 'Regolare i diritti d\'accesso',
 'menu_aide_installation_spip' => 'Installazione di SPIP',
 'menu_aide_interface_perso' => 'Configurazione dell\'interfaccia personale',
 'menu_aide_interface_perso_cookie' => 'Il cookie di corrispondenza',
-'menu_aide_interface_perso_deconnecter' => 'Esci',
+'menu_aide_interface_perso_deconnecter' => 'Disconnettersi',
 'menu_aide_interface_perso_simplifiee' => 'Interfaccia semplificata / completa',
-'menu_aide_messagerie' => 'La messaggeria interna',
+'menu_aide_messagerie' => 'Il sistema di messaggistica interna',
 'menu_aide_messagerie_calendrier' => 'Il calendario',
-'menu_aide_messagerie_configuration_perso' => 'Configurazione personali della messaggeria',
+'menu_aide_messagerie_configuration_perso' => 'Configurazione personale della messaggistica',
 'menu_aide_messagerie_pense_bete' => 'I memo',
 'menu_aide_messagerie_utilisateurs' => 'I messaggi tra utenti',
 'menu_aide_mots_cles' => 'Le parole chiave',
-'menu_aide_mots_cles_groupes' => 'I gruppi di parole',
+'menu_aide_mots_cles_groupes' => 'I gruppi di parole chiave',
 'menu_aide_mots_cles_mots_cles' => 'Le parole chiave',
-'menu_aide_mots_cles_principe' => 'Principio delle parole chiave',
-'menu_aide_rubriques' => 'Le sezioni',
-'menu_aide_rubriques_choix' => 'Scegli la sezione',
-'menu_aide_rubriques_logo' => 'Logo della sezione',
-'menu_aide_rubriques_structure' => 'Una struttura gerarchizzata',
-'menu_aide_sites' => 'I siti r&eacute;f&eacute;renc&eacute;s',
+'menu_aide_mots_cles_principe' => 'Il principio delle parole chiave',
+'menu_aide_rubriques' => 'Le rubriche',
+'menu_aide_rubriques_choix' => 'Scegliere la rubrica',
+'menu_aide_rubriques_logo' => 'Logo della rubrica',
+'menu_aide_rubriques_structure' => 'Una struttura gerarchica',
+'menu_aide_sites' => 'I siti in repertorio',
 'menu_aide_sites_articles_syndiques' => 'Articoli in syndication',
 'menu_aide_sites_proxy' => 'Utilizzare un proxy',
-'menu_aide_sites_referencer' => 'R&eacute;f&eacute;rencer un sito',
+'menu_aide_sites_referencer' => 'Inserire un sito in repertorio',
 'menu_aide_sites_syndiquer' => 'Siti in syndication',
-'menu_aide_suivi_forum' => 'Seguito dei forum',
+'menu_aide_suivi_forum' => 'Gestire i forum',
 'menu_aide_suivi_forum_articles_postes' => 'Articoli post-datati',
 'menu_aide_suivi_forum_configuration' => 'Configurazione precisa',
 'menu_aide_suivi_forum_contenu_articles' => 'Contenuto degli articoli',
-'menu_aide_suivi_forum_envoi_emails' => 'Invio automatico di mails',
+'menu_aide_suivi_forum_envoi_emails' => 'Invio automatico di email',
 'menu_aide_suivi_forum_fonctionnement' => 'Funzionamento dei forum',
-'menu_aide_suivi_forum_messagerie_interne' => 'Messaggeria interna',
+'menu_aide_suivi_forum_messagerie_interne' => 'Il sistema di messaggistica interna',
 'menu_aide_suivi_forum_moteur_recherche' => 'Motore di ricerca integrato',
-'menu_aide_suivi_forum_nom_adresse' => 'Nome ed indirizzo del tuo sito',
+'menu_aide_suivi_forum_nom_adresse' => 'Nome e indirizzo del sito',
 'menu_aide_suivi_forum_statistiques' => 'Statistiche delle visite',
-'menu_aide_suivi_forum_suivi' => 'Seguito dei forum',
+'menu_aide_suivi_forum_suivi' => 'Gestione dei forum',
 'menu_aide_suivi_forum_systeme_breves' => 'Sistema di brevi',
 'mois_non_connu' => 'sconosciuto',
 
@@ -1169,7 +1161,7 @@ devi attivare Javascript nel tuo browser e',
 'onglet_messages_vide' => 'Messaggi senza testo',
 'onglet_origine_visites' => 'Origine delle visite',
 'onglet_repartition_actuelle' => 'attualmente',
-'onglet_repartition_debut' => 'dal principio',
+'onglet_repartition_debut' => 'dall\'inizio',
 'onglet_repartition_rubrique' => 'Ripartizione per rubriche',
 'onglet_save_restaur_base' => 'Salva/ripristina il database',
 'onglet_vider_cache' => 'Svuota la cache',
@@ -1184,18 +1176,10 @@ devi attivare Javascript nel tuo browser e',
 'pass_erreur_non_valide' => '<b>Errore:</b> questo indirizzo <tt>@email_oubli@</tt> non &egrave; valido!',
 'pass_erreur_probleme_technique' => '<b>Errore:</b> l\'email non pu&ograve; essere inviato a causa di un problema tecnico.',
 'pass_espace_prive_bla' => 'L\'area riservata di questo sito &egrave; accessibile
-
-
 unicamente agli utenti registrati.
-
-
 Una volta iscritto, potrai consultare gli articoli in corso di redazione,
-
-
 proporre nuovi articoli e partecipare a tutti i forum.',
 'pass_forum_bla' => 'Hai chiesto di intervenire su un forum
-
-
 riservato agli utenti registrati.',
 'pass_indiquez_cidessous' => 'Indica qui sotto l\'indirizzo email con il quale ti sei registrato precedentemente.
 Riceverai un email con le istruzioni per recuperare i dati di accesso al sito.',
@@ -1240,14 +1224,10 @@ Potrai quindi inserire una nuova password e riconnetterti all\'area riservata.',
 'texte_admin_tech_01' => 'Questa opzione permette di salvare il contenuto del database in un file che sar&agrave; conservato nella cartella <i>ecrire/data/</i>.
 In fase di backup non dimenticare di recuperare integralmente anche la cartella <i>IMG/</i>, che contiene le immagini utilizzate negli articoli e nelle rubriche.',
 'texte_admin_tech_02' => 'Attenzione: questo salvaggio potr&agrave; essere ripristinato SOLO in un sito installato con la stessa versione di SPIP.
-
 Con l\'intenzione di aggiornare la versione di SPIP, si commette spesso l\'errore di salvare il database,
-
 pensando di doverlo cancellare per poi ripristinarlo ad aggiornamento effettuato...
-
 Per maggiori informazioni consulta <a href="http://www.uzine.net/article1489.html">la documentazione di SPIP</a>.',
 'texte_admin_tech_03' => 'Puoi scegliere di salvare il file in forma compressa, al fine di ridurre
-
 i tempi di trasferimento in rete e di risparmiare dello spazio su disco.',
 'texte_adresse_annuaire_1' => '(Se la rubrica &egrave; installata nella stessa macchina di questo sito, dovrai probabilmente inserire "localhost".)',
 'texte_ajout_auteur' => 'Il seguente autore &egrave; stato aggiunto all\'articolo:',
@@ -1259,182 +1239,207 @@ i tempi di trasferimento in rete e di risparmiare dello spazio su disco.',
 'texte_auteur_messagerie' => 'Se il sistema di messaggistica non &egrave; disattivato, questo sito pu&ograve; costantemente visualizzare la lista dei redattori collegati, permettendo lo scambio di messaggi in tempo reale. Puoi per&ograve; decidere di non comparire in questo elenco (rendendoti quindi &laquo;invisibile&raquo; agli altri utenti).',
 'texte_auteur_messagerie_1' => 'Questo sito permette lo scambio di messaggi e la costituzione di forum di discussione privati tra i partecipanti al sito. Puoi per&ograve; decidere di non partecipare a questi scambi.',
 'texte_auteurs' => 'GLI AUTORI',
-'texte_breves' => 'Le brevi sono dei testi corti e semplici che permette di
-	mettere in linea rapidamente delle informazioni concise, di gestire
-	una rivista, un calendario di eventi...',
-'texte_choix_base_1' => 'Scegliere vostra base:',
-'texte_choix_base_2' => 'Il server MySQL contiene molti database.',
-'texte_choix_base_3' => ' <B>Selezionare</b> di seguito quello che vi &egrave; stato attribuito dal vostro dominio:',
-'texte_choix_langue_defaut' => 'Scegli qui sotto la lingua predefinita del sito e le lingue che saranno proposte ai redattori.',
-'texte_commande_vider_tables_indexation' => ' Utilizzare questo commando al fine di vuotare le tavole d\'incidizzazione utilizzate
-			dal motore di ricerca integrato a SPIP. Questo vi permette
-			di guadagnare dello spazio disco.',
-'texte_comment_lire_tableau' => 'Le rang dell\'articolo,
-		nella classificazione per popularit&agrave;, &egrave; indicato nella
-		margine; la popolarit&agrave; dell\'articolo (una stima del
-		numero di visite quotidiane che ricever&agrave; se il ritmo attuale di
-		consultazione si mantiene) e il numero di visite ricevute
-		dal inizio sono pubblicate nel commento che
-		si vede quando il mouse sopravola il titolo.',
-'texte_compresse_ou_non' => '(il che pu&Uacute; essere compresso o no)',
+'texte_breves' => 'Le brevi sono dei testi corti e semplici che consentono
+di mettere in linea rapidamente delle news di attualit&agrave;,
+di gestire una rassegna stampa o un calendario di eventi, ecc.',
+'texte_choix_base_1' => 'Scegli il database:',
+'texte_choix_base_2' => 'Il server MySQL contiene diversi database.',
+'texte_choix_base_3' => '<B>Seleziona</b> quello che &egrave; stato attribuito al tuo dominio:',
+'texte_choix_langue_defaut' => 'Scegli la lingua predefinita del sito e le lingue che saranno proposte ai redattori.',
+'texte_commande_vider_tables_indexation' => 'Utilizza questo comando per svuotare le tabelle d\'incidizzazione utilizzate
+dal motore di ricerca integrato di SPIP. Ci&ograve; permetter&agrave;
+di guadagnare spazio sul disco.',
+'texte_comment_lire_tableau' => 'Il posizionamento dell\'articolo,
+nella classificazione per popolarit&agrave;, &egrave; indicato a
+margine. La popolarit&agrave; dell\'articolo (una stima del
+numero di visite quotidiane che ricever&agrave; rimanendo costante il ritmo attuale di
+consultazione) e il numero di visite ricevute dall\'inizio,
+sono visualizzati nel commento che appare
+quando si passa con il mouse sopra al titolo.',
+'texte_compresse_ou_non' => '(pu&ograve; essere compresso o meno)',
 'texte_compte_element' => '@count@ elemento',
 'texte_compte_elements' => '@count@ elementi',
-'texte_config_groupe_mots_cles' => 'Vuoi attivare la configurazione avanzata delle parole chiave, indicando per esempio che si pu&ograve; selezionare una parola unica per gruppo, che un gruppo &egrave; importante...?',
-'texte_connexion_mysql' => 'Consultare le informazioni fornite dal vostro dominio: dovete trovarci, se vostro dominio sopporta MySQL, i codici di collegamento al server MySQL.',
-'texte_contenu_article' => '(Contenuto dell\'articolo in alcune parole.)',
-'texte_contenu_articles' => 'Secondo il modello adottata per vostro sito, potete decidere 
-		che alcuni elementi degli articoli non siano utilizzati.
-		Utilizzate l\'elenco qui sotto per indicare quali elementi sono disponibili.',
-'texte_crash_base' => 'Se il vostro database &egrave; andato in stallo, potete tentare una riparazione automatica.',
-'texte_creation_automatique_vignette' => 'La creazione automatica di etichette de pr&eacute;visualisation &egrave; attivata su questo sito. Se installate a partire di questo modulo delle immagini al formato @gd_formats@, saranno accompagnate di un\'etichetta di una taglia massima di @taille_preview@&nbsp;pixels. ',
-'texte_creer_rubrique' => 'Prima di poter scrivere degli articoli,<BR> devi creare una sezione.',
+'texte_config_groupe_mots_cles' => 'Vuoi attivare la configurazione avanzata delle parole chiave,
+indicando per esempio che si pu&ograve; selezionare una parola unica per gruppo o che un gruppo &egrave; importante, ecc.?',
+'texte_connexion_mysql' => 'Consulta le informazioni fornite dal tuo hoster: devi poterci trovare, se il tuo dominio sopporta MySQL, i codici di collegamento al server MySQL.',
+'texte_contenu_article' => '- Contenuto dell\'articolo in poche parole (<em>abstract</em>)',
+'texte_contenu_articles' => 'A seconda del modello di presentazione adottato per il sito, puoi decidere
+che alcuni elementi degli articoli siano utilizzati oppure no.
+Serviti dell\'elenco qui sotto per indicare quali elementi rendere disponibili.',
+'texte_crash_base' => 'Se il database &egrave; stato danneggiato, puoi tentare un ripristino automatico.',
+'texte_creation_automatique_vignette' => 'La creazione automatica di thumbnail di anteprima &egrave; attivata. Se inserisci in questo campo delle immagini in formato @gd_formats@, esse saranno accompagnate da thumbnail con una dimensione massima di @taille_preview@&nbsp;pixels. ',
+'texte_creer_rubrique' => 'Prima di poter scrivere degli articoli,<BR> devi creare una rubrica.',
 'texte_date_creation_article' => 'DATA DI CREAZIONE DELL\'ARTICOLO',
 'texte_date_publication_anterieure' => 'DATA DI PUBBLICAZIONE ANTERIORE',
-'texte_date_publication_anterieure_nonaffichee' => 'Non pubblicare la data di pubblicazione anteriore.',
+'texte_date_publication_anterieure_nonaffichee' => 'Non visualizzare la data di pubblicazione anteriore.',
 'texte_date_publication_article' => 'DATA DI PUBBLICAZIONE ON LINE:',
 'texte_demander_blocage_priori' => 'I prossimi link in
-				provenienza di questo sito saranno bloccati a priori.',
-'texte_descriptif_petition' => 'Descrizione del sondaggio',
+provenienza da questo sito saranno bloccati a priori.',
+'texte_descriptif_petition' => 'Descrizione della petizione',
 'texte_descriptif_rapide' => 'Descrizione rapida',
-'texte_documents_associes' => 'I seguenti documenti sono associati all\'articolo, ma non ci sono stati inseriti direttamente.
-A seconda delle impostazioni di pubblicazione del sito, potranno essere disponibili sotto forma di documenti allegati.',
-'texte_documents_joints' => 'Potete autorizzare l\'aggiunta di documenti (file di Office, immagini, multimedia, etc.) agli articoli e/o alle sezioni. Questi file possono poi essere rinviati nell\'articolo, o pubblicati in un modo separato.<p>',
-'texte_documents_joints_2' => 'Questo regolamento non impedisce l\'inserimento di immagini direttamente negli articoli.',
-'texte_effacer_base' => 'Cancellare il database SPIP',
-'texte_effacer_donnees_indexation' => 'Cancellare i dati d\'indicizzazione',
-'texte_en_cours_validation' => 'Gli articoli e brevi qui sotto sono proposti per la pubblicazione. Non esitare ad esprimere il tuo punto di vista grazie ai forum che trovi in coda.',
+'texte_documents_associes' => 'I seguenti documenti sono associati all\'articolo,
+ma non vi sono stati inseriti direttamente.
+A seconda delle impostazioni di pubblicazione del sito,
+potranno essere disponibili sotto forma di documenti allegati.',
+'texte_documents_joints' => 'Puoi autorizzare l\'aggiunta di documenti (file di testo, fogli elettronici, immagini, file multimediali, ecc.) agli articoli e/o alle rubriche. Questi file possono poi essere richiamati dalla pagina dell\'articolo, o pubblicati separatamente.<p>',
+'texte_documents_joints_2' => 'Questa impostazione non impedisce l\'inserimento diretto di immagini negli articoli.',
+'texte_effacer_base' => 'Cancella il database SPIP',
+'texte_effacer_donnees_indexation' => 'Cancella i dati d\'indicizzazione',
+'texte_en_cours_validation' => 'Gli articoli e le brevi qui sotto sono proposti per la pubblicazione. Non esitare ad esprimere il tuo punto di vista grazie ai forum che trovi in coda.',
 'texte_enrichir_mise_a_jour' => 'Puoi arricchire la formattazione del testo utilizzando le &laquo;&nbsp;scorciatoie tipografiche&nbsp;&raquo;.',
-'texte_erreur_mise_niveau_base' => 'Errore di database durante l\'aggiornamento. L\'immagine <B>@fichier@</B> non &egrave; passata (articolo @id_article@).<p>
-Segnare questo riferimento, provare di nuovo l\'aggiornamento, e verificare che le immagini si vedano
-						ancora negli articoli.',
+'texte_erreur_mise_niveau_base' => 'Errore nel database durante l\'aggiornamento.
+L\'immagine <B>@fichier@</B> non &egrave; passata (articolo @id_article@).
+Prendi nota di questo riferimento, ritenta l\'aggiornamento,
+e verifica che le immagini si vedano ancora
+negli articoli.',
 'texte_fichier_authent' => '<b>SPIP deve creare i file speciali<tt>.htpasswd</tt>
-		et <tt>.htpasswd-admin</tt> nella cartella<tt>ecrire/data/</tt>?</b><p>
-		Questi file possono servire a ristringere l\'accesso agli autori
-		e amministratori in altri posti del sito
-		(programma esterno di statistiche , per esempio).<p>
-		Se non avete l\'utilit&agrave;, potete lasciare questa opzione
-		al suo valore predefinito(nessuna creazione di file).',
-'texte_inc_auth_1' => 'Siete identificati con il
-		login <B>@auth_login@</B>, ma non esiste/pi&ugrave; nella base. 
-		Provare a ',
-'texte_inc_auth_2' => 'collegarsi di nuovo',
-'texte_inc_auth_3' => ', dopo aver lasciato poi
-		red&eacute;marr&eacute; votre navigateur.',
-'texte_inc_config' => 'Le modifiche effettuate in queste pagine influenzano notevolmente il funzionamento del sito. Non intervenire finch&eacute; non conosci bene i meccanismi del sistema SPIP. <P align="justify"><B>In generale, si consiglia di lasciare al webmaster la configurazione delle opzioni qui presenti.</B>',
+e <tt>.htpasswd-admin</tt> nella cartella<tt>ecrire/data/</tt>?</b><p>
+Questi file possono servire a ristringere l\'accesso agli autori
+e agli amministratori in altre aree del sito
+(per esempio, per un programma esterno di statistiche).<p>
+Se non ne hai necessit&agrave;, puoi lasciare questa opzione
+al suo valore predefinito (nessuna creazione di file).',
+'texte_inc_auth_1' => 'Sei identificato con il
+login <B>@auth_login@</B>, ma non esiste pi&ugrave; nel database. 
+Prova a ',
+'texte_inc_auth_2' => 'collegarti nuovamente',
+'texte_inc_auth_3' => ', dopo aver eventualmente effettuato un logout e 
+riavviato il tuo browser.',
+'texte_inc_config' => 'Le modifiche effettuate in queste pagine influenzano notevolmente il
+funzionamento del sito. Non intervenire finch&eacute; non conosci bene i meccanismi del sistema SPIP. <P align="justify"><B>In generale, si consiglia di lasciare sempre al webmaster la configurazione delle opzioni qui presenti.</B>',
 'texte_inc_meta_1' => 'In quanto amministratore del sito, ',
-'texte_inc_meta_2' => 'verificare i diritti di scritura',
-'texte_inc_meta_3' => ' nella cartella ecrire/ ',
-'texte_informations_personnelles_1' => 'Il sistema vi crea adesso un accesso personalizzato al sito.',
-'texte_informations_personnelles_2' => '(Nota: se si tratta di una reinstallazione, e che il vostro accesso funziona ancora, potete ',
+'texte_inc_meta_2' => 'verifica i diritti di scritura',
+'texte_inc_meta_3' => 'nella cartella ecrire/ ',
+'texte_informations_personnelles_1' => 'Il sistema creer&agrave; un tuo accesso personalizzato al sito.',
+'texte_informations_personnelles_2' => '(Nota: se si tratta di una reinstallazione, e il tuo accesso funziona ancora, puoi ',
 'texte_introductif_article' => '(Testo introduttivo dell\'articolo.)',
-'texte_jeu_caractere' => 'Quest\'opzione &egrave; utile se il tuo sito verr&agrave; visualizzato con alfabeti diversi dell\'alfabeto romano (o &laquo;&nbsp;occidentale&nbsp;&raquo;) e i suoi derivati.
+'texte_jeu_caractere' => 'Quest\'opzione &egrave; utile se il tuo sito dovr&agrave; essere visualizzato con alfabeti
+diversi dall\'alfabeto latino (o &laquo;&nbsp;occidentale&nbsp;&raquo;) e dai suoi derivati.
 In questo caso, bisogna cambiare l\'impostazione predefinita per utilizzare il
 set di caratteri appropriato. Non dimenticare di adattare
-il sito pubblico di conseguenza (scrivendo il <tt>#CHARSET</tt>).',
-'texte_jeu_caractere_2' => 'Questo regolamento non ha nessun effetto retroattivo. Quindi, i testi gi&agrave; entrati possono essere pubblicati
-	in un modo sbagliato in seguito di una modifica del regolamento. In ogni caso, potrete senza danni tornare al regolamento precedente.',
-'texte_lien_hypertexte' => '(Se il tuo messaggio si riferisce ad un articolo pubblicato sul Web, o a una pagina che fornisce pi&ugrave; informazioni, indica qui sotto il titolo della pagina e il suo indirizzo URL.)',
-'texte_liens_sites_syndiques' => 'I link usciti dai siti in syndication possono essere bloccati a priori ; il regolamento
-		qui sotto indica i criteri predefinito dei siti syndiqu&eacute;s dopo la loro creazione. &raquo; &Egrave; poi comunque possibile 
-		sbloccare ogni link in modo individuale, o di scegliere, sito per sito, di sbloccare i link futuri di qualsiasi sito.',
-'texte_liens_syndication' => 'I prossimi link in provenienza di questo sito saranno affich&eacute;s subito
-				sul sito pubblico.',
-'texte_login_ldap_1' => '(Lasciare vuoto per un accesso anonimo, o entrare il percorso completo, per esempio &laquo;<tt>uid=dupont, o=users, dc=mio-spazio, dc=com</tt>&nbsp;&raquo;.)',
-'texte_login_precaution' => 'Attenzione! Questo &egrave; il login con il quale sei collegato attualmente.
-Occhio a quello che fai...',
-'texte_message_edit' => 'Attenzione: Questo messaggio pu&Uacute; essere modificato da tutti gli amministratori del sito, ed &egrave; visibile da tutti i redattori. Utilizzare gli annunci solo per esporre degli eventi importanti della vita del sito.',
+il sito pubblico di conseguenza (scrivendo il segnaposto <tt>#CHARSET</tt>).',
+'texte_jeu_caractere_2' => 'Questa impostazione non ha alcun effetto retroattivo.
+Modificando il valore del set di caratteri,
+i testi gi&agrave; inseriti rischiano quindi di venire visualizzati in modo errato.
+Sar&agrave; comunque possibile tornare all\'impostazione precedente senza alcun danno.',
+'texte_lien_hypertexte' => '(Se il tuo messaggio si riferisce ad un articolo pubblicato sul Web, o ad una pagina che fornisce informazioni supplementari, indica il titolo della pagina e il suo indirizzo URL.)',
+'texte_liens_sites_syndiques' => 'I link provenienti dai siti in syndication
+possono essere bloccati a priori; l\'impostazione
+qui sotto indica i criteri predefiniti dei siti in syndication.
+Sar&agrave; comunque possibile sbloccare singolarmente ogni link,
+o scegliere di bloccare i link di ogni singolo sito.',
+'texte_liens_syndication' => 'I prossimi link provenienti da questo sito saranno visualizzati immediatamente
+sul sito pubblico.',
+'texte_login_ldap_1' => '(Lascia vuoto per un accesso anonimo, o inserisci il percorso completo, per esempio &laquo;<tt>uid=rossi, ou=users, dc=mio-dominio, dc=com</tt>&nbsp;&raquo;.)',
+'texte_login_precaution' => 'Attenzione! Questo &egrave; l\'ID con il quale sei attualmente collegato.
+Utilizza questo modulo con cognizione di causa...',
+'texte_message_edit' => 'Attenzione: questo messaggio pu&ograve; essere modificato da tutti gli amministratori del sito, ed &egrave; visibile da tutti i redattori. Utilizza gli annunci solo per esporre degli eventi importanti per la vita del sito.',
 'texte_messages_publics' => 'Messaggi pubblici dell\'articolo:',
-'texte_mise_a_niveau_base_1' => 'Avete aggiornato i file SPIP.
-	Bisogna adesso aggiornare il database del sito.',
+'texte_mise_a_niveau_base_1' => 'Hai aggiornato i file SPIP.
+Adesso &egrave; necessario aggiornare il database.',
 'texte_modifier_article' => 'Modifica l\'articolo:',
-'texte_moteur_recherche_active' => '<b>Il motore di ricerca &egrave; attivato.</b> Utilizzare questo commando 
-se volete procedere a una reindicizzazione rapida (dopo restauro
-della salvaguardia per esempio). Notare che i documenti modificati in un modo normale (dall\'interfaccia SPIP) sono automaticamente
-indicizzati: questo commando, quindi, &egrave; utile solo eccezionalmente',
+'texte_moteur_recherche_active' => '<b>Il motore di ricerca &egrave; attivato.</b> Utilizza questo commando
+se vuoi procedere a una reindicizzazione rapida (dopo il ripristino
+di un salvataggio, per esempio). Nota bene: i documenti modificati in modo standard (con l\'interfaccia di SPIP) sono automaticamente
+reindicizzati. Questo commando, quindi, &egrave; utile solo in casi eccezionali.',
 'texte_moteur_recherche_non_active' => 'Il motore di ricerca non &egrave; attivato.',
-'texte_mots_cles' => 'Le parole chiave permettono di creare dei link tematici tra gli articoli indipendentemente dal posto che occupano nella sezione di contenuto. 
-Si pu&ograve; quindi arricchire la navigazione del sito, o utilizzare queste propriet&agrave; per personalizzare la presentazione degli articoli nei vostri modelli di layout.',
-'texte_mots_cles_dans_forum' => 'Vuoi abilitare l\'utilizzazione delle parole chiave, da selezionare dai visitatori, nei forum dei siti pubblici? (Attenzione: questa opzione &egrave; relativamente complessa da utilizzare in modo corretto.)',
-'texte_non_compresse' => '<i>non compresso</i> (vostro server non sopporta questa funzionalit&agrave;)',
-'texte_non_fonction_referencement' => 'Potete non utilizzare questa funzione automatica, e indicare direttamente gli elementi riguardando il sito...',
+'texte_mots_cles' => 'Le parole chiave permettono di creare dei link tematici tra gli articoli
+indipendentemente dal posto che occupano nelle diverse rubriche.
+Si pu&ograve; quindi arricchire la navigazione del sito, o utilizzare queste propriet&agrave;
+per personalizzare la presentazione degli articoli nei tuoi modelli di layout.',
+'texte_mots_cles_dans_forum' => 'Vuoi consentire ai visitatori di selezionare delle parole chiave nei forum pubblici? (Attenzione: questa opzione &egrave; relativamente complessa da gestire in modo corretto.)',
+'texte_non_compresse' => '<i>non compresso</i> (il tuo server non supporta questa funzionalit&agrave;)',
+'texte_non_fonction_referencement' => 'Puoi non utilizzare questa funzione automatica, e indicare direttamente gli elementi riguardanti il sito...',
 'texte_nouveau_message' => 'Nuovo messaggio',
 'texte_nouveau_mot' => 'Nuova parola',
-'texte_nouvelle_version_spip_1' => 'Avete installato una nuova versione si SPIP.',
-'texte_nouvelle_version_spip_2' => 'Questa nuova versione necessita un aggiornamento pi&ugrave; completo che di solito. Se siete webmaster del sito, cancellare il file <tt>inc_connect.php3</tt> del repertorio <tt>ecrire</tt> e riprendere l\'installazione al fine di aggiornare i vostri parametri di collegamento al database. (NB.: se avete dimenticato i parametri di collegamento, guardare il file <tt>inc_connect.php3</tt> prima di cancellarlo...)',
-'texte_operation_echec' => 'Tornare alla pagina precedente, selezionare un\'altra base o crearne una nuova . Verificare le informazioni fornite dal vostro dominio.',
+'texte_nouvelle_version_spip_1' => 'Hai installato una nuova versione di SPIP.',
+'texte_nouvelle_version_spip_2' => 'Questa nuova versione necessita un aggiornamento pi&ugrave; radicale del solito. Se sei il webmaster del sito, cancella il file <tt>inc_connect.php3</tt> nella cartella <tt>ecrire</tt> e riprendi l\'installazione al fine di aggiornare i parametri di connessione al database. (NB: se hai dimenticato questi parametri, rileggi il file <tt>inc_connect.php3</tt> prima di cancellarlo...)',
+'texte_operation_echec' => 'Torna alla pagina precedente, seleziona un altro database o creane uno nuovo. Verifica le informazioni fornite dal tuo hoster.',
 'texte_plus_trois_car' => 'pi&ugrave; di tre caratteri',
-'texte_plusieurs_articles' => 'Numerosi autori trovati per "@cherche_auteur@":',
-'texte_port_annuaire' => '(Il valore indicato predefinitoconviene generalmente.)',
-'texte_proposer_publication' => 'Quando il vostro articolo &egrave; finito,<br> potete proporre la sua pubblicazione.',
-'texte_proxy' => 'In alcuni casi (intranet, reti protette...), pu&ograve; essere necessario utilizzare un <I>proxy HTTP</i> per raggiungere i siti in syndication.
-In caso contrario indicare qui l\'indirizzo nella forma <tt><html>http://proxy:8080</html></tt>. Altrimenti questa casella va lasciata vuota.',
-'texte_publication_articles_post_dates' => 'Come si deve comportare SPIP quando gli articoli hanno una data di pubblicazione fissata nel futuro?',
-'texte_rappel_selection_champs' => '[Non dimenticare di impostare correttamente questo campo].',
-'texte_recalcul_page' => 'Se volete calcolare di nuovo una sola pagina, passare par lo spazio pubblico e utilizzare i pulsante &laquo;calcolare di nuovo&raquo;.',
-'texte_recapitiule_liste_documents' => 'Questa pagina mostra l\'elenco dei documenti che hai assegnato alle sezioni. Per modificare le informazioni di ogni documento, segui il link verso la sezione di pertinenza.',
-'texte_recuperer_base' => 'Riparare il database',
-'texte_reference_mais_redirige' => 'articolo r&eacute;f&eacute;renc&eacute; nel vostro sito SPIP, ma ridirito verso un altro URL.',
-'texte_referencement_automatique' => '<b>R&eacute;f&eacute;rencement automatizzato di un sito</b><br> Potete r&eacute;f&eacute;rencer velocemente un sito Web indicando qui sotto l\'indirizzo URL desiderato, o l\'indirizzo del suo file backend. SPIP recuperer&agrave; automaticamente le informazioni riguardando questo sito(titolo, descrizione...).',
-'texte_requetes_echouent' => '<B>Quando alcune richieste MySQL &eacute;chouent
-		syst&eacute;matiquement e senza motivi ovvi, &egrave; possibile
-		che sia per colpa del database.</B><p>
-		MySQL dispone di una facolt&agrave; di riparazione delle sue tavole
-		Quando sono state danneggiate per sbaglio.
-		Potete tentare questa riparazione; in
-		Caso di fallimento, conservare una copia della pubblicazione, che contiene
-		forse delle indicazioni di quello che non va...<p>
-		Se il problema persiste, contattare il vostro
-		dominio.<p>',
-'texte_restaurer_base' => 'Restaurare il contenuto di una salvaguardia della base',
-'texte_restaurer_sauvegarde' => 'Quest\'opzione vi permette di restaurare una salvaguardia effettuata prima della base.
-Per questo, il file che contiene la salvaguardia deve essere stato messo nella cartella
-<i>ecrire/data/</i>.
-State attenti con questa funzionalit&agrave;: <b>le modifiche, perdite eventuali, sono
-irreversibili.</b>',
-'texte_sauvegarde' => 'Salvaguardare il contenuto della base',
-'texte_sauvegarde_base' => 'Salvaguardare la base',
-'texte_sauvegarde_compressee' => 'La salvaguardia sar&agrave; fatta nel file non compresso <b>ecrire/data/dump.xml</b>.',
-'texte_selection_langue_principale' => 'Puoi selezionare qui sotto la  &laquo;&nbsp;lingua predefinita&nbsp;&raquo; del sito. Questa scelta non obbliga - fortunatamente! - a scrivere gli articoli nella stessa lingua, ma permette di determinare:
-<ul><li> il formato di default della data sul sito pubblico;</li>
-<li> la tipologia di motore tipografico che SPIP deve utilizzare per la resa del testo</li>
-<li> la lingua utilizzata nei moduli del sito pubblico;</li>
-<li> la lingua di default nello spazio privato di amministrazione.</li></ul>',
-'texte_signification' => 'Le barre rosse rappresentano le entrate accumulate (totale delle sottosezioni), le barre verde il numero di visite per ogni sezione.',
+'texte_plusieurs_articles' => 'Diversi autori trovati per "@cherche_auteur@":',
+'texte_port_annuaire' => '(Il valore predefinito &egrave; in genere quello adatto.)',
+'texte_proposer_publication' => 'Quando l\'articolo &egrave; completo,<br> puoi proporne la pubblicazione.',
+'texte_proxy' => 'In alcuni casi (intranet, reti protette...),
+pu&ograve; essere necessario utilizzare un <I>proxy HTTP</i> per accedere ai siti in syndication.
+In questo caso, va indicato l\'indirizzo del server nella forma
+<tt><html>http://proxy:8080</html></tt>. Altrimenti
+questa casella va lasciata vuota.',
+'texte_publication_articles_post_dates' => 'Come si deve comportare SPIP quando gli articoli hanno
+una data di pubblicazione impostata nel futuro?',
+'texte_rappel_selection_champs' => '[Non dimenticare di impostare correttamente questo campo]',
+'texte_recalcul_page' => 'Se vuoi rigenerare
+una sola pagina, utilizza piuttosto lo spazio pubblico e clicca sul pulsante &laquo;rigenera&raquo;.',
+'texte_recapitiule_liste_documents' => 'Questa pagina mostra l\'elenco dei documenti che hai allegato alle rubriche. Per modificare le informazioni di un documento, segui il link verso la relativa pagina di rubrica.',
+'texte_recuperer_base' => 'Ripara il database',
+'texte_reference_mais_redirige' => 'articolo catalogato nel tuo sito SPIP, ma con reindirizzamento verso un altro URL.',
+'texte_referencement_automatique' => '<b>Inserimento automatizzato in repertorio</b><br>Se si desidera, &egrave; possibile repertoriare rapidamente un sito Web indicandone qui sotto l\'indirizzo URL, o l\'indirizzo del file di backend. SPIP recuperer&agrave; automaticamente le informazioni riguardanti il sito (titolo, descrizione...).',
+'texte_requetes_echouent' => '<B>Quando alcune query MySQL falliscono
+ripetutamente e senza un chiaro motivo, &egrave; possibile
+che sia per colpa del database stesso.</B><p>
+MySQL dispone di una funzione di ripristino delle tabelle
+danneggiate inavvertitamente. Puoi tentare il ripristino;
+in caso di errore, conserva una copia del messaggio visualizzato,
+contenente forse delle informazioni preziose...<p>
+Se il problema persiste, contatta il webmaster.<p>',
+'texte_restaurer_base' => 'Ripristina un backup del database',
+'texte_restaurer_sauvegarde' => 'Quest\'opzione permette il ripristino di un backup del database.
+Il file di salvataggio deve trovarsi nella cartella <i>ecrire/data/</i>.
+Attenzione: <b>le modifiche o la perdita eventuale di dati, sono irreversibili.</b>',
+'texte_sauvegarde' => 'Salva il contenuto del database',
+'texte_sauvegarde_base' => 'Salva il database',
+'texte_sauvegarde_compressee' => 'Il salvataggio avverr&agrave; nel file non compresso <b>ecrire/data/dump.xml</b>.',
+'texte_selection_langue_principale' => 'Puoi selezionare qui sotto la &laquo;lingua predefinita&raquo; del sito. Questa scelta non obbliga - fortunatamente! - a scrivere gli articoli nella stessa lingua, ma permette di determinare:
+<ul><li> il formato di default delle date sul sito pubblico;</li>
+<li> la tipologia di motore tipografico che SPIP deve utilizzare per la resa del testo;</li>
+<li> la lingua utilizzata nelle finestre di dialogo del sito pubblico;</li>
+<li> la lingua di default nell\'area riservata all\'amministrazione.</li></ul>',
+'texte_signification' => 'Le barre rosse rappresentano le entrate accumulate (per il totale delle sottorubriche), le barre verdi il numero di visite per ogni rubrica.',
 'texte_sous_titre' => 'Sottotitolo',
 'texte_statistiques_visites' => '(barre scure:  domenica / curve scure: evoluzione della media)',
-'texte_statut_attente_validation' => 'in attesa di validazione',
+'texte_statut_attente_validation' => 'in attesa di convalida',
 'texte_statut_en_cours_redaction' => 'in corso di redazione',
-'texte_statut_poubelle' => 'al cestino',
-'texte_statut_propose_evaluation' => 'proposto alla valutazione',
+'texte_statut_poubelle' => 'nel cestino',
+'texte_statut_propose_evaluation' => 'proposto per una valutazione',
 'texte_statut_publie' => 'pubblicato on line',
 'texte_statut_publies' => 'pubblicato on line',
 'texte_statut_refuse' => 'rifiutato',
 'texte_statut_refuses' => 'rifiutati',
-'texte_suppression_fichiers' => 'Utilizza questo commando per cancellare tutti i file presenti nella cache di SPIP. Ci&ograve; permette ad esempio di forzare un nuovo calcolo di tutte le pagine se hai fatto delle modifiche importanti di grafica o di struttura del sito.',
-'texte_sur_titre' => 'Soprattitolo',
-'texte_syndication' => 'E possibile recuperare automaticamente, quando un sito Web lo permette, 
-		l\'elenco delle sue novit&agrave;. Per questo, dovete attivare la syndication. 
-		<blockquote><i>Alcuni domini disattivano questa funzionalit&agrave;; 
-		in questo caso, non potrete utilizzare la syndication di contenuto
-	dal vostro sito.</i></blockquote>',
-'texte_table_ok' => ': questa tavola &egrave; OK.',
-'texte_tables_indexation_vides' => ' Le tavole d\'indicizzazione del motore sono vuote.',
-'texte_tentative_recuperation' => 'Tentativo di riparazione',
-'texte_tenter_reparation' => 'Tenta la riparazione del database',
-'texte_test_proxy' => 'Per fare una prova di questo proxy, indicare qui l\'indirizzo di un sito Web da provare.',
+'texte_suppression_fichiers' => 'Utilizza questo commando per cancellare tutti i file presenti nella
+cache di SPIP. Ci&ograve; permette ad esempio di forzare la rigenerazione di tutte le pagine se hai fatto delle importanti modifiche di grafica o di struttura del sito.',
+'texte_sur_titre' => 'Occhiello',
+'texte_syndication' => 'Quando un sito Web lo permette, &egrave; possibile recuperarne automaticamente
+la lista delle novit&agrave;. A tal fine &egrave; necessario attivare la syndication.
+<blockquote><i>Alcuni webmaster disattivano questa funzionalit&agrave;; 
+in questo caso, non potrai utilizzare la syndication di contenuto
+sul tuo sito.</i></blockquote>',
+'texte_table_ok' => ': questa tabella &egrave; OK.',
+'texte_tables_indexation_vides' => 'Le tabelle d\'indicizzazione del motore sono vuote.',
+'texte_tentative_recuperation' => 'Tentativo di ripristino',
+'texte_tenter_reparation' => 'Tenta un ripristino del database',
+'texte_test_proxy' => 'Per fare una prova di questo proxy, indicare qui l\'indirizzo
+di un sito Web da testare.',
 'texte_titre_02' => 'Titolo:',
 'texte_titre_obligatoire' => '<B>Titolo</B> [Obbligatorio]',
 'texte_travail_article' => '@nom_auteur_modif@ ha lavorato su questo articolo @date_diff@ minuti fa',
-'texte_travail_collaboratif' => 'Se di frequente diversi autori lavorano sullo stesso articolo, il sistema pu&ograve; segnalare gli articoli &laquo;&nbsp;aperti&nbsp;&raquo; di recente al fine di evitare modifiche simultanee.
-Questa opzione &egrave; disattivata di default per evitare di generare messaggi d\'avvertimento intempestivi.',
-'texte_trop_resultats_auteurs' => 'Troppi risultati per "@cherche_auteur@" ; raffina la ricerca.',
-'texte_unpack' => 'Scarica l\'ultima versione',
-'texte_utilisation_moteur_syndiques' => 'Quando utilizzi il motore di ricerca integrato a SPIP, puoi effettuare le ricerche sui siti e gli articoli in syndication in due modalit&agrave; diverse.
-<br><img src=\'puce.gif\'> La pi&ugrave; semplice consiste nel ricercare solo nei titoli e le descrizioni degli articoli.
-<br><img src=\'puce.gif\'> Un altro metodo, molto pi&ugrave; potente, consente a SPIP di ricercare anche nel testo degli articoli in syndication&nbsp;. Se inserisci la referenza ad un sito, SPIP effettua la ricerca anche nel testo del sito stesso.',
-'texte_utilisation_moteur_syndiques_2' => 'Questo metodo obbliga SPIP a visitare regolarmente i siti in syndication; in tal modo si pu&ograve; verificare un leggero rallentamento del proprio sito.',
+'texte_travail_collaboratif' => 'Se di frequente diversi autori lavorano sullo stesso articolo,
+il sistema pu&ograve; segnalare gli articoli &laquo;aperti&raquo;
+di recente al fine di evitare modifiche simultanee.
+Questa opzione &egrave; disattivata di default
+per evitare di generare messaggi d\'avvertimento intempestivi.',
+'texte_trop_resultats_auteurs' => 'Troppi risultati per "@cherche_auteur@"; restringi la ricerca.',
+'texte_unpack' => 'scarica l\'ultima versione',
+'texte_utilisation_moteur_syndiques' => 'Quando utilizzi il motore di ricerca integrato di SPIP,
+puoi effettuare le ricerche sui siti e gli articoli in syndication
+in due modalit&agrave; diverse.<br><img src=\'puce.gif\'> La pi&ugrave; semplice
+consiste nel ricercare solo nei titoli e nelle descrizioni degli articoli.<br><img src=\'puce.gif\'>
+Un altro metodo, molto pi&ugrave; potente, consente
+a SPIP di ricercare anche nel testo degli articoli in syndication.
+Se inserisci un sito nel repertorio, SPIP effettuer&agrave; la ricerca anche nel testo del sito stesso.',
+'texte_utilisation_moteur_syndiques_2' => 'Questo metodo obbliga SPIP a visitare
+regolarmente i siti in repertorio;
+in tal caso si pu&ograve; verificare un leggero rallentamento del tuo sito.',
 'texte_vide' => 'vuoto',
-'texte_vider_cache' => 'Vuota la cache',
+'texte_vider_cache' => 'Svuota la cache',
 'titre_admin_effacer' => 'Manutenzione tecnica',
 'titre_admin_tech' => 'Manutenzione tecnica',
 'titre_admin_vider' => 'Manutenzione tecnica',
