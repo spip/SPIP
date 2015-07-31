@@ -24,7 +24,8 @@ define('_SPIP_SELECT_RUBRIQUES', 20); /* mettre 100000 pour desactiver ajax */
 // $idem : en mode rubrique = la rubrique soi-meme
 // http://doc.spip.org/@inc_chercher_rubrique_dist
 function inc_chercher_rubrique_dist ($id_rubrique, $type, $restreint, $idem=0, $do='aff') {
-	if (sql_countsel('spip_rubriques')<1)
+	$n = sql_countsel('spip_rubriques');
+	if ($n < 1)
 		return '';
 
 	// Mode sans Ajax :
@@ -32,7 +33,7 @@ function inc_chercher_rubrique_dist ($id_rubrique, $type, $restreint, $idem=0, $
 	// - soit parce qu'il y a peu de rubriques
 	if (_SPIP_AJAX < 1
 	OR $type == 'breve'
-	OR sql_countsel('spip_rubriques') < _SPIP_SELECT_RUBRIQUES)
+	OR $n < _SPIP_SELECT_RUBRIQUES)
 		return selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem);
 
 	else return selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem, $do);
@@ -44,7 +45,7 @@ $GLOBALS['selecteur_rubrique'] = 'inc_chercher_rubrique_dist';
 
 // http://doc.spip.org/@style_menu_rubriques
 function style_menu_rubriques($i) {
-	global $browser_name, $browser_version, $spip_lang_left;
+	global $browser_name, $spip_lang_left;
 
 	$espace = '';
 	if (preg_match(",mozilla,i", $browser_name)) {
@@ -126,7 +127,13 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem=0) {
 	//
 
 	include_spip('base/abstract_sql');
-	$q = sql_select("id_rubrique, id_parent, titre, statut, lang, langue_choisie", "spip_rubriques", ($type == 'breve' ?  ' id_parent=0 ' : ''), '', "0+titre,titre");
+	$where = array();
+	if ($type == 'breve')
+		$where[]= ' id_parent=0 ';
+	if (is_array($restreint) AND $restreint)
+		$where[]= sql_in('id_rubrique', $restreint);
+
+	$q = sql_select("id_rubrique, id_parent, titre, statut, lang, langue_choisie", "spip_rubriques", join(' AND ', $where), '', "0+titre,titre");
 	while ($r = sql_fetch($q)) {
 		if (autoriser('voir','rubrique',$r['id_rubrique'])){
 			// titre largeur maxi a 50
@@ -136,7 +143,6 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem=0) {
 				$titre .= ' ['.traduire_nom_langue($r['lang']).']';
 			$data[$r['id_rubrique']] = $titre;
 			$enfants[$r['id_parent']][] = $r['id_rubrique'];
-			if ($id_rubrique == $r['id_rubrique']) $id_parent = $r['id_parent'];
 		}
 	}
 
@@ -159,8 +165,7 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem=0) {
 // http://doc.spip.org/@selecteur_rubrique_ajax
 function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0, $do) {
 
-       ## $restreint indique qu'il faut limiter les rubriques affichees
-       ## aux rubriques editables par l'admin restreint... or, ca ne marche pas.
+       ## $restreint, si c'est un tableau, limite les rubriques selectionnables
        ## Pour la version HTML c'est bon (cf. ci-dessus), mais pour l'ajax...
        ## je laisse ca aux specialistes de l'ajax & des admins restreints
        ## note : toutefois c'est juste un pb d'interface, car question securite
