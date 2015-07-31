@@ -52,10 +52,10 @@ function resize_logo($image) {
 }
 
 
-function afficher_boite_logo($racine, $titre) {
+function afficher_boite_logo($racine, $titre, $toujours_afficher = 'false') {
 	global $id_article, $coll, $id_breve, $id_auteur, $id_mot, $id_syndic, $connect_id_auteur, $PHP_SELF;
 	global $couleur_foncee, $couleur_claire;
-	
+
 	$redirect = substr($PHP_SELF, strrpos($PHP_SELF, '/') + 1);
 	$logo = get_image($racine);
 	if ($logo) {
@@ -67,15 +67,19 @@ function afficher_boite_logo($racine, $titre) {
 		}
 	}
 
-	echo "<font size=2 FACE='Verdana,Arial,Helvetica,sans-serif'>";
-	//echo "<CENTER><TABLE WIDTH=100% CELLPADDING=2 BORDER=1 CLASS='hauteur'><TR><TD WIDTH=100% ALIGN='center' BGCOLOR='$couleur_foncee'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='white'><B>";
-	echo "<div style='border-left: 1px solid white; border-top: 1px solid white; border-right: 1px solid #aaaaaa; border-bottom: 1px solid #aaaaaa; '>";
-	echo "<div style='background-color: white; border:  1px solid $couleur_foncee; padding: 3px; text-align: center;'><b>";
+/*	echo "<div style='border-left: 1px solid white; border-top: 1px solid white; border-right: 1px solid #aaaaaa; border-bottom: 1px solid #aaaaaa; '>";
+	echo "<div style='background-color: white; border:  1px solid $couleur_foncee; padding: 3px; text-align: center;'><b>";*/
+	debut_cadre_relief("image-24.gif");
+	echo "<font size='2' FACE='Verdana,Arial,Helvetica,sans-serif'><center><b>";
 	echo bouton_block_invisible("$racine");
 	echo $titre;
-	echo "</b></div>";
-	echo "</div>";
-	//echo "</B></FONT></TD></TR></TABLE></CENTER>";
+	echo "</b></center></font>";
+	fin_cadre_relief();
+
+	echo "<font size=2 FACE='Verdana,Arial,Helvetica,sans-serif'>";
+
+/*	echo "</b></div>";
+	echo "</div>";*/
 	if ($fichier) {
 		$hash = calculer_action_auteur("supp_image $fichier");
 
@@ -116,7 +120,7 @@ function afficher_boite_logo($racine, $titre) {
 			echo "\n<INPUT NAME='image' TYPE=File CLASS='forml' style='font-size:9px;' SIZE=15>";
 			echo "\n <div align='right'><INPUT NAME='ok' TYPE=Submit VALUE='T&eacute;l&eacute;charger' CLASS='fondo' style='font-size:9px;'></div>";
 		} else {
-		
+
 			$myDir = opendir("upload");
 			while($entryName = readdir($myDir)){
 				if (!ereg("^\.",$entryName) AND eregi("(gif|jpg|png)$",$entryName)){
@@ -125,7 +129,7 @@ function afficher_boite_logo($racine, $titre) {
 				}
 			}
 			closedir($myDir);
-			
+
 			if (strlen($afficher) > 10){
 				echo "\nS&eacute;lectionner un fichier&nbsp;:";
 				echo "\n<SELECT NAME='image' CLASS='forml' SIZE=1>";
@@ -135,7 +139,7 @@ function afficher_boite_logo($racine, $titre) {
 			} else {
 				echo "Installer des images dans le dossier /ecrire/upload pour pouvoir les s&eacute;lectionner ici.";
 			}
-		
+
 		}
 
 		echo "\n</FORM>\n\n";

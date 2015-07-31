@@ -212,9 +212,6 @@ if ($modif_document == 'oui' AND $flag_document_editable) {
 	}
 
 }
-		
-
-
 
 
 ///// debut de la page
@@ -248,40 +245,13 @@ if ($coll > 0) {
 	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><B>RUBRIQUE NUM&Eacute;RO&nbsp;:</B></FONT>";
 	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=6><B>$coll</B></FONT>";
 	echo "</CENTER>";
-	
-	
-		
-	if ($coll >0 AND $statut == 'publie') {
+
+	if ($coll > 0 AND $statut == 'publie') {
 		icone_horizontale("Voir en ligne", "../spip_redirect.php3?id_rubrique=$coll&recalcul=oui", "racine-24.gif", "rien.gif");
 	}
-	
-	
-	
+
 	fin_boite_info();
 }
-
-$rubon = "rubon$coll";
-$ruboff = "ruboff$coll";
-$rubon_ok = get_image($rubon);
-if ($rubon_ok) $ruboff_ok = get_image($ruboff);
-
-if ($connect_statut == '0minirezo' AND acces_rubrique($coll) AND ($options == 'avancees' OR $rubon_ok) AND tester_upload()) {
-
-	debut_cadre_relief();
-
-	if ($coll>0)
-		afficher_boite_logo($rubon, "LOGO DE LA RUBRIQUE ".aide ("rublogo"));
-	else
-		afficher_boite_logo($rubon, "LOGO STANDARD DES RUBRIQUES ".aide ("rublogo"));
-
-	if (($options == 'avancees' AND $rubon_ok) OR $ruboff_ok) {
-		echo "<P>";
-		afficher_boite_logo($ruboff, "LOGO POUR SURVOL");
-	}
-
-	fin_cadre_relief();
-}
-
 
 
 //
@@ -315,6 +285,31 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($coll)) {
 }
 
 fin_raccourcis();
+
+
+//
+// Logos de la rubrique
+//
+
+$rubon = "rubon$coll";
+$ruboff = "ruboff$coll";
+$rubon_ok = get_image($rubon);
+if ($rubon_ok) $ruboff_ok = get_image($ruboff);
+
+if ($connect_statut == '0minirezo' AND acces_rubrique($coll) AND ($options == 'avancees' OR $rubon_ok)) {
+	debut_cadre_relief();
+	if ($coll > 0)
+		afficher_boite_logo($rubon, "LOGO DE LA RUBRIQUE ".aide ("rublogo"));
+	else
+		afficher_boite_logo($rubon, "LOGO STANDARD DES RUBRIQUES ".aide ("rublogo"));
+
+	if (($options == 'avancees' AND $rubon_ok) OR $ruboff_ok) {
+		echo "<P>";
+		afficher_boite_logo($ruboff, "LOGO POUR SURVOL");
+	}
+	fin_cadre_relief();
+}
+
 
 
 
