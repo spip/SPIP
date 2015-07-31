@@ -21,8 +21,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define('CODE_RECUPERER_FOND', 'recuperer_fond(%s, array(%s), array(%s), %s)');
-
 // http://doc.spip.org/@interprete_argument_balise
 function interprete_argument_balise($n,$p) {
 	if (($p->param) && (!$p->param[0][0]) && (count($p->param[0])>$n))
@@ -429,7 +427,7 @@ function balise_LESAUTEURS_dist ($p) {
 		$c = memoriser_contexte_compil($p);
 
 		$p->code = sprintf(CODE_RECUPERER_FOND, "'modeles/lesauteurs'",
-				   "'id_article' => ".champ_sql('id_article', $p),
+				   "array('id_article' => ".champ_sql('id_article', $p) .")",
 				   "'trim'=>true, 'compil'=>array($c)",
 				   _q($connect));
 		$p->interdire_scripts = false; // securite apposee par recuperer_fond()
@@ -934,10 +932,7 @@ function balise_INCLURE_dist($p) {
 		if (isset($_contexte['ajax'])) $_options[] = "'ajax'=>true";
 		if ($p->etoile) $_options[] = "'etoile'=>true";
 		$_options[] = "'compil'=>array(" . memoriser_contexte_compil($p) .")";
-		$_options = "array(" . join(',',$_options) . ")";
-		
-		$p->code = "recuperer_fond($f, $_l, $_options)";
-
+		$p->code = sprintf(CODE_RECUPERER_FOND, $f, $_l, join(',',$_options),"''");
 	} elseif (!isset($_contexte[1])) {
 			$msg = array('zbug_balise_sans_argument', array('balise' => ' INCLURE'));
 			erreur_squelette($msg, $p);
@@ -979,7 +974,7 @@ function balise_MODELE_dist($p) {
 		  . (isset($_contexte['ajax'])?", 'ajax'=>true":'')
 		  . ", 'compil'=>array(" . memoriser_contexte_compil($p) .")";
 
-		$page = sprintf(CODE_RECUPERER_FOND, "'modeles/' . $nom", join(',', $_contexte), $_options, _q($connect));
+		$page = sprintf(CODE_RECUPERER_FOND, "'modeles/' . $nom", 'array(' . join(',', $_contexte) .')', $_options, _q($connect));
 
 		$p->code = "\n\t(((\$recurs=(isset(\$Pile[0]['recurs'])?\$Pile[0]['recurs']:0))>=5)? '' :\n\t$page)\n";
 
