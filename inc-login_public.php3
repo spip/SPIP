@@ -90,6 +90,9 @@ function login_pour_tous($login, $cible, $message, $action, $mode) {
  			$row = array();
 			$login = '';
 			@spip_setcookie("spip_admin", "", time() - 3600);
+		} else {
+		  // on laisse le menu decide de la langue
+		  unset($row['lang']);
 		}
 	}
 
