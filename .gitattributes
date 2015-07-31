@@ -358,6 +358,7 @@ ecrire/install/etape_ldap5.php -text
 ecrire/install/etape_sup1.php -text
 ecrire/install/etape_sup2.php -text
 ecrire/install/index.php -text
+ecrire/lang/ecrire_ast.php -text
 ecrire/lang/ecrire_br.php -text
 ecrire/lang/ecrire_bs.php -text
 ecrire/lang/ecrire_cs.php -text
@@ -368,6 +369,7 @@ ecrire/lang/ecrire_my.php -text
 ecrire/lang/ecrire_ru.php -text
 ecrire/lang/ecrire_sv.php -text
 ecrire/lang/index.php -text
+ecrire/lang/public_ast.php -text
 ecrire/lang/public_br.php -text
 ecrire/lang/public_bs.php -text
 ecrire/lang/public_cs.php -text
@@ -377,6 +379,7 @@ ecrire/lang/public_km.php -text
 ecrire/lang/public_my.php -text
 ecrire/lang/public_ru.php -text
 ecrire/lang/public_sv.php -text
+ecrire/lang/spip_ast.php -text
 ecrire/lang/spip_br.php -text
 ecrire/lang/spip_bs.php -text
 ecrire/lang/spip_cs.php -text

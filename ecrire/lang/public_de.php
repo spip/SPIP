@@ -33,11 +33,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date' => 'Datum',
-'dernier_ajout' => 'Letzter Eintrag',
-'dernieres_breves' => 'Letzte Meldungen',
-'derniers_articles' => 'Letzte Artikel',
-'derniers_commentaires' => 'Letzte Kommentare',
-'derniers_messages_forum' => 'Letzte Forumsbeitr&auml;ge',
+'dernier_ajout' => 'Neuester Eintrag',
+'dernieres_breves' => 'Neue Meldungen',
+'derniers_articles' => 'Neueste Artikel',
+'derniers_commentaires' => 'Neueste Kommentare',
+'derniers_messages_forum' => 'Neuste Forumsbeitr&auml;ge',
 'documents_interdits_forum' => 'Dokumente sind im Forum verboten.',
 
 // E
