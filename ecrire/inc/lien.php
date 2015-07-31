@@ -66,7 +66,8 @@ function nettoyer_raccourcis_typo($texte, $connect='')
 			if (!$titre) {
 				$match = typer_raccourci($reg[count($reg)-1]);
 				@list($type,,$id,,,,) = $match;
-				$titre = traiter_raccourci_titre($type, $id, '', '', 'titre', $connect);
+				$titre = traiter_raccourci_titre($id, $type, $connect);
+				if (!$titre) $titre = $match;
 			}
 			$titre = corriger_typo(supprimer_tags($titre));
 			$texte = str_replace($reg[0], $titre, $texte);
@@ -225,24 +226,6 @@ function calculer_url ($ref, $texte='', $pour='url', $connect='') {
 	return $r ? $r : traiter_lien_explicite($ref, $texte, $pour, $connect);
 }
 
-// http://doc.spip.org/@traiter_lien_implicite
-function traiter_lien_implicite ($ref, $texte='', $pour='url', $connect='')
-{
-	if ($match = typer_raccourci($ref)) {
-		@list($type,,$id,,$args,,$ancre) = $match;
-# attention dans le cas des sites le lien doit pointer non pas sur
-# la page locale du site, mais directement sur le site lui-meme
-		if ($type == 'site')
-			$url = sql_getfetsel('url_site', 'spip_syndic', "id_syndic=$id",'','','','',$connect);
-		else $url = generer_url_entite($id,$type,$args,$ancre,	$connect ? $connect : NULL);
-		if ($url) 
-			return ($pour === 'url')
-			? $url
-			: traiter_raccourci_titre($type, $id, $url, $texte, $pour, $connect);
-	}
-	return false;
-}
-
 // http://doc.spip.org/@traiter_lien_explicite
 function traiter_lien_explicite ($ref, $texte='', $pour='url', $connect='')
 {
@@ -278,6 +261,30 @@ function traiter_lien_explicite ($ref, $texte='', $pour='url', $connect='')
 	return ($pour == 'url') ? $lien : array($lien, $class, $texte, '');
 }
 
+// http://doc.spip.org/@traiter_lien_implicite
+function traiter_lien_implicite ($ref, $texte='', $pour='url', $connect='')
+{
+	if (!($match = typer_raccourci($ref))) return false;
+	@list($type,,$id,,$args,,$ancre) = $match;
+# attention dans le cas des sites le lien doit pointer non pas sur
+# la page locale du site, mais directement sur le site lui-meme
+	if ($type == 'site')
+		$url = sql_getfetsel('url_site', 'spip_syndic', "id_syndic=$id",'','','','',$connect);
+	else $url = generer_url_entite($id,$type,$args,$ancre,$connect ? $connect : NULL);
+	if (!$url) return false;
+	if (is_array($url)) {
+		@list($type,$id) = $url;
+		$url = generer_url_entite($id,$type,$args,$ancre,$connect ? $connect : NULL);
+	}
+	if ($pour === 'url') return $url;
+	$r = traiter_raccourci_titre($id, $type, $connect);
+	$style = $r ? 'spip_in': 'spip_out';
+	$lang = @$r['lang'];
+	if (!($texte = trim($texte))) $texte = @$r['titre'];
+	if (!$texte) $texte =  _T($type) . " $id";
+	return ($pour=='titre') ? $texte : array($url, $style, $texte, $lang);
+}
+
 // analyse des raccourcis issus de [TITRE->RACCOURCInnn] et connexes
 
 define('_RACCOURCI_URL', ',^\s*(\w*?)\s*(\d+)(\?(.*?))?(#([^\s]*))?\s*$,S');
@@ -300,25 +307,17 @@ function typer_raccourci ($lien) {
 	return $match;
 }
 
-function traiter_raccourci_titre($type, $id, $url, $texte, $pour, $connect)
+function traiter_raccourci_titre($id, $type, $connect=NULL)
 {
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table(table_objet($type));
-	$lang = '';
-	if ($desc AND $s = $desc['titre']) {
-		$_id = $desc['key']['PRIMARY KEY'];
-		$t = $desc['table'];
-		$r = sql_fetsel($s, $t, "$_id=$id", '','','','',$connect);
-		$texte = trim($texte);
-		if ($r AND !$texte) {
-			$texte = supprimer_numero($r['titre']);
-			if (!$texte) $texte = $r['surnom'];
-			$lang = $r['lang'];
-		}
-		$style = 'spip_in';
-	} else $style =  'spip_out';
-	if (!$texte) $texte = _T($type) . " $id";
-	return ($pour=='titre') ? $texte : array($url, $style, $texte, $lang);
+	if (!($desc AND $s = $desc['titre'])) return array();
+	$_id = $desc['key']['PRIMARY KEY'];
+	$r = sql_fetsel($s, $desc['table'], "$_id=$id", '','','','',$connect);
+	if (!$r) return array();
+	$r['titre'] = supprimer_numero($r['titre']);
+	if (!$r['titre']) $r['titre'] = $r['surnom'];
+	return $r;
 }
 
 // traite les modeles (dans la fonction typo), en remplacant
