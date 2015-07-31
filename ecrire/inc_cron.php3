@@ -138,6 +138,9 @@ function taches_generales() {
 	// indexation
 	if (lire_meta("activer_moteur") == "oui") 
 		$taches_generales[]= 'index';
+		
+	// ajax
+		$taches_generales[] = 'ajax';
 
 	return $taches_generales;
 }
@@ -158,7 +161,8 @@ $frequence_taches = array(
 			  'popularites' => 1800,
 			  'sites' => 90,
 			  'index' => 60,
-			  'optimiser' => 3600 * 48
+			  'optimiser' => 3600 * 48,
+			  'ajax' => 3600 * 2
 );
 
 // Fonctions effectivement appelees.
@@ -260,6 +264,11 @@ function cron_mail($t) {
 		envoyer_mail($adresse_neuf, $sujet_nouveautes, $mail_nouveautes, '', $headers);
 	else
 		spip_log("mail nouveautes : rien de neuf depuis $jours_neuf jours");
+	return 1;
+}
+
+function cron_ajax ($t) {
+	nettoyer_ajax();
 	return 1;
 }
 
