@@ -344,6 +344,12 @@ if ($new != "oui" AND 0) {
 }
 
 
+//
+// Pave "documents associes a l'article"
+//
+
+echo pave_documents($id_article);
+
 debut_droite();
 
 

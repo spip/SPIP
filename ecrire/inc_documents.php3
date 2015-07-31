@@ -228,6 +228,7 @@ function afficher_document($id_document) {
 	echo fin_block($block);
 }
 
+
 function pave_documents($id_article) {
 	global $puce;
 
@@ -237,24 +238,38 @@ function pave_documents($id_article) {
 			WHERE lien.id_article=$id_article AND doc.id_document = lien.id_document AND doc.id_type = type.id_type
 			GROUP BY doc.id_type"));
 		while ($type = mysql_fetch_object($result_doc)) {
-			$documents .= $type->cnt." ".$type->extension."<br>";
+			$documents .= $puce.$type->cnt." ".$type->extension."<br>";
 			$nbdoc += $type->cnt;
 		}
 
+		$a = "<a href=\"javascript:window.open('article_documents.php3?id_article=$id_article', 'docs_article', 'scrollbars=yes,resizable=yes,width=630,height=550'); void(0);\">";
+
+		if ($nbdoc) $icone = "documents-directory.png";
+		else $icone = "download-dir.png";
+		$txticone = "$a<img src='IMG2/$icone' width='48' height='48' border='0'></a>";
+
 		if ($nbdoc == 0) {
-			$txtdoc = "<img src='IMG2/gnome-compressed.png' width='48' height='48' align='left'> ";
-			$txtdoc .= "Ajouter un document";
+			$txtdoc .= $a."<b>Lier un document &agrave; cet article</b></a>";
 		}
 		else {
-			$txtdoc = "<img src='IMG2/gnome-package.png' width='48' height='48' align='left'> ";
+			$txtdoc .= $a."<b>";
 			if ($nbdoc == 1)
-				$txtdoc .= "Document</a></b><br> \n";
-			else
-				$txtdoc .= "$nbdoc documents</a></b><br>\n";
+				$txtdoc .= "Un document li&eacute; &agrave; l'article</b></a>";
+			else {
+				$txtdoc .= "$nbdoc documents li&eacute;s &agrave; l'article</b></a><br>\n";
+				//$txtdoc .= $documents;
+			}
 		}
+
 		debut_boite_info();
-		echo "<div align='center'><b><a href=\"javascript:window.open('article_documents.php3?id_article=$id_article', 'docs_article', 'scrollbars=yes,resizable=yes,width=620,height=500'); void(0);\">";
-		echo "$txtdoc$documents</div>\n";
+		echo "<table border='0' align='center' valign='center'><tr>\n";
+		echo "<td align='right'>\n";
+		echo $txticone;
+		echo "</td>\n";
+		echo "<td align='center'><font size='2'>\n";
+		echo $txtdoc;
+		echo "</font></td>\n";
+		echo "</tr></table>\n";
 		fin_boite_info();
 	}
 }

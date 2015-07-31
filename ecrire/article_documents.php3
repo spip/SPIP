@@ -26,7 +26,6 @@ if ($modif_document == 'oui') {
 	mysql_query("UPDATE spip_documents SET titre=\"$titre\", descriptif=\"$descriptif\" WHERE id_document=$id_document");
 }
 
-$fond = 5;
 debut_html("Images et documents");
 
 echo "<table width='100%' border='0' cellpadding='6' cellspacing='0'>\n";
