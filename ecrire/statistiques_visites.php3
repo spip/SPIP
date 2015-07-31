@@ -356,9 +356,9 @@ if (!$origine) {
 			if (! $id_article) $val_popularite = $moyenne;
 			$prevision = (1 - (date("H")*60 - date("i"))/(24*60)) * $val_popularite;
 			$prevision = ceil($prevision * $rapport);
-			echo "<img src='img_pack/rien.gif' width=$largeur height=$prevision style='background-color:#cccccc;'>";
+			echo "<img src='img_pack/rien.gif' width=$largeur height=$prevision style='background-color:#eeeeee;'>";
 
-			echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur style='background-color:#eeeeee;'>";
+			echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur style='background-color:#cccccc;'>";
 		}
 		echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:black;'>";
 		echo "</td>";
