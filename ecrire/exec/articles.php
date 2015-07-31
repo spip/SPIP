@@ -559,32 +559,19 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 		echo "<td>". http_img_pack('rien.gif', " ", "width='5'") . "</td>\n";
 		echo "<td align='center'>";
 	
-		// Recuperer les donnees de l'article
+
+		// Est-ce que quelqu'un a deja ouvert l'article en edition ?
+		unset($modif);
 		if ($GLOBALS['meta']['articles_modif'] != 'non') {
-			$result = spip_query("SELECT auteur_modif, UNIX_TIMESTAMP(date_modif) AS modification, UNIX_TIMESTAMP(NOW()) AS maintenant FROM spip_articles WHERE id_article='$id_article'");
-
-	
-			if ($row = spip_fetch_array($result)) {
-				$auteur_modif = $row["auteur_modif"];
-				$modification = $row["modification"];
-				$maintenant = $row["maintenant"];
-	
-				$date_diff = floor(($maintenant - $modification)/60);
-	
-				if ($date_diff >= 0 AND $date_diff < 60 AND $auteur_modif > 0 AND $auteur_modif != $connect_id_auteur) {
-					$result_auteur = spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur='$auteur_modif'");
-
-					if ($row_auteur = spip_fetch_array($result_auteur)) {
-						$nom_auteur_modif = typo($row_auteur["nom"]);
-					}
-					$modif = array('nom_auteur_modif' => $nom_auteur_modif, 'date_diff' => $date_diff);
-				}
-			}
+			include_spip('inc/drapeau_edition');
+			$modif = qui_edite($id_article, 'article');
+			if ($modif['id_auteur_modif'] == $connect_id_auteur)
+				unset($modif);
 		}
+
 		bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.gif", "edit.gif");
-	
 		echo "</td>";
-	 }
+	}
 	echo "</tr></table>\n";
 	echo "<div>&nbsp;</div>";
 	return $modif;
@@ -744,12 +731,12 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 	// Gerer les groupes de traductions
 	if ($GLOBALS['meta']['gerer_trad'] == 'oui') {
 		if ($flag_editable AND _request('supp_trad') == 'oui') { // Ne plus lier a un groupe de trad
-			spip_query("UPDATE spip_articles SET id_trad=0, date_modif=NOW() WHERE id_article = $id_article");
+			spip_query("UPDATE spip_articles SET id_trad=0 WHERE id_article = $id_article");
 
 			// Verifier si l'ancien groupe ne comporte plus qu'un seul article. Alors mettre a zero.
 			$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_articles WHERE id_trad = $id_trad"));
 			if ($cpt['n'] == 1)
-				spip_query("UPDATE spip_articles SET id_trad = 0, date_modif=NOW() WHERE id_trad = $id_trad");
+				spip_query("UPDATE spip_articles SET id_trad = 0 WHERE id_trad = $id_trad");
 
 			$id_trad = 0;
 		}
@@ -759,7 +746,7 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 		AND $id_trad_old = intval(_request('id_trad_old'))  # bizarre
 		AND $connect_statut=='0minirezo'
 		AND $connect_toutes_rubriques) { 
-			spip_query("UPDATE spip_articles SET id_trad = $id_trad_new, date_modif=NOW() WHERE id_trad = $id_trad_old");
+			spip_query("UPDATE spip_articles SET id_trad = $id_trad_new WHERE id_trad = $id_trad_old");
 			$id_trad = $id_trad_new;
 		}
 
@@ -777,12 +764,12 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 					$nouveau_trad = $id_lier;
 				}
 
-				spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad, date_modif=NOW() WHERE id_article = $lier_trad");
+				spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad WHERE id_article = $lier_trad");
 				if ($id_lier > 0)
-					spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad, date_modif=NOW() WHERE id_trad = $id_lier");
-				spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad, date_modif=NOW() WHERE id_article = $id_article");
+					spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad WHERE id_trad = $id_lier");
+				spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad WHERE id_article = $id_article");
 				if ($id_trad > 0)
-					spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad, date_modif=NOW() WHERE id_trad = $id_trad");
+					spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad WHERE id_trad = $id_trad");
 
 				$id_trad = $nouveau_trad;
 			}
@@ -1344,9 +1331,9 @@ function modif_langue_articles($id_article, $id_rubrique, $changer_lang)
 	$langue_parent=$langue_parent['lang'];
 	if ($changer_lang) {
 		if ($changer_lang != "herit")
-			spip_query("UPDATE spip_articles SET lang=" . spip_abstract_quote($changer_lang) . ", langue_choisie='oui', date_modif=NOW() WHERE id_article=$id_article");
+			spip_query("UPDATE spip_articles SET lang=" . spip_abstract_quote($changer_lang) . ", langue_choisie='oui' WHERE id_article=$id_article");
 		else
-			spip_query("UPDATE spip_articles SET lang=" . spip_abstract_quote($langue_parent) . ", langue_choisie='non', date_modif=NOW() WHERE id_article=$id_article");
+			spip_query("UPDATE spip_articles SET lang=" . spip_abstract_quote($langue_parent) . ", langue_choisie='non' WHERE id_article=$id_article");
                 calculer_langues_utilisees();
 	}
  }
@@ -1417,6 +1404,15 @@ function revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubriqu
 		ajouter_version($id_article, $champs, '', $connect_id_auteur);
 	}
 
+	// marquer le fait que l'article est travaille par toto a telle date
+	// une alerte sera donnee aux autres redacteurs sur exec=articles
+	if ($GLOBALS['meta']['articles_modif'] != 'non') {
+		include_spip('inc/drapeau_edition');
+		if ($id_article)
+			signale_edition ($id_article, $connect_id_auteur, 'article');
+	}
+
+
 	// Changer la langue heritee
 	if ($id_rubrique != $id_rubrique_old) {
 		propager_les_secteurs();
@@ -1428,12 +1424,10 @@ function revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubriqu
 			$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 			$langue_new = $row['lang'];
 			if ($langue_new != $langue_old)
-				spip_query("UPDATE spip_articles SET lang = '$langue_new', date_modif=NOW() WHERE id_article = $id_article");
+				spip_query("UPDATE spip_articles SET lang = '$langue_new' WHERE id_article = $id_article");
 		}
 	}
 
-	// marquer l'article (important pour les articles nouvellement crees)
-	spip_query("UPDATE spip_articles SET date_modif=NOW(), auteur_modif=$connect_id_auteur WHERE id_article=$id_article");
 	calculer_rubriques();
  }
 }
@@ -1502,7 +1496,7 @@ $flag_auteur = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_arti
 if ($flag_editable) {
 
 if ($jour) {
-	spip_query("UPDATE spip_articles SET date='" . format_mysql_date($annee, $mois, $jour, $heure, $minute) ."', date_modif=NOW()	WHERE id_article=$id_article");
+	spip_query("UPDATE spip_articles SET date='" . format_mysql_date($annee, $mois, $jour, $heure, $minute) ."'	WHERE id_article=$id_article");
 	calculer_rubriques();
 }
 
@@ -1512,7 +1506,7 @@ if ($jour_redac) {
 	if ($avec_redac == 'non')
 		$annee_redac = $mois_redac = $jour_redac = $heure_redac = $minute_redac = 0;
 
-	spip_query("UPDATE spip_articles SET date_redac='" . format_mysql_date($annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac) ."',  date_modif=NOW() WHERE id_article=$id_article");
+	spip_query("UPDATE spip_articles SET date_redac='" . format_mysql_date($annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac) ."' WHERE id_article=$id_article");
 }
 
 

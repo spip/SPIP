@@ -37,9 +37,11 @@ function action_instituer_dist() {
 function instituer_collaboration($debloquer_article) {
 	global $id_auteur;
 	if ($debloquer_article AND ($id_auteur = intval($id_auteur))) {
-		if ($debloquer_article <> 'tous')
-			$where_id = "AND id_article=".intval($debloquer_article);
-		spip_query("UPDATE spip_articles SET auteur_modif='0' WHERE auteur_modif=$id_auteur $where_id");
+		include_spip('inc/drapeau_edition');
+		if ($debloquer_article == 'tous')
+			debloquer_tous($id_auteur);
+		else
+			debloquer_edition($id_auteur, $debloquer_article, 'article');
 	}
 }
 

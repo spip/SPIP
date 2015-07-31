@@ -434,7 +434,7 @@ function maj_base() {
 	
 	if ($version_installee < 1.421) {
 		spip_query("ALTER TABLE spip_articles ADD auteur_modif bigint(21) DEFAULT '0' NOT NULL");
-		pip_query("ALTER TABLE spip_articles ADD date_modif datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
+		spip_query("ALTER TABLE spip_articles ADD date_modif datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
 		maj_version (1.421);
 	}
 
@@ -1159,6 +1159,12 @@ function maj_base() {
 		@copy(_DIR_IMG.'rubon0.png', _DIR_IMG.'siteon0.png');
 		@copy(_DIR_IMG.'ruboff0.png', _DIR_IMG.'siteoff0.png');
 		maj_version(1.912);
+	}
+
+	// suppression de auteur_modif qui n'est plus utilise nulle part
+	if ($version_installee < 1.913) {
+		spip_query("ALTER TABLE spip_articles DROP auteur_modif");
+		maj_version(1.913);
 	}
 
 }
