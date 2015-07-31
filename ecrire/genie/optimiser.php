@@ -11,10 +11,11 @@
 \***************************************************************************/
 
 /**
- * Gestion des optimisations de la base de donnée en cron 
+ * Gestion des optimisations de la base de données en cron 
  *
  * @package SPIP\Core\Genie\Optimiser
 **/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('base/abstract_sql');
@@ -212,8 +213,3 @@ function optimiser_base_disparus($attente = 86400) {
 	
 	if (!$n) spip_log("Optimisation des tables: aucun lien mort");
 }
-/**
- * Gestion des optimisations de la base de données en cron 
- *
- * @package SPIP\Core\Genie\Optimiser
-**/
