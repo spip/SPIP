@@ -358,7 +358,7 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 }
 
 // http://doc.spip.org/@icone_inline
-function icone_inline($texte, $lien, $fond, $fonction="", $align="", $ajax=false, $javascript=''){
+function icone_verticale($texte, $lien, $fond, $fonction="", $align="", $javascript=''){
 	// cas d'ajax_action_auteur: faut defaire le boulot
 	// (il faudrait fusionner avec le cas $javascript)
 	if (preg_match(",^<a\shref='([^']*)'([^>]*)>(.*)</a>$,i",$lien,$r)) {
@@ -366,15 +366,11 @@ function icone_inline($texte, $lien, $fond, $fonction="", $align="", $ajax=false
 		$javascript .= $atts;
 	}
 
-	// l'ajax de l'espace prive made in php
-	if ($ajax)
-		$javascript .= ' onclick=' . ajax_action_declencheur($lien,$ajax);
-
 	return icone_base($lien, $texte, $fond, $fonction,"verticale $align",$javascript);
 }
 
 // http://doc.spip.org/@icone_horizontale
-function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $af = true, $javascript='') {
+function icone_horizontale($texte, $lien, $fond="", $fonction="", $dummy, $javascript='') {
 	$retour = '';
 	// cas d'ajax_action_auteur: faut defaire le boulot
 	// (il faudrait fusionner avec le cas $javascript)
@@ -384,7 +380,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $af = true
 	}
 
 	$retour = icone_base($lien, $texte, $fond, $fonction,"horizontale",$javascript);
-	if ($af) echo_log('icone_horizontale',$retour); else return $retour;
+	return $retour;
 }
 
 

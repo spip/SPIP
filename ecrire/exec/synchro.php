@@ -19,8 +19,8 @@ include_spip('inc/acces'); // pour low_sec (iCal)
 function afficher_liens_calendrier($lien, $icone, $texte) {
 
 	global $spip_display;
-	$charge = icone_horizontale(_T('ical_methode_http'), $lien, "agenda-24.png","", false);
-	$abonne = icone_horizontale(_T('ical_methode_webcal'), preg_replace("@https?://@", "webcal://", $lien), "agenda-24.png", "", false);
+	$charge = icone_horizontale(_T('ical_methode_http'), $lien, "agenda-24.png");
+	$abonne = icone_horizontale(_T('ical_methode_webcal'), preg_replace("@https?://@", "webcal://", $lien), "agenda-24.png");
 
 	echo debut_cadre_enfonce($icone, true);
 	echo $texte;
