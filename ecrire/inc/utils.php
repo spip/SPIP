@@ -26,11 +26,19 @@ if (!defined('_LOG_DEBUG')) define('_LOG_DEBUG', 7);
 // Utilitaires indispensables autour du serveur Http.
 //
 
-// charge un fichier perso ou, a defaut, standard
-// et retourne si elle existe le nom de la fonction homonyme (exec_$nom),
-// ou de suffixe _dist
-// Peut etre appelee plusieurs fois, donc optimiser
-// http://doc.spip.org/@charger_fonction
+/**
+ * charge un fichier perso ou, a defaut, standard
+ * et retourne si elle existe le nom de la fonction homonyme (exec_$nom),
+ * ou de suffixe _dist
+ * Peut etre appelee plusieurs fois, donc optimiser
+ *
+ * http://doc.spip.org/@charger_fonction
+ *
+ * @param string $nom
+ * @param string $dossier
+ * @param bool $continue
+ * @return string
+ */
 function charger_fonction($nom, $dossier='exec', $continue=false) {
 	static $echecs = array();
 
