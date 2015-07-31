@@ -164,21 +164,18 @@ define('_TRANCHES', 10);
 //
 
 // Controle de la version, sauf si on est deja en train de s'en occuper
-if (!isset($reinstall)) {
-	if ($spip_version <> ((double) str_replace(',','.',$GLOBALS['meta']['version_installee']))) {
-		include_spip('inc/admin');
-		demande_maj_version();
-	}
-}
+if (!isset($reinstall)
+AND ($spip_version <> ((double) str_replace(',','.',$GLOBALS['meta']['version_installee']))))
+	$exec = 'demande_mise_a_jour';
 
 // Controle d'interruption d'une longue restauration
-if ($_COOKIE['spip_admin']
+elseif ($_COOKIE['spip_admin']
 AND isset($GLOBALS['meta']["debut_restauration"]))
 	$exec = 'import_all';
 
 // Verification des plugins
 // (ne pas interrompre une restauration ou un upgrade)
-if ($exec!='upgrade'
+elseif ($exec!='upgrade'
 AND $auteur_session['statut']=='0minirezo'
 AND lire_fichier(_DIR_TMP.'verifier_plugins.txt',$l)
 AND $l = @unserialize($l)) {

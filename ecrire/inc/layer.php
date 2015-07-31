@@ -236,12 +236,6 @@ function flag_svg() {
 	return ($browser_name == "Mozilla" AND $browser_rev >= 1.8);
 }
 
-// Obsolete. Present pour compatibilite 
-// http://doc.spip.org/@afficher_script_layer
-function afficher_script_layer(){echo $GLOBALS['browser_layer'];}
-// http://doc.spip.org/@test_layer
-function test_layer(){return $GLOBALS['browser_layer'];}
-
 verif_butineur();
 
 $GLOBALS['browser_caret'] =  (!$GLOBALS['browser_barre'] ? '' : "

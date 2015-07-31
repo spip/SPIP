@@ -73,23 +73,4 @@ function fin_admin($action) {
 	@unlink($dir . $signal);
 	@rmdir($dir . $signal);
 }
-
-
-// http://doc.spip.org/@demande_maj_version
-function demande_maj_version() {
-	include_spip('inc/presentation');
-	debut_page();
-	echo "<blockquote><blockquote><h4><font color='red'>",
-	_T('info_message_technique'),
-	"</font><br> ",
-	_T('info_procedure_maj_version'),
-	"</h4>",
-	_T('info_administrateur_site_01'),
-	" <a href='" . generer_url_ecrire("upgrade","reinstall=non") . "'>",
-	_T('info_administrateur_site_02'),
-	"</a></blockquote></blockquote><p>";
-	echo fin_page();
-	exit;
-}
-
 ?>
