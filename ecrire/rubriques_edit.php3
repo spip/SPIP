@@ -63,6 +63,7 @@ if ($new == "oui") {
 		$titre = filtrer_entites(_T('titre_nouvelle_rubrique'));
 		$descriptif = "";
 		$texte = "";
+		$supplement=array();
 	}
 	else {
 		echo _T('avis_acces_interdit');
@@ -78,6 +79,7 @@ else {
 		$titre = $row['titre'];
 		$descriptif = $row['descriptif'];
 		$texte = $row['texte'];
+		$supplement = unserialize($row["supplement"]);
 	}
 }
 
@@ -192,6 +194,12 @@ echo aide ("raccourcis");
 echo "<BR><TEXTAREA NAME='texte' ROWS='25' CLASS='forml' COLS='40' wrap=soft>";
 echo $texte;
 echo "</TEXTAREA>\n";
+
+if (function_exists(champs_supplement)) {
+	$champs_suppl=champs_supplement("rubrique", $id_rubrique, $id_parent);
+	include_ecrire("inc_supplement.php3");
+	supplement_saisie($supplement, $champs_suppl);
+}
 
 echo "<P align='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 echo "</FORM>";

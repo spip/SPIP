@@ -47,6 +47,7 @@ if ($id_article) {
 		        $annee_redac = $regs[1];
 		        if ($annee_redac > 4000) $annee_redac -= 9000;
 		}
+		$supplement=unserialize($row["supplement"]);
 
 		$query = "SELECT * FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur";
 		$result_auteur = spip_query($query);
@@ -423,6 +424,12 @@ echo "<P><HR><P>";
 	}
 	else {
 		echo "<INPUT TYPE='hidden' NAME='ps' VALUE=\"$ps\">";
+	}
+
+	if (function_exists(champs_supplement)) {
+		$champs_suppl=champs_supplement("article", $id_article, $id_rubrique);
+		include_ecrire("inc_supplement.php3");
+		supplement_saisie($supplement, $champs_suppl);
 	}
 
 	if ($date)

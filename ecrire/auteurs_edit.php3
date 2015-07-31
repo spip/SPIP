@@ -57,6 +57,7 @@ if ($row = spip_fetch_array($result)) {
 	$pgp=$row["pgp"];
 	$messagerie=$row["messagerie"];
 	$imessage=$row["imessage"];
+	$supplement = unserialize($row["supplement"]);
 
 
 if ($connect_id_auteur == $id_auteur) debut_page($nom, "redacteurs", "perso");
@@ -118,12 +119,16 @@ else if ($statut == "5poubelle") $logo = "redacteurs-poubelle-24.gif";
 else $logo = "redacteurs-24.gif";
 
 
-	if (strlen($email) > 2 OR strlen($bio) > 0 OR strlen($nom_site_auteur) > 0) {
+	if (strlen($email) > 2 OR strlen($bio) > 0 OR strlen($nom_site_auteur) > 0 OR !empty($supplement)) {
 		debut_cadre_relief("$logo");
 		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif'>";
 		if (strlen($email) > 2) echo _T('email_2')." <B><A HREF='mailto:$email'>$email</A></B><BR> ";
 		if (strlen($nom_site_auteur) > 2) echo _T('info_site_2')." <B><A HREF='$url_site'>$nom_site_auteur</A></B>";
-		echo "<P>".propre($bio);
+		echo "<P>".propre($bio)."</P>";
+		if ($supplement && function_exists(champs_supplement)) {
+			include_ecrire("inc_supplement.php3");
+			supplement_affichage($supplement);
+		}
 		echo "</FONT>";
 		fin_cadre_relief();
 	}

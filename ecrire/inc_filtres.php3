@@ -427,4 +427,13 @@ function centrer($letexte) {
 	return aligner($letexte,'center');
 }
 
+//
+// Recuperation de donnees dans le champ supplement
+// Ce filtre n'a de sens qu'avec la balise #SUPPLEMENT
+//
+function champ($letexte,$champ) {
+	$champs = unserialize($letexte);
+	return interdire_scripts($champs[$champ]);
+}
+
 ?>

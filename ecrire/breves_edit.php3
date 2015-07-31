@@ -163,6 +163,11 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	echo _T('info_url')."<BR>";
 	echo "<INPUT TYPE='text' CLASS='forml' NAME='lien_url' VALUE=\"$lien_url\" SIZE='40'><P>";
 
+	if (function_exists(champs_supplement)) {
+		$champs_suppl=champs_supplement("breve", $id_breve, $id_secteur);
+		include_ecrire("inc_supplement.php3");
+		supplement_saisie(unserialize($row['supplement']), $champs_suppl);
+	}
 
 	if ($connect_statut=="0minirezo" AND acces_rubrique($id_rubrique)) {
 		debut_cadre_relief();
