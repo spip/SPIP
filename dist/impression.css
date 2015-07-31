@@ -4,7 +4,7 @@
 
 /*  Correction des styles HTML par defaut
 ---------------------------------------------- */
-body { background: #FFF; margin: 15pt; text-align: left; font: 12pt Verdana, Helvetica, sans-serif; color: #000; }
+body { background: #FFF; margin: 15pt; text-align: left; font: 12pt "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", sans-serif; color: #000; }
 
 img, table { margin: 0; padding: 0; border: 0; }
 ul, ol, li { margin: 0; padding: 0; list-style: none; }
@@ -12,7 +12,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 
 /*  Ne pas imprimer : on elimine les elements de navigation (display: none; )
 ---------------------------------------------- */
-#top, #hierarchie, #navigation, #extra, #pied { display: none; }
+#entete, #hierarchie, #navigation, #extra, #pied { display: none; }
 .repondre, .repondre, .formulaire_spip { display: none; }
 .spip-admin, .spip-admin-float, .invisible { display: none; }
 

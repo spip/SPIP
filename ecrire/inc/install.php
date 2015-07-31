@@ -195,8 +195,8 @@ function info_progression_etape($en_cours,$phase,$dir, $erreur = false){
 			$etat = 'todo';
 */
 		if ($debut < $last) {
-			if ($debut == $en_cours && $erreur) $class = "erreur";
-			else if ($debut == $en_cours) $class = "encours";
+			if ($debut == $en_cours && $erreur) $class = "on erreur";
+			else if ($debut == $en_cours) $class = "on";
 			else if ($debut > $en_cours) $class = "prochains";
 			else $class = "valides";
 
@@ -325,7 +325,7 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 			// Passer l'avertissement SQLIte en  commentaire, on pourra facilement le supprimer par la suite sans changer les traductions.
 			. "<br /><small>(". _T('install_types_db_connus_avertissement') .')</small>'
 			.'</label>'		
-		. "\n<div style='text-align: center;'><select name='server_db' id='sql_serveur_db' >"
+		. "\n<div><select name='server_db' id='sql_serveur_db' >"
 		. ($mysql
 			? "\n<option value='mysql'>"._T('install_select_type_mysql')."</option>"
 			: '')
