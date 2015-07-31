@@ -414,7 +414,7 @@ function spip_pg_selectdb($db, $serveur='',$requeter=true) {
 // Qu'une seule base pour le moment
 
 // http://doc.spip.org/@spip_pg_listdbs
-function spip_pg_listdbs() {
+function spip_pg_listdbs($serveur) {
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$link = $connexion['link'];
 	return spip_pg_query_simple("select * from pg_database");
@@ -583,7 +583,7 @@ function spip_pg_frommysql($arg)
 			    $res);
 
 	$res = preg_replace('/TO_DAYS\s*[(]([^()]*([(][^)]*[)][()]*)*)[)]/',
-			    ' EXTRACT(day FROM \1 - \'0000-01-01\')',
+			    ' EXTRACT(day FROM \1 - \'0001-01-01\')',
 			    $res);
 
 	$res = preg_replace("/(EXTRACT[(][^ ]* FROM *)\"([^\"]*)\"/", '\1\'\2\'', $res);
@@ -1229,7 +1229,7 @@ function mysql2pg_type($v)
 		str_replace("mediumtext", 'text',
 		preg_replace("/tinytext/i", 'text',
 	  	str_replace("longblob", 'text',
-		str_replace("0000-00-00",'0000-01-01',
+		str_replace("0000-00-00",'0001-01-01',
 		preg_replace("/datetime/i", 'timestamp',
 		preg_replace("/unsigned/i", '', 	
 		preg_replace("/double/i", 'double precision', 	 	
