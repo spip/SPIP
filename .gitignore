@@ -1,4 +1,5 @@
 CACHE/?
+CACHE/lang_*
 CACHE/skel_*
 ecrire/data/.htaccess
 ecrire/data/.htpasswd
