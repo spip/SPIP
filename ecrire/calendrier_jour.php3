@@ -10,7 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-$type = 'jour';
+if (!isset($_GET['type'])) $type = 'jour';
 include ("calendrier.php3");
 exit;
 ?>

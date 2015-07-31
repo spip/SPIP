@@ -10,7 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-$type = 'semaine';
+if (!isset($_GET['type'])) $type = 'semaine';
 include ("calendrier.php3");
 exit;
 ?>
