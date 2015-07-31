@@ -57,6 +57,7 @@ class Boucle {
 	// champs pour la construction de la requete SQL
 	var $select = array();
 	var $from = array();
+	var $from_type = array();
 	var $where = array();
 	var $join = array();
 	var $having = array();

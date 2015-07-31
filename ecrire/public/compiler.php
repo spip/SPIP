@@ -300,6 +300,8 @@ function calculer_requete_sql(&$boucle)
 		'"), # SELECT
 		' . calculer_from($boucle) .
 		', # FROM
+		' . calculer_from_type($boucle) .
+		', # FROM	type jointure	
 		' . calculer_dump_array($boucle->where) .
 		', # WHERE
 		' . calculer_dump_join($boucle->join)
@@ -348,6 +350,14 @@ function calculer_from(&$boucle)
 {
   $res = "";
   foreach($boucle->from as $k => $v) $res .= ",'$k' => '$v'";
+  return 'array(' . substr($res,1) . ')';
+}
+
+// http://doc.spip.org/@calculer_from_type
+function calculer_from_type(&$boucle)
+{
+  $res = "";
+  foreach($boucle->from_type as $k => $v) $res .= ",'$k' => '$v'";
   return 'array(' . substr($res,1) . ')';
 }
 
