@@ -23,7 +23,6 @@ function action_redirect_dist()
 		$m = 'var_mode='.urlencode($m);
 	}
 	$h = generer_url_entite_absolue(intval(_request('id')), $type, $m, '', true);
-	$h = generer_url_entite_absolue(intval(_request('id')), $type, $m, '', true);
 	$status = '302';
 	if (_request('status') AND _request('status')=='301')
 		$status = '301';
