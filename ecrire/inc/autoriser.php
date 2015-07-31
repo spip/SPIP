@@ -358,9 +358,9 @@ function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
 	}
 
 	if ($qui['statut'] == '0minirezo') return true;
-	// seuls les admin peuvent voir un auteur
+	// admins et redacteurs peuvent voir un auteur
 	if ($type == 'auteur')
-		return false;
+		return in_array($qui['statut'], array('0minirezo', '1comite'));
 	// sinon par defaut tout est visible
 	// sauf cas particuliers traites separemment (ie article)
 	return true;
