@@ -203,7 +203,9 @@ function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $pr
 		return;
 	}
 
-	if (!$prefixe) $prefixe = $db;
+	if (!$prefixe) 
+		$prefixe = isset($GLOBALS['table_prefix'])
+		? $GLOBALS['table_prefix'] : $db;
 	$db_ok = charger_fonction('db_' . $type, 'base', true);
 	if ($db_ok AND $db_ok = $db_ok($host, $port, $login, $pass, $db, $prefixe)) 
 
