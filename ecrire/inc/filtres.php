@@ -4024,7 +4024,6 @@ function tri_champ_select($t){
  * @return string
  */
 function generer_info_entite($id_objet, $type_objet, $info, $etoile=""){
-	global $table_des_traitements;
 	static $trouver_table=null;
 	static $objets;
 
@@ -4080,24 +4079,51 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile=""){
 	else
 		$info_generee = (isset($objets[$type_objet][$id_objet][$info])?$objets[$type_objet][$id_objet][$info]:'');
 
-	// On va ensuite chercher les traitements automatiques a faire
-	$champ = strtoupper($info);
-	$traitement = isset($table_des_traitements[$champ]) ? $table_des_traitements[$champ] : false;
-	$table_sql = table_objet_sql($type_objet);
-
-	if (!$etoile
-		AND is_array($traitement)
-	  AND (isset($traitement[$table_sql]) OR isset($traitement[0]))){
-	  	include_spip('inc/texte');
-		$traitement = $traitement[isset($traitement[$table_sql]) ? $table_sql : 0];
-		$traitement = str_replace('%s', "'".texte_script($info_generee)."'", $traitement);
-		// FIXME: $connect et $Pile[0] font souvent partie des traitements.
-		// on les definit pour eviter des notices, mais ce fonctionnement est a ameliorer !
-		$connect = ""; $Pile = array(0 => array('id_objet'=>$id_objet,'objet'=>$type_objet));
-		eval("\$info_generee = $traitement;");
+	// On va ensuite appliquer les traitements automatiques si besoin
+	if (!$etoile){
+		// FIXME: on fournit un ENV minimum avec id et type et connect=''
+		// mais ce fonctionnement est a ameliorer !
+		$info_generee = appliquer_traitement_champ($info_generee, $info, table_objet_sql($type_objet),array('id_objet'=>$id_objet,'objet'=>$type_objet,''));
 	}
 
 	return $info_generee;
+}
+
+/**
+ * Appliquer a un champ SQL le traitement qui est configure pour la balise homonyme dans les squelettes
+ *
+ * @param string $texte
+ * @param string $champ
+ * @param string $table_sql
+ * @param array $env
+ * @param string $connect
+ * @return string
+ */
+function appliquer_traitement_champ($texte,$champ,$table_sql='',$env=array(),$connect=''){
+	if (!$champ)
+		return $texte;
+
+	$champ = strtoupper($champ);
+	$traitements = isset($GLOBALS['table_des_traitements'][$champ]) ? $GLOBALS['table_des_traitements'][$champ] : false;
+	if($traitements)
+		return $texte;
+
+	$traitement = '';
+	if (isset($traitements[$table_sql]))
+		$traitement = $traitements[$table_sql];
+	elseif (isset($traitements[0]))
+		$traitement = $traitements[0];
+
+	if (!$traitement)
+		return $texte;
+
+	$traitement = str_replace('%s', "'".texte_script($texte)."'", $traitement);
+
+	// Fournir $connect et $Pile[0] au traitement si besoin
+	$Pile = array(0 => $env);
+	eval("\$texte = $traitement;");
+
+	return $texte;
 }
 
 /**
