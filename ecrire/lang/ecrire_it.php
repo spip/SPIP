@@ -386,6 +386,7 @@ dai loro server. In questo caso, le funzionalità di SPIP di seguito riportate n
 	'info_langues' => 'Lingua del sito',
 	'info_ldap_ok' => 'L\'autenticazione LDAP è installata.',
 	'info_lien_hypertexte' => 'Link ipertestuale:',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Elenco dei redattori collegati',
 	'info_login_existant' => 'Questo login esiste già.',
 	'info_login_trop_court' => 'Login troppo corto.',

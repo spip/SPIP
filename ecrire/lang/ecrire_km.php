@@ -372,6 +372,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langues' => 'ភាសា នៃសៃថ៍',
 	'info_ldap_ok' => 'LDAP បញ្ជាក់​ភាព​ត្រឹមត្រូវ ត្រូវ​បាន​ដំឡើង​។',
 	'info_lien_hypertexte' => 'តំណភ្ជាប់ អត្ថបទខ្ពស់៖',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'បញ្ជី​អ្នក​សរសេរ​អត្ថបទ​ដែល​ទាក់ទង',
 	'info_login_existant' => 'ការពិនិត្យចូលនេះ មានស្រាប់ហើយ។',
 	'info_login_trop_court' => 'ការពិនិត្យចូល ខ្លីពេក។',

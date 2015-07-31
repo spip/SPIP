@@ -403,6 +403,7 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 	'info_langues' => 'Lingua di u situ',
 	'info_ldap_ok' => 'Hè stallata l\'autentificazione LDAP.',
 	'info_lien_hypertexte' => 'Lea ipertestu :',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Lista di i scrittori cunnessi',
 	'info_login_existant' => 'Stu login esiste digià.',
 	'info_login_trop_court' => 'Login troppu cortu.',

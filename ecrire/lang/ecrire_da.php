@@ -377,6 +377,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langues' => 'Webstedets sprog',
 	'info_ldap_ok' => 'LDAP adgangskontrol er installeret.',
 	'info_lien_hypertexte' => 'Hypertekst link:',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Oversigt over tilknyttede reaktører',
 	'info_login_existant' => 'Dette login findes allerede.',
 	'info_login_trop_court' => 'Login for kort.',

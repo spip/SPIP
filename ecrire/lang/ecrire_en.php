@@ -381,6 +381,7 @@ via FTP.</p>',
 	'info_langues' => 'Site languages',
 	'info_ldap_ok' => 'LDAP authentication is installed.',
 	'info_lien_hypertexte' => 'Hyperlink:',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'List of editors online',
 	'info_login_existant' => 'This login already exists.',
 	'info_login_trop_court' => 'Login too short.',

@@ -371,6 +371,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langues' => 'Talen van de site',
 	'info_ldap_ok' => 'De LDAP-autentificatie is geïnstalleerd',
 	'info_lien_hypertexte' => 'Hypertekst koppeling :',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Lijst met online redacteuren',
 	'info_login_existant' => 'Deze login is reeds in gebruik',
 	'info_login_trop_court' => 'Login te kort.',

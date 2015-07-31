@@ -386,6 +386,7 @@ Koulè imaj rannkont stati yo (komandè = vèr; redaktè = jon).',
 	'info_langues' => 'Tout lanng sit la',
 	'info_ldap_ok' => 'Lotantifikasyon LDAP se enstale.',
 	'info_lien_hypertexte' => 'Lyen ipètèks :',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Llis redaktè ki ap an liy kounye-a',
 	'info_login_existant' => 'Nonkod la ki egziste deja.',
 	'info_login_trop_court' => 'Nondkod ki tro piti.',

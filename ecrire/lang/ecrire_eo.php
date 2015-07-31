@@ -378,6 +378,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 	'info_langues' => 'Lingvoj de la retejo',
 	'info_ldap_ok' => 'La LDAP-aŭtentokontrolilo estas instalita.',
 	'info_lien_hypertexte' => 'Hiperligilo:',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Listo de la konektitaj redaktantoj',
 	'info_login_existant' => 'Tiu salutnomo jam ekzistas.',
 	'info_login_trop_court' => 'Tro mallonga salutnomo.',

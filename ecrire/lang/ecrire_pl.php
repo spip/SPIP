@@ -387,6 +387,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langues' => 'Języki stron',
 	'info_ldap_ok' => 'Uwierzytelnianie LDAP jest włączone.',
 	'info_lien_hypertexte' => 'Hiperłącze:',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Lista zalogowanych redaktorów',
 	'info_login_existant' => 'Podany login już istnieje.',
 	'info_login_trop_court' => 'Za krótki login.',

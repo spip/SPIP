@@ -370,6 +370,7 @@ os autores excluídos por uma lixeira.',
 	'info_langues' => 'Idiomas do site',
 	'info_ldap_ok' => 'A autenticação LDAP está instalada.',
 	'info_lien_hypertexte' => 'Link hipertexto:',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Lista de redatores conectados',
 	'info_login_existant' => 'Este login já está cadastrado.',
 	'info_login_trop_court' => 'Login muito curto.',

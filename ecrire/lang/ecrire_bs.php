@@ -365,6 +365,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langues' => 'Jezici stranice',
 	'info_ldap_ok' => 'LDAP autentifikacija je instalirana.',
 	'info_lien_hypertexte' => 'Hiperlink:',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Lista konektovanih urednika',
 	'info_login_existant' => 'Ovaj login vec postoji.',
 	'info_login_trop_court' => 'Ovaj login je prekratak.',

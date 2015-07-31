@@ -372,6 +372,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langues' => 'Limbile site-ului',
 	'info_ldap_ok' => 'Autentificarea LDAP a fost instalată.',
 	'info_lien_hypertexte' => 'Legătură hipertext :',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Lista redactorilor conectaţi',
 	'info_login_existant' => 'Acest login există déjà.',
 	'info_login_trop_court' => 'Login prea scurt.',

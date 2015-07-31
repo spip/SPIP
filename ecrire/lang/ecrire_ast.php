@@ -391,6 +391,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 	'info_langues' => 'Idiomes del sitiu',
 	'info_ldap_ok' => 'L\'autentificación LDAP ta instalada.',
 	'info_lien_hypertexte' => 'Enllace d\'hipertestu:',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Llista de los redactores conectáos',
 	'info_login_existant' => 'Esti nome ya esiste.',
 	'info_login_trop_court' => 'El nome ye mui curtiu.',
