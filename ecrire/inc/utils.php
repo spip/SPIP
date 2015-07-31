@@ -584,19 +584,20 @@ function _chemin($dir_path=NULL){
 	if ($dir_path===NULL) return $path_full;
 
 	if (strlen($dir_path)){
-		if ($dir_path{0}!='/')
-			$dir_path = $dir_path;
-		if (substr($dir_path,-1) != '/')
-			$dir_path .= "/";
-		if (!in_array($dir_path,$path_base)){
-			$tete = "";
-			if (reset($path_base)==_DIR_RACINE.'squelettes/')
-				$tete = array_shift($path_base);
-
-			array_unshift($path_base,$dir_path);
-			if (strlen($tete))
-				array_unshift($path_base,$tete);
+		$tete = "";
+		if (reset($path_base)==_DIR_RACINE.'squelettes/')
+			$tete = array_shift($path_base);
+		$dirs = array_reverse(explode(':',$dir_path));
+		foreach($dirs as $dir_path){
+				#if ($dir_path{0}!='/')
+				#	$dir_path = $dir_path;
+				if (substr($dir_path,-1) != '/')
+					$dir_path .= "/";
+				if (!in_array($dir_path,$path_base))
+					array_unshift($path_base,$dir_path);
 		}
+		if (strlen($tete))
+			array_unshift($path_base,$tete);
 	}
 	$path_full = $path_base;
 	// Et le(s) dossier(s) des squelettes nommes
@@ -715,9 +716,15 @@ function load_path_cache(){
 		//AND (!isset($GLOBALS['visiteur_session']['statut']) OR $GLOBALS['visiteur_session']['statut']!='0minirezo')
 		AND !isset($_COOKIE[$GLOBALS['cookie_prefix'].'_admin'])
 		){
-		lire_fichier(_CACHE_CHEMIN,$contenu);
-		if (!$GLOBALS['path_files']=unserialize($contenu))
-			$GLOBALS['path_files'] = array();
+		// on essaye de lire directement sans verrou pour aller plus vite
+		if ($contenu = spip_file_get_contents($fichier)){
+			// mais si semble corrompu on relit avec un verrou
+			if (!$GLOBALS['path_files']=unserialize($contenu)){
+				lire_fichier(_CACHE_CHEMIN,$contenu);
+				if (!$GLOBALS['path_files']=unserialize($contenu))
+					$GLOBALS['path_files'] = array();
+			}
+		}
 	}
 	// pas de sauvegarde du chemin si on est pas dans le public
 	if (!_DIR_RESTREINT)
@@ -1200,9 +1207,6 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	spip_desinfecte($_POST);
 	spip_desinfecte($_COOKIE);
 	spip_desinfecte($_REQUEST);
-	// ne pas desinfecter les globales en profondeur car elle contient aussi les
-	// precedentes, qui seraient desinfectees 2 fois.
-	spip_desinfecte($GLOBALS,false);
 
 	// Par ailleurs on ne veut pas de magic_quotes au cours de l'execution
 	@set_magic_quotes_runtime(0);
@@ -1212,6 +1216,9 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	// il faut faire quelques verifications de base
 	if ($x = test_valeur_serveur(@ini_get('register_globals'))
 	OR  _FEED_GLOBALS) {
+		// ne pas desinfecter les globales en profondeur car elle contient aussi les
+		// precedentes, qui seraient desinfectees 2 fois.
+		spip_desinfecte($GLOBALS,false);
 		include_spip('inc/php3');
 		spip_register_globals($x);
 	}
