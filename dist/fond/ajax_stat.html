@@ -1,18 +1,8 @@
-[#SET{ajaxid,ids#EVAL{'include_spip("inc/acces")?substr(md5(creer_uniqid()),0,8):""'}}
-<div id='#GET{ajaxid}'>(#INCLURE{fond=#ENV*{fond_ajax}}{env})</div>
 [(#REM) calculer l'env et la cle pour le contexte du traitement ajax]
 #SET{env,#ENV**|base64_encode}
 #SET{cle,#EVAL{#VAL{'include_spip("inc/securiser_action")?calculer_cle_action("'}|concat{#GET{env},'"):""'}}}
-<script type='text/javascript'>/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
-if (window.jQuery) {
-	var ajaxbloc_#GET{ajaxid} = function() {
-		jQuery('div#[(#GET{ajaxid})]')
-		.prepend('<div><input type=\'hidden\' name=\'var_ajax_env\' value=\'#GET{env}\' />'
-		+'<input type=\'hidden\' name=\'var_ajax_cle\' value=\'#GET{cle}\' /><\/div>')
-		.ajaxbloc();
-	};
-	jQuery('document').ready(ajaxbloc_#GET{ajaxid});
-	onAjaxLoad(ajaxbloc_#GET{ajaxid});
-}
-/*#EVAL{chr(93)}#EVAL{chr(93)}>*/</script>
+[
+<div class='ajaxbloc[ env-(#GET{env})][ cle-(#GET{cle})]'>
+(#INCLURE{fond=#ENV*{fond_ajax}}{env})
+</div><!-- ajaxbloc -->
 ]

@@ -5,6 +5,7 @@ config/remove.txt -text
 dist/favicon.ico -text
 dist/feed.png -text
 dist/fond/ajax.html -text
+dist/fond/ajax_fonctions.php -text
 dist/fond/ajax_stat.html -text
 dist/formulaires/choix_mots.html -text
 dist/formulaires/editer_article.html -text
@@ -18,7 +19,6 @@ dist/formulaires/editer_rubrique.php -text
 dist/formulaires/editer_site.html -text
 dist/formulaires/editer_site.php -text
 dist/formulaires/editer_site_fonctions.php -text
-dist/formulaires/formulaire_.html -text
 dist/formulaires/login_forum_abo.html -text
 dist/formulaires/logo_auteur.html -text
 dist/formulaires/oubli/charger.php -text

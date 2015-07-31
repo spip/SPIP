@@ -147,10 +147,13 @@ function traiter_formulaires_dynamiques(){
 			   || (count($_POST["erreurs_$form"] = call_user_func_array($verifier,$args))==0))
 			 && ($traiter = charger_fonction("traiter","formulaires/$form/",true))
 			 ) {
-				$_POST["message_ok_$form"] = call_user_func_array($traiter,$args);
+				$rev = call_user_func_array($traiter,$args);
 				// traiter peut retourner soit un message, soit un array(editable,message)
-				if (is_array($_POST["message_ok_$form"]))
-					list($_POST["editable_$form"],$_POST["message_ok_$form"]) = $_POST["message_ok_$form"];
+				if (is_array($rev)) {
+					$_POST["editable_$form"] = $rev[0];
+					$_POST["message_ok_$form"] = $rev[1];
+				} else
+					$rev = $_POST["message_ok_$form"];
 			}
 			// si le formulaire a ete soumis en ajax, on le renvoie direct !
 			if (_request('var_ajax')){

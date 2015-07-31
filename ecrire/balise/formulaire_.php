@@ -87,13 +87,6 @@ function balise_FORMULAIRE__dyn($form)
 	$action = parametre_url($action,'formulaire_action_cle',''); // nettoyer l'url des champs qui vont etre saisis
 	$action = parametre_url($action,'formulaire_action_args',''); // nettoyer l'url des champs qui vont etre saisis
 
-	$ajaxid = "";
-	if ((!$ajax=_request('var_ajax'))
-	 AND (isset($valeurs['_ajax']))
-	 AND $valeurs['_ajax']){
-		include_spip('inc/acces');
-		$ajaxid = substr(md5(creer_uniqid()),0,8);
-	}
 	if (isset($valeurs['_action'])){
 		$securiser_action = charger_fonction('securiser_action','inc');
 		$secu = inc_securiser_action_dist(reset($valeurs['_action']),end($valeurs['_action']),'',-1);
@@ -102,10 +95,11 @@ function balise_FORMULAIRE__dyn($form)
 		. "<input type='hidden' name='hash' value='".$secu['hash']."' />";
 	}
 
-	return array($ajaxid?"formulaires/formulaire_":"formulaires/$form", 0, 
+	return array("formulaires/$form",
+		3600,
 		array_merge(
-		$valeurs, 
-		array(
+			$valeurs, 
+			array(
 			'form' => $form,
 			'action' => $action,
 			'formulaire_args' => base64_encode(serialize($args)),
@@ -114,8 +108,8 @@ function balise_FORMULAIRE__dyn($form)
 			'message_ok' => $message_ok,
 			'message_erreur' => $message_erreur,
 			'editable' => $editable?' ':'',
-		),
-		$ajaxid?array('ajaxid' => "id$ajaxid"):array())
+			)
+		)
 	);
 }
 
