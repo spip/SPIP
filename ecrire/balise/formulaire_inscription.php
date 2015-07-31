@@ -30,11 +30,8 @@ function balise_FORMULAIRE_INSCRIPTION ($p) {
 // http://doc.spip.org/@balise_FORMULAIRE_INSCRIPTION_stat
 function balise_FORMULAIRE_INSCRIPTION_stat($args, $filtres) {
 	list($mode, $id, $focus) = $args;
-	//initialiser_mode_inscription
-	if(!$mode) $mode = $GLOBALS['meta']['accepter_inscriptions'] == 'oui' ? '1comite' : ''; 
-	if (!test_mode_inscription($mode))
-		return '';
-	else return array($mode, $focus, $id);
+	$mode = test_mode_inscription($mode);
+	return $mode ? array($mode, $focus, $id) : '';
 }
 
 // Si inscriptions pas autorisees, retourner une chaine d'avertissement
@@ -47,7 +44,6 @@ function balise_FORMULAIRE_INSCRIPTION_stat($args, $filtres) {
 function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id=0) {
 
 	if (!test_mode_inscription($mode)) return _T('pass_rien_a_faire_ici');
-
 	$nom = _request('nom_inscription');
 	$mail = _request('mail_inscription');
 	$commentaire = ($mode=='1comite') ? _T('pass_espace_prive_bla') : _T('pass_forum_bla');
@@ -83,14 +79,27 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id=0) {
 		);
 }
 
+
+// Verifier que les options de configuration acceptent l'inscription demandee
+// La liste globale des statuts donne le nom du statut pour le mode
+// Si mode inconnu laisser faire, c'est une extension non std
+// mais verifier que la syntaxe est compatible avec SQL
+
 // http://doc.spip.org/@test_mode_inscription
 function test_mode_inscription($mode) {
 
-  return (($mode == '1comite'  OR ($mode == 'redac') // redac: compatibilite
-		AND $GLOBALS['meta']['accepter_inscriptions'] == 'oui')
-	  OR ($mode == addslashes($mode) // mode libre mais syntaxe propre
-		AND ($GLOBALS['meta']['accepter_visiteurs'] == 'oui'
-			OR $GLOBALS['meta']['forums_publics'] == 'abo')));
+	$s = array_search($mode, $GLOBALS['liste_des_statuts']);
+	switch ($s) {
+
+	case 'info_redacteurs' : 
+	  return (($GLOBALS['meta']['accepter_inscriptions'] == 'oui') ? $mode : '');
+
+	case 'info_visiteurs' : 
+	  return (($GLOBALS['meta']['accepter_visiteurs'] == 'oui' OR $GLOBALS['meta']['forums_publics'] == 'abo') ? $mode : '');
+
+	default:
+	  return ($mode AND $mode == addslashes($mode)) ? $mode : '';
+	}
 }
 
 // fonction qu'on peut redefinir pour filtrer les adresses mail et les noms,
