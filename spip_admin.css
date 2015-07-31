@@ -1,20 +1,17 @@
-/*
- * Float ?
- */
+/* Les boutons d'admin survolent la page (sauf #FORMULAIRE_ADMIN) */
 .spip-admin-float {
 	top: 0px;
 	right: 20px;
-	position: absolute;
+	position: fixed;
+	z-index: 100;
 }
 
-/*
- * <ul><li>admin</li></ul>
- */
+
+/* Couleurs et design des boutons d'admin */
 .spip-admin-bloc {
 	font-family: Verdana,Arial,Helvetica,sans-serif;
 	background-color: transparent;
 	font-size: 10px;
-	z-index: 100;
 }
 
 .spip-admin-bloc li {
@@ -52,6 +49,7 @@ a:active.spip-admin-boutons {
 	background-color: #ccc;
 	border-bottom: 2px solid #f00;
 }
+
 
 /* Style pour le mode debug */
 #spip_debug {
