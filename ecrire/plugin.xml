@@ -229,6 +229,7 @@ Le programme est n&eacute; en 2001 d'une initiative du minir&eacute;zo, un colle
 	<pipeline><nom>affiche_droite</nom><action></action></pipeline>
 	<pipeline><nom>affiche_gauche</nom><action></action></pipeline>
 	<pipeline><nom>affiche_milieu</nom><action>f_queue_affiche_milieu</action></pipeline>
+	<pipeline><nom>affiche_pied</nom><action></action></pipeline>
 	<pipeline><nom>affiche_enfants</nom><action></action></pipeline>
 	<pipeline><nom>affiche_hierarchie</nom><action></action></pipeline>
 	<pipeline><nom>affiche_formulaire_login</nom>
