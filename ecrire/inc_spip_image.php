@@ -11,12 +11,10 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
-include_ecrire("inc_charsets");	# pour le nom de fichier
-include_ecrire("inc_session");	# verifier_action_auteur
+include_ecrire("inc_meta");
 
 // Tester nos capacites
-function spip_image_tester_dist() {
+function spip_action_tester_dist() {
 	global $pnmscale_command,$test_vignette;
 
 	// verifier les formats acceptes par GD
@@ -139,6 +137,4 @@ function spip_image_tester_dist() {
 	# image echec
 	redirige_par_entete(_DIR_IMG_PACK . 'puce-rouge-anim.gif');
 }
-
-
 ?>
