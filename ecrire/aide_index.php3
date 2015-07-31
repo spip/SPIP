@@ -232,6 +232,8 @@ function help_img($regs) {
 function help_menu($aide, $html) {
 	global $spip_lang_left, $spip_lang_rtl, $spip_lang_right;
 
+$triangle = "url(" . _DIR_IMG_PACK . 'triangle'.$spip_lang_rtl.'.gif) ';
+
 echo '<style type="text/css">
 <!--
 	a {text-decoration: none; }
@@ -241,8 +243,7 @@ echo '<style type="text/css">
 		float: '.$spip_lang_left.';
 		text-align: '.$spip_lang_left.';
 		width: 80%;
-		background: url(img_pack/triangle'.$spip_lang_rtl.'.gif) '
-	. $spip_lang_left.' center no-repeat;
+		background: ' . $triangle . $spip_lang_left.' center no-repeat;
 		margin: 2px;
 		padding: 0px;
 		padding-'.$spip_lang_left.': 20px;
@@ -253,7 +254,7 @@ echo '<style type="text/css">
 		float: '.$spip_lang_right.';
 		text-align: '.$spip_lang_right.';
 		width: 80%;
-		background: url(img_pack/triangle'.$spip_lang_rtl.'.gif) '.$spip_lang_right.' center no-repeat;
+		background: ' . $triangle . $spip_lang_right.' center no-repeat;
 		margin: 4px;
 		padding: 0px;
 		padding-'.$spip_lang_right.': 20px;

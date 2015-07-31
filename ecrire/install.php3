@@ -366,7 +366,7 @@ else if (!$etape) {
 	else {
 		install_debut_html();
 
-		echo "<p align='center'><img src='img_pack/logo-spip.gif'></p>";
+		echo "<p align='center'><img src='" . _DIR_IMG_PACK . "logo-spip.gif'></p>";
 		
 		echo "<p style='text-align: center; font-family: Verdana,Arial,Sans,sans-serif; font-size: 10px;'>";
 		echo "<b>SPIP $spip_version_affichee</b> ";

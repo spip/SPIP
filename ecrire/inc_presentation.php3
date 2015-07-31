@@ -1327,9 +1327,9 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 			echo "<a id='$id_forum'></a>";
 			if ($spip_display != 4) echo "<table width='100%' cellpadding='0' cellspacing='0' border='0'><tr>";
 			for ($count=2;$count<=$compteur_forum AND $count<20;$count++){
-				$fond[$count]='img_pack/rien.gif';
+				$fond[$count]=_DIR_IMG_PACK . 'rien.gif';
 				if ($i[$count]!=$nb_forum[$count]){
-					$fond[$count]='img_pack/forum-vert.gif';
+					$fond[$count]=_DIR_IMG_PACK . 'forum-vert.gif';
 				}
 				$fleche='rien.gif';
 				if ($count==$compteur_forum){
@@ -2464,7 +2464,7 @@ else {
 
 	// Bandeau
 	if ($rubrique == "administration") {
-		$style = "background: url(img_pack/rayures-danger.png); background-color: $couleur_foncee";
+		$style = "background: url(" . _DIR_IMG_PACK . "rayures-danger.png); background-color: $couleur_foncee";
 		echo "<style>a.icone26 { color: white; }</style>";
 	}
 	else {
@@ -2522,7 +2522,7 @@ else {
 	echo "<td class='bandeau_couleur' style='text-align: $spip_lang_right;' valign='middle'>";
 
 			// Choix display
-		//	echo"<img src='img_pack/rien.gif' width='10' />";
+		//	echo"<img src=_DIR_IMG_PACK . 'rien.gif' width='10' />";
 			if ($options != "avancees") {
 				$lien = new Link;
 				$lien->addVar('set_options', 'avancees');
@@ -2556,7 +2556,7 @@ else {
 				  http_img_pack("set-ecran.png", "alt=\""._T('info_grand_ecran')."\" width='26' height='20' border='0'") ."</a>";
 				$ecran = "<div><b>"._T('info_petit_ecran')."</b>/<a href='".$lien->getUrl()."' class='lien_sous'>"._T('info_grand_ecran')."</a></div>";
 			}
-//			echo "<img src='img_pack/rien.gif' width='10' height='1' alt='' />";
+//			echo "<img src=_DIR_IMG_PACK . 'rien.gif' width='10' height='1' alt='' />";
 		echo "</td>";
 		
 		echo "<td class='bandeau_couleur' style='width: 60px; text-align:$spip_lang_left;' valign='middle'>";
@@ -2571,7 +2571,7 @@ else {
 					echo "<a href=\"".$link->getUrl()."\">" .
 					  http_img_pack("rien.gif", "width='8' height='8' border='0' style='margin: 1px; background-color: ".$couleurs_spip[$key]['couleur_claire'].";' onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\" alt=''"). "</a>";
 			}
-			// echo "<img src='img_pack/rien.gif' width='10' height='1' />";
+			// echo "<img src=_DIR_IMG_PACK . 'rien.gif' width='10' height='1' />";
 		echo "</td>";
 	//
 	// choix de la langue

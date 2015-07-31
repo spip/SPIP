@@ -3,6 +3,19 @@
 include ("inc.php3");
 include_ecrire("inc_statistiques.php3");
 
+function http_img_rien($width, $height, $style='', $title='')
+{
+  return "<img src='"
+    . _DIR_IMG_PACK . "rien.gif' width='$width' height='$height' alt=''" 
+    . (!$style ? '' : (" style='$style'"))
+    . (!$title ? '' : (" title=\"$title\""))
+    . "/>";
+}
+
+function http_a_img($href, $img, $att)
+{
+  return "<a href='$href'><img src='" . _DIR_IMG_PACK . $img . "' $att /></a>";
+}
 
 if ($id_article = intval($id_article)){
 	$query = "SELECT titre, visites, popularite FROM spip_articles WHERE statut='publie' AND id_article ='$id_article'";
@@ -301,8 +314,8 @@ if (!$origine) {
 		
 		if ($id_article) $pour_article="&id_article=$id_article";
 		
-		if ($date_premier < $date_debut) echo "<a href='statistiques_visites.php3?aff_jours=$aff_jours_plus$pour_article'><img src='img_pack/loupe-moins.gif' border='0' valign='center'></a>&nbsp;";
-		if ( (($date_today - $date_debut) / (24*3600)) > 30)  echo "<a href='statistiques_visites.php3?aff_jours=$aff_jours_moins$pour_article'><img src='img_pack/loupe-plus.gif' border='0' valign='center'></a>&nbsp;";
+		if ($date_premier < $date_debut) echo http_a_img("statistiques_visites.php3?aff_jours=$aff_jours_plus$pour_article", 'loupe-moins.gif', "border='0' valign='center'"), "&nbsp;";
+		if ( (($date_today - $date_debut) / (24*3600)) > 30)  echo http_a_img("statistiques_visites.php3?aff_jours=$aff_jours_moins$pour_article", 'loupe-plus.gif', "border='0' valign='center'"), "&nbsp;";
 	
 		/*
 		if ($spip_svg_plugin == 'oui') {
@@ -314,10 +327,11 @@ if (!$origine) {
 		} 
 		else {
 		*/
-			echo "<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/fond-stats.gif'>";
+			echo "<table cellpadding=0 cellspacing=0 border=0><tr>",
+			  "<td background='", _DIR_IMG_PACK, "fond-stats.gif'>";
 			echo "<table cellpadding=0 cellspacing=0 border=0><tr>";
 	
-			echo "<td bgcolor='black'><img src='img_pack/rien.gif' width=1 height=200></td>";
+			echo "<td bgcolor='black'>", http_img_rien(1,200), "</td>";
 	
 			// Presentation graphique
 			while (list($key, $value) = each($log)) {
@@ -355,14 +369,15 @@ if (!$origine) {
 						echo "<td valign='bottom' width=$largeur>";
 						$difference = ($hauteur_moyenne) -1;
 						$moyenne = round($moyenne,2); // Pour affichage harmonieux
-						$tagtitle='"'.attribut_html(supprimer_tags("$jour | "
+						$tagtitle= attribut_html(supprimer_tags("$jour | "
 						._T('info_visites')." | "
-						._T('info_moyenne')." $moyenne")).'"';
+						._T('info_moyenne')." $moyenne"));
 						if ($difference > 0) {	
-							echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:#333333;' title=$tagtitle>";
-							echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur_moyenne title=$tagtitle>";
+						  echo http_img_rien($largeur,1, 'background-color:#333333;', $tagtitle);
+						  echo http_img_rien($largeur, $hauteur_moyenne, '', $tagtitle);
 						}
-						echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:black;' title=$tagtitle>";
+						echo 
+						    http_img_rien($largeur,1,'background-color:black;', $tagtitle);
 						echo "</td>";
 						$n++;
 					}
@@ -384,38 +399,38 @@ if (!$origine) {
 				$moyenne = round($moyenne,2); // Pour affichage harmonieux
 				echo "<td valign='bottom' width=$largeur>";
 	
-				$tagtitle='"'.attribut_html(supprimer_tags("$jour | "
-				._T('info_visites')." ".$value)).'"';
+				$tagtitle= attribut_html(supprimer_tags("$jour | "
+				._T('info_visites')." ".$value));
 	
 				if ($hauteur > 0){
 					if ($hauteur_moyenne > $hauteur) {
 						$difference = ($hauteur_moyenne - $hauteur) -1;
-						echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:#333333;' title=$tagtitle>";
-						echo "<img src='img_pack/rien.gif' width=$largeur height=$difference title=$tagtitle>";
-						echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:$couleur_foncee;' title=$tagtitle>";
+						echo http_img_rien($largeur, 1,'background-color:#333333;',$tagtitle);
+						echo http_img_rien($largeur, $difference, '', $tagtitle);
+						echo http_img_rien($largeur,1, "background-color:$couleur_foncee;", $tagtitle);
 						if (date("w",$key) == "0") // Dimanche en couleur foncee
-							echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur style='background-color:$couleur_foncee;' title=$tagtitle>";
+						  echo http_img_rien($largeur, $hauteur, "background-color:$couleur_foncee;", $tagtitle);
 						else
-							echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur style='background-color:$couleur_claire;' title=$tagtitle>";
+						  echo http_img_rien($largeur,$hauteur, "background-color:$couleur_claire;", $tagtitle);
 					} else if ($hauteur_moyenne < $hauteur) {
 						$difference = ($hauteur - $hauteur_moyenne) -1;
-						echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:$couleur_foncee;' title=$tagtitle>";
+						echo http_img_rien($largeur,1,"background-color:$couleur_foncee;", $tagtitle);
 						if (date("w",$key) == "0") // Dimanche en couleur foncee
 							$couleur =  $couleur_foncee;
 						else
 							$couleur = $couleur_claire;
-						echo "<img src='img_pack/rien.gif' width=$largeur height='$difference' style='background-color:$couleur;' title=$tagtitle>";
-						echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:#333333;' title=$tagtitle>";
-						echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur_moyenne style='background-color:$couleur;' title=$tagtitle>";
+						echo http_img_rien($largeur, $difference, "background-color:$couleur;", $tagtitle);
+						echo http_img_rien($largeur,1,"background-color:#333333;", $tagtitle);
+						echo http_img_rien($largeur, $hauteur_moyenne, "background-color:$couleur;", $tagtitle);
 					} else {
-						echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:$couleur_foncee;' title=$tagtitle>";
+					  echo http_img_rien($largeur, 1, "background-color:$couleur_foncee;", $tagtitle);
 						if (date("w",$key) == "0") // Dimanche en couleur foncee
-							echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur style='background-color:$couleur_foncee;' title=$tagtitle>";
+						  echo http_img_rien($largeur, $hauteur, "background-color:$couleur_foncee;", $tagtitle);
 						else
-							echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur style='background-color:$couleur_claire;' title=$tagtitle>";
+						  echo http_img_rien($largeur,$hauteur, "background-color:$couleur_claire;", $tagtitle);
 					}
 				}
-				echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:black;' title=$tagtitle>";
+				echo http_img_rien($largeur, 1, 'background-color:black;', $tagtitle);
 				echo "</td>\n";
 			
 				$jour_prec = $key;
@@ -428,7 +443,7 @@ if (!$origine) {
 			$total_absolu = $total_absolu + $visites_today;
 			echo "<td valign='bottom' width=$largeur>";
 			if ($hauteur > 0){
-				echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:$couleur_foncee;'>";
+			  echo http_img_rien($largeur, 1, "background-color:$couleur_foncee;");
 	
 				// prevision de visites jusqu'a minuit
 				// basee sur la moyenne (site) ou popularite (article)
@@ -436,19 +451,19 @@ if (!$origine) {
 				$prevision = (1 - (date("H")*60 - date("i"))/(24*60)) * $val_popularite;
 				$hauteurprevision = ceil($prevision * $rapport);
 				$prevision = round($prevision,0)+$visites_today; // Pour affichage harmonieux
-				$tagtitle='"'.attribut_html(supprimer_tags(_T('info_aujourdhui')." $visites_today &rarr; $prevision")).'"';
-				echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteurprevision style='background-color:#eeeeee;' title=$tagtitle>";
+				$tagtitle= attribut_html(supprimer_tags(_T('info_aujourdhui')." $visites_today &rarr; $prevision"));
+				echo http_img_rien($largeur, $hauteurprevision,'background-color:#eeeeee;', $tagtitle);
 	
-				echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur style='background-color:#cccccc;' title=$tagtitle>";
+				echo http_img_rien($largeur, $hauteur, 'background-color:#cccccc;', $tagtitle);
 			}
-			echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:black;'>";
+			echo http_img_rien($largeur, 1, 'background-color:black;');
 			echo "</td>";
 		
-			echo "<td bgcolor='black'><img src='img_pack/rien.gif' width=1 height=1></td>";
+			echo "<td bgcolor='black'>",http_img_rien(1, 1),"</td>";
 			echo "</tr></table>";
-			echo "</td>";
-			echo "<td background='img_pack/fond-stats.gif' valign='bottom'><img src='img_pack/rien.gif' style='background-color:black;' width=3 height=1></td>";
-			echo "<td><img src='img_pack/rien.gif' width=5 height=1></td>";
+			echo "</td>",
+			  "<td background='", _DIR_IMG_PACK, "fond-stats.gif' valign='bottom'>", http_img_rien(3, 1, 'background-color:black;'),"</td>";
+			echo "<td>", http_img_rien(5, 1),"</td>";
 			echo "<td valign='top'><font face='Verdana,Arial,Sans,sans-serif' size=2>";
 			echo "<table cellpadding=0 cellspacing=0 border=0>";
 			echo "<tr><td height=15 valign='top'>";		
@@ -574,9 +589,10 @@ if (!$origine) {
 			if ($largeur > 50) $largeur = 50;
 		}
 		
-		echo "<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/fond-stats.gif'>";
+		echo "<table cellpadding=0 cellspacing=0 border=0><tr>",
+		  "<td background='", _DIR_IMG_PACK, "fond-stats.gif'>";
 		echo "<table cellpadding=0 cellspacing=0 border=0><tr>";
-		echo "<td bgcolor='black'><img src='img_pack/rien.gif' width=1 height=200></td>";
+		echo "<td bgcolor='black'>", http_img_rien(1, 200),"</td>";
 	
 		// Presentation graphique
 		$n = 0;
@@ -604,57 +620,57 @@ if (!$origine) {
 			$hauteur = round($value * $rapport) - 1;
 			echo "<td valign='bottom' width=$largeur>";
 
-			$tagtitle='"'.attribut_html(supprimer_tags("$mois | "
-			._T('info_visites')." ".$value)).'"';
+			$tagtitle= attribut_html(supprimer_tags("$mois | "
+			._T('info_visites')." ".$value));
 
 			if ($hauteur > 0){
 				if ($hauteur_moyenne > $hauteur) {
 					$difference = ($hauteur_moyenne - $hauteur) -1;
-					echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:#333333;'>";
-					echo "<img src='img_pack/rien.gif' width=$largeur height='$difference' title=$tagtitle>";
-					echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:$couleur_foncee;'>";
+					echo http_img_rien($largeur, 1, 'background-color:#333333;');
+					echo http_img_rien($largeur, $difference, '', $tagtitle);
+					echo http_img_rien($largeur,1,"background-color:$couleur_foncee;");
 					if (ereg("-01",$key)){ // janvier en couleur foncee
-						echo "<img src='img_pack/rien.gif' width=$largeur height='$hauteur' style='background-color:$couleur_foncee;' title=$tagtitle>";
+					  echo http_img_rien($largeur,$hauteur,"background-color:$couleur_foncee;", $tagtitle);
 					} 
 					else {
-						echo "<img src='img_pack/rien.gif' width=$largeur height='$hauteur' style='background-color:$couleur_claire;' title=$tagtitle>";
+					  echo http_img_rien($largeur,$hauteur,"background-color:$couleur_claire;", $tagtitle);
 					}
 				}
 				else if ($hauteur_moyenne < $hauteur) {
 					$difference = ($hauteur - $hauteur_moyenne) -1;
-					echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:$couleur_foncee;' title=$tagtitle>";
+					echo http_img_rien($largeur,1,"background-color:$couleur_foncee;", $tagtitle);
 					if (ereg("-01",$key)){ // janvier en couleur foncee
 						$couleur =  $couleur_foncee;
 					} 
 					else {
 						$couleur = $couleur_claire;
 					}
-					echo "<img src='img_pack/rien.gif' width=$largeur height='$difference' style='background-color:$couleur;' title=$tagtitle>";
-					echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:#333333;' title=$tagtitle>";
-					echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur_moyenne style='background-color:$couleur;' title=$tagtitle>";
+					echo http_img_rien($largeur,$difference, "background-color:$couleur;", $tagtitle);
+					echo http_img_rien($largeur,1,'background-color:#333333;',$tagtitle);
+					echo http_img_rien($largeur,$hauteur_moyenne,"background-color:$couleur;", $tagtitle);
 				}
 				else {
-					echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:$couleur_foncee;' title=$tagtitle>";
+				  echo http_img_rien($largeur,1,"background-color:$couleur_foncee;", $tagtitle);
 					if (ereg("-01",$key)){ // janvier en couleur foncee
-						echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur style='background-color:$couleur_foncee;' title=$tagtitle>";
+					  echo http_img_rien($largeur, $hauteur, "background-color:$couleur_foncee;", $tagtitle);
 					} 
 					else {
-						echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur style='background-color:$couleur_claire;' title=$tagtitle>";
+					  echo http_img_rien($largeur,$hauteur, "background-color:$couleur_claire;", $tagtitle);
 					}
 				}
 			}
-			echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:black;' title=$tagtitle>";
+			echo http_img_rien($largeur,1,'background-color:black;', $tagtitle);
 			echo "</td>\n";
 			
 			$jour_prec = $key;
 			$val_prec = $value;
 		}
 		
-		echo "<td bgcolor='black'><img src='img_pack/rien.gif' width=1 height=1></td>";
+		echo "<td bgcolor='black'>", http_img_rien(1, 1),"</td>";
 		echo "</tr></table>";
-		echo "</td>";
-		echo "<td background='img_pack/fond-stats.gif' valign='bottom'><img src='img_pack/rien.gif' style='background-color:black;' width=3 height=1></td>";
-		echo "<td><img src='img_pack/rien.gif' width=5 height=1></td>";
+		echo "</td>",
+		  "<td background='", _DIR_IMG_PACK, "fond-stats.gif' valign='bottom'>", http_img_rien(3, 1, 'background-color:black;'),"</td>";
+		echo "<td>", http_img_rien(5, 1),"</td>";
 		echo "<td valign='top'><font face='Verdana,Arial,Sans,sans-serif' size=2>";
 		echo "<table cellpadding=0 cellspacing=0 border=0>";
 		echo "<tr><td height=15 valign='top'>";		

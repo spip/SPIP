@@ -22,6 +22,8 @@ if (!$headers_only) {
 		$couleur_claire = "#EDF3FE";
 	if (!isset($couleur_foncee))
 		$couleur_foncee = "#3874B0";
+
+	function http_img_pack($f) { return _DIR_IMG_PACK . $f; }
 ?>
 
 /*
@@ -121,7 +123,7 @@ td {
 	width: 11px;
 	padding: 0px;
 	margin: 0px;
-	background: url(img_pack/tirets-separation.gif);
+	background: url(<?php echo http_img_pack('tirets-separation.gif') ?>);
 	background-position: 5px 0px;
 }
 .bandeau_couleur {
@@ -174,7 +176,7 @@ a.bandeau_rub {
 	border-bottom: 1px solid #cccccc;
 	background-repeat: no-repeat;
 	background-position: <?php echo $ltr ? "1%" : "99%"; ?> center;
-	background-image: url(img_pack/rubrique-12.gif);
+	background-image: url(<?php echo http_img_pack('rubrique-12.gif') ?>);
 }
 a.bandeau_rub:hover {
 	background-color: white;
@@ -195,7 +197,7 @@ div.bandeau_rub {
 }
 
 div.brt {
-	background: url(img_pack/triangle-droite<?php echo $_rtl; ?>.gif) <?php echo $right; ?> center no-repeat;
+	background: url(<?php echo http_img_pack('triangle-droite' . $_rtl .' gif'), ')', $right; ?> center no-repeat;
 }
 div.pos_r {
 	position: relative;
@@ -203,7 +205,7 @@ div.pos_r {
 
 option.selec_rub {
 	background-position: <?php echo $left; ?> center;
-	background-image: url(img_pack/rubrique-12.gif);
+	background-image: url(<?php echo http_img_pack('rubrique-12.gif') ?>);
 	background-repeat: no-repeat;
 	padding-<?php echo $left; ?>: 16px;
 }
@@ -237,7 +239,7 @@ a.icone26 img {
 	background-color: <?php echo $couleur_foncee; ?>;
 }
 a.icone26:hover img {
-	background: url(img_pack/fond-gris-anim.gif);
+	background: url(<?php echo http_img_pack('fond-gris-anim.gif') ?>);
 }
 
 
@@ -359,7 +361,7 @@ a.icone26:hover img {
 	margin: 4px;
 	padding: 0px;
 	border: 0px;
-	background: url(img_pack/fond-gris-anim.gif);
+	background: url(<?php echo http_img_pack('fond-gris-anim.gif') ?>);
 }
 
 
@@ -384,7 +386,7 @@ a.icone26:hover img {
 	display: inline;
 	padding: 3px;
 	background-color: #e4e4e4;
-	background: url(img_pack/fond-gris-anim.gif);
+	background: url(<?php echo http_img_pack('fond-gris-anim.gif') ?>);
 	border: 1px solid <?php echo $couleur_foncee; ?>;
 	-moz-border-radius: 5px;
 }
@@ -491,7 +493,7 @@ a.cellule-h div.cell-i {
 a.cellule-h:hover div.cell-i {
 	padding: 0px;
 	border: 1px solid <?php echo $couleur_foncee; ?>;
-	background: url(img_pack/fond-gris-anim.gif);
+	background: url(<?php echo http_img_pack('fond-gris-anim.gif') ?>);
 	-moz-border-radius: 5px;
 	margin: 0px;
 	margin-<?php echo $right; ?>: 3px;
@@ -534,7 +536,7 @@ a.cellule-h-texte {
 }
 .danger a.cellule-h-texte {
 	border: 1px dashed black;
-	background: url(img_pack/rayures-sup.gif);
+	background: url(<?php echo http_img_pack('rayures-sup.gif') ?>);
 }
 a.cellule-h-texte:hover {
 	text-decoration: none;
@@ -627,15 +629,21 @@ div.onglet_off {
 
 
 
-.reliefblanc { background-image: url(img_pack/barre-blanc.gif); }
-.reliefgris { background-image: url(img_pack/barre-noir.gif); }
+.reliefblanc {
+	 background-image: url(<?php echo http_img_pack('barre-blanc.gif') ?>);
+}
+.reliefgris { 
+	 background-image: url(<?php echo http_img_pack('barre-noir.gif') ?>);
+}
 .iconeoff {
 	padding: 3px; margin: 1px; border: 1px dashed #aaaaaa; background-color: #f0f0f0;
 }
 .iconeon {
 	cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #666666; border-top: solid 1px #666666; background-color: #eeeeee;
 }
-.iconedanger { padding: 3px; margin: 1px; border: 1px dashed black; background: url(img_pack/rayures-sup.gif);}
+.iconedanger { padding: 3px; margin: 1px; border: 1px dashed black;
+	background: url(<?php echo http_img_pack('rayures-sup.gif') ?>);
+}
 
 /* Raccourcis pour les polices (utile pour les tableaux) */
 .arial0 { font-family: Arial, Sans, sans-serif; font-size: 9px; }
@@ -713,7 +721,7 @@ a.ortho-dico:hover {
 	z-index: 0;
 }
 .suggest-actif .detail ul, .suggest-inactif .detail ul {
-	list-style-image: url(img_pack/puce.gif);
+	 list-style-image: url(<?php echo http_img_pack('puce.gif') ?>);
 	background: #f3f2f3;
 	margin: 0px;
 	padding: 0px;
@@ -1018,19 +1026,19 @@ a.bouton_rotation:hover img {
 	text-decoration: none;
 }
 .plan-articles .publie {
-	background-image: url(img_pack/puce-verte.gif);
+	 background-image: url(<?php echo http_img_pack('puce-verte.gif') ?>);
 }
 .plan-articles .prepa {
-	background-image: url(img_pack/puce-blanche.gif);
+	 background-image: url(<?php echo http_img_pack('puce-blanche.gif') ?>);
 }
 .plan-articles .prop {
-	background-image: url(img_pack/puce-orange.gif);
+	 background-image: url(<?php echo http_img_pack('puce-orange.gif') ?>);
 }
 .plan-articles .refuse {
-	background-image: url(img_pack/puce-rouge.gif);
+	 background-image: url(<?php echo http_img_pack('puce-rouge.gif') ?>);
 }
 .plan-articles .poubelle {
-	background-image: url(img_pack/puce-poubelle.gif);
+	 background-image: url(<?php echo http_img_pack('puce-poubelle.gif') ?>);
 }
 
 a.foncee, a.foncee:hover, a.claire, a.claire:hover, span.creer, span.lang_base {
@@ -1080,7 +1088,7 @@ div.liste {
 }
 
 a.liste-mot {
-	background: url(img_pack/petite-cle.gif) <?php echo $left; ?> center no-repeat; 
+	background: url(<?php echo http_img_pack('petite-cle.gif'), ')', $left; ?> center no-repeat; 
 	padding-<?php echo $left; ?>: 30px;
 }
 
@@ -1151,7 +1159,7 @@ div.brouteur_rubrique {
 	border-bottom: 1px solid <?php echo $couleur_foncee; ?>;
 	border-left: 1px solid <?php echo $couleur_foncee; ?>;
 	border-right: 1px solid <?php echo $couleur_foncee; ?>;
-	background: url(img_pack/triangle-droite<?php echo $_rtl; ?>.gif) <?php echo $right; ?> center no-repeat;
+	background: url(<?php echo http_img_pack('triangle-droite'. $_rtl . 'gif'), ')', $right; ?> center no-repeat;
 	background-color: white;
 }
 
@@ -1163,7 +1171,7 @@ div.brouteur_rubrique_on {
 	border-bottom: 1px solid <?php echo $couleur_foncee; ?>;
 	border-left: 1px solid <?php echo $couleur_foncee; ?>;
 	border-right: 1px solid <?php echo $couleur_foncee; ?>;
-	background: url(img_pack/triangle-droite<?php echo $_rtl; ?>.gif) <?php echo $right; ?> center no-repeat;
+	background: url(<?php echo http_img_pack('triangle-droite' . $_rtl . 'gif'), ')', $right; ?> center no-repeat;
 	background-color: #e0e0e0;
 }
 
@@ -1256,7 +1264,7 @@ a.spip_in  {
 	border-bottom: 1px dashed;
 }
 a.spip_out {
-	background: url(img_pack/spip_out.gif) <?php echo $right; ?> center no-repeat;
+	background: url(<?php echo http_img_pack('spip_out.gif'), ')', $right; ?> center no-repeat;
 	padding-<?php echo $right; ?>: 10px;
 	border-bottom: 1px solid;
 }
