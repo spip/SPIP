@@ -1006,6 +1006,7 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc=array(), $serveur=''
 
 	$connexion['last'] = $query;
 	#spip_log($query, 'mysql.'._LOG_DEBUG);
+	$r = false;
 	if (mysqli_query($link, $query))
 		$r = mysqli_insert_id($link);
 	else {
