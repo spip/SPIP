@@ -10,7 +10,7 @@
 	ATTENTION: il faut absolument le charset sinon Firefox croit que
 	c'est du text/html !
 ]
-#CACHE{0*100,cache-client}
+#CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
@@ -58,9 +58,14 @@
 .formulaire_spip ul {
 	margin: 0;
 	padding: 0;
+	padding-bottom: 10px;
 	list-style: none;
 	background-color: #f0f0f0;
 }
+.formulaire_spip ul li ul {
+	padding-bottom: 0px;
+}
+
 .formulaire_spip li {
 	margin: 0;
 	padding: 10px 10px 0px 10px;
@@ -71,7 +76,6 @@
 .formulaire_spip li fieldset li {
 	border:0; 
 	padding: 10px 10px 0px 10px;
-	background-color: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];
 }
 
 /* elements du formulaire */
@@ -145,7 +149,7 @@ li.haut label
 }
 .formulaire_spip li.editer_texte label {
 	font-weight: bold;
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee}|couleur_foncer)], bottom [(#GET{left})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee})], bottom [(#GET{left})] no-repeat })]
 	color: white;
 }
 
@@ -206,7 +210,7 @@ li.gauche label,
 	font-weight: normal;
 	font-size: 80%;
 	line-height: 11px;
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee}|couleur_foncer)], bottom [(#GET{left})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee})], bottom [(#GET{left})] no-repeat })]
 
 }
 .formulaire_spip li fieldset legend, 
@@ -232,7 +236,6 @@ li.gauche label,
 	margin-right: -10px;
 	padding-bottom: 10px;
 	border-top: 1px solid #GET{foncee};
-	background-color: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];
 }
 /* champ des radio/checkbox
 *  on annule les decalages de label/champs
@@ -265,7 +268,8 @@ li.gauche label,
 }
 /* boutons */
 .formulaire_spip .boutons {
-	margin:0; clear:both;
+	margin:0; 
+	clear:both;
 	text-align: #GET{right};
 	margin: 7px 1em;
 }
