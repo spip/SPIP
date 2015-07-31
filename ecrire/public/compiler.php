@@ -793,18 +793,34 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 
 	$squelette = $f($squelette, '', $boucles, $descr);
 
-
-	$a = compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $connect);
-
+	$boucles = compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $connect);
 	// restituer les echappements
-	if ($esc) foreach($a as $i=>$boucle) {
-		$a[$i]->return = preg_replace_callback(",$inerte-(\d+)-,", create_function('$a', 'return chr($a[1]);'),
+	if ($esc) foreach($boucles as $i=>$boucle) {
+		$boucles[$i]->return = preg_replace_callback(",$inerte-(\d+)-,", create_function('$a', 'return chr($a[1]);'),
 			$boucle->return);
-		$a[$i]->descr['squelette'] = preg_replace_callback(",$inerte-(\d+)-,", create_function('$a', 'return "\\\\".chr($a[1]);'),
+		$boucles[$i]->descr['squelette'] = preg_replace_callback(",$inerte-(\d+)-,", create_function('$a', 'return "\\\\".chr($a[1]);'),
 			$boucle->descr['squelette']);
 	}
+	
+	$debug = ($boucles AND isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode']=='debug');
+	if ($debug) {
+		include_spip('public/decompiler');
+		foreach($boucles as $id => $boucle) {
+			if ($id)
+			  $decomp = "\n/* BOUCLE " .
+			    $boucle->type_requete .
+			    " " .
+			    str_replace('*/', '* /', public_decompiler($boucle, $gram, 0, 'criteres')) .
+			    " */\n";
+			else $decomp = ("\n/*\n" . 
+				 str_replace('*/', '* /', public_decompiler($squelette, $gram)) 
+				 . "\n*/");
+			$boucles[$id]->return = $decomp .$boucle->return; 
+			$GLOBALS['debug_objets']['code'][$nom.$id] = $boucle->return;
+		}
+	}
 
-	return $a;
+	return $boucles;
 }
 
 // Point d'entree pour arbre de syntaxe abstraite fourni en premier argument
@@ -933,19 +949,16 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 	// idem pour la racine
 	$descr['id_mere'] = '';
 	$corps = calculer_liste($squelette, $descr, $boucles);
-	$debug = (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode']=='debug');
 
-	if ($debug) {
-		include_spip('public/decompiler');
-		include_spip('public/format_' . _EXTENSION_SQUELETTES);
-	}
+
+
 	// Calcul du corps de toutes les fonctions PHP,
 	// en particulier les requetes SQL et TOTAL_BOUCLE
 	// de'terminables seulement maintenant
 
 	foreach($boucles as $id => $boucle) {
 		$boucle = $boucles[$id] = pipeline('pre_boucle', $boucle);
-		if ($boucle->return === false) continue;
+		if ($boucle->return === false) {$corps = false; continue;}
 		// appeler la fonction de definition de la boucle
 
 		if ($req = $boucle->type_requete) {
@@ -962,50 +975,17 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 		} else $req = ("\n\treturn '';");
 
 		$boucles[$id]->return = 
-			"function BOUCLE" . strtr($id,"-","_") . $nom .
+			"\n\nfunction BOUCLE" . strtr($id,"-","_") . $nom .
 			'(&$Cache, &$Pile, &$doublons, &$Numrows, $SP) {' .
 			$req .
-			"\n}\n\n";
-
-		if ($debug)
-			$GLOBALS['debug_objets']['code'][$nom.$id] = $boucles[$id]->return;
+			"\n}\n";
 	}
 
 	// Au final, si le corps ou un critere au moins s'est mal compile
 	// retourner False, sinon inserer leur decompilation
 	if (is_bool($corps)) return false;
-	foreach($boucles as $id => $boucle) {
-		if ($boucle->return === false) return false;
-		$boucle->return = "\n\n/* BOUCLE " .
-			$boucle->type_requete .
-			" " .
-			(!$debug ? '' : 
-			str_replace('*/', '* /', 
-				decompiler_criteres($boucle->param, 
-						$boucle->criteres))) .
-			" */\n\n " .
-			$boucle->return;
-	}
 
-	$secondes = spip_timer('calcul_skel');
-	spip_log("COMPIL ($secondes) [$sourcefile] $nom.php");
-
-	// Assimiler la fct principale a une boucle anonyme, c'est plus simple
-	$code = new Boucle;
-	$code->descr = $descr;
-	$code->return = '
-//
-// Fonction principale du squelette ' . 
-	$sourcefile . 
-	($connect ? " pour $connect" : '') . 
-	(!CODE_COMMENTE ? '' : "\n// Temps de compilation total: $secondes") .
-	"\n//" .
-	(!$debug ? '' : ("\n/*\n" . 
-			str_replace('*/', '* /', public_decompiler($squelette)) 
-				      . "\n*/")) . "
-
-function " . $nom . '($Cache, $Pile, $doublons=array(), $Numrows=array(), $SP=0) {
-
+	$principal = "\nfunction " . $nom . '($Cache, $Pile, $doublons=array(), $Numrows=array(), $SP=0) {
 '
 	// reporter de maniere securisee les doublons inclus
 .'
@@ -1023,6 +1003,21 @@ function " . $nom . '($Cache, $Pile, $doublons=array(), $Numrows=array(), $SP=0)
 	return analyse_resultat_skel(".var_export($nom,true)
 		.", \$Cache, \$page, ".var_export($sourcefile,true).");
 }";
+
+	$secondes = spip_timer('calcul_skel');
+	spip_log("COMPIL ($secondes) [$sourcefile] $nom.php");
+
+	// Assimiler la fct principale a une boucle anonyme, pour retourner un resultat simple
+	$code = new Boucle;
+	$code->descr = $descr;
+	$code->return = '
+//
+// Fonction principale du squelette ' . 
+	$sourcefile . 
+	($connect ? " pour $connect" : '') . 
+	(!CODE_COMMENTE ? '' : "\n// Temps de compilation total: $secondes") .
+	"\n//\n" .
+	$principal;
 
 	$boucles[''] = $code;
 	return $boucles;

@@ -306,10 +306,10 @@ function trouve_squelette_inclus($script)
       // a defaut on cherche le param 'page'
       if (!preg_match("/'param' => '([^']*)'/", $script, $reg))
 	$reg[1] = "inconnu";
-  $incl = $reg[1] . '.' .  _EXTENSION_SQUELETTES . '$';
+  $incl = ',' . $reg[1] . '[.]\w$,';
 
   foreach($debug_objets['sourcefile'] as $k => $v) {
-    if (preg_match(",$incl,",$v)) return $k;
+    if (preg_match($incl, $v)) return $k;
   }
   return "";
 }
@@ -456,7 +456,7 @@ function debusquer_navigation_squelettes($self)
 	$t_skel = _T('squelette');
 	foreach ($debug_objets['sourcefile'] as $nom => $sourcefile) {
 		$self2 = parametre_url($self,'var_mode_objet', $nom);
-		$nav = !$boucles ? '' : debusquer_navigation_boucles($boucles, $nom, $self);
+		$nav = !$boucles ? '' : debusquer_navigation_boucles($boucles, $nom, $self, $sourcefile);
 		$temps = !isset($debug_objets['profile'][$sourcefile]) ? '' : _T('zbug_profile', array('time'=>$debug_objets['profile'][$sourcefile]));
 
 		$res .= "<fieldset><legend>"
@@ -482,17 +482,19 @@ function debusquer_navigation_squelettes($self)
 	return $res;
 }
 
-function debusquer_navigation_boucles($boucles, $nom_skel, $self)
+function debusquer_navigation_boucles($boucles, $nom_skel, $self, $nom_source)
 {
 	$i = 0;
 	$res = '';
 	$var_mode_objet = _request('var_mode_objet');
+	$gram = preg_match('/[.](\w+)$/', $nom_source, $r) ? $r[1] : '';
+
 	foreach ($boucles as $objet => $boucle) {
 		if (substr($objet, 0, strlen($nom_skel)) == $nom_skel) {
 			$i++;
 			$nom = $boucle->id_boucle;
 			$req = $boucle->type_requete;
-			$crit = decompiler_criteres($boucle->param, $boucle->criteres);
+			$crit = public_decompiler($boucle, $gram, 0, 'criteres');
 			$self2 = $self .  "&amp;var_mode_objet=" .  $objet;
 
 			$res .= "\n<tr style='background-color: " .
@@ -575,7 +577,9 @@ function debusquer_source($objet, $affiche)
 		$res = ancre_texte("<"."?php\n".$quoi."\n?".">");
 	} else if ($affiche == 'boucle') {
 		$legend = _T('boucle') . ' ' .  $nom;
-		$res = ancre_texte(decompiler_boucle($quoi));
+		// Le compilateur prefixe le nom des boucles par l'extension du fichier source.
+		$gram = preg_match('/^([^_]+)_/', $objet, $r) ? $r[1] : '';
+		$res = ancre_texte(public_decompiler($quoi, '', 0, 'boucle'));
 	} else if ($affiche == 'squelette') {
 		$legend = $GLOBALS['debug_objets']['sourcefile'][$objet];
 		$res = ancre_texte($GLOBALS['debug_objets']['squelette'][$objet]);

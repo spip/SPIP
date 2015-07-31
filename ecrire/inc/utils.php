@@ -846,18 +846,6 @@ function autoriser_sans_cookie($nom)
   return in_array($nom, $autsanscookie);
 }
 
-function tester_url_ecrire($nom){
-	// tester si c'est une page en squelette
-	if (find_in_path('prive/squelettes/contenu/' . $nom . '.' . _EXTENSION_SQUELETTES))
-		return 'fond';
-	// compat skels orthogonaux version precedente
-	elseif (find_in_path('prive/exec/' . $nom . '.' . _EXTENSION_SQUELETTES))
-		return 'fond_monobloc';
-	// attention, il ne faut pas inclure l'exec ici car sinon on modifie l'environnement
-	// par un simple #URL_ECRIRE dans un squelette (cas d'un define en debut d'exec/nom )
-	return (find_in_path("{$nom}.php",'exec/') OR charger_fonction($nom,'exec',true))?$nom:'';
-}
-
 // Fonction codant et decodant les URLS des objets SQL mis en page par SPIP
 // $id = numero de la cle primaire si nombre, URL a decoder si pas numerique
 // $entite = surnom de la table SQL (donne acces au nom de cle primaire)
@@ -1810,7 +1798,7 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 		$page = evaluer_fond($f, $contexte, $connect);
 		if ($page === '') {
 			$c = isset($options['compil']) ? $options['compil'] :'';
-			$a = array('fichier'=>$fond.'.'._EXTENSION_SQUELETTES);
+			$a = array('fichier'=>$fond);
 			erreur_squelette(_T('info_erreur_squelette2', $a), $c);
 		}
 					 
@@ -1837,9 +1825,23 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 		return $options['trim'] ? ltrim($texte) : $texte;
 }
 
-function trouve_modele($nom)
+// Trouve un squelette, par defaut dans le repertoire modeles/
+// Attention, si le 2arg fourni, il doit avoir le / final 
+function trouve_modele($nom, $dir='modeles/')
 {
-	return find_in_path( 'modeles/' . $nom.'.'. _EXTENSION_SQUELETTES);
+	return find_in_path($nom.'.'. _EXTENSION_SQUELETTES, $dir);
+}
+
+function tester_url_ecrire($nom){
+	// tester si c'est une page en squelette
+	if (trouve_modele($nom, 'prive/squelettes/contenu/'))
+		return 'fond';
+	// compat skels orthogonaux version precedente
+	elseif (trouve_modele($nom, 'prive/exec/'))
+		return 'fond_monobloc';
+	// attention, il ne faut pas inclure l'exec ici car sinon on modifie l'environnement
+	// par un simple #URL_ECRIRE dans un squelette (cas d'un define en debut d'exec/nom )
+	return (find_in_path("{$nom}.php",'exec/') OR charger_fonction($nom,'exec',true))?$nom:'';
 }
 
 // Charger dynamiquement une extension php
