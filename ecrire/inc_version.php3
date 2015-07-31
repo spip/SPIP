@@ -340,10 +340,10 @@ if (@file_exists(_FILE_OPTIONS)) {
   include(_FILE_OPTIONS);
 }
 
-// la taille maxi des logos
-define_once('_LOGO_MAX_SIZE', 200); # poids en ko
-define_once('_LOGO_MAX_WIDTH', 300); # largeur en pixels
-define_once('_LOGO_MAX_HEIGHT', 200); # hauteur en pixels
+// la taille maxi des logos (0 : pas de limite)
+define_once('_LOGO_MAX_SIZE', 0); # poids en ko
+define_once('_LOGO_MAX_WIDTH', 0); # largeur en pixels
+define_once('_LOGO_MAX_HEIGHT', 0); # hauteur en pixels
 
 
 define_once('_DIR_INCLUDE', _DIR_RESTREINT);
@@ -1130,6 +1130,8 @@ function find_in_path ($filename, $path='AUTO') {
 			return "$dir/$filename";
 		}
 	}
+
+#	spip_log("find_in_path: pas de fichier '$filename' sur le chemin '$path'");
 }
 
 ?>
