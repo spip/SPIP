@@ -118,7 +118,7 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 	else if ($table == 'breves') $ou = _T('info_la_breve');
 	else if ($table == 'rubriques') $ou = _T('info_la_rubrique');
 
-	$result = spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe=$id_groupe");
+	$result = spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe=" . _q($id_groupe));
 
 	$table_mots = array();
 	$table_ids = array();
@@ -131,11 +131,12 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 	$res = '';
 
 	foreach (split(" *[,;] *", $cherche_mots) as $cherche_mot) {
+	  spip_log  (" cherche $cherche_mot");
 	  if  ($cherche_mot) {
 		$resultat = mots_ressemblants($cherche_mot, $table_mots, $table_ids);
 		$res .= "<p>" . debut_boite_info(true);
 		if (!$resultat) {
-			$res .= "<b>"._T('info_non_resultat', array('cherche_mot' => $cherche_mot))."</b><br /></p>";
+			$res .= "<b>"._T('info_non_resultat', array('cherche_mot' => htmlspecialchars($cherche_mot)))."</b><br /></p>";
 		}
 		else if (count($resultat) == 1) {
 			$nouveaux_mots[] = $resultat[0];
