@@ -206,8 +206,8 @@ function test_login($nom, $mail) {
 	$login = $login_base;
 
 	for ($i = 1; ; $i++) {
-		$n = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE login='$login' LIMIT 1"));
-		if (!$n) return $login;
+		if (!sql_countsel('spip_auteurs', "login='$login'"))
+			return $login;
 		$login = $login_base.$i;
 	}
 }
