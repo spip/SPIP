@@ -497,12 +497,6 @@ function creer_base() {
 		"('wmv', 'Windows Media', 'embed'), ".
 		"('zip', 'Zip', 'non')";
 	spip_query($query);
-
-
-	//
-	// Mettre a jour le numero de version installee
-	//
-	spip_query("REPLACE spip_meta (nom, valeur) VALUES ('version_installee', '$spip_version')");
 }
 
 
