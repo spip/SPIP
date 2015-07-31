@@ -154,6 +154,8 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 
 	// Pour RealVideo
 	$real = ((!ereg("^controls", $les_parametres)) AND (ereg("^(rm|ra|ram)$", $extension)));
+	// Pour Flash
+	$flash = ((!ereg("^controls", $les_parametres)) AND (ereg("^(swf)$", $extension)));
 
 	if ($inclus == "embed" AND !$real) {
 		
@@ -161,7 +163,7 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 					if (ereg("([^\=]*)\=([^\=]*)", $params[$i], $vals)){
 						$nom = $vals[1];
 						$valeur = $vals[2];
-						$inserer_vignette .= "<param name='$nom' value='$valeur'>";
+						$inserer_vignette .= "<param name='$nom' value='$valeur' />";
 						$param_emb .= " $nom='$valeur'";
 						if ($nom == "controls" AND $valeur == "PlayButton") { 
 							$largeur = 40;
@@ -174,13 +176,19 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 					}
 				}
 				
-				$vignette = "<object width='$largeur' height='$hauteur'>\n";
-				$vignette .= "<param name='movie' value='$fichier'>\n";
-				$vignette .= "<param name='src' value='$fichier'>\n";
+				$vignette = "<object ";
+				if ($flash)
+					$vignette .=
+					"type='application/x-shockwave-flash' data='$fichier' ";
+
+				$vignette .= "width='$largeur' height='$hauteur'>\n";
+				$vignette .= "<param name='movie' value='$fichier' />\n";
+				$vignette .= "<param name='src' value='$fichier' />\n";
 				$vignette .= $inserer_vignette;
-		
-				$vignette .= "<embed src='$fichier' $param_emb width='$largeur' height='$hauteur'></embed></object>\n";
-		
+
+				if (!$flash)
+					$vignette .= "<embed src='$fichier' $param_emb width='$largeur' height='$hauteur'></embed>\n";
+				$vignette .= "</object>\n";
 	}
 	else if ($inclus == "embed" AND $real) {
 			$vignette .= "<div>".embed_document ($id_document, "controls=ImageWindow|type=audio/x-pn-realaudio-plugin|console=Console$id_document|nojava=true|$les_parametres", false)."</div>";
@@ -215,7 +223,7 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 			$float = " style='float: $align;'";
 	}
 
-	$retour .= "<div class='spip_documents$class_align'$float>\n";
+	$retour .= "<div class='spip_document_$id_document spip_documents$class_align'$float>\n";
 	$retour .= $vignette;
 	
 	if ($titre) $retour .= "<div class='spip_doc_titre'><strong>$titre</strong></div>";
@@ -343,7 +351,7 @@ function integre_image($id_document, $align, $type_aff) {
 	# mode <span ...> : ne pas mettre d'attributs de type block sinon MSIE Windows refuse de faire des liens dessus
 	if ($span == 'span') {
 		$vignette = inserer_attribut($vignette, 'style', $float.'border-width: 0px; width:'.$width.'px;');
-		$vignette = inserer_attribut($vignette, 'class', "spip_documents$class_align");
+		$vignette = inserer_attribut($vignette, 'class', "spip_document_$id_document spip_documents$class_align");
 		return $vignette;
 	}
 	# mode <div ...>
@@ -356,7 +364,7 @@ function integre_image($id_document, $align, $type_aff) {
 			$style = " style='$float$width'";
 		}
 		return
-			"<div class='spip_documents$class_align'$style>"
+			"<div class='spip_document_$id_document spip_documents$class_align'$style>"
 			. $vignette
 			. $txt
 			. "</div>\n";
