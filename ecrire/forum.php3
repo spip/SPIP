@@ -13,7 +13,6 @@ debut_gauche();
 if ($connect_statut == '0minirezo') {
 	debut_raccourcis();
 	
-	//icone_horizontale("Forum interne", "forum.php3", "forum-interne-24.gif", "rien.gif");
 	icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.gif", "rien.gif");
 
 	$query_petition = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut!='perso' AND statut != 'redac' AND date_heure > DATE_SUB(NOW(),INTERVAL 30 DAY)";
@@ -23,7 +22,7 @@ if ($connect_statut == '0minirezo') {
 	}
 	if ($nombre_petition > 0) {
 		echo "<p>";
-		icone_horizontale("$nombre_petition messages de forums", "controle_forum.php3", "suivi-forum-24.gif", "rien.gif");
+		icone_horizontale("Suivi des forums", "controle_forum.php3", "suivi-forum-24.gif", "rien.gif");
 	}
 
 
