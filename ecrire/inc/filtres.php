@@ -2780,7 +2780,7 @@ function filtre_pagination_dist($total, $nom, $position, $pas, $liste = true, $m
 
 	// n'afficher l'ancre qu'une fois
 	if (!isset($ancres[$ancre]))
-		$bloc_ancre = $ancres[$ancre] = "<a name='".$ancre."' id='".$ancre."'></a>";
+		$bloc_ancre = $ancres[$ancre] = "<a id='".$ancre."'></a>";
 	else $bloc_ancre = '';
 	// liste = false : on ne veut que l'ancre
 	if (!$liste)
