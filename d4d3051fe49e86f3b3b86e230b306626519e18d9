@@ -1,0 +1,13 @@
+Unsynced commit 'd4d3051fe49e86f3b3b86e230b306626519e18d9' referred by 'tag spip-3.0.10' has been detected at septembre 03, 2015;
+Git and Subversion repositories are out of sync at the moment.
+
+To translate this unsynced commit to Subversion and restore synchronized state do:
+
+1. Fetch unsynced commit to your local Git clone
+    $ git fetch origin refs/subgit/unsynced/tags/spip-3.0.10/1:refs/subgit/unsynced/tags/spip-3.0.10/1
+
+2. Merge fetched ref to 'tag spip-3.0.10'
+    $ git merge refs/subgit/unsynced/tags/spip-3.0.10/1 refs/tags/spip-3.0.10
+
+3. Push merged commit back to the Git repository
+    $ git push origin refs/tags/spip-3.0.10

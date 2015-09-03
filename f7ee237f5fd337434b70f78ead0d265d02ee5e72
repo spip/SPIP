@@ -1,0 +1,13 @@
+Unsynced commit 'f7ee237f5fd337434b70f78ead0d265d02ee5e72' referred by 'tag spip-2.0.11' has been detected at septembre 03, 2015;
+Git and Subversion repositories are out of sync at the moment.
+
+To translate this unsynced commit to Subversion and restore synchronized state do:
+
+1. Fetch unsynced commit to your local Git clone
+    $ git fetch origin refs/subgit/unsynced/tags/spip-2.0.11/1:refs/subgit/unsynced/tags/spip-2.0.11/1
+
+2. Merge fetched ref to 'tag spip-2.0.11'
+    $ git merge refs/subgit/unsynced/tags/spip-2.0.11/1 refs/tags/spip-2.0.11
+
+3. Push merged commit back to the Git repository
+    $ git push origin refs/tags/spip-2.0.11
