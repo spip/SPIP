@@ -76,7 +76,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='
 	}
 
 	// Ne plus rien faire si le compilateur n'a pas pu operer.
-	if (!$skel_code) return false;
+	if (!isset($skel_code) or !$skel_code) return false;
 
 	foreach($skel_code as $id => $boucle) {
 		$f = $boucle->return;
