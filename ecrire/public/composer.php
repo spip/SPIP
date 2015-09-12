@@ -74,6 +74,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='
 		$compiler = charger_fonction('compiler', 'public');
 		$skel_code = $compiler($skel, $nom, $gram, $source, $connect);
 	}
+	else spip_log ("Impossible de lire le fichier de squelette '$source'");
 
 	// Ne plus rien faire si le compilateur n'a pas pu operer.
 	if (!isset($skel_code) or !$skel_code) return false;
