@@ -205,7 +205,7 @@ function objet_modifier_champs($objet, $id_objet, $options, $c=null, $serveur=''
 		// on verifie si elle est bien passee
 		$moof = sql_fetsel(array_keys($champs), $spip_table_objet, "$id_table_objet=".intval($id_objet), array(), array(), '', array(), $serveur);
 		// si difference entre les champs, reperer les champs mal enregistres
-		if ($moof != $champs) {
+		if ($moof and $moof != $champs) {
 			$liste = array();
 			foreach($moof as $k=>$v) {
 				if ($v !== $champs[$k]
