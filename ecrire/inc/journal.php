@@ -11,9 +11,8 @@
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
-
 
 /*
  * Consigner une phrase dans le journal de bord du site
@@ -23,14 +22,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param string $journal
  * @param array $opt
  */
-function inc_journal_dist($phrase, $opt = array()) {
-	if (!strlen($phrase)) {
-		return;
-	}
-	if ($opt) {
-		$phrase .= " :: " . str_replace("\n", ' ', join(', ', $opt));
-	}
-	spip_log($phrase, 'journal');
+function inc_journal_dist($phrase, $opt = array())
+{
+    if (!strlen($phrase)) {
+        return;
+    }
+    if ($opt) {
+        $phrase .= ' :: '.str_replace("\n", ' ', implode(', ', $opt));
+    }
+    spip_log($phrase, 'journal');
 }
-
-?>

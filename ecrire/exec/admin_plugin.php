@@ -11,13 +11,10 @@
 \***************************************************************************/
 
 /**
- * Gestion d'affichage de l'administration des plugins
- *
- * @package SPIP\Core\Exec
+ * Gestion d'affichage de l'administration des plugins.
  */
-
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 include_spip('inc/config');
@@ -28,35 +25,36 @@ include_spip('inc/actions');
 include_spip('inc/securiser_action');
 
 /**
- * Affichage de la page de gestion des plugins
+ * Affichage de la page de gestion des plugins.
  *
  * Relance la page si des plugins ont été modifiés, sinon affiche la liste.
  *
  * @uses actualise_plugins_actifs()
+ *
  * @param string $retour Inutilisé
  */
-function exec_admin_plugin_dist($retour = '') {
-
-	if (!autoriser('configurer', '_plugins')) {
-		include_spip('inc/minipres');
-		echo minipres();
-	} else {
-		// on fait la verif du path avant tout,
-		// et l'installation des qu'on est dans la colonne principale
-		// si jamais la liste des plugins actifs change, il faut faire un refresh du hit
-		// pour etre sur que les bons fichiers seront charges lors de l'install
-		$new = actualise_plugins_actifs();
-		if ($new AND _request('actualise') < 2) {
-			include_spip('inc/headers');
-			redirige_par_entete(parametre_url(self(), 'actualise', _request('actualise')+1, '&'));
-		} else {
-			admin_plug_args(_request('voir'), _request('erreur'), _request('format'));
-		}
-	}
+function exec_admin_plugin_dist($retour = '')
+{
+    if (!autoriser('configurer', '_plugins')) {
+        include_spip('inc/minipres');
+        echo minipres();
+    } else {
+        // on fait la verif du path avant tout,
+        // et l'installation des qu'on est dans la colonne principale
+        // si jamais la liste des plugins actifs change, il faut faire un refresh du hit
+        // pour etre sur que les bons fichiers seront charges lors de l'install
+        $new = actualise_plugins_actifs();
+        if ($new and _request('actualise') < 2) {
+            include_spip('inc/headers');
+            redirige_par_entete(parametre_url(self(), 'actualise', _request('actualise') + 1, '&'));
+        } else {
+            admin_plug_args(_request('voir'), _request('erreur'), _request('format'));
+        }
+    }
 }
 
 /**
- * Affichage spécifique de la page de gestion des plugins
+ * Affichage spécifique de la page de gestion des plugins.
  *
  * Affiche la liste des plugins demandés et les erreurs éventuelles.
  *
@@ -70,133 +68,134 @@ function exec_admin_plugin_dist($retour = '') {
  * @pipeline_appel affiche_milieu
  *
  * @param string $quoi
- *     Quels plugins afficher ? actifs, ou autre
+ *                       Quels plugins afficher ? actifs, ou autre
  * @param string $erreur
- *     Erreur éventuelle à afficher
+ *                       Erreur éventuelle à afficher
  * @param string $format
- *     Format d'affichage (liste ou arborescence)
+ *                       Format d'affichage (liste ou arborescence)
  **/
-function admin_plug_args($quoi, $erreur, $format) {
-	if (!$quoi) {
-		$quoi = 'actifs';
-	}
-	// empecher l'affichage des erreurs dans le bandeau, on le donne ensuite
-	// format brut par plugin
-	$GLOBALS['erreurs_activation_raw'] = plugin_donne_erreurs(true, false);
-	// format resume mis en forme
-	$erreur_activation = plugin_donne_erreurs();
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
+function admin_plug_args($quoi, $erreur, $format)
+{
+    if (!$quoi) {
+        $quoi = 'actifs';
+    }
+    // empecher l'affichage des erreurs dans le bandeau, on le donne ensuite
+    // format brut par plugin
+    $GLOBALS['erreurs_activation_raw'] = plugin_donne_erreurs(true, false);
+    // format resume mis en forme
+    $erreur_activation = plugin_donne_erreurs();
+    $commencer_page = charger_fonction('commencer_page', 'inc');
+    echo $commencer_page(_T('icone_admin_plugin'), 'configuration', 'plugin');
 
-	echo debut_gauche('plugin', true);
-	echo recuperer_fond('prive/squelettes/navigation/configurer', array('exec' => 'admin_plugin'));
+    echo debut_gauche('plugin', true);
+    echo recuperer_fond('prive/squelettes/navigation/configurer', array('exec' => 'admin_plugin'));
 
-	echo pipeline('affiche_gauche',
-		array(
-			'args' => array('exec' => 'admin_plugin'),
-			'data' => afficher_librairies()
-		)
-	);
+    echo pipeline('affiche_gauche',
+        array(
+            'args' => array('exec' => 'admin_plugin'),
+            'data' => afficher_librairies(),
+        )
+    );
 
-	echo debut_droite('plugin', true);
-	echo gros_titre(_T('icone_admin_plugin'), '', false);
+    echo debut_droite('plugin', true);
+    echo gros_titre(_T('icone_admin_plugin'), '', false);
 
-	// Barre d'onglets de premier niveau
-	echo barre_onglets("plugins", "plugins_actifs");
-	// Barre d'onglets de second niveau
-	$onglet2 = $quoi == 'actifs' ? 'plugins_actifs' : 'admin_plugin';
-	echo debut_onglet('onglets_simple second');
-	echo onglet(_T('plugins_tous_liste'), generer_url_ecrire("admin_plugin", "voir=tous"), 'admin_plugin', $onglet2);
-	echo onglet(_T('plugins_actifs_liste'), generer_url_ecrire("admin_plugin"), 'plugins_actifs', $onglet2);
-	echo fin_onglet();
+    // Barre d'onglets de premier niveau
+    echo barre_onglets('plugins', 'plugins_actifs');
+    // Barre d'onglets de second niveau
+    $onglet2 = $quoi == 'actifs' ? 'plugins_actifs' : 'admin_plugin';
+    echo debut_onglet('onglets_simple second');
+    echo onglet(_T('plugins_tous_liste'), generer_url_ecrire('admin_plugin', 'voir=tous'), 'admin_plugin', $onglet2);
+    echo onglet(_T('plugins_actifs_liste'), generer_url_ecrire('admin_plugin'), 'plugins_actifs', $onglet2);
+    echo fin_onglet();
 
-	// message d'erreur au retour d'une operation
-	if ($erreur) {
-		echo "<div class='error'>$erreur</div>";
-	}
-	if ($erreur_activation) {
-		echo "<div class='error'>$erreur_activation</div>";
-	}
+    // message d'erreur au retour d'une operation
+    if ($erreur) {
+        echo "<div class='error'>$erreur</div>";
+    }
+    if ($erreur_activation) {
+        echo "<div class='error'>$erreur_activation</div>";
+    }
 
-	// la mise a jour de cette meta a ete faite par ecrire_plugin_actifs
-	$actifs = unserialize($GLOBALS['meta']['plugin']);
-	$lcpa = $actifs+unserialize($GLOBALS['meta']['plugin_attente']);
+    // la mise a jour de cette meta a ete faite par ecrire_plugin_actifs
+    $actifs = unserialize($GLOBALS['meta']['plugin']);
+    $lcpa = $actifs + unserialize($GLOBALS['meta']['plugin_attente']);
 
-	// Les affichages se basent sur le repertoire, pas sur le nom
-	$actifs = liste_chemin_plugin($actifs, '');
-	if (defined('_DIR_PLUGINS_SUPPL')) {
-		$lcpas = liste_chemin_plugin($lcpa, _DIR_PLUGINS_SUPPL);
-	}
-	$lcpa = liste_chemin_plugin($lcpa);
+    // Les affichages se basent sur le repertoire, pas sur le nom
+    $actifs = liste_chemin_plugin($actifs, '');
+    if (defined('_DIR_PLUGINS_SUPPL')) {
+        $lcpas = liste_chemin_plugin($lcpa, _DIR_PLUGINS_SUPPL);
+    }
+    $lcpa = liste_chemin_plugin($lcpa);
 
-	// on installe les plugins maintenant,
-	// cela permet aux scripts d'install de faire des affichages (moches...)
-	plugin_installes_meta();
+    // on installe les plugins maintenant,
+    // cela permet aux scripts d'install de faire des affichages (moches...)
+    plugin_installes_meta();
 
-	echo "<div class='liste-plugins formulaire_spip'>";
-	echo debut_cadre_trait_couleur('plugin-24.png', true, '', _T('plugins_liste'), 'plugins');
+    echo "<div class='liste-plugins formulaire_spip'>";
+    echo debut_cadre_trait_couleur('plugin-24.png', true, '', _T('plugins_liste'), 'plugins');
 
-	if ($quoi !== 'actifs') {
-		$lpf = liste_plugin_files();
-		if ($lpf) {
-			echo "<p>" . _T('texte_presente_plugin') . "</p>";
-		} else {
-			if (!@is_dir(_DIR_PLUGINS)) {
-				echo "<p>" . _T('plugin_info_automatique_ftp', array('rep' => joli_repertoire(_DIR_PLUGINS)))
-					. " &mdash; " . _T('plugin_info_automatique_creer') . "</p>";
-			}
-		}
-		$lcpaffiche = $lpf;
-		if (defined('_DIR_PLUGINS_SUPPL')) {
-			$lcpaffichesup = liste_plugin_files(_DIR_PLUGINS_SUPPL);
-		}
-	} else {
-		// la liste
-		// $quoi=='actifs'
-		$lcpaffiche = $lcpa;
-		if (defined('_DIR_PLUGINS_SUPPL')) {
-			$lcpaffichesup = $lcpas;
-		}
-	}
+    if ($quoi !== 'actifs') {
+        $lpf = liste_plugin_files();
+        if ($lpf) {
+            echo '<p>'._T('texte_presente_plugin').'</p>';
+        } else {
+            if (!@is_dir(_DIR_PLUGINS)) {
+                echo '<p>'._T('plugin_info_automatique_ftp', array('rep' => joli_repertoire(_DIR_PLUGINS)))
+                    .' &mdash; '._T('plugin_info_automatique_creer').'</p>';
+            }
+        }
+        $lcpaffiche = $lpf;
+        if (defined('_DIR_PLUGINS_SUPPL')) {
+            $lcpaffichesup = liste_plugin_files(_DIR_PLUGINS_SUPPL);
+        }
+    } else {
+        // la liste
+        // $quoi=='actifs'
+        $lcpaffiche = $lcpa;
+        if (defined('_DIR_PLUGINS_SUPPL')) {
+            $lcpaffichesup = $lcpas;
+        }
+    }
 
-	if ($quoi == 'actifs' OR $lpf) {
-		$nb = count($lcpa);
-		if (defined('_DIR_PLUGINS_SUPPL')) {
-			$nb += count($lcpas);
-		}
-		echo "<h3>" . sinon(singulier_ou_pluriel($nb, 'plugins_actif_un', 'plugins_actifs', 'count'),
-				_T('plugins_actif_aucun')) . "</h3>";
-	}
+    if ($quoi == 'actifs' or $lpf) {
+        $nb = count($lcpa);
+        if (defined('_DIR_PLUGINS_SUPPL')) {
+            $nb += count($lcpas);
+        }
+        echo '<h3>'.sinon(singulier_ou_pluriel($nb, 'plugins_actif_un', 'plugins_actifs', 'count'),
+                _T('plugins_actif_aucun')).'</h3>';
+    }
 
-	if (empty($format)) {
-		$format = 'liste';
-	} elseif (!in_array($format, array('liste', 'repertoires'))) {
-		$format = 'repertoires';
-	}
+    if (empty($format)) {
+        $format = 'liste';
+    } elseif (!in_array($format, array('liste', 'repertoires'))) {
+        $format = 'repertoires';
+    }
 
-	$afficher = charger_fonction("afficher_$format", 'plugins');
-	$corps = $afficher(self(), $lcpaffiche, $lcpa, $actifs);
-	if (defined('_DIR_PLUGINS_SUPPL')) {
-		$corps .= $afficher(self(), $lcpaffichesup, $lcpas, $actifs, _DIR_PLUGINS_SUPPL);
-	}
+    $afficher = charger_fonction("afficher_$format", 'plugins');
+    $corps = $afficher(self(), $lcpaffiche, $lcpa, $actifs);
+    if (defined('_DIR_PLUGINS_SUPPL')) {
+        $corps .= $afficher(self(), $lcpaffichesup, $lcpas, $actifs, _DIR_PLUGINS_SUPPL);
+    }
 
-	if ($corps) {
-		$corps .= "\n<div class='boutons' style='display:none;'>"
-			. "<input type='submit' class='submit save' value='" . _T('bouton_enregistrer')
-			. "' />"
-			. "</div>";
-	}
+    if ($corps) {
+        $corps .= "\n<div class='boutons' style='display:none;'>"
+            ."<input type='submit' class='submit save' value='"._T('bouton_enregistrer')
+            ."' />"
+            .'</div>';
+    }
 
-	echo redirige_action_post('activer_plugins', 'activer', 'admin_plugin', '', $corps);
+    echo redirige_action_post('activer_plugins', 'activer', 'admin_plugin', '', $corps);
 
-	echo fin_cadre_trait_couleur(true);
+    echo fin_cadre_trait_couleur(true);
 
-	if ($quoi == 'actifs') {
-		echo affiche_les_plugins_verrouilles($actifs);
-	}
-	echo "</div>";
+    if ($quoi == 'actifs') {
+        echo affiche_les_plugins_verrouilles($actifs);
+    }
+    echo '</div>';
 
-	echo http_script("
+    echo http_script("
 	jQuery(function(){
 		jQuery('.plugins li.item a[rel=info]').click(function(){
 			var li = jQuery(this).parents('li').eq(0);
@@ -222,94 +221,94 @@ function admin_plug_args($quoi, $erreur, $format) {
 	});
 	");
 
-	echo pipeline('affiche_milieu',
-		array(
-			'args' => array('exec' => 'admin_plugin'),
-			'data' => ''
-		)
-	);
+    echo pipeline('affiche_milieu',
+        array(
+            'args' => array('exec' => 'admin_plugin'),
+            'data' => '',
+        )
+    );
 
-	echo fin_gauche(), fin_page();
+    echo fin_gauche(), fin_page();
 }
 
 /**
- * Crée le code HTML de la liste des plugins verrouillés
+ * Crée le code HTML de la liste des plugins verrouillés.
  *
  * @uses liste_plugin_files()
  *
  * @param array $actifs
- *     Liste des plugins actifs
+ *                      Liste des plugins actifs
+ *
  * @return string
- *     Code HTML
+ *                Code HTML
  **/
-function affiche_les_plugins_verrouilles($actifs) {
-	if ((!$liste = liste_plugin_files(_DIR_PLUGINS_DIST))) {
-		return '';
-	}
+function affiche_les_plugins_verrouilles($actifs)
+{
+    if ((!$liste = liste_plugin_files(_DIR_PLUGINS_DIST))) {
+        return '';
+    }
 
-	$afficher = charger_fonction("afficher_liste", 'plugins');
-	$liste = $afficher(self(), $liste, array(), $actifs, _DIR_PLUGINS_DIST);
+    $afficher = charger_fonction('afficher_liste', 'plugins');
+    $liste = $afficher(self(), $liste, array(), $actifs, _DIR_PLUGINS_DIST);
 
-	return
-		"<div id='plugins_dist'>"
-		. debut_cadre_trait_couleur('', true, '', _T('plugins_liste_dist'), 'liste_plugins_dist')
-		. "<p>"
-		. _T('plugin_info_plugins_dist_1', array('plugins_dist' => joli_repertoire(_DIR_PLUGINS_DIST)))
-		. '<br />' . _T('plugin_info_plugins_dist_2')
-		. "</p>"
-		. $liste
-		. fin_cadre_trait_couleur(true)
-		. "</div>\n";
+    return
+        "<div id='plugins_dist'>"
+        .debut_cadre_trait_couleur('', true, '', _T('plugins_liste_dist'), 'liste_plugins_dist')
+        .'<p>'
+        ._T('plugin_info_plugins_dist_1', array('plugins_dist' => joli_repertoire(_DIR_PLUGINS_DIST)))
+        .'<br />'._T('plugin_info_plugins_dist_2')
+        .'</p>'
+        .$liste
+        .fin_cadre_trait_couleur(true)
+        ."</div>\n";
 }
 
 /**
- * Crée le code HTML de la liste des librairies présentes
+ * Crée le code HTML de la liste des librairies présentes.
  *
  * @uses liste_librairies()
  *
  * @return string Code HTML
  */
-function afficher_librairies() {
+function afficher_librairies()
+{
+    if (!$libs = liste_librairies()) {
+        return '';
+    }
+    ksort($libs);
+    $res = debut_cadre_enfonce('', true, '', _T('plugin_librairies_installees'));
+    $res .= '<dl>';
+    foreach ($libs as $lib => $rep) {
+        $res .= "<dt>$lib</dt><dd>".joli_repertoire($rep)."</dd>\n";
+    }
+    $res .= '</dl>';
+    $res .= fin_cadre_enfonce(true);
 
-	if (!$libs = liste_librairies()) {
-		return '';
-	}
-	ksort($libs);
-	$res = debut_cadre_enfonce('', true, '', _T('plugin_librairies_installees'));
-	$res .= '<dl>';
-	foreach ($libs as $lib => $rep) {
-		$res .= "<dt>$lib</dt><dd>" . joli_repertoire($rep) . "</dd>\n";
-	}
-	$res .= '</dl>';
-	$res .= fin_cadre_enfonce(true);
-
-	return $res;
+    return $res;
 }
-
 
 /**
- * Faire la liste des librairies disponibles
+ * Faire la liste des librairies disponibles.
  *
  * @return array
- *     Tableau (nom de la lib => repertoire , ...)
+ *               Tableau (nom de la lib => repertoire , ...)
  */
-function liste_librairies() {
-	$libs = array();
-	foreach (array_reverse(creer_chemin()) as $d) {
-		if (is_dir($dir = $d . 'lib/')
-			AND $t = @opendir($dir)
-		) {
-			while (($f = readdir($t)) !== false) {
-				if ($f[0] != '.'
-					AND is_dir("$dir/$f")
-				) {
-					$libs[$f] = $dir;
-				}
-			}
-		}
-	}
+function liste_librairies()
+{
+    $libs = array();
+    foreach (array_reverse(creer_chemin()) as $d) {
+        if (is_dir($dir = $d.'lib/')
+            and $t = @opendir($dir)
+        ) {
+            while (($f = readdir($t)) !== false) {
+                if ($f[0] != '.'
+                    and is_dir("$dir/$f")
+                ) {
+                    $libs[$f] = $dir;
+                }
+            }
+        }
+    }
 
-	return $libs;
+    return $libs;
 }
-
-?>

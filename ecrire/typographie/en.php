@@ -11,39 +11,38 @@
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 // rien sauf les "~" et "-,"
 
-function typographie_en_dist($letexte) {
+function typographie_en_dist($letexte)
+{
 
-	// zouli apostrophe
-	$letexte = str_replace("'", "&#8217;", $letexte);
+    // zouli apostrophe
+    $letexte = str_replace("'", '&#8217;', $letexte);
 
-	$cherche1 = array(
-		'/ --?,/S'
-	);
-	$remplace1 = array(
-		'~\0'
-	);
-	$letexte = preg_replace($cherche1, $remplace1, $letexte);
+    $cherche1 = array(
+        '/ --?,/S',
+    );
+    $remplace1 = array(
+        '~\0',
+    );
+    $letexte = preg_replace($cherche1, $remplace1, $letexte);
 
-	$letexte = str_replace("&nbsp;", "~", $letexte);
-	$letexte = preg_replace("/ *~+ */", "~", $letexte);
+    $letexte = str_replace('&nbsp;', '~', $letexte);
+    $letexte = preg_replace('/ *~+ */', '~', $letexte);
 
-	$cherche2 = array(
-		'/([^-\n]|^)--([^-]|$)/',
-		'/~/'
-	);
-	$remplace2 = array(
-		'\1&mdash;\2',
-		'&nbsp;'
-	);
+    $cherche2 = array(
+        '/([^-\n]|^)--([^-]|$)/',
+        '/~/',
+    );
+    $remplace2 = array(
+        '\1&mdash;\2',
+        '&nbsp;',
+    );
 
-	$letexte = preg_replace($cherche2, $remplace2, $letexte);
+    $letexte = preg_replace($cherche2, $remplace2, $letexte);
 
-	return $letexte;
+    return $letexte;
 }
-
-?>

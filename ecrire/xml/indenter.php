@@ -11,63 +11,68 @@
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
-class IndenteurXML {
+class IndenteurXML
+{
+    // http://code.spip.net/@debutElement
+    public function debutElement($phraseur, $name, $attrs)
+    {
+        xml_debutElement($this, $name, $attrs);
+    }
 
-	// http://code.spip.net/@debutElement
-	function debutElement($phraseur, $name, $attrs) {
-		xml_debutElement($this, $name, $attrs);
-	}
+    // http://code.spip.net/@finElement
+    public function finElement($phraseur, $name)
+    {
+        xml_finElement($this, $name);
+    }
 
-	// http://code.spip.net/@finElement
-	function finElement($phraseur, $name) {
-		xml_finElement($this, $name);
-	}
+    // http://code.spip.net/@textElement
+    public function textElement($phraseur, $data)
+    {
+        xml_textElement($this, $data);
+    }
 
-	// http://code.spip.net/@textElement
-	function textElement($phraseur, $data) {
-		xml_textElement($this, $data);
-	}
+    public function piElement($phraseur, $target, $data)
+    {
+        xml_PiElement($this, $target, $data);
+    }
 
-	function piElement($phraseur, $target, $data) {
-		xml_PiElement($this, $target, $data);
-	}
+    // http://code.spip.net/@defautElement
+    public function defaultElement($phraseur, $data)
+    {
+        xml_defaultElement($this, $data);
+    }
 
-	// http://code.spip.net/@defautElement
-	function defaultElement($phraseur, $data) {
-		xml_defaultElement($this, $data);
-	}
+    // http://code.spip.net/@phraserTout
+    public function phraserTout($phraseur, $data)
+    {
+        xml_parsestring($this, $data);
+    }
 
-	// http://code.spip.net/@phraserTout
-	function phraserTout($phraseur, $data) {
-		xml_parsestring($this, $data);
-	}
-
-	var $depth = "";
-	var $res = "";
-	var $err = array();
-	var $contenu = array();
-	var $ouvrant = array();
-	var $reperes = array();
-	var $entete = '';
-	var $page = '';
-	var $dtc = null;
-	var $sax = null;
+    public $depth = '';
+    public $res = '';
+    public $err = array();
+    public $contenu = array();
+    public $ouvrant = array();
+    public $reperes = array();
+    public $entete = '';
+    public $page = '';
+    public $dtc = null;
+    public $sax = null;
 }
 
 // http://code.spip.net/@xml_indenter_dist
-function xml_indenter_dist($page, $apply = false) {
-	$sax = charger_fonction('sax', 'xml');
-	$f = new IndenteurXML();
-	$sax($page, $apply, $f);
-	if (!$f->err) {
-		return $f->entete . $f->res;
-	}
-	spip_log("indentation impossible " . count($f->err) . " erreurs de validation");
+function xml_indenter_dist($page, $apply = false)
+{
+    $sax = charger_fonction('sax', 'xml');
+    $f = new IndenteurXML();
+    $sax($page, $apply, $f);
+    if (!$f->err) {
+        return $f->entete.$f->res;
+    }
+    spip_log('indentation impossible '.count($f->err).' erreurs de validation');
 
-	return $f->entete . $f->page;
+    return $f->entete.$f->page;
 }
-
-?>

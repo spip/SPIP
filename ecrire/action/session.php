@@ -11,17 +11,14 @@
 \***************************************************************************/
 
 /**
- * Gestion d'une action ajoutant une variable dans une session SPIP
- *
- * @package SPIP\Core\Sessions
+ * Gestion d'une action ajoutant une variable dans une session SPIP.
  **/
-
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 /**
- * Action pour poser une variable de session SPIP
+ * Action pour poser une variable de session SPIP.
  *
  * Poster sur cette action en indiquant les clés `var` et `val`
  *
@@ -31,20 +28,18 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @todo
  *   Envoyer en réponse : json contenant toutes les variables publiques de la session
  **/
-function action_session_dist() {
-	if ($var = _request('var')
-		AND preg_match(',^[a-z_0-9-]+$,i', $var)
-	) {
-		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-			include_spip('inc/session');
-			session_set('session_' . $var, $val = _request('val'));
-			#spip_log("autosave:$var:$val",'autosave');
-		}
-	}
+function action_session_dist()
+{
+    if ($var = _request('var')
+        and preg_match(',^[a-z_0-9-]+$,i', $var)
+    ) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            include_spip('inc/session');
+            session_set('session_'.$var, $val = _request('val'));
+            #spip_log("autosave:$var:$val",'autosave');
+        }
+    }
 
-	# TODO: mode lecture de session ; n'afficher que ce qu'il faut
-	#echo json_encode($GLOBALS['visiteur_session']);
+    # TODO: mode lecture de session ; n'afficher que ce qu'il faut
+    #echo json_encode($GLOBALS['visiteur_session']);
 }
-
-
-?>

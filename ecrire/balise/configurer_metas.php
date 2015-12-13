@@ -10,20 +10,16 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 /**
- * Ce fichier gère la balise dynamique `#CONFIGURER_METAS`
- *
- * @package SPIP\Core\Compilateur\Balises
+ * Ce fichier gère la balise dynamique `#CONFIGURER_METAS`.
  **/
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
-
 
 /**
  * Compile la balise dynamique `#CONFIGURER_METAS` appelant un formulaire
- * de configuration
+ * de configuration.
  *
  * L'usage `#CONFIGURER_METAS{nom}` suppose qu'il existe un formulaire
  * nommé `nom.html` et une table SQL `spip_nom` ayant deux colonnes
@@ -53,42 +49,46 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *   On pourrait toutefois traiter le cas de l'argument qui est une constante.
  *
  * @balise
+ *
  * @deprecated Utiliser `#FORMULAIRE_CONFIGURER_XX`
+ *
  * @param Champ $p
- *     Pile au niveau de la balise
+ *                 Pile au niveau de la balise
+ *
  * @return Champ
- *     Pile complétée du code compilé
+ *               Pile complétée du code compilé
  **/
-function balise_CONFIGURER_METAS_dist($p) {
-	return calculer_balise_dynamique($p, $p->nom_champ, array());
+function balise_CONFIGURER_METAS_dist($p)
+{
+    return calculer_balise_dynamique($p, $p->nom_champ, array());
 }
 
 /**
- * Exécution de la balise dynamique `#CONFIGURER_METAS`
+ * Exécution de la balise dynamique `#CONFIGURER_METAS`.
  *
  * À l'exécution on dispose du nom du squelette, on verifie qu'il existe.
  * Pour le calcul du contexte, c'est comme la balise `#FORMULAIRE_`
  * y compris le contrôle au retour pour faire apparaître le message d'erreur.
  *
  * @see balise_CONFIGURER_METAS_dist()
+ *
  * @param string $form
- *     Nom du formulaire
+ *                     Nom du formulaire
+ *
  * @return array
- *     Liste : Chemin du squelette, durée du cache, contexte
+ *               Liste : Chemin du squelette, durée du cache, contexte
  **/
-function balise_CONFIGURER_METAS_dyn($form) {
+function balise_CONFIGURER_METAS_dyn($form)
+{
+    include_spip('balise/formulaire_');
+    if (!existe_formulaire($form)) {
+        return '';
+    }
+    $args = func_get_args();
+    $contexte = balise_FORMULAIRE__contexte('configurer_metas', $args);
+    if (!is_array($contexte)) {
+        return $contexte;
+    }
 
-	include_spip('balise/formulaire_');
-	if (!existe_formulaire($form)) {
-		return '';
-	}
-	$args = func_get_args();
-	$contexte = balise_FORMULAIRE__contexte('configurer_metas', $args);
-	if (!is_array($contexte)) {
-		return $contexte;
-	}
-
-	return array('formulaires/' . $form, 3600, $contexte);
+    return array('formulaires/'.$form, 3600, $contexte);
 }
-
-?>

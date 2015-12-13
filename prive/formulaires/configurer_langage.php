@@ -11,51 +11,49 @@
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
-function formulaires_configurer_langage_charger_dist() {
+function formulaires_configurer_langage_charger_dist()
+{
+    include_spip('inc/lang');
+    $GLOBALS['meta']['langues_proposees'] = '';
+    init_langues();
+    $langues = explode(',', $GLOBALS['meta']['langues_proposees']);
 
-	include_spip('inc/lang');
-	$GLOBALS['meta']['langues_proposees'] = '';
-	init_langues();
-	$langues = explode(',', $GLOBALS['meta']['langues_proposees']);
+    $valeurs = array(
+        'var_lang_ecrire' => $GLOBALS['spip_lang'],
+        '_langues' => $langues,
+    );
 
-
-	$valeurs = array(
-		'var_lang_ecrire' => $GLOBALS['spip_lang'],
-		'_langues' => $langues
-	);
-
-	return $valeurs;
+    return $valeurs;
 }
 
+function formulaires_configurer_langage_traiter_dist()
+{
+    include_spip('action/converser');
+    action_converser_changer_langue(true);
 
-function formulaires_configurer_langage_traiter_dist() {
-	include_spip('action/converser');
-	action_converser_changer_langue(true);
+    refuser_traiter_formulaire_ajax();
 
-	refuser_traiter_formulaire_ajax();
-
-	// on ne peut pas changer la langue pour tout le hit ici,
-	// car CVT repasse derriere et retablit la langue avant l'appel a traiter()
-	// il faut rediriger !
-	return array('message_ok' => _T('config_info_enregistree'), 'editable' => true, 'redirect' => self());
+    // on ne peut pas changer la langue pour tout le hit ici,
+    // car CVT repasse derriere et retablit la langue avant l'appel a traiter()
+    // il faut rediriger !
+    return array('message_ok' => _T('config_info_enregistree'), 'editable' => true, 'redirect' => self());
 }
 
-function afficher_langues_choix($langues, $name, $id, $selected) {
-	include_spip('inc/lang');
-	$ret = '';
-	sort($langues);
-	foreach ($langues as $l) {
-		$checked = ($l == $selected) ? ' checked=\'checked\'' : '';
-		$ret .= "<div class='choix'>"
-			. "<input type='radio' name='$name' id='{$id}_$l' value='$l'$checked />"
-			. "<label for='{$id}_$l'>" . traduire_nom_langue($l) . "</label>"
-			. "</div>";
-	}
+function afficher_langues_choix($langues, $name, $id, $selected)
+{
+    include_spip('inc/lang');
+    $ret = '';
+    sort($langues);
+    foreach ($langues as $l) {
+        $checked = ($l == $selected) ? ' checked=\'checked\'' : '';
+        $ret .= "<div class='choix'>"
+            ."<input type='radio' name='$name' id='{$id}_$l' value='$l'$checked />"
+            ."<label for='{$id}_$l'>".traduire_nom_langue($l).'</label>'
+            .'</div>';
+    }
 
-	return $ret;
+    return $ret;
 }
-
-?>

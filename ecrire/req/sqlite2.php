@@ -11,30 +11,30 @@
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 include_spip('req/sqlite_generique');
 
 $GLOBALS['spip_sqlite2_functions_1'] = _sqlite_ref_fonctions();
 
-
 // http://code.spip.net/@req_sqlite2_dist
-function req_sqlite2_dist($addr, $port, $login, $pass, $db = '', $prefixe = '') {
-	return req_sqlite_dist($addr, $port, $login, $pass, $db, $prefixe, $sqlite_version = 2);
+function req_sqlite2_dist($addr, $port, $login, $pass, $db = '', $prefixe = '')
+{
+    return req_sqlite_dist($addr, $port, $login, $pass, $db, $prefixe, $sqlite_version = 2);
 }
 
 // http://code.spip.net/@spip_sqlite2_constantes
-function spip_sqlite2_constantes() {
-	if (!defined('SPIP_SQLITE2_ASSOC')) {
-		define('SPIP_SQLITE2_ASSOC', SQLITE_ASSOC);
-		define('SPIP_SQLITE2_NUM', SQLITE_NUM);
-		define('SPIP_SQLITE2_BOTH', SQLITE_BOTH);
-	}
+function spip_sqlite2_constantes()
+{
+    if (!defined('SPIP_SQLITE2_ASSOC')) {
+        define('SPIP_SQLITE2_ASSOC', SQLITE_ASSOC);
+        define('SPIP_SQLITE2_NUM', SQLITE_NUM);
+        define('SPIP_SQLITE2_BOTH', SQLITE_BOTH);
+    }
 }
 
-function spip_versions_sqlite2() {
-	return _sqlite_charger_version(2) ? 2 : false;
+function spip_versions_sqlite2()
+{
+    return _sqlite_charger_version(2) ? 2 : false;
 }
-
-?>

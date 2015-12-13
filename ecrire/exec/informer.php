@@ -11,40 +11,36 @@
 \***************************************************************************/
 
 /**
- * Gestion d'affichage ajax d'une rubrique sélectionnée dans le mini navigateur
- *
- * @package SPIP\Core\Exec
+ * Gestion d'affichage ajax d'une rubrique sélectionnée dans le mini navigateur.
  */
-
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 include_spip('inc/actions');
 
 /**
- * Affiche en ajax des informations d'une rubrique selectionnée dans le mini navigateur
+ * Affiche en ajax des informations d'une rubrique selectionnée dans le mini navigateur.
  *
  * @uses inc_informer_dist()
  * @uses ajax_retour()
  **/
-function exec_informer_dist() {
-	$id = intval(_request('id'));
-	$col = intval(_request('col'));
-	$exclus = intval(_request('exclus'));
-	$do = _request('do');
+function exec_informer_dist()
+{
+    $id = intval(_request('id'));
+    $col = intval(_request('col'));
+    $exclus = intval(_request('exclus'));
+    $do = _request('do');
 
-	if (preg_match('/^\w*$/', $do)) {
-		if (!$do) {
-			$do = 'aff';
-		}
+    if (preg_match('/^\w*$/', $do)) {
+        if (!$do) {
+            $do = 'aff';
+        }
 
-		$informer = charger_fonction('informer', 'inc');
-		$res = $informer($id, $col, $exclus, _request('rac'), _request('type'), $do);
-	} else {
-		$res = '';
-	}
-	ajax_retour($res);
+        $informer = charger_fonction('informer', 'inc');
+        $res = $informer($id, $col, $exclus, _request('rac'), _request('type'), $do);
+    } else {
+        $res = '';
+    }
+    ajax_retour($res);
 }
-
-?>

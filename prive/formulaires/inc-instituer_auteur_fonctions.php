@@ -1,54 +1,52 @@
 <?php
 
 /**
- * Fonction pour le squelette du même nom
- *
- * @package SPIP\Core\Formulaires
+ * Fonction pour le squelette du même nom.
  **/
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 /**
  * Afficher le formulaire de choix de rubrique restreinte
- * pour insertion dans le formulaire
+ * pour insertion dans le formulaire.
  *
- * @param int $id_auteur
+ * @param int    $id_auteur
  * @param string $label
  * @param string $sel_css
- *     Sélecteur CSS déterminant le conteneur de l'input reçevant les rubriques sélectionnées
+ *                           Sélecteur CSS déterminant le conteneur de l'input reçevant les rubriques sélectionnées
  * @param string $img_remove
- *     Balise `<img...>` pour enlever des rubriques
+ *                           Balise `<img...>` pour enlever des rubriques
+ *
  * @return string
- *     Code HTML et javascript
+ *                Code HTML et javascript
  */
 function choisir_rubriques_admin_restreint(
-	$id_auteur,
-	$label = '',
-	$sel_css = "#liste_rubriques_restreintes",
-	$img_remove = ""
+    $id_auteur,
+    $label = '',
+    $sel_css = '#liste_rubriques_restreintes',
+    $img_remove = ''
 ) {
-	global $spip_lang;
-	$res = "";
-	// Ajouter une rubrique a un administrateur restreint
-	if ($chercher_rubrique = charger_fonction('chercher_rubrique', 'inc')
-		AND $a = $chercher_rubrique(0, 'auteur', false)
-	) {
+    global $spip_lang;
+    $res = '';
+    // Ajouter une rubrique a un administrateur restreint
+    if ($chercher_rubrique = charger_fonction('chercher_rubrique', 'inc')
+        and $a = $chercher_rubrique(0, 'auteur', false)
+    ) {
+        if ($img_remove) {
+            $img_remove = addslashes("<a href=\"#\" onclick=\"jQuery(this).parent().remove();return false;\" class=\"removelink\">$img_remove</a>");
+        }
 
-		if ($img_remove) {
-			$img_remove = addslashes("<a href=\"#\" onclick=\"jQuery(this).parent().remove();return false;\" class=\"removelink\">$img_remove</a>");
-		}
+        $res =
+            "\n<div id='ajax_rubrique'>\n"
+            ."<label>$label</label>\n"
+            ."<input name='id_auteur' value='$id_auteur' type='hidden' />\n"
+            .$a
+            ."</div>\n"
 
-		$res =
-			"\n<div id='ajax_rubrique'>\n"
-			. "<label>$label</label>\n"
-			. "<input name='id_auteur' value='$id_auteur' type='hidden' />\n"
-			. $a
-			. "</div>\n"
-
-			// onchange = pour le menu
-			// l'evenement doit etre provoque a la main par le selecteur ajax
-			. "<script type='text/javascript'>/*<![CDATA[*/
+            // onchange = pour le menu
+            // l'evenement doit etre provoque a la main par le selecteur ajax
+."<script type='text/javascript'>/*<![CDATA[*/
 jQuery(function(){
 	jQuery('#id_parent')
 	.bind('change', function(){
@@ -68,10 +66,7 @@ jQuery(function(){
 	.attr('name','noname');
 });
 /*]]>*/</script>";
+    }
 
-	}
-
-	return $res;
+    return $res;
 }
-
-?>

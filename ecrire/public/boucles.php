@@ -10,54 +10,51 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 /**
- * Ce fichier definit les boucles standard de SPIP
- *
- * @package SPIP\Core\Compilateur\Boucles
+ * Ce fichier definit les boucles standard de SPIP.
  **/
-
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
-
 /**
- * Compile une boucle standard, sans condition rajoutée
+ * Compile une boucle standard, sans condition rajoutée.
  *
  * @param string $id_boucle
- *     Identifiant de la boucle
- * @param array $boucles
- *     AST du squelette
+ *                          Identifiant de la boucle
+ * @param array  $boucles
+ *                          AST du squelette
+ *
  * @return string
- *     Code PHP compilé de la boucle
+ *                Code PHP compilé de la boucle
  **/
-function boucle_DEFAUT_dist($id_boucle, &$boucles) {
-	return calculer_boucle($id_boucle, $boucles);
+function boucle_DEFAUT_dist($id_boucle, &$boucles)
+{
+    return calculer_boucle($id_boucle, $boucles);
 }
 
-
 /**
- * Compile une boucle récursive
+ * Compile une boucle récursive.
  *
  * `<BOUCLE(BOUCLE)>`
  *
  * @link http://www.spip.net/914
  *
  * @param string $id_boucle
- *     Identifiant de la boucle
- * @param array $boucles
- *     AST du squelette
+ *                          Identifiant de la boucle
+ * @param array  $boucles
+ *                          AST du squelette
+ *
  * @return string
- *     Code PHP compilé de la boucle
+ *                Code PHP compilé de la boucle
  **/
-function boucle_BOUCLE_dist($id_boucle, &$boucles) {
-	return calculer_boucle($id_boucle, $boucles);
+function boucle_BOUCLE_dist($id_boucle, &$boucles)
+{
+    return calculer_boucle($id_boucle, $boucles);
 }
 
-
 /**
- * Compile une boucle HIERARCHIE
+ * Compile une boucle HIERARCHIE.
  *
  * La boucle `<BOUCLE(HIERARCHIE)>` retourne la liste des RUBRIQUES
  * qui mènent de la racine du site à la rubrique ou à l’article en cours.
@@ -75,40 +72,39 @@ function boucle_BOUCLE_dist($id_boucle, &$boucles) {
  * @link http://www.spip.net/913
  *
  * @param string $id_boucle
- *     Identifiant de la boucle
- * @param array $boucles
- *     AST du squelette
+ *                          Identifiant de la boucle
+ * @param array  $boucles
+ *                          AST du squelette
+ *
  * @return string
- *     Code PHP compilé de la boucle
+ *                Code PHP compilé de la boucle
  **/
-function boucle_HIERARCHIE_dist($id_boucle, &$boucles) {
-	$boucle = &$boucles[$id_boucle];
-	$id_table = $boucle->id_table . ".id_rubrique";
+function boucle_HIERARCHIE_dist($id_boucle, &$boucles)
+{
+    $boucle = &$boucles[$id_boucle];
+    $id_table = $boucle->id_table.'.id_rubrique';
 
-	// Si la boucle mere est une boucle RUBRIQUES il faut ignorer la feuille
-	// sauf en presence du critere {tout} (vu par phraser_html)
-	// ou {id_article} qui positionne aussi le {tout}
+    // Si la boucle mere est une boucle RUBRIQUES il faut ignorer la feuille
+    // sauf en presence du critere {tout} (vu par phraser_html)
+    // ou {id_article} qui positionne aussi le {tout}
 
-	$boucle->hierarchie = 'if (!($id_rubrique = intval('
-		. calculer_argument_precedent($boucle->id_boucle, 'id_rubrique', $boucles)
-		. ")))\n\t\treturn '';\n\t"
-		. "include_spip('inc/rubriques');\n\t"
-		. '$hierarchie = calcul_hierarchie_in($id_rubrique,'
-		. (isset($boucle->modificateur['tout']) ? 'true' : 'false')
-		. ");\n\t"
-		. 'if (!$hierarchie) return "";' . "\n\t";
+    $boucle->hierarchie = 'if (!($id_rubrique = intval('
+        .calculer_argument_precedent($boucle->id_boucle, 'id_rubrique', $boucles)
+        .")))\n\t\treturn '';\n\t"
+        ."include_spip('inc/rubriques');\n\t"
+        .'$hierarchie = calcul_hierarchie_in($id_rubrique,'
+        .(isset($boucle->modificateur['tout']) ? 'true' : 'false')
+        .");\n\t"
+        .'if (!$hierarchie) return "";'."\n\t";
 
-	$boucle->where[] = array("'IN'", "'$id_table'", '"($hierarchie)"');
+    $boucle->where[] = array("'IN'", "'$id_table'", '"($hierarchie)"');
 
-	$order = "FIELD($id_table, \$hierarchie)";
-	if (!isset($boucle->default_order[0]) OR $boucle->default_order[0] != " DESC") {
-		$boucle->default_order[] = "\"$order\"";
-	} else {
-		$boucle->default_order[0] = "\"$order DESC\"";
-	}
+    $order = "FIELD($id_table, \$hierarchie)";
+    if (!isset($boucle->default_order[0]) or $boucle->default_order[0] != ' DESC') {
+        $boucle->default_order[] = "\"$order\"";
+    } else {
+        $boucle->default_order[0] = "\"$order DESC\"";
+    }
 
-	return calculer_boucle($id_boucle, $boucles);
+    return calculer_boucle($id_boucle, $boucles);
 }
-
-
-?>

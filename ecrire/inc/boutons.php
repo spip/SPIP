@@ -11,67 +11,65 @@
 \***************************************************************************/
 
 /**
- * Gestion des boutons de l'interface privée
- *
- * @package SPIP\Core\Boutons
+ * Gestion des boutons de l'interface privée.
  */
-
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 /**
  * Classe définissant un bouton dans la barre du haut de l'interface
- * privée ou dans un de ses sous menus
+ * privée ou dans un de ses sous menus.
  */
-class Bouton {
-	/** @var string L'icone à mettre dans le bouton */
-	var $icone;
+class Bouton
+{
+    /* @var string L'icone à mettre dans le bouton */
+    public $icone;
 
-	/** @var string Le nom de l'entrée d'i18n associé */
-	var $libelle;
+    /* @var string Le nom de l'entrée d'i18n associé */
+    public $libelle;
 
-	/** @var null|string L'URL de la page (null => ?exec=nom) */
-	var $url = null;
+    /* @var null|string L'URL de la page (null => ?exec=nom) */
+    public $url = null;
 
-	/** @var null|string|array Arguments supplementaires de l'URL */
-	var $urlArg = null;
+    /* @var null|string|array Arguments supplementaires de l'URL */
+    public $urlArg = null;
 
-	/** @var null|string URL du javascript */
-	var $url2 = null;
+    /* @var null|string URL du javascript */
+    public $url2 = null;
 
-	/** @var null|string Pour ouvrir dans une fenetre a part */
-	var $target = null;
+    /* @var null|string Pour ouvrir dans une fenetre a part */
+    public $target = null;
 
-	/** @var null|mixed Sous-barre de boutons / onglets */
-	var $sousmenu = null;
+    /* @var null|mixed Sous-barre de boutons / onglets */
+    public $sousmenu = null;
 
-	/**
-	 * Définit un bouton
-	 *
-	 * @param string $icone
-	 *    L'icone à mettre dans le bouton
-	 * @param string $libelle
-	 *    Le nom de l'entrée i18n associé
-	 * @param null|string $url
-	 *    L'URL de la page
-	 * @param null|string|array $urlArg
-	 *    Arguments supplémentaires de l'URL
-	 * @param null|string $url2
-	 *    URL du javascript
-	 * @param null|mixed $target
-	 *    Pour ouvrir une fenêtre à part
-	 */
-	function __construct($icone, $libelle, $url = null, $urlArg = null, $url2 = null, $target = null) {
-		$this->icone = $icone;
-		$this->libelle = $libelle;
-		$this->url = $url;
-		$this->urlArg = $urlArg;
-		$this->url2 = $url2;
-		$this->target = $target;
-	}
+    /**
+     * Définit un bouton.
+     *
+     * @param string            $icone
+     *                                   L'icone à mettre dans le bouton
+     * @param string            $libelle
+     *                                   Le nom de l'entrée i18n associé
+     * @param null|string       $url
+     *                                   L'URL de la page
+     * @param null|string|array $urlArg
+     *                                   Arguments supplémentaires de l'URL
+     * @param null|string       $url2
+     *                                   URL du javascript
+     * @param null|mixed        $target
+     *                                   Pour ouvrir une fenêtre à part
+     */
+    public function __construct($icone, $libelle, $url = null, $urlArg = null, $url2 = null, $target = null)
+    {
+        $this->icone = $icone;
+        $this->libelle = $libelle;
+        $this->url = $url;
+        $this->urlArg = $urlArg;
+        $this->url2 = $url2;
+        $this->target = $target;
+    }
 }
-
 
 /**
  * Définir la liste des onglets dans une page de l'interface privée.
@@ -82,42 +80,40 @@ class Bouton {
  * @pipeline_appel ajouter_onglets
  *
  * @param string $script
+ *
  * @return array
  */
-function definir_barre_onglets($script) {
+function definir_barre_onglets($script)
+{
+    $onglets = array();
+    $liste_onglets = array();
 
-	$onglets = array();
-	$liste_onglets = array();
+    // ajouter les onglets issus des plugin via paquet.xml
+    if (function_exists('onglets_plugins')) {
+        $liste_onglets = onglets_plugins();
+    }
 
-	// ajouter les onglets issus des plugin via paquet.xml
-	if (function_exists('onglets_plugins')) {
-		$liste_onglets = onglets_plugins();
-	}
+    foreach ($liste_onglets as $id => $infos) {
+        if (($parent = $infos['parent'])
+            && $parent == $script
+            && autoriser('onglet', "_$id")
+        ) {
+            $onglets[$id] = new Bouton(
+                isset($infos['icone']) ? find_in_theme($infos['icone']) : '',  // icone
+                $infos['titre'],  // titre
+                (isset($infos['action']) and $infos['action'])
+                    ? generer_url_ecrire($infos['action'],
+                    (isset($infos['parametres']) and $infos['parametres']) ? $infos['parametres'] : '')
+                    : null
+            );
+        }
+    }
 
-
-	foreach ($liste_onglets as $id => $infos) {
-		if (($parent = $infos['parent'])
-			&& $parent == $script
-			&& autoriser('onglet', "_$id")
-		) {
-			$onglets[$id] = new Bouton(
-				isset($infos['icone']) ? find_in_theme($infos['icone']) : '',  // icone
-				$infos['titre'],  // titre
-				(isset($infos['action']) and $infos['action'])
-					? generer_url_ecrire($infos['action'],
-					(isset($infos['parametres']) AND $infos['parametres']) ? $infos['parametres'] : '')
-					: null
-			);
-		}
-	}
-
-	return pipeline('ajouter_onglets', array('data' => $onglets, 'args' => $script));
+    return pipeline('ajouter_onglets', array('data' => $onglets, 'args' => $script));
 }
 
-
 /**
- *
- * Création de la barre d'onglets
+ * Création de la barre d'onglets.
  *
  * @uses definir_barre_onglets()
  * @uses onglet()
@@ -127,20 +123,19 @@ function definir_barre_onglets($script) {
  * @param string $rubrique
  * @param string $ongletCourant
  * @param string $class
+ *
  * @return string
  */
-function barre_onglets($rubrique, $ongletCourant, $class = "barre_onglet") {
-	include_spip('inc/presentation');
+function barre_onglets($rubrique, $ongletCourant, $class = 'barre_onglet')
+{
+    include_spip('inc/presentation');
 
-	$res = '';
+    $res = '';
 
-	foreach (definir_barre_onglets($rubrique) as $exec => $onglet) {
-		$url = $onglet->url ? $onglet->url : generer_url_ecrire($exec);
-		$res .= onglet(_T($onglet->libelle), $url, $exec, $ongletCourant, $onglet->icone);
-	}
+    foreach (definir_barre_onglets($rubrique) as $exec => $onglet) {
+        $url = $onglet->url ? $onglet->url : generer_url_ecrire($exec);
+        $res .= onglet(_T($onglet->libelle), $url, $exec, $ongletCourant, $onglet->icone);
+    }
 
-	return !$res ? '' : (debut_onglet($class) . $res . fin_onglet());
+    return !$res ? '' : (debut_onglet($class).$res.fin_onglet());
 }
-
-
-?>

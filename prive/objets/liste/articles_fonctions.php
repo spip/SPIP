@@ -11,37 +11,39 @@
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
-function defaut_tri_defined($defaut) {
-	if (!defined('_TRI_ARTICLES_RUBRIQUE')) {
-		return $defaut;
-	}
+function defaut_tri_defined($defaut)
+{
+    if (!defined('_TRI_ARTICLES_RUBRIQUE')) {
+        return $defaut;
+    }
 
-	$sens = 1;
-	$tri = trim(_TRI_ARTICLES_RUBRIQUE);
-	$tri = explode(" ", $tri);
-	if (strncasecmp(end($tri), "DESC", 4) == 0) {
-		$sens = -1;
-		array_pop($tri);
-	}
-	$tri = implode(' ', $tri);
-	$tri = array($tri => $sens);
-	foreach ($defaut as $n => $s) {
-		if (!isset($tri[$n])) {
-			$tri[$n] = $s;
-		}
-	}
+    $sens = 1;
+    $tri = trim(_TRI_ARTICLES_RUBRIQUE);
+    $tri = explode(' ', $tri);
+    if (strncasecmp(end($tri), 'DESC', 4) == 0) {
+        $sens = -1;
+        array_pop($tri);
+    }
+    $tri = implode(' ', $tri);
+    $tri = array($tri => $sens);
+    foreach ($defaut as $n => $s) {
+        if (!isset($tri[$n])) {
+            $tri[$n] = $s;
+        }
+    }
 
-	return $tri;
+    return $tri;
 }
 
-function defaut_tri_par($par, $defaut) {
-	if (!defined('_TRI_ARTICLES_RUBRIQUE')) {
-		return $par;
-	}
-	$par = array_keys($defaut);
+function defaut_tri_par($par, $defaut)
+{
+    if (!defined('_TRI_ARTICLES_RUBRIQUE')) {
+        return $par;
+    }
+    $par = array_keys($defaut);
 
-	return reset($par);
+    return reset($par);
 }

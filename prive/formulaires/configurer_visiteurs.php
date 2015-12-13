@@ -11,46 +11,46 @@
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 include_spip('inc/presentation');
 
-function formulaires_configurer_visiteurs_charger_dist() {
-	if (avoir_visiteurs(false, false)) {
-		$valeurs['editable'] = false;
-	}
+function formulaires_configurer_visiteurs_charger_dist()
+{
+    if (avoir_visiteurs(false, false)) {
+        $valeurs['editable'] = false;
+    }
 
-	foreach (array(
-		         "accepter_visiteurs",
-	         ) as $m) {
-		$valeurs[$m] = $GLOBALS['meta'][$m];
-	}
+    foreach (array(
+                 'accepter_visiteurs',
+             ) as $m) {
+        $valeurs[$m] = $GLOBALS['meta'][$m];
+    }
 
-	return $valeurs;
+    return $valeurs;
 }
 
+function formulaires_configurer_visiteurs_traiter_dist()
+{
+    $res = array('editable' => true);
+    // Modification du reglage accepter_inscriptions => vider le cache
+    // (pour repercuter la modif sur le panneau de login)
+    if (($i = _request('accepter_visiteurs')
+        and $i != $GLOBALS['meta']['accepter_visiteurs'])
+    ) {
+        include_spip('inc/invalideur');
+        suivre_invalideur('1'); # tout effacer
+    }
 
-function formulaires_configurer_visiteurs_traiter_dist() {
-	$res = array('editable' => true);
-	// Modification du reglage accepter_inscriptions => vider le cache
-	// (pour repercuter la modif sur le panneau de login)
-	if (($i = _request('accepter_visiteurs')
-		AND $i != $GLOBALS['meta']['accepter_visiteurs'])
-	) {
-		include_spip('inc/invalideur');
-		suivre_invalideur("1"); # tout effacer
-	}
+    foreach (array(
+                 'accepter_visiteurs',
+             ) as $m) {
+        if (!is_null($v = _request($m))) {
+            ecrire_meta($m, $v == 'oui' ? 'oui' : 'non');
+        }
+    }
 
-	foreach (array(
-		         "accepter_visiteurs",
-	         ) as $m) {
-		if (!is_null($v = _request($m))) {
-			ecrire_meta($m, $v == 'oui' ? 'oui' : 'non');
-		}
-	}
+    $res['message_ok'] = _T('config_info_enregistree');
 
-	$res['message_ok'] = _T('config_info_enregistree');
-
-	return $res;
+    return $res;
 }
-

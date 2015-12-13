@@ -11,34 +11,34 @@
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
-function formulaires_configurer_rubriques_charger_dist() {
-	foreach (array(
-		         "rubriques_descriptif",
-		         "rubriques_texte",
-	         ) as $m) {
-		$valeurs[$m] = $GLOBALS['meta'][$m];
-	}
+function formulaires_configurer_rubriques_charger_dist()
+{
+    foreach (array(
+                 'rubriques_descriptif',
+                 'rubriques_texte',
+             ) as $m) {
+        $valeurs[$m] = $GLOBALS['meta'][$m];
+    }
 
-	return $valeurs;
+    return $valeurs;
 }
 
+function formulaires_configurer_rubriques_traiter_dist()
+{
+    $res = array('editable' => true);
+    foreach (array(
+                 'rubriques_descriptif',
+                 'rubriques_texte',
+             ) as $m) {
+        if (!is_null($v = _request($m))) {
+            ecrire_meta($m, $v == 'oui' ? 'oui' : 'non');
+        }
+    }
 
-function formulaires_configurer_rubriques_traiter_dist() {
-	$res = array('editable' => true);
-	foreach (array(
-		         "rubriques_descriptif",
-		         "rubriques_texte",
-	         ) as $m) {
-		if (!is_null($v = _request($m))) {
-			ecrire_meta($m, $v == 'oui' ? 'oui' : 'non');
-		}
-	}
+    $res['message_ok'] = _T('config_info_enregistree');
 
-	$res['message_ok'] = _T('config_info_enregistree');
-
-	return $res;
+    return $res;
 }
-

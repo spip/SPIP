@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 include_spip('inc/lang');
@@ -19,16 +19,16 @@ include_spip('inc/lang');
 // NB: mes_fonctions peut initialiser $dossier_squelettes (old-style)
 // donc il faut l'inclure "en globals"
 if ($f = find_in_path('mes_fonctions.php')) {
-	global $dossier_squelettes;
-	include_once(_ROOT_CWD . $f);
+    global $dossier_squelettes;
+    include_once _ROOT_CWD.$f;
 }
 
 if (@is_readable(_CACHE_PLUGINS_FCT)) {
-	// chargement optimise precompile
-	include_once(_CACHE_PLUGINS_FCT);
+    // chargement optimise precompile
+    include_once _CACHE_PLUGINS_FCT;
 }
 if (test_espace_prive()) {
-	include_spip('inc/filtres_ecrire');
+    include_spip('inc/filtres_ecrire');
 }
 
 # Determine le squelette associe a une requete 
@@ -45,227 +45,227 @@ if (test_espace_prive()) {
 # En cas d'erreur process_ins est absent et texte est un tableau de 2 chaines
 
 // http://code.spip.net/@public_parametrer_dist
-function public_parametrer_dist($fond, $contexte = '', $cache = '', $connect = '') {
-	static $composer, $styliser, $notes = null;
-	$page = tester_redirection($fond, $contexte, $connect);
-	if ($page) {
-		return $page;
-	}
+function public_parametrer_dist($fond, $contexte = '', $cache = '', $connect = '')
+{
+    static $composer, $styliser, $notes = null;
+    $page = tester_redirection($fond, $contexte, $connect);
+    if ($page) {
+        return $page;
+    }
 
-	if (isset($contexte['lang'])) {
-		$lang = $contexte['lang'];
-	} elseif (!isset($lang)) {
-		$lang = $GLOBALS['meta']['langue_site'];
-	}
+    if (isset($contexte['lang'])) {
+        $lang = $contexte['lang'];
+    } elseif (!isset($lang)) {
+        $lang = $GLOBALS['meta']['langue_site'];
+    }
 
-	$select = ((!isset($GLOBALS['forcer_lang']) OR !$GLOBALS['forcer_lang']) AND $lang <> $GLOBALS['spip_lang']);
-	if ($select) {
-		$select = lang_select($lang);
-	}
+    $select = ((!isset($GLOBALS['forcer_lang']) or !$GLOBALS['forcer_lang']) and $lang != $GLOBALS['spip_lang']);
+    if ($select) {
+        $select = lang_select($lang);
+    }
 
-	$debug = (defined('_VAR_MODE') && _VAR_MODE == 'debug');
+    $debug = (defined('_VAR_MODE') && _VAR_MODE == 'debug');
 
-	if (!$styliser) {
-		$styliser = charger_fonction('styliser', 'public');
-	}
-	list($skel, $mime_type, $gram, $sourcefile) =
-		$styliser($fond, $contexte, $GLOBALS['spip_lang'], $connect);
+    if (!$styliser) {
+        $styliser = charger_fonction('styliser', 'public');
+    }
+    list($skel, $mime_type, $gram, $sourcefile) =
+        $styliser($fond, $contexte, $GLOBALS['spip_lang'], $connect);
 
-	if ($skel) {
+    if ($skel) {
 
-		// sauver le nom de l'eventuel squelette en cours d'execution
-		// (recursion possible a cause des modeles)
-		if ($debug) {
-			$courant = @$GLOBALS['debug_objets']['courant'];
-			$GLOBALS['debug_objets']['contexte'][$sourcefile] = $contexte;
-		}
+        // sauver le nom de l'eventuel squelette en cours d'execution
+        // (recursion possible a cause des modeles)
+        if ($debug) {
+            $courant = @$GLOBALS['debug_objets']['courant'];
+            $GLOBALS['debug_objets']['contexte'][$sourcefile] = $contexte;
+        }
 
-		// charger le squelette en specifiant les langages cibles et source
-		// au cas il faudrait le compiler (source posterieure au resultat)
+        // charger le squelette en specifiant les langages cibles et source
+        // au cas il faudrait le compiler (source posterieure au resultat)
 
-		if (!$composer) {
-			$composer = charger_fonction('composer', 'public');
-		}
-		$fonc = $composer($skel, $mime_type, $gram, $sourcefile, $connect);
-	} else {
-		$fonc = '';
-	}
+        if (!$composer) {
+            $composer = charger_fonction('composer', 'public');
+        }
+        $fonc = $composer($skel, $mime_type, $gram, $sourcefile, $connect);
+    } else {
+        $fonc = '';
+    }
 
-	if (!$fonc) { // squelette inconnu (==='') ou faux (===false)
-		$page = $fonc;
-	} else {
-		// Preparer l'appel de la fonction principale du squelette 
+    if (!$fonc) { // squelette inconnu (==='') ou faux (===false)
+        $page = $fonc;
+    } else {
+        // Preparer l'appel de la fonction principale du squelette 
 
-		spip_timer($a = 'calcul page ' . rand(0, 1000));
+        spip_timer($a = 'calcul page '.rand(0, 1000));
 
-		// On cree un marqueur de notes unique lie a cette composition
-		// et on enregistre l'etat courant des globales de notes...
-		if (is_null($notes)) {
-			$notes = charger_fonction('notes', 'inc', true);
-		}
-		if ($notes) {
-			$notes('', 'empiler');
-		}
+        // On cree un marqueur de notes unique lie a cette composition
+        // et on enregistre l'etat courant des globales de notes...
+        if (is_null($notes)) {
+            $notes = charger_fonction('notes', 'inc', true);
+        }
+        if ($notes) {
+            $notes('', 'empiler');
+        }
 
-		// Rajouter d'office ces deux parametres
-		// (mais vaudrait mieux que le compilateur sache le simuler
-		// car ca interdit l'usage de criteres conditionnels dessus).
-		if (!isset($contexte['date'])) {
-			$contexte['date'] = date("Y-m-d H:i:s");
-			$contexte['date_default'] = true;
-		} else {
-			$contexte['date'] = normaliser_date($contexte['date'], true);
-		}
+        // Rajouter d'office ces deux parametres
+        // (mais vaudrait mieux que le compilateur sache le simuler
+        // car ca interdit l'usage de criteres conditionnels dessus).
+        if (!isset($contexte['date'])) {
+            $contexte['date'] = date('Y-m-d H:i:s');
+            $contexte['date_default'] = true;
+        } else {
+            $contexte['date'] = normaliser_date($contexte['date'], true);
+        }
 
-		if (!isset($contexte['date_redac'])) {
-			$contexte['date_redac'] = date("Y-m-d H:i:s");
-			$contexte['date_redac_default'] = true;
-		} else {
-			$contexte['date_redac'] = normaliser_date($contexte['date_redac'], true);
-		}
+        if (!isset($contexte['date_redac'])) {
+            $contexte['date_redac'] = date('Y-m-d H:i:s');
+            $contexte['date_redac_default'] = true;
+        } else {
+            $contexte['date_redac'] = normaliser_date($contexte['date_redac'], true);
+        }
 
-		// Passer le nom du cache pour produire sa destruction automatique
-		$page = $fonc(array('cache' => $cache), array($contexte));
+        // Passer le nom du cache pour produire sa destruction automatique
+        $page = $fonc(array('cache' => $cache), array($contexte));
 
-		// Restituer les globales de notes telles qu'elles etaient avant l'appel
-		// Si l'inclus n'a pas affiche ses notes, tant pis (elles *doivent*
-		// etre dans son resultat, autrement elles ne seraient pas prises en
-		// compte a chaque calcul d'un texte contenant un modele, mais seulement
-		// quand le modele serait calcule, et on aurait des resultats incoherents)
-		if ($notes) {
-			$notes('', 'depiler');
-		}
+        // Restituer les globales de notes telles qu'elles etaient avant l'appel
+        // Si l'inclus n'a pas affiche ses notes, tant pis (elles *doivent*
+        // etre dans son resultat, autrement elles ne seraient pas prises en
+        // compte a chaque calcul d'un texte contenant un modele, mais seulement
+        // quand le modele serait calcule, et on aurait des resultats incoherents)
+        if ($notes) {
+            $notes('', 'depiler');
+        }
 
-		// reinjecter en dynamique la pile des notes
-		// si il y a des inclure dynamiques
-		// si la pile n'est pas vide
-		// la generalisation de cette injection permettrait de corriger le point juste au dessus
-		// en faisant remonter les notes a l'incluant (A tester et valider avant application)
-		if ($notes) {
-			$page['notes'] = $notes('', 'sauver_etat');
-		}
+        // reinjecter en dynamique la pile des notes
+        // si il y a des inclure dynamiques
+        // si la pile n'est pas vide
+        // la generalisation de cette injection permettrait de corriger le point juste au dessus
+        // en faisant remonter les notes a l'incluant (A tester et valider avant application)
+        if ($notes) {
+            $page['notes'] = $notes('', 'sauver_etat');
+        }
 
-		// spip_log: un joli contexte
-		$infos = array();
-		foreach (array_filter($contexte) as $var => $val) {
-			if (is_array($val)) {
-				$val = serialize($val);
-			}
-			if (strlen("$val") > 30) {
-				$val = substr("$val", 0, 27) . '..';
-			}
-			if (strstr($val, ' ')) {
-				$val = "'$val'";
-			}
-			$infos[] = $var . '=' . $val;
-		}
-		$profile = spip_timer($a);
-		spip_log("calcul ($profile) [$skel] "
-			. join(', ', $infos)
-			. ' (' . strlen($page['texte']) . ' octets)');
+        // spip_log: un joli contexte
+        $infos = array();
+        foreach (array_filter($contexte) as $var => $val) {
+            if (is_array($val)) {
+                $val = serialize($val);
+            }
+            if (strlen("$val") > 30) {
+                $val = substr("$val", 0, 27).'..';
+            }
+            if (strstr($val, ' ')) {
+                $val = "'$val'";
+            }
+            $infos[] = $var.'='.$val;
+        }
+        $profile = spip_timer($a);
+        spip_log("calcul ($profile) [$skel] "
+            .implode(', ', $infos)
+            .' ('.strlen($page['texte']).' octets)');
 
-		if ($debug) {
-			// si c'est ce que demande le debusqueur, lui passer la main
-			$t = strlen($page['texte']) ? $page['texte'] : " ";
-			$GLOBALS['debug_objets']['resultat'][$fonc . 'tout'] = $t;
-			$GLOBALS['debug_objets']['courant'] = $courant;
-			$GLOBALS['debug_objets']['profile'][$sourcefile] = $profile;
-			if ($GLOBALS['debug_objets']['sourcefile']
-				AND (_request('var_mode_objet') == $fonc)
-				AND (_request('var_mode_affiche') == 'resultat')
-			) {
-				erreur_squelette();
-			}
-		}
-		// Si #CACHE{} n'etait pas la, le mettre a $delais
-		if (!isset($page['entetes']['X-Spip-Cache'])) {
-			// Dans l'espace prive ou dans un modeles/ on pose un cache 0 par defaut
-			// si aucun #CACHE{} spécifié
-			// le contexte implicite qui conditionne le cache assure qu'on retombe pas sur le meme
-			// entre public et prive
-			if (test_espace_prive() OR strncmp($fond, 'modeles/', 8) == 0) {
-				$page['entetes']['X-Spip-Cache'] = 0;
-			} else {
-				$page['entetes']['X-Spip-Cache'] = isset($GLOBALS['delais']) ? $GLOBALS['delais'] : 36000;
-			}
-		}
+        if ($debug) {
+            // si c'est ce que demande le debusqueur, lui passer la main
+            $t = strlen($page['texte']) ? $page['texte'] : ' ';
+            $GLOBALS['debug_objets']['resultat'][$fonc.'tout'] = $t;
+            $GLOBALS['debug_objets']['courant'] = $courant;
+            $GLOBALS['debug_objets']['profile'][$sourcefile] = $profile;
+            if ($GLOBALS['debug_objets']['sourcefile']
+                and (_request('var_mode_objet') == $fonc)
+                and (_request('var_mode_affiche') == 'resultat')
+            ) {
+                erreur_squelette();
+            }
+        }
+        // Si #CACHE{} n'etait pas la, le mettre a $delais
+        if (!isset($page['entetes']['X-Spip-Cache'])) {
+            // Dans l'espace prive ou dans un modeles/ on pose un cache 0 par defaut
+            // si aucun #CACHE{} spécifié
+            // le contexte implicite qui conditionne le cache assure qu'on retombe pas sur le meme
+            // entre public et prive
+            if (test_espace_prive() or strncmp($fond, 'modeles/', 8) == 0) {
+                $page['entetes']['X-Spip-Cache'] = 0;
+            } else {
+                $page['entetes']['X-Spip-Cache'] = isset($GLOBALS['delais']) ? $GLOBALS['delais'] : 36000;
+            }
+        }
 
-		$page['contexte'] = $contexte;
+        $page['contexte'] = $contexte;
 
-		// faire remonter le fichier source
-		static $js_inclus = false;
-		if (defined('_VAR_INCLURE') AND _VAR_INCLURE) {
-			$page['sourcefile'] = $sourcefile;
-			$page['texte'] =
-				"<div class='inclure_blocs'><h6>" . $page['sourcefile'] . "</h6>" . $page['texte'] . "</div>"
-				. ($js_inclus ? "" : "<script type='text/javascript'>jQuery(function(){jQuery('.inclure_blocs > h6:first-child').hover(function(){jQuery(this).parent().addClass('hover')},function(){jQuery(this).parent().removeClass('hover')})});</script>");
-			$js_inclus = true;
-		}
+        // faire remonter le fichier source
+        static $js_inclus = false;
+        if (defined('_VAR_INCLURE') and _VAR_INCLURE) {
+            $page['sourcefile'] = $sourcefile;
+            $page['texte'] =
+                "<div class='inclure_blocs'><h6>".$page['sourcefile'].'</h6>'.$page['texte'].'</div>'
+                .($js_inclus ? '' : "<script type='text/javascript'>jQuery(function(){jQuery('.inclure_blocs > h6:first-child').hover(function(){jQuery(this).parent().addClass('hover')},function(){jQuery(this).parent().removeClass('hover')})});</script>");
+            $js_inclus = true;
+        }
 
-		// Si un modele contenait #SESSION, on note l'info dans $page
-		if (isset($GLOBALS['cache_utilise_session'])) {
-			$page['invalideurs']['session'] = $GLOBALS['cache_utilise_session'];
-			unset($GLOBALS['cache_utilise_session']);
-		}
-	}
+        // Si un modele contenait #SESSION, on note l'info dans $page
+        if (isset($GLOBALS['cache_utilise_session'])) {
+            $page['invalideurs']['session'] = $GLOBALS['cache_utilise_session'];
+            unset($GLOBALS['cache_utilise_session']);
+        }
+    }
 
-	if ($select) {
-		lang_select();
-	}
+    if ($select) {
+        lang_select();
+    }
 
-	return $page;
+    return $page;
 }
-
 
 /**
  * si le champ virtuel est non vide c'est une redirection.
  * avec un eventuel raccourci Spip
- * si le raccourci a un titre il sera pris comme corps du 302
+ * si le raccourci a un titre il sera pris comme corps du 302.
  *
  * http://code.spip.net/@tester_redirection
  *
  * @param string $fond
- * @param array $contexte
+ * @param array  $contexte
  * @param string $connect
+ *
  * @return array|bool
  */
-function tester_redirection($fond, $contexte, $connect) {
-	if ($fond == 'article'
-		AND $id_article = intval($contexte['id_article'])
-	) {
-		include_spip('public/quete'); // pour quete_virtuel et ses dependances
-		$m = quete_virtuel($id_article, $connect);
-		if (strlen($m)) {
-			include_spip('inc/texte');
-			// les navigateurs pataugent si l'URL est vide
-			if ($url = virtuel_redirige($m, true)) {
-				// passer en url absolue car cette redirection pourra
-				// etre utilisee dans un contexte d'url qui change
-				// y compris url arbo
-				$status = 302;
-				if (defined('_STATUS_REDIRECTION_VIRTUEL')) {
-					$status = _STATUS_REDIRECTION_VIRTUEL;
-				}
-				if (!preg_match(',^\w+:,', $url)) {
-					include_spip('inc/filtres_mini');
-					$url = url_absolue($url);
-				}
-				$url = str_replace('&amp;', '&', $url);
+function tester_redirection($fond, $contexte, $connect)
+{
+    if ($fond == 'article'
+        and $id_article = intval($contexte['id_article'])
+    ) {
+        include_spip('public/quete'); // pour quete_virtuel et ses dependances
+        $m = quete_virtuel($id_article, $connect);
+        if (strlen($m)) {
+            include_spip('inc/texte');
+            // les navigateurs pataugent si l'URL est vide
+            if ($url = virtuel_redirige($m, true)) {
+                // passer en url absolue car cette redirection pourra
+                // etre utilisee dans un contexte d'url qui change
+                // y compris url arbo
+                $status = 302;
+                if (defined('_STATUS_REDIRECTION_VIRTUEL')) {
+                    $status = _STATUS_REDIRECTION_VIRTUEL;
+                }
+                if (!preg_match(',^\w+:,', $url)) {
+                    include_spip('inc/filtres_mini');
+                    $url = url_absolue($url);
+                }
+                $url = str_replace('&amp;', '&', $url);
 
-				return array(
-					'texte' => "<"
-						. "?php include_spip('inc/headers');redirige_par_entete('"
-						. texte_script($url)
-						. "','',$status);"
-						. "?" . ">",
-					'process_ins' => 'php',
-					'status' => $status
-				);
-			}
-		}
-	}
+                return array(
+                    'texte' => '<'
+                        ."?php include_spip('inc/headers');redirige_par_entete('"
+                        .texte_script($url)
+                        ."','',$status);"
+                        .'?'.'>',
+                    'process_ins' => 'php',
+                    'status' => $status,
+                );
+            }
+        }
+    }
 
-	return false;
+    return false;
 }
-
-?>

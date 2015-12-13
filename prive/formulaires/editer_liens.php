@@ -10,17 +10,14 @@
 \***************************************************************************/
 
 /**
- * Gestion du formulaire d'édition de liens
- *
- * @package SPIP\Core\Formulaires
+ * Gestion du formulaire d'édition de liens.
  **/
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
-
 /**
- * Retrouve la source et l'objet de la liaison
+ * Retrouve la source et l'objet de la liaison.
  *
  * À partir des 3 premiers paramètres transmis au formulaire,
  * la fonction retrouve :
@@ -28,36 +25,38 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * - l'objet et id_objet sur qui on lie des éléments (objet, id_objet)
  * - l'objet que l'on veut lier dessus (objet_lien)
  *
- * @param string $a
+ * @param string     $a
  * @param string|int $b
  * @param int|string $c
+ *
  * @return array
- *   ($table_source,$objet,$id_objet,$objet_lien)
+ *               ($table_source,$objet,$id_objet,$objet_lien)
  */
-function determine_source_lien_objet($a, $b, $c) {
-	$table_source = $objet_lien = $objet = $id_objet = null;
-	// auteurs, article, 23 :
-	// associer des auteurs à l'article 23, sur la table pivot spip_auteurs_liens
-	if (is_numeric($c) AND !is_numeric($b)) {
-		$table_source = table_objet($a);
-		$objet_lien = objet_type($a);
-		$objet = objet_type($b);
-		$id_objet = $c;
-	}
-	// article, 23, auteurs
-	// associer des auteurs à l'article 23, sur la table pivot spip_articles_liens
-	if (is_numeric($b) AND !is_numeric($c)) {
-		$table_source = table_objet($c);
-		$objet_lien = objet_type($a);
-		$objet = objet_type($a);
-		$id_objet = $b;
-	}
+function determine_source_lien_objet($a, $b, $c)
+{
+    $table_source = $objet_lien = $objet = $id_objet = null;
+    // auteurs, article, 23 :
+    // associer des auteurs à l'article 23, sur la table pivot spip_auteurs_liens
+    if (is_numeric($c) and !is_numeric($b)) {
+        $table_source = table_objet($a);
+        $objet_lien = objet_type($a);
+        $objet = objet_type($b);
+        $id_objet = $c;
+    }
+    // article, 23, auteurs
+    // associer des auteurs à l'article 23, sur la table pivot spip_articles_liens
+    if (is_numeric($b) and !is_numeric($c)) {
+        $table_source = table_objet($c);
+        $objet_lien = objet_type($a);
+        $objet = objet_type($a);
+        $id_objet = $b;
+    }
 
-	return array($table_source, $objet, $id_objet, $objet_lien);
+    return array($table_source, $objet, $id_objet, $objet_lien);
 }
 
 /**
- * Chargement du formulaire d'édition de liens
+ * Chargement du formulaire d'édition de liens.
  *
  * #FORMULAIRE_EDITER_LIENS{auteurs,article,23}
  *   pour associer des auteurs à l'article 23, sur la table pivot spip_auteurs_liens
@@ -68,92 +67,93 @@ function determine_source_lien_objet($a, $b, $c) {
  * #FORMULAIRE_EDITER_LIENS{auteur,12,articles}
  *   pour associer des articles à l'auteur 12, sur la table pivot spip_auteurs_liens
  *
- * @param string $a
+ * @param string     $a
  * @param string|int $b
  * @param int|string $c
  * @param array|bool $options
- *    - Si array, tableau d'options
- *    - Si bool : valeur de l'option 'editable' uniquement
+ *                            - Si array, tableau d'options
+ *                            - Si bool : valeur de l'option 'editable' uniquement
  *
  * @return array
  */
-function formulaires_editer_liens_charger_dist($a, $b, $c, $options = array()) {
+function formulaires_editer_liens_charger_dist($a, $b, $c, $options = array())
+{
 
-	// compat avec ancienne signature ou le 4eme argument est $editable
-	if (!is_array($options)) {
-		$options = array('editable' => $options);
-	} elseif (!isset($options['editable'])) {
-		$options['editable'] = true;
-	}
+    // compat avec ancienne signature ou le 4eme argument est $editable
+    if (!is_array($options)) {
+        $options = array('editable' => $options);
+    } elseif (!isset($options['editable'])) {
+        $options['editable'] = true;
+    }
 
-	$editable = $options['editable'];
+    $editable = $options['editable'];
 
-	list($table_source, $objet, $id_objet, $objet_lien) = determine_source_lien_objet($a, $b, $c);
-	if (!$table_source OR !$objet OR !$objet_lien OR !$id_objet) {
-		return false;
-	}
+    list($table_source, $objet, $id_objet, $objet_lien) = determine_source_lien_objet($a, $b, $c);
+    if (!$table_source or !$objet or !$objet_lien or !$id_objet) {
+        return false;
+    }
 
-	$objet_source = objet_type($table_source);
-	$table_sql_source = table_objet_sql($objet_source);
+    $objet_source = objet_type($table_source);
+    $table_sql_source = table_objet_sql($objet_source);
 
-	// verifier existence de la table xxx_liens
-	include_spip('action/editer_liens');
-	if (!objet_associable($objet_lien)) {
-		return false;
-	}
+    // verifier existence de la table xxx_liens
+    include_spip('action/editer_liens');
+    if (!objet_associable($objet_lien)) {
+        return false;
+    }
 
-	// L'éditabilité :) est définie par un test permanent (par exemple "associermots") ET le 4ème argument
-	include_spip('inc/autoriser');
-	$editable = ($editable and autoriser('associer' . $table_source, $objet, $id_objet) and autoriser('modifier', $objet,
-			$id_objet));
+    // L'éditabilité :) est définie par un test permanent (par exemple "associermots") ET le 4ème argument
+    include_spip('inc/autoriser');
+    $editable = ($editable and autoriser('associer'.$table_source, $objet, $id_objet) and autoriser('modifier', $objet,
+            $id_objet));
 
-	if (!$editable AND !count(objet_trouver_liens(array($objet_lien => '*'),
-			array(($objet_lien == $objet_source ? $objet : $objet_source) => '*')))
-	) {
-		return false;
-	}
+    if (!$editable and !count(objet_trouver_liens(array($objet_lien => '*'),
+            array(($objet_lien == $objet_source ? $objet : $objet_source) => '*')))
+    ) {
+        return false;
+    }
 
-	// squelettes de vue et de d'association
-	// ils sont différents si des rôles sont définis.
-	$skel_vue = $table_source . "_lies";
-	$skel_ajout = $table_source . "_associer";
+    // squelettes de vue et de d'association
+    // ils sont différents si des rôles sont définis.
+    $skel_vue = $table_source.'_lies';
+    $skel_ajout = $table_source.'_associer';
 
-	// description des roles
-	include_spip('inc/roles');
-	if ($roles = roles_presents($objet_source, $objet)) {
-		// on demande de nouveaux squelettes en conséquence
-		$skel_vue = $table_source . "_roles_lies";
-		$skel_ajout = $table_source . "_roles_associer";
-	}
+    // description des roles
+    include_spip('inc/roles');
+    if ($roles = roles_presents($objet_source, $objet)) {
+        // on demande de nouveaux squelettes en conséquence
+        $skel_vue = $table_source.'_roles_lies';
+        $skel_ajout = $table_source.'_roles_associer';
+    }
 
-	$valeurs = array(
-		'id' => "$table_source-$objet-$id_objet-$objet_lien", // identifiant unique pour les id du form
-		'_vue_liee' => $skel_vue,
-		'_vue_ajout' => $skel_ajout,
-		'_objet_lien' => $objet_lien,
-		'id_lien_ajoute' => _request('id_lien_ajoute'),
-		'objet' => $objet,
-		'id_objet' => $id_objet,
-		'objet_source' => $objet_source,
-		'table_source' => $table_source,
-		'recherche' => '',
-		'visible' => 0,
-		'ajouter_lien' => '',
-		'supprimer_lien' => '',
-		'qualifier_lien' => '',
-		'_roles' => $roles, # description des roles
-		'_oups' => _request('_oups'),
-		'editable' => $editable,
-	);
+    $valeurs = array(
+        'id' => "$table_source-$objet-$id_objet-$objet_lien", // identifiant unique pour les id du form
+        '_vue_liee' => $skel_vue,
+        '_vue_ajout' => $skel_ajout,
+        '_objet_lien' => $objet_lien,
+        'id_lien_ajoute' => _request('id_lien_ajoute'),
+        'objet' => $objet,
+        'id_objet' => $id_objet,
+        'objet_source' => $objet_source,
+        'table_source' => $table_source,
+        'recherche' => '',
+        'visible' => 0,
+        'ajouter_lien' => '',
+        'supprimer_lien' => '',
+        'qualifier_lien' => '',
+        '_roles' => $roles, # description des roles
+        '_oups' => _request('_oups'),
+        'editable' => $editable,
+    );
 
-	// les options non definies dans $valeurs sont passees telles quelles au formulaire html
-	$valeurs = array_merge($options, $valeurs);
+    // les options non definies dans $valeurs sont passees telles quelles au formulaire html
+    $valeurs = array_merge($options, $valeurs);
 
-	return $valeurs;
+    return $valeurs;
 }
 
 /**
- * Traiter le post des informations d'édition de liens
+ * Traiter le post des informations d'édition de liens.
  *
  * Les formulaires peuvent poster dans quatre variables
  * - ajouter_lien et supprimer_lien
@@ -176,146 +176,144 @@ function formulaires_editer_liens_charger_dist($a, $b, $c, $options = array()) {
  * qualifier_lien[objet1-id1-objet2-id2][valeur] = array("truc", "chose")
  * produira 2 liens chacun avec array("role"=>"role1","valeur"=>"truc") et array("role"=>"autre_role","valeur"=>"chose")
  *
- * @param string $a
+ * @param string     $a
  * @param string|int $b
  * @param int|string $c
  * @param array|bool $options
- *    - Si array, tableau d'options
- *    - Si bool : valeur de l'option 'editable' uniquement
+ *                            - Si array, tableau d'options
+ *                            - Si bool : valeur de l'option 'editable' uniquement
  *
  * @return array
  */
-function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = array()) {
-	// compat avec ancienne signature ou le 4eme argument est $editable
-	if (!is_array($options)) {
-		$options = array('editable' => $options);
-	} elseif (!isset($options['editable'])) {
-		$options['editable'] = true;
-	}
+function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = array())
+{
+    // compat avec ancienne signature ou le 4eme argument est $editable
+    if (!is_array($options)) {
+        $options = array('editable' => $options);
+    } elseif (!isset($options['editable'])) {
+        $options['editable'] = true;
+    }
 
-	$editable = $options['editable'];
+    $editable = $options['editable'];
 
-	$res = array('editable' => $editable ? true : false);
-	list($table_source, $objet, $id_objet, $objet_lien) = determine_source_lien_objet($a, $b, $c);
-	if (!$table_source OR !$objet OR !$objet_lien) {
-		return $res;
-	}
+    $res = array('editable' => $editable ? true : false);
+    list($table_source, $objet, $id_objet, $objet_lien) = determine_source_lien_objet($a, $b, $c);
+    if (!$table_source or !$objet or !$objet_lien) {
+        return $res;
+    }
 
+    if (_request('tout_voir')) {
+        set_request('recherche', '');
+    }
 
-	if (_request('tout_voir')) {
-		set_request('recherche', '');
-	}
+    include_spip('inc/autoriser');
+    if (autoriser('modifier', $objet, $id_objet)) {
+        // annuler les suppressions du coup d'avant !
+        if (_request('annuler_oups')
+            and $oups = _request('_oups')
+            and $oups = unserialize($oups)
+        ) {
+            if ($oups_objets = charger_fonction("editer_liens_oups_{$table_source}_{$objet}_{$objet_lien}", 'action', true)) {
+                $oups_objets($oups);
+            } else {
+                $objet_source = objet_type($table_source);
+                include_spip('action/editer_liens');
+                foreach ($oups as $oup) {
+                    if ($objet_lien == $objet_source) {
+                        objet_associer(array($objet_source => $oup[$objet_source]), array($objet => $oup[$objet]), $oup);
+                    } else {
+                        objet_associer(array($objet => $oup[$objet]), array($objet_source => $oup[$objet_source]), $oup);
+                    }
+                }
+            }
+            # oups ne persiste que pour la derniere action, si suppression
+            set_request('_oups');
+        }
 
-	include_spip('inc/autoriser');
-	if (autoriser('modifier', $objet, $id_objet)) {
-		// annuler les suppressions du coup d'avant !
-		if (_request('annuler_oups')
-			AND $oups = _request('_oups')
-			AND $oups = unserialize($oups)
-		) {
-			if ($oups_objets = charger_fonction("editer_liens_oups_{$table_source}_{$objet}_{$objet_lien}", "action", true)) {
-				$oups_objets($oups);
-			} else {
-				$objet_source = objet_type($table_source);
-				include_spip('action/editer_liens');
-				foreach ($oups as $oup) {
-					if ($objet_lien == $objet_source) {
-						objet_associer(array($objet_source => $oup[$objet_source]), array($objet => $oup[$objet]), $oup);
-					} else {
-						objet_associer(array($objet => $oup[$objet]), array($objet_source => $oup[$objet_source]), $oup);
-					}
-				}
-			}
-			# oups ne persiste que pour la derniere action, si suppression
-			set_request('_oups');
-		}
+        $supprimer = _request('supprimer_lien');
+        $ajouter = _request('ajouter_lien');
 
-		$supprimer = _request('supprimer_lien');
-		$ajouter = _request('ajouter_lien');
+        // il est possible de preciser dans une seule variable un remplacement :
+        // remplacer_lien[old][new]
+        if ($remplacer = _request('remplacer_lien')) {
+            foreach ($remplacer as $k => $v) {
+                if ($old = lien_verifier_action($k, '')) {
+                    foreach (is_array($v) ? $v : array($v) as $kn => $vn) {
+                        if ($new = lien_verifier_action($kn, $vn)) {
+                            $supprimer[$old] = 'x';
+                            $ajouter[$new] = '+';
+                        }
+                    }
+                }
+            }
+        }
 
-		// il est possible de preciser dans une seule variable un remplacement :
-		// remplacer_lien[old][new]
-		if ($remplacer = _request('remplacer_lien')) {
-			foreach ($remplacer as $k => $v) {
-				if ($old = lien_verifier_action($k, '')) {
-					foreach (is_array($v) ? $v : array($v) as $kn => $vn) {
-						if ($new = lien_verifier_action($kn, $vn)) {
-							$supprimer[$old] = 'x';
-							$ajouter[$new] = '+';
-						}
-					}
-				}
-			}
-		}
+        if ($supprimer) {
+            if ($supprimer_objets = charger_fonction("editer_liens_supprimer_{$table_source}_{$objet}_{$objet_lien}",
+                'action', true)
+            ) {
+                $oups = $supprimer_objets($supprimer);
+            } else {
+                include_spip('action/editer_liens');
+                $oups = array();
 
-		if ($supprimer) {
-			if ($supprimer_objets = charger_fonction("editer_liens_supprimer_{$table_source}_{$objet}_{$objet_lien}",
-				"action", true)
-			) {
-				$oups = $supprimer_objets($supprimer);
-			} else {
-				include_spip('action/editer_liens');
-				$oups = array();
+                foreach ($supprimer as $k => $v) {
+                    if ($lien = lien_verifier_action($k, $v)) {
+                        $lien = explode('-', $lien);
+                        list($objet_source, $ids, $objet_lie, $idl, $role) = $lien;
+                        // appliquer une condition sur le rôle si défini ('*' pour tous les roles)
+                        $cond = (!is_null($role) ? array('role' => $role) : array());
+                        if ($objet_lien == $objet_source) {
+                            $oups = array_merge($oups,
+                                objet_trouver_liens(array($objet_source => $ids), array($objet_lie => $idl), $cond));
+                            objet_dissocier(array($objet_source => $ids), array($objet_lie => $idl), $cond);
+                        } else {
+                            $oups = array_merge($oups,
+                                objet_trouver_liens(array($objet_lie => $idl), array($objet_source => $ids), $cond));
+                            objet_dissocier(array($objet_lie => $idl), array($objet_source => $ids), $cond);
+                        }
+                    }
+                }
+            }
+            set_request('_oups', $oups ? serialize($oups) : null);
+        }
 
-				foreach ($supprimer as $k => $v) {
-					if ($lien = lien_verifier_action($k, $v)) {
-						$lien = explode("-", $lien);
-						list($objet_source, $ids, $objet_lie, $idl, $role) = $lien;
-						// appliquer une condition sur le rôle si défini ('*' pour tous les roles)
-						$cond = (!is_null($role) ? array('role' => $role) : array());
-						if ($objet_lien == $objet_source) {
-							$oups = array_merge($oups,
-								objet_trouver_liens(array($objet_source => $ids), array($objet_lie => $idl), $cond));
-							objet_dissocier(array($objet_source => $ids), array($objet_lie => $idl), $cond);
-						} else {
-							$oups = array_merge($oups,
-								objet_trouver_liens(array($objet_lie => $idl), array($objet_source => $ids), $cond));
-							objet_dissocier(array($objet_lie => $idl), array($objet_source => $ids), $cond);
-						}
-					}
-				}
-			}
-			set_request('_oups', $oups ? serialize($oups) : null);
-		}
+        if ($ajouter) {
+            if ($ajouter_objets = charger_fonction("editer_liens_ajouter_{$table_source}_{$objet}_{$objet_lien}", 'action',
+                true)
+            ) {
+                $ajout_ok = $ajouter_objets($ajouter);
+            } else {
+                $ajout_ok = false;
+                include_spip('action/editer_liens');
+                foreach ($ajouter as $k => $v) {
+                    if ($lien = lien_verifier_action($k, $v)) {
+                        $ajout_ok = true;
+                        list($objet1, $ids, $objet2, $idl) = explode('-', $lien);
+                        $qualifs = lien_retrouver_qualif($objet_lien, $lien);
+                        if ($objet_lien == $objet1) {
+                            lien_ajouter_liaisons($objet1, $ids, $objet2, $idl, $qualifs);
+                        } else {
+                            lien_ajouter_liaisons($objet2, $idl, $objet1, $ids, $qualifs);
+                        }
+                        set_request('id_lien_ajoute', $ids);
+                    }
+                }
+            }
+            # oups ne persiste que pour la derniere action, si suppression
+            # une suppression suivie d'un ajout dans le meme hit est un remplacement
+            # non annulable !
+            if ($ajout_ok) {
+                set_request('_oups');
+            }
+        }
+    }
 
-		if ($ajouter) {
-			if ($ajouter_objets = charger_fonction("editer_liens_ajouter_{$table_source}_{$objet}_{$objet_lien}", "action",
-				true)
-			) {
-				$ajout_ok = $ajouter_objets($ajouter);
-			} else {
-				$ajout_ok = false;
-				include_spip('action/editer_liens');
-				foreach ($ajouter as $k => $v) {
-					if ($lien = lien_verifier_action($k, $v)) {
-						$ajout_ok = true;
-						list($objet1, $ids, $objet2, $idl) = explode("-", $lien);
-						$qualifs = lien_retrouver_qualif($objet_lien, $lien);
-						if ($objet_lien == $objet1) {
-							lien_ajouter_liaisons($objet1, $ids, $objet2, $idl, $qualifs);
-						} else {
-							lien_ajouter_liaisons($objet2, $idl, $objet1, $ids, $qualifs);
-						}
-						set_request('id_lien_ajoute', $ids);
-					}
-				}
-			}
-			# oups ne persiste que pour la derniere action, si suppression
-			# une suppression suivie d'un ajout dans le meme hit est un remplacement
-			# non annulable !
-			if ($ajout_ok) {
-				set_request('_oups');
-			}
-		}
-	}
-
-
-	return $res;
+    return $res;
 }
 
-
 /**
- * Retrouver l'action de liaision demandée
+ * Retrouver l'action de liaision demandée.
  *
  * Les formulaires envoient une action dans un tableau ajouter_lien
  * ou supprimer_lien
@@ -328,128 +326,133 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = array()) {
  * on ne la prend en compte que si un submit avec la clé a été envoyé
  *
  * @internal
+ *
  * @param string $k Clé du tableau
  * @param string $v Valeur du tableau
+ *
  * @return string Action demandée si trouvée, sinon ''
  */
-function lien_verifier_action($k, $v) {
-	$action = '';
-	if (preg_match(",^\w+-[\w*]+-[\w*]+-[\w*]+(-[\w*])?,", $k)) {
-		$action = $k;
-	}
-	if (preg_match(",^\w+-[\w*]+-[\w*]+-[\w*]+(-[\w*])?,", $v)) {
-		if (is_numeric($k)) {
-			$action = $v;
-		}
-		if (_request($k)) {
-			$action = $v;
-		}
-	}
-	// ajout un role null fictif (plus pratique) si pas défini
-	if ($action and count(explode("-", $action)) == 4) {
-		$action .= '-';
-	}
+function lien_verifier_action($k, $v)
+{
+    $action = '';
+    if (preg_match(",^\w+-[\w*]+-[\w*]+-[\w*]+(-[\w*])?,", $k)) {
+        $action = $k;
+    }
+    if (preg_match(",^\w+-[\w*]+-[\w*]+-[\w*]+(-[\w*])?,", $v)) {
+        if (is_numeric($k)) {
+            $action = $v;
+        }
+        if (_request($k)) {
+            $action = $v;
+        }
+    }
+    // ajout un role null fictif (plus pratique) si pas défini
+    if ($action and count(explode('-', $action)) == 4) {
+        $action .= '-';
+    }
 
-	return $action;
+    return $action;
 }
 
-
 /**
- * Retrouve le ou les qualificatifs postés avec une liaison demandée
+ * Retrouve le ou les qualificatifs postés avec une liaison demandée.
  *
  * @internal
+ *
  * @param string $objet_lien
- *    objet qui porte le lien
+ *                           objet qui porte le lien
  * @param string $lien
- *   Action du lien
+ *                           Action du lien
+ *
  * @return array
- *   Liste des qualifs pour chaque lien. Tableau vide s'il n'y en a pas.
+ *               Liste des qualifs pour chaque lien. Tableau vide s'il n'y en a pas.
  **/
-function lien_retrouver_qualif($objet_lien, $lien) {
-	// un role est défini dans la liaison
-	$defs = explode('-', $lien);
-	list($objet1, , $objet2, , $role) = $defs;
-	if ($objet_lien == $objet1) {
-		$colonne_role = roles_colonne($objet1, $objet2);
-	} else {
-		$colonne_role = roles_colonne($objet2, $objet1);
-	}
+function lien_retrouver_qualif($objet_lien, $lien)
+{
+    // un role est défini dans la liaison
+    $defs = explode('-', $lien);
+    list($objet1, , $objet2, , $role) = $defs;
+    if ($objet_lien == $objet1) {
+        $colonne_role = roles_colonne($objet1, $objet2);
+    } else {
+        $colonne_role = roles_colonne($objet2, $objet1);
+    }
 
-	// cas ou le role est defini en 5e argument de l'action sur le lien (suppression, ajout rapide sans autre attribut)
-	if ($role) {
-		return array(
-			// un seul lien avec ce role
-			array($colonne_role => $role)
-		);
-	}
+    // cas ou le role est defini en 5e argument de l'action sur le lien (suppression, ajout rapide sans autre attribut)
+    if ($role) {
+        return array(
+            // un seul lien avec ce role
+            array($colonne_role => $role),
+        );
+    }
 
-	// retrouver les rôles postés pour cette liaison, s'il y en a.
-	$qualifier_lien = _request('qualifier_lien');
-	if (!$qualifier_lien OR !is_array($qualifier_lien)) {
-		return array();
-	}
+    // retrouver les rôles postés pour cette liaison, s'il y en a.
+    $qualifier_lien = _request('qualifier_lien');
+    if (!$qualifier_lien or !is_array($qualifier_lien)) {
+        return array();
+    }
 
-	// pas avec l'action complete (incluant le role)
-	$qualif = array();
-	if ((!isset($qualifier_lien[$lien]) OR !$qualif = $qualifier_lien[$lien])
-		AND count($defs) == 5
-	) {
-		// on tente avec l'action sans le role
-		array_pop($defs);
-		$lien = implode('-', $defs);
-		if (!isset($qualifier_lien[$lien]) OR !$qualif = $qualifier_lien[$lien]) {
-			$qualif = array();
-		}
-	}
+    // pas avec l'action complete (incluant le role)
+    $qualif = array();
+    if ((!isset($qualifier_lien[$lien]) or !$qualif = $qualifier_lien[$lien])
+        and count($defs) == 5
+    ) {
+        // on tente avec l'action sans le role
+        array_pop($defs);
+        $lien = implode('-', $defs);
+        if (!isset($qualifier_lien[$lien]) or !$qualif = $qualifier_lien[$lien]) {
+            $qualif = array();
+        }
+    }
 
-	// $qualif de la forme array(role=>array(...),valeur=>array(...),....)
-	// on le reforme en array(array(role=>..,valeur=>..,..),array(role=>..,valeur=>..,..),...)
-	$qualifs = array();
-	while (count($qualif)) {
-		$q = array();
-		foreach ($qualif as $att => $values) {
-			if (is_array($values)) {
-				$q[$att] = array_shift($qualif[$att]);
-				if (!count($qualif[$att])) {
-					unset($qualif[$att]);
-				}
-			} else {
-				$q[$att] = $values;
-				unset($qualif[$att]);
-			}
-		}
-		// pas de rôle vide
-		if (!$colonne_role OR !isset($q[$colonne_role]) OR $q[$colonne_role]) {
-			$qualifs[] = $q;
-		}
-	}
+    // $qualif de la forme array(role=>array(...),valeur=>array(...),....)
+    // on le reforme en array(array(role=>..,valeur=>..,..),array(role=>..,valeur=>..,..),...)
+    $qualifs = array();
+    while (count($qualif)) {
+        $q = array();
+        foreach ($qualif as $att => $values) {
+            if (is_array($values)) {
+                $q[$att] = array_shift($qualif[$att]);
+                if (!count($qualif[$att])) {
+                    unset($qualif[$att]);
+                }
+            } else {
+                $q[$att] = $values;
+                unset($qualif[$att]);
+            }
+        }
+        // pas de rôle vide
+        if (!$colonne_role or !isset($q[$colonne_role]) or $q[$colonne_role]) {
+            $qualifs[] = $q;
+        }
+    }
 
-	return $qualifs;
+    return $qualifs;
 }
 
 /**
- * Ajoute les liens demandés en prenant éventuellement en compte le rôle
+ * Ajoute les liens demandés en prenant éventuellement en compte le rôle.
  *
  * Appelle la fonction objet_associer. L'appelle autant de fois qu'il y
  * a de rôles demandés pour cette liaison.
  *
  * @internal
- * @param string $objet_source Objet source de la liaison (qui a la table de liaison)
- * @param array|string $ids Identifiants pour l'objet source
- * @param string $objet_lien Objet à lier
- * @param array|string $idl Identifiants pour l'objet lié
- * @param array $qualifs
- * @return void
+ *
+ * @param string       $objet_source Objet source de la liaison (qui a la table de liaison)
+ * @param array|string $ids          Identifiants pour l'objet source
+ * @param string       $objet_lien   Objet à lier
+ * @param array|string $idl          Identifiants pour l'objet lié
+ * @param array        $qualifs
  **/
-function lien_ajouter_liaisons($objet_source, $ids, $objet_lien, $idl, $qualifs) {
+function lien_ajouter_liaisons($objet_source, $ids, $objet_lien, $idl, $qualifs)
+{
 
-	// retrouver la colonne de roles s'il y en a a lier
-	if (is_array($qualifs) and count($qualifs)) {
-		foreach ($qualifs as $qualif) {
-			objet_associer(array($objet_source => $ids), array($objet_lien => $idl), $qualif);
-		}
-	} else {
-		objet_associer(array($objet_source => $ids), array($objet_lien => $idl));
-	}
+    // retrouver la colonne de roles s'il y en a a lier
+    if (is_array($qualifs) and count($qualifs)) {
+        foreach ($qualifs as $qualif) {
+            objet_associer(array($objet_source => $ids), array($objet_lien => $idl), $qualif);
+        }
+    } else {
+        objet_associer(array($objet_source => $ids), array($objet_lien => $idl));
+    }
 }
-

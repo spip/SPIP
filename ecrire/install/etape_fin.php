@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 include_spip('inc/headers');
@@ -20,65 +20,65 @@ include_spip('inc/acces');
 // Mise en place des fichiers de configuration si ce n'est fait
 
 // http://code.spip.net/@install_etape_fin_dist
-function install_etape_fin_dist() {
-	ecrire_acces();
+function install_etape_fin_dist()
+{
+    ecrire_acces();
 
-	$f = str_replace(_FILE_TMP_SUFFIX, '.php', _FILE_CHMOD_TMP);
-	if (file_exists(_FILE_CHMOD_TMP)) {
-		if (!@rename(_FILE_CHMOD_TMP, $f)) {
-			if (@copy(_FILE_CHMOD_TMP, $f)) {
-				spip_unlink(_FILE_CHMOD_TMP);
-			}
-		}
-	}
+    $f = str_replace(_FILE_TMP_SUFFIX, '.php', _FILE_CHMOD_TMP);
+    if (file_exists(_FILE_CHMOD_TMP)) {
+        if (!@rename(_FILE_CHMOD_TMP, $f)) {
+            if (@copy(_FILE_CHMOD_TMP, $f)) {
+                spip_unlink(_FILE_CHMOD_TMP);
+            }
+        }
+    }
 
-	$f = str_replace(_FILE_TMP_SUFFIX, '.php', _FILE_CONNECT_TMP);
-	if (file_exists(_FILE_CONNECT_TMP)) {
-		spip_log("renomme $f");
-		if (!@rename(_FILE_CONNECT_TMP, $f)) {
-			if (@copy(_FILE_CONNECT_TMP, $f)) {
-				@spip_unlink(_FILE_CONNECT_TMP);
-			}
-		}
-	}
+    $f = str_replace(_FILE_TMP_SUFFIX, '.php', _FILE_CONNECT_TMP);
+    if (file_exists(_FILE_CONNECT_TMP)) {
+        spip_log("renomme $f");
+        if (!@rename(_FILE_CONNECT_TMP, $f)) {
+            if (@copy(_FILE_CONNECT_TMP, $f)) {
+                @spip_unlink(_FILE_CONNECT_TMP);
+            }
+        }
+    }
 
-	// creer le repertoire cache, qui sert partout !
-	// deja fait en etape 4 en principe, on garde au cas ou
-	if (!@file_exists(_DIR_CACHE)) {
-		$rep = preg_replace(',' . _DIR_TMP . ',', '', _DIR_CACHE);
-		$rep = sous_repertoire(_DIR_TMP, $rep, true, true);
-	}
+    // creer le repertoire cache, qui sert partout !
+    // deja fait en etape 4 en principe, on garde au cas ou
+    if (!@file_exists(_DIR_CACHE)) {
+        $rep = preg_replace(','._DIR_TMP.',', '', _DIR_CACHE);
+        $rep = sous_repertoire(_DIR_TMP, $rep, true, true);
+    }
 
-	// Verifier la securite des htaccess
-	// Si elle ne fonctionne pas, prevenir
-	$msg = install_verifier_htaccess();
-	if ($msg) {
-		$cible = _T('public:accueil_site');
-		$cible = generer_form_ecrire('accueil', '', '', $cible);
-		echo minipres('AUTO', $msg . $cible);
-		// ok, deboucher dans l'espace prive
-	} else {
-		redirige_url_ecrire('accueil');
-	}
+    // Verifier la securite des htaccess
+    // Si elle ne fonctionne pas, prevenir
+    $msg = install_verifier_htaccess();
+    if ($msg) {
+        $cible = _T('public:accueil_site');
+        $cible = generer_form_ecrire('accueil', '', '', $cible);
+        echo minipres('AUTO', $msg.$cible);
+        // ok, deboucher dans l'espace prive
+    } else {
+        redirige_url_ecrire('accueil');
+    }
 }
 
-function install_verifier_htaccess() {
-	if (verifier_htaccess(_DIR_TMP, true)
-		AND verifier_htaccess(_DIR_CONNECT, true)
-	) {
-		return '';
-	}
+function install_verifier_htaccess()
+{
+    if (verifier_htaccess(_DIR_TMP, true)
+        and verifier_htaccess(_DIR_CONNECT, true)
+    ) {
+        return '';
+    }
 
-	$titre = _T('htaccess_inoperant');
+    $titre = _T('htaccess_inoperant');
 
-	$averti = _T('htaccess_a_simuler',
-		array(
-			'htaccess' => '<tt>' . _ACCESS_FILE_NAME . '</tt>',
-			'constantes' => '<tt>_DIR_TMP &amp; _DIR_CONNECT</tt>',
-			'document_root' => '<tt>' . $_SERVER['DOCUMENT_ROOT'] . '</tt>'
-		));
+    $averti = _T('htaccess_a_simuler',
+        array(
+            'htaccess' => '<tt>'._ACCESS_FILE_NAME.'</tt>',
+            'constantes' => '<tt>_DIR_TMP &amp; _DIR_CONNECT</tt>',
+            'document_root' => '<tt>'.$_SERVER['DOCUMENT_ROOT'].'</tt>',
+        ));
 
-	return "<div class='error'><h3>$titre</h3><p>$averti</p></div>";
+    return "<div class='error'><h3>$titre</h3><p>$averti</p></div>";
 }
-
-?>

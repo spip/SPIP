@@ -11,17 +11,14 @@
 \***************************************************************************/
 
 /**
- * Gestion des actions sécurisées
- *
- * @package SPIP\Core\Actions
+ * Gestion des actions sécurisées.
  **/
-
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 /**
- * Génère ou vérifie une action sécurisée
+ * Génère ou vérifie une action sécurisée.
  *
  * Interface d'appel:
  *
@@ -29,6 +26,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * - sans argument : vérifie la sécurité et retourne `_request('arg')`, ou exit.
  *
  * @uses securiser_action_auteur() Pour produire l'URL ou le formulaire
+ *
  * @example
  *     Tester une action reçue et obtenir son argument :
  *     ```
@@ -36,37 +34,39 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     $arg = $securiser_action();
  *     ```
  *
- * @param string $action
- * @param string $arg
- * @param string $redirect
+ * @param string          $action
+ * @param string          $arg
+ * @param string          $redirect
  * @param bool|int|string $mode
- *   - -1 : renvoyer action, arg et hash sous forme de array()
- *   - true ou false : renvoyer une url, avec &amp; (false) ou & (true)
- *   - string : renvoyer un formulaire
- * @param string|int $att
- *   id_auteur pour lequel generer l'action en mode url ou array()
- *   atributs du formulaire en mode formulaire
- * @param bool $public
+ *                                  - -1 : renvoyer action, arg et hash sous forme de array()
+ *                                  - true ou false : renvoyer une url, avec &amp; (false) ou & (true)
+ *                                  - string : renvoyer un formulaire
+ * @param string|int      $att
+ *                                  id_auteur pour lequel generer l'action en mode url ou array()
+ *                                  atributs du formulaire en mode formulaire
+ * @param bool            $public
+ *
  * @return array|string
  */
-function inc_securiser_action_dist($action = '', $arg = '', $redirect = "", $mode = false, $att = '', $public = false) {
-	if ($action) {
-		return securiser_action_auteur($action, $arg, $redirect, $mode, $att, $public);
-	} else {
-		$arg = _request('arg');
-		$hash = _request('hash');
-		$action = _request('action') ? _request('action') : _request('formulaire_action');
-		if ($a = verifier_action_auteur("$action-$arg", $hash)) {
-			return $arg;
-		}
-		include_spip('inc/minipres');
-		echo minipres();
-		exit;
-	}
+function inc_securiser_action_dist($action = '', $arg = '', $redirect = '', $mode = false, $att = '', $public = false)
+{
+    if ($action) {
+        return securiser_action_auteur($action, $arg, $redirect, $mode, $att, $public);
+    } else {
+        $arg = _request('arg');
+        $hash = _request('hash');
+        $action = _request('action') ? _request('action') : _request('formulaire_action');
+        if ($a = verifier_action_auteur("$action-$arg", $hash)) {
+            return $arg;
+        }
+        include_spip('inc/minipres');
+        echo minipres();
+        exit;
+    }
 }
 
 /**
- * Retourne une URL ou un formulaire sécurisés
+ * Retourne une URL ou un formulaire sécurisés.
  *
  * @note
  *   Attention: PHP applique urldecode sur $_GET mais pas sur $_POST
@@ -76,166 +76,175 @@ function inc_securiser_action_dist($action = '', $arg = '', $redirect = "", $mod
  * @uses calculer_action_auteur()
  * @uses generer_form_action()
  *
- * @param string $action
- * @param string $arg
- * @param string $redirect
+ * @param string          $action
+ * @param string          $arg
+ * @param string          $redirect
  * @param bool|int|string $mode
- *   - -1 : renvoyer action, arg et hash sous forme de array()
- *   - true ou false : renvoyer une url, avec &amp; (false) ou & (true)
- *   - string : renvoyer un formulaire
- * @param string|int $att
- *   - id_auteur pour lequel générer l'action en mode URL ou array()
- *   - atributs du formulaire en mode formulaire
- * @param bool $public
+ *                                  - -1 : renvoyer action, arg et hash sous forme de array()
+ *                                  - true ou false : renvoyer une url, avec &amp; (false) ou & (true)
+ *                                  - string : renvoyer un formulaire
+ * @param string|int      $att
+ *                                  - id_auteur pour lequel générer l'action en mode URL ou array()
+ *                                  - atributs du formulaire en mode formulaire
+ * @param bool            $public
+ *
  * @return array|string
- *    - string URL, si $mode = true ou false,
- *    - string code HTML du formulaire, si $mode texte,
- *    - array Tableau (action=>x, arg=>x, hash=>x) si $mode=-1.
+ *                      - string URL, si $mode = true ou false,
+ *                      - string code HTML du formulaire, si $mode texte,
+ *                      - array Tableau (action=>x, arg=>x, hash=>x) si $mode=-1.
  */
-function securiser_action_auteur($action, $arg, $redirect = "", $mode = false, $att = '', $public = false) {
+function securiser_action_auteur($action, $arg, $redirect = '', $mode = false, $att = '', $public = false)
+{
 
-	// mode URL ou array
-	if (!is_string($mode)) {
-		$hash = calculer_action_auteur("$action-$arg", is_numeric($att) ? $att : null);
+    // mode URL ou array
+    if (!is_string($mode)) {
+        $hash = calculer_action_auteur("$action-$arg", is_numeric($att) ? $att : null);
 
-		$r = rawurlencode($redirect);
-		if ($mode === -1) {
-			return array('action' => $action, 'arg' => $arg, 'hash' => $hash);
-		} else {
-			return generer_url_action($action, "arg=" . rawurlencode($arg) . "&hash=$hash" . (!$r ? '' : "&redirect=$r"),
-				$mode, $public);
-		}
-	}
+        $r = rawurlencode($redirect);
+        if ($mode === -1) {
+            return array('action' => $action, 'arg' => $arg, 'hash' => $hash);
+        } else {
+            return generer_url_action($action, 'arg='.rawurlencode($arg)."&hash=$hash".(!$r ? '' : "&redirect=$r"),
+                $mode, $public);
+        }
+    }
 
-	// mode formulaire
-	$hash = calculer_action_auteur("$action-$arg");
-	$att .= " style='margin: 0px; border: 0px'";
-	if ($redirect) {
-		$redirect = "\n\t\t<input name='redirect' type='hidden' value='" . str_replace("'", '&#39;', $redirect) . "' />";
-	}
-	$mode .= $redirect . "
+    // mode formulaire
+    $hash = calculer_action_auteur("$action-$arg");
+    $att .= " style='margin: 0px; border: 0px'";
+    if ($redirect) {
+        $redirect = "\n\t\t<input name='redirect' type='hidden' value='".str_replace("'", '&#39;', $redirect)."' />";
+    }
+    $mode .= $redirect."
 <input name='hash' type='hidden' value='$hash' />
 <input name='arg' type='hidden' value='$arg' />";
 
-	return generer_form_action($action, $mode, $att, $public);
+    return generer_form_action($action, $mode, $att, $public);
 }
 
 /**
- * Caracteriser un auteur : l'auteur loge si $id_auteur=null
+ * Caracteriser un auteur : l'auteur loge si $id_auteur=null.
  *
  * @param int|null $id_auteur
+ *
  * @return array
  */
-function caracteriser_auteur($id_auteur = null) {
-	static $caracterisation = array();
+function caracteriser_auteur($id_auteur = null)
+{
+    static $caracterisation = array();
 
-	if (is_null($id_auteur) AND !isset($GLOBALS['visiteur_session']['id_auteur'])) {
-		// si l'auteur courant n'est pas connu alors qu'il peut demander une action
-		// c'est une connexion par php_auth ou 1 instal, on se rabat sur le cookie.
-		// S'il n'avait pas le droit de realiser cette action, le hash sera faux.
-		if (isset($_COOKIE['spip_session'])
-			AND (preg_match('/^(\d+)/', $_COOKIE['spip_session'], $r))
-		) {
-			return array($r[1], '');
-			// Necessaire aux forums anonymes.
-			// Pour le reste, ca echouera.
-		} else {
-			return array('0', '');
-		}
-	}
-	// Eviter l'acces SQL si le pass est connu de PHP
-	if (is_null($id_auteur)) {
-		$id_auteur = isset($GLOBALS['visiteur_session']['id_auteur']) ? $GLOBALS['visiteur_session']['id_auteur'] : 0;
-		if (isset($GLOBALS['visiteur_session']['pass']) AND $GLOBALS['visiteur_session']['pass']) {
-			return $caracterisation[$id_auteur] = array($id_auteur, $GLOBALS['visiteur_session']['pass']);
-		}
-	}
+    if (is_null($id_auteur) and !isset($GLOBALS['visiteur_session']['id_auteur'])) {
+        // si l'auteur courant n'est pas connu alors qu'il peut demander une action
+        // c'est une connexion par php_auth ou 1 instal, on se rabat sur le cookie.
+        // S'il n'avait pas le droit de realiser cette action, le hash sera faux.
+        if (isset($_COOKIE['spip_session'])
+            and (preg_match('/^(\d+)/', $_COOKIE['spip_session'], $r))
+        ) {
+            return array($r[1], '');
+            // Necessaire aux forums anonymes.
+            // Pour le reste, ca echouera.
+        } else {
+            return array('0', '');
+        }
+    }
+    // Eviter l'acces SQL si le pass est connu de PHP
+    if (is_null($id_auteur)) {
+        $id_auteur = isset($GLOBALS['visiteur_session']['id_auteur']) ? $GLOBALS['visiteur_session']['id_auteur'] : 0;
+        if (isset($GLOBALS['visiteur_session']['pass']) and $GLOBALS['visiteur_session']['pass']) {
+            return $caracterisation[$id_auteur] = array($id_auteur, $GLOBALS['visiteur_session']['pass']);
+        }
+    }
 
-	if (isset($caracterisation[$id_auteur])) {
-		return $caracterisation[$id_auteur];
-	}
+    if (isset($caracterisation[$id_auteur])) {
+        return $caracterisation[$id_auteur];
+    }
 
-	if ($id_auteur) {
-		include_spip('base/abstract_sql');
-		$t = sql_fetsel("id_auteur, pass", "spip_auteurs", "id_auteur=$id_auteur");
-		if ($t) {
-			return $caracterisation[$id_auteur] = array($t['id_auteur'], $t['pass']);
-		}
-		include_spip('inc/minipres');
-		echo minipres();
-		exit;
-	} // Visiteur anonyme, pour ls forums par exemple
-	else {
-		return array('0', '');
-	}
+    if ($id_auteur) {
+        include_spip('base/abstract_sql');
+        $t = sql_fetsel('id_auteur, pass', 'spip_auteurs', "id_auteur=$id_auteur");
+        if ($t) {
+            return $caracterisation[$id_auteur] = array($t['id_auteur'], $t['pass']);
+        }
+        include_spip('inc/minipres');
+        echo minipres();
+        exit;
+    } // Visiteur anonyme, pour ls forums par exemple
+    else {
+        return array('0', '');
+    }
 }
 
 /**
  * Calcule une cle securisee pour une action et un auteur donnes
  * utilisee pour generer des urls personelles pour executer une action qui modifie la base
- * et verifier la legitimite de l'appel a l'action
+ * et verifier la legitimite de l'appel a l'action.
  *
  * @param string $action
- * @param int $id_auteur
+ * @param int    $id_auteur
  * @param string $pass
  * @param string $alea
+ *
  * @return string
  */
-function _action_auteur($action, $id_auteur, $pass, $alea) {
-	static $sha = array();
-	if (!isset($sha[$id_auteur . $pass . $alea])) {
-		if (!isset($GLOBALS['meta'][$alea]) AND _request('exec') !== 'install') {
-			include_spip('base/abstract_sql');
-			$GLOBALS['meta'][$alea] = sql_getfetsel('valeur', 'spip_meta', "nom=" . sql_quote($alea));
-			if (!($GLOBALS['meta'][$alea])) {
-				include_spip('inc/minipres');
-				echo minipres();
-				spip_log("$alea indisponible");
-				exit;
-			}
-		}
-		include_spip('auth/sha256.inc');
-		$sha[$id_auteur . $pass . $alea] = _nano_sha256($id_auteur . $pass . @$GLOBALS['meta'][$alea]);
-	}
-	if (function_exists('sha1')) {
-		return sha1($action . $sha[$id_auteur . $pass . $alea]);
-	} else {
-		return md5($action . $sha[$id_auteur . $pass . $alea]);
-	}
+function _action_auteur($action, $id_auteur, $pass, $alea)
+{
+    static $sha = array();
+    if (!isset($sha[$id_auteur.$pass.$alea])) {
+        if (!isset($GLOBALS['meta'][$alea]) and _request('exec') !== 'install') {
+            include_spip('base/abstract_sql');
+            $GLOBALS['meta'][$alea] = sql_getfetsel('valeur', 'spip_meta', 'nom='.sql_quote($alea));
+            if (!($GLOBALS['meta'][$alea])) {
+                include_spip('inc/minipres');
+                echo minipres();
+                spip_log("$alea indisponible");
+                exit;
+            }
+        }
+        include_spip('auth/sha256.inc');
+        $sha[$id_auteur.$pass.$alea] = _nano_sha256($id_auteur.$pass.@$GLOBALS['meta'][$alea]);
+    }
+    if (function_exists('sha1')) {
+        return sha1($action.$sha[$id_auteur.$pass.$alea]);
+    } else {
+        return md5($action.$sha[$id_auteur.$pass.$alea]);
+    }
 }
 
 /**
- * Calculer le hash qui signe une action pour un auteur
+ * Calculer le hash qui signe une action pour un auteur.
  *
- * @param string $action
+ * @param string   $action
  * @param int|null $id_auteur
+ *
  * @return string
  */
-function calculer_action_auteur($action, $id_auteur = null) {
-	list($id_auteur, $pass) = caracteriser_auteur($id_auteur);
+function calculer_action_auteur($action, $id_auteur = null)
+{
+    list($id_auteur, $pass) = caracteriser_auteur($id_auteur);
 
-	return _action_auteur($action, $id_auteur, $pass, 'alea_ephemere');
+    return _action_auteur($action, $id_auteur, $pass, 'alea_ephemere');
 }
-
 
 /**
  * Verifier le hash de signature d'une action
- * toujours exclusivement pour l'auteur en cours
+ * toujours exclusivement pour l'auteur en cours.
  *
  * @param $action
  * @param $hash
+ *
  * @return bool
  */
-function verifier_action_auteur($action, $hash) {
-	list($id_auteur, $pass) = caracteriser_auteur();
-	if ($hash == _action_auteur($action, $id_auteur, $pass, 'alea_ephemere')) {
-		return true;
-	}
-	if ($hash == _action_auteur($action, $id_auteur, $pass, 'alea_ephemere_ancien')) {
-		return true;
-	}
+function verifier_action_auteur($action, $hash)
+{
+    list($id_auteur, $pass) = caracteriser_auteur();
+    if ($hash == _action_auteur($action, $id_auteur, $pass, 'alea_ephemere')) {
+        return true;
+    }
+    if ($hash == _action_auteur($action, $id_auteur, $pass, 'alea_ephemere_ancien')) {
+        return true;
+    }
 
-	return false;
+    return false;
 }
 
 //
@@ -246,51 +255,54 @@ function verifier_action_auteur($action, $hash) {
 /**
  * Renvoyer le secret du site, et le generer si il n'existe pas encore
  * Le secret du site doit rester aussi secret que possible, et est eternel
- * On ne doit pas l'exporter
+ * On ne doit pas l'exporter.
  *
  * @return string
  */
-function secret_du_site() {
-	if (!isset($GLOBALS['meta']['secret_du_site'])) {
-		include_spip('base/abstract_sql');
-		$GLOBALS['meta']['secret_du_site'] = sql_getfetsel('valeur', 'spip_meta', "nom='secret_du_site'");
-	}
-	if (!isset($GLOBALS['meta']['secret_du_site'])
-		OR (strlen($GLOBALS['meta']['secret_du_site']) < 64)
-	) {
-		include_spip('inc/acces');
-		include_spip('auth/sha256.inc');
-		ecrire_meta('secret_du_site',
-			_nano_sha256($_SERVER["DOCUMENT_ROOT"] . $_SERVER["SERVER_SIGNATURE"] . creer_uniqid()), 'non');
-		lire_metas(); // au cas ou ecrire_meta() ne fonctionne pas
-	}
+function secret_du_site()
+{
+    if (!isset($GLOBALS['meta']['secret_du_site'])) {
+        include_spip('base/abstract_sql');
+        $GLOBALS['meta']['secret_du_site'] = sql_getfetsel('valeur', 'spip_meta', "nom='secret_du_site'");
+    }
+    if (!isset($GLOBALS['meta']['secret_du_site'])
+        or (strlen($GLOBALS['meta']['secret_du_site']) < 64)
+    ) {
+        include_spip('inc/acces');
+        include_spip('auth/sha256.inc');
+        ecrire_meta('secret_du_site',
+            _nano_sha256($_SERVER['DOCUMENT_ROOT'].$_SERVER['SERVER_SIGNATURE'].creer_uniqid()), 'non');
+        lire_metas(); // au cas ou ecrire_meta() ne fonctionne pas
+    }
 
-	return $GLOBALS['meta']['secret_du_site'];
+    return $GLOBALS['meta']['secret_du_site'];
 }
 
 /**
- * Calculer une signature valable pour une action et pour le site
+ * Calculer une signature valable pour une action et pour le site.
  *
  * @param string $action
+ *
  * @return string
  */
-function calculer_cle_action($action) {
-	if (function_exists('sha1')) {
-		return sha1($action . secret_du_site());
-	} else {
-		return md5($action . secret_du_site());
-	}
+function calculer_cle_action($action)
+{
+    if (function_exists('sha1')) {
+        return sha1($action.secret_du_site());
+    } else {
+        return md5($action.secret_du_site());
+    }
 }
 
 /**
- * Verifier la cle de signature d'une action valable pour le site
+ * Verifier la cle de signature d'une action valable pour le site.
  *
  * @param string $action
  * @param string $cle
+ *
  * @return bool
  */
-function verifier_cle_action($action, $cle) {
-	return ($cle == calculer_cle_action($action));
+function verifier_cle_action($action, $cle)
+{
+    return $cle == calculer_cle_action($action);
 }
-
-?>

@@ -11,10 +11,10 @@
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
-/**
+/*
  * Evaluer la page produite par un squelette
  *
  * Évalue une page pour la transformer en texte statique
@@ -31,40 +31,39 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $res = true;
 
 // Cas d'une page contenant du PHP :
-if (empty($page['process_ins']) OR $page['process_ins'] != 'html') {
+if (empty($page['process_ins']) or $page['process_ins'] != 'html') {
+    include_spip('inc/lang');
 
-	include_spip('inc/lang');
+    // restaurer l'etat des notes avant calcul
+    if (isset($page['notes'])
+        and $page['notes']
+        and $notes = charger_fonction('notes', 'inc', true)
+    ) {
+        $notes($page['notes'], 'restaurer_etat');
+    }
+    ob_start();
+    if (strpos($page['texte'], '?xml') !== false) {
+        $page['texte'] = str_replace('<'.'?xml', "<\1?xml", $page['texte']);
+    }
 
-	// restaurer l'etat des notes avant calcul
-	if (isset($page['notes'])
-		AND $page['notes']
-		AND $notes = charger_fonction("notes", "inc", true)
-	) {
-		$notes($page['notes'], 'restaurer_etat');
-	}
-	ob_start();
-	if (strpos($page['texte'], '?xml') !== false) {
-		$page['texte'] = str_replace('<' . '?xml', "<\1?xml", $page['texte']);
-	}
+    $res = eval('?'.'>'.$page['texte']);
+    $eval = ob_get_contents();
+    ob_end_clean();
 
-	$res = eval('?' . '>' . $page['texte']);
-	$eval = ob_get_contents();
-	ob_end_clean();
+    // erreur d'exécution ?
+    // enregistrer le code pour afficher zbug_erreur_execution_page
+    if (false === $res) {
+        $page['codephp'] = $page['texte'];
+        $page['texte'] = '<!-- erreur -->';
+    } else {
+        $page['texte'] = $eval;
+    }
 
-	// erreur d'exécution ?
-	// enregistrer le code pour afficher zbug_erreur_execution_page
-	if (false === $res) {
-		$page['codephp'] = $page['texte'];
-		$page['texte'] = '<!-- erreur -->';
-	} else {
-		$page['texte'] = $eval;
-	}
+    $page['process_ins'] = 'html';
 
-	$page['process_ins'] = 'html';
-
-	if (strpos($page['texte'], '?xml') !== false) {
-		$page['texte'] = str_replace("<\1?xml", '<' . '?xml', $page['texte']);
-	}
+    if (strpos($page['texte'], '?xml') !== false) {
+        $page['texte'] = str_replace("<\1?xml", '<'.'?xml', $page['texte']);
+    }
 }
 
 page_base_href($page['texte']);

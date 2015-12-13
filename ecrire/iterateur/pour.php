@@ -11,38 +11,35 @@
 \***************************************************************************/
 
 /**
- * Gestion de l'itérateur POUR
- *
- * @package SPIP\Core\Iterateur\POUR
+ * Gestion de l'itérateur POUR.
  **/
-
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 include_spip('iterateur/data');
 
-
 /**
- * Créer une boucle sur un itérateur POUR
+ * Créer une boucle sur un itérateur POUR.
  *
  * Annonce au compilateur les "champs" disponibles,
  * c'est à dire 'cle' et 'valeur'.
  *
  * @param Boucle $b
- *     Description de la boucle
+ *                  Description de la boucle
+ *
  * @return Boucle
- *     Description de la boucle complétée des champs
+ *                Description de la boucle complétée des champs
  */
-function iterateur_POUR_dist($b) {
-	$b->iterateur = 'DATA'; # designe la classe d'iterateur
-	$b->show = array(
-		'field' => array(
-			'cle' => 'STRING',
-			'valeur' => 'STRING',
-		)
-	);
+function iterateur_POUR_dist($b)
+{
+    $b->iterateur = 'DATA'; # designe la classe d'iterateur
+    $b->show = array(
+        'field' => array(
+            'cle' => 'STRING',
+            'valeur' => 'STRING',
+        ),
+    );
 
-	return $b;
+    return $b;
 }
-

@@ -1,13 +1,10 @@
 <?php
 
 /**
- * Gestion des verrous NFS
- *
- * @package SPIP\Core\NFS
+ * Gestion des verrous NFS.
  **/
-
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 include_spip('inc/acces');
@@ -15,7 +12,7 @@ define('_DEFAULT_LOCKTIME', 60);
 define('_NAME_LOCK', 'spip_nfs_lock');
 
 /**
- * Crée un verrou pour NFS
+ * Crée un verrou pour NFS.
  *
  * (Excerpts from Chuck's notes:
  *   this becomes complex, due to our dear friend, the NFS mounted mail spool.
@@ -97,101 +94,101 @@ define('_NAME_LOCK', 'spip_nfs_lock');
  * @author Cedric Morin <cedric@yterium.com> (rewritter for php&SPIP)
  *
  * @param string $fichier Chemin du fichier
- * @param int $max_age Age maximum du verrou
+ * @param int    $max_age Age maximum du verrou
+ *
  * @return int|bool Timestamp du verrou, false si erreur
  */
-function spip_nfslock($fichier, $max_age = 0) {
-	$tries = 0;
+function spip_nfslock($fichier, $max_age = 0)
+{
+    $tries = 0;
 
-	if (!$max_age) {
-		$max_age = _DEFAULT_LOCKTIME;
-	}
-	$lock_file = _DIR_TMP . _NAME_LOCK . "-" . substr(md5($fichier), 0, 8);
+    if (!$max_age) {
+        $max_age = _DEFAULT_LOCKTIME;
+    }
+    $lock_file = _DIR_TMP._NAME_LOCK.'-'.substr(md5($fichier), 0, 8);
 
+    /*
+     * 1. create a tmp file with a psuedo random file name. we also make
+     *    tpath which is a buffer to store the full pathname of the tmp file.
+     */
 
-	/*
-	 * 1. create a tmp file with a psuedo random file name. we also make
-	 *    tpath which is a buffer to store the full pathname of the tmp file.
-	 */
+    $id = creer_uniqid();
+    $tpath = _DIR_TMP."slock.$id";
+    $tmpfd = @fopen($tpath, 'w'); // hum, le 'x' necessite php4,3,2 ...
+    if (!$tmpfd) {  /* open failed */
+        @fclose($tmpfd);
+        spip_unlink($tpath);
 
-	$id = creer_uniqid();
-	$tpath = _DIR_TMP . "slock.$id";
-	$tmpfd = @fopen($tpath, 'w'); // hum, le 'x' necessite php4,3,2 ...
-	if (!$tmpfd) {  /* open failed */
-		@fclose($tmpfd);
-		spip_unlink($tpath);
+        return false; //NFSL_SYSF
+    }
 
-		return false; //NFSL_SYSF
-	}
+    /*
+     * 2. make fullpath, a buffer for the full pathname of the lock file.
+     *    then start looping trying to lock it
+     */
 
-	/*
-	 * 2. make fullpath, a buffer for the full pathname of the lock file.
-	 *    then start looping trying to lock it
-	 */
+    while ($tries < 10) {
+        /*
+         * 3. link tmp file to lock file.  if it goes, we win and we clean
+         *    up and return the st_ctime of the lock file.
+         */
 
-	while ($tries < 10) {
-		/*
-		 * 3. link tmp file to lock file.  if it goes, we win and we clean
-		 *    up and return the st_ctime of the lock file.
-		 */
+        if (link($tpath, $lock_file) == 1) {
+            spip_unlink($tpath); /* got it! */
+            @fclose($tmpfd);
+            if (($our_tmp = lstat($lock_file)) == false) {  /* stat failed... shouldn't happen */
+                spip_unlink($lock_file);
 
-		if (link($tpath, $lock_file) == 1) {
-			spip_unlink($tpath); /* got it! */
-			@fclose($tmpfd);
-			if (($our_tmp = lstat($lock_file)) == false) {  /* stat failed... shouldn't happen */
-				spip_unlink($lock_file);
+                return false; // (NFSL_SYSF);
+            }
 
-				return false; // (NFSL_SYSF);
-			}
+            return $our_tmp['ctime'];
+        }
 
-			return ($our_tmp['ctime']);
-		}
+        /*
+         * 4. the lock failed.  check for a stale lock file, being mindful
+         *    of NFS and the fact the time is set from the NFS server.  we
+         *    do a write on the tmp file to update its time to the server's
+         *    idea of "now."
+         */
 
-		/*
-		 * 4. the lock failed.  check for a stale lock file, being mindful
-		 *    of NFS and the fact the time is set from the NFS server.  we
-		 *    do a write on the tmp file to update its time to the server's
-		 *    idea of "now."
-		 */
+        $old_stat = lstat($lock_file);
+        if (@fputs($tmpfd, 'zz', 2) != 2 || !$our_tmp = fstat($tmpfd)) {
+            break;
+        } /* something bogus is going on */
 
-		$old_stat = lstat($lock_file);
-		if (@fputs($tmpfd, "zz", 2) != 2 || !$our_tmp = fstat($tmpfd)) {
-			break;
-		} /* something bogus is going on */
+        if ($old_stat != false && (($old_stat['ctime'] + $max_age) < $our_tmp['ctime'])) {
+            spip_unlink($lock_file); /* break the stale lock */
+            ++$tries;
+            /* It is CRITICAL that we sleep after breaking
+             * the lock. Otherwise, we could race with
+             * another process and unlink it's newly-
+             * created file.
+             */
+            sleep(1 + rand(0, 4));
+            continue;
+        }
 
+        /*
+         * 5. try again
+         */
 
-		if ($old_stat != false && (($old_stat['ctime']+$max_age) < $our_tmp['ctime'])) {
-			spip_unlink($lock_file); /* break the stale lock */
-			$tries++;
-			/* It is CRITICAL that we sleep after breaking
-			 * the lock. Otherwise, we could race with
-			 * another process and unlink it's newly-
-			 * created file.
-			 */
-			sleep(1+rand(0, 4));
-			continue;
-		}
+        ++$tries;
+        sleep(1 + rand(0, 4));
+    }
 
-		/*
-		 * 5. try again
-		 */
+    /*
+     * 6. give up, failure.
+     */
 
-		$tries++;
-		sleep(1+rand(0, 4));
-	}
+    spip_unlink($tpath);
+    @fclose($tmpfd);
 
-	/*
-	 * 6. give up, failure.
-	 */
-
-	spip_unlink($tpath);
-	@fclose($tmpfd);
-
-	return false; //(NFSL_LOCKED);
+    return false; //(NFSL_LOCKED);
 }
 
 /**
- * Unlock an nfslock()ed file
+ * Unlock an nfslock()ed file.
  *
  * This can get tricky because the lock may have expired (perhaps even
  * during a process that should be "atomic"). We have to make sure we don't
@@ -222,84 +219,85 @@ function spip_nfslock($fichier, $max_age = 0) {
  * happen unless someone is violating the locking protocol.
  *
  * @author Alexis Rosen <alexis@panix.com>
+ *
  * @see spip_nfslock()
  *
  * @param string $fichier Chemin du fichier
- * @param bool $birth Timestamp de l'heure de création du verrou
- * @param int $max_age Age maximum du verrou
- * @param bool $test Mode de test
- * return bool true si déverrouillé, false sinon
+ * @param bool   $birth   Timestamp de l'heure de création du verrou
+ * @param int    $max_age Age maximum du verrou
+ * @param bool   $test    Mode de test
+ *                        return bool true si déverrouillé, false sinon
  */
-function spip_nfsunlock($fichier, $birth, $max_age = 0, $test = false) {
-	$id = creer_uniqid();
-	if (!$max_age) {
-		$max_age = _DEFAULT_LOCKTIME;
-	}
+function spip_nfsunlock($fichier, $birth, $max_age = 0, $test = false)
+{
+    $id = creer_uniqid();
+    if (!$max_age) {
+        $max_age = _DEFAULT_LOCKTIME;
+    }
 
-	/*
-	 * 1. Build a temp file and stat that to get an idea of what the server
-	 *    thinks the current time is (our_tmp.st_ctime)..
-	 */
+    /*
+     * 1. Build a temp file and stat that to get an idea of what the server
+     *    thinks the current time is (our_tmp.st_ctime)..
+     */
 
-	$tpath = _DIR_TMP . "stime.$id";
-	$tmpfd = @fopen($tpath, 'w');
-	if ((!$tmpfd)
-		OR (@fputs($tmpfd, "zz", 2) != 2)
-		OR !($our_tmp = fstat($tmpfd))
-	) {
-		/* The open failed, or we can't write the file, or we can't stat it */
-		@fclose($tmpfd);
-		spip_unlink($tpath);
+    $tpath = _DIR_TMP."stime.$id";
+    $tmpfd = @fopen($tpath, 'w');
+    if ((!$tmpfd)
+        or (@fputs($tmpfd, 'zz', 2) != 2)
+        or !($our_tmp = fstat($tmpfd))
+    ) {
+        /* The open failed, or we can't write the file, or we can't stat it */
+        @fclose($tmpfd);
+        spip_unlink($tpath);
 
-		return false; //(NFSL_SYSF);
-	}
+        return false; //(NFSL_SYSF);
+    }
 
-	@fclose($tmpfd);    /* We don't need this once we have our_tmp.st_ctime. */
-	spip_unlink($tpath);
+    @fclose($tmpfd);    /* We don't need this once we have our_tmp.st_ctime. */
+    spip_unlink($tpath);
 
-	/*
-	 * 2. make fullpath, a buffer for the full pathname of the lock file
-	 */
+    /*
+     * 2. make fullpath, a buffer for the full pathname of the lock file
+     */
 
-	$lock_file = _DIR_TMP . _NAME_LOCK . "-" . substr(md5($fichier), 0, 8);
+    $lock_file = _DIR_TMP._NAME_LOCK.'-'.substr(md5($fichier), 0, 8);
 
-	/*
-	 * 3. If the ctime hasn't been modified, unlink the file and return. If the
-	 *    lock has expired, sleep the usual random interval before returning.
-	 *    If we didn't sleep, there could be a race if the caller immediately
-	 *    tries to relock the file.
-	 */
+    /*
+     * 3. If the ctime hasn't been modified, unlink the file and return. If the
+     *    lock has expired, sleep the usual random interval before returning.
+     *    If we didn't sleep, there could be a race if the caller immediately
+     *    tries to relock the file.
+     */
 
-	if (($old_stat = @lstat($lock_file))  /* stat succeeds so file is there */
-		&& ($old_stat['ctime'] == $birth)
-	) {  /* hasn't been modified since birth */
-		if (!$test) {
-			spip_unlink($lock_file);
-		}      /* so the lock is ours to remove */
-		if ($our_tmp['ctime'] >= $birth+$max_age) {  /* the lock has expired */
-			if (!$test) {
-				return false;
-			} //(NFSL_LOST);
-			sleep(1+(random(0, 4)));    /* so sleep a bit */
-		}
+    if (($old_stat = @lstat($lock_file))  /* stat succeeds so file is there */
+        && ($old_stat['ctime'] == $birth)
+    ) {  /* hasn't been modified since birth */
+        if (!$test) {
+            spip_unlink($lock_file);
+        }      /* so the lock is ours to remove */
+        if ($our_tmp['ctime'] >= $birth + $max_age) {  /* the lock has expired */
+            if (!$test) {
+                return false;
+            } //(NFSL_LOST);
+            sleep(1 + (random(0, 4)));    /* so sleep a bit */
+        }
 
-		return true;//(NFSL_OK);			/* success */
-	}
+        return true;//(NFSL_OK);			/* success */
+    }
 
-	/*
-	 * 4. Either ctime has been modified, or the entire lock file is missing.
-	 *    If the lock should still be ours, based on the ctime of the temp
-	 *    file, return with NFSL_STOLEN. If not, then our lock is expired and
-	 *    someone else has grabbed the file, so return NFSL_LOST.
-	 */
+    /*
+     * 4. Either ctime has been modified, or the entire lock file is missing.
+     *    If the lock should still be ours, based on the ctime of the temp
+     *    file, return with NFSL_STOLEN. If not, then our lock is expired and
+     *    someone else has grabbed the file, so return NFSL_LOST.
+     */
 
-	if ($our_tmp['ctime'] < $birth+$max_age)  /* lock was stolen */ {
-		return false;
-	} //(NFSL_STOLEN);
+    if ($our_tmp['ctime'] < $birth + $max_age) {/* lock was stolen */
+        return false;
+    } //(NFSL_STOLEN);
 
-	return false; //(NFSL_LOST);	/* The lock must have expired first. */
+    return false; //(NFSL_LOST);	/* The lock must have expired first. */
 }
-
 
 /**
  * Test a lock to see if it's still valid.
@@ -313,15 +311,15 @@ function spip_nfsunlock($fichier, $birth, $max_age = 0, $test = false) {
  * coded separately to make things as clear as possible.
  *
  * @author Alexis Rosen <alexis@panix.com>
+ *
  * @see spip_nfsunlock() about lost and stolen locks.
  *
  * @param string $fichier Chemin du fichier
- * @param bool $birth Timestamp de l'heure de création du verrou
- * @param int $max_age Age maximum du verrou
- * return bool true si déverrouillé, false sinon
+ * @param bool   $birth   Timestamp de l'heure de création du verrou
+ * @param int    $max_age Age maximum du verrou
+ *                        return bool true si déverrouillé, false sinon
  */
-function spip_nfslock_test($fichier, $birth, $max_age = 0) {
-	return spip_nfsunlock($fichier, $birth, $max_age, true);
+function spip_nfslock_test($fichier, $birth, $max_age = 0)
+{
+    return spip_nfsunlock($fichier, $birth, $max_age, true);
 }
-
-?>

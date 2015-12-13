@@ -11,18 +11,14 @@
 \***************************************************************************/
 
 /**
- * Gestion de listes d'objets
- *
- * @package SPIP\Core\Listes
+ * Gestion de listes d'objets.
  **/
-
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
-
 /**
- * Affichage des liste d'objets
+ * Affichage des liste d'objets.
  *
  * Surcharge pour aiguiller vers la mise en squelettes des listes
  *
@@ -30,40 +26,39 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *   pour la table en question et l'appeler avec une inclusion.
  *
  * @param string $vue
- *     Nom de l'objet
- * @param array $contexte
- *     Contexte du squelette
- * @param bool $force
- *     Si `true` le titre est affiché même s'il n'y a aucun élément dans la liste.
+ *                         Nom de l'objet
+ * @param array  $contexte
+ *                         Contexte du squelette
+ * @param bool   $force
+ *                         Si `true` le titre est affiché même s'il n'y a aucun élément dans la liste.
+ *
  * @return string
- *     Code HTML de la liste
+ *                Code HTML de la liste
  */
-function inc_lister_objets_dist($vue, $contexte = array(), $force = false) {
-	$res = ""; // debug
-	if (!is_array($contexte)) {
-		return _L('$contexte doit etre un tableau dans inc/lister_objets');
-	}
+function inc_lister_objets_dist($vue, $contexte = array(), $force = false)
+{
+    $res = ''; // debug
+    if (!is_array($contexte)) {
+        return _L('$contexte doit etre un tableau dans inc/lister_objets');
+    }
 
-	$fond = "prive/objets/liste/$vue";
-	if (!find_in_path($fond . "." . _EXTENSION_SQUELETTES)) {
-		// traiter les cas particuliers
-		include_spip('base/connect_sql');
-		$vue = table_objet($vue);
-		$fond = "prive/objets/liste/$vue";
-		if (!find_in_path($fond . "." . _EXTENSION_SQUELETTES)) {
-			return _L("vue $vue introuvable pour lister les objets");
-		}
-	}
+    $fond = "prive/objets/liste/$vue";
+    if (!find_in_path($fond.'.'._EXTENSION_SQUELETTES)) {
+        // traiter les cas particuliers
+        include_spip('base/connect_sql');
+        $vue = table_objet($vue);
+        $fond = "prive/objets/liste/$vue";
+        if (!find_in_path($fond.'.'._EXTENSION_SQUELETTES)) {
+            return _L("vue $vue introuvable pour lister les objets");
+        }
+    }
 
+    $contexte['sinon'] = ($force ? $contexte['titre'] : '');
 
-	$contexte['sinon'] = ($force ? $contexte['titre'] : '');
+    $res = recuperer_fond($fond, $contexte, array('ajax' => true));
+    if (_request('var_liste')) {
+        echo var_export($contexte, true);
+    }
 
-	$res = recuperer_fond($fond, $contexte, array('ajax' => true));
-	if (_request('var_liste')) {
-		echo var_export($contexte, true);
-	}
-
-	return $res;
+    return $res;
 }
-
-?>

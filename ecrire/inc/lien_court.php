@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 /*
@@ -21,15 +21,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * on affiche
  * http://zoumzamzouilam/truc/chose/machin..."
  */
-function inc_lien_court($url) {
-	$long_url = defined('_MAX_LONG_URL') ? _MAX_LONG_URL : 40;
-	$coupe_url = defined('_MAX_COUPE_URL') ? _MAX_COUPE_URL : 35;
+function inc_lien_court($url)
+{
+    $long_url = defined('_MAX_LONG_URL') ? _MAX_LONG_URL : 40;
+    $coupe_url = defined('_MAX_COUPE_URL') ? _MAX_COUPE_URL : 35;
 
-	if (strlen($url) > $long_url) {
-		$url = substr($url, 0, $coupe_url) . '...';
-	}
+    if (strlen($url) > $long_url) {
+        $url = substr($url, 0, $coupe_url).'...';
+    }
 
-	return $url;
+    return $url;
 }
-
-?>

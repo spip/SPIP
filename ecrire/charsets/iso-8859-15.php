@@ -11,15 +11,12 @@
 \***************************************************************************/
 
 /**
- * Déclaration des correspondances entre charsets iso-8859-15 et unicode
+ * Déclaration des correspondances entre charsets iso-8859-15 et unicode.
  *
  * @author Gaetan Ryckeboer <gryckeboer@virtual-net.fr>
- *
- * @package SPIP\Core\Charsets
  **/
-
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 load_charset('iso-8859-1');
@@ -35,5 +32,3 @@ $trans[189] = 339;
 $trans[190] = 376;
 
 $GLOBALS['CHARSET']['iso-8859-15'] = $trans;
-
-?>

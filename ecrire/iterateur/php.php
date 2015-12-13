@@ -12,50 +12,44 @@
 \***************************************************************************/
 
 /**
- * Gestion de l'itérateur PHP
- *
- * @package SPIP\Core\Iterateur\PHP
+ * Gestion de l'itérateur PHP.
  **/
-
-
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
-
 /**
- * Créer une boucle sur un itérateur PHP
+ * Créer une boucle sur un itérateur PHP.
  *
  * Annonce au compilateur les "champs" disponibles, c'est à dire
  * 'cle', 'valeur' et toutes les méthodes de l'itérateur désigné.
  *
  * @param Boucle $b
- *     Description de la boucle
+ *                             Description de la boucle
  * @param string $iteratorName
- *     Nom de l'itérateur à utiliser
+ *                             Nom de l'itérateur à utiliser
+ *
  * @return Boucle
- *     Description de la boucle complétée des champs
+ *                Description de la boucle complétée des champs
  */
-function iterateur_php_dist($b, $iteratorName) {
-	$b->iterateur = $iteratorName; # designe la classe d'iterateur
-	$b->show = array(
-		'field' => array(
-			'cle' => 'STRING',
-			'valeur' => 'STRING',
-		)
-	);
-	foreach (get_class_methods($iteratorName) as $method) {
-		$b->show['field'][strtolower($method)] = 'METHOD';
-	}
+function iterateur_php_dist($b, $iteratorName)
+{
+    $b->iterateur = $iteratorName; # designe la classe d'iterateur
+    $b->show = array(
+        'field' => array(
+            'cle' => 'STRING',
+            'valeur' => 'STRING',
+        ),
+    );
+    foreach (get_class_methods($iteratorName) as $method) {
+        $b->show['field'][strtolower($method)] = 'METHOD';
+    }
 
-	/*
-	foreach (get_class_vars($iteratorName) as $property) {
-		$b->show['field'][ strtolower($property) ] = 'PROPERTY';
-	}
-	*/
+    /*
+    foreach (get_class_vars($iteratorName) as $property) {
+        $b->show['field'][ strtolower($property) ] = 'PROPERTY';
+    }
+    */
 
-	return $b;
+    return $b;
 }
-
-
-?>

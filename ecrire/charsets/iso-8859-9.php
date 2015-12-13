@@ -11,15 +11,12 @@
 \***************************************************************************/
 
 /**
- * Déclaration des correspondances entre charsets iso-8859-9 (Turc) et unicode
+ * Déclaration des correspondances entre charsets iso-8859-9 (Turc) et unicode.
  *
  * @author <alexis@nds.k12.tr>
- *
- * @package SPIP\Core\Charsets
  **/
-
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 load_charset('iso-8859-1');
@@ -33,5 +30,3 @@ $trans[254] = 351; //scedil
 $trans[222] = 350; //Scedil
 
 $GLOBALS['CHARSET']['iso-8859-9'] = $trans;
-
-?>

@@ -11,29 +11,23 @@
 \***************************************************************************/
 
 /**
- * Gestion de l'action annuler_job
- *
- * @package SPIP\Core\Job
+ * Gestion de l'action annuler_job.
  **/
-
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 /**
- * Annuler un travail
- *
- * @return void
+ * Annuler un travail.
  */
-function action_annuler_job_dist() {
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$id_job = $securiser_action();
+function action_annuler_job_dist()
+{
+    $securiser_action = charger_fonction('securiser_action', 'inc');
+    $id_job = $securiser_action();
 
-	if ($id_job = intval($id_job)
-		AND autoriser('annuler', 'job', $id_job)
-	) {
-		job_queue_remove($id_job);
-	}
+    if ($id_job = intval($id_job)
+        and autoriser('annuler', 'job', $id_job)
+    ) {
+        job_queue_remove($id_job);
+    }
 }
-
-?>

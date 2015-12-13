@@ -11,82 +11,82 @@
 \***************************************************************************/
 
 /**
- * Gestion d'une sécurisation des squelettes
+ * Gestion d'une sécurisation des squelettes.
  *
  * Une surcharge de ce fichier pourrait permettre :
  *
  * - de limiter l'utilisation des filtres à l'aide d'une liste blanche ou liste noire,
  * - de rendre inactif le PHP écrit dans les squelettes
  * - de refuser l'inclusion de fichier PHP dans les squelettes
- *
- * @package SPIP\Core\Compilateur\Sandbox
  **/
-
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 /**
- * Composer le code d'exécution d'un texte
+ * Composer le code d'exécution d'un texte.
  *
  * En principe juste un echappement de guillemets
  * sauf si on veut aussi echapper et interdire les scripts serveurs
  * dans les squelettes
  *
  * @param string $texte
- *     Texte à composer
- * @param Champ $p
- *     Balise qui appelle ce texte
+ *                      Texte à composer
+ * @param Champ  $p
+ *                      Balise qui appelle ce texte
+ *
  * @return string
- *     Texte
+ *                Texte
  */
-function sandbox_composer_texte($texte, &$p) {
-	$code = "'" . str_replace(array("\\", "'"), array("\\\\", "\\'"), $texte) . "'";
+function sandbox_composer_texte($texte, &$p)
+{
+    $code = "'".str_replace(array('\\', "'"), array('\\\\', "\\'"), $texte)."'";
 
-	return $code;
+    return $code;
 }
 
-
 /**
- * Composer le code d'exécution d'un filtre
+ * Composer le code d'exécution d'un filtre.
  *
  * @param string $fonc
  * @param string $code
  * @param string $arglist
- * @param Champ $p
- *     Balise qui appelle ce filtre
+ * @param Champ  $p
+ *                        Balise qui appelle ce filtre
+ *
  * @return string
  */
-function sandbox_composer_filtre($fonc, $code, $arglist, &$p) {
-	if (isset($GLOBALS['spip_matrice'][$fonc])) {
-		$code = "filtrer('$fonc',$code$arglist)";
-	}
+function sandbox_composer_filtre($fonc, $code, $arglist, &$p)
+{
+    if (isset($GLOBALS['spip_matrice'][$fonc])) {
+        $code = "filtrer('$fonc',$code$arglist)";
+    }
 
-	// le filtre est defini sous forme de fonction ou de methode
-	// par ex. dans inc_texte, inc_filtres ou mes_fonctions
-	elseif ($f = chercher_filtre($fonc)) {
+    // le filtre est defini sous forme de fonction ou de methode
+    // par ex. dans inc_texte, inc_filtres ou mes_fonctions
+    elseif ($f = chercher_filtre($fonc)) {
 
-		// cas particulier : le filtre |set doit acceder a la $Pile
-		// proto: filtre_set(&$Pile, $val, $args...)
-		if (strpbrk($f, ':')) { // Class::method
-			$refl = new ReflectionMethod($f);
-		} else {
-			$refl = new ReflectionFunction($f);
-		}
-		$refs = $refl->getParameters();
-		if (isset($refs[0]) AND $refs[0]->name == 'Pile') {
-			$code = "$f(\$Pile,$code$arglist)";
-		} else {
-			$code = "$f($code$arglist)";
-		}
-	}
-	// le filtre n'existe pas,
-	// on le notifie
-	else {
-		erreur_squelette(array('zbug_erreur_filtre', array('filtre' => texte_script($fonc))), $p);
-	}
+        // cas particulier : le filtre |set doit acceder a la $Pile
+        // proto: filtre_set(&$Pile, $val, $args...)
+        if (strpbrk($f, ':')) { // Class::method
+            $refl = new ReflectionMethod($f);
+        } else {
+            $refl = new ReflectionFunction($f);
+        }
+        $refs = $refl->getParameters();
+        if (isset($refs[0]) and $refs[0]->name == 'Pile') {
+            $code = "$f(\$Pile,$code$arglist)";
+        } else {
+            $code = "$f($code$arglist)";
+        }
+    }
+    // le filtre n'existe pas,
+    // on le notifie
+    else {
+        erreur_squelette(array('zbug_erreur_filtre', array('filtre' => texte_script($fonc))), $p);
+    }
 
-	return $code;
+    return $code;
 }
 
 // Calculer un <INCLURE(xx.php)>
@@ -101,123 +101,129 @@ else {
 );
 
 /**
- * Composer le code d'inclusion PHP
+ * Composer le code d'inclusion PHP.
  *
  * @param string $fichier
- * @param Champ $p
- *     Balise créant l'inclusion
- * @param array $_contexte
+ * @param Champ  $p
+ *                          Balise créant l'inclusion
+ * @param array  $_contexte
+ *
  * @return string
  */
-function sandbox_composer_inclure_php($fichier, &$p, $_contexte) {
-	$compil = texte_script(memoriser_contexte_compil($p));
-	// si inexistant, on essaiera a l'execution
-	if ($path = find_in_path($fichier)) {
-		$path = "\"$path\"";
-	} else {
-		$path = "find_in_path(\"$fichier\")";
-	}
+function sandbox_composer_inclure_php($fichier, &$p, $_contexte)
+{
+    $compil = texte_script(memoriser_contexte_compil($p));
+    // si inexistant, on essaiera a l'execution
+    if ($path = find_in_path($fichier)) {
+        $path = "\"$path\"";
+    } else {
+        $path = "find_in_path(\"$fichier\")";
+    }
 
-	return sprintf(CODE_INCLURE_SCRIPT, $path, $fichier, $compil, $_contexte);
+    return sprintf(CODE_INCLURE_SCRIPT, $path, $fichier, $compil, $_contexte);
 }
 
 /**
- * Composer le code de sécurisation anti script
+ * Composer le code de sécurisation anti script.
  *
  * @param string $code
- * @param Champ $p
- *     Balise sur laquelle s'applique le filtre
+ * @param Champ  $p
+ *                     Balise sur laquelle s'applique le filtre
+ *
  * @return string
  */
-function sandbox_composer_interdire_scripts($code, &$p) {
-	// Securite
-	if ($p->interdire_scripts
-		AND $p->etoile != '**'
-	) {
-		if (!preg_match("/^sinon[(](.*),'([^']*)'[)]$/", $code, $r)) {
-			$code = "interdire_scripts($code)";
-		} else {
-			$code = interdire_scripts($r[2]);
-			$code = "sinon(interdire_scripts($r[1]),'$code')";
-		}
-	}
+function sandbox_composer_interdire_scripts($code, &$p)
+{
+    // Securite
+    if ($p->interdire_scripts
+        and $p->etoile != '**'
+    ) {
+        if (!preg_match("/^sinon[(](.*),'([^']*)'[)]$/", $code, $r)) {
+            $code = "interdire_scripts($code)";
+        } else {
+            $code = interdire_scripts($r[2]);
+            $code = "sinon(interdire_scripts($r[1]),'$code')";
+        }
+    }
 
-	return $code;
+    return $code;
 }
 
-
 /**
- * Appliquer des filtres sur un squelette complet
+ * Appliquer des filtres sur un squelette complet.
  *
  * La fonction accèpte plusieurs tableaux de filtres à partir du 3ème argument
  * qui seront appliqués dans l'ordre
  *
  * @uses echapper_php_callback()
  *
- * @param array $skel
+ * @param array  $skel
  * @param string $corps
- * @param array $filtres
- *     Tableau de filtres à appliquer.
+ * @param array  $filtres
+ *                        Tableau de filtres à appliquer.
+ *
  * @return mixed|string
  */
-function sandbox_filtrer_squelette($skel, $corps, $filtres) {
-	$series_filtres = func_get_args();
-	array_shift($series_filtres);// skel
-	array_shift($series_filtres);// corps
+function sandbox_filtrer_squelette($skel, $corps, $filtres)
+{
+    $series_filtres = func_get_args();
+    array_shift($series_filtres);// skel
+    array_shift($series_filtres);// corps
 
-	// proteger les <INCLUDE> et tous les morceaux de php licites
-	if ($skel['process_ins'] == 'php') {
-		$corps = preg_replace_callback(',<[?](\s|php|=).*[?]>,UimsS', 'echapper_php_callback', $corps);
-	}
+    // proteger les <INCLUDE> et tous les morceaux de php licites
+    if ($skel['process_ins'] == 'php') {
+        $corps = preg_replace_callback(',<[?](\s|php|=).*[?]>,UimsS', 'echapper_php_callback', $corps);
+    }
 
-	// recuperer les couples de remplacement
-	$replace = echapper_php_callback();
+    // recuperer les couples de remplacement
+    $replace = echapper_php_callback();
 
-	foreach ($series_filtres as $filtres) {
-		if (count($filtres)) {
-			foreach ($filtres as $filtre) {
-				if ($filtre AND $f = chercher_filtre($filtre)) {
-					$corps = $f($corps);
-				}
-			}
-		}
-	}
+    foreach ($series_filtres as $filtres) {
+        if (count($filtres)) {
+            foreach ($filtres as $filtre) {
+                if ($filtre and $f = chercher_filtre($filtre)) {
+                    $corps = $f($corps);
+                }
+            }
+        }
+    }
 
-	// restaurer les echappements
-	return str_replace($replace[0], $replace[1], $corps);
+    // restaurer les echappements
+    return str_replace($replace[0], $replace[1], $corps);
 }
 
-
 /**
- * Callback pour échapper du code PHP (les séquences `<?php ... ?>`)
+ * Callback pour échapper du code PHP (les séquences `<?php ... ?>`).
  *
  * Rappeler la fonction sans paramètre pour obtenir les substitutions réalisées.
  *
  * @see sandbox_filtrer_squelette()
  *
  * @param array|null $r
- *     - array : ce sont les captures de la regex à échapper
- *     - NULL : demande à dépiler tous les échappements réalisés
+ *                      - array : ce sont les captures de la regex à échapper
+ *                      - NULL : demande à dépiler tous les échappements réalisés
+ *
  * @return string|array
- *     - string : hash de substitution du code php lorsque `$r` est un array
- *     - array : Liste( liste des codes PHP, liste des substitutions )
+ *                      - string : hash de substitution du code php lorsque `$r` est un array
+ *                      - array : Liste( liste des codes PHP, liste des substitutions )
  **/
-function echapper_php_callback($r = null) {
-	static $src = array();
-	static $dst = array();
+function echapper_php_callback($r = null)
+{
+    static $src = array();
+    static $dst = array();
 
-	// si on recoit un tableau, on est en mode echappement
-	// on enregistre le code a echapper dans dst, et le code echappe dans src
-	if (is_array($r)) {
-		$dst[] = $r[0];
+    // si on recoit un tableau, on est en mode echappement
+    // on enregistre le code a echapper dans dst, et le code echappe dans src
+    if (is_array($r)) {
+        $dst[] = $r[0];
 
-		return $src[] = '___' . md5($r[0]) . '___';
-	}
+        return $src[] = '___'.md5($r[0]).'___';
+    }
 
-	// si on recoit pas un tableau, on renvoit les couples de substitution
-	// et on RAZ les remplacements
-	$r = array($src, $dst);
-	$src = $dst = array();
+    // si on recoit pas un tableau, on renvoit les couples de substitution
+    // et on RAZ les remplacements
+    $r = array($src, $dst);
+    $src = $dst = array();
 
-	return $r;
+    return $r;
 }

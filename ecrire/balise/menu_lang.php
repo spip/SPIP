@@ -11,73 +11,75 @@
 \***************************************************************************/
 
 /**
- * Ce fichier gère la balise dynamique `#MENU_LANG`
- *
- * @package SPIP\Core\Compilateur\Balises
+ * Ce fichier gère la balise dynamique `#MENU_LANG`.
  **/
-
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 /**
  * Compile la balise dynamique `#MENU_LANG` qui affiche
- * un sélecteur de langue pour l'espace public
+ * un sélecteur de langue pour l'espace public.
  *
  * Affiche le menu des langues de l'espace public
  * et présélectionne celle la globale `$lang`
  * ou de l'arguemnt fourni: `#MENU_LANG{#ENV{malangue}}`
  *
  * @balise
+ *
  * @link http://www.spip.net/4626
  *
  * @param Champ $p
- *     Pile au niveau de la balise
+ *                 Pile au niveau de la balise
+ *
  * @return Champ
- *     Pile complétée du code compilé
+ *               Pile complétée du code compilé
  **/
-function balise_MENU_LANG($p) {
-	return calculer_balise_dynamique($p, 'MENU_LANG', array('lang'));
+function balise_MENU_LANG($p)
+{
+    return calculer_balise_dynamique($p, 'MENU_LANG', array('lang'));
 }
 
 /**
- * Calculs de paramètres de contexte automatiques pour la balise MENU_LANG
+ * Calculs de paramètres de contexte automatiques pour la balise MENU_LANG.
  *
  * S'il n'y a qu'une langue proposée, pas besoin du formulaire
  * (éviter une balise ?php inutile)
  *
  * @param array $args
- *   Liste des arguments demandés obtenus du contexte (lang)
- *   complétés de ceux fournis à la balise
+ *                              Liste des arguments demandés obtenus du contexte (lang)
+ *                              complétés de ceux fournis à la balise
  * @param array $context_compil
- *   Tableau d'informations sur la compilation
+ *                              Tableau d'informations sur la compilation
+ *
  * @return array
- *   Liste (lang) des arguments collectés et fournis.
+ *               Liste (lang) des arguments collectés et fournis.
  */
-function balise_MENU_LANG_stat($args, $context_compil) {
-	if (strpos($GLOBALS['meta']['langues_multilingue'], ',') === false) {
-		return '';
-	}
+function balise_MENU_LANG_stat($args, $context_compil)
+{
+    if (strpos($GLOBALS['meta']['langues_multilingue'], ',') === false) {
+        return '';
+    }
 
-	return $args;
+    return $args;
 }
 
 /**
- * Exécution de la balise dynamique `#MENU_LANG`
+ * Exécution de la balise dynamique `#MENU_LANG`.
  *
  * @uses menu_lang_pour_tous()
  * @note
  *   Normalement `$opt` sera toujours non vide suite au test ci-dessus
  *
  * @param string $opt
- *     Langue par défaut
+ *                    Langue par défaut
+ *
  * @return array
- *     Liste : Chemin du squelette, durée du cache, contexte
+ *               Liste : Chemin du squelette, durée du cache, contexte
  **/
-function balise_MENU_LANG_dyn($opt) {
-	include_spip('balise/menu_lang_ecrire');
+function balise_MENU_LANG_dyn($opt)
+{
+    include_spip('balise/menu_lang_ecrire');
 
-	return menu_lang_pour_tous('var_lang', $opt);
+    return menu_lang_pour_tous('var_lang', $opt);
 }
-
-?>

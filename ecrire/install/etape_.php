@@ -10,15 +10,11 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 /**
- * Affichage de l'écran d'installation (étape 0 : écran d'accueil)
- *
- * @package SPIP\Core\Installation
+ * Affichage de l'écran d'installation (étape 0 : écran d'accueil).
  */
-
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 /**
@@ -26,21 +22,20 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @uses info_copyright()
  **/
-function install_etape__dist() {
-	utiliser_langue_visiteur();
-	$menu_langues = menu_langues('var_lang_ecrire');
-	if (!$menu_langues) {
-		redirige_url_ecrire('install', "etape=chmod");
-	} else {
-		include_spip('inc/presentation'); // pour info_copyright
+function install_etape__dist()
+{
+    utiliser_langue_visiteur();
+    $menu_langues = menu_langues('var_lang_ecrire');
+    if (!$menu_langues) {
+        redirige_url_ecrire('install', 'etape=chmod');
+    } else {
+        include_spip('inc/presentation'); // pour info_copyright
 
-		$res = "<div class='petit-centre'><img alt='SPIP' src='" . chemin_image('logo-spip2.gif') . "' />\n" .
-			"<p class='small'>" . info_copyright() . "</p></div>\n" .
-			"<p>" . _T('install_select_langue') . "</p>" .
-			"<div>" . $menu_langues . "</div>\n" .
-			generer_form_ecrire('install', "<input type='hidden' name='etape' value='chmod' />" . bouton_suivant());
-		echo minipres('AUTO', $res);
-	}
+        $res = "<div class='petit-centre'><img alt='SPIP' src='".chemin_image('logo-spip2.gif')."' />\n".
+            "<p class='small'>".info_copyright()."</p></div>\n".
+            '<p>'._T('install_select_langue').'</p>'.
+            '<div>'.$menu_langues."</div>\n".
+            generer_form_ecrire('install', "<input type='hidden' name='etape' value='chmod' />".bouton_suivant());
+        echo minipres('AUTO', $res);
+    }
 }
-
-?>

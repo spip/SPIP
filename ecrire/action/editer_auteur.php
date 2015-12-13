@@ -11,491 +11,500 @@
 \***************************************************************************/
 
 /**
- * Gestion de l'action editer_article et de l'API d'édition d'un article
- *
- * @package SPIP\Core\Auteurs\Edition
+ * Gestion de l'action editer_article et de l'API d'édition d'un article.
  */
-
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 /**
- * Éditer ou créer un auteur
+ * Éditer ou créer un auteur.
  *
  * Si aucun identifiant d'auteur n'est donné, on crée alors un nouvel auteur.
  *
  * @global array visiteur_session
+ *
  * @uses auteur_inserer()
  * @uses auteur_modifier()
  *
  * @param array|null $arg
- *     Identifiant de l'auteur. En absence utilise l'argument
- *     de l'action sécurisée.
+ *                        Identifiant de l'auteur. En absence utilise l'argument
+ *                        de l'action sécurisée.
+ *
  * @return array
- *     Liste (identifiant de l'auteur, Texte d'erreur éventuel)
+ *               Liste (identifiant de l'auteur, Texte d'erreur éventuel)
  */
-function action_editer_auteur_dist($arg = null) {
+function action_editer_auteur_dist($arg = null)
+{
+    if (is_null($arg)) {
+        $securiser_action = charger_fonction('securiser_action', 'inc');
+        $arg = $securiser_action();
+    }
 
-	if (is_null($arg)) {
-		$securiser_action = charger_fonction('securiser_action', 'inc');
-		$arg = $securiser_action();
-	}
+    // si id_auteur n'est pas un nombre, c'est une creation
+    if (!$id_auteur = intval($arg)) {
+        if (($id_auteur = auteur_inserer()) > 0) {
 
+            # cf. GROS HACK
+            # recuperer l'eventuel logo charge avant la creation
+            # ils ont un id = 0-id_auteur de la session
+            $id_hack = 0 - $GLOBALS['visiteur_session']['id_auteur'];
+            $chercher_logo = charger_fonction('chercher_logo', 'inc');
+            foreach (array('on', 'off') as $type) {
+                if ($logo = $chercher_logo($id_hack, 'id_auteur', $type)) {
+                    if ($logo = reset($logo)) {
+                        rename($logo, str_replace($id_hack, $id_auteur, $logo));
+                    }
+                }
+            }
+        }
+    }
 
-	// si id_auteur n'est pas un nombre, c'est une creation
-	if (!$id_auteur = intval($arg)) {
+    // Enregistre l'envoi dans la BD
+    $err = '';
+    if ($id_auteur > 0) {
+        $err = auteur_modifier($id_auteur);
+    }
 
-		if (($id_auteur = auteur_inserer()) > 0) {
+    if ($err) {
+        spip_log("echec editeur auteur: $err", _LOG_ERREUR);
+    }
 
-			# cf. GROS HACK
-			# recuperer l'eventuel logo charge avant la creation
-			# ils ont un id = 0-id_auteur de la session
-			$id_hack = 0-$GLOBALS['visiteur_session']['id_auteur'];
-			$chercher_logo = charger_fonction('chercher_logo', 'inc');
-			foreach (array('on', 'off') as $type) {
-				if ($logo = $chercher_logo($id_hack, 'id_auteur', $type)) {
-					if ($logo = reset($logo)) {
-						rename($logo, str_replace($id_hack, $id_auteur, $logo));
-					}
-				}
-			}
-		}
-	}
-
-	// Enregistre l'envoi dans la BD
-	$err = "";
-	if ($id_auteur > 0) {
-		$err = auteur_modifier($id_auteur);
-	}
-
-	if ($err) {
-		spip_log("echec editeur auteur: $err", _LOG_ERREUR);
-	}
-
-	return array($id_auteur, $err);
+    return array($id_auteur, $err);
 }
 
 /**
- * Insérer un auteur en base
+ * Insérer un auteur en base.
  *
  * @pipeline_appel pre_insertion
  * @pipeline_appel post_insertion
  *
  * @param string|null $source
- *     D'où provient l'auteur créé ? par défaut 'spip', mais peut être 'ldap' ou autre.
- * @param array|null $set
+ *                            D'où provient l'auteur créé ? par défaut 'spip', mais peut être 'ldap' ou autre.
+ * @param array|null  $set
+ *
  * @return int
- *     Identifiant de l'auteur créé
+ *             Identifiant de l'auteur créé
  */
-function auteur_inserer($source = null, $set = null) {
+function auteur_inserer($source = null, $set = null)
+{
 
-	// Ce qu'on va demander comme modifications
-	$champs = array();
-	$champs['source'] = $source ? $source : 'spip';
+    // Ce qu'on va demander comme modifications
+    $champs = array();
+    $champs['source'] = $source ? $source : 'spip';
 
-	$champs['login'] = '';
-	$champs['statut'] = '5poubelle';  // inutilisable tant qu'il n'a pas ete renseigne et institue
-	$champs['webmestre'] = 'non';
+    $champs['login'] = '';
+    $champs['statut'] = '5poubelle';  // inutilisable tant qu'il n'a pas ete renseigne et institue
+    $champs['webmestre'] = 'non';
 
-	if ($set) {
-		$champs = array_merge($champs, $set);
-	}
+    if ($set) {
+        $champs = array_merge($champs, $set);
+    }
 
-	// Envoyer aux plugins
-	$champs = pipeline('pre_insertion',
-		array(
-			'args' => array(
-				'table' => 'spip_auteurs',
-			),
-			'data' => $champs
-		)
-	);
-	$id_auteur = sql_insertq("spip_auteurs", $champs);
-	pipeline('post_insertion',
-		array(
-			'args' => array(
-				'table' => 'spip_auteurs',
-				'id_objet' => $id_auteur
-			),
-			'data' => $champs
-		)
-	);
+    // Envoyer aux plugins
+    $champs = pipeline('pre_insertion',
+        array(
+            'args' => array(
+                'table' => 'spip_auteurs',
+            ),
+            'data' => $champs,
+        )
+    );
+    $id_auteur = sql_insertq('spip_auteurs', $champs);
+    pipeline('post_insertion',
+        array(
+            'args' => array(
+                'table' => 'spip_auteurs',
+                'id_objet' => $id_auteur,
+            ),
+            'data' => $champs,
+        )
+    );
 
-	return $id_auteur;
+    return $id_auteur;
 }
 
-
 /**
- * Modifier un auteur
+ * Modifier un auteur.
  *
  * Appelle toutes les fonctions de modification d'un auteur
  *
- * @param int $id_auteur
- *     Identifiant de l'auteur
+ * @param int        $id_auteur
+ *                                 Identifiant de l'auteur
  * @param array|null $set
- *     Couples (colonne => valeur) de données à modifier.
- *     En leur absence, on cherche les données dans les champs éditables
- *     qui ont été postés (via collecter_requests())
- * @param bool $force_update
- *   Permet de forcer la maj en base des champs fournis, sans passer par instancier.
- *   Utilise par auth/spip
+ *                                 Couples (colonne => valeur) de données à modifier.
+ *                                 En leur absence, on cherche les données dans les champs éditables
+ *                                 qui ont été postés (via collecter_requests())
+ * @param bool       $force_update
+ *                                 Permet de forcer la maj en base des champs fournis, sans passer par instancier.
+ *                                 Utilise par auth/spip
+ *
  * @return string|null
  *
  *     - Chaîne vide si aucune erreur,
  *     - Chaîne contenant un texte d'erreur sinon.
  */
-function auteur_modifier($id_auteur, $set = null, $force_update = false) {
+function auteur_modifier($id_auteur, $set = null, $force_update = false)
+{
+    include_spip('inc/modifier');
+    include_spip('inc/filtres');
+    $c = collecter_requests(
+    // white list
+        objet_info('auteur', 'champs_editables'),
+        // black list
+        $force_update ? array() : array('webmestre', 'pass', 'login'),
+        // donnees eventuellement fournies
+        $set
+    );
 
-	include_spip('inc/modifier');
-	include_spip('inc/filtres');
-	$c = collecter_requests(
-	// white list
-		objet_info('auteur', 'champs_editables'),
-		// black list
-		$force_update ? array() : array('webmestre', 'pass', 'login'),
-		// donnees eventuellement fournies
-		$set
-	);
+    if ($err = objet_modifier_champs('auteur', $id_auteur,
+        array(
+            'data' => $set,
+            'nonvide' => array('nom' => _T('ecrire:item_nouvel_auteur')),
+        ),
+        $c)
+    ) {
+        return $err;
+    }
+    $session = $c;
 
-	if ($err = objet_modifier_champs('auteur', $id_auteur,
-		array(
-			'data' => $set,
-			'nonvide' => array('nom' => _T('ecrire:item_nouvel_auteur'))
-		),
-		$c)
-	) {
-		return $err;
-	}
-	$session = $c;
+    $err = '';
+    if (!$force_update) {
+        // Modification de statut, changement de rubrique ?
+        $c = collecter_requests(
+        // white list
+            array(
+                'statut',
+                'new_login',
+                'new_pass',
+                'login',
+                'pass',
+                'webmestre',
+                'restreintes',
+                'id_parent',
+            ),
+            // black list
+            array(),
+            // donnees eventuellement fournies
+            $set
+        );
+        if (isset($c['new_login']) and !isset($c['login'])) {
+            $c['login'] = $c['new_login'];
+        }
+        if (isset($c['new_pass']) and !isset($c['pass'])) {
+            $c['pass'] = $c['new_pass'];
+        }
+        $err = auteur_instituer($id_auteur, $c);
+        $session = array_merge($session, $c);
+    }
 
-	$err = '';
-	if (!$force_update) {
-		// Modification de statut, changement de rubrique ?
-		$c = collecter_requests(
-		// white list
-			array(
-				'statut',
-				'new_login',
-				'new_pass',
-				'login',
-				'pass',
-				'webmestre',
-				'restreintes',
-				'id_parent'
-			),
-			// black list
-			array(),
-			// donnees eventuellement fournies
-			$set
-		);
-		if (isset($c['new_login']) AND !isset($c['login'])) {
-			$c['login'] = $c['new_login'];
-		}
-		if (isset($c['new_pass']) AND !isset($c['pass'])) {
-			$c['pass'] = $c['new_pass'];
-		}
-		$err = auteur_instituer($id_auteur, $c);
-		$session = array_merge($session, $c);
-	}
+    // .. mettre a jour les sessions de cet auteur
+    include_spip('inc/session');
+    $session['id_auteur'] = $id_auteur;
+    unset($session['new_login']);
+    unset($session['new_pass']);
+    actualiser_sessions($session);
 
-	// .. mettre a jour les sessions de cet auteur
-	include_spip('inc/session');
-	$session['id_auteur'] = $id_auteur;
-	unset($session['new_login']);
-	unset($session['new_pass']);
-	actualiser_sessions($session);
-
-	return $err;
+    return $err;
 }
 
 /**
- * Associer un auteur à des objets listés
+ * Associer un auteur à des objets listés.
  *
  * @uses objet_associer()
  *
- * @param int $id_auteur
- *     Identifiant de l'auteur
- * @param array $objets
- *     Liste sous la forme `array($objet=>$id_objets,...)`.
- *     `$id_objets` peut lui-même être un scalaire ou un tableau pour une liste
- *     d'objets du même type.
+ * @param int        $id_auteur
+ *                              Identifiant de l'auteur
+ * @param array      $objets
+ *                              Liste sous la forme `array($objet=>$id_objets,...)`.
+ *                              `$id_objets` peut lui-même être un scalaire ou un tableau pour une liste
+ *                              d'objets du même type.
  * @param array|null $qualif
- *     Optionnellement indique une qualification du (des) lien(s) qui sera
- *     alors appliquée dans la foulée.
- *     En cas de lot de liens, c'est la même qualification qui est appliquée à tous
+ *                              Optionnellement indique une qualification du (des) lien(s) qui sera
+ *                              alors appliquée dans la foulée.
+ *                              En cas de lot de liens, c'est la même qualification qui est appliquée à tous
+ *
  * @return string
  */
-function auteur_associer($id_auteur, $objets, $qualif = null) {
-	include_spip('action/editer_liens');
+function auteur_associer($id_auteur, $objets, $qualif = null)
+{
+    include_spip('action/editer_liens');
 
-	return objet_associer(array('auteur' => $id_auteur), $objets, $qualif);
+    return objet_associer(array('auteur' => $id_auteur), $objets, $qualif);
 }
 
-
 /**
- * Ancien nommage pour compatibilité
+ * Ancien nommage pour compatibilité.
  *
  * @deprecated Utiliser auteur_associer()
  * @see auteur_associer()
  *
- * @param int $id_auteur
+ * @param int   $id_auteur
  * @param array $c
+ *
  * @return string
  */
-function auteur_referent($id_auteur, $c) {
-	return auteur_associer($id_auteur, $c);
+function auteur_referent($id_auteur, $c)
+{
+    return auteur_associer($id_auteur, $c);
 }
 
 /**
- * Dissocier un auteur des objets listés
+ * Dissocier un auteur des objets listés.
  *
  * @uses objet_dissocier()
  *
- * @param int $id_auteur
- *     Identifiant de l'auteur
+ * @param int   $id_auteur
+ *                         Identifiant de l'auteur
  * @param array $objets
- *     Liste sous la forme `array($objet=>$id_objets,...)`.
- *     `$id_objets` peut lui-même être un scalaire ou un tableau pour une liste
- *     d'objets du même type.
+ *                         Liste sous la forme `array($objet=>$id_objets,...)`.
+ *                         `$id_objets` peut lui-même être un scalaire ou un tableau pour une liste
+ *                         d'objets du même type.
  *
  *     Un `*` pour $id_auteur,$objet,$id_objet permet de traiter par lot
+ *
  * @return string
  */
-function auteur_dissocier($id_auteur, $objets) {
-	include_spip('action/editer_liens');
+function auteur_dissocier($id_auteur, $objets)
+{
+    include_spip('action/editer_liens');
 
-	return objet_dissocier(array('auteur' => $id_auteur), $objets);
+    return objet_dissocier(array('auteur' => $id_auteur), $objets);
 }
 
 /**
- * Qualifier le lien d'un auteur avec les objets listés
+ * Qualifier le lien d'un auteur avec les objets listés.
  *
  * @uses objet_qualifier_liens()
  *
- * @param int $id_auteur
- *     Identifiant de l'auteur
+ * @param int   $id_auteur
+ *                         Identifiant de l'auteur
  * @param array $objets
- *     Liste sous la forme `array($objet=>$id_objets,...)`.
- *     `$id_objets` peut lui-même être un scalaire ou un tableau pour une liste
- *     d'objets du même type.
+ *                         Liste sous la forme `array($objet=>$id_objets,...)`.
+ *                         `$id_objets` peut lui-même être un scalaire ou un tableau pour une liste
+ *                         d'objets du même type.
  *
  *     Un `*` pour $id_auteur,$objet,$id_objet permet de traiter par lot
  * @param array $qualif
- *     Couples (colonne, valeur) tel que `array('vu'=>'oui');`
+ *                      Couples (colonne, valeur) tel que `array('vu'=>'oui');`
+ *
  * @return bool|int
  */
-function auteur_qualifier($id_auteur, $objets, $qualif) {
-	include_spip('action/editer_liens');
+function auteur_qualifier($id_auteur, $objets, $qualif)
+{
+    include_spip('action/editer_liens');
 
-	return objet_qualifier_liens(array('auteur' => $id_auteur), $objets, $qualif);
+    return objet_qualifier_liens(array('auteur' => $id_auteur), $objets, $qualif);
 }
 
-
 /**
- * Modifier le statut d'un auteur, ou son login/pass
+ * Modifier le statut d'un auteur, ou son login/pass.
  *
  * @pipeline_appel pre_edition
  * @pipeline_appel post_edition
  *
- * @param int $id_auteur
- *     Identifiant de l'auteur
+ * @param int   $id_auteur
+ *                               Identifiant de l'auteur
  * @param array $c
- *     Couples (colonne => valeur) des données à instituer
- * @param bool $force_webmestre
- *     Autoriser un auteur à passer webmestre (force l'autorisation)
+ *                               Couples (colonne => valeur) des données à instituer
+ * @param bool  $force_webmestre
+ *                               Autoriser un auteur à passer webmestre (force l'autorisation)
+ *
  * @return bool|string
  */
-function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
-	if (!$id_auteur = intval($id_auteur)) {
-		return false;
-	}
-	$erreurs = array(); // contiendra les differentes erreurs a traduire par _T()
-	$champs = array();
+function auteur_instituer($id_auteur, $c, $force_webmestre = false)
+{
+    if (!$id_auteur = intval($id_auteur)) {
+        return false;
+    }
+    $erreurs = array(); // contiendra les differentes erreurs a traduire par _T()
+    $champs = array();
 
-	// les memoriser pour les faire passer dans le pipeline pre_edition
-	if (isset($c['login']) AND strlen($c['login'])) {
-		$champs['login'] = $c['login'];
-	}
-	if (isset($c['pass']) AND strlen($c['pass'])) {
-		$champs['pass'] = $c['pass'];
-	}
+    // les memoriser pour les faire passer dans le pipeline pre_edition
+    if (isset($c['login']) and strlen($c['login'])) {
+        $champs['login'] = $c['login'];
+    }
+    if (isset($c['pass']) and strlen($c['pass'])) {
+        $champs['pass'] = $c['pass'];
+    }
 
-	$statut = $statut_ancien = sql_getfetsel('statut', 'spip_auteurs', 'id_auteur=' . intval($id_auteur));
+    $statut = $statut_ancien = sql_getfetsel('statut', 'spip_auteurs', 'id_auteur='.intval($id_auteur));
 
-	if (isset($c['statut'])
-		AND (autoriser('modifier', 'auteur', $id_auteur, null, array('statut' => $c['statut'])))
-	) {
-		$statut = $champs['statut'] = $c['statut'];
-	}
+    if (isset($c['statut'])
+        and (autoriser('modifier', 'auteur', $id_auteur, null, array('statut' => $c['statut'])))
+    ) {
+        $statut = $champs['statut'] = $c['statut'];
+    }
 
-	// Restreindre avant de declarer l'auteur
-	// (section critique sur les droits)
-	if (isset($c['id_parent']) and $c['id_parent']) {
-		if (is_array($c['restreintes'])) {
-			$c['restreintes'][] = $c['id_parent'];
-		} else {
-			$c['restreintes'] = array($c['id_parent']);
-		}
-	}
+    // Restreindre avant de declarer l'auteur
+    // (section critique sur les droits)
+    if (isset($c['id_parent']) and $c['id_parent']) {
+        if (is_array($c['restreintes'])) {
+            $c['restreintes'][] = $c['id_parent'];
+        } else {
+            $c['restreintes'] = array($c['id_parent']);
+        }
+    }
 
-	if (isset($c['webmestre'])
-		AND ($force_webmestre OR autoriser('modifier', 'auteur', $id_auteur, null, array('webmestre' => '?')))
-	) {
-		$champs['webmestre'] = $c['webmestre'] == 'oui' ? 'oui' : 'non';
-	}
+    if (isset($c['webmestre'])
+        and ($force_webmestre or autoriser('modifier', 'auteur', $id_auteur, null, array('webmestre' => '?')))
+    ) {
+        $champs['webmestre'] = $c['webmestre'] == 'oui' ? 'oui' : 'non';
+    }
 
-	// si statut change et n'est pas 0minirezo, on force webmestre a non
-	if (isset($c['statut']) AND $c['statut'] !== '0minirezo') {
-		$champs['webmestre'] = $c['webmestre'] = 'non';
-	}
+    // si statut change et n'est pas 0minirezo, on force webmestre a non
+    if (isset($c['statut']) and $c['statut'] !== '0minirezo') {
+        $champs['webmestre'] = $c['webmestre'] = 'non';
+    }
 
-	// Envoyer aux plugins
-	$champs = pipeline('pre_edition',
-		array(
-			'args' => array(
-				'table' => 'spip_auteurs',
-				'id_objet' => $id_auteur,
-				'action' => 'instituer',
-				'statut_ancien' => $statut_ancien,
-			),
-			'data' => $champs
-		)
-	);
+    // Envoyer aux plugins
+    $champs = pipeline('pre_edition',
+        array(
+            'args' => array(
+                'table' => 'spip_auteurs',
+                'id_objet' => $id_auteur,
+                'action' => 'instituer',
+                'statut_ancien' => $statut_ancien,
+            ),
+            'data' => $champs,
+        )
+    );
 
-	if (isset($c['restreintes']) and is_array($c['restreintes'])
-		AND autoriser('modifier', 'auteur', $id_auteur, null, array('restreint' => $c['restreintes']))
-	) {
-		$rubriques = array_map('intval', $c['restreintes']);
-		$rubriques = array_unique($rubriques);
-		$rubriques = array_diff($rubriques, array(0));
-		auteur_dissocier($id_auteur, array('rubrique' => '*'));
-		auteur_associer($id_auteur, array('rubrique' => $rubriques));
-	}
+    if (isset($c['restreintes']) and is_array($c['restreintes'])
+        and autoriser('modifier', 'auteur', $id_auteur, null, array('restreint' => $c['restreintes']))
+    ) {
+        $rubriques = array_map('intval', $c['restreintes']);
+        $rubriques = array_unique($rubriques);
+        $rubriques = array_diff($rubriques, array(0));
+        auteur_dissocier($id_auteur, array('rubrique' => '*'));
+        auteur_associer($id_auteur, array('rubrique' => $rubriques));
+    }
 
-	$flag_ecrire_acces = false;
-	// commencer par traiter les cas particuliers des logins et pass
-	// avant les autres ecritures en base
-	if (isset($champs['login']) OR isset($champs['pass'])) {
-		$auth_methode = sql_getfetsel('source', 'spip_auteurs', 'id_auteur=' . intval($id_auteur));
-		include_spip('inc/auth');
-		if (isset($champs['login']) AND strlen($champs['login'])) {
-			if (!auth_modifier_login($auth_methode, $champs['login'], $id_auteur)) {
-				$erreurs[] = 'ecrire:impossible_modifier_login_auteur';
-			}
-		}
-		if (isset($champs['pass']) AND strlen($champs['pass'])) {
-			$champs['login'] = sql_getfetsel('login', 'spip_auteurs', 'id_auteur=' . intval($id_auteur));
-			if (!auth_modifier_pass($auth_methode, $champs['login'], $champs['pass'], $id_auteur)) {
-				$erreurs[] = 'ecrire:impossible_modifier_pass_auteur';
-			}
-		}
-		unset($champs['login']);
-		unset($champs['pass']);
-		$flag_ecrire_acces = true;
-	}
+    $flag_ecrire_acces = false;
+    // commencer par traiter les cas particuliers des logins et pass
+    // avant les autres ecritures en base
+    if (isset($champs['login']) or isset($champs['pass'])) {
+        $auth_methode = sql_getfetsel('source', 'spip_auteurs', 'id_auteur='.intval($id_auteur));
+        include_spip('inc/auth');
+        if (isset($champs['login']) and strlen($champs['login'])) {
+            if (!auth_modifier_login($auth_methode, $champs['login'], $id_auteur)) {
+                $erreurs[] = 'ecrire:impossible_modifier_login_auteur';
+            }
+        }
+        if (isset($champs['pass']) and strlen($champs['pass'])) {
+            $champs['login'] = sql_getfetsel('login', 'spip_auteurs', 'id_auteur='.intval($id_auteur));
+            if (!auth_modifier_pass($auth_methode, $champs['login'], $champs['pass'], $id_auteur)) {
+                $erreurs[] = 'ecrire:impossible_modifier_pass_auteur';
+            }
+        }
+        unset($champs['login']);
+        unset($champs['pass']);
+        $flag_ecrire_acces = true;
+    }
 
-	if (!count($champs)) {
-		return implode(' ', array_map('_T', $erreurs));
-	}
-	sql_updateq('spip_auteurs', $champs, 'id_auteur=' . $id_auteur);
+    if (!count($champs)) {
+        return implode(' ', array_map('_T', $erreurs));
+    }
+    sql_updateq('spip_auteurs', $champs, 'id_auteur='.$id_auteur);
 
-	// .. mettre a jour les fichiers .htpasswd et .htpasswd-admin
-	if ($flag_ecrire_acces
-		OR isset($champs['statut'])
-	) {
-		include_spip('inc/acces');
-		ecrire_acces();
-	}
+    // .. mettre a jour les fichiers .htpasswd et .htpasswd-admin
+    if ($flag_ecrire_acces
+        or isset($champs['statut'])
+    ) {
+        include_spip('inc/acces');
+        ecrire_acces();
+    }
 
-	// Invalider les caches
-	include_spip('inc/invalideur');
-	suivre_invalideur("id='auteur/$id_auteur'");
+    // Invalider les caches
+    include_spip('inc/invalideur');
+    suivre_invalideur("id='auteur/$id_auteur'");
 
-	// Pipeline
-	pipeline('post_edition',
-		array(
-			'args' => array(
-				'table' => 'spip_auteurs',
-				'id_objet' => $id_auteur,
-				'action' => 'instituer',
-				'statut_ancien' => $statut_ancien,
-			),
-			'data' => $champs
-		)
-	);
+    // Pipeline
+    pipeline('post_edition',
+        array(
+            'args' => array(
+                'table' => 'spip_auteurs',
+                'id_objet' => $id_auteur,
+                'action' => 'instituer',
+                'statut_ancien' => $statut_ancien,
+            ),
+            'data' => $champs,
+        )
+    );
 
+    // Notifications
+    if ($notifications = charger_fonction('notifications', 'inc')) {
+        $notifications('instituerauteur', $id_auteur,
+            array('statut' => $statut, 'statut_ancien' => $statut_ancien)
+        );
+    }
 
-	// Notifications
-	if ($notifications = charger_fonction('notifications', 'inc')) {
-		$notifications('instituerauteur', $id_auteur,
-			array('statut' => $statut, 'statut_ancien' => $statut_ancien)
-		);
-	}
-
-	return implode(' ', array_map('_T', $erreurs));
-
+    return implode(' ', array_map('_T', $erreurs));
 }
-
 
 // Fonctions Dépréciées
 // --------------------
 
-
 /**
- * Insertion d'un auteur
+ * Insertion d'un auteur.
  *
  * @deprecated Utiliser auteur_inserer()
  * @see auteur_inserer()
  *
  * @param string|null $source
+ *
  * @return int
  */
-function insert_auteur($source = null) {
-	return auteur_inserer($source);
+function insert_auteur($source = null)
+{
+    return auteur_inserer($source);
 }
 
 /**
- * Modification d'un auteur
+ * Modification d'un auteur.
  *
  * @deprecated Utiliser auteur_modifier()
  * @see auteur_modifier()
  *
- * @param int $id_auteur
+ * @param int        $id_auteur
  * @param array|null $set
+ *
  * @return string|null
  */
-function auteurs_set($id_auteur, $set = null) {
-	return auteur_modifier($id_auteur, $set);
+function auteurs_set($id_auteur, $set = null)
+{
+    return auteur_modifier($id_auteur, $set);
 }
 
 /**
- * Modifier le statut d'un auteur, ou son login/pass
+ * Modifier le statut d'un auteur, ou son login/pass.
  *
  * @deprecated Utiliser auteur_instituer()
  * @see auteur_instituer()
  *
- * @param int $id_auteur
+ * @param int   $id_auteur
  * @param array $c
- * @param bool $force_webmestre
+ * @param bool  $force_webmestre
+ *
  * @return bool|string
  */
-function instituer_auteur($id_auteur, $c, $force_webmestre = false) {
-	return auteur_instituer($id_auteur, $c, $force_webmestre);
+function instituer_auteur($id_auteur, $c, $force_webmestre = false)
+{
+    return auteur_instituer($id_auteur, $c, $force_webmestre);
 }
 
 /**
- * Créer une révision d'un auteur
+ * Créer une révision d'un auteur.
  *
  * @deprecated Utiliser auteur_modifier()
  * @see auteur_modifier()
  *
- * @param int $id_auteur
+ * @param int   $id_auteur
  * @param array $c
+ *
  * @return string|null
  */
-function revision_auteur($id_auteur, $c = false) {
-	return auteur_modifier($id_auteur, $c);
+function revision_auteur($id_auteur, $c = false)
+{
+    return auteur_modifier($id_auteur, $c);
 }
-
-?>

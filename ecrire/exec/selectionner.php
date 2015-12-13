@@ -11,40 +11,37 @@
 \***************************************************************************/
 
 /**
- * Gestion le l'affichage du sélecteur de rubrique AJAX
- *
- * @package SPIP\Core\Rubriques
+ * Gestion le l'affichage du sélecteur de rubrique AJAX.
  **/
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 include_spip('inc/actions');
 
 /**
- * Affichage en ajax du sélecteur (mini-navigateur) de rubrique AJAX
+ * Affichage en ajax du sélecteur (mini-navigateur) de rubrique AJAX.
  *
  * @uses inc_selectionner_dist()
  * @uses ajax_retour()
  **/
-function exec_selectionner_dist() {
-	$id = intval(_request('id'));
-	$exclus = intval(_request('exclus'));
-	$type = _request('type');
-	$rac = _request('racine');
-	$do = _request('do');
-	if (preg_match('/^\w*$/', $do)) {
-		if (!$do) {
-			$do = 'aff';
-		}
+function exec_selectionner_dist()
+{
+    $id = intval(_request('id'));
+    $exclus = intval(_request('exclus'));
+    $type = _request('type');
+    $rac = _request('racine');
+    $do = _request('do');
+    if (preg_match('/^\w*$/', $do)) {
+        if (!$do) {
+            $do = 'aff';
+        }
 
-		$selectionner = charger_fonction('selectionner', 'inc');
+        $selectionner = charger_fonction('selectionner', 'inc');
 
-		$r = $selectionner($id, "choix_parent", $exclus, $rac, $type != 'breve', $do);
-	} else {
-		$r = '';
-	}
-	ajax_retour($r);
+        $r = $selectionner($id, 'choix_parent', $exclus, $rac, $type != 'breve', $do);
+    } else {
+        $r = '';
+    }
+    ajax_retour($r);
 }
-
-?>

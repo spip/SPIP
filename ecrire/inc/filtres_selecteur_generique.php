@@ -1,17 +1,14 @@
 <?php
 
 /**
- * Filtres pour les sélecteurs d'objets
- *
- * @package SPIP\Core\Filtres\Selecteurs
+ * Filtres pour les sélecteurs d'objets.
  **/
-
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 /**
- * Fournit la liste des objets ayant un sélecteur
+ * Fournit la liste des objets ayant un sélecteur.
  *
  * Concrètement, va chercher tous les `formulaires/selecteur/hierarchie-{trucs}.html`
  * Ensuite on ajoute les parents obligatoires éventuels
@@ -19,65 +16,67 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @uses find_all_in_path()
  *
  * @param array $whitelist
- *     Liste blanche décrivant les objets à lister
+ *                         Liste blanche décrivant les objets à lister
  * @param array $blacklist
- *     Liste noire décrivant les objets à ne pas lister
+ *                         Liste noire décrivant les objets à ne pas lister
+ *
  * @return array
- *     Retourne un tableau de deux entrées listant les objets à lister et les objets sélectionnables
- *     - selectionner : tableau des objets que l'on pourra sélectionner (avec un +)
- *     - afficher : tableau des objets à afficher (mais pas forcément sélectionnables)
+ *               Retourne un tableau de deux entrées listant les objets à lister et les objets sélectionnables
+ *               - selectionner : tableau des objets que l'on pourra sélectionner (avec un +)
+ *               - afficher : tableau des objets à afficher (mais pas forcément sélectionnables)
  */
-function selecteur_lister_objets($whitelist = array(), $blacklist = array()) {
-	static $liste_selecteurs, $liste_parents;
+function selecteur_lister_objets($whitelist = array(), $blacklist = array())
+{
+    static $liste_selecteurs, $liste_parents;
 
-	if (!$liste_selecteurs) {
-		$liste_selecteurs = find_all_in_path('formulaires/selecteur/', 'hierarchie-[\w]+[.]html$');
-	}
-	$objets_selectionner = array();
-	foreach ($liste_selecteurs as $fichier => $chemin) {
-		$objets_selectionner[] = preg_replace('/^hierarchie-([\w]+)[.]html$/', '$1', $fichier);
-	}
+    if (!$liste_selecteurs) {
+        $liste_selecteurs = find_all_in_path('formulaires/selecteur/', 'hierarchie-[\w]+[.]html$');
+    }
+    $objets_selectionner = array();
+    foreach ($liste_selecteurs as $fichier => $chemin) {
+        $objets_selectionner[] = preg_replace('/^hierarchie-([\w]+)[.]html$/', '$1', $fichier);
+    }
 
-	// S'il y a une whitelist on ne garde que ce qui est dedans
-	if (!empty($whitelist)) {
-		$whitelist = array_map('table_objet', $whitelist);
-		$objets_selectionner = array_intersect($objets_selectionner, $whitelist);
-	}
-	// On supprime ce qui est dans la blacklist
-	$blacklist = array_map('table_objet', $blacklist);
-	// On enlève toujours la racine
-	$blacklist[] = 'racine';
-	$objets_selectionner = array_diff($objets_selectionner, $blacklist);
+    // S'il y a une whitelist on ne garde que ce qui est dedans
+    if (!empty($whitelist)) {
+        $whitelist = array_map('table_objet', $whitelist);
+        $objets_selectionner = array_intersect($objets_selectionner, $whitelist);
+    }
+    // On supprime ce qui est dans la blacklist
+    $blacklist = array_map('table_objet', $blacklist);
+    // On enlève toujours la racine
+    $blacklist[] = 'racine';
+    $objets_selectionner = array_diff($objets_selectionner, $blacklist);
 
-	// Ensuite on cherche ce qu'on doit afficher : au moins ceux qu'on peut sélectionner
-	$objets_afficher = $objets_selectionner;
+    // Ensuite on cherche ce qu'on doit afficher : au moins ceux qu'on peut sélectionner
+    $objets_afficher = $objets_selectionner;
 
-	// Il faut alors chercher d'éventuels parents obligatoires en plus :
-	// lister-trucs-bidules.html => on doit afficher des "trucs" pour trouver des "bidules"
-	if (!$liste_parents) {
-		$liste_parents = find_all_in_path('formulaires/selecteur/', 'lister-[\w]+-[\w]+[.]html$');
-	}
-	foreach ($liste_parents as $fichier => $chemin) {
-		preg_match('/^lister-([\w]+)-([\w]+)[.]html$/', $fichier, $captures);
-		$parent = $captures[1];
-		$type = $captures[2];
-		// Si le type fait partie de ce qu'on doit afficher alors on ajoute aussi le parent à l'affichage
-		if (in_array($type, $objets_afficher)) {
-			$objets_afficher[] = $parent;
-		}
-	}
+    // Il faut alors chercher d'éventuels parents obligatoires en plus :
+    // lister-trucs-bidules.html => on doit afficher des "trucs" pour trouver des "bidules"
+    if (!$liste_parents) {
+        $liste_parents = find_all_in_path('formulaires/selecteur/', 'lister-[\w]+-[\w]+[.]html$');
+    }
+    foreach ($liste_parents as $fichier => $chemin) {
+        preg_match('/^lister-([\w]+)-([\w]+)[.]html$/', $fichier, $captures);
+        $parent = $captures[1];
+        $type = $captures[2];
+        // Si le type fait partie de ce qu'on doit afficher alors on ajoute aussi le parent à l'affichage
+        if (in_array($type, $objets_afficher)) {
+            $objets_afficher[] = $parent;
+        }
+    }
 
-	$objets = array(
-		'selectionner' => array_unique($objets_selectionner),
-		'afficher' => array_unique($objets_afficher),
-	);
+    $objets = array(
+        'selectionner' => array_unique($objets_selectionner),
+        'afficher' => array_unique($objets_afficher),
+    );
 
-	return $objets;
+    return $objets;
 }
 
 /**
  * Extrait des informations d'un tableau d'entrées `array("rubrique|9", "article|8", ...)`
- * ou une chaine brute `rubrique|9,article|8,...`
+ * ou une chaine brute `rubrique|9,article|8,...`.
  *
  * Peut retourner un tableau de couples (objet => id_objet) ou la liste
  * des identifiants d'un objet précis si `$type` est fourni.
@@ -92,96 +91,99 @@ function selecteur_lister_objets($whitelist = array(), $blacklist = array()) {
  * @filtre
  *
  * @param array|string $selected
- *     Liste des entrées : tableau ou chaine séparée par des virgules
- * @param string $type
- *     Type de valeur à recuperer tel que `rubrique`, `article`
+ *                               Liste des entrées : tableau ou chaine séparée par des virgules
+ * @param string       $type
+ *                               Type de valeur à recuperer tel que `rubrique`, `article`
+ *
  * @return array
- *     liste des couples (objets => id_objet) ou liste des identifiants d'un type d'objet.
+ *               liste des couples (objets => id_objet) ou liste des identifiants d'un type d'objet.
  **/
-function picker_selected($selected, $type = '') {
-	$select = array();
-	$type = preg_replace(',\W,', '', $type);
+function picker_selected($selected, $type = '')
+{
+    $select = array();
+    $type = preg_replace(',\W,', '', $type);
 
-	if ($selected and !is_array($selected)) {
-		$selected = explode(',', $selected);
-	}
+    if ($selected and !is_array($selected)) {
+        $selected = explode(',', $selected);
+    }
 
-	if (is_array($selected)) {
-		foreach ($selected as $value) {
-			// Si c'est le bon format déjà
-			if (preg_match('/^([\w]+)[|]([0-9]+)$/', $value, $captures)) {
-				$objet = $captures[1];
-				$id_objet = intval($captures[2]);
+    if (is_array($selected)) {
+        foreach ($selected as $value) {
+            // Si c'est le bon format déjà
+            if (preg_match('/^([\w]+)[|]([0-9]+)$/', $value, $captures)) {
+                $objet = $captures[1];
+                $id_objet = intval($captures[2]);
 
-				// Si on cherche un type et que c'est le bon, on renvoit un tableau que d'identifiants
-				if (is_string($type) AND $type == $objet AND ($id_objet OR in_array($objet, array('racine', 'rubrique')))) {
-					$select[] = $id_objet;
-				} elseif (!$type AND ($id_objet OR in_array($objet, array('racine', 'rubrique')))) {
-					$select[] = array('objet' => $objet, 'id_objet' => $id_objet);
-				}
-			}
-		}
-	}
+                // Si on cherche un type et que c'est le bon, on renvoit un tableau que d'identifiants
+                if (is_string($type) and $type == $objet and ($id_objet or in_array($objet, array('racine', 'rubrique')))) {
+                    $select[] = $id_objet;
+                } elseif (!$type and ($id_objet or in_array($objet, array('racine', 'rubrique')))) {
+                    $select[] = array('objet' => $objet, 'id_objet' => $id_objet);
+                }
+            }
+        }
+    }
 
-	return $select;
+    return $select;
 }
 
 /**
- * Récupère des informations sur un objet pour pouvoir l'ajouter aux éléments sélectionnés
+ * Récupère des informations sur un objet pour pouvoir l'ajouter aux éléments sélectionnés.
  *
  * @uses typer_raccourci()
  *
  * @param string $ref
- *     Référence de l'objet à chercher, de la forme "type|id", par exemple "rubrique|123".
- * @param mixed $rubriques_ou_objets
- *     Soit un booléen (pouvant être une chaîne vide aussi) indiquant que les rubriques sont sélectionnables
- *     soit un tableau complet des objets sélectionnables.
- * @param bool $articles
- *     Booléen indiquant si les articles sont sélectionnables
+ *                                    Référence de l'objet à chercher, de la forme "type|id", par exemple "rubrique|123".
+ * @param mixed  $rubriques_ou_objets
+ *                                    Soit un booléen (pouvant être une chaîne vide aussi) indiquant que les rubriques sont sélectionnables
+ *                                    soit un tableau complet des objets sélectionnables.
+ * @param bool   $articles
+ *                                    Booléen indiquant si les articles sont sélectionnables
  */
-function picker_identifie_id_rapide($ref, $rubriques_ou_objets = false, $articles = false) {
-	include_spip('inc/json');
-	include_spip('inc/lien');
+function picker_identifie_id_rapide($ref, $rubriques_ou_objets = false, $articles = false)
+{
+    include_spip('inc/json');
+    include_spip('inc/lien');
 
-	// On construit un tableau des objets sélectionnables suivant les paramètres
-	$objets = array();
-	if ($rubriques_ou_objets and is_array($rubriques_ou_objets)) {
-		$objets = $rubriques_ou_objets;
-	} else {
-		if ($rubriques_ou_objets) {
-			$objets[] = 'rubriques';
-		}
-		if ($articles) {
-			$objets[] = 'articles';
-		}
-	}
+    // On construit un tableau des objets sélectionnables suivant les paramètres
+    $objets = array();
+    if ($rubriques_ou_objets and is_array($rubriques_ou_objets)) {
+        $objets = $rubriques_ou_objets;
+    } else {
+        if ($rubriques_ou_objets) {
+            $objets[] = 'rubriques';
+        }
+        if ($articles) {
+            $objets[] = 'articles';
+        }
+    }
 
-	// Si la référence ne correspond à rien, c'est fini
-	if (!($match = typer_raccourci($ref))) {
-		return json_export(false);
-	}
-	// Sinon on récupère les infos utiles
-	@list($type, , $id, , , ,) = $match;
+    // Si la référence ne correspond à rien, c'est fini
+    if (!($match = typer_raccourci($ref))) {
+        return json_export(false);
+    }
+    // Sinon on récupère les infos utiles
+    @list($type, , $id) = $match;
 
-	// On regarde si le type trouvé fait partie des objets sélectionnables
-	if (!in_array(table_objet($type), $objets)) {
-		return json_export(false);
-	}
+    // On regarde si le type trouvé fait partie des objets sélectionnables
+    if (!in_array(table_objet($type), $objets)) {
+        return json_export(false);
+    }
 
-	// Maintenant que tout est bon, on cherche les informations sur cet objet
-	include_spip('inc/filtres');
-	if (!$titre = generer_info_entite($id, $type, 'titre')) {
-		return json_export(false);
-	}
+    // Maintenant que tout est bon, on cherche les informations sur cet objet
+    include_spip('inc/filtres');
+    if (!$titre = generer_info_entite($id, $type, 'titre')) {
+        return json_export(false);
+    }
 
-	// On simplifie le texte
-	$titre = attribut_html($titre);
+    // On simplifie le texte
+    $titre = attribut_html($titre);
 
-	return json_export(array('type' => $type, 'id' => "$type|$id", 'titre' => $titre));
+    return json_export(array('type' => $type, 'id' => "$type|$id", 'titre' => $titre));
 }
 
 /**
- * Déterminer si une rubrique a des enfants à afficher ou non
+ * Déterminer si une rubrique a des enfants à afficher ou non.
  *
  * On test d'abord si la rubrique a des sous rubriques, et sinon on regarde
  * les autres types sélectionnables, puis on regarde si la rubrique contient
@@ -191,45 +193,45 @@ function picker_identifie_id_rapide($ref, $rubriques_ou_objets = false, $article
  *     Pour optimiser, la fonction calcule sa valeur sur toute la fratrie d'un coup,
  *     puisqu'elle est appellée N fois pour toutes les rubriques d'un même niveau
  *
- * @param int $id_rubrique
- *     Identifiant de la rubrique
+ * @param int   $id_rubrique
+ *                           Identifiant de la rubrique
  * @param array $types
- *     Liste de type d'objets. Si l'un de ces objet est présent dans la rubrique,
- *     alors cette rubrique est à afficher
+ *                           Liste de type d'objets. Si l'un de ces objet est présent dans la rubrique,
+ *                           alors cette rubrique est à afficher
+ *
  * @return string
- *     Comme le filtre `oui` : espace (` `) si rubrique à afficher, chaîne vide sinon.
+ *                Comme le filtre `oui` : espace (` `) si rubrique à afficher, chaîne vide sinon.
  */
-function test_enfants_rubrique($id_rubrique, $types = array()) {
-	static $has_child = array();
+function test_enfants_rubrique($id_rubrique, $types = array())
+{
+    static $has_child = array();
 
-	if (!isset($has_child[$id_rubrique])) {
-		$types = (is_array($types) ? array_filter($types) : array());
+    if (!isset($has_child[$id_rubrique])) {
+        $types = (is_array($types) ? array_filter($types) : array());
 
-		// recuperer tous les freres et soeurs de la rubrique visee
-		$id_parent = sql_getfetsel('id_parent', 'spip_rubriques', 'id_rubrique=' . intval($id_rubrique));
-		$fratrie = sql_allfetsel('id_rubrique', 'spip_rubriques', 'id_parent=' . intval($id_parent));
-		$fratrie = array_map('reset', $fratrie);
-		$has = sql_allfetsel("DISTINCT id_parent", "spip_rubriques", sql_in('id_parent', $fratrie));
-		$has = array_map('reset', $has);
-		$fratrie = array_diff($fratrie, $has);
+        // recuperer tous les freres et soeurs de la rubrique visee
+        $id_parent = sql_getfetsel('id_parent', 'spip_rubriques', 'id_rubrique='.intval($id_rubrique));
+        $fratrie = sql_allfetsel('id_rubrique', 'spip_rubriques', 'id_parent='.intval($id_parent));
+        $fratrie = array_map('reset', $fratrie);
+        $has = sql_allfetsel('DISTINCT id_parent', 'spip_rubriques', sql_in('id_parent', $fratrie));
+        $has = array_map('reset', $has);
+        $fratrie = array_diff($fratrie, $has);
 
-		while (count($fratrie) AND is_array($types) AND count($types)) {
-			$type = array_shift($types);
-			$h = sql_allfetsel("DISTINCT id_rubrique", table_objet_sql($type), sql_in('id_rubrique', $fratrie));
-			$h = array_map('reset', $h);
-			$has = array_merge($has, $h);
-			$fratrie = array_diff($fratrie, $h);
-		}
+        while (count($fratrie) and is_array($types) and count($types)) {
+            $type = array_shift($types);
+            $h = sql_allfetsel('DISTINCT id_rubrique', table_objet_sql($type), sql_in('id_rubrique', $fratrie));
+            $h = array_map('reset', $h);
+            $has = array_merge($has, $h);
+            $fratrie = array_diff($fratrie, $h);
+        }
 
-		if (count($has)) {
-			$has_child = $has_child+array_combine($has, array_pad(array(), count($has), true));
-		}
-		if (count($fratrie)) {
-			$has_child = $has_child+array_combine($fratrie, array_pad(array(), count($fratrie), false));
-		}
-	}
+        if (count($has)) {
+            $has_child = $has_child + array_combine($has, array_pad(array(), count($has), true));
+        }
+        if (count($fratrie)) {
+            $has_child = $has_child + array_combine($fratrie, array_pad(array(), count($fratrie), false));
+        }
+    }
 
-	return $has_child[$id_rubrique] ? ' ' : '';
+    return $has_child[$id_rubrique] ? ' ' : '';
 }
-
-?>

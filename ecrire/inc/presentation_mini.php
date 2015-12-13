@@ -11,12 +11,10 @@
 \***************************************************************************/
 
 /**
- * Fonctions d'affichage pour l'espace privé (hors squelettes)
- *
- * @package SPIP\Core\Affichage
+ * Fonctions d'affichage pour l'espace privé (hors squelettes).
  **/
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 /**
@@ -29,31 +27,36 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Utiliser des squelettes pour l'affichage !
  *
  * @param string $f
- *     Nom de la fonction
+ *                    Nom de la fonction
  * @param string $ret
- *     Code HTML à afficher
- * @return void
+ *                    Code HTML à afficher
  **/
-function echo_log($f, $ret) {
-	spip_log("Page " . self() . " function $f: echo " . substr($ret, 0, 50) . "...", 'echo');
-	echo
-		(_SIGNALER_ECHOS ? "#Echo par $f#" : "")
-		. $ret;
+function echo_log($f, $ret)
+{
+    spip_log('Page '.self()." function $f: echo ".substr($ret, 0, 50).'...', 'echo');
+    echo(_SIGNALER_ECHOS ? "#Echo par $f#" : '')
+        .$ret;
 }
 
 /**
- * Retourne le code HTML d'un début de cadre pour le centre de page (haut de page)
+ * Retourne le code HTML d'un début de cadre pour le centre de page (haut de page).
  *
  * @return string Code HTML
  */
-function debut_grand_cadre() { return "\n<div class = 'table_page'>\n"; }
+function debut_grand_cadre()
+{
+    return "\n<div class = 'table_page'>\n";
+}
 
 /**
- * Retourne le code HTML d'une fin de cadre pour le centre de page (haut de page)
+ * Retourne le code HTML d'une fin de cadre pour le centre de page (haut de page).
  *
  * @return string Code HTML
  */
-function fin_grand_cadre() { return "\n</div>"; }
+function fin_grand_cadre()
+{
+    return "\n</div>";
+}
 
 // Debut de la colonne de gauche
 // div navigation fermee par creer_colonne_droite qui ouvre
@@ -62,50 +65,56 @@ function fin_grand_cadre() { return "\n</div>"; }
 // div conteneur
 
 /**
- * Retourne le code HTML du début de la colonne gauche
+ * Retourne le code HTML du début de la colonne gauche.
  *
  * @return string Code HTML
  */
-function debut_gauche() {
-	return "<div id = 'conteneur' class = ''>\n<div id = 'navigation' class = 'lat' role = 'contentinfo'>\n";
+function debut_gauche()
+{
+    return "<div id = 'conteneur' class = ''>\n<div id = 'navigation' class = 'lat' role = 'contentinfo'>\n";
 }
 
 /**
- * Retourne le code HTML de la fin de la colonne
+ * Retourne le code HTML de la fin de la colonne.
  *
  * @return string Code HTML
  */
-function fin_gauche() { return "</div></div><br class = 'nettoyeur' />"; }
-
-/**
- * Retourne le code HTML du changement de colonne (passer de la gauche à la droite)
- *
- * @return string Code HTML
- */
-function creer_colonne_droite() {
-	static $deja_colonne_droite;
-	if ($GLOBALS['spip_ecran'] != 'large' OR $deja_colonne_droite) {
-		return '';
-	}
-	$deja_colonne_droite = true;
-
-	return "\n</div><div id='extra' class='lat' role='complementary'>";
+function fin_gauche()
+{
+    return "</div></div><br class = 'nettoyeur' />";
 }
 
 /**
- * Retourne le code HTML de la colonne droite et du centre de page
+ * Retourne le code HTML du changement de colonne (passer de la gauche à la droite).
  *
  * @return string Code HTML
  */
-function debut_droite() {
-	return liste_objets_bloques(_request('exec'))
-	. creer_colonne_droite()
-	. "</div>"
-	. "\n<div id='contenu'>";
+function creer_colonne_droite()
+{
+    static $deja_colonne_droite;
+    if ($GLOBALS['spip_ecran'] != 'large' or $deja_colonne_droite) {
+        return '';
+    }
+    $deja_colonne_droite = true;
+
+    return "\n</div><div id='extra' class='lat' role='complementary'>";
 }
 
 /**
- * Retourne la liste des objets édités récemment (si les drapeaux d'édition sont actifs)
+ * Retourne le code HTML de la colonne droite et du centre de page.
+ *
+ * @return string Code HTML
+ */
+function debut_droite()
+{
+    return liste_objets_bloques(_request('exec'))
+    .creer_colonne_droite()
+    .'</div>'
+    ."\n<div id='contenu'>";
+}
+
+/**
+ * Retourne la liste des objets édités récemment (si les drapeaux d'édition sont actifs).
  *
  * Si notre page est une page d'édition d'un objet, on déclare au passage l'auteur
  * comme éditant l'objet
@@ -113,42 +122,43 @@ function debut_droite() {
  * @uses signale_edition()
  * @uses liste_drapeau_edition()
  *
- * @param string $exec
- *     Nom de la page exec en cours
- * @param array $contexte
- *     Contexte de la page
+ * @param string     $exec
+ *                             Nom de la page exec en cours
+ * @param array      $contexte
+ *                             Contexte de la page
  * @param array|null $auteur
- *     Session de l'auteur. Sera prise sur l'auteur connecté si non indiquée.
+ *                             Session de l'auteur. Sera prise sur l'auteur connecté si non indiquée.
+ *
  * @return string
- *     Code HTML
+ *                Code HTML
  **/
-function liste_objets_bloques($exec, $contexte = array(), $auteur = null) {
-	$res = '';
-	if ($GLOBALS['meta']["articles_modif"] != "non") {
-		include_spip('inc/drapeau_edition');
-		if (is_null($auteur)) {
-			$auteur = $GLOBALS['visiteur_session'];
-		}
-		if ($en_cours = trouver_objet_exec($exec)
-			AND $en_cours['edition']
-			AND $type = $en_cours['type']
-			AND ((isset($contexte[$en_cours['id_table_objet']]) and $id = $contexte[$en_cours['id_table_objet']])
-				OR $id = _request($en_cours['id_table_objet']))
-		) {
-			// marquer le fait que l'objet est ouvert en edition par toto
-			// a telle date ; une alerte sera donnee aux autres redacteurs
-			signale_edition($id, $auteur, $type);
-		}
+function liste_objets_bloques($exec, $contexte = array(), $auteur = null)
+{
+    $res = '';
+    if ($GLOBALS['meta']['articles_modif'] != 'non') {
+        include_spip('inc/drapeau_edition');
+        if (is_null($auteur)) {
+            $auteur = $GLOBALS['visiteur_session'];
+        }
+        if ($en_cours = trouver_objet_exec($exec)
+            and $en_cours['edition']
+            and $type = $en_cours['type']
+            and ((isset($contexte[$en_cours['id_table_objet']]) and $id = $contexte[$en_cours['id_table_objet']])
+                or $id = _request($en_cours['id_table_objet']))
+        ) {
+            // marquer le fait que l'objet est ouvert en edition par toto
+            // a telle date ; une alerte sera donnee aux autres redacteurs
+            signale_edition($id, $auteur, $type);
+        }
 
-		$objets_ouverts = liste_drapeau_edition($auteur['id_auteur']);
-		if (count($objets_ouverts)) {
-			$res .= recuperer_fond('prive/objets/liste/objets-en-edition', array(), array('ajax' => true));
-		}
-	}
+        $objets_ouverts = liste_drapeau_edition($auteur['id_auteur']);
+        if (count($objets_ouverts)) {
+            $res .= recuperer_fond('prive/objets/liste/objets-en-edition', array(), array('ajax' => true));
+        }
+    }
 
-	return $res;
+    return $res;
 }
-
 
 /**
  * Retourne le code HTML de fin de page de l'interface privée.
@@ -159,25 +169,26 @@ function liste_objets_bloques($exec, $contexte = array(), $auteur = null) {
  *
  * @return string Code HTML
  **/
-function fin_page() {
-	include_spip('inc/pipelines');
-	// avec &var_profile=1 on a le tableau de mesures SQL
-	$debug = ((_request('exec') !== 'valider_xml')
-		AND ((_request('var_mode') == 'debug')
-			OR (isset($GLOBALS['tableau_des_temps']) AND $GLOBALS['tableau_des_temps'])
-			AND isset($_COOKIE['spip_admin'])));
-	$t = '</div><div id="pied"><div class="largeur">'
-		. recuperer_fond('prive/squelettes/inclure/pied')
-		. "</div>"
-		. "</div></div>" // cf. div#page et div.largeur ouvertes dans conmmencer_page()
-		. ($debug ? erreur_squelette() : '')
-		. "</body></html>\n";
+function fin_page()
+{
+    include_spip('inc/pipelines');
+    // avec &var_profile=1 on a le tableau de mesures SQL
+    $debug = ((_request('exec') !== 'valider_xml')
+        and ((_request('var_mode') == 'debug')
+            or (isset($GLOBALS['tableau_des_temps']) and $GLOBALS['tableau_des_temps'])
+            and isset($_COOKIE['spip_admin'])));
+    $t = '</div><div id="pied"><div class="largeur">'
+        .recuperer_fond('prive/squelettes/inclure/pied')
+        .'</div>'
+        .'</div></div>' // cf. div#page et div.largeur ouvertes dans conmmencer_page()
+.($debug ? erreur_squelette() : '')
+        ."</body></html>\n";
 
-	return f_queue($t);
+    return f_queue($t);
 }
 
 /**
- * Retourne des tests javascript à exécuter
+ * Retourne des tests javascript à exécuter.
  *
  * - Teste que javascript est actif : si non, un hit sur exec=test_ajax est généré
  * - Rejoue la session si demandé (par verifier_session() si l'ip a changé)
@@ -187,109 +198,108 @@ function fin_page() {
  *
  * @return string Code HTML
  **/
-function html_tests_js() {
-	if (_SPIP_AJAX AND !defined('_TESTER_NOSCRIPT')) {
-		// pour le pied de page (deja defini si on est validation XML)
-		define('_TESTER_NOSCRIPT',
-			"<noscript>\n<div style='display:none;'><img src='"
-			. generer_url_ecrire('test_ajax', 'js=-1')
-			. "' width='1' height='1' alt='' /></div></noscript>\n");
-	}
+function html_tests_js()
+{
+    if (_SPIP_AJAX and !defined('_TESTER_NOSCRIPT')) {
+        // pour le pied de page (deja defini si on est validation XML)
+        define('_TESTER_NOSCRIPT',
+            "<noscript>\n<div style='display:none;'><img src='"
+            .generer_url_ecrire('test_ajax', 'js=-1')
+            ."' width='1' height='1' alt='' /></div></noscript>\n");
+    }
 
-	return
-		(defined('_SESSION_REJOUER') ? _SESSION_REJOUER : '')
-		. (defined('_TESTER_NOSCRIPT') ? _TESTER_NOSCRIPT : '');
+    return
+        (defined('_SESSION_REJOUER') ? _SESSION_REJOUER : '')
+        .(defined('_TESTER_NOSCRIPT') ? _TESTER_NOSCRIPT : '');
 }
 
 /**
- * Retourne la liste des mises à jour de SPIP possibles
+ * Retourne la liste des mises à jour de SPIP possibles.
  *
  * @return string Texte présentant la liste des mises à jour existantes
  **/
-function info_maj_spip() {
+function info_maj_spip()
+{
+    $maj = isset($GLOBALS['meta']['info_maj_spip']) ? $GLOBALS['meta']['info_maj_spip'] : null;
+    if (!$maj) {
+        return '';
+    }
 
-	$maj = isset($GLOBALS['meta']['info_maj_spip']) ? $GLOBALS['meta']['info_maj_spip'] : null;
-	if (!$maj) {
-		return "";
-	}
+    $maj = explode('|', $maj);
+    // c'est une ancienne notif, on a fait la maj depuis !
+    if ($GLOBALS['spip_version_branche'] !== reset($maj)) {
+        return '';
+    }
 
-	$maj = explode('|', $maj);
-	// c'est une ancienne notif, on a fait la maj depuis !
-	if ($GLOBALS['spip_version_branche'] !== reset($maj)) {
-		return "";
-	}
+    if (!autoriser('webmestre')) {
+        return '';
+    }
 
-	if (!autoriser('webmestre')) {
-		return "";
-	}
+    array_shift($maj);
+    $maj = implode('|', $maj);
 
-	array_shift($maj);
-	$maj = implode('|', $maj);
-
-	return "$maj<br />";
+    return "$maj<br />";
 }
 
 /**
  * Retourne les informations de copyright (version de SPIP, de l'écran de sécurité)
- * pour le pied de page de l'espace privé
+ * pour le pied de page de l'espace privé.
  *
  * @return string Code HTML
  **/
-function info_copyright() {
+function info_copyright()
+{
+    $version = $GLOBALS['spip_version_affichee'];
 
-	$version = $GLOBALS['spip_version_affichee'];
+    //
+    // Mention, le cas echeant, de la revision SVN courante
+    //
+    if ($svn_revision = version_svn_courante(_DIR_RACINE)) {
+        $version .= ' '.(($svn_revision < 0) ? 'SVN ' : '')
+            ."[<a href='http://core.spip.net/projects/spip/repository/revisions/"
+            .abs($svn_revision)."' onclick=\"window.open(this.href); return false;\">"
+            .abs($svn_revision).'</a>]';
+    }
 
-	//
-	// Mention, le cas echeant, de la revision SVN courante
-	//
-	if ($svn_revision = version_svn_courante(_DIR_RACINE)) {
-		$version .= ' ' . (($svn_revision < 0) ? 'SVN ' : '')
-			. "[<a href='http://core.spip.net/projects/spip/repository/revisions/"
-			. abs($svn_revision) . "' onclick=\"window.open(this.href); return false;\">"
-			. abs($svn_revision) . "</a>]";
-	}
+    // et la version de l'ecran de securite
+    $secu = defined('_ECRAN_SECURITE')
+        ? '<br />'._T('ecran_securite', array('version' => _ECRAN_SECURITE))
+        : '';
 
-	// et la version de l'ecran de securite
-	$secu = defined('_ECRAN_SECURITE')
-		? "<br />" . _T('ecran_securite', array('version' => _ECRAN_SECURITE))
-		: '';
-
-	return _T('info_copyright',
-		array(
-			'spip' => "<b>SPIP $version</b> ",
-			'lien_gpl' =>
-				"<a href='" . generer_url_ecrire("aide",
-					"aide=licence&var_lang=" . $GLOBALS['spip_lang']) . "' class=\"aide popin\">" . _T('info_copyright_gpl') . "</a>"
-		))
-	. $secu;
-
+    return _T('info_copyright',
+        array(
+            'spip' => "<b>SPIP $version</b> ",
+            'lien_gpl' => "<a href='".generer_url_ecrire('aide',
+                    'aide=licence&var_lang='.$GLOBALS['spip_lang'])."' class=\"aide popin\">"._T('info_copyright_gpl').'</a>',
+        ))
+    .$secu;
 }
 
 /**
- * Retourne un formulaire de recherche pour l'espace privé
+ * Retourne un formulaire de recherche pour l'espace privé.
  *
  * Préférez l'usage en squelettes via la balise `#FORMULAIRE_RECHERCHE_ECRIRE`.
  *
  * @see formulaires_recherche_ecrire_charger_dist()
  *
- * @param string $page Nom de la page exec
+ * @param string $page       Nom de la page exec
  * @param string $complement Code HTML supplémentaire
- * @return string             Code HTML
+ *
+ * @return string Code HTML
  **/
-function formulaire_recherche($page, $complement = "") {
-	$recherche = _request('recherche');
-	$recherche_aff = entites_html($recherche);
-	if (!strlen($recherche)) {
-		$recherche_aff = _T('info_rechercher');
-		$onfocus = " onfocus=\"this.value='';\"";
-	} else {
-		$onfocus = '';
-	}
+function formulaire_recherche($page, $complement = '')
+{
+    $recherche = _request('recherche');
+    $recherche_aff = entites_html($recherche);
+    if (!strlen($recherche)) {
+        $recherche_aff = _T('info_rechercher');
+        $onfocus = " onfocus=\"this.value='';\"";
+    } else {
+        $onfocus = '';
+    }
 
-	$form = '<input type="text" size="10" value="' . $recherche_aff . '" name="recherche" class="recherche" accesskey="r"' . $onfocus . ' />';
-	$form .= "<input type='image' src='" . chemin_image('rechercher-20.png') . "' name='submit' class='submit' alt='" . _T('info_rechercher') . "' />";
+    $form = '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="recherche" accesskey="r"'.$onfocus.' />';
+    $form .= "<input type='image' src='".chemin_image('rechercher-20.png')."' name='submit' class='submit' alt='"._T('info_rechercher')."' />";
 
-	return "<div class='spip_recherche'>" . generer_form_ecrire($page, $form . $complement, " method='get'") . "</div>";
+    return "<div class='spip_recherche'>".generer_form_ecrire($page, $form.$complement, " method='get'").'</div>';
 }
-
-?>

@@ -11,13 +11,10 @@
 \***************************************************************************/
 
 /**
- * Gestion du formulaire iconifier pour ajouter des logos
- *
- * @package SPIP\Core\Logos
+ * Gestion du formulaire iconifier pour ajouter des logos.
  */
-
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 include_spip('inc/actions');
@@ -26,21 +23,20 @@ include_spip('inc/actions');
  * Retourne le formulaire de gestion de logo sur les objets.
  *
  * @param string $objet
- * @param integer $id
+ * @param int    $id
  * @param string $script
- * @param bool $visible
- * @param bool $flag_modif
+ * @param bool   $visible
+ * @param bool   $flag_modif
  *
  * @return string|array
- *     - Contenu du squelette calculé
- *     - ou tableau d'information sur le squelette.
+ *                      - Contenu du squelette calculé
+ *                      - ou tableau d'information sur le squelette.
  */
-function inc_iconifier_dist($objet, $id, $script, $visible = false, $flag_modif = true) {
-	// compat avec anciens appels
-	$objet = objet_type($objet);
+function inc_iconifier_dist($objet, $id, $script, $visible = false, $flag_modif = true)
+{
+    // compat avec anciens appels
+    $objet = objet_type($objet);
 
-	return recuperer_fond('prive/objets/editer/logo',
-		array('objet' => $objet, 'id_objet' => $id, 'editable' => $flag_modif));
+    return recuperer_fond('prive/objets/editer/logo',
+        array('objet' => $objet, 'id_objet' => $id, 'editable' => $flag_modif));
 }
-
-?>

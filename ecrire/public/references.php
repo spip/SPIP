@@ -11,16 +11,14 @@
 \***************************************************************************/
 
 /**
- * Fonctions de recherche et de reservation dans l'arborescence des boucles
- *
- * @package SPIP\Core\Compilateur\References
+ * Fonctions de recherche et de reservation dans l'arborescence des boucles.
  **/
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 /**
- * Retrouver l'index de la boucle d'une balise
+ * Retrouver l'index de la boucle d'une balise.
  *
  * Retrouve à quelle boucle appartient une balise, utile dans le cas
  * où une référence explicite est demandée
@@ -35,28 +33,29 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     ```
  *
  * @param Champ $p AST au niveau de la balise
+ *
  * @return string
  *
  *     - Identifiant de la boucle possédant ce champ.
  *     - '' si une référence explicite incorrecte est envoyée
  */
-function index_boucle($p) {
+function index_boucle($p)
+{
+    $idb = $p->id_boucle;
+    $explicite = $p->nom_boucle;
 
-	$idb = $p->id_boucle;
-	$explicite = $p->nom_boucle;
+    if (strlen($explicite)) {
+        // Recherche d'un champ dans un etage superieur
+        while (($idb !== $explicite) && ($idb !== '')) {
+            $idb = $p->boucles[$idb]->id_parent;
+        }
+    }
 
-	if (strlen($explicite)) {
-		// Recherche d'un champ dans un etage superieur
-		while (($idb !== $explicite) && ($idb !== '')) {
-			$idb = $p->boucles[$idb]->id_parent;
-		}
-	}
-
-	return $idb;
+    return $idb;
 }
 
 /**
- * Retourne la position dans la pile d'un champ SQL
+ * Retourne la position dans la pile d'un champ SQL.
  *
  * Retourne le code PHP permettant de récupérer un champ SQL dans
  * une boucle parente, en prenant la boucle la plus proche du sommet de pile
@@ -69,109 +68,112 @@ function index_boucle($p) {
  * Si ca référence un champ SQL, on le mémorise dans la structure $boucles
  * afin de construire un requête SQL minimale (plutôt qu'un brutal 'SELECT *')
  *
- * @param string $idb Identifiant de la boucle
- * @param string $nom_champ Nom du champ SQL cherché
- * @param array $boucles AST du squelette
- * @param string $explicite
- *     Indique que le nom de la boucle est explicite dans la balise #_nomboucletruc:CHAMP
+ * @param string      $idb          Identifiant de la boucle
+ * @param string      $nom_champ    Nom du champ SQL cherché
+ * @param array       $boucles      AST du squelette
+ * @param string      $explicite
+ *                                  Indique que le nom de la boucle est explicite dans la balise #_nomboucletruc:CHAMP
  * @param null|string $defaut
- *     Code par defaut si le champ n'est pas trouvé dans l'index.
- *     Utilise @$Pile[0][$nom_champ] si non fourni
- * @param bool $remonte_pile
- *     Permettre de remonter la pile des boucles ou non (dans ce cas on
- *     ne cherche que danss la 1ère boucle englobante)
- * @param bool $select
- *     Pour ajouter au select de la boucle, par defaut true
+ *                                  Code par defaut si le champ n'est pas trouvé dans l'index.
+ *                                  Utilise @$Pile[0][$nom_champ] si non fourni
+ * @param bool        $remonte_pile
+ *                                  Permettre de remonter la pile des boucles ou non (dans ce cas on
+ *                                  ne cherche que danss la 1ère boucle englobante)
+ * @param bool        $select
+ *                                  Pour ajouter au select de la boucle, par defaut true
+ *
  * @return string
- *     Code PHP pour obtenir le champ SQL
+ *                Code PHP pour obtenir le champ SQL
  */
 function index_pile(
-	$idb,
-	$nom_champ,
-	&$boucles,
-	$explicite = '',
-	$defaut = null,
-	$remonte_pile = true,
-	$select = true
+    $idb,
+    $nom_champ,
+    &$boucles,
+    $explicite = '',
+    $defaut = null,
+    $remonte_pile = true,
+    $select = true
 ) {
-	if (!is_string($defaut)) {
-		$defaut = '@$Pile[0][\'' . strtolower($nom_champ) . '\']';
-	}
+    if (!is_string($defaut)) {
+        $defaut = '@$Pile[0][\''.strtolower($nom_champ).'\']';
+    }
 
-	$i = 0;
-	if (strlen($explicite)) {
-		// Recherche d'un champ dans un etage superieur
-		while (($idb !== $explicite) && ($idb !== '')) {
-			#	spip_log("Cherchexpl: $nom_champ '$explicite' '$idb' '$i'");
-			$i++;
-			$idb = $boucles[$idb]->id_parent;
-		}
-	}
+    $i = 0;
+    if (strlen($explicite)) {
+        // Recherche d'un champ dans un etage superieur
+        while (($idb !== $explicite) && ($idb !== '')) {
+            #	spip_log("Cherchexpl: $nom_champ '$explicite' '$idb' '$i'");
+            ++$i;
+            $idb = $boucles[$idb]->id_parent;
+        }
+    }
 
-	#	spip_log("Cherche: $nom_champ a partir de '$idb'");
-	$nom_champ = strtolower($nom_champ);
-	$conditionnel = array();
-	// attention: entre la boucle nommee 0, "" et le tableau vide,
-	// il y a incoherences qu'il vaut mieux eviter
-	while (isset($boucles[$idb])) {
-		$joker = true;
-		// modifie $joker si tous les champs sont autorisés.
-		// $t = le select pour le champ, si on l'a trouvé (ou si joker)
-		// $c = le nom du champ demandé
-		list ($t, $c) = index_tables_en_pile($idb, $nom_champ, $boucles, $joker);
-		if ($t) {
-			if ($select AND !in_array($t, $boucles[$idb]->select)) {
-				$boucles[$idb]->select[] = $t;
-			}
-			$champ = '$Pile[$SP' . ($i ? "-$i" : "") . '][\'' . $c . '\']';
-			if (!$joker) {
-				return index_compose($conditionnel, $champ);
-			}
+    #	spip_log("Cherche: $nom_champ a partir de '$idb'");
+    $nom_champ = strtolower($nom_champ);
+    $conditionnel = array();
+    // attention: entre la boucle nommee 0, "" et le tableau vide,
+    // il y a incoherences qu'il vaut mieux eviter
+    while (isset($boucles[$idb])) {
+        $joker = true;
+        // modifie $joker si tous les champs sont autorisés.
+        // $t = le select pour le champ, si on l'a trouvé (ou si joker)
+        // $c = le nom du champ demandé
+        list($t, $c) = index_tables_en_pile($idb, $nom_champ, $boucles, $joker);
+        if ($t) {
+            if ($select and !in_array($t, $boucles[$idb]->select)) {
+                $boucles[$idb]->select[] = $t;
+            }
+            $champ = '$Pile[$SP'.($i ? "-$i" : '').'][\''.$c.'\']';
+            if (!$joker) {
+                return index_compose($conditionnel, $champ);
+            }
 
-			// tant que l'on trouve des tables avec joker, on continue
-			// avec la boucle parente et on conditionne à l'exécution
-			// la présence du champ. Si le champ existe à l'exécution
-			// dans une boucle, il est pris, sinon on le cherche dans le parent...
-			$conditionnel[] = "isset($champ)?$champ";
-		}
+            // tant que l'on trouve des tables avec joker, on continue
+            // avec la boucle parente et on conditionne à l'exécution
+            // la présence du champ. Si le champ existe à l'exécution
+            // dans une boucle, il est pris, sinon on le cherche dans le parent...
+            $conditionnel[] = "isset($champ)?$champ";
+        }
 
-		if ($remonte_pile) {
-			#	spip_log("On remonte vers $i");
-			// Sinon on remonte d'un cran
-			$idb = $boucles[$idb]->id_parent;
-			$i++;
-		} else {
-			$idb = null;
-		}
-	}
+        if ($remonte_pile) {
+            #	spip_log("On remonte vers $i");
+            // Sinon on remonte d'un cran
+            $idb = $boucles[$idb]->id_parent;
+            ++$i;
+        } else {
+            $idb = null;
+        }
+    }
 
-	#	spip_log("Pas vu $nom_champ");
-	// esperons qu'il y sera
-	// ou qu'on a fourni une valeur par "defaut" plus pertinent
-	return index_compose($conditionnel, $defaut);
+    #	spip_log("Pas vu $nom_champ");
+    // esperons qu'il y sera
+    // ou qu'on a fourni une valeur par "defaut" plus pertinent
+    return index_compose($conditionnel, $defaut);
 }
 
 /**
- * Reconstuire la cascade de condition de recherche d'un champ
+ * Reconstuire la cascade de condition de recherche d'un champ.
  *
  * On ajoute la valeur finale par défaut pour les balises dont on ne saura
  * qu'à l'exécution si elles sont definies ou non (boucle DATA)
  *
- * @param array $conditionnel Liste de codes PHP pour retrouver un champ
- * @param string $defaut Valeur par défaut si aucun des moyens ne l'a trouvé
- * @return string              Code PHP complet de recherche d'un champ
+ * @param array  $conditionnel Liste de codes PHP pour retrouver un champ
+ * @param string $defaut       Valeur par défaut si aucun des moyens ne l'a trouvé
+ *
+ * @return string Code PHP complet de recherche d'un champ
  */
-function index_compose($conditionnel, $defaut) {
-	while ($c = array_pop($conditionnel)) {
-		// si on passe defaut = '', ne pas générer d'erreur de compilation.
-		$defaut = "($c:(" . ($defaut ? $defaut : "''") . "))";
-	}
+function index_compose($conditionnel, $defaut)
+{
+    while ($c = array_pop($conditionnel)) {
+        // si on passe defaut = '', ne pas générer d'erreur de compilation.
+        $defaut = "($c:(".($defaut ? $defaut : "''").'))';
+    }
 
-	return $defaut;
+    return $defaut;
 }
 
 /**
- * Cherche un champ dans une boucle
+ * Cherche un champ dans une boucle.
  *
  * Le champ peut être :
  *
@@ -188,104 +190,103 @@ function index_compose($conditionnel, $defaut) {
  *     et non comme à d'autres endroits sur toutes les jointures possibles.
  *     Il faut homogénéiser cela.
  *
- *
- * @param string $idb Identifiant de la boucle
+ * @param string $idb       Identifiant de la boucle
  * @param string $nom_champ Nom du champ SQL cherché
- * @param Boucle $boucles AST du squelette
- * @param bool $joker
- *     Le champ peut-il être inconnu à la compilation ?
- *     Ce drapeau sera levé si c'est le cas.
+ * @param Boucle $boucles   AST du squelette
+ * @param bool   $joker
+ *                          Le champ peut-il être inconnu à la compilation ?
+ *                          Ce drapeau sera levé si c'est le cas.
+ *
  * @return array
- *     Liste (Nom du champ véritable, nom du champ demandé).
- *     Le nom du champ véritable est une expression pour le SELECT de
- *     la boucle tel que "rubriques.titre" ou "mots.titre AS titre_mot".
- *     Les éléments de la liste sont vides si on ne trouve rien.
+ *               Liste (Nom du champ véritable, nom du champ demandé).
+ *               Le nom du champ véritable est une expression pour le SELECT de
+ *               la boucle tel que "rubriques.titre" ou "mots.titre AS titre_mot".
+ *               Les éléments de la liste sont vides si on ne trouve rien.
  **/
-function index_tables_en_pile($idb, $nom_champ, &$boucles, &$joker) {
+function index_tables_en_pile($idb, $nom_champ, &$boucles, &$joker)
+{
+    $r = $boucles[$idb]->type_requete;
+    // boucle recursive, c'est foutu...
+    if ($r == TYPE_RECURSIF) {
+        return array();
+    }
+    if (!$r) {
+        $joker = false; // indiquer a l'appelant
+        # continuer pour chercher l'erreur suivante
+        return array("'#".$r.':'.$nom_champ."'", '');
+    }
 
-	$r = $boucles[$idb]->type_requete;
-	// boucle recursive, c'est foutu...
-	if ($r == TYPE_RECURSIF) {
-		return array();
-	}
-	if (!$r) {
-		$joker = false; // indiquer a l'appelant
-		# continuer pour chercher l'erreur suivante
-		return array("'#" . $r . ':' . $nom_champ . "'", '');
-	}
+    $desc = $boucles[$idb]->show;
+    // le nom du champ est il une exception de la table ? un alias ?
+    $excep = isset($GLOBALS['exceptions_des_tables'][$r]) ? $GLOBALS['exceptions_des_tables'][$r] : '';
+    if ($excep) {
+        $excep = isset($excep[$nom_champ]) ? $excep[$nom_champ] : '';
+    }
+    if ($excep) {
+        $joker = false; // indiquer a l'appelant
+        return index_exception($boucles[$idb], $desc, $nom_champ, $excep);
+    } // pas d'alias. Le champ existe t'il ?
+    else {
+        // le champ est réellement présent, on le prend.
+        if (isset($desc['field'][$nom_champ])) {
+            $t = $boucles[$idb]->id_table;
+            $joker = false; // indiquer a l'appelant
+            return array("$t.$nom_champ", $nom_champ);
+        }
+        // Tous les champs sont-ils acceptés ?
+        // Si oui, on retourne le champ, et on lève le flag joker
+        // C'est le cas des itérateurs DATA qui acceptent tout
+        // et testent la présence du champ à l'exécution et non à la compilation
+        // car ils ne connaissent pas ici leurs contenus.
+        elseif (/*$joker AND */
+        isset($desc['field']['*'])
+        ) {
+            $joker = true; // indiquer a l'appelant
+            return array($nom_champ, $nom_champ);
+        }
+        // pas d'alias, pas de champ, pas de joker...
+        // tenter via une jointure...
+        else {
+            $joker = false; // indiquer a l'appelant
+            // regarder si le champ est deja dans une jointure existante
+            // sinon, si il y a des joitures explicites, la construire
+            if (!$t = trouver_champ_exterieur($nom_champ, $boucles[$idb]->from, $boucles[$idb])) {
+                if ($boucles[$idb]->jointures_explicites) {
+                    // [todo] Ne pas lancer que lorsque il y a des jointures explicites !!!!
+                    // fonctionnel, il suffit d'utiliser $boucles[$idb]->jointures au lieu de jointures_explicites
+                    // mais est-ce ce qu'on veut ?
+                    $jointures = preg_split("/\s+/", $boucles[$idb]->jointures_explicites);
+                    if ($cle = trouver_jointure_champ($nom_champ, $boucles[$idb], $jointures)) {
+                        $t = trouver_champ_exterieur($nom_champ, $boucles[$idb]->from, $boucles[$idb]);
+                    }
+                }
+            }
+            if ($t) {
+                // si on a trouvé une jointure possible, on fait comme
+                // si c'était une exception pour le champ demandé
+                return index_exception($boucles[$idb],
+                    $desc,
+                    $nom_champ,
+                    array($t[1]['id_table'], reset($t[2])));
+            }
 
-	$desc = $boucles[$idb]->show;
-	// le nom du champ est il une exception de la table ? un alias ?
-	$excep = isset($GLOBALS['exceptions_des_tables'][$r]) ? $GLOBALS['exceptions_des_tables'][$r] : '';
-	if ($excep) {
-		$excep = isset($excep[$nom_champ]) ? $excep[$nom_champ] : '';
-	}
-	if ($excep) {
-		$joker = false; // indiquer a l'appelant
-		return index_exception($boucles[$idb], $desc, $nom_champ, $excep);
-	} // pas d'alias. Le champ existe t'il ?
-	else {
-		// le champ est réellement présent, on le prend.
-		if (isset($desc['field'][$nom_champ])) {
-			$t = $boucles[$idb]->id_table;
-			$joker = false; // indiquer a l'appelant
-			return array("$t.$nom_champ", $nom_champ);
-		}
-		// Tous les champs sont-ils acceptés ?
-		// Si oui, on retourne le champ, et on lève le flag joker
-		// C'est le cas des itérateurs DATA qui acceptent tout
-		// et testent la présence du champ à l'exécution et non à la compilation
-		// car ils ne connaissent pas ici leurs contenus.
-		elseif (/*$joker AND */
-		isset($desc['field']['*'])
-		) {
-			$joker = true; // indiquer a l'appelant
-			return array($nom_champ, $nom_champ);
-		}
-		// pas d'alias, pas de champ, pas de joker...
-		// tenter via une jointure...
-		else {
-			$joker = false; // indiquer a l'appelant
-			// regarder si le champ est deja dans une jointure existante
-			// sinon, si il y a des joitures explicites, la construire
-			if (!$t = trouver_champ_exterieur($nom_champ, $boucles[$idb]->from, $boucles[$idb])) {
-				if ($boucles[$idb]->jointures_explicites) {
-					// [todo] Ne pas lancer que lorsque il y a des jointures explicites !!!!
-					// fonctionnel, il suffit d'utiliser $boucles[$idb]->jointures au lieu de jointures_explicites
-					// mais est-ce ce qu'on veut ?
-					$jointures = preg_split("/\s+/", $boucles[$idb]->jointures_explicites);
-					if ($cle = trouver_jointure_champ($nom_champ, $boucles[$idb], $jointures)) {
-						$t = trouver_champ_exterieur($nom_champ, $boucles[$idb]->from, $boucles[$idb]);
-					}
-				}
-			}
-			if ($t) {
-				// si on a trouvé une jointure possible, on fait comme
-				// si c'était une exception pour le champ demandé
-				return index_exception($boucles[$idb],
-					$desc,
-					$nom_champ,
-					array($t[1]['id_table'], reset($t[2])));
-			}
-
-			return array('', '');
-		}
-	}
+            return array('', '');
+        }
+    }
 }
 
-
 /**
- * Retrouve un alias d'un champ dans une boucle
+ * Retrouve un alias d'un champ dans une boucle.
  *
  * Référence à une entite SPIP alias d'un champ SQL.
  * Ça peut même être d'un champ dans une jointure qu'il faut provoquer
  * si ce n'est fait
  *
- * @param Boucle $boucle Boucle dont on prend un alias de champ
- * @param array $desc Description de la table SQL de la boucle
+ * @param Boucle $boucle    Boucle dont on prend un alias de champ
+ * @param array  $desc      Description de la table SQL de la boucle
  * @param string $nom_champ Nom du champ original demandé
- * @param array $excep
- *     Description de l'exception pour ce champ. Peut être :
+ * @param array  $excep
+ *                          Description de l'exception pour ce champ. Peut être :
  *
  *     - string : nom du champ véritable dans la table
  *     - array :
@@ -293,87 +294,91 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles, &$joker) {
  *           est dans une autre table et construit la jointure dessus
  *         - liste (table, champ, fonction) idem, mais en passant un
  *           nom de fonction qui s'occupera de créer la jointure.
+ *
  * @return array
- *     Liste (nom du champ alias, nom du champ). Le nom du champ alias
- *     est une expression pour le SELECT de la boucle du style "mots.titre AS titre_mot"
+ *               Liste (nom du champ alias, nom du champ). Le nom du champ alias
+ *               est une expression pour le SELECT de la boucle du style "mots.titre AS titre_mot"
  **/
-function index_exception(&$boucle, $desc, $nom_champ, $excep) {
-	static $trouver_table;
-	if (!$trouver_table) {
-		$trouver_table = charger_fonction('trouver_table', 'base');
-	}
+function index_exception(&$boucle, $desc, $nom_champ, $excep)
+{
+    static $trouver_table;
+    if (!$trouver_table) {
+        $trouver_table = charger_fonction('trouver_table', 'base');
+    }
 
-	if (is_array($excep)) {
-		// permettre aux plugins de gerer eux meme des jointures derogatoire ingerables
-		$t = null;
-		if (count($excep) == 3) {
-			$index_exception_derogatoire = array_pop($excep);
-			$t = $index_exception_derogatoire($boucle, $desc, $nom_champ, $excep);
-		}
-		if ($t == null) {
-			list($e, $x) = $excep;  #PHP4 affecte de gauche a droite
-			$excep = $x;    #PHP5 de droite a gauche !
-			$j = $trouver_table($e, $boucle->sql_serveur);
-			if (!$j) {
-				return array('', '');
-			}
-			$e = $j['table'];
-			if (!$t = array_search($e, $boucle->from)) {
-				$k = $j['key']['PRIMARY KEY'];
-				if (strpos($k, ',')) {
-					$l = (preg_split('/\s*,\s*/', $k));
-					$k = $desc['key']['PRIMARY KEY'];
-					if (!in_array($k, $l)) {
-						spip_log("jointure impossible $e " . join(',', $l));
+    if (is_array($excep)) {
+        // permettre aux plugins de gerer eux meme des jointures derogatoire ingerables
+        $t = null;
+        if (count($excep) == 3) {
+            $index_exception_derogatoire = array_pop($excep);
+            $t = $index_exception_derogatoire($boucle, $desc, $nom_champ, $excep);
+        }
+        if ($t == null) {
+            list($e, $x) = $excep;  #PHP4 affecte de gauche a droite
+            $excep = $x;    #PHP5 de droite a gauche !
+            $j = $trouver_table($e, $boucle->sql_serveur);
+            if (!$j) {
+                return array('', '');
+            }
+            $e = $j['table'];
+            if (!$t = array_search($e, $boucle->from)) {
+                $k = $j['key']['PRIMARY KEY'];
+                if (strpos($k, ',')) {
+                    $l = (preg_split('/\s*,\s*/', $k));
+                    $k = $desc['key']['PRIMARY KEY'];
+                    if (!in_array($k, $l)) {
+                        spip_log("jointure impossible $e ".implode(',', $l));
 
-						return array('', '');
-					}
-				}
-				$k = array($boucle->id_table, array($e), $k);
-				fabrique_jointures($boucle, array($k));
-				$t = array_search($e, $boucle->from);
-			}
-		}
-	} else {
-		$t = $boucle->id_table;
-	}
-	// demander a SQL de gerer le synonyme
-	// ca permet que excep soit dynamique (Cedric, 2/3/06)
-	if ($excep != $nom_champ) {
-		$excep .= ' AS ' . $nom_champ;
-	}
+                        return array('', '');
+                    }
+                }
+                $k = array($boucle->id_table, array($e), $k);
+                fabrique_jointures($boucle, array($k));
+                $t = array_search($e, $boucle->from);
+            }
+        }
+    } else {
+        $t = $boucle->id_table;
+    }
+    // demander a SQL de gerer le synonyme
+    // ca permet que excep soit dynamique (Cedric, 2/3/06)
+    if ($excep != $nom_champ) {
+        $excep .= ' AS '.$nom_champ;
+    }
 
-	return array("$t.$excep", $nom_champ);
+    return array("$t.$excep", $nom_champ);
 }
 
 /**
- * Demande le champ '$champ' dans la pile
+ * Demande le champ '$champ' dans la pile.
  *
  * Le champ est cherché dans l'empilement de boucles, sinon dans la valeur
  * par défaut (qui est l'environnement du squelette si on ne la précise pas).
  *
  * @api
- * @param string $champ
- *     Champ recherché
- * @param Champ $p
- *     AST au niveau de la balise
+ *
+ * @param string      $champ
+ *                                  Champ recherché
+ * @param Champ       $p
+ *                                  AST au niveau de la balise
  * @param null|string $defaut
- *     Code de la valeur par défaut si on ne trouve pas le champ dans une
- *     des boucles parentes. Sans précision, il sera pris dans l'environnement
- *     du squelette.
- *     Passer $defaut = '' pour ne pas prendre l'environnement.
- * @param bool $remonte_pile
- *     Permettre de remonter dans la pile des boucles pour trouver le champ
+ *                                  Code de la valeur par défaut si on ne trouve pas le champ dans une
+ *                                  des boucles parentes. Sans précision, il sera pris dans l'environnement
+ *                                  du squelette.
+ *                                  Passer $defaut = '' pour ne pas prendre l'environnement.
+ * @param bool        $remonte_pile
+ *                                  Permettre de remonter dans la pile des boucles pour trouver le champ
+ *
  * @return string
- *     Code PHP pour retrouver le champ
+ *                Code PHP pour retrouver le champ
  */
-function champ_sql($champ, $p, $defaut = null, $remonte_pile = true) {
-	return index_pile($p->id_boucle, $champ, $p->boucles, $p->nom_boucle, $defaut, $remonte_pile);
+function champ_sql($champ, $p, $defaut = null, $remonte_pile = true)
+{
+    return index_pile($p->id_boucle, $champ, $p->boucles, $p->nom_boucle, $defaut, $remonte_pile);
 }
 
-
 /**
- * Calcule et retourne le code PHP d'exécution d'une balise SPIP et des ses filtres
+ * Calcule et retourne le code PHP d'exécution d'une balise SPIP et des ses filtres.
  *
  * Cette fonction qui sert d'API au compilateur demande à calculer
  * le code PHP d'une balise, puis lui applique les filtres (automatiques
@@ -383,19 +388,20 @@ function champ_sql($champ, $p, $defaut = null, $remonte_pile = true) {
  * @uses applique_filtres()
  *
  * @param Champ $p
- *     AST au niveau de la balise
+ *                 AST au niveau de la balise
+ *
  * @return string
- *     Code PHP pour d'exécution de la balise et de ses filtres
+ *                Code PHP pour d'exécution de la balise et de ses filtres
  **/
-function calculer_champ($p) {
-	$p = calculer_balise($p->nom_champ, $p);
+function calculer_champ($p)
+{
+    $p = calculer_balise($p->nom_champ, $p);
 
-	return applique_filtres($p);
+    return applique_filtres($p);
 }
 
-
 /**
- * Calcule et retourne le code PHP d'exécution d'une balise SPIP
+ * Calcule et retourne le code PHP d'exécution d'une balise SPIP.
  *
  * Cette fonction qui sert d'API au compilateur demande à calculer
  * le code PHP d'une balise (cette fonction ne calcule pas les éventuels
@@ -415,45 +421,47 @@ function calculer_champ($p) {
  *
  * @uses calculer_balise_DEFAUT_dist()
  *     Lorsqu'aucune fonction spécifique n'est trouvée.
+ *
  * @see  charger_fonction()
  *     Pour la recherche des fonctions de balises
  *
  * @param string $nom
- *     Nom de la balise
- * @param Champ $p
- *     AST au niveau de la balise
+ *                    Nom de la balise
+ * @param Champ  $p
+ *                    AST au niveau de la balise
+ *
  * @return Champ
- *     Pile complétée par le code PHP pour l'exécution de la balise et de ses filtres
+ *               Pile complétée par le code PHP pour l'exécution de la balise et de ses filtres
  **/
-function calculer_balise($nom, $p) {
+function calculer_balise($nom, $p)
+{
 
-	// S'agit-t-il d'une balise_XXXX[_dist]() ?
-	if ($f = charger_fonction($nom, 'balise', true)) {
-		$p->balise_calculee = true;
-		$res = $f($p);
-		if ($res !== null AND is_object($res)) {
-			return $res;
-		}
-	}
+    // S'agit-t-il d'une balise_XXXX[_dist]() ?
+    if ($f = charger_fonction($nom, 'balise', true)) {
+        $p->balise_calculee = true;
+        $res = $f($p);
+        if ($res !== null and is_object($res)) {
+            return $res;
+        }
+    }
 
-	// Certaines des balises comportant un _ sont generiques
-	if ($f = strpos($nom, '_')
-		AND $f = charger_fonction(substr($nom, 0, $f+1), 'balise', true)
-	) {
-		$res = $f($p);
-		if ($res !== null AND is_object($res)) {
-			return $res;
-		}
-	}
+    // Certaines des balises comportant un _ sont generiques
+    if ($f = strpos($nom, '_')
+        and $f = charger_fonction(substr($nom, 0, $f + 1), 'balise', true)
+    ) {
+        $res = $f($p);
+        if ($res !== null and is_object($res)) {
+            return $res;
+        }
+    }
 
-	$f = charger_fonction('DEFAUT', 'calculer_balise');
+    $f = charger_fonction('DEFAUT', 'calculer_balise');
 
-	return $f($nom, $p);
+    return $f($nom, $p);
 }
 
-
 /**
- * Calcule et retourne le code PHP d'exécution d'une balise SPIP non déclarée
+ * Calcule et retourne le code PHP d'exécution d'une balise SPIP non déclarée.
  *
  * Cette fonction demande à calculer le code PHP d'une balise qui
  * n'a pas de fonction spécifique.
@@ -468,55 +476,55 @@ function calculer_balise($nom, $p) {
  *     et qu'aucun champ correspondant n'a été trouvé, comme `#CCAABB`
  *
  * @param string $nom
- *     Nom de la balise
- * @param Champ $p
- *     AST au niveau de la balise
+ *                    Nom de la balise
+ * @param Champ  $p
+ *                    AST au niveau de la balise
+ *
  * @return string
- *     Code PHP pour d'exécution de la balise et de ses filtres
+ *                Code PHP pour d'exécution de la balise et de ses filtres
  **/
-function calculer_balise_DEFAUT_dist($nom, $p) {
+function calculer_balise_DEFAUT_dist($nom, $p)
+{
 
-	// ca pourrait etre un champ SQL homonyme,
-	$p->code = index_pile($p->id_boucle, $nom, $p->boucles, $p->nom_boucle);
+    // ca pourrait etre un champ SQL homonyme,
+    $p->code = index_pile($p->id_boucle, $nom, $p->boucles, $p->nom_boucle);
 
-	// compatibilite: depuis qu'on accepte #BALISE{ses_args} sans [(...)] autour
-	// il faut recracher {...} quand ce n'est finalement pas des args
-	if ($p->fonctions AND (!$p->fonctions[0][0]) AND $p->fonctions[0][1]) {
-		$code = addslashes($p->fonctions[0][1]);
-		$p->code .= " . '$code'";
-	}
+    // compatibilite: depuis qu'on accepte #BALISE{ses_args} sans [(...)] autour
+    // il faut recracher {...} quand ce n'est finalement pas des args
+    if ($p->fonctions and (!$p->fonctions[0][0]) and $p->fonctions[0][1]) {
+        $code = addslashes($p->fonctions[0][1]);
+        $p->code .= " . '$code'";
+    }
 
-	// ne pas passer le filtre securite sur les id_xxx
-	if (strpos($nom, 'ID_') === 0) {
-		$p->interdire_scripts = false;
-	}
+    // ne pas passer le filtre securite sur les id_xxx
+    if (strpos($nom, 'ID_') === 0) {
+        $p->interdire_scripts = false;
+    }
 
-	// Compatibilite ascendante avec les couleurs html (#FEFEFE) :
-	// SI le champ SQL n'est pas trouve
-	// ET si la balise a une forme de couleur
-	// ET s'il n'y a ni filtre ni etoile
-	// ALORS retourner la couleur.
-	// Ca permet si l'on veut vraiment de recuperer [(#ACCEDE*)]
-	if (preg_match("/^[A-F]{1,6}$/i", $nom)
-		AND !$p->etoile
-		AND !$p->fonctions
-	) {
-		$p->code = "'#$nom'";
-		$p->interdire_scripts = false;
-	}
+    // Compatibilite ascendante avec les couleurs html (#FEFEFE) :
+    // SI le champ SQL n'est pas trouve
+    // ET si la balise a une forme de couleur
+    // ET s'il n'y a ni filtre ni etoile
+    // ALORS retourner la couleur.
+    // Ca permet si l'on veut vraiment de recuperer [(#ACCEDE*)]
+    if (preg_match('/^[A-F]{1,6}$/i', $nom)
+        and !$p->etoile
+        and !$p->fonctions
+    ) {
+        $p->code = "'#$nom'";
+        $p->interdire_scripts = false;
+    }
 
-	return $p;
+    return $p;
 }
 
-
-/** Code PHP d'exécution d'une balise dynamique */
+/* Code PHP d'exécution d'une balise dynamique */
 define('CODE_EXECUTER_BALISE', "executer_balise_dynamique('%s',
 	array(%s%s),
 	array(%s%s))");
 
-
 /**
- * Calcule le code PHP d'exécution d'une balise SPIP dynamique
+ * Calcule le code PHP d'exécution d'une balise SPIP dynamique.
  *
  * Calcule les balises dynamiques, notamment les `formulaire_*`.
  *
@@ -532,54 +540,56 @@ define('CODE_EXECUTER_BALISE', "executer_balise_dynamique('%s',
  *
  * @uses collecter_balise_dynamique()
  *     Qui calcule le code d'exécution de chaque argument de la balise
+ *
  * @see  executer_balise_dynamique()
  *     Code PHP produit qui chargera les fonctions de la balise dynamique à l'exécution,
  *     appelée avec les arguments calculés.
- * @param Champ $p
- *     AST au niveau de la balise
+ *
+ * @param Champ  $p
+ *                     AST au niveau de la balise
  * @param string $nom
- *     Nom de la balise dynamique
- * @param array $l
- *     Liste des noms d'arguments (balises) à collecter
- * @param array $supp
- *     Liste de données supplémentaires à transmettre au code d'exécution.
+ *                     Nom de la balise dynamique
+ * @param array  $l
+ *                     Liste des noms d'arguments (balises) à collecter
+ * @param array  $supp
+ *                     Liste de données supplémentaires à transmettre au code d'exécution.
+ *
  * @return Champ
- *     Balise complétée de son code d'exécution
+ *               Balise complétée de son code d'exécution
  **/
-function calculer_balise_dynamique($p, $nom, $l, $supp = array()) {
+function calculer_balise_dynamique($p, $nom, $l, $supp = array())
+{
+    if (!balise_distante_interdite($p)) {
+        $p->code = "''";
 
-	if (!balise_distante_interdite($p)) {
-		$p->code = "''";
+        return $p;
+    }
+    // compatibilite: depuis qu'on accepte #BALISE{ses_args} sans [(...)] autour
+    // il faut recracher {...} quand ce n'est finalement pas des args
+    if ($p->fonctions and (!$p->fonctions[0][0]) and $p->fonctions[0][1]) {
+        $p->fonctions = null;
+    }
 
-		return $p;
-	}
-	// compatibilite: depuis qu'on accepte #BALISE{ses_args} sans [(...)] autour
-	// il faut recracher {...} quand ce n'est finalement pas des args
-	if ($p->fonctions AND (!$p->fonctions[0][0]) AND $p->fonctions[0][1]) {
-		$p->fonctions = null;
-	}
+    if ($p->param and ($c = $p->param[0])) {
+        // liste d'arguments commence toujours par la chaine vide
+        array_shift($c);
+        // construire la liste d'arguments comme pour un filtre
+        $param = compose_filtres_args($p, $c, ',');
+    } else {
+        $param = '';
+    }
+    $collecte = collecter_balise_dynamique($l, $p, $nom);
 
-	if ($p->param AND ($c = $p->param[0])) {
-		// liste d'arguments commence toujours par la chaine vide
-		array_shift($c);
-		// construire la liste d'arguments comme pour un filtre
-		$param = compose_filtres_args($p, $c, ',');
-	} else {
-		$param = "";
-	}
-	$collecte = collecter_balise_dynamique($l, $p, $nom);
+    $p->code = sprintf(CODE_EXECUTER_BALISE, $nom,
+        implode(',', $collecte),
+        ($collecte ? $param : substr($param, 1)), # virer la virgule
+        memoriser_contexte_compil($p),
+        (!$supp ? '' : (', '.implode(',', $supp))));
 
-	$p->code = sprintf(CODE_EXECUTER_BALISE, $nom,
-		join(',', $collecte),
-		($collecte ? $param : substr($param, 1)), # virer la virgule
-		memoriser_contexte_compil($p),
-		(!$supp ? '' : (', ' . join(',', $supp))));
+    $p->interdire_scripts = false;
 
-	$p->interdire_scripts = false;
-
-	return $p;
+    return $p;
 }
-
 
 /**
  * Construction du tableau des arguments d'une balise dynamique.
@@ -596,57 +606,59 @@ function calculer_balise_dynamique($p, $nom, $l, $supp = array()) {
  * @uses calculer_balise()
  *     Pour obtenir le code d'éxécution de chaque argument.
  *
- * @param array $l
- *     Liste des noms d'arguments (balises) à collecter (chaque argument
- *     de la balise dynamique est considéré comme étant un nom de balise)
- * @param Champ $p
- *     AST au niveau de la balise
+ * @param array  $l
+ *                    Liste des noms d'arguments (balises) à collecter (chaque argument
+ *                    de la balise dynamique est considéré comme étant un nom de balise)
+ * @param Champ  $p
+ *                    AST au niveau de la balise
  * @param string $nom
- *     Nom de la balise
+ *                    Nom de la balise
+ *
  * @return array
- *     Liste des codes PHP d'éxecution des balises collectées
+ *               Liste des codes PHP d'éxecution des balises collectées
  **/
-function collecter_balise_dynamique($l, &$p, $nom) {
-	$args = array();
-	foreach ($l as $c) {
-		$x = calculer_balise($c, $p);
-		$args[] = $x->code;
-	}
+function collecter_balise_dynamique($l, &$p, $nom)
+{
+    $args = array();
+    foreach ($l as $c) {
+        $x = calculer_balise($c, $p);
+        $args[] = $x->code;
+    }
 
-	return $args;
+    return $args;
 }
 
-
 /**
- * Récuperer le nom du serveur
+ * Récuperer le nom du serveur.
  *
  * Mais pas si c'est un serveur spécifique dérogatoire
  *
  * @param Champ $p
- *     AST positionné sur la balise
+ *                 AST positionné sur la balise
+ *
  * @return string
- *     Nom de la connexion
+ *                Nom de la connexion
  **/
-function trouver_nom_serveur_distant($p) {
-	$nom = $p->id_boucle;
-	if ($nom
-		AND isset($p->boucles[$nom])
-	) {
-		$s = $p->boucles[$nom]->sql_serveur;
-		if (strlen($s)
-			AND strlen($serveur = strtolower($s))
-			AND !in_array($serveur, $GLOBALS['exception_des_connect'])
-		) {
-			return $serveur;
-		}
-	}
+function trouver_nom_serveur_distant($p)
+{
+    $nom = $p->id_boucle;
+    if ($nom
+        and isset($p->boucles[$nom])
+    ) {
+        $s = $p->boucles[$nom]->sql_serveur;
+        if (strlen($s)
+            and strlen($serveur = strtolower($s))
+            and !in_array($serveur, $GLOBALS['exception_des_connect'])
+        ) {
+            return $serveur;
+        }
+    }
 
-	return "";
+    return '';
 }
 
-
 /**
- * Teste si une balise est appliquée sur une base distante
+ * Teste si une balise est appliquée sur une base distante.
  *
  * La fonction loge une erreur si la balise est utilisée sur une
  * base distante et retourne false dans ce cas.
@@ -658,95 +670,95 @@ function trouver_nom_serveur_distant($p) {
  *     sur quelque-chose qui n'a rien a voir.
  *
  * @param Champ $p
- *     AST positionné sur la balise
+ *                 AST positionné sur la balise
+ *
  * @return bool
  *
  *     - true : La balise est autorisée
  *     - false : La balise est interdite car le serveur est distant
  **/
-function balise_distante_interdite($p) {
-	$nom = $p->id_boucle;
+function balise_distante_interdite($p)
+{
+    $nom = $p->id_boucle;
 
-	if ($nom AND trouver_nom_serveur_distant($p)) {
-		spip_log($nom . ':' . $p->nom_champ . ' ' . _T('zbug_distant_interdit'));
+    if ($nom and trouver_nom_serveur_distant($p)) {
+        spip_log($nom.':'.$p->nom_champ.' '._T('zbug_distant_interdit'));
 
-		return false;
-	}
+        return false;
+    }
 
-	return true;
+    return true;
 }
-
 
 //
 // Traitements standard de divers champs
 // definis par $table_des_traitements, cf. ecrire/public/interfaces
 //
 // http://code.spip.net/@champs_traitements
-function champs_traitements($p) {
+function champs_traitements($p)
+{
+    if (isset($GLOBALS['table_des_traitements'][$p->nom_champ])) {
+        $ps = $GLOBALS['table_des_traitements'][$p->nom_champ];
+    } else {
+        // quand on utilise un traitement catch-all *
+        // celui-ci ne s'applique pas sur les balises calculees qui peuvent gerer
+        // leur propre securite
+        if (!$p->balise_calculee) {
+            $ps = $GLOBALS['table_des_traitements']['*'];
+        } else {
+            $ps = false;
+        }
+    }
 
-	if (isset($GLOBALS['table_des_traitements'][$p->nom_champ])) {
-		$ps = $GLOBALS['table_des_traitements'][$p->nom_champ];
-	} else {
-		// quand on utilise un traitement catch-all *
-		// celui-ci ne s'applique pas sur les balises calculees qui peuvent gerer
-		// leur propre securite
-		if (!$p->balise_calculee) {
-			$ps = $GLOBALS['table_des_traitements']['*'];
-		} else {
-			$ps = false;
-		}
-	}
+    if (is_array($ps)) {
+        // Recuperer le type de boucle (articles, DATA) et la table SQL sur laquelle elle porte
+        $idb = index_boucle($p);
+        // mais on peut aussi etre hors boucle. Se mefier.
+        $type_requete = isset($p->boucles[$idb]->type_requete) ? $p->boucles[$idb]->type_requete : false;
+        $table_sql = isset($p->boucles[$idb]->show['table_sql']) ? $p->boucles[$idb]->show['table_sql'] : false;
 
-	if (is_array($ps)) {
-		// Recuperer le type de boucle (articles, DATA) et la table SQL sur laquelle elle porte
-		$idb = index_boucle($p);
-		// mais on peut aussi etre hors boucle. Se mefier.
-		$type_requete = isset($p->boucles[$idb]->type_requete) ? $p->boucles[$idb]->type_requete : false;
-		$table_sql = isset($p->boucles[$idb]->show['table_sql']) ? $p->boucles[$idb]->show['table_sql'] : false;
+        // le traitement peut n'etre defini que pour une table en particulier "spip_articles"
+        if ($table_sql and isset($ps[$table_sql])) {
+            $ps = $ps[$table_sql];
+        } // ou pour une boucle en particulier "DATA","articles"
+        elseif ($type_requete and isset($ps[$type_requete])) {
+            $ps = $ps[$type_requete];
+        } // ou pour indiferrement quelle que soit la boucle
+        elseif (isset($ps[0])) {
+            $ps = $ps[0];
+        } else {
+            $ps = false;
+        }
+    }
 
-		// le traitement peut n'etre defini que pour une table en particulier "spip_articles"
-		if ($table_sql AND isset($ps[$table_sql])) {
-			$ps = $ps[$table_sql];
-		} // ou pour une boucle en particulier "DATA","articles"
-		elseif ($type_requete AND isset($ps[$type_requete])) {
-			$ps = $ps[$type_requete];
-		} // ou pour indiferrement quelle que soit la boucle
-		elseif (isset($ps[0])) {
-			$ps = $ps[0];
-		} else {
-			$ps = false;
-		}
-	}
+    if (!$ps) {
+        return $p->code;
+    }
 
-	if (!$ps) {
-		return $p->code;
-	}
+    // Si une boucle DOCUMENTS{doublons} est presente dans le squelette,
+    // ou si in INCLURE contient {doublons}
+    // on insere une fonction de remplissage du tableau des doublons 
+    // dans les filtres propre() ou typo()
+    // (qui traitent les raccourcis <docXX> referencant les docs)
 
-	// Si une boucle DOCUMENTS{doublons} est presente dans le squelette,
-	// ou si in INCLURE contient {doublons}
-	// on insere une fonction de remplissage du tableau des doublons 
-	// dans les filtres propre() ou typo()
-	// (qui traitent les raccourcis <docXX> referencant les docs)
+    if (isset($p->descr['documents'])
+        and
+        $p->descr['documents']
+        and (
+            (strpos($ps, 'propre') !== false)
+            or
+            (strpos($ps, 'typo') !== false)
+        )
+    ) {
+        $ps = 'traiter_doublons_documents($doublons, '.$ps.')';
+    }
 
-	if (isset($p->descr['documents'])
-		AND
-		$p->descr['documents']
-		AND (
-			(strpos($ps, 'propre') !== false)
-			OR
-			(strpos($ps, 'typo') !== false)
-		)
-	) {
-		$ps = 'traiter_doublons_documents($doublons, ' . $ps . ')';
-	}
+    // La protection des champs par |safehtml est assuree par les extensions
+    // dans la declaration des traitements des champs sensibles
 
-	// La protection des champs par |safehtml est assuree par les extensions
-	// dans la declaration des traitements des champs sensibles
-
-	// Remplacer enfin le placeholder %s par le vrai code de la balise
-	return str_replace('%s', $p->code, $ps);
+    // Remplacer enfin le placeholder %s par le vrai code de la balise
+    return str_replace('%s', $p->code, $ps);
 }
-
 
 //
 // Appliquer les filtres a un champ [(#CHAMP|filtre1|filtre2)]
@@ -755,113 +767,114 @@ function champs_traitements($p) {
 //  - deux etoiles => pas de securite non plus !
 //
 // http://code.spip.net/@applique_filtres
-function applique_filtres($p) {
+function applique_filtres($p)
+{
 
-	// Traitements standards (cf. supra)
-	if ($p->etoile == '') {
-		$code = champs_traitements($p);
-	} else {
-		$code = $p->code;
-	}
+    // Traitements standards (cf. supra)
+    if ($p->etoile == '') {
+        $code = champs_traitements($p);
+    } else {
+        $code = $p->code;
+    }
 
-	// Appliquer les filtres perso
-	if ($p->param) {
-		$code = compose_filtres($p, $code);
-	}
+    // Appliquer les filtres perso
+    if ($p->param) {
+        $code = compose_filtres($p, $code);
+    }
 
-	// S'il y a un lien avec la session, ajouter un code qui levera
-	// un drapeau dans la structure d'invalidation $Cache
-	if (isset($p->descr['session'])) {
-		$code = "invalideur_session(\$Cache, $code)";
-	}
+    // S'il y a un lien avec la session, ajouter un code qui levera
+    // un drapeau dans la structure d'invalidation $Cache
+    if (isset($p->descr['session'])) {
+        $code = "invalideur_session(\$Cache, $code)";
+    }
 
-	$code = sandbox_composer_interdire_scripts($code, $p);
+    $code = sandbox_composer_interdire_scripts($code, $p);
 
-	return $code;
+    return $code;
 }
 
 // Cf. function pipeline dans ecrire/inc_utils.php
 // http://code.spip.net/@compose_filtres
-function compose_filtres(&$p, $code) {
+function compose_filtres(&$p, $code)
+{
+    $image_miette = false;
+    foreach ($p->param as $filtre) {
+        $fonc = array_shift($filtre);
+        if (!$fonc) {
+            continue;
+        } // normalement qu'au premier tour.
+        $is_filtre_image = ((substr($fonc, 0, 6) == 'image_') and $fonc != 'image_graver');
+        if ($image_miette and !$is_filtre_image) {
+            // il faut graver maintenant car apres le filtre en cours
+            // on est pas sur d'avoir encore le nom du fichier dans le pipe
+            $code = "filtrer('image_graver', $code)";
+            $image_miette = false;
+        }
+        // recuperer les arguments du filtre, 
+        // a separer par "," ou ":" dans le cas du filtre "?{a,b}"
+        if ($fonc !== '?') {
+            $sep = ',';
+        } else {
+            $sep = ':';
+            // |?{a,b} *doit* avoir exactement 2 arguments ; on les force
+            if (count($filtre) != 2) {
+                $filtre = array(isset($filtre[0]) ? $filtre[0] : '', isset($filtre[1]) ? $filtre[1] : '');
+            }
+        }
+        $arglist = compose_filtres_args($p, $filtre, $sep);
+        $logique = filtre_logique($fonc, $code, substr($arglist, 1));
+        if ($logique) {
+            $code = $logique;
+        } else {
+            $code = sandbox_composer_filtre($fonc, $code, $arglist, $p);
+            if ($is_filtre_image) {
+                $image_miette = true;
+            }
+        }
+    }
+    // ramasser les images intermediaires inutiles et graver l'image finale
+    if ($image_miette) {
+        $code = "filtrer('image_graver',$code)";
+    }
 
-	$image_miette = false;
-	foreach ($p->param as $filtre) {
-		$fonc = array_shift($filtre);
-		if (!$fonc) {
-			continue;
-		} // normalement qu'au premier tour.
-		$is_filtre_image = ((substr($fonc, 0, 6) == 'image_') AND $fonc != 'image_graver');
-		if ($image_miette AND !$is_filtre_image) {
-			// il faut graver maintenant car apres le filtre en cours
-			// on est pas sur d'avoir encore le nom du fichier dans le pipe
-			$code = "filtrer('image_graver', $code)";
-			$image_miette = false;
-		}
-		// recuperer les arguments du filtre, 
-		// a separer par "," ou ":" dans le cas du filtre "?{a,b}"
-		if ($fonc !== '?') {
-			$sep = ',';
-		} else {
-			$sep = ':';
-			// |?{a,b} *doit* avoir exactement 2 arguments ; on les force
-			if (count($filtre) != 2) {
-				$filtre = array(isset($filtre[0]) ? $filtre[0] : "", isset($filtre[1]) ? $filtre[1] : "");
-			}
-		}
-		$arglist = compose_filtres_args($p, $filtre, $sep);
-		$logique = filtre_logique($fonc, $code, substr($arglist, 1));
-		if ($logique) {
-			$code = $logique;
-		} else {
-			$code = sandbox_composer_filtre($fonc, $code, $arglist, $p);
-			if ($is_filtre_image) {
-				$image_miette = true;
-			}
-		}
-	}
-	// ramasser les images intermediaires inutiles et graver l'image finale
-	if ($image_miette) {
-		$code = "filtrer('image_graver',$code)";
-	}
-
-	return $code;
+    return $code;
 }
 
 // Filtres et,ou,oui,non,sinon,xou,xor,and,or,not,yes
 // et comparateurs
-function filtre_logique($fonc, $code, $arg) {
+function filtre_logique($fonc, $code, $arg)
+{
+    switch (true) {
+        case in_array($fonc, $GLOBALS['table_criteres_infixes']):
+            return "($code $fonc $arg)";
+        case ($fonc == 'and') or ($fonc == 'et'):
+            return "((($code) AND ($arg)) ?' ' :'')";
+        case ($fonc == 'or') or ($fonc == 'ou'):
+            return "((($code) OR ($arg)) ?' ' :'')";
+        case ($fonc == 'xor') or ($fonc == 'xou'):
+            return "((($code) XOR ($arg)) ?' ' :'')";
+        case $fonc == 'sinon':
+            return "(((\$a = $code) OR (is_string(\$a) AND strlen(\$a))) ? \$a : $arg)";
+        case ($fonc == 'not') or ($fonc == 'non'):
+            return "(($code) ?'' :' ')";
+        case ($fonc == 'yes') or ($fonc == 'oui'):
+            return "(($code) ?' ' :'')";
+    }
 
-	switch (true) {
-		case in_array($fonc, $GLOBALS['table_criteres_infixes']):
-			return "($code $fonc $arg)";
-		case ($fonc == 'and') OR ($fonc == 'et'):
-			return "((($code) AND ($arg)) ?' ' :'')";
-		case ($fonc == 'or') OR ($fonc == 'ou'):
-			return "((($code) OR ($arg)) ?' ' :'')";
-		case ($fonc == 'xor') OR ($fonc == 'xou'):
-			return "((($code) XOR ($arg)) ?' ' :'')";
-		case ($fonc == 'sinon'):
-			return "(((\$a = $code) OR (is_string(\$a) AND strlen(\$a))) ? \$a : $arg)";
-		case ($fonc == 'not') OR ($fonc == 'non'):
-			return "(($code) ?'' :' ')";
-		case ($fonc == 'yes') OR ($fonc == 'oui'):
-			return "(($code) ?' ' :'')";
-	}
-
-	return '';
+    return '';
 }
 
 // http://code.spip.net/@compose_filtres_args
-function compose_filtres_args($p, $args, $sep) {
-	$arglist = "";
-	foreach ($args as $arg) {
-		$arglist .= $sep .
-			calculer_liste($arg, $p->descr, $p->boucles, $p->id_boucle);
-	}
+function compose_filtres_args($p, $args, $sep)
+{
+    $arglist = '';
+    foreach ($args as $arg) {
+        $arglist .= $sep.
+            calculer_liste($arg, $p->descr, $p->boucles, $p->id_boucle);
+    }
 
-	return $arglist;
+    return $arglist;
 }
-
 
 /**
  * Réserve les champs necessaires à la comparaison avec le contexte donné par
@@ -869,23 +882,25 @@ function compose_filtres_args($p, $args, $sep) {
  *
  * Attention en recursif il faut les réserver chez soi-même ET chez sa maman
  *
- * @param string $idb Identifiant de la boucle
- * @param string $nom_champ
- * @param array $boucles AST du squelette
+ * @param string      $idb       Identifiant de la boucle
+ * @param string      $nom_champ
+ * @param array       $boucles   AST du squelette
  * @param null|string $defaut
+ *
  * @return
  **/
-function calculer_argument_precedent($idb, $nom_champ, &$boucles, $defaut = null) {
+function calculer_argument_precedent($idb, $nom_champ, &$boucles, $defaut = null)
+{
 
-	// si recursif, forcer l'extraction du champ SQL mais ignorer le code
-	if ($boucles[$idb]->externe) {
-		index_pile($idb, $nom_champ, $boucles, '', $defaut);
-		// retourner $Pile[$SP] et pas $Pile[0] si recursion en 1ere boucle
-		// on ignore le defaut fourni dans ce cas
-		$defaut = "@\$Pile[\$SP]['$nom_champ']";
-	}
+    // si recursif, forcer l'extraction du champ SQL mais ignorer le code
+    if ($boucles[$idb]->externe) {
+        index_pile($idb, $nom_champ, $boucles, '', $defaut);
+        // retourner $Pile[$SP] et pas $Pile[0] si recursion en 1ere boucle
+        // on ignore le defaut fourni dans ce cas
+        $defaut = "@\$Pile[\$SP]['$nom_champ']";
+    }
 
-	return index_pile($boucles[$idb]->id_parent, $nom_champ, $boucles, '', $defaut);
+    return index_pile($boucles[$idb]->id_parent, $nom_champ, $boucles, '', $defaut);
 }
 
 //
@@ -899,31 +914,30 @@ function calculer_argument_precedent($idb, $nom_champ, &$boucles, $defaut = null
 //
 
 // http://code.spip.net/@rindex_pile
-function rindex_pile($p, $champ, $motif) {
-	$n = 0;
-	$b = $p->id_boucle;
-	$p->code = '';
-	while ($b != '') {
-		foreach ($p->boucles[$b]->criteres as $critere) {
-			if ($critere->op == $motif) {
-				$p->code = '$Pile[$SP' . (($n == 0) ? "" : "-$n") .
-					"]['$champ']";
-				$b = '';
-				break 2;
-			}
-		}
-		$n++;
-		$b = $p->boucles[$b]->id_parent;
-	}
+function rindex_pile($p, $champ, $motif)
+{
+    $n = 0;
+    $b = $p->id_boucle;
+    $p->code = '';
+    while ($b != '') {
+        foreach ($p->boucles[$b]->criteres as $critere) {
+            if ($critere->op == $motif) {
+                $p->code = '$Pile[$SP'.(($n == 0) ? '' : "-$n").
+                    "]['$champ']";
+                $b = '';
+                break 2;
+            }
+        }
+        ++$n;
+        $b = $p->boucles[$b]->id_parent;
+    }
 
-	// si on est hors d'une boucle de {recherche}, cette balise est vide
-	if (!$p->code) {
-		$p->code = "''";
-	}
+    // si on est hors d'une boucle de {recherche}, cette balise est vide
+    if (!$p->code) {
+        $p->code = "''";
+    }
 
-	$p->interdire_scripts = false;
+    $p->interdire_scripts = false;
 
-	return $p;
+    return $p;
 }
-
-?>

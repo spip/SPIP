@@ -11,50 +11,50 @@
 \***************************************************************************/
 
 /**
- * Gestion de l'itérateur CONDITION
- *
- * @package SPIP\Core\Iterateur\CONDITION
+ * Gestion de l'itérateur CONDITION.
  **/
-
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 include_spip('iterateur/data');
 
-
 /**
- * Créer une boucle sur un itérateur CONDITION
+ * Créer une boucle sur un itérateur CONDITION.
  *
  * Annonce au compilateur les "champs" disponibles,
  * c'est à dire aucun. Une boucle CONDITION n'a pas de données !
  *
  * @param Boucle $b
- *     Description de la boucle
+ *                  Description de la boucle
+ *
  * @return Boucle
- *     Description de la boucle complétée des champs
+ *                Description de la boucle complétée des champs
  */
-function iterateur_CONDITION_dist($b) {
-	$b->iterateur = 'CONDITION'; # designe la classe d'iterateur
-	$b->show = array(
-		'field' => array()
-	);
+function iterateur_CONDITION_dist($b)
+{
+    $b->iterateur = 'CONDITION'; # designe la classe d'iterateur
+    $b->show = array(
+        'field' => array(),
+    );
 
-	return $b;
+    return $b;
 }
 
 /**
- * Iterateur CONDITION pour itérer sur des données
+ * Iterateur CONDITION pour itérer sur des données.
  *
  * La boucle condition n'a toujours qu'un seul élément.
  */
-class IterateurCONDITION extends IterateurData {
-	/**
-	 * Obtenir les données de la boucle CONDITION
-	 *
-	 * @param array $command
-	 **/
-	protected function select($command) {
-		$this->tableau = array(0 => 1);
-	}
+class IterateurCONDITION extends IterateurData
+{
+    /**
+     * Obtenir les données de la boucle CONDITION.
+     *
+     * @param array $command
+     **/
+    protected function select($command)
+    {
+        $this->tableau = array(0 => 1);
+    }
 }

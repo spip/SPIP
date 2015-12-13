@@ -11,17 +11,14 @@
 \***************************************************************************/
 
 /**
- * Gestion de l'activation des plugins
- *
- * @package SPIP\Core\Plugins
+ * Gestion de l'activation des plugins.
  **/
-
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
-/** l'adresse du repertoire de telechargement et de decompactage des plugins */
-define('_DIR_PLUGINS_AUTO', _DIR_PLUGINS . 'auto/');
+/* l'adresse du repertoire de telechargement et de decompactage des plugins */
+define('_DIR_PLUGINS_AUTO', _DIR_PLUGINS.'auto/');
 
 #include_spip('inc/texte'); // ????? Appelle public/parametrer trop tot avant la reconstruction du chemin des plugins.
 include_spip('plugins/installer');
@@ -31,92 +28,95 @@ include_spip('plugins/installer');
 // _DIR_PLUGINS_SUPPL pour aller en chercher ailleurs
 // (chemin relatif a la racine du site)
 // http://code.spip.net/@liste_plugin_files
-function liste_plugin_files($dir_plugins = null) {
-	static $plugin_files = array();
-	if (is_null($dir_plugins)) {
-		$dir_plugins = _DIR_PLUGINS;
-	}
-	if (!isset($plugin_files[$dir_plugins])
-		OR count($plugin_files[$dir_plugins]) == 0
-	) {
-		$plugin_files[$dir_plugins] = array();
-		foreach (fast_find_plugin_dirs($dir_plugins) as $plugin) {
-			$plugin_files[$dir_plugins][] = substr($plugin, strlen($dir_plugins));
-		}
+function liste_plugin_files($dir_plugins = null)
+{
+    static $plugin_files = array();
+    if (is_null($dir_plugins)) {
+        $dir_plugins = _DIR_PLUGINS;
+    }
+    if (!isset($plugin_files[$dir_plugins])
+        or count($plugin_files[$dir_plugins]) == 0
+    ) {
+        $plugin_files[$dir_plugins] = array();
+        foreach (fast_find_plugin_dirs($dir_plugins) as $plugin) {
+            $plugin_files[$dir_plugins][] = substr($plugin, strlen($dir_plugins));
+        }
 
-		sort($plugin_files[$dir_plugins]);
-		// et on lit le XML de tous les plugins pour le mettre en cache
-		// et en profiter pour nettoyer ceux qui n'existent plus du cache
-		$get_infos = charger_fonction('get_infos', 'plugins');
-		$get_infos($plugin_files[$dir_plugins], false, $dir_plugins, true);
-	}
+        sort($plugin_files[$dir_plugins]);
+        // et on lit le XML de tous les plugins pour le mettre en cache
+        // et en profiter pour nettoyer ceux qui n'existent plus du cache
+        $get_infos = charger_fonction('get_infos', 'plugins');
+        $get_infos($plugin_files[$dir_plugins], false, $dir_plugins, true);
+    }
 
-	return $plugin_files[$dir_plugins];
+    return $plugin_files[$dir_plugins];
 }
 
-function fast_find_plugin_dirs($dir, $max_prof = 100) {
-	$fichiers = array();
-	// revenir au repertoire racine si on a recu dossier/truc
-	// pour regarder dossier/truc/ ne pas oublier le / final
-	$dir = preg_replace(',/[^/]*$,', '', $dir);
-	if ($dir == '') {
-		$dir = '.';
-	}
+function fast_find_plugin_dirs($dir, $max_prof = 100)
+{
+    $fichiers = array();
+    // revenir au repertoire racine si on a recu dossier/truc
+    // pour regarder dossier/truc/ ne pas oublier le / final
+    $dir = preg_replace(',/[^/]*$,', '', $dir);
+    if ($dir == '') {
+        $dir = '.';
+    }
 
-	if (!is_dir($dir)) {
-		return $fichiers;
-	}
-	if (is_plugin_dir($dir, '')) {
-		$fichiers[] = $dir;
+    if (!is_dir($dir)) {
+        return $fichiers;
+    }
+    if (is_plugin_dir($dir, '')) {
+        $fichiers[] = $dir;
 
-		return $fichiers;
-	}
-	if ($max_prof <= 0) {
-		return $fichiers;
-	}
+        return $fichiers;
+    }
+    if ($max_prof <= 0) {
+        return $fichiers;
+    }
 
-	$subdirs = array();
-	if (@is_dir($dir) AND is_readable($dir) AND $d = @opendir($dir)) {
-		while (($f = readdir($d)) !== false) {
-			if ($f[0] != '.' # ignorer . .. .svn etc
-				AND $f != 'CVS'
-				AND is_dir($f = "$dir/$f")
-			) {
-				$subdirs[] = $f;
-			}
-		}
-		closedir($d);
-	}
+    $subdirs = array();
+    if (@is_dir($dir) and is_readable($dir) and $d = @opendir($dir)) {
+        while (($f = readdir($d)) !== false) {
+            if ($f[0] != '.' # ignorer . .. .svn etc
+                and $f != 'CVS'
+                and is_dir($f = "$dir/$f")
+            ) {
+                $subdirs[] = $f;
+            }
+        }
+        closedir($d);
+    }
 
-	foreach ($subdirs as $d) {
-		$fichiers = array_merge($fichiers, fast_find_plugin_dirs("$d/", $max_prof-1));
-	}
+    foreach ($subdirs as $d) {
+        $fichiers = array_merge($fichiers, fast_find_plugin_dirs("$d/", $max_prof - 1));
+    }
 
-	return $fichiers;
+    return $fichiers;
 }
 
-function is_plugin_dir($dir, $dir_plugins = null) {
-	if (is_array($dir)) {
-		foreach ($dir as $k => $d) {
-			if (!is_plugin_dir($d, $dir_plugins)) {
-				unset($dir[$k]);
-			}
-		}
+function is_plugin_dir($dir, $dir_plugins = null)
+{
+    if (is_array($dir)) {
+        foreach ($dir as $k => $d) {
+            if (!is_plugin_dir($d, $dir_plugins)) {
+                unset($dir[$k]);
+            }
+        }
 
-		return $dir;
-	}
-	if (is_null($dir_plugins)) {
-		$dir_plugins = _DIR_PLUGINS;
-	}
-	$search = array("$dir_plugins$dir/plugin.xml", "$dir_plugins$dir/paquet.xml");
+        return $dir;
+    }
+    if (is_null($dir_plugins)) {
+        $dir_plugins = _DIR_PLUGINS;
+    }
+    $search = array("$dir_plugins$dir/plugin.xml", "$dir_plugins$dir/paquet.xml");
 
-	foreach ($search as $s) {
-		if (file_exists($s)) {
-			return $dir;
-		}
-	}
+    foreach ($search as $s) {
+        if (file_exists($s)) {
+            return $dir;
+        }
+    }
 
-	return '';
+    return '';
 }
 
 // Regexp d'extraction des informations d'un intervalle de compatibilité
@@ -129,154 +129,158 @@ define('_EXTRAIRE_INTERVALLE', ',^[\[\(\]]([0-9.a-zRC\s\-]*)[;]([0-9.a-zRC\s\-\*
  * voir commentaire infra sur l'utilisation de la constante _DEV_PLUGINS
  *
  * @param string $intervalle
- *    Un intervalle entre 2 versions. ex: [2.0.0-dev;2.1.*]
+ *                           Un intervalle entre 2 versions. ex: [2.0.0-dev;2.1.*]
  * @param string $version
- *    Un numéro de version. ex: 3.1.99]
+ *                           Un numéro de version. ex: 3.1.99]
  * @param string $avec_quoi
- *    Ce avec quoi est testée la compatibilité. par défaut ('')
- *    avec un plugin (cas des 'necessite'), parfois ('spip')
- *    avec SPIP.
+ *                           Ce avec quoi est testée la compatibilité. par défaut ('')
+ *                           avec un plugin (cas des 'necessite'), parfois ('spip')
+ *                           avec SPIP.
+ *
  * @return bool
- *    True si dans l'intervalle, false sinon.
+ *              True si dans l'intervalle, false sinon.
  **/
-function plugin_version_compatible($intervalle, $version, $avec_quoi = '') {
+function plugin_version_compatible($intervalle, $version, $avec_quoi = '')
+{
+    if (!strlen($intervalle)) {
+        return true;
+    }
+    if (!preg_match(_EXTRAIRE_INTERVALLE, $intervalle, $regs)) {
+        return false;
+    }
+    // Extraction des bornes et traitement de * pour la borne sup :
+    // -- on autorise uniquement les ecritures 3.0.*, 3.*
+    $minimum = $regs[1];
+    $maximum = $regs[2];
 
-	if (!strlen($intervalle)) {
-		return true;
-	}
-	if (!preg_match(_EXTRAIRE_INTERVALLE, $intervalle, $regs)) {
-		return false;
-	}
-	// Extraction des bornes et traitement de * pour la borne sup :
-	// -- on autorise uniquement les ecritures 3.0.*, 3.*
-	$minimum = $regs[1];
-	$maximum = $regs[2];
+    //  si une borne de compatibilité supérieure a été définie (dans
+    //  mes_options.php, sous la forme : define('_DEV_PLUGINS', '3.1.99');
+    //  on l'utilise (phase de dev, de test...) mais *que* en cas de comparaison
+    //  avec la version de SPIP (ne nuit donc pas aux tests de necessite
+    //  entre plugins)
+    if (defined('_DEV_PLUGINS') && $avec_quoi == 'spip') {
+        $maximum = _DEV_PLUGINS.']';
+    }
 
-	//  si une borne de compatibilité supérieure a été définie (dans
-	//  mes_options.php, sous la forme : define('_DEV_PLUGINS', '3.1.99');
-	//  on l'utilise (phase de dev, de test...) mais *que* en cas de comparaison
-	//  avec la version de SPIP (ne nuit donc pas aux tests de necessite
-	//  entre plugins)
-	if (defined('_DEV_PLUGINS') && $avec_quoi == 'spip') {
-		$maximum = _DEV_PLUGINS . ']';
-	}
+    $minimum_inc = $intervalle{0}
+    == '[';
+    $maximum_inc = substr($intervalle, -1) == ']';
 
-	$minimum_inc = $intervalle{0} == "[";
-	$maximum_inc = substr($intervalle, -1) == "]";
+    if (strlen($minimum)) {
+        if ($minimum_inc and spip_version_compare($version, $minimum, '<')) {
+            return false;
+        }
+        if (!$minimum_inc and spip_version_compare($version, $minimum, '<=')) {
+            return false;
+        }
+    }
+    if (strlen($maximum)) {
+        if ($maximum_inc and spip_version_compare($version, $maximum, '>')) {
+            return false;
+        }
+        if (!$maximum_inc and spip_version_compare($version, $maximum, '>=')) {
+            return false;
+        }
+    }
 
-	if (strlen($minimum)) {
-		if ($minimum_inc AND spip_version_compare($version, $minimum, '<')) {
-			return false;
-		}
-		if (!$minimum_inc AND spip_version_compare($version, $minimum, '<=')) {
-			return false;
-		}
-	}
-	if (strlen($maximum)) {
-		if ($maximum_inc AND spip_version_compare($version, $maximum, '>')) {
-			return false;
-		}
-		if (!$maximum_inc AND spip_version_compare($version, $maximum, '>=')) {
-			return false;
-		}
-	}
-
-	return true;
+    return true;
 }
-
 
 /**
  * Construire la liste des infos strictement necessaires aux plugins a activer
  * afin de les memoriser dans une meta pas trop grosse
- * http://code.spip.net/@liste_plugin_valides
+ * http://code.spip.net/@liste_plugin_valides.
  *
  * @param array $liste_plug
- * @param bool $force
+ * @param bool  $force
+ *
  * @return array
  */
-function liste_plugin_valides($liste_plug, $force = false) {
-	$liste_ext = liste_plugin_files(_DIR_PLUGINS_DIST);
-	$get_infos = charger_fonction('get_infos', 'plugins');
-	$infos = array(
-		// lister les extensions qui sont automatiquement actives
-		'_DIR_PLUGINS_DIST' => $get_infos($liste_ext, $force, _DIR_PLUGINS_DIST),
-		'_DIR_PLUGINS' => $get_infos($liste_plug, $force, _DIR_PLUGINS)
-	);
+function liste_plugin_valides($liste_plug, $force = false)
+{
+    $liste_ext = liste_plugin_files(_DIR_PLUGINS_DIST);
+    $get_infos = charger_fonction('get_infos', 'plugins');
+    $infos = array(
+        // lister les extensions qui sont automatiquement actives
+        '_DIR_PLUGINS_DIST' => $get_infos($liste_ext, $force, _DIR_PLUGINS_DIST),
+        '_DIR_PLUGINS' => $get_infos($liste_plug, $force, _DIR_PLUGINS),
+    );
 
-	// creer une premiere liste non ordonnee mais qui ne retient
-	// que les plugins valides, et dans leur derniere version en cas de doublon
-	$infos['_DIR_RESTREINT'][''] = $get_infos('./', $force, _DIR_RESTREINT);
-	$infos['_DIR_RESTREINT']['SPIP']['version'] = $GLOBALS['spip_version_branche'];
-	$infos['_DIR_RESTREINT']['SPIP']['chemin'] = array();
-	$liste_non_classee = array(
-		'SPIP' => array(
-			'nom' => 'SPIP',
-			'etat' => 'stable',
-			'version' => $GLOBALS['spip_version_branche'],
-			'dir_type' => '_DIR_RESTREINT',
-			'dir' => '',
-		)
-	);
+    // creer une premiere liste non ordonnee mais qui ne retient
+    // que les plugins valides, et dans leur derniere version en cas de doublon
+    $infos['_DIR_RESTREINT'][''] = $get_infos('./', $force, _DIR_RESTREINT);
+    $infos['_DIR_RESTREINT']['SPIP']['version'] = $GLOBALS['spip_version_branche'];
+    $infos['_DIR_RESTREINT']['SPIP']['chemin'] = array();
+    $liste_non_classee = array(
+        'SPIP' => array(
+            'nom' => 'SPIP',
+            'etat' => 'stable',
+            'version' => $GLOBALS['spip_version_branche'],
+            'dir_type' => '_DIR_RESTREINT',
+            'dir' => '',
+        ),
+    );
 
-	foreach ($liste_ext as $plug) {
-		if (isset($infos['_DIR_PLUGINS_DIST'][$plug])) {
-			plugin_valide_resume($liste_non_classee, $plug, $infos, '_DIR_PLUGINS_DIST');
-		}
-	}
-	foreach ($liste_plug as $plug) {
-		if (isset($infos['_DIR_PLUGINS'][$plug])) {
-			plugin_valide_resume($liste_non_classee, $plug, $infos, '_DIR_PLUGINS');
-		}
-	}
+    foreach ($liste_ext as $plug) {
+        if (isset($infos['_DIR_PLUGINS_DIST'][$plug])) {
+            plugin_valide_resume($liste_non_classee, $plug, $infos, '_DIR_PLUGINS_DIST');
+        }
+    }
+    foreach ($liste_plug as $plug) {
+        if (isset($infos['_DIR_PLUGINS'][$plug])) {
+            plugin_valide_resume($liste_non_classee, $plug, $infos, '_DIR_PLUGINS');
+        }
+    }
 
-	if (defined('_DIR_PLUGINS_SUPPL') and _DIR_PLUGINS_SUPPL) {
-		$infos['_DIR_PLUGINS_SUPPL'] = $get_infos($liste_plug, false, _DIR_PLUGINS_SUPPL);
-		foreach ($liste_plug as $plug) {
-			if (isset($infos['_DIR_PLUGINS_SUPPL'][$plug])) {
-				plugin_valide_resume($liste_non_classee, $plug, $infos, '_DIR_PLUGINS_SUPPL');
-			}
-		}
-	}
+    if (defined('_DIR_PLUGINS_SUPPL') and _DIR_PLUGINS_SUPPL) {
+        $infos['_DIR_PLUGINS_SUPPL'] = $get_infos($liste_plug, false, _DIR_PLUGINS_SUPPL);
+        foreach ($liste_plug as $plug) {
+            if (isset($infos['_DIR_PLUGINS_SUPPL'][$plug])) {
+                plugin_valide_resume($liste_non_classee, $plug, $infos, '_DIR_PLUGINS_SUPPL');
+            }
+        }
+    }
 
-	plugin_fixer_procure($liste_non_classee, $infos);
+    plugin_fixer_procure($liste_non_classee, $infos);
 
-	return array($infos, $liste_non_classee);
+    return array($infos, $liste_non_classee);
 }
 
 /**
  * Ne retenir un plugin que s'il est valide
  * et dans leur plus recente version compatible
- * avec la version presente de SPIP
+ * avec la version presente de SPIP.
  *
- * @param array $liste
+ * @param array  $liste
  * @param string $plug
- * @param array $infos
+ * @param array  $infos
  * @param string $dir_type
  */
-function plugin_valide_resume(&$liste, $plug, $infos, $dir_type) {
-	$i = $infos[$dir_type][$plug];
-	if (isset($i['erreur']) AND $i['erreur']) {
-		return;
-	}
-	if (!plugin_version_compatible($i['compatibilite'], $GLOBALS['spip_version_branche'], 'spip')) {
-		return;
-	}
-	$p = strtoupper($i['prefix']);
-	if (!isset($liste[$p])
-		OR spip_version_compare($i['version'], $liste[$p]['version'], '>')
-	) {
-		$liste[$p] = array(
-			'nom' => $i['nom'],
-			'etat' => $i['etat'],
-			'version' => $i['version'],
-			'dir' => $plug,
-			'dir_type' => $dir_type
-		);
-	}
+function plugin_valide_resume(&$liste, $plug, $infos, $dir_type)
+{
+    $i = $infos[$dir_type][$plug];
+    if (isset($i['erreur']) and $i['erreur']) {
+        return;
+    }
+    if (!plugin_version_compatible($i['compatibilite'], $GLOBALS['spip_version_branche'], 'spip')) {
+        return;
+    }
+    $p = strtoupper($i['prefix']);
+    if (!isset($liste[$p])
+        or spip_version_compare($i['version'], $liste[$p]['version'], '>')
+    ) {
+        $liste[$p] = array(
+            'nom' => $i['nom'],
+            'etat' => $i['etat'],
+            'version' => $i['version'],
+            'dir' => $plug,
+            'dir_type' => $dir_type,
+        );
+    }
 }
 
 /**
- * Completer la liste des plugins avec les eventuels procure
+ * Completer la liste des plugins avec les eventuels procure.
  *
  * les <procure> sont consideres comme des plugins proposes,
  * mais surchargeables (on peut activer un plugin qui procure ca pour l'ameliorer,
@@ -285,86 +289,91 @@ function plugin_valide_resume(&$liste, $plug, $infos, $dir_type) {
  * @param array $liste
  * @param array $infos
  */
-function plugin_fixer_procure(&$liste, &$infos) {
-	foreach ($liste as $p => $resume) {
-		$i = $infos[$resume['dir_type']][$resume['dir']];
-		if (isset($i['procure']) AND $i['procure']) {
-			foreach ($i['procure'] as $procure) {
-				$p = strtoupper($procure['nom']);
-				$dir = $resume['dir'];
-				if ($dir) {
-					$dir .= "/";
-				}
-				$dir .= "procure:" . $procure['nom'];
+function plugin_fixer_procure(&$liste, &$infos)
+{
+    foreach ($liste as $p => $resume) {
+        $i = $infos[$resume['dir_type']][$resume['dir']];
+        if (isset($i['procure']) and $i['procure']) {
+            foreach ($i['procure'] as $procure) {
+                $p = strtoupper($procure['nom']);
+                $dir = $resume['dir'];
+                if ($dir) {
+                    $dir .= '/';
+                }
+                $dir .= 'procure:'.$procure['nom'];
 
-				$procure['etat'] = '?';
-				$procure['dir_type'] = $resume['dir_type'];
-				$procure['dir'] = $dir;
+                $procure['etat'] = '?';
+                $procure['dir_type'] = $resume['dir_type'];
+                $procure['dir'] = $dir;
 
-				// si ce plugin n'est pas deja procure, ou dans une version plus ancienne
-				// on ajoute cette version a la liste
-				if (!isset($liste[$p])
-					OR spip_version_compare($procure['version'], $liste[$p]['version'], '>')
-				) {
-					$liste[$p] = $procure;
+                // si ce plugin n'est pas deja procure, ou dans une version plus ancienne
+                // on ajoute cette version a la liste
+                if (!isset($liste[$p])
+                    or spip_version_compare($procure['version'], $liste[$p]['version'], '>')
+                ) {
+                    $liste[$p] = $procure;
 
-					// on fournit une information minimale pour ne pas perturber la compilation
-					$infos[$resume['dir_type']][$dir] = array(
-						'prefix' => $procure['nom'],
-						'nom' => $procure['nom'],
-						'etat' => $procure['etat'],
-						'version' => $procure['version'],
-						'chemin' => array(),
-						'necessite' => array(),
-						'utilise' => array(),
-						'lib' => array(),
-						'menu' => array(),
-						'onglet' => array(),
-						'procure' => array(),
-					);
-				}
-			}
-		}
-	}
+                    // on fournit une information minimale pour ne pas perturber la compilation
+                    $infos[$resume['dir_type']][$dir] = array(
+                        'prefix' => $procure['nom'],
+                        'nom' => $procure['nom'],
+                        'etat' => $procure['etat'],
+                        'version' => $procure['version'],
+                        'chemin' => array(),
+                        'necessite' => array(),
+                        'utilise' => array(),
+                        'lib' => array(),
+                        'menu' => array(),
+                        'onglet' => array(),
+                        'procure' => array(),
+                    );
+                }
+            }
+        }
+    }
 }
 
 /**
  * extrait les chemins d'une liste de plugin
  * selectionne au passage ceux qui sont dans $dir_plugins uniquement
- * si valeur non vide
+ * si valeur non vide.
  *
- * @param array $liste
+ * @param array  $liste
  * @param string $dir_plugins
+ *
  * @return array
  */
-function liste_chemin_plugin($liste, $dir_plugins = _DIR_PLUGINS) {
-	foreach ($liste as $prefix => $infos) {
-		if (!$dir_plugins
-			OR (
-				defined($infos['dir_type'])
-				AND constant($infos['dir_type']) == $dir_plugins)
-		) {
-			$liste[$prefix] = $infos['dir'];
-		} else {
-			unset($liste[$prefix]);
-		}
-	}
+function liste_chemin_plugin($liste, $dir_plugins = _DIR_PLUGINS)
+{
+    foreach ($liste as $prefix => $infos) {
+        if (!$dir_plugins
+            or (
+                defined($infos['dir_type'])
+                and constant($infos['dir_type']) == $dir_plugins)
+        ) {
+            $liste[$prefix] = $infos['dir'];
+        } else {
+            unset($liste[$prefix]);
+        }
+    }
 
-	return $liste;
+    return $liste;
 }
 
 /**
  * Liste les chemins vers les plugins actifs du dossier fourni en argument
- * a partir d'une liste d'elelements construits par plugin_valide_resume
+ * a partir d'une liste d'elelements construits par plugin_valide_resume.
  *
  * @param string $dir_plugins
- *     Chemin du répertoire de plugins
+ *                            Chemin du répertoire de plugins
+ *
  * @return array
  */
-function liste_chemin_plugin_actifs($dir_plugins = _DIR_PLUGINS) {
-	include_spip('plugins/installer');
+function liste_chemin_plugin_actifs($dir_plugins = _DIR_PLUGINS)
+{
+    include_spip('plugins/installer');
 
-	return liste_chemin_plugin(liste_plugin_actifs(), $dir_plugins);
+    return liste_chemin_plugin(liste_plugin_actifs(), $dir_plugins);
 }
 
 // Pour tester utilise, il faut connaitre tous les plugins
@@ -375,125 +384,129 @@ function liste_chemin_plugin_actifs($dir_plugins = _DIR_PLUGINS) {
 // avec un doute sur un "utilise" qu'on peut ignorer.
 // Mais ne pas inserer silencieusement et risquer un bug sournois latent
 
-function plugin_trier($infos, $liste_non_classee) {
-	$toute_la_liste = $liste_non_classee;
-	$liste = $ordre = array();
-	$count = 0;
-	while ($c = count($liste_non_classee) AND $c != $count) { // tant qu'il reste des plugins a classer, et qu'on ne stagne pas
-		#echo "tour::";var_dump($liste_non_classee);
-		$count = $c;
-		foreach ($liste_non_classee as $p => $resume) {
-			$plug = $resume['dir'];
-			$dir_type = $resume['dir_type'];
-			$info1 = $infos[$dir_type][$plug];
-			// si des plugins sont necessaires,
-			// on ne peut inserer qu'apres eux
-			foreach ($info1['necessite'] as $need) {
-				$nom = strtoupper($need['nom']);
-				$compat = isset($need['compatibilite']) ? $need['compatibilite'] : '';
-				if (!isset($liste[$nom]) OR !plugin_version_compatible($compat, $liste[$nom]['version'])) {
-					$info1 = false;
-					break;
-				}
-			}
-			if (!$info1) {
-				continue;
-			}
-			// idem si des plugins sont utiles,
-			// sauf si ils sont de toute facon absents de la liste
-			foreach ($info1['utilise'] as $need) {
-				$nom = strtoupper($need['nom']);
-				$compat = isset($need['compatibilite']) ? $need['compatibilite'] : '';
-				if (isset($toute_la_liste[$nom])) {
-					if (!isset($liste[$nom]) OR
-						!plugin_version_compatible($compat, $liste[$nom]['version'])
-					) {
-						$info1 = false;
-						break;
-					}
-				}
-			}
-			if ($info1) {
-				$ordre[$p] = $info1;
-				$liste[$p] = $liste_non_classee[$p];
-				unset($liste_non_classee[$p]);
-			}
-		}
-	}
+function plugin_trier($infos, $liste_non_classee)
+{
+    $toute_la_liste = $liste_non_classee;
+    $liste = $ordre = array();
+    $count = 0;
+    while ($c = count($liste_non_classee) and $c != $count) { // tant qu'il reste des plugins a classer, et qu'on ne stagne pas
+        #echo "tour::";var_dump($liste_non_classee);
+        $count = $c;
+        foreach ($liste_non_classee as $p => $resume) {
+            $plug = $resume['dir'];
+            $dir_type = $resume['dir_type'];
+            $info1 = $infos[$dir_type][$plug];
+            // si des plugins sont necessaires,
+            // on ne peut inserer qu'apres eux
+            foreach ($info1['necessite'] as $need) {
+                $nom = strtoupper($need['nom']);
+                $compat = isset($need['compatibilite']) ? $need['compatibilite'] : '';
+                if (!isset($liste[$nom]) or !plugin_version_compatible($compat, $liste[$nom]['version'])) {
+                    $info1 = false;
+                    break;
+                }
+            }
+            if (!$info1) {
+                continue;
+            }
+            // idem si des plugins sont utiles,
+            // sauf si ils sont de toute facon absents de la liste
+            foreach ($info1['utilise'] as $need) {
+                $nom = strtoupper($need['nom']);
+                $compat = isset($need['compatibilite']) ? $need['compatibilite'] : '';
+                if (isset($toute_la_liste[$nom])) {
+                    if (!isset($liste[$nom]) or
+                        !plugin_version_compatible($compat, $liste[$nom]['version'])
+                    ) {
+                        $info1 = false;
+                        break;
+                    }
+                }
+            }
+            if ($info1) {
+                $ordre[$p] = $info1;
+                $liste[$p] = $liste_non_classee[$p];
+                unset($liste_non_classee[$p]);
+            }
+        }
+    }
 
-	return array($liste, $ordre, $liste_non_classee);
+    return array($liste, $ordre, $liste_non_classee);
 }
 
 // Collecte les erreurs dans la meta
 
-function plugins_erreurs($liste_non_classee, $liste, $infos, $msg = array()) {
-	static $erreurs = array();
-	foreach ($liste_non_classee as $p => $resume) {
-		$dir_type = $resume['dir_type'];
-		$plug = $resume['dir'];
-		$k = $infos[$dir_type][$plug];
-		$plug = constant($dir_type) . $plug;
-		if (!isset($msg[$p])) {
-			if (!$msg[$p] = plugin_necessite($k['necessite'], $liste, 'necessite')) {
-				$msg[$p] = plugin_necessite($k['utilise'], $liste, 'utilise');
-			}
-		} else {
-			foreach ($msg[$p] as $c => $l) {
-				$msg[$p][$c] = plugin_controler_lib($l['nom'], $l['lien']);
-			}
-		}
-		$erreurs[$plug] = $msg[$p];
-	}
-	ecrire_meta('plugin_erreur_activation', serialize($erreurs));
+function plugins_erreurs($liste_non_classee, $liste, $infos, $msg = array())
+{
+    static $erreurs = array();
+    foreach ($liste_non_classee as $p => $resume) {
+        $dir_type = $resume['dir_type'];
+        $plug = $resume['dir'];
+        $k = $infos[$dir_type][$plug];
+        $plug = constant($dir_type).$plug;
+        if (!isset($msg[$p])) {
+            if (!$msg[$p] = plugin_necessite($k['necessite'], $liste, 'necessite')) {
+                $msg[$p] = plugin_necessite($k['utilise'], $liste, 'utilise');
+            }
+        } else {
+            foreach ($msg[$p] as $c => $l) {
+                $msg[$p][$c] = plugin_controler_lib($l['nom'], $l['lien']);
+            }
+        }
+        $erreurs[$plug] = $msg[$p];
+    }
+    ecrire_meta('plugin_erreur_activation', serialize($erreurs));
 }
 
-function plugin_donne_erreurs($raw = false, $raz = true) {
-	if (!isset($GLOBALS['meta']['plugin_erreur_activation'])) {
-		return $raw ? array() : '';
-	}
-	$list = @unserialize($GLOBALS['meta']['plugin_erreur_activation']);
-	// Compat ancienne version
-	if (!$list) {
-		$list = $raw ? array() : $GLOBALS['meta']['plugin_erreur_activation'];
-	} elseif (!$raw) {
-		foreach ($list as $plug => $msg) {
-			$list[$plug] = "<li>" . _T('plugin_impossible_activer', array('plugin' => $plug))
-				. "<ul><li>" . implode("</li><li>", $msg) . "</li></ul></li>";
-		}
-		$list = "<ul>" . join("\n", $list) . "</ul>";
-	}
-	if ($raz) {
-		effacer_meta('plugin_erreur_activation');
-	}
+function plugin_donne_erreurs($raw = false, $raz = true)
+{
+    if (!isset($GLOBALS['meta']['plugin_erreur_activation'])) {
+        return $raw ? array() : '';
+    }
+    $list = @unserialize($GLOBALS['meta']['plugin_erreur_activation']);
+    // Compat ancienne version
+    if (!$list) {
+        $list = $raw ? array() : $GLOBALS['meta']['plugin_erreur_activation'];
+    } elseif (!$raw) {
+        foreach ($list as $plug => $msg) {
+            $list[$plug] = '<li>'._T('plugin_impossible_activer', array('plugin' => $plug))
+                .'<ul><li>'.implode('</li><li>', $msg).'</li></ul></li>';
+        }
+        $list = '<ul>'.implode("\n", $list).'</ul>';
+    }
+    if ($raz) {
+        effacer_meta('plugin_erreur_activation');
+    }
 
-	return $list;
+    return $list;
 }
 
 /**
  * Teste des dependances
  * Et verifie que chaque dependance est presente
- * dans la liste de plugins donnee
+ * dans la liste de plugins donnee.
  *
  * @param array $n
- *    Tableau de dependances dont on souhaite verifier leur presence
+ *                     Tableau de dependances dont on souhaite verifier leur presence
  * @param array $liste
- *    Tableau des plugins presents
- * @return array
- *    Tableau des messages d'erreurs recus. Il sera vide si tout va bien.
+ *                     Tableau des plugins presents
  *
+ * @return array
+ *               Tableau des messages d'erreurs recus. Il sera vide si tout va bien.
  **/
-function plugin_necessite($n, $liste, $balise = 'necessite') {
-	$msg = array();
-	foreach ($n as $need) {
-		$id = strtoupper($need['nom']);
-		if ($r = plugin_controler_necessite($liste, $id, isset($need['compatibilite']) ? $need['compatibilite'] : '',
-			$balise)
-		) {
-			$msg[] = $r;
-		}
-	}
+function plugin_necessite($n, $liste, $balise = 'necessite')
+{
+    $msg = array();
+    foreach ($n as $need) {
+        $id = strtoupper($need['nom']);
+        if ($r = plugin_controler_necessite($liste, $id, isset($need['compatibilite']) ? $need['compatibilite'] : '',
+            $balise)
+        ) {
+            $msg[] = $r;
+        }
+    }
 
-	return $msg;
+    return $msg;
 }
 
 /**
@@ -507,92 +520,94 @@ function plugin_necessite($n, $liste, $balise = 'necessite') {
  *    L'éventuelle intervalle de compatibilité de la dependance. ex: [1.1.0;]
  * @param $balise
  *    Permet de définir si on teste un utilise ou un necessite
+ *
  * @return string.
- *    Vide si ok,
- *    Message d'erreur lorsque la dependance est absente.
+ *                 Vide si ok,
+ *                 Message d'erreur lorsque la dependance est absente.
  **/
-function plugin_controler_necessite($liste, $nom, $intervalle, $balise) {
-	if (isset($liste[$nom]) AND plugin_version_compatible($intervalle, $liste[$nom]['version'])) {
-		return '';
-	}
+function plugin_controler_necessite($liste, $nom, $intervalle, $balise)
+{
+    if (isset($liste[$nom]) and plugin_version_compatible($intervalle, $liste[$nom]['version'])) {
+        return '';
+    }
 
-	return
-		plugin_message_incompatibilite($intervalle, (isset($liste[$nom]) ? $liste[$nom]['version'] : ""), $nom, $balise);
+    return
+        plugin_message_incompatibilite($intervalle, (isset($liste[$nom]) ? $liste[$nom]['version'] : ''), $nom, $balise);
 }
 
+function plugin_message_incompatibilite($intervalle, $version, $nom, $balise)
+{
+    if (preg_match(_EXTRAIRE_INTERVALLE, $intervalle, $regs)) {
+        $minimum = $regs[1];
+        $maximum = $regs[2];
 
-function plugin_message_incompatibilite($intervalle, $version, $nom, $balise) {
+        $minimum_inclus = $intervalle{0}
+        == '[';
+        $maximum_inclus = substr($intervalle, -1) == ']';
 
-	if (preg_match(_EXTRAIRE_INTERVALLE, $intervalle, $regs)) {
-		$minimum = $regs[1];
-		$maximum = $regs[2];
+        if (strlen($minimum)) {
+            if ($minimum_inclus and spip_version_compare($version, $minimum, '<')) {
+                return _T("plugin_${balise}_plugin", array(
+                    'plugin' => $nom,
+                    'version' => ' &ge; '.$minimum,
+                ));
+            }
+            if (!$minimum_inclus and spip_version_compare($version, $minimum, '<=')) {
+                return _T("plugin_${balise}_plugin", array(
+                    'plugin' => $nom,
+                    'version' => ' &gt; '.$minimum,
+                ));
+            }
+        }
 
-		$minimum_inclus = $intervalle{0} == "[";
-		$maximum_inclus = substr($intervalle, -1) == "]";
+        if (strlen($maximum)) {
+            if ($maximum_inclus and spip_version_compare($version, $maximum, '>')) {
+                return _T("plugin_${balise}_plugin", array(
+                    'plugin' => $nom,
+                    'version' => ' &le; '.$maximum,
+                ));
+            }
+            if (!$maximum_inclus and spip_version_compare($version, $maximum, '>=')) {
+                return _T("plugin_${balise}_plugin", array(
+                    'plugin' => $nom,
+                    'version' => ' &lt; '.$maximum,
+                ));
+            }
+        }
+    }
 
-		if (strlen($minimum)) {
-			if ($minimum_inclus AND spip_version_compare($version, $minimum, '<')) {
-				return _T("plugin_${balise}_plugin", array(
-					'plugin' => $nom,
-					'version' => ' &ge; ' . $minimum
-				));
-			}
-			if (!$minimum_inclus AND spip_version_compare($version, $minimum, '<=')) {
-				return _T("plugin_${balise}_plugin", array(
-					'plugin' => $nom,
-					'version' => ' &gt; ' . $minimum
-				));
-			}
-		}
-
-		if (strlen($maximum)) {
-			if ($maximum_inclus AND spip_version_compare($version, $maximum, '>')) {
-				return _T("plugin_${balise}_plugin", array(
-					'plugin' => $nom,
-					'version' => ' &le; ' . $maximum
-				));
-			}
-			if (!$maximum_inclus AND spip_version_compare($version, $maximum, '>=')) {
-				return _T("plugin_${balise}_plugin", array(
-					'plugin' => $nom,
-					'version' => ' &lt; ' . $maximum
-				));
-			}
-		}
-	}
-
-	return _T("plugin_necessite_plugin_sans_version", array('plugin' => $nom));
+    return _T('plugin_necessite_plugin_sans_version', array('plugin' => $nom));
 }
 
-
-function plugin_controler_lib($lib, $url) {
-	/* Feature sortie du core, voir STP
-	 * if ($url) {
-		include_spip('inc/charger_plugin');
-		$url = '<br />'	. bouton_telechargement_plugin($url, 'lib');
-	}*/
-	return _T('plugin_necessite_lib', array('lib' => $lib)) . " <a href='$url'>$url</a>";
+function plugin_controler_lib($lib, $url)
+{
+    /* Feature sortie du core, voir STP
+     * if ($url) {
+        include_spip('inc/charger_plugin');
+        $url = '<br />'	. bouton_telechargement_plugin($url, 'lib');
+    }*/
+    return _T('plugin_necessite_lib', array('lib' => $lib))." <a href='$url'>$url</a>";
 }
-
 
 /**
  * Calcule la liste des plugins actifs et recompile les fichiers caches
- * qui leurs sont relatifs
+ * qui leurs sont relatifs.
  *
  * @uses ecrire_plugin_actifs()
  *
  * @param bool $pipe_recherche ?
+ *
  * @return bool
- *     true si il y a eu des modifications sur la liste des plugins actifs, false sinon
+ *              true si il y a eu des modifications sur la liste des plugins actifs, false sinon
  **/
-function actualise_plugins_actifs($pipe_recherche = false) {
-	return ecrire_plugin_actifs('', $pipe_recherche, 'force');
+function actualise_plugins_actifs($pipe_recherche = false)
+{
+    return ecrire_plugin_actifs('', $pipe_recherche, 'force');
 }
-
 
 /**
  * Calcule ou modifie la liste des plugins actifs et recompile les fichiers caches
- * qui leurs sont relatifs
+ * qui leurs sont relatifs.
  *
  * @note
  *   Les  ecrire_meta() doivent en principe aussi initialiser la valeur a vide
@@ -600,240 +615,244 @@ function actualise_plugins_actifs($pipe_recherche = false) {
  *   (verifier dans la doc php)
  *
  * @param string|string[] $plugin
- *     Plugin ou plugins concernés (leur chemin depuis le répertoire plugins)
- * @param bool $pipe_recherche
- *     ?
- * @param string $operation
- *     - raz : recalcule tout
- *     - ajoute : ajoute le plugin indiqué à la liste des plugins actifs
- *     - enleve : enleve le plugin indiqué de la liste des plugins actifs
- *     - force  : ?
+ *                                        Plugin ou plugins concernés (leur chemin depuis le répertoire plugins)
+ * @param bool            $pipe_recherche
+ *                                        ?
+ * @param string          $operation
+ *                                        - raz : recalcule tout
+ *                                        - ajoute : ajoute le plugin indiqué à la liste des plugins actifs
+ *                                        - enleve : enleve le plugin indiqué de la liste des plugins actifs
+ *                                        - force  : ?
+ *
  * @return bool
- *     true si il y a eu des modifications sur la liste des plugins actifs, false sinon
+ *              true si il y a eu des modifications sur la liste des plugins actifs, false sinon
  **/
-function ecrire_plugin_actifs($plugin, $pipe_recherche = false, $operation = 'raz') {
+function ecrire_plugin_actifs($plugin, $pipe_recherche = false, $operation = 'raz')
+{
 
-	// creer le repertoire cache/ si necessaire ! (installation notamment)
-	$cache = sous_repertoire(_DIR_CACHE, '', false, true);
+    // creer le repertoire cache/ si necessaire ! (installation notamment)
+    $cache = sous_repertoire(_DIR_CACHE, '', false, true);
 
-	// Si on n'a ni cache accessible, ni connexion SQL, on ne peut pas faire grand chose encore.
-	if (!$cache and !spip_connect()) {
-		return false;
-	}
+    // Si on n'a ni cache accessible, ni connexion SQL, on ne peut pas faire grand chose encore.
+    if (!$cache and !spip_connect()) {
+        return false;
+    }
 
-	if ($operation != 'raz') {
-		$plugin_valides = liste_chemin_plugin_actifs();
-		$plugin_valides = is_plugin_dir($plugin_valides);
-		if (defined('_DIR_PLUGINS_SUPPL') && _DIR_PLUGINS_SUPPL) {
-			$plugin_valides_supp = liste_chemin_plugin_actifs(_DIR_PLUGINS_SUPPL);
-			$plugin_valides_supp = is_plugin_dir($plugin_valides_supp, _DIR_PLUGINS_SUPPL);
-			$plugin_valides = array_merge($plugin_valides, $plugin_valides_supp);
-		}
-		// si des plugins sont en attentes (coches mais impossible a activer)
-		// on les reinjecte ici
-		if (isset($GLOBALS['meta']['plugin_attente'])
-			AND $a = unserialize($GLOBALS['meta']['plugin_attente'])
-		) {
-			$plugin_valides = $plugin_valides+liste_chemin_plugin($a);
-		}
+    if ($operation != 'raz') {
+        $plugin_valides = liste_chemin_plugin_actifs();
+        $plugin_valides = is_plugin_dir($plugin_valides);
+        if (defined('_DIR_PLUGINS_SUPPL') && _DIR_PLUGINS_SUPPL) {
+            $plugin_valides_supp = liste_chemin_plugin_actifs(_DIR_PLUGINS_SUPPL);
+            $plugin_valides_supp = is_plugin_dir($plugin_valides_supp, _DIR_PLUGINS_SUPPL);
+            $plugin_valides = array_merge($plugin_valides, $plugin_valides_supp);
+        }
+        // si des plugins sont en attentes (coches mais impossible a activer)
+        // on les reinjecte ici
+        if (isset($GLOBALS['meta']['plugin_attente'])
+            and $a = unserialize($GLOBALS['meta']['plugin_attente'])
+        ) {
+            $plugin_valides = $plugin_valides + liste_chemin_plugin($a);
+        }
 
-		if ($operation == 'ajoute') {
-			$plugin = array_merge($plugin_valides, $plugin);
-		} elseif ($operation == 'enleve') {
-			$plugin = array_diff($plugin_valides, $plugin);
-		} else {
-			$plugin = $plugin_valides;
-		}
-	}
-	$actifs_avant = isset($GLOBALS['meta']['plugin']) ? $GLOBALS['meta']['plugin'] : '';
+        if ($operation == 'ajoute') {
+            $plugin = array_merge($plugin_valides, $plugin);
+        } elseif ($operation == 'enleve') {
+            $plugin = array_diff($plugin_valides, $plugin);
+        } else {
+            $plugin = $plugin_valides;
+        }
+    }
+    $actifs_avant = isset($GLOBALS['meta']['plugin']) ? $GLOBALS['meta']['plugin'] : '';
 
-	// si une fonction de gestion de dependances existe, l'appeler ici
-	if ($ajouter_dependances = charger_fonction("ajouter_dependances", "plugins", true)) {
-		$plugin = $ajouter_dependances($plugin);
-	}
+    // si une fonction de gestion de dependances existe, l'appeler ici
+    if ($ajouter_dependances = charger_fonction('ajouter_dependances', 'plugins', true)) {
+        $plugin = $ajouter_dependances($plugin);
+    }
 
-	// recharger le xml des plugins a activer
-	// on forcer le reload ici, meme si le fichier xml n'a pas change
-	// pour ne pas rater l'ajout ou la suppression d'un fichier fonctions/options/administrations
-	// pourra etre evite quand on ne supportera plus les plugin.xml
-	// en deplacant la detection de ces fichiers dans la compilation ci dessous
-	list($infos, $liste) = liste_plugin_valides($plugin, true);
-	// trouver l'ordre d'activation
-	list($plugin_valides, $ordre, $reste) = plugin_trier($infos, $liste);
-	if ($reste) {
-		plugins_erreurs($reste, $liste, $infos);
-	}
-	// Ignorer les plugins necessitant une lib absente
-	// et preparer la meta d'entete Http
-	$err = $msg = $header = array();
-	foreach ($plugin_valides as $p => $resume) {
-		$header[] = $p . ($resume['version'] ? "(" . $resume['version'] . ")" : "");
-		if ($resume['dir']) {
-			foreach ($infos[$resume['dir_type']][$resume['dir']]['lib'] as $l) {
-				if (!find_in_path($l['nom'], 'lib/')) {
-					$err[$p] = $resume;
-					$msg[$p][] = $l;
-					unset($plugin_valides[$p]);
-				}
-			}
-		}
-	}
-	if ($err) {
-		plugins_erreurs($err, '', $infos, $msg);
-	}
+    // recharger le xml des plugins a activer
+    // on forcer le reload ici, meme si le fichier xml n'a pas change
+    // pour ne pas rater l'ajout ou la suppression d'un fichier fonctions/options/administrations
+    // pourra etre evite quand on ne supportera plus les plugin.xml
+    // en deplacant la detection de ces fichiers dans la compilation ci dessous
+    list($infos, $liste) = liste_plugin_valides($plugin, true);
+    // trouver l'ordre d'activation
+    list($plugin_valides, $ordre, $reste) = plugin_trier($infos, $liste);
+    if ($reste) {
+        plugins_erreurs($reste, $liste, $infos);
+    }
+    // Ignorer les plugins necessitant une lib absente
+    // et preparer la meta d'entete Http
+    $err = $msg = $header = array();
+    foreach ($plugin_valides as $p => $resume) {
+        $header[] = $p.($resume['version'] ? '('.$resume['version'].')' : '');
+        if ($resume['dir']) {
+            foreach ($infos[$resume['dir_type']][$resume['dir']]['lib'] as $l) {
+                if (!find_in_path($l['nom'], 'lib/')) {
+                    $err[$p] = $resume;
+                    $msg[$p][] = $l;
+                    unset($plugin_valides[$p]);
+                }
+            }
+        }
+    }
+    if ($err) {
+        plugins_erreurs($err, '', $infos, $msg);
+    }
 
-	if (isset($GLOBALS['meta']['message_crash_plugins'])) {
-		effacer_meta('message_crash_plugins');
-	}
-	ecrire_meta('plugin', serialize($plugin_valides));
-	$liste = array_diff_key($liste, $plugin_valides);
-	ecrire_meta('plugin_attente', serialize($liste));
-	$header = strtolower(implode(",", $header));
-	ecrire_meta('plugin_header', substr($header, 0, 900));
-	if (!isset($GLOBALS['spip_header_silencieux']) OR !$GLOBALS['spip_header_silencieux']) {
-		ecrire_fichier(_DIR_VAR . "config.txt",
-			(defined('_HEADER_COMPOSED_BY') ? _HEADER_COMPOSED_BY : "Composed-By: SPIP") . ' ' . $GLOBALS['spip_version_affichee'] . " @ www.spip.net + " . $header);
-	} else {
-		@unlink(_DIR_VAR . "config.txt");
-	}
-	// generer charger_plugins_chemin.php
-	plugins_precompile_chemin($plugin_valides, $ordre);
-	// generer les fichiers
-	// 	charger_plugins_options.php
-	// 	charger_plugins_fonctions.php
-	// et retourner les fichiers a verifier
-	plugins_precompile_xxxtions($plugin_valides, $ordre);
-	// mise a jour de la matrice des pipelines
-	$prepend_code = pipeline_matrice_precompile($plugin_valides, $ordre, $pipe_recherche);
-	// generer le fichier _CACHE_PIPELINE
-	pipeline_precompile($prepend_code);
+    if (isset($GLOBALS['meta']['message_crash_plugins'])) {
+        effacer_meta('message_crash_plugins');
+    }
+    ecrire_meta('plugin', serialize($plugin_valides));
+    $liste = array_diff_key($liste, $plugin_valides);
+    ecrire_meta('plugin_attente', serialize($liste));
+    $header = strtolower(implode(',', $header));
+    ecrire_meta('plugin_header', substr($header, 0, 900));
+    if (!isset($GLOBALS['spip_header_silencieux']) or !$GLOBALS['spip_header_silencieux']) {
+        ecrire_fichier(_DIR_VAR.'config.txt',
+            (defined('_HEADER_COMPOSED_BY') ? _HEADER_COMPOSED_BY : 'Composed-By: SPIP').' '.$GLOBALS['spip_version_affichee'].' @ www.spip.net + '.$header);
+    } else {
+        @unlink(_DIR_VAR.'config.txt');
+    }
+    // generer charger_plugins_chemin.php
+    plugins_precompile_chemin($plugin_valides, $ordre);
+    // generer les fichiers
+    // 	charger_plugins_options.php
+    // 	charger_plugins_fonctions.php
+    // et retourner les fichiers a verifier
+    plugins_precompile_xxxtions($plugin_valides, $ordre);
+    // mise a jour de la matrice des pipelines
+    $prepend_code = pipeline_matrice_precompile($plugin_valides, $ordre, $pipe_recherche);
+    // generer le fichier _CACHE_PIPELINE
+    pipeline_precompile($prepend_code);
 
-	// attendre eventuellement l'invalidation du cache opcode
-	spip_attend_invalidation_opcode_cache();
+    // attendre eventuellement l'invalidation du cache opcode
+    spip_attend_invalidation_opcode_cache();
 
-	if (spip_connect()) {
-		// lancer et initialiser les nouveaux crons !
-		include_spip('inc/genie');
-		genie_queue_watch_dist();
-	}
+    if (spip_connect()) {
+        // lancer et initialiser les nouveaux crons !
+        include_spip('inc/genie');
+        genie_queue_watch_dist();
+    }
 
-	return ($GLOBALS['meta']['plugin'] != $actifs_avant);
+    return $GLOBALS['meta']['plugin'] != $actifs_avant;
 }
 
-function plugins_precompile_chemin($plugin_valides, $ordre) {
-	$chemins = array();
-	$contenu = "";
-	foreach ($ordre as $p => $info) {
-		// $ordre peur contenir des plugins en attente et non valides pour ce hit
-		if (isset($plugin_valides[$p])) {
-			$dir_type = $plugin_valides[$p]['dir_type'];
-			$plug = $plugin_valides[$p]['dir'];
-			// definir le plugin, donc le path avant l'include du fichier options
-			// permet de faire des include_spip pour attraper un inc_ du plugin
+function plugins_precompile_chemin($plugin_valides, $ordre)
+{
+    $chemins = array();
+    $contenu = '';
+    foreach ($ordre as $p => $info) {
+        // $ordre peur contenir des plugins en attente et non valides pour ce hit
+        if (isset($plugin_valides[$p])) {
+            $dir_type = $plugin_valides[$p]['dir_type'];
+            $plug = $plugin_valides[$p]['dir'];
+            // definir le plugin, donc le path avant l'include du fichier options
+            // permet de faire des include_spip pour attraper un inc_ du plugin
 
-			$dir = $dir_type . ".'" . $plug . "/'";
+            $dir = $dir_type.".'".$plug."/'";
 
-			$prefix = strtoupper(preg_replace(',\W,', '_', $info['prefix']));
-			if ($prefix !== "SPIP") {
-				$contenu .= "define('_DIR_PLUGIN_$prefix',$dir);\n";
-				foreach ($info['chemin'] as $chemin) {
-					if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],
-							$GLOBALS['spip_version_branche'], 'spip')
-					) {
-						$dir = $chemin['path'];
-						if (strlen($dir) AND $dir{0} == "/") {
-							$dir = substr($dir, 1);
-						}
-						if (strlen($dir) AND $dir == "./") {
-							$dir = '';
-						}
-						if (strlen($dir)) {
-							$dir = rtrim($dir, '/') . '/';
-						}
-						if (!isset($chemin['type']) OR $chemin['type'] == 'public') {
-							$chemins['public'][] = "_DIR_PLUGIN_$prefix" . (strlen($dir) ? ".'$dir'" : "");
-						}
-						if (!isset($chemin['type']) OR $chemin['type'] == 'prive') {
-							$chemins['prive'][] = "_DIR_PLUGIN_$prefix" . (strlen($dir) ? ".'$dir'" : "");
-						}
-					}
-				}
-			}
-		}
-	}
-	if (count($chemins)) {
-		$contenu .= "if (_DIR_RESTREINT) _chemin(implode(':',array(" . implode(',',
-				array_reverse($chemins['public'])) . ")));\n"
-			. "else _chemin(implode(':',array(" . implode(',', array_reverse($chemins['prive'])) . ")));\n";
-	}
+            $prefix = strtoupper(preg_replace(',\W,', '_', $info['prefix']));
+            if ($prefix !== 'SPIP') {
+                $contenu .= "define('_DIR_PLUGIN_$prefix',$dir);\n";
+                foreach ($info['chemin'] as $chemin) {
+                    if (!isset($chemin['version']) or plugin_version_compatible($chemin['version'],
+                            $GLOBALS['spip_version_branche'], 'spip')
+                    ) {
+                        $dir = $chemin['path'];
+                        if (strlen($dir) and $dir{0} == '/') {
+                            $dir = substr($dir, 1);
+                        }
+                        if (strlen($dir) and $dir == './') {
+                            $dir = '';
+                        }
+                        if (strlen($dir)) {
+                            $dir = rtrim($dir, '/').'/';
+                        }
+                        if (!isset($chemin['type']) or $chemin['type'] == 'public') {
+                            $chemins['public'][] = "_DIR_PLUGIN_$prefix".(strlen($dir) ? ".'$dir'" : '');
+                        }
+                        if (!isset($chemin['type']) or $chemin['type'] == 'prive') {
+                            $chemins['prive'][] = "_DIR_PLUGIN_$prefix".(strlen($dir) ? ".'$dir'" : '');
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if (count($chemins)) {
+        $contenu .= "if (_DIR_RESTREINT) _chemin(implode(':',array(".implode(',',
+                array_reverse($chemins['public'])).")));\n"
+            ."else _chemin(implode(':',array(".implode(',', array_reverse($chemins['prive'])).")));\n";
+    }
 
-	ecrire_fichier_php(_CACHE_PLUGINS_PATH, $contenu);
+    ecrire_fichier_php(_CACHE_PLUGINS_PATH, $contenu);
 }
 
-function plugins_precompile_xxxtions($plugin_valides, $ordre) {
-	$contenu = array('options' => '', 'fonctions' => '');
-	$boutons = array();
-	$onglets = array();
-	$sign = "";
+function plugins_precompile_xxxtions($plugin_valides, $ordre)
+{
+    $contenu = array('options' => '', 'fonctions' => '');
+    $boutons = array();
+    $onglets = array();
+    $sign = '';
 
-	foreach ($ordre as $p => $info) {
-		// $ordre peur contenir des plugins en attente et non valides pour ce hit
-		if (isset($plugin_valides[$p])) {
-			$dir_type = $plugin_valides[$p]['dir_type'];
-			$plug = $plugin_valides[$p]['dir'];
-			$dir = constant($dir_type);
-			$root_dir_type = str_replace('_DIR_', '_ROOT_', $dir_type);
-			if ($info['menu']) {
-				$boutons = array_merge($boutons, $info['menu']);
-			}
-			if ($info['onglet']) {
-				$onglets = array_merge($onglets, $info['onglet']);
-			}
-			foreach ($contenu as $charge => $v) {
-				// si pas declare/detecte a la lecture du paquet.xml,
-				// detecer a nouveau ici puisque son ajout ne provoque pas une modif du paquet.xml
-				// donc ni sa relecture, ni sa detection
-				if (!isset($info[$charge])
-					AND $dir // exclure le cas du plugin "SPIP"
-					AND strpos($dir, ":") === false // exclure le cas des procure:
-					AND file_exists("$dir$plug/paquet.xml") // uniquement pour les paquet.xml
-				) {
-					if (is_readable("$dir$plug/" . ($file = $info['prefix'] . "_" . $charge . ".php"))) {
-						$info[$charge] = array($file);
-					}
-				}
-				if (isset($info[$charge])) {
-					$files = $info[$charge];
-					foreach ($files as $k => $file) {
-						// on genere un if file_exists devant chaque include
-						// pour pouvoir garder le meme niveau d'erreur general
-						$file = trim($file);
-						if (!is_readable("$dir$plug/$file")
-							// uniquement pour les paquet.xml
-							AND file_exists("$dir$plug/paquet.xml")
-						) {
-							unset($info[$charge][$k]);
-						} else {
-							$_file = $root_dir_type . ".'$plug/$file'";
-							$contenu[$charge] .= "include_once_check($_file);\n";
-						}
-					}
-				}
-			}
-			$sign .= md5(serialize($info));
-		}
-	}
+    foreach ($ordre as $p => $info) {
+        // $ordre peur contenir des plugins en attente et non valides pour ce hit
+        if (isset($plugin_valides[$p])) {
+            $dir_type = $plugin_valides[$p]['dir_type'];
+            $plug = $plugin_valides[$p]['dir'];
+            $dir = constant($dir_type);
+            $root_dir_type = str_replace('_DIR_', '_ROOT_', $dir_type);
+            if ($info['menu']) {
+                $boutons = array_merge($boutons, $info['menu']);
+            }
+            if ($info['onglet']) {
+                $onglets = array_merge($onglets, $info['onglet']);
+            }
+            foreach ($contenu as $charge => $v) {
+                // si pas declare/detecte a la lecture du paquet.xml,
+                // detecer a nouveau ici puisque son ajout ne provoque pas une modif du paquet.xml
+                // donc ni sa relecture, ni sa detection
+                if (!isset($info[$charge])
+                    and $dir // exclure le cas du plugin "SPIP"
+                    and strpos($dir, ':') === false // exclure le cas des procure:
+                    and file_exists("$dir$plug/paquet.xml") // uniquement pour les paquet.xml
+                ) {
+                    if (is_readable("$dir$plug/".($file = $info['prefix'].'_'.$charge.'.php'))) {
+                        $info[$charge] = array($file);
+                    }
+                }
+                if (isset($info[$charge])) {
+                    $files = $info[$charge];
+                    foreach ($files as $k => $file) {
+                        // on genere un if file_exists devant chaque include
+                        // pour pouvoir garder le meme niveau d'erreur general
+                        $file = trim($file);
+                        if (!is_readable("$dir$plug/$file")
+                            // uniquement pour les paquet.xml
+                            and file_exists("$dir$plug/paquet.xml")
+                        ) {
+                            unset($info[$charge][$k]);
+                        } else {
+                            $_file = $root_dir_type.".'$plug/$file'";
+                            $contenu[$charge] .= "include_once_check($_file);\n";
+                        }
+                    }
+                }
+            }
+            $sign .= md5(serialize($info));
+        }
+    }
 
-	$contenu['options'] = "define('_PLUGINS_HASH','" . md5($sign) . "');\n" . $contenu['options'];
-	$contenu['fonctions'] .= plugin_ongletbouton("boutons_plugins", $boutons)
-		. plugin_ongletbouton("onglets_plugins", $onglets);
+    $contenu['options'] = "define('_PLUGINS_HASH','".md5($sign)."');\n".$contenu['options'];
+    $contenu['fonctions'] .= plugin_ongletbouton('boutons_plugins', $boutons)
+        .plugin_ongletbouton('onglets_plugins', $onglets);
 
-	ecrire_fichier_php(_CACHE_PLUGINS_OPT, $contenu['options']);
-	ecrire_fichier_php(_CACHE_PLUGINS_FCT, $contenu['fonctions']);
+    ecrire_fichier_php(_CACHE_PLUGINS_OPT, $contenu['options']);
+    ecrire_fichier_php(_CACHE_PLUGINS_FCT, $contenu['fonctions']);
 }
 
 /**
- * Compile les entrées d'un menu et retourne le code php d'exécution
+ * Compile les entrées d'un menu et retourne le code php d'exécution.
  *
  * Génère et retourne un code php (pour enregistrement dans un fichier de cache)
  * permettant d'obtenir la liste des entrées de menus, ou des onglets
@@ -843,235 +862,237 @@ function plugins_precompile_xxxtions($plugin_valides, $ordre) {
  * signalant une modification de ces menus
  *
  * @param string $nom Nom du type de menu
- *     Exemple: boutons_plugins, onglets_plugins
- * @param array $val Liste des entrées de ce menu
+ *                    Exemple: boutons_plugins, onglets_plugins
+ * @param array  $val Liste des entrées de ce menu
+ *
  * @return string Code php
  */
-function plugin_ongletbouton($nom, $val) {
-	if (!$val) {
-		$val = array();
-	}
+function plugin_ongletbouton($nom, $val)
+{
+    if (!$val) {
+        $val = array();
+    }
 
-	$val = serialize($val);
-	$md5 = md5($val);
+    $val = serialize($val);
+    $md5 = md5($val);
 
-	if (!defined("_UPDATED_$nom")) {
-		define("_UPDATED_$nom", $val);
-		define("_UPDATED_md5_$nom", $md5);
-	}
-	$val = "unserialize('" . str_replace("'", "\'", $val) . "')";
+    if (!defined("_UPDATED_$nom")) {
+        define("_UPDATED_$nom", $val);
+        define("_UPDATED_md5_$nom", $md5);
+    }
+    $val = "unserialize('".str_replace("'", "\'", $val)."')";
 
-	return
-		"if (!function_exists('$nom')) {\n"
-		. "function $nom(){return defined('_UPDATED_$nom')?unserialize(_UPDATED_$nom):$val;}\n"
-		. "function md5_$nom(){return defined('_UPDATED_md5_$nom')?_UPDATED_md5_$nom:'" . $md5 . "';}\n"
-		. "}\n";
+    return
+        "if (!function_exists('$nom')) {\n"
+        ."function $nom(){return defined('_UPDATED_$nom')?unserialize(_UPDATED_$nom):$val;}\n"
+        ."function md5_$nom(){return defined('_UPDATED_md5_$nom')?_UPDATED_md5_$nom:'".$md5."';}\n"
+        ."}\n";
 }
 
 // creer le fichier CACHE_PLUGIN_VERIF a partir de
 // $GLOBALS['spip_pipeline']
 // $GLOBALS['spip_matrice']
 
-function pipeline_matrice_precompile($plugin_valides, $ordre, $pipe_recherche) {
-	static $liste_pipe_manquants = array();
-	if (($pipe_recherche) && (!in_array($pipe_recherche, $liste_pipe_manquants))) {
-		$liste_pipe_manquants[] = $pipe_recherche;
-	}
+function pipeline_matrice_precompile($plugin_valides, $ordre, $pipe_recherche)
+{
+    static $liste_pipe_manquants = array();
+    if (($pipe_recherche) && (!in_array($pipe_recherche, $liste_pipe_manquants))) {
+        $liste_pipe_manquants[] = $pipe_recherche;
+    }
 
-	$prepend_code = array();
+    $prepend_code = array();
 
-	foreach ($ordre as $p => $info) {
-		// $ordre peur contenir des plugins en attente et non valides pour ce hit
-		if (isset($plugin_valides[$p])) {
-			$dir_type = $plugin_valides[$p]['dir_type'];
-			$root_dir_type = str_replace('_DIR_', '_ROOT_', $dir_type);
-			$plug = $plugin_valides[$p]['dir'];
-			$prefix = (($info['prefix'] == "spip") ? "" : $info['prefix'] . "_");
-			if (isset($info['pipeline']) AND is_array($info['pipeline'])) {
-				foreach ($info['pipeline'] as $pipe) {
-					$nom = $pipe['nom'];
-					if (isset($pipe['action'])) {
-						$action = $pipe['action'];
-					} else {
-						$action = $nom;
-					}
-					$nomlower = strtolower($nom);
-					if ($nomlower != $nom
-						AND isset($GLOBALS['spip_pipeline'][$nom])
-						AND !isset($GLOBALS['spip_pipeline'][$nomlower])
-					) {
-						$GLOBALS['spip_pipeline'][$nomlower] = $GLOBALS['spip_pipeline'][$nom];
-						unset($GLOBALS['spip_pipeline'][$nom]);
-					}
-					$nom = $nomlower;
-					// une action vide est une declaration qui ne doit pas etre compilee !
-					if (!isset($GLOBALS['spip_pipeline'][$nom])) // creer le pipeline eventuel
-					{
-						$GLOBALS['spip_pipeline'][$nom] = "";
-					}
-					if ($action) {
-						if (strpos($GLOBALS['spip_pipeline'][$nom], "|$prefix$action") === false) {
-							$GLOBALS['spip_pipeline'][$nom] = preg_replace(",(\|\||$),", "|$prefix$action\\1",
-								$GLOBALS['spip_pipeline'][$nom], 1);
-						}
-						if (isset($pipe['inclure'])) {
-							$GLOBALS['spip_matrice']["$prefix$action"] =
-								"$root_dir_type:$plug/" . $pipe['inclure'];
-						}
-					}
-				}
-				if (isset($info['genie']) AND count($info['genie'])) {
-					if (!isset($prepend_code['taches_generales_cron'])) {
-						$prepend_code['taches_generales_cron'] = "";
-					}
-					foreach ($info['genie'] as $genie) {
-						$nom = $prefix . $genie['nom'];
-						$periode = max(60, intval($genie['periode']));
-						if (charger_fonction($nom, "genie", true)) {
-							$prepend_code['taches_generales_cron'] .= "\$val['$nom'] = $periode;\n";
-						} else {
-							spip_log("Fonction genie_$nom introuvable", _LOG_ERREUR);
-						}
-					}
-				}
-				if (isset($info['style']) AND count($info['style'])) {
-					if (!isset($prepend_code['insert_head_css'])) {
-						$prepend_code['insert_head_css'] = "";
-					}
-					if (!isset($prepend_code['header_prive_css'])) {
-						$prepend_code['header_prive_css'] = "";
-					}
-					foreach ($info['style'] as $style) {
-						if (isset($style['path']) AND $style['path']) {
-							$code = "if (\$f=timestamp(direction_css(find_in_path('" . addslashes($style['path']) . "')))) ";
-						} else {
-							$code = "if (\$f='" . addslashes($style['url']) . "') ";
-						}
-						$code .= "\$val .= '<link rel=\"stylesheet\" href=\"'.\$f.'\" type=\"text/css\"";
-						if (isset($style['media']) AND strlen($style['media'])) {
-							$code .= " media=\"" . addslashes($style['media']) . "\"";
-						}
-						$code .= "/>';\n";
-						if ($style['type'] != 'prive') {
-							$prepend_code['insert_head_css'] .= $code;
-						}
-						if ($style['type'] != 'public') {
-							$prepend_code['header_prive_css'] .= $code;
-						}
-					}
-				}
-				if (!isset($prepend_code['insert_head'])) {
-					$prepend_code['insert_head'] = "";
-				}
-				if (!isset($prepend_code['header_prive'])) {
-					$prepend_code['header_prive'] = "";
-				}
-				if (isset($info['script']) AND count($info['script'])) {
-					foreach ($info['script'] as $script) {
-						if (isset($script['path']) AND $script['path']) {
-							$code = "if (\$f=timestamp(find_in_path('" . addslashes($script['path']) . "'))) ";
-						} else {
-							$code = "if (\$f='" . addslashes($script['url']) . "') ";
-						}
-						$code .= "\$val .= '<script src=\"'.\$f.'\" type=\"text/javascript\"></script>';\n";
-						if ($script['type'] != 'prive') {
-							$prepend_code['insert_head'] .= $code;
-						}
-						if ($script['type'] != 'public') {
-							$prepend_code['header_prive'] .= $code;
-						}
-					}
-				}
-			}
-		}
-	}
+    foreach ($ordre as $p => $info) {
+        // $ordre peur contenir des plugins en attente et non valides pour ce hit
+        if (isset($plugin_valides[$p])) {
+            $dir_type = $plugin_valides[$p]['dir_type'];
+            $root_dir_type = str_replace('_DIR_', '_ROOT_', $dir_type);
+            $plug = $plugin_valides[$p]['dir'];
+            $prefix = (($info['prefix'] == 'spip') ? '' : $info['prefix'].'_');
+            if (isset($info['pipeline']) and is_array($info['pipeline'])) {
+                foreach ($info['pipeline'] as $pipe) {
+                    $nom = $pipe['nom'];
+                    if (isset($pipe['action'])) {
+                        $action = $pipe['action'];
+                    } else {
+                        $action = $nom;
+                    }
+                    $nomlower = strtolower($nom);
+                    if ($nomlower != $nom
+                        and isset($GLOBALS['spip_pipeline'][$nom])
+                        and !isset($GLOBALS['spip_pipeline'][$nomlower])
+                    ) {
+                        $GLOBALS['spip_pipeline'][$nomlower] = $GLOBALS['spip_pipeline'][$nom];
+                        unset($GLOBALS['spip_pipeline'][$nom]);
+                    }
+                    $nom = $nomlower;
+                    // une action vide est une declaration qui ne doit pas etre compilee !
+                    if (!isset($GLOBALS['spip_pipeline'][$nom])) {
+                        // creer le pipeline eventuel
 
-	$prepend_code['insert_head'] =
-		"include_once_check(_DIR_RESTREINT . 'inc/pipelines.php');\n"
-		. "\$val = minipipe('f_jQuery', \$val);\n"
-		. $prepend_code['insert_head'];
-	$prepend_code['header_prive'] =
-		"include_once_check(_DIR_RESTREINT . 'inc/pipelines_ecrire.php');\n"
-		. "\$val = minipipe('f_jQuery_prive', \$val);\n"
-		. $prepend_code['header_prive'];
+                        $GLOBALS['spip_pipeline'][$nom] = '';
+                    }
+                    if ($action) {
+                        if (strpos($GLOBALS['spip_pipeline'][$nom], "|$prefix$action") === false) {
+                            $GLOBALS['spip_pipeline'][$nom] = preg_replace(",(\|\||$),", "|$prefix$action\\1",
+                                $GLOBALS['spip_pipeline'][$nom], 1);
+                        }
+                        if (isset($pipe['inclure'])) {
+                            $GLOBALS['spip_matrice']["$prefix$action"] =
+                                "$root_dir_type:$plug/".$pipe['inclure'];
+                        }
+                    }
+                }
+                if (isset($info['genie']) and count($info['genie'])) {
+                    if (!isset($prepend_code['taches_generales_cron'])) {
+                        $prepend_code['taches_generales_cron'] = '';
+                    }
+                    foreach ($info['genie'] as $genie) {
+                        $nom = $prefix.$genie['nom'];
+                        $periode = max(60, intval($genie['periode']));
+                        if (charger_fonction($nom, 'genie', true)) {
+                            $prepend_code['taches_generales_cron'] .= "\$val['$nom'] = $periode;\n";
+                        } else {
+                            spip_log("Fonction genie_$nom introuvable", _LOG_ERREUR);
+                        }
+                    }
+                }
+                if (isset($info['style']) and count($info['style'])) {
+                    if (!isset($prepend_code['insert_head_css'])) {
+                        $prepend_code['insert_head_css'] = '';
+                    }
+                    if (!isset($prepend_code['header_prive_css'])) {
+                        $prepend_code['header_prive_css'] = '';
+                    }
+                    foreach ($info['style'] as $style) {
+                        if (isset($style['path']) and $style['path']) {
+                            $code = "if (\$f=timestamp(direction_css(find_in_path('".addslashes($style['path'])."')))) ";
+                        } else {
+                            $code = "if (\$f='".addslashes($style['url'])."') ";
+                        }
+                        $code .= "\$val .= '<link rel=\"stylesheet\" href=\"'.\$f.'\" type=\"text/css\"";
+                        if (isset($style['media']) and strlen($style['media'])) {
+                            $code .= ' media="'.addslashes($style['media']).'"';
+                        }
+                        $code .= "/>';\n";
+                        if ($style['type'] != 'prive') {
+                            $prepend_code['insert_head_css'] .= $code;
+                        }
+                        if ($style['type'] != 'public') {
+                            $prepend_code['header_prive_css'] .= $code;
+                        }
+                    }
+                }
+                if (!isset($prepend_code['insert_head'])) {
+                    $prepend_code['insert_head'] = '';
+                }
+                if (!isset($prepend_code['header_prive'])) {
+                    $prepend_code['header_prive'] = '';
+                }
+                if (isset($info['script']) and count($info['script'])) {
+                    foreach ($info['script'] as $script) {
+                        if (isset($script['path']) and $script['path']) {
+                            $code = "if (\$f=timestamp(find_in_path('".addslashes($script['path'])."'))) ";
+                        } else {
+                            $code = "if (\$f='".addslashes($script['url'])."') ";
+                        }
+                        $code .= "\$val .= '<script src=\"'.\$f.'\" type=\"text/javascript\"></script>';\n";
+                        if ($script['type'] != 'prive') {
+                            $prepend_code['insert_head'] .= $code;
+                        }
+                        if ($script['type'] != 'public') {
+                            $prepend_code['header_prive'] .= $code;
+                        }
+                    }
+                }
+            }
+        }
+    }
 
+    $prepend_code['insert_head'] =
+        "include_once_check(_DIR_RESTREINT . 'inc/pipelines.php');\n"
+        ."\$val = minipipe('f_jQuery', \$val);\n"
+        .$prepend_code['insert_head'];
+    $prepend_code['header_prive'] =
+        "include_once_check(_DIR_RESTREINT . 'inc/pipelines_ecrire.php');\n"
+        ."\$val = minipipe('f_jQuery_prive', \$val);\n"
+        .$prepend_code['header_prive'];
 
-	// on charge les fichiers d'options qui peuvent completer
-	// la globale spip_pipeline egalement
-	if (@is_readable(_CACHE_PLUGINS_PATH)) {
-		include_once(_CACHE_PLUGINS_PATH);
-	} // securite : a priori n'a pu etre fait plus tot
-	if (@is_readable(_CACHE_PLUGINS_OPT)) {
-		include_once(_CACHE_PLUGINS_OPT);
-	} else {
-		spip_log("pipelines desactives: impossible de produire " . _CACHE_PLUGINS_OPT);
-	}
+    // on charge les fichiers d'options qui peuvent completer
+    // la globale spip_pipeline egalement
+    if (@is_readable(_CACHE_PLUGINS_PATH)) {
+        include_once _CACHE_PLUGINS_PATH;
+    } // securite : a priori n'a pu etre fait plus tot
+    if (@is_readable(_CACHE_PLUGINS_OPT)) {
+        include_once _CACHE_PLUGINS_OPT;
+    } else {
+        spip_log('pipelines desactives: impossible de produire '._CACHE_PLUGINS_OPT);
+    }
 
-	// on ajoute les pipe qui ont ete recenses manquants
-	foreach ($liste_pipe_manquants as $add_pipe) {
-		if (!isset($GLOBALS['spip_pipeline'][$add_pipe])) {
-			$GLOBALS['spip_pipeline'][$add_pipe] = '';
-		}
-	}
+    // on ajoute les pipe qui ont ete recenses manquants
+    foreach ($liste_pipe_manquants as $add_pipe) {
+        if (!isset($GLOBALS['spip_pipeline'][$add_pipe])) {
+            $GLOBALS['spip_pipeline'][$add_pipe] = '';
+        }
+    }
 
-	return $prepend_code;
+    return $prepend_code;
 }
 
 // precompilation des pipelines
 // http://code.spip.net/@pipeline_precompile
-function pipeline_precompile($prepend_code = array()) {
-
-	$content = "";
-	foreach ($GLOBALS['spip_pipeline'] as $action => $pipeline) {
-		$s_inc = "";
-		$s_call = "";
-		$pipe = array_filter(explode('|', $pipeline));
-		// Eclater le pipeline en filtres et appliquer chaque filtre
-		foreach ($pipe as $fonc) {
-			$fonc = trim($fonc);
-			$s_call .= '$val = minipipe(\'' . $fonc . '\', $val);' . "\n";
-			if (isset($GLOBALS['spip_matrice'][$fonc])) {
-				$file = $GLOBALS['spip_matrice'][$fonc];
-				$file = "'$file'";
-				// si un _DIR_XXX: est dans la chaine, on extrait la constante
-				if (preg_match(",(_(DIR|ROOT)_[A-Z_]+):,Ums", $file, $regs)) {
-					$dir = $regs[1];
-					$root_dir = str_replace('_DIR_', '_ROOT_', $dir);
-					if (defined($root_dir)) {
-						$dir = $root_dir;
-					}
-					$file = str_replace($regs[0], "'." . $dir . ".'", $file);
-					$file = str_replace("''.", "", $file);
-					$file = str_replace(constant($dir), '', $file);
-				}
-				$s_inc .= "include_once_check($file);\n";
-			}
-		}
-		if (strlen($s_inc)) {
-			$s_inc = "static \$inc=null;\nif (!\$inc){\n$s_inc\$inc=true;\n}\n";
-		}
-		$content .= "// Pipeline $action \n"
-			. "function execute_pipeline_$action(&\$val){\n"
-			. $s_inc
-			. ((isset($prepend_code[$action]) AND strlen($prepend_code[$action])) ? trim($prepend_code[$action]) . "\n" : '')
-			. $s_call
-			. "return \$val;\n}\n";
-	}
-	ecrire_fichier_php(_CACHE_PIPELINES, $content);
-	clear_path_cache();
+function pipeline_precompile($prepend_code = array())
+{
+    $content = '';
+    foreach ($GLOBALS['spip_pipeline'] as $action => $pipeline) {
+        $s_inc = '';
+        $s_call = '';
+        $pipe = array_filter(explode('|', $pipeline));
+        // Eclater le pipeline en filtres et appliquer chaque filtre
+        foreach ($pipe as $fonc) {
+            $fonc = trim($fonc);
+            $s_call .= '$val = minipipe(\''.$fonc.'\', $val);'."\n";
+            if (isset($GLOBALS['spip_matrice'][$fonc])) {
+                $file = $GLOBALS['spip_matrice'][$fonc];
+                $file = "'$file'";
+                // si un _DIR_XXX: est dans la chaine, on extrait la constante
+                if (preg_match(',(_(DIR|ROOT)_[A-Z_]+):,Ums', $file, $regs)) {
+                    $dir = $regs[1];
+                    $root_dir = str_replace('_DIR_', '_ROOT_', $dir);
+                    if (defined($root_dir)) {
+                        $dir = $root_dir;
+                    }
+                    $file = str_replace($regs[0], "'.".$dir.".'", $file);
+                    $file = str_replace("''.", '', $file);
+                    $file = str_replace(constant($dir), '', $file);
+                }
+                $s_inc .= "include_once_check($file);\n";
+            }
+        }
+        if (strlen($s_inc)) {
+            $s_inc = "static \$inc=null;\nif (!\$inc){\n$s_inc\$inc=true;\n}\n";
+        }
+        $content .= "// Pipeline $action \n"
+            ."function execute_pipeline_$action(&\$val){\n"
+            .$s_inc
+            .((isset($prepend_code[$action]) and strlen($prepend_code[$action])) ? trim($prepend_code[$action])."\n" : '')
+            .$s_call
+            ."return \$val;\n}\n";
+    }
+    ecrire_fichier_php(_CACHE_PIPELINES, $content);
+    clear_path_cache();
 }
-
 
 // http://code.spip.net/@plugin_est_installe
-function plugin_est_installe($plug_path) {
-	$plugin_installes = isset($GLOBALS['meta']['plugin_installes']) ? unserialize($GLOBALS['meta']['plugin_installes']) : array();
-	if (!$plugin_installes) {
-		return false;
-	}
+function plugin_est_installe($plug_path)
+{
+    $plugin_installes = isset($GLOBALS['meta']['plugin_installes']) ? unserialize($GLOBALS['meta']['plugin_installes']) : array();
+    if (!$plugin_installes) {
+        return false;
+    }
 
-	return in_array($plug_path, $plugin_installes);
+    return in_array($plug_path, $plugin_installes);
 }
-
 
 /**
  * Parcours les plugins activés et appelle leurs fonctions d'installation si elles existent.
@@ -1081,37 +1102,38 @@ function plugin_est_installe($plug_path) {
  *
  * @uses plugins_installer_dist()
  **/
-function plugin_installes_meta() {
-	$installer_plugins = charger_fonction('installer', 'plugins');
-	$meta_plug_installes = array();
-	foreach (unserialize($GLOBALS['meta']['plugin']) as $prefix => $resume) {
-		if ($plug = $resume['dir']) {
-			$infos = $installer_plugins($plug, 'install', $resume['dir_type']);
-			if ($infos) {
-				if (!is_array($infos) OR $infos['install_test'][0]) {
-					$meta_plug_installes[] = $plug;
-				}
-				if (is_array($infos)) {
-					list($ok, $trace) = $infos['install_test'];
-					include_spip('inc/filtres_boites');
-					echo "<div class='install-plugins svp_retour'>"
-						. boite_ouvrir(_T('plugin_titre_installation', array('plugin' => typo($infos['nom']))),
-							($ok ? 'success' : 'error'))
-						. $trace
-						. "<div class='result'>"
-						. ($ok ? ((isset($infos['upgrade']) && $infos['upgrade']) ? _T("plugin_info_upgrade_ok") : _T("plugin_info_install_ok")) : _T("avis_operation_echec"))
-						. "</div>"
-						. boite_fermer()
-						. "</div>";
-				}
-			}
-		}
-	}
-	ecrire_meta('plugin_installes', serialize($meta_plug_installes), 'non');
+function plugin_installes_meta()
+{
+    $installer_plugins = charger_fonction('installer', 'plugins');
+    $meta_plug_installes = array();
+    foreach (unserialize($GLOBALS['meta']['plugin']) as $prefix => $resume) {
+        if ($plug = $resume['dir']) {
+            $infos = $installer_plugins($plug, 'install', $resume['dir_type']);
+            if ($infos) {
+                if (!is_array($infos) or $infos['install_test'][0]) {
+                    $meta_plug_installes[] = $plug;
+                }
+                if (is_array($infos)) {
+                    list($ok, $trace) = $infos['install_test'];
+                    include_spip('inc/filtres_boites');
+                    echo "<div class='install-plugins svp_retour'>"
+                        .boite_ouvrir(_T('plugin_titre_installation', array('plugin' => typo($infos['nom']))),
+                            ($ok ? 'success' : 'error'))
+                        .$trace
+                        ."<div class='result'>"
+                        .($ok ? ((isset($infos['upgrade']) && $infos['upgrade']) ? _T('plugin_info_upgrade_ok') : _T('plugin_info_install_ok')) : _T('avis_operation_echec'))
+                        .'</div>'
+                        .boite_fermer()
+                        .'</div>';
+                }
+            }
+        }
+    }
+    ecrire_meta('plugin_installes', serialize($meta_plug_installes), 'non');
 }
 
-function ecrire_fichier_php($nom, $contenu, $comment = '') {
-	ecrire_fichier($nom,
-		'<' . '?php' . "\n" . $comment . "\nif (defined('_ECRIRE_INC_VERSION')) {\n" . $contenu . "}\n?" . '>');
+function ecrire_fichier_php($nom, $contenu, $comment = '')
+{
+    ecrire_fichier($nom,
+        '<'.'?php'."\n".$comment."\nif (defined('_ECRIRE_INC_VERSION')) {\n".$contenu."}\n?".'>');
 }
-

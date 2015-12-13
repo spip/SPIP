@@ -11,18 +11,14 @@
 \***************************************************************************/
 
 /**
- * Gestion des headers et redirections
- *
- * @package SPIP\Core\Headers
+ * Gestion des headers et redirections.
  **/
-
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
-
 /**
- * Envoyer le navigateur sur une nouvelle adresse
+ * Envoyer le navigateur sur une nouvelle adresse.
  *
  * Le tout en évitant les attaques par la redirection (souvent indique par un `$_GET`)
  *
@@ -33,129 +29,133 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     redirige_par_entete($redirect);
  *     ```
  *
- * @param string $url URL de redirection
- * @param string $equiv ?
- * @param int $status Code de redirection (301 ou 302)
+ * @param string $url    URL de redirection
+ * @param string $equiv  ?
+ * @param int    $status Code de redirection (301 ou 302)
  **/
-function redirige_par_entete($url, $equiv = '', $status = 302) {
-	if (!in_array($status, array(301, 302))) {
-		$status = 302;
-	}
+function redirige_par_entete($url, $equiv = '', $status = 302)
+{
+    if (!in_array($status, array(301, 302))) {
+        $status = 302;
+    }
 
-	$url = trim(strtr($url, "\n\r", "  "));
-	# si l'url de redirection est relative, on la passe en absolue
-	if (!preg_match(",^(\w+:)?//,", $url)) {
-		include_spip("inc/filtres_mini");
-		$url = url_absolue($url);
-	}
+    $url = trim(strtr($url, "\n\r", '  '));
+    # si l'url de redirection est relative, on la passe en absolue
+    if (!preg_match(",^(\w+:)?//,", $url)) {
+        include_spip('inc/filtres_mini');
+        $url = url_absolue($url);
+    }
 
-	if ($x = _request('transformer_xml')) {
-		$url = parametre_url($url, 'transformer_xml', $x, '&');
-	}
+    if ($x = _request('transformer_xml')) {
+        $url = parametre_url($url, 'transformer_xml', $x, '&');
+    }
 
-	if (defined('_AJAX') AND _AJAX) {
-		$url = parametre_url($url, 'var_ajax_redir', 1, '&');
-	}
+    if (defined('_AJAX') and _AJAX) {
+        $url = parametre_url($url, 'var_ajax_redir', 1, '&');
+    }
 
-	// ne pas laisser passer n'importe quoi dans l'url
-	$url = str_replace(array('<', '"'), array('&lt;', '&quot;'), $url);
-	// interdire les url inline avec des pseudo-protocoles :
-	if (
-		(preg_match(",data:,i", $url) AND preg_match("/base64\s*,/i", $url))
-		OR preg_match(",(javascript|mailto):,i", $url)
-	) {
-		$url = "./";
-	}
+    // ne pas laisser passer n'importe quoi dans l'url
+    $url = str_replace(array('<', '"'), array('&lt;', '&quot;'), $url);
+    // interdire les url inline avec des pseudo-protocoles :
+    if (
+        (preg_match(',data:,i', $url) and preg_match("/base64\s*,/i", $url))
+        or preg_match(',(javascript|mailto):,i', $url)
+    ) {
+        $url = './';
+    }
 
-	// Il n'y a que sous Apache que setcookie puis redirection fonctionne
-	include_spip('inc/cookie');
-	if ((!$equiv AND !spip_cookie_envoye()) OR ((strncmp("Apache", $_SERVER['SERVER_SOFTWARE'],
-					6) == 0) OR defined('_SERVER_APACHE'))
-	) {
-		@header("Location: " . $url);
-		$equiv = "";
-	} else {
-		@header("Refresh: 0; url=" . $url);
-		if (isset($GLOBALS['meta']['charset'])) {
-			@header("Content-Type: text/html; charset=" . $GLOBALS['meta']['charset']);
-		}
-		$equiv = "<meta http-equiv='Refresh' content='0; url=$url'>";
-	}
-	include_spip('inc/lang');
-	if ($status != 302) {
-		http_status($status);
-	}
-	echo '<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">', "\n",
-	html_lang_attributes(), '
+    // Il n'y a que sous Apache que setcookie puis redirection fonctionne
+    include_spip('inc/cookie');
+    if ((!$equiv and !spip_cookie_envoye()) or ((strncmp('Apache', $_SERVER['SERVER_SOFTWARE'],
+                    6) == 0) or defined('_SERVER_APACHE'))
+    ) {
+        @header('Location: '.$url);
+        $equiv = '';
+    } else {
+        @header('Refresh: 0; url='.$url);
+        if (isset($GLOBALS['meta']['charset'])) {
+            @header('Content-Type: text/html; charset='.$GLOBALS['meta']['charset']);
+        }
+        $equiv = "<meta http-equiv='Refresh' content='0; url=$url'>";
+    }
+    include_spip('inc/lang');
+    if ($status != 302) {
+        http_status($status);
+    }
+    echo '<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">', "\n",
+    html_lang_attributes(), '
 <head>',
-	$equiv, '
-<title>HTTP ' . $status . '</title>
-' . ((isset($GLOBALS['meta']['charset'])) ? '<meta http-equiv="Content-Type" content="text/html;charset=' . $GLOBALS['meta']['charset'] . '">' : '') . '
+    $equiv, '
+<title>HTTP '.$status.'</title>
+'.((isset($GLOBALS['meta']['charset'])) ? '<meta http-equiv="Content-Type" content="text/html;charset='.$GLOBALS['meta']['charset'].'">' : '').'
 </head>
 <body>
-<h1>HTTP ' . $status . '</h1>
+<h1>HTTP '.$status.'</h1>
 <a href="',
-	quote_amp($url),
-	'">',
-	_T('navigateur_pas_redirige'),
-	'</a></body></html>';
+    quote_amp($url),
+    '">',
+    _T('navigateur_pas_redirige'),
+    '</a></body></html>';
 
-	spip_log("redirige $status: $url");
+    spip_log("redirige $status: $url");
 
-	exit;
+    exit;
 }
 
 // http://code.spip.net/@redirige_formulaire
-function redirige_formulaire($url, $equiv = '', $format = 'message') {
-	if (!_AJAX
-		AND !headers_sent()
-		AND !_request('var_ajax')
-	) {
-		redirige_par_entete(str_replace('&amp;', '&', $url), $equiv);
-	} // si c'est une ancre, fixer simplement le window.location.hash
-	elseif ($format == 'ajaxform' AND preg_match(',^#[0-9a-z\-_]+$,i', $url)) {
-		return array(
-			// on renvoie un lien masque qui sera traite par ajaxCallback.js
-			"<a href='$url' name='ajax_ancre' style='display:none;'>anchor</a>",
-			// et rien dans le message ok
-			''
-		);
-	} else {
-		// ne pas laisser passer n'importe quoi dans l'url
-		$url = str_replace(array('<', '"'), array('&lt;', '&quot;'), $url);
+function redirige_formulaire($url, $equiv = '', $format = 'message')
+{
+    if (!_AJAX
+        and !headers_sent()
+        and !_request('var_ajax')
+    ) {
+        redirige_par_entete(str_replace('&amp;', '&', $url), $equiv);
+    } // si c'est une ancre, fixer simplement le window.location.hash
+    elseif ($format == 'ajaxform' and preg_match(',^#[0-9a-z\-_]+$,i', $url)) {
+        return array(
+            // on renvoie un lien masque qui sera traite par ajaxCallback.js
+            "<a href='$url' name='ajax_ancre' style='display:none;'>anchor</a>",
+            // et rien dans le message ok
+            '',
+        );
+    } else {
+        // ne pas laisser passer n'importe quoi dans l'url
+        $url = str_replace(array('<', '"'), array('&lt;', '&quot;'), $url);
 
-		$url = strtr($url, "\n\r", "  ");
-		# en theorie on devrait faire ca tout le temps, mais quand la chaine
-		# commence par ? c'est imperatif, sinon l'url finale n'est pas la bonne
-		if ($url[0] == '?') {
-			$url = url_de_base() . $url;
-		}
-		$url = str_replace('&amp;', '&', $url);
-		spip_log("redirige formulaire ajax: $url");
-		include_spip('inc/filtres');
-		if ($format == 'ajaxform') {
-			return array(
-				// on renvoie un lien masque qui sera traite par ajaxCallback.js
-				'<a href="' . quote_amp($url) . '" name="ajax_redirect"  style="display:none;">' . _T('navigateur_pas_redirige') . '</a>',
-				// et un message au cas ou
-				'<br /><a href="' . quote_amp($url) . '">' . _T('navigateur_pas_redirige') . '</a>'
-			);
-		} else // format message texte, tout en js inline
-		{
-			return
-				// ie poste les formulaires dans une iframe, il faut donc rediriger son parent
-				"<script type='text/javascript'>if (parent.window){parent.window.document.location.replace(\"$url\");} else {document.location.replace(\"$url\");}</script>"
-				. http_img_pack('searching.gif', '')
-				. '<br />'
-				. '<a href="' . quote_amp($url) . '">' . _T('navigateur_pas_redirige') . '</a>';
-		}
-	}
+        $url = strtr($url, "\n\r", '  ');
+        # en theorie on devrait faire ca tout le temps, mais quand la chaine
+        # commence par ? c'est imperatif, sinon l'url finale n'est pas la bonne
+        if ($url[0] == '?') {
+            $url = url_de_base().$url;
+        }
+        $url = str_replace('&amp;', '&', $url);
+        spip_log("redirige formulaire ajax: $url");
+        include_spip('inc/filtres');
+        if ($format == 'ajaxform') {
+            return array(
+                // on renvoie un lien masque qui sera traite par ajaxCallback.js
+                '<a href="'.quote_amp($url).'" name="ajax_redirect"  style="display:none;">'._T('navigateur_pas_redirige').'</a>',
+                // et un message au cas ou
+                '<br /><a href="'.quote_amp($url).'">'._T('navigateur_pas_redirige').'</a>',
+            );
+        } else {
+            // format message texte, tout en js inline
+
+            return
+                // ie poste les formulaires dans une iframe, il faut donc rediriger son parent
+                "<script type='text/javascript'>if (parent.window){parent.window.document.location.replace(\"$url\");} else {document.location.replace(\"$url\");}</script>"
+                .http_img_pack('searching.gif', '')
+                .'<br />'
+                .'<a href="'.quote_amp($url).'">'._T('navigateur_pas_redirige').'</a>';
+        }
+    }
 }
 
 /**
- * Effectue une redirection par header PHP vers un script de l’interface privée
+ * Effectue une redirection par header PHP vers un script de l’interface privée.
  *
  * @uses redirige_par_entete() Qui tue le script PHP.
+ *
  * @example
  *     ```
  *     include_spip('inc/headers');
@@ -163,14 +163,14 @@ function redirige_formulaire($url, $equiv = '', $format = 'message') {
  *     ```
  *
  * @param string $script
- *     Nom de la page privée (exec)
+ *                       Nom de la page privée (exec)
  * @param string $args
- *     Arguments à transmettre. Exemple `etape=1&autre=oui`
+ *                       Arguments à transmettre. Exemple `etape=1&autre=oui`
  * @param string $equiv
- * @return void
  **/
-function redirige_url_ecrire($script = '', $args = '', $equiv = '') {
-	return redirige_par_entete(generer_url_ecrire($script, $args, true), $equiv);
+function redirige_url_ecrire($script = '', $args = '', $equiv = '')
+{
+    return redirige_par_entete(generer_url_ecrire($script, $args, true), $equiv);
 }
 
 /**
@@ -181,55 +181,54 @@ function redirige_url_ecrire($script = '', $args = '', $equiv = '') {
  * @link http://php.net/manual/fr/function.header.php Fonction header() de PHP utilisée ici
  *
  * @param int $status
- *     Code d'erreur
+ *                    Code d'erreur
  **/
-function http_status($status) {
+function http_status($status)
+{
+    static $status_string = array(
+        200 => '200 OK',
+        204 => '204 No Content',
+        301 => '301 Moved Permanently',
+        302 => '302 Found',
+        304 => '304 Not Modified',
+        401 => '401 Unauthorized',
+        403 => '403 Forbidden',
+        404 => '404 Not Found',
+        503 => '503 Service Unavailable',
+    );
 
-	static $status_string = array(
-		200 => '200 OK',
-		204 => '204 No Content',
-		301 => '301 Moved Permanently',
-		302 => '302 Found',
-		304 => '304 Not Modified',
-		401 => '401 Unauthorized',
-		403 => '403 Forbidden',
-		404 => '404 Not Found',
-		503 => '503 Service Unavailable'
-	);
+    if ($GLOBALS['REDIRECT_STATUS'] && $GLOBALS['REDIRECT_STATUS'] == $status) {
+        return;
+    }
 
-	if ($GLOBALS['REDIRECT_STATUS'] && $GLOBALS['REDIRECT_STATUS'] == $status) {
-		return;
-	}
-
-	$php_cgi = ($GLOBALS['flag_sapi_name'] AND preg_match(",cgi,i", @php_sapi_name()));
-	if ($php_cgi) {
-		header("Status: " . $status_string[$status]);
-	} else {
-		header("HTTP/1.0 " . $status_string[$status]);
-	}
+    $php_cgi = ($GLOBALS['flag_sapi_name'] and preg_match(',cgi,i', @php_sapi_name()));
+    if ($php_cgi) {
+        header('Status: '.$status_string[$status]);
+    } else {
+        header('HTTP/1.0 '.$status_string[$status]);
+    }
 }
 
 // Retourne ce qui va bien pour que le navigateur ne mette pas la page en cache
 // http://code.spip.net/@http_no_cache
-function http_no_cache() {
-	if (headers_sent()) {
-		spip_log("http_no_cache arrive trop tard");
+function http_no_cache()
+{
+    if (headers_sent()) {
+        spip_log('http_no_cache arrive trop tard');
 
-		return;
-	}
-	$charset = empty($GLOBALS['meta']['charset']) ? 'utf-8' : $GLOBALS['meta']['charset'];
+        return;
+    }
+    $charset = empty($GLOBALS['meta']['charset']) ? 'utf-8' : $GLOBALS['meta']['charset'];
 
-	// selon http://developer.apple.com/internet/safari/faq.html#anchor5
-	// il faudrait aussi pour Safari
-	// header("Cache-Control: post-check=0, pre-check=0", false)
-	// mais ca ne respecte pas
-	// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
+    // selon http://developer.apple.com/internet/safari/faq.html#anchor5
+    // il faudrait aussi pour Safari
+    // header("Cache-Control: post-check=0, pre-check=0", false)
+    // mais ca ne respecte pas
+    // http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
 
-	header("Content-Type: text/html; charset=$charset");
-	header("Expires: 0");
-	header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-	header("Cache-Control: no-cache, must-revalidate");
-	header("Pragma: no-cache");
+    header("Content-Type: text/html; charset=$charset");
+    header('Expires: 0');
+    header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
+    header('Cache-Control: no-cache, must-revalidate');
+    header('Pragma: no-cache');
 }
-
-?>

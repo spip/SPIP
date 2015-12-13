@@ -11,13 +11,10 @@
 \***************************************************************************/
 
 /**
- * Ce fichier gère la balise dynamique `#FORMULAIRE_INSCRIPTION`
- *
- * @package SPIP\Core\Inscription
+ * Ce fichier gère la balise dynamique `#FORMULAIRE_INSCRIPTION`.
  **/
-
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 include_spip('base/abstract_sql');
@@ -25,12 +22,12 @@ include_spip('inc/filtres');
 
 // Balise independante du contexte
 
-
 /**
  * Compile la balise dynamique `#FORMULAIRE_INSCRIPTION` qui affiche
- * un formulaire d'inscription au site
+ * un formulaire d'inscription au site.
  *
  * @balise
+ *
  * @example
  *     ```
  *     #FORMULAIRE_INSCRIPTION
@@ -38,16 +35,18 @@ include_spip('inc/filtres');
  *     ```
  *
  * @param Champ $p
- *     Pile au niveau de la balise
+ *                 Pile au niveau de la balise
+ *
  * @return Champ
- *     Pile complétée du code compilé
+ *               Pile complétée du code compilé
  **/
-function balise_FORMULAIRE_INSCRIPTION($p) {
-	return calculer_balise_dynamique($p, 'FORMULAIRE_INSCRIPTION', array());
+function balise_FORMULAIRE_INSCRIPTION($p)
+{
+    return calculer_balise_dynamique($p, 'FORMULAIRE_INSCRIPTION', array());
 }
 
 /**
- * Calculs de paramètres de contexte automatiques pour la balise FORMULAIRE_INSCRIPTION
+ * Calculs de paramètres de contexte automatiques pour la balise FORMULAIRE_INSCRIPTION.
  *
  * En absence de mode d'inscription transmis à la balise, celui-ci est
  * calculé en fonction de la configuration :
@@ -63,20 +62,20 @@ function balise_FORMULAIRE_INSCRIPTION($p) {
  *     ```
  *
  * @param array $args
- *   - args[0] un statut d'auteur (rédacteur par defaut)
- *   - args[1] indique la rubrique éventuelle de proposition
+ *                              - args[0] un statut d'auteur (rédacteur par defaut)
+ *                              - args[1] indique la rubrique éventuelle de proposition
  * @param array $context_compil
- *   Tableau d'informations sur la compilation
+ *                              Tableau d'informations sur la compilation
+ *
  * @return array|string
- *   - Liste (statut, id) si un mode d'inscription est possible
- *   - chaîne vide sinon.
+ *                      - Liste (statut, id) si un mode d'inscription est possible
+ *                      - chaîne vide sinon.
  */
-function balise_FORMULAIRE_INSCRIPTION_stat($args, $context_compil) {
-	list($mode, $id) = array_pad($args, 2, null);
-	include_spip('action/inscrire_auteur');
-	$mode = tester_statut_inscription($mode, $id);
+function balise_FORMULAIRE_INSCRIPTION_stat($args, $context_compil)
+{
+    list($mode, $id) = array_pad($args, 2, null);
+    include_spip('action/inscrire_auteur');
+    $mode = tester_statut_inscription($mode, $id);
 
-	return $mode ? array($mode, $id) : '';
+    return $mode ? array($mode, $id) : '';
 }
-
-?>

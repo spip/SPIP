@@ -11,28 +11,22 @@
 \***************************************************************************/
 
 /**
- * Gestion de l'action de purge des travaux en attente
- *
- * @package SPIP\Core\Queue
+ * Gestion de l'action de purge des travaux en attente.
  **/
 if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
+    return;
 }
 
 /**
- * Purger la liste des travaux en attente
- *
- * @return void
+ * Purger la liste des travaux en attente.
  */
-function action_purger_queue_dist() {
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
+function action_purger_queue_dist()
+{
+    $securiser_action = charger_fonction('securiser_action', 'inc');
+    $securiser_action();
 
-	if (autoriser('purger', 'queue')) {
-		include_spip('inc/queue');
-		queue_purger();
-	}
-
+    if (autoriser('purger', 'queue')) {
+        include_spip('inc/queue');
+        queue_purger();
+    }
 }
-
-?>

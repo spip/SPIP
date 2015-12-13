@@ -1,6 +1,6 @@
 <?php
 /**
- * Transparent SHA-256 Implementation for PHP 4 and PHP 5
+ * Transparent SHA-256 Implementation for PHP 4 and PHP 5.
  *
  * Author: Perry McGee (pmcgee@nanolink.ca)
  * Website: http://www.nanolink.ca/pub/sha256
@@ -64,486 +64,513 @@
  *       If the mhash module is present, and $ignore_php5_hash = false the
  *       script will attempt to use the output from mhash prior to running
  *       the PHP code.
- *
- * @package SPIP\Core\Authentification\Sha256
  */
 if (!class_exists('nanoSha2')) {
-	/**
-	 * Classe de calcul d'un SHA
-	 */
-	class nanoSha2 {
-		// php 4 - 5 compatable class properties
-		/** Le résultat doit être passé en majuscule ?
-		 *
-		 * @var bool
-		 */
-		var $toUpper;
-		/** 32 ou 64 bits ?
-		 *
-		 * @var int
-		 */
-		var $platform;
-		/** bytes par caractères */
-		var $bytesString = 16;
+    /**
+     * Classe de calcul d'un SHA.
+     */
+    class nanoSha2
+    {
+        // php 4 - 5 compatable class properties
+        /* Le résultat doit être passé en majuscule ?
+         *
+         * @var bool
+         */
+        public $toUpper;
+        /* 32 ou 64 bits ?
+         *
+         * @var int
+         */
+        public $platform;
+        /* bytes par caractères */
+        public $bytesString = 16;
 
-		/**
-		 * Constructor
-		 *
-		 * @param bool $toUpper
-		 */
-		function __construct($toUpper = false) {
-			// Determine if the caller wants upper case or not.
-			$this->toUpper = is_bool($toUpper)
-				? $toUpper
-				: ((defined('_NANO_SHA2_UPPER')) ? true : false);
+        /**
+         * Constructor.
+         *
+         * @param bool $toUpper
+         */
+        public function __construct($toUpper = false)
+        {
+            // Determine if the caller wants upper case or not.
+            $this->toUpper = is_bool($toUpper)
+                ? $toUpper
+                : ((defined('_NANO_SHA2_UPPER')) ? true : false);
 
-			// Deteremine if the system is 32 or 64 bit.
-			$tmpInt = (int)4294967295;
-			$this->platform = ($tmpInt > 0) ? 64 : 32;
-		}
+            // Deteremine if the system is 32 or 64 bit.
+            $tmpInt = (int) 4294967295;
+            $this->platform = ($tmpInt > 0) ? 64 : 32;
+        }
 
-		/**
-		 * Here are the bitwise and functions as defined in FIPS180-2 Standard
-		 *
-		 * @param int $x
-		 * @param int $y
-		 * @param int $n
-		 * @return int
-		 */
-		function addmod2n($x, $y, $n = 4294967296)      // Z = (X + Y) mod 2^32
-		{
-			$mask = 0x80000000;
+        /**
+         * Here are the bitwise and functions as defined in FIPS180-2 Standard.
+         *
+         * @param int $x
+         * @param int $y
+         * @param int $n
+         *
+         * @return int
+         */
+        public function addmod2n($x, $y, $n = 4294967296)      // Z = (X + Y) mod 2^32
+        {
+            $mask = 0x80000000;
 
-			if ($x < 0) {
-				$x &= 0x7FFFFFFF;
-				$x = (float)$x+$mask;
-			}
+            if ($x < 0) {
+                $x &= 0x7FFFFFFF;
+                $x = (float) $x + $mask;
+            }
 
-			if ($y < 0) {
-				$y &= 0x7FFFFFFF;
-				$y = (float)$y+$mask;
-			}
+            if ($y < 0) {
+                $y &= 0x7FFFFFFF;
+                $y = (float) $y + $mask;
+            }
 
-			$r = $x+$y;
+            $r = $x + $y;
 
-			if ($r >= $n) {
-				while ($r >= $n) {
-					$r -= $n;
-				}
-			}
+            if ($r >= $n) {
+                while ($r >= $n) {
+                    $r -= $n;
+                }
+            }
 
-			return (int)$r;
-		}
+            return (int) $r;
+        }
 
-		/**
-		 * Logical bitwise right shift (PHP default is arithmetic shift)
-		 *
-		 * @param int $x
-		 * @param int $n
-		 * return int
-		 */
-		function SHR($x, $n)        // x >> n
-		{
-			if ($n >= 32) {      // impose some limits to keep it 32-bit
-				return (int)0;
-			}
+        /**
+         * Logical bitwise right shift (PHP default is arithmetic shift).
+         *
+         * @param int $x
+         * @param int $n
+         *               return int
+         */
+        public function SHR($x, $n)        // x >> n
+        {
+            if ($n >= 32) {      // impose some limits to keep it 32-bit
+                return (int) 0;
+            }
 
-			if ($n <= 0) {
-				return (int)$x;
-			}
+            if ($n <= 0) {
+                return (int) $x;
+            }
 
-			$mask = 0x40000000;
+            $mask = 0x40000000;
 
-			if ($x < 0) {
-				$x &= 0x7FFFFFFF;
-				$mask = $mask >> ($n-1);
+            if ($x < 0) {
+                $x &= 0x7FFFFFFF;
+                $mask = $mask >> ($n - 1);
 
-				return ($x >> $n) | $mask;
-			}
+                return ($x >> $n) | $mask;
+            }
 
-			return (int)$x >> (int)$n;
-		}
+            return (int) $x >> (int) $n;
+        }
 
-		/** ROTR
-		 *
-		 * @param int $x
-		 * @param int $n
-		 * @return int
-		 */
-		function ROTR($x, $n) { return (int)(($this->SHR($x, $n) | ($x << (32-$n)) & 0xFFFFFFFF)); }
+        /** ROTR
+         * @param int $x
+         * @param int $n
+         *
+         * @return int
+         */
+        public function ROTR($x, $n)
+        {
+            return (int) (($this->SHR($x, $n) | ($x << (32 - $n)) & 0xFFFFFFFF));
+        }
 
-		/** Ch
-		 *
-		 * @param int $x
-		 * @param int $y
-		 * @param int $z
-		 * @return int
-		 */
-		function Ch($x, $y, $z) { return ($x & $y) ^ ((~$x) & $z); }
+        /** Ch
+         * @param int $x
+         * @param int $y
+         * @param int $z
+         *
+         * @return int
+         */
+        public function Ch($x, $y, $z)
+        {
+            return ($x & $y) ^ ((~$x) & $z);
+        }
 
-		/** Maj
-		 *
-		 * @param int $x
-		 * @param int $y
-		 * @param int $z
-		 * @return int
-		 */
-		function Maj($x, $y, $z) { return ($x & $y) ^ ($x & $z) ^ ($y & $z); }
+        /** Maj
+         * @param int $x
+         * @param int $y
+         * @param int $z
+         *
+         * @return int
+         */
+        public function Maj($x, $y, $z)
+        {
+            return ($x & $y) ^ ($x & $z) ^ ($y & $z);
+        }
 
-		/** Sigma0
-		 *
-		 * @param int $x
-		 * @return int
-		 */
-		function Sigma0($x) { return (int)($this->ROTR($x, 2) ^ $this->ROTR($x, 13) ^ $this->ROTR($x, 22)); }
+        /** Sigma0
+         * @param int $x
+         *
+         * @return int
+         */
+        public function Sigma0($x)
+        {
+            return (int) ($this->ROTR($x, 2) ^ $this->ROTR($x, 13) ^ $this->ROTR($x, 22));
+        }
 
-		/** Sigma1
-		 *
-		 * @param int $x
-		 * @return int
-		 */
-		function Sigma1($x) { return (int)($this->ROTR($x, 6) ^ $this->ROTR($x, 11) ^ $this->ROTR($x, 25)); }
+        /** Sigma1
+         * @param int $x
+         *
+         * @return int
+         */
+        public function Sigma1($x)
+        {
+            return (int) ($this->ROTR($x, 6) ^ $this->ROTR($x, 11) ^ $this->ROTR($x, 25));
+        }
 
-		/** Sigma_0
-		 *
-		 * @param int $x
-		 * @return int
-		 */
-		function sigma_0($x) { return (int)($this->ROTR($x, 7) ^ $this->ROTR($x, 18) ^ $this->SHR($x, 3)); }
+        /** Sigma_0
+         * @param int $x
+         *
+         * @return int
+         */
+        public function sigma_0($x)
+        {
+            return (int) ($this->ROTR($x, 7) ^ $this->ROTR($x, 18) ^ $this->SHR($x, 3));
+        }
 
-		/** Sigma_1
-		 *
-		 * @param int $x
-		 * @return int
-		 */
-		function sigma_1($x) { return (int)($this->ROTR($x, 17) ^ $this->ROTR($x, 19) ^ $this->SHR($x, 10)); }
+        /** Sigma_1
+         * @param int $x
+         *
+         * @return int
+         */
+        public function sigma_1($x)
+        {
+            return (int) ($this->ROTR($x, 17) ^ $this->ROTR($x, 19) ^ $this->SHR($x, 10));
+        }
 
-		/** String 2 ord UTF8
-		 *
-		 * @param string $s
-		 * @param int $byteSize
-		 * @return array
-		 **/
-		function string2ordUTF8($s, &$byteSize) {
-			$chars = array();
-			// par defaut sur 8bits
-			$byteSize = 8;
-			$i = 0;
-			while ($i < strlen($s)) {
-				$chars[] = $this->ordUTF8($s, $i, $bytes);
-				$i += $bytes;
-				// mais si un char necessite 16bits, on passe tout sur 16
-				// sinon on ne concorde pas avec le lecture de la chaine en js
-				// et le sha256 js
-				if ($bytes > 1) {
-					$byteSize = 16;
-				}
-			}
+        /** String 2 ord UTF8
+         * @param string $s
+         * @param int    $byteSize
+         *
+         * @return array
+         **/
+        public function string2ordUTF8($s, &$byteSize)
+        {
+            $chars = array();
+            // par defaut sur 8bits
+            $byteSize = 8;
+            $i = 0;
+            while ($i < strlen($s)) {
+                $chars[] = $this->ordUTF8($s, $i, $bytes);
+                $i += $bytes;
+                // mais si un char necessite 16bits, on passe tout sur 16
+                // sinon on ne concorde pas avec le lecture de la chaine en js
+                // et le sha256 js
+                if ($bytes > 1) {
+                    $byteSize = 16;
+                }
+            }
 
-			return $chars;
-		}
+            return $chars;
+        }
 
-		/** Ord UTF8
-		 *
-		 * @param string $c
-		 * @param int $index
-		 * @param int $bytes
-		 * @return unknown
-		 **/
-		function ordUTF8($c, $index = 0, &$bytes) {
-			$len = strlen($c);
-			$bytes = 0;
+        /** Ord UTF8
+         * @param string $c
+         * @param int    $index
+         * @param int    $bytes
+         *
+         * @return unknown
+         **/
+        public function ordUTF8($c, $index = 0, &$bytes)
+        {
+            $len = strlen($c);
+            $bytes = 0;
 
-			if ($index >= $len) {
-				return false;
-			}
+            if ($index >= $len) {
+                return false;
+            }
 
-			$h = ord($c{$index});
+            $h = ord($c{$index});
 
-			if ($h <= 0x7F) {
-				$bytes = 1;
+            if ($h <= 0x7F) {
+                $bytes = 1;
 
-				return $h;
-			} else {
-				if ($h < 0xC2) {
-					// pas utf mais renvoyer quand meme ce qu'on a
-					$bytes = 1;
+                return $h;
+            } else {
+                if ($h < 0xC2) {
+                    // pas utf mais renvoyer quand meme ce qu'on a
+                    $bytes = 1;
 
-					return $h;
-				} else {
-					if ($h <= 0xDF && $index < $len-1) {
-						$bytes = 2;
+                    return $h;
+                } else {
+                    if ($h <= 0xDF && $index < $len - 1) {
+                        $bytes = 2;
 
-						return ($h & 0x1F) << 6 | (ord($c{$index+1}) & 0x3F);
-					} else {
-						if ($h <= 0xEF && $index < $len-2) {
-							$bytes = 3;
+                        return ($h & 0x1F) << 6 | (ord($c{$index + 1}) & 0x3F);
+                    } else {
+                        if ($h <= 0xEF && $index < $len - 2) {
+                            $bytes = 3;
 
-							return ($h & 0x0F) << 12 | (ord($c{$index+1}) & 0x3F) << 6
-							| (ord($c{$index+2}) & 0x3F);
-						} else {
-							if ($h <= 0xF4 && $index < $len-3) {
-								$bytes = 4;
+                            return ($h & 0x0F) << 12 | (ord($c{$index + 1}) & 0x3F) << 6
+                            | (ord($c{$index + 2}) & 0x3F);
+                        } else {
+                            if ($h <= 0xF4 && $index < $len - 3) {
+                                $bytes = 4;
 
-								return ($h & 0x0F) << 18 | (ord($c{$index+1}) & 0x3F) << 12
-								| (ord($c{$index+2}) & 0x3F) << 6
-								| (ord($c{$index+3}) & 0x3F);
-							} else {
-								// pas utf mais renvoyer quand meme ce qu'on a
-								$bytes = 1;
+                                return ($h & 0x0F) << 18 | (ord($c{$index + 1}) & 0x3F) << 12
+                                | (ord($c{$index + 2}) & 0x3F) << 6
+                                | (ord($c{$index + 3}) & 0x3F);
+                            } else {
+                                // pas utf mais renvoyer quand meme ce qu'on a
+                                $bytes = 1;
 
-								return $h;
-							}
-						}
-					}
-				}
-			}
-		}
+                                return $h;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-		/** String 2 bin int
-		 *
-		 * @param string $str
-		 * @param int $npad
-		 * @return int[]
-		 **/
-		function string2binint($str, $npad = 512) {
-			$bin = array();
-			$ords = $this->string2ordUTF8($str, $this->bytesString);
-			$npad = $npad/$this->bytesString;
-			$length = count($ords);
-			$ords[] = 0x80; // append the "1" bit followed by 7 0's
-			$pad = ceil(($length+1+32/$this->bytesString)/$npad)*$npad-32/$this->bytesString;
-			$ords = array_pad($ords, $pad, 0);
-			$mask = (1 << $this->bytesString)-1;
-			for ($i = 0; $i < count($ords)*$this->bytesString; $i += $this->bytesString) {
-				if (!isset($bin[$i >> 5])) {
-					$bin[$i >> 5] = 0;
-				} // pour eviter des notices.
-				$bin[$i >> 5] |= ($ords[$i/$this->bytesString] & $mask) << (24-$i%32);
-			}
-			$bin[] = $length*$this->bytesString;
+        /** String 2 bin int
+         * @param string $str
+         * @param int    $npad
+         *
+         * @return int[]
+         **/
+        public function string2binint($str, $npad = 512)
+        {
+            $bin = array();
+            $ords = $this->string2ordUTF8($str, $this->bytesString);
+            $npad = $npad / $this->bytesString;
+            $length = count($ords);
+            $ords[] = 0x80; // append the "1" bit followed by 7 0's
+            $pad = ceil(($length + 1 + 32 / $this->bytesString) / $npad) * $npad - 32 / $this->bytesString;
+            $ords = array_pad($ords, $pad, 0);
+            $mask = (1 << $this->bytesString) - 1;
+            for ($i = 0; $i < count($ords) * $this->bytesString; $i += $this->bytesString) {
+                if (!isset($bin[$i >> 5])) {
+                    $bin[$i >> 5] = 0;
+                } // pour eviter des notices.
+                $bin[$i >> 5] |= ($ords[$i / $this->bytesString] & $mask) << (24 - $i % 32);
+            }
+            $bin[] = $length * $this->bytesString;
 
-			return $bin;
-		}
+            return $bin;
+        }
 
-		/** Array split
-		 *
-		 * @param array $a
-		 * @param int $n
-		 * @return array
-		 **/
-		function array_split($a, $n) {
-			$split = array();
-			while (count($a) > $n) {
-				$s = array();
-				for ($i = 0; $i < $n; $i++) {
-					$s[] = array_shift($a);
-				}
-				$split[] = $s;
-			}
-			if (count($a)) {
-				$a = array_pad($a, $n, 0);
-				$split[] = $a;
-			}
+        /** Array split
+         * @param array $a
+         * @param int   $n
+         *
+         * @return array
+         **/
+        public function array_split($a, $n)
+        {
+            $split = array();
+            while (count($a) > $n) {
+                $s = array();
+                for ($i = 0; $i < $n; ++$i) {
+                    $s[] = array_shift($a);
+                }
+                $split[] = $s;
+            }
+            if (count($a)) {
+                $a = array_pad($a, $n, 0);
+                $split[] = $a;
+            }
 
-			return $split;
-		}
+            return $split;
+        }
 
-		/**
-		 * Process and return the hash.
-		 *
-		 * @param $str Input string to hash
-		 * @param $ig_func Option param to ignore checking for php > 5.1.2
-		 * @return string Hexadecimal representation of the message digest
-		 */
-		function hash($str, $ig_func = true) {
-			unset($binStr);     // binary representation of input string
-			unset($hexStr);     // 256-bit message digest in readable hex format
+        /**
+         * Process and return the hash.
+         *
+         * @param $str Input string to hash
+         * @param $ig_func Option param to ignore checking for php > 5.1.2
+         *
+         * @return string Hexadecimal representation of the message digest
+         */
+        public function hash($str, $ig_func = true)
+        {
+            unset($binStr);     // binary representation of input string
+            unset($hexStr);     // 256-bit message digest in readable hex format
 
-			// check for php's internal sha256 function, ignore if ig_func==true
-			if ($ig_func == false) {
-				if (version_compare(PHP_VERSION, '5.1.2', '>=') AND !defined('_NO_HASH_DEFINED')) {
-					return hash("sha256", $str, false);
-				} else {
-					if (function_exists('mhash') && defined('MHASH_SHA256')) {
-						return base64_encode(bin2hex(mhash(MHASH_SHA256, $str)));
-					}
-				}
-			}
+            // check for php's internal sha256 function, ignore if ig_func==true
+            if ($ig_func == false) {
+                if (version_compare(PHP_VERSION, '5.1.2', '>=') and !defined('_NO_HASH_DEFINED')) {
+                    return hash('sha256', $str, false);
+                } else {
+                    if (function_exists('mhash') && defined('MHASH_SHA256')) {
+                        return base64_encode(bin2hex(mhash(MHASH_SHA256, $str)));
+                    }
+                }
+            }
 
-			/*
-			 * SHA-256 Constants
-			 *  Sequence of sixty-four constant 32-bit words representing the
-			 *  first thirty-two bits of the fractional parts of the cube roots
-			 *  of the first sixtyfour prime numbers.
-			 */
-			$K = array(
-				(int)0x428a2f98,
-				(int)0x71374491,
-				(int)0xb5c0fbcf,
-				(int)0xe9b5dba5,
-				(int)0x3956c25b,
-				(int)0x59f111f1,
-				(int)0x923f82a4,
-				(int)0xab1c5ed5,
-				(int)0xd807aa98,
-				(int)0x12835b01,
-				(int)0x243185be,
-				(int)0x550c7dc3,
-				(int)0x72be5d74,
-				(int)0x80deb1fe,
-				(int)0x9bdc06a7,
-				(int)0xc19bf174,
-				(int)0xe49b69c1,
-				(int)0xefbe4786,
-				(int)0x0fc19dc6,
-				(int)0x240ca1cc,
-				(int)0x2de92c6f,
-				(int)0x4a7484aa,
-				(int)0x5cb0a9dc,
-				(int)0x76f988da,
-				(int)0x983e5152,
-				(int)0xa831c66d,
-				(int)0xb00327c8,
-				(int)0xbf597fc7,
-				(int)0xc6e00bf3,
-				(int)0xd5a79147,
-				(int)0x06ca6351,
-				(int)0x14292967,
-				(int)0x27b70a85,
-				(int)0x2e1b2138,
-				(int)0x4d2c6dfc,
-				(int)0x53380d13,
-				(int)0x650a7354,
-				(int)0x766a0abb,
-				(int)0x81c2c92e,
-				(int)0x92722c85,
-				(int)0xa2bfe8a1,
-				(int)0xa81a664b,
-				(int)0xc24b8b70,
-				(int)0xc76c51a3,
-				(int)0xd192e819,
-				(int)0xd6990624,
-				(int)0xf40e3585,
-				(int)0x106aa070,
-				(int)0x19a4c116,
-				(int)0x1e376c08,
-				(int)0x2748774c,
-				(int)0x34b0bcb5,
-				(int)0x391c0cb3,
-				(int)0x4ed8aa4a,
-				(int)0x5b9cca4f,
-				(int)0x682e6ff3,
-				(int)0x748f82ee,
-				(int)0x78a5636f,
-				(int)0x84c87814,
-				(int)0x8cc70208,
-				(int)0x90befffa,
-				(int)0xa4506ceb,
-				(int)0xbef9a3f7,
-				(int)0xc67178f2
-			);
+            /*
+             * SHA-256 Constants
+             *  Sequence of sixty-four constant 32-bit words representing the
+             *  first thirty-two bits of the fractional parts of the cube roots
+             *  of the first sixtyfour prime numbers.
+             */
+            $K = array(
+                (int) 0x428a2f98,
+                (int) 0x71374491,
+                (int) 0xb5c0fbcf,
+                (int) 0xe9b5dba5,
+                (int) 0x3956c25b,
+                (int) 0x59f111f1,
+                (int) 0x923f82a4,
+                (int) 0xab1c5ed5,
+                (int) 0xd807aa98,
+                (int) 0x12835b01,
+                (int) 0x243185be,
+                (int) 0x550c7dc3,
+                (int) 0x72be5d74,
+                (int) 0x80deb1fe,
+                (int) 0x9bdc06a7,
+                (int) 0xc19bf174,
+                (int) 0xe49b69c1,
+                (int) 0xefbe4786,
+                (int) 0x0fc19dc6,
+                (int) 0x240ca1cc,
+                (int) 0x2de92c6f,
+                (int) 0x4a7484aa,
+                (int) 0x5cb0a9dc,
+                (int) 0x76f988da,
+                (int) 0x983e5152,
+                (int) 0xa831c66d,
+                (int) 0xb00327c8,
+                (int) 0xbf597fc7,
+                (int) 0xc6e00bf3,
+                (int) 0xd5a79147,
+                (int) 0x06ca6351,
+                (int) 0x14292967,
+                (int) 0x27b70a85,
+                (int) 0x2e1b2138,
+                (int) 0x4d2c6dfc,
+                (int) 0x53380d13,
+                (int) 0x650a7354,
+                (int) 0x766a0abb,
+                (int) 0x81c2c92e,
+                (int) 0x92722c85,
+                (int) 0xa2bfe8a1,
+                (int) 0xa81a664b,
+                (int) 0xc24b8b70,
+                (int) 0xc76c51a3,
+                (int) 0xd192e819,
+                (int) 0xd6990624,
+                (int) 0xf40e3585,
+                (int) 0x106aa070,
+                (int) 0x19a4c116,
+                (int) 0x1e376c08,
+                (int) 0x2748774c,
+                (int) 0x34b0bcb5,
+                (int) 0x391c0cb3,
+                (int) 0x4ed8aa4a,
+                (int) 0x5b9cca4f,
+                (int) 0x682e6ff3,
+                (int) 0x748f82ee,
+                (int) 0x78a5636f,
+                (int) 0x84c87814,
+                (int) 0x8cc70208,
+                (int) 0x90befffa,
+                (int) 0xa4506ceb,
+                (int) 0xbef9a3f7,
+                (int) 0xc67178f2,
+            );
 
-			// Pre-processing: Padding the string
-			$binStr = $this->string2binint($str, 512);
+            // Pre-processing: Padding the string
+            $binStr = $this->string2binint($str, 512);
 
-			// Parsing the Padded Message (Break into N 512-bit blocks)
-			$M = $this->array_split($binStr, 16);
+            // Parsing the Padded Message (Break into N 512-bit blocks)
+            $M = $this->array_split($binStr, 16);
 
-			// Set the initial hash values
-			$h[0] = (int)0x6a09e667;
-			$h[1] = (int)0xbb67ae85;
-			$h[2] = (int)0x3c6ef372;
-			$h[3] = (int)0xa54ff53a;
-			$h[4] = (int)0x510e527f;
-			$h[5] = (int)0x9b05688c;
-			$h[6] = (int)0x1f83d9ab;
-			$h[7] = (int)0x5be0cd19;
+            // Set the initial hash values
+            $h[0] = (int) 0x6a09e667;
+            $h[1] = (int) 0xbb67ae85;
+            $h[2] = (int) 0x3c6ef372;
+            $h[3] = (int) 0xa54ff53a;
+            $h[4] = (int) 0x510e527f;
+            $h[5] = (int) 0x9b05688c;
+            $h[6] = (int) 0x1f83d9ab;
+            $h[7] = (int) 0x5be0cd19;
 
-			// loop through message blocks and compute hash. ( For i=1 to N : )
-			$N = count($M);
-			for ($i = 0; $i < $N; $i++) {
-				// Break input block into 16 32bit words (message schedule prep)
-				$MI = $M[$i];
+            // loop through message blocks and compute hash. ( For i=1 to N : )
+            $N = count($M);
+            for ($i = 0; $i < $N; ++$i) {
+                // Break input block into 16 32bit words (message schedule prep)
+                $MI = $M[$i];
 
-				// Initialize working variables
-				$_a = (int)$h[0];
-				$_b = (int)$h[1];
-				$_c = (int)$h[2];
-				$_d = (int)$h[3];
-				$_e = (int)$h[4];
-				$_f = (int)$h[5];
-				$_g = (int)$h[6];
-				$_h = (int)$h[7];
-				unset($_s0);
-				unset($_s1);
-				unset($_T1);
-				unset($_T2);
-				$W = array();
+                // Initialize working variables
+                $_a = (int) $h[0];
+                $_b = (int) $h[1];
+                $_c = (int) $h[2];
+                $_d = (int) $h[3];
+                $_e = (int) $h[4];
+                $_f = (int) $h[5];
+                $_g = (int) $h[6];
+                $_h = (int) $h[7];
+                unset($_s0);
+                unset($_s1);
+                unset($_T1);
+                unset($_T2);
+                $W = array();
 
-				// Compute the hash and update
-				for ($t = 0; $t < 16; $t++) {
-					// Prepare the first 16 message schedule values as we loop
-					$W[$t] = $MI[$t];
+                // Compute the hash and update
+                for ($t = 0; $t < 16; ++$t) {
+                    // Prepare the first 16 message schedule values as we loop
+                    $W[$t] = $MI[$t];
 
-					// Compute hash
-					$_T1 = $this->addmod2n($this->addmod2n($this->addmod2n($this->addmod2n($_h, $this->Sigma1($_e)),
-						$this->Ch($_e, $_f, $_g)), $K[$t]), $W[$t]);
-					$_T2 = $this->addmod2n($this->Sigma0($_a), $this->Maj($_a, $_b, $_c));
+                    // Compute hash
+                    $_T1 = $this->addmod2n($this->addmod2n($this->addmod2n($this->addmod2n($_h, $this->Sigma1($_e)),
+                        $this->Ch($_e, $_f, $_g)), $K[$t]), $W[$t]);
+                    $_T2 = $this->addmod2n($this->Sigma0($_a), $this->Maj($_a, $_b, $_c));
 
-					// Update working variables
-					$_h = $_g;
-					$_g = $_f;
-					$_f = $_e;
-					$_e = $this->addmod2n($_d, $_T1);
-					$_d = $_c;
-					$_c = $_b;
-					$_b = $_a;
-					$_a = $this->addmod2n($_T1, $_T2);
-				}
+                    // Update working variables
+                    $_h = $_g;
+                    $_g = $_f;
+                    $_f = $_e;
+                    $_e = $this->addmod2n($_d, $_T1);
+                    $_d = $_c;
+                    $_c = $_b;
+                    $_b = $_a;
+                    $_a = $this->addmod2n($_T1, $_T2);
+                }
 
-				for (; $t < 64; $t++) {
-					// Continue building the message schedule as we loop
-					$_s0 = $W[($t+1) & 0x0F];
-					$_s0 = $this->sigma_0($_s0);
-					$_s1 = $W[($t+14) & 0x0F];
-					$_s1 = $this->sigma_1($_s1);
+                for (; $t < 64; ++$t) {
+                    // Continue building the message schedule as we loop
+                    $_s0 = $W[($t + 1) & 0x0F];
+                    $_s0 = $this->sigma_0($_s0);
+                    $_s1 = $W[($t + 14) & 0x0F];
+                    $_s1 = $this->sigma_1($_s1);
 
-					$W[$t & 0xF] = $this->addmod2n($this->addmod2n($this->addmod2n($W[$t & 0xF], $_s0), $_s1), $W[($t+9) & 0x0F]);
+                    $W[$t & 0xF] = $this->addmod2n($this->addmod2n($this->addmod2n($W[$t & 0xF], $_s0), $_s1), $W[($t + 9) & 0x0F]);
 
-					// Compute hash
-					$_T1 = $this->addmod2n($this->addmod2n($this->addmod2n($this->addmod2n($_h, $this->Sigma1($_e)),
-						$this->Ch($_e, $_f, $_g)), $K[$t]), $W[$t & 0xF]);
-					$_T2 = $this->addmod2n($this->Sigma0($_a), $this->Maj($_a, $_b, $_c));
+                    // Compute hash
+                    $_T1 = $this->addmod2n($this->addmod2n($this->addmod2n($this->addmod2n($_h, $this->Sigma1($_e)),
+                        $this->Ch($_e, $_f, $_g)), $K[$t]), $W[$t & 0xF]);
+                    $_T2 = $this->addmod2n($this->Sigma0($_a), $this->Maj($_a, $_b, $_c));
 
-					// Update working variables
-					$_h = $_g;
-					$_g = $_f;
-					$_f = $_e;
-					$_e = $this->addmod2n($_d, $_T1);
-					$_d = $_c;
-					$_c = $_b;
-					$_b = $_a;
-					$_a = $this->addmod2n($_T1, $_T2);
-				}
+                    // Update working variables
+                    $_h = $_g;
+                    $_g = $_f;
+                    $_f = $_e;
+                    $_e = $this->addmod2n($_d, $_T1);
+                    $_d = $_c;
+                    $_c = $_b;
+                    $_b = $_a;
+                    $_a = $this->addmod2n($_T1, $_T2);
+                }
 
-				$h[0] = $this->addmod2n($h[0], $_a);
-				$h[1] = $this->addmod2n($h[1], $_b);
-				$h[2] = $this->addmod2n($h[2], $_c);
-				$h[3] = $this->addmod2n($h[3], $_d);
-				$h[4] = $this->addmod2n($h[4], $_e);
-				$h[5] = $this->addmod2n($h[5], $_f);
-				$h[6] = $this->addmod2n($h[6], $_g);
-				$h[7] = $this->addmod2n($h[7], $_h);
-			}
+                $h[0] = $this->addmod2n($h[0], $_a);
+                $h[1] = $this->addmod2n($h[1], $_b);
+                $h[2] = $this->addmod2n($h[2], $_c);
+                $h[3] = $this->addmod2n($h[3], $_d);
+                $h[4] = $this->addmod2n($h[4], $_e);
+                $h[5] = $this->addmod2n($h[5], $_f);
+                $h[6] = $this->addmod2n($h[6], $_g);
+                $h[7] = $this->addmod2n($h[7], $_h);
+            }
 
-			// Convert the 32-bit words into human readable hexadecimal format.
-			$hexStr = sprintf("%08x%08x%08x%08x%08x%08x%08x%08x", $h[0], $h[1], $h[2], $h[3], $h[4], $h[5], $h[6], $h[7]);
+            // Convert the 32-bit words into human readable hexadecimal format.
+            $hexStr = sprintf('%08x%08x%08x%08x%08x%08x%08x%08x', $h[0], $h[1], $h[2], $h[3], $h[4], $h[5], $h[6], $h[7]);
 
-			return ($this->toUpper) ? strtoupper($hexStr) : $hexStr;
-		}
-
-	}
+            return ($this->toUpper) ? strtoupper($hexStr) : $hexStr;
+        }
+    }
 }
 
 /**
@@ -557,49 +584,55 @@ if (!class_exists('nanoSha2')) {
  * PHP Strings are limitd to (2^31)-1, so it is not worth it to
  * check for input strings > 2^64 as the FIPS180-2 defines.
  *
- * @param string $str Chaîne dont on veut calculer le SHA
- * @param bool $ig_func
+ * @param string $str     Chaîne dont on veut calculer le SHA
+ * @param bool   $ig_func
+ *
  * @return string Le SHA de la chaîne
  */
-function _nano_sha256($str, $ig_func = true) {
-	$obj = new nanoSha2((defined('_NANO_SHA2_UPPER')) ? true : false);
+function _nano_sha256($str, $ig_func = true)
+{
+    $obj = new nanoSha2((defined('_NANO_SHA2_UPPER')) ? true : false);
 
-	return $obj->hash($str, $ig_func);
+    return $obj->hash($str, $ig_func);
 }
 
 // 2009-07-23: Added check for function as the Suhosin plugin adds this routine.
 if (!function_exists('sha256')) {
-	/**
-	 * Calcul du SHA256
-	 *
-	 * @param string $str Chaîne dont on veut calculer le SHA
-	 * @param bool $ig_func
-	 * @return string Le SHA de la chaîne
-	 */
-	function sha256($str, $ig_func = true) { return _nano_sha256($str, $ig_func); }
+    /**
+     * Calcul du SHA256.
+     *
+     * @param string $str     Chaîne dont on veut calculer le SHA
+     * @param bool   $ig_func
+     *
+     * @return string Le SHA de la chaîne
+     */
+    function sha256($str, $ig_func = true)
+    {
+        return _nano_sha256($str, $ig_func);
+    }
 }
 
 // support to give php4 the hash() routine which abstracts this code.
 if (!function_exists('hash')) {
-	define('_NO_HASH_DEFINED', true);
-	/**
-	 * Retourne le calcul d'un hachage d'une chaîne (pour PHP4)
-	 *
-	 * @param string $algo Nom de l'algorythme de hachage
-	 * @param string $data Chaîne à hacher
-	 * @return string|bool
-	 *     Hash de la chaîne
-	 *     False si pas d'algo trouvé
-	 */
-	function hash($algo, $data) {
-		if (empty($algo) || !is_string($algo) || !is_string($data)) {
-			return false;
-		}
+    define('_NO_HASH_DEFINED', true);
+    /**
+     * Retourne le calcul d'un hachage d'une chaîne (pour PHP4).
+     *
+     * @param string $algo Nom de l'algorythme de hachage
+     * @param string $data Chaîne à hacher
+     *
+     * @return string|bool
+     *                     Hash de la chaîne
+     *                     False si pas d'algo trouvé
+     */
+    function hash($algo, $data)
+    {
+        if (empty($algo) || !is_string($algo) || !is_string($data)) {
+            return false;
+        }
 
-		if (function_exists($algo)) {
-			return $algo($data);
-		}
-	}
+        if (function_exists($algo)) {
+            return $algo($data);
+        }
+    }
 }
-
-?>
