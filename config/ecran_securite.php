@@ -5,7 +5,7 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '1.2.4'); // 2016-03-10
+define('_ECRAN_SECURITE', '1.2.5'); // 2016-03-13
 
 /*
  * Documentation : http://www.spip.net/fr_article4200.html
@@ -38,7 +38,7 @@ if (!defined('_IS_BOT'))
 	    // MSIE 6.0 est un botnet 99,9% du temps, on traite donc ce USER_AGENT comme un bot
 	    . 'MSIE 6\.0|'
 	    // UA plus cibles
-	    . '80legs|accoona|AltaVista|ASPSeek|Baidu|Charlotte|EC2LinkFinder|eStyle|facebook|flipboard|hootsuite|FunWebProducts|Google|Genieo|INA dlweb|InfegyAtlas|Java VM|LiteFinder|Lycos|MetaURI|Moreover|Rambler|Scooter|ScrubbyBloglines|Yahoo|Yeti'
+	    . '80legs|accoona|AltaVista|ASPSeek|Baidu|Charlotte|EC2LinkFinder|eStyle|flipboard|hootsuite|FunWebProducts|Google|Genieo|INA dlweb|InfegyAtlas|Java VM|LiteFinder|Lycos|MetaURI|Moreover|Rambler|Scooter|ScrubbyBloglines|Yahoo|Yeti'
 	    . ',i', (string) $_SERVER['HTTP_USER_AGENT'])
 	);
 
