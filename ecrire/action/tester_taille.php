@@ -76,7 +76,8 @@ function action_tester_taille_dist() {
 	$i = _request('i')+1;
 	$image_source = chemin_image("test.png");
 	$GLOBALS['redirect'] = generer_url_action("tester_taille", "i=$i&arg=".$GLOBALS['taille_min']."-".$GLOBALS['taille_test']);
-
+    // par precaution, on ferme avant d'ouvrir on ne sait jamais.
+	$r = ob_end_clean();
 	ob_start('action_tester_taille_error_handler');
 	$result = filtrer('image_recadre',$image_source,$taille,$taille);
 	$GLOBALS['redirect'] = generer_url_action("tester_taille", "i=$i&arg=$taille-".$GLOBALS['taille_max']);
