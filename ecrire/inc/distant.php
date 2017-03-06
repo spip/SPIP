@@ -679,7 +679,7 @@ function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $
 	$http_proxy = need_proxy($host);
 
 	if ($http_proxy){
-		$path = (($scheme=='ssl') ? 'https://' : "$scheme://")
+		$path2 = (($scheme=='ssl') ? 'https://' : "$scheme://")
 			. (!$user ? '' : (urlencode($user[0]) . ":" . urlencode($user[1]) . "@"))
 			. "$host" . (($port!=80) ? ":$port" : "") . $path;
 		$t2 = @parse_url($http_proxy);
@@ -691,15 +691,18 @@ function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $
 	else
 		$first_host = $noproxy . $host;
 
-	$f = @fsockopen($first_host, $port);
-	spip_log("Recuperer $path sur $first_host:$port par $f");
-	if (!$f) return false;
+	$f = @fsockopen($first_host, $port, $errno, $errstr);
+	spip_log("Recuperer $path sur $first_host:$port via $http_proxy: socket $f");
+	if (!$f) {
+        spip_log("fsockopen erreur $errno $errstr");
+        return false;
+    }
 
 	$site = $GLOBALS['meta']["adresse_site"];
 
 	if ($user) $user = base64_encode($user[0] . ":" . $user[1]);
 
-	$req = "$method $path $vers\r\n"
+	$req = "$method $path2 $vers\r\n"
 		. "Host: $host\r\n"
 		. "User-Agent: " . _INC_DISTANT_USER_AGENT . "\r\n"
 		. ($refuse_gz ? '' : ("Accept-Encoding: " . _INC_DISTANT_CONTENT_ENCODING . "\r\n"))
