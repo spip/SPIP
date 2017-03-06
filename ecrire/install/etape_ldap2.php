@@ -54,9 +54,9 @@ function install_etape_ldap2_dist()
 				$ldap_link = false;
 			}
 		}
-		if ($ldap_link) {
-			$ldap_link = ldap_bind($ldap_link, $login_ldap, $pass_ldap);
-			$erreur = "ldap_bind('$ldap_link', '$login_ldap', '$pass_ldap'): $adresse_ldap, $port_ldap";
+		if ($ldap_link AND $login_ldap) {
+			$ldap_link2 = ldap_bind($ldap_link, $login_ldap, $pass_ldap);
+			$erreur = "ldap_bind('$ldap_link', '$login_ldap', 'XXX'): $ldap_link2 $adresse_ldap $port_ldap $protocole_ldap " . strval($tls);
 		}
 	}
 
