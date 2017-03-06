@@ -32,8 +32,12 @@ function retrouver_document($f, $id) {
 	} else {
 		$path = set_spip_doc($file);
 		$path2 = generer_acceder_document($f, $id);
+		$path3 = (strpos($path2, 'https') === 0) ? 
+            preg_replace('/^https/', 'http', $path2) : 
+            preg_replace('/^http/', 'https', $path2);
 		$where = "(documents.fichier=".sql_quote($path)
-		  . ' OR documents.fichier=' . sql_quote($path2) . ')'
+		  . ' OR documents.fichier=' . sql_quote($path2)
+		  . ' OR documents.fichier=' . sql_quote($path3) . ')'
 		  . ($id ? (" AND documents.id_document=$id") : '');
 
 		$doc = sql_fetsel("documents.id_document, documents.titre, types.mime_type, types.inclus, documents.extension", "spip_documents AS documents LEFT JOIN spip_types_documents AS types ON documents.extension=types.extension",$where);
