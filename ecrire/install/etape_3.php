@@ -99,6 +99,7 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 		}
 		spip_log("Creation des tables. Codage $charsetbase");
 		creer_base($server_db); // AT LAST
+        creer_base_types_doc($server_db);
 		// memoriser avec quel charset on l'a creee
 
 		if ($charset) {
@@ -198,13 +199,13 @@ function install_propose_ldap()
 
 
 // http://code.spip.net/@install_premier_auteur
-function install_premier_auteur($email, $login, $nom, $pass, $hidden, $auteur_obligatoire)
+function install_premier_auteur($email, $login, $nom, $pass, $hidden, $auteur_obligatoire=false)
 {
 	return info_progression_etape(3,'etape_','install/') .
 		info_etape(_T('info_informations_personnelles'),
 
 		     "<b>"._T('texte_informations_personnelles_1')."</b>" .
-			     aide ("install5", true) .
+			     aide ("install5") .
 			     "<p>" .
 			     ($auteur_obligatoire?
 				     ''
