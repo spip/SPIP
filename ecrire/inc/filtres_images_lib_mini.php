@@ -741,8 +741,8 @@ function process_image_reduire($fonction,$img,$taille,$taille_y,$force,$cherche_
 	# determiner le format de sortie
 	$format_sortie = false; // le choix par defaut sera bon
 	if ($process == "netpbm") $format_sortie = "jpg";
-	else if ($process == 'gd1' OR $process == 'gd2') {
-		$image = _image_valeurs_trans($img, "reduire-{$taille}-{$taille_y}",$format_sortie,$fonction);
+	else if (($process == 'gd1' OR $process == 'gd2') AND
+	    $image = _image_valeurs_trans($img, "reduire-{$taille}-{$taille_y}",$format_sortie,$fonction)) {
 
 		// on verifie que l'extension choisie est bonne (en principe oui)
 		$gd_formats = explode(',',$GLOBALS['meta']["gd_formats"]);
