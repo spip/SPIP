@@ -1,11 +1,17 @@
 #HTTP_HEADER{Content-Type: text/xml; charset=#CHARSET}#CACHE{900}<BOUCLE0(AUTEURS){tout}{id_auteur=#ENV{id}}{lang_select}><?php
 if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},rss,#ENV{op}, #ENV{args}}|?{1,0})]) {
 ?><?xml version="1.0" encoding="#CHARSET" ?>
-
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:thr="http://purl.org/syndication/thread/1.0">
 <channel xml:lang="[(#LANG|texte_backend)]">
-	<title>[&#91;(#NOM_SITE_SPIP|texte_backend)&#93; ]RSS <:ecrire:titre_page_forum_suivi:></title>
-	<link>[(#URL_ECRIRE{controle_forum, type=prop&amp;[id_rubrique=(#ENV{id_rubrique}|intval)]}|url_absolue|texte_backend)]</link>
+	<title>[&#91;(#NOM_SITE_SPIP|
+		texte_backend)&#93; ]<BOUCLE_A(ARTICLES){id_article}>[(#TITRE|
+		supprimer_numero|
+		texte_backend
+	)]</BOUCLE_A>RSS <:ecrire:titre_page_forum_suivi:><//B_A></title>
+	<link>[(#ENV{id_article}|?{
+			[(#URL_ECRIRE{articles_forum, id_article=#ID_ARTICLE})],
+			[(#URL_ECRIRE{controle_forum,
+	  type=prop})][&amp;id_rubrique=(#ENV{id_rubrique}|intval)]}|url_absolue|texte_backend)]</link>
 	<description></description>
 	<language>[(#LANG|texte_backend)]</language>
 	<BOUCLE_RSS(FORUMS){statut IN publie,prop,off,spam}{texte!=""}{tout}{id_article ?}{!par date}{0,20}>
@@ -13,8 +19,11 @@ if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},rss,#ENV{op}, #ENV{args}}|?{1,0})]) {
 		<title>[(#TITRE|texte_backend)][ ((#STATUT|=={publie}|?{'', #STATUT}))]</title>
 		<link>[(#URL_FORUM|url_absolue|texte_backend)]</link>
 		<guid isPermaLink="true">[(#ENV{id_article}|?{
-			[(#URL_ECRIRE{articles_forum, id_article=#ID_ARTICLE})],
-			[(#URL_ECRIRE{controle_forum, type=prop&amp;debut_id_forum=#ID_FORUM})]}|url_absolue|texte_backend)]</guid>
+			[(#URL_ECRIRE{articles_forum,
+	  type=prop&amp;debut_id_forum=#ID_FORUM&amp;id_article=#ID_ARTICLE})],
+			[(#URL_ECRIRE{controle_forum,
+	  type=prop&amp;debut_id_forum=#ID_FORUM})]}|
+		  url_absolue|texte_backend)]</guid>
 		<dc:date>[(#DATE|date_iso)]</dc:date>
 		<dc:format>text/html</dc:format>
 		[<dc:language>(#LANG|texte_backend)</dc:language>]
@@ -27,7 +36,7 @@ if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},rss,#ENV{op}, #ENV{args}}|?{1,0})]) {
 </channel>
 </rss><?php
 } else {
+#HTTP_HEADER{Content-Type: text/html;charset=#CHARSET} 
 include_spip('inc/minipres'); 
 echo minipres();
 }?></BOUCLE0>
-
