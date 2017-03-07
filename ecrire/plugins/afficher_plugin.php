@@ -31,7 +31,7 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=fal
 	$cfg = !$actif ? '' : plugin_bouton_config($plug_file,$info,$dir_plugins);
 
 	// numerotons les occurrences d'un meme prefix
-	$versions[$prefix] = $id = isset($versions[$prefix]) ? $versions[$prefix] + 1 : '';
+	$versions[$prefix] = $id = isset($versions[$prefix]) ? (intval($versions[$prefix]) + 1) : '';
 
 	$class_li .= ($actif?" actif":"") . ($expose?" on":"") . (isset($info['erreur']) ? " erreur" : '');
 
