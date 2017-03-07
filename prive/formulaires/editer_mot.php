@@ -76,7 +76,7 @@ function formulaires_editer_mot_verifier_dist($id_mot='new', $id_groupe=0, $reto
 
 // http://doc.spip.org/@inc_editer_mot_dist
 function formulaires_editer_mot_traiter_dist($id_mot='new', $id_groupe=0, $retour='', $ajouter_id_article=0, $table='', $table_id=0, $config_fonc='mots_edit_config', $row=array(), $hidden=''){
-	$res = '';
+	$res = array();
 	set_request('redirect','');
 	$action_editer = charger_fonction("editer_mot",'action');
 	list($id_mot,$err) = $action_editer();
