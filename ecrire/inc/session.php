@@ -102,7 +102,6 @@ function ajouter_session($auteur) {
 			$_COOKIE['spip_session'],
 			time() + $duree
 			);
-		spip_log("ajoute session $fichier_session cookie $duree");
 
 		// purger au passage les vieux fichiers de session
 		supprimer_sessions(-1);
@@ -197,21 +196,23 @@ function supprimer_sessions($id_auteur) {
 	$t = (time()  - (_RENOUVELLE_ALEA << 2));
 	$dir = opendir(_DIR_SESSIONS);
 	while(($e = readdir($dir)) !== false) {
-		if (!preg_match(",^\D*(\d+)_\w{32}\.php[3]?$,", $e, $r))
+		if (!preg_match(",^\D*(\d+)_\w{32}\.php[3]?,", $e, $r))
 			continue;
 		$f = _DIR_SESSIONS . $e;
-		if (file_exists($f) AND (($id_auteur AND ($r[1] == $id_auteur))
-		OR ($t > filemtime($f)))) {
-			spip_unlink($f);
-			$i++;
-		}
+        if (($id_auteur <= 0) OR ($r[1] != $id_auteur)) {
+            $n = @filemtime($f);
+            if (!$n OR ($t <= $n)) continue;
+        }
+        @spip_unlink($f);
+        $i++;
 	}
 	// pour un anonyme, se fonder sur le cookie pour trouver le fichier
 	if (!$id_auteur) {
 		verifier_session();
 		spip_unlink(fichier_session('alea_ephemere', true));
 	}
-	if ($i) spip_log("destruction des $i fichiers de session de $id_auteur et 0");
+	if ($i) spip_log("destruction dans " . _DIR_SESSIONS . 
+    	" des $i fichiers de $id_auteur ou > " . _RENOUVELLE_ALEA);
 	// forcer le recalcul de la session courante
 	spip_session(true);
 }
