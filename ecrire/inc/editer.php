@@ -68,6 +68,7 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 		}
 		if (!$row) {
 			$trouver_table = charger_fonction('trouver_table','base');
+			$row = array();
 			if ($desc = $trouver_table($table_objet))
 				foreach($desc['field'] as $k=>$v) $row[$k]='';
 		}
