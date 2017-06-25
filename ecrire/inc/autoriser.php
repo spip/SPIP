@@ -168,6 +168,7 @@ function autoriser_dist($faire, $type = '', $id = 0, $qui = null, $opt = null) {
 	if (isset($GLOBALS['autoriser_exception'][$faire][$type][$id])
 		and autoriser_exception($faire, $type, $id, 'verifier')
 	) {
+		spip_log("autoriser ($faire, $type, $id, " . (isset($qui['nom']) ? $qui['nom'] : '') . ') : OK Exception', 'autoriser' . _LOG_DEBUG);
 		return true;
 	}
 
@@ -200,7 +201,7 @@ function autoriser_dist($faire, $type = '', $id = 0, $qui = null, $opt = null) {
 	}
 
 	spip_log(
-		"$f($faire,$type,$id," . (isset($qui['nom']) ? $qui['nom'] : '') . '): ' . ($a ? 'OK' : 'niet'),
+		"$f($faire, $type, $id, " . (isset($qui['nom']) ? $qui['nom'] : '') . ') : ' . ($a ? 'OK' : 'niet'),
 		'autoriser' . _LOG_DEBUG
 	);
 
