@@ -73,14 +73,19 @@ function lire_cache($nom_cache) {
 // Parano : on signe le cache, afin d'interdire un hack d'injection
 // dans notre memcache
 function cache_signature(&$page) {
-	if (!isset($GLOBALS['meta']['cache_signature'])) {
+	static $meta_cache_signature = NULL;
+
+	if (!isset($meta_cache_signature))
+		$meta_cache_signature = sprintf('cache_signature_%08x', crc32($_SERVER['DOCUMENT_ROOT'] . $_SERVER['SERVER_NAME'] . $_SERVER['SERVER_ADDR'] . $_SERVER['SERVER_PORT']));
+
+	if (!isset($GLOBALS['meta'][$meta_cache_signature])) {
 		include_spip('inc/acces');
 		include_spip('auth/sha256.inc');
-		ecrire_meta('cache_signature',
+		ecrire_meta($meta_cache_signature,
 			_nano_sha256($_SERVER["DOCUMENT_ROOT"] . $_SERVER["SERVER_SIGNATURE"] . creer_uniqid()), 'non');
 	}
 
-	return crc32($GLOBALS['meta']['cache_signature'] . $page['texte']);
+	return crc32($GLOBALS['meta'][$meta_cache_signature] . $page['texte']);
 }
 
 /**
