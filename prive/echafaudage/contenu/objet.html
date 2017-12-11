@@ -29,7 +29,7 @@
 
 	<div id="wysiwyg">
 		<h2 class="invisible"><:previsualisation:></h2>
-		<INCLURE{fond=prive/objets/contenu/#OBJET,id=#ID_OBJET,env,wysiwyg=1}>
+		<INCLURE{fond=prive/objets/contenu/#OBJET,id=#ID_OBJET,env,wysiwyg=1,espace_prive}>
 	</div>
 
 	[(#AUTORISER{modifier,#OBJET,#ID_OBJET}|et{#OBJET|objet_info{editable}}|oui)

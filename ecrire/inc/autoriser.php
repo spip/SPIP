@@ -950,11 +950,12 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 	// Un redacteur peut modifier ses propres donnees mais ni son login/email
 	// ni son statut (qui sont le cas echeant passes comme option)
 	if ($qui['statut'] == '1comite') {
-		if (isset($opt['webmestre']) and $opt['webmestre']) {
+		if (!empty($opt['webmestre'])) {
 			return false;
-		} elseif ((isset($opt['statut']) and $opt['statut'])
-			or (isset($opt['restreintes']) and $opt['restreintes'])
-			or $opt['email']
+		} elseif (
+			!empty($opt['statut'])
+			or !empty($opt['restreintes'])
+			or !empty($opt['email'])
 		) {
 			return false;
 		} elseif ($id == $qui['id_auteur']) {
@@ -1459,6 +1460,28 @@ function autoriser_articlecreer_menu_dist($faire, $type, $id, $qui, $opt) {
  **/
 function autoriser_auteurcreer_menu_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('creer', 'auteur', $id, $qui, $opt);
+}
+
+/**
+ * Autorisation de voir le menu "afficher les visiteurs"
+ *
+ * Être admin complet et il faut qu'il en existe ou que ce soit activé en config
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type Type d'objet sur lequel appliquer l'action
+ * @param  int $id Identifiant de l'objet
+ * @param  array $qui Description de l'auteur demandant l'autorisation
+ * @param  array $opt Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_visiteurs_menu_dist($faire, $type, $id, $qui, $opt) {
+	include_spip('base/abstract_sql');
+	return 
+		$qui['statut'] == '0minirezo' and !$qui['restreint']
+		and (
+			$GLOBALS['meta']["accepter_visiteurs"] != 'non'
+			or sql_countsel('spip_auteurs', 'statut="6forum"') > 0
+		);
 }
 
 /**

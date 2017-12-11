@@ -40,7 +40,7 @@ function f_jQuery_prive($texte) {
 	$jquery_plugins = pipeline('jquery_plugins',
 		array(
 			'prive/javascript/jquery.js',
-			'prive/javascript/jquery-migrate-3.0.0.js',
+			'prive/javascript/jquery-migrate-3.0.1.js',
 			'prive/javascript/jquery.form.js',
 			'prive/javascript/jquery.autosave.js',
 			'prive/javascript/jquery.placeholder-label.js',
@@ -109,6 +109,7 @@ function f_boite_infos($flux) {
 	if (!trouver_fond($type, "prive/objets/infos/")) {
 		$type = 'objet';
 	}
+	$args['espace_prive'] = 1;
 	$flux['data'] .= recuperer_fond("prive/objets/infos/$type", $args);
 
 	return $flux;
@@ -167,7 +168,7 @@ function f_afficher_blocs_ecrire($flux) {
 			) {
 				// inserer le formulaire de traduction
 				$flux['data']['texte'] = str_replace("<!--affiche_milieu-->", recuperer_fond('prive/objets/editer/traductions',
-						array('objet' => $objet, 'id_objet' => $id)) . "<!--affiche_milieu-->", $flux['data']['texte']);
+						array('objet' => $objet, 'id_objet' => $id, 'espace_prive' => 1)) . "<!--affiche_milieu-->", $flux['data']['texte']);
 				$flux['data']['texte'] = pipeline('afficher_fiche_objet', array(
 					'args' => array(
 						'contexte' => $flux['args']['contexte'],
@@ -212,7 +213,7 @@ function f_queue_affiche_milieu($flux) {
 	foreach ($args as $key => $arg) {
 		if (preg_match(",^id_,", $key) and is_numeric($arg) and $arg = intval($arg)) {
 			$objet = preg_replace(',^id_,', '', $key);
-			$res .= recuperer_fond('modeles/object_jobs_list', array('id_objet' => $arg, 'objet' => $objet),
+			$res .= recuperer_fond('modeles/object_jobs_list', array('id_objet' => $arg, 'objet' => $objet, 'espace_prive' => 1),
 				array('ajax' => true));
 		}
 	}

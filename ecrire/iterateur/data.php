@@ -486,17 +486,17 @@ class IterateurDATA implements Iterator {
 					$a = ' . sprintf($tv, '$aa') . ';
 					$b = ' . sprintf($tv, '$bb') . ';
 					if ($a <> $b)
-						return ($a ' . ((isset($r[2]) and $r[2]) ? '>' : '<') . ' $b) ? -1 : 1;';
+						return ($a ' . (!empty($r[2]) ? '>' : '<') . ' $b) ? -1 : 1;';
 					}
 				}
 			}
 		}
 
 		if ($sortfunc) {
-			uasort($this->tableau, create_function('$aa,$bb',
-				$sortfunc . '
-				return 0;'
-			));
+			$sortfunc .= "\n return 0;";
+			uasort($this->tableau, function($aa, $bb) use ($sortfunc) {
+				return eval($sortfunc);
+			});
 		}
 	}
 
@@ -636,7 +636,7 @@ function inc_object_to_array($object) {
  * @return array|bool
  */
 function inc_yql_to_array_dist($u) {
-	define('_YQL_ENDPOINT', 'http://query.yahooapis.com/v1/public/yql?&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&q=');
+	define('_YQL_ENDPOINT', 'https://query.yahooapis.com/v1/public/yql?&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&q=');
 	$v = recuperer_url($url = _YQL_ENDPOINT . urlencode($u) . '&format=json');
 	if (!$v['page']
 		or !$w = json_decode($v['page'], true)

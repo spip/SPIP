@@ -1194,7 +1194,13 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect = '
 		$i++;
 	}
 	$squelette = preg_replace_callback(',\\\\([#[()\]{}<>]),',
-		create_function('$a', "return '$inerte-'.ord(\$a[1]).'-';"), $squelette, -1, $esc);
+		function($a) use ($inerte) {
+			return "$inerte-" . ord($a[1]) . '-';
+		},
+		$squelette,
+		-1,
+		$esc
+	);
 
 	$descr = array(
 		'nom' => $nom,
@@ -1215,11 +1221,20 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect = '
 	// restituer les echappements
 	if ($esc) {
 		foreach ($boucles as $i => $boucle) {
-			$boucles[$i]->return = preg_replace_callback(",$inerte-(\d+)-,", create_function('$a', 'return chr($a[1]);'),
-				$boucle->return);
-			$boucles[$i]->descr['squelette'] = preg_replace_callback(",$inerte-(\d+)-,",
-				create_function('$a', 'return "\\\\".chr($a[1]);'),
-				$boucle->descr['squelette']);
+			$boucles[$i]->return = preg_replace_callback(
+				",$inerte-(\d+)-,",
+				function($a) {
+					return chr($a[1]);
+				},
+				$boucle->return
+			);
+			$boucles[$i]->descr['squelette'] = preg_replace_callback(
+				",$inerte-(\d+)-,",
+				function($a) {
+					return "\\\\" . chr($a[1]);
+				},
+				$boucle->descr['squelette']
+			);
 		}
 	}
 

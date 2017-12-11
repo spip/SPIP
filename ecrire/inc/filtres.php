@@ -1905,11 +1905,13 @@ function alterner($i) {
  **/
 function extraire_attribut($balise, $attribut, $complet = false) {
 	if (is_array($balise)) {
-		array_walk($balise,
-			create_function('&$a,$key,$t',
-				'$a = extraire_attribut($a,$t);'
-			),
-			$attribut);
+		array_walk(
+			$balise,
+			function(&$a, $key, $t){
+				$a = extraire_attribut($a, $t);
+			},
+			$attribut
+		);
 
 		return $balise;
 	}
@@ -2389,7 +2391,9 @@ function extraire_balise($texte, $tag = 'a') {
 	if (is_array($texte)) {
 		array_walk(
 			$texte,
-			create_function('&$a,$key,$t', '$a = extraire_balise($a,$t);'),
+			function(&$a, $key, $t){
+				$a = extraire_balise($a, $t);
+			},
 			$tag
 		);
 
@@ -2431,7 +2435,9 @@ function extraire_balises($texte, $tag = 'a') {
 	if (is_array($texte)) {
 		array_walk(
 			$texte,
-			create_function('&$a,$key,$t', '$a = extraire_balises($a,$t);'),
+			function(&$a, $key, $t){
+				$a = extraire_balises($a, $t);
+			},
 			$tag
 		);
 
@@ -2834,9 +2840,11 @@ function urls_absolues_css($contenu, $source) {
 
 	return preg_replace_callback(
 		",url\s*\(\s*['\"]?([^'\"/#\s][^:]*)['\"]?\s*\),Uims",
-		create_function('$x',
-			'return "url(\'".suivre_lien(\'' . $path . '\',$x[1])."\')";'
-		), $contenu);
+		function($x) use ($path) {
+			return "url('" . suivre_lien($path, $x[1]) . "')";
+		},
+		$contenu
+	);
 }
 
 

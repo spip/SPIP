@@ -2,14 +2,14 @@ function init_gadgets(url_menu_rubrique){
 	jQuery('#boutonbandeautoutsite').one('mouseover',function(){
 		jQuery(this).siblings('ul').find('li:first>a').animeajax();
 		jQuery.ajax({
-						url: url_menu_rubrique,
-						success: function(c){
-							jQuery('#boutonbandeautoutsite').siblings('ul').remove();
-							jQuery('#boutonbandeautoutsite')
-							  .after(c)
-								.parent().find('li').menuFocus();
-						}
-					});
+			url: url_menu_rubrique,
+			success: function(c){
+				jQuery('#boutonbandeautoutsite').siblings('ul').remove();
+				jQuery('#boutonbandeautoutsite')
+				  .after(c)
+					.parent().find('li').menuFocus();
+			}
+		});
 	});
 }
 function focus_zone(selecteur){
@@ -41,7 +41,7 @@ jQuery(function(){
 		// le replier si un hover de souris sur un autre onglet,
 		// timer sur la fermeture des onglets pour ne pas que ca aille trop vite
 		// timer sur l'ouverture des onglets pour ne tolerer les derapages
-		.hover(
+		.on('mouseenter',
 			function(){
 				if (this.timerout)
 					clearTimeout(this.timerout);
@@ -55,8 +55,8 @@ jQuery(function(){
 						me.menuItemOpen(null);
 					}, 200);
 				}
-			}
-			,
+			})
+		.on('mouseleave',
 			function(){
 				if (this.timerin)
 						clearTimeout(this.timerin);
@@ -69,39 +69,53 @@ jQuery(function(){
 				}
 			}
 		)
-		// navigation au clavier :
-		// deplier le ul enfant
-		.find('>a').focus(function(){
-			//jQuery(this).parents('ul').find('>li.actif').removeClass('actif');
-			jQuery(this).parents('li').addClass('actif');
-		})
-		// cacher en partant de l'onglet...
-		.blur(function(){
-			jQuery(this).parents('li').removeClass('actif');
-		});
+		// navigation au doigt des items déroulants
+		.has('ul').find(' > a')
+			.on('touchend', function(event) {
+				event.preventDefault();
+				var me = jQuery(this).parent();
+				if (me.hasClass('actif')) {
+					me.trigger('mouseleave').find('> a').trigger('blur');
+				} else {
+					me.siblings('.actif').trigger('mouseleave').find('> a').trigger('blur');
+					me.trigger('mouseenter').find('> a').trigger('focus');
+				}
+			})
+		.end().end()
+		.find('> a, li > a')
+			// navigation au clavier :
+			// deplier le ul enfant
+			.on('focus', function(){
+				jQuery(this).parents('li').siblings('.actif').removeClass('actif');
+				jQuery(this).parents('li').addClass('actif');
+			})
+			// cacher en partant de l'onglet...
+			.on('blur', function(){
+				jQuery(this).parents('li').removeClass('actif');
+			});
 		return this;
 	}
 
 	// Controler la position verticale des sous-menus
 	// pour l'instant, effectuer a chaque hover, en cas de changement de taille d'affichage par exemple
-	jQuery('#bando_navigation').hover(function(){
+	jQuery('#bando_navigation').on('hover touchstart', function(){
 		hauteur = parseInt(jQuery('#bando_navigation .largeur').height())
 			+  parseInt(jQuery('#bando_navigation').css("padding-top"))
 			+  parseInt(jQuery('#bando_navigation').css("padding-bottom"));
 		jQuery('#bando_navigation ul li>ul').css({'top':hauteur});
 	});
 
-	jQuery('#bando_navigation li').menuFocus();
+	jQuery('#bando_navigation .deroulant > li').menuFocus();
 	jQuery('#bando_outils ul.bandeau_rubriques li').menuFocus();
 
-	jQuery('#bandeau_haut #formRecherche input').hover(function(){
+	jQuery('#bandeau_haut #formRecherche input').on('hover touchstart', function(){
 		jQuery('#bandeau_haut ul.actif').trigger('mouseout');
 	});
 	jQuery('#bando_liens_rapides a')
-		.focus(function(){
+		.on('focus', function(){
 			jQuery('#bando_liens_rapides').addClass('actif');
 		})
-		.blur(function(){
+		.on('blur', function(){
 			jQuery('#bando_liens_rapides').removeClass('actif');
 		});
 	if (typeof window.test_accepte_ajax != "undefined") {

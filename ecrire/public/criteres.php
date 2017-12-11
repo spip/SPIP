@@ -1898,14 +1898,12 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	// sinon introduire le vrai type du champ si connu dans le sql_quote (ou int NOT NULL sinon)
 	// Ne pas utiliser intval, PHP tronquant les Bigint de SQL
 	if ($op == '=' or in_array($op, $GLOBALS['table_criteres_infixes'])) {
-
+		$type_cast_quote = (isset($desc['field'][$col_vraie]) ? $desc['field'][$col_vraie] : 'int NOT NULL');
 		// defaire le quote des int et les passer dans sql_quote avec le bon type de champ si on le connait, int sinon
 		// prendre en compte le debug ou la valeur arrive avec un commentaire PHP en debut
 		if (preg_match(",^\\A(\s*//.*?$\s*)?\"'(-?\d+)'\"\\z,ms", $val[0], $r)) {
-			$val[0] = $r[1] . '"' . sql_quote($r[2], $boucle->sql_serveur,
-					(isset($desc['field'][$col_vraie]) ? $desc['field'][$col_vraie] : 'int NOT NULL')) . '"';
+			$val[0] = $r[1] . '"' . sql_quote($r[2], $boucle->sql_serveur, $type_cast_quote) . '"';
 		}
-
 		// sinon expliciter les
 		// sql_quote(truc) en sql_quote(truc,'',type)
 		// sql_quote(truc,serveur) en sql_quote(truc,serveur,type)
@@ -1919,10 +1917,20 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 		) {
 			$r = $r[1]
 				. ((isset($r[2]) and $r[2]) ? $r[2] : ",''")
-				. ",'" . (isset($desc['field'][$col_vraie]) ? addslashes($desc['field'][$col_vraie]) : 'int NOT NULL') . "'";
+				. ",'" . addslashes($type_cast_quote) . "'";
 			$val[0] = "sql_quote($r)";
 		}
+		elseif(strpos($val[0], '@@defaultcast@@') !== false
+		  and preg_match("/'@@defaultcast@@'\s*\)\s*\z/ms", $val[0], $r)) {
+			$val[0] = substr($val[0], 0, -strlen($r[0])) . "'" . addslashes($type_cast_quote) . "')";
+		}
 	}
+
+	if(strpos($val[0], '@@defaultcast@@') !== false
+	  and preg_match("/'@@defaultcast@@'\s*\)\s*\z/ms", $val[0], $r)) {
+		$val[0] = substr($val[0], 0, -strlen($r[0])) . "'char')";
+	}
+
 	// Indicateur pour permettre aux fonctionx boucle_X de modifier
 	// leurs requetes par defaut, notamment le champ statut
 	// Ne pas confondre champs de la table principale et des jointures
@@ -2328,7 +2336,7 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit) {
 				if (strcasecmp($op, 'IN') == 0) {
 					$val[] = $a;
 				} else {
-					$val[] = kwote($a, $boucles[$idb]->sql_serveur, 'char');
+					$val[] = kwote($a, $boucles[$idb]->sql_serveur, '@@defaultcast@@');
 				} // toujours quoter en char ici
 			}
 		}

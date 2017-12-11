@@ -501,6 +501,7 @@ function spip_attend_invalidation_opcode_cache() {
 		and @ini_get('opcache.validate_timestamps')
 		and $duree = @ini_get('opcache.revalidate_freq')
 	) {
+		spip_log('Probleme de configuration opcache.revalidate_freq '. $duree .'s', _LOG_INFO_IMPORTANTE);
 		sleep($duree + 1);
 	}
 }

@@ -95,11 +95,10 @@ function chrono_requete($temps) {
 		$q[$key] = $nb;
 		if (!isset($d[$k])) {
 			$d[$k] = 0;
+			$n[$k] = 0;
 		}
 		$d[$k] += $dt;
-		if ($k) {
-			@++$n[$k];
-		}
+		++$n[$k];
 
 		if (!is_array($explain)) {
 			$explain = array();

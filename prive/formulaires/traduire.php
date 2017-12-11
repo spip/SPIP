@@ -80,16 +80,18 @@ function formulaires_traduire_charger_dist($objet, $id_objet, $retour = '', $tra
 
 	$valeurs['_traduisible'] = autoriser('changertraduction', $objet, $id_objet);
 	$valeurs['_traduire'] = '';
-	if (isset($valeurs['id_trad']) and $valeurs['_traduisible']) {
+	if (isset($valeurs['id_trad'])) {
 		$valeurs['_traduire'] = ($traduire ? ' ' : '');
-		$valeurs['_vue_traductions'] = 'prive/objets/liste/' . (trouver_fond(
-			$f = table_objet($objet) . '-trad',
-			'prive/objets/liste'
-		) ? $f : 'objets-trad');
-		// pour afficher la liste des trad sur la base de l'id_trad en base
-		// independamment d'une saisie en cours sur id_trad
-		$valeurs['_lister_id_trad'] = $valeurs['id_trad'];
-		$valeurs['_id_parent'] = $id_parent;
+		if ($valeurs['_traduisible']) {
+			$valeurs['_vue_traductions'] = 'prive/objets/liste/' . (trouver_fond(
+				$f = table_objet($objet) . '-trad',
+				'prive/objets/liste'
+			) ? $f : 'objets-trad');
+			// pour afficher la liste des trad sur la base de l'id_trad en base
+			// independamment d'une saisie en cours sur id_trad
+			$valeurs['_lister_id_trad'] = $valeurs['id_trad'];
+			$valeurs['_id_parent'] = $id_parent;
+		}
 	}
 
 	$valeurs['_saisie_en_cours'] = (!_request('annuler') and (_request('changer_lang') !== null

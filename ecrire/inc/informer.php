@@ -21,7 +21,7 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type, $do = 'aff') {
 	include_spip('inc/texte');
 	$titre = $descriptif = '';
 	if ($type == "rubrique") {
-		$row = sql_fetsel("titre, descriptif", "spip_rubriques", "id_rubrique = $id");
+		$row = sql_fetsel("titre, descriptif", "spip_rubriques", "id_rubrique = " . intval($id));
 		if ($row) {
 			$titre = typo($row["titre"]);
 			$descriptif = propre($row["descriptif"]);
@@ -45,7 +45,9 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type, $do = 'aff') {
 		}
 	}
 
-	$rac = spip_htmlentities($rac);
+	$rac = spip_htmlentities($rac, ENT_QUOTES);
+	$do = spip_htmlentities($do, ENT_QUOTES);
+	$id = intval($id);
 
 # ce lien provoque la selection (directe) de la rubrique cliquee
 # et l'affichage de son titre dans le bandeau

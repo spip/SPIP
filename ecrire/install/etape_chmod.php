@@ -139,9 +139,9 @@ function install_etape_chmod_dist() {
 
 		$t = _T('login_recharger');
 		$t = (!$test_dir ? '' :
-				"<input type='hidden' name='test_dir' value='$test_dir' />")
+				"<input type='hidden' name='test_dir' value='" . spip_htmlspecialchars($test_dir, ENT_QUOTES) . "' />")
 			. "<input type='hidden' name='etape' value='chmod' />"
-			. "<div style='text-align: right'><input type='submit' value='$t' /></div>";
+			. "<div style='text-align: right'><input type='submit' value='" . attribut_html($t) . "' /></div>";
 
 		echo minipres($titre, $res . generer_form_ecrire('install', $t));
 	} else {

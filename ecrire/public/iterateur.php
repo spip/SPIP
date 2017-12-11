@@ -302,7 +302,10 @@ class IterDecorator extends FilterIterator {
 
 		// Creer la fonction de filtrage sur $this
 		if ($this->filtre) {
-			$this->func_filtre = create_function('$me', $b = 'return (' . join(') AND (', $this->filtre) . ');');
+			$filtres = 'return (' . join(') AND (', $this->filtre) . ');';
+			$this->func_filtre = function () use ($filtres) {
+				return eval($filtres);
+			};
 		}
 	}
 
@@ -322,7 +325,7 @@ class IterDecorator extends FilterIterator {
 		# if (!in_array($cle, array('cle', 'valeur')))
 		#	return;
 
-		$a = '$me->get_select(\'' . $cle . '\')';
+		$a = '$this->get_select(\'' . $cle . '\')';
 
 		$filtre = '';
 
@@ -568,7 +571,7 @@ class IterDecorator extends FilterIterator {
 	 **/
 	public function accept() {
 		if ($f = $this->func_filtre) {
-			return $f($this);
+			return $f();
 		}
 
 		return true;
