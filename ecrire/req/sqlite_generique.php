@@ -284,7 +284,7 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true) {
 				if (!_sqlite_modifier_table(
 					$table,
 					array($colonne_origine => ""),
-					'',
+					array(),
 					$serveur)
 				) {
 					return false;
@@ -336,7 +336,7 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true) {
 					// artillerie lourde pour sqlite2 !
 				} else {
 					$table_dest = trim(substr($do, 9));
-					if (!_sqlite_modifier_table(array($table => $table_dest), '', '', $serveur)) {
+					if (!_sqlite_modifier_table(array($table => $table_dest), '', array(), $serveur)) {
 						spip_log("SQLite : Erreur ALTER TABLE / RENAME : $query", 'sqlite.' . _LOG_ERREUR);
 
 						return false;

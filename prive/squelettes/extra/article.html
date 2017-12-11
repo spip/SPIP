@@ -1,7 +1,7 @@
 <BOUCLE_extra(ARTICLES){id_article}{statut?}{si #ENV{exec}|=={article}}>
 #SET{statut,#SESSION{statut}|statuts_articles_visibles}
 #SET{where,#VAL{id_article!=}|concat{#ID_ARTICLE}}
-<INCLURE{fond=prive/objets/liste/articles-memerubrique,id_rubrique=#ID_RUBRIQUE,where=#GET{where},statut=#GET{statut},ajax}>
+<INCLURE{fond=prive/objets/liste/articles-memerubrique,id_rubrique=#ID_RUBRIQUE,where=#GET{where},statut=#GET{statut},env,ajax}>
 
 </BOUCLE_extra>
 [(#ENV{exec}|=={article_edit}|oui)<INCLURE{fond=prive/squelettes/extra/article_edit,env}>]

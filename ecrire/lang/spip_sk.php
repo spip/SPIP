@@ -290,6 +290,8 @@ stránku "@nom_site_spip@" (@adresse_login@):',
 	'form_prop_non_enregistre' => 'Váš návrh nebol uložený.',
 	'form_prop_sujet' => 'Predmet',
 	'form_prop_url_site' => 'Adresa stránky',
+	'format_date_incorrecte' => 'Dátum alebo jeho formát nie je správny',
+	'format_heure_incorrecte' => 'Čas alebo jeho formát nie je správny',
 	'forum_non_inscrit' => 'Buď ste sa nezaregistrovali, alebo sú adresa či heslo nesprávne.',
 	'forum_par_auteur' => 'napísal(a) @auteur@',
 	'forum_titre_erreur' => 'Chyba...',
@@ -545,6 +547,9 @@ stránku "@nom_site_spip@" (@adresse_login@):',
 	// M
 	'masquer_colonne' => 'Schovať tento stĺpec',
 	'masquer_trad' => 'Schovať preklady',
+	'message_nouveaux_identifiants_echec' => 'Nie je možné vytvoriť mové prihlasovacie údaje.',
+	'message_nouveaux_identifiants_echec_envoi' => 'Nepodarilo sa poslať nové prihlasovacie údaje.',
+	'message_nouveaux_identifiants_ok' => 'Nové prihlasovacie údaje boli odoslané na adresu @email@.',
 	'module_fichiers_langues' => 'Jazykové súbory',
 
 	// N

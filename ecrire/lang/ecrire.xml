@@ -1,50 +1,50 @@
 <traduction module="ecrire" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://trac.rezo.net/spip/spip/ecrire/lang/" reference="fr">
-	<langue code="ar" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=ar" total="808" traduits="808" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="ar" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=ar" total="809" traduits="809" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="chankalan" lien="https://trad.spip.net/auteur/chankalan" />
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
-	<langue code="ast" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=ast" total="808" traduits="672" relire="0" modifs="42" nouveaux="94" pourcent="83.17">
+	<langue code="ast" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=ast" total="809" traduits="672" relire="0" modifs="42" nouveaux="95" pourcent="83.07">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Xuacu" lien="https://trad.spip.net/auteur/xuacu" />
 	</langue>
-	<langue code="ay" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=ay" total="808" traduits="175" relire="0" modifs="7" nouveaux="626" pourcent="21.66">
+	<langue code="ay" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=ay" total="809" traduits="175" relire="0" modifs="7" nouveaux="627" pourcent="21.63">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 	</langue>
-	<langue code="bg" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=bg" total="808" traduits="482" relire="0" modifs="42" nouveaux="284" pourcent="59.65">
+	<langue code="bg" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=bg" total="809" traduits="482" relire="0" modifs="42" nouveaux="285" pourcent="59.58">
 	</langue>
-	<langue code="br" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=br" total="808" traduits="786" relire="0" modifs="5" nouveaux="17" pourcent="97.28">
+	<langue code="br" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=br" total="809" traduits="786" relire="0" modifs="5" nouveaux="18" pourcent="97.16">
 		<traducteur nom="AudeB" lien="https://trad.spip.net/auteur/audeb" />
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="kerivo" lien="https://trad.spip.net/auteur/kerivo" />
 		<traducteur nom="Kristen" lien="https://trad.spip.net/auteur/kristen" />
 	</langue>
-	<langue code="bs" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=bs" total="808" traduits="429" relire="0" modifs="71" nouveaux="308" pourcent="53.09">
+	<langue code="bs" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=bs" total="809" traduits="429" relire="0" modifs="71" nouveaux="309" pourcent="53.03">
 	</langue>
-	<langue code="ca" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=ca" total="808" traduits="786" relire="0" modifs="5" nouveaux="17" pourcent="97.28">
+	<langue code="ca" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=ca" total="809" traduits="786" relire="0" modifs="5" nouveaux="18" pourcent="97.16">
 		<traducteur nom="alf" lien="https://trad.spip.net/auteur/alf" />
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="laura" lien="https://trad.spip.net/auteur/laura" />
 		<traducteur nom="merce" lien="https://trad.spip.net/auteur/merce" />
 	</langue>
-	<langue code="co" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=co" total="808" traduits="675" relire="0" modifs="39" nouveaux="94" pourcent="83.54">
+	<langue code="co" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=co" total="809" traduits="675" relire="0" modifs="39" nouveaux="95" pourcent="83.44">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="tavamig" lien="https://trad.spip.net/auteur/tavamig" />
 	</langue>
-	<langue code="cpf" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=cpf" total="808" traduits="482" relire="0" modifs="42" nouveaux="284" pourcent="59.65">
+	<langue code="cpf" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=cpf" total="809" traduits="482" relire="0" modifs="42" nouveaux="285" pourcent="59.58">
 	</langue>
-	<langue code="cpf_hat" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=cpf_hat" total="808" traduits="453" relire="0" modifs="53" nouveaux="302" pourcent="56.06">
+	<langue code="cpf_hat" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=cpf_hat" total="809" traduits="453" relire="0" modifs="53" nouveaux="303" pourcent="56.00">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="cs" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=cs" total="808" traduits="462" relire="0" modifs="66" nouveaux="280" pourcent="57.18">
+	<langue code="cs" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=cs" total="809" traduits="462" relire="0" modifs="66" nouveaux="281" pourcent="57.11">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="da" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=da" total="808" traduits="438" relire="0" modifs="39" nouveaux="331" pourcent="54.21">
+	<langue code="da" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=da" total="809" traduits="438" relire="0" modifs="39" nouveaux="332" pourcent="54.14">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="de" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=de" total="808" traduits="806" relire="0" modifs="0" nouveaux="2" pourcent="99.75">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=de" total="809" traduits="806" relire="0" modifs="0" nouveaux="3" pourcent="99.63">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="EricT" lien="https://trad.spip.net/auteur/erict-7193" />
 		<traducteur nom="Fil" lien="https://trad.spip.net/auteur/fil" />
@@ -55,7 +55,7 @@
 		<traducteur nom="RealET" lien="https://trad.spip.net/auteur/realet" />
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
-	<langue code="en" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=en" total="808" traduits="808" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=en" total="809" traduits="809" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="akomarani" lien="https://trad.spip.net/auteur/akomarani" />
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
@@ -74,13 +74,13 @@
 		<traducteur nom="RealET" lien="https://trad.spip.net/auteur/realet" />
 		<traducteur nom="sQuonk" lien="https://trad.spip.net/auteur/squonk" />
 	</langue>
-	<langue code="eo" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=eo" total="808" traduits="764" relire="0" modifs="9" nouveaux="35" pourcent="94.55">
+	<langue code="eo" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=eo" total="809" traduits="764" relire="0" modifs="9" nouveaux="36" pourcent="94.44">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Fil" lien="https://trad.spip.net/auteur/fil" />
 		<traducteur nom="frederik" lien="https://trad.spip.net/auteur/frederik" />
 		<traducteur nom="Matthieu Marcillaud" lien="https://trad.spip.net/auteur/matthieu-marcillaud" />
 	</langue>
-	<langue code="es" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=es" total="808" traduits="799" relire="0" modifs="0" nouveaux="9" pourcent="98.89">
+	<langue code="es" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=es" total="809" traduits="799" relire="0" modifs="0" nouveaux="10" pourcent="98.76">
 		<traducteur nom="alf" lien="https://trad.spip.net/auteur/alf" />
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="dani" lien="https://trad.spip.net/auteur/dani" />
@@ -92,22 +92,22 @@
 		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
 		<traducteur nom="severo" lien="https://trad.spip.net/auteur/severo" />
 	</langue>
-	<langue code="eu" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=eu" total="808" traduits="771" relire="0" modifs="0" nouveaux="37" pourcent="95.42">
+	<langue code="eu" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=eu" total="809" traduits="771" relire="0" modifs="0" nouveaux="38" pourcent="95.30">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="otalazt" lien="https://trad.spip.net/auteur/otalazt-7232" />
 	</langue>
-	<langue code="fa" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=fa" total="808" traduits="773" relire="0" modifs="10" nouveaux="25" pourcent="95.67">
+	<langue code="fa" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=fa" total="809" traduits="773" relire="0" modifs="10" nouveaux="26" pourcent="95.55">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 		<traducteur nom="Fil" lien="https://trad.spip.net/auteur/fil" />
 	</langue>
-	<langue code="fon" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=fon" total="808" traduits="447" relire="0" modifs="40" nouveaux="321" pourcent="55.32">
+	<langue code="fon" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=fon" total="809" traduits="447" relire="0" modifs="40" nouveaux="322" pourcent="55.25">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="fr" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=fr" total="808" traduits="808" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=fr" total="809" traduits="809" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Matthieu Marcillaud" lien="https://trad.spip.net/auteur/matthieu-marcillaud" />
 	</langue>
-	<langue code="fr_fem" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=fr_fem" total="808" traduits="799" relire="0" modifs="0" nouveaux="9" pourcent="98.89">
+	<langue code="fr_fem" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=fr_fem" total="809" traduits="799" relire="0" modifs="0" nouveaux="10" pourcent="98.76">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Cerf" lien="https://trad.spip.net/auteur/cerf" />
 		<traducteur nom="denisb" lien="https://trad.spip.net/auteur/denisb" />
@@ -115,7 +115,7 @@
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 		<traducteur nom="touti" lien="https://trad.spip.net/auteur/touti" />
 	</langue>
-	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=fr_tu" total="808" traduits="808" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=fr_tu" total="809" traduits="808" relire="0" modifs="0" nouveaux="1" pourcent="99.88">
 		<traducteur nom="Astalaseven" lien="https://trad.spip.net/auteur/astalaseven" />
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="beatnick" lien="https://trad.spip.net/auteur/beatnick" />
@@ -128,49 +128,49 @@
 		<traducteur nom="PatV" lien="https://trad.spip.net/auteur/pat" />
 		<traducteur nom="RealET" lien="https://trad.spip.net/auteur/realet" />
 	</langue>
-	<langue code="gl" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=gl" total="808" traduits="693" relire="0" modifs="40" nouveaux="75" pourcent="85.77">
+	<langue code="gl" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=gl" total="809" traduits="693" relire="0" modifs="40" nouveaux="76" pourcent="85.66">
 		<traducteur nom="Antón Méixome" lien="https://trad.spip.net/auteur/anton-meixome" />
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="he" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=he" total="808" traduits="337" relire="0" modifs="13" nouveaux="458" pourcent="41.71">
+	<langue code="he" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=he" total="809" traduits="337" relire="0" modifs="13" nouveaux="459" pourcent="41.66">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Nicoco" lien="https://trad.spip.net/auteur/nicoco" />
 	</langue>
-	<langue code="hu" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=hu" total="808" traduits="456" relire="0" modifs="66" nouveaux="286" pourcent="56.44">
+	<langue code="hu" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=hu" total="809" traduits="456" relire="0" modifs="66" nouveaux="287" pourcent="56.37">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="id" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=id" total="808" traduits="495" relire="0" modifs="41" nouveaux="272" pourcent="61.26">
+	<langue code="id" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=id" total="809" traduits="495" relire="0" modifs="41" nouveaux="273" pourcent="61.19">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="it" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=it" total="808" traduits="784" relire="0" modifs="5" nouveaux="19" pourcent="97.03">
+	<langue code="it" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=it" total="809" traduits="784" relire="0" modifs="5" nouveaux="20" pourcent="96.91">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="cam.lafit" lien="https://trad.spip.net/auteur/cam-lafit" />
 		<traducteur nom="Julia14" lien="https://trad.spip.net/auteur/julia14" />
 		<traducteur nom="phante" lien="https://trad.spip.net/auteur/phante" />
 	</langue>
-	<langue code="it_fem" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=it_fem" total="808" traduits="633" relire="28" modifs="2" nouveaux="145" pourcent="78.34">
+	<langue code="it_fem" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=it_fem" total="809" traduits="633" relire="28" modifs="2" nouveaux="146" pourcent="78.24">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Julia14" lien="https://trad.spip.net/auteur/julia14" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="ja" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=ja" total="808" traduits="461" relire="0" modifs="40" nouveaux="307" pourcent="57.05">
+	<langue code="ja" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=ja" total="809" traduits="461" relire="0" modifs="40" nouveaux="308" pourcent="56.98">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="km" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=km" total="808" traduits="534" relire="0" modifs="34" nouveaux="240" pourcent="66.09">
+	<langue code="km" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=km" total="809" traduits="534" relire="0" modifs="34" nouveaux="241" pourcent="66.01">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="lb" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=lb" total="808" traduits="764" relire="0" modifs="9" nouveaux="35" pourcent="94.55">
+	<langue code="lb" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=lb" total="809" traduits="764" relire="0" modifs="9" nouveaux="36" pourcent="94.44">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Jim Wanderscheid" lien="https://trad.spip.net/auteur/jwander" />
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="my" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=my" total="808" traduits="493" relire="0" modifs="38" nouveaux="277" pourcent="61.01">
+	<langue code="my" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=my" total="809" traduits="493" relire="0" modifs="38" nouveaux="278" pourcent="60.94">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="nl" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=nl" total="808" traduits="808" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="nl" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=nl" total="809" traduits="809" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="ericdg10" lien="https://trad.spip.net/auteur/ericdg10" />
 		<traducteur nom="gerbrand" lien="https://trad.spip.net/auteur/gerbrand" />
@@ -179,51 +179,51 @@
 		<traducteur nom="mpossoz" lien="https://trad.spip.net/auteur/mpossoz" />
 		<traducteur nom="Suske" lien="https://trad.spip.net/auteur/suske" />
 	</langue>
-	<langue code="oc_auv" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_auv" total="808" traduits="454" relire="0" modifs="41" nouveaux="313" pourcent="56.19">
+	<langue code="oc_auv" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_auv" total="809" traduits="454" relire="0" modifs="41" nouveaux="314" pourcent="56.12">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="oc_gsc" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_gsc" total="808" traduits="454" relire="0" modifs="41" nouveaux="313" pourcent="56.19">
+	<langue code="oc_gsc" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_gsc" total="809" traduits="454" relire="0" modifs="41" nouveaux="314" pourcent="56.12">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="oc_lms" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_lms" total="808" traduits="454" relire="0" modifs="41" nouveaux="313" pourcent="56.19">
+	<langue code="oc_lms" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_lms" total="809" traduits="454" relire="0" modifs="41" nouveaux="314" pourcent="56.12">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="oc_lnc" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_lnc" total="808" traduits="515" relire="0" modifs="41" nouveaux="252" pourcent="63.74">
+	<langue code="oc_lnc" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_lnc" total="809" traduits="515" relire="0" modifs="41" nouveaux="253" pourcent="63.66">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="oc_ni" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_ni" total="808" traduits="670" relire="1" modifs="2" nouveaux="135" pourcent="82.92">
+	<langue code="oc_ni" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_ni" total="809" traduits="670" relire="1" modifs="2" nouveaux="136" pourcent="82.82">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Bastian" lien="https://trad.spip.net/auteur/bastian" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 		<traducteur nom="sylvain" lien="https://trad.spip.net/auteur/sylvain" />
 	</langue>
-	<langue code="oc_ni_la" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_ni_la" total="808" traduits="453" relire="0" modifs="42" nouveaux="313" pourcent="56.06">
+	<langue code="oc_ni_la" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_ni_la" total="809" traduits="453" relire="0" modifs="42" nouveaux="314" pourcent="56.00">
 		<traducteur nom="Bastian" lien="https://trad.spip.net/auteur/bastian" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="oc_ni_mis" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_ni_mis" total="808" traduits="806" relire="0" modifs="0" nouveaux="2" pourcent="99.75">
+	<langue code="oc_ni_mis" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_ni_mis" total="809" traduits="806" relire="0" modifs="0" nouveaux="3" pourcent="99.63">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="sylvain" lien="https://trad.spip.net/auteur/sylvain" />
 	</langue>
-	<langue code="oc_prv" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_prv" total="808" traduits="468" relire="0" modifs="41" nouveaux="299" pourcent="57.92">
+	<langue code="oc_prv" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_prv" total="809" traduits="468" relire="0" modifs="41" nouveaux="300" pourcent="57.85">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="oc_va" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_va" total="808" traduits="454" relire="0" modifs="41" nouveaux="313" pourcent="56.19">
+	<langue code="oc_va" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_va" total="809" traduits="454" relire="0" modifs="41" nouveaux="314" pourcent="56.12">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="pl" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=pl" total="808" traduits="673" relire="0" modifs="47" nouveaux="88" pourcent="83.29">
+	<langue code="pl" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=pl" total="809" traduits="673" relire="0" modifs="47" nouveaux="89" pourcent="83.19">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Karolina Anna" lien="https://trad.spip.net/auteur/karolina-anna" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 		<traducteur nom="ktos" lien="https://trad.spip.net/auteur/keycheck" />
 	</langue>
-	<langue code="pt" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=pt" total="808" traduits="770" relire="0" modifs="9" nouveaux="29" pourcent="95.30">
+	<langue code="pt" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=pt" total="809" traduits="770" relire="0" modifs="9" nouveaux="30" pourcent="95.18">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Cláudia Anjos Lopes" lien="https://trad.spip.net/auteur/claudia_a_lopes" />
 		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
-	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=pt_br" total="808" traduits="808" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=pt_br" total="809" traduits="808" relire="0" modifs="0" nouveaux="1" pourcent="99.88">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Fil" lien="https://trad.spip.net/auteur/fil" />
 		<traducteur nom="filipaun" lien="https://trad.spip.net/auteur/filipaun" />
@@ -232,30 +232,30 @@
 		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
 		<traducteur nom="telopa" lien="https://trad.spip.net/auteur/telopa" />
 	</langue>
-	<langue code="ro" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=ro" total="808" traduits="639" relire="0" modifs="36" nouveaux="133" pourcent="79.08">
+	<langue code="ro" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=ro" total="809" traduits="639" relire="0" modifs="36" nouveaux="134" pourcent="78.99">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 		<traducteur nom="telopa" lien="https://trad.spip.net/auteur/telopa" />
 		<traducteur nom="vmurariu" lien="https://trad.spip.net/auteur/vmurariu" />
 	</langue>
-	<langue code="ru" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=ru" total="808" traduits="807" relire="1" modifs="0" nouveaux="0" pourcent="99.88">
+	<langue code="ru" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=ru" total="809" traduits="807" relire="1" modifs="0" nouveaux="1" pourcent="99.75">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="olly" lien="https://trad.spip.net/auteur/olly" />
 		<traducteur nom="Serge Markitanenko" lien="https://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
-	<langue code="sk" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=sk" total="808" traduits="798" relire="0" modifs="0" nouveaux="10" pourcent="98.76">
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=sk" total="809" traduits="807" relire="0" modifs="0" nouveaux="2" pourcent="99.75">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 	</langue>
-	<langue code="sv" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=sv" total="808" traduits="495" relire="0" modifs="27" nouveaux="286" pourcent="61.26">
+	<langue code="sv" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=sv" total="809" traduits="495" relire="0" modifs="27" nouveaux="287" pourcent="61.19">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="tr" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=tr" total="808" traduits="627" relire="93" modifs="7" nouveaux="81" pourcent="77.60">
+	<langue code="tr" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=tr" total="809" traduits="627" relire="93" modifs="7" nouveaux="82" pourcent="77.50">
 		<traducteur nom="alexis" lien="https://trad.spip.net/auteur/alexis" />
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="uk" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=uk" total="808" traduits="808" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="uk" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=uk" total="809" traduits="808" relire="0" modifs="0" nouveaux="1" pourcent="99.88">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Fil" lien="https://trad.spip.net/auteur/fil" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
@@ -263,10 +263,10 @@
 		<traducteur nom="Retenodus" lien="https://trad.spip.net/auteur/retenodus" />
 		<traducteur nom="Serge Markitanenko" lien="https://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
-	<langue code="vi" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=vi" total="808" traduits="448" relire="0" modifs="46" nouveaux="314" pourcent="55.45">
+	<langue code="vi" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=vi" total="809" traduits="448" relire="0" modifs="46" nouveaux="315" pourcent="55.38">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="zh" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=zh" total="808" traduits="410" relire="0" modifs="78" nouveaux="320" pourcent="50.74">
+	<langue code="zh" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=zh" total="809" traduits="410" relire="0" modifs="78" nouveaux="321" pourcent="50.68">
 		<traducteur nom="Chia Kiah Yeen" lien="https://trad.spip.net/auteur/chia-kiah-yeen" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>

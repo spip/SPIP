@@ -140,14 +140,18 @@ function definir_barre_boutons($contexte = array(), $icones = true, $autorise = 
 	}
 	$boutons_admin = pipeline('ajouter_menus', $boutons_admin);
 
-	// définir les favoris
+	// définir les favoris et positions d’origine
 	if ($boutons_admin) {
 		$menus_favoris = obtenir_menus_favoris();
+		$i = 1;
 		foreach ($boutons_admin as $key => $menu) {
 			$menu->favori = table_valeur($menus_favoris, $key, false);
+			$menu->position = $i++;
 			if ($menu->sousmenu) {
+				$j = 1;
 				foreach ($menu->sousmenu as $key => $bouton) {
 					$bouton->favori = table_valeur($menus_favoris, $key, false);
+					$bouton->position = $j++;
 				}
 			}
 		}

@@ -125,10 +125,7 @@ function echappe_js($t, $class = ' class = "echappe-js"') {
  * dans l'espace privé. Cette fonction est aussi appelée par propre et typo.
  *
  * De la même manière, la fonction empêche l'exécution de JS mais selon le mode
- * de protection déclaré par la globale filtrer_javascript :
- * - -1 : protection dans l'espace privé et public
- * - 0  : protection dans l'espace public
- * - 1  : aucune protection
+ * de protection passe en argument
  *
  * Il ne faut pas désactiver globalement la fonction dans l'espace privé car elle protège
  * aussi les balises des squelettes qui ne passent pas forcement par propre ou typo après
@@ -136,10 +133,16 @@ function echappe_js($t, $class = ' class = "echappe-js"') {
  *
  * @param string $arg
  *     Code à protéger
+ * @param int $mode_filtre
+ *     Mode de protection
+ *       -1 : protection dans l'espace privé et public
+ *       0  : protection dans l'espace public
+ *       1  : aucune protection
+ *     utilise la valeur de la globale filtrer_javascript si non fourni
  * @return string
  *     Code protégé
  **/
-function interdire_scripts($arg) {
+function interdire_scripts($arg, $mode_filtre=null) {
 	// on memorise le resultat sur les arguments non triviaux
 	static $dejavu = array();
 
@@ -148,8 +151,12 @@ function interdire_scripts($arg) {
 		return $arg;
 	}
 
-	if (isset($dejavu[$GLOBALS['filtrer_javascript']][$arg])) {
-		return $dejavu[$GLOBALS['filtrer_javascript']][$arg];
+	if (is_null($mode_filtre) or !in_array($mode_filtre, array(-1, 0, 1))) {
+		$mode_filtre = $GLOBALS['filtrer_javascript'];
+	}
+
+	if (isset($dejavu[$mode_filtre][$arg])) {
+		return $dejavu[$mode_filtre][$arg];
 	}
 
 	// echapper les tags asp/php
@@ -162,7 +169,7 @@ function interdire_scripts($arg) {
 	$t = preg_replace(',<(script\b[^>]+\blanguage\b[^\w>]+php\b),UimsS', '&lt;\1', $t);
 
 	// Pour le js, trois modes : parano (-1), prive (0), ok (1)
-	switch ($GLOBALS['filtrer_javascript']) {
+	switch ($mode_filtre) {
 		case 0:
 			if (!_DIR_RESTREINT) {
 				$t = echappe_js($t);
@@ -184,7 +191,7 @@ function interdire_scripts($arg) {
 		$t = echappe_retour($t, "php" . _PROTEGE_PHP_MODELES);
 	}
 
-	return $dejavu[$GLOBALS['filtrer_javascript']][$arg] = $t;
+	return $dejavu[$mode_filtre][$arg] = $t;
 }
 
 

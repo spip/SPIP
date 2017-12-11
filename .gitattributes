@@ -476,7 +476,7 @@ prive/informer_auteur_fonctions.php -text
 prive/javascript/SearchHighlight.js -text
 prive/javascript/ajaxCallback.js -text
 prive/javascript/gadgets.js -text
-prive/javascript/jquery-migrate-3.0.0.js -text
+prive/javascript/jquery-migrate-3.0.1.js -text
 prive/javascript/jquery.autosave.js -text
 prive/javascript/jquery.cookie.js -text
 prive/javascript/jquery.form.js -text

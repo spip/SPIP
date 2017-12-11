@@ -636,7 +636,7 @@ function inc_object_to_array($object) {
  * @return array|bool
  */
 function inc_yql_to_array_dist($u) {
-	define('_YQL_ENDPOINT', 'http://query.yahooapis.com/v1/public/yql?&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&q=');
+	define('_YQL_ENDPOINT', 'https://query.yahooapis.com/v1/public/yql?&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&q=');
 	$v = recuperer_url($url = _YQL_ENDPOINT . urlencode($u) . '&format=json');
 	if (!$v['page']
 		or !$w = json_decode($v['page'], true)

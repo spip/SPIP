@@ -49,7 +49,7 @@ function f_jQuery($texte) {
 	$jquery_plugins = pipeline('jquery_plugins',
 		array(
 			'javascript/jquery.js',
-			'javascript/jquery-migrate-3.0.0.js',
+			'javascript/jquery-migrate-3.0.1.js',
 			'javascript/jquery.form.js',
 			'javascript/jquery.autosave.js',
 			'javascript/jquery.placeholder-label.js',

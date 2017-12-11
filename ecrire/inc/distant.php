@@ -1312,7 +1312,7 @@ function lance_requete(
 			)
 		));
 		if (version_compare(phpversion(), '5.6', '<')) {
-			$streamContext['SNI_server_name'] = $host;
+			stream_context_set_option($streamContext, 'ssl', 'SNI_server_name', $host);
 		}
 		$f = @stream_socket_client(
 			"tcp://$first_host:$port",

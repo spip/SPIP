@@ -1,8 +1,8 @@
 <paquet
 	prefix="spip"
 	categorie="outil"
-	version="3.2.0-dev"
-	etat="dev"
+	version="3.2.0"
+	etat="stable"
 	compatibilite="];["
 	schema="23375"
 	documentation="https://www.spip.net"
@@ -11,7 +11,7 @@
 >
 
 	<nom>SPIP</nom>
-	<!-- Système de publication pour l'Internet -->
+	<!--  Système de publication pour l'Internet -->
 
 	<auteur>Arnaud Martin</auteur>
 	<auteur>Antoine Pitrou</auteur>
@@ -138,7 +138,7 @@
 
 	<procure nom="iterateurs" version="1.0.6" />
 	<procure nom="queue" version="0.6.8" />
-	<procure nom="jquery" version="1.12.4" />
+	<procure nom="jquery" version="3.2.1" />
 
 	<menu nom="menu_accueil" titre="icone_accueil" icone="images/accueil-48.png" action="accueil" />
 	<menu nom="menu_edition" titre="icone_edition" icone="images/edition-48.png" action="navigation" parametres="menu=menu_edition" />

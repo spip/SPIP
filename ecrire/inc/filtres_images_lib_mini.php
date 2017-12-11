@@ -230,12 +230,14 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 		return false;
 	}
 
-	// partager les images calculées pour des traitements identiques dans l’espace public ou privé
+	// les images calculees dependent du chemin du fichier source
+	// pour une meme image source et un meme filtre on aboutira a 2 fichiers selon si l'appel est dans le public ou dans le prive
+	// ce n'est pas totalement optimal en terme de stockage, mais chaque image est associee a un fichier .src
+	// qui contient la methode de reconstrucion (le filtre + les arguments d'appel) et les arguments different entre prive et public
+	// la mise en commun du fichier image cree donc un bug et des problemes qui necessiteraient beaucoup de complexite de code
+	// alors que ca concerne peu de site au final
+	// la release de r23632+r23633+r23634 a provoque peu de remontee de bug attestant du peu de sites impactes
 	$identifiant = $fichier;
-	$f = realpath($fichier);
-	if (strpos(str_replace('\\', '/', $f), str_replace('\\', '/', _ROOT_RACINE)) === 0) {
-		$identifiant = substr($f, strlen(_ROOT_RACINE));
-	}
 
 	// cas general :
 	// on a un dossier cache commun et un nom de fichier qui varie avec l'effet

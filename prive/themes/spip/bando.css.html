@@ -137,7 +137,8 @@ Les styles pour les icones pochoir de diala sont dans themes/spip/style_prive_th
 .navigation_avec_icones #bando_navigation ul li ul li a {margin-#ENV{left}:7px; margin-#ENV{right}: 1.0em; background-position:[(#ENV{left})] center;margin-top:0;padding-#ENV{left}:24px;padding-top:0.8em;}
 
 .navigation .sous_navigation .item a {display:block;background-position:left center;margin-left:7px;padding:2px;padding-left:24px;background-repeat:no-repeat;}
-
+.navigation .sous_navigation .item.non_favori { background-color: #[(#ENV{claire}|couleur_eclaircir{.92})]; }
+.navigation .sous_navigation .item.on { background-color:[#(#ENV{claire}|couleur_eclaircir|couleur_eclaircir)]; }
 
 /* messages de statut et d'avertissement dans le bandeau */
 div.wrap-messages, div.en_lignes { padding: 5px; border-bottom: 1px solid #ENV{foncee}; font-weight: bold;}

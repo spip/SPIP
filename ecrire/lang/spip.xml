@@ -200,7 +200,7 @@
 		<traducteur nom="olly" lien="https://trad.spip.net/auteur/olly" />
 		<traducteur nom="Serge Markitanenko" lien="https://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
-	<langue code="sk" url="https://trad.spip.net/tradlang_module/spip?lang_cible=sk" total="641" traduits="636" relire="0" modifs="0" nouveaux="5" pourcent="99.22">
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/spip?lang_cible=sk" total="641" traduits="641" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 	</langue>
 	<langue code="sq" url="https://trad.spip.net/tradlang_module/spip?lang_cible=sq" total="641" traduits="469" relire="0" modifs="51" nouveaux="121" pourcent="73.17">

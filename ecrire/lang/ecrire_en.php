@@ -135,6 +135,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_url' => 'URL of your site',
 	'entree_url_2' => 'Site URL',
 	'erreur_connect_deja_existant' => 'There is already a server with that name ',
+	'erreur_contenu_suspect' => 'Text badly formatted',
 	'erreur_email_deja_existant' => 'This email address is already registered.',
 	'erreur_nom_connect_incorrect' => 'Server name not allowed',
 	'erreur_plugin_attribut_balise_manquant' => 'Attribut @attribut@ fehlt in dem tag @balise@',

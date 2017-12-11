@@ -391,7 +391,7 @@ function base_vider_tables_destination_copie($tables, $exclure_tables = array(),
 function base_conserver_copieur($move = true, $serveur = '') {
 	// s'asurer qu'on a pas deja fait la manip !
 	if ($GLOBALS['visiteur_session']['id_auteur'] > 0 and sql_countsel("spip_auteurs", "id_auteur>0")) {
-		spip_log('Conserver copieur ' . $GLOBALS['visiteur_statut']['id_auteur'] . " dans id_auteur=" . $GLOBALS['visiteur_statut']['id_auteur'] . " pour le serveur '$serveur'",
+		spip_log('Conserver copieur dans id_auteur=' . $GLOBALS['visiteur_session']['id_auteur'] . " pour le serveur '$serveur'",
 			'dump.' . _LOG_INFO_IMPORTANTE);
 		sql_delete("spip_auteurs", "id_auteur<0", $serveur);
 		if ($move) {

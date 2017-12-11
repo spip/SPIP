@@ -1051,7 +1051,11 @@ function affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme = ''
 						'dtstart' => $dtstart,
 						'dtend' => $dtend,
 						'dtabbr' => $dtabbr
-					));
+					),
+						array(
+							'sanitize' => false
+						)
+					);
 				} // Le lundi 20 fevrier de 18h00 a 20h00
 				else {
 					$s = spip_ucfirst(_T('date_fmt_jour_heure_debut_fin',

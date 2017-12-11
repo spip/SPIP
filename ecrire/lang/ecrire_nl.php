@@ -135,6 +135,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_url' => 'Je website-adres (URL)',
 	'entree_url_2' => 'Adres van de site (URL)',
 	'erreur_connect_deja_existant' => 'Een server met die naam bestaat al',
+	'erreur_contenu_suspect' => 'Slecht gevormde tekst',
 	'erreur_email_deja_existant' => 'Dit emailadres is al geregistreerd.',
 	'erreur_nom_connect_incorrect' => 'Deze server naam is niet toegestaan',
 	'erreur_plugin_attribut_balise_manquant' => 'Attribuut @attribut@ ontbreekt in lus @balise@.',
