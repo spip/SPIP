@@ -3215,7 +3215,7 @@ function recuperer_fond($fond, $contexte = array(), $options = array(), $connect
 		}
 		
 		// contamination de la session appelante, pour les inclusions statiques
-		if (isset($options['session_contaminante'])
+		if (isset($options['sessionnement_contaminant'])
 		    and isset($page['invalideurs']['session']))
 			$cache_utilise_session_appelant = $page['invalideurs']['session'];
 	}
