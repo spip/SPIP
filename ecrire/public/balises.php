@@ -1988,6 +1988,10 @@ function balise_INCLURE_dist($p) {
 		}
 
 		$_options = array();
+
+		// FIX https://core.spip.net/issues/4235 :
+		$_options[] = "'session_contaminante'=>true";
+
 		if (isset($_contexte['ajax'])) {
 			$_options[] = preg_replace(",=>(.*)$,ims", '=> ($v=(\\1))?$v:true', $_contexte['ajax']);
 			unset($_contexte['ajax']);
