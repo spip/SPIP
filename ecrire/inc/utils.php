@@ -3170,8 +3170,14 @@ function recuperer_fond($fond, $contexte = array(), $options = array(), $connect
 
 	$GLOBALS['_INC_PUBLIC']++;
 
+	// fix #4235
+	$cache_utilise_session_appelant	= (isset($GLOBALS['cache_utilise_session']) ? $GLOBALS['cache_utilise_session'] : null);
+
 
 	foreach (is_array($fond) ? $fond : array($fond) as $f) {
+		
+		unset($GLOBALS['cache_utilise_session']);	// fix #4235
+
 		$page = evaluer_fond($f, $contexte, $connect);
 		if ($page === '') {
 			$c = isset($options['compil']) ? $options['compil'] : '';
@@ -3207,6 +3213,11 @@ function recuperer_fond($fond, $contexte = array(), $options = array(), $connect
 		} else {
 			$texte .= $options['trim'] ? rtrim($page['texte']) : $page['texte'];
 		}
+		
+		// contamination de la session appelante, pour les inclusions statiques
+		if (isset($options['session_contaminante'])
+		    and isset($page['invalideurs']['session']))
+			$cache_utilise_session_appelant = $page['invalideurs']['session'];
 	}
 
 	$GLOBALS['_INC_PUBLIC']--;
