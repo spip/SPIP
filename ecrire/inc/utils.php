@@ -3220,6 +3220,11 @@ function recuperer_fond($fond, $contexte = array(), $options = array(), $connect
 			$cache_utilise_session_appelant = $page['invalideurs']['session'];
 	}
 
+	// restaurer le sessionnement du contexte appelant, 
+	// éventuellement contaminé si on vient de récupérer une inclusion statique sessionnée
+	$GLOBALS['cache_utilise_session']
+		= (isset($cache_utilise_session_appelant) ? $cache_utilise_session_appelant : null);
+	
 	$GLOBALS['_INC_PUBLIC']--;
 
 	if ($lang_select) {
