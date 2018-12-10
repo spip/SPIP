@@ -2049,7 +2049,7 @@ function balise_MODELE_dist($p) {
 	// erreur de syntaxe = fond absent
 	// (2 messages d'erreur SPIP pour le prix d'un, mais pas d'erreur PHP
 	if (!$_contexte) {
-		$contexte = array();
+		$_contexte = array();
 	}
 
 	if (!isset($_contexte[1])) {
@@ -2088,7 +2088,7 @@ function balise_MODELE_dist($p) {
 		}
 
 		$_options = memoriser_contexte_compil($p);
-		$_options = "'compil'=>array($_options), 'trim'=>true";
+		$_options = "'compil'=>array($_options), 'trim'=>true, 'sessionnement_contaminant'=>true";
 		if (isset($_contexte['ajax'])) {
 			$_options .= ", " . preg_replace(",=>(.*)$,ims", '=> ($v=(\\1))?$v:true', $_contexte['ajax']);
 			unset($_contexte['ajax']);
