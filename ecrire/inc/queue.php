@@ -641,11 +641,15 @@ function queue_affichage_cron() {
 				$errno, $errstr, 1);
 
 			if ($fp) {
+				$host_sent = $parts['host'];
+				if (isset($parts['port']) and $parts['port'] !== $port) {
+					$host_sent .= ':' . $parts['port'];
+				}
 				$timeout = 200; // ms
 				stream_set_timeout($fp, 0, $timeout * 1000);
 				$query = $parts['path'] . ($parts['query'] ? "?" . $parts['query'] : "");
 				$out = "GET " . $query . " HTTP/1.1\r\n";
-				$out .= "Host: " . $parts['host'] . "\r\n";
+				$out .= "Host: " . $host_sent . "\r\n";
 				$out .= "Connection: Close\r\n\r\n";
 				fwrite($fp, $out);
 				spip_timer('read');

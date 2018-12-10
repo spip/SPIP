@@ -1484,8 +1484,12 @@ function lance_requete(
 
 	$site = isset($GLOBALS['meta']['adresse_site']) ? $GLOBALS['meta']['adresse_site'] : '';
 
+	$host_port = $host;
+	if ($port != (in_array($scheme , array('tls','ssl')) ? 443 : 80)) {
+		$host_port .= ":$port";
+	}
 	$req = "$method $path $vers\r\n"
-		. "Host: $host\r\n"
+		. "Host: $host_port\r\n"
 		. 'User-Agent: ' . _INC_DISTANT_USER_AGENT . "\r\n"
 		. ($refuse_gz ? '' : ('Accept-Encoding: ' . _INC_DISTANT_CONTENT_ENCODING . "\r\n"))
 		. (!$site ? '' : "Referer: $site/$referer\r\n")
