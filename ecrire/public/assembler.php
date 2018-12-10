@@ -569,7 +569,8 @@ function inclure_modele($type, $id, $params, $lien, $connect = '', $env = array(
 	$contexte = array_merge($contexte, $arg_list);
 
 	// Appliquer le modele avec le contexte
-	$retour = recuperer_fond($fond, $contexte, array(), $connect);
+	// et provoquer le sessionnement du squelette appelant si le modèle et sessionné
+	$retour = recuperer_fond($fond, $contexte, array('sessionnement_contaminant'=>true), $connect);
 
 	// Regarder si le modele tient compte des liens (il *doit* alors indiquer
 	// spip_lien_ok dans les classes de son conteneur de premier niveau ;
