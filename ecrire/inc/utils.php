@@ -633,6 +633,9 @@ function nettoyer_uri($reset = null) {
 
 /**
  * Nettoie une request_uri des paramètres var_xxx
+ * 
+ * Attention, la regexp doit suivre _CONTEXTE_IGNORE_VARIABLES défini au début de public/assembler.php
+ * 
  * @param $request_uri
  * @return string
  */
@@ -640,7 +643,7 @@ function nettoyer_uri_var($request_uri) {
 	$uri1 = $request_uri;
 	do {
 		$uri = $uri1;
-		$uri1 = preg_replace(',([?&])(PHPSESSID|(var_[^=&]*))=[^&]*(&|$),i',
+		$uri1 = preg_replace(',([?&])(var_[^=&]*|PHPSESSID|fbclid|utm_[^=&]*)=[^&]*(&|$),i',
 			'\1', $uri);
 	} while ($uri <> $uri1);
 	return preg_replace(',[?&]$,', '', $uri1);
