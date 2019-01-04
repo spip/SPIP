@@ -23,6 +23,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+// En cas de modification, il faut aussi actualiser la regexp de nettoyer_uri_var() dans inc/utils.php
 if (!defined('_CONTEXTE_IGNORE_VARIABLES')) {
 	define('_CONTEXTE_IGNORE_VARIABLES', "/(^var_|^PHPSESSID$|^fbclid$|^utm_)/");
 }
