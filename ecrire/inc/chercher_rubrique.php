@@ -21,8 +21,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-define('_SPIP_SELECT_RUBRIQUES', 20); /* mettre 100000 pour desactiver ajax */
-
+if (!defined('_SPIP_SELECT_RUBRIQUES') {
+	/**
+	 * @var int Nombre de rubriques maximum du sélecteur de rubriques. 
+	 * Au delà, on bascule sur un sélecteur ajax.
+	 * mettre 100000 pour desactiver ajax 
+	 */
+	define('_SPIP_SELECT_RUBRIQUES', 20); 
+}
 
 /**
  * Sélecteur de rubriques pour l'espace privé
