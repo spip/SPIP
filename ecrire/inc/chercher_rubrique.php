@@ -21,7 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-if (!defined('_SPIP_SELECT_RUBRIQUES') {
+if (!defined('_SPIP_SELECT_RUBRIQUES')) {
 	/**
 	 * @var int Nombre de rubriques maximum du sélecteur de rubriques. 
 	 * Au delà, on bascule sur un sélecteur ajax.
