@@ -3175,7 +3175,7 @@ function recuperer_fond($fond, $contexte = array(), $options = array(), $connect
 		$page = evaluer_fond($f, $contexte, $connect);
 		if ($page === '') {
 			$c = isset($options['compil']) ? $options['compil'] : '';
-			$a = array('fichier' => $fond);
+			$a = array('fichier' => $f);
 			$erreur = _T('info_erreur_squelette2', $a); // squelette introuvable
 			erreur_squelette($erreur, $c);
 			// eviter des erreurs strictes ensuite sur $page['cle'] en PHP >= 5.4
