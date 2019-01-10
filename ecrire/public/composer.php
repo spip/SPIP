@@ -81,6 +81,8 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect =
 		$compiler = charger_fonction('compiler', 'public');
 		$skel_code = $compiler($skel, $nom, $gram, $source, $connect);
 	}
+	else
+		$skel_code='';
 
 	// Ne plus rien faire si le compilateur n'a pas pu operer.
 	if (!$skel_code) {
