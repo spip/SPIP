@@ -1,3 +1,22 @@
+
+SPIP-Core spip-3.0.27 -> spip-3.0.28  18 janvier 2019
+-------------------------------------------------------------
+
+r23953 | cedric    |  (ven. 16 mars 2018)  | Backport de l'ecran de secu, meme si on ne maintient plus cette branche
+r24097 | cedric    |  (sam. 29 sept. 2018) | Report de r24050 : debut de solution pour #4173 mais il manque les tests unitaires pour verifier que ca marche bien
+r24098 | cedric    |  (sam. 29 sept. 2018) | Report de r24062 : fix protocole_verifier (copier-coller abusif)
+r24099 | cedric    |  (sam. 29 sept. 2018) | Report de r24063 : debug fonction valider_url_distante() https://core.spip.net/issues/4173
+r24100 | cedric    |  (sam. 29 sept. 2018) | Report de r24018 : Fix #4157 : les inconsistances de PHP nous avaient enduit en erreur. On croyait bien faire en explicitant tls:// comme protocole pour l'ouverture des sockets, grave erreur cela limitait a SSLv1.0.Il faut revenir a ssl:// pour avoir une negociation sans limite du protocole crypto et donv pouvoir acceder a TLSv1.1 ou TLSv1.2 pour les serveurs qui ne supportent que cela les autres etant non securises
+r24126 | b_b       |  (sam. 13 oct. 2018)  | report de r24123
+r24138 | fil       |  (mer. 31 oct. 2018)  | report de l'ecran de secu 1.3.8
+
+SPIP-plugins-dist spip-3.0.27 -> spip-3.0.28  18 janvier 2019
+-------------------------------------------------------------
+
+r109749 | Francky   |  (dim. 01 avril 2018) | Bonne année aussi aux plugins-dist :-D
+r111765 | cedric    |  (sam. 29 sept. 2018) | Report de r111687 : https://core.spip.net/issues/4173 : ne pas permettre d'acceder a des URLs locales du serveur via l'upload de documents distants
+r113381 | Francky   |  (sam. 12 janv. 2019) | Bonne année spip 3.0
+
 SPIP-Core spip-3.0.26 -> spip-3.0.27  14 mars 2018
 -------------------------------------------------------------
 
