@@ -1989,7 +1989,7 @@ function balise_INCLURE_dist($p) {
 
 		$_options = array();
 
-		// FIX https://core.spip.net/issues/4235 :
+		// Fix #4235 : sessionner le contexte appelant si cette inclusion statique est sessionnée
 		$_options[] = "'sessionnement_contaminant'=>true";
 
 		if (isset($_contexte['ajax'])) {
@@ -2088,7 +2088,9 @@ function balise_MODELE_dist($p) {
 		}
 
 		$_options = memoriser_contexte_compil($p);
+		// Fix #4235 : sessionner le contexte appelant si ce modèle est sessionné
 		$_options = "'compil'=>array($_options), 'trim'=>true, 'sessionnement_contaminant'=>true";
+		
 		if (isset($_contexte['ajax'])) {
 			$_options .= ", " . preg_replace(",=>(.*)$,ims", '=> ($v=(\\1))?$v:true', $_contexte['ajax']);
 			unset($_contexte['ajax']);
