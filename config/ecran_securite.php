@@ -5,7 +5,7 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '1.3.8'); // 2018-10-31
+define('_ECRAN_SECURITE', '1.3.10'); // 2019-02-12
 
 /*
  * Documentation : http://www.spip.net/fr_article4200.html
@@ -39,6 +39,9 @@ if (!defined('_IS_BOT')){
 			'bot',
 			'slurp',
 			'crawler',
+			'crwlr',
+			'java',
+			'monitoring',
 			'spider',
 			'webvac',
 			'yandex',
@@ -49,17 +52,22 @@ if (!defined('_IS_BOT')){
 			'a6-indexer',
 			'aboundex',
 			'accoona',
+			'acrylicapps',
 			'addthis',
 			'adressendeutschland',
 			'alexa',
 			'altavista',
 			'analyticsseo',
+			'antennapod',
+			'arachnys',
 			'archive',
+			'argclrint',
 			'aspseek',
 			'baidu',
 			'begunadvertising',
-			'bingpreview',
+			'bing',
 			'bloglines',
+			'buck',
 			'browsershots',
 			'bubing',
 			'butterfly',
@@ -71,9 +79,13 @@ if (!defined('_IS_BOT')){
 			'crowsnest',
 			'dataminr',
 			'daumoa',
+			'dlvr\.it',
 			'dlweb',
+			'drupal',
 			'ec2linkfinder',
+			'eset\.com',
 			'estyle',
+			'exalead',
 			'ezooms',
 			'facebookexternalhit',
 			'facebookplatform',
@@ -85,6 +97,7 @@ if (!defined('_IS_BOT')){
 			'flipboardproxy',
 			'genieo',
 			'google',
+			'go-http-client',
 			'grapeshot',
 			'hatena-useragent',
 			'head',
@@ -95,46 +108,69 @@ if (!defined('_IS_BOT')){
 			'iltrovatore-setaccio',
 			'immediatenet',
 			'ina',
+			'inoreader',
 			'infegyatlas',
 			'infohelfer',
 			'instapaper',
 			'jabse',
 			'james',
+			'jersey',
 			'kumkie',
 			'linkdex',
 			'linkfluence',
 			'linkwalker',
 			'litefinder',
 			'loadimpactpageanalyzer',
+			'ltx71',
 			'luminate',
 			'lycos',
 			'lycosa',
 			'mediapartners-google',
 			'msai',
+			'myapp',
+			'nativehost',
 			'najdi',
 			'netcraftsurveyagent',
 			'netestate',
 			'netseer',
+			'netnewswire',
+			'newspaper',
+			'newsblur',
 			'nuhk',
+			'nuzzel',
+			'okhttp',
+			'otmedia',
 			'owlin',
+			'owncloud',
 			'panscient',
+			'paper\.li',
 			'parsijoo',
+			'protopage',
 			'plukkie',
 			'proximic',
+			'pubsub',
+			'python',
 			'qirina',
+			'qoshe',
 			'qualidator',
+			'qwantify',
 			'rambler',
 			'readability',
+			'ruby',
 			'sbsearch',
+			'scoop\.it',
 			'scooter',
+			'scoutjet',
 			'scrapy',
 			'scrubby',
 			'scrubbybloglines',
 			'shareaholic',
 			'shopwiki',
+			'simplepie',
 			'sistrix',
 			'sitechecker',
 			'siteexplorer',
+			'snapshot',
 			'sogou',
 			'special_archiver',
 			'speedy',
@@ -146,24 +182,31 @@ if (!defined('_IS_BOT')){
 			'superdownloads',
 			'svenska-webbsido',
 			'teoma',
+			'the knowledge AI',
 			'thumbshots',
 			'tineye',
+			'traackr',
 			'trendiction',
+			'trendsmap',
 			'tweetedtimes',
 			'tweetmeme',
+			'universalfeedparser',
 			'uaslinkchecker',
 			'undrip',
 			'unwindfetchor',
+			'upday',
 			'vedma',
 			'vkshare',
 			'vm',
 			'wch',
 			'webalta',
 			'webcookies',
+			'webparser',
 			'webthumbnail',
 			'wesee',
 			'wise-guys',
 			'woko',
+			'wordpress',
 			'wotbox',
 			'y!j-bri',
 			'y!j-bro',
@@ -172,6 +215,7 @@ if (!defined('_IS_BOT')){
 			'yahoo',
 			'yahoo!',
 			'yahooysmcm',
+			'ymobactus',
 			'yats',
 			'yeti',
 			'zeerch'
@@ -184,7 +228,8 @@ if (!defined('_IS_BOT_FRIEND')){
 		isset($_SERVER['HTTP_USER_AGENT'])
 		and preg_match(',' . implode ('|', array(
 			'facebookexternalhit',
-			'flipboardproxy'
+			'flipboardproxy',
+			'wordpress'
 		)) . ',i',
 		(string)$_SERVER['HTTP_USER_AGENT'])
 	);
@@ -197,17 +242,18 @@ if (!defined('_IS_BOT_FRIEND')){
  * (sauf pour id_table, qui n'est pas numérique jusqu'à [5743])
  * (id_base est une variable de la config des widgets de WordPress)
  */
+$_exceptions = array('id_table','id_base','id_parent','id_article_pdf');
 foreach ($_GET as $var => $val)
 	if ($_GET[$var] and strncmp($var, "id_", 3) == 0
-	and !in_array($var, array('id_table', 'id_base')))
+		and !in_array($var, $_exceptions))
 		$_GET[$var] = is_array($_GET[$var])?@array_map('intval', $_GET[$var]):intval($_GET[$var]);
 foreach ($_POST as $var => $val)
 	if ($_POST[$var] and strncmp($var, "id_", 3) == 0
-	and !in_array($var, array('id_table', 'id_base')))
+		and !in_array($var, $_exceptions))
 		$_POST[$var] = is_array($_POST[$var])?@array_map('intval', $_POST[$var]):intval($_POST[$var]);
 foreach ($GLOBALS as $var => $val)
 	if ($GLOBALS[$var] and strncmp($var, "id_", 3) == 0
-	and !in_array($var, array('id_table', 'id_base')))
+		and !in_array($var, $_exceptions))
 		$GLOBALS[$var] = is_array($GLOBALS[$var])?@array_map('intval', $GLOBALS[$var]):intval($GLOBALS[$var]);
 
 /*
@@ -321,6 +367,8 @@ if (isset($_REQUEST['GLOBALS']))
 if (_IS_BOT and (
 	(isset($_REQUEST['echelle']) and isset($_REQUEST['partie_cal']) and isset($_REQUEST['type']))
 	or (strpos((string)$_SERVER['REQUEST_URI'], 'debut_') and preg_match(',[?&]debut_.*&debut_,', (string)$_SERVER['REQUEST_URI']))
+		or (isset($_REQUEST['calendrier_annee']) and strpos((string)$_SERVER['REQUEST_URI'], 'debut_') )
+		or (isset($_REQUEST['calendrier_annee']) and preg_match(',[?&]calendrier_annee=.*&calendrier_annee=,', (string)$_SERVER['REQUEST_URI']))
 )
 )
 	$ecran_securite_raison = "robot agenda/double pagination";
@@ -520,11 +568,12 @@ if (
 	and $load > _ECRAN_SECURITE_LOAD // eviter l'evaluation suivante si de toute facon le load est inferieur a la limite
 	and rand(0, $load * $load) > _ECRAN_SECURITE_LOAD * _ECRAN_SECURITE_LOAD
 ) {
-	header("HTTP/1.0 503 Service Unavailable");
+	//https://webmasters.stackexchange.com/questions/65674/should-i-return-a-429-or-503-status-code-to-a-bot
+	header("HTTP/1.0 429 Too Many Requests");
 	header("Retry-After: 300");
 	header("Expires: Wed, 11 Jan 1984 05:00:00 GMT");
 	header("Cache-Control: no-cache, must-revalidate");
 	header("Pragma: no-cache");
 	header("Content-Type: text/html");
-	die("<html><title>Status 503: Site temporarily unavailable</title><body><h1>Status 503</h1><p>Site temporarily unavailable (load average $load)</p></body></html>");
+	die("<html><title>Status 429: Too Many Requests</title><body><h1>Status 429</h1><p>Too Many Requests (try again soon)</p></body></html>");
 }
