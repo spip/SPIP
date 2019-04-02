@@ -21,7 +21,7 @@
 					href="#URL_ECRIRE{aide,var_lang=#LANG}"><:icone_aide_ligne:></a> |]
 				<a href="[(#VAL{logout}|generer_url_action{logout=prive})]"><:icone_deconnecter:></a>
 			</p>
-			<p class="nom_site_spip">[(#SET{configurer,#AUTORISER{configurer}|?{oui,''}})][(#GET{configurer}|oui)<a
+			<p class="nom_site_spip">[(#SET{configurer,#AUTORISER{configurer,_identite}|?{oui,''}})][(#GET{configurer}|oui)<a
 					class="info"
 					title="<:titre_identite_site|attribut_html:>"
 					href="#URL_ECRIRE{configurer_identite}">]<strong
