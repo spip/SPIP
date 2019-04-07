@@ -400,7 +400,7 @@ Riskloù zo e vefe distrujet ho tiaz titouroù pe ne’z afe ket en-dro ken.<br 
 	'info_post_scriptum' => 'Goude-skrid',
 	'info_post_scriptum_2' => 'Goude-skrid :',
 	'info_pour' => 'evit',
-	'info_preview_texte' => 'Posupl eo rakwelet an holl bennadoù al lec’h gant ar statud « kinniget » d’an nebeutañ, hag an holl verrskridoù. Daoust ha dleout a rafe an holl skridaozerien gallout en ober, ar verourien hepken, pe den ebet ?', # RELIRE
+	'info_preview_texte' => 'Posupl eo rakwelet  holl bennadoù al lec’h gant ar statud « kinniget » d’an nebeutañ, hag an holl verrskridoù a vezer an oberour anezho. Daoust ha dleout a rafe an holl verourien gallout en ober, pe ar skridaozerien, pe den ebet ?',
 	'info_procedez_par_etape' => 'kit war-raok pazenn-ha-pazenn',
 	'info_procedure_maj_version' => 'rankout a ra al labour hizivaat bezañ lañset a-benn azasaat 
  an diaz titouroù ouzh stumm nevez SPIP.',
@@ -712,6 +712,7 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 	'queue_next_job_in_nb_sec' => 'Labour-all a-benn @nb@ eilenn',
 	'queue_no_job_in_queue' => 'Labour ebet o chom a-ispilh',
 	'queue_one_job_in_queue' => '1 labour o chom a-ispilh',
+	'queue_priorite_tache' => 'prioriezh',
 	'queue_purger_queue' => 'Nevesaat roll al labourioù',
 	'queue_titre' => 'Roll al labourioù',
 

@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2018                                                *
+ *  Copyright (c) 2001-2019                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -633,6 +633,9 @@ function nettoyer_uri($reset = null) {
 
 /**
  * Nettoie une request_uri des paramètres var_xxx
+ * 
+ * Attention, la regexp doit suivre _CONTEXTE_IGNORE_VARIABLES défini au début de public/assembler.php
+ * 
  * @param $request_uri
  * @return string
  */
@@ -640,7 +643,7 @@ function nettoyer_uri_var($request_uri) {
 	$uri1 = $request_uri;
 	do {
 		$uri = $uri1;
-		$uri1 = preg_replace(',([?&])(PHPSESSID|(var_[^=&]*))=[^&]*(&|$),i',
+		$uri1 = preg_replace(',([?&])(var_[^=&]*|PHPSESSID|fbclid|utm_[^=&]*)=[^&]*(&|$),i',
 			'\1', $uri);
 	} while ($uri <> $uri1);
 	return preg_replace(',[?&]$,', '', $uri1);
@@ -1422,7 +1425,7 @@ function chemin_image($icone) {
 	}
 
 	// si c'est un nom d'image complet (article-24.png) essayer de le renvoyer direct
-	if (preg_match(',[.](png|gif|jpg)$,', $icone) and $f = find_in_theme("images/$icone")) {
+	if (preg_match(',[.](png|gif|jpg|svg)$,', $icone) and $f = find_in_theme("images/$icone")) {
 		return $f;
 	}
 	// sinon passer par le module de renommage
@@ -3170,8 +3173,14 @@ function recuperer_fond($fond, $contexte = array(), $options = array(), $connect
 
 	$GLOBALS['_INC_PUBLIC']++;
 
+	// fix #4235
+	$cache_utilise_session_appelant	= (isset($GLOBALS['cache_utilise_session']) ? $GLOBALS['cache_utilise_session'] : null);
+
 
 	foreach (is_array($fond) ? $fond : array($fond) as $f) {
+		
+		unset($GLOBALS['cache_utilise_session']);	// fix #4235
+
 		$page = evaluer_fond($f, $contexte, $connect);
 		if ($page === '') {
 			$c = isset($options['compil']) ? $options['compil'] : '';
@@ -3207,6 +3216,17 @@ function recuperer_fond($fond, $contexte = array(), $options = array(), $connect
 		} else {
 			$texte .= $options['trim'] ? rtrim($page['texte']) : $page['texte'];
 		}
+		
+		// contamination de la session appelante, pour les inclusions statiques
+		if (isset($page['invalideurs']['session'])){
+			$cache_utilise_session_appelant = $page['invalideurs']['session'];
+		}
+	}
+
+	// restaurer le sessionnement du contexte appelant, 
+	// éventuellement contaminé si on vient de récupérer une inclusion statique sessionnée
+	if (isset($cache_utilise_session_appelant)) {
+		$GLOBALS['cache_utilise_session'] = $cache_utilise_session_appelant;
 	}
 
 	$GLOBALS['_INC_PUBLIC']--;

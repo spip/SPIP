@@ -2,7 +2,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2018                                                *
+ *  Copyright (c) 2001-2019                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -142,6 +142,8 @@ function formulaires_editer_liens_charger_dist($a, $b, $c, $options = array()) {
 		'ajouter_lien' => '',
 		'supprimer_lien' => '',
 		'qualifier_lien' => '',
+		'ordonner_lien' => '',
+		'desordonner_liens' => '',
 		'_roles' => $roles, # description des roles
 		'_oups' => _request('_oups'),
 		'editable' => $editable,
@@ -160,6 +162,8 @@ function formulaires_editer_liens_charger_dist($a, $b, $c, $options = array()) {
  * - ajouter_lien et supprimer_lien
  * - remplacer_lien
  * - qualifier_lien
+ * - ordonner_lien
+ * - desordonner_liens
  *
  * Les deux premières peuvent être de trois formes différentes :
  * ajouter_lien[]="objet1-id1-objet2-id2"
@@ -176,6 +180,11 @@ function formulaires_editer_liens_charger_dist($a, $b, $c, $options = array()) {
  * qualifier_lien[objet1-id1-objet2-id2][role] = array("role1", "autre_role")
  * qualifier_lien[objet1-id1-objet2-id2][valeur] = array("truc", "chose")
  * produira 2 liens chacun avec array("role"=>"role1","valeur"=>"truc") et array("role"=>"autre_role","valeur"=>"chose")
+ *
+ * ordonner_lien doit être de la forme, et sert pour trier les liens
+ * ordonner_lien[objet1-id1-objet2-id2] = nouveau_rang
+ *
+ * desordonner_liens n'a pas de forme précise, il doit simplement être non nul/non vide
  *
  * @param string $a
  * @param string|int $b
@@ -233,6 +242,12 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = array()) {
 
 		$supprimer = _request('supprimer_lien');
 		$ajouter = _request('ajouter_lien');
+		$ordonner = _request('ordonner_lien');
+
+		if (_request('desordonner_liens')) {
+			include_spip('action/editer_liens');
+			objet_qualifier_liens(array($objet_lien => '*'), array($objet => $id_objet), array('rang_lien' => 0));
+		}
 
 		// il est possible de preciser dans une seule variable un remplacement :
 		// remplacer_lien[old][new]
@@ -263,7 +278,7 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = array()) {
 				foreach ($supprimer as $k => $v) {
 					if ($lien = lien_verifier_action($k, $v)) {
 						$lien = explode('-', $lien);
-						list($objet_source, $ids, $objet_lie, $idl, $role) = $lien;
+						list($objet_source, $ids, $objet_lie, $idl, $role) = array_pad($lien, 5, null);
 						// appliquer une condition sur le rôle si défini ('*' pour tous les roles)
 						$cond = (!is_null($role) ? array('role' => $role) : array());
 						if ($objet_lien == $objet_source) {
@@ -311,6 +326,24 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = array()) {
 			# non annulable !
 			if ($ajout_ok) {
 				set_request('_oups');
+			}
+		}
+
+		if ($ordonner) {
+			include_spip('action/editer_liens');
+			foreach ($ordonner as $k => $rang_lien) {
+				if ($lien = lien_verifier_action($k, '')) {
+					list($objet1, $ids, $objet2, $idl) = explode('-', $lien);
+					$qualif = array('rang_lien' => $rang_lien);
+
+					if ($objet_lien == $objet1) {
+						objet_qualifier_liens(array($objet1 => $ids), array($objet2 => $idl), $qualif);
+					} else {
+						objet_qualifier_liens(array($objet2 => $idl), array($objet1 => $ids), $qualif);
+					}
+					set_request('id_lien_ajoute', $ids);
+					set_request('_oups');
+				}
 			}
 		}
 	}
@@ -374,7 +407,7 @@ function lien_verifier_action($k, $v) {
 function lien_retrouver_qualif($objet_lien, $lien) {
 	// un role est défini dans la liaison
 	$defs = explode('-', $lien);
-	list($objet1, , $objet2, , $role) = $defs;
+	list($objet1, , $objet2, , $role) = array_pad($defs, 5, null);
 	if ($objet_lien == $objet1) {
 		$colonne_role = roles_colonne($objet1, $objet2);
 	} else {

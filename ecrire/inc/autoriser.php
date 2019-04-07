@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2018                                                *
+ *  Copyright (c) 2001-2019                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -496,13 +496,14 @@ function autoriser_changertraduction_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_dater_dist($faire, $type, $id, $qui, $opt) {
+	$table = table_objet($type);
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$desc = $trouver_table($table);
+	if (!$desc) {
+		return false;
+	}
+	
 	if (!isset($opt['statut'])) {
-		$table = table_objet($type);
-		$trouver_table = charger_fonction('trouver_table', 'base');
-		$desc = $trouver_table($table);
-		if (!$desc) {
-			return false;
-		}
 		if (isset($desc['field']['statut'])) {
 			$statut = sql_getfetsel('statut', $desc['table'], id_table_objet($type) . '=' . intval($id));
 		} else {
@@ -511,9 +512,21 @@ function autoriser_dater_dist($faire, $type, $id, $qui, $opt) {
 	} else {
 		$statut = $opt['statut'];
 	}
-
-	if ($statut == 'publie'
-		or ($statut == 'prop' and $type == 'article' and $GLOBALS['meta']['post_dates'] == 'non')) {
+	
+	// Liste des statuts publiés pour cet objet
+	if (isset($desc['statut'][0]['publie'])) {
+		$statuts_publies = explode(',', $desc['statut'][0]['publie']);
+	}
+	// Sinon en dur le statut "publie"
+	else {
+		$statuts_publies = array('publie');
+	}
+	
+	if (
+		in_array($statut, $statuts_publies)
+		// Ou cas particulier géré en dur ici pour les articles
+		or ($statut == 'prop' and $type == 'article' and $GLOBALS['meta']['post_dates'] == 'non')
+	) {
 		return autoriser('modifier', $type, $id);
 	}
 

@@ -3,7 +3,7 @@
 /* *************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2018                                                *
+ *  Copyright (c) 2001-2019                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -180,26 +180,17 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 		$fichier = $source;
 	}
 
-	$terminaison = $terminaison_dest = "";
-	if (preg_match(",\.(gif|jpe?g|png)($|[?]),i", $fichier, $regs)) {
-		$terminaison = strtolower($regs[1]);
-		$terminaison_dest = $terminaison;
-
-		if ($terminaison == "gif") {
-			$terminaison_dest = "png";
-		}
+	$terminaison_dest = "";
+	if ($terminaison = _image_trouver_extension($fichier)) {
+		$terminaison_dest = ($terminaison == 'gif') ? 'png' : $terminaison;
 	}
+
 	if ($forcer_format !== false) {
 		$terminaison_dest = $forcer_format;
 	}
 
 	if (!$terminaison_dest) {
 		return false;
-	}
-
-	$term_fonction = $terminaison;
-	if ($term_fonction == "jpg") {
-		$term_fonction = "jpeg";
 	}
 
 	$nom_fichier = substr($fichier, 0, strlen($fichier) - (strlen($terminaison) + 1));
@@ -314,7 +305,7 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 			"images" . _LOG_DEBUG);
 	}
 
-	// TODO: si une image png est nommee .jpg, le reconnaitre avec le bon $f
+	$term_fonction = _image_trouver_extension_pertinente($fichier);
 	$ret["fonction_imagecreatefrom"] = "_imagecreatefrom" . $term_fonction;
 	$ret["fichier"] = $fichier;
 	$ret["fonction_image"] = "_image_image" . $terminaison_dest;
@@ -355,6 +346,74 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 	}
 
 	return $ret;
+}
+
+/**
+ * Retourne la terminaison d’un fichier image
+ * @param string $path
+ * @return string
+ */
+function _image_trouver_extension($path) {
+	if (preg_match(",\.(gif|jpe?g|png)($|[?]),i", $path, $regs)) {
+		$terminaison = strtolower($regs[1]);
+		return $terminaison;
+	}
+	return '';
+}
+
+/**
+ * Tente de trouver le véritable type d’une image,
+ * même si une image est d’extension .jpg alors que son contenu est autre chose (gif ou png)
+ *
+ * @param string $path
+ * @return string Extension, dans le format attendu par les fonctions 'gd' ('jpeg' pour les .jpg par exemple)
+ */
+function _image_trouver_extension_pertinente($path) {
+	$path = supprimer_timestamp($path);
+	$terminaison = _image_trouver_extension($path);
+	if ($terminaison == 'jpg') {
+		$terminaison = 'jpeg';
+	}
+
+	if (!file_exists($path)) {
+		return $terminaison;
+	}
+
+	if (!$info = @getimagesize($path)) {
+		return $terminaison;
+	}
+
+	$mime = image_type_to_mime_type($info[2]);
+
+	switch (strtolower($mime)) {
+		case 'image/png':
+		case 'image/x-png':
+			$_terminaison = 'png';
+			break;
+
+		case 'image/jpg':
+		case 'image/jpeg':
+		case 'image/pjpeg':
+			$_terminaison = 'jpeg';
+			break;
+
+		case 'image/gif':
+			$_terminaison = 'gif';
+			break;
+
+		case 'image/webp':
+		case 'image/x-webp':
+			$_terminaison = 'webp';
+			break;
+
+		default:
+			$_terminaison = '';
+	}
+	if ($_terminaison !== $terminaison) {
+		spip_log("Mauvaise extension du fichier : $path . Son type mime est : $mime", "images." . _LOG_INFO_IMPORTANTE);
+		$terminaison = $_terminaison;
+	}
+	return $terminaison;
 }
 
 /**

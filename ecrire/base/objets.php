@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2018                                                *
+ *  Copyright (c) 2001-2019                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -959,6 +959,31 @@ function lister_tables_spip($serveur = '') {
 	return $tables[$serveur];
 }
 
+
+/**
+ * Retourne la liste des tables SQL, Spip ou autres
+ *
+ * Cette liste n'est calculée qu'une fois par serveur pour l'ensemble du hit
+ *
+ * @param string $serveur
+ *     Nom du fichier de connexion à la base de données
+ * @return array
+ *     Couples (nom de la table SQL => même nom)
+ **/
+function lister_toutes_tables($serveur){
+	static $tables = array();
+	if (!isset($tables[$serveur])){
+		$tables[$serveur] = array();
+		if (!function_exists("sql_alltable"))
+			include_spip("base/abstract_sql");
+		$ts = sql_alltable('%',$serveur); // toutes les tables
+		foreach ($ts as $t){
+			$tables[$serveur][$t] = $t;
+		}
+	}
+	return $tables[$serveur];
+}
+
 /**
  * Retrouve le nom d'objet à partir de la table
  *
@@ -1077,7 +1102,10 @@ function id_table_objet($type, $serveur = '') {
 	}
 
 	$ts = lister_tables_spip($serveur);
-	if (in_array($t, $ts)) {
+	if (
+		in_array($t, $ts)
+		or in_array($t, lister_toutes_tables($serveur))
+	){
 		$desc = $trouver_table($t, $serveur);
 		if (isset($desc['key']['PRIMARY KEY'])) {
 			return $desc['key']['PRIMARY KEY'];

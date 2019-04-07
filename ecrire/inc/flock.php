@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2018                                                *
+ *  Copyright (c) 2001-2019                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -20,14 +20,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-
-/**
- * Autoriser la création de faux répertoires ?
- *
- * Ajouter `define('_CREER_DIR_PLAT', true);` dans mes_options pour restaurer
- * le fonctionnement des faux répertoires en `.plat`
- */
-define('_CREER_DIR_PLAT', false);
 if (!defined('_TEST_FILE_EXISTS')) {
 	/** Permettre d'éviter des tests file_exists sur certains hébergeurs */
 	define('_TEST_FILE_EXISTS', preg_match(',(online|free)[.]fr$,', isset($_ENV["HTTP_HOST"]) ? $_ENV["HTTP_HOST"] : ""));
@@ -556,8 +548,7 @@ function supprimer_repertoire($dir) {
 /**
  * Crée un sous répertoire
  *
- * Retourne `$base/${subdir}/` si le sous-repertoire peut être crée,
- * `$base/${subdir}_` sinon.
+ * Retourne `$base/${subdir}/` si le sous-repertoire peut être crée
  *
  * @example
  *     ```
@@ -583,8 +574,8 @@ function sous_repertoire($base, $subdir = '', $nobase = false, $tantpis = false)
 
 	$base = str_replace("//", "/", $base);
 
-	# suppr le dernier caractere si c'est un / ou un _
-	$base = rtrim($base, '/_');
+	# suppr le dernier caractere si c'est un /
+	$base = rtrim($base, '/');
 
 	if (!strlen($subdir)) {
 		$n = strrpos($base, "/");
@@ -601,11 +592,6 @@ function sous_repertoire($base, $subdir = '', $nobase = false, $tantpis = false)
 	$baseaff = $nobase ? '' : $base;
 	if (isset($dirs[$base . $subdir])) {
 		return $baseaff . $dirs[$base . $subdir];
-	}
-
-
-	if (_CREER_DIR_PLAT and @file_exists("$base${subdir}.plat")) {
-		return $baseaff . ($dirs[$base . $subdir] = "${subdir}_");
 	}
 
 	$path = $base . $subdir; # $path = 'IMG/distant/pdf' ou 'IMG/distant_pdf'
@@ -626,25 +612,15 @@ function sous_repertoire($base, $subdir = '', $nobase = false, $tantpis = false)
 
 	// en cas d'echec c'est peut etre tout simplement que le disque est plein :
 	// l'inode du fichier dir_test existe, mais impossible d'y mettre du contenu
-	// => sauf besoin express (define dans mes_options), ne pas creer le .plat
-	if (_CREER_DIR_PLAT
-		and $f = @fopen("$base${subdir}.plat", "w")
-	) {
-		fclose($f);
-	} else {
-		spip_log("echec creation $base${subdir}");
-		if ($tantpis) {
-			return '';
-		}
-		if (!_DIR_RESTREINT) {
-			$base = preg_replace(',^' . _DIR_RACINE . ',', '', $base);
-		}
-		$base .= $subdir;
-		raler_fichier($base . '/.plat');
+	spip_log("echec creation $base${subdir}");
+	if ($tantpis) {
+		return '';
 	}
-	spip_log("faux sous-repertoire $base${subdir}");
-
-	return $baseaff . ($dirs[$base . $subdir] = "${subdir}_");
+	if (!_DIR_RESTREINT) {
+		$base = preg_replace(',^' . _DIR_RACINE . ',', '', $base);
+	}
+	$base .= $subdir;
+	raler_fichier($base . '/.ok');
 }
 
 

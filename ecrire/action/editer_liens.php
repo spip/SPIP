@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2018                                                *
+ *  Copyright (c) 2001-2019                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -247,7 +247,12 @@ function objet_dupliquer_liens($objet, $id_source, $id_cible, $types = null, $ex
 				foreach ($liens as $lien) {
 					$n++;
 					if ($infos['type'] == $objet) {
-						objet_associer(array($objet => $id_cible), array($lien['objet'] => $lien[$lien['objet']]), $lien);
+						if (
+							(is_null($types) or in_array($lien['objet'], $types))
+							and (is_null($exclure_types) or !in_array($lien['objet'], $exclure_types))
+						) {
+							objet_associer(array($objet => $id_cible), array($lien['objet'] => $lien[$lien['objet']]), $lien);
+						}
 					} else {
 						objet_associer(array($infos['type'] => $lien[$infos['type']]), array($objet => $id_cible), $lien);
 					}
@@ -374,7 +379,7 @@ function lien_insert($objet_source, $primary, $table_lien, $id, $objets, $qualif
 			roles_trouver_dans_qualif($objet_source, $objet, $qualif);
 
 		foreach ($id_objets as $id_objet) {
-			$objet = ($objet == '*') ? $objet : objet_type($objet); # securite
+			$objet = (($objet == '*') ? $objet : objet_type($objet)); # securite
 
 			$insertions = array(
 				'id_objet' => $id_objet,
@@ -387,6 +392,21 @@ function lien_insert($objet_source, $primary, $table_lien, $id, $objets, $qualif
 					$colonne_role => $role
 				);
 			}
+
+			if (lien_triables($table_lien)) {
+				$where = lien_where($primary, $id, $objet, $id_objet);
+				// si il y a deja un lien pour ce couple (avec un autre role?) on reprend le meme rang si non nul
+				if (!$rang = intval(sql_getfetsel('rang_lien', $table_lien, $where))) {
+					$where = lien_where($primary, '*', $objet, $id_objet);
+					$rang = intval(sql_getfetsel('max(rang_lien)', $table_lien, $where));
+					// si aucun lien n'a de rang, on en introduit pas, on garde zero
+					if ($rang>0) {
+						$rang = intval($rang) + 1;
+					}
+				}
+				$insertions['rang_lien'] = $rang;
+			}
+
 			$args = array(
 				'table_lien' => $table_lien,
 				'objet_source' => $objet_source,
@@ -413,6 +433,12 @@ function lien_insert($objet_source, $primary, $table_lien, $id, $objets, $qualif
 				and !sql_getfetsel($primary, $table_lien, $where)
 			) {
 
+				if (lien_triables($table_lien) and isset($insertions['rang_lien']) and intval($insertions['rang_lien'])) {
+					// on decale les liens de rang_lien>=la valeur inseree pour faire la place
+					$w = lien_where($primary, '*', $objet, $id_objet, array('rang_lien>='.intval($insertions['rang_lien']),"$primary!=".intval($id)));
+					sql_update($table_lien, array('rang_lien'=>'rang_lien+1'), $w);
+				}
+
 				$e = sql_insertq($table_lien, $insertions);
 				if ($e !== false) {
 					$ins++;
@@ -431,9 +457,74 @@ function lien_insert($objet_source, $primary, $table_lien, $id, $objets, $qualif
 			}
 		}
 	}
+	// si on a fait des insertions, on reordonne les liens concernes
+	if ($ins>0) {
+		lien_ordonner($objet_source, $primary, $table_lien, $id, $objets);
+	}
 
 	return ($echec ? false : $ins);
 }
+
+
+/**
+ * Reordonner les liens sur lesquels on est intervenus
+ * @param string $objet_source
+ * @param string $primary
+ * @param string $table_lien
+ * @param int $id
+ * @param array|string $objets
+ */
+function lien_ordonner($objet_source, $primary, $table_lien, $id, $objets) {
+	if (!lien_triables($table_lien)) {
+		return;
+	}
+
+	foreach ($objets as $objet => $id_objets) {
+		if (!is_array($id_objets)) {
+			$id_objets = array($id_objets);
+		}
+
+		foreach ($id_objets as $id_objet) {
+			$objet = (($objet == '*') ? $objet : objet_type($objet)); # securite
+
+			$where = lien_where($primary, '*', $objet, $id_objet);
+			$liens = sql_allfetsel("$primary, id_objet, objet, rang_lien", $table_lien, $where, $primary,"rang_lien");
+
+			$rangs = array_column($liens, 'rang_lien');
+			if (count($rangs) and (max($rangs)>0 or min($rangs)<0)) {
+				$rang = 1;
+				foreach ($liens as $lien) {
+					$where = lien_where($primary, $lien[$primary], $objet, $id_objet, array('rang_lien!='.intval($rang)));
+					sql_updateq($table_lien, array('rang_lien' => $rang), $where);
+					$rang++;
+				}
+			}
+		}
+	}
+}
+
+
+/**
+ * Une table de lien est-elle triable ?
+ * elle doit disposer d'un champ rang_lien pour cela
+ * @param $table_lien
+ * @return mixed
+ */
+function lien_triables($table_lien) {
+	static $triables = array();
+	if (!isset($triables[$table_lien])) {
+		$trouver_table = charger_fonction('trouver_table', 'base');
+		$desc = $trouver_table($table_lien);
+		if ($desc and isset($desc['field']['rang_lien'])) {
+			$triables[$table_lien] = true;
+		}
+		else {
+			$triables[$table_lien] = false;
+		}
+	}
+	return $triables[$table_lien];
+}
+
 
 /**
  * Fabriquer la condition where en tenant compte des jokers *
@@ -591,6 +682,10 @@ function lien_delete($objet_source, $primary, $table_lien, $id, $objets, $cond =
 			}
 		}
 	}
+	// si on a supprime des liens, on reordonne les liens concernes
+	if ($dels) {
+		lien_ordonner($objet_source, $primary, $table_lien, $id, $objets);
+	}
 
 	pipeline('trig_supprimer_objets_lies', $retire);
 
@@ -700,6 +795,7 @@ function lien_optimise($objet_source, $primary, $table_lien, $id, $objets) {
 function lien_set($objet_source, $primary, $table_lien, $id, $objets, $qualif) {
 	$echec = null;
 	$ok = 0;
+	$reordonner = false;
 	if (!$qualif) {
 		return false;
 	}
@@ -743,6 +839,20 @@ function lien_set($objet_source, $primary, $table_lien, $id, $objets, $qualif) {
 			);
 			$args['id_objet'] = $id_objet;
 
+			if (lien_triables($table_lien) and isset($qualif['rang_lien'])) {
+				if (intval($qualif['rang_lien'])) {
+					// on decale les liens de rang_lien>=la valeur inseree pour faire la place
+					$w = lien_where($primary, '*', $objet, $id_objet, array('rang_lien>='.intval($qualif['rang_lien']),"$primary!=".intval($id)));
+					sql_update($table_lien, array('rang_lien'=>'rang_lien+1'), $w);
+				}
+				// tous les liens de même rôle recoivent le rang indiqué aussi
+				if (roles_colonne($objet_source, $objet)) {
+					$w = lien_where($primary, $id, $objet, $id_objet);
+					sql_updateq($table_lien, array('rang_lien' => intval($qualif['rang_lien'])), $w);
+				}
+				$reordonner = true;
+			}
+
 			$where = lien_where($primary, $id, $objet, $id_objet, $cond);
 			$e = sql_updateq($table_lien, $qualif, $where);
 
@@ -759,6 +869,10 @@ function lien_set($objet_source, $primary, $table_lien, $id, $objets, $qualif) {
 				$ok++;
 			}
 		}
+	}
+	// si on a fait des modif de rang, on reordonne les liens concernes
+	if ($reordonner) {
+		lien_ordonner($objet_source, $primary, $table_lien, $id, $objets);
 	}
 
 	return ($echec ? false : $ok);
@@ -802,7 +916,7 @@ function lien_find($objet_source, $primary, $table_lien, $id, $objets, $cond = n
 		// ajouter les entrees objet_source et objet cible par convenance
 		foreach ($liens as $l) {
 			$l[$objet_source] = $l[$primary];
-			$l[$objet] = $l['id_objet'];
+			$l[$l['objet']] = $l['id_objet'];
 			$trouve[] = $l;
 		}
 	}

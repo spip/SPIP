@@ -10,7 +10,7 @@
 	</langue>
 	<langue code="bg" url="https://trad.spip.net/tradlang_module/spip?lang_cible=bg" total="642" traduits="478" relire="0" modifs="27" nouveaux="137" pourcent="74.45">
 	</langue>
-	<langue code="br" url="https://trad.spip.net/tradlang_module/spip?lang_cible=br" total="642" traduits="604" relire="2" modifs="1" nouveaux="35" pourcent="94.08">
+	<langue code="br" url="https://trad.spip.net/tradlang_module/spip?lang_cible=br" total="642" traduits="642" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="AudeB" lien="https://trad.spip.net/auteur/audeb" />
 		<traducteur nom="fa_b" lien="https://trad.spip.net/auteur/fa_b" />
 		<traducteur nom="kerivo" lien="https://trad.spip.net/auteur/kerivo" />
@@ -58,6 +58,7 @@
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
+		<traducteur nom="Loiseau2nuit" lien="https://trad.spip.net/auteur/loiseau2nuit" />
 		<traducteur nom="Paolo" lien="https://trad.spip.net/auteur/paolo" />
 		<traducteur nom="sQuonk" lien="https://trad.spip.net/auteur/squonk" />
 	</langue>
@@ -109,8 +110,8 @@
 	<langue code="gl" url="https://trad.spip.net/tradlang_module/spip?lang_cible=gl" total="642" traduits="606" relire="0" modifs="5" nouveaux="31" pourcent="94.39">
 		<traducteur nom="Antón Méixome" lien="https://trad.spip.net/auteur/anton-meixome" />
 	</langue>
-	<langue code="hac" url="https://trad.spip.net/tradlang_module/spip?lang_cible=hac" total="642" traduits="641" relire="0" modifs="0" nouveaux="1" pourcent="99.84">
-		<traducteur nom="akomarani" lien="https://trad.spip.net/auteur/akomarani" />
+	<langue code="hac" url="https://trad.spip.net/tradlang_module/spip?lang_cible=hac" total="642" traduits="642" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Aku Marani" lien="https://trad.spip.net/auteur/akomarani" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="he" url="https://trad.spip.net/tradlang_module/spip?lang_cible=he" total="642" traduits="567" relire="0" modifs="12" nouveaux="63" pourcent="88.32">
@@ -174,7 +175,8 @@
 		<traducteur nom="Bastian" lien="https://trad.spip.net/auteur/bastian" />
 		<traducteur nom="sylvain" lien="https://trad.spip.net/auteur/sylvain" />
 	</langue>
-	<langue code="oc_ni_la" url="https://trad.spip.net/tradlang_module/spip?lang_cible=oc_ni_la" total="642" traduits="474" relire="0" modifs="24" nouveaux="144" pourcent="73.83">
+	<langue code="oc_ni_la" url="https://trad.spip.net/tradlang_module/spip?lang_cible=oc_ni_la" total="642" traduits="473" relire="0" modifs="24" nouveaux="145" pourcent="73.68">
+		<traducteur nom="adminieo" lien="https://trad.spip.net/auteur/adminieo" />
 	</langue>
 	<langue code="oc_ni_mis" url="https://trad.spip.net/tradlang_module/spip?lang_cible=oc_ni_mis" total="642" traduits="636" relire="0" modifs="0" nouveaux="6" pourcent="99.07">
 		<traducteur nom="sylvain" lien="https://trad.spip.net/auteur/sylvain" />

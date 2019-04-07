@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2018                                                *
+ *  Copyright (c) 2001-2019                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -1008,7 +1008,7 @@ function textebrut($texte) {
  **/
 function liens_ouvrants($texte) {
 	if (preg_match_all(",(<a\s+[^>]*https?://[^>]*class=[\"']spip_(out|url)\b[^>]+>),imsS",
-		$texte, $liens, PREG_SET_ORDER)) {
+		$texte, $liens, PREG_PATTERN_ORDER)) {
 		foreach ($liens[0] as $a) {
 			$rel = 'noopener noreferrer ' . extraire_attribut($a, 'rel');
 			$ablank = inserer_attribut($a, 'rel', $rel);

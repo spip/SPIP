@@ -616,7 +616,7 @@ and log in to the site.
 	'previsualiser' => 'Show preview',
 
 	// R
-	'retour' => 'Return',
+	'retour' => 'Back',
 
 	// S
 	'spip_conforme_dtd' => 'SPIP finds this page to be in compliance with its DOCTYPE:',

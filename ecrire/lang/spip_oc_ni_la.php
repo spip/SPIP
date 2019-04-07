@@ -11,7 +11,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// 0
 	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
-	'0_langue' => 'occitan (niçard larg) [oc_ni_la]',
 	'0_liste' => 'lenga.occitana@aprene.org',
 	'0_mainteneur' => 'Domergue Sumien: lenga.occitana@aprene.org',
 

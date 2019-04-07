@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2018                                                *
+ *  Copyright (c) 2001-2019                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -77,6 +77,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect =
 	}
 
 	// charger le source, si possible, et compiler 
+	$skel_code = '';
 	if (lire_fichier($source, $skel)) {
 		$compiler = charger_fonction('compiler', 'public');
 		$skel_code = $compiler($skel, $nom, $gram, $source, $connect);

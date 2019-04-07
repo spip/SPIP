@@ -80,15 +80,15 @@ L’administrator dau sistèma o de la ret vos deu poder fornir
 	'entree_login' => 'Vòstre login',
 	'entree_login_connexion_1' => 'Lo login de connexion',
 	'entree_login_connexion_2' => '(Correspond de còps a vòstre login d’accès vèrs l’FTP; de còps se laissa voide)',
-	'entree_mot_passe' => 'Vòstre mot de santa Clara',
-	'entree_mot_passe_1' => 'Mot de santa Clara per la connexion',
-	'entree_mot_passe_2' => '(Correspond de còps a vòstre mot de santa Clara per l’FTP; de còps se laissa voide)',
+	'entree_mot_passe' => 'Vòstre senhal',
+	'entree_mot_passe_1' => 'Senhal per la connexion',
+	'entree_mot_passe_2' => '(Correspond de còps a vòstre senhal per l’FTP; de còps se laissa voide)',
 	'entree_nom_fichier' => 'Volhatz entrar lo nom dau fichèir @texte_compresse@:',
 	'entree_nom_pseudo' => 'Vòstre nom o vòstre pseudonim',
 	'entree_nom_pseudo_1' => '(Vòstre nom o vòstre pseudonim)',
 	'entree_nom_site' => 'Lo nom de vòstre sit',
-	'entree_nouveau_passe' => 'Mot de santa Clara novèl',
-	'entree_passe_ldap' => 'Mot de santa Clara',
+	'entree_nouveau_passe' => 'Senhal novèl',
+	'entree_passe_ldap' => 'Senhal',
 	'entree_port_annuaire' => 'Lo numèro de pòrt de l’annuari',
 	'entree_signature' => 'Signatura',
 	'entree_titre_obligatoire' => '<b>Títol</b> [Obligatòri]<br />',
@@ -97,7 +97,7 @@ L’administrator dau sistèma o de la ret vos deu poder fornir
 	// I
 	'ical_info1' => 'Aquela pagina mòstra de metòdes diferents per demorar en contacte amb la vida d’aquel sit.',
 	'ical_info2' => 'Per téner mai d’informacions sobre aquelas tecnicas, esitetz pas de consultar <a href="@spipnet@">la documentacion d’SPIP</a>.', # MODIF
-	'ical_info_calendrier' => 'I a dos chalendèirs a la vòstra disposicion. Lo primèir es un plan dau sit qu’anóncia totes los articles publicats. Lo segond conten los anoncis editoriaus en mai de vòstres darrèirs messatges privats: vos es reservat gràcias a una clau personala, que la podètz modificar en tot moment en renovant vòstre mot de santa Clara. ',
+	'ical_info_calendrier' => 'I a dos chalendèirs a la vòstra disposicion. Lo primèir es un plan dau sit qu’anóncia totes los articles publicats. Lo segond conten los anoncis editoriaus en mai de vòstres darrèirs messatges privats: vos es reservat gràcias a una clau personala, que la podètz modificar en tot moment en renovant vòstre senhal. ',
 	'ical_methode_http' => 'Telecharjament',
 	'ical_methode_webcal' => 'Sincronizacion (webcal://)', # MODIF
 	'ical_texte_js' => 'Los articles publicats en aquel sit se pòdon afichar aisat, dins totes los sits vòstres, en far servir una linha javascript. ',
@@ -165,7 +165,7 @@ L’administrator dau sistèma o de la ret vos deu poder fornir
 	'info_code_acces' => 'Oblidetz pas vòstres còdes d’accès pròpris!',
 	'info_config_suivi' => 'S’aquela adreiça correspond a una lista de corrèir, podètz indicar çai sos l’adreiça ont los participants au sit se pòdon inscriure. Aquela adreiça pòt èstre una URL (per exemple la pagina d’inscripcion a la lista per lo web), o una adreiça e-mail tenent un subjècte especific (per exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 	'info_config_suivi_explication' => 'Vos podètz abonar a la lista de difusion d’aqueste sit. Adoncas recebretz per e-mail los anoncis d’articles e de brèvas que se prepausa a la publicacion.',
-	'info_confirmer_passe' => 'Confirmar aquel mot de santa Clara novèl:',
+	'info_confirmer_passe' => 'Confirmar aquel senhal novèl:',
 	'info_connexion_base' => 'Segonda estapa: <b>Assai de connexion a la basa</b>',
 	'info_connexion_ldap_ok' => 'La connexion LDAP a abotit.</b><p> Podètz passar a l’estapa seguenta.</p>', # MODIF
 	'info_connexion_mysql' => 'Primèira estapa:<b>Vòstra connexion SQL</b>',

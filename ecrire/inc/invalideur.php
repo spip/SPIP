@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2018                                                *
+ *  Copyright (c) 2001-2019                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -128,7 +128,7 @@ function taille_du_cache() {
  * @param bool $modif
  *     Inutilisé
  **/
-function suivre_invalideur($cond, $modif = true) {
+function inc_suivre_invalideur_dist($cond, $modif = true) {
 	if (!$modif) {
 		return;
 	}
@@ -242,6 +242,16 @@ function retire_cache($cache) {
 	}
 }
 
+// Supprimer les caches marques "x"
+// A priori dans cette version la fonction ne sera pas appelee, car
+// la meta est toujours false ; mais evitons un bug si elle est appellee
+// http://code.spip.net/@retire_caches
+function inc_retire_caches_dist($chemin = '') {
+	if (isset($GLOBALS['meta']['invalider_caches'])) {
+		effacer_meta('invalider_caches');
+	} # concurrence
+}
+
 #######################################################################
 ##
 ## Ci-dessous les fonctions qui restent appellees dans le core
@@ -249,25 +259,24 @@ function retire_cache($cache) {
 ## mais ici elles ne font plus rien
 ##
 
-// Supprimer les caches marques "x"
-// A priori dans cette version la fonction ne sera pas appelee, car
-// la meta est toujours false ; mais evitons un bug si elle est appellee
-// http://code.spip.net/@retire_caches
 function retire_caches($chemin = '') {
-	if (isset($GLOBALS['meta']['invalider_caches'])) {
-		effacer_meta('invalider_caches');
-	} # concurrence
+	if ($retire_caches = charger_fonction('retire_caches', 'inc', true)) {
+		return $retire_caches($chemin);
+	}
 }
 
 
 // Fonction permettant au compilo de calculer les invalideurs d'une page
 // (note: si absente, n'est pas appellee)
-/*
+
 // http://code.spip.net/@calcul_invalideurs
 function calcul_invalideurs($corps, $primary, &$boucles, $id_boucle) {
+	if ($calcul_invalideurs = charger_fonction('calcul_invalideurs', 'inc', true)) {
+		return $calcul_invalideurs($corps, $primary, $boucles, $id_boucle);
+	}
 	return $corps;
 }
-*/
+
 
 // Cette fonction permet de supprimer tous les invalideurs
 // Elle ne touche pas aux fichiers cache eux memes ; elle est
@@ -275,24 +284,44 @@ function calcul_invalideurs($corps, $primary, &$boucles, $id_boucle) {
 //
 // http://code.spip.net/@supprime_invalideurs
 function supprime_invalideurs() {
+	if ($supprime_invalideurs = charger_fonction('supprime_invalideurs', 'inc', true)) {
+		return $supprime_invalideurs();
+	}
 }
 
 
 // Calcul des pages : noter dans la base les liens d'invalidation
 // http://code.spip.net/@maj_invalideurs
 function maj_invalideurs($fichier, &$page) {
+	if ($maj_invalideurs = charger_fonction('maj_invalideurs', 'inc', true)) {
+		return $maj_invalideurs($fichier, $page);
+	}
 }
 
 
 // les invalideurs sont de la forme "objet/id_objet"
 // http://code.spip.net/@insere_invalideur
 function insere_invalideur($inval, $fichier) {
+	if ($insere_invalideur = charger_fonction('insere_invalideur', 'inc', true)) {
+		return $insere_invalideur($inval, $fichier);
+	}
 }
-
 
 //
 // Marquer les fichiers caches invalides comme etant a supprimer
 //
 // http://code.spip.net/@applique_invalideur
 function applique_invalideur($depart) {
+	if ($applique_invalideur = charger_fonction('applique_invalideur', 'inc', true)) {
+		return $applique_invalideur($depart);
+	}
+}
+
+//
+// Invalider les caches liés à telle condition
+//
+function suivre_invalideur($cond, $modif = true) {
+	if ($suivre_invalideur = charger_fonction('suivre_invalideur', 'inc', true)) {
+		return $suivre_invalideur($cond, $modif);
+	}
 }

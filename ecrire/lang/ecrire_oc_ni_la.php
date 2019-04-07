@@ -80,15 +80,15 @@ L’administrator dau sistèma ò de la ret vos deu poder fornir
 	'entree_login' => 'Lo vòstre login',
 	'entree_login_connexion_1' => 'Lo login de connexion',
 	'entree_login_connexion_2' => '(Correspònde de còups au vòstre login d’accès a l’FTP; de còups si laissa vuei)',
-	'entree_mot_passe' => 'Lo vòstre mot de santa Clara',
-	'entree_mot_passe_1' => 'Mot de santa Clara per la connexion',
-	'entree_mot_passe_2' => '(Correspònde de còups au vòstre mot de santa Clara per l’FTP; de còups si laissa vuei)',
+	'entree_mot_passe' => 'Lo vòstre senhau',
+	'entree_mot_passe_1' => 'Senhau per la connexion',
+	'entree_mot_passe_2' => '(Correspònde de còups au vòstre senhal per l’FTP; de còups si laissa vuei)',
 	'entree_nom_fichier' => 'Vorgatz intrar lo nom dau fichier @texte_compresse@:',
 	'entree_nom_pseudo' => 'Lo vòstre nom ò lo vòstre pseudonim',
 	'entree_nom_pseudo_1' => '(Lo vòstre nom ò lo vòstre pseudonim)',
 	'entree_nom_site' => 'Lo nom dau vòstre sit',
 	'entree_nouveau_passe' => 'Mot de santa Clara novèu',
-	'entree_passe_ldap' => 'Mot de santa Clara',
+	'entree_passe_ldap' => 'Senhau',
 	'entree_port_annuaire' => 'Lo número de pòrt de l’annuari',
 	'entree_signature' => 'Signatura',
 	'entree_titre_obligatoire' => '<b>Títol</b> [Obligatòri]<br />',
@@ -97,7 +97,7 @@ L’administrator dau sistèma ò de la ret vos deu poder fornir
 	// I
 	'ical_info1' => 'Aquela pàgina mòstra de metòdes diferents per restar en contacte emb la vida d’aqueu sit.',
 	'ical_info2' => 'Per tenir mai d’informacions sobre aqueli tecnicas, non esitetz de consultar <a href="@spipnet@">la documentacion d’SPIP</a>.', # MODIF
-	'ical_info_calendrier' => 'I a doi calendiers a la vòstra disposicion. Lo primier es un plan dau sit qu’anóncia toi lu articles publicats. Lo segond conten lu anoncis editoriaus en mai dei vòstres darriers messatges privats: v’es reservat gaug a una clau personala, que la podètz modificar en tot moment en renovant lo vòstre mot de santa Clara. ',
+	'ical_info_calendrier' => 'I a doi calendiers a la vòstra disposicion. Lo primier es un plan dau sit qu’anóncia toi lu articles publicats. Lo segond conten lu anoncis editoriaus en mai dei vòstres darriers messatges privats: v’es reservat gaug a una clau personala, que la podètz modificar en tot moment en renovant lo vòstre senhau. ',
 	'ical_methode_http' => 'Telecargament',
 	'ical_methode_webcal' => 'Sincronizacion (webcal://)', # MODIF
 	'ical_texte_js' => 'Lu articles publicats en aqueu sit si pòdon afichar aisat, dins toi lu sits vòstres, en fent servir una linha javascript. ',

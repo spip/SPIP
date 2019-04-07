@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2018                                                *
+ *  Copyright (c) 2001-2019                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -542,9 +542,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 	// souhaite invalider ces elements
 	if (!$constant and $primary) {
 		include_spip('inc/invalideur');
-		if (function_exists($i = 'calcul_invalideurs')) {
-			$corps = $i($corps, $primary, $boucles, $id_boucle);
-		}
+		$corps = calcul_invalideurs($corps, $primary,$boucles, $id_boucle);
 	}
 
 	// gerer le compteur de boucle 
@@ -1247,6 +1245,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect = '
 					$boucle->type_requete .
 					" " .
 					str_replace('*/', '* /', public_decompiler($boucle, $gram, 0, 'criteres')) .
+					($boucle->debug ? "\n *\n * " . implode("\n * ", $boucle->debug) . "\n" : '') .
 					" */\n";
 			} else {
 				$decomp = ("\n/*\n" .

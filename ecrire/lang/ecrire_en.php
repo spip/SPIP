@@ -20,21 +20,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_aucun_resultat' => 'No results found.',
 	'avis_base_inaccessible' => 'Impossible to connect to the database @base@.',
 	'avis_chemin_invalide_1' => 'The path you selected',
-	'avis_chemin_invalide_2' => 'does not seem to be valid. Please return to the previous page and verify the information provided.',
+	'avis_chemin_invalide_2' => 'does not seem to be valid. Please go back to previous page and check the information you provided.',
 	'avis_connexion_echec_1' => 'Connection to the SQL server failed.',
-	'avis_connexion_echec_2' => 'Go back to the previous page, and verify the information you provided.',
+	'avis_connexion_echec_2' => 'Go back to the previous page, and check the information you provided.',
 	'avis_connexion_echec_3' => '<b>N.B.</b> On many servers, you must <b>request</b> activation of your access to the SQL database before you can use it. If you cannot connect to your database, check that activation has been done.',
 	'avis_connexion_erreur_creer_base' => 'The database could not be created.',
-	'avis_connexion_erreur_nom_base' => 'The database name should contain letters, digits and hyphens only.',
+	'avis_connexion_erreur_nom_base' => 'The database’s name should only contain letters, digits and hyphens.',
 	'avis_connexion_ldap_echec_1' => 'Connection to the LDAP server failed.',
-	'avis_connexion_ldap_echec_2' => 'Go back to the previous page, and verify the information you provided.',
+	'avis_connexion_ldap_echec_2' => 'Go back to the previous page, and check the information you provided.',
 	'avis_connexion_ldap_echec_3' => 'Alternatively, do not use LDAP support to import users.',
 	'avis_deplacement_rubrique' => 'Warning! This section contains @contient_breves@ news item@scb@: if you move it, please check this box to confirm.',
 	'avis_erreur_connexion_mysql' => 'SQL connection error',
 	'avis_espace_interdit' => '<b>Forbidden area</b> <div>SPIP is already installed.</div>',
 	'avis_lecture_noms_bases_1' => 'The installer could not read the names of any databases already installed.',
-	'avis_lecture_noms_bases_2' => 'Either no database is available, or the option for listing databases was disabled for security reasons (which is the case with a lot of hosting services).',
-	'avis_lecture_noms_bases_3' => 'In the second case, it is possible that a database named after your login would be usable:',
+	'avis_lecture_noms_bases_2' => 'Either no database is available, or the option listing databases was disabled for security reasons (which is the case with various hosting services).',
+	'avis_lecture_noms_bases_3' => 'In the second case, a database named after your login might already be available:',
 	'avis_non_acces_page' => 'You do not have access to this page.',
 	'avis_operation_echec' => 'The operation failed.',
 	'avis_operation_impossible' => 'Operation impossible',
@@ -97,7 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ecran_securite' => '+ safety screen @version@',
 	'email' => 'email',
 	'email_2' => 'email:',
-	'en_savoir_plus' => 'To learn more',
+	'en_savoir_plus' => 'Learn more',
 	'entree_adresse_annuaire' => 'Directory address',
 	'entree_adresse_email' => 'Your email address',
 	'entree_adresse_email_2' => 'E-mail address',
@@ -125,20 +125,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_nom_pseudo' => 'Your name or alias',
 	'entree_nom_pseudo_1' => '(Your name or alias)',
 	'entree_nom_pseudo_2' => 'Name or alias',
-	'entree_nom_site' => 'Name of your site',
-	'entree_nom_site_2' => 'Name of the author’s site',
+	'entree_nom_site' => 'Website’s name',
+	'entree_nom_site_2' => 'Author’s website’s name',
 	'entree_nouveau_passe' => 'New password',
 	'entree_passe_ldap' => 'Password',
 	'entree_port_annuaire' => 'Port number of the directory',
 	'entree_signature' => 'Signature',
 	'entree_titre_obligatoire' => '<b>Title</b> [Required]<br />',
-	'entree_url' => 'URL of your site',
-	'entree_url_2' => 'Site URL',
-	'erreur_connect_deja_existant' => 'There is already a server with that name ',
+	'entree_url' => 'Website’s URL',
+	'entree_url_2' => 'Website’s URL',
+	'erreur_connect_deja_existant' => 'A server by that name already exists',
 	'erreur_contenu_suspect' => 'Text escaped',
-	'erreur_email_deja_existant' => 'This email address is already registered.',
+	'erreur_email_deja_existant' => 'This email address has already been registered.',
 	'erreur_nom_connect_incorrect' => 'Server name not allowed',
-	'erreur_plugin_attribut_balise_manquant' => 'Attribut @attribut@ fehlt in dem tag @balise@',
+	'erreur_plugin_attribut_balise_manquant' => 'Missing attribute @attribut@ in tag @balise@',
 	'erreur_plugin_desinstalation_echouee' => 'Uninstallation of the plugin failed. However, you may deactivate it.',
 	'erreur_plugin_fichier_absent' => 'File missing',
 	'erreur_plugin_fichier_def_absent' => 'Definition file missing',
@@ -153,7 +153,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'htaccess_inoperant' => 'inoperative htaccess',
 
 	// I
-	'ical_info1' => 'This page presents several ways of keeping up-to-date with site activity.',
+	'ical_info1' => 'This page offers several tools to be kept  up-to-date with website’s activity.',
 	'ical_info2' => 'For more information, do not hesitate to visit <a href="@spipnet@">SPIP’s documentation</a>.',
 	'ical_info_calendrier' => 'Two calendars are available. The first is a general, public calendar showing  articles as they are published. The second is personal and contains editorial announcements as well as your latest private messages: it is reserved for you via a personal key that you can modify at any time by renewing your password.',
 	'ical_methode_http' => 'Downloading',
@@ -175,7 +175,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_arret_discussion' => 'Stop participating in this discussion',
 	'icone_calendrier' => 'Calendar',
 	'icone_configuration' => 'Configuration',
-	'icone_creer_auteur' => 'Create a new author and associate him/her with this article',
+	'icone_creer_auteur' => 'Create a new author and link him/her to this article',
 	'icone_creer_mot_cle' => 'Create a new keyword and link it to this article',
 	'icone_creer_rubrique_2' => 'Create a new section',
 	'icone_developpement' => 'Development',
@@ -190,7 +190,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_retour' => 'Back',
 	'icone_retour_article' => 'Back to the article',
 	'icone_squelette' => 'Templates',
-	'icone_suivi_publication' => 'Publication tracking ',
+	'icone_suivi_publication' => 'Publication follow up ',
 	'icone_supprimer_cookie' => 'Delete cookie',
 	'icone_supprimer_rubrique' => 'Delete this section',
 	'icone_supprimer_signature' => 'Delete this signature',
@@ -202,8 +202,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_mot_cle' => '1 keyword',
 	'info_1_rubrique' => '1 section',
 	'info_1_visiteur' => '1 visitor',
-	'info_activer_cookie' => 'You can activate an <b>administration cookie</b>, which allows you
- to switch easily between the public site and the private area.',
+	'info_activer_cookie' => 'You can activate an <b>administration cookie</b>, which lets you switch easily between the public website and the admin area.',
 	'info_activer_menu_developpement' => 'Show the Development menu',
 	'info_admin_etre_webmestre' => 'Give me web administrator rights',
 	'info_admin_je_suis_webmestre' => 'I am a <b>webmaster</b>',
@@ -315,7 +314,7 @@ via FTP.</p>',
 	'info_gauche_auteurs' => 'All the site authors are listed here.
  The status of each is indicated by the colour of their icon (administrator = green; editor = yellow).',
 	'info_gauche_auteurs_exterieurs' => 'Visiting authors, without any access to the site, are indicated by a blue icon; deleted authors by a grey icon.',
-	'info_gauche_messagerie' => 'Messaging allows you to exchange messages amongst editors, to preserve memos (for your personal use) or to display announcements on the homepage of the private area (if you are an administrator).',
+	'info_gauche_messagerie' => 'Internal messaging lets you exchange messages between editors, keep memos (for personal use) or, display announcements on the admin area’s homepage (if you are an administrator).',
 	'info_gauche_statistiques_referers' => 'This page displays the list of <i>referrers</i>, i.e. websites containing links to your own site, for yesterday and today. The list is reset every 24 hours.',
 	'info_gauche_visiteurs_enregistres' => 'You will find here the visitors registered
  for the public area of the site (subscription-only forums).',
@@ -343,17 +342,16 @@ via FTP.</p>',
 	'info_login_existant' => 'This login already exists.',
 	'info_login_trop_court' => 'Login too short.',
 	'info_login_trop_court_car_pluriel' => 'Your login must contain at least @nb@ characters.',
-	'info_logos' => 'The logos',
+	'info_logos' => 'Logos',
 	'info_maximum' => 'maximum:',
 	'info_meme_rubrique' => 'In this section',
 	'info_message_en_redaction' => 'Your draft messages',
 	'info_message_technique' => 'Technical message:',
 	'info_messagerie_interne' => 'Internal messaging',
 	'info_mise_a_niveau_base' => 'SQL database upgrade',
-	'info_mise_a_niveau_base_2' => '{{Warning!}} You have installed a version of
-  SPIP {older} than the one
-  originally installed on this site: your database is at risk of being lost
-  and your site will not work properly anymore.<br />{{Reinstall
+	'info_mise_a_niveau_base_2' => '{{Warning!}} You have installed an {older} SPIP version, prior to the one
+  originally installed on this website: your database is at risk of being corrupted
+  and your site might not work properly anymore.<br />{{Please, re-install
   SPIP files.}}',
 	'info_modification_enregistree' => 'Your changes have been saved',
 	'info_modifier_auteur' => 'Edit author details:',
@@ -417,22 +415,22 @@ via FTP.</p>',
 	'info_ps' => 'P.S.',
 	'info_publier' => 'publish',
 	'info_publies' => 'Your articles published online',
-	'info_question_accepter_visiteurs' => 'If your site’s template allows visitors to register without entering the private area, please activate the following option:',
+	'info_question_accepter_visiteurs' => 'If your website’s templates allows visitors to register with no access to the admin area, please activate the following option:',
 	'info_question_inscription_nouveaux_redacteurs' => 'Do you wish to allow new editors to register
- via the public site? If you agree to this, visitors will be able to  register
-  using an automatic form, and then access the private area to
-  write their own articles. <div class="notice">During the registration process, users receive an automatic email
-  giving them their access code for the private area. Some
-  service providers disallow the sending of email from their
-  servers: in that case, automated registration cannot be
-  implemented.</div>',
+ from the public website? If you agree with this, visitors will be able to  register
+  using an automatic form, and then access the admin area to
+  write their own articles. <div class="notice">During the registration process, users usually receive an automatic email
+  giving them their access code for the admin area. Some
+  service providers disallow sending emails from their
+  servers: in that case, automated registration is not
+  possible.</div>',
 	'info_qui_edite' => '@nom_auteur_modif@ worked on the contents @date_diff@ minutes ago',
 	'info_racine_site' => 'Site root',
 	'info_recharger_page' => 'Please wait a few moments, then reload this page.',
 	'info_recherche_auteur_zero' => 'No results for "@cherche_auteur@".',
 	'info_recommencer' => 'Please try again.',
 	'info_redacteur_1' => 'Editor',
-	'info_redacteur_2' => 'with access to the private area (<i>recommended</i>)',
+	'info_redacteur_2' => 'with access to the admin area (<i>recommended</i>)',
 	'info_redacteurs' => 'Editors',
 	'info_redaction_en_cours' => 'EDITING IN PROGRESS',
 	'info_redirection' => 'Redirection',
@@ -609,11 +607,11 @@ and their status is colour-coded:',
 	'lien_trier_nombre_articles' => 'Sort by total articles',
 	'lien_trier_statut' => 'Sort by status',
 	'lien_voir_en_ligne' => 'VIEW ONLINE:',
-	'logo_article' => 'Article logo',
+	'logo_article' => 'Article’s logo',
 	'logo_auteur' => 'Author’s logo',
-	'logo_rubrique' => 'Logo of the section',
-	'logo_site' => 'Logo of this site',
-	'logo_standard_rubrique' => 'Standard logo of sections',
+	'logo_rubrique' => 'Section’s logo',
+	'logo_site' => 'Website’s logo',
+	'logo_standard_rubrique' => 'Default sections’ logo',
 	'logo_survol' => 'Mouseover logo',
 
 	// M
@@ -686,7 +684,7 @@ and their status is colour-coded:',
 	'plugin_source' => 'source: ',
 	'plugin_titre_automatique' => 'Automatic installation',
 	'plugin_titre_automatique_ajouter' => 'Add plugins',
-	'plugin_titre_installation' => 'Installation of the @plugin@ plugin',
+	'plugin_titre_installation' => '@plugin@ plugin installation',
 	'plugin_titre_modifier' => 'My plugins',
 	'plugin_utilise_extension_php' => 'Uses the PHP extension @plugin@ version @version@.',
 	'plugin_utilise_php' => 'Uses @plugin@ version @version@.',
@@ -801,7 +799,7 @@ reinstall SPIP, create a new database and a new administrator account.',
 	'texte_login_ldap_1' => '(Keep empty for anonymous access or enter complete path, for instance «<tt>uid=smith, ou=users, dc=my-domain, dc=com</tt>».)',
 	'texte_login_precaution' => 'Warning! This is the login which you are currently using.
  Use this form with caution...',
-	'texte_messagerie_agenda' => 'A messaging system enables the authors on this site to communicate directly in the private area. It is linked to a calendar.',
+	'texte_messagerie_agenda' => 'A messaging system lets website’s authors communicate directly into the admin area. It is linked to a calendar.',
 	'texte_mise_a_niveau_base_1' => 'You have just updated SPIP files.
  Now you must upgrade the site
  database.',
@@ -837,12 +835,12 @@ to re-process a single page, it is easier to view that page from the public site
   clues as to where the problem lies.</p><p>
   If the problem persists, contact your 
   service provider.</p>',
-	'texte_selection_langue_principale' => 'You can select the "primary language" for the site. This does not mean that you can only write articles in that language, but it is used to determine
+	'texte_selection_langue_principale' => 'You can choose the website’s "primary language". This does not mean that you can only write articles in that language, but it will be used to determine
 
-<ul><li> the default format of dates on the public site,</li>
+<ul><li> the default date/time format on the public website,</li>
 <li> the nature of the typographical engine which will be used by SPIP for rendering text,</li>
-<li> the language used in the forms on the public site,</li>
-<li> the default language displayed in the private area.</li></ul>',
+<li> the language in use in public website’s forms,</li>
+<li> the default language in use in the admin area.</li></ul>',
 	'texte_sous_titre' => 'Subtitle',
 	'texte_statistiques_visites' => '(dark bars = Sunday, dark curve: average visits)',
 	'texte_statut_attente_validation' => 'awaiting validation',
@@ -877,7 +875,7 @@ significant modifications to the site’s graphics or structure.',
 	'titre_cadre_numero_objet' => '@objet@ NUMBER:',
 	'titre_cadre_signature_obligatoire' => '<b>Signature</b> [Required]<br />',
 	'titre_config_contenu_notifications' => 'Notifications',
-	'titre_config_contenu_prive' => 'In the private area',
+	'titre_config_contenu_prive' => 'In the admin area',
 	'titre_config_contenu_public' => 'On the public site',
 	'titre_config_fonctions' => 'Site configuration',
 	'titre_config_langage' => 'Configure the language',

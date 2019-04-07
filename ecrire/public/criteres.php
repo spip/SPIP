@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2018                                                *
+ *  Copyright (c) 2001-2019                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -961,6 +961,7 @@ function calculer_critere_par_expression_multi($idb, &$boucles, $crit, $tri, $ch
  */
 function calculer_critere_par_champ($idb, &$boucles, $crit,  $par, $raw = false) {
 	$boucle = &$boucles[$idb];
+	$desc = $boucle->show;
 
 	// le champ existe dans la table, pas de souci (le plus commun)
 	if (isset($desc['field'][$par])) {
@@ -1577,6 +1578,137 @@ function critere_where_dist($idb, &$boucles, $crit) {
 	$boucle->where[] = $_where;
 }
 
+/**
+ * Compile le critère `{id_?}`
+ *
+ * Ajoute automatiquement à la boucle des contraintes (nommées sélections conditionnelles)
+ * équivalentes à `{id_article ?}{id_rubrique ?}...`, adaptées à la table en cours d’utilisation.
+ *
+ * Les champs sélectionnés par défaut sont :
+ * - chaque champ id_xx de la table en cours d’utilisation (par exemple id_secteur sur la boucle ARTICLES)
+ * - un champ 'objet', si cette table en dispose
+ * - chaque clé primaire des tables des objets éditoriaux, s’ils sont éditables et liables (par exemple id_mot).
+ *
+ * @example
+ *     ```
+ *      <BOUCLE_liste_articles(ARTICLES){id_?}{tout}> ...
+ *      Est équivalent (selon les plugins actifs) à :
+ *      <BOUCLE_liste_articles(ARTICLES){id_article?}{id_rubrique?}{id_secteur?}{id_trad?}{id_mot?}{id_document?} ... {tout}> ...
+ *     ```
+ *
+ * @uses lister_champs_selection_conditionnelle()
+ * @param string $idb Identifiant de la boucle
+ * @param array $boucles AST du squelette
+ * @param Critere $crit Paramètres du critère dans cette boucle
+ * @return void
+ */
+function critere_id__dist($idb, &$boucles, $crit) {
+	/** @var Boucle $boucle */
+	$boucle = $boucles[$idb];
+
+	$champs = lister_champs_selection_conditionnelle(
+		$boucle->show['table'],
+		$boucle->show,
+		$boucle->sql_serveur
+	);
+
+	// ne pas tenir compte des critères identiques déjà présents.
+	if (!empty($boucle->modificateur['criteres'])) {
+		$champs = array_diff($champs, array_keys($boucle->modificateur['criteres']));
+	}
+	// nous aider en mode debug.
+	$boucle->debug[] = "id_ : " . implode(', ', $champs);
+	$boucle->modificateur['id_'] = $champs;
+
+	// créer un critère {id_xxx?} de chaque champ retenu
+	foreach ($champs as $champ) {
+		$critere_id_table = new Critere;
+		$critere_id_table->op = $champ;
+		$critere_id_table->cond = '?';
+		$critere_id_table->ligne = $crit->ligne;
+		calculer_critere_DEFAUT_dist($idb, $boucles, $critere_id_table);
+	}
+}
+
+/**
+ * Liste les champs qui peuvent servir de selection conditionnelle à une table SQL
+ *
+ * Retourne, pour la table demandée :
+ * - chaque champ id_xx de la table en cours d’utilisation (par exemple id_secteur sur la boucle ARTICLES)
+ * - un champ 'objet' si la table le contient (pour les tables avec objet / id_objet par exemple)
+ * - chaque clé primaire des tables des objets éditoriaux qui peuvent se lier facilement à cette table,
+ * -- soit parce que sa clé primaire de la table demandée est un champ dans la table principale
+ * -- soit parce qu’une table de liaison existe, d’un côté ou de l’autre
+ *
+ * @pipeline_appel lister_champs_selection_conditionnelle
+ * @param string $table Nom de la table SQL
+ * @param array|null $desc Description de la table SQL, si connu
+ * @param string $serveur Connecteur sql a utiliser
+ * @return array Liste de nom de champs (tel que id_article, id_mot, id_parent ...)
+ */
+function lister_champs_selection_conditionnelle($table, $desc = null, $serveur = '') {
+	// calculer la description de la table
+	if (!is_array($desc)) {
+		$desc = description_table($table, $serveur);
+	}
+	if (!$desc) {
+		return [];
+	}
+
+	// Les champs id_xx de la table demandée
+	$champs = array_filter(
+		array_keys($desc['field']),
+		function($champ){
+			return
+				strpos($champ, 'id_') === 0
+				or (in_array($champ, array('objet')));
+		}
+	);
+
+	// On ne fera pas mieux pour les tables d’un autre serveur
+	if ($serveur) {
+		return $champs;
+	}
+
+	$primary = false;
+	$associable = false;
+	include_spip('action/editer_liens');
+
+	if (isset($desc['type'])) {
+		$primary = id_table_objet($desc['type']);
+		$associable = objet_associable($desc['type']);
+	}
+	if (isset($desc['field']['id_objet']) and isset($desc['field']['objet'])) {
+		$associable = true;
+	}
+
+	// liste de toutes les tables principales, sauf la notre
+	$tables = lister_tables_objets_sql();
+	unset($tables[$table]);
+
+	foreach ($tables as $_table => $_desc) {
+		if (
+			$associable
+			or ($primary and in_array($primary, array_keys($_desc['field'])))
+			or objet_associable($_desc['type'])
+		) {
+			$champs[] = id_table_objet($_table);
+		}
+	}
+	$champs = array_values(array_unique($champs));
+	$champs = pipeline(
+		'lister_champs_selection_conditionnelle',
+		array(
+			'args' => array(
+				'table' => $table,
+				'id_table_objet' => $primary,
+				'associable' => $associable,
+			),
+			'data' => $champs,
+		)
+	);
+	return $champs;
+}
 
 /**
  * Compile le critère `{tri}` permettant le tri dynamique d'un champ

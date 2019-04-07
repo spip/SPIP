@@ -434,9 +434,21 @@ function auteur_regenerer_identifiants($id_auteur, $notifier=true, $contexte = a
 			);
 			// on merge avec les champs fournit en appel, qui sont passes au modele de notification donc
 			$contexte = array_merge($contexte, $c);
+			// si pas de langue explicitement demandee, prendre celle de l'auteur si on la connait, ou a defaut celle du site
+			// plutot que celle de l'admin qui vient de cliquer sur le bouton
+			if (!isset($contexte['lang']) or !$contexte['lang']) {
+				if (isset($row['lang']) and $row['lang']) {
+					$contexte['lang'] = $row['lang'];
+				}
+				else {
+					$contexte['lang'] = $GLOBALS['meta']['langue_site'];
+				}
+			}
+			lang_select($contexte['lang']);
 			$message = recuperer_fond($fond, $contexte);
 			include_spip("inc/notifications");
 			notifications_envoyer_mails($row['email'],$message);
+			lang_select();
 
 			return $row['email'];
 		}

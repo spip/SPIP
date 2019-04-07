@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2018                                                *
+ *  Copyright (c) 2001-2019                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -554,6 +554,9 @@ function afficher_plus_info($lien, $titre = "+", $titre_lien = "") {
 	}
 }
 
+
+
+
 /**
  * Lister les id objet_source associés à l'objet id_objet
  * via la table de lien objet_lien
@@ -567,17 +570,96 @@ function afficher_plus_info($lien, $titre = "+", $titre_lien = "") {
  * @return array
  */
 function lister_objets_lies($objet_source, $objet, $id_objet, $objet_lien) {
-	include_spip('action/editer_liens');
-	$l = array();
-	// quand $objet == $objet_lien == $objet_source on reste sur le cas par defaut de $objet_lien == $objet_source
-	if ($objet_lien == $objet and $objet_lien !== $objet_source) {
-		$res = objet_trouver_liens(array($objet => $id_objet), array($objet_source => '*'));
+	$res = lister_objets_liens($objet_source, $objet, $id_objet, $objet_lien);
+	if (!count($res)) {
+		return [];
+	}
+	$r = reset($res);
+	if (isset($r['rang_lien'])) {
+		$l = array_column($res, 'rang_lien', $objet_source);
+		asort($l);
+		$l = array_keys($l);
 	} else {
-		$res = objet_trouver_liens(array($objet_source => '*'), array($objet => $id_objet));
+		$l = array_column($res, $objet_source);
 	}
-	while ($row = array_shift($res)) {
-		$l[] = $row[$objet_source];
-	}
-
 	return $l;
+}
+
+
+/**
+ * Retrouver le rang du lien entre un objet source et un obet lie
+ * utilisable en direct dans un formulaire d'edition des liens, mais #RANG doit faire le travail automatiquement
+ * [(#ENV{objet_source}|rang_lien{#ID_AUTEUR,#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}})]
+ *
+ * @param $objet_source
+ * @param $ids
+ * @param $objet_lie
+ * @param $idl
+ * @param $objet_lien
+ * @return string
+ */
+function retrouver_rang_lien($objet_source, $ids, $objet_lie, $idl, $objet_lien){
+	$res = lister_objets_liens($objet_source, $objet_lie, $idl, $objet_lien);
+	$res = array_column($res, 'rang_lien', $objet_source);
+
+	return (isset($res[$ids]) ? $res[$ids] : '');
+}
+
+
+/**
+ * Lister les liens en le memoizant dans une static
+ * pour utilisation commune par lister_objets_lies et retrouver_rang_lien dans un formuluaire d'edition de liens
+ * (evite de multiplier les requetes)
+ *
+ * @param $objet_source
+ * @param $objet
+ * @param $id_objet
+ * @param $objet_lien
+ * @return mixed
+ * @private
+ */
+function lister_objets_liens($objet_source, $objet, $id_objet, $objet_lien) {
+	static $liens = array();
+	if (!isset($liens["$objet_source-$objet-$id_objet-$objet_lien"])) {
+		include_spip('action/editer_liens');
+		// quand $objet == $objet_lien == $objet_source on reste sur le cas par defaut de $objet_lien == $objet_source
+		if ($objet_lien == $objet and $objet_lien !== $objet_source) {
+			$res = objet_trouver_liens(array($objet => $id_objet), array($objet_source => '*'));
+		} else {
+			$res = objet_trouver_liens(array($objet_source => '*'), array($objet => $id_objet));
+		}
+
+		$liens["$objet_source-$objet-$id_objet-$objet_lien"] = $res;
+	}
+	return $liens["$objet_source-$objet-$id_objet-$objet_lien"];
+}
+
+/**
+ * Calculer la balise #RANG
+ * quand ce n'est pas un champ rang :
+ * peut etre le num titre, le champ rang_lien ou le rang du lien en edition des liens, a retrouver avec les infos du formulaire
+ * @param $titre
+ * @param $objet_source
+ * @param $id
+ * @param $env
+ * @return int|string
+ */
+function calculer_rang_smart($titre, $objet_source, $id, $env) {
+	// Cas du #RANG utilisé dans #FORMULAIRE_EDITER_LIENS -> attraper le rang du lien
+	// permet de voir le rang du lien si il y en a un en base, meme avant un squelette xxxx-lies.html ne gerant pas les liens
+	if (isset($env['form']) and $env['form']
+		and isset($env['_objet_lien']) and $env['_objet_lien']
+		and (function_exists('lien_triables') or include_spip('action/editer_liens'))
+		and $r = objet_associable($env['_objet_lien'])
+		and list($p, $table_lien) = $r
+	  and lien_triables($table_lien)
+	  and isset($env['objet']) and $env['objet']
+		and isset($env['id_objet']) and $env['id_objet']
+		and $objet_source
+		and $id = intval($id)
+	) {
+		$rang = retrouver_rang_lien($objet_source, $id, $env['objet'], $env['id_objet'], $env['_objet_lien']);
+		return ($rang ? $rang : '');
+	}
+	return recuperer_numero($titre);
 }

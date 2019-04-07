@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2018                                                *
+ *  Copyright (c) 2001-2019                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -23,6 +23,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+// En cas de modification, il faut aussi actualiser la regexp de nettoyer_uri_var() dans inc/utils.php
 if (!defined('_CONTEXTE_IGNORE_VARIABLES')) {
 	define('_CONTEXTE_IGNORE_VARIABLES', "/(^var_|^PHPSESSID$|^fbclid$|^utm_)/");
 }

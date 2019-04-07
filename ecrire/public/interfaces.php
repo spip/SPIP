@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2018                                                *
+ *  Copyright (c) 2001-2019                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -542,6 +542,11 @@ class Boucle {
 	 * @var string
 	 */
 	public $iterateur = ''; // type d'iterateur
+
+	/**
+	 * @var array $debug Textes qui seront insérés dans l’entête de boucle du mode debug
+	 */
+	public $debug = [];
 
 	// obsoletes, conserves provisoirement pour compatibilite
 	public $tout = false;
