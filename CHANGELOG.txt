@@ -1,3 +1,24 @@
+SPIP-Core spip-3.1.9 -> spip-3.1.10  08 avril 2019
+-------------------------------------------------------------
+
+r24222 | Cerdic     |  (mar. 12 févr. 2019) | Ecran de securite :* les id_ exceptions dans une variable et on ajoute id_parent et id_article_pdf qui posent parfois problemes* bloquer les paginations croisees dans les calendrier egalement pour les bots (sur certains squelettes genere des tonnes de requetes)* envoyer une 429 Too Many Requests plutot qu'une 503 cf https://webmasters.stackexchange.com/questions/65674/should-i-return-a-429-or-503-status-code-to-a-bot et c'est mieux pour le referencement et GoogleBot qui a tendance a penser que 503 vient d'un serveur mal gere
+r24225 | Cerdic     |  (mar. 12 févr. 2019) | Retour a une liste complete de bots telle qu'elle etait sur la version non incremente de la zone, et on incremente
+r24231 | Cerdic     |  (mer. 20 févr. 2019) | Fix : quand on essaye d'activer un plugin qui n'est pas compatible avec la version de SPIP, il faut remonter une erreur d'activationOn modifie pour cela les fonctions* plugin_valide_resume() pour qu'elle renvoie le prefixe du plugin accepte ou la description short du plugin refuse pour incompatibilite ou erreur* liste_plugin_valides() pour qu'elle renvoie en plus la liste des plugins invalides qu'on voulait* plugins_erreurs() pour gerer le cas xml en erreur ou incompatibilite avec la version de SPIP* (pas sur la branche 3.1)<del>plugin_message_incompatibilite() pour generer un message d'erreur approprie quand il s'agit de SPIP et pas d'un plugin</del>Aucune rupture de compat, ce ne sont que des ajouts : du code qui utilisait les anciennes signatures de fonction continue a fonctionner sans probleme(Dans l'interface on ne peut pas cocher un plugin non compatible avec la version de SPIP, mais en spip-cli on peut le faire et ca echouait silencieusement)
+r24259 | Cerdic     |  (mer. 13 mars 2019) | Attention au cas ou * en second argument de l'appel de la fonction objet_trouver_lien(), ce qui se produit malheureusement dans la fonction objet_dupliquer_liens()
+r24260 | Cerdic     |  (mer. 13 mars 2019) | respecter les arguments  et  dans objet_dupliquer_liens(), y compris quand ca concerne un lien qui part de l'objet source
+r24278 | Cerdic |  (lun. 08 avril 2019) | utiliser var_export qui fait le job plus surement
+r24279 | Cerdic |  (lun. 08 avril 2019) | sanitizer var_memotri avant de l'utiliser (G0uz)
+r24280 | Cerdic |  (lun. 08 avril 2019) | v1.3.11 (securiser var_memotri)
+
+SPIP-plugins-dist spip-3.1.9 -> spip-3.1.10  08 avril 2019
+-------------------------------------------------------------
+
+r113550 | cedric    |  (lun. 21 janv. 2019) | Report de r105250 : Il arrive parfois que des documents images soient téléversés avec la mauvaise extension par rapport à leur contenu réel. Par exemple recevoir un fichier.jpg alors que son contenu est du png.On corrige cette subtilité lorsqu’on ajoute un document. Dans ce cas le nom du fichier reçoit en complément la nouvelle extension (il devient donc ici fichier.jpg.png), et on le stocke dans le bon répertoire (ie: IMG/png/fichier.jpg.png). Quelques logs au passage de ces cas.
+r113879 | cedric    |  (mar. 12 févr. 2019) | Report de r113877 : Fix https://core.spip.net/issues/4282 casse par r87494 qui avait renomme par erreur la boucle _forum en _forums (JLuc)
+r113885 | cedric    |  (mar. 12 févr. 2019) | Report de r113883 : une indirection manquante signalee dans https://core.spip.net/issues/4282 (JLuc)
+r114015 | cedric    |  (ven. 22 févr. 2019) | Report de r114013 : Envoyer des mails en from d'un inconnu c'est de l'usurpation d'identite et ca peut vous conduire au commissariat, en plus d'etre vu comme un SPAM par beaucoup de fournisseur de mail. On laisse donc le from par defaut du site, mais un mets un Reply-To a l'envoyeur et l'email de l'envoyeur suppose (mais pas verifie) en signature du message. C'est plus robuste et moins sujet a litige
+
+
 
 SPIP-Core spip-3.1.8 -> spip-3.1.9  18 janvier 2019
 -------------------------------------------------------------
