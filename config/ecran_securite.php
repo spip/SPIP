@@ -5,7 +5,7 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '1.3.10'); // 2019-02-12
+define('_ECRAN_SECURITE', '1.3.11'); // 2019-04-08
 
 /*
  * Documentation : http://www.spip.net/fr_article4200.html
@@ -491,7 +491,7 @@ if (isset($_SERVER['HTTP_X_FORWARDED_HOST']))
 /*
  * Réinjection des clés en html dans l'admin r19561
  */
-if (strpos($_SERVER['REQUEST_URI'], "ecrire/") !== false){
+if (strpos($_SERVER['REQUEST_URI'], "ecrire/") !== false or isset($_REQUEST['var_memotri'])){
 	$zzzz = implode("", array_keys($_REQUEST));
 	if (strlen($zzzz) != strcspn($zzzz, '<>"\''))
 		$ecran_securite_raison = 'Cle incorrecte en $_REQUEST';
