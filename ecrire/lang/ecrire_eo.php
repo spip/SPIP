@@ -197,6 +197,8 @@ Tamen vi povas malŝalti ĝin.',
 	'icone_supprimer_signature' => 'Forviŝi tiun subskribon',
 	'icone_valider_signature' => 'Validigi tiun subskribon',
 	'image_administrer_rubrique' => 'Vi povas mastrumi tiun rubrikon',
+	'impossible_modifier_login_auteur' => 'Ne eblas modifi la salutnomo.', # MODIF
+	'impossible_modifier_pass_auteur' => 'Ne eblas modifi la pasvorto.', # MODIF
 	'info_1_article' => '1 artikolo',
 	'info_1_auteur' => '1 aŭtoro',
 	'info_1_message' => '1 mesaĝo',

@@ -683,6 +683,9 @@ funzionamento del sito. Non intervenire finché non conosci bene i meccanismi de
 	'trad_definir_reference' => 'Scegliere "@titre@" come riferimento per le traduzioni',
 	'trad_reference' => '(articolo di riferimento)',
 
+	// U
+	'upload_limit' => 'Questo file è trppo grande per il server; la dimensione massima consentita in <i>upload</i> è di @max@.',
+
 	// Z
 	'zbug_balise_b_aval' => ': ciclo B deve precedere ciclo BOUCLE',
 	'zbug_balise_inexistante' => 'errore @from@: il tag #@balise@ non esiste ',

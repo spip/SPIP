@@ -147,6 +147,8 @@ L’administrator del sistèma o de la ret vos deu poder fornir
 	'icone_supprimer_signature' => 'Suprimir aquela signatura',
 	'icone_valider_signature' => 'Validar aquela signatura',
 	'image_administrer_rubrique' => 'Podètz administrar aquela rubrica',
+	'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # MODIF
+	'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # MODIF
 	'info_1_article' => '1 article',
 	'info_activer_cookie' => 'Podètz activar un <b>cookie de correspondéncia</b>; aquò vos permetrà de passar aisit del sit public al sit privat.',
 	'info_administrateur' => 'Administrator',

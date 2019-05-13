@@ -196,6 +196,8 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d’hostatg
 	'icone_supprimer_signature' => 'Suprimir aquesta secció',
 	'icone_valider_signature' => 'Validar aquesta signatura',
 	'image_administrer_rubrique' => 'Podeu administrar aquesta secció',
+	'impossible_modifier_login_auteur' => 'Impossible modificar l’usuari.', # MODIF
+	'impossible_modifier_pass_auteur' => 'Impossible modificar la contrasenya.', # MODIF
 	'info_1_article' => '1 article',
 	'info_1_auteur' => '1 autor',
 	'info_1_message' => '1 missatge',

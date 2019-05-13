@@ -162,6 +162,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_supprimer_signature' => 'מחק חתימה זו',
 	'icone_valider_signature' => 'תן תוקף לחתימה זו',
 	'image_administrer_rubrique' => 'אתה יכול לנהל את המדור',
+	'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # MODIF
+	'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # MODIF
 	'info_1_article' => 'מאמר 1',
 	'info_activer_cookie' => 'אתה יכול להפעיל <b> עוגיית התכתבות</b>, אשר יאפשר לך
  לעבור בקלות מן האתר הציבורי לאתר הפרטי.',

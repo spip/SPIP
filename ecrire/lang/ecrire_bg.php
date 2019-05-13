@@ -134,6 +134,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_supprimer_signature' => 'Изтриване на записа',
 	'icone_valider_signature' => 'Одобряване на записа',
 	'image_administrer_rubrique' => 'Управление на рубриката',
+	'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # MODIF
+	'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # MODIF
 	'info_1_article' => '1 статия',
 	'info_activer_cookie' => 'Възможност за активиране на <b>cookie администриране</b>, което позволява
  улеснено превключване между публичния сайт и личната зона.',

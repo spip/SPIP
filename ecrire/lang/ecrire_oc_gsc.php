@@ -124,6 +124,8 @@ L’administrator deu sistèma o de l’arret que’vs deu poder hornir
 	'icone_supprimer_signature' => 'Suprimir aquera signatura',
 	'icone_valider_signature' => 'Validar aquera signatura',
 	'image_administrer_rubrique' => 'Que podetz administrar aquera rubrica',
+	'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # MODIF
+	'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # MODIF
 	'info_1_article' => '1 article',
 	'info_activer_cookie' => 'Que podetz activar un <b>cookie de correspondéncia</b>; aquò que’vs permeterà de passar aisit deu sit public au sit privat.',
 	'info_administrateur' => 'Administrator',

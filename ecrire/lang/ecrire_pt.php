@@ -191,6 +191,8 @@ Essas informações devem poder ser fornecidas pelo administrador do sistema ou 
 	'icone_supprimer_signature' => 'Suprimir esta assinatura',
 	'icone_valider_signature' => 'Validar esta assinatura',
 	'image_administrer_rubrique' => 'Pode administrar esta rubrica',
+	'impossible_modifier_login_auteur' => 'Impossível alterar o login.', # MODIF
+	'impossible_modifier_pass_auteur' => 'Impossível alterar a palavra-passe.', # MODIF
 	'info_1_article' => '1 artigo',
 	'info_1_auteur' => '1 autor',
 	'info_1_message' => '1 mensagem',

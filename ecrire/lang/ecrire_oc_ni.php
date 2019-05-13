@@ -181,6 +181,8 @@ Aqueli informacions vos devon poder èstre provesidi per l’administrator dau s
 	'icone_supprimer_signature' => 'Suprimir aquela signatura',
 	'icone_valider_signature' => 'Validar aquela signatura',
 	'image_administrer_rubrique' => 'Podètz administrar aquela rubrica',
+	'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # MODIF
+	'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # MODIF
 	'info_1_article' => '1 article',
 	'info_1_auteur' => '1 autor',
 	'info_1_message' => '1 messatge',

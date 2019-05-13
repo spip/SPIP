@@ -138,6 +138,8 @@ Bann zinformasyon-la, sé komandèr-sistèm ou komandèr-rézo sak i dwa donn a 
 	'icone_supprimer_signature' => 'Dégrèn sinyatir-la',
 	'icone_valider_signature' => 'Konfirm sinyatir-la',
 	'image_administrer_rubrique' => 'Ou néna drwa d-komandman sir rubrik-la',
+	'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # MODIF
+	'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # MODIF
 	'info_1_article' => '1 lartik',
 	'info_activer_cookie' => 'I pé fé zwé inn <b>gatomakro drokonésans </b>. Kom sa ou sra kav pas fasilman dopwi lafigirwèb piblik sir lo sit privé.',
 	'info_administrateur' => 'Komandèr',

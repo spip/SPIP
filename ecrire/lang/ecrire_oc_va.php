@@ -124,6 +124,8 @@ L’administrator dau sistèma o de la ret vos deu poer fornir
 	'icone_supprimer_signature' => 'Suprimir aquela signatura',
 	'icone_valider_signature' => 'Validar aquela signatura',
 	'image_administrer_rubrique' => 'Poètz administrar aquela rubrica',
+	'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # MODIF
+	'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # MODIF
 	'info_1_article' => '1 article',
 	'info_activer_cookie' => 'Poètz activar un <b>cookie de correspondéncia</b>; aquò vos permetrà de passar aisat dau sit public au sit privat.',
 	'info_administrateur' => 'Administrator',

@@ -140,7 +140,7 @@
 
 	<procure nom="iterateurs" version="1.0.6" />
 	<procure nom="queue" version="0.6.8" />
-	<procure nom="jquery" version="3.2.1" />
+	<procure nom="jquery" version="3.4.1" />
 
 	<menu nom="menu_accueil" titre="icone_accueil" icone="images/accueil-48.png" action="accueil" />
 	<menu nom="menu_edition" titre="icone_edition" icone="images/edition-48.png" action="navigation" parametres="menu=menu_edition" />

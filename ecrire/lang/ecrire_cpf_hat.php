@@ -136,6 +136,8 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 	'icone_supprimer_signature' => 'Kraze siyati a',
 	'icone_valider_signature' => 'Konfime siyati a',
 	'image_administrer_rubrique' => 'Ou kapab gèr ribrik la',
+	'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # MODIF
+	'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # MODIF
 	'info_1_article' => '1 atik',
 	'info_activer_cookie' => 'Ou kapab mèt <b> yon gatomakro ki rokonèt a w</b>, ki ke pèmè 
  fè yon viré ant sit piblik ek sit privé.',

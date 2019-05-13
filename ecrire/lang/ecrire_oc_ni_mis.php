@@ -195,6 +195,8 @@ Aqueli informacioun vi devon poudé estre prouvedi da l’aministratour dóu sis
 	'icone_supprimer_signature' => 'Suprimà aquela firma',
 	'icone_valider_signature' => 'Validà aquela firma',
 	'image_administrer_rubrique' => 'Poudès aministrà aquela rùbrica',
+	'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # MODIF
+	'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # MODIF
 	'info_1_article' => '1 article',
 	'info_1_auteur' => '1 autour',
 	'info_1_message' => '1 message',

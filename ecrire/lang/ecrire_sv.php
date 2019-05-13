@@ -153,6 +153,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_supprimer_signature' => 'Radera den här signaturen',
 	'icone_valider_signature' => 'Validera signaturen',
 	'image_administrer_rubrique' => 'Du kan hantera den här avdelningen',
+	'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # MODIF
+	'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # MODIF
 	'info_1_article' => '1 artikel',
 	'info_activer_cookie' => 'Du kan aktivera en <b>administrationscookie</b>, som tillåter dig
  att enkelt växla mellan den publika och den privata delen.',

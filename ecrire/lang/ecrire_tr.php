@@ -160,6 +160,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_supprimer_signature' => 'Bu imzayı sil',
 	'icone_valider_signature' => 'Bu imzayı onayla',
 	'image_administrer_rubrique' => 'Bu bölümü yönetebilirsiniz',
+	'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # MODIF
+	'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # MODIF
 	'info_1_article' => '1 makale',
 	'info_activer_cookie' => 'Bir <b>yazışma kurabiyesi</b> çalıştırabilirsiniz,
  bu sizin kolayca kamu sitesinden özel siteye geçmenizi sağlar.',

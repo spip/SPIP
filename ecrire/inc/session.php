@@ -624,7 +624,7 @@ function ecrire_fichier_session($fichier, $auteur) {
 	// enregistrer les autres donnees du visiteur
 	$texte = "<" . "?php\n";
 	foreach ($auteur as $var => $val) {
-		$texte .= '$GLOBALS[\'visiteur_session\'][\'' . $var . '\'] = '
+		$texte .= '$GLOBALS[\'visiteur_session\'][' . var_export($var, true) . '] = '
 			. var_export($val, true) . ";\n";
 	}
 	$texte .= "?" . ">\n";

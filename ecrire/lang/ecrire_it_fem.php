@@ -183,6 +183,8 @@ Se non conosci queste informazioni, richiedile all’amministratrice del sistema
 	'icone_supprimer_signature' => 'Cancella l’adesione',
 	'icone_valider_signature' => 'Conferma l’adesione',
 	'image_administrer_rubrique' => 'Puoi amministrare questa rubrica',
+	'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # MODIF
+	'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # MODIF
 	'info_1_article' => '1 articolo',
 	'info_activer_cookie' => 'Se vuoi puoi attivare un <b>cookie di corrispondenza</b>, che ti permetterà
 di passare facilmente dal sito pubblico all’interfaccia privata.',

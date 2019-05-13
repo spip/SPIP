@@ -193,6 +193,8 @@ Seguritate hobetzeko, konfigurazio hau aldatu behar zenuke, edo @constantes@ kon
 	'icone_supprimer_signature' => 'Sinadura hau ezabatu',
 	'icone_valider_signature' => 'Sinadura hau onartu',
 	'image_administrer_rubrique' => 'Atal hau kudeatu ahal duzu',
+	'impossible_modifier_login_auteur' => 'Logina aldatzea ezinezkoa da.', # MODIF
+	'impossible_modifier_pass_auteur' => 'Pasahitza aldatzea ezinezkoa da.', # MODIF
 	'info_1_article' => 'artikulu 1',
 	'info_1_auteur' => 'Autore 1',
 	'info_1_message' => 'Mezu 1',

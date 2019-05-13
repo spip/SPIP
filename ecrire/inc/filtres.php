@@ -3302,7 +3302,7 @@ function http_img_pack($img, $alt, $atts = '', $title = '', $options = array()) 
 	if (!isset($options['chemin_image']) or $options['chemin_image'] == true) {
 		$img = chemin_image($img);
 	}
-	if (stripos($atts, 'width') === false) {
+	if (stripos($atts, 'width') === false && !preg_match(',\.svg$,', $img)) {
 		// utiliser directement l'info de taille presente dans le nom
 		if ((!isset($options['utiliser_suffixe_size']) or $options['utiliser_suffixe_size'] == true)
 			and preg_match(',-([0-9]+)[.](png|gif)$,', $img, $regs)
@@ -3350,6 +3350,50 @@ function filtre_balise_img_dist($img, $alt = "", $class = "") {
 	return http_img_pack($img, $alt, $class ? " class='" . attribut_html($class) . "'" : '', '',
 		array('chemin_image' => false, 'utiliser_suffixe_size' => false));
 }
+
+
+/**
+ * Inserer un svg inline
+ * http://www.accede-web.com/notices/html-css-javascript/6-images-icones/6-2-svg-images-vectorielles/
+ *
+ * pour l'inserer avec une balise <img>, utiliser le filtre |balise_img
+ *
+ * @param string $img
+ * @param string $alt
+ * @param string $class
+ * @return string
+ */
+function filtre_balise_svg_dist($img, $alt = "", $class = "") {
+	if (!$file = find_in_path($img)
+	  or !$svg = file_get_contents($file)) {
+		return '';
+	}
+
+	if (!preg_match(",<svg\b[^>]*>,UimsS", $svg, $match)) {
+		return '';
+	}
+	$balise_svg = $match[0];
+	$balise_svg_source = $balise_svg;
+	// IE est toujours mon ami
+	$balise_svg = inserer_attribut($balise_svg, 'focusable', 'false');
+	if ($class) {
+		$balise_svg = inserer_attribut($balise_svg, 'class', $class);
+	}
+	if ($alt){
+		$balise_svg = inserer_attribut($balise_svg, 'role', 'img');
+		$id = "img-svg-title-" . substr(md5("$file:$svg:$alt"),0,4);
+		$balise_svg = inserer_attribut($balise_svg, 'aria-labelledby', $id);
+		$title = "<title id=\"$id\">" . entites_html($alt)."</title>\n";
+		$balise_svg .= $title;
+	}
+	else {
+		$balise_svg = inserer_attribut($balise_svg, 'aria-hidden', 'true');
+	}
+	$svg = str_replace($balise_svg_source, $balise_svg, $svg);
+
+	return $svg;
+}
+
 
 
 /**

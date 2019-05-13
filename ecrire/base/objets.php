@@ -243,7 +243,8 @@ function lister_tables_objets_sql($table_sql = null, $desc = array()) {
 					'prefs' => 'text',
 					'cookie_oubli' => 'tinytext',
 					'source' => "VARCHAR(10) DEFAULT 'spip' NOT NULL",
-					'lang' => "VARCHAR(10) DEFAULT '' NOT NULL"
+					'lang' => "VARCHAR(10) DEFAULT '' NOT NULL",
+					'imessage' => "VARCHAR(3) DEFAULT '' NOT NULL"
 				),
 				'key' => array(
 					'PRIMARY KEY' => 'id_auteur',

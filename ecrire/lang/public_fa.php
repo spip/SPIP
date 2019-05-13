@@ -19,11 +19,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_article' => 'مقاله‌اى با اين نشانى وجود ندارد',
 	'aucun_auteur' => ' نويسنده‌اى با اين نشانى وجود ندارد',
 	'aucun_site' => 'سايتى با اين نشانى وجود ندارد',
-	'aucune_breve' => 'خبري با اين نشانى وجود ندارد',
-	'aucune_rubrique' => 'بخشى بااين نشانى وجود ندارد',
+	'aucune_breve' => 'خبری با اين نشانى وجود ندارد',
+	'aucune_rubrique' => 'بخشى با اين نشانى وجود ندارد',
 	'auteur' => 'نويسنده',
 	'autres' => 'نويسندگان',
-	'autres_breves' => 'خبرهاي ديگر',
+	'autres_breves' => 'خبرهای ديگر',
 	'autres_groupes_mots_clefs' => 'گروه‌هاى ديگر واژه كليدها',
 	'autres_sites' => ' سايت‌هاى ديگر',
 
@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'commenter_site' => 'اظهار نظر در مورد اين سايت',
 	'contact' => 'تماس',
-	'copie_document_impossible' => 'روبرداري از اين سند ناممكن است',
+	'copie_document_impossible' => 'روبرداری از اين سند ناممكن است',
 
 	// D
 	'date' => 'تاريخ',
@@ -44,14 +44,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'derniers_messages_forum' => 'آخرين پيامهاى منتشر شده در سخنگاه‌ها',
 
 	// E
-	'edition_mode_texte' => 'ويرايش با شيوه‌ي متن',
+	'edition_mode_texte' => 'ويرايش با شيوه‌ ی متن',
 	'en_reponse' => 'در پاسخ به:',
 	'en_resume' => 'خلاصه',
 	'envoyer_message' => 'فرستادن پيام',
 	'espace_prive' => 'قسمت شخصى',
 
 	// F
-	'formats_acceptes' => 'فرمت‌هاي مورد قبول:@formats@. ',
+	'formats_acceptes' => 'فرمت‌های مورد قبول:@formats@. ',
 
 	// H
 	'hierarchie_site' => 'سلسله مراتب سايت',
@@ -85,7 +85,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_precedente' => 'صفحه ى پيشين',
 	'page_suivante' => 'صفحه‌ى بعدى',
 	'par_auteur' => 'بوسيله‌ى',
-	'participer_site' => 'مي‌توانيد با ثبت نام در اين سايت و ارايه‌ى مقاله‌هايتان در فعاليت‌هاى اين سايت شركت كنيد. به محض ثبت نام، كد ورود به قسمت شخصي سايت با ايميل براي شما ارسال مي‌شود.',
+	'participer_site' => 'مي‌توانيد با ثبت نام در اين سايت و ارايه‌ مقاله‌هايتان در فعاليت‌های اين سايت شركت كنيد. به محض ثبت نام، كد ورود به قسمت شخصی سايت با ايميل برای شما ارسال می شود.',
 	'plan_site' => 'نقشه‌ى سايت',
 	'popularite' => 'محبوبيت سايت',
 	'poster_message' => 'يك پيام بفرستيد',
@@ -104,11 +104,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'site_realise_avec_spip' => 'سايت با اسپيپ درست شده است',
 	'sites_web' => 'وب سايت‌ها',
 	'sous_rubriques' => 'زيربخش‌ها',
-	'spam' => 'اسپام',
+	'spam' => 'اسپم',
 	'suite' => 'دنباله',
 	'sur_web' => 'در تارنما',
-	'syndiquer_rubrique' => 'مشترك‌سازي اين بخش',
-	'syndiquer_site' => 'مشترك‌سازي تمام سايت',
+	'syndiquer_rubrique' => 'مشترک سازی اين بخش',
+	'syndiquer_site' => 'مشترک سازی تمام سايت',
 
 	// T
 	'texte_lettre_information' => 'نامه‌ى اطلاع رسانى سايت',

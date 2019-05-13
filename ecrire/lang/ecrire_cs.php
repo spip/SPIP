@@ -136,6 +136,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_supprimer_signature' => 'Odstranit podpis',
 	'icone_valider_signature' => 'Potvrdit podpis',
 	'image_administrer_rubrique' => 'Máte právo správy této sekce',
+	'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # MODIF
+	'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # MODIF
 	'info_1_article' => '1 článek',
 	'info_activer_cookie' => 'Můžete nastavit <b>administrátorské cookie</b>, které vám dovolí
  snadno přecházet mezi prohlížením webu a jeho editací.',
