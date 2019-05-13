@@ -515,6 +515,7 @@ function queue_update_next_job_time($next_time = null) {
 	if (is_array($res)) {
 		foreach ($res as $row) {
 			queue_close_job($row, $time);
+			spip_log ("queue_close_job car _JQ_PENDING depuis +180s : ".print_r($row,1), "job_mort"._LOG_ERREUR);
 		}
 	}
 
