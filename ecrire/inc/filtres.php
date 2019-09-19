@@ -3374,6 +3374,11 @@ function filtre_balise_svg_dist($img, $alt = "", $class = "") {
 	}
 	$balise_svg = $match[0];
 	$balise_svg_source = $balise_svg;
+
+	// XML / commentaires à supprimer
+	$svg = preg_replace('#(<\?xml[^>]*\?' . '>)#', '', $svg);
+	$svg = preg_replace('#(<!--[^>]*>)#', '', $svg);
+
 	// IE est toujours mon ami
 	$balise_svg = inserer_attribut($balise_svg, 'focusable', 'false');
 	if ($class) {
