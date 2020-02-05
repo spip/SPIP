@@ -1,51 +1,264 @@
-/* Layout */
-body {min-width: 780px;}
-body.large {min-width: 974px;}
-/* ecran etroit*/
-#haut {text-align:center;margin-top:10px;}
-.largeur { width: 780px; margin: auto; text-align:left;padding:0; }
-#conteneur,.table_page { clear: both; margin-right: auto; margin-left: auto; text-align: left; width: 780px; margin-top:0.5em;}
-#navigation { float: left; width: 200px; min-height: 100px; overflow-wrap: break-word; }
-#extra { float: left; clear:left; width: 200px; overflow-wrap: break-word; }
-#contenu { float: right ; margin-left: 30px; width: 550px; min-height:400px}
+/**
+ * ======
+ * Layout
+ * ======
+ *
+ * Organisation :
+ *
+ * 1. Layout général de la page
+ * 2. Contenus textes limités en largeur
+ * 3. Divers
+ * 4. Grenier
+ *
+ * Breakpoints : 780px / 1200px
+ *
+ * Markup :
+ *
+ * body
+ * |--#bando_haut
+ * |  |--#bando_xxx (x4)
+ * |     |--.largeur
+ * |--#page
+ * |  |--.largeur
+ * |  |  |--#haut
+ * |  |     |--#chemin
+ * |  |--#conteneur(.pleine_largeur)
+ * |     |--#navigation
+ * |     |--#extra
+ * |     |--#contenu
+ * |--#pied
+ *    |--.largeur
+ */
+
+/**
+ * ============================
+ * 1. Layout général de la page
+ * ============================
+ */
+
+.largeur,
+.table_page,
+.messages-alertes {
+	max-width: 1440px;
+}
+.largeur {
+	margin: auto;
+	text-align: left;
+	padding: 0 10px;
+}
+
+#page {
+	margin: auto;
+	text-align: center;
+}
+
+#haut {
+	text-align: center;
+	margin-top: 10px;
+}
+
+#contenu {}
+
+#navigation {
+	overflow-wrap: break-word;
+}
+
+#extra {
+	overflow-wrap: break-word;
+}
+
 #pied {}
-div.messages-alertes {text-align: right;background: #fff;padding: 5px;width: 770px;clear: both; margin-right: auto; margin-left: auto;}
 
-/* ecran large*/
-.large .largeur {width:974px;}
-.large #conteneur,.large .table_page { width: 974px; }
-.large div.messages-alertes {width: 964px;}
-.large #navigation {  }
-.large #extra { float: right; clear:none; width: 200px; }
-.large #contenu { float: left; margin-left: 17px; width: 540px; }
+/**
+ * Écrans moyens : on passe en 2 colonnes.
+ * Fallback vieux navigateurs : direct en 3 colonnes et basta.
+ */
+@media (min-width: 720px) {
+	.largeur {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	/* Navigateurs napthaline */
+	#conteneur {
+		text-align: center;
+	}
+	#contenu {
+		text-align: left;
+		display: inline-block;
+		width: 61%;
+		margin-left: auto;
+		margin-right: auto;
+		min-height: 50vh;
+	}
+	#navigation {
+		text-align: left;
+		width: 18%;
+		float: left;
+	}
+	#extra {
+		text-align: left;
+		width: 18%;
+		float: right;
+	}
 
-/* les formulaires sont en 600px en config large */
-body.large.edition #contenu,
-.articles_edit.large #contenu,
-.mots_edit.large #contenu,
-.breves_edit.large #contenu,
-.rubriques_edit.large #contenu {width:600px;}
-body.large.edition #extra,
-.articles_edit.large #extra,
-.mots_edit.large #extra,
-.breves_edit.large #extra,
-.rubriques_edit.large #extra {width:140px;}
+	/* Les pages qui demandent à être en pleine largeur (sans #nav ni #extra) */
+	.pleine_largeur #contenu {
+		width: 100%;
+	}
+	.pleine_largeur #navigation,
+	.pleine_largeur #extra {
+		display: none;
+	}
 
-/* une seule colonne centrale */
-.pleine_largeur #navigation,.pleine_largeur #extra,
-body.large .pleine_largeur #navigation,body.large .pleine_largeur #extra {display:none;}
-.pleine_largeur #contenu,
-body.large .pleine_largeur #contenu {margin-left:0;width:100%;}
+	/* Navigateurs récents */
+	@supports (display: grid) {
+		/* Les pages "normales" */
+		#conteneur:not(.pleine_largeur) {
+			text-align: left;
+			display: grid;
+			grid-column-gap: 2%;
+			/*grid-template-columns:
+				min-content
+				minmax(auto, calc(100% - (8em + 8vw)));*/
+			grid-template-rows: auto 1fr; /* la 1ère ligne doit se collapser */
+			grid-template-columns:
+				25%  /* navigation & extra */
+				73%; /* contenu */
+			grid-template-areas:
+				"navigation contenu "
+				"extra      contenu ";
+			-webkit-box-pack: center;
+			        justify-content: center;
+		}
+		#contenu {
+			grid-area: contenu;
+			width: initial;
+			margin: 0;
+		}
+		#navigation {
+			grid-area: navigation;
+			width: initial;
+			margin-right: 0;
+		}
+		#extra {
+			grid-area: extra;
+			width: initial;
+		}
+	}
+}
+@media (min-width: 960px) {
+	.largeur {
+		padding: 0 20px;
+	}
+	@supports (display: grid) {
+		#conteneur:not(.pleine_largeur) {
+			grid-template-columns:
+				25%  /* navigation & extra */
+				73%; /* contenu */
+		}
+	}
+}
+
+
+/**
+ * Sur écrans larges : 3 colonnes.
+ */
+@media (min-width: 1200px) {
+	@supports (display: grid) {
+		#conteneur:not(.pleine_largeur) {
+			grid-column-gap: 3%;
+			grid-template-columns:
+				20%  /* navigation */
+				56%  /* contenu */
+				18%; /* extra */
+			grid-template-areas:
+				"navigation contenu extra"
+				"navigation contenu extra";
+		}
+	}
+}
+
+/* petit ecrans : flex pour reordonner */
+@media (max-width: 719.999px) {
+	@supports (display: flex) {
+		#conteneur {
+			display: flex;
+			flex-direction: column;
+		}
+		#navigation {
+			order:1;
+		}
+		#contenu {
+			order:2;
+		}
+		#extra {
+			order:3;
+		}
+	}
+}
+
+/**
+ * =====================================
+ * 2. Contenus textes limités en largeur
+ * =====================================
+ * On essaie d'obtenir environ 60 charactères max par ligne.
+ */
+
+.pleine_largeur .formulaire_spip {
+	max-width: 60em;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/**
+ * =========
+ * 3. Divers
+ * =========
+ */
+
+.centered {
+	margin: 0 auto;
+	text-align: center;
+}
+
+div.messages-alertes {
+	text-align: right;
+	background: #fff;
+	padding: 5px;
+	clear: both;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+
+/**
+ * ==========
+ * 4. Grenier
+ * ==========
+ */
+
+.table_page {
+	margin: auto;
+	text-align: left;
+	clear: both;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 0.5em;
+}
+
+div.table_page {
+	margin-top: 1em;
+}
 
 /*fix all layout problems of IE6 and IE7*/
 .lte7 .cadre,
-.lte7 .fiche_objet, /*title not visible*/
-.lte7 .ajax-action, /*containers of expandible boxes go mad*/
-.lte7 .tabs-container, /*containers of expandible boxes go mad*/
+.lte7 .fiche_objet,
+/*title not visible*/
+.lte7 .ajax-action,
+/*containers of expandible boxes go mad*/
+.lte7 .tabs-container,
+/*containers of expandible boxes go mad*/
 .lte7 #portfolio,
-.lte7 #documents {zoom:1}
-
-div.table_page { margin-top: 1em; }
-.centered { margin: 0 auto; text-align: center; }
-#page { margin: auto; text-align: center; }
-.table_page{ margin: auto; text-align: left; }
+.lte7 #documents {
+	zoom: 1
+}

@@ -62,7 +62,7 @@ function fin_gauche() { return "</div></div><br class = 'nettoyeur' />"; }
  */
 function creer_colonne_droite() {
 	static $deja_colonne_droite;
-	if ($GLOBALS['spip_ecran'] != 'large' or $deja_colonne_droite) {
+	if ($deja_colonne_droite) {
 		return '';
 	}
 	$deja_colonne_droite = true;

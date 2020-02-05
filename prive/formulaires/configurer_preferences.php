@@ -40,7 +40,6 @@ function formulaires_configurer_preferences_charger_dist() {
 	$valeurs['display_outils'] = isset($GLOBALS['visiteur_session']['prefs']['display_outils']) ? $GLOBALS['visiteur_session']['prefs']['display_outils'] : 'oui';
 	$valeurs['display'] = (isset($GLOBALS['visiteur_session']['prefs']['display']) and $GLOBALS['visiteur_session']['prefs']['display'] > 0) ? $GLOBALS['visiteur_session']['prefs']['display'] : 2;
 	$valeurs['couleur'] = (isset($GLOBALS['visiteur_session']['prefs']['couleur']) and $GLOBALS['visiteur_session']['prefs']['couleur'] > 0) ? $GLOBALS['visiteur_session']['prefs']['couleur'] : 1;
-	$valeurs['spip_ecran'] = $GLOBALS['spip_ecran'];
 
 	$couleurs = charger_fonction('couleurs', 'inc');
 	$les_couleurs = $couleurs(array(), true);
@@ -86,14 +85,6 @@ function formulaires_configurer_preferences_traiter_dist() {
 		}
 
 		auteur_modifier($GLOBALS['visiteur_session']['id_auteur'], $c);
-	}
-
-	if ($spip_ecran = _request('spip_ecran')) {
-		// Poser un cookie,
-		// car ce reglage depend plus du navigateur que de l'utilisateur
-		$GLOBALS['spip_ecran'] = $spip_ecran;
-		include_spip('inc/cookie');
-		spip_setcookie('spip_ecran', $_COOKIE['spip_ecran'] = $spip_ecran, time() + 365 * 24 * 3600);
 	}
 
 	return array('message_ok' => _T('config_info_enregistree'), 'editable' => true);

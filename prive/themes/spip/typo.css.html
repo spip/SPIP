@@ -37,7 +37,21 @@
 */
 
 html { font-size: 100.01%; } /* Cf.: http://www.pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ */
-body { background: #GET{background-color}; font: #GET{font-size}/#GET{line-height}[ (#GET{font-family})]; color: #GET{color}; }
+body {
+  background: #GET{background-color};
+  font: #GET{font-size}/#GET{line-height}[ (#GET{font-family})];
+  color: #GET{color};
+}
+@media (min-width: 960px) {
+	body {
+		font: [(#GET{font-size}|mult{14}|div{13}|round{4})em]/#GET{line-height}[ (#GET{font-family})];
+	}
+}
+@media (min-width: 1200px) {
+	body {
+		font: [(#GET{font-size}|mult{15}|div{13}|round{4})em]/#GET{line-height}[ (#GET{font-family})];
+	}
+}
 
 /* Titraille / Intertitres */
 h1,h2,h3,h4,h5,h6,

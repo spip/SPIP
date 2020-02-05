@@ -16,9 +16,8 @@
 			<div id="conteneur" class="[(#LARGEUR_ECRAN)]">
 				<div id="navigation" class='lat' role='contentinfo'>
 					<INCLURE{fond=prive/squelettes/navigation/#ENV{type-page},ajax=navigation,env}>
-				[(#EVAL{$GLOBALS}|table_valeur{spip_ecran}|=={large}|oui)
 				</div>
-				<div id="extra" class='lat' role='complementary'>]
+				<div id="extra" class='lat' role='complementary'>
 					<INCLURE{fond=prive/squelettes/extra/#ENV{type-page},ajax=extra,env}>
 				</div>
 				<div id="contenu" role='main'>
