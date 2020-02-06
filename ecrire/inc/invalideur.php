@@ -188,8 +188,8 @@ function purger_repertoire($dir, $options = array()) {
 	$total = 0;
 
 	while (($fichier = @readdir($handle)) !== false) {
-		// Eviter ".", "..", ".htaccess", ".svn" etc.
-		if ($fichier[0] == '.') {
+		// Eviter ".", "..", ".htaccess", ".svn" etc & CACHEDIR.TAG
+		if ($fichier[0] == '.' OR $fichier == 'CACHEDIR.TAG') {
 			continue;
 		}
 		$chemin = "$dir/$fichier";
