@@ -81,7 +81,10 @@ function action_purger_dist($arg = null) {
 			break;
 
 		case 'vignettes':
-			purger_repertoire(_DIR_VAR, array('subdir' => true));
+			purger_repertoire(_DIR_VAR . 'cache-gd2', array('subdir' => true));
+			purger_repertoire(_DIR_VAR . 'cache-texte', array('subdir' => true));
+			purger_repertoire(_DIR_VAR . 'cache-vignettes', array('subdir' => true));
+			purger_repertoire(_DIR_VAR . 'cache-TeX', array('subdir' => true));
 			supprime_invalideurs();
 			purger_repertoire(_DIR_CACHE, array('subdir' => true));
 			break;
