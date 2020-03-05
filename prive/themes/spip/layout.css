@@ -36,78 +36,67 @@
  * ============================
  */
 
+/*
+ * Par defaut les vieux navigateurs qui ne supportent rien : direct en 3 colonnes et basta.
+ * on met des min-width et des max-width
+ */
+
 .largeur,
 .table_page,
 .messages-alertes {
 	max-width: 1440px;
+	min-width: 960px;
 }
+
 .largeur {
 	margin: auto;
 	text-align: left;
 	padding: 0 10px;
 }
-
-#page {
-	margin: auto;
+/* Navigateurs napthaline : par defaut */
+#conteneur {
 	text-align: center;
 }
-
-#haut {
-	text-align: center;
-	margin-top: 10px;
+#contenu {
+	text-align: left;
+	display: inline-block;
+	width: 61%;
+	margin-left: auto;
+	margin-right: auto;
+	min-height: 50vh;
 }
-
-#contenu {}
-
 #navigation {
 	overflow-wrap: break-word;
+	text-align: left;
+	width: 18%;
+	float: left;
 }
-
 #extra {
 	overflow-wrap: break-word;
+	text-align: left;
+	width: 18%;
+	float: right;
 }
 
-#pied {}
+/* Les pages qui demandent à être en pleine largeur (sans #nav ni #extra) */
+.pleine_largeur #contenu {
+	width: 100%;
+}
+.pleine_largeur #navigation,
+.pleine_largeur #extra {
+	display: none;
+}
+
 
 /**
  * Écrans moyens : on passe en 2 colonnes.
  * Fallback vieux navigateurs : direct en 3 colonnes et basta.
  */
 @media (min-width: 720px) {
-	.largeur {
-		padding-left: 10px;
-		padding-right: 10px;
-	}
-	/* Navigateurs napthaline */
-	#conteneur {
-		text-align: center;
-	}
-	#contenu {
-		text-align: left;
-		display: inline-block;
-		width: 61%;
-		margin-left: auto;
-		margin-right: auto;
-		min-height: 50vh;
-	}
-	#navigation {
-		text-align: left;
-		width: 18%;
-		float: left;
-	}
-	#extra {
-		text-align: left;
-		width: 18%;
-		float: right;
-	}
-
-	/* Les pages qui demandent à être en pleine largeur (sans #nav ni #extra) */
-	.pleine_largeur #contenu {
-		width: 100%;
-	}
-	.pleine_largeur #navigation,
-	.pleine_largeur #extra {
-		display: none;
+	.largeur,
+	.table_page,
+	.messages-alertes {
+		min-width: 0;
 	}
 
 	/* Navigateurs récents */
@@ -180,6 +169,39 @@
 
 /* petit ecrans : flex pour reordonner */
 @media (max-width: 719.999px) {
+	.largeur,
+	.table_page,
+	.messages-alertes {
+		min-width: 0;
+	}
+
+	#page {
+		margin: auto;
+		text-align: center;
+	}
+
+	#haut {
+		text-align: center;
+		margin-top: 10px;
+	}
+
+	#contenu {
+		float:none;
+		width: auto;
+	}
+
+	#navigation {
+		float:none;
+		width: auto;
+	}
+
+	#extra {
+		float:none;
+		width: auto;
+	}
+
+	#pied {}
+
 	@supports (display: flex) {
 		#conteneur {
 			display: flex;
