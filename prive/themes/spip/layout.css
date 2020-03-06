@@ -53,6 +53,10 @@
 	text-align: left;
 	padding: 0 10px;
 }
+#haut {
+	margin-top: 10px;
+}
+
 /* Navigateurs napthaline : par defaut */
 #conteneur {
 	text-align: center;
