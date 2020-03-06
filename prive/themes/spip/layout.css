@@ -192,16 +192,19 @@
 	#contenu {
 		float:none;
 		width: auto;
+		max-width: 100%;
 	}
 
 	#navigation {
 		float:none;
 		width: auto;
+		max-width: 100%;
 	}
 
 	#extra {
 		float:none;
 		width: auto;
+		max-width: 100%;
 	}
 
 	#pied {}
