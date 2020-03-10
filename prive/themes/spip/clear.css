@@ -25,12 +25,8 @@ hr.clear { visibility: hidden; }
     visibility: hidden;
     overflow: hidden;
 }
-.clearfix { display: inline-table; }
-
-/* Hides from IE-mac \*/
-.clearfix { height: 1%; }
 .clearfix { display: block; }
-/* End hide from IE-mac */
+
 
 /* Non visible a l'ecran */
 .none,.js .none-js,.no-js .none-nojs { display: none; }
