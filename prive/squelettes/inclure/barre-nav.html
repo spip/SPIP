@@ -40,7 +40,7 @@
 					{source tableau, #GET{boutons}}
 					{cle!=outils_rapides}
 					{cle!=outils_collaboratifs}>
-					[<li (#CLE|=={menu_accueil}|ou{#VALEUR{sousmenu}}|?{' ',#SET{li,''}}) #SET{li,'</li>'}[class="(#VAL{first}|unique)"]>
+					[<li (#CLE|=={menu_accueil}|ou{#VALEUR{sousmenu}}|?{' ',#SET{li,''}}) #SET{li,'</li>'} class="item-deroulant item-#CLE[ (#VAL{first}|unique)]">[(#CLE|in_array{#LISTE{menu_accueil,menu_activite}}|oui)#SET{li,'</li><li class="sep"></li>'}]
 					<a href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]" id="bando1_#CLE">
 						[(#LIBELLE|_T)]
 					</a>
@@ -69,35 +69,37 @@
 
 	<div id="bando_outils">
 		<div class="largeur clearfix">
-			<ul class="bandeau_rubriques deroulant">
-				<li class="plan_site"><a
-					href="#URL_ECRIRE{plan}"
-					id="boutonbandeautoutsite">[(#CHEMIN_IMAGE{plan_site-24.png}|balise_img)]</a>
-					[(#REM|menu_rubriques)]</li></ul>
-			<B_creer>
-				<ul class="rapides creer">
-					<BOUCLE_creer(DATA)
-						{source tableau, #GET{boutons}}
-						{cle=outils_rapides}><BOUCLE_creersous(DATA){source tableau, #SOUSMENU}{par position}>[<li class="bouton"><a
-						href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
-						title="[(#VALEUR{libelle}|_T|attribut_html)]"
-						class="bando2_#CLE"><span>(#VALEUR{libelle}|_T)</span></a></li>]
-					</BOUCLE_creersous></BOUCLE_creer>
-				</ul>
-			</B_creer>
-			<div id="rapides">
-				<B_collaborer>
-					<ul class="rapides collaborer">
-					<BOUCLE_collaborer(DATA)
-						{source tableau, #GET{boutons}}
-						{cle=outils_collaboratifs}><BOUCLE_collaborersous(DATA){source tableau, #SOUSMENU}>[<li class="bouton"><a
+			<div class="largeur-inner">
+				<ul class="bandeau_rubriques deroulant">
+					<li class="plan_site"><a
+						href="#URL_ECRIRE{plan}"
+						id="boutonbandeautoutsite">[(#CHEMIN_IMAGE{plan_site-24.png}|balise_img)]</a>
+						[(#REM|menu_rubriques)]</li></ul>
+				<B_creer>
+					<ul class="rapides creer">
+						<BOUCLE_creer(DATA)
+							{source tableau, #GET{boutons}}
+							{cle=outils_rapides}><BOUCLE_creersous(DATA){source tableau, #SOUSMENU}{par position}>[<li class="bouton"><a
 							href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
 							title="[(#VALEUR{libelle}|_T|attribut_html)]"
-							class="bando2_#CLE"><span>(#VALEUR{libelle}|_T)</span></a></li>]</BOUCLE_collaborersous></BOUCLE_collaborer>
+							class="bando2_#CLE"><span>(#VALEUR{libelle}|_T)</span></a></li>]
+						</BOUCLE_creersous></BOUCLE_creer>
 					</ul>
-				</B_collaborer>
+				</B_creer>
+				<div id="rapides">
+					<B_collaborer>
+						<ul class="rapides collaborer">
+						<BOUCLE_collaborer(DATA)
+							{source tableau, #GET{boutons}}
+							{cle=outils_collaboratifs}><BOUCLE_collaborersous(DATA){source tableau, #SOUSMENU}>[<li class="bouton"><a
+								href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
+								title="[(#VALEUR{libelle}|_T|attribut_html)]"
+								class="bando2_#CLE"><span>(#VALEUR{libelle}|_T)</span></a></li>]</BOUCLE_collaborersous></BOUCLE_collaborer>
+						</ul>
+					</B_collaborer>
 
-				#FORMULAIRE_RECHERCHE_ECRIRE
+					#FORMULAIRE_RECHERCHE_ECRIRE
+				</div>
 			</div>
 		</div>
 	</div>

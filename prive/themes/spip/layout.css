@@ -56,6 +56,7 @@
 #haut {
 	margin-top: 10px;
 }
+#bando_navigation .deroulant .sep {display: none}
 
 /* Navigateurs napthaline : par defaut */
 #conteneur {
@@ -143,6 +144,39 @@
 	.largeur {
 		padding: 0 20px;
 	}
+	@supports (display: flex) {
+		#bando_navigation .deroulant .sep {
+			display: block;
+			width: 5%;
+			flex-basis: 5%;
+			position: relative;
+			min-width: 2px;
+			background: none !important;
+		}
+		#bando_navigation .deroulant .sep:last-child {
+			visibility: hidden;
+			margin-right: auto;
+		}
+		#bando_navigation .deroulant .sep::after {
+			content:'';
+			display: block;
+			position: absolute;
+			top:10%;
+			height: 80%;
+			left: 50%;
+			border-left: 1px solid #eee;
+		}
+		#bando_navigation .deroulant {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-evenly;
+			margin: 0 auto;
+		}
+		#bando_navigation .item-deroulant {
+			max-width: 12em !important;
+			position: relative;
+		}
+	}
 	@supports (display: grid) {
 		#conteneur:not(.pleine_largeur) {
 			grid-template-columns:
@@ -157,6 +191,37 @@
  * Sur écrans larges : 3 colonnes.
  */
 @media (min-width: 1200px) {
+	@supports (display: flex) {
+		#bando_haut {
+			background: #fff;
+		}
+		#bando_navigation .deroulant {
+			max-width: 85%;
+			position: relative;
+		}
+		#bando_navigation {
+			background: none !important;
+		}
+		#bando_identite {
+			z-index: 11 !important;
+		}
+		#bando_outils .largeur-inner {
+			width: 85%;
+			margin: 0 auto;
+			position: relative;
+		}
+		#bando_outils .largeur-inner::before {
+			content:'';
+			position: absolute;
+			display: block;
+			left:0;
+			right: 0;
+			top:-100px;
+			bottom:100%;
+			box-shadow: 0 0 50px #888;
+			z-index: -1;
+		}
+	}
 	@supports (display: grid) {
 		#conteneur:not(.pleine_largeur) {
 			grid-column-gap: 3%;
@@ -170,6 +235,16 @@
 		}
 	}
 }
+
+@media (min-width: 1400px) {
+	@supports (display: flex) {
+		#bando_navigation .item-deroulant {
+			min-width: 8.5em !important;
+		}
+	}
+}
+
+
 
 /* petit ecrans : flex pour reordonner */
 @media (max-width: 719.999px) {
