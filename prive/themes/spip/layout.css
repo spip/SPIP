@@ -57,6 +57,9 @@
 	margin-top: 10px;
 }
 #bando_navigation .deroulant .sep {display: none}
+#page {
+	text-align: center;
+}
 
 /* Navigateurs napthaline : par defaut */
 #conteneur {
@@ -256,7 +259,6 @@
 
 	#page {
 		margin: auto;
-		text-align: center;
 	}
 
 	#haut {
@@ -325,10 +327,17 @@
 	text-align: center;
 }
 
+.wrap-messages-alertes {
+	padding: 5px 10px;
+	background: #eee;
+}
+@media (min-width: 960px) {
+	.wrap-messages-alertes {
+		padding: 5px 20px;
+	}
+}
 div.messages-alertes {
 	text-align: right;
-	background: #fff;
-	padding: 5px;
 	clear: both;
 	margin-right: auto;
 	margin-left: auto;
