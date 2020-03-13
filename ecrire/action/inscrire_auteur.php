@@ -256,7 +256,7 @@ function envoyer_inscription_dist($desc, $nom, $mode, $options = array()) {
  */
 function creer_pass_pour_auteur($id_auteur) {
 	include_spip('inc/acces');
-	$pass = creer_pass_aleatoire(8, $id_auteur);
+	$pass = creer_pass_aleatoire(16, $id_auteur);
 	include_spip('action/editer_auteur');
 	auteur_instituer($id_auteur, array('pass' => $pass));
 

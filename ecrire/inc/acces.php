@@ -30,7 +30,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return string
  *     Mot de passe
  **/
-function creer_pass_aleatoire($longueur = 8, $sel = '') {
+function creer_pass_aleatoire($longueur = 16, $sel = '') {
 	$seed = (int)round(((float)microtime() + 1) * time());
 
 	mt_srand($seed);
