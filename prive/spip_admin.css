@@ -1,6 +1,8 @@
 /* Les boutons d'admin survolent la page (sauf # FORMULAIRE_ADMIN) */
 .spip-admin-bloc,
-.spip-admin-float { z-index: 100; position: fixed; right: 20%; top: 0; white-space: nowrap; }
+.spip-admin-float { z-index: 100; position: fixed; right: 20%; top: 0; white-space: nowrap; pointer-events: none; }
+.spip-admin-bloc a,
+.spip-admin-float a { pointer-events: all; }
 
 /* Couleurs et design des boutons d'admin */
 .spip-admin-boutons { margin: 0; padding: .4em 1em; background: #666; border: 0; font-weight: bold; border-radius: 0 0 .3em .3em; opacity: .7; }
