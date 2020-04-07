@@ -699,7 +699,6 @@ function spip_mysql_create(
 	}
 	$temporary = $temporary ? 'TEMPORARY' : '';
 	$q = "CREATE $temporary TABLE IF NOT EXISTS $nom ($query" . ($keys ? ",$keys" : '') . ")"
-		. " ENGINE=MyISAM"
 		. ($character_set ? " DEFAULT $character_set" : "")
 		. "\n";
 
