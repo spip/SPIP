@@ -173,7 +173,6 @@ h3.titrem {position:relative;}
 /* icone d'aide */
 .formulaire_spip .editer .aide {padding-top: 0px;}
 
-
 /* Fieldset */
 .formulaire_spip .editer.fieldset {padding:0;}
 .formulaire_spip fieldset {border: 0;width:auto;border-top: 1px solid #ccc;margin-top: [(#ENV{margin-bottom}|strdiv{4})em];padding-bottom:[(#ENV{margin-bottom}|strdiv{4})em];}
@@ -190,6 +189,12 @@ h3.titrem {position:relative;}
 #extra .formulaire_spip .boutons { padding: [(#ENV{margin-bottom}|strdiv{4})em] 5px}
 
 .formulaire_spip .boutons .image_loading {float:none;}
+.formulaire_spip input,
+.formulaire_spip button,
+.bouton_action_post .submit {
+	cursor: pointer;
+}
+
 /* Bouton de validation */
 input[type="file"] {border: none;background-color: transparent;}
 /* Pour IE, qui grossit le bouton submit */
@@ -232,7 +237,13 @@ input[type="submit"],input[type="reset"] {font-size: inherit;}
 }
 
 
-/* Formulaires particuliers ----------------------------------------------------------------*/
+/**
+ * ========================
+ * Formulaires particuliers
+ * ========================
+ */
+
+
 .formulaire_editer_article .editer.editer_liens_sites {border-bottom: 1px solid #ccc;}
 
 /* edition d'un auteur */
@@ -324,15 +335,203 @@ input[type="submit"],input[type="reset"] {font-size: inherit;}
 .formulaire_traduire .liste-objets .first_row {display:none;}
 .formulaire_traduire .supprimer_trad {float:#ENV{right};}
 
-/* les boutons action */
-form.bouton_action_post, form.bouton_action_post div {display:inline;}
-form.bouton_action_post.link button.submit, .formulaire_spip .boutons input.link,.formulaire_spip button.link {margin:0;font-weight:normal;}
-
-.formulaire_spip button {cursor:pointer;}
-form.bouton_action_post.link button.submit, .formulaire_spip .boutons input.link,.formulaire_spip button.link {background:none;border:0;cursor:pointer;padding:0 0 1px;color:#444;}
-form.bouton_action_post.link button.submit:hover, .formulaire_spip .boutons input.link:hover,.formulaire_spip button.link:hover {border-bottom:1px solid;padding:0;}
-
 /* formulaire_editer_logo */
 .formulaire_editer_logo .titrem,.formulaire_editer_logo .ajouter_survol {text-transform: uppercase;}
 /* Date picker : passer par dessus des icones et du menu haut */
 .ui-datepicker { z-index: 1001 !important;}
+
+
+/**
+ * ====================
+ * Variantes de boutons
+ * ====================
+ */
+
+
+/* Boutons link */
+.formulaire_spip .boutons .link,
+.formulaire_spip button.link,
+.bouton_action_post.link .submit {
+	background-color: transparent;
+	padding: 0;
+}
+.formulaire_spip .boutons .link:hover,
+.formulaire_spip .boutons .link:focus,
+.formulaire_spip button.link:hover,
+.formulaire_spip button.link:focus,
+.bouton_action_post.link .submit:hover,
+.bouton_action_post.link .submit:focus {
+	background-color: transparent;
+	padding: 0;
+	color: #ENV{foncee};
+}
+.bouton_action_post.link.del {
+	background: transparent;
+}
+
+/* Boutons block = pleine largeur */
+.formulaire_spip .submit.block {
+	display: block;
+	width: 100%;
+}
+.bouton_action_post.block:not(.link),
+.lat .bouton_action_post:not(.link),
+.bouton_action_post.block:not(.link) div,
+.lat .bouton_action_post:not(.link) div {
+	display: flex;
+}
+.bouton_action_post.block:not(.link) div,
+.lat .bouton_action_post:not(.link) div,
+.bouton_action_post.block:not(.link) .submit,
+.lat .bouton_action_post:not(.link) .submit {
+	flex: 1 1 auto;
+}
+
+/* Boutons secondaires */
+.formulaire_spip .submit.secondary,
+.bouton_action_post.secondary .submit {
+	background: transparent;
+}
+.formulaire_spip .submit.secondary {
+	border-color: [#(#ENV{claire}|couleur_foncer{0.05})];
+}
+.formulaire_spip .submit.secondary:hover,
+.formulaire_spip .submit.secondary:focus,
+.bouton_action_post.secondary .submit:hover,
+.bouton_action_post.secondary .submit:focus {
+	background: transparent;
+	border-color: #111;
+	color: #111;
+}
+
+/* Groupe de boutons */
+.boutons_groupe {
+	display: flex;
+	flex-flow: row wrap;
+}
+.formulaire_spip .boutons_groupe {
+	justify-content: flex-end;
+}
+.boutons_groupe > .submit,
+.boutons_groupe .bouton_action_post {
+	flex: 0 1 auto;
+}
+.boutons_groupe > .submit:not(:last-child),
+.boutons_groupe .bouton_action_post:not(:last-child) .submit {
+	border-top-#ENV{right}-radius: 0;
+	border-bottom-#ENV{right}-radius: 0;
+}
+.boutons_groupe > .submit:not(:first-child),
+.boutons_groupe .bouton_action_post:not(:first-child) .submit {
+	border-top-#ENV{left}-radius: 0;
+	border-bottom-#ENV{left}-radius: 0;
+}
+.boutons_groupe > .submit:not(:first-child):not(.secondary),
+.boutons_groupe .bouton_action_post:not(:first-child):not(.secondary) .submit {
+	border-#ENV{left}: 1px solid hsla(0, 0%, 0%, 0.15);
+}
+.boutons_groupe > .submit.secondary:not(:last-child),
+.boutons_groupe .bouton_action_post.secondary:not(:last-child) .submit {
+	border-#ENV{right}: 0;
+}
+.boutons_groupe.block {
+	display: flex;
+}
+.boutons_groupe.block > .submit,
+.boutons_groupe.block .bouton_action_post,
+.boutons_groupe.block .bouton_action_post div ,
+.boutons_groupe.block .bouton_action_post .submit {
+	flex: 1 1 auto;
+}
+
+/**
+ * ================
+ * Boutons d'action
+ * ================
+ * Certains styles sont mutualisés dans icons.css theme.css et au dessus.
+ *
+ * Markup :
+ * <form class="bouton_action_post"><div><button class="submit">Action</button></div></form>
+ *
+ * Classes modificatrices :
+ * - link : affiche sous forme de pseudo-lien
+ * - add | del | edit | new | config : ajoute une icône
+ * - s16 | s24 | s32 : taille de l'icône (défaut = 24px)
+ */
+
+.bouton_action_post,
+.bouton_action_post div {
+	display: inline-flex;
+}
+.bouton_action_post {
+	margin-bottom: 0.5em;
+}
+.box .ft .bouton_action_post { margin-bottom: 0; }
+.bouton_action_post div {
+	border-radius: inherit;
+}
+.bouton_action_post .submit {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+	border-radius: inherit;
+	background-color: #eee;
+	background-color: hsla(0, 0%, 0%, 0.1);
+	color:#666;
+}
+
+/* Variantes icônes : add, del, edit, config (taille défaut = 24)
+ * Images : voir dans icons.css.html
+ */
+.bouton_action_post.add .submit:before,
+.bouton_action_post.del .submit:before,
+.bouton_action_post.edit .submit:before,
+.bouton_action_post.config .submit:before {
+	content: '';
+	display: block;
+	width: 16px;
+	height: 16px;
+	margin-#ENV{right}: 0.25em;
+	background-repeat: no-repeat;
+	background-size: 24px;
+	background-position: -10px -10px;
+}
+.bouton_action_post.del .submit {
+	background-color: transparent;
+}
+
+/* boutons secondaires */
+.bouton_action_post.secondary .submit {
+	border-color: #ddd;
+	border-color: hsla(0, 0%, 0%, 0.2);
+}
+
+/* variantes tailles */
+.bouton_action_post.s16 .submit:before {
+	background-size: 16px;
+	background-position: -4px -4px;
+}
+.bouton_action_post.s32 .submit:before {
+	background-size: 32px;
+	background-position: -16px -16px;
+}
+
+/* Flottant à droite (selon la langue) */
+.bouton_action_post.left {
+	float: #ENV{left};
+}
+.bouton_action_post.right {
+	float: #ENV{right};
+}
+.bouton_action_post.right .submit:before {
+	order: 2;
+	margin-#ENV{left}: 0.25em;
+	margin-#ENV{right}: 0;
+}
+.bouton_action_post.right + .bouton_action_post.right {
+	margin-#ENV{right}: 0.5em;
+}
+
+/* Variante sans icône (préférence utilisateur) */
+.icones_texte .bouton_action_post .submit:before { display: none !important; }
