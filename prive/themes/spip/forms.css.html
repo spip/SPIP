@@ -347,13 +347,38 @@ input[type="submit"],input[type="reset"] {font-size: inherit;}
  * ====================
  */
 
+/* Boutons principaux */
+.formulaire_spip .submit.principal,
+.bouton_action_post.principal .submit {
+	background-color: #ENV{claire};
+	color: #[(#ENV{foncee}|couleur_luminance{0.8})];
+	/* color: #444; */
+}
+
+/* Boutons secondaires */
+.formulaire_spip .submit.secondaire,
+.bouton_action_post.secondaire .submit {
+	background: transparent;
+}
+.formulaire_spip .submit.secondaire {
+	border-color: [#(#ENV{claire}|couleur_foncer{0.05})];
+}
+.formulaire_spip .submit.secondaire:hover,
+.formulaire_spip .submit.secondaire:focus,
+.bouton_action_post.secondaire .submit:hover,
+.bouton_action_post.secondaire .submit:focus {
+	background: transparent;
+	border-color: #111;
+	color: #111;
+}
 
 /* Boutons link */
 .formulaire_spip .boutons .link,
 .formulaire_spip button.link,
 .bouton_action_post.link .submit {
 	background-color: transparent;
-	padding: 0;
+	padding-left: 0; /* garder une marge verticale */
+	padding-right: 0; /* garder une marge verticale */
 }
 .formulaire_spip .boutons .link:hover,
 .formulaire_spip .boutons .link:focus,
@@ -362,7 +387,6 @@ input[type="submit"],input[type="reset"] {font-size: inherit;}
 .bouton_action_post.link .submit:hover,
 .bouton_action_post.link .submit:focus {
 	background-color: transparent;
-	padding: 0;
 	color: #ENV{foncee};
 }
 .bouton_action_post.link.del {
@@ -370,38 +394,21 @@ input[type="submit"],input[type="reset"] {font-size: inherit;}
 }
 
 /* Boutons block = pleine largeur */
-.formulaire_spip .submit.block {
+.formulaire_spip .submit.bloc {
 	display: block;
 	width: 100%;
 }
-.bouton_action_post.block:not(.link),
+.bouton_action_post.bloc:not(.link),
 .lat .bouton_action_post:not(.link),
-.bouton_action_post.block:not(.link) div,
+.bouton_action_post.bloc:not(.link) div,
 .lat .bouton_action_post:not(.link) div {
 	display: flex;
 }
-.bouton_action_post.block:not(.link) div,
+.bouton_action_post.bloc:not(.link) div,
 .lat .bouton_action_post:not(.link) div,
-.bouton_action_post.block:not(.link) .submit,
+.bouton_action_post.bloc:not(.link) .submit,
 .lat .bouton_action_post:not(.link) .submit {
 	flex: 1 1 auto;
-}
-
-/* Boutons secondaires */
-.formulaire_spip .submit.secondary,
-.bouton_action_post.secondary .submit {
-	background: transparent;
-}
-.formulaire_spip .submit.secondary {
-	border-color: [#(#ENV{claire}|couleur_foncer{0.05})];
-}
-.formulaire_spip .submit.secondary:hover,
-.formulaire_spip .submit.secondary:focus,
-.bouton_action_post.secondary .submit:hover,
-.bouton_action_post.secondary .submit:focus {
-	background: transparent;
-	border-color: #111;
-	color: #111;
 }
 
 /* Groupe de boutons */
@@ -426,21 +433,22 @@ input[type="submit"],input[type="reset"] {font-size: inherit;}
 	border-top-#ENV{left}-radius: 0;
 	border-bottom-#ENV{left}-radius: 0;
 }
-.boutons_groupe > .submit:not(:first-child):not(.secondary),
-.boutons_groupe .bouton_action_post:not(:first-child):not(.secondary) .submit {
-	border-#ENV{left}: 1px solid hsla(0, 0%, 0%, 0.15);
+.boutons_groupe > .submit:not(:first-child):not(.secondaire),
+.boutons_groupe .bouton_action_post:not(:first-child):not(.secondaire) .submit {
+	border-#ENV{left}: 1px solid hsla(0, 0%, 0%, 0.25);
+	margin-left: -1px; /* bordure gauche par dessus le bouton précédent */
 }
-.boutons_groupe > .submit.secondary:not(:last-child),
-.boutons_groupe .bouton_action_post.secondary:not(:last-child) .submit {
+.boutons_groupe > .submit.secondaire:not(:last-child),
+.boutons_groupe .bouton_action_post.secondaire:not(:last-child) .submit {
 	border-#ENV{right}: 0;
 }
-.boutons_groupe.block {
+.boutons_groupe.bloc {
 	display: flex;
 }
-.boutons_groupe.block > .submit,
-.boutons_groupe.block .bouton_action_post,
-.boutons_groupe.block .bouton_action_post div ,
-.boutons_groupe.block .bouton_action_post .submit {
+.boutons_groupe.bloc > .submit,
+.boutons_groupe.bloc .bouton_action_post,
+.boutons_groupe.bloc .bouton_action_post div ,
+.boutons_groupe.bloc .bouton_action_post .submit {
 	flex: 1 1 auto;
 }
 
@@ -502,7 +510,7 @@ input[type="submit"],input[type="reset"] {font-size: inherit;}
 }
 
 /* boutons secondaires */
-.bouton_action_post.secondary .submit {
+.bouton_action_post.secondaire .submit {
 	border-color: #ddd;
 	border-color: hsla(0, 0%, 0%, 0.2);
 }
