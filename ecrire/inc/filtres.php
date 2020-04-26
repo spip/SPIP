@@ -4375,7 +4375,7 @@ function appliquer_traitement_champ($texte, $champ, $table_objet = '', $env = ar
 	$traitement = '';
 	if ($table_objet and (!isset($traitements[0]) or count($traitements) > 1)) {
 		// necessaire pour prendre en charge les vieux appels avec un table_objet_sql en 3e arg
-		$table_objet = table_objet($table_objet);
+		$table_objet = table_objet_sql($table_objet);
 		if (isset($traitements[$table_objet])) {
 			$traitement = $traitements[$table_objet];
 		}
