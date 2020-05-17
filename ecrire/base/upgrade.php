@@ -215,7 +215,7 @@ function maj_base($version_cible = 0, $redirect = '') {
 function maj_plugin($nom_meta_base_version, $version_cible, $maj, $table_meta = 'meta') {
 
 	if ($table_meta !== 'meta') {
-		lire_metas($table_meta);
+		installer_table_meta($table_meta);
 	}
 
 	$current_version = null;

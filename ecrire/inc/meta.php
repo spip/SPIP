@@ -124,15 +124,17 @@ function lire_metas($table = 'meta') {
 function touch_meta($antidate = false, $table = 'meta') {
 	$file = cache_meta($table);
 	if (!$antidate or !@touch($file, $antidate)) {
-		$r = $GLOBALS[$table];
-		unset($r['alea_ephemere']);
-		unset($r['alea_ephemere_ancien']);
-		// le secret du site est utilise pour encoder les contextes ajax que l'on considere fiables
-		// mais le sortir deu cache meta implique une requete sql des qu'on a un form dynamique
-		// meme si son squelette est en cache
-		//unset($r['secret_du_site']);
-		if ($antidate) {
-			$r['touch'] = $antidate;
+		$r = isset($GLOBALS[$table]) ? $GLOBALS[$table] : array();
+		if ($table == 'meta') {
+			unset($r['alea_ephemere']);
+			unset($r['alea_ephemere_ancien']);
+			// le secret du site est utilise pour encoder les contextes ajax que l'on considere fiables
+			// mais le sortir deu cache meta implique une requete sql des qu'on a un form dynamique
+			// meme si son squelette est en cache
+			//unset($r['secret_du_site']);
+			if ($antidate) {
+				$r['touch'] = $antidate;
+			}
 		}
 		ecrire_fichier_securise($file, serialize($r));
 	}
@@ -271,15 +273,47 @@ function installer_table_meta($table) {
  * @param bool $force
  */
 function supprimer_table_meta($table, $force = false) {
-	if ($table == 'meta') {
-		return;
-	} // interdit !
+	if ($table !== 'meta') {
+		// Vérifier le contenu restant de la table
+		$nb_variables = sql_countsel("spip_$table");
 
-	if ($force or !sql_countsel("spip_$table")) {
-		unset($GLOBALS[$table]);
-		sql_drop_table("spip_$table");
-		// vider le cache des tables
-		$trouver_table = charger_fonction('trouver_table', 'base');
-		$trouver_table('');
+		// Supprimer si :
+		// - la table est vide
+		// - ou limitée à la variable charset
+		// - ou qu'on force la suppression
+		if (
+			$force
+			or !$nb_variables
+			or (
+				($nb_variables == 1)
+				and isset($GLOBALS[$table]['charset'])
+			)
+		) {
+			// Supprimer la table des globaleset de la base
+			unset($GLOBALS[$table]);
+			sql_drop_table("spip_$table");
+			// Supprimer le fichier cache
+			include_spip('inc/flock');
+			$cache = cache_meta($table);
+			supprimer_fichier($cache);
+
+			// vider le cache des tables
+			$trouver_table = charger_fonction('trouver_table', 'base');
+			$trouver_table('');
+
+			// Supprimer la table de la liste des tables de configuration autres que spip_meta
+			if (isset($GLOBALS['meta']['tables_config'])) {
+				$liste = unserialize($GLOBALS['meta']['tables_config']);
+				$cle = array_search($table, $liste);
+				if ($cle !== false) {
+					unset($liste[$cle]);
+					if ($liste ) {
+						ecrire_meta('tables_config', serialize($liste));
+					} else {
+						effacer_meta('tables_config');
+					}
+				}
+			}
+		}
 	}
 }

@@ -260,12 +260,7 @@ function ecrire_config($cfg, $store) {
 			return false;
 		} // la config n'existait deja pas !
 		effacer_meta($casier, $table);
-		if (!count($GLOBALS[$table])
-			or count($GLOBALS[$table]) == 1 and isset($GLOBALS[$table]['charset'])
-		) {
-			effacer_meta('charset', $table); // enlevons cette meta
-			supprimer_table_meta($table); // supprimons la table (si elle est bien vide)
-		}
+		supprimer_table_meta($table); // supprimons la table (si elle est bien vide)
 	} // les meta ne peuvent etre que des chaines : il faut serializer le reste
 	else {
 		if (!isset($GLOBALS[$table])) {

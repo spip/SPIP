@@ -39,7 +39,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @note
  *     La fonction quitte (retourne false) si le plugin
  *     n'a pas de version d'installation définie
- *     (information `version_base` dans le paquet.xml)
+ *     (information `schema` dans le paquet.xml)
  *
  * @param string $plug
  *     Nom du plugin
@@ -53,12 +53,15 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     - le tableau de get_infos sinon
  */
 function plugins_installer_dist($plug, $action, $dir_type = '_DIR_PLUGINS') {
+
+	// Charger les informations du XML du plugin et vérification de l'existence d'une installation
 	$get_infos = charger_fonction('get_infos', 'plugins');
 	$infos = $get_infos($plug, false, constant($dir_type));
 	if (!isset($infos['install']) or !$infos['install']) {
 		return false;
 	}
-	// passer en chemin absolu si possible, c'est plus efficace
+
+	// Passer en chemin absolu si possible, c'est plus efficace
 	$dir = str_replace('_DIR_', '_ROOT_', $dir_type);
 	if (!defined($dir)) {
 		$dir = $dir_type;
@@ -70,31 +73,50 @@ function plugins_installer_dist($plug, $action, $dir_type = '_DIR_PLUGINS') {
 			include_once($file);
 		}
 	}
-	$version = isset($infos['schema']) ? $infos['schema'] : '';
-	$arg = $infos;
+
+	// Détermination de la table meta et du nom de la meta plugin
+	$table = 'meta';
+	if (isset($infos['meta']) and ($infos['meta'] !== 'meta')) {
+		$table = $infos['meta'];
+		// S'assurer que les metas de la table spécifique sont bien accessibles dans la globale
+		lire_metas($table);
+	}
+	$nom_meta = $infos['prefix'] . '_base_version';
+
+	// Détermination de la fonction à appeler et de ses arguments
 	$f = $infos['prefix'] . "_install";
 	if (!function_exists($f)) {
 		$f = isset($infos['schema']) ? 'spip_plugin_install' : '';
+		$arg = $infos;
+		// On passe la table et la meta pour éviter de les recalculer dans la fonction appelée
+		$arg['meta'] = $table;
+		$arg['nom_meta'] = $nom_meta;
 	} else {
+		// Ancienne méthode d'installation - TODO à supprimer à terme
+		// stupide: info deja dans le nom
 		$arg = $infos['prefix'];
-	} // stupide: info deja dans le nom
+	}
+	$version = isset($infos['schema']) ? $infos['schema'] : '';
 
 	if (!$f) {
 		// installation sans operation particuliere
 		$infos['install_test'] = array(true, '');
-
 		return $infos;
 	}
+
+	// Tester si l'action demandée est nécessaire ou pas.
 	$test = $f('test', $arg, $version);
 	if ($action == 'uninstall') {
 		$test = !$test;
 	}
-	// Si deja fait, on ne dit rien
+	// Si deja fait, on ne fait rien et on ne dit rien
 	if ($test) {
 		return true;
 	}
-	// Si install et que l'on a la meta d'installation, c'est un upgrade
-	if ($action == 'install' && !is_null(lire_meta($infos['prefix'] . '_base_version'))) {
+
+	// Si install et que l'on a la meta d'installation, c'est un upgrade. On le consigne dans $infos
+	// pour renvoyer le bon message en retour de la fonction.
+	if ($action == 'install' && !empty($GLOBALS[$table][$nom_meta])) {
 		$infos['upgrade'] = true;
 	}
 
@@ -104,25 +126,41 @@ function plugins_installer_dist($plug, $action, $dir_type = '_DIR_PLUGINS') {
 	$f($action, $arg, $version);
 	$aff = ob_get_contents();
 	ob_end_clean();
+
 	// vider le cache des descriptions de tables a chaque (de)installation
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$trouver_table('');
 	$infos['install_test'] = array($f('test', $arg, $version), $aff);
 
+	// Si la table meta n'est pas spip_meta et qu'on est dans la première installation du plugin
+	// on force la création du fichier cache à la date du moment.
+	// On relit les metas de la table pour être sur que la globale soit à jour pour touch_meta.
+	if (
+		($table !== 'meta')
+		and ($action == 'install')
+		and empty($infos['upgrade'])
+	) {
+		touch_meta(false, $table);
+	}
+
 	return $infos;
 }
 
-// Fonction par defaut pour install/desinstall
-
-// http://code.spip.net/@spip_plugin_install
+/**
+ * Fonction standard utilisée par defaut pour install/desinstall
+ *
+ * @param string $action
+ *     Nom de l'action (install|uninstall)
+ * @param array  $infos
+ *     Tableau des informations du XML du plugin complété par le nom et la table meta
+ * @param string $version_cible
+ *     Référence de la version du schéma de données cible
+ *
+ * @return bool|void
+ */
 function spip_plugin_install($action, $infos, $version_cible) {
-	$prefix = $infos['prefix'];
-	if (isset($infos['meta']) and (($table = $infos['meta']) !== 'meta')) {
-		$nom_meta = "base_version";
-	} else {
-		$nom_meta = $prefix . "_base_version";
-		$table = 'meta';
-	}
+	$nom_meta = $infos['nom_meta'];
+	$table = $infos['meta'];
 	switch ($action) {
 		case 'test':
 			return (isset($GLOBALS[$table])
@@ -130,12 +168,12 @@ function spip_plugin_install($action, $infos, $version_cible) {
 				and spip_version_compare($GLOBALS[$table][$nom_meta], $version_cible, '>='));
 			break;
 		case 'install':
-			if (function_exists($upgrade = $prefix . "_upgrade")) {
+			if (function_exists($upgrade = $infos['prefix'] . '_upgrade')) {
 				$upgrade($nom_meta, $version_cible, $table);
 			}
 			break;
 		case 'uninstall':
-			if (function_exists($vider_tables = $prefix . "_vider_tables")) {
+			if (function_exists($vider_tables = $infos['prefix'] . '_vider_tables')) {
 				$vider_tables($nom_meta, $table);
 			}
 			break;
