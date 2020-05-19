@@ -1557,11 +1557,11 @@ function critere_where_dist($idb, &$boucles, $crit) {
 	if (isset($crit->param[0])) {
 		$_where = calculer_liste($crit->param[0], $idb, $boucles, $boucle->id_parent);
 	} else {
-		$_where = '@$Pile[0]["where"]';
+		$_where = 'spip_sanitize_from_request(@$Pile[0]["where"],"where","vide")';
 	}
 
 	if ($crit->cond) {
-		$_where = "(($_where) ? ($_where) : '')";
+		$_where = "((\$zzw = $_where) ? \$zzw : '')";
 	}
 
 	if ($crit->not) {

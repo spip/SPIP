@@ -15,6 +15,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function securiser_redirect_action($redirect) {
+	// cas d'un double urlencode : si un urldecode de l'url n'est pas secure, on retient ca comme redirect
+	if (strpos($redirect, '%') !== false) {
+		$r2 = urldecode($redirect);
+		if (($r3 = securiser_redirect_action($r2)) !== $r2) {
+			return $r3;
+		}
+	}
 	if ((tester_url_absolue($redirect) or preg_match(',^\w+:,',trim($redirect)))
 		and !defined('_AUTORISER_ACTION_ABS_REDIRECT')) {
 		// si l'url est une url du site, on la laisse passer sans rien faire

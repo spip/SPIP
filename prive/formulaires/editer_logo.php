@@ -61,6 +61,7 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 	if (!is_array($options)) {
 		$options = unserialize($options);
 	}
+	$options = spip_sanitize_from_request($options, '*');
 
 	if (!isset($options['titre'])) {
 		$balise_img = chercher_filtre('balise_img');

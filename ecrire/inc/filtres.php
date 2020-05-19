@@ -353,6 +353,17 @@ function filtre_setenv(&$Pile, $val, $key, $continue = null) {
 }
 
 /**
+ * @param array $Pile
+ * @param array|string $keys
+ * @return string
+ */
+function filtre_sanitize_env(&$Pile, $keys) {
+	$Pile[0] = spip_sanitize_from_request($Pile[0], $keys);
+	return '';
+}
+
+
+/**
  * Filtre `debug` qui affiche un debug de la valeur en entrée
  *
  * Log la valeur dans `debug.log` et l'affiche si on est webmestre.

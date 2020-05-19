@@ -5,5 +5,6 @@
 <head>
 <INCLURE{fond=prive/squelettes/head/#ENV{type-page},env,espace_prive=1}>
 </head>
+[(#LISTE{titre,sinon}|sanitize_env)]
 <INCLURE{fond=prive/squelettes/body,env,espace_prive=1}>
 </html>

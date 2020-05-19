@@ -446,6 +446,43 @@ function set_request($var, $val = null, $c = false) {
 	return false; # n'affecte pas $c
 }
 
+/**
+ * Sanitizer une valeur *SI* elle provient du GET ou POST
+ * Utile dans les squelettes pour les valeurs qu'on attrape dans le env,
+ * dont on veut permettre à un squelette de confiance appelant de fournir une valeur complexe
+ * mais qui doit etre nettoyee si elle provient de l'URL
+ *
+ * On peut sanitizer
+ * - une valeur simple : `$where = spip_sanitize_from_request($value, 'where')`
+ * - un tableau en partie : `$env = spip_sanitize_from_request($env, ['key1','key2'])`
+ * - un tableau complet : `$env = spip_sanitize_from_request($env, '*')`
+ *
+ * @param string|array $value
+ * @param string|array $key
+ * @param string $sanitize_function
+ * @return array|mixed|string
+ */
+function spip_sanitize_from_request($value, $key, $sanitize_function='entites_html') {
+	if (is_array($value)) {
+		if ($key=='*') {
+			$key = array_keys($value);
+		}
+		if (!is_array($key)) {
+			$key = [$key];
+		}
+		foreach ($key as $k) {
+			if (!empty($value[$k])) {
+				$value[$k] = spip_sanitize_from_request($value[$k], $k, $sanitize_function);
+			}
+		}
+		return $value;
+	}
+	// si la valeur vient des GET ou POST on la sanitize
+	if (!empty($value) and $value == _request($key)) {
+		$value = $sanitize_function($value);
+	}
+	return $value;
+}
 
 /**
  * Tester si une URL est absolue
