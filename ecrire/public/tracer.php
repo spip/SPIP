@@ -129,6 +129,7 @@ function chrono_requete($temps) {
 	foreach ($temps as $k => $v) {
 		$titre = strip_tags($v[2]);
 		$href = quote_amp($GLOBALS['REQUEST_URI']) . "#req$i";
+		$href = str_replace("\\'", '&#39;', $href);
 
 		if (!isset($t[$v[2]])) {
 			$t[$v[2]] = array();
