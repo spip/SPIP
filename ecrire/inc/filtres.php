@@ -3870,7 +3870,7 @@ function lien_ou_expose($url, $libelle = null, $on = false, $class = "", $title 
  *
  * @param int $nb : le nombre
  * @param string $chaine_un : l'item de langue si $nb vaut un
- * @param string $chaine_plusieurs : l'item de lanque si $nb > 2
+ * @param string $chaine_plusieurs : l'item de lanque si $nb >= 2
  * @param string $var : La variable à remplacer par $nb dans l'item de langue (facultatif, défaut "nb")
  * @param array $vars : Les autres variables nécessaires aux chaines de langues (facultatif)
  * @return string : la chaine de langue finale en utilisant la fonction _T()
@@ -3883,7 +3883,7 @@ function singulier_ou_pluriel($nb, $chaine_un, $chaine_plusieurs, $var = 'nb', $
 		return "";
 	}
 	$vars[$var] = $nb;
-	if ($nb > 2) {
+	if ($nb >= 2) {
 		return _T($chaine_plusieurs, $vars);
 	} else {
 		return _T($chaine_un, $vars);
