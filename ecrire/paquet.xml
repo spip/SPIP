@@ -137,6 +137,8 @@
 	<pipeline nom="trig_propager_les_secteurs" action="" />
 	<pipeline nom="trig_supprimer_objets_lies" action="" />
 	<pipeline nom="trig_purger" action="" />
+	<pipeline nom="objet_trouver_parent" action="" />
+	<pipeline nom="objet_trouver_enfants" action="" />
 
 	<procure nom="iterateurs" version="1.0.6" />
 	<procure nom="queue" version="0.6.8" />
