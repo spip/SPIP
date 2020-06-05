@@ -299,17 +299,19 @@ function verifier_cle_action($action, $cle) {
 /**
  * Calculer le token de prévisu
  *
- * Il permettra de transmettre une URL publique d’un élément non encore publié,
+ * Il permettra
+ * - de generer un jeton de securisation des URLs de previsu pour les rendre non predictibles et propres à chaque auteur connecte
+ * - de transmettre une URL publique d’un élément non encore publié,
  * pour qu’une personne tierce le relise. Valable quelques temps.
  *
- * @see verifier_token_previsu()
+ * @see verifier_token_previsu_relecture()
  * @param string $url Url à autoriser en prévisu
  * @param int|null id_auteur qui génère le token de prévisu. Null utilisera auteur courant.
  * @param string $alea Nom de l’alea à utiliser
  * @return string Token, de la forme "{id}*{hash}"
  */
 function calculer_token_previsu($url, $id_auteur = null, $alea = 'alea_ephemere') {
-	if (is_null($id_auteur)) {
+	if (is_null($id_auteur) or $url === 'all') {
 		if (!empty($GLOBALS['visiteur_session']['id_auteur'])) {
 			$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
 		}
@@ -317,10 +319,19 @@ function calculer_token_previsu($url, $id_auteur = null, $alea = 'alea_ephemere'
 	if (!$id_auteur = intval($id_auteur)) {
 		return "";
 	}
-	// On nettoie l’URL de tous les var_.
-	$url = nettoyer_uri_var($url);
 
-	$token = _action_auteur('previsualiser-' . $url, $id_auteur, null, $alea);
+	// si on passe 'all' pour l'url, on veut un jeton universel de previsu,
+	// utilisable uniquement par l'utilisateur connecte pour lequel il est connecte
+	$pass = null;
+	if ($url === 'all') {
+		$pass = (!empty($_COOKIE['spip_session']) ? $_COOKIE['spip_session'] : $GLOBALS['visiteur_session']['login'] . ':' . $GLOBALS['visiteur_session']['id_auteur']);
+	}
+	else {
+		// On nettoie l’URL de tous les var_.
+		$url = nettoyer_uri_var($url);
+	}
+
+	$token = _action_auteur('previsualiser-' . $url, $id_auteur, $pass, $alea);
 	return "$id_auteur-$token";
 }
 
@@ -334,11 +345,14 @@ function calculer_token_previsu($url, $id_auteur = null, $alea = 'alea_ephemere'
  *
  * @see calculer_token_previsu()
  * @param string $token Token, de la forme '{id}*{hash}'
+ * @param bool $fullaccess
+ *   pour avoir un token personnel d'acces complet a la previsu
  * @return false|array
  *     - `False` si echec,
  *     + Tableau (id auteur, type d’objet, id_objet) sinon.
  */
-function verifier_token_previsu($token) {
+function verifier_token_previsu($token, $fullaccess = false) {
+
 	// retrouver auteur / hash
 	$e = explode('-', $token, 2);
 	if (count($e) == 2 and is_numeric(reset($e))) {
@@ -346,11 +360,21 @@ function verifier_token_previsu($token) {
 	} else {
 		return false;
 	}
+	if ($fullaccess) {
+		// le token d'acces complet n'est pas partageable
+		if (empty($GLOBALS['visiteur_session']['id_auteur'])
+		  or $id_auteur !== $GLOBALS['visiteur_session']['id_auteur']) {
+			return false;
+		}
+		$url = 'all';
+	}
+	else {
 
-	// calculer le type et id de l’url actuelle
-	include_spip('inc/urls');
-	include_spip('inc/filtres_mini');
-	$url = url_absolue(self());
+		// calculer le type et id de l’url actuelle
+		include_spip('inc/urls');
+		include_spip('inc/filtres_mini');
+		$url = url_absolue(self());
+	}
 
 	// verifier le token
 	$_token = calculer_token_previsu($url, $id_auteur, 'alea_ephemere');
@@ -369,16 +393,21 @@ function verifier_token_previsu($token) {
 /**
  * Décrire un token de prévisu en session
  * @uses verifier_token_previsu()
+ * @param bool $fullaccess;
  * @return bool|array
  */
-function decrire_token_previsu() {
-	static $desc = null;
-	if (is_null($desc)) {
-		if ($token = _request('var_previewtoken')) {
-			$desc = verifier_token_previsu($token);
+function decrire_token_previsu($fullaccess = false) {
+	static $desc = [];
+	if (is_null($desc[$fullaccess])) {
+		if (
+		  ($fullaccess and !empty($_COOKIE['spip_previewtoken']) and $token = $_COOKIE['spip_previewtoken'])
+			or ($token = _request('var_previewtoken'))
+			) {
+			$desc[$fullaccess] = verifier_token_previsu($token, $fullaccess);
 		} else {
-			$desc = false;
+			$desc[$fullaccess] = false;
 		}
 	}
-	return $desc;
+	return $desc[$fullaccess];
+
 }

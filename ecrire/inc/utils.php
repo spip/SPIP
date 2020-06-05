@@ -494,6 +494,12 @@ function parametre_url($url, $c, $v = null, $sep = '&amp;') {
 	if (strpos($c, "|") !== false and is_null($v)) {
 		return null;
 	}
+	// cas particulier : si on ajoute var_mode=preview il faut aussi ajouter le token de previsu perso
+	if ($c === 'var_mode' and $v === 'preview'
+	  and !parametre_url($url, 'var_previewtoken')) {
+		include_spip('inc/securiser_action');
+		$url = parametre_url($url, 'var_previewtoken', calculer_token_previsu('all'), $sep);
+	}
 
 	// lever l'#ancre
 	if (preg_match(',^([^#]*)(#.*)$,', $url, $r)) {

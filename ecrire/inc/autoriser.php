@@ -314,7 +314,7 @@ function autoriser_creer_dist($faire, $type, $id, $qui, $opt) {
  * Autorisation de prévisualiser un contenu
  *
  * @uses test_previsualiser_objet_champ()
- * @uses decrire_token_previsu()
+ * @uses decrire_token_previsu_relecture()
  *
  * @param  string $faire Action demandée
  * @param  string $type Type d'objet sur lequel appliquer l'action
@@ -325,13 +325,17 @@ function autoriser_creer_dist($faire, $type, $id, $qui, $opt) {
  **/
 function autoriser_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 
+	include_spip('inc/securiser_action');
 	// Le visiteur a-t-il un statut prevu par la config ?
 	if (strpos($GLOBALS['meta']['preview'], ',' . $qui['statut'] . ',') !== false) {
+		// dans l'espace public il faut avoir son jeton personalise qui rend les urls de previsu non predictibles
+		if (!test_espace_prive() and !decrire_token_previsu(true)) {
+			return false;
+		}
 		return test_previsualiser_objet_champ($type, $id, $qui, $opt);
 	}
 
 	// A-t-on un token de prévisualisation valable ?
-	include_spip('inc/securiser_action');
 	if (decrire_token_previsu()) {
 		return true;
 	}

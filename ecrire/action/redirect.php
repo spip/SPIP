@@ -65,6 +65,13 @@ function action_redirect_dist() {
 	if ($url) {
 		if ($var_mode) {
 			$url = parametre_url($url, 'var_mode', $var_mode, '&');
+			// ne pas prendre le token automatique ici : il faut qu'il soit fourni dans l'URL d'appel de l'action
+			$url = parametre_url($url, 'var_previewtoken', '', '&');
+			// auquel cas on le pose en cookie pour ne pas encombrer les urls de previsu et laisser la place pour le token de previsu partagee
+			if ($previewtoken = _request('var_previewtoken')) {
+				include_spip('inc/cookie');
+				spip_setcookie('spip_previewtoken', $previewtoken);
+			}
 		}
 
 		if ($var_mode == 'preview'

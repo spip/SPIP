@@ -161,6 +161,12 @@ if (!$var_auth and isset($_COOKIE['spip_lang_ecrire'])
 	action_converser_post($GLOBALS['visiteur_session']['lang'], true);
 }
 
+// supprimer le token de previsu des qu'on mets les pied dans ecrire
+if (!$var_auth and isset($_COOKIE['spip_previewtoken'])) {
+	spip_setcookie('spip_previewtoken', '', time()-3600);
+	unset($_COOKIE['spip_previewtoken']);
+}
+
 if ($var_f = tester_url_ecrire($exec)) {
 	$var_f = charger_fonction($var_f);
 	$var_f(); // at last
