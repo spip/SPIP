@@ -304,7 +304,7 @@ function verifier_cle_action($action, $cle) {
  * - de transmettre une URL publique d’un élément non encore publié,
  * pour qu’une personne tierce le relise. Valable quelques temps.
  *
- * @see verifier_token_previsu_relecture()
+ * @see verifier_token_previsu()
  * @param string $url Url à autoriser en prévisu
  * @param int|null id_auteur qui génère le token de prévisu. Null utilisera auteur courant.
  * @param string $alea Nom de l’alea à utiliser

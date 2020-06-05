@@ -314,7 +314,7 @@ function autoriser_creer_dist($faire, $type, $id, $qui, $opt) {
  * Autorisation de prévisualiser un contenu
  *
  * @uses test_previsualiser_objet_champ()
- * @uses decrire_token_previsu_relecture()
+ * @uses decrire_token_previsu()
  *
  * @param  string $faire Action demandée
  * @param  string $type Type d'objet sur lequel appliquer l'action
