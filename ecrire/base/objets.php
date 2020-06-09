@@ -1306,19 +1306,21 @@ function objet_trouver_parent($objet, $id_objet) {
 				
 				// Si le type est fixe
 				if (isset($parent_methode['type'])) {
-					return array(
+					$parent = array(
 						'objet' 	=> $parent_methode['type'],
 						'id_objet'	=> intval($ligne[$parent_methode['champ']]),
 						'champ' 	=> $parent_methode['champ'],
 					);
+					break;
 				}
 				elseif (isset($parent_methode['champ_type'])) {
-					return array(
+					$parent = array(
 						'objet' 	 => $ligne[$parent_methode['champ_type']],
 						'id_objet' 	 => intval($ligne[$parent_methode['champ']]),
 						'champ' 	 => $parent_methode['champ'],
 						'champ_type' => $parent_methode['champ_type'],
 					);
+					break;
 				}
 			}
 		}
