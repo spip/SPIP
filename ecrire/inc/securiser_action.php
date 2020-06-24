@@ -398,16 +398,15 @@ function verifier_token_previsu($token, $fullaccess = false) {
  */
 function decrire_token_previsu($fullaccess = false) {
 	static $desc = [];
-	if (is_null($desc[$fullaccess])) {
+	if (!isset($desc[$fullaccess])) {
 		if (
-		  ($fullaccess and !empty($_COOKIE['spip_previewtoken']) and $token = $_COOKIE['spip_previewtoken'])
+			($fullaccess and !empty($_COOKIE['spip_previewtoken']) and $token = $_COOKIE['spip_previewtoken'])
 			or ($token = _request('var_previewtoken'))
-			) {
+		) {
 			$desc[$fullaccess] = verifier_token_previsu($token, $fullaccess);
 		} else {
 			$desc[$fullaccess] = false;
 		}
 	}
 	return $desc[$fullaccess];
-
 }
