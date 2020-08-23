@@ -3966,6 +3966,47 @@ function singulier_ou_pluriel($nb, $chaine_un, $chaine_plusieurs, $var = 'nb', $
 
 
 /**
+ * Variante de singulier_ou_pluriel pour la langue arabe
+ *
+ * @see  singulier_ou_pluriel()
+ *
+ * @param int $nb : le nombre
+ * @param string $chaine_un : l'item de langue si $nb vaut un
+ * @param string $chaine_plusieurs : l'item de lanque si $nb >= 2
+ * @param string $var : La variable à remplacer par $nb dans l'item de langue (facultatif, défaut "nb")
+ * @param array $vars : Les autres variables nécessaires aux chaines de langues (facultatif)
+ * @return string : la chaine de langue finale en utilisant la fonction _T()
+ */
+function singulier_ou_pluriel_ar($nb, $chaine_un, $chaine_plusieurs, $var = 'nb', $vars = array()) {
+	$fem = substr(_T($chaine_un), -2);
+	switch (true) {
+		case ($nb == 1):
+			if ($fem == 'ة') {
+				$un = _T($chaine_un) . ' واحدة';
+			} else {
+				$un = _T($chaine_un) . ' واحد';
+			}
+			return $un;
+			break;
+		case ($nb == 2):
+			if ($fem == 'ة') {
+				$deux = rtrim(_T($chaine_un), $fem) . 'تان';
+			} else {
+				$deux = _T($chaine_un) . 'ان';
+			}
+			return $deux;
+			break;
+		case ($nb >2 && $nb < 11):
+			return _T($chaine_plusieurs, $vars);
+			break;
+		default:
+			$chaine_un = $nb . ' ' . $chaine_un;
+			return _T($chaine_un, $vars);
+	}
+}
+
+
+/**
  * Fonction de base pour une icone dans un squelette
  * structure html : `<span><a><img><b>texte</b></span>`
  *
