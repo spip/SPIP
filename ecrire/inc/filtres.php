@@ -3938,18 +3938,30 @@ function lien_ou_expose($url, $libelle = null, $on = false, $class = "", $title 
  * @return string : la chaine de langue finale en utilisant la fonction _T()
  */
 function singulier_ou_pluriel($nb, $chaine_un, $chaine_plusieurs, $var = 'nb', $vars = array()) {
+	$texte = '';
+	$langue = $GLOABLS['spip_lang'];
+
 	if (!is_numeric($nb) or $nb == 0) {
-		return "";
+		$texte = "";
 	}
 	if (!is_array($vars)) {
-		return "";
+		$texte = "";
 	}
 	$vars[$var] = $nb;
-	if ($nb >= 2) {
-		return _T($chaine_plusieurs, $vars);
+
+	// utiliser une éventuelle fonction propre à la langue en cours
+	if ($fn = charger_fonction("singulier_ou_pluriel_${langue}", '', true)) {
+		$texte = $fn($nb, $chaine_un, $chaine_plusieurs, $var, $vars);
 	} else {
-		return _T($chaine_un, $vars);
+		// sinon fr par défaut
+		if ($nb >= 2) {
+			$texte = _T($chaine_plusieurs, $vars);
+		} else {
+			$texte = _T($chaine_un, $vars);
+		}
 	}
+
+	return $texte;
 }
 
 
