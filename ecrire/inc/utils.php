@@ -3129,7 +3129,7 @@ function exec_info_dist() {
 
 	include_spip('inc/autoriser');
 	if (autoriser('webmestre')) {
-		phpinfo();
+		phpinfo(INFO_GENERAL | INFO_CREDITS | INFO_CONFIGURATION | INFO_MODULES | INFO_ENVIRONMENT | INFO_LICENSE);
 	} else {
 		include_spip('inc/filtres');
 		sinon_interdire_acces();
