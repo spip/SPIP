@@ -232,7 +232,7 @@ function traiter_formulaires_dynamiques($get = false) {
 		}
 
 		// accessibilite : si des erreurs mais pas de message general l'ajouter
-		if (count($post["erreurs_$form"]) and !isset($post["erreurs_$form"]['message_erreur'])) {
+		if ((isset($post["erreurs_$form"]) and count($post["erreurs_$form"])) and !isset($post["erreurs_$form"]['message_erreur'])) {
 			$post["erreurs_$form"]['message_erreur'] = singulier_ou_pluriel(count($post["erreurs_$form"]),
 				'avis_1_erreur_saisie', 'avis_nb_erreurs_saisie');
 		}
@@ -246,7 +246,7 @@ function traiter_formulaires_dynamiques($get = false) {
 			return true; // on a fini le hit
 		}
 		$retour = "";
-		if ((count($post["erreurs_$form"]) == 0)) {
+		if (isset($post["erreurs_$form"]) and (count($post["erreurs_$form"]) == 0)) {
 			$rev = "";
 			if ($traiter = charger_fonction("traiter", "formulaires/$form/", true)) {
 				$rev = call_user_func_array($traiter, $args);
