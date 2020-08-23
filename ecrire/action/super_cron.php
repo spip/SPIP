@@ -38,9 +38,17 @@ function action_super_cron_dist() {
 	if (function_exists('fsockopen')) {
 		$url = generer_url_action('cron');
 		$parts = parse_url($url);
-		$fp = fsockopen($parts['host'],
-			isset($parts['port']) ? $parts['port'] : 80,
-			$errno, $errstr, 30);
+		switch ($parts['scheme']) {
+			case 'https':
+				$scheme = 'ssl://';
+				$port = 443;
+				break;
+			case 'http':
+			default:
+				$scheme = '';
+				$port = 80;
+		}
+		$fp = fsockopen($scheme . $parts['host'], isset($parts['port']) ? $parts['port'] : $port, $errno, $errstr, 30);
 		if ($fp) {
 			$out = "GET " . $parts['path'] . "?" . $parts['query'] . " HTTP/1.1\r\n";
 			$out .= "Host: " . $parts['host'] . "\r\n";
