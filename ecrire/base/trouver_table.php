@@ -152,7 +152,7 @@ function base_trouver_table_dist($nom, $serveur = '', $table_spip = true) {
 		$desc = sql_showtable($nom_sql, $table_spip, $serveur);
 		if (!$desc or !$desc['field']) {
 			if (!$fdesc) {
-				spip_log("trouver_table: table inconnue '$serveur' '$nom'", _LOG_INFO_IMPORTANTE);
+				spip_log("trouver_table: table inconnue '$serveur' '$nom'", 'base' . _LOG_INFO_IMPORTANTE);
 
 				return null;
 			}
@@ -162,6 +162,12 @@ function base_trouver_table_dist($nom, $serveur = '', $table_spip = true) {
 			$desc['exist'] = false;
 		} else {
 			$desc['exist'] = true;
+			// gerer le cas des cles vides (echec de l'analyse sur une vue par exemple)
+			// pour recuperer la declaration de lister_tables_objets_sql() si il y en a une
+			if (! $desc['key']) {
+				spip_log("trouver_table: table sans cle '$serveur' '$nom'", 'base');
+				unset($desc['key']);
+			}
 		}
 
 		$desc['table'] = $desc['table_sql'] = $nom_sql;
@@ -171,6 +177,10 @@ function base_trouver_table_dist($nom, $serveur = '', $table_spip = true) {
 		// en lui passant les infos connues
 		// $desc est prioritaire pour la description de la table
 		$desc = array_merge(lister_tables_objets_sql($nom_sql, $desc), $desc);
+		// s'assurer qu'on a toujours un 'key'
+		if (! isset($desc['key'])) {
+			$desc['key'] = array();
+		}
 
 		// si tables_objets_sql est bien fini d'init, on peut cacher
 		$connexion['tables'][$nom_sql] = $desc;
