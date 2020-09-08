@@ -1,0 +1,13 @@
+Unsynced commit 'ebcf7f8f942c2c9d9162227fbd68c7b25f4f4547' referred by 'branch master' has been detected at September 08, 2020;
+Git and Subversion repositories are out of sync at the moment.
+
+To translate this unsynced commit to Subversion and restore synchronized state do:
+
+1. Fetch unsynced commit to your local Git clone
+    $ git fetch origin refs/subgit/unsynced/heads/master/4:refs/subgit/unsynced/heads/master/4
+
+2. Merge fetched ref to 'branch master'
+    $ git merge refs/subgit/unsynced/heads/master/4 refs/heads/master
+
+3. Push merged commit back to the Git repository
+    $ git push origin refs/heads/master
