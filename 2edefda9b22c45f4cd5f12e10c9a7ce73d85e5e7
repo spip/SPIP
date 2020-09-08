@@ -1,0 +1,13 @@
+Unsynced commit '2edefda9b22c45f4cd5f12e10c9a7ce73d85e5e7' referred by 'branch spip-3.2' has been detected at September 08, 2020;
+Git and Subversion repositories are out of sync at the moment.
+
+To translate this unsynced commit to Subversion and restore synchronized state do:
+
+1. Fetch unsynced commit to your local Git clone
+    $ git fetch origin refs/subgit/unsynced/heads/spip-3.2/5:refs/subgit/unsynced/heads/spip-3.2/5
+
+2. Merge fetched ref to 'branch spip-3.2'
+    $ git merge refs/subgit/unsynced/heads/spip-3.2/5 refs/heads/spip-3.2
+
+3. Push merged commit back to the Git repository
+    $ git push origin refs/heads/spip-3.2
