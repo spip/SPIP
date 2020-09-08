@@ -2412,7 +2412,7 @@ function calculer_vieux_in($params) {
  *     - nom de la colonne de date (si le calcul n'est pas relatif)
  **/
 function calculer_critere_infixe_date($idb, &$boucles, $col) {
-	if (!preg_match(",^((age|jour|mois|annee)_relatif|date|mois|annee|jour|heure|age)(_[a-z]+)?$,", $col, $regs)) {
+	if (!preg_match(",^((age|jour|mois|annee)_relatif|date|mois|annee|jour|heure|age)(_[a-z_]+)?$,", $col, $regs)) {
 		return '';
 	}
 
