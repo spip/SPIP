@@ -11,3 +11,7 @@ To translate this unsynced commit to Subversion and restore synchronized state d
 
 3. Push merged commit back to the Git repository
     $ git push origin refs/heads/spip-3.2
+
+Automatic recovery from the out of sync state has failed:
+
+'branches/spip-3.2@24645' is out of date: it has been modified externally at r24668; retry the operation once again
