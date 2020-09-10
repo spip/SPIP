@@ -1,7 +1,7 @@
 <script type='text/javascript'>/*<![CDATA[*/
 function date_picker_options(){
 	return {
-		buttonText: '<:afficher_calendrier|texte_script:>',
+		buttonText: '',
 		buttonImage: '#CHEMIN_IMAGE{calendrier-16.png}',
 		buttonImageOnly: true,
 		closeText: '<:bouton_fermer|texte_script:>',
@@ -55,7 +55,8 @@ function date_picker_init(){
 			}
 			jQuery(this)
 				.datepicker(jQuery.extend(date_picker_options(),options))
-				.trigger('datePickerLoaded');
+				.trigger('datePickerLoaded')
+                .next('.ui-datepicker-trigger').removeAttr('title');
 		});
 	
 	// Initialisation du sélecteur sur les champs d'heure
