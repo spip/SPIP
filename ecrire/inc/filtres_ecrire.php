@@ -434,7 +434,7 @@ function lien_article_virtuel($virtuel) {
  */
 function bouton_spip_rss($op, $args = array(), $lang = '', $title = 'RSS') {
 	include_spip('inc/acces');
-	$clic = http_img_pack('feed.png', 'RSS', '', $title);
+	$clic = http_img_pack('rss-16.png', 'RSS', '', $title);
 	$args = param_low_sec($op, $args, $lang, 'rss');
 	$url = generer_url_public('rss', $args);
 

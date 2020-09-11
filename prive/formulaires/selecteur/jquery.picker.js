@@ -66,7 +66,7 @@ item_picked et picker doivent seulement etre voisins
 				+'<input type="hidden" name="'+name+'[]" value="'+id_item+'"/>'
 				+ title
 				+((select&&obligatoire)?"":" <a title='"+label_supprimer+"' href='#' onclick='jQuery(this).item_unpick();return false;'>"
-				  +"<img alt='"+label_supprimer+"' src='"+img_unpick+"' /></a>"
+				  +"<img alt='"+label_supprimer+"' src='"+img_unpick+"' width='12' height='12'/></a>"
 				  )
 				+'<span class="sep">, </span></li>').removeClass('changing').stopAnimeajax();
 				// masquer le selecteur apres un pick

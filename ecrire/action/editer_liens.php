@@ -211,6 +211,7 @@ function objet_trouver_liens($objets_source, $objets_lies, $cond = null) {
  * @return int
  */
 function objet_optimiser_liens($objets_source, $objets_lies) {
+	spip_log("objet_optimiser_liens : ".json_encode($objets_source) . ', ' . json_encode($objets_lies), 'genie'._LOG_DEBUG);
 	return objet_traiter_liaisons('lien_optimise', $objets_source, $objets_lies);
 }
 
@@ -745,8 +746,10 @@ function lien_optimise($objet_source, $primary, $table_lien, $id, $objets) {
 						array("$primary=" . $row['id'], "id_objet=" . $row['id_objet'], "objet=" . sql_quote($type)));
 					if ($e != false) {
 						$dels += $e;
-						spip_log("Entree " . $row['id'] . "/" . $row['id_objet'] . "/$type supprimee dans la table $table_lien",
-							_LOG_INFO_IMPORTANTE);
+						spip_log(
+							"lien_optimise: Entree " . $row['id'] . "/" . $row['id_objet'] . "/$type supprimee dans la table $table_lien",
+							'genie'._LOG_INFO_IMPORTANTE
+						);
 					}
 				}
 			}

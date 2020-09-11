@@ -142,23 +142,23 @@
 	<procure nom="queue" version="0.6.8" />
 	<procure nom="jquery" version="3.5.1" />
 
-	<menu nom="menu_accueil" titre="icone_accueil" icone="images/accueil-48.png" action="accueil" />
-	<menu nom="menu_edition" titre="icone_edition" icone="images/edition-48.png" action="navigation" parametres="menu=menu_edition" />
+	<menu nom="menu_accueil" titre="icone_accueil" icone="images/menu-accueil.svg" action="accueil" />
+	<menu nom="menu_edition" titre="icone_edition" icone="images/menu-edition.svg" action="navigation" parametres="menu=menu_edition" />
 	<menu nom="auteurs" titre="icone_auteurs" parent="menu_edition" icone="images/auteur-16.png" />
 	<menu nom="rubriques" titre="info_rubriques" parent="menu_edition" icone="images/rubrique-16.png" action="rubriques" />
 	<menu nom="articles" titre="info_articles_2" parent="menu_edition" icone="images/article-16.png" />
-	<menu nom="menu_publication" titre="icone_publication" icone="images/publication-48.png" action="navigation" parametres="menu=menu_publication" />
+	<menu nom="menu_publication" titre="icone_publication" icone="images/menu-publication.svg" action="navigation" parametres="menu=menu_publication" />
 	<menu nom="suivi_edito" titre="icone_suivi_publication" parent="menu_publication" icone="images/suivi-16.png" />
 	<menu nom="synchro" titre="icone_suivi_activite" parent="menu_publication" icone="images/rss-16.png" />
-	<menu nom="menu_activite" titre="icone_activite" icone="images/activite-48.png" action="navigation" parametres="menu=menu_activite" />
+	<menu nom="menu_activite" titre="icone_activite" icone="images/menu-activite.svg" action="navigation" parametres="menu=menu_activite" />
 	<menu nom="visiteurs" titre="icone_afficher_visiteurs" parent="menu_activite" icone="images/auteur-6forum-16.png" action="visiteurs" />
-	<menu nom="menu_squelette" titre="icone_squelette" icone="images/squelette-48.png" action="navigation" parametres="menu=menu_squelette" />
-	<menu nom="menu_administration" titre="icone_administration" icone="images/administration-48.png" action="navigation" parametres="menu=menu_administration" />
+	<menu nom="menu_squelette" titre="icone_squelette" icone="images/menu-squelette.svg" action="navigation" parametres="menu=menu_squelette" />
+	<menu nom="menu_administration" titre="icone_administration" icone="images/menu-administration.svg" action="navigation" parametres="menu=menu_administration" />
 	<menu nom="admin_vider" titre="onglet_vider_cache" parent="menu_administration" icone="images/cache-empty-16.png" />
 	<menu nom="admin_maintenir" titre="titre_admin_tech" parent="menu_administration" icone="images/base-maintenance-16.png" action="admin_tech" />
 	<menu nom="job_queue" titre="queue_titre" parent="menu_administration" icone="images/queue-process-16.png" />
 	<menu nom="phpinfos" titre="phpinfo" parent="menu_administration" icone="images/php-16.png" action="info" />
-	<menu nom="menu_configuration" titre="icone_configuration" icone="images/configuration-48.png" action="navigation" parametres="menu=menu_configuration" />
+	<menu nom="menu_configuration" titre="icone_configuration" icone="images/menu-configuration.svg" action="navigation" parametres="menu=menu_configuration" />
 	<menu nom="configurer_identite" titre="titre_identite_site" parent="menu_configuration" icone="images/identite-16.png" action="configurer_identite" />
 	<menu nom="configurer_langue" titre="info_langue_principale" parent="menu_configuration" icone="images/langue-16.png" />
 	<menu nom="configurer_multilinguisme" titre="info_multilinguisme" parent="menu_configuration" icone="images/traduction-16.png" />
@@ -166,7 +166,7 @@
 	<menu nom="configurer_interactions" titre="onglet_interactivite" parent="menu_configuration" icone="images/config-interaction-16.png" />
 	<menu nom="configurer_avancees" titre="onglet_fonctions_avances" parent="menu_configuration" icone="images/configuration-16.png" />
 	<menu nom="admin_plugin" titre="icone_admin_plugin" parent="menu_configuration" position="-1" icone="images/plugin-16.png" />
-	<menu nom="menu_developpement" titre="icone_developpement" icone="images/developpement-48.png" action="navigation" parametres="menu=menu_developpement" />
+	<menu nom="menu_developpement" titre="icone_developpement" icone="images/menu-developpement.svg" action="navigation" parametres="menu=menu_developpement" />
 	<menu nom="outils_collaboratifs" titre="icone_outils_collaboratifs" />
 	<menu nom="outils_rapides" titre="icone_outil_rapides" />
 	<menu nom="rubrique_creer" titre="icone_creer_rubrique_2" parent="outils_rapides" icone="images/rubrique-new-16.png" action="rubrique_edit" parametres="new=oui&amp;id_parent=@id_rubrique@" />

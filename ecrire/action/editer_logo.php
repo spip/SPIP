@@ -128,6 +128,7 @@ function logo_modifier($objet, $id_objet, $etat, $source) {
 	logo_supprimer($objet, $id_objet, $etat);
 
 
+	include_spip('inc/autoriser');
 	$source['mode'] = $mode_document;
 	$ajouter_documents = charger_fonction('ajouter_documents', 'action');
 	autoriser_exception('associerdocuments', $objet, $id_objet);

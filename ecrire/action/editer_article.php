@@ -178,8 +178,7 @@ function article_inserer($id_rubrique, $set = null) {
 	// eviter $id_secteur = NULL (erreur sqlite) si la requete precedente echoue 
 	// cas de id_rubrique = -1 par exemple avec plugin "pages"
 	$id_secteur = isset($row['id_secteur']) ? $row['id_secteur'] : 0;
-
-	$lang_rub = $row['lang'];
+	$lang_rub = isset($row['lang']) ? $row['lang'] : '';
 
 	$lang = "";
 	$choisie = 'non';
