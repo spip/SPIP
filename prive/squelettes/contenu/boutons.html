@@ -1,0 +1,247 @@
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/prism.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/prism-autoloader.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/themes/prism-okaidia.min.css">
+
+<h1><a href="https://core.spip.net/issues/4468">Ticket 4468</a></h1>
+
+#SET{actions,   #LISTE{new,add,edit,del,config}}
+#SET{variantes, #LISTE{'',principal,secondaire,link,danger}}
+#SET{icones,    #LISTE{add,edit,del,config,export,import,fermer,ouvrir,ok}}
+#SET{tailles,   #LISTE{16,24,32}}
+
+<section class="issue clearfix">
+	<h3>Icônes</h3>
+	
+	<p>Boutons icônes horizontales et verticales</p>
+	<pre><code class="language-html">[(\#URL|icone_horizontale{…, …, fonction})]</code></pre>
+	<div class="issue__group clearfix">
+		<BOUCLE_icoco(DATA) {source table, #LISTE{horizontale,verticale}}>
+		#SET{filtre,icone_#VALEUR}
+		#SET{align,#VALEUR|=={verticale}|?{left}}
+		<div class="[(#COMPTEUR_BOUCLE|alterner{gauche,droite})]">
+			<h4 class="h5">[(#VALEUR|ucfirst)s]</h4>
+			[(#SELF|appliquer_filtre{#GET{filtre},Défaut,rubrique,'',#GET{align}})]
+			<BOUCLE_icones(DATA) {source table, #GET{actions}}>
+			[(#SELF|appliquer_filtre{#GET{filtre},.#VALEUR,rubrique,#VALEUR,#GET{align}})]
+			</BOUCLE_icones>
+			<BOUCLE_icones_tailles(DATA) {source table, #GET{tailles}}>
+			[(#SELF|appliquer_filtre{#GET{filtre},.s#VALEUR,rubrique-#VALEUR,'',[(#GET{align})][ (#COMPTEUR_BOUCLE|=={1}|oui)clearleft]})]
+			</BOUCLE_icones_tailles>
+			[(#SELF|appliquer_filtre{#GET{filtre},.left,rubrique,'',left clearleft})]
+			[(#SELF|appliquer_filtre{#GET{filtre},.center,rubrique,'',center})]
+			[(#SELF|appliquer_filtre{#GET{filtre},.right,rubrique,'',right})]
+		</div>
+		</BOUCLE_icoco>
+	</div>
+</section>
+
+<section class="issue clearfix">
+	<h3>Liens boutons</h3>
+	<p>Classe .bouton pour afficher des liens sous forme de bouton.</p>
+<pre><code class="language-html">&lt;a class=&quot;bouton&quot;&gt;&mldr;&lt;/a&gt;&#10;&lt;a class=&quot;bouton&quot;&gt;&lt;img class=&quot;icone-image&quot;/&gt;&mldr;&lt;/a&gt;&#10;&lt;div class=&quot;groupe-boutons&quot;&gt;&#10;&#9;&lt;a class=&quot;bouton&quot;&gt;&mldr;&lt;/a&gt;&#10;&#9;&lt;a class=&quot;bouton&quot;&gt;&mldr;&lt;/a&gt;&#10;&lt;/div&gt;</code></pre>
+
+	<div class="issue__subgroup clearfix">
+		<div class="gauche">Défaut et variantes</div>
+		<div class="droite">
+			<BOUCLE_variantes(DATA) {source table, #GET{variantes}}>
+			<a href="#" class="bouton[ (#VALEUR)]">[(#VALEUR|?{.#VALEUR,Défaut})]</a>
+			</BOUCLE_variantes>
+		</div>
+	</div>
+	<div class="issue__subgroup clearfix">
+		<div class="gauche">Pleine largeur</div>
+		<div class="droite">
+			<a href="#" class="bouton bloc">.bloc</a>
+		</div>
+	</div>
+	<div class="issue__subgroup clearfix">
+		<div class="gauche">Avec icônes prédéfinies</div>
+		<div class="droite">
+			<BOUCLE_icones2(DATA) {source table, #GET{icones}}>
+			<a href="#" class="bouton[ (#VALEUR)]">[ (#VALEUR|?{.#VALEUR,Défaut})]</a>
+			</BOUCLE_icones2>
+		</div>
+	</div>
+	<div class="issue__subgroup clearfix">
+		<div class="gauche">Avec icône dans le HTML</div>
+		<div class="droite">
+			<a href="#" class="bouton[ (#VALEUR)]">[(#CHEMIN_IMAGE{php-16.svg}|balise_img{'',icone-image}) ][ (#VALEUR|?{.#VALEUR})]Icône manuelle</a>
+		</div>
+	</div>
+	<div class="issue__subgroup clearfix">
+		<div class="gauche">Tailles</div>
+		<div class="droite">
+			<a href="#" class="bouton s16">.s16</a>
+			<a href="#" class="bouton add s16">.s16</a> <small>(Taille par défaut)</small>
+			<br><a href="#" class="bouton s24">.s24</a>
+			<a href="#" class="bouton add s24">.s24</a>
+			<br><a href="#" class="bouton s32">.s32</a>
+			<a href="#" class="bouton add s32">.s32</a>
+		</div>
+	</div>
+	<div class="issue__subgroup clearfix">
+		<div class="gauche">Flottantes</div>
+		<div class="droite">
+			<a href="#" class="bouton left">.left</a>
+			<a href="#" class="bouton right">.right</a>
+		</div>
+	</div>
+	<div class="issue__subgroup clearfix">
+		<div class="gauche">Désactivé</div>
+		<div class="droite">
+			<BOUCLE_variantes_desactive(DATA) {source table, #GET{variantes}}>
+			<a href="#" class="bouton desactive[ (#VALEUR)]">[(#VALEUR)].desactive</a>
+			</BOUCLE_variantes_desactive>
+		</div>
+	</div>
+	<div class="issue__subgroup clearfix">
+		<div class="gauche">Groupe de boutons<br>→ variantes .bloc et .vertical</div>
+		<div class="droite">
+			<BOUCLE_groupe_variante(DATA) {source table, #LISTE{'',bloc,vertical,vertical bloc}}>
+			<div class="groupe-boutons #VALEUR">
+				<a href="#" class="bouton">Bouton</a>
+				<a href="#" class="bouton">Bouton</a>
+				<a href="#" class="bouton">Bouton</a>
+			</div>
+			<div class="groupe-boutons #VALEUR">
+				<BOUCLE_groupe_variante_btn(DATA) {source table, #LISTE{'',principal,secondaire}} {si #GET{popo}}>
+				<a href="#" class="bouton #VALEUR">Bouton</a>
+				</BOUCLE_groupe_variante_btn>
+			</div>
+			</BOUCLE_groupe_variante>
+		</div>
+	</div>
+</section>
+
+<section class="issue clearfix">
+	<h3>Boutons d'action</h3>
+	<p>Affichage identique à .bouton, mêmes variantes.</p>
+	<p>
+<pre><code class="language-html">\#BOUTON_ACTION{…, …, …, variante}</code></pre>
+	</p>
+
+	<div class="issue__subgroup clearfix">
+		<div class="gauche">Base et variantes</div>
+		<div class="droite">
+			<BOUCLE_variantes2(DATA) {source table, #GET{variantes}}>
+			[(#BOUTON_ACTION{#VALEUR|?{.#VALEUR,Défaut},#SELF,#VALEUR})]
+			</BOUCLE_variantes2>
+		</div>
+	</div>
+	<div class="issue__subgroup clearfix">
+		<div class="gauche">Pleine largeur</div>
+		<div class="droite">
+			[(#BOUTON_ACTION{.bloc,#SELF,bloc})]
+		</div>
+	</div>
+	<div class="issue__subgroup clearfix">
+		<div class="gauche">Avec icônes normées</div>
+		<div class="droite">
+			<BOUCLE_icones3(DATA) {source table, #GET{icones}}>
+			[(#BOUTON_ACTION{#VALEUR|?{.#VALEUR,Défaut},#SELF,#VALEUR})]
+			</BOUCLE_icones3>
+		</div>
+	</div>
+	<div class="issue__subgroup clearfix">
+		<div class="gauche">Avec icône dans le HTML</div>
+		<div class="droite">
+			[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{php-16.svg}|balise_img{'',icone-image}) ]Icône manuelle,#SELF})]
+		</div>
+	</div>
+	<div class="issue__subgroup clearfix">
+		<div class="gauche">Flottantes droite/gauche</div>
+		<div class="droite">
+			[(#BOUTON_ACTION{.left,#SELF,left})]
+			[(#BOUTON_ACTION{.right,#SELF,right})]
+		</div>
+	</div>
+	<div class="issue__subgroup clearfix">
+		<div class="gauche">Groupe de boutons</div>
+		<div class="droite">
+			<div class="groupe-boutons">
+				#BOUTON_ACTION{Bouton,#SELF}
+				#BOUTON_ACTION{Bouton,#SELF}
+				#BOUTON_ACTION{Bouton,#SELF}
+			</div>
+			<div class="groupe-boutons">
+				#BOUTON_ACTION{Bouton,#SELF,secondaire}
+				#BOUTON_ACTION{Bouton,#SELF,secondaire}
+				#BOUTON_ACTION{Bouton,#SELF,secondaire}
+			</div>
+			<div class="groupe-boutons bloc">
+				#BOUTON_ACTION{Bouton,#SELF}
+				#BOUTON_ACTION{Bouton,#SELF}
+				#BOUTON_ACTION{Bouton,#SELF}
+			</div>
+			<div class="groupe-boutons bloc">
+				#BOUTON_ACTION{Bouton,#SELF,secondaire}
+				#BOUTON_ACTION{Bouton,#SELF,secondaire}
+				#BOUTON_ACTION{Bouton,#SELF,secondaire}
+			</div>
+		</div>
+	</div>
+	<div class="issue__subgroup clearfix">
+		<div class="gauche"><span class="obsolete">Obsolète : classe .icone</span></div>
+		<div class="droite">
+			[(#BOUTON_ACTION{.icone,#SELF,icone rubrique-16 horizontale s16})]
+			[ (#BOUTON_ACTION{.icone.del.danger,#SELF,icone horizontale s16 del danger})]
+		</div>
+	</div>
+
+</section>
+
+<section class="issue clearfix">
+	<h3 class="h5">Boutons de formulaires</h3>
+	<p>Affichage identique à .bouton sauf le défaut qui utilise la couleur foncée du thème au lieu du gris, mêmes variantes.</p>
+<pre><code class="language-html">&lt;div class=&quot;boutons&quot;&gt;&#10;  &lt;input type=&quot;submit&quot; class=&quot;submit&quot; value=&quot;&mldr;&quot; /&gt;&#10;  &lt;button type=&quot;submit&quot;&gt;&mldr;&lt;/button&gt;&#10;  &lt;div class=&quot;groupe-boutons&quot;&gt;&#10;    &lt;input type=&quot;submit&quot; class=&quot;submit&quot; value=&quot;&mldr;&quot; /&gt;&#10;    &lt;input type=&quot;submit&quot; class=&quot;submit&quot; value=&quot;&mldr;&quot; /&gt;&#10;  &lt;/div&gt;&#10;&lt;/div&gt;</code></pre>
+	<div class="formulaire_spip">
+		<h3 class="titrem">Formulaire</h3>
+		<p>Des saisies...</p>
+		<form><div>
+			<div class="boutons">
+				<BOUCLE_input_variantes(DATA) {source table, #GET{variantes}}>
+				<input type="submit" class="submit #VALEUR" value="[(#VALEUR|?{.#VALEUR,Défaut})]" />
+				</BOUCLE_input_variantes>
+			</div>
+			<div class="boutons">
+				<BOUCLE_input_icones(DATA) {source table, #GET{icones}}>
+				<input type="submit" class="submit #VALEUR" value=".#VALEUR" />
+				</BOUCLE_input_icones>
+			</div>
+			<div class="boutons">
+				<button type="submit" class="submit">&lt;button&gt; .submit</button>
+				<button type="reset" class="reset">&lt;button&gt; .reset</button>
+				<button type="button">&lt;button&gt;</button>
+			</div>
+			<div class="boutons">
+				<input type="submit" class="submit bloc" value=".bloc" />
+			</div>
+			<div class="boutons">
+				Groupe de boutons : 
+				<div class="groupe-boutons">
+					<input type="submit" class="submit" value="Clic" />
+					<button type="submit" class="submit">Clac</button>
+				</div>
+			</div>
+			<div class="boutons">
+				Groupe de boutons .bloc : 
+				<div class="groupe-boutons bloc">
+					<input type="submit" class="submit" value="Clic" />
+					<button type="submit" class="submit">Clac</button>
+				</div>
+			</div>
+		</div></form>
+	</div>
+</section>
+
+
+
+<style>
+	.issue {margin-bottom: 2em;}
+	.issue + .issue {padding-top: 2em; border-top: 1px dotted hsl(0, 0%, 44%) }
+	.issue__group {margin-bottom: 1.5em;}
+	.issue__subgroup {margin-bottom: 0.5em;}
+	.issue__label {font: 0.85em/1 monospace; color:rgb(37, 37, 167); display: block; margin-bottom: 1em;}
+	pre[class*="language-"] {margin-bottom: 2em;}
+	.obsolete { background-color: #ffcb00; padding: 0.33em }
+</style>
