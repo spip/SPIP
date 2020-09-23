@@ -269,34 +269,8 @@
 
 /* Variante danger (à mutualiser avec boutons.css ?) */
 .icone.danger a {
-	background-image: url(#CHEMIN_IMAGE{rayures-sup.gif});
+	background-image: url(#CHEMIN_IMAGE{rayures-sup.svg});
 	background-color: transparent;
-	-webkit-transition-duration: 0s;
-	     -o-transition-duration: 0s;
-	        transition-duration: 0s; /* Éviter une sacade de l'animation à la fin du survol */
-}
-.icone.danger a:hover,
-.icone.danger a:focus {
-	-webkit-animation: danger 0.85s linear;
-	        animation: danger 0.85s linear;
-	-webkit-animation-iteration-count: infinite;
-	        animation-iteration-count: infinite;
-}
-@-webkit-keyframes danger {
-	0% {
-		background-position: left 0 center;
-	}
-	100% {
-		background-position: left 16px center;
-	}
-}
-@keyframes danger {
-	0% {
-		background-position: left 0 center;
-	}
-	100% {
-		background-position: left 16px center;
-	}
 }
 .icone.danger b {
 	color: #222;
@@ -305,6 +279,10 @@
 .icone.danger .icone-image {
 	background-color: #fff;
 	border: 2px solid #ff9999;
+}
+.icone.danger a:hover b,
+.icone.danger a:focus b {
+	color: red !important;
 }
 .icone.danger a:hover .icone-image,
 .icone.danger a:focus .icone-image {

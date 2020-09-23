@@ -249,7 +249,7 @@
 .formulaire_spip input.submit.danger,
 .formulaire_spip button.danger {
 	background-color: transparent !important;
-	background-image: url(#CHEMIN_IMAGE{rayures-sup.gif}) !important;
+	background-image: url(#CHEMIN_IMAGE{rayures-sup.svg}) !important;
 	color: #222 !important;
 	text-shadow: 0 0 0.25em white, 0 0 0.5em white, 0 0 1em white; /* Lisibilité */
 	-webkit-transition-duration: 0s;
@@ -264,12 +264,9 @@
 .formulaire_spip input.submit.danger:focus,
 .formulaire_spip button.danger:hover,
 .formulaire_spip button.danger:focus {
-	-webkit-animation: danger 0.85s linear;
-	        animation: danger 0.85s linear;
-	-webkit-animation-iteration-count: infinite;
-	        animation-iteration-count: infinite;
 	-webkit-box-shadow: none;
 	        box-shadow: none;
+	color: red !important;
 }
 
 /* Variante sans icône (préférence utilisateur) */
