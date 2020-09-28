@@ -1,13 +1,13 @@
 <?php
 
 /***************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
+ *  SPIP, Système de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2019                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *  Copyright © avec tendresse depuis 2001                                 *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Rivière, Emmanuel Saint-James  *
  *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
+ *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
 /**
@@ -31,45 +31,90 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Nom du cookie
  * @param string $value
  *     Valeur à stocker
- * @param int $expire
- *     Date d'expiration du cookie (timestamp)
- * @param string $path
- *     Chemin sur lequel le cookie sera disponible
- * @param string $domain
- *     Domaine à partir duquel le cookie est disponible
- * @param bool $secure
- *     cookie sécurisé ou non ?
+ * @param array $options
+ *     Tableau clé => valeur de l’option
+ *     - expires = 0 : Date d'expiration du cookie (timestamp)
+ *     - path = 'AUTO' : Chemin sur lequel le cookie sera disponible
+ *     - domain = '' : Domaine à partir duquel le cookie est disponible
+ *     - secure = false : cookie sécurisé ou non ?
+ *     - samesite = 'Lax' : valeur samesite (Lax, Strict ou None)
  * @return bool
  *     true si le cookie a été posé, false sinon.
+ * 
+ * @note Anciens paramètres (à la place de $options) (pour rétrocompatibilité)
+ *   param int $expire
+ *     Date d'expiration du cookie (timestamp)
+ *   param string $path
+ *     Chemin sur lequel le cookie sera disponible
+ *   param string $domain
+ *     Domaine à partir duquel le cookie est disponible
+ *   param bool $secure
+ *     cookie sécurisé ou non ?
  **/
-function spip_setcookie($name = '', $value = '', $expire = 0, $path = 'AUTO', $domain = '', $secure = '') {
-	// liste des cookies en httponly (a passer en define si besoin)
-	$httponly = in_array($name, explode(' ', 'spip_session'));
+function spip_setcookie($name = '', $value = '', $options = []) {
+	static $to_secure_list = ['spip_session'];
+
+	if (!is_array($options)) {
+		// anciens paramètres :
+		# spip_setcookie($name = '', $value = '', $expire = 0, $path = 'AUTO', $domain = '', $secure = '')
+		$opt = func_get_args();
+		$opt = array_slice($opt, 2);
+		$options = []; # /!\ après le func_get_args (sinon $opt[0] référence la nouvelle valeur de $options !);
+		if (isset($opt[0])) {
+			$options['expires'] = $opt[0];
+		}
+		if (isset($opt[1])) {
+			$options['path'] = $opt[1];
+		}
+		if (isset($opt[2])) {
+			$options['domain'] = $opt[2];
+		}
+		if (isset($opt[3])) {
+			$options['secure'] = $opt[3];
+		}
+	}
 
 	$name = preg_replace('/^spip_/', $GLOBALS['cookie_prefix'] . '_', $name);
-	if ($path == 'AUTO') {
-		$path = defined('_COOKIE_PATH') ? _COOKIE_PATH : preg_replace(',^\w+://[^/]*,', '', url_de_base());
+
+	// expires
+	if (!isset($options['expires'])) {
+		$options['expires'] = 0;
 	}
-	if (!$domain and defined('_COOKIE_DOMAIN')) {
-		$domain = _COOKIE_DOMAIN;
+	if (!isset($options['path']) or $options['path'] === 'AUTO') {
+		if (defined('_COOKIE_PATH')) {
+			$options['path'] = _COOKIE_PATH;
+		} else {
+			$options['path'] = preg_replace(',^\w+://[^/]*,', '', url_de_base());
+		}
+	}
+	if (empty($options['domain']) and defined('_COOKIE_DOMAIN') and _COOKIE_DOMAIN) {
+		$options['domain'] = _COOKIE_DOMAIN;
+	}
+	if (in_array($name, $to_secure_list)) {
+		if (empty($options['secure']) and defined('_COOKIE_SECURE') and _COOKIE_SECURE) {
+			$options['secure'] = true;
+		}
+		if (empty($options['httponly'])) {
+			$options['httponly'] = true;
+		}
+	}
+	if (empty($options['samesite'])) {
+		$options['samesite'] = 'Lax';
 	}
 
-	#spip_log("cookie('$name', '$value', '$expire', '$path', '$domain', '$secure', '$httponly'");
-
-	$a =
-		$httponly ?
-			@setcookie($name, $value, $expire, $path, $domain, $secure, $httponly)
-			: ($secure ?
-			@setcookie($name, $value, $expire, $path, $domain, $secure)
-			: ($domain ?
-				@setcookie($name, $value, $expire, $path, $domain)
-				: ($path ?
-					@setcookie($name, $value, $expire, $path)
-					: ($expire ?
-						@setcookie($name, $value, $expire)
-						:
-						@setcookie($name, $value)
-					))));
+	#spip_log("cookie('$name', '$value', " . json_encode($options, true) . ")", "cookies");
+	if (PHP_VERSION_ID < 70300) {
+		$options = [
+			isset($options['expires']) ? $options['expires'] : 0,
+			isset($options['path']) ? $options['path'] : '',
+			isset($options['domain']) ? $options['domain'] : '',
+			isset($options['secure']) ? $options['secure'] : false,
+			isset($options['httponly']) ? $options['httponly'] : false,
+		];
+		$a = @setcookie($name, $value, ...$options);
+	} else {
+		$a = @setcookie($name, $value, $options);
+	}
 
 	spip_cookie_envoye(true);
 

@@ -1,13 +1,13 @@
 <?php
 
 /***************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
+ *  SPIP, Système de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2019                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *  Copyright © avec tendresse depuis 2001                                 *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Rivière, Emmanuel Saint-James  *
  *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
+ *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
 /**
@@ -432,8 +432,8 @@ define('_SPIP_EXTRA_VERSION', '-dev');
 // a supprimer en phase beta/rc/release
 define('_DEV_VERSION_SPIP_COMPAT',"3.2.99");
 // version des signatures de fonctions PHP
-// (= numero SVN de leur derniere modif cassant la compatibilite et/ou necessitant un recalcul des squelettes)
-$spip_version_code = 24447;
+// (= date de leur derniere modif cassant la compatibilite et/ou necessitant un recalcul des squelettes)
+$spip_version_code = 20200917;
 // version de la base SQL (= numero SVN de sa derniere modif)
 $spip_version_base = 24379;
 

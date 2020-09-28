@@ -1,13 +1,13 @@
 <?php
 
 /***************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
+ *  SPIP, Système de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2019                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *  Copyright © avec tendresse depuis 2001                                 *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Rivière, Emmanuel Saint-James  *
  *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
+ *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
 /**
@@ -469,12 +469,14 @@ function image_reduire_par($img, $val = 1, $force = false) {
  *      Couleur en écriture hexadécimale, tel que `ff3300`
  * @param float $val
  *      Pourcentage désiré (entre 0 et 1)
+ * @param bool|string $strict
+ *      Si true, ne change vraiment que la saturation, sans toucher à la luminosité
  * @return string
  *      Couleur en écriture hexadécimale.
 **/
-function filtre_couleur_saturation_dist($couleur, $val) {
+function filtre_couleur_saturation_dist($couleur, $val, $strict = false) {
 	if (function_exists('couleur_saturation')) {
-		return couleur_saturation($couleur, $val);
+		return couleur_saturation($couleur, $val, $strict);
 	}
 	return $couleur;
 }

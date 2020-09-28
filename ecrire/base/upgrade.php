@@ -1,13 +1,13 @@
 <?php
 
 /***************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
+ *  SPIP, Système de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2019                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *  Copyright © avec tendresse depuis 2001                                 *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Rivière, Emmanuel Saint-James  *
  *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
+ *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
 /**
@@ -442,7 +442,10 @@ function maj_while($installee, $cible, $maj, $meta = '', $table = 'meta', $redir
  */
 function serie_alter($serie, $q = array(), $meta = '', $table = 'meta', $redirect = '') {
 	$meta2 = $meta . '_maj_' . $serie;
-	$etape = intval(@$GLOBALS[$table][$meta2]);
+	$etape = 0;
+	if (isset($GLOBALS[$table][$meta2])) {
+		$etape = intval($GLOBALS[$table][$meta2]);
+	}
 	foreach ($q as $i => $r) {
 		if ($i >= $etape) {
 			$msg = "maj $table $meta2 etape $i";

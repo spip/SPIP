@@ -1,13 +1,13 @@
 <?php
 
 /***************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
+ *  SPIP, Système de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2019                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *  Copyright © avec tendresse depuis 2001                                 *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Rivière, Emmanuel Saint-James  *
  *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
+ *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -77,7 +77,11 @@ function cache_signature(&$page) {
 		include_spip('inc/acces');
 		include_spip('auth/sha256.inc');
 		ecrire_meta('cache_signature',
-			spip_sha256($_SERVER["DOCUMENT_ROOT"] . $_SERVER["SERVER_SIGNATURE"] . creer_uniqid()), 'non');
+			spip_sha256(
+				$_SERVER["DOCUMENT_ROOT"] 
+				. (isset($_SERVER['SERVER_SIGNATURE']) ? $_SERVER["SERVER_SIGNATURE"] : "")
+				. creer_uniqid()
+			), 'non');
 	}
 
 	return crc32($GLOBALS['meta']['cache_signature'] . $page['texte']);

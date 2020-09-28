@@ -46,14 +46,10 @@
 .icone.clearleft {clear:#ENV{left};}
 .icone.clearright {clear:#ENV{right};}
 
-/* icone verticale : precision necessaire pour IEx */
-.lte7 .icone.verticale.left,.lte7 .icone.verticale.right {width:72px;}
-
 /* icone horizontale */
 .icone.horizontale {}
 .icone.horizontale { display:block; clear: both;position:relative;margin:0;padding:2px;text-align: #ENV{left};padding-#ENV{left}:32px;}
 .icone.horizontale a,.icone.horizontale .submit {display:inline;width:auto;padding:0;position: static}
-.lte7 .icone.horizontale a,.lte7 .icone.horizontale .submit{display:block;padding:5px 0;height: auto;}
 /* pour les navigateurs modernes */
 .icone.horizontale a,.icone.horizontale .submit {display:table-cell;vertical-align:middle;height:28px;}
 .icone.horizontale.right {text-align: #ENV{right};padding-#ENV{right}:32px;padding-#ENV{left}:2px;}
@@ -102,10 +98,7 @@
 
 .barre_onglet {padding:7px;clear:both;text-align:center;}
 .barre_onglet ul {
-	display:-moz-inline-stack;
 	display:inline-block;
-	zoom:1;
-	*display:inline;
 	margin:0 auto;text-align:#ENV{left};padding:0;list-style:none;}
 .barre_onglet li {float:#ENV{left};border: 1px solid #ENV{foncee};margin:0;padding:0;margin-#ENV{right}: 3px;position:relative;list-style:none;}
 .barre_onglet .cadre-icone {top:-8px;#ENV{left}:4px;}

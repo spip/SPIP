@@ -1,13 +1,13 @@
 <?php
 
 /***************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
+ *  SPIP, Système de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2019                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *  Copyright © avec tendresse depuis 2001                                 *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Rivière, Emmanuel Saint-James  *
  *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
+ *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
 /**
@@ -64,11 +64,9 @@ function action_converser_changer_langue($update_session) {
 			$GLOBALS['visiteur_session']['lang'] = $lang;
 			$session = charger_fonction('session', 'inc');
 			if ($spip_session = $session($GLOBALS['visiteur_session'])) {
-				spip_setcookie(
-					'spip_session',
-					$spip_session,
-					time() + 3600 * 24 * 14
-				);
+				spip_setcookie('spip_session', $spip_session, [
+					'expires' => time() + 3600 * 24 * 14
+				]);
 			}
 		}
 		action_converser_post($lang, 'spip_lang_ecrire');
@@ -88,9 +86,13 @@ function action_converser_post($lang, $ecrire = false) {
 	if ($lang) {
 		include_spip('inc/lang');
 		if (changer_langue($lang)) {
-			spip_setcookie('spip_lang', $_COOKIE['spip_lang'] = $lang, time() + 365 * 24 * 3600);
+			spip_setcookie('spip_lang', $_COOKIE['spip_lang'] = $lang, [
+				'expires' => time() + 365 * 24 * 3600
+			]);
 			if ($ecrire) {
-				spip_setcookie('spip_lang_ecrire', $_COOKIE['spip_lang_ecrire'] = $lang, time() + 365 * 24 * 3600);
+				spip_setcookie('spip_lang_ecrire', $_COOKIE['spip_lang_ecrire'] = $lang, [
+					'expires' => time() + 365 * 24 * 3600
+				]);
 			}
 		}
 	}

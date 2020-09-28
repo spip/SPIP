@@ -288,16 +288,3 @@ div.messages-alertes {
 div.table_page {
 	margin-top: 1em;
 }
-
-/*fix all layout problems of IE6 and IE7*/
-.lte7 .cadre,
-.lte7 .fiche_objet,
-/*title not visible*/
-.lte7 .ajax-action,
-/*containers of expandible boxes go mad*/
-.lte7 .tabs-container,
-/*containers of expandible boxes go mad*/
-.lte7 #portfolio,
-.lte7 #documents {
-	zoom: 1
-}

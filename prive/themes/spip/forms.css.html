@@ -115,12 +115,6 @@ h3.titrem {position:relative;}
 .formulaire_spip textarea,
 .formulaire_spip select { font-size:1em;padding: 3px; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;-ms-box-sizing: border-box; box-sizing: border-box;}
 
-.lte7 .formulaire_spip input.text,
-.lte7 .formulaire_spip input.password,
-.lte7 .formulaire_spip textarea,
-.lte7 .formulaire_spip select { width: 96%;margin:0;display: inline;margin-left:0;}
-.lte7 .formulaire_spip textarea {margin-left: 10px;}
-
 .formulaire_spip input.text,
 .formulaire_spip input.password,
 .formulaire_spip input.file,
@@ -205,7 +199,6 @@ input[type="submit"],input[type="reset"] {font-size: inherit;}
 .lat .formulaire_spip,.lat .formulaire_spip fieldset {padding:0 5px;}
 .lat .formulaire_spip .editer-groupe,.lat .formulaire_spip fieldset,.lat .formulaire_spip .boutons,.lat .formulaire_spip .titrem,.lat .formulaire_spip .legend {margin-left: -5px;margin-right: -5px;}
 
-.lte7 .lat .formulaire_spip input.text,.lte7 .lat .formulaire_spip textarea {margin-left: 5px;} /* BUG IE7 */
 .lat .formulaire_spip {}
 .lat .formulaire_spip h3.titrem {font-size:1em;/*padding:[(#ENV{margin-bottom}|strdiv{4})em] 5px;*/}
 
@@ -267,7 +260,6 @@ input[type="submit"],input[type="reset"] {font-size: inherit;}
 .formulaire_dater .editer {padding-bottom:0;padding-top:0;}
 .formulaire_dater .editer label {font-weight: bold;text-transform: uppercase;font-size:0.9em;}
 .formulaire_dater .aide {float:#GET{right}}
-.lte7 .formulaire_dater a.aide {margin-top: -16px;position: relative;display: inline;}
 .formulaire_dater .affiche {font-weight: bold;text-transform: uppercase;}
 .formulaire_dater .saisie_redac {display:block;}
 .formulaire_dater .editer_date_redac .editable .choix{ display:block;}
@@ -287,9 +279,7 @@ input[type="submit"],input[type="reset"] {font-size: inherit;}
 .formulaire_editer_liens.non_editable input,.formulaire_editer_liens.non_editable button {display:none;}
 .formulaire_editer_liens .action {text-align: #ENV{right};}
 .formulaire_editer_liens .liste-objets tr > .action {text-align: #ENV{right};width:120px;}
-.lte7 .formulaire_editer_liens .liste-objets tr > .action button {font-size: 1em;}
 .formulaire_editer_liens .liste-objets tr > .action button img {float:#ENV{right};margin-#ENV{left}:5px;}
-.lte7 .formulaire_editer_liens .liste-objets tr > .action button img {display: inline;float: none;}
 
 .formulaire_editer_liens .associer_mot.obligatoire.nonvu {background-color:#FFCDAF;}
 .formulaire_editer_liens .associer_mot select,.formulaire_editer_liens .associer_mot input.text {width:75%;}
@@ -308,7 +298,6 @@ input[type="submit"],input[type="reset"] {font-size: inherit;}
 .formulaire_spip.formulaire_recherche { float: [(#ENV{right})]; border:0;background:none;border: 1px solid #fff; background-color: [#(#ENV{foncee}|couleur_foncer)]; margin: 0 0 6px;position:relative;padding:0;z-index:1;}
 .box_mediabox .formulaire_spip.formulaire_recherche {z-index:1} /* focus dans la mediabox */
 .largeur .formulaire_spip.formulaire_recherche .text,.box_mediabox .formulaire_spip.formulaire_recherche .text{ float:[(#ENV{left})];padding:3px;width: 200px;background-color:#ENV{foncee};border:none;border-right:1px solid #fff;/*font-size: 10px;*/ color: #fff;  margin:0;min-height:20px;}
-.lte8 .largeur .formulaire_spip.formulaire_recherche .text {min-height:14px} /* IE<=8 ne supporte pas -ms-box-sizing:border-box; */
 .formulaire_spip.formulaire_recherche .text.cancelable {padding-#ENV{left}:20px}
 .formulaire_spip.formulaire_recherche .text::-webkit-input-placeholder { color:#eee; }
 .formulaire_spip.formulaire_recherche .text::-moz-placeholder { color:#eee; opacity: 1; }

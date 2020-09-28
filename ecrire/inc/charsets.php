@@ -1,13 +1,13 @@
 <?php
 
 /***************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
+ *  SPIP, Système de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2019                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *  Copyright © avec tendresse depuis 2001                                 *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Rivière, Emmanuel Saint-James  *
  *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
+ *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
 /**
@@ -462,7 +462,7 @@ function charset2unicode($texte, $charset = 'AUTO' /* $forcer: obsolete*/) {
  *     Texte transformé dans le charset souhaité
  **/
 function unicode2charset($texte, $charset = 'AUTO') {
-	static $CHARSET_REVERSE;
+	static $CHARSET_REVERSE = array();
 	static $trans = array();
 
 	if ($charset == 'AUTO') {
@@ -477,7 +477,7 @@ function unicode2charset($texte, $charset = 'AUTO') {
 		default:
 			$charset = load_charset($charset);
 
-			if (!is_array($CHARSET_REVERSE[$charset])) {
+			if (empty($CHARSET_REVERSE[$charset])) {
 				$CHARSET_REVERSE[$charset] = array_flip($GLOBALS['CHARSET'][$charset]);
 			}
 

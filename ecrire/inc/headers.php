@@ -1,13 +1,13 @@
 <?php
 
 /***************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
+ *  SPIP, Système de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2019                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *  Copyright © avec tendresse depuis 2001                                 *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Rivière, Emmanuel Saint-James  *
  *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
+ *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
 /**
@@ -71,7 +71,7 @@ function redirige_par_entete($url, $equiv = '', $status = 302) {
 	include_spip('inc/cookie');
 	if ((!$equiv and !spip_cookie_envoye()) or (
 			   (strncmp("Apache", $_SERVER['SERVER_SOFTWARE'], 6) == 0)
-			or (stripos($_SERVER['SERVER_SIGNATURE'], 'Apache') !== false)
+			or (isset($_SERVER['SERVER_SIGNATURE']) and stripos($_SERVER['SERVER_SIGNATURE'], 'Apache') !== false)
 			or function_exists('apache_getenv')
 			or defined('_SERVER_APACHE')
 		)

@@ -1,13 +1,13 @@
 <?php
 
 /***************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
+ *  SPIP, Système de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2019                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *  Copyright © avec tendresse depuis 2001                                 *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Rivière, Emmanuel Saint-James  *
  *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
+ *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
 /**
@@ -216,7 +216,9 @@ function ajouter_session($auteur) {
 	// poser le cookie de session SPIP
 	include_spip('inc/cookie');
 	$duree = definir_duree_cookie_session($auteur);
-	spip_setcookie( 'spip_session', $_COOKIE['spip_session'], time() + $duree);
+	spip_setcookie( 'spip_session', $_COOKIE['spip_session'], [
+		'expires' => time() + $duree
+	]);
 	spip_log("ajoute session $fichier_session cookie $duree", "session");
 
 	// Si on est admin, poser le cookie de correspondance
@@ -224,10 +226,14 @@ function ajouter_session($auteur) {
 		include_spip('inc/autoriser');
 	}
 	if (autoriser('ecrire','','',$auteur) and _DUREE_COOKIE_ADMIN) {
-		spip_setcookie('spip_admin', '@' . ($auteur['email'] ?: $auteur['login']), time() + max(_DUREE_COOKIE_ADMIN, $duree));
+		spip_setcookie('spip_admin', '@' . ($auteur['email'] ?: $auteur['login']), [
+			'expires' => time() + max(_DUREE_COOKIE_ADMIN, $duree)
+		]);
 	} // sinon le supprimer ...
 	else {
-		spip_setcookie('spip_admin', '', 1);
+		spip_setcookie('spip_admin', '', [
+			'expires' => 1
+		]);
 	}
 
 	# on en profite pour purger les vieilles sessions anonymes abandonnees

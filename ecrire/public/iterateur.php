@@ -2,13 +2,13 @@
 
 
 /***************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
+ *  SPIP, Système de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2019                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *  Copyright © avec tendresse depuis 2001                                 *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Rivière, Emmanuel Saint-James  *
  *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
+ *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -318,12 +318,12 @@ class IterDecorator extends FilterIterator {
 		$filtre = '';
 
 		if ($op == 'REGEXP') {
-			$filtre = 'match(' . $a . ', ' . str_replace('\"', '"', $valeur) . ')';
+			$filtre = 'filtrer("match", ' . $a . ', ' . str_replace('\"', '"', $valeur) . ')';
 			$op = '';
 		} else {
 			if ($op == 'LIKE') {
 				$valeur = str_replace(array('\"', '_', '%'), array('"', '.', '.*'), preg_quote($valeur));
-				$filtre = 'match(' . $a . ', ' . $valeur . ')';
+				$filtre = 'filtrer("match", ' . $a . ', ' . $valeur . ')';
 				$op = '';
 			} else {
 				if ($op == '=') {

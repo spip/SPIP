@@ -1,13 +1,13 @@
 <?php
 
 /* *************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
+ *  SPIP, Système de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2019                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *  Copyright © avec tendresse depuis 2001                                 *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Rivière, Emmanuel Saint-James  *
  *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
+ *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
 /**
@@ -359,8 +359,8 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true) {
 					if ($colonne_origine[0] == "(") {
 						$colonnes = substr($colonne_origine, 1, -1);
 						if (false !== strpos(",", $colonnes)) {
-							spip_log(_LOG_GRAVITE_ERREUR, "SQLite : Erreur, impossible de creer un index sur plusieurs colonnes"
-								. " sans qu'il ait de nom ($table, ($colonnes))", 'sqlite');
+							spip_log("SQLite : Erreur, impossible de creer un index sur plusieurs colonnes"
+								. " sans qu'il ait de nom ($table, ($colonnes))", 'sqlite.' . _LOG_ERREUR);
 							break;
 						} else {
 							$nom_index = $colonnes;
@@ -460,7 +460,7 @@ function spip_sqlite_create(
 	$ok = $res ? true : false;
 	if ($ok) {
 		foreach ($cles as $k => $v) {
-			if (preg_match(',^(KEY|UNIQUE)\s,i', $k, $m)) {
+			if (preg_match(',^(UNIQUE KEY|KEY|UNIQUE)\s,i', $k, $m)) {
 				$index = trim(substr($k, strlen($m[1])));
 				$unique = (strlen($m[1]) > 3);
 				$ok &= spip_sqlite_create_index($index, $nom, $v, $unique, $serveur);
@@ -2328,8 +2328,8 @@ function _sqlite_modifier_table($table, $colonne, $opt = array(), $serveur = '')
 		// il faut les faire une par une car $query = join('; ', $queries).";"; ne fonctionne pas
 		foreach ($queries as $q) {
 			if (!spip_sqlite::executer_requete($q, $serveur)) {
-				spip_log(_LOG_GRAVITE_ERREUR, "SQLite : ALTER TABLE table :"
-					. " Erreur a l'execution de la requete : $q", 'sqlite');
+				spip_log("SQLite : ALTER TABLE table :"
+					. " Erreur a l'execution de la requete : $q", 'sqlite.' . _LOG_ERREUR);
 				spip_sqlite::annuler_transaction($serveur);
 
 				return false;
@@ -2825,12 +2825,18 @@ class sqlite_requeteur {
 		# spip_log("requete: $this->serveur >> $query",'sqlite.'._LOG_DEBUG); // boum ? pourquoi ?
 		if ($this->link) {
 			// memoriser la derniere erreur PHP vue
-			$e = (function_exists('error_get_last') ? error_get_last() : "");
+			$last_error = (function_exists('error_get_last') ? error_get_last() : "");
+			$e = null;
 			// sauver la derniere requete
 			$GLOBALS['connexions'][$this->serveur ? $this->serveur : 0]['last'] = $query;
 			$GLOBALS['connexions'][$this->serveur ? $this->serveur : 0]['total_requetes']++;
 
-			$r = $this->link->query($query);
+			try {
+				$r = $this->link->query($query);
+			} catch (\PDOException $e) {
+				spip_log("PDOException: " . $e->getMessage(), 'sqlite.' . _LOG_DEBUG);
+				$r = false;
+			}
 			// sauvegarde de la requete (elle y est deja dans $r->queryString)
 			# $r->spipQueryString = $query;
 
@@ -2848,7 +2854,10 @@ class sqlite_requeteur {
 			}
 
 			// loger les warnings/erreurs eventuels de sqlite remontant dans PHP
-			if ($err = (function_exists('error_get_last') ? error_get_last() : "") and $err != $e) {
+			if ($e and $e instanceof \PDOException) {
+				$err = strip_tags($e->getMessage()) . " in " . $e->getFile() . " line " . $e->getLine();
+				spip_log("$err - " . $query, 'sqlite.' . _LOG_ERREUR);
+			} elseif ($err = (function_exists('error_get_last') ? error_get_last() : "") and $err != $last_error) {
 				$err = strip_tags($err['message']) . " in " . $err['file'] . " line " . $err['line'];
 				spip_log("$err - " . $query, 'sqlite.' . _LOG_ERREUR);
 			} else {

@@ -1,13 +1,13 @@
 <?php
 
 /***************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
+ *  SPIP, Système de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2019                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *  Copyright © avec tendresse depuis 2001                                 *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Rivière, Emmanuel Saint-James  *
  *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
+ *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
 // Script pour appeler un squelette apres s'etre authentifie
@@ -27,7 +27,9 @@ if ($var_auth !== '') {
 		// autrement on insiste
 		if (is_array($var_auth)) {
 			$var_auth = '../?' . $_SERVER['QUERY_STRING'];
-			spip_setcookie('spip_session', $_COOKIE['spip_session'], time() + 3600 * 24 * 14);
+			spip_setcookie('spip_session', $_COOKIE['spip_session'], [
+				'expires' => time() + 3600 * 24 * 14
+			]);
 		}
 		include_spip('inc/headers');
 		redirige_formulaire($var_auth);

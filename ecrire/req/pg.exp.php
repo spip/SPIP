@@ -1,13 +1,13 @@
 <?php
 
 /* *************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
+ *  SPIP, Système de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2019                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *  Copyright © avec tendresse depuis 2001                                 *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Rivière, Emmanuel Saint-James  *
  *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
+ *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
 /**
@@ -352,8 +352,8 @@ function spip_pg_alter_add($table, $arg, $serveur = '', $requeter = true) {
 			if ($m[1][0] == "(") {
 				$colonnes = substr($m[1], 1, -1);
 				if (false !== strpos(",", $colonnes)) {
-					spip_log(_LOG_GRAVITE_ERREUR, "PG : Erreur, impossible de creer un index sur plusieurs colonnes"
-						. " sans qu'il ait de nom ($table, ($colonnes))", 'pg');
+					spip_log("PG : Erreur, impossible de creer un index sur plusieurs colonnes"
+						. " sans qu'il ait de nom ($table, ($colonnes))", 'pg.' . _LOG_ERREUR);
 				} else {
 					$nom_index = $colonnes;
 				}

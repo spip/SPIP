@@ -1,13 +1,13 @@
 <?php
 
 /***************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
+ *  SPIP, Système de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2019                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *  Copyright © avec tendresse depuis 2001                                 *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Rivière, Emmanuel Saint-James  *
  *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
+ *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
 /**
@@ -98,12 +98,16 @@ function action_cookie_dist($set_cookie_admin = null, $change_session = null) {
 			// Suppression cookie d'admin ?
 			if ($set_cookie_admin == "non") {
 				if ($cook) {
-					spip_setcookie('spip_admin', $cook, time() - 3600 * 24);
+					spip_setcookie('spip_admin', $cook, [
+						'expires' => time() - 3600 * 24
+					]);
 				}
 			} // Ajout de cookie d'admin
 			else {
 				if ($set_cookie_admin and _DUREE_COOKIE_ADMIN) {
-					spip_setcookie('spip_admin', $set_cookie_admin, time() + max(_DUREE_COOKIE_ADMIN, 2 * _RENOUVELLE_ALEA));
+					spip_setcookie('spip_admin', $set_cookie_admin, [
+						'expires' => time() + max(_DUREE_COOKIE_ADMIN, 2 * _RENOUVELLE_ALEA)
+					]);
 				}
 			}
 		}

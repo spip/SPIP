@@ -275,8 +275,10 @@ foreach(array('lang', 'var_recherche', 'aide', 'var_lang_r', 'lang_r', 'var_ajax
 /*
  * Filtre l'accès à spip_acces_doc (injection SQL en 1.8.2x)
  */
-if (preg_match(',^(.*/)?spip_acces_doc\.,', (string)$_SERVER['REQUEST_URI'])) {
-	$file = addslashes((string)$_GET['file']);
+if (isset($_SERVER['REQUEST_URI'])) {
+	if (preg_match(',^(.*/)?spip_acces_doc\.,', (string)$_SERVER['REQUEST_URI'])) {
+		$file = addslashes((string)$_GET['file']);
+	}
 }
 
 /*
@@ -514,7 +516,10 @@ if (isset($_REQUEST['var_erreur']) and isset($_REQUEST['page']) and $_REQUEST['p
 /*
  * Réinjection des clés en html dans l'admin r19561
  */
-if (strpos($_SERVER['REQUEST_URI'], "ecrire/") !== false or isset($_REQUEST['var_memotri'])){
+if (
+	(isset($_SERVER['REQUEST_URI']) and strpos($_SERVER['REQUEST_URI'], "ecrire/") !== false)
+	or isset($_REQUEST['var_memotri'])
+){
 	$zzzz = implode("", array_keys($_REQUEST));
 	if (strlen($zzzz) != strcspn($zzzz, '<>"\''))
 		$ecran_securite_raison = 'Cle incorrecte en $_REQUEST';
@@ -600,3 +605,4 @@ if (
 	header("Content-Type: text/html");
 	die("<html><title>Status 429: Too Many Requests</title><body><h1>Status 429</h1><p>Too Many Requests (try again soon)</p></body></html>");
 }
+
