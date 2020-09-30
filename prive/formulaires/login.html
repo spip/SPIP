@@ -2,14 +2,14 @@
 #HTTP_HEADER{"Pragma: no-cache"}
 
 <div class='formulaire_spip formulaire_login'>
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{_deja_loge})</p>]
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok" role="status">(#ENV*{_deja_loge})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok" role="status">(#ENV*{message_ok})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_erreur' role="alert">(#ENV*{message_erreur})</p>]
 
 	[(#ENV{echec_cookie})
 	<fieldset class='reponse_formulaire reponse_formulaire_erreur'>
 		<h2><:avis_erreur_cookie:></h2>
-		<p class="erreur_message"><:login_cookie_oblige:><br /><:login_cookie_accepte:></p>
+		<p class="erreur_message" role="alert"><:login_cookie_oblige:><br /><:login_cookie_accepte:></p>
 	</fieldset>]
 
 	[(#ENV{editable})
@@ -20,14 +20,14 @@
 		<legend><:form_forum_identifiants:></legend>
 		<div class="editer-groupe">
 			<div class="editer editer_login obligatoire[(#ENV**{erreurs}|table_valeur{var_login}|oui)erreur]">
-				<label for="var_login"><:login_login2:></label>[
-				<span class="erreur_message">(#ENV**{erreurs}|table_valeur{var_login})</span>
+				<label for="var_login"><:login_login2:> *</label>[
+				<span class="erreur_message" role="alert">(#ENV**{erreurs}|table_valeur{var_login})</span>
 				]<input type='text' class='text' name='var_login' id='var_login' value="[(#ENV**{var_login})]" size='40'[(#HTML5) required='required' autofocus='autofocus'] autocapitalize="off" autocorrect="off" />[
 				<span id="spip_logo_auteur">(#ENV*{_logo,''})</span>]
 			</div>
 			<div class="editer editer_password obligatoire[(#ENV**{erreurs}|table_valeur{password}|oui)erreur]">
 				<label for="password"><:login_pass2:></label>[
-				<span class="erreur_message">(#ENV**{erreurs}|table_valeur{password})</span>
+				<span class="erreur_message" role="alert">(#ENV**{erreurs}|table_valeur{password})</span>
 				]<input type='password' class='text password' name='password' id='password' value="" size='40' autocapitalize="off" autocorrect="off" />
 				<p class='details'><a href="[(#URL_PAGE{spip_pass}|parametre_url{lang,#LANG})]" id='spip_pass'><:login_motpasseoublie:></a></p>
 			</div>
