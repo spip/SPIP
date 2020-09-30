@@ -20,7 +20,7 @@
 		<legend><:form_forum_identifiants:></legend>
 		<div class="editer-groupe">
 			<div class="editer editer_login obligatoire[(#ENV**{erreurs}|table_valeur{var_login}|oui)erreur]">
-				<label for="var_login"><:login_login2:> *</label>[
+				<label for="var_login"><:login_login2:><:info_obligatoire_02:></label>[
 				<span class="erreur_message" role="alert">(#ENV**{erreurs}|table_valeur{var_login})</span>
 				]<input type='text' class='text' name='var_login' id='var_login' value="[(#ENV**{var_login})]" size='40'[(#HTML5) required='required' autofocus='autofocus'] autocapitalize="off" autocorrect="off" />[
 				<span id="spip_logo_auteur">(#ENV*{_logo,''})</span>]
