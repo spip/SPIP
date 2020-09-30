@@ -1,7 +1,9 @@
 #CACHE{0}
 [(#REM)
 
-	Ce squelette definit les styles de l'espace prive
+	Ce squelette definit les styles des formulaires de l'espace prive
+
+	Les styles des boutons sont dans boutons.css.html
 
 	Note: l'entete "Vary:" sert a repousser l'entete par
 	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
@@ -157,7 +159,7 @@ h3.titrem {position:relative;}
 /* Remarques importantes */
 .formulaire_spip .attention { display: block; margin-bottom: #ENV{margin-bottom}; font-weight: normal; color: #514721; background-color:#FFF6BF; padding: 5px;}
 
-
+/* Boutons (voir aussi dans boutons.css) */
 .formulaire_spip input.submit,
 .formulaire_spip input.reset,
 .formulaire_spip input.button {
@@ -166,7 +168,6 @@ h3.titrem {position:relative;}
 
 /* icone d'aide */
 img.aide {padding: 2px !important;box-sizing: border-box;}
-
 
 /* Fieldset */
 .formulaire_spip .editer.fieldset {padding:0;}
@@ -177,13 +178,22 @@ img.aide {padding: 2px !important;box-sizing: border-box;}
 
 .formulaire_spip .editer fieldset label {color: #444444;}
 
-/* boutons */
+/**
+ * Conteneur des boutons
+ * Les boutons eux-mêmes sont dans boutons.css.html
+ */
 .formulaire_spip .boutons { margin-bottom:0;clear:both;padding: [(#ENV{margin-bottom}|strdiv{2})em] 10px;text-align: #ENV{right};background-color: #[(#ENV{claire}|couleur_eclaircir)];border-top: 1px solid [(#ENV{claire})];}
 
 #navigation .formulaire_spip .boutons,
 #extra .formulaire_spip .boutons { padding: [(#ENV{margin-bottom}|strdiv{4})em] 5px}
 
 .formulaire_spip .boutons .image_loading {float:none;}
+.formulaire_spip input,
+.formulaire_spip button,
+.bouton_action_post .submit {
+	cursor: pointer;
+}
+
 /* Bouton de validation */
 input[type="file"] {border: none;background-color: transparent;}
 /* Pour IE, qui grossit le bouton submit */
@@ -225,7 +235,13 @@ input[type="submit"],input[type="reset"] {font-size: inherit;}
 }
 
 
-/* Formulaires particuliers ----------------------------------------------------------------*/
+/**
+ * ========================
+ * Formulaires particuliers
+ * ========================
+ */
+
+
 .formulaire_editer_article .editer.editer_liens_sites {border-bottom: 1px solid #ccc;}
 
 /* edition d'un auteur */
@@ -312,14 +328,6 @@ input[type="submit"],input[type="reset"] {font-size: inherit;}
 .formulaire_traduire .liste-objets {margin-top:0;margin-bottom:0;}
 .formulaire_traduire .liste-objets .first_row {display:none;}
 .formulaire_traduire .supprimer_trad {float:#ENV{right};}
-
-/* les boutons action */
-form.bouton_action_post, form.bouton_action_post div {display:inline;}
-form.bouton_action_post.link button.submit, .formulaire_spip .boutons input.link,.formulaire_spip button.link {margin:0;font-weight:normal;}
-
-.formulaire_spip button {cursor:pointer;}
-form.bouton_action_post.link button.submit, .formulaire_spip .boutons input.link,.formulaire_spip button.link {background:none;border:0;cursor:pointer;padding:0 0 1px;color:#444;}
-form.bouton_action_post.link button.submit:hover, .formulaire_spip .boutons input.link:hover,.formulaire_spip button.link:hover {border-bottom:1px solid;padding:0;}
 
 /* formulaire_editer_logo */
 .formulaire_editer_logo .titrem,.formulaire_editer_logo .ajouter_survol {text-transform: uppercase;}

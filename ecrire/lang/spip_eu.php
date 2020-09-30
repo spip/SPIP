@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-es',
-	'0_langue' => 'Euskara [eu]',
-	'0_liste' => 'info@interneteuskadi.org',
-	'0_mainteneur' => 'info@interneteuskadi.org',
-
 	// A
 	'access_interface_graphique' => 'Interfaz grafiko osora itzuli',
 	'access_mode_texte' => 'Testu moduan laburtutako interfazea erakutsi.',

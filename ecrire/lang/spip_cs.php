@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
-	'0_langue' => 'Čeština [cs]',
-	'0_liste' => 'spip-cs@rezo.net',
-	'0_mainteneur' => 'otto@pacholik.cz',
-
 	// A
 	'access_interface_graphique' => 'Zpět do kompletního grafického rozhraní',
 	'access_mode_texte' => 'Zobrazit jednoduché textové rozhraní',

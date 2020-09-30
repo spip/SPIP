@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-ja',
-	'0_langue' => '日本語［ja］',
-	'0_liste' => 'HU(hu_renraku@yahoo.co.jp), spip-ja@rezo.net',
-	'0_mainteneur' => 'HU(hu_renraku@yahoo.co.jp), spip-dev@rezo.net',
-
 	// A
 	'access_interface_graphique' => 'グラフィカルインターフェースに戻る',
 	'access_mode_texte' => 'シンプルなテキストインターフェースを表示する',

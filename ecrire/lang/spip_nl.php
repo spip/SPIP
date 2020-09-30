@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://www.spip.net/nl_',
-	'0_langue' => 'Nederlands [nl]',
-	'0_liste' => 'spip-nl@rezo.net',
-	'0_mainteneur' => 'spip-nl@teomech.ugent.be',
-
 	// A
 	'access_interface_graphique' => 'Terug naar de volledig grafische interface',
 	'access_mode_texte' => 'Vereenvoudigde tekstinterface weergeven',

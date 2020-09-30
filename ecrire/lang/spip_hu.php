@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-hu',
-	'0_langue' => 'Magyar [hu]',
-	'0_liste' => 'spip-hu@rezo.net',
-	'0_mainteneur' => 'trucy@freemail.huEcker Gábor (ecker.gabor@ecker.t-online.hu)',
-
 	// A
 	'access_interface_graphique' => 'Vissza a teljes grafikus felületre',
 	'access_mode_texte' => 'Egyszerűsített szöveges felület megjelenítése',

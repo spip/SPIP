@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-eo',
-	'0_langue' => 'Esperanto [eo]',
-	'0_liste' => 'spip-eo@rezo.net',
-	'0_mainteneur' => 'MHSautet@aol.com',
-
 	// A
 	'access_interface_graphique' => 'Reen al kompleta grafika interfaco',
 	'access_mode_texte' => 'Afiŝi la simpligitan tekstan interfacon',

@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
-	'0_langue' => ' မြန်မာ[my]',
-	'0_liste' => 'spip-en@rezo.net',
-	'0_mainteneur' => 'George Kandalaft (george@diwanalarab.com)',
-
 	// A
 	'access_interface_graphique' => 'ရုပ်ပုံစာမျက်နှာသို့ ပြန်သွားပါ',
 	'access_mode_texte' => 'ရိုးရိုးစာမျက်နှာကို ပြပါ',

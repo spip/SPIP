@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://www.kyantonius.com/spip',
-	'0_langue' => 'Indonesian [id]',
-	'0_liste' => 'kyantonius@gmail.com',
-	'0_mainteneur' => 'Kemas Antonius (kyantonius@gmail.com)',
-
 	// A
 	'access_interface_graphique' => 'Kembali ke tatap muka grafis lengkap',
 	'access_mode_texte' => 'Tampilkan tatap muka teks disederhana',

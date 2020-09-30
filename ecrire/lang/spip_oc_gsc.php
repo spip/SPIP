@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
-	'0_langue' => 'occitan (gascon) [oc_gsc]',
-	'0_liste' => 'lenga.occitana@aprene.org',
-	'0_mainteneur' => 'Domergue: lenga.occitana@aprene.org ',
-
 	// A
 	'access_interface_graphique' => 'Tornar a l’interfàcia grafica completa',
 	'access_mode_texte' => 'Afichar l’interfàcia textuau simplificada',

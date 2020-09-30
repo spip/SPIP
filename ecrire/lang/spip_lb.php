@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-lb',
-	'0_langue' => 'Lëtzebuergesch [lb]',
-	'0_liste' => 'spip-lb@rezo.net',
-	'0_mainteneur' => 'jim.wanderscheid bei gmail Punkt com',
-
 	// A
 	'access_interface_graphique' => 'Zeréck bei de komplette grapheschen Interface',
 	'access_mode_texte' => 'Vereinfachten Text-Interface weisen',

@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-oc',
-	'0_langue' => 'Nissart [oc_ni]',
-	'0_liste' => 'spip-oc@rezo.net',
-	'0_mainteneur' => 'Sébastien Donato : sebastien@donato.fr',
-
 	// A
 	'access_interface_graphique' => 'Tornar à l’interfaça grafica completa',
 	'access_mode_texte' => 'Affichar l’interfaça textuala simplificada', # essai commentaire

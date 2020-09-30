@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
-	'0_langue' => 'ភាសា ​ខ្មែរ​ [km-Cambodia]',
-	'0_liste' => 'spip-en@rezo.net',
-	'0_mainteneur' => 'spip-dev@rezo.net',
-
 	// A
 	'access_interface_graphique' => 'ត្រលប់​ទៅ ផ្ទាំង​ប្រទាក់​ក្រាហ្វិក​ពេញលេញ​',
 	'access_mode_texte' => 'បង្ហាញ​ចេញ ផ្ទាំង​ប្រទាក់​​សាមញ្ញ ជាអត្ថបទ',

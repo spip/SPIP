@@ -9,13 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
-	'0_langue' => 'Русский [ru]',
-	'0_liste' => 'spip-ru@rezo.net',
-	'0_mainteneur' => '2009-2016 Serge Markitanenko (ss1945@gmail.com). 
-2005-2007 Vitali Zhulkovsky (vzhulkovsky@cmp.com) upd. Maxim Krioukov (krumax@mail.ru)',
-
 	// A
 	'access_interface_graphique' => 'Возврат к полному интерфейсу',
 	'access_mode_texte' => 'Упрощенный текстовый интерфейс',

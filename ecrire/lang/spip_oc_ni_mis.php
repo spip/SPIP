@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-oc',
-	'0_langue' => 'Nissart (mistralenc) [oc_ni_mis]',
-	'0_liste' => 'spip-oc@rezo.net',
-	'0_mainteneur' => 'Sylvain Oliver : spip -at- oliver-fr.org',
-
 	// A
 	'access_interface_graphique' => 'Retour a l’interfaça gràfica coumpleta',
 	'access_mode_texte' => 'Afichà l’interfaça testuala simplificada',

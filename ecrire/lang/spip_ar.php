@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
-	'0_langue' => 'عربي [ar]',
-	'0_liste' => 'spip-dev@rezo.net',
-	'0_mainteneur' => 'جورج قندلفت (khodr1957@gmail.com) ',
-
 	// A
 	'access_interface_graphique' => 'عودة إلى الواجهة الرسومية الكاملة',
 	'access_mode_texte' => 'عرض الواجهة النصية المبسّطة',

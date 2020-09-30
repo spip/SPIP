@@ -1,140 +1,574 @@
 [(#REM)
 
-	Ce squelette definit les styles de l'espace prive
+	Ce squelette definit les styles des boutons icônes de l'espace prive
 
-	Note: l'entete "Vary:" sert a repousser l'entete par
-	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
-	genant en cas de "rotation du cookie de session" apres
-	un changement d'IP (effet de clignotement).
-	<style>
-]
+	Organisation du fichier :
+
+	1. Icones horizontales et verticales
+	2. Barre onglets
+	3. Onglets simples
+	4. Divers et dépréciés
+
+<style>]
 #CACHE{3600*100,cache-client}
-#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
+#HTTP_HEADER{Content-Type: text/css;charset=utf-8}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
 #SET{iconfontsize,0.9em}
+#SET{iconpadding,0.5em}
+#SET{couleurs, #ARRAY{
+	claire,     ##ENV{claire}|couleur_luminance{0.05}|couleur_saturation{0.33, strict},
+	foncee,     #ENV{foncee}|couleur_luminance{0.55},
+	foncee_max, #ENV{foncee}|couleur_luminance{0.75},
+}}
 
-/* * Style des icones */
-/* structure html : <span class="icone danger horizontale s24 left"><a><img><b>texte</b></span> */
-.icone { display:block; margin:0;padding:0;text-align: center;position:relative;z-index:2; /*font-size: 10px;*/}
-.icone a,.icone .submit {display:block;margin:0 auto;width:72px;padding: 5px 0;border:0;cursor:hand;cursor:pointer; }
-.icone a:hover {text-decoration:none;}
-.icone a img,.icone .submit img {margin: 0 auto; display: inline; padding: 4px; background-color: #eee; border: 2px solid #ENV{foncee}; background-repeat:no-repeat;background-position: center center;}
-.icone a:hover img,.icone .submit:hover img  { background-color: #fff; border-color: #666; }
-.icone a b,.box .icone a b,.icone .submit b,.box .icone .submit b { font-weight: bold; color: #ENV{foncee}; display: block; margin: 2px auto; width: 100%; font-size:#GET{iconfontsize};height: [(#ENV{line-height}|strmult{2}|strdiv{#GET{iconfontsize}})em];line-height:1; }
-.icone a:hover b,.icone .submit:hover b { color: #000;}
-.icone .icone-image {display: inline-block;position: relative;}
-.icone .icone-image img {display: block;}
-.icone.s16 .icone-image img {width: 16px;}
-.icone.s24 .icone-image img {width: 24px;}
-.icone.s32 .icone-image img {width: 32px;}
-.icone .icone-fonction::after {content:'';display: block;position: absolute;top:0;left:0;right:0;bottom:0;background-size: 85%;background-position: center right 2px;background-repeat: no-repeat;}
-.icone .icone-fonction-add::after{background-image:url(#CHEMIN_IMAGE{add-xx.svg});}
-.icone .icone-fonction-new::after{background-image:url(#CHEMIN_IMAGE{new-xx.svg});}
-.icone .icone-fonction-del::after{background-image:url(#CHEMIN_IMAGE{del-xx.svg});}
-.icone .icone-fonction-edit::after{background-image:url(#CHEMIN_IMAGE{edit-xx.svg});}
-.icone .icone-fonction-config::after{background-image:url(#CHEMIN_IMAGE{config-xx.svg});}
+/**
+ * ==============================
+ * 1. Icône verticale/horizontale
+ * ==============================
+ *
+ * Par défaut, icône verticale.
+ * Une variante horizontale.
+ *
+ * Markup :
+ * <span class="icone danger horizontale s24 left">
+ *   <a>
+ *     <img>
+ *     <b>texte</b>
+ *   </a>
+ * </span>
+ */
 
-/*form.bouton_action_post.icone,form.bouton_action_post.icone div,form.bouton_action_post.icone .submit {display:block;}*/
+.icone {
+	position: relative; /* Afin que le z-index soit pris en compte */
+	z-index: 2;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	 -webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	  justify-content: center;
+	-webkit-box-align: center;
+	   -ms-flex-align: center;
+	      align-items: center;
+	text-align: center;
+	border-radius: 0.25em;
+	vertical-align: middle;
+}
+
+/* Conteneur lien */
+.icone a {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	   -webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	        -ms-flex-flow: column wrap;
+	            flex-flow: column wrap;
+	-webkit-box-align: inherit;
+	   -ms-flex-align: inherit;
+	      align-items: inherit;
+	-webkit-box-pack: inherit;
+	   -ms-flex-pack: inherit;
+	 justify-content: inherit;
+	width: 5em;
+	padding: [(#GET{iconpadding}) ]0;
+	cursor: pointer;
+	-webkit-transition: all 0.2s;
+	     -o-transition: all 0.2s;
+         	transition: all 0.2s;
+	border-radius: inherit;
+}
+
+/* Label */
+.icone b,
+.box .icone b {
+	font-weight: bold;
+	margin: 0.5em 0 0;
+	font-size: #GET{iconfontsize};
+	line-height: 1;
+	color: #ENV{foncee};
+	/* height: [(#ENV{line-height}|strmult{2}|strdiv{#GET{iconfontsize}})em]; */
+}
+
+/* Survol et cie */
+.icone a:hover,
+.icone a:focus {
+	text-decoration: none;
+}
+.icone a:hover .icone-image,
+.icone a:focus .icone-image {
+	background-color: #ENV{claire};
+	-webkit-box-shadow: none;
+	        box-shadow: none;
+}
+.icone a:hover b,
+.icone a:focus b {
+	color: #222;
+}
+/* Si icone fonction, animation bling */
+.icone a:hover .icone-image.icone-fonction,
+.icone a:focus .icone-image.icone-fonction {
+	background-color: transparent;
+}
+.icone a:hover .icone-fonction img,
+.icone a:focus .icone-fonction img {
+	opacity: 0;
+}
+.icone a:hover .icone-fonction:after,
+.icone a:focus .icone-fonction:after {
+	background-size: 60% auto;
+	background-position: center center;
+	-webkit-transition: background 0.2s;
+	     -o-transition: background 0.2s;
+	        transition: background 0.2s; /* aller */
+}
+
+/**
+ * Images
+ * Nb : les URLs sont mutualisées avec les boutons, donc définies dans boutons.css
+ * .icone-image : image de base
+ * .icone-fonction : mini image optionnelle par-dessus la précédente
+ */
+.icone .icone-image {
+	padding: #GET{iconpadding};
+	border-radius: inherit;
+	/* background-color: hsla(0, 0%, 0%, 0.025); */
+	background-color: #GET{couleurs/claire};
+	-webkit-box-shadow: inset 0 0 0.75em hsla(0, 0%, 0%, 0.033);
+	        box-shadow: inset 0 0 0.75em hsla(0, 0%, 0%, 0.033);
+	-webkit-transition: all 0.2s;
+	     -o-transition: all 0.2s;
+	        transition: all 0.2s;
+}
+.icone .icone-image img {
+	display: block;
+	-webkit-transition: inherit;
+	     -o-transition: inherit;
+	        transition: inherit;
+}
+.icone .icone-fonction {
+	position: relative;
+}
+.icone .icone-fonction:after {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-position: bottom[ (#GET{iconpadding}) ]right[ (#GET{iconpadding})];
+	background-repeat: no-repeat;
+	-webkit-transition: background 0.1s;
+	     -o-transition: background 0.1s;
+	        transition: background 0.1s; /* Retour */
+}
+.icone .icone-fonction-new:after {
+	background-position-y: top[ (#GET{iconpadding})];
+}
+
+/* Variante horizontale */
+.icone.horizontale {
+	clear: both;
+	-webkit-box-pack: start;
+	   -ms-flex-pack: start;
+	 justify-content: flex-start;
+	text-align: #ENV{left};
+}
+.icone.horizontale a {
+	padding: 0.25em 0;
+	-webkit-box-flex: 1;
+	        -ms-flex: 1 1 auto;
+	            flex: 1 1 auto;
+	   -webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	        -ms-flex-flow: row nowrap;
+	            flex-flow: row nowrap;
+	width: auto;
+}
+.icone.horizontale b {
+	margin-top: 0;
+	margin-#ENV{left}: 0.5em;
+}
+.icone.horizontale a:not(:hover):not(:focus) b {
+	color: #666;
+}
+.icone.horizontale .icone-image {
+	padding: 0;
+	background: transparent;
+	-webkit-box-shadow: none;
+	        box-shadow: none;
+}
+.icone.horizontale .icone-fonction:after {
+	background-position: bottom 0 right 0;
+}
+.icone.horizontale .icone-fonction-new:after {
+	background-position-y: top 0;
+}
+.icone.horizontale a:hover .icone-image,
+.icone.horizontale a:focus .icone-image {
+	background: transparent;
+}
+
+/* Tailles */
+.icone.s16 .icone-image img {
+	width: 16px;
+}
+.icone.s16 .icone-fonction:after {
+	background-size: 8px;
+}
+.icone.s24 .icone-image img {
+	width: 24px;
+}
+.icone.s24 .icone-fonction:after {
+	background-size: 12px;
+}
+.icone.s32 .icone-image img {
+	width: 32px;
+}
+.icone.s32 .icone-fonction:after {
+	background-size: 16px;
+}
+
+/* Variantes alignement */
+.icone.left {
+	float: #ENV{left};
+}
+.icone.horizontale.left,
+.icone.horizontale.right {
+	clear: none;
+}
+.icone.right {
+	float: #ENV{right};
+}
+.icone.center {
+	clear: both;
+	display: table !important; /* Seule façon d'auto-centrer un élément indépendamment du parent */
+	margin-left: auto;
+	margin-right: auto;
+}
+.icone.clearleft {
+	clear: #ENV{left};
+}
+.icone.clearright {
+	clear: #ENV{right};
+}
 
 
-/* alignement */
-.icone.left {float:#ENV{left};}
-.icone.right {float:#ENV{right};}
-.icone.center {clear:both;}
-.icone.center a,.icone.center .submit {margin:0 auto;}
-.icone.clearleft {clear:#ENV{left};}
-.icone.clearright {clear:#ENV{right};}
+/* Variantes sans texte ou sans image */
+.icones_img .icone a b {
+	display: none;
+}
+.icones_texte .icone .icone-image {
+	display: none;
+}
+.icones_texte .icone.horizontale:not(.danger) {
+	padding-left: 0;
+	padding-right: 0;
+}
 
-/* icone horizontale */
-.icone.horizontale {}
-.icone.horizontale { display:block; clear: both;position:relative;margin:0;padding:2px;text-align: #ENV{left};padding-#ENV{left}:32px;}
-.icone.horizontale a,.icone.horizontale .submit {display:inline;width:auto;padding:0;position: static}
-/* pour les navigateurs modernes */
-.icone.horizontale a,.icone.horizontale .submit {display:table-cell;vertical-align:middle;height:28px;}
-.icone.horizontale.right {text-align: #ENV{right};padding-#ENV{right}:32px;padding-#ENV{left}:2px;}
-.icone.horizontale a img,.icone.horizontale .submit img {padding:0;border:0;background:none;}
-.icone.horizontale a .icone-image,.icone.horizontale .submit .icone-image {position:absolute;#ENV{left}:4px;top:50%;margin-top:-12px;}
-.icone.horizontale a b,.icone.horizontale .submit b {color:#666;display:inline;}
-.icone.horizontale a:hover b,.icone.horizontale .submit:hover b { color: #000;}
-.icone.horizontale .icone-fonction::after {background-size: contain;background-position: center;}
+/* Variante danger (à mutualiser avec boutons.css ?) */
+.icone.danger a {
+	background-image: url(#CHEMIN_IMAGE{rayures-sup.svg});
+	background-color: transparent;
+}
+.icone.danger b {
+	color: #222;
+	text-shadow: 0 0 0.25em white, 0 0 0.5em white, 0 0 1em white; /* Lisibilité */
+}
+.icone.danger .icone-image {
+	background-color: #fff;
+	border: 2px solid #ff9999;
+}
+.icone.danger a:hover b,
+.icone.danger a:focus b {
+	color: red !important;
+}
+.icone.danger a:hover .icone-image,
+.icone.danger a:focus .icone-image {
+	background-color: #fff;
+	border-color: red;
+}
+.icone.horizontale.danger a {
+	padding-left: 0.25em;
+	padding-right: 0.25em;
+}
+.icone.horizontale.danger .icone-image {
+	background: none;
+	border: none;
+}
+.icone.horizontale.danger a:hover .icone-image,
+.icone.horizontale.danger a:focus .icone-image {
+	background: none;
+}
 
-/* variantes sans texte ou sans image */
-.icones_img .icone.verticale b {display:none;}
-.icones_texte .icone .icone-image {display:none;}
+/* Cas particuliers */
+.icone.verticale.historique-24 {
+	width: 90px;
+}
+.icone.verticale.suivi-forum-24 {
+	width: 100px;
+}
+.icone.verticale.edition_deja,
+.icone.verticale.edition_deja a,
+.icone.verticale.edition_deja a b {
+	width: 100px;
+}
+.icone.verticale.edition_deja a b {
+	height: [(#ENV{line-height}|strmult{3}|strdiv{#GET{iconfontsize}})em];
+}
 
-.icones_texte .icone.horizontale {padding:2px;}
-.icones_texte .icone.horizontale a,.icones_texte .icone.horizontale .submit {display:block;padding:7px;height:auto;color: #606060;border: 1px solid #ddd; background-color: #f0f0f0;}
-.icones_texte .icone.horizontale a:hover,.icones_texte .icone.horizontale .submit:hover  { text-decoration: none; color: #000; border-#ENV{right}: solid 1px #fff; border-bottom: solid 1px #fff; border-#ENV{left}: solid 1px #666; border-top: solid 1px #666; background-color: #eee; }
 
-/* danger */
-.icone.danger {background:none;}
-.icone.danger a,.icone.danger .submit { background: #fce8dd url(#CHEMIN_IMAGE{rayures-danger.png}); }
-.icone.danger a img,.icone.danger .submit img { background-color: #fff; border-color: #ff9999; }
-.icone.danger a:hover img,.icone.danger .submit:hover img { background-color: #fff; border-color: red; }
-.icone.horizontale.danger a,.icone.horizontale.danger .submit { background: none; }
-.icone.horizontale.danger a img,.icone.horizontale.danger .submit img { background: none; }
-.icone.horizontale.danger { background: #fce8dd url(#CHEMIN_IMAGE{rayures-danger.png}); }
-.icones_texte .icone.horizontale.danger {background:none;}
-.icones_texte .icone.horizontale.danger a,.icones_texte .icone.horizontale.danger .submit { background: #fce8dd url(#CHEMIN_IMAGE{rayures-danger.png}); }
+/* ================
+ * 2. Barre onglets
+ * ================
+ *
+ * Markup :
+ *
+ * <div class='barre_onglet'><ul class='clearfix'>
+ * <li><strong></strong><li><a></a></li>
+ * </ul></div>
+ */
+.barre_onglet {
+	padding: 7px;
+	clear: both;
+	text-align: center;
+}
+.barre_onglet ul {
+	display: inline-block;
+	margin: 0 auto;
+	text-align: #ENV{left};
+	padding:0;
+	list-style:none;
+}
+.barre_onglet li {
+	float: #ENV{left};
+	border: 1px solid #ENV{foncee};
+	margin:0;
+	padding:0;
+	margin-#ENV{right}: 3px;
+	position:relative;
+	list-style:none;
+	margin-right: 0px;
+	border-left-width: 0px;
+	border-color: #eee;
+}
+.barre_onglet a,
+.barre_onglet strong {
+	display: block;
+	font-weight: bold;
+	padding: 5px 8px;
+	text-decoration: none;
+	background-color: #fff;
+}
+.barre_onglet a {
+	background-color: #eee;
+}
+.barre_onglet a:hover,
+.barre_onglet a:focus {
+	background-color: #ENV{claire};
+	color: #fff;
+	text-decoration: none;
+	background-color: white;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ffffff));
+	background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
+	background-image: -moz-linear-gradient(top, #ffffff, #ffffff);
+	background-image: -ms-linear-gradient(top, #ffffff, #ffffff);
+	background-image: -o-linear-gradient(top, #ffffff, #ffffff);
+	background-image: linear-gradient(top, #ffffff, #ffffff);color: #[(#ENV{foncee}|couleur_luminance{0.7})];
+	filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ffffff', endColorstr='#ffffff');
+}
+.barre_onglet strong {
+	background-color: #ENV{foncee};
+	color: #fff;
+}
+.barre_onglet strong.on {
+	background-color: #ENV{foncee};
+}
+.barre_onglet li:first-child strong.on {
+	border-bottom-left-radius:5px;
+	border-top-left-radius:5px;
+}
+.barre_onglet li:last-child strong.on {
+	border-bottom-right-radius:5px;
+	border-top-right-radius:5px;
+}
+.barre_onglet ul > li:first-child {
+	position: relative;
+	border-left-width: 1px;
+	border-bottom-left-radius: 5px;
+	border-top-left-radius: 5px;
+}
+.barre_onglet ul > li:first-child a {
+	position: relative;
+	border-bottom-left-radius: 5px;
+	border-top-left-radius: 5px;
+}
+.barre_onglet ul > li:last-child {
+	position: relative;
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+}
+.barre_onglet ul > li:last-child a {
+	position: relative;
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+}
+.barre_onglet .cadre-icone {
+	top: -8px;
+	#ENV{left}: 4px;
+}
+.barre_onglet .cadre-icone + a,
+.barre_onglet .cadre-icone + strong {
+	padding-#ENV{left}: 32px;
+}
 
-/* cas particuliers */
-.icone.verticale.historique-24 { width: 90px; }
-.icone.verticale.suivi-forum-24 { width: 100px; }
 
-.icone.verticale.edition_deja,.icone.verticale.edition_deja a,.icone.verticale.edition_deja a b {width: 100px;}
-.icone.verticale.edition_deja a b {height: [(#ENV{line-height}|strmult{3}|strdiv{#GET{iconfontsize}})em];}
+/* ==================
+ * 3. Onglets simples
+ * ==================
+ *
+ * Markup :
+ *
+ * <div class='onglets_simple clearfix'><ul><li><strong></strong></li><li><a></a></li></ul></div>
+ * <div class='onglets_simple second clearfix'><ul><li><strong></strong></li><li><a></a></li></ul></div>
+ */
+
+.onglets_simple {
+	margin: 1em 0;
+	clear: #ENV{left};
+	border-bottom:1px solid #ENV{foncee};
+	padding-#ENV{left}:5px;
+}
+.onglets_simple ul {
+	list-style: none;
+	margin-#ENV{left}:1px;
+	padding:0;
+}
+.onglets_simple ul li {
+	float: #ENV{left};
+	padding: 0;
+	margin: 0;
+	margin-bottom: -1px;
+}
+.onglets_simple ul li strong,
+.onglets_simple ul li a {
+	display: block;
+	float: #ENV{left};
+	padding: 4px 7px;
+	border: 1px solid #ENV{foncee};
+	margin-#ENV{left}: 5px;
+	background-color: #eee;
+	background-position: center #ENV{left};
+	background-repeat: no-repeat;
+}
+.onglets_simple ul li strong,
+.onglets_simple ul li a:hover {
+	background-color: #f8f7f3;
+}
+.onglets_simple ul li a {
+	position: relative;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	opacity: 0.7;
+	filter: alpha(opacity=70);
+}
+.onglets_simple ul li a:hover,
+.onglets_simple ul li a:focus {
+	cursor: hand;
+	cursor: pointer;
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+.onglets_simple ul li strong {
+	position: relative;
+	color: #555;
+	background-color: transparent;
+	border-bottom: 1px solid #f8f7f3;
+	border-top-right-radius: 5px;
+	border-bottom-color: #f9f9f9;
+}
+.onglets_simple .cadre-icone {
+	display: none;
+}
+
+/* Second niveau */
+
+.onglets_simple.second {
+	font-size: 0.9em;
+	border: 0;
+	padding-#ENV{left}: 0;
+}
+.onglets_simple.second ul li strong,
+.onglets_simple.second ul li a {
+	margin-#ENV{left}:0px;
+	margin-#ENV{right}:5px;
+	margin-bottom:5px;
+}
+.onglets_simple.second ul li strong {
+	border:1px solid #ENV{foncee};
+}
+.onglets_simple.second ul li strong,
+.onglets_simple.second ul li a:hover,
+.onglets_simple.second ul li a:focus {
+	background-color: #fff;
+}
+
+/* ==================
+ * 4. Divers & oldies
+ * ==================
+ */
 
 /* icone en bord haut du cadre */
-.cadre-icone {position: absolute; top: -16px; #ENV{left}: 10px;z-index:1;max-width:24px;height:auto;}
+.cadre-icone {
+	position: absolute;
+	top: -16px;
+	#ENV{left}: 10px;
+	z-index:1;
+	max-width:24px;
+	height:auto;
+}
 
+.iconeoff {
+	padding: 3px;
+	margin: 1px;
+	border: 1px dashed #ccc;
+	background-color: #f0f0f0;
+}
 
-/* barre onglet historique
-<div class='barre_onglet'><ul class='clearfix'>
-<li><strong></strong><li><a></a></li>
-</ul></div>
-*/
-/* * Style des onglets historiques */
+.iconeon {
+	cursor: pointer;
+	padding: 3px;
+	margin: 1px;
+	border-#ENV{right}: solid 1px #fff;
+	border-bottom: solid 1px #fff;
+	border-#ENV{left}: solid 1px #666;
+	border-top: solid 1px #666;
+	background-color: #eee;
+}
 
-.barre_onglet {padding:7px;clear:both;text-align:center;}
-.barre_onglet ul {
-	display:inline-block;
-	margin:0 auto;text-align:#ENV{left};padding:0;list-style:none;}
-.barre_onglet li {float:#ENV{left};border: 1px solid #ENV{foncee};margin:0;padding:0;margin-#ENV{right}: 3px;position:relative;list-style:none;}
-.barre_onglet .cadre-icone {top:-8px;#ENV{left}:4px;}
-.barre_onglet a,.barre_onglet strong {display:block;font-weight: bold;padding: 5px 8px;text-decoration: none;background-color:#fff;}
-.barre_onglet .cadre-icone+a,.barre_onglet .cadre-icone+strong {padding-#ENV{left}:32px;}
-
-.barre_onglet strong {background-color: #ENV{foncee}; color: #fff;}
-.barre_onglet a:hover {background-color: #ENV{claire}; color: #fff;text-decoration: none;}
-
-
-/* onglets simple 1er et second niveau
-<div class='onglets_simple clearfix'><ul><li><strong></strong></li><li><a></a></li></ul></div>
-<div class='onglets_simple second clearfix'><ul><li><strong></strong></li><li><a></a></li></ul></div>
-*/
-.onglets_simple { margin:1em 0;clear:#ENV{left};border-bottom:1px solid #ENV{foncee};padding-#ENV{left}:5px;}
-.onglets_simple ul {list-style:none;margin-#ENV{left}:1px;padding:0;}
-.onglets_simple ul li {float:#ENV{left};padding:0;margin:0;margin-bottom:-1px;}
-
-.onglets_simple ul li strong,.onglets_simple ul li a {display:block;float:#ENV{left};padding:4px 7px;border:1px solid #ENV{foncee};margin-#ENV{left}:5px;background-color:#eee;background-position:center #ENV{left};background-repeat:no-repeat;}
-.onglets_simple ul li strong,.onglets_simple ul li a:hover {background-color:#f8f7f3;}
-.onglets_simple ul li a:hover {cursor:hand;cursor:pointer;}
-.onglets_simple ul li strong {border-bottom:1px solid #f8f7f3;color:#555;}
-.onglets_simple .cadre-icone {display: none;}
-
-.onglets_simple.second {font-size:0.9em;border:0;padding-#ENV{left}:0;}
-.onglets_simple.second ul li strong,.onglets_simple.second ul li a {margin-#ENV{left}:0px;margin-#ENV{right}:5px;margin-bottom:5px;}
-.onglets_simple.second ul li strong {border:1px solid #ENV{foncee};}
-.onglets_simple.second ul li strong,.onglets_simple.second ul li a:hover {background-color:#fff;}
-
-
-.iconeoff { padding: 3px; margin: 1px; border: 1px dashed #ccc; background-color: #f0f0f0; }
-.iconeon { cursor: pointer; padding: 3px; margin: 1px; border-#ENV{right}: solid 1px #fff; border-bottom: solid 1px #fff; border-#ENV{left}: solid 1px #666; border-top: solid 1px #666; background-color: #eee; }
-.iconedanger { padding: 3px; margin: 1px; border: 1px dashed #000; background: #fce8dd url(#CHEMIN_IMAGE{rayures-danger.png}); }
+.iconedanger {
+	padding: 3px;
+	margin: 1px;
+	border: 1px dashed #000;
+	background: #fce8dd url(#CHEMIN_IMAGE{rayures-danger.svg});
+}
 
 /* OLDIES anciennes icones issues de php */
 td.icone table {}
-td.icone a { color: #000; text-decoration: none; font-size: 10px; font-weight: bold; }
-td.icone a:hover { text-decoration: none; }
-td.icone a img { border: 0; }
+
+td.icone a {
+	color: #000;
+	text-decoration: none;
+	font-size: 10px;
+	font-weight: bold;
+}
+
+td.icone a:hover {
+	text-decoration: none;
+}
+
+td.icone a img {
+	border: 0;
+}

@@ -40,7 +40,7 @@ function genie_mise_a_jour_dist($t) {
 
 // TODO : fournir une URL sur spip.net pour maitriser la diffusion d'une nouvelle version de l'ecran via l'update auto
 // ex : http://www.spip.net/auto-update/ecran_securite.php
-define('_URL_ECRAN_SECURITE', 'https://zone.spip.org/trac/spip-zone/browser/_core_/securite/ecran_securite.php?format=txt');
+define('_URL_ECRAN_SECURITE', 'https://git.spip.net/spip-contrib-outils/securite/raw/branch/master/ecran_securite.php');
 define('_VERSIONS_SERVEUR', 'https://files.spip.net/');
 define('_VERSIONS_LISTE', 'archives.xml');
 

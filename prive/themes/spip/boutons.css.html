@@ -1,0 +1,571 @@
+[(#REM)
+
+	Ce squelette définit les styles des boutons de l'espace privé.
+
+	- Liens boutons : <a class="bouton">
+	- Boutons d'action : \#BOUTON_ACTION
+	- Boutons de formulaires : <input class="submit"> et <button>
+
+	Organisation du fichier :
+
+	1. Base commune à tous les boutons
+	2. Variantes génériques
+	3. Variantes icônes
+	4. Liens boutons
+	5. Boutons de formulaires
+	6. Boutons d'action
+	7. Groupes de boutons
+
+<style>]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{couleurs, #ARRAY{
+	claire,     ##ENV{claire}|couleur_luminance{0.05}|couleur_saturation{0.33, strict},
+	foncee,     #ENV{foncee}|couleur_luminance{0.55},
+	foncee_max, #ENV{foncee}|couleur_luminance{0.75},
+}}
+
+[(#REM) Tailles et valeurs associées ]
+#SET{paddings, #ARRAY{
+	16, #LISTE{0.5em, 1.25em},
+	24, #LISTE{0.5em, 1.25em},
+	32, #LISTE{0.5em, 1.25em},
+}}
+#SET{font-sizes, #ARRAY{
+	16, 0.85em,
+	24, 1em,
+	32, 1.15em,
+}}
+#SET{heights, #ARRAY{
+	16, calc\(\(#GET{paddings/16/0} * 2\) + 16px + 2px\),
+	24, calc\(\(#GET{paddings/24/0} * 2\) + 24px + 2px\),
+	32, calc\(\(#GET{paddings/32/0} * 2\) + 32px + 2px\),
+}}
+#SET{tailles, #ARRAY{
+	16, #ARRAY{font-size, #GET{font-sizes/16}, height, #GET{heights/16}, padding, #GET{paddings/16}},
+	24, #ARRAY{font-size, #GET{font-sizes/24}, height, #GET{heights/24}, padding, #GET{paddings/24}},
+	32, #ARRAY{font-size, #GET{font-sizes/32}, height, #GET{heights/32}, padding, #GET{paddings/32}},
+}}
+
+/**
+ * ==================================
+ * 1. Base commune à tous les boutons
+ * ==================================
+ * Fond gris clair, police, alignement.
+ */
+
+.bouton,
+.bouton_action_post,
+.formulaire_spip input.submit,
+.formulaire_spip button {
+	border-radius: 0.33em;
+	text-decoration: none;
+	margin-bottom: 0.25em;
+	vertical-align: middle;
+}
+.bouton,
+.bouton_action_post .submit,
+.formulaire_spip input.submit,
+.formulaire_spip button {
+	position: relative;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box; /* Ignorer le padding pour les dimensions */
+	display: -webkit-inline-box;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	  justify-content: center;
+	-webkit-box-align: center;
+	   -ms-flex-align: center;
+	      align-items: center;
+	vertical-align: middle; /* Répété juste pour .bouton_action_post */
+	text-align: center;
+	min-height: [(#GET{tailles/16/height})];
+	padding: [(#GET{tailles/16/padding}|implode{' '})];
+	border: 1px solid transparent; /* Garder les mêmes dimensions que ceux avec bordure */
+	background-color: #GET{couleurs/claire};
+	/* background-color: hsla(0, 0%, 0%, 0.08); */
+	color: #666;
+	font-family: inherit;
+	font-weight: bold;
+	font-size: [(#GET{tailles/16/font-size})];
+	line-height: 1;
+	transition: all 0.2s, transform 0.05s;
+}
+/* Fix form dans colonne */
+.lat .formulaire_spip input.submit {
+	padding: [(#GET{tailles/16/padding}|implode{' '})]; /* Obligé de dupliquer la règle */
+}
+
+/* Survol, focus & active : fond très foncé */
+.bouton:hover,
+.bouton:focus,
+.bouton_action_post .submit:hover,
+.bouton_action_post .submit:focus,
+.formulaire_spip input.submit:hover,
+.formulaire_spip input.submit:focus,
+.formulaire_spip button:hover,
+.formulaire_spip button:focus {
+	background: [#(#GET{couleurs/foncee})]; /* background tout court pour surcharger image éventuelle */
+	color: white;
+	-webkit-box-shadow: 0 0 0.75em [ #(#ENV{claire}|couleur_luminance{0.15}|couleur_saturation{1, strict})];
+	        box-shadow: 0 0 0.75em [ #(#ENV{claire}|couleur_luminance{0.15}|couleur_saturation{1, strict})];
+	text-decoration: none;
+}
+.bouton:active,
+.bouton_action_post .submit:active,
+.formulaire_spip input.submit:active,
+.formulaire_spip button:active {
+	background: #[(#GET{couleurs/foncee_max})]; /* background tout court pour surcharger image éventuelle */
+	color: white;
+	-webkit-transform: translateY(0.1em);
+	    -ms-transform: translateY(0.1em);
+	        transform: translateY(0.1em);
+}
+
+/* Image-icône éventuelle */
+.bouton .icone-image,
+.bouton_action_post .submit .icone-image,
+.formulaire_spip button .icone-image {
+	margin-#ENV{right}: 0.5em;
+}
+
+
+/**
+ * ================================
+ * 2. Variantes génériques communes
+ * ================================
+ * Nb : on fait en sorte de garder les couleurs de base pour le survol et cie.
+ */
+
+/* Variante principal : boutons mis en avant, fond de couleur du thème */
+.bouton.principal:not(:hover):not(:focus):not(:active),
+.bouton_action_post.principal .submit:not(:hover):not(:focus):not(:active),
+.formulaire_spip input.submit.principal:not(:hover):not(:focus):not(:active),
+.formulaire_spip button.principal:not(:hover):not(:focus):not(:active) {
+	background-color: #ENV{foncee};
+	color: white;
+}
+
+/* Variante secondaire : boutons mis en retrait, juste une bordure */
+.bouton.secondaire:not(:hover):not(:focus):not(:active),
+.bouton_action_post.secondaire .submit:not(:hover):not(:focus):not(:active),
+.formulaire_spip input.submit.secondaire:not(:hover):not(:focus):not(:active),
+.formulaire_spip button.secondaire:not(:hover):not(:focus):not(:active) {
+	background: transparent;
+	border-color: #ENV{claire};
+}
+.bouton.secondaire:hover,
+.bouton.secondaire:focus,
+.bouton_action_post.secondaire .submit:hover,
+.bouton_action_post.secondaire .submit:focus,
+.formulaire_spip input.submit.secondaire:hover,
+.formulaire_spip input.submit.secondaire:focus,
+.formulaire_spip button.secondaire:hover,
+.formulaire_spip button.secondaire:focus {
+	border-color: #GET{couleurs/foncee_max}; /* Idem fond */
+}
+.bouton.secondaire:active,
+.bouton_action_post.secondaire .submit:active,
+.formulaire_spip input.submit.secondaire:active,
+.formulaire_spip button.secondaire:active {
+	border-color: #GET{couleurs/foncee_max}; /* Idem fond */
+}
+
+/* Variante link : boutons affichés comme un lien */
+.bouton.link,
+.bouton_action_post.link .submit,
+.formulaire_spip input.submit.link,
+.formulaire_spip button.link {
+	background-color: transparent;
+	padding-left: 0; /* garder une marge verticale */
+	padding-right: 0; /* garder une marge verticale */
+}
+.bouton.link:hover,
+.bouton.link:focus,
+.bouton.link:active,
+.bouton_action_post.link .submit:hover,
+.bouton_action_post.link .submit:focus,
+.bouton_action_post.link .submit:active,
+.formulaire_spip input.submit.link:hover,
+.formulaire_spip input.submit.link:focus,
+.formulaire_spip input.submit.link:active,
+.formulaire_spip button.link:hover,
+.formulaire_spip button.link:focus,
+.formulaire_spip button.link:active {
+	background-color: transparent;
+	color: #ENV{foncee};
+	-webkit-box-shadow: none;
+	        box-shadow: none;
+}
+
+/* Variante bloc : pleine largeur */
+.bouton.bloc,
+.formulaire_spip input.submit.bloc,
+.formulaire_spip button.bloc {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	width: 100%;
+}
+.bouton_action_post.bloc,
+.bouton_action_post.bloc div {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+.bouton_action_post.bloc div,
+.bouton_action_post.bloc .submit {
+	-webkit-box-flex: 1;
+	        -ms-flex: 1 1 auto;
+	            flex: 1 1 auto;
+}
+
+/* Variantes alignements : boutons flottants à gauche ou à droite */
+.bouton.right,
+.bouton_action_post.right,
+.formulaire_spip input.submit.right,
+.formulaire_spip button.right {
+	float: #ENV{right};
+}
+.bouton.left,
+.bouton_action_post.left,
+.formulaire_spip input.submit.left,
+.formulaire_spip button.left {
+	float: #ENV{left};
+}
+
+/* Variante désactivé : boutons non cliquables */
+.bouton.desactive,
+.bouton_action_post.desactive,
+.formulaire_spip input.submit.desactive,
+.formulaire_spip button.desactive {
+	opacity: 0.8;
+	-webkit-filter: grayscale(100%);
+	        filter: grayscale(100%);
+	pointer-events: none;
+}
+
+/* Variante danger (voir aussi dans icons.css) */
+.bouton.danger,
+.bouton_action_post.danger .submit,
+.formulaire_spip input.submit.danger,
+.formulaire_spip button.danger {
+	background-color: transparent !important;
+	background-image: url(#CHEMIN_IMAGE{rayures-sup.svg}) !important;
+	color: #222 !important;
+	text-shadow: 0 0 0.25em white, 0 0 0.5em white, 0 0 1em white; /* Lisibilité */
+}
+.bouton.danger:hover,
+.bouton.danger:focus,
+.bouton_action_post.danger .submit:hover,
+.bouton_action_post.danger .submit:focus,
+.formulaire_spip input.submit.danger:hover,
+.formulaire_spip input.submit.danger:focus,
+.formulaire_spip button.danger:hover,
+.formulaire_spip button.danger:focus {
+	-webkit-box-shadow: none;
+	        box-shadow: none;
+	color: red !important;
+}
+
+/* Variante sans icône (préférence utilisateur) */
+.icones_texte .bouton:before,
+.icones_texte .bouton_action_post .submit:before,
+.icones_texte .formulaire_spip button:before,
+.icones_texte .icone-image {
+	display: none !important;
+}
+.icones_texte .formulaire_spip input.submit:not(.danger) {
+	background-image: none !important;
+	padding-left: #GET{tailles/16/padding/1} !important; /* Todo autres tailles ? */
+}
+
+/* Variantes tailles */
+ <BOUCLE_icones_tailles(DATA) {source table, #GET{tailles}}>
+.bouton.s#CLE,
+.bouton_action_post.s#CLE .submit,
+.formulaire_spip input.submit.s#CLE,
+.formulaire_spip button.s#CLE {
+	font-size: [(#VALEUR{fontsize})];
+	min-height: [(#VALEUR{height})]; /* Pour hauteur identique avec ou sans icone */
+	padding: [(#VALEUR{padding}|implode{' '})];
+}
+.bouton.s#CLE:before,
+.bouton_action_post.s#CLE .submit:before,
+.formulaire_spip button.s#CLE:before {
+	width: [(#CLE)]px !important; /* Obligé important */
+	height: [(#CLE)]px !important;
+}
+.formulaire_spip input.submit.s#CLE {
+	background-size: [(#CLE)]px;
+	padding-#ENV{left}: [(#VALEUR{padding/1})];
+}
+</BOUCLE_icones_tailles>
+
+
+/**
+ * ===================
+ * 3. Variantes images
+ * ===================
+ * Des images/icônes pour des boutons avec des fonctions précises : ajouter, supprimer, etc.
+ * Certaines règles sont mutualisées avec icons.css
+ * On peut aussi mettre manuellement une icône dans le HTML : <img class="icone-image">
+ */
+
+#SET{icones, #LISTE{add, del, config, edit, import, export, new, fermer, ouvrir, ok}}
+/* Styles communs */
+<BOUCLE_icones_common(DATA) {source table, #GET{icones}} {","}>
+.bouton.#VALEUR:before,
+.bouton_action_post.#VALEUR .submit:before,
+.formulaire_spip button.#VALEUR:before
+</BOUCLE_icones_common>
+{
+	content: '';
+	display: block;
+	width: 16px;
+	height: 16px;
+	margin-#ENV{right}: 0.5em;
+	background-size: 100%;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+<BOUCLE_icones_submit(DATA) {source table, #GET{icones}} {","}>
+.formulaire_spip input.submit.#VALEUR
+</BOUCLE_icones_submit>
+{
+	padding-#ENV{left}: calc(16px + 1.5em); /* Todo autres tailles */
+	background-size: 16px 16px;
+	background-position: center left 1em;
+	background-repeat: no-repeat;
+}
+/* Images */
+<BOUCLE_icones_images(DATA) {source table, #GET{icones}}>
+.icone .icone-fonction-#VALEUR:after,
+.bouton.#VALEUR:before,
+.bouton_action_post.#VALEUR .submit:before,
+.formulaire_spip input.submit.#VALEUR,
+.formulaire_spip button.#VALEUR:before {
+	background-image: url(#CHEMIN_IMAGE{#VALEUR-xx.svg});
+}
+/* Au survol on met une variante mono de couleur claire */
+.bouton.#VALEUR:hover:before,
+.bouton.#VALEUR:focus:before,
+.bouton_action_post.#VALEUR .submit:hover:before,
+.bouton_action_post.#VALEUR .submit:focus:before,
+.formulaire_spip input.submit.#VALEUR:hover,
+.formulaire_spip input.submit.#VALEUR:focus,
+.formulaire_spip button.#VALEUR:hover:before,
+.formulaire_spip button.#VALEUR:focus:before  {
+	background-image: url(#CHEMIN_IMAGE{#VALEUR-inverse-xx.svg});
+}
+</BOUCLE_icones_images>
+[(#REM)/**/]
+
+
+/**
+ * ================
+ * 4. Liens boutons
+ * ================
+ *
+ * Markup :
+ * <a class="bouton [variante]">…</a>
+ */
+.bouton {}
+
+
+/**
+ * =========================
+ * 5. Boutons de formulaires
+ * =========================
+ *
+ * Markup :
+ *
+ * <form class="formulaire_spip">
+ *   <input type="submit" class="submit [variante]" value="Valider" />
+ *   <button type="submit" class="[variante]">Valider</button>
+ * </form>
+ */
+
+/* Couleur différente pour les boutons de base et les boutons d'actions dans un pied de boîte */
+.formulaire_spip input.submit,
+.formulaire_spip button,
+.act .bouton_action_post .submit:not(:hover):not(:focus) {
+	background-color: #ENV{claire};
+	color: #[(#ENV{foncee}|couleur_luminance{0.85})];
+	color: hsla(0, 0%, 0%, 0.9);
+	margin-bottom: 0;
+}
+
+
+/**
+ * ===================
+ * 6. Boutons d'action
+ * ===================
+ *
+ * Markup :
+ *
+ * <form class="bouton_action_post [variante]">
+ *   <div><button class="submit">Action</button></div>
+ * </form>
+ */
+
+.bouton_action_post {
+	display: -webkit-inline-box;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+}
+.bouton_action_post div {
+	border-radius: inherit;
+	display: inherit;
+}
+.bouton_action_post .submit {
+	border-radius: inherit;
+}
+/* Dans le footer d'une boîte */
+.box .ft .bouton_action_post { 
+	margin-bottom: 0;
+}
+
+/* Fix bouton d'action + classe .icone : combinaison obsolète à ne plus utiliser */
+.bouton_action_post.icone {
+	display: -webkit-inline-box !important;
+	display: -ms-inline-flexbox !important;
+	display: inline-flex !important;
+	padding: 0 !important;
+	background: none !important;
+}
+
+/**
+ * =====================
+ * 7. Groupes de boutons
+ * =====================
+ *
+ * Markup :
+ *
+ * <div class="groupe-boutons">
+ *   <a class="bouton">…</a>
+ *   <a class="bouton">…</a>
+ * </div>
+ */
+
+.groupe-boutons {
+	display: -webkit-inline-box;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+	   -webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	        -ms-flex-flow: row nowrap;
+	            flex-flow: row nowrap;
+}
+/* Si boutons de formulaire ou pied d'une boîte : bloc et alignement */
+.groupe-boutons.act,
+.groupe-boutons.boutons {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: end;
+	   -ms-flex-pack: end;
+	 justify-content: flex-end;
+}
+.groupe-boutons .bouton,
+.groupe-boutons .bouton_action_post,
+.groupe-boutons input.submit,
+.groupe-boutons button {
+	-webkit-box-flex: 0;
+	        -ms-flex: 0 1 auto;
+	            flex: 0 1 auto;
+}
+.groupe-boutons:not(.vertical) .bouton:not(:last-child),
+.groupe-boutons:not(.vertical) .bouton_action_post:not(:last-child) .submit,
+.formulaire_spip .groupe-boutons:not(.vertical) input.submit:not(:last-child),
+.formulaire_spip .groupe-boutons:not(.vertical) button:not(:last-child) {
+	border-top-#ENV{right}-radius: 0;
+	border-bottom-#ENV{right}-radius: 0;
+}
+.groupe-boutons:not(.vertical) .bouton:not(:first-child),
+.groupe-boutons:not(.vertical) .bouton_action_post:not(:first-child) .submit,
+.formulaire_spip .groupe-boutons:not(.vertical) input.submit:not(:first-child),
+.formulaire_spip .groupe-boutons:not(.vertical) button:not(:first-child) {
+	border-top-#ENV{left}-radius: 0;
+	border-bottom-#ENV{left}-radius: 0;
+}
+.groupe-boutons:not(.vertical) .bouton:not(:first-child):not(.secondaire),
+.groupe-boutons:not(.vertical) .bouton_action_post:not(:first-child):not(.secondaire) .submit,
+.formulaire_spip .groupe-boutons:not(.vertical) input.submit:not(:first-child):not(.secondaire),
+.formulaire_spip .groupe-boutons:not(.vertical) button:not(:first-child):not(.secondaire) {
+	border-#ENV{left}: 1px solid hsla(0, 0%, 0%, 0.15);
+	margin-left: -1px; /* bordure gauche par dessus le bouton précédent */
+}
+.groupe-boutons:not(.vertical) .bouton.secondaire:not(:last-child),
+.groupe-boutons:not(.vertical) .bouton_action_post.secondaire:not(:last-child) .submit,
+.formulaire_spip .groupe-boutons:not(.vertical) input.submit.secondaire:not(:last-child),
+.formulaire_spip .groupe-boutons:not(.vertical) button.secondaire:not(:last-child) {
+	border-#ENV{right}: 0;
+}
+
+/* variante vertical */
+.groupe-boutons.vertical {
+	   -webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	        -ms-flex-flow: column wrap;
+	            flex-flow: column wrap;
+}
+.groupe-boutons.vertical .bouton:not(:last-child),
+.groupe-boutons.vertical .bouton_action_post:not(:last-child) .submit,
+.formulaire_spip .groupe-boutons.vertical input.submit:not(:last-child),
+.formulaire_spip .groupe-boutons.vertical button.submit:not(:last-child) {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	margin-bottom: 0;
+}
+.groupe-boutons.vertical .bouton:not(:first-child),
+.groupe-boutons.vertical .bouton_action_post:not(:first-child) .submit,
+.formulaire_spip .groupe-boutons.vertical input.submit:not(:first-child),
+.formulaire_spip .groupe-boutons.vertical button:not(:first-child) {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+.groupe-boutons.vertical .bouton:not(:first-child):not(.secondaire),
+.groupe-boutons.vertical .bouton_action_post:not(:first-child):not(.secondaire) .submit,
+.formulaire_spip .groupe-boutons.vertical input.submit:not(:first-child):not(.secondaire),
+.formulaire_spip .groupe-boutons.vertical button:not(:first-child):not(.secondaire) {
+	border-top: 1px solid hsla(0, 0%, 0%, 0.15);
+	margin-top: -1px; /* bordure haut par dessus le bouton précédent */
+}
+.groupe-boutons.vertical .bouton.secondaire:not(:last-child),
+.groupe-boutons.vertical .bouton_action_post.secondaire:not(:last-child) .submit,
+.formulaire_spip .groupe-boutons.vertical input.submit.secondaire:not(:last-child),
+.formulaire_spip .groupe-boutons.vertical button.secondaire:not(:last-child) {
+	border-bottom: 0;
+}
+
+/* Variante bloc */
+.groupe-boutons.bloc {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+.groupe-boutons.bloc .bouton,
+.groupe-boutons.bloc .bouton_action_post,
+.groupe-boutons.bloc .bouton_action_post div ,
+.groupe-boutons.bloc .bouton_action_post .submit,
+.groupe-boutons.bloc input.submit,
+.groupe-boutons.bloc button {
+	-webkit-box-flex: 1;
+	        -ms-flex: 1 1 auto;
+	            flex: 1 1 auto;
+}
+
+/* Dans un formulaire : ajustements */
+.formulaire_spip .boutons.groupe-boutons {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex; /* pleine largeur */
+	-webkit-box-pack: end;
+	   -ms-flex-pack: end;
+	 justify-content: flex-end;
+}

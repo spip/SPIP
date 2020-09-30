@@ -9,14 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
-	'0_langue' => 'Українська [uk]',
-	'0_liste' => 'spip-uk@rezo.net',
-	'0_mainteneur' => '2015 Olga Karpenko (olly.olga@gmail.com)
-2017 Serge Markitanenko
-(ss1945@gmail.com)',
-
 	// A
 	'access_interface_graphique' => 'Повернення до повного інтерфейсу',
 	'access_mode_texte' => 'Спрощений текстовий інтерфейс',

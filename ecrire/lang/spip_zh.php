@@ -9,13 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-zh',
-	'0_langue' => '简体中文 [zh]',
-	'0_liste' => 'spip-zh@rezo.net',
-	'0_mainteneur' => 'Lily Zou (lily.zou@terra.com.cn)
-Zhen QIN (zhen_q@21cn.com)',
-
 	// A
 	'access_interface_graphique' => '返回完整显示模式',
 	'access_mode_texte' => '显示简洁显示模式',

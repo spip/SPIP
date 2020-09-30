@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-oc',
-	'0_langue' => 'occitan (lengadocian) [oc_lnc]',
-	'0_liste' => 'escambis.pedagogics@aprene.org',
-	'0_mainteneur' => 'Mòni : escambis.pedagogics@aprene.org <br /> Estève (Servici de l’Emplec) : cros@emplec.net',
-
 	// A
 	'access_interface_graphique' => 'Tornar a l’interfàcia grafica completa',
 	'access_mode_texte' => 'Afichar l’interfàcia textuala simplificada',

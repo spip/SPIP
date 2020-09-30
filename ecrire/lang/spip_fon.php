@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'Hɔnùwá',
-	'0_langue' => 'Fongbe [fon]',
-	'0_liste' => 'spip-dev@rezo.net',
-	'0_mainteneur' => 'spip-dev@rezo.net',
-
 	// A
 	'access_interface_graphique' => 'Lɛkɔ yì atɛ bi jí',
 	'access_mode_texte' => 'ɖè tɛmɛ nu wiwlantɔn xlɛ  do atɛ ɔ ji ',

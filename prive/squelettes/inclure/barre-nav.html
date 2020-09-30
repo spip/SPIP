@@ -78,7 +78,7 @@
 				<ul class="rapides creer">
 					<BOUCLE_creer(DATA)
 						{source tableau, #GET{boutons}}
-						{cle=outils_rapides}><BOUCLE_creersous(DATA){source tableau, #SOUSMENU}{par position}>[<li class="bouton"><a
+						{cle=outils_rapides}><BOUCLE_creersous(DATA){source tableau, #SOUSMENU}{par position}>[<li class="rapides__item"><a
 						href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
 						title="[(#VALEUR{libelle}|_T|attribut_html)]"
 						class="bando2_#CLE"><span>(#VALEUR{libelle}|_T)</span></a></li>]
@@ -90,7 +90,7 @@
 					<ul class="rapides collaborer">
 					<BOUCLE_collaborer(DATA)
 						{source tableau, #GET{boutons}}
-						{cle=outils_collaboratifs}><BOUCLE_collaborersous(DATA){source tableau, #SOUSMENU}>[<li class="bouton"><a
+						{cle=outils_collaboratifs}><BOUCLE_collaborersous(DATA){source tableau, #SOUSMENU}>[<li class="rapides__item"><a
 							href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
 							title="[(#VALEUR{libelle}|_T|attribut_html)]"
 							class="bando2_#CLE"><span>(#VALEUR{libelle}|_T)</span></a></li>]</BOUCLE_collaborersous></BOUCLE_collaborer>

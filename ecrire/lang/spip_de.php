@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://www.spip.net/de',
-	'0_langue' => 'Deutsch [de]',
-	'0_liste' => 'spip-de@rezo.net',
-	'0_mainteneur' => 'klaus@spip.de',
-
 	// A
 	'access_interface_graphique' => 'Zurück zur vollständigen grafischen Oberfläche',
 	'access_mode_texte' => 'vereinfachtes Interface als Textversion anzeigen',

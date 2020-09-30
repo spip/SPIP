@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
-	'0_langue' => 'Việt Nam [vi]',
-	'0_liste' => 'spip-vi@rezo.net',
-	'0_mainteneur' => 'daoduyp@libertysurf.fr',
-
 	// A
 	'access_interface_graphique' => 'Trở lại giao diện ảnh ',
 	'access_mode_texte' => 'Xem phần giao diện đơn giản',

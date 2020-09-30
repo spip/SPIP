@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://www.spip.net/oc',
-	'0_langue' => 'occitan (lemosin) [oc_lms]',
-	'0_liste' => 'spip-oc@rezo.net',
-	'0_mainteneur' => 'Domergue Sumien: lenga.occitana@aprene.org ',
-
 	// A
 	'access_interface_graphique' => 'Tornar a l’interfàcia grafica completa',
 	'access_mode_texte' => 'Afichar l’interfàcia textuala simplificada',

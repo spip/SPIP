@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
-	'0_langue' => 'Hrvatski [hr]',
-	'0_liste' => 'spip-dev@rezo.net',
-	'0_mainteneur' => 'Alexander Gehrecke (a_gehrecke(at)ambinet.de)',
-
 	// A
 	'access_interface_graphique' => 'Natrag u potpuni grafički interface',
 	'access_mode_texte' => 'Pojednostavljeni text interface',

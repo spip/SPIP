@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
-	'0_langue' => 'Bosanski [bs]',
-	'0_liste' => 'spip-dev@rezo.net',
-	'0_mainteneur' => 'nerina corbadzic <muzevira@googlemail.com>',
-
 	// A
 	'access_interface_graphique' => 'Nazad na kompletno graficki interfejs',
 	'access_mode_texte' => 'Prikazi pojednostavljeni tekstualni interfejs',

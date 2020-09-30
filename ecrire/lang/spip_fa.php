@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://www.spip.net/fa',
-	'0_langue' => '[fa] فارسى',
-	'0_liste' => 'spip-fa@rezo.net',
-	'0_mainteneur' => 'mani@rezo.net',
-
 	// A
 	'access_interface_graphique' => 'بازگشت به نماى كامل سايت',
 	'access_mode_texte' => 'نماى ساده سايت را نمايش دهيد',

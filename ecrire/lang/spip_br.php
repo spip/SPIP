@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
-	'0_langue' => 'Brezhoneg [br]',
-	'0_liste' => 'spip-br@rezo.net',
-	'0_mainteneur' => 'Malo Morvan (malomorvan@yahoo.fr)',
-
 	// A
 	'access_interface_graphique' => 'Distreiñ d’an etrefas grafek klok', # Gwelloc'h e vije ober gant etrefas evit treiñ interface; heñveldra, grafek zo kalz komprenusoc'h eget kevregañ. Dreist-holl e vez komprenet gant an holl hag en implij emañ gant kalz a dud
 	'access_mode_texte' => 'diskouez an etrefas testenn eeun',

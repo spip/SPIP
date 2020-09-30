@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-cpf',
-	'0_langue' => 'Krèyòl ayisyen [hat]',
-	'0_liste' => 'spip-cpf@rezo.net',
-	'0_mainteneur' => 'pascale@rezo.net',
-
 	// A
 	'access_interface_graphique' => 'Tounen dèyé si lentèfas gwafik konple',
 	'access_mode_texte' => 'Afiche lentèfas tèks senp',

@@ -27,12 +27,26 @@ Valeurs par defaut :
 */
 
 [(#REM) les vieux styles a evacuer en premier, ca permet qu'ils ne polluent pas en cas de double definition]
-
-
 [(#INCLURE{#VAL{clear.css}|find_in_theme|direction_css{#GET{dir}}|substr{#CONST{_DIR_RACINE}|strlen}})]
 [(#INCLURE{#VAL{layout.css}|find_in_theme|direction_css{#GET{dir}}|substr{#CONST{_DIR_RACINE}|strlen}})]
 
-<BOUCLE_css(POUR){tableau #LISTE{typo.css,grids.css,bando.css,icons.css,lists.css,forms.css,picker.css,box_skins.css,jquery-ui.css,content.css,exceptions.css,theme.css}}>
+[(#REM) Les modules ]
+#SET{modules,#LISTE{
+	typo.css,
+	grids.css,
+	bando.css,
+	boutons.css,
+	icons.css,
+	lists.css,
+	forms.css,
+	picker.css,
+	box_skins.css,
+	jquery-ui.css,
+	content.css,
+	exceptions.css,
+	theme.css,
+}}
+<BOUCLE_css(POUR){tableau #GET{modules}}>
 [(#SET{fond,[(#VALEUR|concat{.html}|find_in_theme|substr{[(#CONST{_DIR_RACINE}|strlen)],[(#VAL{-5}|intval)]})]})]
 /*
  * #VALEUR::[(#GET{fond})]

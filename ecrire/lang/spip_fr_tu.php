@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://www.spip.net/trad-lang/trad_index.php?lang_print=fr_tu',
-	'0_langue' => 'Francais copain [fr_tu]',
-	'0_liste' => 'spip-trad@rezo.net',
-	'0_mainteneur' => 'spip-trad@rezo.net',
-
 	// A
 	'access_interface_graphique' => 'Retour à l’interface graphique complète',
 	'access_mode_texte' => 'Afficher l’interface textuelle simplifiée',

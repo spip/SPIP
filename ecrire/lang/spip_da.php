@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-da',
-	'0_langue' => 'dansk [da]',
-	'0_liste' => 'spip-da@rezo.net',
-	'0_mainteneur' => 'abc@dk2net.dk',
-
 	// A
 	'admin_modifier_article' => 'Rediger artikel',
 	'admin_modifier_auteur' => 'Ret forfatter',

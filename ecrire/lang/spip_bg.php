@@ -9,12 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// 0
-	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-bg',
-	'0_langue' => 'български [bg]',
-	'0_liste' => 'spip-bg@rezo.net',
-	'0_mainteneur' => 'Christina Haralanova, chris@fsa-bg.org',
-
 	// A
 	'access_interface_graphique' => 'Обратно към пълния графичен интерфейс',
 	'access_mode_texte' => 'Показване на опростения текстов интерфейс',
