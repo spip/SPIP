@@ -1,8 +1,9 @@
-<div class="formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{objet}-#ENV{id,nouveau}[ (#ENV{_class})]">
+#SET{id,#FORM-#ENV{objet}-#ENV{id,nouveau}}
+<div class="formulaire_spip formulaire_#FORM formulaire_#GET{id}[ (#ENV{_class})]">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	<p hidden id="format_date_#FORM-#ENV{objet}-#ENV{id,nouveau}"><:format_date_attendu:></p>
-	<p hidden id="format_heure_#FORM-#ENV{objet}-#ENV{id,nouveau}"><:format_heure_attendu:></p>
+	<p hidden id="format_date_#GET{id}"><:format_date_attendu:></p>
+	<p hidden id="format_heure_#GET{id}"><:format_heure_attendu:></p>
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
 		<input type='submit' class='over' name='changer' value='<:bouton_changer:>' />
@@ -13,8 +14,8 @@
 		<div class="editer-groupe">
 			#SET{name,date}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-				<label for="#GET{name}_jour" id="#GET{name}_jour_#FORM-#ENV{objet}-#ENV{id,nouveau}">[(#ENV{_label_date})] #AIDER{artdate}</label>[
-				<span class='erreur_message' id="erreur_#FORM-#ENV{objet}-#ENV{id,nouveau}">(#GET{erreurs})</span>
+				<label for="#GET{name}_jour" id="#GET{name}_jour_#GET{id}">[(#ENV{_label_date})] #AIDER{artdate}</label>[
+				<span class='erreur_message' id="erreur_#GET{id}">(#GET{erreurs})</span>
 				]
 				<span class="affiche"[(#ENV{_saisie_en_cours}|et{#ENV{_editer_date}}|oui)style="display:none;"]>[(#ENV*{afficher_#GET{name}}|affdate)]</span>
 				<BOUCLE_editable(CONDITION){si #ENV{editable}}>
@@ -24,23 +25,23 @@
 						onclick="var f=jQuery(this).parents('form').eq(0);f.find('.editer .input.editable').show('fast').siblings('span').add(jQuery(this).parent()).hide('fast');f.find('.boutons').show('fast');f.find('input.date').eq(0).focus();[(#ENV{sans_redac}|oui)f.find('.editer_date_redac label\[for=date_redac\]').hide();]return false;"
 						><:bouton_changer:><i class="over"> \(#ENV{_label_date}\)</i></button>&#93;</span>
 				<span class="input[(#ENV{_editer_date}|oui)editable]"[(#ENV{_saisie_en_cours}|et{#ENV{_editer_date}}|non)style="display:none;"]>
-					<input type="text" class="text date" name="#GET{name}_jour" id="#GET{name}_jour" value="#ENV{#GET{name}_jour}" size="10" aria-describedby="[(#GET{erreurs}|oui)erreur_#FORM-#ENV{objet}-#ENV{id,nouveau} ]format_date_#FORM-#ENV{objet}-#ENV{id,nouveau}"/>
-					<input type="text" class="text heure time" name="#GET{name}_heure" id="#GET{name}_heure" value="#ENV{#GET{name}_heure}" size="5" aria-labelledby="#GET{name}_jour_#FORM-#ENV{objet}-#ENV{id,nouveau}" aria-describedby=" format_heure_#FORM-#ENV{objet}-#ENV{id,nouveau}"/>
+					<input type="text" class="text date" name="#GET{name}_jour" id="#GET{name}_jour" value="#ENV{#GET{name}_jour}" size="10" aria-describedby="[(#GET{erreurs}|oui)erreur_#GET{id} ]format_date_#GET{id}"/>
+					<input type="text" class="text heure time" name="#GET{name}_heure" id="#GET{name}_heure" value="#ENV{#GET{name}_heure}" size="5" aria-labelledby="#GET{name}_jour_#GET{id}" aria-describedby="format_heure_#GET{id}"/>
 				</span>
 				</BOUCLE_editable>
 			</div>
 			<BOUCLE_editer_date_anterieure(CONDITION){si #ENV{_editer_date_anterieure}|oui}>
 				#SET{name,date_redac}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-					<label for="#GET{name}_jour" id="#GET{name}_jour_#FORM-#ENV{objet}-#ENV{id,nouveau}">[(#ENV{_label_date_redac,<:texte_date_publication_anterieure:>})] #AIDER{artdate_redac}</label>[
+					<label for="#GET{name}_jour" id="#GET{name}_jour_#GET{id}">[(#ENV{_label_date_redac,<:texte_date_publication_anterieure:>})] #AIDER{artdate_redac}</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]
 					<span class="affiche"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]>[(#ENV*{afficher_#GET{name}}|affdate|sinon{<:jour_non_connu_nc:>})]</span>
 					<BOUCLE_editable1(CONDITION){si #ENV{editable}}>
 					<span class="input editable"[(#ENV{_saisie_en_cours}|non)style="display:none;"]>
 						<span class="saisie_redac"[(#ENV{sans_redac}|oui)style="display:none;"]>
-							<input type="text" class="text date" name="#GET{name}_jour" id="#GET{name}_jour" value="#ENV{#GET{name}_jour}" size="10" aria-describedby="[(#GET{erreurs}|oui)erreur_#FORM-#ENV{objet}-#ENV{id,nouveau} ]format_date_#FORM-#ENV{objet}-#ENV{id,nouveau}"/>
-							<input type="text" class="text heure time" name="#GET{name}_heure" id="#GET{name}_heure" value="#ENV{#GET{name}_heure}" size="5" aria-labelledby="#GET{name}_jour_#FORM-#ENV{objet}-#ENV{id,nouveau}" aria-describedby=" format_heure_#FORM-#ENV{objet}-#ENV{id,nouveau}"/>
+							<input type="text" class="text date" name="#GET{name}_jour" id="#GET{name}_jour" value="#ENV{#GET{name}_jour}" size="10" aria-describedby="[(#GET{erreurs}|oui)erreur_#GET{id} ]format_date_#GET{id}"/>
+							<input type="text" class="text heure time" name="#GET{name}_heure" id="#GET{name}_heure" value="#ENV{#GET{name}_heure}" size="5" aria-labelledby="#GET{name}_jour_#GET{id}" aria-describedby="format_heure_#GET{id}"/>
 							<br />
 						</span>
 						<span class="choix">
