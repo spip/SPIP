@@ -1264,35 +1264,44 @@ function objet_test_si_publie($objet, $id_objet, $serveur = '') {
 /**
  * Cherche le contenu parent d'un contenu précis
  * 
+ * Permet également de gérer un parent trouvé dans une table de lien, comme :
+ * 
+ * ```
+ * $tables['spip_auteurs']['parent']  = array(
+ *     'type' => 'organisation',
+ *     'champ' => 'id_organisation',
+ *     'table' => 'spip_organisations_liens',
+ *     'table_condition' => 'role="parent"',
+ *     'source_champ' => 'id_objet',
+ *     'champ_type' => 'objet'
+ * );
+ * ```
+ * 
  * @api
  * @param $objet
- * 		Type de l'objet dont on cherche le parent
+ *     Type de l'objet dont on cherche le parent
  * @param $id_objet
- * 		Identifiant de l'objet dont on cherche le parent
+ *     Identifiant de l'objet dont on cherche le parent
  * @return array|false
- * 	Retourne un tableau décrivant le parent trouvé, ou false sinon
- * 
+ *     Retourne un tableau décrivant le parent trouvé, ou false sinon
  */
 function objet_trouver_parent($objet, $id_objet) {
 	$parent = false;
-	
+
 	// Si on trouve une ou des méthodes de parent
 	if ($parent_methodes = type_objet_info_parent($objet)) {
 
+		// On identifie les informations sur l'objet source dont on cherche le parent.
 		include_spip('base/abstract_sql');
-		$table = table_objet_sql($objet);
+		$table_objet = table_objet_sql($objet);
 		$cle_objet = id_table_objet($objet);
 		$id_objet = intval($id_objet);
 
-
 		// On teste chacun méthode dans l'ordre, et dès qu'on a trouvé un parent on s'arrête
 		foreach ($parent_methodes as $parent_methode) {
-			$where = array("$cle_objet = $id_objet");
-			
-			if (isset($parent_methode['condition'])) {
-				$where[] = $parent_methode['condition'];
-			}
-			
+			// Champ identifiant le parent (id et éventuellement le type)
+			// -- cette identification ne dépend pas du fait que le parent soit stocké dans une table de différente
+			//    de celle de l'objet source
 			$select = array();
 			if (isset($parent_methode['champ'])) {
 				$select[] = $parent_methode['champ'];
@@ -1301,31 +1310,80 @@ function objet_trouver_parent($objet, $id_objet) {
 				$select[] = $parent_methode['champ_type'];
 			}
 
-			// On lance la requête
-			if ($ligne = sql_fetsel($select, $table, $where)) {
-				
+			// Détermination de la table du parent et des conditions sur l'objet source et le parent.
+			$condition_objet_invalide = false;
+			$where = array();
+			if (!isset($parent_methode['table'])) {
+				// Le parent est stocké dans la même table que l'objet source :
+				// -- toutes les conditions s'appliquent à la table source.
+				$table = $table_objet;
+				$where = array("$cle_objet = $id_objet");
+				// -- Condition supplémentaire sur la détection du parent
+				if (isset($parent_methode['condition'])) {
+					$where[] = $parent_methode['condition'];
+				}
+			} else {
+				// Le parent est stocké dans une table différente de l'objet source.
+				// -- on vérifie d'emblée si il y a une condition sur l'objet source et si celle-ci est vérifiée
+				//    Si non, on peut arrêter le traitement.
+				if (isset($parent_methode['condition'])) {
+					$where = array(
+						"$cle_objet = $id_objet",
+						$parent_methode['condition']
+					);
+					if (!sql_countsel($table_objet, $where)) {
+						$condition_objet_invalide = true;
+					}
+				}
+
+				// Si pas de condition sur l'objet source ou que la condition est vérifiée, on peut construire
+				// la requête sur la table qui accueille le parent.
+				if (!$condition_objet_invalide) {
+					$table = $parent_methode['table'];
+					// On construit les conditions en fonction de l'identification de l'objet source
+					$where = array();
+					// -- si le champ_source de l'id n'est pas précisé c'est qu'il est déjà connu et donc que c'est
+					//    le même que celui de l'objet source.
+					$where[] = isset($parent_methode['source_champ'])
+						? "{$parent_methode['source_champ']} = $id_objet"
+						: "${cle_objet} = $id_objet";
+					if (isset($parent_methode['source_champ_type'])) {
+						$where[] = "{$parent_methode['source_champ_type']} = " . sql_quote($objet);
+					}
+					// -- Condition supplémentaire sur la détection du parent
+					if (isset($parent_methode['table_condition'])) {
+						$where[] = $parent_methode['table_condition'];
+					}
+				}
+			}
+
+			// On lance la requête de récupération du parent
+			if (
+				!$condition_objet_invalide
+				and $where
+				and ($ligne = sql_fetsel($select, $table, $where))
+			) {
 				// Si le type est fixe
 				if (isset($parent_methode['type'])) {
 					$parent = array(
-						'objet' 	=> $parent_methode['type'],
-						'id_objet'	=> intval($ligne[$parent_methode['champ']]),
-						'champ' 	=> $parent_methode['champ'],
+						'objet'    => $parent_methode['type'],
+						'id_objet' => intval($ligne[$parent_methode['champ']]),
+						'champ'    => $parent_methode['champ'],
 					);
-					break;
 				}
 				elseif (isset($parent_methode['champ_type'])) {
 					$parent = array(
-						'objet' 	 => $ligne[$parent_methode['champ_type']],
-						'id_objet' 	 => intval($ligne[$parent_methode['champ']]),
-						'champ' 	 => $parent_methode['champ'],
+						'objet'      => $ligne[$parent_methode['champ_type']],
+						'id_objet'   => intval($ligne[$parent_methode['champ']]),
+						'champ'      => $parent_methode['champ'],
 						'champ_type' => $parent_methode['champ_type'],
 					);
-					break;
 				}
+				break;
 			}
 		}
 	}
-	
+
 	// On passe par un pipeline avant de retourner
 	$parent = pipeline(
 		'objet_trouver_parent',
@@ -1337,7 +1395,7 @@ function objet_trouver_parent($objet, $id_objet) {
 			'data' => $parent,
 		)
 	);
-	
+
 	return $parent;
 }
 
@@ -1346,12 +1404,11 @@ function objet_trouver_parent($objet, $id_objet) {
  * 
  * @api
  * @param $objet
- * 		Type de l'objet dont on cherche les enfants
+ *     Type de l'objet dont on cherche les enfants
  * @param $id_objet
- * 		Identifiant de l'objet dont on cherche les enfants
+ *     Identifiant de l'objet dont on cherche les enfants
  * @return array
- * 	Retourne un tableau de tableaux, avec comme clés les types des objets, et dans chacun un tableau des identifiants trouvés
- * 
+ *     Retourne un tableau de tableaux, avec comme clés les types des objets, et dans chacun un tableau des identifiants trouvés
  */
 function objet_trouver_enfants($objet, $id_objet) {
 	$enfants = array();
@@ -1362,28 +1419,47 @@ function objet_trouver_enfants($objet, $id_objet) {
 		$id_objet = intval($id_objet);
 		
 		// On parcourt tous les types d'enfants trouvés
-		foreach ($enfants_methodes as $objet_enfant => $methode) {
-			$table_enfant = table_objet_sql($objet_enfant);
-			$cle_objet_enfant = id_table_objet($objet_enfant);
-			
+		foreach ($enfants_methodes as $objet_enfant => $_methode_parent) {
+			// On construit les conditions d'identification du parent
 			$where = array();
-			// L'identifiant du parent
-			if (isset($methode['champ'])) {
-				$where[] = $methode['champ'] . ' = ' . $id_objet;
+			// -- L'identifiant du parent
+			if (isset($_methode_parent['champ'])) {
+				$where[] = $_methode_parent['champ'] . ' = ' . $id_objet;
 			}
-			// Si le parent est variable
-			if (isset($methode['champ_type'])) {
-				$where[] = $methode['champ_type'] . ' = ' . sql_quote($objet);
+			// -- Si le parent est variable
+			if (isset($_methode_parent['champ_type'])) {
+				$where[] = $_methode_parent['champ_type'] . ' = ' . sql_quote($objet);
 			}
-			// S'il y a une condition supplémentaire
-			if (isset($methode['condition'])) {
-				$where[] = $methode['condition'];
+
+			// On détermine la table, le champ id des enfants et on complète éventuellement les conditions
+			if (!isset($_methode_parent['table'])) {
+				// Les enfants sont stockés dans la même table que l'objet parent :
+				$table_enfant = table_objet_sql($objet_enfant);
+				$cle_objet_enfant = id_table_objet($objet_enfant);
+
+				// S'il y a une condition supplémentaire
+				if (isset($_methode_parent['condition'])) {
+					$where[] = $_methode_parent['condition'];
+				}
+			} else {
+				// Les enfants sont stockés dans une table différente de l'objet parent.
+				$table_enfant = $_methode_parent['table'];
+				$cle_objet_enfant = isset($_methode_parent['source_champ'])
+					? $_methode_parent['source_champ']
+					: id_table_objet($objet_enfant);
+
+				// S'il y a une condition supplémentaire
+				if (isset($_methode_parent['table_condition'])) {
+					$where[] = $_methode_parent['table_condition'];
+				}
 			}
-			
+
 			// On lance la requête
 			if ($ids = sql_allfetsel($cle_objet_enfant, $table_enfant, $where)) {
 				$ids = array_map('reset', $ids);
-				$enfants[$objet_enfant] = $ids;
+				$enfants[$objet_enfant] = isset($enfants[$objet_enfant])
+					? array_merge($enfants[$objet_enfant], $ids)
+					: $ids;
 			}
 		}
 	}
@@ -1407,10 +1483,9 @@ function objet_trouver_enfants($objet, $id_objet) {
  * Donne les informations de parenté directe d'un type d'objet si on en trouve
  * 
  * @param $objet
- * 		Type de l'objet dont on cherche les informations de parent
+ *     Type de l'objet dont on cherche les informations de parent
  * @return array|false
- * 		Retourne un tableau de tableau contenant les informations de type et de champ pour trouver le parent ou false sinon
- * 
+ *     Retourne un tableau de tableau contenant les informations de type et de champ pour trouver le parent ou false sinon
  */
 function type_objet_info_parent($objet) {
 	static $parents = array();
@@ -1422,27 +1497,22 @@ function type_objet_info_parent($objet) {
 		
 		// Si on trouve bien la description de cet objet
 		if ($infos = lister_tables_objets_sql($table)) {
-			// S'il y a une description explicite de parent, c'est prioritaire
 			if (isset($infos['parent']) and is_array($infos['parent'])) {
-				if (count($infos['parent']) === count($infos['parent'], COUNT_RECURSIVE)) {
+				// S'il y a une description explicite de parent, c'est prioritaire
+				// -- on traite les cas où il y a une ou plusieurs description mais on renvoie toujours un tableau
+				//    de description
+				if (!isset($infos['parent'][0])) {
 					$parents[$objet] = array($infos['parent']);
 				} else {
 					$parents[$objet] = $infos['parent'];
 				}
-			}
-			// Sinon on cherche des cas courants connus magiquement, à commencer par id_rubrique
-			elseif (isset($infos['field']['id_rubrique'])) {
+			} elseif (isset($infos['field']['id_rubrique'])) {
+				// Sinon on cherche des cas courants connus magiquement, à commencer par id_rubrique
 				$parents[$objet] = array(array('type' => 'rubrique', 'champ' => 'id_rubrique'));
-			}
-			// Sinon on cherche un champ id_parent, ce qui signifie que l'objet est parent de lui-même
-			elseif (isset($infos['field']['id_parent'])) {
+			} elseif (isset($infos['field']['id_parent'])) {
+				// Sinon on cherche un champ id_parent, ce qui signifie que l'objet est parent de lui-même
 				$parents[$objet] = array(array('type' => $objet, 'champ' => 'id_parent'));
 			}
-			//~ // Sinon on cherche s'il y a objet et id_objet dans la table, ce qui signifie que le parent peut-être n'importe quel objet
-			//~ // comme c'est le cas pour les forums de premier niveau
-			//~ elseif (isset($infos['field']['objet']) and isset($infos['field']['id_objet'])) {
-				//~ $parents[$objet] = array(array('champ_type' => 'objet', 'champ' => 'id_objet'));
-			//~ }
 		}
 	}
 	
@@ -1453,10 +1523,9 @@ function type_objet_info_parent($objet) {
  * Donne les informations des enfants directs d'un type d'objet si on en trouve
  * 
  * @param $objet
- * 		Type de l'objet dont on cherche les informations des enfants
+ *     Type de l'objet dont on cherche les informations des enfants
  * @return array
- * 		Retourne un tableau de tableaux contenant chacun les informations d'un type d'enfant
- * 
+ *     Retourne un tableau de tableaux contenant chacun les informations d'un type d'enfant
  */
 function type_objet_info_enfants($objet) {
 	static $enfants = array();
