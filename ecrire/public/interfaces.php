@@ -963,10 +963,16 @@ function declarer_interfaces() {
 	// $GLOBALS['exceptions_des_jointures']['titre_mot'] = array('spip_mots', 'titre'); // pour exemple
 	$GLOBALS['exceptions_des_jointures']['profondeur'] = array('spip_rubriques', 'profondeur');
 
-	define('_TRAITEMENT_TYPO', 'typo(%s, "TYPO", $connect, $Pile[0])');
-	define('_TRAITEMENT_RACCOURCIS', 'propre(%s, $connect, $Pile[0])');
-	define('_TRAITEMENT_TYPO_SANS_NUMERO', 'supprimer_numero(typo(%s), "TYPO", $connect, $Pile[0])');
 
+	if (!defined('_TRAITEMENT_TYPO')) {
+		define('_TRAITEMENT_TYPO', 'typo(%s, "TYPO", $connect, $Pile[0])');
+	}
+	if (!defined('_TRAITEMENT_RACCOURCIS')) {
+		define('_TRAITEMENT_RACCOURCIS', 'propre(%s, $connect, $Pile[0])');
+	}
+	if (!defined('_TRAITEMENT_TYPO_SANS_NUMERO')) {
+		define('_TRAITEMENT_TYPO_SANS_NUMERO', 'supprimer_numero(typo(%s), "TYPO", $connect, $Pile[0])');
+	}
 	$GLOBALS['table_des_traitements']['BIO'][] = _TRAITEMENT_RACCOURCIS;
 	$GLOBALS['table_des_traitements']['CHAPO'][] = _TRAITEMENT_RACCOURCIS;
 	$GLOBALS['table_des_traitements']['DATE'][] = 'normaliser_date(%s)';
