@@ -774,15 +774,15 @@ function phraser_critere_infixe($arg1, $arg2, $args, $op, $not, $cond) {
  * Compter le nombre de lignes dans une partie texte
  * @param $texte
  * @param int $debut
- * @param null $longueur
+ * @param null $fin
  * @return int
  */
-function public_compte_ligne($texte, $debut = 0, $longueur = null) {
-	if (is_null($longueur)) {
+function public_compte_ligne($texte, $debut = 0, $fin = null) {
+	if (is_null($fin)) {
 		return substr_count($texte, "\n", $debut);
 	}
 	else {
-		return substr_count($texte, "\n", $debut, $longueur);
+		return substr_count($texte, "\n", $debut, $fin - $debut);
 	}
 }
 
@@ -795,11 +795,13 @@ function public_compte_ligne($texte, $debut = 0, $longueur = null) {
  * @param $texte
  * @param $id_parent
  * @param $descr
+ * @param int $pos_debut_texte
  * @return array|null
  */
-function public_trouver_premiere_boucle($texte, $id_parent, $descr) {
+function public_trouver_premiere_boucle($texte, $id_parent, $descr, $pos_debut_texte = 0) {
 	$premiere_boucle = null;
-	$current_pos = 0;
+
+	$current_pos = $pos_debut_texte;
 	while (($pos_boucle = strpos($texte, BALISE_BOUCLE, $current_pos)) !== false) {
 		$current_pos = $pos_boucle + 1;
 		$pos_parent = strpos($texte,'(', $pos_boucle);
@@ -835,7 +837,7 @@ function public_trouver_premiere_boucle($texte, $id_parent, $descr) {
 
 			// trouver sa position de depart reelle : au <B_ ou au <BB_
 			$precond_boucle = BALISE_PRECOND_BOUCLE . $id_boucle . '>';
-			$pos_precond = strpos($texte, $precond_boucle);
+			$pos_precond = strpos($texte, $precond_boucle, $pos_debut_texte);
 			if ($pos_precond !== false and $pos_precond < $boucle['debut_boucle']) {
 				$boucle['debut_boucle'] = $pos_precond;
 				$boucle['pos_precond'] = $pos_precond;
@@ -843,7 +845,7 @@ function public_trouver_premiere_boucle($texte, $id_parent, $descr) {
 			}
 
 			$preaff_boucle = BALISE_PREAFF_BOUCLE . $id_boucle . '>';
-			$pos_preaff = strpos($texte, $preaff_boucle);
+			$pos_preaff = strpos($texte, $preaff_boucle, $pos_debut_texte);
 			if ($pos_preaff !== false and $pos_preaff < $boucle['debut_boucle']) {
 				$boucle['debut_boucle'] = $pos_preaff;
 				$boucle['pos_preaff'] = $pos_preaff;
@@ -860,23 +862,25 @@ function public_trouver_premiere_boucle($texte, $id_parent, $descr) {
 }
 
 
-function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne = 1) {
+function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne_debut_texte = 1) {
 
 	$all_res = array();
 
-	while ($boucle = public_trouver_premiere_boucle($texte, $id_parent, $descr)) {
+	$pos_debut_texte = 0;
+	while ($boucle = public_trouver_premiere_boucle($texte, $id_parent, $descr, $pos_debut_texte)) {
 		$err_b = ''; // indiquera s'il y a eu une erreur
 		$result = new Boucle;
 		$result->id_parent = $id_parent;
 		$result->descr = $descr;
 
-		$pos_boucle = $boucle['pos_boucle'];
+		$pos_courante = $boucle['pos_boucle'];
 		$id_boucle = $boucle['id_boucle'];
 		$pos_parent = $boucle['pos_parent'];
 
-		$ligne_preaff = $ligne_avant = $ligne_milieu = $ligne + public_compte_ligne($texte, 0, $pos_parent);
-		$pos_debut_boucle = $pos_boucle;
-		$milieu = substr($texte, $pos_parent);
+		$ligne_preaff = $ligne_avant = $ligne_milieu = $ligne_debut_texte + public_compte_ligne($texte, $pos_debut_texte, $pos_parent);
+		$pos_debut_boucle = $pos_courante;
+
+		$pos_milieu = $pos_parent;
 
 		// Regarder si on a une partie conditionnelle avant <B_xxx>
 		if ($boucle['pos_precond'] !== false) {
@@ -884,8 +888,8 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne 
 			$pos_debut_boucle = $boucle['pos_precond'];
 
 			$pos_avant = $boucle['pos_precond_inside'];
-			$result->avant = substr($texte, $pos_avant, $pos_boucle - $pos_avant);
-			$ligne_avant = $ligne +  public_compte_ligne($texte,0, $pos_avant);
+			$result->avant = substr($texte, $pos_avant, $pos_courante - $pos_avant);
+			$ligne_avant = $ligne_debut_texte +  public_compte_ligne($texte, $pos_debut_texte, $pos_avant);
 		}
 
 		// Regarder si on a une partie inconditionnelle avant <BB_xxx>
@@ -895,25 +899,26 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne 
 
 			$pos_preaff = $boucle['pos_preaff_inside'];
 			$result->preaff = substr($texte, $pos_preaff, $end_preaff - $pos_preaff);
-			$ligne_preaff = $ligne +  public_compte_ligne($texte,0, $pos_preaff);
+			$ligne_preaff = $ligne_debut_texte +  public_compte_ligne($texte, $pos_debut_texte, $pos_preaff);
 		}
-
-		$debut = substr($texte, 0, $boucle['debut_boucle']);
 
 		$result->id_boucle = $id_boucle;
 
-		if (!preg_match(SPEC_BOUCLE, $milieu, $match)) {
+		if (!preg_match(SPEC_BOUCLE, $texte, $match, 0, $pos_milieu)
+		  or ($pos_match = strpos($texte, $match[0], $pos_milieu)) === false
+			or $pos_match > $pos_milieu
+		) {
 			$err_b = array('zbug_erreur_boucle_syntaxe', array('id' => $id_boucle));
 			erreur_squelette($err_b, $result);
 
-			$ligne += public_compte_ligne($texte, 0, $pos_boucle + 1);
-			$texte = substr($texte, $pos_boucle + 1);
+			$ligne_debut_texte += public_compte_ligne($texte, $pos_debut_texte, $pos_courante + 1);
+			$pos_debut_texte = $pos_courante + 1;
 			continue;
 		}
 
 		$result->type_requete = $match[0];
-		$milieu = substr($milieu, strlen($match[0]));
-		$pos_boucle = $pos_parent + strlen($match[0]); // on s'en sert pour compter les lignes plus precisemment
+		$pos_milieu += strlen($match[0]);
+		$pos_courante = $pos_milieu; // on s'en sert pour compter les lignes plus precisemment
 
 		$type = $match[1];
 		$jointures = trim($match[2]);
@@ -930,31 +935,29 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne 
 
 		// 1ere passe sur les criteres, vu comme des arguments sans fct
 		// Resultat mis dans result->param
-		phraser_args($milieu, "/>", "", $all_res, $result);
+		phraser_args(substr($texte, $pos_milieu), "/>", "", $all_res, $result);
 
 		// En 2e passe result->criteres contiendra un tableau
 		// pour l'instant on met le source (chaine) :
 		// si elle reste ici au final, c'est qu'elle contient une erreur
-		$pos_fin_criteres = strpos($milieu, $result->apres);
-		$pos_boucle += $pos_fin_criteres; // on s'en sert pour compter les lignes plus precisemment
-		$result->criteres = substr($milieu, 0, $pos_fin_criteres);
-		$milieu = $result->apres;
+		$pos_fin_criteres = strpos($texte, $result->apres, $pos_milieu);
+		$pos_courante = $pos_fin_criteres; // on s'en sert pour compter les lignes plus precisemment
+		$result->criteres = substr($texte, $pos_milieu, $pos_fin_criteres - $pos_milieu);
+		$pos_milieu = $pos_fin_criteres;
 		$result->apres = "";
 
 		//
 		// Recuperer la fin :
 		//
-		if ($milieu[0] === '/') {
+		if ($texte[$pos_milieu] === '/') {
 			// boucle autofermante : pas de partie conditionnelle apres
-			$suite = substr($milieu, 2);
-			$pos_boucle += 2;
-			$milieu = '';
+			$pos_courante += 2;
+			$result->milieu = '';
 		} else {
-			$milieu = substr($milieu, 1);
-			$pos_boucle += 1;
+			$pos_milieu += 1;
 
 			$fin_boucle = BALISE_FIN_BOUCLE . $id_boucle . ">";
-			$pos_fin = strpos($milieu, $fin_boucle);
+			$pos_fin = strpos($texte, $fin_boucle, $pos_milieu);
 			if ($pos_fin === false) {
 				$err_b = array(
 					'zbug_erreur_boucle_fermant',
@@ -963,25 +966,22 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne 
 				erreur_squelette($err_b, $result);
 			}
 
-			$pos_boucle += $pos_fin + strlen($fin_boucle);
-			$suite = substr($milieu, $pos_fin + strlen($fin_boucle));
-			$milieu = substr($milieu, 0, $pos_fin);
+			$pos_courante = $pos_fin + strlen($fin_boucle);
+			$result->milieu = substr($texte, $pos_milieu, $pos_fin - $pos_milieu);
 		}
 
-		$result->milieu = $milieu;
-		$ligne_suite = $ligne_apres = $ligne + public_compte_ligne($texte, 0, $pos_boucle);
+		$ligne_suite = $ligne_apres = $ligne_debut_texte + public_compte_ligne($texte, $pos_debut_texte, $pos_courante);
 
 		//
 		// 1. Recuperer la partie conditionnelle apres
 		//
 		$apres_boucle = BALISE_POSTCOND_BOUCLE . $id_boucle . ">";
-		$pos_apres = strpos($suite, $apres_boucle);
+		$pos_apres = strpos($texte, $apres_boucle, $pos_courante);
 		if ($pos_apres !== false) {
-			$result->apres = substr($suite, 0, $pos_apres);
+			$result->apres = substr($texte, $pos_courante, $pos_apres - $pos_courante);
 			$pos_apres += strlen($apres_boucle);
-			$suite = substr($suite, $pos_apres);
-			$ligne_suite += public_compte_ligne($texte, $pos_boucle, $pos_apres);
-			$pos_boucle += $pos_apres ;
+			$ligne_suite += public_compte_ligne($texte, $pos_courante, $pos_apres);
+			$pos_courante = $pos_apres ;
 		}
 
 
@@ -990,13 +990,12 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne 
 		//
 		$ligne_altern = $ligne_suite;
 		$altern_boucle = BALISE_ALT_BOUCLE . $id_boucle . ">";
-		$pos_altern = strpos($suite, $altern_boucle);
+		$pos_altern = strpos($texte, $altern_boucle, $pos_courante);
 		if ($pos_altern !== false) {
-			$result->altern = substr($suite, 0, $pos_altern);
+			$result->altern = substr($texte, $pos_courante, $pos_altern - $pos_courante);
 			$pos_altern += strlen($altern_boucle);
-			$suite = substr($suite, $pos_altern);
-			$ligne_suite += public_compte_ligne($texte, $pos_boucle, $pos_altern);
-			$pos_boucle += $pos_altern;
+			$ligne_suite += public_compte_ligne($texte, $pos_courante, $pos_altern);
+			$pos_courante = $pos_altern;
 		}
 
 		//
@@ -1004,13 +1003,12 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne 
 		//
 		$ligne_postaff = $ligne_suite;
 		$postaff_boucle = BALISE_POSTAFF_BOUCLE . $id_boucle . ">";
-		$pos_postaff = strpos($suite, $postaff_boucle);
+		$pos_postaff = strpos($texte, $postaff_boucle, $pos_courante);
 		if ($pos_postaff !== false) {
-			$result->postaff = substr($suite, 0, $pos_postaff);
+			$result->postaff = substr($texte, $pos_courante, $pos_postaff - $pos_courante);
 			$pos_postaff += strlen($postaff_boucle);
-			$suite = substr($suite, $pos_postaff);
-			$ligne_suite += public_compte_ligne($texte, $pos_boucle, $pos_postaff);
-			$pos_boucle += $pos_postaff ;
+			$ligne_suite += public_compte_ligne($texte, $pos_courante, $pos_postaff);
+			$pos_courante = $pos_postaff ;
 		}
 
 		$result->ligne = $ligne_preaff;
@@ -1041,7 +1039,7 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne 
 		}
 
 		$descr['id_mere_contexte'] = $id_boucle;
-		$result->milieu = public_phraser_html_dist($milieu, $id_boucle, $boucles, $descr, $ligne_milieu);
+		$result->milieu = public_phraser_html_dist($result->milieu, $id_boucle, $boucles, $descr, $ligne_milieu);
 		// reserver la place dans la pile des boucles pour compiler ensuite dans le bon ordre
 		// ie les boucles qui apparaissent dans les partie conditionnelles doivent etre compilees apres cette boucle
 		// si il y a deja une boucle de ce nom, cela declenchera une erreur ensuite
@@ -1072,12 +1070,15 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne 
 		} else {
 			$boucles[$id_boucle] = $result;
 		}
-		$all_res = phraser_champs_etendus($debut, $ligne, $all_res);
+
+		// phraser la partie avant le debut de la boucle
+		$all_res = phraser_champs_etendus(substr($texte, $pos_debut_texte, $boucle['debut_boucle'] - $pos_debut_texte), $ligne_debut_texte, $all_res);
 		$all_res[] = &$boucles[$id_boucle];
 
-		$ligne = $ligne_suite;
-		$texte = $suite;
+		$ligne_debut_texte = $ligne_suite;
+		$pos_debut_texte = $pos_courante;
 	}
 
-	return phraser_champs_etendus($texte, $ligne, $all_res);
+	$all_res = phraser_champs_etendus(substr($texte, $pos_debut_texte), $ligne_debut_texte, $all_res);
+	return $all_res;
 }
