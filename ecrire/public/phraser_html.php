@@ -502,6 +502,9 @@ function phraser_champs_interieurs($texte, $ligne, $sep, $result) {
 			}
 			$champ->apres = phraser_champs_exterieurs($debut, $n, $sep, $result);
 
+			// reinjecter la boucle si c'en est une
+			phraser_boucle_placeholder($champ);
+
 			$result[$i] = $champ;
 			$i++;
 			$texte = substr($texte, $p + strlen($match[0]));
@@ -869,11 +872,57 @@ function public_trouver_premiere_boucle($texte, $id_parent, $descr, $pos_debut_t
 	return $premiere_boucle;
 }
 
+/**
+ * @param object|string $champ
+ * @param null|string $boucle_placeholder
+ * @param null|object $boucle
+ */
+function phraser_boucle_placeholder(&$champ, $boucle_placeholder=null, $boucle = null) {
+	static $boucles_connues = array();
+	// si c'est un appel pour memoriser une boucle, memorisons la
+	if (is_string($champ) and !empty($boucle_placeholder) and !empty($boucle)) {
+		$boucles_connues[$boucle_placeholder][$champ] = &$boucle;
+	}
+	else {
+		if (!empty($champ->nom_champ) and !empty($boucles_connues[$champ->nom_champ])) {
+			$placeholder = $champ->nom_champ;
+			$id = reset($champ->param[0][1]);
+			$id = $id->texte;
+			if (!empty($boucles_connues[$placeholder][$id])) {
+				$champ = $boucles_connues[$placeholder][$id];
+			}
+		}
+	}
+}
 
-function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne_debut_texte = 1) {
+
+/**
+ * Generer une balise placeholder qui prend la place de la boucle pour continuer le parsing des balises
+ * @param string $id_boucle
+ * @param $boucle
+ * @param string $boucle_placeholder
+ * @param int $nb_lignes
+ * @return string
+ */
+function public_generer_boucle_placeholder($id_boucle, &$boucle, $boucle_placeholder, $nb_lignes) {
+	$placeholder = "[(#{$boucle_placeholder}{" . $id_boucle . '})' . str_pad("", $nb_lignes, "\n") . "]";
+	//memoriser la boucle a reinjecter
+	$id_boucle = "$id_boucle";
+	phraser_boucle_placeholder($id_boucle, $boucle_placeholder, $boucle);
+	return $placeholder;
+}
+
+function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne_debut_texte = 1, $boucle_placeholder = null) {
 
 	$all_res = array();
+	// definir un placholder pour les boucles dont on est sur d'avoir aucune occurence dans le squelette
+	if (is_null($boucle_placeholder)) {
+		do {
+			$boucle_placeholder = "BOUCLE_PLACEHOLDER_" . strtoupper(md5(uniqid()));
+		} while (strpos($texte, $boucle_placeholder) !== false);
+	}
 
+	$ligne_debut_initial = $ligne_debut_texte;
 	$pos_debut_texte = 0;
 	while ($boucle = public_trouver_premiere_boucle($texte, $id_parent, $descr, $pos_debut_texte)) {
 		$err_b = ''; // indiquera s'il y a eu une erreur
@@ -1046,18 +1095,18 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne_
 		}
 
 		$descr['id_mere_contexte'] = $id_boucle;
-		$result->milieu = public_phraser_html_dist($result->milieu, $id_boucle, $boucles, $descr, $ligne_milieu);
+		$result->milieu = public_phraser_html_dist($result->milieu, $id_boucle, $boucles, $descr, $ligne_milieu, $boucle_placeholder);
 		// reserver la place dans la pile des boucles pour compiler ensuite dans le bon ordre
 		// ie les boucles qui apparaissent dans les partie conditionnelles doivent etre compilees apres cette boucle
 		// si il y a deja une boucle de ce nom, cela declenchera une erreur ensuite
 		if (empty($boucles[$id_boucle])){
 			$boucles[$id_boucle] = null;
 		}
-		$result->preaff = public_phraser_html_dist($result->preaff, $id_parent, $boucles, $descr, $ligne_preaff);
-		$result->avant = public_phraser_html_dist($result->avant, $id_parent, $boucles, $descr, $ligne_avant);
-		$result->apres = public_phraser_html_dist($result->apres, $id_parent, $boucles, $descr, $ligne_apres);
-		$result->altern = public_phraser_html_dist($result->altern, $id_parent, $boucles, $descr, $ligne_altern);
-		$result->postaff = public_phraser_html_dist($result->postaff, $id_parent, $boucles, $descr, $ligne_postaff);
+		$result->preaff = public_phraser_html_dist($result->preaff, $id_parent, $boucles, $descr, $ligne_preaff, $boucle_placeholder);
+		$result->avant = public_phraser_html_dist($result->avant, $id_parent, $boucles, $descr, $ligne_avant, $boucle_placeholder);
+		$result->apres = public_phraser_html_dist($result->apres, $id_parent, $boucles, $descr, $ligne_apres, $boucle_placeholder);
+		$result->altern = public_phraser_html_dist($result->altern, $id_parent, $boucles, $descr, $ligne_altern, $boucle_placeholder);
+		$result->postaff = public_phraser_html_dist($result->postaff, $id_parent, $boucles, $descr, $ligne_postaff, $boucle_placeholder);
 
 		// Prevenir le generateur de code que le squelette est faux
 		if ($err_b) {
@@ -1078,14 +1127,21 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne_
 			$boucles[$id_boucle] = $result;
 		}
 
+		// remplacer la boucle par un placeholder qui compte le meme nombre de lignes
+		$placeholder = public_generer_boucle_placeholder($id_boucle, $boucles[$id_boucle], $boucle_placeholder, $ligne_suite - $ligne_debut_texte);
+		$longueur_boucle = $pos_courante - $boucle['debut_boucle'];
+		$texte = substr_replace($texte, $placeholder, $boucle['debut_boucle'], $longueur_boucle);
+		$pos_courante = $pos_courante - $longueur_boucle + strlen($placeholder);
+
 		// phraser la partie avant le debut de la boucle
-		$all_res = phraser_champs_etendus(substr($texte, $pos_debut_texte, $boucle['debut_boucle'] - $pos_debut_texte), $ligne_debut_texte, $all_res);
-		$all_res[] = &$boucles[$id_boucle];
+		#$all_res = phraser_champs_etendus(substr($texte, $pos_debut_texte, $boucle['debut_boucle'] - $pos_debut_texte), $ligne_debut_texte, $all_res);
+		#$all_res[] = &$boucles[$id_boucle];
 
 		$ligne_debut_texte = $ligne_suite;
 		$pos_debut_texte = $pos_courante;
 	}
 
-	$all_res = phraser_champs_etendus(substr($texte, $pos_debut_texte), $ligne_debut_texte, $all_res);
+	$all_res = phraser_champs_etendus($texte, $ligne_debut_initial, $all_res);
+
 	return $all_res;
 }
