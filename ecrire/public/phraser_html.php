@@ -85,15 +85,15 @@ function phraser_inclure($texte, $ligne, $result) {
 		$champ->texte = ($fichier !== 'page.php') ? $fichier : '';
 		$texte = substr($texte, $p + strlen($match[0]));
 		// on assimile {var=val} a une liste de un argument sans fonction
-		phraser_args($texte, "/>", "", $result, $champ);
+		$pos_apres = 0;
+		phraser_args($texte, "/>", "", $result, $champ, $pos_apres);
 		if (!$champ->texte or count($champ->param) > 1) {
 			if (!function_exists('normaliser_inclure')) {
 				include_spip('public/normaliser');
 			}
 			normaliser_inclure($champ);
 		}
-		$texte = substr($champ->apres, strpos($champ->apres, '>') + 1);
-		$champ->apres = "";
+		$texte = substr($texte, strpos($texte, '>', $pos_apres) + 1);
 		$texte = preg_replace(',^</INCLU[DR]E>,', '', $texte);
 		$result[] = $champ;
 	}
@@ -190,7 +190,9 @@ function phraser_idiomes($texte, $ligne, $result) {
 		$champ->nom_champ = strtolower($match[3]);
 		$champ->module = $match[2];
 		// pas d'imbrication pour les filtres sur langue
-		phraser_args($match[7], ":", '', array(), $champ);
+		$pos_apres = 0;
+		phraser_args($match[7], ":", '', array(), $champ, $pos_apres);
+		$champ->apres = substr($match[7], $pos_apres);
 		$result[] = $champ;
 	}
 	if ($texte !== "") {
@@ -285,22 +287,28 @@ function phraser_champs_etendus($texte, $ligne, $result) {
  *
  * https://code.spip.net/@phraser_args
  *
- * @param $texte
- * @param $fin
- * @param $sep
+ * @param string $texte
+ * @param string $fin
+ * @param string $sep
  * @param $result
  * @param $pointeur_champ
+ * @param int $pos_debut
  * @return array
  */
-function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
-	$texte = ltrim($texte);
-	while (($texte !== "") && strpos($fin, $texte[0]) === false) {
-		$result = phraser_arg($texte, $sep, $result, $pointeur_champ);
-		$texte = ltrim($texte);
+function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ, &$pos_debut) {
+	$length = strlen($texte);
+	while ($pos_debut < $length and trim($texte[$pos_debut]) === '') {
+		$pos_debut++;
 	}
-# mettre ici la suite du texte, 
-# notamment pour que l'appelant vire le caractere fermant si besoin
-	$pointeur_champ->apres = $texte;
+	while (($pos_debut < $length) && strpos($fin, $texte[$pos_debut]) === false) {
+		// phraser_arg modifie directement le $texte, on fait donc avec ici en passant par une sous chaine
+		$st = substr($texte, $pos_debut);
+		$result = phraser_arg($st, $sep, $result, $pointeur_champ);
+		$pos_debut = $length - strlen($st);
+		while ($pos_debut < $length and trim($texte[$pos_debut]) === '') {
+			$pos_debut++;
+		}
+	}
 
 	return $result;
 }
@@ -395,9 +403,9 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 					$next = isset($args[0]) ? $args[0] : '';
 				}
 				while ($next == '|') {
-					phraser_args($rec, $par, $sep, array(), $champ);
-					$args = $champ->apres;
-					$champ->apres = '';
+					$pos_apres = 0;
+					phraser_args($rec, $par, $sep, array(), $champ, $pos_apres);
+					$args = substr($rec, $pos_apres);
 					$next = isset($args[0]) ? $args[0] : '';
 				}
 				// Si erreur de syntaxe dans un sous-argument, propager.
@@ -484,11 +492,11 @@ function phraser_champs_interieurs($texte, $ligne, $sep, $result) {
 			$champ->nom_champ = $nom;
 			$champ->etoile = $match[6];
 			// phraser_args indiquera ou commence apres
-			$result = phraser_args($match[7], ")", $sep, $result, $champ);
+			$pos_apres = 0;
+			$result = phraser_args($match[7], ")", $sep, $result, $champ, $pos_apres);
 			phraser_vieux($champ);
-			$champ->avant =
-				phraser_champs_exterieurs($match[1], $n, $sep, $result);
-			$debut = substr($champ->apres, 1);
+			$champ->avant =	phraser_champs_exterieurs($match[1], $n, $sep, $result);
+			$debut = substr($match[7], $pos_apres + 1);
 			if (!empty($debut)) {
 				$n += substr_count(substr($texte, 0, strpos($texte, $debut)), "\n");
 			}
@@ -935,16 +943,15 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne_
 
 		// 1ere passe sur les criteres, vu comme des arguments sans fct
 		// Resultat mis dans result->param
-		phraser_args(substr($texte, $pos_milieu), "/>", "", $all_res, $result);
+		$pos_fin_criteres = $pos_milieu;
+		phraser_args($texte, "/>", "", $all_res, $result, $pos_fin_criteres);
 
 		// En 2e passe result->criteres contiendra un tableau
 		// pour l'instant on met le source (chaine) :
 		// si elle reste ici au final, c'est qu'elle contient une erreur
-		$pos_fin_criteres = strpos($texte, $result->apres, $pos_milieu);
 		$pos_courante = $pos_fin_criteres; // on s'en sert pour compter les lignes plus precisemment
 		$result->criteres = substr($texte, $pos_milieu, $pos_fin_criteres - $pos_milieu);
 		$pos_milieu = $pos_fin_criteres;
-		$result->apres = "";
 
 		//
 		// Recuperer la fin :
