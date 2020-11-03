@@ -174,7 +174,7 @@
 	<menu nom="auteur_creer" titre="icone_creer_nouvel_auteur" parent="outils_rapides" icone="images/auteur-new-16.png" action="auteur_edit" parametres="new=oui" />
 
 	<onglet nom="infos_perso" titre="icone_mes_infos" parent="infos_perso" icone="images/information-perso-24.png" />
-	<onglet nom="configurer_langage" titre="icone_ma_langue" parent="infos_perso" icone="images/ma_langue-24.png" />
+	<onglet nom="configurer_langage" titre="icone_ma_langue" parent="infos_perso" icone="images/langue-24.png" />
 	<onglet nom="configurer_preferences" titre="icone_mes_preferences" parent="infos_perso" icone="images/mes_preferences-24.png" />
 	<onglet nom="plugins_actifs" titre="plugin_titre_modifier" parent="plugins" icone="images/plugin-24.png" action="admin_plugin" />
 </paquet>
