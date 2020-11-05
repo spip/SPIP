@@ -63,6 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_redirection' => 'REDIRECTION',
 	'bouton_reinitialiser_aux_valeurs_par_defaut' => 'Réinitialiser aux valeurs par défaut',
 	'bouton_relancer_installation' => 'Relancer l’installation',
+	'bouton_relancer_inscription' => 'Relancer l’inscription',
 	'bouton_reset_password' => 'Générer un nouveau mot de passe et l’envoyer par email',
 	'bouton_suivant' => 'Suivant',
 	'bouton_tenter_recuperation' => 'Tenter une réparation',

@@ -17,6 +17,9 @@
 		[(#BOUTON_ACTION{<:info_admin_etre_webmestre:>,[(#URL_ACTION_AUTEUR{etre_webmestre,[(#EVAL{'time()'})],#SELF})]})]
 	]
 ]
+[(#STATUT|=={nouveau}|et{#AUTORISER{webmestre}}|oui)
+[(#BOUTON_ACTION{<:bouton_relancer_inscription:>,[(#URL_ACTION_AUTEUR{relancer_inscription,#ID_AUTEUR,#SELF})],'bloc actualiser'})]
+]
 <INCLURE{fond=prive/objets/infos/inc-auteur-rubriques,id_auteur,statut} />
 <div class='nb_elements'>
 <BOUCLE_arts(ARTICLES){id_auteur}{statut!=poubelle}> </BOUCLE_arts>
