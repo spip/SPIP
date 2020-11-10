@@ -16,7 +16,7 @@
 					href="#URL_ECRIRE{infos_perso}"><strong class="nom">[(#SESSION{nom}|trim|sinon{#SESSION{login}}|typo|couper{30})]</strong></a> |
 				<a class="menu_lang"
 					href="#URL_ECRIRE{configurer_langage}"
-					title="<:titre_config_langage:>">[(#CHEMIN_IMAGE{langues.png}|balise_img{<:titre_config_langage:>})][(#LANG|traduire_nom_langue)]</a> |
+					title="<:titre_config_langage:>">[(#CHEMIN_IMAGE{langues.svg}|balise_img{<:titre_config_langage:>})][(#LANG|traduire_nom_langue)]</a> |
 				[(#PLUGIN{aide}|oui)<a class="aide popin" target="_blank"
 					href="#URL_ECRIRE{aide,var_lang=#LANG}"><:icone_aide_ligne:></a> |]
 				<a href="[(#VAL{logout}|generer_url_action{logout=prive})]"><:icone_deconnecter:></a>
