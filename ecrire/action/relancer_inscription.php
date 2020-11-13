@@ -29,7 +29,7 @@ function action_relancer_inscription_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_auteur = $securiser_action();
 
-	if ($GLOBALS['visiteur_session']['statut'] == '0minirezo' and intval($id_auteur)) {
+	if (intval($id_auteur) and autoriser('inscription', 'relancer')) {
 		$auteur = sql_fetsel('prefs, email, nom, statut', 'spip_auteurs', "id_auteur=$id_auteur");
 		if ($auteur['statut'] == 'nouveau') {
 			include_spip('action/inscrire_auteur');
