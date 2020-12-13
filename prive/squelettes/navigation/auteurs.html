@@ -14,5 +14,8 @@
 
 	[(#VAL{1}|avoir_visiteurs|oui)
 	[(#URL_ECRIRE{#ENV{is_visiteur,''}|?{auteurs,visiteurs}}|icone_horizontale{#ENV{is_visiteur,''}|?{<:icone_afficher_auteurs:>,<:icone_afficher_visiteurs:>},#ENV{is_visiteur,''}|?{auteur,auteur-6forum}})]
+	[(#ENV{statut}|=={nouveau}|et{#AUTORISER{relancer,inscription}}|oui)
+		[(#BOUTON_ACTION{<:bouton_relancer_inscriptions:>,[(#URL_ACTION_AUTEUR{relancer_inscription,*,#SELF})],'bloc actualiser'})]
+	]
 	]
 #BOITE_FERMER
