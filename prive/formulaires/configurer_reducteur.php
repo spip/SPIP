@@ -73,7 +73,7 @@ function formulaires_configurer_reducteur_traiter_dist() {
 					break;
 				case 'convert':
 				case 'imagick':
-					$formats_graphiques = 'gif,jpg,png';
+					$formats_graphiques = 'gif,jpg,png,webp';
 					break;
 				default: #debug
 					$formats_graphiques = '';

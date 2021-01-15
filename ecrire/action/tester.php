@@ -38,7 +38,6 @@ function action_tester_dist() {
 	if ($arg == "gd1") {
 		// Si GD est installe et php >= 4.0.2
 		if (function_exists('imagetypes')) {
-
 			if (imagetypes() & IMG_GIF) {
 				$gd_formats[] = "gif";
 			} else {
@@ -57,6 +56,9 @@ function action_tester_dist() {
 			}
 			if (imagetypes() & IMG_PNG) {
 				$gd_formats[] = "png";
+			}
+			if (imagetypes() & IMG_WEBP) {
+				$gd_formats[] = "webp";
 			}
 		} else {
 			# ancienne methode de detection des formats, qui en plus
@@ -82,6 +84,13 @@ function action_tester_dist() {
 				$srcImage = @ImageCreateFromPNG(_ROOT_IMG_PACK . "test.png");
 				if ($srcImage) {
 					$gd_formats[] = "png";
+					ImageDestroy($srcImage);
+				}
+			}
+			if (function_exists('ImageCreateFromWEBP')) {
+				$srcImage = @ImageCreateFromWEBP(_ROOT_IMG_PACK . "test.webp");
+				if ($srcImage) {
+					$gd_formats[] = "webp";
 					ImageDestroy($srcImage);
 				}
 			}
