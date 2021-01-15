@@ -1180,16 +1180,19 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 
 	// S'il s'agit d'une image pas trop grosse ou d'un fichier html, on va aller
 	// recharger le document en GET et recuperer des donnees supplementaires...
-	if (preg_match(',^image/(jpeg|gif|png|swf|svg),', $mime_type)) {
+	include_spip('inc/filtres_images_lib_mini');
+	if (strpos($mime_type, "image/") === 0
+	  and $extension = _image_trouver_extension_depuis_mime($mime_type)) {
 		if ($max == 0
 			and (empty($a['taille']) or $a['taille'] < _INC_DISTANT_MAX_SIZE)
-			and in_array($a['extension'], formats_image_acceptables())
+			and in_array($extension, formats_image_acceptables())
 			and $charger_si_petite_image
 		) {
 			$a = recuperer_infos_distantes($source, _INC_DISTANT_MAX_SIZE);
 		} else {
 			if ($a['body']) {
-				$a['fichier'] = _DIR_RACINE . nom_fichier_copie_locale($source, $a['extension']);
+				$a['extension'] = $extension;
+				$a['fichier'] = _DIR_RACINE . nom_fichier_copie_locale($source, $extension);
 				ecrire_fichier($a['fichier'], $a['body']);
 				$size_image = @spip_getimagesize($a['fichier']);
 				$a['largeur'] = intval($size_image[0]);
@@ -1201,6 +1204,7 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 
 	// Fichier swf, si on n'a pas la taille, on va mettre 425x350 par defaut
 	// ce sera mieux que 0x0
+	// Flash is dead!
 	if ($a and isset($a['extension']) and $a['extension'] == 'swf'
 		and empty($a['largeur'])
 	) {
