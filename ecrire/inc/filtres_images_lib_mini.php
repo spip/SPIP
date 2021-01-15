@@ -155,8 +155,11 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 		$source = $img;
 		$img = "<img src='$source' />";
 	} # gerer img src="data:....base64"
-	elseif (preg_match('@^data:image/(jpe?g|png|gif|svg+xml);base64,(.*)$@isS', $source, $regs)) {
-		$local = sous_repertoire(_DIR_VAR, 'image-data') . md5($regs[2]) . '.' . str_replace('jpeg', 'jpg', $regs[1]);
+	elseif (preg_match('@^data:image/([^;]*);base64,(.*)$@isS', $source, $regs)
+	  and $extension = _image_trouver_extension_depuis_mime("image/".$regs[1])
+		and in_array($extension, _image_extensions_acceptees_en_entree())
+	) {
+		$local = sous_repertoire(_DIR_VAR, 'image-data') . md5($regs[2]) . '.' . _image_extension_normalisee($extension);
 		if (!file_exists($local)) {
 			ecrire_fichier($local, base64_decode($regs[2]));
 		}
@@ -195,7 +198,7 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 
 	if ($forcer_format !== false
 		// ignorer forcer_format si on a une image svg, que le filtre appelant ne supporte pas SVG, et que le forcage est un autre format image
-		and ($terminaison_dest !== 'svg' or $support_svg or !in_array($forcer_format,['png','gif','jpg']))) {
+		and ($terminaison_dest !== 'svg' or $support_svg or !in_array($forcer_format,_image_extensions_acceptees_en_sortie()))) {
 		$terminaison_dest = $forcer_format;
 	}
 
@@ -263,11 +266,6 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 		}
 		$cache = sous_repertoire(_DIR_VAR, $cache);
 		$cache = sous_repertoire($cache, $effet);
-		# cherche un cache existant
-		/*foreach (array('gif','jpg','png') as $fmt)
-			if (@file_exists($cache . $fichier_dest . '.' . $fmt)) {
-				$terminaison_dest = $fmt;
-			}*/
 	} else {
 		$fichier_dest = md5("$identifiant-$effet");
 		$cache = sous_repertoire(_DIR_VAR, $cache);
@@ -320,7 +318,7 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 	$ret["fichier"] = $fichier;
 	$ret["fonction_image"] = "_image_image" . $terminaison_dest;
 	$ret["fichier_dest"] = $fichier_dest;
-	$ret["format_source"] = ($terminaison != 'jpeg' ? $terminaison : 'jpg');
+	$ret["format_source"] = _image_extension_normalisee($terminaison);
 	$ret["format_dest"] = $terminaison_dest;
 	$ret["date_src"] = $date_src;
 	$ret["creer"] = $creer;
@@ -367,13 +365,67 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 	return $ret;
 }
 
+
+/**
+ * @param string $quoi
+ * @return array
+ */
+function _image_extensions_acceptees_en_entree() {
+	static $extensions = null;
+	if (empty($extensions)) {
+		$extensions = ['png', 'gif', 'jpg', 'jpeg', 'svg'];
+		if (!empty($GLOBALS['meta']['gd_formats'])) {
+			// action=tester renseigne gd_formats et detecte le support de webp
+			$extensions = array_merge(explode(',', $GLOBALS['meta']['gd_formats']));
+			$extensions = array_map('trim', $extensions);
+			$extensions = array_filter($extensions);
+			$extensions = array_unique($extensions);
+		}
+	}
+
+	return $extensions;
+}
+
+/**
+ * @return array|string[]|null
+ */
+function _image_extensions_acceptees_en_sortie(){
+	static $extensions = null;
+	if (empty($extensions)){
+		$extensions = _image_extensions_acceptees_en_entree();
+		$extensions = array_diff($extensions, ['jpeg']);
+		if (in_array('gif', $extensions) and !function_exists('imagegif')) {
+			$extensions = array_diff($extensions, ['gif']);
+		}
+		if (in_array('webp', $extensions) and !function_exists('imagewebp')) {
+			$extensions = array_diff($extensions, ['webp']);
+		}
+	}
+
+	return $extensions;
+}
+
+function _image_extension_normalisee($extension){
+	$extension = strtolower($extension);
+	if ($extension === 'jpeg') {
+		$extension = 'jpg';
+	}
+	return $extension;
+}
+
+function _image_extensions_conservent_transparence(){
+	return ['png', 'webp'];
+}
+
+
 /**
  * Retourne la terminaison d’un fichier image
  * @param string $path
  * @return string
  */
 function _image_trouver_extension($path) {
-	if (preg_match(",\.(gif|jpe?g|png|svg)($|[?]),i", $path, $regs)) {
+	$preg_extensions = implode('|', _image_extensions_acceptees_en_entree());
+	if (preg_match(",\.($preg_extensions)($|[?]),i", $path, $regs)) {
 		$terminaison = strtolower($regs[1]);
 		return $terminaison;
 	}
@@ -409,38 +461,48 @@ function _image_trouver_extension_pertinente($path) {
 		$mime = image_type_to_mime_type($info[2]);
 	}
 
+	$_terminaison = _image_trouver_extension_depuis_mime($mime);
+	if ($_terminaison and $_terminaison !== $terminaison) {
+		spip_log("Mauvaise extension du fichier : $path . Son type mime est : $mime", "images." . _LOG_INFO_IMPORTANTE);
+		$terminaison = $_terminaison;
+	}
+	return $terminaison;
+}
+
+/**
+ * @param string $mime
+ * @return string
+ */
+function _image_trouver_extension_depuis_mime($mime) {
 	switch (strtolower($mime)) {
 		case 'image/png':
 		case 'image/x-png':
-			$_terminaison = 'png';
+			$terminaison = 'png';
 			break;
 
 		case 'image/jpg':
 		case 'image/jpeg':
 		case 'image/pjpeg':
-			$_terminaison = 'jpeg';
+			$terminaison = 'jpeg';
 			break;
 
 		case 'image/gif':
-			$_terminaison = 'gif';
+			$terminaison = 'gif';
 			break;
 
 		case 'image/webp':
 		case 'image/x-webp':
-			$_terminaison = 'webp';
+			$terminaison = 'webp';
 			break;
 
 		case 'image/svg+xml':
-			$_terminaison = 'svg';
+			$terminaison = 'svg';
 			break;
 
 		default:
-			$_terminaison = '';
+			$terminaison = '';
 	}
-	if ($_terminaison and $_terminaison !== $terminaison) {
-		spip_log("Mauvaise extension du fichier : $path . Son type mime est : $mime", "images." . _LOG_INFO_IMPORTANTE);
-		$terminaison = $_terminaison;
-	}
+
 	return $terminaison;
 }
 
@@ -452,7 +514,7 @@ function _image_trouver_extension_pertinente($path) {
  * @param string $filename
  *     Le path vers l'image à traiter (par exemple : IMG/distant/jpg/image.jpg
  *     ou local/cache-vignettes/L180xH51/image.jpg).
- * @return ressource
+ * @return resource
  *     Une ressource de type Image GD.
  */
 function _imagecreatefromjpeg($filename) {
@@ -474,7 +536,7 @@ function _imagecreatefromjpeg($filename) {
  * @param string $filename
  *     Le path vers l'image à traiter (par exemple : IMG/distant/png/image.png
  *     ou local/cache-vignettes/L180xH51/image.png).
- * @return ressource
+ * @return resource
  *     Une ressource de type Image GD.
  */
 function _imagecreatefrompng($filename) {
@@ -496,7 +558,7 @@ function _imagecreatefrompng($filename) {
  * @param string $filename
  *     Le path vers l'image à traiter (par exemple : IMG/distant/gif/image.gif
  *     ou local/cache-vignettes/L180xH51/image.gif).
- * @return ressource
+ * @return resource
  *     Une ressource de type Image GD.
  */
 function _imagecreatefromgif($filename) {
@@ -504,6 +566,29 @@ function _imagecreatefromgif($filename) {
 	if (!$img) {
 		spip_log("Erreur lecture imagecreatefromgif $filename", _LOG_CRITIQUE);
 		erreur_squelette("Erreur lecture imagecreatefromgif $filename");
+		$img = imagecreate(10, 10);
+	}
+
+	return $img;
+}
+
+
+/**
+ * Crée une image depuis un fichier ou une URL (au format webp)
+ *
+ * Utilise les fonctions spécifiques GD.
+ *
+ * @param string $filename
+ *     Le path vers l'image à traiter (par exemple : IMG/distant/png/image.png
+ *     ou local/cache-vignettes/L180xH51/image.png).
+ * @return resource
+ *     Une ressource de type Image GD.
+ */
+function _imagecreatefromwebp($filename) {
+	$img = @imagecreatefromwebp($filename);
+	if (!$img) {
+		spip_log("Erreur lecture imagecreatefromwebp $filename", _LOG_CRITIQUE);
+		erreur_squelette("Erreur lecture imagecreatefrompng $filename");
 		$img = imagecreate(10, 10);
 	}
 
@@ -550,7 +635,7 @@ function _image_imagepng($img, $fichier) {
  *
  * Utilise les fonctions spécifiques GD.
  *
- * @param ressource $img
+ * @param resource $img
  *     Une ressource de type Image GD.
  * @param string $fichier
  *     Le path vers l'image (ex : local/cache-vignettes/L180xH51/image.gif).
@@ -585,7 +670,7 @@ function _image_imagegif($img, $fichier) {
  *
  * Utilise les fonctions spécifiques GD.
  *
- * @param ressource $img
+ * @param resource $img
  *     Une ressource de type Image GD.
  * @param string $fichier
  *     Le path vers l'image (ex : local/cache-vignettes/L180xH51/image.jpg).
@@ -632,7 +717,7 @@ function _image_imagejpg($img, $fichier, $qualite = _IMG_GD_QUALITE) {
  *
  * @uses phpthumb_functions::GD2ICOstring()
  *
- * @param ressource $img
+ * @param resource $img
  *     Une ressource de type Image GD.
  * @param string $fichier
  *     Le path vers l'image (ex : local/cache-vignettes/L180xH51/image.jpg).
@@ -645,6 +730,41 @@ function _image_imageico($img, $fichier) {
 	return ecrire_fichier($fichier, phpthumb_functions::GD2ICOstring($gd_image_array));
 }
 
+
+/**
+ * Affiche ou sauvegarde une image au format WEBP
+ *
+ * Utilise les fonctions spécifiques GD.
+ *
+ * @param resource $img
+ *     Une ressource de type Image GD.
+ * @param string $fichier
+ *     Le path vers l'image (ex : local/cache-vignettes/L180xH51/image.png).
+ * @return bool
+ *
+ *     - false si l'image créée a une largeur nulle ou n'existe pas ;
+ *     - true si une image est bien retournée.
+ */
+function _image_imagewebp($img, $fichier, $qualite = _IMG_GD_QUALITE) {
+	if (!function_exists('imagewebp')) {
+		return false;
+	}
+	$tmp = $fichier . ".tmp";
+	$ret = imagewebp($img, $tmp, $qualite);
+	if (file_exists($tmp)) {
+		$taille_test = getimagesize($tmp);
+		if ($taille_test[0] < 1) {
+			return false;
+		}
+
+		spip_unlink($fichier); // le fichier peut deja exister
+		@rename($tmp, $fichier);
+
+		return $ret;
+	}
+
+	return false;
+}
 
 /**
  * Sauvegarde une image au format SVG
@@ -1076,8 +1196,8 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process = 'AUTO
 		$process = $GLOBALS['meta']['image_process'];
 	}
 
-	// si le doc n'est pas une image, refuser
-	if (!$force and !in_array($format, formats_image_acceptables())) {
+	// si le doc n'est pas une image dans un format accetpable, refuser
+	if (!$force and !in_array($format, formats_image_acceptables(in_array($process, ['gd1', 'gd2'])))) {
 		return;
 	}
 	$destination = "$destdir/$destfile";
@@ -1263,7 +1383,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process = 'AUTO
 					$destFormat = "png";
 				}
 			}
-			if ($destFormat == "png") {
+			if (in_array($destFormat, _image_extensions_conservent_transparence())) {
 				// Conserver la transparence 
 				if (function_exists("imageAntiAlias")) {
 					imageAntiAlias($destImage, true);
@@ -1446,12 +1566,11 @@ function process_image_reduire($fonction, $img, $taille, $taille_y, $force, $pro
 		$format_sortie = "jpg";
 	} elseif ($process == 'gd1' or $process == 'gd2') {
 		$image = _image_valeurs_trans($img, "reduire-{$taille}-{$taille_y}", $format_sortie, $fonction, false, _SVG_SUPPORTED);
-
 		// on verifie que l'extension choisie est bonne (en principe oui)
 		$gd_formats = formats_image_acceptables(true);
 		if (is_array($image)
 			and (!in_array($image['format_dest'], $gd_formats)
-				or ($image['format_dest'] == 'gif' and !function_exists('ImageGif'))
+				or (!in_array($image['format_dest'], _image_extensions_acceptees_en_sortie()))
 			)
 		) {
 			if ($image['format_source'] == 'jpg') {
@@ -1467,10 +1586,8 @@ function process_image_reduire($fonction, $img, $taille, $taille_y, $force, $pro
 			# pas *ecrire*
 			$format_sortie = "";
 			foreach ($formats_sortie as $fmt) {
-				if (in_array($fmt, $gd_formats)) {
-					if ($fmt <> "gif" or function_exists('ImageGif')) {
-						$format_sortie = $fmt;
-					}
+				if (in_array($fmt, $gd_formats) and in_array($fmt, _image_extensions_acceptees_en_sortie())) {
+					$format_sortie = $fmt;
 					break;
 				}
 			}
@@ -1512,7 +1629,7 @@ function process_image_reduire($fonction, $img, $taille, $taille_y, $force, $pro
 			array('src' => $image['fichier_dest'], 'width' => $image['largeur_dest'], 'height' => $image['hauteur_dest']));
 	}
 
-	if (in_array($image["format_source"], formats_image_acceptables())) {
+	if (in_array($image["format_source"], _image_extensions_acceptees_en_entree())) {
 		$destWidth = $image['largeur_dest'];
 		$destHeight = $image['hauteur_dest'];
 		$logo = $image['fichier'];
