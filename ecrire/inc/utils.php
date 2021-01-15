@@ -1477,7 +1477,7 @@ function chemin_image($icone) {
 	}
 
 	// si c'est un nom d'image complet (article-24.png) essayer de le renvoyer direct
-	if (preg_match(',[.](png|gif|jpg|svg)$,', $icone) and $f = find_in_theme("images/$icone")) {
+	if (preg_match(',[.](png|gif|jpg|webp|svg)$,', $icone) and $f = find_in_theme("images/$icone")) {
 		return $f;
 	}
 	// sinon passer par le module de renommage
@@ -3427,17 +3427,30 @@ function html5_permis() {
  * @param bool $svg_allowed
  * @return array
  */
-function formats_image_acceptables($gd = false, $svg_allowed = true) {
-	$config = ($gd ? "gd_formats" : "formats_graphiques");
-	$formats = (isset($GLOBALS['meta'][$config]) ? $GLOBALS['meta'][$config] : 'png,gif,jpg');
-	$formats = explode(',', $formats);
-	$formats = array_filter($formats);
-	$formats = array_map('trim', $formats);
-
-	if ($svg_allowed) {
-		$formats[] = 'svg';
+function formats_image_acceptables($gd = null, $svg_allowed = true) {
+	$formats = null;
+	if (!is_null($gd)) {
+		$config = ($gd ? "gd_formats" : "formats_graphiques");
+		if (isset($GLOBALS['meta'][$config])) {
+			$formats = $GLOBALS['meta'][$config];
+			$formats = explode(',', $formats);
+			$formats = array_filter($formats);
+			$formats = array_map('trim', $formats);
+		}
+	}
+	if (is_null($formats)) {
+		include_spip('inc/filtres_images_lib_mini');
+		$formats = _image_extensions_acceptees_en_entree();
 	}
 
+	if ($svg_allowed) {
+		if (!in_array('svg', $formats)) {
+			$formats[] = 'svg';
+		}
+	}
+	else {
+		$formats = array_diff($formats, ['svg']);
+	}
 	return $formats;
 }
 
