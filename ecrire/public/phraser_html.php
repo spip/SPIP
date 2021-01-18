@@ -811,21 +811,26 @@ function public_compte_ligne($texte, $debut = 0, $fin = null) {
  */
 function public_trouver_premiere_boucle($texte, $id_parent, $descr, $pos_debut_texte = 0) {
 	$premiere_boucle = null;
+	$pos_derniere_boucle_anonyme = $pos_debut_texte;
 
 	$current_pos = $pos_debut_texte;
 	while (($pos_boucle = strpos($texte, BALISE_BOUCLE, $current_pos)) !== false) {
 		$current_pos = $pos_boucle + 1;
 		$pos_parent = strpos($texte,'(', $pos_boucle);
+
+		$id_boucle = '';
+		if ($pos_parent !== false) {
+			$id_boucle = trim(substr($texte,$pos_boucle + strlen(BALISE_BOUCLE), $pos_parent - $pos_boucle - strlen(BALISE_BOUCLE)));
+		}
 		if ($pos_parent === false
-		  or !$id_boucle = trim(substr($texte,$pos_boucle + strlen(BALISE_BOUCLE), $pos_parent - $pos_boucle - strlen(BALISE_BOUCLE)))
-			or !(is_numeric($id_boucle) or strpos($id_boucle, '_') === 0)) {
+		  or (strlen($id_boucle) and !(is_numeric($id_boucle) or strpos($id_boucle, '_') === 0))) {
 
 			$result = new Boucle;
 			$result->id_parent = $id_parent;
 			$result->descr = $descr;
 
 			// un id_boucle pour l'affichage de l'erreur
-			if (!$id_boucle) {
+			if (!strlen($id_boucle)) {
 				$id_boucle = substr($texte,$pos_boucle + strlen(BALISE_BOUCLE), 15);
 			}
 			$result->id_boucle = $id_boucle;
@@ -837,6 +842,7 @@ function public_trouver_premiere_boucle($texte, $id_parent, $descr, $pos_debut_t
 		else {
 			$boucle = [
 				'id_boucle' => $id_boucle,
+				'id_boucle_err' => $id_boucle,
 				'debut_boucle' => $pos_boucle,
 				'pos_boucle' => $pos_boucle,
 				'pos_parent' => $pos_parent,
@@ -846,21 +852,31 @@ function public_trouver_premiere_boucle($texte, $id_parent, $descr, $pos_debut_t
 				'pos_preaff_inside' => false,
 			];
 
-			// trouver sa position de depart reelle : au <B_ ou au <BB_
+			// un id_boucle pour l'affichage de l'erreur sur les boucle anonymes
+			if (!strlen($id_boucle)) {
+				$boucle['id_boucle_err'] = substr($texte,$pos_boucle + strlen(BALISE_BOUCLE), 15);
+			}
+
+			// trouver sa position de depart reelle : au <Bxx> ou au <BBxx>
 			$precond_boucle = BALISE_PRECOND_BOUCLE . $id_boucle . '>';
-			$pos_precond = strpos($texte, $precond_boucle, $pos_debut_texte);
-			if ($pos_precond !== false and $pos_precond < $boucle['debut_boucle']) {
+			$pos_precond = strpos($texte, $precond_boucle, $id_boucle ? $pos_debut_texte : $pos_derniere_boucle_anonyme);
+			if ($pos_precond !== false
+				and $pos_precond < $boucle['debut_boucle']) {
 				$boucle['debut_boucle'] = $pos_precond;
 				$boucle['pos_precond'] = $pos_precond;
 				$boucle['pos_precond_inside'] = $pos_precond + strlen($precond_boucle);
 			}
 
 			$preaff_boucle = BALISE_PREAFF_BOUCLE . $id_boucle . '>';
-			$pos_preaff = strpos($texte, $preaff_boucle, $pos_debut_texte);
-			if ($pos_preaff !== false and $pos_preaff < $boucle['debut_boucle']) {
+			$pos_preaff = strpos($texte, $preaff_boucle, $id_boucle ? $pos_debut_texte : $pos_derniere_boucle_anonyme);
+			if ($pos_preaff !== false
+				and $pos_preaff < $boucle['debut_boucle']) {
 				$boucle['debut_boucle'] = $pos_preaff;
 				$boucle['pos_preaff'] = $pos_preaff;
 				$boucle['pos_preaff_inside'] = $pos_preaff + strlen($preaff_boucle);
+			}
+			if (!strlen($id_boucle)) {
+				$pos_derniere_boucle_anonyme = $pos_boucle;
 			}
 
 			if (is_null($premiere_boucle) or $premiere_boucle['debut_boucle'] > $boucle['debut_boucle']) {
@@ -871,6 +887,77 @@ function public_trouver_premiere_boucle($texte, $id_parent, $descr, $pos_debut_t
 
 	return $premiere_boucle;
 }
+
+/**
+ * Trouver la fin de la  boucle (balises </B <//B </BB)
+ * en faisant attention aux boucles anonymes qui ne peuvent etre imbriquees
+ *
+ * @param $texte
+ * @param $id_parent
+ * @param $boucle
+ * @param $pos_debut_texte
+ * @param $result
+ * @return mixed
+ */
+function public_trouver_fin_boucle($texte, $id_parent, $boucle, $pos_debut_texte, $result) {
+	$id_boucle = $boucle['id_boucle'];
+	$pos_courante = $pos_debut_texte;
+
+	$boucle['pos_postcond'] = false;
+	$boucle['pos_postcond_inside'] = false;
+	$boucle['pos_altern'] = false;
+	$boucle['pos_altern_inside'] = false;
+	$boucle['pos_postaff'] = false;
+	$boucle['pos_postaff_inside'] = false;
+
+	$pos_anonyme_next = null;
+	// si c'est une boucle anonyme, chercher la position de la prochaine boucle anonyme
+	if (!strlen($id_boucle)) {
+		$pos_anonyme_next = strpos($texte, BALISE_BOUCLE . '(', $pos_courante);
+	}
+
+	//
+	// 1. Recuperer la partie conditionnelle apres
+	//
+	$apres_boucle = BALISE_POSTCOND_BOUCLE . $id_boucle . ">";
+	$pos_apres = strpos($texte, $apres_boucle, $pos_courante);
+	if ($pos_apres !== false
+		and (!$pos_anonyme_next or $pos_apres < $pos_anonyme_next)) {
+		$boucle['pos_postcond'] = $pos_apres;
+		$pos_apres += strlen($apres_boucle);
+		$boucle['pos_postcond_inside'] = $pos_apres;
+		$pos_courante = $pos_apres ;
+	}
+
+	//
+	// 2. Récuperer la partie alternative apres
+	//
+	$altern_boucle = BALISE_ALT_BOUCLE . $id_boucle . ">";
+	$pos_altern = strpos($texte, $altern_boucle, $pos_courante);
+	if ($pos_altern !== false
+		and (!$pos_anonyme_next or $pos_altern < $pos_anonyme_next)) {
+		$boucle['pos_altern'] = $pos_altern;
+		$pos_altern += strlen($altern_boucle);
+		$boucle['pos_altern_inside'] = $pos_altern;
+		$pos_courante = $pos_altern;
+	}
+
+	//
+	// 3. Recuperer la partie footer non alternative
+	//
+	$postaff_boucle = BALISE_POSTAFF_BOUCLE . $id_boucle . ">";
+	$pos_postaff = strpos($texte, $postaff_boucle, $pos_courante);
+	if ($pos_postaff !== false
+	  and (!$pos_anonyme_next or $pos_postaff < $pos_anonyme_next)) {
+		$boucle['pos_postaff'] = $pos_postaff;
+		$pos_postaff += strlen($postaff_boucle);
+		$boucle['pos_postaff_inside'] = $pos_postaff;
+		$pos_courante = $pos_postaff ;
+	}
+
+	return $boucle;
+}
+
 
 /**
  * @param object|string $champ
@@ -931,10 +1018,16 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne_
 		$result->descr = $descr;
 
 		$pos_courante = $boucle['pos_boucle'];
-		$id_boucle = $boucle['id_boucle'];
 		$pos_parent = $boucle['pos_parent'];
+		$id_boucle_search = $id_boucle = $boucle['id_boucle'];
 
 		$ligne_preaff = $ligne_avant = $ligne_milieu = $ligne_debut_texte + public_compte_ligne($texte, $pos_debut_texte, $pos_parent);
+
+		// boucle anonyme ?
+		if (!strlen($id_boucle)) {
+			$id_boucle = '_anon_L' . $ligne_milieu . '_' . substr(md5('anonyme:' .$id_parent.':'. json_encode($boucle)), 0, 8);
+		}
+
 		$pos_debut_boucle = $pos_courante;
 
 		$pos_milieu = $pos_parent;
@@ -1012,7 +1105,7 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne_
 		} else {
 			$pos_milieu += 1;
 
-			$fin_boucle = BALISE_FIN_BOUCLE . $id_boucle . ">";
+			$fin_boucle = BALISE_FIN_BOUCLE . $id_boucle_search . ">";
 			$pos_fin = strpos($texte, $fin_boucle, $pos_milieu);
 			if ($pos_fin === false) {
 				$err_b = array(
@@ -1027,44 +1120,36 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne_
 		}
 
 		$ligne_suite = $ligne_apres = $ligne_debut_texte + public_compte_ligne($texte, $pos_debut_texte, $pos_courante);
+		$boucle = public_trouver_fin_boucle($texte, $id_parent, $boucle, $pos_courante, $result);
 
 		//
-		// 1. Recuperer la partie conditionnelle apres
+		// 1. Partie conditionnelle apres ?
 		//
-		$apres_boucle = BALISE_POSTCOND_BOUCLE . $id_boucle . ">";
-		$pos_apres = strpos($texte, $apres_boucle, $pos_courante);
-		if ($pos_apres !== false) {
-			$result->apres = substr($texte, $pos_courante, $pos_apres - $pos_courante);
-			$pos_apres += strlen($apres_boucle);
-			$ligne_suite += public_compte_ligne($texte, $pos_courante, $pos_apres);
-			$pos_courante = $pos_apres ;
+		if ($boucle['pos_postcond']) {
+			$result->apres = substr($texte, $pos_courante, $boucle['pos_postcond'] - $pos_courante);
+			$ligne_suite += public_compte_ligne($texte, $pos_courante, $boucle['pos_postcond_inside']);
+			$pos_courante = $boucle['pos_postcond_inside'] ;
 		}
 
 
 		//
-		// 2. Recuperer la partie alternative
+		// 2. Partie alternative apres ?
 		//
 		$ligne_altern = $ligne_suite;
-		$altern_boucle = BALISE_ALT_BOUCLE . $id_boucle . ">";
-		$pos_altern = strpos($texte, $altern_boucle, $pos_courante);
-		if ($pos_altern !== false) {
-			$result->altern = substr($texte, $pos_courante, $pos_altern - $pos_courante);
-			$pos_altern += strlen($altern_boucle);
-			$ligne_suite += public_compte_ligne($texte, $pos_courante, $pos_altern);
-			$pos_courante = $pos_altern;
+		if ($boucle['pos_altern']) {
+			$result->altern = substr($texte, $pos_courante, $boucle['pos_altern'] - $pos_courante);
+			$ligne_suite += public_compte_ligne($texte, $pos_courante, $boucle['pos_altern_inside']);
+			$pos_courante = $boucle['pos_altern_inside'];
 		}
 
 		//
-		// 3. Recuperer la partie footer non alternative
+		// 3. Partie footer non alternative ?
 		//
 		$ligne_postaff = $ligne_suite;
-		$postaff_boucle = BALISE_POSTAFF_BOUCLE . $id_boucle . ">";
-		$pos_postaff = strpos($texte, $postaff_boucle, $pos_courante);
-		if ($pos_postaff !== false) {
-			$result->postaff = substr($texte, $pos_courante, $pos_postaff - $pos_courante);
-			$pos_postaff += strlen($postaff_boucle);
-			$ligne_suite += public_compte_ligne($texte, $pos_courante, $pos_postaff);
-			$pos_courante = $pos_postaff ;
+		if ($boucle['pos_postaff']) {
+			$result->postaff = substr($texte, $pos_courante, $boucle['pos_postaff'] - $pos_courante);
+			$ligne_suite += public_compte_ligne($texte, $pos_courante, $boucle['pos_postaff_inside']);
+			$pos_courante = $boucle['pos_postaff_inside'];
 		}
 
 		$result->ligne = $ligne_preaff;
