@@ -140,7 +140,7 @@ function formulaires_editer_objet_verifier($type, $id = 'new', $oblis = array())
 				if (!isset($erreurs[$champ])) {
 					$erreurs[$champ] = '';
 				}
-				$erreurs[$champ] .= _T('alerte_modif_info_concourante') . "<br /><textarea readonly='readonly' class='forml'>" . $conflit['base'] . '</textarea>';
+				$erreurs[$champ] .= _T('alerte_modif_info_concourante') . "<br /><textarea readonly='readonly' class='forml'>" . entites_html($conflit['base']) . '</textarea>';
 			}
 		}
 	}
