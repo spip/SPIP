@@ -432,7 +432,7 @@ function jeune_fichier($fichier, $n) {
  * @param bool $lock
  *     true pour utiliser un verrou
  * @return bool|void
- *     - true si le fichier n'existe pas
+ *     - true si le fichier n'existe pas ou s'il a bien été supprimé
  *     - false si on n'arrive pas poser le verrou
  *     - void sinon
  */
@@ -456,7 +456,7 @@ function supprimer_fichier($fichier, $lock = true) {
 }
 
 /**
- * Supprimer brutalement un fichier, s'il existe
+ * Supprimer brutalement un fichier ou un dossier, s'il existe
  *
  * @param string $f
  *     Chemin du fichier
