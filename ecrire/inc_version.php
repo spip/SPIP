@@ -433,7 +433,7 @@ define('_SPIP_EXTRA_VERSION', '-dev');
 define('_DEV_VERSION_SPIP_COMPAT',"3.2.99");
 // version des signatures de fonctions PHP
 // (= date de leur derniere modif cassant la compatibilite et/ou necessitant un recalcul des squelettes)
-$spip_version_code = 20200930;
+$spip_version_code = 20201020;
 // version de la base SQL (= numero SVN de sa derniere modif)
 $spip_version_base = 24379;
 
@@ -512,6 +512,13 @@ if (!defined('_LOG_FILTRE_GRAVITE')) {
 if (!defined('_OUTILS_DEVELOPPEURS')) {
 	/** Activer des outils pour développeurs ? */
 	define('_OUTILS_DEVELOPPEURS', false);
+}
+
+if (!defined('_CACHE_CONTEXTES_AJAX_SUR_LONGUEUR')) {
+	/** 
+	 * Basculer les contextes ajax en fichier si la longueur d’url est trop grande 
+	 * @var int Nombre de caractères */
+	define('_CACHE_CONTEXTES_AJAX_SUR_LONGUEUR', 2000);
 }
 
 // charger systematiquement inc/autoriser dans l'espace restreint

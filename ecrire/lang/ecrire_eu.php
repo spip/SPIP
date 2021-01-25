@@ -767,7 +767,7 @@ Horrela baldin bada, jarraian ipini berehelbidea, http://proxy:8080 erapean.
 Orokorrean, aukera hau hutsik geratuko da.',
 	'texte_publication_articles_post_dates' => 'Zer nolako jarrera hartu behar du SPIP-ekberen argitaratze data oraindik heldu ez den data duten artikuluen aurrean?',
 	'texte_rappel_selection_champs' => '[Ez ahaztu eremu hau zuzenki hautatzea.]',
-	'texte_recalcul_page' => 'Orri bat baino ez baduzu berkalkulatu nahi,gunepublikoan dagoen "Berkalkulatu" botoia erabili.',
+	'texte_recalcul_page' => 'Orri bat baino ez baduzu berkalkulatu nahi, gune publikoan dagoen "Berkalkulatu" botoia erabili.', # MODIF
 	'texte_recuperer_base' => 'Datuen Basea konpondu',
 	'texte_reference_mais_redirige' => 'Zure tokianerreferentziatutako artikulua eta beste URL batengana berzuzenduta.',
 	'texte_requetes_echouent' => '<b>SQL eskaera batzuk sistematikoki eta agerian dagoen arrazoirik gabe huts egiten dutenean, datu-basea berarengatik izatea posible da.<b><p>Zure SQL zerbitzariak bere taulak konpontzeko gaitasun bat dauka istripu baten erruz hondatuak izan direnean. Hemen konponketa hau egiten saia zaitezke; huts eginez gero, gorde emaitzaren kopia bat, posible baita huts egitearen aztarnak izatea...</p><p>

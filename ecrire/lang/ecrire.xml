@@ -104,8 +104,9 @@
 		<traducteur nom="severo" lien="https://trad.spip.net/auteur/severo" />
 		<traducteur nom="solid57" lien="https://trad.spip.net/auteur/solid57" />
 	</langue>
-	<langue code="eu" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=eu" total="813" traduits="771" relire="0" modifs="2" nouveaux="40" pourcent="94.83">
+	<langue code="eu" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=eu" total="813" traduits="770" relire="0" modifs="3" nouveaux="40" pourcent="94.71">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
+		<traducteur nom="Ixab" lien="https://trad.spip.net/auteur/ixab" />
 		<traducteur nom="otalazt" lien="https://trad.spip.net/auteur/otalazt-7232" />
 	</langue>
 	<langue code="fa" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=fa" total="813" traduits="773" relire="0" modifs="12" nouveaux="28" pourcent="95.08">

@@ -562,7 +562,11 @@ function _mysql_traite_query($query, $db = '', $prefixe = '') {
 	$r = preg_replace(_SQL_PREFIXE_TABLE_MYSQL, '\1' . $pref, $query) . $suite;
 
 	// en option, remplacer les emoji (que mysql ne sait pas gérer) en &#128169;
-	if (defined('_MYSQL_NOPLANES') and _MYSQL_NOPLANES and lire_meta('charset_sql_connexion') == 'utf8') {
+	// remplacer les emoji (que mysql ne sait pas gérer) en &#128169;
+	if (defined('_MYSQL_NOPLANES')
+		and _MYSQL_NOPLANES
+		and !empty($GLOBALS['meta']['charset_sql_connexion'])
+		and $GLOBALS['meta']['charset_sql_connexion'] == 'utf8') {
 		include_spip('inc/charsets');
 		$r = utf8_noplanes($r);
 	}
@@ -1154,6 +1158,15 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc = array(), $serveur 
 	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 	$link = $connexion['link'];
 	$table = prefixer_table_spip($table, $connexion['prefixe']);
+
+	// remplacer les emoji (que mysql ne sait pas gérer) en &#128169;
+	if (defined('_MYSQL_NOPLANES')
+		and _MYSQL_NOPLANES
+		and !empty($GLOBALS['meta']['charset_sql_connexion'])
+		and $GLOBALS['meta']['charset_sql_connexion'] == 'utf8') {
+		include_spip('inc/charsets');
+		$valeurs = utf8_noplanes($valeurs);
+	}
 
 	$query = "INSERT INTO $table $champs VALUES $valeurs";
 	if (!$requeter) {

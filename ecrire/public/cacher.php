@@ -263,7 +263,7 @@ function creer_cache(&$page, &$chemin_cache) {
 	$ok = ecrire_cache($chemin_cache, $pagez);
 
 	spip_log((_IS_BOT ? "Bot:" : "") . "Creation du cache $chemin_cache pour "
-		. $page['entetes']['X-Spip-Cache'] . " secondes" . ($ok ? '' : ' (erreur!)'), _LOG_INFO_IMPORTANTE);
+		. $page['entetes']['X-Spip-Cache'] . " secondes" . ($ok ? '' : ' (erreur!)'), _LOG_INFO);
 
 	// Inserer ses invalideurs
 	include_spip('inc/invalideur');

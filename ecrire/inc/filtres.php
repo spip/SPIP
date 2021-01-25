@@ -3713,10 +3713,10 @@ function encoder_contexte_ajax($c, $form = '', $emboite = null, $ajaxid = '') {
 	$cle = calculer_cle_action($form . $c);
 	$c = "$cle:$c";
 
-	// on ne stocke pas les contextes dans des fichiers caches
-	// par defaut, sauf si cette configuration a ete forcee
-	// OU que la longueur de l''argument generee est plus long
-	// que ce que telere Suhosin.
+	// on ne stocke pas les contextes dans des fichiers en cache
+	// par defaut, sauf si cette configuration a été forcée
+	// OU que la longueur de l’argument géneré est plus long
+	// que ce qui est toléré.
 	$cache_contextes_ajax = (defined('_CACHE_CONTEXTES_AJAX') and _CACHE_CONTEXTES_AJAX);
 	if (!$cache_contextes_ajax) {
 		$env = $c;
@@ -3730,9 +3730,20 @@ function encoder_contexte_ajax($c, $form = '', $emboite = null, $ajaxid = '') {
 		}
 		$env = _xor($env);
 		$env = base64_encode($env);
-		// tester Suhosin et la valeur maximale des variables en GET...
-		if ($max_len = @ini_get('suhosin.get.max_value_length')
-			and $max_len < ($len = strlen($env))
+		$len = strlen($env);
+		// Si l’url est trop longue pour le navigateur
+		$max_len = _CACHE_CONTEXTES_AJAX_SUR_LONGUEUR;
+		if ($len > $max_len) {
+			$cache_contextes_ajax = true;
+			spip_log("Contextes AJAX forces en fichiers !"
+				. " Cela arrive lorsque la valeur du contexte" 
+				. " depasse la longueur maximale autorisee ($max_len). Ici : $len."
+				, _LOG_AVERTISSEMENT);
+		}
+		// Sinon si Suhosin est actif et a une la valeur maximale des variables en GET...
+		elseif (
+			$max_len = @ini_get('suhosin.get.max_value_length')
+			and $max_len < $len
 		) {
 			$cache_contextes_ajax = true;
 			spip_log("Contextes AJAX forces en fichiers !"
@@ -3741,7 +3752,8 @@ function encoder_contexte_ajax($c, $form = '', $emboite = null, $ajaxid = '') {
 				. " ($max_len) dans 'suhosin.get.max_value_length'. Ici : $len."
 				. " Vous devriez modifier les parametres de Suhosin"
 				. " pour accepter au moins 1024 caracteres.", _LOG_AVERTISSEMENT);
-		}
+		} 
+
 	}
 
 	if ($cache_contextes_ajax) {
@@ -4548,7 +4560,7 @@ function filtre_print_dist($u, $join = "<br />", $indent = 0) {
  *
  * @param string $objet
  * @param string $info
- * @return string
+ * @return string|array
  */
 function objet_info($objet, $info) {
 	$table = table_objet_sql($objet);
@@ -4901,4 +4913,40 @@ function filtre_compacte_dist($source, $format = null) {
 	}
 
 	return $source;
+}
+
+
+/**
+ * Afficher partiellement un mot de passe que l'on ne veut pas rendre lisible par un champ hidden
+ * @param string $passe
+ * @param bool $afficher_partiellement
+ * @param int|null $portion_pourcent
+ * @return string
+ */
+function spip_affiche_mot_de_passe_masque($passe, $afficher_partiellement = false, $portion_pourcent = null) {
+	$l = strlen($passe);
+
+	if ($l<=8 or !$afficher_partiellement){
+		if (!$l) {
+			return ''; // montrer qu'il y a pas de mot de passe si il y en a pas
+		}
+		return str_pad('',$afficher_partiellement ? $l : 16,'*');
+	}
+
+	if (is_null($portion_pourcent)) {
+		if (!defined('_SPIP_AFFICHE_MOT_DE_PASSE_MASQUE_PERCENT')) {
+			define('_SPIP_AFFICHE_MOT_DE_PASSE_MASQUE_PERCENT', 20); // 20%
+		}
+		$portion_pourcent = _SPIP_AFFICHE_MOT_DE_PASSE_MASQUE_PERCENT;
+	}
+	if ($portion_pourcent >= 100) {
+		return $passe;
+	}
+	$e = intval(ceil($l * $portion_pourcent / 100 / 2));
+	$e = max($e, 0);
+	$mid = str_pad('',$l-2*$e,'*');
+	if ($e>0 and strlen($mid)>8){
+		$mid = '***...***';
+	}
+	return substr($passe,0,$e) . $mid . ($e > 0 ? substr($passe,-$e) : '');
 }
