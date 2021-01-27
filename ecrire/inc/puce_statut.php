@@ -414,10 +414,9 @@ function puce_statut_changement_rapide(
 
 function afficher_script_statut($id, $type, $n, $img, $statut, $titre, $act = '') {
 	$h = generer_action_auteur("instituer_objet", "$type-$id-$statut");
-	$h = "selec_statut('$id', '$type', $n, jQuery('img',this).attr('src'), '$h');return false;";
 	$t = supprimer_tags($titre);
 
-	return "<a href=\"#\" onclick=\"$h\" title=\"$t\"$act>" . http_img_pack($img, $t) . "</a>";
+	return "<a href=\"#\" data-id=\"$id\" data-type=\"$type\" data-decal=\"$n\" data-action=\"$h\" title=\"$t\"$act>" . http_img_pack($img, $t) . "</a>";
 }
 
 // compat
