@@ -1052,6 +1052,7 @@ jQuery(function() {
 	jQuery('div.ajaxbloc').ajaxbloc();
 	jQuery("input[placeholder]:text").placeholderLabel();
 	jQuery('.spip_logo_survol').hover(spip_logo_survol_hover, spip_logo_survol_out);
+    jQuery('span.puce_objet',this).mouseover(function(){if (!this.puce_loaded) { this.puce_loaded = true; prepare_selec_statut(this, jQuery(this).attr('data-nom'), jQuery(this).attr('data-type'), jQuery(this).attr('data-id'), jQuery(this).attr('data-action')); }});    
 });
 
 // ... et a chaque fois que le DOM change
@@ -1067,5 +1068,6 @@ onAjaxLoad(function() {
 			jQuery('div.ajaxbloc', this).ajaxbloc();
 		jQuery("input[placeholder]:text",this).placeholderLabel();
 		jQuery('.spip_logo_survol',this).hover(spip_logo_survol_hover, spip_logo_survol_out);
+        jQuery('span.puce_objet_popup a',this).click(function(){selec_statut(jQuery(this).attr('data-id'), jQuery(this).attr('data-type'), jQuery(this).attr('data-decal'), jQuery('img',this).attr('src'), jQuery(this).attr('data-action'));return false;});        
 	}
 });

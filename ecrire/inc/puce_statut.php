@@ -403,12 +403,9 @@ function puce_statut_changement_rapide(
 
 		$nom = "puce_statut_";
 		$action = generer_url_ecrire('puce_statut', "", true);
-		$action = "if (!this.puce_loaded) { this.puce_loaded = true; prepare_selec_statut(this, '$nom', '$type', '$id', '$action'); }";
-		$over = " onmouseover=\"$action\"";
-
 		$lang_dir = lang_dir(lang_typo());
 
-		return "<span class='puce_objet $type' id='$nom$type$id' dir='$lang_dir'$over>"
+		return "<span class='puce_objet $type' id='$nom$type$id' dir='$lang_dir' data-nom='$nom' data-type='$type' data-id='$id' data-action='$action'>"
 		. $inser_puce
 		. '</span>';
 	}
