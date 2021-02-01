@@ -312,11 +312,18 @@ function synthetiser_balise_dynamique($nom, $args, $file, $context_compil) {
 	if (strncmp($file, "/", 1) !== 0) {
 		$file = './" . _DIR_RACINE . "' . $file;
 	}
+
+	$args = array_map('argumenter_squelette', $args);
+	if (!empty($context_compil['appel_php_depuis_modele'])) {
+		$args[0] = 'arguments_balise_dyn_depuis_modele('.$args[0].')';
+	}
+	$args = join(', ', $args);
+
 	$r = sprintf(CODE_INCLURE_BALISE,
 		$file,
 		$context_compil[4] ? $context_compil[4] : '',
 		$nom,
-		join(', ', array_map('argumenter_squelette', $args)),
+		$args,
 		join(', ', array_map('_q', $context_compil)));
 
 	return $r;
@@ -385,6 +392,16 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 	$nomfonction = $nom;
 	$nomfonction_generique = "";
 
+	$appel_php_depuis_modele = false;
+	if (is_array($context_compil)
+	  and !is_numeric($context_compil[3])
+	  and empty($context_compil[0])
+		and empty($context_compil[1])
+		and empty($context_compil[2])
+		and empty($context_compil[3])) {
+		$appel_php_depuis_modele = true;
+	}
+
 	// Calculer un nom générique (ie. 'formulaire_' dans 'formulaire_editer_article')
 	if (false !== ($p = strpos($nom, "_"))) {
 		$nomfonction_generique = substr($nom, 0, $p + 1);
@@ -444,6 +461,9 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 		}
 	}
 
+	if ($appel_php_depuis_modele) {
+		$context_compil['appel_php_depuis_modele'] = true;
+	}
 	return synthetiser_balise_dynamique($nomfonction, $r, $file, $context_compil);
 
 }

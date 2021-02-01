@@ -87,6 +87,20 @@ function test_formulaire_inclus_par_modele() {
 	$trace = debug_backtrace(null, 20);
 	$trace_fonctions = array_column($trace, 'function');
 	$trace_fonctions = array_map('strtolower', $trace_fonctions);
+
+	// regarder si un flag a ete leve juste avant l'appel de balise_FORMULAIRE_dyn
+	if (!empty($GLOBALS["balise_dyn_appellee_par_modele"])
+		and $form = existe_formulaire($GLOBALS["balise_dyn_appellee_par_modele"])) {
+		if (in_array('balise_formulaire__dyn', $trace_fonctions)) {
+			$k = array_search('balise_formulaire__dyn', $trace_fonctions);
+			if ($trace[$k]['args'][0] === $form) {
+				return $trace[$k]['args'];
+			}
+		}
+	}
+
+	// fallback qui ne repose pas sur le flag lie a l'analyse de contexte_compil,
+	// mais ne marche pas si executer_balise_dynamique est appelee via du php dans le squelette
 	if (in_array('eval', $trace_fonctions) and in_array('inclure_modele', $trace_fonctions)) {
 		$k = array_search('inclure_modele', $trace_fonctions);
 		// les arguments de recuperer_fond() passes par inclure_modele()
