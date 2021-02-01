@@ -55,7 +55,7 @@ function formulaires_editer_rubrique_charger_dist(
 	$row = array(),
 	$hidden = ''
 ) {
-	return formulaires_editer_objet_charger(
+	$valeurs = formulaires_editer_objet_charger(
 		'rubrique',
 		$id_rubrique,
 		$id_parent,
@@ -65,6 +65,12 @@ function formulaires_editer_rubrique_charger_dist(
 		$row,
 		$hidden
 	);
+
+	if (intval($id_rubrique) and !autoriser('modifier', 'rubrique', intval($id_rubrique))) {
+		$valeurs['editable'] = '';
+	}
+
+	return $valeurs;
 }
 
 /**
