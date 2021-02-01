@@ -78,6 +78,22 @@ function existe_formulaire($form) {
 	return trouver_fond($form, 'formulaires/') ? $form : false;
 }
 
+/**
+ * Tester si un formulaire est appele via un modele type <formulaire|...> et le cas echeant retourne les arguments passes au modele
+ * false sinon
+ * @return false|array
+ */
+function test_formulaire_inclus_par_modele() {
+	$trace = debug_backtrace(null, 20);
+	$trace_fonctions = array_column($trace, 'function');
+	$trace_fonctions = array_map('strtolower', $trace_fonctions);
+	if (in_array('eval', $trace_fonctions) and in_array('inclure_modele', $trace_fonctions)) {
+		$k = array_search('inclure_modele', $trace_fonctions);
+		// les arguments de recuperer_fond() passes par inclure_modele()
+		return $trace[$k-1]['args'][1]['args'];
+	}
+	return false;
+}
 
 /**
  * Balises Formulaires par défaut.
