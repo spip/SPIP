@@ -207,9 +207,21 @@ function formulaires_editer_objet_charger(
 	$row = array(),
 	$hidden = ''
 ) {
+
 	$table_objet = table_objet($type);
 	$table_objet_sql = table_objet_sql($type);
 	$id_table_objet = id_table_objet($type);
+
+	// on accepte pas une fonction de config inconnue si elle vient d'un modele
+	if ($config_fonc
+	  and !in_array($config_fonc, ['articles_edit_config', 'rubriques_edit_config', 'auteurs_edit_config'])
+	  and $config_fonc !== $table_objet . '_edit_config') {
+		if ($args = test_formulaire_inclus_par_modele()
+		  and in_array($config_fonc, $args)) {
+			$config_fonc = '';
+		}
+	}
+
 	$new = !is_numeric($id);
 	// Appel direct dans un squelette
 	if (!$row) {
