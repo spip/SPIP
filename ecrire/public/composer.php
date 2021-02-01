@@ -313,6 +313,11 @@ function synthetiser_balise_dynamique($nom, $args, $file, $context_compil) {
 		$file = './" . _DIR_RACINE . "' . $file;
 	}
 
+	$lang = $context_compil[4];
+	if (preg_match(",\W,", $lang)) {
+		$lang = '';
+	}
+
 	$args = array_map('argumenter_squelette', $args);
 	if (!empty($context_compil['appel_php_depuis_modele'])) {
 		$args[0] = 'arguments_balise_dyn_depuis_modele('.$args[0].')';
@@ -321,7 +326,7 @@ function synthetiser_balise_dynamique($nom, $args, $file, $context_compil) {
 
 	$r = sprintf(CODE_INCLURE_BALISE,
 		$file,
-		$context_compil[4] ? $context_compil[4] : '',
+		$lang,
 		$nom,
 		$args,
 		join(', ', array_map('_q', $context_compil)));
