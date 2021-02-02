@@ -544,7 +544,7 @@ function debusquer_squelette($fonc, $mode, $self) {
 			}
 		} else {
 			if (strlen(trim($res))) {
-				return "<img src='" . chemin_image('compat-16.png') . "' alt='afficher-masquer le debug' id='spip-debug-toggle' onclick=\"var x = document.getElementById('spip-debug'); (x.style.display == '' ? x.style.display = 'none' : x.style.display = '');\" /><div id='spip-debug'>$res</div>";
+				return "<img src='" . chemin_image('debug-xx.svg') . "' alt='afficher-masquer le debug' id='spip-debug-toggle' onclick=\"var x = document.getElementById('spip-debug'); (x.style.display == '' ? x.style.display = 'none' : x.style.display = '');\" /><div id='spip-debug'>$res</div>";
 			} else {
 				// cas de l'appel sur erreur: montre la page
 				return isset($GLOBALS['debug_objets']['resultat']['tout'])
@@ -570,7 +570,7 @@ function debusquer_squelette($fonc, $mode, $self) {
 	}
 
 	return !trim($texte) ? '' : (
-		"<img src='" . chemin_image('compat-16.png') . "' alt='afficher-masquer le debug' id='spip-debug-toggle' onclick=\"var x = document.getElementById('spip-debug'); (x.style.display == '' ? x.style.display = 'none' : x.style.display = '');\" /><div id='spip-debug'>$res"
+		"<img src='" . chemin_image('debug-xx.svg') . "' alt='afficher-masquer le debug' id='spip-debug-toggle' onclick=\"var x = document.getElementById('spip-debug'); (x.style.display == '' ? x.style.display = 'none' : x.style.display = '');\" /><div id='spip-debug'>$res"
 		. "<div id='debug_boucle'><fieldset$id><legend>"
 		. "<a href='" . $self . "#f_" . substr($fonc, 0, 37) . "'> &#8593; "
 		. ($legend ? $legend : $mode)
