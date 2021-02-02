@@ -346,9 +346,8 @@ function public_produire_page_dist(
 // 4: langue
 
 function inserer_balise_dynamique($contexte_exec, $contexte_compil) {
-	if (!empty($GLOBALS["balise_dyn_appellee_par_modele"])) {
-		unset($GLOBALS["balise_dyn_appellee_par_modele"]);
-	}
+	arguments_balise_dyn_depuis_modele(null, 'reset');
+
 	if (!is_array($contexte_exec)) {
 		echo $contexte_exec;
 	} // message d'erreur etc
@@ -462,9 +461,27 @@ function message_page_indisponible($page, $contexte) {
 	return $page;
 }
 
-function arguments_balise_dyn_depuis_modele($arg) {
-	$GLOBALS["balise_dyn_appellee_par_modele"] = $arg;
-	return $arg;
+/**
+ * gerer le flag qui permet de reperer qu'une balise dynamique a ete inseree depuis un modele
+ * utilisee dans les #FORMULAIRE_xx
+ *
+ * @param string|null $arg
+ * @param string $operation
+ * @return mixed
+ */
+function arguments_balise_dyn_depuis_modele($arg, $operation = 'set') {
+	static $balise_dyn_appellee_par_modele = null;
+	switch ($operation) {
+		case 'read':
+			return $balise_dyn_appellee_par_modele;
+		case 'reset':
+			$balise_dyn_appellee_par_modele = null;
+			return null;
+		case 'set':
+		default:
+			$balise_dyn_appellee_par_modele = $arg;
+			return $arg;
+	}
 }
 
 // temporairement ici : a mettre dans le futur inc/modeles

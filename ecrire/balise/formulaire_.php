@@ -89,8 +89,8 @@ function test_formulaire_inclus_par_modele() {
 	$trace_fonctions = array_map('strtolower', $trace_fonctions);
 
 	// regarder si un flag a ete leve juste avant l'appel de balise_FORMULAIRE_dyn
-	if (!empty($GLOBALS["balise_dyn_appellee_par_modele"])
-		and $form = existe_formulaire($GLOBALS["balise_dyn_appellee_par_modele"])) {
+	if (function_exists('arguments_balise_dyn_depuis_modele')
+		and $form = arguments_balise_dyn_depuis_modele(null, 'read')) {
 		if (in_array('balise_formulaire__dyn', $trace_fonctions)) {
 			$k = array_search('balise_formulaire__dyn', $trace_fonctions);
 			if ($trace[$k]['args'][0] === $form) {
