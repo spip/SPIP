@@ -210,6 +210,22 @@ html #spip-boucles fieldset .spip-env fieldset legend {
   margin-top: -1.5rem;
   cursor: pointer;
 }
+html #spip-boucles fieldset .spip-env fieldset legend:after {
+  content:' +';
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  line-height: 1.5em;
+  text-align: center;
+  vertical-align: bottom;
+  margin-left: 0.5em;
+  background: #eee;
+  border-radius: 50%;
+}
+html #spip-boucles fieldset .spip-env fieldset.expanded legend:after {
+  content:' -';
+}
+
 html #spip-boucles fieldset .spip-env fieldset table {
   font-family: inherit;
   display: block;
@@ -221,15 +237,16 @@ html #spip-boucles fieldset .spip-env fieldset table tbody, html #spip-boucles f
   font-size: inherit;
   display: flex;
 }
-html #spip-boucles fieldset .spip-env fieldset .expanded table tr {
+html #spip-boucles fieldset .spip-env fieldset.expanded table tr {
   flex-basis: 100% !important;
   max-width: 100% !important;
   max-height: none !important;
+  overflow: auto !important;
 }
 html #spip-boucles fieldset .spip-env fieldset table tr {
   flex-basis: 100%;
   max-width: 100%;
-  overflow: auto;
+  overflow: hidden;
   max-height: 1.5rem;
 }
 @media (min-width: 640px) {

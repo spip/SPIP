@@ -239,7 +239,7 @@ function debusquer_contexte($env) {
 			. "</td></tr>\n";
 	}
 
-	return "<div class='spip-env'><fieldset><legend onclick=\"this.nextElementSibling.classList.toggle('expanded');\">#ENV</legend>\n<div><table>$res</table></div></fieldset></div>\n";
+	return "<div class='spip-env'><fieldset><legend onclick=\"this.parentElement.classList.toggle('expanded');\">#ENV</legend>\n<div><table>$res</table></div></fieldset></div>\n";
 }
 
 // Affichage du tableau des erreurs ou des temps de calcul
