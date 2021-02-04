@@ -208,6 +208,7 @@ html #spip-boucles fieldset .spip-env fieldset legend {
   color: inherit;
   float: left;
   margin-top: -1.5rem;
+  cursor: pointer;
 }
 html #spip-boucles fieldset .spip-env fieldset table {
   font-family: inherit;
@@ -219,6 +220,47 @@ html #spip-boucles fieldset .spip-env fieldset table tbody, html #spip-boucles f
   font-family: inherit;
   font-size: inherit;
   display: flex;
+}
+html #spip-boucles fieldset .spip-env fieldset .expanded table tr {
+  flex-basis: 100% !important;
+  max-width: 100% !important;
+  max-height: none !important;
+}
+html #spip-boucles fieldset .spip-env fieldset table tr {
+  flex-basis: 100%;
+  max-width: 100%;
+  overflow: auto;
+  max-height: 1.5rem;
+}
+@media (min-width: 640px) {
+  html #spip-boucles fieldset .spip-env fieldset table tr {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+}
+@media (min-width: 980px) {
+  html #spip-boucles fieldset .spip-env fieldset table tr {
+    flex-basis: 33%;
+    max-width: 33%;
+  }
+}
+@media (min-width: 1400px) {
+  html #spip-boucles fieldset .spip-env fieldset table tr {
+    flex-basis: 25%;
+    max-width: 25%;
+  }
+}
+@media (min-width: 1800px) {
+  html #spip-boucles fieldset .spip-env fieldset table tr {
+    flex-basis: 20%;
+    max-width: 20%;
+  }
+}
+html #spip-boucles fieldset .spip-env fieldset table td:first-child {
+  flex-basis: 15%;
+}
+html #spip-boucles fieldset .spip-env fieldset table td:last-child {
+  flex-basis: 85%;
 }
 html #spip-boucles fieldset .spip-env fieldset table tbody {
   flex-wrap: wrap;
