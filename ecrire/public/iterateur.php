@@ -269,7 +269,7 @@ class IterDecorator extends FilterIterator {
 				// * 3 : {x op y} ; on recoit $v[0] = 'op', $v[1] = x, $v[2] = y
 
 				// 1 : forcement traite par un critere, on passe
-				if (count($v) == 1) {
+				if ($v && count($v) == 1) {
 					continue;
 				}
 				if (count($v) == 2 and is_array($v[1])) {
