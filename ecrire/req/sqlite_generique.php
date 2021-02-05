@@ -1739,8 +1739,10 @@ function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true) {
 				}
 				$def = query_reinjecte_textes($r[2], $echaps); // valeur du champ
 
-				# rustine pour DECIMAL(10,2)
-				if (false !== strpos($k, ')')) {
+				// rustine pour DECIMAL(10,2)
+				// s'il y a une parenthèse fermante dans la clé
+				// ou dans la définition sans qu'il n'y ait une ouverture avant
+				if (false !== strpos($k, ')') or preg_match('/^[^\(]*\)/', $def)) {
 					$fields[$k_precedent] .= ',' . $k . ' ' . $def;
 					continue;
 				}
