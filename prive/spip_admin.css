@@ -47,7 +47,6 @@ a:active.spip-admin-boutons,
 	border:0 !important;
 	border-bottom:2px solid #FEFF7F !important;
 	background:url(images/fond-inclure.png) repeat top left !important;
-	overflow: hidden;
 }
 .inclure_blocs > h6 {
 	background: #FEFF7F;
