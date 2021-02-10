@@ -277,7 +277,7 @@ function balise_URL_PAGE_dist($p) {
 				$code .= ", $args";
 			}
 			$code = $f('page', $code, $s);
-
+			$p->code = $code;
 			return $p;
 		}
 		$s = 'connect=' . addslashes($s);
