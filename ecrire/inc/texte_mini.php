@@ -109,6 +109,26 @@ function traiter_echap_html_dist($regs) {
 	return $regs[3];
 }
 
+// Echapper les <pre>...</ pre>
+function traiter_echap_pre_dist($regs) {
+	// echapper les <code> dans <pre>
+	$pre = $regs[3];
+
+	// echapper les < dans <code>
+	// on utilise _PROTEGE_BLOCS pour simplifier le code et la maintenance, mais on est interesse que par <code>
+	if (strpos($pre, "<") !== false
+		and preg_match_all(_PROTEGE_BLOCS, $pre, $matches, PREG_SET_ORDER)){
+
+		foreach ($matches as $m){
+			if ($m[1]==='code'){
+				$code = "<code" . $m[2] . ">" . spip_htmlspecialchars($m[3]) . "</code>";
+				$pre = str_replace($m[0], $code, $pre);
+			}
+		}
+	}
+	return "<pre>$pre</pre>";
+}
+
 // Echapper les <code>...</ code>
 // https://code.spip.net/@traiter_echap_code_dist
 function traiter_echap_code_dist($regs) {
@@ -166,7 +186,7 @@ function traiter_echap_script_dist($regs) {
 	return $regs[0];
 }
 
-define('_PROTEGE_BLOCS', ',<(html|code|cadre|frame|script|style)(\s[^>]*)?>(.*)</\1>,UimsS');
+define('_PROTEGE_BLOCS', ',<(html|pre|code|cadre|frame|script|style)(\s[^>]*)?>(.*)</\1>,UimsS');
 
 // - pour $source voir commentaire infra (echappe_retour)
 // - pour $no_transform voir le filtre post_autobr dans inc/filtres
