@@ -2176,13 +2176,21 @@ function nom_acceptable($nom) {
 /**
  * Vérifier la conformité d'une ou plusieurs adresses email (suivant RFC 822)
  *
- * @param string $adresses
+ * @param string|array $adresses
  *      Adresse ou liste d'adresse
- * @return bool|string
- *      - false si pas conforme,
+ *      si on fournit un tableau, il est filtre et la fonction renvoie avec uniquement les adresses email valides (donc possiblement vide)
+ * @return bool|string|array
+ *      - false si une des adresses n'est pas conforme,
  *      - la normalisation de la dernière adresse donnée sinon
+ *      - renvoie un tableau si l'entree est un tableau
  **/
 function email_valide($adresses) {
+	if (is_array($adresses)) {
+		$adresses = array_map('email_valide', $adresses);
+		$adresses = array_filter($adresses);
+		return $adresses;
+	}
+
 	$email_valide = charger_fonction('email_valide', 'inc');
 	return $email_valide($adresses);
 }

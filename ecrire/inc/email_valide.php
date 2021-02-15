@@ -1,13 +1,13 @@
 <?php
 
 /***************************************************************************\
- *  SPIP, Système de publication pour l'internet                           *
+ *  SPIP, SystÃ¨me de publication pour l'internet                           *
  *                                                                         *
- *  Copyright © avec tendresse depuis 2001                                 *
- *  Arnaud Martin, Antoine Pitrou, Philippe Rivière, Emmanuel Saint-James  *
+ *  Copyright Â© avec tendresse depuis 2001                                 *
+ *  Arnaud Martin, Antoine Pitrou, Philippe RiviÃ¨re, Emmanuel Saint-James  *
  *                                                                         *
- *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
- *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Ce programme est un logiciel libre distribuÃ© sous licence GNU/GPL.     *
+ *  Pour plus de dÃ©tails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
 /**
@@ -22,13 +22,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 
 /**
- * Vérifier la conformité d'une ou plusieurs adresses email (suivant RFC 822)
+ * VÃ©rifier la conformitÃ© d'une ou plusieurs adresses email (suivant RFC 822)
  *
  * @param string $adresses
- *      Adresse ou liste d'adresse
+ *      Adresse ou liste d'adresse (separees pas des virgules)
  * @return bool|string
- *      - false si pas conforme,
- *      - la normalisation de la dernière adresse donnée sinon
+ *      - false si une des adresses n'est pas conforme,
+ *      - la normalisation de la derniÃ¨re adresse donnÃ©e sinon
  **/
 function inc_email_valide_dist($adresses) {
 	// eviter d'injecter n'importe quoi dans preg_match
