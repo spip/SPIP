@@ -7,8 +7,6 @@
 ][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
 [\[(#NOM_SITE_SPIP|concat{'\] : ',<:form_forum_identifiants:>}|nettoyer_titre_email)]
 
-[(#SET{url_confirm, [(#ENV{url_confirm}|parametre_url{redirect,#ENV{redirect}})]})]
-
 <:form_forum_message_auto:>
 
 <:form_forum_bonjour{nom=#ENV{nom}}:>

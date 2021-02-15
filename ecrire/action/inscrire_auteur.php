@@ -32,6 +32,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param array $options
  *   - login : login precalcule
  *   - id : id_rubrique fournit en second arg de #FORMULAIRE_INSCRIPTION
+ *   - redirect : URL où rediriger après validation depuis l'email, sinon c'est l'accueil
  *   - from : email de l'envoyeur pour l'envoi du mail d'inscription
  *   - force_nouveau : forcer le statut nouveau sur l'auteur inscrit, meme si il existait deja en base
  *   - modele_mail : squelette de mail a utiliser
@@ -235,6 +236,10 @@ function envoyer_inscription_dist($desc, $nom, $mode, $options = array()) {
 	$contexte['url_confirm'] = generer_url_action('confirmer_inscription', '', true, true);
 	$contexte['url_confirm'] = parametre_url($contexte['url_confirm'], 'email', $desc['email']);
 	$contexte['url_confirm'] = parametre_url($contexte['url_confirm'], 'jeton', $desc['jeton']);
+	// S'il y a l'option redirect, on l'ajoute directement ici
+	if (isset($options['redirect'])) {
+		$contexte['url_confirm'] = parametre_url($contexte['url_confirm'], 'redirect', $options['redirect']);
+	}
 
 	$modele_mail = 'modeles/mail_inscription';
 	if (isset($options['modele_mail']) and $options['modele_mail']){
