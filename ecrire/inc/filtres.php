@@ -2183,29 +2183,8 @@ function nom_acceptable($nom) {
  *      - la normalisation de la dernière adresse donnée sinon
  **/
 function email_valide($adresses) {
-	// eviter d'injecter n'importe quoi dans preg_match
-	if (!is_string($adresses)) {
-		return false;
-	}
-
-	// Si c'est un spammeur autant arreter tout de suite
-	if (preg_match(",[\n\r].*(MIME|multipart|Content-),i", $adresses)) {
-		spip_log("Tentative d'injection de mail : $adresses");
-
-		return false;
-	}
-
-	foreach (explode(',', $adresses) as $v) {
-		// nettoyer certains formats
-		// "Marie Toto <Marie@toto.com>"
-		$adresse = trim(preg_replace(",^[^<>\"]*<([^<>\"]+)>$,i", "\\1", $v));
-		// RFC 822
-		if (!preg_match('#^[^()<>@,;:\\"/[:space:]]+(@([-_0-9a-z]+\.)*[-_0-9a-z]+)$#i', $adresse)) {
-			return false;
-		}
-	}
-
-	return $adresse;
+	$email_valide = charger_fonction('email_valide', 'inc');
+	return $email_valide($adresses);
 }
 
 /**
