@@ -598,6 +598,26 @@ function critere_fusion_dist($idb, &$boucles, $crit) {
 }
 
 /**
+ * Compile le critère `fusion_supprimer` qui supprime toutes les fusions qui le précèdent
+ *
+ * Ce critère retire toutes les définitions de "group by" qui le précèdent. Par exemple pour en ajouter d'autres ensuite.
+ *
+ * @critere
+ * @example
+ *     ```
+ *      <BOUCLE_a(ARTICLES){gis}{fusion_supprimer}{fusion ville} 
+ *     ```
+ *
+ * @param string $idb Identifiant de la boucle
+ * @param array $boucles AST du squelette
+ * @param Critere $crit Paramètres du critère dans cette boucle
+ * @return void
+ **/
+function critere_fusion_supprimer_dist($idb, &$boucles, $crit){
+	$boucles[$idb]->group = array();
+}
+
+/**
  * Compile le critère `{collecte}` qui permet de spécifier l'interclassement
  * à utiliser pour les tris de la boucle.
  * 
