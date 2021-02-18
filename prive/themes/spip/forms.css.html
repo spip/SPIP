@@ -70,18 +70,23 @@ h3.titrem {position:relative;}
 /* Formulaires alignes a gauche c'est le par defaut des formulaires de Spip */
 .formulaire_spip .editer,
 .formulaire_spip .editer.gauche {padding-#ENV{left}:140px;}
+.formulaire_spip fieldset.editer {border: 0; margin:0;}
 
 .formulaire_spip .editer label,
+.formulaire_spip .editer .label,
 .formulaire_spip .editer.gauche label {
 	color: #444;
 	width: 114px;
 	float:#ENV{left};
 	margin-#ENV{left}:-130px;
 	text-align: #ENV{left};
+	background: transparent;
+	padding: 0;
 	/*vertical-align: top;*/
 }
 
 .formulaire_spip .long_label {padding-#ENV{left}:270px;}
+.formulaire_spip .long_label .label,
 .formulaire_spip .long_label label {width: 250px;margin-#ENV{left}:-260px;}
 
 /* Formulaires avec label en haut */
@@ -105,6 +110,7 @@ h3.titrem {position:relative;}
 .formulaire_spip .pleine_largeur>label {display: block;float: none;width:auto;margin-#ENV{left}: 0;}
 
 .formulaire_spip .editer.obligatoire label,
+.formulaire_spip .editer.obligatoire .label,
 .formulaire_spip .editer.obligatoire.gauche label {color: black;font-weight: bold;}
 
 /* cas exotique d'un label dans une erreur (ie confirmez que vous etes sur ) */
