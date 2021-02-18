@@ -3808,13 +3808,17 @@ function url_rss_forum($texte) { return $texte; }
 /**
  * Génère des menus avec liens ou `<strong class='on'>` non clicable lorsque
  * l'item est sélectionné
+ * Le parametre $on peut recevoir un selecteur simplifié de type 'a.active' 'strong.active.expose'
+ * pour préciser la balise (a, span ou strong uniquement) et la/les classes à utiliser quand on est expose
  *
  * @filtre
  * @link https://www.spip.net/4004
  * @example
  *   ```
  *   [(#URL_RUBRIQUE|lien_ou_expose{#TITRE, #ENV{test}|=={en_cours}})]
+ *   [(#URL_RUBRIQUE|lien_ou_expose{#TITRE, #ENV{test}|=={en_cours}|?{a.monlien.active}, 'monlien'})]
  *   ```
+ *
  *
  * @param string $url
  *   URL du lien
@@ -3836,8 +3840,23 @@ function url_rss_forum($texte) { return $texte; }
  */
 function lien_ou_expose($url, $libelle = null, $on = false, $class = "", $title = "", $rel = "", $evt = '') {
 	if ($on) {
-		$bal = "strong";
-		$att = "class='on'";
+		$bal = 'strong';
+		$class = "";
+		$att = "";
+		// si $on passe la balise et optionnelement une ou ++classe
+		// a.active span.selected.active etc....
+		if (is_string($on) and (strncmp($on, 'a', 1)==0 or strncmp($on, 'span', 4)==0 or strncmp($on, 'strong', 6)==0)){
+			$on = explode(".", $on);
+			// on verifie que c'est exactement une des 3 balises a, span ou strong
+			if (in_array(reset($on), array('a', 'span', 'strong'))){
+				$bal = array_shift($on);
+				$class = implode(" ", $on);
+				if ($bal=="a"){
+					$att = 'href="#" ';
+				}
+			}
+		}
+		$att .= 'class="' . ($class ? attribut_html($class) . ' ' : '') . (defined('_LIEN_OU_EXPOSE_CLASS_ON') ? _LIEN_OU_EXPOSE_CLASS_ON : 'on') . '"';
 	} else {
 		$bal = 'a';
 		$att = "href='$url'"
