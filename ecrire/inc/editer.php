@@ -318,6 +318,18 @@ function formulaires_editer_objet_charger(
 	// on le garde pour compat
 	$contexte['_action'] = array("editer_$type", $id);
 
+	// et in fine placer l'autorisation
+	if (intval($id)){
+		if (!autoriser('modifier', $type, intval($id))){
+			$valeurs['editable'] = '';
+		}
+	}
+	else {
+		if (!autoriser('creer', $type, 0, null, ['id_parent' => $id_parent])) {
+			$valeurs['editable'] = '';
+		}
+	}
+
 	return $contexte;
 }
 

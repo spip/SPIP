@@ -590,10 +590,12 @@ function autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_rubrique_creer_dist($faire, $type, $id, $qui, $opt) {
-	return
-		((!$id and autoriser('defaut', null, null, $qui, $opt))
-			or $id and autoriser('creerrubriquedans', 'rubrique', $id, $qui, $opt)
-		);
+	if (!empty($opt['id_parent'])) {
+		return autoriser('creerrubriquedans', 'rubrique', $opt['id_parent'], $qui);
+	}
+	else {
+		return autoriser('defaut', null, null, $qui, $opt);
+	}
 }
 
 /**
@@ -734,7 +736,13 @@ function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_article_creer_dist($faire, $type, $id, $qui, $opt) {
-	return (sql_countsel('spip_rubriques') > 0 and in_array($qui['statut'], array('0minirezo', '1comite')));
+	if (!empty($opt['id_parent'])) {
+		// creerarticledans rappelle autoriser(creer,article) sans id, donc on verifiera condition du else aussi
+		return autoriser('creerarticledans', 'rubrique', $opt['id_parent'], $qui);
+	}
+	else {
+		return (sql_countsel('spip_rubriques') > 0 and in_array($qui['statut'], array('0minirezo', '1comite')));
+	}
 }
 
 /**
