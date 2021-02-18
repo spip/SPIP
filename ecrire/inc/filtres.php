@@ -3867,12 +3867,31 @@ function lien_ou_expose($url, $libelle = null, $on = false, $class = "", $title 
  * @return string : la chaine de langue finale en utilisant la fonction _T()
  */
 function singulier_ou_pluriel($nb, $chaine_un, $chaine_plusieurs, $var = 'nb', $vars = array()) {
+	static $local_singulier_ou_pluriel = array();
+
+	// si nb=0 ou pas de $vars valide on retourne une chaine vide, a traiter par un |sinon
 	if (!is_numeric($nb) or $nb == 0) {
 		return "";
 	}
 	if (!is_array($vars)) {
 		return "";
 	}
+
+	$langue = $GLOBALS['spip_lang'];
+	if (!isset($local_singulier_ou_pluriel[$langue])) {
+		$local_singulier_ou_pluriel[$langue] = false;
+		if ($f = charger_fonction("singulier_ou_pluriel_${langue}", 'inc', true)
+		  or $f = charger_fonction("singulier_ou_pluriel", 'inc', true)) {
+			$local_singulier_ou_pluriel[$langue] = $f;
+		}
+	}
+
+	// si on a une surcharge on l'utilise
+	if ($local_singulier_ou_pluriel[$langue]) {
+		return ($local_singulier_ou_pluriel[$langue])($nb, $chaine_un, $chaine_plusieurs, $var, $vars);
+	}
+
+	// sinon traitement par defaut
 	$vars[$var] = $nb;
 	if ($nb >= 2) {
 		return _T($chaine_plusieurs, $vars);
