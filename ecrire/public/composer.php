@@ -779,12 +779,13 @@ function calculer_select(
 		if (is_numeric($cle)) {
 			$cle = "L$k";
 		}
+		$cle_where_lie = "JOIN-$cle";
 		if (!$menage
 			or isset($afrom[$cle])
 			or calculer_jointnul($cle, $select)
 			or calculer_jointnul($cle, array_diff_key($join, array($cle => $join[$cle])))
 			or calculer_jointnul($cle, $having)
-			or calculer_jointnul($cle, $where_simples)
+			or calculer_jointnul($cle, array_diff_key($where_simples, [$cle_where_lie => '']))
 		) {
 			// corriger les references non explicites dans select
 			// ou groupby
@@ -822,6 +823,10 @@ function calculer_select(
 			$equiv[] = $carr;
 		} else {
 			unset($join[$cledef]);
+			if (isset($where_simples[$cle_where_lie])) {
+				unset($where_simples[$cle_where_lie]);
+				unset($where[$cle_where_lie]);
+			}
 		}
 		unset($from[$cle]);
 		$k--;

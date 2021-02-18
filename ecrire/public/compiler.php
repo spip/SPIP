@@ -812,8 +812,9 @@ function calculer_dump_array($a) {
 			" : " . calculer_dump_array($a[3]) .
 			")");
 	} else {
-		foreach ($a as $v) {
-			$res .= ", " . calculer_dump_array($v);
+		foreach ($a as $k => $v) {
+			$showk = (is_numeric($k) ? '' : sql_quote($k) . ' => ');
+			$res .= ", " . $showk . calculer_dump_array($v);
 		}
 
 		return "\n\t\t\tarray(" . substr($res, 2) . ')';
