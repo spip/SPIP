@@ -2018,6 +2018,80 @@ function vider_attribut($balise, $attribut) {
 	return inserer_attribut($balise, $attribut, '', false, true);
 }
 
+/**
+ * Fonction support pour les filtres |ajouter_class |supprimer_class |basculer_class
+ *
+ * @param string $balise
+ * @param string|array $class
+ * @param string $operation
+ * @return string
+ */
+function modifier_class($balise, $class, $operation='ajouter') {
+	if (is_string($class)) {
+		$class = explode(' ', trim($class));
+	}
+	$class = array_filter($class);
+	if ($class) {
+		$class = array_unique($class);
+		$class_courante = extraire_attribut($balise, 'class');
+
+		$class_new = $class_courante;
+		foreach ($class as $c) {
+			if ($c) {
+				$is_class_presente = false;
+				if (strpos($class_courante, $c) !== false
+					and preg_match("/(^|\s)".preg_quote($c)."($|\s)/", $class_courante)) {
+					$is_class_presente = true;
+				}
+				if (in_array($operation, ['ajouter', 'basculer'])
+					and !$is_class_presente) {
+					$class_new = rtrim($class_new) . " " . $c;
+				}
+				elseif (in_array($operation, ['supprimer', 'basculer'])
+					and $is_class_presente) {
+					$class_new = rtrim(preg_replace("/(^|\s)".preg_quote($c)."($|\s)/", "\\1", $class_new));
+				}
+			}
+		}
+
+		if ($class_new !== $class_courante) {
+			$balise = inserer_attribut($balise, 'class', $class_new);
+		}
+	}
+
+	return $balise;
+}
+
+/**
+ * Ajoute une ou plusieurs classes sur une balise (si pas deja presentes)
+ * @param string $balise
+ * @param string|array $class
+ * @return string
+ */
+function ajouter_class($balise, $class){
+	return modifier_class($balise, $class, 'ajouter');
+}
+
+/**
+ * Supprime une ou plusieurs classes sur une balise (si presentes)
+ * @param string $balise
+ * @param string|array $class
+ * @return string
+ */
+function supprimer_class($balise, $class){
+	return modifier_class($balise, $class, 'supprimer');
+}
+
+/**
+ * Bascule une ou plusieurs classes sur une balise : ajoutees si absentes, supprimees si presentes
+ *
+ * @param string $balise
+ * @param string|array $class
+ * @return string
+ */
+function basculer_class($balise, $class){
+	return modifier_class($balise, $class, 'basculer');
+}
 
 /**
  * Un filtre pour déterminer le nom du statut des inscrits
