@@ -2031,6 +2031,12 @@ function modifier_class($balise, $class, $operation='ajouter') {
 		$class = explode(' ', trim($class));
 	}
 	$class = array_filter($class);
+
+	// si la ou les classes ont des caracteres invalides on ne fait rien
+	if (preg_match(",[^\w-],", implode('', $class))) {
+		return $balise;
+	}
+
 	if ($class) {
 		$class = array_unique($class);
 		$class_courante = extraire_attribut($balise, 'class');
