@@ -3825,7 +3825,8 @@ function url_rss_forum($texte) { return $texte; }
  * @param string $libelle
  *   Texte du lien
  * @param bool $on
- *   État exposé (génère un strong) ou non (génère un lien)
+ *   État exposé ou non (génère un lien). Si $on vaut true ou 1 ou ' ', l'etat expose est rendu par un <strong class='on'>...</strong>
+ *   Si $on est de la forme span.active.truc par exemple, l'etat expose est rendu par <span class='active truc'>...</span> Seules les balises a, span et strong sont acceptees dans ce cas
  * @param string $class
  *   Classes CSS ajoutées au lien
  * @param string $title
