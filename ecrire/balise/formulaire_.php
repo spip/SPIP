@@ -289,6 +289,18 @@ function balise_FORMULAIRE__contexte($form, $args) {
 		} elseif (isset($erreurs['message_ok'])) {
 			$valeurs['message_ok'] = $erreurs["message_ok"];
 		}
+
+		// accessibilite : encapsuler toutes les erreurs dans un role='alert'
+		// uniquement si c'est une string et au premier niveau (on ne touche pas au tableaux)
+		// et si $k ne commence pas par un _ (c'est bien une vrai erreur sur un vrai champ)
+		if (html5_permis()) {
+			foreach ($erreurs as $k => $v) {
+				if (is_string($v) and strpos($k,'_') !== 0) {
+					// on encapsule dans un span car ces messages sont en general simple, juste du texte, et deja dans un span dans le form
+					$valeurs['erreurs'][$k] = "<span role='alert'>".$erreurs[$k]."</span>";
+				}
+			}
+		}
 	}
 
 	return $valeurs;
