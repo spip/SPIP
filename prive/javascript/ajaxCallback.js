@@ -3,6 +3,21 @@ jQuery.spip.log = function(){
 	if (jQuery.spip.debug && window.console && window.console.log)
 		window.console.log.apply(this,arguments);
 }
+
+/**
+ * Test si on est dans l'admin de SPIP
+ * 
+ * @return bool
+ *   Retourne true si on est dans l'admin, false sinon
+ */
+jQuery.spip.test_espace_prive = function () {
+	if (typeof spipConfig.core.test_espace_prive != undefined && spipConfig.core.test_espace_prive) {
+		return true;
+	}
+	
+	return false;
+}
+
 // A plugin that wraps all ajax calls introducing a fixed callback function on ajax complete
 if(!jQuery.spip.load_handlers) {
 	jQuery.spip.load_handlers = new Array();

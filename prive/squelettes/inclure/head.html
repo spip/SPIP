@@ -14,6 +14,19 @@ function test_accepte_ajax(){jQuery.ajax({"url":"[(#URL_ECRIRE{test_ajax,js=1}|r
 var stat = [(#CONFIG{activer_statistiques}|=={non}|?{0,1})];
 var confirm_changer_statut = '<:confirm_changer_statut|html2unicode|addslashes|unicode_to_javascript:>';
 var error_on_ajaxform='<:erreur_technique_ajaxform|html2unicode|addslashes|unicode_to_javascript:>';
+
+// On pose un objet SPIP extensible, non dépendant de jQuery
+var spipConfig = spipConfig || {};
+// On le remplit avec déjà les anciennes variables
+spipConfig.core = {
+	test_espace_prive: true,
+	url_menu_rubrique: url_menu_rubrique,
+	outils_developpeurs: [(#CONST{_OUTILS_DEVELOPPEURS}|?{true,false})],
+	ajax_image_searching: ajax_image_searching,
+	stat: stat,
+	confirm_changer_statut: confirm_changer_statut,
+	error_on_ajaxform: error_on_ajaxform
+};
 /*]]>*/</script>
 <meta name="viewport" content="width=device-width" />
 [<link rel="stylesheet" type="text/css" href="(#VAL{reset.css}|find_in_theme|timestamp|url_absolue)" id="csspriveereset" />]
