@@ -77,7 +77,7 @@ RewriteRule ^([1-9][0-9]*)$     spip.php?action=redirect&type=article&status=301
 # http://site/atom.api/articles/1234
 # https://site/offline.api.sw.js
 
-RewriteRule ^([\w]+)\.api([/.](.*))?$ spip.php?action=api_$1&arg=$3 [QSA,L]
+RewriteRule ^(ecrire/)?([\w]+)\.api([/.](.*))?$ spip.php?action=api_$2&arg=$4 [QSA,L]
 
 # Fin des APIs
 ###
