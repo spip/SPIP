@@ -2055,13 +2055,18 @@ function modifier_class($balise, $class, $operation='ajouter') {
 				}
 				elseif (in_array($operation, ['supprimer', 'basculer'])
 					and $is_class_presente) {
-					$class_new = rtrim(preg_replace("/(^|\s)".preg_quote($c)."($|\s)/", "\\1", $class_new));
+					$class_new = trim(preg_replace("/(^|\s)".preg_quote($c)."($|\s)/", "\\1", $class_new));
 				}
 			}
 		}
 
 		if ($class_new !== $class_courante) {
-			$balise = inserer_attribut($balise, 'class', $class_new);
+			if (strlen($class_new)) {
+				$balise = inserer_attribut($balise, 'class', $class_new);
+			}
+			elseif ($class_courante) {
+				$balise = vider_attribut($balise, 'class');
+			}
 		}
 	}
 
