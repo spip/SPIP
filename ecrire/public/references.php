@@ -466,10 +466,8 @@ function calculer_balise($nom, $p) {
 	}
 
 	// Certaines des balises comportant un _ sont generiques
-	if ($f = strpos($nom, '_')
-		and $f = charger_fonction(substr($nom, 0, $f + 1), 'balise', true)
-	) {
-		$res = $f($p);
+	if ($balise_generique = chercher_balise_generique($nom)) {
+		$res = $balise_generique['fonction_generique']($p);
 		if ($res !== null and is_object($res)) {
 			return $res;
 		}

@@ -479,24 +479,30 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
  *
  * Le nom de balise doit contenir au moins un souligné "A_B", auquel cas on cherche une balise générique "A_"
  * 
+ * S'il y a plus d'un souligné, tel que "A_B_C_D" on cherche différentes balises génériques en commençant par la plus longue possible,
+ * tel que "A_B_C_", sinon "A_B_" sinon "A_"
+ * 
  * @param string $nom
  * @return array|null
  */
 function chercher_balise_generique($nom) {
-	$p = strpos($nom, "_");
-	if (false === $p) {
+	if (false === strpos($nom, "_")) {
 		return null;
 	}
-	$nom_generique = substr($nom, 0, $p + 1);
-	$fonction_generique = charger_fonction($nom_generique, 'balise', true);
-	if (!$fonction_generique) {
-		return null;
+	$nom_generique = $nom;
+	while (false !== ($p = strrpos($nom_generique, "_"))) {
+		$nom_generique = substr($nom_generique, 0, $p + 1);
+		$fonction_generique = charger_fonction($nom_generique, 'balise', true);
+		if ($fonction_generique) {
+			return [
+				'nom' => $nom,
+				'nom_generique' => $nom_generique,
+				'fonction_generique' => $fonction_generique,
+			];
+		}
+		$nom_generique = substr($nom_generique, 0, -1);
 	}
-	return [
-		'nom' => $nom,
-		'nom_generique' => $nom_generique,
-		'fonction_generique' => $fonction_generique,
-	];
+	return null;
 }
 
 
