@@ -449,7 +449,9 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 	// verifier que la fonction dyn est la, 
 	// sinon se replier sur la generique si elle existe
 	if (!function_exists('balise_' . $nom_balise . '_dyn')) {
-		if ($nom_balise_generique
+		if (
+			$balise_generique = chercher_balise_generique($nom)
+			and $nom_balise_generique = $balise_generique['nom_generique']
 			and $file = include_spip("balise/" . strtolower($nom_balise_generique))
 			and function_exists('balise_' . $nom_balise_generique . '_dyn')
 		) {
