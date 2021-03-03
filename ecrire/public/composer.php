@@ -394,8 +394,10 @@ function argumenter_squelette($v) {
  *     Code PHP d'exécutant l'inclusion du squelette (ou texte) de la balise dynamique
  **/
 function executer_balise_dynamique($nom, $args, $context_compil) {
-	$nomfonction = $nom;
-	$nomfonction_generique = "";
+	/** @var string Nom de la balise à charger (balise demandée ou balise générique) */
+	$nom_balise = $nom;
+	/** @var string Nom de la balise générique (si utilisée) */
+	$nom_balise_generique = "";
 
 	$appel_php_depuis_modele = false;
 	if (is_array($context_compil)
@@ -407,17 +409,16 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 		$appel_php_depuis_modele = true;
 	}
 
-	// Calculer un nom générique (ie. 'formulaire_' dans 'formulaire_editer_article')
-	if (false !== ($p = strpos($nom, "_"))) {
-		$nomfonction_generique = substr($nom, 0, $p + 1);
-	}
-
-	if (!$fonction_balise = charger_fonction($nomfonction, 'balise', true)) {
-		if ($nomfonction_generique and $fonction_balise = charger_fonction($nomfonction_generique, 'balise', true)) {
-			// et injecter en premier arg le nom de la balise 
+	if (!$fonction_balise = charger_fonction($nom_balise, 'balise', true)) {
+		// Calculer un nom générique (ie. 'formulaire_' dans 'formulaire_editer_article')
+		if ($balise_generique = chercher_balise_generique($nom)) {
+			// injecter en premier arg le nom de la balise 
 			array_unshift($args, $nom);
-			$nomfonction = $nomfonction_generique;
+			$nom_balise_generique = $balise_generique['nom_generique'];
+			$fonction_balise = $balise_generique['fonction_generique'];
+			$nom_balise = $nom_balise_generique;
 		}
+		unset($balise_generique);
 	}
 
 	if (!$fonction_balise) {
@@ -437,7 +438,7 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 	}
 
 	// Y a-t-il une fonction de traitement des arguments ?
-	$f = 'balise_' . $nomfonction . '_stat';
+	$f = 'balise_' . $nom_balise . '_stat';
 
 	$r = !function_exists($f) ? $args : $f($args, $context_compil);
 
@@ -447,14 +448,14 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 
 	// verifier que la fonction dyn est la, 
 	// sinon se replier sur la generique si elle existe
-	if (!function_exists('balise_' . $nomfonction . '_dyn')) {
-		if ($nomfonction_generique
-			and $file = include_spip("balise/" . strtolower($nomfonction_generique))
-			and function_exists('balise_' . $nomfonction_generique . '_dyn')
+	if (!function_exists('balise_' . $nom_balise . '_dyn')) {
+		if ($nom_balise_generique
+			and $file = include_spip("balise/" . strtolower($nom_balise_generique))
+			and function_exists('balise_' . $nom_balise_generique . '_dyn')
 		) {
 			// et lui injecter en premier arg le nom de la balise 
 			array_unshift($r, $nom);
-			$nomfonction = $nomfonction_generique;
+			$nom_balise = $nom_balise_generique;
 			if (!_DIR_RESTREINT) {
 				$file = _DIR_RESTREINT_ABS . $file;
 			}
@@ -469,8 +470,33 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 	if ($appel_php_depuis_modele) {
 		$context_compil['appel_php_depuis_modele'] = true;
 	}
-	return synthetiser_balise_dynamique($nomfonction, $r, $file, $context_compil);
+	return synthetiser_balise_dynamique($nom_balise, $r, $file, $context_compil);
 
+}
+
+/**
+ * Pour une balise "NOM" donné, cherche s'il existe une balise générique qui peut la traiter
+ *
+ * Le nom de balise doit contenir au moins un souligné "A_B", auquel cas on cherche une balise générique "A_"
+ * 
+ * @param string $nom
+ * @return array|null
+ */
+function chercher_balise_generique($nom) {
+	$p = strpos($nom, "_");
+	if (false === $p) {
+		return null;
+	}
+	$nom_generique = substr($nom, 0, $p + 1);
+	$fonction_generique = charger_fonction($nom_generique, 'balise', true);
+	if (!$fonction_generique) {
+		return null;
+	}
+	return [
+		'nom' => $nom,
+		'nom_generique' => $nom_generique,
+		'fonction_generique' => $fonction_generique,
+	];
 }
 
 
