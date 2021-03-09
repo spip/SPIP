@@ -5163,13 +5163,16 @@ function spip_affiche_mot_de_passe_masque($passe, $afficher_partiellement = fals
  * @param array $options
  *   string separateur : par défaut, un underscore `_`.
  *   int longueur_maxi : par defaut 60
+ *   int longueur_mini : par defaut 0
  *
  * @return string
  */
 function identifiant_slug($texte, $type = '', $options = array()) {
 
+	$original = $texte;
 	$separateur = (isset($options['separateur'])?$options['separateur']:'_');
 	$longueur_maxi = (isset($options['longueur_maxi'])?$options['longueur_maxi']:60);
+	$longueur_mini = (isset($options['longueur_mini'])?$options['longueur_mini']:0);
 
 	if (!function_exists('translitteration')) {
 		include_spip('inc/charsets');
@@ -5213,6 +5216,14 @@ function identifiant_slug($texte, $type = '', $options = array()) {
 
 	if (strlen($texte)>$longueur_maxi) {
 		$texte = substr($texte, 0, $longueur_maxi);
+	}
+
+	if (strlen($texte) < $longueur_mini and $longueur_mini < $longueur_maxi) {
+		if (preg_match(',^\d,', $texte)) {
+			$texte = ($type ? substr($type,0,1) : "s") . $texte;
+		}
+		$texte .= $separateur . md5($original);
+		$texte = substr($texte, 0, $longueur_mini);
 	}
 
 	return $texte;
