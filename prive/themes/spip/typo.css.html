@@ -122,7 +122,7 @@ cite { font-style: italic; }
 
 address { font-style: italic; }
 
-pre,code,kbd,samp,var,tt { font-family: 'lucida console',monospace; font-size: 1em; }
+pre,code,kbd,samp,var,tt { font-family: 'Courier New', Courier, monospace; font-size: 1em; }
 pre { margin:[ (#GET{margin-bottom}) ]0; white-space: pre; }
 kbd { background-color: #GET{color}; color: #GET{background-color}; }
 samp { font-weight: bold; }
@@ -173,9 +173,8 @@ ul.spip li li, ol.spip li li, #conteneur ul.spip li li {margin-#ENV{left}:[(#ENV
 blockquote.spip_poesie { margin: 2em 0; padding-left: 1em; border-left: 1px solid; font-family: Garamond, Georgia, Times, serif; }
 blockquote.spip_poesie div { text-indent: -3em; margin-left: 3em; }
 */
-.spip_code, .spip_cadre { color: #336; }
-.spip_cadre { width: 99%; background-color: #F3F3F3; border: 1px dotted #ddd; padding:5px;-ms-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
-div.spip_code, .spip_cadre { margin-bottom: #ENV{margin-bottom}; }
+.spip_code, .spip_cadre, .formulaire_spip textarea.spip_cadre { font-family: 'Courier New', Courier, monospace; color: #333; }
+div.spip_code, textarea.spip_cadre, .formulaire_spip textarea.spip_cadre { text-shadow: 0 1px 0 #fdfdfc; background-color: #F3F3F3; border: 1px solid #E0E0E0; padding: 0.5em; box-sizing: border-box; width: 100%; resize: none; margin-bottom: #ENV{margin-bottom}; }
 
 .spip_surligne { background: #FF6; }
 
