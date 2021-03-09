@@ -123,7 +123,11 @@ cite { font-style: italic; }
 address { font-style: italic; }
 
 pre,code,kbd,samp,var,tt { font-family: 'Courier New', Courier, monospace; font-size: 1em; }
-pre { margin:[ (#GET{margin-bottom}) ]0; white-space: pre; }
+pre { margin:[ (#GET{margin-bottom}) ]0; white-space: pre; overflow-x: auto; }
+@media print {
+    pre {overflow: hidden; white-space: pre-wrap; word-wrap: break-word;}
+}
+pre code { white-space: pre-wrap; }
 kbd { background-color: #GET{color}; color: #GET{background-color}; }
 samp { font-weight: bold; }
 var { font-style: italic; }
