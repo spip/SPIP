@@ -5150,3 +5150,70 @@ function spip_affiche_mot_de_passe_masque($passe, $afficher_partiellement = fals
 	}
 	return substr($passe,0,$e) . $mid . ($e > 0 ? substr($passe,-$e) : '');
 }
+
+
+/**
+ * Cette fonction permet de transformer un texte clair en nom court pouvant servir d'identifiant, class, id, url...
+ * en ne conservant que des caracteres alphanumeriques et un separateur
+ *
+ * @param string $texte
+ *   Texte à transformer en nom machine
+ * @param string $type
+ *
+ * @param array $options
+ *   string separateur : par défaut, un underscore `_`.
+ *   int longueur_maxi : par defaut 60
+ *
+ * @return string
+ */
+function identifiant_slug($texte, $type = '', $options = array()) {
+
+	$separateur = (isset($options['separateur'])?$options['separateur']:'_');
+	$longueur_maxi = (isset($options['longueur_maxi'])?$options['longueur_maxi']:60);
+
+	if (!function_exists('translitteration')) {
+		include_spip('inc/charsets');
+	}
+
+	// pas de balise html
+	if (strpos($texte, '<') !== false) {
+		$texte = strip_tags($texte);
+	}
+	if (strpos($texte, '&') !== false) {
+		$texte = unicode2charset($texte);
+	}
+	// On enlève les espaces indésirables
+	$texte = trim($texte);
+
+	// On enlève les accents et cie
+	$texte = translitteration($texte);
+
+	// On remplace tout ce qui n'est pas un mot par un séparateur
+	$texte = preg_replace(',[\W_]+,ms', $separateur, $texte);
+
+	// nettoyer les doubles occurences du separateur si besoin
+	while (strpos($texte, "$separateur$separateur") !== false) {
+		$texte = str_replace("$separateur$separateur", $separateur, $texte);
+	}
+
+	// pas de separateur au debut ni a la fin
+	$texte = trim($texte, $separateur);
+
+	// en minuscules
+	$texte = strtolower($texte);
+
+	switch ($type) {
+		case 'class':
+		case 'id':
+		case 'anchor':
+			if (preg_match(',^\d,', $texte)) {
+				$texte = substr($type, 0, 1).$texte;
+			}
+	}
+
+	if (strlen($texte)>$longueur_maxi) {
+		$texte = substr($texte, 0, $longueur_maxi);
+	}
+
+	return $texte;
+}
