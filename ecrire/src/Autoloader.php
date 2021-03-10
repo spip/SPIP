@@ -17,7 +17,6 @@ class Autoloader
             return self::$loader;
         }
         self::$loader = $loader = new self();
-        $loader->addPsr4("Spip\Core", __DIR__);
         $loader->register();
         return self::$loader;
     }
