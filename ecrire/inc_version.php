@@ -33,7 +33,7 @@ define('_ECRIRE_INC_VERSION', "1");
 error_reporting(E_ALL ^ E_NOTICE);
 
 /** version PHP minimum exigee (cf. inc/utils) */
-define('_PHP_MIN', '5.6.0');
+define('_PHP_MIN', '7.1.0');
 
 if (!defined('_DIR_RESTREINT_ABS')) {
 	/** le nom du repertoire ecrire/ */
@@ -467,6 +467,10 @@ if (!defined('SPIP_ERREUR_REPORT')) {
 	define('SPIP_ERREUR_REPORT', E_ALL ^ E_NOTICE ^ E_DEPRECATED);
 }
 error_reporting(SPIP_ERREUR_REPORT);
+
+// Démarrer l'autoloder de SPIP (en absence de Composer) 
+require_once __DIR__ . '/src/Autoloader.php';
+\Spip\Core\Autoloader::getLoader();
 
 // Initialisations critiques non surchargeables par les plugins
 // INITIALISER LES REPERTOIRES NON PARTAGEABLES ET LES CONSTANTES
