@@ -468,6 +468,14 @@ if (!defined('SPIP_ERREUR_REPORT')) {
 }
 error_reporting(SPIP_ERREUR_REPORT);
 
+// Démarrer l'autoloder de SPIP (en absence de Composer) 
+if (!class_exists('\Spip\Core\Autoloader')) {
+	require_once __DIR__ . '/src/Autoloader.php';
+	$loader = \Spip\Core\Autoloader::getLoader();
+	$loader->addPsr4("Spip\Core", __DIR__ . '/src');
+	unset($loader);
+}
+
 // Initialisations critiques non surchargeables par les plugins
 // INITIALISER LES REPERTOIRES NON PARTAGEABLES ET LES CONSTANTES
 // (charge aussi inc/flock)
