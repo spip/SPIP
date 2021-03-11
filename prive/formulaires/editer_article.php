@@ -161,6 +161,19 @@ function formulaires_editer_article_verifier_dist(
 ) {
 	// auto-renseigner le titre si il n'existe pas
 	titre_automatique('titre', array('descriptif', 'chapo', 'texte'));
+	if (!_request('id_parent') and !intval($id_article)) {
+		$valeurs = formulaires_editer_objet_charger(
+			'article',
+			$id_article,
+			$id_rubrique,
+			$lier_trad,
+			$retour,
+			$config_fonc,
+			$row,
+			$hidden
+		);
+		set_request('id_parent', $valeurs['id_parent']);
+	}
 	// on ne demande pas le titre obligatoire : il sera rempli a la volee dans editer_article si vide
 	$erreurs = formulaires_editer_objet_verifier('article', $id_article, array('id_parent'));
 	// si on utilise le formulaire dans le public

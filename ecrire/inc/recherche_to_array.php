@@ -125,8 +125,10 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 						$champs_vus[$champ] = $t[$champ];
 					}
 					if ($options['score']) {
-						$score += $n * $poids;
+						// compter les points avec un peu de discernement : on pondere par la longueur du match compte en chars
+						$score += $poids * strlen(implode('',array_column($regs, 0)));
 					}
+
 					if ($options['matches']) {
 						$matches[$champ] = $regs;
 					}

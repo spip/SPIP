@@ -262,7 +262,7 @@ function formulaires_editer_objet_charger(
 			unset($contexte['id_rubrique']);
 		}
 		$contexte['id_parent'] = $id_parent;
-	} elseif (!isset($contexte['id_parent'])) {
+	} elseif (empty($contexte['id_parent'])) {
 		// id_rubrique dans id_parent si possible
 		if (isset($contexte['id_rubrique'])) {
 			$contexte['id_parent'] = $contexte['id_rubrique'];

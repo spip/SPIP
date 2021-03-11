@@ -1,7 +1,7 @@
 #SET{p,pa_#ID_RUBRIQUE}<B_articles>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 <div class="editer-groupe">
-<BOUCLE_articles(ARTICLES){id_rubrique}{statut?}{pagination 100 #GET{p}}><li
+<BOUCLE_articles(ARTICLES){id_rubrique}{statut?}{pagination 100 #GET{p}}{!par date}><li
 	class='article[ (#EXPOSE)]'>[(#ENV{picker_article,1}|oui)<a
 	href='#'
 	onclick="jQuery(this).item_pick('article|#ID_ARTICLE','#ENV{name,id_item}','[(#TITRE*|attribut_html|texte_script|replace{'&#039;',#VAL{'\\'}|concat{#EVAL{chr(39)}}})]','article');return false;"
