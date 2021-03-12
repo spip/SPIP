@@ -211,7 +211,7 @@ function formulaires_editer_objet_charger(
 
 	// on accepte pas une fonction de config inconnue si elle vient d'un modele
 	if ($config_fonc
-	  and !in_array($config_fonc, ['articles_edit_config', 'rubriques_edit_config', 'auteurs_edit_config'])
+	  and !in_array($config_fonc, array('articles_edit_config', 'rubriques_edit_config', 'auteurs_edit_config'))
 	  and $config_fonc !== $table_objet . '_edit_config') {
 		if ($args = test_formulaire_inclus_par_modele()
 		  and in_array($config_fonc, $args)) {
