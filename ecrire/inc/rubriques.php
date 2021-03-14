@@ -53,11 +53,30 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return bool
  *     true si le statut change effectivement
  **/
-function calculer_rubriques_if($id_rubrique, $modifs, $statut_ancien = '', $postdate = false) {
+function calculer_rubriques_if($id_rubrique, $infos, $statut_ancien = '', $postdate = false) {
 	$neuf = false;
-	if ($statut_ancien == 'publie') {
-		if (isset($modifs['statut'])
-			or isset($modifs['id_rubrique'])
+	
+	// On recherche quels statuts tester
+	if (
+		isset($infos['objet'])
+		and include_spip('inc/filtres')
+		and $declaration_statut = objet_info($infos['objet'], 'statut')
+		and is_array($declaration_statut)
+	) {
+		foreach ($declaration_statut as $champ_statut) {
+			if ($champ_statut['champ'] == 'statut') {
+				$statuts_publies = array_map('trim', explode(',', $champ_statut['publie']));
+				break; // stop on a trouvé le bon champ
+			}
+		}
+	}
+	else {
+		$statuts_publies = array('publie');
+	}
+	
+	if (in_array($statut_ancien, $statuts_publies)) {
+		if (isset($infos['statut'])
+			or isset($infos['id_rubrique'])
 			or ($postdate and strtotime($postdate) > time())
 		) {
 			$neuf |= depublier_branche_rubrique_if($id_rubrique);
@@ -66,10 +85,10 @@ function calculer_rubriques_if($id_rubrique, $modifs, $statut_ancien = '', $post
 		if ($postdate) {
 			calculer_prochain_postdate(true);
 			$neuf |= (strtotime($postdate) <= time()); // par securite
-		} elseif (isset($modifs['id_rubrique'])) {
-			$neuf |= publier_branche_rubrique($modifs['id_rubrique']);
+		} elseif (isset($infos['id_rubrique'])) {
+			$neuf |= publier_branche_rubrique($infos['id_rubrique']);
 		}
-	} elseif (isset($modifs['statut']) and $modifs['statut'] == 'publie') {
+	} elseif (isset($infos['statut']) and in_array($infos['statut'], $statuts_publies)) {
 		if ($postdate) {
 			calculer_prochain_postdate(true);
 			$neuf |= (strtotime($postdate) <= time()); // par securite
