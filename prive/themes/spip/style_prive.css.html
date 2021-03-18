@@ -26,6 +26,12 @@ Valeurs par defaut :
 #SET{color,#ENV{color,#000000}} [color: (#GET{color});]
 */
 
+[(#REM) Variables ]
+[(#SET{fond,[(#VAL{vars.css.html}|find_in_theme|substr{[(#CONST{_DIR_RACINE}|strlen)],[(#VAL{-5}|intval)]})]})]
+[(#GET{fond}|oui)
+	[(#INCLURE{fond=#GET{fond},env,couleur_claire,couleur_foncee,lang,ltr,claire=#GET{claire},foncee=#GET{foncee},left=#GET{left},right=#GET{right},rtl=#GET{rtl},dir=#GET{dir},font-size=#GET{font-size},line-height=#GET{line-height},margin-bottom=#GET{margin-bottom},text-indent=#GET{text-indent},font-family=#GET{font-family},background-color=#GET{background-color},color=#GET{color}})]
+]
+
 [(#REM) les vieux styles a evacuer en premier, ca permet qu'ils ne polluent pas en cas de double definition]
 [(#INCLURE{#VAL{clear.css}|find_in_theme|direction_css{#GET{dir}}|substr{#CONST{_DIR_RACINE}|strlen}})]
 [(#INCLURE{#VAL{layout.css}|find_in_theme|direction_css{#GET{dir}}|substr{#CONST{_DIR_RACINE}|strlen}})]
