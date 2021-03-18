@@ -1,0 +1,37 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Déclarations de variables CSS.
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+
+:root {
+	--spip-couleur-claire: #ENV{claire};
+	--spip-couleur-claire-hsl: [(#ENV{claire}|couleur_hex_to_hsl)];
+	--spip-couleur-claire-h: [(#ENV{claire}|couleur_hex_to_hsl{h})];
+	--spip-couleur-claire-s: [(#ENV{claire}|couleur_hex_to_hsl{s})];
+	--spip-couleur-claire-l: [(#ENV{claire}|couleur_hex_to_hsl{l})];
+
+	--spip-couleur-foncee: #ENV{foncee};
+	--spip-couleur-foncee-hsl: [(#ENV{foncee}|couleur_hex_to_hsl)];
+	--spip-couleur-foncee-h: [(#ENV{foncee}|couleur_hex_to_hsl{h})];
+	--spip-couleur-foncee-s: [(#ENV{foncee}|couleur_hex_to_hsl{s})];
+	--spip-couleur-foncee-l: [(#ENV{foncee}|couleur_hex_to_hsl{l})];
+
+	--spip-css-dir: #ENV{dir};
+	--spip-css-left: #ENV{left};
+	--spip-css-right: #ENV{right};
+
+	--spip-css-font-size: #ENV{font-size};
+	--spip-css-line-height: #ENV{line-height};
+	--spip-css-margin-bottom: #ENV{margin-bottom};
+	--spip-css-text-indent: #ENV{text-indent};
+	--spip-css-font-family: #ENV{font-family};
+	--spip-css-background-color: #ENV{background-color};
+	--spip-css-color: #ENV{color};
+}
