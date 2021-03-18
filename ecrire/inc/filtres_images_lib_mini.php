@@ -70,11 +70,170 @@ function _couleur_hex_to_dec($couleur) {
 	if (strlen($couleur) === 3) {
 		$couleur = $couleur[0] . $couleur[0] . $couleur[1] . $couleur[1] . $couleur[2] . $couleur[2];
 	}
+	$retour = [];
 	$retour["red"] = hexdec(substr($couleur, 0, 2));
 	$retour["green"] = hexdec(substr($couleur, 2, 2));
 	$retour["blue"] = hexdec(substr($couleur, 4, 2));
 
 	return $retour;
+}
+
+
+/**
+ * Transforme une couleur vectorielle H,S,L en hexa (par exemple pour usage css)
+ *
+ * @param int $hue
+ *     Valeur de teinte de 0 à 1.
+ * @param int $saturation
+ *     Valeur de saturation de 0 à 1.
+ * @param int $lightness
+ *     Valeur de luminosité de 0 à 1.
+ * @return string
+ *     Le code de la couleur en hexadécimal.
+ */
+function _couleur_hsl_to_hex($hue, $saturation, $lightness) {
+	$rgb = _couleur_hsl_to_rgb($hue, $saturation, $lightness);
+	return _couleur_dec_to_hex($rgb['r'], $rgb['g'], $rgb['b']);
+}
+
+/**
+ * Transforme une couleur vectorielle H,S,L en hexa (par exemple pour usage css)
+ *
+ * @param string $couleur
+ *     Code couleur en hexa (#000000 à #FFFFFF).
+ * @return array
+ *     Un tableau des 3 éléments : teinte, saturation, luminosité.
+ */
+function _couleur_hex_to_hsl($couleur) {
+	$rgb = _couleur_hex_to_dec($couleur);
+	return _couleur_rgb_to_hsl($rgb['red'], $rgb['green'], $rgb['blue']);
+}
+
+/**
+ * Transformation d'une couleur RGB en HSL
+ * 
+ * HSL float entre 0 et 1
+ * RGB entiers entre 0 et 255
+ *
+ * @param int $R
+ * @param int $G
+ * @param int $B
+ * @return array
+ */
+function _couleur_rgb_to_hsl($R, $G, $B) {
+	$var_R = ($R / 255); // Where RGB values = 0 Ã· 255
+	$var_G = ($G / 255);
+	$var_B = ($B / 255);
+
+	$var_Min = min($var_R, $var_G, $var_B);   //Min. value of RGB
+	$var_Max = max($var_R, $var_G, $var_B);   //Max. value of RGB
+	$del_Max = $var_Max - $var_Min;           //Delta RGB value
+
+	$L = ($var_Max + $var_Min) / 2;
+
+	if ($del_Max == 0) {
+		//This is a gray, no chroma...
+		$H = 0; //HSL results = 0 Ã· 1
+		$S = 0;
+	} else {
+		// Chromatic data...
+		if ($L < 0.5) {
+			$S = $del_Max / ($var_Max + $var_Min);
+		} else {
+			$S = $del_Max / (2 - $var_Max - $var_Min);
+		}
+
+		$del_R = ((($var_Max - $var_R) / 6) + ($del_Max / 2)) / $del_Max;
+		$del_G = ((($var_Max - $var_G) / 6) + ($del_Max / 2)) / $del_Max;
+		$del_B = ((($var_Max - $var_B) / 6) + ($del_Max / 2)) / $del_Max;
+
+		if ($var_R == $var_Max) {
+			$H = $del_B - $del_G;
+		} else {
+			if ($var_G == $var_Max) {
+				$H = (1 / 3) + $del_R - $del_B;
+			} else {
+				if ($var_B == $var_Max) {
+					$H = (2 / 3) + $del_G - $del_R;
+				}
+			}
+		}
+
+		if ($H < 0) {
+			$H += 1;
+		}
+		if ($H > 1) {
+			$H -= 1;
+		}
+	}
+
+	$ret = [];
+	$ret["h"] = $H;
+	$ret["s"] = $S;
+	$ret["l"] = $L;
+
+	return $ret;
+}
+
+
+/**
+ * Transformation d'une couleur HSL en RGB
+ * 
+ * HSL float entre 0 et 1
+ * RGB entiers entre 0 et 255
+ *
+ * @param float $H
+ * @param float $S
+ * @param float $L
+ * @return array
+ */
+function _couleur_hsl_to_rgb($H, $S, $L) {
+	// helper
+	$hue_2_rgb = function($v1, $v2, $vH) {
+		if ($vH < 0) {
+			$vH += 1;
+		}
+		if ($vH > 1) {
+			$vH -= 1;
+		}
+		if ((6 * $vH) < 1) {
+			return ($v1 + ($v2 - $v1) * 6 * $vH);
+		}
+		if ((2 * $vH) < 1) {
+			return ($v2);
+		}
+		if ((3 * $vH) < 2) {
+			return ($v1 + ($v2 - $v1) * ((2 / 3) - $vH) * 6);
+		}
+	
+		return ($v1);
+	};
+
+	if ($S == 0) {
+		// HSV values = 0 -> 1
+		$R = $L * 255;
+		$G = $L * 255;
+		$B = $L * 255;
+	} else {
+		if ($L < 0.5) {
+			$var_2 = $L * (1 + $S);
+		} else {
+			$var_2 = ($L + $S) - ($S * $L);
+		}
+
+		$var_1 = 2 * $L - $var_2;
+
+		$R = 255 * $hue_2_rgb($var_1, $var_2, $H + (1 / 3));
+		$G = 255 * $hue_2_rgb($var_1, $var_2, $H);
+		$B = 255 * $hue_2_rgb($var_1, $var_2, $H - (1 / 3));
+	}
+
+	$ret = [];
+	$ret["r"] = floor($R);
+	$ret["g"] = floor($G);
+	$ret["b"] = floor($B);
+
+	return $ret;
 }
 
 /**

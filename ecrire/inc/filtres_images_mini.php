@@ -189,6 +189,25 @@ function couleur_html_to_hex($couleur) {
 }
 
 /**
+ * Retourne une couleur hsl a partir d'une couleur hex
+ *
+ * @param string $couleur
+ * @param string|null $key Juste la valeur désirée ? h, s ou l.
+ * @return string Couleur tel que "hsl(200, 40%, 34%)" ou valeur h, s ou l.
+ */
+function couleur_hex_to_hsl($couleur, $key = null) {
+	$hsl = _couleur_hex_to_hsl($couleur);
+	$hsl = [
+		'h' => round($hsl['h'] * 360), 
+		's' => round($hsl['s'] * 100) . '%', 
+		'l' => round($hsl['l'] * 100) . '%'
+	];
+	return ($key === null) 
+		? "hsl({$hsl['h']}, {$hsl['s']}, {$hsl['l']})" 
+		: ($hsl[strtolower($key)] ?? '');
+}
+
+/**
  * Rend une couleur (code hexadécimal) plus foncée
  *
  * @uses _couleur_hex_to_dec() Pour transformer le code hexadécimal en décimal
