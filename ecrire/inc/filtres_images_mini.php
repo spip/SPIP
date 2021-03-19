@@ -207,6 +207,26 @@ function couleur_hex_to_hsl($couleur, $key = null) {
 		: ($hsl[strtolower($key)] ?? '');
 }
 
+
+/**
+ * Retourne une couleur rgb a partir d'une couleur hex
+ *
+ * @param string $couleur
+ * @param string|null $key Juste la valeur désirée ? r, g ou b
+ * @return string Couleur tel que "rgb(200, 40, 84)" ou valeur r, g ou b.
+ */
+function couleur_hex_to_rgb($couleur, $key = null) {
+	$rgb = _couleur_hex_to_dec($couleur);
+	$rgb = [
+		'r' => $rgb['red'], 
+		'g' => $rgb['green'], 
+		'b' => $rgb['blue'],
+	];
+	return ($key === null) 
+		? "rgb({$rgb['r']}, {$rgb['g']}, {$rgb['b']})" 
+		: ($rgb[strtolower($key)] ?? '');
+}
+
 /**
  * Rend une couleur (code hexadécimal) plus foncée
  *
