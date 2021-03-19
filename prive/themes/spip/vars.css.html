@@ -11,12 +11,12 @@
 
 
 :root {
-	--spip-color-coef-lightest: 1.75;
-	--spip-color-coef-lighter: 1.5;
-	--spip-color-coef-light: 1.25;
-	--spip-color-coef-dark: .75;
-	--spip-color-coef-darker: .5;
-	--spip-color-coef-darkest: .25;
+	--spip-color-coef-lightest: 92%;
+	--spip-color-coef-lighter: 85%;
+	--spip-color-coef-light: 65%;
+	--spip-color-coef-dark: 30%;
+	--spip-color-coef-darker: 20%;
+	--spip-color-coef-darkest: 10%;
 
 	--spip-color-theme-hsl: [(#ENV{couleur_theme}|couleur_hex_to_hsl{"h, s, l"})];
 	--spip-color-theme-hs: [(#ENV{couleur_theme}|couleur_hex_to_hsl{"h, s"})];
@@ -29,13 +29,13 @@
 	--spip-color-theme-g: [(#ENV{couleur_theme}|couleur_hex_to_rgb{g})];
 	--spip-color-theme-b: [(#ENV{couleur_theme}|couleur_hex_to_rgb{b})];
 
-		--spip-color-theme-lightest: hsl(var(--spip-color-theme-hs), calc(var(--spip-color-theme-l) * var(--spip-color-coef-lightest)));
-		--spip-color-theme-lighter: hsl(var(--spip-color-theme-hs), calc(var(--spip-color-theme-l) * var(--spip-color-coef-lighter)));
-		--spip-color-theme-light : hsl(var(--spip-color-theme-hs), calc(var(--spip-color-theme-l) * var(--spip-color-coef-light)));
-		--spip-color-theme: hsl(var(--spip-color-theme-hsl));
-		--spip-color-theme-dark: hsl(var(--spip-color-theme-hs), calc(var(--spip-color-theme-l) * var(--spip-color-coef-dark)));
-		--spip-color-theme-darker: hsl(var(--spip-color-theme-hs), calc(var(--spip-color-theme-l) * var(--spip-color-coef-darker)));
-		--spip-color-theme-darkest: hsl(var(--spip-color-theme-hs), calc(var(--spip-color-theme-l) * var(--spip-color-coef-darkest)));
+	--spip-color-theme-lightest: hsl(var(--spip-color-theme-hs), var(--spip-color-coef-lightest));
+	--spip-color-theme-lighter: hsl(var(--spip-color-theme-hs), var(--spip-color-coef-lighter));
+	--spip-color-theme-light : hsl(var(--spip-color-theme-hs), var(--spip-color-coef-light));
+	--spip-color-theme: hsl(var(--spip-color-theme-hsl));
+	--spip-color-theme-dark: hsl(var(--spip-color-theme-hs), var(--spip-color-coef-dark));
+	--spip-color-theme-darker: hsl(var(--spip-color-theme-hs), var(--spip-color-coef-darker));
+	--spip-color-theme-darkest: hsl(var(--spip-color-theme-hs), var(--spip-color-coef-darkeest));
 
 	--spip-css-dir: #ENV{dir};
 	--spip-css-left: #ENV{left};

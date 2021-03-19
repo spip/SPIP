@@ -64,8 +64,6 @@
 					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_#CLE'[(#ENV{#GET{name}}|=={#CLE}|oui)checked="checked" ]value="#CLE"
 					onchange="if (this.checked) { jQuery('head>link#csspriveedef').clone().removeAttr('id').appendTo(jQuery('head')).attr('href', '[(#ENV{_couleurs_url/#CLE})]'); jQuery('body').removeClass(function(i, c){ return (c.match (/(^|\s)couleur_\S+/g) || []).join(' ');}).addClass('couleur_#CLE')}" />
 					<label for="[(#GET{name})]_#CLE">
-						<img src="#CHEMIN{rien.gif}" alt="" width="16" height="16" style="background-color: var(--spip-color-theme-darkest);" />
-						<img src="#CHEMIN{rien.gif}" alt="" width="16" height="16" style="background-color: var(--spip-color-theme-darker);" />
 						<img src="#CHEMIN{rien.gif}" alt="" width="16" height="16" style="background-color: var(--spip-color-theme-dark);" />
 						<img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> #CLE" width="16" height="16" style="background-color: var(--spip-color-theme);" />
 						<img src="#CHEMIN{rien.gif}" alt="" width="16" height="16" style="background-color: var(--spip-color-theme-light);" />

@@ -40,25 +40,25 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function inc_couleurs_dist($choix = null, $ajouter = false) {
 	static $couleurs_spip = array(
 		// Saumon
-		4 => ["couleur_theme" => "#CDA261"],
+		4 => ["couleur_theme" => "#c89851"], 
 		// Orange
-		3 => ["couleur_theme" => "#fa9a00"],
+		3 => ["couleur_theme" => "#e69900"],
 		// Rouge
-		8 => ["couleur_theme" => "#DF4543"],
+		8 => ["couleur_theme" => "#de3d3b"],
 		// Framboise
-		2 => ["couleur_theme" =>  "#D51B60"],
+		2 => ["couleur_theme" =>  "#d51a5f"],
 		// Vert de gris
 		7 => ["couleur_theme" => "#999966"],
 		// Vert
-		1 => ["couleur_theme" => "#9DBA00"],
+		1 => ["couleur_theme" => "#8ea824"],
 		//  Bleu pastel
-		5 => ["couleur_theme" => "#5da7c5"],
+		5 => ["couleur_theme" => "#56a4c2"],
 		// Violet
-		9 => ["couleur_theme" => "#8F8FBD"],
+		9 => ["couleur_theme" => "#6e6eaa"],
 		//  Gris
-		6 => ["couleur_theme" => "#85909A"],
+		6 => ["couleur_theme" => "#828d97"],
 		//  Gris
-		10 => ["couleur_theme" => "#909090"],
+		10 => ["couleur_theme" => "#8c8c8c"],
 	);
 
 	if (is_numeric($choix)) {

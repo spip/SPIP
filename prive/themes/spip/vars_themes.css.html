@@ -25,12 +25,12 @@
 	--spip-color-theme-g: [(#VALEUR{couleur_theme}|couleur_hex_to_rgb{g})];
 	--spip-color-theme-b: [(#VALEUR{couleur_theme}|couleur_hex_to_rgb{b})];
 
-	--spip-color-theme-lightest: hsl(var(--spip-color-theme-hs), calc(var(--spip-color-theme-l) * var(--spip-color-coef-lightest)));
-	--spip-color-theme-lighter: hsl(var(--spip-color-theme-hs), calc(var(--spip-color-theme-l) * var(--spip-color-coef-lighter)));
-	--spip-color-theme-light : hsl(var(--spip-color-theme-hs), calc(var(--spip-color-theme-l) * var(--spip-color-coef-light)));
+	--spip-color-theme-lightest: hsl(var(--spip-color-theme-hs), var(--spip-color-coef-lightest));
+	--spip-color-theme-lighter: hsl(var(--spip-color-theme-hs), var(--spip-color-coef-lighter));
+	--spip-color-theme-light : hsl(var(--spip-color-theme-hs), var(--spip-color-coef-light));
 	--spip-color-theme: hsl(var(--spip-color-theme-hsl));
-	--spip-color-theme-dark: hsl(var(--spip-color-theme-hs), calc(var(--spip-color-theme-l) * var(--spip-color-coef-dark)));
-	--spip-color-theme-darker: hsl(var(--spip-color-theme-hs), calc(var(--spip-color-theme-l) * var(--spip-color-coef-darker)));
-	--spip-color-theme-darkest: hsl(var(--spip-color-theme-hs), calc(var(--spip-color-theme-l) * var(--spip-color-coef-darkest)));
+	--spip-color-theme-dark: hsl(var(--spip-color-theme-hs), var(--spip-color-coef-dark));
+	--spip-color-theme-darker: hsl(var(--spip-color-theme-hs), var(--spip-color-coef-darker));
+	--spip-color-theme-darkest: hsl(var(--spip-color-theme-hs), var(--spip-color-coef-darkeest));
 }
 </BOUCLE_themes>
