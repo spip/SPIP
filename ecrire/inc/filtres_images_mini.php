@@ -191,40 +191,52 @@ function couleur_html_to_hex($couleur) {
 /**
  * Retourne une couleur hsl a partir d'une couleur hex
  *
+ * @example couleur_hex_to_hsl("#ffccaa");
+ * @example couleur_hex_to_hsl("#ffccaa", "h");
+ * @example couleur_hex_to_hsl("#ffccaa", "h, s, l");
+ * 
+ * @filtre
  * @param string $couleur
- * @param string|null $key Juste la valeur désirée ? h, s ou l.
- * @return string Couleur tel que "hsl(200, 40%, 34%)" ou valeur h, s ou l.
+ * @param string|null $format Si précisé, remplace h, s ou l par sa valeur dans la chaine passée.
+ * @return string Couleur tel que "hsl(200, 40%, 34%)" ou valeur formattée
  */
-function couleur_hex_to_hsl($couleur, $key = null) {
+function couleur_hex_to_hsl($couleur, $format = null) {
 	$hsl = _couleur_hex_to_hsl($couleur);
 	$hsl = [
 		'h' => round($hsl['h'] * 360), 
 		's' => round($hsl['s'] * 100) . '%', 
 		'l' => round($hsl['l'] * 100) . '%'
 	];
-	return ($key === null) 
-		? "hsl({$hsl['h']}, {$hsl['s']}, {$hsl['l']})" 
-		: ($hsl[strtolower($key)] ?? '');
+	if ($format === null) {
+		return "hsl({$hsl['h']}, {$hsl['s']}, {$hsl['l']})";
+	}
+	return str_replace(array_keys($hsl), $hsl, $format);
 }
 
 
 /**
  * Retourne une couleur rgb a partir d'une couleur hex
  *
+ * @example couleur_hex_to_rgb("#ffccaa");
+ * @example couleur_hex_to_rgb("#ffccaa", "r");
+ * @example couleur_hex_to_rgb("#ffccaa", "r, g, b");
+ * 
+ * @filtre
  * @param string $couleur
- * @param string|null $key Juste la valeur désirée ? r, g ou b
- * @return string Couleur tel que "rgb(200, 40, 84)" ou valeur r, g ou b.
+ * @param string|null $format Si précisé, remplace r, g ou b par sa valeur dans la chaine passée.
+ * @return string Couleur tel que "rgb(200, 40, 84)" ou valeur formattée
  */
-function couleur_hex_to_rgb($couleur, $key = null) {
+function couleur_hex_to_rgb($couleur, $format = null) {
 	$rgb = _couleur_hex_to_dec($couleur);
 	$rgb = [
 		'r' => $rgb['red'], 
 		'g' => $rgb['green'], 
 		'b' => $rgb['blue'],
 	];
-	return ($key === null) 
-		? "rgb({$rgb['r']}, {$rgb['g']}, {$rgb['b']})" 
-		: ($rgb[strtolower($key)] ?? '');
+	if ($format === null) {
+		return "rgb({$rgb['r']}, {$rgb['g']}, {$rgb['b']})";
+	}
+	return str_replace(array_keys($rgb), $rgb, $format);
 }
 
 /**
