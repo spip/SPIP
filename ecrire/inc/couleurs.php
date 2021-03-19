@@ -43,81 +43,55 @@ function inc_couleurs_dist($choix = null, $ajouter = false) {
 		4 => array(
 			"couleur_foncee" => "#CDA261",
 			"couleur_claire" => "#FFDDAA",
-			"couleur_lien" => "#AA6A09",
-			"couleur_lien_off" => "#B79562"
 		),
 		// Orange
 		3 => array(
 			"couleur_foncee" => "#fa9a00",
 			"couleur_claire" => "#ffc000",
-			"couleur_lien" => "#FF5B00",
-			"couleur_lien_off" => "#B49280"
 		),
 		// Rouge
 		8 => array(
 			"couleur_foncee" => "#DF4543",
 			"couleur_claire" => "#FAACB0",
-			"couleur_lien" => "#D0000A",
-			"couleur_lien_off" => "#D96067"
 		),
 		// Framboise
 		2 => array(
 			"couleur_foncee" =>  "#D51B60",
 			"couleur_claire" => "#EF91B4",
-			"couleur_lien" => "#db1762",
-			"couleur_lien_off" => "#E29FB6"
 		),
 		// Vert de gris
 		7 => array(
 			"couleur_foncee" => "#999966",
 			"couleur_claire" => "#CCCC99",
-			"couleur_lien" => "#666633",
-			"couleur_lien_off" => "#999966"
 		),
 		// Vert
 		1 => array(
 			"couleur_foncee" => "#9DBA00",
 			"couleur_claire" => "#C5E41C",
-			"couleur_lien" => "#657701",
-			"couleur_lien_off" => "#A6C113"
 		),
 		//  Bleu pastel
 		5 => array(
 			"couleur_foncee" => "#5da7c5",
 			"couleur_claire" => "#97d2e1",
-			"couleur_lien" => "#116587",
-			"couleur_lien_off" => "#81B7CD"
 		),
 		// Violet
 		9 => array(
 			"couleur_foncee" => "#8F8FBD",
 			"couleur_claire" => "#C4C4DD",
-			"couleur_lien" => "#6071A5",
-			"couleur_lien_off" => "#5C5C8C"
 		),
 		//  Gris
 		6 => array(
 			"couleur_foncee" => "#85909A",
 			"couleur_claire" => "#C0CAD4",
-			"couleur_lien" => "#3B5063",
-			"couleur_lien_off" => "#6D8499"
 		),
 		//  Gris
 		10 => array(
 			"couleur_foncee" => "#909090",
 			"couleur_claire" => "#D3D3D3",
-			"couleur_lien" => "#808080",
-			"couleur_lien_off" => "#909090"
 		),
 	);
 
 	if (is_numeric($choix)) {
-		// Compatibilite ascendante (plug-ins notamment)
-		$GLOBALS["couleur_claire"] = $couleurs_spip[$choix]['couleur_claire'];
-		$GLOBALS["couleur_foncee"] = $couleurs_spip[$choix]['couleur_foncee'];
-		$GLOBALS["couleur_lien"] = $couleurs_spip[$choix]['couleur_lien'];
-		$GLOBALS["couleur_lien_off"] = $couleurs_spip[$choix]['couleur_lien_off'];
-
 		return
 			"couleur_claire=" . substr($couleurs_spip[$choix]['couleur_claire'], 1) .
 			'&couleur_foncee=' . substr($couleurs_spip[$choix]['couleur_foncee'], 1);
