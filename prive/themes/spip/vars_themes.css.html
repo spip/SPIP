@@ -1,0 +1,36 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Déclarations de variables CSS. Variantes de couleurs pour chaque thème.
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{couleurs,#VAL{couleurs}|charger_fonction{inc}}
+#SET{couleurs,#GET{couleurs}|call_user_func}
+<BOUCLE_themes(DATA){source tableau, #GET{couleurs}}>
+[data-spip-theme-colors="#CLE"],
+.spip-theme-colors-#CLE {
+	--spip-color-theme-hsl: [(#VALEUR{couleur_theme}|couleur_hex_to_hsl{"h, s, l"})];
+	--spip-color-theme-hs: [(#VALEUR{couleur_theme}|couleur_hex_to_hsl{"h, s"})];
+	--spip-color-theme-sl: [(#VALEUR{couleur_theme}|couleur_hex_to_hsl{"s, l"})];
+	--spip-color-theme-h: [(#VALEUR{couleur_theme}|couleur_hex_to_hsl{h})];
+	--spip-color-theme-s: [(#VALEUR{couleur_theme}|couleur_hex_to_hsl{s})];
+	--spip-color-theme-l: [(#VALEUR{couleur_theme}|couleur_hex_to_hsl{l})];
+	--spip-color-theme-rgb: [(#VALEUR{couleur_theme}|couleur_hex_to_rgb{"r, g, b"})];
+	--spip-color-theme-r: [(#VALEUR{couleur_theme}|couleur_hex_to_rgb{r})];
+	--spip-color-theme-g: [(#VALEUR{couleur_theme}|couleur_hex_to_rgb{g})];
+	--spip-color-theme-b: [(#VALEUR{couleur_theme}|couleur_hex_to_rgb{b})];
+
+	--spip-color-theme-lightest: hsl(var(--spip-color-theme-hs), calc(var(--spip-color-theme-l) * var(--spip-color-coef-lightest)));
+	--spip-color-theme-lighter: hsl(var(--spip-color-theme-hs), calc(var(--spip-color-theme-l) * var(--spip-color-coef-lighter)));
+	--spip-color-theme-light : hsl(var(--spip-color-theme-hs), calc(var(--spip-color-theme-l) * var(--spip-color-coef-light)));
+	--spip-color-theme: hsl(var(--spip-color-theme-hsl));
+	--spip-color-theme-dark: hsl(var(--spip-color-theme-hs), calc(var(--spip-color-theme-l) * var(--spip-color-coef-dark)));
+	--spip-color-theme-darker: hsl(var(--spip-color-theme-hs), calc(var(--spip-color-theme-l) * var(--spip-color-coef-darker)));
+	--spip-color-theme-darkest: hsl(var(--spip-color-theme-hs), calc(var(--spip-color-theme-l) * var(--spip-color-coef-darkest)));
+}
+</BOUCLE_themes>

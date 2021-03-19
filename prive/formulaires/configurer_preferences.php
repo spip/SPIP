@@ -42,7 +42,7 @@ function formulaires_configurer_preferences_charger_dist() {
 	$valeurs['couleur'] = (isset($GLOBALS['visiteur_session']['prefs']['couleur']) and $GLOBALS['visiteur_session']['prefs']['couleur'] > 0) ? $GLOBALS['visiteur_session']['prefs']['couleur'] : 1;
 
 	$couleurs = charger_fonction('couleurs', 'inc');
-	$les_couleurs = $couleurs(array(), true);
+	$les_couleurs = $couleurs();
 	foreach ($les_couleurs as $k => $c) {
 		$valeurs['_couleurs_url'][$k] = generer_url_public('style_prive.css', 'ltr='
 			. $GLOBALS['spip_lang_left'] . '&'

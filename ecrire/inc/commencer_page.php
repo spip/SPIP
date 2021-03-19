@@ -176,7 +176,7 @@ function init_body_class() {
 
 	$couleur = isset($prefs['couleur']) ? (int) $prefs['couleur'] : 9;
 
-	$classes = $GLOBALS['spip_ecran'] . " couleur_$couleur $spip_display_navigation $spip_display_outils " . $display_class[$GLOBALS['spip_display']];
+	$classes = $GLOBALS['spip_ecran'] . " spip-theme-colors-$couleur $spip_display_navigation $spip_display_outils " . $display_class[$GLOBALS['spip_display']];
 	return spip_sanitize_classname($classes);
 }
 
