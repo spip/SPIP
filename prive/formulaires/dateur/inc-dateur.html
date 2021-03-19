@@ -1,13 +1,11 @@
 <script type='text/javascript'>/*<![CDATA[*/
 function date_picker_options(){
 	return {
-		buttonText: '',
-		buttonImage: '#CHEMIN_IMAGE{calendrier-16.png}',
-		buttonImageOnly: true,
 		closeText: '<:bouton_fermer|texte_script:>',
 		prevText: '<:precedent|texte_script:>',
 		nextText: '<:suivant|texte_script:>',
 		currentText: '<:date_aujourdhui|texte_script:>',
+		clearText: '<:lien_supprimer|texte_script:>',
 		monthNames: [
 			'<:date_mois_1|texte_script:>','<:date_mois_2|texte_script:>','<:date_mois_3|texte_script:>','<:date_mois_4|texte_script:>','<:date_mois_5|texte_script:>','<:date_mois_6|texte_script:>',
 			'<:date_mois_7|texte_script:>','<:date_mois_8|texte_script:>','<:date_mois_9|texte_script:>','<:date_mois_10|texte_script:>','<:date_mois_11|texte_script:>','<:date_mois_12|texte_script:>'],
@@ -25,11 +23,11 @@ function date_picker_options(){
 			'<:date_jour_5_initiale|texte_script:>','<:date_jour_6_initiale|texte_script:>','<:date_jour_7_initiale|texte_script:>'],
 		dateFormat: 'dd/mm/yy',
 		firstDay: 1,
-		changeMonth: true,
-		changeYear: true,
-		showOtherMonths: true,
-		selectOtherMonths: true,
-		yearRange: "c-60:c+40"
+		autoclose: true,
+		todayBtn: true,
+		clearBtn: false,
+		orientation: 'bottom',
+		zIndexOffset: 1010
 	};
 }
 function time_picker_options() {
@@ -41,21 +39,46 @@ function date_picker_init(){
 	// Initialisation du sélecteur sur les champs de date
 	jQuery('input.date').not('.datePicker')
 		.addClass('datePicker').each(function() {
+			var options =  date_picker_options();
+			var lang = '[(#LANG|texte_script)]';
+			if (typeof jQuery.fn.datepicker.dates !== "undefined"){
+				if (typeof jQuery.fn.datepicker.dates[lang]==="undefined"){
+					jQuery.fn.datepicker.dates[lang] = {
+						days: options.dayNames,
+						daysShort: options.dayNamesShort,
+						daysMin: options.dayNamesMin,
+						months: options.monthNames,
+						monthsShort: options.monthNamesShort,
+						today: options.currentText,
+						clear: options.clearText,
+						format: options.dateFormat.replace('yy', 'yyyy'),
+						titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
+						weekStart: options.firstDay,
+						rtl: [(#LANG_DIR|=={'rtl'}|?{true, false})]
+					};
+				}
+				options.language = lang;
+			}
+
 			// Pour chaque champ, on regarde s'il y a des options propres
-			var options = {showOn: 'button'};
 			if (jQuery(this).data('startdate')) {
-				options.minDate = jQuery(this).data('startdate');
+				options.startDate = jQuery(this).data('startdate');
 			}
 			if (jQuery(this).data('enddate')) {
-				options.maxDate = jQuery(this).data('enddate');
+				options.endDate = jQuery(this).data('enddate');
 			}
-			if (jQuery(this).data('yearrange')) {
-				options.yearRange = jQuery(this).data('yearrange');
+			if (jQuery(this).data('todaybtn')) {
+				options.todayBtn = jQuery(this).data('todaybtn');
+			}
+			if (jQuery(this).data('clearbtn')) {
+				options.todayBtn = jQuery(this).data('clearbtn');
+			}
+			if (jQuery(this).data('orientation')) {
+				options.orientation = jQuery(this).data('orientation');
 			}
 			jQuery(this)
-				.datepicker(jQuery.extend(date_picker_options(),options))
-				.trigger('datePickerLoaded')
-				.next('.ui-datepicker-trigger').removeAttr('title');
+				.datepicker(jQuery.extend({},options))
+				.trigger('datePickerLoaded');
 		});
 	
 	// Initialisation du sélecteur sur les champs d'heure
@@ -92,8 +115,11 @@ if (window.jQuery){
 /*]]>*/</script>
 <style type="text/css">
 [(#INCLURE{formulaires/dateur/time_picker.css}|compacte{css})]
-img.ui-datepicker-trigger { display: inline-block; padding: 0; margin: 0; margin-[(#ENV{lang}|lang_dir|choixsiegal{ltr,left,right})]: -19px; vertical-align: middle; z-index:2 }
+[(#INCLURE{formulaires/dateur/bootstrap-datepicker.standalone.css}|compacte{css})]
+.datepicker th {border-radius: 0;}
+.datepicker td.day {background: transparent;}
 div.time-picker {font-size:11px;  width:5em; /* needed for IE */}
-.formulaire_spip input.date {width:9em;padding-[(#ENV{lang}|lang_dir|choixsiegal{ltr,right,left})]:25px;}
+.datePicker {background-image: url(#CHEMIN_IMAGE{calendrier-16.png});background-size:1em;background-position:[(#ENV{lang}|lang_dir|choixsiegal{ltr,right,left})] 0.25em center;background-repeat:no-repeat;}
+.formulaire_spip input.date {width:9em;padding-[(#ENV{lang}|lang_dir|choixsiegal{ltr,right,left})]:1.5em;}
 .formulaire_spip input.heure {width:7em;}
 </style>
