@@ -11,25 +11,31 @@
 
 
 :root {
-	--spip-couleur-claire: #ENV{claire};
-	--spip-couleur-claire-hsl: [(#ENV{claire}|couleur_hex_to_hsl)];
-	--spip-couleur-claire-h: [(#ENV{claire}|couleur_hex_to_hsl{h})];
-	--spip-couleur-claire-s: [(#ENV{claire}|couleur_hex_to_hsl{s})];
-	--spip-couleur-claire-l: [(#ENV{claire}|couleur_hex_to_hsl{l})];
-	--spip-couleur-claire-rgb: [(#ENV{claire}|couleur_hex_to_rgb)];
-	--spip-couleur-claire-r: [(#ENV{claire}|couleur_hex_to_rgb{r})];
-	--spip-couleur-claire-g: [(#ENV{claire}|couleur_hex_to_rgb{g})];
-	--spip-couleur-claire-b: [(#ENV{claire}|couleur_hex_to_rgb{b})];
+	--spip-color-coef-lightest: .875;
+	--spip-color-coef-lighter: .75;
+	--spip-color-coef-light: .5;
+	--spip-color-coef-dark: 1.25;
+	--spip-color-coef-darker: 1.5;
+	--spip-color-coef-darkest: 1.75;
 
-	--spip-couleur-foncee: #ENV{foncee};
-	--spip-couleur-foncee-hsl: [(#ENV{foncee}|couleur_hex_to_hsl)];
-	--spip-couleur-foncee-h: [(#ENV{foncee}|couleur_hex_to_hsl{h})];
-	--spip-couleur-foncee-s: [(#ENV{foncee}|couleur_hex_to_hsl{s})];
-	--spip-couleur-foncee-l: [(#ENV{foncee}|couleur_hex_to_hsl{l})];
-	--spip-couleur-foncee-rgb: [(#ENV{foncee}|couleur_hex_to_rgb)];
-	--spip-couleur-foncee-r: [(#ENV{foncee}|couleur_hex_to_rgb{r})];
-	--spip-couleur-foncee-g: [(#ENV{foncee}|couleur_hex_to_rgb{g})];
-	--spip-couleur-foncee-b: [(#ENV{foncee}|couleur_hex_to_rgb{b})];
+	--spip-color-theme-hsl: [(#ENV{couleur_theme}|couleur_hex_to_hsl{"h, s, l"})];
+	--spip-color-theme-hs: [(#ENV{couleur_theme}|couleur_hex_to_hsl{"h, s"})];
+	--spip-color-theme-sl: [(#ENV{couleur_theme}|couleur_hex_to_hsl{"s, l"})];
+	--spip-color-theme-h: [(#ENV{couleur_theme}|couleur_hex_to_hsl{h})];
+	--spip-color-theme-s: [(#ENV{couleur_theme}|couleur_hex_to_hsl{s})];
+	--spip-color-theme-l: [(#ENV{couleur_theme}|couleur_hex_to_hsl{l})];
+	--spip-color-theme-rgb: [(#ENV{couleur_theme}|couleur_hex_to_rgb{"r, g, b"})];
+	--spip-color-theme-r: [(#ENV{couleur_theme}|couleur_hex_to_rgb{r})];
+	--spip-color-theme-g: [(#ENV{couleur_theme}|couleur_hex_to_rgb{g})];
+	--spip-color-theme-b: [(#ENV{couleur_theme}|couleur_hex_to_rgb{b})];
+
+	--spip-color-theme-lightest: hsl(var(--spip-color-theme-hs), calc(var(--spip-color-theme-l) * var(--spip-color-coef-lightest)));;
+	--spip-color-theme-lighter: hsl(var(--spip-color-theme-hs), calc(var(--spip-color-theme-l) * var(--spip-color-coef-lighter)));
+	--spip-color-theme-light : hsl(var(--spip-color-theme-hs), calc(var(--spip-color-theme-l) * var(--spip-color-coef-light)));
+	--spip-color-theme: hsl(var(--spip-color-theme-hsl));
+	--spip-color-theme-dark: hsl(var(--spip-color-theme-hs), calc(var(--spip-color-theme-l) * var(--spip-color-coef-dark)));
+	--spip-color-theme-darker: hsl(var(--spip-color-theme-hs), calc(var(--spip-color-theme-l) * var(--spip-color-coef-darker)));
+	--spip-color-theme-darkest: hsl(var(--spip-color-theme-hs), calc(var(--spip-color-theme-l) * var(--spip-color-coef-darkest)));
 
 	--spip-css-dir: #ENV{dir};
 	--spip-css-left: #ENV{left};

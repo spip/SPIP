@@ -64,11 +64,11 @@
 					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_#CLE'[(#ENV{#GET{name}}|=={#CLE}|oui)checked="checked" ]value="#CLE"
 					onchange="if (this.checked) { jQuery('head>link#csspriveedef').clone().removeAttr('id').appendTo(jQuery('head')).attr('href', '[(#ENV{_couleurs_url/#CLE})]'); jQuery('body').removeClass(function(i, c){ return (c.match (/(^|\s)couleur_\S+/g) || []).join(' ');}).addClass('couleur_#CLE')}" />
 					<label for="[(#GET{name})]_#CLE">
-						<img src="#CHEMIN{rien.gif}" alt="" width="16" height="16" style="background-color:[#(#VALEUR{couleur_foncee}|couleur_foncer)];" />
-						<img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 1" width="16" height="16" style="background-color:[(#VALEUR{couleur_foncee})];" />
-						<img src="#CHEMIN{rien.gif}" alt="" width="16" height="16" style="background-color:[(#VALEUR{couleur_claire})];" />
-						<img src="#CHEMIN{rien.gif}" alt="" width="16" height="16" style="background-color:[#(#VALEUR{couleur_claire}|couleur_eclaircir)];" />
-						<img src="#CHEMIN{rien.gif}" alt="" width="16" height="16" style="background-color:[#(#VALEUR{couleur_claire}|couleur_eclaircir{0.75})];" />
+						<img src="#CHEMIN{rien.gif}" alt="" width="16" height="16" style="background-color:[#(#VALEUR{couleur_theme}|couleur_foncer)];" />
+						<img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 1" width="16" height="16" style="background-color:[(#VALEUR{couleur_theme})];" />
+						<img src="#CHEMIN{rien.gif}" alt="" width="16" height="16" style="background-color:[#(#VALEUR{couleur_theme}|couleur_eclaircir)];" />
+						<img src="#CHEMIN{rien.gif}" alt="" width="16" height="16" style="background-color:[#(#VALEUR{couleur_theme}|couleur_eclaircir{0.75})];" />
+						<img src="#CHEMIN{rien.gif}" alt="" width="16" height="16" style="background-color:[#(#VALEUR{couleur_theme}|couleur_eclaircir{0.875})];" />
 					</label>
 				</div>
 				</BOUCLE_couleurs>

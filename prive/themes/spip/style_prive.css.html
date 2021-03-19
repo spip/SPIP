@@ -10,8 +10,9 @@
 #HTTP_HEADER{Vary: Accept-Encoding}
 /*
 Valeurs par defaut :
-#SET{claire,##ENV{couleur_claire,edf3fe}} [claire: (#GET{claire});]
-#SET{foncee,##ENV{couleur_foncee,3874b0}} [foncee: (#GET{foncee});]
+#SET{theme,##ENV{couleur_theme,3874b0}} [theme: (#GET{theme});]
+#SET{foncee,#GET{theme}} [foncee: (#GET{foncee});]
+[(#SET{claire,[#(#GET{theme}|couleur_eclaircir{.5})]})] [claire: (#GET{claire});]
 #SET{left,#ENV{ltr}|choixsiegal{left,left,right}} [left: (#GET{left});]
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}} [right: (#GET{right});]
 #SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}} [rtl: (#GET{rtl});]
