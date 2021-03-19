@@ -38,48 +38,83 @@ function time_picker_options() {
 function date_picker_init(){
 	// Initialisation du sélecteur sur les champs de date
 	jQuery('input.date').not('.datePicker')
-		.addClass('datePicker').each(function() {
-			var options =  date_picker_options();
-			var lang = '[(#LANG|texte_script)]';
-			if (typeof jQuery.fn.datepicker.dates !== "undefined"){
-				if (typeof jQuery.fn.datepicker.dates[lang]==="undefined"){
-					jQuery.fn.datepicker.dates[lang] = {
-						days: options.dayNames,
-						daysShort: options.dayNamesShort,
-						daysMin: options.dayNamesMin,
-						months: options.monthNames,
-						monthsShort: options.monthNamesShort,
-						today: options.currentText,
-						clear: options.clearText,
-						format: options.dateFormat.replace('yy', 'yyyy'),
-						titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
-						weekStart: options.firstDay,
-						rtl: [(#LANG_DIR|=={'rtl'}|?{true, false})]
-					};
+		.each(function() {
+			var $me = jQuery(this);
+			if (!$me.is('.datePicker')) {
+				var options =  date_picker_options();
+				var lang = '[(#LANG|texte_script)]';
+				if (typeof jQuery.fn.datepicker.dates !== "undefined"){
+					if (typeof jQuery.fn.datepicker.dates[lang]==="undefined"){
+						jQuery.fn.datepicker.dates[lang] = {
+							days: options.dayNames,
+							daysShort: options.dayNamesShort,
+							daysMin: options.dayNamesMin,
+							months: options.monthNames,
+							monthsShort: options.monthNamesShort,
+							today: options.currentText,
+							clear: options.clearText,
+							format: options.dateFormat.replace('yy', 'yyyy'),
+							titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
+							weekStart: options.firstDay,
+							rtl: [(#LANG_DIR|=={'rtl'}|?{true, false})]
+						};
+					}
+					options.language = lang;
 				}
-				options.language = lang;
-			}
 
-			// Pour chaque champ, on regarde s'il y a des options propres
-			if (jQuery(this).data('startdate')) {
-				options.startDate = jQuery(this).data('startdate');
+				// Pour chaque champ, on regarde s'il y a des options propres
+				if ($me.data('startdate')) {
+					options.startDate = $me.data('startdate');
+				}
+				if ($me.data('enddate')) {
+					options.endDate = $me.data('enddate');
+				}
+				if ($me.data('todaybtn')) {
+					options.todayBtn = $me.data('todaybtn');
+				}
+				if ($me.data('clearbtn')) {
+					options.todayBtn = $me.data('clearbtn');
+				}
+				if ($me.data('orientation')) {
+					options.orientation = $me.data('orientation');
+				}
+
+				$me
+					.addClass('datePicker')
+					.datepicker(jQuery.extend({},options))
+					.trigger('datePickerLoaded');
+
+				if ($me.data('range-after') || $me.data('range-before')) {
+					$me.on('changeDate', function (){rangePickerChangeDate($me)});
+				}
 			}
-			if (jQuery(this).data('enddate')) {
-				options.endDate = jQuery(this).data('enddate');
-			}
-			if (jQuery(this).data('todaybtn')) {
-				options.todayBtn = jQuery(this).data('todaybtn');
-			}
-			if (jQuery(this).data('clearbtn')) {
-				options.todayBtn = jQuery(this).data('clearbtn');
-			}
-			if (jQuery(this).data('orientation')) {
-				options.orientation = jQuery(this).data('orientation');
-			}
-			jQuery(this)
-				.datepicker(jQuery.extend({},options))
-				.trigger('datePickerLoaded');
 		});
+
+	function rangePickerChangeDate($me) {
+		var newValue = $me.val();
+		var newDate = $me.datepicker('getDate');
+		console.log('rangePickerChangeDate', newValue, newDate);
+		if ($me.data('range-after')) {
+			var $after = jQuery($me.data('range-after'));
+			if ($after) {
+				var afterDate = $after.datepicker('getDate');
+				if (afterDate < newDate) {
+					$after.datepicker('setDate', newDate);
+				}
+				$after.datepicker('setStartDate', newDate);
+			}
+		}
+		if ($me.data('range-before')) {
+			var $before = jQuery($me.data('range-before'));
+			if ($before) {
+				var beforeDate = $before.datepicker('getDate');
+				if (beforeDate > newDate) {
+					$before.datepicker('setDate', newDate);
+				}
+				$before.datepicker('setEndDate', newDate);
+			}
+		}
+	}
 	
 	// Initialisation du sélecteur sur les champs d'heure
 	jQuery("input.heure").not('.timePicker')
