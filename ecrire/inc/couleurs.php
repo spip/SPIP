@@ -40,25 +40,25 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function inc_couleurs_dist($choix = null, $ajouter = false) {
 	static $couleurs_spip = array(
 		// Saumon
-		4 => ["couleur_theme" => "#c89851"], 
+		4 => ["couleur_theme" => "#cda261"], 
 		// Orange
-		3 => ["couleur_theme" => "#e69900"],
+		3 => ["couleur_theme" => "#fa9a00"],
 		// Rouge
-		8 => ["couleur_theme" => "#de3d3b"],
+		8 => ["couleur_theme" => "#df4543"],
 		// Framboise
-		2 => ["couleur_theme" =>  "#d51a5f"],
+		2 => ["couleur_theme" =>  "#d51b60"],
 		// Vert de gris
 		7 => ["couleur_theme" => "#999966"],
 		// Vert
-		1 => ["couleur_theme" => "#8ea824"],
+		1 => ["couleur_theme" => "#9dba00"],
 		//  Bleu pastel
-		5 => ["couleur_theme" => "#56a4c2"],
+		5 => ["couleur_theme" => "#5da7c5"],
 		// Violet
-		9 => ["couleur_theme" => "#6e6eaa"],
+		9 => ["couleur_theme" => "#8f8fbd"],
 		//  Gris
-		6 => ["couleur_theme" => "#828d97"],
+		6 => ["couleur_theme" => "#85909a"],
 		//  Gris
-		10 => ["couleur_theme" => "#8c8c8c"],
+		10 => ["couleur_theme" => "#909090"],
 	);
 
 	if (is_numeric($choix)) {
@@ -66,7 +66,7 @@ function inc_couleurs_dist($choix = null, $ajouter = false) {
 		// compat < SPIP 3.3
 		include_spip('inc/filtres_images_mini');
 		$c["couleur_foncee"] = $c["couleur_theme"];
-		$c["couleur_claire"] = "#" . couleur_eclaircir($c["couleur_theme"], .5);
+		$c["couleur_claire"] = '#' . couleur_eclaircir($c["couleur_theme"], .5);
 
 		return
 			'couleur_theme=' . substr($c['couleur_theme'], 1)

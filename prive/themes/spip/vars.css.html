@@ -11,31 +11,7 @@
 
 
 :root {
-	--spip-color-coef-lightest: 92%;
-	--spip-color-coef-lighter: 85%;
-	--spip-color-coef-light: 65%;
-	--spip-color-coef-dark: 30%;
-	--spip-color-coef-darker: 20%;
-	--spip-color-coef-darkest: 10%;
-
-	--spip-color-theme-hsl: [(#ENV{couleur_theme}|couleur_hex_to_hsl{"h, s, l"})];
-	--spip-color-theme-hs: [(#ENV{couleur_theme}|couleur_hex_to_hsl{"h, s"})];
-	--spip-color-theme-sl: [(#ENV{couleur_theme}|couleur_hex_to_hsl{"s, l"})];
-	--spip-color-theme-h: [(#ENV{couleur_theme}|couleur_hex_to_hsl{h})];
-	--spip-color-theme-s: [(#ENV{couleur_theme}|couleur_hex_to_hsl{s})];
-	--spip-color-theme-l: [(#ENV{couleur_theme}|couleur_hex_to_hsl{l})];
-	--spip-color-theme-rgb: [(#ENV{couleur_theme}|couleur_hex_to_rgb{"r, g, b"})];
-	--spip-color-theme-r: [(#ENV{couleur_theme}|couleur_hex_to_rgb{r})];
-	--spip-color-theme-g: [(#ENV{couleur_theme}|couleur_hex_to_rgb{g})];
-	--spip-color-theme-b: [(#ENV{couleur_theme}|couleur_hex_to_rgb{b})];
-
-	--spip-color-theme-lightest: hsl(var(--spip-color-theme-hs), var(--spip-color-coef-lightest));
-	--spip-color-theme-lighter: hsl(var(--spip-color-theme-hs), var(--spip-color-coef-lighter));
-	--spip-color-theme-light : hsl(var(--spip-color-theme-hs), var(--spip-color-coef-light));
-	--spip-color-theme: hsl(var(--spip-color-theme-hsl));
-	--spip-color-theme-dark: hsl(var(--spip-color-theme-hs), var(--spip-color-coef-dark));
-	--spip-color-theme-darker: hsl(var(--spip-color-theme-hs), var(--spip-color-coef-darker));
-	--spip-color-theme-darkest: hsl(var(--spip-color-theme-hs), var(--spip-color-coef-darkeest));
+	[(#ENV{couleur_theme}|spip_couleur_theme_generer_variables_css)]
 
 	--spip-css-dir: #ENV{dir};
 	--spip-css-left: #ENV{left};
@@ -49,3 +25,13 @@
 	--spip-css-background-color: #ENV{background-color};
 	--spip-css-color: #ENV{color};
 }
+
+
+#SET{couleurs,#VAL{couleurs}|charger_fonction{inc}}
+#SET{couleurs,#GET{couleurs}|call_user_func}
+<BOUCLE_themes(DATA){source tableau, #GET{couleurs}}>
+[data-spip-theme-colors="#CLE"],
+.spip-theme-colors-#CLE {
+	[(#VALEUR{couleur_theme}|spip_couleur_theme_generer_variables_css)]
+}
+</BOUCLE_themes>
