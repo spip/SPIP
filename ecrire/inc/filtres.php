@@ -5260,6 +5260,7 @@ function identifiant_slug($texte, $type = '', $options = array()) {
 	return $texte;
 }
 
+
 /**
  * Cherche le contenu parent d'un contenu précis
  *
@@ -5268,6 +5269,27 @@ function identifiant_slug($texte, $type = '', $options = array()) {
  * @return array
  */
 function filtre_objet_trouver_parent_dist($objet, $id_objet) {
+	// compatibilite signature inversee
+	if (is_numeric($objet) and !is_numeric($id_objet)) {
+		list($objet, $id_objet) = [$id_objet, $objet];
+	}
 	include_spip('base/objets');
 	return objet_trouver_parent($objet, $id_objet);
+}
+
+
+/**
+ * Cherche les enfants d'un contenu précis
+ *
+ * @param string $objet
+ * @param int|string $id_objet
+ * @return array
+ */
+function filtre_objet_trouver_enfants_dist($objet, $id_objet) {
+	// compatibilite signature inversee
+	if (is_numeric($objet) and !is_numeric($id_objet)) {
+		list($objet, $id_objet) = [$id_objet, $objet];
+	}
+	include_spip('base/objets');
+	return objet_trouver_enfants($objet, $id_objet);
 }
