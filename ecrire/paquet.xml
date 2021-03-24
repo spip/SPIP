@@ -138,7 +138,7 @@
 	<pipeline nom="trig_supprimer_objets_lies" action="" />
 	<pipeline nom="trig_purger" action="" />
 	<pipeline nom="trig_trace_query" action="" />
-	<pipeline nom="objet_trouver_parent" action="" />
+	<pipeline nom="objet_trouver_parents" action="" />
 	<pipeline nom="objet_trouver_enfants" action="" />
 
 	<procure nom="iterateurs" version="1.0.6" />

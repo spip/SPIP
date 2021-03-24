@@ -1261,11 +1261,12 @@ function objet_test_si_publie($objet, $id_objet, $serveur = '') {
 	return true;
 }
 
+
 /**
  * Cherche le contenu parent d'un contenu précis
- * 
+ *
  * Permet également de gérer un parent trouvé dans une table de lien, comme :
- * 
+ *
  * ```
  * $tables['spip_auteurs']['parent']  = array(
  *     'type' => 'organisation',
@@ -1276,17 +1277,19 @@ function objet_test_si_publie($objet, $id_objet, $serveur = '') {
  *     'champ_type' => 'objet'
  * );
  * ```
- * 
+ *
  * @api
- * @param $objet
- *     Type de l'objet dont on cherche le parent
- * @param $id_objet
- *     Identifiant de l'objet dont on cherche le parent
- * @return array|false
- *     Retourne un tableau décrivant le parent trouvé, ou false sinon
+ * @param string $objet
+ *     Type de l'objet dont on cherche les parent
+ * @param int $id_objet
+ *     Identifiant de l'objet dont on cherche les parent
+ * @param bool $parent_direct_seulement
+ *     ne considerer que les relations directes et non via table de liens
+ * @return array
+ *     Retourne un tableau décrivant les parents trouvés
  */
-function objet_trouver_parent($objet, $id_objet) {
-	$parent = false;
+function objet_trouver_parents($objet, $id_objet, $parent_direct_seulement = false) {
+	$parents = [];
 
 	// Si on trouve une ou des méthodes de parent
 	if ($parent_methodes = type_objet_info_parent($objet)) {
@@ -1322,7 +1325,7 @@ function objet_trouver_parent($objet, $id_objet) {
 				if (isset($parent_methode['condition'])) {
 					$where[] = $parent_methode['condition'];
 				}
-			} else {
+			} elseif (!$parent_direct_seulement) {
 				// Le parent est stocké dans une table différente de l'objet source.
 				// -- on vérifie d'emblée si il y a une condition sur l'objet source et si celle-ci est vérifiée
 				//    Si non, on peut arrêter le traitement.
@@ -1361,42 +1364,46 @@ function objet_trouver_parent($objet, $id_objet) {
 			if (
 				!$condition_objet_invalide
 				and $where
-				and ($ligne = sql_fetsel($select, $table, $where))
+				and ($lignes = sql_allfetsel($select, $table, $where))
 			) {
-				// Si le type est fixe
-				if (isset($parent_methode['type'])) {
-					$parent = array(
-						'objet'    => $parent_methode['type'],
-						'id_objet' => intval($ligne[$parent_methode['champ']]),
-						'champ'    => $parent_methode['champ'],
-					);
+				foreach ($lignes as $ligne) {
+					// Si le type est fixe
+					if (isset($parent_methode['type'])) {
+						$parent = array(
+							'objet' 	=> $parent_methode['type'],
+							'id_objet'	=> intval($ligne[$parent_methode['champ']]),
+							'champ' 	=> $parent_methode['champ'],
+							'table'    => $table,
+						);
+					}
+					elseif (isset($parent_methode['champ_type'])) {
+						$parent = array(
+							'objet' 	 => $ligne[$parent_methode['champ_type']],
+							'id_objet' 	 => intval($ligne[$parent_methode['champ']]),
+							'champ' 	 => $parent_methode['champ'],
+							'champ_type' => $parent_methode['champ_type'],
+							'table'    => $table,
+						);
+					}
+					$parents[] = $parent;
 				}
-				elseif (isset($parent_methode['champ_type'])) {
-					$parent = array(
-						'objet'      => $ligne[$parent_methode['champ_type']],
-						'id_objet'   => intval($ligne[$parent_methode['champ']]),
-						'champ'      => $parent_methode['champ'],
-						'champ_type' => $parent_methode['champ_type'],
-					);
-				}
-				break;
 			}
 		}
 	}
 
 	// On passe par un pipeline avant de retourner
-	$parent = pipeline(
-		'objet_trouver_parent',
+	$parents = pipeline(
+		'objet_trouver_parents',
 		array(
 			'args' => array(
 				'objet' => $objet,
 				'id_objet' => $id_objet,
 			),
-			'data' => $parent,
+			'data' => $parents,
 		)
 	);
 
-	return $parent;
+	return $parents;
 }
 
 /**
