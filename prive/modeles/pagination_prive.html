@@ -5,41 +5,33 @@
 #SET{pages,#GET{premiere}|range{#GET{derniere}}}
 #SET{sep,#ENV{separateur,' | '}}
 <B_pages>
-	[<span
-  class='label'>(#ENV{label,''})</span>][
+	[<span class="pagination-label"><span class="label">(#ENV{label})</span></span>]
+	<ul class="pagination-items">
+		[<li class="pagination-item"><a
+			href='[(#ENV{url}|parametre_url{#ENV{debut},''}|ancre_url{#ENV{ancre}})]'
+			class='pagination-lien lien_pagination'
+			rel='nofollow'>(#GET{premiere}|>{1}|?{0})</a></li><li
+			class="pagination-item tbc disabled"><span class="pagination-lien">...</span></li>]
 
-	(#SET{item, #ENV{page_courante}|moins{2}|mult{#ENV{pas}} })
-
-	]<span
-	class="pages">[<a
-	href='[(#ENV{url}|parametre_url{#ENV{debut},''})]##ENV{ancre}'
-	class='lien_pagination'
-	rel='nofollow'>(#GET{premiere}|>{1}|?{0})</a><span
-	class="tbc">[<span
-	class='sep'>(#GET*{sep})</span>]...[<span
-	class='sep'>(#GET*{sep})</span>]</span
-
-		>]<BOUCLE_pages(POUR){tableau #GET{pages}}>[
+		<BOUCLE_pages(POUR){tableau #GET{pages}}>[
 		(#SET{item, #VALEUR|moins{1}|mult{#ENV{pas}} })
-		][(#ENV{url}
+		][<li class="pagination-item[(#VALEUR|=={#ENV{page_courante}}|oui)on active]">(#ENV{url}
 		|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}
 		|ancre_url{#ENV{ancre}}
-		|lien_ou_expose{#GET{item},#VALEUR|=={#ENV{page_courante}},lien_pagination,'',nofollow})][<span
-		class='sep'>(#VALEUR|<{#GET{derniere}}|?{#GET{sep}})</span
-		>]</BOUCLE_pages>[<span
+		|lien_ou_expose{#GET{item},#VALEUR|=={#ENV{page_courante}}|?{span.pagination-lien},pagination-lien lien_pagination,'',nofollow})</li>]
+		</BOUCLE_pages>
 
-	class="tbc">[<span
-	class='sep'>(#GET*{sep})</span>]...[<span
-	class='sep'>(#GET*{sep})</span>]</span><a
-	href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}})]##ENV{ancre}'
-	class='lien_pagination'
-	rel='nofollow'>(#GET{derniere}|<{#ENV{nombre_pages}}|?{#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}})</a>]</span>[
-	(#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}|<{1000}|oui)[
-	(#SET{item, #ENV{page_courante}|mult{#ENV{pas}} })
-	][<span
-	class="all[(#ENV{page_courante}|=={0}|oui)disabled]">[<span
-	class='sep'>(#GET*{sep})</span>](#ENV{url}
-	|parametre_url{#ENV{debut},-1}
-	|ancre_url{#ENV{ancre}}
-	|lien_ou_expose{<:lien_tout_afficher:>,#ENV{page_courante}|=={0},lien_pagination,'',nofollow})</span>]]
+		[<li class="pagination-item tbc disabled"><span class="pagination-lien">...</span></li>
+		<li class="pagination-item"><a
+		href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}}|ancre_url{#ENV{ancre}})]'
+		class='pagination-lien lien_pagination'
+		rel='nofollow'>(#GET{derniere}|<{#ENV{nombre_pages}}|?{#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}})</a></li>]
+
+		[<li class="pagination-item all[(#ENV{page_courante}|=={0}|oui)on active]">(#ENV{url}
+			|parametre_url{#ENV{debut},-1}
+			|ancre_url{#ENV{ancre}}
+			|lien_ou_expose{+,#ENV{page_courante}|=={0}|?{span.pagination-lien},pagination-lien lien_pagination,'',nofollow}
+		  |inserer_attribut{title,<:lien_tout_afficher:>}
+		)</li>]
+	</ul>
 </B_pages>

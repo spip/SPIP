@@ -211,7 +211,7 @@ function filtre_pagination_dist(
 		define('_PAGINATION_NOMBRE_LIENS_MAX', 10);
 	}
 	if (!defined('_PAGINATION_NOMBRE_LIENS_MAX_ECRIRE')) {
-		define('_PAGINATION_NOMBRE_LIENS_MAX_ECRIRE', 10);
+		define('_PAGINATION_NOMBRE_LIENS_MAX_ECRIRE', 5);
 	}
 
 
