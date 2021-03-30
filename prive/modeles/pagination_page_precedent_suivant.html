@@ -5,48 +5,45 @@
 #SET{pages,#GET{premiere}|range{#GET{derniere}}}
 #SET{sep,#ENV{separateur,' | '}}
 <B_pages>
-	[<span
-  class='label'>(#ENV{label,''})</span>][
+	[<span class="pagination-label"><span class="label">(#ENV{label})</span></span>]
+	<ul class="pagination-items pagination_page">[
 
-	(#SET{item, #ENV{page_courante}|moins{2}|mult{#ENV{pas}} })
+	  (#SET{item, #ENV{page_courante}|moins{2}|mult{#ENV{pas}} })
 
-	][<span
-	class="prev[(#ENV{page_courante}|<={1}|oui)disabled]">(#ENV{url}
-	|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}
-	|ancre_url{#ENV{ancre}}
-	|lien_ou_expose{#ENV{label_precedent,<:public:page_precedente:>},#ENV{page_courante}|<={1},'lien_pagination','',nofollow}
-	|inserer_attribut{rel,prev}
-	)[<span
-	class='sep'>(#GET*{sep})</span>]</span>]<span
-	class="pages">[<a
-	href='[(#ENV{url}|parametre_url{#ENV{debut},''})]##ENV{ancre}'
-	class='lien_pagination'
-	rel='nofollow'>(#GET{premiere}|>{1}|?{1})</a><span
-	class="tbc">[<span
-	class='sep'>(#GET*{sep})</span>]...[<span
-	class='sep'>(#GET*{sep})</span>]</span
-
-		>]<BOUCLE_pages(POUR){tableau #GET{pages}}>[
+	 ][<li class="pagination-item prev[(#ENV{page_courante}|<={1}|oui)disabled]">(#ENV{url_precedent,#ENV{url}
+		|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}}
+		|ancre_url{#ENV{ancre}}
+		|lien_ou_expose{#ENV{label_precedent,&lt;},#ENV{page_courante}|<={1}|?{span.pagination-lien},'pagination-lien lien_pagination','',nofollow}
+		|inserer_attribut{title,<:public:page_precedente:>}
+		|inserer_attribut{rel,prev}
+		)</li>]
+		[<li class="pagination-item"><a
+				href="[(#ENV{url}|parametre_url{#ENV{debut},''}|ancre_url{#ENV{ancre}})]"
+				class="pagination-lien lien_pagination"
+				rel="nofollow">(#GET{premiere}|>{1}|?{1})</a></li><li
+				class="pagination-item tbc disabled"><span class="pagination-lien">...</span></li>]
+		<BOUCLE_pages(POUR){tableau #GET{pages}}>[
 		(#SET{item, #VALEUR|moins{1}|mult{#ENV{pas}} })
-		][(#ENV{url}
+		][<li class="pagination-item[(#VALEUR|=={#ENV{page_courante}}|oui)on active]">(#ENV{url}
 		|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}
 		|ancre_url{#ENV{ancre}}
-		|lien_ou_expose{#VALEUR,#VALEUR|=={#ENV{page_courante}},lien_pagination,'',nofollow})][<span
-		class='sep'>(#VALEUR|<{#GET{derniere}}|?{#GET{sep}})</span
-		>]</BOUCLE_pages>[<span
+		|lien_ou_expose{#VALEUR,#VALEUR|=={#ENV{page_courante}}|?{span.pagination-lien},pagination-lien lien_pagination,'',nofollow})</li>]
+		</BOUCLE_pages>
 
-	class="tbc">[<span
-	class='sep'>(#GET*{sep})</span>]...[<span
-	class='sep'>(#GET*{sep})</span>]</span><a
-	href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}})]##ENV{ancre}'
-	class='lien_pagination'
-	rel='nofollow'>(#GET{derniere}|<{#ENV{nombre_pages}}|?{#ENV{nombre_pages}})</a>]</span>[
-	(#SET{item, #ENV{page_courante}|mult{#ENV{pas}} })
-	][<span
-	class="next[(#ENV{page_courante}|>={#ENV{nombre_pages}}|oui)disabled]">[<span class='sep'>(#GET*{sep})</span>](#ENV{url}
-	|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}
-	|ancre_url{#ENV{ancre}}
-	|lien_ou_expose{#ENV{label_suivant,<:public:page_suivante:>},#ENV{page_courante}|>={#ENV{nombre_pages}},'lien_pagination','',nofollow}
-	|inserer_attribut{rel,next}
-	)</span>]
+		[<li class="pagination-item tbc disabled"><span class="pagination-lien">...</span></li>
+		<li class="pagination-item"><a
+		  href="[(#ENV{url}|parametre_url{#ENV{debut},#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}}|ancre_url{#ENV{ancre}})]"
+		  class="pagination-lien lien_pagination"
+		  rel="nofollow">(#GET{derniere}|<{#ENV{nombre_pages}}|?{#ENV{nombre_pages}})</a></li>][
+
+		(#SET{item, #ENV{page_courante}|mult{#ENV{pas}} })
+
+		][<li class="pagination-item next[(#ENV{page_courante}|>={#ENV{nombre_pages}}|oui)disabled]">(#ENV{url_suivant,#ENV{url}
+		|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}}
+		|ancre_url{#ENV{ancre}}
+		|lien_ou_expose{#ENV{label_suivant,&gt;},#ENV{page_courante}|>={#ENV{nombre_pages}}|?{span.pagination-lien},'pagination-lien lien_pagination','',nofollow}
+		|inserer_attribut{title,<:public:page_suivante:>}
+		|inserer_attribut{rel,next}
+		)</li>]
+	</ul>
 </B_pages>
