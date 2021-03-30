@@ -502,9 +502,12 @@ function objet_editer_heritage($objet, $id, $id_rubrique, $statut, $champs, $con
 		//$postdate = ($GLOBALS['meta']["post_dates"] == "non" AND isset($champs['date']) AND (strtotime($champs['date']) < time()))?$champs['date']:false;
 		$postdate = false;
 		// On rajoute les infos de l'objet
-		$champs['objet'] = $objet;
-		$champs['id_objet'] = $id;
-		calculer_rubriques_if($id_rubrique, $champs, $statut, $postdate);
+		$infos = array(
+			'objet' => $objet,
+			'id_objet' => $id,
+			'statut_ancien' => $statut,
+		);
+		calculer_rubriques_if($id_rubrique, $champs, $infos, $postdate);
 	}
 }
 
