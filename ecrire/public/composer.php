@@ -309,9 +309,11 @@ if ($lang_select) lang_select();
  *     Code PHP pour inclure le squelette de la balise dynamique
  **/
 function synthetiser_balise_dynamique($nom, $args, $file, $context_compil) {
-	if (strncmp($file, "/", 1) !== 0 
+	if (
+		strncmp($file, "/", 1) !== 0 
 		// pas de lien symbolique sous Windows
-		and !(stristr(PHP_OS, 'WIN') and strpos($file, ':') !== false)) {
+		and !(stristr(PHP_OS, 'WIN') and strpos($file, ':') !== false)
+	) {
 		$file = './" . _DIR_RACINE . "' . $file;
 	}
 
