@@ -204,7 +204,13 @@ function filtre_pagination_dist(
 	}
 
 	if ($modele) {
-		$modele = '_' . $modele;
+		$pagination['type_pagination'] = $modele;
+		if (trouver_fond('pagination_'.$modele, 'modele')) {
+			$modele = '_' . $modele;
+		}
+		else {
+			$modele = '';
+		}
 	}
 
 	if (!defined('_PAGINATION_NOMBRE_LIENS_MAX')) {
@@ -248,6 +254,19 @@ function filtre_bornes_pagination_dist($courante, $nombre, $max = 10) {
 	return array($premiere, $derniere);
 }
 
+function filtre_pagination_affiche_page($type_pagination, $numero_page, $rang_item) {
+	switch ($type_pagination) {
+		case 'resultats':
+			return $rang_item + 1; // 1 11 21 31...
+		case 'naturel':
+			return $rang_item ? $rang_item : 1; // 1 10 20 30...
+		case 'rang':
+			return $rang_item; // 0 10 20 30...
+		case 'page':
+		default:
+			return $numero_page; // 1 2 3 4 5...
+	}
+}
 
 /**
  * Retourne pour une clé primaire d'objet donnée les identifiants ayant un logo
