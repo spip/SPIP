@@ -254,7 +254,7 @@ function filtre_bornes_pagination_dist($courante, $nombre, $max = 10) {
 	return array($premiere, $derniere);
 }
 
-function filtre_pagination_affiche_page($type_pagination, $numero_page, $rang_item) {
+function filtre_pagination_affiche_texte_lien_page_dist($type_pagination, $numero_page, $rang_item) {
 	if ($numero_page === 'tous') {
 		return '+';
 	}
