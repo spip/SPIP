@@ -262,8 +262,13 @@ function filtre_pagination_affiche_page($type_pagination, $numero_page, $rang_it
 			return $rang_item ? $rang_item : 1; // 1 10 20 30...
 		case 'rang':
 			return $rang_item; // 0 10 20 30...
+
 		case 'page':
+		case 'prive':
 		default:
+			if ($numero_page === '*') {
+				return '+';
+			}
 			return $numero_page; // 1 2 3 4 5...
 	}
 }
