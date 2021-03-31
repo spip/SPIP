@@ -12,14 +12,14 @@
 		[<li class="pagination-item prev[(#ENV{page_courante}|<={1}|oui)disabled]">(#ENV{url_precedent,#ENV{url}
 				|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}}
 				|ancre_url{#ENV{ancre}}
-				|lien_ou_expose{#ENV{label_precedent,#GET{type}|pagination_affiche_page{prev,#GET{item}}},#ENV{page_courante}|<={1}|?{span.pagination-lien},'pagination-lien lien_pagination','',nofollow}
+				|lien_ou_expose{#ENV{label_precedent,#GET{type}|pagination_affiche_page{prev,#GET{item}}},#ENV{page_courante}|<={1}|?{span.pagination-lien},'pagination-lien lien_pagination','',prev nofollow}
+				|inserer_attribut{aria-label,<:lien_aller_a_la_page_precedente:>}
 				|inserer_attribut{title,<:public:page_precedente:>}
-				|inserer_attribut{rel,prev}
 				)</li>]
 		]
 		[<li class="pagination-item"><a
 	      href="[(#ENV{url}|parametre_url{#ENV{debut},''}|ancre_url{#ENV{ancre}})]"
-				class="pagination-lien lien_pagination"
+				class="pagination-lien lien_pagination" aria-label="<:lien_aller_a_la_premiere_page|attribut_html:>"
 				rel="nofollow">(#GET{premiere}|>{1}|?{#GET{type}|pagination_affiche_page{1,0}})</a></li><li
 				class="pagination-item tbc disabled"><span class="pagination-lien">...</span></li>]
 
@@ -28,14 +28,16 @@
 		][<li class="pagination-item[(#VALEUR|=={#ENV{page_courante}}|oui)on active]">(#ENV{url}
 		|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}
 		|ancre_url{#ENV{ancre}}
-		|lien_ou_expose{#GET{type}|pagination_affiche_page{#VALEUR,#GET{item}},#VALEUR|=={#ENV{page_courante}}|?{span.pagination-lien},pagination-lien lien_pagination,'',nofollow})</li>]
+		|lien_ou_expose{#GET{type}|pagination_affiche_page{#VALEUR,#GET{item}},#VALEUR|=={#ENV{page_courante}}|?{span.pagination-lien},pagination-lien lien_pagination,'',nofollow}
+		|inserer_attribut{aria-label,[(#VAL{lien_aller_a_la_page_nb}|_T{#ARRAY{nb,#VALEUR}}|concat{[ \((#VALEUR|=={#ENV{page_courante}}|?{<:info_page_actuelle:>})\)]})]}
+			)</li>]
 		</BOUCLE_pages>
 
 		[<li class="pagination-item tbc disabled"><span class="pagination-lien">...</span></li>
 		#SET{item, #ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}}
 		<li class="pagination-item"><a
 		  href="[(#ENV{url}|parametre_url{#ENV{debut},#GET{item}}|ancre_url{#ENV{ancre}})]"
-		  class="pagination-lien lien_pagination"
+		  class="pagination-lien lien_pagination" aria-label="<:lien_aller_a_la_derniere_page|attribut_html:>"
 		  rel="nofollow">(#GET{derniere}|<{#ENV{nombre_pages}}|?{#GET{type}|pagination_affiche_page{#ENV{nombre_pages},#GET{item}}})</a></li>]
 
 		[(#ENV{afficher_lien_tous,0}|ou{#GET{type}|=={prive}}|oui)
@@ -43,6 +45,7 @@
 			|parametre_url{#ENV{debut},-1}
 			|ancre_url{#ENV{ancre}}
 			|lien_ou_expose{#ENV{label_tous,#GET{type}|pagination_affiche_page{tous,#GET{item}}},#ENV{page_courante}|=={0}|?{span.pagination-lien},pagination-lien lien_pagination,'',nofollow}
+			|inserer_attribut{aria-label,<:lien_tout_afficher:>}
 		  |inserer_attribut{title,<:lien_tout_afficher:>}
 		)</li>]][
 		(#ENV{afficher_lien_suivant,0}|ou{#GET{type}|=={page_precedent_suivant}})
@@ -50,9 +53,9 @@
 		[<li class="pagination-item next[(#ENV{page_courante}|>={#ENV{nombre_pages}}|oui)disabled]">(#ENV{url_suivant,#ENV{url}
 				|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}}
 				|ancre_url{#ENV{ancre}}
-				|lien_ou_expose{#ENV{label_suivant,#GET{type}|pagination_affiche_page{next,#GET{item}}},#ENV{page_courante}|>={#ENV{nombre_pages}}|?{span.pagination-lien},'pagination-lien lien_pagination','',nofollow}
+				|lien_ou_expose{#ENV{label_suivant,#GET{type}|pagination_affiche_page{next,#GET{item}}},#ENV{page_courante}|>={#ENV{nombre_pages}}|?{span.pagination-lien},'pagination-lien lien_pagination','',next nofollow}
+				|inserer_attribut{aria-label,<:lien_aller_a_la_page_suivante:>}
 				|inserer_attribut{title,<:public:page_suivante:>}
-				|inserer_attribut{rel,next}
 				)</li>]
 		]
 	</ul>
