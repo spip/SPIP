@@ -255,6 +255,16 @@ function filtre_bornes_pagination_dist($courante, $nombre, $max = 10) {
 }
 
 function filtre_pagination_affiche_page($type_pagination, $numero_page, $rang_item) {
+	if ($numero_page === 'tous') {
+		return '+';
+	}
+	if ($numero_page === 'prev') {
+		return '&lt;';
+	}
+	if ($numero_page === 'next') {
+		return '&gt;';
+	}
+
 	switch ($type_pagination) {
 		case 'resultats':
 			return $rang_item + 1; // 1 11 21 31...
@@ -266,9 +276,6 @@ function filtre_pagination_affiche_page($type_pagination, $numero_page, $rang_it
 		case 'page':
 		case 'prive':
 		default:
-			if ($numero_page === '*') {
-				return '+';
-			}
 			return $numero_page; // 1 2 3 4 5...
 	}
 }

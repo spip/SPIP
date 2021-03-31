@@ -6,7 +6,17 @@
 #SET{type,#ENV{type_pagination,page}}
 <B_pages>
 	[<span class="pagination-label"><span class="label">(#ENV{label})</span></span>]
-	<ul class="pagination-items pagination_#GET{type}">
+	<ul class="pagination-items pagination_#GET{type}">[
+		(#ENV{afficher_lien_precedent,0}|ou{#GET{type}|=={page_precedent_suivant}})
+		[(#SET{item, #ENV{page_courante}|moins{2}|mult{#ENV{pas}} })]
+		[<li class="pagination-item prev[(#ENV{page_courante}|<={1}|oui)disabled]">(#ENV{url_precedent,#ENV{url}
+				|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}}
+				|ancre_url{#ENV{ancre}}
+				|lien_ou_expose{#ENV{label_precedent,#GET{type}|pagination_affiche_page{prev,#GET{item}}},#ENV{page_courante}|<={1}|?{span.pagination-lien},'pagination-lien lien_pagination','',nofollow}
+				|inserer_attribut{title,<:public:page_precedente:>}
+				|inserer_attribut{rel,prev}
+				)</li>]
+		]
 		[<li class="pagination-item"><a
 	      href="[(#ENV{url}|parametre_url{#ENV{debut},''}|ancre_url{#ENV{ancre}})]"
 				class="pagination-lien lien_pagination"
@@ -32,8 +42,18 @@
 		[<li class="pagination-item all[(#ENV{page_courante}|=={0}|oui)on active]">(#ENV{url}
 			|parametre_url{#ENV{debut},-1}
 			|ancre_url{#ENV{ancre}}
-			|lien_ou_expose{#ENV{label_tous,#GET{type}|pagination_affiche_page{*,#GET{item}}},#ENV{page_courante}|=={0}|?{span.pagination-lien},pagination-lien lien_pagination,'',nofollow}
+			|lien_ou_expose{#ENV{label_tous,#GET{type}|pagination_affiche_page{tous,#GET{item}}},#ENV{page_courante}|=={0}|?{span.pagination-lien},pagination-lien lien_pagination,'',nofollow}
 		  |inserer_attribut{title,<:lien_tout_afficher:>}
-		)</li>]]
+		)</li>]][
+		(#ENV{afficher_lien_suivant,0}|ou{#GET{type}|=={page_precedent_suivant}})
+		[(#SET{item, #ENV{page_courante}|mult{#ENV{pas}} })]
+		[<li class="pagination-item next[(#ENV{page_courante}|>={#ENV{nombre_pages}}|oui)disabled]">(#ENV{url_suivant,#ENV{url}
+				|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}}
+				|ancre_url{#ENV{ancre}}
+				|lien_ou_expose{#ENV{label_suivant,#GET{type}|pagination_affiche_page{next,#GET{item}}},#ENV{page_courante}|>={#ENV{nombre_pages}}|?{span.pagination-lien},'pagination-lien lien_pagination','',nofollow}
+				|inserer_attribut{title,<:public:page_suivante:>}
+				|inserer_attribut{rel,next}
+				)</li>]
+		]
 	</ul>
 </B_pages>
