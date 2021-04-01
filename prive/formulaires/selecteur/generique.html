@@ -63,10 +63,17 @@ afficher la selection dans un ul class item_picked
 
 </div>
 
-[(#ENV{sortable,'non'}|=={oui}|oui)
+[(#ENV{sortable,non}|=={oui}|oui)
 <script type='text/javascript'>
-jQuery.getScript('[(#PRODUIRE{fond=formulaires/selecteur/jquery.selecteur.js}|timestamp)]',function(){
-	jQuery(function() {jQuery("ul.item_picked").sortable(); });
-});
+(function(){
+	const picked_sorter = () => { 
+		new Sortable(document.querySelector("ul.item_picked"));
+	};
+	if (typeof Sortable === "undefined") {
+		jQuery.getScript('[(#CHEMIN{prive/javascript/Sortable.min.js}|timestamp)]').done(picked_sorter);
+	} else {
+		picked_sorter();
+	}
+})();
 </script>
 ]
