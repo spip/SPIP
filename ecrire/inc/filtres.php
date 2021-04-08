@@ -418,7 +418,7 @@ function filtre_set(&$Pile, $val, $key, $continue = null) {
  * Filtre `setenv` qui enregistre une valeur dans l'environnement du squelette
  *
  * La valeur pourra être retrouvée avec `#ENV{variable}`.
- * 
+ *
  * @example
  *     `[(#CALCUL|setenv{toto})]` enregistre le résultat de `#CALCUL`
  *      dans l'environnement toto et renvoie vide.
@@ -851,10 +851,10 @@ function filtrer_entites($texte) {
 if (!function_exists('filtre_filtrer_entites_dist')) {
 	/**
 	 * Version sécurisée de filtrer_entites
-	 * 
+	 *
 	 * @uses interdire_scripts()
 	 * @uses filtrer_entites()
-	 * 
+	 *
 	 * @param string $t
 	 * @return string
 	 */
@@ -3106,7 +3106,7 @@ function url_absolue_css($css) {
  *     Permet de forcer la fonction à renvoyer la valeur null d'un index
  *     et non pas $defaut comme cela est fait naturellement par la fonction
  *     isset. On utilise alors array_key_exists() à la place de isset().
- * 
+ *
  * @return mixed
  *     Valeur trouvée ou valeur par défaut.
  **/
@@ -3928,7 +3928,7 @@ function encoder_contexte_ajax($c, $form = '', $emboite = null, $ajaxid = '') {
 		if ($len > $max_len) {
 			$cache_contextes_ajax = true;
 			spip_log("Contextes AJAX forces en fichiers !"
-				. " Cela arrive lorsque la valeur du contexte" 
+				. " Cela arrive lorsque la valeur du contexte"
 				. " depasse la longueur maximale autorisee ($max_len). Ici : $len."
 				, _LOG_AVERTISSEMENT);
 		}
@@ -3944,7 +3944,7 @@ function encoder_contexte_ajax($c, $form = '', $emboite = null, $ajaxid = '') {
 				. " ($max_len) dans 'suhosin.get.max_value_length'. Ici : $len."
 				. " Vous devriez modifier les parametres de Suhosin"
 				. " pour accepter au moins 1024 caracteres.", _LOG_AVERTISSEMENT);
-		} 
+		}
 
 	}
 
@@ -4638,11 +4638,11 @@ function appliquer_traitement_champ($texte, $champ, $table_objet = '', $env = ar
 	if (!$champ) {
 		return $texte;
 	}
-	
+
 	// On charge toujours les filtres de texte car la majorité des traitements les utilisent
 	// et il ne faut pas partir du principe que c'est déjà chargé (form ajax, etc)
 	include_spip('inc/texte');
-	
+
 	$champ = strtoupper($champ);
 	$traitements = isset($GLOBALS['table_des_traitements'][$champ]) ? $GLOBALS['table_des_traitements'][$champ] : false;
 	if (!$traitements or !is_array($traitements)) {
@@ -5257,5 +5257,55 @@ function identifiant_slug($texte, $type = '', $options = array()) {
 		$texte = substr($texte, 0, $longueur_mini);
 	}
 
+	return $texte;
+}
+
+/*
+ * Décaler le niveau des intertitres dans un texte
+ * h2->h3
+ * h3->h4
+ * etc.
+ * @param string $texte
+ * @param str|int=1 $decalage_ou_niveau :
+ *	- si int : 1 pour augmenter d'un niveau, -1 pour baisser d'un niveau
+ *	- si str de la forme `hx`, alors fait commencer les titres à hx, et descend ensuite (`hx+1`, `hx+2` etc.)
+**/
+function ajuster_intertitres($texte, $decalage_ou_niveau = 1) {
+
+	if (intval($decalage_ou_niveau)) {
+		$decalage = $decalage_ou_niveau;
+	}	elseif (substr($decalage_ou_niveau, 0, 1) === 'h' and $niveau = intval(substr($decalage_ou_niveau, 1, 1))) {
+		var_dump($niveau);
+		preg_match_all('#<h([1-6])#', $texte, $matches);
+		$base_actuel = min($matches[1]);
+		$decalage = $niveau - $base_actuel;
+	} else {
+		return $texte;
+	}
+
+
+	$niveau_max_recherche = 6-$decalage; // h5+1 -> h6, mais h6+1 ->h7, car h7 n'existe pas
+	// Si on décale vers le haut (+1), alors on commence par décaler les titres avec le plus grand chiffre, puis ceux avec le chiffres le plus bas (h5->h6, puis h4->h5, etc.)
+	// Si on décale vers le bas (-1), alors c'est l'inverse (h2->h1, puis h3->h2. etc.)
+	// Ceci pour éviter de décaler quelque chose qu'on a déjà décalé.
+	// L'ordre de décalage est stocké dans $increment
+	if ($decalage > 0) {
+		$ancien_niveau = $niveau_max_recherche;
+		$increment = -1;
+	} elseif ($decalage == 0) {
+		return $texte;
+	} else {
+		$ancien_niveau = 1;
+		$increment = +1;
+	}
+
+	while ($ancien_niveau > 0 and $ancien_niveau <= $niveau_max_recherche){
+		$nouveau_niveau = $ancien_niveau+$decalage;
+		if ($nouveau_niveau > 0) {
+			$texte = str_replace("<h$ancien_niveau", "<h$nouveau_niveau", $texte);
+			$texte = str_replace("</h$ancien_niveau", "</h$nouveau_niveau", $texte);
+		}
+		$ancien_niveau = $ancien_niveau+$increment;
+	}
 	return $texte;
 }
