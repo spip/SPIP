@@ -256,7 +256,7 @@ function filtre_bornes_pagination_dist($courante, $nombre, $max = 10) {
 
 function filtre_pagination_affiche_texte_lien_page_dist($type_pagination, $numero_page, $rang_item) {
 	if ($numero_page === 'tous') {
-		return '+';
+		return '&#8734;';
 	}
 	if ($numero_page === 'prev') {
 		return '&lt;';
