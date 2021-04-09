@@ -110,7 +110,16 @@ function public_parametrer_dist($fond, $contexte = '', $cache = '', $connect = '
 		}
 
 		// Passer le nom du cache pour produire sa destruction automatique
-		$page = $fonc(array('cache' => $cache), array($contexte));
+		try {
+			$page = $fonc(array('cache' => $cache), array($contexte));
+		} catch (Throwable $e) {
+			$msg = _T('zbug_erreur_execution_page')
+				. " $sourcefile"
+				. ' | Line ' . $e->getLine() . ' : ' . $e->getMessage();
+			$corps = "<pre>$msg</pre>";
+			$page = analyse_resultat_skel($fond, array('cache' => $cache), $corps, $sourcefile);
+			erreur_squelette($msg);
+		}
 
 		// Restituer les globales de notes telles qu'elles etaient avant l'appel
 		// Si l'inclus n'a pas affiche ses notes, tant pis (elles *doivent*

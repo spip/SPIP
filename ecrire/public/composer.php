@@ -92,17 +92,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect =
 	foreach ($skel_code as $id => $boucle) {
 		$f = $boucle->return;
 		try {
-			// @todo : a remplacer quand _PHP_MIN >= 7
-			// eval("return true; $f ;");
-			// PHP 5.x compat
-			if ($ok = @eval("return true; $f ;") === false) {
-				// Code syntaxiquement faux (critere etc mal programme')
-				$msg = _T('zbug_erreur_compilation');
-				erreur_squelette($msg, $boucle);
-				// continuer pour trouver d'autres fautes eventuelles
-				// mais prevenir que c'est mort
-				$nom = '';
-			}
+			eval("return true; $f ;");
 		} catch (\ParseError $e) {
 			// Code syntaxiquement faux (critere etc mal programme')
 			$msg = _T('zbug_erreur_compilation') . ' | Line ' . $e->getLine() . ' : ' . $e->getMessage();
