@@ -113,12 +113,13 @@ function public_parametrer_dist($fond, $contexte = '', $cache = '', $connect = '
 		try {
 			$page = $fonc(array('cache' => $cache), array($contexte));
 		} catch (Throwable $e) {
-			$msg = _T('zbug_erreur_execution_page')
-				. " $sourcefile"
-				. ' | Line ' . $e->getLine() . ' : ' . $e->getMessage();
+			$msg = _T('zbug_erreur_execution_page') . " $sourcefile";
+			$full_msg = $msg . ' | File ' . $e->getFile() . ' Line ' . $e->getLine() . ' : ' . $e->getMessage();
+			$full_msg = str_replace(_ROOT_RACINE, '[…]/', $full_msg);
 			$corps = "<pre>$msg</pre>";
 			$page = analyse_resultat_skel($fond, array('cache' => $cache), $corps, $sourcefile);
-			erreur_squelette($msg);
+			erreur_squelette($full_msg);
+			unset($msg, $full_msg, $corps);
 		}
 
 		// Restituer les globales de notes telles qu'elles etaient avant l'appel
