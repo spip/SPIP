@@ -20,8 +20,8 @@
 		[<li class="pagination-item"><a
 	      href="[(#ENV{url}|parametre_url{#ENV{debut},''}|ancre_url{#ENV{ancre}})]"
 				class="pagination-lien lien_pagination" aria-label="<:lien_aller_a_la_premiere_page|attribut_html:>"
-				rel="nofollow">(#GET{premiere}|>{1}|?{#GET{type}|pagination_affiche_texte_lien_page{1,0}})</a></li><li
-				class="pagination-item tbc disabled"><span class="pagination-lien">...</span></li>]
+				rel="nofollow">(#GET{premiere}|>{1}|?{#GET{type}|pagination_affiche_texte_lien_page{1,0}})</a></li>[(#GET{premiere}|>{2}|oui)<li
+				class="pagination-item tbc disabled"><span class="pagination-lien">…</span></li>]]
 
 		<BOUCLE_pages(POUR){tableau #GET{pages}}>[
 		(#SET{item, #VALEUR|moins{1}|mult{#ENV{pas}} })
@@ -33,7 +33,7 @@
 			)</li>]
 		</BOUCLE_pages>
 
-		[<li class="pagination-item tbc disabled"><span class="pagination-lien">...</span></li>
+		[[(#GET{derniere}|<{#ENV{nombre_pages}|moins{1}}|oui)<li class="pagination-item tbc disabled"><span class="pagination-lien">…</span></li>]
 		#SET{item, #ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}}
 		<li class="pagination-item"><a
 		  href="[(#ENV{url}|parametre_url{#ENV{debut},#GET{item}}|ancre_url{#ENV{ancre}})]"
