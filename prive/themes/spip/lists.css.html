@@ -133,15 +133,15 @@
 .pagination .pagination-item {  margin: 0; flex-basis: 2em; display: flex;align-items: center; font-size: 0.9em}
 .pagination .pagination_precedent_suivant .pagination-item { flex-basis: auto;}
 .pagination .pagination-item + .pagination-item {  margin-left: 0.15em }
-.pagination .pagination-lien { display:block; flex-basis: 100%; background: #f0f0f0; border:1px solid #ccc; text-decoration: none; padding:0.15em .30em; border-radius:.15em;text-align: center}
-.pagination .on .pagination-lien,
-.pagination a.pagination-lien:hover,
-.pagination a.pagination-lien:focus,
-.pagination a.pagination-lien:active { background: #ENV{foncee}; border-color: #ENV{foncee}; color: #fff; }
-.pagination .on .pagination-lien {font-weight: bold;}
+.pagination .pagination-item-label { display:block; flex-basis: 100%; background: #f0f0f0; border:1px solid #ccc; text-decoration: none; padding:0.15em .30em; border-radius:.15em;text-align: center}
+.pagination .on .pagination-item-label,
+.pagination a.pagination-item-label:hover,
+.pagination a.pagination-item-label:focus,
+.pagination a.pagination-item-label:active { background: #ENV{foncee}; border-color: #ENV{foncee}; color: #fff; }
+.pagination .on .pagination-item-label {font-weight: bold;}
 .pagination .pagination_precedent_suivant .disabled {visibility: hidden}
 .pagination .pagination-item.disabled {}
-.pagination .pagination-item.disabled .pagination-lien {color:#aaa; font-weight: normal;border-color: #ddd;}
+.pagination .pagination-item.disabled .pagination-item-label {color:#aaa; font-weight: normal;border-color: #ddd;}
 
 
 .pagination + .tri, .tri + .pagination {border-top:0;margin-top:0;}

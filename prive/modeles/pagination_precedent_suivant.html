@@ -8,7 +8,7 @@
 ][<li class="pagination-item prev[(#ENV{page_courante}|<={1}|oui)disabled]">(#ENV{url_precedent,#ENV{url}
 |parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}}
 |ancre_url{#ENV{ancre}}
-|lien_ou_expose{#ENV{label_precedent,<:public:page_precedente:>},#ENV{page_courante}|<={1}|?{span.pagination-lien},'pagination-lien lien_pagination','',nofollow}
+|lien_ou_expose{#ENV{label_precedent,<:public:page_precedente:>},#ENV{page_courante}|<={1}|?{span.pagination-item-label},'pagination-item-label lien_pagination','',nofollow}
 |inserer_attribut{rel,prev}
 )</li>][
 
@@ -17,7 +17,7 @@
 ][<li class="pagination-item next[(#ENV{page_courante}|>={#ENV{nombre_pages}}|oui)disabled]">(#ENV{url_suivant,#ENV{url}
 |parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}}
 |ancre_url{#ENV{ancre}}
-|lien_ou_expose{#ENV{label_suivant,<:public:page_suivante:>},#ENV{page_courante}|>={#ENV{nombre_pages}}|?{span.pagination-lien},'pagination-lien lien_pagination','',nofollow}
+|lien_ou_expose{#ENV{label_suivant,<:public:page_suivante:>},#ENV{page_courante}|>={#ENV{nombre_pages}}|?{span.pagination-item-label},'pagination-item-label lien_pagination','',nofollow}
 |inserer_attribut{rel,next}
 )</li>]
 </ul>
