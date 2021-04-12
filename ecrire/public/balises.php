@@ -2538,18 +2538,31 @@ function balise_ACTION_FORMULAIRE($p) {
  * Compile la balise `#BOUTON_ACTION` qui génère un bouton d'action en post, ajaxable
  *
  * Cette balise s'utilise à la place des liens `action_auteur`, sous la forme
+ * `#BOUTON_ACTION{libelle[,url[,class[,confirm[,title[,callback]]]]]}`
  *
- * - `#BOUTON_ACTION{libelle,url}`
- * - ou `#BOUTON_ACTION{libelle,url,ajax}` pour que l'action soit ajax comme un lien `class='ajax'`
- * - ou `#BOUTON_ACTION{libelle,url,ajax,message_confirmation}` pour utiliser un message de confirmation
- * - ou encore `#BOUTON_ACTION{libelle[,url[,ajax[,message_confirmation[,title[,callback]]]]]}`
+ * - libelle  : Texte du bouton
+ * - url      : URL d’action sécurisée
+ * - class    : Soit directement une classe à ajouter au formulaire,
+ *              Soit un tableau associatif qui permet de préciser par élément :
+ *              - formulaire : classes du formulaire, telles que `ajax`, `ajax`, `nocache`…
+ *              - bouton     : classes du bouton
+ * - confirm  : message de confirmation oui/non avant l'action
+ * - title    : attribut title à ajouter au bouton
+ * - callback : callback js a appeler lors de l'évènement action et avant execution de l'action
+ *               (ou après confirmation éventuelle si $confirm est non vide).
+ *               Si la callback renvoie false, elle annule le déclenchement de l'action.
  *
  * @balise
+ * @uses bouton_action()
  * @link https://www.spip.net/4583
  * @example
  *     ```
- *     [(#AUTORISER{reparer,base})
- *        [(#BOUTON_ACTION{<:bouton_tenter_recuperation:>,#URL_ECRIRE{base_repair}})]
+ *     [(#AUTORISER{reparer,base}|oui)
+ *        [(#BOUTON_ACTION{
+ *            <:bouton_tenter_recuperation:>,
+ *            #URL_ECRIRE{base_repair},
+ *            #ARRAY{formulaire,ajax, bouton,btn_large},
+ *        })]
  *     ]
  *     ```
  *

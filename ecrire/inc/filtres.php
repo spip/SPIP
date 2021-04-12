@@ -4171,8 +4171,9 @@ function singulier_ou_pluriel($nb, $chaine_un, $chaine_plusieurs, $var = 'nb', $
 
 
 /**
- * Fonction de base pour une icone dans un squelette
- * structure html : `<span><a><img><b>texte</b></span>`
+ * Fonction de base pour une icone dans un squelette.
+ * Il peut s'agir soit d'un simple lien, structure html : `<span><a><img><b>texte</b></span>`,
+ * soit d'un bouton d'action, structure identique au retour de `#BOUTON_ACTION`.
  *
  * @param string $type
  *  'lien' ou 'bouton'
@@ -4184,62 +4185,91 @@ function singulier_ou_pluriel($nb, $chaine_un, $chaine_plusieurs, $var = 'nb', $
  *  objet avec ou sans son extension et sa taille (article, article-24, article-24.png)
  * @param string $fonction
  *  new/del/edit
- * @param string $class
- *  classe supplementaire (horizontale, verticale, ajax ...)
+ * @param string|array $class
+ *  Classe supplementaire (horizontale, verticale, ajax ...),
+ *  Pour les boutons il peut également s'agir d'un tableau pour préciser les classes par élément :
+ *  - bouton     : classes du bouton
+ *  - formulaire : classes du formulaire
  * @param string $javascript
- *  "onclick='...'" par exemple
+ *  code javascript tel que "onclick='...'" par exemple
+ *  ou texte du message de confirmation s'il s'agit d'un bouton
  * @return string
  */
-function prepare_icone_base($type, $lien, $texte, $fond, $fonction = "", $class = "", $javascript = "") {
-	if (in_array($fonction, array("del", "supprimer.gif"))) {
-		$class .= ' danger';
-	} elseif ($fonction == "rien.gif") {
-		$fonction = "";
-	} elseif ($fonction == "delsafe") {
-		$fonction = "del";
+function prepare_icone_base($type, $lien, $texte, $fond, $fonction = '', $class = '', $javascript = '') {
+
+	// Classes : array pour les boutons, string pour les liens
+	$class_lien = $class_bouton = $class;
+	if (is_string($class_bouton)) {
+		$class_bouton = ['formulaire' => $class_bouton];
+	} elseif (is_array($class_lien)) {
+		$class_lien = implode(' ', array_values($class_lien));
+	}
+	// Évitons-nous de tester les clés partout par la suite
+	$class_bouton['formulaire'] = $class_bouton['formulaire'] ?? '';
+	$class_bouton['bouton'] = $class_bouton['bouton'] ?? '';
+
+	// Normaliser la fonction et ajuster la classe en fonction
+	if (in_array($fonction, ['del', 'supprimer.gif'])) {
+		$class_lien .= ' danger';
+		$class_bouton['bouton'] .= ' btn_danger';
+	} elseif ($fonction == 'rien.gif') {
+		$fonction = '';
+	} elseif ($fonction == 'delsafe') {
+		$fonction = 'del';
 	}
 
 	$fond_origine = $fond;
-	// remappage des icone : article-24.png+new => article-new-24.png
+	// Remappage des icone : article-24.png+new => article-new-24.png
 	if ($icone_renommer = charger_fonction('icone_renommer', 'inc', true)) {
 		list($fond, $fonction) = $icone_renommer($fond, $fonction);
 	}
 
-	// ajouter le type d'objet dans la class de l'icone
-	$class .= " " . substr(basename($fond), 0, -4);
+	// Ajouter le type d'objet dans la classe
+	$objet_type = substr(basename($fond), 0, -4);
+	$class_lien .= " $objet_type";
+	$class_bouton['bouton'] .= " $objet_type";
 
+	// Texte
 	$alt = attribut_html($texte);
 	$title = " title=\"$alt\""; // est-ce pertinent de doubler le alt par un title ?
 
-	$ajax = "";
-	if (strpos($class, "ajax") !== false) {
-		$ajax = "ajax";
-		if (strpos($class, "preload") !== false) {
-			$ajax .= " preload";
+	// Liens : préparer les classes ajax
+	$ajax = '';
+	if ($type === 'lien') {
+		if (strpos($class_lien, 'ajax') !== false) {
+			$ajax = 'ajax';
+			if (strpos($class_lien, 'preload') !== false) {
+				$ajax .= ' preload';
+			}
+			if (strpos($class_lien, 'nocache') !== false) {
+				$ajax .= ' nocache';
+			}
+			$ajax = " class='$ajax'";
 		}
-		if (strpos($class, "nocache") !== false) {
-			$ajax .= " nocache";
-		}
-		$ajax = " class='$ajax'";
 	}
 
+	// Repérer la taille et l'ajouter dans la classe
 	$size = 24;
 	if (preg_match("/-([0-9]{1,3})[.](gif|png|svg)$/i", $fond, $match)
 	  or preg_match("/-([0-9]{1,3})([.](gif|png|svg))?$/i", $fond_origine, $match)) {
 		$size = $match[1];
 	}
+	$class_lien .= " s$size";
+	$class_bouton['bouton'] .= " s$size";
 
+	// Icône
 	$icone = http_img_pack($fond, $alt, "width='$size' height='$size'");
 	$icone = "<span class=\"icone-image".($fonction ? " icone-fonction icone-fonction-$fonction" : "") . "\">$icone</span>";
 
+	// Markup final
 	if ($type == 'lien') {
-		return "<span class='icone s$size $class'>"
+		return "<span class='icone $class_lien'>"
 		. "<a href='$lien'$title$ajax$javascript>"
 		. $icone
 		. "<b>$texte</b>"
 		. "</a></span>\n";
 	} else {
-		return bouton_action("$icone<b>$texte</b>", $lien, "icone s$size $class", $javascript, $alt);
+		return bouton_action("$icone $texte", $lien, $class_bouton, $javascript, $alt);
 	}
 }
 
@@ -4356,7 +4386,7 @@ function filtre_icone_horizontale_dist($lien, $texte, $fond, $fonction = "", $cl
  * @example
  *     ```
  *     [(#URL_ACTION_AUTEUR{supprimer_mot, #ID_MOT, #URL_ECRIRE{groupe_mots,id_groupe=#ID_GROUPE}}
- *         |bouton_action_horizontal{<:mots:info_supprimer_mot:>,mot-24.png,del})]
+ *         |bouton_action_horizontal{<:mots:info_supprimer_mot:>,mot-24.png,del,#ARRAY{bouton,btn_large}})]
  *     ```
  *
  * @param string $lien
@@ -4368,14 +4398,17 @@ function filtre_icone_horizontale_dist($lien, $texte, $fond, $fonction = "", $cl
  * @param string $fonction
  *     Fonction du bouton (`edit`, `new`, `del`)
  * @param string $class
- *     Classe CSS à ajouter
+ *     Soit directement une classe à ajouter au formulaire,
+ *     Soit un tableau associatif qui permet de préciser par élément :
+ *     - formulaire : classes du formulaire, telles que `ajax`, `ajax`, `nocache`…
+ *     - bouton     : classes du bouton
  * @param string $confirm
  *     Message de confirmation à ajouter en javascript sur le bouton
  * @return string
  *     Code HTML du lien
  **/
 function filtre_bouton_action_horizontal_dist($lien, $texte, $fond, $fonction = "", $class = "", $confirm = "") {
-	return prepare_icone_base('bouton', $lien, $texte, $fond, $fonction, "horizontale $class", $confirm);
+	return prepare_icone_base('bouton', $lien, $texte, $fond, $fonction, $class, $confirm);
 }
 
 /**
@@ -4476,21 +4509,37 @@ function bando_images_background() {
 }
 
 /**
- * Generer un bouton_action
- * utilise par #BOUTON_ACTION
+ * Générer un bouton_action
+ * utilisé par #BOUTON_ACTION
  *
  * @param string $libelle
+ *   Libellé du bouton
  * @param string $url
- * @param string $class
+ *   URL d'action sécurisée, généralement obtenue avec generer_action_auteur()
+ * @param array|string $class
+ *   Soit directement une classe à ajouter au formulaire,
+ *   Soit un tableau associatif qui permet de préciser par élément :
+ *   - formulaire : classes du formulaire, telles que `ajax`, `preload` et `nocache`
+ *   - bouton     : classes du bouton
  * @param string $confirm
- *   message de confirmation oui/non avant l'action
+ *   Message de confirmation oui/non avant l'action
  * @param string $title
+ *   Attribut title à ajouter au bouton
  * @param string $callback
- *   callback js a appeler lors de l'evenement action (apres confirmation eventuelle si $confirm est non vide)
- *   et avant execution de l'action. Si la callback renvoie false, elle annule le declenchement de l'action
+ *   Callback js a appeler lors de l'évènement action et avant execution de l'action
+ *   (ou après confirmation éventuelle si $confirm est non vide).
+ *   Si la callback renvoie false, elle annule le déclenchement de l'action.
  * @return string
  */
-function bouton_action($libelle, $url, $class = "", $confirm = "", $title = "", $callback = "") {
+function bouton_action($libelle, $url, $class = '', $confirm = '', $title = '', $callback = '') {
+
+	// Classes
+	if (is_string($class)) {
+		$class = ['formulaire' => $class];
+	}
+	$class_form = $class['formulaire'] ?? '';
+	$class_btn  = 'submit' . ($class['bouton'] ? ' '.$class['bouton'] : '');
+
 	if ($confirm) {
 		$confirm = "confirm(\"" . attribut_html($confirm) . "\")";
 		if ($callback) {
@@ -4500,10 +4549,10 @@ function bouton_action($libelle, $url, $class = "", $confirm = "", $title = "", 
 		}
 	}
 	$onclick = $callback ? " onclick='return " . addcslashes($callback, "'") . "'" : "";
-	$title = $title ? " title='$title'" : "";
+	$title = $title ? " title='$title'" : '';
 
-	return "<form class='bouton_action_post $class' method='post' action='$url'><div>" . form_hidden($url)
-	. "<button type='submit' class='submit'$title$onclick>$libelle</button></div></form>";
+	return "<form class='bouton_action_post $class_form' method='post' action='$url'><div>" . form_hidden($url)
+	. "<button type='submit' class='$class_btn'$title$onclick>$libelle</button></div></form>";
 }
 
 /**
