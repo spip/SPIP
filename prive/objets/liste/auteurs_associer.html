@@ -54,7 +54,7 @@ a mis a jour la valeur avec la page reelle]
 			<td class='nom[ (#NOM|non)vide]'[(#LOGO_AUTEUR|non)colspan='2']><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#RANG). ][(#NOM|sinon{<:texte_vide:>})]</a></td>
 			[<td class='logo'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]" style="background-image:url\((#LOGO_AUTEUR|image_passe_partout{30,30}|extraire_attribut{src}))"></a></td>]
 			<td class='email'>[<a href='mailto:(#EMAIL)'>[(#EMAIL|couper{30})]</a>]</td>
-			<td class='action'><button type="submit" class="ajouter mini" name="ajouter_lien[auteur-#ID_AUTEUR-#OBJET-#ID_OBJET]" value="+"><:lien_ajouter_auteur:></button></td>
+			<td class='action'><button type="submit" class="ajouter btn_mini" name="ajouter_lien[auteur-#ID_AUTEUR-#OBJET-#ID_OBJET]" value="+"><:lien_ajouter_auteur:></button></td>
 		</tr>
 	</BOUCLE_liste_aut>
 	</tbody>

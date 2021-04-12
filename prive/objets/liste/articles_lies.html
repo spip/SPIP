@@ -33,13 +33,13 @@
 				<a href="[(#URL_ECRIRE{articles_edit,id_article=#ID_ARTICLE})]" title="<:icone_modifier_article|attribut_html:>">#ID_ARTICLE</a>,
 				#ID_ARTICLE
 			})]</td>
-			<td class='action'><button type="submit" class="supprimer link mini" name="supprimer_lien[article-#ID_ARTICLE-#OBJET-#ID_OBJET]" value="X"><:lien_retirer_article:></button></td>
+			<td class='action'><button type="submit" class="supprimer btn_link btn_mini" name="supprimer_lien[article-#ID_ARTICLE-#OBJET-#ID_OBJET]" value="X"><:lien_retirer_article:></button></td>
 		</tr>
 	</BOUCLE_liste_rub>
 	</tbody>
 </table>
 [<nav class='pagination'>(#PAGINATION{prive})</nav>]
-[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="supprimer link mini" name="supprimer_lien\[article-*-#OBJET-#ID_OBJET\]" value="X"><:lien_retirer_toutes_articles:></button></div>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="supprimer btn_link btn_mini" name="supprimer_lien\[article-*-#OBJET-#ID_OBJET\]" value="X"><:lien_retirer_toutes_articles:></button></div>]
 </div>
 </B_liste_rub>
 <div class="liste-objets liste-objets-lies articles caption-wrap">

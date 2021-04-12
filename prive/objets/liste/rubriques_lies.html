@@ -33,13 +33,13 @@
 				<a href="[(#URL_ECRIRE{rubrique_edit,id_rubrique=#ID_RUBRIQUE})]" title="<:icone_modifier_rubrique|attribut_html:>">#ID_RUBRIQUE</a>,
 				#ID_RUBRIQUE
 			})]</td>
-			<td class='action'><button type="submit" class="supprimer link mini" name="supprimer_lien[rubrique-#ID_RUBRIQUE-#OBJET-#ID_OBJET]" value="X"><:lien_retirer_rubrique:></button></td>
+			<td class='action'><button type="submit" class="supprimer btn_link btn_mini" name="supprimer_lien[rubrique-#ID_RUBRIQUE-#OBJET-#ID_OBJET]" value="X"><:lien_retirer_rubrique:></button></td>
 		</tr>
 	</BOUCLE_liste_rub>
 	</tbody>
 </table>
 [<nav class='pagination'>(#PAGINATION{prive})</nav>]
-[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="supprimer link mini" name="supprimer_lien\[rubrique-*-#OBJET-#ID_OBJET\]" value="X"><:lien_retirer_toutes_rubriques:></button></div>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="supprimer btn_link btn_mini" name="supprimer_lien\[rubrique-*-#OBJET-#ID_OBJET\]" value="X"><:lien_retirer_toutes_rubriques:></button></div>]
 </div>
 </B_liste_rub>
 <div class="liste-objets liste-objets-lies rubriques caption-wrap">

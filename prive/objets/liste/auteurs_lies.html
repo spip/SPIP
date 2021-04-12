@@ -51,7 +51,7 @@ a mis a jour la valeur avec la page reelle]
 			<td class='nombre'>[(#COMPTEUR_ARTICLES|singulier_ou_pluriel{info_1_article,info_nb_articles})][<br /><span>(#PIPELINE{'compter_contributions_auteur',#ARRAY{args,#ARRAY{id_auteur,#ID_AUTEUR},data,#ARRAY{}}}|implode{'<br />'})</span>]</td>
 			<td class='action'>
 				[(#ENV{editable}|oui)
-				<button type="submit" class="supprimer link mini" name="supprimer_lien\[auteur-#ID_AUTEUR-#ENV{objet}-#ENV{id_objet}\]" value="X"><:lien_retirer_auteur:></button>
+				<button type="submit" class="supprimer btn_link btn_mini" name="supprimer_lien\[auteur-#ID_AUTEUR-#ENV{objet}-#ENV{id_objet}\]" value="X"><:lien_retirer_auteur:></button>
 				]
 			</td>
 		</tr>
@@ -59,7 +59,7 @@ a mis a jour la valeur avec la page reelle]
 	</tbody>
 </table>
 [<nav class='pagination'>(#PAGINATION{prive})</nav>]
-[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="supprimer link mini" name="supprimer_lien\[auteur-*-#OBJET-#ID_OBJET\]" value="X"><:lien_retirer_tous_auteurs:></button></div>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="supprimer btn_link btn_mini" name="supprimer_lien\[auteur-*-#OBJET-#ID_OBJET\]" value="X"><:lien_retirer_tous_auteurs:></button></div>]
 </div>
 </B_liste_aut>
 <div class="liste-objets liste-objets-lies auteurs caption-wrap">

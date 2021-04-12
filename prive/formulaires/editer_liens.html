@@ -24,7 +24,7 @@
 							|icone_horizontale{[(#ENV{objet_source}|objet_info{texte_creer_associer}|_T)],#ENV{objet_source},new,right})]
 				]
 				<div class="toggle_box_link">
-					<a class="bouton fermer mini link" href="#"
+					<a class="fermer btn btn_mini" href="#"
 						onclick="jQuery(this).parents('div.selecteur').hide('fast').siblings('.toggle_box_link').show();jQuery('#visible-#ENV{id}').attr('value',0);return false;"
 						><:bouton_fermer:></a>
 				</div>
@@ -33,7 +33,7 @@
 				</p>
 			</div>
 			<div class="toggle_box_link" style="display:none;">
-					<a class="bouton ajouter mini principal" href="#"
+					<a class="ajouter btn btn_mini" href="#"
 						onclick="jQuery(this).parents('div.toggle_box_link').hide('fast').siblings('.selecteur').show('fast');jQuery('#visible-#ENV{id}').attr('value',1);return false;"
 						>[(#ENV{objet_source}|objet_info{texte_ajouter}|_T)]</a>
 			</div>
@@ -41,7 +41,7 @@
 	[(#ENV{editable})
 		[(#ENV{visible,0}|non)
 		<div class="toggle_box_link">
-			<button type="submit" class="ajouter mini principal" name="visible" value="1">[(#ENV{objet_source}|objet_info{texte_ajouter}|_T)]</button>
+			<button type="submit" class="ajouter btn_mini" name="visible" value="1">[(#ENV{objet_source}|objet_info{texte_ajouter}|_T)]</button>
 		</div>
 		]
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
