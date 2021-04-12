@@ -2,63 +2,106 @@
 
 	Ce squelette définit les styles des boutons de l'espace privé.
 
-	- Liens boutons : <a class="bouton">
+	- Liens boutons : <a class="btn">
 	- Boutons d'action : \#BOUTON_ACTION
 	- Boutons de formulaires : <input class="submit"> et <button>
 
 	Organisation du fichier :
 
+	0. Variables
 	1. Base commune à tous les boutons
 	2. Variantes génériques
-	3. Variantes icônes
 	4. Liens boutons
 	5. Boutons de formulaires
 	6. Boutons d'action
 	7. Groupes de boutons
-	8. Exceptions, rustines et divers
+	8. Boutons avec icônes
+	9. Rustines, dépéractions
 
-<style>/**]
-#CACHE{3600*100,cache-client}
+]#CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=utf-8}
 #HTTP_HEADER{Vary: Accept-Encoding}
+[(#REM)<style>]
 
-#SET{couleurs, #ARRAY{
-	base,       "hsl(0, 0%, 90%)",
-	principal,  #ENV{foncee},
-	secondaire, #ENV{claire},
-	survol,     #ENV{foncee},
-	actif,      ##ENV{foncee}|couleur_luminance{0.95},
-	ombre,      "hsla\(0, 0%, 0%, 0.1\)",
-}}
+/**
+ * ============
+ * 0. Variables
+ * ============
+ */
 
-[(#REM) Tailles et valeurs associées ]
-#SET{tailles, #ARRAY{
-	mini, #ARRAY{
-		font-size, 0.75em,
-		padding,   #LISTE{0.25em, 0.66em},
-		margin,    0.25em,
-		icon-size, 0.9em,
-		gutter,    0.33em,
-	},
-	normal, #ARRAY{
-		font-size, 0.85em,
-		padding,   #LISTE{0.5em, 1em},
-		margin,    0.25em,
-		icon-size, 1em,
-		gutter,    0.5em,
-	},
-	large, #ARRAY{
-		font-size, 1em,
-		padding,   #LISTE{0.66em, 1.5em},
-		margin,    0.25em,
-		icon-size, 1.25em,
-		gutter,    0.5em,
-	},
-}}
-
-#SET{border-radius, 0.25em}
-#SET{icones, #LISTE{add, del, supprimer, ajouter, config, edit, import, export, new, fermer, ouvrir, ok, actualiser}}
-[(#REM)*/]
+:root {
+	/* couleurs partagées */
+	--spip-btn-color-white:                var(--spip-color-white);
+	--spip-btn-color-black:                var(--spip-color-gray-darker);
+	--spip-btn-color-border-accent:       hsla(0, 0%, 0%, 0.2);
+	--spip-btn-color-focus:                hsla(var(--spip-color-theme--h), calc(var(--spip-color-theme--s) * 3), var(--spip-color-theme--l), 0.5);
+	/* couleurs bouton par défaut */
+	--spip-btn-color-main-bg:              hsl(var(--spip-color-theme--h), var(--spip-color-theme--s), calc(var(--spip-color-theme--l) * 0.9));
+	--spip-btn-color-main-border:          var(--spip-btn-color-main-bg);
+	--spip-btn-color-main-text:            var(--spip-btn-color-white);
+	--spip-btn-color-main-hover-bg:        hsl(var(--spip-color-theme--h), var(--spip-color-theme--s), calc(var(--spip-color-theme--l) * 0.75));
+	--spip-btn-color-main-hover-border:    var(--spip-btn-color-main-hover-bg);
+	--spip-btn-color-main-hover-text:      var(--spip-btn-color-main-text);
+	--spip-btn-color-main-active-bg:       hsl(var(--spip-color-theme--h), var(--spip-color-theme--s), calc(var(--spip-color-theme--l) * 0.6));
+	--spip-btn-color-main-active-border:   var(--spip-btn-color-main-active-bg);
+	--spip-btn-color-main-active-text:     var(--spip-btn-color-main-text);
+	/* couleurs bouton secondaire */
+	--spip-btn-color-second-bg:            transparent;
+	--spip-btn-color-second-border:        hsl(var(--spip-color-theme--h), var(--spip-color-theme--s), calc(var(--spip-color-theme--l) * 0.95));
+	--spip-btn-color-second-text:          hsl(var(--spip-color-theme--h), var(--spip-color-theme--s), calc(var(--spip-color-theme--l) * 0.85));
+	--spip-btn-color-second-hover-bg:      var(--spip-btn-color-main-hover-bg);
+	--spip-btn-color-second-hover-border:  var(--spip-btn-color-main-hover-border);
+	--spip-btn-color-second-hover-text:    var(--spip-btn-color-main-hover-text);
+	--spip-btn-color-second-active-bg:     var(--spip-btn-color-main-active-bg);
+	--spip-btn-color-second-active-border: var(--spip-btn-color-main-active-border);
+	--spip-btn-color-second-active-text:   var(--spip-btn-color-main-active-text);
+	/* couleurs bouton lien */
+	--spip-btn-color-link-text:            var(--spip-btn-color-black);
+	--spip-btn-color-link-hover-text:      var(--spip-color-theme-dark);
+	/* couleurs boutons inverse */
+	--spip-btn-color-inverse-bg:           var(--spip-btn-color-white);
+	--spip-btn-color-inverse-border:       var(--spip-btn-color-inverse-bg);
+	--spip-btn-color-inverse-text:         var(--spip-btn-color-black);
+	--spip-btn-color-inverse-hover-bg:     var(--spip-color-gray-lightest);
+	--spip-btn-color-inverse-hover-border: var(--spip-btn-color-inverse-hover-bg);
+	--spip-btn-color-inverse-hover-text:   var(--spip-btn-color-inverse-text);
+	--spip-btn-color-inverse-active-bg:    var(--spip-color-gray-lighter);
+	--spip-btn-color-inverse-active-border:var(--spip-btn-color-inverse-active-bg);
+	--spip-btn-color-inverse-active-text:  var(--spip-btn-color-inverse-text);
+	/* couleur bouton actif (un seul état) */
+	--spip-btn-color-on-bg:                var(--spip-btn-color-main-hover-bg);
+	--spip-btn-color-on-border:            var(--spip-btn-color-main-hover-border);
+	--spip-btn-color-on-text:              var(--spip-btn-color-main-hover-text);
+	/* couleurs boutons inactif */
+	--spip-btn-color-off-bg:               var(--spip-color-gray-lighter);
+	--spip-btn-color-off-border:           var(--spip-btn-color-off-bg);
+	--spip-btn-color-off-text:             var(--spip-btn-color-black);
+	--spip-btn-color-off-hover-bg:         var(--spip-color-gray-light);
+	--spip-btn-color-off-hover-border:     var(--spip-btn-color-off-hover-bg);
+	--spip-btn-color-off-hover-text:       var(--spip-btn-color-off-text);
+	--spip-btn-color-off-active-bg:        var(--spip-color-gray);
+	--spip-btn-color-off-active-border:    var(--spip-btn-color-off-active-bg);
+	--spip-btn-color-off-active-text:      var(--spip-btn-color-off-text);
+	/* taille normale */
+	--spip-btn-font-size:           0.9em;
+	--spip-btn-padding-x:           0.5em;
+	--spip-btn-padding-y:           1em;
+	--spip-btn-margin:              0.25em;
+	--spip-btn-border-radius:       0.25em;
+	--spip-btn-gutter:              0.5em;
+	/* taille mini */
+	--spip-btn-font-size-mini:      0.75em;
+	--spip-btn-padding-x-mini:      0.25em;
+	--spip-btn-padding-y-mini:      0.66em;
+	--spip-btn-margin-mini:         var(--spip-btn-margin);
+	--spip-btn-border-radius-mini:  var(--spip-btn-border-radius);
+	/* taille large */
+	--spip-btn-font-size-large:     1em;
+	--spip-btn-padding-x-large:     0.66em;
+	--spip-btn-padding-y-large:     1.5em;
+	--spip-btn-margin-large:        var(--spip-btn-margin);
+	--spip-btn-border-radius-large: 0.33em;
+}
 
 /**
  * ==================================
@@ -66,26 +109,13 @@
  * ==================================
  */
 
-.bouton,
-.bouton_action_post,
-input.submit,
-input.reset,
-button {
-	border-radius: #GET{border-radius};
-	text-decoration: none;
-	margin-bottom: #GET{tailles/normal/margin};
-	vertical-align: middle;
-	text-align: #ENV{left};
-	cursor: pointer;
-}
-.bouton,
-.bouton_action_post .submit,
+.btn,
 input.submit,
 input.reset,
 button {
 	position: relative;
 	-webkit-box-sizing: border-box;
-	        box-sizing: border-box; /* Ignorer le padding pour les dimensions */
+	        box-sizing: border-box;
 	display: -webkit-inline-box;
 	display: -ms-inline-flexbox;
 	display: inline-flex;
@@ -95,15 +125,17 @@ button {
 	-webkit-box-align: center;
 	   -ms-flex-align: center;
 	      align-items: center;
-	vertical-align: middle; /* Répété juste pour .bouton_action_post */
 	text-align: center;
-	min-height: calc\(\(#GET{tailles/normal/padding/0} * 2\) + [(#GET{tailles/normal/icon-size})] + 2px\); /* Pour hauteur identique avec ou sans icone = padding + icône + bordure */
-	padding: [(#GET{tailles/normal/padding}|implode{' '})];
-	border: 1px solid transparent; /* Pour garder les mêmes dimensions que ceux avec bordure */
-	background-color: #GET{couleurs/base};
-	color: #666;
-	color: hsla(0, 0%, 0%, 0.6); /* Pour mieux s'adapter aux couleurs de fond */
-	font-size: [(#GET{tailles/normal/font-size})];
+	vertical-align: middle;
+	padding: var(--spip-btn-padding-x) var(--spip-btn-padding-y);
+	margin-bottom: var(--spip-btn-margin);
+	background-color: var(--spip-btn-color-main-bg);
+	color: var(--spip-btn-color-main-text);
+	border: 1px solid var(--spip-btn-color-main-border);
+	border-bottom-color: var(--spip-btn-color-border-accent);
+	border-radius: var(--spip-btn-border-radius);
+	text-decoration: none;
+	font-size: var(--spip-btn-font-size);
 	font-family: inherit;
 	font-weight: 500;
 	line-height: 1.2;
@@ -112,52 +144,46 @@ button {
      -moz-user-select: none;
       -ms-user-select: none;
 	        user-select: none;
-	transition: all 0.2s, transform 0.05s;
+	transition: all 0.1s;
+}
+a.btn,
+input.submit,
+input.reset,
+button {
+	cursor: pointer;
 }
 
-/* Survol, focus & active */
-.bouton:hover,
-.bouton:focus,
-.bouton_action_post .submit:hover,
-.bouton_action_post .submit:focus,
+/* Survol */
+.btn:hover,
+.btn:focus,
 input.submit:hover,
 input.submit:focus,
 input.reset:hover,
 input.reset:focus,
-button:hover,
-button:focus {
-	background-color: #GET{couleurs/survol};
-	color: white;
-	-webkit-box-shadow: 0 0 0.75em[ (#GET{couleurs/ombre})], 0 0 0.15em[ (#GET{couleurs/ombre})];
-	        box-shadow: 0 0 0.75em[ (#GET{couleurs/ombre})], 0 0 0.15em[ (#GET{couleurs/ombre})];
+button:hover {
+	background-color: var(--spip-btn-color-main-hover-bg);
+	border-color: var(--spip-btn-color-main-hover-border);
+	border-bottom-color: var(--spip-btn-color-border-accent);
+	color: var(--spip-btn-color-main-hover-text);
 	text-decoration: none;
+	transition: all 0.2s;
 }
-.bouton:active,
-.bouton_action_post .submit:active,
+/* Focus : outline */
+.btn:focus,
+input.submit:focus,
+input.reset:focus,
+button:focus {
+	box-shadow: 0 0 0 0.3em var(--spip-btn-color-focus);
+}
+/* Actif */
+.btn:active,
 input.submit:active,
 input.reset:active,
 button:active {
-	background-color: [(#GET{couleurs/actif})];
-	color: white;
-	-webkit-transform: translateY(0.1em);
-	    -ms-transform: translateY(0.1em);
-	        transform: translateY(0.1em);
-}
-
-/* Image-icône éventuelle */
-.bouton .icone-image,
-.bouton_action_post .submit .icone-image,
-button .icone-image {
-	margin-#ENV{right}: #GET{tailles/normal/gutter};
-}
-.bouton .icone-image img,
-.bouton .icone-image svg,
-.bouton_action_post .submit .icone-image img,
-.bouton_action_post .submit .icone-image svg,
-button .icone-image img,
-button .icone-image svg {
-	max-height: #GET{tailles/normal/icon-size};
-	width: auto;
+	background-color: var(--spip-btn-color-main-active-bg);
+	border-color: var(--spip-btn-color-main-active-border);
+	border-bottom-color: var(--spip-btn-color-border-accent);
+	color: var(--spip-btn-color-main-active-text);
 }
 
 
@@ -165,134 +191,184 @@ button .icone-image svg {
  * ================================
  * 2. Variantes génériques communes
  * ================================
- * Nb : on fait en sorte de garder les couleurs de base pour le survol et cie.
  */
 
-/**
- * Variante principal : boutons mis en avant, fond de couleur du thème
- */
-.bouton.principal,
-.bouton_action_post.principal .submit,
-input.submit.principal,
-input.reset.principal,
-button.principal {
-	background-color: #GET{couleurs/principal};
-	color: white;
-}
-.bouton.principal:hover,
-.bouton.principal:focus,
-.bouton_action_post.principal .submit:hover,
-.bouton_action_post.principal .submit:focus,
-input.submit.principal:hover,
-input.submit.principal:focus,
-input.reset.principal:hover,
-input.reset.principal:focus,
-button.principal:hover,
-button.principal:focus {
-	background-color: [#(#GET{couleurs/survol}|couleur_foncer)];
-}
-.bouton.principal:active,
-.bouton_action_post.principal .submit:active,
-input.submit.principal:active,
-input.reset.principal:active,
-button.principal:active {
-	background-color: [#(#GET{couleurs/actif}|couleur_foncer)];
-}
 
 /**
  * Variante secondaire : boutons mis en retrait, juste une bordure
  */
-.bouton.secondaire,
-.bouton_action_post.secondaire .submit,
-input.submit.secondaire,
-input.reset.secondaire,
-button.secondaire {
-	background-color: transparent;
-	border-color: #GET{couleurs/secondaire};
+.btn_secondaire,
+input.submit.btn_secondaire,
+input.reset.btn_secondaire,
+button.btn_secondaire {
+	background-color: var(--spip-btn-color-second-bg);
+	border-color: var(--spip-btn-color-second-border);
+	color: var(--spip-btn-color-second-text);
 }
-.bouton.secondaire:hover,
-.bouton.secondaire:focus,
-.bouton_action_post.secondaire .submit:hover,
-.bouton_action_post.secondaire .submit:focus,
-input.submit.secondaire:hover,
-input.submit.secondaire:focus,
-input.reset.secondaire:hover,
-input.reset.secondaire:focus,
-button.secondaire:hover,
-button.secondaire:focus {
-	background-color: #GET{couleurs/survol};
-	border-color: #GET{couleurs/survol}; /* Idem fond */
+.btn_secondaire:hover,
+.btn_secondaire:focus,
+input.submit.btn_secondaire:hover,
+input.submit.btn_secondaire:focus,
+input.reset.btn_secondaire:hover,
+input.reset.btn_secondaire:focus,
+button.btn_secondaire:hover,
+button.btn_secondaire:focus {
+	background-color: var(--spip-btn-color-second-hover-bg);
+	border-color: var(--spip-btn-color-second-hover-border);
+	color: var(--spip-btn-color-second-hover-text);
 }
-.bouton.secondaire:active,
-.bouton_action_post.secondaire .submit:active,
-input.submit.secondaire:active,
-input.reset.secondaire:active,
-button.secondaire:active {
-	background-color: #GET{couleurs/actif};
-	border-color: #GET{couleurs/actif}; /* Idem fond */
+.btn_secondaire:active,
+input.submit.btn_secondaire:active,
+input.reset.btn_secondaire:active,
+button.btn_secondaire:active {
+	background-color: var(--spip-btn-color-second-active-bg);
+	border-color: var(--spip-btn-color-second-active-border);
+	color: var(--spip-btn-color-second-active-text);
 }
 
 /**
  * Variante link : boutons affichés comme un lien
  */
-.bouton.link,
-.bouton_action_post.link .submit,
-input.submit.link,
-input.reset.link,
-button.link {
+.btn_link,
+input.submit.btn_link,
+input.reset.btn_link,
+button.btn_link {
 	background-color: transparent;
-	padding-left: 0; /* garder juste une marge verticale */
-	padding-right: 0; /* garder juste une marge verticale */
-	min-height: initial;
+	border-color: transparent;
+	color: var(--spip-btn-color-link-text);
 }
-.bouton.link:hover,
-.bouton.link:focus,
-.bouton.link:active,
-.bouton_action_post.link .submit:hover,
-.bouton_action_post.link .submit:focus,
-.bouton_action_post.link .submit:active,
-input.submit.link:hover,
-input.submit.link:focus,
-input.submit.link:active,
-input.reset.link:hover,
-input.reset.link:focus,
-input.reset.link:active,
-button.link:hover,
-button.link:focus,
-button.link:active {
+.btn_link:hover,
+.btn_link:focus,
+.btn_link:active,
+input.submit.btn_link:hover,
+input.submit.btn_link:focus,
+input.submit.btn_link:active,
+input.reset.btn_link:hover,
+input.reset.btn_link:focus,
+input.reset.btn_link:active,
+button.btn_link:hover,
+button.btn_link:focus,
+button.btn_link:active {
 	background-color: transparent;
-	color: #ENV{foncee};
-	-webkit-box-shadow: none;
-	        box-shadow: none;
-	/* text-decoration: underline; */
+	border-color: transparent;
+	color: var(--spip-btn-color-link-hover-text);
 }
-.bouton.link:hover:before,
-.bouton.link:focus:before,
-.bouton.link:active:before,
-.bouton_action_post.link .submit:hover:before,
-.bouton_action_post.link .submit:focus:before,
-.bouton_action_post.link .submit:active:before,
-input.submit.link:hover:before,
-input.submit.link:focus:before,
-input.submit.link:active:before,
-input.reset.link:hover:before,
-input.reset.link:focus:before,
-input.reset.link:active:before,
-button.link:hover:before,
-button.link:focus:before,
-button.link:active:before {
-	filter: brightness(1.2);
+
+/**
+ * Variante actif : idem pour tous les états (survol et cie).
+ */
+.btn_on,
+input.submit.btn_on,
+input.reset.btn_on,
+button.btn_on,
+.btn_on:hover,
+input.submit.btn_on:hover,
+input.reset.btn_on:hover,
+button.btn_on:hover,
+.btn_on:focus,
+input.submit.btn_on:focus,
+input.reset.btn_on:focus,
+button.btn_on:focus,
+.btn_on:active,
+input.submit.btn_on:active,
+input.reset.btn_on:active,
+button.btn_on:active {
+	background-color: var(--spip-btn-color-on-bg);
+	border-color: var(--spip-btn-color-on-border);
+	color: var(--spip-btn-color-on-text);
+	border-bottom-color: var(--spip-btn-color-border-accent);
+}
+
+/**
+ * Variante inactif
+ */
+.btn_off,
+input.submit.btn_off,
+input.reset.btn_off,
+button.btn_off {
+	background-color: var(--spip-btn-color-off-bg);
+	border-color: var(--spip-btn-color-off-border);
+	color: var(--spip-btn-color-off-text);
+	border-bottom-color: var(--spip-btn-color-border-accent);
+}
+.btn_off:hover,
+.btn_off:focus,
+input.submit.btn_off:hover,
+input.submit.btn_off:focus,
+input.reset.btn_off:hover,
+button.btn_off:hover,
+button.btn_off:focus {
+	background-color: var(--spip-btn-color-off-hover-bg);
+	border-color: var(--spip-btn-color-off-hover-border);
+	border-bottom-color: var(--spip-btn-color-border-accent);
+	color: var(--spip-btn-color-off-hover-text);
+}
+.btn_off:active,
+input.submit.btn_off:active,
+input.reset.btn_off:active,
+button.btn_off:active {
+	background-color: var(--spip-btn-color-off-active-bg);
+	border-color: var(--spip-btn-color-off-active-border);
+	border-bottom-color: var(--spip-btn-color-border-accent);
+	color: var(--spip-btn-color-off-active-text);
+}
+
+/**
+ * Variante inverse : couleurs inversées (blanc)
+ */
+.btn_inverse,
+input.submit.btn_inverse,
+input.reset.btn_inverse,
+button.btn_inverse {
+	background-color: var(--spip-btn-color-inverse-bg);
+	color: var(--spip-btn-color-inverse-text);
+	border-color: var(--spip-btn-color-inverse-border);
+}
+.btn_inverse.btn_secondaire,
+input.submit.btn_inverse.btn_secondaire,
+input.reset.btn_inverse.btn_secondaire,
+button.btn_inverse.btn_secondaire {
+	color: var(--spip-btn-color-inverse-border);
+	background-color: transparent;
+}
+.btn_inverse.btn_link,
+input.submit.btn_inverse.btn_link,
+input.reset.btn_inverse.btn_link,
+button.btn_inverse.btn_link {
+	color: var(--spip-btn-color-inverse-border);
+	background-color: transparent;
+	border-color: transparent;
+}
+.btn_inverse:hover,
+.btn_inverse:focus,
+input.submit.btn_inverse:hover,
+input.submit.btn_inverse:focus,
+input.reset.btn_inverse:hover,
+input.reset.btn_inverse:focus,
+button.btn_inverse:hover,
+button.btn_inverse:focus {
+	background-color: var(--spip-btn-color-inverse-hover-bg);
+	color: var(--spip-btn-color-inverse-hover-text);
+	border-color: var(--spip-btn-color-inverse-hover-border);
+}
+.btn_inverse:active,
+input.submit.btn_inverse:active,
+input.reset.btn_inverse:active,
+button.btn_inverse:active {
+	background-color: var(--spip-btn-color-inverse-active-bg);
+	color: var(--spip-btn-color-inverse-active-text);
+	border-color: var(--spip-btn-color-inverse-active-border);
 }
 
 /**
  * Variante bloc : pleine largeur
  */
-.bouton.bloc,
-input.submit.bloc,
-input.reset.bloc,
-.formulaire_spip input.submit.bloc, /* pour avoir précédence sur les règles de forms.css */
-.formulaire_spip input.reset.bloc, /* idem */
-button.bloc {
+.btn_bloc,
+input.submit.btn_bloc,
+input.reset.btn_bloc,
+.formulaire_spip input.submit.btn_bloc, /* pour avoir précédence sur les règles de forms.css */
+.formulaire_spip input.reset.btn_bloc, /* idem */
+button.btn_bloc {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -302,246 +378,69 @@ button.bloc {
 	 justify-content: center;
 	text-align: center;
 }
-.bouton_action_post.bloc,
-.bouton_action_post.bloc div {
+/* Pour les boutons d'actions il faut ajouter *en plus* la classe bloc sur le formulaire */
+.bouton_action_post.bloc {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
-}
-.bouton_action_post.bloc div,
-.bouton_action_post.bloc .submit {
-	-webkit-box-flex: 1;
-	        -ms-flex: 1 1 auto;
-	            flex: 1 1 auto;
-}
-
-/**
- * Variantes alignements : boutons flottants à gauche ou à droite
- */
-.bouton.right,
-.bouton_action_post.right,
-input.submit.right,
-input.reset.right,
-button.right,
-.groupe-boutons.right {
-	float: #ENV{right};
-}
-.bouton.left,
-.bouton_action_post.left,
-input.submit.left,
-input.reset.left,
-button.left ,
-.groupe-boutons.left {
-	float: #ENV{left};
 }
 
 /**
  * Variante désactivé : boutons non cliquables
  */
-.bouton.desactive,
-.bouton_action_post.desactive,
-input.submit.desactive,
-input.reset.desactive,
-button.desactive {
-	opacity: 0.8;
-	-webkit-filter: grayscale(100%);
-	        filter: grayscale(100%);
+.btn_desactive,
+input.submit.btn_desactive,
+input.reset.btn_desactive,
+button.btn_desactive {
+	opacity: 0.66;
 	pointer-events: none;
 }
 
 /**
  * Variante danger (voir aussi dans icons.css)
  */
-.bouton.danger,
-.bouton_action_post.danger .submit,
-input.submit.danger,
-input.reset.danger,
-button.danger {
-	background-color: transparent !important;
-	background-image: url(#CHEMIN_IMAGE{rayures-sup.svg}) !important;
-	color: #222 !important;
+.btn_danger,
+input.submit.btn_danger,
+input.reset.btn_danger,
+button.btn_danger {
+	background-color: transparent;
+	border-color: transparent transparent var(--spip-btn-color-border-accent);
+	color: var(--spip-btn-color-black);
+	background-image: url(#CHEMIN_IMAGE{rayures-sup.svg});
 	text-shadow: 0 0 0.25em white, 0 0 0.5em white, 0 0 1em white; /* Lisibilité */
 }
-.bouton.danger:hover,
-.bouton.danger:focus,
-.bouton_action_post.danger .submit:hover,
-.bouton_action_post.danger .submit:focus,
-input.submit.danger:hover,
-input.submit.danger:focus,
-input.reset.danger:hover,
-input.reset.danger:focus,
-button.danger:hover,
-button.danger:focus {
-	-webkit-box-shadow: none;
-	        box-shadow: none;
-	color: red !important;
-}
-
-/**
- * Variante sans icône (préf. utilisateur)
- */
-.icones_texte .bouton:before,
-.icones_texte .bouton_action_post .submit:before,
-.icones_texte button:before,
-.icones_texte .icone-image {
-	display: none !important;
-}
-.icones_texte input.submit:not(.danger),
-.icones_texte input.reset:not(.danger) {
-	background-image: none !important;
-	padding-left: [(#GET{tailles/normal/padding/1})] !important;
+.btn_danger:hover,
+.btn_danger:focus,
+input.submit.btn_danger:hover,
+input.submit.btn_danger:focus,
+input.reset.btn_danger:hover,
+input.reset.btn_danger:focus,
+button.btn_danger:hover,
+button.btn_danger:focus {
+	background-color: transparent;
+	border-color: transparent transparent var(--spip-btn-color-border-accent);
+	color: hsl(0, 100%, 45%);
 }
 
 /**
  * Variantes de tailles
- * Ajuste la taille des icônes, de la police, des marges, etc.
+ * Ajuste de la police, des marges, etc.
  */
- <BOUCLE_tailles(DATA) {source table, #GET{tailles}} {cle != normal}>
-.bouton.#CLE,
-.bouton_action_post.#CLE .submit,
-input.submit.#CLE,
-input.reset.#CLE,
-button.#CLE,
-.groupe-boutons.#CLE > .bouton,
-.groupe-boutons.#CLE > .bouton_action_post .submit,
-.groupe-boutons.#CLE > input.submit,
-.groupe-boutons.#CLE > button {
-	font-size: #VALEUR{font-size};
-	min-height: calc\(\([(#VALEUR{padding/0})] * 2\) + [(#VALEUR{icon-size})] + 2px\); /* Pour hauteur identique avec ou sans icone = padding + icône + bordure */
+<BOUCLE_tailles(DATA) {source table, #LISTE{mini,large}}>
+.btn_#VALEUR,
+input.submit.btn_#VALEUR,
+input.reset.btn_#VALEUR,
+button.btn_#VALEUR,
+.groupe-btns_#VALEUR .btn,
+.groupe-btns_#VALEUR input.submit,
+.groupe-btns_#VALEUR input.reset,
+.groupe-btns_#VALEUR button {
+	font-size: var\(--spip-btn-font-size-#VALEUR\);
+	padding: var\(--spip-btn-padding-x-#VALEUR\) var\(--spip-btn-padding-y-#VALEUR\);
+	border-radius: var\(--spip-btn-border-radius-#VALEUR\);
+	margin-bottom: var\(--spip-btn-margin-#VALEUR\);
 }
-.bouton.#CLE:not(.link),
-.bouton_action_post.#CLE:not(.link) .submit,
-input.submit.#CLE:not(.link),
-input.reset.#CLE:not(.link),
-button.#CLE:not(.link),
-.groupe-boutons.#CLE:not(.link) > .bouton,
-.groupe-boutons.#CLE:not(.link) > .bouton_action_post .submit,
-.groupe-boutons.#CLE:not(.link) > input.submit,
-.groupe-boutons.#CLE:not(.link) > input.reset,
-.groupe-boutons.#CLE:not(.link) > button {
-	padding: [(#VALEUR{padding}|implode{' '})];
-}
-/* Avec icône CSS */
-.bouton.#CLE:before,
-.bouton_action_post.#CLE .submit:before,
-button.#CLE:before,
-.groupe-boutons.#CLE > .bouton:before,
-.groupe-boutons.#CLE > .bouton_action_post .submit:before,
-.groupe-boutons.#CLE > button:before {
-	width: #VALEUR{icon-size} !important; /* Obligé important */
-	height: #VALEUR{icon-size} !important;
-	margin-#ENV{right}: #VALEUR{gutter} !important;
-}
-/* Avec icône CSS en background direct */
-<BOUCLE_tailles_icones_submit(DATA) {source table, #GET{icones}} {","}>
-input.submit.#_tailles:CLE.#VALEUR,
-input.reset.#_tailles:CLE.#VALEUR,
-.groupe-boutons.#_tailles:CLE > input.submit.#VALEUR,
-.groupe-boutons.#_tailles:CLE > input.reset.#VALEUR
-</BOUCLE_tailles_icones_submit>
-{
-	padding-#ENV{left}: calc\([(#VALEUR{padding/1}) ]+[ (#VALEUR{icon-size}) ]+[ (#VALEUR{gutter})]\);
-	background-size: auto #VALEUR{icon-size};
-	background-position: [(#ENV{left})] [(#VALEUR{padding/1})] center;
-}
-/* Avec icône HTML */
-.bouton.#CLE .icone-image img,
-.bouton.#CLE .icone-image svg,
-.bouton_action_post.#CLE .submit .icone-image img,
-.bouton_action_post.#CLE .submit .icone-image svg,
-button.#CLE .icone-image img,
-button.#CLE .icone-image svg,
-.groupe-boutons.#CLE > .bouton .icone-image img,
-.groupe-boutons.#CLE > .bouton .icone-image svg,
-.groupe-boutons.#CLE > .bouton_action_post .submit .icone-image img,
-.groupe-boutons.#CLE > .bouton_action_post .submit .icone-image svg,
-.groupe-boutons.#CLE > button .icone-image img,
-.groupe-boutons.#CLE > button .icone-image svg{
-	max-height: #VALEUR{icon-size};
-	width: auto;
-}
-/* Avec icône CSS en bg direct mais interface sans icône (préf. utilisateur) */
-.icones_texte input.submit.#CLE:not(.danger),
-.icones_texte input.reset.#CLE:not(.danger),
-.icones_texte .groupe-boutons.#CLE > input.submit:not(.danger),
-.icones_texte .groupe-boutons.#CLE > input.reset:not(.danger) {
-	padding-left: #VALEUR{padding/1} !important;
-}
-/* Variante .link dans groupe de boutons */
-.groupe-boutons > .link.#CLE {
-	padding-left: #VALEUR{padding/1};
-	padding-right: #VALEUR{padding/1};
-}
-</BOUCLE_tailles>
-
-
-/**
- * ========================
- * 3. Variantes avec icônes
- * ========================
- * Des images/icônes pour des boutons avec des fonctions précises : ajouter, supprimer, etc.
- * Certaines règles sont mutualisées avec icons.css
- * On peut aussi mettre manuellement une icône dans le HTML : <img class="icone-image">
- */
-
-/* Icônes sous forme de pseudo-élément :before */
-#SET{icones_plus,#GET{icones}|push{delete}}
-<BOUCLE_icones_before(DATA) {source table, #GET{icones_plus}} {","}>
-.bouton.#VALEUR:before,
-.bouton_action_post.#VALEUR .submit:before,
-button.#VALEUR:before
-</BOUCLE_icones_before>
-{
-	content: '';
-	display: block;
-	width: #GET{tailles/normal/icon-size};
-	height: #GET{tailles/normal/icon-size};
-	margin-#ENV{right}: #GET{tailles/normal/gutter};
-	background-size: contain;
-	background-position: center center;
-	background-repeat: no-repeat;
-}
-/* Icônes en images de fond */
-<BOUCLE_icones_background(DATA) {source table, #GET{icones}} {","}>
-input.submit.#VALEUR,
-input.reset.#VALEUR
-</BOUCLE_icones_background>
-{
-	padding-#ENV{left}: calc\([(#GET{tailles/normal/padding/1}) ]+[ (#GET{tailles/normal/icon-size}) ]+[ (#GET{tailles/normal/gutter})]\);
-	background-size: auto #GET{tailles/normal/icon-size};
-	background-position: center [(#ENV{left})] #GET{tailles/normal/padding/1};
-	background-repeat: no-repeat;
-}
-/* Images */
-<BOUCLE_icones_images(DATA) {source table, #GET{icones}}>
-.icone .icone-fonction-#VALEUR:after,
-.bouton.#VALEUR:before,
-.bouton_action_post.#VALEUR .submit:before,
-input.submit.#VALEUR,
-input.reset.#VALEUR,
-button.#VALEUR:before {
-	background-image: url(#CHEMIN_IMAGE{#VALEUR-xx.svg});
-}
-/* Variante mono pour ceux sur fond sombre : les .principal et au survol pour les autres (sauf pour les .link) */
-.bouton.#VALEUR.principal:before,
-.bouton.#VALEUR:not(.link):hover:before,
-.bouton.#VALEUR:not(.link):focus:before,
-.bouton_action_post.#VALEUR.principal .submit:hover:before,
-.bouton_action_post.#VALEUR:not(.link) .submit:hover:before,
-.bouton_action_post.#VALEUR:not(.link) .submit:focus:before,
-input.submit.#VALEUR.principal,
-input.submit.#VALEUR:not(.link):hover,
-input.submit.#VALEUR:not(.link):focus,
-input.reset.#VALEUR.principal,
-input.reset.#VALEUR:not(.link):hover,
-input.reset.#VALEUR:not(.link):focus,
-button.#VALEUR.principal:before,
-button.#VALEUR:not(.link):hover:before,
-button.#VALEUR:not(.link):focus:before  {
-	background-image: url(#CHEMIN_IMAGE{#VALEUR-inverse-xx.svg});
-}
-</BOUCLE_icones_images>
-[(#REM)/**/]
+</BOUCLE_tailles>[(#REM)/**/]
 
 
 /**
@@ -552,18 +451,18 @@ button.#VALEUR:not(.link):focus:before  {
  * Markup :
  * <a class="bouton [variante]">…</a>
  */
-.bouton {}
+.btn {}
 /* Garder la couleur de base pour les boutons liens externes */
-.bouton[rel=external],
-.bouton.spip_out {
-	color: hsla(0, 0%, 0%, 0.6);
+.btn[rel=external],
+.btn.spip_out {
+	color: inherit;
 }
 
 
 /**
- * =========================
- * 5. Boutons de formulaires
- * =========================
+ * ==============================
+ * 5. Boutons de formulaires spip
+ * ==============================
  *
  * Markup :
  *
@@ -573,17 +472,11 @@ button.#VALEUR:not(.link):focus:before  {
  * </form>
  */
 
-/* Couleur plus sombre pour les boutons se trouvant dans un conteneur ayant déjà un fond de couleur claire */
-.boutons input.submit:not(.principal):not(.link):not(:hover):not(:focus):not(:active),
-.boutons input.reset:not(.principal):not(.link):not(:hover):not(:focus):not(.active),
-.boutons button:not(.principal):not(.link):not(:hover):not(:focus):not(:active),
-.act .bouton_action_post:not(.principal):not(.link) .submit:not(:hover):not(:focus):not(:active) {
-	background-color: #ENV{claire};
-}
-.boutons input.submit,
-.boutons input.reset,
-.boutons button,
-.act .bouton_action_post .submit {
+.formulaire_spip .boutons .btn,
+.formulaire_spip .boutons input.submit,
+.formulaire_spip .boutons input.reset,
+.formulaire_spip .boutons button,
+.act .bouton_action_post {
 	margin-bottom: 0;
 }
 
@@ -604,14 +497,14 @@ button.#VALEUR:not(.link):focus:before  {
 	display: -webkit-inline-box;
 	display: -ms-inline-flexbox;
 	display: inline-flex;
+	vertical-align: middle;
 }
-.bouton_action_post div {
-	border-radius: inherit;
-	display: inherit;
+.bouton_action_post.bloc div {
+-webkit-box-flex: 1;
+	      -ms-flex: 1 1 auto;
+	          flex: 1 1 auto;
 }
-.bouton_action_post .submit {
-	border-radius: inherit;
-}
+
 /* Dans le footer d'une boîte */
 .box .ft .bouton_action_post { 
 	margin-bottom: 0;
@@ -633,6 +526,14 @@ button.#VALEUR:not(.link):focus:before  {
 	max-height: 100%;
 }
 
+/* Ajustements pour le filtre |bouton_action_horizontal */
+.bouton_action_post .icone-fonction:after {
+	background-position: bottom 0 right 0;
+}
+.bouton_action_post .icone-fonction.icone-fonction-new:after {
+	background-position: top 0 right 0;
+}
+
 /**
  * =====================
  * 7. Groupes de boutons
@@ -640,13 +541,13 @@ button.#VALEUR:not(.link):focus:before  {
  *
  * Markup :
  *
- * <div class="groupe-boutons">
- *   <a class="bouton">…</a>
- *   <a class="bouton">…</a>
+ * <div class="groupe-btns">
+ *   <a class="btn">…</a>
+ *   <a class="btn">…</a>
  * </div>
  */
 
-.groupe-boutons {
+.groupe-btns {
 	display: -webkit-inline-box;
 	display: -ms-inline-flexbox;
 	display: inline-flex;
@@ -654,225 +555,236 @@ button.#VALEUR:not(.link):focus:before  {
 	-webkit-box-direction: normal;
 	        -ms-flex-flow: row nowrap;
 	            flex-flow: row nowrap;
-	margin-bottom: #GET{tailles/normal/margin};
+	margin-bottom: var(--spip-btn-margin);
 }
-.groupe-boutons > .bouton,
-.groupe-boutons > .bouton_action_post,
-.groupe-boutons > input.submit,
-.groupe-boutons > input.reset,
-.groupe-boutons > button {
+.groupe-btns .btn,
+.groupe-btns .bouton_action_post,
+.groupe-btns input.submit,
+.groupe-btns input.reset,
+.groupe-btns button {
 	-webkit-box-flex: 0;
 	        -ms-flex: 0 1 auto;
 	            flex: 0 1 auto;
 	margin: 0;
 }
-.groupe-boutons > .bouton_action_post .submit {
+.groupe-btns .bouton_action_post .submit {
 	margin: 0;
 }
 /* Ne garder l'arrondi qu'aux extrémités */
-.groupe-boutons:not(.vertical) > .bouton:not(:last-child):not(:only-child),
-.groupe-boutons:not(.vertical) > .bouton_action_post:not(:last-child):not(:only-child) .submit,
-.groupe-boutons:not(.vertical) > input.submit:not(:last-child):not(:only-child),
-.groupe-boutons:not(.vertical) > input.reset:not(:last-child):not(:only-child),
-.groupe-boutons:not(.vertical) > button:not(:last-child):not(:only-child) {
-	border-top-#ENV{right}-radius: 0;
-	border-bottom-#ENV{right}-radius: 0;
+.groupe-btns:not(.groupe-btns_vertical) .btn:not(:last-child):not(:only-child),
+.groupe-btns:not(.groupe-btns_vertical) input.submit:not(:last-child):not(:only-child),
+.groupe-btns:not(.groupe-btns_vertical) input.reset:not(:last-child):not(:only-child),
+.groupe-btns:not(.groupe-btns_vertical) > button:not(:last-child):not(:only-child),
+.groupe-btns:not(.groupe-btns_vertical) .bouton_action_post:not(:last-child):not(:only-child) .submit {
+	border-top-#RIGHT-radius: 0;
+	border-bottom-#RIGHT-radius: 0;
 }
-.groupe-boutons:not(.vertical) > .bouton:not(:first-child),
-.groupe-boutons:not(.vertical) > .bouton_action_post:not(:first-child) .submit,
-.groupe-boutons:not(.vertical) > input.submit:not(:first-child),
-.groupe-boutons:not(.vertical) > input.reset:not(:first-child),
-.groupe-boutons:not(.vertical) > button:not(:first-child) {
-	border-top-#ENV{left}-radius: 0;
-	border-bottom-#ENV{left}-radius: 0;
+.groupe-btns:not(.groupe-btns_vertical) .btn:not(:first-child),
+.groupe-btns:not(.groupe-btns_vertical) input.submit:not(:first-child),
+.groupe-btns:not(.groupe-btns_vertical) input.reset:not(:first-child),
+.groupe-btns:not(.groupe-btns_vertical) > button:not(:first-child),
+.groupe-btns:not(.groupe-btns_vertical) .bouton_action_post:not(:first-child) .submit {
+	border-top-#LEFT-radius: 0;
+	border-bottom-#LEFT-radius: 0;
 }
 /* Bordures pour séparer */
-.groupe-boutons:not(.vertical) > .bouton:not(:first-child):not(.secondaire),
-.groupe-boutons:not(.vertical) > .bouton_action_post:not(:first-child):not(.secondaire) .submit,
-.groupe-boutons:not(.vertical) > input.submit:not(:first-child):not(.secondaire),
-.groupe-boutons:not(.vertical) > input.reset:not(:first-child):not(.secondaire),
-.groupe-boutons:not(.vertical) > button:not(:first-child):not(.secondaire) {
-	border-#ENV{left}: 1px solid hsla(0, 0%, 0%, 0.15);
-	margin-left: -1px; /* bordure gauche par dessus le bouton précédent */
+.groupe-btns:not(.groupe-btns_vertical) .btn:not(:first-child):not(.btn_secondaire),
+.groupe-btns:not(.groupe-btns_vertical) input.submit:not(:first-child):not(.btn_secondaire),
+.groupe-btns:not(.groupe-btns_vertical) input.reset:not(:first-child):not(.btn_secondaire),
+.groupe-btns:not(.groupe-btns_vertical) > button:not(:first-child):not(.btn_secondaire),
+.groupe-btns:not(.groupe-btns_vertical) .bouton_action_post:not(:first-child):not(.btn_secondaire) .submit {
+	border-#LEFT-color: var(--spip-btn-color-border-accent) !important;
 }
-.groupe-boutons:not(.vertical) > .bouton.secondaire:not(:last-child),
-.groupe-boutons:not(.vertical) > .bouton_action_post.secondaire:not(:last-child) .submit,
-.groupe-boutons:not(.vertical) > input.submit.secondaire:not(:last-child),
-.groupe-boutons:not(.vertical) > input.reset.secondaire:not(.last-child),
-.groupe-boutons:not(.vertical) > button.secondaire:not(:last-child) {
-	border-#ENV{right}: 0;
+.groupe-btns:not(.groupe-btns_vertical) .btn:not(:first-child),
+.groupe-btns:not(.groupe-btns_vertical) input.submit:not(:first-child),
+.groupe-btns:not(.groupe-btns_vertical) input.reset:not(:first-child),
+.groupe-btns:not(.groupe-btns_vertical) > button:not(:first-child),
+.groupe-btns:not(.groupe-btns_vertical) .bouton_action_post:not(:first-child) .submit {
+	margin-#LEFT: -1px; /* bordure haut par dessus le bouton précédent */
 }
-/* Survol & cie */
-.groupe-boutons > *:hover,
-.groupe-boutons > *:focus,
-.groupe-boutons > *:active {
-	z-index: 2;
-	/* border-color: transparent !important; */
-}
-
-/* Si boutons de formulaire ou pied d'une boîte : bloc et alignement */
-.groupe-boutons.act,
-.groupe-boutons.boutons {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-pack: end;
-	   -ms-flex-pack: end;
-	 justify-content: flex-end;
+.groupe-btns:not(.groupe-btns_vertical) .btn_secondaire:not(:last-child),
+.groupe-btns:not(.groupe-btns_vertical) input.submit.btn_secondaire:not(:last-child),
+.groupe-btns:not(.groupe-btns_vertical) input.reset.btn_secondaire:not(.last-child),
+.groupe-btns:not(.groupe-btns_vertical) > button.btn_secondaire:not(:last-child),
+.groupe-btns:not(.groupe-btns_vertical) .bouton_action_post.btn_secondaire:not(:last-child) .submit {
+	border-#RIGHT-color: transparent;
 }
 
 /* variante vertical */
-.groupe-boutons.vertical {
+.groupe-btns.groupe-btns_vertical {
 	   -webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
 	        -ms-flex-flow: column wrap;
 	            flex-flow: column wrap;
-	vertical-align: top; /* middle fait des trucs bizarres */
+	vertical-align: middle;
 }
-.groupe-boutons.vertical > .bouton:not(:last-child),
-.groupe-boutons.vertical > .bouton_action_post:not(:last-child),
-.groupe-boutons.vertical > .bouton_action_post:not(:last-child) .submit,
-.groupe-boutons.vertical > input.submit:not(:last-child),
-.groupe-boutons.vertical > input.reset:not(:last-child),
-.groupe-boutons.vertical > button.submit:not(:last-child) {
-	border-bottom-left-radius: 0;
-	border-bottom-right-radius: 0;
+.groupe-btns.groupe-btns_vertical .btn:not(:last-child),
+.groupe-btns.groupe-btns_vertical input.submit:not(:last-child),
+.groupe-btns.groupe-btns_vertical input.reset:not(:last-child),
+.groupe-btns.groupe-btns_vertical > button.submit:not(:last-child),
+.groupe-btns.groupe-btns_vertical .bouton_action_post:not(:last-child) .submit {
+	border-bottom-#LEFT-radius: 0;
+	border-bottom-#RIGHT-radius: 0;
 	margin-bottom: 0;
 }
-.groupe-boutons.vertical > .bouton:not(:first-child),
-.groupe-boutons.vertical > .bouton_action_post:not(:first-child) .submit,
-.groupe-boutons.vertical > input.submit:not(:first-child),
-.groupe-boutons.vertical > input.reset:not(:first-child),
-.groupe-boutons.vertical > button:not(:first-child) {
-	border-top-left-radius: 0;
-	border-top-right-radius: 0;
+.groupe-btns.groupe-btns_vertical .btn:not(:first-child),
+.groupe-btns.groupe-btns_vertical input.submit:not(:first-child),
+.groupe-btns.groupe-btns_vertical input.reset:not(:first-child),
+.groupe-btns.groupe-btns_vertical > button:not(:first-child),
+.groupe-btns.groupe-btns_vertical .bouton_action_post:not(:first-child) .submit {
+	border-top-#LEFT-radius: 0;
+	border-top-#RIGHT-radius: 0;
 }
-.groupe-boutons.vertical > .bouton:not(:first-child):not(.secondaire),
-.groupe-boutons.vertical > .bouton_action_post:not(:first-child):not(.secondaire) .submit,
-.groupe-boutons.vertical > input.submit:not(:first-child):not(.secondaire),
-.groupe-boutons.vertical > input.reset:not(:first-child):not(.secondaire),
-.groupe-boutons.vertical > button:not(:first-child):not(.secondaire) {
-	border-top: 1px solid hsla(0, 0%, 0%, 0.15);
+.groupe-btns.groupe-btns_vertical .btn:not(:first-child):not(.btn_secondaire),
+.groupe-btns.groupe-btns_vertical input.submit:not(:first-child):not(.btn_secondaire),
+.groupe-btns.groupe-btns_vertical input.reset:not(:first-child):not(.btn_secondaire),
+.groupe-btns.groupe-btns_vertical > button:not(:first-child):not(.btn_secondaire),
+.groupe-btns.groupe-btns_vertical .bouton_action_post:not(:first-child):not(.btn_secondaire) .submit {
+	border-top-color: var(--spip-btn-color-border-accent);
 	margin-top: -1px; /* bordure haut par dessus le bouton précédent */
 }
-.groupe-boutons.vertical > .bouton.secondaire:not(:last-child),
-.groupe-boutons.vertical > .bouton_action_post.secondaire:not(:last-child) .submit,
-.groupe-boutons.vertical > input.submit.secondaire:not(:last-child),
-.groupe-boutons.vertical > input.reset.secondaire:not(:last-child),
-.groupe-boutons.vertical > button.secondaire:not(:last-child) {
+.groupe-btns.groupe-btns_vertical .btn_secondaire:not(:last-child),
+.groupe-btns.groupe-btns_vertical input.submit.btn_secondaire:not(:last-child),
+.groupe-btns.groupe-btns_vertical input.reset.btn_secondaire:not(:last-child),
+.groupe-btns.groupe-btns_vertical > button.btn_secondaire:not(:last-child),
+.groupe-btns.groupe-btns_vertical .bouton_action_post.btn_secondaire:not(:last-child) .submit {
 	border-bottom: 0;
 }
 
 /* Variante bloc */
-.groupe-boutons.bloc {
+.groupe-btns.groupe-btns_bloc,
+.groupe-btns.groupe-btns_bloc .bouton_action_post div {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
 }
-.groupe-boutons.bloc > .bouton,
-.groupe-boutons.bloc > .bouton_action_post,
-.groupe-boutons.bloc > .bouton_action_post div ,
-.groupe-boutons.bloc > .bouton_action_post .submit,
-.groupe-boutons.bloc > input.submit,
-.groupe-boutons.bloc > input.reset,
-.groupe-boutons.bloc > button {
+.groupe-btns.groupe-btns_bloc .btn,
+.groupe-btns.groupe-btns_bloc .bouton_action_post,
+.groupe-btns.groupe-btns_bloc .bouton_action_post div ,
+.groupe-btns.groupe-btns_bloc .bouton_action_post .submit,
+.groupe-btns.groupe-btns_bloc input.submit,
+.groupe-btns.groupe-btns_bloc input.reset,
+.groupe-btns.groupe-btns_bloc button {
 	-webkit-box-flex: 1;
 	        -ms-flex: 1 1 auto;
 	            flex: 1 1 auto;
 }
 
-/* Dans un formulaire : ajustements */
-.boutons.groupe-boutons {
+/* Variante groupe de boutons menu.
+   Les boutons reprennent l'apparence de boutons inactifs par défaut,
+   sauf ceux qui ont la classe .btn_on, ou les secondaires / liens */
+.groupe-btns_menu .btn:not(.btn_on):not(.btn_secondaire):not(.btn_link),
+.groupe-btns_menu input.submit:not(.btn_on):not(.btn_secondaire):not(.btn_link),
+.groupe-btns_menu input.reset:not(.btn_on):not(.btn_secondaire):not(.btn_link),
+.groupe-btns_menu button:not(.btn_on):not(.btn_secondaire):not(.btn_link) {
+	background-color: var(--spip-btn-color-off-bg);
+	border-color: var(--spip-btn-color-off-border);
+	border-bottom-color: var(--spip-btn-color-border-accent);
+	color: var(--spip-btn-color-off-text);
+}
+.groupe-btns_menu .btn:not(.btn_on):not(.btn_secondaire):not(.btn_link):hover,
+.groupe-btns_menu .btn:not(.btn_on):not(.btn_secondaire):not(.btn_link):focus,
+.groupe-btns_menu input.submit:not(.btn_on):not(.btn_secondaire):not(.btn_link):hover,
+.groupe-btns_menu input.submit:not(.btn_on):not(.btn_secondaire):not(.btn_link):focus,
+.groupe-btns_menu input.reset:not(.btn_on):not(.btn_secondaire):not(.btn_link):hover,
+.groupe-btns_menu input.reset:not(.btn_on):not(.btn_secondaire):not(.btn_link):focus,
+.groupe-btns_menu button:not(.btn_on):not(.btn_secondaire):not(.btn_link):hover,
+.groupe-btns_menu button:not(.btn_on):not(.btn_secondaire):not(.btn_link):focus {
+	background-color: var(--spip-btn-color-off-hover-bg);
+	border-color: var(--spip-btn-color-off-hover-border);
+	border-bottom-color: var(--spip-btn-color-border-accent);
+	color: var(--spip-btn-color-off-hover-text);
+}
+.groupe-btns_menu .btn:not(.btn_on):not(.btn_secondaire):not(.btn_link):active,
+.groupe-btns_menu input.submit:not(.btn_on):not(.btn_secondaire):not(.btn_link):active,
+.groupe-btns_menu input.reset:not(.btn_on):not(.btn_secondaire):not(.btn_link):active,
+.groupe-btns_menu button:not(.btn_on):not(.btn_secondaire):not(.btn_link):active {
+	background-color: var(--spip-btn-color-off-active-bg);
+	border-color: var(--spip-btn-color-off-active-border);
+	border-bottom-color: var(--spip-btn-color-border-accent);
+	color: var(--spip-btn-color-off-active-text);
+}
+
+/* Si boutons de formulaire ou pied d'une boîte : bloc et alignement */
+.groupe-btns.act,
+.groupe-btns.boutons {
 	display: -webkit-box;
 	display: -ms-flexbox;
-	display: flex; /* pleine largeur */
+	display: flex;
 	-webkit-box-pack: end;
 	   -ms-flex-pack: end;
 	 justify-content: flex-end;
 }
 
-/* Ajustements .link */
-.groupe-boutons > *.link:not(:first-child) {
-	padding-#ENV{left}: #GET{tailles/normal/padding/1};
-}
-.groupe-boutons > *.link:not(:last-child) {
-	padding-#ENV{right}: #GET{tailles/normal/padding/1};
-}
-
 
 /**
- * ===============================================
- * 8. Exceptions, rustines, rétro-compat et divers
- * ===============================================
- * 
+ * ======================
+ * 8. Boutons avec icônes
+ * ======================
+ *
+ * Markup :
+ *
+ * <a class="btn spicon spicon_ajouter">Bouton</a>
+ * <a class="btn"><i class="spicon spicon_ajouter"></i> Bouton</a>
+ * <a class="btn"><svg class="spicon spicon_ajouter"></svg> Bouton</a>
  */
 
-/* Ajuster les boutons de base qui sont sur un fond de couleur proche */
-#SET{fonds_clairs,#LISTE{.liste_items .item:hover, .toggle_box_link, .editer_parent, .liste-objets .caption, .liste-objets .pagination, .fiche_objet .formulaire_spip.formulaire_dater}}
-<BOUCLE_fonds_clairs(DATA) {source table, #GET{fonds_clairs}} {","}>
-[(#VALEUR) ].bouton:not(.principal):not(.link):not(.secondaire):not(:hover):not(:focus),
-[(#VALEUR) ].bouton_action_post:not(.principal):not(.link):not(.secondaire) .submit:not(:hover):not(:focus),
-[(#VALEUR) ]button:not(.principal):not(.link):not(.secondaire):not(:hover):not(:focus),
-[(#VALEUR) ]input.submit:not(.principal):not(.link):not(.secondaire):not(:hover):not(:focus),
-[(#VALEUR) ]input.reset:not(.principal):not(.link):not(.secondaire):not(:hover):not(:focus)
-</BOUCLE_fonds_clairs>
-{
-	border-color: hsla(0, 0%, 0%, 0.1);
+/* Base */
+.btn.spicon:before,
+.btn .spicon,
+button.spicon:before,
+button .spicon,
+input.submit.spicon:before,
+input.submit .spicon,
+input.reset.spicon:before,
+input.reset .spicon,
+.bouton_action_post .icone-image {
+	margin-#RIGHT: var(--spip-btn-gutter); /* fallback */
+	margin-inline-end: var(--spip-btn-gutter);
 }
 
-
-/* Rétro-compat boutons ajouter/retirer dans editer_liens.
-   Quand il n'y a pas les nouvelles classes, on les simule (en variante .mini.link) :
-   - button[name=supprimer_lien].delete → button.supprimer.mini.link
-   - button[name=ajouter_lien]          → button.ajouter.mini
-   */
-button[name^=supprimer_lien]:not(.supprimer),
-button[name^=ajouter_lien]:not(.ajouter) {
-	background: transparent;
-	font-size: #GET{tailles/mini/font-size};
-	padding-top: #GET{tailles/mini/padding/0};
-	padding-bottom: #GET{tailles/mini/padding/0};
-	padding-left: 0;
-	padding-right: 0;
+/* Bouton avec uniquement une icône, sans label */
+.btn_icone {
+	padding-left: var(--spip-btn-padding-x);
+	padding-right: var(--spip-btn-padding-x);
+}
+.btn_icone.btn_mini {
+	padding-left: var(--spip-btn-padding-x-mini);
+	padding-right: var(--spip-btn-padding-x-mini);
+}
+.btn_icone.btn_larglarge-e {
+	padding-left: var(--large-spip-btn-padding-x-large);
+	padding-right: var(--spip-btn-padding-x-large);
+}
+.btn_icone.spicon:before,
+.btn_icone .spicon {
 	margin: 0;
 }
-button[name^=supprimer_lien]:not(.supprimer):before,
-button[name^=ajouter_lien]:not(.ajouter):before {
-	content: '';
-	display: block;
-	width: #GET{tailles/mini/icon-size};
-	height: #GET{tailles/mini/icon-size};
-	margin-#ENV{right}: #GET{tailles/mini/gutter};
-	background-size: contain;
-}
-button[name^=supprimer_lien]:not(.supprimer):before {
-	background-image: url(#CHEMIN_IMAGE{supprimer-xx.svg});
-}
-button[name^=ajouter_lien]:not(.ajouter):before {
-	background-image: url(#CHEMIN_IMAGE{ajouter-xx.svg});
-}
-button[name^=supprimer_lien]:not(.supprimer):hover,
-button[name^=supprimer_lien]:not(.supprimer):focus {
-	box-shadow: none;
-}
-button[name^=supprimer_lien]:not(.supprimer) img,
-button[name^=ajouter_lien]:not(.ajouter) img {
-	display: none;
+
+/* Icône après le texte */
+.btn_icone_after.spicon:before,
+.btn_icone_after .spicon {
+	order: 2;
+	margin-#LEFT: var(--spip-btn-gutter); /* fallback */
+	margin-#RIGHT: 0; /* fallback */
+	margin-inline-start: var(--spip-btn-gutter);
+	margin-inline-end: 0;
 }
 
-/* Boutons de suppression et cie */
-button[name^=supprimer_lien]:not(.supprimer).link:hover,
-button[name^=supprimer_lien]:not(.supprimer).link:focus,
-<BOUCLE_del(DATA) {source table, #LISTE{del,supprimer}} {","}>
-.bouton.link.#VALEUR:hover,
-.bouton.link.#VALEUR:focus,
-.bouton_action_post.link.#VALEUR .submit:hover,
-.bouton_action_post.link.#VALEUR .submit:focus,
-button.link.#VALEUR:hover,
-button.link.#VALEUR:focus,
-input.submit.link.#VALEUR:hover,
-input.submit.link.#VALEUR:focus
-</BOUCLE_del>
-{
-	color: hsl(15, 100%, 50%);
+/**
+ * ===========================
+ * 9. Rustines et déprécations
+ * ===========================
+ */
+
+/* Formulaire editer_liens
+ * Dans les listes, les boutons d'ajout et de retrait doivent avoir les classes .btn_mini et .btn_link
+ * En leur absence, on @extend .btn_mini à la main en fallback */
+
+.liste-objets-associer button:not(.btn_mini),
+.liste-objets-lies button:not(.btn_mini) {
+	font-size: var(--spip-btn-font-size-mini);
+	padding: var(--spip-btn-padding-x-mini) var(--spip-btn-padding-y-mini);
+	border-radius: var(--spip-btn-border-radius-mini);
+	margin-bottom: var(--spip-btn-margin-mini);
 }

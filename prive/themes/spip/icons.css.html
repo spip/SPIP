@@ -151,10 +151,11 @@
 	     -o-transition: inherit;
 	        transition: inherit;
 }
-.icone .icone-fonction {
+.icone-fonction {
+	display: flex; /* éviter espacements indésirables autour de l'image */
 	position: relative;
 }
-.icone .icone-fonction:after {
+.icone-fonction:after {
 	content: '';
 	display: block;
 	position: absolute;
@@ -168,9 +169,15 @@
 	     -o-transition: background 0.1s;
 	        transition: background 0.1s; /* Retour */
 }
-.icone .icone-fonction-new:after {
+.icone-fonction-new:after {
 	background-position-y: top[ (#GET{iconpadding})];
 }
+#SET{icones, #LISTE{add, new, del, config, edit}}
+<BOUCLE_icones_images(DATA) {source table, #GET{icones}}>
+.icone-fonction-#VALEUR:after {
+	background-image: url(#CHEMIN_IMAGE{#VALEUR-xx.svg});
+}
+</BOUCLE_icones_images>
 
 /* Variante horizontale */
 .icone.horizontale {
@@ -217,22 +224,22 @@
 }
 
 /* Tailles */
-.icone.s16 .icone-image img {
+.s16 .icone-image img {
 	width: 16px;
 }
-.icone.s16 .icone-fonction:after {
+.s16 .icone-fonction:after {
 	background-size: 8px;
 }
-.icone.s24 .icone-image img {
+.s24 .icone-image img {
 	width: 24px;
 }
-.icone.s24 .icone-fonction:after {
+.s24 .icone-fonction:after {
 	background-size: 12px;
 }
-.icone.s32 .icone-image img {
+.s32 .icone-image img {
 	width: 32px;
 }
-.icone.s32 .icone-fonction:after {
+.s32 .icone-fonction:after {
 	background-size: 16px;
 }
 
