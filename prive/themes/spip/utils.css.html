@@ -1,0 +1,20 @@
+[(#REM)
+
+	Ce squelette définit les styles des boutons de l'espace privé.
+
+	Classes utilitaires.
+
+]#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
+#HTTP_HEADER{Vary: Accept-Encoding}
+[(#REM)<style>]
+
+/* Éléments flottants */
+.float-start {
+	float: var(--spip-css-left); /* fallback */
+	float: inline-start;
+}
+.float-end {
+	float: var(--spip-css-right); /* fallback */
+	float: inline-end;
+}
