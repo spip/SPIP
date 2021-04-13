@@ -118,7 +118,7 @@
 	border-top-left-radius: inherit;
 	border-top-right-radius: inherit;
 }
-.formulaire_spip h3.titrem ~ p:last-child {
+.formulaire_spip h3.titrem ~ p:last-child:not(.boutons) {
 	margin-bottom: calc(var(--spip-css-margin-bottom) / 2);
 }
 
@@ -523,7 +523,7 @@ input[type="file"] {
 	border-top-#RIGHT-radius: var(--spip-form-border-radius);
 	border-bottom-#RIGHT-radius: var(--spip-form-border-radius);
 	background-color: var(--spip-color-gray-lightest);
-	border-#LEFT: 0.3em solid var(--spip-color-theme);
+	border-#LEFT: 0.3em solid var(--spip-form-border-color);
 }
 .formulaire_spip .editer .explication {
 	margin-bottom: 0;
