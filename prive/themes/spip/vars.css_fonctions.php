@@ -45,6 +45,10 @@ function spip_generer_variables_css_typo(array $Pile) : \Spip_Css_Vars_Collectio
 	$vars->add('--spip-css-background-color', $Pile[0]['background-color']);
 	$vars->add('--spip-css-color', $Pile[0]['color']);
 
+	$vars->add('--spip-css-border-radius-mini', '0.2em');
+	$vars->add('--spip-css-border-radius', '0.33em');
+	$vars->add('--spip-css-border-radius-large', '0.66em');
+
 	return $vars;
 }
 
@@ -108,7 +112,7 @@ function spip_generer_variables_css_couleurs() : \Spip_Css_Vars_Collection {
 
 	// déclinaisons de gris (luminosité calquée sur le dégradé de couleur)
 	$vars->add('--spip-color-white--hsl', '0, 0%, 100%');
-	$vars->add('--spip-color-gray-lightest--hsl', '0, 0%, 95%');
+	$vars->add('--spip-color-gray-lightest--hsl', '0, 0%, 96%');
 	$vars->add('--spip-color-gray-lighter--hsl', '0, 0%, 90%');
 	$vars->add('--spip-color-gray-light--hsl', '0, 0%, 80%');
 	$vars->add('--spip-color-gray--hsl', '0, 0%, 60%');
