@@ -49,6 +49,8 @@ function spip_generer_variables_css_typo(array $Pile) : \Spip_Css_Vars_Collectio
 	$vars->add('--spip-css-border-radius', '0.33em');
 	$vars->add('--spip-css-border-radius-large', '0.66em');
 
+	$vars->add('--spip-css-box-shadow', '0px 2px 1px -1px hsla(0,0%,0%,0.2), 0px 1px 1px 0px hsla(0,0%,0%,0.1), 0px 1px 3px 0px hsla(0,0%,0%,0.12)');
+
 	return $vars;
 }
 

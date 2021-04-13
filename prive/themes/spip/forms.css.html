@@ -15,8 +15,9 @@
 	8. Choix
 	9. Explications
 	10. Formulaires compacts en colonnes laterales
-	11. Formulaires particuliers
-	12. Divers
+	11. Formulaires dans fiche objet
+	12. Formulaires particuliers
+	13. Divers
 
 
 <style>/**]
@@ -42,7 +43,7 @@
 	--spip-form-label-width: 12em;
 	--spip-form-label-long-width: 18em;
 	/* couleurs */
-	--spip-form-border-color: var(--spip-color-gray-light); /* couleur bordure inputs et cie */
+	--spip-form-border-color: hsla(0, 0%, 0%, 0.15); /* couleur bordure inputs et cie */
 	--spip-form-color-focus: hsla(var(--spip-color-theme--h), calc(var(--spip-color-theme--s) * 3), var(--spip-color-theme--l), 0.25); /* outline focus inputs et cie */
 	--spip-form-color-text: var(--spip-color-gray-darkest); /* défaut */
 	--spip-form-color-text-light: var(--spip-color-gray-dark); /* labels et cie */
@@ -79,10 +80,10 @@
 	padding: calc(var(--spip-css-margin-bottom) / 2) var(--spip-form-gutter-x);
 	overflow: hidden;
 	background: var(--spip-color-white);
-	border: 1px solid var(--spip-form-border-color);
-	border-bottom: 0;
+	border-bottom: 1px solid var(--spip-form-border-color);
 	border-top-left-radius: var(--spip-css-border-radius);
 	border-top-right-radius: var(--spip-css-border-radius);
+	box-shadow: var(--spip-css-box-shadow);
 }
 .formulaire_spip .cadre{
 	border: 1px solid var(--spip-form-border-color);
@@ -107,16 +108,19 @@
 	position: relative; /* pour positionner le ajaxload en automatique */
 	padding: 0 var(--spip-form-gutter-x) 0;
 	margin: calc(var(--spip-css-margin-bottom) * 1.5) 0;
-	border: 1px solid var(--spip-form-border-color);
 	color: var(--spip-form-color-text);
 	background-color: var(--spip-color-white);
 	border-radius: var(--spip-css-border-radius);
+	box-shadow: var(--spip-css-box-shadow);
+	z-index: 2; /* passer par dessus l'entête */
 }
 .formulaire_spip h3.titrem {
 	padding: var(--spip-form-gutter-y) var(--spip-form-gutter-x);
-	background-color: var(--spip-color-gray-lightest);
 	border-top-left-radius: inherit;
 	border-top-right-radius: inherit;
+	color: var(--spip-color-theme);
+	border-bottom: 1px solid hsla(0, 0%, 0%, 0.1);
+	text-transform: uppercase;
 }
 .formulaire_spip h3.titrem ~ p:last-child:not(.boutons) {
 	margin-bottom: calc(var(--spip-css-margin-bottom) / 2);
@@ -208,9 +212,9 @@
 	position: relative;
 	margin-bottom: 0;
 	clear: both;
-	padding: calc(var(--spip-form-gutter-y)  / 2) var(--spip-form-gutter-x);
+	padding: calc(var(--spip-form-gutter-y) / 2) var(--spip-form-gutter-x);
 	text-align: var(--spip-css-right);
-	background-color: var(--spip-color-gray-lightest);
+	background-color: var(--spip-color-theme-lightest);
 	border-bottom-left-radius: var(--spip-form-border-radius);
 	border-bottom-right-radius: var(--spip-form-border-radius);
 }
@@ -665,8 +669,53 @@ input[type="file"] {
 
 
 /**
+ * ================================
+ * 11. Formulaires dans fiche objet
+ * ================================
+ */
+
+
+.fiche_objet .formulaire_spip {
+	border: 1px solid var(--spip-form-border-color);
+	box-shadow: none;
+}
+.fiche_objet .formulaire_spip.formulaire_dater {
+	margin-top: 0;
+	border: 0;
+	border-radius: 0;
+	margin-left: -15px; /* = padding de fiche_objet */
+	margin-right: -15px; /* = padding de fiche_objet */
+	background-color: var(--spip-color-gray-lightest);
+	position: relative;
+}
+.fiche_objet .formulaire_spip.formulaire_dater label {
+	font-size: 85%;
+	font-weight: normal;
+	/* oblmigé de recalculer width à cause du font-size */
+	width: calc((var(--spip-form-label-long-width) - (var(--spip-form-gutter-x) * 2)) * 1.2);
+	margin-#LEFT: calc(((var(--spip-form-label-long-width) - var(--spip-form-gutter-x)) * -1) * 1.2);
+}
+.fiche_objet .formulaire_spip.formulaire_dater .input.editable {
+	display: flex;
+}
+.fiche_objet .formulaire_spip.formulaire_dater img.ui-datepicker-trigger {
+	margin-#LEFT: -1em;
+	#LEFT: -1em;
+}
+.fiche_objet .formulaire_spip.formulaire_dater input.text {
+	padding-top: calc(var(--spip-form-gutter-input-y) / 2);
+	padding-bottom: calc(var(--spip-form-gutter-input-y) / 2);
+}
+.fiche_objet .formulaire_spip.formulaire_dater p.boutons {
+	border-radius: 0px;
+	margin: 0px -15px -10px -15px;
+	position: relative;
+}
+
+
+/**
  * ============================
- * 11. Formulaires particuliers
+ * 12. Formulaires particuliers
  * ============================
  */
 
@@ -973,11 +1022,72 @@ input[type="file"] {
 	float: var(--spip-css-right);
 }
 
+/* formulaire_instituer */
+.infos .formulaire_instituer {
+	background: none;
+	border: 0;
+	box-shadow: none;
+	margin:0 -10px;
+}
+.infos .formulaire_instituer .reponse_formulaire {
+	display: none;
+}
+.infos .formulaire_instituer ul {
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+.infos .formulaire_instituer .editer {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.infos .formulaire_instituer .show {
+	display:block;
+	margin:0 -10px;
+	padding:10px;
+	background-color: var(--spip-color-gray-lightest);
+}
+.infos .formulaire_instituer .show select {
+	width: 100%;
+}
+.infos .formulaire_instituer .show select,
+.infos .formulaire_instituer .show option {
+	background-repeat: no-repeat;
+	background-position: 4px center;
+	background-color: var(--spip-color-gray-lightest);
+	color: inherit;
+}
+.infos .formulaire_instituer .show img {
+	border: 1px solid white;
+}
+.infos .formulaire_instituer .boutons {
+	background: none;
+	border-top: 0;
+}
+.infos .formulaire_instituer .statut_prepa .show {
+	background-color: #fff;
+}
+.infos .formulaire_instituer .statut_prop .show {
+	background-color: #f89058;
+}
+.infos .formulaire_instituer .statut_publie .show {
+	background-color: #9dba00;
+}
+.infos .formulaire_instituer .statut_poubelle .show {
+	background-color: #000;
+	color:#fff;
+}
+.infos .formulaire_instituer .statut_poubelle .show select,
+.infos .formulaire_instituer .statut_poubelle .show option {
+	color:#333;
+}
+.infos .formulaire_instituer .statut_refuse .show {
+	background-color: #ff0000;
+}
 
 
 /**
  * ==========
- * 12. Divers
+ * 13. Divers
  * ==========
  */
 
