@@ -608,8 +608,16 @@ input[type="file"] {
 }
 .lat .formulaire_spip fieldset,
 .lat .formulaire_spip h3.legend,
-.lat .formulaire_spip legend {
+.lat .formulaire_spip legend,
+.lat .formulaire_spip .explication {
+	margin-bottom: calc(var(--spip-form-gutter-y) / 2);
+}
+.lat .formulaire_spip .editer .explication {
 	margin-bottom: 0;
+}
+.lat .formulaire_spip fieldset + fieldset,
+.lat .formulaire_spip fieldset legend + .editer-groupe {
+	margin-top: calc((var(--spip-form-gutter-y) / 2) * -1);
 }
 .lat .formulaire_spip {
 	line-height: 120%;
@@ -637,7 +645,7 @@ input[type="file"] {
 	display: inline;
 }
 .lat .formulaire_spip select {
-	width: auto;
+	/* width: auto; */
 }
 .lat .formulaire_spip input.file {
 	font-size: 0.9em;
@@ -645,7 +653,8 @@ input[type="file"] {
 .lat .formulaire_spip input.text,
 .lat .formulaire_spip input.number,
 .lat .formulaire_spip input.password,
-.lat .formulaire_spip textarea {
+.lat .formulaire_spip textarea,
+.lat .formulaire_spip select {
 	font-size: 0.9em;
 	line-height: 125%;
 	padding: calc(var(--spip-form-gutter-input-y) / 2) calc(var(--spip-form-gutter-input-x) / 2);
