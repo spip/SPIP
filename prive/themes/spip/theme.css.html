@@ -118,57 +118,6 @@ h1 {font-size: 2em;line-height: 125%;}
 div.titrem {font-size: 1em;line-height: 125%;padding-top: 7px;padding-bottom: 7px;}
 h3.titrem {font-size: 1em;line-height: 125%;padding-top: 7px;padding-bottom: 7px;}
 
-
-.lat .formulaire_spip {border-color: #ENV{claire};line-height: 120%;}
-.lat .formulaire_spip h3.titrem {background-color: #ENV{claire};color: #444;padding-top: 5px;padding-bottom: 5px;}
-.lat .formulaire_spip input.text {font-size: 0.9em;line-height: 125%;padding: 3px;}
-.lat .formulaire_spip input.password {font-size: 0.9em;line-height: 125%;padding: 3px;}
-.lat .formulaire_spip textarea {font-size: 0.9em;line-height: 125%;padding: 3px;}
-
-.formulaire_spip {-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;position:relative;}
-.formulaire_spip h3.titrem {background-color: #ENV{foncee};color: white;}
-.formulaire_spip input.text,
-.formulaire_spip input.password,
-.formulaire_spip select,
-.formulaire_spip textarea {border: 1px solid #ddd;padding: 5px;/*font-size: 1.1em;*/-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;position:relative;z-index:2;}
-.formulaire_spip img.ui-datepicker-trigger {position:relative;max-width:1.5em;margin-top: -0.25em;margin-left: -1.75em;}
-.formulaire_spip .editer fieldset input.text {border: 1px solid #ddd;}
-.formulaire_spip .editer fieldset input.password {border: 1px solid #ddd;}
-.formulaire_spip .editer fieldset textarea {border: 1px solid #ddd;}
-.formulaire_spip label {color: #666;/*font-size: 90%;line-height: 120%;*/}
-.formulaire_spip .editer fieldset label {color: #777;}
-.formulaire_spip label[for] {cursor: pointer;}
-.formulaire_spip .explication {padding: 5px 10px;font-size: 90%;line-height: 125%;color: #444;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;background-color: #ddd;position:relative;}
-.formulaire_spip .explication+.editer-groupe {margin-top:-[(#ENV{margin-bottom}|strdiv{2})em]}
-.formulaire_spip .editer .explication {-webkit-border-bottom-left-radius:0px;-moz-border-radius-bottomleft:0px;border-bottom-left-radius:0px;-webkit-border-bottom-right-radius:0px;-moz-border-radius-bottomright:0px;border-bottom-right-radius:0px;}
-.formulaire_spip .editer .explication:last-child{-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;}
-.formulaire_spip .explication + input.text,
-.formulaire_spip .explication + textarea,
-.formulaire_spip .explication + input.password,
-.formulaire_spip .explication +.choix:first-of-type {margin-top: 0px;-webkit-border-top-left-radius:0px;-moz-border-radius-topleft:0px;border-top-left-radius:0px;-webkit-border-top-right-radius:0px;-moz-border-radius-topright:0px;border-top-right-radius:0px;position:relative;}
-.formulaire_spip .editer input.text + .explication,
-.formulaire_spip .editer textarea + .explication,
-.formulaire_spip .editer input.password+.explication,
-.formulaire_spip .editer select+.explication,
-.formulaire_spip .editer div.choix:last-of-type+.explication{-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;-webkit-border-top-left-radius:0px;-moz-border-radius-topleft:0px;border-top-left-radius:0px;-webkit-border-top-right-radius:0px;-moz-border-radius-topright:0px;border-top-right-radius:0px;position: relative}
-.formulaire_spip input.text + .explication:before,
-.formulaire_spip textarea + .explication:before,
-.formulaire_spip input.password+.explication:before,
-.formulaire_spip select+.explication:before,
-.formulaire_spip div.choix:last-of-type+.explication:before{content:"";display: block;position: absolute;top:-5px;height:5px;width:100%;left:0;background:#ddd;}
-
-.formulaire_spip .choix {background-color: white;padding: 3px 10px;border: 1px solid #ddd;-webkit-border-top-left-radius:5px;-moz-border-radius-topleft:5px;border-top-left-radius:5px;-webkit-border-top-right-radius:5px;-moz-border-radius-topright:5px;border-top-right-radius:5px;border-bottom: 0px}
-.formulaire_spip .choix + .choix {padding-top: 0px;border-top: 0px;border-bottom: 0px;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
-.formulaire_spip div.choix + .explication {margin-top: 0px;-webkit-border-top-left-radius:0px;-moz-border-radius-topleft:0px;border-top-left-radius:0px;-webkit-border-top-right-radius:0px;-moz-border-radius-topright:0px;border-top-right-radius:0px;position:relative;}
-.formulaire_spip .choix:last-of-type,.formulaire_spip .choix:last-child {-webkit-border-bottom-left-radius:5px;-moz-border-radius-bottomleft:5px;border-bottom-left-radius:5px;-webkit-border-bottom-right-radius:5px;-moz-border-radius-bottomright:5px;border-bottom-right-radius:5px;border-bottom: 1px solid #ddd;position:relative;}
-.formulaire_spip .choix:first-of-type {-webkit-border-top-left-radius:5px;-moz-border-radius-topleft:5px;border-top-left-radius:5px;-webkit-border-top-right-radius:5px;-moz-border-radius-topright:5px;border-top-right-radius:5px;border-top: 1px solid #ddd;position:relative;}
-.formulaire_spip span.choix,.formulaire_spip span.choix:first-of-type,.formulaire_spip span.choix:last-of-type,.formulaire_spip span.choix:last-child{display:inline-block;background: transparent;padding: 0;border:0;}
-.formulaire_spip .boutons {-webkit-border-bottom-left-radius:5px;-moz-border-radius-bottomleft:5px;border-bottom-left-radius:5px;-webkit-border-bottom-right-radius:5px;-moz-border-radius-bottomright:5px;border-bottom-right-radius:5px;position:relative;}
-
-.actions a.editbox:not(.bouton) {display:inline-block;}
-.formulaire_editer_liens .associer_mot .submit {margin-top:3px;}
-.formulaire_editer_logo .editer_logo_on.logo_upload,
-.formulaire_editer_logo .editer_logo_off.logo_upload.open {background: #fff;} [(#REM) https://core.spip.net/issues/2995]
 #chemin {}
 #chemin .bouton_deplacer {font-size: 10px;color: #GET{lien};-webkit-opacity:0.6;-moz-opacity:0.6;opacity:0.6;filter:alpha(opacity=60);}
 #chemin:hover .bouton_deplacer {-webkit-opacity:1.0;-moz-opacity:1.0;opacity:1.0;filter:alpha(opacity=100);}
@@ -185,11 +134,6 @@ h3.titrem {font-size: 1em;line-height: 125%;padding-top: 7px;padding-bottom: 7px
 .largeur .formulaire_spip.formulaire_recherche input.text {background-color: #777;border: 0;border: 1px solid #999;font-size: 0.9em;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;padding-right: 22px;width: 100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;position:relative;}
 .largeur .formulaire_spip.formulaire_recherche input.text:focus {background-color: #333;border-color: white;-webkit-box-shadow:0px 0px 4px #ffffff;-moz-box-shadow:0px 0px 4px #ffffff;box-shadow:0px 0px 4px #ffffff;color: white;outline: none;position:relative;}
 .largeur .formulaire_spip.formulaire_recherche input.image {position: absolute;top: 2px;right: 1px;}
-.entete-formulaire {-webkit-border-top-left-radius:5px;-moz-border-radius-topleft:5px;border-top-left-radius:5px;-webkit-border-top-right-radius:5px;-moz-border-radius-topright:5px;border-top-right-radius:5px;position:relative;}
-.entete-formulaire+ .formulaire_spip,
-.entete-formulaire+.formedit .formulaire_spip,
-.entete-formulaire+div>.formulaire_spip,
-.entete-formulaire+div>div>.formulaire_spip{-webkit-border-top-left-radius:0px;-moz-border-radius-topleft:0px;border-top-left-radius:0px;-webkit-border-top-right-radius:0px;-moz-border-radius-topright:0px;border-top-right-radius:0px;position:relative;}
 .popin .formulaire_spip {-webkit-border-top-left-radius:0px;-moz-border-radius-topleft:0px;border-top-left-radius:0px;-webkit-border-top-right-radius:0px;-moz-border-radius-topright:0px;border-top-right-radius:0px;position:relative;}
 
 .lat #documents_joints {border-top:0}

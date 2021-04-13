@@ -79,6 +79,9 @@ h3,.h3 {[ font-size: (#GET{line-height}|strmult{#GET{coeff}})em];[ line-height: 
 h4,.h4,caption,.caption-wrap {[ font-size: (#GET{line-height}|strmult{#GET{coeff}})em];[ line-height: (#GET{coeffinv})em];[ margin-bottom: (#GET{coeffinv})em;]font-weight: bold; }
 h5,.h5 { font-size: 1em; font-weight: bold; margin-bottom: #GET{margin-bottom}; }
 h6,.h6 { font-size: 1em; font-weight: bold; }
+h3.titrem {
+	position: relative;
+}
 
 #haut h1,h1.grostitre {margin-top:[(#ENV{margin-bottom}|strmult{1.5}|strdiv{2}|strdiv{#GET{line-height}})em]}
 
