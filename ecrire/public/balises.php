@@ -2542,10 +2542,8 @@ function balise_ACTION_FORMULAIRE($p) {
  *
  * - libelle  : Texte du bouton
  * - url      : URL d’action sécurisée
- * - class    : Soit directement une classe à ajouter au formulaire,
- *              Soit un tableau associatif qui permet de préciser par élément :
- *              - formulaire : classes du formulaire, telles que `ajax`, `ajax`, `nocache`…
- *              - bouton     : classes du bouton
+ * - class    : Classes à ajouter au bouton, à l'exception de `ajax` qui est placé sur le formulaire.
+ *              Pour d'autres classes sur le formulaire, utiliser le filtre `ajouter_class`
  * - confirm  : message de confirmation oui/non avant l'action
  * - title    : attribut title à ajouter au bouton
  * - callback : callback js a appeler lors de l'évènement action et avant execution de l'action
@@ -2561,7 +2559,7 @@ function balise_ACTION_FORMULAIRE($p) {
  *        [(#BOUTON_ACTION{
  *            <:bouton_tenter_recuperation:>,
  *            #URL_ECRIRE{base_repair},
- *            #ARRAY{formulaire,ajax, bouton,btn_large},
+ *            "ajax btn_large",
  *        })]
  *     ]
  *     ```

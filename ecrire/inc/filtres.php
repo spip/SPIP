@@ -4185,11 +4185,8 @@ function singulier_ou_pluriel($nb, $chaine_un, $chaine_plusieurs, $var = 'nb', $
  *  objet avec ou sans son extension et sa taille (article, article-24, article-24.png)
  * @param string $fonction
  *  new/del/edit
- * @param string|array $class
- *  Classe supplementaire (horizontale, verticale, ajax ...),
- *  Pour les boutons il peut également s'agir d'un tableau pour préciser les classes par élément :
- *  - bouton     : classes du bouton
- *  - formulaire : classes du formulaire
+ * @param string $class
+ *  Classes supplémentaires (horizontale, verticale, ajax…)
  * @param string $javascript
  *  code javascript tel que "onclick='...'" par exemple
  *  ou texte du message de confirmation s'il s'agit d'un bouton
@@ -4197,21 +4194,12 @@ function singulier_ou_pluriel($nb, $chaine_un, $chaine_plusieurs, $var = 'nb', $
  */
 function prepare_icone_base($type, $lien, $texte, $fond, $fonction = '', $class = '', $javascript = '') {
 
-	// Classes : array pour les boutons, string pour les liens
 	$class_lien = $class_bouton = $class;
-	if (is_string($class_bouton)) {
-		$class_bouton = ['formulaire' => $class_bouton];
-	} elseif (is_array($class_lien)) {
-		$class_lien = implode(' ', array_values($class_lien));
-	}
-	// Évitons-nous de tester les clés partout par la suite
-	$class_bouton['formulaire'] = $class_bouton['formulaire'] ?? '';
-	$class_bouton['bouton'] = $class_bouton['bouton'] ?? '';
 
-	// Normaliser la fonction et ajuster la classe en fonction
+	// Normaliser la fonction et compléter la classe en fonction
 	if (in_array($fonction, ['del', 'supprimer.gif'])) {
 		$class_lien .= ' danger';
-		$class_bouton['bouton'] .= ' btn_danger';
+		$class_bouton .= ' btn_danger';
 	} elseif ($fonction == 'rien.gif') {
 		$fonction = '';
 	} elseif ($fonction == 'delsafe') {
@@ -4227,7 +4215,7 @@ function prepare_icone_base($type, $lien, $texte, $fond, $fonction = '', $class 
 	// Ajouter le type d'objet dans la classe
 	$objet_type = substr(basename($fond), 0, -4);
 	$class_lien .= " $objet_type";
-	$class_bouton['bouton'] .= " $objet_type";
+	$class_bouton .= " $objet_type";
 
 	// Texte
 	$alt = attribut_html($texte);
@@ -4255,7 +4243,7 @@ function prepare_icone_base($type, $lien, $texte, $fond, $fonction = '', $class 
 		$size = $match[1];
 	}
 	$class_lien .= " s$size";
-	$class_bouton['bouton'] .= " s$size";
+	$class_bouton .= " s$size";
 
 	// Icône
 	$icone = http_img_pack($fond, $alt, "width='$size' height='$size'");
@@ -4398,10 +4386,7 @@ function filtre_icone_horizontale_dist($lien, $texte, $fond, $fonction = "", $cl
  * @param string $fonction
  *     Fonction du bouton (`edit`, `new`, `del`)
  * @param string $class
- *     Soit directement une classe à ajouter au formulaire,
- *     Soit un tableau associatif qui permet de préciser par élément :
- *     - formulaire : classes du formulaire, telles que `ajax`, `ajax`, `nocache`…
- *     - bouton     : classes du bouton
+ *     Classes à ajouter au bouton, à l'exception de `ajax` qui est placé sur le formulaire.
  * @param string $confirm
  *     Message de confirmation à ajouter en javascript sur le bouton
  * @return string
@@ -4516,11 +4501,8 @@ function bando_images_background() {
  *   Libellé du bouton
  * @param string $url
  *   URL d'action sécurisée, généralement obtenue avec generer_action_auteur()
- * @param array|string $class
- *   Soit directement une classe à ajouter au formulaire,
- *   Soit un tableau associatif qui permet de préciser par élément :
- *   - formulaire : classes du formulaire, telles que `ajax`, `preload` et `nocache`
- *   - bouton     : classes du bouton
+ * @param string $class
+ *   Classes à ajouter au bouton, à l'exception de `ajax` qui est placé sur le formulaire.
  * @param string $confirm
  *   Message de confirmation oui/non avant l'action
  * @param string $title
@@ -4533,12 +4515,13 @@ function bando_images_background() {
  */
 function bouton_action($libelle, $url, $class = '', $confirm = '', $title = '', $callback = '') {
 
-	// Classes
-	if (is_string($class)) {
-		$class = ['formulaire' => $class];
+	// Classes : dispatcher `ajax` sur le formulaire
+	$class_form = '';
+	if (strpos($class, 'ajax') !== false) {
+		$class_form = 'ajax';
+		$class = str_replace('ajax', '', $class);
 	}
-	$class_form = $class['formulaire'] ?? '';
-	$class_btn  = 'submit' . ($class['bouton'] ? ' '.$class['bouton'] : '');
+	$class_btn = 'submit ' . trim($class);
 
 	if ($confirm) {
 		$confirm = "confirm(\"" . attribut_html($confirm) . "\")";
