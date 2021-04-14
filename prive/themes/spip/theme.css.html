@@ -30,7 +30,11 @@
 
 [(#SET{lien,[#(#ENV{foncee}|couleur_foncer{0.25})]})]
 
-body {font-family: 'Lucida Grande', Tahoma, Ubuntu, Arial, Verdana, sans-serif;background-color: #f9f9f9;background-color: #[(#ENV{claire}|couleur_luminance{0.01}|couleur_saturation{0.015})];}
+body {
+	font-family: 'Lucida Grande', Tahoma, Ubuntu, Arial, Verdana, sans-serif;
+	background-color: #f9f9f9;
+	background-color: hsl(var(--spip-color-theme--h), var(--spip-color-theme--s), 97%);
+}
 #bando_identite {letter-spacing: -0.5px}
 #bando_identite a:hover {color: #333;}
 #bando_haut ul.deroulant li a {color: #666;}

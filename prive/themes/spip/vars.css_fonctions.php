@@ -49,7 +49,18 @@ function spip_generer_variables_css_typo(array $Pile) : \Spip_Css_Vars_Collectio
 	$vars->add('--spip-css-border-radius', '0.33em');
 	$vars->add('--spip-css-border-radius-large', '0.66em');
 
-	$vars->add('--spip-css-box-shadow', '0px 2px 1px -1px hsla(0,0%,0%,0.2), 0px 1px 1px 0px hsla(0,0%,0%,0.1), 0px 1px 3px 0px hsla(0,0%,0%,0.12)');
+	$vars->add
+	('--spip-css-box-shadow',
+		'0 0.05em 0.15em hsla(0, 0%, 0%, 0.33),' .
+		'0 0.1em  0.25em hsla(0, 0%, 0%, 0.05),' .
+		'0 0.1em  0.5em  hsla(0, 0%, 0%, 0.05)'
+	);
+	$vars->add
+	('--spip-css-box-shadow-hover',
+		'0 0.05em 0.15em hsla(0, 0%, 0%, 0.1),' .
+		'0 0.2em  0.5em  hsla(0, 0%, 0%, 0.1),' .
+		'0 0.2em  1em    hsla(0, 0%, 0%, 0.075)'
+	);
 
 	return $vars;
 }
