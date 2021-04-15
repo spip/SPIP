@@ -14,13 +14,13 @@
 		<div class="editer-groupe">
 			#SET{name,date}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-				<label for="#GET{name}_jour" id="#GET{name}_jour_#GET{id}">[(#ENV{_label_date})] #AIDER{artdate}</label>[
+				<label for="#GET{name}_jour" id="#GET{name}_jour_#GET{id}"><span class="texte-label">[(#ENV{_label_date})]</span> #AIDER{artdate}</label>[
 				<span class='erreur_message' id="erreur_#GET{id}">(#GET{erreurs})</span>
 				]
 				<span class="affiche"[(#ENV{_saisie_en_cours}|et{#ENV{_editer_date}}|oui)style="display:none;"]>[(#ENV*{afficher_#GET{name}}|affdate)]</span>
 				<BOUCLE_editable(CONDITION){si #ENV{editable}}>
 				<span class="toggle_box_link middle"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]><button
-					  class="mini principal"
+					  class="btn_mini btn_secondaire"
 					  name="_saisie_en_cours" value="X"
 						onclick="return formulaireDaterButtonChangeOnClick.apply(this)"
 						><:bouton_changer:><i class="over"> \(#ENV{_label_date}\)</i></button></span>
@@ -33,7 +33,7 @@
 			<BOUCLE_editer_date_anterieure(CONDITION){si #ENV{_editer_date_anterieure}|oui}>
 				#SET{name,date_redac}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-					<label for="#GET{name}_jour" id="#GET{name}_jour_#GET{id}">[(#ENV{_label_date_redac,<:texte_date_publication_anterieure:>})] #AIDER{artdate_redac}</label>[
+					<label for="#GET{name}_jour" id="#GET{name}_jour_#GET{id}"><span class="texte-label">[(#ENV{_label_date_redac,<:texte_date_publication_anterieure:>})]</span> #AIDER{artdate_redac}</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]
 					<span class="affiche"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]>[(#ENV*{afficher_#GET{name}}|affdate|sinon{<:jour_non_connu_nc:>})]</span>
@@ -48,7 +48,7 @@
 							<input type="checkbox" name="sans_redac" value="1"[(#ENV{sans_redac}|oui)checked="checked"] id="sans_redac"
 								onclick="jQuery(this).blur();"
 								onchange="formulaireDaterCheckboxSansRedacOnChange.apply(this)"
-							/><label for="sans_redac">[(#ENV{_texte_sans_date_redac,<:texte_date_publication_anterieure_nonaffichee:>})]</label>
+							/><label for="sans_redac"><span class="texte-label">[(#ENV{_texte_sans_date_redac,<:texte_date_publication_anterieure_nonaffichee:>})]</span></label>
 						</span>
 					</BOUCLE_editable1>
 					</span>
@@ -60,8 +60,8 @@
 	[(#ENV{editable})
 		<div class='boutons'[(#ENV{_saisie_en_cours}|non)style="display:none;"]>
 			<span class='image_loading'>&nbsp;</span>
-			<div class="groupe-boutons">
-				<input type='submit' class='btn submit' name='annuler' value='<:bouton_annuler:>' />
+			<div class="groupe-btns">
+				<input type='submit' class='btn submit btn_secondaire' name='annuler' value='<:bouton_annuler:>' />
 				<input type='submit' class='btn submit' name='changer' value='<:bouton_changer:>' />
 			</div>
 		</div>

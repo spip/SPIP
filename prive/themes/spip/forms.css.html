@@ -41,7 +41,7 @@
 	--spip-form-gutter-input-y: 0.66em;
 	/* layout */
 	--spip-form-label-width: 12em;
-	--spip-form-label-long-width: 18em;
+	--spip-form-label-long-width: 19em;
 	/* couleurs */
 	--spip-form-border-color: hsla(0, 0%, 0%, 0.2); /* couleur bordure inputs et cie */
 	--spip-form-color-focus: hsla(var(--spip-color-theme--h), calc(var(--spip-color-theme--s) * 3), var(--spip-color-theme--l), 0.25); /* outline focus inputs et cie */
@@ -178,6 +178,7 @@
 	text-align: var(--spip-css-left);
 	color: var(--spip-form-color-text-light);
 	background: transparent;
+	line-height: 1.3; /* légèrement inférieure au texte normal */
 }
 .formulaire_spip .long_label {
 	padding-#LEFT: var(--spip-form-label-long-width);
@@ -707,29 +708,6 @@ input[type="file"] {
 	background-color: var(--spip-color-gray-lightest);
 	position: relative;
 }
-.fiche_objet .formulaire_spip.formulaire_dater label {
-	font-size: 85%;
-	font-weight: normal;
-	/* oblmigé de recalculer width à cause du font-size */
-	width: calc((var(--spip-form-label-long-width) - (var(--spip-form-gutter-x) * 2)) * 1.2);
-	margin-#LEFT: calc(((var(--spip-form-label-long-width) - var(--spip-form-gutter-x)) * -1) * 1.2);
-}
-.fiche_objet .formulaire_spip.formulaire_dater .input.editable {
-	display: flex;
-}
-.fiche_objet .formulaire_spip.formulaire_dater img.ui-datepicker-trigger {
-	margin-#LEFT: -1em;
-	#LEFT: -1em;
-}
-.fiche_objet .formulaire_spip.formulaire_dater input.text {
-	padding-top: calc(var(--spip-form-gutter-input-y) / 2);
-	padding-bottom: calc(var(--spip-form-gutter-input-y) / 2);
-}
-.fiche_objet .formulaire_spip.formulaire_dater p.boutons {
-	border-radius: 0px;
-	margin: 0px -15px -10px -15px;
-	position: relative;
-}
 
 
 /**
@@ -845,13 +823,19 @@ input[type="file"] {
 	padding-bottom: 0;
 	padding-top: 0;
 }
-.formulaire_dater .editer label {
+.formulaire_dater .editer > label {
 	font-weight: bold;
 	text-transform: uppercase;
-	font-size:0.9em;
+	display: flex;
+	align-items: center;
+}
+.formulaire_dater .editer > label .texte-label {
+	font-size: 0.85em;
 }
 .formulaire_dater .aide {
-	float: var(--spip-css-right);
+	margin-#LEFT: auto;
+	display: block;
+	flex: 0 0 auto;
 }
 .formulaire_dater .affiche {
 	font-weight: bold;
@@ -862,16 +846,33 @@ input[type="file"] {
 }
 .formulaire_dater .editer_date_redac .editable .choix {
 	display: block;
+	margin-top: calc(var(--spip-form-gutter-input-y) / 2);
+}
+.formulaire_dater #sans_redac {
+	vertical-align: top;
+}
+.formulaire_spip.formulaire_dater img.ui-datepicker-trigger {
+	margin-#LEFT: -1em;
+	#LEFT: -1em;
+}
+.formulaire_spip.formulaire_dater input.text {
+	padding-top: calc(var(--spip-form-gutter-input-y) / 2);
+	padding-bottom: calc(var(--spip-form-gutter-input-y) / 2);
+}
+.formulaire_spip.formulaire_dater .toggle_box_link {
+	#RIGHT: var(--spip-form-gutter-x);
+}
+.formulaire_spip.formulaire_dater .boutons {
+	border-radius: 0px;
+	position: relative;
+	padding-top: 0; /* inutile car pas de démarquation de couleur */
 }
 @media (max-width: 760px) {
 	.formulaire_dater .editer_date_redac .editable label {
-		margin-left: -260px!important;
-		width: 240px !important;
-		display:inline-block;
+		margin-left: calc((var(--spip-form-label-long-width) + (var(--spip-form-gutter-x) * 1/2)) * -1);
+		width: calc(var(--spip-form-label-long-width) - (var(--spip-form-gutter-x) * 2));
+		display: inline-block;
 	}
-}
-.formulaire_dater  #sans_redac {
-	vertical-align: top;
 }
 
 /* editer_liens */
