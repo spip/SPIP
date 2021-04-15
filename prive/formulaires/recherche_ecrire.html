@@ -3,26 +3,34 @@
 	[(#ENV{action}|form_hidden)]
 	[<input type="hidden" name="lang" value="(#ENV{lang})" />]
 	<label for="#ENV{_id_champ,recherche}"><:info_rechercher_02:></label>
-	<input type="text"
-				 class="text[(#ENV{recherche}|oui) cancelable]"
-				 size="10"
-				 name="recherche"
-				 id="#ENV{_id_champ,recherche}"
-				 placeholder="<:info_rechercher|attribut_html:>"[
-				 value="(#ENV{recherche})"]
-	/>[<a
-	(#ENV{recherche}|oui)
+	<input
+		type="text"
+		class="text[(#ENV{recherche}|oui) cancelable]"
+		size="10"
+		name="recherche"
+		id="#ENV{_id_champ,recherche}"
+		placeholder="<:info_rechercher|attribut_html:>"[
+		value="(#ENV{recherche})"]
+	/>[(#ENV{recherche}|oui)
+	<a
 		class="cancel[ (#ENV{class,''})]"
 		href="[(#ENV{action}|parametre_url{'recherche',''})]"
 		onclick="$(this).siblings('input.text').val('')"
-		title='<:annuler_recherche|attribut_html:>'>[(#CHEMIN_IMAGE{fermer-16.png}
-	|balise_img
-	|inserer_attribut{alt,<:annuler_recherche:>})]</a>]<input type='image'
-					 src='[(#CHEMIN_IMAGE{rechercher-20.png})]'
-					 class="image"
-					 alt='<:info_rechercher|attribut_html:>'
-					 onclick="return recherche_submit_#ENV{_id_champ,recherche}.apply(this);"
-	/><a class="none[ (#ENV{class,''})] refresh" href="[(#ENV{action}|parametre_url{'recherche',''})]"><:info_rechercher:></a>
+		title='<:annuler_recherche|attribut_html:>'
+	>[(#CHEMIN_IMAGE{fermer-16.png}
+		|balise_img
+		|inserer_attribut{alt,<:annuler_recherche:>})]
+	</a>]
+	<button
+		type="button"
+		class="image"
+		aria-label="<:info_rechercher|attribut_html:>"
+		title="<:info_rechercher|attribut_html:>"
+		onclick="return recherche_submit_#ENV{_id_champ,recherche}.apply(this);"
+	>
+		[(#CHEMIN_IMAGE{rechercher-20.png}|balise_svg)]
+	</button>
+	<a class="none[ (#ENV{class,''})] refresh" href="[(#ENV{action}|parametre_url{'recherche',''})]"><:info_rechercher:></a>
 </div></form>
 <script type="text/javascript">/*<![CDATA[*/
 function recherche_submit_#ENV{_id_champ,recherche}(){
