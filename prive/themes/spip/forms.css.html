@@ -43,7 +43,7 @@
 	--spip-form-label-width: 12em;
 	--spip-form-label-long-width: 18em;
 	/* couleurs */
-	--spip-form-border-color: hsla(0, 0%, 0%, 0.15); /* couleur bordure inputs et cie */
+	--spip-form-border-color: hsla(0, 0%, 0%, 0.2); /* couleur bordure inputs et cie */
 	--spip-form-color-focus: hsla(var(--spip-color-theme--h), calc(var(--spip-color-theme--s) * 3), var(--spip-color-theme--l), 0.25); /* outline focus inputs et cie */
 	--spip-form-color-text: var(--spip-color-gray-darkest); /* défaut */
 	--spip-form-color-text-light: var(--spip-color-gray-dark); /* labels et cie */
@@ -149,8 +149,7 @@
 .formulaire_spip fieldset,
 .formulaire_spip fieldset .editer-groupe,
 .formulaire_spip .boutons,
-.formulaire_spip .titrem,
-.formulaire_spip .legend {
+.formulaire_spip .titrem {
 	margin-left: calc(var(--spip-form-gutter-x) * -1);
 	margin-right: calc(var(--spip-form-gutter-x) * -1);
 }
@@ -230,12 +229,12 @@
 
 
 /**
- * ============
- * 4. Fieldsets
- * ============
+ * =======================
+ * 4. Fieldsets des enfers
+ * =======================
  */
 
-
+/* Tous */
 .formulaire_spip fieldset {
 	min-width: 0;
 	padding-left: var(--spip-form-gutter-x);
@@ -251,9 +250,16 @@
 	border: 0;
 	margin: 0;
 }
-.formulaire_spip .editer.fieldset {
+/* Champ conteneur de fieldset */
+.formulaire_spip .fieldset {
 	padding: 0;
+	margin-top: calc(var(--spip-form-gutter-y) / 2); /* Parce que bordure en haut */
 }
+.formulaire_spip .fieldset .editer-groupe {
+	margin-left: calc(var(--spip-form-gutter-x) * -1);
+	margin-right: calc(var(--spip-form-gutter-x) * -1);
+}
+/* Légendes */
 .formulaire_spip h3.legend,
 .formulaire_spip legend {
 	display: block;
@@ -262,6 +268,12 @@
 	background-color: transparent;
 	color: var(--spip-color-theme);
 	font-weight: 800;
+}
+.formulaire_spip h3.legend,
+.formulaire_spip .fieldset fieldset > legend {
+	margin-bottom: 0; /* suivi d'un editer-groupe donc pas la peine */
+	margin-left: calc((var(--spip-form-gutter-x) / 2) * -1);
+	margin-right: calc((var(--spip-form-gutter-x) / 2) * -1);
 }
 
 
@@ -275,7 +287,6 @@
 .formulaire_spip .editer_parent,
 .formulaire_spip .editer_groupe_mot,
 .formulaire_editer_auteur .editer_statut {
-	margin-top: calc(var(--spip-form-gutter-y) / 2);
 	padding-top: var(--spip-form-gutter-y);
 	padding-bottom: var(--spip-form-gutter-y);
 }
@@ -283,6 +294,8 @@
 .formulaire_spip .editer_groupe_mot:not(.erreur),
 .formulaire_editer_auteur .editer_statut:not(.erreur) {
 	background-color: var(--spip-color-theme-lightest);
+	margin-top: calc(var(--spip-form-gutter-y) / 2); /* si fond de couleur, alors augmenter la marge */
+	margin-bottom: calc(var(--spip-form-gutter-y) / 2);
 }
 .formulaire_spip .editer.editer_parent label,
 .formulaire_spip .editer.editer_groupe_mot label {
@@ -729,6 +742,7 @@ input[type="file"] {
 /* Article */
 .formulaire_editer_article .editer.editer_liens_sites {
 	border-bottom: 1px solid var(--spip-form-border-color);
+	margin-bottom: calc(var(--spip-form-gutter-y) / 2); /* parceque bordure en bas */
 }
 
 /* edition d'un auteur */
