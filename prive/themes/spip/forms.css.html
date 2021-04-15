@@ -50,6 +50,7 @@
 	--spip-form-color-text-lightest: var(--spip-color-gray); /* placeholder */
 	/* divers */
 	--spip-form-border-radius: var(--spip-css-border-radius); /* bordure inputs et cie */
+	--spip-form-input-height: calc((var(--spip-form-gutter-input-y) * 2) + var(--spip-css-line-height));
 }
 
 
@@ -283,13 +284,15 @@
 .formulaire_editer_auteur .editer_statut:not(.erreur) {
 	background-color: var(--spip-color-theme-lightest);
 }
-.formulaire_spip .editer_parent .rubrique_actuelle {
-	clear: #LEFT;
-}
 .formulaire_spip .editer.editer_parent label,
 .formulaire_spip .editer.editer_groupe_mot label {
 	color: black;
 	font-weight: bold;
+}
+.formulaire_spip .editer_parent .rubrique_actuelle {
+	clear: both;
+	display: flex;
+	align-items: center;
 }
 
 
@@ -325,7 +328,7 @@
 .formulaire_spip textarea:focus,
 .formulaire_spip select:focus {
 	border-color: var(--spip-color-theme);
-	box-shadow: 0 0 0 0.3em var(--spip-form-color-focus);
+	box-shadow: 0 0 0 0.2em var(--spip-form-color-focus);
 	outline: 0;
 }
 .formulaire_spip input.text,
