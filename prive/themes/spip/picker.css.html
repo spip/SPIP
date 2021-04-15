@@ -66,7 +66,9 @@ a.rub-ouverte {
 }
 
 /* Selecteur ajax */
-.rubrique_actuelle {}
+.rubrique_actuelle {
+	margin-top: 1em;
+}
 #titreparent[disabled=disabled] {
 	border: none;
 	background: none;
@@ -85,6 +87,16 @@ a.rub-ouverte {
 .rubrique-search:focus {
 	color: var(--spip-color-theme-darker);
 	border: 1px solid var(--spip-color-theme-darker);
+}
+.rubrique-search.toggled {
+	background-color: var(--spip-color-theme);
+	border-color: var(--spip-color-theme);
+	color: var(--spip-color-white);
+}
+.rubrique-search.toggled:hover,
+.rubrique-search.toggled:focus {
+	background-color: var(--spip-color-theme-darker);
+	border-color: var(--spip-color-theme-darker);
 }
 .rubrique-search svg {
 	width: 0.85em;

@@ -336,8 +336,9 @@ function construire_selecteur($url, $js, $idom, $name, $init = '', $id = 0) {
 	$img_icone = $balise(chemin_image($icone, _T('titre_image_selecteur')));
 
 	return
-		"<div class='rubrique_actuelle'><a href='#' class='rubrique-search' style='display:inline-flex;vertical-align:middle;' onclick=\""
+		"<div class='rubrique_actuelle'><a href='#' class='rubrique-search' role='button' style='display:inline-flex;vertical-align:middle;' onclick=\""
 		. $js
+		. " jQuery(this).toggleClass('toggled'); "
 		. "return charger_node_url_si_vide('"
 		. $url
 		. "', this.parentNode.nextSibling, this.nextSibling,'',event)\" title='" . attribut_html(_T('titre_image_selecteur')) . "'>"
