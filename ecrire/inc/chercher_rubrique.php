@@ -331,20 +331,23 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem = 0, $do
  **/
 function construire_selecteur($url, $js, $idom, $name, $init = '', $id = 0) {
 	$icone = (strpos($idom, 'auteur') !== false) ? 'auteur-24.png' : 'rechercher-20.png';
+	// si icone de recherche on embed le svg
+	$balise = ($icone === 'rechercher-20.png' ? chercher_filtre('balise_svg') : chercher_filtre('balise_img'));
+	$img_icone = $balise(chemin_image($icone, _T('titre_image_selecteur')));
 
 	return
-		"<div class='rubrique_actuelle'><a href='#' onclick=\""
+		"<div class='rubrique_actuelle'><a href='#' class='rubrique-search' style='display:inline-flex;vertical-align:middle;' onclick=\""
 		. $js
 		. "return charger_node_url_si_vide('"
 		. $url
-		. "', this.parentNode.nextSibling, this.nextSibling,'',event)\" title='" . attribut_html(_T('titre_image_selecteur')) . "'><img src='"
-		. chemin_image($icone)
-		. "'\nstyle='vertical-align: middle;' alt='" . attribut_html(_T('titre_image_selecteur')) . "' /></a><img src='"
+		. "', this.parentNode.nextSibling, this.nextSibling,'',event)\" title='" . attribut_html(_T('titre_image_selecteur')) . "'>"
+		. $img_icone
+		. "</a><img src='"
 		. chemin_image('loader.svg')
 		. "' class='loader' id='img_"
 		. $idom
 		. "'\nstyle='visibility: hidden;' alt='*' />"
-		. "<input id='titreparent' name='titreparent'"
+		. "<input id='titreparent' name='titreparent' class='text'"
 		. $init
 		. " />"
 		. "<input type='hidden' id='$name' name='$name' value='"

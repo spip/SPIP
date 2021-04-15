@@ -39,7 +39,7 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type, $do = 'aff') {
 				include_spip('inc/filtres_images_mini');
 				$res = image_reduire("<img src='$fid' alt='' />", 100, 48);
 				if ($res) {
-					$res = "<div style='float: " . $GLOBALS['spip_lang_right'] . "; margin-" . $GLOBALS['spip_lang_right'] . ": -5px; margin-top: -5px;'>$res</div>";
+					$res = "<div class='informer__media' style='float: " . $GLOBALS['spip_lang_right'] . "; margin-" . $GLOBALS['spip_lang_right'] . ": -5px; margin-top: -5px;'>$res</div>";
 				}
 			}
 		}
@@ -64,11 +64,13 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type, $do = 'aff') {
 	. "\" />"
 	. "</div>"
 	. "<div class='informer' style='padding: 5px; border-top: 0px;'>"
+	. '<div class="informer__item">'
 	. (!$res ? '' : $res)
-	. "<p><b>" . safehtml($titre) . "</b></p>"
-	. (!$descriptif ? '' : "<div>" . safehtml($descriptif) . "</div>")
-	. "<div style='text-align: " . $GLOBALS['spip_lang_right'] . ";'>"
-	. "<input type='submit' class='fondo' value='"
+	. "<p class='informer__titre'><b>" . safehtml($titre) . "</b></p>"
+	. (!$descriptif ? '' : "<div class='informer__descriptif'>" . safehtml($descriptif) . "</div>")
+	. '</div>'
+	. "<div class='informer__action' style='clear:both; text-align: " . $GLOBALS['spip_lang_right'] . ";'>"
+	. "<input type='submit' class='fondo btn submit' value='"
 	. _T('bouton_choisir')
 	. "'\nonclick=\"$js_func('$titre',$id,'selection_rubrique','id_parent'); return false;\" />"
 	. "</div>"

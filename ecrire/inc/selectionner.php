@@ -66,7 +66,7 @@ function inc_selectionner_dist($sel, $idom = "", $exclus = 0, $aff_racine = fals
 		$js_func = $do . '_selection_titre';
 		$ondbClick = "$js_func('$ondbClick',0,'selection_rubrique','id_parent');";
 
-		$aff_racine = "<div class='petite-racine item'>"
+		$aff_racine = "<div class='petit-item petite-racine item'>"
 			. "<a href='#'"
 			. "onclick=\""
 			. $onClick
@@ -119,7 +119,7 @@ function construire_selectionner_hierarchie($idom, $liste, $racine, $url, $name,
 	. http_img_pack("loader.svg", "",
 		"class='loader' style='visibility: hidden;float:" . $GLOBALS['spip_lang_right'] . "' id='$idom5'")
 	. ""
-	. "<input style='width: 100px;float:" . $GLOBALS['spip_lang_right'] . ";' type='search' id='$idom1'"
+	. "<input style='width: 10em;float:" . $GLOBALS['spip_lang_right'] . ";' type='search' class='text search' id='$idom1' placeholder='" . _T('info_rechercher') . "'"
 	// eliminer Return car il provoque la soumission (balise unique)
 	// et eliminer Tab pour la navigation au clavier
 	// ce serait encore mieux de ne le faire que s'il y a encore plusieurs

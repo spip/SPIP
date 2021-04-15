@@ -61,7 +61,7 @@ function inc_plonger_dist($id_rubrique, $idom = "", $list = array(), $col = 1, $
 		foreach ($ordre as $id => $titrebrut) {
 			$titre = supprimer_numero($titrebrut);
 
-			$classe1 = $id_rubrique ? 'petite-rubrique' : "petit-secteur";
+			$classe1 = 'petit-item ' . ($id_rubrique ? 'petite-rubrique' : "petit-secteur");
 			if (isset($rub[$id]["enfants"])) {
 				$classe2 = " class='rub-ouverte'";
 				$url = "\nhref='$rec&amp;id=$id'";
