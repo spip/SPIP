@@ -70,12 +70,12 @@ a.rub-ouverte {
 	margin-top: 1em;
 }
 #titreparent[disabled=disabled] {
+	width: 100% !important;
 	border: none;
 	background: none;
 	color: inherit;
 	font-weight: 500;
 	padding: 0;
-	mask-image: linear-gradient(90deg, hsla(0, 0%, 0%, 100) 90%, hsla(0, 0%, 0%, 0) 100%);
 }
 .rubrique-search {
 	color: var(--spip-color-theme);
@@ -107,6 +107,11 @@ a.rub-ouverte {
 	float: var(--spip-css-right);
 	display: flex;
 	align-items: center;
+	/* fond de couleur par-dessus le titre */
+	position: relative;
+	z-index: 2;
+	padding-left: 2em;
+	background-image: linear-gradient(90deg, transparent 0%, var(--spip-color-theme-lightest) 2em);
 }
 .recherche_rapide_parent input.search {
 	border-radius: 99em;
