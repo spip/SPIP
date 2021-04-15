@@ -51,6 +51,15 @@
 
 #bando_outils { bottom:0px; width:100%; clear:both; background: #ENV{claire}; }
 
+#bando_outils > .largeur {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	   -ms-flex-align: center;
+	      align-items: center;
+}
+
 #bando_outils li.plan_site {margin-#ENV{right}:20px;}
 #bando_outils li.plan_site a#boutonbandeautoutsite {display:block;line-height:1em;}
 #bando_outils li.plan_site a#boutonbandeautoutsite img {padding:2px; }
@@ -102,8 +111,15 @@
 #bando_outils ul.rapides li.rapides__item a:hover, #bando_outils ul.rapides li.rapides__item a:focus{background-color:#[(#ENV{claire}|couleur_eclaircir)];}
 #bando_outils ul.rapides li.rapides__item{ margin-top:0px;}
 
-#bando_outils #rapides {float:#ENV{right};}
-#bando_outils #rapides .formulaire_recherche {margin:3px 0;clear:none;}
+#bando_outils #rapides {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	   -ms-flex-align: center;
+	      align-items: center;
+	margin-#LEFT: auto;
+}
 
 #bando_navigation ul.deroulant > li {min-width:90px; max-width:115px; text-align:center; }
 @media (min-width: 960px) {
