@@ -78,11 +78,19 @@ function date_picker_init(){
 				if ($me.data('orientation')) {
 					options.orientation = $me.data('orientation');
 				}
+				options.showOnFocus = false;
+				if ($me.data('showonfocus')){
+					options.showOnFocus = $me.data('showonfocus');
+				}
 
 				$me
 					.addClass('datePicker')
 					.datepicker(jQuery.extend({},options))
 					.trigger('datePickerLoaded');
+
+				if (!options.showOnFocus) {
+					$me.on('click', function(){$me.datepicker('show')});
+				}
 
 				if ($me.data('range-after') || $me.data('range-before')) {
 					$me.on('changeDate', function (){rangePickerChangeDate($me)});

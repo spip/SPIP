@@ -25,7 +25,7 @@
 						onclick="return formulaireDaterButtonChangeOnClick.apply(this)"
 						><:bouton_changer:><i class="over"> \(#ENV{_label_date}\)</i></button></span>
 				<span class="input[(#ENV{_editer_date}|oui)editable]"[(#ENV{_saisie_en_cours}|et{#ENV{_editer_date}}|non)style="display:none;"]>
-					<input type="text" class="text date" data-orientation="top" name="#GET{name}_jour" id="#GET{name}_jour" value="#ENV{#GET{name}_jour}" size="10" aria-describedby="[(#GET{erreurs}|oui)erreur_#GET{id} ]format_date_#GET{id}"/>
+					<input type="text" class="text date" name="#GET{name}_jour" id="#GET{name}_jour" value="#ENV{#GET{name}_jour}" size="10" aria-describedby="[(#GET{erreurs}|oui)erreur_#GET{id} ]format_date_#GET{id}"/>
 					<input type="text" class="text heure time" name="#GET{name}_heure" id="#GET{name}_heure" value="#ENV{#GET{name}_heure}" size="5" aria-labelledby="#GET{name}_jour_#GET{id}" aria-describedby="format_heure_#GET{id}"/>
 				</span>
 				</BOUCLE_editable>
