@@ -231,7 +231,7 @@
 .datepicker table tr td.active:hover,
 .datepicker table tr td.active.disabled,
 .datepicker table tr td.active.disabled:hover {
-  background-color: var(--spip-color-theme-dark);
+  background-color: var(--spip-color-theme-dark,#0044cc);
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
@@ -255,7 +255,7 @@
 .datepicker table tr td.active:hover[disabled],
 .datepicker table tr td.active.disabled[disabled],
 .datepicker table tr td.active.disabled:hover[disabled] {
-  background-color: var(--spip-color-theme-dark);
+  background-color: var(--spip-color-theme-dark,#0044cc);
 }
 .datepicker table tr td span {
   display: block;
@@ -283,8 +283,8 @@
 .datepicker table tr td span.active:hover,
 .datepicker table tr td span.active.disabled,
 .datepicker table tr td span.active.disabled:hover {
-  background-color: var(--spip-color-theme);
-  border-color: var(--spip-color-theme-dark) var(--spip-color-theme-dark) var(--spip-color-theme-darkest);
+  background-color: var(--spip-color-theme,#006dcc);
+  border-color: var(--spip-color-theme-dark,#0044cc) var(--spip-color-theme-dark,#0044cc) var(--spip-color-theme-darkest,#002a80);
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
@@ -309,7 +309,7 @@
 .datepicker table tr td span.active:hover[disabled],
 .datepicker table tr td span.active.disabled[disabled],
 .datepicker table tr td span.active.disabled:hover[disabled] {
-  background-color: var(--spip-color-theme-dark);
+  background-color: var(--spip-color-theme-dark,#0044cc);
 }
 .datepicker table tr td span.old,
 .datepicker table tr td span.new {
