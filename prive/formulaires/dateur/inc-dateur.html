@@ -27,6 +27,8 @@ function date_picker_options(){
 		todayBtn: true,
 		clearBtn: false,
 		orientation: 'bottom',
+		showOn:false,   // jQuery UI
+		showOnFocus:false,// BS Datepicker
 		zIndexOffset: 1010
 	};
 }
@@ -78,9 +80,11 @@ function date_picker_init(){
 				if ($me.data('orientation')) {
 					options.orientation = $me.data('orientation');
 				}
-				options.showOnFocus = false;
 				if ($me.data('showonfocus')){
 					options.showOnFocus = $me.data('showonfocus');
+					if (options.showOnFocus) {
+						options.showOn = 'focus';
+					}
 				}
 
 				$me
