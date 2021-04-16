@@ -120,7 +120,7 @@ function phraser_polyglotte($texte, $ligne, $result) {
 			$champ->ligne = $ligne;
 			$ligne += substr_count($match[0], "\n");
 			$lang = '';
-		phraser_arite_incorrecte	$bloc = $match[1];
+			$bloc = $match[1];
 			$texte = substr($texte, $p + strlen($match[0]));
 			while (preg_match("/^[[:space:]]*([^[{]*)[[:space:]]*[[{]([a-z_]+)[]}](.*)$/si", $bloc, $regs)) {
 				$trad = $regs[1];
