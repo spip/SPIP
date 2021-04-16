@@ -120,7 +120,7 @@ function phraser_polyglotte($texte, $ligne, $result) {
 			$champ->ligne = $ligne;
 			$ligne += substr_count($match[0], "\n");
 			$lang = '';
-			$bloc = $match[1];
+		phraser_arite_incorrecte	$bloc = $match[1];
 			$texte = substr($texte, $p + strlen($match[0]));
 			while (preg_match("/^[[:space:]]*([^[{]*)[[:space:]]*[[{]([a-z_]+)[]}](.*)$/si", $bloc, $regs)) {
 				$trad = $regs[1];
@@ -330,6 +330,10 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 			$err_f = array('zbug_erreur_filtre', array('filtre' => $texte));
 			erreur_squelette($err_f, $pointeur_champ);
 			$texte = '';
+		} elseif ($fonc and $err_filtre=phraser_arite_incorrecte($fonc, 1)) {
+			$err_f = array('zbug_erreur_filtre', array('filtre' => $texte.$err_filtre));    // mauvaise arité
+			erreur_squelette($err_f, $pointeur_champ);
+			$texte = '';
 		} else {
 			$texte = $suite;
 		}
@@ -433,6 +437,14 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 		$res[] = $collecte;
 		$collecte = array();
 	}
+
+	if ($fonc and $err_filtre=phraser_arite_incorrecte($fonc, count($res))) {
+		$err_f = array('zbug_erreur_filtre', array('filtre' => $texte . $err_filtre));    // mauvaise arité
+		erreur_squelette($err_f, $pointeur_champ);
+		$champ = new Texte;
+		$champ->apres = $champ->avant = $args = "";
+	}
+
 	$texte = substr($args, 1);
 	$source = substr($suite, 0, strlen($suite) - strlen($texte));
 	// propager les erreurs, et ignorer les param vides
@@ -1257,4 +1269,26 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne_
 	$all_res = phraser_champs_etendus($texte, $ligne_debut_initial, $all_res);
 
 	return $all_res;
+}
+
+/**
+ * @param string $filtre
+ * @param int    $nb_args
+ * @return string			texte d'erreur si arité mauvaise, chaine vide sinon
+ * @throws ReflectionException
+ */
+function phraser_arite_incorrecte(string $filtre, int $nb_args) : string {
+	if (!function_exists($filtre)) {    // détection des fonctions non existantes ailleurs ?
+		return '';
+	}
+	$reflection = new ReflectionFunction($filtre);
+	$min = $reflection->getNumberOfRequiredParameters();
+	if ($nb_args < $min) {
+		return " appelé avec $nb_args arguments alors qu'il en faut au moins $min";
+	}
+	$max = $reflection->getNumberOfParameters();
+	if ($nb_args > $max and !$reflection->isVariadic()) {
+		return " appelé avec $nb_args arguments alors qu'il en faut $max au maximum";
+	}
+	return '';
 }
