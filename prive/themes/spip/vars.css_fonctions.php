@@ -30,25 +30,35 @@ class Spip_Css_Vars_Collection {
  * @param Pile $pile Pile
  */
 function spip_generer_variables_css_typo(array $Pile) : \Spip_Css_Vars_Collection {
-		$vars = new \Spip_Css_Vars_Collection();
+	$vars = new \Spip_Css_Vars_Collection();
 
+	// Direction
 	$vars->add('--spip-css-dir', $Pile[0]['dir']);
 	$vars->add('--spip-css-left', $Pile[0]['left']);
 	$vars->add('--spip-css-right', $Pile[0]['right']);
 
+	// Typographie
 	$vars->add('--spip-css-font-size', $Pile[0]['font-size']);
 	$vars->add('--spip-css-line-height',  $Pile[0]['line-height']);
-	$vars->add('--spip-css-margin-bottom', $Pile[0]['margin-bottom']);
-
 	$vars->add('--spip-css-text-indent', $Pile[0]['text-indent']);
 	$vars->add('--spip-css-font-family', $Pile[0]['font-family']);
+
+	// Couleurs hors thème
 	$vars->add('--spip-css-background-color', $Pile[0]['background-color']);
 	$vars->add('--spip-css-color', $Pile[0]['color']);
 
+	// Espacements pour le rythme vertical et les gouttières
+	// Basés sur la hauteur d'une ligne de texte
+	$vars->add('--spip-css-spacing-y', round(strmult($Pile[0]['font-size'], $Pile[0]['line-height']), 4) . 'em');
+	$vars->add('--spip-css-spacing-x', round(strmult($Pile[0]['font-size'], $Pile[0]['line-height']), 4) . 'em');
+	$vars->add('--spip-css-margin-bottom', $Pile[0]['margin-bottom']); // À éviter
+
+	// Bordures
 	$vars->add('--spip-css-border-radius-mini', '0.2em');
 	$vars->add('--spip-css-border-radius', '0.33em');
 	$vars->add('--spip-css-border-radius-large', '0.66em');
 
+	// Ombres portées
 	$vars->add
 	('--spip-css-box-shadow',
 		'0 0.05em 0.15em hsla(0, 0%, 0%, 0.33),' .
