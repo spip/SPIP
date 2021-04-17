@@ -247,6 +247,10 @@ function phraser_champs($texte, $ligne, $result) {
 				$champ->apres[0]->texte = substr($suite,0,$n);
 			}
 			*/
+		} elseif ($fonc and $err_a=phraser_arite_incorrecte($fonc, 1)) {
+			$err_f = array('zbug_erreur_filtre', array('filtre' => $texte)); // créer chaine de langue ?
+			erreur_squelette($err_f, $pointeur_champ);
+			$texte = '';
 		} else {
 			$texte = $suite;
 		}
@@ -433,6 +437,14 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 		$res[] = $collecte;
 		$collecte = array();
 	}
+
+	if ($fonc and $err_a=phraser_arite_incorrecte($fonc, count($res))) {
+		$err_f = array('zbug_erreur_filtre', array('filtre' => $texte));    // autre future chaine de langue ?
+		erreur_squelette($err_f, $pointeur_champ);
+		$champ = new Texte;
+		$champ->apres = $champ->avant = $args = "";
+	}
+
 	$texte = substr($args, 1);
 	$source = substr($suite, 0, strlen($suite) - strlen($texte));
 	// propager les erreurs, et ignorer les param vides
@@ -1257,4 +1269,24 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne_
 	$all_res = phraser_champs_etendus($texte, $ligne_debut_initial, $all_res);
 
 	return $all_res;
+}
+
+/**
+ * @param string $filtre
+ * @param int    $nb_args
+ * @return string				chaine vide s'il est correct d'appeler $filtre avec $nb_args arguments
+ * @throws ReflectionException
+ */
+function phraser_arite_incorrecte(string $filtre, int $nb_args) : string {
+	if (!function_exists($filtre)) {    // détection des fonctions non existantes ailleurs ?
+		return '';
+	}
+	$reflection = new ReflectionFunction($filtre);
+	$min = $reflection->getNumberOfRequiredParameters();
+	$max = $reflection->getNumberOfParameters();
+	if (($nb_args < $min) or  ($nb_args > $max and $reflection->isInternal() and !$reflection->isVariadic())) {
+		spip_log("Erreur : La fonction php `$filtre` implémentant un filtre est appelée avec $nb_args arguments alors qu'il en faut au moins $min et au plus $max", _LOG_ERREUR);
+		return ' ';
+	}
+	return '';
 }
