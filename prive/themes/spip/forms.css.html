@@ -6,19 +6,37 @@
 	Organisation du fichier :
 
 	0. Variables
-	1. Entête optionnel avant le formulaire
-	3. Conteneur et structure
-	4. Fieldsets
-	5. Champs particuliers
-	6. Éléments de formulaire (inputs & cie)
-	7. Erreurs, obligations et messages de retour
-	8. Choix
-	9. Explications
-	10. Formulaires compacts en colonnes laterales
-	11. Formulaires dans fiche objet
-	12. Formulaires particuliers
-	13. Divers
+	1. Layout : gouttière
+	2. Layout : rythme vertical
+	3. Entête optionnel avant le formulaire
+	4. Structure générale : conteneurs, champs & labels
+	5. Fieldsets
+	6. Champs avec .choix
+	7. Champs en erreurs, obligations & autres états
+	8. Champs particuliers
+	9. Éléments de formulaire (inputs & cie)
+	10. Messages de retour
+	11. Messages d’explications
+	12. Formulaires compacts en colonnes laterales
+	13. Formulaires dans certains contextes : fiche objet, etc.
+	14. Formulaires particuliers
+	15. Divers
 
+	Markup :
+
+	.formulaire_spip > form > div
+	  .editer-groupe
+	    .editer x
+	    .editer y
+	  (.fieldset > ) fieldset
+	    .editer-groupe
+	      .editer x
+	      .editer y
+	      (.fieldset > ) fieldset
+	        .editer-groupe
+	          .editer x
+	          .editer y
+	  .boutons
 
 <style>/**]
 #CACHE{3600*100,cache-client}
@@ -32,37 +50,187 @@
  * ============
  */
 
+
 :root {
 	/* espacements externes (entre les inputs et cie) */
-	--spip-form-gutter-x: 1.25em;
-	--spip-form-gutter-y: 1.25em;
+	--spip-form-spacing-x: 0.75em;
+	--spip-form-spacing-y: 0.75em;
 	/* espacements internes (à l'intérieur des inputs et cie) */
-	--spip-form-gutter-input-x: 0.66em;
-	--spip-form-gutter-input-y: 0.66em;
-	/* layout */
+	--spip-form-padding-input-x: 0.5em;
+	--spip-form-padding-input-y: 0.5em;
+	/* fieldsets */
+	--spip-form-fieldset-offset: 1.5em; /* décalage quand imbriqué */
+	--spip-form-fieldset-spacing: calc(var(--spip-form-spacing-y) / 2); /* espacement en plus */
+	/* layout labels */
 	--spip-form-label-width: 12em;
 	--spip-form-label-long-width: 19em;
 	/* couleurs */
 	--spip-form-border-color: hsla(0, 0%, 0%, 0.2); /* couleur bordure inputs et cie */
+	--spip-form-sep-color: hsla(0, 0%, 0%, 0.125); /* couleur trait de séparation */
 	--spip-form-color-focus: hsla(var(--spip-color-theme--h), calc(var(--spip-color-theme--s) * 3), var(--spip-color-theme--l), 0.25); /* outline focus inputs et cie */
 	--spip-form-color-text: var(--spip-color-gray-darkest); /* défaut */
-	--spip-form-color-text-light: var(--spip-color-gray-dark); /* labels et cie */
+	--spip-form-color-text-light: var(--spip-color-gray-darker); /* labels et cie */
 	--spip-form-color-text-lightest: var(--spip-color-gray); /* placeholder */
 	/* divers */
 	--spip-form-border-radius: var(--spip-css-border-radius); /* bordure inputs et cie */
-	--spip-form-input-height: calc((var(--spip-form-gutter-input-y) * 2) + var(--spip-css-line-height));
+	--spip-form-input-height: calc((var(--spip-form-padding-input-y) * 2) + var(--spip-css-line-height)); /* à toute fin utile */
+}
+@media (min-width: 768px) {
+	:root {
+		/* espacements externes (entre les inputs et cie) */
+		--spip-form-spacing-x: 1.25em;
+		--spip-form-spacing-y: 1.25em;
+		/* espacements internes (à l'intérieur des inputs et cie) */
+		--spip-form-padding-input-x: 0.66em;
+		--spip-form-padding-input-y: 0.66em;
+		/* décalage des fieldsets imbriqués */
+		--spip-form-fieldset-offset: 2.5em;
+	}
+}
+
+
+/**
+ * ===================================
+ * 1. Layout : gestion de la gouttière
+ * ===================================
+ *
+ * Principe : par défaut il y a des gouttières latérales afin que le contenu ne colle pas aux bords du formulaire.
+ * Mais pour certains éléments on l'annule au moyen de marges négatives, de sorte qu'ils reviennent coller aux bords.
+ * On regroupe tout au même endroit pour mutualiser et se simplifier la vie.
+ */
+
+/* Gouttière latérale principale */
+.formulaire_spip,
+.formulaire_spip .titrem,
+.formulaire_spip fieldset,
+.formulaire_spip .editer-groupe,
+.formulaire_spip .editer,
+.formulaire_spip .boutons {
+	padding-left: var(--spip-form-spacing-x);
+	padding-right: var(--spip-form-spacing-x);
+}
+
+/* Marges négatives pour annuler la gouttière */
+.formulaire_spip .titrem,
+.formulaire_spip .editer-groupe,
+.formulaire_spip fieldset,
+.formulaire_spip .editer,
+.formulaire_spip .boutons, #wysiwyg .formulaire_spip p.boutons {
+	margin-left: calc(var(--spip-form-spacing-x) * -1);
+	margin-right: calc(var(--spip-form-spacing-x) * -1);
+}
+
+
+/**
+ * ===========================
+ * 2. Layout : rythme vertical
+ * ===========================
+ *
+ * On réunit au même endroit toutes les règlent concernant le rythme vertical.
+ * Il s'agit des espacements verticaux entre les éléments : marges internes et externes.
+ */
+
+/**
+ * 2.2. Élements optionnels qui précèdent le <form> : titre, explications, etc.
+ * Il y a d'office 1 espace entre ceux-ci et le form.
+ * Donc hormis le titre, dès qu'il y a un élément avec une marge inférieure (p, ul), ça fait 2 espaces.
+ * Essayer de forcer à n'avoir qu'1 espace tout le temps est trop compliqué avec le markup actuel.
+ */
+
+/* Titre : 1 espace avec l'élément suivant. Pas de marge sous le titre lui-même,
+   sinon ça fait 2 espaces quand il n'y a que le titre avant le form, et c'est très moche */
+.formulaire_spip .titrem {
+	margin-bottom: 0;
+}
+.formulaire_spip .titrem + *:not(form) {
+	margin-top: var(--spip-form-spacing-y);
+}
+/* Généralités */
+.formulaire_spip p,
+.formulaire_spip ul,
+.formulaire_spip pre,
+.formulaire_spip blockquote {
+	margin-bottom: var(--spip-form-spacing-y);
+}
+
+/**
+ * 2.3. Groupes de saisies
+ * 1 espace entre les saisies, ainsi qu'à l'extérieur du groupe.
+ */
+
+.formulaire_spip .editer-groupe {
+	padding-top: calc(var(--spip-form-spacing-y) / 2);
+	padding-bottom: calc(var(--spip-form-spacing-y) / 2);
+}
+.formulaire_spip .editer {
+	padding-top: calc(var(--spip-form-spacing-y) / 2);
+	padding-bottom: calc(var(--spip-form-spacing-y) / 2);
+}
+/* Saisies avec fond de couleur : ajuster pour conserver 1 espace */
+.formulaire_spip .editer.erreur,
+.formulaire_spip .editer_parent,
+.formulaire_spip .editer_groupe_mot,
+.formulaire_editer_auteur .editer_statut {
+	padding-top: var(--spip-form-spacing-y);
+	padding-bottom: var(--spip-form-spacing-y);
+	margin-top: calc(var(--spip-form-spacing-y) / 2);
+	margin-bottom: calc(var(--spip-form-spacing-y) / 2);
+}
+/* Groupes consécutifs : annuler l'espace en trop (à priori rare mais possible) */
+.formulaire_spip .editer-groupe + .editer-groupe {
+	margin-top: calc((var(--spip-form-spacing-y) / 2) * -1);
+	padding-top: 0;
+}
+
+/**
+ * 2.4. Fieldsets
+ * Compliqué d'avoir précisément la main, la légende fausse tous les calculs.
+ */
+
+/* Fieldsets : espace supplémentaire autour */
+.formulaire_spip fieldset {
+	padding-top: var(--spip-form-fieldset-spacing);
+	padding-bottom: var(--spip-form-fieldset-spacing);
+	margin-top: var(--spip-form-fieldset-spacing);
+	margin-bottom: var(--spip-form-fieldset-spacing);
+}
+.formulaire_spip fieldset legend,
+.formulaire_spip fieldset .legend {
+	margin-bottom: 0;
+}
+/* Fieldsets successifs : ressérer */
+.formulaire_spip fieldset + fieldset,
+.formulaire_spip .fieldset + .fieldset fieldset {
+	margin-top: calc(var(--spip-form-fieldset-spacing) * -1);
+}
+/* Fieldsets imbriqués */
+.formulaire_spip fieldset fieldset {
+	margin-bottom: 0; /* Tant qu'il n'y a pas de bordure latérale */
+}
+
+
+/**
+ * 2.5. Autres éléments
+ */
+
+/* Explications : 1 espace autour. */
+.formulaire_spip .explication,
+.formulaire_spip .attention {
+	margin-top: var(--spip-form-spacing-y);
+	margin-bottom: var(--spip-form-spacing-y);
 }
 
 
 /**
  * =======================================
- * 1. Entête optionnel avant le formulaire
+ * 3. Entête optionnel avant le formulaire
  * =======================================
  */
 
 
 .cadre-formulaire-editer .formulaire_spip {
 	margin-top: 0;
+	overflow: hidden; /* sinon problème avec marge supérieure qui déborde, mais par défaut sur tous ça cacherait l'icône en entête */
 }
 .cadre-formulaire-editer {
 	color: var(--spip-form-color-text-light);
@@ -76,17 +244,18 @@
 	position: absolute;
 	#RIGHT: 0;
 }
-.entete-formulaire{
+.entete-formulaire {
 	position:relative;
-	padding: calc(var(--spip-css-margin-bottom) / 2) var(--spip-form-gutter-x);
+	padding: calc(var(--spip-form-spacing-y) / 2) var(--spip-form-spacing-x);
+	padding-bottom: 0; /* Déjà une marge suffisante sous le h1 */
 	overflow: hidden;
 	background: var(--spip-color-white);
-	border-bottom: 1px solid var(--spip-form-border-color);
+	border-bottom: 1px solid var(--spip-form-sep-color);
 	border-top-left-radius: var(--spip-css-border-radius);
 	border-top-right-radius: var(--spip-css-border-radius);
 	box-shadow: var(--spip-css-box-shadow);
 }
-.formulaire_spip .cadre{
+.formulaire_spip .cadre {
 	border: 1px solid var(--spip-form-border-color);
 }
 .entete-formulaire + .formulaire_spip,
@@ -99,15 +268,22 @@
 
 
 /**
- * =========================
- * 3. Conteneur et structure
- * =========================
+ * ===================================================
+ * 4. Structure générale : conteneurs, champs & labels
+ * ===================================================
  */
 
 
+/* Conteneur général */
+.formulaire_spip,
+.formulaire_spip * {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
 .formulaire_spip {
 	position: relative; /* pour positionner le ajaxload en automatique */
-	padding: 0 var(--spip-form-gutter-x) 0;
 	margin: calc(var(--spip-css-margin-bottom) * 1.5) 0;
 	color: var(--spip-form-color-text);
 	background-color: var(--spip-color-white);
@@ -120,105 +296,108 @@
 .formulaire_spip:focus-within {
 	box-shadow: var(--spip-css-box-shadow-hover);
 }
-.formulaire_spip h3.titrem {
-	padding: var(--spip-form-gutter-y) var(--spip-form-gutter-x);
+
+/* Titre optionnel */
+.formulaire_spip .titrem {
+	display: flex;
+	align-items: center;
+	padding-top: var(--spip-form-spacing-y);
+	padding-bottom: var(--spip-form-spacing-y);
 	border-top-left-radius: inherit;
 	border-top-right-radius: inherit;
-	color: var(--spip-color-theme);
-	border-bottom: 1px solid hsla(0, 0%, 0%, 0.1);
+	color: var(--spip-color-theme-dark);
+	border-bottom: 1px solid var(--spip-form-sep-color);
 	text-transform: uppercase;
 }
-.formulaire_spip h3.titrem ~ p:last-child:not(.boutons) {
-	margin-bottom: calc(var(--spip-css-margin-bottom) / 2);
-}
 
-/* Conteneur inputs */
+/* Conteneur des saisies */
 .formulaire_spip .editer-groupe {
-	padding: var(--spip-form-gutter-input-y) 0;
-}
-.formulaire_spip .editer-groupe.deux_colonnes {
-	-webkit-column-count: 2;
-	-moz-column-count: 2;
-	column-count: 2;
-}
-.formulaire_spip .editer-groupe .editer-groupe,
-.formulaire_spip .fieldset > fieldset {
-	margin:0;
-}
-.formulaire_spip .editer-groupe,
-.formulaire_spip fieldset,
-.formulaire_spip fieldset .editer-groupe,
-.formulaire_spip .boutons,
-.formulaire_spip .titrem {
-	margin-left: calc(var(--spip-form-gutter-x) * -1);
-	margin-right: calc(var(--spip-form-gutter-x) * -1);
-}
-.formulaire_spip .editer {
-	padding: calc(var(--spip-form-gutter-y) / 2) var(--spip-form-gutter-x);
-	clear: both;
 	overflow: hidden;
 }
+/*  2 colonnes */
+@media (min-width: 768px) {
+	.formulaire_spip .editer-groupe.deux_colonnes {
+		-webkit-column-count: 2;
+		-moz-column-count: 2;
+		column-count: 2;
+		column-gap: var(--spip-form-spacing-x);
+	}
+	.formulaire_spip .editer-groupe.deux_colonnes .editer {
+		padding-left:  0;
+		padding-right: 0;
+		margin: 0;
+	}
+}
 
-/* Labels */
+/* Conteneur d'une saisie */
+.formulaire_spip .editer {
+	clear: both;
+	/* overflow: hidden; */ /* un peu trop brutal par défaut ? */
+}
+
+/* Labels : affichés à gauche par défaut */
 .formulaire_spip label[for] {
 	cursor: pointer;
 }
 .formulaire_spip .editer,
 .formulaire_spip .editer.gauche {
-	padding-#LEFT: var(--spip-form-label-width);
+	padding-#LEFT: calc(var(--spip-form-label-width) + (var(--spip-form-spacing-x) * 2)); /* largeur + marge gauche+droite */
 }
 .formulaire_spip .editer label,
 .formulaire_spip .editer .label,
 .formulaire_spip .editer.gauche label {
 	float: var(--spip-css-left);
-	width: calc(var(--spip-form-label-width) - (var(--spip-form-gutter-x) * 2));
+	width: var(--spip-form-label-width);
+	margin-#LEFT: calc((var(--spip-form-label-width) + var(--spip-form-spacing-x)) * -1); /* inverse largeur + marge */
+	margin-bottom: calc(var(--spip-form-spacing-y) / 4);
 	padding: 0;
-	margin-#LEFT: calc((var(--spip-form-label-width) - var(--spip-form-gutter-x)) * -1);
-	margin-bottom: calc(var(--spip-form-gutter-y) / 4);
-	text-align: var(--spip-css-left);
-	color: var(--spip-form-color-text-light);
 	background: transparent;
+	color: var(--spip-form-color-text-light);
+	text-align: var(--spip-css-left);
+	font-weight: inherit;
 	line-height: 1.3; /* légèrement inférieure au texte normal */
 }
+/* Labels plus longs */
 .formulaire_spip .long_label {
-	padding-#LEFT: var(--spip-form-label-long-width);
+	padding-#LEFT: calc(var(--spip-form-label-long-width) + (var(--spip-form-spacing-x) * 2)); /* largeur + marge gauche+droite */
 }
 .formulaire_spip .long_label .label,
 .formulaire_spip .long_label label {
-	width: calc(var(--spip-form-label-long-width) - (var(--spip-form-gutter-x) * 2));
-	margin-#LEFT: calc((var(--spip-form-label-long-width) - var(--spip-form-gutter-x)) * -1);
+	width: var(--spip-form-label-long-width);
+	margin-#LEFT: calc((var(--spip-form-label-long-width) + var(--spip-form-spacing-x)) * -1); /* inverse largeur + marge */
 }
-/* Formulaires avec label en haut + cas particuliers où c'est forcé */
+/* Labels en haut + cas particuliers où c'est forcé */
+.formulaire_spip .pleine_largeur,
 .formulaire_spip .editer_parent,
 .formulaire_spip .editer_groupe_mot,
 .formulaire_spip .editer_descriptif,
 .formulaire_spip .editer_chapo,
 .formulaire_spip .editer_texte,
 .formulaire_spip .editer_ps,
-.formulaire_spip .haut,
-.formulaire_spip .pleine_largeur {
-	padding-#LEFT: var(--spip-form-gutter-x);
+.formulaire_spip .haut {
+	padding-#LEFT: var(--spip-form-spacing-x);
 }
+.formulaire_spip .pleine_largeur > label,
+.formulaire_spip .editer-groupe.deux_colonnes .editer > label,
 .formulaire_spip .editer_parent label,
 .formulaire_spip .editer_groupe_mot label,
 .formulaire_spip .editer_descriptif label,
 .formulaire_spip .editer_chapo label,
 .formulaire_spip .editer_texte label,
 .formulaire_spip .editer_ps label,
-.formulaire_spip .haut label,
-.formulaire_spip .pleine_largeur > label {
+.formulaire_spip .haut label {
 	display: block;
 	float: none;
-	width:auto;
+	width: auto;
 	margin-#LEFT: 0;
 }
 
 /* Conteneur des boutons (les boutons eux-mêmes sont dans boutons.css.html) */
 .formulaire_spip .boutons {
 	position: relative;
-	margin-bottom: 0;
+	margin-bottom: 0 !important; /* Fix #wysiwyg */
 	clear: both;
-	padding: calc(var(--spip-form-gutter-y) / 2) var(--spip-form-gutter-x);
+	padding: calc(var(--spip-form-spacing-y) / 2)  var(--spip-form-spacing-x);
 	text-align: var(--spip-css-right);
 	background-color: var(--spip-color-theme-lightest);
 	border-bottom-left-radius: var(--spip-form-border-radius);
@@ -231,275 +410,157 @@
 
 /**
  * =======================
- * 4. Fieldsets des enfers
+ * 5. Fieldsets des enfers
  * =======================
  */
 
-/* Tous */
+
+/* Fieldsets : tous */
 .formulaire_spip fieldset {
-	min-width: 0;
-	padding-left: var(--spip-form-gutter-x);
-	padding-right: var(--spip-form-gutter-x);
-	padding-bottom: calc(var(--spip-margin-bottom) / 4);
-	margin-bottom: var(--spip-form-gutter-y);
-	margin-top: calc(var(--spip-margin-bottom) / 4);
-	border: 0;
+	position: relative;
+	min-width: 0; /* nécessaire ? */
 	width: auto;
-	border-top: 1px solid var(--spip-form-border-color);
+	border: 0;
+	border-top: 1px solid var(--spip-form-sep-color);
 }
+
+/* Légendes */
+.formulaire_spip fieldset legend,
+.formulaire_spip fieldset .legend {
+	display: flex; /* pour aligner les pictos aide */
+	align-items: center;
+	justify-content: space-between;
+	padding: var(--spip-form-padding-input-y) var(--spip-form-padding-input-x);
+	background-color: var(--spip-color-gray-lightest);
+	/* color: var(--spip-color-theme-darker); */
+	font-weight: 800;
+	font-size: inherit;
+}
+/* Fix h3 pseudo-légendes : on essaie de les afficher comme des vraies */
+.formulaire_spip fieldset .legend:not(legend) {
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	transform: translateY(-50%);
+}
+.formulaire_spip fieldset .legend:not(legend) + * {
+	margin-top: var(--spip-form-spacing-y) !important;
+}
+
+/* Fieldsets .editer : ce sont des conteneurs pour des .choix, à afficher comme les autre .editer */
 .formulaire_spip fieldset.editer {
 	border: 0;
-	margin: 0;
+	margin-bottom: 0;
+	margin-top: 0;
 }
-/* Champ conteneur de fieldset */
-.formulaire_spip .fieldset {
-	padding: 0;
-	margin-top: calc(var(--spip-form-gutter-y) / 2); /* Parce que bordure en haut */
+
+/* Fix des .editer + .fieldset : combinaison erronée ? */
+.formulaire_spip .fieldset.editer {
+	padding-left: var(--spip-form-spacing-x);
 }
-.formulaire_spip .fieldset .editer-groupe {
-	margin-left: calc(var(--spip-form-gutter-x) * -1);
-	margin-right: calc(var(--spip-form-gutter-x) * -1);
+
+/* Fieldsets imbriqués */
+.formulaire_spip fieldset fieldset {
+	margin-#LEFT: var(--spip-form-fieldset-offset); /* décalage */
+	padding-left: 0;
+	padding-right: 0;
+	margin-right: 0;
 }
-/* Légendes */
-.formulaire_spip h3.legend,
-.formulaire_spip legend {
-	display: block;
-	padding: var(--spip-form-gutter-input-y) var(--spip-form-gutter-input-x);
-	margin-bottom: var(--spip-form-gutter-y);
-	background-color: transparent;
-	color: var(--spip-color-theme);
-	font-weight: 800;
-}
-.formulaire_spip h3.legend,
-.formulaire_spip .fieldset fieldset > legend {
-	margin-bottom: 0; /* suivi d'un editer-groupe donc pas la peine */
-	margin-left: calc((var(--spip-form-gutter-x) / 2) * -1);
-	margin-right: calc((var(--spip-form-gutter-x) / 2) * -1);
+
+/* Hack temporaire pour avoir marquer la fin des fieldsets racines avec une bordure inférieure.
+   Il n'en faut une que quand le fieldset est suivi d'autre chose qu'un fieldset.
+   On pose donc la bordure sur l'élément suivant, en bidouillant les marges.
+   À refaire proprement quand il y aura un meilleur markup (une classe spéciale ou autre). */
+.formulaire_spip form > div > fieldset + *:not(fieldset):not(.fieldset):not(.boutons),
+.formulaire_spip form > div > .fieldset + *:not(fieldset):not(.fieldset):not(.boutons),
+.formulaire_spip form > div > .editer-groupe > .fieldset + *:not(.fieldset):not(.boutons) {
+	border-top: 1px solid var(--spip-form-sep-color);
+	margin-top: calc(var(--spip-form-fieldset-spacing) * -1);
+	padding-top: var(--spip-form-spacing-y);
 }
 
 
 /**
- * ======================
- * 5. Champs particuliers
- * ======================
+ * =====================
+ * 8. Champs avec .choix
+ * =====================
+ *
+ * Conteneur de paires inputs + labels, plusieurs paires possibles par conteneur.
+ * Recommandé pour les radios et checkbox.
+ * La variante inline peut avoir des inputs textes, et éventuellement des selects.
+ *
+ * Attention, il y a une distinction selon la balise :
+ *   - div.choix : variante bloc avec un cadre similaire à ceux des inputs.text et cie
+ *   - span.choix : variante inline sans aucun habillage
  */
 
 
-.formulaire_spip .editer_parent,
-.formulaire_spip .editer_groupe_mot,
-.formulaire_editer_auteur .editer_statut {
-	padding-top: var(--spip-form-gutter-y);
-	padding-bottom: var(--spip-form-gutter-y);
-}
-.formulaire_spip .editer_parent:not(.erreur),
-.formulaire_spip .editer_groupe_mot:not(.erreur),
-.formulaire_editer_auteur .editer_statut:not(.erreur) {
-	background-color: var(--spip-color-theme-lightest);
-	margin-top: calc(var(--spip-form-gutter-y) / 2); /* si fond de couleur, alors augmenter la marge */
-	margin-bottom: calc(var(--spip-form-gutter-y) / 2);
-}
-.formulaire_spip .editer.editer_parent label,
-.formulaire_spip .editer.editer_groupe_mot label {
-	color: black;
-	font-weight: bold;
-}
-.formulaire_spip .editer_parent .rubrique_actuelle {
-	
-}
-
-
-/**
- * ========================================
- * 6. Éléments de formulaire (inputs & cie)
- * ========================================
- */
-
-
-.formulaire_spip input.text,
-.formulaire_spip input.number,
-.formulaire_spip input.password,
-.formulaire_spip textarea,
-.formulaire_spip select {
-	position: relative;
-	z-index: 2;
-	padding: var(--spip-form-gutter-input-y) var(--spip-form-gutter-input-x);
-	width: 100%;
-	border: 1px solid var(--spip-form-border-color);
-	border-radius: var(--spip-form-border-radius);
+/* Ceux avec un cadre */
+.formulaire_spip div.choix {
 	background-color: var(--spip-color-white);
-	font-size: 1em;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-ms-box-sizing: border-box;
-	box-sizing: border-box;
-	transition: box-shadow 0.2s;
-}
-.formulaire_spip input.text:focus,
-.formulaire_spip input.number:focus,
-.formulaire_spip input.password:focus,
-.formulaire_spip textarea:focus,
-.formulaire_spip select:focus {
-	border-color: var(--spip-color-theme);
-	box-shadow: 0 0 0 0.2em var(--spip-form-color-focus);
-	outline: 0;
-}
-.formulaire_spip input.text,
-.formulaire_spip input.password,
-.formulaire_spip input.file,
-.formulaire_spip select {
-	font-size: inherit;
-	font-family: inherit;
-}
-.formulaire_spip textarea {
-	overflow: auto;
-	font-size: inherit;
-	font-family:inherit;
-	line-height: inherit;
-}
-.formulaire_spip input.placeholder,
-.formulaire_spip textarea.placeholder {
-	color: var(--spip-form-color-text-lightest);
-}
-input[type="file"] {
-	border: none;
-	background-color: transparent;
-}
-/* Boutons de soumission du form (voir aussi dans boutons.css) */
-.formulaire_spip input.submit,
-.formulaire_spip input.reset,
-.formulaire_spip input.button {
-	width: auto;
-}
-
-
-/**
- * =============================================
- * 7. Erreurs, obligations et messages de retour
- * =============================================
- */
-
-
-/* Obligatoire */
-.formulaire_spip .editer.obligatoire label,
-.formulaire_spip .editer.obligatoire .label,
-.formulaire_spip .editer.obligatoire.gauche label {
-	color: var(--spip-color-black);
-	font-weight: bold;
-}
-.formulaire_spip .editer.obligatoire input.text,
-.formulaire_spip .editer.obligatoire input.number,
-.formulaire_spip .editer.obligatoire input.password {
-	font-weight: bold;
-}
-
-/* Inputs en erreur */
-/* cas exotique d'un label dans une erreur (ie confirmez que vous etes sur ) */
-.formulaire_spip .erreur_message label {
-	float: none;
-	display: inline;
-	font-weight: normal;
-	margin-#LEFT: 0;
-}
-.formulaire_spip .erreur {
-	background-color:#FBE3E4;
-}
-.formulaire_spip .editer .erreur_message {
-	display: block;
-	color: #8A1F11;
-	font-weight: bold;
-}
-.formulaire_spip .erreur input.text,
-.formulaire_spip .erreur input.password,
-.formulaire_spip .erreur textarea {
-	border: 2px solid #FBC2C4;
-}
-
-/* Messages de retour */
-.formulaire_spip .reponse_formulaire,
-.error, .success, .notice, .information {
-	border: 2px solid;
-	color: var(--spip-form-color-text);
-	font-weight: normal;
-	padding: var(--spip-form-gutter-input-y) var(--spip-form-gutter-input-x);
-	padding-left: 40px; /* place pour icône */
-	min-height: 24px;
-	background-repeat:no-repeat;
-	background-position: var(--spip-form-gutter-input-y) var(--spip-form-gutter-input-x);
-	background-size: 24px;
-	margin-bottom: var(--spip-css-margin-bottom);
-	margin-top: var(--spip-css-margin-bottom);
-}
-.formulaire_spip .reponse_formulaire_ok,
-.success {
-	color: #264409;
-	border-color: #C6D880;
-	background-color:#E6EFC2;
-	background-image:url(#CHEMIN_IMAGE{ok-24.png});
-}
-.formulaire_spip .reponse_formulaire_erreur,
-.error {
-	color: #8A1F11;
-	border-color: #FBC2C4;
-	background-color:#FBE3E4;
-	background-image:url(#CHEMIN_IMAGE{erreur-24.png});
-}
-.notice {
-	color: #514721;
-	border-color: #FFD324;
-	background-color:#FFF6BF;
-	background-image:url(#CHEMIN_IMAGE{warning-24.png});
-}
-.information {
-	color: #1e556b;
-	border-color: #2f96b4;
-	background-color: #e2f6fd;
-}
-/* Remarques importantes */
-.formulaire_spip .attention {
-	display: block;
-	margin-bottom: var(--spip-css-margin-bottom);
-	font-weight: normal;
-	color: #514721;
-	background-color:#FFF6BF;
-	padding: var(--spip-form-gutter-input-y) var(--spip-form-gutter-input-x);
-}
-
-
-/**
- * ========
- * 8. Choix
- * ========
- */
-
-
-.formulaire_spip .choix {
-	background-color: var(--spip-color-white);
-	padding: calc(var(--spip-form-gutter-input-y) / 2) calc(var(--spip-form-gutter-input-x) / 2);
+	padding: calc(var(--spip-form-padding-input-y) / 2) var(--spip-form-padding-input-x);
 	border: 1px solid var(--spip-form-border-color);
 	border-top-left-radius: var(--spip-form-border-radius);
 	border-top-right-radius: var(--spip-form-border-radius);
 	border-bottom: 0;
 	z-index: 1; /* passer par dessus fond explication qui suit */
+	transition: box-shadow 0.2s; /* idem inputs */
 }
-.formulaire_spip .choix + .choix {
+.formulaire_spip div.choix + .choix {
 	padding-top: 0;
 	border-top: 0;
 	border-bottom: 0;
 	border-radius: 0;
 }
-.formulaire_spip .choix:last-of-type,
-.formulaire_spip .choix:last-child {
+.formulaire_spip div.choix:last-of-type,
+.formulaire_spip div.choix:last-child {
 	border-bottom-left-radius: var(--spip-form-border-radius);
 	border-bottom-right-radius: var(--spip-form-border-radius);
 	border-bottom: 1px solid var(--spip-form-border-color);
 	position: relative;
 }
-.formulaire_spip .choix:first-of-type {
+.formulaire_spip div.choix:first-of-type {
 	border-top-left-radius: var(--spip-form-border-radius);
 	border-top-right-radius: var(--spip-form-border-radius);
 	border-top: 1px solid var(--spip-form-border-color);
 	position: relative;
 }
+
+/* Label */
+.formulaire_spip .choix > label,
+.formulaire_spip .choix :not(.editer) > label /* pourquoi ? */
+{
+	display: inline;
+	float: none;
+	margin: 0;
+	font-weight: normal;
+	text-transform: none;
+}
+
+/* Inputs */
+.formulaire_spip .choix input {
+	margin: 0 0 0.15em; /* remonter légèrement pour aligner */
+	vertical-align: middle;
+}
+/* Largeur auto, en évitant d'utiliser !important */
+.formulaire_spip .choix input,
+.formulaire_spip .choix input.text,
+.formulaire_spip .choix input.password,
+.formulaire_spip .choix select {
+	width: auto;
+}
+
+/* Espacements entre inputs et labels, indépendamment de la position du label (on sait qu'ils vont par paire, ça suffit) */
+.formulaire_spip .choix > *:nth-child(odd) {
+	margin-#RIGHT: calc(var(--spip-form-padding-input-x) * 3/4); /* entre input et label */
+}
+/* Espacement entre plusieurs options dans un même .choix, et entre .choix inline successifs */
+.formulaire_spip .choix > *:nth-child(3n+3),
+.formulaire_spip span.choix + span.choix {
+	margin-#LEFT: var(--spip-form-spacing-x); /* entre options ou .choix inline */
+}
+
+/* Variante inline, sans bordure (cf. explication plus haut) */
 .formulaire_spip span.choix,
 .formulaire_spip span.choix:first-of-type,
 .formulaire_spip span.choix:last-of-type,
@@ -509,20 +570,10 @@ input[type="file"] {
 	padding: 0;
 	border: 0;
 }
-.formulaire_spip .choix > label,
-.formulaire_spip .choix :not(.editer) > label {
-	font-weight: normal;
-	text-transform: none;
-	float:none;
-	display: inline;
-	margin-#LEFT: var(--spip-form-gutter-input-x);
-	color: var(--spip-form-color-text-light);
-}
-.formulaire_spip .choix .radio,
-.formulaire_spip .choix .checkbox {
-	width: auto;
-}
-.formulaire_spip div.choix + .explication {
+
+/* Explication en dessous */
+.formulaire_spip div.choix + .explication,
+.formulaire_spip div.choix + .attention {
 	margin-top: 0;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
@@ -531,25 +582,280 @@ input[type="file"] {
 
 
 /**
- * ===============
- * 9. Explications
- * ===============
+ * ================================================
+ * 7. Champs en erreurs, obligations & autres états
+ * ================================================
  */
 
 
-.formulaire_spip .explication {
+/* Champs obligatoires */
+.formulaire_spip .editer.obligatoire label,
+.formulaire_spip .editer.obligatoire .label,
+.formulaire_spip .editer.obligatoire.gauche label {
+	color: var(--spip-color-black);
+	font-weight: bold;
+}
+.formulaire_spip .editer.obligatoire input.text,
+.formulaire_spip .editer.obligatoire input.password {
+	font-weight: bold;
+}
+
+/* Champs en erreur */
+.formulaire_spip .editer.erreur {
+	background-color: hsl(var(--spip-color-error--h), var(--spip-color-error--s), 95%);
+}
+.formulaire_spip .erreur_message {
+	display: block;
+	margin-bottom: calc(var(--spip-form-spacing-y) / 4);
+	font-weight: bold;
+}
+/* Coloriser message et labels des .choix */
+.formulaire_spip .erreur_message,
+.formulaire_spip .editer.erreur .choix label {
+	color: hsl(var(--spip-color-error--h), var(--spip-color-error--s), 45%);
+}
+/* cas exotique d'un label dans une erreur (ie confirmez que vous êtes sûr ) */
+.formulaire_spip .erreur_message label {
+	float: none;
+	display: inline;
+	font-weight: normal;
+	margin-#LEFT: 0;
+}
+.formulaire_spip .editer.erreur input.text,
+.formulaire_spip .editer.erreur input.password,
+.formulaire_spip .editer.erreur textarea,
+.formulaire_spip .editer.erreur select {
+	border: 2px solid hsl(var(--spip-color-error--h), var(--spip-color-error--s), 66%);
+}
+.formulaire_spip .editer.erreur .choix {
+	border-color: hsl(var(--spip-color-error--h), var(--spip-color-error--s), 66%) !important;
+	border-width: 2px !important;
+}
+.formulaire_spip .editer.erreur input.text:focus,
+.formulaire_spip .editer.erreur input.password:focus,
+.formulaire_spip .editer.erreur textarea:focus,
+.formulaire_spip .editer.erreur select:focus,
+.formulaire_spip .editer.erreur [type="radio"]:focus,
+.formulaire_spip .editer.erreur [type="checkbox"]:focus,
+.formulaire_spip .editer.erreur [type="file"]:focus {
+	box-shadow: 0 0 0 0.2rem hsla(var(--spip-color-error--hsl), 0.33);
+}
+
+/* Champs disabled */
+.formulaire_spip .editer.disabled {
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+
+/**
+ * ======================
+ * 8. Champs particuliers
+ * ======================
+ */
+
+
+/* Avec couleur de fond */
+.formulaire_spip .editer_parent:not(.erreur),
+.formulaire_spip .editer_groupe_mot:not(.erreur),
+.formulaire_editer_auteur .editer_statut:not(.erreur) {
+	background-color: var(--spip-color-gray-lightest);
+}
+
+/* Importants */
+.formulaire_spip .editer.editer_parent label,
+.formulaire_spip .editer.editer_groupe_mot label {
+	/* color: black; */
+	font-weight: bold;
+}
+
+
+/**
+ * ========================================
+ * 9. Éléments de formulaire (inputs & cie)
+ * ========================================
+ *
+ * Nomenclature recommandée pour les types d'inputs : <type> [text text_<type>]
+ * C'est à dire toujours mettre le type + text si c'est une variation du type texte.
+ * Pour l'instant on fait des fallbacks si classes absentes.
+ *
+ * Exemples :
+ * <input type="text"   class="text" />
+ * <input type="email"  class="email  text text_email" />
+ * <input type="number" class="number text text_number" />
+ * <input type="phone"  class="phone  text text_phone" />
+ * <input type="file"   class="file" />
+ */
+
+
+/* Éléments avec du texte */
+.formulaire_spip input.text,
+.formulaire_spip input.password,
+.formulaire_spip textarea,
+.formulaire_spip select {
+	font-size: inherit;
+	font-family: inherit;
+	line-height: inherit;
+}
+
+/* Éléments avec bordure */
+.formulaire_spip input.text,
+.formulaire_spip input.password,
+.formulaire_spip textarea,
+.formulaire_spip select {
+	position: relative;
+	z-index: 2;
+	padding: var(--spip-form-padding-input-y) var(--spip-form-padding-input-x);
+	margin: 0;
+	width: 100%;
+	border: 1px solid var(--spip-form-border-color);
+	border-radius: var(--spip-form-border-radius);
+	background-color: var(--spip-color-white);
+	transition: box-shadow 0.1s;
+}
+.formulaire_spip input.text:focus,
+.formulaire_spip input.password:focus,
+.formulaire_spip textarea:focus,
+.formulaire_spip select:focus,
+.formulaire_spip [type="radio"]:focus,
+.formulaire_spip [type="checkbox"]:focus,
+.formulaire_spip [type="file"]:focus {
+	border-color: var(--spip-color-theme);
+	box-shadow: 0 0 0 0.2rem var(--spip-form-color-focus);
+	outline: 0;
+}
+
+/* Bloc de texte */
+.formulaire_spip textarea {
+	overflow: auto;
+}
+
+/* Placeholders simulés ? */
+.formulaire_spip input.placeholder,
+.formulaire_spip textarea.placeholder {
+	color: var(--spip-form-color-text-lightest);
+}
+
+/* Input fichier */
+.formulaire_spip input.file,
+.formulaire_spip input[type="file"] {
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+/* Input de couleur */
+.formulaire_spip input.color,
+.formulaire_spip input[type="color"] {
+	min-height: 2.75em; /* À la louche, à calculer auto. si possible */
+	min-width: 2.75em; /* Carré */
+	width: auto;
+	padding: calc(var(--spip-form-padding-input-y) / 2);
+	cursor: pointer;
+}
+
+/* Input de recherche */
+.formulaire_spip input.search,
+.formulaire_spip input[type="search"] {
+	border-radius: 99em;
+}
+
+/* Boutons de soumission (voir aussi dans boutons.css) */
+.formulaire_spip input.submit,
+.formulaire_spip input.reset,
+.formulaire_spip input.button {
+	width: auto;
+}
+
+
+/**
+ * =============================
+ * 10. Messages de retour et cie
+ * =============================
+ */
+
+
+.formulaire_spip .reponse_formulaire,
+.error, .success, .notice, .information {
+	border: 2px solid;
+	color: var(--spip-form-color-text);
+	font-weight: normal;
+	padding: var(--spip-form-spacing-y) var(--spip-form-spacing-x);
+	padding-left: calc(var(--spip-form-spacing-y) + 24px); /* place pour icône */
+	min-height: 24px;
+	background-repeat: no-repeat;
+	background-position: calc(var(--spip-form-spacing-y) / 2) var(--spip-form-spacing-x);
+	background-size: 24px;
+	margin-bottom: var(--spip-form-spacing-y);
+	margin-top: var(--spip-form-spacing-y);
+}
+.formulaire_spip .reponse_formulaire {
+	border-top-#RIGHT-radius: var(--spip-css-border-radius);
+	border-bottom-#RIGHT-radius: var(--spip-css-border-radius);
+	border-width: 0;
+	border-#LEFT-width: 0.6em;
+	box-shadow: inset 0 0 1em hsla(0, 0%, 100%, 0.2);
+}
+.formulaire_spip .reponse_formulaire_ok,
+.success {
+	color: hsl(var(--spip-color-success--h), var(--spip-color-success--s), 25%);
+	border-color: hsl(var(--spip-color-success--h), var(--spip-color-success--s), 66%);
+	background-color:hsl(var(--spip-color-success--h), var(--spip-color-success--s), 85%);
+	background-image: url(#CHEMIN_IMAGE{ok-24.png});
+}
+.formulaire_spip .reponse_formulaire_erreur,
+.error {
+	color: hsl(var(--spip-color-error--h), var(--spip-color-error--s), 45%);
+	border-color: hsl(var(--spip-color-error--h), var(--spip-color-error--s), 87%);
+	background-color:hsl(var(--spip-color-error--h), var(--spip-color-error--s), 95%);
+	background-image: url(#CHEMIN_IMAGE{erreur-24.png});
+}
+.notice {
+	color: hsl(var(--spip-color-notice--h), var(--spip-color-notice--s), 22%);
+	border-color: hsl(var(--spip-color-notice--h), var(--spip-color-notice--s), 57%);
+	background-color:hsl(var(--spip-color-notice--h), var(--spip-color-notice--s), 87%);
+	background-image: url(#CHEMIN_IMAGE{warning-24.png});
+}
+.information {
+	color: hsl(var(--spip-color-info--h), var(--spip-color-info--s), 27%);
+	border-color: hsl(var(--spip-color-info--h), var(--spip-color-info--s), 85%);
+	background-color:hsl(var(--spip-color-info--h), var(--spip-color-info--s), 94%);
+}
+
+
+/**
+ * ==========================================
+ * 11. Messages d’explications et d’attention
+ * ==========================================
+ */
+
+
+.formulaire_spip .explication,
+.formulaire_spip .attention {
 	display: block;
 	position: relative;
-	padding: var(--spip-form-gutter-input-y) var(--spip-form-gutter-input-x);
-	font-size: 90%;
-	line-height: 125%;
+	padding: var(--spip-form-padding-input-y) var(--spip-form-padding-input-x);
+	font-size: 0.9em;
+	line-height: 1.25;
 	color: var(--spip-color-gray-dark);
 	border-top-#RIGHT-radius: var(--spip-form-border-radius);
 	border-bottom-#RIGHT-radius: var(--spip-form-border-radius);
-	background-color: var(--spip-color-gray-lightest);
-	border-#LEFT: 0.3em solid var(--spip-form-border-color);
+	border-left-width: 0.3em;
+	border-left-style: solid;
 }
-.formulaire_spip .editer .explication {
+.formulaire_spip .explication {
+	background-color: hsla(0, 0%, 0%, 0.05); /* transparent sinon on voit pas sur les champs avec le même fond */
+	border-#LEFT-color: var(--spip-form-border-color);
+}
+.formulaire_spip .attention {
+	color: #514721;
+	background-color:#FFF6BF;
+	border-left-color: #f0e28c;
+}
+
+/* Ceux dans un champ */
+.formulaire_spip .editer .explication,
+.formulaire_spip .editer .attention {
 	margin-bottom: 0;
 	margin-top: 0;
 	border-bottom-left-radius: 0;
@@ -557,104 +863,92 @@ input[type="file"] {
 	border-top-#LEFT-radius: var(--spip-form-border-radius);
 	border: 0;
 }
-.formulaire_spip .editer .explication > :last-child {
+.formulaire_spip .editer .explication > :last-child,
+.formulaire_spip .editer .attention > :last-child {
 	margin-bottom: 0
 }
-.formulaire_spip .explication + .editer-groupe {
-	margin-top: calc((var(--spip-css-margin-bottom) / 2) * -1);
-}
-.formulaire_spip .editer .explication:last-child{
+.formulaire_spip .editer .explication:last-child,
+.formulaire_spip .editer .attention:last-child {
 	border-radius: var(--spip-form-border-radius);
 }
 .formulaire_spip .explication + input.text,
-.formulaire_spip .explication + input.number,
+.formulaire_spip .attention + input.text,
 .formulaire_spip .explication + input.password,
+.formulaire_spip .attention + input.password,
 .formulaire_spip .explication + textarea,
-.formulaire_spip .explication +.choix:first-of-type {
+.formulaire_spip .attention + textarea,
+.formulaire_spip .explication + select,
+.formulaire_spip .attention + select,
+.formulaire_spip .explication + div.choix:first-of-type,
+.formulaire_spip .attention + div.choix:first-of-type {
 	position: relative;
 	margin-top: 0;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 }
+
+/* Message dessous : on fait "déborder" le fond sous l'input précédent (à cause border-radius) */
 .formulaire_spip .editer input.text + .explication,
-.formulaire_spip .editer input.number +.explication,
-.formulaire_spip .editer input.password +.explication,
+.formulaire_spip .editer input.text + .attention,
+.formulaire_spip .editer input.password + .explication,
+.formulaire_spip .editer input.password + .attention,
 .formulaire_spip .editer textarea + .explication,
+.formulaire_spip .editer textarea + .attention,
 .formulaire_spip .editer select + .explication,
-.formulaire_spip .editer div.choix:last-of-type + .explication{
+.formulaire_spip .editer select + .attention,
+.formulaire_spip .editer div.choix:last-of-type + .explication,
+.formulaire_spip .editer div.choix:last-of-type + .attention {
 	border-radius: var(--spip-form-border-radius);
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 	position: relative
 }
 .formulaire_spip input.text + .explication:before,
-.formulaire_spip input.number + .explication:before,
+.formulaire_spip input.text + .attention:before,
 .formulaire_spip input.password + .explication:before,
+.formulaire_spip input.password + .attention:before,
 .formulaire_spip textarea + .explication:before,
+.formulaire_spip textarea + .attention:before,
 .formulaire_spip select + .explication:before,
-.formulaire_spip div.choix:last-of-type + .explication:before {
+.formulaire_spip select + .attention:before,
+.formulaire_spip div.choix:last-of-type + .explication:before,
+.formulaire_spip div.choix:last-of-type + .attention:before {
 	content: "";
 	display: block;
 	position: absolute;
-	top: -5px;
-	height: 5px;
+	top: calc(var(--spip-form-border-radius) * -1);
+	height: var(--spip-form-border-radius);
 	width: 100%;
 	left: 0;
-	background: var(--spip-color-gray-lightest);
+	background-color: inherit;
 }
 
 
 /**
  * ==============================================
- * 10. Formulaires compacts en colonnes laterales
+ * 12. Formulaires compacts en colonnes laterales
  * ==============================================
  */
 
 
-.lat .formulaire_spip,
-.lat .formulaire_spip fieldset {
-	padding: 0 calc(var(--spip-form-gutter-x) / 2);
-}
-.lat .formulaire_spip fieldset.editer {
-	margin-top: calc(var(--spip-form-gutter-y) / 2);
-}
-.lat .formulaire_spip .editer-groupe,
-.lat .formulaire_spip fieldset:not(.editer),
-.lat .formulaire_spip .boutons,
-.lat .formulaire_spip .titrem,
-.lat .formulaire_spip .legend {
-	margin-left: calc((var(--spip-form-gutter-x) / 2) * -1);
-	margin-right: calc((var(--spip-form-gutter-x) / 2) * -1);
-}
-.lat .formulaire_spip .fieldset fieldset {
-	margin-left: 0;
-	margin-right: 0;
-}
-.lat .formulaire_spip fieldset,
-.lat .formulaire_spip h3.legend,
-.lat .formulaire_spip legend,
-.lat .formulaire_spip .explication {
-	margin-bottom: calc(var(--spip-form-gutter-y) / 2);
-}
-.lat .formulaire_spip .editer .explication {
-	margin-bottom: 0;
-}
-.lat .formulaire_spip fieldset + fieldset,
-.lat .formulaire_spip fieldset legend + .editer-groupe {
-	margin-top: calc((var(--spip-form-gutter-y) / 2) * -1);
-}
 .lat .formulaire_spip {
-	line-height: 120%;
+	/* espacements externes (entre les inputs et cie) */
+	--spip-form-spacing-x: 0.75em;
+	--spip-form-spacing-y: 0.85em;
+	/* espacements internes (à l'intérieur des inputs et cie) */
+	--spip-form-padding-input-x: 0.33em;
+	--spip-form-padding-input-y: 0.33em;
+	/* décalage des fieldsets imbriqués */
+	--spip-form-fieldset-offset: 1.5em;
+	/* line-height: 1.2; */
+	font-size: 0.9em;
 }
-.lat .formulaire_spip h3.titrem {
+.lat .formulaire_spip .titrem {
 	font-size: 1em;
 }
-.lat .formulaire_spip h3.titrem ~ ul.spip li {
-	margin-#LEFT: 2em !important;
-}
-.lat .formulaire_spip h3.titrem,
+/* Tous les labels au dessus */
 .lat .formulaire_spip .editer {
-	padding: calc(var(--spip-form-gutter-y) / 2) calc(var(--spip-form-gutter-x) / 2);
+	padding-left: var(--spip-form-spacing-x);
 }
 .lat .formulaire_spip .editer label,
 .lat .formulaire_spip .editer .label {
@@ -665,37 +959,38 @@ input[type="file"] {
 	width: auto;
 	margin-#LEFT: 0;
 }
+/* Fieldsets imbriqués */
+.lat .formulaire_spip fieldset fieldset {
+	margin-#LEFT: calc(var(--spip-form-fieldset-offset) / 2);
+}
+/* Fieldsets conteneurs de .choix */
+.lat .formulaire_spip fieldset.editer {
+	margin-top: calc(var(--spip-form-spacing-y) / 2);
+	margin-bottom: calc(var(--spip-form-spacing-y) / 2);
+	margin-left: calc(var(--spip-form-spacing-x) * -1);
+}
 .lat .formulaire_spip .editer .choix label {
 	display: inline;
-}
-.lat .formulaire_spip select {
-	/* width: auto; */
 }
 .lat .formulaire_spip input.file {
 	font-size: 0.9em;
 }
-.lat .formulaire_spip input.text,
-.lat .formulaire_spip input.number,
-.lat .formulaire_spip input.password,
-.lat .formulaire_spip textarea,
-.lat .formulaire_spip select {
-	font-size: 0.9em;
-	line-height: 125%;
-	padding: calc(var(--spip-form-gutter-input-y) / 2) calc(var(--spip-form-gutter-input-x) / 2);
-}
-.lat .formulaire_spip .boutons {
-	padding: calc(var(--spip-form-gutter-y) / 2) calc(var(--spip-form-gutter-x) / 2);
+.lat .formulaire_spip ul.spip li {
+	margin-#LEFT: 2em !important;
 }
 
 
 /**
- * ================================
- * 11. Formulaires dans fiche objet
- * ================================
+ * =======================================
+ * 13. Formulaires dans certains contextes
+ * =======================================
+ * Fiche objet, constructeur de formulaire (formidable), …
  */
 
 
-.fiche_objet .formulaire_spip {
+/* Dans fiche objet */
+.fiche_objet .formulaire_spip,
+.formulaire_spip .formulaire_spip {
 	border: 1px solid hsla(0, 0%, 0%, 0.15); /* Nb : la variable est plutôt pour les bordures des inputs */
 	box-shadow: none;
 }
@@ -709,37 +1004,63 @@ input[type="file"] {
 	position: relative;
 }
 
+/* Dans #wysiwyg */
+#wysiwyg .formulaire_spip {
+	font-size: 1rem;
+}
+
+/* Dans une modale */
+.popin .entete-formulaire,
+.popin .formulaire_spip,
+.popin .formulaire_spip:hover,
+.popin .formulaire_spip:focus-within {
+	box-shadow: none
+}
+.popin .entete-formulaire,
+.popin .formulaire_spip {
+	border: 1px solid var(--spip-form-border-color);
+}
+.popin .entete-formulaire {
+	border-bottom: none;
+}
+
 
 /**
  * ============================
- * 12. Formulaires particuliers
+ * 14. Formulaires particuliers
  * ============================
  */
 
 
-/* Article */
-.formulaire_editer_article .editer.editer_liens_sites {
-	border-bottom: 1px solid var(--spip-form-border-color);
-	margin-bottom: calc(var(--spip-form-gutter-y) / 2); /* parceque bordure en bas */
-}
-
-/* edition d'un auteur */
-.formulaire_editer_auteur .editer_identification fieldset{
-	background-color: var(--spip-color-theme-lightest);
+/* Edition d'un auteur */
+.formulaire_editer_auteur .editer_identification fieldset {
+	background-color: var(--spip-color-gray-lightest);
 }
 .formulaire_editer_auteur .editer.editer_statut .instituer_auteur {
-	margin-#LEFT: calc((var(--spip-form-label-width) * -1) + var(--spip-form-gutter-x));
-	margin-top: var(--spip-form-gutter-input-y);
+	margin-#LEFT: calc((var(--spip-form-label-width) * -1) + var(--spip-form-spacing-x));
+	margin-top: var(--spip-form-padding-input-y);
 }
 .formulaire_editer_auteur .editer.editer_statut .rubriques_restreintes > p {
 	margin-#LEFT: 0;
 	margin-bottom: 0;
-	margin-top: var(--spip-form-gutter-input-y);
+	margin-top: var(--spip-form-padding-input-y);
 }
 .formulaire_editer_auteur .editer.editer_statut .rubriques_restreintes label {
 	float: none;
 	width: auto;
 	margin-#LEFT: 0;
+}
+.formulaire_editer_auteur .reset_password {
+	margin-top: calc(var(--spip-form-spacing-y) / 2);
+	margin-bottom: 0;
+	display: block;
+	width: 100%;
+}
+
+/* Statut */
+.lat .formulaire_instituer .editer_statut label {
+	display: flex;
+	align-items: center;
 }
 
 /* Logo */
@@ -750,7 +1071,7 @@ input[type="file"] {
 .formulaire_editer_logo .spip_logo img,
 #illustrations .vignette img,
 #documents_joints .image img.spip_logo {
-		background: url(#CHEMIN_IMAGE{fond-imgs.png});
+	background: url(#CHEMIN_IMAGE{fond-imgs.png});
 }
 .formulaire_editer_logo .taille {
 	font-size: 0.9em;
@@ -759,10 +1080,22 @@ input[type="file"] {
 .formulaire_editer_logo .ajouter_survol {
 	text-transform: uppercase;
 }
+.formulaire_editer_logo .editer_logo_on {
+	margin-top: 0 !important; /* Fix bigup */
+}
 .formulaire_editer_logo .editer_logo_on.logo_upload,
 .formulaire_editer_logo .editer_logo_off.logo_upload.open {
 	background: #fff; [(#REM) https://core.spip.net/issues/2995]
 }
+#navigation .dropfile {
+	margin: 0 !important; /* Bigup */
+}
+
+/* Documents */
+.formulaire_joindre_document .editer_fichier_upload {
+	margin-top: 0 !important; /* Fix à déplacer dans medias */
+}
+
 
 /* Multilinguisme */
 .formulaire_configurer_multilinguisme #langues_bloquees .choix,
@@ -819,8 +1152,7 @@ input[type="file"] {
 }
 
 /* dater */
-.formulaire_dater .editer {
-	padding-bottom: 0;
+.formulaire_dater .editer:nth-child(2n) {
 	padding-top: 0;
 }
 .formulaire_dater .editer > label {
@@ -832,11 +1164,6 @@ input[type="file"] {
 .formulaire_dater .editer > label .texte-label {
 	font-size: 0.85em;
 }
-.formulaire_dater .aide {
-	margin-#LEFT: auto;
-	display: block;
-	flex: 0 0 auto;
-}
 .formulaire_dater .affiche {
 	font-weight: bold;
 	text-transform: uppercase;
@@ -846,7 +1173,7 @@ input[type="file"] {
 }
 .formulaire_dater .editer_date_redac .editable .choix {
 	display: block;
-	margin-top: calc(var(--spip-form-gutter-input-y) / 2);
+	margin-top: calc(var(--spip-form-padding-input-y) / 2);
 }
 .formulaire_dater #sans_redac {
 	vertical-align: top;
@@ -856,11 +1183,11 @@ input[type="file"] {
 	#LEFT: -1em;
 }
 .formulaire_spip.formulaire_dater input.text {
-	padding-top: calc(var(--spip-form-gutter-input-y) / 2);
-	padding-bottom: calc(var(--spip-form-gutter-input-y) / 2);
+	padding-top: calc(var(--spip-form-padding-input-y) / 2);
+	padding-bottom: calc(var(--spip-form-padding-input-y) / 2);
 }
 .formulaire_spip.formulaire_dater .toggle_box_link {
-	#RIGHT: var(--spip-form-gutter-x);
+	#RIGHT: var(--spip-form-spacing-x);
 }
 .formulaire_spip.formulaire_dater .boutons {
 	border-radius: 0px;
@@ -869,8 +1196,8 @@ input[type="file"] {
 }
 @media (max-width: 760px) {
 	.formulaire_dater .editer_date_redac .editable label {
-		margin-left: calc((var(--spip-form-label-long-width) + (var(--spip-form-gutter-x) * 1/2)) * -1);
-		width: calc(var(--spip-form-label-long-width) - (var(--spip-form-gutter-x) * 2));
+		margin-left: calc((var(--spip-form-label-long-width) + (var(--spip-form-spacing-x) * 1/2)) * -1);
+		width: calc(var(--spip-form-label-long-width) - (var(--spip-form-spacing-x) * 2));
 		display: inline-block;
 	}
 }
@@ -878,8 +1205,8 @@ input[type="file"] {
 /* editer_liens */
 .formulaire_editer_liens .liste-objets {
 	border: 0;
-	margin-left: calc(var(--spip-form-gutter-x) * -1);
-	margin-right: calc(var(--spip-form-gutter-x) * -1);
+	margin-left: calc(var(--spip-form-spacing-x) * -1);
+	margin-right: calc(var(--spip-form-spacing-x) * -1);
 }
 .formulaire_editer_liens .liste-objets-associer .caption {
 	font-size: 0.9em;
@@ -893,7 +1220,7 @@ input[type="file"] {
 	font-size: 0.8em;
 }
 .formulaire_editer_liens h3,.formulaire_editer_liens .titrem {
-	margin: 0 calc(var(--spip-form-gutter-x) * -1);
+	margin: 0 calc(var(--spip-form-spacing-x) * -1);
 	padding: calc(var(--spip-css-margin-bottom) / 2);
 }
 .formulaire_editer_liens .liste-objets-lies {
@@ -1141,32 +1468,31 @@ input[type="file"] {
 	background-color: #ff0000;
 }
 
+/* Menu favoris */
+.formulaire_configurer_preferences_menus .menus_favoris input.text {
+	padding: calc(var(--spip-form-padding-input-y) / 2) calc(var(--spip-form-padding-input-y) / 2);
+	width: 2em;
+}
+.formulaire_configurer_preferences_menus .menus_favoris .choix {
+	padding: calc(var(--spip-form-padding-input-y) / 2) calc(var(--spip-form-padding-input-x) / 2);
+}
+
 
 /**
  * ==========
- * 13. Divers
+ * 15. Divers
  * ==========
  */
 
-/* Form dans une modale */
-.popin .entete-formulaire,
-.popin .formulaire_spip,
-.popin .formulaire_spip:hover,
-.popin .formulaire_spip:focus-within {
-	box-shadow: none
-}
-.popin .entete-formulaire,
-.popin .formulaire_spip {
-	border: 1px solid var(--spip-form-border-color);
-}
-.popin .entete-formulaire {
-	border-bottom: none;
-}
 
-/* icone d'aide */
+/* Icone d'aide
+   Attention même classe sur le <a> et le <img> dedans */
+.formulaire_spip .aide {
+	display: inline-flex; /* pour aligner correctement */
+	flex: 0 0 auto;
+}
 img.aide {
 	padding: 2px !important;
-	box-sizing: border-box;
 }
 
 /* Date picker */
