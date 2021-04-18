@@ -848,13 +848,14 @@
 	border-#LEFT-color: var(--spip-form-border-color);
 }
 .formulaire_spip .attention {
-	color: #514721;
-	background-color:#FFF6BF;
-	border-left-color: #f0e28c;
+	color: hsl(var(--spip-color-notice--h), var(--spip-color-notice--s), 22%);
+	border-color: hsl(var(--spip-color-notice--h), var(--spip-color-notice--s), 57%);
+	background-color:hsl(var(--spip-color-notice--h), var(--spip-color-notice--s), 87%);
 }
 
 /* Si l'explication est un div avec des choses à l'intérieur : pas de marge en trop en bas */
-.formulaire_spip .explication * last-child {
+.formulaire_spip .explication * last-child,
+.formulaire_spip .attention * last-child  {
 	margin-bottom: 0;
 }
 
