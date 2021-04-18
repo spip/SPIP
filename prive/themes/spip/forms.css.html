@@ -853,6 +853,11 @@
 	border-left-color: #f0e28c;
 }
 
+/* Si l'explication est un div avec des choses à l'intérieur : pas de marge en trop en bas */
+.formulaire_spip .explication * last-child {
+	margin-bottom: 0;
+}
+
 /* Ceux dans un champ */
 .formulaire_spip .editer .explication,
 .formulaire_spip .editer .attention {
