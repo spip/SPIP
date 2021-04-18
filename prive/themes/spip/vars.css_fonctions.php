@@ -154,5 +154,28 @@ function spip_generer_variables_css_couleurs() : \Spip_Css_Vars_Collection {
 	$vars->add('--spip-color-gray-darkest', 'hsl(var(--spip-color-gray-darkest--hsl))');
 	$vars->add('--spip-color-black', 'hsl(var(--spip-color-black--hsl))');
 
+	// Différents états : erreur, etc.
+	$vars->add('--spip-color-success--hsl', '72, 66%, 62%');
+	$vars->add('--spip-color-success--h', '72');
+	$vars->add('--spip-color-success--s', '66%');
+	$vars->add('--spip-color-success--l', '62%');
+	$vars->add('--spip-color-error--hsl', '356, 70%, 57%');
+	$vars->add('--spip-color-error--h', '356');
+	$vars->add('--spip-color-error--s', '70%');
+	$vars->add('--spip-color-error--l', '57%');
+	$vars->add('--spip-color-notice--hsl', '47, 100%, 62%');
+	$vars->add('--spip-color-notice--h', '47');
+	$vars->add('--spip-color-notice--s', '100%');
+	$vars->add('--spip-color-notice--l', '62%');
+	$vars->add('--spip-color-info--hsl', '197, 56%, 27%');
+	$vars->add('--spip-color-info--h', '197');
+	$vars->add('--spip-color-info--s', '56%');
+	$vars->add('--spip-color-info--l', '27%');
+
+	$vars->add('--spip-color-success', 'hsl(var(--spip-color-success--h), var(--spip-color-success--s), var(--spip-color-success--l))');
+	$vars->add('--spip-color-error', 'hsl(var(--spip-color-error--h), var(--spip-color-error--s), var(--spip-color-error--l))');
+	$vars->add('--spip-color-notice', 'hsl(var(--spip-color-notice--h), var(--spip-color-notice--s), var(--spip-color-notice--l))');
+	$vars->add('--spip-color-info', 'hsl(var(--spip-color-info--h), var(--spip-color-info--s), var(--spip-color-info--l))');
+
 	return $vars;
 }
