@@ -172,10 +172,10 @@ function spip_generer_variables_css_couleurs() : \Spip_Css_Vars_Collection {
 	$vars->add('--spip-color-info--s', '56%');
 	$vars->add('--spip-color-info--l', '27%');
 
-	$vars->add('--spip-color-success', 'hsl(var(--spip-color-success--h), var(--spip-color-success--s), var(--spip-color-success--l))');
-	$vars->add('--spip-color-error', 'hsl(var(--spip-color-error--h), var(--spip-color-error--s), var(--spip-color-error--l))');
-	$vars->add('--spip-color-notice', 'hsl(var(--spip-color-notice--h), var(--spip-color-notice--s), var(--spip-color-notice--l))');
-	$vars->add('--spip-color-info', 'hsl(var(--spip-color-info--h), var(--spip-color-info--s), var(--spip-color-info--l))');
+	$vars->add('--spip-color-success', 'hsl(var(--spip-color-success--hsl))');
+	$vars->add('--spip-color-error', 'hsl(var(--spip-color-error--hsl))');
+	$vars->add('--spip-color-notice', 'hsl(var(--spip-color-notice--hsl))');
+	$vars->add('--spip-color-info', 'hsl(var(--spip-color-info--hsl))');
 
 	return $vars;
 }
