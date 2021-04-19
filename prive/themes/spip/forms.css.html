@@ -72,8 +72,8 @@
 	--spip-form-color-text-light: var(--spip-color-gray-darker); /* labels et cie */
 	--spip-form-color-text-lightest: var(--spip-color-gray); /* placeholder */
 	/* divers */
-	--spip-form-border-radius: var(--spip-css-border-radius); /* bordure inputs et cie */
-	--spip-form-input-height: calc((var(--spip-form-padding-input-y) * 2) + var(--spip-css-line-height)); /* à toute fin utile */
+	--spip-form-border-radius: var(--spip-border-radius); /* bordure inputs et cie */
+	--spip-form-input-height: calc((var(--spip-form-padding-input-y) * 2) + var(--spip-line-height)); /* à toute fin utile */
 }
 @media (min-width: 768px) {
 	:root {
@@ -244,7 +244,7 @@
 }
 .cadre-formulaire-editer {
 	color: var(--spip-form-color-text-light);
-	margin-top: calc(var(--spip-css-margin-bottom) * 1.5);
+	margin-top: calc(var(--spip-margin-bottom) * 1.5);
 	position: relative;
 }
 .cadre-formulaire-editer.popin {
@@ -261,9 +261,9 @@
 	overflow: hidden;
 	background: var(--spip-color-white);
 	border-bottom: 1px solid var(--spip-form-sep-color);
-	border-top-left-radius: var(--spip-css-border-radius);
-	border-top-right-radius: var(--spip-css-border-radius);
-	box-shadow: var(--spip-css-box-shadow);
+	border-top-left-radius: var(--spip-border-radius);
+	border-top-right-radius: var(--spip-border-radius);
+	box-shadow: var(--spip-box-shadow);
 }
 .formulaire_spip .cadre {
 	border: 1px solid var(--spip-form-border-color);
@@ -294,17 +294,17 @@
 }
 .formulaire_spip {
 	position: relative; /* pour positionner le ajaxload en automatique */
-	margin: calc(var(--spip-css-margin-bottom) * 1.5) 0;
+	margin: calc(var(--spip-margin-bottom) * 1.5) 0;
 	color: var(--spip-form-color-text);
 	background-color: var(--spip-color-white);
-	border-radius: var(--spip-css-border-radius);
-	box-shadow: var(--spip-css-box-shadow);
+	border-radius: var(--spip-border-radius);
+	box-shadow: var(--spip-box-shadow);
 	z-index: 2; /* passer par dessus l'entête */
 	transition: box-shadow 0.2s;
 }
 .formulaire_spip:hover,
 .formulaire_spip:focus-within {
-	box-shadow: var(--spip-css-box-shadow-hover);
+	box-shadow: var(--spip-box-shadow-hover);
 }
 
 /* Titre optionnel */
@@ -356,14 +356,14 @@
 .formulaire_spip .editer label,
 .formulaire_spip .editer .label,
 .formulaire_spip .editer.gauche label {
-	float: var(--spip-css-left);
+	float: var(--spip-left);
 	width: var(--spip-form-label-width);
 	margin-#LEFT: calc((var(--spip-form-label-width) + var(--spip-form-spacing-x)) * -1); /* inverse largeur + marge */
 	margin-bottom: calc(var(--spip-form-spacing-y) / 4);
 	padding: calc(var(--spip-form-padding-input-y) + 1px) 0; /* padding + border */
 	background: transparent;
 	color: var(--spip-form-color-text-light);
-	text-align: var(--spip-css-left);
+	text-align: var(--spip-left);
 	font-weight: inherit;
 	line-height: 1.3; /* légèrement inférieure au texte normal */
 }
@@ -409,7 +409,7 @@
 	margin-bottom: 0 !important; /* Fix #wysiwyg */
 	clear: both;
 	padding: calc(var(--spip-form-spacing-y) / 2)  var(--spip-form-spacing-x);
-	text-align: var(--spip-css-right);
+	text-align: var(--spip-right);
 	background-color: var(--spip-color-theme-lightest);
 	border-bottom-left-radius: var(--spip-form-border-radius);
 	border-bottom-right-radius: var(--spip-form-border-radius);
@@ -802,8 +802,8 @@
 	margin-top: var(--spip-form-spacing-y);
 }
 .formulaire_spip .reponse_formulaire {
-	border-top-#RIGHT-radius: var(--spip-css-border-radius);
-	border-bottom-#RIGHT-radius: var(--spip-css-border-radius);
+	border-top-#RIGHT-radius: var(--spip-border-radius);
+	border-bottom-#RIGHT-radius: var(--spip-border-radius);
 	border-width: 0;
 	border-#LEFT-width: 0.6em;
 	box-shadow: inset 0 0 1em hsla(0, 0%, 100%, 0.2);
@@ -1131,7 +1131,7 @@
 }
 .formulaire_configurer_reducteur .vignette_reducteur {
 	text-align: center;
-	float: var(--spip-css-left);
+	float: var(--spip-left);
 	padding: 2px;
 	border: 1px solid hsla(0, 0%, 0%, 0.1);
 	width: 154px;
@@ -1230,7 +1230,7 @@
 }
 .formulaire_editer_liens h3,.formulaire_editer_liens .titrem {
 	margin: 0 calc(var(--spip-form-spacing-x) * -1);
-	padding: calc(var(--spip-css-margin-bottom) / 2);
+	padding: calc(var(--spip-margin-bottom) / 2);
 }
 .formulaire_editer_liens .liste-objets-lies {
 	margin-bottom: 0;
@@ -1280,7 +1280,7 @@
 	width: 75%;
 }
 .formulaire_editer_liens .associer_mot .submit {
-	float: var(--spip-css-right);
+	float: var(--spip-right);
 	margin-top: 3px;
 }
 
@@ -1291,12 +1291,12 @@
 /* formulaire de recherche : */
 /* version old style */
 .spip_recherche {
-	float: var(--spip-css-right);
+	float: var(--spip-right);
 	border: 0;
 	background: none;
 }
 .spip_recherche .recherche {
-	float: var(--spip-css-left);
+	float: var(--spip-left);
 	padding: 3px;
 	padding-#RIGHT: 30px;
 	width: 186px;
@@ -1317,7 +1317,7 @@
 .formulaire_recherche {
 	z-index: 1;
 	position: relative;
-	float: var(--spip-css-right);
+	float: var(--spip-right);
 	border: 0;
 	margin: 0 0 6px;
 	padding: 0;
@@ -1412,7 +1412,7 @@
 	display: none;
 }
 .formulaire_traduire .supprimer_trad {
-	float: var(--spip-css-right);
+	float: var(--spip-right);
 }
 
 /* formulaire_instituer */

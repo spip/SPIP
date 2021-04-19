@@ -10,11 +10,11 @@
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 
 /* Tableaux */
-table { margin-bottom: var(--spip-css-margin-bottom); width: 100%; }
+table { margin-bottom: var(--spip-margin-bottom); width: 100%; }
 th { font-weight: bold; }
 thead th {color:inherit; background: var(--spip-color-theme-lighter); }
 table.spip td, table.spip th, /* annuler spip-styles */
-th,td,caption { padding: calc(var(--spip-css-line-height) / 2); }
+th,td,caption { padding: calc(var(--spip-line-height) / 2); }
 
 tbody tr:nth-child(even)>td,tbody tr:nth-child(even)>th,
 tbody tr.even>td,tbody tr.even>th { background: var(--spip-color-theme-lightest); }
@@ -22,7 +22,7 @@ tfoot { font-style: italic; }
 caption { background: #eee; }
 
 /* Tableaux */
-table.spip { max-width: 99%; margin-right: auto; margin-left: auto; margin-bottom: var(--spip-css-margin-bottom); border-collapse: collapse; border-spacing: 0;}
+table.spip { max-width: 99%; margin-right: auto; margin-left: auto; margin-bottom: var(--spip-margin-bottom); border-collapse: collapse; border-spacing: 0;}
 table.spip caption { caption-side: top; /* bottom pas pris en compte par IE */ text-align: center; margin-right: auto; margin-left: auto; font-weight: bold; }
 table.spip th, table.spip td { /*padding: 0.20em 0.40em; text-align: left; */border: 1px solid var(--spip-color-gray-light); }
 table.spip td.numeric {text-align:right;}
