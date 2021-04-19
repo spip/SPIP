@@ -350,7 +350,7 @@
 	width: var(--spip-form-label-width);
 	margin-#LEFT: calc((var(--spip-form-label-width) + var(--spip-form-spacing-x)) * -1); /* inverse largeur + marge */
 	margin-bottom: calc(var(--spip-form-spacing-y) / 4);
-	padding: 0;
+	padding: calc(var(--spip-form-padding-input-y) + 1px) 0; /* padding + border */
 	background: transparent;
 	color: var(--spip-form-color-text-light);
 	text-align: var(--spip-css-left);
@@ -390,6 +390,7 @@
 	float: none;
 	width: auto;
 	margin-#LEFT: 0;
+	padding: 0;
 }
 
 /* Conteneur des boutons (les boutons eux-mêmes sont dans boutons.css.html) */
@@ -498,7 +499,7 @@
 /* Ceux avec un cadre */
 .formulaire_spip div.choix {
 	background-color: var(--spip-color-white);
-	padding: calc(var(--spip-form-padding-input-y) / 2) var(--spip-form-padding-input-x);
+	padding: var(--spip-form-padding-input-y) var(--spip-form-padding-input-x);
 	border: 1px solid var(--spip-form-border-color);
 	border-top-left-radius: var(--spip-form-border-radius);
 	border-top-right-radius: var(--spip-form-border-radius);
@@ -511,6 +512,7 @@
 	border-top: 0;
 	border-bottom: 0;
 	border-radius: 0;
+	margin-top: calc(var(--spip-form-spacing-y) / 2 * -1);
 }
 .formulaire_spip div.choix:last-of-type,
 .formulaire_spip div.choix:last-child {
