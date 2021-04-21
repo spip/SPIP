@@ -68,7 +68,7 @@ function enfant_rub($collection, $debut = 0, $limite = 500) {
 			if ($voir_logo) {
 				if ($logo = $chercher_logo($id_rubrique, 'id_rubrique', 'on')) {
 					list($fid, $dir, $nom, $format) = $logo;
-					$logo = image_reduire("<img src='$fid' alt='' />", 48, 36);
+					$logo = image_reduire("<img src='$fid' alt='' />", 70, 70);
 					if ($logo) {
 						$logo = inserer_attribut($logo, 'class', 'logo');
 					}
@@ -91,11 +91,12 @@ function enfant_rub($collection, $debut = 0, $limite = 500) {
 				'</a>';
 
 			$titre = (is_string($logo) ? $logo : '') .
-				bouton_block_depliable($lib_bouton, $les_sous_enfants ? false : -1, "enfants$id_rubrique");
+				bouton_block_depliable($lib_bouton, $les_sous_enfants ? false : -1, "enfants$id_rubrique")
+				.(!$descriptif ? '' : "\n<div class='descriptif'>$descriptif</div>") 
+				;
 
 			$res[] =
 				debut_cadre_sous_rub(($id_parent ? 'rubrique-24.png' : 'secteur-24.png'), true, '', $titre) .
-				(!$descriptif ? '' : "\n<div class='descriptif'>$descriptif</div>") .
 				$les_sous_enfants .
 				fin_cadre_sous_rub(true);
 		}

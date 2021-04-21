@@ -487,13 +487,17 @@
    - replié : .depliant.replie */
 .box .titrem.replie,
 .box .titrem.depliant,
-.box .titrem.impliable {
+.box .titrem.impliable
+ {
 	display: block;
 	font-size: 1em;
 	line-height: 1.25;
 	padding: calc(var(--spip-box-spacing-y) / 2) calc(var(--spip-box-spacing-x) / 2);
 	background-repeat: no-repeat;
 	border-radius: inherit;
+}
+.box .titrem.impliable .titremancre {
+	display: none;
 }
 
 /* Picto déplier / Replier */
