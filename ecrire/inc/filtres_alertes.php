@@ -184,8 +184,8 @@ function message_alerte_ouvrir(string $titre = '', string $class = '', string $r
 		'success',
 		'info',
 	];
-	$type  = array_shift(array_intersect(explode(' ', $class), $types));
-	$type  = $type ?: 'notice';
+	$type = array_intersect(explode(' ', $class), $types);
+	$type  = reset($type) ?: 'notice';
 	$class = trim(str_replace($types, '', $class) . " $type");
 
 	// Role
