@@ -799,19 +799,12 @@
  */
 
 
-/* Les styles sont mutualisés dans alertes.css
-   Par défaut, on étend les styles d'une alerte large.
-   Ici, ne mettre que les ajustements propres aux formulaires.
-   Nb : on double les sélecteurs pour avoir la priorité (joie des @extend) */
+/* Les messages de retour sont des alertes (role="status"),
+   aussi les styles sont mutualisés dans alertes.css.
+   On reprend les styles d'une alerte large.
+   Ici, juste des ajustements */
 .formulaire_spip .reponse_formulaire.reponse_formulaire {
-	border-#LEFT-width: 0.6em;
-	border-#LEFT-style: solid;
-}
-.formulaire_spip .reponse_formulaire.reponse_formulaire_ok {
-	border-#LEFT-color: hsl(var(--spip-color-success--h), var(--spip-color-success--s), 66%);
-}
-.formulaire_spip .reponse_formulaire.reponse_formulaire_erreur {
-	border-#LEFT-color: hsl(var(--spip-color-error--h), var(--spip-color-error--s), 87%);
+	margin: var(--spip-form-spacing-y) 0;
 }
 
 

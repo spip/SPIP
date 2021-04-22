@@ -83,7 +83,8 @@
 .formulaire_spip .reponse_formulaire {
 	position: relative;
 	padding: var(--spip-alert-spacing-y) var(--spip-alert-spacing-x);
-	padding-left: calc((var(--spip-alert-spacing-x) * 2) + var(--spip-alert-iconsize));
+	/* gouttière + taille icone + espacement arbitraire avec le texte */
+	padding-left: calc(var(--spip-alert-spacing-x) + var(--spip-alert-iconsize) + 0.75em);
 	margin: calc(var(--spip-margin-bottom) * 1.5) 0; /* Idem boîtes */
 	background-repeat: no-repeat;
 	/* Aligner icône au niveau de la 1ère ligne de texte */
@@ -91,9 +92,9 @@
 	background-size: var(--spip-alert-iconsize);
 	font-weight: normal;
 	border-radius: var(--spip-border-radius);
-	background-color: var(--spip-color-gray-lighter);
 	box-shadow: inset 0 0 1.5em hsla(0, 0%, 0%, 0.02);
-	border: 0;
+	background-color: var(--spip-color-gray-lighter);
+	border-#LEFT: 0.5rem solid var(--spip-color-gray-light);
 }
 
 /* Titre */
@@ -138,7 +139,8 @@
 .msg-alert.notice,
 .notice {
 	color:            hsl(var(--spip-color-notice--h), var(--spip-color-notice--s), 18%);
-	background-color: hsl(var(--spip-color-notice--h), var(--spip-color-notice--s), 85%);
+	background-color: hsl(var(--spip-color-notice--h), 90%, 88%);
+	border-color:     hsl(var(--spip-color-notice--h), 100%, 48%);
 	background-image: url(#CHEMIN_IMAGE{warning-24.png});
 }
 
@@ -147,7 +149,8 @@
 .formulaire_spip .reponse_formulaire_erreur,
 .error {
 	color:            hsl(var(--spip-color-error--h), var(--spip-color-error--s), 18%);
-	background-color: hsl(var(--spip-color-error--h), var(--spip-color-error--s), 90%);
+	background-color: hsl(var(--spip-color-error--h), 60%, 95%);
+	border-color:     hsl(var(--spip-color-error--h), var(--spip-color-error--s), 50%);
 	background-image: url(#CHEMIN_IMAGE{erreur-24.png});
 }
 
@@ -156,7 +159,8 @@
 .formulaire_spip .reponse_formulaire_ok,
 .success {
 	color:            hsl(var(--spip-color-success--h), var(--spip-color-success--s), 15%);
-	background-color: hsl(var(--spip-color-success--h), var(--spip-color-success--s), 85%);
+	background-color: hsl(var(--spip-color-success--h), 55%, 90%);
+	border-color:     hsl(var(--spip-color-success--h), var(--spip-color-success--s), 45%);
 	background-image: url(#CHEMIN_IMAGE{ok-24.png});
 }
 
@@ -164,7 +168,8 @@
 .msg-alert.info,
 .information {
 	color:            hsl(var(--spip-color-info--h), var(--spip-color-info--s), 25%);
-	background-color: hsl(var(--spip-color-info--h), var(--spip-color-info--s), 92%);
+	background-color: hsl(var(--spip-color-info--h), 45%, 93%);
+	border-color:     hsl(var(--spip-color-info--h), var(--spip-color-info--s), 60%);
 	background-image: url(#CHEMIN_IMAGE{info-24.png});
 }
 
@@ -173,31 +178,9 @@
  * ===================
  * 3. Autres variantes
  * ===================
- * Ces variantes peuvent se conjuguer aux variantes principales : .notice.mini, .error.simple, etc.
+ * Ces variantes peuvent se conjuguer aux variantes principales : .notice.mini, .error.large, etc.
  */
 
-
-/* Simple = juste une bordure */
-.msg-alert.simple {
-	border: 2px solid hsla(0, 0%, 0%, 0.1);
-	box-shadow: none;
-}
-.msg-alert.notice.simple {
-	border-color:     hsl(var(--spip-color-notice--h), 100%, 48%);
-	background-color: transparent;
-}
-.msg-alert.error.simple {
-	border-color:     hsl(var(--spip-color-error--h), var(--spip-color-error--s), 50%);
-	background-color: transparent;
-}
-.msg-alert.success.simple {
-	border-color:     hsl(var(--spip-color-success--h), var(--spip-color-success--s), 50%);
-	background-color: transparent;
-}
-.msg-alert.info.simple {
-	border-color:     hsl(var(--spip-color-info--h), var(--spip-color-info--s), 75%);
-	background-color: transparent;
-}
 
 /* Variante mini, automatique en colonne latérale : voir variables */
 .msg-alert.mini,
@@ -208,7 +191,9 @@
 
 /* Variante large : voir variables */
 .msg-alert.large,
-.formulaire_spip .reponse_formulaire {}
+.formulaire_spip .reponse_formulaire {
+	font-size: 1.1em;
+}
 
 /* Variante fermable */
 .msg-alert.fermable {
