@@ -10,22 +10,20 @@
 	Organisation du fichier :
 
 	0. Variables
-	1. Base lib
-	2. Layout et rythme vertical
-	3. Base graphique commune
-	4. Variantes principales
-	5. Variantes d'états
-	6. Autres variantes
-	7. Cas particuliers
-	8. Déprécations
+	1. Layout et rythme vertical
+	2. Base graphique commune
+	3. Variantes principales
+	4. Variantes d'états
+	5. Autres variantes
+	6. Cas particuliers
+	7. Déprécations
 
 	Markup :
 
 	.box
-	  .inner
-	    .hd (header)
-	    .bd (body)
-	    .ft (footer)
+	  .box__header
+	  .box__body
+	  .box__footer
 
 <style>]
 #CACHE{3600*100,cache-client}
@@ -72,16 +70,8 @@
 
 
 /**
- * ===========
- * 1. Base lib
- * ===========
- */
-[(#INCLURE{prive/themes/spip/box.css})]
-
-
-/**
  * ============================
- * 2. Layout et rythme vertical
+ * 1. Layout et rythme vertical
  * ============================
  */
 
@@ -95,79 +85,78 @@
    Plus tard il faudra se baser sur spip-spacing-y quand ça sera au point.
    Pour l'instant on laisse la valeur historique. */
 .box {
+	position: relative;
 	margin: calc(var(--spip-margin-bottom) * 1.5) 0;
 }
-.box .inner {
-	position: relative;
-}
-/* Même padding partout, sauf footer */
-.box .bd, .box .hd, .box .ft {
+/* Même padding partout, ajusté pour le footer */
+.box__header, .box__body, .box__footer {
 	position: relative;
 	padding: var(--spip-box-spacing-y) var(--spip-box-spacing-x);
 }
-.box .ft {
+.box__footer {
 	padding-top: calc(var(--spip-box-spacing-y) / 2);
 	padding-bottom: calc(var(--spip-box-spacing-y) / 2);
 }
 /* Annuler marges inutiles au début et à la fin */
-.box .bd > :first-child,
-.box .bd > :first-child > :first-child {
+.box__body > :first-child,
+.box__body > :first-child > :first-child {
 	margin-top: 0;
 }
-.box .bd > :last-child {
+.box__body > :last-child {
 	margin-bottom: 0;
 }
-.box .hd h1, .box .hd h2, .box .hd h3, .box .hd h4, .box .hd h5, .box .hd h6 {
+.box__header h1, .box__header h2, .box__header h3, .box__header h4, .box__header h5, .box__header h6 {
 	margin-bottom: 0;
 }
-.box .ft .btn,
-.box .ft button,
-.box .ft .groupe-btns {
+.box__footer .btn,
+.box__footer button,
+.box__footer .groupe-btns {
 	margin-bottom: 0;
 }
 
 
 /**
  * =========================
- * 3. Base graphique commune
+ * 2. Base graphique commune
  * =========================
- *
- * Nb : les styles s’appliquent au .inner, pas sur le .box lui-même.
  */
 
 
-/* Conteneur interne */
-.box .inner {
-	background-color: var(--spip-color-white);
-	transition: box-shadow 0.2s;
+/* Conteneur + obligé de reset les vieux messages d'alertes */
+.box,
+.box.notice, .box.error, .box.success {
+	background: var(--spip-color-white);
+	padding: 0;
 	border-radius: var(--spip-box-border-radius);
 	border: 0;
 	box-shadow: var(--spip-box-shadow);
+	color: var(--spip-color-black);
+	transition: box-shadow 0.2s;
 }
-.box .inner:hover,
-.box .inner:focus-within {
+.box:hover,
+.box:focus-within {
 	box-shadow: var(--spip-box-shadow-hover);
 }
 
 /* Header */
-.box .hd {
+.box__header {
 	border-top-left-radius: inherit;
 	border-top-right-radius: inherit;
 	border-bottom: 1px solid var(--spip-box-sep-color);
 }
 
 /* Body : sans titre et/ou sans footer, ajuster l'arrondi */
-.box .bd:first-child {
+.box__body:first-child {
 	border-top-left-radius: var(--spip-box-border-radius);
 	border-top-right-radius: var(--spip-box-border-radius);
 }
-.box .bd:only-child {
+.box__body:only-child {
 	border-bottom-left-radius: var(--spip-box-border-radius);
 	border-bottom-right-radius: var(--spip-box-border-radius);
 }
 
 /* Footer */
-.box .ft {
+.box__footer {
 	border-bottom-left-radius: inherit;
 	border-bottom-right-radius: inherit;
 	background-color: var(--spip-color-gray-lightest);
@@ -175,10 +164,10 @@
 }
 
 /* Titres
-   Règle : avec le h3 par défaut on raccorde avec les titres des formulaires (taille, graisse, …).
-	 Si on veut forcer avec une autre balise (h2…), utilisez la variante .titrem sur le header.  */
-.box .hd h3,
-.box .hd.titrem h1, .box .hd.titrem h2, .box .hd.titrem h3, .box .hd.titrem h4, .box .hd.titrem h5, .box .hd.titrem h6,
+   Règle : si h3, c'est le style par défaut, et on mutualise avec les titres des formulaires (taille, graisse, …).
+	 Si autre balise et qu'on veut forcer le style par défaut, utiliser la variante .titrem sur le header.  */
+.box__header h3,
+.box__header.titrem h1, .box__header.titrem h2, .box__header.titrem h3, .box__header.titrem h4, .box__header.titrem h5, .box__header.titrem h6,
 .formulaire_spip .titrem {
 	font-size: calc(1em * var(--spip-form-titrem-factor));
 	font-weight: 800;
@@ -189,7 +178,7 @@
 .lat .box {
 	font-size: 0.95em;
 }
-.lat .box .hd h1, .lat .box .hd h2, .lat .box .hd h3, .lat .box .hd h4, .lat .box .hd h5, .lat .box .hd h6,
+.lat .box__header h1, .lat .box__header h2, .lat .box__header h3, .lat .box__header h4, .lat .box__header h5, .lat .box__header h6,
 .lat .formulaire_spip .titrem  {
 	font-size: 1em;
 }
@@ -197,105 +186,98 @@
 
 /**
  * ========================
- * 4. Variantes principales
+ * 3. Variantes principales
  * ========================
  */
 
 
 /* Simple */
-.box.simple .inner {
+.box.simple {
 	background-color: var(--spip-color-white);
 }
 
 /* Info */
-.box.info .inner {
+.box.info {
 	border: 3px solid var(--spip-color-theme-light);
 	background-color: var(--spip-color-white);
 }
 
 /* Note */
-.box.note .inner {
+.box.note {
 	border: 3px solid var(--spip-color-theme-lighter);
 	background-color: var(--spip-color-theme-lightest);
 }
 
 /* Raccourcis */
-.box.raccourcis .inner {
+.box.raccourcis {
 	border-bottom: 1px solid hsla(0, 0%, 0%, 0.1);
 	background-color: var(--spip-color-gray-lighter);
 }
 
 /* Important */
-.box.important .inner {
+.box.important {
 	border: 3px solid var(--spip-color-theme);
 	background: var(--spip-color-white);
 }
 
 /* Highlight */
-.box.highlight .inner {
+.box.highlight {
 	background-color: var(--spip-color-theme-light);
 }
-.box.highlight .hd {
+.box.highlight .box_header {
 	border-bottom-color: var(--spip-box-sep-color);
 }
-.box.highlight .hd * {
+.box.highlight .box_header * {
 	color: inherit;
 }
 
 /* Inverse */
-.box.inverse .inner {
+.box.inverse {
 	background-color: var(--spip-color-gray-darker);
 	color: var(--spip-color-white);
 }
-.box.inverse .hd {
+.box.inverse .box__header {
 	border-bottom-color: var(--spip-box-sep-color-inverse);
 }
-.box.inverse .hd * {
+.box.inverse .box__header * {
 	color: inherit;
 }
 
 
 /**
  * ====================
- * 5. Variantes d'états
+ * 4. Variantes d'états
  * ====================
  */
 
 
-/* Reset des styles des "messages" qui sont pour l'instant dans forms.css */
-.box.notice, .box.error, .box.success {
-	border: 0;
-	background: transparent;
-	padding: 0;
-	color: inherit;
-}
 /* Icône centrée verticalement dans le header */
-.box.notice .hd, .box.error .hd, .box.success .hd,
-.box.notice .bd, .box.error .bd, .box.success .bd {
+.box.notice .box__header, .box.error .box__header, .box.success .box__header,
+.box.notice .box__body, .box.error .box__body, .box.success .box__body {
 	background-repeat: no-repeat;
 	background-size: var(--spip-box-iconsize);
 	background-position: var(--spip-left) var(--spip-box-spacing-x) center;
 }
 /* Décommenter s'il faut centrer l'icône sur la 1ère ligne de texte dans le body */
-/*.notice .bd, .error .bd, .success .bd {
+/*.notice .box__body, .error .box__body, .success .box__body {
 	background-position: var(--spip-left) var(--spip-box-spacing-x) top calc(var(--spip-box-spacing-y) - ((var(--spip-box-iconsize) - var(--spip-line-height)) / 2));
 }*/
 /* Espacement pour l'icône selon qu'elle soit dans le header ou dans le body */
-.box.notice .hd, .box.error .hd, .box.success .hd,
-.box.notice .bd:first-child, .box.error .bd:first-child, .box.success .bd:first-child {
+.box.notice .box__header, .box.error .box__header, .box.success .box__header,
+.box.notice .box__body:first-child, .box.error .box__body:first-child, .box.success .box__body:first-child {
 	padding-#LEFT: calc(var(--spip-box-iconsize) + (var(--spip-box-spacing-x) * 2));
 }
 /* Bordure sur le côté */
-.box.notice .hd, .box.error .hd, .box.success .hd,
-.box.notice .bd, .box.error .bd, .box.success .bd,
-.box.notice .ft, .box.error .ft, .box.success .ft {
+.box.notice .box__header, .box.error .box__header, .box.success .box__header,
+.box.notice .box__body, .box.error .box__body, .box.success .box__body,
+.box.notice .box__footer, .box.error .box__footer, .box.success .box__footer {
 	border-#LEFT: var(--spip-box-highlightsize) solid transparent;
 }
 /* Mini hack : sous le header on met la bordure basse en pseudo pour ne pas empiéter la bordure latérale colorée */
-.box.notice .hd, .box.error .hd, .box.success .hd {
+.box.notice .box__header, .box.error .box__header, .box.success .box__header {
 	border-bottom: 0;
 }
-.box.notice .hd:before, .box.error .hd:before, .box.success .hd:before {
+.box.notice .box__header:before, .box.error .box__header:before, .box.success .box__header:before {
 	content: "";
 	display: block;
 	z-index: 2;
@@ -307,48 +289,48 @@
 }
 
 /* Notice */
-.box.notice .hd,
-.box.notice .bd {
+.box.notice .box__header,
+.box.notice .box__body {
 	border-#LEFT-color: hsl(var(--spip-color-notice--h), var(--spip-color-notice--s), 60%);
 }
-.box.notice .ft {
+.box.notice .box__footer {
 	border-#LEFT-color: hsl(var(--spip-color-notice--h), var(--spip-color-notice--s), 50%);
 }
-.box.notice .hd,
-.box.notice .bd:first-child {
+.box.notice .box__header,
+.box.notice .box__body:first-child {
 	background-image: url(#CHEMIN_IMAGE{warning-32.png});
 }
 
 /* Erreur */
-.box.error .hd,
-.box.error .bd {
+.box.error .box__header,
+.box.error .box__body {
 	border-#LEFT-color: hsl(var(--spip-color-error--h), var(--spip-color-error--s), 60%);
 }
-.box.error .ft {
+.box.error .box__footer {
 	border-#LEFT-color: hsl(var(--spip-color-error--h), var(--spip-color-error--s), 50%);
 }
-.box.error .hd,
-.box.error .bd:first-child {
+.box.error .box__header,
+.box.error .box__body:first-child {
 	background-image: url(#CHEMIN_IMAGE{erreur-32.png});
 }
 
 /* Succès */
-.box.success .hd,
-.box.success .bd {
+.box.success .box__header,
+.box.success .box__body {
 	border-#LEFT-color: hsl(var(--spip-color-success--h), var(--spip-color-success--s), 55%);
 }
-.box.success .ft {
+.box.success .box__footer {
 	border-#LEFT-color: hsl(var(--spip-color-success--h), var(--spip-color-success--s), 48%);
 }
-.box.success .hd,
-.box.success .bd:first-child {
+.box.success .box__header,
+.box.success .box__body:first-child {
 	background-image: url(#CHEMIN_IMAGE{ok-32.png});
 }
 
 
 /**
  * ===================
- * 6. Autres variantes
+ * 5. Autres variantes
  * ===================
  */
 
@@ -357,40 +339,40 @@
    Peut se conjuguer aux autres quand on veut forcer.
    Certaines le sont d'office, notamment les boîtes imbriquées.
 	 Une bordure est ajoutée si nécessaire. */
-.box.flat .inner,
-.box.info:not(.pop) .inner,
-.box.note:not(.pop) .inner,
-.box.important:not(.pop) .inner,
-.box.raccourcis:not(.pop) .inner,
-.box .box:not(.pop) .inner /* imbriquées */
+.box.flat,
+.box.info:not(.pop),
+.box.note:not(.pop),
+.box.important:not(.pop),
+.box.raccourcis:not(.pop),
+.box .box:not(.pop) /* imbriquées */
 {
 	box-shadow: none !important;
 }
-.box.simple.flat .inner,
-.box.notice.flat .inner,
-.box.error.flat .inner,
-.box.success.flat .inner,
-.box .box.simple:not(.pop) .inner, /* imbriquées */
-.box .box.notice:not(.pop) .inner,
-.box .box.error:not(.pop) .inner,
-.box .box.success:not(.pop) .inner {
+.box.simple.flat,
+.box.notice.flat,
+.box.error.flat,
+.box.success.flat,
+.box .box.simple:not(.pop), /* imbriquées */
+.box .box.notice:not(.pop),
+.box .box.error:not(.pop),
+.box .box.success:not(.pop) {
 	border: 1px solid var(--spip-box-border-color);
 }
 
 /* pop : avec une ombre portée.
    Peut se conjuguer aux autres quand on veut forcer */
-.box.pop .inner {
+.box.pop {
 	box-shadow: var(--spip-box-shadow);
 }
-.box.pop .inner:hover,
-.box.pop .inner:focus-within {
+.box.pop:hover,
+.box.pop:focus-within {
 	box-shadow: var(--spip-box-shadow-hover);
 }
 
 
 /**
  * ===================
- * 7. Cas particuliers
+ * 6. Cas particuliers
  * ===================
  */
 
@@ -399,12 +381,12 @@
  * Menu des rubriques dépliables sur la home
  * (voir aussi styles boîtes dépliables plus bas)
  */
-.box.sous-rub .inner {
+.box.sous-rub {
 	background-color: var(--spip-color-theme-lighter);
 	box-shadow: none !important;
 }
 /* titre */
-.box.sous-rub .hd {
+.box.sous-rub .box__header {
 	padding: 0; /* padding dans le titre cliquable plutôt */
 	border-bottom: 0;
 }
@@ -424,7 +406,7 @@
 .box.sous-rub .titrem:not(.deplie):focus {
 	border-radius: var(--spip-box-border-radius);
 }
-.box.sous-rub .hd .logo {
+.box.sous-rub .box__header .logo {
 	float: var(--spip-right);
 	margin: 1px 5px 0;
 	margin-#ENV{right}: -9px;
@@ -433,7 +415,7 @@
 	border-top-#RIGHT-radius:5px;
 }
 /* Body */
-.box.sous-rub .bd {
+.box.sous-rub .box__body {
 	padding: 0;
 	border-top: 0;
 }
@@ -474,7 +456,7 @@
 
 /**
  * ===============
- * 8. Déprécations
+ * 7. Déprécations
  * ===============
  * Vieilles boîtes dépliables/repliables encore maintenues mais dépréciées
  * Exemple : menu des rubriques dépliables sur la home (utilisé ailleurs ?)
