@@ -1,6 +1,6 @@
 [(#AUTORISER{configurer,_admin_vider}|oui)
 
-#BOITE_OUVRIR{#CHEMIN_IMAGE{image-24.png}|balise_img{'',cadre-icone}|concat{#VAL{info_images_auto}|_T}|wrap{'<h3>'},'simple','titrem'}
+#BOITE_OUVRIR{#CHEMIN_IMAGE{image-24.png}|balise_img{'',cadre-icone}|concat{#VAL{info_images_auto}|_T}|wrap{'<h3>'},'simple notice','titrem'}
 
 	<div id="placehoder_taille_cache_images"><p>&nbsp;<br />&nbsp;<br />&nbsp;<br /></p></div>
 	<script type="text/javascript">
@@ -13,6 +13,6 @@
 	</noscript>
 
 #BOITE_PIED
-	[(#BOUTON_ACTION{<:bouton_vider_cache:>,#URL_ACTION_AUTEUR{purger,vignettes,#SELF},ajax})]
+	[(#BOUTON_ACTION{<:bouton_vider_cache:>,#URL_ACTION_AUTEUR{purger,vignettes,#SELF},ajax danger})]
 #BOITE_FERMER
 ]
