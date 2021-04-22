@@ -136,7 +136,7 @@ function boite_ouvrir($titre, $class = '', $head_class = '', $id = '') {
 	}
 
 	return '<div class="' . $class . ($id ? "\" id=\"$id" : '') . '">'
-	. ($titre ? "<div class=\"$head_class\">$titre</div>" : '')
+	. ($titre ? "<div class=\"$head_class\">$titre<!--/hd--></div>" : '')
 	. '<div class="box__body clearfix">';
 }
 
