@@ -122,20 +122,16 @@
  */
 
 
-/* Conteneur + obligé de reset les vieux messages d'alertes */
+/* Conteneur + obligé de reset les styles des vieux messages d'alertes */
 .box,
 .box.notice, .box.error, .box.success {
 	background: var(--spip-color-white);
 	padding: 0;
 	border-radius: var(--spip-box-border-radius);
 	border: 0;
-	box-shadow: var(--spip-box-shadow);
+	box-shadow: none;
 	color: var(--spip-color-black);
 	transition: box-shadow 0.2s;
-}
-.box:hover,
-.box:focus-within {
-	box-shadow: var(--spip-box-shadow-hover);
 }
 
 /* Header */
@@ -194,6 +190,7 @@
 /* Simple */
 .box.simple {
 	background-color: var(--spip-color-white);
+	border: 1px solid var(--spip-box-border-color);
 }
 
 /* Info */
@@ -210,7 +207,6 @@
 
 /* Raccourcis */
 .box.raccourcis {
-	border-bottom: 1px solid hsla(0, 0%, 0%, 0.1);
 	background-color: var(--spip-color-gray-lighter);
 }
 
@@ -251,6 +247,14 @@
  */
 
 
+/* Emballage */
+.box.notice, .box.error, .box.success {
+	box-shadow: var(--spip-box-shadow);
+}
+.box.notice:hover, .box.error:hover, .box.success:hover,
+.box.notice:focus-within, .box.error:focus-within, .box.success:focus-within {
+	box-shadow: var(--spip-box-shadow-hover);
+}
 /* Icône centrée verticalement dans le header */
 .box.notice .box__header, .box.error .box__header, .box.success .box__header,
 .box.notice .box__body, .box.error .box__body, .box.success .box__body {
@@ -340,33 +344,31 @@
    Certaines le sont d'office, notamment les boîtes imbriquées.
 	 Une bordure est ajoutée si nécessaire. */
 .box.flat,
-.box.info:not(.pop),
-.box.note:not(.pop),
-.box.important:not(.pop),
-.box.raccourcis:not(.pop),
 .box .box:not(.pop) /* imbriquées */
 {
 	box-shadow: none !important;
 }
-.box.simple.flat,
 .box.notice.flat,
 .box.error.flat,
 .box.success.flat,
-.box .box.simple:not(.pop), /* imbriquées */
-.box .box.notice:not(.pop),
+.box .box.notice:not(.pop), /* imbriquées */
 .box .box.error:not(.pop),
 .box .box.success:not(.pop) {
 	border: 1px solid var(--spip-box-border-color);
 }
 
-/* pop : avec une ombre portée.
-   Peut se conjuguer aux autres quand on veut forcer */
+/* Pop : avec une ombre portée.
+   Peut se conjuguer aux autres quand on veut forcer.
+	 Il faut ajuster la bordure dans certains cas */
 .box.pop {
 	box-shadow: var(--spip-box-shadow);
 }
 .box.pop:hover,
 .box.pop:focus-within {
 	box-shadow: var(--spip-box-shadow-hover);
+}
+.box.simple.pop {
+	border: 0;
 }
 
 
@@ -383,7 +385,7 @@
  */
 .box.sous-rub {
 	background-color: var(--spip-color-theme-lighter);
-	box-shadow: none !important;
+	border: 0;
 }
 /* titre */
 .box.sous-rub .box__header {
