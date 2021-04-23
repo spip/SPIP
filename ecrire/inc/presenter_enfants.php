@@ -68,9 +68,9 @@ function enfant_rub($collection, $debut = 0, $limite = 500) {
 			if ($voir_logo) {
 				if ($logo = $chercher_logo($id_rubrique, 'id_rubrique', 'on')) {
 					list($fid, $dir, $nom, $format) = $logo;
-					$logo = image_reduire("<img src='$fid' alt='' />", 70, 70);
+					$logo = image_passe_partout("<img src='$fid' alt='' />", 70, 70);
 					if ($logo) {
-						$logo = inserer_attribut($logo, 'class', 'logo');
+						$logo = wrap(inserer_attribut($logo, 'class', 'logo'),'<span class="logo-carre">');
 					}
 				}
 			}

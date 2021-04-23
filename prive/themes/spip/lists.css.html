@@ -75,8 +75,8 @@
 .liste-objets.auteurs th.statut {line-height:1px;padding-bottom:0;}
 .liste-objets.auteurs td.nom .spip_logos { vertical-align: middle; margin-#ENV{right}: 0.3em; }
 
-.liste-objets.articles tr td.logo,.liste-objets td.logo-carre  {width: 70px; height: 70px; padding: 3px;}
-.liste-objets.articles tr td.logo img,.liste-objets td.logo-carre img {width: 100%; height: 100%; object-fit: cover; border-radius: 5px;}
+.liste-objets.articles tr td.logo, .logo-carre  {width: 70px; height: 70px; padding: 3px;}
+.liste-objets.articles tr td.logo img, .logo-carre img {width: 100%; height: 100%; object-fit: cover; border-radius: 5px;}
 
 <BOUCLE_objets(DATA){source table,#REM|lister_tables_objets_sql}>[
 .liste-objets.[(#VALEUR{table_objet})] .caption {background-image:url((#CHEMIN_IMAGE{#VALEUR{icone_objet}|concat{-24.png}}));padding-#ENV{left}:30px;}]</BOUCLE_objets>
