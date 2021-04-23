@@ -58,6 +58,7 @@
 	--spip-box-border-radius: var(--spip-form-border-radius);
 	--spip-box-iconsize: 24px;
 	--spip-box-highlightsize: 1em; /* largeur bordure colorée sur boîtes d'états */
+	--spip-box-caretsize: 2rem; /* picto dépliant */
 }
 .lat .box,
 .box.mini {
@@ -380,50 +381,94 @@
 
 
 /**
- * Menu des rubriques dépliables sur la home
- * (voir aussi styles boîtes dépliables plus bas)
+ * Menu des rubriques dépliables.
+ * Ici principalement la décoration de base.
+ * Pour les choses propres au JS, voir plus bas.
  */
-.box.sous-rub {
-	background-color: var(--spip-color-theme-lighter);
-	border: 0;
+.box.sous-rub {}
+.box.sous-rub a {
+	transition: background 0.1s;
 }
-/* titre */
+.box.sous-rub a:hover {
+	background-color: var(--spip-color-theme-lightest);
+}
+/* Header :
+  .box__header
+    .titrem
+        a.titremancre
+        a
+        .logo
+    .descriptif */
 .box.sous-rub .box__header {
-	padding: 0; /* padding dans le titre cliquable plutôt */
+	padding: 0;
 	border-bottom: 0;
+	border-radius: inherit;
 }
-.box.sous-rub .titrem.hover,
+/* Conteneur titre + logo + picto */
+.box.sous-rub .titrem {
+	display: flex;
+	font-size: 1em;
+	background-repeat: no-repeat;
+	border-radius: inherit;
+}
 .box.sous-rub .titrem.deplie,
-.box.sous-rub .titrem:hover,
-.box.sous-rub .titrem:focus {
-	background-color: var(--spip-color-theme-light);
+.box.sous-rub .titrem.deplie .logo {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
 }
-.box.sous-rub .titrem.hover a,
-.box.sous-rub .titrem.deplie a,
-.box.sous-rub .titrem:hover a,
-.box.sous-rub .titrem:focus a {
-	color: var(--spip-color-theme-darker);
+/* Titre
+   On met le padding sur le lien pour maximiser la zone cliquable.
+   Le JS ajoute un <a> au même niveau pour déplier/replier  */
+.box.sous-rub .titrem a {
+	border-radius: inherit;
 }
-.box.sous-rub .titrem:not(.deplie):hover,
-.box.sous-rub .titrem:not(.deplie):focus {
-	border-radius: var(--spip-box-border-radius);
+.box.sous-rub .titrem a:not(.titremancre) {
+	padding: var(--spip-box-spacing-y) calc(var(--spip-box-spacing-x) / 2);
+	flex: 1 1 auto;
+	display: flex;
+	align-items: center; /* Pour aligner les one-liners avec le logo éventuel */
 }
+/* Si titre dépliable */
+.box.sous-rub .titrem.depliant a:first-of-type:not(:only-of-type) {
+	border-top-#RIGHT-radius: 0;
+	border-bottom-#RIGHT-radius: 0;
+}
+.box.sous-rub .titrem.depliant a:last-of-type:not(:only-of-type) {
+	border-top-#LEFT-radius: 0;
+	border-bottom-#LEFT-radius: 0;
+}
+.box.sous-rub .titrem.depliant a:hover,
+.box.sous-rub .titrem.depliant a:focus {
+	background-color: var(--spip-color-theme-lighter);
+	color: var(--spip-color-black);
+}
+/* Logo  */
 .box.sous-rub .box__header .logo {
-	float: var(--spip-right);
-	margin: 1px 5px 0;
-	margin-#ENV{right}: -9px;
-	z-index: 2;
-	position: relative;
-	border-top-#RIGHT-radius:5px;
+	width: auto;
+	max-height: calc((var(--spip-box-spacing-y) * 2) + 1.2em); /* = titre sur 1 ligne */
+	margin: 0;
+	border-top-#RIGHT-radius: var(--spip-box-border-radius);
+	border-bottom-#RIGHT-radius: var(--spip-box-border-radius);
 }
+/* Descriptif */
+.box.sous-rub .descriptif {
+	padding: calc(var(--spip-box-spacing-y) / 2) calc(var(--spip-box-spacing-x) / 2);
+	padding-left: calc(var(--spip-box-caretsize) + (var(--spip-box-spacing-x) / 2));
+	padding-top: 0;
+	padding-bottom: var(--spip-box-spacing-y);
+	font-size: 0.85em;
+}
+.box.sous-rub .descriptif *:last-child {
+	margin-bottom: 0;
+}
+
 /* Body */
 .box.sous-rub .box__body {
 	padding: 0;
 	border-top: 0;
 }
-.box.sous-rub .descriptif {
-	padding: 0px 10px 1px 16px;
-	font-size: 0.95em;
+.box.sous-rub .box__body > * {
+	border-top: 1px solid var(--spip-box-sep-color);
 }
 .box.sous-rub a:hover {
 	color: black;
@@ -431,7 +476,6 @@
 .box.sous-rub .liste-items {
 	font-size: 0.85em;
 	line-height: 1.2;
-	/* border-top: 1px solid var(--spip-box-sep-color); */
 	border-top: 0;
 }
 .box.sous-rub .liste-items .item {
@@ -440,10 +484,7 @@
 }
 .box.sous-rub .liste-items .item a {
 	display: block;
-	padding: calc(var(--spip-box-spacing-y) / 2) calc(var(--spip-box-spacing-x) / 2);
-}
-.box.sous-rub .liste-items .item:hover {
-	background-color: var(--spip-color-theme-light);
+	padding: 0.75em;
 }
 .box.sous-rub .liste-items > .item:last-child {
 	border-bottom: 0;
@@ -460,56 +501,59 @@
  * ===============
  * 7. Déprécations
  * ===============
- * Vieilles boîtes dépliables/repliables encore maintenues mais dépréciées
- * Exemple : menu des rubriques dépliables sur la home (utilisé ailleurs ?)
+ * Vieilles boîtes dépliables/repliables encore maintenues mais dépréciées.
+ * Exemple : menu des rubriques dépliables (utilisé ailleurs ?)
+ * Ici juste les styles propres au JS, pour la déco voir plus haut.
  */
 
 /* Titre
-   - init :   .replie
-   - déplié : .depliant.deplie
-   - replié : .depliant.replie */
-.box .titrem.replie,
-.box .titrem.depliant,
-.box .titrem.impliable
- {
-	display: block;
-	font-size: 1em;
-	line-height: 1.25;
-	padding: calc(var(--spip-box-spacing-y) / 2) calc(var(--spip-box-spacing-x) / 2);
-	background-repeat: no-repeat;
-	border-radius: inherit;
-}
-.box .titrem.impliable .titremancre {
-	display: none;
-}
+   - non dépliable :      .titrem.impliable
+   - dépliable / init :   .titrem.depliant.replie
+   - dépliable / déplié : .titrem.depliant.deplie.blocdeplie
+   - dépliable / replié : .titrem.depliant.replie.blocreplie */
 
 /* Picto déplier / Replier */
 .box .titremancre {
-	display: inline-block;
 	position: relative;
-	width: 1em;
-	height: 1em;
-	float: var(--spip-left);
-	margin-#RIGHT: calc(var(--spip-box-spacing-x) / 3);
+	display: block;
+	flex: 0 0 var(--spip-box-caretsize);
 	background-position: center center;
 	background-repeat: no-repeat;
+	background-size: 1.5em auto;
+	opacity: 0.5;
+}
+.box .titremancre:hover,
+.box .titremancre:focus {
+	opacity: 1;
+}
+.box .titremancre:after {
+	content: "";
+	display: block;
+	position: absolute;
+	#RIGHT: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	height: 1em;
+	border-left: 1px solid hsla(0, 0%, 0%, 0.5);
 }
 .box .replie .titremancre {
-	background-image: url([(#CHEMIN_IMAGE{deplierhaut[(#ENV{rtl})].gif})]);
+	background-image: url([(#CHEMIN_IMAGE{deplierhaut.svg})]);
 }
 .box .deplie .titremancre {
-	background-image: url(#CHEMIN_IMAGE{deplierbas.gif});
+	background-image: url(#CHEMIN_IMAGE{deplierbas.svg});
 }
-/* Afficher / Masquer */
-.js .box .blocreplie {
+.box .impliable .titremancre {
 	display: none;
 }
-.js .box .titrem.blocreplie {
-	display: block;
+
+/* Bloc masqué
+   - replié : .bloc_depliable.blocreplie
+   - déplié : idem (bug ? pas de .blocdeplie ajouté) */
+.js .box .bloc_depliable.blocreplie {
+	display: none;
 }
-.box .blocdeplie {
+.js .box .bloc_depliable.blocdeplie {
 	display: block;
-	background: none;
 }
 .box .bloc_depliable .pagination {
 	white-space: normal;

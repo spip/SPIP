@@ -87,12 +87,12 @@ function enfant_rub($collection, $debut = 0, $limite = 500) {
 				" href='" .
 				generer_url_entite($id_rubrique, 'rubrique') .
 				"'>" .
-				$rang . $titre .
-				'</a>';
+				$rang . $titre
+				. '</a>'
+				. (is_string($logo) ? $logo : '');
 
-			$titre = (is_string($logo) ? $logo : '') .
-				bouton_block_depliable($lib_bouton, $les_sous_enfants ? false : -1, "enfants$id_rubrique")
-				.(!$descriptif ? '' : "\n<div class='descriptif'>$descriptif</div>") 
+			$titre = bouton_block_depliable($lib_bouton, $les_sous_enfants ? false : -1, "enfants$id_rubrique")
+				. (!$descriptif ? '' : "\n<div class='descriptif'>$descriptif</div>")
 				;
 
 			$res[] =
