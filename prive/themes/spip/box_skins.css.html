@@ -381,6 +381,19 @@
 
 
 /**
+ * Boîte fiche objet
+ * Pas de bordure de séparation donc on resserre l'espacement
+ */
+.box.fiche_objet .box__header {
+	border-bottom: 0;
+	padding-bottom: calc(var(--spip-box-spacing-y) / 2);
+}
+.box.fiche_objet .box__body {
+	padding-top: calc(var(--spip-box-spacing-y) / 2);
+}
+
+
+/**
  * Menu des rubriques dépliables.
  * Ici principalement la décoration de base.
  * Pour les choses propres au JS, voir plus bas.
