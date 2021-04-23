@@ -53,11 +53,11 @@
 
 :root {
 	/* espacements externes (entre les inputs et cie) */
-	--spip-form-spacing-x: 0.75em;
-	--spip-form-spacing-y: 0.75em;
+	--spip-form-spacing-x: 0.75rem;
+	--spip-form-spacing-y: 0.75rem;
 	/* espacements internes (à l'intérieur des inputs et cie) */
-	--spip-form-padding-input-x: 0.5em;
-	--spip-form-padding-input-y: 0.5em;
+	--spip-form-padding-input-x: 0.33rem;
+	--spip-form-padding-input-y: 0.33rem;
 	/* fieldsets */
 	--spip-form-fieldset-offset: 1.5em; /* décalage quand imbriqué */
 	--spip-form-fieldset-spacing: calc(var(--spip-form-spacing-y) / 2); /* espacement en plus */
@@ -74,16 +74,15 @@
 	/* divers */
 	--spip-form-border-radius: var(--spip-border-radius); /* bordure inputs et cie */
 	--spip-form-input-height: calc((var(--spip-form-padding-input-y) * 2) + var(--spip-line-height)); /* à toute fin utile */
-	--spip-form-titrem-factor: 1.2; /* Pour la taille du titre */
 }
 @media (min-width: 768px) {
 	:root {
 		/* espacements externes (entre les inputs et cie) */
-		--spip-form-spacing-x: 1.25em;
-		--spip-form-spacing-y: 1.25em;
+		--spip-form-spacing-x: 1.15rem;
+		--spip-form-spacing-y: 1.15rem;
 		/* espacements internes (à l'intérieur des inputs et cie) */
-		--spip-form-padding-input-x: 0.66em;
-		--spip-form-padding-input-y: 0.66em;
+		--spip-form-padding-input-x: 0.66rem;
+		--spip-form-padding-input-y: 0.66rem;
 		/* décalage des fieldsets imbriqués */
 		--spip-form-fieldset-offset: 2.5em;
 	}
@@ -91,11 +90,11 @@
 .lat .formulaire_spip,
 .formulaire_spip.mini {
 	/* espacements externes (entre les inputs et cie) */
-	--spip-form-spacing-x: 0.75em;
-	--spip-form-spacing-y: 0.85em;
+	--spip-form-spacing-x: 0.75rem;
+	--spip-form-spacing-y: 0.75rem;
 	/* espacements internes (à l'intérieur des inputs et cie) */
-	--spip-form-padding-input-x: 0.33em;
-	--spip-form-padding-input-y: 0.33em;
+	--spip-form-padding-input-x: 0.33rem;
+	--spip-form-padding-input-y: 0.33rem;
 	/* décalage des fieldsets imbriqués */
 	--spip-form-fieldset-offset: 1.5em;
 }
@@ -122,8 +121,8 @@
 	padding-right: var(--spip-form-spacing-x);
 }
 .formulaire_spip .titrem {
-	padding-left: calc(var(--spip-form-spacing-x) - ((var(--spip-form-titrem-factor) - 1) * 1em));
-	padding-right: calc(var(--spip-form-spacing-x) - ((var(--spip-form-titrem-factor) - 1) * 1em));
+	padding-left: var(--spip-form-spacing-x);
+	padding-right: var(--spip-form-spacing-x);
 }
 
 /* Marges négatives pour annuler la gouttière.
@@ -136,8 +135,8 @@
 	margin-right: calc(var(--spip-form-spacing-x) * -1);
 }
 .formulaire_spip .titrem {
-	margin-left: calc((var(--spip-form-spacing-x) - ((var(--spip-form-titrem-factor) - 1) * 1em)) * -1);
-	margin-right: calc((var(--spip-form-spacing-x) - ((var(--spip-form-titrem-factor) - 1) * 1em)) * -1);
+	margin-left: calc(var(--spip-form-spacing-x) * -1);
+	margin-right: calc(var(--spip-form-spacing-x) * -1);
 }
 
 
@@ -368,7 +367,7 @@
 	width: var(--spip-form-label-width);
 	margin-#LEFT: calc((var(--spip-form-label-width) + var(--spip-form-spacing-x)) * -1); /* inverse largeur + marge */
 	margin-bottom: calc(var(--spip-form-spacing-y) / 4);
-	padding: calc(var(--spip-form-padding-input-y) + 1px) 0; /* padding + border */
+	padding: calc(var(--spip-form-padding-input-y) + 1px) 0 0; /* décaler pour aligner avec texte input → padding + border */
 	background: transparent;
 	color: var(--spip-form-color-text-light);
 	text-align: var(--spip-left);
@@ -1165,8 +1164,8 @@
 	margin-top: 0;
 	border: 0;
 	border-radius: 0;
-	margin-left: -15px; /* = padding de fiche_objet */
-	margin-right: -15px; /* = padding de fiche_objet */
+	margin-left: calc(var(--spip-box-spacing-x) * -1); /* = padding de fiche_objet */
+	margin-right: calc(var(--spip-box-spacing-x) * -1); /* = padding de fiche_objet */
 	background-color: var(--spip-color-gray-lightest);
 	position: relative;
 }

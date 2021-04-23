@@ -38,11 +38,11 @@
  */
 
 
-/* Nb : la media-query au début sinon pb */
+/* Nb : la media-query au début sinon pb (?) */
 @media (min-width: 768px) {
 	:root {
 		--spip-box-iconsize: 32px;
-		--spip-box-highlightsize: 1.5em;
+		--spip-box-highlightsize: 1.5rem;
 	}
 }
 /* On reprend certaines valeurs des formulaires pour harmoniser */
@@ -57,16 +57,16 @@
 	/* divers */
 	--spip-box-border-radius: var(--spip-form-border-radius);
 	--spip-box-iconsize: 24px;
-	--spip-box-highlightsize: 1em; /* largeur bordure colorée sur boîtes d'états */
+	--spip-box-highlightsize: 1rem; /* largeur bordure colorée sur boîtes d'états */
 	--spip-box-caretsize: 2rem; /* picto dépliant */
 }
 .lat .box,
 .box.mini {
 	--spip-box-iconsize: 24px;
-	--spip-box-highlightsize: 1em;
+	--spip-box-highlightsize: 1rem;
 	/* Obligé de reprendre à la main les mêmes valeurs que les forms */
-	--spip-box-spacing-x: 0.75em;
-	--spip-box-spacing-y: 0.75em;
+	--spip-box-spacing-x: 0.75rem;
+	--spip-box-spacing-y: 0.75rem;
 }
 
 
@@ -166,7 +166,7 @@
 .box__header h3,
 .box__header.titrem h1, .box__header.titrem h2, .box__header.titrem h3, .box__header.titrem h4, .box__header.titrem h5, .box__header.titrem h6,
 .formulaire_spip .titrem {
-	font-size: calc(1em * var(--spip-form-titrem-factor));
+	font-size: 1.2em;
 	font-weight: 800;
 	/* color: var(--spip-color-theme-dark); */
 }
