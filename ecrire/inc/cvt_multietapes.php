@@ -267,7 +267,7 @@ function cvtmulti_formulaire_verifier_etapes($args, $erreurs) {
 		// si la derniere etape OK etait la derniere
 		// on renvoie le flux inchange et ca declenche traiter
 		if ($derniere_etape_ok == $etapes
-			and (!$etape_demandee or $etape_demandee>=$etapes)) {
+			and (!$etape_demandee or $etape_demandee>$etapes)) {
 			return $erreurs;
 		} else {
 			$etape = $derniere_etape_ok + 1;
