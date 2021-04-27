@@ -48,29 +48,39 @@ function spip_generer_variables_css_typo(array $Pile) : \Spip_Css_Vars_Collectio
 	$vars->add('--spip-color', $Pile[0]['color']);
 
 	// Espacements pour le rythme vertical et les gouttières
-	// Basés sur la hauteur d'une ligne de texte
-	$vars->add('--spip-spacing-y', round(strmult($Pile[0]['font-size'], $Pile[0]['line-height']), 4) . 'em');
-	$vars->add('--spip-spacing-x', round(strmult($Pile[0]['font-size'], $Pile[0]['line-height']), 4) . 'em');
-	$vars->add('--spip-margin-bottom', $Pile[0]['margin-bottom']); // À éviter
+	// Basés sur la hauteur d'une ligne de texte à la racine du document
+	$vars->add('--spip-spacing-y', round(strmult($Pile[0]['font-size'], $Pile[0]['line-height']), 4) . 'rem');
+	$vars->add('--spip-spacing-x', round(strmult($Pile[0]['font-size'], $Pile[0]['line-height']), 4) . 'rem');
+	$vars->add('--spip-margin-bottom', $Pile[0]['margin-bottom']); // À déprécier
 
 	// Bordures
-	$vars->add('--spip-border-radius-mini', '0.2em');
-	$vars->add('--spip-border-radius', '0.33em');
-	$vars->add('--spip-border-radius-large', '0.66em');
+	$vars->add('--spip-border-radius-mini', '0.2rem');
+	$vars->add('--spip-border-radius', '0.33rem');
+	$vars->add('--spip-border-radius-large', '0.66rem');
 
 	// Ombres portées
-	$vars->add
-	('--spip-box-shadow',
+	$shadow_mini =
+		'0 0.05em 0.1em hsla(0, 0%, 0%, 0.33),' .
+		'0 0.1em  0.15em hsla(0, 0%, 0%, 0.05),' .
+		'0 0.1em  0.25em  hsla(0, 0%, 0%, 0.05)';
+	$shadow =
 		'0 0.05em 0.15em hsla(0, 0%, 0%, 0.33),' .
 		'0 0.1em  0.25em hsla(0, 0%, 0%, 0.05),' .
-		'0 0.1em  0.5em  hsla(0, 0%, 0%, 0.05)'
-	);
-	$vars->add
-	('--spip-box-shadow-hover',
+		'0 0.1em  0.5em  hsla(0, 0%, 0%, 0.05)';
+	$shadow_large =
 		'0 0.05em 0.15em hsla(0, 0%, 0%, 0.1),' .
 		'0 0.2em  0.5em  hsla(0, 0%, 0%, 0.1),' .
-		'0 0.2em  1em    hsla(0, 0%, 0%, 0.075)'
-	);
+		'0 0.2em  1em    hsla(0, 0%, 0%, 0.075)';
+	$shadow_huge =
+		'0 0.1em 0.25em hsla(0, 0%, 0%, 0.1),' .
+		'0 0.25em  1em  hsla(0, 0%, 0%, 0.1),' .
+		'0 0.5em  2em    hsla(0, 0%, 0%, 0.075)';
+	$vars->add('--spip-box-shadow-mini', $shadow_mini);
+	$vars->add('--spip-box-shadow-mini-hover', $shadow);
+	$vars->add('--spip-box-shadow', $shadow);
+	$vars->add('--spip-box-shadow-hover', $shadow_large);
+	$vars->add('--spip-box-shadow-large', $shadow_large);
+	$vars->add('--spip-box-shadow-large-hover', $shadow_huge);
 
 	return $vars;
 }
