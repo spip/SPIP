@@ -5,4 +5,12 @@
 	[(#SET{home_server,#EVAL{$GLOBALS}|table_valeur{home_server}|concat{'/',#EVAL{$GLOBALS}|table_valeur{spip_lang}}})]
 	<p><:info_copyright_doc{spipnet=#GET{home_server},spipnet_affiche=#GET{home_server}}:></p>
 </div>
+[<a
+	href="#GET{home_server}"
+	class="lien-logo"
+	rel="external"
+	aria-label="<:info_copyright_doc{spipnet_affiche=#GET{home_server}}|textebrut|attribut_html:>"
+>
+	(#CHEMIN{spip.svg}|balise_svg)
+</a>]
 [(#REM**|html_tests_js)]
