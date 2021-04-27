@@ -18,14 +18,6 @@
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 #SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
 
-/* pour les icones pochoir de diala */
-.navigation_avec_icones #bando_navigation ul.deroulant > li > a { background-color: #GET{claire};}
-.navigation_avec_icones #bando_navigation ul.deroulant > li > a:hover,
-.navigation_avec_icones #bando_navigation ul.deroulant > li > a:focus { background-color: #GET{foncee}; }
-
-.navigation_avec_icones #bando_navigation ul li a {background-position:center top;background-repeat:no-repeat;padding-top:60px;}
-.navigation_avec_icones #bando_navigation ul li ul li a {margin-#GET{left}:7px; margin-#GET{right}: 1.0em; background-position:[(#GET{left})] center;margin-top:0;padding-#GET{left}:26px;padding-top:0.8em;}
-
 /** Habillage tire du plugin details_interface d'Arno* *******/
 
 [(#SET{lien,[#(#ENV{foncee}|couleur_foncer{0.25})]})]
@@ -35,34 +27,8 @@ body {
 	background-color: #f9f9f9;
 	background-color: hsl(var(--spip-color-theme--h), 3%, 97%);
 }
-#bando_identite {letter-spacing: -0.5px}
-#bando_identite a:hover {color: #333;}
-#bando_haut ul.deroulant li a {color: #666;}
-#bando_haut ul.deroulant li a:hover {color: black;}
-#bando_haut ul.deroulant li ul li {background-color: transparent;}
-#bando_haut ul.deroulant li ul> li:last-child {-border-bottom-left-radius:5px;border-bottom-right-radius:5px;position:relative;}
-#bando_haut ul.deroulant li ul li.actif,
-#bando_haut ul.deroulant li ul li.actif_tempo {background-color: #[(#ENV{claire}|couleur_eclaircir)];position:relative;}
-#bando_haut ul.deroulant li ul li.actif a:hover,
-#bando_haut ul.deroulant li ul li.actif_tempo a:hover {background-color: transparent;}
-#bando_navigation ul li {line-height: 125%;}
-#bando_navigation ul li ul {min-width: 170px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;background-color: white;position:relative;}
-#bando_navigation ul li ul a {padding: 0.5em;}
-/*
-#bando_outils {border-top: 1px solid #999;background-color: #444;background: -webkit-gradient(linear, left top, left bottom, from(#555555), to(#333333));background-image: -webkit-linear-gradient(top, #555555, #333333);background-image: -moz-linear-gradient(top, #555555, #333333);background-image: -ms-linear-gradient(top, #555555, #333333);background-image: -o-linear-gradient(top, #555555, #333333);background-image: linear-gradient(top, #555555, #333333);filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#555555', endColorstr='#333333');}
-*/
-#bando_outils ul.deroulant {font-size: 0.9em;line-height: 120%;}
-/*
-.navigation_avec_icones #bando_navigation ul.deroulant > li > a {font-size: 90%;}
-.navigation_avec_icones #bando_navigation ul.deroulant > li > a:hover {background-color: #ENV{foncee};}
-.navigation_avec_icones #bando1_menu_accueil {background-image: url("plugins/details_interface_3/images/accueil-48.png");}
-.navigation_avec_icones #bando1_menu_edition {background-image: url("plugins/details_interface_3/images/edition-48.png");}
-.navigation_avec_icones #bando1_menu_publication {background-image: url("plugins/details_interface_3/images/publication-48.png");}
-.navigation_avec_icones #bando1_menu_activite {background-image: url("plugins/details_interface_3/images/suivi-activite-48.png");}
-.navigation_avec_icones #bando1_menu_squelette {background-image: url("plugins/details_interface_3/images/squelettes-48.png");}
-.navigation_avec_icones #bando1_menu_administration {background-image: url("plugins/details_interface_3/images/maintenance-48.png");}
-.navigation_avec_icones #bando1_menu_configuration {background-image: url("plugins/details_interface_3/images/configuration-48.png");}
-*/
+
+
 .simple.fiche_objet .inner .hd { line-height: 120%; }
 #contenu .fiche_objet .propose .inner {border: 0;border-radius:0;background-color: #ffde00;margin: 0px -15px;padding:15px;position:relative;}
 #contenu .fiche_objet .propose .inner p {margin: 0;}
@@ -156,11 +122,6 @@ h1 {font-size: 2em;line-height: 125%;}
 .en-edition .bd .liste-items li {border-bottom: 1px solid white;padding-left: 10px;padding-right: 10px;}
 
 #portfolios h3 {padding: 7px 10px;background-color: #ENV{foncee};color: white;border-top-left-radius:5px;border-top-right-radius:5px;position:relative;}
-.navigation .sous_navigation .item {padding: 0px;font-weight: bold; font-size:1.1em;}
-
-.navigation .sous_navigation .item a {margin: 0;padding: 14px;padding-left: 48px;background-position: 14px center;background-size: 24px; color: #666;}
-.navigation .sous_navigation .item a:hover {background-color: #[(#ENV{foncee}|couleur_luminance{0.15})];box-shadow:0px 0px 10px #[(#ENV{foncee}|couleur_luminance{0.20})] inset;color: black;position:relative;}
-.navigation .sous_navigation .item a:focus {background-color: #[(#ENV{foncee}|couleur_luminance{0.15})];box-shadow:0px 0px 10px #[(#ENV{foncee}|couleur_luminance{0.20})] inset;color: black;position:relative;}
 
 p.actions.right {
 	float: #ENV{right};

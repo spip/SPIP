@@ -38,7 +38,14 @@ function action_menu_rubriques_dist() {
 	// si pas acces a ecrire, pas acces au menu
 	// on renvoi un 401 qui fait echouer la requete ajax silencieusement
 	if (!autoriser('ecrire')) {
-		$retour = "<ul class='cols_1'><li class='toutsite'><a href='" . generer_url_ecrire('accueil') . "'>" . _T('public:lien_connecter') . "</a></li></ul>";
+		$retour =
+		'<ul class="deroulant__sous-menu" data-profondeur="1">' .
+			'<li class="deroulant__item deroulant__item_plan plan_site" data-profondeur="1">' .
+				'<a class="deroulant__lien" href="' . generer_url_ecrire('accueil') . '" data-profondeur="1">' .
+					'<span class="libelle">' . _T('public:lien_connecter') . '</span>' .
+				'</a>' .
+			'</li>' .
+		'</ul>';
 		include_spip('inc/actions');
 		ajax_retour($retour);
 		exit;
@@ -75,10 +82,14 @@ function action_menu_rubriques_dist() {
  *     Code HTML présentant la liste des rubriques
  **/
 function menu_rubriques($complet = true) {
-	$ret = "<li class='toutsite'><a href='" . generer_url_ecrire('plan') . "'>" . _T('info_tout_site') . "</a></li>";
+	$ret = '<li class="deroulant__item deroulant__item_tout toutsite" data-profondeur="1">'
+		. '<a class="deroulant__lien" href="' . generer_url_ecrire('plan') . '" data-profondeur="1">'
+		. '<span class="libelle">' . _T('info_tout_site') . '</span>'
+		. '</a>'
+		. '</li>';
 
 	if (!$complet) {
-		return "<ul class='cols_1'>$ret\n</ul>\n";
+		return "<ul class=\"deroulant__sous-menu\" data-profondeur=\"1\">$ret\n</ul>\n";
 	}
 
 	if (!isset($GLOBALS['db_art_cache'])) {
@@ -100,11 +111,12 @@ function menu_rubriques($complet = true) {
 			}
 		}
 
-		$ret = "<ul class='cols_$nb_col'>"
+		$class_cols = ($nb_col > 1 ? "cols-$nb_col" : '');
+		$ret = "<ul class=\"deroulant__sous-menu $class_cols\" data-profondeur=\"1\">"
 			. $ret
 			. "\n</ul>\n";
 	} else {
-		$ret = "<ul class='cols_1'>$ret\n</ul>\n";
+		$ret = "<ul class=\"deroulant__sous-menu\" data-profondeur=\"1\">$ret\n</ul>\n";
 	}
 
 	return $ret;
@@ -121,24 +133,25 @@ function menu_rubriques($complet = true) {
  *     Titre de cette rubrique
  * @param int $zdecal
  *     Décalage vertical, en nombre d'élément
+ * @param int $profondeur
+ *     Profondeur du parent
  *
  * @return string
  *     Code HTML présentant la liste des rubriques
  **/
-function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal) {
+function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $profondeur = 1) {
 	static $zmax = 6;
+	$profondeur_next = $profondeur + 1;
 
-	$nav = "<a href='"
-		. generer_url_entite($id_rubrique, 'rubrique', '', '', false)
-		. "'>"
-		. supprimer_tags(preg_replace(',[\x00-\x1f]+,', ' ', $titre_rubrique))
+	$nav = '<a class="deroulant__lien" href="' . generer_url_entite($id_rubrique, 'rubrique', '', '', false) . "\" data-profondeur=\"$profondeur\">"
+		. '<span class="libelle">' . supprimer_tags(preg_replace(',[\x00-\x1f]+,', ' ', $titre_rubrique)) . '</span>'
 		. "</a>\n";
 
 	// Limiter volontairement le nombre de sous-menus
 	if (!(--$zmax)) {
 		$zmax++;
 
-		return "\n<li>$nav</li>";
+		return "\n<li class=\"deroulant__item\" data-profondeur=\"$profondeur\">$nav</li>";
 	}
 
 	$arr_rub = extraire_article($id_rubrique, $GLOBALS['db_art_cache']);
@@ -146,7 +159,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal) {
 	if (!$i) {
 		$zmax++;
 
-		return "\n<li>$nav</li>";
+		return "\n<li class=\"deroulant__item\" data-profondeur=\"$profondeur\">$nav</li>";
 	}
 
 
@@ -154,11 +167,14 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal) {
 	if ($nb_rub = count($arr_rub)) {
 		$nb_col = min(10, max(1, ceil($nb_rub / 10)));
 	}
-	$ret = "<li class='haschild'>$nav<ul class='cols_$nb_col'>";
+	$class_cols = ($nb_col > 1 ? "cols-$nb_col" : '');
+	$ret = "<li class=\"deroulant__item deroulant__item_parent\" data-profondeur=\"$profondeur\">"
+	 . $nav
+	 . "<ul class=\"deroulant__sous-menu $class_cols\" data-profondeur=\"$profondeur_next\">";
 	foreach ($arr_rub as $id_rub => $titre_rub) {
 		if (autoriser('voir', 'rubrique', $id_rub)) {
 			$titre = supprimer_numero(typo($titre_rub));
-			$ret .= bandeau_rubrique($id_rub, $titre, $zdecal + $i);
+			$ret .= bandeau_rubrique($id_rub, $titre, $zdecal + $i, $profondeur_next);
 			$i++;
 		}
 	}

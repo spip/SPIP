@@ -1,65 +1,94 @@
 #SET{contexte,#EVAL{definir_barre_contexte()}}
-#SET{boutons,#GET{contexte}|definir_barre_boutons{0}|trier_boutons_enfants_par_favoris_alpha}
-<div id="bando_haut" role="navigation">
-	<div id="bando_liens_rapides">
-		<div class="largeur clearfix">
-			<a href="#conteneur" onclick="return focus_zone('#conteneur')">Aller au contenu</a> |
-			<a href="#bando_navigation" onclick="return focus_zone('#bando_navigation')">Aller &agrave; la navigation</a> |
-			<a href="#recherche" onclick="return focus_zone('#rapides .formulaire_recherche')">Aller &agrave; la recherche</a>
+#SET{boutons,#GET{contexte}|definir_barre_boutons{1}|trier_boutons_enfants_par_favoris_alpha}
+<div id="bando_haut" class="bando-haut" role="navigation">
+
+	[(#REM) Liens d'évitement ]
+	<div id="bando_liens_rapides" class="bando-evitement">
+		<div class="largeur">
+			<p class="menu-simple menu-simple_evitement">
+				<a class="menu-simple__lien" href="#conteneur" onclick="return focus_zone('#conteneur')">Aller au contenu</a>
+				<a class="menu-simple__lien" href="#bando_navigation" onclick="return focus_zone('#bando_navigation')">Aller &agrave; la navigation</a>
+				<a class="menu-simple__lien" href="#recherche" onclick="return focus_zone('#rapides .formulaire_recherche')">Aller &agrave; la recherche</a>
+			</p>
 		</div>
 	</div>
 
-	<div id="bando_identite">
-		<div class="largeur clearfix">
-			<p class="session"><a
+	[(#REM) Bandeau identité ]
+	<div id="bando_identite" class="bando-id">
+		<div class="largeur">
+
+			<p class="menu-simple menu-simple_perso">
+				<a
+					class="menu-simple__lien menu-simple__lien_nom"
 					title="<:icone_informations_personnelles|attribut_html:> \(<:auteur|attribut_html:> ##SESSION{id_auteur}\)"
-					href="#URL_ECRIRE{infos_perso}"><strong class="nom">[(#SESSION{nom}|trim|sinon{#SESSION{login}}|typo|couper{30})]</strong></a> |
-				<a class="menu_lang"
+					href="#URL_ECRIRE{infos_perso}">
+					<strong class="nom">[(#SESSION{nom}|trim|sinon{#SESSION{login}}|typo|couper{30})]</strong>
+				</a>
+				<a class="menu-simple__lien menu-simple__lien_lang menu_lang"
 					href="#URL_ECRIRE{configurer_langage}"
-					title="<:titre_config_langage:>">[(#CHEMIN_IMAGE{langues.svg}|balise_img{<:titre_config_langage:>})][(#LANG|traduire_nom_langue)]</a> |
-				[(#PLUGIN{aide}|oui)<a class="aide popin" target="_blank"
-					href="#URL_ECRIRE{aide,var_lang=#LANG}"><:icone_aide_ligne:></a> |]
-				<a href="[(#VAL{logout}|generer_url_action{logout=prive})]"><:icone_deconnecter:></a>
+					title="<:titre_config_langage:>">
+					[(#CHEMIN_IMAGE{langue-small-xx.svg}|balise_svg{<:titre_config_langage:>,picto-lang})][(#LANG|traduire_nom_langue)]
+				</a>
+				[(#PLUGIN{aide}|oui)<a
+					class="menu-simple__lien menu-simple__lien_aide aide popin" target="_blank"
+					href="#URL_ECRIRE{aide,var_lang=#LANG}">
+					<:icone_aide_ligne:>
+				</a>]
+				<a class="menu-simple__lien menu-simple__lien_logout" href="[(#VAL{logout}|generer_url_action{logout=prive})]">
+					<:icone_deconnecter:>
+				</a>
 			</p>
-			<p class="nom_site_spip">[(#SET{configurer,#AUTORISER{configurer,_identite}|?{oui,''}})][(#GET{configurer}|oui)<a
-					class="info"
+
+			<p class="menu-simple menu-simple_site nom_site_spip">
+				[(#SET{configurer,#AUTORISER{configurer,_identite}|?{oui,''}})][(#GET{configurer}|oui)
+				<a
+					class="menu-simple__lien menu-simple__lien_site info"
 					title="<:titre_identite_site|attribut_html:>"
-					href="#URL_ECRIRE{configurer_identite}">]<strong
-					class="nom">[ (#NOM_SITE_SPIP|couper{35}) ]</strong>[</a>(#GET{configurer}|oui)]|
-				<a class="voir"
-					href="#URL_SITE_SPIP"><:icone_visiter_site:></a>
+					href="#URL_ECRIRE{configurer_identite}">]
+					<strong class="nom">[(#NOM_SITE_SPIP|couper{35})]</strong>
+				[</a>(#GET{configurer}|oui)]
+				<a
+					class="menu-simple__lien menu-simple__lien_voir voir"
+					href="#URL_SITE_SPIP">
+					<:icone_visiter_site:>
+				</a>
 			</p>
+
 		</div>
 	</div>
 
-	<div id="bando_navigation">
-		<div class="largeur clearfix">
+	[(#REM) Menu de navigation principale ]
+	<div id="bando_navigation" class="bando-nav">
+		<div class="largeur">
 			<B_boutons>
-				<ul class="deroulant">
+				<ul class="deroulant deroulant_navigation" data-racine>
 					<BOUCLE_boutons(DATA)
-					{source tableau, #GET{boutons}}
-					{cle!=outils_rapides}
-					{cle!=outils_collaboratifs}>
-					[<li (#CLE|=={menu_accueil}|ou{#VALEUR{sousmenu}}|?{' ',#SET{li,''}}) #SET{li,'</li>'}[class="(#VAL{first}|unique)"]>
-					<a href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]" id="bando1_#CLE">
-						[(#LIBELLE|_T)]
-					</a>
-					][(#REM)
-					permettra d'ajouter une classe sur les entrées non favorites
-					si le menu a des entrées favorites, pour faciliter le stylage CSS
-					][(#SET{has_favoris,0})]
-					<B_sous>
-						<ul[ (#TOTAL_BOUCLE|>{20}|oui)class="menu-2col"]>
-							<BOUCLE_sous(DATA){source tableau, #SOUSMENU}>
+						{source tableau, #GET{boutons}}
+						{cle!=outils_rapides}
+						{cle!=outils_collaboratifs}
+					>
+					[<li class="deroulant__item" data-racine>
+						(#CLE|=={menu_accueil}|ou{#VALEUR{sousmenu}}|?{' ',#SET{li,''}}) #SET{li,'</li>'}
+						<a class="deroulant__lien" href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]" id="bando1_#CLE" data-racine>
+							[(#VALEUR{icone}|balise_svg{'',picto picto_main[ picto_(#CLE|replace{_,-})]})]
+							[<span class="libelle">(#LIBELLE|_T)</span>]
+						</a>
+						][(#REM)
+						permettra d'ajouter une classe sur les entrées non favorites
+						si le menu a des entrées favorites, pour faciliter le stylage CSS
+						][(#SET{has_favoris,0})]
+						<B_sous>
+						<ul class="deroulant__sous-menu[ (#TOTAL_BOUCLE|>{20}|oui)cols-2]" data-profondeur="1">
+							<BOUCLE_sous(DATA) {source tableau, #SOUSMENU}>
 							[(#FAVORI|oui)#SET{has_favoris,1}]
-							[<li[ class="(#FAVORI|?{favori,[(#GET{has_favoris}|?{non_favori})]})"]>
-							<a href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]" class="bando2_#CLE">
-								(#LIBELLE|_T)
-							</a>
+							[<li class="deroulant__item[ (#FAVORI|?{deroulant__item_favori,[(#GET{has_favoris}|?{deroulant__item_non-favori})]})]" data-profondeur="1">
+								<a class="deroulant__lien bando2_#CLE" href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]" data-profondeur="1">
+									<span class="libelle">(#LIBELLE|_T)</span>
+								</a>
 							</li>]
 							</BOUCLE_sous>
 						</ul>
-					</B_sous>
+						</B_sous>
 					#GET{li}
 					</BOUCLE_boutons>
 				</ul>
@@ -67,33 +96,59 @@
 		</div>
 	</div>
 
-	<div id="bando_outils">
-		<div class="largeur clearfix">
-			<ul class="bandeau_rubriques deroulant">
-				<li class="plan_site"><a
-					href="#URL_ECRIRE{plan}"
-					id="boutonbandeautoutsite">[(#CHEMIN_IMAGE{plan_site-24.png}|balise_img)]</a>
-					[(#REM|menu_rubriques)]</li></ul>
-			<B_creer>
-				<ul class="rapides creer">
-					<BOUCLE_creer(DATA)
-						{source tableau, #GET{boutons}}
-						{cle=outils_rapides}><BOUCLE_creersous(DATA){source tableau, #SOUSMENU}{par position}>[<li class="rapides__item"><a
-						href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
-						title="[(#VALEUR{libelle}|_T|attribut_html)]"
-						class="bando2_#CLE"><span>(#VALEUR{libelle}|_T)</span></a></li>]
-					</BOUCLE_creersous></BOUCLE_creer>
+	[(#REM) Menu outils ]
+	<div id="bando_outils" class="bando-outils">
+		<div class="largeur">
+
+			[(#REM) Groupe d'outils n°1 ]
+			<div class="outils outils_plan-creer">
+
+				[(#REM) Plan des rubriques ]
+				<ul class="deroulant deroulant_rubriques bandeau_rubriques" data-racine>
+					<li class="deroulant__item deroulant__item_plan plan_site" data-racine>
+						<a
+							class="deroulant__lien"
+							href="#URL_ECRIRE{plan}"
+							id="boutonbandeautoutsite"
+							data-racine
+						>
+							[(#CHEMIN_IMAGE{plan_site-24.png}|balise_img{'',picto picto_plan})]
+						</a>
+						[(#REM|menu_rubriques)]
+					</li>
 				</ul>
-			</B_creer>
-			<div id="rapides">
+
+				[(#REM) Boutons de création rapide ]
+				<B_creer>
+					<ul class="rapides rapides_creer creer">
+						<BOUCLE_creer(DATA) {source tableau, #GET{boutons}} {cle=outils_rapides}>
+						<BOUCLE_creersous(DATA) {source tableau, #SOUSMENU}{par position}>
+						[<li class="rapides__item">
+							<a
+								href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
+								title="[(#VALEUR{libelle}|_T|attribut_html)]"
+								class="rapides__lien bando2_#CLE"><span class="libelle">(#VALEUR{libelle}|_T)</span></a>
+						</li>]
+						</BOUCLE_creersous></BOUCLE_creer>
+					</ul>
+				</B_creer>
+
+			</div>
+
+
+			[(#REM) Groupe d'outils n°2 ]
+			<div class="outils outils_collab-cherche" id="rapides">
 				<B_collaborer>
-					<ul class="rapides collaborer">
-					<BOUCLE_collaborer(DATA)
-						{source tableau, #GET{boutons}}
-						{cle=outils_collaboratifs}><BOUCLE_collaborersous(DATA){source tableau, #SOUSMENU}>[<li class="rapides__item"><a
-							href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
-							title="[(#VALEUR{libelle}|_T|attribut_html)]"
-							class="bando2_#CLE"><span>(#VALEUR{libelle}|_T)</span></a></li>]</BOUCLE_collaborersous></BOUCLE_collaborer>
+					<ul class="rapides rapides_collaborer collaborer">
+					<BOUCLE_collaborer(DATA) {source tableau, #GET{boutons}} {cle=outils_collaboratifs}>
+					<BOUCLE_collaborersous(DATA) {source tableau, #SOUSMENU}>
+						[<li class="rapides__item">
+							<a
+								href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
+								title="[(#VALEUR{libelle}|_T|attribut_html)]"
+								class="rapides__lien bando2_#CLE"><span class="libelle">(#VALEUR{libelle}|_T)</span></a>
+						</li>]
+						</BOUCLE_collaborersous></BOUCLE_collaborer>
 					</ul>
 				</B_collaborer>
 
