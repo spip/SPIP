@@ -30,6 +30,31 @@
  *    |--.largeur
  */
 
+
+/**
+ * ============
+ * 0. Variables
+ * ============
+ */
+
+
+/* Variable utilitaire pour donner la largeur disponible, tient compte des gouttières de .largeur
+   Utile pour les éléments positionnés en absolute par ex. */
+:root {
+	--spip-vw: 100vw - calc(10px * 2);
+}
+@media (min-width: 960px) {
+	:root {
+		--spip-vw: 100vw - calc(20px * 2);
+	}
+}
+@media (min-width: 1440px) {
+	:root {
+		--spip-vw: 1440px - calc(20px * 2);
+	}
+}
+
+
 /**
  * ============================
  * 1. Layout général de la page
