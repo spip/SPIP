@@ -37,7 +37,6 @@
 	--spip-bando-id-spacing-x: 0.66rem;
 	/* Navigation principale */
 	--spip-bando-nav-picto-size: 20px; /* grands pictos */
-	--spip-bando-nav-spacing-x: 0.5rem; /* padding spécial pour les pictos */
 	/* Outils */
 	--spip-bando-outils-spacing-x: 0.33rem;
 	--spip-bando-outils-spacing-y: 0.25rem;
@@ -51,7 +50,6 @@
 	:root {
 		/* Nav */
 		--spip-bando-nav-picto-size: 40px; /* grands pictos : taille originale */
-		--spip-bando-nav-spacing-x: 1.33rem; /* padding spécial pour les pictos */
 		/* Outils */
 		--spip-bando-outils-spacing-x: 0.5rem;
 		--spip-bando-outils-spacing-y: 0.33rem;
@@ -395,7 +393,24 @@
 	z-index: 10;
 	background: var(--spip-color-white);
 	color: var(--spip-color-gray-dark);
-	margin-#LEFT: calc(var(--spip-bando-nav-spacing-x) * -1); /* Aligner sur le bord de la page */
+}
+
+/* Astuce alignement : on veut que la 1ère entrée soit alignée sur le bord de la page,
+   tout en conservant un espacement constant entre les icônes (pas les <li> eux-mêmes).
+   La seule façon est de donner une largeur aux <li>, sauf le 1er.
+   Cette astuce n'est possible que quand tout est sur une seule ligne.
+*/
+@media (min-width: 960px) {
+	.bando-nav .deroulant_navigation {
+		margin-#LEFT: calc(var(--spip-deroulant-spacing-x) * -1); /* Décalage pour aligner */
+	}
+	.deroulant_navigation .deroulant__item[data-racine]:first-child > a {
+		padding-#RIGHT: 1em; /* Arbitraire, pour équilibrer */
+		/* white-space: nowrap; */ /* Si besoin d'éviter de passer à la ligne */
+	}
+	.deroulant_navigation .deroulant__item[data-racine]:nth-child(n+2) {
+		flex: 0 1 8.5em; /* Largeur arbitraire qui doit convenir dans l'ensemble */
+	}
 }
 
 /* Liens à la racine : centrer, picto au dessus, largeur définie par le padding */
@@ -403,8 +418,6 @@
 	flex-wrap: wrap;
 	justify-content: center;
 	text-align: center;
-	padding-left: var(--spip-bando-nav-spacing-x);
-	padding-right: var(--spip-bando-nav-spacing-x);
 }
 .deroulant_navigation .deroulant__item.actif[data-racine] > .deroulant__lien,
 .deroulant_navigation .deroulant__item.actif_tempo[data-racine] > .deroulant__lien,
