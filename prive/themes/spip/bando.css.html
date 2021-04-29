@@ -391,25 +391,12 @@
 	color: var(--spip-color-gray-dark);
 }
 
-/* Astuce alignement : on veut que la 1ère entrée soit alignée sur le bord de la page,
-   tout en conservant un espacement constant entre les icônes (pas les <li> eux-mêmes).
-   La seule façon est de donner une largeur aux <li>, sauf le 1er.
-   Cette astuce n'est possible que quand tout est sur une seule ligne.
-*/
-@media (min-width: 960px) {
-	.bando-nav .deroulant_navigation {
-		margin-#LEFT: calc(var(--spip-deroulant-spacing-x) * -1); /* Décalage pour aligner */
-	}
-	.deroulant_navigation .deroulant__item[data-racine]:first-child > a {
-		padding-#RIGHT: 2em; /* Arbitraire, pour équilibrer */
-		white-space: nowrap; /* Moins pire que du multi-lignes à cet endroit */
-	}
-	.deroulant_navigation .deroulant__item[data-racine]:nth-child(n+2) {
-		flex: 0 1 8.5em; /* Largeur arbitraire qui doit convenir dans l'ensemble */
-	}
+/* Item <li> à la racine : largeur arbitraire qui doit convenir dans l'ensemble */
+.deroulant_navigation .deroulant__item[data-racine] {
+	flex: 0 1 8.5em;
 }
 
-/* Liens à la racine : centrer, picto au dessus, largeur définie par le padding */
+/* Liens <a> à la racine : centrer, picto au dessus */
 .deroulant_navigation .deroulant__lien[data-racine] {
 	flex-wrap: wrap;
 	justify-content: center;
@@ -423,7 +410,7 @@
 	background-color: transparent;
 }
 
-/* Picto à la racine */
+/* Picto <svg> à la racine */
 .deroulant_navigation .picto {
 	width: var(--spip-bando-nav-picto-size);
 	height: auto;
