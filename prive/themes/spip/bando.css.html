@@ -217,7 +217,7 @@
 /* Liens des sous-menus : prévoir les icônes à gauche en background */
 .navigation_avec_icones .bando-haut .deroulant__sous-menu .deroulant__lien {
 	padding-#LEFT: calc(var(--spip-deroulant-icon-size) + (var(--spip-deroulant-spacing-x) * 2));
-	background-position: var(--spip-left) var(--spip-deroulant-spacing-x) center;
+	background-position: var(--spip-left) var(--spip-deroulant-spacing-x) top calc(var(--spip-deroulant-spacing-y) + 0.2em);
 	background-size: var(--spip-deroulant-icon-size);
 	background-repeat: no-repeat;
 }
@@ -261,36 +261,34 @@
 	border-bottom-left-radius: inherit;
 	border-bottom-right-radius: inherit;
 }
-/* Sous-menus en colonnes (column-count plus adapté que grid ou autre) */
+/* Sous-menus en colonnes
+   Nb : column-count serait plus adapté mais pose des problèmes
+   pour le placement des sous-menus imbriqués */
 .bando-haut .deroulant__sous-menu[class*=cols-] {
 	max-width: calc(var(--spip-vw) * 0.9);
-	column-gap: 0;
-	column-rule: 1px solid var(--spip-color-gray-lighter);
-	column-fill: balance;
-	/* break-inside: avoid-column; */
-	break-inside: avoid;
-	page-break-inside: avoid;
+	display: grid;
+	grid-gap: 0;
 }
 .bando-haut .deroulant__sous-menu.cols-2 {
-	column-count: 2;
+	grid-template-columns: repeat(2, 1fr);
 }
 .bando-haut .deroulant__sous-menu.cols-3 {
-	column-count: 3;
+	grid-template-columns: repeat(3, 1fr);
 }
 .bando-haut .deroulant__sous-menu.cols-4 {
-	column-count: 4;
+	grid-template-columns: repeat(4, 1fr);
 }
 .bando-haut .deroulant__sous-menu.cols-5 {
-	column-count: 5;
+	grid-template-columns: repeat(5, 1fr);
 }
 .bando-haut .deroulant__sous-menu.cols-6 {
-	column-count: 6;
+	grid-template-columns: repeat(6, 1fr);
 }
 .bando-haut .deroulant__sous-menu.cols-7 {
-	column-count: 7;
+	grid-template-columns: repeat(7, 1fr);
 }
 .bando-haut .deroulant__sous-menu.cols-8 {
-	column-count: 8;
+	grid-template-columns: repeat(8, 1fr);
 }
 
 
@@ -568,10 +566,18 @@
 .deroulant_rubriques .deroulant__item_plan .image_loading {
 	float: var(--spip-right);
 }
-/* Sous-menus */
+/* Sous-menus s'ouvrant latéralement */
 .deroulant_rubriques .deroulant__sous-menu[data-profondeur="1"] {
 	font-size: 0.9em;
 }
+.deroulant_rubriques .deroulant__sous-menu .deroulant__item {
+	position: relative;
+}
+.deroulant_rubriques .deroulant__item_parent.actif > .deroulant__sous-menu,
+.deroulant_rubriques .deroulant__item_parent.actif_tempo > .deroulant__sous-menu {
+	#LEFT: 4em; /* Décalage arbitraire pas trop grand */
+}
+/* Lien tout voir sans icône */
 .deroulant_rubriques .deroulant__item_tout > .deroulant__lien {
 	background-image: none !important;
 }
@@ -581,11 +587,6 @@
 }
 .deroulant_rubriques [data-profondeur="2"] .deroulant__lien {
 	background-image: url(#CHEMIN_IMAGE{rubrique-xx.svg});
-}
-/* Les sous-menus de profondeur 2 et + s'ouvrent latéralement */
-.deroulant_rubriques .deroulant__item_parent.actif > .deroulant__sous-menu,
-.deroulant_rubriques .deroulant__item_parent.actif_tempo > .deroulant__sous-menu {
-	#LEFT: 4em; /* Décalage arbitraire pas trop grand */
 }
 /* picto pour indiquer les items dépliants */
 .deroulant_rubriques .deroulant__item_parent > .deroulant__lien {
