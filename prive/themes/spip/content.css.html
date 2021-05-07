@@ -93,7 +93,7 @@ html {background-color:#eee;}
 #haut h1,#contenu h1 {color: var(--spip-color-theme-dark);}
 
 /* Liens hypertexte */
-a { text-decoration: none; color: [#(#ENV{foncee}|couleur_foncer{0.25})]; }
+a { text-decoration: none; color: var(--spip-color-theme-dark); }
 a:hover { text-decoration: underline; }
 a.icone { text-decoration: none; }
 a.icone:hover { text-decoration: none; }
@@ -133,6 +133,7 @@ li .puce_article_popup, li.puce_breve_popup,li.puce_site_popup { padding: 0; }*/
 .puce_objet { position: relative; }
 .puce_objet_fixe { position: relative; }
 
+.puce_objet_popup, .puce_objet_popup * { box-sizing: content-box; }
 .puce_objet_popup { position: absolute; margin-top:-2px; visibility: hidden; border: 1px solid #666; background-color: #ccc; z-index: 10; top: 0; #ENV{left}: 0;}
 .puce_objet_popup img { padding: 2px; border: 0; }
 .puce_objet .puce_objet_popup { visibility: hidden; }
