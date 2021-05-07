@@ -1410,15 +1410,36 @@
 }
 
 /* formulaire_traduire */
+.formulaire_traduire .editer > label {
+	padding: 0;
+}
+.formulaire_traduire .voir_traductions {
+	padding-top: calc(var(--spip-form-spacing-y) / 2);
+}
 .formulaire_traduire .liste-objets {
-	margin-top: 0;
-	margin-bottom: 0;
+	margin: 0 calc(var(--spip-box-spacing-x) * -1);
+	background-color: transparent;
+	border-color: var(--spip-box-sep-color);
+	border-left: 0;
+	border-right: 0;
+	border-radius: 0;
+}
+.formulaire_traduire .liste-objets .caption {
+	border: 0;
 }
 .formulaire_traduire .liste-objets .first_row {
 	display: none;
 }
+.formulaire_traduire .liste-objets .on {
+	font-weight: inherit;
+}
 .formulaire_traduire .supprimer_trad {
 	float: var(--spip-right);
+	margin: calc(var(--spip-form-spacing-y) / 2) 0 0;
+}
+.formulaire_traduire .new_trad {
+	overflow: hidden;
+	padding-bottom: calc(var(--spip-form-spacing-y) / 2);
 }
 
 /* formulaire_instituer */

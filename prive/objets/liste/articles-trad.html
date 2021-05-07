@@ -28,7 +28,7 @@
 				[(#SET{titre,[<:info_numero_abbreviation:>#ID_ARTICLE (#TITRE) - [(#LANG|traduire_nom_langue)]]})]
 				[(#SET{titre,#VAL{trad_definir_reference}|_T{#ARRAY{titre,#GET{titre}}}})]
 				<button type='submit'
-	        class="changer_reference_trad"
+	        class="changer_reference_trad btn btn_mini"
 					name='changer_reference_trad&#91;#ID_ARTICLE&#93;'
 					title="[(#GET{titre}|attribut_html)]"
 					value='#ID_ARTICLE'>#LANG</button>]
@@ -41,7 +41,7 @@
 				[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
 				href="[(#ID_ARTICLE|generer_url_entite{article})]"
 				title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">[(#RANG). ]#TITRE</a>})]</span>
-				[(#ENV{id_trad}|=={#ID_ARTICLE}|oui)<:trad_reference:>]
+				[(#ENV{id_trad}|=={#ID_ARTICLE}|oui)<small class="reference_trad"><:trad_reference:></small>]
 			</td>
 			<td class='langue'>[(#LANG|traduire_nom_langue)]</td>
 			<td class='id'>[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{

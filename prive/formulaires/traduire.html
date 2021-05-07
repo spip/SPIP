@@ -17,13 +17,13 @@
 				[(#ENV{langue_choisie}|=={oui}|non)([(#ENV{_objet}|objet_T{info_multi_herit})])]
 				</span>
 				[(#ENV{_langue}|ou{#ENV{_traduire}}|oui)
-					<span class="toggle_box_link"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]>&#91;<a href="#"
+					<span class="toggle_box_link"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]><a class="btn btn_mini btn_secondaire" href="#"
 						onclick="var f=jQuery(this).parents('form').eq(0);
 							f.find('.editer-groupe .input').removeClass('none-js').show('fast');
 							f.find('span.toggle_box_link[(#ENV{_langue}|oui),span.affiche]').hide('fast');
 							f.find('.boutons,.new_trad,.editer_id_trad').show('fast');
 							f.find('#changer_lang').eq(0).focus();return false;"
-						><:bouton_changer:><i class="over"> \([(#ENV{_langue}|?{[(#ENV{_objet}|objet_info{texte_langue_objet}|_T)],#ENV{_objet}|objet_T{info_traductions}})]\)</i></a>&#93;</span>
+						><:bouton_changer:><i class="over"> \([(#ENV{_langue}|?{[(#ENV{_objet}|objet_info{texte_langue_objet}|_T)],#ENV{_objet}|objet_T{info_traductions}})]\)</i></a></span>
 					[(#ENV{editable}|oui)
 					[<span class="input[(#ENV{_saisie_en_cours}|non)none-js]">
 					<select name="changer_lang" id="changer_lang">(#INCLURE{fond=formulaires/inc-options-langues,name=changer_lang,default=#ENV**{_langue},herit=#ENV**{langue_parent}})</select>
@@ -36,7 +36,7 @@
 					<INCLURE{fond=#ENV**{_vue_traductions},id_trad=#ENV{_lister_id_trad},titre=#ENV{_objet}|objet_T{info_traductions},objet=#ENV{_objet},env,ajax} />
 					[(#ENV{editable}|ou{#ENV{_traduisible}})
 					<span class="input[(#ENV{_saisie_en_cours}|non)none-js]">
-						<input type="submit" class="btn submit supprimer_trad" name="supprimer_trad" value="[(#ENV{_objet}|objet_T{trad_delier}|attribut_html)]" />
+						<input type="submit" class="btn btn_mini btn_secondaire submit supprimer_trad" name="supprimer_trad" value="[(#ENV{_objet}|objet_T{trad_delier}|attribut_html)]" />
 					</span>
 					]
 				</div>
@@ -53,14 +53,16 @@
 		</div>
 		[(#ENV{_traduire}|oui)
 			[<div class="new_trad[(#ENV{_saisie_en_cours}|non)]">
-			(#URL_ECRIRE{#ENV{_objet}|objet_info{url_edit},new=oui&lier_trad=#ENV{_id_objet}}|parametre_url{#ENV{_objet}|=={rubrique}|?{id_parent,id_rubrique},#ENV{_id_parent}}|icone_horizontale{#ENV{_objet}|objet_T{trad_new},traduction,new})
+			(#URL_ECRIRE{#ENV{_objet}|objet_info{url_edit},new=oui&lier_trad=#ENV{_id_objet}}|parametre_url{#ENV{_objet}|=={rubrique}|?{id_parent,id_rubrique},#ENV{_id_parent}}|icone_horizontale{#ENV{_objet}|objet_T{trad_new},traduction,new,right})
 			</div>]
 		]
 		[(#ENV{editable}|ou{#ENV{_traduisible}})
-		<p class="boutons[(#ENV{_saisie_en_cours}|non)none-js]">
+		<div class="boutons[(#ENV{_saisie_en_cours}|non)none-js]">
 			<input type='submit' class='over' name='changer' value='<:bouton_changer:>' />
-			<input type='submit' class='btn submit' name='annuler' value='<:bouton_fermer:>' />
-			<input type="submit" class="btn submit" value="<:bouton_changer:>" />
-		</p>
+			<div class="groupe-btns">
+				<input type='submit' class='btn btn_secondaire submit' name='annuler' value='<:bouton_fermer:>' />
+				<input type="submit" class="btn submit" value="<:bouton_changer:>" />
+			</div>
+		</div>
 	</div></form>]
 </div>
