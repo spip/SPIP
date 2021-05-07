@@ -556,6 +556,10 @@
 	text-align: var(--spip-right);
 	white-space: nowrap;
 }
+.pagination a,
+.tri a {
+	transition: background 0.1s;
+}
 .tri {
 	text-align: var(--spip-left);
 }
@@ -580,6 +584,9 @@
 	flex-basis: 2em;
 	display: flex;
 	align-items: center;
+}
+.pagination .pagination-item + .pagination-item {
+	margin-#LEFT: 1px;
 }
 .pagination .pagination_precedent_suivant .pagination-item {
 	flex-basis: auto;
