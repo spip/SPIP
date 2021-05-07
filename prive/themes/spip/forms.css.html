@@ -17,10 +17,9 @@
 	9. Éléments de formulaire (inputs & cie)
 	10. Messages de retour
 	11. Messages d’explications
-	12. Formulaires compacts en colonnes laterales
-	13. Formulaires dans certains contextes : fiche objet, etc.
-	14. Formulaires particuliers
-	15. Divers
+	12. Variantes d'affichage + formulaires dans certains contextes
+	13. Formulaires particuliers
+	14. Divers
 
 	Markup :
 
@@ -117,8 +116,8 @@
 		--spip-form-input-padding-x: 0.33rem;
 		--spip-form-input-padding-y: 0.33rem;
 		/* Décalage des fieldsets imbriqués */
-	--spip-form-fieldset-offset: 1.5em;
-}
+		--spip-form-fieldset-offset: 1.5em;
+	}
 }
 
 
@@ -170,6 +169,8 @@
  *
  * On réunit au même endroit toutes les règlent concernant le rythme vertical.
  * Il s'agit des espacements verticaux entre les éléments : marges internes et externes.
+ *
+ * Ne mettre ici QUE des margin et des padding, rien d'autre !
  */
 
 /**
@@ -184,7 +185,7 @@
 .formulaire_spip .titrem {
 	margin-bottom: 0;
 }
-.formulaire_spip .titrem + *:not(form) {
+.formulaire_spip .titrem + *:not(form):not(.ajaxbloc) {
 	margin-top: var(--spip-form-spacing-y);
 }
 /* Généralités */
@@ -302,6 +303,7 @@
 }
 .entete-formulaire + .formulaire_spip,
 .entete-formulaire + .formedit .formulaire_spip,
+.entete-formulaire + .ajax-form-container + .formulaire_spip,
 .entete-formulaire + div > .formulaire_spip,
 .entete-formulaire + div > div > .formulaire_spip {
 	border-top-left-radius: 0;
@@ -352,7 +354,7 @@
 
 /* Conteneur des saisies */
 .formulaire_spip .editer-groupe {
-	overflow: hidden;
+	/* overflow: hidden; */ /* Gêne les puces statuts */
 }
 /*  2 colonnes */
 @media (min-width: 768px) {
@@ -935,14 +937,54 @@
 
 
 /**
- * ==============================================
- * 12. Formulaires compacts en colonnes laterales
- * ==============================================
+ * ===============================================================
+ * 12. Variantes d'affichage + formulaires dans certains contextes
+ * ===============================================================
  */
 
 
+/**
+ * 12.1. Formulaires compacts
+ * ---------------------------
+ * cf. variables
+ */
+.formulaire_spip.mini {}
+
+/**
+ * 12.2. Formulaires flat
+ * ----------------------
+ * Sans ombre portée, simple bordure
+ */
+.formulaire_spip.flat,
+.formulaire_spip .formulaire_spip,
+.box .formulaire_spip,
+.popin .entete-formulaire,
+.popin .formulaire_spip {
+	border: 1px solid var(--spip-box-border-color);
+	box-shadow: none !important; /* important = pour inclure hover et cie */
+}
+
+/**
+ * 12.3. Ceux dans .affiche_milieu + certains précis.
+ * --------------------------------------------------
+ * Cf. variables + content.css
+ */
+
+
+/**
+ * 12.4. Ceux dans #wysiwyg
+ * -------------------------
+ */
+#wysiwyg .formulaire_spip {
+	font-size: 1rem;
+}
+
+/**
+ * 12.5. Ceux dans une colonne latérale
+ * ------------------------------------
+ */
 .lat .formulaire_spip {
-	font-size: 0.95em;
+	/* font-size: 0.95em; */
 }
 /* Tous les labels au dessus */
 .lat .formulaire_spip .editer {
@@ -979,32 +1021,8 @@
 
 
 /**
- * =======================================
- * 13. Formulaires dans certains contextes
- * =======================================
- */
-
-
-/* Formulaires flat : sans ombre portée, simple bordure */
-.formulaire_spip.flat,
-.fiche_objet .formulaire_spip,
-.formulaire_spip .formulaire_spip,
-.box .formulaire_spip,
-.popin .entete-formulaire,
-.popin .formulaire_spip {
-	border: 1px solid var(--spip-form-border-color);
-	box-shadow: none !important;
-}
-
-/* Dans #wysiwyg */
-#wysiwyg .formulaire_spip {
-	font-size: 1rem;
-}
-
-
-/**
  * ============================
- * 14. Formulaires particuliers
+ * 13. Formulaires particuliers
  * ============================
  */
 
@@ -1516,7 +1534,7 @@
 
 /**
  * ==========
- * 15. Divers
+ * 14. Divers
  * ==========
  */
 
@@ -1573,5 +1591,5 @@ img.aide {
 /* Centrage vertical */
 .formulaire_spip .toggle_box_link.middle {
 	top: 50%;
-	        transform: translateY(-50%);
+	transform: translateY(-50%);
 }
