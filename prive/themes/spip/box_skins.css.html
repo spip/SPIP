@@ -109,7 +109,7 @@
 		--spip-box-heading-iconpadding: calc(var(--spip-box-heading-iconsize-mini) + (var(--spip-box-spacing-x-mini) * 1.5));
 		/* Divers */
 		--spip-box-highlightsize: 1rem;
-}
+	}
 }
 
 
@@ -199,7 +199,7 @@
 .box__footer {
 	border-bottom-left-radius: inherit;
 	border-bottom-right-radius: inherit;
-	background-color: var(--spip-color-gray-lightest);
+	background-color: var(--spip-color-theme-lightest);
 	text-align: var(--spip-right);
 }
 
@@ -265,7 +265,7 @@
 	color: var(--spip-color-white);
 }
 .box.inverse .box__header {
-	border-bottom-color: var(--spip-box-sep-color-inverse);
+	border-bottom-color: hsla(0, 0%, 100%, 0.1);
 }
 .box.inverse .box__header * {
 	color: inherit;
@@ -297,7 +297,7 @@
 }
 /* Décommenter s'il faut centrer l'icône sur la 1ère ligne de texte dans le body */
 /*.notice .box__body, .error .box__body, .success .box__body {
-	background-position: var(--spip-left) var(--spip-box-spacing-x) top calc(var(--spip-box-spacing-y) - ((var(--spip-box-iconsize) - var(--spip-line-height)) / 2));
+	background-position: var(--spip-left) var(--spip-box-spacing-x) top calc(var(--spip-box-spacing-y) - ((var(--spip-box-heading-iconsize) - var(--spip-line-height)) / 2));
 }*/
 /* Espacement pour l'icône selon qu'elle soit dans le header ou dans le body */
 .box.notice .box__header, .box.error .box__header, .box.success .box__header,
