@@ -1,175 +1,862 @@
 [(#REM)
 
-	Ce squelette definit les styles de l'espace prive
+	Ce squelette définit les styles des listes de l'espace privé.
 
-	Note: l'entete "Vary:" sert a repousser l'entete par
-	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
-	genant en cas de "rotation du cookie de session" apres
-	un changement d'IP (effet de clignotement).
+	Organisation :
+
+	0. Variables
+	1. Listes d'objets
+	2. Pagination et tri
+	3. Listes
+	4. Listes d'items
+	5. Menu d'items et plan du site
+	6. Autres
+
 	<style>
 ]
 #CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=utf-8}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
-/* Listes d'objet */
-.liste-objets{
-	margin:[(#ENV{margin-bottom}|strmult{1.5})em] 0;
-	/*font-size:.95em;*/
-	border: 1px solid #dfdfdf;
-	position:relative;
+
+/**
+ * ============
+ * 0. Variables
+ * ============
+ *
+ * Nb : garder des variables propres à ce composant même dans les cas où on réutilise les variables de --spip-box,
+ * cela permet de garder une autonomie pour les ajustements éventuels.
+ * De plus il est parfois nécessaire d'accéder à ces variables en dehors du composant.
+ */
+
+
+:root {
+	/* Espacements */
+	--spip-list-spacing-x: var(--spip-box-spacing-x-mini);
+	--spip-list-spacing-y: var(--spip-box-spacing-y-mini);
+	/* Entête */
+	--spip-list-heading-fontweight: var(--spip-box-heading-fontweight);
+	--spip-list-heading-fontsize: var(--spip-box-heading-fontsize-mini);
+	--spip-list-heading-iconsize: var(--spip-box-heading-iconsize-mini);
+	--spip-list-heading-iconpadding: calc(var(--spip-list-heading-iconsize) + (var(--spip-list-spacing-x) * 1.5));
+	/* Divers */
+	--spip-list-border-radius: var(--spip-box-border-radius);
+	--spip-list-logo-size: 32px;
+	--spip-list-biglogo-size: 50px;
+	--spip-list-color-lightest: hsl(0, 0%, 98%); /* color-gray-lightest pas assez clair */
 }
-.liste-objets-lies,.liste-objets-associer {margin:0;}
 
-.cadre .liste-objets{font-size:1em;}
-.liste-objets > .image_loading {position:absolute;top:0;right:0;}
-.liste-objets .pagination,.liste-objets p.pagination {
-	margin:0; padding:3px 3px;
-	background:#eee; border:none;
+@media (min-width: 768px) {
+	:root {
+		/* Espacements */
+		--spip-list-spacing-x: var(--spip-box-spacing-x-normal);
+		--spip-list-spacing-y: var(--spip-box-spacing-y-normal);
+		/* Entête */
+		--spip-list-heading-fontsize: var(--spip-box-heading-fontsize-normal);
+		--spip-list-heading-iconsize: var(--spip-box-heading-iconsize-normal);
+		--spip-list-heading-iconpadding: calc(var(--spip-list-heading-iconsize) + (var(--spip-list-spacing-x) * 1.5));
+		/* Divers */
+		--spip-list-logo-size: 40px; /* = vraie taille image */
+		--spip-list-biglogo-size: 70px; /* = vraie taille image */
+	}
+	/* Taille réduite */
+	.liste-objets.mini,
+	.liste-items.mini,
+	.liste_items.mini,
+	.lat,
+	.affiche_milieu,
+	.formulaire_editer_liens,
+	.formulaire_dater {
+		/* Espacements */
+		--spip-list-spacing-x: var(--spip-box-spacing-x-mini);
+		--spip-list-spacing-y: var(--spip-box-spacing-y-mini);
+		/* Entête */
+		--spip-list-heading-fontsize: var(--spip-box-heading-fontsize-mini);
+		--spip-list-heading-iconsize: var(--spip-box-heading-iconsize-mini);
+		--spip-list-heading-iconpadding: calc(var(--spip-list-heading-iconsize) + (var(--spip-list-spacing-x) * 1.5));
+		/* Divers */
+		--spip-list-logo-size: 32px;
+		--spip-list-biglogo-size: 50px;
+	}
 }
-.liste-objets .pagination .sep {color:#aaa;}
 
-.liste-objets table {width:100%; /* surcharger le 99% de spip ? */ max-width:none; background:white; border:none; margin:0;}
-.liste-objets table caption {margin:0;text-align:#ENV{left};padding:0 3px;background-color:#FFFFFF;}
-.liste-objets table caption .formulaire_spip { top:2px; }
-.caption-wrap {padding:0 3px;}
 
-.liste-objets .caption {display:block;color:#333;font-size:1.0em;padding:[(#ENV{margin-bottom}|strdiv{4})em] 5px;background:none no-repeat [(#ENV{left}|=={left}|?{3px,right})] center #FFFFFF;background-size:24px;}
-.liste-objets tr {background:white;}
-.liste-objets .row_odd td {background:white;}
-.liste-objets .row_even td {background:white;}
-.liste-objets thead th {background:#eee;}
-.liste-objets tr:hover td,.liste-objets tbody tr:hover th {background-color: #f8f8f8;}
-.liste-objets tr th {border-color:#dfdfdf; border-left:0; border-right:0;}
-.liste-objets tr td {border-color:#dfdfdf; border-left:0; border-right:0; vertical-align: middle;}
+/**
+ * ==================
+ * 1. Listes d'objets
+ * ==================
+ *
+ * Markup :
+ *
+ * .liste-objets
+ *   table.spip.liste
+ *      caption
+ *        .caption
+ *      thead
+ *        [tr td .pagination]
+ *      tbody
+ *      [tfoot] ?
+ *   [.pagination][.tri]
+ *
+ * Si aucun résultat :
+ *
+ * .liste-objets[.caption-wrap]
+ *   .caption
+ */
 
-.liste-objets tr > .statut,.liste-objets tr > .picto {width: 16px; padding-left:2px;padding-right:2px;text-align:center;}
-.liste-objets tr > .auteur {width: 80px;}
-.liste-objets tr > .auteur > .inner {display: block;max-height: 10em;overflow-x: hidden;border:0;background: none;}
-.liste-objets tr > .date {width: 90px;}
-.liste-objets tr > .id {width: 40px; text-align:#ENV{right};}
-.liste-objets tr > .action {width: 90px; text-align:#ENV{right};}
-.liste-objets tr > .action button { margin-bottom: 0 }
-.liste-objets tr td.syndication .etat {display:block;color:red;}
-.liste-objets tr > .utilisations {width:120px;}
-.liste-objets tr.confirmation {display:none;}
 
-.liste-objets tr td {font-size:0.9em;}
-.liste-objets tr td.action {font-size: 1em;}
-.liste-objets tr td.secondaire {font-size:0.85em;}
-.liste-objets tr td.principale {font-size:1.0em;}
-.liste-objets tr td.titre a {display: block;}
-.liste-objets tr td.titre span.surtitre, .liste-objets tr td.titre span.soustitre {font-size: 85%; display:block; overflow: hidden; text-overflow: ellipsis;white-space: nowrap;max-width: 200px;}
-.liste-objets tr td.titre .spip_logo {float:#ENV{right};margin-#ENV{left}:5px;margin-bottom:5px;}
-.liste-objets tr td.nologo {padding: 0;width:0;height:45px;}
-.liste-objets tr td.logo {text-align: center; padding: 0 5px;}
-.liste-objets tr td.logo img {display: block; margin: 0 auto;}
-.liste-objets.auteurs tr td.logo a {width: 40px; height: 40px; display: block; background-position: center center; background-size: cover; border-radius: 50%; margin: 3px 0;}
-.liste-objets-associer.auteurs tr td.logo a {width: 30px; height: 30px; display: block; background-position: center center; background-size: cover; border-radius: 50%; margin: 2px 0;}
-.liste-objets tr td > span {font-size:0.85em;}
-.liste-objets table td, .liste-objets table th {[ padding: (#ENV{line-height}|strdiv{4})em;] }
+/* Avant tout, reset des styles trop encombrants de table.spip : on repart au propre */
+.liste-objets table {
+	width: 100%;
+}
+.liste-objets table caption {
+	margin: 0;
+	text-align: inherit;
+	font-weight: normal;
+	background-color: transparent;
+}
+.liste-objets tbody tr,
+.liste-objets tbody tr.row_odd,
+.liste-objets tbody tr.row_even,
+.liste-objets tr td,
+.liste-objets tr th,
+.liste-objets tbody tr:nth-child(even):not(:hover) > td,
+.liste-objets tbody tr:nth-child(even):not(:hover) > th,
+.liste-objets tbody tr.even:not(:hover) > td,
+.liste-objets tbody tr.even:not(:hover) > th {
+	background-color: transparent;
+}
+.liste-objets tfoot {
+	font-style: normal;
+}
 
-.liste-objets .action a {color:inherit;}
-.liste-objets .liste + .action .button { margin: [(#ENV{line-height}|strdiv{4})em]; }
+/* Conteneur optionnel */
+.cadre .liste-objets{
+	font-size: 1em;
+}
 
-.liste-objets.auteurs th.statut {line-height:1px;padding-bottom:0;}
-.liste-objets.auteurs td.nom .spip_logos { vertical-align: middle; margin-#ENV{right}: 0.3em; }
+/* Conteneur général */
+.liste-objets,
+.liste-objets * {
+	box-sizing: border-box;
+}
+.liste-objets {
+	z-index: 1;
+	position: relative;
+	margin: calc(var(--spip-margin-bottom) * 1.5) 0; /* À changer par le vraie gouttière plus tard */
+	border: 1px solid var(--spip-box-border-color);
+	border-radius: var(--spip-list-border-radius);
+	background-color: var(--spip-color-white);
+	color: var(--spip-color); /* pour si dans un conteneur qui met le texte en blanc */
+}
 
-.liste-objets.articles tr td.logo, .logo-carre  {padding: 3px; flex-shrink: 0}
-.liste-objets.articles tr td.logo {width:70px; height: 70px;}
-.liste-objets.articles tr td.logo img, .logo-carre img {width: 70px; height: 70px; object-fit: cover; border-radius: 4px; display: block;}
+/* Liste vide, avec un pseudo-caption (boucle sans résultat) */
+.liste-objets.caption-wrap {
+	font-size: inherit; /* reset typo.css */
+}
 
-<BOUCLE_objets(DATA){source table,#REM|lister_tables_objets_sql}>[
-.liste-objets.[(#VALEUR{table_objet})] .caption {background-image:url((#CHEMIN_IMAGE{#VALEUR{icone_objet}|concat{-24.png}}));padding-#ENV{left}:30px;}]</BOUCLE_objets>
+/* Taille générale du texte, en dehors du header */
+.liste-objets table thead,
+.liste-objets table tbody,
+.liste-objets .pagination-item,
+.liste-objets .tri {
+	font-size: 0.95em;
+}
 
-.liste-objets.traductions .trad {text-align:center;}
-.liste-objets.traductions button.changer_reference_trad {line-height: 1;margin: 0;width: 100%;}
+/* Tableau */
+.liste-objets table {
+	max-width: none;
+	margin: 0;
+	border-radius: inherit;
+}
 
-/* dans une colonne laterale, ne visualiser que l'info .lat, le statut et l'id */
-.lat .liste-objets tr > .secondaire,
-.lat .liste-objets tr > .auteur,
-.lat .liste-objets tr > .date,
-.lat .liste-objets tr > .action,
-.lat .liste-objets tr > .syndication,
-.lat .liste-objets tr .spip_logo,
-.lat .liste-objets.articles tr .logo, .lat .liste-objets.articles tr .nologo  {display:none;}
-.lat .liste-objets tr td.principale {font-size:0.9em;max-width:120px;word-wrap: break-word; padding: 7px 3px}
+/* Caption  */
+.liste-objets table caption {
+	padding: 0;
+	border-top-left-radius: inherit;
+	border-top-right-radius: inherit;
+	font-size: inherit; /* reset typo.css */
+}
+.liste-objets .caption {
+	display: block;
+	overflow: hidden;
+	padding: var(--spip-list-spacing-y) var(--spip-list-spacing-x);
+	background: none no-repeat var(--spip-left) var(--spip-list-spacing-x) center transparent;
+	background-size: var(--spip-list-heading-iconsize);
+	border-top-left-radius: inherit;
+	border-top-right-radius: inherit;
+	font-size: var(--spip-list-heading-fontsize);
+	font-weight: var(--spip-list-heading-fontweight);
+}
+.liste-objets table .caption {
+	border-bottom: 1px solid var(--spip-box-sep-color);
+}
+<BOUCLE_objets(DATA){source table,#REM|lister_tables_objets_sql}>
+[.liste-objets.[(#VALEUR{table_objet})] .caption {
+	background-image: url((#CHEMIN_IMAGE{#VALEUR{icone_objet}|concat{-24.png}}));
+	padding-#LEFT: var(--spip-list-heading-iconpadding);
+}]</BOUCLE_objets>
+/* pour editer liens ? */
+.liste-objets caption .formulaire_spip {
+	top: 2px;
+}
 
-.en-edition .inner {font-size:0.9em;}
-.en-edition h3 {font-size:1.1em;}
-.en-edition .bouton_action_post {float:#ENV{right};margin:5px 0 0;}
-.en-edition .liste-items {margin:0;}
-.en-edition .liste-items .item {padding:2px 0;}
-.en-edition .item .icone-objet {float:#ENV{left};margin-top:2px;margin-#ENV{right}:5px;}
-.en-edition .item .bouton_action_post {float:#ENV{right};margin-top:-1px;}
+/* Cellules <td> + <th> (toutes : dans thead, tbody et tfoot) */
+.liste-objets tr th,
+.liste-objets tr td {
+	padding: calc(var(--spip-list-spacing-y) / 2) calc(var(--spip-list-spacing-x) / 2);
+	border-color: var(--spip-box-sep-color);
+	border-left: 0;
+	border-right: 0;
+	line-height: 1.2;
+	transition: background 0.2s, padding 0.2s;
+}
+.liste-objets tr td,
+.liste-objets table img {
+	vertical-align: middle;
+}
+.liste-objets tr th:first-child,
+.liste-objets tr td:first-child {
+	padding-#LEFT: var(--spip-list-spacing-x);
+}
+.liste-objets tr th:last-child,
+.liste-objets tr td:last-child {
+	padding-#RIGHT: var(--spip-list-spacing-x);
+}
 
-/* listes */
-.liste {margin:[(#ENV{margin-bottom})] 0;}
-.liste > h1,.liste > .h1,
-.liste > h2,.liste > .h2,
-.liste > h3,.liste > .h3,
-.liste > h4,.liste > .h4,
-.liste > h5,.liste > .h5,
-.liste > h6,.liste > .h6 {margin-bottom:0;}
-.liste_items,.liste-items {list-style:none;margin:0 0 [(#ENV{margin-bottom})];padding:0;border-top:1px solid #ddd;clear:both;}
-.liste_items .item,.liste-items .item  {border-bottom:1px solid #ddd;padding:[(#ENV{margin-bottom}|strdiv{2})em] 0; overflow:hidden;clear:both;}
-.liste_items .odd,.liste-items .odd  {background:#eee;}
-.liste_items .item:hover,.liste-items .item:hover  {background-color:[#(#ENV{claire}|couleur_eclaircir|couleur_eclaircir)];}
-.liste_items .court:hover,.liste-items .court:hover  {background-color:#eee;}
-.liste_items .item.on,.liste-items .item.on  {background-color:[#(#ENV{claire}|couleur_eclaircir|couleur_eclaircir)];font-weight:normal;}
-.liste_items .item.on:hover,.liste-items .item.on:hover  {background-color:[#(#ENV{claire}|couleur_eclaircir)];}
-.liste_items .item h3,.liste-items .item h3  {margin:0;}
-.liste_items .item a img,.liste-items .item a img {vertical-align: bottom;}
-.liste_items .bouton_action_post { margin: 0; }
+/* Entête <thead>
+   Nb : attention il peut y avoir plusieurs <tr> en cas de double pagination */
+.liste-objets table thead {
+	/* background-color: var(--spip-color-gray-lightest); */
+	background-color: var(--spip-list-color-lightest)
+}
+.liste-objets thead tr:first-child > * {
+	border-top: 0;
+}
+.liste-objets thead tr:last-child > * {
+	border-bottom: 0;
+}
+.liste-objets thead a {
+	display: inline-flex; /* si picto, éviter un espace blanc */
+}
+.liste-objets thead img {
+	width: auto;
+	height: 1em; /* ne pas augmenter la hauteur de la ligne */
+}
+/* si tr multiples, les 1ers contiennent en principe la pagination : on ressert */
+.liste-objets thead tr:not(:last-child) > * {
+	padding-top: calc(var(--spip-list-spacing-y) / 4);
+	padding-bottom: calc(var(--spip-list-spacing-y) / 4);
+}
 
-/* Permet d'utiliser la grid sur les listes */
-.item.unit, .item.lastUnit {clear:none;}
+/* Corps <tbody> */
+.liste-objets tbody tr:first-child td,
+.liste-objets tbody tr:first-child th {
+	border-top: 0;
+}
+.liste-objets tbody tr:last-child td,
+.liste-objets tbody tr:last-child th {
+	border-bottom: 0;
+}
+.liste-objets tbody tr:hover td,
+.liste-objets tbody tr:hover th {
+	background-color: hsl(0, 0%, 98%); /* --spip-color-gray-lightest un poil trop foncé */
+}
 
-.liste_items .item .actions,.liste-items .item .actions  {float:none;margin:0;clear:both;text-align:#ENV{right};}
+/* Gestion des arrondis selon les cas */
+.liste-objets table > *:first-child,
+.liste-objets table > *:first-child tr:first-child,
+.liste-objets table > *:first-child tr:first-child > *:first-child {
+	border-top-#LEFT-radius: var(--spip-list-border-radius);
+}
+.liste-objets table > *:first-child,
+.liste-objets table > *:first-child tr:first-child,
+.liste-objets table > *:first-child tr:first-child > *:last-child {
+	border-top-#RIGHT-radius: var(--spip-list-border-radius);
+}
+.liste-objets table > *:last-child tr:last-child,
+.liste-objets table > *:last-child tr:last-child > *:first-child  {
+	border-bottom-#LEFT-radius: var(--spip-list-border-radius);
+}
+.liste-objets table > *:last-child tr:last-child,
+.liste-objets table > *:last-child tr:last-child > *:last-child {
+	border-bottom-#RIGHT-radius: var(--spip-list-border-radius);
+}
 
-.tri, .pagination {background:#eee;border-top:1px solid #ddd;border-bottom:1px solid #ddd; margin: 0;padding:2px 0; /*font-size: 11px;*/ font-weight: bold; text-align: #ENV{right}; white-space: nowrap;margin-top:1em; }
-.tri {text-align:#ENV{left};}
-.tri .on { background:#ccc;padding:2px 3px;color:#fff; }
-.tri img, .pagination img {vertical-align:bottom;}
+/**
+ * 1.1. Cellules et items particuliers
+ * -----------------------------------
+ */
 
-.pagination .pagination-items {list-style: none;display: flex;flex-direction: row; justify-content: flex-end}
-.pagination .pagination-item {  margin: 0; flex-basis: 2em; display: flex;align-items: center; font-size: 0.9em}
-.pagination .pagination_precedent_suivant .pagination-item { flex-basis: auto;}
-.pagination .pagination-item + .pagination-item {  margin-left: 3px }
-.pagination .pagination-item-label { display:block; flex-basis: 100%; background: #f7f7f7;  text-decoration: none; padding:0.15em .30em; border-radius:.15em;text-align: center}
+/* Statut et picto */
+.liste-objets tr > .statut,
+.liste-objets tr > .picto {
+	width: calc(16px + var(--spip-list-spacing-x));
+	text-align: center;
+}
+.liste-objets tr > .statut:first-child,
+.liste-objets tr > .statut:last-child,
+.liste-objets tr > .picto:first-child,
+.liste-objets tr > .picto:last-child {
+	width: calc(16px + (var(--spip-list-spacing-x) * 1.5));
+	text-align: center;
+}
+
+/* Id */
+.liste-objets tr > .id {
+	width: 40px;
+	text-align: var(--spip-right);
+}
+
+/* Titre */
+.liste-objets td.titre a {
+	display: block;
+}
+.liste-objets td.titre a strong {
+	font-weight: inherit; /* forcer la graisse normale */
+}
+.liste-objets td.titre .surtitre,
+.liste-objets td.titre .soustitre {
+	display: block;
+	overflow: hidden;
+	max-width: 15em;
+	font-size: 0.85em;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* Logo
+   Certaines listes swappent .logo pour .nologo quand aucun logo */
+.liste-objets td.titre .spip_logo {
+	float: var(--spip-right);
+	margin-#LEFT: 0.5em;
+}
+.liste-objets td.logo {
+	text-align: center;
+	/* padding: 0 5px; */
+}
+.liste-objets td.logo img {
+	display: block;
+	margin: 0 auto;
+}
+.liste-objets th.nologo,
+.liste-objets td.nologo {
+	padding: 0;
+	width: 0;
+	/* height: 45px; */
+}
+
+/* Auteur */
+.liste-objets tr > .auteur > .inner {
+	display: block;
+	max-height: 10em;
+	overflow-x: hidden;
+	border: 0;
+	background: none;
+}
+
+/* Actions */
+.liste-objets td.action {
+	text-align: var(--spip-right);
+}
+.liste-objets td.action button {
+	margin-bottom: 0;
+}
+.liste-objets td.action a {
+	color: inherit;
+}
+
+/* Syndication */
+.liste-objets tr td.syndication .etat {
+	display: block;
+	color:red;
+}
+
+/* Confirmation (?) */
+.liste-objets tr.confirmation {
+	display: none;
+}
+
+/* Bouton après le tableau (?) */
+.liste-objets .liste + .action .button {
+	margin: calc(var(--spip-line-height) / 4);
+}
+
+/* Loader */
+.liste-objets > .image_loading {
+	position: absolute;
+	top: 0;
+	#RIGHT: 0;
+}
+
+/* Pagination */
+.liste-objets .pagination,
+.liste-objets p.pagination {
+	margin: 0;
+	border: none;
+}
+/* Pagination après le tableau */
+.liste-objets table + .pagination,
+.liste-objets table + p.pagination {
+	border-radius: inherit;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	background-color: var(--spip-list-color-lightest);
+}
+/* Pagination dans l'entête du tableau */
+.liste-objets thead .pagination {
+	padding: 0;
+	background-color: transparent;
+}
+
+/**
+ * 1.2. Types de listes particulières
+ * ----------------------------------
+ */
+
+/* Objets liés  */
+.liste-objets-lies,
+.liste-objets-associer {
+	margin: 0;
+}
+
+/* Traductions */
+.liste-objets.traductions .trad {
+	text-align: center;
+}
+.liste-objets.traductions button.changer_reference_trad {
+	margin: 0;
+	width: 100%;
+}
+.liste-objets.traductions .reference_trad {
+	/* font-size: inherit; */
+}
+
+/* Articles */
+.liste-objets.articles tr td.logo,
+.logo-carre {
+	padding-top: calc(var(--spip-list-spacing-y) / 3);
+	padding-bottom: calc(var(--spip-list-spacing-y) / 3);
+	flex-shrink: 0;
+}
+.liste-objets.articles tr td.logo,
+.liste-objets.articles tr td.logo img,
+.logo-carre img {
+	width: var(--spip-list-biglogo-size);
+	min-width: var(--spip-list-biglogo-size);
+	height: var(--spip-list-biglogo-size);
+}
+.liste-objets.articles tr td.logo img,
+.logo-carre img {
+	object-fit: cover;
+	display: block;
+	border-radius: calc(var(--spip-list-border-radius) / 2);
+}
+
+/* Sélection articles */
+.liste-objets.selection-articles table {
+	background-color: white;
+	border-bottom: 1px solid var(--spip-box-sep-color);
+}
+.liste-objets.selection-articles form {
+	background-color: var(--spip-color-theme-lightest);
+}
+
+/* Auteurs
+   Nb : pour les auteurs, logo en background du <a>, pour les visiteurs c'est une <img> */
+.liste-objets.auteurs td.logo,
+.liste-objets.visiteurs td.logo {
+	min-width: var(--spip-list-logo-size);
+}
+.liste-objets.auteurs td.logo a,
+.liste-objets.visiteurs td.logo img {
+	width: var(--spip-list-logo-size);
+	height: var(--spip-list-logo-size);
+	display: block;
+	border-radius: 50%;
+}
+.liste-objets.auteurs td.logo a {
+	background-position: center center;
+	background-size: cover;
+}
+.liste-objets-associer.auteurs td.logo,
+.liste-objets-associer.visiteurs td.logo {
+	min-width: calc(var(--spip-list-logo-size) * 0.5);
+}
+.liste-objets-associer.auteurs td.logo a,
+.liste-objets-associer.visiteurs td.logo a {
+	width: calc(var(--spip-list-logo-size) * 0.5);
+	height: calc(var(--spip-list-logo-size) * 0.5);
+}
+
+/* Révisions (à déporter dans le plugin) */
+.liste-objets.versions table .caption {
+	padding-#LEFT: var(--spip-list-heading-iconpadding);
+	background-position: var(--spip-left) var(--spip-list-spacing-x) center;
+}
+
+
+/* Dans boîtes */
+.box.highlight .liste-objets {
+	border-width: 0;
+}
+
+
+/**
+ * 1.3. Liste en colonne latérale
+ * ------------------------------
+ * N'afficher que les colonnes nécessaires : statut et id
+ * @extend .mini
+ */
+.lat .liste-objets tr > *:not(.principale):not(.id):not(.statut) {
+	display: none;
+}
+.lat .liste-objets tr td.principale {
+	word-wrap: break-word;
+}
+.lat .liste-objets .titre .soustitre,
+.lat .liste-objets .titre .surtitre {
+	display: none;
+}
+
+/**
+ * 1.4. Liste de taille réduite
+ * ----------------------------
+ * cf. variables
+ */
+.liste-objets.mini {}
+
+
+/**
+ * 1.5. Listes dans .affiche_milieu
+ * --------------------------------
+ * cf. variables + content.css
+ */
+
+
+/**
+ * ====================
+ * 2. Pagination et tri
+ * ====================
+ *
+ * Composant pouvant être utilisé en dehors des listes d'objets.
+ * .tri n'utilise pas le même markup que .pagination (pas de <ul>, juste des <a>)
+ * Est-il toujours utilisé en conjonction (class="pagination tri") ?
+ */
+
+
+.pagination,
+.tri {
+	background: var(--spip-color-gray-lighter); /* il faut un contraste suffisant si direct sur fond de la page */
+	margin: 0;
+	margin-top: 1em;
+	padding: calc(var(--spip-list-spacing-y) / 2) calc(var(--spip-list-spacing-x) / 2);
+	font-size: 0.85em;
+	font-weight: bold;
+	text-align: var(--spip-right);
+	white-space: nowrap;
+}
+.tri {
+	text-align: var(--spip-left);
+}
+.tri .on {
+	background:var(--spip-color-gray-lighter);
+	padding: 2px 3px;
+	color:var(--spip-color-white);
+}
+.tri img,
+.pagination img {
+	vertical-align: bottom;
+}
+.pagination .pagination-items {
+	list-style: none;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	border-radius: inherit;
+}
+.pagination .pagination-item {
+	margin: 0;
+	flex-basis: 2em;
+	display: flex;
+	align-items: center;
+}
+.pagination .pagination_precedent_suivant .pagination-item {
+	flex-basis: auto;
+}
+.pagination .pagination-item-label {
+	display: block;
+	flex-basis: 100%;
+	text-decoration: none;
+	padding: 0.15em .30em;
+	border-radius: calc(var(--spip-box-border-radius) / 2);
+	text-align: center;
+}
 .pagination .on .pagination-item-label,
 .pagination a.pagination-item-label:hover,
 .pagination a.pagination-item-label:focus,
-.pagination a.pagination-item-label:active { background: #ENV{foncee}; border-color: #ENV{foncee}; color: #fff; }
-.pagination .on .pagination-item-label {font-weight: bold;}
-.pagination .pagination_precedent_suivant .disabled {visibility: hidden}
+.pagination a.pagination-item-label:active {
+	background: var(--spip-color-theme-dark);
+	border-color: var(--spip-color-theme-dark);
+	color: var(--spip-color-white);
+}
+.pagination .on .pagination-item-label {
+	font-weight: bold;
+}
+.pagination .pagination_precedent_suivant .disabled {
+	visibility: hidden;
+}
 .pagination .pagination-item.disabled {}
-.pagination .pagination-item.disabled .pagination-item-label {color:#aaa; font-weight: normal;border-color: #ddd;}
+.pagination .pagination-item.disabled .pagination-item-label {
+	color:#aaa;
+	font-weight:
+	normal;
+	border-color: #ddd;
+}
+/* Successions */
+.pagination + .pagination,
+.pagination + .tri,
+.tri + .pagination {
+	border-top: 1px solid var(--spip-box-sep-color);
+	margin-top: 0;
+}
+.pagination + .liste_items,
+.tri + .liste_items {
+	border-top: 0;
+	margin-top: 0;
+}
+.liste_items + .tri,
+.liste_items + .pagination {
+	margin-bottom: 1em;
+}
+/* Pagination dans une colonne */
+.lat .pagination,
+.lat .tri {
+	font-size: 0.8em;
+}
+.lat .pagination {
+	white-space: normal;
+	text-align: var(--spip-left);
+}
 
 
-.pagination + .tri, .tri + .pagination {border-top:0;margin-top:0;}
-.pagination + .liste_items, .tri + .liste_items {border-top:0;margin-top:0;}
-.liste_items + .tri, .liste_items + .pagination {margin-top:-1em;margin-bottom:1em;}
+/**
+ * =========
+ * 3. Listes
+ * =========
+ *
+ * Utilisations :
+ * - conteneur pour les liste d'items
+ * - conteneur pour certains sélecteurs
+ * - <table> des liste d'objets
+ *
+ * Exemple pour .liste-items :
+ *
+ * div.liste
+ *   h4
+ *   ul.liste-items
+ */
 
-.lat .pagination {font-size:11px;white-space:normal;text-align:#ENV{left};}
-.lat .tri {font-size:11px;}
+
+.liste {
+	margin: var(--spip-margin-bottom) 0;
+}
+.liste > h1, .liste > .h1,
+.liste > h2, .liste > .h2,
+.liste > h3, .liste > .h3,
+.liste > h4, .liste > .h4,
+.liste > h5, .liste > .h5,
+.liste > h6, .liste > .h6 {
+	margin-bottom: 0;
+}
 
 
-/* menus */
-/* listes */
-.menu-items {list-style:none;margin:1em 0;padding:0;border-top:1px solid #ddd;clear:both;}
-.menu-items .item {border-bottom:1px solid #ddd; padding:0; overflow:hidden; clear:both;}
-.menu-items .menu-items {margin:0;padding:0;margin-#ENV{left}:11px;}
-.menu-items .item >a,.menu-items .item >strong.on {display:block;padding:[(#ENV{margin-bottom}|strdiv{2})em] 0;}
-.menu-items .item >a:hover {background-color:[#(#ENV{claire}|couleur_eclaircir|couleur_eclaircir)];}
-.menu-items .item >.on {background-color:[#(#ENV{claire}|couleur_eclaircir|couleur_eclaircir)];}
+/**
+ * =================
+ * 4. Listes d'items
+ * =================
+ */
 
-/* plan de site */
-.plan .menu-items { border-top:0; }
-.plan .menu-items .menu-items {border-#ENV{left}:1px solid #ddd;}
-.plan .menu-items .item .pagination {margin-#ENV{left}:11px;border-#ENV{left}:1px solid #ddd;}
-.plan .menu-items .item {overflow:visible;border-bottom:0;padding-#ENV{left}:6px;}
-.plan .menu-items .item>a {padding: 0.25em 0 0.25em 5px;background-repeat:no-repeat;background-position:center #ENV{left};background-repeat:no-repeat;}
+.liste_items,
+.liste-items,
+.liste_items *,
+.liste-items * {
+	box-sizing: border-box;
+}
+.liste_items,
+.liste-items {
+	list-style: none;
+	margin: 0 0 var(--spip-margin-bottom);
+	padding: 0;
+	clear: both;
+}
+.liste_items .item,
+.liste-items .item {
+	border-bottom: 1px solid var(--spip-box-sep-color);
+	padding: calc(var(--spip-list-spacing-y) / 2) 0;
+	overflow: hidden;
+	clear: both;
+	transition: background 0.15s;
+}
+.liste_items .item:last-child,
+.liste-items .item:last-child {
+	border-bottom: 0;
+}
+.liste_items .odd,
+.liste-items .odd {
+	background:var(--spip-color-gray-lightest);
+}
+.liste_items .item:hover,
+.liste-items .item:hover,
+.liste_items .item:focus,
+.liste-items .item:focus {
+	background-color: var(--spip-color-theme-lightest);
+}
+.liste_items .court:hover,
+.liste-items .court:hover {
+	background-color:var(--spip-color-gray-lightest);
+}
+.liste_items .item.on,
+.liste-items .item.on {
+	background-color: var(--spip-color-theme-lightest);
+	font-weight: normal;
+}
+.liste_items .item.on:hover,
+.liste-items .item.on:hover {
+	background-color: var(--spip-color-theme-lighter);
+}
+.liste_items .item h3,
+.liste-items .item h3 {
+	margin: 0;
+}
+.liste_items .item a,
+.liste-items .item a {
+	display: block;
+}
+.liste_items .item a img,
+.liste-items .item a img {
+	vertical-align: middle;
+}
+.liste_items .item a img:first-child,
+.liste-items .item a img:first-child {
+	margin-#RIGHT: 0.33em;
+}
+.liste_items .bouton_action_post {
+	margin: 0;
+}
 
+/* Permet d'utiliser la grid sur les listes */
+.item.unit, .item.lastUnit {
+	clear: none;
+}
+.liste_items .item .actions,
+.liste-items .item .actions  {
+	float: none;
+	margin: 0;
+	clear: both;
+	text-align: var(--spip-right);
+}
+
+
+/**
+ * ================================
+ * 5. Menus d'items et plan du site
+ * ================================
+ *
+ * Semble pour l'instant utilisé uniquement pour le plan du site.
+ * Le plugin-dist surcharge le plan (donc styles inutilisés).
+ */
+
+
+.menu-items {
+	list-style: none;
+	margin: 1em 0;
+	padding: 0;
+	border-top: 1px solid var(--spip-box-border-color);
+	clear: both;
+}
+.menu-items .item {
+	border-bottom: 1px solid var(--spip-box-border-color);
+	padding: 0;
+	overflow: hidden;
+	clear: both;
+}
+.menu-items .menu-items {
+	margin: 0;
+	padding: 0;
+	margin-#LEFT: 11px;
+}
+.menu-items .item > a,
+.menu-items .item > strong.on {
+	display: block;
+	padding: calc(var(--spip-margin-bottom) / 2) 0;
+}
+.menu-items .item > a:hover,
+.menu-items .item >.on {
+	background-color: var(--spip-color-theme-lighter);
+}
+
+
+/* Variante pour le plan du site */
+.plan .menu-items {
+	border-top:0;
+}
+.plan .menu-items .menu-items {
+	border-#LEFT: 1px solid var(--spip-box-sep-color);
+}
+.plan .menu-items .item .pagination {
+	margin-#LEFT: 11px;
+	border-#LEFT: 1px solid var(--spip-box-sep-color);;
+}
+.plan .menu-items .item {
+	overflow: visible;
+	border-bottom: 0;
+	padding-#LEFT: 6px;
+}
+.plan .menu-items .item > a {
+	padding: 0.25em 0 0.25em 5px;
+	background-repeat: no-repeat;
+	background-position: center var(--spip-left);
+	background-repeat: no-repeat;
+}
 <BOUCLE_objets2(DATA){source table,#REM|lister_tables_objets_sql}{cle!=spip_rubriques}>
-.plan .menu-items.[(#VALEUR{table_objet})] .item>a{padding-#ENV{left}:20px;[background-image:url((#CHEMIN_IMAGE{#VALEUR{icone_objet}-16.png}));]}</BOUCLE_objets2>
+.plan .menu-items.[(#VALEUR{table_objet})] .item > a {
+	padding-#LEFT: 20px;
+	[background-image: url((#CHEMIN_IMAGE{#VALEUR{icone_objet}-16.png}));]
+}
+</BOUCLE_objets2>
+
+
+/**
+ * =========
+ * 6. Autres
+ * =========
+ */
+
+
+/* En édition (à déplacer ailleurs) */
+.en-edition .inner {
+	font-size: 0.9em;
+}
+.en-edition h3 {
+	font-size: 1.1em;
+}
+.en-edition .bouton_action_post {
+	float: #ENV{right};
+	margin: 5px 0 0;
+}
+.en-edition .liste-items {
+	margin: 0;
+}
+.en-edition .liste-items .item {
+	padding: 2px 0;
+}
+.en-edition .item .icone-objet {
+	float: #ENV{left};
+	margin-top: 2px;
+	margin-#ENV{right}: 5px;
+}
+.en-edition .item .bouton_action_post {
+	float: #ENV{right};
+	margin-top: -1px;
+}
