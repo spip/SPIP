@@ -156,10 +156,18 @@ function f_afficher_blocs_ecrire($flux) {
 			$flux['data']['texte'] = pipeline('affiche_hierarchie',
 				array('args' => array('objet' => $o[$exec]['type'], 'id_objet' => $id), 'data' => $flux['data']['texte']));
 		} elseif ($fond == "prive/squelettes/contenu/$typepage") {
-			if (!strpos($flux['data']['texte'], "<!--affiche_milieu-->")) {
-				$flux['data']['texte'] = preg_replace(',<div id=["\']wysiwyg,', "<!--affiche_milieu-->\\0",
-					$flux['data']['texte']);
-			}
+			// Préparation du marqueur affiche_milieu
+			// Si c'est la page d'un objet pas en édition, on l'encapsule dans un div
+			$est_page_objet = !empty($o[$exec]['type']);
+			$est_en_edition = (isset($o[$exec]['edition']) and $o[$exec]['edition'] === true);
+			$encapsuler_milieu = ($est_page_objet and !$est_en_edition);
+			$flux['data']['texte'] = afficher_blocs_ecrire_preparer_marqueur(
+				$flux['data']['texte'],
+				'<!--affiche_milieu-->',
+				'<div id=["\']wysiwyg',
+				$encapsuler_milieu ? '<div class="affiche_milieu">' : '',
+				$encapsuler_milieu ? '</div>' : ''
+			);
 			if ($o[$exec]
 				and $objet = $o[$exec]['type']
 				and $o[$exec]['edition'] == false
@@ -198,6 +206,61 @@ function f_afficher_blocs_ecrire($flux) {
 	}
 
 	return $flux;
+}
+
+/**
+ * Vérifie la présence d'un marqueur dans le HTML et l'ajoute si nécessaire.
+ *
+ * Fonction à appeler avant d'insérer des contenus via pipelines.
+ * Le marqueur peut optionnellement être encapsulé dans des balises.
+ * S'il est déjà présent et encapsulé, il ne faut PAS qu'il y ait d'espace blanc en trop.
+ *
+ * @param string $texte
+ *     Contenu HTML
+ * @param string $marqueur
+ *     Marqueur cherché, tel que `<!--affiche_milieu-->`
+ * @param string $inserer_avant
+ *     Expression régulière indiquant avant quel élément insérer le marqueur s'il est absent
+ *     Exemple : `<div id=["\']wysiwyg`
+ * @param string $ouvrir
+ *     Balise ouvrante si le marqueur doit être encapsulé
+ *     Exemple : `<div class="affiche_milieu">`
+ * @param string $fermer
+ *     Balise fermante si le marqueur doit être encapsulé
+ *     Exemple : `</div>`
+ * @return string
+ *     HTML avec le marqueur, ou inchangé si ajout impossible.
+ */
+function afficher_blocs_ecrire_preparer_marqueur(string $texte, string $marqueur, string $inserer_avant, string $ouvrir = '', string $fermer = '') : string {
+
+	$encapsuler = (($ouvrir and $fermer) ? true : false);
+	$marqueur_pos = strpos($texte, $marqueur);
+	$full_marqueur = "$ouvrir$marqueur$fermer";
+
+	// Le marqueur est absent : on l'ajoute avant l'élément indiqué
+	if ($marqueur_pos  === false) {
+		$texte = preg_replace(
+			",$inserer_avant,",
+			"$full_marqueur\\0",
+			$texte
+		);
+	// Le marqueur est présent mais pas encapsulé : on ajoute les balises ouvrantes et fermantes.
+	// Pour vérifier, on prend le texte précédent et on regarde si ça correspond à la balise ouvrante.
+	// Il ne faut donc aucun espace blanc en trop.
+	} elseif (
+		$marqueur_pos !== false
+		and $encapsuler
+		and substr($texte, $marqueur_pos-strlen($ouvrir), strlen($ouvrir)) !== $ouvrir
+	) {
+		$texte = substr_replace(
+			$texte,
+			$full_marqueur,
+			$marqueur_pos,
+			strlen($marqueur)
+		);
+	}
+
+	return $texte;
 }
 
 /**
