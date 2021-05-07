@@ -153,6 +153,55 @@ li .puce_article_popup, li.puce_breve_popup,li.puce_site_popup { padding: 0; }*/
 #contenu .fiche_objet > .inner > .hd {padding-bottom: 0;}
 #contenu .fiche_objet > .inner > .bd {padding-top: 0;}
 
+
+/**
+ * Affiche_milieu
+ * --------------
+ * Conteneur situé dans .fiche_objet, juste avant le #wysiwyg.
+ *
+ * Intention : distinguer visuellement tout ce qui précède le #wysiwyg.
+ * Il s'agit principalement du contenu ajouté par le pipeline affiche_milieu.
+ * Ce sont en général des éléments de configuration : formulaire editer_liens, etc.
+ * On met par défaut ces blocs sur fond gris clair et en mode "mini" :
+ * - formulaires
+ * - listes
+ * - boîtes simples
+ * Si ces règles sont trop intrusives, supprimer et faire du cas par cas.
+ * Voir aussi les variables de ces composant pour les tailles.
+ */
+.affiche_milieu:not(:last-child) {
+	margin-bottom: calc(var(--spip-spacing-y) * 2); /* Espacer avec le contenu */
+}
+.fiche_objet .formulaire_editer_liens-auteurs,
+.fiche_objet .formulaire_dater,
+.affiche_milieu .formulaire_spip,
+.affiche_milieu .liste-objets,
+.affiche_milieu .box.simple {
+	margin-bottom: calc(var(--spip-form-spacing-y) * 2);
+	margin-top: calc(var(--spip-form-spacing-y) * 2);
+	border-width: 0;
+	background-color: var(--spip-color-gray-lightest);
+	box-shadow: none !important; /* important = pour inclure hover et cie */
+}
+.affiche_milieu .formulaire_spip .boutons,
+.affiche_milieu .box.simple .box__footer {
+	background-color: transparent;
+}
+/* ajustement listes imbriquées */
+.affiche_milieu .formulaire_spip .liste-objets,
+.affiche_milieu .box.simple .liste-objets {
+	border-width: 1px;
+	background-color: transparent;
+}
+.affiche_milieu .formulaire_spip .liste-objets {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.affiche_milieu .liste-objets thead {
+	background-color: transparent;
+	border-bottom: 1px solid var(--spip-box-sep-color);
+}
+
 .infos .instituer_objet {border-bottom:1px solid #eee;margin-bottom:[(#ENV{margin-bottom}|strmult{0.5})em];}
 
 
