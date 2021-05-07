@@ -1130,8 +1130,10 @@
 	color: hsla(0, 0%, 0%, 0.6); /* Pour mieux s'adapter aux couleurs de fond */
 }
 
-/* dater */
-.formulaire_dater .editer[class*=editer_date] {
+/* dater
+   @extend .mini
+   + voir .affiche_milieu */
+.formulaire_dater [class*=editer_date] + [class*=editer_date] {
 	padding-top: 0;
 }
 .formulaire_dater .editer > label {
@@ -1139,7 +1141,7 @@
 	text-transform: uppercase;
 	display: flex;
 	align-items: flex-start;
-	padding-top: calc(var(--spip-form-padding-input-y) / 2);
+	padding-top: calc(var(--spip-form-input-padding-y) / 2);
 }
 .formulaire_dater .editer[class*=editer_date] > label {
 	font-size: 0.85em;
@@ -1148,14 +1150,14 @@
 	display:block;
 	font-weight: bold;
 	text-transform: uppercase;
-	padding-top: calc(var(--spip-form-padding-input-y) / 2);
+	padding-top: calc(var(--spip-form-input-padding-y) / 4);
 }
 .formulaire_dater .saisie_redac {
 	display: block;
 }
 .formulaire_dater .editer_date_redac .editable .choix {
 	display: block;
-	margin-top: calc(var(--spip-form-padding-input-y) / 2);
+	margin-top: calc(var(--spip-form-input-padding-y) / 2);
 }
 .formulaire_dater #sans_redac {
 	vertical-align: top;
@@ -1165,12 +1167,10 @@
 	#LEFT: -1em;
 }
 .formulaire_spip.formulaire_dater input.text {
-	padding-top: calc(var(--spip-form-padding-input-y) / 2);
-	padding-bottom: calc(var(--spip-form-padding-input-y) / 2);
+	padding-top: calc(var(--spip-form-input-padding-y) / 2);
+	padding-bottom: calc(var(--spip-form-input-padding-y) / 2);
 }
 .formulaire_spip.formulaire_dater .toggle_box_link {
-	#RIGHT: var(--spip-form-spacing-x);
-	top: calc(var(--spip-form-padding-input-y) / 2);
 	transform: none;
 }
 .formulaire_spip.formulaire_dater .boutons {
@@ -1187,11 +1187,6 @@
 }
 .fiche_objet .formulaire_spip.formulaire_dater {
 	margin-top: 0;
-	border: 0;
-	border-radius: 0;
-	margin-left: calc(var(--spip-box-spacing-x) * -1); /* = padding de fiche_objet */
-	margin-right: calc(var(--spip-box-spacing-x) * -1); /* = padding de fiche_objet */
-	background-color: var(--spip-color-gray-lightest);
 	position: relative;
 }
 
