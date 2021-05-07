@@ -449,7 +449,7 @@
   .box__header
     .titrem
         a.titremancre
-        a
+        a.titremlien
         .logo
     .descriptif */
 .box.sous-rub .box__header {
@@ -475,16 +475,16 @@
 .box.sous-rub .titrem a {
 	border-radius: inherit;
 }
-.box.sous-rub .titrem a:not(.titremancre) {
+.box.sous-rub .titrem a.titremlien {
+	direction: var(--spip-dir); /* Forcer car le lien met sa propre direction */
 	flex: 1 1 auto;
 	display: flex;
 	align-items: center; /* Pour aligner les one-liners avec le logo éventuel */
-}
-.box.sous-rub .titrem a:not(.titremancre) span.titre {
 	padding: var(--spip-box-spacing-y) calc(var(--spip-box-spacing-x) / 2);
-	flex-grow: 2;
 }
-
+.box.sous-rub .titrem a.titremlien[hreflang]:after {
+	font-weight: normal;
+}
 /* Si titre dépliable */
 .box.sous-rub .titrem.depliant a:first-of-type:not(:only-of-type) {
 	border-top-#RIGHT-radius: 0;
@@ -499,19 +499,15 @@
 	background-color: var(--spip-color-theme-lighter);
 	color: var(--spip-color-black);
 }
-/* Logo  */
-/*
+/* Logo : voir surtout dans lists.css */
 .box.sous-rub .box__header .logo-carre {
-	padding: 0;
+	margin-top: calc(var(--spip-box-spacing-y) * -1);
+	margin-bottom: calc(var(--spip-box-spacing-y) * -1);
+	margin-#RIGHT: calc((var(--spip-box-spacing-x) / 2) * -1);
+	margin-#LEFT: auto;
+	padding-#RIGHT: 0.25em;
+	order: 10; /* Doit être en dernier, après le :after éventuel du <a> */
 }
-.box.sous-rub .box__header .logo {
-	margin: 0;
-	border-top-#LEFT-radius: 0;
-	border-top-#RIGHT-radius: var(--spip-box-border-radius);
-	border-bottom-#LEFT-radius: 0;
-	border-bottom-#RIGHT-radius: var(--spip-box-border-radius);
-}
-*/
 /* Descriptif */
 .box.sous-rub .descriptif {
 	padding: calc(var(--spip-box-spacing-y) / 2) calc(var(--spip-box-spacing-x) / 2);
