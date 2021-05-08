@@ -236,7 +236,7 @@
 .liste-objets thead tr:last-child > * {
 	border-bottom: 0;
 }
-.liste-objets thead a {
+.liste-objets thead th > a {
 	display: inline-flex; /* si picto, éviter un espace blanc */
 }
 .liste-objets thead img {
@@ -361,9 +361,6 @@
 }
 .liste-objets td.action button {
 	margin-bottom: 0;
-}
-.liste-objets td.action a {
-	color: inherit;
 }
 
 /* Syndication */
@@ -737,16 +734,16 @@
 .liste-items .item h3 {
 	margin: 0;
 }
-.liste_items .item a,
-.liste-items .item a {
+.liste_items .item a:only-child,
+.liste-items .item a:only-child {
 	display: block;
 }
-.liste_items .item a img,
-.liste-items .item a img {
+.liste_items .item img,
+.liste-items .item img {
 	vertical-align: middle;
 }
-.liste_items .item a img:first-child,
-.liste-items .item a img:first-child {
+.liste_items .item img:first-child,
+.liste-items .item img:first-child {
 	margin-#RIGHT: 0.33em;
 }
 .liste_items .bouton_action_post {
