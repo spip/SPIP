@@ -63,6 +63,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_radio_non_envoi_annonces_editoriales' => 'Não enviar os avisos editoriais',
 	'bouton_redirection' => 'REDIRECIONAMENTO',
 	'bouton_reinitialiser_aux_valeurs_par_defaut' => 'Reiniciar aos valores padrão',
+	'bouton_relancer_inscription' => 'Reiniciar o registro',
+	'bouton_relancer_inscriptions' => 'Reiniciar os registros',
 	'bouton_relancer_installation' => 'Reiniciar a instalação',
 	'bouton_reset_password' => 'Criar uma nova senha e enviá-la por e-mail',
 	'bouton_suivant' => 'Avançar',
@@ -375,7 +377,7 @@ Os idiomas já utilizados no site (no topo da lista) não podem ser desativados.
 	'info_nouvel_article' => 'Nova matéria',
 	'info_nouvelle_traduction' => 'Nova tradução:',
 	'info_numero_article' => 'MATÉRIA NÚMERO:',
-	'info_obligatoire_02' => '(obrigatório)', # MODIF
+	'info_obligatoire_02' => '(obrigatório)',
 	'info_option_accepter_visiteurs' => 'Aceitar a inscrição de visitantes do site público',
 	'info_option_ne_pas_accepter_visiteurs' => 'Recusar a inscrição dos visitantes',
 	'info_options_avancees' => 'OPÇÕES AVANÇADAS',
@@ -663,9 +665,9 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 	'plugin_titre_automatique_ajouter' => 'Incluir plugins',
 	'plugin_titre_installation' => 'Instalação do plugin @plugin@',
 	'plugin_titre_modifier' => 'Meus plugins',
-	'plugin_utilise_extension_php' => 'Utiliza a extensão PHP @plugin@ na versão @version@.', # MODIF
-	'plugin_utilise_php' => 'Utiliza @plugin@ na versão @version@.', # MODIF
-	'plugin_utilise_plugin' => 'Utiliza o plugin @plugin@ na versão @version@.', # MODIF
+	'plugin_utilise_extension_php' => 'A extensão PHP @plugin@ deve estar na versão @version@.',
+	'plugin_utilise_php' => '@plugin@ deve estar na versão @version@.',
+	'plugin_utilise_plugin' => 'O plugin @plugin@ deve estar na versão @version@.',
 	'plugin_zip_active' => 'Continue para o ativar',
 	'plugin_zip_adresse' => 'Indique abaixo o endereço de um arquivo zip de plugin a ser transferido, ou ainda o endereço de uma lista de plugins.',
 	'plugin_zip_adresse_champ' => 'Endereço do plugin ou da lista',
@@ -692,18 +694,18 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 
 	// Q
 	'queue_executer_maintenant' => 'Executar agora',
-	'queue_info_purger' => 'Você pode excluir todas as tarefas em espera e reinicializar a lista com as tarefas periódicas', # MODIF
-	'queue_nb_jobs_in_queue' => '@nb@ trabalhos em espera', # MODIF
-	'queue_next_job_in_nb_sec' => 'Próximo trabalho em @nb@ s', # MODIF
-	'queue_no_job_in_queue' => 'Nenhum tarefa em espera', # MODIF
-	'queue_one_job_in_queue' => '1 trabalho em espera', # MODIF
+	'queue_info_purger' => 'Você pode excluir todas as tarefas de fundo em espera e reinicializar a lista com as tarefas periódicas',
+	'queue_nb_jobs_in_queue' => '@nb@ tarefas em espera',
+	'queue_next_job_in_nb_sec' => 'Próxima tarefa em @nb@ s',
+	'queue_no_job_in_queue' => 'Nenhum tarefa em espera',
+	'queue_one_job_in_queue' => '1 tarefa em espera',
 	'queue_priorite_tache' => 'prioridade',
-	'queue_purger_queue' => 'Reiniciar a lista de tarefas', # MODIF
-	'queue_titre' => 'Lista de tarefas', # MODIF
+	'queue_purger_queue' => 'Reiniciar a lista de tarefas',
+	'queue_titre' => 'Tarefas de fundo',
 
 	// R
 	'repertoire_plugins' => 'Diretório:',
-	'required' => '(obrigatório)', # MODIF
+	'required' => '(obrigatório)',
 
 	// S
 	'sans_heure' => 'sem hora',

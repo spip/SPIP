@@ -24,7 +24,7 @@
 .cadre .liste-objets{font-size:1em;}
 .liste-objets > .image_loading {position:absolute;top:0;right:0;}
 .liste-objets .pagination,.liste-objets p.pagination {
-	margin:0; padding:1px 5px;
+	margin:0; padding:3px 3px;
 	background:#eee; border:none;
 }
 .liste-objets .pagination .sep {color:#aaa;}
@@ -32,9 +32,9 @@
 .liste-objets table {width:100%; /* surcharger le 99% de spip ? */ max-width:none; background:white; border:none; margin:0;}
 .liste-objets table caption {margin:0;text-align:#ENV{left};padding:0 3px;background-color:#FFFFFF;}
 .liste-objets table caption .formulaire_spip { top:2px; }
-.caption-wrap {padding:0 3px;background-color:#FFFFFF;}
+.caption-wrap {padding:0 3px;}
 
-.liste-objets .caption {display:block;color:#333;font-size:1.0em;padding:[(#ENV{margin-bottom}|strdiv{4})em] 5px;background:none no-repeat [(#ENV{left})] center #FFFFFF;background-size:24px;}
+.liste-objets .caption {display:block;color:#333;font-size:1.0em;padding:[(#ENV{margin-bottom}|strdiv{4})em] 5px;background:none no-repeat [(#ENV{left}|=={left}|?{3px,right})] center #FFFFFF;background-size:24px;}
 .liste-objets tr {background:white;}
 .liste-objets .row_odd td {background:white;}
 .liste-objets .row_even td {background:white;}
@@ -61,7 +61,7 @@
 .liste-objets tr td.titre a {display: block;}
 .liste-objets tr td.titre span.surtitre, .liste-objets tr td.titre span.soustitre {font-size: 85%; display:block; overflow: hidden; text-overflow: ellipsis;white-space: nowrap;max-width: 200px;}
 .liste-objets tr td.titre .spip_logo {float:#ENV{right};margin-#ENV{left}:5px;margin-bottom:5px;}
-.liste-objets tr td.nologo {padding: 0;width:0;}
+.liste-objets tr td.nologo {padding: 0;width:0;height:45px;}
 .liste-objets tr td.logo {text-align: center; padding: 0 5px;}
 .liste-objets tr td.logo img {display: block; margin: 0 auto;}
 .liste-objets.auteurs tr td.logo a {width: 40px; height: 40px; display: block; background-position: center center; background-size: cover; border-radius: 50%; margin: 3px 0;}
@@ -75,8 +75,9 @@
 .liste-objets.auteurs th.statut {line-height:1px;padding-bottom:0;}
 .liste-objets.auteurs td.nom .spip_logos { vertical-align: middle; margin-#ENV{right}: 0.3em; }
 
-.liste-objets.articles tr td.logo,.liste-objets td.logo-carre  {width: 70px; height: 70px; padding: 3px;}
-.liste-objets.articles tr td.logo img,.liste-objets td.logo-carre img {width: 100%; height: 100%; object-fit: cover; border-radius: 8px;}
+.liste-objets.articles tr td.logo, .logo-carre  {padding: 3px; flex-shrink: 0}
+.liste-objets.articles tr td.logo {width:70px; height: 70px;}
+.liste-objets.articles tr td.logo img, .logo-carre img {width: 70px; height: 70px; object-fit: cover; border-radius: 4px; display: block;}
 
 <BOUCLE_objets(DATA){source table,#REM|lister_tables_objets_sql}>[
 .liste-objets.[(#VALEUR{table_objet})] .caption {background-image:url((#CHEMIN_IMAGE{#VALEUR{icone_objet}|concat{-24.png}}));padding-#ENV{left}:30px;}]</BOUCLE_objets>
@@ -92,7 +93,7 @@
 .lat .liste-objets tr > .syndication,
 .lat .liste-objets tr .spip_logo,
 .lat .liste-objets.articles tr .logo, .lat .liste-objets.articles tr .nologo  {display:none;}
-.lat .liste-objets tr td.principale {font-size:0.9em;max-width:120px;word-wrap: break-word;}
+.lat .liste-objets tr td.principale {font-size:0.9em;max-width:120px;word-wrap: break-word; padding: 7px 3px}
 
 .en-edition .inner {font-size:0.9em;}
 .en-edition h3 {font-size:1.1em;}
@@ -134,8 +135,8 @@
 .pagination .pagination-items {list-style: none;display: flex;flex-direction: row; justify-content: flex-end}
 .pagination .pagination-item {  margin: 0; flex-basis: 2em; display: flex;align-items: center; font-size: 0.9em}
 .pagination .pagination_precedent_suivant .pagination-item { flex-basis: auto;}
-.pagination .pagination-item + .pagination-item {  margin-left: 0.15em }
-.pagination .pagination-item-label { display:block; flex-basis: 100%; background: #f0f0f0; border:1px solid #ccc; text-decoration: none; padding:0.15em .30em; border-radius:.15em;text-align: center}
+.pagination .pagination-item + .pagination-item {  margin-left: 3px }
+.pagination .pagination-item-label { display:block; flex-basis: 100%; background: #f7f7f7;  text-decoration: none; padding:0.15em .30em; border-radius:.15em;text-align: center}
 .pagination .on .pagination-item-label,
 .pagination a.pagination-item-label:hover,
 .pagination a.pagination-item-label:focus,

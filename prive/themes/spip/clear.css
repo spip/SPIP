@@ -54,9 +54,13 @@ hr.clear { visibility: hidden; }
 .no-js .display_au_chargement { display: block; }
 
 /* ajax */
-div.ajaxbloc, div.ajax {position:relative;}
+div.ajaxbloc, div.ajax, div.ajax-form-container {position:relative;}
 .image_loading {float:right;}
-div.ajaxbloc>.image_loading,div.ajax>.image_loading,.formulaire_spip>.image_loading {position:absolute;right:0;float:none;}
+div.ajaxbloc>.image_loading,
+div.ajax>.image_loading,
+.formulaire_spip>.image_loading,
+div.ajax-form-container>.image_loading {position:absolute;right:0;float:none;}
+
 .bugajaxie { display: none; } /* Bug IE/Win */
 
 /* debug */

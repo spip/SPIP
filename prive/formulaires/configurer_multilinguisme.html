@@ -11,7 +11,7 @@
 		#ACTION_FORMULAIRE
 		<input type="hidden" name="multi_objets&#91;&#93;" value="" />
 		<input type="hidden" name="gerer_trad_objets&#91;&#93;" value="" />
-	  <div class="editer-groupe">
+		<div class="editer-groupe">
 			<div class="fieldset">
 				<fieldset><div class="editer-groupe">
 					#SET{objets,#VAL{rubrique}|objet_info{texte_objets}|_T}
@@ -90,8 +90,8 @@
 						\(<a href="#" onclick="jQuery('#langues_proposees').find('input\[type=checkbox\]').attr('checked',false);return false;"><:lien_tout_decocher:></a>\)
 						]
 					</p>
-					(#ENV**{_langues,''})
 					<p><:info_multi_langues_soulignees:></p>
+					(#ENV**{_langues,''})
 				</fieldset>
 			</div>
 			]

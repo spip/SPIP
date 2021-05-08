@@ -314,6 +314,7 @@ $GLOBALS['spip_matrice']['image_select'] = true;//'inc/filtres_images_mini.php';
 $GLOBALS['spip_matrice']['image_reduire'] = true;//'inc/filtres_images_mini.php';
 $GLOBALS['spip_matrice']['image_reduire_par'] = true;//'inc/filtres_images_mini.php';
 $GLOBALS['spip_matrice']['image_passe_partout'] = true;//'inc/filtres_images_mini.php';
+$GLOBALS['spip_matrice']['image_recadre_avec_fallback'] = true;//'inc/filtres_images_mini.php';
 
 $GLOBALS['spip_matrice']['couleur_html_to_hex'] = 'inc/filtres_images_mini.php';
 $GLOBALS['spip_matrice']['couleur_hex_to_hsl'] = 'inc/filtres_images_mini.php';
@@ -2884,7 +2885,7 @@ function direction_css($css, $voulue = '') {
 	if (!preg_match(',(_rtl)?\.css$,i', $css, $r)) {
 		return $css;
 	}
-
+	include_spip("inc/lang");
 	// si on a precise le sens voulu en argument, le prendre en compte
 	if ($voulue = strtolower($voulue)) {
 		if ($voulue != 'rtl' and $voulue != 'ltr') {
@@ -4477,9 +4478,6 @@ function bando_images_background() {
 
 	$res = "";
 	foreach ($boutons as $page => $detail) {
-		if ($detail->icone and strlen(trim($detail->icone))) {
-			$res .= "\n.navigation_avec_icones #bando1_$page {background-image:url(" . $detail->icone . ");}";
-		}
 		$selecteur = (in_array($page, array('outils_rapides', 'outils_collaboratifs')) ? "" : ".navigation_avec_icones ");
 		if (is_array($detail->sousmenu)) {
 			foreach ($detail->sousmenu as $souspage => $sousdetail) {

@@ -37,97 +37,107 @@ function time_picker_options() {
 		step: #ENV{heure_pas,30},
 	};
 }
+
+function date_picker_range_changed_date($me) {
+	var newValue = $me.val();
+	var newDate = $me.datepicker('getDate');
+	if ($me.data('range-after')) {
+		var $after = jQuery($me.data('range-after'));
+		if ($after) {
+			var afterDate = $after.datepicker('getDate');
+			if (afterDate < newDate) {
+				$after.datepicker('setDate', newDate);
+			}
+			$after.datepicker('setStartDate', newDate);
+		}
+	}
+	if ($me.data('range-before')) {
+		var $before = jQuery($me.data('range-before'));
+		if ($before) {
+			var beforeDate = $before.datepicker('getDate');
+			if (beforeDate > newDate) {
+				$before.datepicker('setDate', newDate);
+			}
+			$before.datepicker('setEndDate', newDate);
+		}
+	}
+}
+
+function date_picker_enable_on_this(opts) {
+	var $me = jQuery(this);
+	opts = opts || {};
+
+	if (!$me.is('.datePicker')) {
+		var options =  date_picker_options();
+		var lang = '[(#LANG|texte_script)]';
+		if (typeof jQuery.fn.datepicker.dates !== "undefined"){
+			if (typeof jQuery.fn.datepicker.dates[lang]==="undefined"){
+				jQuery.fn.datepicker.dates[lang] = {
+					days: options.dayNames,
+					daysShort: options.dayNamesShort,
+					daysMin: options.dayNamesMin,
+					months: options.monthNames,
+					monthsShort: options.monthNamesShort,
+					today: options.currentText,
+					clear: options.clearText,
+					format: options.dateFormat.replace('yy', 'yyyy'),
+					titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
+					weekStart: options.firstDay,
+					rtl: [(#LANG_DIR|=={'rtl'}|?{true, false})]
+				};
+			}
+			options.language = lang;
+		}
+
+		// Pour chaque champ, on regarde s'il y a des options propres
+		if ($me.data('startdate')) {
+			options.startDate = $me.data('startdate');
+		}
+		if ($me.data('enddate')) {
+			options.endDate = $me.data('enddate');
+		}
+		if ($me.data('todaybtn')) {
+			options.todayBtn = $me.data('todaybtn');
+		}
+		if ($me.data('clearbtn')) {
+			options.todayBtn = $me.data('clearbtn');
+		}
+		if ($me.data('orientation')) {
+			options.orientation = $me.data('orientation');
+		}
+		if ($me.data('showonfocus')){
+			options.showOnFocus = $me.data('showonfocus');
+			if (options.showOnFocus) {
+				options.showOn = 'focus';
+			}
+		}
+
+		if (opts) {
+			options = jQuery.extend(options, opts);
+		}
+
+		$me
+			.addClass('datePicker')
+			.datepicker(jQuery.extend({},options))
+			.trigger('datePickerLoaded');
+
+		if (!options.showOnFocus) {
+			$me.on('click', function(){$me.datepicker('show')});
+		}
+
+		if ($me.data('range-after') || $me.data('range-before')) {
+			$me.on('changeDate', function (){date_picker_range_changed_date($me)});
+		}
+	}
+}
+
 function date_picker_init(){
 	// Initialisation du sélecteur sur les champs de date
 	jQuery('input.date').not('.datePicker')
 		.each(function() {
-			var $me = jQuery(this);
-			if (!$me.is('.datePicker')) {
-				var options =  date_picker_options();
-				var lang = '[(#LANG|texte_script)]';
-				if (typeof jQuery.fn.datepicker.dates !== "undefined"){
-					if (typeof jQuery.fn.datepicker.dates[lang]==="undefined"){
-						jQuery.fn.datepicker.dates[lang] = {
-							days: options.dayNames,
-							daysShort: options.dayNamesShort,
-							daysMin: options.dayNamesMin,
-							months: options.monthNames,
-							monthsShort: options.monthNamesShort,
-							today: options.currentText,
-							clear: options.clearText,
-							format: options.dateFormat.replace('yy', 'yyyy'),
-							titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
-							weekStart: options.firstDay,
-							rtl: [(#LANG_DIR|=={'rtl'}|?{true, false})]
-						};
-					}
-					options.language = lang;
-				}
-
-				// Pour chaque champ, on regarde s'il y a des options propres
-				if ($me.data('startdate')) {
-					options.startDate = $me.data('startdate');
-				}
-				if ($me.data('enddate')) {
-					options.endDate = $me.data('enddate');
-				}
-				if ($me.data('todaybtn')) {
-					options.todayBtn = $me.data('todaybtn');
-				}
-				if ($me.data('clearbtn')) {
-					options.todayBtn = $me.data('clearbtn');
-				}
-				if ($me.data('orientation')) {
-					options.orientation = $me.data('orientation');
-				}
-				if ($me.data('showonfocus')){
-					options.showOnFocus = $me.data('showonfocus');
-					if (options.showOnFocus) {
-						options.showOn = 'focus';
-					}
-				}
-
-				$me
-					.addClass('datePicker')
-					.datepicker(jQuery.extend({},options))
-					.trigger('datePickerLoaded');
-
-				if (!options.showOnFocus) {
-					$me.on('click', function(){$me.datepicker('show')});
-				}
-
-				if ($me.data('range-after') || $me.data('range-before')) {
-					$me.on('changeDate', function (){rangePickerChangeDate($me)});
-				}
-			}
+			date_picker_enable_on_this.apply(this,[{}]);
 		});
 
-	function rangePickerChangeDate($me) {
-		var newValue = $me.val();
-		var newDate = $me.datepicker('getDate');
-		console.log('rangePickerChangeDate', newValue, newDate);
-		if ($me.data('range-after')) {
-			var $after = jQuery($me.data('range-after'));
-			if ($after) {
-				var afterDate = $after.datepicker('getDate');
-				if (afterDate < newDate) {
-					$after.datepicker('setDate', newDate);
-				}
-				$after.datepicker('setStartDate', newDate);
-			}
-		}
-		if ($me.data('range-before')) {
-			var $before = jQuery($me.data('range-before'));
-			if ($before) {
-				var beforeDate = $before.datepicker('getDate');
-				if (beforeDate > newDate) {
-					$before.datepicker('setDate', newDate);
-				}
-				$before.datepicker('setEndDate', newDate);
-			}
-		}
-	}
-	
 	// Initialisation du sélecteur sur les champs d'heure
 	jQuery("input.heure").not('.timePicker')
 		.addClass('timePicker').each(function() {
@@ -146,11 +156,13 @@ function date_picker_init(){
 				.timePicker(jQuery.extend(time_picker_options(), options));
 		});
 }
+
 var date_picker_loading;
 if (window.jQuery){
 	jQuery(function(){
+		console.log('dans inc-dateur jquery function', jQuery('input.date,input.heure').length, typeof(date_picker_loading));
 		if (jQuery('input.date,input.heure').length
-			&& typeof date_picker_loading=="undefined"){
+			&& typeof(date_picker_loading) === "undefined"){
 			date_picker_loading = jQuery.getScript('[(#PRODUIRE{fond=formulaires/dateur/jquery.dateur.js}|timestamp)]');
 			date_picker_loading.done(function(){
 				date_picker_init();
@@ -166,7 +178,7 @@ if (window.jQuery){
 .datepicker th {border-radius: 0;}
 .datepicker td.day {background: transparent;}
 div.time-picker {font-size:11px;  width:5em; /* needed for IE */}
-.datePicker {background-image: url(#CHEMIN_IMAGE{calendrier-16.png});background-size:1em;background-position:[(#ENV{lang}|lang_dir|choixsiegal{ltr,right,left})] 0.25em center;background-repeat:no-repeat;}
+input.datePicker {background-image: url(#CHEMIN_IMAGE{calendrier-16.png});background-size:1em;background-position:[(#ENV{lang}|lang_dir|choixsiegal{ltr,right,left})] 0.25em center;background-repeat:no-repeat;}
 .formulaire_spip input.date {width:9em;padding-[(#ENV{lang}|lang_dir|choixsiegal{ltr,right,left})]:1.5em;}
 .formulaire_spip input.heure {width:7em;}
 </style>

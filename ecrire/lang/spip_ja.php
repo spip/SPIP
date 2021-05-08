@@ -559,7 +559,7 @@ http://mysite.com、あるいは単純にこのサイトの記事番号を与え
 	'pass_indiquez_cidessous' => '登録されたメールアドレスを下に入力してください。アクセスが再び出来るように、取り扱い説明をメールで送信します。',
 	'pass_mail_passcookie' => '(自動メッセージ)サイト@nom_site_spip@(@adresse_site@)へのアクセスを取り戻すように、次のアドレスに行ってください：@sendcookie@。それで新しいパスワードを入力すると再接続ができます。',
 	'pass_mot_oublie' => 'パスワードを忘れました。',
-	'pass_nouveau_enregistre' => '新しいパスワードを登録されました。',
+	'pass_nouveau_enregistre' => '新しいパスワードが登録されました。',
 	'pass_nouveau_pass' => '新規パスワード',
 	'pass_ok' => 'オケー',
 	'pass_oubli_mot' => 'パスワードは忘れています。',

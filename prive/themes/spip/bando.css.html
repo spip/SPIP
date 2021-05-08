@@ -1,160 +1,683 @@
 [(#REM)
 
-	Ce squelette definit les styles de l'espace prive
+	Ce squelette definit les styles des bandeaux de navigation l'espace privé.
 
-	Note: l'entete "Vary:" sert a repousser l'entete par
-	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
-	genant en cas de "rotation du cookie de session" apres
-	un changement d'IP (effet de clignotement).
+	Organisation du fichier :
+
+	0. Variables
+	1. Règles mutualisées : menus déroulants et cie
+	2. Bandeau liens d'évitement
+	3. Bandeau identité
+	4. Bandeau de navigation principale
+	5. Bandeau d'outils
+	6. Autres
+
 	<style>
 ]
 #CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=utf-8}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
-#bando_haut { /*font-size: 1em;*/ position: relative; z-index: 1001;}
-#bando_haut a { text-decoration: none; }
+
+/**
+ * ============
+ * 0. Variables
+ * ============
+ */
 
 
-#bando_haut #bando_liens_rapides {position:absolute;top:0;z-index:0;width:100%;}
-#bando_haut #bando_liens_rapides.actif {z-index:11;background:#000;min-height:25px;line-height:2em;color: #fff; overflow:hidden; border-bottom:1px solid #222;}
-#bando_haut #bando_liens_rapides a {color:#fff;font-weight:bold;}
-
-#bando_haut ul{margin: 0; padding: 0; list-style: none;}
-
-#bando_haut ul.deroulant li { /*position:relative; */float:#ENV{left}; display: block; }
-#bando_haut ul.deroulant li ul li {float:none;position:static;}
-#bando_haut ul.deroulant li.actif,#bando_haut ul.deroulant li.actif_tempo { background-color: #[(#ENV{claire}|couleur_eclaircir|couleur_eclaircir)]; z-index: 100; }
-#bando_haut ul.deroulant li ul {border: 1px solid #aaaaaa; border-top: 0; text-align:#ENV{left}; height: auto; width: auto; display: block; position:absolute; #ENV{left}:-3000em;margin-#ENV{left}:-1px; }
-#bando_haut ul.deroulant li ul.menu-2col { max-width: initial;  -moz-column-count: 2; -moz-column-gap: 0;  -webkit-column-count: 2; -webkit-column-gap: 0; -webkit-perspective:1; column-count: 2; column-gap: 0; }
-#bando_haut ul.deroulant li.actif ul, #bando_haut ul.deroulant li.actif_tempo ul { #ENV{left}:auto;}
-#bando_haut ul.deroulant li a { display: block;  color:#444; font-weight:bold;}
-#bando_haut ul.deroulant li ul.menu-2col a {display: inline-block;}
-#bando_haut ul.deroulant li ul li { background-color: #fff; }
-#bando_haut ul.deroulant li ul li a {  }
-#bando_haut ul.deroulant li ul li a:hover,
-#bando_haut ul.deroulant li ul li a:focus { background-color: #[(#ENV{claire}|couleur_eclaircir|couleur_eclaircir)]; }
-
-#bando_haut ul.deroulant li ul.menu-2col {background-color: #[(#ENV{claire}|couleur_eclaircir{.92})];}
-#bando_haut ul.deroulant li.favori { background-color: #fff; }
-#bando_haut ul.deroulant li.non_favori { background-color: #[(#ENV{claire}|couleur_eclaircir{.92})]; }
-#bando_haut ul.deroulant li.favori + li.non_favori { border-top:1px solid #aaa; }
-
-#bando_identite { line-height:2em; background: #[(#ENV{claire}|couleur_eclaircir|couleur_eclaircir)]; color: #666; overflow:hidden; z-index:10;position:relative;}
-#bando_identite p { width: 50%; padding: 1px 0; margin:0;}
-#bando_identite p img { vertical-align: middle; }
-#bando_identite p.nom_site_spip { width: 45%; float:#ENV{right};text-align:#ENV{right}; }
-#bando_identite p.session { width: 55%; float:#ENV{left}; text-align:#ENV{left}; }
-#bando_identite p.session .menu_lang {  }
-#bando_identite a, #bando_identite strong, #identite a { color: #666; }
-#bando_identite a:hover { text-decoration: underline; }
-
-#bando_outils { bottom:0px; width:100%; clear:both; background: #ENV{claire}; }
-
-#bando_outils li.plan_site {margin-#ENV{right}:20px;}
-#bando_outils li.plan_site a#boutonbandeautoutsite {display:block;line-height:1em;}
-#bando_outils li.plan_site a#boutonbandeautoutsite img {padding:2px; }
-#bando_outils li.plan_site a#boutonbandeautoutsite:hover,#bando_outils li.plan_site a#boutonbandeautoutsite:focus {background:#fff;}
-#bando_outils li.plan_site a .image_loading {float:#ENV{right};}
-
-#bando_outils ul.deroulant {font-size:0.9em;}
-#bando_outils ul.deroulant li ul {background:#fff;[border:1px solid (#ENV{claire});]padding:0px;border-top:0;padding-top:0;margin-left:-1px;}
-#bando_outils ul.deroulant li ul ul {[border:1px solid (#ENV{claire});]}
-#bando_outils ul.deroulant li li a { padding: 3px 3px;padding-#ENV{right}:10px;background-repeat:no-repeat;background-position:[(#ENV{right}) ]3px;}
-#bando_outils ul.deroulant li li { background-repeat:no-repeat;background-position:[(#ENV{left}|=={left}|?{"1%","99%"}) ] center;padding-#ENV{left}:15px;}
-
-#bando_outils ul.deroulant li.haschild > a {background-image:url(#CHEMIN_IMAGE{triangle-droite#ENV{rtl}|concat{.gif}});}
-#bando_outils ul.deroulant li li {background-image:url(#CHEMIN_IMAGE{secteur-xx.svg}); background-size: 12px;}
-#bando_outils ul.deroulant li li li {background-image:url(#CHEMIN_IMAGE{rubrique-xx.svg}); background-size: 12px;}
-#bando_outils ul.deroulant li.toutsite {background-image:none;}
-
-#bando_outils ul.deroulant li ul li {float:none;position:relative;}
-#bando_outils ul.deroulant li.actif li ul, #bando_outils ul.deroulant li.actif_tempo li ul { #ENV{left}:-3000em;}
-#bando_outils ul.deroulant li li.actif >ul,#bando_outils ul.deroulant li li.actif_tempo >ul  {#ENV{left}:50px;top:1.5em;}
-
-#bando_outils ul.deroulant li ul {width:770px;}
-.large #bando_outils ul.deroulant li ul {width:970px;}
-#bando_outils ul.deroulant li ul.cols_1 {width:200px;}
-#bando_outils ul.deroulant li ul.cols_1 > li {width:185px;}
-#bando_outils ul.deroulant li ul.cols_2 {width:350px;}
-#bando_outils ul.deroulant li ul.cols_2 > li {float:#ENV{left};width:160px;}
-#bando_outils ul.deroulant li ul.cols_3 {width:495px;}
-#bando_outils ul.deroulant li ul.cols_3 > li {float:#ENV{left};width:150px;}
-
-#bando_outils ul.deroulant li ul.cols_4 {width:620px;}
-#bando_outils ul.deroulant li ul.cols_4 > li {float:#ENV{left};width:140px;}
-.large #bando_outils ul.deroulant li ul.cols_4 {width:800px;}
-.large #bando_outils ul.deroulant li ul.cols_4 > li {float:#ENV{left};width:185px;}
-#bando_outils ul.deroulant li ul.cols_5 > li {float:#ENV{left};width:139px;}
-.large #bando_outils ul.deroulant li ul.cols_5 > li {float:#ENV{left};width:179px;}
-#bando_outils ul.deroulant li ul.cols_6 > li {float:#ENV{left};width:113px;}
-.large #bando_outils ul.deroulant li ul.cols_6 > li {float:#ENV{left};width:146px;}
-#bando_outils ul.deroulant li ul.cols_7 > li {float:#ENV{left};width:113px;}
-.large #bando_outils ul.deroulant li ul.cols_7 > li {float:#ENV{left};width:123px;}
-#bando_outils ul.deroulant li ul.cols_8 > li {float:#ENV{left};width:113px;}
-.large #bando_outils ul.deroulant li ul.cols_8 > li {float:#ENV{left};width:123px;}
-
-#bando_outils ul.creer {float:#ENV{left};}
-#bando_outils ul.collaborer {float:#ENV{left};margin-#ENV{right}:20px;}
-#bando_outils ul.rapides li.rapides__item{ float:#ENV{left}; }
-#bando_outils ul.rapides li.rapides__item a{ display:block; padding:2px;background-position:center;background-repeat:no-repeat;background-size: 16px;}
-#bando_outils ul.rapides li.rapides__item a span { visibility:hidden;display:block;height:24px;width:24px;overflow:hidden; }
-#bando_outils ul.rapides li.rapides__item a:hover, #bando_outils ul.rapides li.rapides__item a:focus{background-color:#[(#ENV{claire}|couleur_eclaircir)];}
-#bando_outils ul.rapides li.rapides__item{ margin-top:0px;}
-
-#bando_outils #rapides {float:#ENV{right};}
-#bando_outils #rapides .formulaire_recherche {margin:3px 0;clear:none;}
-
-#bando_navigation ul.deroulant > li {min-width:90px; max-width:115px; text-align:center; }
-@media (min-width: 960px) {
-	#bando_navigation ul.deroulant > li {min-width:100px; max-width:130px;}
+/* TODO : baser les gouttières sur la gouttière générale quand elle sera au point */
+:root {
+	/* Identité */
+	--spip-bando-id-spacing-y: 0.33rem;
+	--spip-bando-id-spacing-x: 0.66rem;
+	/* Navigation principale */
+	--spip-bando-nav-picto-size: 20px; /* grands pictos */
+	/* Outils */
+	--spip-bando-outils-spacing-x: 0.33rem;
+	--spip-bando-outils-spacing-y: 0.25rem;
+	--spip-bando-outils-icon-size: 16px;
+	/* Menus déroulants */
+	--spip-deroulant-spacing-x: 0.33rem;
+	--spip-deroulant-spacing-y: 0.5rem;
+	--spip-deroulant-icon-size: 16px;
 }
-@media (min-width: 1200px) {
-	#bando_navigation ul.deroulant > li {min-width:110px;max-width:150px;}
+@media (min-width: 768px) {
+	:root {
+		/* Nav */
+		--spip-bando-nav-picto-size: 40px; /* grands pictos : taille originale */
+		/* Outils */
+		--spip-bando-outils-spacing-x: 0.5rem;
+		--spip-bando-outils-spacing-y: 0.33rem;
+		--spip-bando-outils-icon-size: 20px;
+		/* Menus déroulants */
+		--spip-deroulant-spacing-x: 0.5rem;
+		--spip-deroulant-spacing-y: 0.66rem;
+		--spip-deroulant-icon-size: 20px;
+	}
 }
-#bando_navigation ul li ul {min-width: 85px; max-width:250px;z-index:1;}
-@media (min-width: 960px) {
-	#bando_navigation ul li ul {max-width:300px;}
+
+
+/**
+ * ==================
+ * 1. Bandeaux : tous
+ * ==================
+ *
+ * Règles mutualisées entre tous les bandeaux.
+ * Pour les particularités, voir dans chaque bandeau.
+ */
+
+
+.bando-haut .largeur * {
+	box-sizing: border-box;
 }
-#bando_navigation ul li ul li {width: auto;float:none;text-align:#ENV{left};position:static;}
-
-#bando_navigation { position: relative;z-index: 10; }
-#bando_navigation { clear:both; background: #fff; }
-#bando_navigation ul li a { display: block; padding: .8em 0.5em; font-weight: bold; }
-#bando_navigation ul li a:hover,
-#bando_navigation ul li a:focus { text-decoration: underline; }
-
-#bando_navigation ul li.first { }
-#bando_navigation ul.deroulant > li > a { color:#333; }
-
-#bando_navigation .largeur { position:relative; }
-#bando_navigation #masquer_outils{ position:absolute; #ENV{right}:-33px; bottom:-23px; height:18px; width:18px; background:transparent url([(#VAL{images/fermer-16.png}|find_in_theme)]) center center no-repeat;}
-.navigation_sans_outils #bando_navigation { border-bottom:1px solid #ddd; }
-.navigation_sans_outils #bando_navigation #masquer_outils{background-image:url([(#VAL{images/ouvrir-16.png}|find_in_theme)]); }
-#bando_navigation #masquer_outils span{ display: none; }
+.bando-haut {
+	position: relative;
+	z-index: 1001;
+}
+.bando-haut a {
+	text-decoration: none;
+}
 
 
-/* par defaut on style pour des icones standards en 48px
-Les styles pour les icones pochoir de diala sont dans themes/spip/style_prive_theme
-*/
+/**
+ * 1.1. Menus de liens simple.
+ * Utilisés dans Bandeaux accès rapides + identité
+ *
+ * Markup :
+ *
+ * p.menu-simple
+ *  a.menu-simple__item | span.menu-simple__item
+ */
+.bando-haut .menu-simple {
+	display: flex;
+	flex-flow: row wrap;
+	margin: 0;
+}
+.bando-haut .menu-simple + .menu-simple {
+	border-top: 1px solid hsla(0, 0%, 0%, 0.1);
+}
+.bando-haut .menu-simple__item {
+	position: relative;
+	display: inline-flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	padding: var(--spip-bando-id-spacing-y) var(--spip-bando-id-spacing-x);
+	text-align: center;
+	font-size: 0.9em;
+	font-weight: 500;
+	border: 1px solid transparent; /* Pour le focus */
+	transition: all 0.2s;
+}
+.bando-haut a:not(:hover):not(:focus) {
+	color: inherit;
+}
+.bando-haut a:hover,
+.bando-haut a:focus {
+	text-decoration: underline !important;
+}
+.bando-haut .menu-simple__item:focus {
+	border-color: var(--spip-color-theme);
+	outline: none;
+}
+.bando-haut .menu-simple__item + .menu-simple__item:before {
+	content:'';
+	display: inline-block;
+	height: 0.9em;
+	line-height: 1em;
+	border-#LEFT: 1px solid var(--spip-color-gray-light);
+	position: relative;
+	#LEFT: calc(-1 * var(--spip-bando-id-spacing-x));
+	margin-#LEFT:-1px;
+}
+.bando-haut .menu-simple img {
+	vertical-align: middle;
+}
+@media (min-width: 580px) {
+	.bando-haut .menu-simple + .menu-simple {
+		border-top: 0;
+	}
+	/* Aligner le texte sur le bord de la page */
+	.bando-haut .menu-simple:first-child {
+		margin-#LEFT: calc(var(--spip-bando-id-spacing-x) * -1);
+	}
+	.bando-haut .menu-simple_site:last-child {
+		margin-#RIGHT: calc(var(--spip-bando-id-spacing-x) * -1);
+	}
+}
 
-.navigation_avec_icones #bando_navigation ul.deroulant > li > a { }
-.navigation_avec_icones #bando_navigation ul.deroulant > li > a:hover,
-.navigation_avec_icones #bando_navigation ul.deroulant > li > a:focus { background-color: #[(#ENV{claire}|couleur_eclaircir)]; }
+/**
+ * 1.2. Menus déroulants (Nav principale + plan)
+ *
+ * Ici les règles mutualisées, pour les particularités propres à chaque menu,
+ * voir leurs sections respectives : 3. et 4.
+ *
+ * En cas d'ajouts, merci d'essayer de les faire au bon endroit :)
+ *
+ * Particularité CSS pénible :
+ * Pour qu'un élément positionné en absolute ne soit pas limité par la largeur
+ * de son parent, ce dernier doit être en display: block
+ * Le cas contraire, c'est bloqué sur les largeurs min/max en dur, ce qui est nul.
+ *
+ * Nb : [data-racine] au lieu de [data-profondeur=0] car c'est plus court et plus commode.
+ *
+ * Markup :
+ *
+ * ul.deroulant[data-racine]
+ *  li.deroulant__item[data-racine]
+ *    a.deroulant__lien[data-racine]
+ *
+ *    ul.deroulant__sous-menu[data-profondeur="1"]
+ *      li.deroulant__item[data-profondeur="1"]
+ *        a.deroulant__lien[data-profondeur="1"]
+ *
+ *        ul.deroulant__sous-menu[data-profondeur="2"]
+ *          li.deroulant__item[data-profondeur="2"]
+ *            a.deroulant__lien[data-profondeur="2"]
+ *
+ *            etc.
+ */
 
-.navigation_avec_icones #bando_navigation ul li a {background-position:center 5px;background-repeat:no-repeat;padding-top:60px;}
-.navigation_avec_icones #bando_navigation ul li ul li a {margin-#ENV{left}:7px; margin-#ENV{right}: 1.0em; background-position:[(#ENV{left})] center;background-size:16px;margin-top:0;padding-#ENV{left}:24px;padding-top:0.8em;}
+/* Reset conteneur et sous-menus */
+.bando-haut .deroulant,
+.bando-haut .deroulant__sous-menu {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
 
-.navigation .sous_navigation .item a {display:block;background-position:left center;margin-left:7px;padding:2px;padding-left:24px;background-repeat:no-repeat;}
-.navigation .sous_navigation .item.non_favori { background-color: #[(#ENV{claire}|couleur_eclaircir{.92})]; }
-.navigation .sous_navigation .item.on { background-color:[#(#ENV{claire}|couleur_eclaircir|couleur_eclaircir)]; }
+/* Conteneur racine <ul> */
+.bando-haut .deroulant {
+	display: flex;
+	flex-flow: row wrap;
+	line-height: 1.2;
+}
+
+/* Items <li> */
+.bando-haut .deroulant__item {
+	flex: 0 1; /* effectif à la racine uniquement, plus bas le conteneur est en display:block */
+	display: block; /* block obligé, cf. notes */
+}
+
+/* Liens <a> */
+.bando-haut .deroulant__lien {
+	display: flex;
+	align-items: center;
+	padding: var(--spip-deroulant-spacing-y) var(--spip-deroulant-spacing-x);
+	font-weight: 500;
+	color: inherit;
+	transition: all 0.1s;
+	position: relative;
+}
+.bando-haut .deroulant__lien .libelle {
+	flex: 1 1 100%;
+}
+.bando-haut .deroulant__item.actif > .deroulant__lien,
+.bando-haut .deroulant__item.actif_tempo > .deroulant__lien,
+.bando-haut .deroulant__item:focus-within > .deroulant__lien {
+	text-decoration: underline;
+	color: var(--spip-color-black);
+	background-color: var(--spip-color-theme-lighter);
+}
+.bando-haut .deroulant__item:focus-within > .deroulant__lien {
+	outline: none;
+	box-shadow: inset 0 0 0 1px var(--spip-color-theme);
+}
+/* Liens des sous-menus : prévoir les icônes à gauche en background */
+.navigation_avec_icones .bando-haut .deroulant__sous-menu .deroulant__lien {
+	padding-#LEFT: calc(var(--spip-deroulant-icon-size) + (var(--spip-deroulant-spacing-x) * 2));
+	background-position: var(--spip-left) var(--spip-deroulant-spacing-x) center;
+	background-size: var(--spip-deroulant-icon-size);
+	background-repeat: no-repeat;
+}
+
+/* Sous-menus <ul> */
+.bando-haut .deroulant__sous-menu {
+	position: absolute !important;
+	#LEFT: -3000em;
+	display: block;
+	width: -webkit-max-content;
+	width: -moz-max-content;
+	width: max-content;
+	max-width: 36em;
+	min-width: 12em;
+	opacity: 0;
+	background-color: var(--spip-color-white);
+	border-radius: var(--spip-border-radius);
+	box-shadow: 0 0.1em 0.1em hsla(0, 0%, 0%, 0.3), 0 0.5em 0.6em hsla(0, 0%, 0%, 0.075);
+	transition: opacity 0.1s;
+}
+/* Ouverture à la prise de focus (css ou javascript) */
+.bando-haut .deroulant__item:focus-within > .deroulant__sous-menu,
+.bando-haut .deroulant__item.actif > .deroulant__sous-menu,
+.bando-haut .deroulant__item.actif_tempo > .deroulant__sous-menu {
+	z-index: 100;
+	#LEFT: auto;
+	opacity: 1;
+}
+/* Ajustements arrondis */
+.bando-haut .deroulant__sous-menu[data-profondeur="1"] {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+.bando-haut .deroulant__sous-menu .deroulant__item:first-child,
+.bando-haut .deroulant__sous-menu .deroulant__item:first-child > .deroulant__lien {
+	border-top-left-radius: inherit;
+	border-top-right-radius: inherit;
+}
+.bando-haut .deroulant__sous-menu .deroulant__item:last-child,
+.bando-haut .deroulant__sous-menu .deroulant__item:last-child > .deroulant__lien {
+	border-bottom-left-radius: inherit;
+	border-bottom-right-radius: inherit;
+}
+/* Sous-menus en colonnes
+   Nb : column-count serait plus adapté mais pose des problèmes
+   pour le placement des sous-menus imbriqués */
+.bando-haut .deroulant__sous-menu[class*=cols-] {
+	max-width: calc(var(--spip-vw) * 0.9);
+	display: grid;
+	grid-gap: 0;
+}
+.bando-haut .deroulant__sous-menu.cols-2 {
+	grid-template-columns: repeat(2, 1fr);
+}
+.bando-haut .deroulant__sous-menu.cols-3 {
+	grid-template-columns: repeat(3, 1fr);
+}
+.bando-haut .deroulant__sous-menu.cols-4 {
+	grid-template-columns: repeat(4, 1fr);
+}
+.bando-haut .deroulant__sous-menu.cols-5 {
+	grid-template-columns: repeat(5, 1fr);
+}
+.bando-haut .deroulant__sous-menu.cols-6 {
+	grid-template-columns: repeat(6, 1fr);
+}
+.bando-haut .deroulant__sous-menu.cols-7 {
+	grid-template-columns: repeat(7, 1fr);
+}
+.bando-haut .deroulant__sous-menu.cols-8 {
+	grid-template-columns: repeat(8, 1fr);
+}
+
+
+/**
+ * ============================
+ * 2. Bandeau liens d'évitement
+ * ============================
+ *
+ * Visibles uniquement à la prise de focus.
+ */
+
+
+.bando-evitement {
+	position: absolute;
+	top: 0;
+	z-index: 0;
+	width: 100%;
+	overflow: hidden;
+	background: var(--spip-color-black);
+	color: var(--spip-color-white);
+}
+.bando-evitement.actif {
+	z-index: 11;
+}
+.bando-evitement a:hover,
+.bando-evitement a:focus {
+	color: var(--spip-color-theme);
+}
+
+
+/**
+ * ===================
+ * 3. Bandeau identité
+ * ===================
+ *
+ * 1er bandeau visible
+ * Voir aussi 1.1 pour les styles mutualisés du menu
+ */
+
+
+.bando-id {
+	z-index: 10;
+	position: relative;
+	overflow: hidden;
+	background: var(--spip-color-theme-lightest);
+	color: var(--spip-color-gray-darkest);
+}
+.bando-id .largeur {
+	display: flex;
+	flex-flow: row wrap;
+}
+/* Menu liens */
+.bando-id .menu-simple {
+	flex: 1 1 100%;
+}
+.bando-id .menu-simple__item * {
+	font-weight: inherit; /* tout unifier, même si <strong> */
+}
+.bando-id a:hover,
+.bando-id a:focus {
+	color: var(--spip-color-theme-dark);
+}
+.bando-id svg.picto-lang {
+	height: 1.3em;
+	width: auto;
+	margin-#RIGHT: 0.33em;
+	fill: currentColor;
+}
+.bando-id svg.picto-lang path {
+	fill: inherit; /* forcer la main (?) */
+}
+/* Responsive */
+@media (min-width: 580px) {
+	.bando-id .largeur {
+		justify-content: space-between;
+	}
+	.bando-id .menu-simple {
+		flex: 0 1 auto;
+	}
+}
+
+
+/**
+ * =====================
+ * 4. Bandeau navigation
+ * =====================
+ *
+ * Menu de navigation principale
+ * Voir aussi 1.2 pour les styles mutualisés
+ */
+
+
+.bando-nav {
+	z-index: 10;
+	background: var(--spip-color-white);
+	color: var(--spip-color-gray-dark);
+}
+
+/* Item <li> à la racine : largeur arbitraire qui doit convenir dans l'ensemble */
+.deroulant_navigation .deroulant__item[data-racine] {
+	flex: 0 1 8.5em;
+}
+
+/* Liens <a> à la racine : centrer, picto au dessus */
+.deroulant_navigation .deroulant__lien[data-racine] {
+	flex-wrap: wrap;
+	justify-content: center;
+	text-align: center;
+}
+.deroulant_navigation .deroulant__item.actif[data-racine] > .deroulant__lien,
+.deroulant_navigation .deroulant__item.actif_tempo[data-racine] > .deroulant__lien,
+.deroulant_navigation .deroulant__item[data-racine]:focus-within > .deroulant__lien,
+.deroulant_navigation .deroulant__lien[data-racine]:focus,
+.deroulant_navigation .deroulant__lien[data-racine]:hover {
+	background-color: transparent;
+}
+
+/* Picto <svg> à la racine */
+.deroulant_navigation .picto {
+	width: var(--spip-bando-nav-picto-size);
+	height: auto;
+	margin-bottom: calc(var(--spip-deroulant-spacing-y) / 2);
+}
+.deroulant_navigation .picto .foreground {
+	fill: var(--spip-color-theme-darker); /* currentColor; */
+}
+.deroulant_navigation .picto .background {
+	fill: var(--spip-color-theme-light);
+}
+.deroulant_navigation .deroulant__item.actif .picto .background,
+.deroulant_navigation .deroulant__item.actif_tempo .picto .background,
+.deroulant_navigation .deroulant__item[data-racine]:focus-within > .deroulant__lien .picto .background,
+.deroulant_navigation .deroulant__lien[data-racine]:focus .picto .background,
+.deroulant_navigation .deroulant__lien[data-racine]:hover .picto .background {
+	fill: var(--spip-color-theme);
+}
+.deroulant_navigation .deroulant__item.actif .picto .foreground,
+.deroulant_navigation .deroulant__item.actif_tempo .picto .foreground,
+.deroulant_navigation .deroulant__item[data-racine]:focus-within > .deroulant__lien .picto .foreground,
+.deroulant_navigation .deroulant__lien[data-racine]:focus .picto .foreground,
+.deroulant_navigation .deroulant__lien[data-racine]:hover .picto .foreground {
+	fill: var(--spip-color-black);
+}
+.navigation_sans_icone .deroulant_navigation .picto {
+	display: none;
+}
+
+/* Favoris */
+.deroulant_navigation .deroulant__item_non-favori {
+	background-color: var(--spip-color-gray-lightest);
+}
+.deroulant_navigation .deroulant__item_favori + .deroulant__item_non-favori {
+	border-top: 1px solid var(--spip-color-gray-lighter);
+}
+
+/* Masquer les outils (obsolète ? Ne semble présent nulle part) */
+.bando-nav #masquer_outils {
+	position: absolute;
+	#RIGHT: -33px;
+	bottom: -23px;
+	height: 18px;
+	width: 18px;
+	background:transparent url([(#VAL{images/fermer-16.png}|find_in_theme)]) center center no-repeat;
+}
+.navigation_sans_outils .bando-nav {
+	/* border-bottom: 1px solid #ddd; */
+}
+.navigation_sans_outils .bando-nav #masquer_outils{
+	background-image: url([(#VAL{images/ouvrir-16.png}|find_in_theme)]);
+}
+.bando-nav #masquer_outils span{
+	display: none;
+}
+
+
+/**
+ * =================
+ * 5. Bandeau outils
+ * =================
+ *
+ * Outils après le menu principal
+ * Voir aussi 1.2 pour les styles mutualisés du menu déroulant
+ */
+
+
+.bando-outils {
+	width: 100%;
+	background: var(--spip-color-theme-light);
+}
+
+/* Layout */
+.bando-outils > .largeur,
+.bando-outils .outils,
+.bando-outils .rapides,
+.bando-outils .rapides__item,
+.bando-outils .rapides__lien {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+.bando-outils .largeur {
+	flex-flow: row wrap;
+	justify-content: flex-start;
+}
+.bando-outils .outils {
+	flex: 1 0 100%;
+}
+@media (min-width: 768px) {
+	.bando-outils .largeur {
+		flex-flow: row nowrap;
+		justify-content: space-between;
+	}
+	.bando-outils .outils {
+		flex: 0 1 auto;
+	}
+}
+
+/* Menus « rapides » */
+.bando-outils .rapides__lien {
+	flex: 0 0 auto;
+	align-items: center;
+	padding: var(--spip-bando-outils-spacing-y) var(--spip-bando-outils-spacing-x);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: var(--spip-bando-outils-icon-size);
+}
+.bando-outils .rapides__lien:hover,
+.bando-outils .rapides__lien:focus {
+	background-color: var(--spip-color-theme-lighter);
+}
+.bando-outils .rapides__lien:focus {
+	outline: none;
+	box-shadow: inset 0 0 0 1px var(--spip-color-theme);
+}
+.bando-outils .rapides__item .libelle {
+	visibility: hidden;
+	display: block;
+	height: var(--spip-bando-outils-icon-size);
+	width: var(--spip-bando-outils-icon-size);
+	overflow: hidden;
+}
+.bando-outils .rapides_collaborer {
+	margin-#RIGHT: 1em;
+}
+
+/* Recherche : faire coller l'input aux bords du bandeau, quelque soit sa hauteur */
+#bando_outils .formulaire_recherche,
+#bando_outils .formulaire_recherche form {
+	display: flex;
+}
+#bando_outils .formulaire_recherche input.text {
+	height: 100%;
+}
+
+/* Plan déroulant : ressérer, icônes customs, ouverture latérale */
+.deroulant.deroulant_rubriques {
+	--spip-deroulant-spacing-y: var(--spip-bando-outils-spacing-y);
+	--spip-deroulant-spacing-x: var(--spip-bando-outils-spacing-x);
+	--spip-deroulant-icon-size: 12px;
+	margin-#RIGHT: 1em;
+}
+/* 1ère entrée : aligner sur les icônes des outils */
+.deroulant_rubriques .deroulant__item_plan {
+	flex: 1 0 auto;
+}
+.deroulant_rubriques .deroulant__item_plan > .deroulant__lien {
+	height: 100%;
+}
+.deroulant_rubriques .picto_plan {
+	width: var(--spip-bando-outils-icon-size);
+	height: auto;
+}
+.deroulant_rubriques .deroulant__item_plan .image_loading {
+	float: var(--spip-right);
+}
+/* Sous-menus s'ouvrant latéralement */
+.deroulant_rubriques .deroulant__sous-menu[data-profondeur="1"] {
+	font-size: 0.9em;
+}
+.deroulant_rubriques .deroulant__sous-menu .deroulant__item {
+	position: relative;
+}
+.deroulant_rubriques .deroulant__item_parent.actif > .deroulant__sous-menu,
+.deroulant_rubriques .deroulant__item_parent.actif_tempo > .deroulant__sous-menu {
+	#LEFT: 4em; /* Décalage arbitraire pas trop grand */
+}
+/* Lien tout voir sans icône */
+.deroulant_rubriques .deroulant__item_tout > .deroulant__lien {
+	background-image: none !important;
+}
+/* Icônes secteur / rubriques selon la profondeur */
+.deroulant_rubriques .deroulant__lien[data-profondeur="1"] {
+	background-image: url(#CHEMIN_IMAGE{secteur-xx.svg});
+}
+.deroulant_rubriques [data-profondeur="2"] .deroulant__lien {
+	background-image: url(#CHEMIN_IMAGE{rubrique-xx.svg});
+}
+/* picto pour indiquer les items dépliants */
+.deroulant_rubriques .deroulant__item_parent > .deroulant__lien {
+	position: relative;
+}
+.deroulant_rubriques .deroulant__item_parent > .deroulant__lien:after {
+	content: '';
+	display: block;
+	width: var(--spip-deroulant-icon-size);
+	height: var(--spip-deroulant-icon-size);
+	background-image: url(#CHEMIN_IMAGE{deplier-right.svg});
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: contain;
+	margin-#LEFT: auto;
+	padding-#LEFT: var(--spip-deroulant-spacing-x);
+}
+
+
+/**
+ * =========
+ * 6. Autres
+ * =========
+ */
+
+
+/* Menu de sous-navigation : à déplacer, rien à voir avec les bandeaux */
+.navigation .sous_navigation {
+	border-top: 0;
+}
+.navigation .sous_navigation .item:last-child {
+	border-bottom: 0;
+}
+.navigation .sous_navigation .item {
+	padding: 0;
+	font-size: 1.05em;
+	border-color: hsla(0, 0%, 0%, 0.1);
+	background-color: transparent;
+}
+.navigation .sous_navigation .item,
+.navigation .sous_navigation .item.on {
+	font-weight: bold;
+}
+.navigation .sous_navigation .item a {
+	position: relative;
+	display: block;
+	margin: 0;
+	padding: 14px;
+	padding-left: 48px;
+	background-position: 14px center;
+	background-size: 24px;
+	background-repeat: no-repeat;
+	color: var(--spip-color-gray-dark);
+	transition: background 0.2s;
+}
+.navigation .sous_navigation .item.on > *,
+.navigation .sous_navigation .item a:hover,
+.navigation .sous_navigation .item a:focus {
+	background-color: var(--spip-color-theme-lighter);
+	color: var(--spip-color-black);
+	/* box-shadow: inset 0 0 1.5em hsla(0, 0%, 0%, 0.05); */
+}
+
 
 /* messages de statut et d'avertissement dans le bandeau */
-div.wrap-messages, div.en_lignes { padding: 5px; border-bottom: 1px solid #ENV{foncee}; font-weight: bold;}
-div.wrap-messages {background:#333;color:#fff;}
-div.messages {margin-top:0;/*font-size: 11px;*/}
-div.messages ul {text-align:left;}
+div.wrap-messages,
+div.en_lignes {
+	padding: 5px;
+	border-bottom: 1px solid #ENV{foncee};
+	font-weight: bold;
+}
+div.wrap-messages {
+	background: #333;
+	color: #fff;
+}
+div.messages {
+	margin-top: 0;
+}
+div.messages ul {
+	text-align: left;
+}
+div.en_lignes { }
 
-div.en_lignes { /*font-size: 10px;*/}
 
+/* Icônes en background-image */
 [(#REM|bando_images_background)]

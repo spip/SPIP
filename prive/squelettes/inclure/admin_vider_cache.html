@@ -14,8 +14,9 @@
 	#SET{cache_inhib,#CONFIG{cache_inhib}|sinon{0}|>{#EVAL{'time()'}}|oui}
 
 	[(#GET{cache_inhib}|oui)
-	<div><strong><:info_cache_desactive:></strong>
-	</div>
+	<div class="msg-alert notice" role="alert" data-alert="notice"><div class="msg-alert__text clearfix">
+		<p><strong><:info_cache_desactive:></strong></p>
+	</div></div>
 	]
 
 #BOITE_PIED

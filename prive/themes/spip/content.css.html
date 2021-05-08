@@ -2,10 +2,6 @@
 
 	Ce squelette definit les styles de l'espace prive
 
-	Note: l'entete "Vary:" sert a repousser l'entete par
-	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
-	genant en cas de "rotation du cookie de session" apres
-	un changement d'IP (effet de clignotement).
 	<style>
 ]
 #CACHE{3600*100,cache-client}
@@ -17,8 +13,67 @@
 /*  Habillage des elements du contenu
 /*  ------------------------------------------ */
 html {background-color:#eee;}
-#pied {font-size:0.9em;border-top:1px solid #ddd;background:#eee;margin-top:[(#ENV{margin-bottom}|strdiv{0.9})em];padding-top:[(#ENV{margin-bottom}|strdiv{0.9})em];overflow:hidden;}
-#copyright {text-align:#ENV{right};}
+
+
+/**
+ * ============
+ * Pied de page
+ * ============
+ */
+#pied {
+	font-size: 0.9em;
+	/* border-top:1px solid #ddd; */
+	background: hsl(0, 0%, 93%);
+	margin-top: var(--spip-margin-bottom);
+	padding-top: calc(var(--spip-margin-bottom) * 1.5);
+	padding-bottom: calc(var(--spip-margin-bottom) * 1.5);
+	overflow: hidden;
+}
+#pied .largeur {
+	display: flex;
+	flex-flow: column;
+}
+/* Texte copyright, liens, infos de version, etc. */
+#copyright *:last-child {
+	margin-bottom: 0;
+}
+/* Logo Spip */
+#pied .lien-logo {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	color: var(--spip-color-theme);
+	margin-top: 2em;
+	transition: color 0.2s;
+}
+#pied .lien-logo:hover,
+#pied .lien-logo:focus {
+	color: var(--spip-color-theme-dark);
+}
+#pied .lien-logo:after {
+	display: none; /* flèche unicode liens sortants */
+}
+#pied svg.logo_spip {
+	/* height: 100%; */
+	height: calc(var(--spip-line-height) * 3); /* ~3 lignes */
+	width: auto;
+}
+/* Responsive */
+@media (min-width: 580px) {
+	#pied .largeur {
+		flex-flow: row nowrap;
+		justify-content: flex-end;
+	}
+	#copyright {
+		flex: 10;
+		text-align: var(--spip-right);
+	}
+	#pied .lien-logo {
+		margin-#LEFT: 1.5em;
+		margin-top: 0;
+	}
+}
+
 
 #chemin { overflow: hidden; margin: 0; padding: 0;	text-align:#ENV{left};}
 @media (min-width: 1200px) {
@@ -35,7 +90,7 @@ html {background-color:#eee;}
 
 #chemin .aide {padding-top: 0px; }
 
-#haut h1,#contenu h1 {color:#ENV{foncee};}
+#haut h1,#contenu h1 {color: var(--spip-color-theme-dark);}
 
 /* Liens hypertexte */
 a { text-decoration: none; color: [#(#ENV{foncee}|couleur_foncer{0.25})]; }
@@ -99,24 +154,7 @@ li .puce_article_popup, li.puce_breve_popup,li.puce_site_popup { padding: 0; }*/
 #contenu .fiche_objet > .inner > .bd {padding-top: 0;}
 
 .infos .instituer_objet {border-bottom:1px solid #eee;margin-bottom:[(#ENV{margin-bottom}|strmult{0.5})em];}
-.infos .formulaire_instituer {background: none;border: 0;margin:0 -10px;}
-.infos .formulaire_instituer .reponse_formulaire {display: none;}
-.infos .formulaire_instituer ul {padding-bottom: 0;margin-bottom: 0;}
-.infos .formulaire_instituer .editer {padding-left: 10px;padding-right: 10px;}
-.infos .formulaire_instituer .show {display:block; margin:0 -10px;padding:10px;background-color: #eee;}
-.infos .formulaire_instituer .show select {width: 100%;}
-.infos .formulaire_instituer .show select,
-.infos .formulaire_instituer .show option {background-repeat:no-repeat;background-position: 4px center;background-color: #eee;color:inherit;}
-.infos .formulaire_instituer .show img {border: 1px solid white;}
-.infos .formulaire_instituer .boutons {background: none;border-top: 0;}
 
-.infos .formulaire_instituer .statut_prepa .show {background-color: #fff;}
-.infos .formulaire_instituer .statut_prop .show {background-color: #f89058;}
-.infos .formulaire_instituer .statut_publie .show {background-color: #9dba00;}
-.infos .formulaire_instituer .statut_poubelle .show {background-color: #000;color:#fff;}
-.infos .formulaire_instituer .statut_poubelle .show select,
-.infos .formulaire_instituer .statut_poubelle .show option {color:#333;}
-.infos .formulaire_instituer .statut_refuse .show {background-color: #ff0000;}
 
 #wysiwyg .label { clear: both;color:#888;}
 #wysiwyg div p { margin-top: 0; }
@@ -143,7 +181,7 @@ li .puce_article_popup, li.puce_breve_popup,li.puce_site_popup { padding: 0; }*/
 #wysiwyg .contenu_ps { background:#eeeeee; border: 1px solid #ccc; padding: 1em 1em 0em 1em; margin: 1em 0 ;}
 #wysiwyg .contenu_nom_site {padding: 1em;}
 #wysiwyg .contenu_descriptif .label {color:#000;background:none;display:inline;font-size:1.1em;font-weight:bold;}
-#wysiwyg .label { display: block; font-weight: bold; color:#ENV{foncee};}
+#wysiwyg .label { display: block; font-weight: bold; color:#ENV{foncee}; font-family: var(--spip-font-family);font-size: 85%;}
 #wysiwyg .label.label-none { display: none !important;}
 #wysiwyg .label.label-inline { display: inline !important;}
 #wysiwyg .label.label-inline-block { display: inline-block !important;}

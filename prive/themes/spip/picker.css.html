@@ -27,32 +27,191 @@ option.niveau_4 { background:#eee; color: #606060; }
 option.niveau_5 { background:#eee; color: #808080; }
 option.niveau_6 { background:#eee; color: #a0a0a0; }
 
+/* Plongeur
+ * Voir aussi à la fin des règles du selecteur ajax */
+div.petite-racine,
+a.petite-racine {
+	background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat;
+	background-image: url(#CHEMIN_IMAGE{racine-xx.svg});
+	background-size: 12px;
+	padding-#LEFT: 15px;
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+	background-color: #fff;
+	border: 1px solid var(--spip-form-border-color);
+	border-bottom: 0;
+	width: 10em;
+	border-top-left-radius: var(--spip-form-border-radius);
+	border-top-right-radius: var(--spip-form-border-radius);
+}
+div.petite-rubrique,
+a.petite-rubrique {
+	background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat;
+	background-image: url(#CHEMIN_IMAGE{rubrique-xx.svg});
+	background-size:12px;
+	padding-#LEFT: 15px;
+	cursor: pointer;
+}
+div.petit-secteur,
+a.petit-secteur {
+	background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat;
+	background-image: url(#CHEMIN_IMAGE{secteur-xx.svg});
+	background-size: 12px;
+	padding-#GET{left}: 15px;
+}
+div.rub-ouverte,
+a.rub-ouverte {
+	padding-#RIGHT: 10px;
+	background: url([(#CHEMIN_IMAGE{triangle-droite[(#GET{rtl})].gif})]) var(spip-css-right) center no-repeat;
+}
 
-/* plongeur */
-div.petite-racine { margin-bottom: -5px; }
-div.petite-racine, a.petite-racine { background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat; background-image: url(#CHEMIN_IMAGE{racine-xx.svg}); background-size:12px; padding-#GET{left}: 15px; background-color: #fff; border: 1px solid #GET{foncee}; border-bottom: 0; width: 134px; }
-div.petite-rubrique, a.petite-rubrique { background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat; background-image: url(#CHEMIN_IMAGE{rubrique-xx.svg}); background-size:12px; padding-#GET{left}: 15px; }
-div.petit-secteur, a.petit-secteur { background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat; background-image: url(#CHEMIN_IMAGE{secteur-xx.svg}); background-size: 12px; padding-#GET{left}: 15px; }
-div.rub-ouverte, a.rub-ouverte { padding-#GET{right}: 10px; background: url([(#CHEMIN_IMAGE{triangle-droite[(#GET{rtl})].gif})]) [(#GET{right})] center no-repeat; }
-/* selecteur ajax */
-#choix_parent_principal { background: #fff; border: 1px solid #GET{foncee}; position: relative; height: 170px; overflow: auto; margin-top:5px;}
-.recherche_rapide_parent {margin-top: -25px;float:right; }
-.rubrique_actuelle {height: 25px; }
-#selection_rubrique .informer { background: #fff; }
-.informer-auteur { background: #fff; padding: 5px; border-top: 0; }
+/* Selecteur ajax */
+.rubrique_actuelle {
+	margin-top: 1em;
+	clear: both;
+	display: flex;
+	align-items: center;
+}
+#titreparent[disabled=disabled] {
+	width: 100% !important;
+	border: none;
+	background: none;
+	color: inherit;
+	font-weight: 500;
+	padding: 0;
+}
+.rubrique-search {
+	color: var(--spip-color-theme);
+	border: 1px solid var(--spip-color-theme);
+	border-radius: 99em;
+	padding: 0.33em;
+}
+.rubrique-search:hover,
+.rubrique-search:focus {
+	color: var(--spip-color-theme-darker);
+	border: 1px solid var(--spip-color-theme-darker);
+}
+.rubrique-search.toggled {
+	background-color: var(--spip-color-theme);
+	border-color: var(--spip-color-theme);
+	color: var(--spip-color-white);
+}
+.rubrique-search.toggled:hover,
+.rubrique-search.toggled:focus {
+	background-color: var(--spip-color-theme-darker);
+	border-color: var(--spip-color-theme-darker);
+}
+.rubrique-search svg {
+	width: 0.85em;
+	height: 0.85em;
+}
+.recherche_rapide_parent {
+	margin-top: -2.2em;
+	float: var(--spip-right);
+	display: flex;
+	align-items: center;
+	/* fond de couleur par-dessus le titre */
+	position: relative;
+	z-index: 2;
+	padding-left: 2em;
+	background-image: linear-gradient(90deg, transparent 0%, var(--spip-color-theme-lightest) 2em);
+}
+#chemin .recherche_rapide_parent {
+	background-image: linear-gradient(90deg, transparent 0%, #fcfcfc 2em);
+}
+.recherche_rapide_parent input.search {
+	border-radius: 99em;
+	padding: 0.33em 1em;
+}
+.recherche_rapide_parent .loader {
+	order: 2;
+}
+/**/
+#choix_parent{
+	margin-top: 0.5em;
+}
+#choix_parent_principal {
+	position: relative;
+	height: 10em;
+	overflow: auto;
+	background: var(--spip-color-theme-white);
+	border: 1px solid var(--spip-form-border-color);
+	border-top-left-radius: var(--spip-form-border-radius);
+	border-top-right-radius: var(--spip-form-border-radius);
+}
+#choix_parent_selection {
+	margin-top: -1px;
+}
+.informer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.5em !important;
+	border-bottom-left-radius: var(--spip-form-border-radius);
+	border-bottom-right-radius: var(--spip-form-border-radius);
+	background-color: var(--spip-color-theme-light);
+}
+.informer__titre,
+.informer__descriptif,
+.informer__media {
+	margin-bottom: 0.5em;
+}
+.informer__media {
+	margin-#RIGHT: 0 !important;
+	margin-top: 0 !important;
+	margin-#LEFT: 1em;
+}
+.informer__action {
+	margin-#LEFT: 1em;
+}
+.informer .btn {
+	margin: 0;
+}
+.informer-auteur {
+	/* background: #fff; */
+	/* padding: 5px; */
+	/* border-top: 0; */
+}
+/**/
+#choix_parent .item {
+	color: var(--spip-color-gray-dark);
+	background-color: var(--spip-color-white);
+	display: block;
+}
+#choix_parent .item.on {
+	color: var(--spip-color-black);
+	background-color: var(--spip-color-theme-lighter);
+}
+#choix_parent .item.on {
+	color: var(--spip-color-black);
+}
+#choix_parent .item:hover {
+	color: var(--spip-color-black);
+	cursor: pointer;
+}
+/* voir aussi règles du plongeur */
+#choix_parent .petit-item > div {
+	display: flex; /* rendre tout le bloc cliquable */
+}
+#choix_parent .petit-item a {
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+	padding-#RIGHT: 0.2em;
+	flex: 1 1 auto;
+	color: inherit;
+}
+#choix_parent .petit-item:hover,
+#choix_parent .petit-item:focus {
+	background-color: var(--spip-color-theme-lightest);
+}
 
-#choix_parent .item { color: #666; background-color: #fff; }
-#choix_parent_principal .item { padding: 2px; display: block; }
-#choix_parent .item.on { color: #000; background-color: #ccc; }
-#choix_parent .item.on a {color:#000;}
-#choix_parent .item:hover a { color: #000; cursor: pointer; }
 
 /* ----- */
 
 /* Les éléments propres à chaque objet */
 <BOUCLE_objets(POUR){tableau (#REM|lister_tables_objets_sql)}>
 [(#SET{petite_icone, [(#CHEMIN_IMAGE{#VALEUR{icone_objet}-12.png}|sinon{[(#CHEMIN_IMAGE{#VALEUR{icone_objet}-16.png}|image_reduire{12}|extraire_attribut{src})]})]})]
-ul.item_picked li.#VALEUR{type} {padding-#GET{left}:15px;background-image:url(#GET{petite_icone});}
+ul.item_picked li.#VALEUR{type} {padding-#GET{left}:15px;background-image:url(#GET{petite_icone});background-size:12px;}
 .item_picker .[(#VALEUR{table_objet})] .type_objet {padding-#GET{left}:15px; background:url(#GET{petite_icone}) no-repeat[ (#GET{left}) ]center; background-size:12px;}
 .item_picker .frame ul li.#VALEUR{type} {background:url(#GET{petite_icone}) no-repeat[ (#GET{left}) ]2px;background-size:12px;}
 </BOUCLE_objets>

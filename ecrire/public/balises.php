@@ -2471,7 +2471,7 @@ function balise_PLUGIN_dist($p) {
  * @link https://www.spip.net/4733
  * @example
  *     ```
- *     #AIDER{titre}
+ *     #AIDER{raccourcis}
  *     ```
  *
  * @param Champ $p
@@ -2481,9 +2481,7 @@ function balise_PLUGIN_dist($p) {
  **/
 function balise_AIDER_dist($p) {
 	$_motif = interprete_argument_balise(1, $p);
-	$s = "'" . addslashes($p->descr['sourcefile']) . "'";
-	$p->code = "((\$aider=charger_fonction('aide','inc',true))?\$aider($_motif,$s, \$Pile[0]):'')";
-
+	$p->code = "((\$aider=charger_fonction('aide','inc',true))?\$aider($_motif):'')";
 	return $p;
 }
 
@@ -2519,14 +2517,14 @@ function balise_ACTION_FORMULAIRE($p) {
 
 	// envoyer le nom du formulaire que l'on traite
 	// transmettre les eventuels args de la balise formulaire
-	$p->code = "	'<div>' .
+	$p->code = "	'<span class=\"form-hidden\">' .
 	form_hidden($_url) .
 	'<input name=\'formulaire_action\' type=\'hidden\'
 		value=\'' . $_form . '\' />' .
 	'<input name=\'formulaire_action_args\' type=\'hidden\'
 		value=\'' . @\$Pile[0]['formulaire_args']. '\' />' .
 	(!empty(\$Pile[0]['_hidden']) ? @\$Pile[0]['_hidden'] : '') .
-	'</div>'";
+	'</span>'";
 
 	$p->interdire_scripts = false;
 

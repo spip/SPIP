@@ -559,8 +559,9 @@ function calculer_langues_utilisees($serveur = '') {
 			$boucle->return = '$Pile[$SP][\'lang\']';
 			$boucle->iterateur = 'sql';
 
-			$boucle->descr['nom'] = 'objet_test_si_publie'; // eviter notice php
+			$boucle->descr['nom'] = 'calculer_langues_utilisees'; // eviter notice php
 			$boucle->descr['sourcefile'] = 'internal';
+			$boucle->descr['gram'] = 'html';
 
 			$boucle = pipeline('pre_boucle', $boucle);
 

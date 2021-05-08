@@ -5,7 +5,7 @@
 	url="https://trad.spip.net"
 	source="https://git.spip.net/spip/spip.git"
 	reference="fr">
-	<langue code="ar" url="https://trad.spip.net/tradlang_module/spip?lang_cible=ar" total="648" traduits="641" relire="0" modifs="0" nouveaux="7" pourcent="98.92">
+	<langue code="ar" url="https://trad.spip.net/tradlang_module/spip?lang_cible=ar" total="648" traduits="648" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
 	<langue code="ast" url="https://trad.spip.net/tradlang_module/spip?lang_cible=ast" total="648" traduits="582" relire="0" modifs="12" nouveaux="54" pourcent="89.81">
@@ -54,7 +54,7 @@
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Yannick Bailly" lien="https://trad.spip.net/auteur/yannick-bailly" />
 	</langue>
-	<langue code="en" url="https://trad.spip.net/tradlang_module/spip?lang_cible=en" total="648" traduits="641" relire="0" modifs="0" nouveaux="7" pourcent="98.92">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/spip?lang_cible=en" total="648" traduits="648" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="cedric" lien="https://trad.spip.net/auteur/fil" />
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
@@ -185,7 +185,7 @@
 		<traducteur nom="Cláudia Anjos Lopes" lien="https://trad.spip.net/auteur/claudia_a_lopes" />
 		<traducteur nom="Fernando Ferreira" lien="https://trad.spip.net/auteur/fernando-ferreira" />
 	</langue>
-	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/spip?lang_cible=pt_br" total="648" traduits="636" relire="0" modifs="2" nouveaux="10" pourcent="98.15">
+	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/spip?lang_cible=pt_br" total="648" traduits="648" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="filipaun" lien="https://trad.spip.net/auteur/filipaun" />
 		<traducteur nom="joao1315" lien="https://trad.spip.net/auteur/joao1315" />
 		<traducteur nom="quijaua" lien="https://trad.spip.net/auteur/quijaua" />

@@ -1,126 +1,584 @@
 [(#REM)
 
-	Ce squelette definit les styles de l'espace prive
+	Ce squelette définit les styles des boîtes de l'espace privé.
 
-	Note: l'entete "Vary:" sert a repousser l'entete par
-	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
-	genant en cas de "rotation du cookie de session" apres
-	un changement d'IP (effet de clignotement).
-	<style>
-]
+	Ce composant correspond aux balises #BOITE_OUVRIR et cie.
+
+	L'entête et le pied sont optionnels.
+	Les boîtes simples reprennent un style proche des formulaires.
+
+	Organisation du fichier :
+
+	0. Variables
+	1. Layout et rythme vertical
+	2. Base graphique commune
+	3. Variantes principales
+	4. Variantes d'états
+	5. Autres variantes
+	6. Cas particuliers
+	7. Déprécations
+
+	Markup :
+
+	.box
+	  .box__header
+	  .box__body
+	  .box__footer
+
+<style>]
 #CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=utf-8}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
-[(#INCLURE{prive/themes/spip/box.css})]
-/* ajustement des marges selon grille verticale en em */
-.box{margin:[(#ENV{margin-bottom}|strmult{1.5})em] 0;}
-.bd {padding:[(#ENV{margin-bottom}|strdiv{2})em] 10px;}
-.bd > :first-child,.bd > :first-child > :first-child {margin-top:0;}
-.bd > :last-child {margin-bottom:0;}
-.hd, .ft {padding:[(#ENV{margin-bottom}|strdiv{2})em] 10px;}
-.hd h1,.hd h2,.hd h3,.hd h4,.hd h5,.hd h6 {margin-bottom:0;}
 
-/* **************** BLOCK SKINS ***************** */
-/* ====== Contour blocks ====== */
-/* remove *background-image:" to default to square corners for IE */
-/* ----- simple (extends box) ----- */
-.simple .inner {border:1px solid #ccc;background-color:#fcfcfc;color:#333;}
-.simple .inner .hd {}
-.simple b{}
-/* ----- info (extends box) ----- */
-.info .inner {border:2px solid #ENV{claire};background:#fcfcfc;}
-.info .inner .hd {}
-.info b{}
-/* ----- note (extends box) ----- */
-.note,.note .inner{border:1px solid #c2c2c2;}
-.note .inner{border-color:#eee; border-width:4px; background-color:[#(#ENV{claire}|couleur_eclaircir{0.85})];}
-.note .inner .hd {}
-
-/* ----- raccourcis (extends box) ----- */
-.raccourcis .inner{border:1px solid #ccc;background-color:#eee;}
-.note .inner .hd {}
-
-/* ----- important (extends box) ----- */
-.important .inner{border: 3px solid [(#ENV{foncee})]; border-bottom-width:10px;background:#fff;}
-.important b{}
-
-/* ----- basic (extends box) ----- */
-.basic {/*margin-bottom: -1px*/}
-.basic .inner {/*padding-bottom: 1px;*/border: 1px solid #aaa;}
-.basic .inner .hd {}
-.basic b{}
-
-/* ----- error, success, notice (extends box) ----- */
-.box.error, .box.success, .box.notice {padding:0;backround-image:none;}
-.error .inner,.success .inner,.notice .inner{border:2px solid;font-weight: normal;color:#333;}
-.error .bd,.success .bd,.notice .bd {padding-[(#ENV{left})]:40px;min-height:24px;background-repeat:no-repeat;background-position: [(#ENV{left}) ]2px top 5px;background-size:32px;}
-.box.error .hd,.box.success .hd,.box.notice .hd {padding-[(#ENV{left})]:40px;}
-.error .ft,.success .ft,.notice .ft {padding-[(#ENV{left})]:40px;}
-.box.error .ft,.box.success .ft,.box.notice .ft {border-color:#ddd;background-color:#eee;}
-
-.success .inner{color: #264409;border-color: #C6D880;background-color:#E6EFC2;}
-.success .bd{background-image:url(#CHEMIN_IMAGE{ok-32.png});}
-.box.success .inner .hd {background-color:#C6DF61;}
-.box.success .hd h1,.box.success .hd h2,.box.success .hd h3,.box.success .hd h4,.box.success .hd h5,.box.success .hd h6 {background-color:#C6DF61;}
-
-.error .inner{color: #8A1F11;border-color: #FBC2C4;background-color:#FBE3E4;}
-.error .bd{background-image:url(#CHEMIN_IMAGE{erreur-32.png});}
-.box.error .inner .hd {background-color:#DF454F;color:#fff;}
-.box.error .hd h1,.box.error .hd h2,.box.error .hd h3,.box.error .hd h4,.box.error .hd h5,.box.error .hd h6 {background-color:#DF454F;color:#fff;}
-
-.notice .inner{color: #514721;border-color: #FFD324;background-color:#FFF6BF;}
-.notice .bd{background-image:url(#CHEMIN_IMAGE{warning-32.png});}
-.box.notice .inner .hd {background-color:#FFD83F;}
-.box.notice .hd h1,.box.notice .hd h2,.box.notice .hd h3,.box.notice .hd h4,.box.notice .hd h5,.box.notice .hd h6 {background-color:#FFD83F;}
+/**
+ * ============
+ * 0. Variables
+ * ============
+ */
 
 
-/* ====== Background blocks ====== */
-.highlight > .inner{background-color:#ENV{claire}; border: 0; box-shadow: 0 0 15px #ccc;}
-.inverse .inner{background-color:#ENV{foncee};color:#ffffff}
-
-/* ====== Block headers and footers ====== */
-.hd.titrem { background-repeat: no-repeat; padding-[(#ENV{left})]:16px; padding-[(#ENV{right})]:10px;
-background-color: [#(#ENV{foncee}|couleur_eclaircir)];color: #4A4A4A; font-size:[(#ENV{line-height}|strmult{1})em];position:relative;line-height: 1;}
-.hd.titrem h1,.hd.titrem h2,.hd.titrem h3,.hd.titrem h4,.hd.titrem h5,.hd.titrem h6{ font-size: 1em; color:#4A4A4A;}
-
-.section{ background-repeat: no-repeat; padding-[(#ENV{left})]:16px; padding-[(#ENV{right})]:10px;
-background-color: #ENV{foncee}; color: #4A4A4A;font-size:1.2em;position:relative;}
-.section h1,.section h2,.section h3,.section h4,.section h5,.section h6{font-size:100%;color:#4A4A4A;padding:0;margin:0;}
-
-.bam{ background-repeat: no-repeat; padding-[(#ENV{left})]:16px; padding-[(#ENV{right})]:10px;
-background-color: [#(#ENV{foncee}|couleur_foncer)]; color: #fff;font-size:1.2em; position:relative;}
-.bam h1,.bam h2,.bam h3,.bam h4,.bam h5,.bam h6{font-size:100%;color:#fff;padding:0;margin:0;}
-
-.topper{ background-repeat: no-repeat; padding-[(#ENV{left})]:16px; padding-[(#ENV{right})]:10px;
-background-color: #fff; color: #4A4A4A;font-size:1.2em; position:relative;}
-.topper h1,.topper h2,.topper h3,.topper h4,.topper h5,.topper h6{font-size:100%;color:#4A4A4A;padding:0;margin:0;}
-
-.act{	[background-color: #(#ENV{claire}|couleur_eclaircir);]
-	[border-top: 1px solid (#ENV{claire});]
-	margin-top:-1px;
-	clear:both;
-	text-align: #ENV{right};
+/* Nb : la media-query au début sinon pb (?) */
+@media (min-width: 768px) {
+	:root {
+		--spip-box-iconsize: 32px;
+		--spip-box-highlightsize: 1.5rem;
+	}
+}
+/* On reprend certaines valeurs des formulaires pour harmoniser */
+:root {
+	/* base pour les espacements internes */
+	--spip-box-spacing-x: var(--spip-form-spacing-x);
+	--spip-box-spacing-y: var(--spip-form-spacing-y);
+	/* couleurs */
+	--spip-box-sep-color: hsla(0, 0%, 0%, 0.125);
+	--spip-box-border-color: hsla(0, 0%, 0%, 0.125); /* bordure basique */
+	--spip-box-sep-color-inverse: hsla(0, 0%, 100%, 0.1);
+	/* divers */
+	--spip-box-border-radius: var(--spip-form-border-radius);
+	--spip-box-iconsize: 24px;
+	--spip-box-highlightsize: 1rem; /* largeur bordure colorée sur boîtes d'états */
+	--spip-box-caretsize: 2rem; /* picto dépliant */
+}
+.lat .box,
+.box.mini {
+	--spip-box-iconsize: 24px;
+	--spip-box-highlightsize: 1rem;
+	/* Obligé de reprendre à la main les mêmes valeurs que les forms */
+	--spip-box-spacing-x: 0.75rem;
+	--spip-box-spacing-y: 0.75rem;
 }
 
-/* Cas particuliers */
-.simple.sous-rub .inner .hd {padding:0}
-.simple.sous-rub .inner .hd .logo {float:#ENV{right};margin: 1px 5px 0;margin-#ENV{right}: -9px;z-index:2;position:relative;}
-.simple.sous-rub .sous-sous-rub {margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;}
 
-/* vieilles boites depliables/repliables
-  encore maintenues mais depreciees
+/**
+ * ============================
+ * 1. Layout et rythme vertical
+ * ============================
+ */
+
+
+.box,
+.box * {
+	box-sizing: border-box;
+}
+
+/* La marge externe doit être identique entre plusieurs composants (formulaires, …).
+   Plus tard il faudra se baser sur spip-spacing-y quand ça sera au point.
+   Pour l'instant on laisse la valeur historique. */
+.box {
+	position: relative;
+	margin: calc(var(--spip-margin-bottom) * 1.5) 0;
+}
+/* Même padding partout, ajusté pour le footer */
+.box__header, .box__body, .box__footer {
+	position: relative;
+	padding: var(--spip-box-spacing-y) var(--spip-box-spacing-x);
+}
+.box__footer {
+	padding-top: calc(var(--spip-box-spacing-y) / 2);
+	padding-bottom: calc(var(--spip-box-spacing-y) / 2);
+}
+/* Annuler marges inutiles au début et à la fin */
+.box__body > :first-child,
+.box__body > :first-child > :first-child {
+	margin-top: 0;
+}
+.box__body > :last-child {
+	margin-bottom: 0;
+}
+.box__header h1, .box__header h2, .box__header h3, .box__header h4, .box__header h5, .box__header h6 {
+	margin-bottom: 0;
+}
+.box__footer .btn,
+.box__footer button,
+.box__footer .groupe-btns {
+	margin-bottom: 0;
+}
+
+
+/**
+ * =========================
+ * 2. Base graphique commune
+ * =========================
+ */
+
+
+/* Conteneur + obligé de reset les styles des vieux messages d'alertes */
+.box,
+.box.notice, .box.error, .box.success {
+	padding: 0;
+	background: var(--spip-color-white);
+	border: 1px solid var(--spip-box-border-color);
+	border-radius: var(--spip-box-border-radius);
+	color: var(--spip-color-black);
+	box-shadow: none;
+	transition: box-shadow 0.2s;
+}
+
+/* Header */
+.box__header {
+	border-top-left-radius: inherit;
+	border-top-right-radius: inherit;
+	border-bottom: 1px solid var(--spip-box-sep-color);
+}
+
+/* Body : sans titre et/ou sans footer, ajuster l'arrondi */
+.box__body:first-child {
+	border-top-left-radius: var(--spip-box-border-radius);
+	border-top-right-radius: var(--spip-box-border-radius);
+}
+.box__body:only-child {
+	border-bottom-left-radius: var(--spip-box-border-radius);
+	border-bottom-right-radius: var(--spip-box-border-radius);
+}
+
+/* Footer */
+.box__footer {
+	border-bottom-left-radius: inherit;
+	border-bottom-right-radius: inherit;
+	background-color: var(--spip-color-gray-lightest);
+	text-align: var(--spip-right);
+}
+
+/* Titres
+   Règle : si h3, c'est le style par défaut, et on mutualise avec les titres des formulaires (taille, graisse, …).
+	 Si autre balise et qu'on veut forcer le style par défaut, utiliser la variante .titrem sur le header.  */
+.box__header h3,
+.box__header.titrem h1, .box__header.titrem h2, .box__header.titrem h3, .box__header.titrem h4, .box__header.titrem h5, .box__header.titrem h6,
+.formulaire_spip .titrem {
+	font-size: 1.2em;
+	font-weight: 800;
+	/* color: var(--spip-color-theme-dark); */
+}
+
+/* En colonne latérale (+ voir variables au début) */
+.lat .box {
+	font-size: 0.95em;
+}
+.lat .box__header h1, .lat .box__header h2, .lat .box__header h3, .lat .box__header h4, .lat .box__header h5, .lat .box__header h6,
+.lat .formulaire_spip .titrem  {
+	font-size: 1em;
+}
+
+
+/**
+ * ========================
+ * 3. Variantes principales
+ * ========================
+ */
+
+
+/* Simple  = boîte par défaut */
+.box.simple {}
+
+/* Info */
+.box.info {
+	border: 3px solid var(--spip-color-theme-light);
+	background-color: var(--spip-color-white);
+}
+
+/* Note */
+.box.note {
+	border: 3px solid var(--spip-color-theme-lighter);
+	background-color: var(--spip-color-theme-lightest);
+}
+
+/* Raccourcis */
+.box.raccourcis {
+	background-color: var(--spip-color-gray-lighter);
+	border: 0;
+}
+
+/* Important */
+.box.important {
+	border: 3px solid var(--spip-color-theme);
+	background: var(--spip-color-white);
+}
+
+/* Highlight */
+.box.highlight {
+	background-color: var(--spip-color-theme-light);
+	border: 0;
+}
+.box.highlight .box_header {
+	border-bottom-color: var(--spip-box-sep-color);
+}
+.box.highlight .box_header * {
+	color: inherit;
+}
+
+/* Inverse */
+.box.inverse {
+	background-color: var(--spip-color-gray-darker);
+	color: var(--spip-color-white);
+}
+.box.inverse .box__header {
+	border-bottom-color: var(--spip-box-sep-color-inverse);
+}
+.box.inverse .box__header * {
+	color: inherit;
+}
+
+
+/**
+ * ====================
+ * 4. Variantes d'états
+ * ====================
+ */
+
+
+/* Emballage */
+.box.notice, .box.error, .box.success {
+	box-shadow: var(--spip-box-shadow);
+	border: 0;
+}
+.box.notice:hover, .box.error:hover, .box.success:hover,
+.box.notice:focus-within, .box.error:focus-within, .box.success:focus-within {
+	box-shadow: var(--spip-box-shadow-hover);
+}
+/* Icône centrée verticalement dans le header */
+.box.notice .box__header, .box.error .box__header, .box.success .box__header,
+.box.notice .box__body, .box.error .box__body, .box.success .box__body {
+	background-repeat: no-repeat;
+	background-size: var(--spip-box-iconsize);
+	background-position: var(--spip-left) var(--spip-box-spacing-x) center;
+}
+/* Décommenter s'il faut centrer l'icône sur la 1ère ligne de texte dans le body */
+/*.notice .box__body, .error .box__body, .success .box__body {
+	background-position: var(--spip-left) var(--spip-box-spacing-x) top calc(var(--spip-box-spacing-y) - ((var(--spip-box-iconsize) - var(--spip-line-height)) / 2));
+}*/
+/* Espacement pour l'icône selon qu'elle soit dans le header ou dans le body */
+.box.notice .box__header, .box.error .box__header, .box.success .box__header,
+.box.notice .box__body:first-child, .box.error .box__body:first-child, .box.success .box__body:first-child {
+	padding-#LEFT: calc(var(--spip-box-iconsize) + (var(--spip-box-spacing-x) * 2));
+}
+/* Bordure sur le côté */
+.box.notice .box__header, .box.error .box__header, .box.success .box__header,
+.box.notice .box__body, .box.error .box__body, .box.success .box__body,
+.box.notice .box__footer, .box.error .box__footer, .box.success .box__footer {
+	border-#LEFT: var(--spip-box-highlightsize) solid transparent;
+}
+/* Mini hack : sous le header on met la bordure basse en pseudo pour ne pas empiéter la bordure latérale colorée */
+.box.notice .box__header, .box.error .box__header, .box.success .box__header {
+	border-bottom: 0;
+}
+.box.notice .box__header:before, .box.error .box__header:before, .box.success .box__header:before {
+	content: "";
+	display: block;
+	z-index: 2;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-bottom: 1px solid var(--spip-box-sep-color);
+}
+
+/* Notice */
+.box.notice .box__header,
+.box.notice .box__body {
+	border-#LEFT-color: hsl(var(--spip-color-notice--h), var(--spip-color-notice--s), 60%);
+}
+.box.notice .box__footer {
+	border-#LEFT-color: hsl(var(--spip-color-notice--h), var(--spip-color-notice--s), 50%);
+}
+.box.notice .box__header,
+.box.notice .box__body:first-child {
+	background-image: url(#CHEMIN_IMAGE{warning-32.png});
+}
+
+/* Erreur */
+.box.error .box__header,
+.box.error .box__body {
+	border-#LEFT-color: hsl(var(--spip-color-error--h), var(--spip-color-error--s), 60%);
+}
+.box.error .box__footer {
+	border-#LEFT-color: hsl(var(--spip-color-error--h), var(--spip-color-error--s), 50%);
+}
+.box.error .box__header,
+.box.error .box__body:first-child {
+	background-image: url(#CHEMIN_IMAGE{erreur-32.png});
+}
+
+/* Succès */
+.box.success .box__header,
+.box.success .box__body {
+	border-#LEFT-color: hsl(var(--spip-color-success--h), var(--spip-color-success--s), 55%);
+}
+.box.success .box__footer {
+	border-#LEFT-color: hsl(var(--spip-color-success--h), var(--spip-color-success--s), 48%);
+}
+.box.success .box__header,
+.box.success .box__body:first-child {
+	background-image: url(#CHEMIN_IMAGE{ok-32.png});
+}
+
+
+/**
+ * ===================
+ * 5. Autres variantes
+ * ===================
+ */
+
+
+/* Flat : sans ombre portée.
+   Peut se conjuguer aux autres quand on veut forcer.
+   Certaines le sont d'office, notamment les boîtes imbriquées.
+	 Une bordure est ajoutée si nécessaire. */
+.box.flat,
+.box .box:not(.pop) /* imbriquées */
+{
+	box-shadow: none !important;
+}
+.box.notice.flat,
+.box.error.flat,
+.box.success.flat,
+.box .box.notice:not(.pop), /* imbriquées */
+.box .box.error:not(.pop),
+.box .box.success:not(.pop) {
+	border: 1px solid var(--spip-box-border-color);
+}
+
+/* Pop : avec une ombre portée.
+   Peut se conjuguer aux autres quand on veut forcer.
+	 Il faut ajuster la bordure dans certains cas */
+.box.pop {
+	box-shadow: var(--spip-box-shadow);
+}
+.box.pop:hover,
+.box.pop:focus-within {
+	box-shadow: var(--spip-box-shadow-hover);
+}
+.box.pop:not(.note):not(.info):not(.important) {
+	border: 0;
+}
+
+
+/**
+ * ===================
+ * 6. Cas particuliers
+ * ===================
+ */
+
+
+/**
+ * Boîte fiche objet
+ * Pas de bordure de séparation donc on resserre l'espacement
+ */
+.box.fiche_objet .box__header {
+	border-bottom: 0;
+	padding-bottom: calc(var(--spip-box-spacing-y) / 2);
+}
+.box.fiche_objet .box__body {
+	padding-top: calc(var(--spip-box-spacing-y) / 2);
+}
+
+
+/**
+ * Menu des rubriques dépliables.
+ * Ici principalement la décoration de base.
+ * Pour les choses propres au JS, voir plus bas.
+ */
+.box.sous-rub {}
+.box.sous-rub a {
+	transition: background 0.1s;
+}
+.box.sous-rub a:hover {
+	background-color: var(--spip-color-theme-lightest);
+}
+/* Header :
+  .box__header
+    .titrem
+        a.titremancre
+        a
+        .logo
+    .descriptif */
+.box.sous-rub .box__header {
+	padding: 0;
+	border-bottom: 0;
+	border-radius: inherit;
+}
+/* Conteneur titre + logo + picto */
+.box.sous-rub .titrem {
+	display: flex;
+	font-size: 1em;
+	background-repeat: no-repeat;
+	border-radius: inherit;
+}
+.box.sous-rub .titrem.deplie/*,
+.box.sous-rub .titrem.deplie .logo*/ {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+/* Titre
+   On met le padding sur le lien pour maximiser la zone cliquable.
+   Le JS ajoute un <a> au même niveau pour déplier/replier  */
+.box.sous-rub .titrem a {
+	border-radius: inherit;
+}
+.box.sous-rub .titrem a:not(.titremancre) {
+	flex: 1 1 auto;
+	display: flex;
+	align-items: center; /* Pour aligner les one-liners avec le logo éventuel */
+}
+.box.sous-rub .titrem a:not(.titremancre) span.titre {
+	padding: var(--spip-box-spacing-y) calc(var(--spip-box-spacing-x) / 2);
+	flex-grow: 2;
+}
+
+/* Si titre dépliable */
+.box.sous-rub .titrem.depliant a:first-of-type:not(:only-of-type) {
+	border-top-#RIGHT-radius: 0;
+	border-bottom-#RIGHT-radius: 0;
+}
+.box.sous-rub .titrem.depliant a:last-of-type:not(:only-of-type) {
+	border-top-#LEFT-radius: 0;
+	border-bottom-#LEFT-radius: 0;
+}
+.box.sous-rub .titrem.depliant a:hover,
+.box.sous-rub .titrem.depliant a:focus {
+	background-color: var(--spip-color-theme-lighter);
+	color: var(--spip-color-black);
+}
+/* Logo  */
+/*
+.box.sous-rub .box__header .logo-carre {
+	padding: 0;
+}
+.box.sous-rub .box__header .logo {
+	margin: 0;
+	border-top-#LEFT-radius: 0;
+	border-top-#RIGHT-radius: var(--spip-box-border-radius);
+	border-bottom-#LEFT-radius: 0;
+	border-bottom-#RIGHT-radius: var(--spip-box-border-radius);
+}
 */
-.titrem { font-weight: bold; }
-div.titrem, h3.titrem { display: block; padding-top: [(#ENV{margin-bottom}|strdiv{2})em]; padding-bottom: [(#ENV{margin-bottom}|strdiv{2})em]; background-repeat: no-repeat; padding-[(#ENV{left})]:16px; padding-[(#ENV{right})]:10px;}
-div.titrem a.titremancre,h3.titrem a.titremancre {padding:15px 0 0 16px;background-position: [(#ENV{left})] top;background-repeat: no-repeat; position:relative;float:[(#ENV{left})];margin-[(#ENV{left})]:-16px;}
-/* Deplier / Replier */
-.deplie a.titremancre, .deplie a.titremancre, .depliant a.titremancre, .replie a.titremancre { height: 1px; padding-bottom: 0px; }
-.replie a.titremancre { background-image: url([(#CHEMIN_IMAGE{deplierhaut[(#ENV{rtl})].gif})]); }
-.titrem.hover { background-color: #ENV{claire}; }
-.deplie a.titremancre { background-image: url(#CHEMIN_IMAGE{deplierbas.gif}); }
-.impliable {}
-.js .blocreplie { display: none; }
-.js .titrem.blocreplie { display: block; }
-.blocdeplie { display: block; background: none; }
-.bloc_depliable .pagination{ white-space:normal; }
+/* Descriptif */
+.box.sous-rub .descriptif {
+	padding: calc(var(--spip-box-spacing-y) / 2) calc(var(--spip-box-spacing-x) / 2);
+	padding-left: calc(var(--spip-box-caretsize) + (var(--spip-box-spacing-x) / 2));
+	padding-top: 0;
+	padding-bottom: var(--spip-box-spacing-y);
+	font-size: 0.85em;
+}
+.box.sous-rub .descriptif *:last-child {
+	margin-bottom: 0;
+}
+
+/* Body */
+.box.sous-rub .box__body {
+	padding: 0;
+	border-top: 0;
+}
+.box.sous-rub .box__body > * {
+	border-top: 1px solid var(--spip-box-sep-color);
+}
+.box.sous-rub a:hover {
+	color: black;
+}
+.box.sous-rub .liste-items {
+	font-size: 0.85em;
+	line-height: 1.2;
+	border-top: 0;
+}
+.box.sous-rub .liste-items .item {
+	padding: 0px;
+	border-color: var(--spip-box-sep-color);
+}
+.box.sous-rub .liste-items .item a {
+	display: block;
+	padding: 0.75em;
+}
+.box.sous-rub .liste-items > .item:last-child {
+	border-bottom: 0;
+}
+.box.sous-rub .sous-sous-rub {
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+
+/**
+ * ===============
+ * 7. Déprécations
+ * ===============
+ * Vieilles boîtes dépliables/repliables encore maintenues mais dépréciées.
+ * Exemple : menu des rubriques dépliables (utilisé ailleurs ?)
+ * Ici juste les styles propres au JS, pour la déco voir plus haut.
+ */
+
+/* Titre
+   - non dépliable :      .titrem.impliable
+   - dépliable / init :   .titrem.depliant.replie
+   - dépliable / déplié : .titrem.depliant.deplie.blocdeplie
+   - dépliable / replié : .titrem.depliant.replie.blocreplie */
+
+/* Picto déplier / Replier */
+.box .titremancre {
+	position: relative;
+	display: block;
+	flex: 0 0 var(--spip-box-caretsize);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 1.5em auto;
+	opacity: 0.5;
+}
+.box .titremancre:hover,
+.box .titremancre:focus {
+	opacity: 1;
+}
+
+.box .titremancre:after {
+	content: "";
+	display: block;
+	position: absolute;
+	#RIGHT: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	height: 1em;
+	border-left: 1px solid hsla(0, 0%, 0%, 0.5);
+}
+
+.box .replie .titremancre {
+	background-image: url([(#CHEMIN_IMAGE{deplierhaut.svg})]);
+}
+.box .deplie .titremancre {
+	background-image: url(#CHEMIN_IMAGE{deplierbas.svg});
+}
+.box .impliable .titremancre {
+	display: none;
+}
+
+/* Bloc masqué
+   - replié : .bloc_depliable.blocreplie
+   - déplié : idem (bug ? pas de .blocdeplie ajouté) */
+.js .box .bloc_depliable.blocreplie {
+	display: none;
+}
+.js .box .bloc_depliable.blocdeplie {
+	display: block;
+}
+.box .bloc_depliable .pagination {
+	white-space: normal;
+}

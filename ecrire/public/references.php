@@ -733,7 +733,10 @@ function champs_traitements($p) {
 
 		// bien prendre en compte les alias de boucles (hierarchie => rubrique, syndication => syncdic, etc.)
 		if ($type_requete and isset($GLOBALS['table_des_tables'][$type_requete])) {
+			$type_alias = $type_requete;
 			$type_requete = $GLOBALS['table_des_tables'][$type_requete];
+		} else {
+			$type_alias = false;
 		}
 
 		// le traitement peut n'etre defini que pour une table en particulier "spip_articles"
@@ -742,6 +745,9 @@ function champs_traitements($p) {
 		} // ou pour une boucle en particulier "DATA","articles"
 		elseif ($type_requete and isset($ps[$type_requete])) {
 			$ps = $ps[$type_requete];
+		} // ou pour une boucle utilisant un alias ("hierarchie")
+		elseif ($type_alias and isset($ps[$type_alias])) {
+			$ps = $ps[$type_alias];
 		} // ou pour indifféremment quelle que soit la boucle
 		elseif (isset($ps[0])) {
 			$ps = $ps[0];

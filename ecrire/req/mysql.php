@@ -1610,7 +1610,10 @@ function spip_mysql_in($val, $valeurs, $not = '', $serveur = '', $requeter = tru
  */
 function spip_mysql_cite($v, $type) {
 	if (!$type) {
-		if (is_numeric($v)) {
+		if (is_bool($v)) {
+			return strval(intval($v));
+		}
+		elseif (is_numeric($v)) {
 			return strval($v);
 		}
 		return "'" . addslashes($v) . "'";

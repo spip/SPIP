@@ -147,7 +147,6 @@ function filtre_text_csv_dist($t) {
 		'}}|' .
 		"\n|" .
 		str_replace("\n", "|\n|", $corps);
-	$corps = str_replace('&#34#', '&#34;', $corps);
 	include_spip('inc/texte');
 
 	return propre($corps);

@@ -688,9 +688,9 @@ and their status is colour-coded:',
 	'plugin_titre_automatique_ajouter' => 'Add plugins',
 	'plugin_titre_installation' => '@plugin@ plugin installation',
 	'plugin_titre_modifier' => 'My plugins',
-	'plugin_utilise_extension_php' => 'Uses the PHP extension @plugin@ version @version@.', # MODIF
-	'plugin_utilise_php' => 'Uses @plugin@ version @version@.', # MODIF
-	'plugin_utilise_plugin' => 'Utilise le plugin @plugin@ en version @version@.', # MODIF
+	'plugin_utilise_extension_php' => 'The version of the PHP extension @plugin@ must be @version@.',
+	'plugin_utilise_php' => '@plugin@ version must be @version@.',
+	'plugin_utilise_plugin' => 'The version of the plugin @plugin@ must be @version@.',
 	'plugin_zip_active' => 'Continue in order to activate',
 	'plugin_zip_adresse' => 'To load a zipped plugin file, or a list of plugins, enter the path below.',
 	'plugin_zip_adresse_champ' => 'Path of the plugin or list ',

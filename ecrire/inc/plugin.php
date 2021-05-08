@@ -1299,7 +1299,7 @@ function pipeline_precompile($prepend_code = array()) {
 		unset($GLOBALS['spip_pipeline']['all']);
 		$all_pipes = trim(array_shift($a));
 		if ($all_pipes) {
-			$all_pipes = '|' . ltrim($a, '|');
+			$all_pipes = '|' . ltrim($all_pipes, '|');
 		}
 		if (count($a)) {
 			$all_pipes_end = '||' . array_shift($a);

@@ -2015,7 +2015,8 @@ function sql_date_proche($champ, $interval, $unite, $serveur = '', $option = tru
  *     Expression de requête SQL
  **/
 function sql_in($val, $valeurs, $not = '', $serveur = '', $option = true) {
-	if (is_string($valeurs)) {
+	if (!is_array($valeurs)) {
+		$valeurs = strval($valeurs);
 		if(isset($valeurs[0]) and $valeurs[0] === ',') {
 			$valeurs = substr($valeurs, 1);
 		}
@@ -2027,7 +2028,9 @@ function sql_in($val, $valeurs, $not = '', $serveur = '', $option = true) {
 		return false;
 	}
 	// sql_quote produit une chaine dans tous les cas
-	$valeurs = $f(array_unique($valeurs));
+	$valeurs = array_filter($valeurs, function ($v) { return !is_array($v);});
+	$valeurs = array_unique($valeurs);
+	$valeurs = $f($valeurs);
 
 	if (!strlen(trim($valeurs))) {
 		return ($not ? "0=0" : '0=1');

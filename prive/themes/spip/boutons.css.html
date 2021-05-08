@@ -114,7 +114,6 @@ input.submit,
 input.reset,
 button {
 	position: relative;
-	-webkit-box-sizing: border-box;
 	        box-sizing: border-box;
 	display: -webkit-inline-box;
 	display: -ms-inline-flexbox;
@@ -403,6 +402,7 @@ button.btn_desactive {
  * Variante danger (voir aussi dans icons.css)
  */
 .btn_danger,
+.btn.danger, /* support temporaire des vieux boutons d'action */
 input.submit.btn_danger,
 input.reset.btn_danger,
 button.btn_danger {
@@ -414,6 +414,8 @@ button.btn_danger {
 }
 .btn_danger:hover,
 .btn_danger:focus,
+.btn.danger:hover,
+.btn.danger:focus,
 input.submit.btn_danger:hover,
 input.submit.btn_danger:focus,
 input.reset.btn_danger:hover,
@@ -509,7 +511,7 @@ button.btn_#VALEUR,
 }
 
 /* Dans le footer d'une boîte */
-.box .ft .bouton_action_post { 
+.box__footer .bouton_action_post { 
 	margin-bottom: 0;
 }
 
@@ -522,8 +524,14 @@ button.btn_#VALEUR,
 	background: none !important;
 }
 .bouton_action_post.icone b,
-.box .bouton_action_post.icone b {
-	font-size: 1em;
+.box .bouton_action_post.icone b,
+.btn.icone b {
+	font-size: inherit !important;
+	font-weight: inherit !important;
+	line-height: inherit !important;
+	text-shadow: inherit !important;
+	color: inherit !important;
+	margin: 0 !important;
 }
 .bouton_action_post.icone .icone-image img {
 	max-height: 100%;

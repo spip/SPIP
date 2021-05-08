@@ -17,7 +17,7 @@
 		[(#VAL{redirect}
 			|generer_url_action{type=#ENV{type}&id=#ENV{id}}
 			|parametre_url{var_mode,calcul}
-			|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+			|icone_horizontale{<:icone_voir_en_ligne:>,voir-ligne})]
 	]
 	[(#PUBLIE{#ENV{type}, #ENV{id}}|non)
 		#SET{champ_statut,#ENV{type}|objet_info{statut}|table_valeur{0/champ}}

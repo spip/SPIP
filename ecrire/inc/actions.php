@@ -142,5 +142,5 @@ function ajax_retour($corps, $content_type = null) {
 	$debut = (($xml and strlen(trim($corps))) ? '<' . "?xml version='1.0' encoding='" . $c . "'?" . ">\n" : '');
 	$fin = '';
 
-	echo $debut, $corps, $fin, $e;
+	die ($debut.$corps.$fin.$e);
 }

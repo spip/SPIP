@@ -79,6 +79,9 @@ h3,.h3 {[ font-size: (#GET{line-height}|strmult{#GET{coeff}})em];[ line-height: 
 h4,.h4,caption,.caption-wrap {[ font-size: (#GET{line-height}|strmult{#GET{coeff}})em];[ line-height: (#GET{coeffinv})em];[ margin-bottom: (#GET{coeffinv})em;]font-weight: bold; }
 h5,.h5 { font-size: 1em; font-weight: bold; margin-bottom: #GET{margin-bottom}; }
 h6,.h6 { font-size: 1em; font-weight: bold; }
+h3.titrem {
+	position: relative;
+}
 
 #haut h1,h1.grostitre {margin-top:[(#ENV{margin-bottom}|strmult{1.5}|strdiv{2}|strdiv{#GET{line-height}})em]}
 
@@ -162,7 +165,7 @@ blockquote.spip_poesie { margin: 2em 0; padding-left: 1em; border-left: 1px soli
 blockquote.spip_poesie div { text-indent: -3em; margin-left: 3em; }
 */
 .spip_code, .spip_cadre { color: #336; }
-.spip_cadre { width: 99%; background-color: #F3F3F3; border: 1px dotted #ddd; padding:5px;-ms-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
+.spip_cadre { width: 99%; background-color: #F3F3F3; border: 1px dotted #ddd; padding:5px;box-sizing:border-box;}
 div.spip_code, .spip_cadre { margin-bottom: #ENV{margin-bottom}; }
 
 .spip_surligne { background: #FF6; }

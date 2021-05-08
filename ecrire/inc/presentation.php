@@ -28,6 +28,7 @@ include_spip('inc/actions');
 include_spip('inc/puce_statut');
 include_spip('inc/filtres_ecrire');
 include_spip('inc/filtres_boites');
+include_spip('inc/filtres_alertes');
 
 // https://code.spip.net/@debut_cadre
 function debut_cadre($style, $icone = "", $fonction = "", $titre = "", $id = "", $class = "", $padding = true) {

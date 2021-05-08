@@ -30,7 +30,7 @@ html, body { height: 100%; }
 .quitter_fenetre a { display: block; width: 1.5em; height: 1.5em; background: url(images/fermer-16.png) no-repeat right center; color: #fff; text-indent: -999em; }
 
 @media (min-width: 640px) {
-	body { display: flex; padding: 2em; flex-direction: column; justify-content: center; align-items: center;}
+	body { display: flex; padding: 2em; flex-direction: column; justify-content: center; align-items: center; height: auto; min-height: 100%; }
 	#minipres { margin: 6em auto; width: 580px;border: 1px solid #DB1762;border-radius: 8px;padding: 2em 2em 1.5em 2em;overflow: hidden;}
 	#minipres h1 {margin-top: -2em;margin-left: -2em;margin-right: -2em;padding: 0.8em;font-size: 1.1em;color: white;background: #DB1762;}
 }

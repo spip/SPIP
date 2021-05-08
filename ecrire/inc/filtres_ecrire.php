@@ -20,6 +20,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 include_spip('inc/filtres_boites');
+include_spip('inc/filtres_alertes');
 include_spip('inc/boutons');
 include_spip('inc/pipelines_ecrire');
 
@@ -136,7 +137,7 @@ function chercher_rubrique(
 	if ($actionable) {
 		if (strpos($form, '<select') !== false) {
 			$form .= "<div style='text-align: " . $GLOBALS['spip_lang_right'] . ";'>"
-				. '<input class="fondo" type="submit" value="' . _T('bouton_choisir') . '"/>'
+				. '<input class="fondo submit btn" type="submit" value="' . _T('bouton_choisir') . '"/>'
 				. "</div>";
 		}
 		$form = "<input type='hidden' name='editer_$objet' value='oui' />\n" . $form;

@@ -1998,7 +1998,10 @@ function _sqlite_calculer_cite($v, $type) {
 		}
 	} else {
 		// si on ne connait pas le type on le deduit de $v autant que possible
-		if (is_numeric($v)) {
+		if (is_bool($v)) {
+			return strval(intval($v));
+		}
+		elseif (is_numeric($v)) {
 			return strval($v);
 		}
 	}

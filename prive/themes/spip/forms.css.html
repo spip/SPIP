@@ -1,269 +1,1498 @@
 #CACHE{0}
 [(#REM)
 
-	Ce squelette definit les styles des formulaires de l'espace prive
+	Ce squelette définit les styles des formulaires de l'espace privé.
 
-	Les styles des boutons sont dans boutons.css.html
+	Organisation du fichier :
 
-	Note: l'entete "Vary:" sert a repousser l'entete par
-	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
-	genant en cas de "rotation du cookie de session" apres
-	un changement d'IP (effet de clignotement).
-	<style>
-]
+	0. Variables
+	1. Layout : gouttière
+	2. Layout : rythme vertical
+	3. Entête optionnel avant le formulaire
+	4. Structure générale : conteneurs, champs & labels
+	5. Fieldsets
+	6. Champs avec .choix
+	7. Champs en erreurs, obligations & autres états
+	8. Champs particuliers
+	9. Éléments de formulaire (inputs & cie)
+	10. Messages de retour
+	11. Messages d’explications
+	12. Formulaires compacts en colonnes laterales
+	13. Formulaires dans certains contextes : fiche objet, etc.
+	14. Formulaires particuliers
+	15. Divers
+
+	Markup :
+
+	.formulaire_spip > form > div
+	  .editer-groupe
+	    .editer x
+	    .editer y
+	  (.fieldset > ) fieldset
+	    .editer-groupe
+	      .editer x
+	      .editer y
+	      (.fieldset > ) fieldset
+	        .editer-groupe
+	          .editer x
+	          .editer y
+	  .boutons
+
+<style>/**]
 #CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=utf-8}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
-#SET{claire,##ENV{couleur_claire,edf3fe}}
-#SET{foncee,##ENV{couleur_foncee,3874b0}}
-#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
-#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 
-/*
-	Note sur ecran large et etroit, en [11846]
-	large = 540px (ou 600px!)
-	etroit = 505px
-*/
+/**
+ * ============
+ * 0. Variables
+ * ============
+ */
 
 
-/* Style des formulaires d'edition
------------------------------------------------ */
-.formulaire_spip {
-	padding:0 10px 0;
-	border: 1px solid #ENV{foncee};
-	color: #333;
-	background-color: #f8f8f8;
-	margin: [(#ENV{margin-bottom}|strmult{1.5})em] 0;
-	position:relative; /* pour positionner le ajaxload en automatique */
+:root {
+	/* espacements externes (entre les inputs et cie) */
+	--spip-form-spacing-x: 0.75rem;
+	--spip-form-spacing-y: 0.75rem;
+	/* espacements internes (à l'intérieur des inputs et cie) */
+	--spip-form-padding-input-x: 0.33rem;
+	--spip-form-padding-input-y: 0.33rem;
+	/* fieldsets */
+	--spip-form-fieldset-offset: 1.5em; /* décalage quand imbriqué */
+	--spip-form-fieldset-spacing: calc(var(--spip-form-spacing-y) / 2); /* espacement en plus */
+	/* layout labels */
+	--spip-form-label-width: 12rem;
+	--spip-form-label-long-width: 19rem; /* ne pas dépendre de la taille de la font-size du label qui peut varier */
+	/* couleurs */
+	--spip-form-border-color: hsla(0, 0%, 0%, 0.2); /* couleur bordure inputs et cie */
+	--spip-form-sep-color: hsla(0, 0%, 0%, 0.125); /* couleur trait de séparation */
+	--spip-form-color-focus: hsla(var(--spip-color-theme--h), calc(var(--spip-color-theme--s) * 3), var(--spip-color-theme--l), 0.25); /* outline focus inputs et cie */
+	--spip-form-color-text: var(--spip-color-gray-darkest); /* défaut */
+	--spip-form-color-text-light: var(--spip-color-gray-darker); /* labels et cie */
+	--spip-form-color-text-lightest: var(--spip-color-gray); /* placeholder */
+	/* divers */
+	--spip-form-border-radius: var(--spip-border-radius); /* bordure inputs et cie */
+	--spip-form-input-height: calc((var(--spip-form-padding-input-y) * 2) + var(--spip-line-height)); /* à toute fin utile */
+}
+@media (min-width: 768px) {
+	:root {
+		/* espacements externes (entre les inputs et cie) */
+		--spip-form-spacing-x: 1.15rem;
+		--spip-form-spacing-y: 1.15rem;
+		/* espacements internes (à l'intérieur des inputs et cie) */
+		--spip-form-padding-input-x: 0.66rem;
+		--spip-form-padding-input-y: 0.66rem;
+		/* décalage des fieldsets imbriqués */
+		--spip-form-fieldset-offset: 2.5em;
+	}
+}
+.lat .formulaire_spip,
+.formulaire_spip.mini {
+	/* espacements externes (entre les inputs et cie) */
+	--spip-form-spacing-x: 0.75rem;
+	--spip-form-spacing-y: 0.75rem;
+	/* espacements internes (à l'intérieur des inputs et cie) */
+	--spip-form-padding-input-x: 0.33rem;
+	--spip-form-padding-input-y: 0.33rem;
+	/* décalage des fieldsets imbriqués */
+	--spip-form-fieldset-offset: 1.5em;
 }
 
-.cadre-formulaire-editer .formulaire_spip { margin-top:0; }
-.cadre-formulaire-editer {color: #444; margin-top:[(#ENV{margin-bottom}|strmult{1.5})em];position:relative;}
-.cadre-formulaire-editer.popin {margin-top:0}
-.cadre-formulaire-editer .image_loading {position:absolute;right:0;}
 
-.entete-formulaire{ background:white; border:1px solid #ENV{foncee}; border-bottom:0; padding:[(#ENV{margin-bottom}|strdiv{2})em] 10px; overflow:hidden;}
-.formulaire_spip .cadre{border: 1px solid #ENV{foncee};}
+/**
+ * ===================================
+ * 1. Layout : gestion de la gouttière
+ * ===================================
+ *
+ * Principe : par défaut il y a des gouttières latérales afin que le contenu ne colle pas aux bords du formulaire.
+ * Mais pour certains éléments on l'annule au moyen de marges négatives, de sorte qu'ils reviennent coller aux bords.
+ * On regroupe tout au même endroit pour mutualiser et se simplifier la vie.
+ */
 
-/* dans les formulaires de configuration */
-h3.titrem {position:relative;}
-.formulaire_spip h3.titrem {background-color: [#(#ENV{foncee}|couleur_eclaircir)];color: #4A4A4A;}
+/* Gouttière latérale principale.
+   Pour le titre ajuster selon la taille de la police. */
+.formulaire_spip,
+.formulaire_spip fieldset,
+.formulaire_spip .editer-groupe,
+.formulaire_spip .editer,
+.formulaire_spip .boutons {
+	padding-left: var(--spip-form-spacing-x);
+	padding-right: var(--spip-form-spacing-x);
+}
+.formulaire_spip .titrem {
+	padding-left: var(--spip-form-spacing-x);
+	padding-right: var(--spip-form-spacing-x);
+}
 
-/* ul li -----*/
-.formulaire_spip fieldset {min-width:0;padding-left:10px;padding-right:10px;margin-bottom:[(#ENV{margin-bottom}|strdiv{4})em]}
-.formulaire_spip .editer-groupe {padding: [(#ENV{margin-bottom}|strdiv{4})em] 0;}
-.formulaire_spip .editer-groupe .editer-groupe,.formulaire_spip .fieldset fieldset {margin:0;}
+/* Marges négatives pour annuler la gouttière.
+   Pour le titre ajuster selon la taille de la police. */
 .formulaire_spip .editer-groupe,
 .formulaire_spip fieldset,
-.formulaire_spip fieldset .editer-groupe,
-.formulaire_spip .boutons,
-.formulaire_spip .titrem,
-.formulaire_spip .legend {margin-left: -10px;margin-right: -10px;}
-
-.formulaire_spip .editer {padding: [(#ENV{margin-bottom}|strdiv{2})em] 10px;clear:both;overflow:hidden;}
-
-.formulaire_spip .editer-groupe.deux_colonnes {  -webkit-column-count: 2;  -moz-column-count: 2;  column-count: 2; }
-
-/* label -----*/
-
-/* Formulaires alignes a gauche c'est le par defaut des formulaires de Spip */
 .formulaire_spip .editer,
-.formulaire_spip .editer.gauche {padding-#ENV{left}:140px;}
-.formulaire_spip fieldset.editer {border: 0; margin:0;}
+.formulaire_spip .boutons, #wysiwyg .formulaire_spip p.boutons {
+	margin-left: calc(var(--spip-form-spacing-x) * -1);
+	margin-right: calc(var(--spip-form-spacing-x) * -1);
+}
+.formulaire_spip .titrem {
+	margin-left: calc(var(--spip-form-spacing-x) * -1);
+	margin-right: calc(var(--spip-form-spacing-x) * -1);
+}
 
+
+/**
+ * ===========================
+ * 2. Layout : rythme vertical
+ * ===========================
+ *
+ * On réunit au même endroit toutes les règlent concernant le rythme vertical.
+ * Il s'agit des espacements verticaux entre les éléments : marges internes et externes.
+ */
+
+/**
+ * 2.2. Élements optionnels qui précèdent le <form> : titre, explications, etc.
+ * Il y a d'office 1 espace entre ceux-ci et le form.
+ * Donc hormis le titre, dès qu'il y a un élément avec une marge inférieure (p, ul), ça fait 2 espaces.
+ * Essayer de forcer à n'avoir qu'1 espace tout le temps est trop compliqué avec le markup actuel.
+ */
+
+/* Titre : 1 espace avec l'élément suivant. Pas de marge sous le titre lui-même,
+   sinon ça fait 2 espaces quand il n'y a que le titre avant le form, et c'est très moche */
+.formulaire_spip .titrem {
+	margin-bottom: 0;
+}
+.formulaire_spip .titrem + *:not(form) {
+	margin-top: var(--spip-form-spacing-y);
+}
+/* Généralités */
+.formulaire_spip p,
+.formulaire_spip ul,
+.formulaire_spip pre,
+.formulaire_spip blockquote {
+	margin-bottom: var(--spip-form-spacing-y);
+}
+
+/**
+ * 2.3. Groupes de saisies
+ * 1 espace entre les saisies, ainsi qu'à l'extérieur du groupe.
+ */
+
+.formulaire_spip .editer-groupe {
+	padding-top: calc(var(--spip-form-spacing-y) / 2);
+	padding-bottom: calc(var(--spip-form-spacing-y) / 2);
+}
+.formulaire_spip .editer {
+	padding-top: calc(var(--spip-form-spacing-y) / 2);
+	padding-bottom: calc(var(--spip-form-spacing-y) / 2);
+}
+/* Saisies avec fond de couleur : ajuster pour conserver 1 espace */
+.formulaire_spip .editer.erreur,
+.formulaire_spip .editer_parent,
+.formulaire_spip .editer_groupe_mot,
+.formulaire_editer_auteur .editer_statut {
+	padding-top: var(--spip-form-spacing-y);
+	padding-bottom: var(--spip-form-spacing-y);
+	margin-top: calc(var(--spip-form-spacing-y) / 2);
+	margin-bottom: calc(var(--spip-form-spacing-y) / 2);
+}
+/* Groupes consécutifs : annuler l'espace en trop (à priori rare mais possible) */
+.formulaire_spip .editer-groupe + .editer-groupe {
+	margin-top: calc((var(--spip-form-spacing-y) / 2) * -1);
+	padding-top: 0;
+}
+
+/**
+ * 2.4. Fieldsets
+ * Compliqué d'avoir précisément la main, la légende fausse tous les calculs.
+ */
+
+/* Fieldsets : espace supplémentaire autour */
+.formulaire_spip fieldset {
+	padding-top: var(--spip-form-fieldset-spacing);
+	padding-bottom: var(--spip-form-fieldset-spacing);
+	margin-top: var(--spip-form-fieldset-spacing);
+	margin-bottom: var(--spip-form-fieldset-spacing);
+}
+.formulaire_spip fieldset legend,
+.formulaire_spip fieldset .legend {
+	margin-bottom: 0;
+}
+/* Fieldsets successifs : ressérer */
+.formulaire_spip fieldset + fieldset,
+.formulaire_spip .fieldset + .fieldset > fieldset {
+	margin-top: calc(var(--spip-form-fieldset-spacing) * -1);
+}
+/* Fieldsets imbriqués */
+.formulaire_spip fieldset fieldset {
+	margin-bottom: 0; /* Tant qu'il n'y a pas de bordure latérale */
+}
+
+
+/**
+ * 2.5. Autres éléments
+ */
+
+/* Explications : 1 espace autour. */
+.formulaire_spip .explication,
+.formulaire_spip .attention {
+	margin-top: var(--spip-form-spacing-y);
+	margin-bottom: var(--spip-form-spacing-y);
+}
+
+
+/**
+ * =======================================
+ * 3. Entête optionnel avant le formulaire
+ * =======================================
+ */
+
+
+.cadre-formulaire-editer .formulaire_spip {
+	margin-top: 0;
+	overflow: hidden; /* sinon problème avec marge supérieure qui déborde, mais par défaut sur tous ça cacherait l'icône en entête */
+}
+.cadre-formulaire-editer {
+	color: var(--spip-form-color-text-light);
+	margin-top: calc(var(--spip-margin-bottom) * 1.5);
+	position: relative;
+}
+.cadre-formulaire-editer.popin {
+	margin-top: 0
+}
+.cadre-formulaire-editer .image_loading {
+	position: absolute;
+	#RIGHT: 0;
+}
+.entete-formulaire {
+	position:relative;
+	padding: var(--spip-form-spacing-y) var(--spip-form-spacing-x);
+	padding-bottom: calc(var(--spip-form-spacing-y) / 2);
+	overflow: hidden;
+	background: var(--spip-color-white);
+	border-bottom: 1px solid var(--spip-form-sep-color);
+	border-top-left-radius: var(--spip-border-radius);
+	border-top-right-radius: var(--spip-border-radius);
+	box-shadow: var(--spip-box-shadow);
+}
+.formulaire_spip .cadre {
+	border: 1px solid var(--spip-form-border-color);
+}
+.entete-formulaire + .formulaire_spip,
+.entete-formulaire + .formedit .formulaire_spip,
+.entete-formulaire + div > .formulaire_spip,
+.entete-formulaire + div > div > .formulaire_spip {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+
+/**
+ * ===================================================
+ * 4. Structure générale : conteneurs, champs & labels
+ * ===================================================
+ */
+
+
+/* Conteneur général */
+.formulaire_spip,
+.formulaire_spip * {
+	box-sizing: border-box;
+}
+.formulaire_spip {
+	position: relative; /* pour positionner le ajaxload en automatique */
+	margin: calc(var(--spip-margin-bottom) * 1.5) 0;
+	color: var(--spip-form-color-text);
+	background-color: var(--spip-color-white);
+	border-radius: var(--spip-border-radius);
+	box-shadow: var(--spip-box-shadow);
+	z-index: 2; /* passer par dessus l'entête */
+	transition: box-shadow 0.2s;
+	border-top:1px solid transparent; /* permet de respecter le margin top sur le premier element si besoin */
+}
+.formulaire_spip:hover,
+.formulaire_spip:focus-within {
+	box-shadow: var(--spip-box-shadow-hover);
+}
+
+/* Titre optionnel
+   Une partie de l'habillage est mutualisée avec ceux des boîtes : taille, graisse….
+	 Voir dans box_skins.css */
+.formulaire_spip .titrem {
+	display: flex;
+	align-items: center;
+	padding-top: var(--spip-form-spacing-y);
+	padding-bottom: var(--spip-form-spacing-y);
+	border-top-left-radius: inherit;
+	border-top-right-radius: inherit;
+	border-bottom: 1px solid var(--spip-form-sep-color);
+}
+
+/* Conteneur des saisies */
+.formulaire_spip .editer-groupe {
+	overflow: hidden;
+}
+/*  2 colonnes */
+@media (min-width: 768px) {
+	.formulaire_spip .editer-groupe.deux_colonnes {
+		-webkit-column-count: 2;
+		-moz-column-count: 2;
+		column-count: 2;
+		column-gap: var(--spip-form-spacing-x);
+	}
+	.formulaire_spip .editer-groupe.deux_colonnes .editer {
+		padding-left:  0;
+		padding-right: 0;
+		margin: 0;
+	}
+}
+
+/* Conteneur d'une saisie */
+.formulaire_spip .editer {
+	clear: both;
+	/* overflow: hidden; */ /* un peu trop brutal par défaut ? */
+}
+
+/* Labels : affichés à gauche par défaut */
+.formulaire_spip label[for] {
+	cursor: pointer;
+}
+.formulaire_spip .editer,
+.formulaire_spip .editer.gauche {
+	padding-#LEFT: calc(var(--spip-form-label-width) + (var(--spip-form-spacing-x) * 2)); /* largeur + marge gauche+droite */
+}
 .formulaire_spip .editer label,
 .formulaire_spip .editer .label,
 .formulaire_spip .editer.gauche label {
-	color: #444;
-	width: 114px;
-	float:#ENV{left};
-	margin-#ENV{left}:-130px;
-	text-align: #ENV{left};
+	float: var(--spip-left);
+	width: var(--spip-form-label-width);
+	margin-#LEFT: calc((var(--spip-form-label-width) + var(--spip-form-spacing-x)) * -1); /* inverse largeur + marge */
+	margin-bottom: calc(var(--spip-form-spacing-y) / 4);
+	padding: calc(var(--spip-form-padding-input-y) + 1px) 0 0; /* décaler pour aligner avec texte input → padding + border */
 	background: transparent;
-	padding: 0;
-	/*vertical-align: top;*/
+	color: var(--spip-form-color-text-light);
+	text-align: var(--spip-left);
+	font-weight: inherit;
+	line-height: 1.3; /* légèrement inférieure au texte normal */
 }
-
-.formulaire_spip .long_label {padding-#ENV{left}:270px;}
+/* Labels plus longs */
+.formulaire_spip .long_label {
+	padding-#LEFT: calc(var(--spip-form-label-long-width) + (var(--spip-form-spacing-x) * 2)); /* largeur + marge gauche+droite */
+}
 .formulaire_spip .long_label .label,
-.formulaire_spip .long_label label {width: 250px;margin-#ENV{left}:-260px;}
-
-/* Formulaires avec label en haut */
-/* les cas particuliers des edition pleines largeur */
+.formulaire_spip .long_label label {
+	width: var(--spip-form-label-long-width);
+	margin-#LEFT: calc((var(--spip-form-label-long-width) + var(--spip-form-spacing-x)) * -1); /* inverse largeur + marge */
+}
+/* Labels en haut + cas particuliers où c'est forcé */
+.formulaire_spip .pleine_largeur,
 .formulaire_spip .editer_parent,
 .formulaire_spip .editer_groupe_mot,
 .formulaire_spip .editer_descriptif,
 .formulaire_spip .editer_chapo,
 .formulaire_spip .editer_texte,
 .formulaire_spip .editer_ps,
-.formulaire_spip .haut,
-.formulaire_spip .pleine_largeur { padding-#ENV{left}:10px;}
-
+.formulaire_spip .haut {
+	padding-#LEFT: var(--spip-form-spacing-x);
+}
+.formulaire_spip .pleine_largeur > label,
+.formulaire_spip .editer-groupe.deux_colonnes .editer > label,
 .formulaire_spip .editer_parent label,
 .formulaire_spip .editer_groupe_mot label,
 .formulaire_spip .editer_descriptif label,
 .formulaire_spip .editer_chapo label,
 .formulaire_spip .editer_texte label,
 .formulaire_spip .editer_ps label,
-.formulaire_spip .haut label,
-.formulaire_spip .pleine_largeur>label {display: block;float: none;width:auto;margin-#ENV{left}: 0;}
+.formulaire_spip .haut label {
+	display: block;
+	float: none;
+	width: auto;
+	margin-#LEFT: 0;
+	padding: 0;
+}
 
+/* Conteneur des boutons (les boutons eux-mêmes sont dans boutons.css.html) */
+.formulaire_spip .boutons {
+	position: relative;
+	margin-bottom: 0 !important; /* Fix #wysiwyg */
+	clear: both;
+	padding: calc(var(--spip-form-spacing-y) / 2)  var(--spip-form-spacing-x);
+	text-align: var(--spip-right);
+	background-color: var(--spip-color-theme-lightest);
+	border-bottom-left-radius: var(--spip-form-border-radius);
+	border-bottom-right-radius: var(--spip-form-border-radius);
+}
+.formulaire_spip .boutons .image_loading {
+	float: none;
+}
+
+
+/**
+ * =======================
+ * 5. Fieldsets des enfers
+ * =======================
+ */
+
+
+/* Fieldsets : tous */
+.formulaire_spip fieldset {
+	position: relative;
+	min-width: 0; /* nécessaire ? */
+	width: auto;
+	border: 0;
+	border-top: 1px solid var(--spip-form-sep-color);
+}
+
+/* Légendes */
+.formulaire_spip fieldset legend:not(.label),
+.formulaire_spip fieldset .legend {
+	padding: var(--spip-form-padding-input-y) var(--spip-form-padding-input-x);
+	background-color: var(--spip-color-gray-lightest);
+	/* color: var(--spip-color-theme-darker); */
+	font-weight: 800;
+	font-size: inherit;
+}
+/* Fix h3 pseudo-légendes : on essaie de les afficher comme des vraies */
+.formulaire_spip fieldset .legend:not(legend) {
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	transform: translateY(-50%);
+}
+.formulaire_spip fieldset .legend:not(legend) + * {
+	margin-top: var(--spip-form-spacing-y) !important;
+}
+
+/* Fieldsets .editer : ce sont des conteneurs pour des .choix, à afficher comme les autre .editer */
+.formulaire_spip fieldset.editer {
+	border: 0;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+
+/* Fix des .editer + .fieldset : combinaison erronée ? */
+.formulaire_spip .fieldset.editer {
+	padding-left: var(--spip-form-spacing-x);
+}
+
+/* Fieldsets imbriqués */
+.formulaire_spip fieldset fieldset {
+	margin-#LEFT: var(--spip-form-fieldset-offset); /* décalage */
+	padding-left: 0;
+	padding-right: 0;
+	margin-right: 0;
+}
+
+/* Hack temporaire pour avoir marquer la fin des fieldsets racines avec une bordure inférieure.
+   Il n'en faut une que quand le fieldset est suivi d'autre chose qu'un fieldset.
+   On pose donc la bordure sur l'élément suivant, en bidouillant les marges.
+   À refaire proprement quand il y aura un meilleur markup (une classe spéciale ou autre). */
+.formulaire_spip form > div > fieldset + *:not(fieldset):not(.fieldset):not(.boutons),
+.formulaire_spip form > div > .fieldset + *:not(fieldset):not(.fieldset):not(.boutons),
+.formulaire_spip form > div > .editer-groupe > .fieldset + *:not(.fieldset):not(.boutons) {
+	border-top: 1px solid var(--spip-form-sep-color);
+	margin-top: calc(var(--spip-form-fieldset-spacing) * -1);
+	padding-top: var(--spip-form-spacing-y);
+}
+
+
+/**
+ * =====================
+ * 8. Champs avec .choix
+ * =====================
+ *
+ * Conteneur de paires inputs + labels, plusieurs paires possibles par conteneur.
+ * Recommandé pour les radios et checkbox.
+ * La variante inline peut avoir des inputs textes, et éventuellement des selects.
+ *
+ * Attention, il y a une distinction selon la balise :
+ *   - div.choix : variante bloc avec un cadre similaire à ceux des inputs.text et cie
+ *   - span.choix : variante inline sans aucun habillage
+ */
+
+
+/* Ceux avec un cadre */
+.formulaire_spip div.choix {
+	background-color: var(--spip-color-white);
+	padding: calc(var(--spip-form-padding-input-y) / 2) var(--spip-form-padding-input-x);
+	border: 1px solid var(--spip-form-border-color);
+	border-top-left-radius: var(--spip-form-border-radius);
+	border-top-right-radius: var(--spip-form-border-radius);
+	border-bottom: 0;
+	z-index: 1; /* passer par dessus fond explication qui suit */
+	transition: box-shadow 0.2s; /* idem inputs */
+}
+.formulaire_spip div.choix + .choix {
+	padding-top: 0;
+	border-top: 0;
+	border-bottom: 0;
+	border-radius: 0;
+}
+.formulaire_spip div.choix:last-of-type,
+.formulaire_spip div.choix:last-child {
+	border-bottom-left-radius: var(--spip-form-border-radius);
+	border-bottom-right-radius: var(--spip-form-border-radius);
+	border-bottom: 1px solid var(--spip-form-border-color);
+	padding-bottom: var(--spip-form-padding-input-y);
+	position: relative;
+}
+.formulaire_spip div.choix:first-of-type {
+	border-top-left-radius: var(--spip-form-border-radius);
+	border-top-right-radius: var(--spip-form-border-radius);
+	border-top: 1px solid var(--spip-form-border-color);
+	padding-top: var(--spip-form-padding-input-y);
+	position: relative;
+}
+
+/* Label */
+.formulaire_spip .choix > label,
+.formulaire_spip .choix :not(.editer) > label /* pourquoi ? */
+{
+	display: inline;
+	float: none;
+	margin: 0;
+	font-weight: normal;
+	text-transform: none;
+}
+
+/* Inputs */
+.formulaire_spip .choix input {
+	margin: 0 0 0.15em; /* remonter légèrement pour aligner */
+	vertical-align: middle;
+}
+/* Largeur auto, en évitant d'utiliser !important */
+.formulaire_spip .choix input,
+.formulaire_spip .choix input.text,
+.formulaire_spip .choix input.password,
+.formulaire_spip .choix select {
+	width: auto;
+}
+
+/* Espacements entre inputs et labels, indépendamment de la position du label (on sait qu'ils vont par paire, ça suffit) */
+.formulaire_spip .choix > *:nth-child(odd) {
+	margin-#RIGHT: calc(var(--spip-form-padding-input-x) * 3/4); /* entre input et label */
+}
+/* Espacement entre plusieurs options dans un même .choix, et entre .choix inline successifs */
+.formulaire_spip .choix > *:nth-child(3n+3),
+.formulaire_spip span.choix + span.choix {
+	margin-#LEFT: var(--spip-form-spacing-x); /* entre options ou .choix inline */
+}
+
+/* Variante inline, sans bordure (cf. explication plus haut) */
+.formulaire_spip span.choix,
+.formulaire_spip span.choix:first-of-type,
+.formulaire_spip span.choix:last-of-type,
+.formulaire_spip span.choix:last-child{
+	display: inline-block;
+	background: transparent;
+	padding: 0;
+	border: 0;
+}
+
+/* Explication en dessous */
+.formulaire_spip div.choix + .explication,
+.formulaire_spip div.choix + .attention {
+	margin-top: 0;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	position: relative;
+}
+
+
+/**
+ * ================================================
+ * 7. Champs en erreurs, obligations & autres états
+ * ================================================
+ */
+
+
+/* Champs obligatoires */
 .formulaire_spip .editer.obligatoire label,
 .formulaire_spip .editer.obligatoire .label,
-.formulaire_spip .editer.obligatoire.gauche label {color: black;font-weight: bold;}
+.formulaire_spip .editer.obligatoire.gauche label {
+	color: var(--spip-color-black);
+	font-weight: bold;
+}
+.formulaire_spip .editer.obligatoire input.text,
+.formulaire_spip .editer.obligatoire input.password {
+	font-weight: bold;
+}
 
-/* cas exotique d'un label dans une erreur (ie confirmez que vous etes sur ) */
-.formulaire_spip .erreur_message label { float:none;display:inline;font-weight:normal;margin-#ENV{left}: 0;}
+/* Champs en erreur */
+.formulaire_spip .editer.erreur {
+	background-color: hsl(var(--spip-color-error--h), var(--spip-color-error--s), 95%);
+}
+.formulaire_spip .erreur_message {
+	display: block;
+	margin-bottom: calc(var(--spip-form-spacing-y) / 4);
+	font-weight: bold;
+}
+/* Coloriser message et labels des .choix */
+.formulaire_spip .erreur_message,
+.formulaire_spip .editer.erreur .choix label {
+	color: hsl(var(--spip-color-error--h), var(--spip-color-error--s), 45%);
+}
+/* cas exotique d'un label dans une erreur (ie confirmez que vous êtes sûr ) */
+.formulaire_spip .erreur_message label {
+	float: none;
+	display: inline;
+	font-weight: normal;
+	margin-#LEFT: 0;
+}
+.formulaire_spip .editer.erreur input.text,
+.formulaire_spip .editer.erreur input.password,
+.formulaire_spip .editer.erreur textarea,
+.formulaire_spip .editer.erreur select {
+	border: 2px solid hsl(var(--spip-color-error--h), var(--spip-color-error--s), 66%);
+}
+.formulaire_spip .editer.erreur .choix {
+	border-color: hsl(var(--spip-color-error--h), var(--spip-color-error--s), 66%) !important;
+	border-width: 2px !important;
+}
+.formulaire_spip .editer.erreur input.text:focus,
+.formulaire_spip .editer.erreur input.password:focus,
+.formulaire_spip .editer.erreur textarea:focus,
+.formulaire_spip .editer.erreur select:focus,
+.formulaire_spip .editer.erreur [type="radio"]:focus,
+.formulaire_spip .editer.erreur [type="checkbox"]:focus,
+.formulaire_spip .editer.erreur [type="file"]:focus {
+	box-shadow: 0 0 0 0.2rem hsla(var(--spip-color-error--hsl), 0.33);
+}
+
+/* Champs disabled */
+.formulaire_spip .editer.disabled {
+	opacity: 0.5;
+	pointer-events: none;
+}
 
 
-/* elements du formulaire */
+/**
+ * ======================
+ * 8. Champs particuliers
+ * ======================
+ */
+
+
+/* Avec couleur de fond */
+.formulaire_spip .editer_parent:not(.erreur),
+.formulaire_spip .editer_groupe_mot:not(.erreur),
+.formulaire_editer_auteur .editer_statut:not(.erreur) {
+	background-color: var(--spip-color-gray-lightest);
+}
+
+/* Importants */
+.formulaire_spip .editer.editer_parent label,
+.formulaire_spip .editer.editer_groupe_mot label {
+	/* color: black; */
+	font-weight: bold;
+}
+
+
+/**
+ * ========================================
+ * 9. Éléments de formulaire (inputs & cie)
+ * ========================================
+ *
+ * Nomenclature recommandée pour les types d'inputs : <type> [text text_<type>]
+ * C'est à dire toujours mettre le type + text si c'est une variation du type texte.
+ * Pour l'instant on fait des fallbacks si classes absentes.
+ *
+ * Exemples :
+ * <input type="text"   class="text" />
+ * <input type="email"  class="email  text text_email" />
+ * <input type="number" class="number text text_number" />
+ * <input type="phone"  class="phone  text text_phone" />
+ * <input type="file"   class="file" />
+ */
+
+
+/* Éléments avec du texte */
 .formulaire_spip input.text,
 .formulaire_spip input.password,
 .formulaire_spip textarea,
-.formulaire_spip select { font-size:1em;padding: 3px; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;-ms-box-sizing: border-box; box-sizing: border-box;}
+.formulaire_spip select {
+	font-size: inherit;
+	font-family: inherit;
+	line-height: inherit;
+}
 
+/* Éléments avec bordure */
 .formulaire_spip input.text,
 .formulaire_spip input.password,
-.formulaire_spip input.file,
-.formulaire_spip select { font-size: inherit;font-family:inherit}
-.formulaire_spip textarea {padding: [(#ENV{margin-bottom}|strdiv{4})em] 5px;overflow: auto;font-size: inherit;font-family:inherit;line-height: inherit;}
+.formulaire_spip textarea,
+.formulaire_spip select {
+	position: relative;
+	z-index: 2;
+	padding: var(--spip-form-padding-input-y) var(--spip-form-padding-input-x);
+	margin: 0;
+	width: 100%;
+	border: 1px solid var(--spip-form-border-color);
+	border-radius: var(--spip-form-border-radius);
+	background-color: var(--spip-color-white);
+	transition: box-shadow 0.1s;
+}
+.formulaire_spip input.text:focus,
+.formulaire_spip input.password:focus,
+.formulaire_spip textarea:focus,
+.formulaire_spip select:focus,
+.formulaire_spip [type="radio"]:focus,
+.formulaire_spip [type="checkbox"]:focus,
+.formulaire_spip [type="file"]:focus {
+	border-color: var(--spip-color-theme);
+	box-shadow: 0 0 0 0.2rem var(--spip-form-color-focus);
+	outline: 0;
+}
 
+/* Bloc de texte */
+.formulaire_spip textarea {
+	overflow: auto;
+}
+
+/* Placeholders (et simulés, legacy) */
 .formulaire_spip input.placeholder,
-.formulaire_spip textarea.placeholder {color:#888;}
-.formulaire_spip .editer.obligatoire input.text {font-weight: bold;}
+.formulaire_spip textarea.placeholder,
+.formulaire_spip input::placeholder,
+.formulaire_spip textarea::placeholder {
+	color: var(--spip-form-color-text-lightest);
+	font-style: italic;
+}
 
+/* Input fichier */
+.formulaire_spip input.file,
+.formulaire_spip input[type="file"] {
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+}
 
-.formulaire_spip .erreur {background-color:#FBE3E4;}
-.formulaire_spip .editer .erreur_message {	display: block;color: #8A1F11;font-weight:bold;}
-.formulaire_spip .erreur input.text,
-.formulaire_spip .erreur input.password,
-.formulaire_spip .erreur textarea {border:2px solid #FBC2C4;}
+/* Input de couleur */
+.formulaire_spip input.color,
+.formulaire_spip input[type="color"] {
+	min-height: 2.75em; /* À la louche, à calculer auto. si possible */
+	min-width: 2.75em; /* Carré */
+	width: auto;
+	padding: calc(var(--spip-form-padding-input-y) / 2);
+	cursor: pointer;
+}
 
-/* sous choix */
-.formulaire_spip .choix>label,
-.formulaire_spip .choix :not(.editer)>label {font-weight:normal;text-transform: none;float:none;display:inline;margin-#ENV{left}: 5px;color: #666666;}
-.formulaire_spip .choix .radio,
-.formulaire_spip .choix .checkbox {width:auto;}
+/* Input de recherche */
+.formulaire_spip input.search,
+.formulaire_spip input[type="search"] {
+	border-radius: var(--spip-form-border-radius);
+}
 
-/* reponses succes/erreur */
-
-.formulaire_spip .reponse_formulaire,
-.error,.success,.notice,.information {border:2px solid;color:#333;font-weight: normal;padding:[(#ENV{margin-bottom}|strdiv{2})em] 10px;padding-left:40px;min-height:24px;background-repeat:no-repeat;background-position: 2px 5px;background-size:24px;margin-bottom:#ENV{margin-bottom};margin-top:#ENV{margin-bottom};}
-.formulaire_spip .reponse_formulaire_ok, .success {color: #264409;border-color: #C6D880;background-color:#E6EFC2;background-image:url(#CHEMIN_IMAGE{ok-24.png});}
-.formulaire_spip .reponse_formulaire_erreur, .error {color: #8A1F11;border-color: #FBC2C4;background-color:#FBE3E4;background-image:url(#CHEMIN_IMAGE{erreur-24.png});}
-.notice {color: #514721;border-color: #FFD324;background-color:#FFF6BF;background-image:url(#CHEMIN_IMAGE{warning-24.png});}
-.information {color: #1e556b;border-color: #2f96b4;background-color: #e2f6fd;}
-
-/* Explications */
-.formulaire_spip p {}
-.formulaire_spip .explication {display:block;padding: 5px;background-color: #e9e9e9;}
-.formulaire_spip .editer .explication {margin-bottom: 0;margin-top: 0;}
-.formulaire_spip .editer .explication>:last-child {margin-bottom: 0}
-.formulaire_spip .editer .explication a {}
-
-/* Remarques importantes */
-.formulaire_spip .attention { display: block; margin-bottom: #ENV{margin-bottom}; font-weight: normal; color: #514721; background-color:#FFF6BF; padding: 5px;}
-
-/* Boutons (voir aussi dans boutons.css) */
+/* Boutons de soumission (voir aussi dans boutons.css) */
 .formulaire_spip input.submit,
 .formulaire_spip input.reset,
 .formulaire_spip input.button {
 	width: auto;
 }
-/* Bouton de validation */
-input[type="file"] {
-	border: none;
-	background-color: transparent;
-}
 
-/* icone d'aide */
-img.aide {padding: 2px !important;box-sizing: border-box;}
-
-/* Fieldset */
-.formulaire_spip .editer.fieldset {padding:0;}
-.formulaire_spip fieldset {border: 0;width:auto;border-top: 1px solid #ccc;margin-top: [(#ENV{margin-bottom}|strdiv{4})em];padding-bottom:[(#ENV{margin-bottom}|strdiv{4})em];}
-
-.formulaire_spip h3.legend,
-.formulaire_spip legend {
-	display: block;
-	padding-top: 7px;
-	padding-bottom: 7px;
-	background-color: [#(#ENV{foncee}|couleur_eclaircir)];
-	color: black;
-	font-weight: normal;
-	padding-#ENV{left}: 10px;
-	padding-#ENV{right}: 5px;
-	margin-bottom:[(#ENV{margin-bottom}|strdiv{2})em]
-}
-
-.formulaire_spip .editer fieldset label {color: #444444;}
 
 /**
- * Conteneur des boutons
- * Les boutons eux-mêmes sont dans boutons.css.html
+ * ======================
+ * 10. Messages de retour
+ * ======================
  */
-.formulaire_spip .boutons { margin-bottom:0;clear:both;padding: [(#ENV{margin-bottom}|strdiv{2})em] 10px;text-align: #ENV{right};background-color: #[(#ENV{claire}|couleur_eclaircir)];border-top: 1px solid [(#ENV{claire})];}
-
-#navigation .formulaire_spip .boutons,
-#extra .formulaire_spip .boutons { padding: [(#ENV{margin-bottom}|strdiv{4})em] 5px}
-
-.formulaire_spip .boutons .image_loading {float:none;}
-
-/* Date picker */
-#ui-datepicker-div {z-index: 10000 !important;}
 
 
-/*
- * Formulaires compactes en colonnes laterales
+/* Les messages de retour sont des alertes (role="status"),
+   aussi les styles sont mutualisés dans alertes.css.
+   On reprend les styles d'une alerte large.
+   Ici, juste des ajustements */
+.formulaire_spip .reponse_formulaire.reponse_formulaire {
+	margin: var(--spip-form-spacing-y) 0;
+}
+
+
+/**
+ * ==========================================
+ * 11. Messages d’explications et d’attention
+ * ==========================================
  */
-.lat .formulaire_spip,.lat .formulaire_spip fieldset {padding:0 5px;}
-.lat .formulaire_spip .editer-groupe,.lat .formulaire_spip fieldset,.lat .formulaire_spip .boutons,.lat .formulaire_spip .titrem,.lat .formulaire_spip .legend {margin-left: -5px;margin-right: -5px;}
 
-.lat .formulaire_spip {}
-.lat .formulaire_spip h3.titrem {font-size:1em;/*padding:[(#ENV{margin-bottom}|strdiv{4})em] 5px;*/}
 
-.lat .formulaire_spip .editer {padding: [(#ENV{margin-bottom}|strdiv{4})em] 5px;}
+.formulaire_spip .explication,
+.formulaire_spip .attention {
+	display: block;
+	position: relative;
+	padding: var(--spip-form-padding-input-y) var(--spip-form-padding-input-x);
+	font-size: 0.9em;
+	line-height: 1.25;
+	color: var(--spip-color-gray-dark);
+	border-top-#RIGHT-radius: var(--spip-form-border-radius);
+	border-bottom-#RIGHT-radius: var(--spip-form-border-radius);
+	border-left-width: 0.3em;
+	border-left-style: solid;
+}
+.formulaire_spip .explication {
+	background-color: hsla(0, 0%, 0%, 0.05); /* transparent sinon on voit pas sur les champs avec le même fond */
+	border-#LEFT-color: var(--spip-form-border-color);
+}
+.formulaire_spip .attention {
+	color: hsl(var(--spip-color-notice--h), var(--spip-color-notice--s), 22%);
+	border-color: hsl(var(--spip-color-notice--h), var(--spip-color-notice--s), 57%);
+	background-color:hsl(var(--spip-color-notice--h), var(--spip-color-notice--s), 87%);
+}
 
-.lat .formulaire_spip .editer label {text-transform: none;color: #444444;display:block;font-weight: normal;float:none;padding: 0;width:auto;margin-#ENV{left}:0;}
-.lat .formulaire_spip select { width:auto;padding:1px 0;}
-.lat .formulaire_spip input:not(.submit):not(.reset) {padding: 1px 0;}
-.lat .formulaire_spip textarea {padding: 2px;}
-.lat .formulaire_spip input.file {font-size: 0.9em;}
+/* Si l'explication est un div avec des choses à l'intérieur : pas de marge en trop en bas */
+.formulaire_spip .explication * :last-child,
+.formulaire_spip .attention * :last-child {
+	margin-bottom: 0;
+}
 
-.lat .formulaire_spip .editer .choix label {display:inline;}
+/* Ceux dans un champ */
+.formulaire_spip .editer .explication,
+.formulaire_spip .editer .attention {
+	margin-bottom: 0;
+	margin-top: 0;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	border-top-#LEFT-radius: var(--spip-form-border-radius);
+	border: 0;
+}
+.formulaire_spip .editer .explication > :last-child,
+.formulaire_spip .editer .attention > :last-child {
+	margin-bottom: 0
+}
+.formulaire_spip .editer .explication:last-child,
+.formulaire_spip .editer .attention:last-child {
+	border-radius: var(--spip-form-border-radius);
+}
+.formulaire_spip .explication + input.text,
+.formulaire_spip .attention + input.text,
+.formulaire_spip .explication + input.password,
+.formulaire_spip .attention + input.password,
+.formulaire_spip .explication + textarea,
+.formulaire_spip .attention + textarea,
+.formulaire_spip .explication + select,
+.formulaire_spip .attention + select,
+.formulaire_spip .explication + div.choix:first-of-type,
+.formulaire_spip .attention + div.choix:first-of-type {
+	position: relative;
+	margin-top: 0;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
 
-/* Champs particuliers, trans-forms */
-.formulaire_spip .editer_parent,
-.formulaire_spip .editer_groupe_mot,
-.formulaire_editer_auteur .editer_statut {margin-top:5px;padding-bottom:[(#ENV{margin-bottom}|strdiv{2})em];}
-.formulaire_spip .editer_parent:not(.erreur),
-.formulaire_spip .editer_groupe_mot:not(.erreur),
-.formulaire_editer_auteur .editer_statut:not(.erreur) {background-color: [#(#ENV{couleur_claire}|couleur_eclaircir)];}
+/* Message dessous : on fait "déborder" le fond sous l'input précédent (à cause border-radius) */
+.formulaire_spip .editer input.text + .explication,
+.formulaire_spip .editer input.text + .attention,
+.formulaire_spip .editer input.password + .explication,
+.formulaire_spip .editer input.password + .attention,
+.formulaire_spip .editer textarea + .explication,
+.formulaire_spip .editer textarea + .attention,
+.formulaire_spip .editer select + .explication,
+.formulaire_spip .editer select + .attention,
+.formulaire_spip .editer div.choix:last-of-type + .explication,
+.formulaire_spip .editer div.choix:last-of-type + .attention {
+	border-radius: var(--spip-form-border-radius);
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	position: relative
+}
+.formulaire_spip input.text + .explication:before,
+.formulaire_spip input.text + .attention:before,
+.formulaire_spip input.password + .explication:before,
+.formulaire_spip input.password + .attention:before,
+.formulaire_spip textarea + .explication:before,
+.formulaire_spip textarea + .attention:before,
+.formulaire_spip select + .explication:before,
+.formulaire_spip select + .attention:before,
+.formulaire_spip div.choix:last-of-type + .explication:before,
+.formulaire_spip div.choix:last-of-type + .attention:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: calc(var(--spip-form-border-radius) * -1);
+	height: var(--spip-form-border-radius);
+	width: 100%;
+	left: 0;
+	background-color: inherit;
+}
 
-.formulaire_spip .editer_parent .rubrique_actuelle {clear:#ENV{left};}
 
-.formulaire_spip .editer.editer_parent label,
-.formulaire_spip .editer.editer_groupe_mot label {
-	color: black;
+/**
+ * ==============================================
+ * 12. Formulaires compacts en colonnes laterales
+ * ==============================================
+ */
+
+
+.lat .formulaire_spip {
+	font-size: 0.95em;
+}
+/* Tous les labels au dessus */
+.lat .formulaire_spip .editer {
+	padding-left: var(--spip-form-spacing-x);
+}
+.lat .formulaire_spip .editer label,
+.lat .formulaire_spip .editer .label {
+	text-transform: none;
+	display: block;
+	float: none;
+	padding: 0;
+	width: auto;
+	margin-#LEFT: 0;
+}
+/* Fieldsets imbriqués */
+.lat .formulaire_spip fieldset fieldset {
+	margin-#LEFT: calc(var(--spip-form-fieldset-offset) / 2);
+}
+/* Fieldsets conteneurs de .choix */
+.lat .formulaire_spip fieldset.editer {
+	margin-top: calc(var(--spip-form-spacing-y) / 2);
+	margin-bottom: calc(var(--spip-form-spacing-y) / 2);
+	margin-left: calc(var(--spip-form-spacing-x) * -1);
+}
+.lat .formulaire_spip .editer .choix label {
+	display: inline;
+}
+.lat .formulaire_spip input.file {
+	font-size: 0.9em;
+}
+.lat .formulaire_spip ul.spip li {
+	margin-#LEFT: 2em !important;
+}
+
+
+/**
+ * =======================================
+ * 13. Formulaires dans certains contextes
+ * =======================================
+ */
+
+
+/* Formulaires flat : sans ombre portée, simple bordure */
+.formulaire_spip.flat,
+.fiche_objet .formulaire_spip,
+.formulaire_spip .formulaire_spip,
+.box .formulaire_spip,
+.popin .entete-formulaire,
+.popin .formulaire_spip {
+	border: 1px solid var(--spip-form-border-color);
+	box-shadow: none !important;
+}
+
+/* Dans #wysiwyg */
+#wysiwyg .formulaire_spip {
+	font-size: 1rem;
+}
+
+
+/**
+ * ============================
+ * 14. Formulaires particuliers
+ * ============================
+ */
+
+
+/* Edition d'un auteur */
+.formulaire_editer_auteur .editer_identification fieldset {
+	background-color: var(--spip-color-gray-lightest);
+}
+.formulaire_editer_auteur .editer.editer_statut .instituer_auteur {
+	margin-#LEFT: calc((var(--spip-form-label-width) * -1) + var(--spip-form-spacing-x));
+	margin-top: var(--spip-form-padding-input-y);
+}
+.formulaire_editer_auteur .editer.editer_statut .rubriques_restreintes > p {
+	margin-#LEFT: 0;
+	margin-bottom: 0;
+	margin-top: var(--spip-form-padding-input-y);
+}
+.formulaire_editer_auteur .editer.editer_statut .rubriques_restreintes label {
+	float: none;
+	width: auto;
+	margin-#LEFT: 0;
+}
+.formulaire_editer_auteur .reset_password {
+	margin-top: calc(var(--spip-form-spacing-y) / 2);
+	margin-bottom: 0;
+	display: block;
+	width: 100%;
+}
+
+/* Statut */
+.lat .formulaire_instituer .editer_statut label {
+	display: flex;
+	align-items: center;
+}
+
+/* Logo */
+.lat .formulaire_editer_logo .apercu,
+.lat .formulaire_editer_logo .ajouter_survol {
+	text-align: center;
+}
+.formulaire_editer_logo .spip_logo img,
+#illustrations .vignette img,
+#documents_joints .image img.spip_logo {
+	background: url(#CHEMIN_IMAGE{fond-imgs.png});
+}
+.formulaire_editer_logo .taille {
+	font-size: 0.9em;
+}
+.formulaire_editer_logo .titrem,
+.formulaire_editer_logo .ajouter_survol {
+	text-transform: uppercase;
+}
+.formulaire_editer_logo .editer_logo_on {
+	margin-top: 0 !important; /* Fix bigup */
+}
+.formulaire_editer_logo .editer_logo_on.logo_upload,
+.formulaire_editer_logo .editer_logo_off.logo_upload.open {
+	background: #fff; [(#REM) https://core.spip.net/issues/2995]
+}
+#navigation .dropfile {
+	margin: 0 !important; /* Bigup */
+}
+
+/* Documents */
+.formulaire_joindre_document .editer_fichier_upload {
+	margin-top: 0 !important; /* Fix à déplacer dans medias */
+}
+
+
+/* Multilinguisme */
+.formulaire_configurer_multilinguisme #langues_bloquees .choix,
+.formulaire_configurer_multilinguisme #langues_proposees .choix {
+	padding: 0 5px;
+	margin-#RIGHT: 10px;
+	float: #LEFT;
+	width: 45%;
+	clear: none;
+	background: transparent;
+	border: 0;
+}
+.formulaire_configurer_multilinguisme .traduite label {
+	text-decoration: underline;
+}
+.formulaire_configurer_multilinguisme #langues_bloquees label {
+	color: var(--spip-color-theme);
 	font-weight: bold;
 }
 
-/* Toggle box link = bouton pour afficher/masquer du contenu.
- * Pour le bouton en lui-même, voir dans boutons.css */
+/* config/reducteur */
+.formulaire_configurer_reducteur .vignettes_reducteur {
+	display: flex;
+}
+.formulaire_configurer_reducteur .vignette_reducteur {
+	text-align: center;
+	float: var(--spip-left);
+	padding: 2px;
+	border: 1px solid hsla(0, 0%, 0%, 0.1);
+	width: 154px;
+	padding-top: 150px;
+	margin: 0.5em;
+	background-position: top center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+.formulaire_configurer_reducteur .vignette_reducteur:first-child {
+	margin-#LEFT: 0;
+}
+.formulaire_configurer_reducteur .vignette_reducteur:last-child {
+	margin-#RIGHT: 0;
+}
+.formulaire_configurer_reducteur .vignette_reducteur:hover {
+	border-color:#bbb;
+	background-color:#ddd;
+}
+.formulaire_configurer_reducteur .vignette_reducteur.on {
+	font-weight: bold;
+	border: 2px solid var(--spip-color-theme);
+	background-color: var(--spip-color-gray-lightest);
+	box-shadow: 0 0 5px var(--spip-color-theme);
+}
+.formulaire_configurer_reducteur .vignette_reducteur.on:hover {
+	border-color: var(--spip-color-theme);
+	color: hsla(0, 0%, 0%, 0.6); /* Pour mieux s'adapter aux couleurs de fond */
+}
+
+/* dater */
+.formulaire_dater .editer[class*=editer_date] {
+	padding-top: 0;
+}
+.formulaire_dater .editer > label {
+	font-weight: bold;
+	text-transform: uppercase;
+	display: flex;
+	align-items: flex-start;
+	padding-top: calc(var(--spip-form-padding-input-y) / 2);
+}
+.formulaire_dater .editer[class*=editer_date] > label {
+	font-size: 0.85em;
+}
+.formulaire_dater .affiche {
+	display:block;
+	font-weight: bold;
+	text-transform: uppercase;
+	padding-top: calc(var(--spip-form-padding-input-y) / 2);
+}
+.formulaire_dater .saisie_redac {
+	display: block;
+}
+.formulaire_dater .editer_date_redac .editable .choix {
+	display: block;
+	margin-top: calc(var(--spip-form-padding-input-y) / 2);
+}
+.formulaire_dater #sans_redac {
+	vertical-align: top;
+}
+.formulaire_spip.formulaire_dater img.ui-datepicker-trigger {
+	margin-#LEFT: -1em;
+	#LEFT: -1em;
+}
+.formulaire_spip.formulaire_dater input.text {
+	padding-top: calc(var(--spip-form-padding-input-y) / 2);
+	padding-bottom: calc(var(--spip-form-padding-input-y) / 2);
+}
+.formulaire_spip.formulaire_dater .toggle_box_link {
+	#RIGHT: var(--spip-form-spacing-x);
+	top: calc(var(--spip-form-padding-input-y) / 2);
+	transform: none;
+}
+.formulaire_spip.formulaire_dater .boutons {
+	border-radius: 0px;
+	position: relative;
+	padding-top: 0; /* inutile car pas de démarquation de couleur */
+}
+@media (max-width: 760px) {
+	.formulaire_dater .editer_date_redac .editable label {
+		margin-left: calc((var(--spip-form-label-long-width) + (var(--spip-form-spacing-x) * 1/2)) * -1);
+		width: calc(var(--spip-form-label-long-width) - (var(--spip-form-spacing-x) * 2));
+		display: inline-block;
+	}
+}
+.fiche_objet .formulaire_spip.formulaire_dater {
+	margin-top: 0;
+	border: 0;
+	border-radius: 0;
+	margin-left: calc(var(--spip-box-spacing-x) * -1); /* = padding de fiche_objet */
+	margin-right: calc(var(--spip-box-spacing-x) * -1); /* = padding de fiche_objet */
+	background-color: var(--spip-color-gray-lightest);
+	position: relative;
+}
+
+/* editer_liens */
+.formulaire_editer_liens .liste-objets {
+	border: 0;
+	margin-left: calc(var(--spip-form-spacing-x) * -1);
+	margin-right: calc(var(--spip-form-spacing-x) * -1);
+}
+.formulaire_editer_liens .liste-objets-associer .caption {
+	font-size: 0.9em;
+}
+.formulaire_editer_liens .liste-objets-associer .caption span.recherche {
+	float: #RIGHT;
+	margin-top: -3px;
+	font-size: 0.9em;
+}
+.formulaire_editer_liens .liste-objets-associer .caption span.recherche .tout_voir {
+	font-size: 0.8em;
+}
+.formulaire_editer_liens h3,.formulaire_editer_liens .titrem {
+	margin: 0 calc(var(--spip-form-spacing-x) * -1);
+	padding: calc(var(--spip-margin-bottom) / 2);
+}
+.formulaire_editer_liens .liste-objets-lies {
+	margin-bottom: 0;
+}
+.formulaire_editer_liens .selecteur > .titrem {
+	margin-bottom: 0;
+}
+.formulaire_editer_liens .selecteur .tout_voir {
+	visibility: hidden;
+}
+.formulaire_editer_liens .selecteur.filtre .tout_voir {
+	visibility: visible;
+}
+.formulaire_editer_liens.non_editable input,
+.formulaire_editer_liens.non_editable button {
+	display: none;
+}
+.formulaire_editer_liens .action {
+	text-align: #RIGHT;
+}
+.formulaire_editer_liens .liste-objets tr > .action {
+	text-align: #RIGHT;
+	width: 120px;
+}
+.formulaire_editer_liens .liste-objets tr > .action button {
+	opacity: 0.6;
+	filter: alpha(opacity=60);
+}
+.formulaire_editer_liens .liste-objets tr > .action button img {
+	margin-#LEFT: 0;
+	vertical-align: bottom;
+}
+.formulaire_editer_liens .liste-objets tr:hover > .action button,
+.formulaire_editer_liens .liste-objets tr:focus > .action button {
+	opacity: 1.0;
+	filter: alpha(opacity=100);
+}
+.formulaire_editer_liens .associer_mot.obligatoire.nonvu {
+	background-color:#FFCDAF;
+}
+.formulaire_editer_liens .associer_mot select,
+.formulaire_editer_liens .associer_mot input.text {
+	width: 75%;
+}
+.formulaire_editer_liens .associer_mot .submit {
+	float: var(--spip-right);
+	margin-top: 3px;
+}
+
+/* retour visuel a la suppression et a l'ajout */
+.remove {background-color:#FFD0BF;}
+.append {background-color:#E0FFCF;}
+
+/* formulaire de recherche : */
+/* version old style */
+.spip_recherche {
+	float: var(--spip-right);
+	border: 0;
+	background: none;
+}
+.spip_recherche .recherche {
+	float: var(--spip-left);
+	padding: 3px;
+	padding-#RIGHT: 30px;
+	width: 186px;
+	border: 1px solid #fff;
+	background-color: var(--spip-color-theme);
+	color: var(--spip-gray-white);
+	margin: 0 0 6px;
+}
+.spip_recherche .submit {
+	float: [(#LEFT)];
+	margin-#LEFT:-24px;
+	margin-top:1px;
+}
+/* version moderne */
+:root {
+	--spip-searchform-padding: 1em;
+}
+.formulaire_recherche {
+	z-index: 1;
+	position: relative;
+	float: var(--spip-right);
+	border: 0;
+	margin: 0 0 6px;
+	padding: 0;
+	background: transparent;
+	box-shadow: none !important;
+}
+.formulaire_recherche label {
+	display: none; /* Todo : masquer accessiblement */
+}
+.formulaire_recherche input.text {
+	z-index: 1;
+	order: 2;
+	box-sizing: border-box;
+	position: relative;
+	width: 16em;
+	padding-#LEFT: var(--spip-searchform-padding);
+	padding-#RIGHT: calc(1.15em + var(--spip-searchform-padding)); /* place pour picto loupe (.image) */
+	font-size: 0.9em;
+	border-radius: 99em;
+	border-color: transparent;
+	background-color: var(--spip-color-gray-lighter);
+	transition: background 0.1s, border 0.1s;
+}
+.formulaire_recherche input.text:focus {
+	border-color: var(--spip-color-theme);
+	background-color: transparent;
+	box-shadow: none;
+}
+.formulaire_recherche input.text:focus ~ .image:not(:hover) {
+	color: var(--spip-color-theme);
+}
+.formulaire_recherche input.text.cancelable {
+	padding-#LEFT: calc(16px + (var(--spip-searchform-padding) * 1)); /* place pour picto fermer */
+}
+.formulaire_recherche input.text.placeholder {
+	color: var(--spip-color-gray-light);
+	opacity: 1;
+}
+.formulaire_recherche .image,
+.formulaire_recherche .cancel {
+	z-index: 2;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	line-height: 1px;
+}
+.formulaire_recherche .image {
+	#RIGHT: calc(var(--spip-searchform-padding) / 2);
+	margin-bottom: 0;
+	padding: 0.25em;
+	color: hsla(0, 0%, 0%, 0.5);
+}
+.formulaire_recherche .image svg {
+	width: 1.15em;
+	height: auto;
+}
+.formulaire_recherche .image,
+.formulaire_recherche .image:hover,
+.formulaire_recherche .image:focus {
+	background: none;
+	border: 0;
+	box-shadow: none;
+}
+.formulaire_recherche .image:hover,
+.formulaire_recherche .image:focus {
+	color: var(--spip-color-theme-black);
+}
+.formulaire_recherche .cancel {
+	#LEFT: calc(var(--spip-searchform-padding) / 2);
+}
+/* Dans une modale */
+.box_mediabox .formulaire_recherche {
+	z-index: 1; /* focus dans la mediabox */
+}
+/* Dans bandeau outils */
+#bando_outils .formulaire_recherche {
+	margin: 0;
+}
+#bando_outils .formulaire_recherche input.text {
+	padding-top: 0.44em; /* à la louche pour obtenir même hauteur que le bando */
+	padding-bottom: 0.44em;
+	border-radius: 0;
+	background-color:hsla(0, 0%, 100%, 0.33);
+}
+
+/* formulaire_traduire */
+.formulaire_traduire .liste-objets {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.formulaire_traduire .liste-objets .first_row {
+	display: none;
+}
+.formulaire_traduire .supprimer_trad {
+	float: var(--spip-right);
+}
+
+/* formulaire_instituer */
+.infos .formulaire_instituer {
+	background: none;
+	border: 0;
+	box-shadow: none;
+	margin:0 -10px;
+}
+.infos .formulaire_instituer .reponse_formulaire {
+	display: none;
+}
+.infos .formulaire_instituer ul {
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+.infos .formulaire_instituer .editer {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.infos .formulaire_instituer .show {
+	display:block;
+	margin:0 -10px;
+	padding:10px;
+	background-color: var(--spip-color-gray-lightest);
+}
+.infos .formulaire_instituer .show select {
+	width: 100%;
+}
+.infos .formulaire_instituer .show select,
+.infos .formulaire_instituer .show option {
+	background-repeat: no-repeat;
+	background-position: 4px center;
+	background-color: var(--spip-color-gray-lightest);
+	color: inherit;
+}
+.infos .formulaire_instituer .show img {
+	border: 1px solid white;
+}
+.infos .formulaire_instituer .boutons {
+	background: none;
+	border-top: 0;
+}
+.infos .formulaire_instituer .statut_prepa .show {
+	background-color: #fff;
+}
+.infos .formulaire_instituer .statut_prop .show {
+	background-color: #f89058;
+}
+.infos .formulaire_instituer .statut_publie .show {
+	background-color: #9dba00;
+}
+.infos .formulaire_instituer .statut_poubelle .show {
+	background-color: #000;
+	color:#fff;
+}
+.infos .formulaire_instituer .statut_poubelle .show select,
+.infos .formulaire_instituer .statut_poubelle .show option {
+	color:#333;
+}
+.infos .formulaire_instituer .statut_refuse .show {
+	background-color: #ff0000;
+}
+
+/* Menu favoris */
+.formulaire_configurer_preferences_menus .menus_favoris input.text {
+	padding: calc(var(--spip-form-padding-input-y) / 2) calc(var(--spip-form-padding-input-y) / 2);
+	width: 2em;
+}
+.formulaire_configurer_preferences_menus .menus_favoris .choix {
+	padding: calc(var(--spip-form-padding-input-y) / 2) calc(var(--spip-form-padding-input-x) / 2);
+}
+
+
+/**
+ * ==========
+ * 15. Divers
+ * ==========
+ */
+
+
+/* Icone d'aide
+   Attention même classe sur le <a> et le <img> dedans */
+a.aide {
+	display: inline-flex; /* pour aligner correctement */
+	vertical-align: middle;
+	margin-bottom: 0.1em; /* pour aligner aussi */
+}
+img.aide {
+	padding: 2px !important;
+	width: 16px;
+	height: 16px;
+}
+
+/* Date picker */
+#ui-datepicker-div {
+	z-index: 10000 !important;
+}
+.ui-datepicker {
+	z-index: 1001 !important;
+}
+.formulaire_spip img.ui-datepicker-trigger {
+	position: relative;
+	max-width: 1.5em;
+	margin-top: -0.25em;
+	margin-left: -1.75em;
+}
+
+/* pour editer_liens ? */
+.actions a.editbox:not(.bouton) {
+	display: inline-block;
+}
+
+/* Toggle box link */
 .formulaire_spip .toggle_box_link {
 	position: absolute;
 	top: 6px;
-	#ENV{right}: 6px;
-	-webkit-opacity: 0.6;
-	-moz-opacity: 0.6;
+	#RIGHT: 6px;
 	opacity: 0.6;
 	filter: alpha(opacity=60);
 	z-index: 1;
 }
 .formulaire_spip:hover .toggle_box_link {
-	-webkit-opacity: 1.0;
-	-moz-opacity: 1.0;
 	opacity: 1.0;
 	filter: alpha(opacity=100);
 }
@@ -273,131 +1502,5 @@ img.aide {padding: 2px !important;box-sizing: border-box;}
 /* Centrage vertical */
 .formulaire_spip .toggle_box_link.middle {
 	top: 50%;
-	-webkit-transform: translateY(-50%);
-	    -ms-transform: translateY(-50%);
 	        transform: translateY(-50%);
 }
-
-
-/**
- * ========================
- * Formulaires particuliers
- * ========================
- */
-
-/* Article */
-.formulaire_editer_article .editer.editer_liens_sites {border-bottom: 1px solid #ccc;}
-
-/* edition d'un auteur */
-.formulaire_editer_auteur .editer_identification fieldset{[background-color: #(#ENV{claire}|couleur_eclaircir|couleur_eclaircir);]}
-.formulaire_editer_auteur .editer.editer_statut {	padding-top:10px;}
-.formulaire_editer_auteur .editer.editer_statut .instituer_auteur {margin-#ENV{left}:-130px;margin-top:10px;}
-.formulaire_editer_auteur .editer.editer_statut .rubriques_restreintes > p {margin-#ENV{left}:0;margin-bottom:0;margin-top:10px;}
-.formulaire_editer_auteur .editer.editer_statut .rubriques_restreintes label { float: none; width: auto; margin-#ENV{left}: 0; }
-
-/* Logo */
-.formulaire_editer_logo {}
-#navigation .formulaire_editer_logo .apercu,#navigation .formulaire_editer_logo .ajouter_survol {text-align: center;}
-.formulaire_editer_logo .spip_logo img, #illustrations .vignette img, #documents_joints .image img.spip_logo {
-		background: url(#CHEMIN_IMAGE{fond-imgs.png});
-}
-.formulaire_editer_logo .taille {font-size: 0.9em;}
-
-/* Multilinguisme */
-.formulaire_configurer_multilinguisme #langues_bloquees .choix,
-.formulaire_configurer_multilinguisme #langues_proposees .choix { padding:0 5px;margin-#ENV{right}:10px;float:#ENV{left};width:45%;clear:none; background: transparent; border: 0; }
-.formulaire_configurer_multilinguisme .traduite label {text-decoration:underline;}
-.formulaire_configurer_multilinguisme #langues_bloquees label {color: #ENV{foncee};font-weight: bold; }
-
-/* config/reducteur */
-.formulaire_configurer_reducteur .vignettes_reducteur {display: flex;}
-.formulaire_configurer_reducteur .vignette_reducteur {text-align: center; float: #ENV{left};padding:2px; border:2px solid #ddd; width:154px;padding-top:150px;margin:2px;background-position: top center;background-repeat: no-repeat;}
-.formulaire_configurer_reducteur .vignette_reducteur:hover {border-color:#bbb;background-color:#ddd;}
-.formulaire_configurer_reducteur .vignette_reducteur.on { font-weight: bold; border:2px solid #ENV{claire};background-color:#fff; }
-.formulaire_configurer_reducteur .vignette_reducteur.on:hover {border-color:#ENV{foncee}; color: #666; color: hsla(0, 0%, 0%, 0.6); /* Pour mieux s'adapter aux couleurs de fond */}
-
-/* dater */
-.formulaire_dater .editer {padding-bottom:0;padding-top:0;}
-.formulaire_dater .editer label {font-weight: bold;text-transform: uppercase;font-size:0.9em;}
-.formulaire_dater .aide {float:#GET{right}}
-.formulaire_dater .affiche {font-weight: bold;text-transform: uppercase;}
-.formulaire_dater .saisie_redac {display:block;}
-.formulaire_dater .editer_date_redac .editable .choix{ display:block;}
-@media (max-width: 760px) {
-	.formulaire_dater .editer_date_redac .editable label { margin-left:-260px!important; width:240px !important; display:inline-block;}
-}
-.formulaire_dater  #sans_redac { vertical-align:top;}
-
-/* editer_liens */
-.formulaire_editer_liens .liste-objets {border:0;margin-left:-10px;margin-right:-10px;}
-.formulaire_editer_liens .liste-objets-associer .caption {font-size:0.9em;}
-.formulaire_editer_liens .liste-objets-associer .caption span.recherche {float:#ENV{right};margin-top:-3px;font-size:0.9em;}
-.formulaire_editer_liens .liste-objets-associer .caption span.recherche .tout_voir {font-size:0.8em;}
-.formulaire_editer_liens h3,.formulaire_editer_liens .titrem {margin:0 -10px;padding:[(#ENV{margin-bottom}|strdiv{2})em];}
-.formulaire_editer_liens .liste-objets-lies {margin-bottom: 0;}
-.formulaire_editer_liens .selecteur > .titrem {margin-bottom:0;}
-.formulaire_editer_liens .selecteur .tout_voir {visibility:hidden;}
-.formulaire_editer_liens .selecteur.filtre .tout_voir {visibility:visible;}
-.formulaire_editer_liens.non_editable input,.formulaire_editer_liens.non_editable button {display:none;}
-.formulaire_editer_liens .action {
-	text-align: #ENV{right};
-}
-.formulaire_editer_liens .liste-objets tr > .action {
-	text-align: #ENV{right};
-	width: 120px;
-}
-.formulaire_editer_liens .liste-objets tr > .action button {
-	-webkit-opacity: 0.6;
-	-moz-opacity: 0.6;
-	opacity: 0.6;
-	filter: alpha(opacity=60);
-}
-.formulaire_editer_liens .liste-objets tr > .action button img {
-	margin-#ENV{left}: 0px;
-	vertical-align: bottom;
-}
-.formulaire_editer_liens .liste-objets tr:hover > .action button,
-.formulaire_editer_liens .liste-objets tr:focus > .action button {
-	-webkit-opacity: 1.0;
-	-moz-opacity: 1.0;
-	opacity: 1.0;
-	filter: alpha(opacity=100);
-}
-
-.formulaire_editer_liens .associer_mot.obligatoire.nonvu {background-color:#FFCDAF;}
-.formulaire_editer_liens .associer_mot select,.formulaire_editer_liens .associer_mot input.text {width:75%;}
-.formulaire_editer_liens .associer_mot .submit {float:#ENV{right};}
-
-
-/* retour visuel a la suppression et a l'ajout */
-.remove {background-color:#FFD0BF;}
-.append {background-color:#E0FFCF;}
-
-/* formulaire de recherche : */
-/* version old style */
-.spip_recherche { float: [(#ENV{right})]; border:0;background:none;}
-.spip_recherche .recherche { float:[(#ENV{left})];padding:3px;padding-#ENV{right}:30px;width: 186px;/*font-size: 10px;*/ border: 1px solid #fff; background-color: #ENV{foncee}; color: #fff; margin: 0 0 6px; }
-.spip_recherche .submit {float: [(#ENV{left})];margin-#ENV{left}:-24px;margin-top:1px;}
-/* version moderne */
-.formulaire_spip.formulaire_recherche { float: [(#ENV{right})]; border:0;background:none;border: 1px solid #fff; background-color: [#(#ENV{foncee}|couleur_foncer)]; margin: 0 0 6px;position:relative;padding:0;z-index:1;}
-.box_mediabox .formulaire_spip.formulaire_recherche {z-index:1} /* focus dans la mediabox */
-.largeur .formulaire_spip.formulaire_recherche .text,.box_mediabox .formulaire_spip.formulaire_recherche .text{ float:[(#ENV{left})];padding:3px;width: 200px;background-color:#ENV{foncee};border:none;border-right:1px solid #fff;/*font-size: 10px;*/ color: #fff;  margin:0;min-height:20px;}
-.formulaire_spip.formulaire_recherche .text.cancelable {padding-#ENV{left}:20px}
-.formulaire_spip.formulaire_recherche .text::-webkit-input-placeholder { color:#eee; }
-.formulaire_spip.formulaire_recherche .text::-moz-placeholder { color:#eee; opacity: 1; }
-.formulaire_spip.formulaire_recherche .text.placeholder { color:#eee; }
-
-.formulaire_spip.formulaire_recherche .cancel {float: [(#ENV{left})];line-height:1px;position:absolute;top:2px;left:2px;z-index:2}
-.formulaire_spip.formulaire_recherche label {display:none;}
-.formulaire_spip.formulaire_recherche .submit,.formulaire_spip.formulaire_recherche .image {float: [(#ENV{left})];margin-top:0px;padding:0 2px; }
-.formulaire_spip.formulaire_recherche .image { z-index:2; }
-
-/* formulaire_traduire */
-.formulaire_traduire .liste-objets {margin-top:0;margin-bottom:0;}
-.formulaire_traduire .liste-objets .first_row {display:none;}
-.formulaire_traduire .supprimer_trad {float:#ENV{right};}
-
-/* formulaire_editer_logo */
-.formulaire_editer_logo .titrem,.formulaire_editer_logo .ajouter_survol {text-transform: uppercase;}
-/* Date picker : passer par dessus des icones et du menu haut */
-.ui-datepicker { z-index: 1001 !important;}

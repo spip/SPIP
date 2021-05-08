@@ -11,10 +11,6 @@
         "path": "plugins-dist/bigup",
         "source": "https://git.spip.net/spip/bigup.git"
     },
-    "breves": {
-        "path": "plugins-dist/breves",
-        "source": "https://git.spip.net/spip/breves.git"
-    },
     "compagnon": {
         "path": "plugins-dist/compagnon",
         "source": "https://git.spip.net/spip/compagnon.git"
@@ -47,14 +43,6 @@
         "path": "plugins-dist/mots",
         "source": "https://git.spip.net/spip/mots.git"
     },
-    "organiseur": {
-        "path": "plugins-dist/organiseur",
-        "source": "https://git.spip.net/spip/organiseur.git"
-    },
-    "petitions": {
-        "path": "plugins-dist/petitions",
-        "source": "https://git.spip.net/spip/petitions.git"
-    },
     "plan": {
         "path": "plugins-dist/plan",
         "source": "https://git.spip.net/spip/plan.git"
@@ -75,10 +63,6 @@
         "path": "plugins-dist/sites",
         "source": "https://git.spip.net/spip/sites.git"
     },
-    "squelettes_par_rubrique": {
-        "path": "plugins-dist/squelettes_par_rubrique",
-        "source": "https://git.spip.net/spip/squelettes_par_rubrique.git"
-    },
     "statistiques": {
         "path": "plugins-dist/statistiques",
         "source": "https://git.spip.net/spip/statistiques.git"
@@ -94,10 +78,6 @@
     "urls_etendues": {
         "path": "plugins-dist/urls_etendues",
         "source": "https://git.spip.net/spip/urls_etendues.git"
-    },
-    "vertebres": {
-        "path": "plugins-dist/vertebres",
-        "source": "https://git.spip.net/spip/vertebres.git"
     },
     "dist": {
         "path": "squelettes-dist",

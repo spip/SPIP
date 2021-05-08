@@ -19,8 +19,8 @@
 				]
 				<span class="affiche"[(#ENV{_saisie_en_cours}|et{#ENV{_editer_date}}|oui)style="display:none;"]>[(#ENV*{afficher_#GET{name}}|affdate)]</span>
 				<BOUCLE_editable(CONDITION){si #ENV{editable}}>
-				<span class="toggle_box_link middle"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]><button
-					  class="mini principal"
+				<span class="toggle_box_link"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]><button
+					  class="btn_mini btn_secondaire"
 					  name="_saisie_en_cours" value="X"
 						onclick="return formulaireDaterButtonChangeOnClick.apply(this)"
 						><:bouton_changer:><i class="over"> \(#ENV{_label_date}\)</i></button></span>
@@ -48,7 +48,7 @@
 							<input type="checkbox" name="sans_redac" value="1"[(#ENV{sans_redac}|oui)checked="checked"] id="sans_redac"
 								onclick="jQuery(this).blur();"
 								onchange="formulaireDaterCheckboxSansRedacOnChange.apply(this)"
-							/><label for="sans_redac">[(#ENV{_texte_sans_date_redac,<:texte_date_publication_anterieure_nonaffichee:>})]</label>
+							/><label for="sans_redac"><span class="texte-label">[(#ENV{_texte_sans_date_redac,<:texte_date_publication_anterieure_nonaffichee:>})]</span></label>
 						</span>
 					</BOUCLE_editable1>
 					</span>
@@ -60,8 +60,8 @@
 	[(#ENV{editable})
 		<div class='boutons'[(#ENV{_saisie_en_cours}|non)style="display:none;"]>
 			<span class='image_loading'>&nbsp;</span>
-			<div class="groupe-boutons">
-				<input type='submit' class='btn submit' name='annuler' value='<:bouton_annuler:>' />
+			<div class="groupe-btns">
+				<input type='submit' class='btn submit btn_secondaire' name='annuler' value='<:bouton_annuler:>' />
 				<input type='submit' class='btn submit' name='changer' value='<:bouton_changer:>' />
 			</div>
 		</div>

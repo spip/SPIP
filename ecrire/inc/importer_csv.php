@@ -89,7 +89,7 @@ function inc_importer_csv_dist($file, $options = []) {
 
 	// support ancienne syntaxe
 	// inc_importer_csv_dist($file, $head = false, $delim = ',', $enclos = '"', $len = 10000, $charset_source = '')
-	if (is_string($options)) {
+	if (!is_array($options)) {
 		$args = func_get_args();
 		$options = [];
 		foreach ([1 => 'head', 2 => 'delim', 3 => 'enclos', 4 => 'len', 5 => 'charset_source'] as $k => $option) {

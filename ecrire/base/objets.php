@@ -1237,6 +1237,10 @@ function objet_test_si_publie($objet, $id_objet, $serveur = '') {
 		$boucle->from[$table_objet] = table_objet_sql($objet, $serveur);
 		$boucle->where[] = $id_table . '.' . $id_table_objet . '=' . intval($id_objet);
 
+		$boucle->descr['nom'] = 'objet_test_si_publie'; // eviter notice php
+		$boucle->descr['sourcefile'] = 'internal';
+		$boucle->descr['gram'] = 'html';
+
 		include_spip('public/compiler');
 		include_spip('public/composer');
 		instituer_boucle($boucle, false, true);

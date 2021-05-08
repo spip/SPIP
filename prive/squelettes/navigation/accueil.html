@@ -1,7 +1,7 @@
 [(#BOITE_OUVRIR{[
 	[(#URL_ECRIRE{infos_perso}|afficher_plus_info{<:icone_informations_personnelles:>})]
 	[(#CHEMIN_IMAGE{information-perso-24.png}|balise_img{'','cadre-icone'})]
-	(#SESSION{nom})
+	(#SESSION{nom}|typo)
 ],'simple personnel'})]
 	[(#URL_ECRIRE{infos_perso}|icone_horizontale{<:icone_informations_personnelles:>,fiche-perso})]
 
@@ -25,7 +25,7 @@
 	](#NOM_SITE_SPIP)
 ],'simple etat_base'})]
 
-	[<div class="logo_du_site">(#LOGO_SITE_SPIP|image_reduire{170,170})</div>]
+	[<div class="logo_du_site">(#LOGO_SITE_SPIP|image_reduire{320,240})</div>]
 	[<div class="descriptif_du_site">(#DESCRIPTIF_SITE_SPIP|image_reduire{180,*})</div>]
 
 	#PIPELINE{accueil_informations,#INCLURE{fond=prive/squelettes/inclure/accueil-information,env}}
