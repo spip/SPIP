@@ -54,10 +54,11 @@ function sandbox_composer_texte($texte, &$p) {
  * @param string $code
  * @param string $arglist
  * @param Champ $p
+ * @param int $nb_arg_droite        nb d'arguments à droite du filtre
  *     Balise qui appelle ce filtre
  * @return string
  */
-function sandbox_composer_filtre($fonc, $code, $arglist, &$p) {
+function sandbox_composer_filtre($fonc, $code, $arglist, &$p, $nb_arg_droite=1000) : string {
 	if (isset($GLOBALS['spip_matrice'][$fonc])) {
 		$code = "filtrer('$fonc',$code$arglist)";
 	}
@@ -76,8 +77,15 @@ function sandbox_composer_filtre($fonc, $code, $arglist, &$p) {
 		$refs = $refl->getParameters();
 		if (isset($refs[0]) and $refs[0]->name == 'Pile') {
 			$code = "$f(\$Pile,$code$arglist)";
+			$nb_arg_gauche = 2; // la balise à laquelle s'applique le filtre + $Pile
 		} else {
 			$code = "$f($code$arglist)";
+			$nb_arg_gauche = 1; // la balise à laquelle s'applique le filtre
+		}
+		$nb_args_f = $nb_arg_gauche+$nb_arg_droite;
+		$min_f = $refl->getNumberOfRequiredParameters();
+		if (($nb_args_f < $min_f)) {
+			erreur_squelette (array('zbug_erreur_filtre', array('filtre' => texte_script ($fonc . " (nombre d’argument $nb_arg_droite insuffisant pour $fonc. Il en faut au moins ".($min_f-$nb_arg_gauche).')'))), $p);
 		}
 	}
 	// le filtre n'existe pas,
