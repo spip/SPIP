@@ -85,7 +85,8 @@ function sandbox_composer_filtre($fonc, $code, $arglist, &$p, $nb_arg_droite=100
 		$nb_args_f = $nb_arg_gauche+$nb_arg_droite;
 		$min_f = $refl->getNumberOfRequiredParameters();
 		if (($nb_args_f < $min_f)) {
-			erreur_squelette (array('zbug_erreur_filtre', array('filtre' => texte_script ($fonc . " (nombre d’argument $nb_arg_droite insuffisant pour $fonc. Il en faut au moins ".($min_f-$nb_arg_gauche).')'))), $p);
+			$msg_args = ['filtre' => texte_script ($fonc), 'nb'=> $nb_arg_droite, 'min' => $min_f-$nb_arg_gauche];
+			erreur_squelette ([ 'zbug_erreur_filtre_nbarg_min', $msg_args], $p);
 		}
 	}
 	// le filtre n'existe pas,
