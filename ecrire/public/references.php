@@ -845,7 +845,8 @@ function compose_filtres(&$p, $code) {
 			$sep = ':';
 			// |?{a,b} *doit* avoir exactement 2 arguments ; on les force
 			if ($countfiltre != 2) {
-				$filtre = array(isset($filtre[0]) ? $filtre[0] : "", isset($filtre[1]) ? $filtre[1] : "");
+				$filtre = array($filtre[0] ?? '', $filtre[1] ?? '');
+				$countfiltre = 2;
 			}
 		}
 		$arglist = compose_filtres_args($p, $filtre, $sep);
