@@ -54,7 +54,7 @@ function sandbox_composer_texte($texte, &$p) {
  * @param string $code
  * @param string $arglist
  * @param Champ $p
- * @param int $nb_arg_droite        nb d'arguments à droite du filtre
+ * @param int $nb_arg_droite        nb d'arguments à droite du filtre dans le source spip |fff{a,b,c}
  *     Balise qui appelle ce filtre
  * @return string
  */
