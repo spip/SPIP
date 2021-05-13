@@ -50,8 +50,17 @@ function balise_INFO__dist($p) {
 
 		return $p;
 	} else {
+
+		// Récupérer tous les params à la suite de objet et id_objet
+		$_params = '[';
+		$nb_params = count($p->param[0]); // 1ère valeur vide donc 1 en plus
+		for ($i = 3; $i < $nb_params; $i++) {
+			$_params .= interprete_argument_balise($i, $p) . ',';
+		}
+		$_params .= ']';
+
 		$info_sql = strtolower(substr($info, 5));
-		$code = "generer_info_entite($id_objet, $type_objet, '$info_sql'" . ($p->etoile ? "," . _q($p->etoile) : "") . ")";
+		$code = "generer_info_entite($id_objet, $type_objet, '$info_sql', " . ($p->etoile ? _q($p->etoile) : "''") . ", $_params)";
 		$p->code = champ_sql($info, $p, $code);
 		$p->interdire_scripts = true;
 
