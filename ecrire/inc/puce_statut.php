@@ -126,20 +126,20 @@ function statut_image($objet, $statut) {
 	} else {
 		switch ($statut) {
 			case 'prepa':
-				$src = 'puce-preparer-8.png';
+				$src = 'puce-preparer-xx.svg?12px';
 				break;
 			case 'prop':
-				$src = 'puce-proposer-8.png';
+				$src = 'puce-proposer-xx.svg?12px';
 				break;
 			case 'publie':
-				$src = 'puce-publier-8.png';
+				$src = 'puce-publier-xx.svg?12px';
 				break;
 			case 'refuse':
-				$src = 'puce-refuser-8.png';
+				$src = 'puce-refuser-xx.svg?12px';
 				break;
 			case 'poubelle':
 			case 'poub':
-				$src = 'puce-supprimer-8.png';
+				$src = 'puce-supprimer-xx.svg?12px';
 				break;
 		}
 	}
@@ -379,10 +379,10 @@ function puce_statut_changement_rapide(
 		return $inser_puce;
 	}
 
-	$unit = 8/*widh de img*/ + 4/*padding*/
+	$unit = 18/*widh de img*/ + 0/*padding*/
 	;
-	$margin = 4; /* marge a gauche + droite */
-	$zero = 1 /*border*/ + $margin / 2 + 2 /*padding*/
+	$margin = 0; /* marge a gauche + droite */
+	$zero = 0 /*border*/ + $margin / 2 + 0 /*padding*/
 	;
 	$clip = $zero + ($unit * $coord[$statut]);
 
