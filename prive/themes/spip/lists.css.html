@@ -476,7 +476,8 @@
    Nb : pour les auteurs, logo en background du <a>, pour les visiteurs c'est une <img> */
 .liste-objets.auteurs td.logo,
 .liste-objets.visiteurs td.logo {
-	min-width: var(--spip-list-logo-size);
+	width: var(--spip-list-logo-size);
+	padding: calc(var(--spip-list-spacing-y) / 4) calc(var(--spip-list-spacing-x) / 2);
 }
 .liste-objets.auteurs td.logo a,
 .liste-objets.visiteurs td.logo img {
