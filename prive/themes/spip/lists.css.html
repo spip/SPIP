@@ -862,13 +862,16 @@
 }
 .en-edition .bouton_action_post {
 	float: #ENV{right};
-	margin: 5px 0 0;
 }
 .en-edition .liste-items {
 	margin: 0;
 }
 .en-edition .liste-items .item {
-	padding: 2px 0;
+	padding: 5px 0;
+	display: flex;
+}
+.en-edition .liste-items a {
+	flex-grow: 2;
 }
 .en-edition .item .icone-objet {
 	float: #ENV{left};
@@ -876,6 +879,13 @@
 	margin-#ENV{right}: 5px;
 }
 .en-edition .item .bouton_action_post {
-	float: #ENV{right};
-	margin-top: -1px;
+	margin: 0;
+}
+.en-edition .item .bouton_action_post button {
+	padding: 0;
+}
+.en-edition .item .bouton_action_post img {
+	margin: 0;
+	width: 16px;
+	height: 16px;
 }
