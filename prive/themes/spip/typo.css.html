@@ -76,12 +76,27 @@ h2,.h2 {[ font-size: (#GET{line-height}|strmult{1})em]; line-height: 1; margin-b
 h3,.h3 {[ font-size: (#GET{line-height}|strmult{#GET{coeff}})em];[ line-height: (#GET{coeffinv})em];[ margin-bottom: (#GET{coeffinv})em;]font-weight: bold; }
 #SET{coeff,#GET{line-height}|strplus{3}|strdiv{4}|strdiv{#GET{line-height}}}
 #SET{coeffinv,#VAL{1}|strdiv{#GET{coeff}}}
-h4,.h4,caption,.caption-wrap {[ font-size: (#GET{line-height}|strmult{#GET{coeff}})em];[ line-height: (#GET{coeffinv})em];[ margin-bottom: (#GET{coeffinv})em;]font-weight: bold; }
+h4,.h4,caption {[ font-size: (#GET{line-height}|strmult{#GET{coeff}})em];[ line-height: (#GET{coeffinv})em];[ margin-bottom: (#GET{coeffinv})em;]font-weight: bold; }
 h5,.h5 { font-size: 1em; font-weight: bold; margin-bottom: #GET{margin-bottom}; }
 h6,.h6 { font-size: 1em; font-weight: bold; }
 h3.titrem {
 	position: relative;
 }
+
+/* Titre de section.
+   Ils reprennent l'affichage des entêtes de boîtes.
+   Utile pour démarrer une section sur une fiche d'objet par exemple,
+   tout en gardant un affichage consistant avec les blocs de formulaires, listes, etc. */
+.titrem_section {
+	display: block;
+	padding: var(--spip-box-spacing-y-mini) var(--spip-box-spacing-x-mini);
+	margin: var(--spip-spacing-y) 0;
+	font-size: var(--spip-box-heading-fontsize-mini);
+	font-weight: var(--spip-box-heading-fontweight);
+	border-radius: var(--spip-box-border-radius);
+	background-color: var(--spip-color-gray-lightest);
+}
+
 
 #haut h1,h1.grostitre {margin-top:[(#ENV{margin-bottom}|strmult{1.5}|strdiv{2}|strdiv{#GET{line-height}})em]}
 

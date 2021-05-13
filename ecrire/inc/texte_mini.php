@@ -542,6 +542,9 @@ function safehtml($t) {
 		return str_replace("\x00", '', $t);
 	}
 
+	if (!function_exists('interdire_scripts')) {
+		include_spip('inc/texte');
+	}
 	$t = interdire_scripts($t); // jolifier le php
 	$t = echappe_js($t);
 

@@ -170,7 +170,7 @@
 		<traducteur nom="Julia14" lien="https://trad.spip.net/auteur/julia14" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="ja" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=ja" total="810" traduits="795" relire="0" modifs="12" nouveaux="3" pourcent="98.15">
+	<langue code="ja" url="https://trad.spip.net/tradlang_module/ecrire_?lang_cible=ja" total="810" traduits="810" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 		<traducteur nom="origenius" lien="https://trad.spip.net/auteur/origenius" />
 	</langue>

@@ -24,6 +24,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 /**
  * Compile la balise `#ALERTE` produisant le HTML d'un message d'alerte complet.
  *
+ * @note
+ * Produit par défaut une alerte avec la classe `notice` et le role `alert`,
+ * sauf si on passe des chaînes vides en param.
+ * Cela permet par exemple de retirer le rôle dans certains cas précis.
+ *
  * @package SPIP\Core\Compilateur\Balises
  * @balise
  * @example
@@ -43,10 +48,11 @@ function balise_ALERTE_dist($p) {
 	$_class = interprete_argument_balise(3, $p);
 	$_role  = interprete_argument_balise(4, $p);
 	$_id    = interprete_argument_balise(5, $p);
-	$_titre = ($_titre ? ", $_titre" : "''");
-	$_class = ($_class ? ", $_class" : ", ''");
-	$_role  = ($_role ? ", $_role" : ", ''");
-	$_id    = ($_id ? ", $_id" : ", ''");
+	$_texte = ($_texte ? $_texte     : "''");
+	$_titre = ($_titre ? ", $_titre" : ', null');
+	$_class = ($_class ? ", $_class" : ', null');
+	$_role  = ($_role  ? ", $_role"  : ', null');
+	$_id    = ($_id    ? ", $_id"    : ', null');
 
 	$f = chercher_filtre('message_alerte');
 	$p->code = "$f($_texte$_titre$_class$_role$_id)";
@@ -59,6 +65,11 @@ function balise_ALERTE_dist($p) {
  * Compile la balise `#ALERTE_OUVRIR` produisant le HTML ouvrant d'un message d’alerte
  *
  * Doit être suivie du texte de l'alerte, puis de la balise `#ALERTE_FERMER`.
+ *
+ * @note
+ * Produit par défaut une alerte avec la classe `notice` et le role `alert`,
+ * sauf si on passe des chaînes vides en param.
+ * Cela permet par exemple de ne pas mettre de rôle dans certains cas précis.
  *
  * @package SPIP\Core\Compilateur\Balises
  * @balise
@@ -79,10 +90,10 @@ function balise_ALERTE_OUVRIR_dist($p) {
 	$_class = interprete_argument_balise(2, $p);
 	$_role  = interprete_argument_balise(3, $p);
 	$_id    = interprete_argument_balise(4, $p);
-	$_titre = ($_titre ? "$_titre" : "''");
-	$_class = ($_class ? ", $_class" : ", ''");
-	$_role  = ($_role ? ", $_role" : ", ''");
-	$_id    = ($_id ? ", $_id" : ", ''");
+	$_titre = ($_titre ? "$_titre"   : 'null');
+	$_class = ($_class ? ", $_class" : ', null');
+	$_role  = ($_role  ? ", $_role"  : ', null');
+	$_id    = ($_id    ? ", $_id"    : ', null');
 
 	$f = chercher_filtre('message_alerte_ouvrir');
 	$p->code = "$f($_titre$_class$_role$_id)";
@@ -122,6 +133,11 @@ function balise_ALERTE_FERMER_dist($p) {
  *
  * Peut-être surchargé par `filtre_message_alerte_dist` ou `filtre_message_alerte`
  *
+ * @note
+ * Produit par défaut une alerte avec la classe `notice` et le rôle `alert`,
+ * sauf si on passe des chaînes vides en param (compat balises).
+ * Cela permet par exemple de ne pas mettre de rôle dans certains cas précis.
+ *
  * @filtre
  * @see balise_ALERTE_dist() qui utilise ce filtre
  * @see message_alerte_ouvrir()
@@ -133,14 +149,16 @@ function balise_ALERTE_FERMER_dist($p) {
  * @param string $class
  *     Classes CSS ajoutées au conteneur
  *     Doit contenir le type : `notice`, `error`, `success`, `info`
+ *     Défaut = `notice` (sauf en cas de chaîne vide)
  * @param string $role
- *     Attribut rôle ajouté au conteneur : `alert` ou `status`, selon l'importance
+ *     Attribut role ajouté au conteneur : `alert` ou `status`, selon l'importance
+ *     Défaut = `alert` (sauf en cas de chaîne vide)
  * @param string $id
  *     Identifiant HTML du conteneur
  * @return string
  *     HTML de l'alerte
  */
-function message_alerte(string $texte, string $titre = '', string $class = '', string $role = '', string $id = '') : string {
+function message_alerte(string $texte, ?string $titre = null, ?string $class = null, ?string $role = null, ?string $id = null) : string {
 
 	$message_alerte_ouvrir = chercher_filtre('message_alerte_ouvrir');
 	$message_alerte_fermer = chercher_filtre('message_alerte_fermer');
@@ -157,6 +175,11 @@ function message_alerte(string $texte, string $titre = '', string $class = '', s
  *
  * Peut-être surchargé par `filtre_message_alerte_ouvrir_dist` ou `filtre_message_alerte_ouvrir`
  *
+ * @note
+ * Produit par défaut une alerte avec la classe `notice` et le role `alert`,
+ * sauf si on passe des chaînes vides en param (compat balises).
+ * Cela permet par exemple de ne pas mettre de rôle dans certains cas précis.
+ *
  * @filtre
  * @see balise_ALERTE_OUVRIR_dist() qui utilise ce filtre
  * @param string $titre
@@ -164,18 +187,22 @@ function message_alerte(string $texte, string $titre = '', string $class = '', s
  * @param string $class
  *     Classes CSS ajoutées au conteneur
  *     Doit contenir le type : `notice`, `error`, `success`, `info`
- *     Défaut = `notice`
+ *     Défaut = `notice` (sauf en cas de chaîne vide)
  * @param string $role
  *     Attribut role ajouté au conteneur : `alert` ou `status`, selon l'importance
- *     Défaut = `alert`
+ *     Défaut = `alert` (sauf en cas de chaîne vide)
  * @param string $id
  *     Identifiant HTML du conteneur
  * @return string
  *     HTML d'ouverture de l'alerte
  */
-function message_alerte_ouvrir(string $titre = '', string $class = '', string $role = '', string $id = '') : string {
+function message_alerte_ouvrir(?string $titre = null, ?string $class = null, ?string $role = null, ?string $id = null) : string {
 
 	$prive = test_espace_prive();
+
+	// Valeurs par défaut
+	$role = $role ?? 'alert'; // fallback uniquement si null
+	$class = $class ?? 'notice'; // fallback uniquement si null
 
 	// Type d'alerte : le chercher dans les classes, nettoyer celles-ci, puis le réinjecter
 	$types = [
@@ -184,12 +211,9 @@ function message_alerte_ouvrir(string $titre = '', string $class = '', string $r
 		'success',
 		'info',
 	];
-	$type = array_intersect(explode(' ', $class), $types);
-	$type  = reset($type) ?: 'notice';
+	$type  = array_intersect(explode(' ', $class), $types);
+	$type  = reset($type);
 	$class = trim(str_replace($types, '', $class) . " $type");
-
-	// Role
-	$role = $role ?: 'alert';
 
 	// Classes
 	$class_racine = 'msg-alert';
@@ -212,14 +236,15 @@ function message_alerte_ouvrir(string $titre = '', string $class = '', string $r
 		$titre = ajouter_class($titre, $class_titre);
 	}
 
-	// Autres attributs
-	$attr_id = ($id ? "id=\"$id\"" : '');
-	$attr_data = ($type ? "data-$role=\"$type\"" : '');
+	// Attributs
+	$attr_role = ($role ? "role=\"$role\"" : '');
+	$attr_id   = ($id   ? "id=\"$id\"" : '');
+	$attr_data = ($type ? "data-alert=\"$type\"" : '');
 
 	$message =
-		"<div class=\"$class_alerte\" role=\"$role\" $attr_id $attr_data>" .
-			$titre .
-			"<div class=\"$class_texte\">";
+		"<div class=\"$class_alerte\" $attr_role $attr_id $attr_data>"
+			. $titre
+			. "<div class=\"$class_texte\">";
 
 	return $message;
 }

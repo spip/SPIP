@@ -835,15 +835,18 @@ function compose_filtres(&$p, $code) {
 			$code = "filtrer('image_graver', $code)";
 			$image_miette = false;
 		}
+
 		// recuperer les arguments du filtre, 
 		// a separer par "," ou ":" dans le cas du filtre "?{a,b}"
+		$countfiltre = count($filtre);
 		if ($fonc !== '?') {
 			$sep = ',';
 		} else {
 			$sep = ':';
 			// |?{a,b} *doit* avoir exactement 2 arguments ; on les force
-			if (count($filtre) != 2) {
-				$filtre = array(isset($filtre[0]) ? $filtre[0] : "", isset($filtre[1]) ? $filtre[1] : "");
+			if ($countfiltre != 2) {
+				$filtre = array($filtre[0] ?? '', $filtre[1] ?? '');
+				$countfiltre = 2;
 			}
 		}
 		$arglist = compose_filtres_args($p, $filtre, $sep);
@@ -851,7 +854,7 @@ function compose_filtres(&$p, $code) {
 		if ($logique) {
 			$code = $logique;
 		} else {
-			$code = sandbox_composer_filtre($fonc, $code, $arglist, $p);
+			$code = sandbox_composer_filtre($fonc, $code, $arglist, $p, $countfiltre);
 			if ($is_filtre_image) {
 				$image_miette = true;
 			}

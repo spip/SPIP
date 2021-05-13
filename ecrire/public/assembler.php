@@ -722,30 +722,36 @@ function page_base_href(&$texte) {
 	) {
 		$head = substr($texte, 0, $poshead);
 		$insert = false;
+		$href_base = false;
 		if (strpos($head, '<base') === false) {
 			$insert = true;
 		} else {
-			// si aucun <base ...> n'a de href c'est bon quand meme !
+			// si aucun <base ...> n'a de href il faut en inserer un
+			// sinon juste re-ecrire les ancres si besoin
 			$insert = true;
 			include_spip('inc/filtres');
 			$bases = extraire_balises($head, 'base');
 			foreach ($bases as $base) {
-				if (extraire_attribut($base, 'href')) {
+				if ($href_base = extraire_attribut($base, 'href')) {
 					$insert = false;
+					break;
 				}
 			}
 		}
-		if ($insert) {
+
+		if ($insert){
 			include_spip('inc/filtres_mini');
 			// ajouter un base qui reglera tous les liens relatifs
-			$base = url_absolue('./');
-			$bbase = "\n<base href=\"$base\" />";
-			if (($pos = strpos($head, '<head>')) !== false) {
-				$head = substr_replace($head, $bbase, $pos + 6, 0);
+			$href_base = url_absolue('./');
+			$base = "\n<base href=\"$href_base\" />";
+			if (($pos = strpos($head, '<head>'))!==false){
+				$head = substr_replace($head, $base, $pos+6, 0);
 			} elseif (preg_match(",<head[^>]*>,i", $head, $r)) {
-				$head = str_replace($r[0], $r[0] . $bbase, $head);
+				$head = str_replace($r[0], $r[0] . $base, $head);
 			}
 			$texte = $head . substr($texte, $poshead);
+		}
+		if ($href_base) {
 			// gerer les ancres
 			$base = $_SERVER['REQUEST_URI'];
 			// pas de guillemets ni < dans l'URL qu'on insere dans le HTML

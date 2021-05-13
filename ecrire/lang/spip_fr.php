@@ -714,6 +714,7 @@ et vous reconnecter au site.
 	'zbug_erreur_compilation' => 'Erreur de compilation',
 	'zbug_erreur_execution_page' => 'Erreur d’exécution',
 	'zbug_erreur_filtre' => 'Filtre @filtre@ non défini',
+	'zbug_erreur_filtre_nbarg_min' => 'Filtre @filtre@ : il manque @nb@ argument(s)',
 	'zbug_erreur_meme_parent' => 'Le critère {meme_parent} ne s’applique qu’aux boucles (FORUMS) ou (RUBRIQUES)',
 	'zbug_erreur_squelette' => 'Erreur(s) dans le squelette',
 	'zbug_hors_compilation' => 'Hors Compilation',

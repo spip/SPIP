@@ -142,5 +142,7 @@ function ajax_retour($corps, $content_type = null) {
 	$debut = (($xml and strlen(trim($corps))) ? '<' . "?xml version='1.0' encoding='" . $c . "'?" . ">\n" : '');
 	$fin = '';
 
-	die ($debut.$corps.$fin.$e);
+	echo $debut.$corps.$fin.$e;
+	while (ob_get_level()) ob_end_flush();
+	flush();
 }

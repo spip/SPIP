@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuler_recherche' => '検索を取り消す',
 	'auteur' => '著者：',
 	'avis_acces_interdit' => 'アクセス禁止',
+	'avis_acces_interdit_prive' => '<b>@exec@</b>ページにアクセス禁止。',
 	'avis_article_modifie' => 'ご注意ください。@nom_auteur_modif@が@date_diff@分前にこの記事を編集しました。',
 	'avis_aucun_resultat' => '当たるデータがありません。',
 	'avis_base_inaccessible' => 'データーベース@base@に接続出来ません。',
@@ -63,6 +64,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_radio_non_envoi_annonces_editoriales' => '編集の発表を送信しない',
 	'bouton_redirection' => 'リダイレクト',
 	'bouton_reinitialiser_aux_valeurs_par_defaut' => 'デフォルトにリセットする',
+	'bouton_relancer_inscription' => '登録を再開する',
+	'bouton_relancer_inscriptions' => '登録を再開する',
 	'bouton_relancer_installation' => 'インストールを再開する',
 	'bouton_reset_password' => '新規パスワードを生成して、メールで送信する',
 	'bouton_suivant' => '次',
@@ -373,7 +376,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nouvel_article' => '新規記事',
 	'info_nouvelle_traduction' => '新規翻訳：',
 	'info_numero_article' => '記事番号：',
-	'info_obligatoire_02' => '［必須］', # MODIF
+	'info_obligatoire_02' => '［必須］',
 	'info_option_accepter_visiteurs' => '公開サイトから、訪問者の登録を受け取る',
 	'info_option_ne_pas_accepter_visiteurs' => '訪問者の登録を断る',
 	'info_options_avancees' => '詳細オプション',
@@ -661,9 +664,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plugin_titre_automatique_ajouter' => 'プラグインを追加する',
 	'plugin_titre_installation' => 'プラグイン@plugin@のインストール',
 	'plugin_titre_modifier' => '私のプラグイン',
-	'plugin_utilise_extension_php' => 'PHP拡張@plugin@のバーション@version@を使用しています。', # MODIF
-	'plugin_utilise_php' => '@plugin@のバーション@version@を使用しています。', # MODIF
-	'plugin_utilise_plugin' => 'プラグイン@plugin@のバーション@version@を使用しています。', # MODIF
+	'plugin_utilise_extension_php' => 'PHP拡張@plugin@は最低@version@のバーションを使用しています。',
+	'plugin_utilise_php' => '@plugin@のプラグインのバージョンは@version@でなければなりません。',
+	'plugin_utilise_plugin' => '@plugin@のプラグインは最低@version@バージョンが必要です。',
 	'plugin_zip_active' => '有効にするように続けてください。',
 	'plugin_zip_adresse' => '圧縮されたプラグインファイル、またはプラグインのリストをロードするには、以下のパスを入力します。',
 	'plugin_zip_adresse_champ' => 'プラグインまたはリストのパス',
@@ -690,19 +693,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Q
 	'queue_executer_maintenant' => '今すぐ実行する',
-	'queue_info_purger' => '全ての保留中のタスクを削除し、定期タスクのリストをリセットすることもできま
-す。', # MODIF
-	'queue_nb_jobs_in_queue' => '保留中のタスクは@nb@つです。', # MODIF
-	'queue_next_job_in_nb_sec' => '次のタスクは@nb@秒間後になります。', # MODIF
-	'queue_no_job_in_queue' => '保留中のタスクなし', # MODIF
-	'queue_one_job_in_queue' => '保留中のタスク1つ', # MODIF
+	'queue_info_purger' => '全ての保留中のタスクを削除して、定期タスクのリストを再設定するのにリセットすることも出来ます。',
+	'queue_nb_jobs_in_queue' => '保留中のタスクは@nb@つあります。',
+	'queue_next_job_in_nb_sec' => '次のタスクが@nb@秒後に始まる',
+	'queue_no_job_in_queue' => '保留中のタスクなし',
+	'queue_one_job_in_queue' => '保留中のタスク1つ',
 	'queue_priorite_tache' => '優先',
-	'queue_purger_queue' => 'タスクのリストをリセットする', # MODIF
-	'queue_titre' => 'タスクのリスト', # MODIF
+	'queue_purger_queue' => 'タスクのリストをリセットする',
+	'queue_titre' => 'バックグラウンドのタスク',
 
 	// R
 	'repertoire_plugins' => 'フォルダー：',
-	'required' => '［必須］', # MODIF
+	'required' => '［必須］',
 
 	// S
 	'sans_heure' => '時間指定なし',

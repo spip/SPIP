@@ -17,10 +17,9 @@
 	9. Éléments de formulaire (inputs & cie)
 	10. Messages de retour
 	11. Messages d’explications
-	12. Formulaires compacts en colonnes laterales
-	13. Formulaires dans certains contextes : fiche objet, etc.
-	14. Formulaires particuliers
-	15. Divers
+	12. Variantes d'affichage + formulaires dans certains contextes
+	13. Formulaires particuliers
+	14. Divers
 
 	Markup :
 
@@ -48,56 +47,79 @@
  * ============
  * 0. Variables
  * ============
+ *
+ * Nb : garder des variables propres à ce composant même dans les cas où on réutilise les variables de --spip-box,
+ * cela permet de garder une autonomie pour les ajustements éventuels.
+ * De plus il est parfois nécessaire d'accéder à ces variables en dehors de ce composant.
  */
 
 
 :root {
-	/* espacements externes (entre les inputs et cie) */
-	--spip-form-spacing-x: 0.75rem;
-	--spip-form-spacing-y: 0.75rem;
-	/* espacements internes (à l'intérieur des inputs et cie) */
-	--spip-form-padding-input-x: 0.33rem;
-	--spip-form-padding-input-y: 0.33rem;
-	/* fieldsets */
+	/* Espacements */
+	--spip-form-spacing-x: var(--spip-box-spacing-x-mini);
+	--spip-form-spacing-y: var(--spip-box-spacing-y-mini);
+	/* Entête */
+	--spip-form-heading-fontweight: var(--spip-box-heading-fontweight);
+	--spip-form-heading-fontsize: var(--spip-box-heading-fontsize-mini);
+	--spip-form-heading-iconsize: var(--spip-box-heading-iconsize-mini);
+	--spip-from-heading-iconpadding: calc(var(--spip-from-heading-iconsize) + (var(--spip-from-spacing-x) * 1.5));
+	/* Fieldsets */
 	--spip-form-fieldset-offset: 1.5em; /* décalage quand imbriqué */
 	--spip-form-fieldset-spacing: calc(var(--spip-form-spacing-y) / 2); /* espacement en plus */
-	/* layout labels */
+	/* Layout labels */
 	--spip-form-label-width: 12rem;
 	--spip-form-label-long-width: 19rem; /* ne pas dépendre de la taille de la font-size du label qui peut varier */
-	/* couleurs */
-	--spip-form-border-color: hsla(0, 0%, 0%, 0.2); /* couleur bordure inputs et cie */
-	--spip-form-sep-color: hsla(0, 0%, 0%, 0.125); /* couleur trait de séparation */
+	/* Couleurs */
 	--spip-form-color-focus: hsla(var(--spip-color-theme--h), calc(var(--spip-color-theme--s) * 3), var(--spip-color-theme--l), 0.25); /* outline focus inputs et cie */
 	--spip-form-color-text: var(--spip-color-gray-darkest); /* défaut */
 	--spip-form-color-text-light: var(--spip-color-gray-darker); /* labels et cie */
 	--spip-form-color-text-lightest: var(--spip-color-gray); /* placeholder */
-	/* divers */
-	--spip-form-border-radius: var(--spip-border-radius); /* bordure inputs et cie */
-	--spip-form-input-height: calc((var(--spip-form-padding-input-y) * 2) + var(--spip-line-height)); /* à toute fin utile */
+	/* Divers */
+	--spip-form-border-radius: var(--spip-box-border-radius);
+	/* Inputs */
+	--spip-form-input-padding-x: 0.33rem;
+	--spip-form-input-padding-y: 0.33rem;
+	--spip-form-input-border-color: hsla(0, 0%, 0%, 0.2);
+	--spip-form-input-border-radius: var(--spip-border-radius);
+	--spip-form-input-height: calc((var(--spip-form-input-padding-y) * 2) + var(--spip-line-height)); /* à toute fin utile */
 }
 @media (min-width: 768px) {
+	/* Taille normale */
 	:root {
-		/* espacements externes (entre les inputs et cie) */
-		--spip-form-spacing-x: 1.15rem;
-		--spip-form-spacing-y: 1.15rem;
-		/* espacements internes (à l'intérieur des inputs et cie) */
-		--spip-form-padding-input-x: 0.66rem;
-		--spip-form-padding-input-y: 0.66rem;
-		/* décalage des fieldsets imbriqués */
+		/* Espacements */
+		--spip-form-spacing-x: var(--spip-box-spacing-x-normal);
+		--spip-form-spacing-y: var(--spip-box-spacing-y-normal);
+		/* Entête */
+		--spip-form-heading-fontsize: var(--spip-box-heading-fontsize-normal);
+		--spip-form-heading-iconsize: var(--spip-box-heading-iconsize-normal);
+		--spip-from-heading-iconpadding: calc(var(--spip-from-heading-iconsize) + (var(--spip-from-spacing-x) * 1.5));
+		/* Inputs */
+		--spip-form-input-padding-x: 0.66rem;
+		--spip-form-input-padding-y: 0.66rem;
+		/* Décalage des fieldsets imbriqués */
 		--spip-form-fieldset-offset: 2.5em;
 	}
+	/* Taille réduite */
+	.formulaire_spip.mini,
+	.lat,
+	.affiche_milieu,
+	.formulaire_editer_liens,
+	.formulaire_dater {
+		/* Espacements  */
+		--spip-form-spacing-x: var(--spip-box-spacing-x-mini);
+		--spip-form-spacing-y: var(--spip-box-spacing-y-mini);
+		/* Entête */
+		--spip-form-heading-fontsize: var(--spip-box-heading-fontsize-mini);
+		--spip-form-heading-iconsize: var(--spip-box-heading-iconsize-mini);
+		--spip-from-heading-iconpadding: calc(var(--spip-from-heading-iconsize) + (var(--spip-from-spacing-x) * 1.5));
+		/* Inputs */
+		--spip-form-input-padding-x: 0.33rem;
+		--spip-form-input-padding-y: 0.33rem;
+		/* Décalage des fieldsets imbriqués */
+		--spip-form-fieldset-offset: 1.5em;
+	}
 }
-.lat .formulaire_spip,
-.formulaire_spip.mini {
-	/* espacements externes (entre les inputs et cie) */
-	--spip-form-spacing-x: 0.75rem;
-	--spip-form-spacing-y: 0.75rem;
-	/* espacements internes (à l'intérieur des inputs et cie) */
-	--spip-form-padding-input-x: 0.33rem;
-	--spip-form-padding-input-y: 0.33rem;
-	/* décalage des fieldsets imbriqués */
-	--spip-form-fieldset-offset: 1.5em;
-}
+
 
 
 /**
@@ -147,6 +169,8 @@
  *
  * On réunit au même endroit toutes les règlent concernant le rythme vertical.
  * Il s'agit des espacements verticaux entre les éléments : marges internes et externes.
+ *
+ * Ne mettre ici QUE des margin et des padding, rien d'autre !
  */
 
 /**
@@ -161,7 +185,7 @@
 .formulaire_spip .titrem {
 	margin-bottom: 0;
 }
-.formulaire_spip .titrem + *:not(form) {
+.formulaire_spip .titrem + *:not(form):not(.ajaxbloc) {
 	margin-top: var(--spip-form-spacing-y);
 }
 /* Généralités */
@@ -269,16 +293,17 @@
 	padding-bottom: calc(var(--spip-form-spacing-y) / 2);
 	overflow: hidden;
 	background: var(--spip-color-white);
-	border-bottom: 1px solid var(--spip-form-sep-color);
-	border-top-left-radius: var(--spip-border-radius);
-	border-top-right-radius: var(--spip-border-radius);
+	border-bottom: 1px solid var(--spip-box-sep-color);
+	border-top-left-radius: var(--spip-form-border-radius);
+	border-top-right-radius: var(--spip-form-border-radius);
 	box-shadow: var(--spip-box-shadow);
 }
 .formulaire_spip .cadre {
-	border: 1px solid var(--spip-form-border-color);
+	border: 1px solid var(--spip-box-border-color);
 }
 .entete-formulaire + .formulaire_spip,
 .entete-formulaire + .formedit .formulaire_spip,
+.entete-formulaire + .ajax-form-container + .formulaire_spip,
 .entete-formulaire + div > .formulaire_spip,
 .entete-formulaire + div > div > .formulaire_spip {
 	border-top-left-radius: 0;
@@ -303,7 +328,7 @@
 	margin: calc(var(--spip-margin-bottom) * 1.5) 0;
 	color: var(--spip-form-color-text);
 	background-color: var(--spip-color-white);
-	border-radius: var(--spip-border-radius);
+	border-radius: var(--spip-form-border-radius);
 	box-shadow: var(--spip-box-shadow);
 	z-index: 2; /* passer par dessus l'entête */
 	transition: box-shadow 0.2s;
@@ -314,9 +339,7 @@
 	box-shadow: var(--spip-box-shadow-hover);
 }
 
-/* Titre optionnel
-   Une partie de l'habillage est mutualisée avec ceux des boîtes : taille, graisse….
-	 Voir dans box_skins.css */
+/* Titre optionnel */
 .formulaire_spip .titrem {
 	display: flex;
 	align-items: center;
@@ -324,12 +347,14 @@
 	padding-bottom: var(--spip-form-spacing-y);
 	border-top-left-radius: inherit;
 	border-top-right-radius: inherit;
-	border-bottom: 1px solid var(--spip-form-sep-color);
+	border-bottom: 1px solid var(--spip-box-sep-color);
+	font-size: var(--spip-form-heading-fontsize);
+	font-weight: var(--spip-form-heading-fontweight);
 }
 
 /* Conteneur des saisies */
 .formulaire_spip .editer-groupe {
-	overflow: hidden;
+	/* overflow: hidden; */ /* Gêne les puces statuts */
 }
 /*  2 colonnes */
 @media (min-width: 768px) {
@@ -367,7 +392,7 @@
 	width: var(--spip-form-label-width);
 	margin-#LEFT: calc((var(--spip-form-label-width) + var(--spip-form-spacing-x)) * -1); /* inverse largeur + marge */
 	margin-bottom: calc(var(--spip-form-spacing-y) / 4);
-	padding: calc(var(--spip-form-padding-input-y) + 1px) 0 0; /* décaler pour aligner avec texte input → padding + border */
+	padding: calc(var(--spip-form-input-padding-y) + 1px) 0 0; /* décaler pour aligner avec texte input → padding + border */
 	background: transparent;
 	color: var(--spip-form-color-text-light);
 	text-align: var(--spip-left);
@@ -418,8 +443,8 @@
 	padding: calc(var(--spip-form-spacing-y) / 2)  var(--spip-form-spacing-x);
 	text-align: var(--spip-right);
 	background-color: var(--spip-color-theme-lightest);
-	border-bottom-left-radius: var(--spip-form-border-radius);
-	border-bottom-right-radius: var(--spip-form-border-radius);
+	border-bottom-left-radius: var(--spip-form-input-border-radius);
+	border-bottom-right-radius: var(--spip-form-input-border-radius);
 }
 .formulaire_spip .boutons .image_loading {
 	float: none;
@@ -439,13 +464,13 @@
 	min-width: 0; /* nécessaire ? */
 	width: auto;
 	border: 0;
-	border-top: 1px solid var(--spip-form-sep-color);
+	border-top: 1px solid var(--spip-box-sep-color);
 }
 
 /* Légendes */
 .formulaire_spip fieldset legend:not(.label),
 .formulaire_spip fieldset .legend {
-	padding: var(--spip-form-padding-input-y) var(--spip-form-padding-input-x);
+	padding: var(--spip-form-input-padding-y) var(--spip-form-input-padding-x);
 	background-color: var(--spip-color-gray-lightest);
 	/* color: var(--spip-color-theme-darker); */
 	font-weight: 800;
@@ -489,7 +514,7 @@
 .formulaire_spip form > div > fieldset + *:not(fieldset):not(.fieldset):not(.boutons),
 .formulaire_spip form > div > .fieldset + *:not(fieldset):not(.fieldset):not(.boutons),
 .formulaire_spip form > div > .editer-groupe > .fieldset + *:not(.fieldset):not(.boutons) {
-	border-top: 1px solid var(--spip-form-sep-color);
+	border-top: 1px solid var(--spip-box-sep-color);
 	margin-top: calc(var(--spip-form-fieldset-spacing) * -1);
 	padding-top: var(--spip-form-spacing-y);
 }
@@ -513,10 +538,10 @@
 /* Ceux avec un cadre */
 .formulaire_spip div.choix {
 	background-color: var(--spip-color-white);
-	padding: calc(var(--spip-form-padding-input-y) / 2) var(--spip-form-padding-input-x);
-	border: 1px solid var(--spip-form-border-color);
-	border-top-left-radius: var(--spip-form-border-radius);
-	border-top-right-radius: var(--spip-form-border-radius);
+	padding: calc(var(--spip-form-input-padding-y) / 2) var(--spip-form-input-padding-x);
+	border: 1px solid var(--spip-form-input-border-color);
+	border-top-left-radius: var(--spip-form-input-border-radius);
+	border-top-right-radius: var(--spip-form-input-border-radius);
 	border-bottom: 0;
 	z-index: 1; /* passer par dessus fond explication qui suit */
 	transition: box-shadow 0.2s; /* idem inputs */
@@ -529,17 +554,17 @@
 }
 .formulaire_spip div.choix:last-of-type,
 .formulaire_spip div.choix:last-child {
-	border-bottom-left-radius: var(--spip-form-border-radius);
-	border-bottom-right-radius: var(--spip-form-border-radius);
-	border-bottom: 1px solid var(--spip-form-border-color);
-	padding-bottom: var(--spip-form-padding-input-y);
+	border-bottom-left-radius: var(--spip-form-input-border-radius);
+	border-bottom-right-radius: var(--spip-form-input-border-radius);
+	border-bottom: 1px solid var(--spip-form-input-border-color);
+	padding-bottom: var(--spip-form-input-padding-y);
 	position: relative;
 }
 .formulaire_spip div.choix:first-of-type {
-	border-top-left-radius: var(--spip-form-border-radius);
-	border-top-right-radius: var(--spip-form-border-radius);
-	border-top: 1px solid var(--spip-form-border-color);
-	padding-top: var(--spip-form-padding-input-y);
+	border-top-left-radius: var(--spip-form-input-border-radius);
+	border-top-right-radius: var(--spip-form-input-border-radius);
+	border-top: 1px solid var(--spip-form-input-border-color);
+	padding-top: var(--spip-form-input-padding-y);
 	position: relative;
 }
 
@@ -569,7 +594,7 @@
 
 /* Espacements entre inputs et labels, indépendamment de la position du label (on sait qu'ils vont par paire, ça suffit) */
 .formulaire_spip .choix > *:nth-child(odd) {
-	margin-#RIGHT: calc(var(--spip-form-padding-input-x) * 3/4); /* entre input et label */
+	margin-#RIGHT: calc(var(--spip-form-input-padding-x) * 3/4); /* entre input et label */
 }
 /* Espacement entre plusieurs options dans un même .choix, et entre .choix inline successifs */
 .formulaire_spip .choix > *:nth-child(3n+3),
@@ -722,11 +747,11 @@
 .formulaire_spip select {
 	position: relative;
 	z-index: 2;
-	padding: var(--spip-form-padding-input-y) var(--spip-form-padding-input-x);
+	padding: var(--spip-form-input-padding-y) var(--spip-form-input-padding-x);
 	margin: 0;
 	width: 100%;
-	border: 1px solid var(--spip-form-border-color);
-	border-radius: var(--spip-form-border-radius);
+	border: 1px solid var(--spip-form-input-border-color);
+	border-radius: var(--spip-form-input-border-radius);
 	background-color: var(--spip-color-white);
 	transition: box-shadow 0.1s;
 }
@@ -770,14 +795,14 @@
 	min-height: 2.75em; /* À la louche, à calculer auto. si possible */
 	min-width: 2.75em; /* Carré */
 	width: auto;
-	padding: calc(var(--spip-form-padding-input-y) / 2);
+	padding: calc(var(--spip-form-input-padding-y) / 2);
 	cursor: pointer;
 }
 
 /* Input de recherche */
 .formulaire_spip input.search,
 .formulaire_spip input[type="search"] {
-	border-radius: var(--spip-form-border-radius);
+	border-radius: var(--spip-form-input-border-radius);
 }
 
 /* Boutons de soumission (voir aussi dans boutons.css) */
@@ -815,18 +840,18 @@
 .formulaire_spip .attention {
 	display: block;
 	position: relative;
-	padding: var(--spip-form-padding-input-y) var(--spip-form-padding-input-x);
+	padding: var(--spip-form-input-padding-y) var(--spip-form-input-padding-x);
 	font-size: 0.9em;
 	line-height: 1.25;
 	color: var(--spip-color-gray-dark);
-	border-top-#RIGHT-radius: var(--spip-form-border-radius);
-	border-bottom-#RIGHT-radius: var(--spip-form-border-radius);
+	border-top-#RIGHT-radius: var(--spip-form-input-border-radius);
+	border-bottom-#RIGHT-radius: var(--spip-form-input-border-radius);
 	border-left-width: 0.3em;
 	border-left-style: solid;
 }
 .formulaire_spip .explication {
 	background-color: hsla(0, 0%, 0%, 0.05); /* transparent sinon on voit pas sur les champs avec le même fond */
-	border-#LEFT-color: var(--spip-form-border-color);
+	border-#LEFT-color: var(--spip-form-input-border-color);
 }
 .formulaire_spip .attention {
 	color: hsl(var(--spip-color-notice--h), var(--spip-color-notice--s), 22%);
@@ -847,7 +872,7 @@
 	margin-top: 0;
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
-	border-top-#LEFT-radius: var(--spip-form-border-radius);
+	border-top-#LEFT-radius: var(--spip-form-input-border-radius);
 	border: 0;
 }
 .formulaire_spip .editer .explication > :last-child,
@@ -856,7 +881,7 @@
 }
 .formulaire_spip .editer .explication:last-child,
 .formulaire_spip .editer .attention:last-child {
-	border-radius: var(--spip-form-border-radius);
+	border-radius: var(--spip-form-input-border-radius);
 }
 .formulaire_spip .explication + input.text,
 .formulaire_spip .attention + input.text,
@@ -885,7 +910,7 @@
 .formulaire_spip .editer select + .attention,
 .formulaire_spip .editer div.choix:last-of-type + .explication,
 .formulaire_spip .editer div.choix:last-of-type + .attention {
-	border-radius: var(--spip-form-border-radius);
+	border-radius: var(--spip-form-input-border-radius);
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 	position: relative
@@ -903,8 +928,8 @@
 	content: "";
 	display: block;
 	position: absolute;
-	top: calc(var(--spip-form-border-radius) * -1);
-	height: var(--spip-form-border-radius);
+	top: calc(var(--spip-form-input-border-radius) * -1);
+	height: var(--spip-form-input-border-radius);
 	width: 100%;
 	left: 0;
 	background-color: inherit;
@@ -912,14 +937,54 @@
 
 
 /**
- * ==============================================
- * 12. Formulaires compacts en colonnes laterales
- * ==============================================
+ * ===============================================================
+ * 12. Variantes d'affichage + formulaires dans certains contextes
+ * ===============================================================
  */
 
 
+/**
+ * 12.1. Formulaires compacts
+ * ---------------------------
+ * cf. variables
+ */
+.formulaire_spip.mini {}
+
+/**
+ * 12.2. Formulaires flat
+ * ----------------------
+ * Sans ombre portée, simple bordure
+ */
+.formulaire_spip.flat,
+.formulaire_spip .formulaire_spip,
+.box .formulaire_spip,
+.popin .entete-formulaire,
+.popin .formulaire_spip {
+	border: 1px solid var(--spip-box-border-color);
+	box-shadow: none !important; /* important = pour inclure hover et cie */
+}
+
+/**
+ * 12.3. Ceux dans .affiche_milieu + certains précis.
+ * --------------------------------------------------
+ * Cf. variables + content.css
+ */
+
+
+/**
+ * 12.4. Ceux dans #wysiwyg
+ * -------------------------
+ */
+#wysiwyg .formulaire_spip {
+	font-size: 1rem;
+}
+
+/**
+ * 12.5. Ceux dans une colonne latérale
+ * ------------------------------------
+ */
 .lat .formulaire_spip {
-	font-size: 0.95em;
+	/* font-size: 0.95em; */
 }
 /* Tous les labels au dessus */
 .lat .formulaire_spip .editer {
@@ -956,32 +1021,8 @@
 
 
 /**
- * =======================================
- * 13. Formulaires dans certains contextes
- * =======================================
- */
-
-
-/* Formulaires flat : sans ombre portée, simple bordure */
-.formulaire_spip.flat,
-.fiche_objet .formulaire_spip,
-.formulaire_spip .formulaire_spip,
-.box .formulaire_spip,
-.popin .entete-formulaire,
-.popin .formulaire_spip {
-	border: 1px solid var(--spip-form-border-color);
-	box-shadow: none !important;
-}
-
-/* Dans #wysiwyg */
-#wysiwyg .formulaire_spip {
-	font-size: 1rem;
-}
-
-
-/**
  * ============================
- * 14. Formulaires particuliers
+ * 13. Formulaires particuliers
  * ============================
  */
 
@@ -992,12 +1033,12 @@
 }
 .formulaire_editer_auteur .editer.editer_statut .instituer_auteur {
 	margin-#LEFT: calc((var(--spip-form-label-width) * -1) + var(--spip-form-spacing-x));
-	margin-top: var(--spip-form-padding-input-y);
+	margin-top: var(--spip-form-input-padding-y);
 }
 .formulaire_editer_auteur .editer.editer_statut .rubriques_restreintes > p {
 	margin-#LEFT: 0;
 	margin-bottom: 0;
-	margin-top: var(--spip-form-padding-input-y);
+	margin-top: var(--spip-form-input-padding-y);
 }
 .formulaire_editer_auteur .editer.editer_statut .rubriques_restreintes label {
 	float: none;
@@ -1070,21 +1111,21 @@
 	font-weight: bold;
 }
 
-/* config/reducteur */
+/* Config / réducteur
+   Les vignettes sont des <button>
+   Les images en background font 150 x 150px */
 .formulaire_configurer_reducteur .vignettes_reducteur {
 	display: flex;
 }
 .formulaire_configurer_reducteur .vignette_reducteur {
 	text-align: center;
 	float: var(--spip-left);
-	padding: 2px;
-	border: 1px solid hsla(0, 0%, 0%, 0.1);
-	width: 154px;
-	padding-top: 150px;
+	border: 1px solid var(--spip-form-input-border-color);
+	width: 150px;
+	padding-top: calc(150px + var(--spip-btn-padding-y));
 	margin: 0.5em;
 	background-position: top center;
 	background-repeat: no-repeat;
-	background-size: contain;
 }
 .formulaire_configurer_reducteur .vignette_reducteur:first-child {
 	margin-#LEFT: 0;
@@ -1092,47 +1133,41 @@
 .formulaire_configurer_reducteur .vignette_reducteur:last-child {
 	margin-#RIGHT: 0;
 }
+.formulaire_configurer_reducteur .vignette_reducteur.on,
 .formulaire_configurer_reducteur .vignette_reducteur:hover {
-	border-color:#bbb;
-	background-color:#ddd;
+	border-color: var(--spip-color-theme);
+	background-color: var(--spip-color-theme);
+	color: var(--spip-color-white);
 }
 .formulaire_configurer_reducteur .vignette_reducteur.on {
-	font-weight: bold;
-	border: 2px solid var(--spip-color-theme);
-	background-color: var(--spip-color-gray-lightest);
-	box-shadow: 0 0 5px var(--spip-color-theme);
-}
-.formulaire_configurer_reducteur .vignette_reducteur.on:hover {
-	border-color: var(--spip-color-theme);
-	color: hsla(0, 0%, 0%, 0.6); /* Pour mieux s'adapter aux couleurs de fond */
+	border-color: var(--spip-color-theme-dark);
+	background-color: var(--spip-color-theme-dark);
 }
 
-/* dater */
-.formulaire_dater .editer[class*=editer_date] {
+
+/* dater
+   @extend .mini
+   + voir .affiche_milieu */
+.formulaire_dater [class*=editer_date] + [class*=editer_date] {
 	padding-top: 0;
 }
 .formulaire_dater .editer > label {
-	font-weight: bold;
-	text-transform: uppercase;
-	display: flex;
-	align-items: flex-start;
-	padding-top: calc(var(--spip-form-padding-input-y) / 2);
-}
-.formulaire_dater .editer[class*=editer_date] > label {
-	font-size: 0.85em;
+	font-weight: var(--spip-form-heading-fontweight);
+	font-size: var(--spip-form-heading-fontsize);
+	padding-top: calc(var(--spip-form-input-padding-y) / 2);
 }
 .formulaire_dater .affiche {
 	display:block;
 	font-weight: bold;
 	text-transform: uppercase;
-	padding-top: calc(var(--spip-form-padding-input-y) / 2);
+	padding-top: calc(var(--spip-form-input-padding-y) / 4);
 }
 .formulaire_dater .saisie_redac {
 	display: block;
 }
 .formulaire_dater .editer_date_redac .editable .choix {
 	display: block;
-	margin-top: calc(var(--spip-form-padding-input-y) / 2);
+	margin-top: calc(var(--spip-form-input-padding-y) / 2);
 }
 .formulaire_dater #sans_redac {
 	vertical-align: top;
@@ -1142,12 +1177,10 @@
 	#LEFT: -1em;
 }
 .formulaire_spip.formulaire_dater input.text {
-	padding-top: calc(var(--spip-form-padding-input-y) / 2);
-	padding-bottom: calc(var(--spip-form-padding-input-y) / 2);
+	padding-top: calc(var(--spip-form-input-padding-y) / 2);
+	padding-bottom: calc(var(--spip-form-input-padding-y) / 2);
 }
 .formulaire_spip.formulaire_dater .toggle_box_link {
-	#RIGHT: var(--spip-form-spacing-x);
-	top: calc(var(--spip-form-padding-input-y) / 2);
 	transform: none;
 }
 .formulaire_spip.formulaire_dater .boutons {
@@ -1164,42 +1197,68 @@
 }
 .fiche_objet .formulaire_spip.formulaire_dater {
 	margin-top: 0;
-	border: 0;
-	border-radius: 0;
-	margin-left: calc(var(--spip-box-spacing-x) * -1); /* = padding de fiche_objet */
-	margin-right: calc(var(--spip-box-spacing-x) * -1); /* = padding de fiche_objet */
-	background-color: var(--spip-color-gray-lightest);
 	position: relative;
 }
 
-/* editer_liens */
-.formulaire_editer_liens .liste-objets {
-	border: 0;
+/* editer_liens
+   @extend .mini
+   + voir .affiche_milieu */
+.formulaire_editer_liens .selecteur {
 	margin-left: calc(var(--spip-form-spacing-x) * -1);
 	margin-right: calc(var(--spip-form-spacing-x) * -1);
+	padding-left: var(--spip-box-spacing-x);
+	padding-right: var(--spip-box-spacing-x);
+	background-color: var(--spip-color-theme-lightest);
+	border: 1px solid var(--spip-color-theme);
+	border-bottom-left-radius: var(--spip-form-input-border-radius);
+	border-bottom-right-radius: var(--spip-form-input-border-radius);
 }
-.formulaire_editer_liens .liste-objets-associer .caption {
-	font-size: 0.9em;
+.formulaire_editer_liens .selecteur h3,
+.formulaire_editer_liens .selecteur .titrem {
+	margin: 0;
+	padding: var(--spip-box-spacing-y) 0;
+	background-color: transparent;
+	font-size: 1em;
+	border: 0;
 }
-.formulaire_editer_liens .liste-objets-associer .caption span.recherche {
-	float: #RIGHT;
-	margin-top: -3px;
-	font-size: 0.9em;
+.formulaire_editer_liens .selecteur .boutons {
+	margin-left: 0;
+	margin-right: 0;
+	padding-left: 0;
+	padding-right: 0;
+	background-color: transparent;
 }
-.formulaire_editer_liens .liste-objets-associer .caption span.recherche .tout_voir {
-	font-size: 0.8em;
+/* listes */
+.formulaire_editer_liens .liste-objets {
+	border: 0;
+	background-color: transparent;
+	margin-top: 0;
+	margin-bottom: 0;
 }
-.formulaire_editer_liens h3,.formulaire_editer_liens .titrem {
-	margin: 0 calc(var(--spip-form-spacing-x) * -1);
-	padding: calc(var(--spip-margin-bottom) / 2);
+.formulaire_editer_liens .liste-objets thead {
+	display: none; /* bruit peu utile */
 }
 .formulaire_editer_liens .liste-objets-lies {
+	margin-left: calc(var(--spip-form-spacing-x) * -1);
+	margin-right: calc(var(--spip-form-spacing-x) * -1);
 	margin-bottom: 0;
 }
-.formulaire_editer_liens .selecteur > .titrem {
-	margin-bottom: 0;
+.formulaire_editer_liens .liste-objets-associer {
+	font-size: 0.9em;
+	margin-left: calc(var(--spip-box-spacing-x) * -1);
+	margin-right: calc(var(--spip-box-spacing-x) * -1);
+	margin-bottom: var(--spip-box-spacing-y);
+	border-bottom: 1px solid var(--spip-box-sep-color);
 }
-.formulaire_editer_liens .selecteur .tout_voir {
+.formulaire_editer_liens .liste-objets-associer .caption span.recherche {
+	margin-#LEFT: auto;
+	font-size: 0.9em;
+}
+.formulaire_editer_liens .liste-objets-associer .caption input.recherche {
+	width: auto;
+}
+.formulaire_editer_liens .liste-objets-associer .caption span.recherche .tout_voir {
+	/* font-size: 0.8em; */
 	visibility: hidden;
 }
 .formulaire_editer_liens .selecteur.filtre .tout_voir {
@@ -1214,20 +1273,11 @@
 }
 .formulaire_editer_liens .liste-objets tr > .action {
 	text-align: #RIGHT;
-	width: 120px;
-}
-.formulaire_editer_liens .liste-objets tr > .action button {
-	opacity: 0.6;
-	filter: alpha(opacity=60);
+	/* width: 120px; */
 }
 .formulaire_editer_liens .liste-objets tr > .action button img {
 	margin-#LEFT: 0;
 	vertical-align: bottom;
-}
-.formulaire_editer_liens .liste-objets tr:hover > .action button,
-.formulaire_editer_liens .liste-objets tr:focus > .action button {
-	opacity: 1.0;
-	filter: alpha(opacity=100);
 }
 .formulaire_editer_liens .associer_mot.obligatoire.nonvu {
 	background-color:#FFCDAF;
@@ -1361,43 +1411,61 @@
 }
 
 /* formulaire_traduire */
+.formulaire_traduire .editer > label {
+	padding: 0;
+}
+.formulaire_traduire .voir_traductions {
+	padding-top: calc(var(--spip-form-spacing-y) / 2);
+}
 .formulaire_traduire .liste-objets {
-	margin-top: 0;
-	margin-bottom: 0;
+	margin: 0 calc(var(--spip-box-spacing-x) * -1);
+	background-color: transparent;
+	border-color: var(--spip-box-sep-color);
+	border-left: 0;
+	border-right: 0;
+	border-radius: 0;
+}
+.formulaire_traduire .liste-objets .caption {
+	border: 0;
 }
 .formulaire_traduire .liste-objets .first_row {
 	display: none;
 }
+.formulaire_traduire .liste-objets .on {
+	font-weight: inherit;
+}
 .formulaire_traduire .supprimer_trad {
 	float: var(--spip-right);
+	margin: calc(var(--spip-form-spacing-y) / 2) 0 0;
+}
+.formulaire_traduire .new_trad {
+	overflow: hidden;
+	padding-bottom: calc(var(--spip-form-spacing-y) / 2);
 }
 
 /* formulaire_instituer */
+.infos .formulaire_instituer,
+.infos .formulaire_instituer .show {
+	margin-left: calc(var(--spip-box-spacing-x) * -1);
+	margin-right: calc(var(--spip-box-spacing-x) * -1);
+}
 .infos .formulaire_instituer {
 	background: none;
 	border: 0;
 	box-shadow: none;
-	margin:0 -10px;
+	margin-bottom: 0;
+	margin-top: 0;
 }
 .infos .formulaire_instituer .reponse_formulaire {
 	display: none;
 }
-.infos .formulaire_instituer ul {
-	padding-bottom: 0;
-	margin-bottom: 0;
-}
-.infos .formulaire_instituer .editer {
-	padding-left: 10px;
-	padding-right: 10px;
-}
 .infos .formulaire_instituer .show {
-	display:block;
-	margin:0 -10px;
-	padding:10px;
+	display: block;
+	padding: var(--spip-form-spacing-y) var(--spip-form-spacing-x);
 	background-color: var(--spip-color-gray-lightest);
 }
 .infos .formulaire_instituer .show select {
-	width: 100%;
+	border: 0;
 }
 .infos .formulaire_instituer .show select,
 .infos .formulaire_instituer .show option {
@@ -1436,17 +1504,17 @@
 
 /* Menu favoris */
 .formulaire_configurer_preferences_menus .menus_favoris input.text {
-	padding: calc(var(--spip-form-padding-input-y) / 2) calc(var(--spip-form-padding-input-y) / 2);
+	padding: calc(var(--spip-form-input-padding-y) / 2) calc(var(--spip-form-input-padding-y) / 2);
 	width: 2em;
 }
 .formulaire_configurer_preferences_menus .menus_favoris .choix {
-	padding: calc(var(--spip-form-padding-input-y) / 2) calc(var(--spip-form-padding-input-x) / 2);
+	padding: calc(var(--spip-form-input-padding-y) / 2) calc(var(--spip-form-input-padding-x) / 2);
 }
 
 
 /**
  * ==========
- * 15. Divers
+ * 14. Divers
  * ==========
  */
 
@@ -1485,16 +1553,11 @@ img.aide {
 
 /* Toggle box link */
 .formulaire_spip .toggle_box_link {
+	display: inline-flex; /* éviter des espacements indésirables */
 	position: absolute;
-	top: 6px;
-	#RIGHT: 6px;
-	opacity: 0.6;
-	filter: alpha(opacity=60);
+	top: var(--spip-box-spacing-y);
+	#RIGHT: var(--spip-box-spacing-x);
 	z-index: 1;
-}
-.formulaire_spip:hover .toggle_box_link {
-	opacity: 1.0;
-	filter: alpha(opacity=100);
 }
 .formulaire_spip .toggle_box_link button {
 	margin: 0;
@@ -1502,5 +1565,5 @@ img.aide {
 /* Centrage vertical */
 .formulaire_spip .toggle_box_link.middle {
 	top: 50%;
-	        transform: translateY(-50%);
+	transform: translateY(-50%);
 }
