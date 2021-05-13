@@ -134,8 +134,22 @@ li .puce_article_popup, li.puce_breve_popup,li.puce_site_popup { padding: 0; }*/
 .puce_objet_fixe { position: relative; }
 
 .puce_objet_popup, .puce_objet_popup * { box-sizing: content-box; }
-.puce_objet_popup { position: absolute; margin-top:-2px; visibility: hidden; border: 1px solid #666; background-color: #ccc; z-index: 10; top: 0; #ENV{left}: 0;}
-.puce_objet_popup img { padding: 2px; border: 0; }
+.puce_objet_popup { 
+	position: absolute; 
+	visibility: hidden; 
+	border: 0px;
+	background-color: white;
+	padding: 0px;
+	z-index: 10; 
+	top: -3px; 
+	box-shadow: 0 0 5px rgba(0,0,0,0.2);
+	border-radius: var(--spip-list-border-radius);
+	#ENV{left}: -7px;
+	padding: 4px;
+	line-height: 0;
+}
+.puce_objet_popup a { display: inline-block;}
+.puce_objet_popup img { margin: 3px; border: 0; display: block;}
 .puce_objet .puce_objet_popup { visibility: hidden; }
 .puce_objet.on .puce_objet_popup { visibility: visible; }
 
