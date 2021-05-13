@@ -803,6 +803,8 @@ function balise_INTRODUCTION_dist($p) {
 	$_id_objet = champ_sql($cle_objet, $p);
 
 	// Récupérer les valeurs sql nécessaires : descriptif, texte et chapo
+	// ainsi que le longueur d'introduction donnée dans la description de l'objet.
+	$_introduction_longueur = 'null';
 	$_ligne = 'array(';
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	if ($desc = $trouver_table(table_objet_sql($type_objet))) {
@@ -814,6 +816,9 @@ function balise_INTRODUCTION_dist($p) {
 		}
 		if (isset($desc['field']['chapo'])) {
 			$_ligne .= "'chapo' => " . champ_sql('chapo', $p) . ',';
+		}
+		if (isset($desc['introduction_longueur'])) {
+			$_introduction_longueur = "'" . $desc['introduction_longueur'] . "'";
 		}
 	}
 	$_ligne .= ')';
@@ -828,7 +833,7 @@ function balise_INTRODUCTION_dist($p) {
 		$_suite = $v2;
 	}
 
-	$p->code = "generer_introduction_entite($_id_objet, '$type_objet', $_ligne, $_longueur_ou_suite, $_suite, \$connect)";
+	$p->code = "generer_introduction_entite($_id_objet, '$type_objet', $_ligne, $_introduction_longueur, $_longueur_ou_suite, $_suite, \$connect)";
 
 	#$p->interdire_scripts = true;
 	$p->etoile = '*'; // propre est deja fait dans le calcul de l'intro

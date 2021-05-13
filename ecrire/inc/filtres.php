@@ -4323,8 +4323,7 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile = "") {
  * Cette fonction est mutualisée entre les balises #INTRODUCTION et #INFO_INTRODUCTION.
  * Elle se charge de faire le tri entre descriptif, texte et chapo,
  * et normalise les paramètres pour la longueur et la suite.
- * Ensuite elle fait appel au filtre 'introduction' qui construit celle-ci
- * à partir de ces données.
+ * Ensuite elle fait appel au filtre 'introduction' qui construit celle-ci à partir de ces données.
  *
  * @uses filtre_introduction_dist()
  * @see generer_info_entite()
@@ -4336,6 +4335,8 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile = "") {
  *     Type d'objet
  * @param string $desc
  *     Ligne SQL de l'objet avec au moins descriptif, texte et chapo
+ * @param int $introduction_longueur
+ *     Longueur de l'introduction dans la description de l'objet
  * @param int|string $longueur_ou_suite
  *     Longueur de l'introduction OU points de suite si on coupe
  * @param string $suite
@@ -4344,46 +4345,27 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile = "") {
  *     Nom du connecteur à la base de données
  * @return string
  */
-function generer_introduction_entite($id_objet, $type_objet, $ligne, $longueur_ou_suite = null, $suite = null, $connect = '') {
+function generer_introduction_entite($id_objet, $type_objet, $ligne_sql, $introduction_longueur = null, $longueur_ou_suite = null, $suite = null, $connect = '') {
 
-	include_spip('base/objets');
-	$type_objet = objet_type($type_objet);
-
-	// Récupérer les champs texte, descriptif, et chapo s'ils existent
-	$trouver_table = charger_fonction('trouver_table', 'base');
-	$descriptif = '';
-	$texte = '';
-	if ($desc = $trouver_table(table_objet_sql($type_objet))) {
-		if (
-			isset($desc['field']['descriptif'])
-			and isset($ligne['descriptif'])
-		) {
-			$descriptif = $ligne['descriptif'];
-		}
-		if (
-			isset($desc['field']['texte'])
-			and isset($ligne['texte'])
-		) {
-			$texte = $ligne['texte'];
-		}
-		// En absence de descriptif, on se rabat sur chapo + texte
-		if (
-			isset($desc['field']['chapo'])
-			and isset($ligne['chapo'])
-		) {
-			$chapo = $ligne['chapo'];
-			$texte = strlen($descriptif) ?
-				'' :
-				"$chapo \n\n $texte";
-		}
+	$descriptif = $ligne_sql['descriptif'] ?? '';
+	$texte = $ligne_sql['texte'] ?? '';
+	// En absence de descriptif, on se rabat sur chapo + texte
+	if (isset($ligne_sql['chapo'])) {
+		$chapo = $ligne_sql['chapo'];
+		$texte = strlen($descriptif) ?
+			'' :
+			"$chapo \n\n $texte";
 	}
 
 	// Longueur en paramètre, sinon celle renseignée dans la description de l'objet, sinon valeur en dur
 	// Attention, même pour la longueur, la variable n'est pas un integer mais un string
 	if (!intval($longueur_ou_suite)) {
-		$longueur_objet  = objet_info($type_objet, 'introduction_longueur');
-		$longueur_defaut = 600;
-		$longueur        = ($longueur_objet ? $longueur_objet : $longueur_defaut);
+		if ($introduction_longueur === null) {
+			include_spip('base/objets');
+			$type_objet = objet_type($type_objet);
+			$introduction_longueur = objet_info($type_objet, 'introduction_longueur');
+		}
+		$longueur = intval($introduction_longueur ?: 600);
 	} else {
 		$longueur = intval($longueur_ou_suite);
 	}
