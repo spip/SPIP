@@ -246,11 +246,13 @@
 	opacity: 0;
 	background-color: var(--spip-color-white);
 	border-radius: var(--spip-border-radius);
-	box-shadow: 0 0.1em 0.1em hsla(0, 0%, 0%, 0.5), 0 0.5em 0.6em hsla(0, 0%, 0%, 0.075);
+	box-shadow: 0 0.5em 0.6em hsla(0, 0%, 0%, 0.075);
+	border: 1px solid var(--spip-box-border-color);
+	border-top: 0px;
 	transition: opacity 0.1s;
 }
 .plan_site .deroulant__sous-menu {
-	box-shadow: 0 0em 0.1em hsla(0, 0%, 0%, 0.5), 0 0.5em 0.6em hsla(0, 0%, 0%, 0.075);
+	border: 1px solid var(--spip-box-border-color);
 }
 /* Ouverture à la prise de focus (css ou javascript) */
 .bando-haut .deroulant__item:focus-within > .deroulant__sous-menu,
