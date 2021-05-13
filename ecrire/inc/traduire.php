@@ -283,7 +283,7 @@ function inc_traduire_dist($ori, $lang, $raw = false) {
 		if (isset($GLOBALS[$var][$code])) {
 			$desc->code = $code;
 			$desc->module = $module;
-			$desc->langue = $GLOBALS['lang_' . $var];
+			$desc->langue = $GLOBALS['lang_' . $var] ?? '';
 			$desc->texte = $GLOBALS[$var][$code];
 			break;
 		}
