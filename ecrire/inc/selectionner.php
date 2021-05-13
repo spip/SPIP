@@ -115,11 +115,11 @@ function construire_selectionner_hierarchie($idom, $liste, $racine, $url, $name,
 	. "<a id='$idom6' style='visibility: hidden;'"
 	. ($url_init ? "\nhref='$url_init'" : '')
 	. "></a>"
-	. "<div class='recherche_rapide_parent'>"
+	. "<div class='recherche_rapide_parent formulaire_recherche'>"
 	. http_img_pack("loader.svg", "",
 		"class='loader' style='visibility: hidden;float:" . $GLOBALS['spip_lang_right'] . "' id='$idom5'")
 	. ""
-	. "<input style='width: 10em;float:" . $GLOBALS['spip_lang_right'] . ";' type='search' class='text search' id='$idom1' placeholder='" . _T('info_rechercher') . "'"
+	. "<input style='width: 10em;float:" . $GLOBALS['spip_lang_right'] . ";' type='text' class='text search' id='$idom1' placeholder='" . _T('info_rechercher') . "'"
 	// eliminer Return car il provoque la soumission (balise unique)
 	// et eliminer Tab pour la navigation au clavier
 	// ce serait encore mieux de ne le faire que s'il y a encore plusieurs

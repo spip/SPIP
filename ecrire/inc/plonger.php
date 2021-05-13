@@ -98,14 +98,14 @@ function inc_plonger_dist($id_rubrique, $idom = "", $list = array(), $col = 1, $
 	}
 
 	$idom2 = $idom . "_col_" . ($col + 1);
-	$left = ($col * 150);
+	$left = ($col * 250);
 
 	return http_img_pack("loader.svg", "",
 		"class='loader' style='visibility: hidden; position: absolute; " . $GLOBALS['spip_lang_left'] . ": "
 		. ($left - 30)
 		. "px; top: 2px; z-index: 2;' id='img_$idom2'")
-	. "<div style='width: 150px; height: 100%; overflow: auto; position: absolute; top: 0px; " . $GLOBALS['spip_lang_left'] . ": "
-	. ($left - 150)
+	. "<div style='width: 250px; height: 100%; overflow: auto; position: absolute; top: 0px; " . $GLOBALS['spip_lang_left'] . ": "
+	. ($left - 250)
 	. "px;'>"
 	. $ret
 	. "\n</div>\n<div id='$idom2'>"
