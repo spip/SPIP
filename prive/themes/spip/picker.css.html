@@ -33,8 +33,9 @@ div.petite-racine,
 a.petite-racine {
 	background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat;
 	background-image: url(#CHEMIN_IMAGE{racine-xx.svg});
-	background-size: 12px;
-	padding-#LEFT: 15px;
+	background-size: 14px;
+	background-position: 5px center;
+	padding-#LEFT: 24px;
 	padding-top: 0.2em;
 	padding-bottom: 0.2em;
 	background-color: #fff;
@@ -48,16 +49,18 @@ div.petite-rubrique,
 a.petite-rubrique {
 	background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat;
 	background-image: url(#CHEMIN_IMAGE{rubrique-xx.svg});
-	background-size:12px;
-	padding-#LEFT: 15px;
+	background-size:14px;
+	background-position: 5px center;
+	padding-#LEFT: 24px;
 	cursor: pointer;
 }
 div.petit-secteur,
 a.petit-secteur {
 	background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat;
 	background-image: url(#CHEMIN_IMAGE{secteur-xx.svg});
-	background-size: 12px;
-	padding-#GET{left}: 15px;
+	background-size: 14px;
+	background-position: 5px center;
+	padding-#GET{left}: 24px;
 }
 div.rub-ouverte,
 a.rub-ouverte {
@@ -67,7 +70,6 @@ a.rub-ouverte {
 
 /* Selecteur ajax */
 .rubrique_actuelle {
-	margin-top: 1em;
 	clear: both;
 	display: flex;
 	align-items: center;
@@ -108,17 +110,10 @@ a.rub-ouverte {
 .recherche_rapide_parent {
 	margin-top: -2.2em;
 	float: var(--spip-right);
-	display: flex;
-	align-items: center;
-	/* fond de couleur par-dessus le titre */
-	position: relative;
 	z-index: 2;
 	padding-left: 2em;
-	background-image: linear-gradient(90deg, transparent 0%, var(--spip-color-theme-lightest) 2em);
 }
-#chemin .recherche_rapide_parent {
-	background-image: linear-gradient(90deg, transparent 0%, #fcfcfc 2em);
-}
+
 .recherche_rapide_parent input.search {
 	border-radius: 99em;
 	padding: 0.33em 1em;
@@ -132,7 +127,8 @@ a.rub-ouverte {
 }
 #choix_parent_principal {
 	position: relative;
-	height: 10em;
+	clear: both;
+	height: 50vh;
 	overflow: auto;
 	background: var(--spip-color-theme-white);
 	border: 1px solid var(--spip-form-border-color);
@@ -211,8 +207,8 @@ a.rub-ouverte {
 /* Les éléments propres à chaque objet */
 <BOUCLE_objets(POUR){tableau (#REM|lister_tables_objets_sql)}>
 [(#SET{petite_icone, [(#CHEMIN_IMAGE{#VALEUR{icone_objet}-12.png}|sinon{[(#CHEMIN_IMAGE{#VALEUR{icone_objet}-16.png}|image_reduire{12}|extraire_attribut{src})]})]})]
-ul.item_picked li.#VALEUR{type} {padding-#GET{left}:15px;background-image:url(#GET{petite_icone});background-size:12px;}
-.item_picker .[(#VALEUR{table_objet})] .type_objet {padding-#GET{left}:15px; background:url(#GET{petite_icone}) no-repeat[ (#GET{left}) ]center; background-size:12px;}
+ul.item_picked li.#VALEUR{type} {padding-#GET{left}:24px;background-image:url(#GET{petite_icone});background-size:12px;}
+.item_picker .[(#VALEUR{table_objet})] .type_objet {padding-#GET{left}:24px; background:url(#GET{petite_icone}) no-repeat[ (#GET{left}) ]center; background-size:12px;}
 .item_picker .frame ul li.#VALEUR{type} {background:url(#GET{petite_icone}) no-repeat[ (#GET{left}) ]2px;background-size:12px;}
 </BOUCLE_objets>
 
