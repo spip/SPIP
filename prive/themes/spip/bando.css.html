@@ -245,7 +245,7 @@
 	opacity: 0;
 	background-color: var(--spip-color-white);
 	border-radius: var(--spip-border-radius);
-	box-shadow: 0 0.1em 0.1em hsla(0, 0%, 0%, 0.3), 0 0.5em 0.6em hsla(0, 0%, 0%, 0.075);
+	box-shadow: 0 0 0.1em hsla(0, 0%, 0%, 0.5), 0 0.5em 0.6em hsla(0, 0%, 0%, 0.075);
 	transition: opacity 0.1s;
 }
 /* Ouverture à la prise de focus (css ou javascript) */
@@ -581,6 +581,7 @@
 }
 .deroulant_rubriques .deroulant__sous-menu .deroulant__item {
 	position: relative;
+	width: 20em;
 }
 .deroulant_rubriques .deroulant__item_parent.actif > .deroulant__sous-menu,
 .deroulant_rubriques .deroulant__item_parent.actif_tempo > .deroulant__sous-menu {
