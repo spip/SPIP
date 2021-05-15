@@ -347,16 +347,26 @@
 	width: 0;
 }
 
-/* Sur smartphone, ne pas afficher les logos */
-@media (max-width: 500px) {
-	.liste-objets .logo,
+/*  N'afficher les logos que sur grand écran */
+.liste-objets .logo,
+.liste-objets .nologo {
+	display: none;
+}
+.liste-objets td.auteur {
+	font-size: .85em;
+}
+@media (min-width: 500px) {
+.liste-objets .logo,
 	.liste-objets .nologo {
-		display: none;
+		display: table-cell;
 	}
 	.liste-objets td.auteur {
-		font-size: .85em;
+		font-size: inherit;
 	}
 }
+
+
+
 .liste-objets td.nologo {
 	height: 45px; 
 }
