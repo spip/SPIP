@@ -4955,8 +4955,10 @@ function insert_head_css_conditionnel($flux) {
  * Permet ensuite à Apache de le servir en statique sans repasser
  * par spip.php à chaque hit sur le fichier.
  *
- * Si le format (css ou js) est passe dans `contexte['format']`, on l'utilise
- * sinon on regarde si le fond finit par .css ou .js, sinon on utilie "html"
+ * Formats supportés : html, css, js, json, xml, svg
+ *
+ * Si le format est passé dans `contexte['format']`, on l'utilise
+ * sinon on regarde l'extension du fond, sinon on utilie "html"
  *
  * @uses urls_absolues_css()
  *
@@ -4971,8 +4973,8 @@ function produire_fond_statique($fond, $contexte = array(), $options = array(), 
 		$extension = $contexte['format'];
 		unset($contexte['format']);
 	} else {
-		$extension = "html";
-		if (preg_match(',[.](css|js|json)$,', $fond, $m)) {
+		$extension = 'html';
+		if (preg_match(',[.](css|js|json|xml|svg)$,', $fond, $m)) {
 			$extension = $m[1];
 		}
 	}
@@ -5015,8 +5017,8 @@ function produire_fond_statique($fond, $contexte = array(), $options = array(), 
 		}
 
 		$comment = '';
-		// ne pas insérer de commentaire si c'est du json
-		if ($extension != "json") {
+		// ne pas insérer de commentaire sur certains formats
+		if (!in_array($extension, ['json', 'xml', 'svg'])) {
 			$comment = "/* #PRODUIRE{fond=$fond";
 			foreach ($contexte as $k => $v) {
 				$comment .= ",$k=$v";
