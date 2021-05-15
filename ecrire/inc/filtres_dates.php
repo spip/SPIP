@@ -524,7 +524,9 @@ function affdate_base($numdate, $vue, $options = array()) {
 
 	$mois = intval($mois);
 	if ($mois > 0 and $mois < 13) {
-		$nommois = _T('date_mois_' . $mois);
+		/* Traiter le cas "abbr" pour les noms de mois */
+		$param = ((isset($options['param']) and $options['param']=="abbr") ? '_' . $options['param'] : '');
+		$nommois = _T('date_mois_' . $mois . $param);
 		if ($jour) {
 			$jourmois = _T('date_de_mois_' . $mois, array('j' => $jour, 'nommois' => $nommois));
 		} else {
@@ -614,10 +616,12 @@ function affdate_base($numdate, $vue, $options = array()) {
 			}
 
 		case 'nom_mois':
+			/*
 			$param = ((isset($options['param']) and $options['param']) ? '_' . $options['param'] : '');
 			if ($param and $mois) {
 				return _T('date_mois_' . $mois . $param);
 			}
+			*/
 
 			return $nommois;
 
