@@ -12,10 +12,10 @@
 <BOUCLE_testrub(RUBRIQUES){statut!=poub}{1,1} />
 [(#TOTAL_BOUCLE|et{#ENV{editable}}|oui)
 	[(#ENV{deplacer}|non)
-	<span class="bouton_deplacer"><span class="image_loading" style="float:#DIR_LANG_LEFT;"></span> &#91;<a href="[(#SELF|parametre_url{deplacer,oui})]" class="ajax"><:bouton_deplacer:></a>&#93;</span>
+	<span class="bouton_deplacer"><span class="image_loading" style="float:#DIR_LANG_LEFT;"></span> <a href="[(#SELF|parametre_url{deplacer,oui})]" class="ajax btn btn_mini btn_secondaire"><:bouton_deplacer:></a></span>
 	]
 	[(#ENV{deplacer}|oui)
-	<span class="bouton_deplacer">&#91;<a href="#" onclick="jQuery('#chercher_rubrique').toggle('fast');return false;"><:bouton_deplacer:></a>&#93;</span>
+	<span class="bouton_deplacer"><a href="#" class="btn btn_mini btn_secondaire" onclick="jQuery('#chercher_rubrique').toggle('fast');return false;"><:bouton_deplacer:></a></span>
 	<div id="chercher_rubrique">
 	[(#BOITE_OUVRIR{<:titre_cadre_interieur_rubrique:>,'simple'})]
 	[(#VAL|chercher_rubrique{#ENV{id_objet},#ENV{id_parent},#ENV{objet},#ENV{id_secteur,#GET{id_secteur}},#ENV{restreint,#ENV{objet}|deplacement_restreint{#INFO_STATUT{#ENV{objet},#ENV{id_objet}}}},true,form_simple})]
