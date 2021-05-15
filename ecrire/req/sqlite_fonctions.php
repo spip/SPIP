@@ -160,9 +160,7 @@ function _sqlite_func_ceil($a) {
 }
 
 // https://code.spip.net/@_sqlite_func_concat
-function _sqlite_func_concat() {
-	$args = func_get_args();
-
+function _sqlite_func_concat(...$args) {
 	return join('', $args);
 }
 
