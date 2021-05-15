@@ -3325,11 +3325,10 @@ function env_to_attributs($env, $ignore_params = array()) {
  *     #TEXTE|concat{texte1,texte2,...}
  *     ```
  *
+ * @param array $args
  * @return string Chaînes concaténés
  **/
-function concat() {
-	$args = func_get_args();
-
+function concat(...$args) : string {
 	return join('', $args);
 }
 
