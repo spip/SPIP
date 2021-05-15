@@ -384,11 +384,15 @@
 	background: none;
 }
 /* Date */
-.liste-objets tr > td.date {
-	font-size: .85em;
+.liste-objets th.date,
+.liste-objets td.date {
+	text-align: var(--spip-right);
+}
+
+.liste-objets td.date {
+	font-size: 0.85em;
 	white-space: nowrap;
 	width: 10%;
-	text-align: #ENV{right};
 }
 /* Date */
 .liste-objets tr > .id {
