@@ -30,7 +30,7 @@
 				class="surtitre">(#SURTITRE|image_reduire{150,70})</span>][(#RANG). ]<strong>#TITRE</strong>[<span class="soustitre">(#SOUSTITRE)</span>]</a></td>
 			<td class='[(#LOGO_ARTICLE_NORMAL|?{logo,nologo})]'>[(#LOGO_ARTICLE_NORMAL|image_recadre_avec_fallback{70,70,focus})]</td>
 			<td class='auteur'><div class="inner"><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></div></td>
-			<td class='date secondaire'>[<span title="[(#DATE|heures_minutes)]">(#DATE|affdate{d/m/Y})</span>]</td>
+			<td class='date secondaire'>[<span title="[(#DATE|heures_minutes)]">(#DATE|affdate_jourcourt)</span>]</td>
 			<td class='id'>[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
 				<a href="[(#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE})]" title="<:icone_modifier_article|attribut_html:>">#ID_ARTICLE</a>,
 				#ID_ARTICLE
