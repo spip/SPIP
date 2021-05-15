@@ -4958,7 +4958,7 @@ function insert_head_css_conditionnel($flux) {
  * Formats supportés : html, css, js, json, xml, svg
  *
  * Si le format est passé dans `contexte['format']`, on l'utilise
- * sinon on regarde l'extension du fond, sinon on utilie "html"
+ * sinon on regarde l'extension du fond, sinon on utilise "html"
  *
  * @uses urls_absolues_css()
  *
