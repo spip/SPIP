@@ -623,23 +623,23 @@
 
 
 /* Menu de sous-navigation : à déplacer, rien à voir avec les bandeaux */
-#navigation .navigation .sous_navigation {
+.navigation .sous_navigation {
 	border-top: 0;
 }
-#navigation .navigation .sous_navigation .item:last-child {
+.navigation .sous_navigation .item:last-child {
 	border-bottom: 0;
 }
-#navigation .navigation .sous_navigation .item {
+.navigation .sous_navigation .item {
 	padding: 0;
 	font-size: 1.05em;
 	border-color: hsla(0, 0%, 0%, 0.1);
 	background-color: transparent;
 }
-#navigation .navigation .sous_navigation .item,
-#navigation .navigation .sous_navigation .item.on {
+.navigation .sous_navigation .item,
+.navigation .sous_navigation .item.on {
 	font-weight: bold;
 }
-#navigation .navigation .sous_navigation .item a {
+.navigation .sous_navigation .item a {
 	position: relative;
 	display: block;
 	margin: 0;
@@ -651,9 +651,9 @@
 	color: var(--spip-color-gray-dark);
 	transition: background 0.2s;
 }
-#navigation .navigation .sous_navigation .item.on > *,
-#navigation .navigation .sous_navigation .item a:hover,
-#navigation .navigation .sous_navigation .item a:focus {
+.navigation .sous_navigation .item.on > *,
+.navigation .sous_navigation .item a:hover,
+.navigation .sous_navigation .item a:focus {
 	background-color: var(--spip-color-theme-lighter);
 	color: var(--spip-color-black);
 	/* box-shadow: inset 0 0 1.5em hsla(0, 0%, 0%, 0.05); */
@@ -661,7 +661,6 @@
 
 
 #contenu .sous_navigation {
-	border-top: 0;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: flex-start;
@@ -669,37 +668,17 @@
 }
 
 #contenu .sous_navigation .item {
-	padding: 0;
-	font-size: 1.05em;
 	border: 0;
-	background-color: transparent;
 	flex: 0 1 150px;
 }
-#contenu .sous_navigation .item,
-#contenu .sous_navigation .item.on {
-	font-weight: bold;
-}
 #contenu .sous_navigation .item a {
-	position: relative;
-	margin: 0;
 	padding: 20px 16px;
 	padding-top: 60px;
 	background-position: center 20px;
 	background-size: 32px;
-	background-repeat: no-repeat;
-	color: var(--spip-color-gray-dark);
-	transition: background 0.2s;
 	height: 100%;
 	text-align: center;
 	border-radius: var(--spip-border-radius);
-
-}
-#contenu .sous_navigation .item.on > *,
-#contenu .sous_navigation .item a:hover,
-#contenu .sous_navigation .item a:focus {
-	background-color: var(--spip-color-theme-lighter);
-	color: var(--spip-color-black);
-	/* box-shadow: inset 0 0 1.5em hsla(0, 0%, 0%, 0.05); */
 }
 @media (max-width: 500px) {
 	#contenu .sous_navigation .item {
