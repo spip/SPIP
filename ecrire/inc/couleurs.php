@@ -54,7 +54,7 @@ function inc_couleurs_dist($choix = null, $ajouter = false) {
 		// Vert de gris
 		//7 => ["couleur_theme" => "#999966"],
 		// Vert SPIP
-		1 => ["couleur_theme" => "#739100"],
+		1 => ["couleur_theme" => "#9dba00"],
 		// Vert Troglo
 		8 => ["couleur_theme" => "#419A2C"],
 		// Bleu-vert
