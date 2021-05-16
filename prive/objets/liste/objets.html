@@ -20,7 +20,7 @@
 			<td class='titre principale'><a
 				href="[(#VALEUR{id}|generer_url_entite{#ENV{objet}})]"
 				[hreflang="(#ENV{lang}|=={#GET{lang}}|non|?{#GET{lang}})"]
-				title="<:info_numero_abbreviation|attribut_html:> #VALEUR{id}">[(#RANG). ][(#INFO_TITRE{#ENV{objet},#VALEUR{id}}|sinon{<:info_sans_titre:>})]</a>
+				title="<:info_numero_abbreviation|attribut_html:> #VALEUR{id}">[<span class='rang'>(#RANG).</span> ][(#INFO_TITRE{#ENV{objet},#VALEUR{id}}|sinon{<:info_sans_titre:>})]</a>
 			</td>
 			<td class='id'>[(#AUTORISER{modifier,#ENV{objet},#VALEUR{id}}|?{
 				[<a href="[(#VALEUR{id}|generer_url_ecrire_entite_edit{#ENV{objet}})]">(#VALEUR{id})</a>],

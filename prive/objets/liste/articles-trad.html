@@ -40,7 +40,7 @@
 				lang="#LANG">[(#EXPOSE|?{#TITRE,<a
 				[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
 				href="[(#ID_ARTICLE|generer_url_entite{article})]"
-				title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">[(#RANG). ]#TITRE</a>})]</span>
+				title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">[<span class='rang'>(#RANG).</span> ]#TITRE</a>})]</span>
 				[(#ENV{id_trad}|=={#ID_ARTICLE}|oui)<small class="reference_trad"><:trad_reference:></small>]
 			</td>
 			<td class='langue'>[(#LANG|traduire_nom_langue)]</td>
