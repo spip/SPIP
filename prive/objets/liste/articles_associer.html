@@ -35,7 +35,7 @@
 			<td class='titre principale'>[(#LOGO_ARTICLE|image_reduire{20,26})
 				]<a href="[(#ID_ARTICLE|generer_url_entite{article})]"
 				[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
-				title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">[(#RANG). ]#TITRE</a></td>
+				title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">[<span class='rang'>(#RANG).</span> ]#TITRE</a></td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
 			<td class='id'>#ID_ARTICLE</td>
 			<td class='action'><button type="submit" class="ajouter btn btn_mini btn_secondaire" name="ajouter_lien[article-#ID_ARTICLE-#OBJET-#ID_OBJET]" value="+"><:lien_ajouter_un_article:>[ (#CHEMIN_IMAGE{add-12.svg}|balise_img)]</button></td>
