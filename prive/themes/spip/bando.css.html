@@ -41,6 +41,7 @@
 	--spip-deroulant-spacing-x: 0.33rem;
 	--spip-deroulant-spacing-y: 0.5rem;
 	--spip-deroulant-icon-size: 16px;
+	--spip-deroulant-col-width: 12em;
 }
 @media (min-width: 768px) {
 	:root {
@@ -54,8 +55,10 @@
 		--spip-deroulant-spacing-x: 0.5rem;
 		--spip-deroulant-spacing-y: 0.66rem;
 		--spip-deroulant-icon-size: 20px;
+		--spip-deroulant-col-width: 18em;
 	}
 }
+
 
 
 /**
@@ -241,8 +244,6 @@
 	width: -webkit-max-content;
 	width: -moz-max-content;
 	width: max-content;
-	max-width: 36em;
-	min-width: 12em;
 	opacity: 0;
 	background-color: var(--spip-color-white);
 	border-radius: var(--spip-border-radius);
@@ -587,7 +588,7 @@
 }
 .deroulant_rubriques .deroulant__sous-menu .deroulant__item {
 	position: relative;
-	width: 20em;
+	width: var(--spip-deroulant-col-width);
 }
 .deroulant_rubriques .deroulant__item_parent.actif > .deroulant__sous-menu,
 .deroulant_rubriques .deroulant__item_parent.actif_tempo > .deroulant__sous-menu {
