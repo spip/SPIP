@@ -55,7 +55,7 @@ function enfant_rub($collection, $debut = 0, $limite = 500) {
 		// pour etre sur de passer par tous les traitements
 		$titre = generer_info_entite($id_rubrique, 'rubrique', 'titre');
 		if ('' !== ($rang = recuperer_numero($row['titre']))) {
-			$rang = "$rang. ";
+			$rang = "<span class='rang'>$rang.</span> ";
 		}
 
 		if (autoriser('voir', 'rubrique', $id_rubrique)) {
@@ -153,7 +153,7 @@ function sous_enfant_rub($collection2) {
 			'titre'
 		); // pour etre sur de passer par tous les traitements
 		if ('' !== ($rang2 = recuperer_numero($row['titre']))) {
-			$rang2 = "$rang2. ";
+			$rang2 = "<span class='rang'>$rang2.</span> ";
 		}
 
 		changer_typo($row['lang']);
