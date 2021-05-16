@@ -40,35 +40,35 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function inc_couleurs_dist($choix = null, $ajouter = false) {
 	static $couleurs_spip = array(
 		// Saumon
-		4 => ["couleur_theme" => "#cda261"], 
+		// 4 => ["couleur_theme" => "#cda261"], 
+		// Violet rosé
+		11 => ["couleur_theme" => "#B154B7"],
+		// Rose foncé
+		2 => ["couleur_theme" =>  "#EE2B94"],
+		// Rouge
+		6 => ["couleur_theme" => "#E80000"],
 		// Orange
 		3 => ["couleur_theme" => "#fa9a00"],
-		// Rouge
-		8 => ["couleur_theme" => "#df4543"],
-		// Framboise
-		2 => ["couleur_theme" =>  "#d51b60"],
 		// Vert de gris
-		7 => ["couleur_theme" => "#999966"],
-		// Vert Troglo
-		11 => ["couleur_theme" => "#419A2C"],
+		//7 => ["couleur_theme" => "#999966"],
 		// Vert SPIP
 		1 => ["couleur_theme" => "#9dba00"],
+		// Vert Troglo
+		8 => ["couleur_theme" => "#419A2C"],
 		// Bleu-vert
-		15 => ["couleur_theme" => "#3EAB95"],
+		12 => ["couleur_theme" => "#3EAB95"],
 		//  Bleu pastel
-		5 => ["couleur_theme" => "#5da7c5"],
+		4 => ["couleur_theme" => "#43A1C0"],
 		//  Bleu Kermesse
-		12 => ["couleur_theme" => "#1d83d4"],
+		9 => ["couleur_theme" => "#1d83d4"],
 		// Violet
-		9 => ["couleur_theme" => "#8f8fbd"],
+		//9 => ["couleur_theme" => "#8f8fbd"],
 		// Violet soutenu
-		13 => ["couleur_theme" => "#6B3DAF"],
-		// Rose foncé
-		14 => ["couleur_theme" => "#B154B7"],
+		10 => ["couleur_theme" => "#5F3CB0"],
+		//  Gris bleuté
+		5 => ["couleur_theme" => "#7D90A2"],
 		//  Gris
-		6 => ["couleur_theme" => "#85909a"],
-		//  Gris
-		10 => ["couleur_theme" => "#909090"],
+		7 => ["couleur_theme" => "#909090"],
 	);
 
 	if (is_numeric($choix)) {
