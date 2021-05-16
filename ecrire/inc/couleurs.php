@@ -41,6 +41,8 @@ function inc_couleurs_dist($choix = null, $ajouter = false) {
 	static $couleurs_spip = array(
 		// Saumon
 		// 4 => ["couleur_theme" => "#cda261"], 
+		// Violet soutenu
+		10 => ["couleur_theme" => "#9a6ef2"],
 		// Violet rosé
 		11 => ["couleur_theme" => "#c464cb"],
 		// Rose foncé
@@ -63,8 +65,6 @@ function inc_couleurs_dist($choix = null, $ajouter = false) {
 		9 => ["couleur_theme" => "#288bdd"],
 		// Violet
 		//9 => ["couleur_theme" => "#8f8fbd"],
-		// Violet soutenu
-		10 => ["couleur_theme" => "#9a6ef2"],
 		//  Gris bleuté
 		5 => ["couleur_theme" => "#7D90A2"],
 		//  Gris
