@@ -50,7 +50,7 @@ function inc_couleurs_dist($choix = null, $ajouter = false) {
 		// Vert de gris
 		7 => ["couleur_theme" => "#999966"],
 		// Vert soutenu
-		11 => ["couleur_theme" => "#72C053"],
+		11 => ["couleur_theme" => "#21BA45"],
 		// Vert SPIP
 		1 => ["couleur_theme" => "#9dba00"],
 		// Bleu-vert
