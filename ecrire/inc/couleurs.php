@@ -49,16 +49,16 @@ function inc_couleurs_dist($choix = null, $ajouter = false) {
 		2 => ["couleur_theme" =>  "#d51b60"],
 		// Vert de gris
 		7 => ["couleur_theme" => "#999966"],
-		// Vert soutenu
-		11 => ["couleur_theme" => "#21BA45"],
+		// Vert Troglo
+		11 => ["couleur_theme" => "#419A2C"],
 		// Vert SPIP
 		1 => ["couleur_theme" => "#9dba00"],
 		// Bleu-vert
 		15 => ["couleur_theme" => "#3EAB95"],
 		//  Bleu pastel
 		5 => ["couleur_theme" => "#5da7c5"],
-		//  Bleu 
-		12 => ["couleur_theme" => "#275CCA"],
+		//  Bleu Kermesse
+		12 => ["couleur_theme" => "#1d83d4"],
 		// Violet
 		9 => ["couleur_theme" => "#8f8fbd"],
 		// Violet soutenu
