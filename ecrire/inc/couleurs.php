@@ -54,7 +54,7 @@ function inc_couleurs_dist($choix = null, $ajouter = false) {
 		// Vert SPIP
 		1 => ["couleur_theme" => "#9dba00"],
 		// Bleu-vert
-		15 => ["couleur_theme" => "#4ABDA6"],
+		15 => ["couleur_theme" => "#3EAB95"],
 		//  Bleu pastel
 		5 => ["couleur_theme" => "#5da7c5"],
 		//  Bleu 
