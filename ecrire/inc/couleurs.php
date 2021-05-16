@@ -42,29 +42,29 @@ function inc_couleurs_dist($choix = null, $ajouter = false) {
 		// Saumon
 		// 4 => ["couleur_theme" => "#cda261"], 
 		// Violet rosé
-		11 => ["couleur_theme" => "#B154B7"],
+		11 => ["couleur_theme" => "#c464cb"],
 		// Rose foncé
-		2 => ["couleur_theme" =>  "#EE2B94"],
+		2 => ["couleur_theme" =>  "#ff3da5"],
 		// Rouge
-		6 => ["couleur_theme" => "#E80000"],
+		6 => ["couleur_theme" => "#ff4524"],
 		// Orange
-		3 => ["couleur_theme" => "#fa9a00"],
+		3 => ["couleur_theme" => "#c97500"],
 		// Vert de gris
 		//7 => ["couleur_theme" => "#999966"],
 		// Vert SPIP
-		1 => ["couleur_theme" => "#9dba00"],
+		1 => ["couleur_theme" => "#739100"],
 		// Vert Troglo
 		8 => ["couleur_theme" => "#419A2C"],
 		// Bleu-vert
-		12 => ["couleur_theme" => "#3EAB95"],
+		12 => ["couleur_theme" => "#269681"],
 		//  Bleu pastel
-		4 => ["couleur_theme" => "#43A1C0"],
+		4 => ["couleur_theme" => "#3190ae"],
 		//  Bleu Kermesse
-		9 => ["couleur_theme" => "#1d83d4"],
+		9 => ["couleur_theme" => "#288bdd"],
 		// Violet
 		//9 => ["couleur_theme" => "#8f8fbd"],
 		// Violet soutenu
-		10 => ["couleur_theme" => "#5F3CB0"],
+		10 => ["couleur_theme" => "#9a6ef2"],
 		//  Gris bleuté
 		5 => ["couleur_theme" => "#7D90A2"],
 		//  Gris
