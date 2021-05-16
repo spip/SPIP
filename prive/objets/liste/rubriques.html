@@ -26,7 +26,7 @@
 			<td class='titre principale'>[(#LOGO_RUBRIQUE|image_reduire{20,26})
 				]<a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]"
 				[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
-				title="<:info_numero_abbreviation|attribut_html:> #ID_RUBRIQUE">[(#RANG). ]#TITRE</a></td>
+				title="<:info_numero_abbreviation|attribut_html:> #ID_RUBRIQUE">[<span class='rang'>(#RANG).</span> ]#TITRE</a></td>
 			<td class='langue'></td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
 			<td class='id'>[(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE}|?{

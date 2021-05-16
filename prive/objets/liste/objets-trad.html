@@ -28,7 +28,7 @@
 				dir="[(#VALEUR{lang}|lang_dir)]"
 				lang="#VALEUR{lang}"><a
 				href="[(#VALEUR{id}|generer_url_entite{#ENV{objet}})]"
-				title="<:info_numero_abbreviation|attribut_html:> #VALEUR{id}">[(#VALEUR{statut}|puce_statut{#ENV{objet}}) ][(#RANG). ]#INFO_TITRE{#ENV{objet},#VALEUR{id}}</a></span>
+				title="<:info_numero_abbreviation|attribut_html:> #VALEUR{id}">[(#VALEUR{statut}|puce_statut{#ENV{objet}}) ][<span class='rang'>(#RANG).</span> ]#INFO_TITRE{#ENV{objet},#VALEUR{id}}</a></span>
 				[(#EVAL{lang_select()}|vide)]
 				[(#ENV{id_trad}|=={#VALEUR{id}}|oui)[(#ENV*{info_trad_reference,#ENV{objet}|objet_T{trad_reference}})]]
 			</td>
