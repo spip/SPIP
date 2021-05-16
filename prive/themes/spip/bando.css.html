@@ -41,6 +41,7 @@
 	--spip-deroulant-spacing-x: 0.33rem;
 	--spip-deroulant-spacing-y: 0.5rem;
 	--spip-deroulant-icon-size: 16px;
+	--spip-deroulant-col-width: 12em;
 }
 @media (min-width: 768px) {
 	:root {
@@ -54,6 +55,7 @@
 		--spip-deroulant-spacing-x: 0.5rem;
 		--spip-deroulant-spacing-y: 0.66rem;
 		--spip-deroulant-icon-size: 20px;
+		--spip-deroulant-col-width: 18em;
 	}
 }
 
@@ -240,8 +242,8 @@
 	width: -webkit-max-content;
 	width: -moz-max-content;
 	width: max-content;
-	max-width: 36em;
-	min-width: 12em;
+	max-width: var(--spip-deroulant-col-width);
+	min-width: var(--spip-deroulant-col-width);
 	opacity: 0;
 	background-color: var(--spip-color-white);
 	border-radius: var(--spip-border-radius);
@@ -275,7 +277,8 @@
    Nb : column-count serait plus adapté mais pose des problèmes
    pour le placement des sous-menus imbriqués */
 .bando-haut .deroulant__sous-menu[class*=cols-] {
-	max-width: calc(var(--spip-vw) * 0.9);
+	/* max-width: calc(var(--spip-vw) * 0.9);*/
+	max-width: none;
 	display: grid;
 	grid-gap: 0;
 }
@@ -581,6 +584,7 @@
 }
 .deroulant_rubriques .deroulant__sous-menu .deroulant__item {
 	position: relative;
+	max-width: var(--spip-deroulant-col-width);
 }
 .deroulant_rubriques .deroulant__item_parent.actif > .deroulant__sous-menu,
 .deroulant_rubriques .deroulant__item_parent.actif_tempo > .deroulant__sous-menu {
