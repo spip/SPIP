@@ -23,7 +23,7 @@
 				<label for="var_login"><:login_login2:> <span class="etoile" title="<:info_obligatoire_02|attribut_html:>" aria-label="<:info_obligatoire_02|attribut_html:>">*</span></label>[
 				<span class="erreur_message">(#ENV**{erreurs}|table_valeur{var_login})</span>
 				]<input type='text' class='text' name='var_login' id='var_login' value="[(#ENV**{var_login})]" size='40'[(#HTML5) required='required' [(#ENV{_autofocus}|et{#ENV**{erreurs}|table_valeur{password}|non})autofocus='autofocus']] autocapitalize="off" autocorrect="off" />[
-				<span id="spip_logo_auteur">(#ENV*{_logo,''})</span>]
+				<span id="spip_logo_auteur">(#ENV*{_logo,''}|sinon{#CHEMIN_IMAGE{favicon-spip.png}|image_recadre_avec_fallback{100,100}})</span>]
 			</div>
 			<div class="editer editer_password obligatoire[(#ENV**{erreurs}|table_valeur{password}|oui)erreur]">
 				<label for="password"><:login_pass2:>  <span class="etoile" title="<:info_obligatoire_02|attribut_html:>" aria-label="<:info_obligatoire_02|attribut_html:>">*</span></label>[
