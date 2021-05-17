@@ -11,7 +11,6 @@ function formulaires_configurer_image_fond_login_charger_dist() {
 		$valeurs["src_img"] = $img;
 	}
 
-	$valeurs['_bigup_rechercher_fichiers'] = true;
 	return $valeurs;
 }
 
@@ -19,7 +18,11 @@ function formulaires_configurer_image_fond_login_charger_dist() {
 function formulaires_configurer_image_fond_login_verifier_dist() {
 	$erreurs = array();
 
-	if (!empty($_FILES['upload_image_fond_login'])) {
+	if (_request("supprimer_image_fond_login")) {
+		// rien à tester
+	}
+
+	elseif (!empty($_FILES['upload_image_fond_login'])) {
 		$file = $_FILES['upload_image_fond_login'];
 		include_spip('action/ajouter_documents');
 		$extension = pathinfo($file['name'], PATHINFO_EXTENSION);
@@ -46,7 +49,7 @@ function formulaires_configurer_image_fond_login_traiter_dist() {
 		];
 	}
 
-	if (!empty($_FILES['upload_image_fond_login'])) {
+	elseif (!empty($_FILES['upload_image_fond_login'])) {
 		$file = $_FILES['upload_image_fond_login'];
 		include_spip('inc/documents');
 		deplacer_fichier_upload($file['tmp_name'], $dest);

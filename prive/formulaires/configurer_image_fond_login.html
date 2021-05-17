@@ -22,11 +22,11 @@
 			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}">Installer une image (format JPEG, 1920x1080 pixels)&nbsp;:</label>
 				[<span class='erreur_message'>(#ENV{erreurs/upload_image_fond_login})</span>]
-				<input type="file" name="#GET{name}" class="file bigup" accept="image/jpeg" data-token="#BIGUP_TOKEN{upload_image_fond_login}">
+				<input type="file" name="#GET{name}" class="file" accept="image/jpeg" />
 			</div>
 		</div>
 		<div class="boutons">
-			<button type="submit" class="submit" name="upload"><:bouton_enregistrer:></button>
+			<button type="submit" class="submit btn-upload" name="upload"><:bouton_enregistrer:></button>
 		</div>
 	</div></form>
 	]
