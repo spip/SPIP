@@ -1,0 +1,45 @@
+<?php
+
+
+function formulaires_image_fond_login_charger_dist($id){
+	include_spip("inc/utils");
+	$img = _DIR_IMG."spip_fond_login.jpg";
+    die($img);
+	$valeurs = array(
+		"upload_image_fond_login" => ""
+	);
+	if (file_exists($img)) $valeurs["src_img"] = $img;
+	$valeurs['_bigup_rechercher_fichiers'] = true;
+	return $valeurs;
+}
+
+
+function formulaires_image_fond_login_verifier_dist($id){
+	$erreurs = array();
+	return $erreurs;
+}
+
+
+
+function formulaires_image_fond_login_traiter_dist($id){
+	$img = _DIR_IMG."spip_fond_login.jpg";
+	
+die ($img);
+	if ($_POST["supprimer_image_fond_login"]){
+		@unlink($dest);
+	}
+
+	if ($_FILES['upload_image_fond_login']['name']) {
+		$fichier = $_FILES['upload_image_fond_login']['name'];
+		if (preg_match(",\.jpg$,", $fichier)) {
+			$fichier = $_FILES['upload_image_fond_login']['tmp_name'];
+			rename($fichier, $dest);
+		}
+	}
+	$retours = [
+		'message_ok' => json_encode($_FILES),
+		'editable' => true,
+	];
+
+	//return $retours;
+}

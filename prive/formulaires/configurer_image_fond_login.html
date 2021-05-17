@@ -1,0 +1,24 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+<h3 class='titrem'><img src="#CHEMIN_IMAGE{image-xx.svg}" class="cadre-icone" />Image de fond de l’écran d’accueil</h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok" role="status">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur" role="alert">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype="multipart/form-data"><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE
+		<div class="editer-groupe">
+			<div class="editer editer_logo">
+
+				[<img id="image_fond_hotspots" src="(#ENV{src_img}|timestamp)" style="width: 100%; display: block;">]
+
+				
+				<label for="upload_image_fond_login">Installer une image (format JPEG, 1920x1080 pixels)&nbsp;:</label>
+
+				<input type="file" name="upload_image_fond_login" class="file bigup" accept="image/jpeg" data-token="#BIGUP_TOKEN{upload_image_fond_login}">			
+			</div>
+			<input type="submit">
+	  	</div>
+	</div></form>
+	]
+</div>
