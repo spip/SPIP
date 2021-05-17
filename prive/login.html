@@ -13,15 +13,14 @@
 <link rel="stylesheet" href="[(#VAL{reset.css}|find_in_theme|direction_css)]" type="text/css" />
 <link rel="stylesheet" href="[(#VAL{clear.css}|find_in_theme|direction_css)]" type="text/css" />
 <link rel="stylesheet" href="[(#VAL{minipres.css}|find_in_theme|direction_css)]" type="text/css" />
+<link rel="stylesheet" href="[(#VAL{login_prive.css}|find_in_theme|direction_css)]" type="text/css" />
 #INSERT_HEAD
 <script type='text/javascript'>
 jQuery(function(){jQuery('a#spip_pass').click(function(){window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=380'); return false;});});
 </script>
 <meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
 </head>
-<body class="page_login">
-
-<div id="minipres">
+<body class="page_login"[ style="background-image:url((#CHEMIN_IMAGE{ecureuil_by_shane_young.jpg}))"]>
 
 	<h1>#NOM_SITE_SPIP</h1>
 	[(#REM)
@@ -42,7 +41,6 @@ jQuery(function(){jQuery('a#spip_pass').click(function(){window.open(this.href, 
 		<a href="https://www.spip.net/" title="<:site_realise_avec_spip:>">(#CHEMIN_IMAGE{spip.png}|balise_img)</a>
 	</p>]
 	
-</div><!--#minipres-->
 
 </body>
 </html>
