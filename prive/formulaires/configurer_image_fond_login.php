@@ -1,15 +1,16 @@
 <?php
 
-
 function formulaires_configurer_image_fond_login_charger_dist() {
-	include_spip("inc/utils");
-	$repertoire = sous_repertoire(_DIR_IMG, "logo");
-	$img = $repertoire."hotspot$id.jpg";
-	$img = _DIR_IMG."spip_fond_login.jpg";
+
 	$valeurs = array(
 		"upload_image_fond_login" => ""
 	);
-	if (file_exists($img)) $valeurs["src_img"] = $img;
+
+	$img = _DIR_IMG . "spip_fond_login.jpg";
+	if (file_exists($img)) {
+		$valeurs["src_img"] = $img;
+	}
+
 	$valeurs['_bigup_rechercher_fichiers'] = true;
 	return $valeurs;
 }
@@ -17,29 +18,43 @@ function formulaires_configurer_image_fond_login_charger_dist() {
 
 function formulaires_configurer_image_fond_login_verifier_dist() {
 	$erreurs = array();
+
+	if (!empty($_FILES['upload_image_fond_login'])) {
+		$file = $_FILES['upload_image_fond_login'];
+		include_spip('action/ajouter_documents');
+		$extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+		$extension = corriger_extension(strtolower($extension));
+		if (!in_array($extension, ['jpg'])) {
+			$erreurs['upload_image_fond_login'] = _L('Mauvaise extension de l’image');
+		}
+	}
+
 	return $erreurs;
 }
 
 
-
 function formulaires_configurer_image_fond_login_traiter_dist() {
-	$img = _DIR_IMG."spip_fond_login.jpg";
-	if ($_POST["supprimer_image_fond_login"]){
+	
+	$dest = _DIR_IMG . "spip_fond_login.jpg";
+	$retours = [];
+
+	if (_request("supprimer_image_fond_login")) {
 		@unlink($dest);
+		$retours = [
+			'message_ok' => _L('L’image est enlevée.'),
+			'editable' => true,
+		];
 	}
 
-	die ($img);
-	if ($_FILES['upload_image_fond_login']['name']) {
-		$fichier = $_FILES['upload_image_fond_login']['name'];
-		if (preg_match(",\.jpg$,", $fichier)) {
-			$fichier = $_FILES['upload_image_fond_login']['tmp_name'];
-			rename($fichier, $dest);
-		}
+	if (!empty($_FILES['upload_image_fond_login'])) {
+		$file = $_FILES['upload_image_fond_login'];
+		include_spip('inc/documents');
+		deplacer_fichier_upload($file['tmp_name'], $dest);
+		$retours = [
+			'message_ok' => _L('L’image est installée'),
+			'editable' => true,
+		];
 	}
-	$retours = [
-		'message_ok' => json_encode($_FILES),
-		'editable' => true,
-	];
 
-	//return $retours;
+	return $retours;
 }
