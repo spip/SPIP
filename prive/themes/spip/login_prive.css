@@ -16,15 +16,17 @@
 }
 .page_login .erreur_message,
 .page_login .reponse_formulaire_erreur {
-	background: rgba(255,255,255,0.8);
     font-size: 85%;
-	padding: 5px 10px;
+    padding-bottom: 5px;
+}
+.page_login .reponse_formulaire_erreur {
+    padding: 10px;
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
+   background: rgba(255,255,255,0.8);
+    background: white;
 }
-.page_login .reponse_formulaire_erreur ~ #formulaire_login fieldset,
-.page_login .erreur_message ~ input.text,
-.page_login .erreur_message ~ input.password {
+.page_login .reponse_formulaire_erreur ~ #formulaire_login fieldset {
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 }
@@ -36,7 +38,6 @@
 	border: 0;
 	background-color: white;
 	background-color: rgba(255, 255, 255, 0.5);
-	background-color: #ccc;
 	font-size: 12px;
 	-webkit-appearance: none;
 }
