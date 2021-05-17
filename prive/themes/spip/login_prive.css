@@ -8,7 +8,7 @@
 	border:0;
 	padding: 0;
 	font-family: arial, helvetica, sans;
-	background: #f9f9f9;
+    background-color: rgb(233, 233, 242);
     background-size: cover;
 }
 .page_login label[for=var_lang_ecrire] {
@@ -44,8 +44,8 @@
  .page_login .formulaire_menu_lang {
 	position: absolute;
 	top: 15px;
-	right: 5%;
-	width: 200px;
+	right: 10px;
+	width: 150px;
 }
  .page_login .formulaire_login, .page_login .formulaire_spip.pass {
 	width: 90%;

@@ -20,7 +20,7 @@ jQuery(function(){jQuery('a#spip_pass').click(function(){window.open(this.href, 
 </script>
 <meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
 </head>
-<body class="page_login"[ style="background-image:url((#CHEMIN_IMAGE{ecureuil_by_shane_young.jpg}))"]>
+<body class="page_login"[ style="background-image:url((#CHEMIN_IMAGE{spip_fond_login.jpg}))"]>
 
 	<h1>#NOM_SITE_SPIP</h1>
 	[(#REM)
@@ -33,7 +33,7 @@ jQuery(function(){jQuery('a#spip_pass').click(function(){window.open(this.href, 
 	]
 
 	[(#FORMULAIRE_LOGIN{#ENV{url}|sinon{#URL_ECRIRE{accueil}}})]
-	<p class="retour">
+	<p class="retour">#CHEMIN_IMAGE{spip_fond_login.jpg}
 		[<a href="#URL_PAGE{identifiants,focus=nom_inscription}&amp;mode=(#URL_SITE_SPIP|tester_config{1comite})"><:login_sinscrire:></a> | ]
 		<a href="#URL_SITE_SPIP/"><:login_retoursitepublic:></a>
 	</p>
