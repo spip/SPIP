@@ -59,5 +59,8 @@ function formulaires_configurer_image_fond_login_traiter_dist() {
 		];
 	}
 
+	include_spip('inc/invalideur');
+	suivre_invalideur('1'); # tout effacer
+
 	return $retours;
 }
