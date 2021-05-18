@@ -3,6 +3,7 @@
 function formulaires_configurer_ecran_connexion_data() : array {
 	return [
 		'couleur_defaut' => "#db1762",
+		'img_fond' => _DIR_IMG . "spip_fond_login.jpg",
 	];
 }
 
@@ -18,9 +19,8 @@ function formulaires_configurer_ecran_connexion_charger_dist() {
 		"upload_image_fond_login" => "",
 	);
 
-	$img = _DIR_IMG . "spip_fond_login.jpg";
-	if (file_exists($img)) {
-		$valeurs["src_img"] = $img;
+	if (file_exists($data['img_fond'])) {
+		$valeurs["src_img"] = $data['img_fond'];
 	}
 
 	return $valeurs;
@@ -44,7 +44,7 @@ function formulaires_configurer_ecran_connexion_verifier_dist() {
 		$extension = pathinfo($file['name'], PATHINFO_EXTENSION);
 		$extension = corriger_extension(strtolower($extension));
 		if (!in_array($extension, ['jpg'])) {
-			$erreurs['upload_image_fond_login'] = _L('Mauvaise extension de l’image');
+			$erreurs['upload_image_fond_login'] = _T('erreur_type_fichier');
 		}
 	}
 
@@ -53,8 +53,7 @@ function formulaires_configurer_ecran_connexion_verifier_dist() {
 
 
 function formulaires_configurer_ecran_connexion_traiter_dist() {
-	
-	$dest = _DIR_IMG . "spip_fond_login.jpg";
+
 	$retours = [
 		'message_ok' => _T('config_info_enregistree'),
 		'editable' => true,
@@ -62,6 +61,7 @@ function formulaires_configurer_ecran_connexion_traiter_dist() {
 
 	include_spip('inc/config');
 	$data = formulaires_configurer_ecran_connexion_data();
+	$dest = $data['img_fond'];
 
 	if (_request('couleur_login')) {
 		$color = _request('couleur_login');
@@ -74,29 +74,17 @@ function formulaires_configurer_ecran_connexion_traiter_dist() {
 
 	if (_request("supprimer_image_fond_login")) {
 		@unlink($dest);
-		$retours = [
-			'message_ok' => _L('L’image est enlevée.'),
-			'editable' => true,
-		];
 	}
 
 	elseif (_request("supprimer_couleur_login")) {
 		effacer_config("couleur_login");
 		set_request("couleur_login", null);
-		$retours = [
-			'message_ok' => _L('La couleur est remise à sa valeur par défaut.'),
-			'editable' => true,
-		];
 	}
 
 	elseif (!empty($_FILES['upload_image_fond_login'])) {
 		$file = $_FILES['upload_image_fond_login'];
 		include_spip('inc/documents');
 		deplacer_fichier_upload($file['tmp_name'], $dest);
-		$retours = [
-			'message_ok' => _L('L’image est installée'),
-			'editable' => true,
-		];
 	}
 
 	include_spip('inc/invalideur');

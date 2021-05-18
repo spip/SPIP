@@ -1,5 +1,5 @@
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
-<h3 class='titrem'><img src="#CHEMIN_IMAGE{image-xx.svg}" class="cadre-icone" />Écran de connexion</h3>
+<h3 class='titrem'><img src="#CHEMIN_IMAGE{image-xx.svg}" class="cadre-icone" /><:ecran_connexion_titre:></h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok" role="status">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur" role="alert">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
@@ -8,23 +8,20 @@
 		<input type="hidden" name="save" />
 
 		<div class="editer-groupe">
-			#SET{name,couleur_login}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
+			#SET{name,couleur_login}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
 			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-				<label for="#GET{name}">Couleur principale</label>
+				<label for="#GET{name}"><:ecran_connexion_couleur_principale:></label>
 					[<span class='erreur_message'>(#GET{erreurs})</span>]
 					<input type='color' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
-					[(#ENV{couleur_defaut_login}|!=={#ENV{#GET{name}}}|oui)
-						<button type="submit" class="btn submit supprimer" name="supprimer_couleur_login" value="1">Remettre à la couleur par défaut</button>
-					]
 			</div>
 
 			#SET{name,upload_image_fond_login}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
-			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-				<label for="#GET{name}">Image de fond</label>
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur] pleine_largeur">
+				<label for="#GET{name}"><:ecran_connexion_image_fond:></label>
 				[(#ENV{src_img}|oui)
-					[(#INCLURE{fond=formulaires/inc-apercu-logo,env,logo=#ENV{src_img},quoi=image_fond_login,editable})]
+					[(#INCLURE{fond=formulaires/inc-apercu-logo,env,logo=#ENV{src_img},quoi=image_fond_login,editable,_options=#ARRAY{image_reduire,780}})]
 				][(#ENV{src_img}|non)
-					<div class="explication">Installer une image (format JPEG, 1920x1080 pixels).</div>
+					<div class="explication"><:ecran_connexion_image_fond_explication:></div>
 					[<span class='erreur_message'>(#ENV{erreurs/upload_image_fond_login})</span>]
 					<input type="file" name="#GET{name}" class="file" accept="image/jpeg" />
 				]
@@ -32,6 +29,9 @@
 		</div>
 
 		<div class="boutons">
+			[(#ENV{couleur_defaut_login}|!=={#ENV{#GET{name}}}|oui)
+				<button type="submit" class="btn submit btn_secondaire float-start" name="supprimer_couleur_login" value="1"><:ecran_connexion_image_remettre_couleur_defaut:></button>
+			]
 			<button type="submit" class="submit" name="save"><:bouton_enregistrer:></button>
 		</div>
 	</div></form>

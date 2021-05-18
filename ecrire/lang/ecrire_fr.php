@@ -96,6 +96,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_mot_heures' => 'heures',
 
 	// E
+	'ecran_connexion_titre' => 'Écran de connexion',
+	'ecran_connexion_couleur_principale' => 'Couleur principale',
+	'ecran_connexion_image_fond' => 'Image de fond',
+	'ecran_connexion_image_fond_explication' => 'Installer une image (format JPEG, 1920x1080 pixels)',
+	'ecran_connexion_image_remettre_couleur_defaut' => 'Remettre la couleur par défaut',
 	'ecran_securite' => ' + écran de sécurité @version@',
 	'email' => 'email',
 	'email_2' => 'email :',
@@ -142,6 +147,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_contenu_suspect' => 'Texte échappé',
 	'erreur_email_deja_existant' => 'Cette adresse email est déjà enregistrée.',
 	'erreur_nom_connect_incorrect' => 'Ce nom de serveur n’est pas autorisé',
+	'erreur_type_fichier' => 'Type de fichier incorrect',
 	'erreur_plugin_attribut_balise_manquant' => 'Attribut @attribut@ manquant dans la balise @balise@.',
 	'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a échoué. Vous pouvez néanmoins le désactiver.',
 	'erreur_plugin_fichier_absent' => 'Fichier absent',
