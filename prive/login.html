@@ -19,9 +19,24 @@
 jQuery(function(){jQuery('a#spip_pass').click(function(){window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=380'); return false;});});
 </script>
 <meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
-</head>
 #SET{logo,#CHEMIN_IMAGE{#CONST{_DIR_IMG}|concat{spip_fond_login.jpg}}}
-<body class="page_login[(#GET{logo}|non) sans_fond]"[ style="background-image:url((#GET{logo}|timestamp))"]>
+[(#CONFIG{couleur_login}|oui)
+	#SET{hs,#CONFIG{couleur_login}|couleur_hex_to_hsl{"h, s"}}
+	#SET{l,#CONFIG{couleur_login}|couleur_hex_to_hsl{l}}
+]
+<style type="text/css">
+.page_login {
+	[background-image:url((#GET{logo}|timestamp));]
+}
+[(#CONFIG{couleur_login}|oui)
+:root {
+		--spip-login-color-theme--hs: #GET{hs};
+		--spip-login-color-theme--l: #GET{l};
+}
+]
+</style>
+</head>
+<body class="page_login[(#GET{logo}|non) sans_fond]">
 
 	<h1>#NOM_SITE_SPIP</h1>
 	[(#REM)

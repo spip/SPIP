@@ -7,8 +7,8 @@
 	--spip-login-color-theme--l: 47%;
 
 	--spip-login-color-theme: hsl(var(--spip-login-color-theme--hs), var(--spip-login-color-theme--l));
-	--spip-login-color-theme-light: hsl(var(--spip-login-color-theme--hs), calc(var(--spip-login-color-theme--l) + 20%));
-	--spip-login-color-theme-dark: hsl(var(--spip-login-color-theme--hs), calc(var(--spip-login-color-theme--l) - 20%));
+	--spip-login-color-theme-light: hsl(var(--spip-login-color-theme--hs), calc(var(--spip-login-color-theme--l) + 25%));
+	--spip-login-color-theme-dark: hsl(var(--spip-login-color-theme--hs), calc(var(--spip-login-color-theme--l) - 25%));
 
 	--spip-login-color-gray-lighter: rgba(255, 255, 255, 0.7);
 	--spip-login-color-gray-light: rgba(255, 255, 255, 0.5);
