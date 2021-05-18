@@ -12,21 +12,10 @@
     background-size: cover;
 }
 .page_login.sans_fond {
-	background:
-	radial-gradient(black 15%, transparent 16%) 0 0,
-	radial-gradient(black 15%, transparent 16%) 8px 8px,
-	radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
-	radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
-	background-color:#2b3e45;
-	background-size:16px 16px;	
+	background: rgb(219,23,98);
+	background: radial-gradient(circle, rgba(219,23,98,1) 0%, rgba(140,27,70,1) 100%);
 }
-.page_login.sans_fond:before {
-	content: " ";
-	position: absolute;
-	top: 0; left: 0; right: 0; bottom: 0;
-	background: linear-gradient(335deg, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0.5) 100%);
-	mix-blend-mode: soft-light;
-}
+
 .page_login label[for=var_lang_ecrire] {
 	display: none;
 }
@@ -164,16 +153,15 @@
 	font-size: 16px;
 	border: 0px;
 	padding: 7px 15px;
-	background-color: #E8246F
-	transition: 0.2s background-color, 0.2s color;
+	background-color: rgba(255,255,255,0.5);
+	transition: 0.2s background-color;
 	border-radius: 4px;
-	color: white;
+	color: black;
 	-webkit-appearance: none;
 }
  .page_login h1, .page_login .boutons input.submit:hover,
  .page_login h1, .page_login .boutons input.submit:focus {
 	background-color: white;
-	color: black;
 }
 
  .page_login h1, .page_login #spip_logo_auteur img {
