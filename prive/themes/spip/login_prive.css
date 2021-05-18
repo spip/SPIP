@@ -3,8 +3,10 @@
 ---------------------------------------------- */
 :root {
 
+	--spip-login-color-theme-light: rgb(241, 93, 150);
 	--spip-login-color-theme: rgba(219, 23, 98, 1);
-	--spip-login-color-theme-dark: rgba(140, 27, 70, 1);
+	--spip-login-color-theme-dark: rgb(131, 25, 66);
+	
 
 	--spip-login-color-gray-lighter: rgba(255, 255, 255, 0.7);
 	--spip-login-color-gray-light: rgba(255, 255, 255, 0.5);
@@ -23,7 +25,7 @@
 }
 .page_login.sans_fond {
 	background: var(--spip-login-color-theme);
-	background: radial-gradient(circle, var(--spip-login-color-theme) 0%, var(--spip-login-color-theme-dark) 100%);
+	background: radial-gradient(circle, var(--spip-login-color-theme) 20%, var(--spip-login-color-theme-dark) 100%);
 }
 
 .page_login label[for=var_lang_ecrire] {
@@ -57,13 +59,13 @@
 	font-size: 12px;
 	-webkit-appearance: none;
 }
- .page_login .formulaire_menu_lang {
+.page_login .formulaire_menu_lang {
 	position: absolute;
 	top: 15px;
 	right: 10px;
 	width: 150px;
 }
- .page_login .formulaire_login, .page_login .formulaire_spip.pass {
+.page_login .formulaire_login, .page_login .formulaire_spip.pass {
 	width: 90%;
 	max-width: 400px;
 	position: absolute;
@@ -102,15 +104,15 @@
 	top: 0;
 	right: 0;
 }
- .page_login h1 {
+.page_login h1 {
 	margin-left: -1.5em;
 }
- .page_login h1,  .page_login label {
+.page_login h1,  .page_login label {
 	font-size: 0.9em;
 	padding-bottom: 0.2em;
 	text-shadow: 0 0 3px var(--spip-login-color-gray-dark);
 }
- .page_login h1,  .page_login input.text {
+.page_login h1,  .page_login input.text {
 	width: 100%;
 	box-sizing: border-box;
 	border: 0px;
@@ -118,12 +120,12 @@
 	border-radius: 4px;
 	transition: 0.2s background-color;
 }
- .page_login h1,  input.text:hover,
- .page_login h1,  input.text:focus{
+.page_login h1,  input.text:hover,
+.page_login h1,  input.text:focus{
 	background-color: white;
 }
 
- .page_login h1, .page_login #spip_logo_auteur {
+.page_login h1, .page_login #spip_logo_auteur {
 	float: none;
 	position: absolute;
 	top: -130px;
@@ -134,7 +136,7 @@
 	border-radius: 50%;
 	overflow: hidden;
 }
- .page_login h1 {
+.page_login h1 {
 	font-size: 85%;
 	text-align: right;
 	padding-top: 5px;
@@ -146,19 +148,19 @@
 	padding-top: 0.3em;
 }
 
- .page_login h1, .page_login p.details a {
+.page_login h1, .page_login p.details a {
 	color: white;
 	text-shadow: 0 0 3px var(--spip-login-color-gray-dark);
 	opacity: 0.7;
 }
- .page_login h1, .page_login p.details a:hover {
+.page_login h1, .page_login p.details a:hover {
 	opacity: 1;
 }
- .page_login h1, .page_login .boutons {
+.page_login h1, .page_login .boutons {
 	text-align: right;
 	margin-right: 0px;
 }
- .page_login h1, .page_login .boutons input.submit {
+.page_login h1, .page_login .boutons input.submit {
 	font-size: 16px;
 	border: 0px;
 	padding: 7px 15px;
@@ -168,16 +170,16 @@
 	color: black;
 	-webkit-appearance: none;
 }
- .page_login h1, .page_login .boutons input.submit:hover,
- .page_login h1, .page_login .boutons input.submit:focus {
+.page_login h1, .page_login .boutons input.submit:hover,
+.page_login h1, .page_login .boutons input.submit:focus {
 	background-color: white;
 }
 
- .page_login h1, .page_login #spip_logo_auteur img {
+.page_login h1, .page_login #spip_logo_auteur img {
 	position: inline;
 	margin: 0 !important;
 }
- .page_login p.retour {
+.page_login p.retour {
 	position: absolute;
 	left: 20px;
 	bottom: 10px;
@@ -185,17 +187,25 @@
 	padding: 5px 10px;
 	border-radius: 4px;
 }
- .page_login p.retour a {
+.page_login p.retour a {
 	color: black;
 	font-size: 14px;
 }
- .page_login p.retour a:before {
+.page_login p.retour a:before {
 	content: "⬅︎ ";
 }
- .page_login p.generator {
+.page_login p.generator {
 	position: absolute;
 	right: 10px;
 	bottom: 10px;
+}
+.page_login p.generator a {
+	color: var(--spip-login-color-theme);
+	transition: .2s color;
+}
+.page_login p.generator a:hover, 
+.page_login p.generator a:focus {
+	color: var(--spip-login-color-theme-light);
 }
 
 .page_login h1 {
