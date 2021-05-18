@@ -1,35 +1,39 @@
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
-<h3 class='titrem'><img src="#CHEMIN_IMAGE{image-xx.svg}" class="cadre-icone" />Image de fond de l’écran d’accueil</h3>
+<h3 class='titrem'><img src="#CHEMIN_IMAGE{image-xx.svg}" class="cadre-icone" />Écran d’accueil</h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok" role="status">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur" role="alert">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}' enctype="multipart/form-data"><div>
-		[(#REM) declarer les hidden qui declencheront le service du formulaire
-		parametre : url d'action ]
 		#ACTION_FORMULAIRE
-		<input type="hidden" name="upload" />
-		[<div class="editer-groupe">
-			<div class="editer pleine_largeur">
-				<img id="image_fond_login" src="(#ENV{src_img}|timestamp)" style="width: 100%; display: block;">
-			</div>
-		</div>
-		<div class="boutons">
-			<button type="submit" class="submit" name="supprimer_image_fond_login" value="1"><:medias:bouton_supprimer:></button>
-		</div>]
+		<input type="hidden" name="save" />
 
-		[(#ENV{src_img}|non)
-			<div class="editer-groupe">
-				#SET{name,upload_image_fond_login}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
-				<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-					<label for="#GET{name}">Installer une image (format JPEG, 1920x1080 pixels)&nbsp;:</label>
+		<div class="editer-groupe">
+			#SET{name,couleur_login}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">Couleur principale</label>
+					[<span class='erreur_message'>(#GET{erreurs})</span>]
+					<input type='color' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+					[(#ENV{couleur_defaut_login}|!=={#ENV{#GET{name}}}|oui)
+						<button type="submit" class="btn submit supprimer" name="supprimer_couleur_login" value="1">Remettre à la couleur par défaut</button>
+					]
+			</div>
+
+			#SET{name,upload_image_fond_login}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">Image de fond</label>
+				[(#ENV{src_img}|oui)
+					[(#INCLURE{fond=formulaires/inc-apercu-logo,env,logo=#ENV{src_img},quoi=image_fond_login,editable})]
+				][(#ENV{src_img}|non)
+					<div class="explication">Installer une image (format JPEG, 1920x1080 pixels).</div>
 					[<span class='erreur_message'>(#ENV{erreurs/upload_image_fond_login})</span>]
 					<input type="file" name="#GET{name}" class="file" accept="image/jpeg" />
-				</div>
+				]
 			</div>
-			<div class="boutons">
-				<button type="submit" class="submit btn-upload" name="upload"><:bouton_enregistrer:></button>
-			</div>
-		]
+		</div>
+
+		<div class="boutons">
+			<button type="submit" class="submit" name="save"><:bouton_enregistrer:></button>
+		</div>
 	</div></form>
 	]
 </div>
