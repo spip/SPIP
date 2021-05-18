@@ -1,16 +1,16 @@
 <?php
 
-function formulaires_configurer_image_fond_login_data() : array {
+function formulaires_configurer_ecran_connexion_data() : array {
 	return [
 		'couleur_defaut' => "#db1762",
 	];
 }
 
-function formulaires_configurer_image_fond_login_charger_dist() {
+function formulaires_configurer_ecran_connexion_charger_dist() {
 	include_spip('inc/config');
 	include_spip('inc/autoriser');
 
-	$data = formulaires_configurer_image_fond_login_data();
+	$data = formulaires_configurer_ecran_connexion_data();
 
 	$valeurs = array(
 		"couleur_login" => lire_config("couleur_login", $data['couleur_defaut']),
@@ -27,7 +27,7 @@ function formulaires_configurer_image_fond_login_charger_dist() {
 }
 
 
-function formulaires_configurer_image_fond_login_verifier_dist() {
+function formulaires_configurer_ecran_connexion_verifier_dist() {
 	$erreurs = array();
 
 	if (_request("supprimer_image_fond_login")) {
@@ -52,7 +52,7 @@ function formulaires_configurer_image_fond_login_verifier_dist() {
 }
 
 
-function formulaires_configurer_image_fond_login_traiter_dist() {
+function formulaires_configurer_ecran_connexion_traiter_dist() {
 	
 	$dest = _DIR_IMG . "spip_fond_login.jpg";
 	$retours = [
@@ -61,7 +61,7 @@ function formulaires_configurer_image_fond_login_traiter_dist() {
 	];
 
 	include_spip('inc/config');
-	$data = formulaires_configurer_image_fond_login_data();
+	$data = formulaires_configurer_ecran_connexion_data();
 
 	if (_request('couleur_login')) {
 		$color = _request('couleur_login');
