@@ -32,6 +32,7 @@
 	{id_article}
 	{statut=prepa}
 	{id_auteur=#SESSION{id_auteur}}
+	{si #SESSION{statut}|=={1comite}|et{#AUTORISER{modifier,article,#ID_ARTICLE}}}
 	>
 #BOITE_OUVRIR{'',pop notice}
 	<p><:texte_proposer_publication:></p>
