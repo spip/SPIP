@@ -35,14 +35,16 @@
     font-size: 85%;
     padding-bottom: 5px;
 }
-.page_login .reponse_formulaire_erreur {
-    padding: 10px;
+.page_login .reponse_formulaire_erreur,
+.page_login .erreur_message {
+    padding: 7px 10px;
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
-   background: rgba(255,255,255,0.8);
-    background: white;
+	background: red;
+	color: white;
 }
-.page_login .reponse_formulaire_erreur ~ #formulaire_login fieldset {
+.page_login .reponse_formulaire_erreur ~ #formulaire_login fieldset,
+.page_login .erreur_message ~ input.text {
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 }
@@ -52,7 +54,6 @@
 	top: 10px;
 	right: 10px;
 	border: 0;
-	background-color: white;
 	background-color: rgba(255, 255, 255, 0.5);
 	font-size: 12px;
 	-webkit-appearance: none;
