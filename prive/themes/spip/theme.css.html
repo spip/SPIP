@@ -42,9 +42,20 @@ body {
 #contenu .fiche_objet > .box__header h1 .rang {
 	opacity: 0.7;
 }
+
+#contenu .fiche_objet > .box__header h1,
+#contenu .fiche_objet > .box__header .surtitre,
+#contenu .fiche_objet > .box__header .soustitre {
+	color: var(--spip-color-theme-dark);
+	font-weight: normal;
+}
+
+
 #contenu .fiche_objet > .box__header .surtitre,
 #contenu .fiche_objet > .box__header .soustitre {
 	line-height: inherit;
+	opacity: 0.7;
+	font-size: 1.6em;
 }
 .box.fiche_objet > .box__body {
 	padding-top: calc(var(--spip-box-spacing-y) / 2);
