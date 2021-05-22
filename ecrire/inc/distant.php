@@ -412,6 +412,7 @@ function recuperer_url($url, $options = array()) {
 		'file' => '',
 		'follow_location' => 10,
 		'version_http' => _INC_DISTANT_VERSION_HTTP,
+		'entetes' => array()
 	);
 	$options = array_merge($default, $options);
 	// copier directement dans un fichier ?
@@ -466,7 +467,8 @@ function recuperer_url($url, $options = array()) {
 		$options['uri_referer'],
 		$options['datas'],
 		$options['version_http'],
-		$options['if_modified_since']
+		$options['if_modified_since'],
+		$options['entetes']
 	);
 	if (!$handle) {
 		spip_log("ECHEC init_http $url", 'distant' . _LOG_ERREUR);
@@ -1304,7 +1306,7 @@ function need_proxy($host, $http_proxy = null, $http_noproxy = null) {
  * @param string $date
  * @return array
  */
-function init_http($method, $url, $refuse_gz = false, $referer = '', $datas = '', $vers = 'HTTP/1.0', $date = '') {
+function init_http($method, $url, $refuse_gz = false, $referer = '', $datas = '', $vers = 'HTTP/1.0', $date = '', $entetes = array()) {
 	$user = $via_proxy = $proxy_user = '';
 	$fopen = false;
 
@@ -1338,7 +1340,7 @@ function init_http($method, $url, $refuse_gz = false, $referer = '', $datas = ''
 		$path .= '?' . $t['query'];
 	}
 
-	$f = lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $refuse_gz, $referer, $datas, $vers, $date);
+	$f = lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $refuse_gz, $referer, $datas, $vers, $date, $entetes);
 	if (!$f or !is_resource($f)) {
 		// fallback : fopen si on a pas fait timeout dans lance_requete
 		// ce qui correspond a $f===110
@@ -1402,7 +1404,8 @@ function lance_requete(
 	$referer = '',
 	$datas = '',
 	$vers = 'HTTP/1.0',
-	$date = ''
+	$date = '',
+	$entetes = array()
 ) {
 
 	$proxy_user = '';
@@ -1505,6 +1508,16 @@ function lance_requete(
 		. (!$user ? '' : ('Authorization: Basic ' . base64_encode($user) . "\r\n"))
 		. (!$proxy_user ? '' : "Proxy-Authorization: Basic $proxy_user\r\n")
 		. (!strpos($vers, '1.1') ? '' : "Keep-Alive: 300\r\nConnection: keep-alive\r\n");
+
+	// Ajout des en-têtes spécifiques si besoin
+	$champs_entetes_defaut = array('host', 'user-agent', 'accept-encoding', 'referer', 'if-modified-since', 'authorization', 'proxy-authorization', 'keep-alive');
+	if ($entetes) {
+		foreach ($entetes as $champ => $valeur) {
+			if (!in_array(strtolower($champ), $champs_entetes_defaut)) {
+				$req .= $champ . ': ' . $valeur . "\r\n";
+			}
+		}
+	}
 
 #	spip_log("Requete\n$req", 'distant');
 	fputs($f, $req);
