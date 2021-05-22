@@ -400,6 +400,8 @@ function url_to_ascii($url_idn) {
  *     string file : nom du fichier si enregistre dans un fichier
  */
 function recuperer_url($url, $options = array()) {
+	// Conserve la mémoire de la méthode fournit éventuellement
+	$methode_input = $options['methode'] ?? '';
 	$default = array(
 		'transcoder' => false,
 		'methode' => 'GET',
@@ -424,15 +426,34 @@ function recuperer_url($url, $options = array()) {
 		$options['taille_max'] = $copy ? _COPIE_LOCALE_MAX_SIZE : _INC_DISTANT_MAX_SIZE;
 	}
 
+
+	// Ajout des en-têtes spécifiques si besoin
+	$head_add = '';
+	if (!empty($options['entetes'])) {
+		$champs_entetes_defaut = array('host', 'user-agent', 'accept-encoding', 'referer', 'if-modified-since', 'authorization', 'proxy-authorization', 'keep-alive');
+		foreach ($options['entetes'] as $champ => $valeur) {
+			if (!in_array(strtolower($champ), $champs_entetes_defaut)) {
+				$head_add .= $champ . ': ' . $valeur . "\r\n";
+			}
+		}
+		unset($options['entetes']);
+	}
+
 	if (!empty($options['datas'])) {
 		list($head, $postdata) = prepare_donnees_post($options['datas'], $options['boundary']);
+		$head .= $head_add;
 		if (stripos($head, 'Content-Length:') === false) {
-			$head .= 'Content-Length: ' . strlen($postdata);
+			$head .= 'Content-Length: ' . strlen($postdata) . "\r\n";
 		}
-		$options['datas'] = $head . "\r\n\r\n" . $postdata;
-		if (strlen($postdata)) {
+		$options['datas'] = $head . "\r\n" . $postdata;
+		if (
+			strlen($postdata)
+			and !$methode_input
+		) {
 			$options['methode'] = 'POST';
 		}
+	} elseif ($head_add) {
+		$options['datas'] = $head_add . "\r\n";
 	}
 
 	// Accepter les URLs au format feed:// ou qui ont oublie le http:// ou les urls relatives au protocole
