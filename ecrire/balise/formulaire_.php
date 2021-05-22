@@ -137,28 +137,25 @@ function balise_FORMULAIRE__dist($p) {
 /**
  * Balise dynamiques par défaut des formulaires
  *
+ * @note 
+ *     Deux moyen d'arriver ici : 
+ *     soit #FORMULAIRE_XX reroute avec 'FORMULAIRE_XX' ajoute en premier arg
+ *     soit #FORMULAIRE_{xx}
+ * 
  * @param string $form
  *     Nom du formulaire
+ * @param array $args
+ *     Arguments envoyés à l'appel du formulaire
  * @return string|array
  *     - array : squelette à appeler, durée du cache, contexte
  *     - string : texte à afficher directement
  */
-function balise_FORMULAIRE__dyn($form) {
+function balise_FORMULAIRE__dyn($form, ...$args) {
 	$form = existe_formulaire($form);
 	if (!$form) {
 		return '';
 	}
 
-	// deux moyen d'arriver ici : 
-	// soit #FORMULAIRE_XX reroute avec 'FORMULAIRE_XX' ajoute en premier arg
-	// soit #FORMULAIRE_{xx}
-
-	// recuperer les arguments passes a la balise
-	// on enleve le premier qui est le nom de la balise 
-	// deja recupere ci-dessus
-
-	$args = func_get_args();
-	array_shift($args);
 	$contexte = balise_FORMULAIRE__contexte($form, $args);
 	if (!is_array($contexte)) {
 		return $contexte;
@@ -295,7 +292,7 @@ function balise_FORMULAIRE__contexte($form, $args) {
 		// et si $k ne commence pas par un _ (c'est bien une vrai erreur sur un vrai champ)
 		if (html5_permis()) {
 			foreach ($erreurs as $k => $v) {
-				if (is_string($v) and strpos($k,'_') !== 0) {
+				if (is_string($v) and strlen(trim($v)) and strpos($k,'_') !== 0) {
 					// on encapsule dans un span car ces messages sont en general simple, juste du texte, et deja dans un span dans le form
 					$valeurs['erreurs'][$k] = "<span role='alert'>".$erreurs[$k]."</span>";
 				}

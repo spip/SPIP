@@ -307,6 +307,7 @@
 	width: 40px;
 	text-align: var(--spip-right);
 }
+/* Statut */
 
 /* Titre */
 .liste-objets td.titre a {
@@ -344,6 +345,8 @@
 .liste-objets td.nologo {
 	padding: 0;
 	width: 0;
+}
+.liste-objets td.nologo {
 	height: 45px; 
 }
 
@@ -359,7 +362,7 @@
 	background: none;
 }
 /* Date */
-.liste-objets tr > .date {
+.liste-objets tr > td.date {
 	font-size: .85em;
 	width: 13%;
 }
@@ -476,7 +479,8 @@
    Nb : pour les auteurs, logo en background du <a>, pour les visiteurs c'est une <img> */
 .liste-objets.auteurs td.logo,
 .liste-objets.visiteurs td.logo {
-	min-width: var(--spip-list-logo-size);
+	width: var(--spip-list-logo-size);
+	padding: calc(var(--spip-list-spacing-y) / 4) calc(var(--spip-list-spacing-x) / 2);
 }
 .liste-objets.auteurs td.logo a,
 .liste-objets.visiteurs td.logo img {
@@ -745,10 +749,6 @@
 .liste-items .item h3 {
 	margin: 0;
 }
-.liste_items .item a:only-child,
-.liste-items .item a:only-child {
-	display: block;
-}
 .liste_items .item img,
 .liste-items .item img {
 	vertical-align: middle;
@@ -859,13 +859,17 @@
 }
 .en-edition .bouton_action_post {
 	float: #ENV{right};
-	margin: 5px 0 0;
 }
 .en-edition .liste-items {
 	margin: 0;
 }
 .en-edition .liste-items .item {
-	padding: 2px 0;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	display: flex;
+}
+.en-edition .liste-items a {
+	flex-grow: 2;
 }
 .en-edition .item .icone-objet {
 	float: #ENV{left};
@@ -873,6 +877,14 @@
 	margin-#ENV{right}: 5px;
 }
 .en-edition .item .bouton_action_post {
-	float: #ENV{right};
-	margin-top: -1px;
+	flex-shrink: 0;
+	margin: 0;
+}
+.en-edition .item .bouton_action_post button {
+	padding: 0;
+}
+.en-edition .item .bouton_action_post img {
+	margin: 0;
+	width: 16px;
+	height: 16px;
 }

@@ -55,12 +55,7 @@ body {
 
 /* Boîte articles proposés */
 #contenu .fiche_objet .box.propose {
-	border: 0;
-	border-radius: 0;
-	background-color: #ffde00;
-	margin-left: calc(var(--spip-box-spacing-x) *  -1);
-	margin-right: calc(var(--spip-box-spacing-x) *  -1);
-	position:relative;
+	background-color: var(--spip-color-theme-light);
 }
 
 h1 {font-size: 2em;line-height: 125%;}
@@ -115,7 +110,7 @@ h1 {font-size: 2em;line-height: 125%;}
 .infos .instituer_objet {border: 0px;}
 
 .en-edition {font-size: 95%;line-height: 120%;}
-.en-edition button.submit {background-color: transparent;border: 0;color: red;cursor: pointer;}
+.en-edition button.submit {background-color: transparent;border: 0;color: red;cursor: pointer; padding:0}
 .en-edition .bd {padding: 0;padding-bottom: 5px;}
 .en-edition .bd .liste-items {border-top: 1px solid white;}
 .en-edition .bd .liste-items li {border-bottom: 1px solid white;padding-left: 10px;padding-right: 10px;}

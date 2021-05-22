@@ -10,18 +10,34 @@
 <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
 <meta name="robots" content="none" />
 <meta name="viewport" content="width=device-width" />
+#INSERT_HEAD_CSS
 <link rel="stylesheet" href="[(#VAL{reset.css}|find_in_theme|direction_css)]" type="text/css" />
 <link rel="stylesheet" href="[(#VAL{clear.css}|find_in_theme|direction_css)]" type="text/css" />
 <link rel="stylesheet" href="[(#VAL{minipres.css}|find_in_theme|direction_css)]" type="text/css" />
+<link rel="stylesheet" href="[(#VAL{login_prive.css}|find_in_theme|direction_css)]" type="text/css" />
 #INSERT_HEAD
 <script type='text/javascript'>
 jQuery(function(){jQuery('a#spip_pass').click(function(){window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=380'); return false;});});
 </script>
 <meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
+#SET{logo,#CHEMIN_IMAGE{#CONST{_DIR_IMG}|concat{spip_fond_login.jpg}}}
+[(#CONFIG{couleur_login}|oui)
+	#SET{hs,#CONFIG{couleur_login}|couleur_hex_to_hsl{"h, s"}}
+	#SET{l,#CONFIG{couleur_login}|couleur_hex_to_hsl{l}}
+]
+<style type="text/css">
+.page_login {
+	[background-image:url((#GET{logo}|timestamp));]
+}
+[(#CONFIG{couleur_login}|oui)
+:root {
+		--spip-login-color-theme--hs: #GET{hs};
+		--spip-login-color-theme--l: #GET{l};
+}
+]
+</style>
 </head>
-<body class="page_login">
-
-<div id="minipres">
+<body class="page_login[(#GET{logo}|non) sans_fond]">
 
 	<h1>#NOM_SITE_SPIP</h1>
 	[(#REM)
@@ -39,10 +55,9 @@ jQuery(function(){jQuery('a#spip_pass').click(function(){window.open(this.href, 
 		<a href="#URL_SITE_SPIP/"><:login_retoursitepublic:></a>
 	</p>
 	[<p class="generator">
-		<a href="https://www.spip.net/" title="<:site_realise_avec_spip:>">(#CHEMIN_IMAGE{spip.png}|balise_img)</a>
+		<a href="https://www.spip.net/" title="<:site_realise_avec_spip:>">(#CHEMIN{spip.svg}|balise_svg)</a>
 	</p>]
 	
-</div><!--#minipres-->
 
 </body>
 </html>

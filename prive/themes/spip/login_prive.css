@@ -1,0 +1,231 @@
+
+/* Page de login
+---------------------------------------------- */
+:root {
+
+	--spip-login-color-theme--hs: 337, 81%;
+	--spip-login-color-theme--l: 47%;
+
+	--spip-login-color-theme: hsl(var(--spip-login-color-theme--hs), var(--spip-login-color-theme--l));
+	--spip-login-color-theme-light: hsl(var(--spip-login-color-theme--hs), calc(var(--spip-login-color-theme--l) + 25%));
+	--spip-login-color-theme-dark: hsl(var(--spip-login-color-theme--hs), calc(var(--spip-login-color-theme--l) - 25%));
+
+	--spip-login-color-gray-lighter: rgba(255, 255, 255, 0.7);
+	--spip-login-color-gray-light: rgba(255, 255, 255, 0.5);
+	--spip-login-color-gray-dark: rgba(0, 0, 0, 0.5);
+	
+}
+.page_login  {
+	margin:0;
+	font-size: 16px;
+	color: white;
+	border:0;
+	padding: 0;
+	font-family: arial, helvetica, sans;
+	background-color: rgb(233, 233, 242);
+	background-size: cover;
+}
+.page_login.sans_fond {
+	background: var(--spip-login-color-theme);
+	background: radial-gradient(circle, var(--spip-login-color-theme) 20%, var(--spip-login-color-theme-dark) 100%);
+}
+
+.page_login label[for=var_lang_ecrire] {
+	display: none;
+}
+.page_login .erreur_message,
+.page_login .reponse_formulaire_erreur {
+	font-size: 85%;
+	padding-bottom: 5px;
+}
+.page_login .reponse_formulaire_erreur,
+.page_login .erreur_message {
+	padding: 7px 10px;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	background: red;
+	color: white;
+}
+.page_login .reponse_formulaire_erreur ~ #formulaire_login fieldset,
+.page_login .erreur_message ~ input.text {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.page_login #var_lang_ecrire {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	border: 0;
+	background-color: var(--spip-login-color-gray-light);
+	font-size: 12px;
+	-webkit-appearance: none;
+}
+.page_login .formulaire_menu_lang {
+	position: absolute;
+	top: 15px;
+	right: 10px;
+	width: 150px;
+}
+.page_login .formulaire_login, .page_login .formulaire_spip.pass {
+	width: 90%;
+	max-width: 400px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-top: 30px;
+	transform: translate(-50%, -50%);
+}
+.page_login .formulaire_spip fieldset {
+	background: var(--spip-login-color-gray-dark);
+	padding: 10px 20px;
+	line-height: 130%;
+	border: 0;
+	margin:0;
+}
+.page_login .formulaire_spip fieldset legend {
+	display: none;
+}
+.page_login .formulaire_spip fieldset p {
+	margin-bottom: 1em;
+}
+.page_login h1, .page_login h3 {
+	display: none;
+}
+.page_login .formulaire_spip fieldset .editer {
+	margin-bottom: 0.5em;
+}
+.page_login .formulaire_spip fieldset .editer_session {
+	margin-bottom: 0;
+}
+.page_login .editer_password {
+	position: relative;
+}
+ .page_login #pass_securise {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.page_login label {
+	font-size: 0.9em;
+	padding-bottom: 0.2em;
+	text-shadow: 0 0 3px var(--spip-login-color-gray-dark);
+}
+.page_login input.text {
+	width: 100%;
+	box-sizing: border-box;
+	border: 0px;
+	background-color: var(--spip-login-color-gray-lighter);
+	border-radius: 4px;
+	transition: 0.2s background-color;
+}
+input.text:hover,
+input.text:focus{
+	background-color: white;
+}
+
+.page_login #spip_logo_auteur {
+	float: none;
+	position: absolute;
+	left: 50%;
+	border-radius: 50%;
+	overflow: hidden;
+	top: -80px;
+	margin-left: -35px;
+	width: 70px;
+	height: 70px;
+}
+.page_login .boutons {
+	margin-top: 0.5em;
+}
+@media (min-height: 600px) {
+	.page_login #spip_logo_auteur {
+		top: -130px;
+		margin-left: -50px;
+		width: 100px;
+		height: 100px;
+	}
+	.page_login .formulaire_spip fieldset {
+		padding: 20px;
+	}
+	.page_login .boutons {
+		margin-top: 1.5em;
+	}
+	.page_login .formulaire_login {
+		margin-top: 50px;
+	}
+}
+.page_login h1 {
+	font-size: 1.4em;
+	margin-bottom: 1em;
+}
+
+.page_login p.details {
+	font-size: 85%;
+	text-align: right;
+	padding-top: 0.3em;
+}
+
+.page_login h1, .page_login p.details a {
+	color: white;
+	text-shadow: 0 0 3px var(--spip-login-color-gray-dark);
+	opacity: 0.7;
+}
+.page_login h1, .page_login p.details a:hover {
+	opacity: 1;
+}
+.page_login .boutons {
+	text-align: right;
+	margin-right: 0px;
+}
+.page_login .boutons input.submit {
+	font-size: 16px;
+	border: 0px;
+	padding: 7px 15px;
+	background-color: var(--spip-login-color-gray-light);
+	transition: 0.2s background-color;
+	border-radius: 4px;
+	color: black;
+	-webkit-appearance: none;
+}
+.page_login .boutons input.submit:hover,
+.page_login .boutons input.submit:focus {
+	background-color: white;
+}
+
+.page_login #spip_logo_auteur img {
+	display: inline;
+	margin: 0 !important;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.page_login p.retour {
+	position: absolute;
+	left: 20px;
+	bottom: 10px;
+	background: var(--spip-login-color-gray-lighter);
+	padding: 5px 10px;
+	border-radius: 4px;
+}
+.page_login p.retour a {
+	color: black;
+	font-size: 14px;
+}
+.page_login p.retour a:before {
+	content: "⬅︎ ";
+}
+.page_login p.generator {
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+}
+.page_login p.generator a {
+	color: var(--spip-login-color-theme);
+	transition: .2s color;
+}
+.page_login p.generator a:hover, 
+.page_login p.generator a:focus {
+	color: var(--spip-login-color-theme-light);
+}

@@ -34,13 +34,14 @@
 	{id_auteur=#SESSION{id_auteur}}
 	{si #SESSION{statut}|=={1comite}|et{#AUTORISER{modifier,article,#ID_ARTICLE}}}
 	>
-#BOITE_OUVRIR{'',note center proposer}
+#BOITE_OUVRIR{'',pop notice}
 	<p><:texte_proposer_publication:></p>
-	[(#BOUTON_ACTION{<:bouton_demande_publication:>,#URL_ACTION_AUTEUR{instituer_objet,article-#ID_ARTICLE-prop,#SELF},'',<:confirm_changer_statut:>})]
+#BOITE_PIED
+	[(#BOUTON_ACTION{<:bouton_demande_publication:>,#URL_ACTION_AUTEUR{instituer_objet,article-#ID_ARTICLE-prop,#SELF},'btn_secondaire',<:confirm_changer_statut:>})]
 #BOITE_FERMER
 </BOUCLE_proposer>
 [(#STATUT|=={prop}|oui)
-#BOITE_OUVRIR{'',note center propose}
+#BOITE_OUVRIR{'',note center pop}
 <p><:text_article_propose_publication:></p>
 #BOITE_FERMER
 ]

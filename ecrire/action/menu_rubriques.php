@@ -68,6 +68,7 @@ function action_menu_rubriques_dist() {
 		include_spip('inc/actions');
 		$ret = menu_rubriques();
 		ajax_retour($ret);
+		exit;
 	}
 }
 

@@ -126,34 +126,6 @@ input[type=radio],input[type=checkbox] {display: inline-block; margin-right: 0.7
 .install-plugins.error + .install-plugins.error {margin-top: 0;border-top: 0;}
 .install-plugins .result {display:block;position:absolute;top:0.8em;right:0.8em;font-weight:bold;}
 .install-plugins .success {display: none;} /* ne pas afficher les installations ok mais seulement les echecs */
-
-/* Page de login
----------------------------------------------- */
-.page_login { text-align: center; }
-@media (min-width: 640px) {
-	.page_login #minipres {width: 30em;}
-}
-.page_login #minipres h3 {text-align: center;}
-.page_login .formulaire_menu_lang {text-align: center;}
-.page_login .formulaire_menu_lang label {display: none;}
-.page_login .formulaire_menu_lang select {display: inline;}
-.page_login .formulaire_menu_lang .boutons,
-.page_login .formulaire_menu_lang input.submit {display: inline;}
-.page_login fieldset { clear: both; margin: 0; padding: 0; background: none; border: 0;}
-.page_login fieldset legend { display: none; }
-.page_login .editer-groupe { width: 100%; }
-.page_login .editer_password .details { margin-top: 0.5em; }
-.page_login .editer_password p { margin-bottom: 0; }
-.page_login .boutons { margin: 1.5em auto 1.5em; text-align: center; }
-.page_login .retour { clear: both; margin: 0 0 1.5em 0; }
-.page_login .generator { margin: 0; }
-.editer_password p { margin-top: 1em; }
-/* logo de l'auteur */
-.page_login .editer_login label { display: block; }
-.page_login #spip_logo_auteur { display: inline-block; vertical-align: middle; }
-.page_login #spip_logo_auteur img { border-radius: 50%; }
-.page_login input[name=var_login]:not(:last-child) { display: inline-block; /* fallback */ width: 82%;  width: calc(100% - 54px); }
-
 /* Couleurs des liens
 ---------------------------------------------- */
 a { color: #db1762; text-decoration: none; }
