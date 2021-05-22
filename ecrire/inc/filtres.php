@@ -1913,22 +1913,22 @@ function unique($donnee, $famille = '', $cpt = false) {
  *
  * @param int $i
  *     Le compteur
+ * @param array $args
+ *     Liste des éléments à alterner
  * @return mixed
  *     Une des valeurs en fonction du compteur.
  **/
-function alterner($i) {
+function alterner($i, ...$args) {
 	// recuperer les arguments (attention fonctions un peu space)
-	$num = func_num_args();
-	$args = func_get_args();
+	$num = count($args);
 
-	if ($num == 2 && is_array($args[1])) {
-		$args = $args[1];
-		array_unshift($args, '');
+	if ($num === 1 && is_array($args[0])) {
+		$args = $args[0];
 		$num = count($args);
 	}
 
 	// renvoyer le i-ieme argument, modulo le nombre d'arguments
-	return $args[(intval($i) - 1) % ($num - 1) + 1];
+	return $args[(intval($i) - 1) % $num];
 }
 
 
@@ -3325,11 +3325,10 @@ function env_to_attributs($env, $ignore_params = array()) {
  *     #TEXTE|concat{texte1,texte2,...}
  *     ```
  *
+ * @param array $args
  * @return string Chaînes concaténés
  **/
-function concat() {
-	$args = func_get_args();
-
+function concat(...$args) : string {
 	return join('', $args);
 }
 

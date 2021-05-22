@@ -14,7 +14,7 @@
 		Les articles a valider
 	]
 	[
-		[(#BOITE_OUVRIR{<:texte_en_cours_validation:>,'basic highlight'})]
+		[(#BOITE_OUVRIR{<:texte_en_cours_validation:>,'basic note'})]
 		(#PIPELINE{rubrique_encours,#ARRAY{args,#ARRAY{type,rubrique,id_objet,#ID_RUBRIQUE},data,#INCLURE{fond=prive/objets/liste/articles,titre=<:info_articles_proposes:>,statut=prop,id_rubrique,par=date,ajax,env}}})
 		#BOITE_FERMER
 	]

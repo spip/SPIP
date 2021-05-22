@@ -80,8 +80,13 @@
 	--spip-form-input-padding-x: 0.33rem;
 	--spip-form-input-padding-y: 0.33rem;
 	--spip-form-input-border-color: hsla(0, 0%, 0%, 0.2);
-	--spip-form-input-border-radius: var(--spip-border-radius);
+	--spip-form-input-border-radius: calc(var(--spip-border-radius) * 2/3);
 	--spip-form-input-height: calc((var(--spip-form-input-padding-y) * 2) + var(--spip-line-height)); /* à toute fin utile */
+}
+@media (min-width: 580px) {
+	:root {
+	--spip-form-input-border-radius: var(--spip-border-radius);
+	}
 }
 @media (min-width: 768px) {
 	/* Taille normale */
@@ -377,62 +382,80 @@
 	/* overflow: hidden; */ /* un peu trop brutal par défaut ? */
 }
 
-/* Labels : affichés à gauche par défaut */
+/* Labels : pleine largeur, puis affichés à gauche à partir des écrans moyens */
 .formulaire_spip label[for] {
 	cursor: pointer;
 }
-.formulaire_spip .editer,
-.formulaire_spip .editer.gauche {
-	padding-#LEFT: calc(var(--spip-form-label-width) + (var(--spip-form-spacing-x) * 2)); /* largeur + marge gauche+droite */
-}
-.formulaire_spip .editer label,
-.formulaire_spip .editer .label,
-.formulaire_spip .editer.gauche label {
-	float: var(--spip-left);
-	width: var(--spip-form-label-width);
-	margin-#LEFT: calc((var(--spip-form-label-width) + var(--spip-form-spacing-x)) * -1); /* inverse largeur + marge */
+.formulaire_spip .editer > label,
+.formulaire_spip .editer > .label,
+.formulaire_spip .editer.gauche > label {
+	display: block;
 	margin-bottom: calc(var(--spip-form-spacing-y) / 4);
-	padding: calc(var(--spip-form-input-padding-y) + 1px) 0 0; /* décaler pour aligner avec texte input → padding + border */
 	background: transparent;
 	color: var(--spip-form-color-text-light);
 	text-align: var(--spip-left);
 	font-weight: inherit;
 	line-height: 1.3; /* légèrement inférieure au texte normal */
 }
-/* Labels plus longs */
-.formulaire_spip .long_label {
-	padding-#LEFT: calc(var(--spip-form-label-long-width) + (var(--spip-form-spacing-x) * 2)); /* largeur + marge gauche+droite */
+.formulaire_spip fieldset.editer > .label {
+	transform: translateY(33%); /* remettre à peu près au niveau de la ligne */
 }
-.formulaire_spip .long_label .label,
-.formulaire_spip .long_label label {
-	width: var(--spip-form-label-long-width);
-	margin-#LEFT: calc((var(--spip-form-label-long-width) + var(--spip-form-spacing-x)) * -1); /* inverse largeur + marge */
-}
-/* Labels en haut + cas particuliers où c'est forcé */
-.formulaire_spip .pleine_largeur,
-.formulaire_spip .editer_parent,
-.formulaire_spip .editer_groupe_mot,
-.formulaire_spip .editer_descriptif,
-.formulaire_spip .editer_chapo,
-.formulaire_spip .editer_texte,
-.formulaire_spip .editer_ps,
-.formulaire_spip .haut {
-	padding-#LEFT: var(--spip-form-spacing-x);
-}
-.formulaire_spip .pleine_largeur > label,
-.formulaire_spip .editer-groupe.deux_colonnes .editer > label,
-.formulaire_spip .editer_parent label,
-.formulaire_spip .editer_groupe_mot label,
-.formulaire_spip .editer_descriptif label,
-.formulaire_spip .editer_chapo label,
-.formulaire_spip .editer_texte label,
-.formulaire_spip .editer_ps label,
-.formulaire_spip .haut label {
-	display: block;
-	float: none;
-	width: auto;
-	margin-#LEFT: 0;
-	padding: 0;
+/* Responsive : passer les labels à gauche + variantes */
+@media (min-width: 580px) {
+	.formulaire_spip .editer,
+	.formulaire_spip .editer.gauche {
+		padding-#LEFT: calc(var(--spip-form-label-width) + (var(--spip-form-spacing-x) * 2)); /* largeur + marge gauche+droite */
+	}
+	.formulaire_spip .editer > label,
+	.formulaire_spip .editer > .label,
+	.formulaire_spip .editer.gauche > label {
+		float: var(--spip-left);
+		width: var(--spip-form-label-width);
+		margin-#LEFT: calc((var(--spip-form-label-width) + var(--spip-form-spacing-x)) * -1); /* inverse largeur + marge */
+		padding: calc(var(--spip-form-input-padding-y) + 1px) 0 0; /* décaler pour aligner avec texte input → padding + border */
+	}
+	.formulaire_spip fieldset.editer > .label {
+		transform: none;
+	}
+	/* Labels plus longs */
+	.formulaire_spip .editer.long_label {
+		padding-#LEFT: calc(var(--spip-form-label-long-width) + (var(--spip-form-spacing-x) * 2)); /* largeur + marge gauche+droite */
+	}
+	.formulaire_spip .editer.long_label > .label,
+	.formulaire_spip .editer.long_label > label {
+		width: var(--spip-form-label-long-width);
+		margin-#LEFT: calc((var(--spip-form-label-long-width) + var(--spip-form-spacing-x)) * -1); /* inverse largeur + marge */
+	}
+	/* Labels en haut + cas particuliers où c'est forcé */
+	.formulaire_spip .editer.pleine_largeur,
+	.formulaire_spip .editer_parent,
+	.formulaire_spip .editer_groupe_mot,
+	.formulaire_spip .editer_descriptif,
+	.formulaire_spip .editer_chapo,
+	.formulaire_spip .editer_texte,
+	.formulaire_spip .editer_ps,
+	.formulaire_spip .editer.haut {
+		padding-#LEFT: var(--spip-form-spacing-x);
+	}
+	.formulaire_spip .editer.pleine_largeur > label,
+	.formulaire_spip .editer.pleine_largeur > .label, /* fieldsets avec legend.label */
+	.formulaire_spip .editer-groupe.deux_colonnes > .editer > label,
+	.formulaire_spip .editer_parent label,
+	.formulaire_spip .editer_groupe_mot label,
+	.formulaire_spip .editer_descriptif label,
+	.formulaire_spip .editer_chapo label,
+	.formulaire_spip .editer_texte label,
+	.formulaire_spip .editer_ps label,
+	.formulaire_spip .editer.haut label {
+		display: block;
+		float: none;
+		width: auto;
+		margin-#LEFT: 0;
+		padding: 0;
+	}
+	.formulaire_spip fieldset.editer.pleine_largeur > .label {
+		transform: translateY(33%); /* remettre à peu au niveau de la ligne */
+	}
 }
 
 /* Conteneur des boutons (les boutons eux-mêmes sont dans boutons.css.html) */
@@ -1027,6 +1050,15 @@
  */
 
 
+/* Choix couleur */
+
+
+.formulaire_configurer_preferences .editer_couleur .choix {
+	float: left;
+	border: 0 !important;
+	padding: 5px 20px 5px 0px !important;
+}
+
 /* Edition d'un auteur */
 .formulaire_editer_auteur .editer_identification fieldset {
 	background-color: var(--spip-color-gray-lightest);
@@ -1470,7 +1502,8 @@
 .infos .formulaire_instituer .show select,
 .infos .formulaire_instituer .show option {
 	background-repeat: no-repeat;
-	background-position: 4px center;
+	background-position: 6px center;
+	background-size: 12px;
 	background-color: var(--spip-color-gray-lightest);
 	color: inherit;
 }

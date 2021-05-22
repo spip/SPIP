@@ -95,6 +95,9 @@ function traiter_appels_actions() {
 			$url = str_replace('&amp;', '&', $url); // les redirections se font en &, pas en en &amp;
 			redirige_par_entete($url);
 		}
+
+		// attention : avec zlib.output_compression=1 on a vu des cas de ob_get_length() qui renvoi 0
+		// et du coup en renvoi un status 204 a tort (vu sur le menu rubriques notamment)
 		if (!headers_sent()
 			and !ob_get_length()
 		) {
