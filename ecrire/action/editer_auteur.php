@@ -439,21 +439,3 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 	return implode(' ', array_map('_T', $erreurs));
 
 }
-
-
-// Fonctions Dépréciées
-// --------------------
-
-/**
- * Modification d'un auteur
- *
- * @deprecated Utiliser auteur_modifier()
- * @see auteur_modifier()
- *
- * @param int $id_auteur
- * @param array|null $set
- * @return string|null
- */
-function auteurs_set($id_auteur, $set = null) {
-	return auteur_modifier($id_auteur, $set);
-}
