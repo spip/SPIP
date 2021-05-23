@@ -3432,26 +3432,6 @@ function tester_url_ecrire($nom) {
 	return $exec[$nom] = ((find_in_path("{$nom}.php", 'exec/') or charger_fonction($nom, 'exec', true)) ? $nom : '');
 }
 
-
-/**
- * Teste la présence d’une extension PHP
- *
- * @deprected Utiliser directement la fonction native `extension_loaded($module)`
- * @example
- *     ```
- *     $ok = charger_php_extension('sqlite');
- *     ```
- * @param string $module Nom du module à charger
- * @return bool true si le module est chargé
- **/
-function charger_php_extension($module) {
-	if (extension_loaded($module)) {
-		return true;
-	}
-	return false;
-}
-
-
 /**
  * Indique si le code HTML5 est permis sur le site public
  *
