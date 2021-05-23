@@ -286,27 +286,6 @@ function decrire_version_svn($dir) {
 	return null;
 }
 
-/**
- * Retrouve un numéro de révision SVN d'un répertoire
- *
- * Mention de la révision SVN courante d'un répertoire
- * /!\ Retourne un nombre négatif si on est sur .svn
- *
- * @deprecated Utiliser version_vcs_courante()
- * @param string $dir Chemin du répertoire
- * @return int
- *
- *     - 0 si aucune info trouvée
- *     - -NN (entier) si info trouvée par .svn/wc.db
- *
- **/
-function version_svn_courante($dir) {
-	if ($desc = decrire_version_svn($dir)) {
-		return -$desc['commit'];
-	}
-	return 0;
-}
-
 // La matrice est necessaire pour ne filtrer _que_ des fonctions definies dans filtres_images
 // et laisser passer les fonctions personnelles baptisees image_...
 $GLOBALS['spip_matrice']['image_graver'] = true;//'inc/filtres_images_mini.php';

@@ -346,29 +346,6 @@ function balise_DATE_NOUVEAUTES_dist($p) {
 	return $p;
 }
 
-
-/**
- * Compile la balise `#DOSSIER_SQUELETTE` retournant le chemin vers le
- * répertoire de squelettes actuellement utilisé
- *
- * @balise
- * @deprecated Utiliser `#CHEMIN`
- * @link https://www.spip.net/4627
- * @see balise_CHEMIN_dist()
- *
- * @param Champ $p
- *     Pile au niveau de la balise.
- * @return Champ
- *     Pile completée du code PHP d'exécution de la balise
- */
-function balise_DOSSIER_SQUELETTE_dist($p) {
-	$code = substr(addslashes(dirname($p->descr['sourcefile'])), strlen(_DIR_RACINE));
-	$p->code = "_DIR_RACINE . '$code'" .
-		$p->interdire_scripts = false;
-
-	return $p;
-}
-
 /**
  * Compile la balise `#SQUELETTE` retournant le chemin du squelette courant
  *
@@ -1641,23 +1618,6 @@ function balise_VAL_dist($p) {
 
 	return $p;
 }
-
-/**
- * Compile la balise `#NOOP`, alias (déprécié) de `#VAL`
- *
- * Alias pour regler #948. Ne plus utiliser.
- *
- * @balise
- * @see balise_VAL_dist()
- * @deprecated Utiliser #VAL
- *
- * @param Champ $p
- *     Pile au niveau de la balise
- * @return Champ
- *     Pile complétée par le code à générer
- **/
-function balise_NOOP_dist($p) { return balise_VAL_dist($p); }
-
 
 /**
  * Compile la balise `#REM` servant à commenter du texte
