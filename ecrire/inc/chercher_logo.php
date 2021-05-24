@@ -80,7 +80,7 @@ function inc_chercher_logo_dist($id, $_id_objet, $mode = 'on', $compat_old_logos
  *     Nom de la clé primaire de l'objet
  * @return string
  *     Type du logo
- * @deprecated MAIS NE PAS SUPPRIMER CAR SERT POUR L'UPGRADE des logos et leur mise en base
+ * @deprecated 4.0.0 MAIS NE PAS SUPPRIMER CAR SERT POUR L'UPGRADE des logos et leur mise en base
  **/
 function type_du_logo($_id_objet) {
 	return isset($GLOBALS['table_logos'][$_id_objet])

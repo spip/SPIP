@@ -1756,7 +1756,8 @@ function auteurs_objet($objet, $id_objet, $cond = '') {
 /**
  * Lister les auteurs d'un article
  *
- * @deprecated utiliser auteurs_objets()
+ * @deprecated 3.2.0
+ * @see auteurs_objets()
  * @param int $id_article Identifiant de l'article
  * @param string $cond Condition en plus dans le where de la requête
  * @return array|bool

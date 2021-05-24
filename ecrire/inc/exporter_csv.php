@@ -67,7 +67,7 @@ function exporter_csv_ligne_numerotee($nb, $ligne, $delim = ',', $importer_chars
 }
 
 /**
- * @deprecated
+ * @deprecated 4.0.0
  *
  * @param $ligne
  * @param string $delim

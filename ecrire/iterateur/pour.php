@@ -28,6 +28,10 @@ include_spip('iterateur/data');
  *
  * Annonce au compilateur les "champs" disponibles,
  * c'est à dire 'cle' et 'valeur'.
+ * 
+ * @deprecated 4.0.0
+ * @see Utiliser une boucle (DATA){source tableau,#XX}
+ * @see iterateur_DATA_dist()
  *
  * @param Boucle $b
  *     Description de la boucle
