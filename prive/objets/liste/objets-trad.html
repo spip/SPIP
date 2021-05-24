@@ -15,7 +15,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_obj(POUR){tableau #ENV{id_trad}|lister_traductions{#ENV{objet}}}{pagination #ENV{nb,10}}{!lang_select}>
+	<BOUCLE_liste_obj(DATA){source table, #ENV{id_trad}|lister_traductions{#ENV{objet}}}{pagination #ENV{nb,10}}{!lang_select}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='picto'>#GET{picto}</td>
 			<td class="trad">[(#ENV{id_trad}|=={#VALEUR{id}}|oui)<span class="on">#LANG</span>]

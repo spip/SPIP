@@ -56,7 +56,7 @@ Valeurs par defaut :
 	utils.css,
 	theme.css,
 }}
-<BOUCLE_css(POUR){tableau #GET{modules}}>
+<BOUCLE_css(DATA){source table, #GET{modules}}>
 [(#SET{fond,[(#VALEUR|concat{.html}|find_in_theme|substr{[(#CONST{_DIR_RACINE}|strlen)],[(#VAL{-5}|intval)]})]})]
 /*
  * #VALEUR::[(#GET{fond})]
@@ -69,7 +69,7 @@ Valeurs par defaut :
 
 /*** Plugins ***/
 
-<BOUCLE_cssplugins(POUR){tableau #VAL{prive/}|find_all_in_path{/style_prive_plugin_}}>
+<BOUCLE_cssplugins(DATA){source table, #VAL{prive/}|find_all_in_path{/style_prive_plugin_}}>
 	#SET{fond,prive/#VALEUR|basename{'.html'}}
 	[(#INCLURE{fond=#GET{fond},env,couleur_claire,couleur_foncee,lang,ltr,claire=#GET{claire},foncee=#GET{foncee},left=#GET{left},right=#GET{right},rtl=#GET{rtl},dir=#GET{dir},font-size=#GET{font-size},line-height=#GET{line-height},margin-bottom=#GET{margin-bottom},text-indent=#GET{text-indent},font-family=#GET{font-family},background-color=#GET{background-color},color=#GET{color}})]
 </BOUCLE_cssplugins>

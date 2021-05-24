@@ -84,7 +84,7 @@
 						][(#SET{has_favoris,0})]
 						<B_sous>
 						<ul class="deroulant__sous-menu[ (#TOTAL_BOUCLE|>{20}|oui)cols-2]" data-profondeur="1">
-							<BOUCLE_sous(DATA) {source tableau, #SOUSMENU}>
+							<BOUCLE_sous(DATA){source table, #SOUSMENU}>
 							[(#FAVORI|oui)#SET{has_favoris,1}]
 							[<li class="deroulant__item[ (#FAVORI|?{deroulant__item_favori,[(#GET{has_favoris}|?{deroulant__item_non-favori})]})]" data-profondeur="1">
 								<a class="deroulant__lien bando2_#CLE" href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]" data-profondeur="1">
@@ -126,8 +126,8 @@
 				[(#REM) Boutons de création rapide ]
 				<B_creer>
 					<ul class="rapides rapides_creer creer">
-						<BOUCLE_creer(DATA) {source tableau, #GET{boutons}} {cle=outils_rapides}>
-						<BOUCLE_creersous(DATA) {source tableau, #SOUSMENU}{par position}>
+						<BOUCLE_creer(DATA){source table, #GET{boutons}} {cle=outils_rapides}>
+						<BOUCLE_creersous(DATA){source table, #SOUSMENU}{par position}>
 						[<li class="rapides__item">
 							<a
 								href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
@@ -145,8 +145,8 @@
 			<div class="outils outils_collab-cherche" id="rapides">
 				<B_collaborer>
 					<ul class="rapides rapides_collaborer collaborer">
-					<BOUCLE_collaborer(DATA) {source tableau, #GET{boutons}} {cle=outils_collaboratifs}>
-					<BOUCLE_collaborersous(DATA) {source tableau, #SOUSMENU}>
+					<BOUCLE_collaborer(DATA){source table, #GET{boutons}} {cle=outils_collaboratifs}>
+					<BOUCLE_collaborersous(DATA){source table, #SOUSMENU}>
 						[<li class="rapides__item">
 							<a
 								href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"

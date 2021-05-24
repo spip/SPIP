@@ -1,12 +1,12 @@
 #SET{boutons,#ENV**|definir_barre_contexte|definir_barre_boutons{0}|trier_boutons_enfants_par_favoris_alpha}
 
-<BOUCLE_menu(DATA){source tableau, #GET{boutons}}{cle=#ENV{menu}}>
+<BOUCLE_menu(DATA){source table, #GET{boutons}}{cle=#ENV{menu}}>
 [(#ENV{bloc}|=={contenu}|?{
 	<h1 class="grostitre">[(#VALEUR{libelle}|_T)]</h1>,
 	<div class="navigation">})]
 
 	<ul class='liste_items sous_navigation'>
-	<BOUCLE_menusous(DATA){source tableau, #SOUSMENU}>
+	<BOUCLE_menusous(DATA){source table, #SOUSMENU}>
 		[(#FAVORI|oui)#SET{has_favoris,1}]
 		[<li class="item[(#ENV{exec}|=={#VALEUR{url}|sinon{#CLE}}|oui)on execfound][ (#FAVORI|?{favori,[(#GET{has_favoris}|?{non_favori})]})]">
 			<a href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#ENV**})]" class="bando2_#CLE">

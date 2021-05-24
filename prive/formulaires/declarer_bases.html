@@ -18,7 +18,7 @@
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]
 				<select class="select" name="#GET{name}" id="#GET{name}">
-					<BOUCLE_serv(POUR){tableau #ENV*{_serveurs}}>
+					<BOUCLE_serv(DATA){source table, #ENV*{_serveurs}}>
 						<option value="#CLE"[(#ENV{#GET{name}}|=={#CLE}|oui)selected="selected"]>[(#VALEUR|_T)]</option>
 					</BOUCLE_serv>
 				</select>

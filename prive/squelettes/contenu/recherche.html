@@ -4,7 +4,7 @@
 <div class="nettoyeur"></div>
 
 <BOUCLE_num(CONDITION){si #ENV{recherche}|is_numeric}>
-	<BOUCLE_tablesid(POUR){tableau #REM|liste_des_champs}
+	<BOUCLE_tablesid(DATA){source table, #REM|liste_des_champs}
 		{cle !IN forum,syndic_article,paquet,plugin}
 		{si #ENV{recherche}}>[
 		(#SET{table,#CLE|table_objet})][
@@ -15,7 +15,7 @@
 	[(#VAL{info_recherche_auteur_zero}|_T{#ARRAY{cherche_auteur,#ENV{recherche}}}|wrap{'<h3>'})]
 	<//B_tablesid>
 </BOUCLE_num>
-<BOUCLE_tables(POUR){tableau #REM|liste_des_champs}
+<BOUCLE_tables(DATA){source table, #REM|liste_des_champs}
 	{cle !IN forum,syndic_article,paquet,plugin}
 	{si #ENV{recherche}}>[
 	(#SET{table,#CLE|table_objet})][

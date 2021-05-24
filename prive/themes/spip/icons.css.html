@@ -171,7 +171,7 @@
 	background-position-y: top[ (#GET{iconpadding})];
 }
 #SET{icones, #LISTE{add, new, del, config, edit}}
-<BOUCLE_icones_images(DATA) {source table, #GET{icones}}>
+<BOUCLE_icones_images(DATA){source table, #GET{icones}}>
 .icone-fonction-#VALEUR:after {
 	background-image: url(#CHEMIN_IMAGE{#VALEUR-xx.svg});
 }

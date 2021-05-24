@@ -6,7 +6,7 @@
 <div class="onglets_simple clearfix">
 	<ul>
 		<li>[(#SELF|parametre_url{statut,''}|lien_ou_expose{<:info_tout_afficher:>,[(#ENV{statut,''}|non)],ajax})]</li>
-		<BOUCLE_st(POUR){tableau #GET{statuts}}{si #GET{statuts}|count|>{1}}>
+		<BOUCLE_st(DATA){source table, #GET{statuts}}{si #GET{statuts}|count|>{1}}>
 		<li>[(#SELF|parametre_url{statut,#VALEUR}|lien_ou_expose{[(#VALEUR|traduire_statut_auteur)],#ENV{statut,''}|=={#VALEUR},ajax})]</li>
 		</BOUCLE_st>
 	</ul>

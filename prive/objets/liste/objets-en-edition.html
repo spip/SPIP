@@ -1,7 +1,7 @@
 <B_objets>
 [(#BOITE_OUVRIR{<:info_cours_edition:>,'note en-edition'})]
 <ul class="liste-items">
-<BOUCLE_objets(POUR){tableau #SESSION{id_auteur}|liste_drapeau_edition}>[
+<BOUCLE_objets(DATA){source table, #SESSION{id_auteur}|liste_drapeau_edition}>[
 <li class="item #VALEUR{objet}"><a href="[(#VALEUR{id_objet}|generer_url_entite{#VALEUR{objet}})]">[(#VALEUR{objet}|objet_icone{16,'icone-objet'})](#INFO_TITRE{#VALEUR{objet},#VALEUR{id_objet}})</a>
 	[(#REM) manque un test pour ne pas proposer le lien de l'objet qu'on est en train d'editer
 	]
