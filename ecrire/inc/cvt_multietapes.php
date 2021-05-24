@@ -157,7 +157,7 @@ function cvtmulti_sauver_post($form, $je_suis_poste, &$valeurs) {
  * Reperer une demande de formulaire CVT multi page
  * et la reformater
  *
- * @deprecated 3.2.0
+ * @deprecated 3.2
  * @see cvtmulti_formulaire_charger_etapes()
  * @param array $flux
  * @return array
@@ -198,7 +198,7 @@ function cvtmulti_formulaire_charger_etapes($args, $valeurs) {
 /**
  * Verifier les etapes de saisie
  *
- * @deprecated 3.2.0
+ * @deprecated 3.2
  * @see cvtmulti_formulaire_verifier_etapes()
  * @param array $flux
  * @return array

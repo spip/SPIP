@@ -29,7 +29,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Exemple de tache cron Unix pour un appel toutes les minutes :
  * `* * * * * curl  http://www.mondomaine.tld/spip.php?action=super_cron`
  *
- * @deprecated 4.0.0
+ * @deprecated 4.0
  * utiliser directement curl  http://www.mondomaine.tld/spip.php?action=cron
  * qui ferme la connection immediatement et est plus robuste
  * (ici le curl peut ne pas marcher si la configuration reseau du serveur le bloque)

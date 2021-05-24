@@ -1029,7 +1029,7 @@ function calculer_critere_par_champ($idb, &$boucles, $crit,  $par, $raw = false)
  * Retourne un champ de tri en créant une jointure
  * si la table n'est pas présente dans le from de la boucle.
  *
- * @deprecated 3.2.0
+ * @deprecated 3.2
  * @param string $table Table du champ désiré
  * @param string $champ Champ désiré
  * @param Boucle $boucle Boucle en cours de compilation
@@ -2924,7 +2924,7 @@ function critere_si_dist($idb, &$boucles, $crit) {
  * {tableau #XX} pour compatibilite ascendante boucle POUR
  * ... préférer la notation (DATA){source tableau,#XX}
  *
- * @deprecated 4.0.0
+ * @deprecated 4.0
  * @see Utiliser une boucle (DATA){source tableau,#XX}
  *
  * @param string $idb Identifiant de la boucle
