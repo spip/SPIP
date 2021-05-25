@@ -3519,14 +3519,6 @@ function lire_meta($nom) {
 	return isset($GLOBALS['meta'][$nom]) ? $GLOBALS['meta'][$nom] : null;
 }
 
-
-/**
- * ecrire_metas : fonction dépréciée
- *
- * @deprecated
- **/
-function ecrire_metas() { }
-
 /**
  * Poser une alerte qui sera affiche aux auteurs de bon statut ('' = tous)
  * au prochain passage dans l'espace prive

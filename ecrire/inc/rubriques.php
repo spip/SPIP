@@ -602,19 +602,6 @@ function calculer_langues_utilisees($serveur = '') {
 }
 
 /**
- * Calcule une branche de rubriques
- *
- * Dépréciée, pour compatibilité
- *
- * @deprecated
- * @see calcul_branche_in()
- *
- * @param string|int|array $generation
- * @return string
- */
-function calcul_branche($generation) { return calcul_branche_in($generation); }
-
-/**
  * Calcul d'une branche de rubrique
  *
  * Liste des id_rubrique contenues dans une rubrique donnée

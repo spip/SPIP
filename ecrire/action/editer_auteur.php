@@ -235,21 +235,6 @@ function auteur_associer($id_auteur, $objets, $qualif = null) {
 	return objet_associer(array('auteur' => $id_auteur), $objets, $qualif);
 }
 
-
-/**
- * Ancien nommage pour compatibilité
- *
- * @deprecated Utiliser auteur_associer()
- * @see auteur_associer()
- *
- * @param int $id_auteur
- * @param array $c
- * @return string
- */
-function auteur_referent($id_auteur, $c) {
-	return auteur_associer($id_auteur, $c);
-}
-
 /**
  * Dissocier un auteur des objets listés
  *

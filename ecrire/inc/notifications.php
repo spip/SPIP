@@ -196,31 +196,3 @@ function email_notification_article($id_article, $modele) {
 
 	return recuperer_fond($modele, array('id_article' => $id_article));
 }
-
-/**
- * Notifier la publication d'un article
- *
- * @deprecated Ne plus utiliser
- * @param int $id_article
- **/
-function notifier_publication_article($id_article) {
-	if ($GLOBALS['meta']["suivi_edito"] == "oui") {
-		$adresse_suivi = $GLOBALS['meta']["adresse_suivi"];
-		$texte = email_notification_article($id_article, "notifications/article_publie");
-		notifications_envoyer_mails($adresse_suivi, $texte);
-	}
-}
-
-/**
- * Notifier la proposition d'un article
- *
- * @deprecated Ne plus utiliser
- * @param int $id_article
- **/
-function notifier_proposition_article($id_article) {
-	if ($GLOBALS['meta']["suivi_edito"] == "oui") {
-		$adresse_suivi = $GLOBALS['meta']["adresse_suivi"];
-		$texte = email_notification_article($id_article, "notifications/article_propose");
-		notifications_envoyer_mails($adresse_suivi, $texte);
-	}
-}

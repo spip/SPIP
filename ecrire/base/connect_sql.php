@@ -384,36 +384,6 @@ function _q($a) {
 			: join(",", array_map('_q', $a)));
 }
 
-
-/**
- * Récupérer le nom de la table de jointure `xxxx` sur l'objet `yyyy`
- *
- * @deprecated
- *     Utiliser l'API editer_liens ou les tables de liaisons spip_xx_liens
- *     ou spip_yy_liens selon.
- *
- * @param string $x Table de destination
- * @param string $y Objet source
- * @return array|string
- *     - array : Description de la table de jointure si connue
- *     - chaîne vide si non trouvé.
- **/
-function table_jointure($x, $y) {
-	$trouver_table = charger_fonction('trouver_table', 'base');
-	$xdesc = $trouver_table(table_objet($x));
-	$ydesc = $trouver_table(table_objet($y));
-	$ix = @$xdesc['key']["PRIMARY KEY"];
-	$iy = @$ydesc['key']["PRIMARY KEY"];
-	if ($table = $ydesc['tables_jointures'][$ix]) {
-		return $table;
-	}
-	if ($table = $xdesc['tables_jointures'][$iy]) {
-		return $table;
-	}
-
-	return '';
-}
-
 /**
  * Echapper les textes entre ' ' ou " " d'une requête SQL
  * avant son pre-traitement

@@ -187,22 +187,6 @@ function spip_mysql_get_charset($charset = array(), $serveur = '', $requeter = t
 	return spip_mysql_fetch(mysqli_query($connexion['link'], $c), null, $serveur);
 }
 
-
-/**
- * Exécute une requête Mysql (obsolète, ne plus utiliser)
- *
- * @deprecated Utiliser sql_query() ou autres
- *
- * @param string $query Requête
- * @param string $serveur Nom de la connexion
- * @param bool $requeter Exécuter la requête, sinon la retourner
- * @return Resource        Ressource pour fetch()
- **/
-function spip_query_db($query, $serveur = '', $requeter = true) {
-	return spip_mysql_query($query, $serveur, $requeter);
-}
-
-
 /**
  * Exécute une requête MySQL, munie d'une trace à la demande
  *
