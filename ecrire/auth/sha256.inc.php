@@ -13,3 +13,14 @@
 function spip_sha256($str) {
 	return hash('sha256', $str);
 }
+
+/**
+ * @param string $str Chaîne dont on veut calculer le SHA
+ * @param bool $ig_func
+ * @return string Le SHA de la chaîne
+ * @deprecated 4.0
+ * @see spip_sha256()
+ */
+function _nano_sha256($str, $ig_func = true) {
+	return spip_sha256($str);
+}
