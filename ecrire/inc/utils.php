@@ -3400,11 +3400,10 @@ function trouver_fond($nom, $dir = '', $pathinfo = false) {
  *
  * Dans ce cas, on retourne la fonction d'exécution correspondante à utiliser
  * (du répertoire `ecrire/exec`). Deux cas particuliers et prioritaires :
- * `fond` ou `fond_monobloc` sont retournés si des squelettes existent.
+ * `fond` est retourné si des squelettes existent.
  *
  * - `fond` : pour des squelettes de `prive/squelettes/contenu`
- *          ou pour des objets éditoriaux dont les suqelettes seront échaffaudés
- * - `fond_monobloc` (compatibilité avec SPIP 2.1) : pour des squelettes de `prive/exec`
+ *          ou pour des objets éditoriaux dont les squelettes seront échaffaudés
  *
  * @param string $nom
  *     Nom de la page
