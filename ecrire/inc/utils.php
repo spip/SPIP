@@ -1040,7 +1040,6 @@ function spip_touch($fichier, $duree = 0, $touch = true) {
  * Action qui déclenche une tache de fond
  *
  * @see  queue_affichage_cron()
- * @see  action_super_cron_dist()
  * @uses cron()
  **/
 function action_cron() {
@@ -3506,19 +3505,6 @@ function spip_getimagesize($fichier) {
  * desormais depreciees ; plutot que d'obliger tout le monde a charger
  * vieilles_defs, on va assumer l'histoire de ces 3 fonctions ubiquitaires
  */
-
-/**
- * lire_meta : fonction dépréciée
- *
- * @deprecated 3.1
- * @see lire_config() ou $GLOBALS['meta'][$nom]
- * @param string $nom Clé de meta à lire
- * @return mixed Valeur de la meta.
- **/
-function lire_meta($nom) {
-	return isset($GLOBALS['meta'][$nom]) ? $GLOBALS['meta'][$nom] : null;
-}
-
 
 /**
  * ecrire_metas : fonction dépréciée
