@@ -400,6 +400,8 @@ function url_to_ascii($url_idn) {
  *     string file : nom du fichier si enregistre dans un fichier
  */
 function recuperer_url($url, $options = array()) {
+	// Conserve la mémoire de la méthode fournit éventuellement
+	$methode_input = $options['methode'] ?? '';
 	$default = array(
 		'transcoder' => false,
 		'methode' => 'GET',
@@ -412,7 +414,6 @@ function recuperer_url($url, $options = array()) {
 		'file' => '',
 		'follow_location' => 10,
 		'version_http' => _INC_DISTANT_VERSION_HTTP,
-		'entetes' => array()
 	);
 	$options = array_merge($default, $options);
 	// copier directement dans un fichier ?
@@ -425,15 +426,34 @@ function recuperer_url($url, $options = array()) {
 		$options['taille_max'] = $copy ? _COPIE_LOCALE_MAX_SIZE : _INC_DISTANT_MAX_SIZE;
 	}
 
+
+	// Ajout des en-têtes spécifiques si besoin
+	$head_add = '';
+	if (!empty($options['entetes'])) {
+		$champs_entetes_defaut = array('host', 'user-agent', 'accept-encoding', 'referer', 'if-modified-since', 'authorization', 'proxy-authorization', 'keep-alive');
+		foreach ($options['entetes'] as $champ => $valeur) {
+			if (!in_array(strtolower($champ), $champs_entetes_defaut)) {
+				$head_add .= $champ . ': ' . $valeur . "\r\n";
+			}
+		}
+		unset($options['entetes']);
+	}
+
 	if (!empty($options['datas'])) {
 		list($head, $postdata) = prepare_donnees_post($options['datas'], $options['boundary']);
+		$head .= $head_add;
 		if (stripos($head, 'Content-Length:') === false) {
-			$head .= 'Content-Length: ' . strlen($postdata);
+			$head .= 'Content-Length: ' . strlen($postdata) . "\r\n";
 		}
-		$options['datas'] = $head . "\r\n\r\n" . $postdata;
-		if (strlen($postdata)) {
+		$options['datas'] = $head . "\r\n" . $postdata;
+		if (
+			strlen($postdata)
+			and !$methode_input
+		) {
 			$options['methode'] = 'POST';
 		}
+	} elseif ($head_add) {
+		$options['datas'] = $head_add . "\r\n";
 	}
 
 	// Accepter les URLs au format feed:// ou qui ont oublie le http:// ou les urls relatives au protocole
@@ -467,8 +487,7 @@ function recuperer_url($url, $options = array()) {
 		$options['uri_referer'],
 		$options['datas'],
 		$options['version_http'],
-		$options['if_modified_since'],
-		$options['entetes']
+		$options['if_modified_since']
 	);
 	if (!$handle) {
 		spip_log("ECHEC init_http $url", 'distant' . _LOG_ERREUR);
@@ -1306,7 +1325,7 @@ function need_proxy($host, $http_proxy = null, $http_noproxy = null) {
  * @param string $date
  * @return array
  */
-function init_http($method, $url, $refuse_gz = false, $referer = '', $datas = '', $vers = 'HTTP/1.0', $date = '', $entetes = array()) {
+function init_http($method, $url, $refuse_gz = false, $referer = '', $datas = '', $vers = 'HTTP/1.0', $date = '') {
 	$user = $via_proxy = $proxy_user = '';
 	$fopen = false;
 
@@ -1340,7 +1359,7 @@ function init_http($method, $url, $refuse_gz = false, $referer = '', $datas = ''
 		$path .= '?' . $t['query'];
 	}
 
-	$f = lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $refuse_gz, $referer, $datas, $vers, $date, $entetes);
+	$f = lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $refuse_gz, $referer, $datas, $vers, $date);
 	if (!$f or !is_resource($f)) {
 		// fallback : fopen si on a pas fait timeout dans lance_requete
 		// ce qui correspond a $f===110
@@ -1404,8 +1423,7 @@ function lance_requete(
 	$referer = '',
 	$datas = '',
 	$vers = 'HTTP/1.0',
-	$date = '',
-	$entetes = array()
+	$date = ''
 ) {
 
 	$proxy_user = '';
@@ -1508,16 +1526,6 @@ function lance_requete(
 		. (!$user ? '' : ('Authorization: Basic ' . base64_encode($user) . "\r\n"))
 		. (!$proxy_user ? '' : "Proxy-Authorization: Basic $proxy_user\r\n")
 		. (!strpos($vers, '1.1') ? '' : "Keep-Alive: 300\r\nConnection: keep-alive\r\n");
-
-	// Ajout des en-têtes spécifiques si besoin
-	$champs_entetes_defaut = array('host', 'user-agent', 'accept-encoding', 'referer', 'if-modified-since', 'authorization', 'proxy-authorization', 'keep-alive');
-	if ($entetes) {
-		foreach ($entetes as $champ => $valeur) {
-			if (!in_array(strtolower($champ), $champs_entetes_defaut)) {
-				$req .= $champ . ': ' . $valeur . "\r\n";
-			}
-		}
-	}
 
 #	spip_log("Requete\n$req", 'distant');
 	fputs($f, $req);
