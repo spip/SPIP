@@ -3419,9 +3419,6 @@ function tester_url_ecrire($nom) {
 	// tester si c'est une page en squelette
 	if (trouver_fond($nom, 'prive/squelettes/contenu/')) {
 		return $exec[$nom] = 'fond';
-	} // compat skels orthogonaux version precedente
-	elseif (trouver_fond($nom, 'prive/exec/')) {
-		return $exec[$nom] = 'fond_monobloc';
 	} // echafaudage d'un fond !
 	elseif (include_spip('public/styliser_par_z') and z_echafaudable($nom)) {
 		return $exec[$nom] = 'fond';
