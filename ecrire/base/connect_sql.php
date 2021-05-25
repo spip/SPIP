@@ -354,7 +354,8 @@ function spip_connect_main($connexion, $charset_sql_connexion = '') {
  *
  * Fonction présente pour compatibilité
  *
- * @deprecated Utiliser l'authentification LDAP de auth/ldap
+ * @deprecated 3.1
+ * @see Utiliser l'authentification LDAP de auth/ldap
  * @uses auth_ldap_connect()
  *
  * @param string $serveur Nom du connecteur
@@ -516,8 +517,8 @@ function query_reinjecte_textes($query, $textes) {
  * Exécute une requête sur le serveur SQL
  *
  * @note Ne génère pas d’erreur fatale si la connexion à la BDD n’existe pas
- * @see sql_query()
- * @deprecated  Pour compatibilité. Utiliser `sql_query()` ou l'API `sql_*`.
+ * @deprecated 3.1 Pour compatibilité.
+ * @see sql_query() ou l'API `sql_*`.
  *
  * @param string $query Texte de la requête
  * @param string $serveur Nom du connecteur pour la base de données

@@ -3510,8 +3510,8 @@ function spip_getimagesize($fichier) {
 /**
  * lire_meta : fonction dépréciée
  *
- * @deprecated Utiliser `$GLOBALS['meta'][$nom]` ou `lire_config('nom')`
- * @see lire_config()
+ * @deprecated 3.1
+ * @see lire_config() ou $GLOBALS['meta'][$nom]
  * @param string $nom Clé de meta à lire
  * @return mixed Valeur de la meta.
  **/

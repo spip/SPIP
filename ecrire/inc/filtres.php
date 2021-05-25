@@ -1187,7 +1187,8 @@ function PtoBR($texte) {
  * @filtre
  * @link https://www.spip.net/4298
  * @link http://www.alsacreations.com/tuto/lire/1038-gerer-debordement-contenu-css.html
- * @deprecated Utiliser le style CSS `word-wrap:break-word;`
+ * @deprecated 3.1
+ * @see Utiliser le style CSS `word-wrap:break-word;`
  *
  * @param string $texte Texte
  * @return string Texte encadré du style CSS
@@ -4382,7 +4383,8 @@ function filtre_bouton_action_horizontal_dist($lien, $texte, $fond, $fonction = 
  * @see  filtre_icone_verticale_dist()
  *
  * @filtre
- * @deprecated Utiliser le filtre `icone_verticale`
+ * @deprecated 3.1
+ * @see Utiliser le filtre `icone_verticale`
  *
  * @param string $lien
  *     URL du lien

@@ -658,7 +658,8 @@ function recuperer_url_cache($url, $options = array()) {
  *
  * Gère les redirections de page (301) sur l'URL demandée (maximum 10 redirections)
  *
- * @deprecated
+ * @deprecated 3.1
+ * @see recuperer_url()
  * @uses recuperer_url()
  *
  * @param string $url
@@ -740,7 +741,7 @@ function recuperer_page(
 /**
  * Obsolete Récupère une page sur le net et au besoin l'encode dans le charset local
  *
- * @deprecated
+ * @deprecated 3.1
  *
  * @uses recuperer_url()
  *

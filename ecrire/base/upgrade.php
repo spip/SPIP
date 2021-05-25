@@ -542,9 +542,10 @@ function upgrade_test() {
 /**
  * Mise à jour des versions de SPIP < 1.926
  *
- * @deprecated Utiliser `maj_plugin()` ou la globale `maj` pour le core.
- * @see maj_plugin()
+ * @deprecated 3.1
+ * @see maj_plugin() ou la globale `maj` pour le core.
  * @see maj_base()
+ * @see https://core.spip.net/issues/4798
  *
  * @param float $version
  * @param bool $test
