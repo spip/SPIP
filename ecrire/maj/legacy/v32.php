@@ -11,14 +11,17 @@
 \***************************************************************************/
 
 /**
- * Certains plugins appelaient ce fichier pour acceder a maj_lien(),
- * qui sert à la migration des tables vers SPIP 3.0
+ * Gestion des mises à jour de bdd de SPIP
  * 
+ * Mises à jour en 3.2
+ *
  * @package SPIP\Core\SQL\Upgrade
- */
-
+ **/
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-include_spip('maj/legacy/v30');
+
+$GLOBALS['maj'][23375] = array(
+	array('sql_alter', "TABLE spip_auteurs CHANGE prefs prefs text"),
+);

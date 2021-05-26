@@ -94,6 +94,16 @@ function base_upgrade_dist($titre = '', $reprise = '') {
  * schéma actuel de la base de données.
  *
  * Les fonctions de mises à jour se trouvent dans `ecrire/maj/`
+ * 
+ * @note
+ *     Si version nulle ou inexistante, c'est une nouvelle installation,
+ *     on ne passe pas par le processus de mise à jour.
+ * 
+ *     De même en cas de version supérieure: ca devait être un test,
+ *     il y a eu le message d'avertissement il doit savoir ce qu'il fait
+ * 
+ *     version_installee = YYYYMMDDNN; quand on a besoin de forcer une MAJ
+ *     tel que 2021021800 où 00 est un incrément.
  *
  * @uses upgrade_test()
  * @uses maj_while()
@@ -104,14 +114,7 @@ function base_upgrade_dist($titre = '', $reprise = '') {
  */
 function maj_base($version_cible = 0, $redirect = '', $debut_page = true) {
 
-	$version_installee = @$GLOBALS['meta']['version_installee'];
-	//
-	// Si version nulle ou inexistante, c'est une nouvelle installation
-	//   => ne pas passer par le processus de mise a jour.
-	// De meme en cas de version superieure: ca devait etre un test,
-	// il y a eu le message d'avertissement il doit savoir ce qu'il fait
-	//
-	// version_installee = 1.702; quand on a besoin de forcer une MAJ
+	$version_installee = $GLOBALS['meta']['version_installee'] ?? null;
 
 	spip_log(
 		"Version anterieure: $version_installee. Courante: " . $GLOBALS['spip_version_base'],
@@ -134,34 +137,12 @@ function maj_base($version_cible = 0, $redirect = '', $debut_page = true) {
 
 	$cible = ($version_cible ? $version_cible : $GLOBALS['spip_version_base']);
 
-	if ($version_installee <= 1.926) {
-		$n = floor($version_installee * 10);
-		while ($n < 19) {
-			$nom = sprintf('v%03d', $n);
-			$f = charger_fonction($nom, 'maj/legacy', true);
-			if ($f) {
-				spip_log("$f repercute les modifications de la version " . ($n / 10), 'maj.' . _LOG_INFO_IMPORTANTE);
-				$f($version_installee, $GLOBALS['spip_version_base']);
-			} else {
-				spip_log("pas de fonction pour la maj $n $nom", 'maj.' . _LOG_INFO_IMPORTANTE);
-			}
-			$n++;
-		}
-		include_spip('maj/legacy/v019_pre193');
-		maj_legacy_v019_pre193($version_installee, $version_cible);
-	}
-	if ($version_installee < 2000) {
-		if ($version_installee < 2) {
-			$version_installee = $version_installee * 1000;
-		}
-		include_spip('maj/legacy/v019');
-	}
-	if ($cible < 2) {
-		$cible = $cible * 1000;
-	}
-
 	if ($version_installee < 2021010100) {
-		include_spip('maj/legacy/svn10000');
+		include_spip('maj/legacy/v21');
+		include_spip('maj/legacy/v30');
+		include_spip('maj/legacy/v31');
+		include_spip('maj/legacy/v32');
+		include_spip('maj/legacy/v40');
 	}
 
 	include_spip('maj/2021');
