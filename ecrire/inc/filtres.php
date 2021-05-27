@@ -3665,6 +3665,9 @@ function filtre_balise_svg_dist($img, $alt = '', $class = null, $size=null) {
 
 /**
  * Affiche chaque valeur d'un tableau associatif en utilisant un modèle
+ * 
+ * @deprecated 4.0
+ * @see <BOUCLE(DATA){source table, #GET{tableau}}>
  *
  * @example
  *     - `[(#ENV*|unserialize|foreach)]`

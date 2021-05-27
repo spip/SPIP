@@ -368,7 +368,7 @@ function url_to_ascii($url_idn) {
  * au besoin encode son contenu dans le charset local
  *
  * @uses init_http()
- * @uses recuperer_entetes()
+ * @uses recuperer_entetes_complets()
  * @uses recuperer_body()
  * @uses transcoder_page()
  * @uses prepare_donnees_post()
@@ -923,7 +923,8 @@ function recuperer_entetes_complets($handle, $if_modified_since = false) {
  * Lit les entêtes de reponse HTTP sur la socket $f
  *
  * @uses recuperer_entetes_complets()
- * @deprecated
+ * @deprecated 3.1
+ * @see recuperer_entetes_complets()
  *
  * @param resource $f
  *     Socket d'un fichier (issu de fopen)

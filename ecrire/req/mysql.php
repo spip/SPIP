@@ -1625,68 +1625,6 @@ function spip_mysql_cite($v, $type) {
 	return ("'" . addslashes($v) . "'");
 }
 
-
-// Ces deux fonctions n'ont pas d'equivalent exact PostGres
-// et ne sont la que pour compatibilite avec les extensions de SPIP < 1.9.3
-
-/**
- * Poser un verrou SQL local
- *
- * Changer de nom toutes les heures en cas de blocage MySQL (ca arrive)
- *
- * @deprecated Pas d'équivalence actuellement en dehors de MySQL
- * @see spip_release_lock()
- *
- * @param string $nom
- *     Inutilisé. Le nom est calculé en fonction de la connexion principale
- * @param int $timeout
- * @return string|bool
- *     - Nom du verrou si réussite,
- *     - false sinon
- */
-function spip_get_lock($nom, $timeout = 0) {
-
-	define('_LOCK_TIME', intval(time() / 3600 - 316982));
-
-	$connexion = &$GLOBALS['connexions'][0];
-	$bd = $connexion['db'];
-	$prefixe = $connexion['prefixe'];
-	$nom = "$bd:$prefixe:$nom" . _LOCK_TIME;
-
-	$connexion['last'] = $q = "SELECT GET_LOCK(" . _q($nom) . ", $timeout) AS n";
-
-	$q = @sql_fetch(mysqli_query(_mysql_link(), $q));
-	if (!$q) {
-		spip_log("pas de lock sql pour $nom", _LOG_ERREUR);
-	}
-
-	return $q['n'];
-}
-
-
-/**
- * Relâcher un verrou SQL local
- *
- * @deprecated Pas d'équivalence actuellement en dehors de MySQL
- * @see spip_get_lock()
- *
- * @param string $nom
- *     Inutilisé. Le nom est calculé en fonction de la connexion principale
- * @return string|bool
- *     True si réussite, false sinon.
- */
-function spip_release_lock($nom) {
-
-	$connexion = &$GLOBALS['connexions'][0];
-	$bd = $connexion['db'];
-	$prefixe = $connexion['prefixe'];
-	$nom = "$bd:$prefixe:$nom" . _LOCK_TIME;
-
-	$connexion['last'] = $q = "SELECT RELEASE_LOCK(" . _q($nom) . ")";
-	mysqli_query(_mysql_link(), $q);
-}
-
-
 /**
  * Teste si on a les fonctions MySQLi (pour l'install)
  *
