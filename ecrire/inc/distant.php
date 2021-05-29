@@ -917,42 +917,6 @@ function recuperer_entetes_complets($handle, $if_modified_since = false) {
 }
 
 /**
- * Obsolete : version simplifiee de recuperer_entetes_complets
- * Retourne les informations d'entête HTTP d'un socket
- *
- * Lit les entêtes de reponse HTTP sur la socket $f
- *
- * @uses recuperer_entetes_complets()
- * @deprecated 3.1
- * @see recuperer_entetes_complets()
- *
- * @param resource $f
- *     Socket d'un fichier (issu de fopen)
- * @param int|string $date_verif
- *     Pour tester une date de dernière modification
- * @return string|int|array
- *     - la valeur (chaîne) de l'en-tete Location si on l'a trouvée
- *     - la valeur (numerique) du statut si different de 200, notamment Not-Modified
- *     - le tableau des entetes dans tous les autres cas
- **/
-function recuperer_entetes($f, $date_verif = '') {
-	//Cas ou la page distante n'a pas bouge depuis
-	//la derniere visite
-	$res = recuperer_entetes_complets($f, $date_verif);
-	if (!$res) {
-		return false;
-	}
-	if ($res['location']) {
-		return $res['location'];
-	}
-	if ($res['status'] != 200) {
-		return $res['status'];
-	}
-
-	return explode("\n", $res['headers']);
-}
-
-/**
  * Calcule le nom canonique d'une copie local d'un fichier distant
  *
  * Si on doit conserver une copie locale des fichiers distants, autant que ca
