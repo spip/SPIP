@@ -60,6 +60,9 @@
  * Onglets de base
  */
 .onglets_simple {
+	display: flex;
+	justify-content: space-between;
+	flex-flow: row wrap;
 	margin: calc(var(--spip-spacing-y) * 1.5) 0;
 	border-bottom: var(--spip-tabs-border-width) solid hsla(0, 0%, 0%, 0.1);
 }
@@ -67,14 +70,20 @@
 	display: flex;
 	flex-flow: row wrap;
 	padding: 0;
-	margin: 0;
+	margin: 0 0 calc(var(--spip-tabs-border-width) * -1); /* Empiéter sur la bordure du bas */
 	list-style: none;
+}
+.onglets_simple ul:only-of-type {
+	flex: 1; /* si groupe unique, permettre d'aggrandir pour garder l'alignement à gauche */
+}
+.onglets_simple ul + ul,
+.onglets_simple.second ul + ul {
+	margin-#LEFT: calc(var(--spip-tabs-spacing-x) * 2);
 }
 .onglets_simple li {
 	display: flex;
 	padding: 0;
 	margin: 0;
-	margin-bottom: calc(var(--spip-tabs-border-width) * -1);
 }
 /* Items */
 .onglets_simple li strong,
@@ -134,12 +143,10 @@
  */
 .onglets_simple.second {
 	border: 0;
+	justify-content: flex-start;
 }
 .onglets_simple.second ul {
-	display: inline-flex;
-}
-.onglets_simple.second ul + ul {
-	margin-#LEFT: 2em;
+	margin: 0;
 }
 /* Items */
 .onglets_simple.second li strong,
