@@ -376,8 +376,9 @@ function url_to_ascii($url_idn) {
  * @param string $url
  * @param array $options
  *   bool transcoder : true si on veut transcoder la page dans le charset du site
- *   string methode : Type de requête HTTP à faire (HEAD, GET ou POST)
+ *   string methode : Type de requête HTTP à faire (HEAD, GET, POST, PUT, DELETE)
  *   int taille_max : Arrêter le contenu au-delà (0 = seulement les entetes ==> requête HEAD). Par defaut taille_max = 1Mo ou 16Mo si copie dans un fichier
+ *   array headers : tableau associatif d'entetes https a envoyer
  *   string|array datas : Pour envoyer des donnees (array) et/ou entetes au complet, avec saut de ligne entre headers et donnees ( string @see prepare_donnees_post()) (force la methode POST si donnees non vide)
  *   string boundary : boundary pour formater les datas au format array
  *   bool refuser_gz : Pour forcer le refus de la compression (cas des serveurs orthographiques)
@@ -401,11 +402,12 @@ function url_to_ascii($url_idn) {
  */
 function recuperer_url($url, $options = array()) {
 	// Conserve la mémoire de la méthode fournit éventuellement
-	$methode_input = $options['methode'] ?? '';
+	$methode_demandee = $options['methode'] ?? '';
 	$default = array(
 		'transcoder' => false,
 		'methode' => 'GET',
 		'taille_max' => null,
+		'headers' => [],
 		'datas' => '',
 		'boundary' => '',
 		'refuser_gz' => false,
@@ -429,14 +431,10 @@ function recuperer_url($url, $options = array()) {
 
 	// Ajout des en-têtes spécifiques si besoin
 	$head_add = '';
-	if (!empty($options['entetes'])) {
-		$champs_entetes_defaut = array('host', 'user-agent', 'accept-encoding', 'referer', 'if-modified-since', 'authorization', 'proxy-authorization', 'keep-alive');
-		foreach ($options['entetes'] as $champ => $valeur) {
-			if (!in_array(strtolower($champ), $champs_entetes_defaut)) {
-				$head_add .= $champ . ': ' . $valeur . "\r\n";
-			}
+	if (!empty($options['headers'])) {
+		foreach ($options['headers'] as $champ => $valeur) {
+			$head_add .= $champ . ': ' . $valeur . "\r\n";
 		}
-		unset($options['entetes']);
 	}
 
 	if (!empty($options['datas'])) {
@@ -448,7 +446,7 @@ function recuperer_url($url, $options = array()) {
 		$options['datas'] = $head . "\r\n" . $postdata;
 		if (
 			strlen($postdata)
-			and !$methode_input
+			and !$methode_demandee
 		) {
 			$options['methode'] = 'POST';
 		}
