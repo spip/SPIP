@@ -97,7 +97,7 @@ function formulaires_instituer_objet_charger_dist($objet, $id_objet, $retour = '
 	if (count($statuts) == 1 and isset($statuts[$v['statut']])) {
 		$editable = false;
 	}
-
+	
 	$valeurs = array(
 		'editable' => $editable,
 		'statut' => $v['statut'],
