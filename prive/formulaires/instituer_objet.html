@@ -86,7 +86,7 @@
 			$('.instituer_objet .statut_old .label').after(bouton_modifier);
 			
 			// Un bouton Annuler
-			var bouton_annuler = $('<button class="btn_secondaire">Annuler</button>')
+			var bouton_annuler = $('<button class="btn_secondaire"><:bouton_annuler:></button>')
 				.click(function() {
 					form.slideUp().addClass('none-js');
 					bouton_modifier.slideDown().attr('aria-expanded', 'false');
