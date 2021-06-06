@@ -25,7 +25,7 @@
 				<div class="editer editer_[(#GET{name})] statut_#ENV{#GET{name}}[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					[<span class='erreur_message'>(#GET{erreurs})</span>]
 					<fieldset class="editer">
-						<legend>Nouveau statut</legend>
+						<legend>Choix du statut</legend>
 						<BOUCLE_choix(DATA){source table, #ENV{_statuts}}{cle != #ENV{statut}}>
 						<div class="choix">
 							<input
