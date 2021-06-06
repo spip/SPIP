@@ -1,62 +1,111 @@
-<div class="instituer_objet">
+<div class="instituer_objet[ (#PUBLIE{#ENV{_objet}, #ENV{_id_objet}})objet_publie]">
+	[(#REM) Dans tous les cas on commence par afficher le statut actuel ]
+	<div class="statut_old">
+		<strong class="label">[(#ENV{_label}|_T)][(#ENV{_aide}|oui)#AIDER{#ENV{_aide}}]</strong>
+		<div class="statut">
+			[(#ENV{statut}|puce_statut{#ENV{_objet}})]
+			[(#ENV{_statuts}|table_valeur{#ENV{statut}}|_T)]
+		</div>
+	</div>
+
 	[(#ENV{_publiable}|non|et{#ENV{statut}|=={prepa}|oui})
 	<p class="small"><:texte_proposer_publication:></p>
 	]
+	[(#ENV{editable}|oui)
 	<div class="formulaire_spip formulaire_editer formulaire_instituer[ formulaire_#FORM formulaire_#FORM-(#ENV{_objet})][ formulaire_#FORM-#ENV{_objet}-(#ENV{_id_objet})]">
 		[<p class="reponse_formulaire reponse_formulaire_ok" role="status">(#ENV**{message_ok})</p>]
 		[<p class="reponse_formulaire reponse_formulaire_erreur" role="alert">(#ENV*{message_erreur})</p>]
-		[(#ENV{editable})
 		<form method='post' action='#ENV{action}'><div>
 			[(#REM) declarer les hidden qui declencheront le service du formulaire
 			parametre : url d'action ]
 			#ACTION_FORMULAIRE
-		]
-			#SET{name,statut}#SET{obli,'obligatoire'}#SET{erreurs,#ENV*{erreurs/#GET{name}}}
+
+			#SET{name,statut}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<div class="editer-groupe">
-				<div class="editer editer_[(#GET{name})] statut_#ENV{#GET{name}}[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-					<label for="formulaire_#FORM-#ENV{_objet}-#ENV{_id_objet}-#GET{name}">[(#ENV{_label}|_T)][(#ENV{_aide}|oui)#AIDER{#ENV{_aide}}]</label>[
-					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<span class="show">
-					[(#ENV{editable})
-						<select class="select statut" name="#GET{name}" id="formulaire_#FORM-#ENV{_objet}-#ENV{_id_objet}-#GET{name}">
-						[(#ENV{_statuts/#ENV{#GET{name}}}|non)
-							<option value="#ENV{#GET{name}}">&nbsp;&nbsp;&nbsp;#ENV{#GET{name}}</option>
-						]
-					]
-						<BOUCLE_choix(DATA){source table, #ENV{_statuts}}{si #ENV{editable}}>
-							<option value="#CLE"[(#ENV{#GET{name}}|=={#CLE}|oui)selected="selected"]
-								style="background-image:url([(#CLE|puce_statut{#ENV{_objet}}|extraire_attribut{src})]);">&nbsp;&nbsp;&nbsp;[(#VALEUR|_T)]</option>
-						</BOUCLE_choix>
-					[(#ENV{editable})
-					</select>
-					]
-					[(#ENV{editable}|non)
-						<span class="statut">[(#ENV{#GET{name}}|puce_statut{#ENV{_objet}})] [(#ENV{_statuts/#ENV{#GET{name}}}|_T)]</span>
-					]
-				</span>
-				</div>
+				<fieldset class="editer editer_[(#GET{name})] statut_#ENV{#GET{name}}[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					[<span class='erreur_message'>(#GET{erreurs})</span>]
+					<legend class="label">Changer vers :</legend>
+					<BOUCLE_choix(DATA){source table, #ENV{_statuts}}{cle != #ENV{statut}}>
+					<div class="choix">
+						<input
+							type="radio" class="radio"
+							name="#GET{name}"
+							id="instituer_#ENV{_objet}_#ENV{_id_objet}_choix_#CLE"
+							[(#ENV{#GET{name}}|=={#CLE}|oui)selected="selected"]
+							value="#CLE"
+						/>
+						<label for="instituer_#ENV{_objet}_#ENV{_id_objet}_choix_#CLE">
+							[(#CLE|puce_statut{#ENV{_objet}})]
+							[(#VALEUR|_T)]
+						</label>
+					</div>
+					</BOUCLE_choix>
+				</fieldset>
 			</div>
 			<!--extra-->
-			[(#ENV{editable})
 			<p class='boutons'><span class='image_loading'>&nbsp;</span>
 				<input type='submit' class='btn submit' value='<:bouton_changer:>' /></p>
 		</div></form>
-		]
 	</div>
+	]
 </div>
+
 <script type="text/javascript">
-	function update_select(statut_default){
-		var selected = this.options[this.selectedIndex];
-		var boutons = jQuery(this).attr('style',jQuery(selected).attr('style')).closest('form').find('.boutons');
-		if (selected.value!=statut_default)
-			boutons.css('visibility','visible').show('fast');
-		else
-			boutons.css('visibility','hidden')
-	}
-	jQuery(function($){
-		$(".formulaire_#FORM .show select")
-			.each(function(){update_select.apply(this,['#ENV{#GET{name}}']);})
-			.on('change',function(){update_select.apply(this,['#ENV{#GET{name}}']);})
-			.on('keyup',function(){update_select.apply(this,['#ENV{#GET{name}}']);});
-	});
+	;(function($){
+		[(#REM) Seulement si éditable et que sans erreur, on masque le form par défaut ]
+		[(#ENV{editable}|oui)
+			var form = $('.formulaire_#FORM-#ENV{_objet}-#ENV{_id_objet}');
+
+
+			// Un bouton pour afficher le form pour modifier
+			var bouton_modifier_annuler = $('<div class="bouton_modifier_annuler float-end"></div>')
+				.append(
+					$('<button class="btn_mini btn_secondaire btn_modifier" aria-expanded="false"><:bouton_changer:></button>')
+					.click(function() {
+						form.slideDown().closest('.instituer_objet').removeClass('form-closed');
+						/*$(this).slideUp().attr('aria-expanded', 'true');*/
+					})
+				).append(
+					$('<button class="btn_mini btn_secondaire btn_annuler"><:bouton_annuler:></button>')
+					.click(function() {
+						form.slideUp().closest('.instituer_objet').addClass('form-closed');
+						/*bouton_modifier.slideDown().attr('aria-expanded', 'false');*/
+						return false;
+					})
+				)
+			;
+
+			// On ajoute ce bouton dynamiquement
+			$('.instituer_objet .statut_old .label').after(bouton_modifier_annuler);
+
+			[(#ENV**{erreurs}|non)
+				// On masque au départ le form pour modifier
+				form.closest('.instituer_objet').addClass('form-closed');
+			][(#ENV**{erreurs}|oui)
+				form.css('display','block');
+			]
+		]
+	})(jQuery);
 </script>
+<style type="text/css">
+	.instituer_objet .bouton_modifier_annuler .btn_modifier {display: none;}
+	.instituer_objet.form-closed .bouton_modifier_annuler .btn_modifier {display: inline-block;}
+	.instituer_objet.form-closed .bouton_modifier_annuler .btn_annuler {display: none;}
+	.instituer_objet.form-closed .formulaire_instituer {display: none;}
+	.instituer_objet .formulaire_instituer .editer_statut div.choix {
+		border: 0;
+		margin-left: calc(-1 * var(--spip-form-spacing-x));
+		margin-right: calc(-1 * var(--spip-form-spacing-x));
+		padding-left: var(--spip-form-spacing-x);
+		padding-right: var(--spip-form-spacing-x);
+	}
+	.instituer_objet .formulaire_instituer .editer_statut div.choix label {
+		font-weight: normal;
+	}
+	.instituer_objet .formulaire_instituer .editer_statut div.choix input.radio:checked + label {
+		font-weight: bold;
+	}
+	.instituer_objet .formulaire_instituer .boutons {
+		padding-top: 0;
+	}
+</style>

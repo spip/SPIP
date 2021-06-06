@@ -149,7 +149,10 @@ function formulaires_instituer_objet_verifier_dist($objet, $id_objet, $retour = 
 		}
 		$l = lister_statuts_proposes($desc, $publiable);
 		$statut = _request('statut');
-		if (
+		if (empty($statut)) {
+			$erreurs['statut'] = _L('Choisissez un nouveau statut');
+		}
+		elseif (
 			!isset($l[$statut])
 			|| !autoriser('instituer', $objet, $id_objet, '', ['statut' => $statut])
 		) {
