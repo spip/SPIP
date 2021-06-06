@@ -77,13 +77,24 @@
 			
 			// Un bouton pour afficher le form pour modifier
 			var bouton_modifier = $('<button class="btn_mini btn_secondaire float-end" aria-expanded="false">Changer</button>')
-				.click(function(){
+				.click(function() {
 					form.slideDown().removeClass('none-js');
 					$(this).slideUp().attr('aria-expanded', 'true');
 				});
 			
 			// On ajoute ce bouton dynamiquement
 			$('.instituer_objet .statut_old .label').after(bouton_modifier);
+			
+			// Un bouton Annuler
+			var bouton_annuler = $('<button class="btn_secondaire">Annuler</button>')
+				.click(function() {
+					form.slideUp().addClass('none-js');
+					bouton_modifier.slideDown().attr('aria-expanded', 'false');
+					return false;
+				});
+			
+			// On ajoute ce bouton à l'intérieur du form
+			form.find('.boutons \[type=submit\]').wrap('<div class="groupe-btns"></div>').parent().prepend(bouton_annuler);
 		]
 	})(jQuery);
 </script>
