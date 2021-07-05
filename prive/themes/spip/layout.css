@@ -149,8 +149,7 @@
 			grid-template-areas:
 				"navigation contenu "
 				"extra      contenu ";
-			-webkit-box-pack: center;
-			        justify-content: center;
+			justify-content: center;
 		}
 		#contenu {
 			grid-area: contenu;

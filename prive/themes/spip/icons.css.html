@@ -42,15 +42,9 @@
 .icone {
 	position: relative; /* Afin que le z-index soit pris en compte */
 	z-index: 2;
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
-	 -webkit-box-pack: center;
-	    -ms-flex-pack: center;
-	  justify-content: center;
-	-webkit-box-align: center;
-	   -ms-flex-align: center;
-	      align-items: center;
+	justify-content: center;
+	align-items: center;
 	text-align: center;
 	border-radius: 0.25em;
 	vertical-align: middle;
@@ -58,25 +52,14 @@
 
 /* Conteneur lien */
 .icone a {
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
-	   -webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	        -ms-flex-flow: column wrap;
-	            flex-flow: column wrap;
-	-webkit-box-align: inherit;
-	   -ms-flex-align: inherit;
-	      align-items: inherit;
-	-webkit-box-pack: inherit;
-	   -ms-flex-pack: inherit;
-	 justify-content: inherit;
+	flex-flow: column wrap;
+	align-items: inherit;
+	justify-content: inherit;
 	width: 5em;
 	padding: [(#GET{iconpadding}) ]0;
 	cursor: pointer;
-	-webkit-transition: all 0.2s;
-	     -o-transition: all 0.2s;
-         	transition: all 0.2s;
+	transition: all 0.2s;
 	border-radius: inherit;
 }
 
@@ -122,9 +105,7 @@
 .icone a:focus .icone-fonction:after {
 	background-size: 60% auto;
 	background-position: center center;
-	-webkit-transition: background 0.2s;
-	     -o-transition: background 0.2s;
-	        transition: background 0.2s; /* aller */
+	transition: background 0.2s; /* aller */
 }
 
 /**
@@ -138,16 +119,12 @@
 	border-radius: inherit;
 	/* background-color: hsla(0, 0%, 0%, 0.025); */
 	background-color: #GET{couleurs/base};
-	        box-shadow: inset 0 0 0.75em hsla(0, 0%, 0%, 0.033);
-	-webkit-transition: all 0.2s;
-	     -o-transition: all 0.2s;
-	        transition: all 0.2s;
+	box-shadow: inset 0 0 0.75em hsla(0, 0%, 0%, 0.033);
+	transition: all 0.2s;
 }
 .icone .icone-image img {
 	display: block;
-	-webkit-transition: inherit;
-	     -o-transition: inherit;
-	        transition: inherit;
+	transition: inherit;
 }
 .icone-fonction {
 	display: flex; /* éviter espacements indésirables autour de l'image */
@@ -163,9 +140,7 @@
 	bottom: 0;
 	background-position: bottom[ (#GET{iconpadding}) ]right[ (#GET{iconpadding})];
 	background-repeat: no-repeat;
-	-webkit-transition: background 0.1s;
-	     -o-transition: background 0.1s;
-	        transition: background 0.1s; /* Retour */
+	transition: background 0.1s; /* Retour */
 }
 .icone-fonction-new:after {
 	background-position-y: [(#GET{iconpadding})];
@@ -180,20 +155,13 @@
 /* Variante horizontale */
 .icone.horizontale {
 	clear: both;
-	-webkit-box-pack: start;
-	   -ms-flex-pack: start;
-	 justify-content: flex-start;
+	justify-content: flex-start;
 	text-align: #ENV{left};
 }
 .icone.horizontale a {
 	padding: 0.25em 0;
-	-webkit-box-flex: 1;
-	        -ms-flex: 1 1 auto;
-	            flex: 1 1 auto;
-	   -webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
-	        -ms-flex-flow: row nowrap;
-	            flex-flow: row nowrap;
+	flex: 1 1 auto;
+	flex-flow: row nowrap;
 	width: auto;
 }
 .icone.horizontale b {
@@ -383,13 +351,8 @@
 	color: #fff;
 	text-decoration: none;
 	background-color: white;
-	background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ffffff));
-	background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
-	background-image: -moz-linear-gradient(top, #ffffff, #ffffff);
-	background-image: -ms-linear-gradient(top, #ffffff, #ffffff);
-	background-image: -o-linear-gradient(top, #ffffff, #ffffff);
-	background-image: linear-gradient(top, #ffffff, #ffffff);color: #[(#ENV{foncee}|couleur_luminance{0.7})];
-	filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ffffff', endColorstr='#ffffff');
+	background-image: linear-gradient(top, #ffffff, #ffffff);
+	color: #[(#ENV{foncee}|couleur_luminance{0.7})];
 }
 .barre_onglet strong {
 	background-color: #ENV{foncee};
@@ -484,14 +447,12 @@
 .onglets_simple ul li a {
 	position: relative;
 	opacity: 0.7;
-	filter: alpha(opacity=70);
 }
 .onglets_simple ul li a:hover,
 .onglets_simple ul li a:focus {
 	cursor: hand;
 	cursor: pointer;
 	opacity: 1;
-	filter: alpha(opacity=100);
 }
 .onglets_simple ul li strong {
 	position: relative;
