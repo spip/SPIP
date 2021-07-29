@@ -14,7 +14,7 @@
 	<thead>
 		<tr class='first_row'>
 			<th class='statut' scope='col'></th>
-			<th class='titre' scope='col'>[(#TRI{num titre,<:info_titre:>,ajax})]</th>
+			<th class='titre' scope='col'>[(#TRI{num titre,<:info_titre|label_nettoyer:>,ajax})]</th>
 			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
 			<th class='id' scope='col'>[(#TRI{id_article,<:info_numero_abbreviation:>,ajax})]</th>
 			<th class='action' scope='col'>&nbsp;</th>
@@ -27,7 +27,7 @@
 			<td class='titre principale'>[(#LOGO_ARTICLE|image_reduire{20,26})
 				]<a href="[(#ID_ARTICLE|generer_url_entite{article})]"
 				[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
-				title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">[(#RANG). ]#TITRE</a></td>
+				title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">[<span class='rang'>(#RANG).</span> ]#TITRE</a></td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
 			<td class='id'>[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
 				<a href="[(#URL_ECRIRE{articles_edit,id_article=#ID_ARTICLE})]" title="<:icone_modifier_article|attribut_html:>">#ID_ARTICLE</a>,

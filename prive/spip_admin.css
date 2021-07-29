@@ -16,7 +16,7 @@ a:active.spip-admin-boutons,
 .spip-admin-boutons:hover { background: #000; } 
 
 /* Style pour le mode debug */
-#spip-debug-toggle {position:fixed; top:6px; right:40px; width:32px;height:32px; cursor:pointer; z-index:10000;}
+#spip-debug-toggle {position:fixed; top:30px; right:34px; width:32px;height:32px; cursor:pointer; z-index:10000;}
 #spip-debug, #spip-debug-header { background-color: #f0f0f0; font-family: Verdana, Geneva, sans-serif; position:absolute;top:30px;left:0;width:100%;height:100%;z-index:10000; font-size:1em; text-align:left; }
 #spip-debug ul table { font-size: 80%; }
 #spip-debug fieldset { background-color: #fff; font-family: Courier, "Courier New", monospace; font-size: 12px; margin-bottom: 1em; display: block; padding: .5em; }
@@ -105,14 +105,14 @@ a:active.spip-admin-boutons,
 
 /* Style pour le mode debug */
 html #spip-debug-toggle {
-  top: 6px;
-  right: 40px;
+  top:30px;
+  right:34px;
 }
 html #spip-debug-header {
   background: #f0e144;
   position: fixed;
   top: 30px;
-  height: 30px;
+  height: 32px;
   width: 100px;
   left: auto;
   right: 0;

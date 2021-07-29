@@ -13,7 +13,7 @@
 		<tr class='first_row'>
 			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
 			<th class='trad' scope='col'>&nbsp;</th>
-			<th class='titre principale' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='titre principale' scope='col'>[(#TRI{titre,<:info_titre|label_nettoyer:>,ajax})]</th>
 			<th class='langue' scope='col'><:langue:></th>
 			<th class='id' scope='col'>[(#TRI{id_article,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
@@ -40,7 +40,7 @@
 				lang="#LANG">[(#EXPOSE|?{#TITRE,<a
 				[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
 				href="[(#ID_ARTICLE|generer_url_entite{article})]"
-				title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">[(#RANG). ]#TITRE</a>})]</span>
+				title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">[<span class='rang'>(#RANG).</span> ]#TITRE</a>})]</span>
 				[(#ENV{id_trad}|=={#ID_ARTICLE}|oui)<small class="reference_trad"><:trad_reference:></small>]
 			</td>
 			<td class='langue'>[(#LANG|traduire_nom_langue)]</td>

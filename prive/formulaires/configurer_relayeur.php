@@ -56,7 +56,8 @@ function formulaires_configurer_relayeur_verifier_dist() {
 				$cur_http_noproxy = $GLOBALS['meta']['http_noproxy'];
 				$GLOBALS['meta']['http_proxy'] = $http_proxy;
 				$GLOBALS['meta']['http_noproxy'] = $http_noproxy;
-				$page = recuperer_page($test_proxy, true);
+				$page = recuperer_url($test_proxy, ['transcoder' => true]);
+				$page = $page['page'] ?? '';
 				$GLOBALS['meta']['http_proxy'] = $cur_http_proxy;
 				$GLOBALS['meta']['http_noproxy'] = $cur_http_noproxy;
 				if ($page) {

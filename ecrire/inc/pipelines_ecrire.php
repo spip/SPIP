@@ -40,7 +40,6 @@ function f_jQuery_prive($texte) {
 	$jquery_plugins = pipeline('jquery_plugins',
 		array(
 			'prive/javascript/jquery.js',
-			'prive/javascript/jquery-migrate-3.2.0.js',
 			'prive/javascript/jquery.form.js',
 			'prive/javascript/jquery.autosave.js',
 			'prive/javascript/jquery.placeholder-label.js',

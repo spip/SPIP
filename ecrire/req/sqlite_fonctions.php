@@ -231,13 +231,13 @@ function _sqlite_func_left($s, $lenght) {
 
 
 // https://code.spip.net/@_sqlite_func_now
-function _sqlite_func_now() {
+function _sqlite_func_now($force_refresh = false) {
 	static $now = null;
-	if (is_null($now)) {
+	if (is_null($now) or $force_refresh) {
 		$now = date("Y-m-d H:i:s");
 	}
 
-	#spip_log("Passage avec NOW : $now",'sqlite.'._LOG_DEBUG);
+	#spip_log("Passage avec NOW : $now | ".time(),'sqlite.'._LOG_DEBUG);
 	return $now;
 }
 
@@ -305,6 +305,8 @@ function _sqlite_func_regexp_match($cherche, $quoi) {
 	if (!$quoi and !strlen($quoi)) {
 		return false;
 	}
+	// il faut enlever un niveau d'echappement pour être homogène à mysql
+	$cherche = str_replace('\\\\', '\\', $cherche);
 	$u = isset($GLOBALS['meta']['pcre_u']) ? $GLOBALS['meta']['pcre_u'] : 'u';
 	$return = preg_match('%' . $cherche . '%imsS' . $u, $quoi);
 

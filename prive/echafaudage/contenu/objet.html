@@ -6,7 +6,7 @@
 #SET{ok,' '}
 
 ][(#GET{ok}|non|et{#ENV**{exec}|=={#OBJET|objet_info{url_voir}}}|oui)
-	[(#ID_OBJET|generer_info_entite{#OBJET,[(#OBJET|id_table_objet)],'**'}|intval|=={#ID_OBJET}|et{#ID_OBJET}|sinon_interdire_acces)]
+	[(#ID_OBJET|generer_info_entite{#OBJET,[(#OBJET|id_table_objet)],'**'}|intval|=={#ID_OBJET}|et{#ID_OBJET}|et{#AUTORISER{voir,#OBJET,#ID_OBJET}}|sinon_interdire_acces)]
 	[(#INFO_LANG{#OBJET,#ID_OBJET}|changer_typo)]
 	[(#BOITE_OUVRIR{[
 

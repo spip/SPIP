@@ -52,12 +52,14 @@ function plugins_afficher_plugin_dist(
 			_T('plugin_info_non_compatible_spip'));
 		$class_li .= " disabled";
 		$checkable = false;
+
 	} elseif (isset($info['erreur'])) {
 		$class_li .= " error";
 		$erreur = http_img_pack("plugin-err-32.png", _T('plugin_info_erreur_xml'), " class='picto_err'",
 				_T('plugin_info_erreur_xml'))
 			. "<div class='erreur'>" . join('<br >', $info['erreur']) . "</div>";
 		$checkable = false;
+
 	} elseif (isset($GLOBALS['erreurs_activation_raw'][$dir_plugins . $plug_file])) {
 		$class_li .= " error";
 		$erreur = http_img_pack("plugin-err-32.png", _T('plugin_impossible_activer', array('plugin' => $nom)),
@@ -66,6 +68,11 @@ function plugins_afficher_plugin_dist(
 				$GLOBALS['erreurs_activation_raw'][$dir_plugins . $plug_file]) . "</div>";
 	} else {
 		$cfg = $actif ? plugin_bouton_config($plug_file, $info, $dir_plugins) : "";
+		if (defined('_DEV_VERSION_SPIP_COMPAT') and !plugin_version_compatible($info['compatibilite'], $GLOBALS['spip_version_branche'])){
+			//$info['slogan'] = _T('plugin_info_non_compatible_spip');
+			$erreur = http_img_pack("plugin-dis-32.png", _T('plugin_info_non_compatible_spip'), " class='picto_err picto_compat_forcee'",
+				_L('Version incompatible : compatibilité forcée'));
+		}
 	}
 
 	// numerotons les occurrences d'un meme prefix
@@ -167,17 +174,16 @@ function plugin_resume($info, $dir_plugins, $plug_file, $url_page) {
 	$icon_class = 'icon';
 	$img = '';
 	if (isset($info['logo']) and $i = trim($info['logo'])) {
-		if ($img = chemin_image("$dir/$i")) {
-			$img = http_img_pack($img, '', " width='32' height='32'", '', ['variante_svg_si_possible' => true, 'chemin_image' => false]);
+		$img = http_img_pack("$dir/$i", '', " width='32' height='32'", '', ['variante_svg_si_possible' => true, 'chemin_image' => false]);
+		if (!extraire_attribut($img, 'src')) {
+			$img = '';
 		}
 	}
 	if (!$img) {
 		$img = http_img_pack("plugin-xx.svg", '', " width='32' height='32'");
 		$icon_class .= ' no-logo';
 	}
-	else {
-#		$img = "<img src='$img' width='32' height='32' alt='' />";
-	}
+
 	$i = "<div class='$icon_class'><a href='$url' rel='info'>$img</a></div>";
 
 	return "<div class='resume'>"

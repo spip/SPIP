@@ -542,6 +542,7 @@ function _image_extensions_acceptees_en_entree() {
 			$extensions = array_map('trim', $extensions);
 			$extensions = array_filter($extensions);
 			$extensions = array_unique($extensions);
+			if (in_array("jpg", $extensions)) $extensions[] = 'jpeg';
 		}
 		$extensions[] = 'svg'; // on le supporte toujours avec des fonctions specifiques
 	}

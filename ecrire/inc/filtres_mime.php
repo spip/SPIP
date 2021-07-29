@@ -180,8 +180,10 @@ function filtre_text_html_dist($t) {
 	if (preg_match_all(',<link[^>]+type=.text/css[^>]*>,is', $h, $r, PREG_PATTERN_ORDER)) {
 		foreach ($r[0] as $l) {
 			preg_match("/href='([^']*)'/", str_replace('"', "'", $l), $m);
+			$page = recuperer_url($m[1]);
+			$page = $page['page'] ?? '';
 			$style .= "\n/* $l */\n"
-				. str_replace('<', '', recuperer_page($m[1]));
+				. str_replace('<', '', $page);
 		}
 	}
 	// Pourquoi SafeHtml transforme-t-il en texte les scripts dans Body ?

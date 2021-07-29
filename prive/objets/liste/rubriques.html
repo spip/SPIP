@@ -12,7 +12,7 @@
 	<thead>
 		<tr class='first_row'>
 			<th class='picto' scope='col'></th>
-			<th class='titre' scope='col'>[(#TRI{num titre,<:info_titre:>,ajax})]</th>
+			<th class='titre' scope='col'>[(#TRI{num titre,<:info_titre|label_nettoyer:>,ajax})]</th>
 			<th class='langue' scope='col'></th>
 			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
 			<th class='id' scope='col'>[(#TRI{id_rubrique,<:info_numero_abbreviation:>,ajax})]</th>
@@ -26,7 +26,7 @@
 			<td class='titre principale'>[(#LOGO_RUBRIQUE|image_reduire{20,26})
 				]<a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]"
 				[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
-				title="<:info_numero_abbreviation|attribut_html:> #ID_RUBRIQUE">[(#RANG). ]#TITRE</a></td>
+				title="<:info_numero_abbreviation|attribut_html:> #ID_RUBRIQUE">[<span class='rang'>(#RANG).</span> ]#TITRE</a></td>
 			<td class='langue'></td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
 			<td class='id'>[(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE}|?{

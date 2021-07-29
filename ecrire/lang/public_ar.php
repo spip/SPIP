@@ -96,6 +96,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'repondre_breve' => 'الرد على هذا الخبر',
 	'resultats_recherche' => 'نتائج البحث',
 	'retour_debut_forums' => 'عودة الى بداية المنتديات',
+	'rss_abonnement' => 'نسخ عن،ان URL التالي في مجمّع RSS:',
+	'rss_abonnement_titre' => 'الاشتراك',
+	'rss_abonnement_titre_page' => 'الاشتراك في',
+	'rss_explication' => 'يجمع خيط RSS معلومات حول تحديث موقع. ويوفر محتوى تذاكر التحديث او التعليقات او مقتطفات منها إضافة الى رابط الى المحتويات الكاملة وبعض المعلومات الإضافية. هذا الخيط يُقرأ بواسطة مجمّع RSS.',
+	'rss_explication_titre' => 'ما هو تدفق RSS؟',
 	'rubrique' => 'القسم',
 	'rubriques' => 'الأقسام',
 

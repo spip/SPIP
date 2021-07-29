@@ -24,7 +24,7 @@
 				rel="nofollow">(#GET{premiere}|>{1}|?{#GET{type}|pagination_affiche_texte_lien_page{1,0}})</a></li>[(#GET{premiere}|>{2}|oui)<li
 				class="pagination-item tbc disabled"><span class="pagination-item-label">…</span></li>]]
 
-		<BOUCLE_pages(POUR){tableau #GET{pages}}>[
+		<BOUCLE_pages(DATA){source table, #GET{pages}}>[
 		(#SET{item, #VALEUR|moins{1}|mult{#ENV{pas}} })
 		][<li class="pagination-item[(#VALEUR|=={#ENV{page_courante}}|oui)on active]">(#ENV{url}
 		|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}

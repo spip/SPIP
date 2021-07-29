@@ -504,21 +504,18 @@ function image_reduire(
  * sinon retourne le image_passe_partout usuel
  * 
  **/
-
 function image_recadre_avec_fallback (
-	$im, 
-	$width, 
-	$height='-', 
-	$position = 'focus', 
-	$background_color = 'white') {
-
-	if (function_exists("image_recadre") && lire_meta("image_process")=="gd2")
-		return image_reduire(image_recadre($im, $width.":".$height, "-", $position, $background_color), $width, $height);
+	$im,
+	$width,
+	$height = '-',
+	$position = 'focus',
+	$background_color = 'white'
+) {
+	if (function_exists('image_recadre') && ($GLOBALS['meta']['image_process'] ?? '') === 'gd2')
+		return image_reduire(image_recadre($im, $width.':'.$height, '-', $position, $background_color), $width, $height);
 	else 
 		return image_passe_partout($im, $width, $height);
-
 }
-
 
 /**
  * Réduit les images d'un certain facteur

@@ -1,7 +1,7 @@
 <paquet
 	prefix="spip"
 	categorie="outil"
-	version="4.0.0-alpha"
+	version="4.1.0-dev"
 	etat="dev"
 	compatibilite="];["
 	schema="2021021800"
@@ -152,7 +152,7 @@
 	<menu nom="articles" titre="info_articles_2" parent="menu_edition" icone="images/article-16.png" />
 	<menu nom="menu_publication" titre="icone_publication" icone="images/menu-publication.svg" action="navigation" parametres="menu=menu_publication" />
 	<menu nom="suivi_edito" titre="icone_suivi_publication" parent="menu_publication" icone="images/suivi-16.png" />
-	<menu nom="synchro" titre="icone_suivi_activite" parent="menu_publication" icone="images/rss-16.png" />
+	<menu nom="synchro" titre="icone_suivi_activite" parent="menu_publication" icone="images/synchro-16.png" />
 	<menu nom="menu_activite" titre="icone_activite" icone="images/menu-activite.svg" action="navigation" parametres="menu=menu_activite" />
 	<menu nom="visiteurs" titre="icone_afficher_visiteurs" parent="menu_activite" icone="images/auteur-6forum-16.png" action="visiteurs" />
 	<menu nom="menu_squelette" titre="icone_squelette" icone="images/menu-squelette.svg" action="navigation" parametres="menu=menu_squelette" />

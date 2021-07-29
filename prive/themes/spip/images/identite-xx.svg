@@ -1,15 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 64 64">
-	<style>
-	.st1,.st2{stroke:#8c8c8c;stroke-width:5}
-	.st2{fill:none}
-	</style>
-	<path id="Calque_2" stroke="#7f7f7f" stroke-width="5" d="M58 51H6l-2-2V13l2-2h52l2 2v36l-2 2z"/>
-	<g>
-		<circle cx="18.1" cy="25.5" r="4.9" class="st1"/>
-		<circle cx="45.9" cy="25.5" r="4.9" class="st1"/>
-	</g>
-	<g>
-		<path d="M25 36c0 3 3 6 7 6" class="st2"/>
-		<path d="M39 36c0 3-3 6-7 6" class="st2"/>
-	</g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <style>
+  .st1{stroke:#1d83d4;stroke-width:4}
+  </style>
+  <path fill="#666" d="M58 58H6c-2.2 0-4-1.8-4-3.9V10.9C2 8.8 3.8 7 6 7h52c2.2 0 4 1.8 4 3.9v43.2c0 2.1-1.8 3.9-4 3.9z" />
+  <path fill="#fff" d="M8 13h48v39H8V13z" />
+  <circle fill="#fff" class="st1" cx="18.1" cy="27.5" r="4.9"/>
+  <circle fill="#fff" class="st1" cx="45.9" cy="27.5" r="4.9"/>
+  <path class="st1" d="M25 38c0 3 3 6 7 6M39 38c0 3-3 6-7 6"/>
 </svg>

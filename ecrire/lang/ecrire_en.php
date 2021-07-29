@@ -97,6 +97,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_mot_heures' => 'H',
 
 	// E
+	'ecran_connexion_couleur_principale' => 'Main colour',
+	'ecran_connexion_image_fond' => 'Background image',
+	'ecran_connexion_image_fond_explication' => 'Use an imege (JPEG format, 1920x1080 pixels)',
+	'ecran_connexion_image_revenir_couleur_defaut' => 'Back to the default colour',
+	'ecran_connexion_titre' => 'Connection screen',
 	'ecran_securite' => '+ safety screen @version@',
 	'email' => 'email',
 	'email_2' => 'email:',
@@ -150,6 +155,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_plugin_prefix_manquant' => 'Namespace undefined for this plugin',
 	'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; missing in the definition file',
 	'erreur_plugin_version_manquant' => 'Plugin version missing',
+	'erreur_type_fichier' => 'Wrong file type',
 
 	// H
 	'htaccess_a_simuler' => 'Warning: your HTTP server configuration ignores @htaccess@ files. To ensure good security, you should change the configuration for this. Alternatively, you should make sure that the constants @constantes@ (definable in the file mes_options.php) have as values directories outside @document_root@.',

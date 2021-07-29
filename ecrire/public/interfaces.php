@@ -473,14 +473,6 @@ class Boucle {
 	 */
 	public $hierarchie = '';
 
-	/**
-	 * Indique la présence d'un critère sur le statut
-	 *
-	 * @deprecated Remplacé par $boucle->modificateur['criteres']['statut']
-	 * @var bool
-	 */
-	public $statut = false;
-
 	// champs pour la construction du corps PHP
 
 	/**
@@ -562,6 +554,16 @@ class Boucle {
 	 * @var array $debug Textes qui seront insérés dans l’entête de boucle du mode debug
 	 */
 	public $debug = [];
+
+	/** 
+	 * Index de la boucle dont le champ présent dans cette boucle est originaire,
+	 * notamment si le champ a été trouve dans une boucle parente
+	 * 
+	 * Tableau nom du champ => index de boucle
+	 * 
+	 * @var array $index_champ 
+	*/
+	public $index_champ = [];
 
 	// obsoletes, conserves provisoirement pour compatibilite
 	public $tout = false;
@@ -971,7 +973,7 @@ function declarer_interfaces() {
 		define('_TRAITEMENT_RACCOURCIS', 'propre(%s, $connect, $Pile[0])');
 	}
 	if (!defined('_TRAITEMENT_TYPO_SANS_NUMERO')) {
-		define('_TRAITEMENT_TYPO_SANS_NUMERO', 'supprimer_numero(typo(%s), "TYPO", $connect, $Pile[0])');
+		define('_TRAITEMENT_TYPO_SANS_NUMERO', 'supprimer_numero(typo(%s, "TYPO", $connect, $Pile[0]))');
 	}
 	$GLOBALS['table_des_traitements']['BIO'][] = _TRAITEMENT_RACCOURCIS;
 	$GLOBALS['table_des_traitements']['CHAPO'][] = _TRAITEMENT_RACCOURCIS;

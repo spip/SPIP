@@ -26,8 +26,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * Surcharge pour aiguiller vers la mise en squelettes des listes
  *
- * @deprecated Créer ou utiliser un squelette dans `prive/objets/liste/`
- *   pour la table en question et l'appeler avec une inclusion.
+ * @deprecated 3.1
+ * @see Créer ou utiliser un squelette dans `prive/objets/liste/`
+ *      pour la table en question et l'appeler avec une inclusion.
  *
  * @param string $vue
  *     Nom de l'objet

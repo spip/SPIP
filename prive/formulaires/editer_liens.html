@@ -11,7 +11,7 @@
 	]
 
 		<INCLURE{fond=prive/objets/liste/#ENV{_vue_liee},action='',env,ajax}>
-		[<div class="action"><input type="hidden" name="_oups" value='(#ENV**{_oups})' /><input type="submit" class="submit" name="annuler_oups" value="Ooops" /></div>]
+		[<div class="action"><input type="hidden" name="_oups" value='(#ENV**{_oups})' /><input type="submit" class="submit btn_mini btn_secondaire" name="annuler_oups" value="Ooops" /></div>]
 
 		[(#ENV{visible,0}|et{#ENV{editable}}|oui)
 			<div class="selecteur[(#ENV{recherche}|oui)filtre]">

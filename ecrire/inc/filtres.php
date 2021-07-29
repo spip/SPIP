@@ -286,27 +286,6 @@ function decrire_version_svn($dir) {
 	return null;
 }
 
-/**
- * Retrouve un numéro de révision SVN d'un répertoire
- *
- * Mention de la révision SVN courante d'un répertoire
- * /!\ Retourne un nombre négatif si on est sur .svn
- *
- * @deprecated Utiliser version_vcs_courante()
- * @param string $dir Chemin du répertoire
- * @return int
- *
- *     - 0 si aucune info trouvée
- *     - -NN (entier) si info trouvée par .svn/wc.db
- *
- **/
-function version_svn_courante($dir) {
-	if ($desc = decrire_version_svn($dir)) {
-		return -$desc['commit'];
-	}
-	return 0;
-}
-
 // La matrice est necessaire pour ne filtrer _que_ des fonctions definies dans filtres_images
 // et laisser passer les fonctions personnelles baptisees image_...
 $GLOBALS['spip_matrice']['image_graver'] = true;//'inc/filtres_images_mini.php';
@@ -1208,7 +1187,8 @@ function PtoBR($texte) {
  * @filtre
  * @link https://www.spip.net/4298
  * @link http://www.alsacreations.com/tuto/lire/1038-gerer-debordement-contenu-css.html
- * @deprecated Utiliser le style CSS `word-wrap:break-word;`
+ * @deprecated 3.1
+ * @see Utiliser le style CSS `word-wrap:break-word;`
  *
  * @param string $texte Texte
  * @return string Texte encadré du style CSS
@@ -2689,7 +2669,7 @@ function form_hidden($action) {
 	if (defined('_DEFINIR_CONTEXTE_TYPE') and _DEFINIR_CONTEXTE_TYPE) {
 		unset($contexte['type']);
 	}
-	if (defined('_DEFINIR_CONTEXTE_TYPE_PAGE') and _DEFINIR_CONTEXTE_TYPE_PAGE) {
+	if (!defined('_DEFINIR_CONTEXTE_TYPE_PAGE') or _DEFINIR_CONTEXTE_TYPE_PAGE) {
 		unset($contexte['type-page']);
 	}
 
@@ -3006,7 +2986,7 @@ function direction_css($css, $voulue = '') {
  * Le calcul n'est pas refait si le fichier cache existe déjà et que
  * la source n'a pas été modifiée depuis.
  *
- * @uses recuperer_page() si l'URL source n'est pas sur le même site
+ * @uses recuperer_url() si l'URL source n'est pas sur le même site
  * @uses urls_absolues_css()
  *
  * @param string $css
@@ -3036,7 +3016,9 @@ function url_absolue_css($css) {
 			or !lire_fichier(_DIR_RACINE . substr($css, $l), $contenu)
 		) {
 			include_spip('inc/distant');
-			if (!$contenu = recuperer_page($css)) {
+			$contenu = recuperer_url($css);
+			$contenu = $contenu['page'] ?? '';
+			if (!$contenu) {
 				return $css;
 			}
 		}
@@ -3368,6 +3350,29 @@ function charge_scripts($files, $script = true) {
 	return $flux;
 }
 
+/**
+ * Trouver la potentielle variante SVG -xx.svg d'une image -xx.png
+ * Cette fonction permet le support multi-version SPIP des plugins qui fournissent une icone PNG et sa variante SVG
+ *
+ * @param string $img_file
+ * @return string
+ */
+function http_img_variante_svg_si_possible($img_file) {
+	// on peut fournir une icone generique -xx.svg qui fera le job dans toutes les tailles, et qui est prioritaire sur le png
+	// si il y a un .svg a la bonne taille (-16.svg) a cote, on l'utilise en remplacement du -16.png
+	if (preg_match(',-(\d+)[.](png|gif|svg)$,', $img_file, $m)
+	  and $variante_svg_generique = substr($img_file, 0, -strlen($m[0])) . "-xx.svg"
+	  and file_exists($variante_svg_generique)) {
+		if ($variante_svg_size = substr($variante_svg_generique,0,-6) . $m[1] . ".svg" and file_exists($variante_svg_size)) {
+			$img_file = $variante_svg_size;
+		}
+		else {
+			$img_file = $variante_svg_generique;
+		}
+	}
+
+	return $img_file;
+}
 
 /**
  * Produit une balise img avec un champ alt d'office si vide
@@ -3396,18 +3401,7 @@ function http_img_pack($img, $alt, $atts = '', $title = '', $options = array()) 
 	}
 	else {
 		if (!isset($options['variante_svg_si_possible']) or $options['variante_svg_si_possible'] == true){
-			// on peut fournir une icone generique -xx.svg qui fera le job dans toutes les tailles, et qui est prioritaire sur le png
-			// si il y a un .svg a la bonne taille (-16.svg) a cote, on l'utilise en remplacement du -16.png
-			if (preg_match(',-(\d+)[.](png|gif|svg)$,', $img_file, $m)
-			  and $variante_svg_generique = substr($img_file, 0, -strlen($m[0])) . "-xx.svg"
-			  and file_exists($variante_svg_generique)) {
-				if ($variante_svg_size = substr($variante_svg_generique,0,-6) . $m[1] . ".svg" and file_exists($variante_svg_size)) {
-					$img_file = $variante_svg_size;
-				}
-				else {
-					$img_file = $variante_svg_generique;
-				}
-			}
+			$img_file = http_img_variante_svg_si_possible($img_file);
 		}
 	}
 	if (stripos($atts, 'width') === false) {
@@ -3685,6 +3679,9 @@ function filtre_balise_svg_dist($img, $alt = '', $class = null, $size=null) {
 
 /**
  * Affiche chaque valeur d'un tableau associatif en utilisant un modèle
+ * 
+ * @deprecated 4.0
+ * @see Utiliser `<BOUCLE_x(DATA){source table, #GET{tableau}}>`
  *
  * @example
  *     - `[(#ENV*|unserialize|foreach)]`
@@ -4403,7 +4400,8 @@ function filtre_bouton_action_horizontal_dist($lien, $texte, $fond, $fonction = 
  * @see  filtre_icone_verticale_dist()
  *
  * @filtre
- * @deprecated Utiliser le filtre `icone_verticale`
+ * @deprecated 3.1
+ * @see Utiliser le filtre `icone_verticale`
  *
  * @param string $lien
  *     URL du lien
@@ -4481,7 +4479,8 @@ function bando_images_background() {
 		if (is_array($detail->sousmenu)) {
 			foreach ($detail->sousmenu as $souspage => $sousdetail) {
 				if ($sousdetail->icone and strlen(trim($sousdetail->icone))) {
-					$res .= "\n$selecteur.bando2_$souspage {background-image:url(" . $sousdetail->icone . ");}";
+					$img = http_img_variante_svg_si_possible($sousdetail->icone);
+					$res .= "\n$selecteur.bando2_$souspage {background-image:url($img);}";
 				}
 			}
 		}
@@ -4550,9 +4549,11 @@ function bouton_action($libelle, $url, $class = '', $confirm = '', $title = '', 
  * @param string $type_objet
  * @param string $info
  * @param string $etoile
+ * @param array $params
+ *     Tableau de paramètres supplémentaires transmis aux fonctions generer_xxx
  * @return string
  */
-function generer_info_entite($id_objet, $type_objet, $info, $etoile = "") {
+function generer_info_entite($id_objet, $type_objet, $info, $etoile = '', $params = []) {
 	static $trouver_table = null;
 	static $objets;
 
@@ -4569,11 +4570,12 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile = "") {
 
 	// Si on demande l'url, on retourne direct la fonction
 	if ($info == 'url') {
-		return generer_url_entite($id_objet, $type_objet);
+		return generer_url_entite($id_objet, $type_objet, ...$params);
 	}
 
 	// Sinon on va tout chercher dans la table et on garde en memoire
-	$demande_titre = ($info == 'titre');
+	$demande_titre = ($info === 'titre');
+	$demande_introduction = ($info === 'introduction');
 
 	// On ne fait la requete que si on a pas deja l'objet ou si on demande le titre mais qu'on ne l'a pas encore
 	if (!isset($objets[$type_objet][$id_objet])
@@ -4601,15 +4603,25 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile = "") {
 			$desc['table_sql'],
 			id_table_objet($type_objet) . ' = ' . intval($id_objet)
 		);
+
+		// Toujours noter la longueur d'introduction, même si pas demandé cette fois-ci
+		$objets[$type_objet]['introduction_longueur'] = $desc['introduction_longueur'] ?? null;
+	}
+
+	// Pour les fonction generer_xxx, si on demande l'introduction,
+	// ajouter la longueur au début des params supplémentaires
+	if ($demande_introduction) {
+		$introduction_longueur = $objets[$type_objet]['introduction_longueur'];
+		array_unshift($params, $introduction_longueur);
 	}
 
 	// Si la fonction generer_TRUC_TYPE existe, on l'utilise pour formater $info_generee
 	if ($generer = charger_fonction("generer_${info}_${type_objet}", '', true)) {
-		$info_generee = $generer($id_objet, $objets[$type_objet][$id_objet]);
+		$info_generee = $generer($id_objet, $objets[$type_objet][$id_objet], ...$params);
 	} // Si la fonction generer_TRUC_entite existe, on l'utilise pour formater $info_generee
 	else {
 		if ($generer = charger_fonction("generer_${info}_entite", '', true)) {
-			$info_generee = $generer($id_objet, $type_objet, $objets[$type_objet][$id_objet]);
+			$info_generee = $generer($id_objet, $type_objet, $objets[$type_objet][$id_objet], ...$params);
 		} // Sinon on prend directement le champ SQL tel quel
 		else {
 			$info_generee = (isset($objets[$type_objet][$id_objet][$info]) ? $objets[$type_objet][$id_objet][$info] : '');
@@ -4625,6 +4637,68 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile = "") {
 	}
 
 	return $info_generee;
+}
+
+/**
+ * Fonction privée pour donner l'introduction d'un objet de manière générique.
+ *
+ * Cette fonction est mutualisée entre les balises #INTRODUCTION et #INFO_INTRODUCTION.
+ * Elle se charge de faire le tri entre descriptif, texte et chapo,
+ * et normalise les paramètres pour la longueur et la suite.
+ * Ensuite elle fait appel au filtre 'introduction' qui construit celle-ci à partir de ces données.
+ *
+ * @uses filtre_introduction_dist()
+ * @see generer_info_entite()
+ * @see balise_INTRODUCTION_dist()
+ *
+ * @param int $id_objet
+ *     Numéro de l'objet
+ * @param string $type_objet
+ *     Type d'objet
+ * @param string $desc
+ *     Ligne SQL de l'objet avec au moins descriptif, texte et chapo
+ * @param int $introduction_longueur
+ *     Longueur de l'introduction donnée dans la description de la table l'objet
+ * @param int|string $longueur_ou_suite
+ *     Longueur de l'introduction OU points de suite si on coupe
+ * @param string $suite
+ *     Points de suite si on coupe
+ * @param string $connect
+ *     Nom du connecteur à la base de données
+ * @return string
+ */
+function generer_introduction_entite($id_objet, $type_objet, $ligne_sql, $introduction_longueur = null, $longueur_ou_suite = null, $suite = null, $connect = '') {
+
+	$descriptif = $ligne_sql['descriptif'] ?? '';
+	$texte = $ligne_sql['texte'] ?? '';
+	// En absence de descriptif, on se rabat sur chapo + texte
+	if (isset($ligne_sql['chapo'])) {
+		$chapo = $ligne_sql['chapo'];
+		$texte = strlen($descriptif) ?
+			'' :
+			"$chapo \n\n $texte";
+	}
+
+	// Longueur en paramètre, sinon celle renseignée dans la description de l'objet, sinon valeur en dur
+	if (!intval($longueur_ou_suite)) {
+		$longueur = intval($introduction_longueur ?: 600);
+	} else {
+		$longueur = intval($longueur_ou_suite);
+	}
+
+	// On peut optionnellement passer la suite en 1er paramètre de la balise
+	// Ex : #INTRODUCTION{...}
+	if (
+		is_null($suite)
+		and !intval($longueur_ou_suite)
+	) {
+		$suite = $longueur_ou_suite;
+	}
+
+	$f = chercher_filtre('introduction');
+	$introduction = $f($descriptif, $texte, $longueur, $connect, $suite);
+
+	return $introduction;
 }
 
 /**
@@ -4894,8 +4968,10 @@ function insert_head_css_conditionnel($flux) {
  * Permet ensuite à Apache de le servir en statique sans repasser
  * par spip.php à chaque hit sur le fichier.
  *
- * Si le format (css ou js) est passe dans `contexte['format']`, on l'utilise
- * sinon on regarde si le fond finit par .css ou .js, sinon on utilie "html"
+ * Formats supportés : html, css, js, json, xml, svg
+ *
+ * Si le format est passé dans `contexte['format']`, on l'utilise
+ * sinon on regarde l'extension du fond, sinon on utilise "html"
  *
  * @uses urls_absolues_css()
  *
@@ -4910,8 +4986,8 @@ function produire_fond_statique($fond, $contexte = array(), $options = array(), 
 		$extension = $contexte['format'];
 		unset($contexte['format']);
 	} else {
-		$extension = "html";
-		if (preg_match(',[.](css|js|json)$,', $fond, $m)) {
+		$extension = 'html';
+		if (preg_match(',[.](css|js|json|xml|svg)$,', $fond, $m)) {
 			$extension = $m[1];
 		}
 	}
@@ -4954,8 +5030,8 @@ function produire_fond_statique($fond, $contexte = array(), $options = array(), 
 		}
 
 		$comment = '';
-		// ne pas insérer de commentaire si c'est du json
-		if ($extension != "json") {
+		// ne pas insérer de commentaire sur certains formats
+		if (!in_array($extension, ['json', 'xml', 'svg'])) {
 			$comment = "/* #PRODUIRE{fond=$fond";
 			foreach ($contexte as $k => $v) {
 				$comment .= ",$k=$v";
@@ -5265,16 +5341,22 @@ function identifiant_slug($texte, $type = '', $options = array()) {
 
 
 /**
- * Prépare un texte (issu d'une chaine de langue historique) pour un affichage en label ou titre
+ * Prépare un texte pour un affichage en label ou titre
  * 
  * Enlève un ':' à la fin d'une chaine de caractère, ainsi que les espaces qui pourraient l'accompagner,
  * Met la première lettre en majuscule (par défaut)
  *
  * Utile afficher dans un contexte de titre des chaines de langues qui contiennent des ':'
  * 
- * @exemple `<:info_maximum|uniformiser_label:>`
+ * @note
+ *    Les chaines de langues (historiques) de SPIP contiennent parfois des ':', parfois pas. 
+ *    Les fonctions `label_nettoyer` et `label_ponctuer` permettent de choisir l'une ou l'autre selon le contexte.
+ *    Il convient dans les chaines de langues de labels de préférer les écritures sans ':'.
+ * 
+ * @see label_ponctuer()
+ * @exemple `<:info_maximum|label_nettoyer:>`
  */
-function uniformiser_label(string $text, bool $ucfirst = true) : string {
+function label_nettoyer(string $text, bool $ucfirst = true) : string {
 	$label = rtrim($text, " : \t\n\r\0\x0B\xc2\xa0");
 	if ($label and $label[-1] === ';') {
 		$label = preg_replace("#(\&nbsp;)+$#", "", $label);
@@ -5284,6 +5366,21 @@ function uniformiser_label(string $text, bool $ucfirst = true) : string {
 	}
 	return $label;
 }
+
+/**
+ * Prépare un texte pour un affichage en label ou titre en ligne, systématiquement avec ' :' à la fin
+ * 
+ * Ajoute ' :' aux chaines qui n'en ont pas (ajoute le caractère adapté à la langue utilisée). 
+ * Passe la première lettre en majuscule par défaut.
+ * 
+ * @uses label_nettoyer()
+ * @exemple `<:info_maximum|label_ponctuer:>`
+ */
+function label_ponctuer(string $text, bool $ucfirst = true) : string {
+	$label = label_nettoyer($text, $ucfirst);
+	return _T('label_ponctuer', ['label' => $label]);
+}
+
 
 
 /**

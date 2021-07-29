@@ -4,7 +4,7 @@
 				id="statut"
 				onchange="update_saisie_statut_auteur(this,this.options[this.selectedIndex].value);"
 				>
-<BOUCLE_statuts(POUR){tableau #VAL{tous}|auteurs_lister_statuts{0}}{valeur!=nouveau}>
+<BOUCLE_statuts(DATA){source table, #VAL{tous}|auteurs_lister_statuts{0}}{valeur!=nouveau}>
 	<option value="#VALEUR"[(#STATUT|=={#VALEUR}|oui)selected="selected"]>[&gt;(#VALEUR|=={5poubelle}|oui)][(#VALEUR|traduire_statut_auteur)]</option>
 </BOUCLE_statuts>
 	[(#STATUT|=={nouveau})

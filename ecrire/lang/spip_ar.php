@@ -490,6 +490,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_ajout_id_rapide' => 'إضافة سريعة',
 	'label_poids_fichier' => 'الحجم',
+	'label_ponctuer' => '@label@ :',
 	'lien_afficher_icones_seuls' => 'عرض الرموز فقط',
 	'lien_afficher_texte_icones' => 'عرض الرموز والعناوين',
 	'lien_afficher_texte_seul' => 'عرض العناوين فقط',
@@ -715,6 +716,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zbug_erreur_compilation' => 'خطأ تصنيف',
 	'zbug_erreur_execution_page' => 'خطأ في التنفيذ',
 	'zbug_erreur_filtre' => 'المرشح @filtre@ غير معرّف ',
+	'zbug_erreur_filtre_nbarg_min' => 'المرشح @filtre@ : ينقص @nb@ عامل',
 	'zbug_erreur_meme_parent' => 'لا ينطبق معيار {meme_parent} إلا على حلقتي (FORUMS) أو (RUBRIQUES)',
 	'zbug_erreur_squelette' => 'خطأ في الصفحة النموذجية',
 	'zbug_hors_compilation' => 'خارج التصنيف',

@@ -49,7 +49,7 @@ function produire_image_math($tex) {
 		if ($server) {
 			spip_log($url = $server . '?' . rawurlencode($tex));
 			include_spip('inc/distant');
-			recuperer_page($url, $fichier);
+			recuperer_url($url, ['file' => $fichier]);
 		}
 	}
 

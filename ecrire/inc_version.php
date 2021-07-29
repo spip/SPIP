@@ -432,16 +432,16 @@ $liste_des_authentifications = array(
 // pour specifier les versions de SPIP necessaires
 // il faut s'en tenir a un nombre de decimales fixe
 // ex : 2.0.0, 2.0.0-dev, 2.0.0-beta, 2.0.0-beta2
-$spip_version_branche = "4.0.0-alpha";
-define('_SPIP_VERSION_ID', 40000);
-define('_SPIP_EXTRA_VERSION', '-alpha');
+$spip_version_branche = "4.1.0-dev";
+define('_SPIP_VERSION_ID', 41000);
+define('_SPIP_EXTRA_VERSION', '-dev');
 
 // cette version dev accepte tous les plugins compatible avec la version ci-dessous
 // a supprimer en phase beta/rc/release
-#define('_DEV_VERSION_SPIP_COMPAT',"3.2.99");
+define('_DEV_VERSION_SPIP_COMPAT',"4.0.99");
 // version des signatures de fonctions PHP
 // (= date de leur derniere modif cassant la compatibilite et/ou necessitant un recalcul des squelettes)
-$spip_version_code = 20210430;
+$spip_version_code = 20210708;
 // version de la base SQL (= Date + numero incremental a 2 chiffres YYYYMMDDXX)
 $spip_version_base = 2021021800;
 

@@ -1,4 +1,4 @@
-<BOUCLE_langues(POUR){tableau #ENV*{name}|liste_options_langues}>
+<BOUCLE_langues(DATA){source table, #ENV*{name}|liste_options_langues}>
 	[(#VALEUR|=={#ENV*{herit}}|oui)
 		<option class='maj-debut on' value='herit'[(#VALEUR|=={#ENV*{default}}|oui)selected="selected"] dir="[(#VALEUR|lang_dir{ltr,rtl})]">&#91;#VALEUR&#93; [(#VALEUR|traduire_nom_langue)] (<:info_multi_herit:>)</option>
 	][(#VALEUR|=={#ENV*{herit}}|non)

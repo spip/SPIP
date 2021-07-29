@@ -127,6 +127,9 @@ function index_pile(
 		$defaut = '@$Pile[0][\'' . strtolower($nom_champ) . '\']';
 	}
 
+	$idb_origine = $idb;
+	$nom_champ_origine = $nom_champ;
+
 	$i = 0;
 	if (strlen($explicite)) {
 		// Recherche d'un champ dans un etage superieur
@@ -152,6 +155,8 @@ function index_pile(
 			if ($select and !in_array($t, $boucles[$idb]->select)) {
 				$boucles[$idb]->select[] = $t;
 			}
+			// renseigner la boucle source de ce champ pour les traitements
+			$boucles[$idb_origine]->index_champ[$nom_champ_origine] = $idb;
 			$champ = '$Pile[$SP' . ($i ? "-$i" : "") . '][\'' . $c . '\']';
 			if (!$joker) {
 				return index_compose($conditionnel, $champ);
@@ -727,6 +732,11 @@ function champs_traitements($p) {
 	if (is_array($ps)) {
 		// Recuperer le type de boucle (articles, DATA) et la table SQL sur laquelle elle porte
 		$idb = index_boucle($p);
+		// si le champ a ete trouve dans une boucle parente sa source est renseignee ici
+		if (!empty($p->boucles[$idb]->index_champ[$p->nom_champ])) {
+			$idb = $p->boucles[$idb]->index_champ[$p->nom_champ];
+		}
+
 		// mais on peut aussi etre hors boucle. Se mefier.
 		$type_requete = isset($p->boucles[$idb]->type_requete) ? $p->boucles[$idb]->type_requete : false;
 		$table_sql = isset($p->boucles[$idb]->show['table_sql']) ? $p->boucles[$idb]->show['table_sql'] : false;

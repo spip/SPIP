@@ -1882,12 +1882,18 @@ function spip_sqlite_updateq($table, $champs, $where = '', $desc = array(), $ser
 	}
 	$fields = $desc['field'];
 
-	// recherche de champs 'timestamp' pour mise a jour auto de ceux-ci
-	$champs = _sqlite_ajouter_champs_timestamp($table, $champs, $desc, $serveur);
-
 	$set = array();
 	foreach ($champs as $champ => $val) {
-		$set[] = $champ . '=' . _sqlite_calculer_cite($val, isset($fields[$champ]) ? $fields[$champ] : '');
+		$set[$champ] = $champ . '=' . _sqlite_calculer_cite($val, isset($fields[$champ]) ? $fields[$champ] : '');
+	}
+
+	// recherche de champs 'timestamp' pour mise a jour auto de ceux-ci
+	// attention ils sont deja quotes
+	$maj = _sqlite_ajouter_champs_timestamp($table, [], $desc, $serveur);
+	foreach ($maj as $champ => $val) {
+		if (!isset($set[$champ])) {
+			$set[$champ] = $champ . '=' . $val;
+		}
 	}
 
 	return spip_sqlite_query(
@@ -2618,18 +2624,25 @@ function _sqlite_ajouter_champs_timestamp($table, $couples, $desc = '', $serveur
 		// cependant, il faudra peut etre etendre
 		// avec la gestion de DEFAULT et ON UPDATE
 		// mais ceux-ci ne sont pas utilises dans le core
-		$tables[$table] = array();
+		$tables[$table] = ['valeur' => [], 'cite' => [], 'desc' => []];
 
-		$now = _sqlite_func_now();
+		$now = _sqlite_func_now(true);
 		foreach ($desc['field'] as $k => $v) {
 			if (strpos(strtolower(ltrim($v)), 'timestamp') === 0) {
-				$tables[$table][$k] = _sqlite_calculer_cite($now, $v);
+				$tables[$table]['desc'][$k] = $v;
+				$tables[$table]['valeur'][$k] = _sqlite_calculer_cite($now, $tables[$table]['desc'][$k]);
 			}
+		}
+	}
+	else {
+		$now = _sqlite_func_now(true);
+		foreach (array_keys($tables[$table]['desc']) as $k) {
+			$tables[$table]['valeur'][$k] = _sqlite_calculer_cite($now, $tables[$table]['desc'][$k]);
 		}
 	}
 
 	// ajout des champs type 'timestamp' absents
-	return array_merge($tables[$table], $couples);
+	return array_merge($tables[$table]['valeur'], $couples);
 }
 
 
@@ -3006,7 +3019,8 @@ class sqlite_traducteur {
 		// il dit que x ne doit pas être un integer dans le order by !
 		// on remplace du coup x par vide() dans ce cas uniquement
 		//
-		// rien que pour public/vertebrer.php ?
+		// apparait dans public/vertebrer.php et dans le plugin menu aussi qui genere aussi ce genre de requete via un {par num #GET{tri_num}}
+		// mais est-ce encore un soucis pour sqlite en 2021 ? (ie commenter le preg_replace marche très bien en sqlite 3.28)
 		if ((strpos($this->query, "0 AS") !== false)) {
 			// on ne remplace que dans ORDER BY ou GROUP BY
 			if (preg_match('/\s(ORDER|GROUP) BY\s/i', $this->query, $regs)) {
@@ -3017,7 +3031,9 @@ class sqlite_traducteur {
 				// on remplace dans $suite le nom par vide()
 				preg_match_all('/\b0 AS\s*([^\s,]+)/', $this->query, $matches, PREG_PATTERN_ORDER);
 				foreach ($matches[1] as $m) {
-					$suite = str_replace($m, 'VIDE()', $suite);
+					if (strpos($suite, $m) !== false) {
+						$suite = preg_replace(",\b$m\b,", 'VIDE()', $suite);
+					}
 				}
 				$this->query .= $suite;
 			}

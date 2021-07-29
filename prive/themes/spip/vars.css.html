@@ -26,7 +26,7 @@
 
 #SET{couleurs,#VAL{couleurs}|charger_fonction{inc}}
 #SET{couleurs,#GET{couleurs}|call_user_func}
-<BOUCLE_themes(DATA){source tableau, #GET{couleurs}}>
+<BOUCLE_themes(DATA){source table, #GET{couleurs}}>
 [data-spip-theme-colors="#CLE"],
 .spip-theme-colors-#CLE {
 	[(#VALEUR{couleur_theme}|spip_generer_variables_css_couleurs_theme)]

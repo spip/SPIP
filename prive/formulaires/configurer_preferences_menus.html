@@ -21,12 +21,12 @@
 			<fieldset>
 				<legend><:titre_preference_menus_favoris:></legend>
 				<div class="editer-groupe deux_colonnes">
-					<BOUCLE_menu(DATA){source tableau, #GET{boutons}}{cle LIKE 'menu_%'}{cle !IN #LISTE{menu_accueil}}>
+					<BOUCLE_menu(DATA){source table, #GET{boutons}}{cle LIKE 'menu_%'}{cle !IN #LISTE{menu_accueil}}>
 					<B_menusous>
 						<div class="editer menus_favoris pleine_largeur">
 							<label>[(#LIBELLE|_T)]</label>
 							[<span class='erreur_message'>(#ENV{erreurs/menus_favoris})</span>]
-							<BOUCLE_menusous(DATA){source tableau, #SOUSMENU}>
+							<BOUCLE_menusous(DATA){source table, #SOUSMENU}>
 							<div class="item choix">
 								<input class='text positionner' type="text" name="menus_favoris[#CLE]" value="#ENV{menus_favoris/#CLE}" id="menu_fav_#CLE" size="1">
 								<label for="menu_fav_#CLE">[(#LIBELLE|_T)]</label>

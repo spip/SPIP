@@ -63,7 +63,7 @@ function formulaires_rediriger_article_traiter_dist($id_article, $retour = '') {
 	}
 
 	include_spip('action/editer_article');
-	articles_set($id_article, array('virtuel' => $url));
+	article_modifier($id_article, array('virtuel' => $url));
 
 	$js = _AJAX ? '<script type="text/javascript">if (window.ajaxReload) ajaxReload("wysiwyg");</script>' : '';
 

@@ -235,21 +235,6 @@ function auteur_associer($id_auteur, $objets, $qualif = null) {
 	return objet_associer(array('auteur' => $id_auteur), $objets, $qualif);
 }
 
-
-/**
- * Ancien nommage pour compatibilité
- *
- * @deprecated Utiliser auteur_associer()
- * @see auteur_associer()
- *
- * @param int $id_auteur
- * @param array $c
- * @return string
- */
-function auteur_referent($id_auteur, $c) {
-	return auteur_associer($id_auteur, $c);
-}
-
 /**
  * Dissocier un auteur des objets listés
  *
@@ -438,65 +423,4 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 
 	return implode(' ', array_map('_T', $erreurs));
 
-}
-
-
-// Fonctions Dépréciées
-// --------------------
-
-
-/**
- * Insertion d'un auteur
- *
- * @deprecated Utiliser auteur_inserer()
- * @see auteur_inserer()
- *
- * @param string|null $source
- * @return int
- */
-function insert_auteur($source = null) {
-	return auteur_inserer($source);
-}
-
-/**
- * Modification d'un auteur
- *
- * @deprecated Utiliser auteur_modifier()
- * @see auteur_modifier()
- *
- * @param int $id_auteur
- * @param array|null $set
- * @return string|null
- */
-function auteurs_set($id_auteur, $set = null) {
-	return auteur_modifier($id_auteur, $set);
-}
-
-/**
- * Modifier le statut d'un auteur, ou son login/pass
- *
- * @deprecated Utiliser auteur_instituer()
- * @see auteur_instituer()
- *
- * @param int $id_auteur
- * @param array $c
- * @param bool $force_webmestre
- * @return bool|string
- */
-function instituer_auteur($id_auteur, $c, $force_webmestre = false) {
-	return auteur_instituer($id_auteur, $c, $force_webmestre);
-}
-
-/**
- * Créer une révision d'un auteur
- *
- * @deprecated Utiliser auteur_modifier()
- * @see auteur_modifier()
- *
- * @param int $id_auteur
- * @param array $c
- * @return string|null
- */
-function revision_auteur($id_auteur, $c = false) {
-	return auteur_modifier($id_auteur, $c);
 }

@@ -936,7 +936,7 @@ function _L($text, $args = array(), $options = array()) {
 	}
 
 	if (($GLOBALS['test_i18n'] or (_request('var_mode') == 'traduction')) and is_null($options['class'])) {
-		return "<span class=debug-traduction-erreur>$text</span>";
+		return "<span class='debug-traduction-erreur'>$text</span>";
 	} else {
 		return $text;
 	}
@@ -1040,7 +1040,6 @@ function spip_touch($fichier, $duree = 0, $touch = true) {
  * Action qui déclenche une tache de fond
  *
  * @see  queue_affichage_cron()
- * @see  action_super_cron_dist()
  * @uses cron()
  **/
 function action_cron() {
@@ -3400,11 +3399,10 @@ function trouver_fond($nom, $dir = '', $pathinfo = false) {
  *
  * Dans ce cas, on retourne la fonction d'exécution correspondante à utiliser
  * (du répertoire `ecrire/exec`). Deux cas particuliers et prioritaires :
- * `fond` ou `fond_monobloc` sont retournés si des squelettes existent.
+ * `fond` est retourné si des squelettes existent.
  *
  * - `fond` : pour des squelettes de `prive/squelettes/contenu`
- *          ou pour des objets éditoriaux dont les suqelettes seront échaffaudés
- * - `fond_monobloc` (compatibilité avec SPIP 2.1) : pour des squelettes de `prive/exec`
+ *          ou pour des objets éditoriaux dont les squelettes seront échaffaudés
  *
  * @param string $nom
  *     Nom de la page
@@ -3419,9 +3417,6 @@ function tester_url_ecrire($nom) {
 	// tester si c'est une page en squelette
 	if (trouver_fond($nom, 'prive/squelettes/contenu/')) {
 		return $exec[$nom] = 'fond';
-	} // compat skels orthogonaux version precedente
-	elseif (trouver_fond($nom, 'prive/exec/')) {
-		return $exec[$nom] = 'fond_monobloc';
 	} // echafaudage d'un fond !
 	elseif (include_spip('public/styliser_par_z') and z_echafaudable($nom)) {
 		return $exec[$nom] = 'fond';
@@ -3431,26 +3426,6 @@ function tester_url_ecrire($nom) {
 	// et des define intrusifs potentiels
 	return $exec[$nom] = ((find_in_path("{$nom}.php", 'exec/') or charger_fonction($nom, 'exec', true)) ? $nom : '');
 }
-
-
-/**
- * Teste la présence d’une extension PHP
- *
- * @deprected Utiliser directement la fonction native `extension_loaded($module)`
- * @example
- *     ```
- *     $ok = charger_php_extension('sqlite');
- *     ```
- * @param string $module Nom du module à charger
- * @return bool true si le module est chargé
- **/
-function charger_php_extension($module) {
-	if (extension_loaded($module)) {
-		return true;
-	}
-	return false;
-}
-
 
 /**
  * Indique si le code HTML5 est permis sur le site public
@@ -3518,34 +3493,6 @@ function spip_getimagesize($fichier) {
 	}
 	return $imagesize;
 }
-
-
-
-/*
- * Bloc de compatibilite : quasiment tous les plugins utilisent ces fonctions
- * desormais depreciees ; plutot que d'obliger tout le monde a charger
- * vieilles_defs, on va assumer l'histoire de ces 3 fonctions ubiquitaires
- */
-
-/**
- * lire_meta : fonction dépréciée
- *
- * @deprecated Utiliser `$GLOBALS['meta'][$nom]` ou `lire_config('nom')`
- * @see lire_config()
- * @param string $nom Clé de meta à lire
- * @return mixed Valeur de la meta.
- **/
-function lire_meta($nom) {
-	return isset($GLOBALS['meta'][$nom]) ? $GLOBALS['meta'][$nom] : null;
-}
-
-
-/**
- * ecrire_metas : fonction dépréciée
- *
- * @deprecated
- **/
-function ecrire_metas() { }
 
 /**
  * Poser une alerte qui sera affiche aux auteurs de bon statut ('' = tous)

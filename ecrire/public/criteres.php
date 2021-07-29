@@ -890,9 +890,13 @@ function calculer_critere_par_expression_num($idb, &$boucles, $crit, $tri, $cham
 	if ($suite !== "''") {
 		$texte = "\" . ((\$x = $suite) ? ('$texte' . \$x) : '0')" . " . \"";
 	}
-	$as = 'num' . ($boucle->order ? count($boucle->order) : "");
-	$boucle->select[] = $texte . " AS $as";
-	$order = "'$as'";
+	$asnum = 'num' . ($boucle->order ? count($boucle->order) : "");
+	$boucle->select[] = $texte . " AS $asnum";
+
+	$orderassinum = calculer_critere_par_expression_sinum($idb, $boucles, $crit, $tri, $champ);
+	$orderassinum = trim($orderassinum, "'");
+
+	$order = "'$orderassinum, $asnum'";
 	return $order;
 }
 
@@ -924,8 +928,23 @@ function calculer_critere_par_expression_sinum($idb, &$boucles, $crit, $tri, $ch
 	if ($suite !== "''") {
 		$texte = "\" . ((\$x = $suite) ? ('$texte' . \$x) : '0')" . " . \"";
 	}
-	$as = 'sinum' . ($boucle->order ? count($boucle->order) : "");
-	$boucle->select[] = 'CASE (' . $texte . ') WHEN 0 THEN 1 ELSE 0 END AS ' . $as;
+
+	$as = false;
+	$select = "CASE ( $texte ) WHEN 0 THEN 1 ELSE 0 END AS ";
+	foreach ($boucle->select as $s) {
+		if (strpos($s, $select) === 0) {
+			$as = trim(substr($s, strlen($select)));
+			if (!preg_match(",\W,", $as)) {
+				break;
+			}
+			$as = false;
+		}
+	}
+
+	if (!$as) {
+		$as = 'sinum' . ($boucle->order ? count($boucle->order) : "");
+		$boucle->select[] = $select . $as;
+	}
 	$order = "'$as'";
 	return $order;
 }
@@ -1029,7 +1048,7 @@ function calculer_critere_par_champ($idb, &$boucles, $crit,  $par, $raw = false)
  * Retourne un champ de tri en créant une jointure
  * si la table n'est pas présente dans le from de la boucle.
  *
- * @deprecated
+ * @deprecated 3.2
  * @param string $table Table du champ désiré
  * @param string $champ Champ désiré
  * @param Boucle $boucle Boucle en cours de compilation
@@ -1641,7 +1660,7 @@ function critere_where_dist($idb, &$boucles, $crit) {
  *      <BOUCLE_liste_articles(ARTICLES){id_article?}{id_rubrique?}{id_secteur?}{id_trad?}{id_mot?}{id_document?} ... {tout}> ...
  *     ```
  *
- * @uses lister_champs_selection_conditionnelle()
+ * @uses lister_champs_id_conditionnel()
  * @param string $idb Identifiant de la boucle
  * @param array $boucles AST du squelette
  * @param Critere $crit Paramètres du critère dans cette boucle
@@ -1685,7 +1704,7 @@ function critere_id__dist($idb, &$boucles, $crit) {
  * -- soit parce que sa clé primaire de la table demandée est un champ dans la table principale
  * -- soit parce qu’une table de liaison existe, d’un côté ou de l’autre
  *
- * @pipeline_appel lister_champs_selection_conditionnelle
+ * @pipeline_appel exclure_id_conditionnel
  * @param string $table Nom de la table SQL
  * @param array|null $desc Description de la table SQL, si connu
  * @param string $serveur Connecteur sql a utiliser
@@ -1848,7 +1867,7 @@ function critere_tri_dist($idb, &$boucles, $crit) {
 	};
 	";
 	$boucle->select[] = "\".tri_champ_select(\$tri).\"";
-	$boucle->order[] = "tri_champ_order(\$tri,\$command['from']).\$senstri";
+	$boucle->order[] = "tri_champ_order(\$tri,\$command['from'],\$senstri)";
 }
 
 # Criteres de comparaison
@@ -2128,15 +2147,6 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 		if ($col_alias != $col_vraie) {
 			$boucles[$idb]->modificateur['criteres'][$col_alias] = true;
 		}
-	}
-
-	// ajout pour le cas special d'une condition sur le champ statut:
-	// il faut alors interdire a la fonction de boucle
-	// de mettre ses propres criteres de statut
-	// https://www.spip.net/@statut (a documenter)
-	// garde pour compatibilite avec code des plugins anterieurs, mais redondant avec la ligne precedente
-	if ($col == 'statut') {
-		$boucles[$idb]->statut = true;
 	}
 
 	// inserer le nom de la table SQL devant le nom du champ
@@ -2743,26 +2753,6 @@ function critere_DATA_source_dist($idb, &$boucles, $crit) {
 	$command[\'source\'] = array(' . join(', ', $args) . ");\n";
 }
 
-
-/**
- * Compile le critère {datasource} d'une boucle DATA
- *
- * Permet de déclarer le mode d'obtention des données dans une boucle DATA
- *
- * @deprecated Utiliser directement le critère {source}
- *
- * @param string $idb Identifiant de la boucle
- * @param array $boucles AST du squelette
- * @param Critere $crit Paramètres du critère dans cette boucle
- */
-function critere_DATA_datasource_dist($idb, &$boucles, $crit) {
-	$boucle = &$boucles[$idb];
-	$boucle->hash .= '
-	$command[\'source\'] = array(' . calculer_liste($crit->param[0], $idb, $boucles, $boucles[$idb]->id_parent) . ');
-	$command[\'sourcemode\'] = ' . calculer_liste($crit->param[1], $idb, $boucles, $boucles[$idb]->id_parent) . ';';
-}
-
-
 /**
  * Compile le critère {datacache} d'une boucle DATA
  *
@@ -2924,7 +2914,8 @@ function critere_si_dist($idb, &$boucles, $crit) {
  * {tableau #XX} pour compatibilite ascendante boucle POUR
  * ... préférer la notation (DATA){source tableau,#XX}
  *
- * @deprecated Utiliser une boucle (DATA){source tableau,#XX}
+ * @deprecated 4.0
+ * @see Utiliser une boucle (DATA){source tableau,#XX}
  *
  * @param string $idb Identifiant de la boucle
  * @param array $boucles AST du squelette

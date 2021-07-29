@@ -18,14 +18,23 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function trace_query_start() {
 	static $trace = '?';
 	if ($trace === '?' or defined('_DEBUG_TRACE_QUERIES')) {
-		// gare au bouclage sur calcul de droits au premier appel
-		// A fortiori quand on demande une trace
 		if (defined('_DEBUG_TRACE_QUERIES') and _DEBUG_TRACE_QUERIES) {
 			$trace = true;
 		}
 		else {
-			include_spip('inc/autoriser');
-			$trace = (isset($_GET['var_profile']) and autoriser('debug'));
+			if (empty($GLOBALS['visiteur_session'])) {
+				// si un anonyme fait un var_profile on est oblige de remplir le tableau des temps en attendant de savoir
+				// car ici on ne sait pas si c'est un hit anonyme
+				// ou une requete SQL faite avant chargement de la session
+				$trace = (!empty($_GET['var_profile']) ? '?' : false);
+			}
+			else {
+				include_spip('inc/autoriser');
+				// gare au bouclage sur calcul de droits au premier appel
+				// A fortiori quand on demande une trace
+				$trace = false; // on ne trace pas la requete provoquee par autoriser('debug')
+				$trace = (!empty($_GET['var_profile']) and autoriser('debug'));
+			}
 		}
 	}
 
@@ -36,7 +45,19 @@ function trace_query_start() {
 function trace_query_end($query, $start, $result, $erreur, $serveur = '') {
 	static $trace = '?';
 	if ($trace === '?') {
-		$trace = isset($_GET['var_profile']) and (autoriser('debug'));
+		if (empty($GLOBALS['visiteur_session'])) {
+			// si un anonyme fait un var_profile on est oblige de remplir le tableau des temps en attendant de savoir
+			// car ici on ne sait pas si c'est un hit anonyme
+			// ou une requete SQL faite avant chargement de la session
+			$trace = (!empty($_GET['var_profile']) ? '?' : false);
+		}
+		else {
+			include_spip('inc/autoriser');
+			// gare au bouclage sur calcul de droits au premier appel
+			// A fortiori quand on demande une trace
+			$trace = false; // on ne trace pas la requete provoquee par autoriser('debug')
+			$trace = (!empty($_GET['var_profile']) and autoriser('debug'));
+		}
 	}
 	if ($start) {
 		$end = microtime();

@@ -51,7 +51,7 @@ function parametres_css_prive() {
 
 	$c = isset($GLOBALS['visiteur_session']['prefs']['couleur'])
 		? $GLOBALS['visiteur_session']['prefs']['couleur']
-		: 9;
+		: 2;
 
 	$couleurs = charger_fonction('couleurs', 'inc');
 	parse_str($couleurs($c), $c);

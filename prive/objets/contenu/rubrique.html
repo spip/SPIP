@@ -1,7 +1,7 @@
 <BOUCLE_afficher_contenu(RUBRIQUES){id_rubrique=#ENV{id}}{statut?}>
 [(#LANG|changer_typo)]
 <div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
-<div class='label'><:info_titre:></div>
+<div class='label'><:info_titre|label_nettoyer:></div>
 <div dir='#LANG_DIR' class='#EDIT{titre} titre'>#TITRE</div>
 </div>
 <div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">

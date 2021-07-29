@@ -90,19 +90,18 @@ function plugins_get_infos_dist($plug = false, $reload = false, $dir = _DIR_PLUG
 
 
 function plugins_get_infos_un($plug, $reload, $dir, &$cache) {
-	if (!is_readable($file = "$dir$plug/" . ($desc = "paquet") . ".xml")) {
-		if (!is_readable($file = "$dir$plug/" . ($desc = "plugin") . ".xml")) {
-			return false;
-		}
+	if (!is_readable($file = "$dir$plug/paquet.xml")) {
+		return false;
 	}
-
-	if (($time = intval(@filemtime($file))) < 0) {
+	$time = intval(@filemtime($file));
+	if ($time < 0) {
 		return false;
 	}
 	$md5 = md5_file($file);
 
 	$pcache = isset($cache[$dir][$plug])
-		? $cache[$dir][$plug] : array('filemtime' => 0, 'md5_file' => '');
+		? $cache[$dir][$plug] 
+		: array('filemtime' => 0, 'md5_file' => '');
 
 	// si le cache est valide
 	if ((intval($reload) <= 0)
@@ -118,7 +117,7 @@ function plugins_get_infos_un($plug, $reload, $dir, &$cache) {
 		return false;
 	}
 
-	$f = charger_fonction('infos_' . $desc, 'plugins');
+	$f = charger_fonction('infos_paquet', 'plugins');
 	$ret = $f($texte, $plug, $dir);
 	$ret['filemtime'] = $time;
 	$ret['md5_file'] = $md5;

@@ -428,16 +428,21 @@ function tri_protege_champ($t) {
  * @param array $from
  * @return string
  */
-function tri_champ_order($t, $from = null) {
+function tri_champ_order($t, $from = null, $senstri='') {
 	if (strncmp($t, 'multi ', 6) == 0) {
 		return "multi";
 	}
 
 	$champ = $t;
 
-	if (strncmp($t, 'num ', 4) == 0) {
-		$champ = substr($t, 4);
+	$prefixe = '';
+	foreach (['num ', 'sinum '] as $p) {
+		if (strpos($t, $p) === 0) {
+			$champ = substr($t, strlen($p));
+			$prefixe = $p;
+		}
 	}
+
 	// enlever les autres espaces non evacues par tri_protege_champ
 	$champ = preg_replace(',\s,', '', $champ);
 
@@ -452,10 +457,13 @@ function tri_champ_order($t, $from = null) {
 			}
 		}
 	}
-	if (strncmp($t, 'num ', 4) == 0) {
-		return "0+$champ";
-	} else {
-		return $champ;
+	switch ($prefixe) {
+		case 'num ':
+			return "CASE( 0+$champ ) WHEN 0 THEN 1 ELSE 0 END{$senstri}, 0+$champ{$senstri}";
+		case 'sinum ':
+			return "CASE( 0+$champ ) WHEN 0 THEN 1 ELSE 0 END{$senstri}";
+		default:
+			return $champ . $senstri;
 	}
 }
 

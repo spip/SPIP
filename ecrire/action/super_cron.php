@@ -29,19 +29,17 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Exemple de tache cron Unix pour un appel toutes les minutes :
  * `* * * * * curl  http://www.mondomaine.tld/spip.php?action=super_cron`
  *
- * @deprecated
+ * @deprecated 4.0
  * utiliser directement curl  http://www.mondomaine.tld/spip.php?action=cron
  * qui ferme la connection immediatement et est plus robuste
  * (ici le curl peut ne pas marcher si la configuration reseau du serveur le bloque)
  *
  * @see queue_affichage_cron() Dont une partie du code est repris ici.
  * @see action_cron() URL appelée en asynchrone pour excécuter le cron
- * @use queue_lancer_url_http_async()
+ * @uses queue_lancer_url_http_async()
  */
 function action_super_cron_dist() {
-
 	$url_cron = generer_url_action('cron');
 	include_spip('inc/queue');
 	queue_lancer_url_http_async($url_cron);
-
 }

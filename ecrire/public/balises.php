@@ -349,12 +349,11 @@ function balise_DATE_NOUVEAUTES_dist($p) {
 
 /**
  * Compile la balise `#DOSSIER_SQUELETTE` retournant le chemin vers le
- * répertoire de squelettes actuellement utilisé
+ * répertoire du fichier squelette dans lequel elle est appelee
+ * (comme __DIR__ en php)
  *
  * @balise
- * @deprecated Utiliser `#CHEMIN`
  * @link https://www.spip.net/4627
- * @see balise_CHEMIN_dist()
  *
  * @param Champ $p
  *     Pile au niveau de la balise.
@@ -782,12 +781,14 @@ function calculer_balise_expose($p, $on, $off) {
  * @see filtre_introduction_dist()
  * @example
  *     ```
- *     #INTRODUCTION
- *     #INTRODUCTION{300}
+ *     #INTRODUCTION : coupe au nombre par défaut, suite par défaut
+ *     #INTRODUCTION{300} : coupe à 300, suite par défaut
+ *     #INTRODUCTION{300, ...} : coupe à 300, suite '...'
+ *     #INTRODUCTION{...} : coupe au nombre par défaut, suite '...'
  *     ```
  *
  * @balise
- * @link https://www.spip.net/@introduction
+ * @link http://www.spip.net/@introduction
  *
  * @param Champ $p
  *     Pile au niveau de la balise
@@ -796,43 +797,42 @@ function calculer_balise_expose($p, $on, $off) {
  **/
 function balise_INTRODUCTION_dist($p) {
 
-	$type = $p->type_requete;
+	$type_objet = $p->type_requete;
+	$cle_objet = id_table_objet($type_objet);
+	$_id_objet = champ_sql($cle_objet, $p);
 
-	$_texte = champ_sql('texte', $p);
+	// Récupérer les valeurs sql nécessaires : descriptif, texte et chapo
+	// ainsi que le longueur d'introduction donnée dans la description de l'objet.
+	$_introduction_longueur = 'null';
+	$_ligne = 'array(';
 	$trouver_table = charger_fonction('trouver_table', 'base');
-	$desc = $trouver_table(table_objet_sql($type));
-	$_descriptif = "''";
-	if ($desc and isset($desc['field']['descriptif'])) {
-		// notamment articles et rubriques mais aussi tout nouvel objet concerne
-		$_descriptif = champ_sql('descriptif', $p);
+	if ($desc = $trouver_table(table_objet_sql($type_objet))) {
+		if (isset($desc['field']['descriptif'])) {
+			$_ligne .= "'descriptif' => " . champ_sql('descriptif', $p) . ',';
+		}
+		if (isset($desc['field']['texte'])) {
+			$_ligne .= "'texte' => " . champ_sql('texte', $p) . ',';
+		}
+		if (isset($desc['field']['chapo'])) {
+			$_ligne .= "'chapo' => " . champ_sql('chapo', $p) . ',';
+		}
+		if (isset($desc['introduction_longueur'])) {
+			$_introduction_longueur = "'" . $desc['introduction_longueur'] . "'";
+		}
 	}
+	$_ligne .= ')';
 
-	// notamment les articles mais aussi tout nouvel objet concerne
-	if ($desc and isset($desc['field']['chapo'])) {
-		$_chapo = champ_sql('chapo', $p);
-		$_texte = "(strlen($_descriptif))
-		? ''
-		: $_chapo . \"\\n\\n\" . $_texte";
+	// Récupérer la longueur et la suite passés en paramètres
+	$_longueur_ou_suite = 'null';
+	if (($v1 = interprete_argument_balise(1, $p)) !== null) {
+		$_longueur_ou_suite = $v1;
 	}
-
-	// longueur en parametre, ou valeur par defaut
-	$longueur_defaut = objet_info($type, 'introduction_longueur');
-	if (!$longueur_defaut) {
-		$longueur_defaut = 600;
-	}
-
 	$_suite = 'null';
-	$_longueur = $longueur_defaut;
-	if (($v = interprete_argument_balise(1, $p)) !== null) {
-		$_longueur = 'is_numeric(' . $v . ')?intval(' . $v . '):' . $longueur_defaut;
-		$_suite = '!is_numeric(' . $v . ')?' . $v . ':null';
-	}
 	if (($v2 = interprete_argument_balise(2, $p)) !== null) {
 		$_suite = $v2;
 	}
 
-	$f = chercher_filtre('introduction');
-	$p->code = "$f($_descriptif, $_texte, $_longueur, \$connect, $_suite)";
+	$p->code = "generer_introduction_entite($_id_objet, '$type_objet', $_ligne, $_introduction_longueur, $_longueur_ou_suite, $_suite, \$connect)";
 
 	#$p->interdire_scripts = true;
 	$p->etoile = '*'; // propre est deja fait dans le calcul de l'intro
@@ -1641,23 +1641,6 @@ function balise_VAL_dist($p) {
 
 	return $p;
 }
-
-/**
- * Compile la balise `#NOOP`, alias (déprécié) de `#VAL`
- *
- * Alias pour regler #948. Ne plus utiliser.
- *
- * @balise
- * @see balise_VAL_dist()
- * @deprecated Utiliser #VAL
- *
- * @param Champ $p
- *     Pile au niveau de la balise
- * @return Champ
- *     Pile complétée par le code à générer
- **/
-function balise_NOOP_dist($p) { return balise_VAL_dist($p); }
-
 
 /**
  * Compile la balise `#REM` servant à commenter du texte

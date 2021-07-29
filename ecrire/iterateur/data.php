@@ -314,7 +314,8 @@ class IterateurDATA implements Iterator {
 					if (is_string($src)) { 
 						if (tester_url_absolue($src)) {
 							include_spip('inc/distant');
-							$data = recuperer_page($src, false, false, _DATA_SOURCE_MAX_SIZE);
+							$data = recuperer_url($src, ['taille_max' => _DATA_SOURCE_MAX_SIZE]);
+							$data = $data['page'] ?? '';
 							if (!$data) {
 								throw new Exception("404");
 							}

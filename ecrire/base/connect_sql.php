@@ -354,7 +354,8 @@ function spip_connect_main($connexion, $charset_sql_connexion = '') {
  *
  * Fonction présente pour compatibilité
  *
- * @deprecated Utiliser l'authentification LDAP de auth/ldap
+ * @deprecated 3.1
+ * @see Utiliser l'authentification LDAP de auth/ldap
  * @uses auth_ldap_connect()
  *
  * @param string $serveur Nom du connecteur
@@ -382,36 +383,6 @@ function _q($a) {
 	return (is_numeric($a)) ? strval($a) :
 		(!is_array($a) ? ("'" . addslashes($a) . "'")
 			: join(",", array_map('_q', $a)));
-}
-
-
-/**
- * Récupérer le nom de la table de jointure `xxxx` sur l'objet `yyyy`
- *
- * @deprecated
- *     Utiliser l'API editer_liens ou les tables de liaisons spip_xx_liens
- *     ou spip_yy_liens selon.
- *
- * @param string $x Table de destination
- * @param string $y Objet source
- * @return array|string
- *     - array : Description de la table de jointure si connue
- *     - chaîne vide si non trouvé.
- **/
-function table_jointure($x, $y) {
-	$trouver_table = charger_fonction('trouver_table', 'base');
-	$xdesc = $trouver_table(table_objet($x));
-	$ydesc = $trouver_table(table_objet($y));
-	$ix = @$xdesc['key']["PRIMARY KEY"];
-	$iy = @$ydesc['key']["PRIMARY KEY"];
-	if ($table = $ydesc['tables_jointures'][$ix]) {
-		return $table;
-	}
-	if ($table = $xdesc['tables_jointures'][$iy]) {
-		return $table;
-	}
-
-	return '';
 }
 
 /**
@@ -516,8 +487,8 @@ function query_reinjecte_textes($query, $textes) {
  * Exécute une requête sur le serveur SQL
  *
  * @note Ne génère pas d’erreur fatale si la connexion à la BDD n’existe pas
- * @see sql_query()
- * @deprecated  Pour compatibilité. Utiliser `sql_query()` ou l'API `sql_*`.
+ * @deprecated 3.1 Pour compatibilité.
+ * @see sql_query() ou l'API `sql_*`.
  *
  * @param string $query Texte de la requête
  * @param string $serveur Nom du connecteur pour la base de données

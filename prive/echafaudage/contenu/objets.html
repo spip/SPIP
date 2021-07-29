@@ -1,3 +1,4 @@
+[(#AUTORISER{voir,[_(#OBJET|objet_info{table_objet})]}|sinon_interdire_acces)]
 <h1 class="grostitre">[(#OBJET|objet_info{texte_objets}|_T)]</h1>
 <INCLURE{fond=prive/objets/liste/#OBJET|objet_info{table_objet},env,ajax,sinon=#OBJET|objet_info{info_aucun_objet}|_T} />
 [(#OBJET|objet_info{editable}|et{#AUTORISER{creer,#OBJET}})

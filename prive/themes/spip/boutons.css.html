@@ -83,22 +83,22 @@
 	--spip-btn-color-off-active-border:    var(--spip-btn-color-off-active-bg);
 	--spip-btn-color-off-active-text:      var(--spip-btn-color-off-text);
 	/* taille normale */
-	--spip-btn-font-size:           0.9em;
-	--spip-btn-padding-x:           1em;
-	--spip-btn-padding-y:           0.5em;
+	--spip-btn-font-size:           1em;
+	--spip-btn-padding-x:           1rem;
+	--spip-btn-padding-y:           0.5rem;
 	--spip-btn-margin:              0.25em;
 	--spip-btn-border-radius:       0.25em;
 	--spip-btn-gutter:              0.5em;
 	/* taille mini */
-	--spip-btn-font-size-mini:      0.75em;
-	--spip-btn-padding-x-mini:      0.66em;
-	--spip-btn-padding-y-mini:      0.25em;
+	--spip-btn-font-size-mini:      0.8em;
+	--spip-btn-padding-x-mini:      0.5rem;
+	--spip-btn-padding-y-mini:      0.1rem;
 	--spip-btn-margin-mini:         var(--spip-btn-margin);
 	--spip-btn-border-radius-mini:  var(--spip-btn-border-radius);
 	/* taille large */
-	--spip-btn-font-size-large:     1em;
-	--spip-btn-padding-x-large:     1.5em;
-	--spip-btn-padding-y-large:     0.66em;
+	--spip-btn-font-size-large:     1.15em;
+	--spip-btn-padding-x-large:     1.5rem;
+	--spip-btn-padding-y-large:     0.75rem;
 	--spip-btn-margin-large:        var(--spip-btn-margin);
 	--spip-btn-border-radius-large: 0.33em;
 }
@@ -114,16 +114,10 @@ input.submit,
 input.reset,
 button {
 	position: relative;
-	        box-sizing: border-box;
-	display: -webkit-inline-box;
-	display: -ms-inline-flexbox;
+	box-sizing: border-box;
 	display: inline-flex;
-	-webkit-box-pack: center;
-	    -ms-flex-pack: center;
-	  justify-content: center;
-	-webkit-box-align: center;
-	   -ms-flex-align: center;
-	      align-items: center;
+	justify-content: center;
+	align-items: center;
 	text-align: center;
 	vertical-align: middle;
 	padding: var(--spip-btn-padding-y) var(--spip-btn-padding-x);
@@ -136,19 +130,17 @@ button {
 	text-decoration: none;
 	font-size: var(--spip-btn-font-size);
 	font-family: inherit;
-	font-weight: 500;
-	line-height: 1.2;
-	white-space: nowrap; /* Pas de retour ligne non voulu (uniquement si <br>) */
-	-webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-	        user-select: none;
+	font-weight: 400;
+	line-height: var(--spip-line-height);
+	user-select: none;
 	transition: all 0.1s;
 }
-a.btn,
+a.btn, 
+#wysiwyg a.btn, #wysiwyg a.btn:hover, 
 input.submit,
 input.reset,
 button {
+	text-decoration: none;
 	cursor: pointer;
 }
 
@@ -371,19 +363,13 @@ input.reset.btn_bloc,
 .formulaire_spip input.submit.btn_bloc, /* pour avoir précédence sur les règles de forms.css */
 .formulaire_spip input.reset.btn_bloc, /* idem */
 button.btn_bloc {
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
 	width: 100%;
-	-webkit-box-pack: center;
-     -ms-flex-pack: center;
-	 justify-content: center;
+	justify-content: center;
 	text-align: center;
 }
 /* Pour les boutons d'actions il faut ajouter *en plus* la classe bloc sur le formulaire */
 .bouton_action_post.bloc {
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
 }
 
@@ -431,7 +417,7 @@ button.btn_danger:focus {
  * Variantes de tailles
  * Ajuste de la police, des marges, etc.
  */
-<BOUCLE_tailles(DATA) {source table, #LISTE{mini,large}}>
+<BOUCLE_tailles(DATA){source table, #LISTE{mini,large}}>
 .btn_#VALEUR,
 input.submit.btn_#VALEUR,
 input.reset.btn_#VALEUR,
@@ -500,15 +486,11 @@ button.btn_#VALEUR,
  */
 
 .bouton_action_post {
-	display: -webkit-inline-box;
-	display: -ms-inline-flexbox;
 	display: inline-flex;
 	vertical-align: middle;
 }
 .bouton_action_post.bloc div {
--webkit-box-flex: 1;
-	      -ms-flex: 1 1 auto;
-	          flex: 1 1 auto;
+	flex: 1 1 auto;
 }
 
 /* Dans le footer d'une boîte */
@@ -518,8 +500,6 @@ button.btn_#VALEUR,
 
 /* Fix bouton d'action + classe .icone : combinaison obsolète à ne plus utiliser */
 .bouton_action_post.icone {
-	display: -webkit-inline-box !important;
-	display: -ms-inline-flexbox !important;
 	display: inline-flex !important;
 	padding: 0 !important;
 	background: none !important;
@@ -560,13 +540,8 @@ button.btn_#VALEUR,
  */
 
 .groupe-btns {
-	display: -webkit-inline-box;
-	display: -ms-inline-flexbox;
 	display: inline-flex;
-	   -webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
-	        -ms-flex-flow: row nowrap;
-	            flex-flow: row nowrap;
+	flex-flow: row nowrap;
 	margin-bottom: var(--spip-btn-margin);
 }
 .groupe-btns .btn,
@@ -574,9 +549,7 @@ button.btn_#VALEUR,
 .groupe-btns input.submit,
 .groupe-btns input.reset,
 .groupe-btns button {
-	-webkit-box-flex: 0;
-	        -ms-flex: 0 1 auto;
-	            flex: 0 1 auto;
+	flex: 0 1 auto;
 	margin: 0;
 }
 .groupe-btns .bouton_action_post .submit {
@@ -624,10 +597,7 @@ button.btn_#VALEUR,
 
 /* variante vertical */
 .groupe-btns.groupe-btns_vertical {
-	   -webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	        -ms-flex-flow: column wrap;
-	            flex-flow: column wrap;
+	flex-flow: column wrap;
 	vertical-align: middle;
 }
 .groupe-btns.groupe-btns_vertical .btn:not(:last-child),
@@ -666,8 +636,6 @@ button.btn_#VALEUR,
 /* Variante bloc */
 .groupe-btns.groupe-btns_bloc,
 .groupe-btns.groupe-btns_bloc .bouton_action_post div {
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
 }
 .groupe-btns.groupe-btns_bloc .btn,
@@ -677,9 +645,7 @@ button.btn_#VALEUR,
 .groupe-btns.groupe-btns_bloc input.submit,
 .groupe-btns.groupe-btns_bloc input.reset,
 .groupe-btns.groupe-btns_bloc button {
-	-webkit-box-flex: 1;
-	        -ms-flex: 1 1 auto;
-	            flex: 1 1 auto;
+	flex: 1 1 auto;
 }
 
 /* Variante groupe de boutons menu.
@@ -720,12 +686,8 @@ button.btn_#VALEUR,
 /* Si boutons de formulaire ou pied d'une boîte : bloc et alignement */
 .groupe-btns.act,
 .groupe-btns.boutons {
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
-	-webkit-box-pack: end;
-	   -ms-flex-pack: end;
-	 justify-content: flex-end;
+	justify-content: flex-end;
 }
 
 

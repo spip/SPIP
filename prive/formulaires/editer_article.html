@@ -15,7 +15,7 @@
 				]<input type='text' class='text' name='surtitre' id='surtitre'[ lang='(#LANGUE)'] value="[(#ENV**{surtitre})]" />
 			</div>]
 			<div class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
-				<label for="titre"><:info_titre:><em class="aide">#AIDER{titre}</em></label>[
+				<label for="titre"><:info_titre|label_nettoyer:><em class="aide">#AIDER{titre}</em></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
 				]<input type='text' class='text' name='titre' id='titre'[ lang='(#LANGUE)'] value="[(#ENV**{titre,''})]"
 				placeholder="<:info_nouvel_article|attribut_html:>" />

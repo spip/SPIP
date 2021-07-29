@@ -5,9 +5,7 @@
 	Organisation du fichier :
 
 	1. Icones horizontales et verticales
-	2. Barre onglets
-	3. Onglets simples
-	4. Divers et dépréciés
+	2. Divers et dépréciés
 
 <style>]
 #CACHE{3600*100,cache-client}
@@ -42,15 +40,9 @@
 .icone {
 	position: relative; /* Afin que le z-index soit pris en compte */
 	z-index: 2;
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
-	 -webkit-box-pack: center;
-	    -ms-flex-pack: center;
-	  justify-content: center;
-	-webkit-box-align: center;
-	   -ms-flex-align: center;
-	      align-items: center;
+	justify-content: center;
+	align-items: center;
 	text-align: center;
 	border-radius: 0.25em;
 	vertical-align: middle;
@@ -58,25 +50,14 @@
 
 /* Conteneur lien */
 .icone a {
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
-	   -webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	        -ms-flex-flow: column wrap;
-	            flex-flow: column wrap;
-	-webkit-box-align: inherit;
-	   -ms-flex-align: inherit;
-	      align-items: inherit;
-	-webkit-box-pack: inherit;
-	   -ms-flex-pack: inherit;
-	 justify-content: inherit;
+	flex-flow: column wrap;
+	align-items: inherit;
+	justify-content: inherit;
 	width: 5em;
 	padding: [(#GET{iconpadding}) ]0;
 	cursor: pointer;
-	-webkit-transition: all 0.2s;
-	     -o-transition: all 0.2s;
-         	transition: all 0.2s;
+	transition: all 0.2s;
 	border-radius: inherit;
 }
 
@@ -122,9 +103,7 @@
 .icone a:focus .icone-fonction:after {
 	background-size: 60% auto;
 	background-position: center center;
-	-webkit-transition: background 0.2s;
-	     -o-transition: background 0.2s;
-	        transition: background 0.2s; /* aller */
+	transition: background 0.2s; /* aller */
 }
 
 /**
@@ -138,16 +117,12 @@
 	border-radius: inherit;
 	/* background-color: hsla(0, 0%, 0%, 0.025); */
 	background-color: #GET{couleurs/base};
-	        box-shadow: inset 0 0 0.75em hsla(0, 0%, 0%, 0.033);
-	-webkit-transition: all 0.2s;
-	     -o-transition: all 0.2s;
-	        transition: all 0.2s;
+	box-shadow: inset 0 0 0.75em hsla(0, 0%, 0%, 0.033);
+	transition: all 0.2s;
 }
 .icone .icone-image img {
 	display: block;
-	-webkit-transition: inherit;
-	     -o-transition: inherit;
-	        transition: inherit;
+	transition: inherit;
 }
 .icone-fonction {
 	display: flex; /* éviter espacements indésirables autour de l'image */
@@ -163,15 +138,13 @@
 	bottom: 0;
 	background-position: bottom[ (#GET{iconpadding}) ]right[ (#GET{iconpadding})];
 	background-repeat: no-repeat;
-	-webkit-transition: background 0.1s;
-	     -o-transition: background 0.1s;
-	        transition: background 0.1s; /* Retour */
+	transition: background 0.1s; /* Retour */
 }
 .icone-fonction-new:after {
-	background-position-y: top[ (#GET{iconpadding})];
+	background-position-y: [(#GET{iconpadding})];
 }
 #SET{icones, #LISTE{add, new, del, config, edit}}
-<BOUCLE_icones_images(DATA) {source table, #GET{icones}}>
+<BOUCLE_icones_images(DATA){source table, #GET{icones}}>
 .icone-fonction-#VALEUR:after {
 	background-image: url(#CHEMIN_IMAGE{#VALEUR-xx.svg});
 }
@@ -180,20 +153,13 @@
 /* Variante horizontale */
 .icone.horizontale {
 	clear: both;
-	-webkit-box-pack: start;
-	   -ms-flex-pack: start;
-	 justify-content: flex-start;
+	justify-content: flex-start;
 	text-align: #ENV{left};
 }
 .icone.horizontale a {
 	padding: 0.25em 0;
-	-webkit-box-flex: 1;
-	        -ms-flex: 1 1 auto;
-	            flex: 1 1 auto;
-	   -webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
-	        -ms-flex-flow: row nowrap;
-	            flex-flow: row nowrap;
+	flex: 1 1 auto;
+	flex-flow: row nowrap;
 	width: auto;
 }
 .icone.horizontale b {
@@ -213,7 +179,7 @@
 	background-position: bottom 0 right 0;
 }
 .icone.horizontale .icone-fonction-new:after {
-	background-position-y: top 0;
+	background-position-y: 0;
 }
 .icone.horizontale a:hover .icone-image,
 .icone.horizontale a:focus .icone-image {
@@ -332,203 +298,8 @@
 }
 
 
-/* ================
- * 2. Barre onglets
- * ================
- *
- * Markup :
- *
- * <div class='barre_onglet'><ul class='clearfix'>
- * <li><strong></strong><li><a></a></li>
- * </ul></div>
- */
-.barre_onglet {
-	padding: 7px;
-	clear: both;
-	text-align: center;
-}
-.barre_onglet ul {
-	display: inline-block;
-	margin: 0 auto;
-	text-align: #ENV{left};
-	padding:0;
-	list-style:none;
-}
-.barre_onglet li {
-	float: #ENV{left};
-	border: 1px solid #ENV{foncee};
-	margin:0;
-	padding:0;
-	margin-#ENV{right}: 3px;
-	position:relative;
-	list-style:none;
-	margin-right: 0px;
-	border-left-width: 0px;
-	border-color: #eee;
-}
-.barre_onglet a,
-.barre_onglet strong {
-	display: block;
-	font-weight: bold;
-	padding: 5px 8px;
-	text-decoration: none;
-	background-color: #fff;
-}
-.barre_onglet a {
-	background-color: #eee;
-}
-.barre_onglet a:hover,
-.barre_onglet a:focus {
-	background-color: #ENV{claire};
-	color: #fff;
-	text-decoration: none;
-	background-color: white;
-	background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ffffff));
-	background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
-	background-image: -moz-linear-gradient(top, #ffffff, #ffffff);
-	background-image: -ms-linear-gradient(top, #ffffff, #ffffff);
-	background-image: -o-linear-gradient(top, #ffffff, #ffffff);
-	background-image: linear-gradient(top, #ffffff, #ffffff);color: #[(#ENV{foncee}|couleur_luminance{0.7})];
-	filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ffffff', endColorstr='#ffffff');
-}
-.barre_onglet strong {
-	background-color: #ENV{foncee};
-	color: #fff;
-}
-.barre_onglet strong.on {
-	background-color: #ENV{foncee};
-}
-.barre_onglet li:first-child strong.on {
-	border-bottom-left-radius:5px;
-	border-top-left-radius:5px;
-}
-.barre_onglet li:last-child strong.on {
-	border-bottom-right-radius:5px;
-	border-top-right-radius:5px;
-}
-.barre_onglet ul > li:first-child {
-	position: relative;
-	border-left-width: 1px;
-	border-bottom-left-radius: 5px;
-	border-top-left-radius: 5px;
-}
-.barre_onglet ul > li:first-child a {
-	position: relative;
-	border-bottom-left-radius: 5px;
-	border-top-left-radius: 5px;
-}
-.barre_onglet ul > li:last-child {
-	position: relative;
-	border-bottom-right-radius: 5px;
-	border-top-right-radius: 5px;
-}
-.barre_onglet ul > li:last-child a {
-	position: relative;
-	border-bottom-right-radius: 5px;
-	border-top-right-radius: 5px;
-}
-.barre_onglet .cadre-icone {
-	top: -8px;
-	#ENV{left}: 4px;
-}
-.barre_onglet .cadre-icone + a,
-.barre_onglet .cadre-icone + strong {
-	padding-#ENV{left}: 32px;
-}
-
-
 /* ==================
- * 3. Onglets simples
- * ==================
- *
- * Markup :
- *
- * <div class='onglets_simple clearfix'><ul><li><strong></strong></li><li><a></a></li></ul></div>
- * <div class='onglets_simple second clearfix'><ul><li><strong></strong></li><li><a></a></li></ul></div>
- */
-
-.onglets_simple {
-	margin: 1em 0;
-	clear: #ENV{left};
-	border-bottom:1px solid #ENV{foncee};
-	padding-#ENV{left}:5px;
-}
-.onglets_simple ul {
-	list-style: none;
-	margin-#ENV{left}:1px;
-	padding:0;
-}
-.onglets_simple ul li {
-	float: #ENV{left};
-	padding: 0;
-	margin: 0;
-	margin-bottom: -1px;
-}
-.onglets_simple ul li strong,
-.onglets_simple ul li a {
-	display: block;
-	float: #ENV{left};
-	padding: 4px 7px;
-	border: 1px solid #ENV{foncee};
-	margin-#ENV{left}: 5px;
-	background-color: #eee;
-	background-position: center #ENV{left};
-	background-repeat: no-repeat;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
-}
-.onglets_simple ul li strong,
-.onglets_simple ul li a:hover {
-	background-color: #f8f7f3;
-}
-.onglets_simple ul li a {
-	position: relative;
-	opacity: 0.7;
-	filter: alpha(opacity=70);
-}
-.onglets_simple ul li a:hover,
-.onglets_simple ul li a:focus {
-	cursor: hand;
-	cursor: pointer;
-	opacity: 1;
-	filter: alpha(opacity=100);
-}
-.onglets_simple ul li strong {
-	position: relative;
-	color: #555;
-	background-color: transparent;
-	border-bottom: 1px solid #f8f7f3;
-	border-top-right-radius: 5px;
-	border-bottom-color: #f9f9f9;
-}
-.onglets_simple .cadre-icone {
-	display: none;
-}
-
-/* Second niveau */
-
-.onglets_simple.second {
-	font-size: 0.9em;
-	border: 0;
-	padding-#ENV{left}: 0;
-}
-.onglets_simple.second ul li strong,
-.onglets_simple.second ul li a {
-	margin-#ENV{left}:0px;
-	margin-#ENV{right}:5px;
-	margin-bottom:5px;
-}
-.onglets_simple.second ul li strong {
-	border:1px solid #ENV{foncee};
-}
-.onglets_simple.second ul li strong,
-.onglets_simple.second ul li a:hover,
-.onglets_simple.second ul li a:focus {
-	background-color: #fff;
-}
-
-/* ==================
- * 4. Divers & oldies
+ * 2. Divers & oldies
  * ==================
  */
 

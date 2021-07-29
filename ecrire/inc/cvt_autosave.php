@@ -63,6 +63,20 @@ function cvtautosave_formulaire_charger($flux) {
 			}
 		}
 
+		// si on est dans le charger() qui suit le traiter(), l'autosave a normalement ete vide
+		// mais si il y a plusieurs sessions il peut y avoir concurrence et un retour de l'autosave
+		if ($je_suis_poste and _request('autosave') === $cle_autosave and function_exists('terminer_actualiser_sessions')) {
+			terminer_actualiser_sessions();
+			// et verifions si jamais l'autosave a fait un come back, dans ce cas on le revide
+			if (isset($GLOBALS['visiteur_session']['session_autosave_' . $cle_autosave])) {
+				session_set('session_autosave_' . $cle_autosave, null);
+				// en court sleep pour etre certain que la concurrence est finie
+				sleep(1);
+				terminer_actualiser_sessions();
+			}
+		}
+
+
 		/**
 		 * Envoyer le input hidden et le bout de js qui l'utilisera
 		 */

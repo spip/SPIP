@@ -22,7 +22,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
- * Compile la balise `#ALERTE` produisant le HTML d'un message d'alerte complet.
+ * Compile la balise `#ALERTE_MESSAGE` produisant le HTML d'un message d'alerte complet.
  *
  * @note
  * Produit par défaut une alerte avec la classe `notice` et le role `alert`,
@@ -33,8 +33,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @balise
  * @example
  *   ```
- *   #ALERTE{message[,titre][,classes][,role][,id]}
- *   [(#ALERTE{<:chaine_langue:>, <:chaine_langue:>, notice, status, mon_alerte})]
+ *   #ALERTE_MESSAGE{message[,titre][,classes][,role][,id]}
+ *   [(#ALERTE_MESSAGE{<:chaine_langue:>, <:chaine_langue:>, notice, status, mon_alerte})]
  *   ```
  *
  * @param Champ $p
@@ -42,7 +42,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return Champ
  *     Pile complétée par le code à générer
  */
-function balise_ALERTE_dist($p) {
+function balise_ALERTE_MESSAGE_dist($p) {
 	$_texte = interprete_argument_balise(1, $p);
 	$_titre = interprete_argument_balise(2, $p);
 	$_class = interprete_argument_balise(3, $p);

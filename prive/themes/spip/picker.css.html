@@ -205,7 +205,7 @@ a.rub-ouverte {
 /* ----- */
 
 /* Les éléments propres à chaque objet */
-<BOUCLE_objets(POUR){tableau (#REM|lister_tables_objets_sql)}>
+<BOUCLE_objets(DATA){source table, (#REM|lister_tables_objets_sql)}>
 [(#SET{petite_icone, [(#CHEMIN_IMAGE{#VALEUR{icone_objet}-12.png}|sinon{[(#CHEMIN_IMAGE{#VALEUR{icone_objet}-16.png}|image_reduire{12}|extraire_attribut{src})]})]})]
 ul.item_picked li.#VALEUR{type} {padding-#GET{left}:24px;background-image:url(#GET{petite_icone});background-size:12px;}
 .item_picker .[(#VALEUR{table_objet})] .type_objet {padding-#GET{left}:24px; background:url(#GET{petite_icone}) no-repeat[ (#GET{left}) ]center; background-size:12px;}
@@ -239,7 +239,7 @@ ul.item_picked.changing {}
 .item_picker .liste ul {list-style:none;margin:0;padding:0;}
 .item_picker .liste li {display:block;clear:both;line-height:1.1em;list-style:none;margin:0;padding:0;position:relative;}
 .item_picker .liste li:hover {background-color:[#(#GET{claire}|couleur_eclaircir)];}
-.item_picker .liste a.ouvrir {color:black;text-decoration:none;display:block;line-height:16px;margin-#GET{right}:20px;padding:0.3em 0;padding-#GET{left}:2px;padding-#GET{right}:20px;background:transparent url('#CHEMIN_IMAGE{fleche-droite-16.png}') no-repeat [ (#GET{right}) ] 0.3em;}
+.item_picker .liste a.ouvrir {color:black;text-decoration:none;display:block;line-height:16px;margin-#GET{right}:20px;padding:0.3em 0;padding-#GET{left}:2px;padding-#GET{right}:20px;background:transparent url('#CHEMIN_IMAGE{deplier-right.svg}') no-repeat [ (#GET{right}) ] 0.3em;}
 .item_picker .liste a.choisir {display:block;width:16px;height:16px;position:absolute;#GET{right}:0;top:0;padding:0.3em 2px;text-indent:-10000px;background:url('#CHEMIN_IMAGE{ajouter-16.png}') no-repeat center center;}
 .item_picker .liste a:hover,.item_picker .liste a:focus {background-color:#GET{claire};}
 
@@ -272,10 +272,10 @@ ul.item_picked.changing {}
 .browser #picker_id {padding:0;margin:0 5px;border:1px solid;}
 
 
-/* 
-   Selecteurs de rubrique / article 
-   ayant une classe li.selecteur_item 
-   n'ont pas de marge a gauche pour occuper toute la largeur 
+/*
+   Selecteurs de rubrique / article
+   ayant une classe li.selecteur_item
+   n'ont pas de marge a gauche pour occuper toute la largeur
 */
 .formulaire_spip li.selecteur_item {
 	padding-#GET{left}:10px;background:#fff;

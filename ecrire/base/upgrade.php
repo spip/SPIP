@@ -94,6 +94,16 @@ function base_upgrade_dist($titre = '', $reprise = '') {
  * schéma actuel de la base de données.
  *
  * Les fonctions de mises à jour se trouvent dans `ecrire/maj/`
+ * 
+ * @note
+ *     Si version nulle ou inexistante, c'est une nouvelle installation,
+ *     on ne passe pas par le processus de mise à jour.
+ * 
+ *     De même en cas de version supérieure: ca devait être un test,
+ *     il y a eu le message d'avertissement il doit savoir ce qu'il fait
+ * 
+ *     version_installee = YYYYMMDDNN; quand on a besoin de forcer une MAJ
+ *     tel que 2021021800 où 00 est un incrément.
  *
  * @uses upgrade_test()
  * @uses maj_while()
@@ -104,14 +114,7 @@ function base_upgrade_dist($titre = '', $reprise = '') {
  */
 function maj_base($version_cible = 0, $redirect = '', $debut_page = true) {
 
-	$version_installee = @$GLOBALS['meta']['version_installee'];
-	//
-	// Si version nulle ou inexistante, c'est une nouvelle installation
-	//   => ne pas passer par le processus de mise a jour.
-	// De meme en cas de version superieure: ca devait etre un test,
-	// il y a eu le message d'avertissement il doit savoir ce qu'il fait
-	//
-	// version_installee = 1.702; quand on a besoin de forcer une MAJ
+	$version_installee = $GLOBALS['meta']['version_installee'] ?? null;
 
 	spip_log(
 		"Version anterieure: $version_installee. Courante: " . $GLOBALS['spip_version_base'],
@@ -134,34 +137,12 @@ function maj_base($version_cible = 0, $redirect = '', $debut_page = true) {
 
 	$cible = ($version_cible ? $version_cible : $GLOBALS['spip_version_base']);
 
-	if ($version_installee <= 1.926) {
-		$n = floor($version_installee * 10);
-		while ($n < 19) {
-			$nom = sprintf('v%03d', $n);
-			$f = charger_fonction($nom, 'maj/legacy', true);
-			if ($f) {
-				spip_log("$f repercute les modifications de la version " . ($n / 10), 'maj.' . _LOG_INFO_IMPORTANTE);
-				$f($version_installee, $GLOBALS['spip_version_base']);
-			} else {
-				spip_log("pas de fonction pour la maj $n $nom", 'maj.' . _LOG_INFO_IMPORTANTE);
-			}
-			$n++;
-		}
-		include_spip('maj/legacy/v019_pre193');
-		maj_legacy_v019_pre193($version_installee, $version_cible);
-	}
-	if ($version_installee < 2000) {
-		if ($version_installee < 2) {
-			$version_installee = $version_installee * 1000;
-		}
-		include_spip('maj/legacy/v019');
-	}
-	if ($cible < 2) {
-		$cible = $cible * 1000;
-	}
-
 	if ($version_installee < 2021010100) {
-		include_spip('maj/legacy/svn10000');
+		include_spip('maj/legacy/v21');
+		include_spip('maj/legacy/v30');
+		include_spip('maj/legacy/v31');
+		include_spip('maj/legacy/v32');
+		include_spip('maj/legacy/v40');
 	}
 
 	include_spip('maj/2021');
@@ -494,31 +475,6 @@ function serie_alter($serie, $q = array(), $meta = '', $table = 'meta', $redirec
 	return 0;
 }
 
-
-/**
- * Mise à jour des types MIME de documents
- *
- * Fonction utilisé par les vieilles mises à jour de SPIP, à appeler dans
- * le tableau `$maj` quand on rajoute des types MIME. Remplacé actuellement
- * par le plugin Medias.
- *
- * @deprecated Utiliser directement `creer_base_types_doc()` du plugin Medias
- * @example
- *     ```
- *     $GLOBALS['maj'][1953] = array(array('upgrade_types_documents'));
- *
- *     ```
- * @uses creer_base_types_doc()
- *
- **/
-function upgrade_types_documents() {
-	if (include_spip('base/medias')
-		and function_exists('creer_base_types_doc')
-	) {
-		creer_base_types_doc();
-	}
-}
-
 /**
  * Vérifie qu'il est possible d'ajouter une colonne à une table SQL
  *
@@ -537,49 +493,4 @@ function upgrade_test() {
 	sql_alter('TABLE spip_test DROP b');
 
 	return $result;
-}
-
-/**
- * Mise à jour des versions de SPIP < 1.926
- *
- * @deprecated Utiliser `maj_plugin()` ou la globale `maj` pour le core.
- * @see maj_plugin()
- * @see maj_base()
- *
- * @param float $version
- * @param bool $test
- * @return void
- **/
-function maj_version($version, $test = true) {
-	if ($test) {
-		if ($version >= 1.922) {
-			ecrire_meta('version_installee', $version, 'oui');
-		} else {
-			// on le fait manuellement, car ecrire_meta utilise le champs impt qui est absent sur les vieilles versions
-			$GLOBALS['meta']['version_installee'] = $version;
-			sql_updateq('spip_meta', array('valeur' => $version), 'nom=' . sql_quote('version_installee'));
-		}
-		spip_log("mise a jour de la base en $version", 'maj.' . _LOG_INFO_IMPORTANTE);
-	} else {
-		echo _T('alerte_maj_impossible', array('version' => $version));
-		exit;
-	}
-}
-
-/**
- * Teste de mise à jour des versions de SPIP < 1.926
- *
- * @deprecated Utiliser `maj_plugin()` ou la globale `maj` pour le core.
- * @see maj_plugin()
- * @see maj_base()
- *
- * @param float $version
- * @param float $version_installee
- * @param int $version_cible
- * @return bool true si la mise à jour doit se réaliser
- **/
-function upgrade_vers($version, $version_installee, $version_cible = 0) {
-	return ($version_installee < $version
-		and (($version_cible >= $version) or ($version_cible == 0))
-	);
 }

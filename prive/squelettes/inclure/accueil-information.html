@@ -22,7 +22,7 @@
 	<B_cpta>
 		<h4>[(#URL_ECRIRE{auteurs}|afficher_plus_info{<:icone_auteurs:>, <:icone_auteurs:>})]</h4>
 		<ul class="liste-items">
-			<BOUCLE_cpta(POUR){tableau #EVAL{$GLOBALS['liste_des_statuts']}}><BOUCLE_auts(AUTEURS){statut=#VALEUR}{tout} />
+			<BOUCLE_cpta(DATA){source table, #EVAL{$GLOBALS['liste_des_statuts']}}><BOUCLE_auts(AUTEURS){statut=#VALEUR}{tout} />
 			[(#TOTAL_BOUCLE|oui)
 			<li class="item">[(#CLE|_T)]&nbsp;: #TOTAL_BOUCLE
 			</li>

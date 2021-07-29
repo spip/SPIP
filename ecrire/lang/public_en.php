@@ -96,6 +96,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'repondre_breve' => 'Comment on this news item',
 	'resultats_recherche' => 'Search results',
 	'retour_debut_forums' => 'Back to forum top',
+	'rss_abonnement' => 'Simply copy the following URL into your aggregator:',
+	'rss_abonnement_titre' => 'Subscribe',
+	'rss_abonnement_titre_page' => 'Subscribe to',
+	'rss_explication' => 'An RSS thread collects information about a site’s update. It delivers the content of the tickets or the comments or an extract of them, as well as a link to the full versions et some other information. This thread is to be read by an RSS aggregator.',
+	'rss_explication_titre' => 'What is an RSS feed?',
 	'rubrique' => 'Section',
 	'rubriques' => 'Sections',
 

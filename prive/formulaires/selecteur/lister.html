@@ -18,7 +18,7 @@
 ]
 
 [(#REM) Pour chaque objet affichable, on cherche s'il peut être enfant de l'objet dans lequel on est ]
-<BOUCLE_objets(POUR){tableau #ENV{objets/afficher}}>
+<BOUCLE_objets(DATA){source table, #ENV{objets/afficher}}>
 [(#CHEMIN{formulaires/selecteur/lister-#ENV{quoi}-#VALEUR.html}|oui)
 	#SET{bouton_selectionner, #VALEUR|in_array{#ENV{objets/selectionner}}|oui}
 	[<div class="#VALEUR">[<h4 class="type_objet">(#VALEUR|table_objet_sql|lister_tables_objets_sql|table_valeur{texte_objets}|_T)</h4>]

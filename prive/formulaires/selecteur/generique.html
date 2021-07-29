@@ -24,7 +24,7 @@ afficher la selection dans un ul class item_picked
 <div id="selecteur_#ENV{name}" class="selecteur[ (#GET{objets/afficher}|count|moins{1}|=={1}|et{#GET{objets/selectionner}|count|=={1}})selecteur_type_unique]">
 
 <ul class="item_picked[ (#ENV{select,''}|?{select})][ (#ENV{obligatoire}|?{obligatoire})]">
-<BOUCLE_selected(POUR){tableau #ENV{selected}|picker_selected}>
+<BOUCLE_selected(DATA){source table, #ENV{selected}|picker_selected}>
 	[(#SET{objet, [(#VALEUR|table_valeur{objet})]})]
 	[(#SET{id_objet, [(#VALEUR|table_valeur{id_objet})]})]
 	[(#GET{id_objet}|=={0}|non)

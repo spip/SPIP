@@ -360,7 +360,8 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	$contexte_implicite = $page['contexte_implicite'];
 
 	// Cas ignorant le cache car completement dynamique
-	if ($_SERVER['REQUEST_METHOD'] == 'POST'
+	if (
+		(!empty($_SERVER['REQUEST_METHOD']) and $_SERVER['REQUEST_METHOD'] === 'POST')
 		or _request('connect')
 	) {
 		$use_cache = -1;

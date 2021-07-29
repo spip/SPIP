@@ -50,7 +50,8 @@ function spip_xml_load($fichier, $strict = true, $clean = true, $taille_max = 10
 	$contenu = "";
 	if (tester_url_absolue($fichier)) {
 		include_spip('inc/distant');
-		$contenu = recuperer_page($fichier, false, false, $taille_max, $datas);
+		$contenu = recuperer_url($fichier, ['taille_max' => $taille_max, 'datas' => $datas]);
+		$contenu = $contenu['page'] ?? '';
 	} else {
 		lire_fichier($fichier, $contenu);
 	}

@@ -59,7 +59,7 @@
 			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:titre_changer_couleur_interface:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
-				]<BOUCLE_couleurs(POUR){tableau #ENV{couleurs}}>
+				]<BOUCLE_couleurs(DATA){source table, #ENV{couleurs}}>
 				<div class="choix" data-spip-theme-colors="#CLE">
 					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_#CLE'[(#ENV{#GET{name}}|=={#CLE}|oui)checked="checked" ]value="#CLE"
 					onchange="if (this.checked) { jQuery('head>link#csspriveedef').clone().removeAttr('id').appendTo(jQuery('head')).attr('href', '[(#ENV{_couleurs_url/#CLE})]'); jQuery('body').removeClass(function(i, c){ return (c.match (/(^|\s)spip-theme-colors-\S+/g) || []).join(' ');}).addClass('spip-theme-colors-#CLE')}" />

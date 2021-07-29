@@ -1,3 +1,4 @@
+#SET{chemin_deplier,#CHEMIN_IMAGE{deplier-#LANG_RIGHT.svg}}
 #SET{p,pr_#ID_RUBRIQUE}<B_enfants>
 [<nav class='pagination'>(#PAGINATION)</nav>]
 <ul class='items'>
@@ -14,7 +15,7 @@
 	<a
 	class='ajax'
 	href='[(#SELF|parametre_url{id_r,#ID_RUBRIQUE})]'
-		>[#TITRE(#ENV{rubriques,0}|non)](#CHEMIN_IMAGE{fleche-droite-16.png}|balise_img{'',ouvrir})</a>],[#TITRE(#ENV{rubriques,0}|non)]})]</li>
+		>[#TITRE(#ENV{rubriques,0}|non)](#GET{chemin_deplier}|balise_img{'',ouvrir})</a>],[#TITRE(#ENV{rubriques,0}|non)]})]</li>
 </BOUCLE_enfants>
 </ul>
 </B_enfants>

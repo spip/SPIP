@@ -4,23 +4,23 @@
 <div class="nettoyeur"></div>
 
 <BOUCLE_num(CONDITION){si #ENV{recherche}|is_numeric}>
-	<BOUCLE_tablesid(POUR){tableau #REM|liste_des_champs}
+	<BOUCLE_tablesid(DATA){source table, #REM|liste_des_champs}
 		{cle !IN forum,syndic_article,paquet,plugin}
 		{si #ENV{recherche}}>[
 		(#SET{table,#CLE|table_objet})][
 		(#SET{statut,[(#CLE|=={article}|?{[(#SESSION{statut}|statuts_articles_visibles)],''})]})
-		][(#GET{table}|trouver_fond{prive/objets/liste/}
+		][(#GET{table}|trouver_fond{prive/objets/liste/}|et{[(#AUTORISER{voir,[_(#CLE|objet_info{table_objet})]}|ou{#CLE|=={article}})]}
 			|?{#GET{table}|inclure_liste_recherche_par_id{#ENV*{recherche},#GET{statut},#ENV**}})
 	]</BOUCLE_tablesid>
 	[(#VAL{info_recherche_auteur_zero}|_T{#ARRAY{cherche_auteur,#ENV{recherche}}}|wrap{'<h3>'})]
 	<//B_tablesid>
 </BOUCLE_num>
-<BOUCLE_tables(POUR){tableau #REM|liste_des_champs}
+<BOUCLE_tables(DATA){source table, #REM|liste_des_champs}
 	{cle !IN forum,syndic_article,paquet,plugin}
 	{si #ENV{recherche}}>[
 	(#SET{table,#CLE|table_objet})][
 	(#SET{statut,[(#CLE|=={article}|?{[(#SESSION{statut}|statuts_articles_visibles)],''})]})
-	][(#GET{table}|trouver_fond{prive/objets/liste/}
+	][(#GET{table}|trouver_fond{prive/objets/liste/}|et{[(#AUTORISER{voir,[_(#CLE|objet_info{table_objet})]}|ou{#CLE|=={article}})]}
 		|?{#INCLURE{fond=prive/objets/liste/#GET{table},env,recherche=#ENV*{recherche},statut=#GET{statut},par=points}})
 ]</BOUCLE_tables>
 [(#VAL{info_recherche_auteur_zero}|_T{#ARRAY{cherche_auteur,#ENV{recherche}}}|wrap{'<h3>'})]

@@ -51,53 +51,6 @@ function base_repair_dist($titre = '', $reprise = '') {
 }
 
 /**
- * Réparer les documents stockés dans des faux répertoires .plat
- *
- * @deprecated Les fichiers .plat ne sont plus utilisés. Cette fonction n'est plus appelée depuis r14292
- * @todo À supprimer ou déplacer dans le plugin Medias.
- *
- * @return string Description des changements de chemins des documents
- **/
-function admin_repair_plat() {
-	spip_log("verification des documents joints", _LOG_INFO_IMPORTANTE);
-	$out = "";
-	$repertoire = array();
-	include_spip('inc/getdocument');
-	$res = sql_select('*', 'spip_documents', "fichier REGEXP CONCAT('^',extension,'[^/\]') AND distant='non'");
-
-	while ($row = sql_fetch($res)) {
-		$ext = $row['extension'];
-		if (!$ext) {
-			spip_log("document sans extension: " . $row['id_document'], _LOG_INFO_IMPORTANTE);
-			continue;
-		}
-		if (!isset($repertoire[$ext])) {
-			if (@file_exists($plat = _DIR_IMG . $ext . ".plat")) {
-				spip_unlink($plat);
-			}
-			$repertoire[$ext] = creer_repertoire_documents($ext);
-			if (preg_match(',_$,', $repertoire[$ext])) {
-				$repertoire[$ext] = false;
-			}
-		}
-		if ($d = $repertoire[$ext]) {
-			$d = substr($d, strlen(_DIR_IMG));
-			$src = $row['fichier'];
-			$dest = $d . substr($src, strlen($d));
-			if (@copy(_DIR_IMG . $src, _DIR_IMG . $dest)
-				and file_exists(_DIR_IMG . $dest)
-			) {
-				sql_updateq('spip_documents', array('fichier' => $dest), 'id_document=' . intval($row['id_document']));
-				spip_unlink(_DIR_IMG . $src);
-				$out .= "$src => $dest<br />";
-			}
-		}
-	}
-
-	return $out;
-}
-
-/**
  * Exécute une réparation de la base de données
  *
  * Crée les tables et les champs manquants.

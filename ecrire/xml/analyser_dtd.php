@@ -109,7 +109,9 @@ function analyser_dtd($loc, $avail, &$dtc) {
 	} else {
 		if ($avail == 'PUBLIC') {
 			include_spip('inc/distant');
-			if ($dtd = trim(recuperer_page($loc))) {
+			$dtd = recuperer_url($loc);
+			$dtd = trim($dtd['page'] ?? '');
+			if ($dtd) {
 				ecrire_fichier($file, $dtd, true);
 			}
 		}

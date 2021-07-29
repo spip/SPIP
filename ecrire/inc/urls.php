@@ -141,7 +141,7 @@ function urls_decoder_url($url, $fond = '', $contexte = array(), $assembler = fa
 			if (defined('_DEFINIR_CONTEXTE_TYPE') and _DEFINIR_CONTEXTE_TYPE) {
 				$contexte['type'] = $type;
 			}
-			if (defined('_DEFINIR_CONTEXTE_TYPE_PAGE') and _DEFINIR_CONTEXTE_TYPE_PAGE) {
+			if (!defined('_DEFINIR_CONTEXTE_TYPE_PAGE') or _DEFINIR_CONTEXTE_TYPE_PAGE) {
 				$contexte['type-page'] = $type;
 			}
 		}

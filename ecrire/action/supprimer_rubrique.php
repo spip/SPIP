@@ -51,7 +51,7 @@ function action_supprimer_rubrique_dist($id_rubrique = null) {
 				"objet='rubrique' AND id_objet!=" . intval($id_rubrique) . " AND id_auteur=" . intval($id_auteur));
 			if (!$n) {
 				include_spip('action/editer_auteur');
-				auteurs_set($id_auteur, array("statut" => '1comite'));
+				auteur_modifier($id_auteur, array("statut" => '1comite'));
 			}
 			sql_delete("spip_auteurs_liens",
 				"objet='rubrique' AND id_objet=" . intval($id_rubrique) . " AND id_auteur=" . intval($id_auteur));

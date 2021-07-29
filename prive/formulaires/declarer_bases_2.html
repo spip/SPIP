@@ -14,7 +14,7 @@
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]
 				#SET{def,checked="checked"}
-				<BOUCLE_db(POUR){tableau #ENV*{_bases_prop}}>
+				<BOUCLE_db(DATA){source table, #ENV*{_bases_prop}}>
 					<div class="choix">
 						<input type="radio" class="radio" name="choix_db" value="#VALEUR" id="choix_#VALEUR"
 						[(#VALEUR|=={#ENV{main_db}}|oui)disabled="disabled"]

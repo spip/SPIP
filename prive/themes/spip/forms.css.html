@@ -99,12 +99,12 @@
 		--spip-form-heading-iconsize: var(--spip-box-heading-iconsize-normal);
 		--spip-from-heading-iconpadding: calc(var(--spip-from-heading-iconsize) + (var(--spip-from-spacing-x) * 1.5));
 		/* Inputs */
-		--spip-form-input-padding-x: 0.66rem;
-		--spip-form-input-padding-y: 0.66rem;
+		--spip-form-input-padding-x: 0.5rem;
+		--spip-form-input-padding-y: 0.5rem;
 		/* Décalage des fieldsets imbriqués */
 		--spip-form-fieldset-offset: 2.5em;
 	}
-	/* Taille réduite */
+	/* Formulaire de taille réduite */
 	.formulaire_spip.mini,
 	.lat,
 	.affiche_milieu,
@@ -118,10 +118,22 @@
 		--spip-form-heading-iconsize: var(--spip-box-heading-iconsize-mini);
 		--spip-from-heading-iconpadding: calc(var(--spip-from-heading-iconsize) + (var(--spip-from-spacing-x) * 1.5));
 		/* Inputs */
-		--spip-form-input-padding-x: 0.33rem;
-		--spip-form-input-padding-y: 0.33rem;
+		--spip-form-input-padding-x: 0.5rem;
+		--spip-form-input-padding-y: 0.2rem;
 		/* Décalage des fieldsets imbriqués */
 		--spip-form-fieldset-offset: 1.5em;
+	}
+	/* Aligner la taille des boutons avec celles des inputs mis automatiquement en taille réduite */
+	/* Nb : juste les boutons normaux pour l'insatnt, ajouter pour les boutons large si nécessaire */
+	.formulaire_spip.mini .editer-groupe .btn,
+	.formulaire_spip.mini .editer-groupe button,
+	.lat .editer-groupe .btn,
+	.lat .editer-groupe button,
+	.affiche_milieu .editer-groupe .btn,
+	.affiche_milieu .editer-groupe button {
+		--spip-btn-font-size: 0.9em;
+		--spip-btn-padding-x: 0.5rem;
+		--spip-btn-padding-y: calc(0.2rem * 1.325); /* facteur à la main pour compenser le font-size réduit */
 	}
 }
 
@@ -364,8 +376,6 @@
 /*  2 colonnes */
 @media (min-width: 768px) {
 	.formulaire_spip .editer-groupe.deux_colonnes {
-		-webkit-column-count: 2;
-		-moz-column-count: 2;
 		column-count: 2;
 		column-gap: var(--spip-form-spacing-x);
 	}
@@ -463,7 +473,7 @@
 	position: relative;
 	margin-bottom: 0 !important; /* Fix #wysiwyg */
 	clear: both;
-	padding: calc(var(--spip-form-spacing-y) / 2)  var(--spip-form-spacing-x);
+	padding: var(--spip-form-spacing-y) var(--spip-form-spacing-x);
 	text-align: var(--spip-right);
 	background-color: var(--spip-color-theme-lightest);
 	border-bottom-left-radius: var(--spip-form-input-border-radius);
@@ -471,6 +481,20 @@
 }
 .formulaire_spip .boutons .image_loading {
 	float: none;
+}
+@media (min-width: 768px) {
+	.formulaire_spip .boutons {
+		padding-top: calc(var(--spip-form-spacing-y) / 2);
+		padding-bottom: calc(var(--spip-form-spacing-y) / 2);
+	}
+	.formulaire_spip.mini .boutons,
+	.lat .formulaire_spip .boutons,
+	.affiche_milieu .formulaire_spip .boutons,
+	.formulaire_editer_liens .boutons,
+	.formulaire_dater  .boutons{
+		padding-top: var(--spip-form-spacing-y);
+		padding-bottom: var(--spip-form-spacing-y);
+	}
 }
 
 
@@ -590,6 +614,10 @@
 	padding-top: var(--spip-form-input-padding-y);
 	position: relative;
 }
+.formulaire_spip div.choix label img {
+	vertical-align: middle;
+	margin: 3px 0px;
+}
 
 /* Label */
 .formulaire_spip .choix > label,
@@ -615,12 +643,12 @@
 	width: auto;
 }
 
-/* Espacements entre inputs et labels, indépendamment de la position du label (on sait qu'ils vont par paire, ça suffit) */
-.formulaire_spip .choix > *:nth-child(odd) {
-	margin-#RIGHT: calc(var(--spip-form-input-padding-x) * 3/4); /* entre input et label */
+/* Espacements entre inputs et labels (à affiner) */
+.formulaire_spip .choix > label,
+.formulaire_spip .choix > .label {
+	margin: 0 0.5em;
 }
-/* Espacement entre plusieurs options dans un même .choix, et entre .choix inline successifs */
-.formulaire_spip .choix > *:nth-child(3n+3),
+/* Espacement entre .choix inline successifs */
 .formulaire_spip span.choix + span.choix {
 	margin-#LEFT: var(--spip-form-spacing-x); /* entre options ou .choix inline */
 }
@@ -643,6 +671,16 @@
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 	position: relative;
+}
+
+/* Les choix qui contiennent un sous-formulaire optionnel, dependant du choix */
+
+.formulaire_spip div.choix>fieldset,
+.formulaire_spip div.choix>.editer-groupe,
+.formulaire_spip div.choix>.boutons {
+	/* Marges négatives pour annuler la gouttière. */
+	margin-left: calc(var(--spip-form-input-padding-x) * -1);
+	margin-right: calc(var(--spip-form-input-padding-x) * -1);
 }
 
 
@@ -760,7 +798,7 @@
 .formulaire_spip select {
 	font-size: inherit;
 	font-family: inherit;
-	line-height: inherit;
+	line-height: var(--spip-line-height);
 }
 
 /* Éléments avec bordure */
@@ -788,6 +826,14 @@
 	border-color: var(--spip-color-theme);
 	box-shadow: 0 0 0 0.2rem var(--spip-form-color-focus);
 	outline: 0;
+}
+
+/* Selects
+ * Il faut un min-height car apparemment la hauteur est pas calculée pareil que pour les inputs,
+ * il faut tenir compte de la bordure. C'est nul.
+ */
+.formulaire_spip select {
+	min-height: calc(var(--spip-line-height) + 2px + (var(--spip-form-input-padding-y) * 2));
 }
 
 /* Bloc de texte */
@@ -1011,7 +1057,7 @@
 }
 /* Tous les labels au dessus */
 .lat .formulaire_spip .editer {
-	padding-left: var(--spip-form-spacing-x);
+	padding-#LEFT: var(--spip-form-spacing-x);
 }
 .lat .formulaire_spip .editer label,
 .lat .formulaire_spip .editer .label {
@@ -1099,6 +1145,9 @@
 #illustrations .vignette img,
 #documents_joints .image img.spip_logo {
 	background: url(#CHEMIN_IMAGE{fond-imgs.png});
+}
+#illustrations .vignette img.spip_document_icone {
+	background-image:none;
 }
 .formulaire_editer_logo .taille {
 	font-size: 0.9em;
@@ -1311,17 +1360,7 @@
 	margin-#LEFT: 0;
 	vertical-align: bottom;
 }
-.formulaire_editer_liens .associer_mot.obligatoire.nonvu {
-	background-color:#FFCDAF;
-}
-.formulaire_editer_liens .associer_mot select,
-.formulaire_editer_liens .associer_mot input.text {
-	width: 75%;
-}
-.formulaire_editer_liens .associer_mot .submit {
-	float: var(--spip-right);
-	margin-top: 3px;
-}
+
 
 /* retour visuel a la suppression et a l'ajout */
 .remove {background-color:#FFD0BF;}
@@ -1592,7 +1631,8 @@ img.aide {
 	#RIGHT: var(--spip-box-spacing-x);
 	z-index: 1;
 }
-.formulaire_spip .toggle_box_link button {
+.formulaire_spip .toggle_box_link button,
+.formulaire_spip .toggle_box_link .btn {
 	margin: 0;
 }
 /* Centrage vertical */

@@ -188,14 +188,26 @@ function traiter_echap_script_dist($regs) {
 
 define('_PROTEGE_BLOCS', ',<(html|pre|code|cadre|frame|script|style)(\s[^>]*)?>(.*)</\1>,UimsS');
 
-// - pour $source voir commentaire infra (echappe_retour)
-// - pour $no_transform voir le filtre post_autobr dans inc/filtres
-// https://code.spip.net/@echappe_html
+/**
+ * pour $source voir commentaire infra (echappe_retour)
+ * pour $no_transform voir le filtre post_autobr dans inc/filtres
+ * @see post_autobr()
+ *
+ * https://code.spip.net/@echappe_html
+ *
+ * @param string $letexte
+ * @param string $source
+ * @param bool $no_transform
+ * @param string $preg
+ * @param string $callback_prefix
+ * @return string|string[]
+ */
 function echappe_html(
 	$letexte,
 	$source = '',
 	$no_transform = false,
-	$preg = ''
+	$preg = '',
+	$callback_prefix = ''
 ) {
 	if (!is_string($letexte) or !strlen($letexte)) {
 		return $letexte;
@@ -222,12 +234,9 @@ function echappe_html(
 				$echap = $regs[0];
 			} // sinon les traiter selon le cas
 			else {
-				if (function_exists($f = 'traiter_echap_' . strtolower($regs[1]))) {
+				if (function_exists($f = $callback_prefix . 'traiter_echap_' . strtolower($regs[1]))
+				  or function_exists($f = $f . '_dist')) {
 					$echap = $f($regs);
-				} else {
-					if (function_exists($f = $f . '_dist')) {
-						$echap = $f($regs);
-					}
 				}
 			}
 

@@ -160,7 +160,6 @@ function date_picker_init(){
 var date_picker_loading;
 if (window.jQuery){
 	jQuery(function(){
-		console.log('dans inc-dateur jquery function', jQuery('input.date,input.heure').length, typeof(date_picker_loading));
 		if (jQuery('input.date,input.heure').length
 			&& typeof(date_picker_loading) === "undefined"){
 			date_picker_loading = jQuery.getScript('[(#PRODUIRE{fond=formulaires/dateur/jquery.dateur.js}|timestamp)]');

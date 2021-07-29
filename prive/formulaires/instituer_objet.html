@@ -23,7 +23,7 @@
 							<option value="#ENV{#GET{name}}">&nbsp;&nbsp;&nbsp;#ENV{#GET{name}}</option>
 						]
 					]
-						<BOUCLE_choix(POUR){tableau #ENV{_statuts}}{si #ENV{editable}}>
+						<BOUCLE_choix(DATA){source table, #ENV{_statuts}}{si #ENV{editable}}>
 							<option value="#CLE"[(#ENV{#GET{name}}|=={#CLE}|oui)selected="selected"]
 								style="background-image:url([(#CLE|puce_statut{#ENV{_objet}}|extraire_attribut{src})]);">&nbsp;&nbsp;&nbsp;[(#VALEUR|_T)]</option>
 						</BOUCLE_choix>

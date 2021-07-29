@@ -370,7 +370,7 @@ function generer_htpass($pass) {
 /**
  * Installe ou vérifie un fichier .htaccess, y compris sa prise en compte par Apache
  *
- * @uses recuperer_lapage()
+ * @uses recuperer_url()
  * @param string $rep
  *     Nom du répertoire où SPIP doit vérifier l'existence d'un fichier .htaccess
  * @param bool $force
@@ -410,10 +410,8 @@ function verifier_htaccess($rep, $force = false) {
 			include_spip('inc/distant');
 			$t = substr($t, strlen(_DIR_RACINE));
 			$t = url_de_base() . $t;
-			$ht = recuperer_lapage($t, false, 'HEAD', 0);
-			// htaccess inoperant si on a recupere des entetes HTTP
-			// (ignorer la reussite si connexion par fopen)
-			$ht = !(isset($ht[0]) and $ht[0]);
+			$ht = recuperer_url($t, ['methode' => 'HEAD', 'taille_max' => 0, 'follow_location' => false]);
+			$ht = ($ht['status'] ?? null) === 403;
 		}
 	}
 	spip_log("Creation de $htaccess " . ($ht ? ' reussie' : ' manquee'));

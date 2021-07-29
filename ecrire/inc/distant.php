@@ -368,7 +368,7 @@ function url_to_ascii($url_idn) {
  * au besoin encode son contenu dans le charset local
  *
  * @uses init_http()
- * @uses recuperer_entetes()
+ * @uses recuperer_entetes_complets()
  * @uses recuperer_body()
  * @uses transcoder_page()
  * @uses prepare_donnees_post()
@@ -376,8 +376,9 @@ function url_to_ascii($url_idn) {
  * @param string $url
  * @param array $options
  *   bool transcoder : true si on veut transcoder la page dans le charset du site
- *   string methode : Type de requête HTTP à faire (HEAD, GET ou POST)
+ *   string methode : Type de requête HTTP à faire (HEAD, GET, POST, PUT, DELETE)
  *   int taille_max : Arrêter le contenu au-delà (0 = seulement les entetes ==> requête HEAD). Par defaut taille_max = 1Mo ou 16Mo si copie dans un fichier
+ *   array headers : tableau associatif d'entetes https a envoyer
  *   string|array datas : Pour envoyer des donnees (array) et/ou entetes au complet, avec saut de ligne entre headers et donnees ( string @see prepare_donnees_post()) (force la methode POST si donnees non vide)
  *   string boundary : boundary pour formater les datas au format array
  *   bool refuser_gz : Pour forcer le refus de la compression (cas des serveurs orthographiques)
@@ -400,10 +401,13 @@ function url_to_ascii($url_idn) {
  *     string file : nom du fichier si enregistre dans un fichier
  */
 function recuperer_url($url, $options = array()) {
+	// Conserve la mémoire de la méthode fournit éventuellement
+	$methode_demandee = $options['methode'] ?? '';
 	$default = array(
 		'transcoder' => false,
 		'methode' => 'GET',
 		'taille_max' => null,
+		'headers' => [],
 		'datas' => '',
 		'boundary' => '',
 		'refuser_gz' => false,
@@ -424,15 +428,32 @@ function recuperer_url($url, $options = array()) {
 		$options['taille_max'] = $copy ? _COPIE_LOCALE_MAX_SIZE : _INC_DISTANT_MAX_SIZE;
 	}
 
+
+	// Ajout des en-têtes spécifiques si besoin
+	$head_add = '';
+	if (!empty($options['headers'])) {
+		foreach ($options['headers'] as $champ => $valeur) {
+			$head_add .= $champ . ': ' . $valeur . "\r\n";
+		}
+		// ne pas le repasser a recuperer_url si on follow un location, car ils seront dans datas
+		unset($options['entetes']);
+	}
+
 	if (!empty($options['datas'])) {
 		list($head, $postdata) = prepare_donnees_post($options['datas'], $options['boundary']);
+		$head .= $head_add;
 		if (stripos($head, 'Content-Length:') === false) {
-			$head .= 'Content-Length: ' . strlen($postdata);
+			$head .= 'Content-Length: ' . strlen($postdata) . "\r\n";
 		}
-		$options['datas'] = $head . "\r\n\r\n" . $postdata;
-		if (strlen($postdata)) {
+		$options['datas'] = $head . "\r\n" . $postdata;
+		if (
+			strlen($postdata)
+			and !$methode_demandee
+		) {
 			$options['methode'] = 'POST';
 		}
+	} elseif ($head_add) {
+		$options['datas'] = $head_add . "\r\n";
 	}
 
 	// Accepter les URLs au format feed:// ou qui ont oublie le http:// ou les urls relatives au protocole
@@ -654,167 +675,6 @@ function recuperer_url_cache($url, $options = array()) {
 }
 
 /**
- * Obsolète : Récupère une page sur le net et au besoin l'encode dans le charset local
- *
- * Gère les redirections de page (301) sur l'URL demandée (maximum 10 redirections)
- *
- * @deprecated
- * @uses recuperer_url()
- *
- * @param string $url
- *     URL de la page à récupérer
- * @param bool|string $trans
- *     - chaîne longue : c'est un nom de fichier (nom pour sa copie locale)
- *     - true : demande d'encodage/charset
- *     - null : ne retourner que les headers
- * @param bool $get_headers
- *     Si on veut récupérer les entêtes
- * @param int|null $taille_max
- *     Arrêter le contenu au-delà (0 = seulement les entetes ==> requête HEAD).
- *     Par defaut taille_max = 1Mo.
- * @param string|array $datas
- *     Pour faire un POST de données
- * @param string $boundary
- *     Pour forcer l'envoi par cette méthode
- * @param bool $refuser_gz
- *     Pour forcer le refus de la compression (cas des serveurs orthographiques)
- * @param string $date_verif
- *     Un timestamp unix pour arrêter la récuperation si la page distante
- *     n'a pas été modifiée depuis une date donnée
- * @param string $uri_referer
- *     Pour préciser un référer différent
- * @return string|bool
- *     - Code de la page obtenue (avec ou sans entête)
- *     - false si la page n'a pu être récupérée (status different de 200)
- **/
-function recuperer_page(
-	$url,
-	$trans = false,
-	$get_headers = false,
-	$taille_max = null,
-	$datas = '',
-	$boundary = '',
-	$refuser_gz = false,
-	$date_verif = '',
-	$uri_referer = ''
-) {
-	// $copy = copier le fichier ?
-	$copy = (is_string($trans) and strlen($trans) > 5); // eviter "false" :-)
-
-	if (!is_null($taille_max) and ($taille_max == 0)) {
-		$get = 'HEAD';
-	} else {
-		$get = 'GET';
-	}
-
-	$options = array(
-		'transcoder' => $trans === true,
-		'methode' => $get,
-		'datas' => $datas,
-		'boundary' => $boundary,
-		'refuser_gz' => $refuser_gz,
-		'if_modified_since' => $date_verif,
-		'uri_referer' => $uri_referer,
-		'file' => $copy ? $trans : '',
-		'follow_location' => 10,
-	);
-	if (!is_null($taille_max)) {
-		$options['taille_max'] = $taille_max;
-	}
-	// dix tentatives maximum en cas d'entetes 301...
-	$res = recuperer_url($url, $options);
-	if (!$res) {
-		return false;
-	}
-	if ($res['status'] !== 200) {
-		return false;
-	}
-	if ($get_headers) {
-		return $res['headers'] . "\n" . $res['page'];
-	}
-
-	return $res['page'];
-}
-
-
-/**
- * Obsolete Récupère une page sur le net et au besoin l'encode dans le charset local
- *
- * @deprecated
- *
- * @uses recuperer_url()
- *
- * @param string $url
- *     URL de la page à récupérer
- * @param bool|null|string $trans
- *     - chaîne longue : c'est un nom de fichier (nom pour sa copie locale)
- *     - true : demande d'encodage/charset
- *     - null : ne retourner que les headers
- * @param string $get
- *     Type de requête HTTP à faire (HEAD, GET ou POST)
- * @param int|bool $taille_max
- *     Arrêter le contenu au-delà (0 = seulement les entetes ==> requête HEAD).
- *     Par defaut taille_max = 1Mo.
- * @param string|array $datas
- *     Pour faire un POST de données
- * @param bool $refuser_gz
- *     Pour forcer le refus de la compression (cas des serveurs orthographiques)
- * @param string $date_verif
- *     Un timestamp unix pour arrêter la récuperation si la page distante
- *     n'a pas été modifiée depuis une date donnée
- * @param string $uri_referer
- *     Pour préciser un référer différent
- * @return string|array|bool
- *     - Retourne l'URL en cas de 301,
- *     - Un tableau (entête, corps) si ok,
- *     - false sinon
- **/
-function recuperer_lapage(
-	$url,
-	$trans = false,
-	$get = 'GET',
-	$taille_max = 1048576,
-	$datas = '',
-	$refuser_gz = false,
-	$date_verif = '',
-	$uri_referer = ''
-) {
-	// $copy = copier le fichier ?
-	$copy = (is_string($trans) and strlen($trans) > 5); // eviter "false" :-)
-
-	// si on ecrit directement dans un fichier, pour ne pas manipuler
-	// en memoire refuser gz
-	if ($copy) {
-		$refuser_gz = true;
-	}
-
-	$options = array(
-		'transcoder' => $trans === true,
-		'methode' => $get,
-		'datas' => $datas,
-		'refuser_gz' => $refuser_gz,
-		'if_modified_since' => $date_verif,
-		'uri_referer' => $uri_referer,
-		'file' => $copy ? $trans : '',
-		'follow_location' => false,
-	);
-	if (!is_null($taille_max)) {
-		$options['taille_max'] = $taille_max;
-	}
-	// dix tentatives maximum en cas d'entetes 301...
-	$res = recuperer_url($url, $options);
-
-	if (!$res) {
-		return false;
-	}
-	if ($res['status'] !== 200) {
-		return false;
-	}
-
-	return array($res['headers'], $res['page']);
-}
-
-/**
  * Recuperer le contenu sur lequel pointe la resource passee en argument
  * $taille_max permet de tronquer
  * de l'url dont on a deja recupere les en-tetes
@@ -913,41 +773,6 @@ function recuperer_entetes_complets($handle, $if_modified_since = false) {
 	$result['headers'] = implode('', $result['headers']);
 
 	return $result;
-}
-
-/**
- * Obsolete : version simplifiee de recuperer_entetes_complets
- * Retourne les informations d'entête HTTP d'un socket
- *
- * Lit les entêtes de reponse HTTP sur la socket $f
- *
- * @uses recuperer_entetes_complets()
- * @deprecated
- *
- * @param resource $f
- *     Socket d'un fichier (issu de fopen)
- * @param int|string $date_verif
- *     Pour tester une date de dernière modification
- * @return string|int|array
- *     - la valeur (chaîne) de l'en-tete Location si on l'a trouvée
- *     - la valeur (numerique) du statut si different de 200, notamment Not-Modified
- *     - le tableau des entetes dans tous les autres cas
- **/
-function recuperer_entetes($f, $date_verif = '') {
-	//Cas ou la page distante n'a pas bouge depuis
-	//la derniere visite
-	$res = recuperer_entetes_complets($f, $date_verif);
-	if (!$res) {
-		return false;
-	}
-	if ($res['location']) {
-		return $res['location'];
-	}
-	if ($res['status'] != 200) {
-		return $res['status'];
-	}
-
-	return explode("\n", $res['headers']);
 }
 
 /**
@@ -1104,9 +929,10 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 	// On va directement charger le debut des images et des fichiers html,
 	// de maniere a attrapper le maximum d'infos (titre, taille, etc). Si
 	// ca echoue l'utilisateur devra les entrer...
-	if ($headers = recuperer_page($source, false, true, $max, '', '', true)) {
-		list($headers, $a['body']) = preg_split(',\n\n,', $headers, 2);
-
+	$reponse = recuperer_url($source, ['taille_max' => $max, 'refuser_gz' => true]);
+	$headers = $reponse['headers'] ?? '';
+	$a['body'] = $reponse['page'] ?? '';
+	if ($headers) {
 		if (preg_match(",\nContent-Type: *([^[:space:];]*),i", "\n$headers", $regs)) {
 			$mime_type = (trim($regs[1]));
 		} else {
@@ -1218,7 +1044,8 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 
 	if ($mime_type == 'text/html') {
 		include_spip('inc/filtres');
-		$page = recuperer_page($source, true, false, _INC_DISTANT_MAX_SIZE);
+		$page = recuperer_url($source, ['transcoder' => true, 'taille_max' => _INC_DISTANT_MAX_SIZE]);
+		$page = $page['page'] ?? '';
 		if (preg_match(',<title>(.*?)</title>,ims', $page, $regs)) {
 			$a['titre'] = corriger_caracteres(trim($regs[1]));
 		}

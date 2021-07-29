@@ -97,6 +97,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_mot_heures' => 'eur',
 
 	// E
+	'ecran_connexion_couleur_principale' => 'Liv kentañ penn',
+	'ecran_connexion_image_fond' => 'Skeudenn adreñv',
+	'ecran_connexion_image_fond_explication' => 'Ober gant ur skeudenn (stumm JPEG, 1920x1080 pixels)',
+	'ecran_connexion_image_revenir_couleur_defaut' => 'Distreiñ d’al liv dre ziouer',
+	'ecran_connexion_titre' => 'Skramm evit kennaskañ',
 	'ecran_securite' => ' + skramm surentez @version@',
 	'email' => 'postel',
 	'email_2' => 'postel:',
@@ -151,6 +156,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_plugin_prefix_manquant' => 'N’eo ket termenet tachenn envel al lugant',
 	'erreur_plugin_tag_plugin_absent' => '&lt;lugant&gt; ezvezant er restr termenañ',
 	'erreur_plugin_version_manquant' => 'Stumm al lugant ezvezant',
+	'erreur_type_fichier' => 'Stumm restr fall',
 
 	// H
 	'htaccess_a_simuler' => 'Diwall: Ne vez ket dalc’het kont eus ar restroù @htaccess@ gant ho tafariad HTTP. Evit diogeliñ surentez vat eo ret deoc’h kemmañ ar c’hefluniadur-mañ war ar c’hraf-mañ, peotramant eo ret o defe an digemmennoù @constantes@ (a c’haller termenañ er restr  mes_options.php) talvoudoù levrioù-chomlec’h er-maez eus @document_root@.',
@@ -680,9 +686,9 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 	'plugin_titre_automatique_ajouter' => 'Ouzhpennañ adveziantoù',
 	'plugin_titre_installation' => 'Desezañ an askouez @plugin@',
 	'plugin_titre_modifier' => 'Va askouezioù plugin',
-	'plugin_utilise_extension_php' => 'Implijout an astenn PHP @plugin@ en version @version@.', # MODIF
-	'plugin_utilise_php' => 'Implijout @plugin@ en version @version@.', # MODIF
-	'plugin_utilise_plugin' => 'A ra gant ar plugin @plugin@ e doare @doare@', # MODIF
+	'plugin_utilise_extension_php' => 'An astenn PHP @plugin@ rank bezañ e stumm @version@.',
+	'plugin_utilise_php' => ' @plugin@ a rank bezañ @version@.',
+	'plugin_utilise_plugin' => 'Ar plugin @plugin@ rank bezañ e doare @version@.',
 	'plugin_zip_active' => 'Kendalc’hit evit e weredekaat',
 	'plugin_zip_adresse' => 'merkit amañ a-is chomlec’h restr zip un adveziant da bellgargañ, pe hini ul rollad adveziantoù.',
 	'plugin_zip_adresse_champ' => 'Chomlec’h an adveziant pe hini ar roll ',

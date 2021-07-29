@@ -98,6 +98,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_mot_heures' => 'ساعات',
 
 	// E
+	'ecran_connexion_couleur_principale' => 'اللون الأساسي',
+	'ecran_connexion_image_fond' => 'صورة الخلفية',
+	'ecran_connexion_image_fond_explication' => 'استخدام صورة (تنسيق JPEG، ١٩٢٠ x ١٠٨٠ نقطة)',
+	'ecran_connexion_image_revenir_couleur_defaut' => 'عودة الى اللون الافتراضي',
+	'ecran_connexion_titre' => 'شاشة الدخول',
 	'ecran_securite' => '+ شاشة الأمان @version@',
 	'email' => 'البريد الالكتروني',
 	'email_2' => 'البريد الالكتروني :',
@@ -153,6 +158,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_plugin_prefix_manquant' => 'حقل تسمية الملحق غير محدد',
 	'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; غير موجود في ملف التعريف',
 	'erreur_plugin_version_manquant' => 'اصدار الملحق غير موجود',
+	'erreur_type_fichier' => 'نوع ملفات غير صحيح',
 
 	// H
 	'htaccess_a_simuler' => 'تحذير: إن إعداد خادم HTTP لديك يتجاهل ملفات @htaccess@. لتوفير أمان فعّال لموقعك، يجب تغيير الإعداد بخصوص هذه المسألة، او ان تكون قيم الثوابت @constantes@ (التي يمكن تحديدها في ملف mes_options.php) مجلدات من خارج @document_root@.',

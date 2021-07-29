@@ -3,7 +3,7 @@
 
 	Ce squelette définit les styles des messages d'alerte de l'espace privé.
 
-	Ce composant correspond aux balises #ALERTE et cie.
+	Ce composant correspond aux balises #ALERTE_* et cie.
 
 	On maintient pour un temps la compat avec les vieux .notice, .error et .success
 	qui pourraient se ballader dans la nature, mais leur utilisation est dépréciée.
@@ -17,7 +17,7 @@
 
 	Markup :
 
-	.msg-alert[.type][.simple]
+	.msg-alert.type?.simple?
 	  .msg-alert__heading
 	  .msg-alert__text
 
