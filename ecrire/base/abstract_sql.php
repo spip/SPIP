@@ -1991,14 +1991,14 @@ function sql_date_proche($champ, $interval, $unite, $serveur = '', $option = tru
  * les éléments d'une colonne qui appartiennent à une liste donnée
  *
  * @example
- *     `sql_in('id_rubrique', array(3,4,5))`
+ *     `sql_in_quote('id_rubrique', array(3,4,5))`
  *     retourne approximativement «id_rubrique IN (3,4,5)» selon ce qu'attend
  *     le gestionnaire de base de donnée du connecteur en cours.
  *
  * @api
- * @param string $val
+ * @param string $champ
  *     Colonne SQL sur laquelle appliquer le test
- * @param array|string $valeurs
+ * @param array $valeurs
  *     Liste des valeurs possibles (séparés par des virgules si string)
  *     le format string est historique et n'est accepte que pour des ids numeriques car autrement la securite ne peut etre garantie
  * @param string $not
@@ -2006,6 +2006,8 @@ function sql_date_proche($champ, $interval, $unite, $serveur = '', $option = tru
  *     - 'NOT' inverse en sélectionnant les éléments ne correspondant pas aux valeurs
  * @param string $serveur
  *   Nom du connecteur
+ * @param string $type
+ *   type du champ pour le sql_quote
  * @param bool|string $option
  *   Peut avoir 2 valeurs :
  *
@@ -2014,23 +2016,16 @@ function sql_date_proche($champ, $interval, $unite, $serveur = '', $option = tru
  * @return string
  *     Expression de requête SQL
  **/
-function sql_in($val, $valeurs, $not = '', $serveur = '', $option = true) {
-	if (!is_array($valeurs)) {
-		$valeurs = strval($valeurs);
-		if(isset($valeurs[0]) and $valeurs[0] === ',') {
-			$valeurs = substr($valeurs, 1);
-		}
-		// on explode en tableau pour pouvoir securiser le contenu
-		$valeurs = explode(',', $valeurs);
-	}
-	$f = sql_serveur('quote', $serveur, true);
-	if (!is_string($f) or !$f) {
+function sql_in_quote($champ, $valeurs, $not = '', $serveur = '', $type = '', $option = true) {
+	$quote = sql_serveur('quote', $serveur, true);
+	if (!is_string($quote) or !$quote) {
 		return false;
 	}
+
 	// sql_quote produit une chaine dans tous les cas
 	$valeurs = array_filter($valeurs, function ($v) { return !is_array($v);});
 	$valeurs = array_unique($valeurs);
-	$valeurs = $f($valeurs);
+	$valeurs = $quote($valeurs, $type);
 
 	if (!strlen(trim($valeurs))) {
 		return ($not ? "0=0" : '0=1');
@@ -2041,8 +2036,38 @@ function sql_in($val, $valeurs, $not = '', $serveur = '', $option = true) {
 		return false;
 	}
 
-	return $f($val, $valeurs, $not, $serveur, $option !== false);
+	return $f($champ, $valeurs, $not ? 'NOT' : '', $serveur, $option !== false);
 }
+
+/**
+ * shorthand historique qui ne permet pas de specifier le type et qui accepte une string pour $valeurs
+ *
+ * @see sql_in_quote
+ *
+ * @param string $champ
+ * @param array|string $valeurs
+ *     Liste des valeurs possibles (séparés par des virgules si string)
+ *     le format string est historique et n'est accepte que pour des ids numeriques car autrement la securite ne peut etre garantie
+ * @param string $not
+ * @param string $serveur
+ * @param bool $option
+ */
+function sql_in($champ, $valeurs, $not = '', $serveur = '', $option = true){
+	$type = '';
+	if (!is_array($valeurs)) {
+		$valeurs = strval($valeurs);
+		if(isset($valeurs[0]) and $valeurs[0] === ',') {
+			$valeurs = substr($valeurs, 1);
+		}
+		// on explode en tableau pour pouvoir securiser le contenu
+		$valeurs = explode(',', $valeurs);
+		// et on force un cast de type int donc
+		$type = 'int';
+	}
+
+	return sql_in_quote($champ, $valeurs, $not, $serveur, $type, $option);
+}
+
 
 
 /**
