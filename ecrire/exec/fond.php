@@ -71,7 +71,7 @@ register_shutdown_function('shutdown_error');
 ob_start();
 # comme on est dans un exec, l'auth a deja ete testee
 # on peut appeler directement public.php
-include "public.php";
+include 'public.php';
 // flushons si cela ne l'a pas encore ete
 ob_end_flush();
 
@@ -81,5 +81,4 @@ ob_end_flush();
  * La fonction ne fait rien, c'est l'inclusion du fichier qui déclenche le traitement
  */
 function exec_fond_dist() {
-
 }

@@ -87,8 +87,8 @@ function creer_repertoire_documents($ext) {
 	// Cette variable de configuration peut etre posee par un plugin
 	// par exemple acces_restreint
 	// sauf pour logo/ utilise pour stocker les logoon et logooff
-	if (isset($GLOBALS['meta']["creer_htaccess"])
-		and $GLOBALS['meta']["creer_htaccess"] == 'oui'
+	if (isset($GLOBALS['meta']['creer_htaccess'])
+		and $GLOBALS['meta']['creer_htaccess'] == 'oui'
 	  and $ext !== 'logo') {
 		include_spip('inc/acces');
 		verifier_htaccess($rep);
@@ -136,9 +136,15 @@ function copier_document($ext, $orig, $source, $subdir = null) {
 
 	$orig = preg_replace(',\.\.+,', '.', $orig); // pas de .. dans le nom du doc
 	$dir = creer_repertoire_documents($subdir ? $subdir : $ext);
-	$dest = preg_replace("/[^.=\w-]+/", "_",
-		translitteration(preg_replace("/\.([^.]+)$/", "",
-			preg_replace("/<[^>]*>/", '', basename($orig)))));
+	$dest = preg_replace(
+		'/[^.=\w-]+/',
+		'_',
+		translitteration(preg_replace(
+			'/\.([^.]+)$/',
+			'',
+			preg_replace('/<[^>]*>/', '', basename($orig))
+		))
+	);
 
 	// ne pas accepter de noms de la forme -r90.jpg qui sont reserves
 	// pour les images transformees par rotation (action/documenter)
@@ -176,9 +182,8 @@ function determine_upload($type = '') {
 
 	if (!autoriser('chargerftp')
 		or $type == 'logos'
-	) # on ne le permet pas pour les logos
-	{
-		return false;
+	) { # on ne le permet pas pour les logos
+	return false;
 	}
 
 	$repertoire = _DIR_TRANSFERT;
@@ -269,28 +274,33 @@ function check_upload_error($error, $msg = '', $return = false) {
 	spip_log("Erreur upload $error -- cf. http://php.net/manual/fr/features.file-upload.errors.php");
 
 	switch ($error) {
-
 		case 4: /* UPLOAD_ERR_NO_FILE */
 			return true;
 
 		# on peut affiner les differents messages d'erreur
 		case 1: /* UPLOAD_ERR_INI_SIZE */
-			$msg = _T('upload_limit',
-				array('max' => ini_get('upload_max_filesize')));
+			$msg = _T(
+				'upload_limit',
+				array('max' => ini_get('upload_max_filesize'))
+			);
 			break;
 		case 2: /* UPLOAD_ERR_FORM_SIZE */
-			$msg = _T('upload_limit',
-				array('max' => ini_get('upload_max_filesize')));
+			$msg = _T(
+				'upload_limit',
+				array('max' => ini_get('upload_max_filesize'))
+			);
 			break;
 		case 3: /* UPLOAD_ERR_PARTIAL  */
-			$msg = _T('upload_limit',
-				array('max' => ini_get('upload_max_filesize')));
+			$msg = _T(
+				'upload_limit',
+				array('max' => ini_get('upload_max_filesize'))
+			);
 			break;
 
 		default: /* autre */
 			if (!$msg) {
 				$msg = _T('pass_erreur') . ' ' . $error
-					. '<br />' . propre("[->http://php.net/manual/fr/features.file-upload.errors.php]");
+					. '<br />' . propre('[->http://php.net/manual/fr/features.file-upload.errors.php]');
 			}
 			break;
 	}
@@ -300,13 +310,15 @@ function check_upload_error($error, $msg = '', $return = false) {
 		return $msg;
 	}
 
-	if (_request("iframe") == "iframe") {
+	if (_request('iframe') == 'iframe') {
 		echo "<div class='upload_answer upload_error'>$msg</div>";
 		exit;
 	}
 
 	include_spip('inc/minipres');
-	echo minipres($msg,
-		"<div style='text-align: " . $GLOBALS['spip_lang_right'] . "'><a href='" . rawurldecode($GLOBALS['redirect']) . "'><button type='button'>" . _T('ecrire:bouton_suivant') . "</button></a></div>");
+	echo minipres(
+		$msg,
+		"<div style='text-align: " . $GLOBALS['spip_lang_right'] . "'><a href='" . rawurldecode($GLOBALS['redirect']) . "'><button type='button'>" . _T('ecrire:bouton_suivant') . '</button></a></div>'
+	);
 	exit;
 }

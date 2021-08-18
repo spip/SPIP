@@ -96,35 +96,37 @@ function chercher_rubrique(
 
 	include_spip('inc/autoriser');
 	if (intval($id_objet) && !autoriser('modifier', $objet, $id_objet)) {
-		return "";
+		return '';
 	}
 	if (!sql_countsel('spip_rubriques')) {
-		return "";
+		return '';
 	}
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 	$form = $chercher_rubrique($id_parent, $objet, $restreint, ($objet == 'rubrique') ? $id_objet : 0);
 
 	if ($id_parent == 0) {
-		$logo = "racine-24.png";
+		$logo = 'racine-24.png';
 	} elseif ($id_secteur == $id_parent) {
-		$logo = "secteur-24.png";
+		$logo = 'secteur-24.png';
 	} else {
-		$logo = "rubrique-24.png";
+		$logo = 'rubrique-24.png';
 	}
 
-	$confirm = "";
+	$confirm = '';
 	if ($objet == 'rubrique') {
 		// si c'est une rubrique-secteur contenant des breves, demander la
 		// confirmation du deplacement
-		$contient_breves = sql_countsel('spip_breves', "id_rubrique=" . intval($id_objet));
+		$contient_breves = sql_countsel('spip_breves', 'id_rubrique=' . intval($id_objet));
 
 		if ($contient_breves > 0) {
 			$scb = ($contient_breves > 1 ? 's' : '');
-			$scb = _T('avis_deplacement_rubrique',
+			$scb = _T(
+				'avis_deplacement_rubrique',
 				array(
 					'contient_breves' => $contient_breves,
 					'scb' => $scb
-				));
+				)
+			);
 			$confirm .= "\n<div class='confirmer_deplacement verdana2'>"
 				. "<div class='choix'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace' /><label for='confirme-deplace'>"
 				. $scb .
@@ -138,15 +140,25 @@ function chercher_rubrique(
 		if (strpos($form, '<select') !== false) {
 			$form .= "<div style='text-align: " . $GLOBALS['spip_lang_right'] . ";'>"
 				. '<input class="fondo submit btn" type="submit" value="' . _T('bouton_choisir') . '"/>'
-				. "</div>";
+				. '</div>';
 		}
 		$form = "<input type='hidden' name='editer_$objet' value='oui' />\n" . $form;
-		if ($action = charger_fonction("editer_$objet", "action", true)) {
-			$form = generer_action_auteur("editer_$objet", $id_objet, self(), $form,
-				" method='post' class='submit_plongeur'");
+		if ($action = charger_fonction("editer_$objet", 'action', true)) {
+			$form = generer_action_auteur(
+				"editer_$objet",
+				$id_objet,
+				self(),
+				$form,
+				" method='post' class='submit_plongeur'"
+			);
 		} else {
-			$form = generer_action_auteur("editer_objet", "$objet/$id_objet", self(), $form,
-				" method='post' class='submit_plongeur'");
+			$form = generer_action_auteur(
+				'editer_objet',
+				"$objet/$id_objet",
+				self(),
+				$form,
+				" method='post' class='submit_plongeur'"
+			);
 		}
 	}
 
@@ -156,8 +168,7 @@ function chercher_rubrique(
 
 	include_spip('inc/presentation');
 
-	return debut_cadre_couleur($logo, true, "", $titre) . $form . fin_cadre_couleur(true);
-
+	return debut_cadre_couleur($logo, true, '', $titre) . $form . fin_cadre_couleur(true);
 }
 
 
@@ -171,10 +182,10 @@ function chercher_rubrique(
  * @return bool
  */
 function avoir_visiteurs($past = false, $accepter = true) {
-	if ($GLOBALS['meta']["forums_publics"] == 'abo') {
+	if ($GLOBALS['meta']['forums_publics'] == 'abo') {
 		return true;
 	}
-	if ($accepter and $GLOBALS['meta']["accepter_visiteurs"] <> 'non') {
+	if ($accepter and $GLOBALS['meta']['accepter_visiteurs'] <> 'non') {
 		return true;
 	}
 	if (sql_countsel('spip_articles', "accepter_forum='abo'")) {
@@ -184,9 +195,11 @@ function avoir_visiteurs($past = false, $accepter = true) {
 		return false;
 	}
 
-	return sql_countsel('spip_auteurs',
+	return sql_countsel(
+		'spip_auteurs',
 		"statut NOT IN ('0minirezo','1comite', '5poubelle')
-	                    AND (statut<>'nouveau' OR prefs NOT IN ('0minirezo','1comite', '5poubelle'))");
+	                    AND (statut<>'nouveau' OR prefs NOT IN ('0minirezo','1comite', '5poubelle'))"
+	);
 }
 
 /**
@@ -226,21 +239,21 @@ function statuts_articles_visibles($statut_auteur) {
  * @param string $attente
  * @return string
  */
-function traduire_statut_auteur($statut, $attente = "") {
-	$plus = "";
+function traduire_statut_auteur($statut, $attente = '') {
+	$plus = '';
 	if ($statut == 'nouveau') {
 		if ($attente) {
 			$statut = $attente;
-			$plus = " (" . _T('info_statut_auteur_a_confirmer') . ")";
+			$plus = ' (' . _T('info_statut_auteur_a_confirmer') . ')';
 		} else {
 			return _T('info_statut_auteur_a_confirmer');
 		}
 	}
 
 	$recom = array(
-		"info_administrateurs" => _T('item_administrateur_2'),
-		"info_redacteurs" => _T('intem_redacteur'),
-		"info_visiteurs" => _T('item_visiteur'),
+		'info_administrateurs' => _T('item_administrateur_2'),
+		'info_redacteurs' => _T('intem_redacteur'),
+		'info_visiteurs' => _T('item_visiteur'),
 		'5poubelle' => _T('texte_statut_poubelle'), // bouh
 	);
 	if (isset($recom[$statut])) {
@@ -309,11 +322,11 @@ function afficher_qui_edite($id_objet, $objet) {
  */
 function auteurs_lister_statuts($quoi = 'tous', $en_base = true) {
 	if (!defined('AUTEURS_MIN_REDAC')) {
-		define('AUTEURS_MIN_REDAC', "0minirezo,1comite,5poubelle");
+		define('AUTEURS_MIN_REDAC', '0minirezo,1comite,5poubelle');
 	}
 
 	switch ($quoi) {
-		case "redacteurs":
+		case 'redacteurs':
 			$statut = AUTEURS_MIN_REDAC;
 			$statut = explode(',', $statut);
 			if ($en_base) {
@@ -324,7 +337,7 @@ function auteurs_lister_statuts($quoi = 'tous', $en_base = true) {
 
 			return array_unique($statut);
 			break;
-		case "visiteurs":
+		case 'visiteurs':
 			$statut = array();
 			$exclus = AUTEURS_MIN_REDAC;
 			$exclus = explode(',', $exclus);
@@ -340,7 +353,7 @@ function auteurs_lister_statuts($quoi = 'tous', $en_base = true) {
 			return array_unique(array_merge($statut, $s_complement));
 			break;
 		default:
-		case "tous":
+		case 'tous':
 			$statut = array_values($GLOBALS['liste_des_statuts']);
 			$s_complement = array_column(
 				sql_allfetsel('DISTINCT statut', 'spip_auteurs', sql_in('statut', $statut, 'NOT')),
@@ -377,18 +390,18 @@ function trouver_rubrique_creer_objet($id_rubrique, $objet) {
 	if (!$id_rubrique and defined('_CHOIX_RUBRIQUE_PAR_DEFAUT') and _CHOIX_RUBRIQUE_PAR_DEFAUT) {
 		$in = !count($GLOBALS['connect_id_rubrique'])
 			? ''
-			: (" AND " . sql_in('id_rubrique', $GLOBALS['connect_id_rubrique']));
+			: (' AND ' . sql_in('id_rubrique', $GLOBALS['connect_id_rubrique']));
 
 		// on tente d'abord l'ecriture a la racine dans le cas des rubriques uniquement
 		if ($objet == 'rubrique') {
 			$id_rubrique = 0;
 		} else {
-			$id_rubrique = sql_getfetsel('id_rubrique', 'spip_rubriques', "id_parent=0$in", '', "id_rubrique DESC", 1);
+			$id_rubrique = sql_getfetsel('id_rubrique', 'spip_rubriques', "id_parent=0$in", '', 'id_rubrique DESC', 1);
 		}
 
 		if (!autoriser("creer{$objet}dans", 'rubrique', $id_rubrique)) {
 			// manque de chance, la rubrique n'est pas autorisee, on cherche un des secteurs autorises
-			$res = sql_select("id_rubrique", "spip_rubriques", "id_parent=0");
+			$res = sql_select('id_rubrique', 'spip_rubriques', 'id_parent=0');
 			while (!autoriser("creer{$objet}dans", 'rubrique', $id_rubrique) && $row_rub = sql_fetch($res)) {
 				$id_rubrique = $row_rub['id_rubrique'];
 			}
@@ -411,7 +424,7 @@ function lien_article_virtuel($virtuel) {
 		return '';
 	}
 
-	return propre("[->" . $virtuel . "]");
+	return propre('[->' . $virtuel . ']');
 }
 
 
@@ -488,7 +501,7 @@ function alertes_auteur($id_auteur) {
 			$update = true;
 		}
 		if ($update) {
-			ecrire_meta("message_alertes_auteurs", serialize($a));
+			ecrire_meta('message_alertes_auteurs', serialize($a));
 		}
 	}
 
@@ -513,7 +526,7 @@ function alertes_auteur($id_auteur) {
 	if ($alertes = array_filter($alertes)) {
 		return "<div class='wrap-messages-alertes'><div class='messages-alertes'>" .
 		join(' | ', $alertes)
-		. "</div></div>";
+		. '</div></div>';
 	}
 }
 
@@ -543,10 +556,10 @@ function filtre_afficher_enfant_rub_dist($id_rubrique) {
  *
  * @return string
  */
-function afficher_plus_info($lien, $titre = "+", $titre_lien = "") {
+function afficher_plus_info($lien, $titre = '+', $titre_lien = '') {
 	$titre = attribut_html($titre);
 	$icone = "\n<a href='$lien' title='$titre' class='plus_info'>" .
-		http_img_pack("information-16.png", $titre) . "</a>";
+		http_img_pack('information-16.png', $titre) . '</a>';
 
 	if (!$titre_lien) {
 		return $icone;
@@ -585,4 +598,3 @@ function lister_objets_lies($objet_source, $objet, $id_objet, $objet_lien) {
 	}
 	return $l;
 }
-

@@ -46,8 +46,14 @@ function install_etape_4_dist() {
 	// installer les extensions
 	include_spip('inc/plugin');
 	$afficher = charger_fonction('afficher_liste', 'plugins');
-	echo $afficher(self(), liste_plugin_files(_DIR_PLUGINS_DIST), array(), array(), _DIR_PLUGINS_DIST,
-		'afficher_nom_plugin');
+	echo $afficher(
+		self(),
+		liste_plugin_files(_DIR_PLUGINS_DIST),
+		array(),
+		array(),
+		_DIR_PLUGINS_DIST,
+		'afficher_nom_plugin'
+	);
 
 	// si la base de SPIP est up, on peut installer les plugins, sinon on passe cette etape
 	// car les plugins supposent que la base de SPIP est dans son etat normal (mise a jour)

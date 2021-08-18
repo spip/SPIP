@@ -179,13 +179,15 @@ class IterateurDATA implements Iterator {
 			return;
 		}
 
-		return cache_set($cle,
+		return cache_set(
+			$cle,
 			array(
 				'data' => $valeur,
 				'time' => time(),
 				'ttl' => $ttl
 			),
-			3600 + $ttl);
+			3600 + $ttl
+		);
 		# conserver le cache 1h de plus que la validite demandee,
 		# pour le cas ou le serveur distant ne reponde plus
 	}
@@ -231,7 +233,7 @@ class IterateurDATA implements Iterator {
 		// Si a ce stade on n'a pas de table, il y a un bug
 		if (!is_array($this->tableau)) {
 			$this->err = true;
-			spip_log("erreur datasource " . var_export($command, true));
+			spip_log('erreur datasource ' . var_export($command, true));
 		}
 
 		// {datapath query.results}
@@ -299,8 +301,10 @@ class IterateurDATA implements Iterator {
 		} else {
 			try {
 				if (isset($this->command['sourcemode'])
-					and in_array($this->command['sourcemode'],
-						array('table', 'array', 'tableau'))
+					and in_array(
+						$this->command['sourcemode'],
+						array('table', 'array', 'tableau')
+					)
 				) {
 					if (is_array($a = $src)
 						or (is_string($a)
@@ -311,13 +315,13 @@ class IterateurDATA implements Iterator {
 					}
 				} else {
 					$data = $src;
-					if (is_string($src)) { 
+					if (is_string($src)) {
 						if (tester_url_absolue($src)) {
 							include_spip('inc/distant');
 							$data = recuperer_url($src, ['taille_max' => _DATA_SOURCE_MAX_SIZE]);
 							$data = $data['page'] ?? '';
 							if (!$data) {
-								throw new Exception("404");
+								throw new Exception('404');
 							}
 							if (!isset($ttl)) {
 								$ttl = 24 * 3600;
@@ -350,12 +354,13 @@ class IterateurDATA implements Iterator {
 				if (!$this->err and isset($ttl) and $ttl > 0) {
 					$this->cache_set($cle, $ttl);
 				}
-
 			} catch (Exception $e) {
 				$e = $e->getMessage();
-				$err = sprintf("[%s, %s] $e",
+				$err = sprintf(
+					"[%s, %s] $e",
 					$src,
-					$this->command['sourcemode']);
+					$this->command['sourcemode']
+				);
 				erreur_squelette(array($err, array()));
 				$this->err = true;
 			}
@@ -406,8 +411,11 @@ class IterateurDATA implements Iterator {
 			}
 		}
 		if (count($this->command['enum']) >= 3) {
-			$enum = range(array_shift($this->command['enum']), array_shift($this->command['enum']),
-				array_shift($this->command['enum']));
+			$enum = range(
+				array_shift($this->command['enum']),
+				array_shift($this->command['enum']),
+				array_shift($this->command['enum'])
+			);
 		} else {
 			$enum = range(array_shift($this->command['enum']), array_shift($this->command['enum']));
 		}
@@ -422,7 +430,7 @@ class IterateurDATA implements Iterator {
 	 **/
 	protected function select_datapath() {
 		$base = reset($this->command['datapath']);
-		if (strlen($base = ltrim(trim($base), "/"))) {
+		if (strlen($base = ltrim(trim($base), '/'))) {
 			$this->tableau = table_valeur($this->tableau, $base);
 			if (!is_array($this->tableau)) {
 				$this->tableau = array();
@@ -482,7 +490,7 @@ class IterateurDATA implements Iterator {
 
 		if ($sortfunc) {
 			$sortfunc .= "\n return 0;";
-			uasort($this->tableau, function($aa, $bb) use ($sortfunc) {
+			uasort($this->tableau, function ($aa, $bb) use ($sortfunc) {
 				return eval($sortfunc);
 			});
 		}
@@ -667,14 +675,14 @@ function inc_csv_to_array_dist($data) {
 	include_spip('inc/charsets');
 	$i = 1;
 	foreach ($entete as $k => $v) {
-		if (trim($v) == "") {
-			$v = "col" . $i;
+		if (trim($v) == '') {
+			$v = 'col' . $i;
 		} // reperer des eventuelles cases vides
 		if (is_numeric($v) and $v < 0) {
-			$v = "__" . $v;
+			$v = '__' . $v;
 		} // ne pas risquer d'ecraser une cle numerique
 		if (is_numeric($v)) {
-			$v = "_" . $v;
+			$v = '_' . $v;
 		} // ne pas risquer d'ecraser une cle numerique
 		$v = strtolower(preg_replace(',\W+,', '_', translitteration($v)));
 		foreach ($csv as &$item) {
@@ -721,7 +729,8 @@ function inc_atom_to_array_dist($data) {
  * @return array|bool
  */
 function inc_glob_to_array_dist($data) {
-	$a = glob($data,
+	$a = glob(
+		$data,
 		GLOB_MARK | GLOB_NOSORT | GLOB_BRACE
 	);
 
@@ -737,7 +746,7 @@ function inc_glob_to_array_dist($data) {
  */
 function inc_yaml_to_array_dist($data) {
 	include_spip('inc/yaml-mini');
-	if (!function_exists("yaml_decode")) {
+	if (!function_exists('yaml_decode')) {
 		throw new Exception('YAML: impossible de trouver la fonction yaml_decode');
 
 		return false;
@@ -779,7 +788,7 @@ function inc_ls_to_array_dist($data) {
 				unset($b[$k]);
 			}
 		}
-		$b['file'] = preg_replace('`/$`','',$v) ;
+		$b['file'] = preg_replace('`/$`', '', $v) ;
 		$v = array_merge(
 			pathinfo($v),
 			$b
@@ -809,7 +818,8 @@ function XMLObjectToArray($object) {
 		}
 		if ($object->hasChildren()) {
 			$xml_array[$key][] = XMLObjectToArray(
-				$object->current());
+				$object->current()
+			);
 		} else {
 			$xml_array[$key][] = strval($object->current());
 		}

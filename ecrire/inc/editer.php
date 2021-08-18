@@ -326,8 +326,8 @@ function formulaires_editer_objet_charger(
 
 	// et in fine placer l'autorisation
 	include_spip('inc/autoriser');
-	if (intval($id)){
-		if (!autoriser('modifier', $type, intval($id))){
+	if (intval($id)) {
+		if (!autoriser('modifier', $type, intval($id))) {
 			$valeurs['editable'] = '';
 		}
 	}

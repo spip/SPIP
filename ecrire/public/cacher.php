@@ -29,7 +29,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function generer_nom_fichier_cache($contexte, $page) {
 	$u = md5(var_export(array($contexte, $page), true));
 
-	return $u . ".cache";
+	return $u . '.cache';
 }
 
 /**
@@ -47,7 +47,7 @@ function generer_nom_fichier_cache($contexte, $page) {
 function cache_chemin_fichier($nom_cache, $ecrire = false) {
 	static $l1, $l2;
 	if (is_null($l1)) {
-		$length = (defined('_CACHE_PROFONDEUR_STOCKAGE') ? min(8,max(_CACHE_PROFONDEUR_STOCKAGE,2)) : 4);
+		$length = (defined('_CACHE_PROFONDEUR_STOCKAGE') ? min(8, max(_CACHE_PROFONDEUR_STOCKAGE, 2)) : 4);
 		$l1 = intval(floor($length / 2));
 		$l2 = $length - $l1;
 	}
@@ -64,7 +64,7 @@ function cache_chemin_fichier($nom_cache, $ecrire = false) {
 		$rep = _DIR_CACHE . "$d/";
 	}
 
-	return $rep . $u . ".cache";
+	return $rep . $u . '.cache';
 }
 
 /**
@@ -75,7 +75,7 @@ function cache_chemin_fichier($nom_cache, $ecrire = false) {
  * @return bool
  */
 function ecrire_cache($nom_cache, $valeur) {
-	return ecrire_fichier(cache_chemin_fichier($nom_cache, true), serialize(array("nom_cache" => $nom_cache, "valeur" => $valeur)));
+	return ecrire_fichier(cache_chemin_fichier($nom_cache, true), serialize(array('nom_cache' => $nom_cache, 'valeur' => $valeur)));
 }
 
 /**
@@ -103,12 +103,15 @@ function cache_signature(&$page) {
 	if (!isset($GLOBALS['meta']['cache_signature'])) {
 		include_spip('inc/acces');
 		include_spip('auth/sha256.inc');
-		ecrire_meta('cache_signature',
+		ecrire_meta(
+			'cache_signature',
 			spip_sha256(
-				$_SERVER["DOCUMENT_ROOT"] 
-				. (isset($_SERVER['SERVER_SIGNATURE']) ? $_SERVER["SERVER_SIGNATURE"] : "")
+				$_SERVER['DOCUMENT_ROOT']
+				. (isset($_SERVER['SERVER_SIGNATURE']) ? $_SERVER['SERVER_SIGNATURE'] : '')
 				. creer_uniqid()
-			), 'non');
+			),
+			'non'
+		);
 	}
 
 	return crc32($GLOBALS['meta']['cache_signature'] . $page['texte']);
@@ -202,7 +205,6 @@ function cache_valide(&$page, $date) {
 	// #CACHE{n,statique} => on n'invalide pas avec derniere_modif
 	// cf. ecrire/public/balises.php, balise_CACHE_dist()
 	if (!isset($page['entetes']['X-Spip-Statique']) or $page['entetes']['X-Spip-Statique'] !== 'oui') {
-
 		// Cache invalide par la meta 'derniere_modif'
 		// sauf pour les bots, qui utilisent toujours le cache
 		if (!_IS_BOT
@@ -212,15 +214,13 @@ function cache_valide(&$page, $date) {
 		) {
 			return 1;
 		}
-
 	}
 
 	// Sinon comparer l'age du fichier a sa duree de cache
 	$duree = intval($page['entetes']['X-Spip-Cache']);
 	$cache_mark = (isset($GLOBALS['meta']['cache_mark']) ? $GLOBALS['meta']['cache_mark'] : 0);
-	if ($duree == 0)  #CACHE{0}
-	{
-		return -1;
+	if ($duree == 0) {  #CACHE{0}
+	return -1;
 	} // sauf pour les bots, qui utilisent toujours le cache
 	else {
 		if ((!_IS_BOT and $date + $duree < $now)
@@ -272,8 +272,10 @@ function creer_cache(&$page, &$chemin_cache) {
 			);
 			ecrire_cache($chemin_cache, $tmp);
 		}
-		$chemin_cache = generer_nom_fichier_cache(array("chemin_cache" => $chemin_cache),
-			array("session" => $page['invalideurs']['session']));
+		$chemin_cache = generer_nom_fichier_cache(
+			array('chemin_cache' => $chemin_cache),
+			array('session' => $page['invalideurs']['session'])
+		);
 	}
 
 	// ajouter la date de production dans le cache lui meme
@@ -289,13 +291,12 @@ function creer_cache(&$page, &$chemin_cache) {
 	// l'enregistrer, compresse ou non...
 	$ok = ecrire_cache($chemin_cache, $pagez);
 
-	spip_log((_IS_BOT ? "Bot:" : "") . "Creation du cache $chemin_cache pour "
-		. $page['entetes']['X-Spip-Cache'] . " secondes" . ($ok ? '' : ' (erreur!)'), _LOG_INFO);
+	spip_log((_IS_BOT ? 'Bot:' : '') . "Creation du cache $chemin_cache pour "
+		. $page['entetes']['X-Spip-Cache'] . ' secondes' . ($ok ? '' : ' (erreur!)'), _LOG_INFO);
 
 	// Inserer ses invalideurs
 	include_spip('inc/invalideur');
 	maj_invalideurs($chemin_cache, $page);
-
 }
 
 
@@ -360,13 +361,12 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	$contexte_implicite = $page['contexte_implicite'];
 
 	// Cas ignorant le cache car completement dynamique
-	if (
-		(!empty($_SERVER['REQUEST_METHOD']) and $_SERVER['REQUEST_METHOD'] === 'POST')
+	if ((!empty($_SERVER['REQUEST_METHOD']) and $_SERVER['REQUEST_METHOD'] === 'POST')
 		or _request('connect')
 	) {
 		$use_cache = -1;
 		$lastmodified = 0;
-		$chemin_cache = "";
+		$chemin_cache = '';
 		$page = array();
 
 		return;
@@ -385,8 +385,10 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	if (isset($page['invalideurs'])
 		and isset($page['invalideurs']['session'])
 	) {
-		$chemin_cache_session = generer_nom_fichier_cache(array("chemin_cache" => $chemin_cache),
-			array("session" => spip_session()));
+		$chemin_cache_session = generer_nom_fichier_cache(
+			array('chemin_cache' => $chemin_cache),
+			array('session' => spip_session())
+		);
 		if ($page_session = lire_cache($chemin_cache_session)
 			and $page_session['lastmodified'] >= $page['lastmodified']
 		) {

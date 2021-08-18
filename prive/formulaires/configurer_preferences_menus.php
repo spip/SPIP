@@ -58,9 +58,8 @@ function formulaires_configurer_preferences_menus_traiter_dist() {
 	}
 
 	// si le menu dev change, ou les menus favoris, on recharge toute la page.
-	if (
-		table_valeur($GLOBALS['visiteur_session'], 'prefs/activer_menudev') != $activer_menudev
-		OR $menus_favoris != obtenir_menus_favoris()
+	if (table_valeur($GLOBALS['visiteur_session'], 'prefs/activer_menudev') != $activer_menudev
+		or $menus_favoris != obtenir_menus_favoris()
 	) {
 		refuser_traiter_formulaire_ajax();
 

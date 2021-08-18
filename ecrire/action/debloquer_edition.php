@@ -39,7 +39,7 @@ function action_debloquer_edition_dist() {
 		if ($arg == 'tous') {
 			debloquer_tous($GLOBALS['visiteur_session']['id_auteur']);
 		} else {
-			$arg = explode("-", $arg);
+			$arg = explode('-', $arg);
 			list($objet, $id_objet) = $arg;
 			debloquer_edition($GLOBALS['visiteur_session']['id_auteur'], $id_objet, $objet);
 		}

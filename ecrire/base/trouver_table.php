@@ -73,7 +73,7 @@ function base_trouver_table_dist($nom, $serveur = '', $table_spip = true) {
 	}
 
 	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
-	$objets_sql = lister_tables_objets_sql("::md5");
+	$objets_sql = lister_tables_objets_sql('::md5');
 
 	// le nom du cache depend du serveur mais aussi du nom de la db et du prefixe
 	// ce qui permet une auto invalidation en cas de modif manuelle du fichier
@@ -81,8 +81,8 @@ function base_trouver_table_dist($nom, $serveur = '', $table_spip = true) {
 	if (!isset($nom_cache_desc_sql[$serveur][$objets_sql])) {
 		$nom_cache_desc_sql[$serveur][$objets_sql] =
 			_DIR_CACHE . 'sql_desc_'
-			. ($serveur ? "{$serveur}_" : "")
-			. substr(md5($connexion['db'] . ":" . $connexion['prefixe'] . ":$objets_sql"), 0, 8)
+			. ($serveur ? "{$serveur}_" : '')
+			. substr(md5($connexion['db'] . ':' . $connexion['prefixe'] . ":$objets_sql"), 0, 8)
 			. '.txt';
 		// nouveau nom de cache = nouvelle version en memoire
 		unset($connexion['tables']);
@@ -129,7 +129,6 @@ function base_trouver_table_dist($nom, $serveur = '', $table_spip = true) {
 		}
 	}
 	if ($table_spip and !isset($connexion['tables'][$nom_sql])) {
-
 		if (isset($GLOBALS['tables_principales'][$nom_sql])) {
 			$fdesc = $GLOBALS['tables_principales'][$nom_sql];
 		}
@@ -147,7 +146,6 @@ function base_trouver_table_dist($nom, $serveur = '', $table_spip = true) {
 		}  # table locale a cote de SPIP, comme non SPIP:
 	}
 	if (!isset($connexion['tables'][$nom_sql])) {
-
 		// La *vraie* base a la priorite
 		$desc = sql_showtable($nom_sql, $table_spip, $serveur);
 		if (!$desc or !$desc['field']) {
@@ -178,7 +176,7 @@ function base_trouver_table_dist($nom, $serveur = '', $table_spip = true) {
 		// $desc est prioritaire pour la description de la table
 		$desc = array_merge(lister_tables_objets_sql($nom_sql, $desc), $desc);
 		// s'assurer qu'on a toujours un 'key'
-		if (!isset($desc['key']) && !empty($fdesc['key'])){
+		if (!isset($desc['key']) && !empty($fdesc['key'])) {
 			$desc['key'] = $fdesc['key'];
 		}
 		if (! isset($desc['key'])) {

@@ -37,7 +37,7 @@ function plugins_get_infos_dist($plug = false, $reload = false, $dir = _DIR_PLUG
 	static $filecache = '';
 
 	if ($cache === '') {
-		$filecache = _DIR_TMP . "plugin_xml_cache.gz";
+		$filecache = _DIR_TMP . 'plugin_xml_cache.gz';
 		if (is_file($filecache)) {
 			lire_fichier($filecache, $contenu);
 			$cache = unserialize($contenu);
@@ -100,7 +100,7 @@ function plugins_get_infos_un($plug, $reload, $dir, &$cache) {
 	$md5 = md5_file($file);
 
 	$pcache = isset($cache[$dir][$plug])
-		? $cache[$dir][$plug] 
+		? $cache[$dir][$plug]
 		: array('filemtime' => 0, 'md5_file' => '');
 
 	// si le cache est valide
@@ -134,7 +134,7 @@ function plugins_get_infos_un($plug, $reload, $dir, &$cache) {
 
 	if ($diff) {
 		$cache[$dir][$plug] = $ret;
-#		echo count($cache[$dir]), $dir,$plug, " $reloadc<br>"; 
+#       echo count($cache[$dir]), $dir,$plug, " $reloadc<br>";
 	}
 
 	return $diff;

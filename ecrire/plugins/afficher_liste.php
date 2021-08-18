@@ -40,7 +40,8 @@ function plugins_afficher_liste_dist(
 
 	$all_infos = $get_infos($liste_plugins, false, $dir_plugins);
 
-	$all_infos = pipeline('filtrer_liste_plugins',
+	$all_infos = pipeline(
+		'filtrer_liste_plugins',
 		array(
 			'args' => array(
 				'liste_plugins' => $liste_plugins,
@@ -89,14 +90,16 @@ function plugins_afficher_liste_dist(
 		$actif = isset($fast_liste_plugins_actifs[$plug]);
 		$checked = isset($fast_liste_plugins_checked[$plug]);
 		$block_actif = $block_actif | $actif;
-		$expose = ($exposed and ($exposed == $plug or $exposed == $dir_plugins . $plug or $exposed == substr($dir_plugins,
-					strlen(_DIR_RACINE)) . $plug));
-		$block .= $ligne_plug($url_page, $plug, $checked, $actif, $expose, "item", $dir_plugins) . "\n";
+		$expose = ($exposed and ($exposed == $plug or $exposed == $dir_plugins . $plug or $exposed == substr(
+			$dir_plugins,
+			strlen(_DIR_RACINE)
+		) . $plug));
+		$block .= $ligne_plug($url_page, $plug, $checked, $actif, $expose, 'item', $dir_plugins) . "\n";
 	}
 	$res .= $block_par_lettre ? affiche_block_initiale($initiale, $block, $block_actif) : $block;
 	$class = basename($dir_plugins);
 
-	return $res ? "<ul class='liste-items plugins $class'>$res</ul>" : "";
+	return $res ? "<ul class='liste-items plugins $class'>$res</ul>" : '';
 }
 
 
@@ -108,8 +111,8 @@ function affiche_block_initiale($initiale, $block, $block_actif) {
 		. debut_block_depliable($block_actif)
 		. "<ul>$block</ul>"
 		. fin_block()
-		. "</li>";
+		. '</li>';
 	}
 
-	return "";
+	return '';
 }

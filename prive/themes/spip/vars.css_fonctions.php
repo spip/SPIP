@@ -39,7 +39,7 @@ function spip_generer_variables_css_typo(array $Pile) : \Spip_Css_Vars_Collectio
 
 	// Typographie
 	$vars->add('--spip-font-size', $Pile[0]['font-size']);
-	$vars->add('--spip-line-height',  $Pile[0]['line-height']);
+	$vars->add('--spip-line-height', $Pile[0]['line-height']);
 	$vars->add('--spip-text-indent', $Pile[0]['text-indent']);
 	$vars->add('--spip-font-family', $Pile[0]['font-family']);
 

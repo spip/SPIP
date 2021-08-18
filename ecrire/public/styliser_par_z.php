@@ -18,7 +18,7 @@
  *
  * @package SPIP\Core\Public\Styliser
  **/
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
@@ -36,27 +36,29 @@ function public_styliser_par_z_dist($flux) {
 	static $page;
 	static $disponible = array();
 	static $echafauder;
-	static $prepend = "";
+	static $prepend = '';
 
 	if (!isset($prefix_path)) {
 		$z_blocs = z_blocs(test_espace_prive());
 		if (test_espace_prive()) {
-			$prefix_path = "prive/squelettes/";
+			$prefix_path = 'prive/squelettes/';
 			$prefix_length = strlen($prefix_path);
 			$apl_constant = '_ECRIRE_AJAX_PARALLEL_LOAD';
 			$page = 'exec';
 			$echafauder = charger_fonction('echafauder', 'prive', true);
 			define('_ZCORE_EXCLURE_PATH', '');
 		} else {
-			$prefix_path = "";
+			$prefix_path = '';
 			$prefix_length = 0;
 			$apl_constant = '_Z_AJAX_PARALLEL_LOAD';
 			$page = _SPIP_PAGE;
 			$echafauder = charger_fonction('echafauder', 'public', true);
-			define('_ZCORE_EXCLURE_PATH', '\bprive|\bsquelettes-dist' . (defined('_DIR_PLUGIN_DIST') ? '|\b' . rtrim(_DIR_PLUGIN_DIST,
-						'/') : ''));
+			define('_ZCORE_EXCLURE_PATH', '\bprive|\bsquelettes-dist' . (defined('_DIR_PLUGIN_DIST') ? '|\b' . rtrim(
+				_DIR_PLUGIN_DIST,
+				'/'
+			) : ''));
 		}
-		$prepend = (defined('_Z_PREPEND_PATH') ? _Z_PREPEND_PATH : "");
+		$prepend = (defined('_Z_PREPEND_PATH') ? _Z_PREPEND_PATH : '');
 	}
 	$z_contenu = reset($z_blocs); // contenu par defaut
 
@@ -83,8 +85,8 @@ function public_styliser_par_z_dist($flux) {
 
 		// surcharger aussi les squelettes venant de squelettes-dist/
 		if ($squelette and !z_fond_valide($squelette)) {
-			$squelette = "";
-			$echafauder = "";
+			$squelette = '';
+			$echafauder = '';
 		}
 		if ($prepend) {
 			$squelette = substr(find_in_path($prefix_path . $prepend . "$fond.$ext"), 0, -strlen(".$ext"));
@@ -97,7 +99,6 @@ function public_styliser_par_z_dist($flux) {
 		// -> router vers les /dist.html
 		// ou scaffolding ou page automatique les contenus
 		if (!$squelette) {
-
 			// si on est sur un ?page=XX non trouve
 			if ((isset($flux['args']['contexte'][$page])
 					and $flux['args']['contexte'][$page] == $fond)
@@ -106,7 +107,6 @@ function public_styliser_par_z_dist($flux) {
 				or ($fond == 'sommaire'
 					and (!isset($flux['args']['contexte'][$page]) or !$flux['args']['contexte'][$page]))
 			) {
-
 				// si on est sur un ?page=XX non trouve
 				// se brancher sur contenu/xx si il existe
 				// ou si c'est un objet spip, associe a une table, utiliser le fond homonyme
@@ -141,8 +141,13 @@ function public_styliser_par_z_dist($flux) {
 				) {
 					$flux['data'] = $echafauder($type, $is[0], $is[1], $is[2], $ext);
 				} else {
-					$flux['data'] = ($disponible['404'] = z_contenu_disponible($prefix_path . $prepend, $z_contenu, '404', $ext,
-						$echafauder));
+					$flux['data'] = ($disponible['404'] = z_contenu_disponible(
+						$prefix_path . $prepend,
+						$z_contenu,
+						'404',
+						$ext,
+						$echafauder
+					));
 				}
 			}
 
@@ -178,9 +183,9 @@ function public_styliser_par_z_dist($flux) {
 			if (isset($flux['args']['contexte']['type-page'])
 				and (
 					(isset($flux['args']['contexte']['composition'])
-						and file_exists(($f = $squelette . "-" . $flux['args']['contexte']['type-page'] . "-" . $flux['args']['contexte']['composition']) . ".$ext"))
+						and file_exists(($f = $squelette . '-' . $flux['args']['contexte']['type-page'] . '-' . $flux['args']['contexte']['composition']) . ".$ext"))
 					or
-					file_exists(($f = $squelette . "-" . $flux['args']['contexte']['type-page']) . ".$ext")
+					file_exists(($f = $squelette . '-' . $flux['args']['contexte']['type-page']) . ".$ext")
 				)
 			) {
 				$flux['data'] = $f;
@@ -197,7 +202,7 @@ function public_styliser_par_z_dist($flux) {
 			and $dir = explode('/', $dir)
 			and $dir = reset($dir)
 			and in_array($dir, $z_blocs)
-			and $f = find_in_path($prefix_path . $prepend . $fond . "-" . $flux['args']['contexte']['composition'] . ".$ext")
+			and $f = find_in_path($prefix_path . $prepend . $fond . '-' . $flux['args']['contexte']['composition'] . ".$ext")
 		) {
 			$flux['data'] = substr($f, 0, -strlen(".$ext"));
 		}
@@ -281,14 +286,13 @@ function z_fond_valide($squelette) {
  * @return string
  */
 function z_trouver_bloc($prefix_path, $bloc, $fond, $ext) {
-	if (
-		(defined('_ZCORE_BLOC_PREFIX_SKEL') and $f = find_in_path("$prefix_path$bloc/$bloc.$fond.$ext") and z_fond_valide($f))
+	if ((defined('_ZCORE_BLOC_PREFIX_SKEL') and $f = find_in_path("$prefix_path$bloc/$bloc.$fond.$ext") and z_fond_valide($f))
 		or ($f = find_in_path("$prefix_path$bloc/$fond.$ext") and z_fond_valide($f))
 	) {
 		return substr($f, 0, -strlen(".$ext"));
 	}
 
-	return "";
+	return '';
 }
 
 /**
@@ -361,7 +365,7 @@ function z_echafaudable($type) {
  * @return string
  */
 function prive_echafauder_dist($exec, $table, $table_sql, $desc_exec, $ext) {
-	$scaffold = "";
+	$scaffold = '';
 
 	// page objet ou objet_edit
 	if (is_array($desc_exec)) {
@@ -369,7 +373,7 @@ function prive_echafauder_dist($exec, $table, $table_sql, $desc_exec, $ext) {
 		$primary = $desc_exec['id_table_objet'];
 
 		if ($desc_exec['edition'] === false) {
-			$fond = "objet";
+			$fond = 'objet';
 		} else {
 			$trouver_table = charger_fonction('trouver_table', 'base');
 			$desc = $trouver_table($table_sql);
@@ -381,21 +385,21 @@ function prive_echafauder_dist($exec, $table, $table_sql, $desc_exec, $ext) {
 		}
 		$dir = z_blocs(test_espace_prive());
 		$dir = reset($dir);
-		$scaffold = "<INCLURE{fond=prive/echafaudage/$dir/" . $fond . ",objet=" . $type . ",id_objet=#" . strtoupper($primary) . ",env}>";
+		$scaffold = "<INCLURE{fond=prive/echafaudage/$dir/" . $fond . ',objet=' . $type . ',id_objet=#' . strtoupper($primary) . ',env}>';
 	} // page objets
-	elseif ($type = $desc_exec and strpos($type, "/") === false) {
+	elseif ($type = $desc_exec and strpos($type, '/') === false) {
 		$dir = z_blocs(test_espace_prive());
 		$dir = reset($dir);
-		$scaffold = "<INCLURE{fond=prive/echafaudage/$dir/objets,objet=" . $type . ",env} />";
+		$scaffold = "<INCLURE{fond=prive/echafaudage/$dir/objets,objet=" . $type . ',env} />';
 	}
 	// morceau d'objet : on fournit le fond de sibstitution dans $desc_exec
 	// et objet et tire de $table
 	elseif ($fond = $desc_exec) {
 		$dir = md5(dirname($fond));
-		$scaffold = "<INCLURE{fond=$fond,objet=" . objet_type($table) . ",env} />";
+		$scaffold = "<INCLURE{fond=$fond,objet=" . objet_type($table) . ',env} />';
 	}
 
-	$base_dir = sous_repertoire(_DIR_CACHE, "scaffold", false);
+	$base_dir = sous_repertoire(_DIR_CACHE, 'scaffold', false);
 	$base_dir = sous_repertoire($base_dir, $dir, false);
 	$f = $base_dir . "$exec";
 	ecrire_fichier("$f.$ext", $scaffold);

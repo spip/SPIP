@@ -48,14 +48,14 @@ function block_parfois_visible($nom, $invite, $masque, $style = '', $visible = f
 }
 
 // https://code.spip.net/@debut_block_depliable
-function debut_block_depliable($deplie, $id = "") {
+function debut_block_depliable($deplie, $id = '') {
 	$class = ' blocdeplie';
 	// si on n'accepte pas js, ne pas fermer
 	if (!$deplie) {
-		$class = " blocreplie";
+		$class = ' blocreplie';
 	}
 
-	return "<div " . ($id ? "id='$id' " : "") . "class='bloc_depliable$class'>";
+	return '<div ' . ($id ? "id='$id' " : '') . "class='bloc_depliable$class'>";
 }
 
 // https://code.spip.net/@fin_block
@@ -64,30 +64,30 @@ function fin_block() {
 }
 
 // $texte : texte du bouton
-// $deplie : true (deplie) ou false (plie) ou -1 (inactif) ou 'incertain' pour que le bouton s'auto init au chargement de la page 
+// $deplie : true (deplie) ou false (plie) ou -1 (inactif) ou 'incertain' pour que le bouton s'auto init au chargement de la page
 // $ids : id des div lies au bouton (facultatif, par defaut c'est le div.bloc_depliable qui suit)
 // https://code.spip.net/@bouton_block_depliable
-function bouton_block_depliable($texte, $deplie, $ids = "") {
+function bouton_block_depliable($texte, $deplie, $ids = '') {
 	$bouton_id = 'b' . substr(md5($texte . microtime()), 0, 8);
 
-	$class = ($deplie === true) ? " deplie" : (($deplie == -1) ? " impliable" : " replie");
+	$class = ($deplie === true) ? ' deplie' : (($deplie == -1) ? ' impliable' : ' replie');
 	if (strlen($ids)) {
 		$cible = explode(',', $ids);
-		$cible = '#' . implode(",#", $cible);
+		$cible = '#' . implode(',#', $cible);
 	} else {
 		$cible = "#$bouton_id + div.bloc_depliable";
 	}
 
-	$b = (strpos($texte, "<h") === false ? 'h3' : 'div');
+	$b = (strpos($texte, '<h') === false ? 'h3' : 'div');
 
 	return "<$b "
-	. ($bouton_id ? "id='$bouton_id' " : "")
+	. ($bouton_id ? "id='$bouton_id' " : '')
 	. "class='titrem$class'"
 	. (($deplie === -1)
-		? ""
+		? ''
 		: " onmouseover=\"jQuery(this).depliant('$cible');\""
 	)
-	. ">"
+	. '>'
 	// une ancre pour rendre accessible au clavier le depliage du sous bloc
 	. "<a href='#' onclick=\"return jQuery(this).depliant_clicancre('$cible');\" class='titremancre'></a>"
 	. "$texte</$b>"
@@ -102,45 +102,47 @@ function bouton_block_depliable($texte, $deplie, $ids = "") {
 // https://code.spip.net/@verif_butineur
 function verif_butineur() {
 
-	preg_match(",^([A-Za-z]+)/([0-9]+\.[0-9]+) (.*)$,", $_SERVER['HTTP_USER_AGENT'], $match);
+	preg_match(',^([A-Za-z]+)/([0-9]+\.[0-9]+) (.*)$,', $_SERVER['HTTP_USER_AGENT'], $match);
 	$GLOBALS['browser_name'] = $match[1];
 	$GLOBALS['browser_version'] = $match[2];
 	$GLOBALS['browser_description'] = $match[3];
 	$GLOBALS['browser_layer'] = ' '; // compat avec vieux scripts qui testent la valeur
 	$GLOBALS['browser_barre'] = '';
 
-	if (!preg_match(",opera,i", $GLOBALS['browser_description']) && preg_match(",opera,i", $GLOBALS['browser_name'])) {
-		$GLOBALS['browser_name'] = "Opera";
+	if (!preg_match(',opera,i', $GLOBALS['browser_description']) && preg_match(',opera,i', $GLOBALS['browser_name'])) {
+		$GLOBALS['browser_name'] = 'Opera';
 		$GLOBALS['browser_version'] = $match[2];
 		$GLOBALS['browser_barre'] = ($GLOBALS['browser_version'] >= 8.5);
 	} else {
-		if (preg_match(",opera,i", $GLOBALS['browser_description'])) {
-			preg_match(",Opera ([^\ ]*),i", $GLOBALS['browser_description'], $match);
-			$GLOBALS['browser_name'] = "Opera";
+		if (preg_match(',opera,i', $GLOBALS['browser_description'])) {
+			preg_match(',Opera ([^\ ]*),i', $GLOBALS['browser_description'], $match);
+			$GLOBALS['browser_name'] = 'Opera';
 			$GLOBALS['browser_version'] = $match[1];
 			$GLOBALS['browser_barre'] = ($GLOBALS['browser_version'] >= 8.5);
 		} else {
-			if (preg_match(",msie,i", $GLOBALS['browser_description'])) {
-				preg_match(",MSIE ([^;]*),i", $GLOBALS['browser_description'], $match);
-				$GLOBALS['browser_name'] = "MSIE";
+			if (preg_match(',msie,i', $GLOBALS['browser_description'])) {
+				preg_match(',MSIE ([^;]*),i', $GLOBALS['browser_description'], $match);
+				$GLOBALS['browser_name'] = 'MSIE';
 				$GLOBALS['browser_version'] = $match[1];
 				$GLOBALS['browser_barre'] = ($GLOBALS['browser_version'] >= 5.5);
 			} else {
-				if (preg_match(",KHTML,i", $GLOBALS['browser_description']) &&
-					preg_match(",Safari/([^;]*),", $GLOBALS['browser_description'], $match)
+				if (preg_match(',KHTML,i', $GLOBALS['browser_description']) &&
+					preg_match(',Safari/([^;]*),', $GLOBALS['browser_description'], $match)
 				) {
-					$GLOBALS['browser_name'] = "Safari";
+					$GLOBALS['browser_name'] = 'Safari';
 					$GLOBALS['browser_version'] = $match[1];
 					$GLOBALS['browser_barre'] = ($GLOBALS['browser_version'] >= 5.0);
 				} else {
-					if (preg_match(",mozilla,i", $GLOBALS['browser_name']) and $GLOBALS['browser_version'] >= 5) {
+					if (preg_match(',mozilla,i', $GLOBALS['browser_name']) and $GLOBALS['browser_version'] >= 5) {
 						// Numero de version pour Mozilla "authentique"
-						if (preg_match(",rv:([0-9]+\.[0-9]+),", $GLOBALS['browser_description'], $match)) {
+						if (preg_match(',rv:([0-9]+\.[0-9]+),', $GLOBALS['browser_description'], $match)) {
 							$GLOBALS['browser_rev'] = doubleval($match[1]);
 						} // Autres Gecko => equivalents 1.4 par defaut (Galeon, etc.)
 						else {
-							if (strpos($GLOBALS['browser_description'], "Gecko") and !strpos($GLOBALS['browser_description'],
-									"KHTML")
+							if (strpos($GLOBALS['browser_description'], 'Gecko') and !strpos(
+								$GLOBALS['browser_description'],
+								'KHTML'
+							)
 							) {
 								$GLOBALS['browser_rev'] = 1.4;
 							} // Machins quelconques => equivalents 1.0 par defaut (Konqueror, etc.)
@@ -156,7 +158,7 @@ function verif_butineur() {
 	}
 
 	if (!$GLOBALS['browser_name']) {
-		$GLOBALS['browser_name'] = "Mozilla";
+		$GLOBALS['browser_name'] = 'Mozilla';
 	}
 }
 

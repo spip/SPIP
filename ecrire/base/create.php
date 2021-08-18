@@ -85,7 +85,7 @@ function creer_ou_upgrader_table($table, $desc, $autoinc, $upgrade = false, $ser
 			#if (!$sql_desc) $sql_desc = false;
 			#spip_log("Resultat table=$table sql_desc:$sql_desc","dbinstall"._LOG_INFO_IMPORTANTE);
 			if (!$sql_desc) {
-				spip_log("Echec creation table $table", "maj" . _LOG_CRITIQUE);
+				spip_log("Echec creation table $table", 'maj' . _LOG_CRITIQUE);
 			}
 		}
 	} else {
@@ -97,7 +97,7 @@ function creer_ou_upgrader_table($table, $desc, $autoinc, $upgrade = false, $ser
 		if (isset($desc['field'])) {
 			foreach ($desc['field'] as $field => $type) {
 				if (!isset($sql_desc['field'][$field])) {
-					sql_alter("TABLE $table ADD $field $type" . ($last ? " AFTER $last" : ""), $serveur);
+					sql_alter("TABLE $table ADD $field $type" . ($last ? " AFTER $last" : ''), $serveur);
 				}
 				$last = $field;
 			}
@@ -112,7 +112,6 @@ function creer_ou_upgrader_table($table, $desc, $autoinc, $upgrade = false, $ser
 				$last = $field;
 			}
 		}
-
 	}
 }
 

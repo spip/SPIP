@@ -46,7 +46,6 @@ function logo_supprimer($objet, $id_objet, $etat) {
 		elseif ($doc = $logo[5]
 			and isset($doc['id_document'])
 		  and $id_document = $doc['id_document']) {
-
 			include_spip('action/editer_liens');
 			// supprimer le lien dans la base
 			objet_dissocier(array('document' => $id_document), array($objet => $id_objet), array('role' => '*'));
@@ -80,8 +79,8 @@ function logo_modifier($objet, $id_objet, $etat, $source) {
 	$primary = id_table_objet($objet);
 	include_spip('inc/chercher_logo');
 
-	$mode = preg_replace(",\W,", '', $etat);
-	if (!$mode){
+	$mode = preg_replace(',\W,', '', $etat);
+	if (!$mode) {
 		spip_log("logo_modifier : etat $etat invalide", 'logo');
 		$erreur = 'etat invalide';
 
@@ -144,7 +143,6 @@ function logo_modifier($objet, $id_objet, $etat, $source) {
 	}
 
 	return ''; // tout est bon, pas d'erreur
-
 }
 
 function logo_migrer_en_base($objet, $time_limit) {
@@ -167,7 +165,7 @@ function logo_migrer_en_base($objet, $time_limit) {
 		$dir = (defined('_DIR_LOGOS') ? _DIR_LOGOS : _DIR_IMG);
 
 		$deja = array();
-		$files = glob($dir . $nom_base . "*");
+		$files = glob($dir . $nom_base . '*');
 
 		foreach ($files as $file) {
 			$logo = substr($file, strlen($dir . $nom_base));
@@ -201,7 +199,6 @@ function logo_migrer_en_base($objet, $time_limit) {
 				return;
 			}
 		}
-
 	}
 	effacer_meta('drapeau_edition');
 }

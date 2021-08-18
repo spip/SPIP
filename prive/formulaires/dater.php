@@ -87,7 +87,7 @@ function formulaires_dater_charger_dist($objet, $id_objet, $retour = '', $option
 		$select .= ",$champ_date_redac as date_redac";
 	}
 	if (isset($desc['field']['statut'])) {
-		$select .= ",statut";
+		$select .= ',statut';
 	}
 
 
@@ -370,8 +370,7 @@ function dater_recuperer_date_saisie($post, $quoi = 'date') {
 
 		return array($regs[3], $regs[2], $regs[1]);
 	} else {
-		if (
-			checkdate(intval($regs[2]), intval($regs[1]), intval($regs[3]))
+		if (checkdate(intval($regs[2]), intval($regs[1]), intval($regs[3]))
 			and $t = mktime(0, 0, 0, $regs[2], $regs[1], $regs[3])
 		) {
 			return array(date('Y', $t), date('m', $t), date('d', $t));

@@ -31,20 +31,28 @@ include_spip('inc/headers');
 function exec_upgrade_dist() {
 
 	if (!_FILE_CONNECT) {
-		redirige_url_ecrire("install");
+		redirige_url_ecrire('install');
 	}
 
 	// Si reinstallation necessaire, message ad hoc
 	if (_request('reinstall') == 'oui') {
 		include_spip('inc/minipres');
-		$r = minipres(_T('titre_page_upgrade'),
-			"<p><b>"
+		$r = minipres(
+			_T('titre_page_upgrade'),
+			'<p><b>'
 			. _T('texte_nouvelle_version_spip_1')
-			. "</b><p> "
-			. _T('texte_nouvelle_version_spip_2',
-				array('connect' => '<tt>' . _FILE_CONNECT . '</tt>'))
-			. generer_form_ecrire('upgrade', "<input type='hidden' name='reinstall' value='non' />", '',
-				_T('bouton_relancer_installation')));
+			. '</b><p> '
+			. _T(
+				'texte_nouvelle_version_spip_2',
+				array('connect' => '<tt>' . _FILE_CONNECT . '</tt>')
+			)
+			. generer_form_ecrire(
+				'upgrade',
+				"<input type='hidden' name='reinstall' value='non' />",
+				'',
+				_T('bouton_relancer_installation')
+			)
+		);
 		echo $r;
 	} elseif (_request('fin')) {
 		include_spip('inc/plugin');
@@ -53,7 +61,6 @@ function exec_upgrade_dist() {
 		$res = generer_url_ecrire('admin_plugin', 'var_mode=recalcul');
 		echo redirige_formulaire($res);
 	} else {
-
 		if (!isset($GLOBALS['meta']['version_installee'])) {
 			$GLOBALS['meta']['version_installee'] = 0.0;
 		} else {
@@ -72,7 +79,7 @@ function exec_upgrade_dist() {
 			$commentaire = _T('texte_mise_a_niveau_base_1');
 		}
 
-		$commentaire .= "<br />[" . $GLOBALS['meta']['version_installee'] . "/" . $GLOBALS['spip_version_base'] . "]";
+		$commentaire .= '<br />[' . $GLOBALS['meta']['version_installee'] . '/' . $GLOBALS['spip_version_base'] . ']';
 
 		$_POST['reinstall'] = 'non'; // pour copy_request dans admin
 		include_spip('inc/headers');

@@ -77,7 +77,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect =
 		return $nom;
 	}
 
-	// charger le source, si possible, et compiler 
+	// charger le source, si possible, et compiler
 	$skel_code = '';
 	if (lire_fichier($source, $skel)) {
 		$compiler = charger_fonction('compiler', 'public');
@@ -122,7 +122,6 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect =
 	}
 
 	if (defined('_VAR_MODE') and _VAR_MODE == 'debug') {
-
 		// Tracer ce qui vient d'etre compile
 		$GLOBALS['debug_objets']['code'][$nom . 'tout'] = $code;
 
@@ -146,10 +145,10 @@ function squelette_traduit($squelette, $sourcefile, $phpfile, $boucles) {
 		$code = "
 /*
  * Squelette : $sourcefile
- * Date :      " . gmdate("D, d M Y H:i:s", @filemtime($sourcefile)) . " GMT
- * Compile :   " . gmdate("D, d M Y H:i:s", time()) . " GMT
- * " . (!$boucles ? "Pas de boucle" : ("Boucles :   " . $noms)) . "
- */ ";
+ * Date :      " . gmdate('D, d M Y H:i:s', @filemtime($sourcefile)) . ' GMT
+ * Compile :   ' . gmdate('D, d M Y H:i:s', time()) . ' GMT
+ * ' . (!$boucles ? 'Pas de boucle' : ('Boucles :   ' . $noms)) . '
+ */ ';
 	}
 
 	$code = '<' . "?php\n" . $code . join('', $boucles) . "\n?" . '>';
@@ -204,7 +203,10 @@ function analyse_resultat_skel($nom, $cache, $corps, $source = '') {
 	if (stripos($corps, 'header') !== false
 		and preg_match_all(
 			'/(<[?]php\s+)@?header\s*\(\s*.([^:\'"]*):?\s*([^)]*)[^)]\s*\)\s*[;]?\s*[?]>/ims',
-			$corps, $regs, PREG_SET_ORDER)
+			$corps,
+			$regs,
+			PREG_SET_ORDER
+		)
 	) {
 		foreach ($regs as $r) {
 			$corps = str_replace($r[0], '', $corps);
@@ -212,7 +214,7 @@ function analyse_resultat_skel($nom, $cache, $corps, $source = '') {
 			$j = join('-', array_map('ucwords', explode('-', strtolower($r[2]))));
 
 			if ($j == 'X-Spip-Filtre' and isset($headers[$j])) {
-				$headers[$j] .= "|" . $r[3];
+				$headers[$j] .= '|' . $r[3];
 			} else {
 				$headers[$j] = $r[3];
 			}
@@ -299,8 +301,7 @@ if ($lang_select) lang_select();
  *     Code PHP pour inclure le squelette de la balise dynamique
  **/
 function synthetiser_balise_dynamique($nom, $args, $file, $context_compil) {
-	if (
-		strncmp($file, "/", 1) !== 0 
+	if (strncmp($file, '/', 1) !== 0
 		// pas de lien symbolique sous Windows
 		and !(stristr(PHP_OS, 'WIN') and strpos($file, ':') !== false)
 	) {
@@ -308,7 +309,7 @@ function synthetiser_balise_dynamique($nom, $args, $file, $context_compil) {
 	}
 
 	$lang = $context_compil[4];
-	if (preg_match(",\W,", $lang)) {
+	if (preg_match(',\W,', $lang)) {
 		$lang = '';
 	}
 
@@ -318,12 +319,14 @@ function synthetiser_balise_dynamique($nom, $args, $file, $context_compil) {
 	}
 	$args = join(', ', $args);
 
-	$r = sprintf(CODE_INCLURE_BALISE,
+	$r = sprintf(
+		CODE_INCLURE_BALISE,
 		$file,
 		$lang,
 		$nom,
 		$args,
-		join(', ', array_map('_q', $context_compil)));
+		join(', ', array_map('_q', $context_compil))
+	);
 
 	return $r;
 }
@@ -353,7 +356,7 @@ function argumenter_squelette($v) {
 			$out [] = argumenter_squelette($k) . '=>' . argumenter_squelette($val);
 		}
 
-		return 'array(' . join(", ", $out) . ')';
+		return 'array(' . join(', ', $out) . ')';
 	}
 }
 
@@ -388,7 +391,7 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 	/** @var string Nom de la balise à charger (balise demandée ou balise générique) */
 	$nom_balise = $nom;
 	/** @var string Nom de la balise générique (si utilisée) */
-	$nom_balise_generique = "";
+	$nom_balise_generique = '';
 
 	$appel_php_depuis_modele = false;
 	if (is_array($context_compil)
@@ -403,7 +406,7 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 	if (!$fonction_balise = charger_fonction($nom_balise, 'balise', true)) {
 		// Calculer un nom générique (ie. 'formulaire_' dans 'formulaire_editer_article')
 		if ($balise_generique = chercher_balise_generique($nom)) {
-			// injecter en premier arg le nom de la balise 
+			// injecter en premier arg le nom de la balise
 			array_unshift($args, $nom);
 			$nom_balise_generique = $balise_generique['nom_generique'];
 			$fonction_balise = $balise_generique['fonction_generique'];
@@ -421,7 +424,7 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 
 	// retrouver le fichier qui a déclaré la fonction
 	// même si la fonction dynamique est déclarée dans un fichier de fonctions.
-	// Attention sous windows, getFileName() retourne un antislash. 
+	// Attention sous windows, getFileName() retourne un antislash.
 	$reflector = new ReflectionFunction($fonction_balise);
 	$file = str_replace('\\', '/', $reflector->getFileName());
 	if (strncmp($file, str_replace('\\', '/', _ROOT_RACINE), strlen(_ROOT_RACINE)) === 0) {
@@ -437,16 +440,15 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 		return $r;
 	}
 
-	// verifier que la fonction dyn est la, 
+	// verifier que la fonction dyn est la,
 	// sinon se replier sur la generique si elle existe
 	if (!function_exists('balise_' . $nom_balise . '_dyn')) {
-		if (
-			$balise_generique = chercher_balise_generique($nom)
+		if ($balise_generique = chercher_balise_generique($nom)
 			and $nom_balise_generique = $balise_generique['nom_generique']
-			and $file = include_spip("balise/" . strtolower($nom_balise_generique))
+			and $file = include_spip('balise/' . strtolower($nom_balise_generique))
 			and function_exists('balise_' . $nom_balise_generique . '_dyn')
 		) {
-			// et lui injecter en premier arg le nom de la balise 
+			// et lui injecter en premier arg le nom de la balise
 			array_unshift($r, $nom);
 			$nom_balise = $nom_balise_generique;
 			if (!_DIR_RESTREINT) {
@@ -464,26 +466,25 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 		$context_compil['appel_php_depuis_modele'] = true;
 	}
 	return synthetiser_balise_dynamique($nom_balise, $r, $file, $context_compil);
-
 }
 
 /**
  * Pour une balise "NOM" donné, cherche s'il existe une balise générique qui peut la traiter
  *
  * Le nom de balise doit contenir au moins un souligné "A_B", auquel cas on cherche une balise générique "A_"
- * 
+ *
  * S'il y a plus d'un souligné, tel que "A_B_C_D" on cherche différentes balises génériques en commençant par la plus longue possible,
  * tel que "A_B_C_", sinon "A_B_" sinon "A_"
- * 
+ *
  * @param string $nom
  * @return array|null
  */
 function chercher_balise_generique($nom) {
-	if (false === strpos($nom, "_")) {
+	if (false === strpos($nom, '_')) {
 		return null;
 	}
 	$nom_generique = $nom;
-	while (false !== ($p = strrpos($nom_generique, "_"))) {
+	while (false !== ($p = strrpos($nom_generique, '_'))) {
 		$nom_generique = substr($nom_generique, 0, $p + 1);
 		$fonction_generique = charger_fonction($nom_generique, 'balise', true);
 		if ($fonction_generique) {
@@ -584,7 +585,7 @@ function match_self($w) {
 		return false;
 	}
 	if (is_array($w)) {
-		if (in_array(reset($w), array("SELF", "SUBSELECT"))) {
+		if (in_array(reset($w), array('SELF', 'SUBSELECT'))) {
 			return $w;
 		}
 		foreach (array_filter($w, 'is_array') as $sw) {
@@ -611,7 +612,7 @@ function match_self($w) {
  **/
 function remplace_sous_requete($w, $sousrequete) {
 	if (is_array($w)) {
-		if (in_array(reset($w), array("SELF", "SUBSELECT"))) {
+		if (in_array(reset($w), array('SELF', 'SUBSELECT'))) {
 			return $sousrequete;
 		}
 		foreach ($w as $k => $sw) {
@@ -714,7 +715,7 @@ function calculer_select(
 	list($where_simples, $where_sous) = trouver_sous_requetes($where);
 	foreach ($where_sous as $k => $w) {
 		$menage = true;
-		// on recupere la sous requete 
+		// on recupere la sous requete
 		$sous = match_self($w);
 		if ($sous[0] == 'SELF') {
 			// c'est une sous requete identique a elle meme sous la forme (SELF,$select,$where)
@@ -730,14 +731,21 @@ function calculer_select(
 			// on construit le where une fois, puis on ajoute les where complentaires si besoin, et on reconstruit le where en fonction
 			$i = 0;
 			do {
-				$where[$k] = remplace_sous_requete($w, "(" . calculer_select(
-						array($sous[1] . " AS id"),
-						$from,
-						$from_type,
-						$wheresub,
-						$jsub,
-						array(), array(), '',
-						$having, $table, $id, $serveur, false) . ")");
+				$where[$k] = remplace_sous_requete($w, '(' . calculer_select(
+					array($sous[1] . ' AS id'),
+					$from,
+					$from_type,
+					$wheresub,
+					$jsub,
+					array(),
+					array(),
+					'',
+					$having,
+					$table,
+					$id,
+					$serveur,
+					false
+				) . ')');
 				if (!$i) {
 					$i = 1;
 					$wherestring = calculer_where_to_string($where[$k]);
@@ -756,19 +764,22 @@ function calculer_select(
 		if ($sous[0] == 'SUBSELECT') {
 			// c'est une sous requete explicite sous la forme identique a sql_select : (SUBSELECT,$select,$from,$where,$groupby,$orderby,$limit,$having)
 			array_push($where_simples, $sous[3]); // est-ce utile dans ce cas ?
-			$where[$k] = remplace_sous_requete($w, "(" . calculer_select(
-					$sous[1], # select
-					$sous[2], #from
-					array(), #from_type
-					$sous[3] ? (is_array($sous[3]) ? $sous[3] : array($sous[3])) : array(),
-					#where, qui peut etre de la forme string comme dans sql_select
+			$where[$k] = remplace_sous_requete($w, '(' . calculer_select(
+				$sous[1], # select
+				$sous[2], #from
+				array(), #from_type
+				$sous[3] ? (is_array($sous[3]) ? $sous[3] : array($sous[3])) : array(),
+				#where, qui peut etre de la forme string comme dans sql_select
 					array(), #join
-					$sous[4] ? $sous[4] : array(), #groupby
-					$sous[5] ? $sous[5] : array(), #orderby
-					$sous[6], #limit
-					$sous[7] ? $sous[7] : array(), #having
-					$table, $id, $serveur, false
-				) . ")");
+				$sous[4] ? $sous[4] : array(), #groupby
+				$sous[5] ? $sous[5] : array(), #orderby
+				$sous[6], #limit
+				$sous[7] ? $sous[7] : array(), #having
+				$table,
+				$id,
+				$serveur,
+				false
+			) . ')');
 		}
 		array_pop($where_simples);
 	}
@@ -831,15 +842,15 @@ function calculer_select(
 			// un implode(' ',..) est fait dans reinjecte_joint un peu plus bas
 			$afrom[$t][$cle] = array(
 				"\n" .
-				(isset($from_type[$cle]) ? $from_type[$cle] : "INNER") . " JOIN",
+				(isset($from_type[$cle]) ? $from_type[$cle] : 'INNER') . ' JOIN',
 				$from[$cle],
 				"AS $cle",
-				"ON (",
+				'ON (',
 				"$cle.$c",
-				"=",
+				'=',
 				"$t.$carr",
-				($and ? "AND " . $and : "") .
-				")"
+				($and ? 'AND ' . $and : '') .
+				')'
 			);
 			if (isset($afrom[$cle])) {
 				$afrom[$t] = $afrom[$t] + $afrom[$cle];
@@ -876,7 +887,7 @@ function calculer_select(
 		$t = key($from);
 		$c = current($from);
 		reset($from);
-		$e = '/\b(' . "$t\\." . join("|" . $t . '\.', $equiv) . ')\b/';
+		$e = '/\b(' . "$t\\." . join('|' . $t . '\.', $equiv) . ')\b/';
 		if (!(strpos($t, ' ') or // jointure des le depart cf boucle_doc
 				calculer_jointnul($t, $select, $e) or
 				calculer_jointnul($t, $join, $e) or
@@ -895,7 +906,7 @@ function calculer_select(
 			unset($afrom[$t]);
 			$e = '/\b' . preg_quote($nfrom[6]) . '\b/';
 			$t = $nfrom[4];
-			$alias = "";
+			$alias = '';
 			// verifier que les deux cles sont homonymes, sinon installer un alias dans le select
 			$oldcle = explode('.', $nfrom[6]);
 			$oldcle = end($oldcle);
@@ -906,9 +917,9 @@ function calculer_select(
 				// reprendre simplement ce AS
 				$as = '/\b' . preg_quote($nfrom[6]) . '\s+(AS\s+\w+)\b/';
 				if (preg_match($as, implode(',', $select), $m)) {
-					$alias = "";
+					$alias = '';
 				} else {
-					$alias = ", " . $nfrom[4] . " AS $oldcle";
+					$alias = ', ' . $nfrom[4] . " AS $oldcle";
 				}
 			}
 			$select = remplacer_jointnul($t . $alias, $select, $e);
@@ -928,8 +939,17 @@ function calculer_select(
 		}
 	}
 	$GLOBALS['debug']['aucasou'] = array($table, $id, $serveur, $requeter);
-	$r = sql_select($select, $from, $where,
-		$groupby, array_filter($orderby), $limit, $having, $serveur, $requeter);
+	$r = sql_select(
+		$select,
+		$from,
+		$where,
+		$groupby,
+		array_filter($orderby),
+		$limit,
+		$having,
+		$serveur,
+		$requeter
+	);
 	unset($GLOBALS['debug']['aucasou']);
 
 	return $r;
@@ -950,7 +970,7 @@ function calculer_where_to_string($v, $join = 'AND') {
 	if (!is_array($v)) {
 		return $v;
 	} else {
-		$exp = "";
+		$exp = '';
 		if (strtoupper($join) === 'AND') {
 			return $exp . join(" $join ", array_map('calculer_where_to_string', $v));
 		} else {
@@ -1020,6 +1040,6 @@ function calculer_nom_fonction_squel($skel, $mime_type = 'html', $connect = '') 
 	}
 
 	return $mime_type
-	. (!$connect ? '' : preg_replace('/\W/', "_", $connect)) . '_'
+	. (!$connect ? '' : preg_replace('/\W/', '_', $connect)) . '_'
 	. md5($GLOBALS['spip_version_code'] . ' * ' . $skel . (isset($GLOBALS['marqueur_skel']) ? '*' . $GLOBALS['marqueur_skel'] : ''));
 }

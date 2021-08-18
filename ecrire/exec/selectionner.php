@@ -40,7 +40,7 @@ function exec_selectionner_dist() {
 
 		$selectionner = charger_fonction('selectionner', 'inc');
 
-		$r = $selectionner($id, "choix_parent", $exclus, $rac, $type != 'breve', $do);
+		$r = $selectionner($id, 'choix_parent', $exclus, $rac, $type != 'breve', $do);
 	} else {
 		$r = '';
 	}

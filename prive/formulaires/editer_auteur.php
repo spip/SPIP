@@ -239,13 +239,12 @@ function formulaires_editer_auteur_verifier_dist(
 	}
 
 	$erreurs['message_erreur'] = '';
-	if (
-		$login = _request('login') and
-		$login !== sql_getfetsel('login','spip_auteurs', 'id_auteur='.intval($id_auteur))
+	if ($login = _request('login') and
+		$login !== sql_getfetsel('login', 'spip_auteurs', 'id_auteur='.intval($id_auteur))
 	) {
 		// on verifie la meme chose que dans auteurs_edit_config()
-		if ( ! auth_autoriser_modifier_login($auth_methode)
-			or !autoriser('modifier', 'auteur', intval($id_auteur), null, array('email' => true))){
+		if (! auth_autoriser_modifier_login($auth_methode)
+			or !autoriser('modifier', 'auteur', intval($id_auteur), null, array('email' => true))) {
 			$erreurs['login'] = _T('info_non_modifiable');
 		}
 	}
@@ -323,7 +322,7 @@ function formulaires_editer_auteur_traiter_dist(
 
 	if ($restreintes = _request('restreintes')) {
 		foreach ($restreintes as $k => $v) {
-			if(strpos($v, 'rubrique|') === 0) {
+			if (strpos($v, 'rubrique|') === 0) {
 				$restreintes[$k] = substr($v, 9);
 			}
 		}
@@ -362,8 +361,11 @@ function formulaires_editer_auteur_traiter_dist(
 			$envoyer_mail($email_nouveau, _T('form_auteur_confirmation'), $texte);
 			set_request('email_confirm', $email_nouveau);
 			if ($email_ancien) {
-				$envoyer_mail($email_ancien, _T('form_auteur_confirmation'),
-					_T('form_auteur_envoi_mail_confirmation', array('email' => $email_nouveau)));
+				$envoyer_mail(
+					$email_ancien,
+					_T('form_auteur_confirmation'),
+					_T('form_auteur_envoi_mail_confirmation', array('email' => $email_nouveau))
+				);
 			}
 			$retour = parametre_url($retour, 'email_confirm', $email_nouveau);
 		}
@@ -375,11 +377,13 @@ function formulaires_editer_auteur_traiter_dist(
 		$erreurs = array();
 		$erreurs = auteur_reset_password($res['id_auteur'], $erreurs);
 		if (isset($erreurs['message_ok'])) {
-			if (!isset($res['message_ok'])) $res['message_ok'] = '';
+			if (!isset($res['message_ok'])) { $res['message_ok'] = '';
+			}
 			$res['message_ok'] = trim($res['message_ok'] . ' ' . $erreurs['message_ok']);
 		}
 		if (isset($erreurs['message_erreur']) and $erreurs['message_erreur']) {
-			if (!isset($res['message_erreur'])) $res['message_erreur'] = '';
+			if (!isset($res['message_erreur'])) { $res['message_erreur'] = '';
+			}
 			$res['message_erreur'] = trim($res['message_erreur'] . ' ' . $erreurs['message_erreur']);
 		}
 	}
@@ -433,21 +437,21 @@ function auteur_reset_password($id_auteur, $erreurs = array()) {
  * @param array $contexte
  * @return string
  */
-function auteur_regenerer_identifiants($id_auteur, $notifier=true, $contexte = array()) {
-	if ($id_auteur){
+function auteur_regenerer_identifiants($id_auteur, $notifier = true, $contexte = array()) {
+	if ($id_auteur) {
 		$set = array();
 		include_spip('inc/access');
 		$set['pass'] = creer_pass_aleatoire();
 
 		include_spip('action/editer_auteur');
-		auteur_modifier($id_auteur,$set);
+		auteur_modifier($id_auteur, $set);
 
-		$row = sql_fetsel('*','spip_auteurs','id_auteur='.intval($id_auteur));
+		$row = sql_fetsel('*', 'spip_auteurs', 'id_auteur='.intval($id_auteur));
 		include_spip('inc/filtres');
 		if ($notifier
 			and $row['email']
 			and email_valide($row['email'])
-		  and trouver_fond($fond = 'modeles/mail_nouveaux_identifiants')){
+		  and trouver_fond($fond = 'modeles/mail_nouveaux_identifiants')) {
 			// envoyer l'email avec login/pass
 			$c = array(
 				'id_auteur' => $id_auteur,
@@ -470,15 +474,14 @@ function auteur_regenerer_identifiants($id_auteur, $notifier=true, $contexte = a
 			}
 			lang_select($contexte['lang']);
 			$message = recuperer_fond($fond, $contexte);
-			include_spip("inc/notifications");
-			notifications_envoyer_mails($row['email'],$message);
+			include_spip('inc/notifications');
+			notifications_envoyer_mails($row['email'], $message);
 			lang_select();
 
 			return $row['email'];
 		}
 
 		return false;
-
 	}
 
 	return '';

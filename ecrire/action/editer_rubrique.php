@@ -56,7 +56,10 @@ function action_editer_rubrique_dist($arg = null) {
 	if (_request('redirect')) {
 		$redirect = parametre_url(
 			urldecode(_request('redirect')),
-			'id_rubrique', $id_rubrique, '&');
+			'id_rubrique',
+			$id_rubrique,
+			'&'
+		);
 
 		include_spip('inc/headers');
 		redirige_par_entete($redirect);
@@ -88,7 +91,8 @@ function rubrique_inserer($id_parent, $set = null) {
 	}
 
 	// Envoyer aux plugins
-	$champs = pipeline('pre_insertion',
+	$champs = pipeline(
+		'pre_insertion',
 		array(
 			'args' => array(
 				'table' => 'spip_rubriques',
@@ -97,8 +101,9 @@ function rubrique_inserer($id_parent, $set = null) {
 		)
 	);
 
-	$id_rubrique = sql_insertq("spip_rubriques", $champs);
-	pipeline('post_insertion',
+	$id_rubrique = sql_insertq('spip_rubriques', $champs);
+	pipeline(
+		'post_insertion',
 		array(
 			'args' => array(
 				'table' => 'spip_rubriques',
@@ -139,12 +144,15 @@ function rubrique_modifier($id_rubrique, $set = null) {
 		$set
 	);
 
-	if ($err = objet_modifier_champs('rubrique', $id_rubrique,
+	if ($err = objet_modifier_champs(
+		'rubrique',
+		$id_rubrique,
 		array(
 			'data' => $set,
-			'nonvide' => array('titre' => _T('titre_nouvelle_rubrique') . " " . _T('info_numero_abbreviation') . $id_rubrique)
+			'nonvide' => array('titre' => _T('titre_nouvelle_rubrique') . ' ' . _T('info_numero_abbreviation') . $id_rubrique)
 		),
-		$c)
+		$c
+	)
 	) {
 		return $err;
 	}
@@ -158,8 +166,8 @@ function rubrique_modifier($id_rubrique, $set = null) {
 	// invalider les caches marques de cette rubrique
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='rubrique/$id_rubrique'");
-	// et celui de menu_rubriques 
-	effacer_meta("date_calcul_rubriques");
+	// et celui de menu_rubriques
+	effacer_meta('date_calcul_rubriques');
 
 	return $err;
 }
@@ -192,10 +200,13 @@ function editer_rubrique_breves($id_rubrique, $id_parent, $c = array()) {
 		return false;
 	}
 
-	if ($id_secteur = sql_getfetsel("id_secteur",
-		"spip_rubriques", "id_rubrique=$id_parent")
+	if ($id_secteur = sql_getfetsel(
+		'id_secteur',
+		'spip_rubriques',
+		"id_rubrique=$id_parent"
+	)
 	) {
-		sql_updateq("spip_breves", array("id_rubrique" => $id_secteur), "id_rubrique=$id_rubrique");
+		sql_updateq('spip_breves', array('id_rubrique' => $id_secteur), "id_rubrique=$id_rubrique");
 	}
 
 	return true;
@@ -230,7 +241,7 @@ function rubrique_instituer($id_rubrique, $c) {
 		if (strpos(",$id_parent,", ",$filles,") !== false) {
 			spip_log("La rubrique $id_rubrique ne peut etre fille de sa descendante $id_parent");
 		} else {
-			$s = sql_fetsel("id_parent, statut", "spip_rubriques", "id_rubrique=$id_rubrique");
+			$s = sql_fetsel('id_parent, statut', 'spip_rubriques', "id_rubrique=$id_rubrique");
 			$old_parent = $s['id_parent'];
 
 			if (!($id_parent != $old_parent
@@ -256,7 +267,7 @@ function rubrique_instituer($id_rubrique, $c) {
 				// Creation ou deplacement d'une rubrique non publiee
 				// invalider le cache de leur menu
 				elseif (!$statut_ancien || $old_parent != $id_parent) {
-					effacer_meta("date_calcul_rubriques");
+					effacer_meta('date_calcul_rubriques');
 				}
 
 				calculer_langues_rubriques();

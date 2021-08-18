@@ -74,7 +74,6 @@ function generer_generer_url($type, $p) {
  **/
 function generer_generer_url_arg($type, $p, $_id) {
 	if ($s = trouver_nom_serveur_distant($p)) {
-
 		// si une fonction de generation des url a ete definie pour ce connect l'utiliser
 		if (function_exists($f = 'generer_generer_url_' . $s)) {
 			return $f($type, $_id, $s);
@@ -231,7 +230,7 @@ function balise_URL_SITE_dist($p) {
  */
 function balise_URL_SITE_SPIP_dist($p) {
 	$p->code = "sinon(\$GLOBALS['meta']['adresse_site'],'.')";
-	$p->code = "spip_htmlspecialchars(" . $p->code . ")";
+	$p->code = 'spip_htmlspecialchars(' . $p->code . ')';
 	$p->interdire_scripts = false;
 
 	return $p;
@@ -291,7 +290,7 @@ function balise_URL_PAGE_dist($p) {
 		if (!$args) {
 			$args = "''";
 		}
-		$noentities = $p->etoile ? ", true" : '';
+		$noentities = $p->etoile ? ', true' : '';
 		$code = "generer_url_public($code, $args$noentities)";
 	}
 	$p->code = $code;
@@ -334,7 +333,7 @@ function balise_URL_ECRIRE_dist($p) {
 		if ($args === null) {
 			$args = "''";
 		}
-		$noentities = $p->etoile ? ", true" : '';
+		$noentities = $p->etoile ? ', true' : '';
 		if (($args != "''") or $noentities) {
 			$fonc .= ",$args$noentities";
 		}
@@ -359,7 +358,7 @@ function balise_URL_ECRIRE_dist($p) {
  * @balise
  * @see generer_action_auteur()
  * @example
- *     `#URL_ACTION_AUTEUR{converser,arg,redirect}` pourra produire  
+ *     `#URL_ACTION_AUTEUR{converser,arg,redirect}` pourra produire
  *     `ecrire/?action=converser&arg=arg&hash=xxx&redirect=redirect`
  *
  * @param Champ $p
@@ -374,17 +373,17 @@ function balise_URL_ACTION_AUTEUR_dist($p) {
 
 	$args = interprete_argument_balise(2, $p);
 	if ($args != "''" && $args !== null) {
-		$p->code .= "," . $args;
+		$p->code .= ',' . $args;
 	}
 	$redirect = interprete_argument_balise(3, $p);
 	if ($redirect != "''" && $redirect !== null) {
 		if ($args == "''" || $args === null) {
 			$p->code .= ",''";
 		}
-		$p->code .= "," . $redirect;
+		$p->code .= ',' . $redirect;
 	}
 
-	$p->code = "generer_action_auteur(" . $p->code . ")";
+	$p->code = 'generer_action_auteur(' . $p->code . ')';
 	$p->interdire_scripts = false;
 
 	return $p;

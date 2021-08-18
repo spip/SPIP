@@ -33,9 +33,11 @@ function exec_base_delete_all_dist() {
 		$res = base_lister_toutes_tables('', array(), array(), true);
 		if (!$res) {
 			include_spip('inc/minipres');
-			spip_log("Erreur base de donnees");
-			echo minipres(_T('info_travaux_titre'),
-				_T('titre_probleme_technique') . "<p><tt>" . sql_errno() . " " . sql_error() . "</tt></p>");
+			spip_log('Erreur base de donnees');
+			echo minipres(
+				_T('info_travaux_titre'),
+				_T('titre_probleme_technique') . '<p><tt>' . sql_errno() . ' ' . sql_error() . '</tt></p>'
+			);
 		} else {
 			$res = base_saisie_tables('delete', $res);
 			include_spip('inc/headers');

@@ -145,15 +145,15 @@ function copie_locale($source, $mode = 'auto', $local = null, $taille_max = null
  * Valider qu'une URL d'un document distant est bien distante
  * et pas une url localhost qui permet d'avoir des infos sur le serveur
  * inspiree de https://core.trac.wordpress.org/browser/trunk/src/wp-includes/http.php?rev=36435#L500
- * 
+ *
  * @param string $url
  * @param array $known_hosts
  *   url/hosts externes connus et acceptes
- * @return false|string 
+ * @return false|string
  *   url ou false en cas d'echec
  */
 function valider_url_distante($url, $known_hosts = array()) {
-	if (!function_exists('protocole_verifier')){
+	if (!function_exists('protocole_verifier')) {
 		include_spip('inc/filtres_mini');
 	}
 
@@ -162,7 +162,7 @@ function valider_url_distante($url, $known_hosts = array()) {
 	}
 	
 	$parsed_url = parse_url($url);
-	if (!$parsed_url or empty($parsed_url['host']) ) {
+	if (!$parsed_url or empty($parsed_url['host'])) {
 		return false;
 	}
 
@@ -203,7 +203,7 @@ function valider_url_distante($url, $known_hosts = array()) {
 			}
 		}
 		if ($ip) {
-			$parts = array_map('intval', explode( '.', $ip ));
+			$parts = array_map('intval', explode('.', $ip));
 			if (127 === $parts[0] or 10 === $parts[0] or 0 === $parts[0]
 			  or ( 172 === $parts[0] and 16 <= $parts[1] and 31 >= $parts[1] )
 			  or ( 192 === $parts[0] && 168 === $parts[1] )
@@ -357,7 +357,9 @@ function url_to_ascii($url_idn) {
 			$url_idn = implode($host_ascii, $url_idn);
 		}
 		// et on urlencode les char utf si besoin dans le path
-		$url_idn = preg_replace_callback('/[^\x20-\x7f]/', function($match) { return urlencode($match[0]); }, $url_idn);
+		$url_idn = preg_replace_callback('/[^\x20-\x7f]/', function ($match) {
+ return urlencode($match[0]);
+		}, $url_idn);
 	}
 
 	return $url_idn;
@@ -446,8 +448,7 @@ function recuperer_url($url, $options = array()) {
 			$head .= 'Content-Length: ' . strlen($postdata) . "\r\n";
 		}
 		$options['datas'] = $head . "\r\n" . $postdata;
-		if (
-			strlen($postdata)
+		if (strlen($postdata)
 			and !$methode_demandee
 		) {
 			$options['methode'] = 'POST';
@@ -1011,7 +1012,7 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 	// S'il s'agit d'une image pas trop grosse ou d'un fichier html, on va aller
 	// recharger le document en GET et recuperer des donnees supplementaires...
 	include_spip('inc/filtres_images_lib_mini');
-	if (strpos($mime_type, "image/") === 0
+	if (strpos($mime_type, 'image/') === 0
 	  and $extension = _image_trouver_extension_depuis_mime($mime_type)) {
 		if ($max == 0
 			and (empty($a['taille']) or $a['taille'] < _INC_DISTANT_MAX_SIZE)
@@ -1089,13 +1090,14 @@ function need_proxy($host, $http_proxy = null, $http_noproxy = null) {
 
 	// si le host ou l'un des domaines parents est dans $http_noproxy on fait exception
 	// $http_noproxy peut contenir plusieurs domaines separes par des espaces ou retour ligne
-	$http_noproxy = str_replace("\n", " ", $http_noproxy);
-	$http_noproxy = str_replace("\r", " ", $http_noproxy);
+	$http_noproxy = str_replace("\n", ' ', $http_noproxy);
+	$http_noproxy = str_replace("\r", ' ', $http_noproxy);
 	$http_noproxy = " $http_noproxy ";
 	$domain = $host;
 	// si le domaine exact www.example.org est dans les exceptions
-	if (strpos($http_noproxy, " $domain ") !== false)
+	if (strpos($http_noproxy, " $domain ") !== false) {
 		return '';
+	}
 
 	while (strpos($domain, '.') !== false) {
 		$domain = explode('.', $domain);
@@ -1240,13 +1242,13 @@ function lance_requete(
 
 	$connect = '';
 	if ($http_proxy) {
-		if (!defined('_PROXY_HTTPS_NOT_VIA_CONNECT') and in_array($scheme , array('tls','ssl'))) {
+		if (!defined('_PROXY_HTTPS_NOT_VIA_CONNECT') and in_array($scheme, array('tls','ssl'))) {
 			$path_host = (!$user ? '' : "$user@") . $host . (($port != 80) ? ":$port" : '');
 			$connect = 'CONNECT ' . $path_host . " $vers\r\n"
 				. "Host: $path_host\r\n"
 				. "Proxy-Connection: Keep-Alive\r\n";
 		} else {
-			$path = (in_array($scheme , array('tls','ssl')) ? 'https://' : "$scheme://")
+			$path = (in_array($scheme, array('tls','ssl')) ? 'https://' : "$scheme://")
 				. (!$user ? '' : "$user@")
 				. "$host" . (($port != 80) ? ":$port" : '') . $path;
 		}
@@ -1320,7 +1322,7 @@ function lance_requete(
 	$site = isset($GLOBALS['meta']['adresse_site']) ? $GLOBALS['meta']['adresse_site'] : '';
 
 	$host_port = $host;
-	if ($port != (in_array($scheme , array('tls','ssl')) ? 443 : 80)) {
+	if ($port != (in_array($scheme, array('tls','ssl')) ? 443 : 80)) {
 		$host_port .= ":$port";
 	}
 	$req = "$method $path $vers\r\n"

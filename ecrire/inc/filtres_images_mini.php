@@ -194,7 +194,7 @@ function couleur_html_to_hex($couleur) {
  * @example couleur_hex_to_hsl("#ffccaa");
  * @example couleur_hex_to_hsl("#ffccaa", "h");
  * @example couleur_hex_to_hsl("#ffccaa", "h, s, l");
- * 
+ *
  * @filtre
  * @param string $couleur
  * @param string|null $format Si précisé, remplace h, s ou l par sa valeur dans la chaine passée.
@@ -203,8 +203,8 @@ function couleur_html_to_hex($couleur) {
 function couleur_hex_to_hsl($couleur, $format = null) {
 	$hsl = _couleur_hex_to_hsl($couleur);
 	$hsl = [
-		'h' => round($hsl['h'] * 360), 
-		's' => round($hsl['s'] * 100) . '%', 
+		'h' => round($hsl['h'] * 360),
+		's' => round($hsl['s'] * 100) . '%',
 		'l' => round($hsl['l'] * 100) . '%'
 	];
 	if ($format === null) {
@@ -220,7 +220,7 @@ function couleur_hex_to_hsl($couleur, $format = null) {
  * @example couleur_hex_to_rgb("#ffccaa");
  * @example couleur_hex_to_rgb("#ffccaa", "r");
  * @example couleur_hex_to_rgb("#ffccaa", "r, g, b");
- * 
+ *
  * @filtre
  * @param string $couleur
  * @param string|null $format Si précisé, remplace r, g ou b par sa valeur dans la chaine passée.
@@ -229,8 +229,8 @@ function couleur_hex_to_hsl($couleur, $format = null) {
 function couleur_hex_to_rgb($couleur, $format = null) {
 	$rgb = _couleur_hex_to_dec($couleur);
 	$rgb = [
-		'r' => $rgb['red'], 
-		'g' => $rgb['green'], 
+		'r' => $rgb['red'],
+		'g' => $rgb['green'],
 		'b' => $rgb['blue'],
 	];
 	if ($format === null) {
@@ -498,23 +498,23 @@ function image_reduire(
 }
 
 /**
- * 
+ *
  * Usage espace privé:
  * recadre une image uniquement si GD2 et image_recadre (plugin activé) existe
  * sinon retourne le image_passe_partout usuel
- * 
+ *
  **/
-function image_recadre_avec_fallback (
+function image_recadre_avec_fallback(
 	$im,
 	$width,
 	$height = '-',
 	$position = 'focus',
 	$background_color = 'white'
 ) {
-	if (function_exists('image_recadre') && ($GLOBALS['meta']['image_process'] ?? '') === 'gd2')
+	if (function_exists('image_recadre') && ($GLOBALS['meta']['image_process'] ?? '') === 'gd2') {
 		return image_reduire(image_recadre($im, $width.':'.$height, '-', $position, $background_color), $width, $height);
-	else 
-		return image_passe_partout($im, $width, $height);
+	} else { return image_passe_partout($im, $width, $height);
+	}
 }
 
 /**
@@ -559,10 +559,10 @@ function image_reduire_par($img, $val = 1, $force = false) {
  * @note
  *     Nécessite le plugin `filtres_images` pour fonctionner.
  *     La couleur d’entrée est retournée tel quelle en cas d'absence.
- * 
+ *
  * @see couleur_saturation() du plugin `filtres_images`
  * @uses couleur_saturation()
- * 
+ *
  * @param string $couleur
  *      Couleur en écriture hexadécimale, tel que `ff3300`
  * @param float $val
@@ -585,10 +585,10 @@ function filtre_couleur_saturation_dist($couleur, $val, $strict = false) {
  * @note
  *     Nécessite le plugin `filtres_images` pour fonctionner.
  *     La couleur d’entrée est retournée tel quelle en cas d'absence.
- * 
+ *
  * @see couleur_luminance() du plugin `filtres_images`
  * @uses couleur_luminance()
- * 
+ *
  * @param string $couleur
  *      Couleur en écriture hexadécimale, tel que `ff3300`
  * @param float $val

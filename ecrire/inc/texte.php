@@ -107,9 +107,11 @@ function echappe_js($t, $class = ' class = "echappe-js"') {
 			and preg_match_all(',<' . $tag . '.*?($|</' . $tag . '.),isS', $t, $r, PREG_SET_ORDER)
 		) {
 			foreach ($r as $regs) {
-				$t = str_replace($regs[0],
+				$t = str_replace(
+					$regs[0],
 					"<code$class>" . nl2br(spip_htmlspecialchars($regs[0])) . '</code>',
-					$t);
+					$t
+				);
 			}
 		}
 	}
@@ -142,7 +144,7 @@ function echappe_js($t, $class = ' class = "echappe-js"') {
  * @return string
  *     Code protégé
  **/
-function interdire_scripts($arg, $mode_filtre=null) {
+function interdire_scripts($arg, $mode_filtre = null) {
 	// on memorise le resultat sur les arguments non triviaux
 	static $dejavu = array();
 
@@ -185,10 +187,10 @@ function interdire_scripts($arg, $mode_filtre=null) {
 
 	// Reinserer les echappements des modeles
 	if (defined('_PROTEGE_JS_MODELES')) {
-		$t = echappe_retour($t, "javascript" . _PROTEGE_JS_MODELES);
+		$t = echappe_retour($t, 'javascript' . _PROTEGE_JS_MODELES);
 	}
 	if (defined('_PROTEGE_PHP_MODELES')) {
-		$t = echappe_retour($t, "php" . _PROTEGE_PHP_MODELES);
+		$t = echappe_retour($t, 'php' . _PROTEGE_PHP_MODELES);
 	}
 
 	return $dejavu[$mode_filtre][$arg] = $t;
@@ -284,7 +286,7 @@ function typo($letexte, $echapper = true, $connect = null, $env = array()) {
 define('_TYPO_PROTEGER', "!':;?~%-");
 define('_TYPO_PROTECTEUR', "\x1\x2\x3\x4\x5\x6\x7\x8");
 
-define('_TYPO_BALISE', ",</?[a-z!][^<>]*[" . preg_quote(_TYPO_PROTEGER) . "][^<>]*>,imsS");
+define('_TYPO_BALISE', ',</?[a-z!][^<>]*[' . preg_quote(_TYPO_PROTEGER) . '][^<>]*>,imsS');
 
 /**
  * Corrige la typographie
@@ -381,8 +383,8 @@ function paragrapher($letexte, $forcer = true) {
  **/
 function traiter_retours_chariots($letexte) {
 	$letexte = preg_replace(",\r\n?,S", "\n", $letexte);
-	$letexte = preg_replace(",<p[>[:space:]],iS", "\n\n\\0", $letexte);
-	$letexte = preg_replace(",</p[>[:space:]],iS", "\\0\n\n", $letexte);
+	$letexte = preg_replace(',<p[>[:space:]],iS', "\n\n\\0", $letexte);
+	$letexte = preg_replace(',</p[>[:space:]],iS', "\\0\n\n", $letexte);
 
 	return $letexte;
 }

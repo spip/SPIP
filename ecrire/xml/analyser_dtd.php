@@ -55,11 +55,10 @@ function charger_dtd($grammaire, $avail, $rotlvl) {
 				$dtc->peres[$k] = $v;
 			}
 
-			spip_log("Analyser DTD $avail $grammaire (" . spip_timer('dtd') . ") " . count($dtc->macros) . ' macros, ' . count($dtc->elements) . ' elements, ' . count($dtc->attributs) . " listes d'attributs, " . count($dtc->entites) . " entites");
+			spip_log("Analyser DTD $avail $grammaire (" . spip_timer('dtd') . ') ' . count($dtc->macros) . ' macros, ' . count($dtc->elements) . ' elements, ' . count($dtc->attributs) . " listes d'attributs, " . count($dtc->entites) . ' entites');
 			#	$r = $dtc->regles; ksort($r);foreach($r as $l => $v) {$t=array_keys($dtc->attributs[$l]);echo "<b>$l</b> '$v' ", count($t), " attributs: ", join (', ',$t);$t=$dtc->peres[$l];echo "<br />",count($t), " peres: ", @join (', ',$t), "<br />\n";}exit;
 			ecrire_fichier($file, serialize($dtc), true);
 		}
-
 	}
 	$dtd[$grammaire] = $dtc;
 
@@ -76,12 +75,27 @@ function charger_dtd($grammaire, $avail, $rotlvl) {
 
 // https://code.spip.net/@compilerRegle
 function compilerRegle($val) {
-	$x = str_replace('()', '',
-		preg_replace('/\s*,\s*/', '',
-			preg_replace('/(\w+)\s*/', '(?:\1 )',
-				preg_replace('/\s*\)/', ')',
-					preg_replace('/\s*([(+*|?])\s*/', '\1',
-						preg_replace('/\s*#\w+\s*[,|]?\s*/', '', $val))))));
+	$x = str_replace(
+		'()',
+		'',
+		preg_replace(
+			'/\s*,\s*/',
+			'',
+			preg_replace(
+				'/(\w+)\s*/',
+				'(?:\1 )',
+				preg_replace(
+					'/\s*\)/',
+					')',
+					preg_replace(
+						'/\s*([(+*|?])\s*/',
+						'\1',
+						preg_replace('/\s*#\w+\s*[,|]?\s*/', '', $val)
+					)
+				)
+			)
+		)
+	);
 
 	return $x;
 }
@@ -135,22 +149,22 @@ function analyser_dtd($loc, $avail, &$dtc) {
 			$r = analyser_dtd_data($dtd, $dtc, $loc);
 		} else {
 			switch ($dtd[3]) {
-				case '%' :
+				case '%':
 					$r = analyser_dtd_data($dtd, $dtc, $loc);
 					break;
-				case 'T' :
+				case 'T':
 					$r = analyser_dtd_attlist($dtd, $dtc, $loc);
 					break;
-				case 'L' :
+				case 'L':
 					$r = analyser_dtd_element($dtd, $dtc, $loc);
 					break;
-				case 'N' :
+				case 'N':
 					$r = analyser_dtd_entity($dtd, $dtc, $loc);
 					break;
-				case 'O' :
+				case 'O':
 					$r = analyser_dtd_notation($dtd, $dtc, $loc);
 					break;
-				case '-' :
+				case '-':
 					$r = analyser_dtd_comment($dtd, $dtc, $loc);
 					break;
 				default:
@@ -158,7 +172,7 @@ function analyser_dtd($loc, $avail, &$dtc) {
 			}
 		}
 		if (!is_string($r)) {
-			spip_log("erreur $r dans la DTD  " . substr($dtd, 0, 80) . ".....");
+			spip_log("erreur $r dans la DTD  " . substr($dtd, 0, 80) . '.....');
 
 			return false;
 		}
@@ -222,8 +236,11 @@ function analyser_dtd_data($dtd, &$dtc, $grammaire) {
 	if (!preg_match(_REGEXP_INCLUDE_USE, $dtd, $m)) {
 		return -11;
 	}
-	if (!preg_match('/^((\s*<!(\[\s*%\s*[^;]*;\s*\[([^]<]*<[^>]*>)*[^]<]*\]\]>)|([^]>]*>))*[^]<]*)\]\]>\s*/s', $m[2],
-		$r)
+	if (!preg_match(
+		'/^((\s*<!(\[\s*%\s*[^;]*;\s*\[([^]<]*<[^>]*>)*[^]<]*\]\]>)|([^]>]*>))*[^]<]*)\]\]>\s*/s',
+		$m[2],
+		$r
+	)
 	) {
 		return -12;
 	}
@@ -242,7 +259,7 @@ function analyser_dtd_notation($dtd, &$dtc, $grammaire) {
 	if (!preg_match('/^<!NOTATION.*?>\s*(.*)$/s', $dtd, $m)) {
 		return -8;
 	}
-	spip_log("analyser_dtd_notation a ecrire");
+	spip_log('analyser_dtd_notation a ecrire');
 
 	return $m[1];
 }
@@ -266,7 +283,7 @@ function analyser_dtd_entity($dtd, &$dtc, $grammaire) {
 	} // cas du synonyme complet
 	$val = expanserEntite(($k2 ? $k3 : ($k4 ? $k5 : $k6)), $dtc->macros);
 
-	// cas particulier double evaluation: 'PUBLIC "..." "...."' 
+	// cas particulier double evaluation: 'PUBLIC "..." "...."'
 	if (preg_match('/(PUBLIC|SYSTEM)\s+"([^"]*)"\s*("([^"]*)")?\s*$/s', $val, $r)) {
 		list($t, $type, $val, $q, $alt) = $r;
 	}

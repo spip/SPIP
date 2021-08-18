@@ -45,8 +45,8 @@ class IndenteurXML {
 		xml_parsestring($this, $data);
 	}
 
-	public $depth = "";
-	public $res = "";
+	public $depth = '';
+	public $res = '';
 	public $err = array();
 	public $contenu = array();
 	public $ouvrant = array();
@@ -65,7 +65,7 @@ function xml_indenter_dist($page, $apply = false) {
 	if (!$f->err) {
 		return $f->entete . $f->res;
 	}
-	spip_log("indentation impossible " . count($f->err) . " erreurs de validation");
+	spip_log('indentation impossible ' . count($f->err) . ' erreurs de validation');
 
 	return $f->entete . $f->page;
 }

@@ -27,9 +27,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 if (!isset($GLOBALS['ldap_attributes']) or !is_array($GLOBALS['ldap_attributes'])) {
 	$GLOBALS['ldap_attributes'] = array(
 		'login' => array('sAMAccountName', 'uid', 'login', 'userid', 'cn', 'sn'),
-		'nom' => "cn",
-		'email' => "mail",
-		'bio' => "description"
+		'nom' => 'cn',
+		'email' => 'mail',
+		'bio' => 'description'
 	);
 }
 
@@ -61,26 +61,26 @@ function auth_ldap_dist($login, $pass, $serveur = '', $phpauth = false) {
 	// Utilisateur connu ?
 	// si http auth, inutile de reauthentifier: cela
 	// ne marchera pas avec auth http autre que basic.
-	$checkpass = isset($_SERVER["REMOTE_USER"]) ? false : true;
+	$checkpass = isset($_SERVER['REMOTE_USER']) ? false : true;
 	if (!($dn = auth_ldap_search($login, $pass, $checkpass, $serveur))) {
 		return array();
 	}
 	$credentials_ldap = array('ldap_dn' => $dn, 'ldap_password' => $pass);
 
 	// Si l'utilisateur figure deja dans la base, y recuperer les infos
-	$r = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login) . " AND source='ldap'", '', '', '', '', $serveur);
+	$r = sql_fetsel('*', 'spip_auteurs', 'login=' . sql_quote($login) . " AND source='ldap'", '', '', '', '', $serveur);
 
 	if ($r) {
 		return array_merge($r, $credentials_ldap);
 	}
 
-	// sinon importer les infos depuis LDAP, 
+	// sinon importer les infos depuis LDAP,
 
-	if ($GLOBALS['meta']["ldap_statut_import"]
+	if ($GLOBALS['meta']['ldap_statut_import']
 		and $desc = auth_ldap_retrouver($dn, array(), $serveur)
 	) {
 		// rajouter le statut indique  a l'install
-		$desc['statut'] = $GLOBALS['meta']["ldap_statut_import"];
+		$desc['statut'] = $GLOBALS['meta']['ldap_statut_import'];
 		$desc['login'] = $login;
 		$desc['source'] = 'ldap';
 		$desc['pass'] = '';
@@ -91,7 +91,7 @@ function auth_ldap_dist($login, $pass, $serveur = '', $phpauth = false) {
 	if ($r) {
 		return array_merge(
 			$credentials_ldap,
-			sql_fetsel("*", "spip_auteurs", "id_auteur=" . intval($r), '', '', '', '', $serveur)
+			sql_fetsel('*', 'spip_auteurs', 'id_auteur=' . intval($r), '', '', '', '', $serveur)
 		);
 	}
 
@@ -156,7 +156,7 @@ function auth_ldap_connect($serveur = '') {
  */
 function auth_ldap_search($login, $pass, $checkpass = true, $serveur = '') {
 	// Securite anti-injection et contre un serveur LDAP laxiste
-	$login_search = preg_replace("/[^-@._\s\d\w]/", "", $login);
+	$login_search = preg_replace('/[^-@._\s\d\w]/', '', $login);
 	if (!strlen($login_search) or ($checkpass and !strlen($pass))) {
 		return '';
 	}
@@ -174,7 +174,7 @@ function auth_ldap_search($login, $pass, $checkpass = true, $serveur = '') {
 
 	// Tenter une recherche pour essayer de retrouver le DN
 	foreach ($logins as $att) {
-		$result = @ldap_search($ldap_link, $ldap_base, "$att=$login_search", array("dn"));
+		$result = @ldap_search($ldap_link, $ldap_base, "$att=$login_search", array('dn'));
 		$info = @ldap_get_entries($ldap_link, $result);
 		// Ne pas accepter les resultats si plus d'une entree
 		// (on veut un attribut unique)
@@ -225,7 +225,7 @@ function auth_ldap_retrouver($dn, $desc = array(), $serveur = '') {
 		$desc = $ldap['attributes'] ? $ldap['attributes'] : $GLOBALS['ldap_attributes'];
 		unset($desc['login']);
 	}
-	$result = @ldap_read($ldap_link, $dn, "objectClass=*", array_values($desc));
+	$result = @ldap_read($ldap_link, $dn, 'objectClass=*', array_values($desc));
 
 	if (!$result) {
 		return array();
@@ -325,7 +325,7 @@ function auth_ldap_modifier_pass($login, $new_pass, $id_auteur, $serveur = '') {
 		return '';
 	}
 	$link = $ldap['link'];
-	include_spip("inc/session");
+	include_spip('inc/session');
 	$dn = session_get('ldap_dn');
 	if ('' == $dn) {
 		return false;
@@ -333,7 +333,7 @@ function auth_ldap_modifier_pass($login, $new_pass, $id_auteur, $serveur = '') {
 	if (!ldap_bind($link, $dn, session_get('ldap_password'))) {
 		return false;
 	}
-	$encoded_pass = "{MD5}" . base64_encode(pack("H*", md5($new_pass)));
+	$encoded_pass = '{MD5}' . base64_encode(pack('H*', md5($new_pass)));
 	$success = ldap_mod_replace($link, $dn, array('userPassword' => $encoded_pass));
 
 	return $success;

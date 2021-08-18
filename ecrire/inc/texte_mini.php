@@ -61,8 +61,9 @@ function definir_puce() {
 // dont on souhaite qu'ils provoquent un saut de paragraphe
 
 if (!defined('_BALISES_BLOCS')) {
-	define('_BALISES_BLOCS',
-	'address|applet|article|aside|blockquote|button|center|d[ltd]|div|fieldset|fig(ure|caption)|footer|form|h[1-6r]|hgroup|head|header|iframe|li|map|marquee|nav|noscript|object|ol|pre|section|t(able|[rdh]|body|foot|extarea)|ul|script|style'
+	define(
+		'_BALISES_BLOCS',
+		'address|applet|article|aside|blockquote|button|center|d[ltd]|div|fieldset|fig(ure|caption)|footer|form|h[1-6r]|hgroup|head|header|iframe|li|map|marquee|nav|noscript|object|ol|pre|section|t(able|[rdh]|body|foot|extarea)|ul|script|style'
 	);
 }
 
@@ -90,7 +91,7 @@ function code_echappement($rempl, $source = '', $no_transform = false, $mode = n
 
 	// Decouper en morceaux, base64 a des probleme selon la taille de la pile
 	$taille = 30000;
-	$return = "";
+	$return = '';
 	for ($i = 0; $i < strlen($rempl); $i += $taille) {
 		// Convertir en base64 et cacher dans un attribut
 		// utiliser les " pour eviter le re-encodage de ' et &#8217
@@ -99,7 +100,6 @@ function code_echappement($rempl, $source = '', $no_transform = false, $mode = n
 	}
 
 	return $return;
-
 }
 
 
@@ -116,12 +116,11 @@ function traiter_echap_pre_dist($regs) {
 
 	// echapper les < dans <code>
 	// on utilise _PROTEGE_BLOCS pour simplifier le code et la maintenance, mais on est interesse que par <code>
-	if (strpos($pre, "<") !== false
-		and preg_match_all(_PROTEGE_BLOCS, $pre, $matches, PREG_SET_ORDER)){
-
-		foreach ($matches as $m){
-			if ($m[1]==='code'){
-				$code = "<code" . $m[2] . ">" . spip_htmlspecialchars($m[3]) . "</code>";
+	if (strpos($pre, '<') !== false
+		and preg_match_all(_PROTEGE_BLOCS, $pre, $matches, PREG_SET_ORDER)) {
+		foreach ($matches as $m) {
+			if ($m[1]==='code') {
+				$code = '<code' . $m[2] . '>' . spip_htmlspecialchars($m[3]) . '</code>';
 				$pre = str_replace($m[0], $code, $pre);
 			}
 		}
@@ -139,17 +138,17 @@ function traiter_echap_code_dist($regs) {
 	if (is_int(strpos($echap, "\n"))) {
 		// supprimer les sauts de ligne debut/fin
 		// (mais pas les espaces => ascii art).
-		$echap = preg_replace("/^[\n\r]+|[\n\r]+$/s", "", $echap);
+		$echap = preg_replace("/^[\n\r]+|[\n\r]+$/s", '', $echap);
 		$echap = nl2br($echap);
 		$echap = "<div style='text-align: left;' "
 			. "class='spip_code' dir='ltr'><code$att>"
-			. $echap . "</code></div>";
+			. $echap . '</code></div>';
 	} else {
-		$echap = "<code$att class='spip_code' dir='ltr'>" . $echap . "</code>";
+		$echap = "<code$att class='spip_code' dir='ltr'>" . $echap . '</code>';
 	}
 
-	$echap = str_replace("\t", "&nbsp; &nbsp; &nbsp; &nbsp; ", $echap);
-	$echap = str_replace("  ", " &nbsp;", $echap);
+	$echap = str_replace("\t", '&nbsp; &nbsp; &nbsp; &nbsp; ', $echap);
+	$echap = str_replace('  ', ' &nbsp;', $echap);
 
 	return $echap;
 }
@@ -225,7 +224,7 @@ function echappe_html(
 		}
 	}
 
-	if (($preg or strpos($letexte, "<") !== false)
+	if (($preg or strpos($letexte, '<') !== false)
 		and preg_match_all($preg ? $preg : _PROTEGE_BLOCS, $letexte, $matches, PREG_SET_ORDER)
 	) {
 		foreach ($matches as $regs) {
@@ -254,13 +253,19 @@ function echappe_html(
 	// (derogatoire car on ne peut pas faire passer < ? ... ? >
 	// dans une callback autonommee
 	if (strpos($preg ? $preg : _PROTEGE_BLOCS, 'script') !== false) {
-		if (strpos($letexte, "<" . "?") !== false and preg_match_all(',<[?].*($|[?]>),UisS',
-				$letexte, $matches, PREG_SET_ORDER)
+		if (strpos($letexte, '<' . '?') !== false and preg_match_all(
+			',<[?].*($|[?]>),UisS',
+			$letexte,
+			$matches,
+			PREG_SET_ORDER
+		)
 		) {
 			foreach ($matches as $regs) {
-				$letexte = str_replace($regs[0],
+				$letexte = str_replace(
+					$regs[0],
 					code_echappement(highlight_string($regs[0], true), $source),
-					$letexte);
+					$letexte
+				);
 			}
 		}
 	}
@@ -273,14 +278,18 @@ function echappe_html(
 // Rq: $source sert a faire des echappements "a soi" qui ne sont pas nettoyes
 // par propre() : exemple dans multi et dans typo()
 // https://code.spip.net/@echappe_retour
-function echappe_retour($letexte, $source = '', $filtre = "") {
+function echappe_retour($letexte, $source = '', $filtre = '') {
 	if (strpos($letexte, "base64$source")) {
 		# spip_log(spip_htmlspecialchars($letexte));  ## pour les curieux
 		$max_prof = 5;
-		while (strpos($letexte, "<") !== false
+		while (strpos($letexte, '<') !== false
 			and
-			preg_match_all(',<(span|div)\sclass=[\'"]base64' . $source . '[\'"]\s(.*)>\s*</\1>,UmsS',
-				$letexte, $regs, PREG_SET_ORDER)
+			preg_match_all(
+				',<(span|div)\sclass=[\'"]base64' . $source . '[\'"]\s(.*)>\s*</\1>,UmsS',
+				$letexte,
+				$regs,
+				PREG_SET_ORDER
+			)
 			and $max_prof--) {
 			foreach ($regs as $reg) {
 				$rempl = base64_decode(extraire_attribut($reg[0], 'title'));
@@ -352,7 +361,7 @@ function couper($texte, $taille = 50, $suite = null) {
 	}
 	$offset = 400 + 2 * $taille;
 	while ($offset < $length
-		and strlen(preg_replace(",<(!--|\w|/)[^>]+>,Uims", "", substr($texte, 0, $offset))) < $taille) {
+		and strlen(preg_replace(',<(!--|\w|/)[^>]+>,Uims', '', substr($texte, 0, $offset))) < $taille) {
 		$offset = 2 * $offset;
 	}
 	if ($offset < $length
@@ -371,15 +380,15 @@ function couper($texte, $taille = 50, $suite = null) {
 	$texte = nettoyer_raccourcis_typo($texte);
 
 	// balises de sauts de ligne et paragraphe
-	$texte = preg_replace("/<p( [^>]*)?" . ">/", "\r", $texte);
-	$texte = preg_replace("/<br( [^>]*)?" . ">/", "\n", $texte);
+	$texte = preg_replace('/<p( [^>]*)?' . '>/', "\r", $texte);
+	$texte = preg_replace('/<br( [^>]*)?' . '>/', "\n", $texte);
 
 	// on repasse les doubles \n en \r que nettoyer_raccourcis_typo() a pu modifier
 	$texte = str_replace("\n\n", "\r", $texte);
 
 	// supprimer les tags
 	$texte = supprimer_tags($texte);
-	$texte = trim(str_replace("\n", " ", $texte));
+	$texte = trim(str_replace("\n", ' ', $texte));
 	$texte .= "\n";  // marquer la fin
 
 	// corriger la longueur de coupe
@@ -414,9 +423,8 @@ function couper($texte, $taille = 50, $suite = null) {
 		$texte = $court;
 	}
 
-	if (strpos($texte, "\n"))  // la fin est encore la : c'est qu'on n'a pas de texte de suite
-	{
-		$points = '';
+	if (strpos($texte, "\n")) {  // la fin est encore la : c'est qu'on n'a pas de texte de suite
+	$points = '';
 	}
 
 	// remettre les paragraphes
@@ -462,10 +470,10 @@ function echapper_faux_tags($letexte) {
 	}
 	$textMatches = preg_split(',(</?[a-z!][^<>]*>),', $letexte, null, PREG_SPLIT_DELIM_CAPTURE);
 
-	$letexte = "";
+	$letexte = '';
 	while (count($textMatches)) {
 		// un texte a echapper
-		$letexte .= str_replace("<", '&lt;', array_shift($textMatches));
+		$letexte .= str_replace('<', '&lt;', array_shift($textMatches));
 		// un tag html qui a servit a faite le split
 		$letexte .= array_shift($textMatches);
 	}
@@ -482,7 +490,7 @@ function echapper_faux_tags($letexte) {
  * @param bool $strict
  * @return string
  */
-function echapper_html_suspect($texte, $strict=true) {
+function echapper_html_suspect($texte, $strict = true) {
 	static $echapper_html_suspect;
 	if (!$texte or !is_string($texte)) {
 		return $texte;
@@ -504,8 +512,8 @@ function echapper_html_suspect($texte, $strict=true) {
 	// quand c'est du texte qui passe par propre on est plus coulant tant qu'il y a pas d'attribut du type onxxx=
 	// car sinon on declenche sur les modeles ou ressources
 	if (!$strict and
-	  (strpos($texte,'on') === false or !preg_match(",<\w+.*\bon\w+\s*=,UimsS", $texte))
-	  ){
+	  (strpos($texte, 'on') === false or !preg_match(",<\w+.*\bon\w+\s*=,UimsS", $texte))
+	  ) {
 		return $texte;
 	}
 
@@ -513,7 +521,7 @@ function echapper_html_suspect($texte, $strict=true) {
 	// mais il peut aussi changer des ' en " sur les attributs html,
 	// donc un test d'egalite est trop strict
 	if (strlen(safehtml($texte)) !== strlen($texte)) {
-		$texte = str_replace("<", "&lt;", $texte);
+		$texte = str_replace('<', '&lt;', $texte);
 		if (!function_exists('attribut_html')) {
 			include_spip('inc/filtres');
 		}
@@ -590,6 +598,9 @@ function supprime_img($letexte, $message = null) {
 		$message = '(' . _T('img_indisponible') . ')';
 	}
 
-	return preg_replace(',<(img|doc|emb)([0-9]+)(\|([^>]*))?' . '\s*/?' . '>,i',
-		$message, $letexte);
+	return preg_replace(
+		',<(img|doc|emb)([0-9]+)(\|([^>]*))?' . '\s*/?' . '>,i',
+		$message,
+		$letexte
+	);
 }

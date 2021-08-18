@@ -30,10 +30,10 @@ function decompiler_boucle($struct, $fmt = '', $prof = 0) {
 		$struct->table_optionnelle);
 
 	if ($struct->jointures_explicites) {
-		$type .= " " . $struct->jointures_explicites;
+		$type .= ' ' . $struct->jointures_explicites;
 	}
 	if ($struct->table_optionnelle) {
-		$type .= "?";
+		$type .= '?';
 	}
 	// Revoir le cas de la boucle recursive
 
@@ -214,7 +214,6 @@ function decompiler_($liste, $fmt = '', $prof = 0) {
 			}
 		}
 		$contenu[] = array($d($p, $fmt, $prof2), $p->type);
-
 	}
 	$f = 'format_suite_' . $fmt;
 

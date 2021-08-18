@@ -49,7 +49,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param bool $public
  * @return array|string
  */
-function inc_securiser_action_dist($action = '', $arg = '', $redirect = "", $mode = false, $att = '', $public = false) {
+function inc_securiser_action_dist($action = '', $arg = '', $redirect = '', $mode = false, $att = '', $public = false) {
 	if ($action) {
 		return securiser_action_auteur($action, $arg, $redirect, $mode, $att, $public);
 	} else {
@@ -79,7 +79,7 @@ function inc_securiser_action_dist($action = '', $arg = '', $redirect = "", $mod
  * @param string|null $url_action
  * @return bool
  */
-function demander_confirmation_avant_action($titre, $titre_bouton, $url_action=null) {
+function demander_confirmation_avant_action($titre, $titre_bouton, $url_action = null) {
 
 	if (!$url_action) {
 		$url_action = self();
@@ -96,13 +96,13 @@ function demander_confirmation_avant_action($titre, $titre_bouton, $url_action=n
 		return true;
 	}
 
-	$url_confirm = parametre_url($url_action, "confirm_action", $confirm, '&');
-	include_spip("inc/filtres");
+	$url_confirm = parametre_url($url_action, 'confirm_action', $confirm, '&');
+	include_spip('inc/filtres');
 	$bouton_action = bouton_action($titre_bouton, $url_confirm);
 	$corps = "<div style='text-align:center;'>$bouton_action</div>";
 
-	include_spip("inc/minipres");
-	echo minipres($titre,$corps);
+	include_spip('inc/minipres');
+	echo minipres($titre, $corps);
 	exit;
 }
 
@@ -133,7 +133,7 @@ function demander_confirmation_avant_action($titre, $titre_bouton, $url_action=n
  *    - string code HTML du formulaire, si $mode texte,
  *    - array Tableau (action=>x, arg=>x, hash=>x) si $mode=-1.
  */
-function securiser_action_auteur($action, $arg, $redirect = "", $mode = false, $att = '', $public = false) {
+function securiser_action_auteur($action, $arg, $redirect = '', $mode = false, $att = '', $public = false) {
 
 	// mode URL ou array
 	if (!is_string($mode)) {
@@ -143,8 +143,12 @@ function securiser_action_auteur($action, $arg, $redirect = "", $mode = false, $
 		if ($mode === -1) {
 			return array('action' => $action, 'arg' => $arg, 'hash' => $hash);
 		} else {
-			return generer_url_action($action, "arg=" . rawurlencode($arg) . "&hash=$hash" . (!$r ? '' : "&redirect=$r"),
-				$mode, $public);
+			return generer_url_action(
+				$action,
+				'arg=' . rawurlencode($arg) . "&hash=$hash" . (!$r ? '' : "&redirect=$r"),
+				$mode,
+				$public
+			);
 		}
 	}
 
@@ -198,7 +202,7 @@ function caracteriser_auteur($id_auteur = null) {
 
 	if ($id_auteur) {
 		include_spip('base/abstract_sql');
-		$t = sql_fetsel("id_auteur, pass", "spip_auteurs", "id_auteur=$id_auteur");
+		$t = sql_fetsel('id_auteur, pass', 'spip_auteurs', "id_auteur=$id_auteur");
 		if ($t) {
 			return $caracterisation[$id_auteur] = array($t['id_auteur'], $t['pass']);
 		}
@@ -226,10 +230,10 @@ function _action_auteur($action, $id_auteur, $pass, $alea) {
 	static $sha = array();
 	if (!isset($sha[$id_auteur . $pass . $alea])) {
 		if (!isset($GLOBALS['meta'][$alea])) {
-			if (!$exec = _request('exec') or !autoriser_sans_cookie($exec)){
+			if (!$exec = _request('exec') or !autoriser_sans_cookie($exec)) {
 				include_spip('inc/acces');
 				charger_aleas();
-				if (empty($GLOBALS['meta'][$alea])){
+				if (empty($GLOBALS['meta'][$alea])) {
 					include_spip('inc/minipres');
 					echo minipres();
 					spip_log("$alea indisponible");
@@ -303,12 +307,15 @@ function secret_du_site() {
 	) {
 		include_spip('inc/acces');
 		include_spip('auth/sha256.inc');
-		ecrire_meta('secret_du_site',
+		ecrire_meta(
+			'secret_du_site',
 			spip_sha256(
-				$_SERVER["DOCUMENT_ROOT"] 
-				. (isset($_SERVER['SERVER_SIGNATURE']) ? $_SERVER["SERVER_SIGNATURE"] : "")
+				$_SERVER['DOCUMENT_ROOT']
+				. (isset($_SERVER['SERVER_SIGNATURE']) ? $_SERVER['SERVER_SIGNATURE'] : '')
 				. creer_uniqid()
-			), 'non');
+			),
+			'non'
+		);
 		lire_metas(); // au cas ou ecrire_meta() ne fonctionne pas
 	}
 
@@ -360,7 +367,7 @@ function calculer_token_previsu($url, $id_auteur = null, $alea = 'alea_ephemere'
 		}
 	}
 	if (!$id_auteur = intval($id_auteur)) {
-		return "";
+		return '';
 	}
 	// On nettoie l’URL de tous les var_.
 	$url = nettoyer_uri_var($url);

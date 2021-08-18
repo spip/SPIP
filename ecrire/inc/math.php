@@ -57,10 +57,9 @@ function produire_image_math($tex) {
 	// Composer la reponse selon presence ou non de l'image
 	$tex = entites_html($tex);
 	if (@file_exists($fichier)) {
-
 		// MathML
 		if ($GLOBALS['traiter_math'] == 'mathml') {
-			return implode("", file($fichier));
+			return implode('', file($fichier));
 		} // TeX
 		else {
 			list(, , , $size) = @spip_getimagesize($fichier);
@@ -68,12 +67,10 @@ function produire_image_math($tex) {
 
 			return "<img src=\"$fichier\" style=\"vertical-align:middle;\" $size $alt />";
 		}
-
 	} else // pas de fichier
 	{
 		return "<tt><span class='spip_code' dir='ltr'>$tex</span></tt>";
 	}
-
 }
 
 
@@ -109,19 +106,25 @@ function produire_image_math($tex) {
 function traiter_math($letexte, $source = '', $defaire_amp = false) {
 
 	$texte_a_voir = $letexte;
-	while (($debut = strpos($texte_a_voir, "<math>")) !== false) {
-		if (!$fin = strpos($texte_a_voir, "</math>")) {
+	while (($debut = strpos($texte_a_voir, '<math>')) !== false) {
+		if (!$fin = strpos($texte_a_voir, '</math>')) {
 			$fin = strlen($texte_a_voir);
 		}
 
 		$texte_debut = substr($texte_a_voir, 0, $debut);
-		$texte_milieu = substr($texte_a_voir,
-			$debut + strlen("<math>"), $fin - $debut - strlen("<math>"));
-		$texte_fin = substr($texte_a_voir,
-			$fin + strlen("</math>"), strlen($texte_a_voir));
+		$texte_milieu = substr(
+			$texte_a_voir,
+			$debut + strlen('<math>'),
+			$fin - $debut - strlen('<math>')
+		);
+		$texte_fin = substr(
+			$texte_a_voir,
+			$fin + strlen('</math>'),
+			strlen($texte_a_voir)
+		);
 
 		// Les doubles $$x^2$$ en mode 'div'
-		while ((preg_match(",[$][$]([^$]+)[$][$],", $texte_milieu, $regs))) {
+		while ((preg_match(',[$][$]([^$]+)[$][$],', $texte_milieu, $regs))) {
 			$expression = $regs[1];
 			if ($defaire_amp) {
 				$expression = str_replace('&amp;', '&', $expression);
@@ -134,7 +137,7 @@ function traiter_math($letexte, $source = '', $defaire_amp = false) {
 		}
 
 		// Les simples $x^2$ en mode 'span'
-		while ((preg_match(",[$]([^$]+)[$],", $texte_milieu, $regs))) {
+		while ((preg_match(',[$]([^$]+)[$],', $texte_milieu, $regs))) {
 			$expression = $regs[1];
 			if ($defaire_amp) {
 				$expression = str_replace('&amp;', '&', $expression);

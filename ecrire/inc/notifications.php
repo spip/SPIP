@@ -39,8 +39,8 @@ function inc_notifications_dist($quoi, $id = 0, $options = array()) {
 
 	if ($notification = charger_fonction($quoi, 'notifications', true)) {
 		spip_log("$notification($quoi,$id"
-			. ($options ? "," . serialize($options) : "")
-			. ")", 'notifications');
+			. ($options ? ',' . serialize($options) : '')
+			. ')', 'notifications');
 		$notification($quoi, $id, $options);
 	}
 }
@@ -77,7 +77,7 @@ function notifications_nettoyer_emails(&$emails, $exclure = array()) {
  * @param string $from
  * @param string $headers
  */
-function notifications_envoyer_mails($emails, $texte, $sujet = "", $from = "", $headers = "") {
+function notifications_envoyer_mails($emails, $texte, $sujet = '', $from = '', $headers = '') {
 	// rien a faire si pas de texte !
 	if (!strlen($texte)) {
 		return;
@@ -91,20 +91,19 @@ function notifications_envoyer_mails($emails, $texte, $sujet = "", $from = "", $
 	notifications_nettoyer_emails($emails);
 
 	// tester si le mail est deja en html
-	if (strpos($texte, "<") !== false // eviter les tests suivants si possible
+	if (strpos($texte, '<') !== false // eviter les tests suivants si possible
 		and $ttrim = trim($texte)
-		and substr($ttrim, 0, 1) == "<"
-		and substr($ttrim, -1, 1) == ">"
-		and stripos($ttrim, "</html>") !== false
+		and substr($ttrim, 0, 1) == '<'
+		and substr($ttrim, -1, 1) == '>'
+		and stripos($ttrim, '</html>') !== false
 	) {
-
 		if (!strlen($sujet)) {
 			// dans ce cas on ruse un peu : extraire le sujet du title
-			if (preg_match(",<title>(.*)</title>,Uims", $texte, $m)) {
+			if (preg_match(',<title>(.*)</title>,Uims', $texte, $m)) {
 				$sujet = $m[1];
 			} else {
 				// fallback, on prend le body si on le trouve
-				if (preg_match(",<body[^>]*>(.*)</body>,Uims", $texte, $m)) {
+				if (preg_match(',<body[^>]*>(.*)</body>,Uims', $texte, $m)) {
 					$ttrim = $m[1];
 				}
 
@@ -121,7 +120,7 @@ function notifications_envoyer_mails($emails, $texte, $sujet = "", $from = "", $
 		}
 
 		// si besoin on ajoute le content-type dans les headers
-		if (stripos($headers, "Content-Type") === false) {
+		if (stripos($headers, 'Content-Type') === false) {
 			$headers .= "Content-Type: text/html\n";
 		}
 	}
@@ -155,10 +154,13 @@ function notifications_envoyer_mails($emails, $texte, $sujet = "", $from = "", $
 		);
 		$email = $envoi['email'];
 
-		job_queue_add('envoyer_mail', ">$email : " . $envoi['sujet'],
-			array($email, $envoi['sujet'], $envoi['texte'], $envoi['from'], $envoi['headers']), 'inc/');
+		job_queue_add(
+			'envoyer_mail',
+			">$email : " . $envoi['sujet'],
+			array($email, $envoi['sujet'], $envoi['texte'], $envoi['from'], $envoi['headers']),
+			'inc/'
+		);
 	}
-
 }
 
 /**
@@ -177,7 +179,7 @@ function email_notification_objet($id_objet, $type_objet, $modele) {
 	$envoyer_mail = charger_fonction('envoyer_mail', 'inc'); // pour nettoyer_titre_email
 	$id_type = id_table_objet($type_objet);
 
-	return recuperer_fond($modele, array($id_type => $id_objet, "id" => $id_objet));
+	return recuperer_fond($modele, array($id_type => $id_objet, 'id' => $id_objet));
 }
 
 /**

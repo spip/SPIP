@@ -62,8 +62,10 @@ function quete_parent_lang($table, $id, $connect = '') {
 	if (!isset($cache_quete[$connect][$table][$id])) {
 		if (!isset($cache_quete[$connect][$table]['_select'])) {
 			$trouver_table = charger_fonction('trouver_table', 'base');
-			if (!$desc = $trouver_table($table,
-					$connect) or !isset($desc['field']['id_rubrique'])
+			if (!$desc = $trouver_table(
+				$table,
+				$connect
+			) or !isset($desc['field']['id_rubrique'])
 			) {
 				// pas de parent rubrique, on passe
 				$cache_quete[$connect][$table]['_select'] = false;
@@ -249,15 +251,15 @@ function quete_condition_statut($mstatut, $previsu, $publie, $serveur = '', $ign
 					} else {
 						$primary = id_table_objet($objet);
 						$where[] = "($w OR $id_table.$primary IN (" . sql_get_select(
-								'ssss.id_objet',
-								'spip_auteurs_liens AS ssss',
-								'ssss.objet=' . sql_quote($objet) . ' AND ssss.id_auteur=' . intval($id_auteur),
-								'',
-								'',
-								'',
-								'',
-								$serveur
-							) . '))';
+							'ssss.id_objet',
+							'spip_auteurs_liens AS ssss',
+							'ssss.objet=' . sql_quote($objet) . ' AND ssss.id_auteur=' . intval($id_auteur),
+							'',
+							'',
+							'',
+							'',
+							$serveur
+						) . '))';
 					}
 				}
 			} // ignorer ce statut si on ne sait pas comment le filtrer
@@ -534,7 +536,7 @@ function quete_html_logo($logo, $align, $lien) {
 	}
 
 	$contexte = [];
-	foreach ($logo as $k=>$v) {
+	foreach ($logo as $k => $v) {
 		if (!is_numeric($k)) {
 			$contexte[$k] = $v;
 		}

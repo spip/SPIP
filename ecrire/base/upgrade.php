@@ -94,14 +94,14 @@ function base_upgrade_dist($titre = '', $reprise = '') {
  * schéma actuel de la base de données.
  *
  * Les fonctions de mises à jour se trouvent dans `ecrire/maj/`
- * 
+ *
  * @note
  *     Si version nulle ou inexistante, c'est une nouvelle installation,
  *     on ne passe pas par le processus de mise à jour.
- * 
+ *
  *     De même en cas de version supérieure: ca devait être un test,
  *     il y a eu le message d'avertissement il doit savoir ce qu'il fait
- * 
+ *
  *     version_installee = YYYYMMDDNN; quand on a besoin de forcer une MAJ
  *     tel que 2021021800 où 00 est un incrément.
  *
@@ -294,7 +294,7 @@ function maj_debut_page($installee, $meta, $table) {
 	$timeout = _UPGRADE_TIME_OUT * 2;
 	$titre = _T('titre_page_upgrade');
 	$balise_img = charger_filtre('balise_img');
-	$titre .= $balise_img(chemin_image('loader.svg'),'','loader');
+	$titre .= $balise_img(chemin_image('loader.svg'), '', 'loader');
 	echo(install_debut_html($titre));
 	// script de rechargement auto sur timeout
 	$redirect = generer_url_ecrire('upgrade', "reinstall=$installee&meta=$meta&table=$table", true);
@@ -449,7 +449,7 @@ function serie_alter($serie, $q = array(), $meta = '', $table = 'meta', $redirec
 				if (strncmp($f, 'sql_', 4) == 0) {
 					ecrire_meta($meta2, $i + 1, 'non', $table);
 				}
-				echo (_IS_CLI ? "." : " <span title='$i'>.</span>");
+				echo (_IS_CLI ? '.' : " <span title='$i'>.</span>");
 				call_user_func_array($f, $r);
 				// si temps imparti depasse, on relance sans ecrire en meta
 				// car on est peut etre sorti sur timeout si c'est une fonction longue

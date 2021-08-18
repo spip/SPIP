@@ -25,7 +25,7 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 	$silence = false;
 	$p = null;
 	// chercher la declaration <plugin spip='...'> a prendre pour cette version de SPIP
-	if ($n = spip_xml_match_nodes(",^plugin(\s|$),", $arbre, $matches)) {
+	if ($n = spip_xml_match_nodes(',^plugin(\s|$),', $arbre, $matches)) {
 		// version de SPIP
 		$vspip = $GLOBALS['spip_version_branche'];
 		foreach ($matches as $tag => $sous) {
@@ -61,22 +61,22 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 		if (!$silence) {
 			$arbre['erreur'][] = _T('erreur_plugin_nom_manquant');
 		}
-		$arbre['nom'] = array("");
+		$arbre['nom'] = array('');
 	}
 	if (!isset($arbre['version'])) {
 		if (!$silence) {
 			$arbre['erreur'][] = _T('erreur_plugin_version_manquant');
 		}
-		$arbre['version'] = array("");
+		$arbre['version'] = array('');
 	}
 	if (!isset($arbre['prefix'])) {
 		if (!$silence) {
 			$arbre['erreur'][] = _T('erreur_plugin_prefix_manquant');
 		}
-		$arbre['prefix'] = array("");
+		$arbre['prefix'] = array('');
 	} else {
 		$prefix = trim(end($arbre['prefix']));
-		if (strtoupper($prefix) == 'SPIP' and $plug != "./") {
+		if (strtoupper($prefix) == 'SPIP' and $plug != './') {
 			$arbre['erreur'][] = _T('erreur_plugin_prefix_interdit');
 		}
 		if (isset($arbre['etat'])) {
@@ -118,12 +118,12 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 			strtolower($prefix)
 		);
 
-		$extraire_pipelines = charger_fonction("extraire_pipelines", "plugins");
+		$extraire_pipelines = charger_fonction('extraire_pipelines', 'plugins');
 		$arbre['pipeline'] = $extraire_pipelines($arbre);
 		foreach ($arbre['pipeline'] as $pipe) {
 			if (!isset($pipe['nom'])) {
 				if (!$silence) {
-					$arbre['erreur'][] = _T("erreur_plugin_nom_pipeline_non_defini");
+					$arbre['erreur'][] = _T('erreur_plugin_nom_pipeline_non_defini');
 				}
 			}
 			if (isset($pipe['action'])) {
@@ -134,7 +134,7 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 			// verif que la methode a un nom autorise
 			if (in_array(strtolower($action), $liste_methodes_reservees)) {
 				if (!$silence) {
-					$arbre['erreur'][] = _T("erreur_plugin_nom_fonction_interdit") . " : $action";
+					$arbre['erreur'][] = _T('erreur_plugin_nom_fonction_interdit') . " : $action";
 				}
 			}
 			if (isset($pipe['inclure'])) {
@@ -153,8 +153,10 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 				list($tag, $att) = spip_xml_decompose_tag($tag);
 				if (!isset($att['id'])) {
 					if (!$silence) {
-						$arbre['erreur'][] = _T('erreur_plugin_attribut_balise_manquant',
-							array('attribut' => 'id', 'balise' => $att));
+						$arbre['erreur'][] = _T(
+							'erreur_plugin_attribut_balise_manquant',
+							array('attribut' => 'id', 'balise' => $att)
+						);
 					}
 				} else {
 					$necessite[] = $att;
@@ -174,8 +176,10 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 				list($tag, $att) = spip_xml_decompose_tag($tag);
 				if (!isset($att['id'])) {
 					if (!$silence) {
-						$arbre['erreur'][] = _T('erreur_plugin_attribut_balise_manquant',
-							array('attribut' => 'id', 'balise' => $att));
+						$arbre['erreur'][] = _T(
+							'erreur_plugin_attribut_balise_manquant',
+							array('attribut' => 'id', 'balise' => $att)
+						);
 					}
 				} else {
 					$utilise[] = $att;

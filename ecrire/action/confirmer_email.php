@@ -38,10 +38,12 @@ function action_confirmer_email_dist() {
 	}
 	// verifier avant de rediriger pour invalider le message de confirmation
 	// si ca n'a pas marche
-	if ($redirect = _request('redirect') and !$arg == sql_getfetsel('email', 'spip_auteurs',
-			'id_auteur=' . intval($GLOBALS['visiteur_session']))
+	if ($redirect = _request('redirect') and !$arg == sql_getfetsel(
+		'email',
+		'spip_auteurs',
+		'id_auteur=' . intval($GLOBALS['visiteur_session'])
+	)
 	) {
 		$GLOBALS['redirect'] = parametre_url($redirect, 'email_modif', '');
 	}
-
 }

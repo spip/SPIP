@@ -123,9 +123,9 @@ function inc_importer_csv_dist($file, $options = []) {
 				$header_type = array();
 				foreach ($header as $heading) {
 					if (!isset($header_type[$heading])) {
-						$header_type[$heading] = "scalar";
+						$header_type[$heading] = 'scalar';
 					} else {
-						$header_type[$heading] = "array";
+						$header_type[$heading] = 'array';
 					}
 				}
 			}
@@ -136,7 +136,7 @@ function inc_importer_csv_dist($file, $options = []) {
 			if ($options['head'] and isset($header)) {
 				$row = array();
 				foreach ($header as $key => $heading) {
-					if ($header_type[$heading] == "array") {
+					if ($header_type[$heading] == 'array') {
 						if (!isset($row[$heading])) {
 							$row[$heading] = array();
 						}

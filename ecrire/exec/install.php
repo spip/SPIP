@@ -24,7 +24,7 @@ include_spip('inc/minipres');
 include_spip('inc/install');
 include_spip('inc/autoriser');
 
-define('_ECRIRE_INSTALL', "1");
+define('_ECRIRE_INSTALL', '1');
 define('_FILE_TMP', '_install');
 
 /**
@@ -51,7 +51,6 @@ function exec_install_dist() {
 	// Mais alors il faut authentifier car ecrire/index.php l'a omis
 
 	if ($deja and in_array($etape, array('chmod', 'sup1', 'sup2'))) {
-
 		$auth = charger_fonction('auth', 'inc');
 		if (!$auth()) {
 			verifier_visiteur();

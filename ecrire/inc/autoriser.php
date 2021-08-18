@@ -390,7 +390,6 @@ function test_previsualiser_objet_champ($type = null, $id = 0, $qui = array(), $
 				$previsu = explode(',', $c['previsu']);
 				// regarder si ce statut est autorise pour l'auteur
 				if (in_array($opt[$champ] . '/auteur', $previsu)) {
-
 					// retrouver l’id_auteur qui a filé un lien de prévisu éventuellement,
 					// sinon l’auteur en session
 					include_spip('inc/securiser_action');
@@ -404,7 +403,7 @@ function test_previsualiser_objet_champ($type = null, $id = 0, $qui = array(), $
 
 					if (!$id_auteur) {
 						return false;
-					} elseif(autoriser('previsualiser' . $opt[$champ], $type, '', $id_auteur)) {
+					} elseif (autoriser('previsualiser' . $opt[$champ], $type, '', $id_auteur)) {
 						// dans ce cas (admin en general), pas de filtrage sur ce statut
 					} elseif (!sql_countsel(
 						'spip_auteurs_liens',
@@ -528,8 +527,7 @@ function autoriser_dater_dist($faire, $type, $id, $qui, $opt) {
 		$statuts_publies = array('publie');
 	}
 	
-	if (
-		in_array($statut, $statuts_publies)
+	if (in_array($statut, $statuts_publies)
 		// Ou cas particulier géré en dur ici pour les articles
 		or ($statut == 'prop' and $type == 'article' and $GLOBALS['meta']['post_dates'] == 'non')
 	) {
@@ -1528,10 +1526,10 @@ function autoriser_auteurcreer_menu_dist($faire, $type, $id, $qui, $opt) {
  **/
 function autoriser_visiteurs_menu_dist($faire, $type, $id, $qui, $opt) {
 	include_spip('base/abstract_sql');
-	return 
+	return
 		$qui['statut'] == '0minirezo' and !$qui['restreint']
 		and (
-			$GLOBALS['meta']["accepter_visiteurs"] != 'non'
+			$GLOBALS['meta']['accepter_visiteurs'] != 'non'
 			or sql_countsel('spip_auteurs', 'statut in ("6forum", "nouveau")') > 0
 		);
 }
@@ -1581,7 +1579,7 @@ function autoriser_synchro_menu_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_configurerinteractions_menu_dist($faire, $type, $id, $qui, $opt) {
-    return autoriser('configurer', '_interactions', $id, $qui, $opt);
+	return autoriser('configurer', '_interactions', $id, $qui, $opt);
 }
 
 /**
@@ -1597,7 +1595,7 @@ function autoriser_configurerinteractions_menu_dist($faire, $type, $id, $qui, $o
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_configurerlangue_menu_dist($faire, $type, $id, $qui, $opt) {
-    return autoriser('configurer', '_langue', $id, $qui, $opt);
+	return autoriser('configurer', '_langue', $id, $qui, $opt);
 }
 
 /**
@@ -1613,7 +1611,7 @@ function autoriser_configurerlangue_menu_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_configurermultilinguisme_menu_dist($faire, $type, $id, $qui, $opt) {
-    return autoriser('configurer', '_multilinguisme', $id, $qui, $opt);
+	return autoriser('configurer', '_multilinguisme', $id, $qui, $opt);
 }
 
 /**
@@ -1629,7 +1627,7 @@ function autoriser_configurermultilinguisme_menu_dist($faire, $type, $id, $qui, 
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_configurercontenu_menu_dist($faire, $type, $id, $qui, $opt) {
-    return autoriser('configurer', '_contenu', $id, $qui, $opt);
+	return autoriser('configurer', '_contenu', $id, $qui, $opt);
 }
 
 /**
@@ -1645,7 +1643,7 @@ function autoriser_configurercontenu_menu_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_configureravancees_menu_dist($faire, $type, $id, $qui, $opt) {
-    return autoriser('configurer', '_avancees', $id, $qui, $opt);
+	return autoriser('configurer', '_avancees', $id, $qui, $opt);
 }
 
 /**
@@ -1661,7 +1659,7 @@ function autoriser_configureravancees_menu_dist($faire, $type, $id, $qui, $opt) 
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_adminplugin_menu_dist($faire, $type, $id, $qui, $opt) {
-    return autoriser('configurer', '_plugins', $id, $qui, $opt);
+	return autoriser('configurer', '_plugins', $id, $qui, $opt);
 }
 
 /**
@@ -1677,7 +1675,7 @@ function autoriser_adminplugin_menu_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_admintech_menu_dist($faire, $type, $id, $qui, $opt) {
-    return autoriser('detruire', $type, $id, $qui, $opt);
+	return autoriser('detruire', $type, $id, $qui, $opt);
 }
 
 /**

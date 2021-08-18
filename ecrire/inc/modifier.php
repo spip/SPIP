@@ -152,7 +152,8 @@ function objet_modifier_champs($objet, $id_objet, $options, $c = null, $serveur 
 	$champs = array_map('corriger_caracteres', $champs);
 
 	// Envoyer aux plugins
-	$champs = pipeline('pre_edition',
+	$champs = pipeline(
+		'pre_edition',
 		array(
 			'args' => array(
 				'table' => $spip_table_objet, // compatibilite
@@ -183,7 +184,7 @@ function objet_modifier_champs($objet, $id_objet, $options, $c = null, $serveur 
 
 	// Verifier si les mises a jour sont pertinentes, datees, en conflit etc
 	include_spip('inc/editer');
-	if (!isset($options['data']) or is_null($options['data'])){
+	if (!isset($options['data']) or is_null($options['data'])) {
 		$options['data'] = &$_POST;
 	}
 	$conflits = controler_md5($champs, $options['data'], $objet, $id_objet, $serveur);
@@ -225,8 +226,16 @@ function objet_modifier_champs($objet, $id_objet, $options, $c = null, $serveur 
 		sql_updateq($spip_table_objet, $champs, "$id_table_objet=" . intval($id_objet), $serveur);
 
 		// on verifie si elle est bien passee
-		$moof = sql_fetsel(array_keys($champs), $spip_table_objet, "$id_table_objet=" . intval($id_objet), array(), array(),
-			'', array(), $serveur);
+		$moof = sql_fetsel(
+			array_keys($champs),
+			$spip_table_objet,
+			"$id_table_objet=" . intval($id_objet),
+			array(),
+			array(),
+			'',
+			array(),
+			$serveur
+		);
 		// si difference entre les champs, reperer les champs mal enregistres
 		if ($moof != $champs) {
 			$liste = array();
@@ -254,11 +263,15 @@ function objet_modifier_champs($objet, $id_objet, $options, $c = null, $serveur 
 			// si un champ n'a pas ete correctement enregistre, loger et retourner une erreur
 			// c'est un cas exceptionnel
 			if (count($liste)) {
-				spip_log("Erreur enregistrement en base $objet/$id_objet champs :" . var_export($conflits, true),
-					'modifier.' . _LOG_CRITIQUE);
+				spip_log(
+					"Erreur enregistrement en base $objet/$id_objet champs :" . var_export($conflits, true),
+					'modifier.' . _LOG_CRITIQUE
+				);
 
-				return _T('erreur_technique_enregistrement_champs',
-					array('champs' => "<i>'" . implode("'</i>,<i>'", $liste) . "'</i>"));
+				return _T(
+					'erreur_technique_enregistrement_champs',
+					array('champs' => "<i>'" . implode("'</i>,<i>'", $liste) . "'</i>")
+				);
 			}
 		}
 
@@ -274,7 +287,8 @@ function objet_modifier_champs($objet, $id_objet, $options, $c = null, $serveur 
 
 		// Notifications, gestion des revisions...
 		// en standard, appelle |nouvelle_revision ci-dessous
-		pipeline('post_edition',
+		pipeline(
+			'post_edition',
 			array(
 				'args' => array(
 					'table' => $spip_table_objet,
@@ -296,8 +310,10 @@ function objet_modifier_champs($objet, $id_objet, $options, $c = null, $serveur 
 	// message a affiner :-)
 	include_spip('inc/filtres_mini');
 	$qui = isset($GLOBALS['visiteur_session']['nom']) and $GLOBALS['visiteur_session']['nom'] ? $GLOBALS['visiteur_session']['nom'] : $GLOBALS['ip'];
-	journal(_L($qui . ' a &#233;dit&#233; l&#8217;' . $objet . ' ' . $id_objet . ' (' . join('+',
-			array_diff(array_keys($champs), array('date_modif'))) . ')'), array(
+	journal(_L($qui . ' a &#233;dit&#233; l&#8217;' . $objet . ' ' . $id_objet . ' (' . join(
+		'+',
+		array_diff(array_keys($champs), array('date_modif'))
+	) . ')'), array(
 		'faire' => 'modifier',
 		'quoi' => $objet,
 		'id' => $id_objet

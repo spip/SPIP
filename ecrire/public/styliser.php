@@ -43,8 +43,8 @@ function public_styliser_dist($fond, $contexte, $lang = '', $connect = '') {
 
 	// s'assurer que le fond est licite
 	// car il peut etre construit a partir d'une variable d'environnement
-	if (strpos($fond, "../") !== false or strncmp($fond, '/', 1) == 0) {
-		$fond = "404";
+	if (strpos($fond, '../') !== false or strncmp($fond, '/', 1) == 0) {
+		$fond = '404';
 	}
 
 	if (strncmp($fond, 'modeles/', 8) == 0) {
@@ -61,10 +61,10 @@ function public_styliser_dist($fond, $contexte, $lang = '', $connect = '') {
 	}
 
 	// trouver un squelette du nom demande
-	// ne rien dire si on ne trouve pas, 
+	// ne rien dire si on ne trouve pas,
 	// c'est l'appelant qui sait comment gerer la situation
 	// ou les plugins qui feront mieux dans le pipeline
-	$squelette = trouver_fond($fond, "", true);
+	$squelette = trouver_fond($fond, '', true);
 	$ext = $squelette['extension'];
 
 	$flux = array(
@@ -120,7 +120,7 @@ function styliser_par_objets($flux) {
 			$table_sql = table_objet_sql($table);
 			$objets = lister_tables_objets_sql();
 			if (isset($objets[$table_sql])) {
-				$flux['data'] = $echafauder($table, $table, $table_sql, "prive/objets/liste/objets", $flux['args']['ext']);
+				$flux['data'] = $echafauder($table, $table, $table_sql, 'prive/objets/liste/objets', $flux['args']['ext']);
 			}
 		}
 		if (strncmp($flux['args']['fond'], 'prive/objets/contenu/', 21) == 0) {
@@ -129,7 +129,7 @@ function styliser_par_objets($flux) {
 			$table_sql = table_objet_sql($table);
 			$objets = lister_tables_objets_sql();
 			if (isset($objets[$table_sql])) {
-				$flux['data'] = $echafauder($type, $table, $table_sql, "prive/objets/contenu/objet", $flux['args']['ext']);
+				$flux['data'] = $echafauder($type, $table, $table_sql, 'prive/objets/contenu/objet', $flux['args']['ext']);
 			}
 		}
 	}

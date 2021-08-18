@@ -37,7 +37,7 @@ class ValidateurXML {
 				return;
 			}
 		}
-		// controler les filles illegitimes, ca suffit 
+		// controler les filles illegitimes, ca suffit
 		$depth = $this->depth;
 		$ouvrant = $this->ouvrant;
 		#spip_log("trouve $name apres " . $ouvrant[$depth]);
@@ -111,7 +111,7 @@ class ValidateurXML {
 				. _T('zxml_inconnu_attribut') . ' ' . _T('zxml_de')
 				. " <a$bons>$bal</a> ("
 				. _T('zxml_survoler')
-				. ")");
+				. ')');
 		} else {
 			$type = $a[$name][0];
 			if (!preg_match('/^\w+$/', $type)) {
@@ -169,8 +169,8 @@ class ValidateurXML {
 				. _T('zxml_de')
 				. " <b>$bal</b> "
 				. _T('zxml_non_conforme')
-				. "</p><p>"
-				. "<b>" . $motif . "</b>");
+				. '</p><p>'
+				. '<b>' . $motif . '</b>');
 		}
 	}
 
@@ -224,7 +224,7 @@ class ValidateurXML {
 
 		$regle = isset($this->dtc->regles[$name]) ? $this->dtc->regles[$name] : false;
 		$vide = ($regle == 'EMPTY');
-		// controler que les balises devant etre vides le sont 
+		// controler que les balises devant etre vides le sont
 		if ($vide) {
 			if ($n <> ($k + $c)) {
 				coordonnees_erreur($this, " <p><b>$name</b> " . _T('zxml_nonvide_balise'));
@@ -240,15 +240,16 @@ class ValidateurXML {
 			} else {
 				$f = isset($this->fratrie[substr($depth, 2)]) ? $this->fratrie[substr($depth, 2)] : null;
 				if (is_null($f) or !preg_match($regle, $f)) {
-					coordonnees_erreur($this,
+					coordonnees_erreur(
+						$this,
 						" <p>\n<b>$name</b> "
 						. _T('zxml_succession_fils_incorrecte')
 						. '&nbsp;: <b>'
 						. $f
-						. '</b>');
+						. '</b>'
+					);
 				}
 			}
-
 		}
 		if ($f = $this->process['fin']) {
 			$f($this, $name, $vide);
@@ -262,9 +263,8 @@ class ValidateurXML {
 			$d = $this->ouvrant[$d];
 			preg_match('/^\s*(\S+)/', $d, $m);
 			if (isset($this->dtc->pcdata[$m[1]]) and ($this->dtc->pcdata[$m[1]])) {
-				coordonnees_erreur($this, " <p><b>" . $m[1] . "</b> "
-					. _T('zxml_nonvide_balise') // message a affiner
-				);
+				coordonnees_erreur($this, ' <p><b>' . $m[1] . '</b> '
+					. _T('zxml_nonvide_balise')); // message a affiner
 			}
 		}
 		if ($f = $this->process['text']) {
@@ -282,8 +282,8 @@ class ValidateurXML {
 	// Pour contourner le bug de conception de SAX qui ne signale pas si elles
 	// sont dans un attribut, les  entites les plus frequentes ont ete
 	// transcodees au prealable  (sauf & < > " que SAX traite correctement).
-	// On ne les verra donc pas passer a cette etape, contrairement a ce que 
-	// le source de la page laisse legitimement supposer. 
+	// On ne les verra donc pas passer a cette etape, contrairement a ce que
+	// le source de la page laisse legitimement supposer.
 
 	// https://code.spip.net/@defautElement
 	public function defaultElement($phraseur, $data) {
@@ -295,8 +295,7 @@ class ValidateurXML {
 				if (!isset($this->dtc->entites[$e])) {
 					coordonnees_erreur($this, " <b>$e</b> "
 						. _T('zxml_inconnu_entite')
-						. ' '
-					);
+						. ' ');
 				}
 			}
 		}
@@ -335,10 +334,10 @@ class ValidateurXML {
 
 	public $dtc = null;
 	public $sax = null;
-	public $depth = "";
+	public $depth = '';
 	public $entete = '';
 	public $page = '';
-	public $res = "";
+	public $res = '';
 	public $err = array();
 	public $contenu = array();
 	public $ouvrant = array();

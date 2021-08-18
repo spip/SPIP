@@ -36,17 +36,17 @@ function inc_completer_traduction_dist($objet, $id_objet, $id_trad) {
 	$_id_table = id_table_objet($objet);
 
 	// recuperer le logo
-	$chercher_logo = charger_fonction('chercher_logo','inc');
+	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	include_spip('action/editer_logo');
 	foreach (array('on', 'off') as $etat) {
 		$logo = $chercher_logo($id_trad, $_id_table, $etat);
-		if ($logo AND $file = reset($logo)) {
+		if ($logo and $file = reset($logo)) {
 			logo_modifier($objet, $id_objet, $etat, $file);
 		}
 	}
 
 	// dupliquer certains champs
-	$trouver_table = charger_fonction('trouver_table','base');
+	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table(table_objet_sql($objet));
 	$champs = $set = array();
 

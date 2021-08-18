@@ -50,7 +50,7 @@ function precharger_objet($type, $id_objet, $id_rubrique = 0, $lier_trad = 0, $c
 
 	// si l'objet existe deja, on retourne simplement ses valeurs
 	if (is_numeric($id_objet)) {
-		return sql_fetsel("*", $table, "$_id_objet=".intval($id_objet));
+		return sql_fetsel('*', $table, "$_id_objet=".intval($id_objet));
 	}
 
 	// ici, on demande une creation.
@@ -64,7 +64,7 @@ function precharger_objet($type, $id_objet, $id_rubrique = 0, $lier_trad = 0, $c
 	// si demande de traduction
 	// on recupere les valeurs de la traduction
 	if ($lier_trad) {
-		if ($select = charger_fonction("precharger_traduction_" . $type, 'inc', true)) {
+		if ($select = charger_fonction('precharger_traduction_' . $type, 'inc', true)) {
 			$row = $select($id_objet, $id_rubrique, $lier_trad);
 		} else {
 			$row = precharger_traduction_objet($type, $id_objet, $id_rubrique, $lier_trad, $champ_titre);
@@ -79,19 +79,19 @@ function precharger_objet($type, $id_objet, $id_rubrique = 0, $lier_trad = 0, $c
 	// calcul de la rubrique
 	# note : comment faire pour des traductions sur l'objet rubriques ?
 	if ($is_rubrique) {
-		// appel du script a la racine, faut choisir 
+		// appel du script a la racine, faut choisir
 		// admin restreint ==> sa premiere rubrique
 		// autre ==> la derniere rubrique cree
 		if (!$row['id_rubrique']) {
 			if ($GLOBALS['connect_id_rubrique']) {
 				$row['id_rubrique'] = $id_rubrique = current($GLOBALS['connect_id_rubrique']);
 			} else {
-				$row_rub = sql_fetsel("id_rubrique", "spip_rubriques", "", "", "id_rubrique DESC", 1);
+				$row_rub = sql_fetsel('id_rubrique', 'spip_rubriques', '', '', 'id_rubrique DESC', 1);
 				$row['id_rubrique'] = $id_rubrique = $row_rub['id_rubrique'];
 			}
 			if (!autoriser('creerarticledans', 'rubrique', $row['id_rubrique'])) {
 				// manque de chance, la rubrique n'est pas autorisee, on cherche un des secteurs autorises
-				$res = sql_select("id_rubrique", "spip_rubriques", "id_parent=0");
+				$res = sql_select('id_rubrique', 'spip_rubriques', 'id_parent=0');
 				while (!autoriser('creerarticledans', 'rubrique', $row['id_rubrique']) && $row_rub = sql_fetch($res)) {
 					$row['id_rubrique'] = $row_rub['id_rubrique'];
 				}
@@ -102,7 +102,7 @@ function precharger_objet($type, $id_objet, $id_rubrique = 0, $lier_trad = 0, $c
 	// recuperer le secteur, pour affecter les bons champs extras
 	if ($id_rubrique and $is_secteur) {
 		if (!$row['id_secteur']) {
-			$row_rub = sql_getfetsel("id_secteur", "spip_rubriques", "id_rubrique=" . sql_quote($id_rubrique));
+			$row_rub = sql_getfetsel('id_secteur', 'spip_rubriques', 'id_rubrique=' . sql_quote($id_rubrique));
 			$row['id_secteur'] = $row_rub;
 		}
 	}
@@ -133,7 +133,7 @@ function precharger_traduction_objet($type, $id_objet, $id_rubrique = 0, $lier_t
 	$_id_objet = id_table_objet($table);
 
 	// Recuperer les donnees de l'objet original
-	$row = sql_fetsel("*", $table, "$_id_objet=".intval($lier_trad));
+	$row = sql_fetsel('*', $table, "$_id_objet=".intval($lier_trad));
 	if ($row) {
 		include_spip('inc/filtres');
 		$row[$champ_titre] = filtrer_entites(objet_T($type, 'info_nouvelle_traduction')) . ' ' . $row[$champ_titre];
@@ -173,7 +173,6 @@ function precharger_traduction_objet($type, $id_objet, $id_rubrique = 0, $lier_t
 		// Regler la langue, si possible, sur celle du redacteur
 		// Cela implique souvent de choisir une rubrique ou un secteur
 		if (in_array($GLOBALS['spip_lang'], $langues_dispo)) {
-
 			// Si le menu de langues est autorise sur l'objet,
 			// on peut changer la langue quelle que soit la rubrique
 			// donc on reste dans la meme rubrique
@@ -187,12 +186,15 @@ function precharger_traduction_objet($type, $id_objet, $id_rubrique = 0, $lier_t
 					$id_parent = 0;
 				} else {
 					// on cherche une rubrique soeur dans la bonne langue
-					$row_rub = sql_fetsel("id_parent", "spip_rubriques", "id_rubrique=".intval($id_rubrique));
+					$row_rub = sql_fetsel('id_parent', 'spip_rubriques', 'id_rubrique='.intval($id_rubrique));
 					$id_parent = $row_rub['id_parent'];
 				}
 
-				$row_rub = sql_fetsel("id_rubrique", "spip_rubriques",
-					"lang='" . $GLOBALS['spip_lang'] . "' AND id_parent=".intval($id_parent));
+				$row_rub = sql_fetsel(
+					'id_rubrique',
+					'spip_rubriques',
+					"lang='" . $GLOBALS['spip_lang'] . "' AND id_parent=".intval($id_parent)
+				);
 				if ($row_rub) {
 					$row['id_rubrique'] = $row_rub['id_rubrique'];
 				}

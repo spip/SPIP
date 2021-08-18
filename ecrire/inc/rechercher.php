@@ -114,13 +114,13 @@ function expression_recherche($recherche, $options) {
 		// -> on remplace les espaces par un \x1 et on enleve les guillemets
 		if (preg_match(',["][^"]+["],Uims', $recherche_mod, $matches)) {
 			foreach ($matches as $match) {
-				$word = preg_replace(",\s+,Uims", "\x1", $match);
+				$word = preg_replace(',\s+,Uims', "\x1", $match);
 				$word = trim($word, '"');
 				$recherche_mod = str_replace($match, $word, $recherche_mod);
 			}
 		}
 
-		if (preg_match(",\s+," . $u, $recherche_mod)) {
+		if (preg_match(',\s+,' . $u, $recherche_mod)) {
 			$is_preg = true;
 
 			$recherche_inter = '|';
@@ -139,7 +139,7 @@ function expression_recherche($recherche, $options) {
 			// mais on cherche quand même l'expression complète, même si elle
 			// comporte des mots de moins de quatre lettres
 			$recherche = trim(preg_replace(',\s+,' . $u, '|', $recherche_inter), '|');
-			if (!$recherche or $petits_mots){
+			if (!$recherche or $petits_mots) {
 				$recherche = preg_quote($recherche_org);
 			}
 			$recherche_trans = translitteration($recherche);
@@ -169,7 +169,7 @@ function expression_recherche($recherche, $options) {
 		// corriger le like dans le $q
 		if (preg_match(',["][^"]+["],Uims', $q, $matches)) {
 			foreach ($matches as $match) {
-				$word = preg_replace(",\s+,Uims", "_", $match);
+				$word = preg_replace(',\s+,Uims', '_', $match);
 				$word = trim($word, '"');
 				$q = str_replace($match, $word, $q);
 			}
@@ -177,19 +177,18 @@ function expression_recherche($recherche, $options) {
 		// corriger la regexp
 		if (preg_match(',["][^"]+["],Uims', $recherche_mod, $matches)) {
 			foreach ($matches as $match) {
-				$word = preg_replace(",\s+,Uims", "[\s]", $match);
+				$word = preg_replace(',\s+,Uims', '[\s]', $match);
 				$word = trim($word, '"');
 				$recherche_mod = str_replace($match, $word, $recherche_mod);
 			}
 		}
 		$q = sql_quote(
-			"%"
-			. preg_replace(",\s+," . $u, "%", $q)
-			. "%"
+			'%'
+			. preg_replace(',\s+,' . $u, '%', $q)
+			. '%'
 		);
 
-		$preg = '/' . preg_replace(",\s+," . $u, ".+", trim($recherche_mod)) . '/' . $options['preg_flags'];
-
+		$preg = '/' . preg_replace(',\s+,' . $u, '.+', trim($recherche_mod)) . '/' . $options['preg_flags'];
 	} else {
 		$methode = 'REGEXP';
 		$q = sql_quote(trim($recherche, '/'));
@@ -206,7 +205,7 @@ function expression_recherche($recherche, $options) {
 		) {
 			// on utilise ..?.? car le char utf peut etre encode sur 1, 2 ou 3 bytes
 			// mais c'est un pis aller cf #4354
-			$q_t = str_replace($char, $is_preg ? "..?.?" : "_", $q_t);
+			$q_t = str_replace($char, $is_preg ? '..?.?' : '_', $q_t);
 		}
 	}
 
@@ -218,7 +217,7 @@ function expression_recherche($recherche, $options) {
 	if (isset($GLOBALS['connexions'][$options['serveur'] ? $options['serveur'] : 0]['type'])
 		and strncmp($GLOBALS['connexions'][$options['serveur'] ? $options['serveur'] : 0]['type'], 'sqlite', 6) == 0
 	) {
-		$q_t = strtr($q, "aeuioc", $is_preg ? "......" : "______");
+		$q_t = strtr($q, 'aeuioc', $is_preg ? '......' : '______');
 		// si il reste au moins un char significatif...
 		if (preg_match(",[^'%_.],", $q_t)) {
 			$q = $q_t;
@@ -281,7 +280,8 @@ function recherche_en_base($recherche = '', $tables = null, $options = array(), 
 	include_spip('inc/autoriser');
 
 	// options par defaut
-	$options = array_merge(array(
+	$options = array_merge(
+		array(
 		'preg_flags' => 'UimsS',
 		'toutvoir' => false,
 		'champs' => false,
@@ -289,7 +289,7 @@ function recherche_en_base($recherche = '', $tables = null, $options = array(), 
 		'matches' => false,
 		'jointures' => false,
 		'serveur' => $serveur
-	),
+		),
 		$options
 	);
 
@@ -297,7 +297,7 @@ function recherche_en_base($recherche = '', $tables = null, $options = array(), 
 
 	// Utiliser l'iterateur (DATA:recherche)
 	// pour recuperer les couples (id_objet, score)
-	// Le resultat est au format { 
+	// Le resultat est au format {
 	//      id1 = { 'score' => x, attrs => { } },
 	//      id2 = { 'score' => x, attrs => { } },
 	// }
@@ -314,14 +314,17 @@ function recherche_en_base($recherche = '', $tables = null, $options = array(), 
 
 		# TODO : ici plutot charger un iterateur via l'API iterateurs
 		$to_array = charger_fonction('recherche_to_array', 'inc');
-		$results[$table] = $to_array($recherche,
+		$results[$table] = $to_array(
+			$recherche,
 			array_merge($options, array('table' => $table, 'champs' => $champs))
 		);
 		##var_dump($results[$table]);
 
 
-		spip_log("recherche $table ($recherche) : " . count($results[$table]) . " resultats " . spip_timer('rech'),
-			'recherche');
+		spip_log(
+			"recherche $table ($recherche) : " . count($results[$table]) . ' resultats ' . spip_timer('rech'),
+			'recherche'
+		);
 
 		if (isset($lock)) {
 			cache_unlock($lock);
@@ -338,10 +341,11 @@ function remplace_en_base($recherche = '', $remplace = null, $tables = null, $op
 	include_spip('inc/modifier');
 
 	// options par defaut
-	$options = array_merge(array(
+	$options = array_merge(
+		array(
 		'preg_flags' => 'UimsS',
 		'toutmodifier' => false
-	),
+		),
 		$options
 	);
 	$options['champs'] = true;
@@ -372,11 +376,14 @@ function remplace_en_base($recherche = '', $remplace = null, $tables = null, $op
 					}
 				}
 				if ($modifs) {
-					objet_modifier_champs($table, $id,
+					objet_modifier_champs(
+						$table,
+						$id,
 						array(
 							'champs' => array_keys($modifs),
 						),
-						$modifs);
+						$modifs
+					);
 				}
 			}
 		}

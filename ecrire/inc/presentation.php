@@ -31,7 +31,7 @@ include_spip('inc/filtres_boites');
 include_spip('inc/filtres_alertes');
 
 // https://code.spip.net/@debut_cadre
-function debut_cadre($style, $icone = "", $fonction = "", $titre = "", $id = "", $class = "", $padding = true) {
+function debut_cadre($style, $icone = '', $fonction = '', $titre = '', $id = '', $class = '', $padding = true) {
 	$style_mapping = array(
 		'r' => 'simple',
 		'e' => 'raccourcis',
@@ -44,9 +44,9 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "", $id = "",
 	);
 	$style_titre_mapping = array('couleur' => 'topper', 'trait-couleur' => 'section');
 	$c = isset($style_mapping[$style]) ? $style_mapping[$style] : 'simple';
-	$class = $c . ($class ? " $class" : "");
+	$class = $c . ($class ? " $class" : '');
 	if (!$padding) {
-		$class .= ($class ? " " : "") . "no-padding";
+		$class .= ($class ? ' ' : '') . 'no-padding';
 	}
 
 	//($id?"id='$id' ":"")
@@ -55,16 +55,16 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "", $id = "",
 			list($fond, $fonction) = $icone_renommer($icone, $fonction);
 		}
 		$size = 24;
-		if (preg_match("/-([0-9]{1,3})[.](gif|png)$/i", $fond, $match)) {
+		if (preg_match('/-([0-9]{1,3})[.](gif|png)$/i', $fond, $match)) {
 			$size = $match[1];
 		}
 		if ($fonction) {
 			// 2 images pour composer l'icone : le fond (article) en background,
 			// la fonction (new) en image
-			$icone = http_img_pack($fonction, "", "class='cadre-icone' width='$size' height='$size'\n" .
-				http_style_background($fond, "no-repeat center center", $size));
+			$icone = http_img_pack($fonction, '', "class='cadre-icone' width='$size' height='$size'\n" .
+				http_style_background($fond, 'no-repeat center center', $size));
 		} else {
-			$icone = http_img_pack($fond, "", "class='cadre-icone' width='$size' height='$size'");
+			$icone = http_img_pack($fond, '', "class='cadre-icone' width='$size' height='$size'");
 		}
 		$titre = $icone . $titre;
 	}
@@ -73,7 +73,9 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "", $id = "",
 }
 
 // https://code.spip.net/@fin_cadre
-function fin_cadre() { return boite_fermer(); }
+function fin_cadre() {
+ return boite_fermer();
+}
 
 
 function debut_cadre_relief(
@@ -81,73 +83,91 @@ function debut_cadre_relief(
 	$dummy = '',
 	$fonction = '',
 	$titre = '',
-	$id = "",
-	$class = ""
+	$id = '',
+	$class = ''
 ) {
 	return debut_cadre('r', $icone, $fonction, $titre, $id, $class);
 }
 
-function fin_cadre_relief() { return fin_cadre('r'); }
+function fin_cadre_relief() {
+ return fin_cadre('r');
+}
 
 function debut_cadre_enfonce(
 	$icone = '',
 	$dummy = '',
 	$fonction = '',
 	$titre = '',
-	$id = "",
-	$class = ""
+	$id = '',
+	$class = ''
 ) {
 	return debut_cadre('e', $icone, $fonction, $titre, $id, $class);
 }
 
-function fin_cadre_enfonce() { return fin_cadre('e'); }
+function fin_cadre_enfonce() {
+ return fin_cadre('e');
+}
 
 function debut_cadre_sous_rub(
 	$icone = '',
 	$dummy = '',
 	$fonction = '',
 	$titre = '',
-	$id = "",
-	$class = ""
+	$id = '',
+	$class = ''
 ) {
 	return debut_cadre('sous_rub', $icone, $fonction, $titre, $id, $class);
 }
 
-function fin_cadre_sous_rub() { return fin_cadre('sous_rub'); }
+function fin_cadre_sous_rub() {
+ return fin_cadre('sous_rub');
+}
 
 function debut_cadre_couleur(
 	$icone = '',
 	$dummy = '',
 	$fonction = '',
 	$titre = '',
-	$id = "",
-	$class = ""
+	$id = '',
+	$class = ''
 ) {
 	return debut_cadre('couleur', $icone, $fonction, $titre, $id, $class);
 }
 
-function fin_cadre_couleur() { return fin_cadre('couleur'); }
+function fin_cadre_couleur() {
+ return fin_cadre('couleur');
+}
 
 function debut_cadre_trait_couleur(
 	$icone = '',
 	$dummy = '',
 	$fonction = '',
 	$titre = '',
-	$id = "",
-	$class = ""
+	$id = '',
+	$class = ''
 ) {
 	return debut_cadre('trait-couleur', $icone, $fonction, $titre, $id, $class);
 }
 
-function fin_cadre_trait_couleur() { return fin_cadre('trait-couleur'); }
+function fin_cadre_trait_couleur() {
+ return fin_cadre('trait-couleur');
+}
 
-function debut_boite_alerte() { return debut_cadre('alerte', '', '', '', '', ''); }
+function debut_boite_alerte() {
+ return debut_cadre('alerte', '', '', '', '', '');
+}
 
-function fin_boite_alerte() { return fin_cadre('alerte'); }
+function fin_boite_alerte() {
+ return fin_cadre('alerte');
+}
 
-function debut_boite_info() { return debut_cadre('info', '', '', '', '', ''); }
+function debut_boite_info() {
+ return debut_cadre('info', '', '', '', '', '');
+}
 
-function fin_boite_info() { return fin_cadre('info'); }
+function fin_boite_info() {
+ return fin_cadre('info');
+}
 
 /**
  * Affiche le titre d’une page de l’interface privée. Utilisée par la plupart des fichiers `exec/xx.php`.
@@ -178,17 +198,21 @@ function bloc_des_raccourcis($bloc) {
 // Fonctions onglets
 // https://code.spip.net/@debut_onglet
 // @param string $sous_classe	prend la valeur second pour definir les onglet de deuxieme niveau
-function debut_onglet($classe = "barre_onglet") { return "<div class = '$classe clearfix'><ul>\n"; }
+function debut_onglet($classe = 'barre_onglet') {
+ return "<div class = '$classe clearfix'><ul>\n";
+}
 
 // https://code.spip.net/@fin_onglet
-function fin_onglet() { return "</ul></div>\n"; }
+function fin_onglet() {
+ return "</ul></div>\n";
+}
 
 // https://code.spip.net/@onglet
-function onglet($texte, $lien, $onglet_ref, $onglet, $icone = "") {
-	return "<li>"
+function onglet($texte, $lien, $onglet_ref, $onglet, $icone = '') {
+	return '<li>'
 	. ($icone ? http_img_pack($icone, '', " class='cadre-icone'") : '')
 	. lien_ou_expose($lien, $texte, $onglet == $onglet_ref)
-	. "</li>";
+	. '</li>';
 }
 
 /**
@@ -219,7 +243,7 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone = "") {
  * @return string
  *     Code HTML du lien
  **/
-function icone_verticale($texte, $lien, $fond, $fonction = "", $align = "", $javascript = "") {
+function icone_verticale($texte, $lien, $fond, $fonction = '', $align = '', $javascript = '') {
 	// cas d'ajax_action_auteur: faut defaire le boulot
 	// (il faudrait fusionner avec le cas $javascript)
 	if (preg_match(",^<a\shref='([^']*)'([^>]*)>(.*)</a>$,i", $lien, $r)) {
@@ -251,7 +275,7 @@ function icone_verticale($texte, $lien, $fond, $fonction = "", $align = "", $jav
  * @return string
  *     Code HTML du lien
  **/
-function icone_horizontale($texte, $lien, $fond, $fonction = "", $dummy = "", $javascript = "") {
+function icone_horizontale($texte, $lien, $fond, $fonction = '', $dummy = '', $javascript = '') {
 	$retour = '';
 	// cas d'ajax_action_auteur: faut defaire le boulot
 	// (il faudrait fusionner avec le cas $javascript)
@@ -260,7 +284,7 @@ function icone_horizontale($texte, $lien, $fond, $fonction = "", $dummy = "", $j
 		$javascript .= $atts;
 	}
 
-	$retour = icone_base($lien, $texte, $fond, $fonction, "horizontale", $javascript);
+	$retour = icone_base($lien, $texte, $fond, $fonction, 'horizontale', $javascript);
 
 	return $retour;
 }

@@ -39,7 +39,7 @@ function inc_lien_dist(
 // Laisser passer des paires de crochets pour la balise multi
 // mais refuser plus d'imbrications ou de mauvaises imbrications
 // sinon les crochets ne peuvent plus servir qu'a ce type de raccourci
-define('_RACCOURCI_LIEN', "/\[([^][]*?([[]\w*[]][^][]*)*)->(>?)([^]]*)\]/msS");
+define('_RACCOURCI_LIEN', '/\[([^][]*?([[]\w*[]][^][]*)*)->(>?)([^]]*)\]/msS');
 
 // https://code.spip.net/@expanser_liens
 function expanser_liens($t, $connect = '', $env = array()) {
@@ -73,9 +73,9 @@ function traiter_raccourci_lien_atts($texte) {
 define('_RACCOURCI_CHAPO', '/^(\W*)(\W*)(\w*\d+([?#].*)?)$/');
 /**
  * Retourne la valeur d'un champ de redirection (articles virtuels)
- * 
+ *
  * @note
- *     Pas d'action dans le noyau SPIP directement. 
+ *     Pas d'action dans le noyau SPIP directement.
  *     Se réferer inc/lien du plugin Textwheel.
  *
  * @param string $virtuel
@@ -87,7 +87,7 @@ function virtuel_redirige($virtuel, $url = false) {
 }
 
 // Cherche un lien du type [->raccourci 123]
-// associe a une fonction generer_url_raccourci() definie explicitement 
+// associe a une fonction generer_url_raccourci() definie explicitement
 // ou implicitement par le jeu de type_urls courant.
 //
 // Valeur retournee selon le parametre $pour:
@@ -119,19 +119,19 @@ function traiter_lien_explicite($ref, $texte = '', $pour = 'url', $connect = '',
 		$lien_court = charger_fonction('lien_court', 'inc');
 		$texte = $lien_court($texte);
 		if ($echappe_typo) {
-			$texte = "<html>" . quote_amp($texte) . "</html>";
+			$texte = '<html>' . quote_amp($texte) . '</html>';
 		}
 	}
 
 	// petites corrections d'URL
 	if (preg_match('/^www\.[^@]+$/S', $lien)) {
-		$lien = "http://" . $lien;
+		$lien = 'http://' . $lien;
 	} else {
-		if (strpos($lien, "@") && email_valide($lien)) {
+		if (strpos($lien, '@') && email_valide($lien)) {
 			if (!$texte) {
 				$texte = $lien;
 			}
-			$lien = "mailto:" . $lien;
+			$lien = 'mailto:' . $lien;
 		}
 	}
 
@@ -164,7 +164,7 @@ function traiter_lien_implicite($ref, $texte = '', $pour = 'url', $connect = '')
 	@list($type, , $id, , $args, , $ancre) = $match;
 	// attention dans le cas des sites le lien doit pointer non pas sur
 	// la page locale du site, mais directement sur le site lui-meme
-	if ($f = charger_fonction("implicite_$type", "liens", true)) {
+	if ($f = charger_fonction("implicite_$type", 'liens', true)) {
 		$url = $f($texte, $id, $type, $args, $ancre, $connect);
 	}
 	if (!$url) {
@@ -197,9 +197,16 @@ function traiter_lien_implicite($ref, $texte = '', $pour = 'url', $connect = '')
 
 	// dans le cas d'un lien vers un doc, ajouter le type='mime/type'
 	if ($type == 'document'
-		and $mime = sql_getfetsel('mime_type', 'spip_types_documents',
-			"extension IN (" . sql_get_select("extension", "spip_documents", "id_document=" . sql_quote($id)) . ")",
-			'', '', '', '', $connect)
+		and $mime = sql_getfetsel(
+			'mime_type',
+			'spip_types_documents',
+			'extension IN (' . sql_get_select('extension', 'spip_documents', 'id_document=' . sql_quote($id)) . ')',
+			'',
+			'',
+			'',
+			'',
+			$connect
+		)
 	) {
 		$r['mime'] = $mime;
 	}
@@ -291,7 +298,8 @@ function traiter_raccourci_titre($id, $type, $connect = null) {
 // mais on renvoie les params (pour l'indexation par le moteur de recherche)
 // https://code.spip.net/@traiter_modeles
 
-define('_RACCOURCI_MODELE',
+define(
+	'_RACCOURCI_MODELE',
 	'(<([a-z_-]{3,})' # <modele
 	. '\s*([0-9]*)\s*' # id
 	. '([|](?:<[^<>]*>|[^>])*?)?' # |arguments (y compris des tags <...>)
@@ -308,22 +316,28 @@ function traiter_modeles($texte, $doublons = false, $echap = '', $connect = '', 
 		$doublons = array('documents' => array('doc', 'emb', 'img'));
 	}
 	// detecter les modeles (rapide)
-	if (strpos($texte, "<") !== false and
+	if (strpos($texte, '<') !== false and
 		preg_match_all('/<[a-z_-]{3,}\s*[0-9|]+/iS', $texte, $matches, PREG_SET_ORDER)
 	) {
 		include_spip('public/assembler');
-		$wrap_embed_html = charger_fonction("wrap_embed_html", "inc", true);
+		$wrap_embed_html = charger_fonction('wrap_embed_html', 'inc', true);
 		foreach ($matches as $match) {
 			// Recuperer l'appel complet (y compris un eventuel lien)
 
 			$a = strpos($texte, $match[0]);
-			preg_match(_RACCOURCI_MODELE_DEBUT,
-				substr($texte, $a), $regs);
-			$regs[] = ""; // s'assurer qu'il y a toujours un 5e arg, eventuellement vide
+			preg_match(
+				_RACCOURCI_MODELE_DEBUT,
+				substr($texte, $a),
+				$regs
+			);
+			$regs[] = ''; // s'assurer qu'il y a toujours un 5e arg, eventuellement vide
 			list(, $mod, $type, $id, $params, $fin) = $regs;
 			if ($fin and
-				preg_match('/<a\s[^<>]*>\s*$/i',
-					substr($texte, 0, $a), $r)
+				preg_match(
+					'/<a\s[^<>]*>\s*$/i',
+					substr($texte, 0, $a),
+					$r
+				)
 			) {
 				$lien = array(
 					'href' => extraire_attribut($r[0], 'href'),
@@ -352,8 +366,8 @@ function traiter_modeles($texte, $doublons = false, $echap = '', $connect = '', 
 					$params = str_replace($liens[0], $liens[1], $params);
 				}
 				$modele = inclure_modele($type, $id, $params, $lien, $connect, $env);
-				// en cas d'echec, 
-				// si l'objet demande a une url, 
+				// en cas d'echec,
+				// si l'objet demande a une url,
 				// creer un petit encadre vers elle
 				if ($modele === false) {
 					if (!$lien) {
@@ -365,13 +379,13 @@ function traiter_modeles($texte, $doublons = false, $echap = '', $connect = '', 
 							. '" class="spip_modele'
 							. '">'
 							. sinon($lien['titre'], _T('ecrire:info_sans_titre'))
-							. "</a>";
+							. '</a>';
 					} else {
-						$modele = "";
+						$modele = '';
 						if (test_espace_prive()) {
 							$modele = entites_html(substr($texte, $a, $cherche));
 							if (!is_null($liens)) {
-								$modele = "<pre>" . str_replace($liens[0], $liens[1], $modele) . "</pre>";
+								$modele = '<pre>' . str_replace($liens[0], $liens[1], $modele) . '</pre>';
 							}
 						}
 					}

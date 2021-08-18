@@ -131,7 +131,7 @@ function formulaires_editer_liens_charger_dist($a, $b, $c, $options = array()) {
 	if (unserialize(base64_decode($oups))) {
 		// on est bon, rien a faire
 	}
-	elseif(unserialize($oups)) {
+	elseif (unserialize($oups)) {
 		// il faut encoder
 		$oups = base64_encode($oups);
 	}

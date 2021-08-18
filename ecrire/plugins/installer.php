@@ -68,7 +68,7 @@ function plugins_installer_dist($plug, $action, $dir_type = '_DIR_PLUGINS') {
 	}
 	$dir = constant($dir);
 	foreach ($infos['install'] as $file) {
-		$file = $dir . $plug . "/" . trim($file);
+		$file = $dir . $plug . '/' . trim($file);
 		if (file_exists($file)) {
 			include_once($file);
 		}
@@ -84,7 +84,7 @@ function plugins_installer_dist($plug, $action, $dir_type = '_DIR_PLUGINS') {
 	$nom_meta = $infos['prefix'] . '_base_version';
 
 	// Détermination de la fonction à appeler et de ses arguments
-	$f = $infos['prefix'] . "_install";
+	$f = $infos['prefix'] . '_install';
 	if (!function_exists($f)) {
 		$f = isset($infos['schema']) ? 'spip_plugin_install' : '';
 		$arg = $infos;
@@ -135,8 +135,7 @@ function plugins_installer_dist($plug, $action, $dir_type = '_DIR_PLUGINS') {
 	// Si la table meta n'est pas spip_meta et qu'on est dans la première installation du plugin
 	// on force la création du fichier cache à la date du moment.
 	// On relit les metas de la table pour être sur que la globale soit à jour pour touch_meta.
-	if (
-		($table !== 'meta')
+	if (($table !== 'meta')
 		and ($action == 'install')
 		and empty($infos['upgrade'])
 	) {
@@ -202,16 +201,16 @@ function liste_plugin_actifs() {
 	}
 	if (!is_array($liste = unserialize($liste))) {
 		// compatibilite pre 1.9.2, mettre a jour la meta
-		spip_log("MAJ meta plugin vieille version : $liste", "plugin");
+		spip_log("MAJ meta plugin vieille version : $liste", 'plugin');
 		$new = true;
-		list(, $liste) = liste_plugin_valides(explode(",", $liste));
+		list(, $liste) = liste_plugin_valides(explode(',', $liste));
 	} else {
 		$new = false;
 		// compat au moment d'une migration depuis version anterieure
 		// si pas de dir_type, alors c'est _DIR_PLUGINS
 		foreach ($liste as $prefix => $infos) {
 			if (!isset($infos['dir_type'])) {
-				$liste[$prefix]['dir_type'] = "_DIR_PLUGINS";
+				$liste[$prefix]['dir_type'] = '_DIR_PLUGINS';
 				$new = true;
 			}
 		}

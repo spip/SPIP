@@ -40,37 +40,37 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function inc_couleurs_dist($choix = null, $ajouter = false) {
 	static $couleurs_spip = array(
 		// Violet soutenu
-		9 => ["couleur_theme" => "#9a6ef2"],
+		9 => ['couleur_theme' => '#9a6ef2'],
 		// Violet rosé
-		4 => ["couleur_theme" => "#c464cb"],
+		4 => ['couleur_theme' => '#c464cb'],
 		// Rose interface SPIP
-		2 => ["couleur_theme" =>  "#F02364"],
+		2 => ['couleur_theme' =>  '#F02364'],
 		// Rouge
-		8 => ["couleur_theme" => "#ff4524"],
+		8 => ['couleur_theme' => '#ff4524'],
 		// Orange
-		3 => ["couleur_theme" => "#c97500"],
+		3 => ['couleur_theme' => '#c97500'],
 		// Vert SPIP
-		1 => ["couleur_theme" => "#9dba00"],
+		1 => ['couleur_theme' => '#9dba00'],
 		// Vert Troglo
-		7 => ["couleur_theme" => "#419a2c"],
+		7 => ['couleur_theme' => '#419a2c'],
 		// Bleu-vert
-		12 => ["couleur_theme" => "#269681"],
+		12 => ['couleur_theme' => '#269681'],
 		//  Bleu pastel
-		5 => ["couleur_theme" => "#3190ae"],
+		5 => ['couleur_theme' => '#3190ae'],
 		//  Bleu Kermesse
-		11 => ["couleur_theme" => "#288bdd"],
+		11 => ['couleur_theme' => '#288bdd'],
 		//  Gris bleuté
-		6 => ["couleur_theme" => "#7d90a2"],
+		6 => ['couleur_theme' => '#7d90a2'],
 		//  Gris
-		10 => ["couleur_theme" => "#909090"],
+		10 => ['couleur_theme' => '#909090'],
 	);
 
 	if (is_numeric($choix)) {
 		$c = $couleurs_spip[$choix];
 		// compat < SPIP 3.3
 		include_spip('inc/filtres_images_mini');
-		$c["couleur_foncee"] = $c["couleur_theme"];
-		$c["couleur_claire"] = '#' . couleur_eclaircir($c["couleur_theme"], .5);
+		$c['couleur_foncee'] = $c['couleur_theme'];
+		$c['couleur_claire'] = '#' . couleur_eclaircir($c['couleur_theme'], .5);
 
 		return
 			'couleur_theme=' . substr($c['couleur_theme'], 1)
@@ -80,13 +80,13 @@ function inc_couleurs_dist($choix = null, $ajouter = false) {
 	} else {
 		if (is_array($choix)) {
 			// compat < SPIP 3.3
-			$compat_spip_33 = function($c) {
-				if (!isset($c["couleur_theme"])) {
-					$c["couleur_theme"] = $c["couleur_foncee"];
-					unset($c["couleur_foncee"]);
-					unset($c["couleur_claire"]);
-					unset($c["couleur_lien"]);
-					unset($c["couleur_lien_off"]);
+			$compat_spip_33 = function ($c) {
+				if (!isset($c['couleur_theme'])) {
+					$c['couleur_theme'] = $c['couleur_foncee'];
+					unset($c['couleur_foncee']);
+					unset($c['couleur_claire']);
+					unset($c['couleur_lien']);
+					unset($c['couleur_lien_off']);
 				}
 				return $c;
 			};

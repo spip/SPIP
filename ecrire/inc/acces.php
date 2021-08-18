@@ -113,8 +113,12 @@ function charger_aleas() {
 		$aleas = sql_allfetsel(
 			array('nom', 'valeur'),
 			'spip_meta',
-			sql_in("nom", array('alea_ephemere', 'alea_ephemere_ancien')),
-			'', '', '', '', '',
+			sql_in('nom', array('alea_ephemere', 'alea_ephemere_ancien')),
+			'',
+			'',
+			'',
+			'',
+			'',
 			'continue'
 		);
 		if ($aleas) {
@@ -123,8 +127,8 @@ function charger_aleas() {
 			}
 			return $GLOBALS['meta']['alea_ephemere'];
 		} else {
-			spip_log("aleas indisponibles", "session");
-			return "";
+			spip_log('aleas indisponibles', 'session');
+			return '';
 		}
 	}
 	return $GLOBALS['meta']['alea_ephemere'];
@@ -451,4 +455,3 @@ function gerer_htaccess() {
 
 	return isset($GLOBALS['meta']['creer_htaccess']) ? $GLOBALS['meta']['creer_htaccess'] : '';
 }
-

@@ -246,8 +246,7 @@ function inc_bandeau_dist() {
  * @return array
  */
 function obtenir_menus_favoris() {
-	if (
-		isset($GLOBALS['visiteur_session']['prefs']['menus_favoris'])
+	if (isset($GLOBALS['visiteur_session']['prefs']['menus_favoris'])
 		and is_array($GLOBALS['visiteur_session']['prefs']['menus_favoris'])
 		and $GLOBALS['visiteur_session']['prefs']['menus_favoris']
 	) {

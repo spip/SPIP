@@ -101,7 +101,7 @@ function trouver_champs_decomposes($champ, $desc) {
 function calculer_jointure(&$boucle, $depart, $arrivee, $col = '', $cond = false, $max_liens = 5) {
 	// les jointures minimales sont optimales :
 	// on contraint le nombre d'etapes en l'augmentant
-	// jusqu'a ce qu'on trouve une jointure ou qu'on atteigne la limite maxi 
+	// jusqu'a ce qu'on trouve une jointure ou qu'on atteigne la limite maxi
 	$max = 1;
 	$res = false;
 	$milieu_exclus = ($col ? $col : array());
@@ -110,7 +110,7 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col = '', $cond = false
 		$max++;
 	}
 	if (!$res) {
-		return "";
+		return '';
 	}
 
 	list($nom, $desc) = $depart;
@@ -155,7 +155,7 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col = '', $cond = false
  */
 function fabrique_jointures(&$boucle, $res, $cond = false, $desc = array(), $nom = '', $col = '', $echap = true) {
 	static $num = array();
-	$id_table = "";
+	$id_table = '';
 	$cpt = &$num[$boucle->descr['nom']][$boucle->descr['gram']][$boucle->id_boucle];
 	foreach ($res as $cle => $r) {
 		list($d, $a, $j) = $r;
@@ -178,7 +178,7 @@ function fabrique_jointures(&$boucle, $res, $cond = false, $desc = array(), $nom
 				$echap ?
 					array("'='","'$obj'","sql_quote('$type')")
 					:
-					array("=","$obj",sql_quote($type));
+					array('=',"$obj",sql_quote($type));
 			$boucle->join["L$n"] =
 				$echap ?
 					array("'$id_table'", "'$j2'", "'$j1'", "'$obj='.sql_quote('$type')")
@@ -201,7 +201,7 @@ function fabrique_jointures(&$boucle, $res, $cond = false, $desc = array(), $nom
 		$pk = nogroupby_if($desc, $a[1], $col);
 	}
 
-	// pas de group by 
+	// pas de group by
 	// si une seule jointure
 	// et si l'index de jointure est une primary key a l'arrivee !
 	if (!$pk
@@ -291,7 +291,7 @@ function liste_champs_jointures($nom, $desc, $primary = false) {
 		return split_key($desc['key']['PRIMARY KEY']);
 	}
 
-	// ici on se rabat sur les cles secondaires, 
+	// ici on se rabat sur les cles secondaires,
 	// en eliminant celles qui sont pas pertinentes (idx, maj)
 	// si jamais le resultat n'est pas pertinent pour une table donnee,
 	// il faut declarer explicitement le champ 'join' de sa description
@@ -397,7 +397,7 @@ function calculer_chaine_jointures(
 
 	// regarder si l'on a (id_objet,objet) au depart et si on peut le mapper sur un id_xx
 	if (count(array_intersect(array('id_objet', 'objet'), $keys)) == 2) {
-		// regarder si l'une des cles d'arrivee peut se decomposer en 
+		// regarder si l'une des cles d'arrivee peut se decomposer en
 		// id_objet,objet
 		// si oui on la prend
 		foreach ($akeys as $key) {
@@ -410,7 +410,7 @@ function calculer_chaine_jointures(
 			}
 		}
 	} else {
-		// regarder si l'une des cles de depart peut se decomposer en 
+		// regarder si l'une des cles de depart peut se decomposer en
 		// id_objet,objet a l'arrivee
 		// si oui on la prend
 		foreach ($keys as $key) {
@@ -441,8 +441,14 @@ function calculer_chaine_jointures(
 			$test_cles = $milieu_exclus;
 			$new[] = $v;
 			$max_iter = 50; // securite
-			while (count($jointure_directe_possible = calculer_chaine_jointures($boucle, $depart, array($v, $def), $vu,
-					$test_cles, 1))
+			while (count($jointure_directe_possible = calculer_chaine_jointures(
+				$boucle,
+				$depart,
+				array($v, $def),
+				$vu,
+				$test_cles,
+				1
+			))
 				and $max_iter--) {
 				$jointure_directe_possible = reset($jointure_directe_possible);
 				$milieu = end($jointure_directe_possible);
@@ -479,10 +485,10 @@ function calculer_chaine_jointures(
 function trouver_cles_table($keys) {
 	$res = array();
 	foreach ($keys as $v) {
-		if (!strpos($v, ",")) {
+		if (!strpos($v, ',')) {
 			$res[$v] = 1;
 		} else {
-			foreach (preg_split("/\s*,\s*/", $v) as $k) {
+			foreach (preg_split('/\s*,\s*/', $v) as $k) {
 				$res[$k] = 1;
 			}
 		}
@@ -584,7 +590,6 @@ function trouver_champ_exterieur($cle, $joints, &$boucle, $checkarrivee = false)
 		and $c = reset($cle)
 		and is_array($decompose = decompose_champ_id_objet($c))
 	) {
-
 		$desc = $boucle->show;
 
 		// cas 1 : la cle id_xx est dans la table de depart
@@ -612,12 +617,12 @@ function trouver_champ_exterieur($cle, $joints, &$boucle, $checkarrivee = false)
 		}
 	}
 
-	return "";
+	return '';
 }
 
 /**
  * Cherche a ajouter la possibilite d'interroger un champ sql dans une boucle.
- * 
+ *
  * Cela construira les jointures necessaires
  * si une possibilite est trouve et retournera le nom de
  * l'alias de la table contenant ce champ

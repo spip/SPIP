@@ -32,7 +32,7 @@ function plugins_infos_paquet($desc, $plug = '', $dir_plugins = _DIR_PLUGINS) {
 	);
 
 	$valider_xml = charger_fonction('valider', 'xml');
-	$vxml = $valider_xml($desc, false, $process, 'paquet.dtd', "utf-8");
+	$vxml = $valider_xml($desc, false, $process, 'paquet.dtd', 'utf-8');
 	if (!$vxml->err) {
 		// On veut toutes les variantes selon la version de SPIP
 		if (!$plug) {
@@ -47,8 +47,8 @@ function plugins_infos_paquet($desc, $plug = '', $dir_plugins = _DIR_PLUGINS) {
 			unset($tree['']);
 		}
 
-		$tree['slogan'] = $tree['prefix'] . "_slogan";
-		$tree['description'] = $tree['prefix'] . "_description";
+		$tree['slogan'] = $tree['prefix'] . '_slogan';
+		$tree['description'] = $tree['prefix'] . '_description';
 		paquet_readable_files($tree, "$dir_plugins$plug/");
 		if (!$tree['chemin']) {
 			$tree['chemin'] = array();
@@ -79,7 +79,7 @@ function plugins_infos_paquet($desc, $plug = '', $dir_plugins = _DIR_PLUGINS) {
 	// Prendre les messages d'erreur sans les numeros de lignes
 	$msg = array_column($vxml->err, 0);
 	$t = _T('plugins_erreur', array('plugins' => $plug));
-	array_unshift($msg, $t . " <ul class='erreur_xml'><li>" . reset($msg) . "</li></ul>");
+	array_unshift($msg, $t . " <ul class='erreur_xml'><li>" . reset($msg) . '</li></ul>');
 
 	return array('erreur' => $msg);
 }
@@ -309,8 +309,8 @@ function info_paquet_copyright($phraseur, $attrs, $texte) {
  */
 function info_paquet_paquet($phraseur, $attrs, $texte) {
 	$n = 0;
-	$phraseur->versions[$n]['dtd'] = "paquet";
-	$phraseur->versions[$n]['balise'] = "paquet";
+	$phraseur->versions[$n]['dtd'] = 'paquet';
+	$phraseur->versions[$n]['balise'] = 'paquet';
 }
 
 /**
@@ -336,7 +336,7 @@ function info_paquet_traduire($phraseur, $attrs, $texte) {
  */
 function info_paquet_spip($phraseur, $attrs, $texte) {
 	$n = $phraseur->contenu['compatible'];
-	$phraseur->versions[$n]['balise'] = "spip";
+	$phraseur->versions[$n]['balise'] = 'spip';
 }
 
 

@@ -73,5 +73,5 @@ function balise_URL_LOGOUT_dyn($cible) {
 		return '';
 	}
 
-	return generer_url_action('logout', "logout=public&url=" . rawurlencode($cible ? $cible : self('&')));
+	return generer_url_action('logout', 'logout=public&url=' . rawurlencode($cible ? $cible : self('&')));
 }

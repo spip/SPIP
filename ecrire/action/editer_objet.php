@@ -37,7 +37,7 @@ function action_editer_objet_dist($id = null, $objet = null, $set = null) {
 	if (is_null($id) or is_null($objet)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
-		list($objet, $id) = array_pad(explode("/", $arg, 2), 2, null);
+		list($objet, $id) = array_pad(explode('/', $arg, 2), 2, null);
 	}
 
 	// appel incorrect ou depuis une url erronnée interdit
@@ -76,11 +76,11 @@ function action_editer_objet_dist($id = null, $objet = null, $set = null) {
  */
 function objet_modifier($objet, $id, $set = null) {
 	if (($t=objet_type($objet)) !== $objet) {
-		spip_log("objet_modifier: appel avec type $objet invalide au lieu de $t", "editer" . _LOG_INFO_IMPORTANTE);
+		spip_log("objet_modifier: appel avec type $objet invalide au lieu de $t", 'editer' . _LOG_INFO_IMPORTANTE);
 		$objet = $t;
 	}
 	if (include_spip('action/editer_' . $objet)
-		and function_exists($modifier = $objet . "_modifier")
+		and function_exists($modifier = $objet . '_modifier')
 	) {
 		return $modifier($id, $set);
 	}
@@ -89,7 +89,7 @@ function objet_modifier($objet, $id, $set = null) {
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table($table_sql);
 	if (!$desc or !isset($desc['field'])) {
-		spip_log("Objet $objet inconnu dans objet_modifier", "editer" . _LOG_ERREUR);
+		spip_log("Objet $objet inconnu dans objet_modifier", 'editer' . _LOG_ERREUR);
 
 		return _L("Erreur objet $objet inconnu");
 	}
@@ -124,11 +124,13 @@ function objet_modifier($objet, $id, $set = null) {
 		$invalideur = "id='$objet/$id'";
 		$indexation = true;
 	} else {
-		$invalideur = "";
+		$invalideur = '';
 		$indexation = false;
 	}
 
-	if ($err = objet_modifier_champs($objet, $id,
+	if ($err = objet_modifier_champs(
+		$objet,
+		$id,
 		array(
 			'data' => $set,
 			'nonvide' => '',
@@ -137,14 +139,15 @@ function objet_modifier($objet, $id, $set = null) {
 			// champ a mettre a date('Y-m-d H:i:s') s'il y a modif
 			'date_modif' => (isset($desc['field']['date_modif']) ? 'date_modif' : '')
 		),
-		$c)
+		$c
+	)
 	) {
 		return $err;
 	}
 
 	// Modification de statut, changement de rubrique ?
 	// FIXME: Ici lorsqu'un $set est passé, la fonction collecter_requests() retourne tout
-	//         le tableau $set hors black liste, mais du coup on a possiblement des champs en trop. 
+	//         le tableau $set hors black liste, mais du coup on a possiblement des champs en trop.
 	$c = collecter_requests(array($champ_date, 'statut', 'id_parent'), array(), $set);
 	$err = objet_instituer($objet, $id, $c);
 
@@ -164,11 +167,11 @@ function objet_modifier($objet, $id, $set = null) {
  */
 function objet_inserer($objet, $id_parent = null, $set = null) {
 	if (($t=objet_type($objet)) !== $objet) {
-		spip_log("objet_inserer: appel avec type $objet invalide au lieu de $t", "editer" . _LOG_INFO_IMPORTANTE);
+		spip_log("objet_inserer: appel avec type $objet invalide au lieu de $t", 'editer' . _LOG_INFO_IMPORTANTE);
 		$objet = $t;
 	}
 	if (include_spip('action/editer_' . $objet)
-		and function_exists($inserer = $objet . "_inserer")
+		and function_exists($inserer = $objet . '_inserer')
 	) {
 		return $inserer($id_parent, $set);
 	}
@@ -180,16 +183,16 @@ function objet_inserer($objet, $id_parent = null, $set = null) {
 		return 0;
 	}
 
-	$lang_rub = "";
+	$lang_rub = '';
 	$champs = array();
 	if (isset($desc['field']['id_rubrique'])) {
 		// Si id_rubrique vaut 0 ou n'est pas definie, creer l'objet
 		// dans la premiere rubrique racine
 		if (!$id_rubrique = intval($id_parent)) {
-			$row = sql_fetsel("id_rubrique, id_secteur, lang", "spip_rubriques", "id_parent=0", '', '0+titre,titre', "1");
+			$row = sql_fetsel('id_rubrique, id_secteur, lang', 'spip_rubriques', 'id_parent=0', '', '0+titre,titre', '1');
 			$id_rubrique = $row['id_rubrique'];
 		} else {
-			$row = sql_fetsel("lang, id_secteur", "spip_rubriques", "id_rubrique=" . intval($id_rubrique));
+			$row = sql_fetsel('lang, id_secteur', 'spip_rubriques', 'id_rubrique=' . intval($id_rubrique));
 		}
 
 		$champs['id_rubrique'] = $id_rubrique;
@@ -203,12 +206,16 @@ function objet_inserer($objet, $id_parent = null, $set = null) {
 	// dans les rubriques, on essaie avec la langue de l'auteur,
 	// ou a defaut celle de la rubrique
 	// Sinon c'est la langue de la rubrique qui est choisie + heritee
-	if (isset($desc['field']['lang']) and !empty($GLOBALS['meta']['multi_objets']) and in_array($table_sql,
-			explode(',', $GLOBALS['meta']['multi_objets']))
+	if (isset($desc['field']['lang']) and !empty($GLOBALS['meta']['multi_objets']) and in_array(
+		$table_sql,
+		explode(',', $GLOBALS['meta']['multi_objets'])
+	)
 	) {
 		lang_select($GLOBALS['visiteur_session']['lang']);
-		if (in_array($GLOBALS['spip_lang'],
-			explode(',', $GLOBALS['meta']['langues_multilingue']))) {
+		if (in_array(
+			$GLOBALS['spip_lang'],
+			explode(',', $GLOBALS['meta']['langues_multilingue'])
+		)) {
 			$champs['lang'] = $GLOBALS['spip_lang'];
 			if (isset($desc['field']['langue_choisie'])) {
 				$champs['langue_choisie'] = 'oui';
@@ -238,7 +245,8 @@ function objet_inserer($objet, $id_parent = null, $set = null) {
 	}
 
 	// Envoyer aux plugins
-	$champs = pipeline('pre_insertion',
+	$champs = pipeline(
+		'pre_insertion',
 		array(
 			'args' => array(
 				'table' => $table_sql,
@@ -267,7 +275,8 @@ function objet_inserer($objet, $id_parent = null, $set = null) {
 			}
 		}
 
-		pipeline('post_insertion',
+		pipeline(
+			'post_insertion',
 			array(
 				'args' => array(
 					'table' => $table_sql,
@@ -277,7 +286,6 @@ function objet_inserer($objet, $id_parent = null, $set = null) {
 				'data' => $champs
 			)
 		);
-
 	}
 
 	return $id;
@@ -298,11 +306,11 @@ function objet_inserer($objet, $id_parent = null, $set = null) {
  */
 function objet_instituer($objet, $id, $c, $calcul_rub = true) {
 	if (($t=objet_type($objet)) !== $objet) {
-		spip_log("objet_instituer: appel avec type $objet invalide au lieu de $t", "editer" . _LOG_INFO_IMPORTANTE);
+		spip_log("objet_instituer: appel avec type $objet invalide au lieu de $t", 'editer' . _LOG_INFO_IMPORTANTE);
 		$objet = $t;
 	}
 	if (include_spip('action/editer_' . $objet)
-		and function_exists($instituer = $objet . "_instituer")
+		and function_exists($instituer = $objet . '_instituer')
 	) {
 		return $instituer($id, $c, $calcul_rub);
 	}
@@ -319,7 +327,7 @@ function objet_instituer($objet, $id, $c, $calcul_rub = true) {
 	include_spip('inc/modifier');
 
 	$sel = array();
-	$sel[] = (isset($desc['field']['statut']) ? "statut" : "'' as statut");
+	$sel[] = (isset($desc['field']['statut']) ? 'statut' : "'' as statut");
 
 	$champ_date = '';
 	if (isset($desc['date']) and $desc['date']) {
@@ -329,7 +337,7 @@ function objet_instituer($objet, $id, $c, $calcul_rub = true) {
 	}
 
 	$sel[] = ($champ_date ? "$champ_date as date" : "'' as date");
-	$sel[] = (isset($desc['field']['id_rubrique']) ? 'id_rubrique' : "0 as id_rubrique");
+	$sel[] = (isset($desc['field']['id_rubrique']) ? 'id_rubrique' : '0 as id_rubrique');
 
 	$row = sql_fetsel($sel, $table_sql, id_table_objet($objet) . '=' . intval($id));
 
@@ -381,7 +389,7 @@ function objet_instituer($objet, $id, $c, $calcul_rub = true) {
 		and isset($c['id_parent'])
 		and $id_parent = $c['id_parent']
 		and $id_parent != $id_rubrique
-		and (sql_fetsel('1', "spip_rubriques", "id_rubrique=" . intval($id_parent)))
+		and (sql_fetsel('1', 'spip_rubriques', 'id_rubrique=' . intval($id_parent)))
 	) {
 		$champs['id_rubrique'] = $id_parent;
 
@@ -397,7 +405,8 @@ function objet_instituer($objet, $id, $c, $calcul_rub = true) {
 
 
 	// Envoyer aux plugins
-	$champs = pipeline('pre_edition',
+	$champs = pipeline(
+		'pre_edition',
 		array(
 			'args' => array(
 				'table' => $table_sql,
@@ -432,7 +441,8 @@ function objet_instituer($objet, $id, $c, $calcul_rub = true) {
 	}*/
 
 	// Pipeline
-	pipeline('post_edition',
+	pipeline(
+		'post_edition',
 		array(
 			'args' => array(
 				'table' => $table_sql,
@@ -448,7 +458,9 @@ function objet_instituer($objet, $id, $c, $calcul_rub = true) {
 
 	// Notifications
 	if ($notifications = charger_fonction('notifications', 'inc')) {
-		$notifications("instituer$objet", $id,
+		$notifications(
+			"instituer$objet",
+			$id,
 			array('statut' => $statut, 'statut_ancien' => $statut_ancien, 'date' => $date, 'date_ancienne' => $date_ancienne)
 		);
 	}
@@ -475,8 +487,7 @@ function objet_editer_heritage($objet, $id, $id_rubrique, $statut, $champs, $con
 	// Si on deplace l'objet
 	// changer aussi son secteur et sa langue (si heritee)
 	if (isset($champs['id_rubrique'])) {
-
-		$row_rub = sql_fetsel("id_secteur, lang", "spip_rubriques", "id_rubrique=" . sql_quote($champs['id_rubrique']));
+		$row_rub = sql_fetsel('id_secteur, lang', 'spip_rubriques', 'id_rubrique=' . sql_quote($champs['id_rubrique']));
 		$langue = $row_rub['lang'];
 
 		if (isset($desc['field']['id_secteur'])) {
@@ -484,8 +495,11 @@ function objet_editer_heritage($objet, $id, $id_rubrique, $statut, $champs, $con
 		}
 
 		if (isset($desc['field']['lang']) and isset($desc['field']['langue_choisie'])) {
-			if (sql_fetsel('1', $table_sql,
-				id_table_objet($objet) . "=" . intval($id) . " AND langue_choisie<>'oui' AND lang<>" . sql_quote($langue))) {
+			if (sql_fetsel(
+				'1',
+				$table_sql,
+				id_table_objet($objet) . '=' . intval($id) . " AND langue_choisie<>'oui' AND lang<>" . sql_quote($langue)
+			)) {
 				$champs['lang'] = $langue;
 			}
 		}
@@ -538,7 +552,7 @@ function objet_editer_heritage($objet, $id, $id_rubrique, $statut, $champs, $con
  */
 function objet_lire($objet, $valeur_id, $options = array()) {
 	if (($t=objet_type($objet)) !== $objet) {
-		spip_log("objet_lire: appel avec type $objet invalide au lieu de $t", "editer" . _LOG_INFO_IMPORTANTE);
+		spip_log("objet_lire: appel avec type $objet invalide au lieu de $t", 'editer' . _LOG_INFO_IMPORTANTE);
 		$objet = $t;
 	}
 
@@ -557,8 +571,7 @@ function objet_lire($objet, $valeur_id, $options = array()) {
 	if (!isset($descriptions[$objet][$champ_id][$valeur_id])
 	  or (isset($options['force']) and $options['force'])) {
 		// Il est possible pour un type d'objet de fournir une fonction de lecture de tous les champs d'un objet.
-		if (
-			include_spip('action/editer_' . $objet)
+		if (include_spip('action/editer_' . $objet)
 			and function_exists($lire = "${objet}_lire_champs")
 		) {
 			$valeurs = $lire($objet, $valeur_id, $champ_id);

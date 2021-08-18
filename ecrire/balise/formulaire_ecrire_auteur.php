@@ -79,9 +79,11 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_stat($args, $context_compil) {
 	// sortir tous les mails des auteurs de l'article
 	if (!$args[0] and $id) {
 		$r = '';
-		$s = sql_allfetsel('email',
+		$s = sql_allfetsel(
+			'email',
 			'spip_auteurs AS A LEFT JOIN spip_auteurs_liens AS L ON (A.id_auteur=L.id_auteur AND L.objet=\'article\')',
-			"A.email != '' AND L.id_objet=$id");
+			"A.email != '' AND L.id_objet=$id"
+		);
 		foreach ($s as $row) {
 			if (email_valide($row['email'])) {
 				$r .= ', ' . $row['email'];

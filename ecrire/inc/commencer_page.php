@@ -43,10 +43,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return string Code HTML
  **/
 function inc_commencer_page_dist(
-	$titre = "",
-	$rubrique = "accueil",
-	$sous_rubrique = "accueil",
-	$id_rubrique = "",
+	$titre = '',
+	$rubrique = 'accueil',
+	$sous_rubrique = 'accueil',
+	$id_rubrique = '',
 	$menu = true,
 	$minipres = false,
 	$alertes = true
@@ -83,14 +83,14 @@ function inc_commencer_page_dist(
  */
 function init_entete($titre = '', $dummy = 0, $minipres = false) {
 	include_spip('inc/texte');
-	if (!$nom_site_spip = textebrut(typo($GLOBALS['meta']["nom_site"]))) {
+	if (!$nom_site_spip = textebrut(typo($GLOBALS['meta']['nom_site']))) {
 		$nom_site_spip = _T('info_mon_site_spip');
 	}
 
-	$titre = "["
+	$titre = '['
 		. $nom_site_spip
-		. "]"
-		. ($titre ? " " . textebrut(typo($titre)) : "");
+		. ']'
+		. ($titre ? ' ' . textebrut(typo($titre)) : '');
 
 	return _DOCTYPE_ECRIRE
 	. html_lang_attributes()
@@ -110,7 +110,7 @@ function init_entete($titre = '', $dummy = 0, $minipres = false) {
  * @return string
  */
 function init_head($titre = '', $dummy = 0, $minipres = false) {
-	return recuperer_fond("prive/squelettes/head/dist", array('titre' => $titre, 'minipres' => $minipres ? ' ' : ''));
+	return recuperer_fond('prive/squelettes/head/dist', array('titre' => $titre, 'minipres' => $minipres ? ' ' : ''));
 }
 
 /**
@@ -133,8 +133,8 @@ function init_head($titre = '', $dummy = 0, $minipres = false) {
 function init_body($rubrique = 'accueil', $sous_rubrique = 'accueil', $id_rubrique = '', $menu = true) {
 
 	$res = pipeline('body_prive', "<body class='"
-		. init_body_class() . " " . _request('exec') . "'"
-		. ($GLOBALS['spip_lang_rtl'] ? " dir='rtl'" : "")
+		. init_body_class() . ' ' . _request('exec') . "'"
+		. ($GLOBALS['spip_lang_rtl'] ? " dir='rtl'" : '')
 		. '>');
 
 	if (!$menu) {
@@ -164,7 +164,7 @@ function init_body_class() {
 	$spip_display_outils = isset($prefs['display_outils'])
 		? ($prefs['display_outils'] ? 'navigation_avec_outils' : 'navigation_sans_outils')
 		: 'navigation_avec_outils';
-	$GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? spip_sanitize_classname($_COOKIE['spip_ecran']) : "etroit";
+	$GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? spip_sanitize_classname($_COOKIE['spip_ecran']) : 'etroit';
 
 	$display_class = array(
 		0 => 'icones_img_texte'

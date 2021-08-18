@@ -61,8 +61,8 @@ function trace_query_end($query, $start, $result, $erreur, $serveur = '') {
 	}
 	if ($start) {
 		$end = microtime();
-		list($usec, $sec) = explode(" ", $start);
-		list($usec2, $sec2) = explode(" ", $end);
+		list($usec, $sec) = explode(' ', $start);
+		list($usec2, $sec2) = explode(' ', $end);
 		$dt = $sec2 + $usec2 - $sec - $usec;
 		pipeline('trig_trace_query', ['query' => $query, 'start' => $start, 'end' => $end, 'time' => $dt, 'result' => $result, 'erreur' => $erreur, 'serveur' => $serveur]);
 		if ($trace) {
@@ -111,7 +111,7 @@ function trace_query_chrono($dt, $query, $result, $serveur = '') {
 
 function chrono_requete($temps) {
 	$total = 0;
-	$hors = "<i>" . _T('zbug_hors_compilation') . "</i>";
+	$hors = '<i>' . _T('zbug_hors_compilation') . '</i>';
 	$t = $q = $n = $d = array();
 	// Totaliser les temps et completer le Explain
 	foreach ($temps as $key => $v) {
@@ -140,17 +140,17 @@ function chrono_requete($temps) {
 		foreach ($explain as $j => $v) {
 			$explain[$j] = "<tr><th>$j</th><td>"
 				. str_replace(';', '<br />', $v)
-				. "</td></tr>";
+				. '</td></tr>';
 		}
 		$e = "<table class='explain'>"
-			. "<caption>"
+			. '<caption>'
 			. $query
-			. "</caption>"
+			. '</caption>'
 			. "<tr><th>Time</th><td>$dt</td></tr>"
 			. "<tr><th>Order</th><td>$nb</td></tr>"
 			. "<tr><th>Res</th><td>$res</td></tr>"
 			. join('', $explain)
-			. "</table>";
+			. '</table>';
 
 		$temps[$key] = array($e, $env, $k);
 	}
@@ -171,7 +171,7 @@ function chrono_requete($temps) {
 		$t[$v[2]][] = "<span class='spip-debug-arg'> "
 			. "<a title='$titre' href='$href'>$i</a>"
 			. '</span>'
-			. ((count($t[$v[2]]) % 10 == 9) ? "<br />" : '');
+			. ((count($t[$v[2]]) % 10 == 9) ? '<br />' : '');
 		$i++;
 	}
 
@@ -189,11 +189,11 @@ function chrono_requete($temps) {
 
 	$navigation = array(
 		_T('zbug_statistiques'),
-		"<tr><td>"
+		'<tr><td>'
 		. join("</td></tr>\n<tr><td>", $d)
 		. "</td></tr>\n"
 		. (# _request('var_mode_objet') ? '' :
-		("<tr><td>" . count($temps) . "</td><td>" . _T('info_total') . '</td><td class="time">' . $total . "</td><td></td></tr>"))
+		('<tr><td>' . count($temps) . '</td><td>' . _T('info_total') . '</td><td class="time">' . $total . '</td><td></td></tr>'))
 	);
 
 	return array($temps, $navigation);

@@ -60,7 +60,7 @@ function action_converser_changer_langue($update_session) {
 		action_converser_post($lang);
 	} elseif ($lang = _request('var_lang_ecrire')) {
 		if ($update_session) {
-			sql_updateq("spip_auteurs", array("lang" => $lang), "id_auteur = " . $GLOBALS['visiteur_session']['id_auteur']);
+			sql_updateq('spip_auteurs', array('lang' => $lang), 'id_auteur = ' . $GLOBALS['visiteur_session']['id_auteur']);
 			$GLOBALS['visiteur_session']['lang'] = $lang;
 			$session = charger_fonction('session', 'inc');
 			if ($spip_session = $session($GLOBALS['visiteur_session'])) {

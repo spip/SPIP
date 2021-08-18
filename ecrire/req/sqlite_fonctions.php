@@ -22,17 +22,17 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Déclarer à SQLite des fonctions spécifiques utilisables dans les requêtes SQL
- * 
+ *
  * SQLite ne supporte nativement que certaines fonctions dans les requêtes SQL.
- * Cependant, il permet d'étendre très facilement celles-ci en déclarant de 
+ * Cependant, il permet d'étendre très facilement celles-ci en déclarant de
  * nouvelles fonctions.
- * 
- * C'est ce qui est fait ici, en ajoutant des fonctions qui existent aussi 
+ *
+ * C'est ce qui est fait ici, en ajoutant des fonctions qui existent aussi
  * dans d'autres moteurs, notamment en MySQL.
- * 
+ *
  * @link http://www.sqlite.org/lang_corefunc.html Liste des fonctions natives
  * @link http://sqlite.org/changes.html Liste des évolutions
- * 
+ *
  * @param PDO|resource $sqlite Représente la connexion Sqlite
  * @return false|void
  */
@@ -131,18 +131,18 @@ function _sqlite_init_functions(&$sqlite) {
 /**
  * Déclare une fonction à SQLite
  *
- * @note 
- *     Permet au besoin de charger des fonctions 
+ * @note
+ *     Permet au besoin de charger des fonctions
  *     ailleurs par _sqlite_init_functions();
- * 
+ *
  * @uses _sqlite_is_version()
- * 
+ *
  * @param PDO|resource $sqlite Représente la connexion Sqlite
  * @param string $f Nom de la fonction à créer
  * @param array $r Tableau indiquant :
- *     - le nom de la fonction à appeler, 
+ *     - le nom de la fonction à appeler,
  *     - le nombre de paramètres attendus de la fonction (-1 = infini, par défaut)
- * 
+ *
 **/
 function _sqlite_add_function(&$sqlite, &$f, &$r) {
 	isset($r[1])
@@ -167,14 +167,14 @@ function _sqlite_func_concat(...$args) {
 
 // https://code.spip.net/@_sqlite_func_dayofmonth
 function _sqlite_func_dayofmonth($d) {
-	return _sqlite_func_date("d", $d);
+	return _sqlite_func_date('d', $d);
 }
 
 
 // https://code.spip.net/@_sqlite_func_find_in_set
 function _sqlite_func_find_in_set($num, $set) {
 	$rank = 0;
-	foreach (explode(",", $set) as $v) {
+	foreach (explode(',', $set) as $v) {
 		if ($v == $num) {
 			return (++$rank);
 		}
@@ -234,7 +234,7 @@ function _sqlite_func_left($s, $lenght) {
 function _sqlite_func_now($force_refresh = false) {
 	static $now = null;
 	if (is_null($now) or $force_refresh) {
-		$now = date("Y-m-d H:i:s");
+		$now = date('Y-m-d H:i:s');
 	}
 
 	#spip_log("Passage avec NOW : $now | ".time(),'sqlite.'._LOG_DEBUG);
@@ -244,7 +244,7 @@ function _sqlite_func_now($force_refresh = false) {
 
 // https://code.spip.net/@_sqlite_func_month
 function _sqlite_func_month($d) {
-	return _sqlite_func_date("m", $d);
+	return _sqlite_func_date('m', $d);
 }
 
 
@@ -330,7 +330,7 @@ function _sqlite_func_strftime($date, $conv) {
 /**
  * Convertit un format demandé pour DATE_FORMAT() de mysql en un format
  * adapté à strftime() de php.
- * 
+ *
  * Certains paramètres ne correspondent pas et doivent être remplacés,
  * d'autres n'ont tout simplement pas d'équivalent dans strftime :
  * dans ce cas là on loggue, car il y a de grandes chances que le résultat
@@ -406,24 +406,24 @@ function _sqlite_timestampdiff($unit, $date1, $date2) {
 	$diff = date_diff($d1, $d2);
 	$inv = $diff->invert ? -1 : 1;
 	switch ($unit) {
-		case "YEAR":
+		case 'YEAR':
 			return $inv * $diff->y;
-		case "QUARTER":
+		case 'QUARTER':
 			return $inv * (4 * $diff->y + intval(floor($diff->m / 3)));
-		case "MONTH":
+		case 'MONTH':
 			return $inv * (12 * $diff->y + $diff->m);
-		case "WEEK":
+		case 'WEEK':
 			return $inv * intval(floor($diff->days / 7));
-		case "DAY":
+		case 'DAY':
 			#var_dump($inv*$diff->days);
 			return $inv * $diff->days;
-		case "HOUR":
+		case 'HOUR':
 			return $inv * (24 * $diff->days + $diff->h);
-		case "MINUTE":
+		case 'MINUTE':
 			return $inv * ((24 * $diff->days + $diff->h) * 60 + $diff->i);
-		case "SECOND":
+		case 'SECOND':
 			return $inv * (((24 * $diff->days + $diff->h) * 60 + $diff->i) * 60 + $diff->s);
-		case "MICROSECOND":
+		case 'MICROSECOND':
 			return $inv * (((24 * $diff->days + $diff->h) * 60 + $diff->i) * 60 + $diff->s) * 1000000;
 	}
 
@@ -455,7 +455,7 @@ function _sqlite_func_unix_timestamp($d) {
 
 // https://code.spip.net/@_sqlite_func_year
 function _sqlite_func_year($d) {
-	return _sqlite_func_date("Y", $d);
+	return _sqlite_func_date('Y', $d);
 }
 
 /**
@@ -479,8 +479,8 @@ function _sqlite_func_date($quoi, $d) {
 		$n = 0;
 	}
 
-	$dec = date("Y-m-d", _sqlite_func_unix_timestamp($d));
-	$mem[$d] = array("Y" => substr($dec, 0, 4), "m" => substr($dec, 5, 2), "d" => substr($dec, 8, 2));
+	$dec = date('Y-m-d', _sqlite_func_unix_timestamp($d));
+	$mem[$d] = array('Y' => substr($dec, 0, 4), 'm' => substr($dec, 5, 2), 'd' => substr($dec, 8, 2));
 
 	return $mem[$d][$quoi];
 }

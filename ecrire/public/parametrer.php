@@ -16,7 +16,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 include_fichiers_fonctions();
 
-# Determine le squelette associe a une requete 
+# Determine le squelette associe a une requete
 # et l'applique sur le contexte, le nom du cache et le serveur
 # en ayant evacue au prealable le cas de la redirection
 # Retourne un tableau ainsi construit
@@ -57,7 +57,6 @@ function public_parametrer_dist($fond, $contexte = '', $cache = '', $connect = '
 		$styliser($fond, $contexte, $GLOBALS['spip_lang'], $connect);
 
 	if ($skel) {
-
 		// sauver le nom de l'eventuel squelette en cours d'execution
 		// (recursion possible a cause des modeles)
 		if ($debug) {
@@ -79,7 +78,7 @@ function public_parametrer_dist($fond, $contexte = '', $cache = '', $connect = '
 	if (!$fonc) { // squelette inconnu (==='') ou faux (===false)
 		$page = $fonc;
 	} else {
-		// Preparer l'appel de la fonction principale du squelette 
+		// Preparer l'appel de la fonction principale du squelette
 
 		spip_timer($a = 'calcul page ' . rand(0, 1000));
 
@@ -96,14 +95,14 @@ function public_parametrer_dist($fond, $contexte = '', $cache = '', $connect = '
 		// (mais vaudrait mieux que le compilateur sache le simuler
 		// car ca interdit l'usage de criteres conditionnels dessus).
 		if (!isset($contexte['date'])) {
-			$contexte['date'] = date("Y-m-d H:i:s");
+			$contexte['date'] = date('Y-m-d H:i:s');
 			$contexte['date_default'] = true;
 		} else {
 			$contexte['date'] = normaliser_date($contexte['date'], true);
 		}
 
 		if (!isset($contexte['date_redac'])) {
-			$contexte['date_redac'] = date("Y-m-d H:i:s");
+			$contexte['date_redac'] = date('Y-m-d H:i:s');
 			$contexte['date_redac_default'] = true;
 		} else {
 			$contexte['date_redac'] = normaliser_date($contexte['date_redac'], true);
@@ -147,14 +146,14 @@ function public_parametrer_dist($fond, $contexte = '', $cache = '', $connect = '
 		spip_log("calcul ($profile) [$skel] $infos"
 			. ' (' . strlen($page['texte']) . ' octets)');
 
-		if (defined('_CALCUL_PROFILER') AND intval($profile)>_CALCUL_PROFILER){
+		if (defined('_CALCUL_PROFILER') and intval($profile)>_CALCUL_PROFILER) {
 			spip_log("calcul ($profile) [$skel] $infos"
-				.' ('.strlen($page['texte']).' octets) | '.$_SERVER['REQUEST_URI'],"profiler"._LOG_AVERTISSEMENT);
+				.' ('.strlen($page['texte']).' octets) | '.$_SERVER['REQUEST_URI'], 'profiler'._LOG_AVERTISSEMENT);
 		}
 
 		if ($debug) {
 			// si c'est ce que demande le debusqueur, lui passer la main
-			$t = strlen($page['texte']) ? $page['texte'] : " ";
+			$t = strlen($page['texte']) ? $page['texte'] : ' ';
 			$GLOBALS['debug_objets']['resultat'][$fonc . 'tout'] = $t;
 			$GLOBALS['debug_objets']['courant'] = $courant;
 			$GLOBALS['debug_objets']['profile'][$sourcefile] = $profile;
@@ -185,8 +184,8 @@ function public_parametrer_dist($fond, $contexte = '', $cache = '', $connect = '
 		if (defined('_VAR_INCLURE') and _VAR_INCLURE) {
 			$page['sourcefile'] = $sourcefile;
 			$page['texte'] =
-				"<div class='inclure_blocs'><h6>" . $page['sourcefile'] . "</h6>" . $page['texte'] . "</div>"
-				. ($js_inclus ? "" : "<script type='text/javascript'>jQuery(function(){jQuery('.inclure_blocs > h6:first-child').hover(function(){jQuery(this).parent().addClass('hover')},function(){jQuery(this).parent().removeClass('hover')})});</script>");
+				"<div class='inclure_blocs'><h6>" . $page['sourcefile'] . '</h6>' . $page['texte'] . '</div>'
+				. ($js_inclus ? '' : "<script type='text/javascript'>jQuery(function(){jQuery('.inclure_blocs > h6:first-child').hover(function(){jQuery(this).parent().addClass('hover')},function(){jQuery(this).parent().removeClass('hover')})});</script>");
 			$js_inclus = true;
 		}
 
@@ -204,8 +203,8 @@ function public_parametrer_dist($fond, $contexte = '', $cache = '', $connect = '
 	return $page;
 }
 
-/** 
- * Retourne une présentation succincte du contexte pour les logs 
+/**
+ * Retourne une présentation succincte du contexte pour les logs
  * @param array $contexte
  * @return string
 */
@@ -297,11 +296,11 @@ function public_tester_redirection_dist($fond, $contexte, $connect) {
 				$url = str_replace('&amp;', '&', $url);
 
 				return array(
-					'texte' => "<"
+					'texte' => '<'
 						. "?php include_spip('inc/headers');redirige_par_entete('"
 						. texte_script($url)
 						. "','',$status);"
-						. "?" . ">",
+						. '?' . '>',
 					'process_ins' => 'php',
 					'status' => $status
 				);

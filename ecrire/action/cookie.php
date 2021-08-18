@@ -35,7 +35,7 @@ include_spip('inc/cookie');
 function action_cookie_dist($set_cookie_admin = null, $change_session = null) {
 	$redirect_echec = $redirect = null;
 	$test_echec_cookie = null;
-	$url = "";
+	$url = '';
 	if (is_null($set_cookie_admin)) {
 		$set_cookie_admin = _request('cookie_admin');
 		$change_session = _request('change_session');
@@ -59,7 +59,7 @@ function action_cookie_dist($set_cookie_admin = null, $change_session = null) {
 	if ($change_session == 'oui') {
 		$session = charger_fonction('session', 'inc');
 		$session(true);
-		spip_log("statut 204 pour " . $_SERVER['REQUEST_URI']);
+		spip_log('statut 204 pour ' . $_SERVER['REQUEST_URI']);
 		http_status(204); // No Content
 		return;
 	}
@@ -74,29 +74,33 @@ function action_cookie_dist($set_cookie_admin = null, $change_session = null) {
 			auth_loger($auteur);
 			redirige_par_entete(parametre_url($redirect, 't', time(), '&'));
 		} else {
-			ask_php_auth(_T('info_connexion_refusee'),
+			ask_php_auth(
+				_T('info_connexion_refusee'),
 				_T('login_login_pass_incorrect'),
 				_T('login_retour_site'),
-				"url=" . rawurlencode($redirect),
+				'url=' . rawurlencode($redirect),
 				_T('login_nouvelle_tentative'),
-				(strpos($url, _DIR_RESTREINT_ABS) !== false));
+				(strpos($url, _DIR_RESTREINT_ABS) !== false)
+			);
 		}
 	} else {
-
 		// en cas de login sur bonjour=oui, on tente de poser un cookie
 		// puis de passer au login qui diagnostiquera l'echec de cookie
 		// le cas echeant.
 		if ($test_echec_cookie == 'oui') {
 			spip_setcookie('spip_session', 'test_echec_cookie');
 			if ($redirect) {
-				$redirect = parametre_url(parametre_url($redirect_echec, 'var_echec_cookie', 'oui', '&'), 'url',
-					rawurlencode($redirect), '&');
+				$redirect = parametre_url(
+					parametre_url($redirect_echec, 'var_echec_cookie', 'oui', '&'),
+					'url',
+					rawurlencode($redirect),
+					'&'
+				);
 			}
 		} else {
-
 			$cook = isset($_COOKIE['spip_admin']) ? $_COOKIE['spip_admin'] : '';
 			// Suppression cookie d'admin ?
-			if ($set_cookie_admin == "non") {
+			if ($set_cookie_admin == 'non') {
 				if ($cook) {
 					spip_setcookie('spip_admin', $cook, [
 						'expires' => time() - 3600 * 24

@@ -171,7 +171,7 @@ function logo_survol($id_objet, $_id_objet, $type, $align, $fichier, $_lien, $p,
 		return $code;
 	}
 
-	$align = preg_replace(",\W,", "", $align);
+	$align = preg_replace(',\W,', '', $align);
 
-	return "quete_html_logo($code, '$align', " .($_lien ? $_lien : "''") .")";
+	return "quete_html_logo($code, '$align', " .($_lien ? $_lien : "''") .')';
 }

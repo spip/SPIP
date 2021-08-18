@@ -88,7 +88,7 @@ function urls_decoder_url($url, $fond = '', $contexte = array(), $assembler = fa
 		} elseif (isset($_ENV['url_propre'])) {
 			$url = $_ENV['url_propre'];
 		} else {
-			$qs = explode("?", $url);
+			$qs = explode('?', $url);
 			// ne prendre que le segment d'url qui correspond, en fonction de la profondeur calculee
 			$url = ltrim($qs[0], '/');
 			$url = explode('/', $url);
@@ -96,20 +96,20 @@ function urls_decoder_url($url, $fond = '', $contexte = array(), $assembler = fa
 				array_shift($url);
 			}
 			$qs[0] = implode('/', $url);
-			$url = implode("?", $qs);
+			$url = implode('?', $qs);
 		}
 	}
 
 	unset($_SERVER['REDIRECT_url_propre']);
 	unset($_ENV['url_propre']);
 	include_spip('inc/filtres_mini');
-	if (strpos($url, "://") === false) {
+	if (strpos($url, '://') === false) {
 		$GLOBALS['profondeur_url'] = substr_count(ltrim(resolve_path("/$url"), '/'), '/');
 	} else {
-		$GLOBALS['profondeur_url'] = max(0, substr_count($url, "/") - substr_count($current_base, "/"));
+		$GLOBALS['profondeur_url'] = max(0, substr_count($url, '/') - substr_count($current_base, '/'));
 	}
 
-	$url_redirect = "";
+	$url_redirect = '';
 	$renommer = generer_url_entite('', '', '', '', true);
 	if (!$renommer and !function_exists('recuperer_parametres_url')) {
 		$renommer = charger_fonction('page', 'urls');
@@ -119,7 +119,7 @@ function urls_decoder_url($url, $fond = '', $contexte = array(), $assembler = fa
 		if (is_array($a)) {
 			list($ncontexte, $type, $url_redirect, $nfond) = array_pad($a, 4, null);
 			if ($url_redirect == $url) {
-				$url_redirect = "";
+				$url_redirect = '';
 			} // securite pour eviter une redirection infinie
 			if ($assembler and strlen($url_redirect)) {
 				spip_log("Redirige $url vers $url_redirect");
@@ -269,7 +269,7 @@ function generer_url_ecrire_objet($objet, $id, $args = '', $ancre = '', $public 
 	if ($public or $connect) {
 		return generer_url_entite_absolue($id, $objet, $args, $ancre, $connect);
 	}
-	$a = id_table_objet($objet) . "=" . intval($id);
+	$a = id_table_objet($objet) . '=' . intval($id);
 	if (!function_exists('objet_info')) {
 		include_spip('inc/filtres');
 	}

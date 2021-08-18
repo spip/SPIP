@@ -83,7 +83,7 @@ function boucle_BOUCLE_dist($id_boucle, &$boucles) {
  **/
 function boucle_HIERARCHIE_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
-	$id_table = $boucle->id_table . ".id_rubrique";
+	$id_table = $boucle->id_table . '.id_rubrique';
 
 	// Si la boucle mere est une boucle RUBRIQUES il faut ignorer la feuille
 	// sauf en presence du critere {tout} (vu par phraser_html)
@@ -101,7 +101,7 @@ function boucle_HIERARCHIE_dist($id_boucle, &$boucles) {
 	$boucle->where[] = array("'IN'", "'$id_table'", '"($hierarchie)"');
 
 	$order = "FIELD($id_table, \$hierarchie)";
-	if (!isset($boucle->default_order[0]) or $boucle->default_order[0] != " DESC") {
+	if (!isset($boucle->default_order[0]) or $boucle->default_order[0] != ' DESC') {
 		$boucle->default_order[] = "\"$order\"";
 	} else {
 		$boucle->default_order[0] = "\"$order DESC\"";

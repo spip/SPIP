@@ -40,20 +40,23 @@ function genie_mail_dist($t) {
 		ecrire_meta('dernier_envoi_neuf', date('Y-m-d H:i:s', $now - (3600 * 24 * $jours_neuf)));
 	}
 
-	$page = recuperer_fond('nouveautes',
-		array('date' => $GLOBALS['meta']['dernier_envoi_neuf'], 'jours_neuf' => $jours_neuf), array('raw' => true));
+	$page = recuperer_fond(
+		'nouveautes',
+		array('date' => $GLOBALS['meta']['dernier_envoi_neuf'], 'jours_neuf' => $jours_neuf),
+		array('raw' => true)
+	);
 
 	if (strlen(trim($page['texte']))) {
 		// recuperer les entetes envoyes par #HTTP_HEADER
-		$headers = "";
+		$headers = '';
 		if (isset($page['entetes']) and count($page['entetes'])) {
 			foreach ($page['entetes'] as $k => $v) {
 				$headers .= (strlen($v) ? "$k: $v" : $k) . "\n";
 			}
 		}
 
-		include_spip("inc/notifications");
-		notifications_envoyer_mails($adresse_neuf, $page['texte'], "", "", $headers);
+		include_spip('inc/notifications');
+		notifications_envoyer_mails($adresse_neuf, $page['texte'], '', '', $headers);
 		ecrire_meta('dernier_envoi_neuf', date('Y-m-d H:i:s', $now));
 	} else {
 		spip_log("mail nouveautes : rien de neuf depuis $jours_neuf jours");

@@ -12,7 +12,7 @@
 
 /**
  * Gestion des mises à jour de bdd de SPIP
- * 
+ *
  * Mises à jour en 2.1 (et 2.0.0+)
  *
  * @package SPIP\Core\SQL\Upgrade
@@ -27,7 +27,7 @@ include_spip('base/medias');
 
 // http://archives.rezo.net/archives/spip-zone.mbox/C6RZKNBUNJYN42IOEOC4QKVCA233AMLI/
 $GLOBALS['maj'][13833] = array(
-	array('sql_alter', "TABLE spip_documents_liens ADD INDEX objet(id_objet,objet)")
+	array('sql_alter', 'TABLE spip_documents_liens ADD INDEX objet(id_objet,objet)')
 );
 
 // 2.1
@@ -38,14 +38,16 @@ $GLOBALS['maj'][13904] = array(
 		'sql_update',
 		'spip_auteurs',
 		array('webmestre' => "'oui'"),
-		sql_in("id_auteur", defined('_ID_WEBMESTRES') ? explode(':',
-			_ID_WEBMESTRES) : (autoriser('configurer') ? array($GLOBALS['visiteur_session']['id_auteur']) : array(0)))
+		sql_in('id_auteur', defined('_ID_WEBMESTRES') ? explode(
+			':',
+			_ID_WEBMESTRES
+		) : (autoriser('configurer') ? array($GLOBALS['visiteur_session']['id_auteur']) : array(0)))
 	) // le webmestre est celui qui fait l'upgrade si rien de defini
 );
 
 // sites plantes en mode "'su" au lieu de "sus"
 $GLOBALS['maj'][13929] = array(
-	array('sql_update', "spip_syndic", array('syndication' => "'sus'"), "syndication LIKE '\\'%'")
+	array('sql_update', 'spip_syndic', array('syndication' => "'sus'"), "syndication LIKE '\\'%'")
 );
 
 // Types de fichiers m4a/m4b/m4p/m4u/m4v/dv
@@ -59,24 +61,23 @@ $GLOBALS['maj'][14559] = $GLOBALS['maj'][13904] + $GLOBALS['maj'][13929] + $GLOB
 // La version 14588 etait une mauvaise piste:
 // Retour en arriere pour ceux qui l'ont subi, ne rien faire sinon
 if (@$GLOBALS['meta']['version_installee'] >= 14588) {
-
 	// "mode" est un mot-cle d'Oracle
 	$GLOBALS['maj'][14588] = array(
-		array('sql_alter', "TABLE spip_documents  DROP INDEX mode"),
+		array('sql_alter', 'TABLE spip_documents  DROP INDEX mode'),
 		array(
 			'sql_alter',
 			"TABLE spip_documents  CHANGE mode genre ENUM('vignette', 'image', 'document') DEFAULT 'document' NOT NULL"
 		),
-		array('sql_alter', "TABLE spip_documents  ADD INDEX genre(genre)")
+		array('sql_alter', 'TABLE spip_documents  ADD INDEX genre(genre)')
 	);
 	// solution moins intrusive au pb de mot-cle d'Oracle, retour avant 14588
 	$GLOBALS['maj'][14598] = array(
-		array('sql_alter', "TABLE spip_documents  DROP INDEX genre"),
+		array('sql_alter', 'TABLE spip_documents  DROP INDEX genre'),
 		array(
 			'sql_alter',
 			"TABLE spip_documents  CHANGE genre mode ENUM('vignette', 'image', 'document') DEFAULT 'document' NOT NULL"
 		),
-		array('sql_alter', "TABLE spip_documents  ADD INDEX mode(mode)")
+		array('sql_alter', 'TABLE spip_documents  ADD INDEX mode(mode)')
 	);
 }
 

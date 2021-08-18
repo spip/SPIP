@@ -70,7 +70,7 @@ function enfant_rub($collection, $debut = 0, $limite = 500) {
 					list($fid, $dir, $nom, $format) = $logo;
 					$logo = image_recadre_avec_fallback("<img src='$fid' alt='' />", 70, 70);
 					if ($logo) {
-						$logo = wrap(inserer_attribut($logo, 'class', 'logo'),'<span class="logo-carre">');
+						$logo = wrap(inserer_attribut($logo, 'class', 'logo'), '<span class="logo-carre">');
 					}
 				}
 			}
@@ -131,8 +131,14 @@ function sous_enfant_rub($collection2) {
 	if ($nb > $limite) {
 		$debut = _request('debut_rubrique' . $collection2) ? _request('debut_rubrique' . $collection2) : $debut;
 		$pagination = chercher_filtre('pagination');
-		$pagination = '<p class="pagination">' . $pagination($nb, '_rubrique' . $collection2, $debut, $limite, true,
-				'prive') . '</p>';
+		$pagination = '<p class="pagination">' . $pagination(
+			$nb,
+			'_rubrique' . $collection2,
+			$debut,
+			$limite,
+			true,
+			'prive'
+		) . '</p>';
 		$limite = $debut + $limite;
 	}
 

@@ -22,11 +22,11 @@ function securiser_redirect_action($redirect) {
 			return $r3;
 		}
 	}
-	if ((tester_url_absolue($redirect) or preg_match(',^\w+:,',trim($redirect)))
+	if ((tester_url_absolue($redirect) or preg_match(',^\w+:,', trim($redirect)))
 		and !defined('_AUTORISER_ACTION_ABS_REDIRECT')) {
 		// si l'url est une url du site, on la laisse passer sans rien faire
 		// c'est encore le plus simple
-		$base = $GLOBALS['meta']['adresse_site'] . "/";
+		$base = $GLOBALS['meta']['adresse_site'] . '/';
 		if (strlen($base) and strncmp($redirect, $base, strlen($base)) == 0) {
 			return $redirect;
 		}
@@ -35,7 +35,7 @@ function securiser_redirect_action($redirect) {
 			return $redirect;
 		}
 
-		return "";
+		return '';
 	}
 
 	return $redirect;
@@ -81,7 +81,7 @@ function traiter_appels_actions() {
 		}
 		if ($url = $GLOBALS['redirect']) {
 			// si l'action est provoque par un hit {ajax}
-			// il faut transmettre l'env ajax au redirect 
+			// il faut transmettre l'env ajax au redirect
 			// qui a pu etre defini par l'action
 			if (($v = _request('var_ajax'))
 				and ($v !== 'form')
@@ -196,7 +196,7 @@ function traiter_formulaires_dynamiques($get = false) {
 		// sauvegarder la lang en cours
 		$old_lang = $GLOBALS['spip_lang'];
 		// changer la langue avec celle qui a cours dans le formulaire
-		// on la depile de $args car c'est un argument implicite masque	
+		// on la depile de $args car c'est un argument implicite masque
 		changer_langue(array_shift($args));
 
 
@@ -217,7 +217,7 @@ function traiter_formulaires_dynamiques($get = false) {
 			)
 		);
 
-		$verifier = charger_fonction("verifier", "formulaires/$form/", true);
+		$verifier = charger_fonction('verifier', "formulaires/$form/", true);
 		$post["erreurs_$form"] = pipeline(
 			'formulaire_verifier',
 			array(
@@ -236,8 +236,11 @@ function traiter_formulaires_dynamiques($get = false) {
 
 		// accessibilite : si des erreurs mais pas de message general l'ajouter
 		if ((isset($post["erreurs_$form"]) and count($post["erreurs_$form"])) and !isset($post["erreurs_$form"]['message_erreur'])) {
-			$post["erreurs_$form"]['message_erreur'] = singulier_ou_pluriel(count($post["erreurs_$form"]),
-				'avis_1_erreur_saisie', 'avis_nb_erreurs_saisie');
+			$post["erreurs_$form"]['message_erreur'] = singulier_ou_pluriel(
+				count($post["erreurs_$form"]),
+				'avis_1_erreur_saisie',
+				'avis_nb_erreurs_saisie'
+			);
 		}
 
 		// si on ne demandait qu'une verif json
@@ -248,10 +251,10 @@ function traiter_formulaires_dynamiques($get = false) {
 
 			return true; // on a fini le hit
 		}
-		$retour = "";
+		$retour = '';
 		if (isset($post["erreurs_$form"]) and (count($post["erreurs_$form"]) == 0)) {
-			$rev = "";
-			if ($traiter = charger_fonction("traiter", "formulaires/$form/", true)) {
+			$rev = '';
+			if ($traiter = charger_fonction('traiter', "formulaires/$form/", true)) {
 				$rev = call_user_func_array($traiter, $args);
 			}
 
@@ -275,7 +278,7 @@ function traiter_formulaires_dynamiques($get = false) {
 
 			// verifier si traiter n'a pas echoue avec une erreur :
 			if (isset($rev['message_erreur'])) {
-				$post["erreurs_$form"]["message_erreur"] = $rev['message_erreur'];
+				$post["erreurs_$form"]['message_erreur'] = $rev['message_erreur'];
 				// si il y a une erreur on ne redirige pas
 			} else {
 				// sinon faire ce qu'il faut :

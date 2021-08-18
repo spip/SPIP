@@ -45,7 +45,6 @@ function action_etre_webmestre_dist() {
 			exit;
 		}
 	}
-
 }
 
 /**

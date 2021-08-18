@@ -43,10 +43,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return void
  **/
 function install_fichier_connexion($nom, $texte) {
-	$texte = "<" . "?php\n"
+	$texte = '<' . "?php\n"
 		. "if (!defined(\"_ECRIRE_INC_VERSION\")) return;\n"
 		. $texte
-		. "?" . ">";
+		. '?' . '>';
 
 	ecrire_fichier($nom, $texte);
 }
@@ -88,7 +88,7 @@ function install_connexion($adr, $port, $login, $pass, $base, $type, $pref, $lda
 	$charset = addcslashes($charset, "'\\");
 
 	return "\$GLOBALS['spip_connect_version'] = 0.8;\n"
-	. "spip_connect_db("
+	. 'spip_connect_db('
 	. "'$adr','$port','$login','$pass','$base'"
 	. ",'$type', '$pref','$ldap','$charset');\n";
 }
@@ -116,7 +116,7 @@ function analyse_fichier_connection($file) {
 		$r = '\s*,' . $ar;
 		$r = "#spip_connect_db[(]$ar$r$r$r$r(?:$r(?:$r(?:$r(?:$r)?)?)?)?#";
 		if (preg_match($r, $s, $regs)) {
-			$regs[2] = $regs[1] . (!$regs[2] ? '' : ":" . $regs[2] . ";");
+			$regs[2] = $regs[1] . (!$regs[2] ? '' : ':' . $regs[2] . ';');
 			array_shift($regs);
 			array_shift($regs);
 
@@ -174,7 +174,7 @@ function tester_compatibilite_hebergement() {
 	// Si on n'a pas la bonne version de PHP, c'est la fin
 	if ($err) {
 		die("<div class='error'>"
-			. "<h3>" . _T('avis_attention') . '</h3><p>' . _T('install_echec_annonce') . "</p><ul class='spip'>"
+			. '<h3>' . _T('avis_attention') . '</h3><p>' . _T('install_echec_annonce') . "</p><ul class='spip'>"
 			. "<li><strong>{$err[0]}</strong></li>\n</ul></div>");
 	}
 
@@ -201,7 +201,7 @@ function tester_compatibilite_hebergement() {
 
 	if ($err) {
 		echo "<div class='error'>"
-			. "<h3>" . _T('avis_attention') . '</h3><p>' . _T('install_echec_annonce') . "</p><ul class='spip'>";
+			. '<h3>' . _T('avis_attention') . '</h3><p>' . _T('install_echec_annonce') . "</p><ul class='spip'>";
 		foreach ($err as $e) {
 			echo "<li><strong>$e</strong></li>\n";
 		}
@@ -213,9 +213,9 @@ function tester_compatibilite_hebergement() {
 }
 
 
-/** 
+/**
  * Faciliter la recherche du login d'installation en fonction de certains hébergeurs connus
- * 
+ *
  * @note superflu ??
  */
 function login_hebergeur() {
@@ -235,8 +235,8 @@ function login_hebergeur() {
 
 // https://code.spip.net/@info_etape
 function info_etape($titre, $complement = '') {
-	return "<h2>" . $titre . "</h2>\n" .
-	($complement ? "" . $complement . "\n" : '');
+	return '<h2>' . $titre . "</h2>\n" .
+	($complement ? '' . $complement . "\n" : '');
 }
 
 /**
@@ -263,20 +263,20 @@ function info_progression_etape($en_cours, $phase, $dir, $erreur = false) {
 	//$en_cours = _request('etape')?_request('etape'):"";
 	$liste = find_all_in_path($dir, $phase . '(([0-9])+|fin)[.]php$');
 	$debut = 1;
-	$etat = "ok";
+	$etat = 'ok';
 	$last = count($liste);
 //	$texte_etat = array('ok'=>'OK','encours'=>_T('en_cours'),'todo'=>_T('todo'));
 
-	$intitule_etat["etape_"][1] = typo(_T('info_connexion_base_donnee'));
-	$intitule_etat["etape_"][2] = typo(_T('menu_aide_installation_choix_base'));
-	$intitule_etat["etape_"][3] = typo(_T('info_informations_personnelles'));
-	$intitule_etat["etape_"][4] = typo(_T('info_derniere_etape'));
+	$intitule_etat['etape_'][1] = typo(_T('info_connexion_base_donnee'));
+	$intitule_etat['etape_'][2] = typo(_T('menu_aide_installation_choix_base'));
+	$intitule_etat['etape_'][3] = typo(_T('info_informations_personnelles'));
+	$intitule_etat['etape_'][4] = typo(_T('info_derniere_etape'));
 
-	$intitule_etat["etape_ldap"][1] = typo(_T('titre_connexion_ldap'));
-	$intitule_etat["etape_ldap"][2] = typo(_T('titre_connexion_ldap'));
-	$intitule_etat["etape_ldap"][3] = typo(_T('info_chemin_acces_1'));
-	$intitule_etat["etape_ldap"][4] = typo(_T('info_reglage_ldap'));
-	$intitule_etat["etape_ldap"][5] = typo(_T('info_ldap_ok'));
+	$intitule_etat['etape_ldap'][1] = typo(_T('titre_connexion_ldap'));
+	$intitule_etat['etape_ldap'][2] = typo(_T('titre_connexion_ldap'));
+	$intitule_etat['etape_ldap'][3] = typo(_T('info_chemin_acces_1'));
+	$intitule_etat['etape_ldap'][4] = typo(_T('info_reglage_ldap'));
+	$intitule_etat['etape_ldap'][5] = typo(_T('info_ldap_ok'));
 
 //	$aff_etapes = "<span id='etapes'>";
 
@@ -285,29 +285,29 @@ function info_progression_etape($en_cours, $phase, $dir, $erreur = false) {
 	foreach ($liste as $etape => $fichier) {
 		if ($debut < $last) {
 			if ($debut == $en_cours && $erreur) {
-				$class = "on erreur";
+				$class = 'on erreur';
 			} else {
 				if ($debut == $en_cours) {
-					$class = "on";
+					$class = 'on';
 				} else {
 					if ($debut > $en_cours) {
-						$class = "prochains";
+						$class = 'prochains';
 					} else {
-						$class = "valides";
+						$class = 'valides';
 					}
 				}
 			}
 
 			$aff_etapes .= "<li class='$class'><div class='fond'>";
-			$aff_etapes .= ($debut == $en_cours) ? "<strong>" : '';
-			$aff_etapes .= "<em>" . _T('etape') . " </em><span class='numero_etape'>$debut</span><em>&nbsp;: </em>";
+			$aff_etapes .= ($debut == $en_cours) ? '<strong>' : '';
+			$aff_etapes .= '<em>' . _T('etape') . " </em><span class='numero_etape'>$debut</span><em>&nbsp;: </em>";
 			$aff_etapes .= $intitule_etat["$phase"][$debut];
-			$aff_etapes .= ($debut == $en_cours) ? "</strong>" : '';
-			$aff_etapes .= "</div></li>";
+			$aff_etapes .= ($debut == $en_cours) ? '</strong>' : '';
+			$aff_etapes .= '</div></li>';
 		}
 		$debut++;
 	}
-	$aff_etapes .= "</ul>";
+	$aff_etapes .= '</ul>';
 	$aff_etapes .= "<br class='nettoyeur' />\n";
 
 	return $aff_etapes;
@@ -318,7 +318,7 @@ function info_progression_etape($en_cours, $phase, $dir, $erreur = false) {
 function fieldset($legend, $champs = array(), $apres = '', $avant = '') {
 	return "<fieldset>\n" .
 	$avant .
-	($legend ? "<legend>" . $legend . "</legend>\n" : '') .
+	($legend ? '<legend>' . $legend . "</legend>\n" : '') .
 	fieldset_champs($champs) .
 	$apres .
 	"</fieldset>\n";
@@ -341,9 +341,9 @@ function fieldset_champs($champs = array()) {
 			$fieldset .= "<br />\n";
 		} else {
 			$fieldset .= "<label for='" . $nom . "'>" . $contenu['label'] . "</label>\n";
-			$fieldset .= "<input " . $class . "type='" . $type . "' id='" . $nom . "' name='" . $nom . "'\nvalue='" . $contenu['valeur'] . "'"
+			$fieldset .= '<input ' . $class . "type='" . $type . "' id='" . $nom . "' name='" . $nom . "'\nvalue='" . $contenu['valeur'] . "'"
 				. (preg_match(',^(pass|login),', $nom) ? " autocomplete='off'" : '')
-				. ((isset($contenu['required']) and $contenu['required']) ? " required='required'" : "")
+				. ((isset($contenu['required']) and $contenu['required']) ? " required='required'" : '')
 				. " />\n";
 		}
 	}
@@ -368,9 +368,9 @@ function install_select_serveur() {
 			if (function_exists($v) and $v()) {
 				$titre = _T("install_select_type_$s");
 				// proposer mysql par defaut si dispo
-				$checked = ($s == 'mysql' ? " checked='checked'" : "");
+				$checked = ($s == 'mysql' ? " checked='checked'" : '');
 				$options[$s] = "<li><input type='radio' id='$s' value='$s' name='server_db'$checked>"
-					. "<label for='$s'>" . ($titre ? $titre : $s) . "</label></li>";
+					. "<label for='$s'>" . ($titre ? $titre : $s) . '</label></li>';
 			} else {
 				spip_log("$s: portage indisponible");
 			}
@@ -389,9 +389,9 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape, $j
 		"\n<input type='hidden' name='etape' value='$etape' />"
 		. $hidden
 		. (_request('echec') ?
-			("<p><b>" . _T('avis_connexion_echec_1') .
-				"</b></p><p>" . _T('avis_connexion_echec_2') . "</p><p style='font-size: small;'>" . _T('avis_connexion_echec_3') . "</p>")
-			: "")
+			('<p><b>' . _T('avis_connexion_echec_1') .
+				'</b></p><p>' . _T('avis_connexion_echec_2') . "</p><p style='font-size: small;'>" . _T('avis_connexion_echec_3') . '</p>')
+			: '')
 
 		. ($jquery ? http_script('', 'jquery.js') : '')
 		. http_script('
@@ -434,7 +434,7 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape, $j
 				: '')
 			: ('<fieldset><legend>'
 				. _T('install_select_type_db')
-				. "</legend>"
+				. '</legend>'
 				. '<p class="explication">'
 				. _T('install_types_db_connus')
 				// Passer l'avertissement SQLIte en  commentaire, on pourra facilement le supprimer par la suite sans changer les traductions.
@@ -448,7 +448,8 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape, $j
 		. '<p>' . _T('texte_connexion_mysql') . '</p>'
 		. ($predef[1]
 			? '<h3>' . _T('install_adresse_base_hebergeur') . '</h3>'
-			: fieldset(_T('entree_base_donnee_1'),
+			: fieldset(
+				_T('entree_base_donnee_1'),
 				array(
 					'adresse_db' => array(
 						'label' => $db[1],
@@ -462,7 +463,8 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape, $j
 		. '<div id="install_login_base_hebergeur">'
 		. ($predef[2]
 			? '<h3>' . _T('install_login_base_hebergeur') . '</h3>'
-			: fieldset(_T('entree_login_connexion_1'),
+			: fieldset(
+				_T('entree_login_connexion_1'),
 				array(
 					'login_db' => array(
 						'label' => $login[1],
@@ -476,7 +478,8 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape, $j
 		. '<div id="install_pass_base_hebergeur">'
 		. ($predef[3]
 			? '<h3>' . _T('install_pass_base_hebergeur') . '</h3>'
-			: fieldset(_T('entree_mot_passe_1'),
+			: fieldset(
+				_T('entree_mot_passe_1'),
 				array(
 					'pass_db' => array(
 						'label' => $pass[1],
@@ -488,7 +491,6 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape, $j
 		. '</div>'
 
 		. bouton_suivant()));
-
 }
 
 // 4 valeurs qu'on reconduit d'un script a l'autre
@@ -498,20 +500,20 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape, $j
 function predef_ou_cache($adresse_db, $login_db, $pass_db, $server_db) {
 	return ((defined('_INSTALL_HOST_DB'))
 		? ''
-		: "\n<input type='hidden' name='adresse_db'  value=\"" . spip_htmlspecialchars($adresse_db) . "\" />"
+		: "\n<input type='hidden' name='adresse_db'  value=\"" . spip_htmlspecialchars($adresse_db) . '" />'
 	)
 	. ((defined('_INSTALL_USER_DB'))
 		? ''
-		: "\n<input type='hidden' name='login_db' value=\"" . spip_htmlspecialchars($login_db) . "\" />"
+		: "\n<input type='hidden' name='login_db' value=\"" . spip_htmlspecialchars($login_db) . '" />'
 	)
 	. ((defined('_INSTALL_PASS_DB'))
 		? ''
-		: "\n<input type='hidden' name='pass_db' value=\"" . spip_htmlspecialchars($pass_db) . "\" />"
+		: "\n<input type='hidden' name='pass_db' value=\"" . spip_htmlspecialchars($pass_db) . '" />'
 	)
 
 	. ((defined('_INSTALL_SERVER_DB'))
 		? ''
-		: "\n<input type='hidden' name='server_db' value=\"" . spip_htmlspecialchars($server_db) . "\" />"
+		: "\n<input type='hidden' name='server_db' value=\"" . spip_htmlspecialchars($server_db) . '" />'
 	);
 }
 
@@ -528,14 +530,14 @@ function install_etape_liste_bases($server_db, $login_db, $disabled = array()) {
 	foreach ($noms as $nom) {
 		$id = spip_htmlspecialchars($nom);
 		$dis = in_array($nom, $disabled) ? " disabled='disabled'" : '';
-		$base = " name=\"choix_db\" value=\""
+		$base = ' name="choix_db" value="'
 			. $nom
 			. '"'
 			. $dis
 			. " type='radio' id='$id'";
 		$label = "<label for='$id'>"
 			. ($dis ? "<i>$nom</i>" : $nom)
-			. "</label>";
+			. '</label>';
 
 		if (!$checked and !$dis and
 			(($nom == $login_db) or

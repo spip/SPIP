@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-// Les fonctions de ce fichier sont appelees en certains points 
+// Les fonctions de ce fichier sont appelees en certains points
 // de l'analyseur syntaxique afin de normaliser de vieilles syntaxes,
 // pour fournir au compilateur un arbre de syntaxe abstraite homogene
 
@@ -52,8 +52,7 @@ function phraser_vieux_logos(&$p) {
 			array_shift($p->param);
 			$p->etoile = '*';
 			spip_log("filtre de logo obsolete $nom", 'vieilles_defs');
-
-		} elseif (preg_match("/^" . NOM_DE_CHAMP . '(.*)$/sS', $nom, $m)) {
+		} elseif (preg_match('/^' . NOM_DE_CHAMP . '(.*)$/sS', $nom, $m)) {
 			$champ = new Champ();
 			$champ->nom_boucle = $m[2];
 			$champ->nom_champ = $m[3];
@@ -67,9 +66,7 @@ function phraser_vieux_logos(&$p) {
 			$args[] = $champ;
 			array_shift($p->param);
 			spip_log("filtre de logo obsolete $nom", 'vieilles_defs');
-
 		} // le cas else est la seule incompatibilite
-
 	}
 	array_unshift($p->param, $args);
 }
@@ -138,7 +135,7 @@ function phraser_vieux_recherche($p) {
 // Gerer la notation [(#EXPOSER|on,off)]
 function phraser_vieux_exposer($p) {
 	if ($a = $p->fonctions) {
-		preg_match("#([^,]*)(,(.*))?#", $a[0][0], $regs);
+		preg_match('#([^,]*)(,(.*))?#', $a[0][0], $regs);
 		$args = array();
 		if ($regs[1]) {
 			$a = new Texte;
@@ -156,9 +153,13 @@ function phraser_vieux_exposer($p) {
 	}
 }
 
-function phraser_vieux_modele($p) { normaliser_args_inclumodel($p); }
+function phraser_vieux_modele($p) {
+ normaliser_args_inclumodel($p);
+}
 
-function phraser_vieux_inclu($p) { normaliser_args_inclumodel($p); }
+function phraser_vieux_inclu($p) {
+ normaliser_args_inclumodel($p);
+}
 
 function normaliser_args_inclumodel($p) {
 	$params = $p->param;
@@ -211,5 +212,5 @@ function normaliser_inclure($champ) {
 			return;
 		}
 	}
-	spip_log("inclure sans fond ni fichier");
+	spip_log('inclure sans fond ni fichier');
 }

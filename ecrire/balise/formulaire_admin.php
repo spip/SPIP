@@ -129,7 +129,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float = '', $debug = '') {
 	$env['divclass'] = $float;
 	$env['lang'] = admin_lang();
 	$env['calcul'] = (_request('var_mode') ? 'recalcul' : 'calcul');
-	$env['debug'] = ((defined('_VAR_PREVIEW') and _VAR_PREVIEW) ? "" : admin_debug());
+	$env['debug'] = ((defined('_VAR_PREVIEW') and _VAR_PREVIEW) ? '' : admin_debug());
 	$env['analyser'] = (!$env['debug'] and !$GLOBALS['xhtml']) ? '' : admin_valider();
 	$env['inclure'] = ((defined('_VAR_INCLURE') and _VAR_INCLURE) ? 'inclure' : '');
 
@@ -234,13 +234,13 @@ function admin_preview($type, $id, $desc = null) {
 		return '';
 	}
 
-	$notpub = sql_in("statut", array('prop', 'prive'));
+	$notpub = sql_in('statut', array('prop', 'prive'));
 
 	if ($type == 'article' and $GLOBALS['meta']['post_dates'] != 'oui') {
-		$notpub .= " OR (statut='publie' AND date>" . sql_quote(date('Y-m-d H:i:s')) . ")";
+		$notpub .= " OR (statut='publie' AND date>" . sql_quote(date('Y-m-d H:i:s')) . ')';
 	}
 
-	return sql_fetsel('1', table_objet_sql($type), id_table_objet($type) . "=" . $id . " AND ($notpub)");
+	return sql_fetsel('1', table_objet_sql($type), id_table_objet($type) . '=' . $id . " AND ($notpub)");
 }
 
 
@@ -254,9 +254,9 @@ function admin_lang() {
 	$alang = '';
 	if (!empty($_COOKIE['spip_admin'])) {
 		$email_or_login = preg_replace(',^@,', '', $_COOKIE['spip_admin']);
-		$alang = sql_getfetsel('lang', 'spip_auteurs', "email=" . sql_quote($email_or_login));
+		$alang = sql_getfetsel('lang', 'spip_auteurs', 'email=' . sql_quote($email_or_login));
 		if (!$alang) {
-			$alang = sql_getfetsel('lang', 'spip_auteurs', "login=" . sql_quote($email_or_login));
+			$alang = sql_getfetsel('lang', 'spip_auteurs', 'login=' . sql_quote($email_or_login));
 		}
 	}
 	if (!$alang) {
@@ -283,7 +283,7 @@ function admin_valider() {
 		(parametre_url(self(), 'var_mode', 'debug', '&')
 			. '&var_mode_affiche=validation') :
 		('http://validator.w3.org/check?uri='
-			. rawurlencode("http://" . $_SERVER['HTTP_HOST'] . nettoyer_uri())));
+			. rawurlencode('http://' . $_SERVER['HTTP_HOST'] . nettoyer_uri())));
 }
 
 /**

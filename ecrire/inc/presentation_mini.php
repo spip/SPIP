@@ -24,14 +24,18 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @return string Code HTML
  */
-function debut_grand_cadre() { return "\n<div class = 'table_page'>\n"; }
+function debut_grand_cadre() {
+ return "\n<div class = 'table_page'>\n";
+}
 
 /**
  * Retourne le code HTML d'une fin de cadre pour le centre de page (haut de page)
  *
  * @return string Code HTML
  */
-function fin_grand_cadre() { return "\n</div>"; }
+function fin_grand_cadre() {
+ return "\n</div>";
+}
 
 // Debut de la colonne de gauche
 // div navigation fermee par creer_colonne_droite qui ouvre
@@ -53,7 +57,9 @@ function debut_gauche() {
  *
  * @return string Code HTML
  */
-function fin_gauche() { return "</div></div><br class = 'nettoyeur' />"; }
+function fin_gauche() {
+ return "</div></div><br class = 'nettoyeur' />";
+}
 
 /**
  * Retourne le code HTML du changement de colonne (passer de la gauche à la droite)
@@ -78,7 +84,7 @@ function creer_colonne_droite() {
 function debut_droite() {
 	return liste_objets_bloques(_request('exec'))
 	. creer_colonne_droite()
-	. "</div>"
+	. '</div>'
 	. "\n<div id='contenu'>";
 }
 
@@ -102,7 +108,7 @@ function debut_droite() {
  **/
 function liste_objets_bloques($exec, $contexte = array(), $auteur = null) {
 	$res = '';
-	if ($GLOBALS['meta']["articles_modif"] != "non") {
+	if ($GLOBALS['meta']['articles_modif'] != 'non') {
 		include_spip('inc/drapeau_edition');
 		if (is_null($auteur)) {
 			$auteur = $GLOBALS['visiteur_session'];
@@ -146,8 +152,8 @@ function fin_page() {
 			and isset($_COOKIE['spip_admin'])));
 	$t = '</div><div id="pied"><div class="largeur">'
 		. recuperer_fond('prive/squelettes/inclure/pied')
-		. "</div>"
-		. "</div></div>" // cf. div#page et div.largeur ouvertes dans conmmencer_page()
+		. '</div>'
+		. '</div></div>' // cf. div#page et div.largeur ouvertes dans conmmencer_page()
 		. ($debug ? erreur_squelette() : '')
 		. "</body></html>\n";
 
@@ -168,10 +174,12 @@ function fin_page() {
 function html_tests_js() {
 	if (_SPIP_AJAX and !defined('_TESTER_NOSCRIPT')) {
 		// pour le pied de page (deja defini si on est validation XML)
-		define('_TESTER_NOSCRIPT',
+		define(
+			'_TESTER_NOSCRIPT',
 			"<noscript>\n<div style='display:none;'><img src='"
 			. generer_url_ecrire('test_ajax', 'js=-1')
-			. "' width='1' height='1' alt='' /></div></noscript>\n");
+			. "' width='1' height='1' alt='' /></div></noscript>\n"
+		);
 	}
 
 	$rejouer = '';
@@ -191,17 +199,17 @@ function info_maj_spip() {
 
 	$maj = isset($GLOBALS['meta']['info_maj_spip']) ? $GLOBALS['meta']['info_maj_spip'] : null;
 	if (!$maj) {
-		return "";
+		return '';
 	}
 
 	$maj = explode('|', $maj);
 	// c'est une ancienne notif, on a fait la maj depuis !
 	if ($GLOBALS['spip_version_branche'] !== reset($maj)) {
-		return "";
+		return '';
 	}
 
 	if (!autoriser('webmestre')) {
-		return "";
+		return '';
 	}
 
 	array_shift($maj);
@@ -244,18 +252,21 @@ function info_copyright() {
 
 	// et la version de l'ecran de securite
 	$secu = defined('_ECRAN_SECURITE')
-		? "<br />" . _T('ecran_securite', array('version' => _ECRAN_SECURITE))
+		? '<br />' . _T('ecran_securite', array('version' => _ECRAN_SECURITE))
 		: '';
 
-	return _T('info_copyright',
+	return _T(
+		'info_copyright',
 		array(
 			'spip' => "<b>SPIP $version</b> ",
 			'lien_gpl' =>
-				"<a href='" . generer_url_ecrire("aide",
-					"aide=licence&var_lang=" . $GLOBALS['spip_lang']) . "' class=\"aide popin\">" . _T('info_copyright_gpl') . "</a>"
-		))
+				"<a href='" . generer_url_ecrire(
+					'aide',
+					'aide=licence&var_lang=' . $GLOBALS['spip_lang']
+				) . "' class=\"aide popin\">" . _T('info_copyright_gpl') . '</a>'
+		)
+	)
 	. $secu;
-
 }
 
 /**
@@ -269,7 +280,7 @@ function info_copyright() {
  * @param string $complement Code HTML supplémentaire
  * @return string             Code HTML
  **/
-function formulaire_recherche($page, $complement = "") {
+function formulaire_recherche($page, $complement = '') {
 	$recherche = _request('recherche');
 	$recherche_aff = entites_html($recherche);
 	if (!strlen($recherche)) {
@@ -282,5 +293,5 @@ function formulaire_recherche($page, $complement = "") {
 	$form = '<input type="text" size="10" value="' . $recherche_aff . '" name="recherche" class="recherche" accesskey="r"' . $onfocus . ' />';
 	$form .= "<input type='image' src='" . chemin_image('rechercher-20.png') . "' name='submit' class='submit' alt='" . _T('info_rechercher') . "' />";
 
-	return "<div class='spip_recherche'>" . generer_form_ecrire($page, $form . $complement, " method='get'") . "</div>";
+	return "<div class='spip_recherche'>" . generer_form_ecrire($page, $form . $complement, " method='get'") . '</div>';
 }

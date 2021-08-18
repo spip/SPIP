@@ -92,11 +92,10 @@ function cvtmulti_recuperer_post_precedents($form) {
 			$store = &$_GET;
 		}
 
-		foreach ($c as $k => $v) // on ecrase pas si saisi a nouveau !
-		{
-			if (!isset($store[$k])) {
+		foreach ($c as $k => $v) { // on ecrase pas si saisi a nouveau !
+		if (!isset($store[$k])) {
 				$_REQUEST[$k] = $store[$k] = $v;
-			} // mais si tableau des deux cotes, on merge avec priorite a la derniere saisie
+		} // mais si tableau des deux cotes, on merge avec priorite a la derniere saisie
 			elseif (is_array($store[$k])
 				and is_array($v)
 				and $z = array_keys($v)
@@ -236,7 +235,7 @@ function cvtmulti_formulaire_verifier_etapes($args, $erreurs) {
 			$erreurs_etapes[$e] = array();
 			if ($verifier = charger_fonction("verifier_$e", "formulaires/$form/", true)) {
 				$erreurs_etapes[$e] = call_user_func_array($verifier, $args['args']);
-			} elseif ($verifier = charger_fonction("verifier_etape", "formulaires/$form/", true)) {
+			} elseif ($verifier = charger_fonction('verifier_etape', "formulaires/$form/", true)) {
 				$a = $args['args'];
 				array_unshift($a, $e);
 				$erreurs_etapes[$e] = call_user_func_array($verifier, $a);

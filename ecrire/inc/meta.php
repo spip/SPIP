@@ -71,7 +71,7 @@ function inc_meta_dist($table = 'meta') {
 	}
 }
 
-// fonctions aussi appelees a l'install ==> spip_query en premiere requete 
+// fonctions aussi appelees a l'install ==> spip_query en premiere requete
 // pour eviter l'erreur fatale (serveur non encore configure)
 
 // https://code.spip.net/@lire_metas
@@ -193,7 +193,7 @@ function ecrire_meta($nom, $valeur, $importable = null, $table = 'meta') {
 		return;
 	}
 	include_spip('base/abstract_sql');
-	$res = sql_select("*", 'spip_' . $table, "nom=" . sql_quote($nom), '', '', '', '', '', 'continue');
+	$res = sql_select('*', 'spip_' . $table, 'nom=' . sql_quote($nom), '', '', '', '', '', 'continue');
 	// table pas encore installee, travailler en php seulement
 	if (!$res) {
 		$GLOBALS[$table][$nom] = $valeur;
@@ -226,9 +226,9 @@ function ecrire_meta($nom, $valeur, $importable = null, $table = 'meta') {
 		$r['impt'] = sql_quote($importable, '', 'text');
 	}
 	if ($row) {
-		sql_update('spip_' . $table, $r, "nom=" . sql_quote($nom));
+		sql_update('spip_' . $table, $r, 'nom=' . sql_quote($nom));
 	} else {
-		sql_insert('spip_' . $table, "(" . join(',', array_keys($r)) . ")", "(" . join(',', array_values($r)) . ")");
+		sql_insert('spip_' . $table, '(' . join(',', array_keys($r)) . ')', '(' . join(',', array_values($r)) . ')');
 	}
 	if (!isset($touch[$table])) {
 		touch_meta($antidate, $table);
@@ -281,8 +281,7 @@ function supprimer_table_meta($table, $force = false) {
 		// - la table est vide
 		// - ou limitée à la variable charset
 		// - ou qu'on force la suppression
-		if (
-			$force
+		if ($force
 			or !$nb_variables
 			or (
 				($nb_variables == 1)
@@ -307,7 +306,7 @@ function supprimer_table_meta($table, $force = false) {
 				$cle = array_search($table, $liste);
 				if ($cle !== false) {
 					unset($liste[$cle]);
-					if ($liste ) {
+					if ($liste) {
 						ecrire_meta('tables_config', serialize($liste));
 					} else {
 						effacer_meta('tables_config');

@@ -56,7 +56,7 @@ function action_inscrire_auteur_dist($statut, $mail_complet, $nom, $options = ar
 	}
 
 	include_spip('base/abstract_sql');
-	$res = sql_select("statut, id_auteur, login, email", "spip_auteurs", "email=" . sql_quote($desc['email']));
+	$res = sql_select('statut, id_auteur, login, email', 'spip_auteurs', 'email=' . sql_quote($desc['email']));
 	// erreur ?
 	if (!$res) {
 		return _T('titre_probleme_technique');
@@ -89,14 +89,16 @@ function action_inscrire_auteur_dist($statut, $mail_complet, $nom, $options = ar
 	$desc['jeton'] = auteur_attribuer_jeton($desc['id_auteur']);
 
 	// charger de suite cette fonction, pour ses utilitaires
-	$envoyer_inscription = charger_fonction("envoyer_inscription", "");
+	$envoyer_inscription = charger_fonction('envoyer_inscription', '');
 	list($sujet, $msg, $from, $head) = $envoyer_inscription($desc, $nom, $statut, $options);
 
 	$notifications = charger_fonction('notifications', 'inc');
 	notifications_envoyer_mails($mail_complet, $msg, $sujet, $from, $head);
 
 	// Notifications
-	$notifications('inscription', $desc['id_auteur'],
+	$notifications(
+		'inscription',
+		$desc['id_auteur'],
 		array('nom' => $desc['nom'], 'email' => $desc['email'])
 	);
 
@@ -192,12 +194,12 @@ function inscription_nouveau($desc) {
 function test_login($nom, $mail) {
 	include_spip('inc/charsets');
 	$nom = strtolower(translitteration($nom));
-	$login_base = preg_replace("/[^\w\d_]/", "_", $nom);
+	$login_base = preg_replace('/[^\w\d_]/', '_', $nom);
 
 	// il faut eviter que le login soit vraiment trop court
 	if (strlen($login_base) < 3) {
 		$mail = strtolower(translitteration(preg_replace('/@.*/', '', $mail)));
-		$login_base = preg_replace("/[^\w\d]/", "_", $mail);
+		$login_base = preg_replace('/[^\w\d]/', '_', $mail);
 	}
 	if (strlen($login_base) < 3) {
 		$login_base = 'user';
@@ -205,7 +207,7 @@ function test_login($nom, $mail) {
 
 	$login = $login_base;
 
-	for ($i = 1; ; $i++) {
+	for ($i = 1;; $i++) {
 		if (!sql_countsel('spip_auteurs', "login='$login'")) {
 			return $login;
 		}
@@ -242,14 +244,14 @@ function envoyer_inscription_dist($desc, $nom, $mode, $options = array()) {
 	}
 
 	$modele_mail = 'modeles/mail_inscription';
-	if (isset($options['modele_mail']) and $options['modele_mail']){
+	if (isset($options['modele_mail']) and $options['modele_mail']) {
 		$modele_mail = $options['modele_mail'];
 	}
 	$message = recuperer_fond($modele_mail, $contexte);
 	$from = (isset($options['from']) ? $options['from'] : null);
 	$head = null;
 
-	return array("", $message, $from, $head);
+	return array('', $message, $from, $head);
 }
 
 
@@ -281,9 +283,8 @@ function tester_statut_inscription($statut_tmp, $id) {
 	include_spip('inc/autoriser');
 	if ($statut_tmp) {
 		return autoriser('inscrireauteur', $statut_tmp, $id) ? $statut_tmp : '';
-	} elseif (
-		autoriser('inscrireauteur', $statut_tmp = "1comite", $id)
-		or autoriser('inscrireauteur', $statut_tmp = "6forum", $id)
+	} elseif (autoriser('inscrireauteur', $statut_tmp = '1comite', $id)
+		or autoriser('inscrireauteur', $statut_tmp = '6forum', $id)
 	) {
 		return $statut_tmp;
 	}
@@ -346,8 +347,8 @@ function auteur_attribuer_jeton($id_auteur) {
 	// s'assurer de l'unicite du jeton pour le couple (email,cookie)
 	do {
 		$jeton = creer_uniqid();
-		sql_updateq("spip_auteurs", array("cookie_oubli" => $jeton), "id_auteur=" . intval($id_auteur));
-	} while (sql_countsel("spip_auteurs", "cookie_oubli=" . sql_quote($jeton)) > 1);
+		sql_updateq('spip_auteurs', array('cookie_oubli' => $jeton), 'id_auteur=' . intval($id_auteur));
+	} while (sql_countsel('spip_auteurs', 'cookie_oubli=' . sql_quote($jeton)) > 1);
 
 	return $jeton;
 }
@@ -365,7 +366,7 @@ function auteur_verifier_jeton($jeton) {
 	}
 
 	// on peut tomber sur un jeton compose uniquement de chiffres, il faut forcer le $type pour sql_quote pour eviter de planter
-	$desc = sql_fetsel('*', 'spip_auteurs', "cookie_oubli=" . sql_quote($jeton, '', 'string'));
+	$desc = sql_fetsel('*', 'spip_auteurs', 'cookie_oubli=' . sql_quote($jeton, '', 'string'));
 
 	return $desc;
 }
@@ -377,5 +378,5 @@ function auteur_verifier_jeton($jeton) {
  * @return bool
  */
 function auteur_effacer_jeton($id_auteur) {
-	return sql_updateq("spip_auteurs", array("cookie_oubli" => ''), "id_auteur=" . intval($id_auteur));
+	return sql_updateq('spip_auteurs', array('cookie_oubli' => ''), 'id_auteur=' . intval($id_auteur));
 }

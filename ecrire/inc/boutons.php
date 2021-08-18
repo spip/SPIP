@@ -104,8 +104,10 @@ function definir_barre_onglets($script) {
 				isset($infos['icone']) ? find_in_theme($infos['icone']) : '',  // icone
 				$infos['titre'],  // titre
 				(isset($infos['action']) and $infos['action'])
-					? generer_url_ecrire($infos['action'],
-					(isset($infos['parametres']) and $infos['parametres']) ? $infos['parametres'] : '')
+					? generer_url_ecrire(
+						$infos['action'],
+						(isset($infos['parametres']) and $infos['parametres']) ? $infos['parametres'] : ''
+					)
 					: null
 			);
 		}
@@ -129,7 +131,7 @@ function definir_barre_onglets($script) {
  * @param string $class
  * @return string
  */
-function barre_onglets($rubrique, $ongletCourant, $class = "barre_onglet") {
+function barre_onglets($rubrique, $ongletCourant, $class = 'barre_onglet') {
 	include_spip('inc/presentation');
 
 	$res = '';

@@ -48,8 +48,10 @@ function enregistre_modif_plugin() {
 		}
 	}
 
-	spip_log("Changement des plugins actifs par l'auteur " . $GLOBALS['visiteur_session']['id_auteur'] . ": " . join(',',
-			$plugin));
+	spip_log("Changement des plugins actifs par l'auteur " . $GLOBALS['visiteur_session']['id_auteur'] . ': ' . join(
+		',',
+		$plugin
+	));
 	ecrire_plugin_actifs($plugin);
 
 	// Chaque fois que l'on valide des plugins, on memorise la liste de ces plugins comme etant "interessants", avec un score initial, qui sera decremente a chaque tour : ainsi un plugin active pourra reter visible a l'ecran, jusqu'a ce qu'il tombe dans l'oubli.

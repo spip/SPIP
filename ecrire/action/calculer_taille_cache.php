@@ -39,10 +39,11 @@ function action_calculer_taille_cache_dist($arg = null) {
 
 	if ($arg == 'images') {
 		$taille = calculer_taille_dossier(_DIR_VAR);
-		$res = _T('ecrire:taille_cache_image',
+		$res = _T(
+			'ecrire:taille_cache_image',
 			array(
 				'dir' => joli_repertoire(_DIR_VAR),
-				'taille' => "<b>" . (taille_en_octets($taille) > 0 ? taille_en_octets($taille) : "0 octet") . "</b>"
+				'taille' => '<b>' . (taille_en_octets($taille) > 0 ? taille_en_octets($taille) : '0 octet') . '</b>'
 			)
 		);
 	} else {

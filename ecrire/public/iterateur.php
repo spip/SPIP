@@ -79,9 +79,9 @@ class IterFactory {
 			// chercher la classe d'iterateur
 			// IterateurXXX
 			// definie dans le fichier iterateurs/xxx.php
-			$class = "Iterateur" . $iterateur;
+			$class = 'Iterateur' . $iterateur;
 			if (!class_exists($class)) {
-				if (!include_spip("iterateur/" . strtolower($iterateur))
+				if (!include_spip('iterateur/' . strtolower($iterateur))
 					or !class_exists($class)
 				) {
 					die("Iterateur $iterateur non trouv&#233;");
@@ -184,7 +184,7 @@ class IterDecorator extends FilterIterator {
 
 	// calcule les elements a retournes par fetch()
 	// enleve les elements inutiles du select()
-	// 
+	//
 	private function calculer_select() {
 		if ($select = &$this->command['select']) {
 			foreach ($select as $s) {
@@ -198,7 +198,7 @@ class IterDecorator extends FilterIterator {
 	}
 
 	// recuperer la valeur d'une balise #X
-	// en fonction des methodes 
+	// en fonction des methodes
 	// et proprietes disponibles
 	public function get_select($nom) {
 		if (is_object($this->iter)
@@ -503,7 +503,6 @@ class IterDecorator extends FilterIterator {
 		if (method_exists($this->iter, 'fetch')) {
 			return $this->iter->fetch();
 		} else {
-
 			while ($this->valid()
 				and (
 					!$this->accept()
@@ -595,5 +594,4 @@ class IterDecorator extends FilterIterator {
 
 		return $this->total;
 	}
-
 }

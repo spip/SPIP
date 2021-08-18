@@ -57,8 +57,10 @@ function inc_prepare_recherche_dist(
 	$primary = ''
 ) {
 	static $cache = array();
-	$delai_fraicheur = min(_DELAI_CACHE_resultats,
-		time() - (isset($GLOBALS['meta']['derniere_modif']) ? $GLOBALS['meta']['derniere_modif'] : 0));
+	$delai_fraicheur = min(
+		_DELAI_CACHE_resultats,
+		time() - (isset($GLOBALS['meta']['derniere_modif']) ? $GLOBALS['meta']['derniere_modif'] : 0)
+	);
 
 	// si recherche n'est pas dans le contexte, on va prendre en globals
 	// ca permet de faire des inclure simple.
@@ -69,7 +71,7 @@ function inc_prepare_recherche_dist(
 	// traiter le cas {recherche?}
 	if ($cond and !strlen($recherche)) {
 		return array(
-			"0 as points" /* as points */, /* where */
+			'0 as points' /* as points */, /* where */
 			''
 		);
 	}
@@ -77,13 +79,19 @@ function inc_prepare_recherche_dist(
 
 	$rechercher = false;
 
-	$where_resultat_recent = sql_date_proche('maj', (0 - ($delai_fraicheur + 100)), " SECOND");
+	$where_resultat_recent = sql_date_proche('maj', (0 - ($delai_fraicheur + 100)), ' SECOND');
 	if (!isset($cache[$serveur][$table][$recherche])) {
 		$hash_serv = ($serveur ? substr(md5($serveur), 0, 16) : '');
 		$hash = substr(md5($recherche . $table), 0, 16);
 		$where = "(resultats.recherche='$hash' AND resultats.table_objet=" . sql_quote($table) . " AND resultats.serveur='$hash_serv')";
-		$row = sql_fetsel('recherche', 'spip_resultats AS resultats',
-			$where . " AND $where_resultat_recent", '', '', '0,1');
+		$row = sql_fetsel(
+			'recherche',
+			'spip_resultats AS resultats',
+			$where . " AND $where_resultat_recent",
+			'',
+			'',
+			'0,1'
+		);
 		if (!$row
 			or (defined('_VAR_MODE') and _VAR_MODE == 'recalcul')
 		) {
@@ -95,14 +103,16 @@ function inc_prepare_recherche_dist(
 	if ($rechercher) {
 		//$tables = liste_des_champs();
 		$x = objet_type($table);
-		$points = recherche_en_base($recherche,
+		$points = recherche_en_base(
+			$recherche,
 			$x,
 			array(
 				'score' => true,
 				'toutvoir' => true,
 				'jointures' => true
 			),
-			$serveur);
+			$serveur
+		);
 		// pas de résultat, pas de point
 		$points = isset($points[$x]) ? $points[$x] : array();
 
@@ -120,11 +130,16 @@ function inc_prepare_recherche_dist(
 		// supprimer les anciens resultats de cette recherche
 		// et les resultats trop vieux avec une marge
 		// pas de AS resultats dans un delete (mysql)
-		$whered = str_replace(array("resultats.recherche", "resultats.table_objet", "resultats.serveur"),
-			array("recherche", "table_objet", "serveur"), $where);
+		$whered = str_replace(
+			array('resultats.recherche', 'resultats.table_objet', 'resultats.serveur'),
+			array('recherche', 'table_objet', 'serveur'),
+			$where
+		);
 
-		sql_delete('spip_resultats',
-			"NOT($where_resultat_recent) OR ($whered)");
+		sql_delete(
+			'spip_resultats',
+			"NOT($where_resultat_recent) OR ($whered)"
+		);
 
 		// inserer les resultats dans la table de cache des resultats
 		if (count($points)) {
@@ -144,7 +159,7 @@ function inc_prepare_recherche_dist(
 
 	if (!isset($cache[$serveur][$table][$recherche])) {
 		if (!$serveur) {
-			$cache[$serveur][$table][$recherche] = array("resultats.points AS points", $where);
+			$cache[$serveur][$table][$recherche] = array('resultats.points AS points', $where);
 		} else {
 			if (sql_countsel('spip_resultats as resultats', $where)) {
 				$rows = sql_allfetsel('resultats.id,resultats.points', 'spip_resultats as resultats', $where);
@@ -171,7 +186,7 @@ function inc_prepare_recherche_dist(
 function generer_select_where_explicites($table, $primary, $rows, $serveur) {
 	# calculer le {id_article IN()} et le {... as points}
 	if (!count($rows)) {
-		return array("''", "0=1");
+		return array("''", '0=1');
 	} else {
 		$listes_ids = array();
 		$select = '0';
@@ -182,7 +197,7 @@ function generer_select_where_explicites($table, $primary, $rows, $serveur) {
 		foreach ($listes_ids as $p => $ids) {
 			$select .= "+$p*(" .
 				sql_in("$table.$primary", $ids, '', $serveur)
-				. ") ";
+				. ') ';
 		}
 
 		return array("$select AS points ", sql_in("$table.$primary", array_map('reset', $rows), '', $serveur));

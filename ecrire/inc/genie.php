@@ -86,8 +86,12 @@ function inc_genie_dist($taches = array()) {
 	// etait de la passer en parametre a ing_genie_dist
 	// on reroute en ajoutant simplement le job a la queue, ASAP
 	foreach ($taches as $function => $period) {
-		$force_jobs[] = queue_add_job($function, _T('tache_cron_asap', array('function' => $function)),
-			array(time() - abs($period)), "genie/");
+		$force_jobs[] = queue_add_job(
+			$function,
+			_T('tache_cron_asap', array('function' => $function)),
+			array(time() - abs($period)),
+			'genie/'
+		);
 	}
 
 	// et on passe la main a la gestion de la queue !
@@ -97,9 +101,9 @@ function inc_genie_dist($taches = array()) {
 
 //
 // Construction de la liste des taches.
-// la cle est la tache, 
+// la cle est la tache,
 // la valeur le temps minimal, en secondes, entre deux memes taches
-// NE PAS METTRE UNE VALEUR INFERIEURE A 30 
+// NE PAS METTRE UNE VALEUR INFERIEURE A 30
 // les serveurs Http n'accordant en general pas plus de 30 secondes
 // a leur sous-processus
 //
@@ -202,6 +206,13 @@ function queue_genie_replan_job($function, $period, $last = 0, $time = null, $pr
 	// on replanifie un job cron
 	// uniquement si il n'y en a pas deja un avec le meme nom
 	// independament de l'argument
-	queue_add_job($function, _T('tache_cron_secondes', array('function' => $function, 'nb' => $period)), array($last),
-		"genie/", 'function_only', $time, $priority);
+	queue_add_job(
+		$function,
+		_T('tache_cron_secondes', array('function' => $function, 'nb' => $period)),
+		array($last),
+		'genie/',
+		'function_only',
+		$time,
+		$priority
+	);
 }

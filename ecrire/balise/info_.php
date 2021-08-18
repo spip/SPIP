@@ -50,7 +50,6 @@ function balise_INFO__dist($p) {
 
 		return $p;
 	} else {
-
 		// Récupérer tous les params à la suite de objet et id_objet
 		$_params = '[';
 		$nb_params = count($p->param[0]); // 1ère valeur vide donc 1 en plus

@@ -19,7 +19,7 @@ include_spip('base/objets');
 
 function inc_icone_renommer_dist($fond, $fonction) {
 	$size = 24;
-	if (preg_match("/(?:-([0-9]{1,3}))?([.](gif|png|svg))?$/i", $fond, $match)
+	if (preg_match('/(?:-([0-9]{1,3}))?([.](gif|png|svg))?$/i', $fond, $match)
 		and ((isset($match[0]) and $match[0]) or (isset($match[1]) and $match[1]))
 	) {
 		if (isset($match[1]) and $match[1]) {
@@ -27,11 +27,11 @@ function inc_icone_renommer_dist($fond, $fonction) {
 		}
 		$type = substr($fond, 0, -strlen($match[0]));
 		if (!isset($match[2]) or !$match[2]) {
-			$fond .= ".png";
+			$fond .= '.png';
 		}
 	} else {
 		$type = $fond;
-		$fond .= ".png";
+		$fond .= '.png';
 	}
 
 	$rtl = false;
@@ -44,7 +44,7 @@ function inc_icone_renommer_dist($fond, $fonction) {
 	// et ne finit pas par un s, sauf si c'est une exception declaree
 	$type = objet_type($type, false);
 
-	$dir = "images/";
+	$dir = 'images/';
 	$f = "$type-$size.png";
 	if ($icone = find_in_theme($dir . $f)) {
 		$dir = dirname($icone);
@@ -58,15 +58,15 @@ function inc_icone_renommer_dist($fond, $fonction) {
 		}
 
 		$action = $fonction;
-		if ($action == "supprimer.gif") {
-			$action = "del";
-		} elseif ($action == "creer.gif") {
-			$action = "new";
-		} elseif ($action == "edit.gif") {
-			$action = "edit";
+		if ($action == 'supprimer.gif') {
+			$action = 'del';
+		} elseif ($action == 'creer.gif') {
+			$action = 'new';
+		} elseif ($action == 'edit.gif') {
+			$action = 'edit';
 		}
 
-		$fonction = "";
+		$fonction = '';
 		if (in_array($action, array('add','del', 'new', 'edit', 'config'))) {
 			$fonction = $action;
 		}

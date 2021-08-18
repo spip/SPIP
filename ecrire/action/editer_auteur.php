@@ -45,9 +45,7 @@ function action_editer_auteur_dist($arg = null) {
 
 	// si id_auteur n'est pas un nombre, c'est une creation
 	if (!$id_auteur = intval($arg)) {
-
 		if (($id_auteur = auteur_inserer()) > 0) {
-
 			# cf. GROS HACK
 			# recuperer l'eventuel logo charge avant la creation
 			# ils ont un id = 0-id_auteur de la session
@@ -64,7 +62,7 @@ function action_editer_auteur_dist($arg = null) {
 	}
 
 	// Enregistre l'envoi dans la BD
-	$err = "";
+	$err = '';
 	if ($id_auteur > 0) {
 		$err = auteur_modifier($id_auteur);
 	}
@@ -106,7 +104,8 @@ function auteur_inserer($source = null, $set = null) {
 	}
 
 	// Envoyer aux plugins
-	$champs = pipeline('pre_insertion',
+	$champs = pipeline(
+		'pre_insertion',
 		array(
 			'args' => array(
 				'table' => 'spip_auteurs',
@@ -114,8 +113,9 @@ function auteur_inserer($source = null, $set = null) {
 			'data' => $champs
 		)
 	);
-	$id_auteur = sql_insertq("spip_auteurs", $champs);
-	pipeline('post_insertion',
+	$id_auteur = sql_insertq('spip_auteurs', $champs);
+	pipeline(
+		'post_insertion',
 		array(
 			'args' => array(
 				'table' => 'spip_auteurs',
@@ -161,12 +161,15 @@ function auteur_modifier($id_auteur, $set = null, $force_update = false) {
 		$set
 	);
 
-	if ($err = objet_modifier_champs('auteur', $id_auteur,
+	if ($err = objet_modifier_champs(
+		'auteur',
+		$id_auteur,
 		array(
 			'data' => $set,
 			'nonvide' => array('nom' => _T('ecrire:item_nouvel_auteur'))
 		),
-		$c)
+		$c
+	)
 	) {
 		return $err;
 	}
@@ -339,7 +342,8 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 	}
 
 	// Envoyer aux plugins
-	$champs = pipeline('pre_edition',
+	$champs = pipeline(
+		'pre_edition',
 		array(
 			'args' => array(
 				'table' => 'spip_auteurs',
@@ -401,7 +405,8 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 	suivre_invalideur("id='auteur/$id_auteur'");
 
 	// Pipeline
-	pipeline('post_edition',
+	pipeline(
+		'post_edition',
 		array(
 			'args' => array(
 				'table' => 'spip_auteurs',
@@ -416,11 +421,12 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 
 	// Notifications
 	if ($notifications = charger_fonction('notifications', 'inc')) {
-		$notifications('instituerauteur', $id_auteur,
+		$notifications(
+			'instituerauteur',
+			$id_auteur,
 			array('statut' => $statut, 'statut_ancien' => $statut_ancien)
 		);
 	}
 
 	return implode(' ', array_map('_T', $erreurs));
-
 }

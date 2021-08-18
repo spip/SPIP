@@ -207,7 +207,7 @@ function mail_normaliser_headers($headers, $from, $to, $texte, $parts = '') {
 		$domain = $domain[0];
 	}
 	else {
-		$domain = "@unknown-".md5($from).'.org';
+		$domain = '@unknown-'.md5($from).'.org';
 	}
 	$uniq = rand() . '_' . md5($to . $texte) . $domain;
 

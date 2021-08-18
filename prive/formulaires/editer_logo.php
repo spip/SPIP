@@ -65,7 +65,7 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 
 	if (!isset($options['titre'])) {
 		$balise_img = chercher_filtre('balise_img');
-		$img = $balise_img(chemin_image('image-24.png'),'', 'cadre-icone');
+		$img = $balise_img(chemin_image('image-24.png'), '', 'cadre-icone');
 		$libelles = pipeline('libeller_logo', $GLOBALS['logo_libelles']);
 		$libelle = (($id_objet or $objet != 'rubrique') ? $objet : 'racine');
 		if (isset($libelles[$libelle])) {

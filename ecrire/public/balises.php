@@ -49,10 +49,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  **/
 function interprete_argument_balise($n, $p) {
 	if (($p->param) && (!$p->param[0][0]) && (count($p->param[0]) > $n)) {
-		return calculer_liste($p->param[0][$n],
+		return calculer_liste(
+			$p->param[0][$n],
 			$p->descr,
 			$p->boucles,
-			$p->id_boucle);
+			$p->id_boucle
+		);
 	} else {
 		return null;
 	}
@@ -239,7 +241,7 @@ function balise_LANG_DIR_dist($p) {
  *     Pile complétée par le code à générer
  **/
 function balise_PUCE_dist($p) {
-	$p->code = "definir_puce()";
+	$p->code = 'definir_puce()';
 	$p->interdire_scripts = false;
 
 	return $p;
@@ -403,7 +405,7 @@ function balise_SQUELETTE_dist($p) {
  *     Pile completée du code PHP d'exécution de la balise
  */
 function balise_SPIP_VERSION_dist($p) {
-	$p->code = "spip_version()";
+	$p->code = 'spip_version()';
 	$p->interdire_scripts = false;
 
 	return $p;
@@ -433,8 +435,8 @@ function balise_SPIP_VERSION_dist($p) {
  **/
 function balise_NOM_SITE_dist($p) {
 	if (!$p->etoile) {
-		$p->code = "supprimer_numero(calculer_url(" .
-			champ_sql('url_site', $p) . "," .
+		$p->code = 'supprimer_numero(calculer_url(' .
+			champ_sql('url_site', $p) . ',' .
 			champ_sql('nom_site', $p) .
 			", 'titre', \$connect, false))";
 	} else {
@@ -665,7 +667,8 @@ function balise_POPULARITE_MAX_dist($p) {
  **/
 function balise_VALEUR_dist($p) {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
-	$p->code = index_pile($p->id_boucle, 'valeur', $p->boucles, $b);;
+	$p->code = index_pile($p->id_boucle, 'valeur', $p->boucles, $b);
+;
 	if (($v = interprete_argument_balise(1, $p)) !== null) {
 		$p->code = 'table_valeur(' . $p->code . ', ' . $v . ')';
 	}
@@ -707,7 +710,6 @@ function balise_EXPOSE_dist($p) {
 		if (($v = interprete_argument_balise(2, $p)) !== null) {
 			$off = $v;
 		}
-
 	}
 
 	return calculer_balise_expose($p, $on, $off);
@@ -733,7 +735,6 @@ function calculer_balise_expose($p, $on, $off) {
 		$msg = array('zbug_champ_hors_boucle', array('champ' => zbug_presenter_champ($p)));
 		erreur_squelette($msg, $p);
 	} else {
-
 		$key = $p->boucles[$b]->primary;
 		$type = $p->boucles[$p->id_boucle]->primary;
 		$desc = $p->boucles[$b]->show;
@@ -912,14 +913,17 @@ function balise_LESAUTEURS_dist($p) {
 		}
 		$c = memoriser_contexte_compil($p);
 
-		$p->code = sprintf(CODE_RECUPERER_FOND, "'modeles/lesauteurs'",
+		$p->code = sprintf(
+			CODE_RECUPERER_FOND,
+			"'modeles/lesauteurs'",
 			"array('objet'=>'" . $objet .
 			"','id_objet' => " . champ_sql($id_table_objet, $p) .
 			",'$id_table_objet' => " . champ_sql($id_table_objet, $p) .
-			($objet == 'article' ? "" : ",'id_article' => " . champ_sql('id_article', $p)) .
-			")",
+			($objet == 'article' ? '' : ",'id_article' => " . champ_sql('id_article', $p)) .
+			')',
 			"'trim'=>true, 'compil'=>array($c)",
-			_q($connect));
+			_q($connect)
+		);
 		$p->interdire_scripts = false; // securite apposee par recuperer_fond()
 	}
 
@@ -983,11 +987,11 @@ function balise_RANG_dist($p) {
 					$m = preg_replace(',as\s+titre$,i', '', $m[1]);
 					$m = trim($m);
 					if ($m != "''") {
-						if (!preg_match(",\W,", $m)) {
+						if (!preg_match(',\W,', $m)) {
 							$m = $boucle->id_table . ".$m";
 						}
 						
-						$m .= " AS titre_rang";
+						$m .= ' AS titre_rang';
 
 						$boucle->select[] = $m;
 						$_titre = '$Pile[$SP][\'titre_rang\']';
@@ -1008,10 +1012,11 @@ function balise_RANG_dist($p) {
 			$_primary = champ_sql($id_table_objet, $p, '', false);
 			$_env = '$Pile[0]';
 
-			if (!$_titre) {$_titre = "''";}
-			if (!$_primary) {$_primary = "''";}
+			if (!$_titre) {$_titre = "''";
+			}
+			if (!$_primary) {$_primary = "''";
+			}
 			$_rang = "calculer_rang_smart($_titre, '$objet', $_primary, $_env)";
-
 		}
 		
 		$p->code = $_rang;
@@ -1055,11 +1060,13 @@ function balise_POPULARITE_dist($p) {
  * On produit un appel à `_request` si on ne l'a pas, mais c'est inexact:
  * l'absence peut-être due à une faute de frappe dans le contexte inclus.
  */
-define('CODE_PAGINATION',
-'%s($Numrows["%s"]["grand_total"],
+define(
+	'CODE_PAGINATION',
+	'%s($Numrows["%s"]["grand_total"],
  		%s,
 		isset($Pile[0][%4$s])?$Pile[0][%4$s]:intval(_request(%4$s)),
-		%5$s, %6$s, %7$s, %8$s, array(%9$s))');
+		%5$s, %6$s, %7$s, %8$s, array(%9$s))'
+);
 
 /**
  * Compile la balise `#PAGINATION` chargée d'afficher une pagination
@@ -1144,8 +1151,18 @@ function balise_PAGINATION_dist($p, $liste = 'true') {
 	$modif = ($type[0] !== "'") ? "'debut'.$type"
 		: ("'debut" . substr($type, 1));
 
-	$p->code = sprintf(CODE_PAGINATION, $f_pagination, $b, $type, $modif, $pas, $liste,
-		((isset($__modele) and $__modele) ? $__modele : "''"), _q($connect), $code_contexte);
+	$p->code = sprintf(
+		CODE_PAGINATION,
+		$f_pagination,
+		$b,
+		$type,
+		$modif,
+		$pas,
+		$liste,
+		((isset($__modele) and $__modele) ? $__modele : "''"),
+		_q($connect),
+		$code_contexte
+	);
 
 	$p->boucles[$b]->numrows = true;
 	$p->interdire_scripts = false;
@@ -1416,7 +1433,7 @@ function balise_CONFIG_dist($p) {
 		$arg = "''";
 	}
 	$_sinon = interprete_argument_balise(2, $p);
-	$_unserialize = sinon(interprete_argument_balise(3, $p), "false");
+	$_unserialize = sinon(interprete_argument_balise(3, $p), 'false');
 
 	$p->code = '(include_spip(\'inc/config\')?lire_config(' . $arg . ',' .
 		($_sinon && $_sinon != "''" ? $_sinon : 'null') . ',' . $_unserialize . "):'')";
@@ -1552,8 +1569,11 @@ function balise_EVAL_dist($p) {
 	if ($php) {
 		# optimisation sur les #EVAL{une expression sans #BALISE}
 		# attention au commentaire "// x signes" qui precede
-		if (preg_match(",^([[:space:]]*//[^\n]*\n)'([^']+)'$,ms",
-			$php, $r)) {
+		if (preg_match(
+			",^([[:space:]]*//[^\n]*\n)'([^']+)'$,ms",
+			$php,
+			$r
+		)) {
 			$p->code = /* $r[1]. */
 				'(' . $r[2] . ')';
 		} else {
@@ -1681,7 +1701,7 @@ function balise_REM_dist($p) {
  * @return mixed
  */
 function balise_NULL_dist($p) {
-	$p->code = "null";
+	$p->code = 'null';
 	$p->interdire_scripts = false;
 
 	return $p;
@@ -1965,14 +1985,13 @@ function balise_INCLURE_dist($p) {
 	}
 
 	if (isset($_contexte['fond'])) {
-
 		$f = $_contexte['fond'];
 		// toujours vrai :
 		if (preg_match('/^.fond.\s*=>(.*)$/s', $f, $r)) {
 			$f = $r[1];
 			unset($_contexte['fond']);
 		} else {
-			spip_log("compilation de #INCLURE a revoir");
+			spip_log('compilation de #INCLURE a revoir');
 		}
 
 		// #INCLURE{doublons}
@@ -1989,13 +2008,13 @@ function balise_INCLURE_dist($p) {
 
 		$_options = array();
 		if (isset($_contexte['ajax'])) {
-			$_options[] = preg_replace(",=>(.*)$,ims", '=> ($v=(\\1))?$v:true', $_contexte['ajax']);
+			$_options[] = preg_replace(',=>(.*)$,ims', '=> ($v=(\\1))?$v:true', $_contexte['ajax']);
 			unset($_contexte['ajax']);
 		}
 		if ($p->etoile) {
 			$_options[] = "'etoile'=>true";
 		}
-		$_options[] = "'compil'=>array(" . memoriser_contexte_compil($p) . ")";
+		$_options[] = "'compil'=>array(" . memoriser_contexte_compil($p) . ')';
 
 		$_l = 'array(' . join(",\n\t", $_contexte) . ')';
 		if ($flag_env) {
@@ -2003,7 +2022,6 @@ function balise_INCLURE_dist($p) {
 		}
 
 		$p->code = sprintf(CODE_RECUPERER_FOND, $f, $_l, join(',', $_options), "_request('connect')");
-
 	} elseif (!isset($_contexte[1])) {
 		$msg = array('zbug_balise_sans_argument', array('balise' => ' INCLURE'));
 		erreur_squelette($msg, $p);
@@ -2086,7 +2104,7 @@ function balise_MODELE_dist($p) {
 		$_options = memoriser_contexte_compil($p);
 		$_options = "'compil'=>array($_options), 'trim'=>true";
 		if (isset($_contexte['ajax'])) {
-			$_options .= ", " . preg_replace(",=>(.*)$,ims", '=> ($v=(\\1))?$v:true', $_contexte['ajax']);
+			$_options .= ', ' . preg_replace(',=>(.*)$,ims', '=> ($v=(\\1))?$v:true', $_contexte['ajax']);
 			unset($_contexte['ajax']);
 		}
 
@@ -2406,8 +2424,10 @@ function balise_AUTORISER_dist($p) {
 		$_code[] = $_v;
 	}
 
-	$p->code = '((function_exists("autoriser")||include_spip("inc/autoriser"))&&autoriser(' . join(', ',
-			$_code) . ')?" ":"")';
+	$p->code = '((function_exists("autoriser")||include_spip("inc/autoriser"))&&autoriser(' . join(
+		', ',
+		$_code
+	) . ')?" ":"")';
 	$p->interdire_scripts = false;
 
 	return $p;
@@ -2564,9 +2584,9 @@ function balise_BOUTON_ACTION_dist($p) {
 	while (end($args) == "''" and count($args) > 2) {
 		array_pop($args);
 	}
-	$args = implode(",", $args);
+	$args = implode(',', $args);
 
-	$bouton_action = chercher_filtre("bouton_action");
+	$bouton_action = chercher_filtre('bouton_action');
 	$p->code = "$bouton_action($args)";
 	$p->interdire_scripts = false;
 
@@ -2693,9 +2713,9 @@ function balise_TRI_dist($p, $liste = 'true') {
 	$_variable = "((\$s=$_issens)?'sens':'tri')." . $boucle->modificateur['tri_nom'];
 	$_url = "parametre_url(self(),$_variable,\$s?$_sens:$_champ)";
 	$_url = "parametre_url($_url,'var_memotri',strncmp(" . $boucle->modificateur['tri_nom'] . ",'session',7)==0?$_variable:'')";
-	$_on = "\$s?(" . $boucle->modificateur['tri_sens'] . "==$_sens" . '):(' . $boucle->modificateur['tri_champ'] . "==$_champ)";
+	$_on = '$s?(' . $boucle->modificateur['tri_sens'] . "==$_sens" . '):(' . $boucle->modificateur['tri_champ'] . "==$_champ)";
 
-	$p->code = "lien_ou_expose($_url,$_libelle,$_on" . ($_class ? ",$_class" : "") . ")";
+	$p->code = "lien_ou_expose($_url,$_libelle,$_on" . ($_class ? ",$_class" : '') . ')';
 	//$p->code = "''";
 	$p->interdire_scripts = false;
 
@@ -2769,7 +2789,7 @@ function balise_PUBLIE_dist($p) {
 		$connect = $p->boucles[$p->id_boucle]->sql_serveur;
 	}
 
-	$p->code = "(objet_test_si_publie(" . $_type . ",intval(" . $_id . ")," . _q($connect) . ")?' ':'')";
+	$p->code = '(objet_test_si_publie(' . $_type . ',intval(' . $_id . '),' . _q($connect) . ")?' ':'')";
 	$p->interdire_scripts = false;
 
 	return $p;

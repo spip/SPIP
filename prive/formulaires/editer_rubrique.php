@@ -170,7 +170,7 @@ function formulaires_editer_rubrique_verifier_dist(
 		$branche = calcul_branche_in($id_rubrique);
 		$branche = explode(',', $branche);
 		if (in_array($id_parent, $branche)) {
-			$erreurs['id_parent'] = _L("Impossible de déplacer une rubrique dans sa propre branche, on tourne en rond !");
+			$erreurs['id_parent'] = _L('Impossible de déplacer une rubrique dans sa propre branche, on tourne en rond !');
 		}
 	}
 

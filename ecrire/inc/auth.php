@@ -142,8 +142,7 @@ function auth_mode() {
 	// Essayer auth http si significatif
 	// (ignorer les login d'intranet independants de spip)
 	if (!$GLOBALS['ignore_auth_http']) {
-		if (
-			(isset($_SERVER['PHP_AUTH_USER']) and isset($_SERVER['PHP_AUTH_PW'])
+		if ((isset($_SERVER['PHP_AUTH_USER']) and isset($_SERVER['PHP_AUTH_PW'])
 				and $r = lire_php_auth($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']))
 			or
 			// Si auth http differtente de basic, PHP_AUTH_PW
@@ -272,8 +271,7 @@ function auth_init_droits($row) {
 
 	// Administrateurs
 	if (in_array($GLOBALS['connect_statut'], explode(',', _STATUT_AUTEUR_RUBRIQUE))) {
-		if (
-			isset($GLOBALS['visiteur_session']['restreint'])
+		if (isset($GLOBALS['visiteur_session']['restreint'])
 			and is_array($GLOBALS['visiteur_session']['restreint'])
 		) {
 			$GLOBALS['connect_id_rubrique'] = $GLOBALS['visiteur_session']['restreint'];
@@ -441,7 +439,6 @@ function auth_informer_login($login, $serveur = '') {
 		or !$login_base = auth_retrouver_login($login, $serveur)
 		or !$row = sql_fetsel('*', 'spip_auteurs', 'login=' . sql_quote($login_base, $serveur, 'text'), '', '', '', '', $serveur)
 	) {
-
 		// generer de fausses infos, mais credibles, pour eviter une attaque
 		// https://core.spip.net/issues/1758 + https://core.spip.net/issues/3691
 		include_spip('inc/securiser_action');
@@ -725,8 +722,7 @@ function auth_synchroniser_distant(
  * @return array|bool
  */
 function lire_php_auth($login, $pw, $serveur = '') {
-	if (
-		!$login
+	if (!$login
 		or !$login = auth_retrouver_login($login, $serveur)
 	) {
 		return false;

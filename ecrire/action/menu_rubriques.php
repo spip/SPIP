@@ -52,7 +52,7 @@ function action_menu_rubriques_dist() {
 	}
 
 	if ($date = intval(_request('date'))) {
-		header("Last-Modified: " . gmdate("D, d M Y H:i:s", $date) . " GMT");
+		header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $date) . ' GMT');
 	}
 
 	$r = gen_liste_rubriques();
@@ -227,12 +227,19 @@ function gen_liste_rubriques() {
 	}
 	// se restreindre aux rubriques utilisees recemment +secteurs
 
-	$where = sql_in_select("id_rubrique", "id_rubrique", "spip_rubriques", "", "", "id_parent=0 DESC, date DESC",
-		_CACHE_RUBRIQUES_MAX);
+	$where = sql_in_select(
+		'id_rubrique',
+		'id_rubrique',
+		'spip_rubriques',
+		'',
+		'',
+		'id_parent=0 DESC, date DESC',
+		_CACHE_RUBRIQUES_MAX
+	);
 
 	// puis refaire la requete pour avoir l'ordre alphabetique
 
-	$res = sql_select("id_rubrique, titre, id_parent", "spip_rubriques", $where, '', 'id_parent, 0+titre, titre');
+	$res = sql_select('id_rubrique, titre, id_parent', 'spip_rubriques', $where, '', 'id_parent, 0+titre, titre');
 
 	// il ne faut pas filtrer le autoriser voir ici
 	// car on met le resultat en cache, commun a tout le monde

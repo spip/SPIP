@@ -61,7 +61,7 @@ function action_purger_dist($arg = null) {
 			supprime_invalideurs();
 			@spip_unlink(_CACHE_RUBRIQUES);
 			@spip_unlink(_CACHE_CHEMIN);
-			@spip_unlink(_DIR_TMP . "plugin_xml_cache.gz");
+			@spip_unlink(_DIR_TMP . 'plugin_xml_cache.gz');
 			// on ne supprime que _CACHE_PLUGINS_OPT qui declenche la reconstruction des 3
 			// _CACHE_PIPELINES _CACHE_PLUGINS_PATH et _CACHE_PLUGINS_FCT
 			// pour eviter des problemes de concurence

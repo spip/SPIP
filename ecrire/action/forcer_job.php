@@ -36,5 +36,4 @@ function action_forcer_job_dist() {
 		include_spip('inc/genie');
 		queue_schedule(array($id_job));
 	}
-
 }

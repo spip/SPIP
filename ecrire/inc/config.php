@@ -335,24 +335,23 @@ function lister_configurer($exclure = array()) {
 			if (strncmp($url, 'configurer_', 11) == 0) {
 				$deja[$url] = $b;
 			} elseif ($b['url'] == 'configurer' and preg_match(',cfg=([a-z0-9_]+),i', $b['args'], $match)) {
-				$deja["configurer_" . $match[1]] = $b;
+				$deja['configurer_' . $match[1]] = $b;
 			}
 		}
-
 	}
 	$exclure = $exclure + $deja;
 
-	$icone_defaut = "images/configuration-16.png";
+	$icone_defaut = 'images/configuration-16.png';
 	$liste = array();
 	$skels = array();
 	$forms = array();
 
 	// trouver toutes les pages configurer_xxx de l'espace prive
 	// et construire un tableau des entrees qui ne sont pas dans $deja
-	$pages = find_all_in_path("prive/squelettes/contenu/", "configurer_.*[.]" . _EXTENSION_SQUELETTES . '$');
+	$pages = find_all_in_path('prive/squelettes/contenu/', 'configurer_.*[.]' . _EXTENSION_SQUELETTES . '$');
 
 	foreach ($pages as $page) {
-		$configurer = basename($page, "." . _EXTENSION_SQUELETTES);
+		$configurer = basename($page, '.' . _EXTENSION_SQUELETTES);
 		if (!isset($exclure[$configurer])) {
 			$liste[$configurer] = array(
 				'parent' => 'bando_configuration',
@@ -372,9 +371,9 @@ function lister_configurer($exclure = array()) {
 
 	// trouver tous les formulaires/configurer_
 	// et construire un tableau des entrees
-	$pages = find_all_in_path("formulaires/", "configurer_.*[.]" . _EXTENSION_SQUELETTES . '$');
+	$pages = find_all_in_path('formulaires/', 'configurer_.*[.]' . _EXTENSION_SQUELETTES . '$');
 	foreach ($pages as $page) {
-		$configurer = basename($page, "." . _EXTENSION_SQUELETTES);
+		$configurer = basename($page, '.' . _EXTENSION_SQUELETTES);
 		if (!isset($forms[$configurer])
 			and !isset($liste[$configurer])
 			and !isset($exclure[$configurer])
@@ -406,7 +405,7 @@ function lister_formulaires_configurer($file) {
 	$forms = array();
 
 	lire_fichier($file, $skel);
-	if (preg_match_all(",#FORMULAIRE_(CONFIGURER_[A-Z0-9_]*),", $skel, $matches, PREG_SET_ORDER)) {
+	if (preg_match_all(',#FORMULAIRE_(CONFIGURER_[A-Z0-9_]*),', $skel, $matches, PREG_SET_ORDER)) {
 		$matches = array_map('end', $matches);
 		$matches = array_map('strtolower', $matches);
 		$forms = array_merge($forms, $matches);
@@ -414,16 +413,16 @@ function lister_formulaires_configurer($file) {
 
 	// evaluer le fond en lui passant un exec coherent pour que les pipelines le reconnaissent
 	// et reperer les formulaires CVT configurer_xx insereres par les plugins via pipeline
-	$config = basename(substr($file, 0, -strlen("." . _EXTENSION_SQUELETTES)));
+	$config = basename(substr($file, 0, -strlen('.' . _EXTENSION_SQUELETTES)));
 	spip_log('Calcul de ' . "prive/squelettes/contenu/$config");
-	$fond = recuperer_fond("prive/squelettes/contenu/$config", array("exec" => $config));
+	$fond = recuperer_fond("prive/squelettes/contenu/$config", array('exec' => $config));
 
 	// passer dans le pipeline affiche_milieu pour que les plugins puissent ajouter leur formulaires...
 	// et donc que l'on puisse les referencer aussi !
-	$fond = pipeline('affiche_milieu', array('args' => array("exec" => $config), 'data' => $fond));
+	$fond = pipeline('affiche_milieu', array('args' => array('exec' => $config), 'data' => $fond));
 
 	// recuperer les noms des formulaires presents.
-	if (is_array($inputs = extraire_balises($fond, "input"))) {
+	if (is_array($inputs = extraire_balises($fond, 'input'))) {
 		foreach ($inputs as $i) {
 			if (extraire_attribut($i, 'name') == 'formulaire_action') {
 				$forms[] = ($c = extraire_attribut($i, 'value'));
@@ -452,7 +451,7 @@ function liste_metas() {
 	return pipeline('configurer_liste_metas', array(
 		'nom_site' => _T('info_mon_site_spip'),
 		'slogan_site' => '',
-		'adresse_site' => preg_replace(",/$,", "", url_de_base()),
+		'adresse_site' => preg_replace(',/$,', '', url_de_base()),
 		'descriptif_site' => '',
 		'activer_logos' => 'oui',
 		'activer_logos_survol' => 'non',
@@ -596,7 +595,7 @@ function appliquer_adresse_site($adresse_site) {
 			$GLOBALS['profondeur_url'] = _DIR_RESTREINT ? 0 : 1;
 			$adresse_site = url_de_base();
 		}
-		$adresse_site = preg_replace(",/?\s*$,", "", $adresse_site);
+		$adresse_site = preg_replace(',/?\s*$,', '', $adresse_site);
 
 		if (!tester_url_absolue($adresse_site)) {
 			$adresse_site = "http://$adresse_site";

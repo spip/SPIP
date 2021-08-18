@@ -597,7 +597,6 @@ function base_auxiliaires(&$tables_auxiliaires) {
 		'field' => &$spip_jobs_liens,
 		'key' => &$spip_jobs_liens_key
 	);
-
 }
 
 
@@ -977,14 +976,15 @@ function lister_tables_spip($serveur = '') {
  * @return array
  *     Couples (nom de la table SQL => même nom)
  **/
-function lister_toutes_tables($serveur){
+function lister_toutes_tables($serveur) {
 	static $tables = array();
-	if (!isset($tables[$serveur])){
+	if (!isset($tables[$serveur])) {
 		$tables[$serveur] = array();
-		if (!function_exists("sql_alltable"))
-			include_spip("base/abstract_sql");
-		$ts = sql_alltable('%',$serveur); // toutes les tables
-		foreach ($ts as $t){
+		if (!function_exists('sql_alltable')) {
+			include_spip('base/abstract_sql');
+		}
+		$ts = sql_alltable('%', $serveur); // toutes les tables
+		foreach ($ts as $t) {
 			$tables[$serveur][$t] = $t;
 		}
 	}
@@ -1109,10 +1109,9 @@ function id_table_objet($type, $serveur = '') {
 	}
 
 	$ts = lister_tables_spip($serveur);
-	if (
-		in_array($t, $ts)
+	if (in_array($t, $ts)
 		or in_array($t, lister_toutes_tables($serveur))
-	){
+	) {
 		$desc = $trouver_table($t, $serveur);
 		if (isset($desc['key']['PRIMARY KEY'])) {
 			return $desc['key']['PRIMARY KEY'];
@@ -1305,7 +1304,6 @@ function objet_lister_parents($objet, $id_objet, $parent_direct_seulement = fals
 
 	// Si on trouve une ou des méthodes de parent
 	if ($parent_methodes = objet_type_decrire_infos_parents($objet)) {
-
 		// On identifie les informations sur l'objet source dont on cherche le parent.
 		include_spip('base/abstract_sql');
 		$table_objet = table_objet_sql($objet);
@@ -1374,10 +1372,9 @@ function objet_lister_parents($objet, $id_objet, $parent_direct_seulement = fals
 
 			// On lance la requête de récupération du parent
 			$is_table_lien = (strpos($table, '_liens') !== false and substr($table, -6) === '_liens');
-			if (
-				!$condition_objet_invalide
+			if (!$condition_objet_invalide
 				and $where
-				and ($lignes = sql_allfetsel( $is_table_lien ? '*' : $select, $table, $where))
+				and ($lignes = sql_allfetsel($is_table_lien ? '*' : $select, $table, $where))
 			) {
 				foreach ($lignes as $ligne) {
 					// Si le type est fixe
@@ -1581,7 +1578,7 @@ function objet_lister_enfants_par_type($objet, $id_objet) {
 
 /**
  * Donne les informations de parenté directe d'un type d'objet si on en trouve
- * 
+ *
  * @param $objet
  *     Type de l'objet dont on cherche les informations de parent
  * @return array|false
@@ -1621,7 +1618,7 @@ function objet_type_decrire_infos_parents($objet) {
 
 /**
  * Donne les informations des enfants directs d'un type d'objet si on en trouve
- * 
+ *
  * @param $objet
  *     Type de l'objet dont on cherche les informations des enfants
  * @return array

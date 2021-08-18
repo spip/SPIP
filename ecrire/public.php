@@ -21,11 +21,8 @@
 // par souci de compatiilite).
 
 if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
-
 	echo recuperer_fond($fond, $contexte_inclus, array(), _request('connect'));
-
 } else {
-
 	$GLOBALS['_INC_PUBLIC'] = 1;
 	define('_PIPELINE_SUFFIX', test_espace_prive() ? '_prive' : '');
 
@@ -123,7 +120,7 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 
 	// Content-Type ?
 	if (!isset($page['entetes']['Content-Type'])) {
-		$charset = isset($GLOBALS['meta']['charset']) ? $GLOBALS['meta']['charset'] : "utf-8";
+		$charset = isset($GLOBALS['meta']['charset']) ? $GLOBALS['meta']['charset'] : 'utf-8';
 		$page['entetes']['Content-Type'] = 'text/html; charset=' . $charset;
 		$html = true;
 	} else {
@@ -134,7 +131,7 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 	// type tableau pour y mettre des choses au besoin.
 	$debug = ((_request('var_mode') == 'debug') or $tableau_des_temps) ? array(1) : array();
 
-	// affiche-t-on les boutons d'administration ? voir f_admin() 
+	// affiche-t-on les boutons d'administration ? voir f_admin()
 	$affiche_boutons_admin = ($html and (
 			(isset($_COOKIE['spip_admin']) and (!isset($flag_preserver) or !$flag_preserver))
 			or ($debug and include_spip('inc/autoriser') and autoriser('debug'))
@@ -154,7 +151,7 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 
 
 	// eval $page et affecte $res
-	include _ROOT_RESTREINT . "public/evaluer_page.php";
+	include _ROOT_RESTREINT . 'public/evaluer_page.php';
 	envoyer_entetes($page['entetes']);
 	if ($res === false) {
 		include_spip('inc/autoriser');
@@ -189,11 +186,10 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 		if ($html and ($affiche_boutons_admin or $debug)) {
 			$var_mode_affiche = _request('var_mode_affiche');
 			$var_mode_objet = _request('var_mode_objet');
-			$GLOBALS['debug_objets'][$var_mode_affiche][$var_mode_objet . 'tout'] = ($var_mode_affiche == 'validation' ? $page['texte'] : "");
+			$GLOBALS['debug_objets'][$var_mode_affiche][$var_mode_objet . 'tout'] = ($var_mode_affiche == 'validation' ? $page['texte'] : '');
 			echo erreur_squelette(false);
 		}
 	} else {
-
 		if (isset($GLOBALS['meta']['date_prochain_postdate'])
 			and $GLOBALS['meta']['date_prochain_postdate'] <= time()
 		) {

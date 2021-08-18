@@ -12,7 +12,7 @@
 
 /**
  * Gestion des mises à jour de bdd de SPIP
- * 
+ *
  * Mises à jour en 3.1
  *
  * @package SPIP\Core\SQL\Upgrade
@@ -32,13 +32,13 @@ $GLOBALS['maj'][21676] = array(
  * https://core.spip.net/issues/3277
  */
 function ranger_cache_gd2() {
-	spip_log("ranger_cache_gd2");
-	$base = _DIR_VAR . "cache-gd2/";
+	spip_log('ranger_cache_gd2');
+	$base = _DIR_VAR . 'cache-gd2/';
 	if (is_dir($base) and is_readable($base)) {
 		if ($dir = opendir($base)) {
 			while (($f = readdir($dir)) !== false) {
-				if (!is_dir($base . $f) and strncmp($f, ".", 1) !== 0
-					and preg_match(",[0-9a-f]{32}\.\w+,", $f)
+				if (!is_dir($base . $f) and strncmp($f, '.', 1) !== 0
+					and preg_match(',[0-9a-f]{32}\.\w+,', $f)
 				) {
 					$sub = substr($f, 0, 2);
 					$sub = sous_repertoire($base, $sub);

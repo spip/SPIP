@@ -38,7 +38,7 @@ function protege_champ($texte) {
 		$texte = array_map('protege_champ', $texte);
 	} else {
 		// ne pas corrompre une valeur serialize
-		if ((preg_match(",^[abis]:\d+[:;],", $texte) and @unserialize($texte) != false) or is_null($texte)) {
+		if ((preg_match(',^[abis]:\d+[:;],', $texte) and @unserialize($texte) != false) or is_null($texte)) {
 			return $texte;
 		}
 		if (is_string($texte)
@@ -65,7 +65,7 @@ function protege_champ($texte) {
  *     - false : pas de squelette trouvé
  **/
 function existe_formulaire($form) {
-	if (substr($form, 0, 11) == "FORMULAIRE_") {
+	if (substr($form, 0, 11) == 'FORMULAIRE_') {
 		$form = strtolower(substr($form, 11));
 	} else {
 		$form = strtolower($form);
@@ -137,11 +137,11 @@ function balise_FORMULAIRE__dist($p) {
 /**
  * Balise dynamiques par défaut des formulaires
  *
- * @note 
- *     Deux moyen d'arriver ici : 
+ * @note
+ *     Deux moyen d'arriver ici :
  *     soit #FORMULAIRE_XX reroute avec 'FORMULAIRE_XX' ajoute en premier arg
  *     soit #FORMULAIRE_{xx}
- * 
+ *
  * @param string $form
  *     Nom du formulaire
  * @param array $args
@@ -207,7 +207,7 @@ function balise_FORMULAIRE__contexte($form, $args) {
 	$valeurs = formulaire__charger($form, $args, $je_suis_poste);
 
 	// si $valeurs n'est pas un tableau, le formulaire n'est pas applicable
-	// C'est plus fort qu'editable qui est gere par le squelette 
+	// C'est plus fort qu'editable qui est gere par le squelette
 	// Idealement $valeur doit etre alors un message explicatif.
 	if (!is_array($valeurs)) {
 		return is_string($valeurs) ? $valeurs : '';
@@ -216,7 +216,7 @@ function balise_FORMULAIRE__contexte($form, $args) {
 	// charger peut passer une action si le formulaire ne tourne pas sur self()
 	// ou une action vide si elle ne sert pas
 	$action = (isset($valeurs['action'])) ? $valeurs['action'] : self('&amp;', true);
-	// bug IEx : si action finit par / 
+	// bug IEx : si action finit par /
 	// IE croit que le <form ... action=../ > est autoferme
 	if (substr($action, -1) == '/') {
 		// on ajoute une ancre pour feinter IE, au pire ca tue l'ancre qui finit par un /
@@ -275,16 +275,16 @@ function balise_FORMULAIRE__contexte($form, $args) {
 	$valeurs['editable'] = ($valeurs['editable'] ? ' ' : '');
 
 	if ($je_suis_poste) {
-		$valeurs['message_erreur'] = "";
+		$valeurs['message_erreur'] = '';
 		if (isset($erreurs['message_erreur'])) {
 			$valeurs['message_erreur'] = $erreurs['message_erreur'];
 		}
 
-		$valeurs['message_ok'] = "";
+		$valeurs['message_ok'] = '';
 		if (isset($post["message_ok_$form"])) {
 			$valeurs['message_ok'] = $post["message_ok_$form"];
 		} elseif (isset($erreurs['message_ok'])) {
-			$valeurs['message_ok'] = $erreurs["message_ok"];
+			$valeurs['message_ok'] = $erreurs['message_ok'];
 		}
 
 		// accessibilite : encapsuler toutes les erreurs dans un role='alert'
@@ -292,9 +292,9 @@ function balise_FORMULAIRE__contexte($form, $args) {
 		// et si $k ne commence pas par un _ (c'est bien une vrai erreur sur un vrai champ)
 		if (html5_permis()) {
 			foreach ($erreurs as $k => $v) {
-				if (is_string($v) and strlen(trim($v)) and strpos($k,'_') !== 0) {
+				if (is_string($v) and strlen(trim($v)) and strpos($k, '_') !== 0) {
 					// on encapsule dans un span car ces messages sont en general simple, juste du texte, et deja dans un span dans le form
-					$valeurs['erreurs'][$k] = "<span role='alert'>".$erreurs[$k]."</span>";
+					$valeurs['erreurs'][$k] = "<span role='alert'>".$erreurs[$k].'</span>';
 				}
 			}
 		}
@@ -312,7 +312,7 @@ function balise_FORMULAIRE__contexte($form, $args) {
  * @return array
  */
 function formulaire__charger($form, $args, $poste) {
-	if ($charger_valeurs = charger_fonction("charger", "formulaires/$form", true)) {
+	if ($charger_valeurs = charger_fonction('charger', "formulaires/$form", true)) {
 		$valeurs = call_user_func_array($charger_valeurs, $args);
 	} else {
 		$valeurs = array();
@@ -330,7 +330,7 @@ function formulaire__charger($form, $args, $poste) {
 	if (is_array($valeurs) and isset($valeurs['_etapes'])) {
 		include_spip('inc/cvt_multietapes');
 		$valeurs = cvtmulti_formulaire_charger_etapes(
-			array('form' => $form, 'args' => $args, 'je_suis_poste' => $poste), 
+			array('form' => $form, 'args' => $args, 'je_suis_poste' => $poste),
 			$valeurs
 		);
 	}
@@ -375,7 +375,7 @@ function formulaire__charger($form, $args, $poste) {
  * @return bool
  */
 function formulaire__identifier($form, $args, $p) {
-	if ($identifier_args = charger_fonction("identifier", "formulaires/$form", true)) {
+	if ($identifier_args = charger_fonction('identifier', "formulaires/$form", true)) {
 		return call_user_func_array($identifier_args, $args) === call_user_func_array($identifier_args, $p);
 	}
 

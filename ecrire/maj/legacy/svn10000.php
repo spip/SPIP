@@ -13,7 +13,7 @@
 /**
  * Certains plugins appelaient ce fichier pour acceder a maj_lien(),
  * qui sert à la migration des tables vers SPIP 3.0
- * 
+ *
  * @package SPIP\Core\SQL\Upgrade
  */
 

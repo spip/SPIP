@@ -47,17 +47,16 @@ function action_logout_dist() {
 		// des sessions anonymes avec id_auteur=0 existent, mais elle n'ont pas de statut : double check
 		and isset($GLOBALS['visiteur_session']['statut'])
 	) {
-
 		// il faut un jeton pour fermer la session (eviter les CSRF)
 		if (!$jeton = _request('jeton')
 			or !verifier_jeton_logout($jeton, $GLOBALS['visiteur_session'])
 		) {
 			$jeton = generer_jeton_logout($GLOBALS['visiteur_session']);
-			$action = generer_url_action("logout", "jeton=$jeton");
+			$action = generer_url_action('logout', "jeton=$jeton");
 			$action = parametre_url($action, 'logout', _request('logout'));
 			$action = parametre_url($action, 'url', _request('url'));
-			include_spip("inc/minipres");
-			include_spip("inc/filtres");
+			include_spip('inc/minipres');
+			include_spip('inc/filtres');
 			$texte = bouton_action(_T('spip:icone_deconnecter'), $action);
 			$texte = "<div class='boutons'>$texte</div>";
 			$texte .= '<script type="text/javascript">document.write("<style>body{visibility:hidden;}</style>");window.document.forms[0].submit();</script>';
@@ -83,13 +82,14 @@ function action_logout_dist() {
 			and !$GLOBALS['ignore_auth_http']
 			and $GLOBALS['auth_can_disconnect']
 		) {
-			ask_php_auth(_T('login_deconnexion_ok'),
+			ask_php_auth(
+				_T('login_deconnexion_ok'),
 				_T('login_verifiez_navigateur'),
 				_T('login_retour_public'),
-				"redirect=" . _DIR_RESTREINT_ABS,
+				'redirect=' . _DIR_RESTREINT_ABS,
 				_T('login_test_navigateur'),
-				true);
-
+				true
+			);
 		}
 	}
 
@@ -116,8 +116,7 @@ function generer_jeton_logout($session, $alea = null) {
 	$jeton = md5($session['date_session']
 		. $session['id_auteur']
 		. $session['statut']
-		. $alea
-	);
+		. $alea);
 
 	return $jeton;
 }

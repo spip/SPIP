@@ -12,7 +12,7 @@
 
 /**
  * Gestion des mises à jour de bdd de SPIP
- * 
+ *
  * Mises à jour en 3.2
  *
  * @package SPIP\Core\SQL\Upgrade
@@ -23,5 +23,5 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 
 $GLOBALS['maj'][23375] = array(
-	array('sql_alter', "TABLE spip_auteurs CHANGE prefs prefs text"),
+	array('sql_alter', 'TABLE spip_auteurs CHANGE prefs prefs text'),
 );

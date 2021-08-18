@@ -56,7 +56,7 @@ function sql_error_backtrace($compil_info = false) {
 			$trace[0]['file'],// sourcefile
 			'', //nom
 			(isset($trace[1]) ? $trace[1]['function'] . "(){\n" : '')
-			. $trace[0]['function'] . "();"
+			. $trace[0]['function'] . '();'
 			. (isset($trace[1]) ? "\n}" : ''), //id_boucle
 			$trace[0]['line'], // ligne
 			$GLOBALS['spip_lang'], // lang
@@ -65,7 +65,7 @@ function sql_error_backtrace($compil_info = false) {
 		return $contexte_compil;
 	}
 
-	$message = count($trace) ? $trace[0]['file'] . " L" . $trace[0]['line'] : "";
+	$message = count($trace) ? $trace[0]['file'] . ' L' . $trace[0]['line'] : '';
 	$f = array();
 	while (count($trace) and $t = array_shift($trace)) {
 		if (in_array($t['function'], array('include_once', 'include_spip', 'find_in_path'))) {
@@ -74,7 +74,7 @@ function sql_error_backtrace($compil_info = false) {
 		$f[] = $t['function'];
 	}
 	if (count($f)) {
-		$message .= " [" . implode("(),", $f) . "()]";
+		$message .= ' [' . implode('(),', $f) . '()]';
 	}
 
 	return $message;
@@ -144,8 +144,10 @@ function sql_get_charset($charset, $serveur = '', $option = true) {
 			}
 		}
 	}
-	spip_log("SPIP ne connait pas les Charsets disponibles sur le serveur $serveur. Le serveur choisira seul.",
-		_LOG_AVERTISSEMENT);
+	spip_log(
+		"SPIP ne connait pas les Charsets disponibles sur le serveur $serveur. Le serveur choisira seul.",
+		_LOG_AVERTISSEMENT
+	);
 
 	return false;
 }
@@ -246,8 +248,17 @@ function sql_select(
 
 	$debug = (defined('_VAR_MODE') and _VAR_MODE == 'debug');
 	if (($option !== false) and !$debug) {
-		$res = $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur,
-			is_array($option) ? true : $option);
+		$res = $f(
+			$select,
+			$from,
+			$where,
+			$groupby,
+			$orderby,
+			$limit,
+			$having,
+			$serveur,
+			is_array($option) ? true : $option
+		);
 	} else {
 		$query = $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, false);
 		if (!$option) {
@@ -1725,7 +1736,7 @@ function sql_allfetsel(
  *
  * @return mixed
  *     Contenu de l'unique valeur demandee du premier enregistrement retourne
- *     ou NULL si la requete ne retourne aucun enregistrement 
+ *     ou NULL si la requete ne retourne aucun enregistrement
  *
  **/
 function sql_getfetsel(
@@ -1773,7 +1784,7 @@ function sql_getfetsel(
  *    Numero de version du serveur SQL
  **/
 function sql_version($serveur = '', $option = true) {
-	$row = sql_fetsel("version() AS n", '', '', '', '', '', '', $serveur);
+	$row = sql_fetsel('version() AS n', '', '', '', '', '', '', $serveur);
 
 	return ($row['n']);
 }
@@ -2017,7 +2028,7 @@ function sql_date_proche($champ, $interval, $unite, $serveur = '', $option = tru
 function sql_in($val, $valeurs, $not = '', $serveur = '', $option = true) {
 	if (!is_array($valeurs)) {
 		$valeurs = strval($valeurs);
-		if(isset($valeurs[0]) and $valeurs[0] === ',') {
+		if (isset($valeurs[0]) and $valeurs[0] === ',') {
 			$valeurs = substr($valeurs, 1);
 		}
 		// on explode en tableau pour pouvoir securiser le contenu
@@ -2028,12 +2039,14 @@ function sql_in($val, $valeurs, $not = '', $serveur = '', $option = true) {
 		return false;
 	}
 	// sql_quote produit une chaine dans tous les cas
-	$valeurs = array_filter($valeurs, function ($v) { return !is_array($v);});
+	$valeurs = array_filter($valeurs, function ($v) {
+ return !is_array($v);
+	});
 	$valeurs = array_unique($valeurs);
 	$valeurs = $f($valeurs);
 
 	if (!strlen(trim($valeurs))) {
-		return ($not ? "0=0" : '0=1');
+		return ($not ? '0=0' : '0=1');
 	}
 
 	$f = sql_serveur('in', $serveur, $option === 'continue' or $option === false);
@@ -2213,19 +2226,19 @@ function sql_test_date($type, $serveur = '', $option = true) {
  *     La date formatee
  */
 function sql_format_date($annee = 0, $mois = 0, $jour = 0, $h = 0, $m = 0, $s = 0, $serveur = '') {
-	$annee = sprintf("%04s", $annee);
-	$mois = sprintf("%02s", $mois);
+	$annee = sprintf('%04s', $annee);
+	$mois = sprintf('%02s', $mois);
 
-	if ($annee == "0000") {
+	if ($annee == '0000') {
 		$mois = 0;
 	}
-	if ($mois == "00") {
+	if ($mois == '00') {
 		$jour = 0;
 	}
 
-	return sprintf("%04u", $annee) . '-' . sprintf("%02u", $mois) . '-'
-	. sprintf("%02u", $jour) . ' ' . sprintf("%02u", $h) . ':'
-	. sprintf("%02u", $m) . ':' . sprintf("%02u", $s);
+	return sprintf('%04u', $annee) . '-' . sprintf('%02u', $mois) . '-'
+	. sprintf('%02u', $jour) . ' ' . sprintf('%02u', $h) . ':'
+	. sprintf('%02u', $m) . ':' . sprintf('%02u', $s);
 }
 
 

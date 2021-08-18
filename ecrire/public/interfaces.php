@@ -111,7 +111,7 @@ class Texte {
 	 *
 	 * @var string|array
 	 */
-	public $avant = "";
+	public $avant = '';
 
 	/**
 	 * Contenu après le texte.
@@ -120,7 +120,7 @@ class Texte {
 	 *
 	 * @var string|array
 	 */
-	public $apres = "";
+	public $apres = '';
 
 	/**
 	 * Numéro de ligne dans le code source du squelette
@@ -343,7 +343,7 @@ class Boucle {
 	 *
 	 * @var string
 	 */
-	public $partie = "";
+	public $partie = '';
 
 	/**
 	 * Nombre de divisions de la boucle, d'éléments à afficher,
@@ -354,7 +354,7 @@ class Boucle {
 	 *
 	 * @var string
 	 */
-	public $total_parties = "";
+	public $total_parties = '';
 
 	/**
 	 * Code PHP ajouté avant l'itération de boucle.
@@ -460,8 +460,8 @@ class Boucle {
 	public $order = array();
 	public $default_order = array();
 	public $date = 'date';
-	public $hash = "";
-	public $in = "";
+	public $hash = '';
+	public $in = '';
 	public $sous_requete = false;
 
 	/**
@@ -555,13 +555,13 @@ class Boucle {
 	 */
 	public $debug = [];
 
-	/** 
+	/**
 	 * Index de la boucle dont le champ présent dans cette boucle est originaire,
 	 * notamment si le champ a été trouve dans une boucle parente
-	 * 
+	 *
 	 * Tableau nom du champ => index de boucle
-	 * 
-	 * @var array $index_champ 
+	 *
+	 * @var array $index_champ
 	*/
 	public $index_champ = [];
 
@@ -789,14 +789,14 @@ class Idiome {
 	 *
 	 * @var string
 	 */
-	public $nom_champ = "";
+	public $nom_champ = '';
 
 	/**
 	 * Module de langue où chercher la clé de traduction. Exemple 'medias'
 	 *
 	 * @var string
 	 */
-	public $module = "";
+	public $module = '';
 
 	/**
 	 * Arguments à passer à la chaîne
@@ -1007,7 +1007,8 @@ function declarer_interfaces() {
 
 
 	// gerer l'affectation en 2 temps car si le pipe n'est pas encore declare, on ecrase les globales
-	$interfaces = pipeline('declarer_tables_interfaces',
+	$interfaces = pipeline(
+		'declarer_tables_interfaces',
 		array(
 			'table_des_tables' => $GLOBALS['table_des_tables'],
 			'exceptions_des_tables' => $GLOBALS['exceptions_des_tables'],
@@ -1017,7 +1018,8 @@ function declarer_interfaces() {
 			'exceptions_des_jointures' => $GLOBALS['exceptions_des_jointures'],
 			'table_des_traitements' => $GLOBALS['table_des_traitements'],
 			'table_statut' => $GLOBALS['table_statut'],
-		));
+		)
+	);
 	if ($interfaces) {
 		$GLOBALS['table_des_tables'] = $interfaces['table_des_tables'];
 		$GLOBALS['exceptions_des_tables'] = $interfaces['exceptions_des_tables'];

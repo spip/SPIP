@@ -256,7 +256,7 @@ function inc_traduire_dist($ori, $lang, $raw = false) {
 
 	// parcourir tous les modules jusqu'a ce qu'on trouve
 	foreach ($modules as $module) {
-		$var = "i18n_" . $module . "_" . $lang;
+		$var = 'i18n_' . $module . '_' . $lang;
 
 		if (empty($GLOBALS[$var])) {
 			charger_langue($lang, $module);

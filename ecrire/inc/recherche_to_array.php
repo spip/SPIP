@@ -35,13 +35,13 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 	include_spip('inc/autoriser');
 
 	$requete = array(
-		"SELECT" => array(),
-		"FROM" => array(),
-		"WHERE" => array(),
-		"GROUPBY" => array(),
-		"ORDERBY" => array(),
-		"LIMIT" => "",
-		"HAVING" => array()
+		'SELECT' => array(),
+		'FROM' => array(),
+		'WHERE' => array(),
+		'GROUPBY' => array(),
+		'ORDERBY' => array(),
+		'LIMIT' => '',
+		'HAVING' => array()
 	);
 
 	$table = sinon($options['table'], 'article');
@@ -63,19 +63,19 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 
 	// c'est un pis-aller : ca a peu de chance de marcher, mais mieux quand meme que en conservant la ','
 	// (aka ca marche au moins dans certains cas comme avec spip_formulaires_reponses_champs)
-	if (strpos($_id_table, ",") !== false) {
+	if (strpos($_id_table, ',') !== false) {
 		$_id_table = explode(',', $_id_table);
 		$_id_table = reset($_id_table);
 	}
 
-	$requete['SELECT'][] = "t." . $_id_table;
+	$requete['SELECT'][] = 't.' . $_id_table;
 	$a = array();
 	// Recherche fulltext
 	foreach ($champs as $champ => $poids) {
 		if (is_array($champ)) {
-			spip_log("requetes imbriquees interdites");
+			spip_log('requetes imbriquees interdites');
 		} else {
-			if (strpos($champ, ".") === false) {
+			if (strpos($champ, '.') === false) {
 				$champ = "t.$champ";
 			}
 			$requete['SELECT'][] = $champ;
@@ -83,17 +83,21 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 		}
 	}
 	if ($a) {
-		$requete['WHERE'][] = join(" OR ", $a);
+		$requete['WHERE'][] = join(' OR ', $a);
 	}
 	$requete['FROM'][] = table_objet_sql($table) . ' AS t';
 
 	$results = array();
 
 	$s = sql_select(
-		$requete['SELECT'], $requete['FROM'], $requete['WHERE'],
-		implode(" ", $requete['GROUPBY']),
-		$requete['ORDERBY'], $requete['LIMIT'],
-		$requete['HAVING'], $serveur
+		$requete['SELECT'],
+		$requete['FROM'],
+		$requete['WHERE'],
+		implode(' ', $requete['GROUPBY']),
+		$requete['ORDERBY'],
+		$requete['LIMIT'],
+		$requete['HAVING'],
+		$serveur
 	);
 
 	while ($t = sql_fetch($s, $serveur)
@@ -126,7 +130,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 					}
 					if ($options['score']) {
 						// compter les points avec un peu de discernement : on pondere par la longueur du match compte en chars
-						$score += $poids * strlen(implode('',array_column($regs, 0)));
+						$score += $poids * strlen(implode('', array_column($regs, 0)));
 					}
 
 					if ($options['matches']) {
@@ -179,11 +183,10 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 		$depart_associable = objet_associable($table);
 		foreach ($joints as $table_liee => $ids_trouves) {
 			// on peut definir une fonction de recherche jointe pour regler les cas particuliers
-			if (
-			!(
-				$rechercher_joints = charger_fonction("rechercher_joints_${table}_${table_liee}", "inc", true)
-				or $rechercher_joints = charger_fonction("rechercher_joints_objet_${table_liee}", "inc", true)
-				or $rechercher_joints = charger_fonction("rechercher_joints_${table}_objet_lie", "inc", true)
+			if (!(
+				$rechercher_joints = charger_fonction("rechercher_joints_${table}_${table_liee}", 'inc', true)
+				or $rechercher_joints = charger_fonction("rechercher_joints_objet_${table_liee}", 'inc', true)
+				or $rechercher_joints = charger_fonction("rechercher_joints_${table}_objet_lie", 'inc', true)
 			)
 			) {
 				$cle_arrivee = id_table_objet($table_liee);
@@ -191,34 +194,78 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 				$desc_arrivee = $trouver_table($table_arrivee, $serveur);
 				// cas simple : $cle_depart dans la table_liee
 				if (isset($desc_arrivee['field'][$cle_depart])) {
-					$s = sql_select("$cle_depart, $cle_arrivee", $desc_arrivee['table_sql'],
-						sql_in($cle_arrivee, array_keys($ids_trouves)), '', '', '', '', $serveur);
+					$s = sql_select(
+						"$cle_depart, $cle_arrivee",
+						$desc_arrivee['table_sql'],
+						sql_in($cle_arrivee, array_keys($ids_trouves)),
+						'',
+						'',
+						'',
+						'',
+						$serveur
+					);
 				} // cas simple : $cle_arrivee dans la table
 				elseif (isset($desc_depart['field'][$cle_arrivee])) {
-					$s = sql_select("$cle_depart, $cle_arrivee", $desc_depart['table_sql'],
-						sql_in($cle_arrivee, array_keys($ids_trouves)), '', '', '', '', $serveur);
+					$s = sql_select(
+						"$cle_depart, $cle_arrivee",
+						$desc_depart['table_sql'],
+						sql_in($cle_arrivee, array_keys($ids_trouves)),
+						'',
+						'',
+						'',
+						'',
+						$serveur
+					);
 				}
 				// sinon cherchons une table de liaison
 				// cas recherche principale article, objet lie document : passer par spip_documents_liens
 				elseif ($l = objet_associable($table_liee)) {
 					list($primary, $table_liens) = $l;
-					$s = sql_select("id_objet as $cle_depart, $primary as $cle_arrivee", $table_liens,
-						array("objet='$table'", sql_in($primary, array_keys($ids_trouves))), '', '', '', '', $serveur);
+					$s = sql_select(
+						"id_objet as $cle_depart, $primary as $cle_arrivee",
+						$table_liens,
+						array("objet='$table'", sql_in($primary, array_keys($ids_trouves))),
+						'',
+						'',
+						'',
+						'',
+						$serveur
+					);
 				} // cas recherche principale auteur, objet lie article: passer par spip_auteurs_liens
 				elseif ($l = $depart_associable) {
 					list($primary, $table_liens) = $l;
-					$s = sql_select("$primary as $cle_depart, id_objet as $cle_arrivee", $table_liens,
-						array("objet='$table_liee'", sql_in('id_objet', array_keys($ids_trouves))), '', '', '', '', $serveur);
+					$s = sql_select(
+						"$primary as $cle_depart, id_objet as $cle_arrivee",
+						$table_liens,
+						array("objet='$table_liee'", sql_in('id_objet', array_keys($ids_trouves))),
+						'',
+						'',
+						'',
+						'',
+						$serveur
+					);
 				} // cas table de liaison generique spip_xxx_yyy
-				elseif ($t = $trouver_table($table_arrivee . "_" . $table_depart, $serveur)
-					or $t = $trouver_table($table_depart . "_" . $table_arrivee, $serveur)
+				elseif ($t = $trouver_table($table_arrivee . '_' . $table_depart, $serveur)
+					or $t = $trouver_table($table_depart . '_' . $table_arrivee, $serveur)
 				) {
-					$s = sql_select("$cle_depart,$cle_arrivee", $t["table_sql"], sql_in($cle_arrivee, array_keys($ids_trouves)),
-						'', '', '', '', $serveur);
+					$s = sql_select(
+						"$cle_depart,$cle_arrivee",
+						$t['table_sql'],
+						sql_in($cle_arrivee, array_keys($ids_trouves)),
+						'',
+						'',
+						'',
+						'',
+						$serveur
+					);
 				}
 			} else {
-				list($cle_depart, $cle_arrivee, $s) = $rechercher_joints($table, $table_liee, array_keys($ids_trouves),
-					$serveur);
+				list($cle_depart, $cle_arrivee, $s) = $rechercher_joints(
+					$table,
+					$table_liee,
+					array_keys($ids_trouves),
+					$serveur
+				);
 			}
 
 			while ($t = is_array($s) ? array_shift($s) : sql_fetch($s)) {

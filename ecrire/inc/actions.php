@@ -143,5 +143,4 @@ function ajax_retour($corps, $content_type = null) {
 	$fin = '';
 
 	echo $debut, $corps, $fin, $e;
-
 }

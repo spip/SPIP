@@ -59,11 +59,11 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect, $sui
 
 	// De preference ce qui est marque <intro>...</intro>
 	$intro = '';
-	$texte = preg_replace(",(</?)intro>,i", "\\1intro>", $texte); // minuscules
-	while ($fin = strpos($texte, "</intro>")) {
+	$texte = preg_replace(',(</?)intro>,i', "\\1intro>", $texte); // minuscules
+	while ($fin = strpos($texte, '</intro>')) {
 		$zone = substr($texte, 0, $fin);
-		$texte = substr($texte, $fin + strlen("</intro>"));
-		if ($deb = strpos($zone, "<intro>") or substr($zone, 0, 7) == "<intro>") {
+		$texte = substr($texte, $fin + strlen('</intro>'));
+		if ($deb = strpos($zone, '<intro>') or substr($zone, 0, 7) == '<intro>') {
 			$zone = substr($zone, $deb + 7);
 		}
 		$intro .= $zone;
@@ -86,7 +86,7 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect, $sui
 		if (strpos("\n" . $texte, "\n|") === false
 			and strlen($texte) > 2.5 * $longueur
 		) {
-			if (strpos($texte, "<multi") !== false) {
+			if (strpos($texte, '<multi') !== false) {
 				$texte = extraire_multi($texte);
 			}
 			$texte = couper($texte, 2 * $longueur);
@@ -115,9 +115,8 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect, $sui
 
 	// et reparagrapher si necessaire (coherence avec le cas descriptif)
 	// une introduction a tojours un <p>
-	if ($GLOBALS['toujours_paragrapher']) // Fermer les paragraphes
-	{
-		$texte = paragrapher($texte, $GLOBALS['toujours_paragrapher']);
+	if ($GLOBALS['toujours_paragrapher']) { // Fermer les paragraphes
+	$texte = paragrapher($texte, $GLOBALS['toujours_paragrapher']);
 	}
 
 	return $texte;
@@ -291,13 +290,13 @@ function filtre_pagination_affiche_texte_lien_page_dist($type_pagination, $numer
 function lister_objets_avec_logos($type) {
 
 	$objet = objet_type($type);
-	$ids = sql_allfetsel("L.id_objet", "spip_documents AS D JOIN spip_documents_liens AS L ON L.id_document=D.id_document", "D.mode=".sql_quote('logoon')." AND L.objet=".sql_quote($objet));
+	$ids = sql_allfetsel('L.id_objet', 'spip_documents AS D JOIN spip_documents_liens AS L ON L.id_document=D.id_document', 'D.mode='.sql_quote('logoon').' AND L.objet='.sql_quote($objet));
 	if ($ids) {
 		$ids = array_column($ids, 'id_objet');
 		return implode(',', $ids);
 	}
 	else {
-		return "0";
+		return '0';
 	}
 }
 
@@ -337,7 +336,7 @@ function calculer_notes() {
  * @param $objet_lien
  * @return string
  */
-function retrouver_rang_lien($objet_source, $ids, $objet_lie, $idl, $objet_lien){
+function retrouver_rang_lien($objet_source, $ids, $objet_lie, $idl, $objet_lien) {
 	$res = lister_objets_liens($objet_source, $objet_lie, $idl, $objet_lien);
 	$res = array_column($res, 'rang_lien', $objet_source);
 
@@ -428,9 +427,9 @@ function tri_protege_champ($t) {
  * @param array $from
  * @return string
  */
-function tri_champ_order($t, $from = null, $senstri='') {
+function tri_champ_order($t, $from = null, $senstri = '') {
 	if (strncmp($t, 'multi ', 6) == 0) {
-		return "multi";
+		return 'multi';
 	}
 
 	$champ = $t;
@@ -500,12 +499,12 @@ function tri_champ_select($t) {
  * @param string $serveur
  * @return string
  */
-function formate_liste_critere_par_ordre_liste($valeurs, $serveur = ''){
-	if (!is_array($valeurs)){
+function formate_liste_critere_par_ordre_liste($valeurs, $serveur = '') {
+	if (!is_array($valeurs)) {
 		return '';
 	}
 	$f = sql_serveur('quote', $serveur, true);
-	if (!is_string($f) or !$f){
+	if (!is_string($f) or !$f) {
 		return '';
 	}
 	$valeurs = implode(',', array_map($f, array_unique($valeurs)));

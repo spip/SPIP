@@ -47,7 +47,7 @@ function index_boucle($p) {
 			return $p->nom_boucle;
 		}
 		return '';
-	} 
+	}
 	return $p->id_boucle;
 }
 
@@ -57,7 +57,7 @@ function index_boucle($p) {
  *
  * - `#MABALISE` : l'index sera celui de la boucle parente
  * - `#_autreboucle:MABALISE` : l'index est celui de la boucle _autreboucle, si elle existe
- * 
+ *
  * @example
  *     Dans une balise dynamique ou calculée :
  *     ```
@@ -77,7 +77,7 @@ function index_boucle_mere($p) {
 			return $p->nom_boucle;
 		}
 		return '';
-	} 
+	}
 	if (!empty($p->descr['id_mere'])) {
 		return $p->descr['id_mere'];
 	}
@@ -157,7 +157,7 @@ function index_pile(
 			}
 			// renseigner la boucle source de ce champ pour les traitements
 			$boucles[$idb_origine]->index_champ[$nom_champ_origine] = $idb;
-			$champ = '$Pile[$SP' . ($i ? "-$i" : "") . '][\'' . $c . '\']';
+			$champ = '$Pile[$SP' . ($i ? "-$i" : '') . '][\'' . $c . '\']';
 			if (!$joker) {
 				return index_compose($conditionnel, $champ);
 			}
@@ -198,7 +198,7 @@ function index_pile(
 function index_compose($conditionnel, $defaut) {
 	while ($c = array_pop($conditionnel)) {
 		// si on passe defaut = '', ne pas générer d'erreur de compilation.
-		$defaut = "($c:(" . ($defaut ? $defaut : "''") . "))";
+		$defaut = "($c:(" . ($defaut ? $defaut : "''") . '))';
 	}
 
 	return $defaut;
@@ -287,7 +287,7 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles, &$joker) {
 					// [todo] Ne pas lancer que lorsque il y a des jointures explicites !!!!
 					// fonctionnel, il suffit d'utiliser $boucles[$idb]->jointures au lieu de jointures_explicites
 					// mais est-ce ce qu'on veut ?
-					$jointures = preg_split("/\s+/", $boucles[$idb]->jointures_explicites);
+					$jointures = preg_split('/\s+/', $boucles[$idb]->jointures_explicites);
 					if ($cle = trouver_jointure_champ($nom_champ, $boucles[$idb], $jointures)) {
 						$t = trouver_champ_exterieur($nom_champ, $boucles[$idb]->from, $boucles[$idb]);
 					}
@@ -296,10 +296,12 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles, &$joker) {
 			if ($t) {
 				// si on a trouvé une jointure possible, on fait comme
 				// si c'était une exception pour le champ demandé
-				return index_exception($boucles[$idb],
+				return index_exception(
+					$boucles[$idb],
 					$desc,
 					$nom_champ,
-					array($t[1]['id_table'], reset($t[2])));
+					array($t[1]['id_table'], reset($t[2]))
+				);
 			}
 
 			return array('', '');
@@ -529,7 +531,7 @@ function calculer_balise_DEFAUT_dist($nom, $p) {
 	// ET s'il n'y a ni filtre ni etoile
 	// ALORS retourner la couleur.
 	// Ca permet si l'on veut vraiment de recuperer [(#ACCEDE*)]
-	if (preg_match("/^[A-F]{1,6}$/i", $nom)
+	if (preg_match('/^[A-F]{1,6}$/i', $nom)
 		and !$p->etoile
 		and !$p->fonctions
 	) {
@@ -597,15 +599,18 @@ function calculer_balise_dynamique($p, $nom, $l, $supp = array()) {
 		// construire la liste d'arguments comme pour un filtre
 		$param = compose_filtres_args($p, $c, ',');
 	} else {
-		$param = "";
+		$param = '';
 	}
 	$collecte = collecter_balise_dynamique($l, $p, $nom);
 
-	$p->code = sprintf(CODE_EXECUTER_BALISE, $nom,
+	$p->code = sprintf(
+		CODE_EXECUTER_BALISE,
+		$nom,
 		join(',', $collecte),
 		($collecte ? $param : substr($param, 1)), # virer la virgule
 		memoriser_contexte_compil($p),
-		(!$supp ? '' : (', ' . join(',', $supp))));
+		(!$supp ? '' : (', ' . join(',', $supp)))
+	);
 
 	$p->interdire_scripts = false;
 
@@ -673,7 +678,7 @@ function trouver_nom_serveur_distant($p) {
 		}
 	}
 
-	return "";
+	return '';
 }
 
 
@@ -772,7 +777,7 @@ function champs_traitements($p) {
 
 	// Si une boucle DOCUMENTS{doublons} est presente dans le squelette,
 	// ou si in INCLURE contient {doublons}
-	// on insere une fonction de remplissage du tableau des doublons 
+	// on insere une fonction de remplissage du tableau des doublons
 	// dans les filtres propre() ou typo()
 	// (qui traitent les raccourcis <docXX> referencant les docs)
 
@@ -846,7 +851,7 @@ function compose_filtres(&$p, $code) {
 			$image_miette = false;
 		}
 
-		// recuperer les arguments du filtre, 
+		// recuperer les arguments du filtre,
 		// a separer par "," ou ":" dans le cas du filtre "?{a,b}"
 		$countfiltre = count($filtre);
 		if ($fonc !== '?') {
@@ -904,7 +909,7 @@ function filtre_logique($fonc, $code, $arg) {
 
 // https://code.spip.net/@compose_filtres_args
 function compose_filtres_args($p, $args, $sep) {
-	$arglist = "";
+	$arglist = '';
 	foreach ($args as $arg) {
 		$arglist .= $sep .
 			calculer_liste($arg, $p->descr, $p->boucles, $p->id_boucle);
@@ -957,7 +962,7 @@ function rindex_pile($p, $champ, $motif) {
 	while ($b != '') {
 		foreach ($p->boucles[$b]->criteres as $critere) {
 			if ($critere->op == $motif) {
-				$p->code = '$Pile[$SP' . (($n == 0) ? "" : "-$n") .
+				$p->code = '$Pile[$SP' . (($n == 0) ? '' : "-$n") .
 					"]['$champ']";
 				$b = '';
 				break 2;
@@ -977,13 +982,13 @@ function rindex_pile($p, $champ, $motif) {
 	return $p;
 }
 
-/** 
+/**
  * Retourne le nom de la balise indiquée pour les messages d’erreurs
  * @param Pile $p Description de la balise
  * @param string $champ Nom du champ
  * @return string Nom de la balise, avec indication de boucle explicite si présent.
  */
-function zbug_presenter_champ($p, $champ = "") {
+function zbug_presenter_champ($p, $champ = '') {
 	$balise = $champ ? $champ : $p->nom_champ;
 	$explicite = $explicite = $p->nom_boucle ? $p->nom_boucle . ':' : '';
 	return "#{$explicite}{$balise}";

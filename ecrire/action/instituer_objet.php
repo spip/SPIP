@@ -16,7 +16,7 @@
  * @package SPIP\Core\PuceStatut
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
@@ -45,9 +45,7 @@ function action_instituer_objet_dist($arg = null) {
 	if ($id_objet = intval($id_objet)
 		and autoriser('instituer', $objet, $id_objet, '', array('statut' => $statut))
 	) {
-
 		include_spip('action/editer_objet');
 		objet_modifier($objet, $id_objet, array('statut' => $statut));
 	}
-
 }

@@ -41,7 +41,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Texte
  */
 function sandbox_composer_texte($texte, &$p) {
-	$code = "'" . str_replace(array("\\", "'"), array("\\\\", "\\'"), $texte) . "'";
+	$code = "'" . str_replace(array('\\', "'"), array('\\\\', "\\'"), $texte) . "'";
 
 	return $code;
 }
@@ -58,7 +58,7 @@ function sandbox_composer_texte($texte, &$p) {
  *     Balise qui appelle ce filtre
  * @return string
  */
-function sandbox_composer_filtre($fonc, $code, $arglist, &$p, $nb_arg_droite=1000) : string {
+function sandbox_composer_filtre($fonc, $code, $arglist, &$p, $nb_arg_droite = 1000) : string {
 	if (isset($GLOBALS['spip_matrice'][$fonc])) {
 		$code = "filtrer('$fonc',$code$arglist)";
 	}
@@ -66,7 +66,6 @@ function sandbox_composer_filtre($fonc, $code, $arglist, &$p, $nb_arg_droite=100
 	// le filtre est defini sous forme de fonction ou de methode
 	// par ex. dans inc_texte, inc_filtres ou mes_fonctions
 	elseif ($f = chercher_filtre($fonc)) {
-
 		// cas particulier : le filtre |set doit acceder a la $Pile
 		// proto: filtre_set(&$Pile, $val, $args...)
 		if (strpbrk($f, ':')) { // Class::method
@@ -85,8 +84,8 @@ function sandbox_composer_filtre($fonc, $code, $arglist, &$p, $nb_arg_droite=100
 		$nb_args_f = $nb_arg_gauche+$nb_arg_droite;
 		$min_f = $refl->getNumberOfRequiredParameters();
 		if (($nb_args_f < $min_f)) {
-			$msg_args = ['filtre' => texte_script ($fonc), 'nb'=> $min_f - $nb_args_f];
-			erreur_squelette ([ 'zbug_erreur_filtre_nbarg_min', $msg_args], $p);
+			$msg_args = ['filtre' => texte_script($fonc), 'nb'=> $min_f - $nb_args_f];
+			erreur_squelette([ 'zbug_erreur_filtre_nbarg_min', $msg_args], $p);
 		}
 	}
 	// le filtre n'existe pas,
@@ -106,8 +105,7 @@ else {
 	$contexte_inclus = %s;
 	include $path;
 }
-'
-);
+');
 
 /**
  * Composer le code d'inclusion PHP

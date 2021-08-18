@@ -32,8 +32,7 @@ include_spip('inc/config');
  * @return array
  */
 function cvtconf_formulaire_charger($flux) {
-	if (
-		$form = $flux['args']['form']
+	if ($form = $flux['args']['form']
 		and strncmp($form, 'configurer_', 11) == 0 // un #FORMULAIRE_CONFIGURER_XXX
 	) {
 		// Pour tous les formulaires CONFIGURER, ayant une fonction charger ou pas, on teste si autorisé
@@ -43,7 +42,7 @@ function cvtconf_formulaire_charger($flux) {
 		}
 
 		// S'il n'y a pas de fonction charger(), on génère un contexte automatiquement
-		if (!charger_fonction("charger", "formulaires/$form/", true)) {
+		if (!charger_fonction('charger', "formulaires/$form/", true)) {
 			$flux['data'] = cvtconf_formulaires_configurer_recense($form);
 			$flux['data']['editable'] = true;
 			if (_request('var_mode') == 'configurer' and autoriser('webmestre')) {
@@ -68,7 +67,7 @@ function cvtconf_formulaire_charger($flux) {
 function cvtconf_formulaire_traiter($flux) {
 	if ($form = $flux['args']['form']
 		and strncmp($form, 'configurer_', 11) == 0 // un #FORMULAIRE_CONFIGURER_XXX
-		and !charger_fonction("traiter", "formulaires/$form/", true) // sans fonction traiter()
+		and !charger_fonction('traiter', "formulaires/$form/", true) // sans fonction traiter()
 	) {
 		$trace = cvtconf_formulaires_configurer_enregistre($form, $flux['args']['args']);
 		$flux['data'] = array('message_ok' => _T('config_info_enregistree') . $trace, 'editable' => true);
@@ -94,7 +93,7 @@ function cvtconf_formulaires_configurer_enregistre($form, $args) {
 	// charger les valeurs
 	// ce qui permet de prendre en charge une fonction charger() existante
 	// qui prend alors la main sur l'auto detection
-	if ($charger_valeurs = charger_fonction("charger", "formulaires/$form/", true)) {
+	if ($charger_valeurs = charger_fonction('charger', "formulaires/$form/", true)) {
 		$valeurs = call_user_func_array($charger_valeurs, $args);
 	}
 	$valeurs = pipeline(
@@ -172,7 +171,6 @@ function cvtconf_formulaires_configurer_recense($form) {
 	if ($f = find_in_path($form . '.' . _EXTENSION_SQUELETTES, 'formulaires/')
 		and lire_fichier($f, $contenu)
 	) {
-
 		for ($i = 0; $i < 2; $i++) {
 			// a la seconde iteration, evaluer le fond avec les valeurs deja trouvees
 			// permet de trouver aussi les name="#GET{truc}"
@@ -180,13 +178,15 @@ function cvtconf_formulaires_configurer_recense($form) {
 				$contenu = recuperer_fond("formulaires/$form", $valeurs);
 			}
 
-			$balises = array_merge(extraire_balises($contenu, 'input'),
+			$balises = array_merge(
+				extraire_balises($contenu, 'input'),
 				extraire_balises($contenu, 'textarea'),
-				extraire_balises($contenu, 'select'));
+				extraire_balises($contenu, 'select')
+			);
 
 			foreach ($balises as $b) {
 				if ($n = extraire_attribut($b, 'name')
-					and preg_match(",^([\w\-]+)(\[\w*\])?$,", $n, $r)
+					and preg_match(',^([\w\-]+)(\[\w*\])?$,', $n, $r)
 					and !in_array($n, array('formulaire_action', 'formulaire_action_args'))
 					and extraire_attribut($b, 'type') !== 'submit'
 				) {
@@ -225,8 +225,8 @@ function cvtconf_configurer_stocker($form, $valeurs, $store) {
 	}
 
 	$prefixe = ($prefixe ? $prefixe . '_' : '');
-	$table = ($table) ? "/$table/" : "";
-	$casier = ($casier) ? rtrim($casier, '/') . '/' : ""; // slash final, sinon rien
+	$table = ($table) ? "/$table/" : '';
+	$casier = ($casier) ? rtrim($casier, '/') . '/' : ''; // slash final, sinon rien
 
 	foreach ($store as $k => $v) {
 		ecrire_config("$stockage$table$prefixe$casier$k", $v);
@@ -247,7 +247,7 @@ function cvtconf_configurer_stocker($form, $valeurs, $store) {
 function cvtconf_configurer_lire_meta($form, &$valeurs) {
 	list($table, $casier, $prefixe, $stockage) = cvtconf_definir_configurer_conteneur($form, $valeurs);
 
-	$table = ($table) ? "/$table/" : "";
+	$table = ($table) ? "/$table/" : '';
 	$prefixe = ($prefixe ? $prefixe . '_' : '');
 	if ($casier) {
 		$meta = lire_config("$stockage$table$prefixe$casier");

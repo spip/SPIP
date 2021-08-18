@@ -46,7 +46,8 @@ if (test_espace_prive()) {
  **/
 function f_jQuery($texte) {
 	$x = '';
-	$jquery_plugins = pipeline('jquery_plugins',
+	$jquery_plugins = pipeline(
+		'jquery_plugins',
 		array(
 			'javascript/jquery.js',
 			'javascript/jquery.form.js',
@@ -55,7 +56,8 @@ function f_jQuery($texte) {
 			'javascript/ajaxCallback.js',
 			'javascript/js.cookie.js',
 			'javascript/jquery.cookie.js'
-		));
+		)
+	);
 	foreach (array_unique($jquery_plugins) as $script) {
 		if ($script = find_in_path(supprimer_timestamp($script))) {
 			$script = timestamp($script);
@@ -100,7 +102,7 @@ function f_surligne($texte) {
 	if (isset($_SERVER['HTTP_REFERER'])) {
 		$_SERVER['HTTP_REFERER'] = preg_replace(',[^\w\,/#&;:-]+,', ' ', $_SERVER['HTTP_REFERER']);
 	}
-	if ($rech){
+	if ($rech) {
 		$rech = preg_replace(',[^\w\,/#&;:-]+,', ' ', $rech);
 	}
 
@@ -199,9 +201,9 @@ function f_admin($texte) {
 		include_spip('inc/filtres'); // pour http_img_pack
 		$x = "<div class='spip-previsu' "
 			. http_style_background('preview-32.png', '', 32)
-			. ">"
+			. '>'
 			. _T('previsualisation')
-			. "</div>";
+			. '</div>';
 		if (!$pos = stripos($texte, '</body>')) {
 			$pos = strlen($texte);
 		}
