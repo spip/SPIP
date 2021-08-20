@@ -106,14 +106,15 @@ function debut_droite() {
  * @return string
  *     Code HTML
  **/
-function liste_objets_bloques($exec, $contexte = array(), $auteur = null) {
+function liste_objets_bloques($exec, $contexte = [], $auteur = null) {
 	$res = '';
 	if ($GLOBALS['meta']['articles_modif'] != 'non') {
 		include_spip('inc/drapeau_edition');
 		if (is_null($auteur)) {
 			$auteur = $GLOBALS['visiteur_session'];
 		}
-		if ($en_cours = trouver_objet_exec($exec)
+		if (
+			$en_cours = trouver_objet_exec($exec)
 			and $en_cours['edition']
 			and $type = $en_cours['type']
 			and ((isset($contexte[$en_cours['id_table_objet']]) and $id = $contexte[$en_cours['id_table_objet']])
@@ -126,7 +127,7 @@ function liste_objets_bloques($exec, $contexte = array(), $auteur = null) {
 
 		$objets_ouverts = liste_drapeau_edition($auteur['id_auteur']);
 		if (count($objets_ouverts)) {
-			$res .= recuperer_fond('prive/objets/liste/objets-en-edition', array(), array('ajax' => true));
+			$res .= recuperer_fond('prive/objets/liste/objets-en-edition', [], ['ajax' => true]);
 		}
 	}
 
@@ -252,19 +253,19 @@ function info_copyright() {
 
 	// et la version de l'ecran de securite
 	$secu = defined('_ECRAN_SECURITE')
-		? '<br />' . _T('ecran_securite', array('version' => _ECRAN_SECURITE))
+		? '<br />' . _T('ecran_securite', ['version' => _ECRAN_SECURITE])
 		: '';
 
 	return _T(
 		'info_copyright',
-		array(
+		[
 			'spip' => "<b>SPIP $version</b> ",
 			'lien_gpl' =>
 				"<a href='" . generer_url_ecrire(
 					'aide',
 					'aide=licence&var_lang=' . $GLOBALS['spip_lang']
 				) . "' class=\"aide popin\">" . _T('info_copyright_gpl') . '</a>'
-		)
+		]
 	)
 	. $secu;
 }

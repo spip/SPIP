@@ -10,7 +10,6 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -39,12 +38,12 @@ function enfant_rub($collection, $debut = 0, $limite = 500) {
 		include_spip('inc/filtres_images_mini');
 	}
 
-	$res = array();
+	$res = [];
 
 	$result = sql_select(
 		'id_rubrique, id_parent, titre, descriptif, lang',
 		'spip_rubriques',
-		'id_parent='.intval($collection),
+		'id_parent=' . intval($collection),
 		'',
 		'0+titre,titre',
 		"$debut,$limite"
@@ -117,7 +116,7 @@ function enfant_rub($collection, $debut = 0, $limite = 500) {
  *  Le contenu du bloc dépliable
  */
 function sous_enfant_rub($collection2) {
-	$nb = sql_countsel('spip_rubriques', 'id_parent='.intval($collection2));
+	$nb = sql_countsel('spip_rubriques', 'id_parent=' . intval($collection2));
 
 	$retour = '';
 	$pagination = '';
@@ -145,7 +144,7 @@ function sous_enfant_rub($collection2) {
 	$result = sql_select(
 		'id_rubrique, id_parent, titre, lang',
 		'spip_rubriques',
-		'id_parent='.intval($collection2),
+		'id_parent=' . intval($collection2),
 		'',
 		'0+titre,titre',
 		"$debut,$limite"
@@ -200,7 +199,7 @@ function afficher_enfant_rub($id_rubrique = 0) {
 	$debut = 0;
 	$limite = 500;
 
-	$nb = sql_countsel('spip_rubriques', 'id_parent='.intval($id_rubrique));
+	$nb = sql_countsel('spip_rubriques', 'id_parent=' . intval($id_rubrique));
 
 	if ($nb > $limite) {
 		$debut = _request('debut_rubrique' . $id_rubrique) ? _request('debut_rubrique' . $id_rubrique) : $debut;

@@ -70,7 +70,7 @@ function balise_LOGO__dist($p) {
 	}
 
 	$fichier = ($p->etoile === '**') ? -1 : 0;
-	$coord = array();
+	$coord = [];
 	$align = $lien = '';
 	$mode_logo = '';
 
@@ -82,9 +82,9 @@ function balise_LOGO__dist($p) {
 				$n = $a[0]->texte;
 				if (is_numeric($n)) {
 					$coord[] = $n;
-				} elseif (in_array($n, array('top', 'left', 'right', 'center', 'bottom'))) {
+				} elseif (in_array($n, ['top', 'left', 'right', 'center', 'bottom'])) {
 					$align = $n;
-				} elseif (in_array($n, array('auto', 'icone', 'apercu', 'vignette'))) {
+				} elseif (in_array($n, ['auto', 'icone', 'apercu', 'vignette'])) {
 					$mode_logo = $n;
 				}
 			} else {
@@ -173,5 +173,5 @@ function logo_survol($id_objet, $_id_objet, $type, $align, $fichier, $_lien, $p,
 
 	$align = preg_replace(',\W,', '', $align);
 
-	return "quete_html_logo($code, '$align', " .($_lien ? $_lien : "''") .')';
+	return "quete_html_logo($code, '$align', " . ($_lien ? $_lien : "''") . ')';
 }

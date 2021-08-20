@@ -110,13 +110,13 @@ function public_parametrer_dist($fond, $contexte = '', $cache = '', $connect = '
 
 		// Passer le nom du cache pour produire sa destruction automatique
 		try {
-			$page = $fonc(array('cache' => $cache), array($contexte));
+			$page = $fonc(['cache' => $cache], [$contexte]);
 		} catch (Throwable $e) {
 			$msg = _T('zbug_erreur_execution_page') . " $sourcefile";
 			$full_msg = $msg . ' | File ' . $e->getFile() . ' Line ' . $e->getLine() . ' : ' . $e->getMessage();
 			$full_msg = str_replace(_ROOT_RACINE, '[…]/', $full_msg);
 			$corps = "<pre>$msg</pre>";
-			$page = analyse_resultat_skel($fond, array('cache' => $cache), $corps, $sourcefile);
+			$page = analyse_resultat_skel($fond, ['cache' => $cache], $corps, $sourcefile);
 			erreur_squelette($full_msg);
 			unset($msg, $full_msg, $corps);
 		}
@@ -146,9 +146,9 @@ function public_parametrer_dist($fond, $contexte = '', $cache = '', $connect = '
 		spip_log("calcul ($profile) [$skel] $infos"
 			. ' (' . strlen($page['texte']) . ' octets)');
 
-		if (defined('_CALCUL_PROFILER') and intval($profile)>_CALCUL_PROFILER) {
+		if (defined('_CALCUL_PROFILER') and intval($profile) > _CALCUL_PROFILER) {
 			spip_log("calcul ($profile) [$skel] $infos"
-				.' ('.strlen($page['texte']).' octets) | '.$_SERVER['REQUEST_URI'], 'profiler'._LOG_AVERTISSEMENT);
+				. ' (' . strlen($page['texte']) . ' octets) | ' . $_SERVER['REQUEST_URI'], 'profiler' . _LOG_AVERTISSEMENT);
 		}
 
 		if ($debug) {
@@ -157,7 +157,8 @@ function public_parametrer_dist($fond, $contexte = '', $cache = '', $connect = '
 			$GLOBALS['debug_objets']['resultat'][$fonc . 'tout'] = $t;
 			$GLOBALS['debug_objets']['courant'] = $courant;
 			$GLOBALS['debug_objets']['profile'][$sourcefile] = $profile;
-			if ($GLOBALS['debug_objets']['sourcefile']
+			if (
+				$GLOBALS['debug_objets']['sourcefile']
 				and (_request('var_mode_objet') == $fonc)
 				and (_request('var_mode_affiche') == 'resultat')
 			) {
@@ -209,7 +210,7 @@ function public_parametrer_dist($fond, $contexte = '', $cache = '', $connect = '
  * @return string
 */
 function presenter_contexte($contexte, $profondeur_max = 1, $max_lines = 0) {
-	$infos = array();
+	$infos = [];
 	$line = 0;
 	foreach ($contexte as $var => $val) {
 		$line++;
@@ -272,7 +273,8 @@ function tester_redirection($fond, $contexte, $connect) {
  * @return array|bool
  */
 function public_tester_redirection_dist($fond, $contexte, $connect) {
-	if ($fond == 'article'
+	if (
+		$fond == 'article'
 		and !empty($contexte['id_article'])
 		and $id_article = intval($contexte['id_article'])
 	) {
@@ -295,7 +297,7 @@ function public_tester_redirection_dist($fond, $contexte, $connect) {
 				}
 				$url = str_replace('&amp;', '&', $url);
 
-				return array(
+				return [
 					'texte' => '<'
 						. "?php include_spip('inc/headers');redirige_par_entete('"
 						. texte_script($url)
@@ -303,7 +305,7 @@ function public_tester_redirection_dist($fond, $contexte, $connect) {
 						. '?' . '>',
 					'process_ins' => 'php',
 					'status' => $status
-				);
+				];
 			}
 		}
 	}

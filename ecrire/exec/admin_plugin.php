@@ -93,14 +93,14 @@ function admin_plug_args($quoi, $erreur, $format) {
 	echo $commencer_page(_T('icone_admin_plugin'), 'configuration', 'plugin');
 
 	echo debut_gauche('plugin', true);
-	echo recuperer_fond('prive/squelettes/navigation/configurer', array('exec' => 'admin_plugin'));
+	echo recuperer_fond('prive/squelettes/navigation/configurer', ['exec' => 'admin_plugin']);
 
 	echo pipeline(
 		'affiche_gauche',
-		array(
-			'args' => array('exec' => 'admin_plugin'),
+		[
+			'args' => ['exec' => 'admin_plugin'],
 			'data' => afficher_librairies()
-		)
+		]
 	);
 
 	echo debut_droite('plugin', true);
@@ -147,7 +147,7 @@ function admin_plug_args($quoi, $erreur, $format) {
 			echo '<p>' . _T('texte_presente_plugin') . '</p>';
 		} else {
 			if (!@is_dir(_DIR_PLUGINS)) {
-				echo '<p>' . _T('plugin_info_automatique_ftp', array('rep' => joli_repertoire(_DIR_PLUGINS)))
+				echo '<p>' . _T('plugin_info_automatique_ftp', ['rep' => joli_repertoire(_DIR_PLUGINS)])
 					. ' &mdash; ' . _T('plugin_info_automatique_creer') . '</p>';
 			}
 		}
@@ -177,7 +177,7 @@ function admin_plug_args($quoi, $erreur, $format) {
 
 	if (empty($format)) {
 		$format = 'liste';
-	} elseif (!in_array($format, array('liste', 'repertoires'))) {
+	} elseif (!in_array($format, ['liste', 'repertoires'])) {
 		$format = 'repertoires';
 	}
 
@@ -231,10 +231,10 @@ function admin_plug_args($quoi, $erreur, $format) {
 
 	echo pipeline(
 		'affiche_milieu',
-		array(
-			'args' => array('exec' => 'admin_plugin'),
+		[
+			'args' => ['exec' => 'admin_plugin'],
 			'data' => ''
-		)
+		]
 	);
 
 	echo fin_gauche(), fin_page();
@@ -256,13 +256,13 @@ function affiche_les_plugins_verrouilles($actifs) {
 	}
 
 	$afficher = charger_fonction('afficher_liste', 'plugins');
-	$liste = $afficher(self(), $liste, array(), $actifs, _DIR_PLUGINS_DIST);
+	$liste = $afficher(self(), $liste, [], $actifs, _DIR_PLUGINS_DIST);
 
 	return
 		"<div id='plugins_dist'>"
 		. debut_cadre_trait_couleur('', true, '', _T('plugins_liste_dist'), 'liste_plugins_dist')
 		. '<p>'
-		. _T('plugin_info_plugins_dist_1', array('plugins_dist' => joli_repertoire(_DIR_PLUGINS_DIST)))
+		. _T('plugin_info_plugins_dist_1', ['plugins_dist' => joli_repertoire(_DIR_PLUGINS_DIST)])
 		. '<br />' . _T('plugin_info_plugins_dist_2')
 		. '</p>'
 		. $liste
@@ -302,13 +302,15 @@ function afficher_librairies() {
  *     Tableau (nom de la lib => repertoire , ...)
  */
 function liste_librairies() {
-	$libs = array();
+	$libs = [];
 	foreach (array_reverse(creer_chemin()) as $d) {
-		if (is_dir($dir = $d . 'lib/')
+		if (
+			is_dir($dir = $d . 'lib/')
 			and $t = opendir($dir)
 		) {
 			while (($f = readdir($t)) !== false) {
-				if ($f[0] != '.'
+				if (
+					$f[0] != '.'
 					and is_dir("$dir/$f")
 				) {
 					$libs[$f] = $dir;

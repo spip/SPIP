@@ -7,7 +7,7 @@
  * @package SPIP\Core\Charsets
  **/
 
-$GLOBALS['CHARSET']['html'] = array(
+$GLOBALS['CHARSET']['html'] = [
 	'ldquo' => '&#8220;',
 	'rdquo' => '&#8221;',
 	'bdquo' => '&#8222;',
@@ -123,7 +123,7 @@ $GLOBALS['CHARSET']['html'] = array(
 	'oelig' => '&#339;',
 	'iexcl' => '&#161;'
 
-);
+];
 
 ## caracteres tres speciaux a ne pas convertir
 #'amp' => '&', 'quot' => '"', 'lt' => '<', 'gt' => '>',

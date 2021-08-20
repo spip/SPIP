@@ -126,7 +126,8 @@ function verif_butineur() {
 				$GLOBALS['browser_version'] = $match[1];
 				$GLOBALS['browser_barre'] = ($GLOBALS['browser_version'] >= 5.5);
 			} else {
-				if (preg_match(',KHTML,i', $GLOBALS['browser_description']) &&
+				if (
+					preg_match(',KHTML,i', $GLOBALS['browser_description']) &&
 					preg_match(',Safari/([^;]*),', $GLOBALS['browser_description'], $match)
 				) {
 					$GLOBALS['browser_name'] = 'Safari';
@@ -139,10 +140,11 @@ function verif_butineur() {
 							$GLOBALS['browser_rev'] = doubleval($match[1]);
 						} // Autres Gecko => equivalents 1.4 par defaut (Galeon, etc.)
 						else {
-							if (strpos($GLOBALS['browser_description'], 'Gecko') and !strpos(
-								$GLOBALS['browser_description'],
-								'KHTML'
-							)
+							if (
+								strpos($GLOBALS['browser_description'], 'Gecko') and !strpos(
+									$GLOBALS['browser_description'],
+									'KHTML'
+								)
 							) {
 								$GLOBALS['browser_rev'] = 1.4;
 							} // Machins quelconques => equivalents 1.0 par defaut (Konqueror, etc.)

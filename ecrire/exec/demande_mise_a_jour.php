@@ -10,7 +10,6 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 /**
  * Gestion d'affichage de la page de demande de mise à jour de la base de données
  *

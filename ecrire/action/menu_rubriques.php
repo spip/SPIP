@@ -56,7 +56,8 @@ function action_menu_rubriques_dist() {
 	}
 
 	$r = gen_liste_rubriques();
-	if (!$r
+	if (
+		!$r
 		and isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
 		and !strstr($_SERVER['SERVER_SOFTWARE'], 'IIS/')
 	) {
@@ -200,7 +201,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $profondeur = 
  *     Liste des rubriques enfants de la rubrique (et leur titre)
  **/
 function extraire_article($id_p, $t) {
-	return array_key_exists($id_p, $t) ? $t[$id_p] : array();
+	return array_key_exists($id_p, $t) ? $t[$id_p] : [];
 }
 
 /**
@@ -243,13 +244,13 @@ function gen_liste_rubriques() {
 
 	// il ne faut pas filtrer le autoriser voir ici
 	// car on met le resultat en cache, commun a tout le monde
-	$GLOBALS['db_art_cache'] = array();
+	$GLOBALS['db_art_cache'] = [];
 	while ($r = sql_fetch($res)) {
 		$t = sinon($r['titre'], _T('ecrire:info_sans_titre'));
 		$GLOBALS['db_art_cache'][$r['id_parent']][$r['id_rubrique']] = supprimer_numero(typo($t));
 	}
 
-	$t = array($last ? $last : time(), $GLOBALS['db_art_cache']);
+	$t = [$last ? $last : time(), $GLOBALS['db_art_cache']];
 	ecrire_fichier(_CACHE_RUBRIQUES, serialize($t));
 
 	return true;

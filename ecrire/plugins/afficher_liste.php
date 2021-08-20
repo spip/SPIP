@@ -42,15 +42,15 @@ function plugins_afficher_liste_dist(
 
 	$all_infos = pipeline(
 		'filtrer_liste_plugins',
-		array(
-			'args' => array(
+		[
+			'args' => [
 				'liste_plugins' => $liste_plugins,
 				'liste_plugins_checked' => $liste_plugins_checked,
 				'liste_plugins_actifs' => $liste_plugins_actifs,
 				'dir_plugins' => $dir_plugins
-			),
+			],
 			'data' => $all_infos
-		)
+		]
 	);
 
 	$liste_plugins = array_flip($liste_plugins);
@@ -66,8 +66,8 @@ function plugins_afficher_liste_dist(
 	$exposed = urldecode(_request('plugin'));
 
 	$block_par_lettre = false;//count($liste_plugins)>10;
-	$fast_liste_plugins_actifs = array();
-	$fast_liste_plugins_checked = array();
+	$fast_liste_plugins_actifs = [];
+	$fast_liste_plugins_checked = [];
 	if (is_array($liste_plugins_actifs)) {
 		$fast_liste_plugins_actifs = array_flip($liste_plugins_actifs);
 	}

@@ -67,7 +67,8 @@ function action_redirect_dist() {
 			$url = parametre_url($url, 'var_mode', $var_mode, '&');
 		}
 
-		if ($var_mode == 'preview'
+		if (
+			$var_mode == 'preview'
 			and defined('_PREVIEW_TOKEN')
 			and _PREVIEW_TOKEN
 			and autoriser('previsualiser')
@@ -115,7 +116,7 @@ function calculer_url_redirect_entite($type, $id, $var_mode) {
 		$publie = objet_test_si_publie($type, $id);
 		$url = generer_url_entite_absolue($id, $type, '', '', true);
 		if (function_exists('cache_set')) {
-			cache_set($key, array($url, $publie), 3600);
+			cache_set($key, [$url, $publie], 3600);
 		}
 	}
 

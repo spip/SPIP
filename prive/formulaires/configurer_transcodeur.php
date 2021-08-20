@@ -15,9 +15,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function formulaires_configurer_transcodeur_charger_dist() {
-	$valeurs = array(
+	$valeurs = [
 		'charset' => $GLOBALS['meta']['charset'],
-	);
+	];
 
 	return $valeurs;
 }
@@ -25,11 +25,11 @@ function formulaires_configurer_transcodeur_charger_dist() {
 function formulaires_configurer_transcodeur_verifier_dist() {
 	include_spip('inc/charsets');
 
-	$erreurs = array();
+	$erreurs = [];
 	if (!$charset = _request('charset')) {
 		$erreurs['charset'] = _T('info_obligatoire');
 	} elseif ($charset != 'utf-8' and !load_charset($charset)) {
-		$erreurs['charset'] = _T('utf8_convert_erreur_orig', array('charset' => entites_html($charset)));
+		$erreurs['charset'] = _T('utf8_convert_erreur_orig', ['charset' => entites_html($charset)]);
 	}
 
 	return $erreurs;
@@ -37,7 +37,7 @@ function formulaires_configurer_transcodeur_verifier_dist() {
 
 
 function formulaires_configurer_transcodeur_traiter_dist() {
-	$res = array('editable' => true);
+	$res = ['editable' => true];
 	ecrire_meta('charset', _request('charset'));
 	$res['message_ok'] = _T('config_info_enregistree');
 

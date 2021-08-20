@@ -15,8 +15,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function inc_log_dist($message, $logname = null, $logdir = null, $logsuf = null) {
-	static $test_repertoire = array();
-	static $compteur = array();
+	static $test_repertoire = [];
+	static $compteur = [];
 	static $debugverb = ''; // pour ne pas le recalculer au reappel
 
 	if (is_null($logname) or !is_string($logname)) {
@@ -25,7 +25,8 @@ function inc_log_dist($message, $logname = null, $logdir = null, $logsuf = null)
 	if (!isset($compteur[$logname])) {
 		$compteur[$logname] = 0;
 	}
-	if ($logname != 'maj'
+	if (
+		$logname != 'maj'
 		and defined('_MAX_LOG')
 		and (
 			$compteur[$logname]++ > _MAX_LOG
@@ -81,7 +82,8 @@ function inc_log_dist($message, $logname = null, $logdir = null, $logsuf = null)
 		. preg_replace("/\n*$/", "\n", $message);
 
 
-	if (@is_readable($logfile)
+	if (
+		@is_readable($logfile)
 		and (!$s = @filesize($logfile) or $s > $GLOBALS['taille_des_logs'] * 1024)
 	) {
 		$rotate = $GLOBALS['nombre_de_logs'];
@@ -94,7 +96,8 @@ function inc_log_dist($message, $logname = null, $logdir = null, $logsuf = null)
 		fclose($f);
 	}
 
-	if ($rotate-- > 0
+	if (
+		$rotate-- > 0
 		and function_exists('spip_unlink')
 	) {
 		spip_unlink($logfile . '.' . $rotate);
@@ -104,7 +107,8 @@ function inc_log_dist($message, $logname = null, $logdir = null, $logsuf = null)
 	}
 
 	// Dupliquer les erreurs specifiques dans le log general
-	if ($logname !== _FILE_LOG
+	if (
+		$logname !== _FILE_LOG
 		and defined('_FILE_LOG')
 	) {
 		inc_log_dist($logname == 'maj' ? 'cf maj.log' : $message);

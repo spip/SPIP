@@ -33,7 +33,7 @@ if (_SPIP_LOCK_MODE == 2) {
 	include_spip('inc/nfslock');
 }
 
-$GLOBALS['liste_verrous'] = array();
+$GLOBALS['liste_verrous'] = [];
 
 /**
  * Ouvre un fichier et le vérrouille
@@ -62,7 +62,7 @@ function spip_fopen_lock($fichier, $mode, $verrou) {
 		return $fl;
 	} elseif (_SPIP_LOCK_MODE == 2) {
 		if (($verrou = spip_nfslock($fichier)) && ($fl = @fopen($fichier, $mode))) {
-			$GLOBALS['liste_verrous'][$fl] = array($fichier, $verrou);
+			$GLOBALS['liste_verrous'][$fl] = [$fichier, $verrou];
 
 			return $fl;
 		} else {
@@ -146,7 +146,7 @@ function spip_file_get_contents($fichier) {
  * @return bool
  *     true si l'opération a réussie, false sinon.
  **/
-function lire_fichier($fichier, &$contenu, $options = array()) {
+function lire_fichier($fichier, &$contenu, $options = []) {
 	$contenu = '';
 	// inutile car si le fichier n'existe pas, le lock va renvoyer false juste apres
 	// economisons donc les acces disque, sauf chez free qui rale pour un rien
@@ -334,9 +334,11 @@ function ecrire_fichier_calcule_si_modifie($fichier, $contenu, $force = false, $
 	if (!ecrire_fichier($fichier_tmp, $contenu, true)) {
 		return false;
 	}
-	if ($force
-	  or !file_exists($fichier)
-		or md5_file($fichier) != md5_file($fichier_tmp)) {
+	if (
+		$force
+		or !file_exists($fichier)
+		or md5_file($fichier) != md5_file($fichier_tmp)
+	) {
 		if ($use_copy) {
 			@copy($fichier_tmp, $fichier);
 		}
@@ -366,7 +368,7 @@ function ecrire_fichier_calcule_si_modifie($fichier, $contenu, $force = false, $
  * @return bool
  *     true si l'opération a réussie, false sinon.
  */
-function lire_fichier_securise($fichier, &$contenu, $options = array()) {
+function lire_fichier_securise($fichier, &$contenu, $options = []) {
 	if ($res = lire_fichier($fichier, $contenu, $options)) {
 		$contenu = substr($contenu, strlen('<' . "?php die ('Acces interdit'); ?" . ">\n"));
 	}
@@ -390,7 +392,7 @@ function raler_fichier($fichier) {
 	$dir = dirname($fichier);
 	http_status(401);
 	echo minipres(_T('texte_inc_meta_2'), "<h4 style='color: red'>"
-		. _T('texte_inc_meta_1', array('fichier' => $fichier))
+		. _T('texte_inc_meta_1', ['fichier' => $fichier])
 		. " <a href='"
 		. generer_url_ecrire('install', "etape=chmod&test_dir=$dir")
 		. "'>"
@@ -398,7 +400,7 @@ function raler_fichier($fichier) {
 		. '</a> '
 		. _T(
 			'texte_inc_meta_3',
-			array('repertoire' => joli_repertoire($dir))
+			['repertoire' => joli_repertoire($dir)]
 		)
 		. "</h4>\n");
 	exit;
@@ -524,7 +526,8 @@ function spip_clear_opcode_cache($filepath) {
  *
  */
 function spip_attend_invalidation_opcode_cache($timestamp = null) {
-	if (function_exists('opcache_get_configuration')
+	if (
+		function_exists('opcache_get_configuration')
 		and @ini_get('opcache.enable')
 		and @ini_get('opcache.validate_timestamps')
 		and ($duree = intval(@ini_get('opcache.revalidate_freq')) or $duree = 2)
@@ -533,11 +536,11 @@ function spip_attend_invalidation_opcode_cache($timestamp = null) {
 		$wait = $duree + 1;
 		if ($timestamp) {
 			$wait -= (time() - $timestamp);
-			if ($wait<0) {
+			if ($wait < 0) {
 				$wait = 0;
 			}
 		}
-		spip_log('Probleme de configuration opcache.revalidate_freq '. $duree .'s : on attend '.$wait.'s', _LOG_INFO_IMPORTANTE);
+		spip_log('Probleme de configuration opcache.revalidate_freq ' . $duree . 's : on attend ' . $wait . 's', _LOG_INFO_IMPORTANTE);
 		if ($wait) {
 			sleep($duree + 1);
 		}
@@ -602,7 +605,7 @@ function supprimer_repertoire($dir) {
  *     Chemin du répertoire créé.
  **/
 function sous_repertoire($base, $subdir = '', $nobase = false, $tantpis = false) {
-	static $dirs = array();
+	static $dirs = [];
 
 	$base = str_replace('//', '/', $base);
 
@@ -684,12 +687,12 @@ function sous_repertoire($base, $subdir = '', $nobase = false, $tantpis = false)
  * @return array
  *     Chemins des fichiers trouvés.
  **/
-function preg_files($dir, $pattern = -1 /* AUTO */, $maxfiles = 10000, $recurs = array()) {
+function preg_files($dir, $pattern = -1 /* AUTO */, $maxfiles = 10000, $recurs = []) {
 	$nbfiles = 0;
 	if ($pattern == -1) {
 		$pattern = "^$dir";
 	}
-	$fichiers = array();
+	$fichiers = [];
 	// revenir au repertoire racine si on a recu dossier/truc
 	// pour regarder dossier/truc/ ne pas oublier le / final
 	$dir = preg_replace(',/[^/]*$,', '', $dir);
@@ -699,7 +702,8 @@ function preg_files($dir, $pattern = -1 /* AUTO */, $maxfiles = 10000, $recurs =
 
 	if (@is_dir($dir) and is_readable($dir) and $d = opendir($dir)) {
 		while (($f = readdir($d)) !== false && ($nbfiles < $maxfiles)) {
-			if ($f[0] != '.' # ignorer . .. .svn etc
+			if (
+				$f[0] != '.' # ignorer . .. .svn etc
 				and $f != 'CVS'
 				and $f != 'remove.txt'
 				and is_readable($f = "$dir/$f")

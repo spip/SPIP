@@ -28,7 +28,7 @@ function inc_simplexml_to_array_dist($u, $utiliser_namespace = false) {
 		$u = simplexml_load_string($u);
 	}
 
-	return array('root' => @xmlObjToArr($u, $utiliser_namespace));
+	return ['root' => @xmlObjToArr($u, $utiliser_namespace)];
 }
 
 
@@ -43,7 +43,7 @@ function inc_simplexml_to_array_dist($u, $utiliser_namespace = false) {
  **/
 function xmlObjToArr($obj, $utiliser_namespace = false) {
 
-	$tableau = array();
+	$tableau = [];
 
 	// Cette fonction getDocNamespaces() est longue sur de gros xml. On permet donc
 	// de l'activer ou pas suivant le contenu supposé du XML
@@ -63,8 +63,8 @@ function xmlObjToArr($obj, $utiliser_namespace = false) {
 			$text = null;
 		}
 
-		$children = array();
-		$attributes = array();
+		$children = [];
+		$attributes = [];
 
 		// get info for all namespaces
 		foreach ($namespace as $ns => $nsUrl) {
@@ -90,9 +90,9 @@ function xmlObjToArr($obj, $utiliser_namespace = false) {
 			}
 		}
 
-		$tableau = array(
+		$tableau = [
 			'name' => $name,
-		);
+		];
 		if ($text) {
 			$tableau['text'] = $text;
 		}

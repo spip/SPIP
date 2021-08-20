@@ -511,7 +511,7 @@ function balise_RECHERCHE_dist($p) {
 function balise_COMPTEUR_BOUCLE_dist($p) {
 	$b = index_boucle_mere($p);
 	if ($b === '') {
-		$msg = array('zbug_champ_hors_boucle', array('champ' => zbug_presenter_champ($p)));
+		$msg = ['zbug_champ_hors_boucle', ['champ' => zbug_presenter_champ($p)]];
 		erreur_squelette($msg, $p);
 	} else {
 		$p->code = "\$Numrows['$b']['compteur_boucle']";
@@ -539,7 +539,7 @@ function balise_COMPTEUR_BOUCLE_dist($p) {
 function balise_TOTAL_BOUCLE_dist($p) {
 	$b = index_boucle_mere($p);
 	if ($b === '') {
-		$msg = array('zbug_champ_hors_boucle', array('champ' => zbug_presenter_champ($p)));
+		$msg = ['zbug_champ_hors_boucle', ['champ' => zbug_presenter_champ($p)]];
 		erreur_squelette($msg, $p);
 	} else {
 		$p->code = "\$Numrows['$b']['total']";
@@ -732,7 +732,7 @@ function balise_EXPOSE_dist($p) {
 function calculer_balise_expose($p, $on, $off) {
 	$b = index_boucle($p);
 	if (empty($p->boucles[$b]->primary)) {
-		$msg = array('zbug_champ_hors_boucle', array('champ' => zbug_presenter_champ($p)));
+		$msg = ['zbug_champ_hors_boucle', ['champ' => zbug_presenter_champ($p)]];
 		erreur_squelette($msg, $p);
 	} else {
 		$key = $p->boucles[$b]->primary;
@@ -894,7 +894,8 @@ function balise_LESAUTEURS_dist($p) {
 	// le modele lesauteurs.html en passant id_article dans le contexte;
 	// dans le cas contraire on prend le champ 'lesauteurs'
 	// (cf extension sites/)
-	if ($_lesauteurs
+	if (
+		$_lesauteurs
 		and $_lesauteurs != '@$Pile[0][\'lesauteurs\']'
 	) {
 		$p->code = "safehtml($_lesauteurs)";
@@ -956,10 +957,10 @@ function balise_LESAUTEURS_dist($p) {
 function balise_RANG_dist($p) {
 	$b = index_boucle($p);
 	if ($b === '') {
-		$msg = array(
+		$msg = [
 			'zbug_champ_hors_boucle',
-			array('champ' => '#RANG')
-		);
+			['champ' => '#RANG']
+		];
 		erreur_squelette($msg, $p);
 	} else {
 		// chercher d'abord un champ sql rang (mais pas dans le env : defaut '' si on trouve pas de champ sql)
@@ -975,7 +976,7 @@ function balise_RANG_dist($p) {
 			$trouver_table = charger_fonction('trouver_table', 'base');
 			$desc = $trouver_table($boucle->id_table);
 			$_titre = ''; # où extraire le numero ?
-			
+
 			if (isset($desc['titre'])) {
 				$t = $desc['titre'];
 				if (
@@ -990,7 +991,7 @@ function balise_RANG_dist($p) {
 						if (!preg_match(',\W,', $m)) {
 							$m = $boucle->id_table . ".$m";
 						}
-						
+
 						$m .= ' AS titre_rang';
 
 						$boucle->select[] = $m;
@@ -1018,11 +1019,11 @@ function balise_RANG_dist($p) {
 			}
 			$_rang = "calculer_rang_smart($_titre, '$objet', $_primary, $_env)";
 		}
-		
+
 		$p->code = $_rang;
 		$p->interdire_scripts = false;
 	}
-	
+
 	return $p;
 }
 
@@ -1103,10 +1104,10 @@ function balise_PAGINATION_dist($p, $liste = 'true') {
 
 	// s'il n'y a pas de nom de boucle, on ne peut pas paginer
 	if ($b === '') {
-		$msg = array(
+		$msg = [
 			'zbug_champ_hors_boucle',
-			array('champ' => $liste ? 'PAGINATION' : 'ANCRE_PAGINATION')
-		);
+			['champ' => $liste ? 'PAGINATION' : 'ANCRE_PAGINATION']
+		];
 		erreur_squelette($msg, $p);
 
 		return $p;
@@ -1116,10 +1117,10 @@ function balise_PAGINATION_dist($p, $liste = 'true') {
 	// dans un boucle recursive ou qu'on a oublie le critere {pagination}
 	if (!$p->boucles[$b]->mode_partie) {
 		if (!$p->boucles[$b]->table_optionnelle) {
-			$msg = array(
+			$msg = [
 				'zbug_pagination_sans_critere',
-				array('champ' => '#PAGINATION')
-			);
+				['champ' => '#PAGINATION']
+			];
 			erreur_squelette($msg, $p);
 		}
 
@@ -1221,7 +1222,7 @@ function balise_ANCRE_PAGINATION_dist($p) {
 function balise_GRAND_TOTAL_dist($p) {
 	$b = index_boucle_mere($p);
 	if ($b === '') {
-		$msg = array('zbug_champ_hors_boucle', array('champ' => zbug_presenter_champ($p)));
+		$msg = ['zbug_champ_hors_boucle', ['champ' => zbug_presenter_champ($p)]];
 		erreur_squelette($msg, $p);
 	} else {
 		$p->code = "(isset(\$Numrows['$b']['grand_total'])
@@ -1290,7 +1291,7 @@ function balise_SELF_dist($p) {
 function balise_CHEMIN_dist($p) {
 	$arg = interprete_argument_balise(1, $p);
 	if (!$arg) {
-		$msg = array('zbug_balise_sans_argument', array('balise' => ' CHEMIN'));
+		$msg = ['zbug_balise_sans_argument', ['balise' => ' CHEMIN']];
 		erreur_squelette($msg, $p);
 	} else {
 		$p->code = 'find_in_path(' . $arg . ')';
@@ -1325,7 +1326,7 @@ function balise_CHEMIN_dist($p) {
 function balise_CHEMIN_IMAGE_dist($p) {
 	$arg = interprete_argument_balise(1, $p);
 	if (!$arg) {
-		$msg = array('zbug_balise_sans_argument', array('balise' => ' CHEMIN_IMAGE'));
+		$msg = ['zbug_balise_sans_argument', ['balise' => ' CHEMIN_IMAGE']];
 		erreur_squelette($msg, $p);
 	} else {
 		$p->code = 'chemin_image(' . $arg . ')';
@@ -1526,7 +1527,7 @@ function balise_SESSION_SET_dist($p) {
 	$_nom = interprete_argument_balise(1, $p);
 	$_val = interprete_argument_balise(2, $p);
 	if (!$_nom or !$_val) {
-		$err_b_s_a = array('zbug_balise_sans_argument', array('balise' => 'SESSION_SET'));
+		$err_b_s_a = ['zbug_balise_sans_argument', ['balise' => 'SESSION_SET']];
 		erreur_squelette($err_b_s_a, $p);
 	} else {
 		$p->code = '(include_spip("inc/session") AND session_set(' . $_nom . ',' . $_val . '))';
@@ -1569,18 +1570,20 @@ function balise_EVAL_dist($p) {
 	if ($php) {
 		# optimisation sur les #EVAL{une expression sans #BALISE}
 		# attention au commentaire "// x signes" qui precede
-		if (preg_match(
-			",^([[:space:]]*//[^\n]*\n)'([^']+)'$,ms",
-			$php,
-			$r
-		)) {
+		if (
+			preg_match(
+				",^([[:space:]]*//[^\n]*\n)'([^']+)'$,ms",
+				$php,
+				$r
+			)
+		) {
 			$p->code = /* $r[1]. */
 				'(' . $r[2] . ')';
 		} else {
 			$p->code = "eval('return '.$php.';')";
 		}
 	} else {
-		$msg = array('zbug_balise_sans_argument', array('balise' => ' EVAL'));
+		$msg = ['zbug_balise_sans_argument', ['balise' => ' EVAL']];
 		erreur_squelette($msg, $p);
 	}
 
@@ -1616,13 +1619,14 @@ function balise_EVAL_dist($p) {
  **/
 function balise_CHAMP_SQL_dist($p) {
 
-	if ($p->param
+	if (
+		$p->param
 		and isset($p->param[0][1][0])
 		and $champ = ($p->param[0][1][0]->texte)
 	) {
 		$p->code = champ_sql($champ, $p);
 	} else {
-		$err_b_s_a = array('zbug_balise_sans_argument', array('balise' => ' CHAMP_SQL'));
+		$err_b_s_a = ['zbug_balise_sans_argument', ['balise' => ' CHAMP_SQL']];
 		erreur_squelette($err_b_s_a, $p);
 	}
 
@@ -1730,7 +1734,7 @@ function balise_HTTP_HEADER_dist($p) {
 
 	$header = interprete_argument_balise(1, $p);
 	if (!$header) {
-		$err_b_s_a = array('zbug_balise_sans_argument', array('balise' => 'HTTP_HEADER'));
+		$err_b_s_a = ['zbug_balise_sans_argument', ['balise' => 'HTTP_HEADER']];
 		erreur_squelette($err_b_s_a, $p);
 	} else {
 		$p->code = "'<'.'?php header(' . _q("
@@ -1765,7 +1769,7 @@ function balise_HTTP_HEADER_dist($p) {
  **/
 function balise_FILTRE_dist($p) {
 	if ($p->param) {
-		$args = array();
+		$args = [];
 		foreach ($p->param as $i => $ignore) {
 			$args[] = interprete_argument_balise($i + 1, $p);
 		}
@@ -1837,7 +1841,8 @@ function balise_CACHE_dist($p) {
 		while (isset($p->param[0][++$i])) {
 			$pa = ($p->param[0][$i][0]->texte);
 
-			if ($pa == 'cache-client'
+			if (
+				$pa == 'cache-client'
 				and $duree > 0
 			) {
 				$code .= ".'<'.'" . '?php header("Cache-Control: max-age='
@@ -1847,7 +1852,8 @@ function balise_CACHE_dist($p) {
 				$pa = 'statique';
 			}
 
-			if ($pa == 'statique'
+			if (
+				$pa == 'statique'
 				and $duree > 0
 			) {
 				$code .= ".'<'.'" . '?php header("X-Spip-Statique: oui"); ?' . "'.'>'";
@@ -1981,7 +1987,7 @@ function balise_INCLURE_dist($p) {
 	// erreur de syntaxe = fond absent
 	// (2 messages d'erreur SPIP pour le prix d'un, mais pas d'erreur PHP
 	if (!$_contexte) {
-		$contexte = array();
+		$contexte = [];
 	}
 
 	if (isset($_contexte['fond'])) {
@@ -2006,7 +2012,7 @@ function balise_INCLURE_dist($p) {
 			unset($_contexte['env']);
 		}
 
-		$_options = array();
+		$_options = [];
 		if (isset($_contexte['ajax'])) {
 			$_options[] = preg_replace(',=>(.*)$,ims', '=> ($v=(\\1))?$v:true', $_contexte['ajax']);
 			unset($_contexte['ajax']);
@@ -2023,7 +2029,7 @@ function balise_INCLURE_dist($p) {
 
 		$p->code = sprintf(CODE_RECUPERER_FOND, $f, $_l, join(',', $_options), "_request('connect')");
 	} elseif (!isset($_contexte[1])) {
-		$msg = array('zbug_balise_sans_argument', array('balise' => ' INCLURE'));
+		$msg = ['zbug_balise_sans_argument', ['balise' => ' INCLURE']];
 		erreur_squelette($msg, $p);
 	} else {
 		$p->code = 'charge_scripts(' . $_contexte[1] . ',false)';
@@ -2063,11 +2069,11 @@ function balise_MODELE_dist($p) {
 	// erreur de syntaxe = fond absent
 	// (2 messages d'erreur SPIP pour le prix d'un, mais pas d'erreur PHP
 	if (!$_contexte) {
-		$_contexte = array();
+		$_contexte = [];
 	}
 
 	if (!isset($_contexte[1])) {
-		$msg = array('zbug_balise_sans_argument', array('balise' => ' MODELE'));
+		$msg = ['zbug_balise_sans_argument', ['balise' => ' MODELE']];
 		erreur_squelette($msg, $p);
 	} else {
 		$nom = $_contexte[1];
@@ -2148,7 +2154,7 @@ function balise_SET_dist($p) {
 	$_val = interprete_argument_balise(2, $p);
 
 	if (!$_nom or !$_val) {
-		$err_b_s_a = array('zbug_balise_sans_argument', array('balise' => 'SET'));
+		$err_b_s_a = ['zbug_balise_sans_argument', ['balise' => 'SET']];
 		erreur_squelette($err_b_s_a, $p);
 	}
 	// affectation $_zzz inutile, mais permet de contourner un bug OpCode cache sous PHP 5.5.4
@@ -2256,7 +2262,7 @@ function balise_DOUBLONS_dist($p) {
 function balise_PIPELINE_dist($p) {
 	$_pipe = interprete_argument_balise(1, $p);
 	if (!$_pipe) {
-		$err_b_s_a = array('zbug_balise_sans_argument', array('balise' => 'PIPELINE'));
+		$err_b_s_a = ['zbug_balise_sans_argument', ['balise' => 'PIPELINE']];
 		erreur_squelette($err_b_s_a, $p);
 	} else {
 		$_flux = interprete_argument_balise(2, $p);
@@ -2343,7 +2349,7 @@ function balise_TOTAL_UNIQUE_dist($p) {
  *     Pile complétée par le code à générer
  **/
 function balise_ARRAY_dist($p) {
-	$_code = array();
+	$_code = [];
 	$n = 1;
 	do {
 		$_key = interprete_argument_balise($n++, $p);
@@ -2374,7 +2380,7 @@ function balise_ARRAY_dist($p) {
  *     Pile complétée par le code à générer
  */
 function balise_LISTE_dist($p) {
-	$_code = array();
+	$_code = [];
 	$n = 1;
 	while ($_val = interprete_argument_balise($n++, $p)) {
 		$_code[] = $_val;
@@ -2416,7 +2422,7 @@ function balise_LISTE_dist($p) {
  *     Pile complétée par le code à générer
  **/
 function balise_AUTORISER_dist($p) {
-	$_code = array();
+	$_code = [];
 	$p->descr['session'] = true; // faire un cache par session
 
 	$n = 1;
@@ -2572,7 +2578,7 @@ function balise_ACTION_FORMULAIRE($p) {
  */
 function balise_BOUTON_ACTION_dist($p) {
 
-	$args = array();
+	$args = [];
 	for ($k = 1; $k <= 6; $k++) {
 		$_a = interprete_argument_balise($k, $p);
 		if (!$_a) {
@@ -2668,7 +2674,7 @@ function balise_TRI_dist($p, $liste = 'true') {
 	$b = index_boucle_mere($p);
 	// s'il n'y a pas de nom de boucle, on ne peut pas trier
 	if ($b === '') {
-		$msg = array('zbug_champ_hors_boucle', array('champ' => zbug_presenter_champ($p)));
+		$msg = ['zbug_champ_hors_boucle', ['champ' => zbug_presenter_champ($p)]];
 		erreur_squelette($msg, $p);
 		$p->code = "''";
 
@@ -2679,10 +2685,10 @@ function balise_TRI_dist($p, $liste = 'true') {
 	// s'il n'y a pas de tri_champ, c'est qu'on se trouve
 	// dans un boucle recursive ou qu'on a oublie le critere {tri}
 	if (!isset($boucle->modificateur['tri_champ'])) {
-		$msg = array('zbug_champ_hors_critere', array(
+		$msg = ['zbug_champ_hors_critere', [
 			'champ' => zbug_presenter_champ($p),
 			'critere' => 'tri'
-		));
+		]];
 		erreur_squelette($msg, $p);
 		$p->code = "''";
 
@@ -2743,7 +2749,7 @@ function balise_SAUTER_dist($p) {
 	$id_boucle = $p->id_boucle;
 
 	if (empty($p->boucles[$id_boucle])) {
-		$msg = array('zbug_champ_hors_boucle', array('champ' => '#SAUTER'));
+		$msg = ['zbug_champ_hors_boucle', ['champ' => '#SAUTER']];
 		erreur_squelette($msg, $p);
 	} else {
 		$boucle = $p->boucles[$id_boucle];

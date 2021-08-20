@@ -50,7 +50,7 @@ function definir_puce() {
 	}
 
 	if (!isset($GLOBALS[$p])) {
-		$GLOBALS[$p] = '<span class="spip-puce '.$dir.'"><b>–</b></span>';
+		$GLOBALS[$p] = '<span class="spip-puce ' . $dir . '"><b>–</b></span>';
 	}
 
 	return $GLOBALS[$p];
@@ -85,7 +85,7 @@ function code_echappement($rempl, $source = '', $no_transform = false, $mode = n
 	}
 
 	// Tester si on echappe en span ou en div
-	if (is_null($mode) or !in_array($mode, array('div', 'span'))) {
+	if (is_null($mode) or !in_array($mode, ['div', 'span'])) {
 		$mode = preg_match(',</?(' . _BALISES_BLOCS . ')[>[:space:]],iS', $rempl) ? 'div' : 'span';
 	}
 
@@ -116,10 +116,12 @@ function traiter_echap_pre_dist($regs) {
 
 	// echapper les < dans <code>
 	// on utilise _PROTEGE_BLOCS pour simplifier le code et la maintenance, mais on est interesse que par <code>
-	if (strpos($pre, '<') !== false
-		and preg_match_all(_PROTEGE_BLOCS, $pre, $matches, PREG_SET_ORDER)) {
+	if (
+		strpos($pre, '<') !== false
+		and preg_match_all(_PROTEGE_BLOCS, $pre, $matches, PREG_SET_ORDER)
+	) {
 		foreach ($matches as $m) {
-			if ($m[1]==='code') {
+			if ($m[1] === 'code') {
 				$code = '<code' . $m[2] . '>' . spip_htmlspecialchars($m[3]) . '</code>';
 				$pre = str_replace($m[0], $code, $pre);
 			}
@@ -224,7 +226,8 @@ function echappe_html(
 		}
 	}
 
-	if (($preg or strpos($letexte, '<') !== false)
+	if (
+		($preg or strpos($letexte, '<') !== false)
 		and preg_match_all($preg ? $preg : _PROTEGE_BLOCS, $letexte, $matches, PREG_SET_ORDER)
 	) {
 		foreach ($matches as $regs) {
@@ -233,8 +236,10 @@ function echappe_html(
 				$echap = $regs[0];
 			} // sinon les traiter selon le cas
 			else {
-				if (function_exists($f = $callback_prefix . 'traiter_echap_' . strtolower($regs[1]))
-				  or function_exists($f = $f . '_dist')) {
+				if (
+					function_exists($f = $callback_prefix . 'traiter_echap_' . strtolower($regs[1]))
+					or function_exists($f = $f . '_dist')
+				) {
 					$echap = $f($regs);
 				}
 			}
@@ -253,12 +258,13 @@ function echappe_html(
 	// (derogatoire car on ne peut pas faire passer < ? ... ? >
 	// dans une callback autonommee
 	if (strpos($preg ? $preg : _PROTEGE_BLOCS, 'script') !== false) {
-		if (strpos($letexte, '<' . '?') !== false and preg_match_all(
-			',<[?].*($|[?]>),UisS',
-			$letexte,
-			$matches,
-			PREG_SET_ORDER
-		)
+		if (
+			strpos($letexte, '<' . '?') !== false and preg_match_all(
+				',<[?].*($|[?]>),UisS',
+				$letexte,
+				$matches,
+				PREG_SET_ORDER
+			)
 		) {
 			foreach ($matches as $regs) {
 				$letexte = str_replace(
@@ -282,7 +288,8 @@ function echappe_retour($letexte, $source = '', $filtre = '') {
 	if (strpos($letexte, "base64$source")) {
 		# spip_log(spip_htmlspecialchars($letexte));  ## pour les curieux
 		$max_prof = 5;
-		while (strpos($letexte, '<') !== false
+		while (
+			strpos($letexte, '<') !== false
 			and
 			preg_match_all(
 				',<(span|div)\sclass=[\'"]base64' . $source . '[\'"]\s(.*)>\s*</\1>,UmsS',
@@ -290,12 +297,13 @@ function echappe_retour($letexte, $source = '', $filtre = '') {
 				$regs,
 				PREG_SET_ORDER
 			)
-			and $max_prof--) {
+			and $max_prof--
+		) {
 			foreach ($regs as $reg) {
 				$rempl = base64_decode(extraire_attribut($reg[0], 'title'));
 				// recherche d'attributs supplementaires
-				$at = array();
-				foreach (array('lang', 'dir') as $attr) {
+				$at = [];
+				foreach (['lang', 'dir'] as $attr) {
 					if ($a = extraire_attribut($reg[0], $attr)) {
 						$at[$attr] = $a;
 					}
@@ -360,11 +368,14 @@ function couper($texte, $taille = 50, $suite = null) {
 		return '';
 	}
 	$offset = 400 + 2 * $taille;
-	while ($offset < $length
-		and strlen(preg_replace(',<(!--|\w|/)[^>]+>,Uims', '', substr($texte, 0, $offset))) < $taille) {
+	while (
+		$offset < $length
+		and strlen(preg_replace(',<(!--|\w|/)[^>]+>,Uims', '', substr($texte, 0, $offset))) < $taille
+	) {
 		$offset = 2 * $offset;
 	}
-	if ($offset < $length
+	if (
+		$offset < $length
 		&& ($p_tag_ouvrant = strpos($texte, '<', $offset)) !== null
 	) {
 		$p_tag_fermant = strpos($texte, '>', $offset);
@@ -504,16 +515,19 @@ function echapper_html_suspect($texte, $strict = true) {
 		return $echapper_html_suspect($texte, $strict);
 	}
 
-	if (strpos($texte, '<') === false
-	  or strpos($texte, '=') === false) {
+	if (
+		strpos($texte, '<') === false
+		or strpos($texte, '=') === false
+	) {
 		return $texte;
 	}
 
 	// quand c'est du texte qui passe par propre on est plus coulant tant qu'il y a pas d'attribut du type onxxx=
 	// car sinon on declenche sur les modeles ou ressources
-	if (!$strict and
-	  (strpos($texte, 'on') === false or !preg_match(",<\w+.*\bon\w+\s*=,UimsS", $texte))
-	  ) {
+	if (
+		!$strict and
+		(strpos($texte, 'on') === false or !preg_match(",<\w+.*\bon\w+\s*=,UimsS", $texte))
+	) {
 		return $texte;
 	}
 
@@ -525,7 +539,7 @@ function echapper_html_suspect($texte, $strict = true) {
 		if (!function_exists('attribut_html')) {
 			include_spip('inc/filtres');
 		}
-		$texte = "<mark class='danger-js' title='".attribut_html(_T('erreur_contenu_suspect'))."'>⚠️</mark> ".$texte;
+		$texte = "<mark class='danger-js' title='" . attribut_html(_T('erreur_contenu_suspect')) . "'>⚠️</mark> " . $texte;
 	}
 
 	return $texte;

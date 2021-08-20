@@ -64,7 +64,7 @@ function inc_puce_statut_dist(
 	$ajax = false,
 	$menu_rapide = _ACTIVER_PUCE_RAPIDE
 ) {
-	static $f_puce_statut = array();
+	static $f_puce_statut = [];
 	$type = objet_type($type);
 	// cas prioritaire : fonction perso, qui permet aussi de gerer les cas historiques
 	if (!isset($f_puce_statut[$type]) or is_null($f_puce_statut[$type])) {
@@ -335,7 +335,8 @@ function puce_statut_changement_rapide(
 		return $src;
 	}
 
-	if (!$id
+	if (
+		!$id
 		or !_SPIP_AJAX
 		or !$menu_rapide
 	) {
@@ -369,7 +370,7 @@ function puce_statut_changement_rapide(
 		}
 	} // si pas d'id_rubrique fourni, tester directement instituer type avec le statut publie
 	else {
-		if (!autoriser('instituer', $type, $id, null, array('statut' => 'publie'))) {
+		if (!autoriser('instituer', $type, $id, null, ['statut' => 'publie'])) {
 			return $inser_puce;
 		}
 	}

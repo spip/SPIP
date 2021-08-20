@@ -10,7 +10,6 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -30,7 +29,8 @@ function notifications_instituerarticle_dist($quoi, $id_article, $options) {
 
 	$modele = '';
 	if ($options['statut'] == 'publie') {
-		if ($GLOBALS['meta']['post_dates'] == 'non'
+		if (
+			$GLOBALS['meta']['post_dates'] == 'non'
 			and strtotime($options['date']) > time()
 		) {
 			$modele = 'notifications/article_valide';
@@ -44,7 +44,7 @@ function notifications_instituerarticle_dist($quoi, $id_article, $options) {
 	}
 
 	if ($modele) {
-		$destinataires = array();
+		$destinataires = [];
 		if ($GLOBALS['meta']['suivi_edito'] == 'oui') {
 			$destinataires = explode(',', $GLOBALS['meta']['adresse_suivi']);
 		}
@@ -52,10 +52,10 @@ function notifications_instituerarticle_dist($quoi, $id_article, $options) {
 
 		$destinataires = pipeline(
 			'notifications_destinataires',
-			array(
-				'args' => array('quoi' => $quoi, 'id' => $id_article, 'options' => $options),
+			[
+				'args' => ['quoi' => $quoi, 'id' => $id_article, 'options' => $options],
 				'data' => $destinataires
-			)
+			]
 		);
 
 		$texte = email_notification_article($id_article, $modele);

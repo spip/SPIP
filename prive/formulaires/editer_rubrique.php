@@ -52,7 +52,7 @@ function formulaires_editer_rubrique_charger_dist(
 	$retour = '',
 	$lier_trad = 0,
 	$config_fonc = 'rubriques_edit_config',
-	$row = array(),
+	$row = [],
 	$hidden = ''
 ) {
 	$valeurs = formulaires_editer_objet_charger(
@@ -120,10 +120,10 @@ function formulaires_editer_rubrique_identifier_dist(
 	$retour = '',
 	$lier_trad = 0,
 	$config_fonc = 'rubriques_edit_config',
-	$row = array(),
+	$row = [],
 	$hidden = ''
 ) {
-	return serialize(array(intval($id_rubrique), $lier_trad));
+	return serialize([intval($id_rubrique), $lier_trad]);
 }
 
 /**
@@ -154,18 +154,20 @@ function formulaires_editer_rubrique_verifier_dist(
 	$retour = '',
 	$lier_trad = 0,
 	$config_fonc = 'rubriques_edit_config',
-	$row = array(),
+	$row = [],
 	$hidden = ''
 ) {
 	// auto-renseigner le titre si il n'existe pas
-	titre_automatique('titre', array('descriptif', 'texte'));
+	titre_automatique('titre', ['descriptif', 'texte']);
 	// on ne demande pas le titre obligatoire : il sera rempli a la volee dans editer_rubrique si vide
-	$erreurs = formulaires_editer_objet_verifier('rubrique', $id_rubrique, array());
+	$erreurs = formulaires_editer_objet_verifier('rubrique', $id_rubrique, []);
 
 	// s'assurer qu'on ne s'auto-designe pas comme parent !
-	if (intval($id_rubrique)
-	  and empty($erreurs['id_parent'])
-		and $id_parent = _request('id_parent')) {
+	if (
+		intval($id_rubrique)
+		and empty($erreurs['id_parent'])
+		and $id_parent = _request('id_parent')
+	) {
 		include_spip('inc/rubriques');
 		$branche = calcul_branche_in($id_rubrique);
 		$branche = explode(',', $branche);
@@ -205,7 +207,7 @@ function formulaires_editer_rubrique_traiter_dist(
 	$retour = '',
 	$lier_trad = 0,
 	$config_fonc = 'rubriques_edit_config',
-	$row = array(),
+	$row = [],
 	$hidden = ''
 ) {
 	return formulaires_editer_objet_traiter(

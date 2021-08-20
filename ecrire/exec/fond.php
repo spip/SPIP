@@ -29,7 +29,8 @@ $fond = _request('exec');
 $GLOBALS['delais'] = 0;// pas de cache !
 // Securite
 if (strstr($fond, '/')) {
-	if (!include_spip('inc/autoriser')
+	if (
+		!include_spip('inc/autoriser')
 		or !autoriser('webmestre')
 	) {
 		include_spip('inc/minipres');

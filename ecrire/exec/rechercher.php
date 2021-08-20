@@ -1,4 +1,5 @@
 <?php
+
 /***************************************************************************\
  *  SPIP, Système de publication pour l'internet                           *
  *                                                                         *
@@ -62,7 +63,7 @@ function exec_rechercher_args($id, $type, $exclus, $rac, $do) {
 		$do = 'aff';
 	}
 
-	$points = $rub = array();
+	$points = $rub = [];
 
 	$where = preg_split(',\s+,', $type);
 	if ($where) {
@@ -80,16 +81,18 @@ function exec_rechercher_args($id, $type, $exclus, $rac, $do) {
 			$where_exclus = '';
 		}
 
-		foreach (array(
+		foreach (
+			[
 			3 => $where_titre,
 			2 => $where_desc,
 			1 => $where_id,
-		) as $point => $recherche) {
+			] as $point => $recherche
+		) {
 			$res = sql_select('id_rubrique, id_parent, titre', 'spip_rubriques', "$recherche$where_exclus");
 			while ($row = sql_fetch($res)) {
 				$id_rubrique = $row['id_rubrique'];
 				if (!isset($rub[$id_rubrique])) {
-					$rub[$id_rubrique] = array();
+					$rub[$id_rubrique] = [];
 				}
 				$rub[$id_rubrique]['titre'] = typo($row['titre']);
 				$rub[$id_rubrique]['id_parent'] = $row['id_parent'];

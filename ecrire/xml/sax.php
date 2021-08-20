@@ -24,7 +24,8 @@ include_spip('xml/interfaces');
  * @return string
  */
 function xml_entites_html($texte) {
-	if (!is_string($texte) or !$texte
+	if (
+		!is_string($texte) or !$texte
 		or strpbrk($texte, "&\"'<>") == false
 	) {
 		return $texte;
@@ -153,11 +154,11 @@ function xml_parsestring($phraseur, $data) {
 // https://code.spip.net/@coordonnees_erreur
 function coordonnees_erreur($phraseur, $msg) {
 	$entete_length = substr_count($phraseur->entete, "\n");
-	$phraseur->err[] = array(
+	$phraseur->err[] = [
 		$msg,
 		xml_get_current_line_number($phraseur->sax) + $entete_length,
 		xml_get_current_column_number($phraseur->sax)
-	);
+	];
 }
 
 // https://code.spip.net/@xml_sax_dist
@@ -214,23 +215,23 @@ function xml_sax_dist($page, $apply = false, $phraseur = null, $doctype = '', $c
 
 	xml_set_element_handler(
 		$xml_parser,
-		array($phraseur, 'debutElement'),
-		array($phraseur, 'finElement')
+		[$phraseur, 'debutElement'],
+		[$phraseur, 'finElement']
 	);
 
 	xml_set_character_data_handler(
 		$xml_parser,
-		array($phraseur, 'textElement')
+		[$phraseur, 'textElement']
 	);
 
 	xml_set_processing_instruction_handler(
 		$xml_parser,
-		array($phraseur, 'piElement')
+		[$phraseur, 'piElement']
 	);
 
 	xml_set_default_handler(
 		$xml_parser,
-		array($phraseur, 'defaultElement')
+		[$phraseur, 'defaultElement']
 	);
 
 	xml_parser_set_option($xml_parser, XML_OPTION_CASE_FOLDING, false);
@@ -262,7 +263,7 @@ function sax_bug($data, $dtc, $charset = null) {
 	}
 
 	if ($dtc) {
-		$trans = array();
+		$trans = [];
 
 		foreach ($dtc->entites as $k => $v) {
 			if (!strpos(' amp lt gt quot ', $k)) {
@@ -289,48 +290,48 @@ function analyser_doctype($data) {
 		if (preg_match(_REGEXP_XML, $data, $page)) {
 			list(, $entete, $topelement) = $page;
 			if ($topelement == 'rss') {
-				return array(
+				return [
 					$entete,
 					'PUBLIC',
 					_DOCTYPE_RSS,
 					'rss-0.91.dtd'
-				);
+				];
 			} else {
 				$dtd = $topelement . '.dtd';
 				$f = find_in_path($dtd);
 				if (file_exists($f)) {
-					return array($entete, 'SYSTEM', $f, $dtd);
+					return [$entete, 'SYSTEM', $f, $dtd];
 				}
 			}
 		}
 		spip_log('Dtd pas vu pour ' . substr($data, 0, 100));
 
-		return array();
+		return [];
 	}
 	list($entete, , $topelement, $avail, $suite) = $page;
 
 	if (!preg_match('/^"([^"]*)"\s*(.*)$/', $suite, $r)) {
 		if (!preg_match("/^'([^']*)'\s*(.*)$/", $suite, $r)) {
-			return array();
+			return [];
 		}
 	}
 	list(, $rotlvl, $suite) = $r;
 
 	if (!$suite) {
 		if ($avail != 'SYSTEM') {
-			return array();
+			return [];
 		}
 		$grammaire = $rotlvl;
 		$rotlvl = '';
 	} else {
 		if (!preg_match('/^"([^"]*)"\s*$/', $suite, $r)) {
 			if (!preg_match("/^'([^']*)'\s*$/", $suite, $r)) {
-				return array();
+				return [];
 			}
 		}
 
 		$grammaire = $r[1];
 	}
 
-	return array($entete, $avail, $grammaire, $rotlvl);
+	return [$entete, $avail, $grammaire, $rotlvl];
 }

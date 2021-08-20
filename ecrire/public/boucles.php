@@ -10,7 +10,6 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 /**
  * Ce fichier definit les boucles standard de SPIP
  *
@@ -98,7 +97,7 @@ function boucle_HIERARCHIE_dist($id_boucle, &$boucles) {
 		. ");\n\t"
 		. 'if (!$hierarchie) return "";' . "\n\t";
 
-	$boucle->where[] = array("'IN'", "'$id_table'", '"($hierarchie)"');
+	$boucle->where[] = ["'IN'", "'$id_table'", '"($hierarchie)"'];
 
 	$order = "FIELD($id_table, \$hierarchie)";
 	if (!isset($boucle->default_order[0]) or $boucle->default_order[0] != ' DESC') {

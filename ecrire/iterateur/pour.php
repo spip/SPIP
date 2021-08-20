@@ -40,12 +40,12 @@ include_spip('iterateur/data');
  */
 function iterateur_POUR_dist($b) {
 	$b->iterateur = 'DATA'; # designe la classe d'iterateur
-	$b->show = array(
-		'field' => array(
+	$b->show = [
+		'field' => [
 			'cle' => 'STRING',
 			'valeur' => 'STRING',
-		)
-	);
+		]
+	];
 
 	return $b;
 }

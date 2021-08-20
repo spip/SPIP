@@ -27,13 +27,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     - selectionner : tableau des objets que l'on pourra sélectionner (avec un +)
  *     - afficher : tableau des objets à afficher (mais pas forcément sélectionnables)
  */
-function selecteur_lister_objets($whitelist = array(), $blacklist = array()) {
+function selecteur_lister_objets($whitelist = [], $blacklist = []) {
 	static $liste_selecteurs, $liste_parents;
 
 	if (!$liste_selecteurs) {
 		$liste_selecteurs = find_all_in_path('formulaires/selecteur/', 'hierarchie-[\w]+[.]html$');
 	}
-	$objets_selectionner = array();
+	$objets_selectionner = [];
 	foreach ($liste_selecteurs as $fichier => $chemin) {
 		$objets_selectionner[] = preg_replace('/^hierarchie-([\w]+)[.]html$/', '$1', $fichier);
 	}
@@ -67,10 +67,10 @@ function selecteur_lister_objets($whitelist = array(), $blacklist = array()) {
 		}
 	}
 
-	$objets = array(
+	$objets = [
 		'selectionner' => array_unique($objets_selectionner),
 		'afficher' => array_unique($objets_afficher),
-	);
+	];
 
 	return $objets;
 }
@@ -99,7 +99,7 @@ function selecteur_lister_objets($whitelist = array(), $blacklist = array()) {
  *     liste des couples (objets => id_objet) ou liste des identifiants d'un type d'objet.
  **/
 function picker_selected($selected, $type = '') {
-	$select = array();
+	$select = [];
 	$type = preg_replace(',\W,', '', $type);
 
 	if ($selected and !is_array($selected)) {
@@ -114,10 +114,10 @@ function picker_selected($selected, $type = '') {
 				$id_objet = intval($captures[2]);
 
 				// Si on cherche un type et que c'est le bon, on renvoit un tableau que d'identifiants
-				if (is_string($type) and $type == $objet and ($id_objet or in_array($objet, array('racine', 'rubrique')))) {
+				if (is_string($type) and $type == $objet and ($id_objet or in_array($objet, ['racine', 'rubrique']))) {
 					$select[] = $id_objet;
-				} elseif (!$type and ($id_objet or in_array($objet, array('racine', 'rubrique')))) {
-					$select[] = array('objet' => $objet, 'id_objet' => $id_objet);
+				} elseif (!$type and ($id_objet or in_array($objet, ['racine', 'rubrique']))) {
+					$select[] = ['objet' => $objet, 'id_objet' => $id_objet];
 				}
 			}
 		}
@@ -144,7 +144,7 @@ function picker_identifie_id_rapide($ref, $rubriques_ou_objets = false, $article
 	include_spip('inc/lien');
 
 	// On construit un tableau des objets sélectionnables suivant les paramètres
-	$objets = array();
+	$objets = [];
 	if ($rubriques_ou_objets and is_array($rubriques_ou_objets)) {
 		$objets = $rubriques_ou_objets;
 	} else {
@@ -182,7 +182,7 @@ function picker_identifie_id_rapide($ref, $rubriques_ou_objets = false, $article
 	// On simplifie le texte
 	$titre = attribut_html($titre);
 
-	return json_export(array('type' => $type, 'id' => "$type|$id", 'titre' => $titre));
+	return json_export(['type' => $type, 'id' => "$type|$id", 'titre' => $titre]);
 }
 
 /**
@@ -204,11 +204,11 @@ function picker_identifie_id_rapide($ref, $rubriques_ou_objets = false, $article
  * @return string
  *     Comme le filtre `oui` : espace (` `) si rubrique à afficher, chaîne vide sinon.
  */
-function test_enfants_rubrique($id_rubrique, $types = array()) {
-	static $has_child = array();
+function test_enfants_rubrique($id_rubrique, $types = []) {
+	static $has_child = [];
 
 	if (!isset($has_child[$id_rubrique])) {
-		$types = (is_array($types) ? array_filter($types) : array());
+		$types = (is_array($types) ? array_filter($types) : []);
 
 		// recuperer tous les freres et soeurs de la rubrique visee
 		$id_parent = sql_getfetsel('id_parent', 'spip_rubriques', 'id_rubrique=' . intval($id_rubrique));
@@ -227,10 +227,10 @@ function test_enfants_rubrique($id_rubrique, $types = array()) {
 		}
 
 		if (count($has)) {
-			$has_child = $has_child + array_combine($has, array_pad(array(), count($has), true));
+			$has_child = $has_child + array_combine($has, array_pad([], count($has), true));
 		}
 		if (count($fratrie)) {
-			$has_child = $has_child + array_combine($fratrie, array_pad(array(), count($fratrie), false));
+			$has_child = $has_child + array_combine($fratrie, array_pad([], count($fratrie), false));
 		}
 	}
 

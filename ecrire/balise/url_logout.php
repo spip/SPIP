@@ -36,7 +36,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Pile complétée du code compilé
  **/
 function balise_URL_LOGOUT($p) {
-	return calculer_balise_dynamique($p, 'URL_LOGOUT', array());
+	return calculer_balise_dynamique($p, 'URL_LOGOUT', []);
 }
 
 
@@ -54,7 +54,7 @@ function balise_URL_LOGOUT($p) {
 function balise_URL_LOGOUT_stat($args, $context_compil) {
 	$url = isset($args[0]) ? $args[0] : '';
 
-	return array($url);
+	return [$url];
 }
 
 /**

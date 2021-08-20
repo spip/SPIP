@@ -48,7 +48,7 @@ function expliquer_config($cfg) {
 	// par defaut, sur la table des meta
 	$table = 'meta';
 	$casier = null;
-	$sous_casier = array();
+	$sous_casier = [];
 	$cfg = explode('/', $cfg);
 
 	// si le premier argument est vide, c'est une syntaxe /table/ ou un appel vide ''
@@ -72,7 +72,7 @@ function expliquer_config($cfg) {
 		$sous_casier = $cfg;
 	}
 
-	return array($table, $casier, $sous_casier);
+	return [$table, $casier, $sous_casier];
 }
 
 /**
@@ -207,7 +207,7 @@ function ecrire_config($cfg, $store) {
 			if (is_null($store)) {
 				return false;
 			}
-			$st = array();
+			$st = [];
 		}
 	}
 
@@ -215,7 +215,7 @@ function ecrire_config($cfg, $store) {
 	// il faut ecrire au bon endroit sans perdre les autres sous casier freres
 	if ($c = $sous_casier) {
 		$sc = &$st;
-		$pointeurs = array();
+		$pointeurs = [];
 		while (count($c) and $cc = array_shift($c)) {
 			// creer l'entree si elle n'existe pas
 			if (!isset($sc[$cc])) {
@@ -224,7 +224,7 @@ function ecrire_config($cfg, $store) {
 				if (is_null($store)) {
 					return false;
 				}
-				$sc[$cc] = array();
+				$sc[$cc] = [];
 			}
 			$pointeurs[$cc] = &$sc;
 			$sc = &$sc[$cc];
@@ -324,11 +324,11 @@ function effacer_config($cfg) {
  * @param array $exclure
  * @return array
  */
-function lister_configurer($exclure = array()) {
-	return array();
+function lister_configurer($exclure = []) {
+	return [];
 
 	// lister les pages de config deja dans les menus
-	$deja = array();
+	$deja = [];
 	foreach ($exclure as $id => $b) {
 		$url = ($b['url'] ? $b['url'] : $id);
 		if (!$b['url'] or !isset($exclure[$url])) {
@@ -342,9 +342,9 @@ function lister_configurer($exclure = array()) {
 	$exclure = $exclure + $deja;
 
 	$icone_defaut = 'images/configuration-16.png';
-	$liste = array();
-	$skels = array();
-	$forms = array();
+	$liste = [];
+	$skels = [];
+	$forms = [];
 
 	// trouver toutes les pages configurer_xxx de l'espace prive
 	// et construire un tableau des entrees qui ne sont pas dans $deja
@@ -353,12 +353,12 @@ function lister_configurer($exclure = array()) {
 	foreach ($pages as $page) {
 		$configurer = basename($page, '.' . _EXTENSION_SQUELETTES);
 		if (!isset($exclure[$configurer])) {
-			$liste[$configurer] = array(
+			$liste[$configurer] = [
 				'parent' => 'bando_configuration',
 				'url' => $configurer,
 				'titre' => _T("configurer:{$configurer}_titre"),
 				'icone' => find_in_theme($i = "images/{$configurer}-16.png") ? $i : $icone_defaut,
-			);
+			];
 		}
 		$skels[$configurer] = $page;
 	}
@@ -374,17 +374,18 @@ function lister_configurer($exclure = array()) {
 	$pages = find_all_in_path('formulaires/', 'configurer_.*[.]' . _EXTENSION_SQUELETTES . '$');
 	foreach ($pages as $page) {
 		$configurer = basename($page, '.' . _EXTENSION_SQUELETTES);
-		if (!isset($forms[$configurer])
+		if (
+			!isset($forms[$configurer])
 			and !isset($liste[$configurer])
 			and !isset($exclure[$configurer])
 		) {
-			$liste[$configurer] = array(
+			$liste[$configurer] = [
 				'parent' => 'bando_configuration',
 				'url' => 'configurer',
 				'args' => 'cfg=' . substr($configurer, 11),
 				'titre' => _T("configurer:{$configurer}_titre"),
 				'icone' => find_in_theme($i = "images/{$configurer}-16.png") ? $i : $icone_defaut,
-			);
+			];
 		}
 	}
 
@@ -402,7 +403,7 @@ function lister_configurer($exclure = array()) {
  *    Liste des formulaires trouvés
  **/
 function lister_formulaires_configurer($file) {
-	$forms = array();
+	$forms = [];
 
 	lire_fichier($file, $skel);
 	if (preg_match_all(',#FORMULAIRE_(CONFIGURER_[A-Z0-9_]*),', $skel, $matches, PREG_SET_ORDER)) {
@@ -415,11 +416,11 @@ function lister_formulaires_configurer($file) {
 	// et reperer les formulaires CVT configurer_xx insereres par les plugins via pipeline
 	$config = basename(substr($file, 0, -strlen('.' . _EXTENSION_SQUELETTES)));
 	spip_log('Calcul de ' . "prive/squelettes/contenu/$config");
-	$fond = recuperer_fond("prive/squelettes/contenu/$config", array('exec' => $config));
+	$fond = recuperer_fond("prive/squelettes/contenu/$config", ['exec' => $config]);
 
 	// passer dans le pipeline affiche_milieu pour que les plugins puissent ajouter leur formulaires...
 	// et donc que l'on puisse les referencer aussi !
-	$fond = pipeline('affiche_milieu', array('args' => array('exec' => $config), 'data' => $fond));
+	$fond = pipeline('affiche_milieu', ['args' => ['exec' => $config], 'data' => $fond]);
 
 	// recuperer les noms des formulaires presents.
 	if (is_array($inputs = extraire_balises($fond, 'input'))) {
@@ -448,7 +449,7 @@ function lister_formulaires_configurer($file) {
  *    Couples nom de la `meta` => valeur par défaut
  */
 function liste_metas() {
-	return pipeline('configurer_liste_metas', array(
+	return pipeline('configurer_liste_metas', [
 		'nom_site' => _T('info_mon_site_spip'),
 		'slogan_site' => '',
 		'adresse_site' => preg_replace(',/$,', '', url_de_base()),
@@ -499,7 +500,7 @@ function liste_metas() {
 		'email_envoi' => '',
 		'email_webmaster' => '',
 		'auto_compress_http' => 'non',
-	));
+	]);
 }
 
 /**
@@ -511,7 +512,7 @@ function liste_metas() {
  */
 function actualise_metas($liste_meta) {
 	$meta_serveur =
-		array(
+		[
 			'version_installee',
 			'adresse_site',
 			'alea_ephemere_ancien',
@@ -534,9 +535,9 @@ function actualise_metas($liste_meta) {
 			'image_process',
 			'plugin_header',
 			'plugin'
-		);
+		];
 	// verifier le impt=non
-	sql_updateq('spip_meta', array('impt' => 'non'), sql_in('nom', $meta_serveur));
+	sql_updateq('spip_meta', ['impt' => 'non'], sql_in('nom', $meta_serveur));
 
 	foreach ($liste_meta as $nom => $valeur) {
 		if (empty($GLOBALS['meta'][$nom])) {

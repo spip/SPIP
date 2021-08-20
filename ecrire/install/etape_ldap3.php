@@ -10,7 +10,6 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -37,7 +36,7 @@ function install_etape_ldap3_dist() {
 	$ldap_link = @ldap_connect("$adresse_ldap", "$port_ldap");
 	if ($ldap_link) {
 		@ldap_bind($ldap_link, "$login_ldap", "$pass_ldap");
-		$result = @ldap_read($ldap_link, '', 'objectclass=*', array('namingContexts'));
+		$result = @ldap_read($ldap_link, '', 'objectclass=*', ['namingContexts']);
 		$info = @ldap_get_entries($ldap_link, $result);
 		@ldap_close($ldap_link);
 	}
@@ -78,7 +77,7 @@ function install_etape_ldap3_dist() {
 		. "<input type='text' name='base_ldap_text' class='text' value=\"$base_ldap_text\" size='40' />"
 		. "\n</fieldset>"
 		. "\n<input type='hidden' name='etape' value='ldap4' />"
-		. install_propager(array('adresse_ldap', 'port_ldap', 'login_ldap', 'pass_ldap', 'protocole_ldap', 'tls_ldap'))
+		. install_propager(['adresse_ldap', 'port_ldap', 'login_ldap', 'pass_ldap', 'protocole_ldap', 'tls_ldap'])
 		. bouton_suivant();
 
 	echo generer_form_ecrire('install', $res);

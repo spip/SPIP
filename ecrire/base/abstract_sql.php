@@ -52,7 +52,7 @@ function sql_error_backtrace($compil_info = false) {
 	}
 
 	if ($compil_info) {
-		$contexte_compil = array(
+		$contexte_compil = [
 			$trace[0]['file'],// sourcefile
 			'', //nom
 			(isset($trace[1]) ? $trace[1]['function'] . "(){\n" : '')
@@ -60,15 +60,15 @@ function sql_error_backtrace($compil_info = false) {
 			. (isset($trace[1]) ? "\n}" : ''), //id_boucle
 			$trace[0]['line'], // ligne
 			$GLOBALS['spip_lang'], // lang
-		);
+		];
 
 		return $contexte_compil;
 	}
 
 	$message = count($trace) ? $trace[0]['file'] . ' L' . $trace[0]['line'] : '';
-	$f = array();
+	$f = [];
 	while (count($trace) and $t = array_shift($trace)) {
-		if (in_array($t['function'], array('include_once', 'include_spip', 'find_in_path'))) {
+		if (in_array($t['function'], ['include_once', 'include_spip', 'find_in_path'])) {
 			break;
 		}
 		$f[] = $t['function'];
@@ -102,7 +102,7 @@ function sql_error_backtrace($compil_info = false) {
  *
  **/
 function sql_serveur($ins_sql = '', $serveur = '', $continue = false) {
-	static $sql_serveur = array();
+	static $sql_serveur = [];
 	if (!isset($sql_serveur[$serveur][$ins_sql])) {
 		$f = spip_connect_sql(sql_ABSTRACT_VERSION, $ins_sql, $serveur, $continue);
 		if (!is_string($f) or !$f) {
@@ -231,13 +231,13 @@ function sql_set_charset($charset, $serveur = '', $option = true) {
  *
  **/
 function sql_select(
-	$select = array(),
-	$from = array(),
-	$where = array(),
-	$groupby = array(),
-	$orderby = array(),
+	$select = [],
+	$from = [],
+	$where = [],
+	$groupby = [],
+	$orderby = [],
 	$limit = '',
-	$having = array(),
+	$having = [],
 	$serveur = '',
 	$option = true
 ) {
@@ -281,7 +281,7 @@ function sql_select(
 	spip_sql_erreur($serveur);
 	// idem dans sa version squelette (prefixe des tables non substitue)
 	$contexte_compil = sql_error_backtrace(true);
-	erreur_squelette(array(sql_errno($serveur), sql_error($serveur), $res), $contexte_compil);
+	erreur_squelette([sql_errno($serveur), sql_error($serveur), $res], $contexte_compil);
 
 	return false;
 }
@@ -320,13 +320,13 @@ function sql_select(
  *
  **/
 function sql_get_select(
-	$select = array(),
-	$from = array(),
-	$where = array(),
-	$groupby = array(),
-	$orderby = array(),
+	$select = [],
+	$from = [],
+	$where = [],
+	$groupby = [],
+	$orderby = [],
 	$limit = '',
-	$having = array(),
+	$having = [],
 	$serveur = ''
 ) {
 	return sql_select($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, false);
@@ -373,10 +373,10 @@ function sql_get_select(
  *
  **/
 function sql_countsel(
-	$from = array(),
-	$where = array(),
-	$groupby = array(),
-	$having = array(),
+	$from = [],
+	$where = [],
+	$groupby = [],
+	$having = [],
 	$serveur = '',
 	$option = true
 ) {
@@ -485,13 +485,13 @@ function sql_fetch($res, $serveur = '', $option = true) {
  *    presentant une ligne de resultat d'une selection
  */
 function sql_fetch_all($res, $serveur = '', $option = true) {
-	$rows = array();
+	$rows = [];
 	if (!$res) {
 		return $rows;
 	}
 	$f = sql_serveur('fetch', $serveur, $option === 'continue' or $option === false);
 	if (!is_string($f) or !$f) {
-		return array();
+		return [];
 	}
 	while ($r = $f($res, null, $serveur, $option !== false)) {
 		$rows[] = $r;
@@ -699,7 +699,7 @@ function sql_free($res, $serveur = '', $option = true) {
  *     - Texte de la requête si demandé,
  *     - False en cas d'erreur.
  **/
-function sql_insert($table, $noms, $valeurs, $desc = array(), $serveur = '', $option = true) {
+function sql_insert($table, $noms, $valeurs, $desc = [], $serveur = '', $option = true) {
 	$f = sql_serveur('insert', $serveur, $option === 'continue' or $option === false);
 	if (!is_string($f) or !$f) {
 		return false;
@@ -750,7 +750,7 @@ function sql_insert($table, $noms, $valeurs, $desc = array(), $serveur = '', $op
  *     - Texte de la requête si demandé,
  *     - False en cas d'erreur.
  **/
-function sql_insertq($table, $couples = array(), $desc = array(), $serveur = '', $option = true) {
+function sql_insertq($table, $couples = [], $desc = [], $serveur = '', $option = true) {
 	$f = sql_serveur('insertq', $serveur, $option === 'continue' or $option === false);
 	if (!is_string($f) or !$f) {
 		return false;
@@ -795,7 +795,7 @@ function sql_insertq($table, $couples = array(), $desc = array(), $serveur = '',
  *     - Texte de la requête si demandé,
  *     - False en cas d'erreur.
  **/
-function sql_insertq_multi($table, $couples = array(), $desc = array(), $serveur = '', $option = true) {
+function sql_insertq_multi($table, $couples = [], $desc = [], $serveur = '', $option = true) {
 	$f = sql_serveur('insertq_multi', $serveur, $option === 'continue' or $option === false);
 	if (!is_string($f) or !$f) {
 		return false;
@@ -845,7 +845,7 @@ function sql_insertq_multi($table, $couples = array(), $desc = array(), $serveur
  *     - true si la requête a réussie, false sinon
  *     - array Tableau décrivant la requête et son temps d'exécution si var_profile est actif
  */
-function sql_update($table, $exp, $where = '', $desc = array(), $serveur = '', $option = true) {
+function sql_update($table, $exp, $where = '', $desc = [], $serveur = '', $option = true) {
 	$f = sql_serveur('update', $serveur, $option === 'continue' or $option === false);
 	if (!is_string($f) or !$f) {
 		return false;
@@ -900,7 +900,7 @@ function sql_update($table, $exp, $where = '', $desc = array(), $serveur = '', $
  *     - Texte de la requête si demandé,
  *     - False en cas d'erreur.
  **/
-function sql_updateq($table, $exp, $where = '', $desc = array(), $serveur = '', $option = true) {
+function sql_updateq($table, $exp, $where = '', $desc = [], $serveur = '', $option = true) {
 	$f = sql_serveur('updateq', $serveur, $option === 'continue' or $option === false);
 	if (!is_string($f) or !$f) {
 		return false;
@@ -985,7 +985,7 @@ function sql_delete($table, $where = '', $serveur = '', $option = true) {
  *     - Texte de la requête si demandé,
  *     - False en cas d'erreur.
  **/
-function sql_replace($table, $couples, $desc = array(), $serveur = '', $option = true) {
+function sql_replace($table, $couples, $desc = [], $serveur = '', $option = true) {
 	$f = sql_serveur('replace', $serveur, $option === 'continue' or $option === false);
 	if (!is_string($f) or !$f) {
 		return false;
@@ -1032,7 +1032,7 @@ function sql_replace($table, $couples, $desc = array(), $serveur = '', $option =
  *     - Texte de la requête si demandé,
  *     - False en cas d'erreur.
  **/
-function sql_replace_multi($table, $tab_couples, $desc = array(), $serveur = '', $option = true) {
+function sql_replace_multi($table, $tab_couples, $desc = [], $serveur = '', $option = true) {
 	$f = sql_serveur('replace_multi', $serveur, $option === 'continue' or $option === false);
 	if (!is_string($f) or !$f) {
 		return false;
@@ -1171,7 +1171,7 @@ function sql_showbase($spip = null, $serveur = '', $option = true) {
  **/
 function sql_alltable($spip = null, $serveur = '', $option = true) {
 	$q = sql_showbase($spip, $serveur, $option);
-	$r = array();
+	$r = [];
 	if ($q) {
 		while ($t = sql_fetch($q, $serveur)) {
 			$r[] = array_shift($t);
@@ -1227,7 +1227,7 @@ function sql_showtable($table, $table_spip = false, $serveur = '', $option = tru
 
 	$f = $f($vraie_table, $serveur, $option !== false);
 	if (!$f) {
-		return array();
+		return [];
 	}
 	if (isset($GLOBALS['tables_principales'][$table]['join'])) {
 		$f['join'] = $GLOBALS['tables_principales'][$table]['join'];
@@ -1282,7 +1282,7 @@ function sql_showtable($table, $table_spip = false, $serveur = '', $option = tru
 function sql_create(
 	$nom,
 	$champs,
-	$cles = array(),
+	$cles = [],
 	$autoinc = false,
 	$temporary = false,
 	$serveur = '',
@@ -1601,13 +1601,13 @@ function sql_query($ins, $serveur = '', $option = true) {
  *
  **/
 function sql_fetsel(
-	$select = array(),
-	$from = array(),
-	$where = array(),
-	$groupby = array(),
-	$orderby = array(),
+	$select = [],
+	$from = [],
+	$where = [],
+	$groupby = [],
+	$orderby = [],
 	$limit = '',
-	$having = array(),
+	$having = [],
 	$serveur = '',
 	$option = true
 ) {
@@ -1616,7 +1616,7 @@ function sql_fetsel(
 		return $q;
 	}
 	if (!$q) {
-		return array();
+		return [];
 	}
 	$r = sql_fetch($q, $serveur, $option);
 	sql_free($q, $serveur, $option);
@@ -1678,13 +1678,13 @@ function sql_fetsel(
  *
  **/
 function sql_allfetsel(
-	$select = array(),
-	$from = array(),
-	$where = array(),
-	$groupby = array(),
-	$orderby = array(),
+	$select = [],
+	$from = [],
+	$where = [],
+	$groupby = [],
+	$orderby = [],
 	$limit = '',
-	$having = array(),
+	$having = [],
 	$serveur = '',
 	$option = true
 ) {
@@ -1741,12 +1741,12 @@ function sql_allfetsel(
  **/
 function sql_getfetsel(
 	$select,
-	$from = array(),
-	$where = array(),
-	$groupby = array(),
-	$orderby = array(),
+	$from = [],
+	$where = [],
+	$groupby = [],
+	$orderby = [],
 	$limit = '',
-	$having = array(),
+	$having = [],
 	$serveur = '',
 	$option = true
 ) {
@@ -2096,15 +2096,15 @@ function sql_in($val, $valeurs, $not = '', $serveur = '', $option = true) {
 function sql_in_select(
 	$in,
 	$select,
-	$from = array(),
-	$where = array(),
-	$groupby = array(),
-	$orderby = array(),
+	$from = [],
+	$where = [],
+	$groupby = [],
+	$orderby = [],
 	$limit = '',
-	$having = array(),
+	$having = [],
 	$serveur = ''
 ) {
-	$liste = array();
+	$liste = [];
 	$res = sql_select($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur);
 	while ($r = sql_fetch($res)) {
 		$liste[] = array_shift($r);

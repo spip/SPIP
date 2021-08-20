@@ -52,7 +52,7 @@ define('_JQ_PENDING', 0);
 function queue_add_job(
 	$function,
 	$description,
-	$arguments = array(),
+	$arguments = [],
 	$file = '',
 	$no_duplicate = false,
 	$time = 0,
@@ -77,7 +77,7 @@ function queue_add_job(
 	}
 	$date = date('Y-m-d H:i:s', $time);
 
-	$set_job = array(
+	$set_job = [
 		'fonction' => $function,
 		'descriptif' => $description,
 		'args' => $arguments,
@@ -86,10 +86,11 @@ function queue_add_job(
 		'priorite' => max(-10, min(10, intval($priority))),
 		'date' => $date,
 		'status' => _JQ_SCHEDULED,
-	);
+	];
 	// si option ne pas dupliquer, regarder si la fonction existe deja
 	// avec les memes args et file
-	if ($no_duplicate
+	if (
+		$no_duplicate
 		and
 		$id_job = sql_getfetsel(
 			'id_job',
@@ -107,7 +108,8 @@ function queue_add_job(
 	// en cas de concurrence, deux process peuvent arriver jusqu'ici en parallele
 	// avec le meme job unique a inserer. Dans ce cas, celui qui a eu l'id le plus grand
 	// doit s'effacer
-	if ($no_duplicate
+	if (
+		$no_duplicate
 		and
 		$id_prev = sql_getfetsel('id_job', 'spip_jobs', 'id_job<' . intval($id_job) . " AND $duplicate_where")
 	) {
@@ -170,7 +172,8 @@ function queue_purger() {
 function queue_remove_job($id_job) {
 	include_spip('base/abstract_sql');
 
-	if ($row = sql_fetsel('fonction,inclure,date', 'spip_jobs', 'id_job=' . intval($id_job))
+	if (
+		$row = sql_fetsel('fonction,inclure,date', 'spip_jobs', 'id_job=' . intval($id_job))
 		and $res = sql_delete('spip_jobs', 'id_job=' . intval($id_job))
 	) {
 		queue_unlink_job($id_job);
@@ -206,7 +209,7 @@ function queue_link_job($id_job, $objets) {
 			}
 			sql_insertq_multi('spip_jobs_liens', $objets);
 		} else {
-			sql_insertq('spip_jobs_liens', array_merge(array('id_job' => $id_job), $objets));
+			sql_insertq('spip_jobs_liens', array_merge(['id_job' => $id_job], $objets));
 		}
 	}
 }
@@ -237,7 +240,7 @@ function queue_start_job($row) {
 	$args = unserialize($row['args']);
 	if ($args === false) {
 		spip_log('arguments job errones ' . var_export($row, true), 'queue');
-		$args = array();
+		$args = [];
 	}
 
 	$fonction = $row['fonction'];
@@ -529,7 +532,7 @@ function queue_update_next_job_time($next_time = null) {
 	if (is_array($res)) {
 		foreach ($res as $row) {
 			queue_close_job($row, $time);
-			spip_log('queue_close_job car _JQ_PENDING depuis +180s : '.print_r($row, 1), 'job_mort'._LOG_ERREUR);
+			spip_log('queue_close_job car _JQ_PENDING depuis +180s : ' . print_r($row, 1), 'job_mort' . _LOG_ERREUR);
 		}
 	}
 
@@ -579,7 +582,8 @@ function queue_set_next_job_time($next) {
 	// et ne mettre a jour que si il y a un interet a le faire
 	// permet ausis d'initialiser le nom de fichier a coup sur
 	$curr_next = $_SERVER['REQUEST_TIME'] + max(0, queue_sleep_time_to_next_job(true));
-	if (($curr_next <= $time and $next > $time) // le prochain job est dans le futur mais pas la date planifiee actuelle
+	if (
+		($curr_next <= $time and $next > $time) // le prochain job est dans le futur mais pas la date planifiee actuelle
 		or $curr_next > $next // le prochain job est plus tot que la date planifiee actuelle
 	) {
 		if (function_exists('cache_set') and defined('_MEMOIZE_MEMORY') and _MEMOIZE_MEMORY) {

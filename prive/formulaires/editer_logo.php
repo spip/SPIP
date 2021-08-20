@@ -48,7 +48,7 @@ $logo_libelles['racine'] = _T('logo_standard_rubrique');
  * @param array $options Tableau d'option (exemple : image_reduire => 50)
  * @return array               Variables d'environnement pour le fond
  */
-function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $options = array()) {
+function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $options = []) {
 	// pas dans une boucle ? formulaire pour le logo du site
 	// dans ce cas, il faut chercher un 'siteon0.ext'
 	if (!$objet) {
@@ -96,21 +96,21 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 		$options['editable'] = autoriser('iconifier', $objet, $id_objet);
 	}
 
-	$res = array(
+	$res = [
 		'editable' => ($GLOBALS['meta']['activer_logos'] == 'oui' ? ' ' : '') && (!isset($options['editable']) or $options['editable']),
 		'logo_survol' => ($GLOBALS['meta']['activer_logos_survol'] == 'oui' ? ' ' : ''),
 		'objet' => $objet,
 		'id_objet' => $id_objet,
 		'_options' => $options,
 		'_show_upload_off' => '',
-	);
+	];
 
 	// rechercher le logo de l'objet
 	// la fonction prend un parametre '_id_objet' etrange :
 	// le nom de la cle primaire (et non le nom de la table)
 	// ou directement le nom du raccourcis a chercher
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
-	$etats = $res['logo_survol'] ? array('on', 'off') : array('on');
+	$etats = $res['logo_survol'] ? ['on', 'off'] : ['on'];
 	foreach ($etats as $etat) {
 		$logo = $chercher_logo($id_objet, $_id_objet, $etat);
 		if ($logo) {
@@ -125,7 +125,8 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 	}
 
 	// si le logo n'est pas editable et qu'il n'y en a pas, on affiche pas du tout le formulaire
-	if (!$res['editable']
+	if (
+		!$res['editable']
 		and !isset($res['logo_off'])
 		and !isset($res['logo_on'])
 	) {
@@ -145,8 +146,8 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
  * @param array $options Tableau d'option (exemple : image_reduire => 50)
  * @return string              Hash du formulaire
  */
-function formulaires_editer_logo_identifier_dist($objet, $id_objet, $retour = '', $options = array()) {
-	return serialize(array($objet, $id_objet));
+function formulaires_editer_logo_identifier_dist($objet, $id_objet, $retour = '', $options = []) {
+	return serialize([$objet, $id_objet]);
 }
 
 /**
@@ -161,8 +162,8 @@ function formulaires_editer_logo_identifier_dist($objet, $id_objet, $retour = ''
  * @param array $options Tableau d'option (exemple : image_reduire => 50)
  * @return array               Erreurs du formulaire
  */
-function formulaires_editer_logo_verifier_dist($objet, $id_objet, $retour = '', $options = array()) {
-	$erreurs = array();
+function formulaires_editer_logo_verifier_dist($objet, $id_objet, $retour = '', $options = []) {
+	$erreurs = [];
 	// verifier les extensions
 	$sources = formulaire_editer_logo_get_sources();
 	include_spip('action/editer_logo');
@@ -173,10 +174,12 @@ function formulaires_editer_logo_verifier_dist($objet, $id_objet, $retour = '', 
 	foreach ($sources as $etat => $file) {
 		// seulement si une reception correcte a eu lieu
 		if ($file and $file['error'] == 0) {
-			if (!in_array(
-				strtolower(pathinfo($file['name'], PATHINFO_EXTENSION)),
-				$extensions_possibles
-			)) {
+			if (
+				!in_array(
+					strtolower(pathinfo($file['name'], PATHINFO_EXTENSION)),
+					$extensions_possibles
+				)
+			) {
 				$erreurs['logo_' . $etat] = _L('Extension non reconnue');
 			}
 		} elseif ($file and $file['error'] != 0 and isset($file['msg'])) {
@@ -199,8 +202,8 @@ function formulaires_editer_logo_verifier_dist($objet, $id_objet, $retour = '', 
  * @param array $options Tableau d'option (exemple : image_reduire => 50)
  * @return array               Retour des traitements
  */
-function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $options = array()) {
-	$res = array('editable' => ' ');
+function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $options = []) {
+	$res = ['editable' => ' '];
 
 	// pas dans une boucle ? formulaire pour le logo du site
 	// dans ce cas, il faut chercher un 'siteon0.ext'
@@ -253,15 +256,15 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $
  */
 function formulaire_editer_logo_get_sources() {
 	if (!$_FILES) {
-		$_FILES = isset($GLOBALS['HTTP_POST_FILES']) ? $GLOBALS['HTTP_POST_FILES'] : array();
+		$_FILES = isset($GLOBALS['HTTP_POST_FILES']) ? $GLOBALS['HTTP_POST_FILES'] : [];
 	}
 	if (!is_array($_FILES)) {
-		return array();
+		return [];
 	}
 
 	include_spip('inc/documents');
-	$sources = array();
-	foreach (array('on', 'off') as $etat) {
+	$sources = [];
+	foreach (['on', 'off'] as $etat) {
 		$logo = 'logo_' . $etat;
 		if (isset($_FILES[$logo])) {
 			if ($_FILES[$logo]['error'] == 0) {

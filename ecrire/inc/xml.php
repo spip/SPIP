@@ -55,7 +55,7 @@ function spip_xml_load($fichier, $strict = true, $clean = true, $taille_max = 10
 	} else {
 		lire_fichier($fichier, $contenu);
 	}
-	$arbre = array();
+	$arbre = [];
 	if ($contenu) {
 		$arbre = spip_xml_parse($contenu, $strict, $clean, $profondeur);
 	}
@@ -83,7 +83,7 @@ if (!defined('_SPIP_XML_TAG_SPLIT')) {
  *     - false si l'arbre xml ne peut être créé ou est vide
  **/
 function spip_xml_parse(&$texte, $strict = true, $clean = true, $profondeur = -1) {
-	$out = array();
+	$out = [];
 	// enlever les commentaires
 	$charset = 'AUTO';
 	if ($clean === true) {
@@ -133,7 +133,8 @@ function spip_xml_parse(&$texte, $strict = true, $clean = true, $profondeur = -1
 				$nclose = 0;
 				$nopen = 0;
 				$d = 0;
-				while ($p !== false
+				while (
+					$p !== false
 					and ($morceau = substr($txt, $d, $p - $d))
 					and (($nopen += preg_match_all(
 						'{<' . preg_quote($closing_tag) . '(\s*>|\s[^>]*[^/>]>)}is',
@@ -214,7 +215,7 @@ function spip_xml_tagname($tag) {
 // https://code.spip.net/@spip_xml_decompose_tag
 function spip_xml_decompose_tag($tag) {
 	$tagname = spip_xml_tagname($tag);
-	$liste = array();
+	$liste = [];
 	$tag = ltrim(strpbrk($tag, " \n\t"));
 	$p = strpos($tag, '=');
 	while ($p !== false) {
@@ -228,7 +229,7 @@ function spip_xml_decompose_tag($tag) {
 		$p = strpos($tag, '=');
 	}
 
-	return array($tagname, $liste);
+	return [$tagname, $liste];
 }
 
 /**
@@ -252,7 +253,7 @@ function spip_xml_decompose_tag($tag) {
  **/
 function spip_xml_match_nodes($regexp, &$arbre, &$matches, $init = true) {
 	if ($init) {
-		$matches = array();
+		$matches = [];
 	}
 	if (is_array($arbre) && count($arbre)) {
 		foreach (array_keys($arbre) as $tag) {

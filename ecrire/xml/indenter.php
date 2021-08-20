@@ -47,10 +47,10 @@ class IndenteurXML {
 
 	public $depth = '';
 	public $res = '';
-	public $err = array();
-	public $contenu = array();
-	public $ouvrant = array();
-	public $reperes = array();
+	public $err = [];
+	public $contenu = [];
+	public $ouvrant = [];
+	public $reperes = [];
 	public $entete = '';
 	public $page = '';
 	public $dtc = null;

@@ -37,7 +37,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Pile complétée du code compilé
  **/
 function balise_MENU_LANG_ECRIRE($p) {
-	return calculer_balise_dynamique($p, 'MENU_LANG_ECRIRE', array('lang'));
+	return calculer_balise_dynamique($p, 'MENU_LANG_ECRIRE', ['lang']);
 }
 
 /**
@@ -112,14 +112,14 @@ function menu_lang_pour_tous($nom, $default) {
 	$cible = parametre_url(self(), 'lang', '', '&');
 	$post = generer_url_action('converser', 'redirect=' . rawurlencode($cible), '&');
 
-	return array(
+	return [
 		'formulaires/menu_lang',
 		3600,
-		array(
+		[
 			'nom' => $nom,
 			'url' => $post,
 			'name' => $nom,
 			'default' => $default,
-		)
-	);
+		]
+	];
 }

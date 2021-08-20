@@ -95,7 +95,8 @@ if (_request('redirect')) {
 //
 
 // Controle de la version, sauf si on est deja en train de s'en occuper
-if (!$reinstall == 'oui'
+if (
+	!$reinstall == 'oui'
 	and !_AJAX
 	and isset($GLOBALS['meta']['version_installee'])
 	and ($GLOBALS['spip_version_base'] != (str_replace(',', '.', $GLOBALS['meta']['version_installee'])))
@@ -113,7 +114,8 @@ elseif (isset($GLOBALS['meta']['admin'])) {
 	if (preg_match('/^(.*)_(\d+)_/', $GLOBALS['meta']['admin'], $l)) {
 		list(, $var_f, $n) = $l;
 	}
-	if (_AJAX
+	if (
+		_AJAX
 		or !(
 			isset($_COOKIE['spip_admin'])
 			or (isset($GLOBALS['visiteur_session']) and $GLOBALS['visiteur_session']['statut'] == '0minirezo')
@@ -154,7 +156,8 @@ $GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? preg_replace('/[^a-z0-9
 // (elle a ete changee dans une autre session, et on retombe sur un vieux cookie)
 // on appelle directement la fonction, car un appel d'action peut conduire a une boucle infinie
 // si le cookie n'est pas pose correctement dans l'action
-if (!$var_auth and isset($_COOKIE['spip_lang_ecrire'])
+if (
+	!$var_auth and isset($_COOKIE['spip_lang_ecrire'])
 	and $_COOKIE['spip_lang_ecrire'] <> $GLOBALS['visiteur_session']['lang']
 ) {
 	include_spip('action/converser');

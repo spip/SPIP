@@ -39,7 +39,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return string
  *     Code HTML de la liste
  */
-function inc_lister_objets_dist($vue, $contexte = array(), $force = false) {
+function inc_lister_objets_dist($vue, $contexte = [], $force = false) {
 	$res = ''; // debug
 	if (!is_array($contexte)) {
 		return _L('$contexte doit etre un tableau dans inc/lister_objets');
@@ -59,7 +59,7 @@ function inc_lister_objets_dist($vue, $contexte = array(), $force = false) {
 
 	$contexte['sinon'] = ($force ? $contexte['titre'] : '');
 
-	$res = recuperer_fond($fond, $contexte, array('ajax' => true));
+	$res = recuperer_fond($fond, $contexte, ['ajax' => true]);
 	if (_request('var_liste')) {
 		echo var_export($contexte, true);
 	}

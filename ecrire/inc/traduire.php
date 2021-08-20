@@ -38,8 +38,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Liste des fichiers de langue trouvés, dans l'ordre des chemins
  */
 function find_langs_in_path($file, $dirname = 'lang') {
-	static $dirs = array();
-	$liste = array();
+	static $dirs = [];
+	$liste = [];
 	foreach (creer_chemin() as $dir) {
 		if (!isset($dirs[$a = $dir . $dirname])) {
 			$dirs[$a] = (is_dir($a) || !$a);
@@ -71,16 +71,17 @@ function chercher_module_lang($module, $lang = '') {
 	}
 
 	// 1) dans un repertoire nomme lang/ se trouvant sur le chemin
-	if ($f = ($module == 'local'
+	if (
+		$f = ($module == 'local'
 		? find_in_path($module . $lang . '.php', 'lang/')
 		: find_langs_in_path($module . $lang . '.php', 'lang/'))
 	) {
-		return is_array($f) ? $f : array($f);
+		return is_array($f) ? $f : [$f];
 	}
 
 	// 2) directement dans le chemin (old style, uniquement pour local)
 	return (($module == 'local') or strpos($module, '/'))
-		? (($f = find_in_path($module . $lang . '.php')) ? array($f) : false)
+		? (($f = find_in_path($module . $lang . '.php')) ? [$f] : false)
 		: false;
 }
 
@@ -103,10 +104,10 @@ function chercher_module_lang($module, $lang = '') {
  * @return string Langue du module chargé, sinon chaîne vide.
  **/
 function charger_langue($lang, $module = 'spip') {
-	static $langs = array();
+	static $langs = [];
 	$var = 'i18n_' . $module . '_' . $lang;
 	if (!isset($langs[$lang])) {
-		$langs[$lang] = array();
+		$langs[$lang] = [];
 		if ($lang) {
 			$langs[$lang][] = $lang;
 			if (strpos($lang, '_') !== false) {
@@ -149,13 +150,13 @@ function charger_langue($lang, $module = 'spip') {
  *    Liste des chemins de fichiers de langue à surcharger.
  **/
 function surcharger_langue($fichiers) {
-	static $surcharges = array();
+	static $surcharges = [];
 	if (!isset($GLOBALS['idx_lang'])) {
 		return;
 	}
 
 	if (!is_array($fichiers)) {
-		$fichiers = array($fichiers);
+		$fichiers = [$fichiers];
 	}
 	if (!count($fichiers)) {
 		return;
@@ -171,7 +172,7 @@ function surcharger_langue($fichiers) {
 		}
 		if (is_array($surcharges[$fichier])) {
 			$GLOBALS[$GLOBALS['idx_lang']] = array_merge(
-				(isset($GLOBALS[$GLOBALS['idx_lang']]) ? (array)$GLOBALS[$GLOBALS['idx_lang']] : array()),
+				(isset($GLOBALS[$GLOBALS['idx_lang']]) ? (array)$GLOBALS[$GLOBALS['idx_lang']] : []),
 				$surcharges[$fichier]
 			);
 		}
@@ -234,8 +235,8 @@ class SPIP_Traductions_Description {
  *     - SPIP_Traductions_Description : traduction et description (texte, module, langue)
  **/
 function inc_traduire_dist($ori, $lang, $raw = false) {
-	static $deja_vu = array();
-	static $local = array();
+	static $deja_vu = [];
+	static $local = [];
 
 	if (isset($deja_vu[$lang][$ori]) and (_request('var_mode') != 'traduction')) {
 		return $raw ? $deja_vu[$lang][$ori] : $deja_vu[$lang][$ori]->texte;
@@ -247,7 +248,7 @@ function inc_traduire_dist($ori, $lang, $raw = false) {
 		$modules = explode('|', $modules);
 		$ori_complet = $ori;
 	} else {
-		$modules = array('spip', 'ecrire');
+		$modules = ['spip', 'ecrire'];
 		$code = $ori;
 		$ori_complet = implode('|', $modules) . ':' . $ori;
 	}
@@ -303,12 +304,13 @@ function inc_traduire_dist($ori, $lang, $raw = false) {
 
 		// Supprimer la mention <NEW> ou <MODIF>
 		if (substr($desc->texte, 0, 1) === '<') {
-			$desc->texte = str_replace(array('<NEW>', '<MODIF>'), array(), $desc->texte);
+			$desc->texte = str_replace(['<NEW>', '<MODIF>'], [], $desc->texte);
 		}
 
 		// Si on n'est pas en utf-8, la chaine peut l'etre...
 		// le cas echeant on la convertit en entites html &#xxx;
-		if ((!isset($GLOBALS['meta']['charset']) or $GLOBALS['meta']['charset'] !== 'utf-8')
+		if (
+			(!isset($GLOBALS['meta']['charset']) or $GLOBALS['meta']['charset'] !== 'utf-8')
 			and preg_match(',[\x7f-\xff],S', $desc->texte)
 		) {
 			include_spip('inc/charsets');
@@ -347,8 +349,8 @@ function definir_details_traduction($desc, $modules) {
 			. $desc->texte
 			. '</span>';
 		$desc->texte = str_replace(
-			array("$desc->module:", "$desc->module|"),
-			array("*$desc->module*:", "*$desc->module*|"),
+			["$desc->module:", "$desc->module|"],
+			["*$desc->module*:", "*$desc->module*|"],
 			$desc->texte
 		);
 	}

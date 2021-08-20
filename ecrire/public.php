@@ -21,14 +21,15 @@
 // par souci de compatiilite).
 
 if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
-	echo recuperer_fond($fond, $contexte_inclus, array(), _request('connect'));
+	echo recuperer_fond($fond, $contexte_inclus, [], _request('connect'));
 } else {
 	$GLOBALS['_INC_PUBLIC'] = 1;
 	define('_PIPELINE_SUFFIX', test_espace_prive() ? '_prive' : '');
 
 	// Faut-il initialiser SPIP ? (oui dans le cas general)
 	if (!defined('_DIR_RESTREINT_ABS')) {
-		if (defined('_DIR_RESTREINT')
+		if (
+			defined('_DIR_RESTREINT')
 			and @file_exists(_ROOT_RESTREINT . 'inc_version.php')
 		) {
 			include_once _ROOT_RESTREINT . 'inc_version.php';
@@ -45,7 +46,8 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 				$fond = (string)$_GET[_SPIP_PAGE];
 
 				// Securite
-				if (strstr($fond, '/')
+				if (
+					strstr($fond, '/')
 					and !(
 						isset($GLOBALS['visiteur_session']) // pour eviter d'evaluer la suite pour les anonymes
 						and include_spip('inc/autoriser')
@@ -70,14 +72,15 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 		}
 	}
 
-	$tableau_des_temps = array();
+	$tableau_des_temps = [];
 
 	// Particularites de certains squelettes
 	if ($fond == 'login') {
 		$forcer_lang = true;
 	}
 
-	if (isset($forcer_lang) and $forcer_lang and ($forcer_lang !== 'non')
+	if (
+		isset($forcer_lang) and $forcer_lang and ($forcer_lang !== 'non')
 		and !_request('action')
 		and $_SERVER['REQUEST_METHOD'] != 'POST'
 	) {
@@ -129,7 +132,7 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 
 	// Tester si on est admin et il y a des choses supplementaires a dire
 	// type tableau pour y mettre des choses au besoin.
-	$debug = ((_request('var_mode') == 'debug') or $tableau_des_temps) ? array(1) : array();
+	$debug = ((_request('var_mode') == 'debug') or $tableau_des_temps) ? [1] : [];
 
 	// affiche-t-on les boutons d'administration ? voir f_admin()
 	$affiche_boutons_admin = ($html and (
@@ -161,7 +164,7 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 				. highlight_string($page['codephp'], true)
 				. "\n<hr />\n";
 		}
-		$msg = array($err);
+		$msg = [$err];
 		erreur_squelette($msg);
 	}
 
@@ -177,7 +180,7 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 	}
 	// l'affichage de la page a pu lever des erreurs (inclusion manquante)
 	// il faut tester a nouveau
-	$debug = ((_request('var_mode') == 'debug') or $tableau_des_temps) ? array(1) : array();
+	$debug = ((_request('var_mode') == 'debug') or $tableau_des_temps) ? [1] : [];
 
 	// Appel au debusqueur en cas d'erreurs ou de demande de trace
 	// at last
@@ -190,7 +193,8 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 			echo erreur_squelette(false);
 		}
 	} else {
-		if (isset($GLOBALS['meta']['date_prochain_postdate'])
+		if (
+			isset($GLOBALS['meta']['date_prochain_postdate'])
 			and $GLOBALS['meta']['date_prochain_postdate'] <= time()
 		) {
 			include_spip('inc/rubriques');

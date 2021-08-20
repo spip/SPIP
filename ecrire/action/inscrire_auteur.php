@@ -38,9 +38,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *   - modele_mail : squelette de mail a utiliser
  * @return array|string
  */
-function action_inscrire_auteur_dist($statut, $mail_complet, $nom, $options = array()) {
+function action_inscrire_auteur_dist($statut, $mail_complet, $nom, $options = []) {
 	if (!is_array($options)) {
-		$options = array('id' => $options);
+		$options = ['id' => $options];
 	}
 
 	if (function_exists('test_inscription')) {
@@ -99,7 +99,7 @@ function action_inscrire_auteur_dist($statut, $mail_complet, $nom, $options = ar
 	$notifications(
 		'inscription',
 		$desc['id_auteur'],
-		array('nom' => $desc['nom'], 'email' => $desc['email'])
+		['nom' => $desc['nom'], 'email' => $desc['email']]
 	);
 
 	return $desc;
@@ -130,7 +130,7 @@ function test_inscription_dist($statut, $mail, $nom, $options) {
 		return 'info_email_invalide';
 	}
 	$nom = trim(corriger_caracteres($nom));
-	$res = array('email' => $r, 'nom' => $nom, 'prefs' => $statut);
+	$res = ['email' => $r, 'nom' => $nom, 'prefs' => $statut];
 	if (isset($options['login'])) {
 		$login = trim(corriger_caracteres($options['login']));
 		if ((strlen($login) >= _LOGIN_TROP_COURT) and (strlen($nom) <= 64)) {
@@ -230,7 +230,7 @@ function test_login($nom, $mail) {
  * @param array $options
  * @return array
  */
-function envoyer_inscription_dist($desc, $nom, $mode, $options = array()) {
+function envoyer_inscription_dist($desc, $nom, $mode, $options = []) {
 
 	$contexte = array_merge($desc, $options);
 	$contexte['nom'] = $nom;
@@ -251,7 +251,7 @@ function envoyer_inscription_dist($desc, $nom, $mode, $options = array()) {
 	$from = (isset($options['from']) ? $options['from'] : null);
 	$head = null;
 
-	return array('', $message, $from, $head);
+	return ['', $message, $from, $head];
 }
 
 
@@ -265,7 +265,7 @@ function creer_pass_pour_auteur($id_auteur) {
 	include_spip('inc/acces');
 	$pass = creer_pass_aleatoire(16, $id_auteur);
 	include_spip('action/editer_auteur');
-	auteur_instituer($id_auteur, array('pass' => $pass));
+	auteur_instituer($id_auteur, ['pass' => $pass]);
 
 	return $pass;
 }
@@ -283,7 +283,8 @@ function tester_statut_inscription($statut_tmp, $id) {
 	include_spip('inc/autoriser');
 	if ($statut_tmp) {
 		return autoriser('inscrireauteur', $statut_tmp, $id) ? $statut_tmp : '';
-	} elseif (autoriser('inscrireauteur', $statut_tmp = '1comite', $id)
+	} elseif (
+		autoriser('inscrireauteur', $statut_tmp = '1comite', $id)
 		or autoriser('inscrireauteur', $statut_tmp = '6forum', $id)
 	) {
 		return $statut_tmp;
@@ -323,7 +324,7 @@ function confirmer_statut_inscription($auteur) {
 	autoriser_exception('modifier', 'auteur', $auteur['id_auteur']);
 	include_spip('action/editer_auteur');
 	// changer le statut
-	auteur_modifier($auteur['id_auteur'], array('statut' => $s));
+	auteur_modifier($auteur['id_auteur'], ['statut' => $s]);
 	unset($_COOKIE['spip_session']); // forcer la maj de la session
 	// lever l'autorisation de modif du statut auteur
 	autoriser_exception('modifier', 'auteur', $auteur['id_auteur'], false);
@@ -347,7 +348,7 @@ function auteur_attribuer_jeton($id_auteur) {
 	// s'assurer de l'unicite du jeton pour le couple (email,cookie)
 	do {
 		$jeton = creer_uniqid();
-		sql_updateq('spip_auteurs', array('cookie_oubli' => $jeton), 'id_auteur=' . intval($id_auteur));
+		sql_updateq('spip_auteurs', ['cookie_oubli' => $jeton], 'id_auteur=' . intval($id_auteur));
 	} while (sql_countsel('spip_auteurs', 'cookie_oubli=' . sql_quote($jeton)) > 1);
 
 	return $jeton;
@@ -378,5 +379,5 @@ function auteur_verifier_jeton($jeton) {
  * @return bool
  */
 function auteur_effacer_jeton($id_auteur) {
-	return sql_updateq('spip_auteurs', array('cookie_oubli' => ''), 'id_auteur=' . intval($id_auteur));
+	return sql_updateq('spip_auteurs', ['cookie_oubli' => ''], 'id_auteur=' . intval($id_auteur));
 }

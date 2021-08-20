@@ -53,10 +53,10 @@ function inc_prepare_recherche_dist(
 	$table = 'articles',
 	$cond = false,
 	$serveur = '',
-	$modificateurs = array(),
+	$modificateurs = [],
 	$primary = ''
 ) {
-	static $cache = array();
+	static $cache = [];
 	$delai_fraicheur = min(
 		_DELAI_CACHE_resultats,
 		time() - (isset($GLOBALS['meta']['derniere_modif']) ? $GLOBALS['meta']['derniere_modif'] : 0)
@@ -70,10 +70,10 @@ function inc_prepare_recherche_dist(
 
 	// traiter le cas {recherche?}
 	if ($cond and !strlen($recherche)) {
-		return array(
+		return [
 			'0 as points' /* as points */, /* where */
 			''
-		);
+		];
 	}
 
 
@@ -92,7 +92,8 @@ function inc_prepare_recherche_dist(
 			'',
 			'0,1'
 		);
-		if (!$row
+		if (
+			!$row
 			or (defined('_VAR_MODE') and _VAR_MODE == 'recalcul')
 		) {
 			$rechercher = true;
@@ -106,33 +107,33 @@ function inc_prepare_recherche_dist(
 		$points = recherche_en_base(
 			$recherche,
 			$x,
-			array(
+			[
 				'score' => true,
 				'toutvoir' => true,
 				'jointures' => true
-			),
+			],
 			$serveur
 		);
 		// pas de résultat, pas de point
-		$points = isset($points[$x]) ? $points[$x] : array();
+		$points = isset($points[$x]) ? $points[$x] : [];
 
 		// permettre aux plugins de modifier le resultat
-		$points = pipeline('prepare_recherche', array(
-			'args' => array(
+		$points = pipeline('prepare_recherche', [
+			'args' => [
 				'type' => $x,
 				'recherche' => $recherche,
 				'serveur' => $serveur,
 				'modificateurs' => $modificateurs
-			),
+			],
 			'data' => $points
-		));
+		]);
 
 		// supprimer les anciens resultats de cette recherche
 		// et les resultats trop vieux avec une marge
 		// pas de AS resultats dans un delete (mysql)
 		$whered = str_replace(
-			array('resultats.recherche', 'resultats.table_objet', 'resultats.serveur'),
-			array('recherche', 'table_objet', 'serveur'),
+			['resultats.recherche', 'resultats.table_objet', 'resultats.serveur'],
+			['recherche', 'table_objet', 'serveur'],
 			$where
 		);
 
@@ -143,23 +144,23 @@ function inc_prepare_recherche_dist(
 
 		// inserer les resultats dans la table de cache des resultats
 		if (count($points)) {
-			$tab_couples = array();
+			$tab_couples = [];
 			foreach ($points as $id => $p) {
-				$tab_couples[] = array(
+				$tab_couples[] = [
 					'recherche' => $hash,
 					'id' => $id,
 					'points' => $p['score'],
 					'table_objet' => $table,
 					'serveur' => $hash_serv,
-				);
+				];
 			}
-			sql_insertq_multi('spip_resultats', $tab_couples, array());
+			sql_insertq_multi('spip_resultats', $tab_couples, []);
 		}
 	}
 
 	if (!isset($cache[$serveur][$table][$recherche])) {
 		if (!$serveur) {
-			$cache[$serveur][$table][$recherche] = array('resultats.points AS points', $where);
+			$cache[$serveur][$table][$recherche] = ['resultats.points AS points', $where];
 		} else {
 			if (sql_countsel('spip_resultats as resultats', $where)) {
 				$rows = sql_allfetsel('resultats.id,resultats.points', 'spip_resultats as resultats', $where);
@@ -186,9 +187,9 @@ function inc_prepare_recherche_dist(
 function generer_select_where_explicites($table, $primary, $rows, $serveur) {
 	# calculer le {id_article IN()} et le {... as points}
 	if (!count($rows)) {
-		return array("''", '0=1');
+		return ["''", '0=1'];
 	} else {
-		$listes_ids = array();
+		$listes_ids = [];
 		$select = '0';
 		foreach ($rows as $r) {
 			$listes_ids[$r['points']][] = $r['id'];
@@ -200,6 +201,6 @@ function generer_select_where_explicites($table, $primary, $rows, $serveur) {
 				. ') ';
 		}
 
-		return array("$select AS points ", sql_in("$table.$primary", array_map('reset', $rows), '', $serveur));
+		return ["$select AS points ", sql_in("$table.$primary", array_map('reset', $rows), '', $serveur)];
 	}
 }

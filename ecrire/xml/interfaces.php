@@ -52,11 +52,11 @@ define('_DOCTYPE_RSS', 'http://www.rssboard.org/rss-0.91.dtd');
  * Document Type Compilation
  **/
 class DTC {
-	public $macros = array();
-	public $elements = array();
-	public $peres = array();
-	public $attributs = array();
-	public $entites = array();
-	public $regles = array();
-	public $pcdata = array();
+	public $macros = [];
+	public $elements = [];
+	public $peres = [];
+	public $attributs = [];
+	public $entites = [];
+	public $regles = [];
+	public $pcdata = [];
 }

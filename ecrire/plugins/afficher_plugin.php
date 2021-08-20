@@ -35,7 +35,7 @@ function plugins_afficher_plugin_dist(
 ) {
 
 	static $id_input = 0;
-	static $versions = array();
+	static $versions = [];
 
 	$force_reload = (_request('var_mode') == 'recalcul');
 	$get_infos = charger_fonction('get_infos', 'plugins');
@@ -70,9 +70,9 @@ function plugins_afficher_plugin_dist(
 		$class_li .= ' error';
 		$erreur = http_img_pack(
 			'plugin-err-32.png',
-			_T('plugin_impossible_activer', array('plugin' => $nom)),
+			_T('plugin_impossible_activer', ['plugin' => $nom]),
 			" class='picto_err'",
-			_T('plugin_impossible_activer', array('plugin' => $nom))
+			_T('plugin_impossible_activer', ['plugin' => $nom])
 		)
 			. "<div class='erreur'>" . implode(
 				'<br />',
@@ -118,10 +118,10 @@ function plugin_bouton_config($nom, $infos, $dir) {
 	if (isset($infos['config']) and $infos['config']) {
 		return recuperer_fond(
 			"$dir$nom/" . $infos['config'],
-			array(
+			[
 				'script' => 'configurer_' . $prefix,
 				'nom' => $nom
-			)
+			]
 		);
 	}
 
@@ -137,10 +137,10 @@ function plugin_bouton_config($nom, $infos, $dir) {
 	// sinon prendre le squelette std sur le nom std
 	return recuperer_fond(
 		'prive/squelettes/inclure/cfg',
-		array(
+		[
 			'script' => 'configurer_' . $prefix,
 			'nom' => $nom
-		)
+		]
 	);
 }
 
@@ -246,7 +246,7 @@ function plugin_desintalle($plug_file, $nom, $dir_plugins = null) {
  *     Traduction de l'état dans la langue en cours
  **/
 function plugin_etat_en_clair($etat) {
-	if (!in_array($etat, array('stable', 'test', 'experimental'))) {
+	if (!in_array($etat, ['stable', 'test', 'experimental'])) {
 		$etat = 'developpement';
 	}
 
@@ -260,7 +260,7 @@ function plugin_propre($texte, $module = '', $propre = 'propre') {
 		$module = substr($module, strlen(_DIR_RACINE));
 	}
 	if (preg_match('|^\w+_[\w_]+$|', $texte)) {
-		$texte = _T(($module ? "$module:" : '') . $texte, array(), array('force' => false));
+		$texte = _T(($module ? "$module:" : '') . $texte, [], ['force' => false]);
 	}
 
 	return $propre($texte);
@@ -289,7 +289,8 @@ function affiche_bloc_plugin($plug_file, $info, $dir_plugins = null) {
 		$description = plugin_propre($info['description'], $dir);
 	}
 
-	if (isset($info['documentation'])
+	if (
+		isset($info['documentation'])
 		and $lien = $info['documentation']
 	) {
 		$description .= "<p><em class='site'><a href='$lien' class='spip_out'>" . _T('en_savoir_plus') . '</a></em></p>';
@@ -340,7 +341,7 @@ function affiche_bloc_plugin($plug_file, $info, $dir_plugins = null) {
 	//
 	// Ajouter les infos techniques
 	//
-	$infotech = array();
+	$infotech = [];
 
 	$version = '<dt>' . _T('version') . '</dt><dd>' . $info['version'];
 	// Version VCS

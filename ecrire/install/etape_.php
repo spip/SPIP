@@ -10,7 +10,6 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 /**
  * Affichage de l'écran d'installation (étape 0 : écran d'accueil)
  *

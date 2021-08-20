@@ -23,7 +23,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 
-$GLOBALS['visiteur_session'] = array(); # globale decrivant l'auteur
+$GLOBALS['visiteur_session'] = []; # globale decrivant l'auteur
 
 /**
  * 3 actions sur les sessions, selon le type de l'argument:
@@ -82,8 +82,8 @@ function supprimer_sessions($id_auteur, $toutes = true, $actives = true) {
 	spip_log("supprimer sessions auteur $id_auteur", 'session');
 	if ($toutes or $id_auteur !== $GLOBALS['visiteur_session']['id_auteur']) {
 		if ($dir = opendir(_DIR_SESSIONS)) {
-			$t = $_SERVER['REQUEST_TIME']  - (4*_RENOUVELLE_ALEA); // 48h par defaut
-			$t_short = $_SERVER['REQUEST_TIME']  - max(_RENOUVELLE_ALEA/4, 3*3600); // 3h par defaut
+			$t = $_SERVER['REQUEST_TIME']  - (4 * _RENOUVELLE_ALEA); // 48h par defaut
+			$t_short = $_SERVER['REQUEST_TIME']  - max(_RENOUVELLE_ALEA / 4, 3 * 3600); // 3h par defaut
 			$t = time() - (4 * _RENOUVELLE_ALEA);
 			while (($f = readdir($dir)) !== false) {
 				$nb_files++;
@@ -94,7 +94,7 @@ function supprimer_sessions($id_auteur, $toutes = true, $actives = true) {
 					}
 					// si il y a trop de sessions ouvertes, on purge les sessions anonymes de plus de 3H
 					// cf http://core.spip.org/issues/3276
-					elseif ($nb_files>$nb_max_files and !intval($regs[1]) and ($t_short > filemtime($f))) {
+					elseif ($nb_files > $nb_max_files and !intval($regs[1]) and ($t_short > filemtime($f))) {
 						spip_unlink($f);
 					}
 				}
@@ -169,7 +169,8 @@ function ajouter_session($auteur) {
 		}
 	}
 
-	if (!isset($_COOKIE['spip_session'])
+	if (
+		!isset($_COOKIE['spip_session'])
 		or !preg_match(',^' . $id_auteur . '_,', $_COOKIE['spip_session'])
 	) {
 		$_COOKIE['spip_session'] = $id_auteur . '_' . md5(uniqid(rand(), true));
@@ -188,9 +189,11 @@ function ajouter_session($auteur) {
 	if (!isset($auteur['date_session'])) {
 		$auteur['date_session'] = time();
 	}
-	if (isset($auteur['prefs'])
+	if (
+		isset($auteur['prefs'])
 		and is_string($auteur['prefs'])
-	  and $prefs = @unserialize($auteur['prefs'])) {
+		and $prefs = @unserialize($auteur['prefs'])
+	) {
 		$auteur['prefs'] = $prefs;
 	}
 
@@ -358,7 +361,8 @@ function verifier_session($change = false) {
 	}
 
 	// Si la session a ete initiee il y a trop longtemps, elle est annulee
-	if (isset($GLOBALS['visiteur_session'])
+	if (
+		isset($GLOBALS['visiteur_session'])
 		and defined('_AGE_SESSION_MAX')
 		and _AGE_SESSION_MAX > 0
 		and time() - @$GLOBALS['visiteur_session']['date_session'] > _AGE_SESSION_MAX
@@ -401,7 +405,7 @@ function session_get($nom) {
  * @return void|array
  */
 function session_set($nom, $val = null) {
-	static $remove = array();
+	static $remove = [];
 	static $actualiser_sessions = false;
 	if ($nom === false) {
 		return $remove;
@@ -417,7 +421,7 @@ function session_set($nom, $val = null) {
 		// On ajoute la valeur dans la globale
 		$GLOBALS['visiteur_session'][$nom] = $val;
 		if ($remove) {
-			$remove = array_diff($remove, array($nom));
+			$remove = array_diff($remove, [$nom]);
 		}
 	}
 	if (!$actualiser_sessions) {
@@ -463,7 +467,7 @@ function terminer_actualiser_sessions() {
  * @param array $supprimer_cles
  *     Liste des clés à supprimer des tableaux de sessions
  */
-function actualiser_sessions($auteur, $supprimer_cles = array()) {
+function actualiser_sessions($auteur, $supprimer_cles = []) {
 
 	$id_auteur = isset($auteur['id_auteur']) ? intval($auteur['id_auteur']) : 0;
 	$id_auteur_courant = isset($GLOBALS['visiteur_session']['id_auteur']) ? intval($GLOBALS['visiteur_session']['id_auteur']) : 0;
@@ -502,9 +506,10 @@ function actualiser_sessions($auteur, $supprimer_cles = array()) {
 
 	// 1ere passe : lire et fusionner les sessions
 	foreach ($sessions as $session) {
-		$GLOBALS['visiteur_session'] = array();
+		$GLOBALS['visiteur_session'] = [];
 		// a pu etre supprime entre le preg initial et le moment ou l'on arrive la (concurrence)
-		if ($session !== $fichier_session_courante
+		if (
+			$session !== $fichier_session_courante
 			and @file_exists($session)
 		) {
 			include $session; # $GLOBALS['visiteur_session'] est alors l'auteur cible
@@ -522,7 +527,7 @@ function actualiser_sessions($auteur, $supprimer_cles = array()) {
 
 	// seconde passe : ecrire les sessions qui ne sont pas a jour
 	foreach ($sessions as $session) {
-		$GLOBALS['visiteur_session'] = array();
+		$GLOBALS['visiteur_session'] = [];
 		// a pu etre supprime entre le preg initial et le moment ou l'on arrive la (concurrence)
 		if (@file_exists($session)) {
 			include $session; # $GLOBALS['visiteur_session'] est alors l'auteur cible
@@ -566,15 +571,18 @@ function lister_sessions_auteur($id_auteur, $nb_max = null) {
 
 	// si on en a plus que la limite, supprimer les plus vieilles
 	// si ce ne sont pas des sessions anonymes car elles sont alors chacune differentes
-	if ($id_auteur
-		and count($sessions) > $nb_max) {
+	if (
+		$id_auteur
+		and count($sessions) > $nb_max
+	) {
 		// limiter le nombre de sessions ouvertes par un auteur
 		// filemtime sur les sessions
 		$sessions = array_flip($sessions);
 
 		// 1ere passe : lire les filemtime
 		foreach ($sessions as $session => $z) {
-			if ($d = @filemtime($session)
+			if (
+				$d = @filemtime($session)
 			) {
 				$sessions[$session] = $d;
 			} else {
@@ -616,7 +624,7 @@ function preparer_ecriture_session($auteur) {
 	unset($auteur['alea_actuel']);
 	unset($auteur['alea_futur']);
 
-	$auteur = pipeline('preparer_fichier_session', array('args' => array('row' => $row), 'data' => $auteur));
+	$auteur = pipeline('preparer_fichier_session', ['args' => ['row' => $row], 'data' => $auteur]);
 
 	// ne pas enregistrer les valeurs vraiment nulle dans le fichier
 	foreach ($auteur as $variable => $valeur) {

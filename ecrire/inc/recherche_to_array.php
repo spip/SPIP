@@ -10,39 +10,38 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
 
 // methodes sql
-function inc_recherche_to_array_dist($recherche, $options = array()) {
+function inc_recherche_to_array_dist($recherche, $options = []) {
 
 	// options par defaut
 	$options = array_merge(
-		array(
+		[
 			'score' => true,
 			'champs' => false,
 			'toutvoir' => false,
 			'matches' => false,
 			'jointures' => false
-		),
+		],
 		$options
 	);
 
 	include_spip('inc/rechercher');
 	include_spip('inc/autoriser');
 
-	$requete = array(
-		'SELECT' => array(),
-		'FROM' => array(),
-		'WHERE' => array(),
-		'GROUPBY' => array(),
-		'ORDERBY' => array(),
+	$requete = [
+		'SELECT' => [],
+		'FROM' => [],
+		'WHERE' => [],
+		'GROUPBY' => [],
+		'ORDERBY' => [],
 		'LIMIT' => '',
-		'HAVING' => array()
-	);
+		'HAVING' => []
+	];
 
 	$table = sinon($options['table'], 'article');
 	if ($options['champs']) {
@@ -57,7 +56,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 
 	$jointures = $options['jointures']
 		? liste_des_jointures()
-		: array();
+		: [];
 
 	$_id_table = id_table_objet($table);
 
@@ -69,7 +68,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 	}
 
 	$requete['SELECT'][] = 't.' . $_id_table;
-	$a = array();
+	$a = [];
 	// Recherche fulltext
 	foreach ($champs as $champ => $poids) {
 		if (is_array($champ)) {
@@ -87,7 +86,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 	}
 	$requete['FROM'][] = table_objet_sql($table) . ' AS t';
 
-	$results = array();
+	$results = [];
 
 	$s = sql_select(
 		$requete['SELECT'],
@@ -100,17 +99,20 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 		$serveur
 	);
 
-	while ($t = sql_fetch($s, $serveur)
-		and (!isset($t['score']) or $t['score'] > 0)) {
+	while (
+		$t = sql_fetch($s, $serveur)
+		and (!isset($t['score']) or $t['score'] > 0)
+	) {
 		$id = intval($t[$_id_table]);
 
-		if ($options['toutvoir']
+		if (
+			$options['toutvoir']
 			or autoriser('voir', $table, $id)
 		) {
 			// indiquer les champs concernes
-			$champs_vus = array();
+			$champs_vus = [];
 			$score = 0;
-			$matches = array();
+			$matches = [];
 
 			$vu = false;
 			foreach ($champs as $champ => $poids) {
@@ -118,7 +120,8 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 				$champ = end($champ);
 				// translitteration_rapide uniquement si on est deja en utf-8
 				$value = ($GLOBALS['meta']['charset'] == 'utf-8' ? translitteration_rapide($t[$champ]) : translitteration($t[$champ]));
-				if ($n =
+				if (
+					$n =
 					($options['score'] || $options['matches'])
 						? preg_match_all($preg, $value, $regs, PREG_SET_ORDER)
 						: preg_match($preg, $value)
@@ -137,7 +140,8 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 						$matches[$champ] = $regs;
 					}
 
-					if (!$options['champs']
+					if (
+						!$options['champs']
 						and !$options['score']
 						and !$options['matches']
 					) {
@@ -148,9 +152,9 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 
 			if ($vu) {
 				if (!isset($results)) {
-					$results = array();
+					$results = [];
 				}
-				$results[$id] = array();
+				$results[$id] = [];
 				if ($champs_vus) {
 					$results[$id]['champs'] = $champs_vus;
 				}
@@ -168,11 +172,12 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 	// Gerer les donnees associees
 	// ici on est un peu naze : pas capables de reconstruire une jointure complexe
 	// on ne sait passer que par table de laison en 1 coup
-	if (isset($jointures[$table])
+	if (
+		isset($jointures[$table])
 		and $joints = recherche_en_base(
 			$recherche,
 			$jointures[$table],
-			array_merge($options, array('jointures' => false))
+			array_merge($options, ['jointures' => false])
 		)
 	) {
 		include_spip('action/editer_liens');
@@ -183,11 +188,12 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 		$depart_associable = objet_associable($table);
 		foreach ($joints as $table_liee => $ids_trouves) {
 			// on peut definir une fonction de recherche jointe pour regler les cas particuliers
-			if (!(
+			if (
+				!(
 				$rechercher_joints = charger_fonction("rechercher_joints_${table}_${table_liee}", 'inc', true)
 				or $rechercher_joints = charger_fonction("rechercher_joints_objet_${table_liee}", 'inc', true)
 				or $rechercher_joints = charger_fonction("rechercher_joints_${table}_objet_lie", 'inc', true)
-			)
+				)
 			) {
 				$cle_arrivee = id_table_objet($table_liee);
 				$table_arrivee = table_objet($table_liee, $serveur);
@@ -224,7 +230,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 					$s = sql_select(
 						"id_objet as $cle_depart, $primary as $cle_arrivee",
 						$table_liens,
-						array("objet='$table'", sql_in($primary, array_keys($ids_trouves))),
+						["objet='$table'", sql_in($primary, array_keys($ids_trouves))],
 						'',
 						'',
 						'',
@@ -237,7 +243,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 					$s = sql_select(
 						"$primary as $cle_depart, id_objet as $cle_arrivee",
 						$table_liens,
-						array("objet='$table_liee'", sql_in('id_objet', array_keys($ids_trouves))),
+						["objet='$table_liee'", sql_in('id_objet', array_keys($ids_trouves))],
 						'',
 						'',
 						'',
@@ -245,7 +251,8 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 						$serveur
 					);
 				} // cas table de liaison generique spip_xxx_yyy
-				elseif ($t = $trouver_table($table_arrivee . '_' . $table_depart, $serveur)
+				elseif (
+					$t = $trouver_table($table_arrivee . '_' . $table_depart, $serveur)
 					or $t = $trouver_table($table_depart . '_' . $table_arrivee, $serveur)
 				) {
 					$s = sql_select(
@@ -272,10 +279,10 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 				$id = $t[$cle_depart];
 				$joint = $ids_trouves[$t[$cle_arrivee]];
 				if (!isset($results)) {
-					$results = array();
+					$results = [];
 				}
 				if (!isset($results[$id])) {
-					$results[$id] = array();
+					$results[$id] = [];
 				}
 				if (isset($joint['score']) and $joint['score']) {
 					if (!isset($results[$id]['score'])) {

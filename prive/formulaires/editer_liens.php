@@ -1,4 +1,5 @@
 <?php
+
 /***************************************************************************\
  *  SPIP, Système de publication pour l'internet                           *
  *                                                                         *
@@ -53,7 +54,7 @@ function determine_source_lien_objet($a, $b, $c) {
 		$id_objet = $b;
 	}
 
-	return array($table_source, $objet, $id_objet, $objet_lien);
+	return [$table_source, $objet, $id_objet, $objet_lien];
 }
 
 /**
@@ -77,11 +78,11 @@ function determine_source_lien_objet($a, $b, $c) {
  *
  * @return array
  */
-function formulaires_editer_liens_charger_dist($a, $b, $c, $options = array()) {
+function formulaires_editer_liens_charger_dist($a, $b, $c, $options = []) {
 
 	// compat avec ancienne signature ou le 4eme argument est $editable
 	if (!is_array($options)) {
-		$options = array('editable' => $options);
+		$options = ['editable' => $options];
 	} elseif (!isset($options['editable'])) {
 		$options['editable'] = true;
 	}
@@ -107,10 +108,12 @@ function formulaires_editer_liens_charger_dist($a, $b, $c, $options = array()) {
 	$editable = ($editable and autoriser('associer' . $table_source, $objet, $id_objet)
 		and autoriser('modifier', $objet, $id_objet));
 
-	if (!$editable and !count(objet_trouver_liens(
-		array($objet_lien => '*'),
-		array(($objet_lien == $objet_source ? $objet : $objet_source) => $id_objet)
-	))) {
+	if (
+		!$editable and !count(objet_trouver_liens(
+			[$objet_lien => '*'],
+			[($objet_lien == $objet_source ? $objet : $objet_source) => $id_objet]
+		))
+	) {
 		return false;
 	}
 
@@ -138,7 +141,7 @@ function formulaires_editer_liens_charger_dist($a, $b, $c, $options = array()) {
 	else {
 		$oups = '';
 	}
-	$valeurs = array(
+	$valeurs = [
 		'id' => "$table_source-$objet-$id_objet-$objet_lien", // identifiant unique pour les id du form
 		'_vue_liee' => $skel_vue,
 		'_vue_ajout' => $skel_ajout,
@@ -158,7 +161,7 @@ function formulaires_editer_liens_charger_dist($a, $b, $c, $options = array()) {
 		'_roles' => $roles, # description des roles
 		'_oups' => $oups,
 		'editable' => $editable,
-	);
+	];
 
 	// les options non definies dans $valeurs sont passees telles quelles au formulaire html
 	$valeurs = array_merge($options, $valeurs);
@@ -206,17 +209,17 @@ function formulaires_editer_liens_charger_dist($a, $b, $c, $options = array()) {
  *
  * @return array
  */
-function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = array()) {
+function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = []) {
 	// compat avec ancienne signature ou le 4eme argument est $editable
 	if (!is_array($options)) {
-		$options = array('editable' => $options);
+		$options = ['editable' => $options];
 	} elseif (!isset($options['editable'])) {
 		$options['editable'] = true;
 	}
 
 	$editable = $options['editable'];
 
-	$res = array('editable' => $editable ? true : false);
+	$res = ['editable' => $editable ? true : false];
 	list($table_source, $objet, $id_objet, $objet_lien) = determine_source_lien_objet($a, $b, $c);
 	if (!$table_source or !$objet or !$objet_lien) {
 		return $res;
@@ -230,7 +233,8 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = array()) {
 	include_spip('inc/autoriser');
 	if (autoriser('modifier', $objet, $id_objet)) {
 		// annuler les suppressions du coup d'avant !
-		if (_request('annuler_oups')
+		if (
+			_request('annuler_oups')
 			and $oups = _request('_oups')
 			and $oups = base64_decode($oups)
 			and $oups = unserialize($oups)
@@ -242,9 +246,9 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = array()) {
 				include_spip('action/editer_liens');
 				foreach ($oups as $oup) {
 					if ($objet_lien == $objet_source) {
-						objet_associer(array($objet_source => $oup[$objet_source]), array($objet => $oup[$objet]), $oup);
+						objet_associer([$objet_source => $oup[$objet_source]], [$objet => $oup[$objet]], $oup);
 					} else {
-						objet_associer(array($objet => $oup[$objet]), array($objet_source => $oup[$objet_source]), $oup);
+						objet_associer([$objet => $oup[$objet]], [$objet_source => $oup[$objet_source]], $oup);
 					}
 				}
 			}
@@ -258,7 +262,7 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = array()) {
 
 		if (_request('desordonner_liens')) {
 			include_spip('action/editer_liens');
-			objet_qualifier_liens(array($objet_lien => '*'), array($objet => $id_objet), array('rang_lien' => 0));
+			objet_qualifier_liens([$objet_lien => '*'], [$objet => $id_objet], ['rang_lien' => 0]);
 		}
 
 		// il est possible de preciser dans une seule variable un remplacement :
@@ -266,7 +270,7 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = array()) {
 		if ($remplacer = _request('remplacer_lien')) {
 			foreach ($remplacer as $k => $v) {
 				if ($old = lien_verifier_action($k, '')) {
-					foreach (is_array($v) ? $v : array($v) as $kn => $vn) {
+					foreach (is_array($v) ? $v : [$v] as $kn => $vn) {
 						if ($new = lien_verifier_action($kn, $vn)) {
 							$supprimer[$old] = 'x';
 							$ajouter[$new] = '+';
@@ -277,34 +281,36 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = array()) {
 		}
 
 		if ($supprimer) {
-			if ($supprimer_objets = charger_fonction(
-				"editer_liens_supprimer_{$table_source}_{$objet}_{$objet_lien}",
-				'action',
-				true
-			)) {
+			if (
+				$supprimer_objets = charger_fonction(
+					"editer_liens_supprimer_{$table_source}_{$objet}_{$objet_lien}",
+					'action',
+					true
+				)
+			) {
 				$oups = $supprimer_objets($supprimer);
 			} else {
 				include_spip('action/editer_liens');
-				$oups = array();
+				$oups = [];
 
 				foreach ($supprimer as $k => $v) {
 					if ($lien = lien_verifier_action($k, $v)) {
 						$lien = explode('-', $lien);
 						list($objet_source, $ids, $objet_lie, $idl, $role) = array_pad($lien, 5, null);
 						// appliquer une condition sur le rôle si défini ('*' pour tous les roles)
-						$cond = (!is_null($role) ? array('role' => $role) : array());
+						$cond = (!is_null($role) ? ['role' => $role] : []);
 						if ($objet_lien == $objet_source) {
 							$oups = array_merge(
 								$oups,
-								objet_trouver_liens(array($objet_source => $ids), array($objet_lie => $idl), $cond)
+								objet_trouver_liens([$objet_source => $ids], [$objet_lie => $idl], $cond)
 							);
-							objet_dissocier(array($objet_source => $ids), array($objet_lie => $idl), $cond);
+							objet_dissocier([$objet_source => $ids], [$objet_lie => $idl], $cond);
 						} else {
 							$oups = array_merge(
 								$oups,
-								objet_trouver_liens(array($objet_lie => $idl), array($objet_source => $ids), $cond)
+								objet_trouver_liens([$objet_lie => $idl], [$objet_source => $ids], $cond)
 							);
-							objet_dissocier(array($objet_lie => $idl), array($objet_source => $ids), $cond);
+							objet_dissocier([$objet_lie => $idl], [$objet_source => $ids], $cond);
 						}
 					}
 				}
@@ -313,7 +319,8 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = array()) {
 		}
 
 		if ($ajouter) {
-			if ($ajouter_objets = charger_fonction("editer_liens_ajouter_{$table_source}_{$objet}_{$objet_lien}", 'action', true)
+			if (
+				$ajouter_objets = charger_fonction("editer_liens_ajouter_{$table_source}_{$objet}_{$objet_lien}", 'action', true)
 			) {
 				$ajout_ok = $ajouter_objets($ajouter);
 			} else {
@@ -346,12 +353,12 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = array()) {
 			foreach ($ordonner as $k => $rang_lien) {
 				if ($lien = lien_verifier_action($k, '')) {
 					list($objet1, $ids, $objet2, $idl) = explode('-', $lien);
-					$qualif = array('rang_lien' => $rang_lien);
+					$qualif = ['rang_lien' => $rang_lien];
 
 					if ($objet_lien == $objet1) {
-						objet_qualifier_liens(array($objet1 => $ids), array($objet2 => $idl), $qualif);
+						objet_qualifier_liens([$objet1 => $ids], [$objet2 => $idl], $qualif);
 					} else {
-						objet_qualifier_liens(array($objet2 => $idl), array($objet1 => $ids), $qualif);
+						objet_qualifier_liens([$objet2 => $idl], [$objet1 => $ids], $qualif);
 					}
 					set_request('id_lien_ajoute', $ids);
 					set_request('_oups');
@@ -428,36 +435,37 @@ function lien_retrouver_qualif($objet_lien, $lien) {
 
 	// cas ou le role est defini en 5e argument de l'action sur le lien (suppression, ajout rapide sans autre attribut)
 	if ($role) {
-		return array(
+		return [
 			// un seul lien avec ce role
-			array($colonne_role => $role)
-		);
+			[$colonne_role => $role]
+		];
 	}
 
 	// retrouver les rôles postés pour cette liaison, s'il y en a.
 	$qualifier_lien = _request('qualifier_lien');
 	if (!$qualifier_lien or !is_array($qualifier_lien)) {
-		return array();
+		return [];
 	}
 
 	// pas avec l'action complete (incluant le role)
-	$qualif = array();
-	if ((!isset($qualifier_lien[$lien]) or !$qualif = $qualifier_lien[$lien])
+	$qualif = [];
+	if (
+		(!isset($qualifier_lien[$lien]) or !$qualif = $qualifier_lien[$lien])
 		and count($defs) == 5
 	) {
 		// on tente avec l'action sans le role
 		array_pop($defs);
 		$lien = implode('-', $defs);
 		if (!isset($qualifier_lien[$lien]) or !$qualif = $qualifier_lien[$lien]) {
-			$qualif = array();
+			$qualif = [];
 		}
 	}
 
 	// $qualif de la forme array(role=>array(...),valeur=>array(...),....)
 	// on le reforme en array(array(role=>..,valeur=>..,..),array(role=>..,valeur=>..,..),...)
-	$qualifs = array();
+	$qualifs = [];
 	while (count($qualif)) {
-		$q = array();
+		$q = [];
 		foreach ($qualif as $att => $values) {
 			if (is_array($values)) {
 				$q[$att] = array_shift($qualif[$att]);
@@ -497,9 +505,9 @@ function lien_ajouter_liaisons($objet_source, $ids, $objet_lien, $idl, $qualifs)
 	// retrouver la colonne de roles s'il y en a a lier
 	if (is_array($qualifs) and count($qualifs)) {
 		foreach ($qualifs as $qualif) {
-			objet_associer(array($objet_source => $ids), array($objet_lien => $idl), $qualif);
+			objet_associer([$objet_source => $ids], [$objet_lien => $idl], $qualif);
 		}
 	} else {
-		objet_associer(array($objet_source => $ids), array($objet_lien => $idl));
+		objet_associer([$objet_source => $ids], [$objet_lien => $idl]);
 	}
 }

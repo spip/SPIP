@@ -65,8 +65,8 @@ defined('_DEBUG_MAX_SQUELETTE_ERREURS') || define('_DEBUG_MAX_SQUELETTE_ERREURS'
  * @return null|string
  *     - string si $message à false.
  **/
-function public_debusquer_dist($message = '', $lieu = '', $opt = array()) {
-	static $tableau_des_erreurs = array();
+function public_debusquer_dist($message = '', $lieu = '', $opt = []) {
+	static $tableau_des_erreurs = [];
 
 	// Pour des tests unitaires, pouvoir récupérer les erreurs générées
 	if (isset($opt['erreurs'])) {
@@ -74,7 +74,7 @@ function public_debusquer_dist($message = '', $lieu = '', $opt = array()) {
 			return $tableau_des_erreurs;
 		}
 		if ($opt['erreurs'] == 'reset') {
-			$tableau_des_erreurs = array();
+			$tableau_des_erreurs = [];
 
 			return true;
 		}
@@ -83,7 +83,7 @@ function public_debusquer_dist($message = '', $lieu = '', $opt = array()) {
 	// Erreur ou appel final ?
 	if ($message) {
 		$message = debusquer_compose_message($message);
-		$tableau_des_erreurs[] = array($message, $lieu);
+		$tableau_des_erreurs[] = [$message, $lieu];
 		set_request('var_mode', 'debug');
 		$GLOBALS['bouton_admin_debug'] = true;
 		// Permettre a la compil de continuer
@@ -115,7 +115,8 @@ function public_debusquer_dist($message = '', $lieu = '', $opt = array()) {
 	// - ca fait 2 headers !
 	// sauf si l'on se trouve deja dans un flux compresse (plugin compresseur
 	// actif par exemple)
-	if (ob_get_length()
+	if (
+		ob_get_length()
 		and
 		!in_array('ob_gzhandler', ob_get_status())
 	) {
@@ -184,7 +185,7 @@ function debusquer_compose_message($msg) {
 function debusquer_bandeau($erreurs) {
 
 	if (!empty($erreurs)) {
-		$n = array(count($erreurs) . ' ' . _T('zbug_erreur_squelette'));
+		$n = [count($erreurs) . ' ' . _T('zbug_erreur_squelette')];
 
 		return debusquer_navigation($erreurs, $n);
 	} elseif (!empty($GLOBALS['tableau_des_temps'])) {
@@ -214,7 +215,7 @@ function debusquer_contexte($env) {
 	$res = '';
 	foreach ($env as $nom => $valeur) {
 		if (is_array($valeur)) {
-			$valeur_simple = array();
+			$valeur_simple = [];
 			foreach ($valeur as $v) {
 				if (is_array($v)) {
 					$valeur_simple[] = 'array:' . count($v);
@@ -245,7 +246,7 @@ function debusquer_contexte($env) {
 // Affichage du tableau des erreurs ou des temps de calcul
 // Cliquer sur les numeros en premiere colonne permet de voir le code
 
-function debusquer_navigation($tableau, $caption = array(), $id = 'debug-nav') {
+function debusquer_navigation($tableau, $caption = [], $id = 'debug-nav') {
 
 	if (_request('exec') == 'valider_xml') {
 		return '';
@@ -332,7 +333,8 @@ function debusquer_requete($message) {
 	// il serait plus prudent certainement d'avoir une fonction d'analyse par moteur
 	if (preg_match(',err(no|code):?[[:space:]]*([0-9]+),i', $msg, $regs)) {
 		$errno = $regs[2];
-	} elseif (is_numeric($errno) and ($errno == 1030 or $errno <= 1026)
+	} elseif (
+		is_numeric($errno) and ($errno == 1030 or $errno <= 1026)
 		and preg_match(',[^[:alnum:]]([0-9]+)[^[:alnum:]],', $msg, $regs)
 	) {
 		$errno = $regs[1];
@@ -341,16 +343,16 @@ function debusquer_requete($message) {
 	// Erreur systeme
 	if (is_numeric($errno) and $errno > 0 and $errno < 200) {
 		$retour = '<tt><br /><br /><blink>'
-			. _T('info_erreur_systeme', array('errsys' => $errno))
+			. _T('info_erreur_systeme', ['errsys' => $errno])
 			. "</blink><br />\n<b>"
 			. _T(
 				'info_erreur_systeme2',
-				array('script' => generer_url_ecrire('base_repair'))
+				['script' => generer_url_ecrire('base_repair')]
 			)
 			. '</b><br />';
 		spip_log("Erreur systeme $errno");
 
-		return array($retour, '');
+		return [$retour, ''];
 	}
 
 	// Requete erronee
@@ -394,13 +396,13 @@ function trouve_boucle_debug($n, $nom, $debut = 0, $boucle = '') {
 					}
 				}
 
-				return array($nom, $boucle, $v[2] - 1 + $n - $debut);
+				return [$nom, $boucle, $v[2] - 1 + $n - $debut];
 			}
 			$debut += $y;
 		}
 	}
 
-	return array($nom, $boucle, $n - $debut);
+	return [$nom, $boucle, $n - $debut];
 }
 
 // https://code.spip.net/@trouve_squelette_inclus
@@ -448,11 +450,11 @@ function reference_boucle_debug($n, $nom, $self) {
 // affiche un texte avec numero de ligne et ancre.
 
 // https://code.spip.net/@ancre_texte
-function ancre_texte($texte, $fautifs = array(), $nocpt = false) {
+function ancre_texte($texte, $fautifs = [], $nocpt = false) {
 
 	$var_mode_ligne = _request('var_mode_ligne');
 	if ($var_mode_ligne) {
-		$fautifs[] = array($var_mode_ligne);
+		$fautifs[] = [$var_mode_ligne];
 	}
 	$res = '';
 
@@ -476,8 +478,8 @@ function ancre_texte($texte, $fautifs = array(), $nocpt = false) {
 	$format10 = str_replace('white', 'lightgrey', $format);
 	$formaterr = 'color: red;';
 	$i = 1;
-	$flignes = array();
-	$loc = array(0, 0);
+	$flignes = [];
+	$loc = [0, 0];
 	foreach ($fautifs as $lc) {
 		if (is_array($lc)) {
 			$l = array_shift($lc);
@@ -539,7 +541,7 @@ function debusquer_squelette($fonc, $mode, $self) {
 			} elseif (!empty($GLOBALS['debug_objets'][$mode][$fonc . 'tout'])) {
 				$legend = _T('zbug_' . $mode);
 				$texte = $GLOBALS['debug_objets'][$mode][$fonc . 'tout'];
-				$texte = ancre_texte($texte, array('', ''));
+				$texte = ancre_texte($texte, ['', '']);
 			}
 		} else {
 			if (strlen(trim($res))) {
@@ -586,17 +588,17 @@ function emboite_texte($res, $fonc = '', $self = '') {
 	$texte = $res->entete . ($errs ? '' : $res->page);
 
 	if (!$texte and !$errs) {
-		return array(ancre_texte('', array('', '')), false);
+		return [ancre_texte('', ['', '']), false];
 	}
 	if (!$errs) {
-		return array(ancre_texte($texte, array('', '')), true);
+		return [ancre_texte($texte, ['', '']), true];
 	}
 
 	if (!isset($GLOBALS['debug_objets'])) {
-		$colors = array('#e0e0f0', '#f8f8ff');
+		$colors = ['#e0e0f0', '#f8f8ff'];
 		$encore = count_occ($errs);
-		$encore2 = array();
-		$fautifs = array();
+		$encore2 = [];
+		$fautifs = [];
 
 		$err = '<tr><th>'
 			. _T('numero')
@@ -634,7 +636,7 @@ function emboite_texte($res, $fonc = '', $self = '') {
 				. "</a></td><td $style>"
 				. $col
 				. "</td><td>$msg</td></tr>\n";
-			$fautifs[] = array($ligne, $col, $i, $msg);
+			$fautifs[] = [$ligne, $col, $i, $msg];
 		}
 		$err = "<h2 style='text-align: center'>"
 			. $i
@@ -644,7 +646,7 @@ function emboite_texte($res, $fonc = '', $self = '') {
 			. $err
 			. " </table><a id='fin_err'></a>";
 
-		return array(ancre_texte($texte, $fautifs), $err);
+		return [ancre_texte($texte, $fautifs), $err];
 	} else {
 		list($msg, $fermant, $ouvrant) = $errs[0];
 		$rf = reference_boucle_debug($fermant, $fonc, $self);
@@ -653,13 +655,13 @@ function emboite_texte($res, $fonc = '', $self = '') {
 			"<a href='#L" . $fermant . "'>$fermant</a>$rf<br />" .
 			"<a href='#L" . $ouvrant . "'>$ouvrant</a>$ro";
 
-		return array(ancre_texte($texte, array(array($ouvrant), array($fermant))), $err);
+		return [ancre_texte($texte, [[$ouvrant], [$fermant]]), $err];
 	}
 }
 
 // https://code.spip.net/@count_occ
 function count_occ($regs) {
-	$encore = array();
+	$encore = [];
 	foreach ($regs as $r) {
 		if (isset($encore[$r[0]])) {
 			$encore[$r[0]]++;
@@ -682,7 +684,7 @@ function debusquer_navigation_squelettes($self) {
 		$nav = !$boucles ? '' : debusquer_navigation_boucles($boucles, $nom, $self, $sourcefile);
 		$temps = !isset($GLOBALS['debug_objets']['profile'][$sourcefile]) ? '' : _T(
 			'zbug_profile',
-			array('time' => $GLOBALS['debug_objets']['profile'][$sourcefile])
+			['time' => $GLOBALS['debug_objets']['profile'][$sourcefile]]
 		);
 
 		$res .= "<fieldset id='f_" . $nom . "'><legend>"
@@ -814,7 +816,7 @@ function debusquer_source($objet, $affiche) {
 		$res = ancre_texte($GLOBALS['debug_objets']['squelette'][$objet]);
 	}
 
-	return array($legend, $res, $res2);
+	return [$legend, $res, $res2];
 }
 
 // https://code.spip.net/@debusquer_entete

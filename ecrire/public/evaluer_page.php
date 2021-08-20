@@ -35,7 +35,8 @@ if (empty($page['process_ins']) or $page['process_ins'] != 'html') {
 	include_spip('inc/lang');
 
 	// restaurer l'etat des notes avant calcul
-	if (isset($page['notes'])
+	if (
+		isset($page['notes'])
 		and $page['notes']
 		and $notes = charger_fonction('notes', 'inc', true)
 	) {
@@ -49,20 +50,22 @@ if (empty($page['process_ins']) or $page['process_ins'] != 'html') {
 	try {
 		$res = eval('?' . '>' . $page['texte']);
 		// error catching 5.2<=PHP<7
-		if ($res === false
-		  and function_exists('error_get_last')
-		  and ($erreur = error_get_last())) {
+		if (
+			$res === false
+			and function_exists('error_get_last')
+			and ($erreur = error_get_last())
+		) {
 			$code = $page['texte'];
 			$GLOBALS['numero_ligne_php'] = 1;
 			if (!function_exists('numerote_ligne_php')) {
 				function numerote_ligne_php($match) {
 					$GLOBALS['numero_ligne_php']++;
-					return "\n/*".str_pad($GLOBALS['numero_ligne_php'], 3, '0', STR_PAD_LEFT).'*/';
+					return "\n/*" . str_pad($GLOBALS['numero_ligne_php'], 3, '0', STR_PAD_LEFT) . '*/';
 				}
 			}
-			$code = '/*001*/'.preg_replace_callback(",\n,", 'numerote_ligne_php', $code);
+			$code = '/*001*/' . preg_replace_callback(",\n,", 'numerote_ligne_php', $code);
 			$code = trim(highlight_string($code, true));
-			erreur_squelette('L'.$erreur['line'].': '.$erreur['message'].'<br />'.$code, array($page['source'],'',$erreur['file'],'',$GLOBALS['spip_lang']));
+			erreur_squelette('L' . $erreur['line'] . ': ' . $erreur['message'] . '<br />' . $code, [$page['source'],'',$erreur['file'],'',$GLOBALS['spip_lang']]);
 			$page['texte'] = '<!-- Erreur -->';
 		}
 		else {
@@ -75,12 +78,12 @@ if (empty($page['process_ins']) or $page['process_ins'] != 'html') {
 		if (!function_exists('numerote_ligne_php')) {
 			function numerote_ligne_php($match) {
 				$GLOBALS['numero_ligne_php']++;
-				return "\n/*".str_pad($GLOBALS['numero_ligne_php'], 3, '0', STR_PAD_LEFT).'*/';
+				return "\n/*" . str_pad($GLOBALS['numero_ligne_php'], 3, '0', STR_PAD_LEFT) . '*/';
 			}
 		}
-		$code = '/*001*/'.preg_replace_callback(",\n,", 'numerote_ligne_php', $code);
+		$code = '/*001*/' . preg_replace_callback(",\n,", 'numerote_ligne_php', $code);
 		$code = trim(highlight_string($code, true));
-		erreur_squelette('L'.$e->getLine().': '.$e->getMessage().'<br />'.$code, array($page['source'],'',$e->getFile(),'',$GLOBALS['spip_lang']));
+		erreur_squelette('L' . $e->getLine() . ': ' . $e->getMessage() . '<br />' . $code, [$page['source'],'',$e->getFile(),'',$GLOBALS['spip_lang']]);
 		$page['texte'] = '<!-- Erreur -->';
 	}
 	ob_end_clean();

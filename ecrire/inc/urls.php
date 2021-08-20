@@ -10,7 +10,6 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 /**
  * Gestion des URLS
  *
@@ -57,18 +56,18 @@ include_spip('base/objets');
  *   est non vide pour vérifier une URL
  *
  */
-function urls_decoder_url($url, $fond = '', $contexte = array(), $assembler = false) {
+function urls_decoder_url($url, $fond = '', $contexte = [], $assembler = false) {
 	static $current_base = null;
 
 	// les anciennes fonctions modifient directement les globales
 	// on les sauve avant l'appel, et on les retablit apres !
-	$save = array(
+	$save = [
 		isset($GLOBALS['fond']) ? $GLOBALS['fond'] : null,
 		isset($GLOBALS['contexte']) ? $GLOBALS['contexte'] : null,
 		isset($_SERVER['REDIRECT_url_propre']) ? $_SERVER['REDIRECT_url_propre'] : null,
 		isset($_ENV['url_propre']) ? $_ENV['url_propre'] : null,
 		$GLOBALS['profondeur_url']
-	);
+	];
 
 	if (is_null($current_base)) {
 		include_spip('inc/filtres_mini');
@@ -129,7 +128,8 @@ function urls_decoder_url($url, $fond = '', $contexte = array(), $assembler = fa
 			if (isset($nfond)) {
 				$fond = $nfond;
 			} else {
-				if ($fond == ''
+				if (
+					$fond == ''
 					or $fond == 'type_urls' /* compat avec htaccess 2.0.0 */
 				) {
 					$fond = $type;
@@ -165,7 +165,7 @@ function urls_decoder_url($url, $fond = '', $contexte = array(), $assembler = fa
 	#	unset($_ENV['url_propre']);
 	#}
 
-	return array($fond, $contexte, $url_redirect);
+	return [$fond, $contexte, $url_redirect];
 }
 
 
@@ -181,7 +181,7 @@ function urls_decoder_url($url, $fond = '', $contexte = array(), $assembler = fa
 function urls_liste_objets($preg = true) {
 	static $url_objets = null;
 	if (is_null($url_objets)) {
-		$url_objets = array();
+		$url_objets = [];
 		// recuperer les tables_objets_sql declarees
 		$tables_objets = lister_tables_objets_sql();
 		foreach ($tables_objets as $t => $infos) {
@@ -209,13 +209,14 @@ function urls_liste_objets($preg = true) {
  * @param array $contexte
  * @return array
  */
-function nettoyer_url_page($url, $contexte = array()) {
+function nettoyer_url_page($url, $contexte = []) {
 	$url_objets = urls_liste_objets();
 	$raccourci_url_page_html = ',^(?:[^?]*/)?(' . $url_objets . ')([0-9]+)(?:\.html)?([?&].*)?$,';
 	$raccourci_url_page_id = ',^(?:[^?]*/)?(' . $url_objets . ')\.php3?[?]id_\1=([0-9]+)([?&].*)?$,';
 	$raccourci_url_page_spip = ',^(?:[^?]*/)?(?:spip[.]php)?[?](' . $url_objets . ')([0-9]+)=?(&.*)?$,';
 
-	if (preg_match($raccourci_url_page_html, $url, $regs)
+	if (
+		preg_match($raccourci_url_page_html, $url, $regs)
 		or preg_match($raccourci_url_page_id, $url, $regs)
 		or preg_match($raccourci_url_page_spip, $url, $regs)
 	) {
@@ -225,10 +226,10 @@ function nettoyer_url_page($url, $contexte = array()) {
 		$contexte[$_id] = $regs[2];
 		$suite = $regs[3];
 
-		return array($contexte, $type, null, $type, $suite);
+		return [$contexte, $type, null, $type, $suite];
 	}
 
-	return array();
+	return [];
 }
 
 /**
@@ -247,9 +248,10 @@ function nettoyer_url_page($url, $contexte = array()) {
  *
  */
 function generer_url_ecrire_objet($objet, $id, $args = '', $ancre = '', $public = null, $connect = '') {
-	static $furls = array();
+	static $furls = [];
 	if (!isset($furls[$objet])) {
-		if (function_exists($f = 'generer_url_ecrire_' . $objet)
+		if (
+			function_exists($f = 'generer_url_ecrire_' . $objet)
 			// ou definie par un plugin
 			or $f = charger_fonction($f, 'urls', true)
 		) {

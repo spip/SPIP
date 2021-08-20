@@ -21,7 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param array $arbre
  */
 function plugins_extraire_pipelines_dist(&$arbre) {
-	$pipeline = array();
+	$pipeline = [];
 	if (spip_xml_match_nodes(',^pipeline,', $arbre, $pipes)) {
 		foreach ($pipes as $tag => $p) {
 			if (!is_array($p[0])) {
@@ -29,7 +29,7 @@ function plugins_extraire_pipelines_dist(&$arbre) {
 				$pipeline[] = $att;
 			} else {
 				foreach ($p as $pipe) {
-					$att = array();
+					$att = [];
 					if (is_array($pipe)) {
 						foreach ($pipe as $k => $t) {
 							$att[$k] = trim(end($t));

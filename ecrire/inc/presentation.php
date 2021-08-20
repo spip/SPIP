@@ -32,7 +32,7 @@ include_spip('inc/filtres_alertes');
 
 // https://code.spip.net/@debut_cadre
 function debut_cadre($style, $icone = '', $fonction = '', $titre = '', $id = '', $class = '', $padding = true) {
-	$style_mapping = array(
+	$style_mapping = [
 		'r' => 'simple',
 		'e' => 'raccourcis',
 		'couleur' => 'basic highlight',
@@ -41,8 +41,8 @@ function debut_cadre($style, $icone = '', $fonction = '', $titre = '', $id = '',
 		'alerte' => 'notice',
 		'info' => 'info',
 		'sous_rub' => 'simple sous-rub'
-	);
-	$style_titre_mapping = array('couleur' => 'topper', 'trait-couleur' => 'section');
+	];
+	$style_titre_mapping = ['couleur' => 'topper', 'trait-couleur' => 'section'];
 	$c = isset($style_mapping[$style]) ? $style_mapping[$style] : 'simple';
 	$class = $c . ($class ? " $class" : '');
 	if (!$padding) {

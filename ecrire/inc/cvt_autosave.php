@@ -38,7 +38,8 @@ function autosave_clean_value($val) {
  * @return array
  */
 function cvtautosave_formulaire_charger($flux) {
-	if (is_array($flux['data'])
+	if (
+		is_array($flux['data'])
 		and isset($flux['data']['_autosave_id'])
 		and $cle_autosave = $flux['data']['_autosave_id']
 	) {
@@ -50,7 +51,8 @@ function cvtautosave_formulaire_charger($flux) {
 
 		// si on a un backup en session et qu'on est au premier chargement, non poste
 		// on restitue les donnees
-		if (isset($GLOBALS['visiteur_session']['session_autosave_' . $cle_autosave])
+		if (
+			isset($GLOBALS['visiteur_session']['session_autosave_' . $cle_autosave])
 			and !$je_suis_poste
 		) {
 			parse_str($GLOBALS['visiteur_session']['session_autosave_' . $cle_autosave], $vars);

@@ -10,7 +10,6 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 /*
  Ce fichier contient les codes de langue de base de SPIP.
  La plupart sont des codes ISO 639-1, dont vous pouvez lire
@@ -22,7 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-$GLOBALS['codes_langues'] = array(
+$GLOBALS['codes_langues'] = [
 	'aa' => 'Afar',
 	'ab' => 'Abkhazian',
 	'af' => 'Afrikaans',
@@ -221,4 +220,4 @@ $GLOBALS['codes_langues'] = array(
 	'zh_tw' => '&#21488;&#28771;&#20013;&#25991;', // chinois taiwan (ecr. traditionnelle)
 	'zu' => 'Zulu'
 
-);
+];

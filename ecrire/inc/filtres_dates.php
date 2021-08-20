@@ -96,9 +96,11 @@ function normaliser_date($date, $forcer_jour = false) {
  *     - Une chaine vide
  **/
 function vider_date($letexte, $verif_format_date = false) {
-	if (!$verif_format_date
-	  or (in_array(strlen($letexte), [10,19]) and
-			  preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}(\s[0-9]{2}:[0-9]{2}:[0-9]{2})?$/', $letexte))) {
+	if (
+		!$verif_format_date
+		or (in_array(strlen($letexte), [10,19]) and
+			  preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}(\s[0-9]{2}:[0-9]{2}:[0-9]{2})?$/', $letexte))
+	) {
 		if (strncmp('0000-00-00', $letexte, 10) == 0) {
 			return '';
 		}
@@ -125,7 +127,7 @@ function vider_date($letexte, $verif_format_date = false) {
  **/
 function recup_heure($date) {
 
-	static $d = array(0, 0, 0);
+	static $d = [0, 0, 0];
 	if (!preg_match('#([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})#', $date, $r)) {
 		return $d;
 	}
@@ -208,11 +210,11 @@ function secondes($numdate) {
  * @return string L'heure formatée dans la langue en cours.
  **/
 function heures_minutes($numdate, $forme = '') {
-	if ($forme !='abbr') {
-		return _T('date_fmt_heures_minutes', array('h' => heures($numdate), 'm' => minutes($numdate)));
+	if ($forme != 'abbr') {
+		return _T('date_fmt_heures_minutes', ['h' => heures($numdate), 'm' => minutes($numdate)]);
 	}
 	else {
-		return _T('date_fmt_heures_minutes_court', array('h' => heures($numdate), 'm' => minutes($numdate)));
+		return _T('date_fmt_heures_minutes_court', ['h' => heures($numdate), 'm' => minutes($numdate)]);
 	}
 }
 
@@ -286,7 +288,7 @@ function recup_date($numdate, $forcer_jour = true) {
 		$mois = '1';
 	}
 	if ($annee or $mois or $jour or $heures or $minutes or $secondes) {
-		return array($annee, $mois, $jour, $heures, $minutes, $secondes);
+		return [$annee, $mois, $jour, $heures, $minutes, $secondes];
 	}
 }
 
@@ -428,7 +430,7 @@ function date_relative($date, $decalage_maxi = 0, $ref_date = null) {
 		}
 	}
 
-	return _T($il_y_a, array('delai' => $delai));
+	return _T($il_y_a, ['delai' => $delai]);
 }
 
 
@@ -497,9 +499,9 @@ function date_relativecourt($date, $decalage_maxi = 0) {
  * }
  * @return mixed|string
  */
-function affdate_base($numdate, $vue, $options = array()) {
+function affdate_base($numdate, $vue, $options = []) {
 	if (is_string($options)) {
-		$options = array('param' => $options);
+		$options = ['param' => $options];
 	}
 	$date_array = recup_date($numdate, false);
 	if (!$date_array) {
@@ -526,7 +528,7 @@ function affdate_base($numdate, $vue, $options = array()) {
 		$param = ((isset($options['param']) and $options['param'] === 'abbr') ? '_' . $options['param'] : '');
 		$nommois = _T('date_mois_' . $mois . $param);
 		if ($jour) {
-			$jourmois = _T('date_de_mois_' . $mois, array('j' => $jour, 'nommois' => $nommois));
+			$jourmois = _T('date_de_mois_' . $mois, ['j' => $jour, 'nommois' => $nommois]);
 		} else {
 			$jourmois = $nommois;
 		}
@@ -566,7 +568,7 @@ function affdate_base($numdate, $vue, $options = array()) {
 			} else {
 				return $saison ? trim(_T(
 					'date_fmt_saison_annee',
-					array('saison' => _T('date_saison_' . $saison), 'annee' => $annee)
+					['saison' => _T('date_saison_' . $saison), 'annee' => $annee]
 				)) : '';
 			}
 
@@ -581,13 +583,13 @@ function affdate_base($numdate, $vue, $options = array()) {
 			if ($annee != $a) {
 				return _T(
 					'date_fmt_mois_annee',
-					array('mois' => $mois, 'nommois' => spip_ucfirst($nommois), 'annee' => $annee)
+					['mois' => $mois, 'nommois' => spip_ucfirst($nommois), 'annee' => $annee]
 				);
 			}
 
 			return _T(
 				'date_fmt_jour_mois',
-				array('jourmois' => $jourmois, 'jour' => $jour, 'mois' => $mois, 'nommois' => $nommois, 'annee' => $annee)
+				['jourmois' => $jourmois, 'jour' => $jour, 'mois' => $mois, 'nommois' => $nommois, 'annee' => $annee]
 			);
 
 		case 'jourcourt':
@@ -601,13 +603,13 @@ function affdate_base($numdate, $vue, $options = array()) {
 			if ($annee != $a) {
 				return _T(
 					'date_fmt_jour_mois_annee',
-					array('jourmois' => $jourmois, 'jour' => $jour, 'mois' => $mois, 'nommois' => $nommois, 'annee' => $annee)
+					['jourmois' => $jourmois, 'jour' => $jour, 'mois' => $mois, 'nommois' => $nommois, 'annee' => $annee]
 				);
 			}
 
 			return _T(
 				'date_fmt_jour_mois',
-				array('jourmois' => $jourmois, 'jour' => $jour, 'mois' => $mois, 'nommois' => $nommois, 'annee' => $annee)
+				['jourmois' => $jourmois, 'jour' => $jour, 'mois' => $mois, 'nommois' => $nommois, 'annee' => $annee]
 			);
 
 		case 'entier':
@@ -617,10 +619,10 @@ function affdate_base($numdate, $vue, $options = array()) {
 			if ($jour) {
 				return _T(
 					'date_fmt_jour_mois_annee',
-					array('jourmois' => $jourmois, 'jour' => $jour, 'mois' => $mois, 'nommois' => $nommois, 'annee' => $annee)
+					['jourmois' => $jourmois, 'jour' => $jour, 'mois' => $mois, 'nommois' => $nommois, 'annee' => $annee]
 				);
 			} elseif ($mois) {
-				return trim(_T('date_fmt_mois_annee', array('mois' => $mois, 'nommois' => $nommois, 'annee' => $annee)));
+				return trim(_T('date_fmt_mois_annee', ['mois' => $mois, 'nommois' => $nommois, 'annee' => $annee]));
 			} else {
 				return $annee;
 			}
@@ -652,7 +654,7 @@ function affdate_base($numdate, $vue, $options = array()) {
 				return $annee;
 			}
 
-			return trim(_T('date_fmt_mois_annee', array('mois' => $mois, 'nommois' => $nommois, 'annee' => $annee)));
+			return trim(_T('date_fmt_mois_annee', ['mois' => $mois, 'nommois' => $nommois, 'annee' => $annee]));
 
 		case 'annee':
 			return $annee;
@@ -922,7 +924,7 @@ function affdate($numdate, $format = 'entier') {
  *     La date formatée
  **/
 function affdate_court($numdate, $annee_courante = null) {
-	return affdate_base($numdate, 'court', array('annee_courante' => $annee_courante));
+	return affdate_base($numdate, 'court', ['annee_courante' => $annee_courante]);
 }
 
 
@@ -949,7 +951,7 @@ function affdate_court($numdate, $annee_courante = null) {
  *     La date formatée
  **/
 function affdate_jourcourt($numdate, $annee_courante = null) {
-	return affdate_base($numdate, 'jourcourt', array('annee_courante' => $annee_courante));
+	return affdate_base($numdate, 'jourcourt', ['annee_courante' => $annee_courante]);
 }
 
 /**
@@ -991,10 +993,10 @@ function affdate_heure($numdate) {
 	}
 	list($annee, $mois, $jour, $heures, $minutes, $sec) = $date_array;
 
-	return _T('date_fmt_jour_heure', array(
+	return _T('date_fmt_jour_heure', [
 		'jour' => affdate($numdate),
-		'heure' => _T('date_fmt_heures_minutes', array('h' => $heures, 'm' => $minutes))
-	));
+		'heure' => _T('date_fmt_heures_minutes', ['h' => $heures, 'm' => $minutes])
+	]);
 }
 
 /**
@@ -1050,40 +1052,40 @@ function affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme = ''
 	$d = date('Y-m-d', $date_debut);
 	$f = date('Y-m-d', $date_fin);
 	$h = ($horaire === 'oui' or $horaire === true);
-	$hd = _T('date_fmt_heures_minutes_court', array('h' => date('H', $date_debut), 'm' => date('i', $date_debut)));
-	$hf = _T('date_fmt_heures_minutes_court', array('h' => date('H', $date_fin), 'm' => date('i', $date_fin)));
+	$hd = _T('date_fmt_heures_minutes_court', ['h' => date('H', $date_debut), 'm' => date('i', $date_debut)]);
+	$hf = _T('date_fmt_heures_minutes_court', ['h' => date('H', $date_fin), 'm' => date('i', $date_fin)]);
 
 	if ($d == $f) { // meme jour
 		$nomjour = nom_jour($d, $abbr);
 		$s = $affdate($d);
-		$s = _T('date_fmt_jour', array('nomjour' => $nomjour, 'jour' => $s));
+		$s = _T('date_fmt_jour', ['nomjour' => $nomjour, 'jour' => $s]);
 		if ($h) {
 			if ($hd == $hf) {
 				// Lundi 20 fevrier a 18h25
-				$s = spip_ucfirst(_T('date_fmt_jour_heure', array('jour' => $s, 'heure' => $hd)));
+				$s = spip_ucfirst(_T('date_fmt_jour_heure', ['jour' => $s, 'heure' => $hd]));
 				$s = "$dtstart$s$dtabbr";
 			} else {
 				// Le <abbr...>lundi 20 fevrier de 18h00</abbr> a <abbr...>20h00</abbr>
 				if ($dtabbr && $dtstart && $dtend) {
 					$s = _T(
 						'date_fmt_jour_heure_debut_fin_abbr',
-						array(
+						[
 						'jour' => spip_ucfirst($s),
 						'heure_debut' => $hd,
 						'heure_fin' => $hf,
 						'dtstart' => $dtstart,
 						'dtend' => $dtend,
 						'dtabbr' => $dtabbr
-						),
-						array(
+						],
+						[
 							'sanitize' => false
-						)
+						]
 					);
 				} // Le lundi 20 fevrier de 18h00 a 20h00
 				else {
 					$s = spip_ucfirst(_T(
 						'date_fmt_jour_heure_debut_fin',
-						array('jour' => $s, 'heure_debut' => $hd, 'heure_fin' => $hf)
+						['jour' => $s, 'heure_debut' => $hd, 'heure_fin' => $hf]
 					));
 				}
 			}
@@ -1104,35 +1106,35 @@ function affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme = ''
 			$date_fin = $affdate($f);
 			if ($jour) {
 				$nomjour_debut = nom_jour($d, $abbr);
-				$date_debut = _T('date_fmt_jour', array('nomjour' => $nomjour_debut, 'jour' => $date_debut));
+				$date_debut = _T('date_fmt_jour', ['nomjour' => $nomjour_debut, 'jour' => $date_debut]);
 				$nomjour_fin = nom_jour($f, $abbr);
-				$date_fin = _T('date_fmt_jour', array('nomjour' => $nomjour_fin, 'jour' => $date_fin));
+				$date_fin = _T('date_fmt_jour', ['nomjour' => $nomjour_fin, 'jour' => $date_fin]);
 			}
 			if ($h) {
-				$date_debut = _T('date_fmt_jour_heure', array('jour' => $date_debut, 'heure' => $hd));
-				$date_fin = _T('date_fmt_jour_heure', array('jour' => $date_fin, 'heure' => $hf));
+				$date_debut = _T('date_fmt_jour_heure', ['jour' => $date_debut, 'heure' => $hd]);
+				$date_fin = _T('date_fmt_jour_heure', ['jour' => $date_fin, 'heure' => $hf]);
 			}
 			$date_debut = $dtstart . $date_debut . $dtabbr;
 			$date_fin = $dtend . $date_fin . $dtabbr;
 
-			$s = _T('date_fmt_periode', array('date_debut' => $date_debut, 'date_fin' => $date_fin));
+			$s = _T('date_fmt_periode', ['date_debut' => $date_debut, 'date_fin' => $date_fin]);
 		} else {
 			$date_debut = affdate_jourcourt($d, date('Y', $date_fin));
 			$date_fin = $affdate($f);
 			if ($jour) {
 				$nomjour_debut = nom_jour($d, $abbr);
-				$date_debut = _T('date_fmt_jour', array('nomjour' => $nomjour_debut, 'jour' => $date_debut));
+				$date_debut = _T('date_fmt_jour', ['nomjour' => $nomjour_debut, 'jour' => $date_debut]);
 				$nomjour_fin = nom_jour($f, $abbr);
-				$date_fin = _T('date_fmt_jour', array('nomjour' => $nomjour_fin, 'jour' => $date_fin));
+				$date_fin = _T('date_fmt_jour', ['nomjour' => $nomjour_fin, 'jour' => $date_fin]);
 			}
 			if ($h) {
-				$date_debut = _T('date_fmt_jour_heure', array('jour' => $date_debut, 'heure' => $hd));
-				$date_fin = _T('date_fmt_jour_heure', array('jour' => $date_fin, 'heure' => $hf));
+				$date_debut = _T('date_fmt_jour_heure', ['jour' => $date_debut, 'heure' => $hd]);
+				$date_fin = _T('date_fmt_jour_heure', ['jour' => $date_fin, 'heure' => $hf]);
 			}
 
 			$date_debut = $dtstart . $date_debut . $dtabbr;
 			$date_fin = $dtend . $date_fin . $dtabbr;
-			$s = _T('date_fmt_periode', array('date_debut' => $date_debut, 'date_fin' => $date_fin));
+			$s = _T('date_fmt_periode', ['date_debut' => $date_debut, 'date_fin' => $date_fin]);
 		}
 	}
 

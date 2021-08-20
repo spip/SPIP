@@ -31,7 +31,7 @@ include_spip('inc/filtres_images_lib_mini'); // par precaution
  *    Le code hexadécimal de la couleur (sans le #) ou le code couleur textuel si non trouvé
  */
 function couleur_html_to_hex($couleur) {
-	$couleurs_html = array(
+	$couleurs_html = [
 		'aliceblue' => 'F0F8FF',
 		'antiquewhite' => 'FAEBD7',
 		'aqua' => '00FFFF',
@@ -180,7 +180,7 @@ function couleur_html_to_hex($couleur) {
 		'whitesmoke' => 'F5F5F5',
 		'yellow' => 'FFFF00',
 		'yellowgreen' => '9ACD32',
-	);
+	];
 	if (isset($couleurs_html[$lc = strtolower($couleur)])) {
 		return $couleurs_html[$lc];
 	}
@@ -412,7 +412,7 @@ function image_passe_partout(
 	}
 
 	list($destWidth, $destHeight, $ratio) = ratio_passe_partout($largeur, $hauteur, $taille_x, $taille_y);
-	$fonction = array('image_passe_partout', func_get_args());
+	$fonction = ['image_passe_partout', func_get_args()];
 
 	return process_image_reduire($fonction, $img, $destWidth, $destHeight, $force, $process);
 }
@@ -492,7 +492,7 @@ function image_reduire(
 		return '';
 	}
 
-	$fonction = array('image_reduire', func_get_args());
+	$fonction = ['image_reduire', func_get_args()];
 
 	return process_image_reduire($fonction, $img, $taille, $taille_y, $force, $process);
 }
@@ -512,7 +512,7 @@ function image_recadre_avec_fallback(
 	$background_color = 'white'
 ) {
 	if (function_exists('image_recadre') && ($GLOBALS['meta']['image_process'] ?? '') === 'gd2') {
-		return image_reduire(image_recadre($im, $width.':'.$height, '-', $position, $background_color), $width, $height);
+		return image_reduire(image_recadre($im, $width . ':' . $height, '-', $position, $background_color), $width, $height);
 	} else { return image_passe_partout($im, $width, $height);
 	}
 }

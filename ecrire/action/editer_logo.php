@@ -43,15 +43,17 @@ function logo_supprimer($objet, $id_objet, $etat) {
 			spip_log("Supprimer ancien logo $logo", 'logo');
 			spip_unlink($logo[0]);
 		}
-		elseif ($doc = $logo[5]
+		elseif (
+			$doc = $logo[5]
 			and isset($doc['id_document'])
-		  and $id_document = $doc['id_document']) {
+			and $id_document = $doc['id_document']
+		) {
 			include_spip('action/editer_liens');
 			// supprimer le lien dans la base
-			objet_dissocier(array('document' => $id_document), array($objet => $id_objet), array('role' => '*'));
+			objet_dissocier(['document' => $id_document], [$objet => $id_objet], ['role' => '*']);
 
 			// verifier si il reste des liens avec d'autres objets et sinon supprimer
-			$liens = objet_trouver_liens(array('document' => $id_document), '*');
+			$liens = objet_trouver_liens(['document' => $id_document], '*');
 			if (!count($liens)) {
 				$supprimer_document = charger_fonction('supprimer_document', 'action');
 				$supprimer_document($doc['id_document']);
@@ -113,10 +115,10 @@ function logo_modifier($objet, $id_objet, $etat, $source) {
 
 			return $erreur;
 		}
-		$source = array(
+		$source = [
 			'tmp_name' => $tmp_name,
 			'name' => basename($tmp_name),
-		);
+		];
 	} elseif ($erreur = check_upload_error($source['error'], '', true)) {
 		return $erreur;
 	}
@@ -138,7 +140,7 @@ function logo_modifier($objet, $id_objet, $etat, $source) {
 
 	if (!is_numeric($id_document)) {
 		$erreur = ($id_document ? $id_document : 'Erreur inconnue');
-		spip_log("Erreur ajout logo : $erreur pour source=".json_encode($source), 'logo');
+		spip_log("Erreur ajout logo : $erreur pour source=" . json_encode($source), 'logo');
 		return $erreur;
 	}
 
@@ -149,7 +151,7 @@ function logo_migrer_en_base($objet, $time_limit) {
 
 	$dir_logos_erreurs = sous_repertoire(_DIR_IMG, 'logo_erreurs');
 	$dir_logos = sous_repertoire(_DIR_IMG, 'logo');
-	$formats_logos = array('jpg', 'png', 'svg', 'gif');
+	$formats_logos = ['jpg', 'png', 'svg', 'gif'];
 	if (isset($GLOBALS['formats_logos'])) {
 		$formats_logos = $GLOBALS['formats_logos'];
 	}
@@ -164,18 +166,20 @@ function logo_migrer_en_base($objet, $time_limit) {
 		$nom_base = $type . $mode;
 		$dir = (defined('_DIR_LOGOS') ? _DIR_LOGOS : _DIR_IMG);
 
-		$deja = array();
+		$deja = [];
 		$files = glob($dir . $nom_base . '*');
 
 		foreach ($files as $file) {
 			$logo = substr($file, strlen($dir . $nom_base));
 			$logo = explode('.', $logo);
-			if (is_numeric($logo[0])
-			  and ($id_objet = intval($logo[0]) or in_array($objet, ['site', 'rubrique']))) {
+			if (
+				is_numeric($logo[0])
+				and ($id_objet = intval($logo[0]) or in_array($objet, ['site', 'rubrique']))
+			) {
 				if (!isset($deja[$id_objet])) {
 					$logo = $chercher_logo($id_objet, $_id_objet, $mode);
 					// if no logo in base
-					if (!$logo or count($logo)<6) {
+					if (!$logo or count($logo) < 6) {
 						foreach ($formats_logos as $format) {
 							if (@file_exists($d = ($dir . ($nom = $nom_base . intval($id_objet) . '.' . $format)))) {
 								// logo_modifier commence par supprimer le logo existant, donc on le deplace pour pas le perdre

@@ -37,7 +37,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Pile complétée du code compilé
  **/
 function balise_MENU_LANG($p) {
-	return calculer_balise_dynamique($p, 'MENU_LANG', array('lang'));
+	return calculer_balise_dynamique($p, 'MENU_LANG', ['lang']);
 }
 
 /**

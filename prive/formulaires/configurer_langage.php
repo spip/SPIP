@@ -22,10 +22,10 @@ function formulaires_configurer_langage_charger_dist() {
 	$langues = explode(',', $GLOBALS['meta']['langues_proposees']);
 
 
-	$valeurs = array(
+	$valeurs = [
 		'var_lang_ecrire' => $GLOBALS['spip_lang'],
 		'_langues' => $langues
-	);
+	];
 
 	return $valeurs;
 }
@@ -40,7 +40,7 @@ function formulaires_configurer_langage_traiter_dist() {
 	// on ne peut pas changer la langue pour tout le hit ici,
 	// car CVT repasse derriere et retablit la langue avant l'appel a traiter()
 	// il faut rediriger !
-	return array('message_ok' => _T('config_info_enregistree'), 'editable' => true, 'redirect' => self());
+	return ['message_ok' => _T('config_info_enregistree'), 'editable' => true, 'redirect' => self()];
 }
 
 function afficher_langues_choix($langues, $name, $id, $selected) {

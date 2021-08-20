@@ -56,7 +56,7 @@ function etape_ldap5_save() {
 			"@ldap_start_tls(\$GLOBALS['ldap_link']);\n")
 		. "@ldap_bind(\$GLOBALS['ldap_link'],'$login_ldap','$pass_ldap');\n";
 
-	$champs = is_array($GLOBALS['ldap_attributes']) ? $GLOBALS['ldap_attributes'] : array();
+	$champs = is_array($GLOBALS['ldap_attributes']) ? $GLOBALS['ldap_attributes'] : [];
 	$res = '';
 	foreach ($champs as $champ => $v) {
 		$nom = 'ldap_' . $champ;

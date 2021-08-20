@@ -52,7 +52,7 @@ function action_supprimer_rubrique_dist($id_rubrique = null) {
 			);
 			if (!$n) {
 				include_spip('action/editer_auteur');
-				auteur_modifier($id_auteur, array('statut' => '1comite'));
+				auteur_modifier($id_auteur, ['statut' => '1comite']);
 			}
 			sql_delete(
 				'spip_auteurs_liens',

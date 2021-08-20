@@ -91,16 +91,17 @@ function admin_repair_tables() {
 		$count = sql_countsel($tab);
 
 		if ($count > 1) {
-			$m .= '(' . _T('texte_compte_elements', array('count' => $count)) . ")\n";
+			$m .= '(' . _T('texte_compte_elements', ['count' => $count]) . ")\n";
 		} else {
 			if ($count == 1) {
-				$m .= '(' . _T('texte_compte_element', array('count' => $count)) . ")\n";
+				$m .= '(' . _T('texte_compte_element', ['count' => $count]) . ")\n";
 			} else {
 				$m .= '(' . _T('texte_vide') . ")\n";
 			}
 		}
 
-		if ($result_repair
+		if (
+			$result_repair
 			and $msg = join(
 				' ',
 				(is_resource($result_repair) or is_object($result_repair)) ? sql_fetch($result_repair) : $result_repair

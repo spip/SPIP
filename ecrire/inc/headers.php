@@ -38,7 +38,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param int $status Code de redirection (301 ou 302)
  **/
 function redirige_par_entete($url, $equiv = '', $status = 302) {
-	if (!in_array($status, array(301, 302))) {
+	if (!in_array($status, [301, 302])) {
 		$status = 302;
 	}
 
@@ -54,13 +54,14 @@ function redirige_par_entete($url, $equiv = '', $status = 302) {
 	}
 
 	// ne pas laisser passer n'importe quoi dans l'url
-	$url = str_replace(array('<', '"'), array('&lt;', '&quot;'), $url);
-	$url = str_replace(array("\r", "\n", ' '), array('%0D', '%0A', '%20'), $url);
+	$url = str_replace(['<', '"'], ['&lt;', '&quot;'], $url);
+	$url = str_replace(["\r", "\n", ' '], ['%0D', '%0A', '%20'], $url);
 	while (strpos($url, '%0A') !== false) {
 		$url = str_replace('%0A', '', $url);
 	}
 	// interdire les url inline avec des pseudo-protocoles :
-	if ((preg_match(',data:,i', $url) and preg_match('/base64\s*,/i', $url))
+	if (
+		(preg_match(',data:,i', $url) and preg_match('/base64\s*,/i', $url))
 		or preg_match(',(javascript|mailto):,i', $url)
 	) {
 		$url = './';
@@ -74,13 +75,14 @@ function redirige_par_entete($url, $equiv = '', $status = 302) {
 	if (!defined('_SERVEUR_SIGNATURE_ACCEPTE_LOCATION_APRES_COOKIE')) {
 		define('_SERVEUR_SIGNATURE_ACCEPTE_LOCATION_APRES_COOKIE', 'Apache|Cherokee|nginx');
 	}
-	if ((!$equiv and !spip_cookie_envoye()) or (
+	if (
+		(!$equiv and !spip_cookie_envoye()) or (
 			   (!empty($_SERVER['SERVER_SOFTWARE'])
 				   and _SERVEUR_SOFTWARE_ACCEPTE_LOCATION_APRES_COOKIE
-				   and preg_match('/'._SERVEUR_SOFTWARE_ACCEPTE_LOCATION_APRES_COOKIE.'/i', $_SERVER['SERVER_SOFTWARE']))
+				   and preg_match('/' . _SERVEUR_SOFTWARE_ACCEPTE_LOCATION_APRES_COOKIE . '/i', $_SERVER['SERVER_SOFTWARE']))
 			or (!empty($_SERVER['SERVER_SIGNATURE'])
 				   and _SERVEUR_SIGNATURE_ACCEPTE_LOCATION_APRES_COOKIE
-				   and preg_match('/'._SERVEUR_SIGNATURE_ACCEPTE_LOCATION_APRES_COOKIE.'/i', $_SERVER['SERVER_SIGNATURE']))
+				   and preg_match('/' . _SERVEUR_SIGNATURE_ACCEPTE_LOCATION_APRES_COOKIE . '/i', $_SERVER['SERVER_SIGNATURE']))
 			or function_exists('apache_getenv')
 			or defined('_SERVER_APACHE')
 		)
@@ -120,22 +122,23 @@ function redirige_par_entete($url, $equiv = '', $status = 302) {
 
 // https://code.spip.net/@redirige_formulaire
 function redirige_formulaire($url, $equiv = '', $format = 'message') {
-	if (!_AJAX
+	if (
+		!_AJAX
 		and !headers_sent()
 		and !_request('var_ajax')
 	) {
 		redirige_par_entete(str_replace('&amp;', '&', $url), $equiv);
 	} // si c'est une ancre, fixer simplement le window.location.hash
 	elseif ($format == 'ajaxform' and preg_match(',^#[0-9a-z\-_]+$,i', $url)) {
-		return array(
+		return [
 			// on renvoie un lien masque qui sera traite par ajaxCallback.js
 			"<a href='$url' name='ajax_ancre' style='display:none;'>anchor</a>",
 			// et rien dans le message ok
 			''
-		);
+		];
 	} else {
 		// ne pas laisser passer n'importe quoi dans l'url
-		$url = str_replace(array('<', '"'), array('&lt;', '&quot;'), $url);
+		$url = str_replace(['<', '"'], ['&lt;', '&quot;'], $url);
 
 		$url = strtr($url, "\n\r", '  ');
 		# en theorie on devrait faire ca tout le temps, mais quand la chaine
@@ -147,12 +150,12 @@ function redirige_formulaire($url, $equiv = '', $format = 'message') {
 		spip_log("redirige formulaire ajax: $url");
 		include_spip('inc/filtres');
 		if ($format == 'ajaxform') {
-			return array(
+			return [
 				// on renvoie un lien masque qui sera traite par ajaxCallback.js
 				'<a href="' . quote_amp($url) . '" name="ajax_redirect"  style="display:none;">' . _T('navigateur_pas_redirige') . '</a>',
 				// et un message au cas ou
 				'<br /><a href="' . quote_amp($url) . '">' . _T('navigateur_pas_redirige') . '</a>'
-			);
+			];
 		} else // format message texte, tout en js inline
 		{
 			return
@@ -198,7 +201,7 @@ function redirige_url_ecrire($script = '', $args = '', $equiv = '') {
  **/
 function http_status($status) {
 
-	static $status_string = array(
+	static $status_string = [
 		200 => '200 OK',
 		204 => '204 No Content',
 		301 => '301 Moved Permanently',
@@ -209,7 +212,7 @@ function http_status($status) {
 		403 => '403 Forbidden',
 		404 => '404 Not Found',
 		503 => '503 Service Unavailable'
-	);
+	];
 
 	if (!empty($GLOBALS['REDIRECT_STATUS']) && $GLOBALS['REDIRECT_STATUS'] == $status) {
 		return;

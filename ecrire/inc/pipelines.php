@@ -48,7 +48,7 @@ function f_jQuery($texte) {
 	$x = '';
 	$jquery_plugins = pipeline(
 		'jquery_plugins',
-		array(
+		[
 			'javascript/jquery.js',
 			'javascript/jquery.form.js',
 			'javascript/jquery.autosave.js',
@@ -56,7 +56,7 @@ function f_jQuery($texte) {
 			'javascript/ajaxCallback.js',
 			'javascript/js.cookie.js',
 			'javascript/jquery.cookie.js'
-		)
+		]
 	);
 	foreach (array_unique($jquery_plugins) as $script) {
 		if ($script = find_in_path(supprimer_timestamp($script))) {
@@ -90,7 +90,8 @@ function f_surligne($texte) {
 		return $texte;
 	}
 	$rech = _request('var_recherche');
-	if (!$rech
+	if (
+		!$rech
 		and (!defined('_SURLIGNE_RECHERCHE_REFERERS')
 			or !_SURLIGNE_RECHERCHE_REFERERS
 			or !isset($_SERVER['HTTP_REFERER']))
@@ -130,7 +131,8 @@ function f_tidy($texte) {
 	 * - false par défaut.
 	 */
 
-	if ($GLOBALS['xhtml'] # tidy demande
+	if (
+		$GLOBALS['xhtml'] # tidy demande
 		and $GLOBALS['html'] # verifie que la page avait l'entete text/html
 		and strlen($texte)
 		and !headers_sent()
@@ -209,11 +211,11 @@ function f_admin($texte) {
 		}
 		$texte = substr_replace($texte, $x, $pos, 0);
 		// pas de preview en fenetre enfant
-		$x = "<script type='text/javascript'>const frameEl = window.frameElement;if (frameEl) {frameEl.sandbox='sandbox';window.location.href='".addslashes($GLOBALS['meta']['adresse_site'])."';}</script>";
+		$x = "<script type='text/javascript'>const frameEl = window.frameElement;if (frameEl) {frameEl.sandbox='sandbox';window.location.href='" . addslashes($GLOBALS['meta']['adresse_site']) . "';}</script>";
 		if (!$pos = stripos($texte, '<head') or !$pos = strpos($texte, '>', $pos)) {
 			$pos = -1;
 		}
-		$texte = substr_replace($texte, $x, $pos+1, 0);
+		$texte = substr_replace($texte, $x, $pos + 1, 0);
 	}
 
 	if (isset($GLOBALS['affiche_boutons_admin']) and $GLOBALS['affiche_boutons_admin']) {
@@ -261,7 +263,8 @@ function f_recuperer_fond($flux) {
  */
 function f_queue($texte) {
 	// eviter une inclusion si rien a faire
-	if (_request('action') == 'cron'
+	if (
+		_request('action') == 'cron'
 		or queue_sleep_time_to_next_job() > 0
 		or defined('_DEBUG_BLOCK_QUEUE')
 	) {

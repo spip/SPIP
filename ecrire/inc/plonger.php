@@ -17,7 +17,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('inc/texte');
 
 // https://code.spip.net/@inc_plonger_dist
-function inc_plonger_dist($id_rubrique, $idom = '', $list = array(), $col = 1, $exclu = 0, $do = 'aff') {
+function inc_plonger_dist($id_rubrique, $idom = '', $list = [], $col = 1, $exclu = 0, $do = 'aff') {
 
 	if ($list) {
 		$id_rubrique = $list[$col - 1];
@@ -29,8 +29,8 @@ function inc_plonger_dist($id_rubrique, $idom = '', $list = array(), $col = 1, $
 	# en excluant une eventuelle rubrique interdite (par exemple, lorsqu'on
 	# deplace une rubrique, on peut la deplacer partout a partir de la
 	# racine... sauf vers elle-meme ou sa propre branche)
-	$ordre = array();
-	$rub = array();
+	$ordre = [];
+	$rub = [];
 
 	$res = sql_select(
 		'rub1.id_rubrique, rub1.titre, rub1.id_parent, rub1.lang, rub1.langue_choisie, rub2.id_rubrique AS id_enfant',

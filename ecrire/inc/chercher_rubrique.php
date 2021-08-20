@@ -62,7 +62,8 @@ function inc_chercher_rubrique_dist($id_rubrique, $type, $restreint, $idem = 0, 
 	// Mode sans Ajax :
 	// - soit parce que le cookie ajax n'est pas la
 	// - soit parce qu'il y a peu de rubriques
-	if (_SPIP_AJAX < 1
+	if (
+		_SPIP_AJAX < 1
 		or $type == 'breve'
 		or sql_countsel('spip_rubriques') < _SPIP_SELECT_RUBRIQUES
 	) {
@@ -96,7 +97,7 @@ function style_menu_rubriques($i) {
 	}
 	$class = "niveau_$i";
 
-	return array($class, $style, $espace);
+	return [$class, $style, $espace];
 }
 
 /**
@@ -123,7 +124,8 @@ function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $excl
 	static $decalage_secteur;
 
 	// Si on a demande l'exclusion ne pas descendre dans la rubrique courante
-	if ($exclus > 0
+	if (
+		$exclus > 0
 		and $root == $exclus
 	) {
 		return '';
@@ -193,7 +195,7 @@ function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $excl
  *     Code HTML du sélecteur
  **/
 function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem = 0) {
-	$data = array();
+	$data = [];
 	if ($type == 'rubrique' and autoriser('publierdans', 'rubrique', 0)) {
 		$data[0] = _T('info_racine_site');
 	}
@@ -220,7 +222,8 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem = 0) {
 		if (autoriser('voir', 'rubrique', $r['id_rubrique'])) {
 			// titre largeur maxi a 50
 			$titre = couper(supprimer_tags(typo($r['titre'])) . ' ', 50);
-			if ($GLOBALS['meta']['multi_rubriques'] == 'oui'
+			if (
+				$GLOBALS['meta']['multi_rubriques'] == 'oui'
 				and ($r['langue_choisie'] == 'oui' or $r['id_parent'] == 0)
 			) {
 				$titre .= ' [' . traduire_nom_langue($r['lang']) . ']';
@@ -236,9 +239,10 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem = 0) {
 	// si une seule rubrique comme choix possible,
 	// inutile de mettre le selecteur sur un choix vide par defaut
 	// sauf si le selecteur s'adresse a une rubrique puisque on peut la mettre a la racine dans ce cas
-	if (count($data) == 2
+	if (
+		count($data) == 2
 		and isset($data[0])
-		and !in_array($type, array('auteur', 'rubrique'))
+		and !in_array($type, ['auteur', 'rubrique'])
 		and !$id_rubrique
 	) {
 		unset($data[0]);

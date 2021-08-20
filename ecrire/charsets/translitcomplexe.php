@@ -26,7 +26,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 load_charset('translit');
 $trans = $GLOBALS['CHARSET']['translit'];
 
-$translit_c = array(
+$translit_c = [
 // vietnamien
 	225 => "a'",
 	224 => 'a`',
@@ -170,7 +170,7 @@ $translit_c = array(
 	196 => 'Ae',
 	214 => 'Oe',
 	220 => 'Ue'
-);
+];
 
 foreach ($translit_c as $u => $t) {
 	$trans[$u] = $t;

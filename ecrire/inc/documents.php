@@ -87,9 +87,11 @@ function creer_repertoire_documents($ext) {
 	// Cette variable de configuration peut etre posee par un plugin
 	// par exemple acces_restreint
 	// sauf pour logo/ utilise pour stocker les logoon et logooff
-	if (isset($GLOBALS['meta']['creer_htaccess'])
+	if (
+		isset($GLOBALS['meta']['creer_htaccess'])
 		and $GLOBALS['meta']['creer_htaccess'] == 'oui'
-	  and $ext !== 'logo') {
+		and $ext !== 'logo'
+	) {
 		include_spip('inc/acces');
 		verifier_htaccess($rep);
 	}
@@ -108,7 +110,8 @@ function effacer_repertoire_temporaire($nom) {
 			if (is_file("$nom/$f")) {
 				spip_unlink("$nom/$f");
 			} else {
-				if ($f <> '.' and $f <> '..'
+				if (
+					$f <> '.' and $f <> '..'
 					and is_dir("$nom/$f")
 				) {
 					effacer_repertoire_temporaire("$nom/$f");
@@ -180,7 +183,8 @@ function determine_upload($type = '') {
 		include_spip('inc/autoriser');
 	}
 
-	if (!autoriser('chargerftp')
+	if (
+		!autoriser('chargerftp')
 		or $type == 'logos'
 	) { # on ne le permet pas pour les logos
 	return false;
@@ -281,19 +285,19 @@ function check_upload_error($error, $msg = '', $return = false) {
 		case 1: /* UPLOAD_ERR_INI_SIZE */
 			$msg = _T(
 				'upload_limit',
-				array('max' => ini_get('upload_max_filesize'))
+				['max' => ini_get('upload_max_filesize')]
 			);
 			break;
 		case 2: /* UPLOAD_ERR_FORM_SIZE */
 			$msg = _T(
 				'upload_limit',
-				array('max' => ini_get('upload_max_filesize'))
+				['max' => ini_get('upload_max_filesize')]
 			);
 			break;
 		case 3: /* UPLOAD_ERR_PARTIAL  */
 			$msg = _T(
 				'upload_limit',
-				array('max' => ini_get('upload_max_filesize'))
+				['max' => ini_get('upload_max_filesize')]
 			);
 			break;
 

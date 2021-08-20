@@ -31,7 +31,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function critere_compteur_articles_filtres_dist($idb, &$boucles, $crit, $left = false) {
 	$boucle = &$boucles[$idb];
 
-	$_statut = calculer_liste($crit->param[0], array(), $boucles, $boucle->id_parent);
+	$_statut = calculer_liste($crit->param[0], [], $boucles, $boucle->id_parent);
 
 	$not = '';
 	if ($crit->not) {
@@ -39,16 +39,16 @@ function critere_compteur_articles_filtres_dist($idb, &$boucles, $crit, $left = 
 	}
 	$boucle->from['LAA'] = 'spip_auteurs_liens';
 	$boucle->from_type['LAA'] = 'left';
-	$boucle->join['LAA'] = array("'auteurs'", "'id_auteur'", "'id_auteur'", "'LAA.objet=\'article\''");
+	$boucle->join['LAA'] = ["'auteurs'", "'id_auteur'", "'id_auteur'", "'LAA.objet=\'article\''"];
 
 	$boucle->from['articles'] = 'spip_articles';
 	$boucle->from_type['articles'] = 'left';
-	$boucle->join['articles'] = array(
+	$boucle->join['articles'] = [
 		"'LAA'",
 		"'id_article'",
 		"'id_objet'",
 		"'(articles.statut IS NULL OR '.sql_in('articles.statut',_q($_statut)$not).')'"
-	);
+	];
 
 	$boucle->select[] = 'COUNT(articles.id_article) AS compteur_articles';
 	$boucle->group[] = 'auteurs.id_auteur';
@@ -88,7 +88,8 @@ function afficher_initiale($url, $initiale, $compteur, $debut, $pas) {
 	static $memo = null;
 	static $res = [];
 	$out = '';
-	if (!$memo
+	if (
+		!$memo
 		or (!$initiale and !$url)
 		or ($initiale !== $memo['initiale'])
 	) {
@@ -105,12 +106,12 @@ function afficher_initiale($url, $initiale, $compteur, $debut, $pas) {
 			$res[] = lien_ou_expose($memo['url'], $memo['initiale'], $on, 'lien_pagination');
 		}
 		if ($initiale) {
-			$memo = array(
+			$memo = [
 				'entree' => isset($memo['entree']) ? $memo['entree'] + 1 : 0,
 				'initiale' => $initiale,
 				'url' => parametre_url($url, 'i', $initiale),
 				'compteur' => $newcompt
-			);
+			];
 		}
 	}
 	if (!$initiale and !$url) {
@@ -141,7 +142,7 @@ function afficher_initiale($url, $initiale, $compteur, $debut, $pas) {
  */
 function auteur_lien_messagerie($id_auteur, $en_ligne, $statut, $imessage, $email = '') {
 	static $time = null;
-	if (!in_array($statut, array('0minirezo', '1comite'))) {
+	if (!in_array($statut, ['0minirezo', '1comite'])) {
 		return '';
 	}
 
@@ -150,7 +151,8 @@ function auteur_lien_messagerie($id_auteur, $en_ligne, $statut, $imessage, $emai
 	}
 	$parti = (($time - strtotime($en_ligne)) > 15 * 60);
 
-	if ($imessage != 'non' and !$parti // historique : est-ce que ca a encore un sens de limiter vu qu'on a la notification par email ?
+	if (
+		$imessage != 'non' and !$parti // historique : est-ce que ca a encore un sens de limiter vu qu'on a la notification par email ?
 		and $GLOBALS['meta']['messagerie_agenda'] != 'non'
 	) {
 		return parametre_url(parametre_url(generer_url_ecrire('message_edit', 'new=oui'), 'to', $id_auteur), 'redirect', self());

@@ -34,7 +34,7 @@ include_spip('inc/lien');
  * @return array Tablea ('','')
  */
 function definir_raccourcis_alineas() {
-	return array('', '');
+	return ['', ''];
 }
 
 
@@ -102,8 +102,9 @@ function traiter_raccourcis($letexte) {
  * @return string
  */
 function echappe_js($t, $class = ' class = "echappe-js"') {
-	foreach (array('script', 'iframe') as $tag) {
-		if (stripos($t, "<$tag") !== false
+	foreach (['script', 'iframe'] as $tag) {
+		if (
+			stripos($t, "<$tag") !== false
 			and preg_match_all(',<' . $tag . '.*?($|</' . $tag . '.),isS', $t, $r, PREG_SET_ORDER)
 		) {
 			foreach ($r as $regs) {
@@ -146,14 +147,14 @@ function echappe_js($t, $class = ' class = "echappe-js"') {
  **/
 function interdire_scripts($arg, $mode_filtre = null) {
 	// on memorise le resultat sur les arguments non triviaux
-	static $dejavu = array();
+	static $dejavu = [];
 
 	// Attention, si ce n'est pas une chaine, laisser intact
 	if (!$arg or !is_string($arg) or !strstr($arg, '<')) {
 		return $arg;
 	}
 
-	if (is_null($mode_filtre) or !in_array($mode_filtre, array(-1, 0, 1))) {
+	if (is_null($mode_filtre) or !in_array($mode_filtre, [-1, 0, 1])) {
 		$mode_filtre = $GLOBALS['filtrer_javascript'];
 	}
 
@@ -221,7 +222,7 @@ function interdire_scripts($arg, $mode_filtre = null) {
  * @return string $t
  *     Texte transformé
  **/
-function typo($letexte, $echapper = true, $connect = null, $env = array()) {
+function typo($letexte, $echapper = true, $connect = null, $env = []) {
 	// Plus vite !
 	if (!$letexte) {
 		return $letexte;
@@ -274,8 +275,10 @@ function typo($letexte, $echapper = true, $connect = null, $env = array()) {
 	// https://core.spip.net/issues/3371
 	// et aussi dans l'espace public si la globale filtrer_javascript = -1
 	// https://core.spip.net/issues/4166
-	if ($GLOBALS['filtrer_javascript'] == -1
-	  or (isset($env['espace_prive']) and $env['espace_prive'] and $GLOBALS['filtrer_javascript']<=0)) {
+	if (
+		$GLOBALS['filtrer_javascript'] == -1
+		or (isset($env['espace_prive']) and $env['espace_prive'] and $GLOBALS['filtrer_javascript'] <= 0)
+	) {
 		$letexte = echapper_html_suspect($letexte);
 	}
 
@@ -411,7 +414,7 @@ function traiter_retours_chariots($letexte) {
  * @return string $t
  *     Texte transformé
  **/
-function propre($t, $connect = null, $env = array()) {
+function propre($t, $connect = null, $env = []) {
 	// les appels directs a cette fonction depuis le php de l'espace
 	// prive etant historiquement ecrits sans argment $connect
 	// on utilise la presence de celui-ci pour distinguer les cas
@@ -433,10 +436,12 @@ function propre($t, $connect = null, $env = array()) {
 	// https://core.spip.net/issues/3371
 	// et aussi dans l'espace public si la globale filtrer_javascript = -1
 	// https://core.spip.net/issues/4166
-	if ($interdire_script
+	if (
+		$interdire_script
 		or $GLOBALS['filtrer_javascript'] == -1
-		or (isset($env['espace_prive']) and $env['espace_prive'] and $GLOBALS['filtrer_javascript']<=0)
-		or (isset($env['wysiwyg']) and $env['wysiwyg'] and $GLOBALS['filtrer_javascript']<=0)) {
+		or (isset($env['espace_prive']) and $env['espace_prive'] and $GLOBALS['filtrer_javascript'] <= 0)
+		or (isset($env['wysiwyg']) and $env['wysiwyg'] and $GLOBALS['filtrer_javascript'] <= 0)
+	) {
 		$t = echapper_html_suspect($t, false);
 	}
 	$t = echappe_html($t);

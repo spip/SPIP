@@ -30,7 +30,7 @@ function exec_base_delete_all_dist() {
 		echo minipres();
 	} else {
 		include_spip('base/dump');
-		$res = base_lister_toutes_tables('', array(), array(), true);
+		$res = base_lister_toutes_tables('', [], [], true);
 		if (!$res) {
 			include_spip('inc/minipres');
 			spip_log('Erreur base de donnees');

@@ -56,7 +56,8 @@ function changer_langue($lang, $liste_langues = null) {
 		return false;
 	}
 
-	if (strpos($liste_langues, ",$lang,") !== false
+	if (
+		strpos($liste_langues, ",$lang,") !== false
 		or ($lang = preg_replace(',_.*,', '', $lang)
 			and strpos($liste_langues, ",$lang,") !== false)
 	) {
@@ -136,7 +137,7 @@ function traduire_nom_langue($lang) {
 // C'est utilise par #LANG_DIR, #LANG_LEFT, #LANG_RIGHT.
 // https://code.spip.net/@lang_dir
 function lang_dir($lang = '', $droitier = 'ltr', $gaucher = 'rtl') {
-	static $lang_rtl = array('ar', 'fa', 'ku', 'prs', 'ps', 'ur', 'he', 'heb', 'hbo', 'yi');
+	static $lang_rtl = ['ar', 'fa', 'ku', 'prs', 'ps', 'ur', 'he', 'heb', 'hbo', 'yi'];
 
 	return in_array(($lang ? $lang : $GLOBALS['spip_lang']), $lang_rtl) ?
 		$gaucher : $droitier;
@@ -154,7 +155,8 @@ function lang_typo($lang = '') {
 			? $GLOBALS['lang_objet']
 			: $GLOBALS['spip_lang'];
 	}
-	if ($lang == 'eo'
+	if (
+		$lang == 'eo'
 		or $lang == 'fr'
 		or strncmp($lang, 'fr_', 3) == 0
 		or $lang == 'cpf'
@@ -281,7 +283,7 @@ function liste_options_langues($nom_select) {
 #			$langues = explode(',', $GLOBALS['all_langs']);
 	}
 	if (count($langues) <= 1) {
-		return array();
+		return [];
 	}
 	sort($langues);
 
@@ -313,7 +315,8 @@ function verifier_lang_url() {
 	}
 
 	// Renvoyer si besoin (et si la langue demandee existe)
-	if ($GLOBALS['spip_lang'] != $lang_demandee
+	if (
+		$GLOBALS['spip_lang'] != $lang_demandee
 		and changer_langue($lang_demandee)
 		and $lang_demandee != @$_GET['lang']
 	) {
@@ -350,7 +353,8 @@ function verifier_lang_url() {
  **/
 function utiliser_langue_site($liste_langues = null) {
 	// s'il existe une langue du site (en gros tout le temps en théorie)
-	if (isset($GLOBALS['meta']['langue_site'])
+	if (
+		isset($GLOBALS['meta']['langue_site'])
 		// et si spip_langue est pas encore définie (ce que va faire changer_langue())
 		// ou qu'elle n'est pas identique à la langue du site
 		and (!isset($GLOBALS['spip_lang'])
@@ -436,7 +440,7 @@ function init_langues() {
 	// liste des langues dans les meta, sauf a l'install
 	$all_langs = @$GLOBALS['meta']['langues_proposees'];
 
-	$tout = array();
+	$tout = [];
 	if (!$all_langs) {
 		// trouver tous les modules lang/spip_xx.php
 		$modules = find_all_in_path('lang/', '/spip_([a-z_]+)\.php$');

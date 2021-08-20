@@ -121,7 +121,7 @@ function balise_URL__dist($p) {
 
 	$nom = $p->nom_champ;
 	if ($nom === 'URL_') {
-		$msg = array('zbug_balise_sans_argument', array('balise' => ' URL_'));
+		$msg = ['zbug_balise_sans_argument', ['balise' => ' URL_']];
 		erreur_squelette($msg, $p);
 		$p->interdire_scripts = false;
 

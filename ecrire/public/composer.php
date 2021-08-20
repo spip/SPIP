@@ -126,7 +126,8 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect =
 		$GLOBALS['debug_objets']['code'][$nom . 'tout'] = $code;
 
 		// si c'est ce que demande le debusqueur, lui passer la main
-		if ($GLOBALS['debug_objets']['sourcefile']
+		if (
+			$GLOBALS['debug_objets']['sourcefile']
 			and (_request('var_mode_objet') == $nom)
 			and (_request('var_mode_affiche') == 'code')
 		) {
@@ -175,7 +176,7 @@ function squelette_obsolete($skel, $squelette) {
 	}
 
 	return (
-		(defined('_VAR_MODE') and in_array(_VAR_MODE, array('recalcul', 'preview', 'debug')))
+		(defined('_VAR_MODE') and in_array(_VAR_MODE, ['recalcul', 'preview', 'debug']))
 		or !@file_exists($skel)
 		or ((@file_exists($squelette) ? @filemtime($squelette) : 0)
 			> ($date = @filemtime($skel)))
@@ -194,13 +195,14 @@ function invalideur_session(&$Cache, $code = null) {
 
 // https://code.spip.net/@analyse_resultat_skel
 function analyse_resultat_skel($nom, $cache, $corps, $source = '') {
-	static $filtres = array();
-	$headers = array();
+	static $filtres = [];
+	$headers = [];
 
 	// Recupere les < ?php header('Xx: y'); ? > pour $page['headers']
 	// note: on essaie d'attrapper aussi certains de ces entetes codes
 	// "a la main" dans les squelettes, mais evidemment sans exhaustivite
-	if (stripos($corps, 'header') !== false
+	if (
+		stripos($corps, 'header') !== false
 		and preg_match_all(
 			'/(<[?]php\s+)@?header\s*\(\s*.([^:\'"]*):?\s*([^)]*)[^)]\s*\)\s*[;]?\s*[?]>/ims',
 			$corps,
@@ -230,20 +232,20 @@ function analyse_resultat_skel($nom, $cache, $corps, $source = '') {
 		? 'html'
 		: 'php';
 
-	$skel = array(
+	$skel = [
 		'squelette' => $nom,
 		'source' => $source,
 		'process_ins' => $process_ins,
 		'invalideurs' => $cache,
 		'entetes' => $headers,
 		'duree' => isset($headers['X-Spip-Cache']) ? intval($headers['X-Spip-Cache']) : 0
-	);
+	];
 
 	// traiter #FILTRE{} et filtres
 	if (!isset($filtres[$nom])) {
-		$filtres[$nom] = pipeline('declarer_filtres_squelettes', array('args' => $skel, 'data' => array()));
+		$filtres[$nom] = pipeline('declarer_filtres_squelettes', ['args' => $skel, 'data' => []]);
 	}
-	$filtres_headers = array();
+	$filtres_headers = [];
 	if (isset($headers['X-Spip-Filtre']) and strlen($headers['X-Spip-Filtre'])) {
 		$filtres_headers = array_filter(explode('|', $headers['X-Spip-Filtre']));
 		unset($headers['X-Spip-Filtre']);
@@ -301,7 +303,8 @@ if ($lang_select) lang_select();
  *     Code PHP pour inclure le squelette de la balise dynamique
  **/
 function synthetiser_balise_dynamique($nom, $args, $file, $context_compil) {
-	if (strncmp($file, '/', 1) !== 0
+	if (
+		strncmp($file, '/', 1) !== 0
 		// pas de lien symbolique sous Windows
 		and !(stristr(PHP_OS, 'WIN') and strpos($file, ':') !== false)
 	) {
@@ -315,7 +318,7 @@ function synthetiser_balise_dynamique($nom, $args, $file, $context_compil) {
 
 	$args = array_map('argumenter_squelette', $args);
 	if (!empty($context_compil['appel_php_depuis_modele'])) {
-		$args[0] = 'arguments_balise_dyn_depuis_modele('.$args[0].')';
+		$args[0] = 'arguments_balise_dyn_depuis_modele(' . $args[0] . ')';
 	}
 	$args = join(', ', $args);
 
@@ -351,7 +354,7 @@ function argumenter_squelette($v) {
 	} elseif (!is_array($v)) {
 		return "'" . texte_script($v) . "'";
 	} else {
-		$out = array();
+		$out = [];
 		foreach ($v as $k => $val) {
 			$out [] = argumenter_squelette($k) . '=>' . argumenter_squelette($val);
 		}
@@ -394,12 +397,14 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 	$nom_balise_generique = '';
 
 	$appel_php_depuis_modele = false;
-	if (is_array($context_compil)
-	  and !is_numeric($context_compil[3])
-	  and empty($context_compil[0])
+	if (
+		is_array($context_compil)
+		and !is_numeric($context_compil[3])
+		and empty($context_compil[0])
 		and empty($context_compil[1])
 		and empty($context_compil[2])
-		and empty($context_compil[3])) {
+		and empty($context_compil[3])
+	) {
 		$appel_php_depuis_modele = true;
 	}
 
@@ -416,7 +421,7 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 	}
 
 	if (!$fonction_balise) {
-		$msg = array('zbug_balise_inexistante', array('from' => 'CVT', 'balise' => $nom));
+		$msg = ['zbug_balise_inexistante', ['from' => 'CVT', 'balise' => $nom]];
 		erreur_squelette($msg, $context_compil);
 
 		return '';
@@ -443,7 +448,8 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 	// verifier que la fonction dyn est la,
 	// sinon se replier sur la generique si elle existe
 	if (!function_exists('balise_' . $nom_balise . '_dyn')) {
-		if ($balise_generique = chercher_balise_generique($nom)
+		if (
+			$balise_generique = chercher_balise_generique($nom)
 			and $nom_balise_generique = $balise_generique['nom_generique']
 			and $file = include_spip('balise/' . strtolower($nom_balise_generique))
 			and function_exists('balise_' . $nom_balise_generique . '_dyn')
@@ -455,7 +461,7 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 				$file = _DIR_RESTREINT_ABS . $file;
 			}
 		} else {
-			$msg = array('zbug_balise_inexistante', array('from' => 'CVT', 'balise' => $nom));
+			$msg = ['zbug_balise_inexistante', ['from' => 'CVT', 'balise' => $nom]];
 			erreur_squelette($msg, $context_compil);
 
 			return '';
@@ -521,7 +527,8 @@ function chercher_balise_generique($nom) {
  **/
 function lang_select_public($lang, $lang_select, $titre = null) {
 	// Cas 1. forcer_lang = true et pas de critere {lang_select}
-	if (isset($GLOBALS['forcer_lang']) and $GLOBALS['forcer_lang']
+	if (
+		isset($GLOBALS['forcer_lang']) and $GLOBALS['forcer_lang']
 		and $lang_select !== 'oui'
 	) {
 		$lang = $GLOBALS['spip_lang'];
@@ -529,7 +536,8 @@ function lang_select_public($lang, $lang_select, $titre = null) {
 	elseif (!strlen($lang)) {
 		$lang = $GLOBALS['spip_lang'];
 	} // Cas 3. l'objet est multilingue !
-	elseif ($lang_select !== 'oui'
+	elseif (
+		$lang_select !== 'oui'
 		and strlen($titre) > 10
 		and strpos($titre, '<multi>') !== false
 		and strpos(echappe_html($titre), '<multi>') !== false
@@ -585,7 +593,7 @@ function match_self($w) {
 		return false;
 	}
 	if (is_array($w)) {
-		if (in_array(reset($w), array('SELF', 'SUBSELECT'))) {
+		if (in_array(reset($w), ['SELF', 'SUBSELECT'])) {
 			return $w;
 		}
 		foreach (array_filter($w, 'is_array') as $sw) {
@@ -612,7 +620,7 @@ function match_self($w) {
  **/
 function remplace_sous_requete($w, $sousrequete) {
 	if (is_array($w)) {
-		if (in_array(reset($w), array('SELF', 'SUBSELECT'))) {
+		if (in_array(reset($w), ['SELF', 'SUBSELECT'])) {
 			return $sousrequete;
 		}
 		foreach ($w as $k => $sw) {
@@ -634,8 +642,8 @@ function remplace_sous_requete($w, $sousrequete) {
  *     - Conditions avec des sous requêtes
  **/
 function trouver_sous_requetes($where) {
-	$where_simples = array();
-	$where_sous = array();
+	$where_simples = [];
+	$where_sous = [];
 	foreach ($where as $k => $w) {
 		if (match_self($w)) {
 			$where_sous[$k] = $w;
@@ -644,7 +652,7 @@ function trouver_sous_requetes($where) {
 		}
 	}
 
-	return array($where_simples, $where_sous);
+	return [$where_simples, $where_sous];
 }
 
 
@@ -670,15 +678,15 @@ function trouver_sous_requetes($where) {
  * @return resource
  */
 function calculer_select(
-	$select = array(),
-	$from = array(),
-	$from_type = array(),
-	$where = array(),
-	$join = array(),
-	$groupby = array(),
-	$orderby = array(),
+	$select = [],
+	$from = [],
+	$from_type = [],
+	$where = [],
+	$join = [],
+	$groupby = [],
+	$orderby = [],
 	$limit = '',
-	$having = array(),
+	$having = [],
 	$table = '',
 	$id = '',
 	$serveur = '',
@@ -709,7 +717,7 @@ function calculer_select(
 	}
 
 	// evacuer les eventuels groupby vide issus d'un calcul dynamique
-	$groupby = array_diff($groupby, array(''));
+	$groupby = array_diff($groupby, ['']);
 
 	// remplacer les sous requetes recursives au calcul
 	list($where_simples, $where_sous) = trouver_sous_requetes($where);
@@ -720,10 +728,10 @@ function calculer_select(
 		if ($sous[0] == 'SELF') {
 			// c'est une sous requete identique a elle meme sous la forme (SELF,$select,$where)
 			array_push($where_simples, $sous[2]);
-			$wheresub = array(
+			$wheresub = [
 				$sous[2],
 				'0=0'
-			); // pour accepter une string et forcer a faire le menage car on a surement simplifie select et where
+			]; // pour accepter une string et forcer a faire le menage car on a surement simplifie select et where
 			$jsub = $join;
 			// trouver les jointures utiles a
 			// reinjecter dans le where de la sous requete les conditions supplementaires des jointures qui y sont mentionnees
@@ -732,13 +740,13 @@ function calculer_select(
 			$i = 0;
 			do {
 				$where[$k] = remplace_sous_requete($w, '(' . calculer_select(
-					array($sous[1] . ' AS id'),
+					[$sous[1] . ' AS id'],
 					$from,
 					$from_type,
 					$wheresub,
 					$jsub,
-					array(),
-					array(),
+					[],
+					[],
 					'',
 					$having,
 					$table,
@@ -750,7 +758,8 @@ function calculer_select(
 					$i = 1;
 					$wherestring = calculer_where_to_string($where[$k]);
 					foreach ($join as $cle => $wj) {
-						if (count($wj) == 4
+						if (
+							count($wj) == 4
 							and strpos($wherestring, "{$cle}.") !== false
 						) {
 							$i = 0;
@@ -767,14 +776,14 @@ function calculer_select(
 			$where[$k] = remplace_sous_requete($w, '(' . calculer_select(
 				$sous[1], # select
 				$sous[2], #from
-				array(), #from_type
-				$sous[3] ? (is_array($sous[3]) ? $sous[3] : array($sous[3])) : array(),
+				[], #from_type
+				$sous[3] ? (is_array($sous[3]) ? $sous[3] : [$sous[3]]) : [],
 				#where, qui peut etre de la forme string comme dans sql_select
-					array(), #join
-				$sous[4] ? $sous[4] : array(), #groupby
-				$sous[5] ? $sous[5] : array(), #orderby
+					[], #join
+				$sous[4] ? $sous[4] : [], #groupby
+				$sous[5] ? $sous[5] : [], #orderby
 				$sous[6], #limit
-				$sous[7] ? $sous[7] : array(), #having
+				$sous[7] ? $sous[7] : [], #having
 				$table,
 				$id,
 				$serveur,
@@ -795,8 +804,8 @@ function calculer_select(
 	// parcourir de la plus recente a la moins recente pour pouvoir eliminer Ln
 	// si elle est seulement utile a Ln+1 elle meme inutile
 
-	$afrom = array();
-	$equiv = array();
+	$afrom = [];
+	$equiv = [];
 	$k = count($join);
 	foreach (array_reverse($join, true) as $cledef => $j) {
 		$cle = $cledef;
@@ -816,10 +825,11 @@ function calculer_select(
 			$cle = "L$k";
 		}
 		$cle_where_lie = "JOIN-$cle";
-		if (!$menage
+		if (
+			!$menage
 			or isset($afrom[$cle])
 			or calculer_jointnul($cle, $select)
-			or calculer_jointnul($cle, array_diff_key($join, array($cle => $join[$cle])))
+			or calculer_jointnul($cle, array_diff_key($join, [$cle => $join[$cle]]))
 			or calculer_jointnul($cle, $having)
 			or calculer_jointnul($cle, array_diff_key($where_simples, [$cle_where_lie => '']))
 		) {
@@ -840,7 +850,7 @@ function calculer_select(
 			// on garde une ecriture decomposee pour permettre une simplification ulterieure si besoin
 			// sans recours a preg_match
 			// un implode(' ',..) est fait dans reinjecte_joint un peu plus bas
-			$afrom[$t][$cle] = array(
+			$afrom[$t][$cle] = [
 				"\n" .
 				(isset($from_type[$cle]) ? $from_type[$cle] : 'INNER') . ' JOIN',
 				$from[$cle],
@@ -851,7 +861,7 @@ function calculer_select(
 				"$t.$carr",
 				($and ? 'AND ' . $and : '') .
 				')'
-			);
+			];
 			if (isset($afrom[$cle])) {
 				$afrom[$t] = $afrom[$t] + $afrom[$cle];
 				unset($afrom[$cle]);
@@ -888,7 +898,8 @@ function calculer_select(
 		$c = current($from);
 		reset($from);
 		$e = '/\b(' . "$t\\." . join('|' . $t . '\.', $equiv) . ')\b/';
-		if (!(strpos($t, ' ') or // jointure des le depart cf boucle_doc
+		if (
+			!(strpos($t, ' ') or // jointure des le depart cf boucle_doc
 				calculer_jointnul($t, $select, $e) or
 				calculer_jointnul($t, $join, $e) or
 				calculer_jointnul($t, $where, $e) or
@@ -933,12 +944,12 @@ function calculer_select(
 	}
 	if (empty($GLOBALS['debug']) or !is_array($GLOBALS['debug'])) {
 		$wasdebug = empty($GLOBALS['debug']) ? false : $GLOBALS['debug'];
-		$GLOBALS['debug'] = array();
+		$GLOBALS['debug'] = [];
 		if ($wasdebug) {
 			$GLOBALS['debug']['debug'] = true;
 		}
 	}
-	$GLOBALS['debug']['aucasou'] = array($table, $id, $serveur, $requeter);
+	$GLOBALS['debug']['aucasou'] = [$table, $id, $serveur, $requeter];
 	$r = sql_select(
 		$select,
 		$from,
@@ -1003,7 +1014,7 @@ function calculer_jointnul($cle, $exp, $equiv = '') {
 
 // https://code.spip.net/@reinjecte_joint
 function reinjecte_joint($afrom, $from) {
-	$from_synth = array();
+	$from_synth = [];
 	foreach ($from as $k => $v) {
 		$from_synth[$k] = $from[$k];
 		if (isset($afrom[$k])) {

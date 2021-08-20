@@ -16,14 +16,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('inc/presentation');
 
 function formulaires_configurer_visiteurs_charger_dist() {
-	$valeurs = array();
+	$valeurs = [];
 	if (avoir_visiteurs(false, false)) {
 		$valeurs['editable'] = false;
 	}
 
-	foreach (array(
+	foreach (
+		[
 		'accepter_visiteurs'
-	) as $m) {
+		] as $m
+	) {
 		$valeurs[$m] = $GLOBALS['meta'][$m];
 	}
 
@@ -32,19 +34,22 @@ function formulaires_configurer_visiteurs_charger_dist() {
 
 
 function formulaires_configurer_visiteurs_traiter_dist() {
-	$res = array('editable' => true);
+	$res = ['editable' => true];
 	// Modification du reglage accepter_inscriptions => vider le cache
 	// (pour repercuter la modif sur le panneau de login)
-	if (($i = _request('accepter_visiteurs')
+	if (
+		($i = _request('accepter_visiteurs')
 		and $i != $GLOBALS['meta']['accepter_visiteurs'])
 	) {
 		include_spip('inc/invalideur');
 		suivre_invalideur('1'); # tout effacer
 	}
 
-	foreach (array(
+	foreach (
+		[
 		'accepter_visiteurs',
-	) as $m) {
+		] as $m
+	) {
 		if (!is_null($v = _request($m))) {
 			ecrire_meta($m, $v == 'oui' ? 'oui' : 'non');
 		}

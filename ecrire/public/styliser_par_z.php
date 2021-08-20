@@ -34,7 +34,7 @@ function public_styliser_par_z_dist($flux) {
 	static $z_blocs;
 	static $apl_constant;
 	static $page;
-	static $disponible = array();
+	static $disponible = [];
 	static $echafauder;
 	static $prepend = '';
 
@@ -69,7 +69,8 @@ function public_styliser_par_z_dist($flux) {
 		$squelette = $flux['data'];
 		$ext = $flux['args']['ext'];
 		// Ajax Parallel loading : ne pas calculer le bloc, mais renvoyer un js qui le loadera en ajax
-		if (defined('_Z_AJAX_PARALLEL_LOAD_OK')
+		if (
+			defined('_Z_AJAX_PARALLEL_LOAD_OK')
 			and $dir = explode('/', $fond)
 			and count($dir) == 2 // pas un sous repertoire
 			and $dir = reset($dir)
@@ -100,7 +101,8 @@ function public_styliser_par_z_dist($flux) {
 		// ou scaffolding ou page automatique les contenus
 		if (!$squelette) {
 			// si on est sur un ?page=XX non trouve
-			if ((isset($flux['args']['contexte'][$page])
+			if (
+				(isset($flux['args']['contexte'][$page])
 					and $flux['args']['contexte'][$page] == $fond)
 				or (isset($flux['args']['contexte']['type-page'])
 					and $flux['args']['contexte']['type-page'] == $fond)
@@ -132,7 +134,8 @@ function public_styliser_par_z_dist($flux) {
 				}
 				if (is_string($disponible[$type])) {
 					$flux['data'] = $disponible[$type];
-				} elseif ($echafauder
+				} elseif (
+					$echafauder
 					and include_spip('inc/autoriser')
 					and isset($GLOBALS['visiteur_session']['statut']) // performance
 					and autoriser('echafauder', $type)
@@ -155,7 +158,8 @@ function public_styliser_par_z_dist($flux) {
 			// et si il y a bien un contenu correspondant ou echafaudable
 			// se rabbatre sur le dist.html du bloc concerne
 			else {
-				if ($dir = explode('/', $fond)
+				if (
+					$dir = explode('/', $fond)
 					and $dir = reset($dir)
 					and $dir !== $z_contenu
 					and in_array($dir, $z_blocs)
@@ -180,7 +184,8 @@ function public_styliser_par_z_dist($flux) {
 		// pour des raisons de perfo, les declinaisons doivent etre dans le
 		// meme dossier que body.html
 		if ($fond == 'body' and substr($squelette, -strlen($fond)) == $fond) {
-			if (isset($flux['args']['contexte']['type-page'])
+			if (
+				isset($flux['args']['contexte']['type-page'])
 				and (
 					(isset($flux['args']['contexte']['composition'])
 						and file_exists(($f = $squelette . '-' . $flux['args']['contexte']['type-page'] . '-' . $flux['args']['contexte']['composition']) . ".$ext"))
@@ -190,13 +195,15 @@ function public_styliser_par_z_dist($flux) {
 			) {
 				$flux['data'] = $f;
 			}
-		} elseif ($fond == 'structure'
+		} elseif (
+			$fond == 'structure'
 			and z_sanitize_var_zajax()
 			and $f = find_in_path($prefix_path . $prepend . 'ajax' . ".$ext")
 		) {
 			$flux['data'] = substr($f, 0, -strlen(".$ext"));
 		} // chercher le fond correspondant a la composition
-		elseif (isset($flux['args']['contexte']['composition'])
+		elseif (
+			isset($flux['args']['contexte']['composition'])
 			and (basename($fond) == 'page' or ($squelette and substr($squelette, -strlen($fond)) == $fond))
 			and $dir = substr($fond, $prefix_length)
 			and $dir = explode('/', $dir)
@@ -219,17 +226,17 @@ function public_styliser_par_z_dist($flux) {
  */
 function z_blocs($espace_prive = false) {
 	if ($espace_prive) {
-		return (isset($GLOBALS['z_blocs_ecrire']) ? $GLOBALS['z_blocs_ecrire'] : array(
+		return (isset($GLOBALS['z_blocs_ecrire']) ? $GLOBALS['z_blocs_ecrire'] : [
 			'contenu',
 			'navigation',
 			'extra',
 			'head',
 			'hierarchie',
 			'top'
-		));
+		]);
 	}
 
-	return (isset($GLOBALS['z_blocs']) ? $GLOBALS['z_blocs'] : array('contenu'));
+	return (isset($GLOBALS['z_blocs']) ? $GLOBALS['z_blocs'] : ['contenu']);
 }
 
 /**
@@ -262,7 +269,8 @@ function z_contenu_disponible($prefix_path, $z_contenu, $type, $ext, $echafauder
  *   `true` si on peut l'utiliser, `false` sinon.
  **/
 function z_fond_valide($squelette) {
-	if (!_ZCORE_EXCLURE_PATH
+	if (
+		!_ZCORE_EXCLURE_PATH
 		or !preg_match(',(' . _ZCORE_EXCLURE_PATH . ')/,', $squelette)
 	) {
 		return true;
@@ -286,7 +294,8 @@ function z_fond_valide($squelette) {
  * @return string
  */
 function z_trouver_bloc($prefix_path, $bloc, $fond, $ext) {
-	if ((defined('_ZCORE_BLOC_PREFIX_SKEL') and $f = find_in_path("$prefix_path$bloc/$bloc.$fond.$ext") and z_fond_valide($f))
+	if (
+		(defined('_ZCORE_BLOC_PREFIX_SKEL') and $f = find_in_path("$prefix_path$bloc/$bloc.$fond.$ext") and z_fond_valide($f))
 		or ($f = find_in_path("$prefix_path$bloc/$fond.$ext") and z_fond_valide($f))
 	) {
 		return substr($f, 0, -strlen(".$ext"));
@@ -305,7 +314,7 @@ function z_trouver_bloc($prefix_path, $bloc, $fond, $ext) {
  */
 function z_echafaudable($type) {
 	static $pages = null;
-	static $echafaudable = array();
+	static $echafaudable = [];
 	if (isset($echafaudable[$type])) {
 		return $echafaudable[$type];
 	}
@@ -318,22 +327,23 @@ function z_echafaudable($type) {
 			include_spip('inc/pipelines_ecrire');
 		}
 		if ($e = trouver_objet_exec($type)) {
-			return $echafaudable[$type] = array($e['table'], $e['table_objet_sql'], $e);
+			return $echafaudable[$type] = [$e['table'], $e['table_objet_sql'], $e];
 		} else {
 			// peut etre c'est un exec=types qui liste tous les objets "type"
-			if (($t = objet_type($type, false)) !== $type
+			if (
+				($t = objet_type($type, false)) !== $type
 				and $e = trouver_objet_exec($t)
 			) {
-				return $echafaudable[$type] = array($e['table'], $e['table_objet_sql'], $t);
+				return $echafaudable[$type] = [$e['table'], $e['table_objet_sql'], $t];
 			}
 		}
 	} else {
 		if (is_null($pages)) {
-			$pages = array();
+			$pages = [];
 			$liste = lister_tables_objets_sql();
 			foreach ($liste as $t => $d) {
 				if ($d['page']) {
-					$pages[$d['page']] = array($d['table_objet'], $t);
+					$pages[$d['page']] = [$d['table_objet'], $t];
 				}
 			}
 		}
@@ -417,7 +427,8 @@ function z_sanitize_var_zajax() {
 	if (!$z_ajax) {
 		return false;
 	}
-	if (!$z_blocs = z_blocs(test_espace_prive())
+	if (
+		!$z_blocs = z_blocs(test_espace_prive())
 		or !in_array($z_ajax, $z_blocs)
 	) {
 		set_request('var_zajax'); // enlever cette demande incongrue

@@ -5,7 +5,8 @@
  *
  * @package SPIP\Core\Charsets
  **/
-$GLOBALS['CHARSET']['mathml'] = array(
+
+$GLOBALS['CHARSET']['mathml'] = [
 
 	'ac' => '&#xE207;',
 	'acd' => '&#xE3A6;',
@@ -1691,4 +1692,4 @@ $GLOBALS['CHARSET']['mathml'] = array(
 	'Zscr' => '&#xE4DE;',
 	'zscr' => '&#xE4F7;'
 
-);
+];

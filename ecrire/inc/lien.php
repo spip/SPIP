@@ -30,7 +30,7 @@ function inc_lien_dist(
 	$hlang = '',
 	$rel = '',
 	$connect = '',
-	$env = array()
+	$env = []
 ) {
 	return $lien;
 }
@@ -42,7 +42,7 @@ function inc_lien_dist(
 define('_RACCOURCI_LIEN', '/\[([^][]*?([[]\w*[]][^][]*)*)->(>?)([^]]*)\]/msS');
 
 // https://code.spip.net/@expanser_liens
-function expanser_liens($t, $connect = '', $env = array()) {
+function expanser_liens($t, $connect = '', $env = []) {
 
 	$t = pipeline('pre_liens', $t);
 
@@ -67,7 +67,7 @@ function traiter_raccourci_lien_atts($texte) {
 	$bulle = '';
 	$hlang = '';
 
-	return array(trim($texte), $bulle, $hlang);
+	return [trim($texte), $bulle, $hlang];
 }
 
 define('_RACCOURCI_CHAPO', '/^(\W*)(\W*)(\w*\d+([?#].*)?)$/');
@@ -107,7 +107,7 @@ define('_EXTRAIRE_LIEN', ',^\s*(?:' . _PROTOCOLES_STD . '):?/?/?\s*$,iS');
 // https://code.spip.net/@traiter_lien_explicite
 function traiter_lien_explicite($ref, $texte = '', $pour = 'url', $connect = '', $echappe_typo = true) {
 	if (preg_match(_EXTRAIRE_LIEN, $ref)) {
-		return ($pour != 'tout') ? '' : array('', '', '', '');
+		return ($pour != 'tout') ? '' : ['', '', '', ''];
 	}
 
 	$lien = entites_html(trim($ref));
@@ -143,7 +143,7 @@ function traiter_lien_explicite($ref, $texte = '', $pour = 'url', $connect = '',
 		return $texte;
 	}
 
-	return array('url' => $lien, 'titre' => $texte);
+	return ['url' => $lien, 'titre' => $texte];
 }
 
 function liens_implicite_glose_dist($texte, $id, $type, $args, $ancre, $connect = '') {
@@ -196,7 +196,8 @@ function traiter_lien_implicite($ref, $texte = '', $pour = 'url', $connect = '')
 	$r['url'] = $url;
 
 	// dans le cas d'un lien vers un doc, ajouter le type='mime/type'
-	if ($type == 'document'
+	if (
+		$type == 'document'
 		and $mime = sql_getfetsel(
 			'mime_type',
 			'spip_types_documents',
@@ -221,7 +222,7 @@ define('_RACCOURCI_URL', '/^\s*(\w*?)\s*(\d+)(\?(.*?))?(#([^\s]*))?\s*$/S');
 // https://code.spip.net/@typer_raccourci
 function typer_raccourci($lien) {
 	if (!preg_match(_RACCOURCI_URL, $lien, $match)) {
-		return array();
+		return [];
 	}
 	$f = $match[1];
 	// valeur par defaut et alias historiques
@@ -272,12 +273,12 @@ function traiter_raccourci_titre($id, $type, $connect = null) {
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table(table_objet($type));
 	if (!($desc and $s = $desc['titre'])) {
-		return array();
+		return [];
 	}
 	$_id = $desc['key']['PRIMARY KEY'];
 	$r = sql_fetsel($s, $desc['table'], "$_id=$id", '', '', '', '', $connect);
 	if (!$r) {
-		return array();
+		return [];
 	}
 	$r['titre'] = supprimer_numero($r['titre']);
 	if (!$r['titre'] and !empty($r['surnom'])) {
@@ -310,13 +311,14 @@ define(
 define('_RACCOURCI_MODELE_DEBUT', '@^' . _RACCOURCI_MODELE . '@isS');
 
 // https://code.spip.net/@traiter_modeles
-function traiter_modeles($texte, $doublons = false, $echap = '', $connect = '', $liens = null, $env = array()) {
+function traiter_modeles($texte, $doublons = false, $echap = '', $connect = '', $liens = null, $env = []) {
 	// preserver la compatibilite : true = recherche des documents
 	if ($doublons === true) {
-		$doublons = array('documents' => array('doc', 'emb', 'img'));
+		$doublons = ['documents' => ['doc', 'emb', 'img']];
 	}
 	// detecter les modeles (rapide)
-	if (strpos($texte, '<') !== false and
+	if (
+		strpos($texte, '<') !== false and
 		preg_match_all('/<[a-z_-]{3,}\s*[0-9|]+/iS', $texte, $matches, PREG_SET_ORDER)
 	) {
 		include_spip('public/assembler');
@@ -332,20 +334,21 @@ function traiter_modeles($texte, $doublons = false, $echap = '', $connect = '', 
 			);
 			$regs[] = ''; // s'assurer qu'il y a toujours un 5e arg, eventuellement vide
 			list(, $mod, $type, $id, $params, $fin) = $regs;
-			if ($fin and
+			if (
+				$fin and
 				preg_match(
 					'/<a\s[^<>]*>\s*$/i',
 					substr($texte, 0, $a),
 					$r
 				)
 			) {
-				$lien = array(
+				$lien = [
 					'href' => extraire_attribut($r[0], 'href'),
 					'class' => extraire_attribut($r[0], 'class'),
 					'mime' => extraire_attribut($r[0], 'type'),
 					'title' => extraire_attribut($r[0], 'title'),
 					'hreflang' => extraire_attribut($r[0], 'hreflang')
-				);
+				];
 				$n = strlen($r[0]);
 				$a -= $n;
 				$cherche = $n + strlen($regs[0]);
@@ -405,7 +408,7 @@ function traiter_modeles($texte, $doublons = false, $echap = '', $connect = '', 
 
 			// hack pour tout l'espace prive
 			if (((!_DIR_RESTREINT) or ($doublons)) and ($id)) {
-				foreach ($doublons ? $doublons : array('documents' => array('doc', 'emb', 'img')) as $quoi => $modeles) {
+				foreach ($doublons ? $doublons : ['documents' => ['doc', 'emb', 'img']] as $quoi => $modeles) {
 					if (in_array($type, $modeles)) {
 						$GLOBALS["doublons_{$quoi}_inclus"][] = $id;
 					}

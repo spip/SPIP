@@ -127,7 +127,7 @@ function inc_exporter_csv_dist($titre, $resource, $options = []) {
 	if ($options['delim'] == 'TAB') {
 		$options['delim'] = "\t";
 	}
-	if (!in_array($options['delim'], array(',', ';', "\t"))) {
+	if (!in_array($options['delim'], [',', ';', "\t"])) {
 		$options['delim'] = ',';
 	}
 

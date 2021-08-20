@@ -123,11 +123,11 @@ function maj_base($version_cible = 0, $redirect = '', $debut_page = true) {
 	if (!$version_installee or ($GLOBALS['spip_version_base'] < $version_installee)) {
 		sql_replace(
 			'spip_meta',
-			array(
+			[
 				'nom' => 'version_installee',
 				'valeur' => $GLOBALS['spip_version_base'],
 				'impt' => 'non'
-			)
+			]
 		);
 		return false;
 	}
@@ -206,7 +206,8 @@ function maj_plugin($nom_meta_base_version, $version_cible, $maj, $table_meta = 
 
 	$current_version = null;
 
-	if ((!isset($GLOBALS[$table_meta][$nom_meta_base_version]))
+	if (
+		(!isset($GLOBALS[$table_meta][$nom_meta_base_version]))
 		|| (!spip_version_compare($current_version = $GLOBALS[$table_meta][$nom_meta_base_version], $version_cible, '='))
 	) {
 		// $maj['create'] contient les directives propres a la premiere creation de base
@@ -214,11 +215,11 @@ function maj_plugin($nom_meta_base_version, $version_cible, $maj, $table_meta = 
 		if (isset($maj['create'])) {
 			if (!isset($GLOBALS[$table_meta][$nom_meta_base_version])) {
 				// installation : on ne fait que l'operation create
-				$maj = array('init' => $maj['create']);
+				$maj = ['init' => $maj['create']];
 				// et on lui ajoute un appel a inc/config
 				// pour creer les metas par defaut
 				$config = charger_fonction('config', 'inc');
-				$maj[$version_cible] = array(array($config));
+				$maj[$version_cible] = [[$config]];
 			}
 			// dans tous les cas enlever cet index du tableau
 			unset($maj['create']);
@@ -370,7 +371,8 @@ function maj_while($installee, $cible, $maj, $meta = '', $table = 'meta', $redir
 
 	foreach ($maj as $v => $operations) {
 		// si une maj pour cette version
-		if ($v == 'init' or
+		if (
+			$v == 'init' or
 			(spip_version_compare($v, $installee, '>')
 				and spip_version_compare($v, $cible, '<='))
 		) {
@@ -383,7 +385,7 @@ function maj_while($installee, $cible, $maj, $meta = '', $table = 'meta', $redir
 			# echec sur une etape en cours ?
 			# on sort
 			if ($etape) {
-				return array($v, $etape);
+				return [$v, $etape];
 			}
 			$n = time() - $time;
 			spip_log("$table $meta: $v en $n secondes", 'maj.' . _LOG_INFO_IMPORTANTE);
@@ -404,7 +406,7 @@ function maj_while($installee, $cible, $maj, $meta = '', $table = 'meta', $redir
 	}
 	spip_log("MAJ terminee. $meta: $installee", 'maj.' . _LOG_INFO_IMPORTANTE);
 
-	return array();
+	return [];
 }
 
 /**
@@ -426,7 +428,7 @@ function maj_while($installee, $cible, $maj, $meta = '', $table = 'meta', $redir
  *   url de redirection en cas d'interruption
  * @return int
  */
-function serie_alter($serie, $q = array(), $meta = '', $table = 'meta', $redirect = '') {
+function serie_alter($serie, $q = [], $meta = '', $table = 'meta', $redirect = '') {
 	$meta2 = $meta . '_maj_' . $serie;
 	$etape = 0;
 	if (isset($GLOBALS[$table][$meta2])) {
@@ -435,7 +437,8 @@ function serie_alter($serie, $q = array(), $meta = '', $table = 'meta', $redirec
 	foreach ($q as $i => $r) {
 		if ($i >= $etape) {
 			$msg = "maj $table $meta2 etape $i";
-			if (is_array($r)
+			if (
+				is_array($r)
 				and function_exists($f = array_shift($r))
 			) {
 				// note: $r (arguments de la fonction $f) peut avoir des données tabulaires
@@ -482,9 +485,9 @@ function serie_alter($serie, $q = array(), $meta = '', $table = 'meta', $redirec
  **/
 function upgrade_test() {
 	sql_drop_table('spip_test', true);
-	sql_create('spip_test', array('a' => 'int'));
+	sql_create('spip_test', ['a' => 'int']);
 	sql_alter('TABLE spip_test ADD b INT');
-	sql_insertq('spip_test', array('b' => 1), array('field' => array('b' => 'int')));
+	sql_insertq('spip_test', ['b' => 1], ['field' => ['b' => 'int']]);
 	$result = sql_select('b', 'spip_test');
 	// ne pas garder le resultat de la requete sinon sqlite3
 	// ne peut pas supprimer la table spip_test lors du sql_alter qui suit

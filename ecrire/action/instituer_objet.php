@@ -42,10 +42,11 @@ function action_instituer_objet_dist($arg = null) {
 		return;
 	} // impossible mais sait-on jamais
 
-	if ($id_objet = intval($id_objet)
-		and autoriser('instituer', $objet, $id_objet, '', array('statut' => $statut))
+	if (
+		$id_objet = intval($id_objet)
+		and autoriser('instituer', $objet, $id_objet, '', ['statut' => $statut])
 	) {
 		include_spip('action/editer_objet');
-		objet_modifier($objet, $id_objet, array('statut' => $statut));
+		objet_modifier($objet, $id_objet, ['statut' => $statut]);
 	}
 }

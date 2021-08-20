@@ -21,12 +21,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return <type>
  */
 function plugins_extraire_boutons_dist($arbre) {
-	$ret = array('bouton' => array(), 'onglet' => array());
+	$ret = ['bouton' => [], 'onglet' => []];
 	// recuperer les boutons et onglets si necessaire
 	spip_xml_match_nodes(',^(bouton|onglet)\s,', $arbre, $les_boutons);
 	if (is_array($les_boutons) && count($les_boutons)) {
-		$ret['bouton'] = array();
-		$ret['onglet'] = array();
+		$ret['bouton'] = [];
+		$ret['onglet'] = [];
 		foreach ($les_boutons as $bouton => $val) {
 			$bouton = spip_xml_decompose_tag($bouton);
 			$type = reset($bouton);

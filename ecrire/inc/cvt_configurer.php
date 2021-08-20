@@ -32,7 +32,8 @@ include_spip('inc/config');
  * @return array
  */
 function cvtconf_formulaire_charger($flux) {
-	if ($form = $flux['args']['form']
+	if (
+		$form = $flux['args']['form']
 		and strncmp($form, 'configurer_', 11) == 0 // un #FORMULAIRE_CONFIGURER_XXX
 	) {
 		// Pour tous les formulaires CONFIGURER, ayant une fonction charger ou pas, on teste si autorisé
@@ -65,12 +66,13 @@ function cvtconf_formulaire_charger($flux) {
  * @return array
  */
 function cvtconf_formulaire_traiter($flux) {
-	if ($form = $flux['args']['form']
+	if (
+		$form = $flux['args']['form']
 		and strncmp($form, 'configurer_', 11) == 0 // un #FORMULAIRE_CONFIGURER_XXX
 		and !charger_fonction('traiter', "formulaires/$form/", true) // sans fonction traiter()
 	) {
 		$trace = cvtconf_formulaires_configurer_enregistre($form, $flux['args']['args']);
-		$flux['data'] = array('message_ok' => _T('config_info_enregistree') . $trace, 'editable' => true);
+		$flux['data'] = ['message_ok' => _T('config_info_enregistree') . $trace, 'editable' => true];
 	}
 
 	return $flux;
@@ -89,7 +91,7 @@ function cvtconf_formulaire_traiter($flux) {
  * @return string
  */
 function cvtconf_formulaires_configurer_enregistre($form, $args) {
-	$valeurs = array();
+	$valeurs = [];
 	// charger les valeurs
 	// ce qui permet de prendre en charge une fonction charger() existante
 	// qui prend alors la main sur l'auto detection
@@ -98,16 +100,16 @@ function cvtconf_formulaires_configurer_enregistre($form, $args) {
 	}
 	$valeurs = pipeline(
 		'formulaire_charger',
-		array(
-			'args' => array('form' => $form, 'args' => $args, 'je_suis_poste' => false),
+		[
+			'args' => ['form' => $form, 'args' => $args, 'je_suis_poste' => false],
 			'data' => $valeurs
-		)
+		]
 	);
 	// ne pas stocker editable !
 	unset($valeurs['editable']);
 
 	// recuperer les valeurs postees
-	$store = array();
+	$store = [];
 	foreach ($valeurs as $k => $v) {
 		if (substr($k, 0, 1) !== '_') {
 			$store[$k] = _request($k);
@@ -154,7 +156,7 @@ function cvtconf_definir_configurer_conteneur($form, $valeurs) {
 		$casier = (isset($valeurs['_meta_casier']) ? $valeurs['_meta_casier'] : '');
 	}
 
-	return array($table, $casier, $prefixe, $stockage);
+	return [$table, $casier, $prefixe, $stockage];
 }
 
 /**
@@ -165,10 +167,11 @@ function cvtconf_definir_configurer_conteneur($form, $valeurs) {
  * @return array
  */
 function cvtconf_formulaires_configurer_recense($form) {
-	$valeurs = array('editable' => ' ');
+	$valeurs = ['editable' => ' '];
 
 	// sinon cas analyse du squelette
-	if ($f = find_in_path($form . '.' . _EXTENSION_SQUELETTES, 'formulaires/')
+	if (
+		$f = find_in_path($form . '.' . _EXTENSION_SQUELETTES, 'formulaires/')
 		and lire_fichier($f, $contenu)
 	) {
 		for ($i = 0; $i < 2; $i++) {
@@ -185,9 +188,10 @@ function cvtconf_formulaires_configurer_recense($form) {
 			);
 
 			foreach ($balises as $b) {
-				if ($n = extraire_attribut($b, 'name')
+				if (
+					$n = extraire_attribut($b, 'name')
 					and preg_match(',^([\w\-]+)(\[\w*\])?$,', $n, $r)
-					and !in_array($n, array('formulaire_action', 'formulaire_action_args'))
+					and !in_array($n, ['formulaire_action', 'formulaire_action_args'])
 					and extraire_attribut($b, 'type') !== 'submit'
 				) {
 					$valeurs[$r[1]] = '';

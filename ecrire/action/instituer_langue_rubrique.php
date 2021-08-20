@@ -31,7 +31,8 @@ function action_instituer_langue_rubrique_dist() {
 
 	list($id_rubrique, $id_parent) = preg_split('/\W/', $arg);
 
-	if ($changer_lang
+	if (
+		$changer_lang
 		and $id_rubrique > 0
 		and $GLOBALS['meta']['multi_rubriques'] == 'oui'
 		and ($GLOBALS['meta']['multi_secteurs'] == 'non' or $id_parent == 0)
@@ -39,7 +40,7 @@ function action_instituer_langue_rubrique_dist() {
 		if ($changer_lang != 'herit') {
 			sql_updateq(
 				'spip_rubriques',
-				array('lang' => $changer_lang, 'langue_choisie' => 'oui'),
+				['lang' => $changer_lang, 'langue_choisie' => 'oui'],
 				"id_rubrique=$id_rubrique"
 			);
 		} else {
@@ -50,7 +51,7 @@ function action_instituer_langue_rubrique_dist() {
 			}
 			sql_updateq(
 				'spip_rubriques',
-				array('lang' => $langue_parent, 'langue_choisie' => 'non'),
+				['lang' => $langue_parent, 'langue_choisie' => 'non'],
 				"id_rubrique=$id_rubrique"
 			);
 		}

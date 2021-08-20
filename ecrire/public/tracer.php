@@ -71,7 +71,7 @@ function trace_query_end($query, $start, $result, $erreur, $serveur = '') {
 	}
 	// tracer les erreurs, sauf pour select, c'est fait dans abstract_sql
 	if ($trace and $erreur and !preg_match('/^select\b/i', $query)) {
-		erreur_squelette(array(sql_errno($serveur), $erreur, $query));
+		erreur_squelette([sql_errno($serveur), $erreur, $query]);
 	}
 
 	return $result;
@@ -105,14 +105,14 @@ function trace_query_chrono($dt, $query, $result, $serveur = '') {
 	$q = preg_replace('/([a-z)`])\s+([A-Z])/', "$1\n<br />$2", spip_htmlentities($query));
 	$e = sql_explain($query, $serveur);
 	$r = str_replace('Resource id ', '', (is_object($result) ? get_class($result) : $result));
-	$GLOBALS['tableau_des_temps'][] = array($dt, $nb, $boucle, $q, $e, $r, $contexte);
+	$GLOBALS['tableau_des_temps'][] = [$dt, $nb, $boucle, $q, $e, $r, $contexte];
 }
 
 
 function chrono_requete($temps) {
 	$total = 0;
 	$hors = '<i>' . _T('zbug_hors_compilation') . '</i>';
-	$t = $q = $n = $d = array();
+	$t = $q = $n = $d = [];
 	// Totaliser les temps et completer le Explain
 	foreach ($temps as $key => $v) {
 		list($dt, $nb, $boucle, $query, $explain, $res, $contexte) = $v;
@@ -135,7 +135,7 @@ function chrono_requete($temps) {
 		++$n[$k];
 
 		if (!is_array($explain)) {
-			$explain = array();
+			$explain = [];
 		}
 		foreach ($explain as $j => $v) {
 			$explain[$j] = "<tr><th>$j</th><td>"
@@ -152,13 +152,13 @@ function chrono_requete($temps) {
 			. join('', $explain)
 			. '</table>';
 
-		$temps[$key] = array($e, $env, $k);
+		$temps[$key] = [$e, $env, $k];
 	}
 	// Trier par temps d'execution decroissant
 	array_multisort($t, SORT_DESC, $q, $temps);
 	arsort($d);
 	$i = 1;
-	$t = array();
+	$t = [];
 	// Fabriquer les liens de navigations dans le tableau des temps
 	foreach ($temps as $k => $v) {
 		$titre = strip_tags($v[2]);
@@ -166,7 +166,7 @@ function chrono_requete($temps) {
 		$href = str_replace("\\'", '&#39;', $href);
 
 		if (!isset($t[$v[2]])) {
-			$t[$v[2]] = array();
+			$t[$v[2]] = [];
 		}
 		$t[$v[2]][] = "<span class='spip-debug-arg'> "
 			. "<a title='$titre' href='$href'>$i</a>"
@@ -187,14 +187,14 @@ function chrono_requete($temps) {
 			. join('', $t[$k]);
 	}
 
-	$navigation = array(
+	$navigation = [
 		_T('zbug_statistiques'),
 		'<tr><td>'
 		. join("</td></tr>\n<tr><td>", $d)
 		. "</td></tr>\n"
 		. (# _request('var_mode_objet') ? '' :
 		('<tr><td>' . count($temps) . '</td><td>' . _T('info_total') . '</td><td class="time">' . $total . '</td><td></td></tr>'))
-	);
+	];
 
-	return array($temps, $navigation);
+	return [$temps, $navigation];
 }

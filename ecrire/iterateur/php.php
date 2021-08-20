@@ -1,6 +1,5 @@
 <?php
 
-
 /***************************************************************************\
  *  SPIP, Système de publication pour l'internet                           *
  *                                                                         *
@@ -38,12 +37,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function iterateur_php_dist($b, $iteratorName) {
 	$b->iterateur = $iteratorName; # designe la classe d'iterateur
-	$b->show = array(
-		'field' => array(
+	$b->show = [
+		'field' => [
 			'cle' => 'STRING',
 			'valeur' => 'STRING',
-		)
-	);
+		]
+	];
 	foreach (get_class_methods($iteratorName) as $method) {
 		$b->show['field'][strtolower($method)] = 'METHOD';
 	}

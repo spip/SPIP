@@ -86,8 +86,8 @@ class Bouton {
  */
 function definir_barre_onglets($script) {
 
-	$onglets = array();
-	$liste_onglets = array();
+	$onglets = [];
+	$liste_onglets = [];
 
 	// ajouter les onglets issus des plugin via paquet.xml
 	if (function_exists('onglets_plugins')) {
@@ -96,7 +96,8 @@ function definir_barre_onglets($script) {
 
 
 	foreach ($liste_onglets as $id => $infos) {
-		if (($parent = $infos['parent'])
+		if (
+			($parent = $infos['parent'])
 			&& $parent == $script
 			&& autoriser('onglet', "_$id")
 		) {
@@ -113,7 +114,7 @@ function definir_barre_onglets($script) {
 		}
 	}
 
-	return pipeline('ajouter_onglets', array('data' => $onglets, 'args' => $script));
+	return pipeline('ajouter_onglets', ['data' => $onglets, 'args' => $script]);
 }
 
 

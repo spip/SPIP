@@ -66,10 +66,11 @@ function verifier_crash_tables() {
 	if (spip_connect()) {
 		include_spip('base/serial');
 		include_spip('base/auxiliaires');
-		$crash = array();
-		foreach (array('tables_principales', 'tables_auxiliaires') as $com) {
+		$crash = [];
+		foreach (['tables_principales', 'tables_auxiliaires'] as $com) {
 			foreach ($GLOBALS[$com] as $table => $desc) {
-				if (!sql_select('*', $table, '', '', '', 1)
+				if (
+					!sql_select('*', $table, '', '', '', 1)
 					and !defined('spip_interdire_cache')
 				) { # cas "LOST CONNECTION"
 				$crash[] = $table;

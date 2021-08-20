@@ -1,6 +1,5 @@
 <?php
 
-
 /***************************************************************************\
  *  SPIP, Système de publication pour l'internet                           *
  *                                                                         *
@@ -31,7 +30,7 @@ class IterFactory {
 				if (!$si) {
 					// $command pour boucle SQL peut generer des erreurs de compilation
 					// s'il est transmis alors qu'on est dans un iterateur vide
-					return new IterDecorator(new EmptyIterator(), array(), $info);
+					return new IterDecorator(new EmptyIterator(), [], $info);
 				}
 			}
 		}
@@ -40,7 +39,7 @@ class IterFactory {
 		// (il faudrait passer l'argument ->sql_serveur
 		// pour etre certain qu'on est sur un "php:")
 		if (class_exists($iterateur)) {
-			$a = isset($command['args']) ? $command['args'] : array();
+			$a = isset($command['args']) ? $command['args'] : [];
 
 			// permettre de passer un Iterateur directement {args #ITERATEUR} :
 			// si on recoit deja un iterateur en argument, on l'utilise
@@ -81,7 +80,8 @@ class IterFactory {
 			// definie dans le fichier iterateurs/xxx.php
 			$class = 'Iterateur' . $iterateur;
 			if (!class_exists($class)) {
-				if (!include_spip('iterateur/' . strtolower($iterateur))
+				if (
+					!include_spip('iterateur/' . strtolower($iterateur))
 					or !class_exists($class)
 				) {
 					die("Iterateur $iterateur non trouv&#233;");
@@ -106,7 +106,7 @@ class IterDecorator extends FilterIterator {
 	 *
 	 * @var array
 	 */
-	protected $filtre = array();
+	protected $filtre = [];
 
 	/**
 	 * Fonction de filtrage compilee a partir des criteres de filtre
@@ -201,7 +201,8 @@ class IterDecorator extends FilterIterator {
 	// en fonction des methodes
 	// et proprietes disponibles
 	public function get_select($nom) {
-		if (is_object($this->iter)
+		if (
+			is_object($this->iter)
 			and method_exists($this->iter, $nom)
 		) {
 			try {
@@ -220,7 +221,8 @@ class IterDecorator extends FilterIterator {
 		}*/
 		// cle et valeur par defaut
 		// ICI PLANTAGE SI ON NE CONTROLE PAS $nom
-		if (in_array($nom, array('cle', 'valeur'))
+		if (
+			in_array($nom, ['cle', 'valeur'])
 			and method_exists($this, $nom)
 		) {
 			return $this->$nom();
@@ -322,7 +324,7 @@ class IterDecorator extends FilterIterator {
 			$op = '';
 		} else {
 			if ($op == 'LIKE') {
-				$valeur = str_replace(array('\"', '_', '%'), array('"', '.', '.*'), preg_quote($valeur));
+				$valeur = str_replace(['\"', '_', '%'], ['"', '.', '.*'], preg_quote($valeur));
 				$filtre = 'filtrer("match", ' . $a . ', ' . $valeur . ')';
 				$op = '';
 			} else {
@@ -333,7 +335,7 @@ class IterDecorator extends FilterIterator {
 						$filtre = 'in_array(' . $a . ', array' . $valeur . ')';
 						$op = '';
 					} else {
-						if (!in_array($op, array('<', '<=', '>', '>='))) {
+						if (!in_array($op, ['<', '<=', '>', '>='])) {
 							spip_log('operateur non reconnu ' . $op); // [todo] mettre une erreur de squelette
 							$op = '';
 						}
@@ -420,7 +422,7 @@ class IterDecorator extends FilterIterator {
 	 * Liste des champs a inserer dans les $row
 	 * retournes par ->fetch()
 	 */
-	protected $select = array();
+	protected $select = [];
 
 
 	/**
@@ -503,11 +505,13 @@ class IterDecorator extends FilterIterator {
 		if (method_exists($this->iter, 'fetch')) {
 			return $this->iter->fetch();
 		} else {
-			while ($this->valid()
+			while (
+				$this->valid()
 				and (
 					!$this->accept()
 					or (isset($this->offset) and $this->fetched++ < $this->offset)
-				)) {
+				)
+			) {
 				$this->next();
 			}
 
@@ -515,13 +519,14 @@ class IterDecorator extends FilterIterator {
 				return false;
 			}
 
-			if (isset($this->limit)
+			if (
+				isset($this->limit)
 				and $this->fetched > $this->offset + $this->limit
 			) {
 				return false;
 			}
 
-			$r = array();
+			$r = [];
 			foreach ($this->select as $nom) {
 				$r[$nom] = $this->get_select($nom);
 			}
@@ -575,7 +580,8 @@ class IterDecorator extends FilterIterator {
 	 */
 	public function count() {
 		if (is_null($this->total)) {
-			if (method_exists($this->iter, 'count')
+			if (
+				method_exists($this->iter, 'count')
 				and !$this->func_filtre
 			) {
 				return $this->total = $this->iter->count();

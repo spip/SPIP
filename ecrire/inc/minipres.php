@@ -61,7 +61,7 @@ function install_debut_html($titre = 'AUTO', $onLoad = '', $all_inline = false) 
 	}
 
 	$css = '';
-	$files = array('reset.css', 'clear.css', 'minipres.css');
+	$files = ['reset.css', 'clear.css', 'minipres.css'];
 	if ($all_inline) {
 		// inliner les CSS (optimisation de la page minipres qui passe en un seul hit a la demande)
 		foreach ($files as $name) {
@@ -146,22 +146,22 @@ function install_fin_html() {
  * @return string
  *   HTML de la page
  */
-function minipres($titre = '', $corps = '', $options = array()) {
+function minipres($titre = '', $corps = '', $options = []) {
 
 	// compat signature old
 	// minipres($titre='', $corps="", $onload='', $all_inline = false)
 	$args = func_get_args();
 	if (isset($args[2]) and is_string($args[2])) {
-		$options = array('onload' => $args[2]);
+		$options = ['onload' => $args[2]];
 	}
 	if (isset($args[3])) {
 		$options['all_inline'] = $args[3];
 	}
 
-	$options = array_merge(array(
+	$options = array_merge([
 		'onload' => '',
 		'all_inline' => false,
-	), $options);
+	], $options);
 
 	if (!defined('_AJAX')) {
 		define('_AJAX', false);
@@ -170,7 +170,8 @@ function minipres($titre = '', $corps = '', $options = array()) {
 		if (!isset($options['status'])) {
 			$options['status'] = 403;
 		}
-		if (!$titre = _request('action')
+		if (
+			!$titre = _request('action')
 			and !$titre = _request('exec')
 			and !$titre = _request('page')
 		) {

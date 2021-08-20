@@ -146,18 +146,18 @@ class ValidateurXML {
 				. " (L$l,C$c)");
 		} else {
 			$this->valider_motif($phraseur, $name, $val, $bal, _REGEXP_ID);
-			$this->ids[$val] = array(xml_get_current_line_number($phraseur), xml_get_current_column_number($phraseur));
+			$this->ids[$val] = [xml_get_current_line_number($phraseur), xml_get_current_column_number($phraseur)];
 		}
 	}
 
 	// https://code.spip.net/@validerAttribut_IDREF
 	public function validerAttribut_IDREF($phraseur, $name, $val, $bal) {
-		$this->idrefs[] = array($val, xml_get_current_line_number($phraseur), xml_get_current_column_number($phraseur));
+		$this->idrefs[] = [$val, xml_get_current_line_number($phraseur), xml_get_current_column_number($phraseur)];
 	}
 
 	// https://code.spip.net/@validerAttribut_IDREFS
 	public function validerAttribut_IDREFS($phraseur, $name, $val, $bal) {
-		$this->idrefss[] = array($val, xml_get_current_line_number($phraseur), xml_get_current_column_number($phraseur));
+		$this->idrefss[] = [$val, xml_get_current_line_number($phraseur), xml_get_current_column_number($phraseur)];
 	}
 
 	// https://code.spip.net/@valider_motif
@@ -177,7 +177,7 @@ class ValidateurXML {
 	// https://code.spip.net/@valider_idref
 	public function valider_idref($nom, $ligne, $col) {
 		if (!isset($this->ids[$nom])) {
-			$this->err[] = array(" <p><b>$nom</b> " . _T('zxml_inconnu_id'), $ligne, $col);
+			$this->err[] = [" <p><b>$nom</b> " . _T('zxml_inconnu_id'), $ligne, $col];
 		}
 	}
 
@@ -287,7 +287,8 @@ class ValidateurXML {
 
 	// https://code.spip.net/@defautElement
 	public function defaultElement($phraseur, $data) {
-		if (!preg_match('/^<!--/', $data)
+		if (
+			!preg_match('/^<!--/', $data)
 			and (preg_match_all('/&([^;]*)?/', $data, $r, PREG_SET_ORDER))
 		) {
 			foreach ($r as $m) {
@@ -309,7 +310,7 @@ class ValidateurXML {
 		xml_parsestring($this, $data);
 
 		if (!$this->dtc or preg_match(',^' . _MESSAGE_DOCTYPE . ',', $data)) {
-			$this->err[] = array('DOCTYPE ?', 0, 0);
+			$this->err[] = ['DOCTYPE ?', 0, 0];
 		} else {
 			$this->valider_passe2($this);
 		}
@@ -320,17 +321,17 @@ class ValidateurXML {
 	 *
 	 * @param array $process ?
 	 **/
-	public function __construct($process = array()) {
+	public function __construct($process = []) {
 		if (is_array($process)) {
 			$this->process = $process;
 		}
 	}
 
-	public $ids = array();
-	public $idrefs = array();
-	public $idrefss = array();
-	public $debuts = array();
-	public $fratrie = array();
+	public $ids = [];
+	public $idrefs = [];
+	public $idrefss = [];
+	public $debuts = [];
+	public $fratrie = [];
 
 	public $dtc = null;
 	public $sax = null;
@@ -338,17 +339,17 @@ class ValidateurXML {
 	public $entete = '';
 	public $page = '';
 	public $res = '';
-	public $err = array();
-	public $contenu = array();
-	public $ouvrant = array();
-	public $reperes = array();
-	public $process = array(
+	public $err = [];
+	public $contenu = [];
+	public $ouvrant = [];
+	public $reperes = [];
+	public $process = [
 		'debut' => 'xml_debutElement',
 		'fin' => 'xml_finElement',
 		'text' => 'xml_textElement',
 		'pi' => 'xml_piElement',
 		'default' => 'xml_defaultElement'
-	);
+	];
 }
 
 

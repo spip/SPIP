@@ -44,15 +44,15 @@ function taille_du_cache() {
 	$t = 0;
 	$n = 0;
 	$time = isset($GLOBALS['meta']['cache_mark']) ? $GLOBALS['meta']['cache_mark'] : 0;
-	for ($i=0; $i < 256; $i++) {
-		$dir = _DIR_CACHE.sprintf('%02s', dechex($i));
+	for ($i = 0; $i < 256; $i++) {
+		$dir = _DIR_CACHE . sprintf('%02s', dechex($i));
 		if (@is_dir($dir) and is_readable($dir) and $d = opendir($dir)) {
 			while (($f = readdir($d)) !== false) {
 				if (preg_match(',^[[0-9a-f]+\.cache$,S', $f) and $a = stat("$dir/$f")) {
 					$n++;
 					if ($a['mtime'] >= $time) {
 						if ($a['blocks'] > 0) {
-							$t += 512*$a['blocks'];
+							$t += 512 * $a['blocks'];
 						} else {
 							$t += $a['size'];
 						}
@@ -61,7 +61,7 @@ function taille_du_cache() {
 			}
 		}
 		if ($n > 500) {
-			return intval(256*$t/(1+$i));
+			return intval(256 * $t / (1 + $i));
 		}
 	}
 	return $t;
@@ -138,7 +138,7 @@ function inc_suivre_invalideur_dist($cond, $modif = true) {
  * @return int
  *     Nombre de fichiers supprimés
  **/
-function purger_repertoire($dir, $options = array()) {
+function purger_repertoire($dir, $options = []) {
 	if (!is_dir($dir) or !is_readable($dir)) {
 		return;
 	}
@@ -156,7 +156,8 @@ function purger_repertoire($dir, $options = array()) {
 		}
 		$chemin = "$dir/$fichier";
 		if (is_file($chemin)) {
-			if ((!isset($options['atime']) or (@fileatime($chemin) < $options['atime']))
+			if (
+				(!isset($options['atime']) or (@fileatime($chemin) < $options['atime']))
 				and (!isset($options['mtime']) or (@filemtime($chemin) < $options['mtime']))
 			) {
 				supprimer_fichier($chemin);
@@ -193,10 +194,12 @@ function purger_repertoire($dir, $options = array()) {
 // https://code.spip.net/@retire_cache
 function retire_cache($cache) {
 
-	if (preg_match(
-		',^([0-9a-f]/)?([0-9]+/)?[0-9a-f]+\.cache(\.gz)?$,i',
-		$cache
-	)) {
+	if (
+		preg_match(
+			',^([0-9a-f]/)?([0-9]+/)?[0-9a-f]+\.cache(\.gz)?$,i',
+			$cache
+		)
+	) {
 		// supprimer le fichier (de facon propre)
 		supprimer_fichier(_DIR_CACHE . $cache);
 	} else {

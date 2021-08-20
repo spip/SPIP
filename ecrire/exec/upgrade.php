@@ -44,7 +44,7 @@ function exec_upgrade_dist() {
 			. '</b><p> '
 			. _T(
 				'texte_nouvelle_version_spip_2',
-				array('connect' => '<tt>' . _FILE_CONNECT . '</tt>')
+				['connect' => '<tt>' . _FILE_CONNECT . '</tt>']
 			)
 			. generer_form_ecrire(
 				'upgrade',

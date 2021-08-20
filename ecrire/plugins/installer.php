@@ -100,7 +100,7 @@ function plugins_installer_dist($plug, $action, $dir_type = '_DIR_PLUGINS') {
 
 	if (!$f) {
 		// installation sans operation particuliere
-		$infos['install_test'] = array(true, '');
+		$infos['install_test'] = [true, ''];
 		return $infos;
 	}
 
@@ -130,12 +130,13 @@ function plugins_installer_dist($plug, $action, $dir_type = '_DIR_PLUGINS') {
 	// vider le cache des descriptions de tables a chaque (de)installation
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$trouver_table('');
-	$infos['install_test'] = array($f('test', $arg, $version), $aff);
+	$infos['install_test'] = [$f('test', $arg, $version), $aff];
 
 	// Si la table meta n'est pas spip_meta et qu'on est dans la première installation du plugin
 	// on force la création du fichier cache à la date du moment.
 	// On relit les metas de la table pour être sur que la globale soit à jour pour touch_meta.
-	if (($table !== 'meta')
+	if (
+		($table !== 'meta')
 		and ($action == 'install')
 		and empty($infos['upgrade'])
 	) {
@@ -197,7 +198,7 @@ function spip_plugin_install($action, $infos, $version_cible) {
 function liste_plugin_actifs() {
 	$liste = isset($GLOBALS['meta']['plugin']) ? $GLOBALS['meta']['plugin'] : '';
 	if (!$liste) {
-		return array();
+		return [];
 	}
 	if (!is_array($liste = unserialize($liste))) {
 		// compatibilite pre 1.9.2, mettre a jour la meta

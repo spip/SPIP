@@ -7,7 +7,7 @@
  * @package SPIP\Core\Charsets
  **/
 
-$GLOBALS['CHARSET']['translit'] = array(
+$GLOBALS['CHARSET']['translit'] = [
 // latin [fausse plage]
 	128 => 'EUR',
 	131 => 'f',
@@ -390,4 +390,4 @@ $GLOBALS['CHARSET']['translit'] = array(
 	7924 => 'Y',
 	273 => 'd'
 
-);
+];

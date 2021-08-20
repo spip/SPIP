@@ -33,7 +33,7 @@ function formulaires_configurer_preferences_menus_charger_dist() {
 	// travailler sur des meta fraîches
 	include_spip('inc/meta');
 	lire_metas();
-	$valeurs = array();
+	$valeurs = [];
 	$valeurs['activer_menudev'] = table_valeur($GLOBALS['visiteur_session'], 'prefs/activer_menudev', 'non');
 	$valeurs['menus_favoris'] = obtenir_menus_favoris();
 	return $valeurs;
@@ -53,12 +53,13 @@ function formulaires_configurer_preferences_menus_traiter_dist() {
 	$menus_favoris = array_map('intval', $menus_favoris);
 
 	if (_request('reset')) {
-		$menus_favoris = array();
+		$menus_favoris = [];
 		set_request('menus_favoris', null);
 	}
 
 	// si le menu dev change, ou les menus favoris, on recharge toute la page.
-	if (table_valeur($GLOBALS['visiteur_session'], 'prefs/activer_menudev') != $activer_menudev
+	if (
+		table_valeur($GLOBALS['visiteur_session'], 'prefs/activer_menudev') != $activer_menudev
 		or $menus_favoris != obtenir_menus_favoris()
 	) {
 		refuser_traiter_formulaire_ajax();
@@ -68,10 +69,10 @@ function formulaires_configurer_preferences_menus_traiter_dist() {
 
 		if (intval($GLOBALS['visiteur_session']['id_auteur'])) {
 			include_spip('action/editer_auteur');
-			$c = array('prefs' => serialize($GLOBALS['visiteur_session']['prefs']));
+			$c = ['prefs' => serialize($GLOBALS['visiteur_session']['prefs'])];
 			auteur_modifier($GLOBALS['visiteur_session']['id_auteur'], $c);
 		}
 	}
 
-	return array('message_ok' => _T('config_info_enregistree'), 'editable' => true);
+	return ['message_ok' => _T('config_info_enregistree'), 'editable' => true];
 }

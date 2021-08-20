@@ -28,13 +28,15 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Environnement du formulaire
  **/
 function formulaires_configurer_reducteur_charger_dist() {
-	$valeurs = array();
-	foreach (array(
+	$valeurs = [];
+	foreach (
+		[
 		'image_process',
 		'formats_graphiques',
 		'creer_preview',
 		'taille_preview',
-	) as $m) {
+		] as $m
+	) {
 		$valeurs[$m] = isset($GLOBALS['meta'][$m]) ? $GLOBALS['meta'][$m] : null;
 	}
 
@@ -54,7 +56,7 @@ function formulaires_configurer_reducteur_charger_dist() {
  *     Retours des traitements
  **/
 function formulaires_configurer_reducteur_traiter_dist() {
-	$res = array('editable' => true);
+	$res = ['editable' => true];
 
 	if (is_array($image_process = _request('image_process_'))) {
 		$image_process = array_keys($image_process);
@@ -85,9 +87,11 @@ function formulaires_configurer_reducteur_traiter_dist() {
 		}
 	}
 
-	foreach (array(
+	foreach (
+		[
 		'creer_preview'
-	) as $m) {
+		] as $m
+	) {
 		if (!is_null($v = _request($m))) {
 			ecrire_meta($m, $v == 'oui' ? 'oui' : 'non');
 		}
@@ -118,7 +122,8 @@ function url_vignette_choix($process) {
 			}
 			break;
 		case 'gd1':
-			if (!function_exists('ImageGif')
+			if (
+				!function_exists('ImageGif')
 				and !function_exists('ImageJpeg')
 				and !function_exists('ImagePng')
 			) {

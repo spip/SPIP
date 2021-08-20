@@ -41,7 +41,7 @@ include_spip('base/abstract_sql');
  *     Pile complétée du code compilé
  **/
 function balise_FORMULAIRE_ECRIRE_AUTEUR($p) {
-	return calculer_balise_dynamique($p, 'FORMULAIRE_ECRIRE_AUTEUR', array('id_auteur', 'id_article', 'email'));
+	return calculer_balise_dynamique($p, 'FORMULAIRE_ECRIRE_AUTEUR', ['id_auteur', 'id_article', 'email']);
 }
 
 /**
@@ -63,13 +63,13 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_stat($args, $context_compil) {
 	// Pas d'id_auteur ni d'id_article ? Erreur de contexte
 	$id = intval($args[1]);
 	if (!$args[0] and !$id) {
-		$msg = array(
+		$msg = [
 			'zbug_champ_hors_motif',
-			array(
+			[
 				'champ' => 'FORMULAIRE_ECRIRE_AUTEUR',
 				'motif' => 'AUTEURS/ARTICLES'
-			)
-		);
+			]
+		];
 
 		erreur_squelette($msg, $context_compil);
 

@@ -23,7 +23,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param string $journal
  * @param array $opt
  */
-function inc_journal_dist($phrase, $opt = array()) {
+function inc_journal_dist($phrase, $opt = []) {
 	if (!strlen($phrase)) {
 		return;
 	}

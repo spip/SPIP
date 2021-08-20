@@ -32,7 +32,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function action_tester_dist() {
 	$arg = _request('arg');
 
-	$gd_formats = array();
+	$gd_formats = [];
 	$gd_formats_read_gif = '';
 	// verifier les formats acceptes par GD
 	if ($arg == 'gd1') {
@@ -110,7 +110,7 @@ function action_tester_dist() {
 			if (_PNMSCALE_COMMAND == '') {
 				return;
 			}
-			$netpbm_formats = array();
+			$netpbm_formats = [];
 
 			$jpegtopnm_command = str_replace(
 				'pnmscale',
@@ -169,7 +169,7 @@ function action_tester_dist() {
 	}
 
 	// et maintenant envoyer la vignette de tests
-	if (in_array($arg, array('gd1', 'gd2', 'imagick', 'convert', 'netpbm'))) {
+	if (in_array($arg, ['gd1', 'gd2', 'imagick', 'convert', 'netpbm'])) {
 		include_spip('inc/filtres');
 		include_spip('inc/filtres_images_mini');
 		$taille_preview = 150;
@@ -177,7 +177,8 @@ function action_tester_dist() {
 
 		$image['fichier_dest'] = _DIR_VAR . "test_$arg";
 
-		if ($preview = _image_creer_vignette($image, $taille_preview, $taille_preview, $arg, true)
+		if (
+			$preview = _image_creer_vignette($image, $taille_preview, $taille_preview, $arg, true)
 			and ($preview['width'] * $preview['height'] > 0)
 		) {
 			redirige_par_entete($preview['fichier']);

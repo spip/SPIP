@@ -20,7 +20,7 @@
  * Retourne la liste des menus favoris par défaut ainsi que leur rang
  */
 function inc_definir_menus_favoris_dist() {
-	$liste = array(
+	$liste = [
 
 		// Menu Édition,
 		'auteurs' => 1,
@@ -34,7 +34,7 @@ function inc_definir_menus_favoris_dist() {
 		'configurer_identite' => 1,
 		'admin_plugin' => 2,
 
-	);
+	];
 
 	return $liste;
 }

@@ -42,13 +42,15 @@ function action_logout_dist() {
 	}
 
 	// seul le loge peut se deloger (mais id_auteur peut valoir 0 apres une restauration avortee)
-	if (isset($GLOBALS['visiteur_session']['id_auteur'])
+	if (
+		isset($GLOBALS['visiteur_session']['id_auteur'])
 		and is_numeric($GLOBALS['visiteur_session']['id_auteur'])
 		// des sessions anonymes avec id_auteur=0 existent, mais elle n'ont pas de statut : double check
 		and isset($GLOBALS['visiteur_session']['statut'])
 	) {
 		// il faut un jeton pour fermer la session (eviter les CSRF)
-		if (!$jeton = _request('jeton')
+		if (
+			!$jeton = _request('jeton')
 			or !verifier_jeton_logout($jeton, $GLOBALS['visiteur_session'])
 		) {
 			$jeton = generer_jeton_logout($GLOBALS['visiteur_session']);
@@ -78,7 +80,8 @@ function action_logout_dist() {
 		}
 		// si authentification http, et que la personne est loge,
 		// pour se deconnecter, il faut proposer un nouveau formulaire de connexion http
-		if (isset($_SERVER['PHP_AUTH_USER'])
+		if (
+			isset($_SERVER['PHP_AUTH_USER'])
 			and !$GLOBALS['ignore_auth_http']
 			and $GLOBALS['auth_can_disconnect']
 		) {

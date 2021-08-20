@@ -117,8 +117,8 @@ function filtre_multipart_dist($t) {
  * @return string Contenu échappé.
  **/
 function filtre_text_dist($t) {
-	static $t1 = array('&', '<', '>');
-	static $t2 = array('&amp;', '&lt;', '&gt;');
+	static $t1 = ['&', '<', '>'];
+	static $t2 = ['&amp;', '&lt;', '&gt;'];
 
 	return '<pre>' . str_replace($t1, $t2, $t) . '</pre>';
 }

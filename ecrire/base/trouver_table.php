@@ -64,9 +64,10 @@ include_spip('base/objets');
  *
  **/
 function base_trouver_table_dist($nom, $serveur = '', $table_spip = true) {
-	static $nom_cache_desc_sql = array();
+	static $nom_cache_desc_sql = [];
 
-	if (!spip_connect($serveur)
+	if (
+		!spip_connect($serveur)
 		or !preg_match('/^[a-zA-Z0-9._-]*/', $nom)
 	) {
 		return null;
@@ -91,7 +92,7 @@ function base_trouver_table_dist($nom, $serveur = '', $table_spip = true) {
 	// un appel avec $nom vide est une demande explicite de vidange du cache des descriptions
 	if (!$nom) {
 		spip_unlink($nom_cache_desc_sql[$serveur][$objets_sql]);
-		$connexion['tables'] = array();
+		$connexion['tables'] = [];
 
 		return null;
 	}
@@ -118,11 +119,13 @@ function base_trouver_table_dist($nom, $serveur = '', $table_spip = true) {
 	// et si on est pas explicitement en recalcul
 	// on essaye de recharger le cache des decriptions de ce serveur
 	// dans le fichier cache
-	if (!isset($connexion['tables'][$nom_sql])
+	if (
+		!isset($connexion['tables'][$nom_sql])
 		and defined('_VAR_MODE') and _VAR_MODE !== 'recalcul'
 		and (!isset($connexion['tables']) or !$connexion['tables'])
 	) {
-		if (lire_fichier($nom_cache_desc_sql[$serveur][$objets_sql], $desc_cache)
+		if (
+			lire_fichier($nom_cache_desc_sql[$serveur][$objets_sql], $desc_cache)
 			and $desc_cache = unserialize($desc_cache)
 		) {
 			$connexion['tables'] = $desc_cache;
@@ -138,7 +141,8 @@ function base_trouver_table_dist($nom, $serveur = '', $table_spip = true) {
 		elseif ($nom_sql == $nom and isset($GLOBALS['tables_principales']['spip_' . $nom])) {
 			$nom_sql = 'spip_' . $nom;
 			$fdesc = &$GLOBALS['tables_principales'][$nom_sql];
-		} elseif (isset($GLOBALS['tables_auxiliaires'][$n = $nom])
+		} elseif (
+			isset($GLOBALS['tables_auxiliaires'][$n = $nom])
 			or isset($GLOBALS['tables_auxiliaires'][$n = 'spip_' . $nom])
 		) {
 			$nom_sql = $n;
@@ -180,7 +184,7 @@ function base_trouver_table_dist($nom, $serveur = '', $table_spip = true) {
 			$desc['key'] = $fdesc['key'];
 		}
 		if (! isset($desc['key'])) {
-			$desc['key'] = array();
+			$desc['key'] = [];
 		}
 
 		// si tables_objets_sql est bien fini d'init, on peut cacher

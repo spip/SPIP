@@ -41,7 +41,7 @@ function format_inclure_html($file, $args, $prof) {
 }
 
 function format_polyglotte_html($args, $prof) {
-	$contenu = array();
+	$contenu = [];
 	foreach ($args as $l => $t) {
 		$contenu[] = ($l ? "[$l]" : '') . $t;
 	}
@@ -120,7 +120,8 @@ function format_suite_html($args) {
 			// si un champ ou assimiles est suivi d'un texte
 			// et si celui-ci commence par un caractere de champ
 			// forcer la notation pleine
-			if (($c1 == '}' and substr(ltrim($texte2), 0, 1) == '|')
+			if (
+				($c1 == '}' and substr(ltrim($texte2), 0, 1) == '|')
 				or (preg_match('/[\w\d_*]/', $c1) and preg_match('/^[\w\d_*{|]/', $texte2))
 			) {
 				$args[$i][0] = '[(' . $texte . ')]';

@@ -39,7 +39,7 @@ function install_etape_4_dist() {
 	echo '<p>'
 		. _T(
 			'plugin_info_plugins_dist_1',
-			array('plugins_dist' => '<tt>' . joli_repertoire(_DIR_PLUGINS_DIST) . '</tt>')
+			['plugins_dist' => '<tt>' . joli_repertoire(_DIR_PLUGINS_DIST) . '</tt>']
 		)
 		. '</p>';
 
@@ -49,8 +49,8 @@ function install_etape_4_dist() {
 	echo $afficher(
 		self(),
 		liste_plugin_files(_DIR_PLUGINS_DIST),
-		array(),
-		array(),
+		[],
+		[],
 		_DIR_PLUGINS_DIST,
 		'afficher_nom_plugin'
 	);
@@ -59,7 +59,8 @@ function install_etape_4_dist() {
 	// car les plugins supposent que la base de SPIP est dans son etat normal (mise a jour)
 	// au premier passage dans l'espace prive on aura une demande d'upgrade qui se poursuit sur la page plugin
 	// et procede alors a l'installation
-	if (!isset($GLOBALS['meta']['version_installee'])
+	if (
+		!isset($GLOBALS['meta']['version_installee'])
 		or ($GLOBALS['spip_version_base'] == (str_replace(',', '.', $GLOBALS['meta']['version_installee'])))
 	) {
 		plugin_installes_meta();

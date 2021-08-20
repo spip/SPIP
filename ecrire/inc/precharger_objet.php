@@ -50,7 +50,7 @@ function precharger_objet($type, $id_objet, $id_rubrique = 0, $lier_trad = 0, $c
 
 	// si l'objet existe deja, on retourne simplement ses valeurs
 	if (is_numeric($id_objet)) {
-		return sql_fetsel('*', $table, "$_id_objet=".intval($id_objet));
+		return sql_fetsel('*', $table, "$_id_objet=" . intval($id_objet));
 	}
 
 	// ici, on demande une creation.
@@ -133,12 +133,12 @@ function precharger_traduction_objet($type, $id_objet, $id_rubrique = 0, $lier_t
 	$_id_objet = id_table_objet($table);
 
 	// Recuperer les donnees de l'objet original
-	$row = sql_fetsel('*', $table, "$_id_objet=".intval($lier_trad));
+	$row = sql_fetsel('*', $table, "$_id_objet=" . intval($lier_trad));
 	if ($row) {
 		include_spip('inc/filtres');
 		$row[$champ_titre] = filtrer_entites(objet_T($type, 'info_nouvelle_traduction')) . ' ' . $row[$champ_titre];
 	} else {
-		$row = array();
+		$row = [];
 	}
 
 	// on met l'objet dans une rubrique si l'objet le peut
@@ -186,14 +186,14 @@ function precharger_traduction_objet($type, $id_objet, $id_rubrique = 0, $lier_t
 					$id_parent = 0;
 				} else {
 					// on cherche une rubrique soeur dans la bonne langue
-					$row_rub = sql_fetsel('id_parent', 'spip_rubriques', 'id_rubrique='.intval($id_rubrique));
+					$row_rub = sql_fetsel('id_parent', 'spip_rubriques', 'id_rubrique=' . intval($id_rubrique));
 					$id_parent = $row_rub['id_parent'];
 				}
 
 				$row_rub = sql_fetsel(
 					'id_rubrique',
 					'spip_rubriques',
-					"lang='" . $GLOBALS['spip_lang'] . "' AND id_parent=".intval($id_parent)
+					"lang='" . $GLOBALS['spip_lang'] . "' AND id_parent=" . intval($id_parent)
 				);
 				if ($row_rub) {
 					$row['id_rubrique'] = $row_rub['id_rubrique'];

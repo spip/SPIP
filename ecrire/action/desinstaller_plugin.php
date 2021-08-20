@@ -43,7 +43,7 @@ function action_desinstaller_plugin_dist() {
 	$infos = $installer_plugins($plugin, 'uninstall', $dir_type);
 	if ($infos and !$infos['install_test'][0]) {
 		include_spip('inc/plugin');
-		ecrire_plugin_actifs(array($plugin), false, 'enleve');
+		ecrire_plugin_actifs([$plugin], false, 'enleve');
 		$erreur = '';
 	} else {
 		$erreur = 'erreur_plugin_desinstalation_echouee';

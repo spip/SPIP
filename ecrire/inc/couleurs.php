@@ -38,7 +38,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return array|string
  */
 function inc_couleurs_dist($choix = null, $ajouter = false) {
-	static $couleurs_spip = array(
+	static $couleurs_spip = [
 		// Violet soutenu
 		9 => ['couleur_theme' => '#9a6ef2'],
 		// Violet rosé
@@ -63,7 +63,7 @@ function inc_couleurs_dist($choix = null, $ajouter = false) {
 		6 => ['couleur_theme' => '#7d90a2'],
 		//  Gris
 		10 => ['couleur_theme' => '#909090'],
-	);
+	];
 
 	if (is_numeric($choix)) {
 		$c = $couleurs_spip[$choix];

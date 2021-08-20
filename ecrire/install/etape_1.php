@@ -57,16 +57,16 @@ function install_etape_1_dist() {
 	}
 
 
-	$db = array($adresse_db, _T('entree_base_donnee_2'));
-	$login = array($login_db, _T('entree_login_connexion_2'));
-	$pass = array('', _T('entree_mot_passe_2'));
+	$db = [$adresse_db, _T('entree_base_donnee_2')];
+	$login = [$login_db, _T('entree_login_connexion_2')];
+	$pass = ['', _T('entree_mot_passe_2')];
 
-	$predef = array(
+	$predef = [
 		defined('_INSTALL_SERVER_DB') ? _INSTALL_SERVER_DB : '',
 		defined('_INSTALL_HOST_DB'),
 		defined('_INSTALL_USER_DB'),
 		defined('_INSTALL_PASS_DB')
-	);
+	];
 
 
 	echo info_progression_etape(1, 'etape_', 'install/');

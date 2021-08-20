@@ -41,6 +41,6 @@ function inc_iconifier_dist($objet, $id, $script, $visible = false, $flag_modif 
 
 	return recuperer_fond(
 		'prive/objets/editer/logo',
-		array('objet' => $objet, 'id_objet' => $id, 'editable' => $flag_modif)
+		['objet' => $objet, 'id_objet' => $id, 'editable' => $flag_modif]
 	);
 }

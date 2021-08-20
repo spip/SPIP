@@ -36,9 +36,9 @@ include_spip('iterateur/data');
  */
 function iterateur_CONDITION_dist($b) {
 	$b->iterateur = 'CONDITION'; # designe la classe d'iterateur
-	$b->show = array(
-		'field' => array()
-	);
+	$b->show = [
+		'field' => []
+	];
 
 	return $b;
 }
@@ -55,6 +55,6 @@ class IterateurCONDITION extends IterateurData {
 	 * @param array $command
 	 **/
 	protected function select($command) {
-		$this->tableau = array(0 => 1);
+		$this->tableau = [0 => 1];
 	}
 }

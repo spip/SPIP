@@ -54,7 +54,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function filtre_introduction_dist($descriptif, $texte, $longueur, $connect, $suite = null) {
 	// Si un descriptif est envoye, on l'utilise directement
 	if (strlen($descriptif)) {
-		return appliquer_traitement_champ($descriptif, 'introduction', '', array(), $connect);
+		return appliquer_traitement_champ($descriptif, 'introduction', '', [], $connect);
 	}
 
 	// De preference ce qui est marque <intro>...</intro>
@@ -83,7 +83,8 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect, $sui
 	if (strlen($intro)) {
 		$texte = $intro;
 	} else {
-		if (strpos("\n" . $texte, "\n|") === false
+		if (
+			strpos("\n" . $texte, "\n|") === false
 			and strlen($texte) > 2.5 * $longueur
 		) {
 			if (strpos($texte, '<multi') !== false) {
@@ -100,7 +101,7 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect, $sui
 	// Supprimer les modèles avant le propre afin d'éviter qu'ils n'ajoutent du texte indésirable
 	// dans l'introduction.
 	$texte = supprime_img($texte, '');
-	$texte = appliquer_traitement_champ($texte, 'introduction', '', array(), $connect);
+	$texte = appliquer_traitement_champ($texte, 'introduction', '', [], $connect);
 
 	if ($notes) {
 		$notes('', 'depiler');
@@ -111,7 +112,7 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect, $sui
 	}
 	$texte = couper($texte, $longueur, $suite);
 	// comme on a coupe il faut repasser la typo (on a perdu les insecables)
-	$texte = typo($texte, true, $connect, array());
+	$texte = typo($texte, true, $connect, []);
 
 	// et reparagrapher si necessaire (coherence avec le cas descriptif)
 	// une introduction a tojours un <p>
@@ -161,9 +162,9 @@ function filtre_pagination_dist(
 	$liste = true,
 	$modele = '',
 	$connect = '',
-	$env = array()
+	$env = []
 ) {
-	static $ancres = array();
+	static $ancres = [];
 	if ($pas < 1) {
 		return '';
 	}
@@ -182,7 +183,7 @@ function filtre_pagination_dist(
 	}
 
 	$self = (empty($env['self']) ? self() : $env['self']);
-	$pagination = array(
+	$pagination = [
 		'debut' => $debut,
 		'url' => parametre_url($self, 'fragment', ''), // nettoyer l'id ahah eventuel
 		'total' => $total,
@@ -192,7 +193,7 @@ function filtre_pagination_dist(
 		'page_courante' => floor(intval($position) / $pas) + 1,
 		'ancre' => $ancre,
 		'bloc_ancre' => $bloc_ancre
-	);
+	];
 	if (is_array($env)) {
 		$pagination = array_merge($env, $pagination);
 	}
@@ -204,7 +205,7 @@ function filtre_pagination_dist(
 
 	if ($modele) {
 		$pagination['type_pagination'] = $modele;
-		if (trouver_fond('pagination_'.$modele, 'modeles')) {
+		if (trouver_fond('pagination_' . $modele, 'modeles')) {
 			$modele = '_' . $modele;
 		}
 		else {
@@ -220,7 +221,7 @@ function filtre_pagination_dist(
 	}
 
 
-	return recuperer_fond("modeles/pagination$modele", $pagination, array('trim' => true), $connect);
+	return recuperer_fond("modeles/pagination$modele", $pagination, ['trim' => true], $connect);
 }
 
 
@@ -240,17 +241,17 @@ function filtre_pagination_dist(
  **/
 function filtre_bornes_pagination_dist($courante, $nombre, $max = 10) {
 	if ($max <= 0 or $max >= $nombre) {
-		return array(1, $nombre);
+		return [1, $nombre];
 	}
 	if ($max <= 1) {
-		return array($courante, $courante);
+		return [$courante, $courante];
 	}
 
 	$premiere = max(1, $courante - floor(($max - 1) / 2));
 	$derniere = min($nombre, $premiere + $max - 2);
 	$premiere = $derniere == $nombre ? $derniere - $max + 1 : $premiere;
 
-	return array($premiere, $derniere);
+	return [$premiere, $derniere];
 }
 
 function filtre_pagination_affiche_texte_lien_page_dist($type_pagination, $numero_page, $rang_item) {
@@ -290,7 +291,7 @@ function filtre_pagination_affiche_texte_lien_page_dist($type_pagination, $numer
 function lister_objets_avec_logos($type) {
 
 	$objet = objet_type($type);
-	$ids = sql_allfetsel('L.id_objet', 'spip_documents AS D JOIN spip_documents_liens AS L ON L.id_document=D.id_document', 'D.mode='.sql_quote('logoon').' AND L.objet='.sql_quote($objet));
+	$ids = sql_allfetsel('L.id_objet', 'spip_documents AS D JOIN spip_documents_liens AS L ON L.id_document=D.id_document', 'D.mode=' . sql_quote('logoon') . ' AND L.objet=' . sql_quote($objet));
 	if ($ids) {
 		$ids = array_column($ids, 'id_objet');
 		return implode(',', $ids);
@@ -315,7 +316,7 @@ function lister_objets_avec_logos($type) {
 function calculer_notes() {
 	$r = '';
 	if ($notes = charger_fonction('notes', 'inc', true)) {
-		$r = $notes(array());
+		$r = $notes([]);
 		$notes('', 'depiler');
 		$notes('', 'empiler');
 	}
@@ -357,14 +358,14 @@ function retrouver_rang_lien($objet_source, $ids, $objet_lie, $idl, $objet_lien)
  * @private
  */
 function lister_objets_liens($objet_source, $objet, $id_objet, $objet_lien) {
-	static $liens = array();
+	static $liens = [];
 	if (!isset($liens["$objet_source-$objet-$id_objet-$objet_lien"])) {
 		include_spip('action/editer_liens');
 		// quand $objet == $objet_lien == $objet_source on reste sur le cas par defaut de $objet_lien == $objet_source
 		if ($objet_lien == $objet and $objet_lien !== $objet_source) {
-			$res = objet_trouver_liens(array($objet => $id_objet), array($objet_source => '*'));
+			$res = objet_trouver_liens([$objet => $id_objet], [$objet_source => '*']);
 		} else {
-			$res = objet_trouver_liens(array($objet_source => '*'), array($objet => $id_objet));
+			$res = objet_trouver_liens([$objet_source => '*'], [$objet => $id_objet]);
 		}
 
 		$liens["$objet_source-$objet-$id_objet-$objet_lien"] = $res;
@@ -385,13 +386,14 @@ function lister_objets_liens($objet_source, $objet, $id_objet, $objet_lien) {
 function calculer_rang_smart($titre, $objet_source, $id, $env) {
 	// Cas du #RANG utilisé dans #FORMULAIRE_EDITER_LIENS -> attraper le rang du lien
 	// permet de voir le rang du lien si il y en a un en base, meme avant un squelette xxxx-lies.html ne gerant pas les liens
-	if (isset($env['form']) and $env['form']
+	if (
+		isset($env['form']) and $env['form']
 		and isset($env['_objet_lien']) and $env['_objet_lien']
 		and (function_exists('lien_triables') or include_spip('action/editer_liens'))
 		and $r = objet_associable($env['_objet_lien'])
 		and list($p, $table_lien) = $r
-	  and lien_triables($table_lien)
-	  and isset($env['objet']) and $env['objet']
+		and lien_triables($table_lien)
+		and isset($env['objet']) and $env['objet']
 		and isset($env['id_objet']) and $env['id_objet']
 		and $objet_source
 		and $id = intval($id)
@@ -448,7 +450,8 @@ function tri_champ_order($t, $from = null, $senstri = '') {
 	if (is_array($from)) {
 		$trouver_table = charger_fonction('trouver_table', 'base');
 		foreach ($from as $idt => $table_sql) {
-			if ($desc = $trouver_table($table_sql)
+			if (
+				$desc = $trouver_table($table_sql)
 				and isset($desc['field'][$champ])
 			) {
 				$champ = "$idt.$champ";

@@ -41,10 +41,10 @@ function action_calculer_taille_cache_dist($arg = null) {
 		$taille = calculer_taille_dossier(_DIR_VAR);
 		$res = _T(
 			'ecrire:taille_cache_image',
-			array(
+			[
 				'dir' => joli_repertoire(_DIR_VAR),
 				'taille' => '<b>' . (taille_en_octets($taille) > 0 ? taille_en_octets($taille) : '0 octet') . '</b>'
-			)
+			]
 		);
 	} else {
 		include_spip('inc/invalideur');
@@ -57,9 +57,9 @@ function action_calculer_taille_cache_dist($arg = null) {
 		if ($taille <= 150000) {
 			$res = _T('taille_cache_vide');
 		} elseif ($taille <= 1024 * 1024) {
-			$res = _T('taille_cache_moins_de', array('octets' => taille_en_octets(1024 * 1024)));
+			$res = _T('taille_cache_moins_de', ['octets' => taille_en_octets(1024 * 1024)]);
 		} else {
-			$res = _T('taille_cache_octets', array('octets' => taille_en_octets($taille)));
+			$res = _T('taille_cache_octets', ['octets' => taille_en_octets($taille)]);
 		}
 		$res = "<b>$res</b>";
 	}

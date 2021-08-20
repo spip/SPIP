@@ -93,7 +93,7 @@ class IterateurSQL implements Iterator {
 	 * array command: les commandes d'initialisation
 	 * array info: les infos sur le squelette
 	 */
-	public function __construct($command, $info = array()) {
+	public function __construct($command, $info = []) {
 		$this->type = 'SQL';
 		$this->command = $command;
 		$this->info = $info;

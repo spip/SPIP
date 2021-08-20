@@ -110,7 +110,7 @@ function init_entete($titre = '', $dummy = 0, $minipres = false) {
  * @return string
  */
 function init_head($titre = '', $dummy = 0, $minipres = false) {
-	return recuperer_fond('prive/squelettes/head/dist', array('titre' => $titre, 'minipres' => $minipres ? ' ' : ''));
+	return recuperer_fond('prive/squelettes/head/dist', ['titre' => $titre, 'minipres' => $minipres ? ' ' : '']);
 }
 
 /**
@@ -157,7 +157,7 @@ function init_body($rubrique = 'accueil', $sous_rubrique = 'accueil', $id_rubriq
  * @return string Classes CSS (séparées par des espaces)
  */
 function init_body_class() {
-	$prefs = isset($GLOBALS['visiteur_session']['prefs']) ? $GLOBALS['visiteur_session']['prefs'] : array();
+	$prefs = isset($GLOBALS['visiteur_session']['prefs']) ? $GLOBALS['visiteur_session']['prefs'] : [];
 
 	$GLOBALS['spip_display'] = isset($prefs['display']) ? (int) $prefs['display'] : 2;
 	$spip_display_navigation = isset($prefs['display_navigation']) ? spip_sanitize_classname($prefs['display_navigation']) : 'navigation_avec_icones';
@@ -166,13 +166,13 @@ function init_body_class() {
 		: 'navigation_avec_outils';
 	$GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? spip_sanitize_classname($_COOKIE['spip_ecran']) : 'etroit';
 
-	$display_class = array(
+	$display_class = [
 		0 => 'icones_img_texte'
 		/*init*/,
 		1 => 'icones_texte',
 		2 => 'icones_img_texte',
 		3 => 'icones_img'
-	);
+	];
 
 	$couleur = isset($prefs['couleur']) ? (int) $prefs['couleur'] : 2;
 

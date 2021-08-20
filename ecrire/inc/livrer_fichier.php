@@ -148,9 +148,9 @@ function spip_livrer_fichier_partie($fichier, $range = null) {
 		### Length is for how long we should read the file according to the browser, and can never go beyond the file size
 		if (isset($match[2])) {
 			$finishBytes = (int)$match[2];
-			$byteLength = $finishBytes+1;
+			$byteLength = $finishBytes + 1;
 		} else {
-			$finishBytes = $fileSize-1;
+			$finishBytes = $fileSize - 1;
 		}
 
 		$cr_header = sprintf('Content-Range: bytes %d-%d/%d', $byteOffset, $finishBytes, $fileSize);
@@ -171,14 +171,14 @@ function spip_livrer_fichier_partie($fichier, $range = null) {
 	header($cr_header);  ### Decrease by 1 on byte-length since this definition is zero-based index of bytes being sent
 
 
-	$byteRange = $byteLength-$byteOffset;
+	$byteRange = $byteLength - $byteOffset;
 
 	header(sprintf('Content-Length: %d', $byteRange));
 
 	// Variable containing the buffer
 	$buffer = '';
 	// Just a reasonable buffer size
-	$bufferSize = 512*16;
+	$bufferSize = 512 * 16;
 	// Contains how much is left to read of the byteRange
 	$bytePool = $byteRange;
 
@@ -186,12 +186,12 @@ function spip_livrer_fichier_partie($fichier, $range = null) {
 		throw new \Exception(sprintf('Could not get handle for file %s', $fichier));
 	}
 
-	if (fseek($handle, $byteOffset, SEEK_SET)==-1) {
+	if (fseek($handle, $byteOffset, SEEK_SET) == -1) {
 		throw new \Exception(sprintf('Could not seek to byte offset %d', $byteOffset));
 	}
 
 
-	while ($bytePool>0) {
+	while ($bytePool > 0) {
 		// How many bytes we request on this iteration
 		$chunkSizeRequested = min($bufferSize, $bytePool);
 
@@ -202,7 +202,7 @@ function spip_livrer_fichier_partie($fichier, $range = null) {
 		$chunkSizeActual = strlen($buffer);
 
 		// If we didn't get any bytes that means something unexpected has happened since $bytePool should be zero already
-		if ($chunkSizeActual==0) {
+		if ($chunkSizeActual == 0) {
 			// For production servers this should go in your php error log, since it will break the output
 			trigger_error('Chunksize became 0', E_USER_WARNING);
 			break;

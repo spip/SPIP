@@ -125,7 +125,7 @@ function analyse_fichier_connection($file) {
 	}
 	spip_log("$file n'est pas un fichier de connexion");
 
-	return array();
+	return [];
 }
 
 /**
@@ -142,7 +142,7 @@ function analyse_fichier_connection($file) {
  *     Liste des noms de connecteurs
  **/
 function bases_referencees($exclu = '') {
-	$tables = array();
+	$tables = [];
 	foreach (preg_files(_DIR_CONNECT, '.php$') as $f) {
 		if ($f != $exclu and analyse_fichier_connection($f)) {
 			$tables[] = basename($f, '.php');
@@ -164,11 +164,11 @@ function install_mode_appel($server_db, $tout = true) {
 // (sert a l'etape 1 de l'installation)
 // https://code.spip.net/@tester_compatibilite_hebergement
 function tester_compatibilite_hebergement() {
-	$err = array();
+	$err = [];
 
 	$p = phpversion();
 	if (version_compare($p, _PHP_MIN, '<')) {
-		$err[] = _T('install_php_version', array('version' => $p, 'minimum' => _PHP_MIN));
+		$err[] = _T('install_php_version', ['version' => $p, 'minimum' => _PHP_MIN]);
 	}
 
 	// Si on n'a pas la bonne version de PHP, c'est la fin
@@ -229,7 +229,7 @@ function login_hebergeur() {
 		$login_hebergeur = '';
 	}
 
-	return array($base_hebergeur, $login_hebergeur);
+	return [$base_hebergeur, $login_hebergeur];
 }
 
 
@@ -315,7 +315,7 @@ function info_progression_etape($en_cours, $phase, $dir, $erreur = false) {
 
 
 // https://code.spip.net/@fieldset
-function fieldset($legend, $champs = array(), $apres = '', $avant = '') {
+function fieldset($legend, $champs = [], $apres = '', $avant = '') {
 	return "<fieldset>\n" .
 	$avant .
 	($legend ? '<legend>' . $legend . "</legend>\n" : '') .
@@ -324,7 +324,7 @@ function fieldset($legend, $champs = array(), $apres = '', $avant = '') {
 	"</fieldset>\n";
 }
 
-function fieldset_champs($champs = array()) {
+function fieldset_champs($champs = []) {
 	$fieldset = '';
 	foreach ($champs as $nom => $contenu) {
 		$type = isset($contenu['hidden']) ? 'hidden' : (preg_match(',^pass,', $nom) ? 'password' : 'text');
@@ -352,14 +352,15 @@ function fieldset_champs($champs = array()) {
 }
 
 function install_select_serveur() {
-	$options = array();
+	$options = [];
 	$dir = _DIR_RESTREINT . 'req/';
 	$d = opendir($dir);
 	if (!$d) {
-		return array();
+		return [];
 	}
 	while (($f = readdir($d)) !== false) {
-		if ((preg_match('/^(.*)[.]php$/', $f, $s))
+		if (
+			(preg_match('/^(.*)[.]php$/', $f, $s))
 			and is_readable($f = $dir . $f)
 		) {
 			require_once($f);
@@ -450,12 +451,12 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape, $j
 			? '<h3>' . _T('install_adresse_base_hebergeur') . '</h3>'
 			: fieldset(
 				_T('entree_base_donnee_1'),
-				array(
-					'adresse_db' => array(
+				[
+					'adresse_db' => [
 						'label' => $db[1],
 						'valeur' => $db[0]
-					),
-				)
+					],
+				]
 			)
 		)
 		. '</div>'
@@ -465,12 +466,12 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape, $j
 			? '<h3>' . _T('install_login_base_hebergeur') . '</h3>'
 			: fieldset(
 				_T('entree_login_connexion_1'),
-				array(
-					'login_db' => array(
+				[
+					'login_db' => [
 						'label' => $login[1],
 						'valeur' => $login[0]
-					),
-				)
+					],
+				]
 			)
 		)
 		. '</div>'
@@ -480,12 +481,12 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape, $j
 			? '<h3>' . _T('install_pass_base_hebergeur') . '</h3>'
 			: fieldset(
 				_T('entree_mot_passe_1'),
-				array(
-					'pass_db' => array(
+				[
+					'pass_db' => [
 						'label' => $pass[1],
 						'valeur' => $pass[0]
-					),
-				)
+					],
+				]
 			)
 		)
 		. '</div>'
@@ -520,8 +521,8 @@ function predef_ou_cache($adresse_db, $login_db, $pass_db, $server_db) {
 // presentation des bases existantes
 
 // https://code.spip.net/@install_etape_liste_bases
-function install_etape_liste_bases($server_db, $login_db, $disabled = array()) {
-	$bases = $checked = array();
+function install_etape_liste_bases($server_db, $login_db, $disabled = []) {
+	$bases = $checked = [];
 	$noms = sql_listdbs($server_db);
 	if (!$noms) {
 		return '';
@@ -539,7 +540,8 @@ function install_etape_liste_bases($server_db, $login_db, $disabled = array()) {
 			. ($dis ? "<i>$nom</i>" : $nom)
 			. '</label>';
 
-		if (!$checked and !$dis and
+		if (
+			!$checked and !$dis and
 			(($nom == $login_db) or
 				($GLOBALS['table_prefix'] == $nom))
 		) {
@@ -558,7 +560,7 @@ function install_etape_liste_bases($server_db, $login_db, $disabled = array()) {
 		$checked = true;
 	}
 
-	return array($checked, $bases);
+	return [$checked, $bases];
 }
 
 function install_propager($hidden) {

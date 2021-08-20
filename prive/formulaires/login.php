@@ -88,7 +88,8 @@ function formulaires_login_charger_dist($cible = '', $options = [], $deprecated 
 	}
 	// ou si on a un cookie admin
 	if (!$login) {
-		if (isset($_COOKIE['spip_admin'])
+		if (
+			isset($_COOKIE['spip_admin'])
 			and preg_match(',^@(.*)$,', $_COOKIE['spip_admin'], $regs)
 		) {
 			$login = $regs[1];
@@ -108,7 +109,7 @@ function formulaires_login_charger_dist($cible = '', $options = [], $deprecated 
 	// Ne pas proposer de "rester connecte quelques jours"
 	// si la duree de l'alea est inferieure a 12 h (valeur par defaut)
 
-	$valeurs = array(
+	$valeurs = [
 		'var_login' => $login,
 		'editable' => !$row,
 		'cnx' => isset($row['cnx']) ? $row['cnx'] : '0',
@@ -119,7 +120,7 @@ function formulaires_login_charger_dist($cible = '', $options = [], $deprecated 
 		'_alea_futur' => isset($row['alea_futur']) ? $row['alea_futur'] : '',
 		'_pipeline' => 'affiche_formulaire_login', // faire passer le formulaire dans un pipe dedie pour les methodes auth
 		'_autofocus' => ($options['autofocus'] and $options['autofocus'] !== 'non') ? ' ' : '',
-	);
+	];
 
 	if ($erreur or !isset($GLOBALS['visiteur_session']['id_auteur']) or !$GLOBALS['visiteur_session']['id_auteur']) {
 		$valeurs['editable'] = true;
@@ -134,7 +135,7 @@ function formulaires_login_charger_dist($cible = '', $options = [], $deprecated 
 
 	// Si on est connecte, appeler traiter()
 	// et lancer la redirection si besoin
-	if (!$valeurs['editable'] and $loge and _request('formulaire_action')!=='login') {
+	if (!$valeurs['editable'] and $loge and _request('formulaire_action') !== 'login') {
 		$traiter = charger_fonction('traiter', 'formulaires/login');
 		$res = $traiter($cible, $login, $prive);
 		$valeurs = array_merge($valeurs, $res);
@@ -178,7 +179,8 @@ function formulaires_login_charger_dist($cible = '', $options = [], $deprecated 
  *     - chaîne vide sinon.
  **/
 function login_auth_http() {
-	if (!$GLOBALS['ignore_auth_http']
+	if (
+		!$GLOBALS['ignore_auth_http']
 		and _request('var_erreur') == 'cookie'
 		and (!isset($_COOKIE['spip_session']) or $_COOKIE['spip_session'] != 'test_echec_cookie')
 		and (($GLOBALS['flag_sapi_name'] and preg_match(',apache,i', @php_sapi_name()))
@@ -231,7 +233,7 @@ function formulaires_login_verifier_dist($cible = '', $options = [], $deprecated
 
 	if (!$session_login) {
 		# pas de login saisi !
-		return array('var_login' => _T('info_obligatoire'));
+		return ['var_login' => _T('info_obligatoire')];
 	}
 
 	// appeler auth_identifier_login qui va :
@@ -242,7 +244,7 @@ function formulaires_login_verifier_dist($cible = '', $options = [], $deprecated
 	$auteur = auth_identifier_login($session_login, $session_password);
 	// on arrive ici si on ne s'est pas identifie avec un SSO
 	if (!is_array($auteur)) {
-		$erreurs = array();
+		$erreurs = [];
 		if (is_string($auteur) and strlen($auteur)) {
 			$erreurs['var_login'] = $auteur;
 		}
@@ -273,7 +275,7 @@ function formulaires_login_verifier_dist($cible = '', $options = [], $deprecated
 	}
 
 	return (is_null($prive) ? is_url_prive($cible) : $prive)
-		? login_autoriser() : array();
+		? login_autoriser() : [];
 }
 
 /**
@@ -292,17 +294,17 @@ function login_autoriser() {
 	if (!autoriser('ecrire')) {
 		$h = generer_url_action('logout', 'logout=prive&url=' . urlencode(self()));
 
-		return array(
+		return [
 			'message_erreur' => '<h1>'
 				. _T('avis_erreur_visiteur')
 				. '</h1><p>'
 				. _T('texte_erreur_visiteur')
 				. "</p><p class='retour'>[<a href='$h'>"
 				. _T('icone_deconnecter') . '</a>]</p>'
-		);
+		];
 	}
 
-	return array();
+	return [];
 }
 
 /**
@@ -323,7 +325,7 @@ function login_autoriser() {
  *     Retours du traitement
  **/
 function formulaires_login_traiter_dist($cible = '', $options = [], $deprecated = null) {
-	$res = array();
+	$res = [];
 
 	if (!is_array($options)) {
 		$options = [

@@ -106,11 +106,11 @@ function install_bases($adresse_db, $login_db, $pass_db, $server_db, $choix_db, 
 		// memoriser avec quel charset on l'a creee
 
 		if ($charset) {
-			$t = array(
+			$t = [
 				'nom' => 'charset_sql_base',
 				'valeur' => $charset['charset'],
 				'impt' => 'non'
-			);
+			];
 			@sql_insertq('spip_meta', $t, '', $server_db);
 			$t['nom'] = 'charset_collation_sql_base';
 			$t['valeur'] = $charset['collation'];
@@ -119,11 +119,11 @@ function install_bases($adresse_db, $login_db, $pass_db, $server_db, $choix_db, 
 			$t['valeur'] = $charset['charset'];
 			@sql_insertq('spip_meta', $t, '', $server_db);
 		}
-		$t = array(
+		$t = [
 			'nom' => 'version_installee',
 			'valeur' => $GLOBALS['spip_version_base'],
 			'impt' => 'non'
-		);
+		];
 		@sql_insertq('spip_meta', $t, '', $server_db);
 		$t['nom'] = 'nouvelle_install';
 		$t['valeur'] = 1;
@@ -132,7 +132,7 @@ function install_bases($adresse_db, $login_db, $pass_db, $server_db, $choix_db, 
 		if (isset($_COOKIE['spip_lang_ecrire'])) {
 			@sql_insertq(
 				'spip_meta',
-				array('nom' => 'langue_site', 'valeur' => $_COOKIE['spip_lang_ecrire']),
+				['nom' => 'langue_site', 'valeur' => $_COOKIE['spip_lang_ecrire']],
 				'',
 				$server_db
 			);
@@ -152,7 +152,7 @@ function install_bases($adresse_db, $login_db, $pass_db, $server_db, $choix_db, 
 		if (!$version_installee or ($GLOBALS['spip_version_base'] < $version_installee)) {
 			$fupdateq(
 				'spip_meta',
-				array('valeur' => $GLOBALS['spip_version_base'], 'impt' => 'non'),
+				['valeur' => $GLOBALS['spip_version_base'], 'impt' => 'non'],
 				"nom='version_installee'",
 				'',
 				$server_db
@@ -235,13 +235,13 @@ function install_propose_ldap() {
 	return generer_form_ecrire('install', (
 	fieldset(
 		_T('info_authentification_externe'),
-		array(
-			'etape' => array(
+		[
+			'etape' => [
 				'label' => _T('texte_annuaire_ldap_1'),
 				'valeur' => 'ldap1',
 				'hidden' => true
-			)
-		),
+			]
+		],
 		bouton_suivant(_T('bouton_acces_ldap'))
 	)));
 }
@@ -266,44 +266,44 @@ function install_premier_auteur($email, $login, $nom, $pass, $hidden, $auteur_ob
 		. $hidden
 		. fieldset(
 			_T('info_identification_publique'),
-			array(
-				'nom' => array(
+			[
+				'nom' => [
 					'label' => '<b>' . _T('entree_signature') . "</b><br />\n" . _T('entree_nom_pseudo_1') . "\n",
 					'valeur' => $nom,
 					'required' => $auteur_obligatoire,
-				),
-				'email' => array(
+				],
+				'email' => [
 					'label' => '<b>' . _T('entree_adresse_email') . "</b>\n",
 					'valeur' => $email,
-				)
-			)
+				]
+			]
 		)
 
 		. fieldset(
 			_T('entree_identifiants_connexion'),
-			array(
-				'login' => array(
+			[
+				'login' => [
 					'label' => '<b>' . _T('entree_login') . "</b><br />\n" . _T(
 						'info_login_trop_court_car_pluriel',
-						array('nb' => _LOGIN_TROP_COURT)
+						['nb' => _LOGIN_TROP_COURT]
 					) . "\n",
 					'valeur' => $login,
 					'required' => $auteur_obligatoire,
-				),
-				'pass' => array(
+				],
+				'pass' => [
 					'label' => '<b>' . _T('entree_mot_passe') . "</b><br />\n" . _T(
 						'info_passe_trop_court_car_pluriel',
-						array('nb' => _PASS_LONGUEUR_MINI)
+						['nb' => _PASS_LONGUEUR_MINI]
 					) . "\n",
 					'valeur' => $pass,
 					'required' => $auteur_obligatoire,
-				),
-				'pass_verif' => array(
+				],
+				'pass_verif' => [
 					'label' => '<b>' . _T('info_confirmer_passe') . "</b><br />\n",
 					'valeur' => $pass,
 					'required' => $auteur_obligatoire,
-				)
-			)
+				]
+			]
 		)
 		. bouton_suivant()));
 }

@@ -22,8 +22,10 @@ function securiser_redirect_action($redirect) {
 			return $r3;
 		}
 	}
-	if ((tester_url_absolue($redirect) or preg_match(',^\w+:,', trim($redirect)))
-		and !defined('_AUTORISER_ACTION_ABS_REDIRECT')) {
+	if (
+		(tester_url_absolue($redirect) or preg_match(',^\w+:,', trim($redirect)))
+		and !defined('_AUTORISER_ACTION_ABS_REDIRECT')
+	) {
 		// si l'url est une url du site, on la laisse passer sans rien faire
 		// c'est encore le plus simple
 		$base = $GLOBALS['meta']['adresse_site'] . '/';
@@ -57,7 +59,8 @@ function traiter_appels_actions() {
 		// si l'action est provoque par un hit {ajax}
 		// il faut transmettre l'env ajax au redirect
 		// on le met avant dans la query string au cas ou l'action fait elle meme sa redirection
-		if (($v = _request('var_ajax'))
+		if (
+			($v = _request('var_ajax'))
 			and ($v !== 'form')
 			and ($args = _request('var_ajax_env'))
 			and ($url = _request('redirect'))
@@ -83,7 +86,8 @@ function traiter_appels_actions() {
 			// si l'action est provoque par un hit {ajax}
 			// il faut transmettre l'env ajax au redirect
 			// qui a pu etre defini par l'action
-			if (($v = _request('var_ajax'))
+			if (
+				($v = _request('var_ajax'))
 				and ($v !== 'form')
 				and ($args = _request('var_ajax_env'))
 			) {
@@ -98,7 +102,8 @@ function traiter_appels_actions() {
 
 		// attention : avec zlib.output_compression=1 on a vu des cas de ob_get_length() qui renvoi 0
 		// et du coup en renvoi un status 204 a tort (vu sur le menu rubriques notamment)
-		if (!headers_sent()
+		if (
+			!headers_sent()
 			and !ob_get_length()
 		) {
 			http_status(204);
@@ -112,7 +117,8 @@ function traiter_appels_actions() {
 
 // https://code.spip.net/@refuser_traiter_formulaire_ajax
 function refuser_traiter_formulaire_ajax() {
-	if ($v = _request('var_ajax')
+	if (
+		$v = _request('var_ajax')
 		and $v == 'form'
 		and $form = _request('formulaire_action')
 		and $args = _request('formulaire_action_args')
@@ -131,23 +137,25 @@ function refuser_traiter_formulaire_ajax() {
 // https://code.spip.net/@traiter_appels_inclusions_ajax
 function traiter_appels_inclusions_ajax() {
 	// traiter les appels de bloc ajax (ex: pagination)
-	if ($v = _request('var_ajax')
+	if (
+		$v = _request('var_ajax')
 		and $v !== 'form'
 		and $args = _request('var_ajax_env')
 	) {
 		include_spip('inc/filtres');
 		include_spip('inc/actions');
-		if ($args = decoder_contexte_ajax($args)
+		if (
+			$args = decoder_contexte_ajax($args)
 			and $fond = $args['fond']
 		) {
 			include_spip('public/assembler');
 			$contexte = calculer_contexte();
 			$contexte = array_merge($args, $contexte);
-			$page = recuperer_fond($fond, $contexte, array('trim' => false));
+			$page = recuperer_fond($fond, $contexte, ['trim' => false]);
 			$texte = $page;
 			if ($ancre = _request('var_ajax_ancre')) {
 				// pas n'importe quoi quand meme dans la variable !
-				$ancre = str_replace(array('<', '"', "'"), array('&lt;', '&quot;', ''), $ancre);
+				$ancre = str_replace(['<', '"', "'"], ['&lt;', '&quot;', ''], $ancre);
 				$texte = "<a href='#$ancre' name='ajax_ancre' style='display:none;'>anchor</a>" . $texte;
 			}
 		} else {
@@ -169,7 +177,7 @@ function traiter_appels_inclusions_ajax() {
 
 // https://code.spip.net/@traiter_formulaires_dynamiques
 function traiter_formulaires_dynamiques($get = false) {
-	static $post = array();
+	static $post = [];
 	static $done = false;
 
 	if ($get) {
@@ -180,7 +188,8 @@ function traiter_formulaires_dynamiques($get = false) {
 	}
 	$done = true;
 
-	if (!($form = _request('formulaire_action')
+	if (
+		!($form = _request('formulaire_action')
 		and $args = _request('formulaire_action_args'))
 	) {
 		return false;
@@ -211,25 +220,25 @@ function traiter_formulaires_dynamiques($get = false) {
 		 */
 		pipeline(
 			'formulaire_receptionner',
-			array(
-				'args' => array('form' => $form, 'args' => $args),
+			[
+				'args' => ['form' => $form, 'args' => $args],
 				'data' => null,
-			)
+			]
 		);
 
 		$verifier = charger_fonction('verifier', "formulaires/$form/", true);
 		$post["erreurs_$form"] = pipeline(
 			'formulaire_verifier',
-			array(
-				'args' => array('form' => $form, 'args' => $args),
-				'data' => $verifier ? call_user_func_array($verifier, $args) : array()
-			)
+			[
+				'args' => ['form' => $form, 'args' => $args],
+				'data' => $verifier ? call_user_func_array($verifier, $args) : []
+			]
 		);
 		// prise en charge CVT multi etape si besoin
 		if (_request('cvtm_prev_post')) {
 			include_spip('inc/cvt_multietapes');
 			$post["erreurs_$form"] = cvtmulti_formulaire_verifier_etapes(
-				array('form' => $form, 'args' => $args),
+				['form' => $form, 'args' => $args],
 				$post["erreurs_$form"]
 			);
 		}
@@ -260,10 +269,10 @@ function traiter_formulaires_dynamiques($get = false) {
 
 			$rev = pipeline(
 				'formulaire_traiter',
-				array(
-					'args' => array('form' => $form, 'args' => $args),
+				[
+					'args' => ['form' => $form, 'args' => $args],
 					'data' => $rev
-				)
+				]
 			);
 			// le retour de traiter est
 			// un tableau explicite ('editable'=>$editable,'message_ok'=>$message,'redirect'=>$redirect,'id_xx'=>$id_xx)

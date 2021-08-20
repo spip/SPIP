@@ -131,7 +131,8 @@ function ajax_retour($corps, $content_type = null) {
 	}
 
 	$e = '';
-	if (isset($_COOKIE['spip_admin'])
+	if (
+		isset($_COOKIE['spip_admin'])
 		and ((_request('var_mode') == 'debug') or !empty($GLOBALS['tableau_des_temps']))
 	) {
 		$e = erreur_squelette();

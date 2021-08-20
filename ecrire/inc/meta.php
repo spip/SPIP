@@ -32,7 +32,8 @@ function inc_meta_dist($table = 'meta') {
 	// en cas d'install ne pas faire confiance au meta_cache eventuel
 	$cache = cache_meta($table);
 
-	if ((!$exec = _request('exec') or !autoriser_sans_cookie($exec))
+	if (
+		(!$exec = _request('exec') or !autoriser_sans_cookie($exec))
 		and $new = jeune_fichier($cache, _META_CACHE_TIME)
 		and lire_fichier_securise($cache, $meta)
 		and $meta = @unserialize($meta)
@@ -40,10 +41,11 @@ function inc_meta_dist($table = 'meta') {
 		$GLOBALS[$table] = $meta;
 	}
 
-	if (isset($GLOBALS[$table]['touch'])
+	if (
+		isset($GLOBALS[$table]['touch'])
 		and ($GLOBALS[$table]['touch'] < time() - _META_CACHE_TIME)
 	) {
-		$GLOBALS[$table] = array();
+		$GLOBALS[$table] = [];
 	}
 	// sinon lire en base
 	if (!$GLOBALS[$table]) {
@@ -51,7 +53,8 @@ function inc_meta_dist($table = 'meta') {
 	}
 
 	// renouveller l'alea general si trop vieux ou sur demande explicite
-	if ((test_espace_prive() || isset($_GET['renouvelle_alea']))
+	if (
+		(test_espace_prive() || isset($_GET['renouvelle_alea']))
 		and $GLOBALS[$table]
 		and (time() > _RENOUVELLE_ALEA + (isset($GLOBALS['meta']['alea_ephemere_date']) ? $GLOBALS['meta']['alea_ephemere_date'] : 0))
 	) {
@@ -79,13 +82,14 @@ function lire_metas($table = 'meta') {
 
 	if ($result = spip_query("SELECT nom,valeur FROM spip_$table")) {
 		include_spip('base/abstract_sql');
-		$GLOBALS[$table] = array();
+		$GLOBALS[$table] = [];
 		while ($row = sql_fetch($result)) {
 			$GLOBALS[$table][$row['nom']] = $row['valeur'];
 		}
 		sql_free($result);
 
-		if (!isset($GLOBALS[$table]['charset'])
+		if (
+			!isset($GLOBALS[$table]['charset'])
 			or !$GLOBALS[$table]['charset']
 			or $GLOBALS[$table]['charset'] == '_DEFAULT_CHARSET' // hum, correction d'un bug ayant abime quelques install
 		) {
@@ -94,12 +98,12 @@ function lire_metas($table = 'meta') {
 
 		// noter cette table de configuration dans les meta de SPIP
 		if ($table !== 'meta') {
-			$liste = array();
+			$liste = [];
 			if (isset($GLOBALS['meta']['tables_config'])) {
 				$liste = unserialize($GLOBALS['meta']['tables_config']);
 			}
 			if (!$liste) {
-				$liste = array();
+				$liste = [];
 			}
 			if (!in_array($table, $liste)) {
 				$liste[] = $table;
@@ -124,7 +128,7 @@ function lire_metas($table = 'meta') {
 function touch_meta($antidate = false, $table = 'meta') {
 	$file = cache_meta($table);
 	if (!$antidate or !@touch($file, $antidate)) {
-		$r = isset($GLOBALS[$table]) ? $GLOBALS[$table] : array();
+		$r = isset($GLOBALS[$table]) ? $GLOBALS[$table] : [];
 		if ($table == 'meta') {
 			unset($r['alea_ephemere']);
 			unset($r['alea_ephemere_ancien']);
@@ -157,7 +161,7 @@ function effacer_meta($nom, $table = 'meta') {
 	// l'invalider avant et apres la MAJ de la BD
 	// c'est un peu moins bien qu'un vrai verrou mais ca suffira
 	// et utiliser une statique pour eviter des acces disques a repetition
-	static $touch = array();
+	static $touch = [];
 	$antidate = time() - (_META_CACHE_TIME << 4);
 	if (!isset($touch[$table])) {
 		touch_meta($antidate, $table);
@@ -188,7 +192,7 @@ function effacer_meta($nom, $table = 'meta') {
  **/
 function ecrire_meta($nom, $valeur, $importable = null, $table = 'meta') {
 
-	static $touch = array();
+	static $touch = [];
 	if (!$nom) {
 		return;
 	}
@@ -205,7 +209,8 @@ function ecrire_meta($nom, $valeur, $importable = null, $table = 'meta') {
 
 	// ne pas invalider le cache si affectation a l'identique
 	// (tant pis si impt aurait du changer)
-	if ($row and $valeur == $row['valeur']
+	if (
+		$row and $valeur == $row['valeur']
 		and isset($GLOBALS[$table][$nom])
 		and $GLOBALS[$table][$nom] == $valeur
 	) {
@@ -218,7 +223,7 @@ function ecrire_meta($nom, $valeur, $importable = null, $table = 'meta') {
 	if (!isset($touch[$table])) {
 		touch_meta($antidate, $table);
 	}
-	$r = array('nom' => sql_quote($nom, '', 'text'), 'valeur' => sql_quote($valeur, '', 'text'));
+	$r = ['nom' => sql_quote($nom, '', 'text'), 'valeur' => sql_quote($valeur, '', 'text')];
 	// Gaffe aux tables sans impt (vieilles versions de SPIP notamment)
 	// ici on utilise pas sql_updateq et sql_insertq pour ne pas provoquer trop tot
 	// de lecture des descriptions des tables
@@ -281,7 +286,8 @@ function supprimer_table_meta($table, $force = false) {
 		// - la table est vide
 		// - ou limitée à la variable charset
 		// - ou qu'on force la suppression
-		if ($force
+		if (
+			$force
 			or !$nb_variables
 			or (
 				($nb_variables == 1)

@@ -53,7 +53,7 @@ function optimiser_caches_contextes() {
 	sous_repertoire(_DIR_CACHE, 'contextes');
 	if (is_dir($d = _DIR_CACHE . 'contextes')) {
 		include_spip('inc/invalideur');
-		purger_repertoire($d, ['mtime' => time() - 48*24*3600, 'limit' => 10000]);
+		purger_repertoire($d, ['mtime' => time() - 48 * 24 * 3600, 'limit' => 10000]);
 	}
 }
 
@@ -86,7 +86,7 @@ function optimiser_base($attente = 86400) {
  **/
 function optimiser_base_une_table() {
 
-	$tables = array();
+	$tables = [];
 	$result = sql_showbase();
 
 	// on n'optimise qu'une seule table a chaque fois,
@@ -96,16 +96,16 @@ function optimiser_base_une_table() {
 		$tables[] = array_shift($row);
 	}
 
-	spip_log('optimiser_base_une_table '.json_encode($tables), 'genie'._LOG_DEBUG);
+	spip_log('optimiser_base_une_table ' . json_encode($tables), 'genie' . _LOG_DEBUG);
 	if ($tables) {
 		$table_op = intval(lire_config('optimiser_table', 0) + 1) % sizeof($tables);
 		ecrire_config('optimiser_table', $table_op);
 		$q = $tables[$table_op];
-		spip_log("optimiser_base_une_table : debut d'optimisation de la table $q", 'genie'._LOG_DEBUG);
+		spip_log("optimiser_base_une_table : debut d'optimisation de la table $q", 'genie' . _LOG_DEBUG);
 		if (sql_optimize($q)) {
-			spip_log("optimiser_base_une_table : fin d'optimisation de la table $q", 'genie'._LOG_DEBUG);
+			spip_log("optimiser_base_une_table : fin d'optimisation de la table $q", 'genie' . _LOG_DEBUG);
 		} else {
-			spip_log("optimiser_base_une_table : Pas d'optimiseur necessaire", 'genie'._LOG_DEBUG);
+			spip_log("optimiser_base_une_table : Pas d'optimiseur necessaire", 'genie' . _LOG_DEBUG);
 		}
 	}
 }
@@ -133,7 +133,7 @@ function optimiser_base_une_table() {
  *     Nombre de suppressions
  **/
 function optimiser_sansref($table, $id, $sel, $and = '') {
-	$in = array();
+	$in = [];
 	while ($row = sql_fetch($sel)) {
 		$in[$row['id']] = true;
 	}
@@ -141,7 +141,7 @@ function optimiser_sansref($table, $id, $sel, $and = '') {
 
 	if ($in) {
 		sql_delete($table, sql_in($id, array_keys($in)) . ($and ? " AND $and" : ''));
-		spip_log("optimiser_sansref: Numeros des entrees $id supprimees dans la table $table: " . implode(', ', array_keys($in)), 'genie'._LOG_DEBUG);
+		spip_log("optimiser_sansref: Numeros des entrees $id supprimees dans la table $table: " . implode(', ', array_keys($in)), 'genie' . _LOG_DEBUG);
 	}
 
 	return count($in);
@@ -202,7 +202,7 @@ function optimiser_base_disparus($attente = 86400) {
 	include_spip('action/editer_liens');
 	// optimiser les liens de tous les auteurs vers des objets effaces
 	// et depuis des auteurs effaces
-	$n += objet_optimiser_liens(array('auteur' => '*'), '*');
+	$n += objet_optimiser_liens(['auteur' => '*'], '*');
 
 	# effacer les auteurs poubelle qui ne sont lies a rien
 	$res = sql_select(
@@ -233,14 +233,14 @@ function optimiser_base_disparus($attente = 86400) {
 	 *
 	 * @pipeline_appel optimiser_base_disparus
 	 */
-	$n = pipeline('optimiser_base_disparus', array(
-		'args' => array(
+	$n = pipeline('optimiser_base_disparus', [
+		'args' => [
 			'attente' => $attente,
 			'date' => $mydate
-		),
+		],
 		'data' => $n
-	));
+	]);
 
 
-	spip_log("optimiser_base_disparus : {$n} lien(s) mort(s)", 'genie'._LOG_DEBUG);
+	spip_log("optimiser_base_disparus : {$n} lien(s) mort(s)", 'genie' . _LOG_DEBUG);
 }

@@ -28,7 +28,7 @@ function plugins_afficher_nom_plugin_dist(
 	$dir_plugins = _DIR_PLUGINS
 ) {
 	static $id_input = 0;
-	static $versions = array();
+	static $versions = [];
 
 	$erreur = false;
 	$s = '';

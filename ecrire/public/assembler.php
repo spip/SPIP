@@ -36,7 +36,7 @@ function assembler($fond, $connect = '') {
 	// contexte est utilise en globale dans le formulaire d'admin
 
 	$GLOBALS['contexte'] = calculer_contexte();
-	$page = array('contexte_implicite' => calculer_contexte_implicite());
+	$page = ['contexte_implicite' => calculer_contexte_implicite()];
 	$page['contexte_implicite']['cache'] = $fond . preg_replace(
 		',\.[a-zA-Z0-9]*$,',
 		'',
@@ -53,7 +53,7 @@ function assembler($fond, $connect = '') {
 	}
 	// Si un resultat est retourne, c'est un message d'impossibilite
 	if ($res) {
-		return array('texte' => $res);
+		return ['texte' => $res];
 	}
 
 	if (!$chemin_cache || !$lastmodified) {
@@ -66,7 +66,8 @@ function assembler($fond, $connect = '') {
 	// Pour les pages non-dynamiques (indiquees par #CACHE{duree,cache-client})
 	// une perennite valide a meme reponse qu'une requete HEAD (par defaut les
 	// pages sont dynamiques)
-	if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
+	if (
+		isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
 		and (!defined('_VAR_MODE') or !_VAR_MODE)
 		and $chemin_cache
 		and isset($page['entetes'])
@@ -137,11 +138,11 @@ function assembler($fond, $connect = '') {
 			if ($page === '') {
 				$erreur = _T(
 					'info_erreur_squelette2',
-					array('fichier' => spip_htmlspecialchars($fond) . '.' . _EXTENSION_SQUELETTES)
+					['fichier' => spip_htmlspecialchars($fond) . '.' . _EXTENSION_SQUELETTES]
 				);
 				erreur_squelette($erreur);
 				// eviter des erreurs strictes ensuite sur $page['cle'] en PHP >= 5.4
-				$page = array('texte' => '', 'erreur' => $erreur);
+				$page = ['texte' => '', 'erreur' => $erreur];
 			}
 		}
 
@@ -157,7 +158,8 @@ function assembler($fond, $connect = '') {
 		if (!$GLOBALS['flag_preserver']) {
 			if ($GLOBALS['flag_ob']) {
 				// Si la page est vide, produire l'erreur 404 ou message d'erreur pour les inclusions
-				if (trim($page['texte']) === ''
+				if (
+					trim($page['texte']) === ''
 					and _VAR_MODE != 'debug'
 					and !isset($page['entetes']['Location']) // cette page realise une redirection, donc pas d'erreur
 				) {
@@ -176,7 +178,8 @@ function assembler($fond, $connect = '') {
 	// Entete Last-Modified:
 	// eviter d'etre incoherent en envoyant un lastmodified identique
 	// a celui qu'on a refuse d'honorer plus haut (cf. #655)
-	if ($lastmodified
+	if (
+		$lastmodified
 		and !isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
 		and !isset($page['entetes']['Last-Modified'])
 	) {
@@ -207,7 +210,7 @@ function assembler($fond, $connect = '') {
  */
 function calculer_contexte() {
 
-	$contexte = array();
+	$contexte = [];
 	foreach ($_GET as $var => $val) {
 		if (!preg_match(_CONTEXTE_IGNORE_VARIABLES, $var)) {
 			$contexte[$var] = $val;
@@ -234,7 +237,7 @@ function calculer_contexte_implicite() {
 	if (is_null($notes)) {
 		$notes = charger_fonction('notes', 'inc', true);
 	}
-	$contexte_implicite = array(
+	$contexte_implicite = [
 		'squelettes' => $GLOBALS['dossier_squelettes'], // devrait etre 'chemin' => $GLOBALS['path_sig'], ?
 		'host' => (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : null),
 		'https' => (isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : ''),
@@ -243,7 +246,7 @@ function calculer_contexte_implicite() {
 		'marqueur_skel' => (isset($GLOBALS['marqueur_skel']) ? $GLOBALS['marqueur_skel'] : ''),
 		'notes' => $notes ? $notes('', 'contexter_cache') : '',
 		'spip_version_code' => $GLOBALS['spip_version_code'],
-	);
+	];
 	if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
 		$contexte_implicite['host'] .= '|' . $_SERVER['HTTP_X_FORWARDED_HOST'];
 	}
@@ -274,7 +277,7 @@ function inclure_page($fond, $contexte, $connect = '') {
 	// dans les sous inclusions -> boucle infinie d'inclusion identique
 	// (cette precaution n'est probablement plus utile)
 	unset($contexte['fond']);
-	$page = array('contexte_implicite' => calculer_contexte_implicite());
+	$page = ['contexte_implicite' => calculer_contexte_implicite()];
 	$page['contexte_implicite']['cache'] = $fond;
 	if (is_null($cacher)) {
 		$cacher = charger_fonction('cacher', 'public', true);
@@ -288,7 +291,7 @@ function inclure_page($fond, $contexte, $connect = '') {
 	}
 	// $res = message d'erreur : on sort de la
 	if ($res) {
-		return array('texte' => $res);
+		return ['texte' => $res];
 	}
 
 	// Si use_cache ne vaut pas 0, la page doit etre calculee
@@ -336,7 +339,8 @@ function public_produire_page_dist(
 	}
 	$page = $parametrer($fond, $contexte, $chemin_cache, $connect);
 	// et on l'enregistre sur le disque
-	if ($chemin_cache
+	if (
+		$chemin_cache
 		and $use_cache > -1
 		and is_array($page)
 		and count($page)
@@ -389,7 +393,7 @@ function inserer_balise_dynamique($contexte_exec, $contexte_compil) {
  * @param array $contexte_compil Contexte de la compilation
  * @return string
  */
-function inclure_balise_dynamique($texte, $echo = true, $contexte_compil = array()) {
+function inclure_balise_dynamique($texte, $echo = true, $contexte_compil = []) {
 	if (is_array($texte)) {
 		list($fond, $delainc, $contexte_inclus) = $texte;
 
@@ -400,7 +404,7 @@ function inclure_balise_dynamique($texte, $echo = true, $contexte_compil = array
 		$page = recuperer_fond(
 			$fond,
 			$contexte_inclus,
-			array('trim' => false, 'raw' => true, 'compil' => $contexte_compil)
+			['trim' => false, 'raw' => true, 'compil' => $contexte_compil]
 		);
 
 		$texte = $page['texte'];
@@ -413,14 +417,15 @@ function inclure_balise_dynamique($texte, $echo = true, $contexte_compil = array
 			unset($page['entetes']['Content-Type']);
 			if (isset($GLOBALS['page']) and is_array($GLOBALS['page'])) {
 				if (!is_array($GLOBALS['page']['entetes'])) {
-					$GLOBALS['page']['entetes'] = array();
+					$GLOBALS['page']['entetes'] = [];
 				}
 				$GLOBALS['page']['entetes'] =
 					array_merge($GLOBALS['page']['entetes'], $page['entetes']);
 			}
 		}
 		// _pipelines au pluriel array('nom_pipeline' => $args...) avec une syntaxe permettant plusieurs pipelines
-		if (isset($page['contexte']['_pipelines'])
+		if (
+			isset($page['contexte']['_pipelines'])
 			and is_array($page['contexte']['_pipelines'])
 			and count($page['contexte']['_pipelines'])
 		) {
@@ -429,10 +434,10 @@ function inclure_balise_dynamique($texte, $echo = true, $contexte_compil = array
 				unset($args['contexte']['_pipelines']); // par precaution, meme si le risque de boucle infinie est a priori nul
 				$texte = pipeline(
 					$pipe,
-					array(
+					[
 						'data' => $texte,
 						'args' => $args
-					),
+					],
 					false
 				);
 			}
@@ -457,10 +462,10 @@ function message_page_indisponible($page, $contexte) {
 	if ($deja) {
 		return 'erreur';
 	}
-	$codes = array(
+	$codes = [
 		'404' => '404 Not Found',
 		'503' => '503 Service Unavailable',
-	);
+	];
 
 	$contexte['status'] = ($page !== false) ? '404' : '503';
 	$contexte['code'] = $codes[$contexte['status']];
@@ -512,10 +517,10 @@ function arguments_balise_dyn_depuis_modele($arg, $operation = 'set') {
 // creer_contexte_de_modele('left', 'autostart=true', ...) renvoie un array()
 // https://code.spip.net/@creer_contexte_de_modele
 function creer_contexte_de_modele($args) {
-	$contexte = array();
+	$contexte = [];
 	foreach ($args as $var => $val) {
 		if (is_int($var)) { // argument pas formate
-			if (in_array($val, array('left', 'right', 'center'))) {
+			if (in_array($val, ['left', 'right', 'center'])) {
 				$var = 'align';
 				$contexte[$var] = $val;
 			} else {
@@ -551,9 +556,11 @@ function styliser_modele($modele, $id, $contexte = null) {
 	if (is_null($styliseurs)) {
 		$tables_objet = lister_tables_objets_sql();
 		foreach ($tables_objet as $table => $desc) {
-			if (isset($desc['modeles']) and $desc['modeles']
+			if (
+				isset($desc['modeles']) and $desc['modeles']
 				and isset($desc['modeles_styliser']) and $desc['modeles_styliser']
-				and function_exists($desc['modeles_styliser'])) {
+				and function_exists($desc['modeles_styliser'])
+			) {
 				$primary = id_table_objet($table);
 				foreach ($desc['modeles'] as $m) {
 					$styliseurs[$m] = ['primary' => $primary, 'callback' => $desc['modeles_styliser']];
@@ -572,7 +579,7 @@ function styliser_modele($modele, $id, $contexte = null) {
 			}
 		}
 		if (is_null($id)) {
-			$msg = "modeles/$modele : " . _T('zbug_parametres_inclus_incorrects', array('param' => "id/$primary"));
+			$msg = "modeles/$modele : " . _T('zbug_parametres_inclus_incorrects', ['param' => "id/$primary"]);
 			erreur_squelette($msg);
 			// on passe id=0 au routeur pour tomber sur le modele par defaut et eviter une seconde erreur sur un modele inexistant
 			$id = 0;
@@ -597,7 +604,7 @@ function styliser_modele($modele, $id, $contexte = null) {
  * @staticvar string $compteur
  * @return string
  */
-function inclure_modele($type, $id, $params, $lien, $connect = '', $env = array()) {
+function inclure_modele($type, $id, $params, $lien, $connect = '', $env = []) {
 
 	static $compteur;
 	if (++$compteur > 10) {
@@ -613,7 +620,7 @@ function inclure_modele($type, $id, $params, $lien, $connect = '', $env = array(
 	if ($params) {
 		$soustype = current($params);
 		$soustype = strtolower(trim($soustype));
-		if (in_array($soustype, array('left', 'right', 'center', 'ajax'))) {
+		if (in_array($soustype, ['left', 'right', 'center', 'ajax'])) {
 			$soustype = next($params);
 			$soustype = strtolower($soustype);
 		}
@@ -624,7 +631,7 @@ function inclure_modele($type, $id, $params, $lien, $connect = '', $env = array(
 				$class = $soustype;
 			}
 			// enlever le sous type des params
-			$params = array_diff($params, array($soustype));
+			$params = array_diff($params, [$soustype]);
 		}
 	}
 
@@ -668,15 +675,17 @@ function inclure_modele($type, $id, $params, $lien, $connect = '', $env = array(
 	$contexte = array_merge($contexte, $arg_list);
 
 	// Appliquer le modele avec le contexte
-	$retour = recuperer_fond($fond, $contexte, array(), $connect);
+	$retour = recuperer_fond($fond, $contexte, [], $connect);
 
 	// Regarder si le modele tient compte des liens (il *doit* alors indiquer
 	// spip_lien_ok dans les classes de son conteneur de premier niveau ;
 	// sinon, s'il y a un lien, on l'ajoute classiquement
-	if (strstr(
-		' ' . ($classes = extraire_attribut($retour, 'class')) . ' ',
-		'spip_lien_ok'
-	)) {
+	if (
+		strstr(
+			' ' . ($classes = extraire_attribut($retour, 'class')) . ' ',
+			'spip_lien_ok'
+		)
+	) {
 		$retour = inserer_attribut(
 			$retour,
 			'class',
@@ -700,7 +709,7 @@ function inclure_modele($type, $id, $params, $lien, $connect = '', $env = array(
 // pour recuperer $page complet, utiliser:
 // 	recuperer_fond($fond,$contexte,array('raw'=>true))
 // https://code.spip.net/@evaluer_fond
-function evaluer_fond($fond, $contexte = array(), $connect = null) {
+function evaluer_fond($fond, $contexte = [], $connect = null) {
 
 	$page = inclure_page($fond, $contexte, $connect);
 
@@ -715,7 +724,8 @@ function evaluer_fond($fond, $contexte = array(), $connect = null) {
 	// pour remonter vers les inclusions appelantes
 	// il faut bien lever ce drapeau apres avoir evalue le fond
 	// pour ne pas faire descendre le flag vers les inclusions appelees
-	if (isset($page['invalideurs'])
+	if (
+		isset($page['invalideurs'])
 		and isset($page['invalideurs']['session'])
 	) {
 		$GLOBALS['cache_utilise_session'] = $page['invalideurs']['session'];
@@ -742,7 +752,8 @@ function page_base_href(&$texte) {
 		}
 	}
 
-	if ($set_html_base
+	if (
+		$set_html_base
 		and isset($GLOBALS['html']) and $GLOBALS['html']
 		and $GLOBALS['profondeur_url'] > 0
 		and ($poshead = strpos($texte, '</head>')) !== false
@@ -771,8 +782,8 @@ function page_base_href(&$texte) {
 			// ajouter un base qui reglera tous les liens relatifs
 			$href_base = url_absolue('./');
 			$base = "\n<base href=\"$href_base\" />";
-			if (($pos = strpos($head, '<head>'))!==false) {
-				$head = substr_replace($head, $base, $pos+6, 0);
+			if (($pos = strpos($head, '<head>')) !== false) {
+				$head = substr_replace($head, $base, $pos + 6, 0);
 			} elseif (preg_match(',<head[^>]*>,i', $head, $r)) {
 				$head = str_replace($r[0], $r[0] . $base, $head);
 			}
@@ -783,7 +794,7 @@ function page_base_href(&$texte) {
 			$base = $_SERVER['REQUEST_URI'];
 			// pas de guillemets ni < dans l'URL qu'on insere dans le HTML
 			if (strpos($base, "'") or strpos($base, '"') or strpos($base, '<')) {
-				$base = str_replace(array("'",'"','<'), array('%27','%22','%3C'), $base);
+				$base = str_replace(["'",'"','<'], ['%27','%22','%3C'], $base);
 			}
 			if (strpos($texte, "href='#") !== false) {
 				$texte = str_replace("href='#", "href='$base#", $texte);

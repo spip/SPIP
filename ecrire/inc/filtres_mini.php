@@ -36,7 +36,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  **/
 function resolve_path($url) {
 	list($url, $query) = array_pad(explode('?', $url, 2), 2, null);
-	while (preg_match(',/\.?/,', $url, $regs)    # supprime // et /./
+	while (
+		preg_match(',/\.?/,', $url, $regs)    # supprime // et /./
 		or preg_match(',/[^/]*/\.\./,S', $url, $regs)  # supprime /toto/../
 		or preg_match(',^/\.\./,S', $url, $regs) # supprime les /../ du haut
 	) {
@@ -152,12 +153,14 @@ function protocole_implicite($url_absolue) {
  * @param array $protocoles_autorises
  * @return bool
  */
-function protocole_verifier($url_absolue, $protocoles_autorises = array('http','https')) {
+function protocole_verifier($url_absolue, $protocoles_autorises = ['http','https']) {
 
 	if (preg_match(';^([a-z]{3,7})://;i', $url_absolue, $m)) {
 		$protocole = $m[1];
-		if (in_array($protocole, $protocoles_autorises)
-		  or in_array(strtolower($protocole), array_map('strtolower', $protocoles_autorises))) {
+		if (
+			in_array($protocole, $protocoles_autorises)
+			or in_array(strtolower($protocole), array_map('strtolower', $protocoles_autorises))
+		) {
 			return true;
 		}
 	}
@@ -183,7 +186,7 @@ function liens_absolus($texte, $base = '') {
 			include_spip('inc/filtres');
 		}
 		foreach ($liens as $lien) {
-			foreach (array('href', 'src') as $attr) {
+			foreach (['href', 'src'] as $attr) {
 				$href = extraire_attribut($lien[0], $attr);
 				if (strlen($href) > 0) {
 					if (!preg_match(';^((?:[a-z]{3,7}:)?//);iS', $href)) {
@@ -232,7 +235,7 @@ function abs_url($texte, $base = '') {
  */
 function spip_htmlspecialchars($string, $flags = null, $encoding = 'UTF-8', $double_encode = true) {
 	if (is_null($flags)) {
-		$flags = ENT_COMPAT|ENT_HTML401;
+		$flags = ENT_COMPAT | ENT_HTML401;
 	}
 
 	return htmlspecialchars($string, $flags, $encoding, $double_encode);
@@ -249,7 +252,7 @@ function spip_htmlspecialchars($string, $flags = null, $encoding = 'UTF-8', $dou
  */
 function spip_htmlentities($string, $flags = null, $encoding = 'UTF-8', $double_encode = true) {
 	if (is_null($flags)) {
-		$flags = ENT_COMPAT|ENT_HTML401;
+		$flags = ENT_COMPAT | ENT_HTML401;
 	}
 
 	return htmlentities($string, $flags, $encoding, $double_encode);

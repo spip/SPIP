@@ -19,7 +19,8 @@ include_spip('base/objets');
 
 function inc_icone_renommer_dist($fond, $fonction) {
 	$size = 24;
-	if (preg_match('/(?:-([0-9]{1,3}))?([.](gif|png|svg))?$/i', $fond, $match)
+	if (
+		preg_match('/(?:-([0-9]{1,3}))?([.](gif|png|svg))?$/i', $fond, $match)
 		and ((isset($match[0]) and $match[0]) or (isset($match[1]) and $match[1]))
 	) {
 		if (isset($match[1]) and $match[1]) {
@@ -50,7 +51,8 @@ function inc_icone_renommer_dist($fond, $fonction) {
 		$dir = dirname($icone);
 		$fond = $icone;
 
-		if ($rtl
+		if (
+			$rtl
 			and $fr = $dir . '/' . str_replace("$type-", "$type-rtl-", basename($icone))
 			and file_exists($fr)
 		) {
@@ -67,13 +69,13 @@ function inc_icone_renommer_dist($fond, $fonction) {
 		}
 
 		$fonction = '';
-		if (in_array($action, array('add','del', 'new', 'edit', 'config'))) {
+		if (in_array($action, ['add','del', 'new', 'edit', 'config'])) {
 			$fonction = $action;
 		}
 
 		// c'est bon !
-		return array($fond, $fonction);
+		return [$fond, $fonction];
 	}
 
-	return array($fond, $fonction);
+	return [$fond, $fonction];
 }

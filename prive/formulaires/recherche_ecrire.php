@@ -40,12 +40,12 @@ function formulaires_recherche_ecrire_charger_dist($action = '', $class = '') {
 	}
 
 	return
-		array(
+		[
 			'action' => ($action ? $action : generer_url_ecrire('recherche')),
 			# action specifique, ne passe pas par Verifier, ni Traiter
 			'recherche' => _request('recherche'),
 			'lang' => $lang,
 			'class' => $class,
 			'_id_champ' => 'rechercher_' . substr(md5($action . $class), 0, 4),
-		);
+		];
 }

@@ -11,7 +11,7 @@ class Spip_Css_Vars_Collection {
 		$this->vars[$var] = $value;
 	}
 
-	public function getString() : string {
+	public function getString(): string {
 		$string = '';
 		foreach ($this->vars as $key => $value) {
 			$string .= "$key: $value;\n";
@@ -19,7 +19,7 @@ class Spip_Css_Vars_Collection {
 		return $string;
 	}
 
-	public function __toString() : string {
+	public function __toString(): string {
 		return $this->getString();
 	}
 }
@@ -29,7 +29,7 @@ class Spip_Css_Vars_Collection {
  *
  * @param Pile $pile Pile
  */
-function spip_generer_variables_css_typo(array $Pile) : \Spip_Css_Vars_Collection {
+function spip_generer_variables_css_typo(array $Pile): \Spip_Css_Vars_Collection {
 	$vars = new \Spip_Css_Vars_Collection();
 
 	// Direction
@@ -90,7 +90,7 @@ function spip_generer_variables_css_typo(array $Pile) : \Spip_Css_Vars_Collectio
  *
  * @param string $couleur Couleur hex
  */
-function spip_generer_variables_css_couleurs_theme(string $couleur) : \Spip_Css_Vars_Collection {
+function spip_generer_variables_css_couleurs_theme(string $couleur): \Spip_Css_Vars_Collection {
 	$vars = new \Spip_Css_Vars_Collection();
 
 	#$vars->add('--spip-color-theme--hsl', couleur_hex_to_hsl($couleur, 'h, s, l')); // redéfini ensuite
@@ -119,7 +119,7 @@ function spip_generer_variables_css_couleurs_theme(string $couleur) : \Spip_Css_
 /**
  * Génère les variables CSS de couleurs, dont celles dépendantes des couleurs du thème actif.
  */
-function spip_generer_variables_css_couleurs() : \Spip_Css_Vars_Collection {
+function spip_generer_variables_css_couleurs(): \Spip_Css_Vars_Collection {
 	$vars = new \Spip_Css_Vars_Collection();
 
 	// nos déclinaisons de couleur (basées sur le dégradé précedent, où 60 est là couleur du thème)

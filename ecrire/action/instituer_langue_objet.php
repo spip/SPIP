@@ -36,12 +36,12 @@ function action_instituer_langue_objet_dist($objet, $id, $id_rubrique, $changer_
 		$id_table_objet = id_table_objet($objet);
 		$trouver_table = charger_fonction('trouver_table', 'base');
 		$desc = $trouver_table($table_objet_sql, $serveur);
-		
-		$set = array();
+
+		$set = [];
 		if (isset($desc['field']['langue_choisie'])) {
 			$set['langue_choisie'] = 'oui';
 		}
-		
+
 		if ($changer_lang != 'herit') {
 			$set['lang'] = $changer_lang;
 			sql_updateq($table_objet_sql, $set, "$id_table_objet=" . intval($id), '', $serveur);

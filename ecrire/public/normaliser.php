@@ -26,7 +26,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 function phraser_vieux_logos(&$p) {
 	if ($p->param[0][0]) {
-		$args = array('');
+		$args = [''];
 	} else {
 		$args = array_shift($p->param);
 	}
@@ -39,9 +39,9 @@ function phraser_vieux_logos(&$p) {
 		}
 		$r = phraser_logo_faux_filtres($nom);
 		if ($r === 0) {
-			$c = new Texte;
+			$c = new Texte();
 			$c->texte = $nom;
-			$args[] = array($c);
+			$args[] = [$c];
 			array_shift($p->param);
 			spip_log("filtre de logo obsolete $nom", 'vieilles_defs');
 		} elseif ($r === 2) {
@@ -57,9 +57,9 @@ function phraser_vieux_logos(&$p) {
 			$champ->nom_boucle = $m[2];
 			$champ->nom_champ = $m[3];
 			$champ->etoile = $m[5];
-			$champ = array($champ);
+			$champ = [$champ];
 			if ($m[6]) {
-				$r = new Texte;
+				$r = new Texte();
 				$r->texte = $m[6];
 				$champ[] = $r;
 			}
@@ -94,13 +94,13 @@ function phraser_logo_faux_filtres($nom) {
 
 function phraser_vieux_emb(&$p) {
 	if (!is_array($p->param)) {
-		$p->param = array();
+		$p->param = [];
 	}
 
 	// Produire le premier argument {emb}
-	$texte = new Texte;
+	$texte = new Texte();
 	$texte->texte = 'emb';
-	$param = array('', array($texte));
+	$param = ['', [$texte]];
 
 	// Transformer les filtres en arguments
 	for ($i = 0; $i < count($p->param); $i++) {
@@ -108,9 +108,9 @@ function phraser_vieux_emb(&$p) {
 			if (!strstr($p->param[$i][0], '=')) {
 				break;
 			}# on a rencontre un vrai filtre, c'est fini
-			$texte = new Texte;
+			$texte = new Texte();
 			$texte->texte = $p->param[$i][0];
-			$param[] = array($texte);
+			$param[] = [$texte];
 		}
 		array_shift($p->param);
 	}
@@ -123,11 +123,11 @@ function phraser_vieux_emb(&$p) {
 
 function phraser_vieux_recherche($p) {
 	if ($p->param[0][0]) {
-		$c = new Texte;
+		$c = new Texte();
 		$c->texte = $p->param[0][0];
-		$p->param[0][1] = array($c);
+		$p->param[0][1] = [$c];
 		$p->param[0][0] = '';
-		$p->fonctions = array();
+		$p->fonctions = [];
 		spip_log('FORMULAIRE_RECHERCHE avec filtre ' . $c->texte, 'vieilles_defs');
 	}
 }
@@ -136,19 +136,19 @@ function phraser_vieux_recherche($p) {
 function phraser_vieux_exposer($p) {
 	if ($a = $p->fonctions) {
 		preg_match('#([^,]*)(,(.*))?#', $a[0][0], $regs);
-		$args = array();
+		$args = [];
 		if ($regs[1]) {
-			$a = new Texte;
+			$a = new Texte();
 			$a->texte = $regs[1];
-			$args = array('', array($a));
+			$args = ['', [$a]];
 			if ($regs[3]) {
-				$a = new Texte;
+				$a = new Texte();
 				$a->texte = $regs[3];
-				$args[] = array($a);
+				$args[] = [$a];
 			}
 		}
 		$p->param[0] = $args;
-		$p->fonctions = array();
+		$p->fonctions = [];
 		$p->nom_champ = 'EXPOSE';
 	}
 }
@@ -192,7 +192,8 @@ function normaliser_inclure($champ) {
 			}
 		}
 		foreach ($l as $k => $p) {
-			if (!$p or $p[0]->type != 'texte' or
+			if (
+				!$p or $p[0]->type != 'texte' or
 				!preg_match('/^fond\s*=\s*(.*)$/', $p[0]->texte, $r)
 			) {
 				continue;

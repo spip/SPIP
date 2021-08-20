@@ -24,7 +24,7 @@ function lister_traductions($id_trad, $objet) {
 	$desc = $trouver_table($table_objet_sql);
 	if (isset($desc['field']['statut'])) {
 		$select .= ',statut';
-		$where .= ' AND statut!='.sql_quote('poubelle');
+		$where .= ' AND statut!=' . sql_quote('poubelle');
 	}
 
 	$rows = sql_allfetsel($select, $table_objet_sql, $where);

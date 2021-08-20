@@ -41,7 +41,7 @@ include_spip('inc/pipelines_ecrire');
  */
 function parametres_css_prive() {
 
-	$args = array();
+	$args = [];
 	$args['v'] = $GLOBALS['spip_version_code'];
 	$args['p'] = substr(md5($GLOBALS['meta']['plugin']), 0, 4);
 	$args['themes'] = implode(',', lister_themes_prives());
@@ -122,10 +122,10 @@ function chercher_rubrique(
 			$scb = ($contient_breves > 1 ? 's' : '');
 			$scb = _T(
 				'avis_deplacement_rubrique',
-				array(
+				[
 					'contient_breves' => $contient_breves,
 					'scb' => $scb
-				)
+				]
 			);
 			$confirm .= "\n<div class='confirmer_deplacement verdana2'>"
 				. "<div class='choix'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace' /><label for='confirme-deplace'>"
@@ -215,12 +215,12 @@ function avoir_visiteurs($past = false, $accepter = true) {
  * @return array
  */
 function statuts_articles_visibles($statut_auteur) {
-	static $auth = array();
+	static $auth = [];
 	if (!isset($auth[$statut_auteur])) {
-		$auth[$statut_auteur] = array();
+		$auth[$statut_auteur] = [];
 		$statuts = array_column(sql_allfetsel('distinct statut', 'spip_articles'), 'statut');
 		foreach ($statuts as $s) {
-			if (autoriser('voir', 'article', 0, array('statut' => $statut_auteur), array('statut' => $s))) {
+			if (autoriser('voir', 'article', 0, ['statut' => $statut_auteur], ['statut' => $s])) {
 				$auth[$statut_auteur][] = $s;
 			}
 		}
@@ -250,12 +250,12 @@ function traduire_statut_auteur($statut, $attente = '') {
 		}
 	}
 
-	$recom = array(
+	$recom = [
 		'info_administrateurs' => _T('item_administrateur_2'),
 		'info_redacteurs' => _T('intem_redacteur'),
 		'info_visiteurs' => _T('item_visiteur'),
 		'5poubelle' => _T('texte_statut_poubelle'), // bouh
-	);
+	];
 	if (isset($recom[$statut])) {
 		return $recom[$statut] . $plus;
 	}
@@ -282,7 +282,7 @@ function traduire_statut_auteur($statut, $attente = '') {
  * @return string
  */
 function afficher_qui_edite($id_objet, $objet) {
-	static $qui = array();
+	static $qui = [];
 	if (isset($qui[$objet][$id_objet])) {
 		return $qui[$objet][$id_objet];
 	}
@@ -338,7 +338,7 @@ function auteurs_lister_statuts($quoi = 'tous', $en_base = true) {
 			return array_unique($statut);
 			break;
 		case 'visiteurs':
-			$statut = array();
+			$statut = [];
 			$exclus = AUTEURS_MIN_REDAC;
 			$exclus = explode(',', $exclus);
 			if (!$en_base) {
@@ -446,7 +446,7 @@ function lien_article_virtuel($virtuel) {
  * @return string
  *     Code HTML du lien
  */
-function bouton_spip_rss($op, $args = array(), $lang = '', $title = 'RSS') {
+function bouton_spip_rss($op, $args = [], $lang = '', $title = 'RSS') {
 	include_spip('inc/acces');
 	$clic = http_img_pack('rss-16.png', 'RSS', '', $title);
 	$args = param_low_sec($op, $args, $lang, 'rss');
@@ -464,9 +464,10 @@ function bouton_spip_rss($op, $args = array(), $lang = '', $title = 'RSS') {
  */
 function alertes_auteur($id_auteur) {
 
-	$alertes = array();
+	$alertes = [];
 
-	if (isset($GLOBALS['meta']['message_crash_tables'])
+	if (
+		isset($GLOBALS['meta']['message_crash_tables'])
 		and autoriser('detruire', null, null, $id_auteur)
 	) {
 		include_spip('genie/maintenance');
@@ -475,17 +476,19 @@ function alertes_auteur($id_auteur) {
 		}
 	}
 
-	if (isset($GLOBALS['meta']['message_crash_plugins'])
+	if (
+		isset($GLOBALS['meta']['message_crash_plugins'])
 		and $GLOBALS['meta']['message_crash_plugins']
 		and autoriser('configurer', '_plugins', null, $id_auteur)
 		and is_array($msg = unserialize($GLOBALS['meta']['message_crash_plugins']))
 	) {
 		$msg = implode(', ', array_map('joli_repertoire', array_keys($msg)));
-		$alertes[] = _T('plugins_erreur', array('plugins' => $msg));
+		$alertes[] = _T('plugins_erreur', ['plugins' => $msg]);
 	}
 
 	$a = isset($GLOBALS['meta']['message_alertes_auteurs']) ? $GLOBALS['meta']['message_alertes_auteurs'] : '';
-	if ($a
+	if (
+		$a
 		and is_array($a = unserialize($a))
 		and count($a)
 	) {
@@ -505,7 +508,8 @@ function alertes_auteur($id_auteur) {
 		}
 	}
 
-	if (isset($GLOBALS['meta']['plugin_erreur_activation'])
+	if (
+		isset($GLOBALS['meta']['plugin_erreur_activation'])
 		and autoriser('configurer', '_plugins', null, $id_auteur)
 	) {
 		include_spip('inc/plugin');
@@ -514,13 +518,13 @@ function alertes_auteur($id_auteur) {
 
 	$alertes = pipeline(
 		'alertes_auteur',
-		array(
-			'args' => array(
+		[
+			'args' => [
 				'id_auteur' => $id_auteur,
 				'exec' => _request('exec'),
-			),
+			],
 			'data' => $alertes
-		)
+		]
 	);
 
 	if ($alertes = array_filter($alertes)) {

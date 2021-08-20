@@ -52,15 +52,15 @@ function nettoyer_caracteres_mail($t) {
 
 	if ($GLOBALS['meta']['charset'] <> 'utf-8') {
 		$t = str_replace(
-			array('&#8217;', '&#8220;', '&#8221;'),
-			array("'", '"', '"'),
+			['&#8217;', '&#8220;', '&#8221;'],
+			["'", '"', '"'],
 			$t
 		);
 	}
 
 	$t = str_replace(
-		array('&mdash;', '&endash;'),
-		array('--', '-'),
+		['&mdash;', '&endash;'],
+		['--', '-'],
 		$t
 	);
 
@@ -207,7 +207,7 @@ function mail_normaliser_headers($headers, $from, $to, $texte, $parts = '') {
 		$domain = $domain[0];
 	}
 	else {
-		$domain = '@unknown-'.md5($from).'.org';
+		$domain = '@unknown-' . md5($from) . '.org';
 	}
 	$uniq = rand() . '_' . md5($to . $texte) . $domain;
 
@@ -243,5 +243,5 @@ function mail_normaliser_headers($headers, $from, $to, $texte, $parts = '') {
 
 	$headers .= "From: $from\n$type$rep$mid\nMIME-Version: 1.0\n";
 
-	return array($headers, $texte);
+	return [$headers, $texte];
 }

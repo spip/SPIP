@@ -15,11 +15,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function formulaires_configurer_logos_charger_dist() {
-	$valeurs = array();
-	foreach (array(
+	$valeurs = [];
+	foreach (
+		[
 		'activer_logos',
 		'activer_logos_survol'
-	) as $m) {
+		] as $m
+	) {
 		$valeurs[$m] = $GLOBALS['meta'][$m];
 	}
 
@@ -28,11 +30,13 @@ function formulaires_configurer_logos_charger_dist() {
 
 
 function formulaires_configurer_logos_traiter_dist() {
-	$res = array('editable' => true);
-	foreach (array(
+	$res = ['editable' => true];
+	foreach (
+		[
 		'activer_logos',
 		'activer_logos_survol',
-	) as $m) {
+		] as $m
+	) {
 		if (!is_null($v = _request($m))) {
 			ecrire_meta($m, $v == 'oui' ? 'oui' : 'non');
 		}

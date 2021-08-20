@@ -51,7 +51,7 @@ function formulaires_editer_article_charger_dist(
 	$retour = '',
 	$lier_trad = 0,
 	$config_fonc = 'articles_edit_config',
-	$row = array(),
+	$row = [],
 	$hidden = ''
 ) {
 	$valeurs = formulaires_editer_objet_charger(
@@ -102,10 +102,10 @@ function formulaires_editer_article_identifier_dist(
 	$retour = '',
 	$lier_trad = 0,
 	$config_fonc = 'articles_edit_config',
-	$row = array(),
+	$row = [],
 	$hidden = ''
 ) {
-	return serialize(array(intval($id_article), $lier_trad));
+	return serialize([intval($id_article), $lier_trad]);
 }
 
 /**
@@ -156,11 +156,11 @@ function formulaires_editer_article_verifier_dist(
 	$retour = '',
 	$lier_trad = 0,
 	$config_fonc = 'articles_edit_config',
-	$row = array(),
+	$row = [],
 	$hidden = ''
 ) {
 	// auto-renseigner le titre si il n'existe pas
-	titre_automatique('titre', array('descriptif', 'chapo', 'texte'));
+	titre_automatique('titre', ['descriptif', 'chapo', 'texte']);
 	if (!_request('id_parent') and !intval($id_article)) {
 		$valeurs = formulaires_editer_objet_charger(
 			'article',
@@ -175,12 +175,13 @@ function formulaires_editer_article_verifier_dist(
 		set_request('id_parent', $valeurs['id_parent']);
 	}
 	// on ne demande pas le titre obligatoire : il sera rempli a la volee dans editer_article si vide
-	$erreurs = formulaires_editer_objet_verifier('article', $id_article, array('id_parent'));
+	$erreurs = formulaires_editer_objet_verifier('article', $id_article, ['id_parent']);
 	// si on utilise le formulaire dans le public
 	if (!function_exists('autoriser')) {
 		include_spip('inc/autoriser');
 	}
-	if (!isset($erreurs['id_parent'])
+	if (
+		!isset($erreurs['id_parent'])
 		and !autoriser('creerarticledans', 'rubrique', _request('id_parent'))
 	) {
 		$erreurs['id_parent'] = _T('info_creerdansrubrique_non_autorise');
@@ -217,7 +218,7 @@ function formulaires_editer_article_traiter_dist(
 	$retour = '',
 	$lier_trad = 0,
 	$config_fonc = 'articles_edit_config',
-	$row = array(),
+	$row = [],
 	$hidden = ''
 ) {
 	// ici on ignore changer_lang qui est poste en cas de trad,
