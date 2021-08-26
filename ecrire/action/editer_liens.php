@@ -395,14 +395,19 @@ function lien_insert($objet_source, $primary, $table_lien, $id, $objets, $qualif
 			}
 
 			if (lien_triables($table_lien)) {
-				$where = lien_where($primary, $id, $objet, $id_objet);
-				// si il y a deja un lien pour ce couple (avec un autre role?) on reprend le meme rang si non nul
-				if (!$rang = intval(sql_getfetsel('rang_lien', $table_lien, $where))) {
-					$where = lien_where($primary, '*', $objet, $id_objet);
-					$rang = intval(sql_getfetsel('max(rang_lien)', $table_lien, $where));
-					// si aucun lien n'a de rang, on en introduit pas, on garde zero
-					if ($rang>0) {
-						$rang = intval($rang) + 1;
+				if (isset($qualif['rang_lien'])) {
+					$rang = $qualif['rang_lien'];
+				}
+				else {
+					$where = lien_where($primary, $id, $objet, $id_objet);
+					// si il y a deja un lien pour ce couple (avec un autre role?) on reprend le meme rang si non nul
+					if (!$rang = intval(sql_getfetsel('rang_lien', $table_lien, $where))) {
+						$where = lien_rang_where($table_lien, $primary, $id, $objet, $id_objet);
+						$rang = intval(sql_getfetsel('max(rang_lien)', $table_lien, $where));
+						// si aucun lien n'a de rang, on en introduit pas, on garde zero
+						if ($rang>0) {
+							$rang = intval($rang) + 1;
+						}
 					}
 				}
 				$insertions['rang_lien'] = $rang;
@@ -435,8 +440,11 @@ function lien_insert($objet_source, $primary, $table_lien, $id, $objets, $qualif
 			) {
 
 				if (lien_triables($table_lien) and isset($insertions['rang_lien']) and intval($insertions['rang_lien'])) {
+					$where_meme_lien = lien_where($primary, $id, $objet, $id_objet);
+					$where_meme_lien = implode(' AND ', $where_meme_lien);
 					// on decale les liens de rang_lien>=la valeur inseree pour faire la place
-					$w = lien_where($primary, '*', $objet, $id_objet, array('rang_lien>='.intval($insertions['rang_lien']),"$primary!=".intval($id)));
+					// sauf sur le meme lien avec un role eventuellement different
+					$w = lien_rang_where($table_lien, $primary, $id, $objet, $id_objet, ['rang_lien>='.intval($insertions['rang_lien']), "NOT($where_meme_lien)"]);
 					sql_update($table_lien, array('rang_lien'=>'rang_lien+1'), $w);
 				}
 
@@ -459,7 +467,8 @@ function lien_insert($objet_source, $primary, $table_lien, $id, $objets, $qualif
 		}
 	}
 	// si on a fait des insertions, on reordonne les liens concernes
-	if ($ins>0) {
+	// pas la peine si $qualif['rang_lien'] etait fournie, on va passer dans lien_set a suivre et donc finir le recomptage
+	if ($ins>0 and empty($qualif['rang_lien'])) {
 		lien_ordonner($objet_source, $primary, $table_lien, $id, $objets);
 	}
 
@@ -480,24 +489,39 @@ function lien_ordonner($objet_source, $primary, $table_lien, $id, $objets) {
 		return;
 	}
 
+	$deja_reordonne = [];
+
 	foreach ($objets as $objet => $id_objets) {
 		if (!is_array($id_objets)) {
 			$id_objets = array($id_objets);
 		}
 
 		foreach ($id_objets as $id_objet) {
-			$objet = (($objet == '*') ? $objet : objet_type($objet)); # securite
+			if (empty($deja_reordonne[$id][$objet][$id_objet])) {
+				$objet = (($objet == '*') ? $objet : objet_type($objet)); # securite
 
-			$where = lien_where($primary, '*', $objet, $id_objet);
-			$liens = sql_allfetsel("$primary, id_objet, objet, rang_lien", $table_lien, $where, $primary,"rang_lien");
+				$where = lien_rang_where($table_lien, $primary, $id, $objet, $id_objet);
+				$liens = sql_allfetsel("$primary, id_objet, objet, rang_lien", $table_lien, $where, '',"rang_lien");
 
-			$rangs = array_column($liens, 'rang_lien');
-			if (count($rangs) and (max($rangs)>0 or min($rangs)<0)) {
-				$rang = 1;
-				foreach ($liens as $lien) {
-					$where = lien_where($primary, $lien[$primary], $objet, $id_objet, array('rang_lien!='.intval($rang)));
-					sql_updateq($table_lien, array('rang_lien' => $rang), $where);
-					$rang++;
+				$rangs = array_column($liens, 'rang_lien');
+				if (count($rangs) and (max($rangs)>0 or min($rangs)<0)) {
+					$rang = 1;
+					foreach ($liens as $lien) {
+						if (empty($deja_reordonne[$lien[$primary]][$lien['objet']][$lien['id_objet']])) {
+							$where = lien_where($primary, $lien[$primary], $lien['objet'], $lien['id_objet'], array('rang_lien!='.intval($rang)));
+							sql_updateq($table_lien, array('rang_lien' => $rang), $where);
+
+							if (empty($deja_reordonne[$lien[$primary]])) {
+								$deja_reordonne[$lien[$primary]] = [];
+							}
+							if (empty($deja_reordonne[$lien[$primary]][$lien['objet']])) {
+								$deja_reordonne[$lien[$primary]][$lien['objet']] = [];
+							}
+							$deja_reordonne[$lien[$primary]][$lien['objet']][$lien['id_objet']] = $rang;
+
+							$rang++;
+						}
+					}
 				}
 			}
 		}
@@ -578,6 +602,27 @@ function lien_where($primary, $id_source, $objet, $id_objet, $cond = array()) {
 	} // idiot mais quand meme
 
 	return $where;
+}
+
+/**
+ * Fabriquer la condition where pour compter les rangs
+ * @param string $table_lien
+ * @param string $primary
+ * @param int|string|array $id_source
+ * @param string $objet
+ * @param int|string|array $id_objet
+ * @param array $cond
+ * @return array                        Liste des conditions
+ */
+function lien_rang_where($table_lien, $primary, $id_source, $objet, $id_objet, $cond = []) {
+
+	// si on veut compter les rangs autrement que le core ne le fait par defaut, fournir le where adhoc
+	if (function_exists($f = 'lien_rang_where_' . $table_lien)) {
+		return $f($primary, $id_source, $objet, $id_objet, $cond);
+	}
+
+	// par defaut c'est un rang compté pour tous les id_source d'un couple objet-id_objet
+	return lien_where($primary, '*', $objet, $id_objet, $cond);
 }
 
 /**
@@ -848,7 +893,10 @@ function lien_set($objet_source, $primary, $table_lien, $id, $objets, $qualif) {
 			if (lien_triables($table_lien) and isset($qualif['rang_lien'])) {
 				if (intval($qualif['rang_lien'])) {
 					// on decale les liens de rang_lien>=la valeur inseree pour faire la place
-					$w = lien_where($primary, '*', $objet, $id_objet, array('rang_lien>='.intval($qualif['rang_lien']),"$primary!=".intval($id)));
+					// sauf sur le meme lien avec un role eventuellement different
+					$where_meme_lien = lien_where($primary, $id, $objet, $id_objet);
+					$where_meme_lien = implode(' AND ', $where_meme_lien);
+					$w = lien_rang_where($table_lien, $primary, $id, $objet, $id_objet, ['rang_lien>='.intval($qualif['rang_lien']), "NOT($where_meme_lien)"]);
 					sql_update($table_lien, array('rang_lien'=>'rang_lien+1'), $w);
 				}
 				// tous les liens de même rôle recoivent le rang indiqué aussi
