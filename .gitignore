@@ -2,6 +2,7 @@
 /composer.phar
 /composer.lock
 /phpcs.xml
+/phpstan.neon
 
 **/.DS_Store
 **/.htaccess

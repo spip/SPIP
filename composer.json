@@ -1,12 +1,15 @@
 {
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
-        "spip/coding-standards": "^1.2"
+        "spip/coding-standards": "^1.2",
+        "phpstan/phpstan": "^0.12.96"
     },
     "archive": {
         "exclude": [
             "composer.json",
             "phpcs.xml.dist",
+            "phpstan.neon.dist",
+            "phpstan-baseline.neon",
             "!plugins-dist",
             "!squelettes-dist",
             "!config/ecran_securite.php",
