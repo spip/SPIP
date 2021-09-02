@@ -10,7 +10,6 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 /**
  * Gestion d'affichage de la page de demande de mise à jour de la base de données
  *
@@ -46,9 +45,9 @@ function exec_demande_mise_a_jour_dist() {
 
 	echo debut_grand_cadre(true);
 	echo boite_ouvrir(_T('info_message_technique'), 'notice');
-	echo "<p>" . _T('info_procedure_maj_version') . "</p>",
-		"<p>" . _T('info_administrateur_site_01') . "</p>";
-	echo bouton_action(_T('bouton_mettre_a_jour_base'), generer_url_ecrire("upgrade", "reinstall=non"));
+	echo '<p>' . _T('info_procedure_maj_version') . '</p>',
+		'<p>' . _T('info_administrateur_site_01') . '</p>';
+	echo bouton_action(_T('bouton_mettre_a_jour_base'), generer_url_ecrire('upgrade', 'reinstall=non'));
 	echo boite_fermer();
 	// masquer les erreurs sql sur cette page car proviennent de la base pas a jour !
 	echo '<style type="text/css">#debug-nav {display: none;}</style>';

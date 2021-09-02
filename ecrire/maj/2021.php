@@ -24,5 +24,5 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS['maj'][2021021800] = [
 	['sql_alter', "TABLE spip_auteurs CHANGE imessage imessage VARCHAR(3) DEFAULT '' NOT NULL" ],
-	['sql_updateq', "spip_auteurs", ['imessage' => 'oui'], "imessage != 'non' OR imessage IS NULL" ],
+	['sql_updateq', 'spip_auteurs', ['imessage' => 'oui'], "imessage != 'non' OR imessage IS NULL" ],
 ];

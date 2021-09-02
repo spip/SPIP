@@ -78,15 +78,16 @@ function definir_barre_contexte($contexte = null) {
  * @param bool $autorise Ne renvoyer que les boutons autorisés
  * @return array
  */
-function definir_barre_boutons($contexte = array(), $icones = true, $autorise = true) {
+function definir_barre_boutons($contexte = [], $icones = true, $autorise = true) {
 	include_spip('inc/autoriser');
-	$boutons_admin = array();
+	$boutons_admin = [];
 
 	// les boutons du core, issus de ecrire/paquet.xml
-	$liste_boutons = array();
+	$liste_boutons = [];
 
 	// ajouter les boutons issus des plugin via paquet.xml
-	if (function_exists('boutons_plugins')
+	if (
+		function_exists('boutons_plugins')
 		and is_array($liste_boutons_plugins = boutons_plugins())
 	) {
 		$liste_boutons = &$liste_boutons_plugins;
@@ -95,48 +96,51 @@ function definir_barre_boutons($contexte = array(), $icones = true, $autorise = 
 	foreach ($liste_boutons as $id => $infos) {
 		$parent = '';
 		// les boutons principaux ne sont pas soumis a autorisation
-		if (!isset($infos['parent'])
+		if (
+			!isset($infos['parent'])
 			or !($parent = $infos['parent'])
 			or !$autorise
-			or autoriser('menu', "_$id", 0, null, array('contexte' => $contexte))
+			or autoriser('menu', "_$id", 0, null, ['contexte' => $contexte])
 		) {
-			if ($parent
+			if (
+				$parent
 				and $parent = preg_replace(',^bando_,', 'menu_', $parent)
 				and isset($boutons_admin[$parent])
 			) {
 				if (!is_array($boutons_admin[$parent]->sousmenu)) {
-					$boutons_admin[$parent]->sousmenu = array();
+					$boutons_admin[$parent]->sousmenu = [];
 				}
 				$position = (isset($infos['position']) and strlen($infos['position'])) ? intval($infos['position']) : count($boutons_admin[$parent]->sousmenu);
 				if ($position < 0) {
 					$position = count($boutons_admin[$parent]->sousmenu) + 1 + $position;
 				}
 				$boutons_admin[$parent]->sousmenu = array_slice($boutons_admin[$parent]->sousmenu, 0, $position)
-					+ array(
+					+ [
 						$id => new Bouton(
 							($icones and !empty($infos['icone'])) ? find_in_theme($infos['icone']) : '',  // icone
 							$infos['titre'],  // titre
 							(isset($infos['action']) and $infos['action']) ? $infos['action'] : null,
 							(isset($infos['parametres']) and $infos['parametres']) ? $infos['parametres'] : null
 						)
-					)
+					]
 					+ array_slice($boutons_admin[$parent]->sousmenu, $position, 100);
 			}
-			if (!$parent
+			if (
+				!$parent
 				// provisoire, eviter les vieux boutons
-				and (!in_array($id, array('forum', 'statistiques_visites')))
-				and (!$autorise or autoriser('menugrandeentree', "_$id", 0, null, array('contexte' => $contexte)))
+				and (!in_array($id, ['forum', 'statistiques_visites']))
+				and (!$autorise or autoriser('menugrandeentree', "_$id", 0, null, ['contexte' => $contexte]))
 			) {
 				$position = (isset($infos['position']) and $infos['position']) ? $infos['position'] : count($boutons_admin);
 				$boutons_admin = array_slice($boutons_admin, 0, $position)
-					+ array(
+					+ [
 						$id => new Bouton(
 							($icones and isset($infos['icone']) and $infos['icone']) ? find_in_theme($infos['icone']) : '',  // icone
 							$infos['titre'],  // titre
 							(isset($infos['action']) and $infos['action']) ? $infos['action'] : null,
 							(isset($infos['parametres']) and $infos['parametres']) ? $infos['parametres'] : null
 						)
-					)
+					]
 					+ array_slice($boutons_admin, $position, 100);
 			}
 		}
@@ -174,7 +178,7 @@ function definir_barre_boutons($contexte = array(), $icones = true, $autorise = 
 function trier_boutons_enfants_par_alpha($menus, $avec_favoris = false) {
 	foreach ($menus as $menu) {
 		if ($menu->sousmenu) {
-			$libelles = $isfavoris = $favoris = array();
+			$libelles = $isfavoris = $favoris = [];
 			foreach ($menu->sousmenu as $key => $item) {
 				$libelles[$key] = strtolower(translitteration(_T($item->libelle)));
 				$isfavoris[$key] = (bool)$item->favori;

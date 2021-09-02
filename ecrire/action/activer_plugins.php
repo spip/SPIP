@@ -30,7 +30,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function enregistre_modif_plugin() {
 	include_spip('inc/plugin');
 	// recuperer les plugins dans l'ordre des $_POST
-	$test = array();
+	$test = [];
 	foreach (liste_plugin_files() as $file) {
 		$test['s' . substr(md5(_DIR_PLUGINS . $file), 0, 16)] = $file;
 	}
@@ -40,7 +40,7 @@ function enregistre_modif_plugin() {
 		}
 	}
 
-	$plugin = array();
+	$plugin = [];
 
 	foreach ($_POST as $choix => $val) {
 		if (isset($test[$choix]) && $val == 'O') {
@@ -48,17 +48,19 @@ function enregistre_modif_plugin() {
 		}
 	}
 
-	spip_log("Changement des plugins actifs par l'auteur " . $GLOBALS['visiteur_session']['id_auteur'] . ": " . join(',',
-			$plugin));
+	spip_log("Changement des plugins actifs par l'auteur " . $GLOBALS['visiteur_session']['id_auteur'] . ': ' . join(
+		',',
+		$plugin
+	));
 	ecrire_plugin_actifs($plugin);
 
 	// Chaque fois que l'on valide des plugins, on memorise la liste de ces plugins comme etant "interessants", avec un score initial, qui sera decremente a chaque tour : ainsi un plugin active pourra reter visible a l'ecran, jusqu'a ce qu'il tombe dans l'oubli.
 	$plugins_interessants = @unserialize($GLOBALS['meta']['plugins_interessants']);
 	if (!is_array($plugins_interessants)) {
-		$plugins_interessants = array();
+		$plugins_interessants = [];
 	}
 
-	$plugins_interessants2 = array();
+	$plugins_interessants2 = [];
 
 	foreach ($plugins_interessants as $plug => $score) {
 		if ($score > 1) {

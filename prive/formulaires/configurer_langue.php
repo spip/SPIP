@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function formulaires_configurer_langue_charger_dist() {
-	$valeurs = array();
+	$valeurs = [];
 
 	include_spip('inc/lang');
 	$l_site = $GLOBALS['meta']['langue_site'];
@@ -34,18 +34,18 @@ function formulaires_configurer_langue_charger_dist() {
 			. '>' . traduire_nom_langue($l) . "</option>\n";
 	}
 
-	$valeurs = array(
+	$valeurs = [
 		'_langues' => $res,
 		'_langue_site' => $langue_site,
 		'changer_langue_site' => '',
-	);
+	];
 
 	return $valeurs;
 }
 
 
 function formulaires_configurer_langue_traiter_dist() {
-	$res = array('editable' => true);
+	$res = ['editable' => true];
 
 	if ($lang = _request('changer_langue_site')) {
 		include_spip('inc/lang');

@@ -47,7 +47,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function lire_tableau_edition() {
 	$edition = @unserialize($GLOBALS['meta']['drapeau_edition']);
 	if (!$edition) {
-		return array();
+		return [];
 	}
 	$changed = false;
 
@@ -131,7 +131,7 @@ function signale_edition($id, $auteur, $type = 'article') {
 	}
 
 	if (!isset($edition[$type][$id]) or !is_array($edition[$type][$id])) {
-		$edition[$type][$id] = array();
+		$edition[$type][$id] = [];
 	}
 	$edition[$type][$id][$id_a][$nom] = time();
 	ecrire_tableau_edition($edition);
@@ -153,7 +153,7 @@ function qui_edite($id, $type = 'article') {
 
 	$edition = lire_tableau_edition();
 
-	return empty($edition[$type][$id]) ? array() : $edition[$type][$id];
+	return empty($edition[$type][$id]) ? [] : $edition[$type][$id];
 }
 
 /**
@@ -178,10 +178,10 @@ function mention_qui_edite($id, $type = 'article') {
 		}
 
 		// format lie a la chaine de langue 'avis_article_modifie'
-		return array(
+		return [
 			'nom_auteur_modif' => join(' | ', $auteurs),
 			'date_diff' => ceil((time() - $quand) / 60)
-		);
+		];
 	}
 }
 
@@ -197,18 +197,19 @@ function mention_qui_edite($id, $type = 'article') {
  */
 function liste_drapeau_edition($id_auteur) {
 	$edition = lire_tableau_edition();
-	$objets_ouverts = array();
+	$objets_ouverts = [];
 
 	foreach ($edition as $objet => $data) {
 		foreach ($data as $id => $auteurs) {
-			if (isset($auteurs[$id_auteur])
+			if (
+				isset($auteurs[$id_auteur])
 				and is_array($auteurs[$id_auteur]) // precaution
 				and (array_pop($auteurs[$id_auteur]) > time() - 3600)
 			) {
-				$objets_ouverts[] = array(
+				$objets_ouverts[] = [
 					'objet' => $objet,
 					'id_objet' => $id,
-				);
+				];
 			}
 		}
 	}
@@ -257,7 +258,8 @@ function debloquer_edition($id_auteur, $id_objet, $type = 'article') {
 	foreach ($edition as $objet => $data) {
 		if ($objet == $type) {
 			foreach ($data as $id => $auteurs) {
-				if ($id == $id_objet
+				if (
+					$id == $id_objet
 					and isset($auteurs[$id_auteur])
 				) {
 					unset($edition[$objet][$id][$id_auteur]);

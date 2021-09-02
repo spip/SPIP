@@ -40,7 +40,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     - samesite = 'Lax' : valeur samesite (Lax, Strict ou None)
  * @return bool
  *     true si le cookie a été posé, false sinon.
- * 
+ *
  * @note Anciens paramètres (à la place de $options) (pour rétrocompatibilité)
  *   param int $expire
  *     Date d'expiration du cookie (timestamp)
@@ -162,7 +162,6 @@ function recuperer_cookies_spip($cookie_prefix) {
 			$GLOBALS[$spipname] = $value;
 		}
 	}
-
 }
 
 

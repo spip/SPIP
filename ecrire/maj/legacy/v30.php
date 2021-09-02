@@ -12,7 +12,7 @@
 
 /**
  * Gestion des mises à jour de bdd de SPIP
- * 
+ *
  * Mises à jour en 3.0
  *
  * @package SPIP\Core\SQL\Upgrade
@@ -22,15 +22,15 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 
-$GLOBALS['maj'][16428] = array(
-	array('maj_liens', 'auteur'), // creer la table liens
-	array('maj_liens', 'auteur', 'article'),
-	array('sql_drop_table', "spip_auteurs_articles"),
-	array('maj_liens', 'auteur', 'rubrique'),
-	array('sql_drop_table', "spip_auteurs_rubriques"),
-	array('maj_liens', 'auteur', 'message'),
-	array('sql_drop_table', "spip_auteurs_messages"),
-);
+$GLOBALS['maj'][16428] = [
+	['maj_liens', 'auteur'], // creer la table liens
+	['maj_liens', 'auteur', 'article'],
+	['sql_drop_table', 'spip_auteurs_articles'],
+	['maj_liens', 'auteur', 'rubrique'],
+	['sql_drop_table', 'spip_auteurs_rubriques'],
+	['maj_liens', 'auteur', 'message'],
+	['sql_drop_table', 'spip_auteurs_messages'],
+];
 
 /**
  * Mise à jour des tables de liens
@@ -57,12 +57,12 @@ function maj_liens($pivot, $l = '') {
 
 	@define('_LOG_FILTRE_GRAVITE', 8);
 
-	$exceptions_pluriel = array('forum' => 'forum', 'syndic' => 'syndic');
+	$exceptions_pluriel = ['forum' => 'forum', 'syndic' => 'syndic'];
 
 	$pivot = preg_replace(',[^\w],', '', $pivot); // securite
-	$pivots = (isset($exceptions_pluriel[$pivot]) ? $exceptions_pluriel[$pivot] : $pivot . "s");
-	$liens = "spip_" . $pivots . "_liens";
-	$id_pivot = "id_" . $pivot;
+	$pivots = (isset($exceptions_pluriel[$pivot]) ? $exceptions_pluriel[$pivot] : $pivot . 's');
+	$liens = 'spip_' . $pivots . '_liens';
+	$id_pivot = 'id_' . $pivot;
 	// Creer spip_auteurs_liens
 	global $tables_auxiliaires;
 	if (!$l) {
@@ -74,7 +74,7 @@ function maj_liens($pivot, $l = '') {
 		$l = preg_replace(',[^\w],', '', $l); // securite
 		$primary = "id_$l";
 		$objet = ($l == 'syndic' ? 'site' : $l);
-		$ls = (isset($exceptions_pluriel[$l]) ? $exceptions_pluriel[$l] : $l . "s");
+		$ls = (isset($exceptions_pluriel[$l]) ? $exceptions_pluriel[$l] : $l . 's');
 		$ancienne_table = 'spip_' . $pivots . '_' . $ls;
 		$pool = 400;
 
@@ -109,7 +109,7 @@ function maj_liens($pivot, $l = '') {
 		// Recopier les donnees
 		$sub_pool = 100;
 		while ($ids = array_map('reset', sql_allfetsel("$primary", $ancienne_table, '', '', '', "0,$sub_pool"))) {
-			$insert = array();
+			$insert = [];
 			foreach ($ids as $id) {
 				$n = sql_countsel($liens, "objet='$objet' AND id_objet=" . intval($id));
 				while ($t = sql_allfetsel($champs, $ancienne_table, "$primary=" . intval($id), '', $id_pivot, "$n,$pool")) {
@@ -120,7 +120,7 @@ function maj_liens($pivot, $l = '') {
 					}
 					if (count($insert) >= $sub_pool) {
 						maj_liens_insertq_multi_check($liens, $insert, $tables_auxiliaires[$liens]);
-						$insert = array();
+						$insert = [];
 					}
 					// si timeout, sortir, la relance nous ramenera dans cette fonction
 					// et on verifiera/repartira de la
@@ -150,7 +150,7 @@ function maj_liens($pivot, $l = '') {
  * @param array $desc Description de la table de liaison
  * @return void
  **/
-function maj_liens_insertq_multi_check($table, $couples, $desc = array()) {
+function maj_liens_insertq_multi_check($table, $couples, $desc = []) {
 	$n_before = sql_countsel($table);
 	sql_insertq_multi($table, $couples, $desc);
 	$n_after = sql_countsel($table);
@@ -164,70 +164,74 @@ function maj_liens_insertq_multi_check($table, $couples, $desc = array()) {
 	}
 }
 
-$GLOBALS['maj'][17311] = array(
-	array(
+$GLOBALS['maj'][17311] = [
+	[
 		'ecrire_meta',
-		"multi_objets",
-		implode(',',
+		'multi_objets',
+		implode(
+			',',
 			array_diff(
-				array(
+				[
 					(isset($GLOBALS['meta']['multi_rubriques']) and $GLOBALS['meta']['multi_rubriques'] == 'oui')
 						? 'spip_rubriques' : '',
 					(isset($GLOBALS['meta']['multi_articles']) and $GLOBALS['meta']['multi_articles'] == 'oui')
 						? 'spip_articles' : ''
-				),
-				array('')
-			))
-	),
-	array(
+				],
+				['']
+			)
+		)
+	],
+	[
 		'ecrire_meta',
-		"gerer_trad_objets",
-		implode(',',
+		'gerer_trad_objets',
+		implode(
+			',',
 			array_diff(
-				array(
+				[
 					(isset($GLOBALS['meta']['gerer_trad']) and $GLOBALS['meta']['gerer_trad'] == 'oui')
 						? 'spip_articles' : ''
-				),
-				array('')
-			))
-	),
-);
-$GLOBALS['maj'][17555] = array(
-	array('sql_alter', "TABLE spip_resultats ADD table_objet varchar(30) DEFAULT '' NOT NULL"),
-	array('sql_alter', "TABLE spip_resultats ADD serveur char(16) DEFAULT '' NOT NULL"),
-);
+				],
+				['']
+			)
+		)
+	],
+];
+$GLOBALS['maj'][17555] = [
+	['sql_alter', "TABLE spip_resultats ADD table_objet varchar(30) DEFAULT '' NOT NULL"],
+	['sql_alter', "TABLE spip_resultats ADD serveur char(16) DEFAULT '' NOT NULL"],
+];
 
-$GLOBALS['maj'][17563] = array(
-	array('sql_alter', "TABLE spip_articles ADD virtuel VARCHAR(255) DEFAULT '' NOT NULL"),
-	array('sql_update', 'spip_articles', array('virtuel' => 'SUBSTRING(chapo,2)', 'chapo' => "''"), "chapo LIKE '=_%'"),
-);
+$GLOBALS['maj'][17563] = [
+	['sql_alter', "TABLE spip_articles ADD virtuel VARCHAR(255) DEFAULT '' NOT NULL"],
+	['sql_update', 'spip_articles', ['virtuel' => 'SUBSTRING(chapo,2)', 'chapo' => "''"], "chapo LIKE '=_%'"],
+];
 
-$GLOBALS['maj'][17577] = array(
-	array('maj_tables', array('spip_jobs', 'spip_jobs_liens')),
-);
+$GLOBALS['maj'][17577] = [
+	['maj_tables', ['spip_jobs', 'spip_jobs_liens']],
+];
 
-$GLOBALS['maj'][17743] = array(
-	array('sql_update', 'spip_auteurs', array('prefs' => 'bio', 'bio' => "''"), "statut='nouveau' AND bio<>''"),
-);
+$GLOBALS['maj'][17743] = [
+	['sql_update', 'spip_auteurs', ['prefs' => 'bio', 'bio' => "''"], "statut='nouveau' AND bio<>''"],
+];
 
-$GLOBALS['maj'][18219] = array(
-	array('sql_alter', "TABLE spip_rubriques DROP id_import"),
-	array('sql_alter', "TABLE spip_rubriques DROP export"),
-);
+$GLOBALS['maj'][18219] = [
+	['sql_alter', 'TABLE spip_rubriques DROP id_import'],
+	['sql_alter', 'TABLE spip_rubriques DROP export'],
+];
 
-$GLOBALS['maj'][18310] = array(
-	array('sql_alter', "TABLE spip_auteurs_liens CHANGE vu vu VARCHAR(6) DEFAULT 'non' NOT NULL"),
-);
+$GLOBALS['maj'][18310] = [
+	['sql_alter', "TABLE spip_auteurs_liens CHANGE vu vu VARCHAR(6) DEFAULT 'non' NOT NULL"],
+];
 
-$GLOBALS['maj'][18597] = array(
-	array('sql_alter', "TABLE spip_rubriques ADD profondeur smallint(5) DEFAULT '0' NOT NULL"),
-	array('maj_propager_les_secteurs'),
-);
+$GLOBALS['maj'][18597] = [
+	['sql_alter', "TABLE spip_rubriques ADD profondeur smallint(5) DEFAULT '0' NOT NULL"],
+	['maj_propager_les_secteurs'],
+];
 
-$GLOBALS['maj'][18955] = array(
-	array('sql_alter', "TABLE spip_auteurs_liens ADD INDEX id_objet (id_objet)"),
-	array('sql_alter', "TABLE spip_auteurs_liens ADD INDEX objet (objet)"),
-);
+$GLOBALS['maj'][18955] = [
+	['sql_alter', 'TABLE spip_auteurs_liens ADD INDEX id_objet (id_objet)'],
+	['sql_alter', 'TABLE spip_auteurs_liens ADD INDEX objet (objet)'],
+];
 
 /**
  * Mise à jour pour recalculer les secteurs des rubriques
@@ -262,14 +266,14 @@ function maj_collation_sqlite() {
 	$trouver_table('');
 
 	// cas particulier spip_auteurs : retablir le collate binary sur le login
-	$desc = $trouver_table("spip_auteurs");
-	spip_log("spip_auteurs : " . var_export($desc['field'], true), "maj." . _LOG_INFO_IMPORTANTE);
-	if (stripos($desc['field']['login'], "BINARY") === false) {
-		spip_log("Retablir champ login BINARY sur table spip_auteurs", "maj");
-		sql_alter("table spip_auteurs change login login VARCHAR(255) BINARY");
+	$desc = $trouver_table('spip_auteurs');
+	spip_log('spip_auteurs : ' . var_export($desc['field'], true), 'maj.' . _LOG_INFO_IMPORTANTE);
+	if (stripos($desc['field']['login'], 'BINARY') === false) {
+		spip_log('Retablir champ login BINARY sur table spip_auteurs', 'maj');
+		sql_alter('table spip_auteurs change login login VARCHAR(255) BINARY');
 		$trouver_table('');
-		$new_desc = $trouver_table("spip_auteurs");
-		spip_log("Apres conversion spip_auteurs : " . var_export($new_desc['field'], true), "maj." . _LOG_INFO_IMPORTANTE);
+		$new_desc = $trouver_table('spip_auteurs');
+		spip_log('Apres conversion spip_auteurs : ' . var_export($new_desc['field'], true), 'maj.' . _LOG_INFO_IMPORTANTE);
 	}
 
 	foreach ($tables as $table) {
@@ -279,33 +283,37 @@ function maj_collation_sqlite() {
 		if ($desc = $trouver_table($table)) {
 			$desc_collate = _sqlite_remplacements_definitions_table($desc['field']);
 			if ($d = array_diff($desc['field'], $desc_collate)) {
-				spip_log("Table $table COLLATE incorrects", "maj");
+				spip_log("Table $table COLLATE incorrects", 'maj');
 
 				// cas particulier spip_urls :
 				// supprimer les doublons avant conversion sinon echec (on garde les urls les plus recentes)
 				if ($table == 'spip_urls') {
 					// par date DESC pour conserver les urls les plus recentes
-					$data = sql_allfetsel("*", "spip_urls", '', '', 'date DESC');
-					$urls = array();
+					$data = sql_allfetsel('*', 'spip_urls', '', '', 'date DESC');
+					$urls = [];
 					foreach ($data as $d) {
-						$key = $d['id_parent'] . "::" . strtolower($d['url']);
+						$key = $d['id_parent'] . '::' . strtolower($d['url']);
 						if (!isset($urls[$key])) {
 							$urls[$key] = true;
 						} else {
-							spip_log("Suppression doublon dans spip_urls avant conversion : " . serialize($d),
-								"maj." . _LOG_INFO_IMPORTANTE);
-							sql_delete("spip_urls", "id_parent=" . sql_quote($d['id_parent']) . " AND url=" . sql_quote($d['url']));
+							spip_log(
+								'Suppression doublon dans spip_urls avant conversion : ' . serialize($d),
+								'maj.' . _LOG_INFO_IMPORTANTE
+							);
+							sql_delete('spip_urls', 'id_parent=' . sql_quote($d['id_parent']) . ' AND url=' . sql_quote($d['url']));
 						}
 					}
 				}
 				foreach ($desc['field'] as $field => $type) {
 					if ($desc['field'][$field] !== $desc_collate[$field]) {
-						spip_log("Conversion COLLATE table $table", "maj." . _LOG_INFO_IMPORTANTE);
+						spip_log("Conversion COLLATE table $table", 'maj.' . _LOG_INFO_IMPORTANTE);
 						sql_alter("table $table change $field $field " . $desc_collate[$field]);
 						$trouver_table('');
 						$new_desc = $trouver_table($table);
-						spip_log("Apres conversion $table : " . var_export($new_desc['field'], true),
-							"maj." . _LOG_INFO_IMPORTANTE);
+						spip_log(
+							"Apres conversion $table : " . var_export($new_desc['field'], true),
+							'maj.' . _LOG_INFO_IMPORTANTE
+						);
 						continue 2; // inutile de continuer pour cette table : un seul alter remet tout a jour en sqlite
 					}
 				}
@@ -315,19 +323,18 @@ function maj_collation_sqlite() {
 
 	// forcer le vidage de cache
 	$trouver_table('');
-
 }
 
 
-$GLOBALS['maj'][19236] = array(
-	array('sql_updateq', 'spip_meta', array('impt' => 'oui'), "nom='version_installee'"), // version base principale
-	array('sql_updateq', 'spip_meta', array('impt' => 'oui'), "nom LIKE '%_base_version'"),  // version base plugins
-	array('maj_collation_sqlite'),
-);
+$GLOBALS['maj'][19236] = [
+	['sql_updateq', 'spip_meta', ['impt' => 'oui'], "nom='version_installee'"], // version base principale
+	['sql_updateq', 'spip_meta', ['impt' => 'oui'], "nom LIKE '%_base_version'"],  // version base plugins
+	['maj_collation_sqlite'],
+];
 
-$GLOBALS['maj'][19268] = array(
-	array('supprimer_toutes_sessions'),
-);
+$GLOBALS['maj'][19268] = [
+	['supprimer_toutes_sessions'],
+];
 
 /**
  * Supprime toutes les sessions des auteurs
@@ -335,7 +342,7 @@ $GLOBALS['maj'][19268] = array(
  * Obligera tous les auteurs à se reconnecter !
  **/
 function supprimer_toutes_sessions() {
-	spip_log("supprimer sessions auteur");
+	spip_log('supprimer sessions auteur');
 	if ($dir = opendir(_DIR_SESSIONS)) {
 		while (($f = readdir($dir)) !== false) {
 			spip_unlink(_DIR_SESSIONS . $f);

@@ -1,4 +1,5 @@
 <?php
+
 /***************************************************************************\
  *  SPIP, Système de publication pour l'internet                           *
  *                                                                         *
@@ -62,37 +63,39 @@ function exec_rechercher_args($id, $type, $exclus, $rac, $do) {
 		$do = 'aff';
 	}
 
-	$points = $rub = array();
+	$points = $rub = [];
 
-	$where = preg_split(",\s+,", $type);
+	$where = preg_split(',\s+,', $type);
 	if ($where) {
 		foreach ($where as $k => $v) {
-			$where[$k] = "'%" . substr(str_replace("%", "\%", sql_quote($v, '', 'string')), 1, -1) . "%'";
+			$where[$k] = "'%" . substr(str_replace('%', '\%', sql_quote($v, '', 'string')), 1, -1) . "%'";
 		}
-		$where_titre = ("(titre LIKE " . join(" AND titre LIKE ", $where) . ")");
-		$where_desc = ("(descriptif LIKE " . join(" AND descriptif LIKE ", $where) . ")");
-		$where_id = ("(id_rubrique = " . intval($type) . ")");
+		$where_titre = ('(titre LIKE ' . join(' AND titre LIKE ', $where) . ')');
+		$where_desc = ('(descriptif LIKE ' . join(' AND descriptif LIKE ', $where) . ')');
+		$where_id = ('(id_rubrique = ' . intval($type) . ')');
 
 		if ($exclus) {
 			include_spip('inc/rubriques');
-			$where_exclus = " AND " . sql_in('id_rubrique', calcul_branche_in($exclus), 'NOT');
+			$where_exclus = ' AND ' . sql_in('id_rubrique', calcul_branche_in($exclus), 'NOT');
 		} else {
 			$where_exclus = '';
 		}
 
-		foreach (array(
+		foreach (
+			[
 			3 => $where_titre,
 			2 => $where_desc,
 			1 => $where_id,
-		) as $point => $recherche) {
-			$res = sql_select("id_rubrique, id_parent, titre", "spip_rubriques", "$recherche$where_exclus");
+			] as $point => $recherche
+		) {
+			$res = sql_select('id_rubrique, id_parent, titre', 'spip_rubriques', "$recherche$where_exclus");
 			while ($row = sql_fetch($res)) {
-				$id_rubrique = $row["id_rubrique"];
+				$id_rubrique = $row['id_rubrique'];
 				if (!isset($rub[$id_rubrique])) {
-					$rub[$id_rubrique] = array();
+					$rub[$id_rubrique] = [];
 				}
-				$rub[$id_rubrique]["titre"] = typo($row["titre"]);
-				$rub[$id_rubrique]["id_parent"] = $row["id_parent"];
+				$rub[$id_rubrique]['titre'] = typo($row['titre']);
+				$rub[$id_rubrique]['id_parent'] = $row['id_parent'];
 				if (!isset($points[$id_rubrique])) {
 					$points[$id_rubrique] = 0;
 				}
@@ -105,7 +108,7 @@ function exec_rechercher_args($id, $type, $exclus, $rac, $do) {
 		arsort($points);
 		$style = " style='background-image: url(" . chemin_image('secteur-12.png') . ")'";
 		foreach ($rub as $k => $v) {
-			$rub[$k]['atts'] = ($v["id_parent"] ? $style : '')
+			$rub[$k]['atts'] = ($v['id_parent'] ? $style : '')
 				. " class='petite-rubrique'";
 		}
 	}
@@ -136,7 +139,7 @@ function proposer_item($ids, $titles, $rac, $type, $do) {
 	if (!$ids) {
 		return "<br /><br /><div style='padding: 5px; color: red;'><b>"
 		. spip_htmlentities($type)
-		. "</b> :  " . _T('avis_aucun_resultat') . "</div>";
+		. '</b> :  ' . _T('avis_aucun_resultat') . '</div>';
 	}
 
 	$ret = '';
@@ -147,20 +150,22 @@ function proposer_item($ids, $titles, $rac, $type, $do) {
 	$ondbClick = "$do(this.firstChild.firstChild.nodeValue,this.firstChild.title,'selection_rubrique', 'id_parent');";
 
 	foreach ($ids as $id => $bof) {
-
-		$titre = strtr(str_replace("'", "&#8217;", str_replace('"', "&#34;", textebrut($titles[$id]["titre"]))), "\n\r",
-			"  ");
+		$titre = strtr(
+			str_replace("'", '&#8217;', str_replace('"', '&#34;', textebrut($titles[$id]['titre']))),
+			"\n\r",
+			'  '
+		);
 
 		$ret .= "<div class='highlight off'\nonclick=\"changerhighlight(this); "
 			. $onClick
 			. "\"\nondblclick=\""
 			. $ondbClick
 			. $onClick
-			. " \"><div"
-			. $titles[$id]["atts"]
+			. ' "><div'
+			. $titles[$id]['atts']
 			. " title='$id'>&nbsp; "
 			. $titre
-			. "</div></div>";
+			. '</div></div>';
 	}
 
 	return $ret;

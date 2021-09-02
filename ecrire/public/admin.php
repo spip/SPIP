@@ -53,7 +53,8 @@ function affiche_boutons_admin($contenu) {
 	// Inserer la balise #FORMULAIRE_ADMIN, en float
 	$boutons_admin = inclure_balise_dynamique(
 		balise_FORMULAIRE_ADMIN_dyn('spip-admin-float'),
-		false);
+		false
+	);
 
 	($pos = strripos($contenu, '</body>'))
 	|| ($pos = strripos($contenu, '</html>'))

@@ -52,18 +52,18 @@ function install_etape_ldap4_dist() {
 			: $GLOBALS['liste_des_statuts']['info_redacteurs'];
 
 
-		$res = install_propager(array('adresse_ldap', 'port_ldap', 'login_ldap', 'pass_ldap', 'protocole_ldap', 'tls_ldap'))
+		$res = install_propager(['adresse_ldap', 'port_ldap', 'login_ldap', 'pass_ldap', 'protocole_ldap', 'tls_ldap'])
 			. "<input type='hidden' name='etape' value='ldap5' />"
 			. "<input type='hidden' name='base_ldap' value='" . spip_htmlentities($base_ldap) . "' />"
 			. fieldset(
 				_T('info_statut_utilisateurs_1'),
-				array(
-					'statut_ldap' => array(
+				[
+					'statut_ldap' => [
 						'label' => _T('info_statut_utilisateurs_2') . '<br />',
 						'valeur' => $statut_ldap,
 						'alternatives' => $statuts
-					)
-				)
+					]
+				]
 			)
 			. install_ldap_correspondances()
 			. bouton_suivant();
@@ -76,13 +76,13 @@ function install_etape_ldap4_dist() {
 
 // https://code.spip.net/@liste_statuts_ldap
 function liste_statuts_ldap() {
-	$recom = array(
+	$recom = [
 		'info_administrateurs' => ('<b>' . _T('info_administrateur_1') . '</b> ' . _T('info_administrateur_2') . '<br />'),
 		'info_redacteurs' => ('<b>' . _T('info_redacteur_1') . '</b> ' . _T('info_redacteur_2') . '<br />'),
 		'info_visiteurs' => ('<b>' . _T('info_visiteur_1') . '</b> ' . _T('info_visiteur_2') . '<br />')
-	);
+	];
 
-	$res = array();
+	$res = [];
 	foreach ($GLOBALS['liste_des_statuts'] as $k => $v) {
 		if (isset($recom[$k])) {
 			$res[$v] = $recom[$k];
@@ -93,14 +93,14 @@ function liste_statuts_ldap() {
 }
 
 function install_ldap_correspondances() {
-	$champs = array();
-	foreach (is_array($GLOBALS['ldap_attributes']) ? $GLOBALS['ldap_attributes'] : array() as $champ => $v) {
+	$champs = [];
+	foreach (is_array($GLOBALS['ldap_attributes']) ? $GLOBALS['ldap_attributes'] : [] as $champ => $v) {
 		$nom = 'ldap_' . $champ;
 		$val = is_array($v) ? join(',', $v) : strval($v);
-		$champs[$nom] = array(
-			'label' => _T('ldap_correspondance', array('champ' => "<tt>$champ</tt>")) . '<br />',
+		$champs[$nom] = [
+			'label' => _T('ldap_correspondance', ['champ' => "<tt>$champ</tt>"]) . '<br />',
 			'valeur' => $val
-		);
+		];
 	}
 
 	return !$champs ?

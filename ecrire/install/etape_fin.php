@@ -63,7 +63,8 @@ function install_etape_fin_dist() {
 }
 
 function install_verifier_htaccess() {
-	if (verifier_htaccess(_DIR_TMP, true)
+	if (
+		verifier_htaccess(_DIR_TMP, true)
 		and verifier_htaccess(_DIR_CONNECT, true)
 	) {
 		return '';
@@ -73,11 +74,11 @@ function install_verifier_htaccess() {
 
 	$averti = _T(
 		'htaccess_a_simuler',
-		array(
+		[
 			'htaccess' => '<tt>' . _ACCESS_FILE_NAME . '</tt>',
 			'constantes' => '<tt>_DIR_TMP &amp; _DIR_CONNECT</tt>',
 			'document_root' => '<tt>' . $_SERVER['DOCUMENT_ROOT'] . '</tt>'
-		)
+		]
 	);
 
 	return "<div class='error'><h3>$titre</h3><p>$averti</p></div>";

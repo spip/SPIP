@@ -52,10 +52,10 @@ function inc_auth_dist() {
 	// Renvoyer le nom fautif et une URL de remise a zero
 
 	if (spip_connect()) {
-		return array(
+		return [
 			'login' => $GLOBALS['connect_login'],
 			'site' => generer_url_public('', 'action=logout&amp;logout=prive')
-		);
+		];
 	}
 
 	$n = intval(sql_errno());
@@ -97,7 +97,7 @@ function auth_echec($raison) {
 		$raison = minipres(
 			_T('avis_erreur_connexion'),
 			'<br /><br /><p>'
-			. _T('texte_inc_auth_1', array('auth_login' => $raison['login']))
+			. _T('texte_inc_auth_1', ['auth_login' => $raison['login']])
 			. " <a href='$h'>"
 			. _T('texte_inc_auth_2')
 			. '</a>'
@@ -129,7 +129,8 @@ function auth_mode() {
 	// Session valide en cours ?
 	if (isset($_COOKIE['spip_session'])) {
 		$session = charger_fonction('session', 'inc');
-		if ($id_auteur = $session()
+		if (
+			$id_auteur = $session()
 			or $id_auteur === 0 // reprise sur restauration
 		) {
 			$GLOBALS['auth_can_disconnect'] = true;
@@ -239,7 +240,7 @@ function auth_init_droits($row) {
 	// reinjecter les preferences_auteur apres le reset de spip_session
 	// car utilisees au retour par auth_loger()
 	$r = @unserialize($row['prefs']);
-	$GLOBALS['visiteur_session']['prefs'] = ($r ? $r : array());
+	$GLOBALS['visiteur_session']['prefs'] = ($r ? $r : []);
 	// si prefs pas definies, les definir par defaut
 	if (!isset($GLOBALS['visiteur_session']['prefs']['couleur'])) {
 		$GLOBALS['visiteur_session']['prefs']['couleur'] = 2;
@@ -250,8 +251,8 @@ function auth_init_droits($row) {
 
 	$GLOBALS['visiteur_session'] = pipeline(
 		'preparer_visiteur_session',
-		array('args' => array('row' => $row),
-		'data' => $GLOBALS['visiteur_session'])
+		['args' => ['row' => $row],
+		'data' => $GLOBALS['visiteur_session']]
 	);
 
 	// Etablir les droits selon le codage attendu
@@ -332,11 +333,11 @@ function auth_trace($row, $date = null) {
 	}
 
 	if (abs(strtotime($date) - $connect_quand) >= 60) {
-		sql_updateq('spip_auteurs', array('en_ligne' => $date), 'id_auteur=' . intval($row['id_auteur']));
+		sql_updateq('spip_auteurs', ['en_ligne' => $date], 'id_auteur=' . intval($row['id_auteur']));
 		$row['en_ligne'] = $date;
 	}
 
-	pipeline('trig_auth_trace', array('args' => array('row' => $row, 'date' => $date)));
+	pipeline('trig_auth_trace', ['args' => ['row' => $row, 'date' => $date]]);
 }
 
 
@@ -364,7 +365,8 @@ function auth_trace($row, $date = null) {
 function auth_administrer($fonction, $args, $defaut = false) {
 	$auth_methode = array_shift($args);
 	$auth_methode = $auth_methode ? $auth_methode : 'spip'; // valeur par defaut au cas ou
-	if ($auth = charger_fonction($auth_methode, 'auth', true)
+	if (
+		$auth = charger_fonction($auth_methode, 'auth', true)
 		and function_exists($f = "auth_{$auth_methode}_$fonction")
 	) {
 		$res = call_user_func_array($f, $args);
@@ -373,14 +375,14 @@ function auth_administrer($fonction, $args, $defaut = false) {
 	}
 	$res = pipeline(
 		'auth_administrer',
-		array(
-			'args' => array(
+		[
+			'args' => [
 				'fonction' => $fonction,
 				'methode' => $auth_methode,
 				'args' => $args
-			),
+			],
 			'data' => $res
-		)
+		]
 	);
 	return $res;
 }
@@ -393,7 +395,7 @@ function auth_administrer($fonction, $args, $defaut = false) {
  */
 function auth_formulaire_login($flux) {
 	foreach ($GLOBALS['liste_des_authentifications'] as $methode) {
-		$flux = auth_administrer('formulaire_login', array($methode, $flux), $flux);
+		$flux = auth_administrer('formulaire_login', [$methode, $flux], $flux);
 	}
 
 	return $flux;
@@ -417,7 +419,7 @@ function auth_retrouver_login($login, $serveur = '') {
 	}
 
 	foreach ($GLOBALS['liste_des_authentifications'] as $methode) {
-		if ($auteur = auth_administrer('retrouver_login', array($methode, $login, $serveur))) {
+		if ($auteur = auth_administrer('retrouver_login', [$methode, $login, $serveur])) {
 			return $auteur;
 		}
 	}
@@ -437,24 +439,24 @@ function auth_retrouver_login($login, $serveur = '') {
  * @return array
  */
 function auth_informer_login($login, $serveur = '') {
-	if (!$login
+	if (
+		!$login
 		or !$login_base = auth_retrouver_login($login, $serveur)
 		or !$row = sql_fetsel('*', 'spip_auteurs', 'login=' . sql_quote($login_base, $serveur, 'text'), '', '', '', '', $serveur)
 	) {
-
 		// generer de fausses infos, mais credibles, pour eviter une attaque
 		// https://core.spip.net/issues/1758 + https://core.spip.net/issues/3691
 		include_spip('inc/securiser_action');
 		$fauxalea1 = md5('fauxalea' . secret_du_site() . $login . floor(date('U') / 86400));
 		$fauxalea2 = md5('fauxalea' . secret_du_site() . $login . ceil(date('U') / 86400));
 
-		$row = array(
+		$row = [
 			'login' => $login,
 			'cnx' => '0',
 			'logo' => '',
 			'alea_actuel' => substr_replace($fauxalea1, '.', 24, 0),
 			'alea_futur' => substr_replace($fauxalea2, '.', 24, 0)
-		);
+		];
 
 		// permettre d'autoriser l'envoi de password non crypte lorsque
 		// l'auteur n'est pas (encore) declare dans SPIP, par exemple pour les cas
@@ -468,12 +470,12 @@ function auth_informer_login($login, $serveur = '') {
 	}
 
 	$prefs = @unserialize($row['prefs']);
-	$infos = array(
+	$infos = [
 		'id_auteur' => $row['id_auteur'],
 		'login' => $row['login'],
 		'cnx' => (isset($prefs['cnx']) and $prefs['cnx'] === 'perma') ? '1' : '0',
 		'logo' => recuperer_fond('formulaires/inc-logo_auteur', $row),
-	);
+	];
 
 	// desactiver le hash md5 si pas auteur spip ?
 	if ($row['source'] !== 'spip') {
@@ -482,7 +484,7 @@ function auth_informer_login($login, $serveur = '') {
 	}
 	verifier_visiteur();
 
-	return auth_administrer('informer_login', array($row['source'], $infos, $row, $serveur), $infos);
+	return auth_administrer('informer_login', [$row['source'], $infos, $row, $serveur], $infos);
 }
 
 
@@ -567,7 +569,7 @@ function auth_loger($auteur) {
 
 	sql_updateq(
 		'spip_auteurs',
-		array('prefs' => serialize($p)),
+		['prefs' => serialize($p)],
 		'id_auteur=' . intval($auteur['id_auteur'])
 	);
 
@@ -697,14 +699,14 @@ function auth_modifier_pass($auth_methode, $login, $new_pass, $id_auteur, $serve
 function auth_synchroniser_distant(
 	$auth_methode = true,
 	$id_auteur = 0,
-	$champs = array(),
-	$options = array(),
+	$champs = [],
+	$options = [],
 	$serveur = ''
 ) {
 	$args = func_get_args();
 	if ($auth_methode === true or (isset($options['all']) and $options['all'] == true)) {
 		$options['all'] = true; // ajouter une option all=>true pour chaque auth
-		$args = array(true, $id_auteur, $champs, $options, $serveur);
+		$args = [true, $id_auteur, $champs, $options, $serveur];
 		foreach ($GLOBALS['liste_des_authentifications'] as $methode) {
 			array_shift($args);
 			array_unshift($args, $methode);
@@ -735,7 +737,8 @@ function lire_php_auth($login, $pw, $serveur = '') {
 	$row = sql_fetsel('*', 'spip_auteurs', 'login=' . sql_quote($login, $serveur, 'text'), '', '', '', '', $serveur);
 
 	if (!$row) {
-		if (spip_connect_ldap($serveur)
+		if (
+			spip_connect_ldap($serveur)
 			and $auth_ldap = charger_fonction('ldap', 'auth', true)
 		) {
 			return $auth_ldap($login, $pw, $serveur, true);
@@ -745,7 +748,8 @@ function lire_php_auth($login, $pw, $serveur = '') {
 	}
 	// su pas de source definie
 	// ou auth/xxx introuvable, utiliser 'spip'
-	if (!$auth_methode = $row['source']
+	if (
+		!$auth_methode = $row['source']
 		or !$auth = charger_fonction($auth_methode, 'auth', true)
 	) {
 		$auth = charger_fonction('spip', 'auth', true);

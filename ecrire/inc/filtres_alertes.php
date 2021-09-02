@@ -158,7 +158,7 @@ function balise_ALERTE_FERMER_dist($p) {
  * @return string
  *     HTML de l'alerte
  */
-function message_alerte(string $texte, ?string $titre = null, ?string $class = null, ?string $role = null, ?string $id = null) : string {
+function message_alerte(string $texte, ?string $titre = null, ?string $class = null, ?string $role = null, ?string $id = null): string {
 
 	$message_alerte_ouvrir = chercher_filtre('message_alerte_ouvrir');
 	$message_alerte_fermer = chercher_filtre('message_alerte_fermer');
@@ -196,7 +196,7 @@ function message_alerte(string $texte, ?string $titre = null, ?string $class = n
  * @return string
  *     HTML d'ouverture de l'alerte
  */
-function message_alerte_ouvrir(?string $titre = null, ?string $class = null, ?string $role = null, ?string $id = null) : string {
+function message_alerte_ouvrir(?string $titre = null, ?string $class = null, ?string $role = null, ?string $id = null): string {
 
 	$prive = test_espace_prive();
 
@@ -259,6 +259,6 @@ function message_alerte_ouvrir(?string $titre = null, ?string $class = null, ?st
  * @return string
  *     HTML de fin de l'alerte
  */
-function message_alerte_fermer() : string {
+function message_alerte_fermer(): string {
 	return '</div></div>';
 }

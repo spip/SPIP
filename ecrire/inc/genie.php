@@ -74,20 +74,24 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Sinon, prendra la tâche la plus prioritaire.
  * @return
  **/
-function inc_genie_dist($taches = array()) {
+function inc_genie_dist($taches = []) {
 	include_spip('inc/queue');
 
 	if (_request('exec') == 'job_queue') {
 		return false;
 	}
 
-	$force_jobs = array();
+	$force_jobs = [];
 	// l'ancienne facon de lancer une tache cron immediatement
 	// etait de la passer en parametre a ing_genie_dist
 	// on reroute en ajoutant simplement le job a la queue, ASAP
 	foreach ($taches as $function => $period) {
-		$force_jobs[] = queue_add_job($function, _T('tache_cron_asap', array('function' => $function)),
-			array(time() - abs($period)), "genie/");
+		$force_jobs[] = queue_add_job(
+			$function,
+			_T('tache_cron_asap', ['function' => $function]),
+			[time() - abs($period)],
+			'genie/'
+		);
 	}
 
 	// et on passe la main a la gestion de la queue !
@@ -97,14 +101,14 @@ function inc_genie_dist($taches = array()) {
 
 //
 // Construction de la liste des taches.
-// la cle est la tache, 
+// la cle est la tache,
 // la valeur le temps minimal, en secondes, entre deux memes taches
-// NE PAS METTRE UNE VALEUR INFERIEURE A 30 
+// NE PAS METTRE UNE VALEUR INFERIEURE A 30
 // les serveurs Http n'accordant en general pas plus de 30 secondes
 // a leur sous-processus
 //
 // https://code.spip.net/@taches_generales
-function taches_generales($taches_generales = array()) {
+function taches_generales($taches_generales = []) {
 
 	// verifier que toutes les taches cron sont planifiees
 	// c'est une tache cron !
@@ -118,7 +122,8 @@ function taches_generales($taches_generales = array()) {
 	$taches_generales['optimiser'] = 3600 * 48;
 
 	// nouveautes
-	if (isset($GLOBALS['meta']['adresse_neuf']) and $GLOBALS['meta']['adresse_neuf']
+	if (
+		isset($GLOBALS['meta']['adresse_neuf']) and $GLOBALS['meta']['adresse_neuf']
 		and $GLOBALS['meta']['jours_neuf']
 		and ($GLOBALS['meta']['quoi_de_neuf'] == 'oui')
 	) {
@@ -183,7 +188,7 @@ function genie_queue_watch_dist() {
  * @return void
  */
 function queue_genie_replan_job($function, $period, $last = 0, $time = null, $priority = 0) {
-	static $done = array();
+	static $done = [];
 	if (isset($done[$function])) {
 		return;
 	}
@@ -202,6 +207,13 @@ function queue_genie_replan_job($function, $period, $last = 0, $time = null, $pr
 	// on replanifie un job cron
 	// uniquement si il n'y en a pas deja un avec le meme nom
 	// independament de l'argument
-	queue_add_job($function, _T('tache_cron_secondes', array('function' => $function, 'nb' => $period)), array($last),
-		"genie/", 'function_only', $time, $priority);
+	queue_add_job(
+		$function,
+		_T('tache_cron_secondes', ['function' => $function, 'nb' => $period]),
+		[$last],
+		'genie/',
+		'function_only',
+		$time,
+		$priority
+	);
 }

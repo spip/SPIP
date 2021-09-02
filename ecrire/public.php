@@ -21,17 +21,15 @@
 // par souci de compatiilite).
 
 if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
-
-	echo recuperer_fond($fond, $contexte_inclus, array(), _request('connect'));
-
+	echo recuperer_fond($fond, $contexte_inclus, [], _request('connect'));
 } else {
-
 	$GLOBALS['_INC_PUBLIC'] = 1;
 	define('_PIPELINE_SUFFIX', test_espace_prive() ? '_prive' : '');
 
 	// Faut-il initialiser SPIP ? (oui dans le cas general)
 	if (!defined('_DIR_RESTREINT_ABS')) {
-		if (defined('_DIR_RESTREINT')
+		if (
+			defined('_DIR_RESTREINT')
 			and @file_exists(_ROOT_RESTREINT . 'inc_version.php')
 		) {
 			include_once _ROOT_RESTREINT . 'inc_version.php';
@@ -48,7 +46,8 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 				$fond = (string)$_GET[_SPIP_PAGE];
 
 				// Securite
-				if (strstr($fond, '/')
+				if (
+					strstr($fond, '/')
 					and !(
 						isset($GLOBALS['visiteur_session']) // pour eviter d'evaluer la suite pour les anonymes
 						and include_spip('inc/autoriser')
@@ -73,14 +72,15 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 		}
 	}
 
-	$tableau_des_temps = array();
+	$tableau_des_temps = [];
 
 	// Particularites de certains squelettes
 	if ($fond == 'login') {
 		$forcer_lang = true;
 	}
 
-	if (isset($forcer_lang) and $forcer_lang and ($forcer_lang !== 'non')
+	if (
+		isset($forcer_lang) and $forcer_lang and ($forcer_lang !== 'non')
 		and !_request('action')
 		and $_SERVER['REQUEST_METHOD'] != 'POST'
 	) {
@@ -123,7 +123,7 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 
 	// Content-Type ?
 	if (!isset($page['entetes']['Content-Type'])) {
-		$charset = isset($GLOBALS['meta']['charset']) ? $GLOBALS['meta']['charset'] : "utf-8";
+		$charset = isset($GLOBALS['meta']['charset']) ? $GLOBALS['meta']['charset'] : 'utf-8';
 		$page['entetes']['Content-Type'] = 'text/html; charset=' . $charset;
 		$html = true;
 	} else {
@@ -132,9 +132,9 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 
 	// Tester si on est admin et il y a des choses supplementaires a dire
 	// type tableau pour y mettre des choses au besoin.
-	$debug = ((_request('var_mode') == 'debug') or $tableau_des_temps) ? array(1) : array();
+	$debug = ((_request('var_mode') == 'debug') or $tableau_des_temps) ? [1] : [];
 
-	// affiche-t-on les boutons d'administration ? voir f_admin() 
+	// affiche-t-on les boutons d'administration ? voir f_admin()
 	$affiche_boutons_admin = ($html and (
 			(isset($_COOKIE['spip_admin']) and (!isset($flag_preserver) or !$flag_preserver))
 			or ($debug and include_spip('inc/autoriser') and autoriser('debug'))
@@ -154,7 +154,7 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 
 
 	// eval $page et affecte $res
-	include _ROOT_RESTREINT . "public/evaluer_page.php";
+	include _ROOT_RESTREINT . 'public/evaluer_page.php';
 	envoyer_entetes($page['entetes']);
 	if ($res === false) {
 		include_spip('inc/autoriser');
@@ -164,7 +164,7 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 				. highlight_string($page['codephp'], true)
 				. "\n<hr />\n";
 		}
-		$msg = array($err);
+		$msg = [$err];
 		erreur_squelette($msg);
 	}
 
@@ -180,7 +180,7 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 	}
 	// l'affichage de la page a pu lever des erreurs (inclusion manquante)
 	// il faut tester a nouveau
-	$debug = ((_request('var_mode') == 'debug') or $tableau_des_temps) ? array(1) : array();
+	$debug = ((_request('var_mode') == 'debug') or $tableau_des_temps) ? [1] : [];
 
 	// Appel au debusqueur en cas d'erreurs ou de demande de trace
 	// at last
@@ -189,12 +189,12 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 		if ($html and ($affiche_boutons_admin or $debug)) {
 			$var_mode_affiche = _request('var_mode_affiche');
 			$var_mode_objet = _request('var_mode_objet');
-			$GLOBALS['debug_objets'][$var_mode_affiche][$var_mode_objet . 'tout'] = ($var_mode_affiche == 'validation' ? $page['texte'] : "");
+			$GLOBALS['debug_objets'][$var_mode_affiche][$var_mode_objet . 'tout'] = ($var_mode_affiche == 'validation' ? $page['texte'] : '');
 			echo erreur_squelette(false);
 		}
 	} else {
-
-		if (isset($GLOBALS['meta']['date_prochain_postdate'])
+		if (
+			isset($GLOBALS['meta']['date_prochain_postdate'])
 			and $GLOBALS['meta']['date_prochain_postdate'] <= time()
 		) {
 			include_spip('inc/rubriques');

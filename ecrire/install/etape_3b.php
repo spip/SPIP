@@ -37,7 +37,7 @@ function install_etape_3b_dist() {
 		$echec = ($pass != $pass_verif) ?
 			_T('info_passes_identiques')
 			: ((strlen($pass) < _PASS_LONGUEUR_MINI) ?
-				_T('info_passe_trop_court_car_pluriel', array('nb' => _PASS_LONGUEUR_MINI))
+				_T('info_passe_trop_court_car_pluriel', ['nb' => _PASS_LONGUEUR_MINI])
 				: ((strlen($login) < _LOGIN_TROP_COURT) ?
 					_T('info_login_trop_court')
 					: ''));
@@ -96,7 +96,7 @@ function install_etape_3b_dist() {
 
 		$id_auteur = sql_getfetsel('id_auteur', 'spip_auteurs', 'login=' . sql_quote($login));
 		if ($id_auteur !== null) {
-			sql_updateq('spip_auteurs', array(
+			sql_updateq('spip_auteurs', [
 				'nom' => $nom,
 				'email' => $email,
 				'login' => $login,
@@ -105,9 +105,9 @@ function install_etape_3b_dist() {
 				'alea_futur' => $alea_futur,
 				'htpass' => $htpass,
 				'statut' => '0minirezo'
-			), "id_auteur=$id_auteur");
+			], "id_auteur=$id_auteur");
 		} else {
-			$id_auteur = sql_insertq('spip_auteurs', array(
+			$id_auteur = sql_insertq('spip_auteurs', [
 				'nom' => $nom,
 				'email' => $email,
 				'login' => $login,
@@ -116,10 +116,10 @@ function install_etape_3b_dist() {
 				'alea_actuel' => $alea_actuel,
 				'alea_futur' => $alea_futur,
 				'statut' => '0minirezo'
-			));
+			]);
 		}
 		// le passer webmestre separrement du reste, au cas ou l'alter n'aurait pas fonctionne
-		@sql_updateq('spip_auteurs', array('webmestre' => 'oui'), "id_auteur=$id_auteur");
+		@sql_updateq('spip_auteurs', ['webmestre' => 'oui'], "id_auteur=$id_auteur");
 
 		// inserer email comme email webmaster principal
 		// (sauf s'il est vide: cas de la re-installation)
@@ -130,7 +130,8 @@ function install_etape_3b_dist() {
 		// Connecter directement celui qui vient de (re)donner son login
 		// mais sans cookie d'admin ni connexion longue
 		include_spip('inc/auth');
-		if (!$auteur = auth_identifier_login($login, $pass)
+		if (
+			!$auteur = auth_identifier_login($login, $pass)
 			or !auth_loger($auteur, true)
 		) {
 			spip_log("login automatique impossible $auth_spip $session" . count($row));

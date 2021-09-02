@@ -23,11 +23,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 if (!defined('_SPIP_SELECT_RUBRIQUES')) {
 	/**
-	 * @var int Nombre de rubriques maximum du sélecteur de rubriques. 
+	 * @var int Nombre de rubriques maximum du sélecteur de rubriques.
 	 * Au delà, on bascule sur un sélecteur ajax.
-	 * mettre 100000 pour desactiver ajax 
+	 * mettre 100000 pour desactiver ajax
 	 */
-	define('_SPIP_SELECT_RUBRIQUES', 20); 
+	define('_SPIP_SELECT_RUBRIQUES', 20);
 }
 
 /**
@@ -62,7 +62,8 @@ function inc_chercher_rubrique_dist($id_rubrique, $type, $restreint, $idem = 0, 
 	// Mode sans Ajax :
 	// - soit parce que le cookie ajax n'est pas la
 	// - soit parce qu'il y a peu de rubriques
-	if (_SPIP_AJAX < 1
+	if (
+		_SPIP_AJAX < 1
 		or $type == 'breve'
 		or sql_countsel('spip_rubriques') < _SPIP_SELECT_RUBRIQUES
 	) {
@@ -70,7 +71,6 @@ function inc_chercher_rubrique_dist($id_rubrique, $type, $restreint, $idem = 0, 
 	} else {
 		return selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem, $do);
 	}
-
 }
 
 // compatibilite pour extensions qui utilisaient l'ancien nom
@@ -90,14 +90,14 @@ function style_menu_rubriques($i) {
 	$espace = '';
 	$style = '';
 	for ($count = 1; $count <= $i; $count++) {
-		$espace .= "&nbsp;&nbsp;&nbsp;&nbsp;";
+		$espace .= '&nbsp;&nbsp;&nbsp;&nbsp;';
 	}
 	if ($i == 1) {
-		$espace = "";
+		$espace = '';
 	}
 	$class = "niveau_$i";
 
-	return array($class, $style, $espace);
+	return [$class, $style, $espace];
 }
 
 /**
@@ -124,7 +124,8 @@ function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $excl
 	static $decalage_secteur;
 
 	// Si on a demande l'exclusion ne pas descendre dans la rubrique courante
-	if ($exclus > 0
+	if (
+		$exclus > 0
 		and $root == $exclus
 	) {
 		return '';
@@ -138,13 +139,12 @@ function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $excl
 	// le style en fonction de la profondeur
 	list($class, $style, $espace) = style_menu_rubriques($niv);
 
-	$class .= " selec_rub";
+	$class .= ' selec_rub';
 
 	// creer l'<option> pour la rubrique $root
 
-	if (isset($data[$root])) # pas de racine sauf pour les rubriques
-	{
-		$r = "<option$selected value='$root' class='$class' style='$style'>$espace"
+	if (isset($data[$root])) { # pas de racine sauf pour les rubriques
+	$r = "<option$selected value='$root' class='$class' style='$style'>$espace"
 			. $data[$root]
 			. '</option>' . "\n";
 	} else {
@@ -155,8 +155,16 @@ function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $excl
 	$sous = '';
 	if (isset($enfants[$root])) {
 		foreach ($enfants[$root] as $sousrub) {
-			$sous .= sous_menu_rubriques($id_rubrique, $sousrub,
-				$niv + 1, $data, $enfants, $exclus, $restreint, $type);
+			$sous .= sous_menu_rubriques(
+				$id_rubrique,
+				$sousrub,
+				$niv + 1,
+				$data,
+				$enfants,
+				$exclus,
+				$restreint,
+				$type
+			);
 		}
 	}
 
@@ -187,7 +195,7 @@ function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $excl
  *     Code HTML du sélecteur
  **/
 function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem = 0) {
-	$data = array();
+	$data = [];
 	if ($type == 'rubrique' and autoriser('publierdans', 'rubrique', 0)) {
 		$data[0] = _T('info_racine_site');
 	}
@@ -203,14 +211,20 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem = 0) {
 	//
 
 	include_spip('base/abstract_sql');
-	$q = sql_select("id_rubrique, id_parent, titre, statut, lang, langue_choisie", "spip_rubriques",
-		($type == 'breve' ? ' id_parent=0 ' : ''), '', "0+titre,titre");
+	$q = sql_select(
+		'id_rubrique, id_parent, titre, statut, lang, langue_choisie',
+		'spip_rubriques',
+		($type == 'breve' ? ' id_parent=0 ' : ''),
+		'',
+		'0+titre,titre'
+	);
 	while ($r = sql_fetch($q)) {
 		if (autoriser('voir', 'rubrique', $r['id_rubrique'])) {
 			// titre largeur maxi a 50
-			$titre = couper(supprimer_tags(typo($r['titre'])) . " ", 50);
-			if ($GLOBALS['meta']['multi_rubriques'] == 'oui'
-				and ($r['langue_choisie'] == "oui" or $r['id_parent'] == 0)
+			$titre = couper(supprimer_tags(typo($r['titre'])) . ' ', 50);
+			if (
+				$GLOBALS['meta']['multi_rubriques'] == 'oui'
+				and ($r['langue_choisie'] == 'oui' or $r['id_parent'] == 0)
 			) {
 				$titre .= ' [' . traduire_nom_langue($r['lang']) . ']';
 			}
@@ -225,9 +239,10 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem = 0) {
 	// si une seule rubrique comme choix possible,
 	// inutile de mettre le selecteur sur un choix vide par defaut
 	// sauf si le selecteur s'adresse a une rubrique puisque on peut la mettre a la racine dans ce cas
-	if (count($data) == 2
+	if (
+		count($data) == 2
 		and isset($data[0])
-		and !in_array($type, array('auteur', 'rubrique'))
+		and !in_array($type, ['auteur', 'rubrique'])
 		and !$id_rubrique
 	) {
 		unset($data[0]);
@@ -240,7 +255,7 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem = 0) {
 	if (preg_match(',^<option[^<>]*value=.(\d*).[^<>]*>([^<]*)</option>$,', $opt, $r)) {
 		$r = "<input$att type='hidden' value='" . $r[1] . "' />" . $r[2];
 	} else {
-		$r = "<select" . $att . " size='1'>\n$opt</select>\n";
+		$r = '<select' . $att . " size='1'>\n$opt</select>\n";
 	}
 
 	# message pour neuneus (a supprimer ?)
@@ -282,7 +297,7 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem = 0) {
 function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem = 0, $do = 'aff') {
 
 	if ($id_rubrique) {
-		$titre = sql_getfetsel("titre", "spip_rubriques", "id_rubrique=" . intval($id_rubrique));
+		$titre = sql_getfetsel('titre', 'spip_rubriques', 'id_rubrique=' . intval($id_rubrique));
 	} else {
 		if ($type == 'auteur') {
 			$titre = '&nbsp;';
@@ -296,7 +311,7 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem = 0, $do
 
 	$url = generer_url_ecrire('selectionner', "id=$id_rubrique&type=$type&do=$do"
 		. (!$idem ? '' : "&exclus=$idem")
-		. ($restreint ? "" : "&racine=oui")
+		. ($restreint ? '' : '&racine=oui')
 		. (isset($GLOBALS['var_profile']) ? '&var_profile=1' : ''));
 
 
@@ -350,7 +365,7 @@ function construire_selecteur($url, $js, $idom, $name, $init = '', $id = 0) {
 		. "'\nstyle='visibility: hidden;' alt='*' />"
 		. "<input id='titreparent' name='titreparent' class='text'"
 		. $init
-		. " />"
+		. ' />'
 		. "<input type='hidden' id='$name' name='$name' value='"
 		. $id
 		. "' /><div class='nettoyeur'></div></div><div id='"

@@ -29,11 +29,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function genie_mise_a_jour_dist($t) {
 	include_spip('inc/meta');
 	$maj = info_maj('spip', 'SPIP', $GLOBALS['spip_version_branche']);
-	ecrire_meta('info_maj_spip', $maj ? ($GLOBALS['spip_version_branche'] . "|$maj") : "", 'non');
+	ecrire_meta('info_maj_spip', $maj ? ($GLOBALS['spip_version_branche'] . "|$maj") : '', 'non');
 
 	mise_a_jour_ecran_securite();
 
-	spip_log("Verification version SPIP : " . ($maj ? $maj : "version a jour"), "verifie_maj");
+	spip_log('Verification version SPIP : ' . ($maj ? $maj : 'version a jour'), 'verifie_maj');
 
 	return 1;
 }
@@ -56,8 +56,9 @@ function mise_a_jour_ecran_securite() {
 	return;
 
 	// si l'ecran n'est pas deja present ou pas updatable, sortir
-	if (!_URL_ECRAN_SECURITE
-		or !file_exists($filename = _DIR_ETC . "ecran_securite.php")
+	if (
+		!_URL_ECRAN_SECURITE
+		or !file_exists($filename = _DIR_ETC . 'ecran_securite.php')
 		or !is_writable($filename)
 		or !$last_modified = filemtime($filename)
 		or !$md5 = md5_file($filename)
@@ -66,26 +67,26 @@ function mise_a_jour_ecran_securite() {
 	}
 
 	include_spip('inc/distant');
-	$tmp_file = _DIR_TMP . "ecran_securite.php";
-	$url = parametre_url(_URL_ECRAN_SECURITE, "md5", $md5);
-	$url = parametre_url($url, "vspip", $GLOBALS['spip_version_branche']);
-	$res = recuperer_url($url, array(
+	$tmp_file = _DIR_TMP . 'ecran_securite.php';
+	$url = parametre_url(_URL_ECRAN_SECURITE, 'md5', $md5);
+	$url = parametre_url($url, 'vspip', $GLOBALS['spip_version_branche']);
+	$res = recuperer_url($url, [
 		'if_modified_since' => $last_modified,
 		'file' => $tmp_file
-	));
+	]);
 
 	// si il y a une version plus recente que l'on a recu correctement
-	if ($res['status'] == 200
+	if (
+		$res['status'] == 200
 		and $res['length']
 		and $tmp_file = $res['file']
 	) {
-
 		if ($md5 !== md5_file($tmp_file)) {
 			// on essaye de l'inclure pour verifier que ca ne fait pas erreur fatale
 			include_once $tmp_file;
 			// ok, on le copie a la place de l'ecran existant
 			// en backupant l'ecran avant, au cas ou
-			@copy($filename, $filename . "-bck-" . date('Y-m-d-His', $last_modified));
+			@copy($filename, $filename . '-bck-' . date('Y-m-d-His', $last_modified));
 			@rename($tmp_file, $filename);
 		} else {
 			@unlink($tmp_file);
@@ -118,7 +119,7 @@ function info_maj($dir, $file, $version) {
 
 	// reperer toutes les versions de numero majeur superieur ou egal
 	// (a revoir quand on arrivera a SPIP V10 ...)
-	$p = substr("0123456789", intval($maj));
+	$p = substr('0123456789', intval($maj));
 	$p = ',/' . $file . '\D+([' . $p . ']+)\D+(\d+)(\D+(\d+))?.*?[.]zip",i';
 	preg_match_all($p, $page, $m, PREG_SET_ORDER);
 	$page = $page_majeure = '';
@@ -132,14 +133,16 @@ function info_maj($dir, $file, $version) {
 		$branche_maj = $maj2 . '.' . $min2;
 		$version_maj = $maj2 . '.' . $min2 . '.' . $rev2;
 		// d'abord les mises à jour de la même branche
-		if ((spip_version_compare($version, $version_maj, '<'))
+		if (
+			(spip_version_compare($version, $version_maj, '<'))
 			and (spip_version_compare($page, $version_maj, '<'))
 			and spip_version_compare($branche, $branche_maj, '=')
 		) {
 			$page = $version_maj;
 		}
 		// puis les mises à jours majeures
-		if ((spip_version_compare($version, $version_maj, '<'))
+		if (
+			(spip_version_compare($version, $version_maj, '<'))
 			and (spip_version_compare($page, $version_maj, '<'))
 			and spip_version_compare($branche, $branche_maj, '<')
 		) {
@@ -147,11 +150,11 @@ function info_maj($dir, $file, $version) {
 		}
 	}
 	if (!$page and !$page_majeure) {
-		return "";
+		return '';
 	}
 
-	$message = $page ? _T('nouvelle_version_spip', array('version' => $page)) . ($page_majeure ? ' | ' : '') : '';
-	$message .= $page_majeure ? _T('nouvelle_version_spip_majeure', array('version' => $page_majeure)) : '';
+	$message = $page ? _T('nouvelle_version_spip', ['version' => $page]) . ($page_majeure ? ' | ' : '') : '';
+	$message .= $page_majeure ? _T('nouvelle_version_spip_majeure', ['version' => $page_majeure]) : '';
 
 	return "<a class='info_maj_spip' href='https://www.spip.net/fr_update' title='$page'>" . $message . '</a>';
 }
@@ -184,7 +187,7 @@ function info_maj_cache($nom, $dir, $page = '') {
 	$url = _VERSIONS_SERVEUR . $dir . '/' . _VERSIONS_LISTE;
 	$a = file_exists($nom) ? filemtime($nom) : '';
 	include_spip('inc/distant');
-	$res = recuperer_url_cache($url, array('if_modified_since' => $a));
+	$res = recuperer_url_cache($url, ['if_modified_since' => $a]);
 	// Si rien de neuf (ou inaccessible), garder l'ancienne
 	if ($res) {
 		$page = $res['page'] ? $res['page'] : $page;

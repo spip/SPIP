@@ -20,11 +20,11 @@ function lister_traductions($id_trad, $objet) {
 
 	$select = "$primary as id,lang";
 	$where = 'id_trad=' . intval($id_trad);
-	$trouver_table = charger_fonction('trouver_table','base');
+	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table($table_objet_sql);
 	if (isset($desc['field']['statut'])) {
 		$select .= ',statut';
-		$where .= ' AND statut!='.sql_quote('poubelle');
+		$where .= ' AND statut!=' . sql_quote('poubelle');
 	}
 
 	$rows = sql_allfetsel($select, $table_objet_sql, $where);

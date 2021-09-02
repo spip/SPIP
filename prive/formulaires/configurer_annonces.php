@@ -15,8 +15,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function formulaires_configurer_annonces_charger_dist() {
-	$valeurs = array();
-	foreach (array(
+	$valeurs = [];
+	foreach (
+		[
 		'suivi_edito',
 		'adresse_suivi',
 		'adresse_suivi_inscription',
@@ -24,7 +25,8 @@ function formulaires_configurer_annonces_charger_dist() {
 		'adresse_neuf',
 		'jours_neuf',
 		'email_envoi',
-	) as $m) {
+		] as $m
+	) {
 		$valeurs[$m] = $GLOBALS['meta'][$m];
 	}
 
@@ -32,7 +34,7 @@ function formulaires_configurer_annonces_charger_dist() {
 }
 
 function formulaires_configurer_annonces_verifier_dist() {
-	$erreurs = array();
+	$erreurs = [];
 	if (_request('suivi_edito') == 'oui') {
 		if (!$email = _request('adresse_suivi')) {
 			$erreurs['adresse_suivi'] = _T('info_obligatoire');
@@ -61,23 +63,27 @@ function formulaires_configurer_annonces_verifier_dist() {
 }
 
 function formulaires_configurer_annonces_traiter_dist() {
-	$res = array('editable' => true);
-	foreach (array(
+	$res = ['editable' => true];
+	foreach (
+		[
 		'suivi_edito',
 		'quoi_de_neuf',
-	) as $m) {
+		] as $m
+	) {
 		if (!is_null($v = _request($m))) {
 			ecrire_meta($m, $v == 'oui' ? 'oui' : 'non');
 		}
 	}
 
-	foreach (array(
+	foreach (
+		[
 		'adresse_suivi',
 		'adresse_suivi_inscription',
 		'adresse_neuf',
 		'jours_neuf',
 		'email_envoi',
-	) as $m) {
+		] as $m
+	) {
 		if (!is_null($v = _request($m))) {
 			ecrire_meta($m, $v);
 		}
@@ -87,9 +93,9 @@ function formulaires_configurer_annonces_traiter_dist() {
 	// provoquer l'envoi des nouveautes en supprimant le fichier lock
 	if (_request('envoi_now')) {
 		effacer_meta('dernier_envoi_neuf');
-		$id_job = job_queue_add('mail', 'Test Envoi des nouveautes', array(0), 'genie/');
+		$id_job = job_queue_add('mail', 'Test Envoi des nouveautes', [0], 'genie/');
 		include_spip('inc/queue');
-		queue_schedule(array($id_job));
+		queue_schedule([$id_job]);
 		$res['message_ok'] .= '<br />' . _T('info_liste_nouveautes_envoyee');
 	}
 

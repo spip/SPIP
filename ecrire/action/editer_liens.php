@@ -50,13 +50,14 @@ function objet_associable($objet) {
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$table_sql = table_objet_sql($objet);
 
-	$l = "";
-	if ($primary = id_table_objet($objet)
-		and $trouver_table($l = $table_sql . "_liens")
+	$l = '';
+	if (
+		$primary = id_table_objet($objet)
+		and $trouver_table($l = $table_sql . '_liens')
 		and !preg_match(',[^\w],', $primary)
 		and !preg_match(',[^\w],', $l)
 	) {
-		return array($primary, $l);
+		return [$primary, $l];
 	}
 
 	spip_log("Objet $objet non associable : ne dispose pas d'une cle primaire $primary OU d'une table liens $l");
@@ -211,7 +212,7 @@ function objet_trouver_liens($objets_source, $objets_lies, $cond = null) {
  * @return int
  */
 function objet_optimiser_liens($objets_source, $objets_lies) {
-	spip_log("objet_optimiser_liens : ".json_encode($objets_source) . ', ' . json_encode($objets_lies), 'genie'._LOG_DEBUG);
+	spip_log('objet_optimiser_liens : ' . json_encode($objets_source) . ', ' . json_encode($objets_lies), 'genie' . _LOG_DEBUG);
 	return objet_traiter_liaisons('lien_optimise', $objets_source, $objets_lies);
 }
 
@@ -242,9 +243,9 @@ function objet_dupliquer_liens($objet, $id_source, $id_cible, $types = null, $ex
 		) {
 			if (objet_associable($infos['type'])) {
 				$liens = (($infos['type'] == $objet) ?
-					objet_trouver_liens(array($objet => $id_source), '*')
+					objet_trouver_liens([$objet => $id_source], '*')
 					:
-					objet_trouver_liens(array($infos['type'] => '*'), array($objet => $id_source)));
+					objet_trouver_liens([$infos['type'] => '*'], [$objet => $id_source]));
 				foreach ($liens as $lien) {
 					$n++;
 					if ($infos['type'] == $objet) {
@@ -252,10 +253,10 @@ function objet_dupliquer_liens($objet, $id_source, $id_cible, $types = null, $ex
 							(is_null($types) or in_array($lien['objet'], $types))
 							and (is_null($exclure_types) or !in_array($lien['objet'], $exclure_types))
 						) {
-							objet_associer(array($objet => $id_cible), array($lien['objet'] => $lien[$lien['objet']]), $lien);
+							objet_associer([$objet => $id_cible], [$lien['objet'] => $lien[$lien['objet']]], $lien);
 						}
 					} else {
-						objet_associer(array($infos['type'] => $lien[$infos['type']]), array($objet => $id_cible), $lien);
+						objet_associer([$infos['type'] => $lien[$infos['type']]], [$objet => $id_cible], $lien);
 					}
 				}
 			}
@@ -306,7 +307,7 @@ function objet_dupliquer_liens($objet, $id_source, $id_cible, $types = null, $ex
 function objet_traiter_liaisons($operation, $objets_source, $objets_lies, $set = null) {
 	// accepter une syntaxe minimale pour supprimer tous les liens
 	if ($objets_lies == '*') {
-		$objets_lies = array('*' => '*');
+		$objets_lies = ['*' => '*'];
 	}
 	$modifs = 0; // compter le nombre de modifications
 	$echec = null;
@@ -314,8 +315,8 @@ function objet_traiter_liaisons($operation, $objets_source, $objets_lies, $set =
 		if ($a = objet_associable($objet)) {
 			list($primary, $l) = $a;
 			if (!is_array($ids)) {
-				$ids = array($ids);
-			} elseif (reset($ids) == "NOT") {
+				$ids = [$ids];
+			} elseif (reset($ids) == 'NOT') {
 				// si on demande un array('NOT',...) => recuperer la liste d'ids correspondants
 				$where = lien_where($primary, $ids, '*', '*');
 				$ids = sql_allfetsel($primary, $l, $where);
@@ -367,12 +368,12 @@ function lien_insert($objet_source, $primary, $table_lien, $id, $objets, $qualif
 	$ins = 0;
 	$echec = null;
 	if (is_null($qualif)) {
-		$qualif = array();
+		$qualif = [];
 	}
 
 	foreach ($objets as $objet => $id_objets) {
 		if (!is_array($id_objets)) {
-			$id_objets = array($id_objets);
+			$id_objets = [$id_objets];
 		}
 
 		// role, colonne, where par défaut
@@ -382,33 +383,38 @@ function lien_insert($objet_source, $primary, $table_lien, $id, $objets, $qualif
 		foreach ($id_objets as $id_objet) {
 			$objet = (($objet == '*') ? $objet : objet_type($objet)); # securite
 
-			$insertions = array(
+			$insertions = [
 				'id_objet' => $id_objet,
 				'objet' => $objet,
 				$primary => $id
-			);
+			];
 			// rôle en plus s'il est défini
 			if ($role) {
-				$insertions += array(
+				$insertions += [
 					$colonne_role => $role
-				);
+				];
 			}
 
 			if (lien_triables($table_lien)) {
-				$where = lien_where($primary, $id, $objet, $id_objet);
-				// si il y a deja un lien pour ce couple (avec un autre role?) on reprend le meme rang si non nul
-				if (!$rang = intval(sql_getfetsel('rang_lien', $table_lien, $where))) {
-					$where = lien_where($primary, '*', $objet, $id_objet);
-					$rang = intval(sql_getfetsel('max(rang_lien)', $table_lien, $where));
-					// si aucun lien n'a de rang, on en introduit pas, on garde zero
-					if ($rang>0) {
-						$rang = intval($rang) + 1;
+				if (isset($qualif['rang_lien'])) {
+					$rang = $qualif['rang_lien'];
+				}
+				else {
+					$where = lien_where($primary, $id, $objet, $id_objet);
+					// si il y a deja un lien pour ce couple (avec un autre role?) on reprend le meme rang si non nul
+					if (!$rang = intval(sql_getfetsel('rang_lien', $table_lien, $where))) {
+						$where = lien_rang_where($table_lien, $primary, $id, $objet, $id_objet);
+						$rang = intval(sql_getfetsel('max(rang_lien)', $table_lien, $where));
+						// si aucun lien n'a de rang, on en introduit pas, on garde zero
+						if ($rang > 0) {
+							$rang = intval($rang) + 1;
+						}
 					}
 				}
 				$insertions['rang_lien'] = $rang;
 			}
 
-			$args = array(
+			$args = [
 				'table_lien' => $table_lien,
 				'objet_source' => $objet_source,
 				'id_objet_source' => $id,
@@ -417,27 +423,31 @@ function lien_insert($objet_source, $primary, $table_lien, $id, $objets, $qualif
 				'role' => $role,
 				'colonne_role' => $colonne_role,
 				'action' => 'insert',
-			);
+			];
 
 			// Envoyer aux plugins
-			$insertions = pipeline('pre_edition_lien',
-				array(
+			$insertions = pipeline(
+				'pre_edition_lien',
+				[
 					'args' => $args,
 					'data' => $insertions
-				)
+				]
 			);
 			$args['id_objet'] = $insertions['id_objet'];
 
 			$where = lien_where($primary, $id, $objet, $id_objet, $cond);
 
-			if (($id_objet = intval($insertions['id_objet']) or in_array($objet, ['site', 'rubrique']))
+			if (
+				($id_objet = intval($insertions['id_objet']) or in_array($objet, ['site', 'rubrique']))
 				and !sql_getfetsel($primary, $table_lien, $where)
 			) {
-
 				if (lien_triables($table_lien) and isset($insertions['rang_lien']) and intval($insertions['rang_lien'])) {
+					$where_meme_lien = lien_where($primary, $id, $objet, $id_objet);
+					$where_meme_lien = implode(' AND ', $where_meme_lien);
 					// on decale les liens de rang_lien>=la valeur inseree pour faire la place
-					$w = lien_where($primary, '*', $objet, $id_objet, array('rang_lien>='.intval($insertions['rang_lien']),"$primary!=".intval($id)));
-					sql_update($table_lien, array('rang_lien'=>'rang_lien+1'), $w);
+					// sauf sur le meme lien avec un role eventuellement different
+					$w = lien_rang_where($table_lien, $primary, $id, $objet, $id_objet, ['rang_lien>=' . intval($insertions['rang_lien']), "NOT($where_meme_lien)"]);
+					sql_update($table_lien, ['rang_lien' => 'rang_lien+1'], $w);
 				}
 
 				$e = sql_insertq($table_lien, $insertions);
@@ -446,11 +456,12 @@ function lien_insert($objet_source, $primary, $table_lien, $id, $objets, $qualif
 					lien_propage_date_modif($objet, $id_objet);
 					lien_propage_date_modif($objet_source, $id);
 					// Envoyer aux plugins
-					pipeline('post_edition_lien',
-						array(
+					pipeline(
+						'post_edition_lien',
+						[
 							'args' => $args,
 							'data' => $insertions
-						)
+						]
 					);
 				} else {
 					$echec = true;
@@ -459,7 +470,8 @@ function lien_insert($objet_source, $primary, $table_lien, $id, $objets, $qualif
 		}
 	}
 	// si on a fait des insertions, on reordonne les liens concernes
-	if ($ins>0) {
+	// pas la peine si $qualif['rang_lien'] etait fournie, on va passer dans lien_set a suivre et donc finir le recomptage
+	if ($ins > 0 and empty($qualif['rang_lien'])) {
 		lien_ordonner($objet_source, $primary, $table_lien, $id, $objets);
 	}
 
@@ -480,24 +492,39 @@ function lien_ordonner($objet_source, $primary, $table_lien, $id, $objets) {
 		return;
 	}
 
+	$deja_reordonne = [];
+
 	foreach ($objets as $objet => $id_objets) {
 		if (!is_array($id_objets)) {
-			$id_objets = array($id_objets);
+			$id_objets = [$id_objets];
 		}
 
 		foreach ($id_objets as $id_objet) {
-			$objet = (($objet == '*') ? $objet : objet_type($objet)); # securite
+			if (empty($deja_reordonne[$id][$objet][$id_objet])) {
+				$objet = (($objet == '*') ? $objet : objet_type($objet)); # securite
 
-			$where = lien_where($primary, '*', $objet, $id_objet);
-			$liens = sql_allfetsel("$primary, id_objet, objet, rang_lien", $table_lien, $where, $primary,"rang_lien");
+				$where = lien_rang_where($table_lien, $primary, $id, $objet, $id_objet);
+				$liens = sql_allfetsel("$primary, id_objet, objet, rang_lien", $table_lien, $where, '', 'rang_lien');
 
-			$rangs = array_column($liens, 'rang_lien');
-			if (count($rangs) and (max($rangs)>0 or min($rangs)<0)) {
-				$rang = 1;
-				foreach ($liens as $lien) {
-					$where = lien_where($primary, $lien[$primary], $objet, $id_objet, array('rang_lien!='.intval($rang)));
-					sql_updateq($table_lien, array('rang_lien' => $rang), $where);
-					$rang++;
+				$rangs = array_column($liens, 'rang_lien');
+				if (count($rangs) and (max($rangs) > 0 or min($rangs) < 0)) {
+					$rang = 1;
+					foreach ($liens as $lien) {
+						if (empty($deja_reordonne[$lien[$primary]][$lien['objet']][$lien['id_objet']])) {
+							$where = lien_where($primary, $lien[$primary], $lien['objet'], $lien['id_objet'], ['rang_lien!=' . intval($rang)]);
+							sql_updateq($table_lien, ['rang_lien' => $rang], $where);
+
+							if (empty($deja_reordonne[$lien[$primary]])) {
+								$deja_reordonne[$lien[$primary]] = [];
+							}
+							if (empty($deja_reordonne[$lien[$primary]][$lien['objet']])) {
+								$deja_reordonne[$lien[$primary]][$lien['objet']] = [];
+							}
+							$deja_reordonne[$lien[$primary]][$lien['objet']][$lien['id_objet']] = $rang;
+
+							$rang++;
+						}
+					}
 				}
 			}
 		}
@@ -512,7 +539,7 @@ function lien_ordonner($objet_source, $primary, $table_lien, $id, $objets) {
  * @return mixed
  */
 function lien_triables($table_lien) {
-	static $triables = array();
+	static $triables = [];
 	if (!isset($triables[$table_lien])) {
 		$trouver_table = charger_fonction('trouver_table', 'base');
 		$desc = $trouver_table($table_lien);
@@ -538,16 +565,17 @@ function lien_triables($table_lien) {
  * @param array $cond Conditions par défaut
  * @return array                        Liste des conditions
  */
-function lien_where($primary, $id_source, $objet, $id_objet, $cond = array()) {
-	if ((!is_array($id_source) and !strlen($id_source))
+function lien_where($primary, $id_source, $objet, $id_objet, $cond = []) {
+	if (
+		(!is_array($id_source) and !strlen($id_source))
 		or !strlen($objet)
 		or (!is_array($id_objet) and !strlen($id_objet))
 	) {
-		return array("0=1");
+		return ['0=1'];
 	} // securite
 
-	$not = "";
-	if (is_array($id_source) and reset($id_source) == "NOT") {
+	$not = '';
+	if (is_array($id_source) and reset($id_source) == 'NOT') {
 		$not = array_shift($id_source);
 		$id_source = reset($id_source);
 	}
@@ -555,29 +583,56 @@ function lien_where($primary, $id_source, $objet, $id_objet, $cond = array()) {
 	$where = $cond;
 
 	if ($id_source !== '*') {
-		$where[] = (is_array($id_source) ? sql_in(addslashes($primary), array_map('intval', $id_source),
-			$not) : addslashes($primary) . ($not ? "<>" : "=") . intval($id_source));
+		$where[] = (is_array($id_source) ? sql_in(
+			addslashes($primary),
+			array_map('intval', $id_source),
+			$not
+		) : addslashes($primary) . ($not ? '<>' : '=') . intval($id_source));
 	} elseif ($not) {
-		$where[] = "0=1";
+		$where[] = '0=1';
 	} // idiot mais quand meme
 
-	$not = "";
-	if (is_array($id_objet) and reset($id_objet) == "NOT") {
+	$not = '';
+	if (is_array($id_objet) and reset($id_objet) == 'NOT') {
 		$not = array_shift($id_objet);
 		$id_objet = reset($id_objet);
 	}
 
 	if ($objet !== '*') {
-		$where[] = "objet=" . sql_quote($objet);
+		$where[] = 'objet=' . sql_quote($objet);
 	}
 	if ($id_objet !== '*') {
-		$where[] = (is_array($id_objet) ? sql_in('id_objet', array_map('intval', $id_objet),
-			$not) : "id_objet" . ($not ? "<>" : "=") . intval($id_objet));
+		$where[] = (is_array($id_objet) ? sql_in(
+			'id_objet',
+			array_map('intval', $id_objet),
+			$not
+		) : 'id_objet' . ($not ? '<>' : '=') . intval($id_objet));
 	} elseif ($not) {
-		$where[] = "0=1";
+		$where[] = '0=1';
 	} // idiot mais quand meme
 
 	return $where;
+}
+
+/**
+ * Fabriquer la condition where pour compter les rangs
+ * @param string $table_lien
+ * @param string $primary
+ * @param int|string|array $id_source
+ * @param string $objet
+ * @param int|string|array $id_objet
+ * @param array $cond
+ * @return array                        Liste des conditions
+ */
+function lien_rang_where($table_lien, $primary, $id_source, $objet, $id_objet, $cond = []) {
+
+	// si on veut compter les rangs autrement que le core ne le fait par defaut, fournir le where adhoc
+	if (function_exists($f = 'lien_rang_where_' . $table_lien)) {
+		return $f($primary, $id_source, $objet, $id_objet, $cond);
+	}
+
+	// par defaut c'est un rang compté pour tous les id_source d'un couple objet-id_objet
+	return lien_where($primary, '*', $objet, $id_objet, $cond);
 }
 
 /**
@@ -608,17 +663,17 @@ function lien_where($primary, $id_source, $objet, $id_objet, $cond = array()) {
  */
 function lien_delete($objet_source, $primary, $table_lien, $id, $objets, $cond = null) {
 
-	$retire = array();
+	$retire = [];
 	$dels = 0;
 	$echec = false;
 	if (is_null($cond)) {
-		$cond = array();
+		$cond = [];
 	}
 
 	foreach ($objets as $objet => $id_objets) {
 		$objet = ($objet == '*') ? $objet : objet_type($objet); # securite
-		if (!is_array($id_objets) or reset($id_objets) == "NOT") {
-			$id_objets = array($id_objets);
+		if (!is_array($id_objets) or reset($id_objets) == 'NOT') {
+			$id_objets = [$id_objets];
 		}
 		foreach ($id_objets as $id_objet) {
 			list($cond, $colonne_role, $role) = roles_creer_condition_role($objet_source, $objet, $cond);
@@ -634,8 +689,7 @@ function lien_delete($objet_source, $primary, $table_lien, $id, $objets, $cond =
 
 			// iterer sur les liens pour permettre aux plugins de gerer
 			foreach ($liens as $l) {
-
-				$args = array(
+				$args = [
 					'table_lien' => $table_lien,
 					'objet_source' => $objet_source,
 					'id_objet_source' => $l[$primary],
@@ -644,14 +698,15 @@ function lien_delete($objet_source, $primary, $table_lien, $id, $objets, $cond =
 					'colonne_role' => $colonne_role,
 					'role' => ($colonne_role ? $l[$colonne_role] : ''),
 					'action' => 'delete',
-				);
+				];
 
 				// Envoyer aux plugins
-				$l = pipeline('pre_edition_lien',
-					array(
+				$l = pipeline(
+					'pre_edition_lien',
+					[
 						'args' => $args,
 						'data' => $l
-					)
+					]
 				);
 				$args['id_objet'] = $id_o = $l['id_objet'];
 
@@ -665,19 +720,20 @@ function lien_delete($objet_source, $primary, $table_lien, $id, $objets, $cond =
 					} else {
 						$echec = true;
 					}
-					$retire[] = array(
-						'source' => array($objet_source => $l[$primary]),
-						'lien' => array($l['objet'] => $id_o),
+					$retire[] = [
+						'source' => [$objet_source => $l[$primary]],
+						'lien' => [$l['objet'] => $id_o],
 						'type' => $l['objet'],
 						'role' => ($colonne_role ? $l[$colonne_role] : ''),
 						'id' => $id_o
-					);
+					];
 					// Envoyer aux plugins
-					pipeline('post_edition_lien',
-						array(
+					pipeline(
+						'post_edition_lien',
+						[
 							'args' => $args,
 							'data' => $l
-						)
+						]
 					);
 				}
 			}
@@ -718,37 +774,41 @@ function lien_optimise($objet_source, $primary, $table_lien, $id, $objets) {
 	$dels = 0;
 	foreach ($objets as $objet => $id_objets) {
 		$objet = ($objet == '*') ? $objet : objet_type($objet); # securite
-		if (!is_array($id_objets) or reset($id_objets) == "NOT") {
-			$id_objets = array($id_objets);
+		if (!is_array($id_objets) or reset($id_objets) == 'NOT') {
+			$id_objets = [$id_objets];
 		}
 		foreach ($id_objets as $id_objet) {
 			$where = lien_where($primary, $id, $objet, $id_objet);
 			# les liens vers un objet inexistant
-			$r = sql_select("DISTINCT objet", $table_lien, $where);
+			$r = sql_select('DISTINCT objet', $table_lien, $where);
 			while ($t = sql_fetch($r)) {
 				$type = $t['objet'];
 				$spip_table_objet = table_objet_sql($type);
 				$id_table_objet = id_table_objet($type);
-				$res = sql_select("L.$primary AS id,L.id_objet",
+				$res = sql_select(
+					"L.$primary AS id,L.id_objet",
 					// la condition de jointure inclue L.objet='xxx' pour ne joindre que les bonnes lignes
 					// du coups toutes les lignes avec un autre objet ont un id_xxx=NULL puisque LEFT JOIN
 					// il faut les eliminier en repetant la condition dans le where L.objet='xxx'
 					"$table_lien AS L
 									LEFT JOIN $spip_table_objet AS O
-										ON (O.$id_table_objet=L.id_objet AND L.objet=" . sql_quote($type) . ")",
-					"L.objet=" . sql_quote($type) . " AND O.$id_table_objet IS NULL");
+										ON (O.$id_table_objet=L.id_objet AND L.objet=" . sql_quote($type) . ')',
+					'L.objet=' . sql_quote($type) . " AND O.$id_table_objet IS NULL"
+				);
 				// sur une cle primaire composee, pas d'autres solutions que de virer un a un
 				while ($row = sql_fetch($res)) {
 					if ($primary === 'id_document' and in_array($type, ['site', 'rubrique']) and !intval($row['id_objet'])) {
 						continue; // gaffe, c'est le logo du site ou des rubriques!
 					}
-					$e = sql_delete($table_lien,
-						array("$primary=" . $row['id'], "id_objet=" . $row['id_objet'], "objet=" . sql_quote($type)));
+					$e = sql_delete(
+						$table_lien,
+						["$primary=" . $row['id'], 'id_objet=' . $row['id_objet'], 'objet=' . sql_quote($type)]
+					);
 					if ($e != false) {
 						$dels += $e;
 						spip_log(
-							"lien_optimise: Entree " . $row['id'] . "/" . $row['id_objet'] . "/$type supprimee dans la table $table_lien",
-							'genie'._LOG_INFO_IMPORTANTE
+							'lien_optimise: Entree ' . $row['id'] . '/' . $row['id_objet'] . "/$type supprimee dans la table $table_lien",
+							'genie' . _LOG_INFO_IMPORTANTE
 						);
 					}
 				}
@@ -760,9 +820,11 @@ function lien_optimise($objet_source, $primary, $table_lien, $id, $objets) {
 			// (en general '*' pour chaque)
 			$where = lien_where("L.$primary", $id, $objet, $id_objet);
 			$where[] = "O.$primary IS NULL";
-			$res = sql_select("L.$primary AS id",
+			$res = sql_select(
+				"L.$primary AS id",
 				"$table_lien AS L LEFT JOIN $table_source AS O ON L.$primary=O.$primary",
-				$where);
+				$where
+			);
 			$dels += optimiser_sansref($table_lien, $primary, $res);
 		}
 	}
@@ -814,18 +876,16 @@ function lien_set($objet_source, $primary, $table_lien, $id, $objets, $qualif) {
 	unset($qualif['objet']);
 	unset($qualif['id_objet']);
 	foreach ($objets as $objet => $id_objets) {
-
 		// role, colonne, where par défaut
 		list($role, $colonne_role, $cond) =
 			roles_trouver_dans_qualif($objet_source, $objet, $qualif);
 
 		$objet = ($objet == '*') ? $objet : objet_type($objet); # securite
-		if (!is_array($id_objets) or reset($id_objets) == "NOT") {
-			$id_objets = array($id_objets);
+		if (!is_array($id_objets) or reset($id_objets) == 'NOT') {
+			$id_objets = [$id_objets];
 		}
 		foreach ($id_objets as $id_objet) {
-
-			$args = array(
+			$args = [
 				'table_lien' => $table_lien,
 				'objet_source' => $objet_source,
 				'id_objet_source' => $id,
@@ -834,27 +894,31 @@ function lien_set($objet_source, $primary, $table_lien, $id, $objets, $qualif) {
 				'role' => $role,
 				'colonne_role' => $colonne_role,
 				'action' => 'modifier',
-			);
+			];
 
 			// Envoyer aux plugins
-			$qualif = pipeline('pre_edition_lien',
-				array(
+			$qualif = pipeline(
+				'pre_edition_lien',
+				[
 					'args' => $args,
 					'data' => $qualif,
-				)
+				]
 			);
 			$args['id_objet'] = $id_objet;
 
 			if (lien_triables($table_lien) and isset($qualif['rang_lien'])) {
 				if (intval($qualif['rang_lien'])) {
 					// on decale les liens de rang_lien>=la valeur inseree pour faire la place
-					$w = lien_where($primary, '*', $objet, $id_objet, array('rang_lien>='.intval($qualif['rang_lien']),"$primary!=".intval($id)));
-					sql_update($table_lien, array('rang_lien'=>'rang_lien+1'), $w);
+					// sauf sur le meme lien avec un role eventuellement different
+					$where_meme_lien = lien_where($primary, $id, $objet, $id_objet);
+					$where_meme_lien = implode(' AND ', $where_meme_lien);
+					$w = lien_rang_where($table_lien, $primary, $id, $objet, $id_objet, ['rang_lien>=' . intval($qualif['rang_lien']), "NOT($where_meme_lien)"]);
+					sql_update($table_lien, ['rang_lien' => 'rang_lien+1'], $w);
 				}
 				// tous les liens de même rôle recoivent le rang indiqué aussi
 				if (roles_colonne($objet_source, $objet)) {
 					$w = lien_where($primary, $id, $objet, $id_objet);
-					sql_updateq($table_lien, array('rang_lien' => intval($qualif['rang_lien'])), $w);
+					sql_updateq($table_lien, ['rang_lien' => intval($qualif['rang_lien'])], $w);
 				}
 				$reordonner = true;
 			}
@@ -866,11 +930,12 @@ function lien_set($objet_source, $primary, $table_lien, $id, $objets, $qualif) {
 				$echec = true;
 			} else {
 				// Envoyer aux plugins
-				pipeline('post_edition_lien',
-					array(
+				pipeline(
+					'post_edition_lien',
+					[
 						'args' => $args,
 						'data' => $qualif
-					)
+					]
 				);
 				$ok++;
 			}
@@ -911,7 +976,7 @@ function lien_set($objet_source, $primary, $table_lien, $id, $objets, $qualif) {
  * @return array
  */
 function lien_find($objet_source, $primary, $table_lien, $id, $objets, $cond = null) {
-	$trouve = array();
+	$trouve = [];
 	foreach ($objets as $objet => $id_objets) {
 		$objet = ($objet == '*') ? $objet : objet_type($objet); # securite
 		// gerer les roles s'il y en a dans $cond
@@ -938,7 +1003,7 @@ function lien_find($objet_source, $primary, $table_lien, $id, $objets, $cond = n
  * @param array|int $ids
  */
 function lien_propage_date_modif($objet, $ids) {
-	static $done = array();
+	static $done = [];
 	$hash = md5($objet . serialize($ids));
 
 	// sql_updateq, peut être un rien lent.
@@ -950,12 +1015,13 @@ function lien_propage_date_modif($objet, $ids) {
 	$trouver_table = charger_fonction('trouver_table', 'base');
 
 	$table = table_objet_sql($objet);
-	if ($desc = $trouver_table($table)
+	if (
+		$desc = $trouver_table($table)
 		and isset($desc['field']['date_modif'])
 	) {
 		$primary = id_table_objet($objet);
 		$where = (is_array($ids) ? sql_in($primary, array_map('intval', $ids)) : "$primary=" . intval($ids));
-		sql_updateq($table, array('date_modif' => date('Y-m-d H:i:s')), $where);
+		sql_updateq($table, ['date_modif' => date('Y-m-d H:i:s')], $where);
 	}
 
 	$done[$hash] = true;

@@ -38,27 +38,30 @@ function autosave_clean_value($val) {
  * @return array
  */
 function cvtautosave_formulaire_charger($flux) {
-	if (is_array($flux['data'])
+	if (
+		is_array($flux['data'])
 		and isset($flux['data']['_autosave_id'])
 		and $cle_autosave = $flux['data']['_autosave_id']
 	) {
-
 		$form = $flux['args']['form'];
 		$je_suis_poste = $flux['args']['je_suis_poste'];
 
 		$cle_autosave = serialize($cle_autosave);
-		$cle_autosave = $form . "_" . md5($cle_autosave);
+		$cle_autosave = $form . '_' . md5($cle_autosave);
 
 		// si on a un backup en session et qu'on est au premier chargement, non poste
 		// on restitue les donnees
-		if (isset($GLOBALS['visiteur_session']['session_autosave_' . $cle_autosave])
+		if (
+			isset($GLOBALS['visiteur_session']['session_autosave_' . $cle_autosave])
 			and !$je_suis_poste
 		) {
 			parse_str($GLOBALS['visiteur_session']['session_autosave_' . $cle_autosave], $vars);
 			foreach ($vars as $key => $val) {
 				if (isset($flux['data'][$key])) {
-					$flux['data'][$key] = (is_string($val) ? autosave_clean_value($val) : array_map('autosave_clean_value',
-						$val));
+					$flux['data'][$key] = (is_string($val) ? autosave_clean_value($val) : array_map(
+						'autosave_clean_value',
+						$val
+					));
 				}
 			}
 		}
@@ -84,7 +87,6 @@ function cvtautosave_formulaire_charger($flux) {
 			. '<script type="text/javascript">/*<![CDATA[*/if (window.jQuery) jQuery(function(){
 		  $("input.autosaveactive").closest("form:not(.autosaveon)").autosave({url:"' . $GLOBALS['meta']['adresse_site'] . '/"}).addClass("autosaveon");
 			});/*]]>*/</script>';
-
 	}
 
 	return $flux;
@@ -119,7 +121,7 @@ function cvtautosave_formulaire_traiter($flux) {
 		foreach ($session as $k => $v) {
 			if (strncmp($k, 'session_autosave_', 17) == 0) {
 				$timestamp = 0;
-				if (preg_match(",&__timestamp=(\d+)$,", $v, $m)) {
+				if (preg_match(',&__timestamp=(\d+)$,', $v, $m)) {
 					$timestamp = intval($m[1]);
 				}
 				if ($timestamp < $time_too_old) {

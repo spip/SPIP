@@ -64,7 +64,7 @@ function inc_puce_statut_dist(
 	$ajax = false,
 	$menu_rapide = _ACTIVER_PUCE_RAPIDE
 ) {
-	static $f_puce_statut = array();
+	static $f_puce_statut = [];
 	$type = objet_type($type);
 	// cas prioritaire : fonction perso, qui permet aussi de gerer les cas historiques
 	if (!isset($f_puce_statut[$type]) or is_null($f_puce_statut[$type])) {
@@ -335,7 +335,8 @@ function puce_statut_changement_rapide(
 		return $src;
 	}
 
-	if (!$id
+	if (
+		!$id
 		or !_SPIP_AJAX
 		or !$menu_rapide
 	) {
@@ -369,7 +370,7 @@ function puce_statut_changement_rapide(
 		}
 	} // si pas d'id_rubrique fourni, tester directement instituer type avec le statut publie
 	else {
-		if (!autoriser('instituer', $type, $id, null, array('statut' => 'publie'))) {
+		if (!autoriser('instituer', $type, $id, null, ['statut' => 'publie'])) {
 			return $inser_puce;
 		}
 	}
@@ -390,19 +391,18 @@ function puce_statut_changement_rapide(
 		$width = $unit * count($desc['statut_textes_instituer']) + $margin;
 		$out = "<span class='puce_objet_fixe $type'>"
 			. $inser_puce
-			. "</span>"
+			. '</span>'
 			. "<span class='puce_objet_popup $type statutdecal$type$id' style='width:{$width}px;margin-left:-{$clip}px;'>";
 		$i = 0;
 		foreach ($desc['statut_textes_instituer'] as $s => $t) {
 			$out .= afficher_script_statut($id, $type, -$zero - $i++ * $unit, statut_image($type, $s), $s, _T($t));
 		}
-		$out .= "</span>";
+		$out .= '</span>';
 
 		return $out;
 	} else {
-
-		$nom = "puce_statut_";
-		$action = generer_url_ecrire('puce_statut', "", true);
+		$nom = 'puce_statut_';
+		$action = generer_url_ecrire('puce_statut', '', true);
 		$lang_dir = lang_dir(lang_typo());
 
 		return "<span class='puce_objet $type' id='$nom$type$id' dir='$lang_dir' data-puce-nom='$nom' data-puce-type='$type' data-puce-id='$id' data-puce-action='$action'>"
@@ -413,10 +413,10 @@ function puce_statut_changement_rapide(
 
 
 function afficher_script_statut($id, $type, $n, $img, $statut, $titre, $act = '') {
-	$h = generer_action_auteur("instituer_objet", "$type-$id-$statut");
+	$h = generer_action_auteur('instituer_objet', "$type-$id-$statut");
 	$t = supprimer_tags($titre);
 
-	return "<a href=\"#\" data-puce-id=\"$id\" data-puce-type=\"$type\" data-puce-decal=\"$n\" data-puce-action=\"$h\" title=\"$t\"$act>" . http_img_pack($img, $t) . "</a>";
+	return "<a href=\"#\" data-puce-id=\"$id\" data-puce-type=\"$type\" data-puce-decal=\"$n\" data-puce-action=\"$h\" title=\"$t\"$act>" . http_img_pack($img, $t) . '</a>';
 }
 
 // compat

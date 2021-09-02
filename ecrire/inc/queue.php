@@ -15,7 +15,7 @@
  *
  * @package SPIP\Core\Queue
  **/
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
@@ -52,7 +52,7 @@ define('_JQ_PENDING', 0);
 function queue_add_job(
 	$function,
 	$description,
-	$arguments = array(),
+	$arguments = [],
 	$file = '',
 	$no_duplicate = false,
 	$time = 0,
@@ -73,11 +73,11 @@ function queue_add_job(
 	$duplicate_where = 'status=' . intval(_JQ_SCHEDULED) . ' AND ';
 	if (!$time) {
 		$time = time();
-		$duplicate_where = ""; // ne pas dupliquer si deja le meme job en cours d'execution
+		$duplicate_where = ''; // ne pas dupliquer si deja le meme job en cours d'execution
 	}
 	$date = date('Y-m-d H:i:s', $time);
 
-	$set_job = array(
+	$set_job = [
 		'fonction' => $function,
 		'descriptif' => $description,
 		'args' => $arguments,
@@ -86,17 +86,20 @@ function queue_add_job(
 		'priorite' => max(-10, min(10, intval($priority))),
 		'date' => $date,
 		'status' => _JQ_SCHEDULED,
-	);
+	];
 	// si option ne pas dupliquer, regarder si la fonction existe deja
 	// avec les memes args et file
 	if (
 		$no_duplicate
 		and
-		$id_job = sql_getfetsel('id_job', 'spip_jobs',
+		$id_job = sql_getfetsel(
+			'id_job',
+			'spip_jobs',
 			$duplicate_where =
 				$duplicate_where . 'fonction=' . sql_quote($function)
 				. (($no_duplicate === 'function_only') ? '' :
-					' AND md5args=' . sql_quote($md5args) . ' AND inclure=' . sql_quote($file)))
+			' AND md5args=' . sql_quote($md5args) . ' AND inclure=' . sql_quote($file))
+		)
 	) {
 		return $id_job;
 	}
@@ -108,7 +111,7 @@ function queue_add_job(
 	if (
 		$no_duplicate
 		and
-		$id_prev = sql_getfetsel('id_job', 'spip_jobs', "id_job<" . intval($id_job) . " AND $duplicate_where")
+		$id_prev = sql_getfetsel('id_job', 'spip_jobs', 'id_job<' . intval($id_job) . " AND $duplicate_where")
 	) {
 		sql_delete('spip_jobs', 'id_job=' . intval($id_job));
 
@@ -124,8 +127,10 @@ function queue_add_job(
 	if (defined('_JQ_INSERT_CHECK_ARGS') and $id_job) {
 		$args = sql_getfetsel('args', 'spip_jobs', 'id_job=' . intval($id_job));
 		if ($args !== $arguments) {
-			spip_log('arguments job errones / longueur ' . strlen($args) . " vs " . strlen($arguments) . ' / valeur : ' . var_export($arguments,
-					true), 'queue');
+			spip_log('arguments job errones / longueur ' . strlen($args) . ' vs ' . strlen($arguments) . ' / valeur : ' . var_export(
+				$arguments,
+				true
+			), 'queue');
 		}
 	}
 
@@ -152,7 +157,7 @@ function queue_add_job(
 function queue_purger() {
 	include_spip('base/abstract_sql');
 	sql_delete('spip_jobs');
-	sql_delete("spip_jobs_liens", "id_job NOT IN (" . sql_get_select("id_job", "spip_jobs") . ")");
+	sql_delete('spip_jobs_liens', 'id_job NOT IN (' . sql_get_select('id_job', 'spip_jobs') . ')');
 	include_spip('inc/genie');
 	genie_queue_watch_dist();
 }
@@ -167,7 +172,8 @@ function queue_purger() {
 function queue_remove_job($id_job) {
 	include_spip('base/abstract_sql');
 
-	if ($row = sql_fetsel('fonction,inclure,date', 'spip_jobs', 'id_job=' . intval($id_job))
+	if (
+		$row = sql_fetsel('fonction,inclure,date', 'spip_jobs', 'id_job=' . intval($id_job))
 		and $res = sql_delete('spip_jobs', 'id_job=' . intval($id_job))
 	) {
 		queue_unlink_job($id_job);
@@ -203,7 +209,7 @@ function queue_link_job($id_job, $objets) {
 			}
 			sql_insertq_multi('spip_jobs_liens', $objets);
 		} else {
-			sql_insertq('spip_jobs_liens', array_merge(array('id_job' => $id_job), $objets));
+			sql_insertq('spip_jobs_liens', array_merge(['id_job' => $id_job], $objets));
 		}
 	}
 }
@@ -217,7 +223,7 @@ function queue_link_job($id_job, $objets) {
  *  resultat du sql_delete
  */
 function queue_unlink_job($id_job) {
-	return sql_delete("spip_jobs_liens", "id_job=" . intval($id_job));
+	return sql_delete('spip_jobs_liens', 'id_job=' . intval($id_job));
 }
 
 /**
@@ -234,7 +240,7 @@ function queue_start_job($row) {
 	$args = unserialize($row['args']);
 	if ($args === false) {
 		spip_log('arguments job errones ' . var_export($row, true), 'queue');
-		$args = array();
+		$args = [];
 	}
 
 	$fonction = $row['fonction'];
@@ -255,7 +261,7 @@ function queue_start_job($row) {
 		return false;
 	}
 
-	spip_log("queue [" . $row['id_job'] . "]: $fonction() start", 'queue');
+	spip_log('queue [' . $row['id_job'] . "]: $fonction() start", 'queue');
 	switch (count($args)) {
 		case 0:
 			$res = $fonction();
@@ -288,17 +294,26 @@ function queue_start_job($row) {
 			$res = $fonction($args[0], $args[1], $args[2], $args[3], $args[4], $args[5], $args[6], $args[7], $args[8]);
 			break;
 		case 10:
-			$res = $fonction($args[0], $args[1], $args[2], $args[3], $args[4], $args[5], $args[6], $args[7], $args[8],
-				$args[9]);
+			$res = $fonction(
+				$args[0],
+				$args[1],
+				$args[2],
+				$args[3],
+				$args[4],
+				$args[5],
+				$args[6],
+				$args[7],
+				$args[8],
+				$args[9]
+			);
 			break;
 		default:
 			# plus lent mais completement generique
 			$res = call_user_func_array($fonction, $args);
 	}
-	spip_log("queue [" . $row['id_job'] . "]: $fonction() end", 'queue');
+	spip_log('queue [' . $row['id_job'] . "]: $fonction() end", 'queue');
 
 	return $res;
-
 }
 
 /**
@@ -327,14 +342,14 @@ function queue_start_job($row) {
 function queue_schedule($force_jobs = null) {
 	$time = time();
 	if (defined('_DEBUG_BLOCK_QUEUE')) {
-		spip_log("_DEBUG_BLOCK_QUEUE : schedule stop", 'jq' . _LOG_DEBUG);
+		spip_log('_DEBUG_BLOCK_QUEUE : schedule stop', 'jq' . _LOG_DEBUG);
 
 		return;
 	}
 
 	// rien a faire si le prochain job est encore dans le futur
 	if (queue_sleep_time_to_next_job() > 0 and (!$force_jobs or !count($force_jobs))) {
-		spip_log("queue_sleep_time_to_next_job", 'jq' . _LOG_DEBUG);
+		spip_log('queue_sleep_time_to_next_job', 'jq' . _LOG_DEBUG);
 
 		return;
 	}
@@ -369,10 +384,10 @@ function queue_schedule($force_jobs = null) {
 	// lorsqu'un job cron n'a pas fini, sa priorite est descendue
 	// pour qu'il ne bloque pas les autres jobs en attente
 	if (is_array($force_jobs) and count($force_jobs)) {
-		$cond = "status=" . intval(_JQ_SCHEDULED) . " AND " . sql_in("id_job", $force_jobs);
+		$cond = 'status=' . intval(_JQ_SCHEDULED) . ' AND ' . sql_in('id_job', $force_jobs);
 	} else {
 		$now = date('Y-m-d H:i:s', $time);
-		$cond = "status=" . intval(_JQ_SCHEDULED) . " AND date<=" . sql_quote($now);
+		$cond = 'status=' . intval(_JQ_SCHEDULED) . ' AND date<=' . sql_quote($now);
 	}
 
 	register_shutdown_function('queue_error_handler'); // recuperer les erreurs auant que possible
@@ -381,7 +396,7 @@ function queue_schedule($force_jobs = null) {
 		if ($row = array_shift($res)) {
 			$nbj++;
 			// il faut un verrou, a base de sql_delete
-			if (sql_delete('spip_jobs', "id_job=" . intval($row['id_job']) . " AND status=" . intval(_JQ_SCHEDULED))) {
+			if (sql_delete('spip_jobs', 'id_job=' . intval($row['id_job']) . ' AND status=' . intval(_JQ_SCHEDULED))) {
 				#spip_log("JQ schedule job ".$nbj." OK",'jq');
 				// on reinsert dans la base aussitot avec un status=_JQ_PENDING
 				$row['status'] = _JQ_PENDING;
@@ -396,13 +411,13 @@ function queue_schedule($force_jobs = null) {
 				queue_close_job($row, $time, $result);
 			}
 		}
-		spip_log("JQ schedule job end time " . $time, 'jq' . _LOG_DEBUG);
+		spip_log('JQ schedule job end time ' . $time, 'jq' . _LOG_DEBUG);
 	} while ($nbj < _JQ_MAX_JOBS_EXECUTE and $row and $time < $end_time);
-	spip_log("JQ schedule end time " . time(), 'jq' . _LOG_DEBUG);
+	spip_log('JQ schedule end time ' . time(), 'jq' . _LOG_DEBUG);
 
 	if ($row = array_shift($res)) {
 		queue_update_next_job_time(0); // on sait qu'il y a encore des jobs a lancer ASAP
-		spip_log("JQ encore !", 'jq' . _LOG_DEBUG);
+		spip_log('JQ encore !', 'jq' . _LOG_DEBUG);
 	} else {
 		queue_update_next_job_time();
 	}
@@ -429,16 +444,15 @@ function queue_close_job(&$row, $time, $result = 0) {
 	if ($periode = queue_is_cron_job($row['fonction'], $row['inclure'])) {
 		// relancer avec les nouveaux arguments de temps
 		include_spip('inc/genie');
-		if ($result < 0) // relancer tout de suite, mais en baissant la priorite
-		{
-			queue_genie_replan_job($row['fonction'], $periode, 0 - $result, null, $row['priorite'] - 1);
+		if ($result < 0) { // relancer tout de suite, mais en baissant la priorite
+		queue_genie_replan_job($row['fonction'], $periode, 0 - $result, null, $row['priorite'] - 1);
 		} else // relancer avec la periode prevue
 		{
 			queue_genie_replan_job($row['fonction'], $periode, $time);
 		}
 	}
 	// purger ses liens eventuels avec des objets
-	sql_delete("spip_jobs_liens", "id_job=" . intval($row['id_job']));
+	sql_delete('spip_jobs_liens', 'id_job=' . intval($row['id_job']));
 	// supprimer le job fini
 	sql_delete('spip_jobs', 'id_job=' . intval($row['id_job']));
 }
@@ -510,18 +524,21 @@ function queue_update_next_job_time($next_time = null) {
 
 	// traiter les jobs morts au combat (_JQ_PENDING depuis plus de 180s)
 	// pour cause de timeout ou autre erreur fatale
-	$res = sql_allfetsel("*", "spip_jobs",
-		"status=" . intval(_JQ_PENDING) . " AND date<" . sql_quote(date('Y-m-d H:i:s', $time - 180)));
+	$res = sql_allfetsel(
+		'*',
+		'spip_jobs',
+		'status=' . intval(_JQ_PENDING) . ' AND date<' . sql_quote(date('Y-m-d H:i:s', $time - 180))
+	);
 	if (is_array($res)) {
 		foreach ($res as $row) {
 			queue_close_job($row, $time);
-			spip_log ("queue_close_job car _JQ_PENDING depuis +180s : ".print_r($row,1), "job_mort"._LOG_ERREUR);
+			spip_log('queue_close_job car _JQ_PENDING depuis +180s : ' . print_r($row, 1), 'job_mort' . _LOG_ERREUR);
 		}
 	}
 
 	// chercher la date du prochain job si pas connu
 	if (is_null($next) or is_null(queue_sleep_time_to_next_job())) {
-		$date = sql_getfetsel('date', 'spip_jobs', "status=" . intval(_JQ_SCHEDULED), '', 'date', '0,1');
+		$date = sql_getfetsel('date', 'spip_jobs', 'status=' . intval(_JQ_SCHEDULED), '', 'date', '0,1');
 		$next = strtotime($date);
 	}
 	if (!is_null($next_time)) {
@@ -532,8 +549,10 @@ function queue_update_next_job_time($next_time = null) {
 
 	if ($next) {
 		if (is_null($nb_jobs_scheduled)) {
-			$nb_jobs_scheduled = sql_countsel('spip_jobs',
-				"status=" . intval(_JQ_SCHEDULED) . " AND date<" . sql_quote(date('Y-m-d H:i:s', $time)));
+			$nb_jobs_scheduled = sql_countsel(
+				'spip_jobs',
+				'status=' . intval(_JQ_SCHEDULED) . ' AND date<' . sql_quote(date('Y-m-d H:i:s', $time))
+			);
 		} elseif ($next <= $time) {
 			$nb_jobs_scheduled++;
 		}
@@ -567,7 +586,7 @@ function queue_set_next_job_time($next) {
 		($curr_next <= $time and $next > $time) // le prochain job est dans le futur mais pas la date planifiee actuelle
 		or $curr_next > $next // le prochain job est plus tot que la date planifiee actuelle
 	) {
-		if (function_exists("cache_set") and defined('_MEMOIZE_MEMORY') and _MEMOIZE_MEMORY) {
+		if (function_exists('cache_set') and defined('_MEMOIZE_MEMORY') and _MEMOIZE_MEMORY) {
 			cache_set(_JQ_NEXT_JOB_TIME_FILENAME, intval($next));
 		} else {
 			ecrire_fichier(_JQ_NEXT_JOB_TIME_FILENAME, intval($next));
@@ -592,7 +611,7 @@ function queue_set_next_job_time($next) {
  * @return string
  */
 function queue_affichage_cron() {
-	$texte = "";
+	$texte = '';
 
 	$time_to_next = queue_sleep_time_to_next_job();
 	// rien a faire si le prochain job est encore dans le futur
@@ -601,7 +620,7 @@ function queue_affichage_cron() {
 	}
 
 	// ne pas relancer si on vient de lancer dans la meme seconde par un hit concurent
-	if (file_exists($lock = _DIR_TMP . "cron.lock") and !(@filemtime($lock) < $_SERVER['REQUEST_TIME'])) {
+	if (file_exists($lock = _DIR_TMP . 'cron.lock') and !(@filemtime($lock) < $_SERVER['REQUEST_TIME'])) {
 		return $texte;
 	}
 
@@ -618,11 +637,9 @@ function queue_affichage_cron() {
 	$url_cron = generer_url_action('cron', '', false, true);
 
 	if (!defined('_HTML_BG_CRON_FORCE') or !_HTML_BG_CRON_FORCE) {
-
 		if (queue_lancer_url_http_async($url_cron) and !$urgent) {
 			return $texte;
 		}
-
 	}
 
 	// si deja force, on retourne sans rien
@@ -674,9 +691,13 @@ function queue_lancer_url_http_async($url_cron) {
 				$scheme = '';
 				$port = 80;
 		}
-		$fp = @fsockopen($scheme . $parts['host'],
+		$fp = @fsockopen(
+			$scheme . $parts['host'],
 			isset($parts['port']) ? $parts['port'] : $port,
-			$errno, $errstr, 1);
+			$errno,
+			$errstr,
+			1
+		);
 
 		if ($fp) {
 			$host_sent = $parts['host'];
@@ -685,9 +706,9 @@ function queue_lancer_url_http_async($url_cron) {
 			}
 			$timeout = 200; // ms
 			stream_set_timeout($fp, 0, $timeout * 1000);
-			$query = $parts['path'] . ($parts['query'] ? "?" . $parts['query'] : "");
-			$out = "GET " . $query . " HTTP/1.1\r\n";
-			$out .= "Host: " . $host_sent . "\r\n";
+			$query = $parts['path'] . ($parts['query'] ? '?' . $parts['query'] : '');
+			$out = 'GET ' . $query . " HTTP/1.1\r\n";
+			$out .= 'Host: ' . $host_sent . "\r\n";
 			$out .= "Connection: Close\r\n\r\n";
 			fwrite($fp, $out);
 			spip_timer('read');
@@ -705,7 +726,7 @@ function queue_lancer_url_http_async($url_cron) {
 	}
 	// si fsockopen n'est pas dispo on essaye cURL :
 	// lancer le cron par un cURL asynchrone si cURL est present
-	elseif (function_exists("curl_init")) {
+	elseif (function_exists('curl_init')) {
 		//setting the curl parameters.
 		$ch = curl_init($url_cron);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

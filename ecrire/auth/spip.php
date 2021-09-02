@@ -36,25 +36,33 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 	$login = auth_spip_retrouver_login($login);
 	// login inconnu, n'allons pas plus loin
 	if (!$login) {
-		return array();
+		return [];
 	}
 
-	$md5pass = "";
-	$shapass = $shanext = "";
+	$md5pass = '';
+	$shapass = $shanext = '';
 
-	if (preg_match(",^\{([0-9a-f]{64});([0-9a-f]{64})\}$,i", $pass, $regs)) {
+	if (preg_match(',^\{([0-9a-f]{64});([0-9a-f]{64})\}$,i', $pass, $regs)) {
 		$shapass = $regs[1];
 		$shanext = $regs[2];
 	} // compat avec une base mixte md5/sha256 : le js a envoye les 2 hash
-	elseif (preg_match(",^\{([0-9a-f]{64});([0-9a-f]{64});([0-9a-f]{32});([0-9a-f]{32})\}$,i", $pass, $regs)) {
+	elseif (preg_match(',^\{([0-9a-f]{64});([0-9a-f]{64});([0-9a-f]{32});([0-9a-f]{32})\}$,i', $pass, $regs)) {
 		$shapass = $regs[1];
 		$shanext = $regs[2];
 		$md5pass = $regs[3];
 		//$md5next = $regs[4];
 	} // si envoi non crypte, crypter maintenant
 	elseif ($pass) {
-		$row = sql_fetsel("alea_actuel, alea_futur", "spip_auteurs", "login=" . sql_quote($login, $serveur, 'text'), '', '',
-			'', '', $serveur);
+		$row = sql_fetsel(
+			'alea_actuel, alea_futur',
+			'spip_auteurs',
+			'login=' . sql_quote($login, $serveur, 'text'),
+			'',
+			'',
+			'',
+			'',
+			$serveur
+		);
 
 		if ($row) {
 			include_spip('auth/sha256.inc');
@@ -66,36 +74,60 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 
 	// login inexistant ou mot de passe vide
 	if (!$shapass and !$md5pass) {
-		return array();
+		return [];
 	}
 
-	$row = sql_fetsel("*", "spip_auteurs",
-		"login=" . sql_quote($login, $serveur, 'text') . " AND pass=" . sql_quote($shapass, $serveur,
-			'text') . " AND statut<>'5poubelle'", '', '', '', '', $serveur);
+	$row = sql_fetsel(
+		'*',
+		'spip_auteurs',
+		'login=' . sql_quote($login, $serveur, 'text') . ' AND pass=' . sql_quote(
+			$shapass,
+			$serveur,
+			'text'
+		) . " AND statut<>'5poubelle'",
+		'',
+		'',
+		'',
+		'',
+		$serveur
+	);
 
 	// compat avec les anciennes bases en md5
 	if (!$row and $md5pass) {
-		$row = sql_fetsel("*", "spip_auteurs",
-			"login=" . sql_quote($login, $serveur, 'text') . " AND pass=" . sql_quote($md5pass, $serveur,
-				'text') . " AND statut<>'5poubelle'", '', '', '', '', $serveur);
+		$row = sql_fetsel(
+			'*',
+			'spip_auteurs',
+			'login=' . sql_quote($login, $serveur, 'text') . ' AND pass=' . sql_quote(
+				$md5pass,
+				$serveur,
+				'text'
+			) . " AND statut<>'5poubelle'",
+			'',
+			'',
+			'',
+			'',
+			$serveur
+		);
 	}
 
 	// login/mot de passe incorrect
 	if (!$row) {
-		return array();
+		return [];
 	}
 
 	// fait tourner le codage du pass dans la base
 	// sauf si phpauth : cela reviendrait a changer l'alea a chaque hit, et aucune action verifiable par securiser_action()
 	if ($shanext and !$phpauth) {
-
 		include_spip('inc/acces'); // pour creer_uniqid
-		@sql_update('spip_auteurs', array(
+		@sql_update('spip_auteurs', [
 			'alea_actuel' => 'alea_futur',
 			'pass' => sql_quote($shanext, $serveur, 'text'),
 			'alea_futur' => sql_quote(creer_uniqid(), $serveur, 'text')
-		), "id_auteur=" . $row['id_auteur'] . ' AND pass IN (' . sql_quote($shapass, $serveur,
-				'text') . ', ' . sql_quote($md5pass, $serveur, 'text') . ')', '', $serveur);
+		], 'id_auteur=' . $row['id_auteur'] . ' AND pass IN (' . sql_quote(
+			$shapass,
+			$serveur,
+			'text'
+		) . ', ' . sql_quote($md5pass, $serveur, 'text') . ')', '', $serveur);
 		// En profiter pour verifier la securite de tmp/
 		// Si elle ne fonctionne pas a l'installation, prevenir
 		if (!verifier_htaccess(_DIR_TMP) and defined('_ECRIRE_INSTALL')) {
@@ -120,7 +152,7 @@ function auth_spip_formulaire_login($flux) {
 	// (perf issue pour les sites qui mettent le formulaire de login sur la home)
 	$compat_md5 = false;
 	if (!isset($GLOBALS['meta']['sha_256_only']) or _request('var_mode')) {
-		$compat_md5 = sql_countsel("spip_auteurs", "length(pass)=32 AND statut<>'poubelle'");
+		$compat_md5 = sql_countsel('spip_auteurs', "length(pass)=32 AND statut<>'poubelle'");
 		if ($compat_md5 and isset($GLOBALS['meta']['sha_256_only'])) {
 			effacer_meta('sha_256_only');
 		}
@@ -140,12 +172,12 @@ function auth_spip_formulaire_login($flux) {
 		. "'page_auteur': '" . generer_url_public('informer_auteur') . "',"
 		. "'informe_auteur_en_cours':false,"
 		. "'attente_informe':0,"
-		. "'compat_md5':" . ($compat_md5 ? "true" : "false") . "};"
+		. "'compat_md5':" . ($compat_md5 ? 'true' : 'false') . '};'
 		. "jQuery(function(){
 	jQuery('#var_login').change(actualise_auteur);
 	jQuery('form#formulaire_login').submit(login_submit);
 });"
-		. "/*]]>*/</script>";
+		. '/*]]>*/</script>';
 
 	return $flux;
 }
@@ -179,11 +211,15 @@ function auth_spip_verifier_login($new_login, $id_auteur = 0, $serveur = '') {
 	// login et mot de passe
 	if (strlen($new_login)) {
 		if (strlen($new_login) < _LOGIN_TROP_COURT) {
-			return _T('info_login_trop_court_car_pluriel', array('nb' => _LOGIN_TROP_COURT));
+			return _T('info_login_trop_court_car_pluriel', ['nb' => _LOGIN_TROP_COURT]);
 		} else {
-			$n = sql_countsel('spip_auteurs',
-				"login=" . sql_quote($new_login) . " AND id_auteur!=" . intval($id_auteur) . " AND statut!='5poubelle'", '', '',
-				$serveur);
+			$n = sql_countsel(
+				'spip_auteurs',
+				'login=' . sql_quote($new_login) . ' AND id_auteur!=' . intval($id_auteur) . " AND statut!='5poubelle'",
+				'',
+				'',
+				$serveur
+			);
 			if ($n) {
 				return _T('info_login_existant');
 			}
@@ -205,7 +241,8 @@ function auth_spip_modifier_login($new_login, $id_auteur, $serveur = '') {
 	if (is_null($new_login) or auth_spip_verifier_login($new_login, $id_auteur, $serveur) != '') {
 		return false;
 	}
-	if (!$id_auteur = intval($id_auteur)
+	if (
+		!$id_auteur = intval($id_auteur)
 		or !$auteur = sql_fetsel('login', 'spip_auteurs', 'id_auteur=' . intval($id_auteur), '', '', '', '', $serveur)
 	) {
 		return false;
@@ -218,14 +255,22 @@ function auth_spip_modifier_login($new_login, $id_auteur, $serveur = '') {
 
 	// vider le login des auteurs a la poubelle qui avaient ce meme login
 	if (strlen($new_login)) {
-		$anciens = sql_allfetsel('id_auteur', 'spip_auteurs',
-			'login=' . sql_quote($new_login, $serveur, 'text') . " AND statut='5poubelle'", '', '', '', '', $serveur);
+		$anciens = sql_allfetsel(
+			'id_auteur',
+			'spip_auteurs',
+			'login=' . sql_quote($new_login, $serveur, 'text') . " AND statut='5poubelle'",
+			'',
+			'',
+			'',
+			'',
+			$serveur
+		);
 		while ($row = array_pop($anciens)) {
-			auteur_modifier($row['id_auteur'], array('login' => ''), true); // manque la gestion de $serveur
+			auteur_modifier($row['id_auteur'], ['login' => ''], true); // manque la gestion de $serveur
 		}
 	}
 
-	auteur_modifier($id_auteur, array('login' => $new_login), true); // manque la gestion de $serveur
+	auteur_modifier($id_auteur, ['login' => $new_login], true); // manque la gestion de $serveur
 
 	return true;
 }
@@ -243,10 +288,19 @@ function auth_spip_retrouver_login($login, $serveur = '') {
 		return null;
 	} // pas la peine de requeter
 	$l = sql_quote($login, $serveur, 'text');
-	if ($r = sql_getfetsel('login', 'spip_auteurs',
-		"statut<>'5poubelle'" .
-		" AND (length(pass)>0)" .
-		" AND (login=$l)", '', '', '', '', $serveur)
+	if (
+		$r = sql_getfetsel(
+			'login',
+			'spip_auteurs',
+			"statut<>'5poubelle'" .
+			' AND (length(pass)>0)' .
+			" AND (login=$l)",
+			'',
+			'',
+			'',
+			'',
+			$serveur
+		)
 	) {
 		return $r;
 	}
@@ -255,10 +309,18 @@ function auth_spip_retrouver_login($login, $serveur = '') {
 	// Ne pas fusionner avec la requete precedente
 	// car un nom peut etre homonyme d'un autre login
 	else {
-		return sql_getfetsel('login', 'spip_auteurs',
+		return sql_getfetsel(
+			'login',
+			'spip_auteurs',
 			"statut<>'5poubelle'" .
-			" AND (length(pass)>0)" .
-			" AND (login<>'' AND (nom=$l OR email=$l))", '', '', '', '', $serveur);
+			' AND (length(pass)>0)' .
+			" AND (login<>'' AND (nom=$l OR email=$l))",
+			'',
+			'',
+			'',
+			'',
+			$serveur
+		);
 	}
 }
 
@@ -318,7 +380,7 @@ function auth_spip_autoriser_modifier_pass($serveur = '') {
 function auth_spip_verifier_pass($login, $new_pass, $id_auteur = 0, $serveur = '') {
 	// login et mot de passe
 	if (strlen($new_pass) < _PASS_LONGUEUR_MINI) {
-		return _T('info_passe_trop_court_car_pluriel', array('nb' => _PASS_LONGUEUR_MINI));
+		return _T('info_passe_trop_court_car_pluriel', ['nb' => _PASS_LONGUEUR_MINI]);
 	}
 
 	return '';
@@ -339,13 +401,14 @@ function auth_spip_modifier_pass($login, $new_pass, $id_auteur, $serveur = '') {
 		return false;
 	}
 
-	if (!$id_auteur = intval($id_auteur)
+	if (
+		!$id_auteur = intval($id_auteur)
 		or !sql_fetsel('login', 'spip_auteurs', 'id_auteur=' . intval($id_auteur), '', '', '', '', $serveur)
 	) {
 		return false;
 	}
 
-	$c = array();
+	$c = [];
 	include_spip('inc/acces');
 	include_spip('auth/sha256.inc');
 	$htpass = generer_htpass($new_pass);
@@ -374,30 +437,31 @@ function auth_spip_modifier_pass($login, $new_pass, $id_auteur, $serveur = '') {
  * @param string $serveur
  * @return void
  */
-function auth_spip_synchroniser_distant($id_auteur, $champs, $options = array(), $serveur = '') {
+function auth_spip_synchroniser_distant($id_auteur, $champs, $options = [], $serveur = '') {
 	// ne rien faire pour une base distante : on ne sait pas regenerer les htaccess
 	if (strlen($serveur)) {
 		return;
 	}
 	// si un login, pass ou statut a ete modifie
 	// regenerer les fichier htpass
-	if (isset($champs['login'])
+	if (
+		isset($champs['login'])
 		or isset($champs['pass'])
 		or isset($champs['statut'])
 		or (isset($options['all']) and $options['all'])
 	) {
-
 		$htaccess = _DIR_RESTREINT . _ACCESS_FILE_NAME;
 		$htpasswd = _DIR_TMP . _AUTH_USER_FILE;
 
 		// Cette variable de configuration peut etre posee par un plugin
 		// par exemple acces_restreint ;
 		// si .htaccess existe, outrepasser spip_meta
-		if ((!isset($GLOBALS['meta']['creer_htpasswd']) or ($GLOBALS['meta']['creer_htpasswd'] != 'oui'))
+		if (
+			(!isset($GLOBALS['meta']['creer_htpasswd']) or ($GLOBALS['meta']['creer_htpasswd'] != 'oui'))
 			and !@file_exists($htaccess)
 		) {
 			spip_unlink($htpasswd);
-			spip_unlink($htpasswd . "-admin");
+			spip_unlink($htpasswd . '-admin');
 
 			return;
 		}
@@ -408,8 +472,11 @@ function auth_spip_synchroniser_distant($id_auteur, $champs, $options = array(),
 
 		$p1 = ''; // login:htpass pour tous
 		$p2 = ''; // login:htpass pour les admins
-		$s = sql_select("login, htpass, statut", "spip_auteurs",
-			sql_in("statut", array('1comite', '0minirezo', 'nouveau')));
+		$s = sql_select(
+			'login, htpass, statut',
+			'spip_auteurs',
+			sql_in('statut', ['1comite', '0minirezo', 'nouveau'])
+		);
 		while ($t = sql_fetch($s)) {
 			if (strlen($t['login']) and strlen($t['htpass'])) {
 				$p1 .= $t['login'] . ':' . $t['htpass'] . "\n";

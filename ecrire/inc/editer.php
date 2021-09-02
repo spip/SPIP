@@ -65,11 +65,11 @@ function formulaires_editer_objet_traiter(
 	$lier_trad = 0,
 	$retour = '',
 	$config_fonc = 'articles_edit_config',
-	$row = array(),
+	$row = [],
 	$hidden = ''
 ) {
 
-	$res = array();
+	$res = [];
 	// eviter la redirection forcee par l'action...
 	set_request('redirect');
 	if ($action_editer = charger_fonction("editer_$type", 'action', true)) {
@@ -131,8 +131,8 @@ function formulaires_editer_objet_traiter(
  * @return array
  *     Tableau des erreurs
  **/
-function formulaires_editer_objet_verifier($type, $id = 'new', $oblis = array()) {
-	$erreurs = array();
+function formulaires_editer_objet_verifier($type, $id = 'new', $oblis = []) {
+	$erreurs = [];
 	if (intval($id)) {
 		$conflits = controler_contenu($type, $id);
 		if ($conflits and count($conflits)) {
@@ -204,7 +204,7 @@ function formulaires_editer_objet_charger(
 	$lier_trad = 0,
 	$retour = '',
 	$config_fonc = 'articles_edit_config',
-	$row = array(),
+	$row = [],
 	$hidden = ''
 ) {
 
@@ -213,11 +213,15 @@ function formulaires_editer_objet_charger(
 	$id_table_objet = id_table_objet($type);
 
 	// on accepte pas une fonction de config inconnue si elle vient d'un modele
-	if ($config_fonc
-	  and !in_array($config_fonc, ['articles_edit_config', 'rubriques_edit_config', 'auteurs_edit_config'])
-	  and $config_fonc !== $table_objet . '_edit_config') {
-		if ($args = test_formulaire_inclus_par_modele()
-		  and in_array($config_fonc, $args)) {
+	if (
+		$config_fonc
+		and !in_array($config_fonc, ['articles_edit_config', 'rubriques_edit_config', 'auteurs_edit_config'])
+		and $config_fonc !== $table_objet . '_edit_config'
+	) {
+		if (
+			$args = test_formulaire_inclus_par_modele()
+			and in_array($config_fonc, $args)
+		) {
 			$config_fonc = '';
 		}
 	}
@@ -239,7 +243,7 @@ function formulaires_editer_objet_charger(
 			}
 		}
 		if (!$row) {
-			$row = array();
+			$row = [];
 			$trouver_table = charger_fonction('trouver_table', 'base');
 			if ($desc = $trouver_table($table_objet)) {
 				foreach ($desc['field'] as $k => $v) {
@@ -270,24 +274,25 @@ function formulaires_editer_objet_charger(
 		} else {
 			$contexte['id_parent'] = '';
 		}
-		if (!$contexte['id_parent']
+		if (
+			!$contexte['id_parent']
 			and $preselectionner_parent_nouvel_objet = charger_fonction('preselectionner_parent_nouvel_objet', 'inc', true)
 		) {
 			$contexte['id_parent'] = $preselectionner_parent_nouvel_objet($type, $row);
 		}
 	}
 
-	$config = array();
+	$config = [];
 	if ($config_fonc) {
 		$contexte['config'] = $config = $config_fonc($contexte);
 		if (!$lang_default) {
 			$lang_default = $config['langue'] ?? session_get('lang') ;
 		}
 	}
-	$config = $config + array(
+	$config = $config + [
 		'lignes' => 0,
 		'langue' => '',
-	);
+	];
 
 	$att_text = " class='textarea' "
 		. " rows='"
@@ -317,17 +322,17 @@ function formulaires_editer_objet_charger(
 		. (isset($md5) ? $md5 : '');
 
 	// preciser que le formulaire doit passer dans un pipeline
-	$contexte['_pipeline'] = array('editer_contenu_objet', array('type' => $type, 'id' => $id));
+	$contexte['_pipeline'] = ['editer_contenu_objet', ['type' => $type, 'id' => $id]];
 
 	// preciser que le formulaire doit etre securise auteur/action
 	// n'est plus utile lorsque l'action accepte l'id en argument direct
 	// on le garde pour compat
-	$contexte['_action'] = array("editer_$type", $id);
+	$contexte['_action'] = ["editer_$type", $id];
 
 	// et in fine placer l'autorisation
 	include_spip('inc/autoriser');
-	if (intval($id)){
-		if (!autoriser('modifier', $type, intval($id))){
+	if (intval($id)) {
+		if (!autoriser('modifier', $type, intval($id))) {
 			$valeurs['editable'] = '';
 		}
 	}
@@ -367,9 +372,9 @@ function coupe_trop_long($texte) {
 			$suite = substr($texte, $pos + $decalage);
 		}
 
-		return (array($debut, $suite));
+		return ([$debut, $suite]);
 	} else {
-		return (array($texte, ''));
+		return ([$texte, '']);
 	}
 }
 
@@ -381,10 +386,11 @@ function coupe_trop_long($texte) {
  * @return array
  */
 function editer_texte_recolle($texte, $att_text) {
-	if ((strlen($texte) < 29 * 1024)
+	if (
+		(strlen($texte) < 29 * 1024)
 		or (include_spip('inc/layer') and ($GLOBALS['browser_name'] != 'MSIE'))
 	) {
-		return array($texte, '');
+		return [$texte, ''];
 	}
 
 	include_spip('inc/barre');
@@ -398,7 +404,7 @@ function editer_texte_recolle($texte, $att_text) {
 			"<textarea id='texte$nombre' name='texte_plus[$nombre]'$att_text>$texte1</textarea>\n";
 	}
 
-	return array($texte, $textes_supplement);
+	return [$texte, $textes_supplement];
 }
 
 /**
@@ -479,7 +485,7 @@ function controles_md5($data, $prefixe = 'ctr_', $format = 'html') {
 		return false;
 	}
 
-	$ctr = array();
+	$ctr = [];
 	foreach ($data as $key => $val) {
 		$m = md5($val);
 		$k = $prefixe . $key;
@@ -536,7 +542,7 @@ function controles_md5($data, $prefixe = 'ctr_', $format = 'html') {
  *     - base : le contenu du champ en base
  *     - post : le contenu posté
  **/
-function controler_contenu($type, $id, $options = array(), $c = false, $serveur = '') {
+function controler_contenu($type, $id, $options = [], $c = false, $serveur = '') {
 	include_spip('inc/filtres');
 
 	$table_objet = table_objet($type);
@@ -574,7 +580,7 @@ function controler_contenu($type, $id, $options = array(), $c = false, $serveur 
 
 	// N'accepter que les champs qui existent
 	// [TODO] ici aussi on peut valider les contenus en fonction du type
-	$champs = array();
+	$champs = [];
 	foreach ($desc['field'] as $champ => $ignore) {
 		if (isset($c[$champ])) {
 			$champs[$champ] = $c[$champ];
@@ -587,19 +593,19 @@ function controler_contenu($type, $id, $options = array(), $c = false, $serveur 
 	// Envoyer aux plugins
 	$champs = pipeline(
 		'pre_edition',
-		array(
-			'args' => array(
+		[
+			'args' => [
 				'table' => $spip_table_objet, // compatibilite
 				'table_objet' => $table_objet,
 				'spip_table_objet' => $spip_table_objet,
 				'type' => $type,
 				'id_objet' => $id,
-				'champs' => isset($options['champs']) ? $options['champs'] : array(), // [doc] c'est quoi ?
+				'champs' => isset($options['champs']) ? $options['champs'] : [], // [doc] c'est quoi ?
 				'action' => 'controler',
 				'serveur' => $serveur,
-			),
+			],
 			'data' => $champs
-		)
+		]
 	);
 
 	if (!$champs) {
@@ -673,7 +679,7 @@ function controler_md5(&$champs, $ctr, $type, $id, $serveur, $prefix = 'ctr_') {
 	// genere a partir de donnees modifiees dans l'intervalle ; ici
 	// on compare a ce qui est dans la base, et on bloque en cas
 	// de conflit.
-	$ctrh = $ctrq = $conflits = array();
+	$ctrh = $ctrq = $conflits = [];
 	foreach (array_keys($champs) as $key) {
 		if (isset($ctr[$prefix . $key]) and $m = $ctr[$prefix . $key]) {
 			$ctrh[$key] = $m;
@@ -683,13 +689,14 @@ function controler_md5(&$champs, $ctr, $type, $id, $serveur, $prefix = 'ctr_') {
 	if ($ctrq) {
 		$ctrq = sql_fetsel($ctrq, $spip_table_objet, "$id_table_objet=$id", $serveur);
 		foreach ($ctrh as $key => $m) {
-			if ($m != md5($ctrq[$key])
+			if (
+				$m != md5($ctrq[$key])
 				and $champs[$key] !== $ctrq[$key]
 			) {
-				$conflits[$key] = array(
+				$conflits[$key] = [
 					'base' => $ctrq[$key],
 					'post' => $champs[$key]
-				);
+				];
 				unset($champs[$key]); # stocker quand meme les modifs ?
 			}
 		}
@@ -734,19 +741,19 @@ function signaler_conflits_edition($conflits, $redirect = '') {
 	include_spip('afficher_diff/champ');
 	include_spip('inc/suivi_versions');
 	include_spip('inc/diff');
-	$diffs = array();
+	$diffs = [];
 	foreach ($conflits as $champ => $a) {
 		// probleme de stockage ou conflit d'edition ?
 		$base = isset($a['save']) ? $a['save'] : $a['base'];
 
-		$diff = new Diff(new DiffTexte);
+		$diff = new Diff(new DiffTexte());
 		$n = preparer_diff($a['post']);
 		$o = preparer_diff($base);
 		$d = propre_diff(afficher_para_modifies(afficher_diff($diff->comparer($n, $o))));
 
 		$titre = isset($a['save']) ? _L(
 			'Echec lors de l\'enregistrement du champ @champ@',
-			array('champ' => $champ)
+			['champ' => $champ]
 		) : $champ;
 
 		$diffs[] = "<h2>$titre</h2>\n"

@@ -17,17 +17,17 @@ include_spip('inc/presentation');
 include_spip('inc/config');
 
 function formulaires_configurer_relayeur_charger_dist() {
-	$valeurs = array(
+	$valeurs = [
 		'http_proxy' => no_password_proxy_url(lire_config('http_proxy', '')),
 		'http_noproxy' => lire_config('http_noproxy', ''),
 		'test_proxy' => 'https://www.spip.net/',
-	);
+	];
 
 	return $valeurs;
 }
 
 function formulaires_configurer_relayeur_verifier_dist() {
-	$erreurs = array();
+	$erreurs = [];
 	$http_proxy = relayeur_saisie_ou_config(_request('http_proxy'), lire_config('http_proxy', ''));
 	$http_noproxy = _request('http_noproxy');
 
@@ -66,7 +66,7 @@ function formulaires_configurer_relayeur_verifier_dist() {
 				} else {
 					$erreurs['message_erreur'] = $info . _T(
 						'info_impossible_lire_page',
-						array('test_proxy' => "<tt>$test_proxy</tt>")
+						['test_proxy' => "<tt>$test_proxy</tt>"]
 					)
 						. ' <b><tt>' . no_password_proxy_url($http_proxy) . '</tt></b>.'
 						. aider('confhttpproxy');
@@ -79,7 +79,7 @@ function formulaires_configurer_relayeur_verifier_dist() {
 }
 
 function formulaires_configurer_relayeur_traiter_dist() {
-	$res = array('editable' => true);
+	$res = ['editable' => true];
 
 	$http_proxy = relayeur_saisie_ou_config(_request('http_proxy'), lire_config('http_proxy', ''));
 	$http_noproxy = _request('http_noproxy');
@@ -138,7 +138,8 @@ function glue_url($url) {
 // Ne pas afficher la partie 'password' du proxy
 // https://code.spip.net/@no_password_proxy_url
 function no_password_proxy_url($http_proxy) {
-	if ($http_proxy
+	if (
+		$http_proxy
 		and $p = @parse_url($http_proxy)
 		and isset($p['pass'])
 		and $p['pass']

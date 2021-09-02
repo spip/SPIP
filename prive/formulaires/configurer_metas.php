@@ -31,7 +31,7 @@ function formulaires_configurer_metas_charger_dist($form) {
 function formulaires_configurer_metas_verifier_dist($form) {
 	$f = charger_fonction('verifier', "formulaires/$form", true);
 
-	return $f ? $f($form) : array();
+	return $f ? $f($form) : [];
 }
 
 function formulaires_configurer_metas_traiter_dist($form) {
@@ -50,8 +50,8 @@ function formulaires_configurer_metas_traiter_dist($form) {
 			ecrire_meta($k, is_array($v) ? serialise($v) : $v, 'oui', $meta);
 		}
 
-		return !isset($infos['prefix']) ? array()
-			: array('redirect' => generer_url_ecrire($infos['prefix']));
+		return !isset($infos['prefix']) ? []
+			: ['redirect' => generer_url_ecrire($infos['prefix'])];
 	}
 }
 
@@ -71,7 +71,7 @@ function formulaires_configurer_metas_recense($form, $opt = '') {
 	if ($f and preg_match_all(_EXTRAIRE_SAISIES, $f, $r, $opt)) {
 		return $r;
 	} else {
-		return array();
+		return [];
 	}
 }
 
@@ -91,7 +91,7 @@ function formulaires_configurer_metas_infos($form) {
 		return '';
 	} // cas traite en amont normalement.
 	if (!preg_match(_EXTRAIRE_PLUGIN, $path, $m)) {
-		return array('path' => $path, 'meta' => 'meta');
+		return ['path' => $path, 'meta' => 'meta'];
 	}
 	$plugin = $m[2];
 	$get_infos = charger_fonction('get_infos', 'plugins');

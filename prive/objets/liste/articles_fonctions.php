@@ -30,7 +30,7 @@ function defaut_tri_defined($defaut) {
 		array_pop($tri);
 	}
 	$tri = implode(' ', $tri);
-	$tri = array($tri => $sens);
+	$tri = [$tri => $sens];
 	foreach ($defaut as $n => $s) {
 		if (!isset($tri[$n])) {
 			$tri[$n] = $s;

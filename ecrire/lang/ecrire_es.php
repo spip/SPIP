@@ -63,6 +63,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_radio_non_envoi_annonces_editoriales' => 'No enviar anuncios editoriales',
 	'bouton_redirection' => 'Redirección',
 	'bouton_reinitialiser_aux_valeurs_par_defaut' => 'Reinicializar a los valores por omisión',
+	'bouton_relancer_inscription' => 'Relanzar la inscripción',
+	'bouton_relancer_inscriptions' => 'Relanzamiento de las inscripciones',
 	'bouton_relancer_installation' => 'Relanzar la instalación',
 	'bouton_reset_password' => 'Generar una nueva contraseña y enviarla por correo electrónico',
 	'bouton_suivant' => 'Siguiente',
@@ -95,6 +97,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_mot_heures' => 'horas',
 
 	// E
+	'ecran_connexion_couleur_principale' => 'Color principal',
+	'ecran_connexion_image_fond' => 'Imagen de fondo',
+	'ecran_connexion_image_fond_explication' => 'Utilizar una imagen (en formato JPEG, 1920x1080 píxeles)',
+	'ecran_connexion_image_revenir_couleur_defaut' => 'Volver al color por defecto',
+	'ecran_connexion_titre' => 'Pantalla de acceso',
 	'ecran_securite' => ' + pantalla de seguridad @version@',
 	'email' => 'correo electrónico',
 	'email_2' => 'correo electrónico:',
@@ -148,6 +155,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_plugin_prefix_manquant' => 'Espacio de nombres del plugin no definido',
 	'erreur_plugin_tag_plugin_absent' => 'Falta el &lt;plugin&gt; en el archivo de  definición',
 	'erreur_plugin_version_manquant' => 'Falta la versión del plugin',
+	'erreur_type_fichier' => 'Tipo de archivo incorrecto',
 
 	// H
 	'htaccess_a_simuler' => 'Advertencia: la configuración de su servidor HTTP no toma en cuenta los archivos @htaccess@. Para poder asegurar una buena seguridad, debe modificar la configuración correspondiente, o bien que las constantes @constantes@ (que se pueden definir en el archivo mes_options.php) tomen valores de carpetas fuera de @document_root@.',
@@ -374,7 +382,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 	'info_nouvel_article' => 'Nuevo artículo',
 	'info_nouvelle_traduction' => 'Nueva traducción:',
 	'info_numero_article' => 'ARTÍCULO NÚMERO:',
-	'info_obligatoire_02' => '(obligatorio)', # MODIF
+	'info_obligatoire_02' => '(obligatorio)',
 	'info_option_accepter_visiteurs' => 'Aceptar la inscripción de los visitantes del sitio público',
 	'info_option_ne_pas_accepter_visiteurs' => 'Rechazar la inscripción de visitantes',
 	'info_options_avancees' => 'OPCIONES AVANZADAS',
@@ -671,9 +679,9 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 	'plugin_titre_automatique_ajouter' => 'Añadir plugins',
 	'plugin_titre_installation' => 'Instalación del plugin @plugin@',
 	'plugin_titre_modifier' => 'Mis plugins',
-	'plugin_utilise_extension_php' => 'Utiliza la extensión PHP @plugin@ en versión @version@.', # MODIF
-	'plugin_utilise_php' => 'Utiliza @plugin@ en versión @version@.', # MODIF
-	'plugin_utilise_plugin' => 'Utiliza le plugin @plugin@ en versión @version@.', # MODIF
+	'plugin_utilise_extension_php' => 'La extensión PHP del plugin @plugin@ debe estar en la versión @version@.',
+	'plugin_utilise_php' => '@plugin@ debe estar en la versión @version@.',
+	'plugin_utilise_plugin' => 'El plugin @plugin@ debe estar en la versión @version@.',
 	'plugin_zip_active' => 'Continúe para activarlo',
 	'plugin_zip_adresse' => 'indique aquí la dirección de un archivo zip de plugin a descargar, o también la dirección de una lista de plugins.',
 	'plugin_zip_adresse_champ' => 'Dirección del plugin o de la lista ',
@@ -700,18 +708,18 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 
 	// Q
 	'queue_executer_maintenant' => 'Ejecutar ahora',
-	'queue_info_purger' => 'Puede eliminar todos los trabajos pendientes y reinicializar la lista con los trabajos periódicos', # MODIF
-	'queue_nb_jobs_in_queue' => '@nb@ trabajos en espera', # MODIF
-	'queue_next_job_in_nb_sec' => 'Próximo trabajo en @nb@ s', # MODIF
-	'queue_no_job_in_queue' => 'Ningún trabajo en espera', # MODIF
-	'queue_one_job_in_queue' => '1 trabajo en espera', # MODIF
+	'queue_info_purger' => 'Puede eliminar todas las tareas pendientes en segundo plano y restablecer la lista con las tareas periódicas',
+	'queue_nb_jobs_in_queue' => '@nb@ tareas pendientes',
+	'queue_next_job_in_nb_sec' => 'Siguiente tarea en @nb@ s',
+	'queue_no_job_in_queue' => 'No hay tareas pendientes',
+	'queue_one_job_in_queue' => '1 tarea pendiente',
 	'queue_priorite_tache' => 'prioridad',
-	'queue_purger_queue' => 'Purgar la lista de trabajos', # MODIF
-	'queue_titre' => 'Lista de trabajos', # MODIF
+	'queue_purger_queue' => 'Restablecer la lista de tareas',
+	'queue_titre' => 'Tareas en segundo plano',
 
 	// R
 	'repertoire_plugins' => 'Carpeta:',
-	'required' => '(obligatorio)', # MODIF
+	'required' => '(obligatorio)',
 
 	// S
 	'sans_heure' => 'sin hora',

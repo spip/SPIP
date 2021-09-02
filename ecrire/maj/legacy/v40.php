@@ -12,9 +12,9 @@
 
 /**
  * Gestion des mises à jour de bdd de SPIP
- * 
+ *
  * Mises à jour en 4.0 (avant 2021)
- * 
+ *
  * À partir de 2021, les numéros d'upgrade sont de la forme YYYYMMDD00 où 00 est un incrément.
  *
  * @package SPIP\Core\SQL\Upgrade
@@ -61,15 +61,17 @@ function maj_timestamp_mysql($tables = null) {
 			$fields_corrected = _mysql_remplacements_definitions_table($desc['field']);
 			$d = array_diff($desc['field'], $fields_corrected);
 			if ($d) {
-				spip_log("Table $table TIMESTAMP incorrect", "maj");
+				spip_log("Table $table TIMESTAMP incorrect", 'maj');
 				foreach ($desc['field'] as $field => $type) {
 					if ($desc['field'][$field] !== $fields_corrected[$field]) {
-						spip_log("Adaptation TIMESTAMP table $table", "maj." . _LOG_INFO_IMPORTANTE);
+						spip_log("Adaptation TIMESTAMP table $table", 'maj.' . _LOG_INFO_IMPORTANTE);
 						sql_alter("table $table change $field $field " . $fields_corrected[$field]);
 						$trouver_table('');
 						$new_desc = $trouver_table($table);
-						spip_log("Apres conversion $table : " . var_export($new_desc['field'], true),
-							"maj." . _LOG_INFO_IMPORTANTE);
+						spip_log(
+							"Apres conversion $table : " . var_export($new_desc['field'], true),
+							'maj.' . _LOG_INFO_IMPORTANTE
+						);
 					}
 				}
 			}

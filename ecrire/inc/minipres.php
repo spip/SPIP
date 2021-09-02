@@ -60,13 +60,13 @@ function install_debut_html($titre = 'AUTO', $onLoad = '', $all_inline = false) 
 		header('Content-Type: text/html; charset=utf-8');
 	}
 
-	$css = "";
-	$files = array('reset.css', 'clear.css', 'minipres.css');
+	$css = '';
+	$files = ['reset.css', 'clear.css', 'minipres.css'];
 	if ($all_inline) {
 		// inliner les CSS (optimisation de la page minipres qui passe en un seul hit a la demande)
 		foreach ($files as $name) {
 			$file = direction_css(find_in_theme($name));
-			if (function_exists("compacte")) {
+			if (function_exists('compacte')) {
 				$file = compacte($file);
 			} else {
 				$file = url_absolue_css($file); // precaution
@@ -74,7 +74,7 @@ function install_debut_html($titre = 'AUTO', $onLoad = '', $all_inline = false) 
 			lire_fichier($file, $c);
 			$css .= $c;
 		}
-		$css = "<style type='text/css'>" . $css . "</style>";
+		$css = "<style type='text/css'>" . $css . '</style>';
 	} else {
 		foreach ($files as $name) {
 			$file = direction_css(find_in_theme($name));
@@ -90,13 +90,13 @@ function install_debut_html($titre = 'AUTO', $onLoad = '', $all_inline = false) 
 	return _DOCTYPE_ECRIRE .
 	html_lang_attributes() .
 	"<head>\n" .
-	"<title>" .
+	'<title>' .
 	textebrut($titre) .
 	"</title>\n" .
 	"<meta name='viewport' content='width=device-width' />\n" .
 	$css .
-	"</head>
-<body" . $onLoad . " class='minipres'>
+	'</head>
+<body' . $onLoad . " class='minipres'>
 	<div id='minipres'>
 	<h1>" .
 	$titre .
@@ -146,22 +146,22 @@ function install_fin_html() {
  * @return string
  *   HTML de la page
  */
-function minipres($titre = '', $corps = "", $options = array()) {
+function minipres($titre = '', $corps = '', $options = []) {
 
 	// compat signature old
 	// minipres($titre='', $corps="", $onload='', $all_inline = false)
 	$args = func_get_args();
 	if (isset($args[2]) and is_string($args[2])) {
-		$options = array('onload' => $args[2]);
+		$options = ['onload' => $args[2]];
 	}
 	if (isset($args[3])) {
 		$options['all_inline'] = $args[3];
 	}
 
-	$options = array_merge(array(
+	$options = array_merge([
 		'onload' => '',
 		'all_inline' => false,
-	), $options);
+	], $options);
 
 	if (!defined('_AJAX')) {
 		define('_AJAX', false);
@@ -170,7 +170,8 @@ function minipres($titre = '', $corps = "", $options = array()) {
 		if (!isset($options['status'])) {
 			$options['status'] = 403;
 		}
-		if (!$titre = _request('action')
+		if (
+			!$titre = _request('action')
 			and !$titre = _request('exec')
 			and !$titre = _request('page')
 		) {
@@ -190,14 +191,14 @@ function minipres($titre = '', $corps = "", $options = array()) {
 			$titre = _T('info_acces_interdit');
 		}
 
-		if ($statut AND test_espace_prive()) {
-			$corps = bouton_action(_T('public:accueil_site'),generer_url_ecrire('accueil'));
+		if ($statut and test_espace_prive()) {
+			$corps = bouton_action(_T('public:accueil_site'), generer_url_ecrire('accueil'));
 		}
 		elseif (!empty($_COOKIE['spip_admin'])) {
-			$corps = bouton_action(_T('public:lien_connecter'),generer_url_public('login'));
+			$corps = bouton_action(_T('public:lien_connecter'), generer_url_public('login'));
 		}
 		else {
-			$corps = bouton_action(_T('public:accueil_site'),$GLOBALS['meta']['adresse_site']);
+			$corps = bouton_action(_T('public:accueil_site'), $GLOBALS['meta']['adresse_site']);
 		}
 		$corps = "<div class='boutons'>$corps</div>";
 		spip_log($nom . " $titre " . $_SERVER['REQUEST_URI']);
@@ -218,6 +219,6 @@ function minipres($titre = '', $corps = "", $options = array()) {
 		foreach ($_POST as $v => $c) {
 			$url = parametre_url($url, $v, $c, '&');
 		}
-		ajax_retour("<div>" . $titre . redirige_formulaire($url) . "</div>", false);
+		ajax_retour('<div>' . $titre . redirige_formulaire($url) . '</div>', false);
 	}
 }

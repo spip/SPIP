@@ -44,13 +44,12 @@ function balise_INFO__dist($p) {
 	$type_objet = interprete_argument_balise(1, $p);
 	$id_objet = interprete_argument_balise(2, $p);
 	if ($info === 'INFO_' or !$type_objet or !$id_objet) {
-		$msg = _T('zbug_balise_sans_argument', array('balise' => ' INFO_'));
+		$msg = _T('zbug_balise_sans_argument', ['balise' => ' INFO_']);
 		erreur_squelette($msg, $p);
 		$p->interdire_scripts = true;
 
 		return $p;
 	} else {
-
 		// Récupérer tous les params à la suite de objet et id_objet
 		$_params = '[';
 		$nb_params = count($p->param[0]); // 1ère valeur vide donc 1 en plus

@@ -64,16 +64,17 @@ include_spip('base/objets');
  *
  **/
 function base_trouver_table_dist($nom, $serveur = '', $table_spip = true) {
-	static $nom_cache_desc_sql = array();
+	static $nom_cache_desc_sql = [];
 
-	if (!spip_connect($serveur)
+	if (
+		!spip_connect($serveur)
 		or !preg_match('/^[a-zA-Z0-9._-]*/', $nom)
 	) {
 		return null;
 	}
 
 	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
-	$objets_sql = lister_tables_objets_sql("::md5");
+	$objets_sql = lister_tables_objets_sql('::md5');
 
 	// le nom du cache depend du serveur mais aussi du nom de la db et du prefixe
 	// ce qui permet une auto invalidation en cas de modif manuelle du fichier
@@ -81,8 +82,8 @@ function base_trouver_table_dist($nom, $serveur = '', $table_spip = true) {
 	if (!isset($nom_cache_desc_sql[$serveur][$objets_sql])) {
 		$nom_cache_desc_sql[$serveur][$objets_sql] =
 			_DIR_CACHE . 'sql_desc_'
-			. ($serveur ? "{$serveur}_" : "")
-			. substr(md5($connexion['db'] . ":" . $connexion['prefixe'] . ":$objets_sql"), 0, 8)
+			. ($serveur ? "{$serveur}_" : '')
+			. substr(md5($connexion['db'] . ':' . $connexion['prefixe'] . ":$objets_sql"), 0, 8)
 			. '.txt';
 		// nouveau nom de cache = nouvelle version en memoire
 		unset($connexion['tables']);
@@ -91,7 +92,7 @@ function base_trouver_table_dist($nom, $serveur = '', $table_spip = true) {
 	// un appel avec $nom vide est une demande explicite de vidange du cache des descriptions
 	if (!$nom) {
 		spip_unlink($nom_cache_desc_sql[$serveur][$objets_sql]);
-		$connexion['tables'] = array();
+		$connexion['tables'] = [];
 
 		return null;
 	}
@@ -118,18 +119,19 @@ function base_trouver_table_dist($nom, $serveur = '', $table_spip = true) {
 	// et si on est pas explicitement en recalcul
 	// on essaye de recharger le cache des decriptions de ce serveur
 	// dans le fichier cache
-	if (!isset($connexion['tables'][$nom_sql])
+	if (
+		!isset($connexion['tables'][$nom_sql])
 		and defined('_VAR_MODE') and _VAR_MODE !== 'recalcul'
 		and (!isset($connexion['tables']) or !$connexion['tables'])
 	) {
-		if (lire_fichier($nom_cache_desc_sql[$serveur][$objets_sql], $desc_cache)
+		if (
+			lire_fichier($nom_cache_desc_sql[$serveur][$objets_sql], $desc_cache)
 			and $desc_cache = unserialize($desc_cache)
 		) {
 			$connexion['tables'] = $desc_cache;
 		}
 	}
 	if ($table_spip and !isset($connexion['tables'][$nom_sql])) {
-
 		if (isset($GLOBALS['tables_principales'][$nom_sql])) {
 			$fdesc = $GLOBALS['tables_principales'][$nom_sql];
 		}
@@ -139,7 +141,8 @@ function base_trouver_table_dist($nom, $serveur = '', $table_spip = true) {
 		elseif ($nom_sql == $nom and isset($GLOBALS['tables_principales']['spip_' . $nom])) {
 			$nom_sql = 'spip_' . $nom;
 			$fdesc = &$GLOBALS['tables_principales'][$nom_sql];
-		} elseif (isset($GLOBALS['tables_auxiliaires'][$n = $nom])
+		} elseif (
+			isset($GLOBALS['tables_auxiliaires'][$n = $nom])
 			or isset($GLOBALS['tables_auxiliaires'][$n = 'spip_' . $nom])
 		) {
 			$nom_sql = $n;
@@ -147,7 +150,6 @@ function base_trouver_table_dist($nom, $serveur = '', $table_spip = true) {
 		}  # table locale a cote de SPIP, comme non SPIP:
 	}
 	if (!isset($connexion['tables'][$nom_sql])) {
-
 		// La *vraie* base a la priorite
 		$desc = sql_showtable($nom_sql, $table_spip, $serveur);
 		if (!$desc or !$desc['field']) {
@@ -178,11 +180,11 @@ function base_trouver_table_dist($nom, $serveur = '', $table_spip = true) {
 		// $desc est prioritaire pour la description de la table
 		$desc = array_merge(lister_tables_objets_sql($nom_sql, $desc), $desc);
 		// s'assurer qu'on a toujours un 'key'
-		if (!isset($desc['key']) && !empty($fdesc['key'])){
+		if (!isset($desc['key']) && !empty($fdesc['key'])) {
 			$desc['key'] = $fdesc['key'];
 		}
 		if (! isset($desc['key'])) {
-			$desc['key'] = array();
+			$desc['key'] = [];
 		}
 
 		// si tables_objets_sql est bien fini d'init, on peut cacher

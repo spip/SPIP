@@ -145,8 +145,8 @@ function autoriser_dist($faire, $type = '', $id = 0, $qui = null, $opt = null) {
 	// Qui ? visiteur_session ?
 	// si null ou '' (appel depuis #AUTORISER) on prend l'auteur loge
 	if ($qui === null or $qui === '') {
-		$qui = $GLOBALS['visiteur_session'] ? $GLOBALS['visiteur_session'] : array();
-		$qui = array_merge(array('statut' => '', 'id_auteur' => 0, 'webmestre' => 'non'), $qui);
+		$qui = $GLOBALS['visiteur_session'] ? $GLOBALS['visiteur_session'] : [];
+		$qui = array_merge(['statut' => '', 'id_auteur' => 0, 'webmestre' => 'non'], $qui);
 	} elseif (is_numeric($qui)) {
 		$qui = sql_fetsel('*', 'spip_auteurs', 'id_auteur=' . $qui);
 	}
@@ -154,7 +154,7 @@ function autoriser_dist($faire, $type = '', $id = 0, $qui = null, $opt = null) {
 	// Admins restreints, on construit ici (pas generique mais...)
 	// le tableau de toutes leurs rubriques (y compris les sous-rubriques)
 	if (_ADMINS_RESTREINTS and is_array($qui)) {
-		$qui['restreint'] = isset($qui['id_auteur']) ? liste_rubriques_auteur($qui['id_auteur']) : array();
+		$qui['restreint'] = isset($qui['id_auteur']) ? liste_rubriques_auteur($qui['id_auteur']) : [];
 	}
 
 	spip_log(
@@ -167,8 +167,9 @@ function autoriser_dist($faire, $type = '', $id = 0, $qui = null, $opt = null) {
 	$type = str_replace('_', '', strncmp($type, '_', 1) == 0 ? $type : objet_type($type, false));
 
 	// Si une exception a ete decretee plus haut dans le code, l'appliquer
-	if ((isset($GLOBALS['autoriser_exception'][$faire][$type][$id]) and autoriser_exception($faire, $type, $id, 'verifier'))
-	  or (isset($GLOBALS['autoriser_exception'][$faire][$type]['*']) and autoriser_exception($faire, $type, '*', 'verifier'))
+	if (
+		(isset($GLOBALS['autoriser_exception'][$faire][$type][$id]) and autoriser_exception($faire, $type, $id, 'verifier'))
+		or (isset($GLOBALS['autoriser_exception'][$faire][$type]['*']) and autoriser_exception($faire, $type, '*', 'verifier'))
 	) {
 		spip_log("autoriser ($faire, $type, $id, " . (isset($qui['nom']) ? $qui['nom'] : '') . ') : OK Exception', 'autoriser' . _LOG_DEBUG);
 		return true;
@@ -178,7 +179,7 @@ function autoriser_dist($faire, $type = '', $id = 0, $qui = null, $opt = null) {
 	// Dans l'ordre on va chercher autoriser_type_faire[_dist], autoriser_type[_dist],
 	// autoriser_faire[_dist], autoriser_defaut[_dist]
 	$fonctions = $type
-		? array(
+		? [
 			'autoriser_' . $type . '_' . $faire,
 			'autoriser_' . $type . '_' . $faire . '_dist',
 			'autoriser_' . $type,
@@ -187,13 +188,13 @@ function autoriser_dist($faire, $type = '', $id = 0, $qui = null, $opt = null) {
 			'autoriser_' . $faire . '_dist',
 			'autoriser_defaut',
 			'autoriser_defaut_dist'
-		)
-		: array(
+		]
+		: [
 			'autoriser_' . $faire,
 			'autoriser_' . $faire . '_dist',
 			'autoriser_defaut',
 			'autoriser_defaut_dist'
-		);
+		];
 
 	foreach ($fonctions as $f) {
 		if (function_exists($f)) {
@@ -211,7 +212,7 @@ function autoriser_dist($faire, $type = '', $id = 0, $qui = null, $opt = null) {
 }
 
 // une globale pour aller au plus vite dans la fonction generique ci dessus
-$GLOBALS['autoriser_exception'] = array();
+$GLOBALS['autoriser_exception'] = [];
 
 /**
  * Accorder une autorisation exceptionnel pour le hit en cours, ou la revoquer
@@ -296,7 +297,7 @@ function autoriser_loger_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_ecrire_dist($faire, $type, $id, $qui, $opt) {
-	return isset($qui['statut']) and in_array($qui['statut'], array('0minirezo', '1comite'));
+	return isset($qui['statut']) and in_array($qui['statut'], ['0minirezo', '1comite']);
 }
 
 /**
@@ -313,7 +314,7 @@ function autoriser_ecrire_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_creer_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo', '1comite'));
+	return in_array($qui['statut'], ['0minirezo', '1comite']);
 }
 
 /**
@@ -368,7 +369,7 @@ function autoriser_previsualiser_dist($faire, $type, $id, $qui, $opt) {
  * @param  array $opt Options de cette autorisation
  * @return boolean True si autorisé, false sinon.
  */
-function test_previsualiser_objet_champ($type = null, $id = 0, $qui = array(), $opt = array()) {
+function test_previsualiser_objet_champ($type = null, $id = 0, $qui = [], $opt = []) {
 
 	// si pas de type et statut fourni, c'est une autorisation generale => OK
 	if (!$type) {
@@ -390,7 +391,6 @@ function test_previsualiser_objet_champ($type = null, $id = 0, $qui = array(), $
 				$previsu = explode(',', $c['previsu']);
 				// regarder si ce statut est autorise pour l'auteur
 				if (in_array($opt[$champ] . '/auteur', $previsu)) {
-
 					// retrouver l’id_auteur qui a filé un lien de prévisu éventuellement,
 					// sinon l’auteur en session
 					include_spip('inc/securiser_action');
@@ -404,12 +404,14 @@ function test_previsualiser_objet_champ($type = null, $id = 0, $qui = array(), $
 
 					if (!$id_auteur) {
 						return false;
-					} elseif(autoriser('previsualiser' . $opt[$champ], $type, '', $id_auteur)) {
+					} elseif (autoriser('previsualiser' . $opt[$champ], $type, '', $id_auteur)) {
 						// dans ce cas (admin en general), pas de filtrage sur ce statut
-					} elseif (!sql_countsel(
-						'spip_auteurs_liens',
-						'id_auteur=' . intval($id_auteur) . ' AND objet=' . sql_quote($type) . ' AND id_objet=' . intval($id)
-					)) {
+					} elseif (
+						!sql_countsel(
+							'spip_auteurs_liens',
+							'id_auteur=' . intval($id_auteur) . ' AND objet=' . sql_quote($type) . ' AND id_objet=' . intval($id)
+						)
+					) {
 						return false;
 					} // pas auteur de cet objet => NIET
 				} elseif (!in_array($opt[$champ], $previsu)) {
@@ -437,12 +439,16 @@ function autoriser_changerlangue_dist($faire, $type, $id, $qui, $opt) {
 	$multi_objets = explode(',', lire_config('multi_objets'));
 	$gerer_trad_objets = explode(',', lire_config('gerer_trad_objets'));
 	$table = table_objet_sql($type);
-	if (in_array($table, $multi_objets)
-		or in_array($table, $gerer_trad_objets)) { // affichage du formulaire si la configuration l'accepte
+	if (
+		in_array($table, $multi_objets)
+		or in_array($table, $gerer_trad_objets)
+	) { // affichage du formulaire si la configuration l'accepte
 		$multi_secteurs = lire_config('multi_secteurs');
 		$champs = objet_info($type, 'field');
-		if ($multi_secteurs == 'oui'
-			and array_key_exists('id_rubrique', $champs)) {
+		if (
+			$multi_secteurs == 'oui'
+			and array_key_exists('id_rubrique', $champs)
+		) {
 			// multilinguisme par secteur et objet rattaché à une rubrique
 			$primary = id_table_objet($type);
 			if ($table != 'spip_rubriques') {
@@ -508,7 +514,7 @@ function autoriser_dater_dist($faire, $type, $id, $qui, $opt) {
 	if (!$desc) {
 		return false;
 	}
-	
+
 	if (!isset($opt['statut'])) {
 		if (isset($desc['field']['statut'])) {
 			$statut = sql_getfetsel('statut', $desc['table'], id_table_objet($type) . '=' . intval($id));
@@ -518,16 +524,16 @@ function autoriser_dater_dist($faire, $type, $id, $qui, $opt) {
 	} else {
 		$statut = $opt['statut'];
 	}
-	
+
 	// Liste des statuts publiés pour cet objet
 	if (isset($desc['statut'][0]['publie'])) {
 		$statuts_publies = explode(',', $desc['statut'][0]['publie']);
 	}
 	// Sinon en dur le statut "publie"
 	else {
-		$statuts_publies = array('publie');
+		$statuts_publies = ['publie'];
 	}
-	
+
 	if (
 		in_array($statut, $statuts_publies)
 		// Ou cas particulier géré en dur ici pour les articles
@@ -681,7 +687,7 @@ function autoriser_rubrique_supprimer_dist($faire, $type, $id, $qui, $opt) {
 
 	$compte = pipeline(
 		'objet_compte_enfants',
-		array('args' => array('objet' => 'rubrique', 'id_objet' => $id), 'data' => array())
+		['args' => ['objet' => 'rubrique', 'id_objet' => $id], 'data' => []]
 	);
 	foreach ($compte as $objet => $n) {
 		if ($n) {
@@ -716,8 +722,8 @@ function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
 			autoriser('publierdans', 'rubrique', $r['id_rubrique'], $qui, $opt)
 			or (
 				(!isset($opt['statut']) or $opt['statut'] !== 'publie')
-				and in_array($qui['statut'], array('0minirezo', '1comite'))
-				and in_array($r['statut'], array('prop', 'prepa', 'poubelle'))
+				and in_array($qui['statut'], ['0minirezo', '1comite'])
+				and in_array($r['statut'], ['prop', 'prepa', 'poubelle'])
 				and auteurs_objet('article', $id, 'id_auteur=' . $qui['id_auteur'])
 			)
 		);
@@ -741,7 +747,7 @@ function autoriser_article_creer_dist($faire, $type, $id, $qui, $opt) {
 		return autoriser('creerarticledans', 'rubrique', $opt['id_parent'], $qui);
 	}
 	else {
-		return (sql_countsel('spip_rubriques') > 0 and in_array($qui['statut'], array('0minirezo', '1comite')));
+		return (sql_countsel('spip_rubriques') > 0 and in_array($qui['statut'], ['0minirezo', '1comite']));
 	}
 }
 
@@ -778,7 +784,7 @@ function autoriser_article_voir_dist($faire, $type, $id, $qui, $opt) {
 	return
 		// si on est pas auteur de l'article,
 		// seuls les propose et publies sont visibles
-		in_array($statut, array('prop', 'publie'))
+		in_array($statut, ['prop', 'publie'])
 		// sinon si on est auteur, on a le droit de le voir, evidemment !
 		or
 		($id
@@ -801,8 +807,10 @@ function autoriser_article_voir_dist($faire, $type, $id, $qui, $opt) {
  **/
 function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
 	# securite, mais on aurait pas du arriver ici !
-	if (function_exists($f = 'autoriser_' . $type . '_voir')
-		or function_exists($f = 'autoriser_' . $type . '_voir_dist')) {
+	if (
+		function_exists($f = 'autoriser_' . $type . '_voir')
+		or function_exists($f = 'autoriser_' . $type . '_voir_dist')
+	) {
 		return $f($faire, $type, $id, $qui, $opt);
 	}
 
@@ -811,7 +819,7 @@ function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
 	}
 	// admins et redacteurs peuvent voir un auteur
 	if ($type == 'auteur') {
-		return in_array($qui['statut'], array('0minirezo', '1comite'));
+		return in_array($qui['statut'], ['0minirezo', '1comite']);
 	}
 	// sinon par defaut tout est visible
 	// sauf cas particuliers traites separemment (ie article)
@@ -911,7 +919,8 @@ function autoriser_detruire_dist($faire, $type, $id, $qui, $opt) {
  **/
 function autoriser_auteur_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 	// les admins peuvent "previsualiser" une page auteur
-	if ($qui['statut'] == '0minirezo'
+	if (
+		$qui['statut'] == '0minirezo'
 		and !$qui['restreint']
 	) {
 		return true;
@@ -973,8 +982,9 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 
 	// Si pas admin : seulement le droit de modifier ses donnees perso, mais pas statut ni login
 	// la modif de l'email doit etre verifiee ou notifiee si possible, mais c'est a l'interface de gerer ca
-	if (!in_array($qui['statut'], array('0minirezo'))) {
-		if ($id == $qui['id_auteur']
+	if (!in_array($qui['statut'], ['0minirezo'])) {
+		if (
+			$id == $qui['id_auteur']
 			&& empty($opt['statut'])
 			&& empty($opt['webmestre'])
 			&& empty($opt['restreintes'])
@@ -990,7 +1000,8 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 	if ($qui['restreint']) {
 		if (isset($opt['webmestre']) and $opt['webmestre']) {
 			return false;
-		} elseif ((isset($opt['statut']) and ($opt['statut'] == '0minirezo'))
+		} elseif (
+			(isset($opt['statut']) and ($opt['statut'] == '0minirezo'))
 			or (isset($opt['restreintes']) and $opt['restreintes'])
 		) {
 			return false;
@@ -1021,10 +1032,12 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 	// sauf se degrader
 	if ($id == $qui['id_auteur'] && (isset($opt['statut']) and $opt['statut'])) {
 		return false;
-	} elseif (isset($opt['webmestre'])
+	} elseif (
+		isset($opt['webmestre'])
 				and $opt['webmestre']
 				and (defined('_ID_WEBMESTRES')
-				or !autoriser('webmestre'))) {
+				or !autoriser('webmestre'))
+	) {
 		// et toucher au statut webmestre si il ne l'est pas lui meme
 		// ou si les webmestres sont fixes par constante (securite)
 		return false;
@@ -1100,10 +1113,10 @@ function autoriser_debug_dist($faire, $type, $id, $qui, $opt) {
  * @return array          Liste des rubriques
  **/
 function liste_rubriques_auteur($id_auteur, $raz = false) {
-	static $restreint = array();
+	static $restreint = [];
 
 	if (!$id_auteur = intval($id_auteur)) {
-		return array();
+		return [];
 	}
 	if ($raz) {
 		unset($restreint[$id_auteur]);
@@ -1111,8 +1124,9 @@ function liste_rubriques_auteur($id_auteur, $raz = false) {
 		return $restreint[$id_auteur];
 	}
 
-	$rubriques = array();
-	if ((!isset($GLOBALS['meta']['version_installee'])
+	$rubriques = [];
+	if (
+		(!isset($GLOBALS['meta']['version_installee'])
 		or $GLOBALS['meta']['version_installee'] > 16428)
 		and $r = sql_allfetsel(
 			'id_objet',
@@ -1138,7 +1152,8 @@ function liste_rubriques_auteur($id_auteur, $raz = false) {
 	}
 
 	// Affecter l'auteur session le cas echeant
-	if (isset($GLOBALS['visiteur_session']['id_auteur'])
+	if (
+		isset($GLOBALS['visiteur_session']['id_auteur'])
 		and $GLOBALS['visiteur_session']['id_auteur'] == $id_auteur
 	) {
 		$GLOBALS['visiteur_session']['restreint'] = $rubriques;
@@ -1528,10 +1543,10 @@ function autoriser_auteurcreer_menu_dist($faire, $type, $id, $qui, $opt) {
  **/
 function autoriser_visiteurs_menu_dist($faire, $type, $id, $qui, $opt) {
 	include_spip('base/abstract_sql');
-	return 
+	return
 		$qui['statut'] == '0minirezo' and !$qui['restreint']
 		and (
-			$GLOBALS['meta']["accepter_visiteurs"] != 'non'
+			$GLOBALS['meta']['accepter_visiteurs'] != 'non'
 			or sql_countsel('spip_auteurs', 'statut in ("6forum", "nouveau")') > 0
 		);
 }
@@ -1581,7 +1596,7 @@ function autoriser_synchro_menu_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_configurerinteractions_menu_dist($faire, $type, $id, $qui, $opt) {
-    return autoriser('configurer', '_interactions', $id, $qui, $opt);
+	return autoriser('configurer', '_interactions', $id, $qui, $opt);
 }
 
 /**
@@ -1597,7 +1612,7 @@ function autoriser_configurerinteractions_menu_dist($faire, $type, $id, $qui, $o
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_configurerlangue_menu_dist($faire, $type, $id, $qui, $opt) {
-    return autoriser('configurer', '_langue', $id, $qui, $opt);
+	return autoriser('configurer', '_langue', $id, $qui, $opt);
 }
 
 /**
@@ -1613,7 +1628,7 @@ function autoriser_configurerlangue_menu_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_configurermultilinguisme_menu_dist($faire, $type, $id, $qui, $opt) {
-    return autoriser('configurer', '_multilinguisme', $id, $qui, $opt);
+	return autoriser('configurer', '_multilinguisme', $id, $qui, $opt);
 }
 
 /**
@@ -1629,7 +1644,7 @@ function autoriser_configurermultilinguisme_menu_dist($faire, $type, $id, $qui, 
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_configurercontenu_menu_dist($faire, $type, $id, $qui, $opt) {
-    return autoriser('configurer', '_contenu', $id, $qui, $opt);
+	return autoriser('configurer', '_contenu', $id, $qui, $opt);
 }
 
 /**
@@ -1645,7 +1660,7 @@ function autoriser_configurercontenu_menu_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_configureravancees_menu_dist($faire, $type, $id, $qui, $opt) {
-    return autoriser('configurer', '_avancees', $id, $qui, $opt);
+	return autoriser('configurer', '_avancees', $id, $qui, $opt);
 }
 
 /**
@@ -1661,7 +1676,7 @@ function autoriser_configureravancees_menu_dist($faire, $type, $id, $qui, $opt) 
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_adminplugin_menu_dist($faire, $type, $id, $qui, $opt) {
-    return autoriser('configurer', '_plugins', $id, $qui, $opt);
+	return autoriser('configurer', '_plugins', $id, $qui, $opt);
 }
 
 /**
@@ -1677,7 +1692,7 @@ function autoriser_adminplugin_menu_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_admintech_menu_dist($faire, $type, $id, $qui, $opt) {
-    return autoriser('detruire', $type, $id, $qui, $opt);
+	return autoriser('detruire', $type, $id, $qui, $opt);
 }
 
 /**
@@ -1731,10 +1746,10 @@ function autoriser_echafauder_dist($faire, $type, $id, $qui, $opt) {
  */
 function auteurs_objet($objet, $id_objet, $cond = '') {
 	$objet = objet_type($objet);
-	$where = array(
+	$where = [
 		'objet=' . sql_quote($objet),
 		'id_objet=' . intval($id_objet)
-	);
+	];
 	if (!empty($cond)) {
 		if (is_array($cond)) {
 			$where = array_merge($where, $cond);
@@ -1750,7 +1765,7 @@ function auteurs_objet($objet, $id_objet, $cond = '') {
 	if (is_array($auteurs)) {
 		return array_column($auteurs, 'id_auteur');
 	}
-	return array();
+	return [];
 }
 
 /**
@@ -1796,7 +1811,7 @@ function acces_restreint_rubrique($id_rubrique) {
  * @return bool             true si un parent existe
  */
 function verifier_table_non_vide($table = 'spip_rubriques') {
-	static $done = array();
+	static $done = [];
 	if (!isset($done[$table])) {
 		$done[$table] = sql_countsel($table) > 0;
 	}

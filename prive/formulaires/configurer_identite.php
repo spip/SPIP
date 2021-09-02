@@ -19,8 +19,8 @@ function formulaires_configurer_identite_charger_dist() {
 	include_spip('inc/meta');
 	lire_metas();
 
-	$valeurs = array();
-	foreach (array('nom_site', 'adresse_site', 'slogan_site', 'descriptif_site', 'email_webmaster') as $k) {
+	$valeurs = [];
+	foreach (['nom_site', 'adresse_site', 'slogan_site', 'descriptif_site', 'email_webmaster'] as $k) {
 		$valeurs[$k] = isset($GLOBALS['meta'][$k]) ? $GLOBALS['meta'][$k] : '';
 	}
 
@@ -28,10 +28,10 @@ function formulaires_configurer_identite_charger_dist() {
 }
 
 function formulaires_configurer_identite_verifier_dist() {
-	$erreurs = array();
+	$erreurs = [];
 
 	// adresse_site est obligatoire mais rempli automatiquement si absent !
-	foreach (array('nom_site'/*,'adresse_site'*/) as $obli) {
+	foreach (['nom_site'/*,'adresse_site'*/] as $obli) {
 		if (!_request($obli)) {
 			$erreurs[$obli] = _T('info_obligatoire');
 		}
@@ -54,7 +54,7 @@ function formulaires_configurer_identite_traiter_dist() {
 	set_request('adresse_site', appliquer_adresse_site(_request('adresse_site')));
 
 	include_spip('inc/meta');
-	foreach (array('nom_site', 'slogan_site', 'descriptif_site', 'email_webmaster') as $k) {
+	foreach (['nom_site', 'slogan_site', 'descriptif_site', 'email_webmaster'] as $k) {
 		ecrire_meta($k, _request($k));
 	}
 
@@ -62,5 +62,5 @@ function formulaires_configurer_identite_traiter_dist() {
 	$reload = texte_script(couper(_request('nom_site'), 35));
 	$reload = "<script type='text/javascript'>if (window.jQuery) jQuery('#bando_identite .nom_site_spip .nom').html('$reload');</script>";
 
-	return array('message_ok' => _T('config_info_enregistree') . $reload, 'editable' => true);
+	return ['message_ok' => _T('config_info_enregistree') . $reload, 'editable' => true];
 }

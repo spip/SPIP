@@ -34,16 +34,16 @@ function action_desinstaller_plugin_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
-	list($dir_plugins, $plugin) = explode("::", $arg);
-	$dir_type = "_DIR_PLUGINS";
+	list($dir_plugins, $plugin) = explode('::', $arg);
+	$dir_type = '_DIR_PLUGINS';
 	if (defined('_DIR_PLUGINS_SUPPL') and $dir_plugins == _DIR_PLUGINS_SUPPL) {
-		$dir_type = "_DIR_PLUGINS_SUPPL";
+		$dir_type = '_DIR_PLUGINS_SUPPL';
 	}
 	$installer_plugins = charger_fonction('installer', 'plugins');
 	$infos = $installer_plugins($plugin, 'uninstall', $dir_type);
 	if ($infos and !$infos['install_test'][0]) {
 		include_spip('inc/plugin');
-		ecrire_plugin_actifs(array($plugin), false, 'enleve');
+		ecrire_plugin_actifs([$plugin], false, 'enleve');
 		$erreur = '';
 	} else {
 		$erreur = 'erreur_plugin_desinstalation_echouee';

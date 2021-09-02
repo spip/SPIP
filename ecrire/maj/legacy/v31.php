@@ -12,7 +12,7 @@
 
 /**
  * Gestion des mises à jour de bdd de SPIP
- * 
+ *
  * Mises à jour en 3.1
  *
  * @package SPIP\Core\SQL\Upgrade
@@ -22,9 +22,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 
-$GLOBALS['maj'][21676] = array(
-	array('ranger_cache_gd2'),
-);
+$GLOBALS['maj'][21676] = [
+	['ranger_cache_gd2'],
+];
 
 /**
  * Ranger les images de local/cache-gd2 dans des sous-rep
@@ -32,13 +32,14 @@ $GLOBALS['maj'][21676] = array(
  * https://core.spip.net/issues/3277
  */
 function ranger_cache_gd2() {
-	spip_log("ranger_cache_gd2");
-	$base = _DIR_VAR . "cache-gd2/";
+	spip_log('ranger_cache_gd2');
+	$base = _DIR_VAR . 'cache-gd2/';
 	if (is_dir($base) and is_readable($base)) {
 		if ($dir = opendir($base)) {
 			while (($f = readdir($dir)) !== false) {
-				if (!is_dir($base . $f) and strncmp($f, ".", 1) !== 0
-					and preg_match(",[0-9a-f]{32}\.\w+,", $f)
+				if (
+					!is_dir($base . $f) and strncmp($f, '.', 1) !== 0
+					and preg_match(',[0-9a-f]{32}\.\w+,', $f)
 				) {
 					$sub = substr($f, 0, 2);
 					$sub = sous_repertoire($base, $sub);
@@ -54,7 +55,7 @@ function ranger_cache_gd2() {
 }
 
 
-$GLOBALS['maj'][21742] = array(
-	array('sql_alter', "TABLE spip_articles CHANGE url_site url_site text DEFAULT '' NOT NULL"),
-	array('sql_alter', "TABLE spip_articles CHANGE virtuel virtuel text DEFAULT '' NOT NULL"),
-);
+$GLOBALS['maj'][21742] = [
+	['sql_alter', "TABLE spip_articles CHANGE url_site url_site text DEFAULT '' NOT NULL"],
+	['sql_alter', "TABLE spip_articles CHANGE virtuel virtuel text DEFAULT '' NOT NULL"],
+];

@@ -15,13 +15,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function format_boucle_html($preaff, $avant, $nom, $type, $crit, $corps, $apres, $altern, $postaff, $prof) {
-	$preaff = $preaff ? "<BB$nom>$preaff" : "";
-	$avant = $avant ? "<B$nom>$avant" : "";
-	$apres = $apres ? "$apres</B$nom>" : "";
-	$altern = $altern ? "$altern<//B$nom>" : "";
-	$postaff = $postaff ? "$postaff</BB$nom>" : "";
+	$preaff = $preaff ? "<BB$nom>$preaff" : '';
+	$avant = $avant ? "<B$nom>$avant" : '';
+	$apres = $apres ? "$apres</B$nom>" : '';
+	$altern = $altern ? "$altern<//B$nom>" : '';
+	$postaff = $postaff ? "$postaff</BB$nom>" : '';
 	if (!$corps) {
-		$corps = " />";
+		$corps = ' />';
 	} else {
 		$corps = ">$corps</BOUCLE$nom>";
 	}
@@ -31,22 +31,22 @@ function format_boucle_html($preaff, $avant, $nom, $type, $crit, $corps, $apres,
 
 function format_inclure_html($file, $args, $prof) {
 	if (strpos($file, '#') === false) {
-		$t = $file ? ("(" . $file . ")") : "";
+		$t = $file ? ('(' . $file . ')') : '';
 	} else {
-		$t = "{fond=" . $file . '}';
+		$t = '{fond=' . $file . '}';
 	}
-	$args = !$args ? '' : ("{" . join(", ", $args) . "}");
+	$args = !$args ? '' : ('{' . join(', ', $args) . '}');
 
-	return ("<INCLURE" . $t . $args . ">");
+	return ('<INCLURE' . $t . $args . '>');
 }
 
 function format_polyglotte_html($args, $prof) {
-	$contenu = array();
+	$contenu = [];
 	foreach ($args as $l => $t) {
 		$contenu[] = ($l ? "[$l]" : '') . $t;
 	}
 
-	return ("<multi>" . join(" ", $contenu) . "</multi>");
+	return ('<multi>' . join(' ', $contenu) . '</multi>');
 }
 
 function format_idiome_html($nom, $module, $args, $filtres, $prof) {
@@ -55,18 +55,18 @@ function format_idiome_html($nom, $module, $args, $filtres, $prof) {
 	}
 	$args = (!$args ? '' : ('{' . join(',', $args) . '}'));
 
-	return ("<:" . ($module ? "$module:" : "") . $nom . $args . $filtres . ":>");
+	return ('<:' . ($module ? "$module:" : '') . $nom . $args . $filtres . ':>');
 }
 
 function format_champ_html($nom, $boucle, $etoile, $avant, $apres, $args, $filtres, $prof) {
-	$nom = "#"
-		. ($boucle ? ($boucle . ":") : "")
+	$nom = '#'
+		. ($boucle ? ($boucle . ':') : '')
 		. $nom
 		. $etoile
 		. $args
 		. $filtres;
 
-	// Determiner si c'est un champ etendu, 
+	// Determiner si c'est un champ etendu,
 
 	$s = ($avant or $apres or $filtres
 		or (strpos($args, '(#') !== false));
@@ -90,12 +90,12 @@ function format_critere_html($critere) {
 		$critere[$k] = $crit_s;
 	}
 
-	return (!$critere ? "" : ("{" . join(",", $critere) . "}"));
+	return (!$critere ? '' : ('{' . join(',', $critere) . '}'));
 }
 
 function format_liste_html($fonc, $args, $prof) {
 	return ((($fonc !== '') ? "|$fonc" : $fonc)
-		. (!$args ? "" : ("{" . join(",", $args) . "}")));
+		. (!$args ? '' : ('{' . join(',', $args) . '}')));
 }
 
 // Concatenation sans separateur: verifier qu'on ne cree pas de faux lexemes
@@ -120,7 +120,8 @@ function format_suite_html($args) {
 			// si un champ ou assimiles est suivi d'un texte
 			// et si celui-ci commence par un caractere de champ
 			// forcer la notation pleine
-			if (($c1 == '}' and substr(ltrim($texte2), 0, 1) == '|')
+			if (
+				($c1 == '}' and substr(ltrim($texte2), 0, 1) == '|')
 				or (preg_match('/[\w\d_*]/', $c1) and preg_match('/^[\w\d_*{|]/', $texte2))
 			) {
 				$args[$i][0] = '[(' . $texte . ')]';
@@ -128,7 +129,9 @@ function format_suite_html($args) {
 		}
 	}
 
-	return join("", array_map(function($arg) { return reset($arg); }, $args));
+	return join('', array_map(function ($arg) {
+ return reset($arg);
+	}, $args));
 }
 
 function format_texte_html($texte) {

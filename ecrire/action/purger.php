@@ -61,7 +61,7 @@ function action_purger_dist($arg = null) {
 			supprime_invalideurs();
 			@spip_unlink(_CACHE_RUBRIQUES);
 			@spip_unlink(_CACHE_CHEMIN);
-			@spip_unlink(_DIR_TMP . "plugin_xml_cache.gz");
+			@spip_unlink(_DIR_TMP . 'plugin_xml_cache.gz');
 			// on ne supprime que _CACHE_PLUGINS_OPT qui declenche la reconstruction des 3
 			// _CACHE_PIPELINES _CACHE_PLUGINS_PATH et _CACHE_PLUGINS_FCT
 			// pour eviter des problemes de concurence
@@ -70,7 +70,7 @@ function action_purger_dist($arg = null) {
 			//@spip_unlink(_CACHE_PLUGINS_PATH);
 			//@spip_unlink(_CACHE_PLUGINS_FCT);
 			@spip_unlink(_CACHE_PLUGINS_OPT);
-			purger_repertoire(_DIR_CACHE, array('subdir' => true));
+			purger_repertoire(_DIR_CACHE, ['subdir' => true]);
 			purger_repertoire(_DIR_AIDE);
 			purger_repertoire(_DIR_VAR . 'cache-css');
 			purger_repertoire(_DIR_VAR . 'cache-js');
@@ -81,12 +81,12 @@ function action_purger_dist($arg = null) {
 			break;
 
 		case 'vignettes':
-			purger_repertoire(_DIR_VAR . 'cache-gd2', array('subdir' => true));
-			purger_repertoire(_DIR_VAR . 'cache-texte', array('subdir' => true));
-			purger_repertoire(_DIR_VAR . 'cache-vignettes', array('subdir' => true));
-			purger_repertoire(_DIR_VAR . 'cache-TeX', array('subdir' => true));
+			purger_repertoire(_DIR_VAR . 'cache-gd2', ['subdir' => true]);
+			purger_repertoire(_DIR_VAR . 'cache-texte', ['subdir' => true]);
+			purger_repertoire(_DIR_VAR . 'cache-vignettes', ['subdir' => true]);
+			purger_repertoire(_DIR_VAR . 'cache-TeX', ['subdir' => true]);
 			supprime_invalideurs();
-			purger_repertoire(_DIR_CACHE, array('subdir' => true));
+			purger_repertoire(_DIR_CACHE, ['subdir' => true]);
 			break;
 	}
 

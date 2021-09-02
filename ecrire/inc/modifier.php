@@ -38,10 +38,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return array
  *     Tableau des champs et valeurs collectées
  */
-function collecter_requests($white_list, $black_list = array(), $set = null, $tous = false) {
+function collecter_requests($white_list, $black_list = [], $set = null, $tous = false) {
 	$c = $set;
 	if (!$c) {
-		$c = array();
+		$c = [];
 		foreach ($white_list as $champ) {
 			// on ne collecte que les champs reellement envoyes par defaut.
 			// le cas d'un envoi de valeur NULL peut du coup poser probleme.
@@ -141,7 +141,7 @@ function objet_modifier_champs($objet, $id_objet, $options, $c = null, $serveur 
 	// N'accepter que les champs qui existent
 	// TODO: ici aussi on peut valider les contenus
 	// en fonction du type
-	$champs = array();
+	$champs = [];
 	foreach ($desc['field'] as $champ => $ignore) {
 		if (isset($c[$champ])) {
 			$champs[$champ] = $c[$champ];
@@ -152,9 +152,10 @@ function objet_modifier_champs($objet, $id_objet, $options, $c = null, $serveur 
 	$champs = array_map('corriger_caracteres', $champs);
 
 	// Envoyer aux plugins
-	$champs = pipeline('pre_edition',
-		array(
-			'args' => array(
+	$champs = pipeline(
+		'pre_edition',
+		[
+			'args' => [
 				'table' => $spip_table_objet, // compatibilite
 				'table_objet' => $table_objet,
 				'spip_table_objet' => $spip_table_objet,
@@ -162,12 +163,12 @@ function objet_modifier_champs($objet, $id_objet, $options, $c = null, $serveur 
 				'type' => $objet,
 				'id_objet' => $id_objet,
 				'data' => isset($options['data']) ? $options['data'] : null,
-				'champs' => isset($options['champs']) ? $options['champs'] : array(), // [doc] c'est quoi ?
+				'champs' => isset($options['champs']) ? $options['champs'] : [], // [doc] c'est quoi ?
 				'serveur' => $serveur,
 				'action' => isset($options['action']) ? $options['action'] : 'modifier'
-			),
+			],
 			'data' => $champs
-		)
+		]
 	);
 
 	if (!$champs) {
@@ -183,7 +184,7 @@ function objet_modifier_champs($objet, $id_objet, $options, $c = null, $serveur 
 
 	// Verifier si les mises a jour sont pertinentes, datees, en conflit etc
 	include_spip('inc/editer');
-	if (!isset($options['data']) or is_null($options['data'])){
+	if (!isset($options['data']) or is_null($options['data'])) {
 		$options['data'] = &$_POST;
 	}
 	$conflits = controler_md5($champs, $options['data'], $objet, $id_objet, $serveur);
@@ -215,7 +216,8 @@ function objet_modifier_champs($objet, $id_objet, $options, $c = null, $serveur 
 		// la modif peut avoir lieu
 
 		// faut-il ajouter date_modif ?
-		if (isset($options['date_modif']) and $options['date_modif']
+		if (
+			isset($options['date_modif']) and $options['date_modif']
 			and !isset($champs[$options['date_modif']])
 		) {
 			$champs[$options['date_modif']] = date('Y-m-d H:i:s');
@@ -225,13 +227,22 @@ function objet_modifier_champs($objet, $id_objet, $options, $c = null, $serveur 
 		sql_updateq($spip_table_objet, $champs, "$id_table_objet=" . intval($id_objet), $serveur);
 
 		// on verifie si elle est bien passee
-		$moof = sql_fetsel(array_keys($champs), $spip_table_objet, "$id_table_objet=" . intval($id_objet), array(), array(),
-			'', array(), $serveur);
+		$moof = sql_fetsel(
+			array_keys($champs),
+			$spip_table_objet,
+			"$id_table_objet=" . intval($id_objet),
+			[],
+			[],
+			'',
+			[],
+			$serveur
+		);
 		// si difference entre les champs, reperer les champs mal enregistres
 		if ($moof != $champs) {
-			$liste = array();
+			$liste = [];
 			foreach ($moof as $k => $v) {
-				if ($v !== $champs[$k]
+				if (
+					$v !== $champs[$k]
 					// ne pas alerter si le champ est numerique est que les valeurs sont equivalentes
 					and (!is_numeric($v) or intval($v) !== intval($champs[$k]))
 					// ne pas alerter si le champ est date, qu'on a envoye une valeur vide et qu'on recupere une date nulle
@@ -254,11 +265,15 @@ function objet_modifier_champs($objet, $id_objet, $options, $c = null, $serveur 
 			// si un champ n'a pas ete correctement enregistre, loger et retourner une erreur
 			// c'est un cas exceptionnel
 			if (count($liste)) {
-				spip_log("Erreur enregistrement en base $objet/$id_objet champs :" . var_export($conflits, true),
-					'modifier.' . _LOG_CRITIQUE);
+				spip_log(
+					"Erreur enregistrement en base $objet/$id_objet champs :" . var_export($conflits, true),
+					'modifier.' . _LOG_CRITIQUE
+				);
 
-				return _T('erreur_technique_enregistrement_champs',
-					array('champs' => "<i>'" . implode("'</i>,<i>'", $liste) . "'</i>"));
+				return _T(
+					'erreur_technique_enregistrement_champs',
+					['champs' => "<i>'" . implode("'</i>,<i>'", $liste) . "'</i>"]
+				);
 			}
 		}
 
@@ -274,21 +289,22 @@ function objet_modifier_champs($objet, $id_objet, $options, $c = null, $serveur 
 
 		// Notifications, gestion des revisions...
 		// en standard, appelle |nouvelle_revision ci-dessous
-		pipeline('post_edition',
-			array(
-				'args' => array(
+		pipeline(
+			'post_edition',
+			[
+				'args' => [
 					'table' => $spip_table_objet,
 					'table_objet' => $table_objet,
 					'spip_table_objet' => $spip_table_objet,
 					'desc' => $desc,
 					'type' => $objet,
 					'id_objet' => $id_objet,
-					'champs' => isset($options['champs']) ? $options['champs'] : array(), // [doc] kesako ?
+					'champs' => isset($options['champs']) ? $options['champs'] : [], // [doc] kesako ?
 					'serveur' => $serveur,
 					'action' => isset($options['action']) ? $options['action'] : 'modifier'
-				),
+				],
 				'data' => $champs
-			)
+			]
 		);
 	}
 
@@ -296,12 +312,14 @@ function objet_modifier_champs($objet, $id_objet, $options, $c = null, $serveur 
 	// message a affiner :-)
 	include_spip('inc/filtres_mini');
 	$qui = isset($GLOBALS['visiteur_session']['nom']) and $GLOBALS['visiteur_session']['nom'] ? $GLOBALS['visiteur_session']['nom'] : $GLOBALS['ip'];
-	journal(_L($qui . ' a &#233;dit&#233; l&#8217;' . $objet . ' ' . $id_objet . ' (' . join('+',
-			array_diff(array_keys($champs), array('date_modif'))) . ')'), array(
+	journal(_L($qui . ' a &#233;dit&#233; l&#8217;' . $objet . ' ' . $id_objet . ' (' . join(
+		'+',
+		array_diff(array_keys($champs), ['date_modif'])
+	) . ')'), [
 		'faire' => 'modifier',
 		'quoi' => $objet,
 		'id' => $id_objet
-	));
+	]);
 
 	return '';
 }

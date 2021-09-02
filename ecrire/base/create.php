@@ -32,7 +32,7 @@ include_spip('base/abstract_sql');
  * @param array $desc
  * @return bool
  */
-function base_determine_autoinc($table, $desc = array()) {
+function base_determine_autoinc($table, $desc = []) {
 	if ($t = lister_tables_principales() and isset($t[$table])) {
 		$autoinc = true;
 	} elseif ($t = lister_tables_auxiliaires() and isset($t[$table])) {
@@ -85,7 +85,7 @@ function creer_ou_upgrader_table($table, $desc, $autoinc, $upgrade = false, $ser
 			#if (!$sql_desc) $sql_desc = false;
 			#spip_log("Resultat table=$table sql_desc:$sql_desc","dbinstall"._LOG_INFO_IMPORTANTE);
 			if (!$sql_desc) {
-				spip_log("Echec creation table $table", "maj" . _LOG_CRITIQUE);
+				spip_log("Echec creation table $table", 'maj' . _LOG_CRITIQUE);
 			}
 		}
 	} else {
@@ -97,7 +97,7 @@ function creer_ou_upgrader_table($table, $desc, $autoinc, $upgrade = false, $ser
 		if (isset($desc['field'])) {
 			foreach ($desc['field'] as $field => $type) {
 				if (!isset($sql_desc['field'][$field])) {
-					sql_alter("TABLE $table ADD $field $type" . ($last ? " AFTER $last" : ""), $serveur);
+					sql_alter("TABLE $table ADD $field $type" . ($last ? " AFTER $last" : ''), $serveur);
 				}
 				$last = $field;
 			}
@@ -112,7 +112,6 @@ function creer_ou_upgrader_table($table, $desc, $autoinc, $upgrade = false, $ser
 				$last = $field;
 			}
 		}
-
 	}
 }
 
@@ -137,11 +136,11 @@ function creer_ou_upgrader_table($table, $desc, $autoinc, $upgrade = false, $ser
 function alterer_base($tables_inc, $tables_noinc, $up = false, $serveur = '') {
 	if ($up === false) {
 		$old = false;
-		$up = array();
+		$up = [];
 	} else {
 		$old = true;
 		if (!is_array($up)) {
-			$up = array($up);
+			$up = [$up];
 		}
 	}
 	foreach ($tables_inc as $k => $v) {
@@ -202,7 +201,7 @@ function creer_base($serveur = '') {
  * @param string $serveur
  * @return void
  */
-function maj_tables($upgrade_tables = array(), $serveur = '') {
+function maj_tables($upgrade_tables = [], $serveur = '') {
 	alterer_base(
 		lister_tables_principales(),
 		lister_tables_auxiliaires(),

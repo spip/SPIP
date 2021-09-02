@@ -43,8 +43,8 @@ function public_styliser_dist($fond, $contexte, $lang = '', $connect = '') {
 
 	// s'assurer que le fond est licite
 	// car il peut etre construit a partir d'une variable d'environnement
-	if (strpos($fond, "../") !== false or strncmp($fond, '/', 1) == 0) {
-		$fond = "404";
+	if (strpos($fond, '../') !== false or strncmp($fond, '/', 1) == 0) {
+		$fond = '404';
 	}
 
 	if (strncmp($fond, 'modeles/', 8) == 0) {
@@ -61,23 +61,23 @@ function public_styliser_dist($fond, $contexte, $lang = '', $connect = '') {
 	}
 
 	// trouver un squelette du nom demande
-	// ne rien dire si on ne trouve pas, 
+	// ne rien dire si on ne trouve pas,
 	// c'est l'appelant qui sait comment gerer la situation
 	// ou les plugins qui feront mieux dans le pipeline
-	$squelette = trouver_fond($fond, "", true);
+	$squelette = trouver_fond($fond, '', true);
 	$ext = $squelette['extension'];
 
-	$flux = array(
-		'args' => array(
+	$flux = [
+		'args' => [
 			'id_rubrique' => $id_rubrique,
 			'ext' => $ext,
 			'fond' => $fond,
 			'lang' => $lang,
 			'contexte' => $contexte, // le style d'un objet peut dependre de lui meme
 			'connect' => $connect
-		),
+		],
 		'data' => $squelette['fond'],
-	);
+	];
 
 	if (test_espace_prive() or defined('_ZPIP')) {
 		if (!$styliser_par_z) {
@@ -91,7 +91,7 @@ function public_styliser_dist($fond, $contexte, $lang = '', $connect = '') {
 	// pipeline styliser
 	$squelette = pipeline('styliser', $flux);
 
-	return array($squelette, $ext, $ext, "$squelette.$ext");
+	return [$squelette, $ext, $ext, "$squelette.$ext"];
 }
 
 /**
@@ -110,7 +110,8 @@ function public_styliser_dist($fond, $contexte, $lang = '', $connect = '') {
  *     Données du pipeline styliser
  **/
 function styliser_par_objets($flux) {
-	if (test_espace_prive()
+	if (
+		test_espace_prive()
 		and !$squelette = $flux['data']
 		and strncmp($flux['args']['fond'], 'prive/objets/', 13) == 0
 		and $echafauder = charger_fonction('echafauder', 'prive', true)
@@ -120,7 +121,7 @@ function styliser_par_objets($flux) {
 			$table_sql = table_objet_sql($table);
 			$objets = lister_tables_objets_sql();
 			if (isset($objets[$table_sql])) {
-				$flux['data'] = $echafauder($table, $table, $table_sql, "prive/objets/liste/objets", $flux['args']['ext']);
+				$flux['data'] = $echafauder($table, $table, $table_sql, 'prive/objets/liste/objets', $flux['args']['ext']);
 			}
 		}
 		if (strncmp($flux['args']['fond'], 'prive/objets/contenu/', 21) == 0) {
@@ -129,7 +130,7 @@ function styliser_par_objets($flux) {
 			$table_sql = table_objet_sql($table);
 			$objets = lister_tables_objets_sql();
 			if (isset($objets[$table_sql])) {
-				$flux['data'] = $echafauder($type, $table, $table_sql, "prive/objets/contenu/objet", $flux['args']['ext']);
+				$flux['data'] = $echafauder($type, $table, $table_sql, 'prive/objets/contenu/objet', $flux['args']['ext']);
 			}
 		}
 	}
@@ -151,14 +152,14 @@ function styliser_par_objets($flux) {
  */
 function quete_rubrique_fond($contexte) {
 	static $liste_objets = null;
-	static $quete = array();
+	static $quete = [];
 	if (is_null($liste_objets)) {
-		$liste_objets = array();
+		$liste_objets = [];
 		include_spip('inc/urls');
 		include_spip('public/quete');
 		$l = urls_liste_objets(false);
 		// placer la rubrique en tete des objets
-		$l = array_diff($l, array('rubrique'));
+		$l = array_diff($l, ['rubrique']);
 		array_unshift($l, 'rubrique');
 		foreach ($l as $objet) {
 			$id = id_table_objet($objet);
@@ -180,16 +181,17 @@ function quete_rubrique_fond($contexte) {
 
 	if (isset($c['id_rubrique']) and $r = $c['id_rubrique']) {
 		unset($c['id_rubrique']);
-		$c = array('id_rubrique' => $r) + $c;
+		$c = ['id_rubrique' => $r] + $c;
 	}
 
 	foreach ($c as $_id => $id) {
-		if ($id
+		if (
+			$id
 			and $row = quete_parent_lang(table_objet_sql($liste_objets[$_id]), $id)
 		) {
 			$lang = isset($row['lang']) ? $row['lang'] : '';
 			if ($_id == 'id_rubrique' or (isset($row['id_rubrique']) and $id = $row['id_rubrique'])) {
-				return $quete[$s] = array($id, $lang);
+				return $quete[$s] = [$id, $lang];
 			}
 		}
 	}

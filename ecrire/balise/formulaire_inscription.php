@@ -43,7 +43,7 @@ include_spip('inc/filtres');
  *     Pile complétée du code compilé
  **/
 function balise_FORMULAIRE_INSCRIPTION($p) {
-	return calculer_balise_dynamique($p, 'FORMULAIRE_INSCRIPTION', array());
+	return calculer_balise_dynamique($p, 'FORMULAIRE_INSCRIPTION', []);
 }
 
 /**
@@ -76,5 +76,5 @@ function balise_FORMULAIRE_INSCRIPTION_stat($args, $context_compil) {
 	include_spip('action/inscrire_auteur');
 	$mode = tester_statut_inscription($mode, $id);
 
-	return $mode ? array($mode, $id, $retour) : '';
+	return $mode ? [$mode, $id, $retour] : '';
 }

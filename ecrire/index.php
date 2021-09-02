@@ -64,7 +64,7 @@ $forcer_lang = true;
 
 
 if (_request('action') or _request('var_ajax') or _request('formulaire_action')) {
-	if (!autoriser_sans_cookie($exec)){
+	if (!autoriser_sans_cookie($exec)) {
 		// Charger l'aiguilleur qui va mettre sur la bonne voie les traitements derogatoires
 		include_spip('public/aiguiller');
 		if (
@@ -76,17 +76,17 @@ if (_request('action') or _request('var_ajax') or _request('formulaire_action'))
 			or
 			// cas des formulaires charger/verifier/traiter
 			traiter_formulaires_dynamiques()
-		){
+		) {
 			exit;
 		} // le hit est fini !
 	}
 }
 // securiser les redirect du back-office
 if (_request('redirect')) {
-	if (!function_exists('securiser_redirect_action')){
+	if (!function_exists('securiser_redirect_action')) {
 		include_spip('public/aiguiller');
 	}
-	set_request('redirect',securiser_redirect_action(_request('redirect')));
+	set_request('redirect', securiser_redirect_action(_request('redirect')));
 }
 
 
@@ -95,7 +95,8 @@ if (_request('redirect')) {
 //
 
 // Controle de la version, sauf si on est deja en train de s'en occuper
-if (!$reinstall == 'oui'
+if (
+	!$reinstall == 'oui'
 	and !_AJAX
 	and isset($GLOBALS['meta']['version_installee'])
 	and ($GLOBALS['spip_version_base'] != (str_replace(',', '.', $GLOBALS['meta']['version_installee'])))
@@ -109,20 +110,21 @@ if (!$reinstall == 'oui'
 // si l'action est vraiment en cours, inc_admin refusera cette 2e demande,
 // sinon c'est qu'elle a ete interrompue et il faut la reprendre
 
-elseif (isset($GLOBALS['meta']["admin"])) {
-	if (preg_match('/^(.*)_(\d+)_/', $GLOBALS['meta']["admin"], $l)) {
+elseif (isset($GLOBALS['meta']['admin'])) {
+	if (preg_match('/^(.*)_(\d+)_/', $GLOBALS['meta']['admin'], $l)) {
 		list(, $var_f, $n) = $l;
 	}
-	if (_AJAX
+	if (
+		_AJAX
 		or !(
 			isset($_COOKIE['spip_admin'])
 			or (isset($GLOBALS['visiteur_session']) and $GLOBALS['visiteur_session']['statut'] == '0minirezo')
 		)
 	) {
-		spip_log("Quand la meta admin vaut " .
-			$GLOBALS['meta']["admin"] .
-			" seul un admin peut se connecter et sans AJAX." .
-			" En cas de probleme, detruire cette meta.");
+		spip_log('Quand la meta admin vaut ' .
+			$GLOBALS['meta']['admin'] .
+			' seul un admin peut se connecter et sans AJAX.' .
+			' En cas de probleme, detruire cette meta.');
 		die(_T('info_travaux_texte'));
 	}
 	if ($n) {
@@ -140,7 +142,7 @@ elseif (isset($GLOBALS['meta']["admin"])) {
 // si nom pas plausible, prendre le script par defaut
 // attention aux deux cas 404/403 qui commencent par un 4 !
 elseif (!preg_match(',^[a-z4_][0-9a-z_-]*$,i', $exec)) {
-	$exec = "accueil";
+	$exec = 'accueil';
 	set_request('exec', $exec);
 }
 
@@ -148,13 +150,14 @@ elseif (!preg_match(',^[a-z4_][0-9a-z_-]*$,i', $exec)) {
 $GLOBALS['spip_display'] = isset($GLOBALS['visiteur_session']['prefs']['display'])
 	? (int) $GLOBALS['visiteur_session']['prefs']['display']
 	: 0;
-$GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? preg_replace('/[^a-z0-9]/i', '', $_COOKIE['spip_ecran']) : "etroit";
+$GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? preg_replace('/[^a-z0-9]/i', '', $_COOKIE['spip_ecran']) : 'etroit';
 
 //  si la langue est specifiee par cookie et ne correspond pas
 // (elle a ete changee dans une autre session, et on retombe sur un vieux cookie)
 // on appelle directement la fonction, car un appel d'action peut conduire a une boucle infinie
 // si le cookie n'est pas pose correctement dans l'action
-if (!$var_auth and isset($_COOKIE['spip_lang_ecrire'])
+if (
+	!$var_auth and isset($_COOKIE['spip_lang_ecrire'])
 	and $_COOKIE['spip_lang_ecrire'] <> $GLOBALS['visiteur_session']['lang']
 ) {
 	include_spip('action/converser');

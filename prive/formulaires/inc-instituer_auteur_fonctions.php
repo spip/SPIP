@@ -5,6 +5,7 @@
  *
  * @package SPIP\Core\Formulaires
  **/
+
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -31,7 +32,8 @@ function choisir_rubriques_admin_restreint(
 	global $spip_lang;
 	$res = '';
 	// Ajouter une rubrique a un administrateur restreint
-	if ($chercher_rubrique = charger_fonction('chercher_rubrique', 'inc')
+	if (
+		$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc')
 		and $a = $chercher_rubrique(0, 'auteur', false)
 	) {
 		if ($img_remove) {

@@ -31,14 +31,14 @@ function formulaires_declarer_bases_charger_dist() {
 		$nom_connect = $nom_connect . $n;
 	}
 
-	$valeurs = array(
+	$valeurs = [
 		'_etapes' => 3,
 		'_bases_deja' => $deja,
 		'_bases_prop' => defined('_DECLARER_SERVEUR_DB') ? liste_bases(_DECLARER_SERVEUR_DB) : '',
 		'_tables' => (defined('_DECLARER_SERVEUR_DB') and defined('_DECLARER_CHOIX_DB')) ?
 			$tables = sql_alltable('%', _DECLARER_SERVEUR_DB)
 			:
-			array(),
+			[],
 		'main_db' => '',
 		'_serveurs' => liste_serveurs(),
 		'sql_serveur_db' => 'sqlite3', // valeur par defaut
@@ -48,20 +48,21 @@ function formulaires_declarer_bases_charger_dist() {
 		'choix_db' => '',
 		'table_new' => '',
 		'nom_connect' => $nom_connect,
-	);
+	];
 
 	return $valeurs;
 }
 
 function liste_serveurs() {
-	$options = array();
+	$options = [];
 	$dir = _DIR_RESTREINT . 'req/';
 	$d = opendir($dir);
 	if (!$d) {
-		return array();
+		return [];
 	}
 	while ($f = readdir($d)) {
-		if ((preg_match('/^(.*)[.]php$/', $f, $s))
+		if (
+			(preg_match('/^(.*)[.]php$/', $f, $s))
 			and is_readable($f = $dir . $f)
 		) {
 			require_once($f);
@@ -80,13 +81,14 @@ function liste_serveurs() {
 }
 
 function liste_bases($server_db) {
-	if (is_null($server_db)
+	if (
+		is_null($server_db)
 		or !$result = sql_listdbs($server_db)
 	) {
 		return '';
 	}
 
-	$noms = array();
+	$noms = [];
 
 	// si sqlite : result est deja un tableau
 	if (is_array($result)) {
@@ -101,7 +103,7 @@ function liste_bases($server_db) {
 }
 
 function formulaires_declarer_bases_verifier_1_dist() {
-	$erreurs = array();
+	$erreurs = [];
 	list($def_adresse_db, $def_login_db, $def_pass_db, $sel_db, $def_serveur_db) = analyse_fichier_connection(_FILE_CONNECT);
 
 	if (!$adresse_db = _request('adresse_db')) {
@@ -160,7 +162,7 @@ function formulaires_declarer_bases_verifier_1_dist() {
 }
 
 function formulaires_declarer_bases_verifier_2_dist() {
-	$erreurs = array();
+	$erreurs = [];
 	$choix_db = _request('choix_db');
 	if ($choix_db == '-1') {
 		$choix_db = _request('table_new');
@@ -170,7 +172,7 @@ function formulaires_declarer_bases_verifier_2_dist() {
 	} else {
 		define('_ECRIRE_INSTALL', 1); // hackons sqlite
 		if (!sql_selectdb($choix_db, _DECLARER_SERVEUR_DB)) {
-			$erreurs['choix_db'] = _T('avis_base_inaccessible', array('base' => $choix_db));
+			$erreurs['choix_db'] = _T('avis_base_inaccessible', ['base' => $choix_db]);
 		} else {
 			define('_DECLARER_CHOIX_DB', $choix_db);
 		}
@@ -180,7 +182,7 @@ function formulaires_declarer_bases_verifier_2_dist() {
 }
 
 function formulaires_declarer_bases_verifier_3_dist() {
-	$erreurs = array();
+	$erreurs = [];
 	$nom_connect = _request('nom_connect');
 	if (!$nom_connect) {
 		$erreurs['nom_connect'] = _T('info_obligatoire');
@@ -225,7 +227,7 @@ function formulaires_declarer_bases_traiter_dist() {
 
 	install_fichier_connexion(_DIR_CONNECT . _DECLARER_NOM_CONNECT . '.php', $conn);
 
-	return array(
-		'message_ok' => _T('install_connect_ok', array('connect' => '<strong>' . _DECLARER_NOM_CONNECT . '</strong>'))
-	);
+	return [
+		'message_ok' => _T('install_connect_ok', ['connect' => '<strong>' . _DECLARER_NOM_CONNECT . '</strong>'])
+	];
 }

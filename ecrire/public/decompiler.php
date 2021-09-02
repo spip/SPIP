@@ -30,10 +30,10 @@ function decompiler_boucle($struct, $fmt = '', $prof = 0) {
 		$struct->table_optionnelle);
 
 	if ($struct->jointures_explicites) {
-		$type .= " " . $struct->jointures_explicites;
+		$type .= ' ' . $struct->jointures_explicites;
 	}
 	if ($struct->table_optionnelle) {
-		$type .= "?";
+		$type .= '?';
 	}
 	// Revoir le cas de la boucle recursive
 
@@ -49,8 +49,8 @@ function decompiler_boucle($struct, $fmt = '', $prof = 0) {
 }
 
 function decompiler_include($struct, $fmt = '', $prof = 0) {
-	$res = array();
-	foreach ($struct->param ? $struct->param : array() as $couple) {
+	$res = [];
+	foreach ($struct->param ? $struct->param : [] as $couple) {
 		array_shift($couple);
 		foreach ($couple as $v) {
 			$res[] = decompiler_($v, $fmt, $prof);
@@ -76,7 +76,7 @@ function decompiler_polyglotte($struct, $fmt = '', $prof = 0) {
 }
 
 function decompiler_idiome($struct, $fmt = '', $prof = 0) {
-	$args = array();
+	$args = [];
 	foreach ($struct->arg as $k => $v) {
 		$args[$k] = public_decompiler($v, $fmt, $prof);
 	}
@@ -94,7 +94,7 @@ function decompiler_champ($struct, $fmt = '', $prof = 0) {
 	$args = $filtres = '';
 	if ($p = $struct->param) {
 		if ($p[0][0] === '') {
-			$args = decompiler_liste(array(array_shift($p)), $fmt, $prof);
+			$args = decompiler_liste([array_shift($p)], $fmt, $prof);
 		}
 		$filtres = decompiler_liste($p, $fmt, $prof);
 	}
@@ -115,10 +115,11 @@ function decompiler_liste($sources, $fmt = '', $prof = 0) {
 		} else {
 			$r = array_shift($arg);
 		}
-		$args = array();
+		$args = [];
 		foreach ($arg as $v) {
 			// cas des arguments entoures de ' ou "
-			if ((count($v) == 1)
+			if (
+				(count($v) == 1)
 				and $v[0]->type == 'texte'
 				and (strlen($v[0]->apres) == 1)
 				and $v[0]->apres == $v[0]->avant
@@ -152,21 +153,23 @@ function decompiler_criteres($boucle, $fmt = '', $prof = 0) {
 			continue;
 		} // boucle recursive
 		array_shift($crit);
-		$args = array();
+		$args = [];
 		foreach ($crit as $i => $v) {
-			if ((count($v) == 1)
+			if (
+				(count($v) == 1)
 				and $v[0]->type == 'texte'
 				and $v[0]->apres
 			) {
-				$args[] = array(array('texte', ($v[0]->apres . $v[0]->texte . $v[0]->apres)));
+				$args[] = [['texte', ($v[0]->apres . $v[0]->texte . $v[0]->apres)]];
 			} else {
-				$res2 = array();
+				$res2 = [];
 				foreach ($v as $k => $p) {
-					if (isset($p->type)
+					if (
+						isset($p->type)
 						and function_exists($d = 'decompiler_' . $p->type)
 					) {
 						$r = $d($p, $fmt, (0 - $prof), @$v[$k + 1]);
-						$res2[] = array($p->type, $r);
+						$res2[] = [$p->type, $r];
 					} else {
 						spip_log("critere $i / $k mal forme");
 					}
@@ -186,7 +189,7 @@ function decompiler_($liste, $fmt = '', $prof = 0) {
 		return '';
 	}
 	$prof2 = ($prof < 0) ? ($prof - 1) : ($prof + 1);
-	$contenu = array();
+	$contenu = [];
 	foreach ($liste as $k => $p) {
 		if (!isset($p->type)) {
 			continue;
@@ -197,7 +200,8 @@ function decompiler_($liste, $fmt = '', $prof = 0) {
 		// contenait des args et s'il est suivi d'espaces,
 		// le champ simple les eliminant est un bug helas perenne.
 
-		if ($next
+		if (
+			$next
 			and ($next->type == 'texte')
 			and $p->type == 'champ'
 			and !$p->apres
@@ -206,15 +210,14 @@ function decompiler_($liste, $fmt = '', $prof = 0) {
 		) {
 			$n = strlen($next->texte) - strlen(ltrim($next->texte));
 			if ($n) {
-				$champ = new Texte;
+				$champ = new Texte();
 				$champ->texte = substr($next->texte, 0, $n);
 				$champ->ligne = $p->ligne;
-				$p->apres = array($champ);
+				$p->apres = [$champ];
 				$next->texte = substr($next->texte, $n);
 			}
 		}
-		$contenu[] = array($d($p, $fmt, $prof2), $p->type);
-
+		$contenu[] = [$d($p, $fmt, $prof2), $p->type];
 	}
 	$f = 'format_suite_' . $fmt;
 

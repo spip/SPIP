@@ -35,30 +35,30 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Page HTML
  **/
 function surligner_mots($page, $surcharge_surligne = '') {
-	$surlignejs_engines = array(
-		array(
-			"," . str_replace(array("/", "."), array("\/", "\."), $GLOBALS['meta']['adresse_site']) . ",i",
-			",recherche=([^&]+),i"
-		), //SPIP
-		array(",^http://(www\.)?google\.,i", ",q=([^&]+),i"), // Google
-		array(",^http://(www\.)?search\.yahoo\.,i", ",p=([^&]+),i"), // Yahoo
-		array(",^http://(www\.)?search\.msn\.,i", ",q=([^&]+),i"), // MSN
-		array(",^http://(www\.)?search\.live\.,i", ",query=([^&]+),i"), // MSN Live
-		array(",^http://(www\.)?search\.aol\.,i", ",userQuery=([^&]+),i"), // AOL
-		array(",^http://(www\.)?ask\.com,i", ",q=([^&]+),i"), // Ask.com
-		array(",^http://(www\.)?altavista\.,i", ",q=([^&]+),i"), // AltaVista
-		array(",^http://(www\.)?feedster\.,i", ",q=([^&]+),i"), // Feedster
-		array(",^http://(www\.)?search\.lycos\.,i", ",q=([^&]+),i"), // Lycos
-		array(",^http://(www\.)?alltheweb\.,i", ",q=([^&]+),i"), // AllTheWeb
-		array(",^http://(www\.)?technorati\.com,i", ",([^\?\/]+)(?:\?.*)$,i"), // Technorati
-	);
+	$surlignejs_engines = [
+		[
+			',' . str_replace(['/', '.'], ['\/', '\.'], $GLOBALS['meta']['adresse_site']) . ',i',
+			',recherche=([^&]+),i'
+		], //SPIP
+		[',^http://(www\.)?google\.,i', ',q=([^&]+),i'], // Google
+		[',^http://(www\.)?search\.yahoo\.,i', ',p=([^&]+),i'], // Yahoo
+		[',^http://(www\.)?search\.msn\.,i', ',q=([^&]+),i'], // MSN
+		[',^http://(www\.)?search\.live\.,i', ',query=([^&]+),i'], // MSN Live
+		[',^http://(www\.)?search\.aol\.,i', ',userQuery=([^&]+),i'], // AOL
+		[',^http://(www\.)?ask\.com,i', ',q=([^&]+),i'], // Ask.com
+		[',^http://(www\.)?altavista\.,i', ',q=([^&]+),i'], // AltaVista
+		[',^http://(www\.)?feedster\.,i', ',q=([^&]+),i'], // Feedster
+		[',^http://(www\.)?search\.lycos\.,i', ',q=([^&]+),i'], // Lycos
+		[',^http://(www\.)?alltheweb\.,i', ',q=([^&]+),i'], // AllTheWeb
+		[',^http://(www\.)?technorati\.com,i', ',([^\?\/]+)(?:\?.*)$,i'], // Technorati
+	];
 
 
 	$ref = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
 	//avoid a js injection
 	if ($surcharge_surligne) {
-		$surcharge_surligne = preg_replace(",(?<!\\\\)((?:(?>\\\\){2})*)('),", "$1\\\\$2", $surcharge_surligne);
-		$surcharge_surligne = str_replace("\\", "\\\\", $surcharge_surligne);
+		$surcharge_surligne = preg_replace(",(?<!\\\\)((?:(?>\\\\){2})*)('),", '$1\\\$2', $surcharge_surligne);
+		$surcharge_surligne = str_replace('\\', '\\\\', $surcharge_surligne);
 		if ($GLOBALS['meta']['charset'] == 'utf-8') {
 			include_spip('inc/charsets');
 			if (!is_utf8($surcharge_surligne)) {
@@ -69,7 +69,6 @@ function surligner_mots($page, $surcharge_surligne = '') {
 	}
 	foreach ($surlignejs_engines as $engine) {
 		if ($surcharge_surligne || (preg_match($engine[0], $ref) && preg_match($engine[1], $ref))) {
-
 			//good referrer found or var_recherche is not null
 			include_spip('inc/filtres');
 			$script = "
@@ -82,17 +81,17 @@ function surligner_mots($page, $surcharge_surligne = '') {
             style_name:'spip_surligne',
             exact:'whole',
             style_name_suffix:false,
-            engines:[/^" . str_replace(array("/", "."), array("\/", "\."), $GLOBALS['meta']['adresse_site']) . "/i,/recherche=([^&]+)/i],
+            engines:[/^" . str_replace(['/', '.'], ['\/', '\.'], $GLOBALS['meta']['adresse_site']) . "/i,/recherche=([^&]+)/i],
             highlight:'.surlignable',
             nohighlight:'.pas_surlignable'" .
 				($surcharge_surligne ? ",
-            keys:'$surcharge_surligne'" : "") . ",
+            keys:'$surcharge_surligne'" : '') . ',
             min_length: 3
           })
         });
       })(jQuery);
       /*]]>*/</script>
-      ";
+      ';
 			// on l'insere juste avant </head>, sinon tout en bas
 			if (is_null($l = strpos($page, '</head>'))) {
 				$l = strlen($page);

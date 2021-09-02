@@ -32,7 +32,8 @@ function action_etre_webmestre_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$time = $securiser_action();
 
-	if (time() - $time < 15 * 60
+	if (
+		time() - $time < 15 * 60
 		and $GLOBALS['visiteur_session']['statut'] == '0minirezo'
 		and $GLOBALS['visiteur_session']['webmestre'] !== 'oui'
 	) {
@@ -45,7 +46,6 @@ function action_etre_webmestre_dist() {
 			exit;
 		}
 	}
-
 }
 
 /**
@@ -56,6 +56,6 @@ function action_etre_webmestre_dist() {
 function base_etre_webmestre_dist() {
 	if ($GLOBALS['visiteur_session']['statut'] == '0minirezo' and $GLOBALS['visiteur_session']['webmestre'] !== 'oui') {
 		include_spip('action/editer_auteur');
-		auteur_instituer($GLOBALS['visiteur_session']['id_auteur'], array('webmestre' => 'oui'), true);
+		auteur_instituer($GLOBALS['visiteur_session']['id_auteur'], ['webmestre' => 'oui'], true);
 	}
 }

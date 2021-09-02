@@ -20,26 +20,26 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function inc_informer_dist($id, $col, $exclus, $rac, $type, $do = 'aff') {
 	include_spip('inc/texte');
 	$titre = $descriptif = '';
-	if ($type == "rubrique") {
-		$row = sql_fetsel("titre, descriptif", "spip_rubriques", "id_rubrique = " . intval($id));
+	if ($type == 'rubrique') {
+		$row = sql_fetsel('titre, descriptif', 'spip_rubriques', 'id_rubrique = ' . intval($id));
 		if ($row) {
-			$titre = typo($row["titre"]);
-			$descriptif = propre($row["descriptif"]);
+			$titre = typo($row['titre']);
+			$descriptif = propre($row['descriptif']);
 		} else {
 			$titre = _T('info_racine_site');
 		}
 	}
 
 	$res = '';
-	if ($type == "rubrique" and $GLOBALS['spip_display'] != 1 and isset($GLOBALS['meta']['image_process'])) {
-		if ($GLOBALS['meta']['image_process'] != "non") {
+	if ($type == 'rubrique' and $GLOBALS['spip_display'] != 1 and isset($GLOBALS['meta']['image_process'])) {
+		if ($GLOBALS['meta']['image_process'] != 'non') {
 			$chercher_logo = charger_fonction('chercher_logo', 'inc');
 			if ($res = $chercher_logo($id, 'id_rubrique', 'on')) {
 				list($fid, $dir, $nom, $format) = $res;
 				include_spip('inc/filtres_images_mini');
 				$res = image_reduire("<img src='$fid' alt='' />", 100, 48);
 				if ($res) {
-					$res = "<div class='informer__media' style='float: " . $GLOBALS['spip_lang_right'] . "; margin-" . $GLOBALS['spip_lang_right'] . ": -5px; margin-top: -5px;'>$res</div>";
+					$res = "<div class='informer__media' style='float: " . $GLOBALS['spip_lang_right'] . '; margin-' . $GLOBALS['spip_lang_right'] . ": -5px; margin-top: -5px;'>$res</div>";
 				}
 			}
 		}
@@ -51,9 +51,15 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type, $do = 'aff') {
 
 # ce lien provoque la selection (directe) de la rubrique cliquee
 # et l'affichage de son titre dans le bandeau
-	$titre = strtr(str_replace("'", "&#8217;",
-		str_replace('"', "&#34;", textebrut($titre))),
-		"\n\r", "  ");
+	$titre = strtr(
+		str_replace(
+			"'",
+			'&#8217;',
+			str_replace('"', '&#34;', textebrut($titre))
+		),
+		"\n\r",
+		'  '
+	);
 
 	$js_func = $do . '_selection_titre';
 
@@ -61,18 +67,18 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type, $do = 'aff') {
 	. "<input type='text' id='" . $rac . "_sel' value='$id' />"
 	. "<input type='text' id='" . $rac . "_sel2' value=\""
 	. entites_html($titre)
-	. "\" />"
-	. "</div>"
+	. '" />'
+	. '</div>'
 	. "<div class='informer' style='padding: 5px; border-top: 0px;'>"
 	. '<div class="informer__item">'
 	. (!$res ? '' : $res)
-	. "<p class='informer__titre'><b>" . safehtml($titre) . "</b></p>"
-	. (!$descriptif ? '' : "<div class='informer__descriptif'>" . safehtml($descriptif) . "</div>")
+	. "<p class='informer__titre'><b>" . safehtml($titre) . '</b></p>'
+	. (!$descriptif ? '' : "<div class='informer__descriptif'>" . safehtml($descriptif) . '</div>')
 	. '</div>'
 	. "<div class='informer__action' style='clear:both; text-align: " . $GLOBALS['spip_lang_right'] . ";'>"
 	. "<input type='submit' class='fondo btn submit' value='"
 	. _T('bouton_choisir')
 	. "'\nonclick=\"$js_func('$titre',$id,'selection_rubrique','id_parent'); return false;\" />"
-	. "</div>"
-	. "</div>";
+	. '</div>'
+	. '</div>';
 }

@@ -36,7 +36,7 @@ function quete_virtuel($id_article, $connect) {
 	return sql_getfetsel(
 		'virtuel',
 		'spip_articles',
-		array('id_article=' . intval($id_article), "statut='publie'"),
+		['id_article=' . intval($id_article), "statut='publie'"],
 		'',
 		'',
 		'',
@@ -57,13 +57,16 @@ function quete_virtuel($id_article, $connect) {
  * @return array
  */
 function quete_parent_lang($table, $id, $connect = '') {
-	static $cache_quete = array();
+	static $cache_quete = [];
 
 	if (!isset($cache_quete[$connect][$table][$id])) {
 		if (!isset($cache_quete[$connect][$table]['_select'])) {
 			$trouver_table = charger_fonction('trouver_table', 'base');
-			if (!$desc = $trouver_table($table,
-					$connect) or !isset($desc['field']['id_rubrique'])
+			if (
+				!$desc = $trouver_table(
+					$table,
+					$connect
+				) or !isset($desc['field']['id_rubrique'])
 			) {
 				// pas de parent rubrique, on passe
 				$cache_quete[$connect][$table]['_select'] = false;
@@ -191,7 +194,7 @@ function quete_condition_postdates($champ_date, $serveur = '', $ignore_previsu =
  * @return array|string
  */
 function quete_condition_statut($mstatut, $previsu, $publie, $serveur = '', $ignore_previsu = false) {
-	static $cond = array();
+	static $cond = [];
 	$key = func_get_args();
 	$key = implode('-', $key);
 	if (isset($cond[$key])) {
@@ -213,7 +216,7 @@ function quete_condition_statut($mstatut, $previsu, $publie, $serveur = '', $ign
 	}
 
 	$liste_statuts = explode(',', $liste_statuts);
-	$where = array();
+	$where = [];
 	foreach ($liste_statuts as $k => $v) {
 		// filtrage /auteur pour limiter les objets d'un statut (prepa en general)
 		// a ceux de l'auteur identifie
@@ -222,7 +225,8 @@ function quete_condition_statut($mstatut, $previsu, $publie, $serveur = '', $ign
 			$filtre = end($v);
 			$v = reset($v);
 			$v = preg_replace(',\W,', '', $v);
-			if ($filtre == 'auteur'
+			if (
+				$filtre == 'auteur'
 				and (strpos($mstatut, '.') !== false)
 				and $objet = explode('.', $mstatut)
 				and $id_table = reset($objet)
@@ -249,15 +253,15 @@ function quete_condition_statut($mstatut, $previsu, $publie, $serveur = '', $ign
 					} else {
 						$primary = id_table_objet($objet);
 						$where[] = "($w OR $id_table.$primary IN (" . sql_get_select(
-								'ssss.id_objet',
-								'spip_auteurs_liens AS ssss',
-								'ssss.objet=' . sql_quote($objet) . ' AND ssss.id_auteur=' . intval($id_auteur),
-								'',
-								'',
-								'',
-								'',
-								$serveur
-							) . '))';
+							'ssss.id_objet',
+							'spip_auteurs_liens AS ssss',
+							'ssss.objet=' . sql_quote($objet) . ' AND ssss.id_auteur=' . intval($id_auteur),
+							'',
+							'',
+							'',
+							'',
+							$serveur
+						) . '))';
 					}
 				}
 			} // ignorer ce statut si on ne sait pas comment le filtrer
@@ -270,18 +274,18 @@ function quete_condition_statut($mstatut, $previsu, $publie, $serveur = '', $ign
 	}
 	$liste_statuts = array_filter($liste_statuts);
 	if (count($liste_statuts) == 1) {
-		$where[] = array('=', $mstatut, sql_quote(reset($liste_statuts), $serveur));
+		$where[] = ['=', $mstatut, sql_quote(reset($liste_statuts), $serveur)];
 	} else {
 		$where[] = sql_in($mstatut, $liste_statuts, $not, $serveur);
 	}
 
 	while (count($where) > 1) {
-		$and = array('AND', array_pop($where), array_pop($where));
+		$and = ['AND', array_pop($where), array_pop($where)];
 		$where[] = $and;
 	}
 	$cond[$key] = reset($where);
 	if ($not) {
-		$cond[$key] = array('NOT', $cond[$key]);
+		$cond[$key] = ['NOT', $cond[$key]];
 	}
 
 	return $cond[$key];
@@ -295,7 +299,7 @@ function quete_condition_statut($mstatut, $previsu, $publie, $serveur = '', $ign
  * @return array|bool|null
  */
 function quete_fichier($id_document, $serveur = '') {
-	return sql_getfetsel('fichier', 'spip_documents', ('id_document=' . intval($id_document)), '', array(), '', '', $serveur);
+	return sql_getfetsel('fichier', 'spip_documents', ('id_document=' . intval($id_document)), '', [], '', '', $serveur);
 }
 
 /**
@@ -306,7 +310,7 @@ function quete_fichier($id_document, $serveur = '') {
  * @return array|bool
  */
 function quete_document($id_document, $serveur = '') {
-	return sql_fetsel('*', 'spip_documents', ('id_document=' . intval($id_document)), '', array(), '', '', $serveur);
+	return sql_fetsel('*', 'spip_documents', ('id_document=' . intval($id_document)), '', [], '', '', $serveur);
 }
 
 /**
@@ -372,11 +376,11 @@ function quete_logo($cle_objet, $onoff, $id, $id_rubrique, $flag) {
 				// on retourne une url du type IMG/artonXX?timestamp
 				// qui permet de distinguer le changement de logo
 				// et placer un expire sur le dossier IMG/
-				$res = array(
+				$res = [
 					$on['chemin'] . ($on['timestamp'] ? "?{$on['timestamp']}" : ''),
 					($off ? $off['chemin'] . ($off['timestamp'] ? "?{$off['timestamp']}" : '') : ''),
 					(!$taille ? '' : (' ' . $taille[3]))
-				);
+				];
 				$res['src'] = $res[0];
 				$res['logo_on'] = $res[0];
 				$res['logo_off'] = $res[1];
@@ -426,24 +430,24 @@ function quete_logo_objet($id_objet, $objet, $mode) {
 	$infos_logo = $chercher_logo($id_objet, $cle_objet, $mode);
 	// Si la méthode classique a trouvé quelque chose, on utilise le nouveau format
 	if (!empty($infos_logo)) {
-		$infos_logo = array(
+		$infos_logo = [
 			'chemin' => $infos_logo[0],
 			'timestamp' => $infos_logo[4],
-		);
+		];
 	}
 
 	// On passe cette recherche de logo dans un pipeline
 	$infos_logo = pipeline(
 		'quete_logo_objet',
-		array(
-			'args' => array(
+		[
+			'args' => [
 				'id_objet' => $id_objet,
 				'objet' => $objet,
 				'cle_objet' => $cle_objet,
 				'mode' => $mode,
-			),
+			],
 			'data' => $infos_logo,
-		)
+		]
 	);
 
 	return $infos_logo;
@@ -469,7 +473,8 @@ function quete_logo_file($row, $connect = null) {
 		$logo = $f($row['extension'], false);
 	}
 	// si c'est une vignette type doc, la renvoyer direct
-	if (strcmp($logo, _DIR_PLUGINS) == 0
+	if (
+		strcmp($logo, _DIR_PLUGINS) == 0
 		or strcmp($logo, _DIR_PLUGINS_DIST) == 0
 		or strcmp($logo, _DIR_RACINE . 'prive/') == 0
 	) {
@@ -506,7 +511,7 @@ function quete_logo_document($row, $lien, $align, $mode_logo, $x, $y, $connect =
 
 	include_spip('inc/documents');
 	$logo = '';
-	if (!in_array($mode_logo, array('icone', 'apercu'))) {
+	if (!in_array($mode_logo, ['icone', 'apercu'])) {
 		$logo = vignette_logo_document($row, $connect);
 	}
 	// si on veut explicitement la vignette, ne rien renvoyer si il n'y en a pas
@@ -534,7 +539,7 @@ function quete_html_logo($logo, $align, $lien) {
 	}
 
 	$contexte = [];
-	foreach ($logo as $k=>$v) {
+	foreach ($logo as $k => $v) {
 		if (!is_numeric($k)) {
 			$contexte[$k] = $v;
 		}
@@ -607,7 +612,7 @@ function vignette_logo_document($row, $connect = '') {
  * @return bool|string
  */
 function calcul_exposer($id, $prim, $reference, $parent, $type, $connect = '') {
-	static $exposer = array();
+	static $exposer = [];
 
 	// Que faut-il exposer ? Tous les elements de $reference
 	// ainsi que leur hierarchie ; on ne fait donc ce calcul
@@ -622,10 +627,11 @@ function calcul_exposer($id, $prim, $reference, $parent, $type, $connect = '') {
 		// il n'est donc pas utile
 		$parent = 0;
 		if (!$principal) { // regarder si un enfant est dans le contexte, auquel cas il expose peut etre le parent courant
-			$enfants = array('id_rubrique' => array('id_article'), 'id_groupe' => array('id_mot'));
+			$enfants = ['id_rubrique' => ['id_article'], 'id_groupe' => ['id_mot']];
 			if (isset($enfants[$type])) {
 				foreach ($enfants[$type] as $t) {
-					if (isset($reference[$t])
+					if (
+						isset($reference[$t])
 						// cas de la reference donnee dynamiquement par la pagination
 						or isset($reference["@$t"])
 					) {
@@ -636,9 +642,9 @@ function calcul_exposer($id, $prim, $reference, $parent, $type, $connect = '') {
 				}
 			}
 		}
-		$exposer[$m][$type] = array();
+		$exposer[$m][$type] = [];
 		if ($principal) {
-			$principaux = is_array($principal) ? $principal : array($principal);
+			$principaux = is_array($principal) ? $principal : [$principal];
 			foreach ($principaux as $principal) {
 				$exposer[$m][$type][$principal] = true;
 				if ($type == 'id_mot') {

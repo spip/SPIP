@@ -17,7 +17,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('inc/texte');
 
 // https://code.spip.net/@inc_plonger_dist
-function inc_plonger_dist($id_rubrique, $idom = "", $list = array(), $col = 1, $exclu = 0, $do = 'aff') {
+function inc_plonger_dist($id_rubrique, $idom = '', $list = [], $col = 1, $exclu = 0, $do = 'aff') {
 
 	if ($list) {
 		$id_rubrique = $list[$col - 1];
@@ -29,14 +29,18 @@ function inc_plonger_dist($id_rubrique, $idom = "", $list = array(), $col = 1, $
 	# en excluant une eventuelle rubrique interdite (par exemple, lorsqu'on
 	# deplace une rubrique, on peut la deplacer partout a partir de la
 	# racine... sauf vers elle-meme ou sa propre branche)
-	$ordre = array();
-	$rub = array();
+	$ordre = [];
+	$rub = [];
 
-	$res = sql_select("rub1.id_rubrique, rub1.titre, rub1.id_parent, rub1.lang, rub1.langue_choisie, rub2.id_rubrique AS id_enfant",
-		"spip_rubriques AS rub1 LEFT JOIN spip_rubriques AS rub2 ON (rub1.id_rubrique = rub2.id_parent)",
-		"rub1.id_parent = " . sql_quote($id_rubrique) . "
-			AND rub1.id_rubrique!=" . sql_quote($exclu) . "
-			AND (rub2.id_rubrique IS NULL OR rub2.id_rubrique!=" . sql_quote($exclu) . ")", "", "0+rub1.titre,rub1.titre");
+	$res = sql_select(
+		'rub1.id_rubrique, rub1.titre, rub1.id_parent, rub1.lang, rub1.langue_choisie, rub2.id_rubrique AS id_enfant',
+		'spip_rubriques AS rub1 LEFT JOIN spip_rubriques AS rub2 ON (rub1.id_rubrique = rub2.id_parent)',
+		'rub1.id_parent = ' . sql_quote($id_rubrique) . '
+			AND rub1.id_rubrique!=' . sql_quote($exclu) . '
+			AND (rub2.id_rubrique IS NULL OR rub2.id_rubrique!=' . sql_quote($exclu) . ')',
+		'',
+		'0+rub1.titre,rub1.titre'
+	);
 
 	while ($row = sql_fetch($res)) {
 		if (autoriser('voir', 'rubrique', $row['id_rubrique'])) {
@@ -61,8 +65,8 @@ function inc_plonger_dist($id_rubrique, $idom = "", $list = array(), $col = 1, $
 		foreach ($ordre as $id => $titrebrut) {
 			$titre = supprimer_numero($titrebrut);
 
-			$classe1 = 'petit-item ' . ($id_rubrique ? 'petite-rubrique' : "petit-secteur");
-			if (isset($rub[$id]["enfants"])) {
+			$classe1 = 'petit-item ' . ($id_rubrique ? 'petite-rubrique' : 'petit-secteur');
+			if (isset($rub[$id]['enfants'])) {
 				$classe2 = " class='rub-ouverte'";
 				$url = "\nhref='$rec&amp;id=$id'";
 			} else {
@@ -78,39 +82,42 @@ function inc_plonger_dist($id_rubrique, $idom = "", $list = array(), $col = 1, $
 # et l'affichage de son titre dans le bandeau
 				. "\"\nondblclick=\""
 				. "$js_func(this."
-				. "firstChild.nodeValue,"
+				. 'firstChild.nodeValue,'
 				. $id
 				. ",'selection_rubrique','id_parent');"
 				. "\nreturn aff_selection_provisoire($id,$args);"
-				. "\"";
+				. '"';
 
 			$ret .= "<div class='"
-				. (($id == $next) ? "item on" : "item")
+				. (($id == $next) ? 'item on' : 'item')
 				. "'><div class='"
 				. $classe1
 				. "'><div$classe2><a"
 				. $url
 				. $click
-				. ">"
+				. '>'
 				. $titre
-				. "</a></div></div></div>";
+				. '</a></div></div></div>';
 		}
 	}
 
-	$idom2 = $idom . "_col_" . ($col + 1);
+	$idom2 = $idom . '_col_' . ($col + 1);
 	$left = ($col * 250);
 
-	return http_img_pack("loader.svg", "",
-		"class='loader' style='visibility: hidden; position: absolute; " . $GLOBALS['spip_lang_left'] . ": "
+	return http_img_pack(
+		'loader.svg',
+		'',
+		"class='loader' style='visibility: hidden; position: absolute; " . $GLOBALS['spip_lang_left'] . ': '
 		. ($left - 30)
-		. "px; top: 2px; z-index: 2;' id='img_$idom2'")
-	. "<div style='width: 250px; height: 100%; overflow: auto; position: absolute; top: 0px; " . $GLOBALS['spip_lang_left'] . ": "
+		. "px; top: 2px; z-index: 2;' id='img_$idom2'"
+	)
+	. "<div style='width: 250px; height: 100%; overflow: auto; position: absolute; top: 0px; " . $GLOBALS['spip_lang_left'] . ': '
 	. ($left - 250)
 	. "px;'>"
 	. $ret
 	. "\n</div>\n<div id='$idom2'>"
 	. ($next
 		? inc_plonger_dist($id_rubrique, $idom, $list, $col + 1, $exclu)
-		: "")
+		: '')
 	. "\n</div>";
 }

@@ -6,7 +6,7 @@
  * @package SPIP\Core\Charsets
  **/
 
-$GLOBALS['CHARSET']['iso-8859-1'] = array(
+$GLOBALS['CHARSET']['iso-8859-1'] = [
 
 // plage invalide en iso-8859-1 mais souvent utilisee quand meme (windows)
 // cf. http://openweb.eu.org/articles/caracteres_illegaux/
@@ -141,4 +141,4 @@ $GLOBALS['CHARSET']['iso-8859-1'] = array(
 	254 => 254,
 	255 => 255
 
-);
+];

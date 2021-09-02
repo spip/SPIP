@@ -108,7 +108,7 @@ function spip_connect($serveur = '', $version = '') {
 			spip_log("spip_connect: serveur $index version '$version' non defini pour '$type'", _LOG_HS);
 
 			// ne plus reessayer
-			return $GLOBALS['connexions'][$index][$version] = array();
+			return $GLOBALS['connexions'][$index][$version] = [];
 		}
 	}
 	$GLOBALS['connexions'][$index][$version] = $GLOBALS[$jeu];
@@ -127,7 +127,7 @@ function spip_connect($serveur = '', $version = '') {
 		$charset = spip_connect_main($GLOBALS[$jeu], $GLOBALS['db_ok']['charset']);
 		if (!$charset) {
 			unset($GLOBALS['connexions'][$index]);
-			spip_log("spip_connect: absence de charset", _LOG_AVERTISSEMENT);
+			spip_log('spip_connect: absence de charset', _LOG_AVERTISSEMENT);
 
 			return false;
 		}
@@ -136,8 +136,9 @@ function spip_connect($serveur = '', $version = '') {
 			$charset = $GLOBALS['db_ok']['charset'];
 		}
 		// spip_meta n'existe pas toujours dans la base
-		// C'est le cas d'un dump sqlite par exemple 
-		elseif ($GLOBALS['connexions'][$index]['spip_connect_version']
+		// C'est le cas d'un dump sqlite par exemple
+		elseif (
+			$GLOBALS['connexions'][$index]['spip_connect_version']
 			and sql_showtable('spip_meta', true, $serveur)
 			and $r = sql_getfetsel('valeur', 'spip_meta', "nom='charset_sql_connexion'", '', '', '', '', $serveur)
 		) {
@@ -200,7 +201,7 @@ function spip_connect_sql($version, $ins = '', $serveur = '', $continue = false)
 		spip_log("Le serveur '$serveur' version $version n'a pas '$ins'", _LOG_ERREUR);
 	}
 	include_spip('inc/minipres');
-	echo minipres(_T('info_travaux_titre'), _T('titre_probleme_technique'), array('status' => 503));
+	echo minipres(_T('info_travaux_titre'), _T('titre_probleme_technique'), ['status' => 503]);
 	exit;
 }
 
@@ -243,18 +244,19 @@ function spip_connect_db(
 		define('_CONNECT_RETRY_DELAY', 30);
 	}
 
-	$f = "";
+	$f = '';
 	// un fichier de identifiant par combinaison (type,host,port,db)
 	// pour ne pas declarer tout indisponible d'un coup
 	// si en cours d'installation ou si db=@test@ on ne pose rien
 	// car c'est un test de connexion
-	if (!defined('_ECRIRE_INSTALL') and $db !== "@test@") {
+	if (!defined('_ECRIRE_INSTALL') and $db !== '@test@') {
 		$f = _DIR_TMP . $type . '.' . substr(md5($host . $port . $db), 0, 8) . '.out';
 	} elseif ($db == '@test@') {
 		$db = '';
 	}
 
-	if ($f
+	if (
+		$f
 		and @file_exists($f)
 		and (time() - @filemtime($f) < _CONNECT_RETRY_DELAY)
 	) {
@@ -274,11 +276,10 @@ function spip_connect_db(
 		return;
 	}
 	if ($g = $h($host, $port, $login, $pass, $db, $prefixe)) {
-
 		if (!is_array($auth)) {
 			// compatibilite version 0.7 initiale
 			$g['ldap'] = $auth;
-			$auth = array('ldap' => $auth);
+			$auth = ['ldap' => $auth];
 		}
 		$g['authentification'] = $auth;
 		$g['type'] = $type;
@@ -336,7 +337,8 @@ function spip_connect_main($connexion, $charset_sql_connexion = '') {
 	}
 	// sinon on regarde la table spip_meta
 	// en cas d'erreur select retourne la requette (is_string=true donc)
-	if (!$r = $f('valeur', 'spip_meta', "nom='charset_sql_connexion'")
+	if (
+		!$r = $f('valeur', 'spip_meta', "nom='charset_sql_connexion'")
 		or is_string($r)
 	) {
 		return false;
@@ -382,7 +384,7 @@ function spip_connect_ldap($serveur = '') {
 function _q($a) {
 	return (is_numeric($a)) ? strval($a) :
 		(!is_array($a) ? ("'" . addslashes($a) . "'")
-			: join(",", array_map('_q', $a)));
+			: join(',', array_map('_q', $a)));
 }
 
 /**
@@ -398,28 +400,28 @@ function _q($a) {
  * @return array
  */
 function query_echappe_textes($query) {
-	static $codeEchappements = array("''" => "\x1@##@\x1", "\'" => "\x2@##@\x2", "\\\"" => "\x3@##@\x3");
+	static $codeEchappements = ["''" => "\x1@##@\x1", "\'" => "\x2@##@\x2", '\\"' => "\x3@##@\x3"];
 	$query = str_replace(array_keys($codeEchappements), array_values($codeEchappements), $query);
 	if (preg_match_all("/((['])[^']*(\\2))|(([\"])[^\"]*(\\5))/S", $query, $textes)) {
 		$textes = reset($textes); // indice 0 du match
 		switch (count($textes)) {
 			case 0:
-				$replace = array();
+				$replace = [];
 				break;
 			case 1:
-				$replace = array('%1$s');
+				$replace = ['%1$s'];
 				break;
 			case 2:
-				$replace = array('%1$s', '%2$s');
+				$replace = ['%1$s', '%2$s'];
 				break;
 			case 3:
-				$replace = array('%1$s', '%2$s', '%3$s');
+				$replace = ['%1$s', '%2$s', '%3$s'];
 				break;
 			case 4:
-				$replace = array('%1$s', '%2$s', '%3$s', '%4$s');
+				$replace = ['%1$s', '%2$s', '%3$s', '%4$s'];
 				break;
 			case 5:
-				$replace = array('%1$s', '%2$s', '%3$s', '%4$s', '%5$s');
+				$replace = ['%1$s', '%2$s', '%3$s', '%4$s', '%5$s'];
 				break;
 			default:
 				$replace = range(1, count($textes));
@@ -429,10 +431,10 @@ function query_echappe_textes($query) {
 		}
 		$query = str_replace($textes, $replace, $query);
 	} else {
-		$textes = array();
+		$textes = [];
 	}
 
-	return array($query, $textes);
+	return [$query, $textes];
 }
 
 /**
@@ -446,7 +448,7 @@ function query_echappe_textes($query) {
  * @return string
  */
 function query_reinjecte_textes($query, $textes) {
-	static $codeEchappements = array("''" => "\x1@##@\x1", "\'" => "\x2@##@\x2", "\\\"" => "\x3@##@\x3");
+	static $codeEchappements = ["''" => "\x1@##@\x1", "\'" => "\x2@##@\x2", '\\"' => "\x3@##@\x3"];
 	# debug de la substitution
 	#if (($c1=substr_count($query,"%"))!=($c2=count($textes))){
 	#	spip_log("$c1 ::". $query,"tradquery"._LOG_ERREUR);

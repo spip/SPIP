@@ -77,7 +77,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect =
 		return $nom;
 	}
 
-	// charger le source, si possible, et compiler 
+	// charger le source, si possible, et compiler
 	$skel_code = '';
 	if (lire_fichier($source, $skel)) {
 		$compiler = charger_fonction('compiler', 'public');
@@ -122,12 +122,12 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect =
 	}
 
 	if (defined('_VAR_MODE') and _VAR_MODE == 'debug') {
-
 		// Tracer ce qui vient d'etre compile
 		$GLOBALS['debug_objets']['code'][$nom . 'tout'] = $code;
 
 		// si c'est ce que demande le debusqueur, lui passer la main
-		if ($GLOBALS['debug_objets']['sourcefile']
+		if (
+			$GLOBALS['debug_objets']['sourcefile']
 			and (_request('var_mode_objet') == $nom)
 			and (_request('var_mode_affiche') == 'code')
 		) {
@@ -146,10 +146,10 @@ function squelette_traduit($squelette, $sourcefile, $phpfile, $boucles) {
 		$code = "
 /*
  * Squelette : $sourcefile
- * Date :      " . gmdate("D, d M Y H:i:s", @filemtime($sourcefile)) . " GMT
- * Compile :   " . gmdate("D, d M Y H:i:s", time()) . " GMT
- * " . (!$boucles ? "Pas de boucle" : ("Boucles :   " . $noms)) . "
- */ ";
+ * Date :      " . gmdate('D, d M Y H:i:s', @filemtime($sourcefile)) . ' GMT
+ * Compile :   ' . gmdate('D, d M Y H:i:s', time()) . ' GMT
+ * ' . (!$boucles ? 'Pas de boucle' : ('Boucles :   ' . $noms)) . '
+ */ ';
 	}
 
 	$code = '<' . "?php\n" . $code . join('', $boucles) . "\n?" . '>';
@@ -176,7 +176,7 @@ function squelette_obsolete($skel, $squelette) {
 	}
 
 	return (
-		(defined('_VAR_MODE') and in_array(_VAR_MODE, array('recalcul', 'preview', 'debug')))
+		(defined('_VAR_MODE') and in_array(_VAR_MODE, ['recalcul', 'preview', 'debug']))
 		or !@file_exists($skel)
 		or ((@file_exists($squelette) ? @filemtime($squelette) : 0)
 			> ($date = @filemtime($skel)))
@@ -195,16 +195,20 @@ function invalideur_session(&$Cache, $code = null) {
 
 // https://code.spip.net/@analyse_resultat_skel
 function analyse_resultat_skel($nom, $cache, $corps, $source = '') {
-	static $filtres = array();
-	$headers = array();
+	static $filtres = [];
+	$headers = [];
 
 	// Recupere les < ?php header('Xx: y'); ? > pour $page['headers']
 	// note: on essaie d'attrapper aussi certains de ces entetes codes
 	// "a la main" dans les squelettes, mais evidemment sans exhaustivite
-	if (stripos($corps, 'header') !== false
+	if (
+		stripos($corps, 'header') !== false
 		and preg_match_all(
 			'/(<[?]php\s+)@?header\s*\(\s*.([^:\'"]*):?\s*([^)]*)[^)]\s*\)\s*[;]?\s*[?]>/ims',
-			$corps, $regs, PREG_SET_ORDER)
+			$corps,
+			$regs,
+			PREG_SET_ORDER
+		)
 	) {
 		foreach ($regs as $r) {
 			$corps = str_replace($r[0], '', $corps);
@@ -212,7 +216,7 @@ function analyse_resultat_skel($nom, $cache, $corps, $source = '') {
 			$j = join('-', array_map('ucwords', explode('-', strtolower($r[2]))));
 
 			if ($j == 'X-Spip-Filtre' and isset($headers[$j])) {
-				$headers[$j] .= "|" . $r[3];
+				$headers[$j] .= '|' . $r[3];
 			} else {
 				$headers[$j] = $r[3];
 			}
@@ -228,20 +232,20 @@ function analyse_resultat_skel($nom, $cache, $corps, $source = '') {
 		? 'html'
 		: 'php';
 
-	$skel = array(
+	$skel = [
 		'squelette' => $nom,
 		'source' => $source,
 		'process_ins' => $process_ins,
 		'invalideurs' => $cache,
 		'entetes' => $headers,
 		'duree' => isset($headers['X-Spip-Cache']) ? intval($headers['X-Spip-Cache']) : 0
-	);
+	];
 
 	// traiter #FILTRE{} et filtres
 	if (!isset($filtres[$nom])) {
-		$filtres[$nom] = pipeline('declarer_filtres_squelettes', array('args' => $skel, 'data' => array()));
+		$filtres[$nom] = pipeline('declarer_filtres_squelettes', ['args' => $skel, 'data' => []]);
 	}
-	$filtres_headers = array();
+	$filtres_headers = [];
 	if (isset($headers['X-Spip-Filtre']) and strlen($headers['X-Spip-Filtre'])) {
 		$filtres_headers = array_filter(explode('|', $headers['X-Spip-Filtre']));
 		unset($headers['X-Spip-Filtre']);
@@ -300,7 +304,7 @@ if ($lang_select) lang_select();
  **/
 function synthetiser_balise_dynamique($nom, $args, $file, $context_compil) {
 	if (
-		strncmp($file, "/", 1) !== 0 
+		strncmp($file, '/', 1) !== 0
 		// pas de lien symbolique sous Windows
 		and !(stristr(PHP_OS, 'WIN') and strpos($file, ':') !== false)
 	) {
@@ -308,22 +312,24 @@ function synthetiser_balise_dynamique($nom, $args, $file, $context_compil) {
 	}
 
 	$lang = $context_compil[4];
-	if (preg_match(",\W,", $lang)) {
+	if (preg_match(',\W,', $lang)) {
 		$lang = '';
 	}
 
 	$args = array_map('argumenter_squelette', $args);
 	if (!empty($context_compil['appel_php_depuis_modele'])) {
-		$args[0] = 'arguments_balise_dyn_depuis_modele('.$args[0].')';
+		$args[0] = 'arguments_balise_dyn_depuis_modele(' . $args[0] . ')';
 	}
 	$args = join(', ', $args);
 
-	$r = sprintf(CODE_INCLURE_BALISE,
+	$r = sprintf(
+		CODE_INCLURE_BALISE,
 		$file,
 		$lang,
 		$nom,
 		$args,
-		join(', ', array_map('_q', $context_compil)));
+		join(', ', array_map('_q', $context_compil))
+	);
 
 	return $r;
 }
@@ -348,12 +354,12 @@ function argumenter_squelette($v) {
 	} elseif (!is_array($v)) {
 		return "'" . texte_script($v) . "'";
 	} else {
-		$out = array();
+		$out = [];
 		foreach ($v as $k => $val) {
 			$out [] = argumenter_squelette($k) . '=>' . argumenter_squelette($val);
 		}
 
-		return 'array(' . join(", ", $out) . ')';
+		return 'array(' . join(', ', $out) . ')';
 	}
 }
 
@@ -388,22 +394,24 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 	/** @var string Nom de la balise à charger (balise demandée ou balise générique) */
 	$nom_balise = $nom;
 	/** @var string Nom de la balise générique (si utilisée) */
-	$nom_balise_generique = "";
+	$nom_balise_generique = '';
 
 	$appel_php_depuis_modele = false;
-	if (is_array($context_compil)
-	  and !is_numeric($context_compil[3])
-	  and empty($context_compil[0])
+	if (
+		is_array($context_compil)
+		and !is_numeric($context_compil[3])
+		and empty($context_compil[0])
 		and empty($context_compil[1])
 		and empty($context_compil[2])
-		and empty($context_compil[3])) {
+		and empty($context_compil[3])
+	) {
 		$appel_php_depuis_modele = true;
 	}
 
 	if (!$fonction_balise = charger_fonction($nom_balise, 'balise', true)) {
 		// Calculer un nom générique (ie. 'formulaire_' dans 'formulaire_editer_article')
 		if ($balise_generique = chercher_balise_generique($nom)) {
-			// injecter en premier arg le nom de la balise 
+			// injecter en premier arg le nom de la balise
 			array_unshift($args, $nom);
 			$nom_balise_generique = $balise_generique['nom_generique'];
 			$fonction_balise = $balise_generique['fonction_generique'];
@@ -413,7 +421,7 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 	}
 
 	if (!$fonction_balise) {
-		$msg = array('zbug_balise_inexistante', array('from' => 'CVT', 'balise' => $nom));
+		$msg = ['zbug_balise_inexistante', ['from' => 'CVT', 'balise' => $nom]];
 		erreur_squelette($msg, $context_compil);
 
 		return '';
@@ -421,7 +429,7 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 
 	// retrouver le fichier qui a déclaré la fonction
 	// même si la fonction dynamique est déclarée dans un fichier de fonctions.
-	// Attention sous windows, getFileName() retourne un antislash. 
+	// Attention sous windows, getFileName() retourne un antislash.
 	$reflector = new ReflectionFunction($fonction_balise);
 	$file = str_replace('\\', '/', $reflector->getFileName());
 	if (strncmp($file, str_replace('\\', '/', _ROOT_RACINE), strlen(_ROOT_RACINE)) === 0) {
@@ -437,23 +445,23 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 		return $r;
 	}
 
-	// verifier que la fonction dyn est la, 
+	// verifier que la fonction dyn est la,
 	// sinon se replier sur la generique si elle existe
 	if (!function_exists('balise_' . $nom_balise . '_dyn')) {
 		if (
 			$balise_generique = chercher_balise_generique($nom)
 			and $nom_balise_generique = $balise_generique['nom_generique']
-			and $file = include_spip("balise/" . strtolower($nom_balise_generique))
+			and $file = include_spip('balise/' . strtolower($nom_balise_generique))
 			and function_exists('balise_' . $nom_balise_generique . '_dyn')
 		) {
-			// et lui injecter en premier arg le nom de la balise 
+			// et lui injecter en premier arg le nom de la balise
 			array_unshift($r, $nom);
 			$nom_balise = $nom_balise_generique;
 			if (!_DIR_RESTREINT) {
 				$file = _DIR_RESTREINT_ABS . $file;
 			}
 		} else {
-			$msg = array('zbug_balise_inexistante', array('from' => 'CVT', 'balise' => $nom));
+			$msg = ['zbug_balise_inexistante', ['from' => 'CVT', 'balise' => $nom]];
 			erreur_squelette($msg, $context_compil);
 
 			return '';
@@ -464,26 +472,25 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 		$context_compil['appel_php_depuis_modele'] = true;
 	}
 	return synthetiser_balise_dynamique($nom_balise, $r, $file, $context_compil);
-
 }
 
 /**
  * Pour une balise "NOM" donné, cherche s'il existe une balise générique qui peut la traiter
  *
  * Le nom de balise doit contenir au moins un souligné "A_B", auquel cas on cherche une balise générique "A_"
- * 
+ *
  * S'il y a plus d'un souligné, tel que "A_B_C_D" on cherche différentes balises génériques en commençant par la plus longue possible,
  * tel que "A_B_C_", sinon "A_B_" sinon "A_"
- * 
+ *
  * @param string $nom
  * @return array|null
  */
 function chercher_balise_generique($nom) {
-	if (false === strpos($nom, "_")) {
+	if (false === strpos($nom, '_')) {
 		return null;
 	}
 	$nom_generique = $nom;
-	while (false !== ($p = strrpos($nom_generique, "_"))) {
+	while (false !== ($p = strrpos($nom_generique, '_'))) {
 		$nom_generique = substr($nom_generique, 0, $p + 1);
 		$fonction_generique = charger_fonction($nom_generique, 'balise', true);
 		if ($fonction_generique) {
@@ -520,7 +527,8 @@ function chercher_balise_generique($nom) {
  **/
 function lang_select_public($lang, $lang_select, $titre = null) {
 	// Cas 1. forcer_lang = true et pas de critere {lang_select}
-	if (isset($GLOBALS['forcer_lang']) and $GLOBALS['forcer_lang']
+	if (
+		isset($GLOBALS['forcer_lang']) and $GLOBALS['forcer_lang']
 		and $lang_select !== 'oui'
 	) {
 		$lang = $GLOBALS['spip_lang'];
@@ -528,7 +536,8 @@ function lang_select_public($lang, $lang_select, $titre = null) {
 	elseif (!strlen($lang)) {
 		$lang = $GLOBALS['spip_lang'];
 	} // Cas 3. l'objet est multilingue !
-	elseif ($lang_select !== 'oui'
+	elseif (
+		$lang_select !== 'oui'
 		and strlen($titre) > 10
 		and strpos($titre, '<multi>') !== false
 		and strpos(echappe_html($titre), '<multi>') !== false
@@ -584,7 +593,7 @@ function match_self($w) {
 		return false;
 	}
 	if (is_array($w)) {
-		if (in_array(reset($w), array("SELF", "SUBSELECT"))) {
+		if (in_array(reset($w), ['SELF', 'SUBSELECT'])) {
 			return $w;
 		}
 		foreach (array_filter($w, 'is_array') as $sw) {
@@ -611,7 +620,7 @@ function match_self($w) {
  **/
 function remplace_sous_requete($w, $sousrequete) {
 	if (is_array($w)) {
-		if (in_array(reset($w), array("SELF", "SUBSELECT"))) {
+		if (in_array(reset($w), ['SELF', 'SUBSELECT'])) {
 			return $sousrequete;
 		}
 		foreach ($w as $k => $sw) {
@@ -633,8 +642,8 @@ function remplace_sous_requete($w, $sousrequete) {
  *     - Conditions avec des sous requêtes
  **/
 function trouver_sous_requetes($where) {
-	$where_simples = array();
-	$where_sous = array();
+	$where_simples = [];
+	$where_sous = [];
 	foreach ($where as $k => $w) {
 		if (match_self($w)) {
 			$where_sous[$k] = $w;
@@ -643,7 +652,7 @@ function trouver_sous_requetes($where) {
 		}
 	}
 
-	return array($where_simples, $where_sous);
+	return [$where_simples, $where_sous];
 }
 
 
@@ -669,15 +678,15 @@ function trouver_sous_requetes($where) {
  * @return resource
  */
 function calculer_select(
-	$select = array(),
-	$from = array(),
-	$from_type = array(),
-	$where = array(),
-	$join = array(),
-	$groupby = array(),
-	$orderby = array(),
+	$select = [],
+	$from = [],
+	$from_type = [],
+	$where = [],
+	$join = [],
+	$groupby = [],
+	$orderby = [],
 	$limit = '',
-	$having = array(),
+	$having = [],
 	$table = '',
 	$id = '',
 	$serveur = '',
@@ -708,21 +717,21 @@ function calculer_select(
 	}
 
 	// evacuer les eventuels groupby vide issus d'un calcul dynamique
-	$groupby = array_diff($groupby, array(''));
+	$groupby = array_diff($groupby, ['']);
 
 	// remplacer les sous requetes recursives au calcul
 	list($where_simples, $where_sous) = trouver_sous_requetes($where);
 	foreach ($where_sous as $k => $w) {
 		$menage = true;
-		// on recupere la sous requete 
+		// on recupere la sous requete
 		$sous = match_self($w);
 		if ($sous[0] == 'SELF') {
 			// c'est une sous requete identique a elle meme sous la forme (SELF,$select,$where)
 			array_push($where_simples, $sous[2]);
-			$wheresub = array(
+			$wheresub = [
 				$sous[2],
 				'0=0'
-			); // pour accepter une string et forcer a faire le menage car on a surement simplifie select et where
+			]; // pour accepter une string et forcer a faire le menage car on a surement simplifie select et where
 			$jsub = $join;
 			// trouver les jointures utiles a
 			// reinjecter dans le where de la sous requete les conditions supplementaires des jointures qui y sont mentionnees
@@ -730,19 +739,27 @@ function calculer_select(
 			// on construit le where une fois, puis on ajoute les where complentaires si besoin, et on reconstruit le where en fonction
 			$i = 0;
 			do {
-				$where[$k] = remplace_sous_requete($w, "(" . calculer_select(
-						array($sous[1] . " AS id"),
-						$from,
-						$from_type,
-						$wheresub,
-						$jsub,
-						array(), array(), '',
-						$having, $table, $id, $serveur, false) . ")");
+				$where[$k] = remplace_sous_requete($w, '(' . calculer_select(
+					[$sous[1] . ' AS id'],
+					$from,
+					$from_type,
+					$wheresub,
+					$jsub,
+					[],
+					[],
+					'',
+					$having,
+					$table,
+					$id,
+					$serveur,
+					false
+				) . ')');
 				if (!$i) {
 					$i = 1;
 					$wherestring = calculer_where_to_string($where[$k]);
 					foreach ($join as $cle => $wj) {
-						if (count($wj) == 4
+						if (
+							count($wj) == 4
 							and strpos($wherestring, "{$cle}.") !== false
 						) {
 							$i = 0;
@@ -756,19 +773,22 @@ function calculer_select(
 		if ($sous[0] == 'SUBSELECT') {
 			// c'est une sous requete explicite sous la forme identique a sql_select : (SUBSELECT,$select,$from,$where,$groupby,$orderby,$limit,$having)
 			array_push($where_simples, $sous[3]); // est-ce utile dans ce cas ?
-			$where[$k] = remplace_sous_requete($w, "(" . calculer_select(
-					$sous[1], # select
-					$sous[2], #from
-					array(), #from_type
-					$sous[3] ? (is_array($sous[3]) ? $sous[3] : array($sous[3])) : array(),
-					#where, qui peut etre de la forme string comme dans sql_select
-					array(), #join
-					$sous[4] ? $sous[4] : array(), #groupby
-					$sous[5] ? $sous[5] : array(), #orderby
-					$sous[6], #limit
-					$sous[7] ? $sous[7] : array(), #having
-					$table, $id, $serveur, false
-				) . ")");
+			$where[$k] = remplace_sous_requete($w, '(' . calculer_select(
+				$sous[1], # select
+				$sous[2], #from
+				[], #from_type
+				$sous[3] ? (is_array($sous[3]) ? $sous[3] : [$sous[3]]) : [],
+				#where, qui peut etre de la forme string comme dans sql_select
+					[], #join
+				$sous[4] ? $sous[4] : [], #groupby
+				$sous[5] ? $sous[5] : [], #orderby
+				$sous[6], #limit
+				$sous[7] ? $sous[7] : [], #having
+				$table,
+				$id,
+				$serveur,
+				false
+			) . ')');
 		}
 		array_pop($where_simples);
 	}
@@ -784,8 +804,8 @@ function calculer_select(
 	// parcourir de la plus recente a la moins recente pour pouvoir eliminer Ln
 	// si elle est seulement utile a Ln+1 elle meme inutile
 
-	$afrom = array();
-	$equiv = array();
+	$afrom = [];
+	$equiv = [];
 	$k = count($join);
 	foreach (array_reverse($join, true) as $cledef => $j) {
 		$cle = $cledef;
@@ -805,10 +825,11 @@ function calculer_select(
 			$cle = "L$k";
 		}
 		$cle_where_lie = "JOIN-$cle";
-		if (!$menage
+		if (
+			!$menage
 			or isset($afrom[$cle])
 			or calculer_jointnul($cle, $select)
-			or calculer_jointnul($cle, array_diff_key($join, array($cle => $join[$cle])))
+			or calculer_jointnul($cle, array_diff_key($join, [$cle => $join[$cle]]))
 			or calculer_jointnul($cle, $having)
 			or calculer_jointnul($cle, array_diff_key($where_simples, [$cle_where_lie => '']))
 		) {
@@ -829,18 +850,18 @@ function calculer_select(
 			// on garde une ecriture decomposee pour permettre une simplification ulterieure si besoin
 			// sans recours a preg_match
 			// un implode(' ',..) est fait dans reinjecte_joint un peu plus bas
-			$afrom[$t][$cle] = array(
+			$afrom[$t][$cle] = [
 				"\n" .
-				(isset($from_type[$cle]) ? $from_type[$cle] : "INNER") . " JOIN",
+				(isset($from_type[$cle]) ? $from_type[$cle] : 'INNER') . ' JOIN',
 				$from[$cle],
 				"AS $cle",
-				"ON (",
+				'ON (',
 				"$cle.$c",
-				"=",
+				'=',
 				"$t.$carr",
-				($and ? "AND " . $and : "") .
-				")"
-			);
+				($and ? 'AND ' . $and : '') .
+				')'
+			];
 			if (isset($afrom[$cle])) {
 				$afrom[$t] = $afrom[$t] + $afrom[$cle];
 				unset($afrom[$cle]);
@@ -876,8 +897,9 @@ function calculer_select(
 		$t = key($from);
 		$c = current($from);
 		reset($from);
-		$e = '/\b(' . "$t\\." . join("|" . $t . '\.', $equiv) . ')\b/';
-		if (!(strpos($t, ' ') or // jointure des le depart cf boucle_doc
+		$e = '/\b(' . "$t\\." . join('|' . $t . '\.', $equiv) . ')\b/';
+		if (
+			!(strpos($t, ' ') or // jointure des le depart cf boucle_doc
 				calculer_jointnul($t, $select, $e) or
 				calculer_jointnul($t, $join, $e) or
 				calculer_jointnul($t, $where, $e) or
@@ -895,7 +917,7 @@ function calculer_select(
 			unset($afrom[$t]);
 			$e = '/\b' . preg_quote($nfrom[6]) . '\b/';
 			$t = $nfrom[4];
-			$alias = "";
+			$alias = '';
 			// verifier que les deux cles sont homonymes, sinon installer un alias dans le select
 			$oldcle = explode('.', $nfrom[6]);
 			$oldcle = end($oldcle);
@@ -906,9 +928,9 @@ function calculer_select(
 				// reprendre simplement ce AS
 				$as = '/\b' . preg_quote($nfrom[6]) . '\s+(AS\s+\w+)\b/';
 				if (preg_match($as, implode(',', $select), $m)) {
-					$alias = "";
+					$alias = '';
 				} else {
-					$alias = ", " . $nfrom[4] . " AS $oldcle";
+					$alias = ', ' . $nfrom[4] . " AS $oldcle";
 				}
 			}
 			$select = remplacer_jointnul($t . $alias, $select, $e);
@@ -922,14 +944,23 @@ function calculer_select(
 	}
 	if (empty($GLOBALS['debug']) or !is_array($GLOBALS['debug'])) {
 		$wasdebug = empty($GLOBALS['debug']) ? false : $GLOBALS['debug'];
-		$GLOBALS['debug'] = array();
+		$GLOBALS['debug'] = [];
 		if ($wasdebug) {
 			$GLOBALS['debug']['debug'] = true;
 		}
 	}
-	$GLOBALS['debug']['aucasou'] = array($table, $id, $serveur, $requeter);
-	$r = sql_select($select, $from, $where,
-		$groupby, array_filter($orderby), $limit, $having, $serveur, $requeter);
+	$GLOBALS['debug']['aucasou'] = [$table, $id, $serveur, $requeter];
+	$r = sql_select(
+		$select,
+		$from,
+		$where,
+		$groupby,
+		array_filter($orderby),
+		$limit,
+		$having,
+		$serveur,
+		$requeter
+	);
 	unset($GLOBALS['debug']['aucasou']);
 
 	return $r;
@@ -950,7 +981,7 @@ function calculer_where_to_string($v, $join = 'AND') {
 	if (!is_array($v)) {
 		return $v;
 	} else {
-		$exp = "";
+		$exp = '';
 		if (strtoupper($join) === 'AND') {
 			return $exp . join(" $join ", array_map('calculer_where_to_string', $v));
 		} else {
@@ -983,7 +1014,7 @@ function calculer_jointnul($cle, $exp, $equiv = '') {
 
 // https://code.spip.net/@reinjecte_joint
 function reinjecte_joint($afrom, $from) {
-	$from_synth = array();
+	$from_synth = [];
 	foreach ($from as $k => $v) {
 		$from_synth[$k] = $from[$k];
 		if (isset($afrom[$k])) {
@@ -1020,6 +1051,6 @@ function calculer_nom_fonction_squel($skel, $mime_type = 'html', $connect = '') 
 	}
 
 	return $mime_type
-	. (!$connect ? '' : preg_replace('/\W/', "_", $connect)) . '_'
+	. (!$connect ? '' : preg_replace('/\W/', '_', $connect)) . '_'
 	. md5($GLOBALS['spip_version_code'] . ' * ' . $skel . (isset($GLOBALS['marqueur_skel']) ? '*' . $GLOBALS['marqueur_skel'] : ''));
 }

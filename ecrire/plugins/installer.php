@@ -68,7 +68,7 @@ function plugins_installer_dist($plug, $action, $dir_type = '_DIR_PLUGINS') {
 	}
 	$dir = constant($dir);
 	foreach ($infos['install'] as $file) {
-		$file = $dir . $plug . "/" . trim($file);
+		$file = $dir . $plug . '/' . trim($file);
 		if (file_exists($file)) {
 			include_once($file);
 		}
@@ -84,7 +84,7 @@ function plugins_installer_dist($plug, $action, $dir_type = '_DIR_PLUGINS') {
 	$nom_meta = $infos['prefix'] . '_base_version';
 
 	// Détermination de la fonction à appeler et de ses arguments
-	$f = $infos['prefix'] . "_install";
+	$f = $infos['prefix'] . '_install';
 	if (!function_exists($f)) {
 		$f = isset($infos['schema']) ? 'spip_plugin_install' : '';
 		$arg = $infos;
@@ -100,7 +100,7 @@ function plugins_installer_dist($plug, $action, $dir_type = '_DIR_PLUGINS') {
 
 	if (!$f) {
 		// installation sans operation particuliere
-		$infos['install_test'] = array(true, '');
+		$infos['install_test'] = [true, ''];
 		return $infos;
 	}
 
@@ -130,7 +130,7 @@ function plugins_installer_dist($plug, $action, $dir_type = '_DIR_PLUGINS') {
 	// vider le cache des descriptions de tables a chaque (de)installation
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$trouver_table('');
-	$infos['install_test'] = array($f('test', $arg, $version), $aff);
+	$infos['install_test'] = [$f('test', $arg, $version), $aff];
 
 	// Si la table meta n'est pas spip_meta et qu'on est dans la première installation du plugin
 	// on force la création du fichier cache à la date du moment.
@@ -198,20 +198,20 @@ function spip_plugin_install($action, $infos, $version_cible) {
 function liste_plugin_actifs() {
 	$liste = isset($GLOBALS['meta']['plugin']) ? $GLOBALS['meta']['plugin'] : '';
 	if (!$liste) {
-		return array();
+		return [];
 	}
 	if (!is_array($liste = unserialize($liste))) {
 		// compatibilite pre 1.9.2, mettre a jour la meta
-		spip_log("MAJ meta plugin vieille version : $liste", "plugin");
+		spip_log("MAJ meta plugin vieille version : $liste", 'plugin');
 		$new = true;
-		list(, $liste) = liste_plugin_valides(explode(",", $liste));
+		list(, $liste) = liste_plugin_valides(explode(',', $liste));
 	} else {
 		$new = false;
 		// compat au moment d'une migration depuis version anterieure
 		// si pas de dir_type, alors c'est _DIR_PLUGINS
 		foreach ($liste as $prefix => $infos) {
 			if (!isset($infos['dir_type'])) {
-				$liste[$prefix]['dir_type'] = "_DIR_PLUGINS";
+				$liste[$prefix]['dir_type'] = '_DIR_PLUGINS';
 				$new = true;
 			}
 		}

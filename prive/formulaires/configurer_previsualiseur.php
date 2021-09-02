@@ -16,7 +16,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('inc/presentation');
 
 function formulaires_configurer_previsualiseur_charger_dist() {
-	$valeurs = array();
+	$valeurs = [];
 	$valeurs['preview'] = explode(',', $GLOBALS['meta']['preview']);
 
 	return $valeurs;
@@ -24,7 +24,7 @@ function formulaires_configurer_previsualiseur_charger_dist() {
 
 
 function formulaires_configurer_previsualiseur_traiter_dist() {
-	$res = array('editable' => true);
+	$res = ['editable' => true];
 
 	if ($i = _request('preview') and is_array($i)) {
 		$i = ',' . implode(',', $i) . ',';

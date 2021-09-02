@@ -46,7 +46,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  **/
 function inc_admin_dist($script, $titre, $comment = '', $anonymous = false) {
 	$reprise = true;
-	if (!isset($GLOBALS['meta'][$script])
+	if (
+		!isset($GLOBALS['meta'][$script])
 		or !isset($GLOBALS['meta']['admin'])
 	) {
 		$reprise = false;
@@ -105,13 +106,14 @@ function admin_verifie_session($script, $anonymous = false) {
 		ecrire_meta('admin', $signal, 'non');
 	} else {
 		if (!$anonymous and ($valeur != $signal)) {
-			if (!preg_match('/^(.*)_(\d+)_/', $GLOBALS['meta']['admin'], $l)
+			if (
+				!preg_match('/^(.*)_(\d+)_/', $GLOBALS['meta']['admin'], $l)
 				or intval($l[2]) != $GLOBALS['visiteur_session']['id_auteur']
 			) {
 				include_spip('inc/minipres');
 				spip_log("refus de lancer $script, priorite a $valeur");
 
-				return minipres(_T('info_travaux_texte'), '', array('status' => 503));
+				return minipres(_T('info_travaux_texte'), '', ['status' => 503]);
 			}
 		}
 	}
@@ -201,7 +203,8 @@ function debut_admin($script, $action = '', $corps = '') {
 
 		// Si on est un super-admin, un bouton de validation suffit
 		// sauf dans les cas destroy
-		if ((autoriser('webmestre') or $script === 'repair')
+		if (
+			(autoriser('webmestre') or $script === 'repair')
 			and $script != 'delete_all'
 		) {
 			if (_request('validation_admin') == $signal) {
@@ -228,7 +231,7 @@ function debut_admin($script, $action = '', $corps = '') {
 				. "<input type='hidden' id='fichier' name='fichier' value='"
 				. $signal
 				. "' />"
-				. _T('info_creer_repertoire_2', array('repertoire' => joli_repertoire($dir)))
+				. _T('info_creer_repertoire_2', ['repertoire' => joli_repertoire($dir)])
 				. '</fieldset>';
 
 			$suivant = _T('bouton_recharger_page');
@@ -247,7 +250,7 @@ function debut_admin($script, $action = '', $corps = '') {
 			$script = "base_$script";
 		}
 		$form = copy_request($script, $corps, $suivant);
-		$info_action = _T('info_action', array('action' => "$action"));
+		$info_action = _T('info_action', ['action' => "$action"]);
 
 		return minipres($info_action, $form, $js);
 	}
@@ -288,7 +291,7 @@ function fin_admin($action) {
 function copy_request($script, $suite, $submit = '') {
 	include_spip('inc/filtres');
 	foreach (array_merge($_POST, $_GET) as $n => $c) {
-		if (!in_array($n, array('fichier', 'exec', 'validation_admin')) and !is_array($c)) {
+		if (!in_array($n, ['fichier', 'exec', 'validation_admin']) and !is_array($c)) {
 			$suite .= "\n<input type='hidden' name='" . spip_htmlspecialchars($n) . "' value='" .
 				entites_html($c) .
 				"'  />";

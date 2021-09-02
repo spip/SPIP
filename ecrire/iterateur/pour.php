@@ -28,7 +28,7 @@ include_spip('iterateur/data');
  *
  * Annonce au compilateur les "champs" disponibles,
  * c'est à dire 'cle' et 'valeur'.
- * 
+ *
  * @deprecated 4.0
  * @see Utiliser une boucle (DATA){source tableau,#XX}
  * @see iterateur_DATA_dist()
@@ -40,12 +40,12 @@ include_spip('iterateur/data');
  */
 function iterateur_POUR_dist($b) {
 	$b->iterateur = 'DATA'; # designe la classe d'iterateur
-	$b->show = array(
-		'field' => array(
+	$b->show = [
+		'field' => [
 			'cle' => 'STRING',
 			'valeur' => 'STRING',
-		)
-	);
+		]
+	];
 
 	return $b;
 }

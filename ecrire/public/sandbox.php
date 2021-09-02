@@ -41,7 +41,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Texte
  */
 function sandbox_composer_texte($texte, &$p) {
-	$code = "'" . str_replace(array("\\", "'"), array("\\\\", "\\'"), $texte) . "'";
+	$code = "'" . str_replace(['\\', "'"], ['\\\\', "\\'"], $texte) . "'";
 
 	return $code;
 }
@@ -58,7 +58,7 @@ function sandbox_composer_texte($texte, &$p) {
  *     Balise qui appelle ce filtre
  * @return string
  */
-function sandbox_composer_filtre($fonc, $code, $arglist, &$p, $nb_arg_droite=1000) : string {
+function sandbox_composer_filtre($fonc, $code, $arglist, &$p, $nb_arg_droite = 1000): string {
 	if (isset($GLOBALS['spip_matrice'][$fonc])) {
 		$code = "filtrer('$fonc',$code$arglist)";
 	}
@@ -66,7 +66,6 @@ function sandbox_composer_filtre($fonc, $code, $arglist, &$p, $nb_arg_droite=100
 	// le filtre est defini sous forme de fonction ou de methode
 	// par ex. dans inc_texte, inc_filtres ou mes_fonctions
 	elseif ($f = chercher_filtre($fonc)) {
-
 		// cas particulier : le filtre |set doit acceder a la $Pile
 		// proto: filtre_set(&$Pile, $val, $args...)
 		if (strpbrk($f, ':')) { // Class::method
@@ -82,17 +81,17 @@ function sandbox_composer_filtre($fonc, $code, $arglist, &$p, $nb_arg_droite=100
 			$code = "$f($code$arglist)";
 			$nb_arg_gauche = 1; // la balise à laquelle s'applique le filtre
 		}
-		$nb_args_f = $nb_arg_gauche+$nb_arg_droite;
+		$nb_args_f = $nb_arg_gauche + $nb_arg_droite;
 		$min_f = $refl->getNumberOfRequiredParameters();
 		if (($nb_args_f < $min_f)) {
-			$msg_args = ['filtre' => texte_script ($fonc), 'nb'=> $min_f - $nb_args_f];
-			erreur_squelette ([ 'zbug_erreur_filtre_nbarg_min', $msg_args], $p);
+			$msg_args = ['filtre' => texte_script($fonc), 'nb' => $min_f - $nb_args_f];
+			erreur_squelette([ 'zbug_erreur_filtre_nbarg_min', $msg_args], $p);
 		}
 	}
 	// le filtre n'existe pas,
 	// on le notifie
 	else {
-		erreur_squelette(array('zbug_erreur_filtre', array('filtre' => texte_script($fonc))), $p);
+		erreur_squelette(['zbug_erreur_filtre', ['filtre' => texte_script($fonc)]], $p);
 	}
 
 	return $code;
@@ -106,8 +105,7 @@ else {
 	$contexte_inclus = %s;
 	include $path;
 }
-'
-);
+');
 
 /**
  * Composer le code d'inclusion PHP
@@ -140,7 +138,8 @@ function sandbox_composer_inclure_php($fichier, &$p, $_contexte) {
  */
 function sandbox_composer_interdire_scripts($code, &$p) {
 	// Securite
-	if ($p->interdire_scripts
+	if (
+		$p->interdire_scripts
 		and $p->etoile != '**'
 	) {
 		if (!preg_match("/^sinon[(](.*),'([^']*)'[)]$/", $code, $r)) {
@@ -212,8 +211,8 @@ function sandbox_filtrer_squelette($skel, $corps, $filtres) {
  *     - array : Liste( liste des codes PHP, liste des substitutions )
  **/
 function echapper_php_callback($r = null) {
-	static $src = array();
-	static $dst = array();
+	static $src = [];
+	static $dst = [];
 
 	// si on recoit un tableau, on est en mode echappement
 	// on enregistre le code a echapper dans dst, et le code echappe dans src
@@ -225,8 +224,8 @@ function echapper_php_callback($r = null) {
 
 	// si on recoit pas un tableau, on renvoit les couples de substitution
 	// et on RAZ les remplacements
-	$r = array($src, $dst);
-	$src = $dst = array();
+	$r = [$src, $dst];
+	$src = $dst = [];
 
 	return $r;
 }

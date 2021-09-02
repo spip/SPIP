@@ -37,16 +37,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  **/
 function inc_chercher_logo_dist($id, $_id_objet, $mode = 'on', $compat_old_logos = true) {
 
-	$mode = preg_replace(",\W,", '', $mode);
+	$mode = preg_replace(',\W,', '', $mode);
 	if ($mode) {
 		// chercher dans la base
 		$mode_document = 'logo' . $mode;
 		$objet = objet_type($_id_objet);
-		$doc = sql_fetsel('D.*', 'spip_documents AS D JOIN spip_documents_liens AS L ON L.id_document=D.id_document', "D.mode=".sql_quote($mode_document)." AND L.objet=".sql_quote($objet)." AND id_objet=".intval($id));
+		$doc = sql_fetsel('D.*', 'spip_documents AS D JOIN spip_documents_liens AS L ON L.id_document=D.id_document', 'D.mode=' . sql_quote($mode_document) . ' AND L.objet=' . sql_quote($objet) . ' AND id_objet=' . intval($id));
 		if ($doc) {
 			include_spip('inc/documents');
 			$d = get_spip_doc($doc['fichier']);
-			return array($d, _DIR_IMG, basename($d), $doc['extension'], @filemtime($d), $doc);
+			return [$d, _DIR_IMG, basename($d), $doc['extension'], @filemtime($d), $doc];
 		}
 
 		# deprecated TODO remove
@@ -57,14 +57,14 @@ function inc_chercher_logo_dist($id, $_id_objet, $mode = 'on', $compat_old_logos
 
 			foreach ($GLOBALS['formats_logos'] as $format) {
 				if (@file_exists($d = (_DIR_LOGOS . $nom . '.' . $format))) {
-					return array($d, _DIR_LOGOS, $nom, $format, @filemtime($d));
+					return [$d, _DIR_LOGOS, $nom, $format, @filemtime($d)];
 				}
 			}
 		}
 	}
 
 	# coherence de type pour servir comme filtre (formulaire_login)
-	return array();
+	return [];
 }
 
 /**
@@ -89,9 +89,9 @@ function type_du_logo($_id_objet) {
 }
 
 // Exceptions standards (historique)
-$GLOBALS['table_logos'] = array(
+$GLOBALS['table_logos'] = [
 	'id_article' => 'art',
 	'id_auteur' => 'aut',
 	'id_rubrique' => 'rub',
 	'id_groupe' => 'groupe',
-);
+];

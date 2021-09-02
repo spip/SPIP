@@ -37,13 +37,13 @@ function plugins_get_infos_dist($plug = false, $reload = false, $dir = _DIR_PLUG
 	static $filecache = '';
 
 	if ($cache === '') {
-		$filecache = _DIR_TMP . "plugin_xml_cache.gz";
+		$filecache = _DIR_TMP . 'plugin_xml_cache.gz';
 		if (is_file($filecache)) {
 			lire_fichier($filecache, $contenu);
 			$cache = unserialize($contenu);
 		}
 		if (!is_array($cache)) {
-			$cache = array();
+			$cache = [];
 		}
 	}
 
@@ -79,10 +79,10 @@ function plugins_get_infos_dist($plug = false, $reload = false, $dir = _DIR_PLUG
 		ecrire_fichier($filecache, serialize($cache));
 	}
 	if (!isset($cache[$dir])) {
-		return array();
+		return [];
 	}
 	if (is_string($plug)) {
-		return isset($cache[$dir][$plug]) ? $cache[$dir][$plug] : array();
+		return isset($cache[$dir][$plug]) ? $cache[$dir][$plug] : [];
 	} else {
 		return $cache[$dir];
 	}
@@ -100,11 +100,12 @@ function plugins_get_infos_un($plug, $reload, $dir, &$cache) {
 	$md5 = md5_file($file);
 
 	$pcache = isset($cache[$dir][$plug])
-		? $cache[$dir][$plug] 
-		: array('filemtime' => 0, 'md5_file' => '');
+		? $cache[$dir][$plug]
+		: ['filemtime' => 0, 'md5_file' => ''];
 
 	// si le cache est valide
-	if ((intval($reload) <= 0)
+	if (
+		(intval($reload) <= 0)
 		and ($time > 0)
 		and ($time <= $pcache['filemtime'])
 		and $md5 == $pcache['md5_file']
@@ -125,16 +126,16 @@ function plugins_get_infos_un($plug, $reload, $dir, &$cache) {
 	// utiliser un necessite php. SPIP procure donc la version php courante du serveur.
 	// chaque librairie php est aussi procurée, par exemple 'php:curl'.
 	if (isset($ret['prefix']) and $ret['prefix'] == 'spip') {
-		$ret['procure']['php'] = array('nom' => 'php', 'version' => phpversion());
+		$ret['procure']['php'] = ['nom' => 'php', 'version' => phpversion()];
 		foreach (get_loaded_extensions() as $ext) {
-			$ret['procure']['php:' . $ext] = array('nom' => 'php:' . $ext, 'version' => phpversion($ext));
+			$ret['procure']['php:' . $ext] = ['nom' => 'php:' . $ext, 'version' => phpversion($ext)];
 		}
 	}
 	$diff = ($ret != $pcache);
 
 	if ($diff) {
 		$cache[$dir][$plug] = $ret;
-#		echo count($cache[$dir]), $dir,$plug, " $reloadc<br>"; 
+#       echo count($cache[$dir]), $dir,$plug, " $reloadc<br>";
 	}
 
 	return $diff;

@@ -30,7 +30,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  **/
 function base_delete_all_dist($titre) {
 	$delete = _request('delete');
-	$res = array();
+	$res = [];
 	if (is_array($delete)) {
 		foreach ($delete as $table) {
 			if (sql_drop_table($table)) {

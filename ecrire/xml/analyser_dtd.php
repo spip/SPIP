@@ -18,7 +18,7 @@ include_spip('xml/interfaces');
 
 // https://code.spip.net/@charger_dtd
 function charger_dtd($grammaire, $avail, $rotlvl) {
-	static $dtd = array(); # cache bien utile pour le validateur en boucle
+	static $dtd = []; # cache bien utile pour le validateur en boucle
 
 	if (isset($dtd[$grammaire])) {
 		return $dtd[$grammaire];
@@ -32,7 +32,7 @@ function charger_dtd($grammaire, $avail, $rotlvl) {
 
 	if (lire_fichier($file, $r)) {
 		if (!$grammaire) {
-			return array();
+			return [];
 		}
 		if (($avail == 'SYSTEM') and filemtime($file) < filemtime($grammaire)) {
 			$r = false;
@@ -43,11 +43,11 @@ function charger_dtd($grammaire, $avail, $rotlvl) {
 		$dtc = unserialize($r);
 	} else {
 		spip_timer('dtd');
-		$dtc = new DTC;
+		$dtc = new DTC();
 		// L'analyseur retourne un booleen de reussite et modifie $dtc.
 		// Retourner vide en cas d'echec
 		if (!analyser_dtd($grammaire, $avail, $dtc)) {
-			$dtc = array();
+			$dtc = [];
 		} else {
 			// tri final pour presenter les suggestions de corrections
 			foreach ($dtc->peres as $k => $v) {
@@ -55,11 +55,10 @@ function charger_dtd($grammaire, $avail, $rotlvl) {
 				$dtc->peres[$k] = $v;
 			}
 
-			spip_log("Analyser DTD $avail $grammaire (" . spip_timer('dtd') . ") " . count($dtc->macros) . ' macros, ' . count($dtc->elements) . ' elements, ' . count($dtc->attributs) . " listes d'attributs, " . count($dtc->entites) . " entites");
+			spip_log("Analyser DTD $avail $grammaire (" . spip_timer('dtd') . ') ' . count($dtc->macros) . ' macros, ' . count($dtc->elements) . ' elements, ' . count($dtc->attributs) . " listes d'attributs, " . count($dtc->entites) . ' entites');
 			#	$r = $dtc->regles; ksort($r);foreach($r as $l => $v) {$t=array_keys($dtc->attributs[$l]);echo "<b>$l</b> '$v' ", count($t), " attributs: ", join (', ',$t);$t=$dtc->peres[$l];echo "<br />",count($t), " peres: ", @join (', ',$t), "<br />\n";}exit;
 			ecrire_fichier($file, serialize($dtc), true);
 		}
-
 	}
 	$dtd[$grammaire] = $dtc;
 
@@ -76,12 +75,27 @@ function charger_dtd($grammaire, $avail, $rotlvl) {
 
 // https://code.spip.net/@compilerRegle
 function compilerRegle($val) {
-	$x = str_replace('()', '',
-		preg_replace('/\s*,\s*/', '',
-			preg_replace('/(\w+)\s*/', '(?:\1 )',
-				preg_replace('/\s*\)/', ')',
-					preg_replace('/\s*([(+*|?])\s*/', '\1',
-						preg_replace('/\s*#\w+\s*[,|]?\s*/', '', $val))))));
+	$x = str_replace(
+		'()',
+		'',
+		preg_replace(
+			'/\s*,\s*/',
+			'',
+			preg_replace(
+				'/(\w+)\s*/',
+				'(?:\1 )',
+				preg_replace(
+					'/\s*\)/',
+					')',
+					preg_replace(
+						'/\s*([(+*|?])\s*/',
+						'\1',
+						preg_replace('/\s*#\w+\s*[,|]?\s*/', '', $val)
+					)
+				)
+			)
+		)
+	);
 
 	return $x;
 }
@@ -135,22 +149,22 @@ function analyser_dtd($loc, $avail, &$dtc) {
 			$r = analyser_dtd_data($dtd, $dtc, $loc);
 		} else {
 			switch ($dtd[3]) {
-				case '%' :
+				case '%':
 					$r = analyser_dtd_data($dtd, $dtc, $loc);
 					break;
-				case 'T' :
+				case 'T':
 					$r = analyser_dtd_attlist($dtd, $dtc, $loc);
 					break;
-				case 'L' :
+				case 'L':
 					$r = analyser_dtd_element($dtd, $dtc, $loc);
 					break;
-				case 'N' :
+				case 'N':
 					$r = analyser_dtd_entity($dtd, $dtc, $loc);
 					break;
-				case 'O' :
+				case 'O':
 					$r = analyser_dtd_notation($dtd, $dtc, $loc);
 					break;
-				case '-' :
+				case '-':
 					$r = analyser_dtd_comment($dtd, $dtc, $loc);
 					break;
 				default:
@@ -158,7 +172,7 @@ function analyser_dtd($loc, $avail, &$dtc) {
 			}
 		}
 		if (!is_string($r)) {
-			spip_log("erreur $r dans la DTD  " . substr($dtd, 0, 80) . ".....");
+			spip_log("erreur $r dans la DTD  " . substr($dtd, 0, 80) . '.....');
 
 			return false;
 		}
@@ -202,7 +216,8 @@ function analyser_dtd_lexeme($dtd, &$dtc, $grammaire) {
 	if (is_array($n)) {
 		// en cas d'inclusion, l'espace de nom est le meme
 		// mais gaffe aux DTD dont l'URL est relative a l'engloblante
-		if (($n[0] == 'PUBLIC')
+		if (
+			($n[0] == 'PUBLIC')
 			and !tester_url_absolue($n[1])
 		) {
 			$n[1] = substr($grammaire, 0, strrpos($grammaire, '/') + 1) . $n[1];
@@ -222,8 +237,12 @@ function analyser_dtd_data($dtd, &$dtc, $grammaire) {
 	if (!preg_match(_REGEXP_INCLUDE_USE, $dtd, $m)) {
 		return -11;
 	}
-	if (!preg_match('/^((\s*<!(\[\s*%\s*[^;]*;\s*\[([^]<]*<[^>]*>)*[^]<]*\]\]>)|([^]>]*>))*[^]<]*)\]\]>\s*/s', $m[2],
-		$r)
+	if (
+		!preg_match(
+			'/^((\s*<!(\[\s*%\s*[^;]*;\s*\[([^]<]*<[^>]*>)*[^]<]*\]\]>)|([^]>]*>))*[^]<]*)\]\]>\s*/s',
+			$m[2],
+			$r
+		)
 	) {
 		return -12;
 	}
@@ -242,7 +261,7 @@ function analyser_dtd_notation($dtd, &$dtc, $grammaire) {
 	if (!preg_match('/^<!NOTATION.*?>\s*(.*)$/s', $dtd, $m)) {
 		return -8;
 	}
-	spip_log("analyser_dtd_notation a ecrire");
+	spip_log('analyser_dtd_notation a ecrire');
 
 	return $m[1];
 }
@@ -266,7 +285,7 @@ function analyser_dtd_entity($dtd, &$dtc, $grammaire) {
 	} // cas du synonyme complet
 	$val = expanserEntite(($k2 ? $k3 : ($k4 ? $k5 : $k6)), $dtc->macros);
 
-	// cas particulier double evaluation: 'PUBLIC "..." "...."' 
+	// cas particulier double evaluation: 'PUBLIC "..." "...."'
 	if (preg_match('/(PUBLIC|SYSTEM)\s+"([^"]*)"\s*("([^"]*)")?\s*$/s', $val, $r)) {
 		list($t, $type, $val, $q, $alt) = $r;
 	}
@@ -282,13 +301,14 @@ function analyser_dtd_entity($dtd, &$dtc, $grammaire) {
 		if (!$alt) {
 			$dtc->macros[$nom] = $val;
 		} else {
-			if (($type == 'PUBLIC')
+			if (
+				($type == 'PUBLIC')
 				and (strpos($alt, '/') === false)
 			) {
 				$alt = preg_replace(',/[^/]+$,', '/', $grammaire)
 					. $alt;
 			}
-			$dtc->macros[$nom] = array($type, $alt);
+			$dtc->macros[$nom] = [$type, $alt];
 		}
 	}
 
@@ -318,7 +338,7 @@ function analyser_dtd_element($dtd, &$dtc, $grammaire) {
 
 		return -4;
 	}
-	$filles = array();
+	$filles = [];
 	$contenu = expanserEntite($contenu, $dtc->macros);
 	$val = $contenu ? compilerRegle($contenu) : '(?:EMPTY )';
 	if ($val == '(?:EMPTY )') {
@@ -327,7 +347,8 @@ function analyser_dtd_element($dtd, &$dtc, $grammaire) {
 		$dtc->regles[$nom] = 'ANY';
 	} else {
 		$last = substr($val, -1);
-		if (preg_match('/ \w/', $val)
+		if (
+			preg_match('/ \w/', $val)
 			or (!empty($last) and strpos('*+?', $last) === false)
 		) {
 			$dtc->regles[$nom] = "/^$val$/";
@@ -338,7 +359,7 @@ function analyser_dtd_element($dtd, &$dtc, $grammaire) {
 
 		foreach ($filles as $k) {
 			if (!isset($dtc->peres[$k])) {
-				$dtc->peres[$k] = array();
+				$dtc->peres[$k] = [];
 			}
 			if (!in_array($nom, $dtc->peres[$k])) {
 				$dtc->peres[$k][] = $nom;
@@ -362,7 +383,7 @@ function analyser_dtd_attlist($dtd, &$dtc, $grammaire) {
 	$nom = expanserEntite($nom, $dtc->macros);
 	$val = expanserEntite($val, $dtc->macros);
 	if (!isset($dtc->attributs[$nom])) {
-		$dtc->attributs[$nom] = array();
+		$dtc->attributs[$nom] = [];
 	}
 
 	if (preg_match_all("/\s*(\S+)\s+(([(][^)]*[)])|(\S+))\s+([^\s']*)(\s*'[^']*')?/", $val, $r2, PREG_SET_ORDER)) {
@@ -371,7 +392,7 @@ function analyser_dtd_attlist($dtd, &$dtc, $grammaire) {
 				: ('/^' . preg_replace('/\s+/', '', $m2[2]) . '$/');
 			$m21 = expanserEntite($m2[1], $dtc->macros);
 			$m25 = expanserEntite($m2[5], $dtc->macros);
-			$dtc->attributs[$nom][$m21] = array($v, $m25);
+			$dtc->attributs[$nom][$m21] = [$v, $m25];
 		}
 	}
 
@@ -390,8 +411,8 @@ function analyser_dtd_attlist($dtd, &$dtc, $grammaire) {
  * @param array $macros
  * @return string|array
  **/
-function expanserEntite($val, $macros = array()) {
-	static $vu = array();
+function expanserEntite($val, $macros = []) {
+	static $vu = [];
 	if (!is_string($val)) {
 		return $vu;
 	}

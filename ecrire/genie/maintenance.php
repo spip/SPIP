@@ -66,14 +66,14 @@ function verifier_crash_tables() {
 	if (spip_connect()) {
 		include_spip('base/serial');
 		include_spip('base/auxiliaires');
-		$crash = array();
-		foreach (array('tables_principales', 'tables_auxiliaires') as $com) {
+		$crash = [];
+		foreach (['tables_principales', 'tables_auxiliaires'] as $com) {
 			foreach ($GLOBALS[$com] as $table => $desc) {
-				if (!sql_select('*', $table, '', '', '', 1)
+				if (
+					!sql_select('*', $table, '', '', '', 1)
 					and !defined('spip_interdire_cache')
-				) # cas "LOST CONNECTION"
-				{
-					$crash[] = $table;
+				) { # cas "LOST CONNECTION"
+				$crash[] = $table;
 				}
 			}
 		}
@@ -109,8 +109,11 @@ function message_crash_tables() {
 		return
 			'<strong>' . _T('texte_recuperer_base') . '</strong><br />'
 			. ' <tt>' . join(', ', $crash) . '</tt><br />'
-			. generer_form_ecrire('base_repair',
-				_T('texte_crash_base'), '',
-				_T('bouton_tenter_recuperation'));
+			. generer_form_ecrire(
+				'base_repair',
+				_T('texte_crash_base'),
+				'',
+				_T('bouton_tenter_recuperation')
+			);
 	}
 }

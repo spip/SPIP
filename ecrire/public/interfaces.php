@@ -52,7 +52,7 @@ class Contexte {
 	 *
 	 * @var array
 	 */
-	public $descr = array();
+	public $descr = [];
 
 	/**
 	 * Identifiant de la boucle
@@ -111,7 +111,7 @@ class Texte {
 	 *
 	 * @var string|array
 	 */
-	public $avant = "";
+	public $avant = '';
 
 	/**
 	 * Contenu après le texte.
@@ -120,7 +120,7 @@ class Texte {
 	 *
 	 * @var string|array
 	 */
-	public $apres = "";
+	public $apres = '';
 
 	/**
 	 * Numéro de ligne dans le code source du squelette
@@ -179,7 +179,7 @@ class Inclure {
 	 *
 	 * @var array
 	 */
-	public $param = array();
+	public $param = [];
 }
 
 
@@ -291,21 +291,21 @@ class Boucle {
 	 *
 	 * @var array
 	 */
-	public $param = array();
+	public $param = [];
 
 	/**
 	 * Critères de la boucle
 	 *
 	 * @var Critere[]
 	 */
-	public $criteres = array();
+	public $criteres = [];
 
 	/**
 	 * Textes insérés entre 2 éléments de boucle (critère inter)
 	 *
 	 * @var string[]
 	 */
-	public $separateur = array();
+	public $separateur = [];
 
 	/**
 	 * Liste des jointures possibles avec cette table
@@ -316,7 +316,7 @@ class Boucle {
 	 * @see base_trouver_table_dist()
 	 * @var array
 	 */
-	public $jointures = array();
+	public $jointures = [];
 
 	/**
 	 * Jointures explicites avec cette table
@@ -343,7 +343,7 @@ class Boucle {
 	 *
 	 * @var string
 	 */
-	public $partie = "";
+	public $partie = '';
 
 	/**
 	 * Nombre de divisions de la boucle, d'éléments à afficher,
@@ -354,7 +354,7 @@ class Boucle {
 	 *
 	 * @var string
 	 */
-	public $total_parties = "";
+	public $total_parties = '';
 
 	/**
 	 * Code PHP ajouté avant l'itération de boucle.
@@ -387,7 +387,7 @@ class Boucle {
 	 *
 	 * @var string[]
 	 */
-	public $select = array();
+	public $select = [];
 
 	/**
 	 * Liste des alias / tables SQL utilisées dans la boucle
@@ -399,7 +399,7 @@ class Boucle {
 	 *
 	 * @var string[]
 	 */
-	public $from = array();
+	public $from = [];
 
 	/**
 	 * Liste des alias / type de jointures utilisées dans la boucle
@@ -412,7 +412,7 @@ class Boucle {
 	 *
 	 * @var string[]
 	 */
-	public $from_type = array();
+	public $from_type = [];
 
 	/**
 	 * Liste des conditions WHERE de la boucle
@@ -451,17 +451,17 @@ class Boucle {
 	 *
 	 * @var array
 	 */
-	public $where = array();
+	public $where = [];
 
-	public $join = array();
-	public $having = array();
+	public $join = [];
+	public $having = [];
 	public $limit;
-	public $group = array();
-	public $order = array();
-	public $default_order = array();
+	public $group = [];
+	public $order = [];
+	public $default_order = [];
 	public $date = 'date';
-	public $hash = "";
-	public $in = "";
+	public $hash = '';
+	public $in = '';
 	public $sous_requete = false;
 
 	/**
@@ -484,7 +484,7 @@ class Boucle {
 	 * @see base_trouver_table_dist()
 	 * @var array
 	 */
-	public $show = array();
+	public $show = [];
 
 	/**
 	 * Nom de la table SQL principale de la boucle, sans son préfixe
@@ -528,7 +528,7 @@ class Boucle {
 	 *
 	 * @var array
 	 */
-	public $descr = array();
+	public $descr = [];
 
 	/**
 	 * Numéro de ligne dans le code source du squelette
@@ -538,7 +538,7 @@ class Boucle {
 	public $ligne = 0;
 
 
-	public $modificateur = array(); // table pour stocker les modificateurs de boucle tels que tout, plat ..., utilisable par les plugins egalement
+	public $modificateur = []; // table pour stocker les modificateurs de boucle tels que tout, plat ..., utilisable par les plugins egalement
 
 	/**
 	 * Type d'itérateur utilisé pour cette boucle
@@ -555,13 +555,13 @@ class Boucle {
 	 */
 	public $debug = [];
 
-	/** 
+	/**
 	 * Index de la boucle dont le champ présent dans cette boucle est originaire,
 	 * notamment si le champ a été trouve dans une boucle parente
-	 * 
+	 *
 	 * Tableau nom du champ => index de boucle
-	 * 
-	 * @var array $index_champ 
+	 *
+	 * @var array $index_champ
 	*/
 	public $index_champ = [];
 
@@ -621,7 +621,7 @@ class Critere {
 	 *
 	 * @var array
 	 */
-	public $param = array();
+	public $param = [];
 
 	/**
 	 * Numéro de ligne dans le code source du squelette
@@ -690,14 +690,14 @@ class Champ {
 	 *
 	 * @var array
 	 */
-	public $param = array();
+	public $param = [];
 
 	/**
 	 * Source des filtres  (compatibilité) (?)
 	 *
 	 * @var array|null
 	 */
-	public $fonctions = array();
+	public $fonctions = [];
 
 	/**
 	 * Identifiant de la boucle
@@ -755,7 +755,7 @@ class Champ {
 	 *
 	 * @var array
 	 */
-	public $descr = array();
+	public $descr = [];
 
 	/**
 	 * Numéro de ligne dans le code source du squelette
@@ -789,35 +789,35 @@ class Idiome {
 	 *
 	 * @var string
 	 */
-	public $nom_champ = "";
+	public $nom_champ = '';
 
 	/**
 	 * Module de langue où chercher la clé de traduction. Exemple 'medias'
 	 *
 	 * @var string
 	 */
-	public $module = "";
+	public $module = '';
 
 	/**
 	 * Arguments à passer à la chaîne
 	 *
 	 * @var array
 	 */
-	public $arg = array();
+	public $arg = [];
 
 	/**
 	 * Filtres à appliquer au résultat
 	 *
 	 * @var array
 	 */
-	public $param = array();
+	public $param = [];
 
 	/**
 	 * Source des filtres  (compatibilité) (?)
 	 *
 	 * @var array|null
 	 */
-	public $fonctions = array();
+	public $fonctions = [];
 
 	/**
 	 * Inutilisé, propriété générique de l'AST
@@ -886,7 +886,7 @@ class Idiome {
 	 *
 	 * @var array
 	 */
-	public $descr = array();
+	public $descr = [];
 
 	/**
 	 * Numéro de ligne dans le code source du squelette
@@ -916,7 +916,7 @@ class Polyglotte {
 	 *
 	 * @var array
 	 */
-	public $traductions = array();
+	public $traductions = [];
 
 	/**
 	 * Numéro de ligne dans le code source du squelette
@@ -928,7 +928,7 @@ class Polyglotte {
 
 
 global $table_criteres_infixes;
-$table_criteres_infixes = array('<', '>', '<=', '>=', '==', '===', '!=', '!==', '<>', '?');
+$table_criteres_infixes = ['<', '>', '<=', '>=', '==', '===', '!=', '!==', '<>', '?'];
 
 global $exception_des_connect;
 $exception_des_connect[] = ''; // ne pas transmettre le connect='' par les inclure
@@ -954,16 +954,16 @@ function declarer_interfaces() {
 	$GLOBALS['table_des_tables']['hierarchie'] = 'rubriques';
 
 	// definition des statuts de publication
-	$GLOBALS['table_statut'] = array();
+	$GLOBALS['table_statut'] = [];
 
 	//
 	// tableau des tables de jointures
 	// Ex: gestion du critere {id_mot} dans la boucle(ARTICLES)
-	$GLOBALS['tables_jointures'] = array();
+	$GLOBALS['tables_jointures'] = [];
 	$GLOBALS['tables_jointures']['spip_jobs'][] = 'jobs_liens';
 
 	// $GLOBALS['exceptions_des_jointures']['titre_mot'] = array('spip_mots', 'titre'); // pour exemple
-	$GLOBALS['exceptions_des_jointures']['profondeur'] = array('spip_rubriques', 'profondeur');
+	$GLOBALS['exceptions_des_jointures']['profondeur'] = ['spip_rubriques', 'profondeur'];
 
 
 	if (!defined('_TRAITEMENT_TYPO')) {
@@ -1007,8 +1007,9 @@ function declarer_interfaces() {
 
 
 	// gerer l'affectation en 2 temps car si le pipe n'est pas encore declare, on ecrase les globales
-	$interfaces = pipeline('declarer_tables_interfaces',
-		array(
+	$interfaces = pipeline(
+		'declarer_tables_interfaces',
+		[
 			'table_des_tables' => $GLOBALS['table_des_tables'],
 			'exceptions_des_tables' => $GLOBALS['exceptions_des_tables'],
 			'table_date' => $GLOBALS['table_date'],
@@ -1017,7 +1018,8 @@ function declarer_interfaces() {
 			'exceptions_des_jointures' => $GLOBALS['exceptions_des_jointures'],
 			'table_des_traitements' => $GLOBALS['table_des_traitements'],
 			'table_statut' => $GLOBALS['table_statut'],
-		));
+		]
+	);
 	if ($interfaces) {
 		$GLOBALS['table_des_tables'] = $interfaces['table_des_tables'];
 		$GLOBALS['exceptions_des_tables'] = $interfaces['exceptions_des_tables'];

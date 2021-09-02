@@ -70,8 +70,9 @@
 		<traducteur nom="gpl" lien="https://trad.spip.net/auteur/gpl" />
 		<traducteur nom="Matthieu Marcillaud" lien="https://trad.spip.net/auteur/matthieu-marcillaud" />
 	</langue>
-	<langue code="es" url="https://trad.spip.net/tradlang_module/spip?lang_cible=es" total="650" traduits="639" relire="0" modifs="2" nouveaux="9" pourcent="98.31">
+	<langue code="es" url="https://trad.spip.net/tradlang_module/spip?lang_cible=es" total="650" traduits="650" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
+		<traducteur nom="comcinco" lien="https://trad.spip.net/auteur/comcinco-7293" />
 		<traducteur nom="dani" lien="https://trad.spip.net/auteur/dani" />
 		<traducteur nom="Freddy" lien="https://trad.spip.net/auteur/freddy" />
 		<traducteur nom="jotacese" lien="https://trad.spip.net/auteur/jotacese" />

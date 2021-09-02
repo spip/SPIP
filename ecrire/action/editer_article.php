@@ -41,20 +41,20 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function action_editer_article_dist($arg = null) {
 	include_spip('inc/autoriser');
-	$err = "";
+	$err = '';
 	if (is_null($arg)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 	}
 
-	// si id_article n'est pas un nombre, c'est une creation 
+	// si id_article n'est pas un nombre, c'est une creation
 	// mais on verifie qu'on a toutes les donnees qu'il faut.
 	if (!$id_article = intval($arg)) {
 		$id_parent = _request('id_parent');
 		if (!$id_parent) {
 			$err = _L("creation interdite d'un article sans rubrique");
 		} elseif (!autoriser('creerarticledans', 'rubrique', $id_parent)) {
-			$err = _T("info_creerdansrubrique_non_autorise");
+			$err = _T('info_creerdansrubrique_non_autorise');
 		} else {
 			$id_article = article_inserer($id_parent);
 		}
@@ -69,7 +69,7 @@ function action_editer_article_dist($arg = null) {
 		spip_log("echec editeur article: $err", _LOG_ERREUR);
 	}
 
-	return array($id_article, $err);
+	return [$id_article, $err];
 }
 
 /**
@@ -100,34 +100,38 @@ function article_modifier($id_article, $set = null) {
 	// white list
 		objet_info('article', 'champs_editables'),
 		// black list
-		array('date', 'statut', 'id_parent'),
+		['date', 'statut', 'id_parent'],
 		// donnees eventuellement fournies
 		$set
 	);
 
 	// Si l'article est publie, invalider les caches et demander sa reindexation
-	$t = sql_getfetsel("statut", "spip_articles", "id_article=" . intval($id_article));
+	$t = sql_getfetsel('statut', 'spip_articles', 'id_article=' . intval($id_article));
 	$invalideur = $indexation = false;
 	if ($t == 'publie') {
 		$invalideur = "id='article/$id_article'";
 		$indexation = true;
 	}
 
-	if ($err = objet_modifier_champs('article', $id_article,
-		array(
+	if (
+		$err = objet_modifier_champs(
+			'article',
+			$id_article,
+			[
 			'data' => $set,
-			'nonvide' => array('titre' => _T('info_nouvel_article') . " " . _T('info_numero_abbreviation') . $id_article),
+			'nonvide' => ['titre' => _T('info_nouvel_article') . ' ' . _T('info_numero_abbreviation') . $id_article],
 			'invalideur' => $invalideur,
 			'indexation' => $indexation,
 			'date_modif' => 'date_modif' // champ a mettre a date('Y-m-d H:i:s') s'il y a modif
-		),
-		$c)
+			],
+			$c
+		)
 	) {
 		return $err;
 	}
 
 	// Modification de statut, changement de rubrique ?
-	$c = collecter_requests(array('date', 'statut', 'id_parent'), array(), $set);
+	$c = collecter_requests(['date', 'statut', 'id_parent'], [], $set);
 	$err = article_instituer($id_article, $c);
 
 	return $err;
@@ -169,29 +173,36 @@ function article_inserer($id_rubrique, $set = null) {
 	// Si id_rubrique vaut 0 ou n'est pas definie, creer l'article
 	// dans la premiere rubrique racine
 	if (!$id_rubrique = intval($id_rubrique)) {
-		$row = sql_fetsel("id_rubrique, id_secteur, lang", "spip_rubriques", "id_parent=0", '', '0+titre,titre', "1");
+		$row = sql_fetsel('id_rubrique, id_secteur, lang', 'spip_rubriques', 'id_parent=0', '', '0+titre,titre', '1');
 		$id_rubrique = $row['id_rubrique'];
 	} else {
-		$row = sql_fetsel("lang, id_secteur", "spip_rubriques", "id_rubrique=$id_rubrique");
+		$row = sql_fetsel('lang, id_secteur', 'spip_rubriques', "id_rubrique=$id_rubrique");
 	}
 
-	// eviter $id_secteur = NULL (erreur sqlite) si la requete precedente echoue 
+	// eviter $id_secteur = NULL (erreur sqlite) si la requete precedente echoue
 	// cas de id_rubrique = -1 par exemple avec plugin "pages"
 	$id_secteur = isset($row['id_secteur']) ? $row['id_secteur'] : 0;
 	$lang_rub = isset($row['lang']) ? $row['lang'] : '';
 
-	$lang = "";
+	$lang = '';
 	$choisie = 'non';
 	// La langue a la creation : si les liens de traduction sont autorises
 	// dans les rubriques, on essaie avec la langue de l'auteur,
 	// ou a defaut celle de la rubrique
 	// Sinon c'est la langue de la rubrique qui est choisie + heritee
-	if (!empty($GLOBALS['meta']['multi_objets']) and in_array('spip_articles',
-			explode(',', $GLOBALS['meta']['multi_objets']))
+	if (
+		!empty($GLOBALS['meta']['multi_objets']) and in_array(
+			'spip_articles',
+			explode(',', $GLOBALS['meta']['multi_objets'])
+		)
 	) {
 		lang_select($GLOBALS['visiteur_session']['lang']);
-		if (in_array($GLOBALS['spip_lang'],
-			explode(',', $GLOBALS['meta']['langues_multilingue']))) {
+		if (
+			in_array(
+				$GLOBALS['spip_lang'],
+				explode(',', $GLOBALS['meta']['langues_multilingue'])
+			)
+		) {
 			$lang = $GLOBALS['spip_lang'];
 			$choisie = 'oui';
 		}
@@ -202,30 +213,31 @@ function article_inserer($id_rubrique, $set = null) {
 		$lang = $lang_rub ? $lang_rub : $GLOBALS['meta']['langue_site'];
 	}
 
-	$champs = array(
+	$champs = [
 		'id_rubrique' => $id_rubrique,
 		'id_secteur' => $id_secteur,
 		'statut' => 'prepa',
 		'date' => date('Y-m-d H:i:s'),
 		'lang' => $lang,
 		'langue_choisie' => $choisie
-	);
+	];
 
 	if ($set) {
 		$champs = array_merge($champs, $set);
 	}
 
 	// Envoyer aux plugins
-	$champs = pipeline('pre_insertion',
-		array(
-			'args' => array(
+	$champs = pipeline(
+		'pre_insertion',
+		[
+			'args' => [
 				'table' => 'spip_articles',
-			),
+			],
 			'data' => $champs
-		)
+		]
 	);
 
-	$id_article = sql_insertq("spip_articles", $champs);
+	$id_article = sql_insertq('spip_articles', $champs);
 
 	// controler si le serveur n'a pas renvoye une erreur
 	if ($id_article > 0) {
@@ -234,18 +246,19 @@ function article_inserer($id_rubrique, $set = null) {
 			: _request('id_auteur'));
 		if ($id_auteur) {
 			include_spip('action/editer_auteur');
-			auteur_associer($id_auteur, array('article' => $id_article));
+			auteur_associer($id_auteur, ['article' => $id_article]);
 		}
 	}
 
-	pipeline('post_insertion',
-		array(
-			'args' => array(
+	pipeline(
+		'post_insertion',
+		[
+			'args' => [
 				'table' => 'spip_articles',
 				'id_objet' => $id_article
-			),
+			],
 			'data' => $champs
-		)
+		]
 	);
 
 	return $id_article;
@@ -280,11 +293,11 @@ function article_instituer($id_article, $c, $calcul_rub = true) {
 	include_spip('inc/rubriques');
 	include_spip('inc/modifier');
 
-	$row = sql_fetsel("statut, date, id_rubrique", "spip_articles", "id_article=$id_article");
+	$row = sql_fetsel('statut, date, id_rubrique', 'spip_articles', "id_article=$id_article");
 	$id_rubrique = $row['id_rubrique'];
 	$statut_ancien = $statut = $row['statut'];
 	$date_ancienne = $date = $row['date'];
-	$champs = array();
+	$champs = [];
 
 	$d = isset($c['date']) ? $c['date'] : null;
 	$s = isset($c['statut']) ? $c['statut'] : $statut;
@@ -305,8 +318,9 @@ function article_instituer($id_article, $c, $calcul_rub = true) {
 		// sauf si $c commande autre chose
 		// ou si l'article est deja date dans le futur
 		// En cas de proposition d'un article (mais pas depublication), idem
-		if ($champs['statut'] == 'publie'
-			or ($champs['statut'] == 'prop' and ($d or !in_array($statut_ancien, array('publie', 'prop'))))
+		if (
+			$champs['statut'] == 'publie'
+			or ($champs['statut'] == 'prop' and ($d or !in_array($statut_ancien, ['publie', 'prop'])))
 		) {
 			if ($d or strtotime($d = $date) > time()) {
 				$champs['date'] = $date = $d;
@@ -318,17 +332,19 @@ function article_instituer($id_article, $c, $calcul_rub = true) {
 
 	// Verifier que la rubrique demandee existe et est differente
 	// de la rubrique actuelle
-	if (isset($c['id_parent'])
+	if (
+		isset($c['id_parent'])
 		and $id_parent = $c['id_parent']
 		and $id_parent != $id_rubrique
-		and (sql_fetsel('1', "spip_rubriques", "id_rubrique=" . intval($id_parent)))
+		and (sql_fetsel('1', 'spip_rubriques', 'id_rubrique=' . intval($id_parent)))
 	) {
 		$champs['id_rubrique'] = $id_parent;
 
 		// si l'article etait publie
 		// et que le demandeur n'est pas admin de la rubrique de destination
 		// repasser l'article en statut 'propose'.
-		if ($statut == 'publie'
+		if (
+			$statut == 'publie'
 			and !autoriser('publierdans', 'rubrique', $id_parent)
 		) {
 			$champs['statut'] = 'prop';
@@ -336,17 +352,18 @@ function article_instituer($id_article, $c, $calcul_rub = true) {
 	}
 
 	// Envoyer aux plugins
-	$champs = pipeline('pre_edition',
-		array(
-			'args' => array(
+	$champs = pipeline(
+		'pre_edition',
+		[
+			'args' => [
 				'table' => 'spip_articles',
 				'id_objet' => $id_article,
 				'action' => 'instituer',
 				'statut_ancien' => $statut_ancien,
 				'date_ancienne' => $date_ancienne,
-			),
+			],
 			'data' => $champs
-		)
+		]
 	);
 
 	if (!count($champs)) {
@@ -369,23 +386,26 @@ function article_instituer($id_article, $c, $calcul_rub = true) {
 	}
 
 	// Pipeline
-	pipeline('post_edition',
-		array(
-			'args' => array(
+	pipeline(
+		'post_edition',
+		[
+			'args' => [
 				'table' => 'spip_articles',
 				'id_objet' => $id_article,
 				'action' => 'instituer',
 				'statut_ancien' => $statut_ancien,
 				'date_ancienne' => $date_ancienne,
-			),
+			],
 			'data' => $champs
-		)
+		]
 	);
 
 	// Notifications
 	if ($notifications = charger_fonction('notifications', 'inc')) {
-		$notifications('instituerarticle', $id_article,
-			array('statut' => $statut, 'statut_ancien' => $statut_ancien, 'date' => $date, 'date_ancienne' => $date_ancienne)
+		$notifications(
+			'instituerarticle',
+			$id_article,
+			['statut' => $statut, 'statut_ancien' => $statut_ancien, 'date' => $date, 'date_ancienne' => $date_ancienne]
 		);
 	}
 
@@ -417,13 +437,17 @@ function editer_article_heritage($id_article, $id_rubrique, $statut, $champs, $c
 	// Si on deplace l'article
 	//  changer aussi son secteur et sa langue (si heritee)
 	if (isset($champs['id_rubrique'])) {
-
-		$row_rub = sql_fetsel("id_secteur, lang", "spip_rubriques", "id_rubrique=" . sql_quote($champs['id_rubrique']));
+		$row_rub = sql_fetsel('id_secteur, lang', 'spip_rubriques', 'id_rubrique=' . sql_quote($champs['id_rubrique']));
 
 		$langue = $row_rub['lang'];
 		$champs['id_secteur'] = $row_rub['id_secteur'];
-		if (sql_fetsel('1', 'spip_articles',
-			"id_article=" . intval($id_article) . " AND langue_choisie<>'oui' AND lang<>" . sql_quote($langue))) {
+		if (
+			sql_fetsel(
+				'1',
+				'spip_articles',
+				'id_article=' . intval($id_article) . " AND langue_choisie<>'oui' AND lang<>" . sql_quote($langue)
+			)
+		) {
 			$champs['lang'] = $langue;
 		}
 	}
@@ -432,13 +456,13 @@ function editer_article_heritage($id_article, $id_rubrique, $statut, $champs, $c
 		return;
 	}
 
-	sql_updateq('spip_articles', $champs, "id_article=" . intval($id_article));
+	sql_updateq('spip_articles', $champs, 'id_article=' . intval($id_article));
 
-	// Changer le statut des rubriques concernees 
+	// Changer le statut des rubriques concernees
 
 	if ($cond) {
 		include_spip('inc/rubriques');
-		$postdate = ($GLOBALS['meta']["post_dates"] == "non" and isset($champs['date']) and (strtotime($champs['date']) < time())) ? $champs['date'] : false;
+		$postdate = ($GLOBALS['meta']['post_dates'] == 'non' and isset($champs['date']) and (strtotime($champs['date']) < time())) ? $champs['date'] : false;
 		calculer_rubriques_if($id_rubrique, $champs, $statut, $postdate);
 	}
 }
@@ -451,7 +475,7 @@ function editer_article_heritage($id_article, $id_rubrique, $statut, $champs, $c
 function trop_longs_articles() {
 	if (is_array($plus = _request('texte_plus'))) {
 		foreach ($plus as $n => $t) {
-			$plus[$n] = preg_replace(",<!--SPIP-->[\n\r]*,", "", $t);
+			$plus[$n] = preg_replace(",<!--SPIP-->[\n\r]*,", '', $t);
 		}
 		set_request('texte', join('', $plus) . _request('texte'));
 	}

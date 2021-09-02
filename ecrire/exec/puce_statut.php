@@ -53,16 +53,17 @@ function exec_puce_statut_dist() {
  **/
 function exec_puce_statut_args($id, $type) {
 	$id = intval($id);
-	if ($table_objet_sql = table_objet_sql($type)
+	if (
+		$table_objet_sql = table_objet_sql($type)
 		and $d = lister_tables_objets_sql($table_objet_sql)
 		and isset($d['statut_textes_instituer'])
 		and $d['statut_textes_instituer']
 	) {
 		$prim = id_table_objet($type);
 		if (isset($d['field']['id_rubrique'])) {
-			$select = "id_rubrique,statut";
+			$select = 'id_rubrique,statut';
 		} else {
-			$select = "0 as id_rubrique,statut";
+			$select = '0 as id_rubrique,statut';
 		}
 		$r = sql_fetsel($select, $table_objet_sql, "$prim=$id");
 		$statut = $r['statut'];

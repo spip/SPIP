@@ -34,7 +34,7 @@ function exec_403_dist($message = '') {
 	$extra = '';
 
 	if (!$message) {
-		$message = _T('avis_acces_interdit_prive', array('exec' => _request('exec')));
+		$message = _T('avis_acces_interdit_prive', ['exec' => _request('exec')]);
 	}
 
 	$contenu = "<h1 class='grostitre'>" . _T('info_acces_interdit') . '</h1>' . $message;
@@ -49,16 +49,16 @@ function exec_403_dist($message = '') {
 		echo $commencer_page($titre);
 
 		echo debut_gauche("403_$exec", true);
-		echo recuperer_fond('prive/squelettes/navigation/dist', array());
-		echo pipeline('affiche_gauche', array('args' => array('exec' => '403', 'exec_erreur' => $exec), 'data' => ''));
+		echo recuperer_fond('prive/squelettes/navigation/dist', []);
+		echo pipeline('affiche_gauche', ['args' => ['exec' => '403', 'exec_erreur' => $exec], 'data' => '']);
 
 		echo creer_colonne_droite('403', true);
-		echo pipeline('affiche_droite', array('args' => array('exec' => '403', 'exec_erreur' => $exec), 'data' => ''));
+		echo pipeline('affiche_droite', ['args' => ['exec' => '403', 'exec_erreur' => $exec], 'data' => '']);
 
 		echo debut_droite('403', true);
 		echo pipeline(
 			'affiche_milieu',
-			array('args' => array('exec' => '403', 'exec_erreur' => $exec), 'data' => $contenu)
+			['args' => ['exec' => '403', 'exec_erreur' => $exec], 'data' => $contenu]
 		);
 
 		echo fin_gauche(), fin_page();

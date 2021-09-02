@@ -18,11 +18,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function plugins_afficher_repertoires_dist($url_page, $liste_plugins, $liste_plugins_actifs) {
 	$ligne_plug = charger_fonction('afficher_plugin', 'plugins');
 	$racine = basename(_DIR_PLUGINS);
-	$init_dir = $current_dir = "";
+	$init_dir = $current_dir = '';
 	// liste des repertoires deplies : construit en remontant l'arbo de chaque plugin actif
 	// des qu'un path est deja note deplie on s'arrete
-	$deplie = array($racine => true);
-	$fast_liste_plugins_actifs = array();
+	$deplie = [$racine => true];
+	$fast_liste_plugins_actifs = [];
 	foreach ($liste_plugins_actifs as $key => $plug) {
 		$chemin_plug = chemin_plug($racine, $plug);
 		$fast_liste_plugins_actifs[$chemin_plug] = true;
@@ -35,7 +35,7 @@ function plugins_afficher_repertoires_dist($url_page, $liste_plugins, $liste_plu
 	}
 
 	// index repertoires --> plugin
-	$dir_index = array();
+	$dir_index = [];
 	foreach ($liste_plugins as $key => $plug) {
 		$liste_plugins[$key] = chemin_plug($racine, $plug);
 		$dir_index[dirname($liste_plugins[$key])][] = $key;
@@ -58,8 +58,12 @@ function plugins_afficher_repertoires_dist($url_page, $liste_plugins, $liste_plu
 				$plug = $liste_plugins[$key];
 				$actif = @isset($fast_liste_plugins_actifs[$plug]);
 				$id = substr(md5($plug), 0, 16);
-				$res .= $ligne_plug($url_page, str_replace(_DIR_PLUGINS, '', _DIR_RACINE . $plug), $actif,
-						'menu-entree') . "\n";
+				$res .= $ligne_plug(
+					$url_page,
+					str_replace(_DIR_PLUGINS, '', _DIR_RACINE . $plug),
+					$actif,
+					'menu-entree'
+				) . "\n";
 				unset($liste_plugins[$key]);
 			}
 		}
@@ -68,7 +72,7 @@ function plugins_afficher_repertoires_dist($url_page, $liste_plugins, $liste_plu
 
 	return "<ul class='menu-liste plugins'>"
 	. $res
-	. "</ul>";
+	. '</ul>';
 }
 
 
@@ -80,14 +84,14 @@ function chemin_plug($racine, $plug) {
 }
 
 // https://code.spip.net/@tree_open_close_dir
-function tree_open_close_dir(&$current, $target, $deplie = array()) {
+function tree_open_close_dir(&$current, $target, $deplie = []) {
 	if ($current == $target) {
-		return "";
+		return '';
 	}
-	$tcur = explode("/", $current);
-	$ttarg = explode("/", $target);
-	$tcom = array();
-	$output = "";
+	$tcur = explode('/', $current);
+	$ttarg = explode('/', $target);
+	$tcom = [];
+	$output = '';
 	// la partie commune
 	while (reset($tcur) == reset($ttarg)) {
 		$tcom[] = array_shift($tcur);
@@ -99,15 +103,15 @@ function tree_open_close_dir(&$current, $target, $deplie = array()) {
 		$output .= fin_block();
 		$output .= "</li>\n";
 	}
-	$chemin = "";
+	$chemin = '';
 	if (count($tcom)) {
-		$chemin .= implode("/", $tcom) . "/";
+		$chemin .= implode('/', $tcom) . '/';
 	}
 	// ouvrir les repertoires jusqu'a la cible
 	while ($open = array_shift($ttarg)) {
 		$visible = @isset($deplie[$chemin . $open]);
-		$chemin .= $open . "/";
-		$output .= "<li>";
+		$chemin .= $open . '/';
+		$output .= '<li>';
 		$output .= bouton_block_depliable($chemin, $visible);
 		$output .= debut_block_depliable($visible);
 

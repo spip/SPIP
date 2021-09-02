@@ -46,8 +46,10 @@ function base_repair_dist($titre = '', $reprise = '') {
 	}
 	include_spip('inc/minipres');
 	$res .= pipeline('base_admin_repair', $res);
-	echo minipres(_T('texte_tentative_recuperation'),
-		$res . generer_form_ecrire('accueil', '', '', _T('public:accueil_site')));
+	echo minipres(
+		_T('texte_tentative_recuperation'),
+		$res . generer_form_ecrire('accueil', '', '', _T('public:accueil_site'))
+	);
 }
 
 /**
@@ -68,10 +70,9 @@ function admin_repair_tables() {
 	creer_base();
 	$tables = sql_alltable();
 
-	$res = "";
+	$res = '';
 	foreach ($tables as $tab) {
-
-		$class = "";
+		$class = '';
 		$m = "<strong>$tab</strong> ";
 		spip_log("Repare $tab", _LOG_INFO_IMPORTANTE);
 		// supprimer la meta avant de lancer la reparation
@@ -90,24 +91,27 @@ function admin_repair_tables() {
 		$count = sql_countsel($tab);
 
 		if ($count > 1) {
-			$m .= "(" . _T('texte_compte_elements', array('count' => $count)) . ")\n";
+			$m .= '(' . _T('texte_compte_elements', ['count' => $count]) . ")\n";
 		} else {
 			if ($count == 1) {
-				$m .= "(" . _T('texte_compte_element', array('count' => $count)) . ")\n";
+				$m .= '(' . _T('texte_compte_element', ['count' => $count]) . ")\n";
 			} else {
-				$m .= "(" . _T('texte_vide') . ")\n";
+				$m .= '(' . _T('texte_vide') . ")\n";
 			}
 		}
 
-		if ($result_repair
-			and $msg = join(" ",
-					(is_resource($result_repair) or is_object($result_repair)) ? sql_fetch($result_repair) : $result_repair) . ' '
+		if (
+			$result_repair
+			and $msg = join(
+				' ',
+				(is_resource($result_repair) or is_object($result_repair)) ? sql_fetch($result_repair) : $result_repair
+			) . ' '
 			and strpos($msg, ' OK ') === false
 		) {
 			$class = " class='notice'";
-			$m .= "<br /><tt>" . spip_htmlentities($msg) . "</tt>\n";
+			$m .= '<br /><tt>' . spip_htmlentities($msg) . "</tt>\n";
 		} else {
-			$m .= " " . _T('texte_table_ok');
+			$m .= ' ' . _T('texte_table_ok');
 		}
 
 		$res .= "<div$class>$m</div>";

@@ -54,7 +54,7 @@ function exporter_csv_champ($champ) {
  * @param callable $callback
  * @return string
  */
-function exporter_csv_ligne_numerotee($nb, $ligne, $delim = ',', $importer_charset = null, $callback=null) {
+function exporter_csv_ligne_numerotee($nb, $ligne, $delim = ',', $importer_charset = null, $callback = null) {
 	if ($callback) {
 		$ligne = call_user_func($callback, $nb, $ligne, $delim, $importer_charset);
 	}
@@ -74,7 +74,7 @@ function exporter_csv_ligne_numerotee($nb, $ligne, $delim = ',', $importer_chars
  * @param null $importer_charset
  * @return string
  */
-function exporter_csv_ligne($ligne, $delim = ',', $importer_charset = null){
+function exporter_csv_ligne($ligne, $delim = ',', $importer_charset = null) {
 	return exporter_csv_ligne_numerotee(null, $ligne, $delim, $importer_charset);
 }
 
@@ -127,7 +127,7 @@ function inc_exporter_csv_dist($titre, $resource, $options = []) {
 	if ($options['delim'] == 'TAB') {
 		$options['delim'] = "\t";
 	}
-	if (!in_array($options['delim'], array(',', ';', "\t"))) {
+	if (!in_array($options['delim'], [',', ';', "\t"])) {
 		$options['delim'] = ',';
 	}
 
@@ -172,7 +172,7 @@ function inc_exporter_csv_dist($titre, $resource, $options = []) {
 	// si envoyer=='attachment' on passe par un fichier temporaire
 	// sinon on ecrit directement sur stdout
 	if ($options['envoyer'] and $options['envoyer'] !== 'attachment') {
-		$fichier = "php://output";
+		$fichier = 'php://output';
 	}
 	else {
 	$fichier = sous_repertoire(_DIR_CACHE, 'export') . $filename;

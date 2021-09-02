@@ -80,7 +80,7 @@ function action_tester_taille_dist() {
 		} else {
 			// c'est un cas "on a reussi la borne max initiale, donc on a pas de limite connue"
 			$t = 0;
-			echo "&infin;";
+			echo '&infin;';
 		}
 		ecrire_meta('max_taille_vignettes', $t, 'non');
 		die();
@@ -106,23 +106,25 @@ function action_tester_taille_dist() {
 	include_spip('inc/charsets');
 	include_spip('inc/documents');
 	include_spip('inc/header');
-	propre("<doc1>"); // charger propre avec le trairement d'un modele
+	propre('<doc1>'); // charger propre avec le trairement d'un modele
 
 	$i = _request('i') + 1;
-	$image_source = chemin_image("test.png");
-	$GLOBALS['redirect'] = generer_url_action("tester_taille",
-		"i=$i&arg=" . $GLOBALS['taille_min'] . "-" . $GLOBALS['taille_test']);
+	$image_source = chemin_image('test.png');
+	$GLOBALS['redirect'] = generer_url_action(
+		'tester_taille',
+		"i=$i&arg=" . $GLOBALS['taille_min'] . '-' . $GLOBALS['taille_test']
+	);
 
 	ob_start('action_tester_taille_error_handler');
 	filtrer('image_recadre', $image_source, $taille, $taille);
-	$GLOBALS['redirect'] = generer_url_action("tester_taille", "i=$i&arg=$taille-" . $GLOBALS['taille_max']);
+	$GLOBALS['redirect'] = generer_url_action('tester_taille', "i=$i&arg=$taille-" . $GLOBALS['taille_max']);
 
 	// si la valeur intermediaire a reussi, on teste la valeur maxi qui est peut etre sous estimee
 	// si $GLOBALS['taille_min']==0 (car on est au premier coup)
 	if ($GLOBALS['taille_min'] == 0) {
 		$taille = $GLOBALS['taille_max'];
 		filtrer('image_recadre', $image_source, $taille, $taille);
-		$GLOBALS['redirect'] = generer_url_action("tester_taille", "i=$i&arg=$taille-" . $GLOBALS['taille_max']);
+		$GLOBALS['redirect'] = generer_url_action('tester_taille', "i=$i&arg=$taille-" . $GLOBALS['taille_max']);
 	}
 	ob_end_clean();
 

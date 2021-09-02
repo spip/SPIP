@@ -57,7 +57,7 @@ function urls_page_dist($i, &$entite, $args = '', $ancre = '') {
 
 	// traiter les injections du type domaine.org/spip.php/cestnimportequoi/ou/encore/plus/rubrique23
 	if ($GLOBALS['profondeur_url'] > 0 and $entite == 'sommaire') {
-		return array(array(), '404');
+		return [[], '404'];
 	}
 
 	// voir s'il faut recuperer le id_* implicite et les &debut_xx;

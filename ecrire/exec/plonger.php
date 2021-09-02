@@ -40,7 +40,7 @@ function exec_plonger_dist() {
 		}
 
 		$plonger = charger_fonction('plonger', 'inc');
-		$r = $plonger($id, spip_htmlentities($rac), array(), $col, $exclus, $do);
+		$r = $plonger($id, spip_htmlentities($rac), [], $col, $exclus, $do);
 	} else {
 		$r = '';
 	}

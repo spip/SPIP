@@ -92,11 +92,11 @@ function roles_presents($objet, $objet_destination = '') {
 	}
 
 	// tout est ok
-	return array(
+	return [
 		'titres' => $titres,
 		'roles' => $application,
 		'colonne' => $colonne
-	);
+	];
 }
 
 /**
@@ -135,24 +135,25 @@ function roles_colonne($objet, $objet_destination) {
  *     Liste (role, colonne, (array)condition) si role possible
  *     Liste ('', '', array()) sinon.
  **/
-function roles_trouver_dans_qualif($objet, $objet_destination, $qualif = array()) {
+function roles_trouver_dans_qualif($objet, $objet_destination, $qualif = []) {
 	// si des rôles sont possibles, on les utilise
 	$role = $colonne_role = ''; # role défini
 	// condition du where par defaut
-	$cond = array();
+	$cond = [];
 	if ($roles = roles_presents($objet, $objet_destination)) {
 		$colonne_role = $roles['colonne'];
 		// qu'il n'est pas défini
-		if (!isset($qualif[$colonne_role])
+		if (
+			!isset($qualif[$colonne_role])
 			or !($role = $qualif[$colonne_role])
 		) {
 			$role = $roles['roles']['defaut'];
 		}
 		// where
-		$cond = array("$colonne_role=" . sql_quote($role));
+		$cond = ["$colonne_role=" . sql_quote($role)];
 	}
 
-	return array($role, $colonne_role, $cond);
+	return [$role, $colonne_role, $cond];
 }
 
 /**
@@ -188,7 +189,7 @@ function roles_creer_condition_role($objet_source, $objet, $cond, $tous_si_absen
 		}
 	}
 
-	return array($cond, $colonne_role, $role);
+	return [$cond, $colonne_role, $role];
 }
 
 /**
@@ -224,7 +225,7 @@ function roles_complets($objet_source, $objet, $id_objet, $objet_lien) {
 	// pour chaque groupe, on fait le diff entre tous les roles possibles
 	// et les roles attribués à l'élément : s'il en reste, c'est que l'élément
 	// n'est pas complet
-	$complets = array();
+	$complets = [];
 	foreach ($ids as $id => $roles_presents) {
 		if (!array_diff($roles_possibles, $roles_presents)) {
 			$complets[] = $id;
@@ -251,11 +252,11 @@ function roles_presents_sur_id($id_objet_source, $objet_source, $objet, $id_obje
 	$presents = roles_presents_liaisons($objet_source, $objet, $id_objet, $objet_lien);
 	// pas de roles sur ces objets => la liste par defaut, comme sans role
 	if ($presents === false) {
-		return array();
+		return [];
 	}
 
 	if (!isset($presents['ids'][$id_objet_source])) {
-		return array();
+		return [];
 	}
 
 	return $presents['ids'][$id_objet_source];
@@ -286,7 +287,7 @@ function roles_presents_sur_id($id_objet_source, $objet_source, $objet, $id_obje
  *     - False si pas de role déclarés
  */
 function roles_presents_liaisons($objet_source, $objet, $id_objet, $objet_lien) {
-	static $done = array();
+	static $done = [];
 
 	// stocker le résultat
 	$hash = "$objet_source-$objet-$id_objet-$objet_lien";
@@ -302,9 +303,9 @@ function roles_presents_liaisons($objet_source, $objet, $id_objet, $objet_lien) 
 
 	// inspiré de lister_objets_lies()
 	if ($objet_lien == $objet) {
-		$res = objet_trouver_liens(array($objet => $id_objet), array($objet_source => '*'));
+		$res = objet_trouver_liens([$objet => $id_objet], [$objet_source => '*']);
 	} else {
-		$res = objet_trouver_liens(array($objet_source => '*'), array($objet => $id_objet));
+		$res = objet_trouver_liens([$objet_source => '*'], [$objet => $id_objet]);
 	}
 
 	// types de roles possibles
@@ -313,20 +314,20 @@ function roles_presents_liaisons($objet_source, $objet, $id_objet, $objet_lien) 
 	$colonne = $roles['colonne'];
 
 	// on recupere par id, et role existant
-	$ids = array();
+	$ids = [];
 	while ($row = array_shift($res)) {
 		$id = $row[$objet_source];
 		if (!isset($ids[$id])) {
-			$ids[$id] = array();
+			$ids[$id] = [];
 		}
 		// tableau des roles présents
 		$ids[$id][] = $row[$colonne];
 	}
 
-	return $done[$hash] = array(
+	return $done[$hash] = [
 		'roles' => $roles,
 		'ids' => $ids
-	);
+	];
 }
 
 
@@ -344,7 +345,7 @@ function roles_presents_liaisons($objet_source, $objet, $id_objet, $objet_lien) 
  *     - false si pas de role déclarés
  */
 function roles_connus_en_base($objet_source, $objet, $objet_lien) {
-	static $done = array();
+	static $done = [];
 
 	// stocker le résultat
 	$hash = "$objet_source-$objet-$objet_lien";

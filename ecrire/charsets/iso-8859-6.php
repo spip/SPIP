@@ -26,7 +26,7 @@ load_charset('iso-8859-1');
 
 $trans = $GLOBALS['CHARSET']['iso-8859-1'];
 
-$mod = array(
+$mod = [
 	0xA0 => 0x00A0,
 	0xA4 => 0x00A4,
 	0xAC => 0x060C,
@@ -78,7 +78,7 @@ $mod = array(
 	0xF0 => 0x0650,
 	0xF1 => 0x0651,
 	0xF2 => 0x0652
-);
+];
 
 foreach ($mod as $num => $val) {
 	$trans[$num] = $val;

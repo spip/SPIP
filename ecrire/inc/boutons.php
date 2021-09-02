@@ -86,8 +86,8 @@ class Bouton {
  */
 function definir_barre_onglets($script) {
 
-	$onglets = array();
-	$liste_onglets = array();
+	$onglets = [];
+	$liste_onglets = [];
 
 	// ajouter les onglets issus des plugin via paquet.xml
 	if (function_exists('onglets_plugins')) {
@@ -96,7 +96,8 @@ function definir_barre_onglets($script) {
 
 
 	foreach ($liste_onglets as $id => $infos) {
-		if (($parent = $infos['parent'])
+		if (
+			($parent = $infos['parent'])
 			&& $parent == $script
 			&& autoriser('onglet', "_$id")
 		) {
@@ -104,14 +105,16 @@ function definir_barre_onglets($script) {
 				isset($infos['icone']) ? find_in_theme($infos['icone']) : '',  // icone
 				$infos['titre'],  // titre
 				(isset($infos['action']) and $infos['action'])
-					? generer_url_ecrire($infos['action'],
-					(isset($infos['parametres']) and $infos['parametres']) ? $infos['parametres'] : '')
+					? generer_url_ecrire(
+						$infos['action'],
+						(isset($infos['parametres']) and $infos['parametres']) ? $infos['parametres'] : ''
+					)
 					: null
 			);
 		}
 	}
 
-	return pipeline('ajouter_onglets', array('data' => $onglets, 'args' => $script));
+	return pipeline('ajouter_onglets', ['data' => $onglets, 'args' => $script]);
 }
 
 
@@ -129,7 +132,7 @@ function definir_barre_onglets($script) {
  * @param string $class
  * @return string
  */
-function barre_onglets($rubrique, $ongletCourant, $class = "barre_onglet") {
+function barre_onglets($rubrique, $ongletCourant, $class = 'barre_onglet') {
 	include_spip('inc/presentation');
 
 	$res = '';

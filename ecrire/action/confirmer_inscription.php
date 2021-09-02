@@ -32,11 +32,11 @@ function action_confirmer_inscription_dist() {
 	$email = _request('email');
 
 	include_spip('action/inscrire_auteur');
-	if ($auteur = auteur_verifier_jeton($jeton)
+	if (
+		$auteur = auteur_verifier_jeton($jeton)
 		and $auteur['email'] == $email
 		and $auteur['statut'] == 'nouveau'
 	) {
-		
 		// d'abord on confirme son statut
 		$auteur = confirmer_statut_inscription($auteur);
 
@@ -55,7 +55,7 @@ function action_confirmer_inscription_dist() {
 			if (autoriser('ecrire', '', '', $auteur['id_auteur'])) {
 				// poser un cookie admin aussi
 				$cookie = charger_fonction('cookie', 'action');
-				$cookie("@" . $GLOBALS['visiteur_session']['login']);
+				$cookie('@' . $GLOBALS['visiteur_session']['login']);
 				$GLOBALS['redirect'] = _DIR_RESTREINT_ABS;
 			} else {
 				$GLOBALS['redirect'] = $GLOBALS['meta']['adresse_site'];
@@ -75,5 +75,4 @@ function action_confirmer_inscription_dist() {
 			$GLOBALS['redirect'] = parametre_url(generer_url_public('login', '', false), 'url', _request('redirect'));
 		}
 	}
-
 }

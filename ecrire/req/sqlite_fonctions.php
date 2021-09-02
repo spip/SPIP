@@ -15,24 +15,24 @@
  *
  * @package SPIP\Core\SQL\SQLite\Fonctions
  */
- 
+
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
 /**
  * Déclarer à SQLite des fonctions spécifiques utilisables dans les requêtes SQL
- * 
+ *
  * SQLite ne supporte nativement que certaines fonctions dans les requêtes SQL.
- * Cependant, il permet d'étendre très facilement celles-ci en déclarant de 
+ * Cependant, il permet d'étendre très facilement celles-ci en déclarant de
  * nouvelles fonctions.
- * 
- * C'est ce qui est fait ici, en ajoutant des fonctions qui existent aussi 
+ *
+ * C'est ce qui est fait ici, en ajoutant des fonctions qui existent aussi
  * dans d'autres moteurs, notamment en MySQL.
- * 
+ *
  * @link http://www.sqlite.org/lang_corefunc.html Liste des fonctions natives
  * @link http://sqlite.org/changes.html Liste des évolutions
- * 
+ *
  * @param PDO|resource $sqlite Représente la connexion Sqlite
  * @return false|void
  */
@@ -43,82 +43,82 @@ function _sqlite_init_functions(&$sqlite) {
 	}
 
 
-	$fonctions = array(
+	$fonctions = [
 		// A
-		'ACOS'  => array('acos', 1),
-		'ASIN'  => array('asin', 1),
-		'ATAN'  => array('atan', 1), // mysql accepte 2 params comme atan2… hum ?
-		'ATAN2' => array('atan2', 2),
+		'ACOS'  => ['acos', 1],
+		'ASIN'  => ['asin', 1],
+		'ATAN'  => ['atan', 1], // mysql accepte 2 params comme atan2… hum ?
+		'ATAN2' => ['atan2', 2],
 
 		// C
-		'CEIL'   => array('_sqlite_func_ceil', 1),
-		'CONCAT' => array('_sqlite_func_concat', -1),
-		'COS'    => array('cos', 1),
+		'CEIL'   => ['_sqlite_func_ceil', 1],
+		'CONCAT' => ['_sqlite_func_concat', -1],
+		'COS'    => ['cos', 1],
 
 		// D
-		'DATE_FORMAT' => array('_sqlite_func_strftime', 2),
-		'DAYOFMONTH'  => array('_sqlite_func_dayofmonth', 1),
-		'DEGREES'     => array('rad2deg', 1),
+		'DATE_FORMAT' => ['_sqlite_func_strftime', 2],
+		'DAYOFMONTH'  => ['_sqlite_func_dayofmonth', 1],
+		'DEGREES'     => ['rad2deg', 1],
 
 		// E
-		'EXTRAIRE_MULTI' => array('_sqlite_func_extraire_multi', 2), // specifique a SPIP/sql_multi()
-		'EXP'            => array('exp', 1),
+		'EXTRAIRE_MULTI' => ['_sqlite_func_extraire_multi', 2], // specifique a SPIP/sql_multi()
+		'EXP'            => ['exp', 1],
 
 		// F
-		'FIND_IN_SET' => array('_sqlite_func_find_in_set', 2),
-		'FLOOR'       => array('_sqlite_func_floor', 1),
+		'FIND_IN_SET' => ['_sqlite_func_find_in_set', 2],
+		'FLOOR'       => ['_sqlite_func_floor', 1],
 
 		// I
-		'IF'     => array('_sqlite_func_if', 3),
-		'INSERT' => array('_sqlite_func_insert', 4),
-		'INSTR'  => array('_sqlite_func_instr', 2),
+		'IF'     => ['_sqlite_func_if', 3],
+		'INSERT' => ['_sqlite_func_insert', 4],
+		'INSTR'  => ['_sqlite_func_instr', 2],
 
 		// L
-		'LEAST'  => array('_sqlite_func_least', 3),
-		'_LEFT'  => array('_sqlite_func_left', 2),
+		'LEAST'  => ['_sqlite_func_least', 3],
+		'_LEFT'  => ['_sqlite_func_left', 2],
 #		'LENGTH' => array('strlen', 1), // present v1.0.4
 #		'LOWER'  => array('strtolower', 1), // present v2.4
 #		'LTRIM'  => array('ltrim', 1), // present
 
 		// N
-		'NOW' => array('_sqlite_func_now', 0),
+		'NOW' => ['_sqlite_func_now', 0],
 
 		// M
-		'MD5'   => array('md5', 1),
-		'MONTH' => array('_sqlite_func_month', 1),
+		'MD5'   => ['md5', 1],
+		'MONTH' => ['_sqlite_func_month', 1],
 
 		// P
-		'PREG_REPLACE' => array('_sqlite_func_preg_replace', 3),
+		'PREG_REPLACE' => ['_sqlite_func_preg_replace', 3],
 
 		// R
-		'RADIANS' => array('deg2rad', 1),
-		'RAND'    => array('_sqlite_func_rand', 0), // sinon random() v2.4
-		'REGEXP'  => array('_sqlite_func_regexp_match', 2), // critere REGEXP supporte a partir de v3.3.2
-		'RIGHT'   => array('_sqlite_func_right', 2),
+		'RADIANS' => ['deg2rad', 1],
+		'RAND'    => ['_sqlite_func_rand', 0], // sinon random() v2.4
+		'REGEXP'  => ['_sqlite_func_regexp_match', 2], // critere REGEXP supporte a partir de v3.3.2
+		'RIGHT'   => ['_sqlite_func_right', 2],
 #		'RTRIM'   => array('rtrim', 1), // present
 
 		// S
-		'SETTYPE'   => array('settype', 2), // CAST present en v3.2.3
-		'SIN'       => array('sin', 1),
-		'SQRT'      => array('sqrt', 1),
-		'SUBSTRING' => array('_sqlite_func_substring' /*, 3*/), // peut etre appelee avec 2 ou 3 arguments, index base 1 et non 0
+		'SETTYPE'   => ['settype', 2], // CAST present en v3.2.3
+		'SIN'       => ['sin', 1],
+		'SQRT'      => ['sqrt', 1],
+		'SUBSTRING' => ['_sqlite_func_substring' /*, 3*/], // peut etre appelee avec 2 ou 3 arguments, index base 1 et non 0
 
 		// T
-		'TAN'           => array('tan', 1),
-		'TIMESTAMPDIFF' => array('_sqlite_timestampdiff'    /*, 3*/),
-		'TO_DAYS'       => array('_sqlite_func_to_days', 1),
+		'TAN'           => ['tan', 1],
+		'TIMESTAMPDIFF' => ['_sqlite_timestampdiff'    /*, 3*/],
+		'TO_DAYS'       => ['_sqlite_func_to_days', 1],
 #		'TRIM'          => array('trim', 1), // present
 
 		// U
-		'UNIX_TIMESTAMP' => array('_sqlite_func_unix_timestamp', 1),
+		'UNIX_TIMESTAMP' => ['_sqlite_func_unix_timestamp', 1],
 #		'UPPER'          => array('strtoupper', 1), // present v2.4
 
 		// V
-		'VIDE' => array('_sqlite_func_vide', 0), // du vide pour SELECT 0 as x ... ORDER BY x -> ORDER BY vide()
+		'VIDE' => ['_sqlite_func_vide', 0], // du vide pour SELECT 0 as x ... ORDER BY x -> ORDER BY vide()
 
 		// Y
-		'YEAR' => array('_sqlite_func_year', 1)
-	);
+		'YEAR' => ['_sqlite_func_year', 1]
+	];
 
 	foreach ($fonctions as $f => $r) {
 		_sqlite_add_function($sqlite, $f, $r);
@@ -131,18 +131,18 @@ function _sqlite_init_functions(&$sqlite) {
 /**
  * Déclare une fonction à SQLite
  *
- * @note 
- *     Permet au besoin de charger des fonctions 
+ * @note
+ *     Permet au besoin de charger des fonctions
  *     ailleurs par _sqlite_init_functions();
- * 
+ *
  * @uses _sqlite_is_version()
- * 
+ *
  * @param PDO|resource $sqlite Représente la connexion Sqlite
  * @param string $f Nom de la fonction à créer
  * @param array $r Tableau indiquant :
- *     - le nom de la fonction à appeler, 
+ *     - le nom de la fonction à appeler,
  *     - le nombre de paramètres attendus de la fonction (-1 = infini, par défaut)
- * 
+ *
 **/
 function _sqlite_add_function(&$sqlite, &$f, &$r) {
 	isset($r[1])
@@ -167,14 +167,14 @@ function _sqlite_func_concat(...$args) {
 
 // https://code.spip.net/@_sqlite_func_dayofmonth
 function _sqlite_func_dayofmonth($d) {
-	return _sqlite_func_date("d", $d);
+	return _sqlite_func_date('d', $d);
 }
 
 
 // https://code.spip.net/@_sqlite_func_find_in_set
 function _sqlite_func_find_in_set($num, $set) {
 	$rank = 0;
-	foreach (explode(",", $set) as $v) {
+	foreach (explode(',', $set) as $v) {
 		if ($v == $num) {
 			return (++$rank);
 		}
@@ -234,7 +234,7 @@ function _sqlite_func_left($s, $lenght) {
 function _sqlite_func_now($force_refresh = false) {
 	static $now = null;
 	if (is_null($now) or $force_refresh) {
-		$now = date("Y-m-d H:i:s");
+		$now = date('Y-m-d H:i:s');
 	}
 
 	#spip_log("Passage avec NOW : $now | ".time(),'sqlite.'._LOG_DEBUG);
@@ -244,7 +244,7 @@ function _sqlite_func_now($force_refresh = false) {
 
 // https://code.spip.net/@_sqlite_func_month
 function _sqlite_func_month($d) {
-	return _sqlite_func_date("m", $d);
+	return _sqlite_func_date('m', $d);
 }
 
 
@@ -330,7 +330,7 @@ function _sqlite_func_strftime($date, $conv) {
 /**
  * Convertit un format demandé pour DATE_FORMAT() de mysql en un format
  * adapté à strftime() de php.
- * 
+ *
  * Certains paramètres ne correspondent pas et doivent être remplacés,
  * d'autres n'ont tout simplement pas d'équivalent dans strftime :
  * dans ce cas là on loggue, car il y a de grandes chances que le résultat
@@ -339,7 +339,7 @@ function _sqlite_func_strftime($date, $conv) {
  * @param string $conv
  * @return void
  */
-function _sqlite_func_strftime_format_converter(string $conv) : string {
+function _sqlite_func_strftime_format_converter(string $conv): string {
 	// ok : %a %b %d %e %H %I %l %j %k %m %p %r %S %T %w %y %Y
 	// on ne sait pas en gérer certains...
 	static $mysql_to_strftime_not_ok = ['%c', '%D', '%f', '%U', '%V', '%W', '%X'];
@@ -406,24 +406,24 @@ function _sqlite_timestampdiff($unit, $date1, $date2) {
 	$diff = date_diff($d1, $d2);
 	$inv = $diff->invert ? -1 : 1;
 	switch ($unit) {
-		case "YEAR":
+		case 'YEAR':
 			return $inv * $diff->y;
-		case "QUARTER":
+		case 'QUARTER':
 			return $inv * (4 * $diff->y + intval(floor($diff->m / 3)));
-		case "MONTH":
+		case 'MONTH':
 			return $inv * (12 * $diff->y + $diff->m);
-		case "WEEK":
+		case 'WEEK':
 			return $inv * intval(floor($diff->days / 7));
-		case "DAY":
+		case 'DAY':
 			#var_dump($inv*$diff->days);
 			return $inv * $diff->days;
-		case "HOUR":
+		case 'HOUR':
 			return $inv * (24 * $diff->days + $diff->h);
-		case "MINUTE":
+		case 'MINUTE':
 			return $inv * ((24 * $diff->days + $diff->h) * 60 + $diff->i);
-		case "SECOND":
+		case 'SECOND':
 			return $inv * (((24 * $diff->days + $diff->h) * 60 + $diff->i) * 60 + $diff->s);
-		case "MICROSECOND":
+		case 'MICROSECOND':
 			return $inv * (((24 * $diff->days + $diff->h) * 60 + $diff->i) * 60 + $diff->s) * 1000000;
 	}
 
@@ -432,13 +432,13 @@ function _sqlite_timestampdiff($unit, $date1, $date2) {
 
 // https://code.spip.net/@_sqlite_func_unix_timestamp
 function _sqlite_func_unix_timestamp($d) {
-	static $mem = array();
+	static $mem = [];
 	static $n = 0;
 	if (isset($mem[$d])) {
 		return $mem[$d];
 	}
 	if ($n++ > 100) {
-		$mem = array();
+		$mem = [];
 		$n = 0;
 	}
 
@@ -455,7 +455,7 @@ function _sqlite_func_unix_timestamp($d) {
 
 // https://code.spip.net/@_sqlite_func_year
 function _sqlite_func_year($d) {
-	return _sqlite_func_date("Y", $d);
+	return _sqlite_func_date('Y', $d);
 }
 
 /**
@@ -469,18 +469,18 @@ function _sqlite_func_year($d) {
  * @return int
  */
 function _sqlite_func_date($quoi, $d) {
-	static $mem = array();
+	static $mem = [];
 	static $n = 0;
 	if (isset($mem[$d])) {
 		return $mem[$d][$quoi];
 	}
 	if ($n++ > 100) {
-		$mem = array();
+		$mem = [];
 		$n = 0;
 	}
 
-	$dec = date("Y-m-d", _sqlite_func_unix_timestamp($d));
-	$mem[$d] = array("Y" => substr($dec, 0, 4), "m" => substr($dec, 5, 2), "d" => substr($dec, 8, 2));
+	$dec = date('Y-m-d', _sqlite_func_unix_timestamp($d));
+	$mem[$d] = ['Y' => substr($dec, 0, 4), 'm' => substr($dec, 5, 2), 'd' => substr($dec, 8, 2)];
 
 	return $mem[$d][$quoi];
 }

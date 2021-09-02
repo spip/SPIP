@@ -28,7 +28,8 @@ function formulaires_rediriger_article_charger_dist($id_article, $retour = '') {
 	include_spip('inc/lien');
 	$redirection = virtuel_redirige($row['virtuel']);
 
-	if (!$redirection
+	if (
+		!$redirection
 		and $GLOBALS['meta']['articles_redirection'] != 'oui'
 	) {
 		return false;
@@ -36,17 +37,17 @@ function formulaires_rediriger_article_charger_dist($id_article, $retour = '') {
 
 
 	include_spip('inc/texte');
-	$valeurs = array(
+	$valeurs = [
 		'redirection' => $redirection,
 		'id' => $id_article,
 		'_afficher_url' => ($redirection ? propre("[->$redirection]") : ''),
-	);
+	];
 
 	return $valeurs;
 }
 
 function formulaires_rediriger_article_verifier_dist($id_article, $retour = '') {
-	$erreurs = array();
+	$erreurs = [];
 
 	if (($redirection = _request('redirection')) == $id_article || $redirection == 'art' . $id_article) {
 		$erreurs['redirection'] = _T('info_redirection_boucle');
@@ -63,12 +64,12 @@ function formulaires_rediriger_article_traiter_dist($id_article, $retour = '') {
 	}
 
 	include_spip('action/editer_article');
-	article_modifier($id_article, array('virtuel' => $url));
+	article_modifier($id_article, ['virtuel' => $url]);
 
 	$js = _AJAX ? '<script type="text/javascript">if (window.ajaxReload) ajaxReload("wysiwyg");</script>' : '';
 
-	return array(
+	return [
 		'message_ok' => ($url ? _T('info_redirection_activee') : _T('info_redirection_desactivee')) . $js,
 		'editable' => true
-	);
+	];
 }

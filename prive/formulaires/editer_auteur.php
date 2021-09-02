@@ -41,7 +41,7 @@ function formulaires_editer_auteur_charger_dist(
 	$retour = '',
 	$associer_objet = '',
 	$config_fonc = 'auteurs_edit_config',
-	$row = array(),
+	$row = [],
 	$hidden = ''
 ) {
 	$valeurs = formulaires_editer_objet_charger('auteur', $id_auteur, 0, 0, $retour, $config_fonc, $row, $hidden);
@@ -79,10 +79,10 @@ function formulaires_editer_auteur_identifier_dist(
 	$retour = '',
 	$associer_objet = '',
 	$config_fonc = 'auteurs_edit_config',
-	$row = array(),
+	$row = [],
 	$hidden = ''
 ) {
-	return serialize(array(intval($id_auteur), $associer_objet));
+	return serialize([intval($id_auteur), $associer_objet]);
 }
 
 
@@ -109,9 +109,9 @@ function auteurs_edit_config($row) {
 	include_spip('inc/auth');
 	$config['edit_login'] =
 		(auth_autoriser_modifier_login($auth_methode)
-			and autoriser('modifier', 'auteur', $row['id_auteur'], null, array('login' => true))
+			and autoriser('modifier', 'auteur', $row['id_auteur'], null, ['login' => true])
 			// legacy : ne pas risquer d'autoriser la modif login si fonction d'autorisation pas mise a jour et ne teste que l'option email
-			and autoriser('modifier', 'auteur', $row['id_auteur'], null, array('email' => true))
+			and autoriser('modifier', 'auteur', $row['id_auteur'], null, ['email' => true])
 		);
 	$config['edit_pass'] =
 		(auth_autoriser_modifier_pass($auth_methode)
@@ -151,13 +151,13 @@ function formulaires_editer_auteur_verifier_dist(
 	$retour = '',
 	$associer_objet = '',
 	$config_fonc = 'auteurs_edit_config',
-	$row = array(),
+	$row = [],
 	$hidden = ''
 ) {
 	// auto-renseigner le nom si il n'existe pas, sans couper
-	titre_automatique('nom', array('email', 'login'), 255);
+	titre_automatique('nom', ['email', 'login'], 255);
 
-	$oblis = array('nom');
+	$oblis = ['nom'];
 	// si on veut renvoyer des identifiants il faut un email et un login
 	if (_request('reset_password')) {
 		$oblis[] = 'email';
@@ -182,7 +182,8 @@ function formulaires_editer_auteur_verifier_dist(
 		include_spip('inc/filtres');
 		include_spip('inc/autoriser');
 		// un redacteur qui modifie son email n'a pas le droit de le vider si il y en avait un
-		if (!autoriser('modifier', 'auteur', $id_auteur, null, array('email' => '?'))
+		if (
+			!autoriser('modifier', 'auteur', $id_auteur, null, ['email' => '?'])
 			and $GLOBALS['visiteur_session']['id_auteur'] == $id_auteur
 			and !strlen(trim($email))
 			and $email != ($email_ancien = sql_getfetsel('email', 'spip_auteurs', 'id_auteur=' . intval($id_auteur)))
@@ -205,14 +206,16 @@ function formulaires_editer_auteur_verifier_dist(
 				}
 			} else {
 				#Un auteur existe deja avec cette adresse ? et n'est pas le user courant.
-				if ((sql_countsel(
-					'spip_auteurs',
-					'email=' . sql_quote($email)
-				) > 0) and ($id_auteur != ($id_auteur_ancien = sql_getfetsel(
-					'id_auteur',
-					'spip_auteurs',
-					'email=' . sql_quote($email)
-				)))) {
+				if (
+					(sql_countsel(
+						'spip_auteurs',
+						'email=' . sql_quote($email)
+					) > 0) and ($id_auteur != ($id_auteur_ancien = sql_getfetsel(
+						'id_auteur',
+						'spip_auteurs',
+						'email=' . sql_quote($email)
+					)))
+				) {
 					$erreurs['email'] = _T('erreur_email_deja_existant');
 				}
 			}
@@ -241,11 +244,13 @@ function formulaires_editer_auteur_verifier_dist(
 	$erreurs['message_erreur'] = '';
 	if (
 		$login = _request('login') and
-		$login !== sql_getfetsel('login','spip_auteurs', 'id_auteur='.intval($id_auteur))
+		$login !== sql_getfetsel('login', 'spip_auteurs', 'id_auteur=' . intval($id_auteur))
 	) {
 		// on verifie la meme chose que dans auteurs_edit_config()
-		if ( ! auth_autoriser_modifier_login($auth_methode)
-			or !autoriser('modifier', 'auteur', intval($id_auteur), null, array('email' => true))){
+		if (
+			! auth_autoriser_modifier_login($auth_methode)
+			or !autoriser('modifier', 'auteur', intval($id_auteur), null, ['email' => true])
+		) {
 			$erreurs['login'] = _T('info_non_modifiable');
 		}
 	}
@@ -313,7 +318,7 @@ function formulaires_editer_auteur_traiter_dist(
 	$retour = '',
 	$associer_objet = '',
 	$config_fonc = 'auteurs_edit_config',
-	$row = array(),
+	$row = [],
 	$hidden = ''
 ) {
 	if (_request('saisie_webmestre') or _request('webmestre')) {
@@ -323,7 +328,7 @@ function formulaires_editer_auteur_traiter_dist(
 
 	if ($restreintes = _request('restreintes')) {
 		foreach ($restreintes as $k => $v) {
-			if(strpos($v, 'rubrique|') === 0) {
+			if (strpos($v, 'rubrique|') === 0) {
 				$restreintes[$k] = substr($v, 9);
 			}
 		}
@@ -337,33 +342,37 @@ function formulaires_editer_auteur_traiter_dist(
 	// "Marie@toto.com  " ou encore "Marie Toto <Marie@toto.com>"
 
 	include_spip('inc/autoriser');
-	if (!autoriser('modifier', 'auteur', $id_auteur, null, array('email' => '?'))) {
+	if (!autoriser('modifier', 'auteur', $id_auteur, null, ['email' => '?'])) {
 		$email_nouveau = _request('email');
 		set_request('email'); // vider la saisie car l'auteur n'a pas le droit de modifier cet email
 		// mais si c'est son propre profil on lui envoie un email à l'adresse qu'il a indique
 		// pour qu'il confirme qu'il possede bien cette adresse
 		// son clic sur l'url du message permettre de confirmer le changement
 		// et de revenir sur son profil
-		if ($GLOBALS['visiteur_session']['id_auteur'] == $id_auteur
+		if (
+			$GLOBALS['visiteur_session']['id_auteur'] == $id_auteur
 			and $email_nouveau !=
 				($email_ancien = sql_getfetsel('email', 'spip_auteurs', 'id_auteur=' . intval($id_auteur)))
 		) {
 			$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 			$texte = _T(
 				'form_auteur_mail_confirmation',
-				array(
+				[
 					'url' => generer_action_auteur(
 						'confirmer_email',
 						$email_nouveau,
 						parametre_url($retour, 'email_modif', 'ok')
 					)
-				)
+				]
 			);
 			$envoyer_mail($email_nouveau, _T('form_auteur_confirmation'), $texte);
 			set_request('email_confirm', $email_nouveau);
 			if ($email_ancien) {
-				$envoyer_mail($email_ancien, _T('form_auteur_confirmation'),
-					_T('form_auteur_envoi_mail_confirmation', array('email' => $email_nouveau)));
+				$envoyer_mail(
+					$email_ancien,
+					_T('form_auteur_confirmation'),
+					_T('form_auteur_envoi_mail_confirmation', ['email' => $email_nouveau])
+				);
 			}
 			$retour = parametre_url($retour, 'email_confirm', $email_nouveau);
 		}
@@ -372,14 +381,16 @@ function formulaires_editer_auteur_traiter_dist(
 	$res = formulaires_editer_objet_traiter('auteur', $id_auteur, 0, 0, $retour, $config_fonc, $row, $hidden);
 
 	if (_request('reset_password') and !intval($id_auteur) and intval($res['id_auteur'])) {
-		$erreurs = array();
+		$erreurs = [];
 		$erreurs = auteur_reset_password($res['id_auteur'], $erreurs);
 		if (isset($erreurs['message_ok'])) {
-			if (!isset($res['message_ok'])) $res['message_ok'] = '';
+			if (!isset($res['message_ok'])) { $res['message_ok'] = '';
+			}
 			$res['message_ok'] = trim($res['message_ok'] . ' ' . $erreurs['message_ok']);
 		}
 		if (isset($erreurs['message_erreur']) and $erreurs['message_erreur']) {
-			if (!isset($res['message_erreur'])) $res['message_erreur'] = '';
+			if (!isset($res['message_erreur'])) { $res['message_erreur'] = '';
+			}
 			$res['message_erreur'] = trim($res['message_erreur'] . ' ' . $erreurs['message_erreur']);
 		}
 	}
@@ -395,7 +406,7 @@ function formulaires_editer_auteur_traiter_dist(
 		}
 		if ($objet and $id_objet and autoriser('modifier', $objet, $id_objet)) {
 			include_spip('action/editer_auteur');
-			auteur_associer($id_auteur, array($objet => $id_objet));
+			auteur_associer($id_auteur, [$objet => $id_objet]);
 			if (isset($res['redirect'])) {
 				$res['redirect'] = parametre_url($res['redirect'], 'id_lien_ajoute', $id_auteur, '&');
 			}
@@ -406,13 +417,13 @@ function formulaires_editer_auteur_traiter_dist(
 }
 
 
-function auteur_reset_password($id_auteur, $erreurs = array()) {
+function auteur_reset_password($id_auteur, $erreurs = []) {
 	$auteur = sql_fetsel('*', 'spip_auteurs', 'id_auteur=' . intval($id_auteur));
 	$config = auteurs_edit_config($auteur);
 
 	if ($config['edit_pass']) {
 		if ($email = auteur_regenerer_identifiants($id_auteur)) {
-			$erreurs['message_ok'] = _T('message_nouveaux_identifiants_ok', array('email' => $email));
+			$erreurs['message_ok'] = _T('message_nouveaux_identifiants_ok', ['email' => $email]);
 			$erreurs['message_erreur'] = '';
 		} elseif ($email === false) {
 			$erreurs['message_erreur'] = _T('message_nouveaux_identifiants_echec_envoi');
@@ -433,29 +444,31 @@ function auteur_reset_password($id_auteur, $erreurs = array()) {
  * @param array $contexte
  * @return string
  */
-function auteur_regenerer_identifiants($id_auteur, $notifier=true, $contexte = array()) {
-	if ($id_auteur){
-		$set = array();
+function auteur_regenerer_identifiants($id_auteur, $notifier = true, $contexte = []) {
+	if ($id_auteur) {
+		$set = [];
 		include_spip('inc/access');
-		$set['pass'] = creer_pass_aleatoire();
+		$set['pass'] = creer_pass_aleatoire(max(_PASS_LONGUEUR_MINI, 16));
 
 		include_spip('action/editer_auteur');
-		auteur_modifier($id_auteur,$set);
+		auteur_modifier($id_auteur, $set);
 
-		$row = sql_fetsel('*','spip_auteurs','id_auteur='.intval($id_auteur));
+		$row = sql_fetsel('*', 'spip_auteurs', 'id_auteur=' . intval($id_auteur));
 		include_spip('inc/filtres');
-		if ($notifier
+		if (
+			$notifier
 			and $row['email']
 			and email_valide($row['email'])
-		  and trouver_fond($fond = 'modeles/mail_nouveaux_identifiants')){
+			and trouver_fond($fond = 'modeles/mail_nouveaux_identifiants')
+		) {
 			// envoyer l'email avec login/pass
-			$c = array(
+			$c = [
 				'id_auteur' => $id_auteur,
 				'nom' => $row['nom'],
 				'mode' => $row['statut'],
 				'email' => $row['email'],
 				'pass' => $set['pass'],
-			);
+			];
 			// on merge avec les champs fournit en appel, qui sont passes au modele de notification donc
 			$contexte = array_merge($contexte, $c);
 			// si pas de langue explicitement demandee, prendre celle de l'auteur si on la connait, ou a defaut celle du site
@@ -470,15 +483,14 @@ function auteur_regenerer_identifiants($id_auteur, $notifier=true, $contexte = a
 			}
 			lang_select($contexte['lang']);
 			$message = recuperer_fond($fond, $contexte);
-			include_spip("inc/notifications");
-			notifications_envoyer_mails($row['email'],$message);
+			include_spip('inc/notifications');
+			notifications_envoyer_mails($row['email'], $message);
 			lang_select();
 
 			return $row['email'];
 		}
 
 		return false;
-
 	}
 
 	return '';

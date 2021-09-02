@@ -90,8 +90,8 @@ function install_etape_chmod_dist() {
 		}
 	}
 
-	$bad_dirs = array();
-	$absent_dirs = array();
+	$bad_dirs = [];
+	$absent_dirs = [];
 
 	foreach ($GLOBALS['test_dirs'] as $i => $my_dir) {
 		$test = test_ecrire($my_dir);
@@ -122,7 +122,7 @@ function install_etape_chmod_dist() {
 			$res .=
 				_T(
 					'dirs_repertoires_suivants',
-					array('bad_dirs' => join("\n", array_keys($bad_dirs)))
+					['bad_dirs' => join("\n", array_keys($bad_dirs))]
 				) .
 				'<b>' . _T('login_recharger') . '</b>.';
 		}
@@ -131,7 +131,7 @@ function install_etape_chmod_dist() {
 			$res .=
 				_T(
 					'dirs_repertoires_absents',
-					array('bad_dirs' => join("\n", array_keys($absent_dirs)))
+					['bad_dirs' => join("\n", array_keys($absent_dirs))]
 				) .
 				'<b>' . _T('login_recharger') . '</b>.';
 		}

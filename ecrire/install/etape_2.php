@@ -107,7 +107,7 @@ function install_etape_2_bases($login_db, $server_db) {
 	if ($res) {
 		list($checked, $bases) = $res;
 
-		return array(
+		return [
 			$checked,
 			"<label for='choix_db'><b>"
 			. _T('texte_choix_base_2')
@@ -119,7 +119,7 @@ function install_etape_2_bases($login_db, $server_db) {
 			. "</li>\n</ul><p>"
 			. _T('info_ou')
 			. ' '
-		);
+		];
 	}
 	$res = '<b>' . _T('avis_lecture_noms_bases_1') . '</b>
 		' . _T('avis_lecture_noms_bases_2') . '<p>';
@@ -147,7 +147,7 @@ function install_etape_2_bases($login_db, $server_db) {
 		}
 	}
 
-	return array($checked, $res);
+	return [$checked, $res];
 }
 
 // https://code.spip.net/@install_etape_2_form

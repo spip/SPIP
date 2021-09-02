@@ -32,7 +32,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *   Envoyer en réponse : json contenant toutes les variables publiques de la session
  **/
 function action_session_dist() {
-	if ($var = _request('var')
+	if (
+		$var = _request('var')
 		and preg_match(',^[a-z_0-9-]+$,i', $var)
 	) {
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {

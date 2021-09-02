@@ -52,7 +52,8 @@
 	<langue code="eo" url="https://trad.spip.net/tradlang_module/public?lang_cible=eo" total="83" traduits="78" relire="0" modifs="0" nouveaux="5" pourcent="93.98">
 		<traducteur nom="Matthieu Marcillaud" lien="https://trad.spip.net/auteur/matthieu-marcillaud" />
 	</langue>
-	<langue code="es" url="https://trad.spip.net/tradlang_module/public?lang_cible=es" total="83" traduits="78" relire="0" modifs="0" nouveaux="5" pourcent="93.98">
+	<langue code="es" url="https://trad.spip.net/tradlang_module/public?lang_cible=es" total="83" traduits="83" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="comcinco" lien="https://trad.spip.net/auteur/comcinco-7293" />
 		<traducteur nom="dani" lien="https://trad.spip.net/auteur/dani" />
 		<traducteur nom="jotacese" lien="https://trad.spip.net/auteur/jotacese" />
 		<traducteur nom="severo" lien="https://trad.spip.net/auteur/severo" />

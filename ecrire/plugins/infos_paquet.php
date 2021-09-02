@@ -25,14 +25,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return array
  */
 function plugins_infos_paquet($desc, $plug = '', $dir_plugins = _DIR_PLUGINS) {
-	static $process = array( // tableau constant
+	static $process = [ // tableau constant
 		'debut' => 'paquet_debutElement',
 		'fin' => 'paquet_finElement',
 		'text' => 'paquet_textElement'
-	);
+	];
 
 	$valider_xml = charger_fonction('valider', 'xml');
-	$vxml = $valider_xml($desc, false, $process, 'paquet.dtd', "utf-8");
+	$vxml = $valider_xml($desc, false, $process, 'paquet.dtd', 'utf-8');
 	if (!$vxml->err) {
 		// On veut toutes les variantes selon la version de SPIP
 		if (!$plug) {
@@ -47,11 +47,11 @@ function plugins_infos_paquet($desc, $plug = '', $dir_plugins = _DIR_PLUGINS) {
 			unset($tree['']);
 		}
 
-		$tree['slogan'] = $tree['prefix'] . "_slogan";
-		$tree['description'] = $tree['prefix'] . "_description";
+		$tree['slogan'] = $tree['prefix'] . '_slogan';
+		$tree['description'] = $tree['prefix'] . '_description';
 		paquet_readable_files($tree, "$dir_plugins$plug/");
 		if (!$tree['chemin']) {
-			$tree['chemin'] = array();
+			$tree['chemin'] = [];
 		}
 
 		// On verifie qu'il existe des balises spip qu'il faudrait rajouter dans
@@ -59,7 +59,8 @@ function plugins_infos_paquet($desc, $plug = '', $dir_plugins = _DIR_PLUGINS) {
 		if (count($vxml->versions) > 1) {
 			$vspip = $GLOBALS['spip_version_branche'];
 			foreach ($vxml->versions as $_compatibilite => $_version) {
-				if (($_version['balise'] == 'spip')
+				if (
+					($_version['balise'] == 'spip')
 					and (plugin_version_compatible($_compatibilite, $vspip, 'spip'))
 				) {
 					// on merge les sous-balises de la balise spip compatible avec celles de la
@@ -78,10 +79,10 @@ function plugins_infos_paquet($desc, $plug = '', $dir_plugins = _DIR_PLUGINS) {
 
 	// Prendre les messages d'erreur sans les numeros de lignes
 	$msg = array_column($vxml->err, 0);
-	$t = _T('plugins_erreur', array('plugins' => $plug));
-	array_unshift($msg, $t . " <ul class='erreur_xml'><li>" . reset($msg) . "</li></ul>");
+	$t = _T('plugins_erreur', ['plugins' => $plug]);
+	array_unshift($msg, $t . " <ul class='erreur_xml'><li>" . reset($msg) . '</li></ul>');
 
-	return array('erreur' => $msg);
+	return ['erreur' => $msg];
 }
 
 /**
@@ -95,9 +96,9 @@ function plugins_infos_paquet($desc, $plug = '', $dir_plugins = _DIR_PLUGINS) {
 function paquet_readable_files(&$tree, $dir) {
 	$prefix = strtolower($tree['prefix']);
 
-	$tree['options'] = (is_readable($dir . $f = ($prefix . '_options.php'))) ? array($f) : array();
-	$tree['fonctions'] = (is_readable($dir . $f = ($prefix . '_fonctions.php'))) ? array($f) : array();
-	$tree['install'] = (is_readable($dir . $f = ($prefix . '_administrations.php'))) ? array($f) : array();
+	$tree['options'] = (is_readable($dir . $f = ($prefix . '_options.php'))) ? [$f] : [];
+	$tree['fonctions'] = (is_readable($dir . $f = ($prefix . '_fonctions.php'))) ? [$f] : [];
+	$tree['install'] = (is_readable($dir . $f = ($prefix . '_administrations.php'))) ? [$f] : [];
 }
 
 /**
@@ -121,21 +122,21 @@ function paquet_debutElement($phraseur, $name, $attrs) {
 	if (($name == 'paquet') or ($name == 'spip')) {
 		if ($name == 'spip') {
 			$n = $attrs['compatibilite'];
-			$attrs = array();
+			$attrs = [];
 		} else {
 			$n = '0';
 			$phraseur->contenu['paquet'] = $attrs;
-			$attrs['menu'] = array();
-			$attrs['chemin'] = array();
-			$attrs['necessite'] = array();
-			$attrs['lib'] = array();
-			$attrs['onglet'] = array();
-			$attrs['procure'] = array();
-			$attrs['pipeline'] = array();
-			$attrs['utilise'] = array();
-			$attrs['style'] = array();
-			$attrs['script'] = array();
-			$attrs['genie'] = array();
+			$attrs['menu'] = [];
+			$attrs['chemin'] = [];
+			$attrs['necessite'] = [];
+			$attrs['lib'] = [];
+			$attrs['onglet'] = [];
+			$attrs['procure'] = [];
+			$attrs['pipeline'] = [];
+			$attrs['utilise'] = [];
+			$attrs['style'] = [];
+			$attrs['script'] = [];
+			$attrs['genie'] = [];
 		}
 		$phraseur->contenu['compatible'] = $n;
 		$phraseur->versions[$phraseur->contenu['compatible']] = $attrs;
@@ -179,7 +180,7 @@ function paquet_finElement($phraseur, $name) {
 		$attrs = $phraseur->versions[$n][$name][0];
 		unset($phraseur->versions[$n][$name][0]);
 	} else {
-		$attrs = array();
+		$attrs = [];
 	}
 
 	$texte = trim($phraseur->versions[$n]['']);
@@ -213,7 +214,7 @@ function info_paquet_licence($phraseur, $attrs, $texte) {
 		$lien = '';
 	}
 	$n = $phraseur->contenu['compatible'];
-	$phraseur->versions[$n]['licence'][] = array('nom' => $texte, 'url' => $lien);
+	$phraseur->versions[$n]['licence'][] = ['nom' => $texte, 'url' => $lien];
 }
 
 /**
@@ -228,9 +229,9 @@ function info_paquet_chemin($phraseur, $attrs, $texte) {
 	$n = $phraseur->contenu['compatible'];
 	if (isset($attrs['path'])) {
 		if (isset($attrs['type'])) {
-			$phraseur->versions[$n]['chemin'][] = array('path' => $attrs['path'], 'type' => $attrs['type']);
+			$phraseur->versions[$n]['chemin'][] = ['path' => $attrs['path'], 'type' => $attrs['type']];
 		} else {
-			$phraseur->versions[$n]['chemin'][] = array('path' => $attrs['path']);
+			$phraseur->versions[$n]['chemin'][] = ['path' => $attrs['path']];
 		}
 	}
 }
@@ -263,7 +264,7 @@ function info_paquet_auteur($phraseur, $attrs, $texte) {
 	}
 
 	$n = $phraseur->contenu['compatible'];
-	$phraseur->versions[$n]['auteur'][] = array('nom' => $texte, 'url' => $lien, 'mail' => $mail);
+	$phraseur->versions[$n]['auteur'][] = ['nom' => $texte, 'url' => $lien, 'mail' => $mail];
 }
 
 /**
@@ -283,7 +284,7 @@ function info_paquet_credit($phraseur, $attrs, $texte) {
 	}
 
 	$n = $phraseur->contenu['compatible'];
-	$phraseur->versions[$n]['credit'][] = array('nom' => $texte, 'url' => $lien);
+	$phraseur->versions[$n]['credit'][] = ['nom' => $texte, 'url' => $lien];
 }
 
 /**
@@ -309,8 +310,8 @@ function info_paquet_copyright($phraseur, $attrs, $texte) {
  */
 function info_paquet_paquet($phraseur, $attrs, $texte) {
 	$n = 0;
-	$phraseur->versions[$n]['dtd'] = "paquet";
-	$phraseur->versions[$n]['balise'] = "paquet";
+	$phraseur->versions[$n]['dtd'] = 'paquet';
+	$phraseur->versions[$n]['balise'] = 'paquet';
 }
 
 /**
@@ -336,7 +337,7 @@ function info_paquet_traduire($phraseur, $attrs, $texte) {
  */
 function info_paquet_spip($phraseur, $attrs, $texte) {
 	$n = $phraseur->contenu['compatible'];
-	$phraseur->versions[$n]['balise'] = "spip";
+	$phraseur->versions[$n]['balise'] = 'spip';
 }
 
 
@@ -378,7 +379,7 @@ function info_paquet_style($phraseur, $attrs, $texte) {
 	}
 
 	$n = $phraseur->contenu['compatible'];
-	$phraseur->versions[$n]['style'][] = array('url' => $lien, 'path' => $chemin, 'type' => $type, 'media' => $media);
+	$phraseur->versions[$n]['style'][] = ['url' => $lien, 'path' => $chemin, 'type' => $type, 'media' => $media];
 }
 
 
@@ -404,7 +405,7 @@ function info_paquet_script($phraseur, $attrs, $texte) {
 	}
 
 	$n = $phraseur->contenu['compatible'];
-	$phraseur->versions[$n]['script'][] = array('url' => $lien, 'path' => $chemin, 'type' => $type);
+	$phraseur->versions[$n]['script'][] = ['url' => $lien, 'path' => $chemin, 'type' => $type];
 }
 
 /**

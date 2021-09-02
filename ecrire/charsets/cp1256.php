@@ -9,7 +9,7 @@
  * @package SPIP\Core\Charsets
  **/
 
-$GLOBALS['CHARSET']['cp1256'] = array(
+$GLOBALS['CHARSET']['cp1256'] = [
 	0x80 => 0x20AC,
 	0x81 => 0x067E,
 	0x82 => 0x201A,
@@ -138,4 +138,4 @@ $GLOBALS['CHARSET']['cp1256'] = array(
 	0xFD => 0x200E,
 	0xFE => 0x200F,
 	0xFF => 0x06D2
-);
+];

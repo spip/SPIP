@@ -52,47 +52,47 @@ function install_etape_ldap1_dist() {
 		"\n<input type='hidden' name='etape' value='ldap2' />"
 		. fieldset(
 			_T('entree_adresse_annuaire'),
-			array(
-				'adresse_ldap' => array(
+			[
+				'adresse_ldap' => [
 					'label' => _T('texte_adresse_annuaire_1'),
 					'valeur' => $adresse_ldap
-				),
-				'port_ldap' => array(
+				],
+				'port_ldap' => [
 					'label' => _T('entree_port_annuaire') . '<br />' . _T('texte_port_annuaire'),
 					'valeur' => $port_ldap
-				),
-				'tls_ldap' => array(
+				],
+				'tls_ldap' => [
 					'label' => '<b>' . _T('tls_ldap') . '</b>',
 					'valeur' => $tls_ldap,
-					'alternatives' => array(
+					'alternatives' => [
 						'non' => _T('item_non'),
 						'oui' => _T('item_oui')
-					)
-				),
-				'protocole_ldap' => array(
+					]
+				],
+				'protocole_ldap' => [
 					'label' => _T('protocole_ldap'),
 					'valeur' => $protocole_ldap,
-					'alternatives' => array(
+					'alternatives' => [
 						'3' => '3',
 						'2' => '2'
-					)
-				)
-			)
+					]
+				]
+			]
 		)
 
 		. "\n<p>" . _T('texte_acces_ldap_anonyme_1') . '</p>'
 		. fieldset(
 			_T('connexion_ldap'),
-			array(
-				'login_ldap' => array(
+			[
+				'login_ldap' => [
 					'label' => _T('texte_login_ldap_1'),
 					'valeur' => $login_ldap
-				),
-				'pass_ldap' => array(
+				],
+				'pass_ldap' => [
 					'label' => _T('entree_passe_ldap'),
 					'valeur' => $pass_ldap
-				)
-			)
+				]
+			]
 		)
 		. bouton_suivant()));
 

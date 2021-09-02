@@ -33,14 +33,14 @@ function action_relancer_inscription_dist() {
 		$auteur = sql_fetsel('prefs, email, nom, statut', 'spip_auteurs', "id_auteur=$id_auteur");
 		if ($auteur['statut'] == 'nouveau') {
 			include_spip('action/inscrire_auteur');
-			action_inscrire_auteur_dist($auteur['prefs'], $auteur['email'], $auteur['nom'], array('force_nouveau' => true));
+			action_inscrire_auteur_dist($auteur['prefs'], $auteur['email'], $auteur['nom'], ['force_nouveau' => true]);
 		}
 	} elseif ($id_auteur === '*' and autoriser('relancer', 'inscription')) {
 		$auteurs = sql_allfetsel('prefs, email, nom', 'spip_auteurs', "statut='nouveau'");
 		if (is_array($auteurs)) {
 			include_spip('action/inscrire_auteur');
 			while ($row = array_pop($auteurs)) {
-				action_inscrire_auteur_dist($row['prefs'], $row['email'], $row['nom'], array('force_nouveau' => true));
+				action_inscrire_auteur_dist($row['prefs'], $row['email'], $row['nom'], ['force_nouveau' => true]);
 			}
 		}
 	}

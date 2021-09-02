@@ -43,13 +43,13 @@ if (!defined('_DATA_SOURCE_MAX_SIZE')) {
  */
 function iterateur_DATA_dist($b) {
 	$b->iterateur = 'DATA'; # designe la classe d'iterateur
-	$b->show = array(
-		'field' => array(
+	$b->show = [
+		'field' => [
 			'cle' => 'STRING',
 			'valeur' => 'STRING',
 			'*' => 'ALL' // Champ joker *
-		)
-	);
+		]
+	];
 	$b->select[] = '.valeur';
 
 	return $b;
@@ -67,7 +67,7 @@ class IterateurDATA implements Iterator {
 	 *
 	 * @var array
 	 */
-	protected $tableau = array();
+	protected $tableau = [];
 
 	/**
 	 * Conditions de filtrage
@@ -75,7 +75,7 @@ class IterateurDATA implements Iterator {
 	 *
 	 * @var array
 	 */
-	protected $filtre = array();
+	protected $filtre = [];
 
 
 	/**
@@ -112,7 +112,7 @@ class IterateurDATA implements Iterator {
 	 * @param  $command
 	 * @param array $info
 	 */
-	public function __construct($command, $info = array()) {
+	public function __construct($command, $info = []) {
 		$this->type = 'DATA';
 		$this->command = $command;
 		$this->info = $info;
@@ -138,7 +138,7 @@ class IterateurDATA implements Iterator {
 	 * @return array
 	 */
 	public function exception_des_criteres() {
-		return array('tableau');
+		return ['tableau'];
 	}
 
 	/**
@@ -179,13 +179,15 @@ class IterateurDATA implements Iterator {
 			return;
 		}
 
-		return cache_set($cle,
-			array(
+		return cache_set(
+			$cle,
+			[
 				'data' => $valeur,
 				'time' => time(),
 				'ttl' => $ttl
-			),
-			3600 + $ttl);
+			],
+			3600 + $ttl
+		);
 		# conserver le cache 1h de plus que la validite demandee,
 		# pour le cas ou le serveur distant ne reponde plus
 	}
@@ -214,7 +216,8 @@ class IterateurDATA implements Iterator {
 		// sont : {tableau #ARRAY} ; {cle=...} ; {valeur=...}
 
 		// {source format, [URL], [arg2]...}
-		if (isset($this->command['source'])
+		if (
+			isset($this->command['source'])
 			and isset($this->command['sourcemode'])
 		) {
 			$this->select_source();
@@ -231,12 +234,13 @@ class IterateurDATA implements Iterator {
 		// Si a ce stade on n'a pas de table, il y a un bug
 		if (!is_array($this->tableau)) {
 			$this->err = true;
-			spip_log("erreur datasource " . var_export($command, true));
+			spip_log('erreur datasource ' . var_export($command, true));
 		}
 
 		// {datapath query.results}
 		// extraire le chemin "query.results" du tableau de donnees
-		if (!$this->err
+		if (
+			!$this->err
 			and isset($this->command['datapath'])
 			and is_array($this->command['datapath'])
 		) {
@@ -268,8 +272,9 @@ class IterateurDATA implements Iterator {
 		# les class indispensables, sinon PHP ne saura pas gerer
 		# l'objet en cache ; cf plugins/icalendar
 		# perf : pas de fonction table_to_array ! (table est deja un array)
-		if (isset($this->command['sourcemode'])
-			and !in_array($this->command['sourcemode'], array('table', 'array', 'tableau'))
+		if (
+			isset($this->command['sourcemode'])
+			and !in_array($this->command['sourcemode'], ['table', 'array', 'tableau'])
 		) {
 			charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true);
 		}
@@ -287,7 +292,8 @@ class IterateurDATA implements Iterator {
 		if (isset($this->command['datacache'])) {
 			$ttl = intval($this->command['datacache']);
 		}
-		if ($cache
+		if (
+			$cache
 			and ($cache['time'] + (isset($ttl) ? $ttl : $cache['ttl'])
 				> time())
 			and !(_request('var_mode') === 'recalcul'
@@ -298,11 +304,15 @@ class IterateurDATA implements Iterator {
 			$this->tableau = $cache['data'];
 		} else {
 			try {
-				if (isset($this->command['sourcemode'])
-					and in_array($this->command['sourcemode'],
-						array('table', 'array', 'tableau'))
+				if (
+					isset($this->command['sourcemode'])
+					and in_array(
+						$this->command['sourcemode'],
+						['table', 'array', 'tableau']
+					)
 				) {
-					if (is_array($a = $src)
+					if (
+						is_array($a = $src)
 						or (is_string($a)
 							and $a = str_replace('&quot;', '"', $a) # fragile!
 							and is_array($a = @unserialize($a)))
@@ -311,13 +321,13 @@ class IterateurDATA implements Iterator {
 					}
 				} else {
 					$data = $src;
-					if (is_string($src)) { 
+					if (is_string($src)) {
 						if (tester_url_absolue($src)) {
 							include_spip('inc/distant');
 							$data = recuperer_url($src, ['taille_max' => _DATA_SOURCE_MAX_SIZE]);
 							$data = $data['page'] ?? '';
 							if (!$data) {
-								throw new Exception("404");
+								throw new Exception('404');
 							}
 							if (!isset($ttl)) {
 								$ttl = 24 * 3600;
@@ -332,7 +342,8 @@ class IterateurDATA implements Iterator {
 						}
 					}
 
-					if (!$this->err
+					if (
+						!$this->err
 						and $data_to_array = charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true)
 					) {
 						$args = $this->command['source'];
@@ -350,19 +361,21 @@ class IterateurDATA implements Iterator {
 				if (!$this->err and isset($ttl) and $ttl > 0) {
 					$this->cache_set($cle, $ttl);
 				}
-
 			} catch (Exception $e) {
 				$e = $e->getMessage();
-				$err = sprintf("[%s, %s] $e",
+				$err = sprintf(
+					"[%s, %s] $e",
 					$src,
-					$this->command['sourcemode']);
-				erreur_squelette(array($err, array()));
+					$this->command['sourcemode']
+				);
+				erreur_squelette([$err, []]);
 				$this->err = true;
 			}
 		}
 
 		# en cas d'erreur, utiliser le cache si encore dispo
-		if ($this->err
+		if (
+			$this->err
 			and $cache
 		) {
 			$this->tableau = $cache['data'];
@@ -406,8 +419,11 @@ class IterateurDATA implements Iterator {
 			}
 		}
 		if (count($this->command['enum']) >= 3) {
-			$enum = range(array_shift($this->command['enum']), array_shift($this->command['enum']),
-				array_shift($this->command['enum']));
+			$enum = range(
+				array_shift($this->command['enum']),
+				array_shift($this->command['enum']),
+				array_shift($this->command['enum'])
+			);
 		} else {
 			$enum = range(array_shift($this->command['enum']), array_shift($this->command['enum']));
 		}
@@ -422,10 +438,10 @@ class IterateurDATA implements Iterator {
 	 **/
 	protected function select_datapath() {
 		$base = reset($this->command['datapath']);
-		if (strlen($base = ltrim(trim($base), "/"))) {
+		if (strlen($base = ltrim(trim($base), '/'))) {
 			$this->tableau = table_valeur($this->tableau, $base);
 			if (!is_array($this->tableau)) {
-				$this->tableau = array();
+				$this->tableau = [];
 				$this->err = true;
 				spip_log("datapath '$base' absent");
 			}
@@ -457,7 +473,7 @@ class IterateurDATA implements Iterator {
 					if ($r[1] == 'hasard') {
 						$k = array_keys($this->tableau);
 						shuffle($k);
-						$v = array();
+						$v = [];
 						foreach ($k as $cle) {
 							$v[$cle] = $this->tableau[$cle];
 						}
@@ -482,7 +498,7 @@ class IterateurDATA implements Iterator {
 
 		if ($sortfunc) {
 			$sortfunc .= "\n return 0;";
-			uasort($this->tableau, function($aa, $bb) use ($sortfunc) {
+			uasort($this->tableau, function ($aa, $bb) use ($sortfunc) {
 				return eval($sortfunc);
 			});
 		}
@@ -497,7 +513,7 @@ class IterateurDATA implements Iterator {
 	protected function select_groupby() {
 		// virer le / initial pour les criteres de la forme {fusion /xx}
 		if (strlen($fusion = ltrim($this->command['groupby'][0], '/'))) {
-			$vu = array();
+			$vu = [];
 			foreach ($this->tableau as $k => $v) {
 				$val = table_valeur($v, $fusion);
 				if (isset($vu[$val])) {
@@ -630,7 +646,7 @@ function inc_sql_to_array_dist($data) {
 	$serveur = (string)$v[1];
 	$req = trim($v[2]);
 	if ($s = sql_query($req, $serveur)) {
-		$r = array();
+		$r = [];
 		while ($t = sql_fetch($s)) {
 			$r[] = $t;
 		}
@@ -667,14 +683,14 @@ function inc_csv_to_array_dist($data) {
 	include_spip('inc/charsets');
 	$i = 1;
 	foreach ($entete as $k => $v) {
-		if (trim($v) == "") {
-			$v = "col" . $i;
+		if (trim($v) == '') {
+			$v = 'col' . $i;
 		} // reperer des eventuelles cases vides
 		if (is_numeric($v) and $v < 0) {
-			$v = "__" . $v;
+			$v = '__' . $v;
 		} // ne pas risquer d'ecraser une cle numerique
 		if (is_numeric($v)) {
-			$v = "_" . $v;
+			$v = '_' . $v;
 		} // ne pas risquer d'ecraser une cle numerique
 		$v = strtolower(preg_replace(',\W+,', '_', translitteration($v)));
 		foreach ($csv as &$item) {
@@ -721,11 +737,12 @@ function inc_atom_to_array_dist($data) {
  * @return array|bool
  */
 function inc_glob_to_array_dist($data) {
-	$a = glob($data,
+	$a = glob(
+		$data,
 		GLOB_MARK | GLOB_NOSORT | GLOB_BRACE
 	);
 
-	return $a ? $a : array();
+	return $a ? $a : [];
 }
 
 /**
@@ -737,7 +754,7 @@ function inc_glob_to_array_dist($data) {
  */
 function inc_yaml_to_array_dist($data) {
 	include_spip('inc/yaml-mini');
-	if (!function_exists("yaml_decode")) {
+	if (!function_exists('yaml_decode')) {
 		throw new Exception('YAML: impossible de trouver la fonction yaml_decode');
 
 		return false;
@@ -779,7 +796,7 @@ function inc_ls_to_array_dist($data) {
 				unset($b[$k]);
 			}
 		}
-		$b['file'] = preg_replace('`/$`','',$v) ;
+		$b['file'] = preg_replace('`/$`', '', $v) ;
 		$v = array_merge(
 			pathinfo($v),
 			$b
@@ -796,7 +813,7 @@ function inc_ls_to_array_dist($data) {
  * @return array|bool
  */
 function XMLObjectToArray($object) {
-	$xml_array = array();
+	$xml_array = [];
 	for ($object->rewind(); $object->valid(); $object->next()) {
 		if (array_key_exists($key = $object->key(), $xml_array)) {
 			$key .= '-' . uniqid();
@@ -809,7 +826,8 @@ function XMLObjectToArray($object) {
 		}
 		if ($object->hasChildren()) {
 			$xml_array[$key][] = XMLObjectToArray(
-				$object->current());
+				$object->current()
+			);
 		} else {
 			$xml_array[$key][] = strval($object->current());
 		}

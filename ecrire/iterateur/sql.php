@@ -66,8 +66,21 @@ class IterateurSQL implements Iterator {
 	protected function select() {
 		$this->row = null;
 		$v = &$this->command;
-		$this->sqlresult = calculer_select($v['select'], $v['from'], $v['type'], $v['where'], $v['join'], $v['groupby'],
-			$v['orderby'], $v['limit'], $v['having'], $v['table'], $v['id'], $v['connect'], $this->info);
+		$this->sqlresult = calculer_select(
+			$v['select'],
+			$v['from'],
+			$v['type'],
+			$v['where'],
+			$v['join'],
+			$v['groupby'],
+			$v['orderby'],
+			$v['limit'],
+			$v['having'],
+			$v['table'],
+			$v['id'],
+			$v['connect'],
+			$this->info
+		);
 		$this->err = !$this->sqlresult;
 		$this->firstseek = false;
 		$this->pos = -1;
@@ -80,7 +93,7 @@ class IterateurSQL implements Iterator {
 	 * array command: les commandes d'initialisation
 	 * array info: les infos sur le squelette
 	 */
-	public function __construct($command, $info = array()) {
+	public function __construct($command, $info = []) {
 		$this->type = 'SQL';
 		$this->command = $command;
 		$this->info = $info;

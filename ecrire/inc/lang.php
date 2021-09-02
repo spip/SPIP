@@ -37,7 +37,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     string : La langue qui a été utilisée si trouvée
  *     false : aucune langue ne correspondait à la demande
  **/
-function changer_langue($lang, $liste_langues=null) {
+function changer_langue($lang, $liste_langues = null) {
 
 	if (is_null($liste_langues)) {
 		$liste_langues = @$GLOBALS['meta']['langues_proposees'] . ',' . @$GLOBALS['meta']['langues_multilingue'];
@@ -56,11 +56,11 @@ function changer_langue($lang, $liste_langues=null) {
 		return false;
 	}
 
-	if (strpos($liste_langues, ",$lang,") !== false
+	if (
+		strpos($liste_langues, ",$lang,") !== false
 		or ($lang = preg_replace(',_.*,', '', $lang)
 			and strpos($liste_langues, ",$lang,") !== false)
 	) {
-
 		$GLOBALS['spip_lang_rtl'] = lang_dir($lang, '', '_rtl');
 		$GLOBALS['spip_lang_right'] = $GLOBALS['spip_lang_rtl'] ? 'left' : 'right';
 		$GLOBALS['spip_lang_left'] = $GLOBALS['spip_lang_rtl'] ? 'right' : 'left';
@@ -87,7 +87,7 @@ function choisir_traduction($trads, $lang = '') {
 }
 
 // retourne son 2e argument si c'est un index du premier
-// ou un index approchant sinon et si possible, 
+// ou un index approchant sinon et si possible,
 // la langue X etant consideree comme une approche de X_Y
 function approcher_langue($trads, $lang = '') {
 
@@ -137,7 +137,7 @@ function traduire_nom_langue($lang) {
 // C'est utilise par #LANG_DIR, #LANG_LEFT, #LANG_RIGHT.
 // https://code.spip.net/@lang_dir
 function lang_dir($lang = '', $droitier = 'ltr', $gaucher = 'rtl') {
-	static $lang_rtl = array('ar', 'fa', 'ku', 'prs', 'ps', 'ur', 'he', 'heb', 'hbo', 'yi');
+	static $lang_rtl = ['ar', 'fa', 'ku', 'prs', 'ps', 'ur', 'he', 'heb', 'hbo', 'yi'];
 
 	return in_array(($lang ? $lang : $GLOBALS['spip_lang']), $lang_rtl) ?
 		$gaucher : $droitier;
@@ -155,7 +155,8 @@ function lang_typo($lang = '') {
 			? $GLOBALS['lang_objet']
 			: $GLOBALS['spip_lang'];
 	}
-	if ($lang == 'eo'
+	if (
+		$lang == 'eo'
 		or $lang == 'fr'
 		or strncmp($lang, 'fr_', 3) == 0
 		or $lang == 'cpf'
@@ -182,13 +183,13 @@ function changer_typo($lang = '') {
 // - 'var_lang_ecrire' = langue interface privee,
 // pour var_lang' = langue de l'article, espace public, voir les squelettes
 // pour 'changer_lang' (langue de l'article, espace prive), c'est en Ajax
-// 
+//
 // https://code.spip.net/@menu_langues
 function menu_langues($nom_select, $default = '') {
 	include_spip('inc/actions');
 
 	$langues = liste_options_langues($nom_select);
-	$ret = "";
+	$ret = '';
 	if (!count($langues)) {
 		return '';
 	}
@@ -198,7 +199,7 @@ function menu_langues($nom_select, $default = '') {
 	}
 	foreach ($langues as $l) {
 		$selected = ($l == $default) ? ' selected=\'selected\'' : '';
-		$ret .= "<option value='$l'$selected>[" . $l . "] " . traduire_nom_langue($l) . "</option>\n";
+		$ret .= "<option value='$l'$selected>[" . $l . '] ' . traduire_nom_langue($l) . "</option>\n";
 	}
 
 	if (!test_espace_prive()) {
@@ -211,19 +212,23 @@ function menu_langues($nom_select, $default = '') {
 
 	$change = ' onchange="this.parentNode.parentNode.submit()"';
 
-	return generer_action_auteur('converser', $base, $cible,
+	return generer_action_auteur(
+		'converser',
+		$base,
+		$cible,
 		(select_langues($nom_select, $change, $ret)
 			. "<noscript><div style='display:inline'><input type='submit' class='fondo' value='" . _T('bouton_changer') . "' /></div></noscript>"),
-		" method='post'");
+		" method='post'"
+	);
 }
 
 // https://code.spip.net/@select_langues
-function select_langues($nom_select, $change, $options, $label = "") {
+function select_langues($nom_select, $change, $options, $label = '') {
 	static $cpt = 0;
-	$id = "menu_langues" . $cpt++;
+	$id = 'menu_langues' . $cpt++;
 
 	return
-		"<label for='$id'>" . ($label ? $label : _T('info_langues')) . "</label> " .
+		"<label for='$id'>" . ($label ? $label : _T('info_langues')) . '</label> ' .
 		"<select name='$nom_select' id='$id' "
 		. ((!test_espace_prive()) ?
 			("class='forml menu_langues'") :
@@ -233,7 +238,7 @@ function select_langues($nom_select, $change, $options, $label = "") {
 		. $change
 		. ">\n"
 		. $options
-		. "</select>";
+		. '</select>';
 }
 
 /**
@@ -273,12 +278,12 @@ function liste_options_langues($nom_select) {
 			$langues = explode(',', $GLOBALS['meta']['langues_proposees']);
 			break;
 
-# dernier choix possible : toutes les langues = langues_proposees 
+# dernier choix possible : toutes les langues = langues_proposees
 # + langues_multilingues ; mais, ne sert pas
 #			$langues = explode(',', $GLOBALS['all_langs']);
 	}
 	if (count($langues) <= 1) {
-		return array();
+		return [];
 	}
 	sort($langues);
 
@@ -310,7 +315,8 @@ function verifier_lang_url() {
 	}
 
 	// Renvoyer si besoin (et si la langue demandee existe)
-	if ($GLOBALS['spip_lang'] != $lang_demandee
+	if (
+		$GLOBALS['spip_lang'] != $lang_demandee
 		and changer_langue($lang_demandee)
 		and $lang_demandee != @$_GET['lang']
 	) {
@@ -347,7 +353,8 @@ function verifier_lang_url() {
  **/
 function utiliser_langue_site($liste_langues = null) {
 	// s'il existe une langue du site (en gros tout le temps en théorie)
-	if (isset($GLOBALS['meta']['langue_site'])
+	if (
+		isset($GLOBALS['meta']['langue_site'])
 		// et si spip_langue est pas encore définie (ce que va faire changer_langue())
 		// ou qu'elle n'est pas identique à la langue du site
 		and (!isset($GLOBALS['spip_lang'])
@@ -357,7 +364,7 @@ function utiliser_langue_site($liste_langues = null) {
 	}
 	// en theorie là, la globale est définie, sinon c'est un problème.
 	if (!isset($GLOBALS['spip_lang'])) {
-		spip_log("La globale spip_lang est indéfinie dans utiliser_langue_site() !", _LOG_ERREUR);
+		spip_log('La globale spip_lang est indéfinie dans utiliser_langue_site() !', _LOG_ERREUR);
 	}
 
 	return $GLOBALS['spip_lang'];
@@ -433,10 +440,10 @@ function init_langues() {
 	// liste des langues dans les meta, sauf a l'install
 	$all_langs = @$GLOBALS['meta']['langues_proposees'];
 
-	$tout = array();
+	$tout = [];
 	if (!$all_langs) {
 		// trouver tous les modules lang/spip_xx.php
-		$modules = find_all_in_path("lang/", "/spip_([a-z_]+)\.php$");
+		$modules = find_all_in_path('lang/', '/spip_([a-z_]+)\.php$');
 		foreach ($modules as $name => $path) {
 			if (preg_match(',^spip_([a-z_]+)\.php$,', $name, $regs)) {
 				if (match_langue($regs[1])) {

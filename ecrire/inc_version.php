@@ -27,7 +27,7 @@ if (defined('_ECRIRE_INC_VERSION')) {
  * de SPIP et des plugins qui peuvent vérifier que SPIP est chargé
  * et donc que les fichiers ne sont pas appelés en dehors de l'usage de SPIP
  */
-define('_ECRIRE_INC_VERSION', "1");
+define('_ECRIRE_INC_VERSION', '1');
 
 # masquer les eventuelles erreurs sur les premiers define
 error_reporting(E_ALL ^ E_NOTICE);
@@ -42,8 +42,10 @@ if (!defined('_DIR_RESTREINT_ABS')) {
 
 /** Chemin relatif pour aller dans ecrire
  *  vide si on est dans ecrire, 'ecrire/' sinon */
-define('_DIR_RESTREINT',
-(!is_dir(_DIR_RESTREINT_ABS) ? "" : _DIR_RESTREINT_ABS));
+define(
+	'_DIR_RESTREINT',
+	(!is_dir(_DIR_RESTREINT_ABS) ? '' : _DIR_RESTREINT_ABS)
+);
 
 /** Chemin relatif pour aller à la racine */
 define('_DIR_RACINE', _DIR_RESTREINT ? '' : '../');
@@ -79,19 +81,19 @@ define('_DIR_JAVASCRIPT', (_DIR_RACINE . 'prive/' . _JAVASCRIPT));
 
 if (!defined('_NOM_TEMPORAIRES_INACCESSIBLES')) {
 	/** Nom du repertoire des fichiers Temporaires Inaccessibles par http:// */
-	define('_NOM_TEMPORAIRES_INACCESSIBLES', "tmp/");
+	define('_NOM_TEMPORAIRES_INACCESSIBLES', 'tmp/');
 }
 if (!defined('_NOM_TEMPORAIRES_ACCESSIBLES')) {
 	/** Nom du repertoire des fichiers Temporaires Accessibles par http:// */
-	define('_NOM_TEMPORAIRES_ACCESSIBLES', "local/");
+	define('_NOM_TEMPORAIRES_ACCESSIBLES', 'local/');
 }
 if (!defined('_NOM_PERMANENTS_INACCESSIBLES')) {
 	/** Nom du repertoire des fichiers Permanents Inaccessibles par http:// */
-	define('_NOM_PERMANENTS_INACCESSIBLES', "config/");
+	define('_NOM_PERMANENTS_INACCESSIBLES', 'config/');
 }
 if (!defined('_NOM_PERMANENTS_ACCESSIBLES')) {
 	/** Nom du repertoire des fichiers Permanents Accessibles par http:// */
-	define('_NOM_PERMANENTS_ACCESSIBLES', "IMG/");
+	define('_NOM_PERMANENTS_ACCESSIBLES', 'IMG/');
 }
 
 
@@ -101,7 +103,8 @@ if (!defined('_NOM_CONFIG')) {
 }
 
 // Son emplacement absolu si on le trouve
-if (@file_exists($f = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . _NOM_CONFIG . '.php')
+if (
+	@file_exists($f = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . _NOM_CONFIG . '.php')
 	or (@file_exists($f = _ROOT_RESTREINT . _NOM_CONFIG . '.php'))
 ) {
 	/** Emplacement absolu du fichier d'option */
@@ -124,7 +127,8 @@ if (!defined('MODULES_IDIOMES')) {
 
 
 // Inclure l'ecran de securite
-if (!defined('_ECRAN_SECURITE')
+if (
+	!defined('_ECRAN_SECURITE')
 	and @file_exists($f = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . 'ecran_securite.php')
 ) {
 	include $f;
@@ -135,7 +139,8 @@ if (!defined('_ECRAN_SECURITE')
  * Détecteur de robot d'indexation
  */
 if (!defined('_IS_BOT')) {
-	define('_IS_BOT',
+	define(
+		'_IS_BOT',
 		isset($_SERVER['HTTP_USER_AGENT'])
 		and preg_match(
 			// mots generiques
@@ -144,16 +149,19 @@ if (!defined('_IS_BOT')) {
 			. 'MSIE 6\.0|'
 			// UA plus cibles
 			. '80legs|accoona|AltaVista|ASPSeek|Baidu|Charlotte|EC2LinkFinder|eStyle|facebook|flipboard|hootsuite|FunWebProducts|Google|Genieo|INA dlweb|InfegyAtlas|Java VM|LiteFinder|Lycos|MetaURI|Moreover|Rambler|Scooter|ScrubbyBloglines|Yahoo|Yeti'
-			. ',i', (string)$_SERVER['HTTP_USER_AGENT'])
+			. ',i',
+			(string)$_SERVER['HTTP_USER_AGENT']
+		)
 	);
 }
 
 if (!defined('_IS_CLI')) {
-	define('_IS_CLI',
-	  !isset($_SERVER['HTTP_HOST'])
-	  and !strlen($_SERVER['DOCUMENT_ROOT'])
-	  and !empty($_SERVER['argv'])
-	  and empty($_SERVER['REQUEST_METHOD'])
+	define(
+		'_IS_CLI',
+		!isset($_SERVER['HTTP_HOST'])
+		and !strlen($_SERVER['DOCUMENT_ROOT'])
+		and !empty($_SERVER['argv'])
+		and empty($_SERVER['REQUEST_METHOD'])
 	);
 }
 
@@ -240,15 +248,15 @@ defined('_LOG_DEBUG') || define('_LOG_DEBUG', 7);
 
 // Prefixe des tables dans la base de donnees
 // (a modifier pour avoir plusieurs sites SPIP dans une seule base)
-$table_prefix = "spip";
+$table_prefix = 'spip';
 
 // Prefixe des cookies
 // (a modifier pour installer des sites SPIP dans des sous-repertoires)
-$cookie_prefix = "spip";
+$cookie_prefix = 'spip';
 
 // Dossier des squelettes
 // (a modifier si l'on veut passer rapidement d'un jeu de squelettes a un autre)
-$dossier_squelettes = "";
+$dossier_squelettes = '';
 
 // Pour le javascript, trois modes : parano (-1), prive (0), ok (1)
 // parano le refuse partout, ok l'accepte partout
@@ -257,10 +265,10 @@ $dossier_squelettes = "";
 $filtrer_javascript = 0;
 // PS: dans les forums, petitions, flux syndiques... c'est *toujours* securise
 
-// Type d'URLs 
+// Type d'URLs
 // inc/utils.php sélectionne le type 'page' (spip.php?article123) en l'absence
-// d'autre configuration stockée en $GLOBALS['meta']['type_urls] 
-// Pour les autres types: voir urls_etendues 
+// d'autre configuration stockée en $GLOBALS['meta']['type_urls]
+// Pour les autres types: voir urls_etendues
 // $type_urls n'a plus de valeur par défaut en 3.1 mais permet de forcer une
 // configuration d'urls dans les fichiers d'options.
 
@@ -274,7 +282,7 @@ $debut_date_publication = null;
 //
 // Prendre en compte les entetes HTTP_X_FORWARDED_XX
 //
-if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) and $_SERVER['HTTP_X_FORWARDED_PROTO']==='https'){
+if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) and $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
 	if (empty($_SERVER['HTTP_X_FORWARDED_HOST'])) {
 		$_SERVER['HTTP_X_FORWARDED_HOST'] = $_SERVER['HTTP_HOST'];
 	}
@@ -282,10 +290,10 @@ if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) and $_SERVER['HTTP_X_FORWARDED_PRO
 		$_SERVER['HTTP_X_FORWARDED_PORT'] = 443;
 	}
 }
-if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])){
-	if (isset($_SERVER['HTTP_X_FORWARDED_PORT']) and is_numeric($_SERVER['HTTP_X_FORWARDED_PORT'])){
+if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
+	if (isset($_SERVER['HTTP_X_FORWARDED_PORT']) and is_numeric($_SERVER['HTTP_X_FORWARDED_PORT'])) {
 		$_SERVER['SERVER_PORT'] = $_SERVER['HTTP_X_FORWARDED_PORT'];
-		if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) and $_SERVER['HTTP_X_FORWARDED_PROTO']==='https'){
+		if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) and $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
 			$_SERVER['HTTPS'] = 'on';
 			if (isset($_SERVER['REQUEST_SCHEME'])) {
 				$_SERVER['REQUEST_SCHEME'] = 'https';
@@ -293,8 +301,8 @@ if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])){
 		}
 	}
 	$host = $_SERVER['HTTP_X_FORWARDED_HOST'];
-	if (strpos($host,',')!==false){
-		$h = explode(',',$host);
+	if (strpos($host, ',') !== false) {
+		$h = explode(',', $host);
 		$host = trim(reset($h));
 	}
 	// securite sur le contenu de l'entete
@@ -306,12 +314,12 @@ if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])){
 //
 if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
 	$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-	if (strpos($ip,',')!==false){
-		$ip = explode(',',$ip);
+	if (strpos($ip, ',') !== false) {
+		$ip = explode(',', $ip);
 		$ip = reset($ip);
 	}
 	// ecraser $_SERVER['REMOTE_ADDR'] si elle est en localhost
-	if (isset($_SERVER['REMOTE_ADDR']) AND $_SERVER['REMOTE_ADDR']==='127.0.0.1'){
+	if (isset($_SERVER['REMOTE_ADDR']) and $_SERVER['REMOTE_ADDR'] === '127.0.0.1') {
 		$_SERVER['REMOTE_ADDR'] = $ip;
 	}
 }
@@ -351,7 +359,7 @@ $derniere_modif_invalide = true;
 # Serveur de documentation officielle
 $home_server = 'https://www.spip.net';
 # glossaire pour raccourci [?X]. Aussi: [?X#G] et definir glossaire_G
-$url_glossaire_externe = "https://@lang@.wikipedia.org/wiki/%s";
+$url_glossaire_externe = 'https://@lang@.wikipedia.org/wiki/%s';
 
 # TeX
 $tex_server = 'https://math.spip.org/tex.php';
@@ -365,7 +373,7 @@ $traiter_math = 'tex';
 $xhtml = false;
 $xml_indent = false;
 
-$formats_logos = array('jpg', 'png', 'svg', 'gif', 'webp');
+$formats_logos = ['jpg', 'png', 'svg', 'gif', 'webp'];
 
 // Controler les dates des item dans les flux RSS ?
 $controler_dates_rss = true;
@@ -379,47 +387,47 @@ $controler_dates_rss = true;
 # note: un pipeline non reference se compile aussi, mais uniquement
 # lorsqu'il est rencontre
 // https://programmer.spip.net/-Les-pipelines-
-$spip_pipeline = array();
+$spip_pipeline = [];
 
 # la matrice standard (fichiers definissant les fonctions a inclure)
-$spip_matrice = array();
+$spip_matrice = [];
 # les plugins a activer
-$plugins = array();  // voir le contenu du repertoire /plugins/
+$plugins = [];  // voir le contenu du repertoire /plugins/
 # les surcharges de include_spip()
-$surcharges = array(); // format 'inc_truc' => '/plugins/chose/inc_truc2.php'
+$surcharges = []; // format 'inc_truc' => '/plugins/chose/inc_truc2.php'
 
 // Variables du compilateur de squelettes
 
-$exceptions_des_tables = array();
-$tables_principales = array();
-$table_des_tables = array();
-$tables_auxiliaires = array();
-$table_primary = array();
-$table_date = array();
-$table_titre = array();
-$tables_jointures = array();
+$exceptions_des_tables = [];
+$tables_principales = [];
+$table_des_tables = [];
+$tables_auxiliaires = [];
+$table_primary = [];
+$table_date = [];
+$table_titre = [];
+$tables_jointures = [];
 
 // Liste des statuts.
-$liste_des_statuts = array(
-	"info_administrateurs" => '0minirezo',
-	"info_redacteurs" => '1comite',
-	"info_visiteurs" => '6forum',
-	"texte_statut_poubelle" => '5poubelle'
-);
+$liste_des_statuts = [
+	'info_administrateurs' => '0minirezo',
+	'info_redacteurs' => '1comite',
+	'info_visiteurs' => '6forum',
+	'texte_statut_poubelle' => '5poubelle'
+];
 
-$liste_des_etats = array(
+$liste_des_etats = [
 	'texte_statut_en_cours_redaction' => 'prepa',
 	'texte_statut_propose_evaluation' => 'prop',
 	'texte_statut_publie' => 'publie',
 	'texte_statut_poubelle' => 'poubelle',
 	'texte_statut_refuse' => 'refuse'
-);
+];
 
 // liste des methodes d'authentifications
-$liste_des_authentifications = array(
+$liste_des_authentifications = [
 	'spip' => 'spip',
 	'ldap' => 'ldap'
-);
+];
 
 // Experimental : pour supprimer systematiquement l'affichage des numeros
 // de classement des titres, recopier la ligne suivante dans mes_options :
@@ -432,13 +440,13 @@ $liste_des_authentifications = array(
 // pour specifier les versions de SPIP necessaires
 // il faut s'en tenir a un nombre de decimales fixe
 // ex : 2.0.0, 2.0.0-dev, 2.0.0-beta, 2.0.0-beta2
-$spip_version_branche = "4.1.0-dev";
+$spip_version_branche = '4.1.0-dev';
 define('_SPIP_VERSION_ID', 41000);
 define('_SPIP_EXTRA_VERSION', '-dev');
 
 // cette version dev accepte tous les plugins compatible avec la version ci-dessous
 // a supprimer en phase beta/rc/release
-define('_DEV_VERSION_SPIP_COMPAT',"4.0.99");
+define('_DEV_VERSION_SPIP_COMPAT', '4.0.99');
 // version des signatures de fonctions PHP
 // (= date de leur derniere modif cassant la compatibilite et/ou necessitant un recalcul des squelettes)
 $spip_version_code = 20210708;
@@ -455,7 +463,7 @@ $spip_version_affichee = "$spip_version_branche";
 
 // ** Securite **
 $visiteur_session = $auteur_session = $connect_statut = $connect_toutes_rubriques = $hash_recherche = $hash_recherche_strict = $ldap_present = '';
-$meta = $connect_id_rubrique = array();
+$meta = $connect_id_rubrique = [];
 
 // *** Fin des globales *** //
 
@@ -529,36 +537,37 @@ if (test_espace_prive()) {
 //
 // Installer Spip si pas installe... sauf si justement on est en train
 //
-if (!(_FILE_CONNECT
+if (
+	!(_FILE_CONNECT
 	or autoriser_sans_cookie(_request('exec'))
 	or _request('action') == 'cookie'
 	or _request('action') == 'converser'
 	or _request('action') == 'test_dirs')
 ) {
-
 	// Si on peut installer, on lance illico
 	if (test_espace_prive()) {
 		include_spip('inc/headers');
-		redirige_url_ecrire("install");
+		redirige_url_ecrire('install');
 	} else {
 		// Si on est dans le site public, dire que qq s'en occupe
 		include_spip('inc/minipres');
 		utiliser_langue_visiteur();
-		echo minipres(_T('info_travaux_titre'), "<p style='text-align: center;'>" . _T('info_travaux_texte') . "</p>", array('status' => 503));
+		echo minipres(_T('info_travaux_titre'), "<p style='text-align: center;'>" . _T('info_travaux_texte') . '</p>', ['status' => 503]);
 		exit;
 	}
 	// autrement c'est une install ad hoc (spikini...), on sait pas faire
 }
 
 // memoriser un tri sessionne eventuel
-if (isset($_REQUEST['var_memotri'])
+if (
+	isset($_REQUEST['var_memotri'])
 	and $t = $_REQUEST['var_memotri']
 	and (strncmp($t, 'trisession', 10) == 0 or strncmp($t, 'senssession', 11) == 0)
 ) {
 	if (!function_exists('session_set')) {
 		include_spip('inc/session');
 	}
-	$t = preg_replace(",\W,","_", $t);
+	$t = preg_replace(',\W,', '_', $t);
 	if ($v = _request($t)) {
 		session_set($t, $v);
 	}
@@ -571,21 +580,21 @@ if (isset($_REQUEST['var_memotri'])
  * La globale $spip_header_silencieux permet de rendre le header minimal pour raisons de securite
  */
 if (!defined('_HEADER_COMPOSED_BY')) {
-	define('_HEADER_COMPOSED_BY', "Composed-By: SPIP");
+	define('_HEADER_COMPOSED_BY', 'Composed-By: SPIP');
 }
 if (!headers_sent() and _HEADER_COMPOSED_BY) {
 	if (!defined('_HEADER_VARY')) {
-		define('_HEADER_VARY', "Vary: Cookie, Accept-Encoding");
+		define('_HEADER_VARY', 'Vary: Cookie, Accept-Encoding');
 	}
 	if (_HEADER_VARY) {
 		header(_HEADER_VARY);
 	}
 	if (!isset($GLOBALS['spip_header_silencieux']) or !$GLOBALS['spip_header_silencieux']) {
 		include_spip('inc/filtres_mini');
-		header(_HEADER_COMPOSED_BY . " $spip_version_affichee @ www.spip.net + " . url_absolue(_DIR_VAR . "config.txt"));
+		header(_HEADER_COMPOSED_BY . " $spip_version_affichee @ www.spip.net + " . url_absolue(_DIR_VAR . 'config.txt'));
 	} else {
 		// header minimal
-		header(_HEADER_COMPOSED_BY . " @ www.spip.net");
+		header(_HEADER_COMPOSED_BY . ' @ www.spip.net');
 	}
 }
 
