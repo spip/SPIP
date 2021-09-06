@@ -540,11 +540,11 @@ function _mysql_traite_query($query, $db = '', $prefixe = '') {
 		// il faut alors echapper les chaine avant de le faire, pour ne pas risquer de
 		// modifier une requete qui est en fait juste du texte dans un champ
 		if (stripos($suite, 'SELECT') !== false) {
-			list($suite, $textes) = query_echappe_textes($suite);
-			if (preg_match('/^(.*?)([(]\s*SELECT\b.*)$/si', $suite, $r)) {
-				$suite = $r[1] . _mysql_traite_query($r[2], $db, $prefixe);
+			list($suite_echap, $textes) = query_echappe_textes($suite);
+			if (preg_match('/^(.*?)([(]\s*SELECT\b.*)$/si', $suite_echap, $r)) {
+				$suite_echap = $r[1] . _mysql_traite_query($r[2], $db, $prefixe);
+				$suite = query_reinjecte_textes($suite_echap, $textes);
 			}
-			$suite = query_reinjecte_textes($suite, $textes);
 		}
 	}
 	$r = preg_replace(_SQL_PREFIXE_TABLE_MYSQL, '\1' . $pref, $query) . $suite;
