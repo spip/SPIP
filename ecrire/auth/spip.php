@@ -152,7 +152,7 @@ function auth_spip_formulaire_login($flux) {
 	// (perf issue pour les sites qui mettent le formulaire de login sur la home)
 	$compat_md5 = false;
 	if (!isset($GLOBALS['meta']['sha_256_only']) or _request('var_mode')) {
-		$compat_md5 = sql_countsel('spip_auteurs', "length(pass)=32 AND statut<>'poubelle'");
+		$compat_md5 = sql_countsel('spip_auteurs', "length(pass)=32 AND statut<>'5poubelle'");
 		if ($compat_md5 and isset($GLOBALS['meta']['sha_256_only'])) {
 			effacer_meta('sha_256_only');
 		}
