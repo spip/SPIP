@@ -93,7 +93,7 @@ function surligner_mots($page, $surcharge_surligne = '') {
 	  }
 		 highlighter();
 		 onAjaxLoad(highlighter);
-      })(jQuery);
+     }(jQuery);
       /*]]>*/</script>
       ';
 			// on l'insere juste avant </head>, sinon tout en bas
