@@ -74,9 +74,10 @@ function surligner_mots($page, $surcharge_surligne = '') {
 			$script = "
       <script type='text/javascript' src='" . url_absolue(find_in_path('javascript/SearchHighlight.js')) . "'></script>
       <script type='text/javascript'>/*<![CDATA[*/
-      if (window.jQuery)
-        (function(\$){\$(function(){
-          \$(document).SearchHighlight({
+      if (window.jQuery) {
+       var highlighter = function() {
+		 jQuery(function($){
+		  \$(document).SearchHighlight({
             tag_name:'" . (html5_permis() ? 'mark' : 'span') . "',
             style_name:'spip_surligne',
             exact:'whole',
@@ -86,9 +87,12 @@ function surligner_mots($page, $surcharge_surligne = '') {
             nohighlight:'.pas_surlignable'" .
 				($surcharge_surligne ? ",
             keys:'$surcharge_surligne'" : '') . ',
-            min_length: 3
-          })
-        });
+            min_length: 3            
+          });
+		});
+	  }
+		 highlighter();
+		 onAjaxLoad(highlighter);
       })(jQuery);
       /*]]>*/</script>
       ';
