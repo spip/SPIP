@@ -194,9 +194,7 @@ function formulaires_editer_auteur_verifier_dist(
 				$erreurs['email'] = (($id_auteur == $GLOBALS['visiteur_session']['id_auteur']) ? _T('form_email_non_valide') : _T('form_prop_indiquer_email'));
 			}
 		}
-		# Ne pas autoriser d'avoir deux auteurs avec le même email
-		# cette fonctionalité nécessite que la base soit clean à l'activation : pas de
-		# doublon sur la requête select email,count(*) from spip_auteurs group by email ;
+		# Ne pas autoriser la création d'un auteur avec un email déjà utilisé par un autre compte
 		if (defined('_INTERDIRE_AUTEUR_MEME_EMAIL')) {
 			#Nouvel auteur
 			if (intval($id_auteur) == 0) {
@@ -205,16 +203,11 @@ function formulaires_editer_auteur_verifier_dist(
 					$erreurs['email'] = _T('erreur_email_deja_existant');
 				}
 			} else {
-				#Un auteur existe deja avec cette adresse ? et n'est pas le user courant.
+				# Changement d'email vers un email déjà attribué à un autre auteur ?
+				$email_ancien = sql_getfetsel('email', 'spip_auteurs', 'id_auteur=' . intval($id_auteur));
 				if (
-					(sql_countsel(
-						'spip_auteurs',
-						'email=' . sql_quote($email)
-					) > 0) and ($id_auteur != ($id_auteur_ancien = sql_getfetsel(
-						'id_auteur',
-						'spip_auteurs',
-						'email=' . sql_quote($email)
-					)))
+					$email != $email_ancien
+					and (sql_countsel('spip_auteurs', 'email=' . sql_quote($email) . " AND statut != '5poubelle'") > 0)
 				) {
 					$erreurs['email'] = _T('erreur_email_deja_existant');
 				}
