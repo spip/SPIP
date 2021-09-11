@@ -18,13 +18,13 @@ function formulaires_configurer_annonces_charger_dist() {
 	$valeurs = [];
 	foreach (
 		[
-		'suivi_edito',
-		'adresse_suivi',
-		'adresse_suivi_inscription',
-		'quoi_de_neuf',
-		'adresse_neuf',
-		'jours_neuf',
-		'email_envoi',
+			'suivi_edito',
+			'adresse_suivi',
+			'adresse_suivi_inscription',
+			'quoi_de_neuf',
+			'adresse_neuf',
+			'jours_neuf',
+			'email_envoi',
 		] as $m
 	) {
 		$valeurs[$m] = $GLOBALS['meta'][$m];
@@ -66,8 +66,8 @@ function formulaires_configurer_annonces_traiter_dist() {
 	$res = ['editable' => true];
 	foreach (
 		[
-		'suivi_edito',
-		'quoi_de_neuf',
+			'suivi_edito',
+			'quoi_de_neuf',
 		] as $m
 	) {
 		if (!is_null($v = _request($m))) {
@@ -77,11 +77,11 @@ function formulaires_configurer_annonces_traiter_dist() {
 
 	foreach (
 		[
-		'adresse_suivi',
-		'adresse_suivi_inscription',
-		'adresse_neuf',
-		'jours_neuf',
-		'email_envoi',
+			'adresse_suivi',
+			'adresse_suivi_inscription',
+			'adresse_neuf',
+			'jours_neuf',
+			'email_envoi',
 		] as $m
 	) {
 		if (!is_null($v = _request($m))) {

@@ -18,7 +18,7 @@ function formulaires_configurer_redacteurs_charger_dist() {
 	$valeurs = [];
 	foreach (
 		[
-		'accepter_inscriptions',
+			'accepter_inscriptions',
 		] as $m
 	) {
 		$valeurs[$m] = $GLOBALS['meta'][$m];
@@ -42,7 +42,7 @@ function formulaires_configurer_redacteurs_traiter_dist() {
 
 	foreach (
 		[
-		'accepter_inscriptions',
+			'accepter_inscriptions',
 		] as $m
 	) {
 		if (!is_null($v = _request($m))) {

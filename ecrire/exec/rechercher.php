@@ -83,9 +83,9 @@ function exec_rechercher_args($id, $type, $exclus, $rac, $do) {
 
 		foreach (
 			[
-			3 => $where_titre,
-			2 => $where_desc,
-			1 => $where_id,
+				3 => $where_titre,
+				2 => $where_desc,
+				1 => $where_id,
 			] as $point => $recherche
 		) {
 			$res = sql_select('id_rubrique, id_parent, titre', 'spip_rubriques', "$recherche$where_exclus");

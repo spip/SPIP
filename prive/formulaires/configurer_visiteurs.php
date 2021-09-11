@@ -23,7 +23,7 @@ function formulaires_configurer_visiteurs_charger_dist() {
 
 	foreach (
 		[
-		'accepter_visiteurs'
+			'accepter_visiteurs'
 		] as $m
 	) {
 		$valeurs[$m] = $GLOBALS['meta'][$m];
@@ -47,7 +47,7 @@ function formulaires_configurer_visiteurs_traiter_dist() {
 
 	foreach (
 		[
-		'accepter_visiteurs',
+			'accepter_visiteurs',
 		] as $m
 	) {
 		if (!is_null($v = _request($m))) {

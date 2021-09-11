@@ -18,16 +18,16 @@ function formulaires_configurer_articles_charger_dist() {
 	$valeurs = [];
 	foreach (
 		[
-		'articles_surtitre',
-		'articles_soustitre',
-		'articles_descriptif',
-		'articles_chapeau',
-		'articles_texte',
-		'articles_ps',
-		'articles_redac',
-		'articles_urlref',
-		'post_dates',
-		'articles_redirection',
+			'articles_surtitre',
+			'articles_soustitre',
+			'articles_descriptif',
+			'articles_chapeau',
+			'articles_texte',
+			'articles_ps',
+			'articles_redac',
+			'articles_urlref',
+			'post_dates',
+			'articles_redirection',
 		] as $m
 	) {
 		$valeurs[$m] = $GLOBALS['meta'][$m];
@@ -47,16 +47,16 @@ function formulaires_configurer_articles_traiter_dist() {
 
 	foreach (
 		[
-		'articles_surtitre',
-		'articles_soustitre',
-		'articles_descriptif',
-		'articles_chapeau',
-		'articles_texte',
-		'articles_ps',
-		'articles_redac',
-		'articles_urlref',
-		'post_dates',
-		'articles_redirection',
+			'articles_surtitre',
+			'articles_soustitre',
+			'articles_descriptif',
+			'articles_chapeau',
+			'articles_texte',
+			'articles_ps',
+			'articles_redac',
+			'articles_urlref',
+			'post_dates',
+			'articles_redirection',
 		] as $m
 	) {
 		if (!is_null($v = _request($m))) {

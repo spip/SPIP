@@ -31,10 +31,10 @@ function formulaires_configurer_reducteur_charger_dist() {
 	$valeurs = [];
 	foreach (
 		[
-		'image_process',
-		'formats_graphiques',
-		'creer_preview',
-		'taille_preview',
+			'image_process',
+			'formats_graphiques',
+			'creer_preview',
+			'taille_preview',
 		] as $m
 	) {
 		$valeurs[$m] = isset($GLOBALS['meta'][$m]) ? $GLOBALS['meta'][$m] : null;
@@ -89,7 +89,7 @@ function formulaires_configurer_reducteur_traiter_dist() {
 
 	foreach (
 		[
-		'creer_preview'
+			'creer_preview'
 		] as $m
 	) {
 		if (!is_null($v = _request($m))) {

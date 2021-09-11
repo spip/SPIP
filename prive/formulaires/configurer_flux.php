@@ -18,7 +18,7 @@ function formulaires_configurer_flux_charger_dist() {
 	$valeurs = [];
 	foreach (
 		[
-		'syndication_integrale'
+			'syndication_integrale'
 		] as $m
 	) {
 		$valeurs[$m] = $GLOBALS['meta'][$m];
@@ -32,7 +32,7 @@ function formulaires_configurer_flux_traiter_dist() {
 	$res = ['editable' => true];
 	foreach (
 		[
-		'syndication_integrale',
+			'syndication_integrale',
 		] as $m
 	) {
 		if (!is_null($v = _request($m))) {

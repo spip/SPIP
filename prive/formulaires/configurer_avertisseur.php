@@ -19,7 +19,7 @@ function formulaires_configurer_avertisseur_charger_dist() {
 	$valeurs = [];
 	foreach (
 		[
-		'articles_modif',
+			'articles_modif',
 		] as $m
 	) {
 		$valeurs[$m] = $GLOBALS['meta'][$m];
@@ -33,7 +33,7 @@ function formulaires_configurer_avertisseur_traiter_dist() {
 	$res = ['editable' => true];
 	foreach (
 		[
-		'articles_modif',
+			'articles_modif',
 		] as $m
 	) {
 		if (!is_null($v = _request($m))) {

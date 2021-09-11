@@ -18,8 +18,8 @@ function formulaires_configurer_logos_charger_dist() {
 	$valeurs = [];
 	foreach (
 		[
-		'activer_logos',
-		'activer_logos_survol'
+			'activer_logos',
+			'activer_logos_survol'
 		] as $m
 	) {
 		$valeurs[$m] = $GLOBALS['meta'][$m];
@@ -33,8 +33,8 @@ function formulaires_configurer_logos_traiter_dist() {
 	$res = ['editable' => true];
 	foreach (
 		[
-		'activer_logos',
-		'activer_logos_survol',
+			'activer_logos',
+			'activer_logos_survol',
 		] as $m
 	) {
 		if (!is_null($v = _request($m))) {
