@@ -489,7 +489,7 @@ le site "@nom_site_spip@" (@adresse_login@) :',
 	// L
 	'label_ajout_id_rapide' => 'Ajout rapide',
 	'label_poids_fichier' => 'Taille',
-	'label_ponctuer' => '@label@  :',
+	'label_ponctuer' => '@label@ :',
 	'lien_afficher_icones_seuls' => 'Afficher uniquement les icones',
 	'lien_afficher_texte_icones' => 'Afficher les icones et le texte',
 	'lien_afficher_texte_seul' => 'Afficher uniquement le texte',
