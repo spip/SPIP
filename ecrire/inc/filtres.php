@@ -5481,10 +5481,7 @@ function identifiant_slug($texte, $type = '', $options = []) {
  * @exemple `<:info_maximum|label_nettoyer:>`
  */
 function label_nettoyer(string $text, bool $ucfirst = true): string {
-	$label = rtrim($text, " : \t\n\r\0\x0B\xc2\xa0");
-	if ($label and $label[-1] === ';') {
-		$label = preg_replace('#(\&nbsp;)+$#', '', $label);
-	}
+	$label = preg_replace('#([\s:]|\&nbsp;)+$#u', '', $text);
 	if ($ucfirst) {
 		$label = spip_ucfirst($label);
 	}
