@@ -491,7 +491,7 @@ the site "@nom_site_spip@" (@adresse_login@):',
 	// L
 	'label_ajout_id_rapide' => 'Quick addition',
 	'label_poids_fichier' => 'Size',
-	'label_ponctuer' => '@label@ :',
+	'label_ponctuer' => '@label@:',
 	'lien_afficher_icones_seuls' => 'Show only icons',
 	'lien_afficher_texte_icones' => 'Show icons and text',
 	'lien_afficher_texte_seul' => 'Show only text',
