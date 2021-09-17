@@ -421,7 +421,7 @@ function query_echappe_textes($query, $uniqid=null) {
 	}
 
 	$query_echappees = str_replace(array_keys($codeEchappements), array_values($codeEchappements), $query);
-	if (preg_match_all("/((['])[^']*(\\2))|(([\"])[^\"]*(\\5))/S", $query_echappees, $textes)) {
+	if (preg_match_all("/('[^']*')|(\"[^\"]*\")/S", $query_echappees, $textes)) {
 		$textes = reset($textes); // indice 0 du match
 		switch (count($textes)) {
 			case 0:
