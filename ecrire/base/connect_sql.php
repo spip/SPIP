@@ -401,7 +401,7 @@ function _q($a) {
  */
 function query_echappe_textes($query, $uniqid=null) {
 	static $codeEchappements = null;
-	if (is_null($codeEchappements)) {
+	if (is_null($codeEchappements) or $uniqid) {
 		if (is_null($uniqid)) {
 			$uniqid = uniqid();
 		}
