@@ -280,6 +280,11 @@ class IterDecorator extends FilterIterator {
 
 		$filtres_string = [];
 		foreach ($filtres as $k => $v) {
+			// si c'est un tableau de OR/AND + 2 sous-filtres, on recurse pour transformer en chaine
+			if (is_array($v) and in_array(reset($v), ['OR', 'AND'])) {
+				$op = array_shift($v);
+				$v = $this->assembler_filtres($v, $op);
+			}
 			if (is_null($v) or !is_string($v) or empty($v)) {
 				continue;
 			}
@@ -296,7 +301,7 @@ class IterDecorator extends FilterIterator {
 	/**
 	 * Traduire un element du tableau where SQL en un filtre
 	 * @param $v
-	 * @return false|string|null
+	 * @return string|array|null
 	 */
 	protected function traduire_condition_sql_en_filtre($v) {
 		if (is_array($v)) {
@@ -334,6 +339,40 @@ class IterDecorator extends FilterIterator {
 			return $this->composer_filtre($v[1][1], $v[1][0], $v[1][2], 'NOT');
 		}
 		if (count($v) == 3) {
+			// traiter le OR/AND suivi de 2 valeurs
+			if (in_array($op, ['OR', 'AND'])) {
+				array_shift($v);
+				foreach (array_keys($v) as $k) {
+					$v[$k] = $this->traduire_condition_sql_en_filtre($v[$k]);
+					if ($v[$k] === null) {
+						unset($v[$k]);
+					}
+					elseif ($v[$k] === 'true') {
+						if ($op === 'OR') {
+							return 'true';
+						}
+						if ($op === 'AND') {
+							unset($v[$k]);
+						}
+					}
+					elseif ($v[$k] === 'false') {
+						if ($op === 'OR') {
+							unset($v[$k]);
+						}
+						if ($op === 'AND') {
+							return 'false';
+						}
+					}
+				}
+				if (!count($v)) {
+					return null;
+				}
+				if (count($v) === 1) {
+					return reset($v);
+				}
+				array_unshift($v, $op);
+				return $v;
+			}
 			return $this->composer_filtre($v[1], $v[0], $v[2]);
 		}
 
