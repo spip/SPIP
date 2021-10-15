@@ -244,42 +244,7 @@ class IterDecorator extends FilterIterator {
 		// IN sur collection vide (ce dernier devrait pouvoir etre fait a la compil)
 		if ($where = &$this->command['where']) {
 			foreach ($where as $k => $v) {
-				if (is_array($v)) {
-					if ((count($v) >= 2) && ($v[0] == 'REGEXP') && ($v[2] == "'.*'")) {
-						$op = false;
-					} elseif ((count($v) >= 2) && ($v[0] == 'LIKE') && ($v[2] == "'%'")) {
-						$op = false;
-					} else {
-						$op = $v[0] ? $v[0] : $v;
-					}
-				} else {
-					$op = $v;
-				}
-				if ((!$op) or ($op == 1) or ($op == '0=0')) {
-					unset($where[$k]);
-				}
-				// traiter {cle IN a,b} ou {valeur !IN a,b}
-				if (preg_match(',^\(([\w/]+)(\s+NOT)?\s+IN\s+(\(.*\))\)$,', $op, $regs)) {
-					$this->ajouter_filtre($regs[1], 'IN', $regs[3], $regs[2]);
-					unset($op, $where[$k]);
-				}
-			}
-			foreach ($where as $k => $v) {
-				// 3 possibilites : count($v) =
-				// * 1 : {x y} ; on recoit $v[0] = y
-				// * 2 : {x !op y} ; on recoit $v[0] = 'NOT', $v[1] = array() // array du type {x op y}
-				// * 3 : {x op y} ; on recoit $v[0] = 'op', $v[1] = x, $v[2] = y
-
-				// 1 : forcement traite par un critere, on passe
-				if (!$v or count($v) == 1) {
-					continue;
-				}
-				if (count($v) == 2 and is_array($v[1])) {
-					$this->ajouter_filtre($v[1][1], $v[1][0], $v[1][2], 'NOT');
-				}
-				if (count($v) == 3) {
-					$this->ajouter_filtre($v[1], $v[0], $v[2]);
-				}
+				$this->filtre[] = $this->traduire_condition_sql_en_filtre($v);
 			}
 		}
 
@@ -292,18 +257,101 @@ class IterDecorator extends FilterIterator {
 
 		// Creer la fonction de filtrage sur $this
 		if ($this->filtre) {
-			$filtres = 'return (' . join(') AND (', $this->filtre) . ');';
-			$this->func_filtre = function () use ($filtres) {
-				return eval($filtres);
-			};
+			if ($filtres = $this->assembler_filtres($this->filtre)) {
+				$filtres = 'return ' . $filtres.';';
+				$this->func_filtre = function () use ($filtres) {
+					return eval($filtres);
+				};
+			}
+			else {
+				$this->func_filtre = null;
+			}
 		}
 	}
 
+	/**
+	 * Assembler le tableau de filtres traduits depuis les conditions SQL
+	 * les filtres vides ou null sont ignores
+	 * @param $filtres
+	 * @param string $operateur
+	 * @return string|null
+	 */
+	protected function assembler_filtres($filtres, $operateur = 'AND') {
 
-	protected function ajouter_filtre($cle, $op, $valeur, $not = false) {
+		$filtres_string = [];
+		foreach ($filtres as $k => $v) {
+			if (is_null($v) or !is_string($v) or empty($v)) {
+				continue;
+			}
+			$filtres_string[] = $v;
+		}
+
+		if (!count($filtres_string)) {
+			return null;
+		}
+
+		return "(" . implode( ") $operateur (", $filtres_string) . ")";
+	}
+
+	/**
+	 * Traduire un element du tableau where SQL en un filtre
+	 * @param $v
+	 * @return false|string|null
+	 */
+	protected function traduire_condition_sql_en_filtre($v) {
+		if (is_array($v)) {
+			if ((count($v) >= 2) && ($v[0] == 'REGEXP') && ($v[2] == "'.*'")) {
+				return 'true';
+			} elseif ((count($v) >= 2) && ($v[0] == 'LIKE') && ($v[2] == "'%'")) {
+				return 'true';
+			} else {
+				$op = $v[0] ?: $v;
+			}
+		} else {
+			$op = $v;
+		}
+		if ((!$op) or ($op == 1) or ($op == '0=0')) {
+			return 'true';
+		}
+		if ($op === '0=1') {
+			return 'false';
+		}
+		// traiter {cle IN a,b} ou {valeur !IN a,b}
+		if (preg_match(',^\(([\w/]+)(\s+NOT)?\s+IN\s+(\(.*\))\)$,', $op, $regs)) {
+			return $this->composer_filtre($regs[1], 'IN', $regs[3], $regs[2]);
+		}
+
+		// 3 possibilites : count($v) =
+		// * 1 : {x y} ; on recoit $v[0] = y
+		// * 2 : {x !op y} ; on recoit $v[0] = 'NOT', $v[1] = array() // array du type {x op y}
+		// * 3 : {x op y} ; on recoit $v[0] = 'op', $v[1] = x, $v[2] = y
+
+		// 1 : forcement traite par un critere, on passe
+		if (!$v or !is_array($v) or count($v) == 1) {
+			return null; // sera ignore
+		}
+		if (count($v) == 2 and is_array($v[1])) {
+			return $this->composer_filtre($v[1][1], $v[1][0], $v[1][2], 'NOT');
+		}
+		if (count($v) == 3) {
+			return $this->composer_filtre($v[1], $v[0], $v[2]);
+		}
+
+		return null;  // sera ignore
+	}
+
+	/**
+	 * Calculer un filtre sur un champ du tableau
+	 * @param $cle
+	 * @param $op
+	 * @param $valeur
+	 * @param false $not
+	 * @return string|null
+	 */
+	protected function composer_filtre($cle, $op, $valeur, $not = false) {
 		if (method_exists($this->iter, 'exception_des_criteres')) {
 			if (in_array($cle, $this->iter->exception_des_criteres())) {
-				return;
+				return null;
 			}
 		}
 		// TODO: analyser le filtre pour refuser ce qu'on ne sait pas traiter ?
@@ -352,9 +400,7 @@ class IterDecorator extends FilterIterator {
 			$filtre = "!($filtre)";
 		}
 
-		if ($filtre) {
-			$this->filtre[] = $filtre;
-		}
+		return $filtre;
 	}
 
 
