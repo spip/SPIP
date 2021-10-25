@@ -25,10 +25,11 @@ jQuery(function(){jQuery('a#spip_pass').click(function(){window.open(this.href, 
 	#SET{hs,#CONFIG{couleur_login}|couleur_hex_to_hsl{"h, s"}}
 	#SET{l,#CONFIG{couleur_login}|couleur_hex_to_hsl{l}}
 ]
-<style type="text/css">
+<style type="text/css">[(#GET{logo}|oui)
+#SET{logo_mini,#GET{logo}|image_reduire{64,64}|extraire_attribut{src}}
 .page_login {
-	[background-image:url((#GET{logo}|timestamp));]
-}
+	background-image:url([(#GET{logo}|timestamp)]),url([(#GET{logo_mini}|embarque_fichier)]);
+}]
 [(#CONFIG{couleur_login}|oui)
 :root {
 		--spip-login-color-theme--hs: #GET{hs};
