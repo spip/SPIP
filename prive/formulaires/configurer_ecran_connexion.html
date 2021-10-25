@@ -35,5 +35,7 @@
 			<button type="submit" class="submit" name="save"><:bouton_enregistrer:></button>
 		</div>
 	</div></form>
+	[(#REM) Produire ici la miniature de 64px utilisee au chargement, cela permettra de se rendre compte de suite si ça plante pour cause image trop grosse
+	][(#ENV{src_img}|oui)[<div style="display: none">(#ENV{src_img}|image_reduire{64,64})</div>]]
 	]
 </div>
