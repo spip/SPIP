@@ -311,8 +311,17 @@ function objet_modifier_champs($objet, $id_objet, $options, $c = null, $serveur 
 	// journaliser l'affaire
 	// message a affiner :-)
 	include_spip('inc/filtres_mini');
-	$qui = isset($GLOBALS['visiteur_session']['nom']) and $GLOBALS['visiteur_session']['nom'] ? $GLOBALS['visiteur_session']['nom'] : $GLOBALS['ip'];
-	journal(_L($qui . ' a &#233;dit&#233; l&#8217;' . $objet . ' ' . $id_objet . ' (' . join(
+	$qui = "";
+ 	if(isset($GLOBALS['visiteur_session']['id_auteur']) and $GLOBALS['visiteur_session']['id_auteur']){
+ 		$qui .= " #id_auteur:".$GLOBALS['visiteur_session']['id_auteur']."#";
+ 	}
+ 	if(isset($GLOBALS['visiteur_session']['nom']) and $GLOBALS['visiteur_session']['nom']){
+ 		$qui .= " #nom:".$GLOBALS['visiteur_session']['nom']."#";
+ 	}
+ 	if($qui == ""){
+ 		$qui = "#ip:".$GLOBALS['ip']."#";
+ 	}
+	journal(_L($qui . ' a édité ' . $objet . ' ' . $id_objet . ' (' . join('+',
 		'+',
 		array_diff(array_keys($champs), ['date_modif'])
 	) . ')'), [
