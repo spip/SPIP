@@ -786,9 +786,9 @@ function critere_parinverse($idb, &$boucles, $crit) {
 				}
 
 			// tris de la forme {par champ} ou {par FONCTION(champ)}
-			} elseif (preg_match(',^' . CHAMP_SQL_PLUS_FONC . '$,is', $par, $match)) {
+			} elseif ($boucle->type_requete == 'DATA' or preg_match(',^' . CHAMP_SQL_PLUS_FONC . '$,is', $par, $match)) {
 				// {par FONCTION(champ)}
-				if (count($match) > 2) {
+				if (isset($match) and count($match) > 2) {
 					$par = substr($match[2], 1, -1);
 					$fct = $match[1];
 				}

@@ -458,7 +458,7 @@ class IterateurDATA implements Iterator {
 		$aleas = 0;
 		foreach ($this->command['orderby'] as $tri) {
 			// virer le / initial pour les criteres de la forme {par /xx}
-			if (preg_match(',^\.?([/\w]+)( DESC)?$,iS', ltrim($tri, '/'), $r)) {
+			if (preg_match(',^\.?([/\w:_-]+)( DESC)?$,iS', ltrim($tri, '/'), $r)) {
 				$r = array_pad($r, 3, null);
 
 				// tri par cle
