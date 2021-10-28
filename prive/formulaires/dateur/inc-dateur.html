@@ -71,7 +71,7 @@ function date_picker_enable_on_this(opts) {
 		var options =  date_picker_options();
 		var lang = '[(#LANG|texte_script)]';
 		if (typeof jQuery.fn.datepicker.dates !== "undefined"){
-			if (typeof jQuery.fn.datepicker.dates[lang]==="undefined"){
+			if (typeof jQuery.fn.datepicker.dates[lang]==="undefined" || lang==='en'){
 				jQuery.fn.datepicker.dates[lang] = {
 					days: options.dayNames,
 					daysShort: options.dayNamesShort,
