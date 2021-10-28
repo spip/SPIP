@@ -663,7 +663,7 @@ function affdate_base($numdate, $vue, $options = []) {
 		// de date propose par http://www.php.net/date
 		default:
 			list($annee, $mois, $jour, $heures, $minutes, $secondes) = $date_array;
-			if (!$time = mktime($heures, $minutes, $secondes, $mois, $jour, $annee)) {
+			if (!$time = mktime($heures, $minutes, $secondes, $mois, (int) $jour, $annee)) {
 				$time = strtotime($numdate);
 			}
 			return date($vue, $time);
