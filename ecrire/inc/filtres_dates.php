@@ -662,7 +662,7 @@ function affdate_base($numdate, $vue, $options = []) {
 		// Cas d'une vue non definie : retomber sur le format
 		// de date propose par http://www.php.net/date
 		default:
-			list($annee, $mois, $jour, $heures, $minutes, $secondes) = $date_array;
+			list($annee, $mois, $njour, $heures, $minutes, $secondes) = $date_array;
 			if (!$time = mktime($heures, $minutes, $secondes, $mois, $jour, $annee)) {
 				$time = strtotime($numdate);
 			}
