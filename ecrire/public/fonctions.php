@@ -404,6 +404,72 @@ function calculer_rang_smart($titre, $objet_source, $id, $env) {
 	return recuperer_numero($titre);
 }
 
+/**
+ * Calcul de la balise #TRI
+ *
+ * @param string $champ
+ * @param string $libelle
+ * @param string $classe
+ * @param string $tri_nom
+ * @param string|int $tri_sens
+ * @param string $tri_champ
+ * @param string $tri_sens_defaut
+ * @return string
+ */
+function calculer_tri(string $champ, string $libelle, string $classe, string $tri_nom, $tri_sens, $tri_champ, $tri_sens_defaut) {
+
+	// Tester s'il s'agit d'un sens de tri fixe au lieu d'un nom de champ
+	$is_sens_fixe = in_array($champ, ['<','>']);
+
+	// Le nouveau sens de tri :
+	// Soit c'est un sens fixe au lieu d'un nom de champ
+	if ($is_sens_fixe) {
+		$tri_sens_nouveau = (strpos('< >', $champ) - 1);
+	// Soit c'est le champ de tri actuel, et on inverse le sens
+	} elseif ($champ === $tri_champ) {
+		$tri_sens_nouveau = ($tri_sens == 1 ? -1 : 1);
+	// Sinon c'est un autre champ, et on prend son tri par défaut
+	} else {
+		$tri_sens_nouveau = ($tri_sens_defaut[$champ] ?? 1);
+	}
+
+	// N'ajouter le sens de tri que si fixe ou différent de celui par défaut
+	$param_sens = "sens$tri_nom";
+	$tri_sens_defaut_champ = ($tri_sens_defaut[$champ] ?? 1);
+	$url = parametre_url(self('&'), $param_sens, '');
+	if (
+		$is_sens_fixe
+		or (
+			!$is_sens_fixe
+			and $tri_sens_nouveau != $tri_sens_defaut_champ
+		)
+		or 1
+	) {
+		$url = parametre_url(self(), $param_sens, $tri_sens_nouveau);
+	}
+
+	// Si c'est un champ, on ajoute le tri
+	if (!$is_sens_fixe) {
+		$param_tri = "tri$tri_nom";
+		$url = parametre_url($url, $param_tri, $champ);
+	}
+
+	// Drapeau pour garder en session ?
+	$param_memo = (!$is_sens_fixe ? $param_tri : $param_sens);
+	$url = parametre_url($url, 'var_memotri', strncmp($tri_nom, 'session', 7) == 0 ? $param_memo : '');
+
+	// Classe icône sur le champ de tri actuel
+	$classe .= ' item-tri';
+	if ($champ === $tri_champ) {
+		$classe .= ' sp-icone sp-icone_tri sp-icone_tri_' . ($tri_sens == 1 ? 'asc' : 'desc');
+	}
+
+	// Lien
+	$balise = lien_ou_expose($url, $libelle, false, $classe);
+
+	return $balise;
+}
+
 
 /**
  * Proteger les champs passes dans l'url et utiliser dans {tri ...}

@@ -2715,15 +2715,37 @@ function balise_TRI_dist($p, $liste = 'true') {
 	$_class = interprete_argument_balise(3, $p);
 	// si champ = ">" c'est un lien vers le tri croissant : de gauche a droite ==> 1
 	// si champ = "<" c'est un lien vers le tri decroissant : (sens inverse) == -1
-	$_issens = "in_array($_champ,array('>','<'))";
-	$_sens = "(strpos('< >',$_champ)-1)";
+	$_is_tri_sens_fixe = "in_array($_champ, ['>','<'])";
+	$_tri_sens_fixe = "(strpos('< >', $_champ) - 1)";
 
-	$_variable = "((\$s=$_issens)?'sens':'tri')." . $boucle->modificateur['tri_nom'];
-	$_url = "parametre_url(self(),$_variable,\$s?$_sens:$_champ)";
-	$_url = "parametre_url($_url,'var_memotri',strncmp(" . $boucle->modificateur['tri_nom'] . ",'session',7)==0?$_variable:'')";
-	$_on = '$s?(' . $boucle->modificateur['tri_sens'] . "==$_sens" . '):(' . $boucle->modificateur['tri_champ'] . "==$_champ)";
 
-	$p->code = "lien_ou_expose($_url,$_libelle,$_on" . ($_class ? ",$_class" : '') . ')';
+	// si '>' : paramètre sens indiqué
+	// sinon  : paramètre sens inversé + tri
+
+	// Nom du paramètre pour le sens de tri
+	$_variable_sens    = "'sens'." . $boucle->modificateur['tri_nom'];
+	// Le sens de tri actuel et son inverse
+	$_tri_sens_actuel  = $boucle->modificateur['tri_sens'];
+	$_tri_sens_inverse = "((($_tri_sens_actuel) == 1) ? -1 : 1)";
+
+	// Dans tous les cas, le sens du tri
+	$_test_is_sens_fixe = "(\$is_sens=$_is_tri_sens_fixe)";
+	$_url = "parametre_url(self(), $_variable_sens, $_test_is_sens_fixe ? $_tri_sens_fixe : $_tri_sens_inverse)";
+
+	$_variable = "((\$is_sens=$_is_tri_sens_fixe)?'sens':'tri')." . $boucle->modificateur['tri_nom'];
+	// $_url = "parametre_url(self(), $_variable, \$is_sens ? $_tri_sens_fixe : $_champ)";
+
+	// Machin session
+	// $_url = "parametre_url($_url,'var_memotri',strncmp(" . $boucle->modificateur['tri_nom'] . ",'session',7)==0?$_variable:'')";
+	// $_on = '$issens?(' . $boucle->modificateur['tri_sens'] . "==$_tri_sens_fixe" . '):(' . $boucle->modificateur['tri_champ'] . "==$_champ)";
+
+	$_tri_nom = $boucle->modificateur['tri_nom']; // nom du param de tri
+	$_tri_champ = $boucle->modificateur['tri_champ']; // champ actuel pour le tri
+	$_tri_sens = $boucle->modificateur['tri_sens']; // sens actuel du tri
+	$_tri_sens_defaut = $boucle->modificateur['tri_sens_defaut']; // sens par défaut pour chaque champ
+	// $p->code = "lien_ou_expose($_url,$_libelle,''" . ($_class ? ",$_class" : '') . ')';
+	$_class = $_class ?? "''";
+	$p->code = "calculer_tri($_champ, $_libelle, $_class, $_tri_nom, $_tri_sens, $_tri_champ, $_tri_sens_defaut)";
 	//$p->code = "''";
 	$p->interdire_scripts = false;
 

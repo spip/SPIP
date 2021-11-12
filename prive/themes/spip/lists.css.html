@@ -612,7 +612,6 @@
  * Est-il toujours utilisé en conjonction (class="pagination tri") ?
  */
 
-
 .pagination,
 .tri {
 	background: var(--spip-color-gray-lighter); /* il faut un contraste suffisant si direct sur fond de la page */
@@ -712,6 +711,30 @@
 .lat .pagination {
 	white-space: normal;
 	text-align: var(--spip-left);
+}
+
+/* Balise #TRI : item et icône sens de tri */
+.item-tri {
+	display: inline-flex;
+	align-items: center;
+}
+.sp-icone_tri:after {
+	content: "";
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	margin-#LEFT: 0.15em;
+	margin-inline-start: 0.15em;
+	background-color: currentColor !important;
+	mask-size: contain;
+	mask-position: center;
+	mask-repeat: no-repeat;
+}
+.sp-icone_tri_asc:after {
+	mask-image: url("#CHEMIN_IMAGE{tri-sens-asc-xx.svg}");
+}
+.sp-icone_tri_desc:after {
+	mask-image: url("#CHEMIN_IMAGE{tri-sens-desc-xx.svg}");
 }
 
 
