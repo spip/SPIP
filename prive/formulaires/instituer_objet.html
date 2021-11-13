@@ -1,4 +1,4 @@
-<div class="instituer_objet">
+<div class="instituer_objet[ (#PUBLIE{#ENV{_objet}, #ENV{_id_objet}})objet_publie]">
 	[(#REM) Dans tous les cas on commence par afficher le statut actuel ]
 	<div class="statut_old">
 		<strong class="label">Statut [(#ENV{_aide}|oui)#AIDER{#ENV{_aide}}]</strong>
@@ -22,27 +22,25 @@
 			
 			#SET{name,statut}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<div class="editer-groupe">
-				<div class="editer editer_[(#GET{name})] statut_#ENV{#GET{name}}[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<fieldset class="editer editer_[(#GET{name})] statut_#ENV{#GET{name}}[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					[<span class='erreur_message'>(#GET{erreurs})</span>]
-					<fieldset class="editer">
-						<legend>Choix du statut</legend>
-						<BOUCLE_choix(DATA){source table, #ENV{_statuts}}{cle != #ENV{statut}}>
-						<div class="choix">
-							<input
-								type="radio" class="radio"
-								name="#GET{name}"
-								id="instituer_#ENV{_objet}_#ENV{_id_objet}_choix_#CLE"
-								[(#ENV{#GET{name}}|=={#CLE}|oui)selected="selected"]
-								value="#CLE"
-							/>
-							<label for="instituer_#ENV{_objet}_#ENV{_id_objet}_choix_#CLE">
-								[(#CLE|puce_statut{#ENV{_objet}})]
-								[(#VALEUR|_T)]
-							</label>
-						</div>
-						</BOUCLE_choix>
-					</fieldset>
-				</div>
+					<legend class="label">Choix du statut</legend>
+					<BOUCLE_choix(DATA){source table, #ENV{_statuts}}{cle != #ENV{statut}}>
+					<div class="choix">
+						<input
+							type="radio" class="radio"
+							name="#GET{name}"
+							id="instituer_#ENV{_objet}_#ENV{_id_objet}_choix_#CLE"
+							[(#ENV{#GET{name}}|=={#CLE}|oui)selected="selected"]
+							value="#CLE"
+						/>
+						<label for="instituer_#ENV{_objet}_#ENV{_id_objet}_choix_#CLE">
+							[(#CLE|puce_statut{#ENV{_objet}})]
+							[(#VALEUR|_T)]
+						</label>
+					</div>
+					</BOUCLE_choix>
+				</fieldset>
 			</div>
 			<!--extra-->
 			<p class='boutons'><span class='image_loading'>&nbsp;</span>
@@ -76,7 +74,7 @@
 			form.toggleClass('none-js');
 			
 			// Un bouton pour afficher le form pour modifier
-			var bouton_modifier = $('<button class="btn_mini btn_secondaire float-end" aria-expanded="false">Changer</button>')
+			var bouton_modifier = $('<button class="btn_mini btn_secondaire float-end" aria-expanded="false"><:bouton_changer:></button>')
 				.click(function() {
 					form.slideDown().removeClass('none-js');
 					$(this).slideUp().attr('aria-expanded', 'true');
