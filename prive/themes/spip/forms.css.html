@@ -1485,15 +1485,16 @@
 /* formulaire_instituer */
 .infos .instituer_objet {
 	border: 0px;
-	margin-bottom:[(#ENV{margin-bottom}|strmult{0.5})em] 0;
+	margin:[(#ENV{margin-bottom}|strmult{0.5})em] 0;
 }
-.infos .instituer_objet .statut_old {
+.infos .instituer_objet .statut_old .statut {
 	margin-left: calc(var(--spip-form-spacing-x) * -1);
 	margin-right: calc(var(--spip-form-spacing-x) * -1);
-	padding: var(--spip-form-spacing-y) var(--spip-form-spacing-x);
+	margin-top: calc(var(--spip-form-spacing-y) / 2);
+	padding: calc(var(--spip-form-spacing-y) / 2) var(--spip-form-spacing-x);
 	/*background-color: var(--spip-color-theme-lightest);*/
 }
-.infos .instituer_objet.objet_publie .statut_old {
+.infos .instituer_objet.objet_publie .statut_old .statut {
 	color: hsl(var(--spip-color-success--h), var(--spip-color-success--s), 15%);
 	background-color: hsl(var(--spip-color-success--h), 55%, 90%);
 }
