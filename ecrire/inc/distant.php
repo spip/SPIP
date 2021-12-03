@@ -1048,6 +1048,9 @@ function distant_trouver_extension_selon_headers($source, $headers) {
 		$mime_type = $GLOBALS['mime_alias'][$mime_type];
 	}
 
+	// pour corriger_extension()
+	include_spip('action/ajouter_documents');
+
 	// Si on a un mime-type insignifiant
 	// text/plain,application/octet-stream ou vide
 	// c'est peut-etre que le serveur ne sait pas
@@ -1059,14 +1062,14 @@ function distant_trouver_extension_selon_headers($source, $headers) {
 			!$t
 			and preg_match(',\.([a-z0-9]+)(\?.*)?$,i', $source, $rext)
 		) {
-			$t = sql_fetsel('extension', 'spip_types_documents', 'extension=' . sql_quote($rext[1], '', 'text'));
+			$t = sql_fetsel('extension', 'spip_types_documents', 'extension=' . sql_quote(corriger_extension($rext[1]), '', 'text'));
 		}
 		if (
 			!$t
 			and preg_match(',^Content-Disposition:\s*attachment;\s*filename=(.*)$,Uims', $headers, $m)
 			and preg_match(',\.([a-z0-9]+)(\?.*)?$,i', $m[1], $rext)
 		) {
-			$t = sql_fetsel('extension', 'spip_types_documents', 'extension=' . sql_quote($rext[1], '', 'text'));
+			$t = sql_fetsel('extension', 'spip_types_documents', 'extension=' . sql_quote(corriger_extension($rext[1]), '', 'text'));
 		}
 	}
 
@@ -1083,7 +1086,7 @@ function distant_trouver_extension_selon_headers($source, $headers) {
 		and preg_match(',\.([a-z0-9]+)(\?.*)?$,i', $source, $rext)
 	) {
 		# eviter xxx.3 => 3gp (> SPIP 3)
-		$t = sql_fetsel('extension', 'spip_types_documents', 'extension=' . sql_quote($rext[1], '', 'text'));
+		$t = sql_fetsel('extension', 'spip_types_documents', 'extension=' . sql_quote(corriger_extension($rext[1]), '', 'text'));
 	}
 
 	if ($t) {
