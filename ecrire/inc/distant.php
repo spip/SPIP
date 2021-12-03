@@ -1091,6 +1091,7 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 
 	# charger les alias des types mime
 	include_spip('base/typedoc');
+	include_spip('action/ajouter_documents');
 
 	$a = array();
 	$mime_type = '';
@@ -1121,13 +1122,13 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 			if (!$t
 				and preg_match(',\.([a-z0-9]+)(\?.*)?$,i', $source, $rext)
 			) {
-				$t = sql_fetsel('extension', 'spip_types_documents', 'extension=' . sql_quote($rext[1], '', 'text'));
+				$t = sql_fetsel('extension', 'spip_types_documents', 'extension=' . sql_quote(corriger_extension($rext[1]), '', 'text'));
 			}
 			if (!$t
 				and preg_match(',^Content-Disposition:\s*attachment;\s*filename=(.*)$,Uims', $headers, $m)
 				and preg_match(',\.([a-z0-9]+)(\?.*)?$,i', $m[1], $rext)
 			) {
-				$t = sql_fetsel('extension', 'spip_types_documents', 'extension=' . sql_quote($rext[1], '', 'text'));
+				$t = sql_fetsel('extension', 'spip_types_documents', 'extension=' . sql_quote(corriger_extension($rext[1]), '', 'text'));
 			}
 		}
 
@@ -1143,7 +1144,7 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 			and preg_match(',\.([a-z0-9]+)(\?.*)?$,i', $source, $rext)
 		) {
 			# eviter xxx.3 => 3gp (> SPIP 3)
-			$t = sql_fetsel('extension', 'spip_types_documents', 'extension=' . sql_quote($rext[1], '', 'text'));
+			$t = sql_fetsel('extension', 'spip_types_documents', 'extension=' . sql_quote(corriger_extension($rext[1]), '', 'text'));
 		}
 
 		if ($t) {
