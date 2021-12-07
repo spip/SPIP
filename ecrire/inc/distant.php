@@ -205,22 +205,28 @@ function valider_url_distante($url, $known_hosts = []) {
 
 	if (!$is_known_host) {
 		$host = trim($parsed_url['host'], '.');
-		if (preg_match('#^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$#', $host)) {
-			$ip = $host;
-		} else {
+		if (! $ip = filter_var($host, FILTER_VALIDATE_IP)) {
 			$ip = gethostbyname($host);
 			if ($ip === $host) {
 				// Error condition for gethostbyname()
 				$ip = false;
 			}
+			if ($records = dns_get_record($host)) {
+				foreach ($records as $record) {
+					// il faut que le TTL soit suffisant afin d'etre certain que le copie_locale eventuel qui suit
+					// se fasse sur la meme IP
+					if ($record['ttl']<10) {
+						$ip = false;
+						break;
+					}
+				}
+			}
+			else {
+				$ip = false;
+			}
 		}
 		if ($ip) {
-			$parts = array_map('intval', explode('.', $ip));
-			if (
-				127 === $parts[0] or 10 === $parts[0] or 0 === $parts[0]
-				or ( 172 === $parts[0] and 16 <= $parts[1] and 31 >= $parts[1] )
-				or ( 192 === $parts[0] && 168 === $parts[1] )
-			) {
+			if (! filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
 				return false;
 			}
 		}
