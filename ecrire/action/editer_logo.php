@@ -157,10 +157,13 @@ function logo_migrer_en_base($objet, $time_limit) {
 	}
 
 
+	$trouver_table = charger_fonction('trouver_table', 'base');
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	include_spip('inc/chercher_logo');
 	$_id_objet = id_table_objet($objet);
+	$table = table_objet_sql($objet);
 	$type = type_du_logo($_id_objet);
+	$desc = $trouver_table($table);
 
 	foreach (['on', 'off'] as $mode) {
 		$nom_base = $type . $mode;
@@ -182,10 +185,18 @@ function logo_migrer_en_base($objet, $time_limit) {
 					if (!$logo or count($logo) < 6) {
 						foreach ($formats_logos as $format) {
 							if (@file_exists($d = ($dir . ($nom = $nom_base . intval($id_objet) . '.' . $format)))) {
+								if (isset($desc['field']['date_modif'])) {
+									$date_modif = sql_getfetsel('date_modif', $table, "$_id_objet=$id_objet");
+								} else {
+									$date_modif = null;
+								}
 								// logo_modifier commence par supprimer le logo existant, donc on le deplace pour pas le perdre
 								@rename($d, $dir_logos . $nom);
 								// et on le declare comme nouveau logo
 								logo_modifier($objet, $id_objet, $mode, $dir_logos . $nom);
+								if ($date_modif) {
+									sql_updateq($table, ['date_modif' => $date_modif], "$_id_objet=$id_objet");
+								}
 								break;
 							}
 						}
