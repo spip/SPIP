@@ -1244,8 +1244,10 @@ function _image_tag_changer_taille($tag, $width, $height, $style = false) {
 	}
 
 	// enlever le width et height du style
-	$style = preg_replace(',(^|;)\s*(width|height)\s*:\s*[^;]+,ims', '', $style);
-	if ($style and $style[0] == ';') {
+	if ($style) {
+		$style = preg_replace(',(^|;)\s*(width|height)\s*:\s*[^;]+,ims', '', $style);
+	}
+	if ($style and $style[0] === ';') {
 		$style = substr($style, 1);
 	}
 
@@ -1334,7 +1336,7 @@ function _image_ecrire_tag($valeurs, $surcharge = []) {
 		$class = $surcharge['class'];
 		unset($surcharge['class']);
 	}
-	if (strlen($class)) {
+	if (is_scalar($class) && strlen($class)) {
 		$tag = inserer_attribut($tag, 'class', $class);
 	}
 

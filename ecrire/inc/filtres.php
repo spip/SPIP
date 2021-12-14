@@ -1958,10 +1958,11 @@ function alterner($i, ...$args) {
  *     True pour retourner un tableau avec
  *     - le texte de la balise
  *     - l'ensemble des résultats de la regexp ($r)
- * @return string|array
- *     - Texte de l'attribut retourné, ou tableau des texte d'attributs
+ * @return string|array|null
+ *     - Texte de l'attribut retourné, ou tableau des textes d'attributs
  *       (si 1er argument tableau)
  *     - Tableau complet (si 2e argument)
+ *     - null lorsque l’attribut n’existe pas.
  **/
 function extraire_attribut($balise, $attribut, $complet = false) {
 	if (is_array($balise)) {
