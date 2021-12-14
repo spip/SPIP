@@ -140,7 +140,7 @@ if ($f = find_in_path('mes_fonctions.php')) {
  * @return bool
  *   true si la personne peut effectuer l'action
  */
-function autoriser_dist($faire, $type = '', $id = 0, $qui = null, $opt = null) {
+function autoriser_dist(string $faire, string $type = '', $id = 0, $qui = null, $opt = null) : bool {
 
 	// Qui ? visiteur_session ?
 	// si null ou '' (appel depuis #AUTORISER) on prend l'auteur loge
@@ -163,8 +163,12 @@ function autoriser_dist($faire, $type = '', $id = 0, $qui = null, $opt = null) {
 	);
 
 	// passer par objet_type pour avoir les alias
+	// sauf si _ est le premier caractère.
+	if ($type and $type[0] !== '_') {
+		$type = objet_type($type, false);
+	}
 	// et supprimer les _
-	$type = str_replace('_', '', strncmp($type, '_', 1) == 0 ? $type : objet_type($type, false));
+	$type = str_replace('_', '', $type);
 
 	// Si une exception a ete decretee plus haut dans le code, l'appliquer
 	if (
