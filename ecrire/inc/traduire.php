@@ -294,7 +294,10 @@ function inc_traduire_dist($ori, $lang, $raw = false) {
 		$desc->corrections = true;
 		// Retour aux sources si la chaine est absente dans la langue cible ;
 		// on essaie d'abord la langue du site, puis a defaut la langue fr
-		if (!strlen($desc->texte) and $lang !== _LANGUE_PAR_DEFAUT) {
+		if (
+			($desc->texte === null || !strlen($desc->texte)) 
+			and $lang !== _LANGUE_PAR_DEFAUT
+		) {
 			if ($lang !== $GLOBALS['meta']['langue_site']) {
 				$desc = inc_traduire_dist($ori, $GLOBALS['meta']['langue_site'], true);
 			} else {
@@ -303,7 +306,7 @@ function inc_traduire_dist($ori, $lang, $raw = false) {
 		}
 
 		// Supprimer la mention <NEW> ou <MODIF>
-		if (substr($desc->texte, 0, 1) === '<') {
+		if ($desc->texte && substr($desc->texte, 0, 1) === '<') {
 			$desc->texte = str_replace(['<NEW>', '<MODIF>'], [], $desc->texte);
 		}
 

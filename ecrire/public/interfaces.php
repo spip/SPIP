@@ -455,7 +455,7 @@ class Boucle {
 
 	public $join = [];
 	public $having = [];
-	public $limit;
+	public $limit = '';
 	public $group = [];
 	public $order = [];
 	public $default_order = [];

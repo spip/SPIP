@@ -494,7 +494,7 @@ function filtre_debug($val, $key = null) {
 function image_filtrer($args) {
 	$filtre = array_shift($args); # enlever $filtre
 	$texte = array_shift($args);
-	if (!strlen($texte)) {
+	if ($texte === null || !strlen($texte)) {
 		return;
 	}
 	find_in_path('filtres_images_mini.php', 'inc/', true);
@@ -1444,7 +1444,9 @@ function securiser_acces($id_auteur, $cle, $dir, $op = '', $args = '') {
  *     Retourne $texte, sinon $sinon.
  **/
 function sinon($texte, $sinon = '') {
-	if ($texte or (!is_array($texte) and strlen($texte))) {
+	if ($texte) {
+		return $texte;
+	} elseif (is_scalar($texte) and strlen($texte)) {
 		return $texte;
 	} else {
 		return $sinon;
@@ -1956,10 +1958,11 @@ function alterner($i, ...$args) {
  *     True pour retourner un tableau avec
  *     - le texte de la balise
  *     - l'ensemble des résultats de la regexp ($r)
- * @return string|array
- *     - Texte de l'attribut retourné, ou tableau des texte d'attributs
+ * @return string|array|null
+ *     - Texte de l'attribut retourné, ou tableau des textes d'attributs
  *       (si 1er argument tableau)
  *     - Tableau complet (si 2e argument)
+ *     - null lorsque l’attribut n’existe pas.
  **/
 function extraire_attribut($balise, $attribut, $complet = false) {
 	if (is_array($balise)) {
@@ -1974,7 +1977,8 @@ function extraire_attribut($balise, $attribut, $complet = false) {
 		return $balise;
 	}
 	if (
-		preg_match(
+		$balise
+		&& preg_match(
 			',(^.*?<(?:(?>\s*)(?>[\w:.-]+)(?>(?:=(?:"[^"]*"|\'[^\']*\'|[^\'"]\S*))?))*?)(\s+'
 			. $attribut
 			. '(?:=\s*("[^"]*"|\'[^\']*\'|[^\'"]\S*))?)()((?:[\s/][^>]*)?>.*),isS',
@@ -1998,6 +2002,7 @@ function extraire_attribut($balise, $attribut, $complet = false) {
 		$att = filtrer_entites($att);
 	} else {
 		$att = null;
+		$r = [];
 	}
 
 	if ($complet) {
@@ -2100,48 +2105,45 @@ function modifier_class($balise, $class, $operation = 'ajouter') {
 		$class = explode(' ', trim($class));
 	}
 	$class = array_filter($class);
+	$class = array_unique($class);
+	if (!$class) {
+		return $balise;
+	}
 
 	// si la ou les classes ont des caracteres invalides on ne fait rien
 	if (preg_match(',[^\w-],', implode('', $class))) {
 		return $balise;
 	}
 
-	if ($class) {
-		$class = array_unique($class);
-		$class_courante = extraire_attribut($balise, 'class');
-
-		$class_new = $class_courante;
-		foreach ($class as $c) {
-			if ($c) {
-				$is_class_presente = false;
-				if (
-					strpos($class_courante, $c) !== false
-					and preg_match('/(^|\s)' . preg_quote($c) . '($|\s)/', $class_courante)
-				) {
-					$is_class_presente = true;
-				}
-				if (
-					in_array($operation, ['ajouter', 'commuter'])
-					and !$is_class_presente
-				) {
-					$class_new = rtrim($class_new) . ' ' . $c;
-				}
-				elseif (
-					in_array($operation, ['supprimer', 'commuter'])
-					and $is_class_presente
-				) {
-					$class_new = trim(preg_replace('/(^|\s)' . preg_quote($c) . '($|\s)/', "\\1", $class_new));
-				}
-			}
+	$class_courante = extraire_attribut($balise, 'class');
+	$class_new = $class_courante;
+	foreach ($class as $c) {
+		$is_class_presente = false;
+		if (
+			$class_courante
+			and strpos($class_courante, $c) !== false
+			and preg_match('/(^|\s)' . preg_quote($c) . '($|\s)/', $class_courante)
+		) {
+			$is_class_presente = true;
 		}
+		if (
+			in_array($operation, ['ajouter', 'commuter'])
+			and !$is_class_presente
+		) {
+			$class_new = ltrim(rtrim($class_new ?? '') . ' ' . $c);
+		} elseif (
+			in_array($operation, ['supprimer', 'commuter'])
+			and $is_class_presente
+		) {
+			$class_new = trim(preg_replace('/(^|\s)' . preg_quote($c) . '($|\s)/', "\\1", $class_new));
+		}
+	}
 
-		if ($class_new !== $class_courante) {
-			if (strlen($class_new)) {
-				$balise = inserer_attribut($balise, 'class', $class_new);
-			}
-			elseif ($class_courante) {
-				$balise = vider_attribut($balise, 'class');
-			}
+	if ($class_new !== $class_courante) {
+		if (strlen($class_new)) {
+			$balise = inserer_attribut($balise, 'class', $class_new);
+		} elseif ($class_courante) {
+			$balise = vider_attribut($balise, 'class');
 		}
 	}
 
@@ -2646,7 +2648,7 @@ function extraire_balises($texte, $tag = 'a') {
  *     - `$def` si on n'a pas transmis de tableau
  **/
 function in_any($val, $vals, $def = '') {
-	if (!is_array($vals) and $v = unserialize($vals)) {
+	if (!is_array($vals) and $vals and $v = unserialize($vals)) {
 		$vals = $v;
 	}
 

@@ -163,8 +163,12 @@ function autoriser_dist($faire, $type = '', $id = 0, $qui = null, $opt = null) {
 	);
 
 	// passer par objet_type pour avoir les alias
+	// sauf si _ est le premier caractère.
+	if ($type and $type[0] !== '_') {
+		$type = objet_type($type, false);
+	}
 	// et supprimer les _
-	$type = str_replace('_', '', strncmp($type, '_', 1) == 0 ? $type : objet_type($type, false));
+	$type = str_replace('_', '', (string) $type);
 
 	// Si une exception a ete decretee plus haut dans le code, l'appliquer
 	if (

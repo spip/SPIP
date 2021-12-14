@@ -191,7 +191,11 @@ function spip_sql_erreur($serveur = '') {
  **/
 function spip_connect_sql($version, $ins = '', $serveur = '', $continue = false) {
 	$desc = spip_connect($serveur, $version);
-	if (function_exists($f = @$desc[$version][$ins])) {
+	if (
+		$desc 
+		and $f = ($desc[$version][$ins] ?? '')
+		and function_exists($f)
+	 ) {
 		return $f;
 	}
 	if ($continue) {
@@ -381,10 +385,17 @@ function spip_connect_ldap($serveur = '') {
  * @param num|string|array $a Valeur à échapper
  * @return string Valeur échappée.
  **/
-function _q($a) {
-	return (is_numeric($a)) ? strval($a) :
-		(!is_array($a) ? ("'" . addslashes($a) . "'")
-			: join(',', array_map('_q', $a)));
+function _q($a) : string {
+	if (is_numeric($a)) {
+		return strval($a);
+	} elseif (is_array($a)) {
+		return join(',', array_map('_q', $a));
+	} elseif (is_scalar($a)) {
+		return ("'" . addslashes($a) . "'");
+	} elseif ($a === null) {
+		return "''";
+	}
+	throw new \RuntimeException("Can’t use _q with " . gettype($a));
 }
 
 /**

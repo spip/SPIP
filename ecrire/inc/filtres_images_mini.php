@@ -411,7 +411,7 @@ function image_passe_partout(
 		return '';
 	}
 
-	list($destWidth, $destHeight, $ratio) = ratio_passe_partout($largeur, $hauteur, $taille_x, $taille_y);
+	list($destWidth, $destHeight, $ratio) = ratio_passe_partout($largeur ?? 0, $hauteur ?? 0, $taille_x, $taille_y);
 	$fonction = ['image_passe_partout', func_get_args()];
 
 	return process_image_reduire($fonction, $img, $destWidth, $destHeight, $force, $process);

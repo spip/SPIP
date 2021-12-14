@@ -589,8 +589,8 @@ function parametre_url($url, $c, $v = null, $sep = '&amp;') {
 
 	$regexp = ',^(' . str_replace('[]', '\[\]', $c) . '[[]?[]]?)(=.*)?$,';
 	$ajouts = array_flip(explode('|', $c));
-	$u = is_array($v) ? $v : rawurlencode($v);
-	$testv = (is_array($v) ? count($v) : strlen($v));
+	$u = is_array($v) ? $v : rawurlencode((string) $v);
+	$testv = (is_array($v) ? count($v) : strlen((string) $v));
 	$v_read = null;
 	// lire les variables et agir
 	foreach ($url as $n => $val) {
@@ -859,7 +859,7 @@ function _T($texte, $args = [], $options = []) {
 	}
 	$text = $traduire($texte, $lang);
 
-	if (!strlen($text)) {
+	if ($text === null || !strlen($text)) {
 		if (!$o['force']) {
 			return '';
 		}
@@ -868,12 +868,11 @@ function _T($texte, $args = [], $options = []) {
 
 		// pour les chaines non traduites, assurer un service minimum
 		if (!$GLOBALS['test_i18n'] and (_request('var_mode') != 'traduction')) {
-			$text = str_replace(
-				'_',
-				' ',
-				(($n = strpos($text, ':')) === false ? $texte :
-				substr($texte, $n + 1))
-			);
+			$n = strpos($text, ':');
+			if ($n !== false) {
+				$text = substr($text, $n + 1);
+			}
+			$text = str_replace('_', ' ', $text);
 		}
 		$o['class'] = null;
 	}

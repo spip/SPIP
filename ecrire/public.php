@@ -21,7 +21,7 @@
 // par souci de compatiilite).
 
 if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
-	echo recuperer_fond($fond, $contexte_inclus, [], _request('connect'));
+	echo recuperer_fond($fond, $contexte_inclus, [], _request('connect') ?? '');
 } else {
 	$GLOBALS['_INC_PUBLIC'] = 1;
 	define('_PIPELINE_SUFFIX', test_espace_prive() ? '_prive' : '');
@@ -114,7 +114,7 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 
 	// Il y a du texte a produire, charger le metteur en page
 	include_spip('public/assembler');
-	$page = assembler($fond, _request('connect'));
+	$page = assembler($fond, _request('connect') ?? '');
 
 	if (isset($page['status'])) {
 		include_spip('inc/headers');

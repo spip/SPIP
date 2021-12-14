@@ -1641,19 +1641,20 @@ function spip_mysql_cite($v, $type) {
 		is_null($v)
 		and stripos($type, 'NOT NULL') === false
 	) {
+		// null php se traduit en NULL SQL
 		return 'NULL';
-	} // null php se traduit en NULL SQL
+	} 
 	if (sql_test_date($type) and preg_match('/^\w+\(/', $v)) {
 		return $v;
 	}
 	if (sql_test_int($type)) {
 		if (
-			is_numeric($v) or (ctype_xdigit(substr($v, 2))
-				and $v[0] == '0' and $v[1] == 'x')
+			is_numeric($v) 
+			or ($v and ctype_xdigit(substr($v, 2)) and $v[0] === '0' and $v[1] === 'x')
 		) {
 			return $v;
-		} // si pas numerique, forcer le intval
-		else {
+		} else {
+			// si pas numerique, forcer le intval
 			return intval($v);
 		}
 	}
