@@ -443,7 +443,7 @@ class IterDecorator extends FilterIterator {
 	}
 
 
-	public function next() {
+	public function next() : void {
 		$this->pos++;
 		parent::next();
 	}
@@ -453,7 +453,7 @@ class IterDecorator extends FilterIterator {
 	 *
 	 * @return void
 	 */
-	public function rewind() {
+	public function rewind() : void {
 		$this->pos = 0;
 		$this->fetched = 0;
 		parent::rewind();
@@ -635,7 +635,7 @@ class IterDecorator extends FilterIterator {
 	 * Accepte-t-on l'entree courante lue ?
 	 * On execute les filtres pour le savoir.
 	 **/
-	public function accept() {
+	public function accept() : bool {
 		if ($f = $this->func_filtre) {
 			return $f();
 		}
