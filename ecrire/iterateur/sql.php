@@ -105,10 +105,10 @@ class IterateurSQL implements Iterator {
 	 *
 	 * @return bool
 	 */
-	public function rewind() {
-		return ($this->pos > 0)
-			? $this->seek(0)
-			: true;
+	public function rewind() : void {
+		if ($this->pos > 0) {
+			$this->seek(0);
+		}
 	}
 
 	/**
@@ -116,7 +116,7 @@ class IterateurSQL implements Iterator {
 	 *
 	 * @return bool
 	 */
-	public function valid() {
+	public function valid() : bool {
 		if ($this->err) {
 			return false;
 		}
@@ -132,10 +132,12 @@ class IterateurSQL implements Iterator {
 	 *
 	 * @return array
 	 */
+	#[\ReturnTypeWillChange]
 	public function current() {
 		return $this->row;
 	}
 
+	#[\ReturnTypeWillChange]
 	public function key() {
 		return $this->pos;
 	}
@@ -172,7 +174,7 @@ class IterateurSQL implements Iterator {
 	 *
 	 * @return void
 	 */
-	public function next() {
+	public function next() : void {
 		$this->row = sql_fetch($this->sqlresult, $this->command['connect']);
 		$this->pos++;
 		$this->firstseek |= true;

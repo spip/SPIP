@@ -125,7 +125,7 @@ class IterateurDATA implements Iterator {
 	 *
 	 * @return void
 	 */
-	public function rewind() {
+	public function rewind() : void {
 		reset($this->tableau);
 		$this->cle = key($this->tableau);
 		$this->valeur = current($this->tableau);
@@ -531,15 +531,16 @@ class IterateurDATA implements Iterator {
 	 *
 	 * @return bool
 	 */
-	public function valid() {
+	public function valid() : bool {
 		return !is_null($this->cle);
 	}
 
 	/**
 	 * Retourner la valeur
 	 *
-	 * @return null
+	 * @return mixed
 	 */
+	#[\ReturnTypeWillChange]
 	public function current() {
 		return $this->valeur;
 	}
@@ -547,8 +548,9 @@ class IterateurDATA implements Iterator {
 	/**
 	 * Retourner la cle
 	 *
-	 * @return null
+	 * @return mixed
 	 */
+	#[\ReturnTypeWillChange]
 	public function key() {
 		return $this->cle;
 	}
@@ -558,7 +560,7 @@ class IterateurDATA implements Iterator {
 	 *
 	 * @return void
 	 */
-	public function next() {
+	public function next() : void {
 		if ($this->valid()) {
 			$this->cle = key($this->tableau);
 			$this->valeur = current($this->tableau);
