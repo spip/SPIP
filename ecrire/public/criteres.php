@@ -215,11 +215,8 @@ function critere_debut_dist($idb, &$boucles, $crit) {
 	$un = $un[0]->texte;
 	$deux = $deux[0]->texte;
 	if ($deux) {
-		$boucles[$idb]->limit = 'intval($Pile[0]["debut' .
-			$un .
-			'"]) . ",' .
-			$deux .
-			'"';
+		$boucles[$idb]->limit = 
+			'intval($Pile[0]["debut' . $un . '"]) . ",' . $deux . '"';
 	} else {
 		calculer_critere_DEFAUT_dist($idb, $boucles, $crit);
 	}
@@ -286,7 +283,7 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 	$partie =
 		// tester si le numero de page demande est de la forme '@yyy'
 		'isset($Pile[0][' . $debut . ']) ? $Pile[0][' . $debut . '] : _request(' . $debut . ");\n"
-		. "\tif(substr(\$debut_boucle,0,1)=='@'){\n"
+		. "\tif (\$debut_boucle && \$debut_boucle[0] === '@') {\n"
 		. "\t\t" . '$debut_boucle = $Pile[0][' . $debut . '] = quete_debut_pagination(\'' . $boucle->primary . '\',$Pile[0][\'@' . $boucle->primary . '\'] = substr($debut_boucle,1),' . $pas . ',$iter);' . "\n"
 		. "\t\t" . '$iter->seek(0);' . "\n"
 		. "\t}\n"

@@ -240,7 +240,7 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 			$code,
 			$contexte,
 			implode(',', $_options),
-			'_request("connect")'
+			"_request(\\'connect\\') ?? \\'\\'"
 		) . ';';
 	}
 
@@ -676,10 +676,11 @@ function calculer_requete_sql($boucle) {
 	$init[] = calculer_dec('join', calculer_dump_join($boucle->join));
 	$init[] = calculer_dec(
 		'limit',
-		(strpos($boucle->limit, 'intval') === false ?
-			"'" . $boucle->limit . "'"
-			:
-		$boucle->limit)
+		(
+			strpos($boucle->limit, 'intval') === false ?
+			"'" . ($boucle->limit) . "'" :
+			$boucle->limit
+		)
 	);
 	$init[] = calculer_dec('having', calculer_dump_array($boucle->having));
 	$s = $d = '';
@@ -721,7 +722,7 @@ function memoriser_contexte_compil($p) {
 	return join(',', [
 		_q(isset($p->descr['sourcefile']) ? $p->descr['sourcefile'] : ''),
 		_q(isset($p->descr['nom']) ? $p->descr['nom'] : ''),
-		_q(isset($p->id_boucle) ? $p->id_boucle : null),
+		_q(isset($p->id_boucle) ? $p->id_boucle : ''),
 		intval($p->ligne),
 		'$GLOBALS[\'spip_lang\']'
 	]);

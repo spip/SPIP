@@ -508,7 +508,7 @@ function balise_COMPTEUR_BOUCLE_dist($p) {
 		$msg = ['zbug_champ_hors_boucle', ['champ' => zbug_presenter_champ($p)]];
 		erreur_squelette($msg, $p);
 	} else {
-		$p->code = "\$Numrows['$b']['compteur_boucle']";
+		$p->code = "(\$Numrows['$b']['compteur_boucle'] ?? 0)";
 		$p->boucles[$b]->cptrows = true;
 		$p->interdire_scripts = false;
 
@@ -536,7 +536,7 @@ function balise_TOTAL_BOUCLE_dist($p) {
 		$msg = ['zbug_champ_hors_boucle', ['champ' => zbug_presenter_champ($p)]];
 		erreur_squelette($msg, $p);
 	} else {
-		$p->code = "\$Numrows['$b']['total']";
+		$p->code = "(\$Numrows['$b']['total'] ?? 0)";
 		$p->boucles[$b]->numrows = true;
 		$p->interdire_scripts = false;
 	}
@@ -1219,8 +1219,7 @@ function balise_GRAND_TOTAL_dist($p) {
 		$msg = ['zbug_champ_hors_boucle', ['champ' => zbug_presenter_champ($p)]];
 		erreur_squelette($msg, $p);
 	} else {
-		$p->code = "(isset(\$Numrows['$b']['grand_total'])
-			? \$Numrows['$b']['grand_total'] : \$Numrows['$b']['total'])";
+		$p->code = "(\$Numrows['$b']['grand_total'] ?? \$Numrows['$b']['total'] ?? 0)";
 		$p->boucles[$b]->numrows = true;
 		$p->interdire_scripts = false;
 	}
@@ -1652,7 +1651,7 @@ function balise_CHAMP_SQL_dist($p) {
  **/
 function balise_VAL_dist($p) {
 	$p->code = interprete_argument_balise(1, $p);
-	if (!strlen($p->code)) {
+	if ($p->code === null || !strlen($p->code)) {
 		$p->code = "''";
 	}
 	$p->interdire_scripts = false;
@@ -2021,7 +2020,7 @@ function balise_INCLURE_dist($p) {
 			$_l = "array_merge(\$Pile[0],$_l)";
 		}
 
-		$p->code = sprintf(CODE_RECUPERER_FOND, $f, $_l, join(',', $_options), "_request('connect')");
+		$p->code = sprintf(CODE_RECUPERER_FOND, $f, $_l, join(',', $_options), "_request('connect') ?? ''");
 	} elseif (!isset($_contexte[1])) {
 		$msg = ['zbug_balise_sans_argument', ['balise' => ' INCLURE']];
 		erreur_squelette($msg, $p);

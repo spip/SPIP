@@ -130,16 +130,16 @@ function formulaires_editer_liens_charger_dist($a, $b, $c, $options = []) {
 		$skel_ajout = $table_source . '_roles_associer';
 	}
 
-	$oups = _request('_oups');
-	if (unserialize(base64_decode($oups))) {
-		// on est bon, rien a faire
-	}
-	elseif (unserialize($oups)) {
-		// il faut encoder
-		$oups = base64_encode($oups);
-	}
-	else {
-		$oups = '';
+	$oups = _request('_oups') ?? '';
+	if ($oups) {
+		if (unserialize(base64_decode($oups))) {
+			// on est bon, rien a faire
+		} elseif (unserialize($oups)) {
+			// il faut encoder
+			$oups = base64_encode($oups);
+		} else {
+			$oups = '';
+		}
 	}
 	$valeurs = [
 		'id' => "$table_source-$objet-$id_objet-$objet_lien", // identifiant unique pour les id du form

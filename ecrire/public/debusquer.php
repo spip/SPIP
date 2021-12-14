@@ -770,7 +770,7 @@ function debusquer_source($objet, $affiche) {
 		$legend = $nom;
 		$req = $GLOBALS['debug_objets']['requete'][$objet];
 		if (function_exists('_mysql_traite_query')) {
-			$c = strtolower(_request('connect'));
+			$c = strtolower(_request('connect') ?? '');
 			$c = $GLOBALS['connexions'][$c ? $c : 0]['prefixe'];
 			$req = _mysql_traite_query($req, '', $c);
 		}

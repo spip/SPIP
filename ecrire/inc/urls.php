@@ -117,7 +117,8 @@ function urls_decoder_url($url, $fond = '', $contexte = [], $assembler = false) 
 		$a = $renommer($url, $fond, $contexte);
 		if (is_array($a)) {
 			list($ncontexte, $type, $url_redirect, $nfond) = array_pad($a, 4, null);
-			if ($url_redirect == $url) {
+			$url_redirect ??= '';
+			if ($url_redirect === $url) {
 				$url_redirect = '';
 			} // securite pour eviter une redirection infinie
 			if ($assembler and strlen($url_redirect)) {

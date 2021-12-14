@@ -311,16 +311,16 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 		return false;
 	}
 
-	$source = trim(extraire_attribut($img, 'src'));
+	$source = trim(extraire_attribut($img, 'src') ?? '');
 	if (strlen($source) < 1) {
 		$source = $img;
 		$img = "<img src='$source' />";
-	} # gerer img src="data:....base64"
-	elseif (
+	} elseif (
 		preg_match('@^data:image/([^;]*);base64,(.*)$@isS', $source, $regs)
 		and $extension = _image_trouver_extension_depuis_mime('image/' . $regs[1])
 		and in_array($extension, _image_extensions_acceptees_en_entree())
 	) {
+		# gerer img src="data:....base64"
 		$local = sous_repertoire(_DIR_VAR, 'image-data') . md5($regs[2]) . '.' . _image_extension_normalisee($extension);
 		if (!file_exists($local)) {
 			ecrire_fichier($local, base64_decode($regs[2]));
@@ -1244,8 +1244,10 @@ function _image_tag_changer_taille($tag, $width, $height, $style = false) {
 	}
 
 	// enlever le width et height du style
-	$style = preg_replace(',(^|;)\s*(width|height)\s*:\s*[^;]+,ims', '', $style);
-	if ($style and $style[0] == ';') {
+	if ($style) {
+		$style = preg_replace(',(^|;)\s*(width|height)\s*:\s*[^;]+,ims', '', $style);
+	}
+	if ($style and $style[0] === ';') {
 		$style = substr($style, 1);
 	}
 
@@ -1334,7 +1336,7 @@ function _image_ecrire_tag($valeurs, $surcharge = []) {
 		$class = $surcharge['class'];
 		unset($surcharge['class']);
 	}
-	if (strlen($class)) {
+	if (is_scalar($class) && strlen($class)) {
 		$tag = inserer_attribut($tag, 'class', $class);
 	}
 
@@ -1400,7 +1402,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process = 'AUTO
 	// calculer la taille
 	if (($srcWidth = $valeurs['largeur']) && ($srcHeight = $valeurs['hauteur'])) {
 		if (!($destWidth = $valeurs['largeur_dest']) || !($destHeight = $valeurs['hauteur_dest'])) {
-			list($destWidth, $destHeight) = _image_ratio($valeurs['largeur'], $valeurs['hauteur'], $maxWidth, $maxHeight);
+			list($destWidth, $destHeight) = _image_ratio($srcWidth, $srcHeight, $maxWidth, $maxHeight);
 		}
 	} elseif ($process == 'convert' or $process == 'imagick') {
 		$destWidth = $maxWidth;
@@ -1647,7 +1649,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process = 'AUTO
  * @param int $maxHeight Hauteur maximum souhaitée
  * @return array Liste [ largeur, hauteur, ratio de réduction ]
  **/
-function _image_ratio($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
+function _image_ratio($srcWidth, $srcHeight, $maxWidth, $maxHeight): array {
 	$ratioWidth = $srcWidth / $maxWidth;
 	$ratioHeight = $srcHeight / $maxHeight;
 
@@ -1685,7 +1687,7 @@ function _image_ratio($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
  * @param int $maxHeight Hauteur maximum souhaitée
  * @return array Liste [ largeur, hauteur, ratio de réduction ]
  **/
-function ratio_passe_partout($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
+function ratio_passe_partout($srcWidth, $srcHeight, $maxWidth, $maxHeight): array {
 	$ratioWidth = $srcWidth / $maxWidth;
 	$ratioHeight = $srcHeight / $maxHeight;
 

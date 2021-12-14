@@ -29,27 +29,24 @@ include_spip('inc/texte');
  * sans toucher aux valeurs sérialisées
  *
  * @see entites_html()
- * @param string|array $texte
+ * @param mixed $texte
  *     Saisie à protéger
- * @return string|array
+ * @return string|array|null
  *     Saisie protégée
  **/
 function protege_champ($texte) {
 	if (is_array($texte)) {
-		$texte = array_map('protege_champ', $texte);
-	} else {
-		// ne pas corrompre une valeur serialize
-		if ((preg_match(',^[abis]:\d+[:;],', $texte) and @unserialize($texte) != false) or is_null($texte)) {
+		return array_map('protege_champ', $texte);
+	} elseif ($texte === null) {
+		return $texte;
+	} elseif (is_bool($texte)) {
+		return $texte ? '1' : '';
+	} elseif (is_string($texte) and $texte) {
+		if (preg_match(',^[abis]:\d+[:;],', $texte) and @unserialize($texte) !== false) {
+			// ne pas corrompre une valeur serialize
 			return $texte;
-		}
-		if (
-			is_string($texte)
-			and $texte
-			and strpbrk($texte, "&\"'<>") !== false
-		) {
-			$texte = spip_htmlspecialchars($texte, ENT_QUOTES);
-		} elseif (is_bool($texte)) {
-			$texte = ($texte ? '1' : '');
+		} elseif (strpbrk($texte, "&\"'<>") !== false) {
+			return spip_htmlspecialchars($texte, ENT_QUOTES);
 		}
 	}
 
