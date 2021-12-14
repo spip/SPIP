@@ -589,8 +589,8 @@ function parametre_url($url, $c, $v = null, $sep = '&amp;') {
 
 	$regexp = ',^(' . str_replace('[]', '\[\]', $c) . '[[]?[]]?)(=.*)?$,';
 	$ajouts = array_flip(explode('|', $c));
-	$u = is_array($v) ? $v : rawurlencode($v);
-	$testv = (is_array($v) ? count($v) : strlen($v));
+	$u = is_array($v) ? $v : rawurlencode((string) $v);
+	$testv = (is_array($v) ? count($v) : strlen((string) $v));
 	$v_read = null;
 	// lire les variables et agir
 	foreach ($url as $n => $val) {
