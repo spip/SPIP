@@ -1444,7 +1444,9 @@ function securiser_acces($id_auteur, $cle, $dir, $op = '', $args = '') {
  *     Retourne $texte, sinon $sinon.
  **/
 function sinon($texte, $sinon = '') {
-	if ($texte or (!is_array($texte) and strlen($texte))) {
+	if ($texte) {
+		return $texte;
+	} elseif (is_scalar($texte) and strlen($texte)) {
 		return $texte;
 	} else {
 		return $sinon;
