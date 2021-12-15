@@ -215,11 +215,8 @@ function critere_debut_dist($idb, &$boucles, $crit) {
 	$un = $un[0]->texte;
 	$deux = $deux[0]->texte;
 	if ($deux) {
-		$boucles[$idb]->limit = 'intval($Pile[0]["debut' .
-			$un .
-			'"]) . ",' .
-			$deux .
-			'"';
+		$boucles[$idb]->limit = 
+			'intval($Pile[0]["debut' . $un . '"]) . ",' . $deux . '"';
 	} else {
 		calculer_critere_DEFAUT_dist($idb, $boucles, $crit);
 	}
