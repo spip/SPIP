@@ -46,13 +46,13 @@ function array_set_merge(&$table, $index, $valeur) {
  * Elle est auto-declarée si inconnue jusqu'alors.
  *
  * @api
- * @param string $table_sql
+ * @param string|null $table_sql
  *   table_sql demandee explicitement
  * @param array $desc
  *   description connue de la table sql demandee
  * @return array|bool
  */
-function lister_tables_objets_sql($table_sql = null, $desc = []) {
+function lister_tables_objets_sql(?string $table_sql = null, $desc = []) {
 	static $deja_la = false;
 	static $infos_tables = null;
 	static $md5 = null;

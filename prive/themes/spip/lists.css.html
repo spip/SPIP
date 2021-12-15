@@ -191,7 +191,7 @@
 .liste-objets table .caption {
 	border-bottom: 1px solid var(--spip-box-sep-color);
 }
-<BOUCLE_objets(DATA){source table, #REM|lister_tables_objets_sql}>
+<BOUCLE_objets(DATA){source table, #NULL|lister_tables_objets_sql}>
 [.liste-objets.[(#VALEUR{table_objet})] .caption {
 	background-image: url((#CHEMIN_IMAGE{#VALEUR{icone_objet}|concat{-24.png}}));
 	padding-#LEFT: var(--spip-list-heading-iconpadding);
@@ -890,7 +890,7 @@
 	background-position: center var(--spip-left);
 	background-repeat: no-repeat;
 }
-<BOUCLE_objets2(DATA){source table, #REM|lister_tables_objets_sql}{cle!=spip_rubriques}>
+<BOUCLE_objets2(DATA){source table, #NULL|lister_tables_objets_sql}{cle!=spip_rubriques}>
 .plan .menu-items.[(#VALEUR{table_objet})] .item > a {
 	padding-#LEFT: 20px;
 	[background-image: url((#CHEMIN_IMAGE{#VALEUR{icone_objet}-16.png}));]

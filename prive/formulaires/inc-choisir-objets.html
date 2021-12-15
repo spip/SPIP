@@ -1,4 +1,4 @@
-#SET{traductions,#ARRAY}<BOUCLE_objets(DATA){source table, #REM|lister_tables_objets_sql}{cle !IN #ENV{exclus,''}}>[(#EDITABLE|oui)
+#SET{traductions,#ARRAY}<BOUCLE_objets(DATA){source table, #NULL|lister_tables_objets_sql}{cle !IN #ENV{exclus,''}}>[(#EDITABLE|oui)
 [(#SET{traductions,#GET{traductions}|array_merge{#ARRAY{#CLE,#TEXTE_OBJETS|_T}}})]
 ]</BOUCLE_objets><BOUCLE_par_traduction(DATA){source table, #GET{traductions}}{par valeur}>
 #SET{id,#ENV{name}|replace{\W,'_'}|concat{'_',#CLE}}

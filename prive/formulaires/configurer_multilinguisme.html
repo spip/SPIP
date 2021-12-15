@@ -50,7 +50,7 @@
 				</fieldset>
 			</div>
 			]
-			<BOUCLE_objets(DATA){source table, #REM|lister_tables_objets_sql}{cle!=spip_rubriques}{cle!=spip_auteurs}{si #ENV{editable}}>[(#CLE|table_supporte_lang|et{#VALEUR{type}|objet_info{editable}})
+			<BOUCLE_objets(DATA){source table, #NULL|lister_tables_objets_sql}{cle!=spip_rubriques}{cle!=spip_auteurs}{si #ENV{editable}}>[(#CLE|table_supporte_lang|et{#VALEUR{type}|objet_info{editable}})
 			#SET{val,#CLE}
 			<div class="fieldset">
 				<fieldset>
