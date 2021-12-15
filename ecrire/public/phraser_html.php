@@ -191,8 +191,8 @@ function phraser_idiomes($texte, $ligne, $result) {
 		$champ->module = $match[2];
 		// pas d'imbrication pour les filtres sur langue
 		$pos_apres = 0;
-		phraser_args($match[7], ':', '', [], $champ, $pos_apres);
-		$champ->apres = substr($match[7], $pos_apres);
+		phraser_args($match[7] ?? '', ':', '', [], $champ, $pos_apres);
+		$champ->apres = substr($match[7] ?? '', $pos_apres);
 		$result[] = $champ;
 	}
 	if ($texte !== '') {
@@ -295,7 +295,7 @@ function phraser_champs_etendus($texte, $ligne, $result) {
  * @param int $pos_debut
  * @return array
  */
-function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ, &$pos_debut) {
+function phraser_args(string $texte, $fin, $sep, $result, &$pointeur_champ, &$pos_debut) {
 	$length = strlen($texte);
 	while ($pos_debut < $length and trim($texte[$pos_debut]) === '') {
 		$pos_debut++;

@@ -1010,12 +1010,16 @@ function lister_toutes_tables($serveur) {
  * @return string
  *     Nom de l'objet
  **/
-function table_objet($type, $serveur = '') {
-	$surnoms = lister_tables_objets_surnoms();
-	$type = preg_replace(',^spip_|^id_|s$,', '', $type);
-	if (!$type) {
-		return;
+function table_objet(string $type, string $serveur = '') : string {
+
+	if ($type) {
+		$type = preg_replace(',^spip_|^id_|s$,', '', $type);
 	}
+	if (!strlen($type)) {
+		return '';
+	}
+
+	$surnoms = lister_tables_objets_surnoms();
 	if (isset($surnoms[$type])) {
 		return $surnoms[$type];
 	}
@@ -1059,9 +1063,12 @@ function table_objet($type, $serveur = '') {
  * @return string
  *     Nom de la table SQL
  **/
-function table_objet_sql($type, $serveur = '') {
+function table_objet_sql(string $type, string $serveur = '') : string {
 
 	$nom = table_objet($type, $serveur);
+	if (!strlen($nom)) {
+		return '';
+	}
 	if (!isset($GLOBALS['table_des_tables']['articles'])) {
 		// eviter de multiples inclusions
 		include_spip('public/interfaces');
