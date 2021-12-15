@@ -1264,7 +1264,7 @@ function _image_tag_changer_taille($tag, $width, $height, $style = false) {
 		$tag = inserer_attribut($tag, 'hspace', '');
 	}
 
-	$tag = inserer_attribut($tag, 'style', $style, true, $style ? false : true);
+	$tag = inserer_attribut($tag, 'style', (string) $style, true, $style ? false : true);
 
 	return $tag;
 }
