@@ -2009,7 +2009,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 
 	$boucle = &$boucles[$idb];
 	$type = $boucle->type_requete;
-	$table = $boucle->id_table;
+	$table = $boucle->id_table ?? '';
 	$desc = $boucle->show;
 	$col_vraie = null;
 
