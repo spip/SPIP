@@ -240,7 +240,7 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 			$code,
 			$contexte,
 			implode(',', $_options),
-			'_request("connect")'
+			"_request(\\'connect\\') ?? \\'\\'"
 		) . ';';
 	}
 
@@ -721,7 +721,7 @@ function memoriser_contexte_compil($p) {
 	return join(',', [
 		_q(isset($p->descr['sourcefile']) ? $p->descr['sourcefile'] : ''),
 		_q(isset($p->descr['nom']) ? $p->descr['nom'] : ''),
-		_q(isset($p->id_boucle) ? $p->id_boucle : null),
+		_q(isset($p->id_boucle) ? $p->id_boucle : ''),
 		intval($p->ligne),
 		'$GLOBALS[\'spip_lang\']'
 	]);

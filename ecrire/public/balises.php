@@ -2021,7 +2021,7 @@ function balise_INCLURE_dist($p) {
 			$_l = "array_merge(\$Pile[0],$_l)";
 		}
 
-		$p->code = sprintf(CODE_RECUPERER_FOND, $f, $_l, join(',', $_options), "_request('connect')");
+		$p->code = sprintf(CODE_RECUPERER_FOND, $f, $_l, join(',', $_options), "_request('connect') ?? ''");
 	} elseif (!isset($_contexte[1])) {
 		$msg = ['zbug_balise_sans_argument', ['balise' => ' INCLURE']];
 		erreur_squelette($msg, $p);
