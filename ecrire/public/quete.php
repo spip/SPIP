@@ -707,3 +707,20 @@ function quete_debut_pagination($primary, $valeur, $pas, $iter) {
 	// sinon, calculer le bon numero de page
 	return floor($pos / $pas) * $pas;
 }
+
+/**
+ * Retourne true si ce where doit être appliqué,
+ * dans le cas des critères avec ? tel que `{id_article ?}`
+ *
+ * @param mixed $value
+ * @return boolean
+ */
+function is_whereable($value) : bool {
+	if (is_array($value) && count($value)) {
+		return true;
+	}
+	if (is_scalar($value) && strlen($value)) {
+		return true;
+	}
+	return false;
+}

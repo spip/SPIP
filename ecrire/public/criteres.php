@@ -1941,13 +1941,13 @@ function calculer_critere_DEFAUT_args($idb, &$boucles, $crit, $args) {
 	// traiter a part la date, elle est mise d'office par SPIP,
 	if ($crit->cond) {
 		$pred = calculer_argument_precedent($idb, $col, $boucles);
-		if ($col == 'date' or $col == 'date_redac') {
-			if ($pred == "\$Pile[0]['" . $col . "']") {
+		if ($col === 'date' or $col === 'date_redac') {
+			if ($pred === "\$Pile[0]['" . $col . "']") {
 				$pred = "(\$Pile[0]['{$col}_default']?'':$pred)";
 			}
 		}
 
-		if ($op == '=' and !$crit->not) {
+		if ($op === '=' and !$crit->not) {
 			$where = [
 				"'?'",
 				"(is_array($pred))",
@@ -1955,10 +1955,10 @@ function calculer_critere_DEFAUT_args($idb, &$boucles, $crit, $args) {
 				$where
 			];
 		}
-		$where = ["'?'", "!(is_array($pred)?count($pred):strlen($pred))", "''", $where];
+		$where = ["'?'", "!is_whereable($pred)", "''", $where];
 		if ($where_complement) { 
 			// condition annexe du type "AND (objet='article')"
-			$where_complement = ["'?'", "!(is_array($pred)?count($pred):strlen($pred))", "''", $where_complement];
+			$where_complement = ["'?'", "!is_whereable($pred)", "''", $where_complement];
 		}
 	}
 
