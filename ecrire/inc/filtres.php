@@ -494,7 +494,7 @@ function filtre_debug($val, $key = null) {
 function image_filtrer($args) {
 	$filtre = array_shift($args); # enlever $filtre
 	$texte = array_shift($args);
-	if (!strlen($texte)) {
+	if ($texte === null || !strlen($texte)) {
 		return;
 	}
 	find_in_path('filtres_images_mini.php', 'inc/', true);
