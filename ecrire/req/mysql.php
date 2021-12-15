@@ -241,8 +241,14 @@ function spip_mysql_query($query, $serveur = '', $requeter = true) {
 		}
 		$debug = ' /* ' . mysqli_real_escape_string($link, str_replace('*/', '@/', $debug)) . ' */';
 	}
-
-	$r = mysqli_query($link, $query . $debug);
+	try {
+		$r = mysqli_query($link, $query . $debug);
+	} catch (\mysqli_sql_exception $e) {
+		spip_log('mysqli_sql_exception: ' . $e->getMessage(), 'mysql.' . _LOG_DEBUG);
+		$r = false;
+		// Todo: utiliser l’exception ensuite plutôt que les appels à spip_mysql_errno()
+		// mais il faut pour php < 8.1 forcer les exeptions via mysqli_report().
+	}
 
 	//Eviter de propager le GoneAway sur les autres requetes d'un même processus PHP
 	if ($e = spip_mysql_errno($serveur)) {  // Log d'un Gone Away
