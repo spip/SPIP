@@ -2498,7 +2498,7 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit) {
 				// pour eviter l'erreur SQL
 				$val = $boucles[$idb]->primary;
 				// mais si pas de boucle superieure, prendre id_parent dans l'env
-				$defaut = "@\$Pile[0]['id_parent']";
+				$defaut = "(\$Pile[0]['id_parent'] ?? null)";
 			} elseif ($val == 'id_enfant') {
 				// Si id_enfant, comparer l'id_objet avec l'id_parent
 				// de la boucle superieure
