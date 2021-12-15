@@ -352,7 +352,7 @@ function argumenter_squelette($v) {
 	if (is_object($v)) {
 		return var_export($v, true);
 	} elseif (!is_array($v)) {
-		return "'" . texte_script($v) . "'";
+		return "'" . texte_script((string) $v) . "'";
 	} else {
 		$out = [];
 		foreach ($v as $k => $val) {
