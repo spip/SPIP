@@ -124,7 +124,7 @@ function index_pile(
 	$select = true
 ) {
 	if (!is_string($defaut)) {
-		$defaut = '@$Pile[0][\'' . strtolower($nom_champ) . '\']';
+		$defaut = '($Pile[0][\'' . strtolower($nom_champ) . '\'] ?? null)';
 	}
 
 	$idb_origine = $idb;
@@ -943,7 +943,7 @@ function calculer_argument_precedent($idb, $nom_champ, &$boucles, $defaut = null
 		index_pile($idb, $nom_champ, $boucles, '', $defaut);
 		// retourner $Pile[$SP] et pas $Pile[0] si recursion en 1ere boucle
 		// on ignore le defaut fourni dans ce cas
-		$defaut = "@\$Pile[\$SP]['$nom_champ']";
+		$defaut = "(\$Pile[\$SP]['$nom_champ'] ?? null)";
 	}
 
 	return index_pile($boucles[$idb]->id_parent, $nom_champ, $boucles, '', $defaut);

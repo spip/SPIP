@@ -268,10 +268,7 @@ function balise_PUCE_dist($p) {
  *     Pile completée du code PHP d'exécution de la balise
  */
 function balise_DATE_dist($p) {
-	$d = champ_sql('date', $p);
-#	if ($d === "@\$Pile[0]['date']")
-#		$d = "isset(\$Pile[0]['date']) ? $d : time()";
-	$p->code = $d;
+	$p->code = champ_sql('date', $p);
 
 	return $p;
 }
@@ -293,10 +290,7 @@ function balise_DATE_dist($p) {
  *     Pile completée du code PHP d'exécution de la balise
  */
 function balise_DATE_REDAC_dist($p) {
-	$d = champ_sql('date_redac', $p);
-#	if ($d === "@\$Pile[0]['date_redac']")
-#		$d = "isset(\$Pile[0]['date_redac']) ? $d : time()";
-	$p->code = $d;
+	$p->code = champ_sql('date_redac', $p);
 	$p->interdire_scripts = false;
 
 	return $p;
@@ -2518,10 +2512,10 @@ function balise_AIDER_dist($p) {
  **/
 function balise_ACTION_FORMULAIRE($p) {
 	if (!$_url = interprete_argument_balise(1, $p)) {
-		$_url = "@\$Pile[0]['action']";
+		$_url = "(\$Pile[0]['action'] ?? '')";
 	}
 	if (!$_form = interprete_argument_balise(2, $p)) {
-		$_form = "@\$Pile[0]['form']";
+		$_form = "(\$Pile[0]['form'] ?? '')";
 	}
 
 	// envoyer le nom du formulaire que l'on traite
@@ -2531,10 +2525,10 @@ function balise_ACTION_FORMULAIRE($p) {
 	'<input name=\'formulaire_action\' type=\'hidden\'
 		value=\'' . $_form . '\' />' .
 	'<input name=\'formulaire_action_args\' type=\'hidden\'
-		value=\'' . @\$Pile[0]['formulaire_args']. '\' />' .
+		value=\'' . (\$Pile[0]['formulaire_args'] ?? '') . '\' />' .
 	'<input name=\'formulaire_action_sign\' type=\'hidden\'
-		value=\'' . @\$Pile[0]['formulaire_sign']. '\' />' .
-	(!empty(\$Pile[0]['_hidden']) ? @\$Pile[0]['_hidden'] : '') .
+		value=\'' . (\$Pile[0]['formulaire_sign'] ?? '') . '\' />' .
+	(\$Pile[0]['_hidden'] ?? '') .
 	'</span>'";
 
 	$p->interdire_scripts = false;
