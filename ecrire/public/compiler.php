@@ -1289,7 +1289,7 @@ function compile_inclure_doublons($lexemes) {
 // En cas d'erreur, elle retournera un tableau des 2 premiers elements seulement
 
 // https://code.spip.net/@public_compiler_dist
-function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect = '') {
+function public_compiler_dist($squelette, $nom, $gram, $sourcefile, string $connect = '') {
 	// Pre-traitement : reperer le charset du squelette, et le convertir
 	// Bonus : supprime le BOM
 	include_spip('inc/charsets');
@@ -1373,7 +1373,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect = '
 // Point d'entree pour arbre de syntaxe abstraite fourni en premier argument
 // Autres specifications comme ci-dessus
 
-function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $connect = '') {
+function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, string $connect = '') {
 	static $trouver_table;
 	spip_timer('calcul_skel');
 

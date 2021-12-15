@@ -29,7 +29,7 @@ if (!defined('_CONTEXTE_IGNORE_VARIABLES')) {
 }
 
 // https://code.spip.net/@assembler
-function assembler($fond, $connect = '') {
+function assembler($fond, string $connect = '') {
 
 	// flag_preserver est modifie ici, et utilise en globale
 	// use_cache sert a informer le bouton d'admin pr savoir s'il met un *
@@ -270,7 +270,7 @@ function auto_content_type($page) {
 }
 
 // https://code.spip.net/@inclure_page
-function inclure_page($fond, $contexte, $connect = '') {
+function inclure_page($fond, $contexte, string $connect = '') {
 	static $cacher, $produire_page;
 
 	// enlever le fond de contexte inclus car sinon il prend la main
@@ -605,7 +605,7 @@ function styliser_modele($modele, $id, $contexte = null) {
  * @staticvar string $compteur
  * @return string
  */
-function inclure_modele($type, $id, $params, $lien, $connect = '', $env = []) {
+function inclure_modele($type, $id, $params, $lien, string $connect = '', $env = []) {
 
 	static $compteur;
 	if (++$compteur > 10) {
@@ -710,7 +710,7 @@ function inclure_modele($type, $id, $params, $lien, $connect = '', $env = []) {
 // pour recuperer $page complet, utiliser:
 // 	recuperer_fond($fond,$contexte,array('raw'=>true))
 // https://code.spip.net/@evaluer_fond
-function evaluer_fond($fond, $contexte = [], $connect = null) {
+function evaluer_fond($fond, $contexte = [], string $connect = '') {
 
 	$page = inclure_page($fond, $contexte, $connect);
 

@@ -56,7 +56,7 @@ function quete_virtuel($id_article, $connect) {
  * @param string $connect
  * @return array
  */
-function quete_parent_lang($table, $id, $connect = '') {
+function quete_parent_lang($table, $id, string $connect = '') {
 	static $cache_quete = [];
 
 	if (!isset($cache_quete[$connect][$table][$id])) {
@@ -107,7 +107,7 @@ function quete_parent_lang($table, $id, $connect = '') {
  * @param string $connect
  * @return int
  */
-function quete_parent($id_rubrique, $connect = '') {
+function quete_parent($id_rubrique, string $connect = '') {
 	if (!$id_rubrique = intval($id_rubrique)) {
 		return 0;
 	}
@@ -143,7 +143,7 @@ function quete_rubrique($id_article, $serveur) {
  * @param string $connect
  * @return int
  */
-function quete_profondeur($id, $connect = '') {
+function quete_profondeur($id, string $connect = '') {
 	$n = 0;
 	while ($id) {
 		$n++;
@@ -507,7 +507,7 @@ function quete_logo_file($row, $connect = null) {
  *   serveur
  * @return string
  */
-function quete_logo_document($row, $lien, $align, $mode_logo, $x, $y, $connect = null) {
+function quete_logo_document($row, $lien, $align, $mode_logo, $x, $y, string $connect = '') {
 
 	include_spip('inc/documents');
 	$logo = '';
@@ -579,7 +579,7 @@ function document_spip_externe($fichier, $connect) {
  * @param string $connect
  * @return string
  */
-function vignette_logo_document($row, $connect = '') {
+function vignette_logo_document($row, string $connect = '') {
 	if (!$row['id_vignette']) {
 		return '';
 	}
@@ -611,7 +611,7 @@ function vignette_logo_document($row, $connect = '') {
  * @param string $connect
  * @return bool|string
  */
-function calcul_exposer($id, $prim, $reference, $parent, $type, $connect = '') {
+function calcul_exposer($id, $prim, $reference, $parent, $type, string $connect = '') {
 	static $exposer = [];
 
 	// Que faut-il exposer ? Tous les elements de $reference

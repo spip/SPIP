@@ -190,10 +190,11 @@ function auth_spip_formulaire_login($flux) {
  * @return bool
  *   toujours true pour un auteur cree dans SPIP
  */
-function auth_spip_autoriser_modifier_login($serveur = '') {
+function auth_spip_autoriser_modifier_login(string $serveur = '') : bool {
+	// les fonctions d'ecriture sur base distante sont encore incompletes
 	if (strlen($serveur)) {
 		return false;
-	} // les fonctions d'ecriture sur base distante sont encore incompletes
+	} 
 	return true;
 }
 
@@ -353,10 +354,11 @@ function auth_spip_informer_login($infos, $row, $serveur = '') {
  * @return bool
  *  toujours true pour un auteur cree dans SPIP
  */
-function auth_spip_autoriser_modifier_pass($serveur = '') {
+function auth_spip_autoriser_modifier_pass(string $serveur = '') : bool {
+	// les fonctions d'ecriture sur base distante sont encore incompletes
 	if (strlen($serveur)) {
 		return false;
-	} // les fonctions d'ecriture sur base distante sont encore incompletes
+	} 
 	return true;
 }
 
@@ -439,7 +441,7 @@ function auth_spip_modifier_pass($login, $new_pass, $id_auteur, $serveur = '') {
  * @param string $serveur
  * @return void
  */
-function auth_spip_synchroniser_distant($id_auteur, $champs, $options = [], $serveur = '') {
+function auth_spip_synchroniser_distant($id_auteur, $champs, $options = [], string $serveur = '') : void {
 	// ne rien faire pour une base distante : on ne sait pas regenerer les htaccess
 	if (strlen($serveur)) {
 		return;

@@ -41,7 +41,7 @@ include_spip('public/quete');
 # Toutefois pour 2. et 3. preferer la technique de la surcharge
 
 // https://code.spip.net/@public_composer_dist
-function public_composer_dist($squelette, $mime_type, $gram, $source, $connect = '') {
+function public_composer_dist($squelette, $mime_type, $gram, $source, string $connect = '') {
 
 	$nom = calculer_nom_fonction_squel($squelette, $mime_type, $connect);
 
@@ -1044,7 +1044,7 @@ function remplacer_jointnul($cle, $exp, $equiv = '') {
 
 // calcul du nom du squelette
 // https://code.spip.net/@calculer_nom_fonction_squel
-function calculer_nom_fonction_squel($skel, $mime_type = 'html', $connect = '') {
+function calculer_nom_fonction_squel($skel, $mime_type = 'html', string $connect = '') {
 	// ne pas doublonner les squelette selon qu'ils sont calcules depuis ecrire/ ou depuis la racine
 	if ($l = strlen(_DIR_RACINE) and strncmp($skel, _DIR_RACINE, $l) == 0) {
 		$skel = substr($skel, strlen(_DIR_RACINE));
