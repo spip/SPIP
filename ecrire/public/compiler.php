@@ -676,10 +676,11 @@ function calculer_requete_sql($boucle) {
 	$init[] = calculer_dec('join', calculer_dump_join($boucle->join));
 	$init[] = calculer_dec(
 		'limit',
-		(strpos($boucle->limit, 'intval') === false ?
-			"'" . $boucle->limit . "'"
-			:
-		$boucle->limit)
+		(
+			strpos($boucle->limit, 'intval') === false ?
+			"'" . ($boucle->limit) . "'" :
+			$boucle->limit
+		)
 	);
 	$init[] = calculer_dec('having', calculer_dump_array($boucle->having));
 	$s = $d = '';
