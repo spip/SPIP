@@ -206,7 +206,7 @@ a.rub-ouverte {
 /* ----- */
 
 /* Les éléments propres à chaque objet */
-<BOUCLE_objets(DATA){source table, (#REM|lister_tables_objets_sql)}>
+<BOUCLE_objets(DATA){source table, (#NULL|lister_tables_objets_sql)}>
 [(#SET{petite_icone, [(#CHEMIN_IMAGE{#VALEUR{icone_objet}-12.png}|sinon{[(#CHEMIN_IMAGE{#VALEUR{icone_objet}-16.png}|image_reduire{12}|extraire_attribut{src})]})]})]
 ul.item_picked li.#VALEUR{type} {padding-#GET{left}:24px;background-image:url(#GET{petite_icone});background-size:12px;}
 .item_picker .[(#VALEUR{table_objet})] .type_objet {padding-#GET{left}:24px; background:url(#GET{petite_icone}) no-repeat[ (#GET{left}) ]center; background-size:12px;}
