@@ -19,7 +19,7 @@ if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},rss,#ENV{op}, #ENV{args}}|?{1,0})]) {
 		<description>[(#INTRODUCTION|texte_backend)]</description>
 	</item>
 </BOUCLE_A>
-<BOUCLE_objets(DATA){source table, #REM|lister_tables_objets_sql}>
+<BOUCLE_objets(DATA){source table, #NULL|lister_tables_objets_sql}>
 	#SET{fond,#VAL{prive/rss/a_suivre-}|concat{#VALEUR{table_objet}}}
 	[(#GET{fond}|trouver_fond|oui)#INCLURE*{fond=#GET{fond}}]
 </BOUCLE_objets>
