@@ -161,7 +161,7 @@ function filtre_pagination_dist(
 	$pas,
 	$liste = true,
 	$modele = '',
-	$connect = '',
+	string $connect = '',
 	$env = []
 ) {
 	static $ancres = [];
