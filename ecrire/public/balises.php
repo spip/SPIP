@@ -47,7 +47,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return string|null
  *     Code PHP si cet argument est présent, sinon null
  **/
-function interprete_argument_balise($n, $p) {
+function interprete_argument_balise(int $n, Champ $p) : ?string {
 	if (($p->param) && (!$p->param[0][0]) && (count($p->param[0]) > $n)) {
 		return calculer_liste(
 			$p->param[0][$n],
@@ -1652,7 +1652,7 @@ function balise_CHAMP_SQL_dist($p) {
  **/
 function balise_VAL_dist($p) {
 	$p->code = interprete_argument_balise(1, $p);
-	if (!strlen($p->code)) {
+	if ($p->code === null || !strlen($p->code)) {
 		$p->code = "''";
 	}
 	$p->interdire_scripts = false;
