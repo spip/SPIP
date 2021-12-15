@@ -1926,9 +1926,9 @@ function calculer_critere_DEFAUT_args($idb, &$boucles, $crit, $args) {
 	if ($crit->exclus) {
 		if (!preg_match(',^L[0-9]+[.],', $arg)) {
 			$where = ["'NOT'", $where];
-		} else // un not sur un critere de jointure se traduit comme un NOT IN avec une sous requete
+		} else {
+			// un not sur un critere de jointure se traduit comme un NOT IN avec une sous requete
 			// c'est une sous requete identique a la requete principale sous la forme (SELF,$select,$where) avec $select et $where qui surchargent
-		{
 			$where = [
 				"'NOT'",
 				[
@@ -1959,14 +1959,16 @@ function calculer_critere_DEFAUT_args($idb, &$boucles, $crit, $args) {
 			];
 		}
 		$where = ["'?'", "!(is_array($pred)?count($pred):strlen($pred))", "''", $where];
-		if ($where_complement) { // condition annexe du type "AND (objet='article')"
-		$where_complement = ["'?'", "!(is_array($pred)?count($pred):strlen($pred))", "''", $where_complement];
+		if ($where_complement) { 
+			// condition annexe du type "AND (objet='article')"
+			$where_complement = ["'?'", "!(is_array($pred)?count($pred):strlen($pred))", "''", $where_complement];
 		}
 	}
 
 	$boucles[$idb]->where[] = $where;
-	if ($where_complement) { // condition annexe du type "AND (objet='article')"
-	$boucles[$idb]->where[] = $where_complement;
+	if ($where_complement) { 
+		// condition annexe du type "AND (objet='article')"
+		$boucles[$idb]->where[] = $where_complement;
 	}
 }
 
