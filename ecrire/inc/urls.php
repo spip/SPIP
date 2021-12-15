@@ -248,7 +248,7 @@ function nettoyer_url_page($url, $contexte = []) {
  * @return string
  *
  */
-function generer_url_ecrire_objet($objet, $id, $args = '', $ancre = '', $public = null, $connect = '') {
+function generer_url_ecrire_objet($objet, $id, $args = '', $ancre = '', $public = null, string $connect = '') {
 	static $furls = [];
 	if (!isset($furls[$objet])) {
 		if (

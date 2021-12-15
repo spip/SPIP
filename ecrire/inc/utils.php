@@ -3286,7 +3286,7 @@ function erreur_squelette($message = '', $lieu = '') {
  *     - Contenu du squelette calculé
  *     - ou tableau d'information sur le squelette.
  */
-function recuperer_fond($fond, $contexte = [], $options = [], $connect = '') {
+function recuperer_fond($fond, $contexte = [], $options = [], string $connect = '') {
 	if (!function_exists('evaluer_fond')) {
 		include_spip('public/assembler');
 	}

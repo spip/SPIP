@@ -4794,7 +4794,7 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile = '', $param
  *     Nom du connecteur à la base de données
  * @return string
  */
-function generer_introduction_entite($id_objet, $type_objet, $ligne_sql, $introduction_longueur = null, $longueur_ou_suite = null, $suite = null, $connect = '') {
+function generer_introduction_entite($id_objet, $type_objet, $ligne_sql, $introduction_longueur = null, $longueur_ou_suite = null, $suite = null, string $connect = '') {
 
 	$descriptif = $ligne_sql['descriptif'] ?? '';
 	$texte = $ligne_sql['texte'] ?? '';
@@ -4838,7 +4838,7 @@ function generer_introduction_entite($id_objet, $type_objet, $ligne_sql, $introd
  * @param string $connect
  * @return string
  */
-function appliquer_traitement_champ($texte, $champ, $table_objet = '', $env = [], $connect = '') {
+function appliquer_traitement_champ($texte, $champ, $table_objet = '', $env = [], string $connect = '') {
 	if (!$champ) {
 		return $texte;
 	}
@@ -5110,7 +5110,7 @@ function insert_head_css_conditionnel($flux) {
  * @param string $connect
  * @return string
  */
-function produire_fond_statique($fond, $contexte = [], $options = [], $connect = '') {
+function produire_fond_statique($fond, $contexte = [], $options = [], string $connect = '') {
 	if (isset($contexte['format'])) {
 		$extension = $contexte['format'];
 		unset($contexte['format']);

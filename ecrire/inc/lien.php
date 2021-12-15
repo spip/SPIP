@@ -29,7 +29,7 @@ function inc_lien_dist(
 	$title = '',
 	$hlang = '',
 	$rel = '',
-	$connect = '',
+	string $connect = '',
 	$env = []
 ) {
 	return $lien;
@@ -42,7 +42,7 @@ function inc_lien_dist(
 define('_RACCOURCI_LIEN', '/\[([^][]*?([[]\w*[]][^][]*)*)->(>?)([^]]*)\]/msS');
 
 // https://code.spip.net/@expanser_liens
-function expanser_liens($t, $connect = '', $env = []) {
+function expanser_liens($t, string $connect = '', $env = []) {
 
 	$t = pipeline('pre_liens', $t);
 
@@ -56,7 +56,7 @@ function expanser_liens($t, $connect = '', $env = []) {
 // Meme analyse mais pour eliminer les liens
 // et ne laisser que leur titre, a expliciter si ce n'est fait
 // https://code.spip.net/@nettoyer_raccourcis_typo
-function nettoyer_raccourcis_typo($texte, $connect = '') {
+function nettoyer_raccourcis_typo($texte, string $connect = '') {
 	return $texte;
 }
 
@@ -96,7 +96,7 @@ function virtuel_redirige($virtuel, $url = false) {
 // 'url':   seulement U  (i.e. generer_url_RACCOURCI)
 
 // https://code.spip.net/@calculer_url
-function calculer_url($ref, $texte = '', $pour = 'url', $connect = '', $echappe_typo = true) {
+function calculer_url($ref, $texte = '', $pour = 'url', string $connect = '', $echappe_typo = true) {
 	$r = traiter_lien_implicite($ref, $texte, $pour, $connect, $echappe_typo);
 
 	return $r ? $r : traiter_lien_explicite($ref, $texte, $pour, $connect, $echappe_typo);
@@ -105,7 +105,7 @@ function calculer_url($ref, $texte = '', $pour = 'url', $connect = '', $echappe_
 define('_EXTRAIRE_LIEN', ',^\s*(?:' . _PROTOCOLES_STD . '):?/?/?\s*$,iS');
 
 // https://code.spip.net/@traiter_lien_explicite
-function traiter_lien_explicite($ref, $texte = '', $pour = 'url', $connect = '', $echappe_typo = true) {
+function traiter_lien_explicite($ref, $texte = '', $pour = 'url', string $connect = '', $echappe_typo = true) {
 	if (preg_match(_EXTRAIRE_LIEN, $ref)) {
 		return ($pour != 'tout') ? '' : ['', '', '', ''];
 	}
@@ -146,7 +146,7 @@ function traiter_lien_explicite($ref, $texte = '', $pour = 'url', $connect = '',
 	return ['url' => $lien, 'titre' => $texte];
 }
 
-function liens_implicite_glose_dist($texte, $id, $type, $args, $ancre, $connect = '') {
+function liens_implicite_glose_dist($texte, $id, $type, $args, $ancre, string $connect = '') {
 	if (function_exists($f = 'glossaire_' . $ancre)) {
 		$url = $f($texte, $id);
 	} else {
@@ -157,7 +157,7 @@ function liens_implicite_glose_dist($texte, $id, $type, $args, $ancre, $connect 
 }
 
 // https://code.spip.net/@traiter_lien_implicite
-function traiter_lien_implicite($ref, $texte = '', $pour = 'url', $connect = '') {
+function traiter_lien_implicite($ref, $texte = '', $pour = 'url', string $connect = '') {
 	if (!($match = typer_raccourci($ref))) {
 		return false;
 	}
@@ -311,7 +311,7 @@ define(
 define('_RACCOURCI_MODELE_DEBUT', '@^' . _RACCOURCI_MODELE . '@isS');
 
 // https://code.spip.net/@traiter_modeles
-function traiter_modeles($texte, $doublons = false, $echap = '', $connect = '', $liens = null, $env = []) {
+function traiter_modeles($texte, $doublons = false, $echap = '', string $connect = '', $liens = null, $env = []) {
 	// preserver la compatibilite : true = recherche des documents
 	if ($doublons === true) {
 		$doublons = ['documents' => ['doc', 'emb', 'img']];
