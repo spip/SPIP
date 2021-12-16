@@ -1043,14 +1043,17 @@ function recuperer_numero($texte) {
  * @note
  *     Ce filtre supprime aussi les signes inférieurs `<` rencontrés.
  *
- * @param string $texte
+ * @param string|null $texte
  *     Texte à échapper
  * @param string $rempl
  *     Inutilisé.
  * @return string
  *     Texte converti
  **/
-function supprimer_tags($texte, $rempl = '') {
+function supprimer_tags(?string $texte, $rempl = '') : string {
+	if ($texte === null || !strlen($texte)) {
+		return '';
+	}
 	$texte = preg_replace(',<(!--|\w|/|!\[endif|!\[if)[^>]*>,US', $rempl, $texte);
 	// ne pas oublier un < final non ferme car coupe
 	$texte = preg_replace(',<(!--|\w|/).*$,US', $rempl, $texte);
