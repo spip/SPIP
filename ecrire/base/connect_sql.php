@@ -191,7 +191,11 @@ function spip_sql_erreur($serveur = '') {
  **/
 function spip_connect_sql($version, $ins = '', $serveur = '', $continue = false) {
 	$desc = spip_connect($serveur, $version);
-	if (function_exists($f = @$desc[$version][$ins])) {
+	if (
+		$desc 
+		and $f = ($desc[$version][$ins] ?? '')
+		and function_exists($f)
+	 ) {
 		return $f;
 	}
 	if ($continue) {
