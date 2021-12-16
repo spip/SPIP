@@ -1983,7 +1983,8 @@ function extraire_attribut($balise, $attribut, $complet = false) {
 		return $balise;
 	}
 	if (
-		preg_match(
+		$balise
+		&& preg_match(
 			',(^.*?<(?:(?>\s*)(?>[\w:.-]+)(?>(?:=(?:"[^"]*"|\'[^\']*\'|[^\'"]\S*))?))*?)(\s+'
 			. $attribut
 			. '(?:=\s*("[^"]*"|\'[^\']*\'|[^\'"]\S*))?)()((?:[\s/][^>]*)?>.*),isS',
@@ -2007,6 +2008,7 @@ function extraire_attribut($balise, $attribut, $complet = false) {
 		$att = filtrer_entites($att);
 	} else {
 		$att = null;
+		$r = [];
 	}
 
 	if ($complet) {
