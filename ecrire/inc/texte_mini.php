@@ -479,7 +479,7 @@ function echapper_faux_tags($letexte) {
 	if (strpos($letexte, '<') === false) {
 		return $letexte;
 	}
-	$textMatches = preg_split(',(</?[a-z!][^<>]*>),', $letexte, null, PREG_SPLIT_DELIM_CAPTURE);
+	$textMatches = preg_split(',(</?[a-z!][^<>]*>),', $letexte, -1, PREG_SPLIT_DELIM_CAPTURE);
 
 	$letexte = '';
 	while (count($textMatches)) {
