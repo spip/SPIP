@@ -2109,48 +2109,45 @@ function modifier_class($balise, $class, $operation = 'ajouter') {
 		$class = explode(' ', trim($class));
 	}
 	$class = array_filter($class);
+	$class = array_unique($class);
+	if (!$class) {
+		return $balise;
+	}
 
 	// si la ou les classes ont des caracteres invalides on ne fait rien
 	if (preg_match(',[^\w-],', implode('', $class))) {
 		return $balise;
 	}
 
-	if ($class) {
-		$class = array_unique($class);
-		$class_courante = extraire_attribut($balise, 'class');
-
-		$class_new = $class_courante;
-		foreach ($class as $c) {
-			if ($c) {
-				$is_class_presente = false;
-				if (
-					strpos($class_courante, $c) !== false
-					and preg_match('/(^|\s)' . preg_quote($c) . '($|\s)/', $class_courante)
-				) {
-					$is_class_presente = true;
-				}
-				if (
-					in_array($operation, ['ajouter', 'commuter'])
-					and !$is_class_presente
-				) {
-					$class_new = rtrim($class_new) . ' ' . $c;
-				}
-				elseif (
-					in_array($operation, ['supprimer', 'commuter'])
-					and $is_class_presente
-				) {
-					$class_new = trim(preg_replace('/(^|\s)' . preg_quote($c) . '($|\s)/', "\\1", $class_new));
-				}
-			}
+	$class_courante = extraire_attribut($balise, 'class');
+	$class_new = $class_courante;
+	foreach ($class as $c) {
+		$is_class_presente = false;
+		if (
+			$class_courante
+			and strpos($class_courante, $c) !== false
+			and preg_match('/(^|\s)' . preg_quote($c) . '($|\s)/', $class_courante)
+		) {
+			$is_class_presente = true;
 		}
+		if (
+			in_array($operation, ['ajouter', 'commuter'])
+			and !$is_class_presente
+		) {
+			$class_new = ltrim(rtrim($class_new ?? '') . ' ' . $c);
+		} elseif (
+			in_array($operation, ['supprimer', 'commuter'])
+			and $is_class_presente
+		) {
+			$class_new = trim(preg_replace('/(^|\s)' . preg_quote($c) . '($|\s)/', "\\1", $class_new));
+		}
+	}
 
-		if ($class_new !== $class_courante) {
-			if (strlen($class_new)) {
-				$balise = inserer_attribut($balise, 'class', $class_new);
-			}
-			elseif ($class_courante) {
-				$balise = vider_attribut($balise, 'class');
-			}
+	if ($class_new !== $class_courante) {
+		if (strlen($class_new)) {
+			$balise = inserer_attribut($balise, 'class', $class_new);
+		} elseif ($class_courante) {
+			$balise = vider_attribut($balise, 'class');
 		}
 	}
 
