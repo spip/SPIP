@@ -311,16 +311,16 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 		return false;
 	}
 
-	$source = trim(extraire_attribut($img, 'src'));
+	$source = trim(extraire_attribut($img, 'src') ?? '');
 	if (strlen($source) < 1) {
 		$source = $img;
 		$img = "<img src='$source' />";
-	} # gerer img src="data:....base64"
-	elseif (
+	} elseif (
 		preg_match('@^data:image/([^;]*);base64,(.*)$@isS', $source, $regs)
 		and $extension = _image_trouver_extension_depuis_mime('image/' . $regs[1])
 		and in_array($extension, _image_extensions_acceptees_en_entree())
 	) {
+		# gerer img src="data:....base64"
 		$local = sous_repertoire(_DIR_VAR, 'image-data') . md5($regs[2]) . '.' . _image_extension_normalisee($extension);
 		if (!file_exists($local)) {
 			ecrire_fichier($local, base64_decode($regs[2]));
