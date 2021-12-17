@@ -1049,7 +1049,7 @@ function distant_trouver_extension_selon_headers($source, $headers) {
 	}
 
 	// pour corriger_extension()
-	include_spip('action/ajouter_documents');
+	include_spip('inc/documents');
 
 	// Si on a un mime-type insignifiant
 	// text/plain,application/octet-stream ou vide
