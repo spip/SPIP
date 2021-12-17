@@ -406,11 +406,6 @@ parameters:
 			path: ecrire/req/sqlite_generique.php
 
 		-
-			message: "#^Function corriger_extension not found\\.$#"
-			count: 1
-			path: prive/formulaires/configurer_ecran_connexion.php
-
-		-
 			message: "#^Function serialise not found\\.$#"
 			count: 1
 			path: prive/formulaires/configurer_metas.php
