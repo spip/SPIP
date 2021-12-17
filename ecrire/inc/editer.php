@@ -177,8 +177,9 @@ function formulaires_editer_objet_verifier($type, $id = 'new', $oblis = []) {
  *     Type d'objet
  * @param int|string $id
  *     Identifiant de l'objet à éditer, 'new' pour un nouvel objet
- * @param int $id_parent
+ * @param int|null $id_parent
  *     Identifiant de l'objet parent
+ *     Si null, le calcule d’après le contexte.
  * @param int $lier_trad
  *     Identifiant de l'objet servant de source à une nouvelle traduction
  * @param string $retour
@@ -261,7 +262,7 @@ function formulaires_editer_objet_charger(
 	$row[$id_table_objet] = $id;
 
 	$contexte = $row;
-	if (strlen($id_parent) && is_numeric($id_parent) && (!isset($contexte['id_parent']) or $new)) {
+	if (is_numeric($id_parent) && strlen($id_parent) && (!isset($contexte['id_parent']) or $new)) {
 		if (!isset($contexte['id_parent'])) {
 			unset($contexte['id_rubrique']);
 		}
