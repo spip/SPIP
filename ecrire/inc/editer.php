@@ -476,19 +476,14 @@ function inc_titrer_contenu_dist($champs_contenu, $c = null, $longueur = 50) {
  * @param string $format
  *      - html : Retourne les contrôles sous forme de input hidden pour un formulaire
  *      - autre : Retourne le tableau ('$prefixe$colonne => md5)
- * @return bool|string|array
- *      - false si pas $data n'est pas un tableau
+ * @return string|array
  *      - string (avec format html) : contrôles dans des input hidden
  *      - array sinon couples ('$prefixe$colonne => md5)
  **/
-function controles_md5($data, $prefixe = 'ctr_', $format = 'html') {
-	if (!is_array($data)) {
-		return false;
-	}
-
+function controles_md5(array $data, string $prefixe = 'ctr_', string $format = 'html') {
 	$ctr = [];
 	foreach ($data as $key => $val) {
-		$m = md5($val);
+		$m = md5($val ?? '');
 		$k = $prefixe . $key;
 
 		switch ($format) {
@@ -501,7 +496,7 @@ function controles_md5($data, $prefixe = 'ctr_', $format = 'html') {
 		}
 	}
 
-	if ($format == 'html') {
+	if ($format === 'html') {
 		return "\n\n<!-- controles md5 -->\n" . join("\n", $ctr) . "\n\n";
 	} else {
 		return $ctr;
