@@ -909,7 +909,7 @@ function corriger_caracteres($texte) {
  * @return string
  *     Texte encodé pour XML
  */
-function texte_backend(string $texte) : string {
+function texte_backend(string $texte): string {
 	if ($texte === '') {
 		return '';
 	}
@@ -963,7 +963,7 @@ function texte_backend(string $texte) : string {
  * @return string
  *     Texte encodé et quote pour XML
  */
-function texte_backendq(string $texte) : string {
+function texte_backendq(string $texte): string {
 	return addslashes(texte_backend($texte));
 }
 
@@ -1050,7 +1050,7 @@ function recuperer_numero($texte) {
  * @return string
  *     Texte converti
  **/
-function supprimer_tags(?string $texte, $rempl = '') : string {
+function supprimer_tags(?string $texte, $rempl = ''): string {
 	if ($texte === null || !strlen($texte)) {
 		return '';
 	}
@@ -1333,7 +1333,7 @@ function taille_en_octets($taille) {
  * @return string
  *     Texte prêt pour être utilisé en attribut HTML
  **/
-function attribut_html(string $texte, $textebrut = true) : string {
+function attribut_html(string $texte, $textebrut = true): string {
 	$u = $GLOBALS['meta']['pcre_u'];
 	if ($textebrut) {
 		$texte = preg_replace([",\n,", ',\s(?=\s),msS' . $u], [' ', ''], textebrut($texte));
@@ -2046,7 +2046,7 @@ function extraire_attribut($balise, $attribut, $complet = false) {
  * @return string
  *     Code html modifié
  **/
-function inserer_attribut(string $balise, string $attribut, string $val, bool $proteger = true, bool $vider = false) : string {
+function inserer_attribut(string $balise, string $attribut, string $val, bool $proteger = true, bool $vider = false): string {
 	// preparer l'attribut
 	// supprimer les &nbsp; etc mais pas les balises html
 	// qui ont un sens dans un attribut value d'un input
@@ -2094,7 +2094,7 @@ function inserer_attribut(string $balise, string $attribut, string $val, bool $p
  * @param string $attribut Nom de l'attribut à enlever
  * @return string Code HTML sans l'attribut
  **/
-function vider_attribut(string $balise, string $attribut) : string {
+function vider_attribut(string $balise, string $attribut): string {
 	return inserer_attribut($balise, $attribut, '', false, true);
 }
 

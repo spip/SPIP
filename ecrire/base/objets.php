@@ -1010,7 +1010,7 @@ function lister_toutes_tables($serveur) {
  * @return string
  *     Nom de l'objet
  **/
-function table_objet(string $type, string $serveur = '') : string {
+function table_objet(string $type, string $serveur = ''): string {
 
 	if ($type) {
 		$type = preg_replace(',^spip_|^id_|s$,', '', $type);
@@ -1063,7 +1063,7 @@ function table_objet(string $type, string $serveur = '') : string {
  * @return string
  *     Nom de la table SQL
  **/
-function table_objet_sql(string $type, string $serveur = '') : string {
+function table_objet_sql(string $type, string $serveur = ''): string {
 
 	$nom = table_objet($type, $serveur);
 	if (!strlen($nom)) {

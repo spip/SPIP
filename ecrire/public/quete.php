@@ -715,7 +715,7 @@ function quete_debut_pagination($primary, $valeur, $pas, $iter) {
  * @param mixed $value
  * @return boolean
  */
-function is_whereable($value) : bool {
+function is_whereable($value): bool {
 	if (is_array($value) && count($value)) {
 		return true;
 	}

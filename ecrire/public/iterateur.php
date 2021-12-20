@@ -635,7 +635,7 @@ class IterDecorator extends FilterIterator {
 	 * Accepte-t-on l'entree courante lue ?
 	 * On execute les filtres pour le savoir.
 	 **/
-	public function accept() : bool {
+	public function accept(): bool {
 		if ($f = $this->func_filtre) {
 			return $f();
 		}
