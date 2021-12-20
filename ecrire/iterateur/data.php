@@ -531,7 +531,7 @@ class IterateurDATA implements Iterator {
 	 *
 	 * @return bool
 	 */
-	public function valid() : bool {
+	public function valid(): bool {
 		return !is_null($this->cle);
 	}
 

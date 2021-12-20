@@ -385,7 +385,7 @@ function spip_connect_ldap($serveur = '') {
  * @param num|string|array $a Valeur à échapper
  * @return string Valeur échappée.
  **/
-function _q($a) : string {
+function _q($a): string {
 	if (is_numeric($a)) {
 		return strval($a);
 	} elseif (is_array($a)) {

@@ -1305,7 +1305,7 @@ function http_script($script, $src = '', $noscript = '') {
  * @return string
  *     Texte échappé
  **/
-function texte_script(string $texte) : string {
+function texte_script(string $texte): string {
 	return str_replace('\'', '\\\'', str_replace('\\', '\\\\', $texte));
 }
 

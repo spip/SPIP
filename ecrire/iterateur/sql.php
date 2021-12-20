@@ -116,7 +116,7 @@ class IterateurSQL implements Iterator {
 	 *
 	 * @return bool
 	 */
-	public function valid() : bool {
+	public function valid(): bool {
 		if ($this->err) {
 			return false;
 		}

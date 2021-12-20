@@ -190,7 +190,7 @@ function auth_spip_formulaire_login($flux) {
  * @return bool
  *   toujours true pour un auteur cree dans SPIP
  */
-function auth_spip_autoriser_modifier_login(string $serveur = '') : bool {
+function auth_spip_autoriser_modifier_login(string $serveur = ''): bool {
 	// les fonctions d'ecriture sur base distante sont encore incompletes
 	if (strlen($serveur)) {
 		return false;
@@ -354,7 +354,7 @@ function auth_spip_informer_login($infos, $row, $serveur = '') {
  * @return bool
  *  toujours true pour un auteur cree dans SPIP
  */
-function auth_spip_autoriser_modifier_pass(string $serveur = '') : bool {
+function auth_spip_autoriser_modifier_pass(string $serveur = ''): bool {
 	// les fonctions d'ecriture sur base distante sont encore incompletes
 	if (strlen($serveur)) {
 		return false;
