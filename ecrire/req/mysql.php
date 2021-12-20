@@ -1639,9 +1639,10 @@ function spip_mysql_cite($v, $type) {
 	if (!$type) {
 		if (is_bool($v)) {
 			return strval(intval($v));
-		}
-		elseif (is_numeric($v)) {
+		} elseif (is_numeric($v)) {
 			return strval($v);
+		} elseif ($v === null) {
+			return 'NULL';
 		}
 		return "'" . addslashes($v) . "'";
 	}
