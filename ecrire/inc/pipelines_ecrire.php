@@ -321,13 +321,13 @@ function f_queue_affiche_milieu($flux) {
  *   nom de la page testee
  * @return array|bool
  */
-function trouver_objet_exec($exec) {
+function trouver_objet_exec(string $exec) {
 	static $objet_exec = [];
 	if (!$exec) {
 		return false;
 	}
 	// cas particulier
-	if ($exec == 'infos_perso') {
+	if ($exec === 'infos_perso') {
 		$exec = 'auteur';
 		set_request('id_auteur', $GLOBALS['visiteur_session']['id_auteur']);
 	}
@@ -335,7 +335,7 @@ function trouver_objet_exec($exec) {
 		$objet_exec[$exec] = false;
 		$infos = lister_tables_objets_sql();
 		foreach ($infos as $t => $info) {
-			if ($exec == $info['url_edit'] and $info['editable']) {
+			if ($exec === $info['url_edit'] and $info['editable']) {
 				return $objet_exec[$exec] = [
 					'edition' => $exec == $info['url_voir'] ? '' : true,
 					'table_objet_sql' => $t,
@@ -344,7 +344,7 @@ function trouver_objet_exec($exec) {
 					'id_table_objet' => id_table_objet($info['type'])
 				];
 			}
-			if ($exec == $info['url_voir']) {
+			if ($exec === $info['url_voir']) {
 				return $objet_exec[$exec] = [
 					'edition' => false,
 					'table_objet_sql' => $t,
