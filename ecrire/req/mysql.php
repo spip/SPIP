@@ -1661,24 +1661,24 @@ function spip_mysql_cite($v, $type) {
 	if (!$type) {
 		if (is_bool($v)) {
 			return strval(intval($v));
-		}
-		elseif (is_numeric($v)) {
+		} elseif (is_numeric($v)) {
 			return strval($v);
+		} elseif ($v === null) {
+			return "''";
 		}
 		return "'" . addslashes($v) . "'";
 	}
 
-	if (
-		is_null($v)
-		and stripos($type, 'NOT NULL') === false
-	) {
-		// null php se traduit en NULL SQL
-		return 'NULL';
-	} 
-	if (sql_test_date($type) and preg_match('/^\w+\(/', $v)) {
+	if ($v === null) {
+		if (stripos($type, 'NOT NULL') === false) {
+			// null php se traduit en NULL SQL
+			return 'NULL';
+		} else {
+			return "''";
+		}
+	} elseif (sql_test_date($type) and preg_match('/^\w+\(/', $v)) {
 		return $v;
-	}
-	if (sql_test_int($type)) {
+	} elseif (sql_test_int($type)) {
 		if (
 			is_numeric($v) 
 			or ($v and ctype_xdigit(substr($v, 2)) and $v[0] === '0' and $v[1] === 'x')
