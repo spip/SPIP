@@ -3180,7 +3180,7 @@ function table_valeur($table, $cle, $defaut = '', $conserver_null = false) {
  * @link https://www.spip.net/4299
  * @link http://php.net/manual/fr/function.preg-match.php Pour des infos sur `preg_match()`
  *
- * @param string $texte
+ * @param ?string $texte
  *     Texte dans lequel chercher
  * @param string|int $expression
  *     Expression régulière de recherche, sans le délimiteur
@@ -3194,7 +3194,7 @@ function table_valeur($table, $cle, $defaut = '', $conserver_null = false) {
  *     - true : expression trouvée, mais pas la parenthèse capturante
  *     - string : expression trouvée.
  **/
-function filtre_match_dist($texte, $expression, $modif = 'UimsS', $capte = 0) {
+function filtre_match_dist(?string $texte, $expression, $modif = 'UimsS', $capte = 0) {
 	if (intval($modif) and $capte == 0) {
 		$capte = $modif;
 		$modif = 'UimsS';
@@ -3202,7 +3202,7 @@ function filtre_match_dist($texte, $expression, $modif = 'UimsS', $capte = 0) {
 	$expression = str_replace('\/', '/', $expression);
 	$expression = str_replace('/', '\/', $expression);
 
-	if (preg_match('/' . $expression . '/' . $modif, $texte, $r)) {
+	if (preg_match('/' . $expression . '/' . $modif, $texte ?? '', $r)) {
 		if (isset($r[$capte])) {
 			return $r[$capte];
 		} else {
