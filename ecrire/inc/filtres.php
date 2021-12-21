@@ -1364,7 +1364,10 @@ function attribut_html(string $texte, $textebrut = true): string {
  * @return string
  *     URL ou chaîne vide
  **/
-function vider_url($url, $entites = true) {
+function vider_url(?string $url, $entites = true): string {
+	if ($url === null) {
+		return '';
+	}
 	# un message pour abs_url
 	$GLOBALS['mode_abs_url'] = 'url';
 	$url = trim($url);
