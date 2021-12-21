@@ -548,6 +548,7 @@ function controler_contenu($type, $id, $options = [], $c = false, $serveur = '')
 
 	// Appels incomplets (sans $c)
 	if (!is_array($c)) {
+		$c = [];
 		foreach ($desc['field'] as $champ => $ignore) {
 			if (_request($champ)) {
 				$c[$champ] = _request($champ);

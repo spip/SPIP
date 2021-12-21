@@ -29,12 +29,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param string $fichier
  * @return string
  */
-function set_spip_doc($fichier) {
-	if (strpos($fichier, _DIR_IMG) === 0) {
+function set_spip_doc(?string $fichier): string {
+	if ($fichier and strpos($fichier, _DIR_IMG) === 0) {
 		return substr($fichier, strlen(_DIR_IMG));
 	} else {
-		return $fichier;
-	} // ex: fichier distant
+		// ex: fichier distant
+		return $fichier ?? '';
+	} 
 }
 
 /**
@@ -45,7 +46,11 @@ function set_spip_doc($fichier) {
  * @param string $fichier
  * @return bool|string
  */
-function get_spip_doc($fichier) {
+function get_spip_doc(?string $fichier) {
+	if ($fichier === null) {
+		return false;
+	}
+
 	// fichier distant
 	if (tester_url_absolue($fichier)) {
 		return $fichier;
@@ -56,11 +61,9 @@ function get_spip_doc($fichier) {
 		return false;
 	}
 
-	$fichier = (
-		strncmp($fichier, _DIR_IMG, strlen(_DIR_IMG)) != 0
-	)
-		? _DIR_IMG . $fichier
-		: $fichier;
+	if (strncmp($fichier, _DIR_IMG, strlen(_DIR_IMG)) !== 0) {
+		$fichier = _DIR_IMG . $fichier;
+	}
 
 	// fichier normal
 	return $fichier;
