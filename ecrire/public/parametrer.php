@@ -218,7 +218,9 @@ function presenter_contexte($contexte, $profondeur_max = 1, $max_lines = 0) {
 			$infos[] = '…';
 			break;
 		}
-		if (is_array($val)) {
+		if ($val === null) {
+			$val = '';
+		} elseif (is_array($val)) {
 			if ($profondeur_max > 0) {
 				$val = 'array:' . count($val) . '(' . presenter_contexte($val, $profondeur_max - 1, 3) . ')';
 			} else {
@@ -233,6 +235,8 @@ function presenter_contexte($contexte, $profondeur_max = 1, $max_lines = 0) {
 			}
 		} elseif (strstr($val, ' ')) {
 			$val = "'$val'";
+		} elseif (!strlen($val)) {
+			$val = "''";
 		}
 		$infos[] = $var . '=' . $val;
 	}
