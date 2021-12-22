@@ -47,7 +47,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return string|null
  *     Code PHP si cet argument est présent, sinon null
  **/
-function interprete_argument_balise($n, $p) {
+function interprete_argument_balise(int $n, Champ $p): ?string {
 	if (($p->param) && (!$p->param[0][0]) && (count($p->param[0]) > $n)) {
 		return calculer_liste(
 			$p->param[0][$n],
