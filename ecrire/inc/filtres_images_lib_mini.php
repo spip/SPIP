@@ -1649,7 +1649,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process = 'AUTO
  * @param int $maxHeight Hauteur maximum souhaitée
  * @return array Liste [ largeur, hauteur, ratio de réduction ]
  **/
-function _image_ratio($srcWidth, $srcHeight, $maxWidth, $maxHeight): array {
+function _image_ratio(int $srcWidth, int $srcHeight, int $maxWidth, int $maxHeight): array {
 	$ratioWidth = $srcWidth / $maxWidth;
 	$ratioHeight = $srcHeight / $maxHeight;
 
@@ -1687,7 +1687,7 @@ function _image_ratio($srcWidth, $srcHeight, $maxWidth, $maxHeight): array {
  * @param int $maxHeight Hauteur maximum souhaitée
  * @return array Liste [ largeur, hauteur, ratio de réduction ]
  **/
-function ratio_passe_partout($srcWidth, $srcHeight, $maxWidth, $maxHeight): array {
+function ratio_passe_partout(int $srcWidth, int $srcHeight, int $maxWidth, int $maxHeight): array {
 	$ratioWidth = $srcWidth / $maxWidth;
 	$ratioHeight = $srcHeight / $maxHeight;
 
