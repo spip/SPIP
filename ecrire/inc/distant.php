@@ -455,30 +455,28 @@ function recuperer_url($url, $options = []) {
 
 
 	// Ajout des en-têtes spécifiques si besoin
-	$head_add = '';
+	$formatted_data = '';
 	if (!empty($options['headers'])) {
 		foreach ($options['headers'] as $champ => $valeur) {
-			$head_add .= $champ . ': ' . $valeur . "\r\n";
+			$formatted_data .= $champ . ': ' . $valeur . "\r\n";
 		}
-		// ne pas le repasser a recuperer_url si on follow un location, car ils seront dans datas
-		unset($options['headers']);
 	}
 
 	if (!empty($options['datas'])) {
 		list($head, $postdata) = prepare_donnees_post($options['datas'], $options['boundary']);
-		$head .= $head_add;
+		$head .= $formatted_data;
 		if (stripos($head, 'Content-Length:') === false) {
 			$head .= 'Content-Length: ' . strlen($postdata) . "\r\n";
 		}
-		$options['datas'] = $head . "\r\n" . $postdata;
+		$formatted_data = $head . "\r\n" . $postdata;
 		if (
 			strlen($postdata)
 			and !$methode_demandee
 		) {
 			$options['methode'] = 'POST';
 		}
-	} elseif ($head_add) {
-		$options['datas'] = $head_add . "\r\n";
+	} elseif ($formatted_data) {
+		$formatted_data .= "\r\n";
 	}
 
 	// Accepter les URLs au format feed:// ou qui ont oublie le http:// ou les urls relatives au protocole
@@ -510,7 +508,7 @@ function recuperer_url($url, $options = []) {
 		$url,
 		$refuser_gz,
 		$options['uri_referer'],
-		$options['datas'],
+		$formatted_data,
 		$options['version_http'],
 		$options['if_modified_since']
 	);
@@ -553,7 +551,15 @@ function recuperer_url($url, $options = []) {
 			fclose($handle);
 			include_spip('inc/filtres');
 			$url = suivre_lien($url, $res['location']);
-			spip_log("recuperer_url recommence sur $url", 'distant');
+
+			// une redirection doit se faire en GET, sauf status explicite 307 ou 308 qui indique de garder la meme methode
+			if ($options['methode'] !== 'GET') {
+				if (empty($res['status']) or !in_array($res['status'], [307, 308])) {
+					$options['methode'] = 'GET';
+					$options['datas'] = '';
+				}
+			}
+			spip_log("recuperer_url recommence " . $options['methode']. " sur $url", 'distant');
 
 			return recuperer_url($url, $options);
 		} elseif ($res['status'] !== 200) {
