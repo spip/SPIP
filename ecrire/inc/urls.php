@@ -248,13 +248,15 @@ function nettoyer_url_page($url, $contexte = []) {
  * @return string
  *
  */
-function generer_url_ecrire_objet($objet, $id, $args = '', $ancre = '', $public = null, string $connect = '') {
+function generer_objet_url_ecrire($objet, $id, $args = '', $ancre = '', $public = null, string $connect = '') {
 	static $furls = [];
 	if (!isset($furls[$objet])) {
 		if (
-			function_exists($f = 'generer_url_ecrire_' . $objet)
+			function_exists($f = 'generer_'.$objet.'_url_ecrire')
 			// ou definie par un plugin
 			or $f = charger_fonction($f, 'urls', true)
+			// deprecated
+			or function_exists($f = 'generer_url_ecrire_' . $objet) or $f = charger_fonction($f, 'urls', true)
 		) {
 			$furls[$objet] = $f;
 		} else {
@@ -278,4 +280,12 @@ function generer_url_ecrire_objet($objet, $id, $args = '', $ancre = '', $public 
 	}
 
 	return generer_url_ecrire(objet_info($objet, 'url_voir'), $a . ($args ? "&$args" : '')) . ($ancre ? "#$ancre" : '');
+}
+
+/**
+ * @deprecated
+ * @see generer_objet_url_ecrire
+ */
+function generer_url_ecrire_objet($objet, $id, $args = '', $ancre = '', $public = null, string $connect = ''){
+	return generer_objet_url_ecrire($objet, $id, $args, $ancre, $public, $connect);
 }
