@@ -145,7 +145,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $profondeur = 
 	static $zmax = 6;
 	$profondeur_next = $profondeur + 1;
 
-	$nav = '<a class="deroulant__lien" href="' . generer_url_entite($id_rubrique, 'rubrique', '', '', false) . "\" data-profondeur=\"$profondeur\">"
+	$nav = '<a class="deroulant__lien" href="' . generer_objet_url($id_rubrique, 'rubrique', '', '', false) . "\" data-profondeur=\"$profondeur\">"
 		. '<span class="libelle">' . supprimer_tags(preg_replace(',[\x00-\x1f]+,', ' ', $titre_rubrique)) . '</span>'
 		. "</a>\n";
 

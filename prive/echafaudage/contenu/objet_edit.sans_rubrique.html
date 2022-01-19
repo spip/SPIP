@@ -3,7 +3,7 @@
 ][(#ID_OBJET|non)
 	[(#AUTORISER{creer,#OBJET}|sinon_interdire_acces)]
 ]
-#SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#ID_OBJET}|?{#ENV{lier_trad,#ID_OBJET}|generer_url_entite{#OBJET},#URL_ECRIRE{#OBJET|objet_info{table_objet}}}}}
+#SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#ID_OBJET}|?{#ENV{lier_trad,#ID_OBJET}|generer_objet_url{#OBJET},#URL_ECRIRE{#OBJET|objet_info{table_objet}}}}}
 
 <div class='cadre-formulaire-editer'>
 <div class="entete-formulaire">
@@ -16,7 +16,7 @@
 	]
 </div>
 
-#SET{redirect,#ENV{redirect,#ID_OBJET|generer_url_entite{#OBJET}}}
+#SET{redirect,#ENV{redirect,#ID_OBJET|generer_objet_url{#OBJET}}}
 [(#ENV{retourajax,''}|oui)
 	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
 	<div class="ajax">

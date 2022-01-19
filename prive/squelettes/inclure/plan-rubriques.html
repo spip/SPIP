@@ -5,7 +5,7 @@
 	<ul class="menu-items rubriques">
 		<BOUCLE_rubriques(RUBRIQUES) {id_parent}{id_rubrique?} {par num titre,titre}{statut==.*}{pagination #GET{nb} #GET{nomp}}>
 			<li class="item">
-				<a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]"[ hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
+				<a href="[(#ID_RUBRIQUE|generer_objet_url{rubrique})]"[ hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
 				title="[(#VAL{rubrique}|objet_info{texte_objet}|_T) #ID_RUBRIQUE]">
 					<strong>[(#STATUT|puce_statut{rubrique}) ][(#TITRE|couper{100}|sinon{<:info_sans_titre:>})]</strong>
 				</a>

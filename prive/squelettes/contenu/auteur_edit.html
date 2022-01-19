@@ -14,7 +14,7 @@
 		<h1>(#ENV*{titre,#INFO_NOM{auteur,#ID_AUTEUR}|sinon{<:info_sans_titre:>}})</h1>]
 	</div>
 
-	#SET{redirect,#ENV{redirect,#ID_AUTEUR|generer_url_entite{auteur}}}
+	#SET{redirect,#ENV{redirect,#ID_AUTEUR|generer_objet_url{auteur}}}
 	[(#ENV{retourajax,''}|oui)
 		#SET{redirect,#GET{retour}}
 		<div class="ajax">

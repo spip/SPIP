@@ -1786,9 +1786,9 @@ function autoriser_sans_cookie($nom, $strict = false) {
  * @return string|array
  *   url codee ou fonction de decodage
  *   array : derogatoire, la fonction d'url retourne (objet,id_objet) utilises par nettoyer_raccourcis_typo() pour generer un lien titre
- *           (cas des raccourcis personalises [->spip20] : il faut implementer une fonction generer_url_spip et une fonction generer_url_ecrire_spip)
+ *           (cas des raccourcis personalises [->spip20] : il faut implementer une fonction generer_spip_url et une fonction generer_spip_url_ecrire)
  */
-function generer_url_entite($id = '', $entite = '', $args = '', $ancre = '', $public = null, $type = null) {
+function generer_objet_url($id = '', $entite = '', $args = '', $ancre = '', $public = null, $type = null) {
 	if ($public === null) {
 		$public = !test_espace_prive();
 	}
@@ -1835,9 +1835,17 @@ function generer_url_entite($id = '', $entite = '', $args = '', $ancre = '', $pu
 	}
 
 	// On a ete gentil mais la ....
-	spip_log("generer_url_entite: entite $entite ($f) inconnue $type $public");
+	spip_log("generer_objet_url: entite $entite ($f) inconnue $type $public");
 
 	return '';
+}
+
+/**
+ * @deprecated
+ * @see generer_objet_url
+ */
+function generer_url_entite($id = '', $entite = '', $args = '', $ancre = '', $public = null, $type = null){
+	return generer_objet_url($id, $entite, $args, $ancre, $public, $type);
 }
 
 /**
@@ -1904,18 +1912,35 @@ function urlencode_1738($url) {
 	return quote_amp($url);
 }
 
-// https://code.spip.net/@generer_url_entite_absolue
-function generer_url_entite_absolue($id = '', $entite = '', $args = '', $ancre = '', $connect = null) {
+/**
+ * Generer l'url absolue vers un objet
+ *
+ * @param int $id
+ * @param string $entite
+ * @param string $args
+ * @param string $ancre
+ * @param $connect
+ * @return string
+ */
+function generer_objet_url_absolue($id = '', $entite = '', $args = '', $ancre = '', $connect = null) {
 	if (!$connect) {
 		$connect = true;
 	}
-	$h = generer_url_entite($id, $entite, $args, $ancre, $connect);
+	$h = generer_objet_url($id, $entite, $args, $ancre, $connect);
 	if (!preg_match(',^\w+:,', $h)) {
 		include_spip('inc/filtres_mini');
 		$h = url_absolue($h);
 	}
 
 	return $h;
+}
+
+/**
+ * @deprecated
+ * @see  generer_objet_url_absolue
+ */
+function generer_url_entite_absolue($id = '', $entite = '', $args = '', $ancre = '', $connect = null){
+	return generer_objet_url_absolue($id, $entite, $args, $args, $ancre, $connect);
 }
 
 

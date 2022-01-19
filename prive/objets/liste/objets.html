@@ -18,7 +18,7 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='picto'>#GET{picto}</td>
 			<td class='titre principale'><a
-				href="[(#VALEUR{id}|generer_url_entite{#ENV{objet}})]"
+				href="[(#VALEUR{id}|generer_objet_url{#ENV{objet}})]"
 				[hreflang="(#ENV{lang}|=={#GET{lang}}|non|?{#GET{lang}})"]
 				title="<:info_numero_abbreviation|attribut_html:> #VALEUR{id}">[<span class='rang'>(#RANG).</span> ][(#INFO_TITRE{#ENV{objet},#VALEUR{id}}|sinon{<:info_sans_titre:>})]</a>
 			</td>

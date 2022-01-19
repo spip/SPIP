@@ -25,7 +25,7 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][(#ID_ARTICLE|=={#ENV{id_lien_ajoute}}|oui)append]">
 			<td class="statut">[(#STATUT|puce_statut{article})]</td>
 			<td class='titre principale'>[(#LOGO_ARTICLE|image_reduire{20,26})
-				]<a href="[(#ID_ARTICLE|generer_url_entite{article})]"
+				]<a href="[(#ID_ARTICLE|generer_objet_url{article})]"
 				[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
 				title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">[<span class='rang'>(#RANG).</span> ]#TITRE</a></td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>

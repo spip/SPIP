@@ -12,7 +12,7 @@
 		<h3><:info_administrateurs:></h3>
 		<ul class="liste-items auteurs">
 		<BOUCLE_admins(AUTEURS){id_rubrique}{statut=0minirezo}{tout}{pagination 10}>
-			<li class="item auteur"><a href='[(#ID_AUTEUR|generer_url_entite{auteur})]'>[(#CHEMIN_IMAGE{auteur-0minirezo-16.png}|balise_img)] #NOM</a></li>
+			<li class="item auteur"><a href='[(#ID_AUTEUR|generer_objet_url{auteur})]'>[(#CHEMIN_IMAGE{auteur-0minirezo-16.png}|balise_img)] #NOM</a></li>
 		</BOUCLE_admins>
 		</ul>
 		[<nav class='pagination'>(#PAGINATION{prive})</nav>]

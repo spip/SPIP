@@ -3,7 +3,7 @@
 #SET{id_secteur,0}
 <BOUCLE_rub(RUBRIQUES){id_rubrique=#ENV{id_parent}}{statut?}>
 <BOUCLE_ariane(HIERARCHIE){id_rubrique}{tout}> &gt;[(#LANG|changer_typo)]
-[(#ID_RUBRIQUE|generer_url_entite{rubrique}|lien_ou_expose{#TITRE|couper{80}|sinon{<:ecrire:info_sans_titre:>},#ENV{objet}|non|et{#ID_RUBRIQUE|=={#ENV{id_parent}}}})]
+[(#ID_RUBRIQUE|generer_objet_url{rubrique}|lien_ou_expose{#TITRE|couper{80}|sinon{<:ecrire:info_sans_titre:>},#ENV{objet}|non|et{#ID_RUBRIQUE|=={#ENV{id_parent}}}})]
 #SET{id_secteur,#ID_SECTEUR}</BOUCLE_ariane></BOUCLE_rub>
 [(#INFO_LANG{#ENV{objet},#ENV{id_objet}}|changer_typo)]
 [ &gt; <strong class="on">(#INFO_TITRE{#ENV{objet},#ENV{id_objet}}|couper{80}|sinon{<:ecrire:info_sans_titre:>})</strong>]

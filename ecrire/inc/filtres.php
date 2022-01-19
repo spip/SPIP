@@ -4709,7 +4709,7 @@ function generer_objet_info($id_objet, $type_objet, $info, $etoile = '', $params
 
 	// Si on demande l'url, on retourne direct la fonction
 	if ($info == 'url') {
-		return generer_url_entite($id_objet, $type_objet, ...$params);
+		return generer_objet_url($id_objet, $type_objet, ...$params);
 	}
 
 	// Sinon on va tout chercher dans la table et on garde en memoire
@@ -4938,7 +4938,7 @@ function generer_objet_lien($id_objet, $objet, $longueur = 80, $connect = null) 
 	if (!strlen($titre)) {
 		$titre = _T('info_sans_titre');
 	}
-	$url = generer_url_entite($id_objet, $objet, '', '', $connect);
+	$url = generer_objet_url($id_objet, $objet, '', '', $connect);
 
 	return "<a href='$url' class='$objet'>" . couper($titre, $longueur) . '</a>';
 }

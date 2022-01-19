@@ -4,7 +4,7 @@
 	#SET{id_rubrique,#ENV{id_rubrique,#ENV{id_parent}}|trouver_rubrique_creer_objet{#OBJET}}
 	[(#GET{id_rubrique}|?{[(#AUTORISER{[creer(#OBJET)dans],rubrique,#GET{id_rubrique}})],[(#AUTORISER{creer,#OBJET})]}|sinon_interdire_acces)]
 ]
-#SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#ID_OBJET}|?{#ENV{lier_trad,#ID_OBJET}|generer_url_entite{#OBJET},#GET{id_rubrique}|?{#GET{id_rubrique}|generer_url_entite{rubrique},#URL_ECRIRE{rubriques}}}}}
+#SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#ID_OBJET}|?{#ENV{lier_trad,#ID_OBJET}|generer_objet_url{#OBJET},#GET{id_rubrique}|?{#GET{id_rubrique}|generer_objet_url{rubrique},#URL_ECRIRE{rubriques}}}}}
 
 <div class='cadre-formulaire-editer'>
 <div class="entete-formulaire">
@@ -17,7 +17,7 @@
 	]
 </div>
 
-#SET{redirect,#ENV{redirect,#ID_OBJET|generer_url_entite{#OBJET}}}
+#SET{redirect,#ENV{redirect,#ID_OBJET|generer_objet_url{#OBJET}}}
 [(#ENV{retourajax,''}|oui)
 	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
 	<div class="ajax">
