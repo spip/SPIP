@@ -1766,6 +1766,60 @@ function autoriser_sans_cookie($nom, $strict = false) {
 }
 
 /**
+ * Charger la fonction de gestion des urls si elle existe
+ * @param $quoi : 'page' 'objet' 'decoder' ou objet spip pour lequel on cherche la fonction url par defaut (si type==='defaut')
+ * @param $type : type des urls (par defaut la meta type_urls) ou 'defaut' pour trouver la fonction par defaut d'un type d'objet
+ * @return string
+ */
+function charger_fonction_url(string $quoi, string $type = '') {
+	if ($type === 'defaut') {
+		$objet = objet_type($quoi);
+		if ($f = charger_fonction('generer_' . $objet . '_url', 'urls', true)
+			// deprecated
+			or $f = charger_fonction('generer_url_' . $objet, 'urls', true)
+		) {
+			return $f;
+		}
+		return '';
+	}
+
+	if (!$type) {
+		$type = $GLOBALS['type_urls'] ?? $GLOBALS['meta']['type_urls'] ?? 'page'; // sinon type "page" par défaut
+	}
+	$decoder = charger_fonction($type, 'urls', true);
+	// se rabattre sur les urls page si les urls perso non dispo
+	if (!$decoder) {
+		$decoder = charger_fonction('page', 'urls', true);
+		$type = 'page';
+	}
+
+	switch ($quoi) {
+		case 'page':
+			if (
+				 function_exists($f = "urls_{$type}_generer_url_page")
+			  or function_exists($f .= "_dist")
+			  // ou une fonction custom utilisateur independante du type d'url
+			  or function_exists($f = "generer_url_page")
+			  or function_exists($f .= "_dist")
+			) {
+				return $f;
+			}
+			return '';
+		case 'objet':
+			if (function_exists($f = "urls_{$type}_generer_url_objet")
+			  or function_exists($f .= "_dist")) {
+				return $f;
+			}
+			// pas de break : si la fonction urls_{$type}_generer_url_objet n'existe pas c'est un ancien module URL
+			// il faut passer par la fonction decoder qui fait tout en un (esperons)
+		case 'decoder':
+		default:
+			return $decoder;
+	}
+}
+
+
+/**
  * Fonction codant et décodant les URLs des objets SQL mis en page par SPIP
  *
  * @api
@@ -1802,18 +1856,10 @@ function generer_objet_url($id = '', $entite = '', $args = '', $ancre = '', $pub
 		}
 		$res = generer_objet_url_ecrire($entite, $id, $args, $ancre, false);
 	} else {
-		if ($type === null) {
-			$type = $GLOBALS['type_urls'] ?? $GLOBALS['meta']['type_urls'] ?? 'page'; // sinon type "page" par défaut
-		}
+		$f = charger_fonction_url('objet', $type ?? '');
 
-		$f = charger_fonction($type, 'urls', true);
-		// se rabattre sur les urls page si les urls perso non dispo
-		if (!$f) {
-			$f = charger_fonction('page', 'urls', true);
-		}
-
-		// si $entite='', on veut la fonction de passage URL ==> id
-		// sinon on veut effectuer le passage id ==> URL
+		// @deprecated si $entite='', on veut la fonction de passage URL ==> id
+		// @see charger_fonction_url
 		if (!$entite) {
 			return $f;
 		}
@@ -2209,30 +2255,37 @@ function generer_url_public($script = '', $args = '', $no_entities = false, $rel
 	// si le script est une action (spip_pass, spip_inscription),
 	// standardiser vers la nouvelle API
 
-	if (!$action) {
-		$action = get_spip_script();
-	}
-	if ($script) {
-		$action = parametre_url($action, _SPIP_PAGE, $script, '&');
+	if (is_array($args)) {
+		$args = http_build_query($args);
 	}
 
-	if ($args) {
-		if (is_array($args)) {
-			$r = '';
-			foreach ($args as $k => $v) {
-				$r .= '&' . $k . '=' . $v;
-			}
-			$args = substr($r, 1);
+	$url = '';
+	if ($f = charger_fonction_url('page')) {
+		$url = $f($script, $args);
+		if ($url and !$rel) {
+			include_spip('inc/filtres_mini');
+			$url = url_absolue($url);
 		}
-		$action .=
-			(strpos($action, '?') !== false ? '&' : '?') . $args;
 	}
-	if (!$no_entities) {
-		$action = quote_amp($action);
+	if (!$url) {
+		if (!$action) {
+			$action = get_spip_script();
+		}
+		if ($script) {
+			$action = parametre_url($action, _SPIP_PAGE, $script, '&');
+		}
+		if ($args) {
+			$action .= (strpos($action, '?') !== false ? '&' : '?') . $args;
+		}
+		// ne pas generer une url avec /./?page= en cas d'url absolue et de _SPIP_SCRIPT vide
+		$url = ($rel ? _DIR_RACINE . $action : rtrim(url_de_base(), '/') . preg_replace(',^/[.]/,', '/', "/$action"));
 	}
 
-	// ne pas generer une url avec /./?page= en cas d'url absolue et de _SPIP_SCRIPT vide
-	return ($rel ? _DIR_RACINE . $action : rtrim(url_de_base(), '/') . preg_replace(',^/[.]/,', '/', "/$action"));
+	if (!$no_entities) {
+		$url = quote_amp($url);
+	}
+
+	return $url;
 }
 
 function generer_url_prive($script, $args = '', $no_entities = false) {
