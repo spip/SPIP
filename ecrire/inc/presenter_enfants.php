@@ -52,7 +52,7 @@ function enfant_rub($collection, $debut = 0, $limite = 500) {
 		$id_rubrique = $row['id_rubrique'];
 		$id_parent = $row['id_parent'];
 		// pour etre sur de passer par tous les traitements
-		$titre = generer_info_entite($id_rubrique, 'rubrique', 'titre');
+		$titre = generer_objet_info($id_rubrique, 'rubrique', 'titre');
 		if ('' !== ($rang = recuperer_numero($row['titre']))) {
 			$rang = "<span class='rang'>$rang.</span> ";
 		}
@@ -152,7 +152,7 @@ function sous_enfant_rub($collection2) {
 
 	while ($row = sql_fetch($result)) {
 		$id_rubrique2 = $row['id_rubrique'];
-		$titre2 = generer_info_entite(
+		$titre2 = generer_objet_info(
 			$id_rubrique2,
 			'rubrique',
 			'titre'

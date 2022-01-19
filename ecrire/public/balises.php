@@ -784,6 +784,7 @@ function calculer_balise_expose($p, $on, $off) {
  *
  * @balise
  * @link http://www.spip.net/@introduction
+ * @use generer_objet_introduction
  *
  * @param Champ $p
  *     Pile au niveau de la balise
@@ -827,7 +828,7 @@ function balise_INTRODUCTION_dist($p) {
 		$_suite = $v2;
 	}
 
-	$p->code = "generer_introduction_entite($_id_objet, '$type_objet', $_ligne, $_introduction_longueur, $_longueur_ou_suite, $_suite, \$connect)";
+	$p->code = "generer_objet_introduction($_id_objet, '$type_objet', $_ligne, $_introduction_longueur, $_longueur_ou_suite, $_suite, \$connect)";
 
 	#$p->interdire_scripts = true;
 	$p->etoile = '*'; // propre est deja fait dans le calcul de l'intro
