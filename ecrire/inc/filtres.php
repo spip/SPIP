@@ -4680,7 +4680,7 @@ function bouton_action($libelle, $url, $class = '', $confirm = '', $title = '', 
  * l'URL et le titre (qui n'est pas forcemment le champ SQL "titre").
  *
  * On peut ensuite personnaliser les autres infos en creant une fonction
- * generer_<nom_info>_entite($id_objet, $type_objet, $ligne).
+ * generer_objet_<nom_info>($id_objet, $type_objet, $ligne).
  * $ligne correspond a la ligne SQL de tous les champs de l'objet, les fonctions
  * de personnalisation n'ont donc pas a refaire de requete.
  *
@@ -4692,7 +4692,7 @@ function bouton_action($libelle, $url, $class = '', $confirm = '', $title = '', 
  *     Tableau de paramètres supplémentaires transmis aux fonctions generer_xxx
  * @return string
  */
-function generer_info_entite($id_objet, $type_objet, $info, $etoile = '', $params = []) {
+function generer_objet_info($id_objet, $type_objet, $info, $etoile = '', $params = []) {
 	static $trouver_table = null;
 	static $objets;
 
@@ -4755,17 +4755,20 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile = '', $param
 		array_unshift($params, $introduction_longueur);
 	}
 
-	// Si la fonction generer_TRUC_TYPE existe, on l'utilise pour formater $info_generee
-	if ($generer = charger_fonction("generer_${info}_${type_objet}", '', true)) {
+	// Si la fonction generer_TYPE_TRUC existe, on l'utilise pour formater $info_generee
+	if ($generer = charger_fonction("generer_${type_objet}_${info}", '', true)
+	  // @deprecated generer_TRUC_TYPE
+	  or $generer = charger_fonction("generer_${info}_${type_objet}", '', true)) {
 		$info_generee = $generer($id_objet, $objets[$type_objet][$id_objet], ...$params);
-	} // Si la fonction generer_TRUC_entite existe, on l'utilise pour formater $info_generee
+	}
+	// Si la fonction generer_objet_TRUC existe, on l'utilise pour formater $info_generee
+	elseif ($generer = charger_fonction("generer_objet_${info}", '', true)
+	  // @deprecated generer_TRUC_entite
+	  or $generer = charger_fonction("generer_${info}_entite", '', true)) {
+		$info_generee = $generer($id_objet, $type_objet, $objets[$type_objet][$id_objet], ...$params);
+	} // Sinon on prend directement le champ SQL tel quel
 	else {
-		if ($generer = charger_fonction("generer_${info}_entite", '', true)) {
-			$info_generee = $generer($id_objet, $type_objet, $objets[$type_objet][$id_objet], ...$params);
-		} // Sinon on prend directement le champ SQL tel quel
-		else {
-			$info_generee = ($objets[$type_objet][$id_objet][$info] ?? '');
-		}
+		$info_generee = ($objets[$type_objet][$id_objet][$info] ?? '');
 	}
 
 	// On va ensuite appliquer les traitements automatiques si besoin
@@ -4781,6 +4784,14 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile = '', $param
 	}
 
 	return $info_generee;
+}
+
+/**
+ * @deprecated
+ * @see generer_objet_info
+ */
+function generer_info_entite($id_objet, $type_objet, $info, $etoile = '', $params = []){
+	return generer_objet_info($id_objet, $type_objet, $info, $etoile, $params);
 }
 
 /**
@@ -4811,7 +4822,7 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile = '', $param
  *     Nom du connecteur à la base de données
  * @return string
  */
-function generer_introduction_entite($id_objet, $type_objet, $ligne_sql, $introduction_longueur = null, $longueur_ou_suite = null, $suite = null, string $connect = '') {
+function generer_objet_introduction($id_objet, $type_objet, $ligne_sql, $introduction_longueur = null, $longueur_ou_suite = null, $suite = null, string $connect = '') {
 
 	$descriptif = $ligne_sql['descriptif'] ?? '';
 	$texte = $ligne_sql['texte'] ?? '';
@@ -4843,6 +4854,14 @@ function generer_introduction_entite($id_objet, $type_objet, $ligne_sql, $introd
 	$introduction = $f($descriptif, $texte, $longueur, $connect, $suite);
 
 	return $introduction;
+}
+
+/**
+ * @deprecated
+ * @see generer_objet_introduction
+ */
+function generer_introduction_entite($id_objet, $type_objet, $ligne_sql, $introduction_longueur = null, $longueur_ou_suite = null, $suite = null, string $connect = '') {
+	return generer_objet_introduction($id_objet, $type_objet, $ligne_sql, $introduction_longueur, $longueur_ou_suite, $suite, $connect);
 }
 
 /**
@@ -4906,7 +4925,7 @@ function appliquer_traitement_champ($texte, $champ, $table_objet = '', $env = []
  * @param null|string $connect
  * @return string
  */
-function generer_lien_entite($id_objet, $objet, $longueur = 80, $connect = null) {
+function generer_objet_lien($id_objet, $objet, $longueur = 80, $connect = null) {
 	include_spip('inc/liens');
 	$titre = traiter_raccourci_titre($id_objet, $objet, $connect);
 	// lorsque l'objet n'est plus declare (plugin desactive par exemple)
@@ -4914,7 +4933,7 @@ function generer_lien_entite($id_objet, $objet, $longueur = 80, $connect = null)
 	$titre = typo($titre['titre']) ?? '';
 	// on essaye avec generer_info_entite ?
 	if (!strlen($titre) and !$connect) {
-		$titre = generer_info_entite($id_objet, $objet, 'titre');
+		$titre = generer_objet_info($id_objet, $objet, 'titre');
 	}
 	if (!strlen($titre)) {
 		$titre = _T('info_sans_titre');
@@ -4924,6 +4943,13 @@ function generer_lien_entite($id_objet, $objet, $longueur = 80, $connect = null)
 	return "<a href='$url' class='$objet'>" . couper($titre, $longueur) . '</a>';
 }
 
+/**
+ * @deprecated
+ * @see generer_objet_lien
+ */
+function generer_lien_entite($id_objet, $objet, $longueur = 80, $connect = null){
+	return generer_objet_lien($id_objet, $objet, $longueur, $connect);
+}
 
 /**
  * Englobe (Wrap) un texte avec des balises

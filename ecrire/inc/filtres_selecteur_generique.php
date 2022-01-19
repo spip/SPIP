@@ -175,7 +175,7 @@ function picker_identifie_id_rapide($ref, $rubriques_ou_objets = false, $article
 
 	// Maintenant que tout est bon, on cherche les informations sur cet objet
 	include_spip('inc/filtres');
-	if (!$titre = generer_info_entite($id, $type, 'titre')) {
+	if (!$titre = generer_objet_info($id, $type, 'titre')) {
 		return json_export(false);
 	}
 
