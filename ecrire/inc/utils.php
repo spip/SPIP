@@ -1886,7 +1886,7 @@ function generer_objet_url($id = '', $entite = '', $args = '', $ancre = '', $pub
 }
 
 /**
- * @deprecated
+ * @deprecated 4.1
  * @see generer_objet_url
  */
 function generer_url_entite($id = '', $entite = '', $args = '', $ancre = '', $public = null, $type = null){
@@ -1917,7 +1917,7 @@ function generer_objet_url_ecrire_edit($id, $entite, $args = '', $ancre = '') {
 }
 
 /**
- * @deprecated
+ * @deprecated 4.1
  * @see generer_objet_url_ecrire_edit
  */
 function generer_url_ecrire_entite_edit($id, $entite, $args = '', $ancre = ''){
@@ -1981,7 +1981,7 @@ function generer_objet_url_absolue($id = '', $entite = '', $args = '', $ancre = 
 }
 
 /**
- * @deprecated
+ * @deprecated 4.1
  * @see  generer_objet_url_absolue
  */
 function generer_url_entite_absolue($id = '', $entite = '', $args = '', $ancre = '', $connect = null){

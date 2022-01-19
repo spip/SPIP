@@ -265,7 +265,7 @@ function balise_FORMULAIRE__contexte($form, $args) {
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated 4.0
 	 * servait pour poster sur les actions de type editer_xxx() qui ne prenaient pas d'argument autrement que par _request('arg') et pour lesquelles il fallait donc passer un hash valide
 	 */
 	/*
