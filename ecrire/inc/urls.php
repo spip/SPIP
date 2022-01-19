@@ -273,7 +273,7 @@ function generer_objet_url_ecrire($objet, $id, $args = '', $ancre = '', $public 
 }
 
 /**
- * @deprecated
+ * @deprecated 4.1
  * @see generer_objet_url_ecrire
  */
 function generer_url_ecrire_objet($objet, $id, $args = '', $ancre = '', $public = null, string $connect = ''){
