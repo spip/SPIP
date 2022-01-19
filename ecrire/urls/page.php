@@ -90,20 +90,6 @@ function urls_page_dist(string $url, string $entite, array $contexte = []) : arr
 	// Si on est revenu en mode html, mais c'est une ancienne url_propre
 	// on ne redirige pas, on assume le nouveau contexte (si possible)
 	$url_propre = $url ?? $_SERVER['REDIRECT_url_propre'] ?? $_ENV['url_propre'] ?? '';
-
-	if ($url_propre) {
-		if ($GLOBALS['profondeur_url'] <= 0) {
-			$urls_anciennes = charger_fonction('propres', 'urls', true);
-		} else {
-			$urls_anciennes = charger_fonction('arbo', 'urls', true);
-		}
-
-		if ($urls_anciennes) {
-			$urls_anciennes = $urls_anciennes($url_propre, $entite, $contexte);
-		}
-		return $urls_anciennes ?: [];
-	}
+	return urls_transition_retrouver_anciennes_url($url_propre, $entite, $contexte);
 	/* Fin du bloc compatibilite url-propres */
-
-	return [];
 }
