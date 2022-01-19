@@ -159,6 +159,31 @@ function urls_decoder_url($url, $fond = '', $contexte = [], $assembler = false) 
 	return [$fond, $contexte, $url_redirect];
 }
 
+/**
+ * Le bloc qui suit sert a faciliter les transitions depuis
+ * le mode 'urls-propres' vers les modes 'urls-standard' et 'url-html'
+ *
+ * @param string $url_propre
+ * @param string $entite
+ * @param array $contexte
+ * @return array|false|string
+ */
+function urls_transition_retrouver_anciennes_url(string $url_propre, string $entite, array $contexte = []) {
+	if ($url_propre) {
+		if ($GLOBALS['profondeur_url'] <= 0) {
+			$urls_anciennes = charger_fonction_url('decoder', 'propres');
+		} else {
+			$urls_anciennes = charger_fonction_url('decoder', 'arbo');
+		}
+
+		if ($urls_anciennes) {
+			$urls_anciennes = $urls_anciennes($url_propre, $entite, $contexte);
+		}
+		return $urls_anciennes ?: [];
+	}
+
+	return [];
+}
 
 /**
  * Lister les objets pris en compte dans les URLs
