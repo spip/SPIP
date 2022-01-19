@@ -24,12 +24,12 @@
 		[(#LANG|changer_typo)]
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})]</td>
-			<td class='titre principale'><a href="[(#ID_ARTICLE|generer_url_entite{article})]"
+			<td class='titre principale'><a href="[(#ID_ARTICLE|generer_objet_url{article})]"
 				[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
 				title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">[<span
 				class="surtitre">(#SURTITRE|image_reduire{150,70})</span>][<span class="rang">(#RANG). </span>]<strong>#TITRE</strong>[<span class="soustitre">(#SOUSTITRE)</span>]</a></td>
 			<td class='[(#LOGO_ARTICLE_NORMAL|?{logo,nologo})]'>[(#LOGO_ARTICLE_NORMAL|image_recadre_avec_fallback{70,70,focus})]</td>
-			<td class='auteur'><div class="inner"><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></div></td>
+			<td class='auteur'><div class="inner"><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href="[(#ID_AUTEUR|generer_objet_url{auteur})]">#NOM</a></BOUCLE_auteurs></div></td>
 			<td class='date secondaire'>[<span title="[(#DATE|heures_minutes)]">(#DATE|affdate_base{jourcourt,abbr})</span>]</td>
 			<td class='id'>[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
 				<a href="[(#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE})]" title="<:icone_modifier_article|attribut_html:>">#ID_ARTICLE</a>,

@@ -43,7 +43,7 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|initiale|=={#ENV{i}}|et{#ENV{i}}|?{on}|unique)]">
 			<td class='statut'>[(#STATUT|puce_statut{auteur})]</td>[
 			(#PLUGIN{organiseur}|oui)<td class="messagerie">[<a href="(#ID_AUTEUR|auteur_lien_messagerie{#EN_LIGNE,#STATUT,#IMESSAGE})">[(#CHEMIN{images/m_envoi.gif}|balise_img{<:info_envoyer_message_prive:>})]</a>]</td>]
-			<td class='nom[ (#NOM|non)vide]'[(#LOGO_AUTEUR|non)colspan='2']><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[<span class='rang'>(#RANG).</span> ][(#NOM|trim|sinon{#BIO*|couper{80}|trim}|sinon{<:info_numero_abbreviation:>#ID_AUTEUR})]</a></td>
+			<td class='nom[ (#NOM|non)vide]'[(#LOGO_AUTEUR|non)colspan='2']><a href="[(#ID_AUTEUR|generer_objet_url{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[<span class='rang'>(#RANG).</span> ][(#NOM|trim|sinon{#BIO*|couper{80}|trim}|sinon{<:info_numero_abbreviation:>#ID_AUTEUR})]</a></td>
 			[<td class='logo'>(#LOGO_AUTEUR|image_recadre_avec_fallback{40,40})</td>]
 			<td class='email'>[<a href='mailto:(#EMAIL)'>[(#EMAIL|couper{30})]</a>]</td>
 			<td class='contributions'>[(#ENV{statut}|=={nouveau}|?{[(#MAJ|affdate)], [(#COMPTEUR_ARTICLES|singulier_ou_pluriel{info_1_article,info_nb_articles})<br />][(#PIPELINE{'compter_contributions_auteur',#ARRAY{args,#ARRAY{id_auteur,#ID_AUTEUR},'data',#ARRAY{}}}|implode{'<br />'})]})]</td>

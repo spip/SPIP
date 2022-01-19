@@ -344,7 +344,7 @@ function formulaires_login_traiter_dist($cible = '', $options = [], $deprecated 
 		$cible = parametre_url($cible, 'bonjour', 'oui', '&');
 	}
 	if ($cible == '@page_auteur') {
-		$cible = generer_url_entite($GLOBALS['auteur_session']['id_auteur'], 'auteur');
+		$cible = generer_objet_url($GLOBALS['auteur_session']['id_auteur'], 'auteur');
 	}
 
 	if ($cible) {

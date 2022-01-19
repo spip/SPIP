@@ -109,7 +109,7 @@ function urls_decoder_url($url, $fond = '', $contexte = [], $assembler = false) 
 	}
 
 	$url_redirect = '';
-	$renommer = generer_url_entite('', '', '', '', true);
+	$renommer = generer_objet_url('', '', '', '', true);
 	if (!$renommer and !function_exists('recuperer_parametres_url')) {
 		$renommer = charger_fonction('page', 'urls');
 	} // fallback pour decoder l'url
@@ -272,7 +272,7 @@ function generer_objet_url_ecrire($objet, $id, $args = '', $ancre = '', $public 
 		$public = objet_test_si_publie($objet, $id, $connect);
 	}
 	if ($public or $connect) {
-		return generer_url_entite_absolue($id, $objet, $args, $ancre, $connect);
+		return generer_objet_url_absolue($id, $objet, $args, $ancre, $connect);
 	}
 	$a = id_table_objet($objet) . '=' . intval($id);
 	if (!function_exists('objet_info')) {

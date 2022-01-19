@@ -51,8 +51,8 @@ a mis a jour la valeur avec la page reelle]
 	<BOUCLE_liste_aut(AUTEURS){!id_auteur IN #GET{exclus}}{tout}{where?}{recherche?}{statut?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} auta}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|initiale|=={#ENV{i}}|?{on}|unique)]">
 			<td class='statut'>[(#STATUT|puce_statut{auteur})]</td>
-			<td class='nom[ (#NOM|non)vide]'[(#LOGO_AUTEUR|non)colspan='2']><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[<span class='rang'>(#RANG).</span> ][(#NOM|sinon{<:texte_vide:>})]</a></td>
-			[<td class='logo'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]" style="background-image:url\((#LOGO_AUTEUR|image_recadre_avec_fallback{30,30}|extraire_attribut{src}))"></a></td>]
+			<td class='nom[ (#NOM|non)vide]'[(#LOGO_AUTEUR|non)colspan='2']><a href="[(#ID_AUTEUR|generer_objet_url{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[<span class='rang'>(#RANG).</span> ][(#NOM|sinon{<:texte_vide:>})]</a></td>
+			[<td class='logo'><a href="[(#ID_AUTEUR|generer_objet_url{auteur})]" style="background-image:url\((#LOGO_AUTEUR|image_recadre_avec_fallback{30,30}|extraire_attribut{src}))"></a></td>]
 			<td class='email'>[<a href='mailto:(#EMAIL)'>[(#EMAIL|couper{30})]</a>]</td>
 			<td class='action'><button type="submit" class="ajouter btn_mini btn_secondaire" name="ajouter_lien[auteur-#ID_AUTEUR-#OBJET-#ID_OBJET]" value="+"><:lien_ajouter_auteur:>[ (#CHEMIN_IMAGE{add-12.svg}|balise_img)]</button></td>
 		</tr>

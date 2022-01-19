@@ -51,17 +51,17 @@ function generer_generer_url($type, $p) {
  * Génère le code compilé des balises d'URL (en connaissant l'identifiant)
  *
  * - Si ces balises sont utilisées pour la base locale,
- *   production des appels à `generer_url_entite(id-courant, entite)`
+ *   production des appels à `generer_objet_url(id-courant, entite)`
  * - Si la base est externe et sous SPIP, on produit
  *
  *   - l'URL de l'objet si c'est une pièce jointe, ou sinon
  *   - l'URL du site local appliqué sur l'objet externe,
  *     ce qui permet de le voir à travers les squelettes du site local
  *
- * On communique le type-url distant à `generer_url_entite` mais il ne sert pas
+ * On communique le type-url distant à `generer_objet_url` mais il ne sert pas
  * car rien ne garantit que le .htaccess soit identique. À approfondir.
  *
- * @see generer_url_entite()
+ * @see generer_objet_url()
  *
  * @param string $type
  *     Type d'objet
@@ -94,7 +94,7 @@ function generer_generer_url_arg($type, $p, $_id) {
 		$s = ", '', '', true";
 	}
 
-	return "urlencode_1738(generer_url_entite($_id, '$type'$s))";
+	return "urlencode_1738(generer_objet_url($_id, '$type'$s))";
 }
 
 

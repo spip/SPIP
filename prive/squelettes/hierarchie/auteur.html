@@ -5,7 +5,7 @@
 [(#STATUT|in_array{#VAL{redacteurs}|auteurs_lister_statuts}|non)
 <a href="#URL_ECRIRE{visiteurs}"><:info_visiteurs:></a>
 ]
-&gt; [(#ID_AUTEUR|generer_url_entite{auteur}|lien_ou_expose{[(#NOM|couper{80}|sinon{<:ecrire:info_sans_titre:>})],1})]
+&gt; [(#ID_AUTEUR|generer_objet_url{auteur}|lien_ou_expose{[(#NOM|couper{80}|sinon{<:ecrire:info_sans_titre:>})],1})]
 </BOUCLE_ariane>
 <a href="#URL_ECRIRE{auteurs}"><:info_auteurs:></a>
 [(#ENV{exec}|match{_edit$}|oui)

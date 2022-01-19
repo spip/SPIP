@@ -117,7 +117,7 @@ function calculer_url_redirect_entite($type, $id, $var_mode) {
 	// Si on ne l’a pas trouvé, ou si var mode, on calcule l’url et son état publie
 	if (empty($desc) or $var_mode) {
 		$publie = objet_test_si_publie($type, $id);
-		$url = generer_url_entite_absolue($id, $type, '', '', true);
+		$url = generer_objet_url_absolue($id, $type, '', '', true);
 		if (function_exists('cache_set')) {
 			cache_set($key, [$url, $publie], 3600);
 		}

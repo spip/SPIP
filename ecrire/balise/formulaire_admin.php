@@ -186,7 +186,7 @@ function admin_objet() {
 				$env['objet'] = $type;
 				$env['id_objet'] = $id;
 				$env['voir_' . $obj] =
-					str_replace('&amp;', '&', generer_url_entite($id, $obj, '', '', false));
+					str_replace('&amp;', '&', generer_objet_url($id, $obj, '', '', false));
 				if (
 					isset($desc['field']['id_rubrique'])
 					and $type != 'rubrique'

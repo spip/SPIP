@@ -84,7 +84,7 @@ function enfant_rub($collection, $debut = 0, $limite = 500) {
 				" <a class='titremlien' dir='$lang_dir'" .
 				($row['lang'] !== $GLOBALS['spip_lang'] ? " hreflang='" . $row['lang'] . "'" : '') .
 				" href='" .
-				generer_url_entite($id_rubrique, 'rubrique') .
+				generer_objet_url($id_rubrique, 'rubrique') .
 				"'><span class='titre'>" .
 				$rang . $titre
 				. '</span>'
@@ -164,7 +164,7 @@ function sous_enfant_rub($collection2) {
 		changer_typo($row['lang']);
 		$lang_dir = lang_dir($row['lang']);
 		if (autoriser('voir', 'rubrique', $id_rubrique2)) {
-			$retour .= "\n<li class='item' dir='$lang_dir'><a href='" . generer_url_entite(
+			$retour .= "\n<li class='item' dir='$lang_dir'><a href='" . generer_objet_url(
 				$id_rubrique2,
 				'rubrique'
 			) . "'>" . $rang2 . $titre2 . "</a></li>\n";

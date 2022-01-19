@@ -3,7 +3,7 @@
 		<:info_auteur_gere_rubriques:>
 		<ul class="liste-items rubriques">
 			<BOUCLE_restreint(RUBRIQUES){id_auteur}{statut==.*}{si #STATUT|in_array{#CONST{_STATUT_AUTEUR_RUBRIQUE}|explode{','}}}{pagination 10}>
-				<li class="item rubrique"><a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]">[(#CHEMIN_IMAGE{rubrique-16.png}|balise_img) ][(#TITRE|sinon{<:info_sans_titre:>})]</a></li>
+				<li class="item rubrique"><a href="[(#ID_RUBRIQUE|generer_objet_url{rubrique})]">[(#CHEMIN_IMAGE{rubrique-16.png}|balise_img) ][(#TITRE|sinon{<:info_sans_titre:>})]</a></li>
 			</BOUCLE_restreint>
 		</ul>
 		[<nav class='pagination'>(#PAGINATION{prive})</nav>]

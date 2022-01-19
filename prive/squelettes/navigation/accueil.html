@@ -10,7 +10,7 @@
 			<h4>[(#GRAND_TOTAL|objet_afficher_nb{rubrique})]</h4>
 			<ul class="liste-items rubriques">
 			<BOUCLE_restreintes(RUBRIQUES){id_auteur=#SESSION{id_auteur}}{tout}{par titre}{pagination 10}{si #SESSION{statut}|=={0minirezo}}>
-				<li class="item rubrique"><a href='[(#ID_RUBRIQUE|generer_url_entite{rubrique})]'>[(#CHEMIN_IMAGE{rubrique-16.png}|balise_img)] #TITRE</a></li>
+				<li class="item rubrique"><a href='[(#ID_RUBRIQUE|generer_objet_url{rubrique})]'>[(#CHEMIN_IMAGE{rubrique-16.png}|balise_img)] #TITRE</a></li>
 			</BOUCLE_restreintes>
 			</ul>
 			[<nav class='pagination'>(#PAGINATION{prive})</nav>]

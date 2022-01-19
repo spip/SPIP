@@ -39,7 +39,7 @@
 				dir="#LANG_DIR"
 				lang="#LANG">[(#EXPOSE|?{#TITRE,<a
 				[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
-				href="[(#ID_ARTICLE|generer_url_entite{article})]"
+				href="[(#ID_ARTICLE|generer_objet_url{article})]"
 				title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">[<span class='rang'>(#RANG).</span> ]#TITRE</a>})]</span>
 				[(#ENV{id_trad}|=={#ID_ARTICLE}|oui)<small class="reference_trad"><:trad_reference:></small>]
 			</td>

@@ -163,14 +163,14 @@ function traiter_lien_implicite($ref, $texte = '', $pour = 'url', string $connec
 		$url = $f($texte, $id, $type, $args, $ancre, $connect);
 	}
 	if (!$url) {
-		$url = generer_url_entite($id, $type, $args, $ancre, $connect ?: null);
+		$url = generer_objet_url($id, $type, $args, $ancre, $connect ?: null);
 	}
 	if (!$url) {
 		return false;
 	}
 	if (is_array($url)) {
 		[$type, $id] = array_pad($url, 2, null);
-		$url = generer_url_entite($id, $type, $args, $ancre, $connect ?: null);
+		$url = generer_objet_url($id, $type, $args, $ancre, $connect ?: null);
 	}
 	if ($pour === 'url') {
 		return $url;
