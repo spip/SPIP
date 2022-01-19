@@ -1874,7 +1874,7 @@ function generer_objet_url($id = '', $entite = '', $args = '', $ancre = '', $pub
 			$f = $g;
 		}
 
-		$res = $f(intval($id), $entite, $args, $ancre, $public);
+		$res = $f(intval($id), $entite, $args ?: '', $ancre ?: '', $public);
 	}
 	if ($res) {
 		return $res;

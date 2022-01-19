@@ -27,18 +27,27 @@ define('_debut_urls_page', get_spip_script('./') . '?');
 #######
 
 
-// https://code.spip.net/@_generer_url_page
-function _generer_url_page($type, $id, $args = '', $ancre = '') {
+/**
+ * Generer l'url d'un objet SPIP
+ * @param int $id
+ * @param string $objet
+ * @param string $args
+ * @param string $ancre
+ * @return string
+ */
+function urls_page_generer_url_objet_dist(int $id, string $objet, string $args = '', string $ancre = '') : string {
 
-	if ($generer_url_externe = charger_fonction("generer_url_$type", 'urls', true)) {
+	if ($generer_url_externe = charger_fonction_url($objet, 'defaut')) {
 		$url = $generer_url_externe($id, $args, $ancre);
-		if (null != $url) {
+		// une url === null indique "je ne traite pas cette url, appliquez le calcul standard"
+		// une url vide est une url vide, ne rien faire de plus
+		if (!is_null($url)) {
 			return $url;
 		}
 	}
 
-	$url = \_debut_urls_page . $type . \_debut_urls_page
-		. $id . \_debut_urls_page;
+	$url = \_debut_urls_page . $objet . \_separateur_urls_page
+		. $id . \_terminaison_urls_page;
 
 	if ($args) {
 		$args = strpos($url, '?') ? "&$args" : "?$args";
@@ -47,27 +56,26 @@ function _generer_url_page($type, $id, $args = '', $ancre = '') {
 	return _DIR_RACINE . $url . $args . ($ancre ? "#$ancre" : '');
 }
 
-// retrouve le fond et les parametres d'une URL abregee
-// le contexte deja existant est fourni dans args sous forme de tableau ou query string
-// https://code.spip.net/@urls_page_dist
-function urls_page_dist($i, &$entite, $args = '', $ancre = '') {
-	if (is_numeric($i)) {
-		return _generer_url_page($entite, $i, $args, $ancre);
-	}
+/**
+ * Decoder une url page
+ * retrouve le fond et les parametres d'une URL abregee
+ * le contexte deja existant est fourni dans args sous forme de tableau ou query string
+ *
+ * @param string $url
+ * @param string $entite
+ * @param array $contexte
+ * @return array
+ *   [$contexte_decode, $type, $url_redirect, $fond]
+ */
+function urls_page_dist(string $url, string $entite, array $contexte = []) : array {
 
 	// traiter les injections du type domaine.org/spip.php/cestnimportequoi/ou/encore/plus/rubrique23
 	if ($GLOBALS['profondeur_url'] > 0 and $entite == 'sommaire') {
 		return [[], '404'];
 	}
 
-	// voir s'il faut recuperer le id_* implicite et les &debut_xx;
-	if (is_array($args)) {
-		$contexte = $args;
-	} else {
-		parse_str($args, $contexte);
-	}
 	include_spip('inc/urls');
-	$r = nettoyer_url_page($i, $contexte);
+	$r = nettoyer_url_page($url, $contexte);
 	if ($r) {
 		array_pop($r); // nettoyer_url_page renvoie un argument de plus inutile ici
 		return $r;
@@ -81,7 +89,6 @@ function urls_page_dist($i, &$entite, $args = '', $ancre = '') {
 	 */
 	// Si on est revenu en mode html, mais c'est une ancienne url_propre
 	// on ne redirige pas, on assume le nouveau contexte (si possible)
-	$url = $i;
 	$url_propre = $url ?? $_SERVER['REDIRECT_url_propre'] ?? $_ENV['url_propre'] ?? '';
 
 	if ($url_propre) {
@@ -91,7 +98,12 @@ function urls_page_dist($i, &$entite, $args = '', $ancre = '') {
 			$urls_anciennes = charger_fonction('arbo', 'urls', true);
 		}
 
-		return $urls_anciennes ? $urls_anciennes($url_propre, $entite, $contexte) : '';
+		if ($urls_anciennes) {
+			$urls_anciennes = $urls_anciennes($url_propre, $entite, $contexte);
+		}
+		return $urls_anciennes ?: [];
 	}
 	/* Fin du bloc compatibilite url-propres */
+
+	return [];
 }
