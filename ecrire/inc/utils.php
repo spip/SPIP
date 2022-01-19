@@ -1797,10 +1797,10 @@ function generer_url_entite($id = '', $entite = '', $args = '', $ancre = '', $pu
 		if (!$entite) {
 			return '';
 		}
-		if (!function_exists('generer_url_ecrire_objet')) {
+		if (!function_exists('generer_objet_url_ecrire')) {
 			include_spip('inc/urls');
 		}
-		$res = generer_url_ecrire_objet($entite, $id, $args, $ancre, false);
+		$res = generer_objet_url_ecrire($entite, $id, $args, $ancre, false);
 	} else {
 		if ($type === null) {
 			$type = $GLOBALS['type_urls'] ?? $GLOBALS['meta']['type_urls'] ?? 'page'; // sinon type "page" par défaut
@@ -1839,7 +1839,15 @@ function generer_url_entite($id = '', $entite = '', $args = '', $ancre = '', $pu
 	return '';
 }
 
-function generer_url_ecrire_entite_edit($id, $entite, $args = '', $ancre = '') {
+/**
+ * Generer l'url vers la page d'edition dans ecrire/
+ * @param int $id
+ * @param string $entite
+ * @param string $args
+ * @param string $ancre
+ * @return string
+ */
+function generer_objet_url_ecrire_edit($id, $entite, $args = '', $ancre = '') {
 	$exec = objet_info($entite, 'url_edit');
 	$url = generer_url_ecrire($exec, $args);
 	if (intval($id)) {
@@ -1853,6 +1861,15 @@ function generer_url_ecrire_entite_edit($id, $entite, $args = '', $ancre = '') {
 
 	return $url;
 }
+
+/**
+ * @deprecated
+ * @see generer_objet_url_ecrire_edit
+ */
+function generer_url_ecrire_entite_edit($id, $entite, $args = '', $ancre = ''){
+	return generer_objet_url_ecrire_edit($id, $entite, $args, $ancre);
+}
+
 
 function urls_connect_dist($i, &$entite, $args = '', $ancre = '', $public = null) {
 	include_spip('base/connect_sql');
