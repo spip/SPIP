@@ -109,10 +109,7 @@ function urls_decoder_url($url, $fond = '', $contexte = [], $assembler = false) 
 	}
 
 	$url_redirect = '';
-	$renommer = generer_objet_url('', '', '', '', true);
-	if (!$renommer and !function_exists('recuperer_parametres_url')) {
-		$renommer = charger_fonction('page', 'urls');
-	} // fallback pour decoder l'url
+	$renommer = charger_fonction_url('decoder');
 	if ($renommer) {
 		$a = $renommer($url, $fond, $contexte);
 		if (is_array($a)) {
@@ -146,13 +143,6 @@ function urls_decoder_url($url, $fond = '', $contexte = [], $assembler = false) 
 				$contexte['type-page'] = $type;
 			}
 		}
-	} // compatibilite <= 1.9.2
-	elseif (function_exists('recuperer_parametres_url')) {
-		$GLOBALS['fond'] = $fond;
-		$GLOBALS['contexte'] = $contexte;
-		recuperer_parametres_url($fond, nettoyer_uri());
-		// fond est en principe modifiee directement
-		$contexte = $GLOBALS['contexte'];
 	}
 
 	// retablir les globales
