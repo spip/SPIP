@@ -168,7 +168,7 @@ function urls_decoder_url($url, $fond = '', $contexte = [], $assembler = false) 
  * @param array $contexte
  * @return array|false|string
  */
-function urls_transition_retrouver_anciennes_url(string $url_propre, string $entite, array $contexte = []) {
+function urls_transition_retrouver_anciennes_url_propres(string $url_propre, string $entite, array $contexte = []): array {
 	if ($url_propre) {
 		if ($GLOBALS['profondeur_url'] <= 0) {
 			$urls_anciennes = charger_fonction_url('decoder', 'propres');
@@ -182,6 +182,53 @@ function urls_transition_retrouver_anciennes_url(string $url_propre, string $ent
 		return $urls_anciennes ?: [];
 	}
 
+	return [];
+}
+
+/**
+ * Le bloc qui suit sert a faciliter les transitions depuis
+ * le mode 'urls-html/standard' vers les modes 'urls propres|arbos'
+ *
+ * @param string $url_propre
+ * @param string $entite
+ * @param array $contexte
+ * @return array|false|string
+ */
+function urls_transition_retrouver_anciennes_url_html(string $url, string $entite, array $contexte = []): array {
+	// Migration depuis anciennes URLs ?
+	// traiter les injections domain.tld/spip.php/n/importe/quoi/rubrique23
+	if (
+		$url
+		and $GLOBALS['profondeur_url'] <= 0
+	) {
+		$r = nettoyer_url_page($url, $contexte);
+		if ($r) {
+			[$contexte, $type, , , $suite] = $r;
+			$_id = id_table_objet($type);
+			$id_objet = $contexte[$_id];
+			$url_propre = generer_objet_url($id_objet, $type);
+			if (
+				strlen($url_propre)
+				and !strstr($url, (string) $url_propre)
+				and (
+					objet_test_si_publie($type, $id_objet)
+					or (defined('_VAR_PREVIEW') and _VAR_PREVIEW and autoriser('voir', $type, $id_objet))
+				)
+			) {
+				[, $hash] = array_pad(explode('#', $url_propre), 2, null);
+				$args = [];
+				foreach (array_filter(explode('&', $suite)) as $fragment) {
+					if ($fragment != "$_id=$id_objet") {
+						$args[] = $fragment;
+					}
+				}
+				$url_redirect = generer_objet_url($id_objet, $type, join('&', array_filter($args)), $hash);
+
+				return [$contexte, $type, $url_redirect, $type];
+			}
+		}
+	}
+	/* Fin compatibilite anciennes urls */
 	return [];
 }
 
@@ -267,7 +314,7 @@ function generer_objet_url_ecrire($objet, $id, $args = '', $ancre = '', $public 
 	static $furls = [];
 	if (!isset($furls[$objet])) {
 		if (
-			function_exists($f = 'generer_'.$objet.'_url_ecrire')
+			function_exists($f = 'generer_' . $objet . '_url_ecrire')
 			// ou definie par un plugin
 			or $f = charger_fonction($f, 'urls', true)
 			// deprecated
@@ -301,6 +348,6 @@ function generer_objet_url_ecrire($objet, $id, $args = '', $ancre = '', $public 
  * @deprecated 4.1
  * @see generer_objet_url_ecrire
  */
-function generer_url_ecrire_objet($objet, $id, $args = '', $ancre = '', $public = null, string $connect = ''){
+function generer_url_ecrire_objet($objet, $id, $args = '', $ancre = '', $public = null, string $connect = '') {
 	return generer_objet_url_ecrire($objet, $id, $args, $ancre, $public, $connect);
 }
