@@ -1898,9 +1898,9 @@ function generer_objet_url(int $id, string $entite, string $args = '', string $a
  */
 function generer_url_entite($id = '', $entite = '', $args = '', $ancre = '', $public = null, $type = null){
 	if ($public and is_string($public)) {
-		return generer_objet_url($id, $entite, $args, $ancre, true, $type ?? '', $public);
+		return generer_objet_url($id, $entite, $args ?: '', $ancre ?: '', true, $type ?? '', $public);
 	}
-	return generer_objet_url($id, $entite, $args, $ancre, $public, $type ?? '');
+	return generer_objet_url($id, $entite, $args ?: '', $ancre ?: '', $public, $type ?? '');
 }
 
 /**
