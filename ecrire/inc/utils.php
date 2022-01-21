@@ -1974,14 +1974,13 @@ function urlencode_1738($url) {
  * @param string $entite
  * @param string $args
  * @param string $ancre
- * @param $connect
+ * @param ?bool $public
+ * @param string $type
+ * @param string $connect
  * @return string
  */
-function generer_objet_url_absolue($id = '', $entite = '', $args = '', $ancre = '', $connect = null) {
-	if (!$connect) {
-		$connect = true;
-	}
-	$h = generer_objet_url($id, $entite, $args, $ancre, null, '', $connect);
+function generer_objet_url_absolue($id = '', $entite = '', $args = '', $ancre = '', ?bool $public = null, string $type = '', string $connect = ''): string {
+	$h = generer_objet_url($id, $entite, $args, $ancre, $public, $type, $connect);
 	if (!preg_match(',^\w+:,', $h)) {
 		include_spip('inc/filtres_mini');
 		$h = url_absolue($h);
@@ -1995,7 +1994,7 @@ function generer_objet_url_absolue($id = '', $entite = '', $args = '', $ancre = 
  * @see  generer_objet_url_absolue
  */
 function generer_url_entite_absolue($id = '', $entite = '', $args = '', $ancre = '', $connect = null){
-	return generer_objet_url_absolue($id, $entite, $args, $args, $ancre, $connect);
+	return generer_objet_url_absolue($id, $entite, $args, $ancre, true, '', $connect);
 }
 
 

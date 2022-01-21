@@ -334,7 +334,7 @@ function generer_objet_url_ecrire($objet, $id, $args = '', $ancre = '', $public 
 		$public = objet_test_si_publie($objet, $id, $connect);
 	}
 	if ($public or $connect) {
-		return generer_objet_url_absolue($id, $objet, $args, $ancre, $connect);
+		return generer_objet_url_absolue($id, $objet, $args, $ancre, $public, '', $connect);
 	}
 	$a = id_table_objet($objet) . '=' . intval($id);
 	if (!function_exists('objet_info')) {
