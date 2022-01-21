@@ -1837,17 +1837,19 @@ function charger_fonction_url(string $quoi, string $type = '') {
  *   query_string a placer apres cle=$id&....
  * @param string $ancre
  *   ancre a mettre a la fin de l'URL a produire
- * @param bool|string $public
+ * @param ?bool $public
  *   produire l'URL publique ou privee (par defaut: selon espace)
  *   si string : serveur de base de donnee (nom du connect)
  * @param string $type
  *   fichier dans le repertoire ecrire/urls determinant l'apparence
- * @return string|array
+ * @param string $connect
+ *   fichier dans le repertoire ecrire/urls determinant l'apparence
+ * @return string
  *   url codee ou fonction de decodage
  *   array : derogatoire, la fonction d'url retourne (objet,id_objet) utilises par nettoyer_raccourcis_typo() pour generer un lien titre
  *           (cas des raccourcis personalises [->spip20] : il faut implementer une fonction generer_spip_url et une fonction generer_spip_url_ecrire)
  */
-function generer_objet_url($id = '', $entite = '', $args = '', $ancre = '', $public = null, $type = null) {
+function generer_objet_url(int $id, string $entite, string $args = '', string $ancre = '', ?bool $public = null, string $type = '', string $connect = ''): string {
 	if ($public === null) {
 		$public = !test_espace_prive();
 	}
@@ -1860,7 +1862,7 @@ function generer_objet_url($id = '', $entite = '', $args = '', $ancre = '', $pub
 		if (!function_exists('generer_objet_url_ecrire')) {
 			include_spip('inc/urls');
 		}
-		$res = generer_objet_url_ecrire($entite, $id, $args, $ancre, false);
+		$res = generer_objet_url_ecrire($entite, $id, $args, $ancre, false, $connect);
 	} else {
 		$f = charger_fonction_url('objet', $type ?? '');
 
@@ -1872,21 +1874,20 @@ function generer_objet_url($id = '', $entite = '', $args = '', $ancre = '', $pub
 
 		// mais d'abord il faut tester le cas des urls sur une
 		// base distante
-		if (
-			is_string($public)
+		if ($connect
 			and $g = charger_fonction('connect', 'urls', true)
 		) {
 			$f = $g;
 		}
 
-		$res = $f(intval($id), $entite, $args ?: '', $ancre ?: '', $public);
+		$res = $f(intval($id), $entite, $args ?: '', $ancre ?: '', $connect);
 	}
 	if ($res) {
 		return $res;
 	}
 
 	// On a ete gentil mais la ....
-	spip_log("generer_objet_url: entite $entite ($f) inconnue $type $public");
+	spip_log("generer_objet_url: entite $entite ($f) inconnue $type $public $connect", _LOG_ERREUR);
 
 	return '';
 }
@@ -1896,7 +1897,10 @@ function generer_objet_url($id = '', $entite = '', $args = '', $ancre = '', $pub
  * @see generer_objet_url
  */
 function generer_url_entite($id = '', $entite = '', $args = '', $ancre = '', $public = null, $type = null){
-	return generer_objet_url($id, $entite, $args, $ancre, $public, $type);
+	if ($public and is_string($public)) {
+		return generer_objet_url($id, $entite, $args, $ancre, true, $type ?? '', $public);
+	}
+	return generer_objet_url($id, $entite, $args, $ancre, $public, $type ?? '');
 }
 
 /**
@@ -1977,7 +1981,7 @@ function generer_objet_url_absolue($id = '', $entite = '', $args = '', $ancre = 
 	if (!$connect) {
 		$connect = true;
 	}
-	$h = generer_objet_url($id, $entite, $args, $ancre, $connect);
+	$h = generer_objet_url($id, $entite, $args, $ancre, null, '', $connect);
 	if (!preg_match(',^\w+:,', $h)) {
 		include_spip('inc/filtres_mini');
 		$h = url_absolue($h);

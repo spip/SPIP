@@ -597,7 +597,7 @@ function vignette_logo_document($row, string $connect = '') {
 		return '';
 	}
 
-	return generer_objet_url($row['id_document'], 'document', '', '', $connect);
+	return generer_objet_url($row['id_document'], 'document', '', '', null, '', $connect);
 }
 
 /**

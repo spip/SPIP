@@ -4942,7 +4942,7 @@ function generer_objet_lien($id_objet, $objet, $longueur = 80, $connect = null) 
 	if (!strlen($titre)) {
 		$titre = _T('info_sans_titre');
 	}
-	$url = generer_objet_url($id_objet, $objet, '', '', $connect);
+	$url = generer_objet_url($id_objet, $objet, '', '', null, '', $connect);
 
 	return "<a href='$url' class='$objet'>" . couper($titre, $longueur) . '</a>';
 }
