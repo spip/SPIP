@@ -1896,11 +1896,11 @@ function generer_objet_url(int $id, string $entite, string $args = '', string $a
  * @deprecated 4.1
  * @see generer_objet_url
  */
-function generer_url_entite($id = '', $entite = '', $args = '', $ancre = '', $public = null, $type = null){
+function generer_url_entite($id = 0, $entite = '', $args = '', $ancre = '', $public = null, $type = null){
 	if ($public and is_string($public)) {
-		return generer_objet_url($id, $entite, $args ?: '', $ancre ?: '', true, $type ?? '', $public);
+		return generer_objet_url(intval($id), $entite, $args ?: '', $ancre ?: '', true, $type ?? '', $public);
 	}
-	return generer_objet_url($id, $entite, $args ?: '', $ancre ?: '', $public, $type ?? '');
+	return generer_objet_url(intval($id), $entite, $args ?: '', $ancre ?: '', $public, $type ?? '');
 }
 
 /**
@@ -1931,7 +1931,7 @@ function generer_objet_url_ecrire_edit(int $id, string $entite, string $args = '
  * @see generer_objet_url_ecrire_edit
  */
 function generer_url_ecrire_entite_edit($id, $entite, $args = '', $ancre = ''){
-	return generer_objet_url_ecrire_edit($id, $entite, $args, $ancre);
+	return generer_objet_url_ecrire_edit(intval($id), $entite, $args, $ancre);
 }
 
 
@@ -1979,7 +1979,7 @@ function urlencode_1738($url) {
  * @param string $connect
  * @return string
  */
-function generer_objet_url_absolue($id = '', $entite = '', $args = '', $ancre = '', ?bool $public = null, string $type = '', string $connect = ''): string {
+function generer_objet_url_absolue(int $id = 0, string $entite = '', string $args = '', string $ancre = '', ?bool $public = null, string $type = '', string $connect = ''): string {
 	$h = generer_objet_url($id, $entite, $args, $ancre, $public, $type, $connect);
 	if (!preg_match(',^\w+:,', $h)) {
 		include_spip('inc/filtres_mini');
@@ -1993,8 +1993,8 @@ function generer_objet_url_absolue($id = '', $entite = '', $args = '', $ancre = 
  * @deprecated 4.1
  * @see  generer_objet_url_absolue
  */
-function generer_url_entite_absolue($id = '', $entite = '', $args = '', $ancre = '', $connect = null){
-	return generer_objet_url_absolue($id, $entite, $args, $ancre, true, '', $connect);
+function generer_url_entite_absolue($id = 0, $entite = '', $args = '', $ancre = '', $connect = null){
+	return generer_objet_url_absolue(intval($id), $entite, $args, $ancre, true, '', $connect);
 }
 
 
