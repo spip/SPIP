@@ -4692,7 +4692,7 @@ function bouton_action($libelle, $url, $class = '', $confirm = '', $title = '', 
  *     Tableau de paramètres supplémentaires transmis aux fonctions generer_xxx
  * @return string
  */
-function generer_objet_info($id_objet, $type_objet, $info, $etoile = '', $params = []) {
+function generer_objet_info(int $id_objet, string $type_objet, string $info, string $etoile = '', array $params = []): string {
 	static $trouver_table = null;
 	static $objets;
 
@@ -4814,7 +4814,7 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile = '', $param
  *     Numéro de l'objet
  * @param string $type_objet
  *     Type d'objet
- * @param string $desc
+ * @param array $ligne_sql
  *     Ligne SQL de l'objet avec au moins descriptif, texte et chapo
  * @param int $introduction_longueur
  *     Longueur de l'introduction donnée dans la description de la table l'objet
@@ -4826,7 +4826,7 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile = '', $param
  *     Nom du connecteur à la base de données
  * @return string
  */
-function generer_objet_introduction($id_objet, $type_objet, $ligne_sql, $introduction_longueur = null, $longueur_ou_suite = null, $suite = null, string $connect = '') {
+function generer_objet_introduction(int $id_objet, string $type_objet, array $ligne_sql, ?int $introduction_longueur = null, $longueur_ou_suite = null, ?string $suite = null, string $connect = ''): string {
 
 	$descriptif = $ligne_sql['descriptif'] ?? '';
 	$texte = $ligne_sql['texte'] ?? '';
