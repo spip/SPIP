@@ -4929,7 +4929,7 @@ function appliquer_traitement_champ($texte, $champ, $table_objet = '', $env = []
  * @param null|string $connect
  * @return string
  */
-function generer_objet_lien($id_objet, $objet, $longueur = 80, $connect = null) {
+function generer_objet_lien(int $id_objet, string $objet, int $longueur = 80, string $connect = ''): string {
 	include_spip('inc/liens');
 	$titre = traiter_raccourci_titre($id_objet, $objet, $connect);
 	// lorsque l'objet n'est plus declare (plugin desactive par exemple)
@@ -4952,7 +4952,7 @@ function generer_objet_lien($id_objet, $objet, $longueur = 80, $connect = null) 
  * @see generer_objet_lien
  */
 function generer_lien_entite($id_objet, $objet, $longueur = 80, $connect = null) {
-	return generer_objet_lien($id_objet, $objet, $longueur, $connect);
+	return generer_objet_lien($id_objet, $objet, $longueur, $connect ?? '');
 }
 
 /**
