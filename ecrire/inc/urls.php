@@ -109,9 +109,9 @@ function urls_decoder_url($url, $fond = '', $contexte = [], $assembler = false) 
 	}
 
 	$url_redirect = '';
-	$renommer = charger_fonction_url('decoder');
-	if ($renommer) {
-		$a = $renommer($url, $fond, $contexte);
+	$decoder = charger_fonction_url('decoder');
+	if ($decoder) {
+		$a = $decoder($url, $fond, $contexte);
 		if (is_array($a)) {
 			[$ncontexte, $type, $url_redirect, $nfond] = array_pad($a, 4, null);
 			$url_redirect ??= '';

@@ -35,7 +35,7 @@ define('_debut_urls_page', get_spip_script('./') . '?');
  * @param string $ancre
  * @return string
  */
-function urls_page_generer_url_objet_dist(int $id, string $objet, string $args = '', string $ancre = '') : string {
+function urls_page_generer_url_objet_dist(int $id, string $objet, string $args = '', string $ancre = ''): string {
 
 	if ($generer_url_externe = charger_fonction_url($objet, 'defaut')) {
 		$url = $generer_url_externe($id, $args, $ancre);
@@ -67,7 +67,7 @@ function urls_page_generer_url_objet_dist(int $id, string $objet, string $args =
  * @return array
  *   [$contexte_decode, $type, $url_redirect, $fond]
  */
-function urls_page_dist(string $url, string $entite, array $contexte = []) : array {
+function urls_page_decoder_url_dist(string $url, string $entite, array $contexte = []): array {
 
 	// traiter les injections du type domaine.org/spip.php/cestnimportequoi/ou/encore/plus/rubrique23
 	if ($GLOBALS['profondeur_url'] > 0 and $entite == 'sommaire') {
