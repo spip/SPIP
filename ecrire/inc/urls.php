@@ -301,16 +301,15 @@ function nettoyer_url_page($url, $contexte = []) {
  * L'URL est calculée en fonction de son état publié ou non,
  * calculé à partir de la déclaration de statut.
  *
- * @param string $objet Type d'objet
  * @param int $id Identifiant de l'objet
+ * @param string $objet Type d'objet
  * @param string $args
  * @param string $ancre
  * @param bool|null $public
  * @param string $connect
  * @return string
- *
  */
-function generer_objet_url_ecrire($objet, $id, $args = '', $ancre = '', $public = null, string $connect = '') {
+function generer_objet_url_ecrire(int $id, string $objet, string $args = '', string $ancre = '', ?bool $public = null, string $connect = ''): string {
 	static $furls = [];
 	if (!isset($furls[$objet])) {
 		if (
@@ -349,5 +348,5 @@ function generer_objet_url_ecrire($objet, $id, $args = '', $ancre = '', $public 
  * @see generer_objet_url_ecrire
  */
 function generer_url_ecrire_objet($objet, $id, $args = '', $ancre = '', $public = null, string $connect = '') {
-	return generer_objet_url_ecrire($objet, $id, $args, $ancre, $public, $connect);
+	return generer_objet_url_ecrire($id, $objet, $args, $ancre, $public, $connect);
 }

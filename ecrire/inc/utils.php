@@ -1862,7 +1862,7 @@ function generer_objet_url(int $id, string $entite, string $args = '', string $a
 		if (!function_exists('generer_objet_url_ecrire')) {
 			include_spip('inc/urls');
 		}
-		$res = generer_objet_url_ecrire($entite, $id, $args, $ancre, false, $connect);
+		$res = generer_objet_url_ecrire($id, $entite, $args, $ancre, false, $connect);
 	} else {
 		$f = charger_fonction_url('objet', $type ?? '');
 
@@ -1911,7 +1911,7 @@ function generer_url_entite($id = '', $entite = '', $args = '', $ancre = '', $pu
  * @param string $ancre
  * @return string
  */
-function generer_objet_url_ecrire_edit($id, $entite, $args = '', $ancre = '') {
+function generer_objet_url_ecrire_edit(int $id, string $entite, string $args = '', string $ancre = ''): string {
 	$exec = objet_info($entite, 'url_edit');
 	$url = generer_url_ecrire($exec, $args);
 	if (intval($id)) {
