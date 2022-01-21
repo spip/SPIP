@@ -1786,12 +1786,9 @@ function charger_fonction_url(string $quoi, string $type = '') {
 	if (!$type) {
 		$type = $GLOBALS['type_urls'] ?? $GLOBALS['meta']['type_urls'] ?? 'page'; // sinon type "page" par défaut
 	}
-	$decoder = charger_fonction($type, 'urls', true);
-	// se rabattre sur les urls page si les urls perso non dispo
-	if (!$decoder) {
-		$decoder = charger_fonction('page', 'urls', true);
-		$type = 'page';
-	}
+
+	// inclure le module d'url
+	include_spip('urls/'.$type);
 
 	switch ($quoi) {
 		case 'page':
@@ -1804,17 +1801,26 @@ function charger_fonction_url(string $quoi, string $type = '') {
 			) {
 				return $f;
 			}
+			// pas de compat ancienne version ici, c'est une nouvelle feature
 			return '';
 		case 'objet':
-			if (function_exists($f = "urls_{$type}_generer_url_objet")
+		case 'decoder':
+		default:
+			$fquoi = ($quoi === 'objet' ? 'generer_url_objet' : 'decoder_url');
+			if (function_exists($f = "urls_{$type}_{$fquoi}")
 			  or function_exists($f .= "_dist")) {
 				return $f;
 			}
-			// pas de break : si la fonction urls_{$type}_generer_url_objet n'existe pas c'est un ancien module URL
-			// il faut passer par la fonction decoder qui fait tout en un (esperons)
-		case 'decoder':
-		default:
-			return $decoder;
+			// est-ce qu'on a une ancienne fonction urls_xxx_dist() ?
+			// c'est un ancien module d'url, on appelle l'ancienne fonction qui fait tout
+			if ($f = charger_fonction($type, 'urls', true)) {
+				return $f;
+			}
+			// sinon on se rabat sur les urls page
+			if ($type !== 'page') {
+				return charger_fonction_url($quoi, 'page');
+			}
+			return '';
 	}
 }
 
