@@ -578,20 +578,23 @@ function image_filtrer($args) {
 }
 
 /**
- * Retourne les tailles d'une image
+ * Retourne les informations d'une image
  *
- * Pour les filtres `largeur` et `hauteur`
+ * Pour les filtres `largeur` et `hauteur` `taille_image` et `poids_image`
  *
  * @param string $img
  *     Balise HTML `<img ... />` ou chemin de l'image (qui peut être une URL distante).
  * @return array
- *     Liste (hauteur, largeur) en pixels
+ *     largeur
+ *     hauteur
+ *     poids
  **/
-function taille_image($img, $force_refresh = false) {
+function infos_image($img, $force_refresh = false) {
 
-	static $largeur_img = [], $hauteur_img = [];
+	static $largeur_img = [], $hauteur_img = [], $poids_img = [];
 	$srcWidth = 0;
 	$srcHeight = 0;
+	$srcSize = null;
 
 	$src = extraire_attribut($img, 'src');
 
@@ -613,23 +616,29 @@ function taille_image($img, $force_refresh = false) {
 		$src = substr($src, 0, $p);
 	}
 
-	$srcsize = false;
+	$imagesize = false;
 	if (isset($largeur_img[$src]) and !$force_refresh) {
 		$srcWidth = $largeur_img[$src];
 	}
 	if (isset($hauteur_img[$src]) and !$force_refresh) {
 		$srcHeight = $hauteur_img[$src];
 	}
-	if (!$srcWidth or !$srcHeight) {
+	if (isset($poids_img[$src]) and !$force_refresh) {
+		$srcSize = $poids_img[$src];
+	}
+	if (!$srcWidth or !$srcHeight or is_null($srcSize)) {
 		if (
 			file_exists($src)
-			and $srcsize = spip_getimagesize($src)
+			and $imagesize = spip_getimagesize($src)
 		) {
 			if (!$srcWidth) {
-				$largeur_img[$src] = $srcWidth = $srcsize[0];
+				$largeur_img[$src] = $srcWidth = $imagesize[0];
 			}
 			if (!$srcHeight) {
-				$hauteur_img[$src] = $srcHeight = $srcsize[1];
+				$hauteur_img[$src] = $srcHeight = $imagesize[1];
+			}
+			if (!$srcSize){
+				$poids_img[$src] = filesize($src);
 			}
 		}
 		elseif (strpos($src, '<svg') !== false) {
@@ -641,6 +650,9 @@ function taille_image($img, $force_refresh = false) {
 				}
 				if (!$srcHeight) {
 					$hauteur_img[$src] = $srcHeight = $height;
+				}
+				if (!$srcSize){
+					$poids_img[$src] = $srcSize = strlen($src);
 				}
 			}
 		}
@@ -657,12 +669,36 @@ function taille_image($img, $force_refresh = false) {
 			if (!$srcHeight) {
 				$hauteur_img[$src] = $srcHeight = $valeurs['hauteur_dest'];
 			}
+			if (!$srcSize){
+				$poids_img[$src] = $srcSize = 0;
+			}
 		}
 	}
 
-	return [$srcHeight, $srcWidth];
+	return ['hauteur' => $srcHeight, 'largeur' => $srcWidth, 'poids' => $srcSize];
 }
 
+/**
+ * Retourne les dimensions d'une image
+ *
+ * Pour les filtres `largeur` et `hauteur`
+ *
+ * @param string $img
+ *     Balise HTML `<img ... />` ou chemin de l'image (qui peut être une URL distante).
+ * @return array
+ *     largeur
+ *     hauteur
+ *     poids
+ **/
+function poids_image($img, $force_refresh = false) {
+	$infos = infos_image($img, $force_refresh);
+	return $infos['poids'];
+}
+
+function taille_image($img, $force_refresh = false){
+	$infos = infos_image($img, $force_refresh);
+	return [$infos['hauteur'], $infos['largeur']];
+}
 
 /**
  * Retourne la largeur d'une image

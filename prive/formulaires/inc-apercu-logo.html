@@ -3,7 +3,7 @@
 	#SET{largeur,#ENV{logo}|largeur}
 	#SET{hauteur,#ENV{logo}|hauteur}
 	[<div class="titre">(#ENV{titre,''})</div>]
-	<div class="taille"><:info_largeur_vignette{largeur_vignette=#GET{largeur},hauteur_vignette=#GET{hauteur}}:>[ - (#ENV{logo}|tester_url_absolue|?{'',#ENV{logo}|filesize|taille_en_octets})]</div>
+	<div class="taille"><:info_largeur_vignette{largeur_vignette=#GET{largeur},hauteur_vignette=#GET{hauteur}}:>[ - (#ENV{logo}|poids_image|taille_en_octets)]</div>
 	[(#ENV{editable}|oui)
 		<input type="submit" class="btn submit supprimer" id="supprimer_#ENV{quoi,logo_on}_#ENV{objet}_#ENV{id_objet}" name="supprimer_#ENV{quoi,logo_on}" value="<:lien_supprimer|ucfirst|attribut_html:>" />
 	]
