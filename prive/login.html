@@ -18,8 +18,8 @@
 #INSERT_HEAD
 <script type='text/javascript'>
 jQuery(function(){jQuery('a#spip_pass').click(function(){window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=380'); return false;});});
-</script>
-<meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
+</script>[
+<meta name="generator" content="SPIP (#SPIP_VERSION|header_silencieux)" />]
 #SET{logo,#CHEMIN_IMAGE{#CONST{_DIR_IMG}|concat{spip_fond_login.jpg}}}
 [(#CONFIG{couleur_login}|oui)
 	#SET{hs,#CONFIG{couleur_login}|couleur_hex_to_hsl{"h, s"}}

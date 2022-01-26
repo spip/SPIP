@@ -390,7 +390,7 @@ function balise_SQUELETTE_dist($p) {
  * @see spip_version()
  * @example
  *     ```
- *     <meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
+ *     [<meta name="generator" content="SPIP (#SPIP_VERSION|header_silencieux)" />]
  *     ```
  *
  * @param Champ $p
