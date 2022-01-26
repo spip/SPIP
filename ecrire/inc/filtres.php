@@ -212,7 +212,6 @@ function spip_version() {
  * @return void
  */
 function header_silencieux($version) {
-	var_dump($GLOBALS['spip_header_silencieux']);
 	if (isset($GLOBALS['spip_header_silencieux']) && (bool) $GLOBALS['spip_header_silencieux']) {
 		$version = '';
 	}
