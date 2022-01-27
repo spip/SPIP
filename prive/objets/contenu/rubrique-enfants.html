@@ -21,21 +21,46 @@
 
 	[(#REM)
 
-		Les articles en cours de redaction
+		Les articles en cours de redaction, limités à ceux du visiteur si pas autorisé à publier dans la rubrique
 	]
-	[(#AUTORISER{publierdans,rubrique,#ID_RUBRIQUE}|?{
-		#INCLURE{fond=prive/objets/liste/articles,titre=<:info_tous_articles_en_redaction:>,statut=prepa,id_rubrique,par=date,ajax,env}
-		,
-		#INCLURE{fond=prive/objets/liste/articles,titre=<:info_tous_articles_en_redaction:>,statut=prepa,id_rubrique,id_auteur=#SESSION{id_auteur},par=date,ajax,env}
-		})
-	]
+	<INCLURE{
+		fond=prive/objets/liste/articles,
+		titre=<:info_tous_articles_en_redaction:>,
+		id_auteur=#AUTORISER{publierdans,rubrique,#ID_RUBRIQUE}|?{'',#SESSION{id_auteur}},
+		statut=prepa,
+		id_rubrique,
+		par=date,
+		ajax,
+		env,
+	}>
 
 	[(#REM)
 
-		Les articles publies
+		Les articles publiés
 	]
-	[(#INCLURE{fond=prive/objets/liste/articles,titre=<:info_tous_articles_presents:>,statut=publie,id_rubrique,par=date,ajax,env}
-		|sinon{#INCLURE{fond=prive/objets/liste/articles,titre=<:info_tous_articles_refuses:>,statut=refuse,id_rubrique,par=date,ajax,env}})]
+	<INCLURE{
+		fond=prive/objets/liste/articles,
+		titre=<:info_tous_articles_presents:>,
+		statut=publie,
+		id_rubrique,
+		par=date,
+		ajax,
+		env,
+	}>
+
+	[(#REM)
+
+		Les articles refusés
+	]
+	<INCLURE{
+		fond=prive/objets/liste/articles,
+		titre=<:info_tous_articles_refuses:>,
+		statut=refuse,
+		id_rubrique,
+		par=date,
+		ajax,
+		env,
+	}>
 ]
 <BOUCLE_verifierrub(RUBRIQUES){id_rubrique}{statut==.*}{si #AUTORISER{creerarticledans,rubrique,#ID_RUBRIQUE}}{0,1}>
 	[(#URL_ECRIRE{article_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique}}|icone_verticale{<:icone_ecrire_article:>,article,new,right})]
