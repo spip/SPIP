@@ -2410,6 +2410,41 @@ function generer_url_action($script, $args = '', $no_entities = false, $public =
 
 
 /**
+ * Créer une URL
+ *
+ * @param  string $script
+ *     Nom du script à exécuter
+ * @param  string $args
+ *     Arguments à transmettre a l'URL sous la forme `arg1=yy&arg2=zz`
+ * @param bool $no_entities
+ *     Si false : transforme les & en &amp;
+ * @param boolean $public
+ *     URL public ou relative a l'espace ou l'on est ?
+ * @return string
+ *     URL
+ */
+function generer_url_api(string $script, string $path, string $args, bool $no_entities = false, ?bool $public = null) {
+	if (is_null($public)) {
+		$public = (_DIR_RACINE ? false : '');
+	}
+	if (substr($script, -4) !== '.api') {
+		$script .= '.api';
+	}
+	$url =
+		(($public ? _DIR_RACINE : _DIR_RESTREINT) ?: './')
+	. $script . '/'
+	. ($path ? trim($path, '/') : '')
+	. ($args ? "?" . quote_amp('&' . $args) : '');
+
+	if ($no_entities) {
+		$url = str_replace('&amp;', '&', $url);
+	}
+
+	return $url;
+}
+
+
+/**
  * Fonction d'initialisation groupée pour compatibilité ascendante
  *
  * @param string $pi Répertoire permanent inaccessible

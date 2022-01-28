@@ -447,9 +447,8 @@ function lien_article_virtuel($virtuel) {
 function bouton_spip_rss($op, $args = [], $lang = '', $title = 'RSS') {
 	include_spip('inc/acces');
 	$clic = http_img_pack('rss-16.png', 'RSS', '', $title);
-	$args = param_low_sec($op, $args, $lang, 'rss');
-	$url = generer_url_public('rss', $args);
 
+	$url = generer_url_api_lowsec('transmettre', 'rss', $op, '', http_build_query($args), false, true);
 	return "<a style='float: " . $GLOBALS['spip_lang_right'] . ";' href='$url'>$clic</a>";
 }
 
