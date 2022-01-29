@@ -249,7 +249,7 @@ function formulaires_editer_auteur_verifier_dist(
 		// on verifie la meme chose que dans auteurs_edit_config()
 		if (
 			! auth_autoriser_modifier_login($auth_methode)
-			or !autoriser('modifier', 'auteur', intval($id_auteur), null, ['email' => true])
+			or !autoriser('modifier', 'auteur', intval($id_auteur), null, ['login' => true])
 		) {
 			$erreurs['login'] = _T('info_non_modifiable');
 		}
