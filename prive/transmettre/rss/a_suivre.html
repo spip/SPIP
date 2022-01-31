@@ -1,6 +1,5 @@
-#HTTP_HEADER{Content-Type: text/xml; charset=#CHARSET}#CACHE{900}<BOUCLE0(AUTEURS){tout}{id_auteur=#ENV{id}}{lang_select}><?php
-if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},rss,#ENV{op}, #ENV{args}}|?{1,0})]) {
-?><?xml version="1.0" encoding="#CHARSET" ?>
+#HTTP_HEADER{Content-Type: text/xml; charset=#CHARSET}#CACHE{900}<BOUCLE0(AUTEURS){tout}{id_auteur=#ENV{id_auteur}}{lang_select}>
+<?xml version="1.0" encoding="#CHARSET" ?>
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:thr="http://purl.org/syndication/thread/1.0">
 <channel xml:lang="#LANG">
 	<title>[&#91;(#NOM_SITE_SPIP|texte_backend)&#93;] RSS (<:icone_a_suivre|texte_backend:>)</title>
@@ -24,9 +23,5 @@ if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},rss,#ENV{op}, #ENV{args}}|?{1,0})]) {
 	[(#GET{fond}|trouver_fond|oui)#INCLURE*{fond=#GET{fond}}]
 </BOUCLE_objets>
 </channel>
-</rss><?php
-} else {
-include_spip('inc/minipres'); 
-echo minipres();
-}?></BOUCLE0>
+</rss></BOUCLE0>
 #FILTRE{trier_rss}
