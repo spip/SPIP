@@ -2434,7 +2434,7 @@ function generer_url_api(string $script, string $path, string $args, bool $no_en
 		(($public ? _DIR_RACINE : _DIR_RESTREINT) ?: './')
 	. $script . '/'
 	. ($path ? trim($path, '/') : '')
-	. ($args ? "?" . quote_amp('&' . $args) : '');
+	. ($args ? "?" . quote_amp($args) : '');
 
 	if ($no_entities) {
 		$url = str_replace('&amp;', '&', $url);
