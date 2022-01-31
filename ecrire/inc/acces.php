@@ -178,6 +178,63 @@ function low_sec($id_auteur) {
 	return $low_sec;
 }
 
+
+/**
+ * Vérifie un accès à faible sécurité
+ *
+ * Vérifie qu'un visiteur peut accéder à la page demandée,
+ * qui est protégée par une clé, calculée à partir du low_sec de l'auteur,
+ * et des paramètres le composant l'appel (op, args)
+ *
+ * @param int $id_auteur
+ *     L'auteur qui demande la page
+ * @param string $cle
+ *     La clé à tester
+ * @param string $dir
+ *     Un type d'accès (nom du répertoire dans lequel sont rangés les squelettes demandés, tel que 'rss')
+ * @param string $op
+ *     Nom de l'opération éventuelle
+ * @param string $args
+ *     Nom de l'argument calculé
+ * @return bool
+ *     True si on a le droit d'accès, false sinon.
+ **@example
+ *     `[(#ID_AUTEUR|securiser_acces{#ENV{cle}, rss, #ENV{op}, #ENV{args}}|sinon_interdire_acces)]`
+ *
+ * @see  generer_url_api_low_sec() pour generer une url api low sec
+ * @see  afficher_low_sec() pour calculer une clé valide
+ * @uses verifier_low_sec()
+ *
+ * @filtre
+ */
+function securiser_acces_low_sec($id_auteur, $cle, $dir, $op = '', $args = '') {
+	if ($op) {
+		$dir .= " $op $args";
+	}
+
+	return verifier_low_sec($id_auteur, $cle, $dir);
+}
+
+/**
+ * Generer une url xxx.api/$id_auteur/$cle/$format/$fond?$args
+ * @param string $script
+ * @param string $format
+ * @param string $fond
+ * @param string $path
+ * @param string $args
+ * @param bool $no_entities
+ * @param bool|null $public
+ * @return string
+ */
+function generer_url_api_low_sec(string $script, string $format, string $fond, string $path, string $args, bool $no_entities = false, ?bool $public = null) {
+	$id_auteur = $GLOBALS['visiteur_session']['id_auteur'] ?? 0;
+	$cle = afficher_low_sec($id_auteur, "$script/$format $fond $args");
+	$path = "$id_auteur/$cle/$format/$fond" . ($path ? "/$path" : '');
+
+	return generer_url_api( $script,  $path,  $args, $no_entities = false, $public);
+}
+
+
 /**
  * Inclure les arguments significatifs pour le hachage
  *
@@ -189,6 +246,7 @@ function low_sec($id_auteur) {
  * @param string $mime
  *     Par défaut 'rss'.
  * @return string
+ * @deprecated 4.1
  */
 function param_low_sec($op, $args = [], $lang = '', $mime = 'rss') {
 	$a = $b = '';

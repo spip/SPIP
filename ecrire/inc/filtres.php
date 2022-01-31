@@ -1477,13 +1477,9 @@ function antispam($texte) {
  * @return bool
  *     True si on a le droit d'accès, false sinon.
  **/
-function securiser_acces($id_auteur, $cle, $dir, $op = '', $args = '') {
+function filtre_securiser_acces_dist($id_auteur, $cle, $dir, $op = '', $args = '') {
 	include_spip('inc/acces');
-	if ($op) {
-		$dir .= " $op $args";
-	}
-
-	return verifier_low_sec($id_auteur, $cle, $dir);
+	return securiser_acces_low_sec($id_auteur, $cle, $op ? "$dir $op $args" : $dir);
 }
 
 /**
