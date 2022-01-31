@@ -431,25 +431,24 @@ function lien_article_virtuel($virtuel) {
  *
  * Le RSS est protegé par un hash de faible sécurité
  *
- * @example
- *     - `[(#VAL{a_suivre}|bouton_spip_rss)]`
- *     - `[(#VAL{signatures}|bouton_spip_rss{#ARRAY{id_article,#ID_ARTICLE}})]`
- *
- * @filtre
- * @uses param_low_sec()
  * @param string $op
  * @param array $args
  * @param string $lang
  * @param string $title
  * @return string
  *     Code HTML du lien
+ *@uses generer_url_api_low_sec()
+ * @example
+ *     - `[(#VAL{a_suivre}|bouton_spip_rss)]`
+ *     - `[(#VAL{signatures}|bouton_spip_rss{#ARRAY{id_article,#ID_ARTICLE}})]`
+ *
+ * @filtre
  */
 function bouton_spip_rss($op, $args = [], $lang = '', $title = 'RSS') {
 	include_spip('inc/acces');
 	$clic = http_img_pack('rss-16.png', 'RSS', '', $title);
-	$args = param_low_sec($op, $args, $lang, 'rss');
-	$url = generer_url_public('rss', $args);
 
+	$url = generer_url_api_low_sec('transmettre', 'rss', $op, '', http_build_query($args), false, true);
 	return "<a style='float: " . $GLOBALS['spip_lang_right'] . ";' href='$url'>$clic</a>";
 }
 
