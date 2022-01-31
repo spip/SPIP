@@ -209,9 +209,18 @@ function minipres($titre = '', $corps = '', $options = []) {
 			http_response_code($options['status']);
 		}
 
-		return install_debut_html($titre, $options['onload'], $options['all_inline'])
-		. $corps
-		. install_fin_html();
+		$html = install_debut_html($titre, $options['onload'], $options['all_inline'])
+				. $corps
+				. install_fin_html();
+
+		if ($GLOBALS['profondeur_url'] >= (_DIR_RESTREINT ? 1 : 2)
+		  and empty($options['all_inline'])) {
+			define('_SET_HTML_BASE', true);
+			include_spip('public/assembler');
+			$GLOBALS['html'] = true;
+			page_base_href($html);
+		}
+		return $html;
 	} else {
 		include_spip('inc/headers');
 		include_spip('inc/actions');
