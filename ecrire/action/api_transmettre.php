@@ -38,10 +38,10 @@ function action_api_transmettre_dist($arg = null) {
 	$id_auteur = intval($id_auteur);
 
 	if (preg_match(",[^\w\\.-],", $format)) {
-		action_api_transmettre_fail("format $format");
+		action_api_transmettre_fail("format $format ??");
 	}
 	if (preg_match(",[^\w\\.-],", $fond)) {
-		action_api_transmettre_fail("fond $fond");
+		action_api_transmettre_fail("fond $fond ??");
 	}
 
 	// verifier la cle
@@ -59,22 +59,29 @@ function action_api_transmettre_dist($arg = null) {
 	}
 	$qs = http_build_query($contexte);
 	if (!securiser_acces_low_sec(intval($id_auteur), $cle, "transmettre/$format", $fond, $qs)) {
-		var_dump([$id_auteur, $cle, "transmettre/$format", $fond, $qs]);
-		action_api_transmettre_fail("QS $qs");
-	}
 
-	// et une autorisation en bonne et due forme
-	include_spip('inc/autoriser');
-	if (!autoriser('transmettre',"_{$format}_{$fond}", $id_auteur)) {
-		action_api_transmettre_fail("autoriser");
+		// si le autoriser low_sec n'est pas bon, on peut valider l'appel si l'auteur est identifie
+		include_spip('inc/autoriser');
+		$autoriser_type = preg_replace(',\W+,', "", "_{$format}{$fond}");
+		if (!$id_auteur
+			or empty($GLOBALS['visiteur_session']['id_auteur'])
+			or $GLOBALS['visiteur_session']['id_auteur'] != $id_auteur
+			or !autoriser('transmettre',$autoriser_type, $id_auteur)) {
+
+			action_api_transmettre_fail("auth QS $qs ??");
+		}
 	}
 
 	$contexte['id_auteur'] = $id_auteur;
 
 	$fond = "transmettre/$format/$fond";
 
-	if (!trouver_fond($fond) and !test_espace_prive()) {
+	if (!trouver_fond($fond)) {
 		$fond = "prive/$fond";
+	}
+
+	if (!trouver_fond($fond)) {
+		action_api_transmettre_fail("fond $fond ??");
 	}
 
 	$res = recuperer_fond($fond, $contexte, ['raw' => true]);
@@ -83,7 +90,13 @@ function action_api_transmettre_dist($arg = null) {
 			header("$h: $v");
 		}
 	}
-	echo ltrim($res['texte']);
+
+	$res = ltrim($res['texte']);
+	if (empty($res)) {
+		spip_log("$arg $qs resultat vide", 'transmettre' . _LOG_INFO_IMPORTANTE);
+	}
+
+	echo $res;
 	exit();
 }
 
