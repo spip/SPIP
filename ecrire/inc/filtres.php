@@ -1999,12 +1999,16 @@ function alterner($i, ...$args) {
 	$num = count($args);
 
 	if ($num === 1 && is_array($args[0])) {
-		$args = $args[0];
+		// un tableau de valeur dont les cles sont numerotees de 0 a num
+		$args = array_values($args[0]);
 		$num = count($args);
 	}
 
+	// un index compris entre 0 et num exclus
+	$i = ((intval($i) -1) % $num); // dans ]-$num;$num[
+	$i = ($i + $num) % $num; // dans [0;$num[
 	// renvoyer le i-ieme argument, modulo le nombre d'arguments
-	return $args[(intval($i) - 1) % $num];
+	return $args[$i];
 }
 
 
