@@ -242,8 +242,12 @@ function formulaires_editer_auteur_verifier_dist(
 	}
 
 	$erreurs['message_erreur'] = '';
-	if (
-		$login = _request('login') and
+	if (_request('login')) {
+		// on n'est jamais cense poster le name 'login'
+		$erreurs['login'] = _T('info_non_modifiable');
+	}
+	elseif (
+		($login = _request('new_login')) and
 		$login !== sql_getfetsel('login', 'spip_auteurs', 'id_auteur=' . intval($id_auteur))
 	) {
 		// on verifie la meme chose que dans auteurs_edit_config()
