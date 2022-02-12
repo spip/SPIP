@@ -1,5 +1,7 @@
 <?php
 
+use Spip\Core\Texte;
+
 /***************************************************************************\
  *  SPIP, Système de publication pour l'internet                           *
  *                                                                         *

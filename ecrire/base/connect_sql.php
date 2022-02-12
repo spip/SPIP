@@ -511,7 +511,7 @@ function query_reinjecte_textes($query, $textes) {
  * @deprecated 3.1 Pour compatibilité.
  * @see sql_query() ou l'API `sql_*`.
  *
- * @param string $query Texte de la requête
+ * @param string $query texte de la requête
  * @param string $serveur Nom du connecteur pour la base de données
  * @return bool|mixed
  *     - false si on ne peut pas exécuter la requête
