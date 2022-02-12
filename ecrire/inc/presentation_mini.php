@@ -100,7 +100,7 @@ function debut_droite() {
  * @param string $exec
  *     Nom de la page exec en cours
  * @param array $contexte
- *     Contexte de la page
+ *     contexte de la page
  * @param array|null $auteur
  *     Session de l'auteur. Sera prise sur l'auteur connecté si non indiquée.
  * @return string
@@ -194,7 +194,7 @@ function html_tests_js() {
 /**
  * Retourne la liste des mises à jour de SPIP possibles
  *
- * @return string Texte présentant la liste des mises à jour existantes
+ * @return string texte présentant la liste des mises à jour existantes
  **/
 function info_maj_spip() {
 

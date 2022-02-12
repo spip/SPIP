@@ -34,11 +34,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * dans les squelettes
  *
  * @param string $texte
- *     Texte à composer
+ *     texte à composer
  * @param Champ $p
  *     Balise qui appelle ce texte
  * @return string
- *     Texte
+ *     texte
  */
 function sandbox_composer_texte($texte, &$p) {
 	$code = "'" . str_replace(['\\', "'"], ['\\\\', "\\'"], $texte) . "'";

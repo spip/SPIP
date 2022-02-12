@@ -33,7 +33,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Identifiant de l'auteur. En absence utilise l'argument
  *     de l'action sécurisée.
  * @return array
- *     Liste (identifiant de l'auteur, Texte d'erreur éventuel)
+ *     Liste (identifiant de l'auteur, texte d'erreur éventuel)
  */
 function action_editer_auteur_dist($arg = null) {
 

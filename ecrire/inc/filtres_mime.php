@@ -130,7 +130,7 @@ function filtre_text_dist($t) {
  *
  * @filtre
  * @param string $t
- *     Texte CSV
+ *     texte CSV
  * @return string
  *     Tableau (formaté en SPIP)
  **/

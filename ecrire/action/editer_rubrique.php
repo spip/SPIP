@@ -128,7 +128,7 @@ function rubrique_inserer($id_parent, $set = null) {
  * @return bool|string
  *     - false  : Aucune modification, aucun champ n'est à modifier
  *     - chaîne vide : Vide si tout s'est bien passé
- *     - chaîne : Texte d'un message d'erreur
+ *     - chaîne : texte d'un message d'erreur
  */
 function rubrique_modifier($id_rubrique, $set = null) {
 	include_spip('inc/autoriser');
@@ -230,7 +230,7 @@ function editer_rubrique_breves($id_rubrique, $id_parent, $c = []) {
  * @global array $GLOBALS ['visiteur_session']
  * @return string
  *     Chaîne vide : aucune erreur
- *     Chaîne : Texte du message d'erreur
+ *     Chaîne : texte du message d'erreur
  */
 function rubrique_instituer($id_rubrique, $c) {
 	// traitement de la rubrique parente

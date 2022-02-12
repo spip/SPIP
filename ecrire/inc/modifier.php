@@ -94,7 +94,7 @@ function collecter_requests($white_list, $black_list = [], $set = null, $tous = 
  * @return bool|string
  *     - false  : Aucune modification, aucun champ n'est à modifier
  *     - chaîne vide : Vide si tout s'est bien passé
- *     - chaîne : Texte d'un message d'erreur
+ *     - chaîne : texte d'un message d'erreur
  */
 function objet_modifier_champs($objet, $id_objet, $options, $c = null, $serveur = '') {
 	if (!$id_objet = intval($id_objet)) {

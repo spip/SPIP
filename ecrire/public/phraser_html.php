@@ -13,6 +13,10 @@
 use Spip\Core\Boucle;
 use Spip\Core\Champ;
 use Spip\Core\Critere;
+use Spip\Core\Idiome;
+use Spip\Core\Inclure;
+use Spip\Core\Polyglotte;
+use Spip\Core\Texte;
 
 /**
  * Phraseur d'un squelette ayant une syntaxe SPIP/HTML

@@ -719,9 +719,9 @@ function balise_EXPOSE_dist($p) {
  * @param Champ $p
  *     Pile au niveau de la balise
  * @param string $on
- *     Texte à afficher si l'élément est exposé (code à écrire tel que "'on'")
+ *     texte à afficher si l'élément est exposé (code à écrire tel que "'on'")
  * @param string $off
- *     Texte à afficher si l'élément n'est pas exposé (code à écrire tel que "''")
+ *     texte à afficher si l'élément n'est pas exposé (code à écrire tel que "''")
  * @return Champ
  *     Pile complétée par le code à générer
  **/
@@ -2542,7 +2542,7 @@ function balise_ACTION_FORMULAIRE($p) {
  * Cette balise s'utilise à la place des liens `action_auteur`, sous la forme
  * `#BOUTON_ACTION{libelle[,url[,class[,confirm[,title[,callback]]]]]}`
  *
- * - libelle  : Texte du bouton
+ * - libelle  : texte du bouton
  * - url      : URL d’action sécurisée
  * - class    : Classes à ajouter au bouton, à l'exception de `ajax` qui est placé sur le formulaire.
  *              Pour d'autres classes sur le formulaire, utiliser le filtre `ajouter_class`
