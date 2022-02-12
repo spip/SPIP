@@ -333,13 +333,13 @@ function echappe_retour_modeles($letexte, $interdire_scripts = false) {
  * @link https://www.spip.net/4275
  *
  * @param string $texte
- *     Texte à couper
+ *     texte à couper
  * @param int $taille
  *     Taille de la coupe
  * @param string $suite
  *     Points de suite ajoutés.
  * @return string
- *     Texte coupé
+ *     texte coupé
  **/
 function couper($texte, $taille = 50, $suite = null) {
 	if (!($length = strlen($texte)) or $taille <= 0) {
@@ -535,9 +535,9 @@ function echapper_html_suspect($texte, $strict = true) {
  * @link https://www.spip.net/4310
  *
  * @param string $t
- *      Texte à sécuriser
+ *      texte à sécuriser
  * @return string
- *      Texte sécurisé
+ *      texte sécurisé
  **/
 function safehtml($t) {
 	static $safehtml;
@@ -578,11 +578,11 @@ function safehtml($t) {
  *     gérer les autres modèles ?
  *
  * @param string $letexte
- *     Texte à nettoyer
+ *     texte à nettoyer
  * @param string|null $message
  *     Message de remplacement pour chaque image enlevée
  * @return string
- *     Texte sans les modèles d'image
+ *     texte sans les modèles d'image
  **/
 function supprime_img($letexte, $message = null) {
 	if ($message === null) {

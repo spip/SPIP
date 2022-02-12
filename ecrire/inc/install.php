@@ -73,7 +73,7 @@ function install_fichier_connexion($nom, $texte) {
  * @param string $ldap Type d'authentification (cas si 'ldap')
  * @param string $charset Charset de la connexion SQL
  * @return string
- *     Texte du fichier de connexion
+ *     texte du fichier de connexion
  *
  **/
 function install_connexion($adr, $port, $login, $pass, $base, $type, $pref, $ldap = '', $charset = '') {
@@ -234,7 +234,7 @@ function info_etape($titre, $complement = '') {
 /**
  * Retourne le code HTML d'un bouton `suivant>>` pour les phases d'installation
  *
- * @param string $code Texte du bouton
+ * @param string $code texte du bouton
  * @return string Code HTML du bouton
  **/
 function bouton_suivant($code = '') {

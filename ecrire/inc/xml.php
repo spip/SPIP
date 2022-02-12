@@ -73,7 +73,7 @@ if (!defined('_SPIP_XML_TAG_SPLIT')) {
  * @see spip_xml_aplatit() pour l'inverse
  *
  * @param string $texte
- *     Texte XML
+ *     texte XML
  * @param bool $strict
  *     true pour râler si une balise n'est pas correctement fermée, false sinon.
  * @param bool $clean ?

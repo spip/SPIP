@@ -119,7 +119,7 @@ class Boucle
 	public $criteres = [];
 
 	/**
-	 * Textes insérés entre 2 éléments de boucle (critère inter)
+	 * textes insérés entre 2 éléments de boucle (critère inter)
 	 *
 	 * @var string[]
 	 */
@@ -369,7 +369,7 @@ class Boucle
 	public $iterateur = ''; // type d'iterateur
 
 	/**
-	 * @var array $debug Textes qui seront insérés dans l’entête de boucle du mode debug
+	 * @var array $debug textes qui seront insérés dans l’entête de boucle du mode debug
 	 */
 	public $debug = [];
 
