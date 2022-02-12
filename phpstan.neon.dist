@@ -8,6 +8,4 @@ parameters:
     excludePaths:
         analyseAndScan:
             - ecrire/lang
-        analyse:
-            - ecrire/inc/idna_convert.class.php
     level: 0
