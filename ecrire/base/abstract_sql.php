@@ -199,11 +199,11 @@ function sql_set_charset($charset, $serveur = '', $option = true) {
  * @param array|string $where
  *     Conditions a remplir (Where)
  * @param array|string $groupby
- *     Critere de regroupement (Group by)
+ *     critere de regroupement (Group by)
  * @param array|string $orderby
  *     Tableau de classement (Order By)
  * @param string $limit
- *     Critere de limite (Limit)
+ *     critere de limite (Limit)
  * @param string|array $having
  *     Tableau ou chaine des des post-conditions à remplir (Having)
  * @param string $serveur
@@ -304,11 +304,11 @@ function sql_select(
  * @param array|string $where
  *    Conditions a remplir (Where)
  * @param array|string $groupby
- *    Critere de regroupement (Group by)
+ *    critere de regroupement (Group by)
  * @param array|string $orderby
  *    Tableau de classement (Order By)
  * @param string $limit
- *    Critere de limite (Limit)
+ *    critere de limite (Limit)
  * @param string|array $having
  *     Tableau ou chaine des des post-conditions à remplir (Having)
  * @param string $serveur
@@ -355,7 +355,7 @@ function sql_get_select(
  * @param array|string $where
  *    Conditions a remplir (Where)
  * @param array|string $groupby
- *    Critere de regroupement (Group by)
+ *    critere de regroupement (Group by)
  * @param string|array $having
  *     Tableau ou chaine des des post-conditions à remplir (Having)
  * @param string $serveur
@@ -1623,11 +1623,11 @@ function sql_query($ins, $serveur = '', $option = true) {
  * @param array|string $where
  *    Conditions a remplir (Where)
  * @param array|string $groupby
- *    Critere de regroupement (Group by)
+ *    critere de regroupement (Group by)
  * @param array|string $orderby
  *    Tableau de classement (Order By)
  * @param string $limit
- *    Critere de limite (Limit)
+ *    critere de limite (Limit)
  * @param string|array $having
  *     Tableau ou chaine des des post-conditions à remplir (Having)
  * @param string $serveur
@@ -1691,11 +1691,11 @@ function sql_fetsel(
  * @param array|string $where
  *    Conditions a remplir (Where)
  * @param array|string $groupby
- *    Critere de regroupement (Group by)
+ *    critere de regroupement (Group by)
  * @param array|string $orderby
  *    Tableau de classement (Order By)
  * @param string $limit
- *    Critere de limite (Limit)
+ *    critere de limite (Limit)
  * @param string|array $having
  *     Tableau ou chaine des des post-conditions à remplir (Having)
  * @param string $serveur
@@ -2147,11 +2147,11 @@ function sql_in($champ, $valeurs, $not = '', $serveur = '', $option = true) {
  * @param array|string $where
  *     Conditions a remplir (Where)
  * @param array|string $groupby
- *     Critere de regroupement (Group by)
+ *     critere de regroupement (Group by)
  * @param array|string $orderby
  *     Tableau de classement (Order By)
  * @param string $limit
- *     Critere de limite (Limit)
+ *     critere de limite (Limit)
  * @param string|array $having
  *     Tableau ou chaine des des post-conditions à remplir (Having)
  * @param string $serveur
