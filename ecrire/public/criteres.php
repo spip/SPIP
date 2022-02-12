@@ -11,6 +11,7 @@
 \***************************************************************************/
 
 use Spip\Core\Boucle;
+use Spip\Core\Critere;
 
 /**
  * Définition des {criteres} d'une boucle
@@ -1853,7 +1854,7 @@ function critere_tri_dist($idb, &$boucles, $crit) {
 	$boucle->order[] = "tri_champ_order(\$tri,\$command['from'],\$senstri)";
 }
 
-# Criteres de comparaison
+# criteres de comparaison
 
 /**
  * Compile un critère non déclaré explicitement
