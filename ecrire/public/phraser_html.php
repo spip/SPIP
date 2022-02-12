@@ -10,6 +10,8 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+use Spip\Core\Champ;
+
 /**
  * Phraseur d'un squelette ayant une syntaxe SPIP/HTML
  *
