@@ -36,7 +36,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Identifiant de l'article. En absence utilise l'argument
  *     de l'action sécurisée.
  * @return array
- *     Liste (identifiant de l'article, Texte d'erreur éventuel)
+ *     Liste (identifiant de l'article, texte d'erreur éventuel)
  */
 function action_editer_article_dist($arg = null) {
 	include_spip('inc/autoriser');
