@@ -42,7 +42,7 @@ include_spip('base/objets');
  * @param string $fond
  *   Fond initial par défaut
  * @param array $contexte
- *   Contexte initial à prendre en compte
+ *   contexte initial à prendre en compte
  * @param bool $assembler
  *   `true` si l'URL correspond à l'URL principale de la page qu'on est en train d'assembler
  *   dans ce cas la fonction redirigera automatiquement si besoin
