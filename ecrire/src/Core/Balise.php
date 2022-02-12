@@ -79,7 +79,7 @@ class Balise
 	/**
 	 * AST du squelette, liste de toutes les boucles
 	 *
-	 * @var Boucles[]
+	 * @var Boucle[]
 	 */
 	public $boucles;
 
