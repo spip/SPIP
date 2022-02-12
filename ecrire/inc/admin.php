@@ -284,7 +284,7 @@ function fin_admin($action) {
  * @param string $suite
  *     Corps du formulaire
  * @param string $submit
- *     Texte du bouton de validation
+ *     texte du bouton de validation
  * @return string
  *     Code HTML du formulaire
  **/

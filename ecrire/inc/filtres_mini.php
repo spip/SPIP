@@ -126,7 +126,7 @@ function suivre_lien($url, $lien) {
  *
  * @param string $url URL
  * @param string $base URL de base de destination (par défaut ce sera l'URL de notre site)
- * @return string Texte ou URL (en absolus)
+ * @return string texte ou URL (en absolus)
  **/
 function url_absolue($url, $base = '') {
 	$url = trim((string) $url);
@@ -180,9 +180,9 @@ function protocole_verifier($url_absolue, $protocoles_autorises = ['http','https
  * @uses url_absolue()
  * @link https://www.spip.net/4126
  *
- * @param string $texte Texte
+ * @param string $texte texte
  * @param string $base URL de base de destination (par défaut ce sera l'URL de notre site)
- * @return string Texte avec des URLs absolues
+ * @return string texte avec des URLs absolues
  **/
 function liens_absolus($texte, $base = '') {
 	if (preg_match_all(',(<(a|link|image|img|script)\s[^<>]*(href|src)=[^<>]*>),imsS', $texte, $liens, PREG_SET_ORDER)) {
@@ -216,9 +216,9 @@ function liens_absolus($texte, $base = '') {
  * @link https://www.spip.net/4128
  * @global string $mode_abs_url Pour connaître le mode (url ou texte)
  *
- * @param string $texte Texte ou URL
+ * @param string $texte texte ou URL
  * @param string $base URL de base de destination (par défaut ce sera l'URL de notre site)
- * @return string Texte ou URL (en absolus)
+ * @return string texte ou URL (en absolus)
  **/
 function abs_url($texte, $base = '') {
 	if ($GLOBALS['mode_abs_url'] == 'url') {
