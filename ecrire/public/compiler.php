@@ -11,6 +11,9 @@
 \***************************************************************************/
 
 use Spip\Core\Boucle;
+use Spip\Core\Contexte;
+use Spip\Core\Inclure;
+use Spip\Core\Texte;
 
 /**
  * Fichier principal du compilateur de squelettes
