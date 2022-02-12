@@ -168,7 +168,7 @@ function test_iconv(): bool {
  * @param string $charset_cible
  *     Charset de destination (unicode par défaut)
  * @return string|array
- *     Texte corrigé
+ *     texte corrigé
  **/
 function corriger_caracteres_windows($texte, $charset = 'AUTO', $charset_cible = 'unicode') {
 	static $trans;
@@ -249,11 +249,11 @@ function corriger_caracteres_windows($texte, $charset = 'AUTO', $charset_cible =
  * Transforme les &eacute; en &#123;
  *
  * @param string $texte
- *     Texte à convertir
+ *     texte à convertir
  * @param bool $secure
  *     true pour *ne pas convertir* les caracteres malins &lt; &amp; etc.
  * @return string
- *     Texte converti
+ *     texte converti
  **/
 function html2unicode($texte, $secure = false) {
 	if (strpos($texte, '&') === false) {
@@ -285,9 +285,9 @@ function html2unicode($texte, $secure = false) {
  * Transforme &angle; en &#x2220; ainsi que toutes autres entités mathématiques
  *
  * @param string $texte
- *     Texte à convertir
+ *     texte à convertir
  * @return string
- *     Texte converti
+ *     texte converti
  **/
 function mathml2unicode($texte) {
 	static $trans;
@@ -313,12 +313,12 @@ function mathml2unicode($texte) {
  *     convertir les accents iso-8859-1
  *
  * @param string $texte
- *     Texte à convertir
+ *     texte à convertir
  * @param string $charset
  *     Charset actuel du texte
  *     Par défaut (AUTO), le charset est celui du site.
  * @return string
- *     Texte converti en unicode
+ *     texte converti en unicode
  **/
 function charset2unicode($texte, $charset = 'AUTO' /* $forcer: obsolete*/) {
 	static $trans;
@@ -400,12 +400,12 @@ function charset2unicode($texte, $charset = 'AUTO' /* $forcer: obsolete*/) {
  * ont ete encodees ainsi c'est a dessein
  *
  * @param string $texte
- *     Texte unicode à transformer
+ *     texte unicode à transformer
  * @param string $charset
  *     Charset à appliquer au texte
  *     Par défaut (AUTO), le charset sera celui du site.
  * @return string
- *     Texte transformé dans le charset souhaité
+ *     texte transformé dans le charset souhaité
  **/
 function unicode2charset($texte, $charset = 'AUTO') {
 	static $CHARSET_REVERSE = [];
@@ -454,12 +454,12 @@ function unicode2charset($texte, $charset = 'AUTO') {
  * Les caractères non resolus sont transformés en `&#123`;
  *
  * @param string $texte
- *     Texte unicode à importer
+ *     texte unicode à importer
  * @param string $charset
  *     Charset d'origine du texte
  *     Par défaut (AUTO), le charset d'origine est celui du site.
  * @return string
- *     Texte transformé dans le charset site
+ *     texte transformé dans le charset site
  **/
 function importer_charset($texte, $charset = 'AUTO') {
 	$s = null;
@@ -505,9 +505,9 @@ function importer_charset($texte, $charset = 'AUTO') {
  * Utilise la librairie mb si présente
  *
  * @param string $source
- *    Texte UTF-8 à transformer
+ *    texte UTF-8 à transformer
  * @return string
- *    Texte transformé en unicode
+ *    texte transformé en unicode
  **/
 function utf_8_to_unicode($source) {
 
@@ -609,9 +609,9 @@ function utf_8_to_unicode($source) {
  * => tout ca sera osolete quand on sera surs d'avoir mb_string
  *
  * @param string $source
- *    Texte UTF-8 à transformer
+ *    texte UTF-8 à transformer
  * @return string
- *    Texte transformé en unicode
+ *    texte transformé en unicode
  **/
 function utf_32_to_unicode($source) {
 
@@ -678,9 +678,9 @@ function caractere_utf_8($num) {
  * Convertit un texte unicode en utf-8
  *
  * @param string $texte
- *     Texte à convertir
+ *     texte à convertir
  * @return string
- *     Texte converti
+ *     texte converti
  **/
 function unicode_to_utf_8($texte) {
 
@@ -726,9 +726,9 @@ function unicode_to_utf_8($texte) {
  * Convertit les unicode &#264; en javascript \u0108
  *
  * @param string $texte
- *     Texte à convertir
+ *     texte à convertir
  * @return string
- *     Texte converti
+ *     texte converti
  **/
 function unicode_to_javascript($texte) {
 	$vu = [];
@@ -746,9 +746,9 @@ function unicode_to_javascript($texte) {
  * Convertit les %uxxxx (envoyés par javascript) en &#yyy unicode
  *
  * @param string $texte
- *     Texte à convertir
+ *     texte à convertir
  * @return string
- *     Texte converti
+ *     texte converti
  **/
 function javascript_to_unicode($texte) {
 	while (preg_match(',%u([0-9A-F][0-9A-F][0-9A-F][0-9A-F]),', $texte, $regs)) {
@@ -762,9 +762,9 @@ function javascript_to_unicode($texte) {
  * Convertit les %E9 (envoyés par le browser) en chaîne du charset du site (binaire)
  *
  * @param string $texte
- *     Texte à convertir
+ *     texte à convertir
  * @return string
- *     Texte converti
+ *     texte converti
  **/
 function javascript_to_binary($texte) {
 	while (preg_match(',%([0-9A-F][0-9A-F]),', $texte, $regs)) {
@@ -883,7 +883,7 @@ function translitteration_chiffree($car): string {
  * Reconnaitre le BOM utf-8 (0xEFBBBF)
  *
  * @param string $texte
- *    Texte dont on vérifie la présence du BOM
+ *    texte dont on vérifie la présence du BOM
  * @return bool
  *    true s'il a un BOM
  **/
@@ -900,7 +900,7 @@ function bom_utf8($texte): bool {
  * @link http://w3.org/International/questions/qa-forms-utf-8.html
  *
  * @param string $string
- *     Texte dont on vérifie qu'il est de l'utf-8
+ *     texte dont on vérifie qu'il est de l'utf-8
  * @return bool
  *     true si c'est le cas
  **/
@@ -926,7 +926,7 @@ function is_utf8($string): bool {
  * Vérifie qu'une chaîne est en ascii valide
  *
  * @param string $string
- *     Texte dont on vérifie qu'il est de l'ascii
+ *     texte dont on vérifie qu'il est de l'ascii
  * @return bool
  *     true si c'est le cas
  **/
@@ -952,7 +952,7 @@ function is_ascii($string): bool {
  * @param string $headers
  *     Éventuels headers HTTP liés à cette page
  * @return string
- *     Texte transcodé dans le charset du site
+ *     texte transcodé dans le charset du site
  **/
 function transcoder_page($texte, $headers = ''): string {
 

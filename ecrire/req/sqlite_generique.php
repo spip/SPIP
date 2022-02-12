@@ -445,7 +445,7 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true) {
  * @param string $serveur Nom de la connexion
  * @param bool $requeter Exécuter la requête, sinon la retourner
  * @return array|null|resource|string
- *     - string Texte de la requête si demandée
+ *     - string texte de la requête si demandée
  *     - true si la requête réussie, false sinon.
  */
 function spip_sqlite_create(
@@ -517,7 +517,7 @@ function spip_sqlite_create_base($nom, $serveur = '', $option = true) {
  * @param string $nom
  *    Nom de la vue a creer
  * @param string $query_select
- *     Texte de la requête de sélection servant de base à la vue
+ *     texte de la requête de sélection servant de base à la vue
  * @param string $serveur
  *     Nom du connecteur
  * @param bool $requeter
@@ -667,7 +667,7 @@ function spip_sqlite_count($r, $serveur = '', $requeter = true) {
  * @param string $serveur Nom de la connexion
  * @param bool $requeter Exécuter la requête, sinon la retourner
  * @return int|bool|string
- *     - String Texte de la requête si demandé
+ *     - string texte de la requête si demandé
  *     - int Nombre de lignes
  *     - false si la requête a échouée
  **/
@@ -708,8 +708,8 @@ function spip_sqlite_countsel(
  * @param bool $requeter Exécuter la requête, sinon la retourner
  * @return bool|string
  *     - int : nombre de suppressions réalisées,
- *     - Texte de la requête si demandé,
- *     - False en cas d'erreur.
+ *     - texte de la requête si demandé,
+ *     - false en cas d'erreur.
  **/
 function spip_sqlite_delete($table, $where = '', $serveur = '', $requeter = true) {
 	$res = spip_sqlite_query(
@@ -741,7 +741,7 @@ function spip_sqlite_delete($table, $where = '', $serveur = '', $requeter = true
  * @param string $serveur Nom de la connexion
  * @param bool $requeter Exécuter la requête, sinon la retourner
  * @return bool|string
- *     - string Texte de la requête si demandé
+ *     - string texte de la requête si demandé
  *     - true si la requête a réussie, false sinon
  */
 function spip_sqlite_drop_table($table, $exist = '', $serveur = '', $requeter = true) {
@@ -765,7 +765,7 @@ function spip_sqlite_drop_table($table, $exist = '', $serveur = '', $requeter = 
  * @param string $serveur Nom de la connexion
  * @param bool $requeter Exécuter la requête, sinon la retourner
  * @return bool|string
- *     - string Texte de la requête si demandé
+ *     - string texte de la requête si demandé
  *     - true si la requête a réussie, false sinon
  */
 function spip_sqlite_drop_view($view, $exist = '', $serveur = '', $requeter = true) {
@@ -891,7 +891,7 @@ function spip_sqlite_errno($serveur = '') {
 /**
  * Retourne une explication de requête (Explain) SQLite
  *
- * @param string $query Texte de la requête
+ * @param string $query texte de la requête
  * @param string $serveur Nom de la connexion
  * @param bool $requeter Exécuter la requête, sinon la retourner
  * @return array|string|bool
@@ -1068,8 +1068,8 @@ function spip_sqlite_in($val, $valeurs, $not = '', $serveur = '', $requeter = tr
  *     Exécuter la requête, sinon la retourner
  * @return bool|string|int|array
  *     - int|true identifiant de l'élément inséré (si possible), ou true, si réussite
- *     - Texte de la requête si demandé,
- *     - False en cas d'erreur,
+ *     - texte de la requête si demandé,
+ *     - false en cas d'erreur,
  *     - Tableau de description de la requête et du temps d'exécution, si var_profile activé
  **/
 function spip_sqlite_insert($table, $champs, $valeurs, $desc = [], $serveur = '', $requeter = true) {
@@ -1107,8 +1107,8 @@ function spip_sqlite_insert($table, $champs, $valeurs, $desc = [], $serveur = ''
  *     Exécuter la requête, sinon la retourner
  * @return bool|string|int|array
  *     - int|true identifiant de l'élément inséré (si possible), ou true, si réussite
- *     - Texte de la requête si demandé,
- *     - False en cas d'erreur,
+ *     - texte de la requête si demandé,
+ *     - false en cas d'erreur,
  *     - Tableau de description de la requête et du temps d'exécution, si var_profile activé
  **/
 function spip_sqlite_insertq($table, $couples = [], $desc = [], $serveur = '', $requeter = true) {
@@ -1152,9 +1152,9 @@ function spip_sqlite_insertq($table, $couples = [], $desc = [], $serveur = '', $
  * @param bool $requeter
  *     Exécuter la requête, sinon la retourner
  * @return bool|string
- *     - True en cas de succès,
- *     - Texte de la requête si demandé,
- *     - False en cas d'erreur.
+ *     - true en cas de succès,
+ *     - texte de la requête si demandé,
+ *     - false en cas d'erreur.
  **/
 function spip_sqlite_insertq_multi($table, $tab_couples = [], $desc = [], $serveur = '', $requeter = true) {
 	if (!$desc) {
@@ -1323,7 +1323,7 @@ function spip_sqlite_listdbs($serveur = '', $requeter = true) {
  *
  * @param string $objet Colonne ayant le texte
  * @param string $lang Langue à extraire
- * @return string       Texte de sélection pour la requête
+ * @return string       texte de sélection pour la requête
  */
 function spip_sqlite_multi($objet, $lang) {
 	$r = 'EXTRAIRE_MULTI(' . $objet . ", '" . $lang . "') AS multi";
@@ -1362,7 +1362,7 @@ function spip_sqlite_optimize($table, $serveur = '', $requeter = true) {
  * mais pour SQLite avec ses spécificités
  *
  * @param string|array|number $v
- *     Texte, nombre ou tableau à échapper
+ *     texte, nombre ou tableau à échapper
  * @param string $type
  *     Description du type attendu
  *    (par exemple description SQL de la colonne recevant la donnée)
@@ -1481,8 +1481,8 @@ function spip_sqlite_repair($table, $serveur = '', $requeter = true) {
  *     Exécuter la requête, sinon la retourner
  * @return bool|string
  *     - true si réussite
- *     - Texte de la requête si demandé,
- *     - False en cas d'erreur.
+ *     - texte de la requête si demandé,
+ *     - false en cas d'erreur.
  **/
 function spip_sqlite_replace($table, $couples, $desc = [], $serveur = '', $requeter = true) {
 	if (!$desc) {
@@ -1528,8 +1528,8 @@ function spip_sqlite_replace($table, $couples, $desc = [], $serveur = '', $reque
  *     Exécuter la requête, sinon la retourner
  * @return bool|string
  *     - true si réussite
- *     - Texte de la requête si demandé,
- *     - False en cas d'erreur.
+ *     - texte de la requête si demandé,
+ *     - false en cas d'erreur.
  **/
 function spip_sqlite_replace_multi($table, $tab_couples, $desc = [], $serveur = '', $requeter = true) {
 
@@ -1560,7 +1560,7 @@ function spip_sqlite_replace_multi($table, $tab_couples, $desc = [], $serveur = 
  * @param string $serveur Nom de la connexion
  * @param bool $requeter Exécuter la requête, sinon la retourner
  * @return array|bool|resource|string
- *     - string : Texte de la requête si on ne l'exécute pas
+ *     - string : texte de la requête si on ne l'exécute pas
  *     - ressource si requête exécutée, ressource pour fetch()
  *     - false si la requête exécutée a ratée
  *     - array  : Tableau décrivant requête et temps d'exécution si var_profile actif pour tracer.
@@ -1747,7 +1747,7 @@ define('_SQLITE_RE_SHOW_TABLE', '/^[^(),]*\(((?:[^()]*\((?:[^()]*\([^()]*\))?[^(
  * @param bool $requeter Exécuter la requête, sinon la retourner
  * @return array|string
  *     - chaîne vide si pas de description obtenue
- *     - string Texte de la requête si demandé
+ *     - string texte de la requête si demandé
  *     - array description de la table sinon
  */
 function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true) {
@@ -2053,9 +2053,9 @@ function _sqlite_link($serveur = '') {
 /**
  * Renvoie les bons echappements (mais pas sur les fonctions comme NOW())
  *
- * @param string|number $v Texte ou nombre à échapper
+ * @param string|number $v texte ou nombre à échapper
  * @param string $type Type de donnée attendue, description SQL de la colonne de destination
- * @return string|number     Texte ou nombre échappé
+ * @return string|number     texte ou nombre échappé
  */
 function _sqlite_calculer_cite($v, $type) {
 	if ($type) {
@@ -2119,7 +2119,7 @@ function _sqlite_calculer_cite($v, $type) {
  * @param string $expression Mot clé de l'expression, tel que "WHERE" ou "ORDER BY"
  * @param array|string $v Données de l'expression
  * @param string $join Si les données sont un tableau, elles seront groupées par cette jointure
- * @return string            Texte de l'expression, une partie donc, du texte la requête.
+ * @return string            texte de l'expression, une partie donc, du texte la requête.
  */
 function _sqlite_calculer_expression($expression, $v, $join = 'AND') {
 	if (empty($v)) {
@@ -2148,8 +2148,8 @@ function _sqlite_calculer_expression($expression, $v, $join = 'AND') {
  * @note
  *   Pas besoin de conversion pour 0+x comme il faudrait pour mysql.
  *
- * @param string|array $orderby Texte du orderby à préparer
- * @return string Texte du orderby préparé
+ * @param string|array $orderby texte du orderby à préparer
+ * @return string texte du orderby préparé
  */
 function _sqlite_calculer_order($orderby) {
 	return (is_array($orderby)) ? join(', ', $orderby) : $orderby;
@@ -2194,7 +2194,7 @@ function _sqlite_calculer_select_as($args) {
  *
  * @param array|string $v
  *     Description des contraintes
- *     - string : Texte du where
+ *     - string : texte du where
  *     - sinon tableau : A et B peuvent être de type string ou array,
  *       OP et C sont de type string :
  *       - array(A) : A est le texte du where
@@ -2863,7 +2863,7 @@ class spip_sqlite {
  */
 
 class sqlite_requeteur {
-	/** @var string Texte de la requête */
+	/** @var string texte de la requête */
 	public $query = ''; // la requete
 	/** @var string Nom de la connexion */
 	public $serveur = '';
@@ -2987,7 +2987,7 @@ class sqlite_requeteur {
  * (fonction pour proteger les textes)
  */
 class sqlite_traducteur {
-	/** @var string $query Texte de la requête */
+	/** @var string $query texte de la requête */
 	public $query = '';
 	/** @var string $prefixe Préfixe des tables */
 	public $prefixe = '';
@@ -3160,7 +3160,7 @@ class sqlite_traducteur {
 	 * par `DATE ... strtotime`
 	 *
 	 * @param array $matches Captures
-	 * @return string Texte de date compris par SQLite
+	 * @return string texte de date compris par SQLite
 	 */
 	public function _remplacerDateParTime($matches) {
 		$op = strtoupper($matches[1] == 'ADD') ? '+' : '-';
@@ -3173,7 +3173,7 @@ class sqlite_traducteur {
 	 * par `CASE WHEN table=i THEN n ... ELSE 0 END`
 	 *
 	 * @param array $matches Captures
-	 * @return string Texte de liste ordonnée compris par SQLite
+	 * @return string texte de liste ordonnée compris par SQLite
 	 */
 	public function _remplacerFieldParCase($matches) {
 		$fields = substr($matches[0], 6, -1); // ne recuperer que l'interieur X de field(X)
