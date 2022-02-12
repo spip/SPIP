@@ -236,7 +236,7 @@ function generer_url_api_low_sec(string $script, string $format, string $fond, s
 
 
 /**
- * Inclure les arguments significatifs pour le hachage
+ * inclure les arguments significatifs pour le hachage
  *
  * Cas particulier du statut pour compatibilité ancien rss/suivi_revisions
  *

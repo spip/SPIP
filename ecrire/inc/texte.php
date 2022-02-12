@@ -212,7 +212,7 @@ function interdire_scripts($arg, $mode_filtre = null) {
  * @see  propre()
  *
  * @param string $letexte
- *     Texte d'origine
+ *     texte d'origine
  * @param bool|string $echapper
  *     Échapper ?
  * @param string|null $connect
@@ -220,7 +220,7 @@ function interdire_scripts($arg, $mode_filtre = null) {
  * @param array $env
  *     Environnement (pour les calculs de modèles)
  * @return string $t
- *     Texte transformé
+ *     texte transformé
  **/
 function typo($letexte, $echapper = true, $connect = null, $env = []) {
 	// Plus vite !
@@ -301,9 +301,9 @@ define('_TYPO_BALISE', ',</?[a-z!][^<>]*[' . preg_quote(_TYPO_PROTEGER) . '][^<>
  * @uses corriger_caracteres()
  * @uses corriger_caracteres()
  *
- * @param string $letexte Texte
+ * @param string $letexte texte
  * @param string $lang Langue
- * @return string Texte
+ * @return string texte
  */
 function corriger_typo($letexte, $lang = '') {
 
@@ -381,8 +381,8 @@ function paragrapher($letexte, $forcer = true) {
  *
  * Ne sert plus
  *
- * @param string $letexte Texte
- * @return string Texte
+ * @param string $letexte texte
+ * @return string texte
  **/
 function traiter_retours_chariots($letexte) {
 	$letexte = preg_replace(",\r\n?,S", "\n", $letexte);
@@ -406,13 +406,13 @@ function traiter_retours_chariots($letexte) {
  * @see  typo()
  *
  * @param string $t
- *     Texte avec des raccourcis SPIP
+ *     texte avec des raccourcis SPIP
  * @param string|null $connect
  *     Nom du connecteur à la bdd
  * @param array $env
  *     Environnement (pour les calculs de modèles)
  * @return string $t
- *     Texte transformé
+ *     texte transformé
  **/
 function propre($t, $connect = null, $env = []) {
 	// les appels directs a cette fonction depuis le php de l'espace
