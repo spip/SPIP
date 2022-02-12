@@ -33,7 +33,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param string $vue
  *     Nom de l'objet
  * @param array $contexte
- *     Contexte du squelette
+ *     contexte du squelette
  * @param bool $force
  *     Si `true` le titre est affiché même s'il n'y a aucun élément dans la liste.
  * @return string
