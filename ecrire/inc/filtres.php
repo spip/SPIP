@@ -49,8 +49,8 @@ function charger_filtre($fonc, $default = 'filtre_identite_dist') {
 /**
  * Retourne le texte tel quel
  *
- * @param string $texte Texte
- * @return string Texte
+ * @param string $texte texte
+ * @return string texte
  **/
 function filtre_identite_dist($texte) {
  return $texte;
@@ -139,11 +139,11 @@ function chercher_filtre($fonc, $default = null) {
  * @uses appliquer_filtre_sinon()
  *
  * @param mixed $arg
- *     Texte (le plus souvent) sur lequel appliquer le filtre
+ *     texte (le plus souvent) sur lequel appliquer le filtre
  * @param string $filtre
  *     Nom du filtre à appliquer
  * @return string
- *     Texte traité par le filtre si le filtre existe,
+ *     texte traité par le filtre si le filtre existe,
  *     Chaîne vide sinon.
  **/
 function appliquer_filtre($arg, $filtre) {
@@ -165,12 +165,12 @@ function appliquer_filtre($arg, $filtre) {
  * @uses appliquer_filtre_sinon()
  *
  * @param mixed $arg
- *     Texte (le plus souvent) sur lequel appliquer le filtre
+ *     texte (le plus souvent) sur lequel appliquer le filtre
  * @param string $filtre
  *     Nom du filtre à appliquer
  * @return string
- *     Texte traité par le filtre si le filtre existe,
- *     Texte d'origine sinon
+ *     texte traité par le filtre si le filtre existe,
+ *     texte d'origine sinon
  **/
 function appliquer_si_filtre($arg, $filtre) {
 	$args = func_get_args();
@@ -502,7 +502,7 @@ function filtre_debug($val, $key = null) {
  *     - le second est le texte sur lequel on applique le filtre
  *     - les suivants sont les arguments du filtre image souhaité.
  * @return string
- *     Texte qui a reçu les filtres
+ *     texte qui a reçu les filtres
  **/
 function image_filtrer($args) {
 	$filtre = array_shift($args); # enlever $filtre
@@ -861,9 +861,9 @@ function entites_html($texte, $tout = false, $quote = true) {
  * @link https://www.spip.net/5513
  *
  * @param string $texte
- *     Texte à convertir
+ *     texte à convertir
  * @return string
- *     Texte converti
+ *     texte converti
  **/
 function filtrer_entites($texte) {
 	if (strpos($texte, '&') === false) {
@@ -949,9 +949,9 @@ function corriger_caracteres($texte) {
  * @link https://www.spip.net/4287
  *
  * @param string $texte
- *     Texte à transformer
+ *     texte à transformer
  * @return string
- *     Texte encodé pour XML
+ *     texte encodé pour XML
  */
 function texte_backend(string $texte): string {
 	if ($texte === '') {
@@ -1003,9 +1003,9 @@ function texte_backend(string $texte): string {
  * @filtre
  *
  * @param string $texte
- *     Texte à transformer
+ *     texte à transformer
  * @return string
- *     Texte encodé et quote pour XML
+ *     texte encodé et quote pour XML
  */
 function texte_backendq(string $texte): string {
 	return addslashes(texte_backend($texte));
@@ -1026,7 +1026,7 @@ function texte_backendq(string $texte): string {
  *     ```
  *
  * @param string $texte
- *     Texte
+ *     texte
  * @return int|string
  *     Numéro de titre, sinon chaîne vide
  **/
@@ -1053,7 +1053,7 @@ function supprimer_numero($texte) {
  *     ```
  *
  * @param string $texte
- *     Texte
+ *     texte
  * @return int|string
  *     Numéro de titre, sinon chaîne vide
  **/
@@ -1088,11 +1088,11 @@ function recuperer_numero($texte) {
  *     Ce filtre supprime aussi les signes inférieurs `<` rencontrés.
  *
  * @param string|array|null $texte
- *     Texte ou tableau de textes à échapper
+ *     texte ou tableau de textes à échapper
  * @param string $rempl
  *     Inutilisé.
  * @return string|array
- *     Texte ou tableau de textes converti
+ *     texte ou tableau de textes converti
  **/
 function supprimer_tags($texte, $rempl = '') {
 	if ($texte === null) {
@@ -1120,11 +1120,11 @@ function supprimer_tags($texte, $rempl = '') {
  *     ```
  *
  * @param string $texte
- *     Texte à échapper
+ *     texte à échapper
  * @param string $rempl
  *     Inutilisé.
  * @return string
- *     Texte converti
+ *     texte converti
  **/
 function echapper_tags($texte, $rempl = '') {
 	$texte = preg_replace('/<([^>]*)>/', "&lt;\\1&gt;", $texte);
@@ -1145,9 +1145,9 @@ function echapper_tags($texte, $rempl = '') {
  *     ```
  *
  * @param string $texte
- *     Texte à convertir
+ *     texte à convertir
  * @return string
- *     Texte converti
+ *     texte converti
  **/
 function textebrut($texte) {
 	$u = $GLOBALS['meta']['pcre_u'];
@@ -1172,9 +1172,9 @@ function textebrut($texte) {
  * @link https://www.spip.net/4297
  *
  * @param string $texte
- *     Texte avec des liens
+ *     texte avec des liens
  * @return string
- *     Texte avec liens ouvrants
+ *     texte avec liens ouvrants
  **/
 function liens_ouvrants($texte) {
 	if (
@@ -1232,9 +1232,9 @@ function liens_nofollow($texte) {
  *     ```
  *
  * @param string $texte
- *     Texte à transformer
+ *     texte à transformer
  * @return string
- *     Texte sans paraghaphes
+ *     texte sans paraghaphes
  **/
 function PtoBR($texte) {
 	$u = $GLOBALS['meta']['pcre_u'];
@@ -1263,8 +1263,8 @@ function PtoBR($texte) {
  * @deprecated 3.1
  * @see Utiliser le style CSS `word-wrap:break-word;`
  *
- * @param string $texte Texte
- * @return string Texte encadré du style CSS
+ * @param string $texte texte
+ * @return string texte encadré du style CSS
  */
 function lignes_longues($texte) {
 	if (!strlen(trim($texte))) {
@@ -1289,8 +1289,8 @@ function lignes_longues($texte) {
  *     [(#EXTENSION|majuscules)]
  *     ```
  *
- * @param string $texte Texte
- * @return string Texte en majuscule
+ * @param string $texte texte
+ * @return string texte en majuscule
  */
 function majuscules($texte) {
 	if (!strlen($texte)) {
@@ -1371,11 +1371,11 @@ function taille_en_octets($taille) {
  * @uses texte_backend()
  *
  * @param ?string $texte
- *     Texte à mettre en attribut
+ *     texte à mettre en attribut
  * @param bool $textebrut
  *     Passe le texte en texte brut (enlève les balises html) ?
  * @return string
- *     Texte prêt pour être utilisé en attribut HTML
+ *     texte prêt pour être utilisé en attribut HTML
  **/
 function attribut_html(?string $texte, $textebrut = true): string {
 	if ($texte === null) {
@@ -2008,15 +2008,15 @@ function alterner($i, ...$args) {
  * (dans ce cas l'option `$complet` n'est pas disponible)
  *
  * @param string|array $balise
- *     Texte ou liste de textes dont on veut extraire des balises
+ *     texte ou liste de textes dont on veut extraire des balises
  * @param string $attribut
  *     Nom de l'attribut désiré
  * @param bool $complet
- *     True pour retourner un tableau avec
+ *     true pour retourner un tableau avec
  *     - le texte de la balise
  *     - l'ensemble des résultats de la regexp ($r)
  * @return string|array|null
- *     - Texte de l'attribut retourné, ou tableau des textes d'attributs
+ *     - texte de l'attribut retourné, ou tableau des textes d'attributs
  *       (si 1er argument tableau)
  *     - Tableau complet (si 2e argument)
  *     - null lorsque l’attribut n’existe pas.
@@ -2440,8 +2440,8 @@ function email_valide($adresses) {
  * @filtre
  * @link https://www.spip.net/4134
  *
- * @param string $tags Texte
- * @return string Texte
+ * @param string $tags texte
+ * @return string texte
  **/
 function afficher_enclosures($tags) {
 	$s = [];
@@ -2476,7 +2476,7 @@ function afficher_enclosures($tags) {
  * @filtre
  * @link https://www.spip.net/4187
  *
- * @param string $tags Texte
+ * @param string $tags texte
  * @param string $rels Attribut `rel` à capturer (ou plusieurs séparés par des virgules)
  * @return string Liens trouvés
  **/
@@ -2539,7 +2539,7 @@ function enclosure2microformat($e) {
  * @filtre
  * @see enclosure2microformat() Pour l'inverse
  *
- * @param string $tags Texte HTML ayant des tag `<a>` avec microformat
+ * @param string $tags texte HTML ayant des tag `<a>` avec microformat
  * @return string Tags RSS `<enclosure>`.
  **/
 function microformat2enclosure($tags) {
@@ -2572,7 +2572,7 @@ function microformat2enclosure($tags) {
  *
  * @filtre
  *
- * @param string $tags Texte
+ * @param string $tags texte
  * @return string Tags RSS Atom `<dc:subject>`.
  **/
 function tags2dcsubject($tags) {
@@ -2606,7 +2606,7 @@ function tags2dcsubject($tags) {
  *     ce qui retournerait `<div> un <div> mot </div>` donc.
  *
  * @param string|array $texte
- *     Texte(s) dont on souhaite extraire une balise html
+ *     texte(s) dont on souhaite extraire une balise html
  * @param string $tag
  *     Nom de la balise html à extraire
  * @return void|string|array
@@ -2654,7 +2654,7 @@ function extraire_balise($texte, $tag = 'a') {
  *     tel que demander à extraire `div` dans un texte.
  *
  * @param string|array $texte
- *     Texte(s) dont on souhaite extraire une balise html
+ *     texte(s) dont on souhaite extraire une balise html
  * @param string $tag
  *     Nom de la balise html à extraire
  * @return array
@@ -3240,7 +3240,7 @@ function table_valeur($table, $cle, $defaut = '', $conserver_null = false) {
  * @link http://php.net/manual/fr/function.preg-match.php Pour des infos sur `preg_match()`
  *
  * @param ?string $texte
- *     Texte dans lequel chercher
+ *     texte dans lequel chercher
  * @param string|int $expression
  *     Expression régulière de recherche, sans le délimiteur
  * @param string $modif
@@ -3285,15 +3285,15 @@ function filtre_match_dist(?string $texte, $expression, $modif = 'UimsS', $capte
  *     ```
  *
  * @param string $texte
- *     Texte
+ *     texte
  * @param string $expression
  *     Expression régulière
  * @param string $replace
- *     Texte de substitution des éléments trouvés
+ *     texte de substitution des éléments trouvés
  * @param string $modif
  *     Modificateurs pour l'expression régulière.
  * @return string
- *     Texte
+ *     texte
  **/
 function replace($texte, $expression, $replace = '', $modif = 'UimsS') {
 	$expression = str_replace('\/', '/', $expression);
@@ -4247,12 +4247,12 @@ function url_rss_forum($texte) {
  * @param string $url
  *   URL du lien
  * @param string $libelle
- *   Texte du lien
+ *   texte du lien
  * @param bool $on
  *   État exposé ou non (génère un lien). Si $on vaut true ou 1 ou ' ', l'etat expose est rendu par un <strong class='on'>...</strong>
  *   Si $on est de la forme span.active.truc par exemple, l'etat expose est rendu par <span class='active truc'>...</span> Seules les balises a, span et strong sont acceptees dans ce cas
  * @param string $class
- *   Classes CSS ajoutées au lien
+ *   classes CSS ajoutées au lien
  * @param string $title
  *   Title ajouté au lien
  * @param string $rel
@@ -4394,7 +4394,7 @@ function prepare_icone_base($type, $lien, $texte, $fond, $fonction = '', $class 
 	$class_lien .= " $objet_type";
 	$class_bouton .= " $objet_type";
 
-	// Texte
+	// texte
 	$alt = attribut_html($texte);
 	$title = " title=\"$alt\""; // est-ce pertinent de doubler le alt par un title ?
 
@@ -4448,13 +4448,13 @@ function prepare_icone_base($type, $lien, $texte, $fond, $fonction = '', $class 
  * @param string $lien
  *     URL du lien
  * @param string $texte
- *     Texte du lien
+ *     texte du lien
  * @param string $fond
  *     Objet avec ou sans son extension et sa taille (article, article-24, article-24.png)
  * @param string $fonction
  *     Fonction du lien (`edit`, `new`, `del`)
  * @param string $class
- *     Classe CSS, tel que `left`, `right` pour définir un alignement
+ *     classe CSS, tel que `left`, `right` pour définir un alignement
  * @param string $javascript
  *     Javascript ajouté sur le lien
  * @return string
@@ -4482,13 +4482,13 @@ function icone_base($lien, $texte, $fond, $fonction = '', $class = '', $javascri
  * @param string $lien
  *     URL du lien
  * @param string $texte
- *     Texte du lien
+ *     texte du lien
  * @param string $fond
  *     Objet avec ou sans son extension et sa taille (article, article-24, article-24.png)
  * @param string $fonction
  *     Fonction du lien (`edit`, `new`, `del`)
  * @param string $class
- *     Classe CSS à ajouter, tel que `left`, `right`, `center` pour définir un alignement.
+ *     classe CSS à ajouter, tel que `left`, `right`, `center` pour définir un alignement.
  *     Il peut y en avoir plusieurs : `left ajax`
  * @param string $javascript
  *     Javascript ajouté sur le lien
@@ -4528,13 +4528,13 @@ function filtre_icone_verticale_dist($lien, $texte, $fond, $fonction = '', $clas
  * @param string $lien
  *     URL du lien
  * @param string $texte
- *     Texte du lien
+ *     texte du lien
  * @param string $fond
  *     Objet avec ou sans son extension et sa taille (article, article-24, article-24.png)
  * @param string $fonction
  *     Fonction du lien (`edit`, `new`, `del`)
  * @param string $class
- *     Classe CSS à ajouter
+ *     classe CSS à ajouter
  * @param string $javascript
  *     Javascript ajouté sur le lien
  * @return string
@@ -4559,13 +4559,13 @@ function filtre_icone_horizontale_dist($lien, $texte, $fond, $fonction = '', $cl
  * @param string $lien
  *     URL de l'action
  * @param string $texte
- *     Texte du bouton
+ *     texte du bouton
  * @param string $fond
  *     Objet avec ou sans son extension et sa taille (article, article-24, article-24.png)
  * @param string $fonction
  *     Fonction du bouton (`edit`, `new`, `del`)
  * @param string $class
- *     Classes à ajouter au bouton, à l'exception de `ajax` qui est placé sur le formulaire.
+ *     classes à ajouter au bouton, à l'exception de `ajax` qui est placé sur le formulaire.
  * @param string $confirm
  *     Message de confirmation à ajouter en javascript sur le bouton
  * @return string
@@ -4588,15 +4588,15 @@ function filtre_bouton_action_horizontal_dist($lien, $texte, $fond, $fonction = 
  * @param string $lien
  *     URL du lien
  * @param string $texte
- *     Texte du lien
+ *     texte du lien
  * @param string $fond
  *     Nom de l'image utilisée
  * @param string $align
- *     Classe CSS d'alignement (`left`, `right`, `center`)
+ *     classe CSS d'alignement (`left`, `right`, `center`)
  * @param string $fonction
  *     Fonction du lien (`edit`, `new`, `del`)
  * @param string $class
- *     Classe CSS à ajouter
+ *     classe CSS à ajouter
  * @param string $javascript
  *     Javascript ajouté sur le lien
  * @return string
@@ -4620,7 +4620,7 @@ function filtre_icone_dist($lien, $texte, $fond, $align = '', $fonction = '', $c
  *     [(#GET{truc}|explode{-})]
  *     ```
  *
- * @param string $a Texte
+ * @param string $a texte
  * @param string $b Séparateur
  * @return array Liste des éléments
  */
@@ -4643,7 +4643,7 @@ function filtre_explode_dist($a, $b) {
  *
  * @param array $a Tableau
  * @param string $b Séparateur
- * @return string Texte
+ * @return string texte
  */
 function filtre_implode_dist($a, $b) {
 	return is_array($a) ? implode($b, $a) : $a;
@@ -5111,7 +5111,7 @@ function objet_info($objet, $info) {
  * @param string $objet
  *     Objet
  * @return mixed|string
- *     Texte traduit du comptage, tel que '3 articles'
+ *     texte traduit du comptage, tel que '3 articles'
  */
 function objet_afficher_nb($nb, $objet) {
 	if (!$nb) {
@@ -5515,7 +5515,7 @@ function spip_affiche_mot_de_passe_masque(?string $passe, bool $afficher_partiel
  * en ne conservant que des caracteres alphanumeriques et un separateur
  *
  * @param string $texte
- *   Texte à transformer en nom machine
+ *   texte à transformer en nom machine
  * @param string $type
  *
  * @param array $options

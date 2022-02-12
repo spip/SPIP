@@ -207,7 +207,7 @@ function spip_mysql_get_charset($charset = [], $serveur = '', $requeter = true) 
  * @param bool $requeter Exécuter la requête, sinon la retourner
  * @return mysqli_result|bool|string|array
  *     - mysqli_result|bool : Si requête exécutée
- *     - string : Texte de la requête si on ne l'exécute pas
+ *     - string : texte de la requête si on ne l'exécute pas
  *     - array : Tableau décrivant requête et temps d'exécution si var_profile actif pour tracer.
  */
 function spip_mysql_query($query, $serveur = '', $requeter = true) {
@@ -295,7 +295,7 @@ function spip_mysql_query($query, $serveur = '', $requeter = true) {
  * @param string $serveur Nom de la connexion
  * @param bool $requeter Exécuter la requête, sinon la retourner
  * @return array|bool|string
- *     - string : Texte de la requête si on ne l'exécute pas
+ *     - string : texte de la requête si on ne l'exécute pas
  *     - bool   : Si requête exécutée
  *     - array  : Tableau décrivant requête et temps d'exécution si var_profile actif pour tracer.
  */
@@ -327,7 +327,7 @@ function spip_mysql_optimize($table, $serveur = '', $requeter = true) {
 /**
  * Retourne une explication de requête (Explain) MySQL
  *
- * @param string $query Texte de la requête
+ * @param string $query texte de la requête
  * @param string $serveur Nom de la connexion
  * @param bool $requeter inutilisé
  * @return array           Tableau de l'explication
@@ -367,7 +367,7 @@ function spip_mysql_explain($query, $serveur = '', $requeter = true) {
  * @param string $serveur Nom de la connexion
  * @param bool $requeter Exécuter la requête, sinon la retourner
  * @return array|bool|resource|string
- *     - string : Texte de la requête si on ne l'exécute pas
+ *     - string : texte de la requête si on ne l'exécute pas
  *     - ressource si requête exécutée, ressource pour fetch()
  *     - false si la requête exécutée a ratée
  *     - array  : Tableau décrivant requête et temps d'exécution si var_profile actif pour tracer.
@@ -414,8 +414,8 @@ function spip_mysql_select(
  *   0+x avec un champ x commencant par des chiffres est converti par MySQL
  *   en le nombre qui commence x. Pas portable malheureusement, on laisse pour le moment.
  *
- * @param string|array $orderby Texte du orderby à préparer
- * @return string Texte du orderby préparé
+ * @param string|array $orderby texte du orderby à préparer
+ * @return string texte du orderby préparé
  */
 function spip_mysql_order($orderby) {
 	return (is_array($orderby)) ? join(', ', $orderby) : $orderby;
@@ -430,7 +430,7 @@ function spip_mysql_order($orderby) {
  *
  * @param array|string $v
  *     Description des contraintes
- *     - string : Texte du where
+ *     - string : texte du where
  *     - sinon tableau : A et B peuvent être de type string ou array,
  *       OP et C sont de type string :
  *       - array(A) : A est le texte du where
@@ -472,7 +472,7 @@ function calculer_mysql_where($v) {
  * @param string $expression Mot clé de l'expression, tel que "WHERE" ou "ORDER BY"
  * @param array|string $v Données de l'expression
  * @param string $join Si les données sont un tableau, elles seront groupées par cette jointure
- * @return string            Texte de l'expression, une partie donc, du texte la requête.
+ * @return string            texte de l'expression, une partie donc, du texte la requête.
  */
 function calculer_mysql_expression($expression, $v, $join = 'AND') {
 	if (empty($v)) {
@@ -790,7 +790,7 @@ function spip_mysql_create_base($nom, $serveur = '', $requeter = true) {
  * @param string $nom
  *    Nom de la vue à creer
  * @param string $query_select
- *     Texte de la requête de sélection servant de base à la vue
+ *     texte de la requête de sélection servant de base à la vue
  * @param string $serveur
  *     Nom du connecteur
  * @param bool $requeter
@@ -825,7 +825,7 @@ function spip_mysql_create_view($nom, $query_select, $serveur = '', $requeter = 
  * @param string $serveur Nom de la connexion
  * @param bool $requeter Exécuter la requête, sinon la retourner
  * @return bool|string
- *     - string Texte de la requête si demandé
+ *     - string texte de la requête si demandé
  *     - true si la requête a réussie, false sinon
  */
 function spip_mysql_drop_table($table, $exist = '', $serveur = '', $requeter = true) {
@@ -844,7 +844,7 @@ function spip_mysql_drop_table($table, $exist = '', $serveur = '', $requeter = t
  * @param string $serveur Nom de la connexion
  * @param bool $requeter Exécuter la requête, sinon la retourner
  * @return bool|string
- *     - string Texte de la requête si demandé
+ *     - string texte de la requête si demandé
  *     - true si la requête a réussie, false sinon
  */
 function spip_mysql_drop_view($view, $exist = '', $serveur = '', $requeter = true) {
@@ -881,7 +881,7 @@ function spip_mysql_showbase($match, $serveur = '', $requeter = true) {
  * @param string $serveur Nom de la connexion
  * @param bool $requeter Exécuter la requête, sinon la retourner
  * @return bool|string
- *     - string Texte de la requête si demandée,
+ *     - string texte de la requête si demandée,
  *     - true si la requête a réussie, false sinon
  */
 function spip_mysql_repair($table, $serveur = '', $requeter = true) {
@@ -937,7 +937,7 @@ define('_MYSQL_RE_SHOW_TABLE', '/^[^(),]*\(((?:[^()]*\((?:[^()]*\([^()]*\))?[^()
  * @param bool $requeter Exécuter la requête, sinon la retourner
  * @return array|string
  *     - chaîne vide si pas de description obtenue
- *     - string Texte de la requête si demandé
+ *     - string texte de la requête si demandé
  *     - array description de la table sinon
  */
 function spip_mysql_showtable($nom_table, $serveur = '', $requeter = true) {
@@ -1070,7 +1070,7 @@ function spip_mysql_seek($r, $row_number, $serveur = '', $requeter = true) {
  * @param string $serveur Nom de la connexion
  * @param bool $requeter Exécuter la requête, sinon la retourner
  * @return int|string
- *     - String Texte de la requête si demandé
+ *     - string texte de la requête si demandé
  *     - int Nombre de lignes (0 si la requête n'a pas réussie)
  **/
 function spip_mysql_countsel(
@@ -1205,8 +1205,8 @@ function spip_mysql_free($r, $serveur = '', $requeter = true) {
  *     Exécuter la requête, sinon la retourner
  * @return bool|string|int|array
  *     - int|true identifiant de l'élément inséré (si possible), ou true, si réussite
- *     - Texte de la requête si demandé,
- *     - False en cas d'erreur,
+ *     - texte de la requête si demandé,
+ *     - false en cas d'erreur,
  *     - Tableau de description de la requête et du temps d'exécution, si var_profile activé
  **/
 function spip_mysql_insert($table, $champs, $valeurs, $desc = [], $serveur = '', $requeter = true) {
@@ -1282,8 +1282,8 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc = [], $serveur = '',
  *     Exécuter la requête, sinon la retourner
  * @return bool|string|int|array
  *     - int|true identifiant de l'élément inséré (si possible), ou true, si réussite
- *     - Texte de la requête si demandé,
- *     - False en cas d'erreur,
+ *     - texte de la requête si demandé,
+ *     - false en cas d'erreur,
  *     - Tableau de description de la requête et du temps d'exécution, si var_profile activé
  **/
 function spip_mysql_insertq($table, $couples = [], $desc = [], $serveur = '', $requeter = true) {
@@ -1327,8 +1327,8 @@ function spip_mysql_insertq($table, $couples = [], $desc = [], $serveur = '', $r
  *     Exécuter la requête, sinon la retourner
  * @return int|bool|string
  *     - int|true identifiant du dernier élément inséré (si possible), ou true, si réussite
- *     - Texte de la requête si demandé,
- *     - False en cas d'erreur.
+ *     - texte de la requête si demandé,
+ *     - false en cas d'erreur.
  **/
 function spip_mysql_insertq_multi($table, $tab_couples = [], $desc = [], $serveur = '', $requeter = true) {
 
@@ -1463,8 +1463,8 @@ function spip_mysql_updateq($table, $champs, $where = '', $desc = [], $serveur =
  * @param bool $requeter Exécuter la requête, sinon la retourner
  * @return bool|string
  *     - int : nombre de suppressions réalisées,
- *     - Texte de la requête si demandé,
- *     - False en cas d'erreur.
+ *     - texte de la requête si demandé,
+ *     - false en cas d'erreur.
  **/
 function spip_mysql_delete($table, $where = '', $serveur = '', $requeter = true) {
 	$res = spip_mysql_query(
@@ -1507,8 +1507,8 @@ function spip_mysql_delete($table, $where = '', $serveur = '', $requeter = true)
  *     Exécuter la requête, sinon la retourner
  * @return bool|string
  *     - true si réussite
- *     - Texte de la requête si demandé,
- *     - False en cas d'erreur.
+ *     - texte de la requête si demandé,
+ *     - false en cas d'erreur.
  **/
 function spip_mysql_replace($table, $couples, $desc = [], $serveur = '', $requeter = true) {
 	return spip_mysql_query("REPLACE $table (" . join(',', array_keys($couples)) . ') VALUES (' . join(
@@ -1539,8 +1539,8 @@ function spip_mysql_replace($table, $couples, $desc = [], $serveur = '', $requet
  *     Exécuter la requête, sinon la retourner
  * @return bool|string
  *     - true si réussite
- *     - Texte de la requête si demandé,
- *     - False en cas d'erreur.
+ *     - texte de la requête si demandé,
+ *     - false en cas d'erreur.
  **/
 function spip_mysql_replace_multi($table, $tab_couples, $desc = [], $serveur = '', $requeter = true) {
 	$cles = '(' . join(',', array_keys($tab_couples[0])) . ')';
@@ -1562,7 +1562,7 @@ function spip_mysql_replace_multi($table, $tab_couples, $desc = [], $serveur = '
  *
  * @param string $objet Colonne ayant le texte
  * @param string $lang Langue à extraire
- * @return string       Texte de sélection pour la requête
+ * @return string       texte de sélection pour la requête
  */
 function spip_mysql_multi($objet, $lang) {
 	$lengthlang = strlen("[$lang]");
@@ -1612,7 +1612,7 @@ function spip_mysql_hex($v) {
  * comme le fait `_q()` mais pour MySQL avec ses spécificités
  *
  * @param string|array|number $v
- *     Texte, nombre ou tableau à échapper
+ *     texte, nombre ou tableau à échapper
  * @param string $type
  *     Description du type attendu
  *    (par exemple description SQL de la colonne recevant la donnée)
@@ -1686,9 +1686,9 @@ function spip_mysql_in($val, $valeurs, $not = '', $serveur = '', $requeter = tru
 /**
  * Renvoie les bons echappements (mais pas sur les fonctions comme NOW())
  *
- * @param string|number $v Texte ou nombre à échapper
+ * @param string|number $v texte ou nombre à échapper
  * @param string $type Type de donnée attendue, description SQL de la colonne de destination
- * @return string|number     Texte ou nombre échappé
+ * @return string|number     texte ou nombre échappé
  */
 function spip_mysql_cite($v, $type) {
 	if (!$type) {
