@@ -32,7 +32,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @deprecated 4.2
  * @link https://www.spip.net/5516
  * @param string $texte
- *    Texte contenant une date tel que `2008-04`
+ *    texte contenant une date tel que `2008-04`
  * @return string
  *    Date au format SQL tel que `2008-04-01` sinon ''
  **/
@@ -1030,7 +1030,7 @@ function affdate_heure($numdate): string {
  *   - `jour` pour forcer l'affichage du nom du jour
  *   - `hcal` pour avoir un markup microformat abbr
  * @return string
- *     Texte de la date
+ *     texte de la date
  */
 function affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme = ''): string {
 	$abbr = $jour = '';

@@ -103,7 +103,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, string $co
 			$nom = '';
 		}
 
-		// Contexte de compil inutile a present
+		// contexte de compil inutile a present
 		// (mais la derniere valeur de $boucle est utilisee ci-dessous)
 		$skel_code[$id] = $f;
 	}

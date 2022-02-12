@@ -10,6 +10,11 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+use Spip\Core\Boucle;
+use Spip\Core\Contexte;
+use Spip\Core\Inclure;
+use Spip\Core\Texte;
+
 /**
  * Fichier principal du compilateur de squelettes
  *

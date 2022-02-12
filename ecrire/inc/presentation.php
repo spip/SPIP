@@ -224,7 +224,7 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone = '') {
  *     ```
  *
  * @param string $texte
- *     Texte du lien
+ *     texte du lien
  * @param string $lien
  *     URL du lien
  * @param string $fond
@@ -256,7 +256,7 @@ function icone_verticale($texte, $lien, $fond, $fonction = '', $align = '', $jav
  * @see  filtre_icone_horizontale_dist() Pour l'usage en tant que filtre
  *
  * @param string $texte
- *     Texte du lien
+ *     texte du lien
  * @param string $lien
  *     URL du lien
  * @param string $fond
