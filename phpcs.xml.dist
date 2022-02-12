@@ -3,7 +3,6 @@
     <file>./ecrire</file>
     <file>./prive</file>
     <exclude-pattern>ecrire/lang/*</exclude-pattern>
-    <exclude-pattern>ecrire/inc/idna_convert.class.php</exclude-pattern>
 
     <rule ref="SPIP41"/>
 
