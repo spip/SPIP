@@ -554,7 +554,7 @@ function balise_TOTAL_BOUCLE_dist($p) {
  * Cette balise nécessite donc la présence de ce critère.
  *
  * @balise
- * @link https://www.spip.net/903 Boucles et balises de recherche
+ * @link https://www.spip.net/903 boucles et balises de recherche
  * @see critere_recherche_dist()
  *
  * @param Champ $p
