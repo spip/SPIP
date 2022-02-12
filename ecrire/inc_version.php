@@ -129,7 +129,7 @@ if (!defined('MODULES_IDIOMES')) {
 // *** Fin des define *** //
 
 
-// Inclure l'ecran de securite
+// inclure l'ecran de securite
 if (
 	!defined('_ECRAN_SECURITE')
 	and @file_exists($f = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . 'ecran_securite.php')

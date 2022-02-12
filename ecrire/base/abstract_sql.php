@@ -696,7 +696,7 @@ function sql_free($res, $serveur = '', $option = true) {
  *
  * @return bool|string
  *     - int|true identifiant de l'élément inséré (si possible), ou true, si réussite
- *     - Texte de la requête si demandé,
+ *     - texte de la requête si demandé,
  *     - False en cas d'erreur.
  **/
 function sql_insert($table, $noms, $valeurs, $desc = [], $serveur = '', $option = true) {
@@ -747,7 +747,7 @@ function sql_insert($table, $noms, $valeurs, $desc = [], $serveur = '', $option 
  *
  * @return int|bool|string
  *     - int|true identifiant de l'élément inséré (si possible), ou true, si réussite
- *     - Texte de la requête si demandé,
+ *     - texte de la requête si demandé,
  *     - False en cas d'erreur.
  **/
 function sql_insertq($table, $couples = [], $desc = [], $serveur = '', $option = true) {
@@ -791,9 +791,9 @@ function sql_insertq($table, $couples = [], $desc = [], $serveur = '', $option =
  *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
  *
  * @return bool|string
- *     - True en cas de succès,
- *     - Texte de la requête si demandé,
- *     - False en cas d'erreur.
+ *     - true en cas de succès,
+ *     - texte de la requête si demandé,
+ *     - false en cas d'erreur.
  **/
 function sql_insertq_multi($table, $couples = [], $desc = [], $serveur = '', $option = true) {
 	$f = sql_serveur('insertq_multi', $serveur, $option === 'continue' or $option === false);
@@ -897,8 +897,8 @@ function sql_update($table, $exp, $where = '', $desc = [], $serveur = '', $optio
  *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
  * @return bool|string
  *     - true si réussite
- *     - Texte de la requête si demandé,
- *     - False en cas d'erreur.
+ *     - texte de la requête si demandé,
+ *     - false en cas d'erreur.
  **/
 function sql_updateq($table, $exp, $where = '', $desc = [], $serveur = '', $option = true) {
 	$f = sql_serveur('updateq', $serveur, $option === 'continue' or $option === false);
@@ -937,8 +937,8 @@ function sql_updateq($table, $exp, $where = '', $desc = [], $serveur = '', $opti
  *
  * @return bool|string
  *     - int : nombre de suppressions réalisées,
- *     - Texte de la requête si demandé,
- *     - False en cas d'erreur.
+ *     - texte de la requête si demandé,
+ *     - false en cas d'erreur.
  **/
 function sql_delete($table, $where = '', $serveur = '', $option = true) {
 	$f = sql_serveur('delete', $serveur, $option === 'continue' or $option === false);
@@ -982,8 +982,8 @@ function sql_delete($table, $where = '', $serveur = '', $option = true) {
  *
  * @return bool|string
  *     - true si réussite
- *     - Texte de la requête si demandé,
- *     - False en cas d'erreur.
+ *     - texte de la requête si demandé,
+ *     - false en cas d'erreur.
  **/
 function sql_replace($table, $couples, $desc = [], $serveur = '', $option = true) {
 	$f = sql_serveur('replace', $serveur, $option === 'continue' or $option === false);
@@ -1029,8 +1029,8 @@ function sql_replace($table, $couples, $desc = [], $serveur = '', $option = true
  *
  * @return bool|string
  *     - true si réussite
- *     - Texte de la requête si demandé,
- *     - False en cas d'erreur.
+ *     - texte de la requête si demandé,
+ *     - false en cas d'erreur.
  **/
 function sql_replace_multi($table, $tab_couples, $desc = [], $serveur = '', $option = true) {
 	$f = sql_serveur('replace_multi', $serveur, $option === 'continue' or $option === false);
@@ -1065,9 +1065,9 @@ function sql_replace_multi($table, $tab_couples, $desc = [], $serveur = '', $opt
  *     - true : exécuter la requête
  *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
  * @return bool|string
- *     - True en cas de succès,
- *     - Texte de la requête si demandé,
- *     - False en cas d'erreur.
+ *     - true en cas de succès,
+ *     - texte de la requête si demandé,
+ *     - false en cas d'erreur.
  **/
 function sql_drop_table($table, $exist = '', $serveur = '', $option = true) {
 	$f = sql_serveur('drop_table', $serveur, $option === 'continue' or $option === false);
@@ -1099,7 +1099,7 @@ function sql_drop_table($table, $exist = '', $serveur = '', $option = true) {
  *     - true : exécuter la requête
  *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
  * @return bool|string
- *     - string Texte de la requête si demandé
+ *     - string texte de la requête si demandé
  *     - true si la requête a réussie, false sinon
  */
 function sql_drop_view($table, $exist = '', $serveur = '', $option = true) {
@@ -1257,10 +1257,9 @@ function sql_showtable($table, $table_spip = false, $serveur = '', $option = tru
  *     - true : exécuter la requête
  *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
  * @return bool|string
- *     - True si la table existe,
- *     - False sinon,
- *     - Texte de la requête si demandé,
- *     - False en cas d'erreur.
+ *     - true si la table existe,
+ *     - texte de la requête si demandé,
+ *     - false en cas d'erreur.
  **/
 function sql_table_exists(string $table, bool $table_spip = true, $serveur = '', $option = true) {
 	$f = sql_serveur('table_exists', $serveur, $option === 'continue' or $option === false);
@@ -1432,7 +1431,7 @@ function sql_create_view($nom, $select_query, $serveur = '', $option = true) {
  *     - true : exécuter la requête
  *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
  * @return string
- *     Texte de sélection pour la requête
+ *     texte de sélection pour la requête
  */
 function sql_multi($sel, $lang, $serveur = '', $option = true) {
 	$f = sql_serveur('multi', $serveur, $option === 'continue' or $option === false);
@@ -1486,7 +1485,7 @@ function sql_errno($serveur = '') {
  * Retourne une explication de requête (Explain) SQL
  *
  * @api
- * @param string $q Texte de la requête
+ * @param string $q texte de la requête
  * @param string $serveur Nom de la connexion
  * @param bool|string $option
  *     Peut avoir 3 valeurs :
@@ -1549,7 +1548,7 @@ function sql_optimize($table, $serveur = '', $option = true) {
  *     - true : exécuter la requête
  *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
  * @return bool|string
- *     - string Texte de la requête si demandée,
+ *     - string texte de la requête si demandée,
  *     - true si la requête a réussie, false sinon
  */
 function sql_repair($table, $serveur = '', $option = true) {
@@ -1582,7 +1581,7 @@ function sql_repair($table, $serveur = '', $option = true) {
  *     - true : exécuter la requête
  *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
  * @return array|resource|string|bool
- *     - string : Texte de la requête si on ne l'exécute pas
+ *     - string : texte de la requête si on ne l'exécute pas
  *     - ressource|bool : Si requête exécutée
  *     - array : Tableau décrivant requête et temps d'exécution si var_profile actif pour tracer.
  */

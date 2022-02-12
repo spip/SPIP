@@ -3,60 +3,39 @@
 namespace Spip\Core;
 
 /**
- * Description d'une Balise.
- */
-class Balise
-{
+ * Description d'une chaîne de langue
+ **/
+class Idiome {
 	/**
 	 * Type de noeud
 	 *
 	 * @var string
 	 */
-	public $type = 'balise';
+	public $type = 'idiome';
 
 	/**
-	 * Nom de la balise demandée. Exemple 'ID_ARTICLE'
-	 *
-	 * @var string|null
-	 */
-	public $nom_champ;
-
-	/**
-	 * Identifiant de la boucle parente si explicité
+	 * Clé de traduction demandée. Exemple 'item_oui'
 	 *
 	 * @var string
 	 */
-	public $nom_boucle = '';
+	public $nom_champ = '';
 
 	/**
-	 * Partie optionnelle avant
-	 *
-	 * @var null|string|array
-	 */
-	public $avant;
-
-	/**
-	 * Partie optionnelle après
-	 *
-	 * @var null|string|array
-	 */
-	public $apres;
-
-	/**
-	 * Étoiles : annuler des automatismes
-	 *
-	 * - '*' annule les filtres automatiques
-	 * - '**' annule en plus les protections de scripts
+	 * Module de langue où chercher la clé de traduction. Exemple 'medias'
 	 *
 	 * @var string
 	 */
-	public $etoile = '';
+	public $module = '';
 
 	/**
-	 * Arguments et filtres explicites sur la balise
+	 * Arguments à passer à la chaîne
 	 *
-	 * - $param[0] contient les arguments de la balise
-	 * - $param[1..n] contient les filtres à appliquer à la balise
+	 * @var array
+	 */
+	public $arg = [];
+
+	/**
+	 * Filtres à appliquer au résultat
 	 *
 	 * @var array
 	 */
@@ -68,6 +47,20 @@ class Balise
 	 * @var array|null
 	 */
 	public $fonctions = [];
+
+	/**
+	 * Inutilisé, propriété générique de l'AST
+	 *
+	 * @var string|array
+	 */
+	public $avant = '';
+
+	/**
+	 * Inutilisé, propriété générique de l'AST
+	 *
+	 * @var string|array
+	 */
+	public $apres = '';
 
 	/**
 	 * Identifiant de la boucle
@@ -100,12 +93,10 @@ class Balise
 	/**
 	 * Interdire les scripts
 	 *
-	 * false si on est sûr de cette balise
-	 *
 	 * @see interdire_scripts()
 	 * @var bool
 	 */
-	public $interdire_scripts = true;
+	public $interdire_scripts = false;
 
 	/**
 	 * Description du squelette
@@ -113,7 +104,6 @@ class Balise
 	 * Sert pour la gestion d'erreur et la production de code dependant du contexte
 	 *
 	 * Peut contenir les index :
-	 *
 	 * - nom : Nom du fichier de cache
 	 * - gram : Nom de la grammaire du squelette (détermine le phraseur à utiliser)
 	 * - sourcefile : Chemin du squelette
@@ -133,11 +123,4 @@ class Balise
 	 * @var int
 	 */
 	public $ligne = 0;
-
-	/**
-	 * Drapeau pour reperer les balises calculées par une fonction explicite
-	 *
-	 * @var bool
-	 */
-	public $balise_calculee = false;
 }

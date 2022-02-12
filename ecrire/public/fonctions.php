@@ -41,7 +41,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param string $descriptif
  *     Descriptif de l'introduction
  * @param string $texte
- *     Texte à utiliser en absence de descriptif
+ *     texte à utiliser en absence de descriptif
  * @param string $longueur
  *     Longueur de l'introduction
  * @param string $connect
@@ -523,7 +523,7 @@ function formate_liste_critere_par_ordre_liste($valeurs, $serveur = '') {
  * @uses chercher_filtre()
  *
  * @param mixed $arg
- *     Texte (le plus souvent) sur lequel appliquer le filtre
+ *     texte (le plus souvent) sur lequel appliquer le filtre
  * @param string $filtre
  *     Nom du filtre à appliquer
  * @param array $args
@@ -531,7 +531,7 @@ function formate_liste_critere_par_ordre_liste($valeurs, $serveur = '') {
  * @param mixed $defaut
  *     Valeur par défaut à retourner en cas d'absence du filtre.
  * @return string
- *     Texte traité par le filtre si le filtre existe,
+ *     texte traité par le filtre si le filtre existe,
  *     Valeur $defaut sinon.
  **/
 function appliquer_filtre_sinon($arg, $filtre, $args, $defaut = '') {
