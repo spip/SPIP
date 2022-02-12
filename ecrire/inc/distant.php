@@ -10,6 +10,8 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+use Algo26\IdnaConvert\ToUnicode;
+
 /**
  * Ce fichier gère l'obtention de données distantes
  *
@@ -391,9 +393,8 @@ function url_to_ascii($url_idn) {
 	if ($parts = parse_url($url_idn)) {
 		$host = $parts['host'];
 		if (!preg_match(',^[a-z0-9_\.\-]+$,i', $host)) {
-			include_spip('inc/idna_convert.class');
-			$IDN = new idna_convert();
-			$host_ascii = $IDN->encode($host);
+			$converter = new ToUnicode();
+			$host_ascii = $converter->convertUrl($host);
 			$url_idn = explode($host, $url_idn, 2);
 			$url_idn = implode($host_ascii, $url_idn);
 		}
