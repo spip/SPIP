@@ -72,7 +72,6 @@ class Bouton {
 	}
 }
 
-
 /**
  * Définir la liste des onglets dans une page de l'interface privée.
  *
@@ -116,7 +115,6 @@ function definir_barre_onglets($script) {
 
 	return pipeline('ajouter_onglets', ['data' => $onglets, 'args' => $script]);
 }
-
 
 /**
  *
