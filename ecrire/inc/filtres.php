@@ -71,7 +71,7 @@ function filtre_identite_dist($texte) {
  *
  * @param string $fonc
  *     Nom du filtre
- * @param null $default
+ * @param string|null $default
  *     Nom du filtre appliqué par défaut si celui demandé n'est pas trouvé
  * @return string
  *     Fonction PHP correspondante du filtre demandé
@@ -225,9 +225,6 @@ function header_silencieux($version): string {
  */
 function version_vcs_courante($dir, $raw = false) {
 	$desc = decrire_version_git($dir);
-	if ($desc === null) {
-		$desc = decrire_version_svn($dir);
-	}
 	if ($desc === null or $raw) {
 		return $desc;
 	}
@@ -265,37 +262,6 @@ function decrire_version_git($dir) {
 		}
 	}
 
-	return null;
-}
-
-
-/**
- * Retrouve un numéro de révision Svn d'un répertoire
- *
- * @param string $dir Chemin du répertoire
- * @return array|null
- *      null si aucune info trouvée
- *      array ['commit' => yy, 'date' => xx, 'author' => xx] sinon.
- **/
-function decrire_version_svn($dir) {
-	if (!$dir) {
-		$dir = '.';
-	}
-	// version installee par SVN
-	if (file_exists($dir . '/.svn/wc.db') && class_exists(\SQLite3::class)) {
-		$db = new SQLite3($dir . '/.svn/wc.db');
-		$result = $db->query('SELECT changed_revision FROM nodes WHERE local_relpath = "" LIMIT 1');
-		if ($result) {
-			$row = $result->fetchArray();
-			if ($row['changed_revision'] != '') {
-				return [
-					'vcs' => 'SVN',
-					'branch' => '',
-					'commit' => $row['changed_revision'],
-				];
-			}
-		}
-	}
 	return null;
 }
 
@@ -2191,9 +2157,11 @@ function strize($f, $a, $b) {
 function plus($a, $b) {
 	return $a + $b;
 }
+
 function strplus($a, $b) {
-return strize('plus', $a, $b);
+	return strize('plus', $a, $b);
 }
+
 /**
  * Soustrait 2 nombres
  *
@@ -2212,8 +2180,9 @@ return strize('plus', $a, $b);
 function moins($a, $b) {
 	return $a - $b;
 }
+
 function strmoins($a, $b) {
-return strize('moins', $a, $b);
+	return strize('moins', $a, $b);
 }
 
 /**
@@ -2235,8 +2204,9 @@ return strize('moins', $a, $b);
 function mult($a, $b) {
 	return $a * $b;
 }
+
 function strmult($a, $b) {
-return strize('mult', $a, $b);
+	return strize('mult', $a, $b);
 }
 
 /**
@@ -2258,8 +2228,9 @@ return strize('mult', $a, $b);
 function div($a, $b) {
 	return $b ? $a / $b : 0;
 }
+
 function strdiv($a, $b) {
-return strize('div', $a, $b);
+	return strize('div', $a, $b);
 }
 
 /**
