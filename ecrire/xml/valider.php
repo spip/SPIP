@@ -21,8 +21,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Faudrait faire deux classes car pour la première passe
  *     on a les memes methodes et variables que l'indenteur
  **/
-class ValidateurXML {
-
+class ValidateurXML
+{
 	public function validerElement($phraseur, $name, $attrs) {
 		if (!($p = isset($this->dtc->elements[$name]))) {
 			if ($p = strpos($name, ':')) {
