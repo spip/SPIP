@@ -570,7 +570,8 @@ function calculer_balise_DEFAUT_dist($nom, $p) {
 /** Code PHP d'exécution d'une balise dynamique */
 define('CODE_EXECUTER_BALISE', "executer_balise_dynamique('%s',
 	array(%s%s),
-	array(%s%s))");
+	array(%s%s))"
+);
 
 
 /**
