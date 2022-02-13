@@ -274,7 +274,7 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles, &$joker) {
 		// et testent la présence du champ à l'exécution et non à la compilation
 		// car ils ne connaissent pas ici leurs contenus.
 		elseif (
-/*$joker AND */
+			/*$joker AND */
 			isset($desc['field']['*'])
 		) {
 			$joker = true; // indiquer a l'appelant
@@ -551,7 +551,8 @@ function calculer_balise_DEFAUT_dist($nom, $p) {
 /** Code PHP d'exécution d'une balise dynamique */
 define('CODE_EXECUTER_BALISE', "executer_balise_dynamique('%s',
 	array(%s%s),
-	array(%s%s))");
+	array(%s%s))"
+);
 
 
 /**
