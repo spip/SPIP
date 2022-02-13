@@ -101,7 +101,7 @@ function argumenter_inclure(
 				$m = array_pad($m, 3, null);
 				$var = $m[1];
 				$auto = false;
-;
+
 				if ($m[2]) {
 					$v = $m[3];
 					if (preg_match(',^[\'"](.*)[\'"]$,', $v, $m)) {
@@ -290,7 +290,7 @@ function instituer_boucle(&$boucle, $echapper = true, $ignore_previsu = false) {
 
 	champstatut est alors le champ statut sur la tablen
 	dans les jointures, clen peut etre un tableau pour une jointure complexe : array('id_objet','id_article','objet','article')
-*/
+	*/
 	$id_table = $boucle->id_table;
 	$show = $boucle->show;
 	if (isset($show['statut']) and $show['statut']) {
@@ -465,7 +465,8 @@ define('CODE_CORPS_BOUCLE', '%s
 	if (defined("_BOUCLE_PROFILER")
 	AND 1000*($timer = (time()+(float)microtime())-$timer) > _BOUCLE_PROFILER)
 		spip_log(intval(1000*$timer)."ms %s","profiler"._LOG_AVERTISSEMENT);
-	return $t0;');
+	return $t0;'
+);
 
 /**
  * Compilation d'une boucle (non recursive).
@@ -649,7 +650,6 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 		'BOUCLE' . $id_boucle . ' @ ' . ($boucle->descr['sourcefile'])
 	);
 
-#	var_dump($a);exit;
 	return $a;
 }
 
@@ -1165,7 +1165,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 				if (
 					($avant != "''" or $apres != "''")
 					and $code[0] != "'"
-#			AND (strpos($code,'interdire_scripts') !== 0)
+					# AND (strpos($code,'interdire_scripts') !== 0)
 					and !preg_match(_REGEXP_COND_VIDE_NONVIDE, $code)
 					and !preg_match(_REGEXP_COND_NONVIDE_VIDE, $code)
 					and !preg_match(_REGEXP_CONCAT_NON_VIDE, $code)
