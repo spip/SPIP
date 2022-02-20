@@ -1,6 +1,6 @@
 <?php
 
-namespace Spip\Base;
+namespace Spip\Sql;
 
 /**
  * Gère l'envoi et la réception de requêtes à SQLite, qui peuvent être
@@ -25,7 +25,8 @@ class Sqlite
 	 * @return SqliteRequeteur
 	 *    Instance unique du requêteur
 	 **/
-	public static function requeteur($serveur) {
+	public static function requeteur($serveur)
+	{
 		if (!isset(static::$requeteurs[$serveur])) {
 			static::$requeteurs[$serveur] = new SqliteRequeteur($serveur);
 		}
@@ -45,9 +46,10 @@ class Sqlite
 	 * @param string $serveur Nom de la connexion
 	 * @return string           Requête préparée
 	 */
-	public static function traduire_requete($query, $serveur) {
+	public static function traduire_requete($query, $serveur)
+	{
 		$requeteur = static::requeteur($serveur);
-		$traducteur = new sqlite_traducteur($query, $requeteur->prefixe, $requeteur->sqlite_version);
+		$traducteur = new SqliteTraducteur($query, $requeteur->prefixe, $requeteur->sqlite_version);
 
 		return $traducteur->traduire_requete();
 	}
@@ -57,7 +59,8 @@ class Sqlite
 	 *
 	 * @param string $serveur Nom de la connexion
 	 **/
-	public static function demarrer_transaction($serveur) {
+	public static function demarrer_transaction($serveur)
+	{
 		Sqlite::executer_requete('BEGIN TRANSACTION', $serveur);
 		Sqlite::$transaction_en_cours[$serveur] = true;
 	}
@@ -69,7 +72,8 @@ class Sqlite
 	 * @param string $serveur Nom de la connexion
 	 * @param null|bool $tracer Demander des statistiques (temps) ?
 	 **/
-	public static function executer_requete($query, $serveur, $tracer = null) {
+	public static function executer_requete($query, $serveur, $tracer = null)
+	{
 		$requeteur = Sqlite::requeteur($serveur);
 
 		return $requeteur->executer_requete($query, $tracer);
@@ -81,7 +85,8 @@ class Sqlite
 	 * @param string $serveur Nom de la connexion
 	 * return int                Identifiant
 	 **/
-	public static function last_insert_id($serveur) {
+	public static function last_insert_id($serveur)
+	{
 		$requeteur = Sqlite::requeteur($serveur);
 
 		return $requeteur->last_insert_id($serveur);
@@ -92,7 +97,8 @@ class Sqlite
 	 *
 	 * @param string $serveur Nom de la connexion
 	 **/
-	public static function annuler_transaction($serveur) {
+	public static function annuler_transaction($serveur)
+	{
 		Sqlite::executer_requete('ROLLBACK', $serveur);
 		Sqlite::$transaction_en_cours[$serveur] = false;
 	}
@@ -102,7 +108,8 @@ class Sqlite
 	 *
 	 * @param string $serveur Nom de la connexion
 	 **/
-	public static function finir_transaction($serveur) {
+	public static function finir_transaction($serveur)
+	{
 		// si pas de transaction en cours, ne rien faire et le dire
 		if (
 			!isset(Sqlite::$transaction_en_cours[$serveur])

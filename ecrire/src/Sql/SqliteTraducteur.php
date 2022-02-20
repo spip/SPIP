@@ -1,6 +1,6 @@
 <?php
 
-namespace Spip\Base;
+namespace Spip\Sql;
 
 /**
  * Cette classe est presente essentiellement pour un preg_replace_callback
@@ -12,10 +12,10 @@ class SqliteTraducteur
 	/** @var string $query texte de la requête */
 	public $query = '';
 
-    /** @var string $prefixe Préfixe des tables */
+	/** @var string $prefixe Préfixe des tables */
 	public $prefixe = '';
 
-    /** @var string $sqlite_version Version de sqlite (2 ou 3) */
+	/** @var string $sqlite_version Version de sqlite (2 ou 3) */
 	public $sqlite_version = '';
 
 	/** Pour les corrections à effectuer sur les requêtes : array(code=>'texte') trouvé
@@ -31,7 +31,8 @@ class SqliteTraducteur
 	 * @param string $prefixe Prefixe des tables à utiliser
 	 * @param string $sqlite_version Version SQLite (2 ou 3)
 	 */
-	public function __construct($query, $prefixe, $sqlite_version) {
+	public function __construct($query, $prefixe, $sqlite_version)
+	{
 		$this->query = $query;
 		$this->prefixe = $prefixe;
 		$this->sqlite_version = $sqlite_version;
@@ -44,7 +45,8 @@ class SqliteTraducteur
 	 * bien interprétée par SQLite, puis remet les textes
 	 * la fonction affecte `$this->query`
 	 */
-	public function traduire_requete() {
+	public function traduire_requete()
+	{
 		//
 		// 1) Protection des textes en les remplacant par des codes
 		//
@@ -185,7 +187,8 @@ class SqliteTraducteur
 	 * @param array $matches Captures
 	 * @return string texte de date compris par SQLite
 	 */
-	public function _remplacerDateParTime($matches) {
+	public function _remplacerDateParTime($matches)
+	{
 		$op = strtoupper($matches[1] == 'ADD') ? '+' : '-';
 
 		return "datetime$matches[2] '$op$matches[3] $matches[4]')";
@@ -198,7 +201,8 @@ class SqliteTraducteur
 	 * @param array $matches Captures
 	 * @return string texte de liste ordonnée compris par SQLite
 	 */
-	public function _remplacerFieldParCase($matches) {
+	public function _remplacerFieldParCase($matches)
+	{
 		$fields = substr($matches[0], 6, -1); // ne recuperer que l'interieur X de field(X)
 		$t = explode(',', $fields);
 		$index = array_shift($t);

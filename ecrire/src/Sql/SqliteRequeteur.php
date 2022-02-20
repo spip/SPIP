@@ -1,6 +1,6 @@
 <?php
 
-namespace Spip\Base;
+namespace Spip\Sql;
 
 /*
  * Classe pour partager les lancements de requête
@@ -10,7 +10,9 @@ namespace Spip\Base;
  * - peut corriger la syntaxe des requêtes pour la conformité à SQLite
  * - peut tracer les requêtes
  */
-class SqliteRequeteur {
+
+class SqliteRequeteur
+{
 	/** @var string texte de la requête */
 	public $query = ''; // la requete
 	/** @var string Nom de la connexion */
@@ -33,7 +35,8 @@ class SqliteRequeteur {
 	 * @param string $serveur
 	 * @return bool
 	 */
-	public function __construct($serveur = '') {
+	public function __construct($serveur = '')
+	{
 		_sqlite_init();
 		$this->serveur = strtolower($serveur);
 
@@ -61,7 +64,8 @@ class SqliteRequeteur {
 	 *     true pour tracer la requête
 	 * @return bool|PDOStatement|array
 	 */
-	public function executer_requete($query, $tracer = null) {
+	public function executer_requete($query, $tracer = null)
+	{
 		if (is_null($tracer)) {
 			$tracer = $this->tracer;
 		}
@@ -129,7 +133,8 @@ class SqliteRequeteur {
 	 *
 	 * @return string|false
 	 **/
-	public function last_insert_id() {
+	public function last_insert_id()
+	{
 		return $this->link->lastInsertId();
 	}
 }
