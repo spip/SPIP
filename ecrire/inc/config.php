@@ -112,7 +112,7 @@ function lire_config($cfg = '', $def = null, $unserialize = true) {
 				// ne pas essayer de deserialiser autre chose qu'une chaine
 				or !is_string($GLOBALS['meta'][$cfg])
 				// ne pas essayer de deserialiser si ce n'est visiblement pas une chaine serializee
-				or strpos($GLOBALS['meta'][$cfg], ':') === false
+				or !str_contains($GLOBALS['meta'][$cfg], ':')
 				or ($t = @unserialize($GLOBALS['meta'][$cfg])) === false) ? $GLOBALS['meta'][$cfg] : $t)
 			: $def;
 

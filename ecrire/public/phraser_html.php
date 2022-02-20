@@ -295,7 +295,7 @@ function phraser_args(string $texte, $fin, $sep, $result, &$pointeur_champ, &$po
 	while ($pos_debut < $length and trim($texte[$pos_debut]) === '') {
 		$pos_debut++;
 	}
-	while (($pos_debut < $length) && strpos($fin, $texte[$pos_debut]) === false) {
+	while (($pos_debut < $length) && !str_contains($fin, $texte[$pos_debut])) {
 		// phraser_arg modifie directement le $texte, on fait donc avec ici en passant par une sous chaine
 		$st = substr($texte, $pos_debut);
 		$result = phraser_arg($st, $sep, $result, $pointeur_champ);
