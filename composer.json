@@ -17,9 +17,14 @@
         "ext-pdo": "*",
         "ext-pdo_sqlite": "*"
     },
+    "autoload": {
+        "psr-4": {
+            "Spip\\": "ecrire/src/"
+        }
+    },
     "archive": {
         "exclude": [
-            "composer.json",
+            "!vendor",
             "phpcs.xml.dist",
             "phpstan.neon.dist",
             "phpstan-baseline.neon",
