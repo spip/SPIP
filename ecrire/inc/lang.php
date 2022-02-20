@@ -58,7 +58,7 @@ function changer_langue($lang, $liste_langues = null) {
 	if (
 		strpos($liste_langues, (string) ",$lang,") !== false
 		or ($lang = preg_replace(',_.*,', '', $lang)
-			and strpos($liste_langues, (string) ",$lang,") !== false)
+			and str_contains($liste_langues, (string) ",$lang,"))
 	) {
 		$GLOBALS['spip_lang_rtl'] = lang_dir($lang, '', '_rtl');
 		$GLOBALS['spip_lang_right'] = $GLOBALS['spip_lang_rtl'] ? 'left' : 'right';
