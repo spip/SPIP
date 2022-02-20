@@ -10,6 +10,8 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+require_once __DIR__ . '/../vendor/autoload.php';
+
 /**
  * Fichier d'exécution de l'interface privée
  *
