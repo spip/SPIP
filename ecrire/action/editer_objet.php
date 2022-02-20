@@ -103,18 +103,18 @@ function objet_modifier($objet, $id, $set = null) {
 		$champ_date = 'date';
 	}
 
-	$white = array_keys($desc['field']);
+	$include_list = array_keys($desc['field']);
 	// on ne traite pas la cle primaire par defaut, notamment car
 	// sur une creation, id_x vaut 'oui', et serait enregistre en id_x=0 dans la base
-	$white = array_diff($white, [$desc['key']['PRIMARY KEY']]);
+	$include_list = array_diff($include_list, [$desc['key']['PRIMARY KEY']]);
 
 	if (isset($desc['champs_editables']) and is_array($desc['champs_editables'])) {
-		$white = $desc['champs_editables'];
+		$include_list = $desc['champs_editables'];
 	}
 	$c = collecter_requests(
-	// white list
-		$white,
-		// black list
+		// include list
+		$include_list,
+		// exclude list
 		[$champ_date, 'statut', 'id_parent', 'id_secteur'],
 		// donnees eventuellement fournies
 		$set
@@ -149,7 +149,7 @@ function objet_modifier($objet, $id, $set = null) {
 
 	// Modification de statut, changement de rubrique ?
 	// FIXME: Ici lorsqu'un $set est passé, la fonction collecter_requests() retourne tout
-	//         le tableau $set hors black liste, mais du coup on a possiblement des champs en trop.
+	//         le tableau $set hors liste d’exclusion, mais du coup on a possiblement des champs en trop.
 	$c = collecter_requests([$champ_date, 'statut', 'id_parent'], [], $set);
 	$err = objet_instituer($objet, $id, $c);
 

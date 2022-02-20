@@ -96,9 +96,9 @@ function article_modifier($id_article, $set = null) {
 	include_spip('inc/modifier');
 	include_spip('inc/filtres');
 	$c = collecter_requests(
-	// white list
+		// include list
 		objet_info('article', 'champs_editables'),
-		// black list
+		// exclude list
 		['date', 'statut', 'id_parent'],
 		// donnees eventuellement fournies
 		$set

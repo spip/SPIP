@@ -18,16 +18,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @uses find_all_in_path()
  *
- * @param array $whitelist
- *     Liste blanche décrivant les objets à lister
- * @param array $blacklist
- *     Liste noire décrivant les objets à ne pas lister
+ * @param array $includelist
+ *     Liste d’inclusion décrivant les objets à lister
+ * @param array $excludelist
+ *     Liste d’exclusion décrivant les objets à ne pas lister
  * @return array
  *     Retourne un tableau de deux entrées listant les objets à lister et les objets sélectionnables
  *     - selectionner : tableau des objets que l'on pourra sélectionner (avec un +)
  *     - afficher : tableau des objets à afficher (mais pas forcément sélectionnables)
  */
-function selecteur_lister_objets($whitelist = [], $blacklist = []) {
+function selecteur_lister_objets($includelist = [], $excludelist = []) {
 	static $liste_selecteurs, $liste_parents;
 
 	if (!$liste_selecteurs) {
@@ -39,15 +39,15 @@ function selecteur_lister_objets($whitelist = [], $blacklist = []) {
 	}
 
 	// S'il y a une whitelist on ne garde que ce qui est dedans
-	if (!empty($whitelist)) {
-		$whitelist = array_map('table_objet', $whitelist);
-		$objets_selectionner = array_intersect($objets_selectionner, $whitelist);
+	if (!empty($includelist)) {
+		$includelist = array_map('table_objet', $includelist);
+		$objets_selectionner = array_intersect($objets_selectionner, $includelist);
 	}
-	// On supprime ce qui est dans la blacklist
-	$blacklist = array_map('table_objet', $blacklist);
+	// On supprime ce qui est dans la liste d’exclusion
+	$excludelist = array_map('table_objet', $excludelist);
 	// On enlève toujours la racine
-	$blacklist[] = 'racine';
-	$objets_selectionner = array_diff($objets_selectionner, $blacklist);
+	$excludelist[] = 'racine';
+	$objets_selectionner = array_diff($objets_selectionner, $excludelist);
 
 	// Ensuite on cherche ce qu'on doit afficher : au moins ceux qu'on peut sélectionner
 	$objets_afficher = $objets_selectionner;

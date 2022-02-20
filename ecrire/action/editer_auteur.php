@@ -153,9 +153,9 @@ function auteur_modifier($id_auteur, $set = null, $force_update = false) {
 	include_spip('inc/modifier');
 	include_spip('inc/filtres');
 	$c = collecter_requests(
-	// white list
+		// include list
 		objet_info('auteur', 'champs_editables'),
-		// black list
+		// exclude list
 		$force_update ? [] : ['webmestre', 'pass', 'login'],
 		// donnees eventuellement fournies
 		$set
@@ -180,7 +180,7 @@ function auteur_modifier($id_auteur, $set = null, $force_update = false) {
 	if (!$force_update) {
 		// Modification de statut, changement de rubrique ?
 		$c = collecter_requests(
-		// white list
+		// include list
 			[
 				'statut',
 				'new_login',
@@ -191,7 +191,7 @@ function auteur_modifier($id_auteur, $set = null, $force_update = false) {
 				'restreintes',
 				'id_parent'
 			],
-			// black list
+			// exclude list
 			[],
 			// donnees eventuellement fournies
 			$set

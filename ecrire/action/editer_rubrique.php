@@ -136,9 +136,9 @@ function rubrique_modifier($id_rubrique, $set = null) {
 
 	include_spip('inc/modifier');
 	$c = collecter_requests(
-	// white list
+		// include list
 		objet_info('rubrique', 'champs_editables'),
-		// black list
+		// exclude list
 		['id_parent', 'confirme_deplace'],
 		// donnees eventuellement fournies
 		$set

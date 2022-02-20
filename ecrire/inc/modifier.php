@@ -26,23 +26,23 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Fonction générique pour la collecte des posts
  * dans action/editer_xxx
  *
- * @param array $white_list
+ * @param array $include_list
  *     Les champs à récupérer
- * @param array $black_list
+ * @param array $exclude_list
  *     Les champs à ignorer
  * @param array|null $set
  *     array : Tableau des champs postés
- *     null  : Les champs sont obtenus par des _request() sur les noms de la white liste
+ *     null  : Les champs sont obtenus par des _request() sur les noms de la liste d’inclusion
  * @param bool $tous
  *     true : Recupère tous les champs de white_list meme ceux n'ayant pas ete postés
  * @return array
  *     Tableau des champs et valeurs collectées
  */
-function collecter_requests($white_list, $black_list = [], $set = null, $tous = false) {
+function collecter_requests($include_list, $exclude_list = [], $set = null, $tous = false) {
 	$c = $set;
 	if (!$c) {
 		$c = [];
-		foreach ($white_list as $champ) {
+		foreach ($include_list as $champ) {
 			// on ne collecte que les champs reellement envoyes par defaut.
 			// le cas d'un envoi de valeur NULL peut du coup poser probleme.
 			$val = _request($champ);
@@ -56,7 +56,7 @@ function collecter_requests($white_list, $black_list = [], $set = null, $tous = 
 			$c['lang'] = $l;
 		}
 	}
-	foreach ($black_list as $champ) {
+	foreach ($exclude_list as $champ) {
 		unset($c[$champ]);
 	}
 
