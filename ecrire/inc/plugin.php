@@ -864,7 +864,7 @@ function ecrire_plugin_actifs($plugin, $pipe_recherche = false, $operation = 'ra
 	$err = $msg = $header = [];
 	foreach ($plugin_valides as $p => $resume) {
 		// Les headers ne doivent pas indiquer les versions des extensions PHP, ni la version PHP
-		if (0 !== strpos($p, 'PHP:') and $p !== 'PHP') {
+		if (!str_starts_with($p, 'PHP:') and $p !== 'PHP') {
 			$header[] = $p . ($resume['version'] ? '(' . $resume['version'] . ')' : '');
 		}
 		if ($resume['dir']) {
@@ -953,7 +953,7 @@ function plugins_precompile_chemin($plugin_valides, $ordre) {
 			$prefix = strtoupper(preg_replace(',\W,', '_', $info['prefix']));
 			if (
 				$prefix !== 'SPIP'
-				and strpos($dir, ':') === false // exclure le cas des procure:
+				and !str_contains($dir, ':') // exclure le cas des procure:
 			) {
 				$contenu .= "define('_DIR_PLUGIN_$prefix',$dir);\n";
 				if (!$info['chemin']) {
@@ -1045,7 +1045,7 @@ function plugins_precompile_xxxtions($plugin_valides, $ordre) {
 				if (
 					!isset($info[$charge])
 					and $dir // exclure le cas du plugin "SPIP"
-					and strpos($dir, ':') === false // exclure le cas des procure:
+					and !str_contains($dir, ':') // exclure le cas des procure:
 					and file_exists("$dir$plug/paquet.xml") // uniquement pour les paquet.xml
 				) {
 					if (is_readable("$dir$plug/" . ($file = $info['prefix'] . '_' . $charge . '.php'))) {
