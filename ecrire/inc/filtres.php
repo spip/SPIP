@@ -552,7 +552,7 @@ function image_filtrer($args) {
 				!$class or
 				(strpos($class, 'filtre_inactif') === false
 					// compat historique a virer en 3.2
-					and strpos($class, 'no_image_filtrer') === false)
+					and !str_contains($class, 'no_image_filtrer'))
 			) {
 				if ($reduit = $filtre($tag[3], ...$args)) {
 					// En cas de span spip_documents, modifier le style=...width:
@@ -2184,7 +2184,7 @@ function modifier_class($balise, $class, $operation = 'ajouter') {
 		$is_class_presente = false;
 		if (
 			$class_courante
-			and strpos($class_courante, (string) $c) !== false
+			and str_contains($class_courante, (string) $c)
 			and preg_match('/(^|\s)' . preg_quote($c) . '($|\s)/', $class_courante)
 		) {
 			$is_class_presente = true;
@@ -3552,7 +3552,7 @@ function http_img_pack($img, $alt, $atts = '', $title = '', $options = []) {
 		if (
 			(!isset($options['utiliser_suffixe_size'])
 				or $options['utiliser_suffixe_size'] == true
-			  or strpos($img_file, '-xx.svg') !== false)
+				or str_contains($img_file, '-xx.svg'))
 			and (preg_match(',-([0-9]+)[.](png|gif|svg)$,', $img, $regs)
 					 or preg_match(',\?([0-9]+)px$,', $img, $regs))
 		) {

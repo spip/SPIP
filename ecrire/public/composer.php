@@ -306,7 +306,7 @@ function synthetiser_balise_dynamique($nom, $args, $file, $context_compil) {
 	if (
 		strncmp($file, '/', 1) !== 0
 		// pas de lien symbolique sous Windows
-		and !(stristr(PHP_OS, 'WIN') and strpos($file, ':') !== false)
+		and !(stristr(PHP_OS, 'WIN') and str_contains($file, ':'))
 	) {
 		$file = './" . _DIR_RACINE . "' . $file;
 	}
@@ -511,7 +511,7 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
  * @return array|null
  */
 function chercher_balise_generique($nom) {
-	if (false === strpos($nom, '_')) {
+	if (!str_contains($nom, '_')) {
 		return null;
 	}
 	$nom_generique = $nom;
@@ -564,8 +564,8 @@ function lang_select_public($lang, $lang_select, $titre = null) {
 	elseif (
 		$lang_select !== 'oui'
 		and strlen($titre) > 10
-		and strpos($titre, '<multi>') !== false
-		and strpos(echappe_html($titre), '<multi>') !== false
+		and str_contains($titre, '<multi>')
+		and str_contains(echappe_html($titre), '<multi>')
 	) {
 		$lang = $GLOBALS['spip_lang'];
 	}
@@ -784,7 +784,7 @@ function calculer_select(
 					foreach ($join as $cle => $wj) {
 						if (
 							(is_countable($wj) ? count($wj) : 0) == 4
-							and strpos($wherestring, (string) "{$cle}.") !== false
+							and str_contains($wherestring, (string) "{$cle}.")
 						) {
 							$i = 0;
 							$wheresub[] = $wj[3];
