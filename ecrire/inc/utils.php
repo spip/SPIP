@@ -2672,7 +2672,7 @@ function spip_initialisation_core($pi = null, $pa = null, $ti = null, $ta = null
 
 	// Sommes-nous dans l'empire du Mal ?
 	// (ou sous le signe du Pingouin, ascendant GNU ?)
-	if (isset($_SERVER['SERVER_SOFTWARE']) and strpos($_SERVER['SERVER_SOFTWARE'], '(Win') !== false) {
+	if (isset($_SERVER['SERVER_SOFTWARE']) and str_contains($_SERVER['SERVER_SOFTWARE'], '(Win')) {
 		if (!defined('_OS_SERVEUR')) {
 			define('_OS_SERVEUR', 'windows');
 		}

@@ -55,7 +55,7 @@ function xml_debutElement($phraseur, $name, $attrs) {
 	$att = '';
 	$sep = ' ';
 	foreach ($attrs as $k => $v) {
-		$delim = strpos($v, "'") === false ? "'" : '"';
+		$delim = !str_contains($v, "'") ? "'" : '"';
 		$val = xml_entites_html($v);
 		$att .= $sep . $k . '=' . $delim
 			. ($delim !== '"' ? str_replace('&quot;', '"', $val) : $val)
