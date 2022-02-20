@@ -207,7 +207,7 @@ function echappe_html(
 	}
 
 	if (
-		($preg or strpos($letexte, '<') !== false)
+		($preg or str_contains($letexte, '<'))
 		and preg_match_all($preg ?: _PROTEGE_BLOCS, $letexte, $matches, PREG_SET_ORDER)
 	) {
 		foreach ($matches as $regs) {
@@ -494,7 +494,7 @@ function echapper_html_suspect($texte, $strict = true) {
 
 	if (
 		strpos($texte, '<') === false
-		or strpos($texte, '=') === false
+		or !str_contains($texte, '=')
 	) {
 		return $texte;
 	}
