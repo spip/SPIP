@@ -240,7 +240,7 @@ function echappe_html(
 	}
 
 	if (
-		($preg or strpos($letexte, '<') !== false)
+		($preg or str_contains($letexte, '<'))
 		and preg_match_all($preg ?: _PROTEGE_BLOCS, $letexte, $matches, PREG_SET_ORDER)
 	) {
 		foreach ($matches as $regs) {
@@ -553,7 +553,7 @@ function echapper_html_suspect($texte, $options = [], $connect = null, $env = []
 	// pas de balise html ou pas d'attribut sur les balises ? c'est OK
 	if (
 		strpos($texte, '<') === false
-		or strpos($texte, '=') === false
+		or !str_contains($texte, '=')
 	) {
 		return $texte;
 	}

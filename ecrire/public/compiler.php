@@ -787,12 +787,12 @@ function calculer_dec($nom, $val) {
 	// si une variable apparait dans le calcul de la clause
 	// il faut la re-evaluer a chaque passage
 	if (
-		strpos($val, '$') !== false
+		str_contains($val, '$')
 		/*
-		OR strpos($val, 'sql_') !== false
+		OR str_contains($val, 'sql_')
 		OR (
 			$test = str_replace(array("array(",'\"',"\'"),array("","",""),$val) // supprimer les array( et les echappements de guillemets
-			AND strpos($test,"(")!==FALSE // si pas de parenthese ouvrante, pas de fonction, on peut sortir
+			AND str_contains($test,"(") // si pas de parenthese ouvrante, pas de fonction, on peut sortir
 			AND $test = preg_replace(",'[^']*',UimsS","",$test) // supprimer les chaines qui peuvent contenir des fonctions SQL qui ne genent pas
 			AND preg_match(",\w+\s*\(,UimsS",$test,$regs) // tester la presence de fonctions restantes
 		)*/
@@ -1302,7 +1302,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, string $conn
 
 	// rendre inertes les echappements de #[](){}<>
 	$i = 0;
-	while (false !== strpos($squelette, $inerte = '-INERTE' . $i)) {
+	while (str_contains($squelette, $inerte = '-INERTE' . $i)) {
 		$i++;
 	}
 	$squelette = preg_replace_callback(
