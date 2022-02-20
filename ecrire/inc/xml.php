@@ -159,7 +159,7 @@ function spip_xml_parse(&$texte, $strict = true, $clean = true, $profondeur = -1
 			}
 			$content = substr($txt, 0, $p);
 			$txt = substr($txt, $p + $ncclos);
-			if ($profondeur == 0 or strpos($content, '<') === false) { // eviter une recursion si pas utile
+			if ($profondeur == 0 or !str_contains($content, '<')) { // eviter une recursion si pas utile
 			$out[$tag][] = importer_charset($content, $charset);
 			}//$content;
 			else {

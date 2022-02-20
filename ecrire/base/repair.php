@@ -106,7 +106,7 @@ function admin_repair_tables() {
 				' ',
 				(is_resource($result_repair) or is_object($result_repair)) ? sql_fetch($result_repair) : $result_repair
 			) . ' '
-			and strpos($msg, ' OK ') === false
+			and !str_contains($msg, ' OK ')
 		) {
 			$class = " class='notice'";
 			$m .= '<br /><tt>' . spip_htmlentities($msg) . "</tt>\n";
