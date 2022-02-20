@@ -15,7 +15,7 @@
  *
  * Une surcharge de ce fichier pourrait permettre :
  *
- * - de limiter l'utilisation des filtres à l'aide d'une liste blanche ou liste noire,
+ * - de limiter l'utilisation des filtres à l'aide d'une liste d’inclusion ou d’exclusion,
  * - de rendre inactif le PHP écrit dans les squelettes
  * - de refuser l'inclusion de fichier PHP dans les squelettes
  *

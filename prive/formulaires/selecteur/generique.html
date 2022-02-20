@@ -1,4 +1,9 @@
-#SET{img_unpick, #CHEMIN_IMAGE{supprimer-12.png}}
+[(#REM)
+
+	@deprecated 4.1 ENV 'whitelist'. Use 'includelist' instead
+	@deprecated 4.1 ENV 'blacklist'. Use 'excludelist' instead
+
+]#SET{img_unpick, #CHEMIN_IMAGE{supprimer-12.png}}
 [(#SET{label_supprimer, <:lien_supprimer:>})]
 <script type='text/javascript'>var identifiant_selecteur = 'selecteur_#ENV{name}'; var img_unpick='#GET{img_unpick}'; var selecteur_label_supprimer='#GET{label_supprimer}';
 jQuery.getScript('[(#CHEMIN{formulaires/selecteur/jquery.picker.js}|timestamp)]');
@@ -18,7 +23,7 @@ afficher la selection dans un ul class item_picked
 ]
 
 [(#REM) On commence par chercher la liste des objets disposant d'un sélecteur ]
-[(#SET{objets, [(#ENV{whitelist,#ARRAY}|selecteur_lister_objets{#ENV{blacklist,#ARRAY}})]})]
+[(#SET{objets, [(#ENV{includelist,#ENV{whitelist,#ARRAY}}|selecteur_lister_objets{#ENV{excludelist,#ENV{blacklist,#ARRAY}}})]})]
 
 [(#REM) S'il n'y a qu'un type d'objet affiché et sélectionnable, on ajoute une classe (on fait -1 car il y a toujours la racine dans "afficher" ]
 <div id="selecteur_#ENV{name}" class="selecteur[ (#GET{objets/afficher}|count|moins{1}|=={1}|et{#GET{objets/selectionner}|count|=={1}})selecteur_type_unique]">
