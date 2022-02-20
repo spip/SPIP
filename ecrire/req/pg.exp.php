@@ -215,7 +215,7 @@ function spip_pg_ajouter_champs_timestamp($table, $couples, $desc = '', $serveur
 		foreach ($desc['field'] as $k => $v) {
 			$v = strtolower(ltrim($v));
 			// ne pas ajouter de timestamp now() si un default est specifie
-			if (strpos($v, 'timestamp') === 0 and strpos($v, 'default') === false) {
+			if (strpos($v, 'timestamp') === 0 and !str_contains($v, 'default')) {
 				$tables[$table][] = $k;
 			}
 		}
@@ -253,8 +253,8 @@ function spip_pg_alter($query, $serveur = '', $requeter = true) {
 	$ouverte = false;
 	while ($do = array_shift($todo)) {
 		$todo2[$i] = isset($todo2[$i]) ? $todo2[$i] . ',' . $do : $do;
-		$o = (false !== strpos($do, '('));
-		$f = (false !== strpos($do, ')'));
+		$o = (str_contains($do, '('));
+		$f = (str_contains($do, ')'));
 		if ($o and !$f) {
 			$ouverte = true;
 		} elseif ($f) {
@@ -349,7 +349,7 @@ function spip_pg_alter_add($table, $arg, $serveur = '', $requeter = true) {
 			// (colonne)
 			if ($m[1][0] == '(') {
 				$colonnes = substr($m[1], 1, -1);
-				if (false !== strpos(',', $colonnes)) {
+				if (str_contains(',', $colonnes)) {
 					spip_log('PG : Erreur, impossible de creer un index sur plusieurs colonnes'
 						. " sans qu'il ait de nom ($table, ($colonnes))", 'pg.' . _LOG_ERREUR);
 				} else {
@@ -1171,7 +1171,7 @@ function spip_pg_sequence($table, $raw = false) {
 	$prim = @$desc['key']['PRIMARY KEY'];
 	if (
 		!preg_match('/^\w+$/', $prim)
-		or strpos($desc['field'][$prim], 'int') === false
+		or !str_contains($desc['field'][$prim], 'int')
 	) {
 		return '';
 	} else {

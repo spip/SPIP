@@ -128,7 +128,7 @@ function ajax_retour($corps, $content_type = null): void {
 	if (is_null($content_type) or $content_type === true) {
 		$xml = true;
 		$content_type = 'text/html';
-	} elseif (!$content_type or !is_string($content_type) or strpos($content_type, '/') === false) {
+	} elseif (!$content_type or !is_string($content_type) or !str_contains($content_type, '/')) {
 		$content_type = 'text/html';
 	}
 
