@@ -973,7 +973,7 @@ function transcoder_page($texte, $headers = ''): string {
 		// charset precise par le contenu (html)
 		preg_match(',<(meta|html|body)[^>]*charset[^>]*=[^>]*([#-_a-z0-9]+?),UimsS', $texte, $regs)
 		# eviter toute balise SPIP tel que #CHARSET ou #CONFIG d'un squelette
-		and false === strpos($regs[2], '#')
+		and !str_contains($regs[2], '#')
 		and $tmp = trim(strtolower($regs[2]))
 	) {
 		$charset = $tmp;

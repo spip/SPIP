@@ -397,7 +397,7 @@ function prive_echafauder_dist($exec, $table, $table_sql, $desc_exec, $ext) {
 		$dir = reset($dir);
 		$scaffold = "<INCLURE{fond=prive/echafaudage/$dir/" . $fond . ',objet=' . $type . ',id_objet=#' . strtoupper($primary) . ',env}>';
 	} // page objets
-	elseif ($type = $desc_exec and strpos($type, '/') === false) {
+	elseif ($type = $desc_exec and !str_contains($type, '/')) {
 		$dir = z_blocs(test_espace_prive());
 		$dir = reset($dir);
 		$scaffold = "<INCLURE{fond=prive/echafaudage/$dir/objets,objet=" . $type . ',env} />';
