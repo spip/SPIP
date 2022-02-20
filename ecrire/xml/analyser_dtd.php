@@ -340,7 +340,7 @@ function analyser_dtd_element($dtd, &$dtc, $grammaire) {
 		$last = substr($val, -1);
 		if (
 			preg_match('/ \w/', $val)
-			or (!empty($last) and strpos('*+?', $last) === false)
+			or (!empty($last) and !str_contains('*+?', $last))
 		) {
 			$dtc->regles[$nom] = "/^$val$/";
 		} else {
