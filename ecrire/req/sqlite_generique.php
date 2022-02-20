@@ -10,7 +10,7 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-use Spip\Base\Sqlite;
+use Spip\Sql\Sqlite;
 
 /**
  * Ce fichier contient les fonctions gérant
