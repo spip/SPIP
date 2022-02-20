@@ -85,7 +85,7 @@ function expression_recherche($recherche, $options) {
 	}
 
 	$u = $GLOBALS['meta']['pcre_u'];
-	if ($u and strpos($options['preg_flags'], (string) $u) === false) {
+	if ($u and !str_contains($options['preg_flags'], (string) $u)) {
 		$options['preg_flags'] .= $u;
 	}
 	include_spip('inc/charsets');

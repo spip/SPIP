@@ -63,7 +63,7 @@ function req_sqlite_dist($addr, $port, $login, $pass, $db = '', $prefixe = '', $
 
 	// determiner le dossier de la base : $addr ou _DIR_DB
 	$f = _DIR_DB;
-	if ($addr and strpos($addr, '/') !== false) {
+	if ($addr and str_contains($addr, '/')) {
 		$f = rtrim($addr, '/') . '/';
 	}
 
@@ -206,8 +206,8 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true) {
 	$ouverte = false;
 	while ($do = array_shift($todo)) {
 		$todo2[$i] = isset($todo2[$i]) ? $todo2[$i] . ',' . $do : $do;
-		$o = (false !== strpos($do, '('));
-		$f = (false !== strpos($do, ')'));
+		$o = (str_contains($do, '('));
+		$f = (str_contains($do, ')'));
 		if ($o and !$f) {
 			$ouverte = true;
 		} elseif ($f) {
@@ -371,7 +371,7 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true) {
 					// (colonne)
 					if ($colonne_origine[0] == '(') {
 						$colonnes = substr($colonne_origine, 1, -1);
-						if (false !== strpos(',', $colonnes)) {
+						if (str_contains(',', $colonnes)) {
 							spip_log('SQLite : Erreur, impossible de creer un index sur plusieurs colonnes'
 								. " sans qu'il ait de nom ($table, ($colonnes))", 'sqlite.' . _LOG_ERREUR);
 							break;
@@ -951,7 +951,7 @@ function spip_sqlite_fetch($r, $t = '', $serveur = '', $requeter = true) {
 	// Renvoie des 'table.titre' au lieu de 'titre' tout court ! pff !
 	// suppression de 'table.' pour toutes les cles (c'est un peu violent !)
 	// c'est couteux : on ne verifie que la premiere ligne pour voir si on le fait ou non
-	if (strpos(implode('', array_keys($retour)), '.') !== false) {
+	if (str_contains(implode('', array_keys($retour)), '.')) {
 		foreach ($retour as $cle => $val) {
 			if (($pos = strpos($cle, '.')) !== false) {
 				$retour[substr($cle, $pos + 1)] = &$retour[$cle];
@@ -1815,7 +1815,7 @@ function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true) {
 				// rustine pour DECIMAL(10,2)
 				// s'il y a une parenthèse fermante dans la clé
 				// ou dans la définition sans qu'il n'y ait une ouverture avant
-				if (false !== strpos($k, ')') or preg_match('/^[^\(]*\)/', $def)) {
+				if (str_contains($k, ')') or preg_match('/^[^\(]*\)/', $def)) {
 					$fields[$k_precedent] .= ',' . $k . ' ' . $def;
 					continue;
 				}
