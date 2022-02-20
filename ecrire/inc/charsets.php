@@ -29,6 +29,29 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('inc/config');
 
 /**
+ * Initialisation
+ */
+function init_charset(): void {
+	// Initialisation
+	$GLOBALS['CHARSET'] = [];
+
+	// noter a l'occasion dans la meta pcre_u notre capacite a utiliser le flag /u
+	// dans les preg_replace pour ne pas casser certaines lettres accentuees :
+	// en utf-8 chr(195).chr(160) = a` alors qu'en iso-latin chr(160) = nbsp
+	if (
+		!isset($GLOBALS['meta']['pcre_u'])
+		or (isset($_GET['var_mode']) and !isset($_GET['var_profile']))
+	) {
+		include_spip('inc/meta');
+		ecrire_meta('pcre_u', (lire_config('charset', _DEFAULT_CHARSET) === 'utf-8') ? 'u' : '');
+	}
+}
+
+// TODO: code d’exécution en dehors du fichier.
+init_charset();
+
+
+/**
  * Charge en mémoire la liste des caractères d'un charset
  *
  * Charsets supportés en natif : voir les tables dans ecrire/charsets/
@@ -57,20 +80,14 @@ function load_charset($charset = 'AUTO') {
 	}
 
 	// Quelques synonymes
-	if ($charset == '') {
+	if ($charset === '') {
 		$charset = 'iso-8859-1';
-	} else {
-		if ($charset == 'windows-1250') {
-			$charset = 'cp1250';
-		} else {
-			if ($charset == 'windows-1251') {
-				$charset = 'cp1251';
-			} else {
-				if ($charset == 'windows-1256') {
-					$charset = 'cp1256';
-				}
-			}
-		}
+	} elseif ($charset === 'windows-1250') {
+		$charset = 'cp1250';
+	} elseif ($charset === 'windows-1251') {
+		$charset = 'cp1251';
+	} elseif ($charset === 'windows-1256') {
+		$charset = 'cp1256';
 	}
 
 	if (find_in_path($charset . '.php', 'charsets/', true)) {
@@ -85,29 +102,19 @@ function load_charset($charset = 'AUTO') {
 
 
 /**
- * Vérifier qu'on peut utiliser mb_string
+ * Vérifier qu'on peut utiliser mb_string avec notre charset
  *
+ * Les fonctions mb_* sont tout le temps présentes avec symfony/polyfill-mbstring
+ * 
  * @return bool
- *     true si toutes les fonctions mb nécessaires sont présentes
+ *     true si notre charset est utilisable par mb_strsing
  **/
-function init_mb_string() {
+function init_mb_string(): bool {
 	static $mb;
 
-	// verifier que tout est present (fonctions mb_string pour php >= 4.0.6)
-	// et que le charset interne est connu de mb_string
+	// verifier que le charset interne est connu de mb_string
 	if (!$mb) {
-		if (
-			function_exists('mb_internal_encoding')
-			and function_exists('mb_detect_order')
-			and function_exists('mb_substr')
-			and function_exists('mb_strlen')
-			and function_exists('mb_strtolower')
-			and function_exists('mb_strtoupper')
-			and function_exists('mb_encode_mimeheader')
-			and function_exists('mb_encode_numericentity')
-			and function_exists('mb_decode_numericentity')
-			and mb_detect_order(lire_config('charset', _DEFAULT_CHARSET))
-		) {
+		if (mb_detect_order(lire_config('charset', _DEFAULT_CHARSET))) {
 			mb_internal_encoding('utf-8');
 			$mb = 1;
 		} else {
@@ -115,7 +122,7 @@ function init_mb_string() {
 		}
 	}
 
-	return ($mb == 1);
+	return ($mb === 1);
 }
 
 /**
@@ -129,14 +136,14 @@ function init_mb_string() {
  * @return bool
  *     true si iconv fonctionne correctement
  **/
-function test_iconv() {
+function test_iconv(): bool {
 	static $iconv_ok;
 
 	if (!$iconv_ok) {
 		if (!function_exists('iconv')) {
 			$iconv_ok = -1;
 		} else {
-			if (utf_32_to_unicode(@iconv('utf-8', 'utf-32', 'chaine de test')) == 'chaine de test') {
+			if (utf_32_to_unicode(@iconv('utf-8', 'utf-32', 'chaine de test')) === 'chaine de test') {
 				$iconv_ok = 1;
 			} else {
 				$iconv_ok = -1;
@@ -144,80 +151,7 @@ function test_iconv() {
 		}
 	}
 
-	return ($iconv_ok == 1);
-}
-
-
-/**
- * Test de fonctionnement du support UTF-8 dans PCRE
- *
- * Contournement bug Debian Woody
- *
- * @return bool
- *     true si PCRE supporte l'UTF-8 correctement
- **/
-function test_pcre_unicode() {
-	static $pcre_ok = 0;
-
-	if (!$pcre_ok) {
-		$s = ' ' . chr(195) . chr(169) . 't' . chr(195) . chr(169) . ' ';
-		if (preg_match(',\W...\W,u', $s)) {
-			$pcre_ok = 1;
-		} else {
-			$pcre_ok = -1;
-		}
-	}
-
-	return $pcre_ok == 1;
-}
-
-/**
- * Renvoie une plage de caractères alphanumeriques unicodes (incomplet...)
- *
- * Retourne pour une expression rationnelle une plage
- * de caractères alphanumériques à utiliser entre crochets [$plage]
- *
- * @internal
- *    N'est pas utilisé
- *    Servait à inc/ortho passé dans le grenier
- * @return string
- *    Plage de caractères
- **/
-function pcre_lettres_unicode() {
-	static $plage_unicode;
-
-	if (!$plage_unicode) {
-		if (test_pcre_unicode()) {
-			// cf. http://www.unicode.org/charts/
-			$plage_unicode = '\w' // iso-latin
-				. '\x{100}-\x{24f}' // europeen etendu
-				. '\x{300}-\x{1cff}' // des tas de trucs
-			;
-		} else {
-			// fallback a trois sous
-			$plage_unicode = '\w';
-		}
-	}
-
-	return $plage_unicode;
-}
-
-
-/**
- * Renvoie une plage de caractères de ponctuation unicode de 0x2000 a 0x206F
- *
- * Retourne pour une expression rationnelle une plage
- * de caractères de ponctuation à utiliser entre crochets [$plage]
- * (i.e. de 226-128-128 a 226-129-176)
- *
- * @internal
- *    N'est pas utilisé
- *    Servait à inc/ortho passé dans le grenier
- * @return string
- *    Plage de caractères
- **/
-function plage_punct_unicode() {
-	return '\xE2(\x80[\x80-\xBF]|\x81[\x80-\xAF])';
+	return ($iconv_ok === 1);
 }
 
 /**
@@ -389,11 +323,11 @@ function mathml2unicode($texte) {
 function charset2unicode($texte, $charset = 'AUTO' /* $forcer: obsolete*/) {
 	static $trans;
 
-	if ($charset == 'AUTO') {
+	if ($charset === 'AUTO') {
 		$charset = lire_config('charset', _DEFAULT_CHARSET);
 	}
 
-	if ($charset == '') {
+	if ($charset === '') {
 		$charset = 'iso-8859-1';
 	}
 	$charset = strtolower($charset);
@@ -854,7 +788,7 @@ function javascript_to_binary($texte) {
  * @param string $complexe
  * @return string
  */
-function translitteration_rapide($texte, $charset = 'AUTO', $complexe = '') {
+function translitteration_rapide($texte, $charset = 'AUTO', $complexe = ''): string {
 	static $trans = [];
 	if ($charset == 'AUTO') {
 		$charset = $GLOBALS['meta']['charset'];
@@ -896,7 +830,7 @@ function translitteration_rapide($texte, $charset = 'AUTO', $complexe = '') {
  * @param string $complexe
  * @return string
  */
-function translitteration($texte, $charset = 'AUTO', $complexe = '') {
+function translitteration($texte, $charset = 'AUTO', $complexe = ''): string {
 	// 0. Supprimer les caracteres illegaux
 	include_spip('inc/filtres');
 	$texte = corriger_caracteres($texte);
@@ -918,7 +852,7 @@ function translitteration($texte, $charset = 'AUTO', $complexe = '') {
  * @param bool $chiffres
  * @return string
  */
-function translitteration_complexe($texte, $chiffres = false) {
+function translitteration_complexe($texte, $chiffres = false): string {
 	$texte = translitteration($texte, 'AUTO', 'complexe');
 
 	if ($chiffres) {
@@ -940,7 +874,7 @@ function translitteration_complexe($texte, $chiffres = false) {
  * @param string $car
  * @return string
  */
-function translitteration_chiffree($car) {
+function translitteration_chiffree($car): string {
 	return strtr($car, "'`?~.^+(-", '123456789');
 }
 
@@ -953,8 +887,8 @@ function translitteration_chiffree($car) {
  * @return bool
  *    true s'il a un BOM
  **/
-function bom_utf8($texte) {
-	return (substr($texte, 0, 3) == chr(0xEF) . chr(0xBB) . chr(0xBF));
+function bom_utf8($texte): bool {
+	return (substr($texte, 0, 3) === chr(0xEF) . chr(0xBB) . chr(0xBF));
 }
 
 /**
@@ -970,7 +904,7 @@ function bom_utf8($texte) {
  * @return bool
  *     true si c'est le cas
  **/
-function is_utf8($string) {
+function is_utf8($string): bool {
 	return !strlen(
 		preg_replace(
 			',[\x09\x0A\x0D\x20-\x7E]'            # ASCII
@@ -996,7 +930,7 @@ function is_utf8($string) {
  * @return bool
  *     true si c'est le cas
  **/
-function is_ascii($string) {
+function is_ascii($string): bool {
 	return !strlen(
 		preg_replace(
 			',[\x09\x0A\x0D\x20-\x7E],sS',
@@ -1020,7 +954,7 @@ function is_ascii($string) {
  * @return string
  *     Texte transcodé dans le charset du site
  **/
-function transcoder_page($texte, $headers = '') {
+function transcoder_page($texte, $headers = ''): string {
 
 	// Si tout est < 128 pas la peine d'aller plus loin
 	if (is_ascii($texte)) {
@@ -1092,8 +1026,7 @@ function transcoder_page($texte, $headers = '') {
  *     Le texte coupé
  **/
 function spip_substr($c, $start = 0, $length = null) {
-	// Si ce n'est pas utf-8, utiliser substr
-	if ($GLOBALS['meta']['charset'] != 'utf-8') {
+	if ($GLOBALS['meta']['charset'] !== 'utf-8') {
 		if ($length) {
 			return substr($c, $start, $length);
 		} else {
@@ -1101,69 +1034,11 @@ function spip_substr($c, $start = 0, $length = null) {
 		}
 	}
 
-	// Si utf-8, voir si on dispose de mb_string
-	if (init_mb_string()) {
-		if ($length) {
-			return mb_substr($c, $start, $length);
-		} else {
-			return mb_substr($c, $start);
-		}
+	if ($length) {
+		return mb_substr($c, $start, $length);
+	} else {
+		return mb_substr($c, $start);
 	}
-
-	// Version manuelle (cf. ci-dessous)
-	return spip_substr_manuelle($c, $start, $length);
-}
-
-
-/**
- * Coupe un texte comme mb_substr()
- *
- * Version manuelle de substr utf8, pour php vieux et/ou mal installe
- *
- * @link http://fr.php.net/manual/fr/function.mb-substr.php
- *
- * @param string $c Le texte
- * @param int $start Début
- * @param null|int $length Longueur ou fin
- * @return string
- *     Le texte coupé
- **/
-function spip_substr_manuelle($c, $start, $length = null) {
-
-	// Cas pathologique
-	if ($length === 0) {
-		return '';
-	}
-
-	// S'il y a un demarrage, on se positionne
-	if ($start > 0) {
-		$c = substr($c, strlen(spip_substr_manuelle($c, 0, $start)));
-	} elseif ($start < 0) {
-		return spip_substr_manuelle($c, spip_strlen($c) + $start, $length);
-	}
-
-	if (!$length) {
-		return $c;
-	}
-
-	if ($length > 0) {
-		// on prend n fois la longueur desiree, pour etre surs d'avoir tout
-		// (un caractere utf-8 prenant au maximum n bytes)
-		$n = 0;
-		while (preg_match(',[\x80-\xBF]{' . (++$n) . '},', $c)) {
-			;
-		}
-		$c = substr($c, 0, $n * $length);
-		// puis, tant qu'on est trop long, on coupe...
-		while (($l = spip_strlen($c)) > $length) {
-			$c = substr($c, 0, $length - $l);
-		}
-
-		return $c;
-	}
-
-	// $length < 0
-	return spip_substr_manuelle($c, 0, spip_strlen($c) + $length);
 }
 
 /**
@@ -1177,8 +1052,7 @@ function spip_substr_manuelle($c, $start, $length = null) {
  *     La chaîne avec une majuscule sur le premier mot
  */
 function spip_ucfirst($c) {
-	// Si on n'a pas mb_* ou si ce n'est pas utf-8, utiliser ucfirst
-	if (!init_mb_string() or $GLOBALS['meta']['charset'] != 'utf-8') {
+	if ($GLOBALS['meta']['charset'] !== 'utf-8') {
 		return ucfirst($c);
 	}
 
@@ -1198,8 +1072,7 @@ function spip_ucfirst($c) {
  *     La chaîne en minuscules
  */
 function spip_strtolower($c) {
-	// Si on n'a pas mb_* ou si ce n'est pas utf-8, utiliser strtolower
-	if (!init_mb_string() or $GLOBALS['meta']['charset'] != 'utf-8') {
+	if ($GLOBALS['meta']['charset'] !== 'utf-8') {
 		return strtolower($c);
 	}
 
@@ -1221,40 +1094,12 @@ function spip_strlen($c) {
 	$c = str_replace("\r\n", "\n", $c);
 
 	// Si ce n'est pas utf-8, utiliser strlen
-	if ($GLOBALS['meta']['charset'] != 'utf-8') {
+	if ($GLOBALS['meta']['charset'] !== 'utf-8') {
 		return strlen($c);
 	}
 
-	// Sinon, utiliser mb_strlen() si disponible
-	if (init_mb_string()) {
-		return mb_strlen($c);
-	}
-
-	// Methode manuelle : on supprime les bytes 10......,
-	// on compte donc les ascii (0.......) et les demarrages
-	// de caracteres utf-8 (11......)
-	return strlen(preg_replace(',[\x80-\xBF],S', '', $c));
+	return mb_strlen($c);
 }
-
-// Initialisation
-$GLOBALS['CHARSET'] = [];
-
-// noter a l'occasion dans la meta pcre_u notre capacite a utiliser le flag /u
-// dans les preg_replace pour ne pas casser certaines lettres accentuees :
-// en utf-8 chr(195).chr(160) = a` alors qu'en iso-latin chr(160) = nbsp
-if (
-	!isset($GLOBALS['meta']['pcre_u'])
-	or (isset($_GET['var_mode']) and !isset($_GET['var_profile']))
-) {
-	include_spip('inc/meta');
-	ecrire_meta(
-		'pcre_u',
-		$u = (lire_config('charset', _DEFAULT_CHARSET) == 'utf-8'
-			and test_pcre_unicode())
-			? 'u' : ''
-	);
-}
-
 
 /**
  * Transforme une chaîne utf-8 en utf-8 sans "planes"
@@ -1267,7 +1112,7 @@ if (
  *     La chaîne avec les caractères utf8 des hauts "planes" échappée
  *     en unicode : &#128169;
  */
-function utf8_noplanes($x) {
+function utf8_noplanes($x): string {
 	$regexp_utf8_4bytes = '/(
       \xF0[\x90-\xBF][\x80-\xBF]{2}     # planes 1-3
    | [\xF1-\xF3][\x80-\xBF]{3}          # planes 4-15
