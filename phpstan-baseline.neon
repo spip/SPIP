@@ -1,34 +1,9 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Array has 2 duplicate keys with value 350 \\(350, 350\\)\\.$#"
+			message: "#^Function test_login\\(\\) should return string but return statement is missing\\.$#"
 			count: 1
-			path: ecrire/charsets/translit.php
-
-		-
-			message: "#^Array has 2 duplicate keys with value 351 \\(351, 351\\)\\.$#"
-			count: 1
-			path: ecrire/charsets/translit.php
-
-		-
-			message: "#^Array has 2 duplicate keys with value 8212 \\(8212, 8212\\)\\.$#"
-			count: 1
-			path: ecrire/charsets/translit.php
-
-		-
-			message: "#^Function exec_puce_statut_args\\(\\) should return string but return statement is missing\\.$#"
-			count: 1
-			path: ecrire/exec/puce_statut.php
-
-		-
-			message: "#^Function exec_puce_statut_dist\\(\\) should return string but return statement is missing\\.$#"
-			count: 1
-			path: ecrire/exec/puce_statut.php
-
-		-
-			message: "#^Function message_crash_tables\\(\\) should return string but return statement is missing\\.$#"
-			count: 1
-			path: ecrire/genie/maintenance.php
+			path: ecrire/action/inscrire_auteur.php
 
 		-
 			message: "#^Function fichier_copie_locale\\(\\) should return string but return statement is missing\\.$#"
@@ -36,37 +11,12 @@ parameters:
 			path: ecrire/inc/distant.php
 
 		-
-			message: "#^Function mention_qui_edite\\(\\) should return array but return statement is missing\\.$#"
-			count: 1
-			path: ecrire/inc/drapeau_edition.php
-
-		-
 			message: "#^Instantiated class csstidy not found\\.$#"
 			count: 1
 			path: ecrire/inc/filtres.php
 
 		-
-			message: "#^Function extraire_date\\(\\) should return string but return statement is missing\\.$#"
-			count: 1
-			path: ecrire/inc/filtres_dates.php
-
-		-
-			message: "#^Function recup_date\\(\\) should return array but return statement is missing\\.$#"
-			count: 1
-			path: ecrire/inc/filtres_dates.php
-
-		-
-			message: "#^Function alertes_auteur\\(\\) should return string but return statement is missing\\.$#"
-			count: 1
-			path: ecrire/inc/filtres_ecrire.php
-
-		-
 			message: "#^Class GdImage not found\\.$#"
-			count: 1
-			path: ecrire/inc/filtres_images_lib_mini.php
-
-		-
-			message: "#^Function statut_effacer_images_temporaires\\(\\) should return bool but return statement is missing\\.$#"
 			count: 1
 			path: ecrire/inc/filtres_images_lib_mini.php
 
@@ -89,11 +39,6 @@ parameters:
 			message: "#^Function calculer_rubriques_if\\(\\) should return bool but return statement is missing\\.$#"
 			count: 1
 			path: ecrire/inc/rubriques.php
-
-		-
-			message: "#^Function charger_langue\\(\\) should return string but return statement is missing\\.$#"
-			count: 1
-			path: ecrire/inc/traduire.php
 
 		-
 			message: "#^Result of function debug_print_backtrace \\(void\\) is used\\.$#"
@@ -164,11 +109,6 @@ parameters:
 			message: "#^Result of function creer_cache \\(void\\) is used\\.$#"
 			count: 1
 			path: ecrire/public/cacher.php
-
-		-
-			message: "#^Function critere_par_ordre_liste_dist\\(\\) should return array\\|string but return statement is missing\\.$#"
-			count: 1
-			path: ecrire/public/criteres.php
 
 		-
 			message: "#^Result of function calculer_critere_parties \\(void\\) is used\\.$#"
