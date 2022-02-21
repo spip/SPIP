@@ -1,28 +1,39 @@
+# composer & outils
 /vendor/
 /composer.phar
 /phpcs.xml
 /phpstan.neon
+/docker-compose.override.yml
+/docker-compose.yml
 
+# SPIP
+/IMG/
+!/IMG/remove.txt
+/config/
+!/config/remove.txt
+/local/
+!/local/CACHEDIR.TAG
+!/local/remove.txt
+/plugins-dist/
+/squelettes-dist/
+/tmp/
+!/tmp/CACHEDIR.TAG
+!/tmp/remove.txt
+
+# Contrib ou personalisation
+/.htaccess
+/lib/
+/mutualisation/
+/plugins/
+/sites/
+/squelettes/
+/tests/
+/themes/
+
+# IDE
 **/.DS_Store
-**/.htaccess
 /.buildpath
 /.project
 /.settings
 /.idea/
 /.vscode/*
-IMG/*
-config/*
-ecrire/inc_connect.php3
-ecrire/inc_meta_cache.php3
-/extensions
-/lib
-local/*
-/mutualisation
-/plugins
-/plugins-dist
-/sites
-/squelettes
-/squelettes-dist
-/tests
-/themes
-tmp/*
