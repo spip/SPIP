@@ -3,15 +3,11 @@
 .gitignore export-ignore
 .gitattributes export-ignore
 .htaccess export-ignore
-/IMG/ export-ignore
-/config/ export-ignore
 docker-compose.override.yml export-ignore
 docker-compose.yml export-ignore
 /lib/ export-ignore
-/local/ export-ignore
 /plugins/ export-ignore
 /squelettes/ export-ignore
-/tmp/ export-ignore
 /lib/ export-ignore
 /mutualisation/ export-ignore
 /sites/ export-ignore
