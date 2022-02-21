@@ -34,11 +34,15 @@
             "phpstan-baseline.neon",
             "!plugins-dist",
             "!squelettes-dist",
+            "config/",
             "!config/ecran_securite.php",
             "!config/remove.txt",
+            "IMG/",
             "!IMG/remove.txt",
+            "local/",
             "!local/remove.txt",
             "!local/CACHEDIR.TAG",
+            "tmp/",
             "!tmp/remove.txt",
             "!tmp/CACHEDIR.TAG"
         ]
