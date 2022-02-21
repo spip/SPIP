@@ -14,7 +14,6 @@ docker-compose.yml export-ignore
 /tmp/ export-ignore
 /lib/ export-ignore
 /mutualisation/ export-ignore
-/plugins/ export-ignore
 /sites/ export-ignore
 /tests/ export-ignore
 /themes/ export-ignore
