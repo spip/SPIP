@@ -15,6 +15,7 @@
  *
  * @package SPIP\Core\Authentification\SPIP
  **/
+use Spip\Core\Chiffrer;
 
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -42,72 +43,58 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 	$md5pass = '';
 	$shapass = $shanext = '';
 
-	if (preg_match(',^\{([0-9a-f]{64});([0-9a-f]{64})\}$,i', $pass, $regs)) {
-		$shapass = $regs[1];
-		$shanext = $regs[2];
-	} // compat avec une base mixte md5/sha256 : le js a envoye les 2 hash
-	elseif (preg_match(',^\{([0-9a-f]{64});([0-9a-f]{64});([0-9a-f]{32});([0-9a-f]{32})\}$,i', $pass, $regs)) {
-		$shapass = $regs[1];
-		$shanext = $regs[2];
-		$md5pass = $regs[3];
-		//$md5next = $regs[4];
-	} // si envoi non crypte, crypter maintenant
-	elseif ($pass) {
-		$row = sql_fetsel(
-			'alea_actuel, alea_futur',
-			'spip_auteurs',
-			'login=' . sql_quote($login, $serveur, 'text'),
-			'',
-			'',
-			'',
-			'',
-			$serveur
-		);
-
-		if ($row) {
-			include_spip('auth/sha256.inc');
-			$shapass = spip_sha256($row['alea_actuel'] . $pass);
-			$shanext = spip_sha256($row['alea_futur'] . $pass);
-			$md5pass = md5($row['alea_actuel'] . $pass);
-		}
-	}
-
-	// login inexistant ou mot de passe vide
-	if (!$shapass and !$md5pass) {
-		return [];
-	}
-
-	$row = sql_fetsel(
-		'*',
-		'spip_auteurs',
-		'login=' . sql_quote($login, $serveur, 'text') . ' AND pass=' . sql_quote(
-			$shapass,
-			$serveur,
-			'text'
-		) . " AND statut<>'5poubelle'",
-		'',
-		'',
-		'',
-		'',
-		$serveur
-	);
-
-	// compat avec les anciennes bases en md5
-	if (!$row and $md5pass) {
+	if ($pass) {
 		$row = sql_fetsel(
 			'*',
 			'spip_auteurs',
-			'login=' . sql_quote($login, $serveur, 'text') . ' AND pass=' . sql_quote(
-				$md5pass,
-				$serveur,
-				'text'
-			) . " AND statut<>'5poubelle'",
+			'login=' . sql_quote($login, $serveur, 'text') . " AND statut<>'5poubelle'",
 			'',
 			'',
 			'',
 			'',
 			$serveur
 		);
+	}
+
+	// login inexistant ou mot de passe vide
+	if (!$pass or !$row) {
+		return [];
+	}
+
+	include_spip('inc/chiffrer');
+
+	switch ( strlen($row["pass"]) ) {
+		case 32:
+			// tres anciens mots de passe encodes en md5(alea.pass)
+			$md5pass = md5($row['alea_actuel'] . $pass);
+			if ($row["pass"] !== $md5pass) {
+				unset($row);
+			}
+			break;
+		case 64:
+			// anciens mots de passe encodes en sha256(alea.pass)
+			include_spip('auth/sha256.inc');
+			$shapass = spip_sha256($row['alea_actuel'] . $pass);
+			if ($row["pass"] !== $shapass) {
+				unset($row);
+			}
+			break;
+
+			case 60:
+		case 98:
+		default:
+			if (!Chiffrer::verifier_mot_de_passe($pass, $row["pass"])) {
+				// doit-on restaurer un backup des cles ?
+				if ($row['webmestre'] === 'oui'
+					and !empty($row['backup_cles'])) {
+					if (Chiffrer::restaurer_cles_depuis_sauvegarde_chiffree($row['backup_cles'], $row['id_auteur'], $pass, $row['pass'])
+					and Chiffrer::verifier_mot_de_passe($pass, $row["pass"])) {
+						break;
+					}
+				}
+				unset($row);
+			}
+			break;
 	}
 
 	// login/mot de passe incorrect
@@ -117,23 +104,36 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 
 	// fait tourner le codage du pass dans la base
 	// sauf si phpauth : cela reviendrait a changer l'alea a chaque hit, et aucune action verifiable par securiser_action()
-	if ($shanext and !$phpauth) {
-		include_spip('inc/acces'); // pour creer_uniqid
-		@sql_update(
-			'spip_auteurs',
-			[
+	if (!$phpauth) {
+		include_spip('inc/acces'); // pour creer_uniqid et verifier_htaccess
+		$pass_hash_next = Chiffrer::calculer_hash_sale_mot_de_passe($pass, $row['alea_futur']);
+		if ($pass_hash_next) {
+
+			$set = [
 				'alea_actuel' => 'alea_futur',
-				'pass' => sql_quote($shanext, $serveur, 'text'),
+				'pass' => sql_quote($pass_hash_next, $serveur, 'text'),
 				'alea_futur' => sql_quote(creer_uniqid(), $serveur, 'text')
-			],
-			'id_auteur=' . $row['id_auteur'] . ' AND pass IN (' . sql_quote(
-				$shapass,
-				$serveur,
-				'text'
-			) . ', ' . sql_quote($md5pass, $serveur, 'text') . ')',
-			[],
-			$serveur
-		);
+			];
+			// a chaque login de webmestre : sauvegarde chiffree des clé du site (avec les pass du webmestre)
+			if ($row['statut'] === '0minirezo' and $row['webmestre'] === 'oui') {
+				// TODO : ajouter le champ en base
+				//$set['backup_cles'] = Chiffrer::sauvegarde_chiffree_cles($row['id_auteur'], $pass);
+			}
+
+			@sql_update(
+				'spip_auteurs',
+				$set,
+				'id_auteur=' . intval($row['id_auteur']) . ' AND pass=' . sql_quote(
+					$row['pass'],
+					$serveur,
+					'text'
+				),
+				[],
+				$serveur
+			);
+
+		}
+
 		// En profiter pour verifier la securite de tmp/
 		// Si elle ne fonctionne pas a l'installation, prevenir
 		if (!verifier_htaccess(_DIR_TMP) and defined('_ECRIRE_INSTALL')) {
@@ -151,38 +151,16 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
  * @return array
  */
 function auth_spip_formulaire_login($flux) {
-	// faut il encore envoyer md5 ?
-	// on regarde si il reste des pass md5 en base pour des auteurs en statut pas poubelle
-	// les hash md5 ont une longueur 32, les sha 64
-	// en evitant une requete sql a chaque affichage du formulaire login sans session
-	// (perf issue pour les sites qui mettent le formulaire de login sur la home)
-	$compat_md5 = false;
-	if (!isset($GLOBALS['meta']['sha_256_only']) or _request('var_mode')) {
-		$compat_md5 = sql_countsel('spip_auteurs', "length(pass)=32 AND statut<>'poubelle'");
-		if ($compat_md5 and isset($GLOBALS['meta']['sha_256_only'])) {
-			effacer_meta('sha_256_only');
-		}
-		if (!$compat_md5) {
-			ecrire_meta('sha_256_only', 'oui');
-		}
-	}
-
 	// javascript qui gere la securite du login en evitant de faire circuler le pass en clair
+	$js = file_get_contents(find_in_path("prive/javascript/login.js"));
 	$flux['data'] .=
-		($compat_md5 ? '<script type="text/javascript" src="' . _DIR_JAVASCRIPT . 'md5.js"></script>' : '')
-		. '<script type="text/javascript" src="' . _DIR_JAVASCRIPT . 'login-sha-min.js"></script>'
-		. '<script type="text/javascript">/*<![CDATA[*/'
-		. "var login_info={'alea_actuel':'" . $flux['args']['contexte']['_alea_actuel'] . "',"
-		. "'alea_futur':'" . $flux['args']['contexte']['_alea_futur'] . "',"
-		. "'login':'" . $flux['args']['contexte']['var_login'] . "',"
+		  '<script type="text/javascript">/*<![CDATA[*/'
+		. "$js\n"
+		. "var login_info={'login':'" . $flux['args']['contexte']['var_login'] . "',"
 		. "'page_auteur': '" . generer_url_public('informer_auteur') . "',"
 		. "'informe_auteur_en_cours':false,"
-		. "'attente_informe':0,"
-		. "'compat_md5':" . ($compat_md5 ? 'true' : 'false') . '};'
-		. "jQuery(function(){
-	jQuery('#var_login').change(actualise_auteur);
-	jQuery('form#formulaire_login').submit(login_submit);
-});"
+		. "'attente_informe':0};"
+		. "jQuery(function(){jQuery('#var_login').change(actualise_auteur);});"
 		. '/*]]>*/</script>';
 
 	return $flux;
@@ -331,28 +309,6 @@ function auth_spip_retrouver_login($login, $serveur = '') {
 	}
 }
 
-
-/**
- * informer sur un login
- * Ce dernier transmet le tableau ci-dessous a la fonction JS informer_auteur
- * Il est invoque par la fonction JS actualise_auteur via la globale JS
- * page_auteur=#URL_PAGE{informer_auteur} dans le squelette login
- * N'y aurait-il pas plus simple ?
- *
- * @param array $infos
- * @param array $row
- * @param string $serveur
- * @return array
- */
-function auth_spip_informer_login($infos, $row, $serveur = '') {
-
-	// pour la methode SPIP on a besoin des alea en plus pour encoder le pass avec
-	$infos['alea_actuel'] = $row['alea_actuel'];
-	$infos['alea_futur'] = $row['alea_futur'];
-
-	return $infos;
-}
-
 /**
  * Informer du droit de modifier ou non le pass
  *
@@ -418,11 +374,11 @@ function auth_spip_modifier_pass($login, $new_pass, $id_auteur, $serveur = '') {
 
 	$c = [];
 	include_spip('inc/acces');
-	include_spip('auth/sha256.inc');
+	include_spip('inc/chiffrer');
 	$htpass = generer_htpass($new_pass);
 	$alea_actuel = creer_uniqid();
 	$alea_futur = creer_uniqid();
-	$pass = spip_sha256($alea_actuel . $new_pass);
+	$pass = Chiffrer::calculer_hash_sale_mot_de_passe($new_pass, $alea_actuel);
 	$c['pass'] = $pass;
 	$c['htpass'] = $htpass;
 	$c['alea_actuel'] = $alea_actuel;
