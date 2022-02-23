@@ -12,7 +12,7 @@
 
 namespace Spip\Core\Chiffrer;
 
-class Cles /* implements ContainerInterface */ {
+class Cles implements \Countable /* , ContainerInterface */ {
 	private array $keys;
 	public function __construct(array $keys) {
 		$this->keys = $keys;
@@ -39,6 +39,10 @@ class Cles /* implements ContainerInterface */ {
 		string $key
 	): void {
 		$this->keys[$name] = $key;
+	}
+
+	public function count() {
+		return count($this->keys);
 	}
 
 	public function toJson(): string {
