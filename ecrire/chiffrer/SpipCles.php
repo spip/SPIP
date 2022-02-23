@@ -28,27 +28,23 @@ final class SpipCles extends Cles {
 		parent::__construct($this->read());
 	}
 
-	public function getSecretSite(): ?string {
-		if ($this->has('secret_du_site')) {
-			return $this->get('secret_du_site');
+	private function getKey(string $name, bool $autoInit): ?string {
+		if ($this->has($name)) {
+			return $this->get($name);
+		}
+		if ($autoInit) {
+			$this->generate($name);
+			$this->save();
+			return $this->get($name);
 		}
         return null;
 	}
-	public function getSecretAuth(): ?string {
-		if ($this->has('secret_des_auth')) {
-			return $this->get('secret_des_auth');
-		}
-		return null;
-	}
 
-	public function generer(): bool {
-		if (!$this->has('secret_du_site')) {
-			$this->generate('secret_du_site');
-		}
-		if (!$this->has('secret_des_auth')) {
-			$this->generate('secret_des_auth');
-		}
-		return $this->save();
+	public function getSecretSite(bool $autoInit = true): ?string {
+		return $this->getKey('secret_du_site', $autoInit);
+	}
+	public function getSecretAuth(bool $autoInit = false): ?string {
+		return $this->getKey('secret_des_auth', $autoInit);
 	}
 
 	public function save(): bool {
