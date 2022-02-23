@@ -226,29 +226,31 @@ function caracteriser_auteur($id_auteur = null) {
  * @param string $alea
  * @return string
  */
-function _action_auteur($action, $id_auteur, $pass, $alea) {
+function _action_auteur(string $action, int $id_auteur, ?string $pass, string $alea): string {
 	static $sha = [];
-	if (!isset($sha[$id_auteur . $pass . $alea])) {
-		if (!isset($GLOBALS['meta'][$alea])) {
-			if (!$exec = _request('exec') or !autoriser_sans_cookie($exec)) {
-				include_spip('inc/acces');
-				charger_aleas();
-				if (empty($GLOBALS['meta'][$alea])) {
-					include_spip('inc/minipres');
-					echo minipres();
-					spip_log("$alea indisponible");
-					exit;
-				}
+	$pass = $pass ?? '';
+	$entry = "$action:$id_auteur:$pass:$alea";
+	if (!isset($sha[$entry])) {
+		$sha[$entry] = hash_hmac('sha256', "$action::$id_auteur", "$pass::" . _action_get_alea($alea));
+	}
+
+	return $sha[$entry];
+}
+
+function _action_get_alea(string $alea): string {
+	if (!isset($GLOBALS['meta'][$alea])) {
+		if (!$exec = _request('exec') or !autoriser_sans_cookie($exec)) {
+			include_spip('inc/acces');
+			charger_aleas();
+			if (empty($GLOBALS['meta'][$alea])) {
+				include_spip('inc/minipres');
+				echo minipres();
+				spip_log("$alea indisponible");
+				exit;
 			}
 		}
-		include_spip('auth/sha256.inc');
-		$sha[$id_auteur . $pass . $alea] = spip_sha256($id_auteur . $pass . @$GLOBALS['meta'][$alea]);
 	}
-	if (function_exists('sha1')) {
-		return sha1($action . $sha[$id_auteur . $pass . $alea]);
-	} else {
-		return md5($action . $sha[$id_auteur . $pass . $alea]);
-	}
+	return $GLOBALS['meta'][$alea] ?? '';
 }
 
 /**
@@ -275,10 +277,10 @@ function calculer_action_auteur($action, $id_auteur = null) {
  */
 function verifier_action_auteur($action, $hash) {
 	[$id_auteur, $pass] = caracteriser_auteur();
-	if ($hash == _action_auteur($action, $id_auteur, $pass, 'alea_ephemere')) {
-		return true;
-	}
-	if ($hash == _action_auteur($action, $id_auteur, $pass, 'alea_ephemere_ancien')) {
+	if (
+	     hash_equals($hash,_action_auteur($action, $id_auteur, $pass, 'alea_ephemere'))
+	  or hash_equals($hash,_action_auteur($action, $id_auteur, $pass, 'alea_ephemere_ancien'))
+	) {
 		return true;
 	}
 
@@ -312,11 +314,7 @@ function secret_du_site() {
  * @return string
  */
 function calculer_cle_action($action) {
-	if (function_exists('sha1')) {
-		return sha1($action . secret_du_site());
-	} else {
-		return md5($action . secret_du_site());
-	}
+	return hash_hmac('sha256', $action, secret_du_site());
 }
 
 /**
@@ -327,7 +325,7 @@ function calculer_cle_action($action) {
  * @return bool
  */
 function verifier_cle_action($action, $cle) {
-	return ($cle == calculer_cle_action($action));
+	return hash_equals( $cle, calculer_cle_action($action));
 }
 
 
@@ -355,7 +353,7 @@ function calculer_token_previsu($url, $id_auteur = null, $alea = 'alea_ephemere'
 	// On nettoie l’URL de tous les var_.
 	$url = nettoyer_uri_var($url);
 
-	$token = _action_auteur('previsualiser-' . $url, $id_auteur, null, $alea);
+	$token = _action_auteur('previsualiser-' . $url, $id_auteur, secret_du_site(), $alea);
 	return "$id_auteur-$token";
 }
 
@@ -389,9 +387,9 @@ function verifier_token_previsu($token) {
 
 	// verifier le token
 	$_token = calculer_token_previsu($url, $id_auteur, 'alea_ephemere');
-	if (!$_token or $token !== $_token) {
+	if (!$_token or !hash_equals($token, $_token)) {
 		$_token = calculer_token_previsu($url, $id_auteur, 'alea_ephemere_ancien');
-		if (!$_token or $token !== $_token) {
+		if (!$_token or !hash_equals($token, $_token)) {
 			return false;
 		}
 	}
