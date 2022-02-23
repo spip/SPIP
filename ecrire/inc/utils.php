@@ -2196,7 +2196,8 @@ function url_de_($http, $host, $request, $prof = 0) {
  *     - string : on transmet l'url à la fonction
  * @return string URL
  **/
-function generer_url_ecrire($script = '', $args = '', $no_entities = false, $rel = false) {
+function generer_url_ecrire(?string $script = '', $args = '', $no_entities = false, $rel = false) {
+	$script ??= '';
 	if (!$rel) {
 		$rel = url_de_base() . _DIR_RESTREINT_ABS . _SPIP_ECRIRE_SCRIPT;
 	} else {
