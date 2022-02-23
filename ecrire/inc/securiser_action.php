@@ -298,29 +298,11 @@ function verifier_action_auteur($action, $hash) {
  * @return string
  */
 function secret_du_site() {
-	if (!isset($GLOBALS['meta']['secret_du_site'])) {
-		include_spip('base/abstract_sql');
-		$GLOBALS['meta']['secret_du_site'] = sql_getfetsel('valeur', 'spip_meta', "nom='secret_du_site'");
-	}
-	if (
-		!isset($GLOBALS['meta']['secret_du_site'])
-		or (strlen($GLOBALS['meta']['secret_du_site']) < 64)
-	) {
-		include_spip('inc/acces');
-		include_spip('auth/sha256.inc');
-		ecrire_meta(
-			'secret_du_site',
-			spip_sha256(
-				$_SERVER['DOCUMENT_ROOT']
-				. ($_SERVER['SERVER_SIGNATURE'] ?? '')
-				. creer_uniqid()
-			),
-			'non'
-		);
-		lire_metas(); // au cas ou ecrire_meta() ne fonctionne pas
-	}
+	include_spip('inc/chiffrer');
+	$cles = Spip\Core\Chiffrer\SpipCles::instance();
+	$secret = $cles->getSecretSite();
 
-	return $GLOBALS['meta']['secret_du_site'];
+	return $secret;
 }
 
 /**
