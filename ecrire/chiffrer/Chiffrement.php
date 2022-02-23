@@ -21,12 +21,18 @@ class Chiffrement {
 	public static function chiffrer(
         string $message,
         #[\SensitiveParameter]
-		?string $key = null,
+		?string $key = null
     ): ?string {
         $key ??= self::getDefaultKey();
         if (!$key) {
             spip_log("chiffrer() sans clé `$message`", 'chiffrer' . _LOG_INFO_IMPORTANTE);
             return null;
+        }
+        if (strlen($key) !== SODIUM_CRYPTO_SECRETBOX_KEYBYTES) {
+            while (strlen($key) < SODIUM_CRYPTO_SECRETBOX_KEYBYTES) {
+                $key .= $key;
+            }
+            $key = substr($key, 0, SODIUM_CRYPTO_SECRETBOX_KEYBYTES);
         }
         $nonce = random_bytes(\SODIUM_CRYPTO_SECRETBOX_NONCEBYTES);
         $encrypted = sodium_crypto_secretbox($message, $nonce, $key);
@@ -40,12 +46,18 @@ class Chiffrement {
 	public static function dechiffrer(
         string $encoded,
         #[\SensitiveParameter]
-		?string $key = null,
+		?string $key = null
     ): ?string {
         $key ??= self::getDefaultKey();
         if (!$key) {
             spip_log("dechiffrer() sans clé `$encoded`", 'chiffrer' . _LOG_INFO_IMPORTANTE);
             return null;
+        }
+        if (strlen($key) !== SODIUM_CRYPTO_SECRETBOX_KEYBYTES) {
+            while (strlen($key) < SODIUM_CRYPTO_SECRETBOX_KEYBYTES) {
+                $key .= $key;
+            }
+            $key = substr($key, 0, SODIUM_CRYPTO_SECRETBOX_KEYBYTES);
         }
         $decoded = base64_decode($encoded);
         $nonce = mb_substr($decoded, 0, \SODIUM_CRYPTO_SECRETBOX_NONCEBYTES, '8bit');
