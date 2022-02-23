@@ -115,7 +115,7 @@ function redirige_action_post($action, $arg, $ret, $gra, $corps, $att = '') {
  * Fonction de formatage du contenu renvoyé en ajax
  *
  * Echo la réponse directement
- * 
+ *
  * @param string $corps
  * @param string $content_type
  *   permet de definir le type de contenu renvoye.

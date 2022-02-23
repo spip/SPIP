@@ -245,7 +245,7 @@ function _couleur_hsl_to_rgb($H, $S, $L) {
  * `filtrer('image_xx, ...)` effacera automatiquement le fichier-image temporaire.
  *
  * @param bool|string $stat
- *     - true, false ou le statut déjà défini 
+ *     - true, false ou le statut déjà défini
  *     - 'get' pour obtenir le statut sauvé si traitements enchaînés.
  * @return bool|void
  *     true si il faut supprimer le fichier temporaire ; false sinon.

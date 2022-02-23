@@ -73,11 +73,11 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 		}
 	}
 
-	switch ( strlen($row["pass"]) ) {
+	switch (strlen($row['pass'])) {
 		case 32:
 			// tres anciens mots de passe encodes en md5(alea.pass)
 			$md5pass = md5($row['alea_actuel'] . $pass);
-			if ($row["pass"] !== $md5pass) {
+			if ($row['pass'] !== $md5pass) {
 				unset($row);
 			}
 			break;
@@ -85,7 +85,7 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 			// anciens mots de passe encodes en sha256(alea.pass)
 			include_spip('auth/sha256.inc');
 			$shapass = spip_sha256($row['alea_actuel'] . $pass);
-			if ($row["pass"] !== $shapass) {
+			if ($row['pass'] !== $shapass) {
 				unset($row);
 			}
 			break;
@@ -97,17 +97,18 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 			if (
 				!$secret
 				and $row['webmestre'] === 'oui'
-				and !empty($row['backup_cles'])) {
+				and !empty($row['backup_cles'])
+			) {
 				if ($cles->restore($row['backup_cles'], $pass, $row['pass'], $row['id_auteur'])) {
-					spip_log("Les cles secretes ont ete restaurées avec le backup du webmestre #".$row['id_auteur'], "auth"._LOG_INFO_IMPORTANTE);
+					spip_log('Les cles secretes ont ete restaurées avec le backup du webmestre #' . $row['id_auteur'], 'auth' . _LOG_INFO_IMPORTANTE);
 					$cles->save();
 				}
 				else {
-					spip_log("Pas de cle secrete disponible (fichier config/cle.php absent ?) mais le backup du webmestre #".$row['id_auteur']." n'est pas valide", "auth"._LOG_ERREUR);
-					sql_updateq("spip_auteurs", ['backup_cles' => ''], 'id_auteur='.intval($row['id_auteur']));
+					spip_log('Pas de cle secrete disponible (fichier config/cle.php absent ?) mais le backup du webmestre #' . $row['id_auteur'] . " n'est pas valide", 'auth' . _LOG_ERREUR);
+					sql_updateq('spip_auteurs', ['backup_cles' => ''], 'id_auteur=' . intval($row['id_auteur']));
 				}
 			}
-			if (!Password::verifier($pass, $row["pass"], $secret)) {
+			if (!Password::verifier($pass, $row['pass'], $secret)) {
 				unset($row);
 			}
 			break;
@@ -124,7 +125,6 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 		include_spip('inc/acces'); // pour creer_uniqid et verifier_htaccess
 		$pass_hash_next = Password::hacher($pass, $secret);
 		if ($pass_hash_next) {
-
 			$set = [
 				'alea_actuel' => 'alea_futur', // @deprecated 4.1
 				'alea_futur' => sql_quote(creer_uniqid(), $serveur, 'text'), // @deprecated 4.1
@@ -146,7 +146,6 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 				[],
 				$serveur
 			);
-
 		}
 
 		// En profiter pour verifier la securite de tmp/
@@ -170,7 +169,7 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
  * @param bool $force
  * @return bool
  */
-function auth_spip_initialiser_secret(bool $force=false): bool {
+function auth_spip_initialiser_secret(bool $force = false): bool {
 	include_spip('inc/chiffrer');
 	$cles = SpipCles::instance();
 	$secret = $cles->getSecretAuth();
@@ -182,20 +181,20 @@ function auth_spip_initialiser_secret(bool $force=false): bool {
 
 	// si force, on ne verifie pas la presence d'un backup chez un webmestre
 	if ($force) {
-		spip_log("Pas de cle secrete disponible, on regenere une nouvelle cle forcee - tous les mots de passe sont invalides", "auth"._LOG_INFO_IMPORTANTE);
+		spip_log('Pas de cle secrete disponible, on regenere une nouvelle cle forcee - tous les mots de passe sont invalides', 'auth' . _LOG_INFO_IMPORTANTE);
 		$secret = $cles->getSecretAuth(true);
 		return true;
 	}
 
-	$has_backup = sql_allfetsel('id_auteur', 'spip_auteurs',"statut=".sql_quote('0minirezo')." AND webmestre=".sql_quote('oui')." AND backup_cles!=''");
+	$has_backup = sql_allfetsel('id_auteur', 'spip_auteurs', 'statut=' . sql_quote('0minirezo') . ' AND webmestre=' . sql_quote('oui') . " AND backup_cles!=''");
 	$has_backup = array_column($has_backup, 'id_auteur');
 	if (empty($has_backup)) {
-		spip_log("Pas de cle secrete disponible, et aucun webmestre n'a de backup, on regenere une nouvelle cle - tous les mots de passe sont invalides", "auth"._LOG_INFO_IMPORTANTE);
+		spip_log("Pas de cle secrete disponible, et aucun webmestre n'a de backup, on regenere une nouvelle cle - tous les mots de passe sont invalides", 'auth' . _LOG_INFO_IMPORTANTE);
 		$secret = $cles->getSecretAuth(true);
 		return true;
 	}
 	else {
-		spip_log("Pas de cle secrete disponible (fichier config/cle.php absent ?) un des webmestres #".implode(', #', $has_backup)." doit se connecter pour restaurer son backup des cles", "auth"._LOG_ERREUR);
+		spip_log('Pas de cle secrete disponible (fichier config/cle.php absent ?) un des webmestres #' . implode(', #', $has_backup) . ' doit se connecter pour restaurer son backup des cles', 'auth' . _LOG_ERREUR);
 		return false;
 	}
 }
@@ -208,7 +207,7 @@ function auth_spip_initialiser_secret(bool $force=false): bool {
  */
 function auth_spip_formulaire_login($flux) {
 	// javascript qui gere la securite du login en evitant de faire circuler le pass en clair
-	$js = file_get_contents(find_in_path("prive/javascript/login.js"));
+	$js = file_get_contents(find_in_path('prive/javascript/login.js'));
 	$flux['data'] .=
 		  '<script type="text/javascript">/*<![CDATA[*/'
 		. "$js\n"

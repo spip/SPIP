@@ -15,7 +15,7 @@ namespace Spip\Core\Chiffrer;
 final class SpipCles {
 	private static array $instances = [];
 
-	private string $file = _DIR_ETC . "cles.php";
+	private string $file = _DIR_ETC . 'cles.php';
 	private Cles $cles;
 
 	public static function instance(string $file = ''): self {
@@ -45,7 +45,7 @@ final class SpipCles {
 
 	/**
 	 * Fournir une sauvegarde chiffree des cles (a l'aide d'une autre clé, comme le pass d'un auteur)
-	 * 
+	 *
 	 * @param string $withKey Clé de chiffrage de la sauvegarde
 	 * @return string Contenu de la sauvegarde chiffrée générée
 	 */
@@ -62,16 +62,16 @@ final class SpipCles {
 	/**
 	 * Restaurer les cles manquantes depuis une sauvegarde chiffree des cles
 	 * (si la sauvegarde est bien valide)
-	 * 
+	 *
 	 * @param string $backup Sauvegarde chiffrée (générée par backup())
 	 * @param int $id_auteur
 	 * @param string $pass
 	 * @return void
 	 */
 	public function restore(
-		string $backup, 
+		string $backup,
 		#[\SensitiveParameter]
-		string $password_clair, 
+		string $password_clair,
 		#[\SensitiveParameter]
 		string $password_hash,
 		int $id_auteur
@@ -120,7 +120,7 @@ final class SpipCles {
 			$this->save();
 			return $this->cles->get($name);
 		}
-        return null;
+		return null;
 	}
 
 	private function read(): array {

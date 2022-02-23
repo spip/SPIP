@@ -18,7 +18,7 @@ namespace Spip\Core\Chiffrer;
  * @package SPIP\Core\Chiffrer
  */
 
-if (!defined('_ECRIRE_INC_VERSION')){
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
