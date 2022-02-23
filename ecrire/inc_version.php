@@ -451,7 +451,7 @@ define('_SPIP_EXTRA_VERSION', '-beta');
 // (= date de leur derniere modif cassant la compatibilite et/ou necessitant un recalcul des squelettes)
 $spip_version_code = 2022_01_16;
 // version de la base SQL (= Date + numero incremental a 2 chiffres YYYYMMDDXX)
-$spip_version_base = 2022_02_23_01;
+$spip_version_base = 2022_02_23_02;
 
 // version de l'interface a la base
 $spip_sql_version = 1;
