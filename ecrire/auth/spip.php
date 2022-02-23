@@ -115,7 +115,7 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 	}
 
 	// login/mot de passe incorrect
-	if (!$row) {
+	if (empty($row)) {
 		return [];
 	}
 
