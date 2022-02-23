@@ -26,3 +26,7 @@ $GLOBALS['maj'][2021_02_18_00] = [
 	['sql_alter', "TABLE spip_auteurs CHANGE imessage imessage VARCHAR(3) DEFAULT '' NOT NULL" ],
 	['sql_updateq', 'spip_auteurs', ['imessage' => 'oui'], "imessage != 'non' OR imessage IS NULL" ],
 ];
+
+$GLOBALS['maj'][2022_02_23_00] = [
+	['sql_alter', "TABLE spip_auteurs ADD backup_cles backup_cles mediumtext DEFAULT '' NOT NULL" ],
+];
