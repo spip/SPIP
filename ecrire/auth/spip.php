@@ -65,13 +65,12 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 	include_spip('inc/chiffrer');
 	$cles = SpipCles::instance();
 	$secret = $cles->getSecretAuth();
-	// Créer les clés si besoin
-	if (
-		!$secret
-		and $row['webmestre'] === 'oui'
-		and empty($row['backup_cles'])
-	) {
-		$cles->generer();
+
+	// Créer la clé si besoin (en verifiant la presence ou non d'un backup chez un webmestre)
+	if (!$secret) {
+		if (auth_spip_initialiser_secret()) {
+			$secret = $cles->getSecretAuth();
+		}
 	}
 
 	switch ( strlen($row["pass"]) ) {
@@ -98,12 +97,17 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 			if (
 				!$secret
 				and $row['webmestre'] === 'oui'
-				and !empty($row['backup_cles'])
-				and $cles->restore($row['backup_cles'], $pass, $row['pass'], $row['id_auteur'])
-			) {
-				$cles->save();
+				and !empty($row['backup_cles'])) {
+				if ($cles->restore($row['backup_cles'], $pass, $row['pass'], $row['id_auteur'])) {
+					spip_log("Les cles secretes ont ete restaurées avec le backup du webmestre #".$row['id_auteur'], "auth"._LOG_INFO_IMPORTANTE);
+					$cles->save();
+				}
+				else {
+					spip_log("Pas de cle secrete disponible (fichier config/cle.php absent ?) mais le backup du webmestre #".$row['id_auteur']." n'est pas valide", "auth"._LOG_ERREUR);
+					sql_updateq("spip_auteurs", ['backup_cles' => ''], 'id_auteur='.intval($row['id_auteur']));
+				}
 			}
-			if (!Password::verifier($pass, $row["pass"])) {
+			if (!Password::verifier($pass, $row["pass"], $secret)) {
 				unset($row);
 			}
 			break;
@@ -116,20 +120,19 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 
 	// fait tourner le codage du pass dans la base
 	// sauf si phpauth : cela reviendrait a changer l'alea a chaque hit, et aucune action verifiable par securiser_action()
-	if (!$phpauth) {
+	if (!$phpauth and $secret) {
 		include_spip('inc/acces'); // pour creer_uniqid et verifier_htaccess
-		$pass_hash_next = Password::hacher($pass);
+		$pass_hash_next = Password::hacher($pass, $secret);
 		if ($pass_hash_next) {
 
 			$set = [
-				'alea_actuel' => 'alea_futur',
+				'alea_actuel' => 'alea_futur', // @deprecated 4.1
+				'alea_futur' => sql_quote(creer_uniqid(), $serveur, 'text'), // @deprecated 4.1
 				'pass' => sql_quote($pass_hash_next, $serveur, 'text'),
-				'alea_futur' => sql_quote(creer_uniqid(), $serveur, 'text')
 			];
 			// a chaque login de webmestre : sauvegarde chiffree des clé du site (avec les pass du webmestre)
-			if ($row['statut'] === '0minirezo' and $row['webmestre'] === 'oui') {
-				// TODO : ajouter le champ en base
-				//$set['backup_cles'] = $cles:->backup($pass);
+			if ($row['statut'] === '0minirezo' and $row['webmestre'] === 'oui' and isset($row['backup_cles'])) {
+				$set['backup_cles'] = sql_quote($cles->backup($pass), $serveur, 'text');
 			}
 
 			@sql_update(
@@ -154,6 +157,47 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 	}
 
 	return $row;
+}
+
+/**
+ * Reinitialiser le secret des auth quand il est perdu
+ * si aucun webmestre n'a de backup
+ * Si force=true, on va forcer la reinit (si il est perdu) meme si des webmestres ont un backup
+ *
+ * Si on a pas perdu le secret des auth (le fichier config/cle.php est toujouts la et contient la cle), la fonction ne fait rien
+ * car réinitialiser le secret des auth invalide *tous* les mots de passe
+ *
+ * @param bool $force
+ * @return bool
+ */
+function auth_spip_initialiser_secret(bool $force=false): bool {
+	include_spip('inc/chiffrer');
+	$cles = SpipCles::instance();
+	$secret = $cles->getSecretAuth();
+
+	// on ne fait rien si on a un secret dispo
+	if ($secret) {
+		return false;
+	}
+
+	// si force, on ne verifie pas la presence d'un backup chez un webmestre
+	if ($force) {
+		spip_log("Pas de cle secrete disponible, on regenere une nouvelle cle forcee - tous les mots de passe sont invalides", "auth"._LOG_INFO_IMPORTANTE);
+		$secret = $cles->getSecretAuth(true);
+		return true;
+	}
+
+	$has_backup = sql_allfetsel('id_auteur', 'spip_auteurs',"statut=".sql_quote('0minirezo')." AND webmestre=".sql_quote('oui')." AND backup_cles!=''");
+	$has_backup = array_column($has_backup, 'id_auteur');
+	if (empty($has_backup)) {
+		spip_log("Pas de cle secrete disponible, et aucun webmestre n'a de backup, on regenere une nouvelle cle - tous les mots de passe sont invalides", "auth"._LOG_INFO_IMPORTANTE);
+		$secret = $cles->getSecretAuth(true);
+		return true;
+	}
+	else {
+		spip_log("Pas de cle secrete disponible (fichier config/cle.php absent ?) un des webmestres #".implode(', #', $has_backup)." doit se connecter pour restaurer son backup des cles", "auth"._LOG_ERREUR);
+		return false;
+	}
 }
 
 /**
@@ -379,27 +423,40 @@ function auth_spip_modifier_pass($login, $new_pass, $id_auteur, $serveur = '') {
 
 	if (
 		!$id_auteur = intval($id_auteur)
-		or !sql_fetsel('login', 'spip_auteurs', 'id_auteur=' . intval($id_auteur), '', '', '', '', $serveur)
+		or !$auteur = sql_fetsel('login, statut, webmestre', 'spip_auteurs', 'id_auteur=' . intval($id_auteur), '', '', '', '', $serveur)
 	) {
 		return false;
 	}
 
-	$c = [];
-	include_spip('inc/acces');
 	include_spip('inc/chiffrer');
-	$htpass = generer_htpass($new_pass);
-	$alea_actuel = creer_uniqid();
-	$alea_futur = creer_uniqid();
-	$pass = Password::hacher($new_pass);
-	// TODO: si webmestre, reenregistrer le backup de clé $cles->backup($new_pass);
-	$c['pass'] = $pass;
-	$c['htpass'] = $htpass;
-	$c['alea_actuel'] = $alea_actuel;
-	$c['alea_futur'] = $alea_futur;
-	$c['low_sec'] = '';
+	$cles = SpipCles::instance();
+	$secret = $cles->getSecretAuth();
+	if (!$secret) {
+		if (auth_spip_initialiser_secret()) {
+			$secret = $cles->getSecretAuth();
+		}
+		else {
+			return false;
+		}
+	}
+
+
+	include_spip('inc/acces');
+	$set = [
+		'pass' => Password::hacher($new_pass, $secret),
+		'htpass' => generer_htpass($new_pass),
+		'alea_actuel' => creer_uniqid(), // @deprecated 4.1
+		'alea_futur' => creer_uniqid(), // @deprecated 4.1
+		'low_sec' => '',
+	];
+
+	// si c'est un webmestre, on met a jour son backup des cles
+	if ($auteur['statut'] === '0minirezo' and $auteur['webmestre'] === 'oui') {
+		$set['backup_cles'] = $cles->backup($new_pass);
+	}
 
 	include_spip('action/editer_auteur');
-	auteur_modifier($id_auteur, $c, true); // manque la gestion de $serveur
+	auteur_modifier($id_auteur, $set, true); // manque la gestion de $serveur
 
 	return true; // on a bien modifie le pass
 }
