@@ -15,7 +15,7 @@ namespace Spip\Core\Chiffrer;
 class Cles /* implements ContainerInterface */ {
 	private array $keys;
 	public function __construct(array $keys) {
-        $this->keys = $keys;
+		$this->keys = $keys;
 	}
 
 	public function has(string $name): bool {
@@ -26,15 +26,15 @@ class Cles /* implements ContainerInterface */ {
 		return $this->keys[$name] ?? null;
 	}
 
-    public function generate(string $name): string {
-        $key = Chiffrement::keygen();
-        $this->keys[$name] = $key;
-        spip_log("Création de la cle $name", 'chiffrer' . _LOG_INFO_IMPORTANTE);
-        return $key;
-    }
+	public function generate(string $name): string {
+		$key = Chiffrement::keygen();
+		$this->keys[$name] = $key;
+		spip_log("Création de la cle $name", 'chiffrer' . _LOG_INFO_IMPORTANTE);
+		return $key;
+	}
 
 	public function set(
-		string $name, 
+		string $name,
 		#[\SensitiveParameter]
 		string $key
 	): void {
