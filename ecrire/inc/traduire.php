@@ -133,12 +133,12 @@ function charger_langue($lang, $module = 'spip') {
 	}
 }
 
-/** 
- * Retourne les entrées d’un fichier de langue 
- * 
+/**
+ * Retourne les entrées d’un fichier de langue
+ *
  * Les fichiers de langue retournent soit un array [ cle => valeur ],
  * soit peuplent une globale `$GLOBALS[$GLOBALS['idx_lang']]`.
- * 
+ *
  * @return string Chemin du fichier de langue (un fichier PHP)
  * @return array<string, string>
  */

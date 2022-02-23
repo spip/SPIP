@@ -96,12 +96,12 @@ function install_etape_3b_dist() {
 			// c'est un auteur connu : si on a pas de secret il faut absolument qu'il se reconnecte avec le meme mot de passe
 			// pour restaurer la copie des cles
 			if (!$secret and !auth_spip_initialiser_secret()) {
-				$row = sql_fetsel('backup_cles, pass', 'spip_auteurs', 'id_auteur='.intval($id_auteur));
+				$row = sql_fetsel('backup_cles, pass', 'spip_auteurs', 'id_auteur=' . intval($id_auteur));
 				if (empty($row['backup_cles']) or !$cles->restore($row['backup_cles'], $pass, $row['pass'], $id_auteur)) {
 					$echec = _L('L\'installation doit être faite par un webmestre avec un backup des cles et son mot de passe');
 					echouer_etape_3b($echec);
 				}
-				spip_log("Les cles secretes ont ete restaurées avec le backup du webmestre #$id_auteur", "auth"._LOG_INFO_IMPORTANTE);
+				spip_log("Les cles secretes ont ete restaurées avec le backup du webmestre #$id_auteur", 'auth' . _LOG_INFO_IMPORTANTE);
 				$cles->save();
 			}
 
@@ -110,7 +110,7 @@ function install_etape_3b_dist() {
 				'email' => $email,
 				'login' => $login,
 				'statut' => '0minirezo'
-			], "id_auteur=".intval($id_auteur));
+			], 'id_auteur=' . intval($id_auteur));
 			// le passer webmestre separement du reste, au cas ou l'alter n'aurait pas fonctionne
 			@sql_updateq('spip_auteurs', ['webmestre' => 'oui'], "id_auteur=$id_auteur");
 			if (!auth_spip_modifier_pass($login, $pass, $id_auteur)) {
@@ -118,7 +118,6 @@ function install_etape_3b_dist() {
 				echouer_etape_3b($echec);
 			}
 		} else {
-
 			// Si on a pas de cle et qu'on ne sait pas la creer, on ne peut pas creer de nouveau compte :
 			// il faut qu'un webmestre avec un backup fasse l'install
 			if (!$secret and !auth_spip_initialiser_secret()) {
