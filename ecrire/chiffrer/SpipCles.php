@@ -13,18 +13,21 @@
 namespace Spip\Core\Chiffrer;
 
 final class SpipCles extends Cles {
-	private static $instance;
+	private static array $instances = [];
 
 	private string $file = _DIR_ETC . "cles.php";
 
-	public static function instance(): self {
-		if (self::$instance === null) {
-			self::$instance = new self();
+	public static function instance(string $file = ''): self {
+		if (empty(self::$instances[$file])) {
+			self::$instances[$file] = new self($file);
 		}
-		return self::$instance;
+		return self::$instances[$file];
 	}
 
-	private function __construct() {
+	private function __construct(string $file = '') {
+		if ($file) {
+			$this->file = $file;
+		}
 		parent::__construct($this->read());
 	}
 
