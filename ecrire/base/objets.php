@@ -249,7 +249,8 @@ function lister_tables_objets_sql(?string $table_sql = null, $desc = []) {
 					'cookie_oubli' => 'tinytext',
 					'source' => "VARCHAR(10) DEFAULT 'spip' NOT NULL",
 					'lang' => "VARCHAR(10) DEFAULT '' NOT NULL",
-					'imessage' => "VARCHAR(3) DEFAULT '' NOT NULL"
+					'imessage' => "VARCHAR(3) DEFAULT '' NOT NULL",
+					'backup_cles' => "mediumtext DEFAULT '' NOT NULL",
 				],
 				'key' => [
 					'PRIMARY KEY' => 'id_auteur',
