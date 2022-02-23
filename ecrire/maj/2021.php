@@ -30,3 +30,7 @@ $GLOBALS['maj'][2021_02_18_00] = [
 $GLOBALS['maj'][2022_02_23_00] = [
 	['sql_alter', "TABLE spip_auteurs ADD backup_cles backup_cles mediumtext DEFAULT '' NOT NULL" ],
 ];
+
+$GLOBALS['maj'][2022_02_23_01] = [
+	['sql_delete', "TABLE spip_meta WHERE nom='secret_du_site'" ],
+];
