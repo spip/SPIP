@@ -53,7 +53,7 @@ final class SpipCles {
 		#[\SensitiveParameter]
 		string $withKey
 	): string {
-		if (count($this->keys)) {
+		if (count($this->cles)) {
 			return Chiffrement::chiffrer($this->cles->toJson(), $withKey);
 		}
 		return '';
