@@ -41,7 +41,7 @@ class Cles implements \Countable /* , ContainerInterface */ {
 		$this->keys[$name] = $key;
 	}
 
-	public function count() {
+	public function count(): int {
 		return count($this->keys);
 	}
 
