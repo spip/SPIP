@@ -15,7 +15,8 @@
  *
  * @package SPIP\Core\Authentification\SPIP
  **/
-use Spip\Core\Chiffrer;
+use Spip\Core\Chiffrer\Password;
+use Spip\Core\Chiffrer\SpipCles;
 
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -62,6 +63,16 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 	}
 
 	include_spip('inc/chiffrer');
+	$cles = SpipCles::instance();
+	$secret = $cles->getSecretAuth();
+	// Créer les clés si besoin
+	if (
+		!$secret
+		and $row['webmestre'] === 'oui'
+		and empty($row['backup_cles'])
+	) {
+		$cles->generer();
+	}
 
 	switch ( strlen($row["pass"]) ) {
 		case 32:
@@ -80,18 +91,19 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 			}
 			break;
 
-			case 60:
+		case 60:
 		case 98:
 		default:
-			if (!Chiffrer::verifier_mot_de_passe($pass, $row["pass"])) {
-				// doit-on restaurer un backup des cles ?
-				if ($row['webmestre'] === 'oui'
-					and !empty($row['backup_cles'])) {
-					if (Chiffrer::restaurer_cles_depuis_sauvegarde_chiffree($row['backup_cles'], $row['id_auteur'], $pass, $row['pass'])
-					and Chiffrer::verifier_mot_de_passe($pass, $row["pass"])) {
-						break;
-					}
-				}
+			// doit-on restaurer un backup des cles ?
+			if (
+				!$secret
+				and $row['webmestre'] === 'oui'
+				and !empty($row['backup_cles'])
+				and $cles->restore($row['backup_cles'], $pass, $row['pass'], $row['id_auteur'])
+			) {
+				$cles->save();
+			}
+			if (!Password::verifier($pass, $row["pass"])) {
 				unset($row);
 			}
 			break;
@@ -106,7 +118,7 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 	// sauf si phpauth : cela reviendrait a changer l'alea a chaque hit, et aucune action verifiable par securiser_action()
 	if (!$phpauth) {
 		include_spip('inc/acces'); // pour creer_uniqid et verifier_htaccess
-		$pass_hash_next = Chiffrer::calculer_hash_sale_mot_de_passe($pass, $row['alea_futur']);
+		$pass_hash_next = Password::hacher($pass);
 		if ($pass_hash_next) {
 
 			$set = [
@@ -117,7 +129,7 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 			// a chaque login de webmestre : sauvegarde chiffree des clé du site (avec les pass du webmestre)
 			if ($row['statut'] === '0minirezo' and $row['webmestre'] === 'oui') {
 				// TODO : ajouter le champ en base
-				//$set['backup_cles'] = Chiffrer::sauvegarde_chiffree_cles($row['id_auteur'], $pass);
+				//$set['backup_cles'] = $cles:->backup($pass);
 			}
 
 			@sql_update(
@@ -378,7 +390,8 @@ function auth_spip_modifier_pass($login, $new_pass, $id_auteur, $serveur = '') {
 	$htpass = generer_htpass($new_pass);
 	$alea_actuel = creer_uniqid();
 	$alea_futur = creer_uniqid();
-	$pass = Chiffrer::calculer_hash_sale_mot_de_passe($new_pass, $alea_actuel);
+	$pass = Password::hacher($new_pass);
+	// TODO: si webmestre, reenregistrer le backup de clé $cles->backup($new_pass);
 	$c['pass'] = $pass;
 	$c['htpass'] = $htpass;
 	$c['alea_actuel'] = $alea_actuel;
