@@ -49,14 +49,7 @@ function install_etape_3b_dist() {
 			$echec = _T('form_email_non_valide');
 		}
 		if ($echec) {
-			echo minipres(
-				'AUTO',
-				info_progression_etape(3, 'etape_', 'install/', true) .
-				"<div class='error'><h3>$echec</h3>\n" .
-				'<p>' . _T('avis_connexion_echec_2') . '</p>' .
-				'</div>'
-			);
-			exit;
+			echouer_etape_3b($echec);
 		}
 	}
 
@@ -84,12 +77,8 @@ function install_etape_3b_dist() {
 		# pour le passwd, bizarrement il faut le convertir comme s'il avait
 		# ete tape en iso-8859-1 ; car c'est en fait ce que voit md5.js
 		$pass = unicode2charset(utf_8_to_unicode($pass), 'iso-8859-1');
-		include_spip('auth/sha256.inc');
-		include_spip('inc/acces');
-		$htpass = generer_htpass($pass);
-		$alea_actuel = creer_uniqid();
-		$alea_futur = creer_uniqid();
-		$shapass = spip_sha256($alea_actuel . $pass);
+
+		include_spip('auth/spip');
 		// prelablement, creer le champ webmestre si il n'existe pas (install neuve
 		// sur une vieille base
 		$t = sql_showtable('spip_auteurs', true);
@@ -97,32 +86,59 @@ function install_etape_3b_dist() {
 			@sql_alter("TABLE spip_auteurs ADD webmestre varchar(3)  DEFAULT 'non' NOT NULL");
 		}
 
+		// il faut avoir une cle des auth valide pour creer un nouvel auteur webmestre
+		include_spip('inc/chiffrer');
+		$cles = Spip\Core\Chiffrer\SpipCles::instance();
+		$secret = $cles->getSecretAuth();
+
 		$id_auteur = sql_getfetsel('id_auteur', 'spip_auteurs', 'login=' . sql_quote($login));
 		if ($id_auteur !== null) {
+			// c'est un auteur connu : si on a pas de secret il faut absolument qu'il se reconnecte avec le meme mot de passe
+			// pour restaurer la copie des cles
+			if (!$secret and !auth_spip_initialiser_secret()) {
+				$row = sql_fetsel('backup_cles, pass', 'spip_auteurs', 'id_auteur='.intval($id_auteur));
+				if (empty($row['backup_cles']) or !$cles->restore($row['backup_cles'], $pass, $row['pass'], $id_auteur)) {
+					$echec = _L('L\'installation doit être faite par un webmestre avec un backup des cles et son mot de passe');
+					echouer_etape_3b($echec);
+				}
+				spip_log("Les cles secretes ont ete restaurées avec le backup du webmestre #$id_auteur", "auth"._LOG_INFO_IMPORTANTE);
+				$cles->save();
+			}
+
 			sql_updateq('spip_auteurs', [
 				'nom' => $nom,
 				'email' => $email,
 				'login' => $login,
-				'pass' => $shapass,
-				'alea_actuel' => $alea_actuel,
-				'alea_futur' => $alea_futur,
-				'htpass' => $htpass,
 				'statut' => '0minirezo'
-			], "id_auteur=$id_auteur");
+			], "id_auteur=".intval($id_auteur));
+			// le passer webmestre separement du reste, au cas ou l'alter n'aurait pas fonctionne
+			@sql_updateq('spip_auteurs', ['webmestre' => 'oui'], "id_auteur=$id_auteur");
+			if (!auth_spip_modifier_pass($login, $pass, $id_auteur)) {
+				$echec = _L('Echec lors de l\'initialisation de l\'acces');
+				echouer_etape_3b($echec);
+			}
 		} else {
+
+			// Si on a pas de cle et qu'on ne sait pas la creer, on ne peut pas creer de nouveau compte :
+			// il faut qu'un webmestre avec un backup fasse l'install
+			if (!$secret and !auth_spip_initialiser_secret()) {
+				$echec = _L('L\'installation doit être faite par un webmestre avec un backup des cles');
+				echouer_etape_3b($echec);
+			}
+
 			$id_auteur = sql_insertq('spip_auteurs', [
 				'nom' => $nom,
 				'email' => $email,
 				'login' => $login,
-				'pass' => $shapass,
-				'htpass' => $htpass,
-				'alea_actuel' => $alea_actuel,
-				'alea_futur' => $alea_futur,
 				'statut' => '0minirezo'
 			]);
+			// le passer webmestre separrement du reste, au cas ou l'alter n'aurait pas fonctionne
+			@sql_updateq('spip_auteurs', ['webmestre' => 'oui'], "id_auteur=$id_auteur");
+			if (!auth_spip_modifier_pass($login, $pass, $id_auteur)) {
+				$echec = _L('Echec lors de l\'initialisation de l\'acces');
+				echouer_etape_3b($echec);
+			}
 		}
-		// le passer webmestre separrement du reste, au cas ou l'alter n'aurait pas fonctionne
-		@sql_updateq('spip_auteurs', ['webmestre' => 'oui'], "id_auteur=$id_auteur");
 
 		// inserer email comme email webmaster principal
 		// (sauf s'il est vide: cas de la re-installation)
@@ -154,4 +170,15 @@ function install_etape_3b_dist() {
 
 	include_spip('inc/distant');
 	redirige_par_entete(parametre_url(self(), 'etape', '4', '&'));
+}
+
+function echouer_etape_3b($echec) {
+	echo minipres(
+		'AUTO',
+		info_progression_etape(3, 'etape_', 'install/', true) .
+		"<div class='error'><h3>$echec</h3>\n" .
+		'<p>' . _T('avis_connexion_echec_2') . '</p>' .
+		'</div>'
+	);
+	exit;
 }
