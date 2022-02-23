@@ -184,7 +184,6 @@ function auth_spip_initialiser_secret(bool $force=false): bool {
 	if ($force) {
 		spip_log("Pas de cle secrete disponible, on regenere une nouvelle cle forcee - tous les mots de passe sont invalides", "auth"._LOG_INFO_IMPORTANTE);
 		$secret = $cles->getSecretAuth(true);
-		$cles->save();
 		return true;
 	}
 
@@ -193,7 +192,6 @@ function auth_spip_initialiser_secret(bool $force=false): bool {
 	if (empty($has_backup)) {
 		spip_log("Pas de cle secrete disponible, et aucun webmestre n'a de backup, on regenere une nouvelle cle - tous les mots de passe sont invalides", "auth"._LOG_INFO_IMPORTANTE);
 		$secret = $cles->getSecretAuth(true);
-		$cles->save();
 		return true;
 	}
 	else {
