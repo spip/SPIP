@@ -13,10 +13,8 @@
 namespace Spip\Chiffrer;
 
 class Chiffrement {
-	public static function keygen(): string {
-		return sodium_crypto_secretbox_keygen();
-	}
 
+	/** Chiffre un message en utilisant une clé (le secret_du_site par défaut) ou un mot de passe */
 	public static function chiffrer(
 		string $message,
 		#[\SensitiveParameter]
@@ -27,11 +25,8 @@ class Chiffrement {
 			spip_log("chiffrer() sans clé `$message`", 'chiffrer' . _LOG_INFO_IMPORTANTE);
 			return null;
 		}
-		if (strlen($key) !== SODIUM_CRYPTO_SECRETBOX_KEYBYTES) {
-			while (strlen($key) < SODIUM_CRYPTO_SECRETBOX_KEYBYTES) {
-				$key .= $key;
-			}
-			$key = substr($key, 0, SODIUM_CRYPTO_SECRETBOX_KEYBYTES);
+		if (strlen($key) !== \SODIUM_CRYPTO_SECRETBOX_KEYBYTES) {
+			$key = self::generateKeyFromPassword($key);
 		}
 		$nonce = random_bytes(\SODIUM_CRYPTO_SECRETBOX_NONCEBYTES);
 		$padded_message = sodium_pad($message, 16);
@@ -43,6 +38,7 @@ class Chiffrement {
 		return $encoded;
 	}
 
+	/** Déchiffre un message en utilisant une clé (le secret_du_site par défaut) ou un mot de passe */	
 	public static function dechiffrer(
 		string $encoded,
 		#[\SensitiveParameter]
@@ -53,11 +49,8 @@ class Chiffrement {
 			spip_log("dechiffrer() sans clé `$encoded`", 'chiffrer' . _LOG_INFO_IMPORTANTE);
 			return null;
 		}
-		if (strlen($key) !== SODIUM_CRYPTO_SECRETBOX_KEYBYTES) {
-			while (strlen($key) < SODIUM_CRYPTO_SECRETBOX_KEYBYTES) {
-				$key .= $key;
-			}
-			$key = substr($key, 0, SODIUM_CRYPTO_SECRETBOX_KEYBYTES);
+		if (strlen($key) !== \SODIUM_CRYPTO_SECRETBOX_KEYBYTES) {
+			$key = self::generateKeyFromPassword($key);
 		}
 		$decoded = base64_decode($encoded);
 		$nonce = mb_substr($decoded, 0, \SODIUM_CRYPTO_SECRETBOX_NONCEBYTES, '8bit');
@@ -74,6 +67,26 @@ class Chiffrement {
 		return null;
 	}
 
+	/** Génère une clé de la taille attendue pour le chiffrement */
+	public static function keygen(): string {
+		return sodium_crypto_secretbox_keygen();
+	}
+
+	/**
+	 * Retourne une clé de la taille attendue pour le chiffrement
+	 *
+	 * Notamment si on utilise un mot de passe comme clé, il faut le hacher
+	 * pour servir de clé à la taille correspondante.
+	 */
+	private static function generateKeyFromPassword(string $password): string {
+		if (strlen($password) === \SODIUM_CRYPTO_SECRETBOX_KEYBYTES) {
+			return $password;
+		}
+		$hashed = hash('sha256', $password);
+		return substr($hashed, 0, \SODIUM_CRYPTO_SECRETBOX_KEYBYTES);
+	}
+
+	/** Retourne la clé de chiffrement par défaut (le secret_du_site) */
 	private static function getDefaultKey(): ?string {
 		$keys = SpipCles::instance();
 		return $keys->getSecretSite();
