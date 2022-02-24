@@ -15,8 +15,8 @@
  *
  * @package SPIP\Core\Authentification\SPIP
  **/
-use Spip\Core\Chiffrer\Password;
-use Spip\Core\Chiffrer\SpipCles;
+use Spip\Chiffrer\Password;
+use Spip\Chiffrer\SpipCles;
 
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;

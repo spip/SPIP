@@ -301,7 +301,7 @@ function verifier_action_auteur($action, $hash) {
  */
 function secret_du_site() {
 	include_spip('inc/chiffrer');
-	$cles = Spip\Core\Chiffrer\SpipCles::instance();
+	$cles = \Spip\Chiffrer\SpipCles::instance();
 	$secret = $cles->getSecretSite();
 
 	return $secret;
