@@ -8,10 +8,16 @@
  *                                                                         *
  *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
- * \***************************************************************************/
+\***************************************************************************/
 
-namespace Spip\Core\Chiffrer;
+namespace Spip\Chiffrer;
 
+/** 
+ * Chiffrement / déchiffrement symétrique. 
+ * 
+ * @link https://fr.wikipedia.org/wiki/Cryptographie_sym%C3%A9trique
+ * @link https://www.php.net/manual/fr/book.sodium.php
+ */
 class Chiffrement {
 	public static function keygen(): string {
 		return sodium_crypto_secretbox_keygen();
