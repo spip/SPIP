@@ -12,6 +12,7 @@
 
 namespace Spip\Chiffrer;
 
+/** Vérification et hachage de mot de passe */
 class Password {
 	/**
 	 * verifier qu'un mot de passe en clair est correct a l'aide de son hash

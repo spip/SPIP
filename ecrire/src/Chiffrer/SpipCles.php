@@ -12,6 +12,7 @@
 
 namespace Spip\Chiffrer;
 
+/** Gestion des clés d’authentification / chiffrement de SPIP */
 final class SpipCles {
 	private static array $instances = [];
 

@@ -12,6 +12,12 @@
 
 namespace Spip\Chiffrer;
 
+/** 
+ * Chiffrement / déchiffrement symétrique. 
+ * 
+ * @link https://fr.wikipedia.org/wiki/Cryptographie_sym%C3%A9trique
+ * @link https://www.php.net/manual/fr/book.sodium.php
+ */
 class Chiffrement {
 
 	/** Chiffre un message en utilisant une clé (le secret_du_site par défaut) ou un mot de passe */
