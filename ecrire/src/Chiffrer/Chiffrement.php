@@ -34,7 +34,8 @@ class Chiffrement {
 			$key = substr($key, 0, SODIUM_CRYPTO_SECRETBOX_KEYBYTES);
 		}
 		$nonce = random_bytes(\SODIUM_CRYPTO_SECRETBOX_NONCEBYTES);
-		$encrypted = sodium_crypto_secretbox($message, $nonce, $key);
+		$padded_message = sodium_pad($message, 16);
+		$encrypted = sodium_crypto_secretbox($padded_message, $nonce, $key);
 		$encoded = base64_encode($nonce . $encrypted);
 		sodium_memzero($key);
 		sodium_memzero($nonce);
@@ -61,7 +62,8 @@ class Chiffrement {
 		$decoded = base64_decode($encoded);
 		$nonce = mb_substr($decoded, 0, \SODIUM_CRYPTO_SECRETBOX_NONCEBYTES, '8bit');
 		$encrypted_result = mb_substr($decoded, \SODIUM_CRYPTO_SECRETBOX_NONCEBYTES, null, '8bit');
-		$message = sodium_crypto_secretbox_open($encrypted_result, $nonce, $key);
+		$padded_message = sodium_crypto_secretbox_open($encrypted_result, $nonce, $key);
+		$message = sodium_unpad($padded_message, 16);
 		sodium_memzero($key);
 		sodium_memzero($nonce);
 		if ($message !== false) {
