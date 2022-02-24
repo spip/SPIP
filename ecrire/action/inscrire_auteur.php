@@ -350,11 +350,13 @@ function confirmer_statut_inscription($auteur) {
  */
 function auteur_attribuer_jeton($id_auteur) {
 	include_spip('inc/acces');
+	include_spip('inc/securiser_action');
 	// s'assurer de l'unicite du jeton pour le couple (email,cookie)
 	do {
 		$jeton = creer_uniqid();
-		sql_updateq('spip_auteurs', ['cookie_oubli' => $jeton], 'id_auteur=' . intval($id_auteur));
-	} while (sql_countsel('spip_auteurs', 'cookie_oubli=' . sql_quote($jeton)) > 1);
+		$cle = calculer_cle_action($jeton);
+		sql_updateq('spip_auteurs', ['cookie_oubli' => $cle], 'id_auteur=' . intval($id_auteur));
+	} while (sql_countsel('spip_auteurs', 'cookie_oubli=' . sql_quote($cle)) > 1);
 
 	return $jeton;
 }
@@ -371,10 +373,17 @@ function auteur_verifier_jeton($jeton) {
 		return false;
 	}
 
-	// on peut tomber sur un jeton compose uniquement de chiffres, il faut forcer le $type pour sql_quote pour eviter de planter
-	$desc = sql_fetsel('*', 'spip_auteurs', 'cookie_oubli=' . sql_quote($jeton, '', 'string'));
+	include_spip('inc/securiser_action');
+	$cle = calculer_cle_action($jeton);
 
-	return $desc;
+	// on peut tomber sur un jeton compose uniquement de chiffres, il faut forcer le $type pour sql_quote pour eviter de planter
+	$desc = sql_fetsel('*', 'spip_auteurs', 'cookie_oubli=' . sql_quote($cle, '', 'string'));
+	// timing proof
+	if (verifier_cle_action($jeton, $desc['cookie_oubli'] ?? '')) {
+		return $desc;
+	}
+
+	return false;
 }
 
 /**
