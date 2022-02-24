@@ -8,9 +8,9 @@
  *                                                                         *
  *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
- * \***************************************************************************/
+\***************************************************************************/
 
-namespace Spip\Core\Chiffrer;
+namespace Spip\Chiffrer;
 
 class Cles implements \Countable /* , ContainerInterface */ {
 	private array $keys;
