@@ -343,22 +343,56 @@ function confirmer_statut_inscription($auteur) {
 
 /**
  * Attribuer un jeton temporaire pour un auteur
- * en assurant l'unicite du jeton
+ * en assurant l'unicite du jeton.
+ * 
+ * Chaque appel crée un nouveau jeton pour l’auteur
+ * et invalide donc le précédent
  *
  * @param int $id_auteur
  * @return string
  */
-function auteur_attribuer_jeton($id_auteur) {
+function auteur_attribuer_jeton($id_auteur): string {
+	include_spip('base/abstract_sql');
 	include_spip('inc/acces');
-	include_spip('inc/securiser_action');
+	include_spip('inc/chiffrer');
 	// s'assurer de l'unicite du jeton pour le couple (email,cookie)
 	do {
-		$jeton = creer_uniqid();
-		$cle = calculer_cle_action($jeton);
-		sql_updateq('spip_auteurs', ['cookie_oubli' => $cle], 'id_auteur=' . intval($id_auteur));
-	} while (sql_countsel('spip_auteurs', 'cookie_oubli=' . sql_quote($cle)) > 1);
+		// Un morceau du jeton est lisible en bdd pour éviter de devoir déchiffrer 
+		// tous les jetons connus pour vérifier le jeton d’un auteur. 
+		$public = substr(creer_uniqid(), 0, 7) . '.';
+		$jeton = $public . creer_uniqid();
+		$jeton_chiffre_prefixe = $public . \Spip\Chiffrer\Chiffrement::chiffrer($jeton);
+		sql_updateq('spip_auteurs', ['cookie_oubli' => $jeton_chiffre_prefixe], 'id_auteur=' . intval($id_auteur));
+	} while (sql_countsel('spip_auteurs', 'cookie_oubli=' . sql_quote($jeton_chiffre_prefixe, '', 'string')) > 1);
 
 	return $jeton;
+}
+
+/**
+ * Lire un jeton temporaire d’un auteur
+ * 
+ * Cette fonction peut être pratique si plusieurs notifications proches
+ * dans la durée sont envoyées au même auteur.
+ * 
+ * @param int $id_auteur
+ * @param bool $autoInit Attribue un jeton à l’auteur s’il n’en a pas déjà.
+ * @return string|null
+ */
+function auteur_lire_jeton(int $id_auteur, bool $autoInit = false): ?string {
+	include_spip('base/abstract_sql');
+	$jeton_chiffre_prefixe = sql_getfetsel('cookie_oubli', 'spip_auteurs', 'id_auteur=' . $id_auteur);
+	if ($jeton_chiffre_prefixe) {
+		include_spip('inc/chiffrer');
+		$jeton_chiffre = substr($jeton_chiffre_prefixe, 8);
+		$jeton = \Spip\Chiffrer\Chiffrement::dechiffrer($jeton_chiffre);
+		if ($jeton) {
+			return $jeton;
+		}
+	}
+	if ($autoInit) {
+		return auteur_attribuer_jeton($id_auteur);
+	}
+	return null;
 }
 
 /**
@@ -373,16 +407,18 @@ function auteur_verifier_jeton($jeton) {
 		return false;
 	}
 
-	include_spip('inc/securiser_action');
-	$cle = calculer_cle_action($jeton);
+	include_spip('base/abstract_sql');
+	include_spip('inc/chiffrer');
+	$public = substr($jeton, 0, 8);
 
-	// on peut tomber sur un jeton compose uniquement de chiffres, il faut forcer le $type pour sql_quote pour eviter de planter
-	$desc = sql_fetsel('*', 'spip_auteurs', 'cookie_oubli=' . sql_quote($cle, '', 'string'));
-	// timing proof
-	if (verifier_cle_action($jeton, $desc['cookie_oubli'] ?? '')) {
-		return $desc;
+	$auteurs = sql_allfetsel('*', 'spip_auteurs', 'cookie_oubli LIKE ' . sql_quote($public . '%'));
+	foreach ($auteurs as $auteur) {
+		$jeton_chiffre = substr($auteur['cookie_oubli'], 8);
+		$_jeton = \Spip\Chiffrer\Chiffrement::dechiffrer($jeton_chiffre);
+		if ($_jeton and hash_equals($jeton, $_jeton)) {
+			return $auteur;
+		}
 	}
-
 	return false;
 }
 
@@ -393,5 +429,6 @@ function auteur_verifier_jeton($jeton) {
  * @return bool
  */
 function auteur_effacer_jeton($id_auteur) {
+	include_spip('base/abstract_sql');
 	return sql_updateq('spip_auteurs', ['cookie_oubli' => ''], 'id_auteur=' . intval($id_auteur));
 }
