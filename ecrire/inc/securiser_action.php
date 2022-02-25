@@ -16,6 +16,8 @@
  * @package SPIP\Core\Actions
  **/
 
+ use \Spip\Chiffrer\SpipCles;
+
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -293,18 +295,14 @@ function verifier_action_auteur($action, $hash) {
 //
 
 /**
- * Renvoyer le secret du site, et le generer si il n'existe pas encore
- * Le secret du site doit rester aussi secret que possible, et est eternel
- * On ne doit pas l'exporter
- *
+ * Renvoyer le secret du site (le generer si il n'existe pas encore)
+ * 
+ * @uses SpipCles::secret_du_site()
  * @return string
  */
 function secret_du_site() {
 	include_spip('inc/chiffrer');
-	$cles = \Spip\Chiffrer\SpipCles::instance();
-	$secret = $cles->getSecretSite();
-
-	return $secret;
+	return SpipCles::secret_du_site();
 }
 
 /**
