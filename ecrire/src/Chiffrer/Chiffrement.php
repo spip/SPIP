@@ -20,57 +20,48 @@ namespace Spip\Chiffrer;
  */
 class Chiffrement {
 
-	/** Chiffre un message en utilisant une clé (le secret_du_site par défaut) ou un mot de passe */
+	/** Chiffre un message en utilisant une clé ou un mot de passe */
 	public static function chiffrer(
 		string $message,
 		#[\SensitiveParameter]
-		?string $key = null
+		string $key
 	): ?string {
-		$key ??= self::getDefaultKey();
-		if (!$key) {
-			spip_log("chiffrer() sans clé `$message`", 'chiffrer' . _LOG_INFO_IMPORTANTE);
-			return null;
-		}
-		if (strlen($key) !== \SODIUM_CRYPTO_SECRETBOX_KEYBYTES) {
-			$key = self::generateKeyFromPassword($key);
-		}
+		// create a random salt for key derivation
+		$salt = random_bytes(SODIUM_CRYPTO_PWHASH_SALTBYTES);
+		$key = self::deriveKeyFromPassword($key, $salt);
 		$nonce = random_bytes(\SODIUM_CRYPTO_SECRETBOX_NONCEBYTES);
 		$padded_message = sodium_pad($message, 16);
 		$encrypted = sodium_crypto_secretbox($padded_message, $nonce, $key);
-		$encoded = base64_encode($nonce . $encrypted);
+		$encoded = base64_encode($salt . $nonce . $encrypted);
 		sodium_memzero($key);
 		sodium_memzero($nonce);
+		sodium_memzero($salt);
 		spip_log("chiffrer($message)=$encoded", 'chiffrer' . _LOG_DEBUG);
 		return $encoded;
 	}
 
-	/** Déchiffre un message en utilisant une clé (le secret_du_site par défaut) ou un mot de passe */	
+	/** Déchiffre un message en utilisant une clé ou un mot de passe */	
 	public static function dechiffrer(
 		string $encoded,
 		#[\SensitiveParameter]
-		?string $key = null
+		string $key
 	): ?string {
-		$key ??= self::getDefaultKey();
-		if (!$key) {
-			spip_log("dechiffrer() sans clé `$encoded`", 'chiffrer' . _LOG_INFO_IMPORTANTE);
-			return null;
-		}
-		if (strlen($key) !== \SODIUM_CRYPTO_SECRETBOX_KEYBYTES) {
-			$key = self::generateKeyFromPassword($key);
-		}
 		$decoded = base64_decode($encoded);
-		$nonce = mb_substr($decoded, 0, \SODIUM_CRYPTO_SECRETBOX_NONCEBYTES, '8bit');
-		$encrypted_result = mb_substr($decoded, \SODIUM_CRYPTO_SECRETBOX_NONCEBYTES, null, '8bit');
-		$padded_message = sodium_crypto_secretbox_open($encrypted_result, $nonce, $key);
-		$message = sodium_unpad($padded_message, 16);
+		$salt = substr($decoded, 0, \SODIUM_CRYPTO_PWHASH_SALTBYTES);
+        $nonce = substr($decoded, \SODIUM_CRYPTO_PWHASH_SALTBYTES, \SODIUM_CRYPTO_SECRETBOX_NONCEBYTES);
+        $encrypted = substr($decoded, \SODIUM_CRYPTO_PWHASH_SALTBYTES + \SODIUM_CRYPTO_SECRETBOX_NONCEBYTES);
+        $key = self::deriveKeyFromPassword($key, $salt);
+		$padded_message = sodium_crypto_secretbox_open($encrypted, $nonce, $key);
 		sodium_memzero($key);
 		sodium_memzero($nonce);
-		if ($message !== false) {
-			spip_log("dechiffrer($encoded)=$message", 'chiffrer' . _LOG_DEBUG);
-			return $message;
+		sodium_memzero($salt);
+		if ($padded_message === false) {
+			spip_log("dechiffrer() chiffre corrompu `$encoded`", 'chiffrer' . _LOG_DEBUG);
+			return null;
 		}
-		spip_log("dechiffrer() chiffre corrompu `$encoded`", 'chiffrer' . _LOG_DEBUG);
-		return null;
+		$message = sodium_unpad($padded_message, 16);
+		spip_log("dechiffrer($encoded)=$message", 'chiffrer' . _LOG_DEBUG);
+		return $message;
 	}
 
 	/** Génère une clé de la taille attendue pour le chiffrement */
@@ -84,17 +75,23 @@ class Chiffrement {
 	 * Notamment si on utilise un mot de passe comme clé, il faut le hacher
 	 * pour servir de clé à la taille correspondante.
 	 */
-	private static function generateKeyFromPassword(string $password): string {
+	private static function deriveKeyFromPassword(
+		#[\SensitiveParameter]
+		string $password,
+		string $salt
+	): string {
 		if (strlen($password) === \SODIUM_CRYPTO_SECRETBOX_KEYBYTES) {
 			return $password;
 		}
-		$hashed = hash('sha256', $password);
-		return substr($hashed, 0, \SODIUM_CRYPTO_SECRETBOX_KEYBYTES);
-	}
+        $key = sodium_crypto_pwhash(
+            \SODIUM_CRYPTO_SECRETBOX_KEYBYTES,
+            $password,
+            $salt,
+            \SODIUM_CRYPTO_PWHASH_OPSLIMIT_INTERACTIVE,
+            \SODIUM_CRYPTO_PWHASH_MEMLIMIT_INTERACTIVE
+        );
+        sodium_memzero($password);
 
-	/** Retourne la clé de chiffrement par défaut (le secret_du_site) */
-	private static function getDefaultKey(): ?string {
-		$keys = SpipCles::instance();
-		return $keys->getSecretSite();
+        return $key;
 	}
 }
