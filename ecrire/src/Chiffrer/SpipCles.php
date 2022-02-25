@@ -26,6 +26,14 @@ final class SpipCles {
 		return self::$instances[$file];
 	}
 
+	/**
+	 * Retourne le secret du site (shorthand)
+	 * @uses self::getSecretSite()
+	 */
+	public static function secret_du_site(): ?string {
+		return (self::instance())->getSecretSite();
+	}
+
 	private function __construct(string $file = '') {
 		if ($file) {
 			$this->file = $file;
@@ -33,13 +41,27 @@ final class SpipCles {
 		$this->cles = new Cles($this->read());
 	}
 
+	/**
+	 * Renvoyer le secret du site
+	 *
+	 * Le secret du site doit rester aussi secret que possible, et est eternel
+	 * On ne doit pas l'exporter
+	 *
+	 * Le secret est partagé entre une clé disque et une clé bdd
+	 *
+	 * @return string
+	 */
 	public function getSecretSite(bool $autoInit = true): ?string {
-		return $this->getKey('secret_du_site', $autoInit);
+		$key = $this->getKey('secret_du_site', $autoInit);
+		$meta = $this->getMetaKey('secret_du_site', $autoInit);
+		// conserve la même longeur.
+		return $key ^ $meta;
 	}
+
+	/** Renvoyer le secret des authentifications */	
 	public function getSecretAuth(bool $autoInit = false): ?string {
 		return $this->getKey('secret_des_auth', $autoInit);
 	}
-
 	public function save(): bool {
 		return ecrire_fichier_securise($this->file, $this->cles->toJson());
 	}
@@ -122,6 +144,25 @@ final class SpipCles {
 			return $this->cles->get($name);
 		}
 		return null;
+	}
+
+	private function getMetaKey(string $name, bool $autoInit = true): ?string {
+		if (!isset($GLOBALS['meta'][$name])) {
+			include_spip('base/abstract_sql');
+			$GLOBALS['meta'][$name] = sql_getfetsel('valeur', 'spip_meta', 'nom = ' . sql_quote($name, '', 'string'));
+		}
+		$key = base64_decode($GLOBALS['meta'][$name] ?? '');
+		if (strlen($key) === \SODIUM_CRYPTO_SECRETBOX_KEYBYTES) {
+			return $key;
+		}
+		if (!$autoInit) {
+			return null;
+		}
+		$key = Chiffrement::keygen();
+		ecrire_meta($name, base64_encode($key), 'non');
+		lire_metas(); // au cas ou ecrire_meta() ne fonctionne pas
+
+		return $key;
 	}
 
 	private function read(): array {

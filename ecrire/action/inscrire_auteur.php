@@ -15,6 +15,11 @@
  *
  * @package SPIP\Core\Inscription
  **/
+
+use Spip\Chiffrer\Chiffrement;
+use Spip\Chiffrer\SpipCles;
+
+
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -340,8 +345,7 @@ function confirmer_statut_inscription($auteur) {
 
 
 /**
- * Attribuer un jeton temporaire pour un auteur
- * en assurant l'unicite du jeton.
+ * Attribuer un jeton temporaire pour un auteur en assurant l'unicite du jeton.
  * 
  * Chaque appel crée un nouveau jeton pour l’auteur
  * et invalide donc le précédent
@@ -359,7 +363,7 @@ function auteur_attribuer_jeton($id_auteur): string {
 		// tous les jetons connus pour vérifier le jeton d’un auteur. 
 		$public = substr(creer_uniqid(), 0, 7) . '.';
 		$jeton = $public . creer_uniqid();
-		$jeton_chiffre_prefixe = $public . \Spip\Chiffrer\Chiffrement::chiffrer($jeton);
+		$jeton_chiffre_prefixe = $public . Chiffrement::chiffrer($jeton, SpipCles::secret_du_site());
 		sql_updateq('spip_auteurs', ['cookie_oubli' => $jeton_chiffre_prefixe], 'id_auteur=' . intval($id_auteur));
 	} while (sql_countsel('spip_auteurs', 'cookie_oubli=' . sql_quote($jeton_chiffre_prefixe, '', 'string')) > 1);
 
@@ -367,7 +371,7 @@ function auteur_attribuer_jeton($id_auteur): string {
 }
 
 /**
- * Lire un jeton temporaire d’un auteur
+ * Lire un jeton temporaire d’un auteur (peut le créer au besoin)
  * 
  * Cette fonction peut être pratique si plusieurs notifications proches
  * dans la durée sont envoyées au même auteur.
@@ -382,7 +386,7 @@ function auteur_lire_jeton(int $id_auteur, bool $autoInit = false): ?string {
 	if ($jeton_chiffre_prefixe) {
 		include_spip('inc/chiffrer');
 		$jeton_chiffre = substr($jeton_chiffre_prefixe, 8);
-		$jeton = \Spip\Chiffrer\Chiffrement::dechiffrer($jeton_chiffre);
+		$jeton = Chiffrement::dechiffrer($jeton_chiffre, SpipCles::secret_du_site());
 		if ($jeton) {
 			return $jeton;
 		}
@@ -409,10 +413,11 @@ function auteur_verifier_jeton($jeton) {
 	include_spip('inc/chiffrer');
 	$public = substr($jeton, 0, 8);
 
+	// Les auteurs qui ont un jetons ressemblant
 	$auteurs = sql_allfetsel('*', 'spip_auteurs', 'cookie_oubli LIKE ' . sql_quote($public . '%'));
 	foreach ($auteurs as $auteur) {
 		$jeton_chiffre = substr($auteur['cookie_oubli'], 8);
-		$_jeton = \Spip\Chiffrer\Chiffrement::dechiffrer($jeton_chiffre);
+		$_jeton = Chiffrement::dechiffrer($jeton_chiffre, SpipCles::secret_du_site());
 		if ($_jeton and hash_equals($jeton, $_jeton)) {
 			return $auteur;
 		}
