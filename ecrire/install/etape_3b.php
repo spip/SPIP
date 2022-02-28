@@ -98,7 +98,7 @@ function install_etape_3b_dist() {
 			if (!$secret and !auth_spip_initialiser_secret()) {
 				$row = sql_fetsel('backup_cles, pass', 'spip_auteurs', 'id_auteur=' . intval($id_auteur));
 				if (empty($row['backup_cles']) or !$cles->restore($row['backup_cles'], $pass, $row['pass'], $id_auteur)) {
-					$echec = _L('L\'installation doit être faite par un webmestre avec un backup des cles et son mot de passe');
+					$echec = _T('avis_connexion_erreur_fichier_cle_manquant_1');
 					echouer_etape_3b($echec);
 				}
 				spip_log("Les cles secretes ont ete restaurées avec le backup du webmestre #$id_auteur", 'auth' . _LOG_INFO_IMPORTANTE);
@@ -114,14 +114,14 @@ function install_etape_3b_dist() {
 			// le passer webmestre separement du reste, au cas ou l'alter n'aurait pas fonctionne
 			@sql_updateq('spip_auteurs', ['webmestre' => 'oui'], "id_auteur=$id_auteur");
 			if (!auth_spip_modifier_pass($login, $pass, $id_auteur)) {
-				$echec = _L('Echec lors de l\'initialisation de l\'acces');
+				$echec = _T('avis_erreur_creation_compte');
 				echouer_etape_3b($echec);
 			}
 		} else {
 			// Si on a pas de cle et qu'on ne sait pas la creer, on ne peut pas creer de nouveau compte :
 			// il faut qu'un webmestre avec un backup fasse l'install
 			if (!$secret and !auth_spip_initialiser_secret()) {
-				$echec = _L('L\'installation doit être faite par un webmestre avec un backup des cles');
+				$echec = _T('avis_connexion_erreur_fichier_cle_manquant_2');
 				echouer_etape_3b($echec);
 			}
 
@@ -134,7 +134,7 @@ function install_etape_3b_dist() {
 			// le passer webmestre separrement du reste, au cas ou l'alter n'aurait pas fonctionne
 			@sql_updateq('spip_auteurs', ['webmestre' => 'oui'], "id_auteur=$id_auteur");
 			if (!auth_spip_modifier_pass($login, $pass, $id_auteur)) {
-				$echec = _L('Echec lors de l\'initialisation de l\'acces');
+				$echec = _T('avis_erreur_creation_compte');
 				echouer_etape_3b($echec);
 			}
 		}
