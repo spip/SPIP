@@ -43,6 +43,7 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 
 	$md5pass = '';
 	$shapass = $shanext = '';
+	$auteur_peut_sauver_cles = false;
 
 	if ($pass) {
 		$row = sql_fetsel(
@@ -55,6 +56,11 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 			'',
 			$serveur
 		);
+
+		// lever un flag si cet auteur peut sauver les cles
+		if ($row['statut'] === '0minirezo' and $row['webmestre'] === 'oui' and isset($row['backup_cles'])) {
+			$auteur_peut_sauver_cles = true;
+		}
 	}
 
 	// login inexistant ou mot de passe vide
@@ -65,13 +71,6 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 	include_spip('inc/chiffrer');
 	$cles = SpipCles::instance();
 	$secret = $cles->getSecretAuth();
-
-	// Créer la clé si besoin (en verifiant la presence ou non d'un backup chez un webmestre)
-	if (!$secret) {
-		if (auth_spip_initialiser_secret()) {
-			$secret = $cles->getSecretAuth();
-		}
-	}
 
 	switch (strlen($row['pass'])) {
 		case 32:
@@ -96,7 +95,7 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 			// doit-on restaurer un backup des cles ?
 			if (
 				!$secret
-				and $row['webmestre'] === 'oui'
+				and $auteur_peut_sauver_cles
 				and !empty($row['backup_cles'])
 			) {
 				if ($cles->restore($row['backup_cles'], $pass, $row['pass'], $row['id_auteur'])) {
@@ -108,10 +107,21 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 					sql_updateq('spip_auteurs', ['backup_cles' => ''], 'id_auteur=' . intval($row['id_auteur']));
 				}
 			}
-			if (!Password::verifier($pass, $row['pass'], $secret)) {
+
+			if (!$secret or !Password::verifier($pass, $row['pass'], $secret)) {
 				unset($row);
 			}
 			break;
+	}
+
+	// Migration depuis ancienne version : si on a pas encore de cle
+	// ET si c'est le login d'un auteur qui peut sauver la cle
+	// créer la clé (en s'assurant bien que personne n'a de backup d'un precedent fichier cle.php)
+	// si c'est un auteur normal, on ne fait rien, il garde son ancien pass hashé en sha256 en attendant le login d'un webmestre
+	if (!$secret and $auteur_peut_sauver_cles) {
+		if (auth_spip_initialiser_secret()) {
+			$secret = $cles->getSecretAuth();
+		}
 	}
 
 	// login/mot de passe incorrect
@@ -130,8 +140,8 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 				'alea_futur' => sql_quote(creer_uniqid(), $serveur, 'text'), // @deprecated 4.1
 				'pass' => sql_quote($pass_hash_next, $serveur, 'text'),
 			];
-			// a chaque login de webmestre : sauvegarde chiffree des clé du site (avec les pass du webmestre)
-			if ($row['statut'] === '0minirezo' and $row['webmestre'] === 'oui' and isset($row['backup_cles'])) {
+			// a chaque login de webmestre : sauvegarde chiffree des clés du site (avec les pass du webmestre)
+			if ($auteur_peut_sauver_cles) {
 				$set['backup_cles'] = sql_quote($cles->backup($pass), $serveur, 'text');
 			}
 
