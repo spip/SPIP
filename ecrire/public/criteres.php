@@ -2630,9 +2630,7 @@ function calculer_critere_infixe_date($idb, &$boucles, $col) {
 		}
 		
 		$pred = $date_orig;
-	}
-	// Sinon il FAUT avoir déclaré le champ date officiel dans l'API objet
-	else {
+	}	else { // Sinon il FAUT avoir déclaré le champ date officiel dans l'API objet
 		// Si aucune déclaration trouvée, on quitte
 		if (!$table['date'] && !isset($GLOBALS['table_date'][$table['id_table']])) {
 			return '';
