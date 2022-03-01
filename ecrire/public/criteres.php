@@ -2616,23 +2616,29 @@ function calculer_critere_infixe_date($idb, &$boucles, $col) {
 		return '';
 	}
 
-	if (!$table['date'] && !isset($GLOBALS['table_date'][$table['id_table']])) {
-		return '';
-	}
-	$pred = $date_orig = $GLOBALS['table_date'][$table['id_table']] ?? $table['date'];
-
+	// Le type de critère à prendre en compte
 	$col = $regs[1];
+	
+	// Si on trouve un nom de champ date précis, on l'utilise, pas besoin de déclaration dans l'API objet
 	if (isset($regs[3]) and $suite = $regs[3]) {
 		# Recherche de l'existence du champ date_xxxx,
 		# si oui choisir ce champ, sinon choisir xxxx
-
 		if (isset($table['field']["date$suite"])) {
 			$date_orig = 'date' . $suite;
 		} else {
 			$date_orig = substr($suite, 1);
 		}
+		
 		$pred = $date_orig;
-	} else {
+	}	else { // Sinon il FAUT avoir déclaré le champ date officiel dans l'API objet
+		// Si aucune déclaration trouvée, on quitte
+		if (!$table['date'] && !isset($GLOBALS['table_date'][$table['id_table']])) {
+			return '';
+		}
+		// Par défaut, on prend le champ date déclaré dans l'API
+		$pred = $date_orig = $GLOBALS['table_date'][$table['id_table']] ?? $table['date'];
+		
+		// Si c'est pour du relatif
 		if (isset($regs[2]) and $rel = $regs[2]) {
 			$pred = 'date';
 		}
