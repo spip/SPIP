@@ -346,7 +346,7 @@ function confirmer_statut_inscription($auteur) {
 
 /**
  * Attribuer un jeton temporaire pour un auteur en assurant l'unicite du jeton.
- * 
+ *
  * Chaque appel crée un nouveau jeton pour l’auteur
  * et invalide donc le précédent
  *
@@ -356,11 +356,11 @@ function confirmer_statut_inscription($auteur) {
 function auteur_attribuer_jeton($id_auteur): string {
 	include_spip('base/abstract_sql');
 	include_spip('inc/acces');
-	include_spip('inc/chiffrer');
+
 	// s'assurer de l'unicite du jeton pour le couple (email,cookie)
 	do {
-		// Un morceau du jeton est lisible en bdd pour éviter de devoir déchiffrer 
-		// tous les jetons connus pour vérifier le jeton d’un auteur. 
+		// Un morceau du jeton est lisible en bdd pour éviter de devoir déchiffrer
+		// tous les jetons connus pour vérifier le jeton d’un auteur.
 		$public = substr(creer_uniqid(), 0, 7) . '.';
 		$jeton = $public . creer_uniqid();
 		$jeton_chiffre_prefixe = $public . Chiffrement::chiffrer($jeton, SpipCles::secret_du_site());
@@ -372,10 +372,10 @@ function auteur_attribuer_jeton($id_auteur): string {
 
 /**
  * Lire un jeton temporaire d’un auteur (peut le créer au besoin)
- * 
+ *
  * Cette fonction peut être pratique si plusieurs notifications proches
  * dans la durée sont envoyées au même auteur.
- * 
+ *
  * @param int $id_auteur
  * @param bool $autoInit Attribue un jeton à l’auteur s’il n’en a pas déjà.
  * @return string|null
@@ -384,7 +384,6 @@ function auteur_lire_jeton(int $id_auteur, bool $autoInit = false): ?string {
 	include_spip('base/abstract_sql');
 	$jeton_chiffre_prefixe = sql_getfetsel('cookie_oubli', 'spip_auteurs', 'id_auteur=' . $id_auteur);
 	if ($jeton_chiffre_prefixe) {
-		include_spip('inc/chiffrer');
 		$jeton_chiffre = substr($jeton_chiffre_prefixe, 8);
 		$jeton = Chiffrement::dechiffrer($jeton_chiffre, SpipCles::secret_du_site());
 		if ($jeton) {
@@ -410,7 +409,6 @@ function auteur_verifier_jeton($jeton) {
 	}
 
 	include_spip('base/abstract_sql');
-	include_spip('inc/chiffrer');
 	$public = substr($jeton, 0, 8);
 
 	// Les auteurs qui ont un jetons ressemblant

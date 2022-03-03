@@ -296,12 +296,11 @@ function verifier_action_auteur($action, $hash) {
 
 /**
  * Renvoyer le secret du site (le generer si il n'existe pas encore)
- * 
+ *
  * @uses SpipCles::secret_du_site()
  * @return string
  */
 function secret_du_site() {
-	include_spip('inc/chiffrer');
 	return SpipCles::secret_du_site();
 }
 
