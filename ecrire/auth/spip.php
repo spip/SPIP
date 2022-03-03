@@ -68,7 +68,6 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 		return [];
 	}
 
-	include_spip('inc/chiffrer');
 	$cles = SpipCles::instance();
 	$secret = $cles->getSecretAuth();
 
@@ -180,7 +179,6 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
  * @return bool
  */
 function auth_spip_initialiser_secret(bool $force = false): bool {
-	include_spip('inc/chiffrer');
 	$cles = SpipCles::instance();
 	$secret = $cles->getSecretAuth();
 
@@ -437,7 +435,6 @@ function auth_spip_modifier_pass($login, $new_pass, $id_auteur, $serveur = '') {
 		return false;
 	}
 
-	include_spip('inc/chiffrer');
 	$cles = SpipCles::instance();
 	$secret = $cles->getSecretAuth();
 	if (!$secret) {

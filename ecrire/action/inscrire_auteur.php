@@ -356,7 +356,7 @@ function confirmer_statut_inscription($auteur) {
 function auteur_attribuer_jeton($id_auteur): string {
 	include_spip('base/abstract_sql');
 	include_spip('inc/acces');
-	include_spip('inc/chiffrer');
+
 	// s'assurer de l'unicite du jeton pour le couple (email,cookie)
 	do {
 		// Un morceau du jeton est lisible en bdd pour éviter de devoir déchiffrer
@@ -384,7 +384,6 @@ function auteur_lire_jeton(int $id_auteur, bool $autoInit = false): ?string {
 	include_spip('base/abstract_sql');
 	$jeton_chiffre_prefixe = sql_getfetsel('cookie_oubli', 'spip_auteurs', 'id_auteur=' . $id_auteur);
 	if ($jeton_chiffre_prefixe) {
-		include_spip('inc/chiffrer');
 		$jeton_chiffre = substr($jeton_chiffre_prefixe, 8);
 		$jeton = Chiffrement::dechiffrer($jeton_chiffre, SpipCles::secret_du_site());
 		if ($jeton) {
@@ -410,7 +409,6 @@ function auteur_verifier_jeton($jeton) {
 	}
 
 	include_spip('base/abstract_sql');
-	include_spip('inc/chiffrer');
 	$public = substr($jeton, 0, 8);
 
 	// Les auteurs qui ont un jetons ressemblant
