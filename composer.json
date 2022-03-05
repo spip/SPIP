@@ -2,7 +2,8 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "ext-xml": "*",
-        "ext-zip": "*"
+        "ext-zip": "*",
+        "ext-sodium": "*"
     },
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",

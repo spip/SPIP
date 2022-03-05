@@ -173,7 +173,7 @@ function tester_compatibilite_hebergement() {
 		$err[] = _T('install_php_version_max', ['version' => $p, 'maximum' => _PHP_MAX]);
 	}
 
-	$diff = array_diff(['xml', 'zip'], get_loaded_extensions());
+	$diff = array_diff(['sodium', 'xml', 'zip'], get_loaded_extensions());
 	if (!empty($diff)) {
 		$err[] = _T('install_php_extension', ['extensions' => implode(',', $diff)]);
 	}
