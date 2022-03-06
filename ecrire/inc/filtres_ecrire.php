@@ -593,7 +593,13 @@ function lister_objets_lies($objet_source, $objet, $id_objet, $objet_lien) {
 		asort($l);
 		$l = array_keys($l);
 	} else {
-		$l = array_column($res, $objet_source);
+		// Si les liens qu'on cherche sont ceux de la table de lien, l'info est dans la clé de l'objet
+		if ($objet_source == $objet_lien) {
+			$l = array_column($res, id_table_objet($objet_source));
+		// Sinon c'est dans "id_objet" 
+		} else {
+			$l = array_column($res, 'id_objet');
+		}
 	}
 	return $l;
 }
