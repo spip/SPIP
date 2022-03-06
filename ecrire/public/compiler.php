@@ -451,7 +451,7 @@ define('CODE_CORPS_BOUCLE', '%s
 	if (defined("_BOUCLE_PROFILER")) $timer = time()+(float)microtime();
 	$t0 = "";
 	// REQUETE
-	$iter = IterFactory::create(
+	$iter = Spip\\Core\\Iterateur\\Factory::create(
 		"%s",
 		%s,
 		array(%s)
@@ -465,8 +465,7 @@ define('CODE_CORPS_BOUCLE', '%s
 	if (defined("_BOUCLE_PROFILER")
 	AND 1000*($timer = (time()+(float)microtime())-$timer) > _BOUCLE_PROFILER)
 		spip_log(intval(1000*$timer)."ms %s","profiler"._LOG_AVERTISSEMENT);
-	return $t0;'
-);
+	return $t0;');
 
 /**
  * Compilation d'une boucle (non recursive).
