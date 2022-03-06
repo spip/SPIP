@@ -45,15 +45,10 @@ function iterateur_php_dist($b, $iteratorName) {
 			'valeur' => 'STRING',
 		]
 	];
+
 	foreach (get_class_methods($iteratorName) as $method) {
 		$b->show['field'][strtolower($method)] = 'METHOD';
 	}
-
-	/*
-	foreach (get_class_vars($iteratorName) as $property) {
-		$b->show['field'][ strtolower($property) ] = 'PROPERTY';
-	}
-	*/
 
 	return $b;
 }
