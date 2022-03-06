@@ -46,49 +46,9 @@ parameters:
 			path: ecrire/inc/utils.php
 
 		-
-			message: "#^Class IterateurDATA referenced with incorrect case\\: IterateurData\\.$#"
-			count: 1
-			path: ecrire/iterateur/condition.php
-
-		-
-			message: "#^Access to an undefined property IterateurDATA\\:\\:\\$command\\.$#"
-			count: 32
-			path: ecrire/iterateur/data.php
-
-		-
-			message: "#^Access to an undefined property IterateurDATA\\:\\:\\$info\\.$#"
-			count: 1
-			path: ecrire/iterateur/data.php
-
-		-
-			message: "#^Access to an undefined property IterateurDATA\\:\\:\\$type\\.$#"
-			count: 1
-			path: ecrire/iterateur/data.php
-
-		-
 			message: "#^Function analyser_backend not found\\.$#"
 			count: 1
 			path: ecrire/iterateur/data.php
-
-		-
-			message: "#^Access to an undefined property IterateurSQL\\:\\:\\$command\\.$#"
-			count: 7
-			path: ecrire/iterateur/sql.php
-
-		-
-			message: "#^Access to an undefined property IterateurSQL\\:\\:\\$info\\.$#"
-			count: 2
-			path: ecrire/iterateur/sql.php
-
-		-
-			message: "#^Access to an undefined property IterateurSQL\\:\\:\\$pos\\.$#"
-			count: 7
-			path: ecrire/iterateur/sql.php
-
-		-
-			message: "#^Access to an undefined property IterateurSQL\\:\\:\\$type\\.$#"
-			count: 1
-			path: ecrire/iterateur/sql.php
 
 		-
 			message: "#^Function inclure_balise_dynamique\\(\\) should return string but return statement is missing\\.$#"
@@ -96,12 +56,12 @@ parameters:
 			path: ecrire/public/assembler.php
 
 		-
-			message: "#^Function balise_COMPTEUR_BOUCLE_dist\\(\\) should return Champ but return statement is missing\\.$#"
+			message: "#^Function balise_COMPTEUR_BOUCLE_dist\\(\\) should return Spip\\\\Core\\\\Champ but return statement is missing\\.$#"
 			count: 1
 			path: ecrire/public/balises.php
 
 		-
-			message: "#^Function balise_FILTRE_dist\\(\\) should return Champ but return statement is missing\\.$#"
+			message: "#^Function balise_FILTRE_dist\\(\\) should return Spip\\\\Core\\\\Champ but return statement is missing\\.$#"
 			count: 1
 			path: ecrire/public/balises.php
 
