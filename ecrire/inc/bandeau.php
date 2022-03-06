@@ -10,6 +10,8 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+use Spip\Admin\Bouton;
+
 /**
  * Ce fichier gère le bandeau supérieur de l'espace privé
  *
