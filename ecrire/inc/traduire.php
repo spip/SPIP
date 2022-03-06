@@ -10,6 +10,8 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+use Spip\I18n\Description;
+
 /**
  * Outils pour la traduction et recherche de traductions
  *
@@ -202,24 +204,6 @@ function surcharger_langue($fichiers) {
 	}
 }
 
-
-
-class SPIP_Traductions_Description {
-	/** @var string code de langue (hors module) */
-	public $code;
-	/** @var string nom du module de langue */
-	public $module;
-	/** @var string langue de la traduction */
-	public $langue;
-	/** @var string traduction */
-	public $texte;
-	/** @var string var mode particulier appliqué ? */
-	public $mode;
-	/** @var bool Corrections des textes appliqué ? */
-	public $corrections = false;
-}
-
-
 /**
  * Traduire une chaine internationalisée
  *
@@ -253,9 +237,9 @@ class SPIP_Traductions_Description {
  * @param bool $raw
  *     - false : retourne le texte (par défaut)
  *     - true  : retourne une description de la chaine de langue (module, texte, langue)
- * @return string|SPIP_Traductions_Description
+ * @return string|Description
  *     - string : Traduction demandée. Chaîne vide si aucune traduction trouvée.
- *     - SPIP_Traductions_Description : traduction et description (texte, module, langue)
+ *     - Description : traduction et description (texte, module, langue)
  **/
 function inc_traduire_dist($ori, $lang, $raw = false) {
 	static $deja_vu = [];
@@ -276,7 +260,7 @@ function inc_traduire_dist($ori, $lang, $raw = false) {
 		$ori_complet = implode('|', $modules) . ':' . $ori;
 	}
 
-	$desc = new SPIP_Traductions_Description();
+	$desc = new Description();
 
 	// parcourir tous les modules jusqu'a ce qu'on trouve
 	foreach ($modules as $module) {
@@ -357,9 +341,9 @@ function inc_traduire_dist($ori, $lang, $raw = false) {
  * Modifie le texte de traduction pour indiquer des éléments
  * servant au debug de celles-ci. (pour var_mode=traduction)
  *
- * @param SPIP_Traductions_Description $desc
+ * @param Description $desc
  * @param string $modules Les modules qui étaient demandés
- * @return SPIP_Traductions_Description
+ * @return Description
  */
 function definir_details_traduction($desc, $modules) {
 	if (!$desc->mode and $desc->texte) {
