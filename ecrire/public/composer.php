@@ -28,7 +28,6 @@ include_spip('inc/rubriques'); # pour calcul_branche (cf critere branche)
 include_spip('inc/acces'); // Gestion des acces pour ical
 include_spip('inc/actions');
 include_spip('public/fonctions');
-include_spip('public/iterateur');
 include_spip('public/interfaces');
 include_spip('public/quete');
 
