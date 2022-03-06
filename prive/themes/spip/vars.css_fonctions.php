@@ -1,36 +1,14 @@
 <?php
 
-/**
- * Collection de variables CSS
- * @internal
- */
-class Spip_Css_Vars_Collection {
-	private array $vars = [];
-
-	public function add(string $var, string $value) {
-		$this->vars[$var] = $value;
-	}
-
-	public function getString(): string {
-		$string = '';
-		foreach ($this->vars as $key => $value) {
-			$string .= "$key: $value;\n";
-		}
-		return $string;
-	}
-
-	public function __toString(): string {
-		return $this->getString();
-	}
-}
+use Spip\Css\Vars\Collection;
 
 /**
  * Génère les variables CSS relatif à la typo et langue pour l'espace privé
  *
  * @param Pile $pile Pile
  */
-function spip_generer_variables_css_typo(array $Pile): \Spip_Css_Vars_Collection {
-	$vars = new \Spip_Css_Vars_Collection();
+function spip_generer_variables_css_typo(array $Pile): Collection {
+	$vars = new Collection();
 
 	// Direction
 	$vars->add('--spip-dir', $Pile[0]['dir']);
@@ -90,8 +68,8 @@ function spip_generer_variables_css_typo(array $Pile): \Spip_Css_Vars_Collection
  *
  * @param string $couleur Couleur hex
  */
-function spip_generer_variables_css_couleurs_theme(string $couleur): \Spip_Css_Vars_Collection {
-	$vars = new \Spip_Css_Vars_Collection();
+function spip_generer_variables_css_couleurs_theme(string $couleur): Collection {
+	$vars = new Collection();
 
 	#$vars->add('--spip-color-theme--hsl', couleur_hex_to_hsl($couleur, 'h, s, l')); // redéfini ensuite
 	$vars->add('--spip-color-theme--h', couleur_hex_to_hsl($couleur, 'h'));
@@ -119,8 +97,8 @@ function spip_generer_variables_css_couleurs_theme(string $couleur): \Spip_Css_V
 /**
  * Génère les variables CSS de couleurs, dont celles dépendantes des couleurs du thème actif.
  */
-function spip_generer_variables_css_couleurs(): \Spip_Css_Vars_Collection {
-	$vars = new \Spip_Css_Vars_Collection();
+function spip_generer_variables_css_couleurs(): Collection {
+	$vars = new Collection();
 
 	// nos déclinaisons de couleur (basées sur le dégradé précedent, où 60 est là couleur du thème)
 	$vars->add('--spip-color-theme-white--hsl', 'var(--spip-color-theme--100)');
