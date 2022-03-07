@@ -786,7 +786,7 @@ function autoriser_article_modifier_dist(string $faire, string $type, $id, array
 		(
 			autoriser('publierdans', 'rubrique', $r['id_rubrique'], $qui, $opt)
 			or (
-				(!isset($opt['statut']) or $opt['statut'] !== 'publie')
+				(!isset($opt['statut']) or !in_array($opt['statut'], ['publie', 'refuse'], true))
 				and in_array($qui['statut'], ['0minirezo', '1comite'])
 				and in_array($r['statut'], ['prop', 'prepa', 'poubelle'])
 				and auteurs_objet('article', $id, 'id_auteur=' . $qui['id_auteur'])
