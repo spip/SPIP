@@ -46,7 +46,7 @@ function enfant_rub($collection, $debut = 0, $limite = 500) {
 		'id_parent=' . intval($collection),
 		'',
 		'0+titre,titre',
-		"$debut,$limite"
+		$debut == -1 ? '' : "$debut,$limite"
 	);
 	while ($row = sql_fetch($result)) {
 		$id_rubrique = $row['id_rubrique'];
@@ -147,7 +147,7 @@ function sous_enfant_rub($collection2) {
 		'id_parent=' . intval($collection2),
 		'',
 		'0+titre,titre',
-		"$debut,$limite"
+		$debut == -1 ? '' : "$debut,$limite"
 	);
 
 	while ($row = sql_fetch($result)) {
