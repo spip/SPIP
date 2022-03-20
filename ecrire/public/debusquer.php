@@ -235,8 +235,8 @@ function debusquer_contexte($env) {
 		} elseif (is_string($valeur)) {
 			$valeur = "'" . $valeur . "'";
 		}
-		$res .= "\n<tr><td><strong>" . nl2br(entites_html($nom))
-			. '</strong></td><td>:&nbsp;' . nl2br(entites_html($valeur))
+		$res .= "\n<tr><td><strong>" . nl2br((string) entites_html($nom))
+			. '</strong></td><td>:&nbsp;' . nl2br((string) entites_html($valeur))
 			. "</td></tr>\n";
 	}
 
