@@ -62,8 +62,10 @@ defined('_DEBUG_MAX_SQUELETTE_ERREURS') || define('_DEBUG_MAX_SQUELETTE_ERREURS'
  *     Options pour debug ou tests unitaires
  *     - 'erreurs' = 'get' : Retourne le tableau des erreurs
  *     - 'erreurs' = 'reset' : Efface le tableau des erreurs
- * @return null|string
+ * @return null|string|array|true|void
  *     - string si $message à false.
+ *     - array si $opt 'erreurs' = 'get'
+ *     - true si $opt 'erreurs' = 'reset'
  **/
 function public_debusquer_dist($message = '', $lieu = '', $opt = []) {
 	static $tableau_des_erreurs = [];
