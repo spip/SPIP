@@ -6,7 +6,7 @@ jQuery.spip.log = function(){
 
 /**
  * Test si on est dans l'admin de SPIP
- * 
+ *
  * @return bool
  *   Retourne true si on est dans l'admin, false sinon
  */
@@ -14,7 +14,7 @@ jQuery.spip.test_espace_prive = function () {
 	if (typeof spipConfig.core.test_espace_prive != undefined && spipConfig.core.test_espace_prive) {
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -29,7 +29,7 @@ if(!jQuery.spip.load_handlers) {
 	 *
 	 * most of time function f is applied on the loaded data
 	 * if not known, the whole document is targetted
-	 * 
+	 *
 	 * @param function f
 	 */
 	function onAjaxLoad(f) {
@@ -964,6 +964,20 @@ jQuery.fn.animateAppend = function(callback){
 	return this; // don't break the chain
 }
 
+jQuery.fn.disableSubmitAfterClick = function(){
+	if (this.length){
+		jQuery('button[type="submit"]',this).on('click', function(){
+			jQuery(this)
+				.attr('disabled','disabled')
+				.addClass('disabled processing')
+				.closest('form')
+				.addClass('processing');
+		})
+	}
+	return this;
+}
+
+
 /**
  * Equivalent js de parametre_url php de spip
  *
@@ -1112,6 +1126,7 @@ if (!window.var_zajax_content)
 jQuery(function() {
 	jQuery('form:not(.bouton_action_post)').parents('div.ajax')
 	.formulaire_dyn_ajax();
+	jQuery('form.bouton_action_post').disableSubmitAfterClick();
 	jQuery('div.ajaxbloc').ajaxbloc();
 	jQuery("input[placeholder]:text").placeholderLabel();
 	jQuery('.spip_logo_survol').hover(spip_logo_survol_hover, spip_logo_survol_out);
@@ -1123,6 +1138,7 @@ onAjaxLoad(function() {
 	if (jQuery){
 		jQuery('form:not(.bouton_action_post)', this).parents('div.ajax')
 			.formulaire_dyn_ajax();
+		jQuery('form.bouton_action_post').disableSubmitAfterClick();
 		if (jQuery(this).is('div.ajaxbloc'))
 			jQuery(this).ajaxbloc();
 		else if (jQuery(this).closest('div.ajaxbloc').length)

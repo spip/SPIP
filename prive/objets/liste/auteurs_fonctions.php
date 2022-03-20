@@ -47,7 +47,7 @@ function critere_compteur_articles_filtres_dist($idb, &$boucles, $crit, $left = 
 		"'LAA'",
 		"'id_article'",
 		"'id_objet'",
-		"'(articles.statut IS NULL OR '.sql_in('articles.statut',_q($_statut)$not).')'"
+		"'(articles.statut IS NULL OR '.sql_in_quote('articles.statut',[$_statut]$not).')'"
 	];
 
 	$boucle->select[] = 'COUNT(articles.id_article) AS compteur_articles';
