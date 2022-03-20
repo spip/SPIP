@@ -531,20 +531,21 @@
 }
 
 /* Auteurs
-   Nb : pour les auteurs, logo en background du <a>, pour les visiteurs c'est une <img> */
+   Nb : pour les auteurs et visiteurs, logo en background du <a> */
 .liste-objets.auteurs td.logo,
 .liste-objets.visiteurs td.logo {
 	width: var(--spip-list-logo-size);
 	padding: calc(var(--spip-list-spacing-y) / 4) calc(var(--spip-list-spacing-x) / 2);
 }
 .liste-objets.auteurs td.logo a,
-.liste-objets.visiteurs td.logo img {
+.liste-objets.visiteurs td.logo a {
 	width: var(--spip-list-logo-size);
 	height: var(--spip-list-logo-size);
 	display: block;
 	border-radius: 50%;
 }
-.liste-objets.auteurs td.logo a {
+.liste-objets.auteurs td.logo a,
+.liste-objets.visiteurs td.logo a {
 	background-position: center center;
 	background-size: cover;
 }

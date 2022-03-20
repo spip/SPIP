@@ -3528,7 +3528,6 @@ function http_img_variante_svg_si_possible($img_file) {
  *   utiliser_suffixe_size : utiliser ou non le suffixe de taille dans le nom de fichier de l'image
  *   sous forme -xx.png (pour les icones essentiellement) (oui par defaut)
  *   variante_svg_si_possible: utiliser l'image -xx.svg au lieu de -32.png par exemple (si la variante svg est disponible)
- *   alternative: icone alternative à utiliser si l'icone demandée n'existe pas
  * @return string
  */
 function http_img_pack($img, $alt, $atts = '', $title = '', $options = []) {
@@ -3567,9 +3566,6 @@ function http_img_pack($img, $alt, $atts = '', $title = '', $options = []) {
 
 	if (file_exists($img_file)) {
 		$img_file = timestamp($img_file);
-	} elseif ($alternative = $options['alternative'] ?? '') {
-		unset($options['alternative']);
-		return http_img_pack($alternative, $alt, $atts, $title, $options);
 	}
 	if ($alt === false) {
 		$alt = '';
@@ -3592,19 +3588,14 @@ function http_img_pack($img, $alt, $atts = '', $title = '', $options = []) {
  * @param string $img
  * @param string $att
  * @param string $size
- * @param string $alternative
  * @return string
  */
-function http_style_background($img, $att = '', $size = null, $alternative = '') {
+function http_style_background($img, $att = '', $size = null) {
 	if ($size and is_numeric($size)) {
 		$size = trim($size) . 'px';
 	}
-
-	if (!$img = chemin_image($img)) {
-		$img = chemin_image($alternative);
-	}
 	return " style='background" .
-		($att ? '' : '-image') . ': url("' . $img . '")' . ($att ? (' ' . $att) : '') . ';'
+		($att ? '' : '-image') . ': url("' . chemin_image($img) . '")' . ($att ? (' ' . $att) : '') . ';'
 		. ($size ? "background-size:{$size};" : '')
 		. "'";
 }
@@ -4432,7 +4423,7 @@ function prepare_icone_base($type, $lien, $texte, $fond, $fonction = '', $class 
 	$class_bouton .= " s$size";
 
 	// Icône
-	$icone = http_img_pack($fond, $alt, "width='$size' height='$size'", '', ['alternative' => "objet-generique-$size.png"]);
+	$icone = http_img_pack($fond, $alt, "width='$size' height='$size'");
 	$icone = '<span class="icone-image' . ($fonction ? " icone-fonction icone-fonction-$fonction" : '') . "\">$icone</span>";
 
 	// Markup final
