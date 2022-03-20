@@ -112,19 +112,6 @@ function public_debusquer_dist($message = '', $lieu = '', $opt = []) {
 	include_spip('inc/headers');
 	include_spip('inc/filtres');
 
-	// en cas de squelette inclus,  virer le code de l'incluant:
-	// - il contient souvent une Div restreignant la largeur a 3 fois rien
-	// - ca fait 2 headers !
-	// sauf si l'on se trouve deja dans un flux compresse (plugin compresseur
-	// actif par exemple)
-	if (
-		ob_get_length()
-		and
-		!in_array('ob_gzhandler', ob_get_status())
-	) {
-		ob_end_clean();
-	}
-
 	lang_select($GLOBALS['visiteur_session']['lang']);
 	$fonc = _request('var_mode_objet');
 	$mode = _request('var_mode_affiche');
