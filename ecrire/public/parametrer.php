@@ -59,7 +59,7 @@ function public_parametrer_dist($fond, $contexte = '', $cache = '', string $conn
 		// sauver le nom de l'eventuel squelette en cours d'execution
 		// (recursion possible a cause des modeles)
 		if ($debug) {
-			$courant = @$GLOBALS['debug_objets']['courant'];
+			$courant = $GLOBALS['debug_objets']['courant'] ?? null;
 			$GLOBALS['debug_objets']['contexte'][$sourcefile] = $contexte;
 		}
 
