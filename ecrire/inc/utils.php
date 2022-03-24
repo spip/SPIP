@@ -3125,9 +3125,14 @@ function init_var_mode() {
 	}
 }
 
-// Annuler les magic quotes \' sur GET POST COOKIE et GLOBALS ;
-// supprimer aussi les eventuels caracteres nuls %00, qui peuvent tromper
-// la commande is_readable('chemin/vers/fichier/interdit%00truc_normal')
+/**
+ * Supprimer les éventuels caracteres nuls %00, qui peuvent tromper
+ * la commande is_readable('chemin/vers/fichier/interdit%00truc_normal').
+ *
+ * Cette fonction est appliquée par SPIP à son initialisation sur GET/POST/COOKIES/GLOBALS
+ * @param array $t le tableau ou la chaine à desinfecter (passage par référence)
+ * @param bool $deep = true : appliquer récursivement
+**/
 function spip_desinfecte(&$t, $deep = true) {
 	foreach ($t as $key => $val) {
 		if (is_string($t[$key])) {
@@ -3141,13 +3146,16 @@ function spip_desinfecte(&$t, $deep = true) {
 	}
 }
 
-//  retourne le statut du visiteur s'il s'annonce
-
+/**
+ * Retourne le statut du visiteur s'il s'annonce.
+ *
+ * Pour que cette fonction marche depuis mes_options,
+ * il faut forcer l'init si ce n'est fait
+ * mais on risque de perturber des plugins en initialisant trop tot
+ * certaines constantes.
+ * @return string|0|false
+**/
 function verifier_visiteur() {
-	// Rq: pour que cette fonction marche depuis mes_options
-	// il faut forcer l'init si ce n'est fait
-	// mais on risque de perturber des plugins en initialisant trop tot
-	// certaines constantes
 	@spip_initialisation_core(
 		(_DIR_RACINE . _NOM_PERMANENTS_INACCESSIBLES),
 		(_DIR_RACINE . _NOM_PERMANENTS_ACCESSIBLES),
