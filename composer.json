@@ -54,7 +54,12 @@
             "dealerdirect/phpcodesniffer-composer-installer": true
         },
         "platform": {
-            "php": "7.4.27"
+            "php": "7.4.28"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "4.2.x-dev"
         }
     }
 }
