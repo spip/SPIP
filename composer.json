@@ -5,14 +5,14 @@
         "ext-sodium": "*",
         "ext-xml": "*",
         "ext-zip": "*",
-        "symfony/polyfill-mbstring": "^1.24",
-        "symfony/polyfill-php80": "^1.24",
-        "symfony/polyfill-php81": "^1.24",
+        "symfony/polyfill-mbstring": "^1.26",
+        "symfony/polyfill-php80": "^1.26",
+        "symfony/polyfill-php81": "^1.26",
         "algo26-matthias/idna-convert": "^3.0"
     },
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
-        "phpstan/phpstan": "^1.4",
+        "phpstan/phpstan": "^1.7",
         "spip/coding-standards": "^1.2"
     },
     "suggest": {
@@ -54,7 +54,12 @@
             "dealerdirect/phpcodesniffer-composer-installer": true
         },
         "platform": {
-            "php": "7.4.27"
+            "php": "7.4.29"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "4.2.x-dev"
         }
     }
 }
