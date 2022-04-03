@@ -175,7 +175,8 @@ function objet_modifier_champs($objet, $id_objet, $options, $c = null, $serveur 
 
 
 	// marquer le fait que l'objet est travaille par toto a telle date
-	if ($GLOBALS['meta']['articles_modif'] != 'non') {
+	include_spip('inc/config');
+	if (lire_config('articles_modif', 'non') !== 'non') {
 		include_spip('inc/drapeau_edition');
 		signale_edition($id_objet, $GLOBALS['visiteur_session'], $objet);
 	}

@@ -279,13 +279,14 @@ function traduire_statut_auteur($statut, $attente = '') {
  * @param string $objet
  * @return string
  */
-function afficher_qui_edite($id_objet, $objet) {
+function afficher_qui_edite($id_objet, $objet): string {
 	static $qui = [];
 	if (isset($qui[$objet][$id_objet])) {
 		return $qui[$objet][$id_objet];
 	}
 
-	if ($GLOBALS['meta']['articles_modif'] == 'non') {
+	include_spip('inc/config');
+	if (lire_config('articles_modif', 'non') === 'non') {
 		return $qui[$objet][$id_objet] = '';
 	}
 
@@ -594,7 +595,7 @@ function lister_objets_lies($objet_source, $objet, $id_objet, $objet_lien) {
 		$l = array_keys($l);
 	} else {
 		// Si les liens qu'on cherche sont ceux de la table de lien, l'info est dans la clé de l'objet
-		// Sinon c'est dans "id_objet" 
+		// Sinon c'est dans "id_objet"
 		$l = array_column(
 			$res,
 			$objet_source == $objet_lien ? id_table_objet($objet_source) : 'id_objet'

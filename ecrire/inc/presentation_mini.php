@@ -106,9 +106,10 @@ function debut_droite() {
  * @return string
  *     Code HTML
  **/
-function liste_objets_bloques($exec, $contexte = [], $auteur = null) {
+function liste_objets_bloques($exec, $contexte = [], $auteur = null): string {
 	$res = '';
-	if ($GLOBALS['meta']['articles_modif'] != 'non') {
+	include_spip('inc/config');
+	if (lire_config('articles_modif', 'non') !== 'non') {
 		include_spip('inc/drapeau_edition');
 		if (is_null($auteur)) {
 			$auteur = $GLOBALS['visiteur_session'];
