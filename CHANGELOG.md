@@ -63,6 +63,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - #5064 Un fichier `config/cles.php` est généré
 - Répertoire `ecrire/src` (en prévision d’un autoloader)
 - Report des chaines de langues
+
 ### Changed
 
 - **Important** #5064 (Issues #5059 #4927 #3824 #2109) : changement de logique du login : plus de hashage + sel côté client, car les algos js sont pénibles à gérér et https est maintenant un standard de securité ;  côté serveur on utilise les fonctions modernes de PHP pour la gestion des mots de passe (sel, poivre, hashage et vérification) ; nécessite l’extension Sodium de PHP
@@ -89,6 +90,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 
 ## [4.1.0-beta] - 2022-02-18
+
+### Security
+
+- Bien appliquer l’autorisation dans `formulaires_editer_objet_charger()` (g0uz)
+
+### Added
+
+- Report des chaines de langues
+
+### Fixed
+
+- #5040 Utiliser une fonction `lire_fichier_langue()` pour charger un fichier de langue et vérifier qu’il est correct. On loge une erreur sinon.
+- Différents warnings, notices ou deprecated
+- Optimisations et nettoyages pour PHP 7.4+, dont remplacement des call_user_func et call_user_func_array par des `$func($param)` ou `$func(...$params)`
+- #5032 `ini_set()` peut être désactivé sur les hébergements web.
+
+### Removed
+
+- #5038 suppression de `signaler_conflits_edition()`, code mort depuis SPIP 3.0
 
 ## [4.1.0-alpha] - 2022-02-08
 
