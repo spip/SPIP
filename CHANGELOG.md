@@ -6,12 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ### Changed
 
-- #4881 suppression des globales flag_* et adaptation ou nettoyage en conséquence du code.
-- #5108 id_table_objet typé comme objet_type que la fonction appelle
+- #4881 suppression des globales `flag_*` et adaptation ou nettoyage en conséquence du code.
+- #5108 `id_table_objet()` typé comme `objet_type()` que la fonction appelle
 
 ### Fixed
 
-- #5115 éviter un warning lors de l'appel avec un tableau à produire_fond_statique
+- #5115 éviter un warning lors de l'appel avec un tableau à `produire_fond_statique()`
 
 
 ## [4.1.1] - 2022-04-01
@@ -26,7 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Fixed
 
 - #5109 bloquer l’accès aux fichiers de définition Composer (via le htaccess)
-- Coquille dans _SPIP_VERSION_ID Nous sommes en version 4.1 ici, pas 41…
+- Coquille dans `_SPIP_VERSION_ID` Nous sommes en version 4.1 ici, pas 41…
 - Éviter des deprecated (null sur str*) lors de l’utilisation de `#CHEMIN{#ENV{absent}}`
 
 
