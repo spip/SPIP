@@ -1219,8 +1219,8 @@ function _image_tag_changer_taille($tag, $width, $height, $style = false) {
 	// ca accelere le rendu du navigateur
 	// ca permet aux navigateurs de reserver la bonne taille
 	// quand on a desactive l'affichage des images.
-	$tag = inserer_attribut($tag, 'width', round($width));
-	$tag = inserer_attribut($tag, 'height', round($height));
+	$tag = inserer_attribut($tag, 'width', round(floatval($width)));
+	$tag = inserer_attribut($tag, 'height', round(floatval($height)));
 
 	// attributs deprecies. Transformer en CSS
 	if ($espace = extraire_attribut($tag, 'hspace')) {
