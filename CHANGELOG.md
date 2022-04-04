@@ -112,3 +112,82 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [4.1.0-alpha] - 2022-02-08
 
+### Added
+
+- Compatibilité PHP 8.1
+- Des traductions depuis trad.spip.net
+- #5018 Fonction `generer_url_api()` pour generer une url vers une action api
+- #5018 Action d’api transmettre à utiliser sous la forme `transmettre.api/id_auteur/cle/format/fond?...` pour remplacer le vieux `transmettre.html` et les flux RSS lowsec
+- #5018 Fonction `generer_url_api_low_sec()` pour faciliter la generation d'une url low_sec vers transmettre.api
+- #5018 Fonction `securiser_acces_low_sec()` (renommage de `securiser_acces()`)
+- #5018 Filtre `filtre_securiser_acces_dist()` (assure la retro-compatibilité des squelettes avec l’ancien nom de `securiser_acces_low_sec()`)
+- #5010 Filtre `header_silencieux()` pour masquer la version de SPIP si la globale `spip_header_silencieux` le demande
+- Une fonction `infos_image()` qui fait un peu plus que `taille_image()` en recupererant en meme temps le poids du fichier si possible (0 sinon), y compris en faisant une copie locale.
+- Un filtre `poids_image()` retourne le poids d’une image (en s’appuyant sur `infos_image()`).
+- #5000 Fonction `generer_objet_info()` (remplace `generer_info_entite()`) qui delegue maintenant à des fonctions `generer_objet_TRUC()` ou `generer_TYPE_TRUC()`
+- #5000 Fonction `generer_objet_lien()` (remplace `generer_lien_entite()`)
+- #5000 Fonction `generer_objet_introduction()` (remplace `generer_introduction_entite()`)
+- #5000 Fonction `generer_objet_url()` (remplace `generer_url_entite()`) et on en profite pour separer public et connect en 2 arguments distincts
+- #5000 Fonction `generer_objet_url_absolue()` (remplace `generer_url_entite_absolue()`)
+- #5000 Fonction `generer_objet_url_ecrire()` (remplace `generer_url_ecrire_objet()`)
+- #5000 Fonction `generer_objet_url_ecrire_edit()` (remplace `generer_url_ecrire_entite_edit()`)
+- spip/medias#4853 Fonction `corriger_extension()` déplacée du plugin medias vers `inc/documents` du core
+- #4974 Fonction `sql_table_exists()` pour vérifier qu’une table SQL existe…
+- #4953 #4939 Connaitre le contenu avant modification des objets dans les pipelines `pre_edition` et `post_edition` en transmettant une information `champs_anciens` en plus
+- Ajout de l’instruction `GREATEST` (de mysql) dans SQLite en la mappant sur `max()`.  L’instruction `LEAST` était déjà traité.
+
+### Changed
+
+- Nécessite PHP 7.4 minimum.
+- Nécessite les extensions PHP Phar, Zip et Zlib (dépendances du plugin Archiviste 2.1+)
+- #5019 Le filtre `alterner` peut recevoir un compteur negatif
+- Typage sur certains arguments et retours de fonctions (dont `autoriser()`, dont `$connect` en type string)
+- #5018 Déplacement des squelettes de prive/rss vers prive/transmettre/rss
+- #5000 #3311 Fonctions de calcul et décodage d’URL réimplémentées
+- Le composer.json (non utilisé encore en dehors du dev) indique la dépendance à PHP et ses extensions
+- Mise à jour de jQuery Forms en version 4.3.0
+- Mise à jour de JS Cookie passe en version 3.0.1
+- Mise à jour de jQuery.form.js en version 4.3.0
+- Mise à jour de Sortable.js en version 1.14.0
+
+### Fixed
+
+- Différents warnings et notices
+- Différents PHPDoc complétés
+- Différents nettoyages de code pour PHP 7.4+
+- PHP 8.1 : Nombreux deprecated (particulièrement avec `null` sur des fonctions de chaines de caractères)
+- PHP 8.1 : Capturer les exceptions mysqli
+- PHP 8.1 : Ne pas générer d’exception sur la boucle DATA avec du json si celui-ci est erronné.
+- PHP 8.1 : Éviter une erreur fatale lorsqu’une erreur survient sur l’écriture d’un fichier et que `raler_fichier()` est appelé avant
+- #5015 Amélioration du message d’erreur sur charger_fonction si le fichier est trouvé mais pas la fonction
+- #5011 Toujours afficher les articles refusés d'une rubrique
+- Correction du fichier de DTD de paquet.xml
+- #4945 Autoriser d'autres espaces que l'espace dans les critères `{a,b}`
+- #4986 Refactoring de la gestion des options headers/datas de `recuperer_url()` pour mieux gérer certaines redirections
+- #4968 PHP 8.1 Attraper les exceptions mysqli.
+- #4974 Ne pas générer une erreur SQL et un log d’erreur simplement pour tester la présence d’une table
+- #4913 Journalisation : ajout de l'id et du nom de l'auteur, correction du message
+- Permettre de reset `query_echappe_textes()` quand on fournit un uniqid, pour les tests unitaires
+- #4870 Tenir compte de `_PASS_LONGUEUR_MINI` pour la génération de mots de passe
+- spip-contrib-extensions/crayons#10 inclure les fichiers de fonctions avant d'appliquer les traitements d’une balise via `appliquer_traitement_champ()`
+
+### Deprecated
+
+- #5018 Fonction `param_low_sec()` (Utiliser `generer_url_api_low_sec()`)
+- #5000 Fonction `generer_info_entite` (Utiliser `generer_objet_info()`)
+- #5000 Fonction `generer_lien_entite` (Utiliser `generer_objet_lien()`)
+- #5000 Fonction `generer_introduction_entite` (Utiliser `generer_objet_introduction()`)
+- #5000 Fonction `generer_url_entite` (Utiliser `generer_objet_url()`)
+- #5000 Fonction `generer_url_entite_absolue` (Utiliser `generer_objet_url_absolue()`)
+- #5000 Fonction `generer_url_ecrire_objet` (Utiliser `generer_objet_url_ecrire()`)
+- #5000 Fonction `generer_url_ecrire_entite_edit` (Utiliser `generer_objet_url_ecrire_edit()`)
+- Fonction `http_status()`. Utiliser la fonction native `http_response_code()`
+
+### Removed
+
+- Compatibilité PHP 7.3
+- #5018 Suppression de prive/rss.html
+- Fichiers `prive/transmettre/forum_article.html` et `prive/transmettre/signatures_article.html`, code mort depuis 10 ans
+- Code mort : on n’a plus à gerer l'appel des vieilles fonction d'URL SPIP < 2
+- #4875 Retrait de `#FORMULAIRE_CONFIGURER_METAS` (code mort depuis SPIP 3)
+- Suppression de la compatibilité `jQuery.cookie` ou `$.cookie` (utiliser `Cookies.get` ou `Cookies.set`)
