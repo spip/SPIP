@@ -18,7 +18,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ### Added
 
-- Report chaines de langues
+- Mise à jour des chaînes de langues depuis trad.spip.net
+
 ### Changed
 
 - #5109 Il est recommandé de mettre les fichiers cachés en 404 (via le htaccess)
@@ -62,7 +63,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - #5064 Champ `backup_cles` sur la table `spip_auteurs`
 - #5064 Un fichier `config/cles.php` est généré
 - Répertoire `ecrire/src` (en prévision d’un autoloader)
-- Report des chaines de langues
+- Mise à jour des chaînes de langues depuis trad.spip.net
 
 ### Changed
 
@@ -97,13 +98,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ### Added
 
-- Report des chaines de langues
+- Mise à jour des chaînes de langues depuis trad.spip.net
 
 ### Fixed
 
 - #5040 Utiliser une fonction `lire_fichier_langue()` pour charger un fichier de langue et vérifier qu’il est correct. On loge une erreur sinon.
 - Différents warnings, notices ou deprecated
-- Optimisations et nettoyages pour PHP 7.4+, dont remplacement des call_user_func et call_user_func_array par des `$func($param)` ou `$func(...$params)`
+- Optimisations et nettoyages pour PHP 7.4+, dont remplacement des `call_user_func` et `call_user_func_array` par des `$func($param)` ou `$func(...$params)`
 - #5032 `ini_set()` peut être désactivé sur les hébergements web.
 
 ### Removed
@@ -115,7 +116,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Added
 
 - Compatibilité PHP 8.1
-- Des traductions depuis trad.spip.net
+- Mise à jour des chaînes de langues depuis trad.spip.net
 - #5018 Fonction `generer_url_api()` pour generer une url vers une action api
 - #5018 Action d’api transmettre à utiliser sous la forme `transmettre.api/id_auteur/cle/format/fond?...` pour remplacer le vieux `transmettre.html` et les flux RSS lowsec
 - #5018 Fonction `generer_url_api_low_sec()` pour faciliter la generation d'une url low_sec vers transmettre.api
@@ -155,8 +156,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Différents warnings et notices
 - Différents PHPDoc complétés
 - Différents nettoyages de code pour PHP 7.4+
-- PHP 8.1 : Nombreux deprecated (particulièrement avec `null` sur des fonctions de chaines de caractères)
-- PHP 8.1 : Capturer les exceptions mysqli
+- #4968 PHP 8.1 Attraper les exceptions mysqli.
+- PHP 8.1 : Nombreux deprecated (particulièrement avec `null` sur des fonctions de chaînes de caractères)
 - PHP 8.1 : Ne pas générer d’exception sur la boucle DATA avec du json si celui-ci est erronné.
 - PHP 8.1 : Éviter une erreur fatale lorsqu’une erreur survient sur l’écriture d’un fichier et que `raler_fichier()` est appelé avant
 - #5015 Amélioration du message d’erreur sur charger_fonction si le fichier est trouvé mais pas la fonction
@@ -164,7 +165,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Correction du fichier de DTD de paquet.xml
 - #4945 Autoriser d'autres espaces que l'espace dans les critères `{a,b}`
 - #4986 Refactoring de la gestion des options headers/datas de `recuperer_url()` pour mieux gérer certaines redirections
-- #4968 PHP 8.1 Attraper les exceptions mysqli.
 - #4974 Ne pas générer une erreur SQL et un log d’erreur simplement pour tester la présence d’une table
 - #4913 Journalisation : ajout de l'id et du nom de l'auteur, correction du message
 - Permettre de reset `query_echappe_textes()` quand on fournit un uniqid, pour les tests unitaires
@@ -173,15 +173,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ### Deprecated
 
-- #5018 Fonction `param_low_sec()` (Utiliser `generer_url_api_low_sec()`)
-- #5000 Fonction `generer_info_entite` (Utiliser `generer_objet_info()`)
-- #5000 Fonction `generer_lien_entite` (Utiliser `generer_objet_lien()`)
-- #5000 Fonction `generer_introduction_entite` (Utiliser `generer_objet_introduction()`)
-- #5000 Fonction `generer_url_entite` (Utiliser `generer_objet_url()`)
-- #5000 Fonction `generer_url_entite_absolue` (Utiliser `generer_objet_url_absolue()`)
-- #5000 Fonction `generer_url_ecrire_objet` (Utiliser `generer_objet_url_ecrire()`)
-- #5000 Fonction `generer_url_ecrire_entite_edit` (Utiliser `generer_objet_url_ecrire_edit()`)
-- Fonction `http_status()`. Utiliser la fonction native `http_response_code()`
+- #5018 Fonction `param_low_sec()` (utiliser `generer_url_api_low_sec()`)
+- #5000 Fonction `generer_info_entite` (utiliser `generer_objet_info()`)
+- #5000 Fonction `generer_lien_entite` (utiliser `generer_objet_lien()`)
+- #5000 Fonction `generer_introduction_entite` (utiliser `generer_objet_introduction()`)
+- #5000 Fonction `generer_url_entite` (utiliser `generer_objet_url()`)
+- #5000 Fonction `generer_url_entite_absolue` (tiliser `generer_objet_url_absolue()`)
+- #5000 Fonction `generer_url_ecrire_objet` (tiliser `generer_objet_url_ecrire()`)
+- #5000 Fonction `generer_url_ecrire_entite_edit` (tiliser `generer_objet_url_ecrire_edit()`)
+- Fonction `http_status()` (utiliser la fonction native `http_response_code()`)
 
 ### Removed
 
