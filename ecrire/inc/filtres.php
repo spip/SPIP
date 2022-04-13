@@ -5321,7 +5321,13 @@ function supprimer_timestamp($url) {
 function filtre_nettoyer_titre_email_dist($titre) {
 	include_spip('inc/envoyer_mail');
 
-	return nettoyer_titre_email($titre);
+	$titre = nettoyer_titre_email($titre);
+	// on est dans un squelette : securiser le retour
+	if (strpos($titre, '<') !== false) {
+		$titre = interdire_scripts($titre);
+	}
+
+	return $titre;
 }
 
 /**
