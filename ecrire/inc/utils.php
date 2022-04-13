@@ -2091,7 +2091,11 @@ function url_de_base($profondeur = null) {
 	}
 
 	// note : HTTP_HOST contient le :port si necessaire
-	$host = $_SERVER['HTTP_HOST'] ?? null;
+	if ($host = $_SERVER['HTTP_HOST'] ?? null) {
+		// Filtrer $host pour proteger d'attaques d'entete HTTP
+		$host = (filter_var($host, FILTER_SANITIZE_URL) ?: null);
+	}
+
 	// si on n'a pas trouvé d'hôte du tout, en dernier recours on utilise adresse_site comme fallback
 	if (is_null($host) and isset($GLOBALS['meta']['adresse_site'])) {
 		$host = $GLOBALS['meta']['adresse_site'];
@@ -2132,6 +2136,9 @@ function url_de_base($profondeur = null) {
 			}
 		}
 	}
+
+	// Et nettoyer l'url
+	$GLOBALS['REQUEST_URI'] = (filter_var($GLOBALS['REQUEST_URI'], FILTER_SANITIZE_URL) ?: '');
 
 	$url[$profondeur] = url_de_($http, $host, $GLOBALS['REQUEST_URI'], $profondeur);
 
