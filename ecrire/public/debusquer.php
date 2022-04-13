@@ -113,8 +113,9 @@ function public_debusquer_dist($message = '', $lieu = '', $opt = []) {
 	include_spip('inc/filtres');
 
 	lang_select($GLOBALS['visiteur_session']['lang']);
-	$fonc = _request('var_mode_objet');
-	$mode = _request('var_mode_affiche');
+	$fonc = preg_replace(",\W,", "_", _request('var_mode_objet') ?? '');
+	$mode = preg_replace(",\W,", "_", _request('var_mode_affiche') ?? '');
+
 	$self = str_replace("\\'", '&#39;', self());
 	$self = parametre_url($self, 'var_mode', 'debug');
 
@@ -811,7 +812,7 @@ function debusquer_entete($titre, $corps) {
 	html_lang_attributes() .
 	"<head>\n<title>" .
 	('SPIP ' . $GLOBALS['spip_version_affichee'] . ' ' .
-		_T('admin_debug') . ' ' . $titre . ' (' .
+		_T('admin_debug') . ' ' . spip_htmlspecialchars($titre) . ' (' .
 		supprimer_tags(corriger_typo($GLOBALS['meta']['nom_site']))) .
 	")</title>\n" .
 	"<meta http-equiv='Content-Type' content='text/html" .
