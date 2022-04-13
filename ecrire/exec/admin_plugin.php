@@ -120,7 +120,7 @@ function admin_plug_args($quoi, $erreur, $format) {
 
 	// message d'erreur au retour d'une operation
 	if ($erreur) {
-		echo "<div class='error'>$erreur</div>";
+		echo "<div class='error'>".spip_htmlspecialchars($erreur)."</div>";
 	}
 	if ($erreur_activation) {
 		echo "<div class='error'>$erreur_activation</div>";
