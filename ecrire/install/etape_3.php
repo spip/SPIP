@@ -366,7 +366,7 @@ function install_etape_3_dist() {
 
 		$hidden = predef_ou_cache($adresse_db, $login_db, $pass_db, $server_db)
 			. (defined('_INSTALL_NAME_DB') ? ''
-				: "\n<input type='hidden' name='sel_db' value='$sel_db' />");
+				: "\n<input type='hidden' name='sel_db' value=\"".spip_htmlspecialchars($sel_db)."\" />");
 
 		$auteur_obligatoire = ($ldap_present ? 0 : !sql_countsel('spip_auteurs', '', '', '', $server_db));
 
