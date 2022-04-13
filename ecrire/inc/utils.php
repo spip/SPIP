@@ -3303,15 +3303,26 @@ function exec_info_dist() {
 	if (autoriser('phpinfos')) {
 		$cookies_masques = ['spip_session', 'PHPSESSID'];
 		$cookies_backup = [];
+		$server_backup = ['HTTP_COOKIE' => $_SERVER['HTTP_COOKIE']];
+		$env_backup = ['HTTP_COOKIE' => $_ENV['HTTP_COOKIE']];
+		$mask = '******************************';
 		foreach ($cookies_masques as $k) {
 			if (!empty($_COOKIE[$k])) {
 				$cookies_backup[$k] = $_COOKIE[$k];
-				$_COOKIE[$k] = '******************************';
+				$_SERVER['HTTP_COOKIE'] = str_replace("$k=".$_COOKIE[$k], "$k=$mask", $_SERVER['HTTP_COOKIE']);
+				$_ENV['HTTP_COOKIE'] = str_replace("$k=".$_COOKIE[$k], "$k=$mask", $_ENV['HTTP_COOKIE']);
+				$_COOKIE[$k] = $mask;
 			}
 		}
 		phpinfo();
 		foreach ($cookies_backup as $k => $v) {
 			$_COOKIE[$k] = $v;
+		}
+		foreach ($server_backup as $k => $v) {
+			$_SERVER[$k] = $v;
+		}
+		foreach ($env_backup as $k => $v) {
+			$_ENV[$k] = $v;
 		}
 	} else {
 		include_spip('inc/filtres');
