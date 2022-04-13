@@ -75,7 +75,7 @@ function install_etape_chmod_dist() {
 	$test_dir = _request('test_dir');
 	$chmod = 0;
 
-	if ($test_dir) {
+	if ($test_dir and strpos($test_dir, '..') === false) {
 		if (substr($test_dir, -1) !== '/') {
 			$test_dir .= '/';
 		}
