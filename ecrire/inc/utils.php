@@ -592,7 +592,12 @@ function parametre_url($url, $c, $v = null, $sep = '&amp;') {
 		$a = './';
 	}
 
-	$regexp = ',^(' . str_replace('[]', '\[\]', $c) . '[[]?[]]?)(=.*)?$,';
+	// preparer la regexp de maniere securisee
+	$regexp = explode('|', $c);
+	foreach ($regexp as $r => $e) {
+		$regexp[$r] = str_replace('[]', '\[\]', preg_replace(',[^\w\d\[\]-],', '', $e));
+	}
+	$regexp = ',^(' . implode('|', $regexp) . '[[]?[]]?)(=.*)?$,';
 	$ajouts = array_flip(explode('|', $c));
 	$u = is_array($v) ? $v : rawurlencode((string) $v);
 	$testv = (is_array($v) ? count($v) : strlen((string) $v));
