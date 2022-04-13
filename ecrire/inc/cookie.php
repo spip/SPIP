@@ -53,6 +53,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  **/
 function spip_setcookie($name = '', $value = '', $options = []) {
 	static $to_secure_list = ['spip_session'];
+	if (defined('_COOKIE_SECURE_LIST') and is_array(_COOKIE_SECURE_LIST)) {
+		$to_secure_list = array_merge($to_secure_list, _COOKIE_SECURE_LIST);
+	}
 
 	if (!is_array($options)) {
 		// anciens paramètres :
@@ -73,8 +76,6 @@ function spip_setcookie($name = '', $value = '', $options = []) {
 			$options['secure'] = $opt[3];
 		}
 	}
-
-	$name = preg_replace('/^spip_/', $GLOBALS['cookie_prefix'] . '_', $name);
 
 	// expires
 	if (!isset($options['expires'])) {
@@ -100,6 +101,11 @@ function spip_setcookie($name = '', $value = '', $options = []) {
 	}
 	if (empty($options['samesite'])) {
 		$options['samesite'] = 'Lax';
+	}
+
+	// in fine renommer le prefixe si besoin
+	if (strpos($name, 'spip_') === 0) {
+		$name = $GLOBALS['cookie_prefix'] . '_' . substr($name, 5);
 	}
 
 	#spip_log("cookie('$name', '$value', " . json_encode($options, true) . ")", "cookies");
