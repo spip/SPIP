@@ -181,7 +181,7 @@ function traiter_echap_script_dist($regs) {
 	return $regs[0];
 }
 
-define('_PROTEGE_BLOCS', ',<(html|pre|code|cadre|frame|script|style)(\s[^>]*)?>(.*)</\1>,UimsS');
+define('_PROTEGE_BLOCS', ',<(html|pre|code|cadre|frame|script|style)(\b[^>]*)?>(.*)</\1>,UimsS');
 
 /**
  * pour $source voir commentaire infra (echappe_retour)
