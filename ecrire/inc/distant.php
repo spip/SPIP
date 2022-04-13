@@ -922,7 +922,7 @@ function fichier_copie_locale($source) {
 		or !$path_parts = @unserialize(spip_file_get_contents($cache))
 		or _request('var_mode') === 'recalcul'
 	) {
-		$path_parts = recuperer_infos_distantes($source, 0, false);
+		$path_parts = recuperer_infos_distantes($source, ['charger_si_petite_image' => false]);
 		ecrire_fichier($cache, serialize($path_parts));
 	}
 	$ext = !empty($path_parts['extension']) ? $path_parts['extension'] : '';
@@ -938,10 +938,11 @@ function fichier_copie_locale($source) {
  *
  * @param string $source
  *     URL de la source
- * @param int $max
- *     Taille maximum du fichier à télécharger
- * @param bool $charger_si_petite_image
- *     Pour télécharger le document s'il est petit
+ * @param array $options
+ *     int $taille_max : Taille maximum du fichier à télécharger
+ *     bool $charger_si_petite_image : Pour télécharger le document s'il est petit
+ *     string $callback_valider_url : callback pour valider l'URL finale du document apres redirection
+ *
  * @return array|false
  *     Couples des informations obtenues parmis :
  *
@@ -955,12 +956,16 @@ function fichier_copie_locale($source) {
  *     - 'fichier' = chaine
  *     - 'mime_type' = chaine
  **/
-function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image = true) {
+function recuperer_infos_distantes($source, $options = []) {
 
 	// pas la peine de perdre son temps
 	if (!tester_url_absolue($source)) {
 		return false;
 	}
+
+	$taille_max = $options['taille_max'] ?? 0;
+	$charger_si_petite_image = !!($options['charger_si_petite_image'] ?? true);
+	$callback_valider_url = $options['callback_valider_url'] ?? null;
 
 	# charger les alias des types mime
 	include_spip('base/typedoc');
@@ -970,7 +975,12 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 	// On va directement charger le debut des images et des fichiers html,
 	// de maniere a attrapper le maximum d'infos (titre, taille, etc). Si
 	// ca echoue l'utilisateur devra les entrer...
-	$reponse = recuperer_url($source, ['taille_max' => $max, 'refuser_gz' => true]);
+	$reponse = recuperer_url($source, ['taille_max' => $taille_max, 'refuser_gz' => true]);
+	if ($callback_valider_url
+		and is_callable($callback_valider_url)
+		and !$callback_valider_url($reponse['url'])) {
+		return false;
+	}
 	$headers = $reponse['headers'] ?? '';
 	$a['body'] = $reponse['page'] ?? '';
 	if ($headers) {
@@ -986,9 +996,10 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 	}
 
 	// Echec avec HEAD, on tente avec GET
-	if (!$a and !$max) {
+	if (!$a and !$taille_max) {
 		spip_log("tenter GET $source", 'distant');
-		$a = recuperer_infos_distantes($source, _INC_DISTANT_MAX_SIZE);
+		$options['taille_max'] = _INC_DISTANT_MAX_SIZE;
+		$a = recuperer_infos_distantes($source, $options);
 	}
 
 	// si on a rien trouve pas la peine d'insister
@@ -1004,12 +1015,13 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 		and $extension = _image_trouver_extension_depuis_mime($mime_type)
 	) {
 		if (
-			$max == 0
+			$taille_max == 0
 			and (empty($a['taille']) or $a['taille'] < _INC_DISTANT_MAX_SIZE)
 			and in_array($extension, formats_image_acceptables())
 			and $charger_si_petite_image
 		) {
-			$a = recuperer_infos_distantes($source, _INC_DISTANT_MAX_SIZE);
+			$options['taille_max'] = _INC_DISTANT_MAX_SIZE;
+			$a = recuperer_infos_distantes($source, $options);
 		} else {
 			if ($a['body']) {
 				$a['extension'] = $extension;
