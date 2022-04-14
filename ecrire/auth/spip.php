@@ -140,6 +140,14 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 				'alea_futur' => sql_quote(creer_uniqid(), $serveur, 'text'), // @deprecated 4.1
 				'pass' => sql_quote($pass_hash_next, $serveur, 'text'),
 			];
+
+			// regenerer un htpass si on a active/desactive le plugin htpasswd
+			// et/ou que l'algo a change - pour etre certain de toujours utiliser le bon algo
+			$htpass = generer_htpass($pass);
+			if (strlen($htpass) !== strlen($row['htpass'])) {
+				$set['htpass'] = sql_quote($htpass, $serveur, 'text');
+			}
+
 			// a chaque login de webmestre : sauvegarde chiffree des clés du site (avec les pass du webmestre)
 			if ($auteur_peut_sauver_cles) {
 				$set['backup_cles'] = sql_quote($cles->backup($pass), $serveur, 'text');
@@ -156,6 +164,11 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 				[],
 				$serveur
 			);
+
+			// si on a change le htpass car changement d'algo, regenerer les fichiers htpasswd
+			if (isset($set['htpass'])) {
+				ecrire_acces();
+			}
 		}
 
 		// En profiter pour verifier la securite de tmp/

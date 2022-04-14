@@ -319,17 +319,6 @@ function effacer_low_sec($id_auteur) {
 	sql_updateq('spip_auteurs', ['low_sec' => ''], 'id_auteur = ' . intval($id_auteur));
 }
 
-/**
- * Initialiser la globale htsalt si cela n'a pas déjà été fait.
- *
- * @return void|bool
- */
-function initialiser_sel() {
-	if (!isset($GLOBALS['htsalt'])) {
-		$GLOBALS['htsalt'] = '$1$' . creer_pass_aleatoire();
-	}
-	return $GLOBALS['htsalt'];
-}
 
 /**
  * Créer un fichier htpasswd
@@ -417,9 +406,7 @@ function generer_htpass($pass) {
 	if ($generer_htpass = charger_fonction('generer_htpass', 'inc', true)) {
 		return $generer_htpass($pass);
 	}
-	elseif (function_exists('crypt')) {
-		return crypt($pass, initialiser_sel());
-	}
+
 	return '';
 }
 
