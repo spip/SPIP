@@ -54,7 +54,7 @@ function extraire_date($texte): string {
  * @filtre
  * @link https://www.spip.net/5518
  * @uses vider_date()
- * @param string $date
+ * @param string|null $date
  *     La date à normaliser
  * @param bool $forcer_jour
  *     true pour forcer à indiquer un jour et mois (01) s'il n'y en a pas.
@@ -62,7 +62,7 @@ function extraire_date($texte): string {
  *     - une date au format datetime
  *     - une chaîne vide si la date est considérée nulle
  **/
-function normaliser_date($date, $forcer_jour = false): string {
+function normaliser_date(?string $date, bool $forcer_jour = false): string {
 	$date = vider_date($date);
 	if ($date) {
 		if (preg_match('/^[0-9]{8,10}$/', $date)) {
@@ -91,13 +91,14 @@ function normaliser_date($date, $forcer_jour = false): string {
 /**
  * Enlève une date considérée comme vide
  *
- * @param string $letexte
+ * @param string|null $letexte
  * @param bool $verif_format_date
  * @return string
  *     - La date entrée (si elle n'est pas considérée comme nulle)
  *     - Une chaine vide
  **/
-function vider_date($letexte, $verif_format_date = false): string {
+function vider_date(?string $letexte, bool $verif_format_date = false): string {
+	$letexte = $letexte ?: '';
 	if (
 		!$verif_format_date
 		or (in_array(strlen($letexte), [10,19]) and
