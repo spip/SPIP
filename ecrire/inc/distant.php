@@ -64,9 +64,11 @@ define('_REGEXP_COPIE_LOCALE', ',' 	.
  *   permet de specifier le nom du fichier local (stockage d'un cache par exemple, et non document IMG)
  * @param int $taille_max
  *   taille maxi de la copie local, par defaut _COPIE_LOCALE_MAX_SIZE
+ * @param string $callback_valider_url
+ *   fonction de callback pour valider l'URL finale apres redirection eventuelle
  * @return bool|string
  */
-function copie_locale($source, $mode = 'auto', $local = null, $taille_max = null) {
+function copie_locale($source, $mode = 'auto', $local = null, $taille_max = null, $callback_valider_url = null) {
 
 	// si c'est la protection de soi-meme, retourner le path
 	if ($mode !== 'force' and preg_match(_REGEXP_COPIE_LOCALE, $source, $match)) {
@@ -100,7 +102,7 @@ function copie_locale($source, $mode = 'auto', $local = null, $taille_max = null
 
 	// sinon voir si on doit/peut le telecharger
 	if ($local === $source or !tester_url_absolue($source)) {
-		return $local;
+		return $t ? $local : '';
 	}
 
 	if ($mode === 'modif' or !$t) {
@@ -110,20 +112,35 @@ function copie_locale($source, $mode = 'auto', $local = null, $taille_max = null
 		if (!$taille_max) {
 			$taille_max = _COPIE_LOCALE_MAX_SIZE;
 		}
+		$localrac_tmp = $localrac . '.tmp';
 		$res = recuperer_url(
 			$source,
-			['file' => $localrac, 'taille_max' => $taille_max, 'if_modified_since' => $t ? filemtime($localrac) : '']
+			['file' => $localrac_tmp, 'taille_max' => $taille_max, 'if_modified_since' => $t ? filemtime($localrac) : '']
 		);
+
 		if (!$res or (!$res['length'] and $res['status'] != 304)) {
-			spip_log("copie_locale : Echec recuperation $source sur $localrac status : " . ($res ? $res['status'] : '-'), 'distant' . _LOG_INFO_IMPORTANTE);
+			spip_log("copie_locale : Echec recuperation $source sur $localrac_tmp status : " . ($res ? $res['status'] : '-'), 'distant' . _LOG_INFO_IMPORTANTE);
+			@unlink($localrac_tmp);
 		}
 		else {
-			spip_log("copie_locale : recuperation $source sur $localrac OK | taille " . $res['length'] . ' status ' . $res['status'], 'distant');
+			spip_log("copie_locale : recuperation $source sur $localrac_tmp OK | taille " . $res['length'] . ' status ' . $res['status'], 'distant');
 		}
 		if (!$res or !$res['length']) {
 			// si $t c'est sans doute juste un not-modified-since
 			return $t ? $local : false;
 		}
+
+		// si option valider url, verifions que l'URL finale est acceptable
+		if ($callback_valider_url
+		  and is_callable($callback_valider_url)
+		  and !$callback_valider_url($res['url'])) {
+			spip_log("copie_locale : url finale ".$res['url']." non valide, on refuse le fichier $localrac_tmp", 'distant' . _LOG_INFO_IMPORTANTE);
+			@unlink($localrac_tmp);
+			return $t ? $local : false;
+		}
+
+		// on peut renommer le fichier tmp
+		@rename($localrac_tmp, $localrac);
 
 		// si on retrouve l'extension
 		if (
@@ -144,6 +161,7 @@ function copie_locale($source, $mode = 'auto', $local = null, $taille_max = null
 					'source' => $source,
 					'fichier' => $local,
 					'http_res' => $res['length'],
+					'url' => $res['url'],
 				],
 				'data' => null
 			]
