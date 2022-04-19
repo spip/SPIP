@@ -4,8 +4,37 @@ Changelog de SPIP 4.1
 
 ## [Unreleased]
 
+### Security
+
+- spip-team/securite#4829 Sécuriser le retour de `nettoyer_titre_email()` lorsqu’utilisé en squelette (Louka)
+- spip-team/securite#4494 Suite de #54 : masquer aussi les cookies sensibles dans `$_SERVER['HTTP_COOKIE']` et `$_ENV['HTTP_COOKIE']` sur la page d’info
+- spip-team/securite#3728 Sécuriser `HTTP_HOST` et `REQUEST_URI` dans `url_de_base()`
+- spip-team/securite#3725 Reconnaitre les cookies securisés même si on utilise un `cookie_prefix`
+- spip-team/securite#3703 Regexp de `_PROTEGE_BLOCS` plus robuste (`\b` plutôt que `\s`)
+- spip-team/securite#3702 Sécuriser dans `parametre_url()` la construction d’une regexp
+- spip-team/securite#3700 Éviter dans `preg_files()` une regexp qui retourne tous les fichiers
+- spip-team/securite#3698 Sécuriser l’affichage des erreurs de plugins
+- spip-team/securite#3609 Sécuriser l'usage des var_mode_xx dans le debuggueur
+- spip-team/securite#3730 À l’installation (étape bdd), échapper le nom de la bdd
+- spip-team/securite#3597 À l’installation (étape ldap), filtrer l’adresse LDAP et échapper les variables
+- spip-team/securite#3596 À l’installation (étape test d’écriture), ne pas accepter `..` lors du test des répertoires
+
+### Added
+
+- spip-team/securite#4336 La fonction `recuperer_infos_distantes()` accepte une option supplémentaire pour passer une callback de validation de l'URL distante finale (apres suivi des redirections eventuelles)
+- spip-team/securite#3725 Permettre d'étendre la liste par défaut des cookies sécurisés via la constante `_COOKIE_SECURE_LIST`
+
+### Changed
+
+- spip-team/securite#4336 La fonction `recuperer_infos_distantes()` prend maintenant un tableau d'options en second argument (seul le core utilisait les 2nd et 3e arguments).
+- spip-team/securite#4336 La fonction `recuperer_infos_distantes()` accepte une option supplémentaire pour passer une callback de validation de l'URL distante finale (apres suivi des redirections eventuelles)
+- spip-team/securite#4336 La fonction `copie_locale()` accèpte un argument `$callback_valider_url` qui permet de tester l'URL finale après récuperation et de refuser la copie locale si l'URL ne valide pas
+
 ### Fixed
 
+- #5148 Centrer l'image de fond de la page login
+- #5117 Éviter un warning à l’installation sur l’absence de configuration de 'articles_modif'
+- spip-team/securite#4336 La fonction `copie_locale()` ne retourne un chemin local que s’il existe
 - #5121 CHANGELOG.md dans un format markdown (et complété)
 - #5115 éviter un warning lors de l'appel avec un tableau à `produire_fond_statique()`
 
