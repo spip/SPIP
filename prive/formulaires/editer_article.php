@@ -116,7 +116,7 @@ function formulaires_editer_article_identifier_dist(
  * return array
  *     Configuration pour le formulaire
  */
-function articles_edit_config($row) {
+function articles_edit_config(array $row): array {
 
 	$config = [];
 	$config['lignes'] = 8;

@@ -94,7 +94,7 @@ function formulaires_editer_auteur_identifier_dist(
  * return array
  *     Configuration pour le formulaire
  */
-function auteurs_edit_config($row) {
+function auteurs_edit_config(array $row): array {
 
 	$config = [];
 	$config['lignes'] = 8;

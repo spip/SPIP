@@ -81,7 +81,7 @@ function formulaires_editer_rubrique_charger_dist(
  * return array
  *     Configuration pour le formulaire
  */
-function rubriques_edit_config($row) {
+function rubriques_edit_config(array $row): array {
 
 	$config = [];
 	$config['lignes'] = 8;
