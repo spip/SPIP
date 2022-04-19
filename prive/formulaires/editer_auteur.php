@@ -95,11 +95,10 @@ function formulaires_editer_auteur_identifier_dist(
  *     Configuration pour le formulaire
  */
 function auteurs_edit_config($row) {
-	global $spip_lang;
 
-	$config = $GLOBALS['meta'];
+	$config = [];
 	$config['lignes'] = 8;
-	$config['langue'] = $spip_lang;
+	$config['langue'] = $GLOBALS['spip_lang'];
 
 	// pour instituer_auteur
 	$config['auteur'] = $row;

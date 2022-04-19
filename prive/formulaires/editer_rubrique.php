@@ -82,12 +82,10 @@ function formulaires_editer_rubrique_charger_dist(
  *     Configuration pour le formulaire
  */
 function rubriques_edit_config($row) {
-	global $spip_lang;
 
-	$config = $GLOBALS['meta'];
+	$config = [];
 	$config['lignes'] = 8;
-	$config['langue'] = $spip_lang;
-
+	$config['langue'] = $GLOBALS['spip_lang'];
 	$config['restreint'] = (!$GLOBALS['connect_toutes_rubriques']);
 
 	return $config;

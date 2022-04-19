@@ -3,7 +3,7 @@
 	[<p class="reponse_formulaire reponse_formulaire_erreur" role="alert">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
-		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE
 	  <div class="editer-groupe">
@@ -20,14 +20,14 @@
 				]
 				(#VAL|chercher_rubrique{[(#ENV{id_rubrique}|intval)],#ENV{id_parent},'rubrique',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint},0,form_simple})
 	    </div>]
-	    
-	  	[(#ENV**{config}|table_valeur{rubriques_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|?{' '})
+
+	  	[(#CONFIG{rubriques_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|?{' '})
 	    <div class="editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
 				<label for="descriptif"><:texte_descriptif_rapide:></label><div class='explication'><:entree_contenu_rubrique:></div>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
 				]<textarea name='descriptif' id='descriptif' rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
 	    </div>]
-	  	[(#ENV**{config}|table_valeur{rubriques_texte}|=={non}|?{#ENV**{texte,''},' '}|?{' '})
+	  	[(#CONFIG{rubriques_texte}|=={non}|?{#ENV**{texte,''},' '}|?{' '})
 	    <div class="editer editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
 				<label for="text_area"><:info_texte_explicatif:><em class="aide">#AIDER{text_area}</em></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>

@@ -3,12 +3,12 @@
 	[<p class="reponse_formulaire reponse_formulaire_erreur" role="alert">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
-		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE
 		<input type='hidden' name='id_article' value='#ENV{id_article}' />
 		<div class="editer-groupe">
-			[(#ENV**{config}|table_valeur{articles_surtitre}|=={non}|?{#ENV**{surtitre,''},' '}|oui)
+			[(#CONFIG{articles_surtitre}|=={non}|?{#ENV**{surtitre,''},' '}|oui)
 			<div class="editer editer_surtitre[ (#ENV**{erreurs}|table_valeur{surtitre}|oui)erreur]">
 				<label for="surtitre"><:texte_sur_titre:><em class="aide">#AIDER{surtitre}</em></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{surtitre})</span>
@@ -20,7 +20,7 @@
 				]<input type='text' class='text' name='titre' id='titre'[ lang='(#LANGUE)'] value="[(#ENV**{titre,''})]"
 				placeholder="<:info_nouvel_article|attribut_html:>" />
 			</div>
-			[(#ENV**{config}|table_valeur{articles_soustitre}|=={non}|?{#ENV**{soustitre,''},' '}|oui)
+			[(#CONFIG{articles_soustitre}|=={non}|?{#ENV**{soustitre,''},' '}|oui)
 			<div class="editer editer_soustitre[ (#ENV**{erreurs}|table_valeur{soustitre}|oui)erreur]">
 				<label for="soustitre"><:texte_sous_titre:><em class="aide">#AIDER{soustitre}</em></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{soustitre})</span>
@@ -32,21 +32,21 @@
 				]
 				(#VAL|chercher_rubrique{#ENV{id_article},#ENV{id_parent},'article',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint},0,form_simple})
 			</div>]
-		
-			[(#ENV**{config}|table_valeur{articles_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|oui)
+
+			[(#CONFIG{articles_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|oui)
 			<div class="editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
 				<label for="descriptif"><:texte_descriptif_rapide:><em class="aide">#AIDER{descriptif}</em></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
 				]<textarea name='descriptif' id='descriptif'[ lang='(#LANGUE)'] rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
 			</div>]
-			[(#ENV**{config}|table_valeur{articles_chapeau}|=={non}|?{#ENV**{chapo,''},' '}|oui)
+			[(#CONFIG{articles_chapeau}|=={non}|?{#ENV**{chapo,''},' '}|oui)
 			<div class="editer editer_chapo[ (#ENV**{erreurs}|table_valeur{chapo}|oui)erreur]">
 				<label for="chapo"><:info_chapeau:><em class="aide">#AIDER{chapo}</em></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{chapo})</span>
 				]<textarea name='chapo' id='chapo'[ lang='(#LANGUE)'][ rows='(#ENV**{config}|table_valeur{lignes})'] cols='40'>[(#ENV**{chapo})]</textarea>
 			</div>]
 
-			[(#ENV**{config}|table_valeur{articles_urlref}|=={non}|?{#ENV**{url_site,#ENV**{nom_site,''}},' '}|oui)
+			[(#CONFIG{articles_urlref}|=={non}|?{#ENV**{url_site,#ENV**{nom_site,''}},' '}|oui)
 			<div class="editer editer_liens_sites fieldset">
 				<fieldset>
 					<h3 class="legend"><:entree_liens_sites:></h3>
@@ -65,14 +65,14 @@
 				</fieldset>
 			</div>]
 
-			[(#ENV**{config}|table_valeur{articles_texte}|=={non}|?{#ENV**{texte,''},' '}|oui)
+			[(#CONFIG{articles_texte}|=={non}|?{#ENV**{texte,''},' '}|oui)
 			<div class="editer editer_texte obligatoire[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
 				<label for="text_area"><:info_texte:><em class="aide">#AIDER{text_area}</em></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>
 				][(#ENV**{_texte_trop_long,''})]
 				<textarea name='texte' id='text_area'[ lang='(#LANGUE)'] rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'>[(#ENV**{texte})]</textarea>
 			</div>]
-			[(#ENV**{config}|table_valeur{articles_ps}|=={non}|?{#ENV**{ps,''},' '}|oui)
+			[(#CONFIG{articles_ps}|=={non}|?{#ENV**{ps,''},' '}|oui)
 			<div class="editer editer_ps[ (#ENV**{erreurs}|table_valeur{ps}|oui)erreur]">
 				<label for="ps"><:info_post_scriptum:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ps})</span>

@@ -117,13 +117,11 @@ function formulaires_editer_article_identifier_dist(
  *     Configuration pour le formulaire
  */
 function articles_edit_config($row) {
-	global $spip_lang;
 
-	$config = $GLOBALS['meta'];
+	$config = [];
 	$config['lignes'] = 8;
-	$config['langue'] = $spip_lang;
-
-	$config['restreint'] = ($row['statut'] == 'publie');
+	$config['langue'] = $GLOBALS['spip_lang'];
+	$config['restreint'] = ($row['statut'] === 'publie');
 
 	return $config;
 }
