@@ -3,36 +3,34 @@
 	[<p class="reponse_formulaire reponse_formulaire_erreur" role="alert">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
-		[(#REM) declarer les hidden qui declencheront le service du formulaire
-		parametre : url d'action ]
 		#ACTION_FORMULAIRE
 	  <div class="editer-groupe">
-	    <div class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+	    <div class="editer editer_titre obligatoire[ (#ENV**{erreurs/titre}|oui)erreur]">
 				<label for="titre"><:info_titre|label_nettoyer:><em class="aide">#AIDER{titre}</em></label>[
-				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
+				<span class='erreur_message'>(#ENV**{erreurs/titre})</span>
 				]<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre,''})]"
 				placeholder="<:titre_nouvelle_rubrique|attribut_html:>" />
 	    </div>
 
-	 	[<div class="editer editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">
+	 	[<div class="editer editer_parent[ (#ENV**{erreurs/id_parent}|oui)erreur]">
 				<label for="id_parent"><:titre_cadre_interieur_rubrique:><em class="aide">#AIDER{id_parent}</em></label>[
-				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>
+				<span class='erreur_message'>(#ENV**{erreurs/id_parent})</span>
 				]
-				(#VAL|chercher_rubrique{[(#ENV{id_rubrique}|intval)],#ENV{id_parent},'rubrique',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint},0,form_simple})
+				(#VAL|chercher_rubrique{[(#ENV{id_rubrique}|intval)],#ENV{id_parent},'rubrique',#ENV{id_secteur},#ENV**{config/restreint},0,form_simple})
 	    </div>]
 
 	  	[(#CONFIG{rubriques_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|?{' '})
-	    <div class="editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
+	    <div class="editer editer_descriptif[ (#ENV**{erreurs/descriptif}|oui)erreur]">
 				<label for="descriptif"><:texte_descriptif_rapide:></label><div class='explication'><:entree_contenu_rubrique:></div>[
-				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
+				<span class='erreur_message'>(#ENV**{erreurs/descriptif})</span>
 				]<textarea name='descriptif' id='descriptif' rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
 	    </div>]
 	  	[(#CONFIG{rubriques_texte}|=={non}|?{#ENV**{texte,''},' '}|?{' '})
-	    <div class="editer editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
+	    <div class="editer editer_texte[ (#ENV**{erreurs/texte}|oui)erreur]">
 				<label for="text_area"><:info_texte_explicatif:><em class="aide">#AIDER{text_area}</em></label>[
-				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>
+				<span class='erreur_message'>(#ENV**{erreurs/texte})</span>
 				][(#ENV**{_texte_trop_long,''})
-				]<textarea name='texte' id='text_area' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'>[(#ENV**{texte})]</textarea>
+				]<textarea name='texte' id='text_area' rows='[(#ENV**{config/lignes}|plus{2})]' cols='40'>[(#ENV**{texte})]</textarea>
 	    </div>]
 	  </div>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
