@@ -98,6 +98,7 @@ function normaliser_date($date, $forcer_jour = false): string {
  *     - Une chaine vide
  **/
 function vider_date($letexte, $verif_format_date = false): string {
+	$letexte ??= '';
 	if (
 		!$verif_format_date
 		or (in_array(strlen($letexte), [10,19]) and
@@ -648,7 +649,7 @@ function affdate_base($numdate, $vue, $options = []): string {
 				return '';
 			}
 			$nom = mktime(1, 1, 1, $mois, $njour, $annee);
-			$nom = 1 + date('w', $nom);
+			$nom = 1 + (int) date('w', $nom);
 			$param = ((isset($options['param']) and $options['param']) ? '_' . $options['param'] : '');
 
 			return _T('date_jour_' . $nom . $param);
