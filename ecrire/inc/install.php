@@ -105,8 +105,11 @@ function install_connexion($adr, $port, $login, $pass, $base, $type, $pref, $lda
  * @return array
  *     Tableau des informations sur la connexion
  **/
-function analyse_fichier_connection($file) {
-	$s = @join('', file($file));
+function analyse_fichier_connection(string $file): array {
+	if (!file_exists($file)) {
+		return [];
+	}
+	$s = file_get_contents($file);
 	if (preg_match("#mysql_connect\([\"'](.*)[\"'],[\"'](.*)[\"'],[\"'](.*)[\"']\)#", $s, $regs)) {
 		array_shift($regs);
 
