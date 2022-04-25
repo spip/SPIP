@@ -191,6 +191,9 @@ jQuery.getScript = function(url,callback){
  * @param bool force
  */
 jQuery.fn.positionner = function(force, setfocus) {
+	if (!this.length) {
+		return this;
+	}
 	var offset = jQuery(this).offset();
 	var hauteur = parseInt(jQuery(this).css('height'));
 	var marge = jQuery.spip.positionner_marge || 5;
