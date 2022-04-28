@@ -21,17 +21,22 @@ Changelog de SPIP 4.1
 
 ### Added
 
+- Permettre de debug (js) les erreurs sur les liens ajax en utilisant le flag `jQuery.spip.debug` pour désactiver la redirection automatique
 - spip-team/securite#4336 La fonction `recuperer_infos_distantes()` accepte une option supplémentaire pour passer une callback de validation de l'URL distante finale (apres suivi des redirections eventuelles)
 - spip-team/securite#3725 Permettre d'étendre la liste par défaut des cookies sécurisés via la constante `_COOKIE_SECURE_LIST`
 
 ### Changed
 
+- Accélérer un peu la migration des logos en documents (sur mise à jour vers SPIP 4.0) en désactivant le versionnage et les drapeaux édition pendant cette étape
 - spip-team/securite#4336 La fonction `recuperer_infos_distantes()` prend maintenant un tableau d'options en second argument (seul le core utilisait les 2nd et 3e arguments).
 - spip-team/securite#4336 La fonction `recuperer_infos_distantes()` accepte une option supplémentaire pour passer une callback de validation de l'URL distante finale (apres suivi des redirections eventuelles)
 - spip-team/securite#4336 La fonction `copie_locale()` accèpte un argument `$callback_valider_url` qui permet de tester l'URL finale après récuperation et de refuser la copie locale si l'URL ne valide pas
 
 ### Fixed
 
+- Fix warning sur un log dans `logo_supprimer()`
+- Fix nom de option `expires` (qui est bien avec un s comme l'entete http qu'on envoie) dans `spip_livrer_fichier()`
+- Fix erreur de typage quand on utilise la fonction dépréciée `generer_url_entite_absolue()`
 - #5155 Suppression de l'argument `formulaire_action_sign` de l'url d’action des formulaires
 - #5148 Centrer l'image de fond de la page login
 - #5117 Éviter un warning à l’installation sur l’absence de configuration de 'articles_modif'
