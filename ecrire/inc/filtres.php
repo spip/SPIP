@@ -5473,7 +5473,8 @@ function filtre_compacte_dist($source, $format = null) {
  * @param int|null $portion_pourcent
  * @return string
  */
-function spip_affiche_mot_de_passe_masque($passe, $afficher_partiellement = false, $portion_pourcent = null) {
+function spip_affiche_mot_de_passe_masque(?string $passe, bool $afficher_partiellement = false, ?int $portion_pourcent = null): string {
+	$passe ??= '';
 	$l = strlen($passe);
 
 	if ($l <= 8 or !$afficher_partiellement) {
