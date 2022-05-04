@@ -25,6 +25,7 @@
 
 ### Changed
 
+- Typage des arguments sur la fonction `spip_affiche_mot_de_passe_masque()`
 - Ne pas insérer de balise de fermeture PHP dans le fichier `config/connect.php`
 - Accélérer un peu la migration des logos en documents (sur mise à jour vers SPIP 4.0) en désactivant le versionnage et les drapeaux édition pendant cette étape
 - #5082 Ne pas autoriser à refuser ses propres articles en tant que rédacteur ou rédactrice.
@@ -37,6 +38,7 @@
 
 ### Fixed
 
+- Correction notice PHP sur `spip_affiche_mot_de_passe_masque()` en absence de mot de passe
 - #5169 Éviter une erreur JS sur `$.fn.positionner()` si la sélection est vide
 - #5168 Éviter une erreur fatale sur `analyse_fichier_connection()` si le fichier de connexion à analyser n’existe pas
 - #5101 Le statut de rubrique par défaut à tester est désormais `prepa` plutôt que `new`
