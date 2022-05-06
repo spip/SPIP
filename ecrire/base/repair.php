@@ -63,7 +63,7 @@ function base_repair_dist($titre = '', $reprise = '') {
  **/
 function admin_repair_tables() {
 
-	$repair = sql_repair('repair', null, 'continue');
+	$repair = sql_serveur('repair', '', true);
 
 	// recreer les tables manquantes eventuelles
 	include_spip('base/create');
