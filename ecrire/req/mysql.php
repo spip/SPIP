@@ -27,6 +27,10 @@ if (!defined('_MYSQL_NOPLANES')) {
 	define('_MYSQL_NOPLANES', true);
 }
 
+if (!defined('_MYSQL_ENGINE')) {
+	define('_MYSQL_ENGINE', 'MyISAM');
+}
+
 /**
  * Crée la première connexion à un serveur MySQL via MySQLi
  *
@@ -728,7 +732,7 @@ function spip_mysql_create(
 	}
 	$temporary = $temporary ? 'TEMPORARY' : '';
 	$q = "CREATE $temporary TABLE IF NOT EXISTS $nom ($query" . ($keys ? ",$keys" : '') . ')'
-		. ' ENGINE=MyISAM'
+		. ' ENGINE=' . _MYSQL_ENGINE
 		. ($character_set ? " DEFAULT $character_set" : '')
 		. "\n";
 
@@ -881,7 +885,17 @@ function spip_mysql_showbase($match, $serveur = '', $requeter = true) {
  *     - true si la requête a réussie, false sinon
  */
 function spip_mysql_repair($table, $serveur = '', $requeter = true) {
-	return spip_mysql_query("REPAIR TABLE `$table`", $serveur, $requeter);
+	$table_status = spip_mysql_fetch(spip_mysql_query("SHOW TABLE STATUS WHERE Name = '$table'", $serveur, true));
+	$engine = $table_status['Engine'];
+	if ($engine == 'InnoDB') {
+		if (spip_mysql_alter("TABLE $table ENGINE = InnoDB", $serveur, $requeter)) {
+			return [' OK '];
+		}
+	} elseif ($engine == 'MyISAM') {
+		return spip_mysql_query("REPAIR TABLE `$table`", $serveur, $requeter);
+	} else {
+		spip_log("spip_mysql_repair impossible pour la table $table engine $engine", 'mysql.' . _LOG_DEBUG);
+	}
 }
 
 /**
