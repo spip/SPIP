@@ -37,6 +37,7 @@
 
 ### Fixed
 
+- #5095 Ne pas casser une meta sérialisée quand un utilisateur saisit un emoji dans un formulaire de configuration
 - #5101 Le statut de rubrique par défaut à tester est désormais `prepa` plutôt que `new`
 - #5183 Éviter de générer des icones trop grandes dans la liste des articles syndiqués
 - #5185 Éviter une double compression des JS de la page login

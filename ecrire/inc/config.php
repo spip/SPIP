@@ -219,6 +219,7 @@ function ecrire_config($cfg, $store) {
 		}
 	}
 
+	$has_planes = false;
 	// si on a affaire a un sous caiser
 	// il faut ecrire au bon endroit sans perdre les autres sous casier freres
 	if ($c = $sous_casier) {
@@ -255,6 +256,28 @@ function ecrire_config($cfg, $store) {
 			}
 		} // dans tous les autres cas, on ecrase
 		else {
+
+			if (
+				    defined('_MYSQL_NOPLANES')
+				and _MYSQL_NOPLANES
+				and !empty($GLOBALS['meta']['charset_sql_connexion'])
+				and $GLOBALS['meta']['charset_sql_connexion'] == 'utf8'
+			) {
+
+				// detecter si la valeur qu'on veut ecrire a des planes
+				// @see utf8_noplanes
+				$serialized_store = (is_string($store) ? $store : serialize($store));
+				// un preg_match rapide pour voir si ca vaut le coup de lancer utf8_noplanes
+				if (preg_match(',[\xF0-\xF4],ms', $serialized_store)) {
+					if (!function_exists('utf8_noplanes')) {
+						include_spip('inc/charsets');
+					}
+					if ($serialized_store !== utf8_noplanes($serialized_store)) {
+						$has_planes = true;
+					}
+				}
+			}
+
 			$sc = $store;
 		}
 
@@ -277,9 +300,22 @@ function ecrire_config($cfg, $store) {
 		// si ce n'est pas une chaine
 		// il faut serializer
 		if (!is_string($store)) {
-			$store = serialize($store);
+			$serialized_store = serialize($store);
+			ecrire_meta($casier, $serialized_store, null, $table);
+			// et dans ce cas il faut verifier que l'ecriture en base a bien eu lieu a l'identique si il y a des planes dans la chaine
+			// car sinon ca casse le serialize PHP - par exemple si on est en mysql utf8 (non mb4)
+			if ($has_planes) {
+				$check_store = sql_getfetsel('valeur', 'spip_'.$table, 'nom='.sql_quote($casier));
+				if ($check_store !== $serialized_store) {
+					array_walk_recursive($store, function (&$value, $key) {if (is_string($value)) {$value = utf8_noplanes($value);}});
+					$serialized_store = serialize($store);
+					ecrire_meta($casier, $serialized_store, null, $table);
+				}
+			}
 		}
-		ecrire_meta($casier, $store, null, $table);
+		else {
+			ecrire_meta($casier, $store, null, $table);
+		}
 	}
 
 	// verifier que lire_config($cfg)==$store ?
