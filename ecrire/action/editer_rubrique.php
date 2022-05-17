@@ -253,7 +253,7 @@ function rubrique_instituer($id_rubrique, $c) {
 				and autoriser('publierdans', 'rubrique', $old_parent)
 				)
 			) {
-				if ($s['statut'] != 'new') {
+				if ($s['statut'] != 'prepa') {
 					spip_log("deplacement de $id_rubrique vers $id_parent refuse a " . $GLOBALS['visiteur_session']['id_auteur'] . ' ' . $GLOBALS['visiteur_session']['statut']);
 				}
 			} elseif (editer_rubrique_breves($id_rubrique, $id_parent, $c)) {
