@@ -2456,7 +2456,9 @@ function afficher_enclosures($tags) {
 				. http_img_pack(
 					'attachment-16.png',
 					$t,
-					'title="' . attribut_html($t) . '"'
+					'',
+					$t,
+					['utiliser_suffixe_size' => true]
 				)
 				. '</a>',
 				$tag

@@ -37,6 +37,7 @@
 
 ### Fixed
 
+- #5183 Éviter de générer des icones trop grandes dans la liste des articles syndiqués
 - Correction de la navigation par initiale sur les listes auteurs et visiteurs (bon markup de pagination)
 - Correction warning sur un log dans `logo_supprimer()`
 - Correction nom de option `expires` (qui est bien avec un s comme l'entete http qu'on envoie) dans `spip_livrer_fichier()`
