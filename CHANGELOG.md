@@ -47,6 +47,7 @@
 - spip-team/securite#4336 La fonction `copie_locale()` ne retourne un chemin local que s’il existe
 - #5121 CHANGELOG.md dans un format markdown suivant https://keepachangelog.com/fr/1.0.0/
 - #5115 éviter un warning lors de l'appel avec un tableau à `produire_fond_statique()`
+- #5101 le statut de rubrique par défaut à tester est désormais `prepa` plutôt que `new`
 
 ### Removed
 
