@@ -34,7 +34,7 @@
 						<div class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 							<label for="#GET{name}"><:info_adresse:></label>[
 							<span class='erreur_message'>(#GET{erreurs})</span>
-							]<input type="email" class="text email" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}" />
+							]<input type="text" class="text email" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}" />[(#REM)<!-- texte et pas email, car peut être une liste séparée par virgule-->]
 						</div>
 						#SET{name,adresse_suivi_inscription}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 						<div class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">

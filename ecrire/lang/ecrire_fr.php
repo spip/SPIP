@@ -318,7 +318,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_facilite_suivi_activite' => 'Afin de faciliter le suivi de l’activité
 		éditoriale du site, SPIP peut faire parvenir par mail, par exemple
 		à une mailing-list des rédacteurs, l’annonce des demandes de
-		publication et des validations d’articles.',
+		publication et des validations d’articles. Indiquer une ou plusieurs adresses, séparées par des virgules.',
 	'info_fichiers_authent' => 'Fichiers d’authentification « .htpasswd »',
 	'info_forums_abo_invites' => 'Votre site comporte des forums sur abonnement ; les visiteurs sont donc invités à s’enregistrer sur le site public.',
 	'info_gauche_admin_tech' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p> Elle donne accès aux différentes

@@ -41,6 +41,7 @@
 
 ### Fixed
 
+- #5190 Dans le formulaire de configuration de l'email de suivi, pouvoir indiquer une liste d'emails séparés par des virgules
 - #4277 Adaptation de `spip_mysql_repair()` à innodb
 - #4277 Permettre de spécifier l'engine mysql à utiliser
 - #5095 Ne pas casser une meta sérialisée quand un utilisateur saisit un emoji dans un formulaire de configuration
