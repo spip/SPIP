@@ -4957,6 +4957,11 @@ function appliquer_traitement_champ($texte, $champ, $table_objet = '', $env = []
 
 	$traitement = str_replace('%s', "'" . texte_script($texte) . "'", $traitement);
 
+	// signaler qu'on est dans l'espace prive pour les filtres qui se servent de ce flag
+	if (test_espace_prive()) {
+		$env['espace_prive'] = 1;
+	}
+
 	// Fournir $connect et $Pile[0] au traitement si besoin
 	$Pile = [0 => $env];
 	eval("\$texte = $traitement;");
