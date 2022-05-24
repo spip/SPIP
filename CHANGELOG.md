@@ -5,6 +5,27 @@
 ### Security
 
 - spip-team/securite#3724 #5150 Le core ne génère plus de champ htpass par défaut dans `spip_auteurs`. Utiliser le plugin Htpasswd https://git.spip.net/spip-contrib-extensions/htpasswd pour ce besoin.
+
+
+### Changed
+
+- #5156 Les squelettes des formulaires d’édition (`formulaires/editer_xxx.html`) ne reçoivent plus l’ensemble du contenu de `spip_meta` dans l’entrée d’environnement `config`. Utiliser `#CONFIG` dedans si besoin pour cela. Seules les données spécifiques au formulaire sont transmises (par les fonctions `xxx_edit_config()`)
+- Ne pas insérer de balise de fermeture PHP dans le fichier `config/connect.php`
+- #5082 Ne pas autoriser à refuser ses propres articles en tant que rédacteur ou rédactrice.
+- #5042 Introduction de `README.md` et `LICENSE` (en remplacement de `INSTALL.txt` et `COPYING.txt`)
+- #4881 suppression des globales `flag_*` et adaptation ou nettoyage en conséquence du code.
+- #5108 `id_table_objet()` typé comme `objet_type()` que la fonction appelle
+
+### Removed
+
+- spip-team/securite#3724 #5150 Suppression de la fonction `initialiser_sel()` (qui ne servait que pour la gestion de htpasswd déportée en plugin).
+
+
+
+## [4.1.2] - 2022-05-20
+
+### Security
+
 - spip-team/securite#4829 Sécuriser le retour de `nettoyer_titre_email()` lorsqu’utilisé en squelette (Louka)
 - spip-team/securite#4494 Suite de #54 : masquer aussi les cookies sensibles dans `$_SERVER['HTTP_COOKIE']` et `$_ENV['HTTP_COOKIE']` sur la page d’info
 - spip-team/securite#3728 Sécuriser `HTTP_HOST` et `REQUEST_URI` dans `url_de_base()`
@@ -23,21 +44,16 @@
 - #4277 Constante `_MYSQL_ENGINE` pour spécifier l’engine MySQL à utiliser
 - Loger l'avancement de la migration des logos (lors d’une mise à jour)
 - Permettre de debug (js) les erreurs sur les liens ajax en utilisant le flag `jQuery.spip.debug` pour désactiver la redirection automatique
+- spip-team/securite#4336 La fonction `recuperer_infos_distantes()` accepte une option supplémentaire pour passer une callback de validation de l'URL distante finale (apres suivi des redirections eventuelles)
 - spip-team/securite#3725 Permettre d'étendre la liste par défaut des cookies sécurisés via la constante `_COOKIE_SECURE_LIST`
 
 ### Changed
 
-- #5156 Les squelettes des formulaires d’édition (`formulaires/editer_xxx.html`) ne reçoivent plus l’ensemble du contenu de `spip_meta` dans l’entrée d’environnement `config`. Utiliser `#CONFIG` dedans si besoin pour cela. Seules les données spécifiques au formulaire sont transmises (par les fonctions `xxx_edit_config()`)
 - Typage de la fonction `spip_affiche_mot_de_passe_masque()`
-- Ne pas insérer de balise de fermeture PHP dans le fichier `config/connect.php`
 - Accélérer un peu la migration des logos en documents (sur mise à jour vers SPIP 4.0) en désactivant le versionnage et les drapeaux édition pendant cette étape
-- #5082 Ne pas autoriser à refuser ses propres articles en tant que rédacteur ou rédactrice.
 - spip-team/securite#4336 La fonction `recuperer_infos_distantes()` prend maintenant un tableau d'options en second argument (seul le core utilisait les 2nd et 3e arguments).
 - spip-team/securite#4336 La fonction `recuperer_infos_distantes()` accepte une option supplémentaire pour passer une callback de validation de l'URL distante finale (apres suivi des redirections eventuelles)
 - spip-team/securite#4336 La fonction `copie_locale()` accèpte un argument `$callback_valider_url` qui permet de tester l'URL finale après récuperation et de refuser la copie locale si l'URL ne valide pas
-- #5042 Introduction de `README.md` et `LICENSE` (en remplacement de `INSTALL.txt` et `COPYING.txt`)
-- #4881 suppression des globales `flag_*` et adaptation ou nettoyage en conséquence du code.
-- #5108 `id_table_objet()` typé comme `objet_type()` que la fonction appelle
 
 ### Fixed
 
@@ -65,5 +81,4 @@
 
 ### Removed
 
-- spip-team/securite#3724 #5150 Suppression de la fonction `initialiser_sel()` (qui ne servait que pour la gestion de htpasswd déportée en plugin).
 - #5110 Depuis #5018, le fichier `prive/transmettre.html` n’a plus lieu d’être.
