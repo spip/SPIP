@@ -153,6 +153,7 @@ function inc_envoyer_mail_dist($destinataire, $sujet, $corps, $from = '', $heade
 		mb_internal_encoding('utf-8');
 	}
 
+	$headers = $headers ?? '';
 	if (function_exists('wordwrap') && (preg_match(',multipart/mixed,', $headers) == 0)) {
 		$texte = wordwrap($texte);
 	}

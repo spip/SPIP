@@ -256,8 +256,8 @@ function envoyer_inscription_dist($desc, $nom, $mode, $options = []) {
 		$modele_mail = $options['modele_mail'];
 	}
 	$message = recuperer_fond($modele_mail, $contexte);
-	$from = ($options['from'] ?? null);
-	$head = null;
+	$from = ($options['from'] ?? '');
+	$head = '';
 
 	return ['', $message, $from, $head];
 }
