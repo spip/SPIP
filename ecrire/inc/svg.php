@@ -305,6 +305,12 @@ function svg_getimagesize_from_attr($attributs) {
 		and $w = svg_dimension_to_pixels($attributs['width'])
 	) {
 		$width = $w;
+		// si on avait pas de viewBox, la construire a partir de ce width
+		if (empty($attributs['viewBox'])) {
+			$viewBox[2] = $width;
+			// si pas de height valide, on suppose l'image carree
+			$viewBox[3] = $width;
+		}
 	}
 	else {
 		// si on recupere la taille de la viewbox mais si la viewbox est petite on met un multiplicateur pour la taille finale
@@ -324,6 +330,10 @@ function svg_getimagesize_from_attr($attributs) {
 		and $h = svg_dimension_to_pixels($attributs['height'])
 	) {
 		$height = $h;
+		// si on avait pas de viewBox, la construire a partir de ce height
+		if (empty($attributs['viewBox'])) {
+			$viewBox[3] = $height;
+		}
 	}
 	else {
 		$height = $viewBox[3];

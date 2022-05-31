@@ -41,6 +41,7 @@
 
 ### Fixed
 
+- #5118 Fix les viewbox erronnées lors de la copie locale des SVG sans viewbox
 - #4277 Adaptation de `spip_mysql_repair()` à innodb
 - #4277 Permettre de spécifier l'engine mysql à utiliser
 - #5095 Ne pas casser une meta sérialisée quand un utilisateur saisit un emoji dans un formulaire de configuration
