@@ -283,6 +283,21 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles, &$joker) {
 
 	$joker = false; // indiquer a l'appelant
 
+	// la table de jointure est explicitement indiquée (rubrique.titre)
+	if (preg_match('/^(.*)\.(.*)$/', $nom_champ, $r)) {
+		[, $_table, $_nom_champ] = $r;
+		if ($cle = trouver_jointure_champ($_nom_champ, $boucles[$idb], [$_table])) {
+			$_alias = $cle . '_' . $_nom_champ;
+			return index_exception(
+				$boucles[$idb],
+				$desc,
+				$_alias,
+				[$_table, $_nom_champ]
+			);
+		}
+		return ['', ''];
+	}
+
 	// pas d'alias, pas de champ, pas de joker...
 	// tenter via une jointure...
 
