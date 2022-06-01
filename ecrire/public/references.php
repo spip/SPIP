@@ -254,60 +254,64 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles, &$joker) {
 	if ($excep) {
 		$excep = $excep[$nom_champ] ?? '';
 	}
+
+	// il y a un alias connu pour ce champ
 	if ($excep) {
 		$joker = false; // indiquer a l'appelant
 		return index_exception($boucles[$idb], $desc, $nom_champ, $excep);
-	} // pas d'alias. Le champ existe t'il ?
-	else {
-		// le champ est réellement présent, on le prend.
-		if (isset($desc['field'][$nom_champ])) {
-			$t = $boucles[$idb]->id_table;
-			$joker = false; // indiquer a l'appelant
-			return ["$t.$nom_champ", $nom_champ];
-		}
-		// Tous les champs sont-ils acceptés ?
-		// Si oui, on retourne le champ, et on lève le flag joker
-		// C'est le cas des itérateurs DATA qui acceptent tout
-		// et testent la présence du champ à l'exécution et non à la compilation
-		// car ils ne connaissent pas ici leurs contenus.
-		elseif (
-/*$joker AND */
-			isset($desc['field']['*'])
-		) {
-			$joker = true; // indiquer a l'appelant
-			return [$nom_champ, $nom_champ];
-		}
-		// pas d'alias, pas de champ, pas de joker...
-		// tenter via une jointure...
-		else {
-			$joker = false; // indiquer a l'appelant
-			// regarder si le champ est deja dans une jointure existante
-			// sinon, si il y a des joitures explicites, la construire
-			if (!$t = trouver_champ_exterieur($nom_champ, $boucles[$idb]->from, $boucles[$idb])) {
-				if ($boucles[$idb]->jointures_explicites) {
-					// [todo] Ne pas lancer que lorsque il y a des jointures explicites !!!!
-					// fonctionnel, il suffit d'utiliser $boucles[$idb]->jointures au lieu de jointures_explicites
-					// mais est-ce ce qu'on veut ?
-					$jointures = preg_split('/\s+/', $boucles[$idb]->jointures_explicites);
-					if ($cle = trouver_jointure_champ($nom_champ, $boucles[$idb], $jointures)) {
-						$t = trouver_champ_exterieur($nom_champ, $boucles[$idb]->from, $boucles[$idb]);
-					}
-				}
-			}
-			if ($t) {
-				// si on a trouvé une jointure possible, on fait comme
-				// si c'était une exception pour le champ demandé
-				return index_exception(
-					$boucles[$idb],
-					$desc,
-					$nom_champ,
-					[$t[1]['id_table'], reset($t[2])]
-				);
-			}
+	}
 
-			return ['', ''];
+	// le champ existe dans la table, on le prend.
+	if (isset($desc['field'][$nom_champ])) {
+		$t = $boucles[$idb]->id_table;
+		$joker = false; // indiquer a l'appelant
+		return ["$t.$nom_champ", $nom_champ];
+	}
+
+	// Tous les champs sont-ils acceptés ?
+	// Si oui, on retourne le champ, et on lève le flag joker
+	// C'est le cas des itérateurs DATA qui acceptent tout
+	// et testent la présence du champ à l'exécution et non à la compilation
+	// car ils ne connaissent pas ici leurs contenus.
+	if (
+		/*$joker AND */
+		isset($desc['field']['*'])
+	) {
+		$joker = true; // indiquer a l'appelant
+		return [$nom_champ, $nom_champ];
+	}
+
+	$joker = false; // indiquer a l'appelant
+
+	// pas d'alias, pas de champ, pas de joker...
+	// tenter via une jointure...
+
+	// regarder si le champ est deja dans une jointure existante
+	// sinon, si il y a des joitures explicites, la construire
+	if (!$t = trouver_champ_exterieur($nom_champ, $boucles[$idb]->from, $boucles[$idb])) {
+		if ($boucles[$idb]->jointures_explicites) {
+			// [todo] Ne pas lancer que lorsque il y a des jointures explicites !!!!
+			// fonctionnel, il suffit d'utiliser $boucles[$idb]->jointures au lieu de jointures_explicites
+			// mais est-ce ce qu'on veut ?
+			$jointures = preg_split('/\s+/', $boucles[$idb]->jointures_explicites);
+			if ($cle = trouver_jointure_champ($nom_champ, $boucles[$idb], $jointures)) {
+				$t = trouver_champ_exterieur($nom_champ, $boucles[$idb]->from, $boucles[$idb]);
+			}
 		}
 	}
+
+	if ($t) {
+		// si on a trouvé une jointure possible, on fait comme
+		// si c'était une exception pour le champ demandé
+		return index_exception(
+			$boucles[$idb],
+			$desc,
+			$nom_champ,
+			[$t[1]['id_table'], reset($t[2])]
+		);
+	}
+
+	return ['', ''];
 }
 
 
