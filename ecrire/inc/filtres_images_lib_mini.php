@@ -1434,14 +1434,14 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process = 'AUTO
 			return;
 		}
 		$imagick = new Imagick();
-		$imagick->readImage($image);
+		$imagick->readImage(realpath($image));
 		$imagick->resizeImage(
 			$destWidth,
 			$destHeight,
 			Imagick::FILTER_LANCZOS,
 			1
 		);//, IMAGICK_FILTER_LANCZOS, _IMG_IMAGICK_QUALITE / 100);
-		$imagick->writeImage($vignette);
+		$imagick->writeImage(realpath($vignette));
 
 		if (!@file_exists($vignette)) {
 			spip_log("echec imagick sur $vignette");
