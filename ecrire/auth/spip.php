@@ -201,13 +201,17 @@ function auth_spip_initialiser_secret(bool $force = false): bool {
 	$has_backup = array_column($has_backup, 'id_auteur');
 	if (empty($has_backup)) {
 		spip_log("Pas de cle secrete disponible, et aucun webmestre n'a de backup, on regenere une nouvelle cle - tous les mots de passe sont invalides", 'auth' . _LOG_INFO_IMPORTANTE);
-		$secret = $cles->getSecretAuth(true);
-		return true;
+		if ($secret = $cles->getSecretAuth(true)) {
+			return true;
+		}
+		spip_log("Echec generation d'une nouvelle cle : verifier les droits d'ecriture ?", 'auth' . _LOG_ERREUR);
+		// et on echoue car on ne veut pas que la situation reste telle quelle
+		raler_fichier(_DIR_ETC . 'cles.php');
 	}
 	else {
 		spip_log('Pas de cle secrete disponible (fichier config/cle.php absent ?) un des webmestres #' . implode(', #', $has_backup) . ' doit se connecter pour restaurer son backup des cles', 'auth' . _LOG_ERREUR);
-		return false;
 	}
+	return false;
 }
 
 /**

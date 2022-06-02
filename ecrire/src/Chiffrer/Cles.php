@@ -42,6 +42,14 @@ class Cles implements \Countable /* , ContainerInterface */ {
 		$this->keys[$name] = $key;
 	}
 
+	public function delete(string $name): bool {
+		if (isset($this->keys[$name])) {
+			unset($this->keys[$name]);
+			return true;
+		};
+		return false;
+	}
+
 	public function count(): int {
 		return count($this->keys);
 	}
