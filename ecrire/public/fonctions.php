@@ -404,6 +404,97 @@ function calculer_rang_smart($titre, $objet_source, $id, $env) {
 	return recuperer_numero($titre);
 }
 
+/**
+ * Calcul de la balise #TRI
+ *
+ * @param string $champ_ou_sens
+ *     - soit le nom de champ sur lequel effectuer le nouveau tri
+ *     - soit `<` et `>` pour définir le sens du tri sur le champ actuel
+ * @param string $libelle
+ *     Texte du lien
+ * @param string $classe
+ *     Classe ajoutée au lien, telle que `ajax`
+ * @param string $tri_nom
+ *     Nom du paramètre définissant le tri
+ * @param string $tri_champ
+ *     Nom du champ actuel utilisé pour le tri
+ * @param string $tri_sens
+ *     Sens de tri actuel, 1 ou -1
+ * @param array|string|int $liste_tri_sens_defaut
+ *     Soit la liste des sens de tri par défaut pour chaque champ
+ *     Soit une valeur par défaut pour tous les champs (1, -1, inverse)
+ * @return string
+ *     HTML avec un lien cliquable
+ */
+function calculer_balise_tri(string $champ_ou_sens, string $libelle, string $classe, string $tri_nom, string $tri_champ, string $tri_sens, $liste_tri_sens_defaut): string {
+
+	$url = self('&');
+	$tri_sens = (int) $tri_sens;
+	$tri_sens_fallback = 1;
+	$alias_sens = [
+		'<' => -1,
+		'>' => 1,
+		'inverse' => -1,
+	];
+
+	// Normaliser la liste des sens de tri par défaut
+	// On ajoute un jocker pour les champs non présents dans la liste
+	if (is_array($liste_tri_sens_defaut)) {
+		$liste_tri_sens_defaut['*'] = $tri_sens_fallback;
+	} else {
+		$liste_tri_sens_defaut = [
+			'*' => (int) ($alias_sens[$liste_tri_sens_defaut] ?? $liste_tri_sens_defaut),
+		];
+	}
+
+	// Le nouveau sens de tri :
+	// Soit c'est un sens fixe donné en paramètre (< ou >)
+	$is_sens_fixe = array_key_exists($champ_ou_sens, $alias_sens);
+	if ($is_sens_fixe) {
+		$tri_sens_nouveau = $alias_sens[$champ_ou_sens];
+	// Soit c'est le champ utilisé actuellement pour le tri → on inverse le sens
+	} elseif ($champ_ou_sens === $tri_champ) {
+		$tri_sens_nouveau = $tri_sens * -1;
+	// Sinon c'est un nouveau champ, et on prend son tri par défaut
+	} else {
+		$tri_sens_nouveau = (int) ($liste_tri_sens_defaut[$champ_ou_sens] ?? $liste_tri_sens_defaut['*']);
+	}
+
+	// URL : ajouter le champ sur lequel porte le tri
+	if (!$is_sens_fixe) {
+		$param_tri = "tri$tri_nom";
+		$url = parametre_url($url, $param_tri, $champ_ou_sens);
+	}
+
+	// URL : n'ajouter le sens de tri que si nécessaire,
+	// c.à.d différent du sens par défaut pour le champ
+	$param_sens = "sens$tri_nom";
+	$tri_sens_defaut_champ = (int) ($liste_tri_sens_defaut[$champ_ou_sens] ?? $liste_tri_sens_defaut['*']);
+	if ($tri_sens_nouveau !== $tri_sens_defaut_champ) {
+		$url = parametre_url($url, $param_sens, $tri_sens_nouveau);
+	} else {
+		$url = parametre_url($url, $param_sens, '');
+	}
+
+	// Drapeau pour garder en session ?
+	$param_memo = (!$is_sens_fixe ? $param_tri : $param_sens);
+	$url = parametre_url($url, 'var_memotri', strncmp($tri_nom, 'session', 7) == 0 ? $param_memo : '');
+
+	// Classe icône sur le champ de tri actuel
+	$classe .= ' item-tri';
+	if ($champ_ou_sens === $tri_champ) {
+		$classe .= ' item-tri_' . ($tri_sens === 1 ? 'asc' : 'desc');
+	}
+
+	// Lien
+	$balise = lien_ou_expose($url, $libelle, false, $classe);
+
+	// Accessibilité
+	$balise = inserer_attribut($balise, 'aria-sort', ($tri_sens === 1 ? 'ascending' : 'descending'));
+
+	return $balise;
+}
+
 
 /**
  * Proteger les champs passes dans l'url et utiliser dans {tri ...}

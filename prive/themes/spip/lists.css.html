@@ -716,6 +716,30 @@
 	text-align: var(--spip-left);
 }
 
+/* Balise #TRI : item et icône sens de tri */
+.item-tri {
+	display: inline-flex;
+	align-items: center;
+}
+[class*=item-tri_]:after {
+	content: "";
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	margin-inline-start: 0.15em;
+	margin-inline-start: 0.15em;
+	background-color: currentColor !important;
+	mask-size: contain;
+	mask-position: center;
+	mask-repeat: no-repeat;
+}
+.item-tri_asc:after {
+	mask-image: url("#CHEMIN_IMAGE{tri-sens-asc-xx.svg}");
+}
+.item-tri_desc:after {
+	mask-image: url("#CHEMIN_IMAGE{tri-sens-desc-xx.svg}");
+}
+
 
 /**
  * =========

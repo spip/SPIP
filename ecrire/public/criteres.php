@@ -1824,18 +1824,19 @@ function critere_tri_dist($idb, &$boucles, $crit) {
 	// definition du champ par defaut
 	$_champ_defaut = !isset($crit->param[0][0]) ? "''"
 		: calculer_liste([$crit->param[0][0]], $idb, $boucles, $boucle->id_parent);
-	$_sens_defaut = !isset($crit->param[1][0]) ? '1'
+	$_liste_sens_defaut = !isset($crit->param[1][0]) ? '1'
 		: calculer_liste([$crit->param[1][0]], $idb, $boucles, $boucle->id_parent);
 	$_variable = !isset($crit->param[2][0]) ? "'$idb'"
 		: calculer_liste([$crit->param[2][0]], $idb, $boucles, $boucle->id_parent);
 
 	$_tri = "((\$t=(isset(\$Pile[0]['tri'.$_variable]))?\$Pile[0]['tri'.$_variable]:((strncmp($_variable,'session',7)==0 AND session_get('tri'.$_variable))?session_get('tri'.$_variable):$_champ_defaut))?tri_protege_champ(\$t):'')";
 
-	$_sens_defaut = "(is_array(\$s=$_sens_defaut)?(isset(\$s[\$st=$_tri])?\$s[\$st]:reset(\$s)):\$s)";
+	$_sens_defaut = "(is_array(\$s=$_liste_sens_defaut)?(isset(\$s[\$st=$_tri])?\$s[\$st]:reset(\$s)):\$s)";
 	$_sens = "((intval(\$t=(isset(\$Pile[0]['sens'.$_variable]))?\$Pile[0]['sens'.$_variable]:((strncmp($_variable,'session',7)==0 AND session_get('sens'.$_variable))?session_get('sens'.$_variable):$_sens_defaut))==-1 OR \$t=='inverse')?-1:1)";
 
 	$boucle->modificateur['tri_champ'] = $_tri;
 	$boucle->modificateur['tri_sens'] = $_sens;
+	$boucle->modificateur['tri_liste_sens_defaut'] = $_liste_sens_defaut;
 	$boucle->modificateur['tri_nom'] = $_variable;
 	// faut il inserer un test sur l'existence de $tri parmi les champs de la table ?
 	// evite des erreurs sql, mais peut empecher des tri sur jointure ...

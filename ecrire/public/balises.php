@@ -2688,34 +2688,31 @@ function balise_TRI_dist($p, $liste = 'true') {
 		return $p;
 	}
 
-	$_champ = interprete_argument_balise(1, $p);
-	// si pas de champ, renvoyer le critere de tri utilise
-	if (!$_champ) {
-		$p->code = $boucle->modificateur['tri_champ'];
+	// Différentes infos relatives au tri présentes dans les modificateurs
+	$_tri_nom = $boucle->modificateur['tri_nom'] ; // nom du paramètre définissant le tri
+	$_tri_champ = $boucle->modificateur['tri_champ']; // champ actuel utilisé le tri
+	$_tri_sens = $boucle->modificateur['tri_sens']; // sens de tri actuel
+	$_tri_liste_sens_defaut = $boucle->modificateur['tri_liste_sens_defaut']; // sens par défaut pour chaque champ
+
+	$_champ_ou_sens = interprete_argument_balise(1, $p);
+	// si pas de champ, renvoyer le critère de tri actuel
+	if (!$_champ_ou_sens) {
+		$p->code = $_tri_champ;
 
 		return $p;
 	}
 	// forcer la jointure si besoin, et si le champ est statique
-	if (preg_match(",^'([\w.]+)'$,i", $_champ, $m)) {
+	if (preg_match(",^'([\w.]+)'$,i", $_champ_ou_sens, $m)) {
 		index_pile($b, $m[1], $p->boucles, '', null, true, false);
 	}
 
 	$_libelle = interprete_argument_balise(2, $p);
-	$_libelle = $_libelle ?: $_champ;
+	$_libelle = $_libelle ?: $_champ_ou_sens;
 
-	$_class = interprete_argument_balise(3, $p);
-	// si champ = ">" c'est un lien vers le tri croissant : de gauche a droite ==> 1
-	// si champ = "<" c'est un lien vers le tri decroissant : (sens inverse) == -1
-	$_issens = "in_array($_champ,array('>','<'))";
-	$_sens = "(strpos('< >',$_champ)-1)";
+	$_class = interprete_argument_balise(3, $p) ?? "''";
 
-	$_variable = "((\$s=$_issens)?'sens':'tri')." . $boucle->modificateur['tri_nom'];
-	$_url = "parametre_url(self(),$_variable,\$s?$_sens:$_champ)";
-	$_url = "parametre_url($_url,'var_memotri',strncmp(" . $boucle->modificateur['tri_nom'] . ",'session',7)==0?$_variable:'')";
-	$_on = '$s?(' . $boucle->modificateur['tri_sens'] . "==$_sens" . '):(' . $boucle->modificateur['tri_champ'] . "==$_champ)";
+	$p->code = "calculer_balise_tri($_champ_ou_sens, $_libelle, $_class, $_tri_nom, $_tri_champ, $_tri_sens, $_tri_liste_sens_defaut)";
 
-	$p->code = "lien_ou_expose($_url,$_libelle,$_on" . ($_class ? ",$_class" : '') . ')';
-	//$p->code = "''";
 	$p->interdire_scripts = false;
 
 	return $p;
