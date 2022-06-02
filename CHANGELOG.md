@@ -18,6 +18,7 @@
 
 ### Fixed
 
+- #5206 echouer en minipres si on ne peut pas ecrire le fichier des cles lors du login
 - #5190 Dans le formulaire de configuration de l'email de suivi, pouvoir indiquer une liste d'emails séparés par des virgules
 - #5204 Fix le login lors de la restauration des cles depuis un compte webmestre
 - #5118 Fix les viewbox erronnées lors de la copie locale des SVG sans viewbox
