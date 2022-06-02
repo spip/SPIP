@@ -93,6 +93,7 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 		case 98:
 		default:
 			// doit-on restaurer un backup des cles ?
+			// si on a le bon pass on peut decoder le backup, retrouver la cle, et du coup valider le pass
 			if (
 				!$secret
 				and $auteur_peut_sauver_cles
@@ -100,8 +101,14 @@ function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
 			) {
 				if ($cles->restore($row['backup_cles'], $pass, $row['pass'], $row['id_auteur'])) {
 					spip_log('Les cles secretes ont ete restaurées avec le backup du webmestre #' . $row['id_auteur'], 'auth' . _LOG_INFO_IMPORTANTE);
-					$cles->save();
-					$secret = $cles->getSecretAuth();
+					if ($cles->save()) {
+						$secret = $cles->getSecretAuth();
+					}
+					else {
+						spip_log("Echec restauration des cles : verifier les droits d'ecriture ?", 'auth' . _LOG_ERREUR);
+						// et on echoue car on ne veut pas que la situation reste telle quelle
+						raler_fichier(_DIR_ETC . 'cles.php');
+					}
 				}
 				else {
 					spip_log('Pas de cle secrete disponible (fichier config/cle.php absent ?) mais le backup du webmestre #' . $row['id_auteur'] . " n'est pas valide", 'auth' . _LOG_ERREUR);
