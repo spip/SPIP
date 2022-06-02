@@ -140,8 +140,13 @@ final class SpipCles {
 		}
 		if ($autoInit) {
 			$this->cles->generate($name);
-			$this->save();
-			return $this->cles->get($name);
+			// si l'ecriture de fichier a bien marche on peut utiliser la cle
+			if ($this->save()) {
+				return $this->cles->get($name);
+			}
+			// sinon loger et annule la cle generee car il ne faut pas l'utiliser
+			spip_log("Echec ecriture du fichier cle ".$this->file." ; impossible de generer une cle $name", 'chiffrer' . _LOG_ERREUR);
+			$this->cles->delete($name);
 		}
 		return null;
 	}
