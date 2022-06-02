@@ -35,7 +35,7 @@ class Chiffrement {
 		sodium_memzero($key);
 		sodium_memzero($nonce);
 		sodium_memzero($salt);
-		spip_log("chiffrer($message)=$encoded", 'chiffrer' . _LOG_DEBUG);
+		#spip_log("chiffrer($message)=$encoded", 'chiffrer' . _LOG_DEBUG);
 		return $encoded;
 	}
 
@@ -59,7 +59,7 @@ class Chiffrement {
 			return null;
 		}
 		$message = sodium_unpad($padded_message, 16);
-		spip_log("dechiffrer($encoded)=$message", 'chiffrer' . _LOG_DEBUG);
+		#spip_log("dechiffrer($encoded)=$message", 'chiffrer' . _LOG_DEBUG);
 		return $message;
 	}
 
