@@ -10,6 +10,7 @@ Changelog de SPIP 4.1
 
 ### Fixed
 
+- #5206 Échouer en minipres si on ne peut pas écrire le fichier des clés lors du login
 - #5213 Prendre en compte le sens du critère `tri` en présence d’un tri `multi`
 - #5190 Dans le formulaire de configuration de l'email de suivi, pouvoir indiquer une liste d'emails séparés par des virgules
 - #5204 Fix le login lors de la restauration des cles depuis un compte webmestre
