@@ -430,7 +430,6 @@ function calculer_balise_tri(string $champ_ou_sens, string $libelle, string $cla
 
 	$url = self('&');
 	$tri_sens = (int) $tri_sens;
-	$tri_sens_fallback = 1;
 	$alias_sens = [
 		'<' => -1,
 		'>' => 1,
@@ -439,8 +438,9 @@ function calculer_balise_tri(string $champ_ou_sens, string $libelle, string $cla
 
 	// Normaliser la liste des sens de tri par défaut
 	// On ajoute un jocker pour les champs non présents dans la liste
+	// avec la valeur du 1er item de la liste, idem critère {tri}
 	if (is_array($liste_tri_sens_defaut)) {
-		$liste_tri_sens_defaut['*'] = $tri_sens_fallback;
+		$liste_tri_sens_defaut['*'] = array_values($liste_tri_sens_defaut)[0];
 	} else {
 		$liste_tri_sens_defaut = [
 			'*' => (int) ($alias_sens[$liste_tri_sens_defaut] ?? $liste_tri_sens_defaut),
