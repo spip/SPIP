@@ -480,10 +480,10 @@ function calculer_balise_tri(string $champ_ou_sens, string $libelle, string $cla
 	$param_memo = (!$is_sens_fixe ? $param_tri : $param_sens);
 	$url = parametre_url($url, 'var_memotri', strncmp($tri_nom, 'session', 7) == 0 ? $param_memo : '');
 
-	// Classe icône sur le champ de tri actuel
-	$classe .= ' item-tri';
+	// Classes : on indique le sens de tri et l'item exposé
+	$classe .= ' item-tri item-tri_' . ($tri_sens === 1 ? 'asc' : 'desc');
 	if ($champ_ou_sens === $tri_champ) {
-		$classe .= ' item-tri_' . ($tri_sens === 1 ? 'asc' : 'desc');
+		$classe .= ' item-tri_actif';
 	}
 
 	// Lien

@@ -716,12 +716,12 @@
 	text-align: var(--spip-left);
 }
 
-/* Balise TRI : picto indiquant le sens de tri */
-[class*=item-tri_]{
+/* Balise TRI : picto indiquant le sens de tri sur l'item exposé */
+.item-tri_actif {
 	display: inline-flex;
 	align-items: center;
 }
-[class*=item-tri_]:after {
+.item-tri_actif:after {
 	content: "";
 	display: inline-block;
 	width: 1em;
@@ -733,10 +733,10 @@
 	mask-position: center;
 	mask-repeat: no-repeat;
 }
-.item-tri_asc:after {
+.item-tri_actif.item-tri_asc:after {
 	mask-image: url("#CHEMIN_IMAGE{tri-sens-asc-xx.svg}");
 }
-.item-tri_desc:after {
+.item-tri_actif.item-tri_desc:after {
 	mask-image: url("#CHEMIN_IMAGE{tri-sens-desc-xx.svg}");
 }
 
