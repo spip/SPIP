@@ -76,7 +76,7 @@ function suivre_lien($url, $lien) {
 		return $lien;
 	}
 	if (preg_match(';^((?:[a-z]{3,33}:)?//.*?)(/.*)?$;iS', $lien, $r)) {
-		$r = array_pad($r, 3, null);
+		$r = array_pad($r, 3, '');
 
 		return $r[1] . resolve_path($r[2]);
 	}
