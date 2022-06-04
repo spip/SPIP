@@ -489,9 +489,6 @@ function calculer_balise_tri(string $champ_ou_sens, string $libelle, string $cla
 	// Lien
 	$balise = lien_ou_expose($url, $libelle, false, $classe);
 
-	// Accessibilité
-	$balise = inserer_attribut($balise, 'aria-sort', ($tri_sens === 1 ? 'ascending' : 'descending'));
-
 	return $balise;
 }
 
