@@ -431,7 +431,7 @@ function tri_protege_champ($t) {
  */
 function tri_champ_order($t, $from = null, $senstri = '') {
 	if (strncmp($t, 'multi ', 6) == 0) {
-		return 'multi';
+		return 'multi' . $senstri;
 	}
 
 	$champ = $t;
