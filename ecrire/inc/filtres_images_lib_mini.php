@@ -1441,7 +1441,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process = 'AUTO
 			Imagick::FILTER_LANCZOS,
 			1
 		);//, IMAGICK_FILTER_LANCZOS, _IMG_IMAGICK_QUALITE / 100);
-		$imagick->writeImage(realpath($vignette));
+		$imagick->writeImage($vignette);
 
 		if (!@file_exists($vignette)) {
 			spip_log("echec imagick sur $vignette");
