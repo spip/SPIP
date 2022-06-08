@@ -20,7 +20,7 @@
 			<div class="editer editer_email[ (#ENV**{erreurs/email}|oui)erreur]">
 				[<label for="email">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:entree_adresse_email:>,<:entree_adresse_email_2:>})</label>][
 				<span class='erreur_message'>(#ENV**{erreurs/email})</span>
-				]<input type='email' class='text email' name='email' id='email' value="[(#ENV**{email})]" />
+				]<input type='email' autocomplete="new-password" class='text email' name='email' id='email' value="[(#ENV**{email})]" />
 			</div>
 			<div class="editer editer_bio[ (#ENV**{erreurs/bio}|oui)erreur]">
 				[<label for="bio">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:entree_infos_perso:>,<:entree_infos_perso_2:>})</label>][
