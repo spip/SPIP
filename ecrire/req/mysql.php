@@ -614,7 +614,11 @@ function _mysql_traite_query($query, $db = '', $prefixe = '', $echappe_textes = 
  **/
 function spip_mysql_selectdb($db, $serveur = '', $requeter = true) {
 	$link = _mysql_link($serveur);
-	$ok = mysqli_select_db($link, $db);
+	try {
+		$ok = mysqli_select_db($link, $db);
+	} catch (\mysqli_sql_exception $e) {
+		$ok = false;
+	}
 	if (!$ok) {
 		spip_log('Echec mysqli_selectdb. Erreur : ' . mysqli_error($link), 'mysql.' . _LOG_CRITIQUE);
 	}
