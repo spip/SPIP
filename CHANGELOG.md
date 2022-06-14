@@ -10,6 +10,7 @@ Changelog de SPIP 4.1
 
 ### Fixed
 
+- #5223 Éviter une erreur fatale sur `sql_selectdb()` sur une base inexistante en mysql
 - #5218 Éviter l’autocomplétion d’identifiants email en éditant un auteur
 - #5209 Fonctionnement de Imagick sous Windows
 - #5206 Échouer en minipres si on ne peut pas écrire le fichier des clés lors du login
