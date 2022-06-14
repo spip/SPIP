@@ -925,25 +925,33 @@ function spip_sqlite_explain($query, $serveur = '', $requeter = true) {
  * @param string $t Structure de résultat attendu (défaut ASSOC)
  * @param string $serveur Nom de la connexion
  * @param bool $requeter Inutilisé
- * @return array           Ligne de résultat
+ * @return array|null|false
+ *     - array Ligne de résultat
+ *     - null Pas de résultat
+ *     - false Erreur
  */
 function spip_sqlite_fetch($r, $t = '', $serveur = '', $requeter = true) {
 
 	$link = _sqlite_link($serveur);
 	$t = $t ? $t : SPIP_SQLITE3_ASSOC;
 
-	$retour = false;
-	if ($r) {
-		$retour = $r->fetch($t);
+	if (!$r) {
+		return false;
+	}
+
+	$retour = $r->fetch($t);
+
+	if (!$retour) {
+		if ($r->errorCode() === '00000') {
+			return null;
+		}
+		return false;
 	}
 
 	// Renvoie des 'table.titre' au lieu de 'titre' tout court ! pff !
 	// suppression de 'table.' pour toutes les cles (c'est un peu violent !)
 	// c'est couteux : on ne verifie que la premiere ligne pour voir si on le fait ou non
-	if (
-		$retour
-		and strpos(implode('', array_keys($retour)), '.') !== false
-	) {
+	if (strpos(implode('', array_keys($retour)), '.') !== false) {
 		foreach ($retour as $cle => $val) {
 			if (($pos = strpos($cle, '.')) !== false) {
 				$retour[substr($cle, $pos + 1)] = &$retour[$cle];

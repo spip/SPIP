@@ -1037,7 +1037,10 @@ function spip_mysql_showtable($nom_table, $serveur = '', $requeter = true) {
  * @param string $t Structure de résultat attendu (défaut MYSQLI_ASSOC)
  * @param string $serveur Nom de la connexion
  * @param bool $requeter Inutilisé
- * @return array           Ligne de résultat
+ * @return array|null|false
+ *     - array Ligne de résultat
+ *     - null Pas de résultat
+ *     - false Erreur
  */
 function spip_mysql_fetch($r, $t = '', $serveur = '', $requeter = true) {
 	if (!$t) {
@@ -1046,6 +1049,7 @@ function spip_mysql_fetch($r, $t = '', $serveur = '', $requeter = true) {
 	if ($r) {
 		return mysqli_fetch_array($r, $t);
 	}
+	return false;
 }
 
 /**
