@@ -243,7 +243,7 @@ function formulaires_editer_objet_charger(
 				$row = sql_fetsel('*', $table_objet_sql, $id_table_objet . '=' . intval($id));
 			}
 			if (!$new) {
-				$md5 = controles_md5($row ?? []);
+				$md5 = controles_md5($row ?: []);
 			}
 		}
 		if (!$row) {
