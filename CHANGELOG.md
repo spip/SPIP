@@ -19,6 +19,7 @@
 
 ### Fixed
 
+- spip-contrib-extensions/agenda#57 Éviter une erreur de typage à l’enregistrement dans certains formulaires
 - #5223 Éviter une erreur fatale sur `sql_selectdb()` sur une base inexistante en mysql
 - #5218 Éviter l’autocomplétion d’identifiants email en éditant un auteur
 - #5209 Fonctionnement de Imagick sous Windows
