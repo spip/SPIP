@@ -2055,8 +2055,9 @@ function _sqlite_calculer_cite($v, $type) {
 			is_null($v)
 			and stripos($type, 'NOT NULL') === false
 		) {
+			// null php se traduit en NULL SQL
 			return 'NULL';
-		} // null php se traduit en NULL SQL
+		}
 
 		if (sql_test_date($type) and preg_match('/^\w+\(/', $v)) {
 			return $v;
@@ -2064,7 +2065,9 @@ function _sqlite_calculer_cite($v, $type) {
 		if (sql_test_int($type)) {
 			if (is_numeric($v)) {
 				return $v;
-			} elseif (ctype_xdigit(substr($v, 2)) and strncmp($v, '0x', 2) == 0) {
+			} elseif ($v === null) {
+				return 0;
+			} elseif (ctype_xdigit(substr($v, 2)) and strncmp($v, '0x', 2) === 0) {
 				return hexdec(substr($v, 2));
 			} else {
 				return intval($v);
