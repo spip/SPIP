@@ -4984,7 +4984,7 @@ function generer_objet_lien(int $id_objet, string $objet, int $longueur = 80, st
 	$titre = traiter_raccourci_titre($id_objet, $objet, $connect);
 	// lorsque l'objet n'est plus declare (plugin desactive par exemple)
 	// le raccourcis n'est plus valide
-	$titre = typo($titre['titre']) ?? '';
+	$titre = typo($titre['titre'] ?? '');
 	// on essaye avec generer_info_entite ?
 	if (!strlen($titre) and !$connect) {
 		$titre = generer_objet_info($id_objet, $objet, 'titre');
