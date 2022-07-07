@@ -124,11 +124,9 @@ function signale_edition($id, $auteur, $type = 'article') {
 	}
 
 	$edition = lire_tableau_edition();
-	if (isset($auteur['id_auteur']) and $id_a = $auteur['id_auteur']) {
-		$nom = $auteur['nom'];
-	} else {
-		$nom = $id_a = $GLOBALS['ip'];
-	}
+	
+	$nom = $auteur['nom'] ?? $GLOBALS['ip'];
+	$id_a = $auteur['id_auteur'] ?? $GLOBALS['ip'];
 
 	if (!isset($edition[$type][$id]) or !is_array($edition[$type][$id])) {
 		$edition[$type][$id] = [];
