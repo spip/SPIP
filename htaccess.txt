@@ -42,6 +42,11 @@ RewriteRule ^(.*) - [E=BASE:%1]
 ###
 # Si le fichier ou repertoire demande existe
 # ignorer toutes les regles qui suivent
+<IfModule mod_headers.c>
+	RewriteCond %{REQUEST_FILENAME} -f
+	RewriteRule ^IMG/ - [env=sandbox:sandbox,skip=100]
+	Header add Content-Security-Policy "sandbox" env=sandbox
+</IfModule>
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule "." - [skip=100]
 RewriteCond %{REQUEST_FILENAME} -d
