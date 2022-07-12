@@ -134,11 +134,8 @@ function formulaires_editer_liens_charger_dist($a, $b, $c, $options = []) {
 	if ($editable) {
 		$oups = _request('_oups') ?? '';
 		if ($oups) {
-			if (unserialize(base64_decode($oups, true))) {
+			if (json_decode(base64_decode($oups, true))) {
 				// on est bon, rien a faire
-			} elseif (unserialize($oups)) {
-				// il faut encoder
-				$oups = base64_encode($oups);
 			} else {
 				$oups = '';
 			}
@@ -239,8 +236,8 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = []) {
 		if (
 			_request('annuler_oups')
 			and $oups = _request('_oups')
-			and $oups = base64_decode($oups)
-			and $oups = unserialize($oups)
+			and $oups = base64_decode($oups, true)
+			and $oups = json_decode($oups, true)
 		) {
 			if ($oups_objets = charger_fonction("editer_liens_oups_{$table_source}_{$objet}_{$objet_lien}", 'action', true)) {
 				$oups_objets($oups);
@@ -318,7 +315,7 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = []) {
 					}
 				}
 			}
-			set_request('_oups', $oups ? base64_encode(serialize($oups)) : null);
+			set_request('_oups', $oups ? base64_encode(json_encode($oups)) : null);
 		}
 
 		if ($ajouter) {
