@@ -1,1 +1,2 @@
-<INCLURE{fond=prive/squelettes/structure}{env}{type-page=#ENV{type-page,#ENV{exec}}}{composition=#ENV{composition,''}}>
+[#HTTP_HEADER{"Content-Security-Policy: frame-ancestors 'none'"}(#ENV{exec}|in_array{#LISTE{auteur,auteur_edit}}|oui)
+]<INCLURE{fond=prive/squelettes/structure}{env}{type-page=#ENV{type-page,#ENV{exec}}}{composition=#ENV{composition,''}}>
