@@ -22,6 +22,7 @@
 
 ### Fixed
 
+- #5256 Corriger `refuser_traiter_formulaire_ajax()` qui ne fonctionnait pas quand un form contenait un element avec un name ou id `submit`
 - #5232 Correction notice PHP sur `signale_edition()`
 - #5231 Correction deprecated PHP 8.1 sur `sql_quote(null)`
 - #5242 Correction warning sur `generer_objet_lien()`
