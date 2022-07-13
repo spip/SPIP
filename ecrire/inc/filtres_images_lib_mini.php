@@ -561,7 +561,7 @@ function _image_extensions_acceptees_en_entree() {
 			$extensions = array_merge(explode(',', $GLOBALS['meta']['gd_formats']));
 			$extensions = array_map('trim', $extensions);
 			$extensions = array_filter($extensions);
-			if (in_array('jpg', $extensions)) { 
+			if (in_array('jpg', $extensions)) {
 				$extensions[] = 'jpeg';
 			}
 			$extensions = array_unique($extensions);
@@ -1780,12 +1780,10 @@ function process_image_reduire($fonction, $img, $taille, $taille_y, $force, $pro
 	}
 
 	if (!is_array($image) or !$image['largeur'] or !$image['hauteur']) {
-		spip_log("image_reduire_src:pas de version locale de $img");
+		spip_log("image_reduire_src:pas de version locale de $img ou extension non prise en charge");
 		// on peut resizer en mode html si on dispose des elements
-		if (
-			$srcw = extraire_attribut($img, 'width')
-			and $srch = extraire_attribut($img, 'height')
-		) {
+		[$srcw, $srch] = taille_image($img);
+		if ($srcw and $srch) {
 			[$w, $h] = _image_ratio($srcw, $srch, $taille, $taille_y);
 
 			return _image_tag_changer_taille($img, $w, $h);
@@ -1795,7 +1793,7 @@ function process_image_reduire($fonction, $img, $taille, $taille_y, $force, $pro
 		return inserer_attribut(
 			$img,
 			'style',
-			"max-width: ${taille}px; max-height: ${taille_y}px"
+			"max-width: ${taille}px;max-width: min(100%,${taille}px); max-height: ${taille_y}px"
 		);
 	}
 
