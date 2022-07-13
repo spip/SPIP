@@ -218,7 +218,7 @@ function analyse_resultat_skel($nom, $cache, $corps, $source = '') {
 			if ($j == 'X-Spip-Filtre' and isset($headers[$j])) {
 				$headers[$j] .= '|' . $r[3];
 			} else {
-				$headers[$j] = $r[3];
+				$headers[$j] = str_replace(['\\\\',"\\'",'\\"'], ['\\',"'",'"'],$r[3]);
 			}
 		}
 	}
