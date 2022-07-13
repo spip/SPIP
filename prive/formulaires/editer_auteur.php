@@ -326,10 +326,32 @@ function formulaires_editer_auteur_traiter_dist(
 	$row = [],
 	$hidden = ''
 ) {
-	$id_objet = null;
 	if (_request('saisie_webmestre') or _request('webmestre')) {
 		set_request('webmestre', _request('webmestre') ?: 'non');
 	}
+
+	// si il y a des modifs sensibles (statut, mot de passe), on refuse le traitement en ajax
+	// le formulaire ne peut être traité depuis une XMLHttpRequest
+	$prev = formulaires_editer_objet_charger('auteur', $id_auteur, 0, 0, $retour, $config_fonc, $row, $hidden);
+	if (
+	     _request('new_pass') // nouveau mot de passe
+	  or empty($prev['statut']) // creation auteur
+	  or (_request('email') and $prev['email'] !== _request('email')) // modification email
+	  or (_request('statut') === '0minirezo' and $prev['statut'] !== '0minirezo') // promotion 0minirezo
+	  or (_request('statut') and intval(_request('statut')) < intval($prev['statut'])) // promotion de statut
+	  or (_request('webmestre') and _request('webmestre') !== 'non' and $prev['webmestre'] !== 'oui') // promotion webmestre
+	) {
+
+		refuser_traiter_formulaire_ajax();
+		// si on arrive là encore en ajax c'est pas OK, on genere une erreur
+		if (_AJAX or !empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+			return [
+				'message_erreur' => _T('erreur_technique_ajaxform')
+			];
+		}
+	}
+
+	$id_objet = null;
 	$retour = parametre_url($retour, 'email_confirm', '');
 
 	if ($restreintes = _request('restreintes')) {

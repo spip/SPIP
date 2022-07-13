@@ -4,6 +4,7 @@
 
 ### Security
 
+- #5256 Bloquer la modification d'un auteur via une XMLHttpRequest ou une iframe
 - spip-team/securite#4832 Envoyer un CSP sandbox sur tous les documents de IMG via une RewriteRule du htaccess.txt modèle
 - spip-team/securite#4835 Mise a jour de l'écran de sécurité en version 1.4.2
 - spip-team/securite#4835 Sécuriser le paramètre `_oups` dans le formulaire d'édition de liens
