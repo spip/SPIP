@@ -1652,3 +1652,20 @@ img.aide {
 	top: 50%;
 	transform: translateY(-50%);
 }
+
+
+@keyframes skew-x-shakeng{
+ 0% { transform: skewX(-4deg); }
+ 5% { transform: skewX(4deg); }
+ 10% { transform: skewX(-4deg); }
+ 15% { transform: skewX(4deg); }
+ 20% { transform: skewX(-4deg); }
+ 25% { transform: skewX(4deg); }
+ 30% { transform: skewX(-4deg); }
+ 35% { transform: skewX(4deg); }
+ 40% { transform: skewX(0deg); }
+ 100% { transform: skewX(0deg); }
+}
+.formulaire_spip.resubmit-noajax {
+  animation: skew-x-shakeng 0.5s;
+}

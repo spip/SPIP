@@ -287,7 +287,7 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 				if (leclk) {
 					scrollwhensubmit_button = !jQuery(leclk).is('.noscroll');
 					var n = leclk.name;
-					if (n && !leclk.disabled && leclk.type == "image") {
+					if (n && !leclk.disabled && leclk.type === "image") {
 						leclk_x = leform.clk_x;
 						leclk_y = leform.clk_y;
 					}
@@ -312,13 +312,20 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 						var n = leclk.name;
 						if (n && !leclk.disabled) {
 							jQuery(leform).prepend("<input type='hidden' name='"+n+"' value='"+leclk.value+"' />");
-							if (leclk.type == "image") {
+							if (leclk.type === "image") {
 								jQuery(leform).prepend("<input type='hidden' name='"+n+".x' value='"+leform.clk_x+"' />");
 								jQuery(leform).prepend("<input type='hidden' name='"+n+".y' value='"+leform.clk_y+"' />");
 							}
 						}
 					}
-					jQuery(leform).ajaxFormUnbind().submit();
+					jQuery(leform).ajaxFormUnbind().closest('.formulaire_spip').addClass('resubmit-noajax');
+					try {
+						leform.submit();
+					} catch (err) {
+						// just in case form has element with name/id of 'submit'
+						var submitFn = document.createElement('form').submit;
+						submitFn.apply(leform);
+					}
 				}
 				else {
 					if (!c.length || c.indexOf("ajax-form-is-ok")==-1)
