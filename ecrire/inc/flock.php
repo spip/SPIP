@@ -226,59 +226,46 @@ function ecrire_fichier($fichier, $contenu, $ignorer_echec = false, $truncate = 
 		if (substr($fichier, -3) == '.gz') {
 			$contenu = gzencode($contenu);
 		}
+		$longueur_a_ecrire = strlen($contenu);
+
 		// si c'est une ecriture avec troncation , on fait plutot une ecriture complete a cote suivie unlink+rename
 		// pour etre sur d'avoir une operation atomique
 		// y compris en NFS : http://www.ietf.org/rfc/rfc1094.txt
-		// sauf sous wintruc ou ca ne marche pas
 		$ok = false;
-		if ($truncate and _OS_SERVEUR != 'windows') {
+		if ($truncate) {
 			if (!function_exists('creer_uniqid')) {
 				include_spip('inc/acces');
 			}
 			$id = creer_uniqid();
-			// on ouvre un pointeur sur un fichier temporaire en ecriture +raz
-			if ($fp2 = spip_fopen_lock("$fichier.$id", 'w', LOCK_EX)) {
-				$s = @fputs($fp2, $contenu, $a = strlen($contenu));
-				$ok = ($s == $a);
-				spip_fclose_unlock($fp2);
+			// on ecrit dans un fichier temporaire avec lock
+			$l = file_put_contents("$fichier.$id", $contenu, LOCK_EX);
+			if ($l === $longueur_a_ecrire) {
 				spip_fclose_unlock($fp);
 				$fp = null;
-				// unlink direct et pas spip_unlink car on avait deja le verrou
-				// a priori pas besoin car rename ecrase la cible
-				// @unlink($fichier);
-				// le rename aussitot, atomique quand on est pas sous windows
-				// au pire on arrive en second en cas de concourance, et le rename echoue
+				// on rename vers la cible, ce qui est atomique quand on est pas sous windows
+				// au pire on arrive en second en cas de concurance, et le rename echoue
 				// --> on a la version de l'autre process qui doit etre identique
-				@rename("$fichier.$id", $fichier);
-				// precaution en cas d'echec du rename
-				if (!_TEST_FILE_EXISTS or @file_exists("$fichier.$id")) {
-					@unlink("$fichier.$id");
-				}
-				if ($ok) {
+				if (@rename("$fichier.$id", $fichier)) {
 					$ok = file_exists($fichier);
 				}
-			} else // echec mais penser a fermer ..
-			{
-				spip_fclose_unlock($fp);
-				$fp = null;
+			}
+			// precaution en cas d'echec du rename
+			if (!_TEST_FILE_EXISTS or @file_exists("$fichier.$id")) {
+				@unlink("$fichier.$id");
 			}
 		}
-		// sinon ou si methode precedente a echoueee
-		// on se rabat sur la methode ancienne
-		if (!$ok and !is_null($fp)) {
-			// ici on est en ajout ou sous windows, cas desespere
-			if ($truncate) {
-				@ftruncate($fp, 0);
-			}
-			$s = @fputs($fp, $contenu, $a = strlen($contenu));
-
-			$ok = ($s == $a);
+		if (!is_null($fp)) {
 			spip_fclose_unlock($fp);
 		}
-		// on tente une dernière fois file_put_contents
+
+		// sinon ou si methode precedente a echoueee
+		// on se rabat sur file_put_contents direct sur le fichier
 		if (!$ok) {
 			$l = file_put_contents($fichier, $contenu, $truncate ? LOCK_EX : LOCK_EX | FILE_APPEND);
-			$ok = ($l === strlen($contenu));
+			$ok = ($l === $longueur_a_ecrire);
+			if ($truncate) {
+				spip_log("ecrire_fichier: operation atomique via rename() impossible, fallback non atomique via file_put_contents", 'flock' . _LOG_INFO_IMPORTANTE);
+			}
 		}
 
 		// liberer le verrou et fermer le fichier
@@ -299,7 +286,7 @@ function ecrire_fichier($fichier, $contenu, $ignorer_echec = false, $truncate = 
 		}
 		spip_unlink($fichier);
 	}
-	spip_log("Ecriture fichier $fichier impossible", _LOG_INFO_IMPORTANTE);
+	spip_log("Ecriture fichier $fichier impossible", 'flock' . _LOG_INFO_IMPORTANTE);
 
 	return false;
 }
