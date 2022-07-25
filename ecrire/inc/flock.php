@@ -242,6 +242,7 @@ function ecrire_fichier($fichier, $contenu, $ignorer_echec = false, $truncate = 
 				$ok = ($s == $a);
 				spip_fclose_unlock($fp2);
 				spip_fclose_unlock($fp);
+				$fp = null;
 				// unlink direct et pas spip_unlink car on avait deja le verrou
 				// a priori pas besoin car rename ecrase la cible
 				// @unlink($fichier);
@@ -259,11 +260,12 @@ function ecrire_fichier($fichier, $contenu, $ignorer_echec = false, $truncate = 
 			} else // echec mais penser a fermer ..
 			{
 				spip_fclose_unlock($fp);
+				$fp = null;
 			}
 		}
 		// sinon ou si methode precedente a echoueee
 		// on se rabat sur la methode ancienne
-		if (!$ok) {
+		if (!$ok and !is_null($fp)) {
 			// ici on est en ajout ou sous windows, cas desespere
 			if ($truncate) {
 				@ftruncate($fp, 0);
@@ -272,6 +274,11 @@ function ecrire_fichier($fichier, $contenu, $ignorer_echec = false, $truncate = 
 
 			$ok = ($s == $a);
 			spip_fclose_unlock($fp);
+		}
+		// on tente une dernière fois file_put_contents
+		if (!$ok) {
+			$l = file_put_contents($fichier, $contenu, $truncate ? LOCK_EX : LOCK_EX | FILE_APPEND);
+			$ok = ($l === strlen($contenu));
 		}
 
 		// liberer le verrou et fermer le fichier
