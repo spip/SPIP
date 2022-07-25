@@ -182,7 +182,7 @@ function lire_fichier($fichier, &$contenu, $options = []) {
 
 		#spip_log("$fread $fichier ".spip_timer('lire_fichier'));
 		if (!$ok) {
-			spip_log("echec lecture $fichier");
+			spip_log("echec lecture $fichier", 'flock' . _LOG_ERREUR);
 		}
 
 		return $ok;
@@ -309,7 +309,7 @@ function ecrire_fichier($fichier, $contenu, $ignorer_echec = false, $truncate = 
  */
 function ecrire_fichier_securise($fichier, $contenu, $ecrire_quand_meme = false, $truncate = true) {
 	if (substr($fichier, -4) !== '.php') {
-		spip_log('Erreur de programmation: ' . $fichier . ' doit finir par .php');
+		spip_log('Erreur de programmation: ' . $fichier . ' doit finir par .php', 'flock' . _LOG_ERREUR);
 	}
 	$contenu = '<' . "?php die ('Acces interdit'); ?" . ">\n" . $contenu;
 
@@ -537,7 +537,7 @@ function spip_attend_invalidation_opcode_cache($timestamp = null) {
 				$wait = 0;
 			}
 		}
-		spip_log('Probleme de configuration opcache.revalidate_freq ' . $duree . 's : on attend ' . $wait . 's', _LOG_INFO_IMPORTANTE);
+		spip_log('Probleme de configuration opcache.revalidate_freq ' . $duree . 's : on attend ' . $wait . 's', 'flock' .  _LOG_INFO_IMPORTANTE);
 		if ($wait) {
 			sleep($duree + 1);
 		}
@@ -637,14 +637,14 @@ function sous_repertoire($base, $subdir = '', $nobase = false, $tantpis = false)
 
 	if (is_dir($path) && is_writable($path)) {
 		@touch("$path/.ok");
-		spip_log("creation $base$subdir/");
+		spip_log("creation $base$subdir/", 'flock');
 
 		return $baseaff . ($dirs[$base . $subdir] = "$subdir/");
 	}
 
 	// en cas d'echec c'est peut etre tout simplement que le disque est plein :
 	// l'inode du fichier dir_test existe, mais impossible d'y mettre du contenu
-	spip_log("echec creation $base${subdir}");
+	spip_log("echec creation $base${subdir}", 'flock' . _LOG_ERREUR);
 	if ($tantpis) {
 		return '';
 	}
