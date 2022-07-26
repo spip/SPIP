@@ -242,8 +242,10 @@ function ecrire_fichier($fichier, $contenu, $ignorer_echec = false, $truncate = 
 				spip_fclose_unlock($fp);
 				$fp = null;
 				// on rename vers la cible, ce qui est atomique quand on est pas sous windows
-				// au pire on arrive en second en cas de concurance, et le rename echoue
+				// au pire on arrive en second en cas de concurence, et le rename echoue
 				// --> on a la version de l'autre process qui doit etre identique
+				// sur certains fs lent, il semble que le rename echoue parce que notre propre lock est pas libéré assez vite...
+				// ce cas sera traité par le fallback avec eventuellement une tempo si besoin
 				if (@rename("$fichier.$id", $fichier)) {
 					$ok = file_exists($fichier);
 				}
@@ -260,10 +262,21 @@ function ecrire_fichier($fichier, $contenu, $ignorer_echec = false, $truncate = 
 		// sinon ou si methode precedente a echoueee
 		// on se rabat sur file_put_contents direct sur le fichier
 		if (!$ok) {
+			clearstatcache();
 			$l = file_put_contents($fichier, $contenu, $truncate ? LOCK_EX : LOCK_EX | FILE_APPEND);
 			$ok = ($l === $longueur_a_ecrire);
 			if ($truncate) {
-				spip_log("ecrire_fichier: operation atomique via rename() impossible, fallback non atomique via file_put_contents", 'flock' . _LOG_INFO_IMPORTANTE);
+				spip_log("ecrire_fichier: operation atomique via rename() impossible, fallback non atomique via file_put_contents : ". ($ok ? 'OK' : 'Fail'), 'flock' . _LOG_INFO_IMPORTANTE);
+			}
+			if (!$ok) {
+				// derniere tentative : on sait que file_put_contents marche dans le dossier considere
+				// c'est peut etre un probleme de tempo avant que le lock qu'on a nous meme posé soit libéré (fs lent)
+				usleep(250000);
+				$l = file_put_contents($fichier, $contenu, $truncate ? LOCK_EX : LOCK_EX | FILE_APPEND);
+				$ok = ($l === $longueur_a_ecrire);
+				if ($truncate) {
+					spip_log("ecrire_fichier: operation atomique via rename() impossible, fallback non atomique via tempo + file_put_contents : ". ($ok ? 'OK' : 'Fail'), 'flock' . _LOG_INFO_IMPORTANTE);
+				}
 			}
 		}
 
