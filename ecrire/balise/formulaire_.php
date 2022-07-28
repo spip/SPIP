@@ -134,19 +134,6 @@ function balise_FORMULAIRE__dist($p) {
 	// sinon renvoyer un code php dynamique
 	$p = calculer_balise_dynamique($p, $p->nom_champ, []);
 
-	if (
-		!test_espace_prive()
-		and !empty($p->descr['sourcefile'])
-		and $f = $p->descr['sourcefile']
-		and basename(dirname($f)) === 'modeles'
-	) {
-		// un modele est toujours inséré en texte dans son contenant
-		// donc si on est dans le public avec un cache on va perdre le dynamisme
-		// et on risque de mettre en cache les valeurs pre-remplies du formulaire
-		// on injecte donc le PHP qui va appeler la fonction pour generer le formulaire au lieu de directement la fonction
-		$p->code = "'<'.'?php echo (" . texte_script($p->code) . "); ?'.'>'";
-		// dans l'espace prive on a pas de cache, donc pas de soucis (et un leak serait moins grave)
-	}
 	return $p;
 }
 

@@ -569,6 +569,10 @@ define('CODE_EXECUTER_BALISE', "executer_balise_dynamique('%s',
 	array(%s%s),
 	array(%s%s))");
 
+define('CODE_EXECUTER_BALISE_MODELE', "executer_balise_dynamique_dans_un_modele('%s',
+	array(%s%s),
+	array(%s%s))");
+
 
 /**
  * Calcule le code PHP d'exécution d'une balise SPIP dynamique
@@ -590,6 +594,7 @@ define('CODE_EXECUTER_BALISE', "executer_balise_dynamique('%s',
  * @see  executer_balise_dynamique()
  *     Code PHP produit qui chargera les fonctions de la balise dynamique à l'exécution,
  *     appelée avec les arguments calculés.
+ * @see  executer_balise_dynamique_dans_un_modele()
  * @param Champ $p
  *     AST au niveau de la balise
  * @param string $nom
@@ -624,8 +629,22 @@ function calculer_balise_dynamique($p, $nom, $l, $supp = []) {
 	}
 	$collecte = collecter_balise_dynamique($l, $p, $nom);
 
+	$dans_un_modele = false;
+	if (!empty($p->descr['sourcefile'])
+	  and $f = $p->descr['sourcefile']
+	  and basename(dirname($f)) === 'modeles'
+	) {
+		$dans_un_modele = true;
+	}
+
+	// un modele est toujours inséré en texte dans son contenant
+	// donc si on est dans le public avec un cache on va perdre le dynamisme
+	// et on risque de mettre en cache les valeurs pre-remplies du formulaire
+	// on passe donc par une fonction proxy qui si besoin va collecter les arguments
+	// et injecter le PHP qui va appeler la fonction pour generer le formulaire au lieu de directement la fonction
+	// (dans l'espace prive on a pas de cache, donc pas de soucis (et un leak serait moins grave))
 	$p->code = sprintf(
-		CODE_EXECUTER_BALISE,
+		$dans_un_modele ? CODE_EXECUTER_BALISE_MODELE : CODE_EXECUTER_BALISE,
 		$nom,
 		join(',', $collecte),
 		($collecte ? $param : substr($param, 1)), # virer la virgule
