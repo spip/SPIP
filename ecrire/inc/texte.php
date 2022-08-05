@@ -252,7 +252,7 @@ function typo($letexte, $echapper = true, $connect = null, $env = []) {
 	// NOTE : propre() ne passe pas par ici mais directement par corriger_typo
 	// cf. inc/lien
 
-	$letexte = traiter_modeles($mem = $letexte, false, $echapper ? 'TYPO' : '', $connect, null, $env);
+	$letexte = traiter_modeles($mem = $letexte, false, $echapper ? 'TYPO' : '', $connect ?? '', null, $env);
 	if ($letexte != $mem) {
 		$echapper = true;
 	}
