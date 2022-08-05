@@ -58,7 +58,6 @@ function modeles_collecter($texte, bool $collecter_liens = true) {
 			$a = strpos($texte, (string)$match[0], $pos);
 
 			if (preg_match(_RACCOURCI_MODELE_DEBUT, substr($texte, $a), $regs)) {
-
 				// s'assurer qu'il y a toujours un 5e arg, eventuellement vide
 				while (count($regs) < 6) {
 					$regs[] = '';
@@ -82,7 +81,7 @@ function modeles_collecter($texte, bool $collecter_liens = true) {
 					];
 					$n = strlen($r[0]);
 					$a -= $n;
-					$longueur = $n+strlen($regs[0]);
+					$longueur = $n + strlen($regs[0]);
 				} else {
 					if ($fermeture_lien) {
 						$mod = rtrim(substr($mod, 0, -strlen($fermeture_lien)));
@@ -109,6 +108,67 @@ function modeles_collecter($texte, bool $collecter_liens = true) {
 	return $modeles;
 }
 
+/**
+ * Echapper les raccourcis modeles pour ne pas les casser via safehtml par exemple
+ *
+ * @see modele_retablir_raccourcis_echappes()
+ * @param string $texte
+ * @param bool $collecter_liens
+ * @return array
+ *   texte, marqueur utilise pour echapper les modeles
+ */
+function modeles_echapper_raccourcis($texte, bool $collecter_liens = false) {
+
+	$modeles = modeles_collecter($texte, $collecter_liens);
+	$markid = '';
+	if (!empty($modeles)) {
+		// generer un marqueur qui n'est pas dans le texte
+		do {
+			$markid = substr(md5(creer_uniqid()), 0, 7);
+			$markid = "@|MODELE$markid|";
+		} while (strpos($texte, $markid) !== false);
+
+		$offset_pos = 0;
+		foreach ($modeles as $m) {
+			$rempl = $markid . base64_encode($m['modele']) . '|@';
+			$texte = substr_replace($texte, $rempl, $m['pos'] + $offset_pos, $m['length']);
+			$offset_pos += strlen($rempl) - $m['length'];
+		}
+	}
+
+	return [$texte, $markid];
+}
+
+/**
+ * Retablir les modeles echappes par la fonction modeles_echapper_raccourcis()
+ *
+ * @see modeles_echapper_raccourcis()
+ * @param string $texte
+ * @param string $markid
+ * @return string
+ */
+function modele_retablir_raccourcis_echappes(string $texte, string $markid) {
+
+	if ($markid) {
+		$pos = 0;
+		while (
+			($p = strpos($texte, $markid, $pos)) !== false
+			and $end = strpos($texte, '|@', $p + 16)
+		) {
+			$base64 = substr($texte, $p + 16, $end - ($p + 16));
+			if ($modele = base64_decode($base64, true)) {
+				$texte = substr_replace($texte, $modele, $p, $end + 2 - $p);
+				$pos = $p + strlen($modele);
+			}
+			else {
+				$pos = $end;
+			}
+		}
+	}
+
+	return $texte;
+}
+
 
 /**
  * Traiter les modeles d'un texte
@@ -133,7 +193,6 @@ function traiter_modeles($texte, $doublons = false, $echap = '', string $connect
 
 		$offset_pos = 0;
 		foreach ($modeles as $m) {
-
 			// calculer le modele
 			# hack indexation
 			if ($doublons) {
@@ -196,9 +255,7 @@ function traiter_modeles($texte, $doublons = false, $echap = '', string $connect
 					}
 				}
 			}
-
 		}
-
 	}
 
 	return $texte;
