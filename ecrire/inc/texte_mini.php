@@ -549,7 +549,7 @@ function echapper_html_suspect($texte, $options = [], $connect = null, $env = []
 		// on teste sur strlen car safehtml supprime le contenu dangereux
 		// mais il peut aussi changer des ' en " sur les attributs html,
 		// donc un test d'egalite est trop strict
-		if (strlen(safehtml($texte)) !== strlen($texte)) {
+		if (!is_html_safe($texte)) {
 			$texte = $options['texte_source_affiche'] ?? $texte;
 			$texte = preg_replace(",<(/?\w+\b[^>]*>),", "<tt>&lt;\\1</tt>", $texte);
 			$texte = str_replace('<', '&lt;', $texte);
@@ -621,6 +621,23 @@ function safehtml($t) {
 	return interdire_scripts($t); // interdire le php (2 precautions)
 }
 
+
+/**
+ * Detecter si un texte est "safe" ie non modifie significativement par safehtml()
+ * @param $texte
+ * @return bool
+ */
+function is_html_safe($texte) {
+	if ($is_html_safe = charger_fonction('is_html_safe', 'inc', true)) {
+		return $is_html_safe($texte);
+	}
+
+	// simplifier les retour ligne pour etre certain de ce que l'on compare
+	$texte = str_replace("\r\n", "\n", $texte);
+	$texte_safe = safehtml($texte);
+
+	return strlen($texte_safe) === strlen($texte);
+}
 
 /**
  * Supprime les modèles d'image d'un texte
