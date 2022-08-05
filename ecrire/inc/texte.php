@@ -279,7 +279,7 @@ function typo($letexte, $echapper = true, $connect = null, $env = []) {
 		$GLOBALS['filtrer_javascript'] == -1
 		or (isset($env['espace_prive']) and $env['espace_prive'] and $GLOBALS['filtrer_javascript'] <= 0)
 	) {
-		$letexte = echapper_html_suspect($letexte);
+		$letexte = echapper_html_suspect($letexte, [], $connect, $env);
 	}
 
 	return $letexte;
@@ -425,6 +425,7 @@ function propre($t, $connect = null, $env = []) {
 	if (is_null($connect)) {
 		$connect = '';
 		$interdire_script = true;
+		$env['espace_prive'] = true;
 	}
 
 	if (!$t) {
@@ -439,10 +440,10 @@ function propre($t, $connect = null, $env = []) {
 	if (
 		$interdire_script
 		or $GLOBALS['filtrer_javascript'] == -1
-		or (isset($env['espace_prive']) and $env['espace_prive'] and $GLOBALS['filtrer_javascript'] <= 0)
-		or (isset($env['wysiwyg']) and $env['wysiwyg'] and $GLOBALS['filtrer_javascript'] <= 0)
+		or (!empty($env['espace_prive']) and $GLOBALS['filtrer_javascript'] <= 0)
+		or (!empty($env['wysiwyg']) and $env['wysiwyg'] and $GLOBALS['filtrer_javascript'] <= 0)
 	) {
-		$t = echapper_html_suspect($t, false);
+		$t = echapper_html_suspect($t, ['strict' => false], $connect, $env);
 	}
 	$t = echappe_html($t);
 	$t = expanser_liens($t, $connect, $env);
