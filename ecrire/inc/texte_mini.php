@@ -103,12 +103,12 @@ function code_echappement($rempl, $source = '', $no_transform = false, $mode = n
 
 
 // Echapper les <html>...</ html>
-function traiter_echap_html_dist($regs) {
+function traiter_echap_html_dist($regs, $options = []) {
 	return $regs[3];
 }
 
 // Echapper les <pre>...</ pre>
-function traiter_echap_pre_dist($regs) {
+function traiter_echap_pre_dist($regs, $options = []) {
 	// echapper les <code> dans <pre>
 	$pre = $regs[3];
 
@@ -129,7 +129,7 @@ function traiter_echap_pre_dist($regs) {
 }
 
 // Echapper les <code>...</ code>
-function traiter_echap_code_dist($regs) {
+function traiter_echap_code_dist($regs, $options = []) {
 	[, , $att, $corps] = $regs;
 	$echap = spip_htmlspecialchars($corps); // il ne faut pas passer dans entites_html, ne pas transformer les &#xxx; du code !
 
@@ -153,7 +153,7 @@ function traiter_echap_code_dist($regs) {
 }
 
 // Echapper les <cadre>...</ cadre> aka <frame>...</ frame>
-function traiter_echap_cadre_dist($regs) {
+function traiter_echap_cadre_dist($regs, $options = []) {
 	$echap = trim(entites_html($regs[3]));
 	// compter les lignes un peu plus finement qu'avec les \n
 	$lignes = explode("\n", trim($echap));
@@ -167,11 +167,11 @@ function traiter_echap_cadre_dist($regs) {
 	return $echap;
 }
 
-function traiter_echap_frame_dist($regs) {
+function traiter_echap_frame_dist($regs, $options = []) {
 	return traiter_echap_cadre_dist($regs);
 }
 
-function traiter_echap_script_dist($regs) {
+function traiter_echap_script_dist($regs, $options = []) {
 	// rendre joli (et inactif) si c'est un script language=php
 	if (preg_match(',<script\b[^>]+php,ims', $regs[0])) {
 		return highlight_string($regs[0], true);
@@ -193,6 +193,7 @@ define('_PROTEGE_BLOCS', ',<(html|pre|code|cadre|frame|script|style)(\b[^>]*)?>(
  * @param bool $no_transform
  * @param string $preg
  * @param string $callback_prefix
+ * @param array $callback_options
  * @return string|string[]
  */
 function echappe_html(
@@ -200,7 +201,8 @@ function echappe_html(
 	$source = '',
 	$no_transform = false,
 	$preg = '',
-	$callback_prefix = ''
+	$callback_prefix = '',
+	$callback_options = []
 ) {
 	if (!is_string($letexte) or !strlen($letexte)) {
 		return $letexte;
@@ -216,11 +218,16 @@ function echappe_html(
 				$echap = $regs[0];
 			} // sinon les traiter selon le cas
 			else {
+				$callback_secure_prefix = ($callback_options['secure_prefix'] ?? '');
 				if (
-					function_exists($f = $callback_prefix . 'traiter_echap_' . strtolower($regs[1]))
+					function_exists($f = $callback_prefix . $callback_secure_prefix . 'traiter_echap_' . strtolower($regs[1]))
 					or function_exists($f = $f . '_dist')
+					or ($callback_secure_prefix and (
+						function_exists($f = $callback_prefix . 'traiter_echap_' . strtolower($regs[1]))
+						or function_exists($f = $f . '_dist')
+					))
 				) {
-					$echap = $f($regs);
+					$echap = $f($regs, $callback_options);
 				}
 			}
 
