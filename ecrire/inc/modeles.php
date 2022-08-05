@@ -64,11 +64,14 @@ function modeles_collecter($texte, bool $collecter_liens = true) {
 					$regs[] = '';
 				}
 
-				[, $mod, $type, $id, $params, $fin] = $regs;
+				[, $mod, $type, $id, $params, $fermeture_lien] = $regs;
 
 				if (
-					$fin
-					and preg_match('/<a\s[^<>]*>\s*$/i', substr($texte, 0, $a), $r)
+					$collecter_liens
+					and $fermeture_lien
+					and $before = substr($texte, $pos, $a - $pos)
+					and stripos($before, '<a') !== false
+					and preg_match('/<a\s[^<>]*>\s*$/i', $before, $r)
 				) {
 					$lien = [
 						'href' => extraire_attribut($r[0], 'href'),
@@ -81,6 +84,9 @@ function modeles_collecter($texte, bool $collecter_liens = true) {
 					$a -= $n;
 					$longueur = $n+strlen($regs[0]);
 				} else {
+					if ($fermeture_lien) {
+						$mod = rtrim(substr($mod, 0, -strlen($fermeture_lien)));
+					}
 					$lien = false;
 					$longueur = strlen($mod);
 				}
