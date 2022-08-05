@@ -481,11 +481,18 @@ function echapper_faux_tags($letexte) {
  * on l'echappe
  * si safehtml ne renvoie pas la meme chose on echappe les < en &lt; pour montrer le contenu brut
  *
+ * @use wrap()
+ *
  * @param string $texte
- * @param bool $strict
+ * @param array $options
+ *   bool strict : etre strict ou non sur la detection
+ *   string wrap_suspect : si le html est suspect, on wrap l'affichage avec la balise indiquee dans cette option via la fonction wrap()
+ *   string texte_source_affiche : si le html est suspect, on utilise ce texte pour l'affichage final et pas le texte utilise pour la detection
+ * @param string $connect
+ * @param array $env
  * @return string
  */
-function echapper_html_suspect($texte, $strict = true) {
+function echapper_html_suspect($texte, $options = [], $connect = null, $env = []) {
 	static $echapper_html_suspect;
 	if (!$texte or !is_string($texte)) {
 		return $texte;
@@ -496,9 +503,23 @@ function echapper_html_suspect($texte, $strict = true) {
 	}
 	// si fonction personalisee, on delegue
 	if ($echapper_html_suspect) {
-		return $echapper_html_suspect($texte, $strict);
+		// on collecte le tableau d'arg minimal pour ne pas casser un appel a une fonction inc_echapper_html_suspect() selon l'ancienne signature
+		$args = [$texte, $options];
+		if ($connect or !empty($env)) {
+			$args[] = $connect;
+		}
+		if (!empty($env)) {
+			$args[] = $env;
+		}
+		return $echapper_html_suspect(...$args);
 	}
 
+	if (is_bool($options)) {
+		$options = ['strict' => $options];
+	}
+	$strict = $options['strict'] ?? true;
+
+	// pas de balise html ou pas d'attribut sur les balises ? c'est OK
 	if (
 		strpos($texte, '<') === false
 		or strpos($texte, '=') === false
@@ -506,24 +527,51 @@ function echapper_html_suspect($texte, $strict = true) {
 		return $texte;
 	}
 
-	// quand c'est du texte qui passe par propre on est plus coulant tant qu'il y a pas d'attribut du type onxxx=
-	// car sinon on declenche sur les modeles ou ressources
-	if (
-		!$strict and
-		(strpos($texte, 'on') === false or !preg_match(",<\w+.*\bon\w+\s*=,UimsS", $texte))
-	) {
-		return $texte;
+	// dans le prive, on veut afficher tout echappé pour la moderation
+	if (!isset($env['espace_prive'])) {
+		// conserver le comportement historique en cas d'appel court sans env
+		$env['espace_prive'] = test_espace_prive();
+	}
+	if (!empty($env['espace_prive']) or !empty($env['wysiwyg'])) {
+
+		// quand c'est du texte qui passe par propre on est plus coulant tant qu'il y a pas d'attribut du type onxxx=
+		// car sinon on declenche sur les modeles ou ressources
+		if (
+			!$strict and
+			(strpos($texte, 'on') === false or !preg_match(",<\w+.*\bon\w+\s*=,UimsS", $texte))
+		) {
+			return $texte;
+		}
+
+		[$texte, $markid] = modeles_echapper_raccourcis($texte, false);
+		$texte = echappe_js($texte);
+
+		// on teste sur strlen car safehtml supprime le contenu dangereux
+		// mais il peut aussi changer des ' en " sur les attributs html,
+		// donc un test d'egalite est trop strict
+		if (strlen(safehtml($texte)) !== strlen($texte)) {
+			$texte = $options['texte_source_affiche'] ?? $texte;
+			$texte = preg_replace(",<(/?\w+\b[^>]*>),", "<tt>&lt;\\1</tt>", $texte);
+			$texte = str_replace('<', '&lt;', $texte);
+			$texte = str_replace('&lt;tt>', '<tt>', $texte);
+			$texte = str_replace('&lt;/tt>', '</tt>', $texte);
+			if (!function_exists('attribut_html')) {
+				include_spip('inc/filtres');
+			}
+			if (!empty($options['wrap_suspect'])) {
+				$texte = wrap($texte, $options['wrap_suspect']);
+			}
+			$texte = "<mark class='danger-js' title='" . attribut_html(_T('erreur_contenu_suspect')) . "'>⚠️</mark> " . $texte;
+		}
+		$texte = modele_retablir_raccourcis_echappes($texte, $markid);
 	}
 
-	// on teste sur strlen car safehtml supprime le contenu dangereux
-	// mais il peut aussi changer des ' en " sur les attributs html,
-	// donc un test d'egalite est trop strict
-	if (strlen(safehtml($texte)) !== strlen($texte)) {
-		$texte = str_replace('<', '&lt;', $texte);
-		if (!function_exists('attribut_html')) {
-			include_spip('inc/filtres');
-		}
-		$texte = "<mark class='danger-js' title='" . attribut_html(_T('erreur_contenu_suspect')) . "'>⚠️</mark> " . $texte;
+	// si on est là dans le public c'est le mode parano
+	// on veut donc un rendu propre et secure, et virer silencieusement ce qui est dangereux
+	else {
+		[$texte, $markid] = modeles_echapper_raccourcis($texte, false);
+		$texte = safehtml($texte);
+		$texte = modele_retablir_raccourcis_echappes($texte, $markid);
 	}
 
 	return $texte;
