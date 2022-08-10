@@ -1107,6 +1107,7 @@ function critere_inverse_dist($idb, &$boucles, $crit) {
 
 /**
  * {par_ordre_liste champ,#LISTE{...}} pour trier selon une liste
+ * ce critère accepte un troisieme arg : debut (ou start) qui permet d'afficher en premier la liste demandée
  * @param $idb
  * @param $boucles
  * @param $crit
@@ -1125,6 +1126,11 @@ function critere_par_ordre_liste_dist($idb, &$boucles, $crit) {
 	$crit2->param = [reset($crit->param)];
 	$res = critere_parinverse($idb, $boucles, $crit2);
 
+	$classement = 'fin';
+	if (isset($crit->param[2]) and in_array($crit->param[2][0]->texte, ['debut', 'start'])) {
+		$classement = 'debut';
+	}
+
 	// erreur ?
 	if (is_array($res)) {
 		return $res;
@@ -1133,7 +1139,14 @@ function critere_par_ordre_liste_dist($idb, &$boucles, $crit) {
 	$_order = array_pop($boucle->order);
 
 	$_liste = calculer_liste($crit->param[1], [], $boucles, $boucles[$idb]->id_parent);
-	$boucle->order[] = "'FIELD(' . $_order . ',' . ((\$zl=formate_liste_critere_par_ordre_liste($_liste,'" . $boucle->sql_serveur . "')) ? \$zl : '0').')'$sens";
+
+	if ($classement === 'debut') {
+		$zl = "((\$zl=formate_liste_critere_par_ordre_liste($_liste,'" . $boucle->sql_serveur . "')) ? \$zl : '0')";
+		$order = "'IF(FIELD(' . $_order . ',' . $zl.')=0,1,0), FIELD(' . $_order . ',' . $zl.')'$sens";
+	} else {
+		$order = "'FIELD(' . $_order . ',' . ((\$zl=formate_liste_critere_par_ordre_liste($_liste,'" . $boucle->sql_serveur . "')) ? \$zl : '0').')'$sens";
+	}
+	$boucle->order[] = $order;
 }
 
 
