@@ -646,6 +646,8 @@ function is_html_safe($texte) {
 
 	// simplifier les retour ligne pour etre certain de ce que l'on compare
 	$texte = str_replace("\r\n", "\n", $texte);
+	// safehtml reduit aussi potentiellement les &nbsp;
+	$texte = str_replace("&nbsp;", " ", $texte);
 	$texte_safe = safehtml($texte);
 
 	// on teste sur strlen car safehtml supprime le contenu dangereux
