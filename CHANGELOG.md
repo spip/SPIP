@@ -23,6 +23,7 @@
 
 ### Fixed
 
+- #5025 Prise en charge de l'utf8 pour le filtre `|match` en appliquant par défaut le modificateur u (PCRE_UTF8)
 - #5274 Homogénéiser les labels des listes
 
 ### Removed
