@@ -546,10 +546,14 @@ function echapper_html_suspect($texte, $options = [], $connect = null, $env = []
 		[$texte, $markid] = modeles_echapper_raccourcis($texte, false);
 		$texte = echappe_js($texte);
 
-		// on teste sur strlen car safehtml supprime le contenu dangereux
-		// mais il peut aussi changer des ' en " sur les attributs html,
-		// donc un test d'egalite est trop strict
-		if (!is_html_safe($texte)) {
+		$texte_to_check = $texte;
+		// si les raccourcis liens vont etre interprétés, il faut les expanser avant de vérifier que le html est safe
+		// car un raccourci peut etre utilisé pour faire un lien malin
+		// et un raccourci est potentiellement modifié par safehtml, ce qui fait un faux positif dans is_html_safe
+		if (!empty($options['expanser_liens'])) {
+			$texte_to_check = expanser_liens($texte_to_check, $env['connect'], $env['env']);
+		}
+		if (!is_html_safe($texte_to_check)) {
 			$texte = $options['texte_source_affiche'] ?? $texte;
 			$texte = preg_replace(",<(/?\w+\b[^>]*>),", "<tt>&lt;\\1</tt>", $texte);
 			$texte = str_replace('<', '&lt;', $texte);
@@ -569,9 +573,17 @@ function echapper_html_suspect($texte, $options = [], $connect = null, $env = []
 	// si on est là dans le public c'est le mode parano
 	// on veut donc un rendu propre et secure, et virer silencieusement ce qui est dangereux
 	else {
-		[$texte, $markid] = modeles_echapper_raccourcis($texte, false);
+		$markid = null;
+		if (!empty($options['expanser_liens'])) {
+			$texte = expanser_liens($texte, $env['connect'], $env['env']);
+		}
+		else {
+			[$texte, $markid] = modeles_echapper_raccourcis($texte, false);
+		}
 		$texte = safehtml($texte);
-		$texte = modele_retablir_raccourcis_echappes($texte, $markid);
+		if ($markid) {
+			$texte = modele_retablir_raccourcis_echappes($texte, $markid);
+		}
 	}
 
 	return $texte;
@@ -636,6 +648,9 @@ function is_html_safe($texte) {
 	$texte = str_replace("\r\n", "\n", $texte);
 	$texte_safe = safehtml($texte);
 
+	// on teste sur strlen car safehtml supprime le contenu dangereux
+	// mais il peut aussi changer des ' en " sur les attributs html,
+	// donc un test d'egalite est trop strict
 	return strlen($texte_safe) === strlen($texte);
 }
 
