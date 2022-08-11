@@ -3253,10 +3253,10 @@ function table_valeur($table, $cle, $defaut = '', $conserver_null = false) {
  *     - true : expression trouvée, mais pas la parenthèse capturante
  *     - string : expression trouvée.
  **/
-function filtre_match_dist(?string $texte, $expression, $modif = 'UimsS', $capte = 0) {
+function filtre_match_dist(?string $texte, $expression, $modif = 'UuimsS', $capte = 0) {
 	if (intval($modif) and $capte == 0) {
 		$capte = $modif;
-		$modif = 'UimsS';
+		$modif = 'UuimsS';
 	}
 	$expression = str_replace('\/', '/', $expression);
 	$expression = str_replace('/', '\/', $expression);
