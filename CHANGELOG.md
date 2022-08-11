@@ -12,6 +12,7 @@
 
 ### Changed
 
+- #5273 Le critère `par_ordre_liste` rejette à la fin les éléments de la boucle absents de la liste
 - #5016 Généralisation du traitement des balises dynamiques dans un modèle
 - #5272 Compatibilité avec PHP 8.2
 - #5025 Prise en charge de l'utf8 pour le filtre `|match` en appliquant par défaut le modificateur u (PCRE_UTF8)
