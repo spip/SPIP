@@ -141,6 +141,24 @@ class Inclure {
 
 	/** Source des filtres (compatibilité) (?) */
 	public array $fonctions = [];
+
+	/**
+	 * Description du squelette
+	 *
+	 * Sert pour la gestion d'erreur et la production de code dependant du contexte
+	 *
+	 * Peut contenir les index :
+	 *
+	 * - nom : Nom du fichier de cache
+	 * - gram : Nom de la grammaire du squelette (détermine le phraseur à utiliser)
+	 * - sourcefile : Chemin du squelette
+	 * - squelette : Code du squelette
+	 * - id_mere : Identifiant de la boucle parente
+	 * - documents : Pour embed et img dans les textes
+	 * - session : Pour un cache sessionné par auteur
+	 * - niv : Niveau de tabulation
+	 */
+	public array $descr = [];
 }
 
 
