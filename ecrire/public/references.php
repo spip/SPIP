@@ -611,7 +611,7 @@ function calculer_balise_dynamique($p, $nom, $l, $supp = []) {
 	// compatibilite: depuis qu'on accepte #BALISE{ses_args} sans [(...)] autour
 	// il faut recracher {...} quand ce n'est finalement pas des args
 	if ($p->fonctions and (!$p->fonctions[0][0]) and $p->fonctions[0][1]) {
-		$p->fonctions = null;
+		$p->fonctions = [];
 	}
 
 	if ($p->param and ($c = $p->param[0])) {

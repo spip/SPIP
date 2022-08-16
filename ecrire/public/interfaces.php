@@ -138,6 +138,9 @@ class Inclure {
 
 	/** Valeurs des paramètres */
 	public array $param = [];
+
+	/** Source des filtres (compatibilité) (?) */
+	public array $fonctions = [];
 }
 
 
@@ -562,8 +565,8 @@ class Champ {
 	 */
 	public array $param = [];
 
-	/** Source des filtres  (compatibilité) (?) */
-	public ?array $fonctions = [];
+	/** Source des filtres (compatibilité) (?) */
+	public array $fonctions = [];
 
 	/**
 	 * Identifiant de la boucle
@@ -639,8 +642,8 @@ class Idiome {
 	/** Filtres à appliquer au résultat */
 	public array $param = [];
 
-	/** Source des filtres  (compatibilité) (?) */
-	public ?array $fonctions = [];
+	/** Source des filtres (compatibilité) (?) */
+	public array $fonctions = [];
 
 	/**
 	 * Inutilisé, propriété générique de l'AST
