@@ -41,14 +41,19 @@ class IterateurSQL implements Iterator {
 	 */
 	protected $row = null;
 
-	protected $firstseek = false;
+	protected bool $firstseek = false;
 
-	/**
-	 * Erreur presente ?
-	 *
-	 * @var bool
-	 **/
-	public $err = false;
+	protected int $pos = -1;
+
+	protected string $type = 'SQL';
+
+	protected array $command = [];
+
+	protected array $info = [];
+
+
+	/** Erreur presente ? **/
+	public bool $err = false;
 
 	/**
 	 * Calcul du total des elements
