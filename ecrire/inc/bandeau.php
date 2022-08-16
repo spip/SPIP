@@ -149,12 +149,12 @@ function definir_barre_boutons($contexte = [], $icones = true, $autorise = true)
 		$menus_favoris = obtenir_menus_favoris();
 		$i = 1;
 		foreach ($boutons_admin as $key => $menu) {
-			$menu->favori = table_valeur($menus_favoris, $key, false);
+			$menu->favori = (bool) table_valeur($menus_favoris, $key, false);
 			$menu->position = $i++;
 			if ($menu->sousmenu) {
 				$j = 1;
 				foreach ($menu->sousmenu as $key => $bouton) {
-					$bouton->favori = table_valeur($menus_favoris, $key, false);
+					$bouton->favori = (bool) table_valeur($menus_favoris, $key, false);
 					$bouton->position = $j++;
 				}
 			}
@@ -178,7 +178,7 @@ function trier_boutons_enfants_par_alpha($menus, $avec_favoris = false) {
 			$libelles = $isfavoris = $favoris = [];
 			foreach ($menu->sousmenu as $key => $item) {
 				$libelles[$key] = strtolower(translitteration(_T($item->libelle)));
-				$isfavoris[$key] = (bool)$item->favori;
+				$isfavoris[$key] = $item->favori;
 				$favoris[$key] = $item->favori;
 			}
 			if ($avec_favoris) {
