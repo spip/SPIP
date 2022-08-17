@@ -232,8 +232,12 @@ class Boucle {
 
 	/**
 	 * Alias de table d'application de la requête ou nom complet de la table SQL
+	 *
+	 * FIXME: un seul typage (string ?)
+	 *
+	 * @var string|false|null
 	 */
-	public ?string $type_requete;
+	public $type_requete = null;
 
 	/**
 	 * La table est elle optionnelle ?
