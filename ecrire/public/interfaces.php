@@ -527,14 +527,8 @@ class Critere {
 	/** Opérateur (>, <, >=, IN, ...) */
 	public ?string $op;
 
-	/**
-	 * Présence d'une négation (truc !op valeur)
-	 *
-	 * FIXME: type unique (bool ?)
-	 *
-	 * @var bool|string
-	*/
-	public $not = false;
+	/** Présence d'une négation (truc !op valeur) */
+	public bool $not = false;
 
 	/** Présence d'une exclusion (!truc op valeur) */
 	public string $exclus = '';
