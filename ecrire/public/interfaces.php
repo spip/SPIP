@@ -452,8 +452,14 @@ class Boucle {
 
 	/**
 	 * Code PHP compilé de la boucle
+	 *
+	 * FIXME: un seul type (string ?)
+	 *
+	 * - false: boucle fautive ?
+	 *
+	 * @var string|false
 	 */
-	public string $return;
+	public $return = '';
 
 	public $numrows = false;
 	public $cptrows = false;
