@@ -723,13 +723,13 @@ function plugin_message_incompatibilite($intervalle, $version, $nom, $balise) {
 
 		if (strlen($minimum)) {
 			if ($minimum_inclus and spip_version_compare($version, $minimum, '<')) {
-				return _T("plugin_${balise}_${type}", [
+				return _T("plugin_{$balise}_{$type}", [
 					'plugin' => $nom,
 					'version' => ' &ge; ' . $minimum
 				]);
 			}
 			if (!$minimum_inclus and spip_version_compare($version, $minimum, '<=')) {
-				return _T("plugin_${balise}_${type}", [
+				return _T("plugin_{$balise}_{$type}", [
 					'plugin' => $nom,
 					'version' => ' &gt; ' . $minimum
 				]);
@@ -738,13 +738,13 @@ function plugin_message_incompatibilite($intervalle, $version, $nom, $balise) {
 
 		if (strlen($maximum)) {
 			if ($maximum_inclus and spip_version_compare($version, $maximum, '>')) {
-				return _T("plugin_${balise}_${type}", [
+				return _T("plugin_{$balise}_{$type}", [
 					'plugin' => $nom,
 					'version' => ' &le; ' . $maximum
 				]);
 			}
 			if (!$maximum_inclus and spip_version_compare($version, $maximum, '>=')) {
-				return _T("plugin_${balise}_plugin", [
+				return _T("plugin_{$balise}_plugin", [
 					'plugin' => $nom,
 					'version' => ' &lt; ' . $maximum
 				]);
@@ -755,7 +755,7 @@ function plugin_message_incompatibilite($intervalle, $version, $nom, $balise) {
 	// note : il ne peut pas y avoir d'erreur sur
 	// - un 'utilise' sans version.
 	// - un 'php' sans version.
-	return _T("plugin_necessite_${type}_sans_version", ['plugin' => $nom]);
+	return _T("plugin_necessite_{$type}_sans_version", ['plugin' => $nom]);
 }
 
 

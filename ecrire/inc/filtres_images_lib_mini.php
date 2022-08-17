@@ -1226,7 +1226,7 @@ function _image_tag_changer_taille($tag, $width, $height, $style = false) {
 
 	// attributs deprecies. Transformer en CSS
 	if ($espace = extraire_attribut($tag, 'hspace')) {
-		$style = "margin:${espace}px;" . $style;
+		$style = "margin:{$espace}px;" . $style;
 		$tag = inserer_attribut($tag, 'hspace', '');
 	}
 
@@ -1791,7 +1791,7 @@ function process_image_reduire($fonction, $img, $taille, $taille_y, $force, $pro
 		return inserer_attribut(
 			$img,
 			'style',
-			"max-width: ${taille}px;max-width: min(100%,${taille}px); max-height: ${taille_y}px"
+			"max-width: {$taille}px;max-width: min(100%,{$taille}px); max-height: {$taille_y}px"
 		);
 	}
 

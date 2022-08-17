@@ -220,8 +220,8 @@ function message_alerte_ouvrir(?string $titre = null, ?string $class = null, ?st
 	$class_racine = 'msg-alert';
 	$clearfix     = ($prive ? 'clearfix' : '');
 	$class_alerte = "$class_racine $class";
-	$class_texte  = "${class_racine}__text $clearfix";
-	$class_titre  = "${class_racine}__heading";
+	$class_texte  = "{$class_racine}__text $clearfix";
+	$class_titre  = "{$class_racine}__heading";
 
 	// Titre : markup
 	$titre = trim($titre);

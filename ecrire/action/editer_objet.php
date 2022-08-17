@@ -590,7 +590,7 @@ function objet_lire($objet, $valeur_id, $options = []) {
 		// Il est possible pour un type d'objet de fournir une fonction de lecture de tous les champs d'un objet.
 		if (
 			include_spip('action/editer_' . $objet)
-			and function_exists($lire = "${objet}_lire_champs")
+			and function_exists($lire = "{$objet}_lire_champs")
 		) {
 			$valeurs = $lire($objet, $valeur_id, $champ_id);
 		} else {
@@ -599,7 +599,7 @@ function objet_lire($objet, $valeur_id, $options = []) {
 
 			// La condition est appliquée sur le champ désigné par l'utilisateur.
 			$where = [
-				"${champ_id}=" . sql_quote($valeur_id)
+				$champ_id . '=' . sql_quote($valeur_id)
 			];
 
 			// Acquisition de tous les champs de l'objet : si l'accès SQL retourne une erreur on renvoie un tableau vide.
