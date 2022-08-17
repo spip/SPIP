@@ -222,8 +222,10 @@ class Boucle {
 
 	/**
 	 * La boucle doit-elle sélectionner la langue ?
+	 *
+	 * Valeurs : '', 'oui', 'non'
 	 */
-	public ?string $lang_select;
+	public string $lang_select = '';
 
 	/**
 	 * Alias de table d'application de la requête ou nom complet de la table SQL
@@ -253,9 +255,13 @@ class Boucle {
 	/**
 	 * Critères de la boucle
 	 *
-	 * @var Critere[]
+	 * FIXME: type array unique.
+	 *
+	 * @var string|Critere[]
+	 * - string: phrasage (code brut). Il reste si erreur de critère
+	 * - array: analyse correcte des critères...
 	 */
-	public array $criteres = [];
+	public $criteres = [];
 
 	/**
 	 * Textes insérés entre 2 éléments de boucle (critère inter)
@@ -288,7 +294,7 @@ class Boucle {
 	/**
 	 * Nom de la variable PHP stockant le noms de doublons utilisés "$doublons_index"
 	 */
-	public ?string $doublons;
+	public string $doublons = '';
 
 	/**
 	 * Code PHP ajouté au début de chaque itération de boucle.
@@ -430,12 +436,12 @@ class Boucle {
 	/**
 	 * Nom de la table SQL principale de la boucle, sans son préfixe
 	 */
-	public string $id_table;
+	public string $id_table = '';
 
 	/**
 	 * Nom de la clé primaire de la table SQL principale de la boucle
 	 */
-	public string $primary;
+	public string $primary = '';
 
 	/**
 	 * Code PHP compilé de la boucle
@@ -498,6 +504,9 @@ class Boucle {
 	*/
 	public array $index_champ = [];
 
+	/** Source des filtres (compatibilité) (?) */
+	public array $fonctions = [];
+
 	// obsoletes, conserves provisoirement pour compatibilite
 	public $tout = false;
 	public $plat = false;
@@ -518,11 +527,17 @@ class Critere {
 	/** Opérateur (>, <, >=, IN, ...) */
 	public ?string $op;
 
-	/** Présence d'une négation (truc !op valeur) */
-	public ?string $not;
+	/**
+	 * Présence d'une négation (truc !op valeur)
+	 *
+	 * FIXME: type unique (bool ?)
+	 *
+	 * @var bool|string
+	*/
+	public $not = false;
 
 	/** Présence d'une exclusion (!truc op valeur) */
-	public ?string $exclus;
+	public string $exclus = '';
 
 	/** Présence d'une condition dans le critère (truc ?) */
 	public bool $cond = false;

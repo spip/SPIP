@@ -384,11 +384,11 @@ function calculer_boucle($id_boucle, &$boucles) {
 		$_trace = $boucles[$id_boucle]->descr['nom'] . $id_boucle;
 		$_trace = "\$GLOBALS['debug_objets']['resultat']['$_trace']";
 		$trace = "
-		if (empty($_trace)) { 
-			$_trace = []; 
+		if (empty($_trace)) {
+			$_trace = [];
 		}
-		if (count($_trace) < 3) { 
-			$_trace" . '[] = $t0; 
+		if (count($_trace) < 3) {
+			$_trace" . '[] = $t0;
 		}';
 	}
 
@@ -752,8 +752,9 @@ function reconstruire_contexte_compil($context_compil) {
 		'sourcefile' => $context_compil[0] ?? '',
 		'nom' => $context_compil[1] ?? '',
 	];
+
 	$p->id_boucle = $context_compil[2] ?? '';
-	$p->ligne = $context_compil[3] ?? '';
+	$p->ligne = (int)($context_compil[3] ?? 0);
 	$p->lang = $context_compil[4] ?? '';
 
 	return $p;

@@ -263,8 +263,9 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles, &$joker) {
 
 	// le champ existe dans la table, on le prend.
 	if (isset($desc['field'][$nom_champ])) {
-		$t = $boucles[$idb]->id_table;
+		$t = $boucles[$idb]->id_table ?? '';
 		$joker = false; // indiquer a l'appelant
+		// note: dans certains cas ('valeur' d’une boucle DATA, sans id_table), retourne ['.valeur', 'valeur'] …
 		return ["$t.$nom_champ", $nom_champ];
 	}
 
