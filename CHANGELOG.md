@@ -4,6 +4,7 @@
 
 ### Security
 
+- spip-team/securite#4836 Refactoring de la gestion du oups du formulaire editer_liens
 - spip-team/securite#3724 #5150 Le core ne génère plus de champ htpass par défaut dans `spip_auteurs`. Utiliser le plugin Htpasswd https://git.spip.net/spip-contrib-extensions/htpasswd pour ce besoin.
 
 ### Added

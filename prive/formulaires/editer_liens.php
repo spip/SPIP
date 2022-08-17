@@ -132,14 +132,7 @@ function formulaires_editer_liens_charger_dist($a, $b, $c, $options = []) {
 
 	$oups = '';
 	if ($editable) {
-		$oups = _request('_oups') ?? '';
-		if ($oups) {
-			if (json_decode(base64_decode($oups, true))) {
-				// on est bon, rien a faire
-			} else {
-				$oups = '';
-			}
-		}
+		$oups = lien_gerer__oups('editer_liens', 'hash');
 	}
 	$valeurs = [
 		'id' => "$table_source-$objet-$id_objet-$objet_lien", // identifiant unique pour les id du form
@@ -232,12 +225,13 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = []) {
 
 	include_spip('inc/autoriser');
 	if (autoriser('modifier', $objet, $id_objet)) {
-		// annuler les suppressions du coup d'avant !
+		// recuperer le oups du coup d'avant pour le propager à charger() si on ne fait rien par exemple
+		lien_gerer__oups('editer_liens','request');
+
+		// annuler les suppressions du coup d'avant ?
 		if (
 			_request('annuler_oups')
-			and $oups = _request('_oups')
-			and $oups = base64_decode($oups, true)
-			and $oups = json_decode($oups, true)
+			and $oups = lien_gerer__oups('editer_liens','get')
 		) {
 			if ($oups_objets = charger_fonction("editer_liens_oups_{$table_source}_{$objet}_{$objet_lien}", 'action', true)) {
 				$oups_objets($oups);
@@ -253,7 +247,7 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = []) {
 				}
 			}
 			# oups ne persiste que pour la derniere action, si suppression
-			set_request('_oups');
+			lien_gerer__oups('editer_liens','reset');
 		}
 
 		$supprimer = _request('supprimer_lien');
@@ -315,7 +309,11 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = []) {
 					}
 				}
 			}
-			set_request('_oups', $oups ? base64_encode(json_encode($oups)) : null);
+			if (!empty($oups)) {
+				lien_gerer__oups('editer_liens','set', $oups);
+			} else {
+				lien_gerer__oups('editer_liens','reset');
+			}
 		}
 
 		if ($ajouter) {
@@ -344,7 +342,7 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = []) {
 			# une suppression suivie d'un ajout dans le meme hit est un remplacement
 			# non annulable !
 			if ($ajout_ok) {
-				set_request('_oups');
+				lien_gerer__oups('editer_liens','reset');
 			}
 		}
 
@@ -361,7 +359,7 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = []) {
 						objet_qualifier_liens([$objet2 => $idl], [$objet1 => $ids], $qualif);
 					}
 					set_request('id_lien_ajoute', $ids);
-					set_request('_oups');
+					lien_gerer__oups('editer_liens','reset');
 				}
 			}
 		}
@@ -510,4 +508,111 @@ function lien_ajouter_liaisons($objet_source, $ids, $objet_lien, $idl, $qualifs)
 	} else {
 		objet_associer([$objet_source => $ids], [$objet_lien => $idl]);
 	}
+}
+
+
+
+/**
+ * Fonction de regroupement pour gerer le _oups de façon sécurisée sans passer par une globale ni par une _request
+ * @param string $action
+ * @param array|null $valeur
+ * @return array|string|null
+ */
+function lien_gerer__oups(string $form, string $action, ?array $valeur = null) {
+	static $_oups_value;
+
+	switch ($action) {
+		case 'reset':
+			$res = (empty($_oups_value) ? false : true);
+			$_oups_value = null;
+			return $res;
+
+		case 'get':
+			return $_oups_value ?: null;
+
+		case 'set':
+			$_oups_value = $valeur;
+			return true;
+
+		case 'request':
+			$_oups_value = null;
+			if ($oups = _request('_oups')) {
+				include_spip('inc/filtres');
+				// on accepte uniquement une valeur signée
+				if ($oups = decoder_contexte_ajax($oups, $form)) {
+					if (!is_array($oups)
+						or empty($oups['id_auteur'])
+						or $oups['id_auteur'] !== $GLOBALS['visiteur_session']['id_auteur']
+						or empty($oups['time'])
+						or $oups['time'] < $_SERVER['REQUEST_TIME'] - 86400
+						or empty($oups['args'])
+						or $oups['args'] !== lien_gerer__oups_collecter_args($form, debug_backtrace(null, 5))
+						or empty($oups['oups_value'])) {
+						$oups = null;
+					}
+					else {
+						$oups = $oups['oups_value'];
+						// controler le contenu
+						foreach ($oups as $k => $oup) {
+							if (!is_array($oup)) {
+								unset($oups[$k]);
+							}
+							else {
+								foreach ($oup as $champ => $valeur) {
+									if (!is_scalar($champ)
+										or !is_scalar($valeur)
+										or preg_match(',\W,', $champ)
+									) {
+										unset($oups[$k][$champ]);
+									}
+								}
+								if (empty($oups[$k])) {
+									unset($oups[$k]);
+								}
+							}
+						}
+					}
+					$_oups_value = $oups;
+					return $_oups_value;
+				}
+			}
+			break;
+
+		case 'hash':
+			if (!$_oups_value) {
+				return '';
+			}
+
+			include_spip('inc/filtres');
+			$oups = [
+				'id_auteur' => $GLOBALS['visiteur_session']['id_auteur'] ?? 0,
+				'time' => strtotime(date('Y-m-d H:00:00')),
+				'args' => lien_gerer__oups_collecter_args($form, debug_backtrace(null, 5)),
+				'oups_value' => $_oups_value,
+			];
+			return encoder_contexte_ajax($oups, $form);
+	}
+}
+
+/**
+ * Collecter les args du form utilisant la fonction lien_gerer__oups()
+ * @param $trace
+ * @return false|float|int|mixed|Services_JSON_Error|string
+ */
+function lien_gerer__oups_collecter_args($form, $trace) {
+	$args = '';
+	if (!empty($trace)) {
+		do {
+			$t = array_shift($trace);
+			$function = $t['function'] ?? '';
+			if (strpos($function, 'formulaires_'. $form) === 0) {
+				if (isset($t['args'])) {
+					$args = json_encode($t['args']);
+				}
+				break;
+			}
+		}
+		while (count($trace));
+	}
+	return $args;
 }
