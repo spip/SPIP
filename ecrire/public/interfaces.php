@@ -177,6 +177,9 @@ class Boucle {
 	/** Identifiant de la boucle parente */
 	public string $id_parent = '';
 
+	/** Un nom explicite qui peut être affecté manuellement à certaines boucles générées */
+	public string $nom = '';
+
 	/**
 	 * Partie avant toujours affichee
 	 *
