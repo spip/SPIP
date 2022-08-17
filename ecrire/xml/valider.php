@@ -22,6 +22,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     on a les memes methodes et variables que l'indenteur
  **/
 class ValidateurXML {
+
 	public function validerElement($phraseur, $name, $attrs) {
 		if (!($p = isset($this->dtc->elements[$name]))) {
 			if ($p = strpos($name, ':')) {
@@ -325,11 +326,13 @@ class ValidateurXML {
 	public $entete = '';
 	public $page = '';
 	public $res = '';
-	public $err = [];
-	public $contenu = [];
-	public $ouvrant = [];
-	public $reperes = [];
-	public $process = [
+	public array $err = [];
+	public array $contenu = [];
+	public array $versions = [];
+
+	public array $ouvrant = [];
+	public array $reperes = [];
+	public array $process = [
 		'debut' => 'xml_debutElement',
 		'fin' => 'xml_finElement',
 		'text' => 'xml_textElement',
