@@ -245,6 +245,14 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = []) {
 				$objet_source = objet_type($table_source);
 				include_spip('action/editer_liens');
 				foreach ($oups as $oup) {
+					// verifier le contenu de $oup
+					foreach ($oup as $champ => $valeur) {
+						if (!is_string($champ)
+						  or preg_match(',\W,', $champ)
+						  or !is_scalar($valeur)) {
+							unset($oup[$champ]);
+						}
+					}
 					if ($objet_lien == $objet_source) {
 						objet_associer([$objet_source => $oup[$objet_source]], [$objet => $oup[$objet]], $oup);
 					} else {
