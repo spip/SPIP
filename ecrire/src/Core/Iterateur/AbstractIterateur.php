@@ -4,18 +4,23 @@ namespace Spip\Core\Iterateur;
 
 abstract class AbstractIterateur
 {
+	protected string $type;
+
 	/**
-	 * Erreur presente ?
+	 * Calcul du total des elements
 	 *
-	 * @var bool
-	 */
-	public $err = false;
+	 * @var int|null
+	 **/
+	public $total = null;
 
-	public $command;
+	/** Erreur presente ? **/
+	public bool $err = false;
 
-	public $info;
+	protected array $command = [];
 
-	public function __construct($command, $info = []) {
+	protected array $info = [];
+
+	public function __construct(array $command, array $info = []) {
 		$this->command = $command;
 		$this->info = $info;
 	}
