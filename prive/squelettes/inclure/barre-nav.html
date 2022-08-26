@@ -76,7 +76,7 @@
 						(#CLE|=={menu_accueil}|ou{#VALEUR{sousmenu}}|?{' ',#SET{li,''}}) #SET{li,'</li>'}
 						<a class="deroulant__lien" href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]" id="bando1_#CLE" data-racine>
 							[(#VALEUR{icone}|balise_svg{'',picto picto_main[ picto_(#CLE|replace{_,-})]})]
-							[<span class="libelle">(#LIBELLE|_T)</span>]
+							[<span class="libelle">(#VALEUR{libelle}|_T)</span>]
 						</a>
 						][(#REM)
 						permettra d'ajouter une classe sur les entrées non favorites
@@ -84,11 +84,11 @@
 						][(#SET{has_favoris,0})]
 						<B_sous>
 						<ul class="deroulant__sous-menu[ (#TOTAL_BOUCLE|>{20}|oui)cols-2]" data-profondeur="1">
-							<BOUCLE_sous(DATA){source table, #SOUSMENU}>
-							[(#FAVORI|oui)#SET{has_favoris,1}]
-							[<li class="deroulant__item[ (#FAVORI|?{deroulant__item_favori,[(#GET{has_favoris}|?{deroulant__item_non-favori})]})]" data-profondeur="1">
+							<BOUCLE_sous(DATA){source table, #VALEUR{sousmenu}}>
+							[(#VALEUR{favori}|oui)#SET{has_favoris,1}]
+							[<li class="deroulant__item[ (#VALEUR{favori}|?{deroulant__item_favori,[(#GET{has_favoris}|?{deroulant__item_non-favori})]})]" data-profondeur="1">
 								<a class="deroulant__lien bando2_#CLE" href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]" data-profondeur="1">
-									<span class="libelle">(#LIBELLE|_T)</span>
+									<span class="libelle">(#VALEUR{libelle}|_T)</span>
 								</a>
 							</li>]
 							</BOUCLE_sous>
@@ -127,7 +127,7 @@
 				<B_creer>
 					<ul class="rapides rapides_creer creer">
 						<BOUCLE_creer(DATA){source table, #GET{boutons}} {cle=outils_rapides}>
-						<BOUCLE_creersous(DATA){source table, #SOUSMENU}{par position}>
+						<BOUCLE_creersous(DATA){source table, #VALEUR{sousmenu}}{par position}>
 						[<li class="rapides__item">
 							<a
 								href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
@@ -146,7 +146,7 @@
 				<B_collaborer>
 					<ul class="rapides rapides_collaborer collaborer">
 					<BOUCLE_collaborer(DATA){source table, #GET{boutons}} {cle=outils_collaboratifs}>
-					<BOUCLE_collaborersous(DATA){source table, #SOUSMENU}>
+					<BOUCLE_collaborersous(DATA){source table, #VALEUR{sousmenu}}>
 						[<li class="rapides__item">
 							<a
 								href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"

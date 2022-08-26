@@ -24,12 +24,12 @@
 					<BOUCLE_menu(DATA){source table, #GET{boutons}}{cle LIKE 'menu_%'}{cle !IN #LISTE{menu_accueil}}>
 					<B_menusous>
 						<div class="editer menus_favoris pleine_largeur">
-							<label>[(#LIBELLE|_T)]</label>
+							<label>[(#VALEUR{libelle}|_T)]</label>
 							[<span class='erreur_message'>(#ENV{erreurs/menus_favoris})</span>]
-							<BOUCLE_menusous(DATA){source table, #SOUSMENU}>
+							<BOUCLE_menusous(DATA){source table, #VALEUR{sousmenu}}>
 							<div class="item choix">
 								<input class='text positionner' type="text" name="menus_favoris[#CLE]" value="#ENV{menus_favoris/#CLE}" id="menu_fav_#CLE" size="1">
-								<label for="menu_fav_#CLE">[(#LIBELLE|_T)]</label>
+								<label for="menu_fav_#CLE">[(#VALEUR{libelle}|_T)]</label>
 							</div>
 							</BOUCLE_menusous>
 						</div>
