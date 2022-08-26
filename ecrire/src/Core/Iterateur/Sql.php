@@ -11,12 +11,6 @@ use Iterator;
  */
 class Sql extends AbstractIterateur implements Iterator
 {
-	/**
-	 * Calcul du total des elements.
-	 *
-	 * @var null|int
-	 */
-	public $total;
 
 	/**
 	 * Ressource sql.
@@ -36,21 +30,12 @@ class Sql extends AbstractIterateur implements Iterator
 
 	protected int $pos = -1;
 
-	protected string $type = 'SQL';
-
-	protected array $command = [];
-
-	protected array $info = [];
-
-
-	/** Erreur presente ? **/
-	public bool $err = false;
-
 	/*
 	 * array command: les commandes d'initialisation
 	 * array info: les infos sur le squelette
 	 */
-	public function __construct($command, $info = []) {
+	public function __construct(array $command, array $info = []) {
+		$this->type = 'SQL';
 		parent::__construct($command, $info);
 
 		$this->select();
