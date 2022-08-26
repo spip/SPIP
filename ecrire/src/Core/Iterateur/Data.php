@@ -21,7 +21,6 @@ class Data extends AbstractIterateur implements Iterator
 	 */
 	protected array $filtre = [];
 
-
 	/**
 	 * Cle courante
 	 *
@@ -36,29 +35,13 @@ class Data extends AbstractIterateur implements Iterator
 	 */
 	protected $valeur = null;
 
-	protected string $type = 'DATA';
-
-	protected array $command = [];
-
-	protected array $info = [];
-
-	/** Erreur presente ? */
-	public bool $err = false;
-
-	/**
-	 * Calcul du total des elements
-	 *
-	 * @var int|null
-	 **/
-	public $total = null;
-
 	/**
 	 * Constructeur
 	 *
 	 * @param  $command
 	 * @param array $info
 	 */
-	public function __construct($command, $info = []) {
+	public function __construct(array $command, array $info = []) {
 		$this->type = 'DATA';
 		$this->command = $command;
 		$this->info = $info;
