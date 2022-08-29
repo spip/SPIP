@@ -66,7 +66,6 @@ function formulaires_configurer_reducteur_traiter_dist() {
 		if ($image_process) {
 			// mettre a jour les formats graphiques lisibles
 			switch ($image_process) {
-				case 'gd1':
 				case 'gd2':
 					$formats_graphiques = $GLOBALS['meta']['gd_formats_read'];
 					break;
@@ -110,7 +109,7 @@ function formulaires_configurer_reducteur_traiter_dist() {
  * une URL pour tester la librairie
  *
  * @param string $process
- *     Code de la libriairie, parmi gd2, gd1, netpbm, imagick ou convert
+ *     Code de la libriairie, parmi gd2, netpbm, imagick ou convert
  * @return string
  *     URL d'action pour tester la librairie graphique en créant une vignette
  **/
@@ -118,15 +117,6 @@ function url_vignette_choix($process) {
 	switch ($process) {
 		case 'gd2':
 			if (!function_exists('ImageCreateTrueColor')) {
-				return '';
-			}
-			break;
-		case 'gd1':
-			if (
-				!function_exists('ImageGif')
-				and !function_exists('ImageJpeg')
-				and !function_exists('ImagePng')
-			) {
 				return '';
 			}
 			break;

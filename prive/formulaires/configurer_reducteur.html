@@ -15,14 +15,6 @@
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]
 				<div class="vignettes_reducteur clearfix">
-				#SET{process,gd1}
-				[<button
-					type="submit"
-					class="btn btn_secondaire vignette_reducteur[(#ENV{image_process}|=={#GET{process}}|oui)on]"
-					style="background-image:url((#GET{process}|url_vignette_choix));"
-					name="image_process_\[#GET{process}\]">
-				[(#GET{process}|strtoupper)]
-				</button>]
 				#SET{process,gd2}
 				[<button
 					type="submit"
@@ -58,7 +50,7 @@
 				</div>
 				<p class="explication"><:info_image_process2:></p>
 			</div>
-			[(#ENV{image_process}|match{^(gd1|gd2)$}|oui)
+			[(#ENV{image_process}|=={gd2}|oui)
 			#SET{name,max_taille_vignettes}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}"><:info_taille_maximale_images:></label>[
