@@ -126,7 +126,11 @@ function date_picker_enable_on_this(opts) {
 			.trigger('datePickerLoaded');
 
 		if (!options.showOnFocus) {
-			$me.on('click', function(){$me.datepicker('show')});
+			$me.on('click', function(){
+				if ($me.is(":visible")) {
+					$me.datepicker('show');
+				}
+			});
 		}
 
 		if ($me.data('range-after') || $me.data('range-before')) {
