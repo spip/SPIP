@@ -14,6 +14,7 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 include_spip('inc/filtres_ecrire'); // si on utilise le formulaire dans le public
 include_spip('inc/autoriser');
+include_spip('inc/session');
 
 /**
  * Chargement du formulaire d'édition d'un auteur
@@ -46,6 +47,9 @@ function formulaires_editer_auteur_charger_dist(
 ) {
 	$valeurs = formulaires_editer_objet_charger('auteur', $id_auteur, 0, 0, $retour, $config_fonc, $row, $hidden);
 	$valeurs['new_login'] = $valeurs['login'];
+	
+	// S'il n'y a pas la langue, on prend la langue du site
+	$valeurs['langue'] = $valeurs['langue'] ?: $GLOBALS['meta']['langue_site'];
 
 	if (!autoriser('modifier', 'auteur', intval($id_auteur))) {
 		$valeurs['editable'] = '';
@@ -404,7 +408,12 @@ function formulaires_editer_auteur_traiter_dist(
 			$retour = parametre_url($retour, 'email_confirm', $email_nouveau);
 		}
 	}
-
+	
+	// Trafic de langue pour enregistrer la bonne
+	if ($langue = _request('langue')) {
+		set_request('lang', $langue);
+	}
+	
 	$res = formulaires_editer_objet_traiter('auteur', $id_auteur, 0, 0, $retour, $config_fonc, $row, $hidden);
 
 	if (_request('reset_password') and !intval($id_auteur) and intval($res['id_auteur'])) {

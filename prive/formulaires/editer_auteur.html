@@ -22,6 +22,19 @@
 				<span class='erreur_message'>(#ENV**{erreurs/email})</span>
 				]<input type='email' autocomplete="new-password" class='text email' name='email' id='email' value="[(#ENV**{email})]" />
 			</div>
+			[(#REM)
+				Édition de la langue, seulement quand on édite quelqu'un d'autre que soi-même
+				(sinon c'est dans configurer_langage ailleurs)
+			]
+			[(#ENV{id_auteur}|!={#SESSION{id_auteur}}|oui)
+			<div class="editer editer_langue[ (#ENV**{erreurs/langue}|oui)erreur]">
+				[<label for="langue">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:ecrire:icone_ma_langue:>,<:ecrire:titre_config_langage:>})</label>][
+				<span class="erreur_message">(#ENV**{erreurs/langue})</span>
+				]<select name="langue" id="langue" class="text langue">
+				[(#INCLURE{fond=prive/formulaires/inc-options-langues,name=var_lang_ecrire,default=#ENV**{langue}})]
+				</select>
+			</div>
+			]
 			<div class="editer editer_bio[ (#ENV**{erreurs/bio}|oui)erreur]">
 				[<label for="bio">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:entree_infos_perso:>,<:entree_infos_perso_2:>})</label>][
 				<span class='erreur_message'>(#ENV**{erreurs/bio})</span>

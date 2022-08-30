@@ -225,8 +225,8 @@ function lister_tables_objets_sql(?string $table_sql = null, $desc = []) {
 				'titre' => "nom AS titre, '' AS lang",
 				'date' => 'date',
 				'principale' => 'oui',
-				'champs_editables' => ['nom', 'email', 'bio', 'nom_site', 'url_site', 'imessage', 'pgp'],
-				'champs_versionnes' => ['nom', 'bio', 'email', 'nom_site', 'url_site', 'login'],
+				'champs_editables' => ['nom', 'email', 'lang', 'bio', 'nom_site', 'url_site', 'imessage', 'pgp'],
+				'champs_versionnes' => ['nom', 'bio', 'lang', 'email', 'nom_site', 'url_site', 'login'],
 				'field' => [
 					'id_auteur' => 'bigint(21) NOT NULL',
 					'nom' => "text DEFAULT '' NOT NULL",
