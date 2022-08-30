@@ -295,6 +295,18 @@ function objet_inserer($objet, $id_parent = null, $set = null) {
 			]
 		);
 	}
+	
+	// Appeler une notification
+	if ($notifications = charger_fonction('notifications', 'inc')) {
+		$notifications(
+			"{$objet}_inserer",
+			$id,
+			array(
+				'id_parent' => $id_parent,
+				'champs' => $champs,
+			)
+		);
+	}
 
 	return $id;
 }
@@ -471,6 +483,20 @@ function objet_instituer($objet, $id, $c, $calcul_rub = true) {
 
 	// Notifications
 	if ($notifications = charger_fonction('notifications', 'inc')) {
+		$notifications(
+			"{$objet}_instituer",
+			$id,
+			array(
+				'statut' => $statut,
+				'statut_ancien' => $statut_ancien,
+				'date' => $date,
+				'date_ancienne' => $date_ancienne,
+				'id_parent_ancien' => $id_rubrique,
+				'champs' => $champs
+			)
+		);
+		
+		// Rétro-compat
 		$notifications(
 			"instituer$objet",
 			$id,
