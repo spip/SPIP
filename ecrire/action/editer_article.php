@@ -259,6 +259,18 @@ function article_inserer($id_rubrique, $set = null) {
 			'data' => $champs
 		]
 	);
+	
+	// Appeler une notification
+	if ($notifications = charger_fonction('notifications', 'inc')) {
+		$notifications(
+			"article_inserer",
+			$id_article,
+			array(
+				'id_parent' => $id_rubrique,
+				'champs' => $champs,
+			)
+		);
+	}
 
 	return $id_article;
 }
@@ -399,6 +411,20 @@ function article_instituer($id_article, $c, $calcul_rub = true) {
 
 	// Notifications
 	if ($notifications = charger_fonction('notifications', 'inc')) {
+		$notifications(
+			"article_instituer",
+			$id_article,
+			array(
+				'statut' => $statut,
+				'statut_ancien' => $statut_ancien,
+				'date' => $date,
+				'date_ancienne' => $date_ancienne,
+				'id_parent_ancien' => $id_rubrique,
+				'champs' => $champs,
+			)
+		);
+		
+		// Rétro-compat
 		$notifications(
 			'instituerarticle',
 			$id_article,
