@@ -98,7 +98,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info_calendrier' => 'To kalendere står til rådighed. Den første er en oversigt over webstedet, der viser alle offentliggjorte artikler.Den anden indeholder både redaktionelle annonceringer og dine seneste private meddelelser. Den er forbeholdt dig i kraft af en personlig nøgle, som du kan ændre når som helst ved at forny din adgangskode.',
 	'ical_methode_http' => 'Filhentning',
 	'ical_methode_webcal' => 'Synkronisering (webcal://)', # MODIF
-	'ical_texte_js' => 'Med en linies javascript kan du nemt vise de senest offentliggjorte artikler på et websted, der tilhører dig.',
 	'ical_texte_prive' => 'Denne strengt personlige kalender holder dig underrettet om private redaktionelle aktiviteter på webstedet (opgaver, personlige aftaler, indsendte artikler, nyheder ...).',
 	'ical_texte_public' => 'Med denne kalender kan du følge de offentlige aktiviteter på webstedet (offentliggjorte artikler og nyheder).',
 	'ical_texte_rss' => 'Du kan syndikere de seneste nyheder på dette websted i en hvilken som helst XML/RSS (Rich Site Summary) fillæser. Dette format tillader også SPIP at læse de seneste nyheder offenliggjort af andre websteder i et kompatibelt udvekslingsformat.',

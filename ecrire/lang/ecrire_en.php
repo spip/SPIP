@@ -170,7 +170,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info_calendrier' => 'Two calendars are available. The first is a general, public calendar showing  articles as they are published. The second is personal and contains editorial announcements as well as your latest private messages: it is reserved for you via a personal key that you can modify at any time by renewing your password.',
 	'ical_methode_http' => 'Downloading',
 	'ical_methode_webcal' => 'Synchronisation (webcal://)',
-	'ical_texte_js' => 'A line of javascript allows you to easily display the most recent articles published on this site on any other site belonging to you.',
 	'ical_texte_prive' => 'This calendar, which is strictly personal, informs you of the private editorial activity of this site (tasks, personal appointments, articles and news items submitted etc.).',
 	'ical_texte_public' => 'This calendar allows you to follow the public activity of this site (newly-published articles and news items).',
 	'ical_texte_rss' => 'You can syndicate the latest news from this site in any XML/RSS (Rich Site Summary) reader. This is also the format that allows SPIP to read the latest news published by other sites using a compatible exchange format (syndicated sites).',

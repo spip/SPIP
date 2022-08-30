@@ -27,10 +27,6 @@ if (!defined('_MYSQL_NOPLANES')) {
 	define('_MYSQL_NOPLANES', true);
 }
 
-if (!defined('_MYSQL_ENGINE')) {
-	define('_MYSQL_ENGINE', 'MyISAM');
-}
-
 /**
  * Crée la première connexion à un serveur MySQL via MySQLi
  *
@@ -736,7 +732,7 @@ function spip_mysql_create(
 	}
 	$temporary = $temporary ? 'TEMPORARY' : '';
 	$q = "CREATE $temporary TABLE IF NOT EXISTS $nom ($query" . ($keys ? ",$keys" : '') . ')'
-		. ' ENGINE=' . _MYSQL_ENGINE
+		. (defined('_MYSQL_ENGINE') ? ' ENGINE=' . _MYSQL_ENGINE : '')
 		. ($character_set ? " DEFAULT $character_set" : '')
 		. "\n";
 

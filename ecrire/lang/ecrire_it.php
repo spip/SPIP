@@ -172,7 +172,6 @@ Se non conosci queste informazioni, richiedile all’amministratore del sistema 
 	'ical_info_calendrier' => 'Sono disponibili due calendari. Il primo è una mappa del sito che annuncia tutti gli articoli pubblicati. Il secondo contiene gli annunci editoriali e gli ultimi messaggi privati: è un’area riservata, mediante identificativo personale, che è possibile modificare in qualsiasi momento rinnovando la password personale.',
 	'ical_methode_http' => 'Download',
 	'ical_methode_webcal' => 'Sincronizzazione (webcal://)',
-	'ical_texte_js' => 'Una linea in javascript permette di visualizzare, con molta semplicità e su qualsiasi tipo di sito, gli articoli recenti pubblicati su questo sito.',
 	'ical_texte_prive' => 'Questo calendario, ad uso strettamente privato, dà informazioni sull’attività redazionale privata di questo sito (impegni e appuntamenti personali, articoli e brevi proposti...).',
 	'ical_texte_public' => 'Questo calendario permette di monitorare l’attività pubblica del sito (articoli e brevi pubblicati).',
 	'ical_texte_rss' => 'È possibile mettere in syndication le novità di questo sito con qualsiasi lettore di file in formato XML/RSS (Rich Site Summary). Questo è il medesimo formato che permette a SPIP di leggere le novità pubblicate su altri siti che utilizzano un formato di scambio compatibile.',

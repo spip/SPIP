@@ -363,6 +363,31 @@ function argumenter_squelette($v) {
 	}
 }
 
+/**
+ * Fonction proxy pour retarder le calcul d'un formulaire si on est au depart dans un modele
+ *
+ * un modele est toujours inséré en texte dans son contenant
+ * donc si on est dans le public avec un cache on va perdre le dynamisme
+ * et on risque de mettre en cache les valeurs pre-remplies du formulaire
+ * on passe donc par une fonction proxy qui si besoin va collecter les arguments
+ * et injecter le PHP qui va appeler la fonction pour generer le formulaire au lieu de directement la fonction
+ * (dans l'espace prive on a pas de cache, donc pas de soucis (et un leak serait moins grave))
+ *
+ * @see calculer_balise_dynamique()
+ *
+ * @param ...$args
+ * @return string
+ */
+function executer_balise_dynamique_dans_un_modele(...$args) {
+	if (test_espace_prive()) {
+		return executer_balise_dynamique(...$args);
+	}
+	else {
+		$str_args = base64_encode(serialize($args));
+		return "<?" . "php \$_zargs=unserialize(base64_decode('$str_args'));echo executer_balise_dynamique(...\$_zargs); ?".">\n";
+	}
+}
+
 
 /**
  * Calcule et retourne le code PHP retourné par l'exécution d'une balise

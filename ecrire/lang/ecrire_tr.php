@@ -129,7 +129,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info_calendrier' => 'Kullanımınıza iki takvim sunulmuştur. Birincisi yayınlanmış tüm makaleleri duyuran bir site planıdır. İkincisi ise editör ilanları ile son olarak aldığınız özel iletilerinizi içerir : kişisel bir anahtar ile size ayrılmıştır ve buradaki bilgileri şifrenizi yenileyerek her an  değiştirebilirsiniz.',
 	'ical_methode_http' => 'Yükleme',
 	'ical_methode_webcal' => 'Eşzamanlaştırma (webcal://)',
-	'ical_texte_js' => 'Bir javascript satırı size ait herhangi bir sitede yayınlanan son makaleleri gayet basit bir şekilde görüntülemenizi sağlar. ',
 	'ical_texte_prive' => 'Tamamen kişisel kullanıma ayrılmış bu takvim size bu sitenin özel editör etkinlikleri hakkında bilgi verir (kişisel işler ve randevular, önerilen makaleler ve haberler...).',
 	'ical_texte_public' => 'Bu takvim bu sitenin kamu etkinliğini izlemenizi sağlar (yayınlanan makeleler ve haberler).',
 	'ical_texte_rss' => 'Bu sitenin yeniliklerini herhangi bir XML/RSS (Rich Site Summary) formatındaki dosya okuyucusunda paylaşabilirsiniz. SPIP’e uyumlu değiş-tokuş formatı kullanan (paylaşımlı)  başka sitelerde yayınlanan yenilikleri okuma olanağı veren de bu formattır.',

@@ -190,9 +190,9 @@ function inc_recherche_to_array_dist($recherche, $options = []) {
 			// on peut definir une fonction de recherche jointe pour regler les cas particuliers
 			if (
 				!(
-				$rechercher_joints = charger_fonction("rechercher_joints_${table}_${table_liee}", 'inc', true)
-				or $rechercher_joints = charger_fonction("rechercher_joints_objet_${table_liee}", 'inc', true)
-				or $rechercher_joints = charger_fonction("rechercher_joints_${table}_objet_lie", 'inc', true)
+				$rechercher_joints = charger_fonction("rechercher_joints_{$table}_{$table_liee}", 'inc', true)
+				or $rechercher_joints = charger_fonction("rechercher_joints_objet_{$table_liee}", 'inc', true)
+				or $rechercher_joints = charger_fonction("rechercher_joints_{$table}_objet_lie", 'inc', true)
 				)
 			) {
 				$cle_arrivee = id_table_objet($table_liee);

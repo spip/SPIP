@@ -168,7 +168,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info_calendrier' => 'Sie verfügen über zwei Kalender. Einer gibt Ihnen eine Übersicht über die Website und alle dort veröffentlichten Artikel. Der zweite enthält editorische Ankündigungen und Ihre persönlichen Nachrichten. Sie allein haben Zugriff auf ihn indem Sie Ihr Passwort eingeben. Sie könne es ändern, indem Sie Ihr Zugangspasswort für diese Website ändern.',
 	'ical_methode_http' => 'Download',
 	'ical_methode_webcal' => 'Synchronisierung (webcal://)',
-	'ical_texte_js' => 'Mit nur einer Zeile Javascript können Sie auf Ihrer Website die neuesten Artikel dieser Website anzeigen.',
 	'ical_texte_prive' => 'Dieser nur für Sie selbst zugängliche Kalender hält Sie auf dem Laufenden über die internen redaktionellen Vorgänge dieser Website (Aufgaben und persönliche Termine, vorgeschlagene Artikel und Meldungen ...).',
 	'ical_texte_public' => 'Dieser Kalender gibt Ihnen einen Überblick über die Ereignisse im öffentlichen Bereich der Website.',
 	'ical_texte_rss' => 'Sie können die Neuheiten dieser Website mit einem beliebigen Programm anzeigen, dass das Format XML/RSS (Rich Site Summary) beherrscht. SPIP nutz dieses Protokoll auch, um neue Einträge aus anderen Websites zu übernehmen (sog. syndizierte Websites).',

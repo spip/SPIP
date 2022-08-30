@@ -113,7 +113,6 @@ Bann zinformasyon-la, sé komandèr-sistèm ou komandèr-rézo sak i dwa donn a 
 	'ical_info_calendrier' => 'Astèr néna dé kalandryé disponib. Promyé lé in manyèr d’kart pou lo sit, sak i donn a ou tout bann zartik la finn dèt pibliyé. Dézièm-la, i donn aou tout bann zanons léditoryal èk zot dernyé modékri andann out léspas privé (out kazmodékri) : laksé dézyèm kalandryé-la, li lé rézervé. ou minm sèlman lé kav konsilt ali sanm inn sort klé privé, sak ou pé sanz kank i vé (sanz sèlman out modpas). ',
 	'ical_methode_http' => 'Télésarzman',
 	'ical_methode_webcal' => 'Po fé lasinkronizasyon(webcal://)', # MODIF
-	'ical_texte_js' => 'In liny "javascript" (zavaskrip) i permé afisé tout bann zartik sat la finn dèt pibliyé an liny si lo sit-la. Lé tré sinp. Ou i pé afisé zot-la  si tout bann sit aou.',
 	'ical_texte_prive' => 'Kalandryé-la lé sèlman disponib pou ou-minm. I di aou kosa i lé laktivité éditoryal lo sitwèb (kosa ou dwa fé, kank i lé out bann randévou, kank bann zartik èk bann tite-nouvèl la finn dèt propozé...).',
 	'ical_texte_public' => 'Kalandryé-la i di aou kosa i lé laktivité pibli si lo sitwèb (i rappèl tout bann zartik èk tite-nouvèl sat la finn dèt pibliyé).',
 	'ical_texte_rss' => 'Ou pé sindiké bann nouvèlté lo sit-la, kiswa i lé out léktèr bann fisyé andan lo forma  XML/RSS (Rich Site Summary). Forma-la i rann a SPIP kav lir bann nouvèlté dot bann sitwèb, tout sat i ansèrv in forma lésanz konpatib y pé apareyé vèk bann zot-la.',

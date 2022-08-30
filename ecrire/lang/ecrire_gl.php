@@ -140,7 +140,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info_calendrier' => 'Dous calendarios están á súa disposición. O primeiro e un mapa do web que anuncia todos os artigos publicados. O segundo contén os anuncios editoriais así como as súas últimas mensaxes privadas : estalle reservada gracias a unha chave persoal, que pode modificar en calquera momento anovando a súa chave.',
 	'ical_methode_http' => 'Descarga',
 	'ical_methode_webcal' => 'Sincronización (webcal://)', # MODIF
-	'ical_texte_js' => 'Unha liña de javascript permítelle mostrar moi doadamente, sobre calquera web do que dispoña os artigos recentes deste web.',
 	'ical_texte_prive' => 'Este calendario, de uso estrictamente persoal, permítelle informarse da actividade editorial privada deste web (tarefas e citas persoais, artigos e breves propostas...).',
 	'ical_texte_public' => 'Este calendario permítelle seguir a actividade pública deste web (artigos e breves publicadas).',
 	'ical_texte_rss' => 'Pode sindicar as novidades deste web dentro de calquera lector de ficheiros en formato XML/RSS (Rich Site Summary). Este formato tamén lle permite ler con SPIP as novidades publicadas noutros webs que utilicen un formato de intercambio compatible (webs sindicados).',

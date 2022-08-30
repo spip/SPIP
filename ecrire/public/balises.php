@@ -1648,8 +1648,8 @@ function balise_CHAMP_SQL_dist($p) {
  *     Pile complétée par le code à générer
  **/
 function balise_VAL_dist($p) {
-	$p->code = interprete_argument_balise(1, $p);
-	if ($p->code === null || !strlen($p->code)) {
+	$p->code = interprete_argument_balise(1, $p) ?? '';
+	if (!strlen($p->code)) {
 		$p->code = "''";
 	}
 	$p->interdire_scripts = false;

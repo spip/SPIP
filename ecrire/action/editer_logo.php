@@ -232,6 +232,8 @@ function logo_migrer_en_base($objet, $time_limit) {
 								} else {
 									$date_modif = null;
 								}
+								// s'assurer que le logo a les bon droits au passage (evite un echec en cas de sanitization d'un svg)
+								@chmod($d, _SPIP_CHMOD & 0666);
 								// logo_modifier commence par supprimer le logo existant, donc on le deplace pour pas le perdre
 								@rename($d, $dir_logos . $nom);
 								// et on le declare comme nouveau logo

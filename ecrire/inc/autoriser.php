@@ -151,7 +151,6 @@ if ($f = find_in_path('mes_fonctions.php')) {
  */
 function autoriser_dist(string $faire, ?string $type = '', $id = null, $qui = null, array $opt = []): bool {
 
-	$a = null;
 	if ($type === null) {
 		$type = '';
 	}
@@ -217,6 +216,7 @@ function autoriser_dist(string $faire, ?string $type = '', $id = null, $qui = nu
 			'autoriser_defaut_dist'
 		];
 
+	$a = false;
 	foreach ($fonctions as $f) {
 		if (function_exists($f)) {
 			$a = $f($faire, $type, $id, $qui, $opt);

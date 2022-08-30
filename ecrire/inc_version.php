@@ -34,7 +34,7 @@ error_reporting(E_ALL ^ E_NOTICE);
 
 /** version PHP minimum exigee (cf. inc/utils) */
 define('_PHP_MIN', '7.4.0');
-define('_PHP_MAX', '8.1.99');
+define('_PHP_MAX', '8.2.99');
 
 if (!defined('_DIR_RESTREINT_ABS')) {
 	/** le nom du repertoire ecrire/ */
@@ -450,7 +450,7 @@ define('_SPIP_EXTRA_VERSION', '-dev');
 # define('_DEV_VERSION_SPIP_COMPAT', '4.1.99');
 // version des signatures de fonctions PHP
 // (= date de leur derniere modif cassant la compatibilite et/ou necessitant un recalcul des squelettes)
-$spip_version_code = 2022_04_13;
+$spip_version_code = 2022_08_23;
 // version de la base SQL (= Date + numero incremental a 2 chiffres YYYYMMDDXX)
 $spip_version_base = 2022_02_23_02;
 

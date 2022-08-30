@@ -181,7 +181,7 @@ function couleur_html_to_hex($couleur) {
 		'yellow' => 'FFFF00',
 		'yellowgreen' => '9ACD32',
 	];
-	if (isset($couleurs_html[$lc = strtolower($couleur)])) {
+	if (isset($couleurs_html[$lc = strtolower($couleur ?? '')])) {
 		return $couleurs_html[$lc];
 	}
 

@@ -562,7 +562,7 @@ function image_filtrer($args) {
 							$w = $regs[1];
 						}
 						if ($w and ($style = extraire_attribut($tag[1], 'style'))) {
-							$style = preg_replace(',width:\s*\d+px,S', "width:${w}px", $style);
+							$style = preg_replace(',width:\s*\d+px,S', "width:{$w}px", $style);
 							$replace = inserer_attribut($tag[1], 'style', $style);
 							$texte = str_replace($tag[1], $replace, $texte);
 						}
@@ -2676,7 +2676,7 @@ function extraire_balises($texte, $tag = 'a') {
 
 	if (
 		preg_match_all(
-			",<${tag}\b[^>]*(/>|>.*</${tag}\b[^>]*>|>),UimsS",
+			",<{$tag}\b[^>]*(/>|>.*</{$tag}\b[^>]*>|>),UimsS",
 			$texte,
 			$regs,
 			PREG_PATTERN_ORDER
@@ -4325,7 +4325,7 @@ function singulier_ou_pluriel($nb, $chaine_un, $chaine_plusieurs, $var = 'nb', $
 	if (!isset($local_singulier_ou_pluriel[$langue])) {
 		$local_singulier_ou_pluriel[$langue] = false;
 		if (
-			$f = charger_fonction("singulier_ou_pluriel_${langue}", 'inc', true)
+			$f = charger_fonction("singulier_ou_pluriel_{$langue}", 'inc', true)
 			or $f = charger_fonction('singulier_ou_pluriel', 'inc', true)
 		) {
 			$local_singulier_ou_pluriel[$langue] = $f;
@@ -4802,17 +4802,17 @@ function generer_objet_info($id_objet, string $type_objet, string $info, string 
 
 	// Si la fonction generer_TYPE_TRUC existe, on l'utilise pour formater $info_generee
 	if (
-		$generer = charger_fonction("generer_${type_objet}_${info}", '', true)
+		$generer = charger_fonction("generer_{$type_objet}_{$info}", '', true)
 		// @deprecated 4.1 generer_TRUC_TYPE
-		or $generer = charger_fonction("generer_${info}_${type_objet}", '', true)
+		or $generer = charger_fonction("generer_{$info}_{$type_objet}", '', true)
 	) {
 		$info_generee = $generer($id_objet, $objets[$type_objet][$id_objet], ...$params);
 	}
 	// Si la fonction generer_objet_TRUC existe, on l'utilise pour formater $info_generee
 	elseif (
-		$generer = charger_fonction("generer_objet_${info}", '', true)
+		$generer = charger_fonction("generer_objet_{$info}", '', true)
 		// @deprecated 4.1 generer_TRUC_entite
-		or $generer = charger_fonction("generer_${info}_entite", '', true)
+		or $generer = charger_fonction("generer_{$info}_entite", '', true)
 	) {
 		$info_generee = $generer($id_objet, $type_objet, $objets[$type_objet][$id_objet], ...$params);
 	} // Sinon on prend directement le champ SQL tel quel

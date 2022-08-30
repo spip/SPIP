@@ -168,7 +168,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info_calendrier' => 'Daou zeiziadur zo en ho kerz. An hini kentañ zo ur plaen eus al lec’hienn hag a ziskouez an holl bennadoù bet embannet. An eil emañ warnañ ar c’hemennoù stur, koulz hag ho kemennadennoù prevez diwezhañ: miret eo evidoc’h dre berzh un alc’hwez personel, a c’hallit kemm n’eus forzh pegoulz pa nevezot ho ker-tremen.',
 	'ical_methode_http' => 'Pellgargañ',
 	'ical_methode_webcal' => 'Kempredañ (webcal://)',
-	'ical_texte_js' => 'A-drugarez d’ul linenn javascript e c’hellit, en un doare aezet, diskouez ar pennadoù diwezhañ embannet war al lec’hienn-mañ, war forzh pe hini eus ho lec’hiennoù.',
 	'ical_texte_prive' => 'An deiziataer hiniennel-mañ a gelaou ac’hanoc’h diwar-benn nevezinti embann prevez al lec’hienn-mañ (labourioù, emgavioù, pennadoù, berrskridoù kinniget,...).',
 	'ical_texte_public' => 'Gant an deiziataer-mañ e c’hellit heuliañ nevezenti foran al lec’hienn (pennadoù ha berrskridoù bet embannet).',
 	'ical_texte_rss' => 'Gallout a rit sindikadiñ nevezenti ar forom-mañ war forzh peseurt lenner restroù XML/RSS (Rich Site Summary). A-drugarez d’ar furmad-se ivez e c’hell SPIP lenn an nevezenti war al lec’hiennoù all hag a implij ur stumm kenlotus(lec’hiennoù sindikadet).',

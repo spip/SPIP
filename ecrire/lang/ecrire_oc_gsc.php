@@ -100,7 +100,6 @@ L’administrator deu sistèma o de l’arret que’vs deu poder hornir
 	'ical_info_calendrier' => 'Que i a dus calendèrs a la vòsta disposicion. Lo permèr qu’ei un plan deu sit qui anóncia tots los articles publicats. Lo segond que contien los anoncis editoriaus en mei deus vòstes darrèrs messatges privats: que vs’ei reservat gràcias a ua clau personau, qui podetz modificar en tot moment en renovant lo vòste mot de santa Clara. ',
 	'ical_methode_http' => 'Telecargament',
 	'ical_methode_webcal' => 'Sincronizacion (webcal://)', # MODIF
-	'ical_texte_js' => 'Los articles publicats en aqueth sit que’s pòden afichar aisit, dens tots los sits vòstes, en har servir ua linha javascript. ',
 	'ical_texte_prive' => 'Aqueth calendèr, d’us estrictament personau, que vs’informa de l’activitat editoriau privada d’aqueth sit (òbras e rendetz-vos personaus, articles e brèvas prepausats...).',
 	'ical_texte_public' => 'Aqueth calendèr que’vs permet de seguir l’activitat publica d’aqueth sit (articles e brèvas publicats).',
 	'ical_texte_rss' => 'Que podetz sindicar las nautats d’aqueste sit dens quin legider de fichièrs que sia en format XML/RSS (Rich Site Summary). Qu’ei tanben lo format qui permet a SPIP de legir las nautats publicadas dens autes sits en utilizar un format d’escambi compatible (sits sindicats). ',

@@ -127,7 +127,7 @@ function charger_langue($lang, $module = 'spip') {
 				$GLOBALS[$var] = &$GLOBALS['i18n_' . $module . '_' . $l];
 			}
 			$GLOBALS['lang_' . $var] = $l;
-			#spip_log("module de langue : ${module}_$l.php", 'traduire');
+			#spip_log("module de langue : {$module}_$l.php", 'traduire');
 			break;
 		}
 	}
@@ -171,7 +171,7 @@ function lire_fichier_langue(string $fichier): array {
  *
  * La fonction suppose la présence de la globale `idx_lang` indiquant
  * la destination des couples de traduction, de la forme
- * `i18n_${module}_${lang}`
+ * `i18n_{$module}_{$lang}`
  *
  * @param array $fichiers
  *    Liste des chemins de fichiers de langue à surcharger.
@@ -238,7 +238,7 @@ class SPIP_Traductions_Description {
  *
  * @note
  *   Les couples clé/traductions déjà connus sont sauvés en interne
- *   dans les globales `i18n_${module}_${lang}` tel que `i18n_mots_es`
+ *   dans les globales `i18n_{$module}_{$lang}` tel que `i18n_mots_es`
  *   et sont également sauvés dans la variable statique `deja_vu`
  *   de cette fonction.
  *

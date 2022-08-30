@@ -111,7 +111,6 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 	'ical_info_calendrier' => 'W genyen dé kalandryé. Promyè sé kart sit-la ki anonsé tout atik piblyé. Lòt dezyèm se kalandryé ka kontni tout anons editoryal yo ak mesaj prive yo ki w te genyen : kalandryé a se résèvè pou w sèlman akoz w gen ositou yon klé pèsònel. Klé ou-a kap chanje nepòt kan w vle pa chanje modpas w-a.',
 	'ical_methode_http' => 'Telechajman',
 	'ical_methode_webcal' => 'Sinkwonizasyon (webcal://)', # MODIF
-	'ical_texte_js' => 'Yon liy javaskrip (javascript) ka pémè w fé parèt senpman tout atik résan nan ki te pibliyé nan sit la, sou nepòt sit ki w genyen a w.',
 	'ical_texte_prive' => 'Kalandriyé a, se sèlman pèsònel, ki enfòm a w kisa se laktivité editoryal pwivé sou sit-la (kisa se ankò pou fè, rannkont lòt patisipan, kisa se atik yo ak tinouvèl ki pwopozé pou piblikasyon...).',
 	'ical_texte_public' => 'Kalandriyé a ka pémè w swiv laktivité piblik sou sit la (atik yo ak tinouvèl ositou ki pibliyé).',
 	'ical_texte_rss' => 'Ou kap sendiké tout nouvèltè sou sit la nan nepòt kisa lèktè fichyé a ki mache sou fòma XML/RSS (Rich Site Summary). Fòma  se fòma ka pémè SPIP fè lekti tout nouvèlté ki pibliyé sou lòt sit yo ka itilize yon fòma echanj posib (konpatib konsa sit sendiké yo).',

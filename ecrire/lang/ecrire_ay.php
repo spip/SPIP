@@ -111,7 +111,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info_calendrier' => 'Pä pachachimpuw utjtam. Mayirix qamawit mä laphi uñnaqawa kunanti taqpach yatiyat qillqatank yatiyi: jumakiw uñjtax uka mä suti imt’awi ukata, ukatxa mayjt’ayasmaw kuna pachtix munktax ukja imt’awim mayjt’ayasa.',
 	'ical_methode_http' => 'Apaqaña',
 	'ical_methode_webcal' => 'Kikipawi (webcal://)', # MODIF
-	'ical_texte_js' => 'Javascript mä siqix ukhamakiw uñachayatam, kawkirs jumankir qamawina, jichhaki yatiyat qillqatanak aka qamawina ',
 	'ical_texte_prive' => 'Aka sapa maynit pacha chimpuxa, aka qamawit jark’ata lurawinak yatiytam (lurawinaka ukatsti sapa maynit aytatanaka, qillqatanaka ukatsti jisk’aptat amtanaka...)',
 	'ical_texte_public' => 'Aka pacha chimpux uñchukiytam qamawit lurawinaka (qillqatanak ukatsti jisk’aptatanak yatiyata).',
 	'ical_texte_rss' => 'Machaq yatiyawinak aka qamawitxa apxasismaw kawkir q’ipinak liyt’irimpi XML/RSS (Rich Site Summary) utt’ayataru. Ukhamaraki SPIP ukax liyt’aspaw machaq yatiyat yatiyawinaka yaqha qamawinakana kawkinti turkakipaw utt’ayatampi lurapxi (apxasit qamawinaka). ',

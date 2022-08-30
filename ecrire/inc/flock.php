@@ -586,7 +586,7 @@ function supprimer_repertoire($dir) {
 /**
  * Crée un sous répertoire
  *
- * Retourne `$base/${subdir}/` si le sous-repertoire peut être crée
+ * Retourne `$base/{$subdir}/` si le sous-repertoire peut être crée
  *
  * @example
  *     ```
@@ -650,7 +650,7 @@ function sous_repertoire($base, $subdir = '', $nobase = false, $tantpis = false)
 
 	// en cas d'echec c'est peut etre tout simplement que le disque est plein :
 	// l'inode du fichier dir_test existe, mais impossible d'y mettre du contenu
-	spip_log("echec creation $base${subdir}");
+	spip_log("echec creation $base{$subdir}");
 	if ($tantpis) {
 		return '';
 	}

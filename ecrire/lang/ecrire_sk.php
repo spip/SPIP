@@ -158,7 +158,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info_calendrier' => 'K dispozícii máte dva kalendáre. Prvý je mapa stránky, kde sú uvedené všetky publikované články. V druhom nájdete oznamy z redakcie, ako aj najnovšie súkromné odkazy: je pre vás vyhradený cez osobný kľúč, ktorý môžete kedykoľvek upraviť tak, že si zmeníte heslo.',
 	'ical_methode_http' => 'Stiahnuť',
 	'ical_methode_webcal' => 'Synchronizácia (webcal://)',
-	'ical_texte_js' => 'Riadok javascriptu vám umožní zobraziť najnovšie publikované články z tejto stránky na hocijakej inej vašej stránke.',
 	'ical_texte_prive' => 'Tento kalendár, ktorý je striktne osobný, vás poinformuje o vašej redakčnej činnosti na tejto stránke (úlohy, osobné stretnutia, odoslané články a novinky, atď.).',
 	'ical_texte_public' => 'Tento kalendár vám umožní sledovať publikačnú činnosť tejto stránky (najnovšie publikované články a novinky).',
 	'ical_texte_rss' => 'Najnovšie správy z tejto stránky môžete sprostredkovať všetkým čítačkám kanálov XML/RSS. To je formát, ktorý aj SPIPu umožňuje  čítať najnovšie správy publikované na iných (syndikovaných) stránkach pomocou kompatibilného formátu na výmenu informácií.',

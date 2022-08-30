@@ -98,7 +98,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info_calendrier' => 'Yè sɛ kàlànɖlyé wè ɖó mí. ɖòkpó nyí gblogblojí ɔ sín tìtòmɛ tɔn bó nɔ xlɛ wě ɖé yè wlàn lɛ bí. Wègɔ ɔ é nyí xógbèɖòtàjì kpó wɛn mì tɔn vívɛná lɛ kpó jí : mi ɖó càvì mi tɔn, bɔ mi lɛ hɛn ɔ mi ná lɛ  nɔ ɖyɔ ɛ kpódó gbètákɛn. .',
 	'ical_methode_http' => 'ɖìɖɔn ',
 	'ical_methode_webcal' => 'mìmá', # MODIF
-	'ical_texte_js' => 'ɖìdèmɛ javasùclipù tɔn  ná síwú nɔ mi ná xlɛ wěkpá gùdógùdó tɔn lɛ ɖò gblogblojí ɖébújí..',
 	'ical_texte_prive' => 'kàlànɖlyé é lɔ é nyí miɖɛsú tɔn ɔn, nɔ ná xógbè ɖó xógbèɖòtàjìzɔ gblogblojí ɔ tɔ wú',
 	'ical_texte_public' => 'kàlànɖlyé ná ná bɔ nùkún mi tɔn ná nɔ gblogblojí ɔ sín àzɔnùkùnɖéjí ɔ jí.',
 	'ical_texte_rss' => 'Mí hɛn ɔ mi siwú má xógbè yɔyɔ é lò gblogblo ɔ jí é, mi sìkú lɛ zán xìxàtɔ ɖébú bóɖó xà  XML/RSS/. ',

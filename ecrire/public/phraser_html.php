@@ -602,13 +602,13 @@ function phraser_criteres($params, &$result) {
 				or preg_match('/^(n|n-|(n-)?\d+)$/S', $param)
 			) {
 				$op = ',';
-				$not = '';
+				$not = false;
 				$cond = false;
 			} else {
 				// Le debut du premier argument est l'operateur
 				preg_match('/^([!]?)([a-zA-Z][a-zA-Z0-9_]*)[[:space:]]*(\??)[[:space:]]*(.*)$/ms', $param, $m);
 				$op = $m[2];
-				$not = $m[1];
+				$not = (bool) $m[1];
 				$cond = $m[3];
 				// virer le premier argument,
 				// et mettre son reliquat eventuel
@@ -651,7 +651,7 @@ function phraser_criteres($params, &$result) {
 				} else {
 					$crit = new Critere();
 					$crit->op = '/';
-					$crit->not = '';
+					$crit->not = false;
 					$crit->exclus = '';
 					$crit->param = [[$v[1][0]], [$v[1][2]]];
 					$args[] = $crit;
@@ -735,7 +735,7 @@ function phraser_criteres($params, &$result) {
 						$crit = new Critere();
 						$crit->op = $m[2];
 						$crit->param = $v;
-						$crit->not = $m[1];
+						$crit->not = (bool) $m[1];
 						$crit->cond = $m[5];
 					} else {
 						$err_ci = [

@@ -110,7 +110,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info_calendrier' => 'Két naptár áll rendelkezésére. Az első egy olyan térpkép a honlapról, melyben szerepel az összes publikált cikk. A második pedig a tartalmi hírdetéseket, illetve az Ön utolsó privát üzenetei : egy személyes kulcsnak köszönhetően van fenntartva Ön részére, ami bármikor módosítható a jelszava változtatásával.',
 	'ical_methode_http' => 'Letöltés',
 	'ical_methode_webcal' => 'Szinkronizálás (webcal://)', # MODIF
-	'ical_texte_js' => 'Egyetlenegy javascript sor nagyon egyszerűen teszi lehetővé az itteni honlap legutóbbi cikkei publikálását bármilyen honlapon, ami az Öné.',
 	'ical_texte_prive' => 'Ez a naptár, ami szigorúan személyes használatra, informálja Önt a honlap privát tartalmi tevékenységről (feladatok és személyes talákozások, javasolt cikkek és hírek...).',
 	'ical_texte_public' => 'Ez a naptár a honlap nyilvános tevékenységének a figyelését teszi lehetővé (publikált cikkek és hírek).',
 	'ical_texte_rss' => 'Ön a honlap ujdonságait szindikálhatja bármilyen XML/RSS (Rich Site Summary)tipusú fájlolvasóval. Valamint ez a formátum SPIP részére teszi lehetővé más honlapok publikált újdonságok olvasását (szindikált honlapok).',

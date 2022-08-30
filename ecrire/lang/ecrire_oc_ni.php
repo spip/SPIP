@@ -144,7 +144,6 @@ Aqueli informacions vos devon poder èstre provesidi per l’administrator dau s
 	'ical_info_calendrier' => 'Li a doi calendiers à la voastra disposicion. Lo promier es un plan dau sit qu’anonça toi lu articles publicats. Lo segond conten lu anoncis editoriaus en mai dei voastres darrièrs messatges privats : vos es reservat graças à una clau personala, que la podètz modificar en tot moment en renovelant lo voastre senhau.',
 	'ical_methode_http' => 'Telecargament',
 	'ical_methode_webcal' => 'Sincronisacion (webcal://)',
-	'ical_texte_js' => 'Lu articles publicats en aqueu sit si poadon afichar simplament, sus toi lu voastres sits, en faguent servir una linha javascript. ',
 	'ical_texte_prive' => 'Aqueu calendier, d’usatge estrictament personau, vos informa de l’activitat editoriala privada d’aqueu sit (òbras e rendètz-vos personaus, articles e brèvas prepauats...).',
 	'ical_texte_public' => 'Aqueu calendier vos permete de sègre l’activitat publica d’aqueu sit (articles e brèvas publicats).',
 	'ical_texte_rss' => 'Podètz sindicar li noveutats d’aqueu sit dins tot legidor de fichiers en format XML/RSS (Rich Site Summary). Es tanben lo format que permete à SPIP de legir li noveutats publicadi dins d’autres sits en utilisant un format d’escambi compatible (sits sindicats). ',

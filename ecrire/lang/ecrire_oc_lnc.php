@@ -122,7 +122,6 @@ L’administrator del sistèma o de la ret vos deu poder fornir
 	'ical_info_calendrier' => 'I a dos calendièrs a la vòstra disposicion. Lo primièr es un plan del sit qu’anóncia totes los articles publicats. Lo segond conten los anoncis editorials en mai de vòstres darrièrs messatges privats: vos es reservat gràcias a una clau personala, que la podètz modificar en tot moment en renovant vòstre mot de santa Clara. ',
 	'ical_methode_http' => 'Telecargament',
 	'ical_methode_webcal' => 'Sincronizacion (webcal://)', # MODIF
-	'ical_texte_js' => 'Los articles publicats en aquel sit se pòdon afichar aisit, dins totes los sits vòstres, en far servir una linha javascript. ',
 	'ical_texte_prive' => 'Aquel calendièr, d’us estrictament personal, vos informa de l’activitat editoriala privada d’aquel sit (òbras e rendètz-vos personals, articles e brèvas prepausats...).',
 	'ical_texte_public' => 'Aquel calendièr vos permet de seguir l’activitat publica d’aquel sit (articles e brèvas publicats).',
 	'ical_texte_rss' => 'Podètz sindicar las novetats d’aqueste sit dins quin legidor de fichièrs que siá en format XML/RSS (Rich Site Summary). Es tanben lo format que permet a SPIP de legir las novetats publicadas dins d’autres sits en utilizar un format d’escambi compatible (sits sindicats). ',

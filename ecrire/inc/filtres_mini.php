@@ -129,6 +129,7 @@ function suivre_lien($url, $lien) {
  * @return string Texte ou URL (en absolus)
  **/
 function url_absolue($url, $base = '') {
+	$url = trim((string) $url);
 	if (strlen($url = trim($url)) == 0) {
 		return '';
 	}

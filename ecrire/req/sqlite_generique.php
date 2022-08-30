@@ -2939,20 +2939,14 @@ class sqlite_requeteur {
 				spip_log('PDOException: ' . $e->getMessage(), 'sqlite.' . _LOG_DEBUG);
 				$r = false;
 			}
-			// sauvegarde de la requete (elle y est deja dans $r->queryString)
-			# $r->spipQueryString = $query;
 
 			// comptage : oblige de compter le nombre d'entrees retournees
 			// par une requete SELECT
 			// aucune autre solution ne donne le nombre attendu :( !
 			// particulierement s'il y a des LIMIT dans la requete.
-			if (strtoupper(substr(ltrim($query), 0, 6)) == 'SELECT') {
-				if ($r) {
-					// noter le link et la query pour faire le comptage *si* on en a besoin
-					$r->spipSqliteRowCount = [$this->link, $query];
-				} elseif ($r instanceof PDOStatement) {
-					$r->spipSqliteRowCount = 0;
-				}
+			if ($r and strtoupper(substr(ltrim($query), 0, 6)) === 'SELECT') {
+				// noter le link et la query pour faire le comptage *si* on en a besoin
+				$r->spipSqliteRowCount = [$this->link, $query];
 			}
 
 			// loger les warnings/erreurs eventuels de sqlite remontant dans PHP

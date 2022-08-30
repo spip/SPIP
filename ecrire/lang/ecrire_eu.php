@@ -156,7 +156,6 @@ Seguritate hobetzeko, konfigurazio hau aldatu behar zenuke, edo @constantes@ kon
 	'ical_info_calendrier' => 'Bi egutegi dituzu eskura. Lehena gunearen planoa da, bertan argitaratutako artikulu guztiak adierazten direlarik. Bigarrenak iragarki editorialak eta zure azken mezu pribatuak ditu: zuk bakarrik ikus dezakezu gako pertsonal baten bidez, gakoa edozein unean alda dezakezularik zure pasahitza aldatuz.',
 	'ical_methode_http' => 'Deskargatu',
 	'ical_methode_webcal' => 'Sinkronizazioa (webcal://)',
-	'ical_texte_js' => 'Gune honetan berriki argitaratutako artikuluak, zure edo edozeinen gunean ikus ditzakezu, Javascript lerro baten bidez.',
 	'ical_texte_prive' => 'Egutegi hau erabat pertsonala da eta gune honen ekintza editorial pribatuen berri ematen du (eginkizunak, hitzordu pertsonalak, artikuluak eta proposatutako berri-laburrak,..)',
 	'ical_texte_public' => 'Egutegi honi eskerleku honetako ekintza publikoen jarraipena egin daiteke (artikuluak eta berri laburrak)',
 	'ical_texte_rss' => 'Leku honen nobedadeak XML/RSS (Rich Site Summary)formatuko edozein fitxategi irakurgailuz sindikatu ditzakezu. Halaber SPIP-ak bestelekuetan argitaratutako nobedadeak irakur ditzake baldin eta leku horiek truke-formatubateragarria (sindikatutako lekuak) erabiltzen badute.',

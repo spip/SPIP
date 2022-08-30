@@ -98,7 +98,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info_calendrier' => 'Na raspolaganju vam stoje dva kalendara. Jedan je plan stranice koji najavljuje sve publicirane artikle. Drugi sadrzi editorijalne najave, kao sto su vase posljednje privatne poruke: On je rezervisan za vas zahvaljujuci licnom kljucu, koji mozete izmijeniti u svakom  momentu, dok mijenjate svoju lozinku.',
 	'ical_methode_http' => 'Download',
 	'ical_methode_webcal' => 'Sinhronizacija (webcal://)', # MODIF
-	'ical_texte_js' => 'Jedna linija javascripta vam omogucuje da recentne clanke, objavljene na ovoj web stranici, jako jednostavno objavite na vasoj web stranici.',
 	'ical_texte_prive' => 'Ovaj kalendar, koji je iskljucivo za licnu upotrebu, obavjestava vas o privatnim editorijalnim  aktivnostima na ovoj stranici (zadaci i licni sastanci, clanci i objavljene kratke poruke).',
 	'ical_texte_rss' => 'Novosti sa ove stranice mozete sindikovati u bilo kojem citacu dokumenata XML/RSS (Rich Site Summary). Takodze, to je format koji dozvoljava SPIP-u da cita novosti objavljene na drugim stranicama, koristeci kompatibilan format  za razmjenu (sindikovane stranice).',
 	'ical_titre_js' => 'Javascript',

@@ -1376,7 +1376,7 @@ function objet_lister_parents($objet, $id_objet, $parent_direct_seulement = fals
 					//    le même que celui de l'objet source.
 					$where[] = isset($parent_methode['source_champ'])
 						? "{$parent_methode['source_champ']} = $id_objet"
-						: "${cle_objet} = $id_objet";
+						: "$cle_objet = $id_objet";
 					if (isset($parent_methode['source_champ_type'])) {
 						$where[] = "{$parent_methode['source_champ_type']} = " . sql_quote($objet);
 					}

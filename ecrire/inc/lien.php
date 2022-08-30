@@ -15,13 +15,26 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 include_spip('base/abstract_sql');
+include_spip('inc/modeles');
 
-//
-// Production de la balise A+href a partir des raccourcis [xxx->url] etc.
-// Note : complique car c'est ici qu'on applique typo(),
-// et en plus on veut pouvoir les passer en pipeline
-//
-
+/**
+ * Production de la balise a+href à partir des raccourcis `[xxx->url]` etc.
+ *
+ * @note
+ *     Compliqué car c'est ici qu'on applique typo(),
+ *     et en plus, on veut pouvoir les passer en pipeline
+ *
+ * @see typo()
+ * @param string $lien
+ * @param string $texte
+ * @param string $class
+ * @param string $title
+ * @param string $hlang
+ * @param string $rel
+ * @param string $connect
+ * @param array $env
+ * @return string
+ */
 function inc_lien_dist(
 	$lien,
 	$texte = '',
@@ -151,43 +164,73 @@ function liens_implicite_glose_dist($texte, $id, $type, $args, $ancre, string $c
 	return $url;
 }
 
-function traiter_lien_implicite($ref, $texte = '', $pour = 'url', string $connect = '') {
-	$url = null;
+/**
+ * Transformer un lien raccourci art23 en son URL
+ * Par defaut la fonction produit une url prive si on est dans le prive
+ * ou publique si on est dans le public.
+ * La globale lien_implicite_cible_public permet de forcer un cas ou l'autre :
+ * $GLOBALS['lien_implicite_cible_public'] = true;
+ *  => tous les liens raccourcis pointent vers le public
+ * $GLOBALS['lien_implicite_cible_public'] = false;
+ *  => tous les liens raccourcis pointent vers le prive
+ * unset($GLOBALS['lien_implicite_cible_public']);
+ *  => retablit le comportement automatique
+ *
+ * @param string $ref
+ * @param string $texte
+ * @param string $pour
+ * @param string $connect
+ * @return array|bool|string
+ */
+function traiter_lien_implicite($ref, $texte = '', $pour = 'url', $connect = '') {
+	$cible = $GLOBALS['lien_implicite_cible_public'] ?? null;
 	if (!($match = typer_raccourci($ref))) {
 		return false;
 	}
+
 	[$type, , $id, , $args, , $ancre] = array_pad($match, 7, null);
-	// attention dans le cas des sites le lien doit pointer non pas sur
-	// la page locale du site, mais directement sur le site lui-meme
+
+	# attention dans le cas des sites le lien doit pointer non pas sur
+	# la page locale du site, mais directement sur le site lui-meme
+	$url = '';
 	if ($f = charger_fonction("implicite_$type", 'liens', true)) {
 		$url = $f($texte, $id, $type, $args, $ancre, $connect);
 	}
+
 	if (!$url) {
-		$url = generer_objet_url($id, $type, $args ?? '', $ancre ?? '', null, '', $connect);
+		$url = generer_objet_url($id, $type, $args ?? '', $ancre ?? '', $cible, '', $connect ?? '');
 	}
+
 	if (!$url) {
 		return false;
 	}
+
 	if (is_array($url)) {
 		[$type, $id] = array_pad($url, 2, null);
-		$url = generer_objet_url($id, $type, $args ?? '', $ancre ?? '', null, '', $connect);
+		$url = generer_objet_url($id, $type, $args ?? '', $ancre ?? '', $cible, '', $connect ?? '');
 	}
+
 	if ($pour === 'url') {
 		return $url;
 	}
+
 	$r = traiter_raccourci_titre($id, $type, $connect);
 	if ($r) {
 		$r['class'] = ($type == 'site') ? 'spip_out' : 'spip_in';
 	}
+
 	if ($texte = trim($texte)) {
 		$r['titre'] = $texte;
 	}
+
 	if (!@$r['titre']) {
 		$r['titre'] = _T($type) . " $id";
 	}
+
 	if ($pour == 'titre') {
 		return $r['titre'];
 	}
+
 	$r['url'] = $url;
 
 	// dans le cas d'un lien vers un doc, ajouter le type='mime/type'
@@ -218,6 +261,7 @@ function typer_raccourci($lien) {
 	if (!preg_match(_RACCOURCI_URL, $lien, $match)) {
 		return [];
 	}
+
 	$f = $match[1];
 	// valeur par defaut et alias historiques
 	if (!$f) {
@@ -239,14 +283,15 @@ function typer_raccourci($lien) {
 							$f = 'document';
 						} else {
 							if (preg_match('/^br..?ve$/S', $f)) {
-								$f = 'breve';
+								$f = 'breve'; # accents :(
 							}
 						}
 					}
 				}
 			}
 		}
-	} # accents :(
+	}
+
 	$match[0] = $f;
 
 	return $match;
@@ -266,150 +311,29 @@ function typer_raccourci($lien) {
 function traiter_raccourci_titre($id, $type, $connect = null) {
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table(table_objet($type));
+
 	if (!($desc and $s = $desc['titre'])) {
 		return [];
 	}
+
 	$_id = $desc['key']['PRIMARY KEY'];
 	$r = sql_fetsel($s, $desc['table'], "$_id=$id", '', '', '', '', $connect);
+
 	if (!$r) {
 		return [];
 	}
+
 	$r['titre'] = supprimer_numero($r['titre']);
+
 	if (!$r['titre'] and !empty($r['surnom'])) {
 		$r['titre'] = $r['surnom'];
 	}
+
 	if (!isset($r['lang'])) {
 		$r['lang'] = '';
 	}
 
 	return $r;
-}
-
-// traite les modeles (dans la fonction typo), en remplacant
-// le raccourci <modeleN|parametres> par la page calculee a
-// partir du squelette modeles/modele.html
-// Le nom du modele doit faire au moins trois caracteres (evite <h2>)
-// Si $doublons==true, on repere les documents sans calculer les modeles
-// mais on renvoie les params (pour l'indexation par le moteur de recherche)
-
-define(
-	'_RACCOURCI_MODELE',
-	'(<([a-z_-]{3,})' # <modele
-	. '\s*([0-9]*)\s*' # id
-	. '([|](?:<[^<>]*>|[^>])*?)?' # |arguments (y compris des tags <...>)
-	. '\s*/?' . '>)' # fin du modele >
-	. '\s*(<\/a>)?' # eventuel </a>
-);
-
-define('_RACCOURCI_MODELE_DEBUT', '@^' . _RACCOURCI_MODELE . '@isS');
-
-function traiter_modeles($texte, $doublons = false, $echap = '', string $connect = '', $liens = null, $env = []) {
-	// preserver la compatibilite : true = recherche des documents
-	if ($doublons === true) {
-		$doublons = ['documents' => ['doc', 'emb', 'img']];
-	}
-	// detecter les modeles (rapide)
-	if (
-		strpos($texte, '<') !== false and
-		preg_match_all('/<[a-z_-]{3,}\s*[0-9|]+/iS', $texte, $matches, PREG_SET_ORDER)
-	) {
-		include_spip('public/assembler');
-		$wrap_embed_html = charger_fonction('wrap_embed_html', 'inc', true);
-		foreach ($matches as $match) {
-			// Recuperer l'appel complet (y compris un eventuel lien)
-
-			$a = strpos($texte, (string) $match[0]);
-			preg_match(
-				_RACCOURCI_MODELE_DEBUT,
-				substr($texte, $a),
-				$regs
-			);
-			$regs[] = ''; // s'assurer qu'il y a toujours un 5e arg, eventuellement vide
-			[, $mod, $type, $id, $params, $fin] = $regs;
-			if (
-				$fin and
-				preg_match(
-					'/<a\s[^<>]*>\s*$/i',
-					substr($texte, 0, $a),
-					$r
-				)
-			) {
-				$lien = [
-					'href' => extraire_attribut($r[0], 'href'),
-					'class' => extraire_attribut($r[0], 'class'),
-					'mime' => extraire_attribut($r[0], 'type'),
-					'title' => extraire_attribut($r[0], 'title'),
-					'hreflang' => extraire_attribut($r[0], 'hreflang')
-				];
-				$n = strlen($r[0]);
-				$a -= $n;
-				$cherche = $n + strlen($regs[0]);
-			} else {
-				$lien = false;
-				$cherche = strlen($mod);
-			}
-
-			// calculer le modele
-			# hack indexation
-			if ($doublons) {
-				$texte .= preg_replace(',[|][^|=]*,s', ' ', $params);
-			} # version normale
-			else {
-				// si un tableau de liens a ete passe, reinjecter le contenu d'origine
-				// dans les parametres, plutot que les liens echappes
-				if (!is_null($liens)) {
-					$params = str_replace($liens[0], $liens[1], $params);
-				}
-				$modele = inclure_modele($type, $id, $params, $lien, $connect, $env);
-				// en cas d'echec,
-				// si l'objet demande a une url,
-				// creer un petit encadre vers elle
-				if ($modele === false) {
-					if (!$lien) {
-						$lien = traiter_lien_implicite("$type$id", '', 'tout', $connect);
-					}
-					if ($lien) {
-						$modele = '<a href="'
-							. $lien['url']
-							. '" class="spip_modele'
-							. '">'
-							. sinon($lien['titre'], _T('ecrire:info_sans_titre'))
-							. '</a>';
-					} else {
-						$modele = '';
-						if (test_espace_prive()) {
-							$modele = entites_html(substr($texte, $a, $cherche));
-							if (!is_null($liens)) {
-								$modele = '<pre>' . str_replace($liens[0], $liens[1], $modele) . '</pre>';
-							}
-						}
-					}
-				}
-				// le remplacer dans le texte
-				if ($modele !== false) {
-					$modele = protege_js_modeles($modele);
-					if ($wrap_embed_html) {
-						$modele = $wrap_embed_html($mod, $modele);
-					}
-					$rempl = code_echappement($modele, $echap);
-					$texte = substr($texte, 0, $a)
-						. $rempl
-						. substr($texte, $a + $cherche);
-				}
-			}
-
-			// hack pour tout l'espace prive
-			if (((!_DIR_RESTREINT) or ($doublons)) and ($id)) {
-				foreach ($doublons ?: ['documents' => ['doc', 'emb', 'img']] as $quoi => $modeles) {
-					if (in_array($type, $modeles)) {
-						$GLOBALS["doublons_{$quoi}_inclus"][] = $id;
-					}
-				}
-			}
-		}
-	}
-
-	return $texte;
 }
 
 //

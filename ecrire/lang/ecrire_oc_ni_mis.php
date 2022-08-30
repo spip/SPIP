@@ -157,7 +157,6 @@ Aqueli informacioun vi devon poudé estre prouvedi da l’aministratour dóu sis
 	'ical_info_calendrier' => 'Li a doui calendari a la vouòstra dispousicioun. Lou premié es un plan dóu sit qu’anounça toui lu article publicat. Lou segount counten li anounça editoriali en mai dei vouòstre darrié message privat : v’es reservat graça a una clau persounala, que la poudès moudificà a cada moumen en renouvelant lou vouòstre mot de passa.',
 	'ical_methode_http' => 'Telecargamen',
 	'ical_methode_webcal' => 'Sincronisacioun (webcal://)',
-	'ical_texte_js' => 'Una ligna de javascript vi permete d’afichà simplamen, soubre toui lu vouòstre sit, lu article rechentamen publicat soubre stou sit. ',
 	'ical_texte_prive' => 'Estou calendari, d’usage estrech personal, v’infourma de l’atività editoriala privada d’estou sit (taca e apountamen persounal, article e brèva proupausat...).',
 	'ical_texte_public' => 'Estou calendari vi permete de sègre l’atività pùblica d’estou sit (article e brèva publicadi).',
 	'ical_texte_rss' => 'Poudès sindicà li nouvità d’estou sit en toui lu letour de fichié en format XML/RSS (Rich Site Summary). Es finda lou format que permete à SPIP de legì li nouvità publicadi soubre d’autre sit en utilisant un format d’escambi compatible (sit sindicat).',

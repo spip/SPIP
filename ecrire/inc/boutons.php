@@ -25,11 +25,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * privée ou dans un de ses sous menus
  */
 class Bouton {
-	/** @var string L'icone à mettre dans le bouton */
-	public $icone;
+	/** L'icone à mettre dans le bouton */
+	public string $icone;
 
-	/** @var string Le nom de l'entrée d'i18n associé */
-	public $libelle;
+	/** Le nom de l'entrée d'i18n associé */
+	public string $libelle;
 
 	/** @var null|string L'URL de la page (null => ?exec=nom) */
 	public $url = null;
@@ -43,8 +43,15 @@ class Bouton {
 	/** @var null|string Pour ouvrir dans une fenetre a part */
 	public $target = null;
 
-	/** @var array Sous-barre de boutons / onglets */
-	public $sousmenu = [];
+	/** Sous-barre de boutons / onglets */
+	public array $sousmenu = [];
+
+	/** Position dans le menu */
+	public int $position = 0;
+
+	/** Entrée favorite ? */
+	public bool $favori = false;
+
 
 	/**
 	 * Définit un bouton

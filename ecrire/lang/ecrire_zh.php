@@ -99,7 +99,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info_calendrier' => '在您的配置中有两个日历. 第一个是站点地图,它显示所有已发布的文章. 第二个包含了可编辑的声明,作为您最后的私有消息: 由于您可以随时通过更新密码来更改您的个人钥匙,它总是为您保留的.',
 	'ical_methode_http' => '下载',
 	'ical_methode_webcal' => '同步 (webcal://)', # MODIF
-	'ical_texte_js' => '一行javascript语句允许在任何您参与的站点显示您在本站最新发表的文章.',
 	'ical_texte_prive' => '该日历严格限于个人使用, 提醒您在该站点上的个人活动 (任务,个人约会,提交的文章和简要...).',
 	'ical_texte_public' => '该日历允许您追踪站点的公共活动 (发布的文章和简要).',
 	'ical_texte_rss' => '您可以用任何XML/RSS(Rich Site Summary)阅读器联合站点的最近新闻以便阅读. XML/RSS同样是允许从其它SPIP站点读取/交换最近新闻的格式.',

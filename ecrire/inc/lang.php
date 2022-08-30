@@ -40,9 +40,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function changer_langue($lang, $liste_langues = null) {
 
 	if (is_null($liste_langues)) {
-		$liste_langues = @$GLOBALS['meta']['langues_proposees'] . ',' . @$GLOBALS['meta']['langues_multilingue'];
-	}
-	else {
+		$liste_langues = ($GLOBALS['meta']['langues_proposees'] ?? '') . ',' . ($GLOBALS['meta']['langues_multilingue'] ?? '');
+	} else {
 		if (is_array($liste_langues)) {
 			$liste_langues = implode(',', $liste_langues);
 		}
@@ -431,7 +430,7 @@ function match_langue($chaine) {
 function init_langues() {
 
 	// liste des langues dans les meta, sauf a l'install
-	$all_langs = @$GLOBALS['meta']['langues_proposees'];
+	$all_langs = $GLOBALS['meta']['langues_proposees'] ?? '';
 
 	$tout = [];
 	if (!$all_langs) {

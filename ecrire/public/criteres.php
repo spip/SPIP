@@ -1107,6 +1107,7 @@ function critere_inverse_dist($idb, &$boucles, $crit) {
 
 /**
  * {par_ordre_liste champ,#LISTE{...}} pour trier selon une liste
+ * en retournant en premier les éléments de la liste
  * @param $idb
  * @param $boucles
  * @param $crit
@@ -1133,7 +1134,9 @@ function critere_par_ordre_liste_dist($idb, &$boucles, $crit) {
 	$_order = array_pop($boucle->order);
 
 	$_liste = calculer_liste($crit->param[1], [], $boucles, $boucles[$idb]->id_parent);
-	$boucle->order[] = "'FIELD(' . $_order . ',' . ((\$zl=formate_liste_critere_par_ordre_liste($_liste,'" . $boucle->sql_serveur . "')) ? \$zl : '0').')'$sens";
+
+	$order = "'-FIELD(' . $_order . ',' . ((\$zl=formate_liste_critere_par_ordre_liste(array_reverse($_liste),'" . $boucle->sql_serveur . "')) ? \$zl : '0').')'$sens";
+	$boucle->order[] = $order;
 }
 
 
@@ -1997,7 +2000,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 
 	$boucle = &$boucles[$idb];
 	$type = $boucle->type_requete;
-	$table = $boucle->id_table ?? '';
+	$table = $boucle->id_table;
 	$desc = $boucle->show;
 	$col_vraie = null;
 

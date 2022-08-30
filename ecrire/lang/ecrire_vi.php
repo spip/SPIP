@@ -98,7 +98,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info_calendrier' => 'Bạn có 2 thời biểu để sử dụng. Thời biểu thứ nhất liệt kê tất cả các bài viết được đăng. Thời biểu thứ hai liệt kê các thông báo của Ban Biên Tập và những thông tin cá nhân của bạn. Phần này được dành cho bạn qua một mật mã riêng mà bạn có thể thay đổi bằng cách thay đổi mật mã của mình.',
 	'ical_methode_http' => 'Đang tải xuống',
 	'ical_methode_webcal' => 'Đồng bộ hoá (webcal://)', # MODIF
-	'ical_texte_js' => 'Một mệnh lệnh javascript có thể được sử dụng để hiển thị những bài vỡ mới nhất được đăng của trang web này trên bất kỳ trang web nào của bạn một cách rất dễ dàng.',
 	'ical_texte_prive' => 'Thời biểu này, với tính cách cá nhân, sẽ cho bạn biết các hoạt động cá nhân của Ban Biên Tập (công việc, các cuộc hẹn, các bài đã nộp và các tin tức...).',
 	'ical_texte_public' => 'Thời biểu này giúp bạn theo dõi các hoạt động chung của trang web (các bài viết và các tin tức đã được đăng).',
 	'ical_texte_rss' => 'Bạn có thể động bộ hoá các tin tức mới nhất của trang web này bằng bất kỳ hệ thống đọc dạng XML/RSS (Rich Site Summary) nào. XML/RSS cũng là dạng hồ sơ mà SPIP có thể dùng để đọc các tin tức mới nhất đăng tải bởi các trang web dùng cùng một hệ trao đổi tương ứng.',

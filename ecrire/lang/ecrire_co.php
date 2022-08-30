@@ -144,8 +144,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		chè vo pudete mudificà quand’ella vi pare rinuvellendu u vostru password.',
 	'ical_methode_http' => 'Scaricà',
 	'ical_methode_webcal' => 'Apparinà (webcal://)', # MODIF
-	'ical_texte_js' => 'Una ligna di javascript permette di fà vede, di manera assai sèmplice è nant’à qualsìasi situ i nuvelli artìculi pubblicati di pocu 
-		nant’à stu situ.',
 	'ical_texte_prive' => 'St’almanaccu, à usu persunale vostru, vi rinsegna nant’à l’attività edituriale privata di stu situ (incàrichi è appuntamenti 
 		persunali, artìculi è dispacci pruposti ...).',
 	'ical_texte_public' => 'St’almanaccu vi permette di seguità l’attività pùbblica di stu situ (artìculi è dispacci pubblicati).',

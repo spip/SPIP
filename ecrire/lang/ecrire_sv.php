@@ -127,7 +127,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info_calendrier' => 'Du kan använda två kalendrar. En är en sajtkarta med alla publicerade artiklar. Den andra innehåller redaktionella meddelanden och dina senaste privata meddelanden: Den är personlig, tack vare en genererad nyckel som du kan förändra när som helst genom att byta lösenord.',
 	'ical_methode_http' => 'Nerladdning',
 	'ical_methode_webcal' => 'Synkronisering (webcal://)', # MODIF
-	'ical_texte_js' => 'En rad javascript tillåter dig att, väldigt enkelt och på vilken sajt du vill, visa en lista på de senaste artiklarna publicerade på den här sajten.',
 	'ical_texte_prive' => 'Den här kalendern som är personlig, innnehåller dina egna redaktionella händelser på den här sajten (uppgifter, egna möten, inlämnade artiklar och nyheter...).',
 	'ical_texte_public' => 'Den här kalendern låter dig följa den publika aktiviteten på sajten (publicerade artiklar och nyheter).',
 	'ical_texte_rss' => 'Du kan syndikerar de senaste nyheterna på den är sajten i vilken XML/RSS-läsare som helst. Det är samma format som gör det möjligt att läsa de senaste nyheterna på andra sajter som använder ett kompatibelt format. (syndikerade sajter).',

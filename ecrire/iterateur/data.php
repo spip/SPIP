@@ -62,42 +62,38 @@ function iterateur_DATA_dist($b) {
  * Pour itérer sur des données quelconques (transformables en tableau)
  */
 class IterateurDATA implements Iterator {
-	/**
-	 * tableau de donnees
-	 *
-	 * @var array
-	 */
-	protected $tableau = [];
+	/** Tableau de données */
+	protected array $tableau = [];
 
 	/**
 	 * Conditions de filtrage
 	 * ie criteres de selection
-	 *
-	 * @var array
 	 */
-	protected $filtre = [];
+	protected array $filtre = [];
 
 
 	/**
 	 * Cle courante
 	 *
-	 * @var null
+	 * @var scalar
 	 */
 	protected $cle = null;
 
 	/**
 	 * Valeur courante
 	 *
-	 * @var null
+	 * @var mixed
 	 */
 	protected $valeur = null;
 
-	/**
-	 * Erreur presente ?
-	 *
-	 * @var bool
-	 **/
-	public $err = false;
+	protected string $type = 'DATA';
+
+	protected array $command = [];
+
+	protected array $info = [];
+
+	/** Erreur presente ? */
+	public bool $err = false;
 
 	/**
 	 * Calcul du total des elements

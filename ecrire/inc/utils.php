@@ -676,11 +676,9 @@ function parametre_url($url, $c, $v = null, $sep = '&amp;') {
  *     - `$url = ancre_url($url, 'navigation'); // => mettra l’ancre #navigation
  *     - `$url = ancre_url($url, ''); // => enlèvera une éventuelle ancre
  * @uses translitteration()
- * @param string $url
- * @param string $ancre
- * @return string
  */
-function ancre_url($url, $ancre) {
+function ancre_url(string $url, ?string $ancre = ''): string {
+	$ancre ??= '';
 	// lever l'#ancre
 	if (preg_match(',^([^#]*)(#.*)$,', $url, $r)) {
 		$url = $r[1];

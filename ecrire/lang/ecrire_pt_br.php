@@ -168,7 +168,6 @@ Estas informações deverão ser fornecidas pelo administrador do sistema ou da 
 	'ical_info_calendrier' => 'Dois calendários estão à sua disposição. O primeiro é um mapa do site anunciando todas as matérias publicadas. O segundo contém os avisos editoriais bem como suas últimas mensagens privadas: ele lhe é reservado graças a uma chave pessoal, que você pode alterar a qualquer momento ao renovar a sua senha.',
 	'ical_methode_http' => 'Transferência',
 	'ical_methode_webcal' => 'Sincronização (webcal://)',
-	'ical_texte_js' => 'Uma linha de javascript permite-lhe exibir de forma simples, em qualquer site que lhe pertença, as matérias recentemente publicadas neste site.',
 	'ical_texte_prive' => 'Este calendário, de uso estritamente pessoal, o informa sobre a atividade editorial privada deste site (tarefas e encontros pessoais, matérias e notas propostas...).',
 	'ical_texte_public' => 'Este calendário permite-lhe acompanhar a atividade pública deste site (matérias e notas publicadas).',
 	'ical_texte_rss' => 'Você pode sindicar as novidades deste site em qualquer leitor de arquivos em formato XML/RSS (Rich Site Summary). É também o formato que permite ao SPIP ler as novidades publicadas em outros sites que utilizem um formato de troca de informações compatível (sites sindicados).',

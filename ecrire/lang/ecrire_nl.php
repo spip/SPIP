@@ -159,7 +159,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info_calendrier' => 'Twee kalenders zijn beschikbaar. De eerste geeft een overzicht van alle gepubliceerde artikelen. De tweede bevat editoriale berichten en je meest recente privé-berichten : deze tweede kalender is afgeschermd voor andere gebruikers door een persoonlijke sleutel die je op elk moment kan wijzigen door je wachtwoord te vernieuwen.',
 	'ical_methode_http' => 'Downloaden',
 	'ical_methode_webcal' => 'Synchronisatie (webcal://)',
-	'ical_texte_js' => 'Met een javascriptregel kan je op eenvoudige wijze de meest recente artikelen van deze site weergeven op een andere site die je beheert.',
 	'ical_texte_prive' => 'Deze kalender is voor persoonlijk gebruik en houdt je op de hoogte van je eigen editoriale activiteit (taken en persoonlijke afspraken, voorgestelde artikelen en nieuwsflitsen...).',
 	'ical_texte_public' => 'Via deze kalender kan je de publieke activiteit van de site volgen (gepubliceerde artikelen en nieuwsflitsen).',
 	'ical_texte_rss' => 'Je kan de nieuwe berichten van de site overnemen (syndiceren) op een andere site in eender welke bestandslezer via het formaat XML/RSS (Rich Site Summary). Dit is hetzelfde formaat dat SPIP toelaat nieuws over te nemen van andere sites die een uitwisselbaar formaat hanteren (gesyndiceerde sites).',

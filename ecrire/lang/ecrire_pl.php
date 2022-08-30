@@ -156,7 +156,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info_calendrier' => 'Do Twojej dyspozycji są dwa kalendarze. Jeden pokazuje mapę strony wraz ze wszystkimi opublikowanymi artykułami. Drugi zawiera ogłoszenia redakcyjne oraz Twoje ostatni wiadomości prywatne : tylko Ty masz do niego dostęp za hasłem.',
 	'ical_methode_http' => 'Ściągnij',
 	'ical_methode_webcal' => 'Synchronizacja (webcal://)',
-	'ical_texte_js' => 'Jedna linia javascript pozwala w bardzo prosty sposób, w każdym należącym do Ciebie serwisie pokazać ostatnio opublikowane w tym serwisie artykuły.',
 	'ical_texte_prive' => 'Ten kalendarz, wyłącznie do użytku osobistego, informuje Cię o działalności redakcyjnej w strefie prywatnej (zadania, spotkania, proponowane artykuły i newsy).',
 	'ical_texte_public' => 'Ten kalendarz pozawala śledzić aktywność redakcyjną serwisu (opublikowane artykuły i newsy).',
 	'ical_texte_rss' => 'Możesz syndykować nowości z tego serwisu w jakimkolwiek czytniku plików formatu XML/RSS (Rich Site Summary). Ten format pozwala SPIP odczytywać nowości opublikowane w innych serwisach (serwisach syndykowanych).',

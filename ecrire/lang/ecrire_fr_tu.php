@@ -173,7 +173,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info_calendrier' => 'Deux calendriers sont à ta disposition. Le premier est un plan du site annonçant tous les articles publiés. Le second contient les annonces éditoriales ainsi que tes derniers messages privés : il t’est réservé grâce à une clé personnelle, que tu peux modifier à tout moment en renouvelant ton mot de passe.',
 	'ical_methode_http' => 'Téléchargement',
 	'ical_methode_webcal' => 'Synchronisation (webcal://)',
-	'ical_texte_js' => 'Une ligne de javascript te permet d’afficher très simplement, sur n’importe quel site t’appartenant, les articles récents publiés sur ce site.',
 	'ical_texte_prive' => 'Ce calendrier, à usage strictement personnel, t’informe de l’activité éditoriale privée de ce site (tâches et rendez-vous personnels, articles et brèves proposés...).',
 	'ical_texte_public' => 'Ce calendrier te permet de suivre l’activité publique de ce site (articles et brèves publiés).',
 	'ical_texte_rss' => 'Tu peux syndiquer les nouveautés de ce site dans n’importe quel lecteur de fichiers au format XML/RSS (Rich Site Summary). C’est aussi le format qui permet à SPIP de lire les nouveautés publiées sur d’autres sites utilisant un format d’échange compatible (sites syndiqués).',

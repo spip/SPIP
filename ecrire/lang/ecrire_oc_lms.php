@@ -100,7 +100,6 @@ L’administrator dau sistema o de la ret vos deu poder fornir
 	'ical_info_calendrier' => 'I a dos chalendiers a la vòstra disposicion. Lo primier es un plan dau sit qu’anóncia tots los articles publicats. Lo segond conten los anoncis editoriaus en mai de vòstres darriers messatges privats: vos es reservat gràcias a una clau personala, que la podetz modificar en tot moment en renovant vòstre senhau. ',
 	'ical_methode_http' => 'Telecharjament',
 	'ical_methode_webcal' => 'Sincronizacion (webcal://)', # MODIF
-	'ical_texte_js' => 'Los articles publicats en queu sit se pòden afichar aisat, dins tots los sits vòstres, en far servir una linha javascript. ',
 	'ical_texte_prive' => 'Queu chalendier, d’usatge estrictament personau, vos informa de l’activitat editoriala privada de queu sit (òbras e rendetz-vos personaus, articles e brevas prepausats...).',
 	'ical_texte_public' => 'Queu chalendier vos permet de seguir l’activitat publica de queu sit (articles e brevas publicats).',
 	'ical_texte_rss' => 'Podetz sindicar las novetats de queste sit dins quin legidor de fichiers que siá en format XML/RSS (Rich Site Summary). Es tanben lo format que permet a SPIP de legir las novetats publicadas dins d’autres sits en utilizar un format d’eschamge compatible (sits sindicats). ',
