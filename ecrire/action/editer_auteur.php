@@ -124,6 +124,17 @@ function auteur_inserer($source = null, $set = null) {
 			'data' => $champs
 		]
 	);
+	
+	// Appeler une notification
+	if ($notifications = charger_fonction('notifications', 'inc')) {
+		$notifications(
+			"auteur_inserer",
+			$id_auteur,
+			array(
+				'champs' => $champs,
+			)
+		);
+	}
 
 	return $id_auteur;
 }
@@ -423,9 +434,19 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 		]
 	);
 
-
 	// Notifications
 	if ($notifications = charger_fonction('notifications', 'inc')) {
+		$notifications(
+			"auteur_instituer",
+			$id_auteur,
+			array(
+				'statut' => $statut,
+				'statut_ancien' => $statut_ancien,
+				'champs' => $champs,
+			)
+		);
+		
+		// Rétro-compat
 		$notifications(
 			'instituerauteur',
 			$id_auteur,

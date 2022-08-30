@@ -115,6 +115,18 @@ function rubrique_inserer($id_parent, $set = null) {
 	propager_les_secteurs();
 	calculer_langues_rubriques();
 
+	// Appeler une notification
+	if ($notifications = charger_fonction('notifications', 'inc')) {
+		$notifications(
+			"rubrique_inserer",
+			$id_rubrique,
+			array(
+				'id_parent' => $id_parent,
+				'champs' => $champs,
+			)
+		);
+	}
+	
 	return $id_rubrique;
 }
 
@@ -274,6 +286,18 @@ function rubrique_instituer($id_rubrique, $c) {
 				}
 
 				calculer_langues_rubriques();
+				
+				// Appeler une notification
+				if ($notifications = charger_fonction('notifications', 'inc')) {
+					$notifications(
+						"rubrique_instituer",
+						$id_rubrique,
+						array(
+							'statut_ancien' => $statut_ancien,
+							'id_parent_ancien' => $old_parent,
+						)
+					);
+				}
 			}
 		}
 	}
