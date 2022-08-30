@@ -311,6 +311,17 @@ function objet_modifier_champs($objet, $id_objet, $options, $c = null, $serveur 
 			]
 		);
 	}
+	
+	// Appeler une notification
+	if ($notifications = charger_fonction('notifications', 'inc')) {
+		$notifications(
+			"{$objet}_modifier",
+			$id_objet,
+			array(
+				'champs' => $champs,
+			)
+		);
+	}
 
 	// journaliser l'affaire
 	// message a affiner :-)
