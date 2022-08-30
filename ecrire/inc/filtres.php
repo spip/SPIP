@@ -1059,6 +1059,7 @@ function supprimer_numero($texte) {
  **/
 function recuperer_numero($texte) {
 	if (
+		$texte and
 		preg_match(
 			',^[[:space:]]*([0-9]+)([.)]|' . chr(194) . '?' . chr(176) . ')[[:space:]]+,S',
 			$texte,
