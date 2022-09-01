@@ -33,8 +33,8 @@
 			)</li>]
 		</BOUCLE_pages>
 
-		[[(#GET{derniere}|<{#ENV{nombre_pages}|moins{1}}|oui)<li class="pagination-item tbc disabled"><span class="pagination-item-label">…</span></li>]
 		#SET{item, #ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}}
+		[[(#GET{derniere}|<{#ENV{nombre_pages}|moins{1}}|oui)<li class="pagination-item tbc disabled"><span class="pagination-item-label">…</span></li>]
 		<li class="pagination-item"><a
 		  href="[(#ENV{url}|parametre_url{#ENV{debut},#GET{item}}|ancre_url{#ENV{ancre}})]"
 		  class="pagination-item-label lien_pagination" aria-label="<:lien_aller_a_la_derniere_page|attribut_html:>"
