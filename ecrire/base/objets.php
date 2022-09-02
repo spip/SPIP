@@ -1020,9 +1020,13 @@ function table_objet(string $type, string $serveur = ''): string {
 		return '';
 	}
 
+static $cache = [];
+	if (isset($cache[$serveur][$type])) {
+		return $cache[$serveur][$type];
+	}	
 	$surnoms = lister_tables_objets_surnoms();
 	if (isset($surnoms[$type])) {
-		return $surnoms[$type];
+		return $cache[$serveur][$type] = $surnoms[$type];
 	}
 
 	if ($serveur !== false) {
@@ -1033,20 +1037,21 @@ function table_objet(string $type, string $serveur = ''): string {
 			(isset($t[$typetrim]) or in_array($typetrim, $t))
 			and ($desc = $trouver_table(rtrim($type, 's') . 's', $serveur))
 		) {
-			return $desc['id_table'];
+			return $cache[$serveur][$type] = $desc['id_table'];
 		} elseif (
 			(isset($t[$type]) or in_array($type, $t))
 			and ($desc = $trouver_table($type, $serveur))
 		) {
-			return $desc['id_table'];
+			return $cache[$serveur][$type] = $desc['id_table'];
 		}
 
 		spip_log('table_objet(' . $type . ') calculee sans verification');
 		#spip_log(debug_backtrace(),'db');
 	}
 
-	return rtrim($type, 's') . 's'; # cas historique ne devant plus servir, sauf si $serveur=false
+	return $cache[$serveur][$type] = (rtrim($type, 's') . 's'); # cas historique ne devant plus servir, sauf si $serveur=false
 }
+
 
 /**
  * Retrouve la table sql à partir de l'objet ou du type
@@ -1161,6 +1166,11 @@ function objet_type(string $table_objet, string $serveur = ''): ?string {
 	if (!$table_objet) {
 		return null;
 	}
+static $cache = [];
+	if (isset($cache[$serveur][$table_objet])) {
+		return $cache[$serveur][$table_objet];
+	}
+
 	$surnoms = lister_types_surnoms();
 
 	// scenario de base
@@ -1169,7 +1179,7 @@ function objet_type(string $table_objet, string $serveur = ''): ?string {
 	// on accepte id_xx en entree aussi
 	$type = preg_replace(',^spip_|^id_|s$,', '', $table_objet);
 	if (isset($surnoms[$type])) {
-		return $surnoms[$type];
+		return $cache[$serveur][$table_objet] = $surnoms[$type];
 	}
 
 	// securite : eliminer les caracteres non \w
@@ -1182,12 +1192,12 @@ function objet_type(string $table_objet, string $serveur = ''): ?string {
 		or (table_objet($type, $serveur) == $table_objet)
 		or (table_objet_sql($type, $serveur) == $table_objet)
 	) {
-		return $type;
+		return $cache[$serveur][$table_objet] = $type;
 	}
 
 	// si on ne veut pas chercher en base
 	if ($serveur === false) {
-		return $type;
+		return $cache[$serveur][$table_objet] = $type;
 	}
 
 	// sinon on passe par la cle primaire id_xx pour trouver le type
@@ -1207,11 +1217,11 @@ function objet_type(string $table_objet, string $serveur = ''): ?string {
 	}
 	// si le type est declare : bingo !
 	if ($desc and isset($desc['type'])) {
-		return $desc['type'];
+		return $cache[$serveur][$table_objet] = $desc['type'];
 	}
 
 	// on a fait ce qu'on a pu
-	return $type;
+	return $cache[$serveur][$table_objet] = $type;
 }
 
 /**
