@@ -8,6 +8,10 @@
 <div class='label'><:email_2:></div>
 <div dir='#LANG_DIR' class='#EDIT{email} email'><a href='mailto:[(#EMAIL|htmlspecialchars)]'>#EMAIL</a></div>
 </div>
+<div class="champ contenu_lang[ (#LANG*|strlen|?{'',vide})]">
+<div class='label'><:ecrire:label_langue:></div>
+<div dir='#LANG_DIR' class='#EDIT{lang} lang'>[(#LANG|traduire_nom_langue)]</div>
+</div>
 <div class="champ contenu_nom_site[ (#NOM_SITE*|sinon{#URL_SITE*}|strlen|?{'',vide})]">
 <div class='label'><:info_site_2:></div>
 <div dir='#LANG_DIR' class='#EDIT{hyperlien} nom_site'>[<a href='(#URL_SITE)'>][(#NOM_SITE|sinon{<:info_site:>})][(#URL_SITE|oui)</a>]</div>
