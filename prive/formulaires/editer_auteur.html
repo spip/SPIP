@@ -28,7 +28,7 @@
 			]
 			[(#ENV{id_auteur}|!={#SESSION{id_auteur}}|oui)
 			<div class="editer editer_langue[ (#ENV**{erreurs/langue}|oui)erreur]">
-				[<label for="langue">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:ecrire:icone_ma_langue:>,<:ecrire:titre_config_langage:>})</label>][
+				[<label for="langue">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:ecrire:icone_ma_langue:>,<:ecrire:label_langue:>})</label>][
 				<span class="erreur_message">(#ENV**{erreurs/langue})</span>
 				]<select name="langue" id="langue" class="text langue">
 				[(#INCLURE{fond=prive/formulaires/inc-options-langues,name=var_lang_ecrire,default=#ENV**{langue}})]
