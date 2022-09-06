@@ -814,8 +814,8 @@ function declarer_interfaces() {
 		define('_TRAITEMENT_TYPO_SANS_NUMERO', 'supprimer_numero(typo(%s, "TYPO", $connect, $Pile[0]))');
 	}
 	$GLOBALS['table_des_traitements']['BIO'][] = 'safehtml(' . _TRAITEMENT_RACCOURCIS . ')';
-	$GLOBALS['table_des_traitements']['NOM_SITE']['spip_auteurs'] = 'entites_html(%s)';
-	$GLOBALS['table_des_traitements']['NOM']['spip_auteurs'] = 'safehtml(' . _TRAITEMENT_TYPO_SANS_NUMERO . ')';
+	$GLOBALS['table_des_traitements']['NOM_SITE']['auteurs'] = 'entites_html(%s)';
+	$GLOBALS['table_des_traitements']['NOM']['auteurs'] = 'safehtml(' . _TRAITEMENT_TYPO_SANS_NUMERO . ')';
 	$GLOBALS['table_des_traitements']['CHAPO'][] = _TRAITEMENT_RACCOURCIS;
 	$GLOBALS['table_des_traitements']['DATE'][] = 'normaliser_date(%s)';
 	$GLOBALS['table_des_traitements']['DATE_REDAC'][] = 'normaliser_date(%s)';

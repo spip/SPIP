@@ -30,6 +30,7 @@
 
 ### Fixed
 
+- spip/medias#4905 utiliser une déclaration moins prioritaire pour les traitements sur les champs
 - #5303 Ne pas déclencher l'ouverture du datepicker quand la date n'est pas en édition
 - #5312 Bug sur la sélection rapide par id dans le selecteur générique
 - #4016 Utiliser de préférence `#VALEUR{index}` dans le core
