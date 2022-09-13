@@ -115,7 +115,15 @@ function auth_echec($raison) {
 	} elseif (@$raison['statut']) {
 		// un simple visiteur n'a pas acces a l'espace prive
 		spip_log('connexion refusee a ' . @$raison['id_auteur']);
-		$raison = minipres(_T('avis_erreur_connexion'), _T('avis_erreur_visiteur'));
+		$est_connecte = (!empty($GLOBALS['visiteur_session']['login']) and !empty($GLOBALS['visiteur_session']['statut'])); // idem test balise #URL_LOGOUT
+		$raison = minipres(
+			_T('avis_erreur_connexion'),
+			_T('avis_erreur_visiteur')
+				// Lien vers le site public
+				. '<br /><a href="' . url_de_base() . '">' . _T('login_retour_public') . '</a>'
+				// Si la personne est connectée, lien de déconnexion ramenant vers la page de login
+				. ($est_connecte ? ' | <a href="' . generer_url_public('', 'action=logout&amp;logout=prive') . '">' . _T('icone_deconnecter') . '</a>' : '')
+		);
 	} else {
 		// auteur en fin de droits ...
 		$h = $raison['site'];
