@@ -29,14 +29,6 @@ define(
 	. '\s*/?' . '>)' # fin du modele >
 );
 
-define(
-	'_RACCOURCI_MODELE',
-	_PREG_MODELE
-	. '\s*(<\/a>)?' # eventuel </a>
-);
-
-define('_RACCOURCI_MODELE_DEBUT', '@^' . _RACCOURCI_MODELE . '@isS');
-
 /**
  * Detecter et collecter les modeles d'un texte dans un tableau descriptif
  * qui pourra servir a leurs traitements ou echappement selon le besoin
@@ -48,29 +40,32 @@ function modeles_collecter($texte, bool $collecter_liens = true) {
 
 	$modeles = [];
 	// detecter les modeles (rapide)
-	if (
-		strpos($texte, '<') !== false
-		and preg_match_all('/<[a-z_-]{3,}\s*[0-9|]+/iS', $texte, $matches, PREG_SET_ORDER)
+	$pos = 0;
+	while (
+		($next = strpos($texte, '<', $pos)) !== false
+		and preg_match('@' . _PREG_MODELE . '@isS', $texte, $regs, PREG_OFFSET_CAPTURE, $next)
 	) {
-		$pos = 0;
-		// Recuperer l'appel complet (y compris un eventuel lien)
-		foreach ($matches as $match) {
-			$a = strpos($texte, (string)$match[0], $pos);
 
-			if (preg_match(_RACCOURCI_MODELE_DEBUT, substr($texte, $a), $regs)) {
-				// s'assurer qu'il y a toujours un 5e arg, eventuellement vide
-				while (count($regs) < 6) {
-					$regs[] = '';
-				}
+		$a = $regs[0][1];
+		$mod = $regs[1][0];
+		$type = $regs[2][0];
+		$id = $regs[3][0] ?? '';
+		$params = $regs[4][0] ?? '';
+		$longueur = strlen($mod);
+		$end = $a + $longueur;
 
-				[, $mod, $type, $id, $params, $fermeture_lien] = $regs;
+		// il faut avoir un id ou des params commençant par un | sinon c'est une simple balise html
+		if (!empty($id) or !empty($params)) {
 
-				if (
-					$collecter_liens
-					and $fermeture_lien
-					and $before = substr($texte, $pos, $a - $pos)
-					and stripos($before, '<a') !== false
-					and preg_match('/<a\s[^<>]*>\s*$/i', $before, $r)
+			$lien = false;
+			if ($collecter_liens
+				and $fermeture_lien = stripos($texte, '</a>', $end)
+				and !strlen(trim(substr($texte, $end, $fermeture_lien - $end)))) {
+
+				$pos_lien_ouvrant = stripos($texte, '<a', $pos);
+				if ($pos_lien_ouvrant !== false
+					and $pos_lien_ouvrant < $a
+					and preg_match('/<a\s[^<>]*>\s*$/i', substr($texte, $pos, $a - $pos), $r)
 				) {
 					$lien = [
 						'href' => extraire_attribut($r[0], 'href'),
@@ -81,27 +76,26 @@ function modeles_collecter($texte, bool $collecter_liens = true) {
 					];
 					$n = strlen($r[0]);
 					$a -= $n;
-					$longueur = $n + strlen($regs[0]);
-				} else {
-					$lien = false;
-					$longueur = strlen($mod);
+					$longueur = $fermeture_lien - $a + 4;
+					$end = $a + $longueur;
 				}
-
-				$modele = [
-					'modele' => $mod,
-					'pos' => $a,
-					'length' => $longueur,
-					'type' => $type,
-					'id' => $id,
-					'params' => $params,
-					'lien' => $lien,
-				];
-
-				$modeles[] = $modele;
 			}
-			$pos = $a + strlen((string)$match[0]);
+
+			$modele = [
+				'modele' => $mod,
+				'pos' => $a,
+				'length' => $longueur,
+				'type' => $type,
+				'id' => $id,
+				'params' => $params,
+				'lien' => $lien,
+			];
+
+			$modeles[] = $modele;
 		}
+		$pos = $end;
 	}
+
 	return $modeles;
 }
 
