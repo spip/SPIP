@@ -122,7 +122,7 @@ function auth_echec($raison) {
 				// Lien vers le site public
 				. '<br /><a href="' . url_de_base() . '">' . _T('login_retour_public') . '</a>'
 				// Si la personne est connectée, lien de déconnexion ramenant vers la page de login
-				. ($est_connecte ? ' / <a href="' . generer_url_public('', 'action=logout&amp;logout=prive') . '">' . _T('icone_deconnecter') . '</a>' : '')
+				. ($est_connecte ? ' | <a href="' . generer_url_public('', 'action=logout&amp;logout=prive') . '">' . _T('icone_deconnecter') . '</a>' : '')
 		);
 	} else {
 		// auteur en fin de droits ...
