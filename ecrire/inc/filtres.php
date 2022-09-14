@@ -2037,6 +2037,7 @@ function extraire_attribut($balise, $attribut, $complet = false) {
 	}
 	if (
 		$balise
+		&& stripos($balise, $attribut) !== false
 		&& preg_match(
 			',(^.*?<(?:(?>\s*)(?>[\w:.-]+)(?>(?:=(?:"[^"]*"|\'[^\']*\'|[^\'"]\S*))?))*?)(\s+'
 			. $attribut
