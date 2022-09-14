@@ -49,7 +49,8 @@ body {
 	color: var(--spip-color-theme-dark);
 	font-weight: normal;
 	overflow-wrap: break-word;
-	max-width: calc(100% - 75px);
+	/* on laisse la place à la fin pour l'icône modifier */
+	max-width: calc(100% - calc(var(--spip-icon-btn-width) + var(--spip-box-spacing-x)));
 }
 
 
