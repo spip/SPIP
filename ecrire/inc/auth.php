@@ -741,12 +741,12 @@ function auth_synchroniser_distant(
 function lire_php_auth($login, $pw, $serveur = '') {
 	if (
 		!$login
-		or !$login = auth_retrouver_login($login, $serveur)
+		or !$login_base = auth_retrouver_login($login, $serveur)
 	) {
 		return false;
 	}
 
-	$row = sql_fetsel('*', 'spip_auteurs', 'login=' . sql_quote($login, $serveur, 'text'), '', '', '', '', $serveur);
+	$row = sql_fetsel('*', 'spip_auteurs', 'login=' . sql_quote($login_base, $serveur, 'text'), '', '', '', '', $serveur);
 
 	if (!$row) {
 		if (
@@ -754,13 +754,14 @@ function lire_php_auth($login, $pw, $serveur = '') {
 			and auth_ldap_connect($serveur)
 			and $auth_ldap = charger_fonction('ldap', 'auth', true)
 		) {
-			return $auth_ldap($login, $pw, $serveur, true);
+			return $auth_ldap($login_base, $pw, $serveur, true);
 		}
 
 		return false;
 	}
-	// su pas de source definie
-	// ou auth/xxx introuvable, utiliser 'spip'
+	
+	// si pas de source definie
+	// ou auth/xxx introuvable, utiliser 'spip' ou autre et avec le login passé par PHP_AUTH_USER
 	if (
 		!$auth_methode = $row['source']
 		or !$auth = charger_fonction($auth_methode, 'auth', true)
