@@ -263,12 +263,22 @@ function article_inserer($id_rubrique, $set = null) {
 	// Appeler une notification
 	if ($notifications = charger_fonction('notifications', 'inc')) {
 		$notifications(
-			"article_inserer",
+			'article_inserer',
 			$id_article,
-			array(
+			[
 				'id_parent' => $id_rubrique,
 				'champs' => $champs,
-			)
+			]
+		);
+		$notifications(
+			'objet_inserer',
+			$id_article,
+			[
+				'objet' => 'article',
+				'id_objet' => $id_article,
+				'id_parent' => $id_rubrique,
+				'champs' => $champs,
+			]
 		);
 	}
 
@@ -412,16 +422,30 @@ function article_instituer($id_article, $c, $calcul_rub = true) {
 	// Notifications
 	if ($notifications = charger_fonction('notifications', 'inc')) {
 		$notifications(
-			"article_instituer",
+			'article_instituer',
 			$id_article,
-			array(
+			[
 				'statut' => $statut,
 				'statut_ancien' => $statut_ancien,
 				'date' => $date,
 				'date_ancienne' => $date_ancienne,
 				'id_parent_ancien' => $id_rubrique,
 				'champs' => $champs,
-			)
+			]
+		);
+		$notifications(
+			'objet_instituer',
+			$id_article,
+			[
+				'objet' => 'article',
+				'id_objet' => $id_article,
+				'statut' => $statut,
+				'statut_ancien' => $statut_ancien,
+				'date' => $date,
+				'date_ancienne' => $date_ancienne,
+				'id_parent_ancien' => $id_rubrique,
+				'champs' => $champs,
+			]
 		);
 		
 		// Rétro-compat
