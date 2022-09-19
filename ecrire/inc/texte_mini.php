@@ -650,6 +650,11 @@ function is_html_safe(string $texte): bool {
 	$texte = str_replace("\r\n", "\n", $texte);
 	// safehtml reduit aussi potentiellement les &nbsp;
 	$texte = str_replace("&nbsp;", " ", $texte);
+	// safehtml remplace les entités numériques
+	if (strpos($texte, '&#') !== false) {
+		$texte = unicode2charset($texte);
+	}
+
 	$texte_safe = safehtml($texte);
 
 	// on teste sur strlen car safehtml supprime le contenu dangereux
