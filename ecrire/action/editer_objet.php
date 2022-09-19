@@ -301,10 +301,20 @@ function objet_inserer($objet, $id_parent = null, $set = null) {
 		$notifications(
 			"{$objet}_inserer",
 			$id,
-			array(
+			[
 				'id_parent' => $id_parent,
 				'champs' => $champs,
-			)
+			]
+		);
+		$notifications(
+			'objet_inserer',
+			$id,
+			[
+				'objet' => $objet,
+				'id_objet' => $id,
+				'id_parent' => $id_parent,
+				'champs' => $champs,
+			]
 		);
 	}
 
@@ -486,14 +496,28 @@ function objet_instituer($objet, $id, $c, $calcul_rub = true) {
 		$notifications(
 			"{$objet}_instituer",
 			$id,
-			array(
+			[
 				'statut' => $statut,
 				'statut_ancien' => $statut_ancien,
 				'date' => $date,
 				'date_ancienne' => $date_ancienne,
 				'id_parent_ancien' => $id_rubrique,
-				'champs' => $champs
-			)
+				'champs' => $champs,
+			]
+		);
+		$notifications(
+			'objet_instituer',
+			$id,
+			[
+				'objet' => $objet,
+				'id_objet' => $id,
+				'statut' => $statut,
+				'statut_ancien' => $statut_ancien,
+				'date' => $date,
+				'date_ancienne' => $date_ancienne,
+				'id_parent_ancien' => $id_rubrique,
+				'champs' => $champs,
+			]
 		);
 		
 		// Rétro-compat

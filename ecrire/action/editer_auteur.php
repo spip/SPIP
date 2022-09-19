@@ -128,11 +128,20 @@ function auteur_inserer($source = null, $set = null) {
 	// Appeler une notification
 	if ($notifications = charger_fonction('notifications', 'inc')) {
 		$notifications(
-			"auteur_inserer",
+			'auteur_inserer',
 			$id_auteur,
-			array(
+			[
 				'champs' => $champs,
-			)
+			]
+		);
+		$notifications(
+			'objet_inserer',
+			$id_auteur,
+			[
+				'objet' => 'auteur',
+				'id_objet' => $id_auteur,
+				'champs' => $champs,
+			]
 		);
 	}
 
@@ -437,13 +446,24 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 	// Notifications
 	if ($notifications = charger_fonction('notifications', 'inc')) {
 		$notifications(
-			"auteur_instituer",
+			'auteur_instituer',
 			$id_auteur,
-			array(
+			[
 				'statut' => $statut,
 				'statut_ancien' => $statut_ancien,
 				'champs' => $champs,
-			)
+			]
+		);
+		$notifications(
+			'objet_instituer',
+			$id_auteur,
+			[
+				'objet' => 'auteur',
+				'id_objet' => $id_auteur,
+				'statut' => $statut,
+				'statut_ancien' => $statut_ancien,
+				'champs' => $champs,
+			]
 		);
 		
 		// Rétro-compat

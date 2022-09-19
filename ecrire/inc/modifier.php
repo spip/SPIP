@@ -317,9 +317,18 @@ function objet_modifier_champs($objet, $id_objet, $options, $c = null, $serveur 
 		$notifications(
 			"{$objet}_modifier",
 			$id_objet,
-			array(
+			[
 				'champs' => $champs,
-			)
+			]
+		);
+		$notifications(
+			'objet_modifier',
+			$id_objet,
+			[
+				'objet' => $objet,
+				'id_objet' => $id_objet,
+				'champs' => $champs,
+			]
 		);
 	}
 

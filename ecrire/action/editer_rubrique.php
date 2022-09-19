@@ -118,12 +118,22 @@ function rubrique_inserer($id_parent, $set = null) {
 	// Appeler une notification
 	if ($notifications = charger_fonction('notifications', 'inc')) {
 		$notifications(
-			"rubrique_inserer",
+			'rubrique_inserer',
 			$id_rubrique,
-			array(
+			[
 				'id_parent' => $id_parent,
 				'champs' => $champs,
-			)
+			]
+		);
+		$notifications(
+			'objet_inserer',
+			$id_rubrique,
+			[
+				'objet' => 'rubrique',
+				'id_objet' => $id_rubrique,
+				'id_parent' => $id_parent,
+				'champs' => $champs,
+			]
 		);
 	}
 	
@@ -290,12 +300,22 @@ function rubrique_instituer($id_rubrique, $c) {
 				// Appeler une notification
 				if ($notifications = charger_fonction('notifications', 'inc')) {
 					$notifications(
-						"rubrique_instituer",
+						'rubrique_instituer',
 						$id_rubrique,
-						array(
+						[
 							'statut_ancien' => $statut_ancien,
 							'id_parent_ancien' => $old_parent,
-						)
+						]
+					);
+					$notifications(
+						'objet_instituer',
+						$id_rubrique,
+						[
+							'objet' => 'rubrique',
+							'id_objet' => $id_rubrique,
+							'statut_ancien' => $statut_ancien,
+							'id_parent_ancien' => $old_parent,
+						]
 					);
 				}
 			}
