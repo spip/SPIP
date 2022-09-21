@@ -577,24 +577,27 @@ function echapper_html_suspect($texte, $options = [], $connect = null, $env = []
 	// si on est là dans le public c'est le mode parano
 	// on veut donc un rendu propre et secure, et virer silencieusement ce qui est dangereux
 	else {
-		$collecteurModeles = null;
-		$markidmodeles = $markidliens = null;
+		$collecteurLiens = $collecteurModeles = null;
 		if (!empty($options['expanser_liens'])) {
 			$texte = expanser_liens($texte, $env['connect'] ?? '', $env['env'] ?? []);
 		}
 		else {
 			include_spip("src/Texte/Utils/Collecteur");
+			include_spip("src/Texte/CollecteurLiens");
 			include_spip("src/Texte/CollecteurModeles");
+
+			$collecteurLiens = new Spip\Texte\CollecteurLiens();
+			$texte = $collecteurLiens->echapper($texte, ['sanitize_callback' => 'safehtml']);
+
 			$collecteurModeles = new Spip\Texte\CollecteurModeles();
-			[$texte, $markidliens] = liens_echapper_raccourcis($texte, 'safehtml');
 			$texte = $collecteurModeles->echapper($texte);
 		}
 		$texte = safehtml($texte);
 		if ($collecteurModeles) {
 			$texte = $collecteurModeles->retablir($texte);
 		}
-		if ($markidliens) {
-			$texte = liens_retablir_raccourcis_echappes($texte, $markidliens);
+		if ($collecteurLiens) {
+			$texte = $collecteurLiens->retablir($texte);
 		}
 	}
 
