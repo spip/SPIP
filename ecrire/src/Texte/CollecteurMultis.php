@@ -86,18 +86,19 @@ class CollecteurMultis extends Collecteur {
 	 **/
 	protected function extraire_trads($bloc) {
 		$trads = [];
+
+		$langs = $this->collecteur($bloc, ']', '[', '@[\[]([a-z]{2,3}(_[a-z]{2,3})?(_[a-z]{2,3})?)[\]]@siS');
 		$lang = '';
-		// ce reg fait planter l'analyse multi s'il y a de l'{italique} dans le champ
-		//	while (preg_match("/^(.*?)[{\[]([a-z_]+)[}\]]/siS", $bloc, $regs)) {
-		while (preg_match('/^(.*?)[\[]([a-z_]+)[\]]/siS', $bloc, $regs)) {
-			$texte = trim($regs[1]);
-			if ($texte or $lang) {
-				$trads[$lang] = $texte;
+		$pos_prev = 0;
+		foreach ($langs as $l) {
+			$pos = $l['pos'];
+			if ($lang or $pos > $pos_prev) {
+				$trads[$lang] = substr($bloc, $pos_prev, $pos - $pos_prev);
 			}
-			$bloc = substr($bloc, strlen($regs[0]));
-			$lang = $regs[2];
+			$lang = $l['match'][1];
+			$pos_prev = $pos + $l['length'];
 		}
-		$trads[$lang] = $bloc;
+		$trads[$lang] = substr($bloc, $pos_prev);
 
 		return $trads;
 	}
