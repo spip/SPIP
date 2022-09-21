@@ -1738,14 +1738,6 @@ function extraire_idiome($letexte, $lang = null, $options = []) {
 }
 
 /**
- * Expression régulière pour obtenir le contenu des extraits polyglottes `<multi>`
- *
- * @var string
- */
-define('_EXTRAIRE_MULTI', '@<multi>(.*?)</multi>@sS');
-
-
-/**
  * Extrait une langue des extraits polyglottes (`<multi>`)
  *
  * Retrouve les balises `<multi>` d'un texte et remplace son contenu
@@ -1762,12 +1754,6 @@ define('_EXTRAIRE_MULTI', '@<multi>(.*?)</multi>@sS');
  *
  * @filtre
  * @link https://www.spip.net/5332
- *
- * @uses extraire_trads()
- * @uses approcher_langue()
- * @uses lang_typo()
- * @uses code_echappement()
- * @uses echappe_retour()
  *
  * @param string $letexte
  * @param string $lang
@@ -1788,7 +1774,7 @@ function extraire_multi($letexte, $lang = null, $options = []) {
 
 	if (
 		$letexte
-		and preg_match_all(_EXTRAIRE_MULTI, $letexte, $regs, PREG_SET_ORDER)
+		and stripos($letexte, '<multi') !== false
 	) {
 		if (!$lang) {
 			$lang = $GLOBALS['spip_lang'];
@@ -1804,82 +1790,17 @@ function extraire_multi($letexte, $lang = null, $options = []) {
 		if (!isset($options['lang_defaut'])) {
 			$options = array_merge($options, ['lang_defaut' => _LANGUE_PAR_DEFAUT]);
 		}
+		$options['lang'] = $lang;
 
-		include_spip('inc/lang');
-		foreach ($regs as $reg) {
-			// chercher la version de la langue courante
-			$trads = extraire_trads($reg[1]);
-			if ($l = approcher_langue($trads, $lang)) {
-				$trad = $trads[$l];
-			} else {
-				if ($options['lang_defaut'] == 'aucune') {
-					$trad = '';
-				} else {
-					// langue absente, prendre le fr ou une langue précisée (meme comportement que inc/traduire.php)
-					// ou la premiere dispo
-					// mais typographier le texte selon les regles de celle-ci
-					// Attention aux blocs multi sur plusieurs lignes
-					if (!$l = approcher_langue($trads, $options['lang_defaut'])) {
-						$l = key($trads);
-					}
-					$trad = $trads[$l];
-					$typographie = charger_fonction(lang_typo($l), 'typographie');
-					$trad = $typographie($trad);
-					// Tester si on echappe en span ou en div
-					// il ne faut pas echapper en div si propre produit un seul paragraphe
-					include_spip('inc/texte');
-					$trad_propre = preg_replace(',(^<p[^>]*>|</p>$),Uims', '', propre($trad));
-					$mode = preg_match(',</?(' . _BALISES_BLOCS . ')[>[:space:]],iS', $trad_propre) ? 'div' : 'span';
-					if ($mode === 'div') {
-						$trad = rtrim($trad) . "\n\n";
-					}
-					$trad = code_echappement($trad, 'multi', false, $mode);
-					$trad = str_replace("'", '"', inserer_attribut($trad, 'lang', $l));
-					if (lang_dir($l) !== lang_dir($lang)) {
-						$trad = str_replace("'", '"', inserer_attribut($trad, 'dir', lang_dir($l)));
-					}
-					if (!$options['echappe_span']) {
-						$trad = echappe_retour($trad, 'multi');
-					}
-				}
-			}
-			$letexte = str_replace($reg[0], $trad, $letexte);
-		}
+		include_spip("src/Texte/Utils/Collecteur");
+		include_spip("src/Texte/CollecteurMultis");
+		$collecteurMultis = new Spip\Texte\CollecteurMultis();
+
+		$letexte = $collecteurMultis->traiter($letexte, $options);
 	}
 
 	return $letexte;
 }
-
-/**
- * Convertit le contenu d'une balise `<multi>` en un tableau
- *
- * Exemple de blocs.
- * - `texte par défaut [fr] en français [en] en anglais`
- * - `[fr] en français [en] en anglais`
- *
- * @param string $bloc
- *     Le contenu intérieur d'un bloc multi
- * @return array [code de langue => texte]
- *     Peut retourner un code de langue vide, lorsqu'un texte par défaut est indiqué.
- **/
-function extraire_trads($bloc) {
-	$trads = [];
-	$lang = '';
-// ce reg fait planter l'analyse multi s'il y a de l'{italique} dans le champ
-//	while (preg_match("/^(.*?)[{\[]([a-z_]+)[}\]]/siS", $bloc, $regs)) {
-	while (preg_match('/^(.*?)[\[]([a-z_]+)[\]]/siS', $bloc, $regs)) {
-		$texte = trim($regs[1]);
-		if ($texte or $lang) {
-			$trads[$lang] = $texte;
-		}
-		$bloc = substr($bloc, strlen($regs[0]));
-		$lang = $regs[2];
-	}
-	$trads[$lang] = $bloc;
-
-	return $trads;
-}
-
 
 /**
  * Calculer l'initiale d'un nom
