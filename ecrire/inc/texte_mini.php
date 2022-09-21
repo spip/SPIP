@@ -632,6 +632,21 @@ function safehtml($t) {
 		return str_replace("\x00", '', $t);
 	}
 
+	$collecteurIdiomes = null;
+	if (stripos($t, '<:') !== false) {
+		include_spip("src/Texte/Utils/Collecteur");
+		include_spip("src/Texte/CollecteurIdiomes");
+		$collecteurIdiomes = new Spip\Texte\CollecteurIdiomes();
+		$t = $collecteurIdiomes->echapper($t);
+	}
+	$collecteurMultis = null;
+	if (stripos($t, '<multi') !== false) {
+		include_spip("src/Texte/Utils/Collecteur");
+		include_spip("src/Texte/CollecteurMultis");
+		$collecteurMultis = new Spip\Texte\CollecteurMultis();
+		$t = $collecteurMultis->echapper($t, ['sanitize_callback' => 'safehtml']);
+	}
+
 	if (!function_exists('interdire_scripts')) {
 		include_spip('inc/texte');
 	}
@@ -643,6 +658,13 @@ function safehtml($t) {
 	}
 	if ($safehtml) {
 		$t = $safehtml($t);
+	}
+
+	if ($collecteurMultis) {
+		$t = $collecteurMultis->retablir($t);
+	}
+	if ($collecteurIdiomes) {
+		$t = $collecteurIdiomes->retablir($t);
 	}
 
 	return interdire_scripts($t); // interdire le php (2 precautions)
