@@ -43,6 +43,18 @@ class CollecteurModeles extends Collecteur {
 	}
 
 	/**
+	 * Sanitizer une collection d'occurences de modèle : on ne fait rien
+	 *
+	 * @param array $collection
+	 * @param string $sanitize_callback
+	 * @return array
+	 */
+	protected function sanitizer_collection(array $collection, string $sanitize_callback): array {
+
+		return $collection;
+	}
+
+	/**
 	 * @param string $texte
 	 * @param array $options
 	 *   bool $collecter_liens
@@ -111,25 +123,12 @@ class CollecteurModeles extends Collecteur {
 	}
 
 	/**
-	 * Sanitizer une collection d'occurences de modèle : on ne fait rien
-	 *
-	 * @param array $collection
-	 * @param string $sanitize_callback
-	 * @return array
-	 */
-	public function sanitizer(array $collection, string $sanitize_callback) {
-
-		return $collection;
-	}
-
-
-	/**
 	 * Traiter les modeles d'un texte
 	 * @param string $texte
 	 * @param array $options
 	 *   bool|array $doublons
 	 *   string $echap
-	 *   ?string $markidliens
+	 *   ?Spip\Texte\CollecteurLiens $collecteurLiens
 	 *   ?array $env
 	 *   ?string $connect
 	 * @return string
@@ -138,7 +137,7 @@ class CollecteurModeles extends Collecteur {
 		if ($texte) {
 			$doublons = $options['doublons'] ?? false;
 			$echap = $options['echap'] ?? '';
-			$markidliens = $options['markidliens'] ?? null;
+			$collecteurLiens = $options['collecteurLiens'] ?? null;
 			$env = $options['env'] ?? [];
 			$connect = $options['connect'] ?? '';
 
@@ -163,8 +162,8 @@ class CollecteurModeles extends Collecteur {
 						// si un tableau de liens a ete passe, reinjecter le contenu d'origine
 						// dans les parametres, plutot que les liens echappes
 						$params = $m['params'];
-						if (!is_null($markidliens)) {
-							$params = liens_retablir_raccourcis_echappes($params, $markidliens);
+						if (!is_null($collecteurLiens)) {
+							$params = $collecteurLiens->retablir($params);
 						}
 
 						$modele = inclure_modele($m['type'], $m['id'], $params, $m['lien'], $connect ?? '', $env);
@@ -175,8 +174,8 @@ class CollecteurModeles extends Collecteur {
 						if ($modele === false) {
 							$modele = $m['raw'];
 
-							if (!is_null($markidliens)) {
-								$modele = liens_retablir_raccourcis_echappes($modele, $markidliens);
+							if (!is_null($collecteurLiens)) {
+								$modele = $collecteurLiens->retablir($modele);
 							}
 
 							$contexte = array_merge($env, ['id' => $m['id'], 'type' => $m['type'], 'modele' => $modele]);

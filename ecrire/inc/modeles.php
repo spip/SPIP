@@ -20,11 +20,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param bool|array $doublons
  * @param string $echap
  * @param string $connect
- * @param ?string $markidliens
+ * @param ?Spip\Texte\CollecteurLiens $collecteurLiens
  * @param array $env
  * @return string
  */
-function traiter_modeles($texte, $doublons = false, $echap = '', string $connect = '', ?string $markidliens = null, $env = []) {
+function traiter_modeles($texte, $doublons = false, $echap = '', string $connect = '', ?Spip\Texte\CollecteurLiens $collecteurLiens = null, $env = []) {
 
 	include_spip("src/Texte/Utils/Collecteur");
 	include_spip("src/Texte/CollecteurModeles");
@@ -34,7 +34,7 @@ function traiter_modeles($texte, $doublons = false, $echap = '', string $connect
 		'doublons' => $doublons,
 		'echap' => $echap,
 		'connect' => $connect,
-		'markidliens' => $markidliens,
+		'collecteurLiens' => $collecteurLiens,
 		'env' => $env
 	];
 	return $collecteurModeles->traiter($texte ?? '', $options);

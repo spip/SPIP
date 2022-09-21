@@ -37,7 +37,7 @@ class Collecteur {
 		$pos = 0;
 		while (
 			(!$if_chars || strpos($texte, $if_chars, $pos) !== false)
-			and ($next = ($start_with ? strpos($texte, $if_chars, $pos) : $pos)) !== false
+			and ($next = ($start_with ? strpos($texte, $start_with, $pos) : $pos)) !== false
 			and preg_match($preg, $texte, $r, PREG_OFFSET_CAPTURE, $next)) {
 
 			$found_pos = $r[0][1];
@@ -87,6 +87,9 @@ class Collecteur {
 	}
 
 	public function detecter($texte): bool {
+		if (!empty($this->markId) and strpos($texte, $this->markId) !== false) {
+			return true;
+		}
 		return !empty($this->collecter($texte, ['detecter_presence' => true]));
 	}
 
