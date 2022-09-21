@@ -543,7 +543,10 @@ function echapper_html_suspect($texte, $options = [], $connect = null, $env = []
 			return $texte;
 		}
 
-		[$texte, $markidmodeles] = modeles_echapper_raccourcis($texte, false);
+		include_spip("src/Texte/Utils/Collecteur");
+		include_spip("src/Texte/CollecteurModeles");
+		$collecteurModeles = new Spip\Texte\CollecteurModeles();
+		$texte = $collecteurModeles->echapper($texte);
 		$texte = echappe_js($texte);
 
 		$texte_to_check = $texte;
@@ -567,23 +570,28 @@ function echapper_html_suspect($texte, $options = [], $connect = null, $env = []
 			}
 			$texte = "<mark class='danger-js' title='" . attribut_html(_T('erreur_contenu_suspect')) . "'>⚠️</mark> " . $texte;
 		}
-		$texte = modele_retablir_raccourcis_echappes($texte, $markidmodeles);
+
+		$texte = $collecteurModeles->retablir($texte);
 	}
 
 	// si on est là dans le public c'est le mode parano
 	// on veut donc un rendu propre et secure, et virer silencieusement ce qui est dangereux
 	else {
+		$collecteurModeles = null;
 		$markidmodeles = $markidliens = null;
 		if (!empty($options['expanser_liens'])) {
 			$texte = expanser_liens($texte, $env['connect'] ?? '', $env['env'] ?? []);
 		}
 		else {
+			include_spip("src/Texte/Utils/Collecteur");
+			include_spip("src/Texte/CollecteurModeles");
+			$collecteurModeles = new Spip\Texte\CollecteurModeles();
 			[$texte, $markidliens] = liens_echapper_raccourcis($texte, 'safehtml');
-			[$texte, $markidmodeles] = modeles_echapper_raccourcis($texte, false);
+			$texte = $collecteurModeles->echapper($texte);
 		}
 		$texte = safehtml($texte);
-		if ($markidmodeles) {
-			$texte = modele_retablir_raccourcis_echappes($texte, $markidmodeles);
+		if ($collecteurModeles) {
+			$texte = $collecteurModeles->retablir($texte);
 		}
 		if ($markidliens) {
 			$texte = liens_retablir_raccourcis_echappes($texte, $markidliens);
