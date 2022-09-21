@@ -1658,13 +1658,6 @@ function post_autobr($texte, $delim = "\n_ ") {
 
 
 /**
- * Expression régulière pour obtenir le contenu des extraits idiomes `<:module:cle:>`
- *
- * @var string
- */
-define('_EXTRAIRE_IDIOME', '@<:(?:([a-z0-9_]+):)?([a-z0-9_]+):>@isS');
-
-/**
  * Extrait une langue des extraits idiomes (`<:module:cle_de_langue:>`)
  *
  * Retrouve les balises `<:cle_de_langue:>` d'un texte et remplace son contenu
@@ -1694,15 +1687,11 @@ define('_EXTRAIRE_IDIOME', '@<:(?:([a-z0-9_]+):)?([a-z0-9_]+):>@isS');
  * @return string
  **/
 function extraire_idiome($letexte, $lang = null, $options = []) {
-	static $traduire = false;
+
 	if (
 		$letexte
-		and preg_match_all(_EXTRAIRE_IDIOME, $letexte, $regs, PREG_SET_ORDER)
+		and strpos($letexte, '<:') !== false
 	) {
-		if (!$traduire) {
-			$traduire = charger_fonction('traduire', 'inc');
-			include_spip('inc/lang');
-		}
 		if (!$lang) {
 			$lang = $GLOBALS['spip_lang'];
 		}
@@ -1713,26 +1702,14 @@ function extraire_idiome($letexte, $lang = null, $options = []) {
 		if (!isset($options['echappe_span'])) {
 			$options = array_merge($options, ['echappe_span' => false]);
 		}
+		$options['lang'] = $lang;
 
-		foreach ($regs as $reg) {
-			$cle = ($reg[1] ? $reg[1] . ':' : '') . $reg[2];
-			$desc = $traduire($cle, $lang, true);
-			$l = $desc->langue;
-			// si pas de traduction, on laissera l'écriture de l'idiome entier dans le texte.
-			if (strlen($desc->texte ?? '')) {
-				$trad = code_echappement($desc->texte, 'idiome', false);
-				if ($l !== $lang) {
-					$trad = str_replace("'", '"', inserer_attribut($trad, 'lang', $l));
-				}
-				if (lang_dir($l) !== lang_dir($lang)) {
-					$trad = str_replace("'", '"', inserer_attribut($trad, 'dir', lang_dir($l)));
-				}
-				if (!$options['echappe_span']) {
-					$trad = echappe_retour($trad, 'idiome');
-				}
-				$letexte = str_replace($reg[0], $trad, $letexte);
-			}
-		}
+		include_spip("src/Texte/Utils/Collecteur");
+		include_spip("src/Texte/CollecteurIdiomes");
+		$CollecteurIdiomes = new Spip\Texte\CollecteurIdiomes();
+
+		$letexte = $CollecteurIdiomes->traiter($letexte, $options);
+
 	}
 	return $letexte;
 }
