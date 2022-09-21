@@ -970,6 +970,15 @@ define('_REGEXP_COND_VIDE_NONVIDE', "/^[(](.*)[?]\s*''\s*:\s*('[^']+')\s*[)]$/")
 define('_REGEXP_COND_NONVIDE_VIDE', "/^[(](.*)[?]\s*('[^']+')\s*:\s*''\s*[)]$/");
 define('_REGEXP_CONCAT_NON_VIDE', "/^(.*)[.]\s*'[^']+'\s*$/");
 
+/**
+ * @uses choisir_traduction()
+ *
+ * @param $tableau
+ * @param $descr
+ * @param $boucles
+ * @param $id_boucle
+ * @return array|false
+ */
 function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 
 	$codes = [];
