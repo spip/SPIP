@@ -1617,12 +1617,12 @@ function post_autobr($texte, $delim = "\n_ ") {
 	$texte = echappe_html($texte, '', true);
 
 	// echapper les modeles
+	$collecteurModeles = null;
 	if (strpos($texte, '<') !== false) {
-		include_spip('inc/lien');
-		if (defined('_PREG_MODELE')) {
-			$preg_modeles = '@' . _PREG_MODELE . '@imsS';
-			$texte = echappe_html($texte, '', true, $preg_modeles);
-		}
+		include_spip("src/Texte/Utils/Collecteur");
+		include_spip("src/Texte/CollecteurModeles");
+		$collecteurModeles = new Spip\Texte\CollecteurModeles();
+		$texte = $collecteurModeles->echapper($texte);
 	}
 
 	$debut = '';
@@ -1646,6 +1646,10 @@ function post_autobr($texte, $delim = "\n_ ") {
 		}
 	}
 	$texte = $debut . $suite;
+
+	if ($collecteurModeles) {
+		$texte = $collecteurModeles->retablir($texte);
+	}
 
 	$texte = echappe_retour($texte);
 
