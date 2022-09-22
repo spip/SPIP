@@ -97,7 +97,7 @@ function _sqlite_init_functions(&$sqlite) {
 
 		// R
 		'RADIANS' => ['deg2rad', 1],
-		'RAND'    => ['_sqlite_func_rand', 0], // sinon random() v2.4
+		'RAND'    => ['_sqlite_func_rand', -1], // sinon random() v2.4
 		'REGEXP'  => ['_sqlite_func_regexp_match', 2], // critere REGEXP supporte a partir de v3.3.2
 		'RIGHT'   => ['_sqlite_func_right', 2],
 
@@ -375,10 +375,17 @@ function _sqlite_func_extraire_multi($quoi, $lang) {
 /**
  * Mapping de `RAND` pour SQLite
  *
+ * @param int|null $seed
  * @return float
  */
-function _sqlite_func_rand() {
-	return random_int(0, mt_getrandmax());
+function _sqlite_func_rand(? int $seed = null) {
+	if (is_int($seed)) {
+		mt_srand($seed);
+		$random = mt_rand();
+	} else {
+		$random = random_int(0, mt_getrandmax());
+	}
+	return $random;
 }
 
 

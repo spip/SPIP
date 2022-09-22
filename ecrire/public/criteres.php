@@ -759,8 +759,9 @@ function critere_parinverse($idb, &$boucles, $crit) {
 		if ($tri[0]->type != 'texte') {
 			// calculer le order dynamique qui verifie les champs
 			$order = calculer_critere_arg_dynamique($idb, $boucles, $tri, $sens);
-			// ajouter 'hasard' comme possibilité de tri dynamique
+			// ajouter 'hasard' et 'hasard_fixe' comme possibilités de tri dynamique
 			calculer_critere_par_hasard($idb, $boucles, $crit);
+			calculer_critere_par_hasard_fixe($idb, $boucles, $crit);
 		}
 		// tris textuels {par titre}
 		else {
@@ -787,7 +788,9 @@ function critere_parinverse($idb, &$boucles, $crit) {
 				// quelques cas spécifiques {par hasard}, {par date}
 				if ($par == 'hasard') {
 					$order = calculer_critere_par_hasard($idb, $boucles, $crit);
-				} elseif ($par == 'date' and !empty($boucle->show['date'])) {
+				} elseif ($par == 'hasard_fixe') {
+					$order = calculer_critere_par_hasard_fixe($idb, $boucles, $crit);
+				}elseif ($par == 'date' and !empty($boucle->show['date'])) {
 					$order = "'" . $boucle->id_table . '.' . $boucle->show['date'] . "'";
 				} else {
 					// cas général {par champ}, {par table.champ}, ...
@@ -849,6 +852,36 @@ function calculer_critere_par_hasard($idb, &$boucles, $crit) {
 		$boucle->select[] = $parha;
 	}
 	return "'hasard'";
+}
+
+/**
+ * Calculs pour le critère `{par hasard_fixe}`
+ *
+ * Ajoute le générateur d'aléatoire fixe au SELECT de la boucle.
+ * Idem que {par hasard}, mais avec de l'aléatoire persistent.
+ *
+ * @param string $idb Identifiant de la boucle
+ * @param array $boucles AST du squelette
+ * @param Critere $crit Paramètres du critère dans cette boucle
+ * @return string Clause pour le Order by
+ */
+function calculer_critere_par_hasard_fixe($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	$table_objets = $boucle->type_requete;// 'articles'
+	$id_boucle = $boucle->id_boucle; // nom de la boucle
+	$id_table = $boucle->id_table; // 'articles' ou autre alias
+	$cle_objet = $boucle->primary; // 'id_article'
+
+	// Si ce n'est fait, ajouter un champ 'hasard_fixe' dans le select
+	// On prend une graine unique à l'objet, à la boucle, et à une période (le jour)
+	$seed_objet = ($id_table ? $id_table.'.'.$cle_objet : 0);
+	$seed_boucle = base_convert(hash('crc32', $id_boucle . $table_objets), 36, 10); // texte transposé en nombre base 10
+	$seed_periode = date('d'); // valable 1 jour
+	$par_hasard_fixe = "RAND($seed_objet + $seed_boucle + $seed_periode) AS hasard_fixe";
+	if (!in_array($par_hasard_fixe, $boucle->select)) {
+		$boucle->select[] = $par_hasard_fixe;
+	}
+	return "'hasard_fixe'";
 }
 
 /**
