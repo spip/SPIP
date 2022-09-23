@@ -13,12 +13,7 @@
 namespace Spip\Texte\Collecteur;
 
 /**
- *    traite les modeles (dans la fonction typo), en remplacant
- *    le raccourci <modeleN|parametres> par la page calculee a
- *    partir du squelette modeles/modele.html
- *    Le nom du modele doit faire au moins trois caracteres (evite <h2>)
- *    Si $doublons==true, on repere les documents sans calculer les modeles
- *    mais on renvoie les params (pour l'indexation par le moteur de recherche)
+ *    Collecte les raccourcis liens [titre->url] de SPIP
  */
 class Liens extends AbstractCollecteur {
 
