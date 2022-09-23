@@ -350,9 +350,9 @@ function _sqlite_func_preg_replace($quoi, $cherche, $remplace) {
  **/
 function _sqlite_func_extraire_multi($quoi, $lang) {
 	if (strpos($quoi, '<')) {
-		include_spip("src/Texte/Utils/Collecteur");
-		include_spip("src/Texte/CollecteurMultis");
-		$collecteurMultis = new Spip\Texte\CollecteurMultis();
+		include_spip("src/Texte/Collecteur/AbstractCollecteur");
+		include_spip("src/Texte/Collecteur/Multis");
+		$collecteurMultis = new Spip\Texte\Collecteur\Multis();
 		$quoi = $collecteurMultis->traiter($quoi, ['lang' => $lang, 'appliquer_typo' => false]);
 	}
 	return $quoi;

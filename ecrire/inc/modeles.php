@@ -20,15 +20,15 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param bool|array $doublons
  * @param string $echap
  * @param string $connect
- * @param ?Spip\Texte\CollecteurLiens $collecteurLiens
+ * @param ?Spip\Texte\Collecteur\Liens $collecteurLiens
  * @param array $env
  * @return string
  */
-function traiter_modeles($texte, $doublons = false, $echap = '', string $connect = '', ?Spip\Texte\CollecteurLiens $collecteurLiens = null, $env = []) {
+function traiter_modeles($texte, $doublons = false, $echap = '', string $connect = '', ?Spip\Texte\Collecteur\Liens $collecteurLiens = null, $env = []) {
 
-	include_spip("src/Texte/Utils/Collecteur");
-	include_spip("src/Texte/CollecteurModeles");
-	$collecteurModeles = new Spip\Texte\CollecteurModeles();
+	include_spip("src/Texte/Collecteur/AbstractCollecteur");
+	include_spip("src/Texte/Collecteur/Modeles");
+	$collecteurModeles = new Spip\Texte\Collecteur\Modeles();
 
 	$options = [
 		'doublons' => $doublons,
