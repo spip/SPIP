@@ -10,9 +10,7 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
  * \***************************************************************************/
 
-namespace Spip\Texte;
-
-use Spip\Texte\Utils\Collecteur;
+namespace Spip\Texte\Collecteur;
 
 /**
  * Extrait une langue des extraits polyglottes (`<multi>`)
@@ -29,7 +27,7 @@ use Spip\Texte\Utils\Collecteur;
  *
  * Ne pas mettre de span@lang=fr si on est déjà en fr.
  */
-class CollecteurMultis extends Collecteur {
+class Multis extends AbstractCollecteur {
 
 	protected static string $markPrefix = 'MULTI';
 

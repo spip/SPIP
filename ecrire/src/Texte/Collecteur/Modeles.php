@@ -10,9 +10,7 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
  * \***************************************************************************/
 
-namespace Spip\Texte;
-
-use Spip\Texte\Utils\Collecteur;
+namespace Spip\Texte\Collecteur;
 
 /**
  *    traite les modeles (dans la fonction typo), en remplacant
@@ -22,7 +20,7 @@ use Spip\Texte\Utils\Collecteur;
  *    Si $doublons==true, on repere les documents sans calculer les modeles
  *    mais on renvoie les params (pour l'indexation par le moteur de recherche)
  */
-class CollecteurModeles extends Collecteur {
+class Modeles extends AbstractCollecteur {
 
 	protected static string $markPrefix = 'MODELE';
 

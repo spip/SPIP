@@ -10,9 +10,9 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
  * \***************************************************************************/
 
-namespace Spip\Texte\Utils;
+namespace Spip\Texte\Collecteur;
 
-class Collecteur {
+abstract class AbstractCollecteur {
 
 	protected static string $markPrefix = 'COLLECT';
 	protected string $markId;

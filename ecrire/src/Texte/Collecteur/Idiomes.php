@@ -10,9 +10,7 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
  * \***************************************************************************/
 
-namespace Spip\Texte;
-
-use Spip\Texte\Utils\Collecteur;
+namespace Spip\Texte\Collecteur;
 
 /**
  * Extrait une langue des extraits idiomes (`<:module:cle_de_langue:>`)
@@ -23,7 +21,7 @@ use Spip\Texte\Utils\Collecteur;
  *
  * Ne pas mettre de span@lang=fr si on est déjà en fr.
  */
-class CollecteurIdiomes extends Collecteur {
+class Idiomes extends AbstractCollecteur {
 
 	protected static string $markPrefix = 'IDIOME';
 
