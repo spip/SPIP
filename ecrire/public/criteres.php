@@ -1139,6 +1139,36 @@ function critere_par_ordre_liste_dist($idb, &$boucles, $crit) {
 	$boucle->order[] = $order;
 }
 
+/**
+ * {par_sans_num champ} pour trier sans la numérotation
+ * 
+ * @param $idb
+ * @param $boucles
+ * @param $crit
+ * @return void : un ORDER qui ne tient pas compte des numéros en préfixe de $champ
+ **/
+function critere_par_sans_num_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+
+	$sens = "";
+	if ($crit->not) {
+		$sens = " . ' DESC'";
+	}
+
+	$crit2 = clone $crit;
+	$crit2->not = false;
+	$crit2->param = [reset($crit->param)];
+	$res = critere_parinverse($idb, $boucles, $crit2);
+
+	// erreur ?
+	if (is_array($res)) {
+		return $res;
+	}
+	
+	$_order = array_pop($boucle->order);
+	$order = "'REGEXP_REPLACE(' . $_order . ',\"^[0-9]+\. \", \"\")'$sens";
+	$boucle->order[] = $order;
+}
 
 function critere_agenda_dist($idb, &$boucles, $crit) {
 	$params = $crit->param;
