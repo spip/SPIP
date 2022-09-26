@@ -941,6 +941,34 @@ function calculer_critere_par_expression_sinum($idb, &$boucles, $crit, $tri, $ch
 	return $order;
 }
 
+/**
+ * Calculs pour le critère {par sansnum champ} qui ordonne les champs alphabétiquement en ignorant leur numéro
+ * 
+ * @uses calculer_critere_par_champ()
+ *
+ * @param string $idb Identifiant de la boucle
+ * @param array $boucles AST du squelette
+ * @param Critere $crit Paramètres du critère dans cette boucle
+ * @param array $tri Paramètre en cours du critère
+ * @param string $champ Texte suivant l'expression ('titre' dans {par sansnum titre})
+ * @return string|array Clause pour le Order by (array si erreur)
+ */
+function calculer_critere_par_expression_sansnum($idb, &$boucles, $crit, $tri, $champ) {
+	$_champ = calculer_critere_par_champ($idb, $boucles, $crit, $champ, true);
+	if (is_array($_champ)) {
+		return ['zbug_critere_inconnu', ['critere' => $crit->op . " num $champ"]];
+	}
+
+	$sens = '';
+	if ($crit->not) {
+		$sens = " . ' DESC'";
+	}
+
+	// MySQL 8 +
+	// $order = "'REGEXP_REPLACE($_champ, \"^[0-9]+\. \", \"\")'$sens";
+	$order = "'(CASE WHEN $_champ REGEXP(\"^[0-9]+\. \") THEN REVERSE(SUBSTRING_INDEX(REVERSE($_champ), \" .\", 1)) ELSE $_champ END)'$sens";
+	return $order;
+}
 
 /**
  * Calculs pour le critère `{par multi champ}` qui extrait la langue en cours dans les textes
