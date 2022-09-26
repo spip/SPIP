@@ -941,6 +941,32 @@ function calculer_critere_par_expression_sinum($idb, &$boucles, $crit, $tri, $ch
 	return $order;
 }
 
+/**
+ * Calculs pour le critère {par sansnum champ} qui ordonne les champs alphabétiquement en ignorant leur numéro
+ * 
+ * @uses calculer_critere_par_champ()
+ *
+ * @param string $idb Identifiant de la boucle
+ * @param array $boucles AST du squelette
+ * @param Critere $crit Paramètres du critère dans cette boucle
+ * @param array $tri Paramètre en cours du critère
+ * @param string $champ Texte suivant l'expression ('titre' dans {par sansnum titre})
+ * @return string|array Clause pour le Order by (array si erreur)
+ */
+function calculer_critere_par_expression_sansnum($idb, &$boucles, $crit, $tri, $champ) {
+	$_champ = calculer_critere_par_champ($idb, $boucles, $crit, $champ, true);
+	if (is_array($_champ)) {
+		return ['zbug_critere_inconnu', ['critere' => $crit->op . " num $champ"]];
+	}
+
+	$sens = '';
+	if ($crit->not) {
+		$sens = " . ' DESC'";
+	}
+
+	$order = "'REGEXP_REPLACE($_champ, \"^[0-9]+\. \", \"\")'$sens";
+	return $order;
+}
 
 /**
  * Calculs pour le critère `{par multi champ}` qui extrait la langue en cours dans les textes
@@ -1136,37 +1162,6 @@ function critere_par_ordre_liste_dist($idb, &$boucles, $crit) {
 	$_liste = calculer_liste($crit->param[1], [], $boucles, $boucles[$idb]->id_parent);
 
 	$order = "'-FIELD(' . $_order . ',' . ((\$zl=formate_liste_critere_par_ordre_liste(array_reverse($_liste),'" . $boucle->sql_serveur . "')) ? \$zl : '0').')'$sens";
-	$boucle->order[] = $order;
-}
-
-/**
- * {par_sans_num champ} pour trier sans la numérotation
- * 
- * @param $idb
- * @param $boucles
- * @param $crit
- * @return void : un ORDER qui ne tient pas compte des numéros en préfixe de $champ
- **/
-function critere_par_sans_num_dist($idb, &$boucles, $crit) {
-	$boucle = &$boucles[$idb];
-
-	$sens = "";
-	if ($crit->not) {
-		$sens = " . ' DESC'";
-	}
-
-	$crit2 = clone $crit;
-	$crit2->not = false;
-	$crit2->param = [reset($crit->param)];
-	$res = critere_parinverse($idb, $boucles, $crit2);
-
-	// erreur ?
-	if (is_array($res)) {
-		return $res;
-	}
-	
-	$_order = array_pop($boucle->order);
-	$order = "'REGEXP_REPLACE(' . $_order . ',\"^[0-9]+\. \", \"\")'$sens";
 	$boucle->order[] = $order;
 }
 
