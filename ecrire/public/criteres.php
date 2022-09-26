@@ -964,7 +964,7 @@ function calculer_critere_par_expression_sansnum($idb, &$boucles, $crit, $tri, $
 		$sens = " . ' DESC'";
 	}
 
-	$order = "'REGEXP_REPLACE($_champ, \"^[0-9]+\. \", \"\")'$sens";
+	$order = "'(CASE WHEN titre REGEXP(\"^[0-9]+\. \") THEN REVERSE(SUBSTRING_INDEX(REVERSE(titre), \" .\", 1)) ELSE titre END)'$sens";
 	return $order;
 }
 
