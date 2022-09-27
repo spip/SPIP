@@ -1249,37 +1249,6 @@ function PtoBR($texte) {
 
 
 /**
- * Assure qu'un texte ne vas pas déborder d'un bloc
- * par la faute d'un mot trop long (souvent des URLs)
- *
- * Ne devrait plus être utilisé et fait directement en CSS par un style
- * `word-wrap:break-word;`
- *
- * @note
- *   Pour assurer la compatibilité du filtre, on encapsule le contenu par
- *   un `div` ou `span` portant ce style CSS inline.
- *
- * @filtre
- * @link https://www.spip.net/4298
- * @link http://www.alsacreations.com/tuto/lire/1038-gerer-debordement-contenu-css.html
- * @deprecated 3.1
- * @see Utiliser le style CSS `word-wrap:break-word;`
- *
- * @param string $texte Texte
- * @return string Texte encadré du style CSS
- */
-function lignes_longues($texte) {
-	if (!strlen(trim($texte))) {
-		return $texte;
-	}
-	include_spip('inc/texte');
-	$tag = preg_match(',</?(' . _BALISES_BLOCS . ')[>[:space:]],iS', $texte) ?
-		'div' : 'span';
-
-	return "<$tag style='word-wrap:break-word;'>$texte</$tag>";
-}
-
-/**
  * Passe un texte en majuscules, y compris les accents, en HTML
  *
  * Encadre le texte du style CSS `text-transform: uppercase;`.
