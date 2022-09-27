@@ -56,6 +56,40 @@ function definir_puce() {
 	return $GLOBALS[$p];
 }
 
+/**
+ * Preparer le markup html pour les extraits de code en ligne ou en bloc
+ *
+ * @param string $corps
+ * @param bool $bloc
+ * @param string $attributs
+ * @param string $langage
+ * @return string
+ */
+function spip_balisage_code(string $corps, bool $bloc = false, string $attributs = '', string $langage = '') {
+
+	$echap = spip_htmlspecialchars($corps); // il ne faut pas passer dans entites_html, ne pas transformer les &#xxx; du code !
+	$class = "spip_code";
+	if ($langage) {
+		$class .= " $langage";
+	}
+	if ($bloc) {
+		$html = "<div class=\"precode p\">"
+		  . "<pre class=\"$class\" dir=\"ltr\" style=\"text-align: left;\"$attributs>"
+		  . "<code>"
+		  . $echap
+		  . '</code>'
+		  . '</pre>'
+		  . '</div>';
+	}
+	else {
+		$echap = str_replace("\t", "&nbsp; &nbsp; &nbsp; &nbsp; ", $echap);
+		$echap = str_replace("  ", " &nbsp;", $echap);
+		$html = "<code class=\"$class\" dir=\"ltr\" $attributs>" . $echap . '</code>';
+	}
+
+	return $html;
+}
+
 
 // XHTML - Preserver les balises-bloc : on liste ici tous les elements
 // dont on souhaite qu'ils provoquent un saut de paragraphe
@@ -131,23 +165,17 @@ function traiter_echap_pre_dist($regs, $options = []) {
 // Echapper les <code>...</ code>
 function traiter_echap_code_dist($regs, $options = []) {
 	[, , $att, $corps] = $regs;
-	$echap = spip_htmlspecialchars($corps); // il ne faut pas passer dans entites_html, ne pas transformer les &#xxx; du code !
 
 	// ne pas mettre le <div...> s'il n'y a qu'une ligne
-	if (is_int(strpos($echap, "\n"))) {
+	if (strpos($corps, "\n") !== false) {
 		// supprimer les sauts de ligne debut/fin
 		// (mais pas les espaces => ascii art).
-		$echap = preg_replace("/^[\n\r]+|[\n\r]+$/s", '', $echap);
-		$echap = nl2br($echap);
-		$echap = "<div style='text-align: left;' "
-			. "class='spip_code' dir='ltr'><code$att>"
-			. $echap . '</code></div>';
-	} else {
-		$echap = "<code$att class='spip_code' dir='ltr'>" . $echap . '</code>';
-	}
+		$corps = preg_replace("/^[\n\r]+|[\n\r]+$/s", '', $corps);
 
-	$echap = str_replace("\t", '&nbsp; &nbsp; &nbsp; &nbsp; ', $echap);
-	$echap = str_replace('  ', ' &nbsp;', $echap);
+		$echap = spip_balisage_code($corps, true, $att);
+	} else {
+		$echap = spip_balisage_code($corps, false, $att);
+	}
 
 	return $echap;
 }
