@@ -180,8 +180,11 @@ blockquote.spip_poesie { margin: 2em 0; padding-left: 1em; border-left: 1px soli
 blockquote.spip_poesie div { text-indent: -3em; margin-left: 3em; }
 */
 .spip_code, .spip_cadre { color: #336; }
-.spip_cadre { width: 99%; background-color: #F3F3F3; border: 1px dotted #ddd; padding:5px;box-sizing:border-box;}
-div.spip_code, .spip_cadre { margin-bottom: #ENV{margin-bottom}; }
+
+.spip_cadre { font-size:1em; background-color: #F3F3F3; border: 1px solid #ccc; border-radius: 0.25em}
+.spip_code { font-size:0.85em; border-radius: 0.125em; border: 1px solid #dfdfcd; background-color: rgba(227,227,211,0.5); color: #3b3b25; text-shadow: 0 1px 0 #fdfdfc;}
+.spip_code.spip_code_inline {margin: 0 0.125em;padding: 0 0.125em;}
+.spip_code.spip_code_block, .spip_cadre.spip_cadre_block { margin-bottom: #ENV{margin-bottom}; width: 100%;box-sizing:border-box;padding:0.75em;}
 
 .spip_surligne { background: #FF6; }
 
