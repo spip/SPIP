@@ -543,7 +543,7 @@ le site "@nom_site_spip@" (@adresse_login@) :',
 	'login_retoursitepublic' => 'retour au site public',
 	'login_sans_cookie' => 'Identification sans cookie',
 	'login_securise' => 'Login sécurisé',
-	'login_sinscrire' => 's’inscrire',
+	'login_sinscrire' => 'S’inscrire',
 	'login_test_navigateur' => 'test navigateur/reconnexion',
 	'login_verifiez_navigateur' => '(Vérifiez toutefois que votre navigateur n’a pas mémorisé votre mot de passe...)',
 
