@@ -1,50 +1,29 @@
 <?php
 
-namespace Spip\Core;
+namespace Spip\Compilateur\Noeud;
 
 /**
- * Description d'une Balise.
- */
-class Balise
+ * Description d'une chaîne de langue
+ **/
+class Idiome
 {
 	/** Type de noeud */
-	public string $type = 'balise';
+	public string $type = 'idiome';
 
-	/** Nom du champ demandé. Exemple 'ID_ARTICLE' */
-	public ?string $nom_champ;
+	/** Clé de traduction demandée. Exemple 'item_oui' */
+	public string $nom_champ = '';
 
-	/** Identifiant de la boucle parente si explicité */
-	public ?string $nom_boucle = '';
+	/** Module de langue où chercher la clé de traduction. Exemple 'medias' */
+	public string $module = '';
 
-	/**
-	 * Partie optionnelle avant
-	 *
-	 * @var null|string|array
-	 */
-	public $avant;
+	/** Arguments à passer à la chaîne */
+	public array $arg = [];
 
 	/**
-	 * Partie optionnelle après
+	 * Filtres à appliquer au résultat
 	 *
-	 * @var null|string|array
-	 */
-	public $apres;
-
-	/**
-	 * Étoiles : annuler des automatismes
 	 *
-	 * - '*' annule les filtres automatiques
-	 * - '**' annule en plus les protections de scripts
-	 */
-	public ?string $etoile;
-
-	/**
-	 * Arguments et filtres explicites sur la balise
-	 *
-	 * - $param[0] contient les arguments de la balise
-	 * - $param[1..n] contient les filtres à appliquer à la balise
-	 *
-	 * FIXME: type unique.
+	 * * FIXME: type unique.
 	 * @var false|array
 	 *     - false: erreur de syntaxe
 	 */
@@ -54,11 +33,21 @@ class Balise
 	public array $fonctions = [];
 
 	/**
-	 * Identifiant de la boucle
+	 * Inutilisé, propriété générique de l'AST
 	 *
-	 * @var string
+	 * @var string|array
 	 */
-	public $id_boucle = '';
+	public $avant = '';
+
+	/**
+	 * Inutilisé, propriété générique de l'AST
+	 *
+	 * @var string|array
+	 */
+	public $apres = '';
+
+	/** Identifiant de la boucle */
+	public string $id_boucle = '';
 
 	/**
 	 * AST du squelette, liste de toutes les boucles
@@ -76,11 +65,9 @@ class Balise
 	/**
 	 * Interdire les scripts
 	 *
-	 * false si on est sûr de cette balise
-	 *
 	 * @see interdire_scripts()
 	 */
-	public bool $interdire_scripts = true;
+	public bool $interdire_scripts = false;
 
 	/**
 	 * Description du squelette
@@ -88,7 +75,6 @@ class Balise
 	 * Sert pour la gestion d'erreur et la production de code dependant du contexte
 	 *
 	 * Peut contenir les index :
-	 *
 	 * - nom : Nom du fichier de cache
 	 * - gram : Nom de la grammaire du squelette (détermine le phraseur à utiliser)
 	 * - sourcefile : Chemin du squelette
@@ -100,9 +86,6 @@ class Balise
 	 */
 	public array $descr = [];
 
-	/** Numéro de ligne dans le code source du squelette*/
+	/** Numéro de ligne dans le code source du squelette */
 	public int $ligne = 0;
-
-	/** Drapeau pour reperer les balises calculées par une fonction explicite */
-	public bool $balise_calculee = false;
 }

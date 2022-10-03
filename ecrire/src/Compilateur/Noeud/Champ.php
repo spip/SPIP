@@ -1,6 +1,6 @@
 <?php
 
-namespace Spip\Core;
+namespace Spip\Compilateur\Noeud;
 
 /**
  * Retro compatiblité un Champ, c'est une Balise.

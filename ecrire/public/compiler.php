@@ -10,10 +10,9 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-use Spip\Core\Boucle;
-use Spip\Core\Contexte;
-use Spip\Core\Inclure;
-use Spip\Core\Texte;
+use Spip\Compilateur\Noeud\Boucle;
+use Spip\Compilateur\Noeud\Contexte;
+use Spip\Compilateur\Noeud\Texte;
 
 /**
  * Fichier principal du compilateur de squelettes
@@ -451,7 +450,7 @@ define('CODE_CORPS_BOUCLE', '%s
 	if (defined("_BOUCLE_PROFILER")) $timer = time()+(float)microtime();
 	$t0 = "";
 	// REQUETE
-	$iter = Spip\\Core\\Iterateur\\Factory::create(
+	$iter = Spip\\Compilateur\\Iterateur\\Factory::create(
 		"%s",
 		%s,
 		array(%s)

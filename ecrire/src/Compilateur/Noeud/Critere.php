@@ -1,6 +1,6 @@
 <?php
 
-namespace Spip\Core;
+namespace Spip\Compilateur\Noeud;
 
 /**
  * Description d'un critère de boucle.
