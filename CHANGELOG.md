@@ -9,6 +9,8 @@
 
 ### Added
 
+- #5056 Chargement de l’autoloader de Composer aux points d’entrées de SPIP
+- #5056 Intégration de dépendances à des librairies PHP via composer.json (notamment les polyfill PHP 8.0 8.1 et 8.2 ainsi que le polyfill mbstring)
 - #5323 Ajout de liens de retour vers le site public + déconnexion dans un des écrans d'erreur d'accès à l'espace privé
 - #5302 Afficher la langue des utilisateurs sur leur page et permettre aussi de l'éditer
 - #5271 Fonction `is_html_safe()`
@@ -16,6 +18,8 @@
 
 ### Changed
 
+- #5056 SPIP nécessite certaines dépendances via Composer (son archive zip contiendra le nécessaire)
+- #5056 Les (quelques) classes PHP de SPIP sont déplacées dans `ecrire/src` sous le namespace `Spip`
 - #5361 Image `loader.svg` dans un style plus moderne
 - #5351 Balisage html généré par la balise raccourci `<code>`
 - #5321 Refactoring de la collecte et echappement des liens
