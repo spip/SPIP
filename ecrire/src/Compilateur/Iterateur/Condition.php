@@ -1,6 +1,6 @@
 <?php
 
-namespace Spip\Core\Iterateur;
+namespace Spip\Compilateur\Iterateur;
 
 /**
  * Iterateur CONDITION pour itérer sur des données.
