@@ -5,10 +5,10 @@
         "ext-sodium": "*",
         "ext-xml": "*",
         "ext-zip": "*",
+        "algo26-matthias/idna-convert": "^3.0",
         "symfony/polyfill-mbstring": "^1.26",
         "symfony/polyfill-php80": "^1.26",
         "symfony/polyfill-php81": "^1.26",
-        "algo26-matthias/idna-convert": "^3.0",
         "symfony/polyfill-php82": "^1.26"
     },
     "require-dev": {
