@@ -1,6 +1,6 @@
 <?php
 
-use Spip\Core\Contexte;
+use Spip\Compilateur\Noeud\Contexte;
 
 /***************************************************************************\
  *  SPIP, Système de publication pour l'internet                           *

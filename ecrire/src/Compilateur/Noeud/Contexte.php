@@ -1,6 +1,6 @@
 <?php
 
-namespace Spip\Core;
+namespace Spip\Compilateur\Contexte;
 
 /**
  * Description d'un contexte de compilation
