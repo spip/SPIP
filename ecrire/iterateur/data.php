@@ -10,7 +10,7 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-use Spip\Core\Boucle;
+use Spip\Compilateur\Noeud\Boucle;
 
 /**
  * Gestion de l'itérateur DATA

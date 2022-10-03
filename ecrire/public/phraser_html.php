@@ -10,13 +10,13 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-use Spip\Core\Boucle;
-use Spip\Core\Champ;
-use Spip\Core\Critere;
-use Spip\Core\Idiome;
-use Spip\Core\Inclure;
-use Spip\Core\Polyglotte;
-use Spip\Core\Texte;
+use Spip\Compilateur\Noeud\Boucle;
+use Spip\Compilateur\Noeud\Champ;
+use Spip\Compilateur\Noeud\Critere;
+use Spip\Compilateur\Noeud\Idiome;
+use Spip\Compilateur\Noeud\Inclure;
+use Spip\Compilateur\Noeud\Polyglotte;
+use Spip\Compilateur\Noeud\Texte;
 
 /**
  * Phraseur d'un squelette ayant une syntaxe SPIP/HTML

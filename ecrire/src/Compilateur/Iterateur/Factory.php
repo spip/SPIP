@@ -1,6 +1,6 @@
 <?php
 
-namespace Spip\Core\Iterateur;
+namespace Spip\Compilateur\Iterateur;
 
 use EmptyIterator;
 use Exception;
@@ -36,38 +36,11 @@ class Factory
 			// si on recoit deja un iterateur en argument, on l'utilise
 			if ((is_countable($a) ? count($a) : 0) == 1 and is_object($a[0]) and is_subclass_of($a[0], \Iterator::class)) {
 				$iter = $a[0];
-
-			// sinon, on cree un iterateur du type donne
 			} else {
+				// sinon, on cree un iterateur du type donne
 				// arguments de creation de l'iterateur...
-				// (pas glop)
 				try {
-					switch (is_countable($a) ? count($a) : 0) {
-						case 0:
-							$iter = new $iterateur();
-
-							break;
-
-						case 1:
-							$iter = new $iterateur($a[0]);
-
-							break;
-
-						case 2:
-							$iter = new $iterateur($a[0], $a[1]);
-
-							break;
-
-						case 3:
-							$iter = new $iterateur($a[0], $a[1], $a[2]);
-
-							break;
-
-						case 4:
-							$iter = new $iterateur($a[0], $a[1], $a[2], $a[3]);
-
-							break;
-					}
+					$iter = $iterateur(...$a);
 				} catch (Exception $e) {
 					spip_log("Erreur de chargement de l'iterateur {$iterateur}");
 					spip_log($e->getMessage());
@@ -75,14 +48,20 @@ class Factory
 				}
 			}
 		} else {
-			// chercher la classe d'iterateur
-			// IterateurXXX
-			// definie dans le fichier src/Core/Iterateur/xxx.php
-			$class = 'Spip\\Core\\Iterateur\\' . ucfirst($iterateur);
+			// chercher la classe d'iterateur Iterateur/XXX
+			// definie dans le fichier src/Compilateur/Iterateur/xxx.php
+			// FIXME: déclarer quelque part les iterateurs supplémentaires
+			$class = __NAMESPACE__ . '\\' . ucfirst($iterateur);
 			if (!class_exists($class)) {
-				exit("Iterateur {$iterateur} non trouv&#233;");
-				// si l'iterateur n'existe pas, on se rabat sur le generique
-				// $iter = new EmptyIterator();
+				// historique
+				// Chercher IterateurXXX
+				include_spip('iterateur/' . $iterateur);
+				$class = 'Iterateur' . $iterateur;
+				if (!class_exists($class)) {
+					exit("Iterateur {$iterateur} non trouv&#233;");
+					// si l'iterateur n'existe pas, on se rabat sur le generique
+					// $iter = new EmptyIterator();
+				}
 			}
 			$iter = new $class($command, $info);
 		}
