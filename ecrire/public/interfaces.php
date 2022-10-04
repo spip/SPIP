@@ -27,6 +27,15 @@ $table_criteres_infixes = ['<', '>', '<=', '>=', '==', '===', '!=', '!==', '<>',
 global $exception_des_connect;
 $exception_des_connect[] = ''; // ne pas transmettre le connect='' par les inclure
 
+/** @deprecated 4.2 Uses nampespaced classes */
+class_alias('Spip\\Compilateur\\Noeud\\Boucle', 'Boucle');
+class_alias('Spip\\Compilateur\\Noeud\\Champ', 'Champ');
+class_alias('Spip\\Compilateur\\Noeud\\Contexte', 'Contexte');
+class_alias('Spip\\Compilateur\\Noeud\\Critere', 'Critere');
+class_alias('Spip\\Compilateur\\Noeud\\Idiome', 'Idiome');
+class_alias('Spip\\Compilateur\\Noeud\\Polyglotte', 'Polyglotte');
+class_alias('Spip\\Compilateur\\Noeud\\Texte', 'Texte');
+
 /**
  * Déclarer les interfaces de la base pour le compilateur
  *
