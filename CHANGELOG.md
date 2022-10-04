@@ -60,6 +60,10 @@
 - #5016 Collecte des arguments sur les formulaires dans un modèle
 - #5274 Homogénéiser les labels des listes
 
+### Deprecated
+
+- #5056 Les classes de nœud du compilateur (Champ, Boucle, Critere...) sont déplacées dans le namespace `Spip\Compilateur\Noeud\` (l’appel sans namespace est déprécié)
+
 ### Removed
 
 - #5285 Supprimer le lien obsolète vers `page=distrib` dans la page Suivre la vie du site
