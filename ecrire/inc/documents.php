@@ -156,7 +156,7 @@ function copier_document($ext, $orig, $source, $subdir = null) {
 		if (
 			!function_exists('verifier_upload_autorise')
 			or !$r = verifier_upload_autorise($dest)
-			or $r['autozip']
+			or ($r['autozip'] ?? false)
 		) {
 			$dest = substr($dest, 0, -strlen($m[0])) . '_' . $m[1];
 			break;

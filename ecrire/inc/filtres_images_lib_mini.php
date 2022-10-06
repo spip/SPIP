@@ -810,8 +810,8 @@ function _image_imagepng($img, $fichier) {
 	$tmp = $fichier . '.tmp';
 	$ret = imagepng($img, $tmp);
 	if (file_exists($tmp)) {
-		$taille_test = getimagesize($tmp);
-		if ($taille_test[0] < 1) {
+		$taille_test = @getimagesize($tmp);
+		if ($taille_test and ($taille_test[0] < 1)) {
 			return false;
 		}
 
@@ -845,8 +845,8 @@ function _image_imagegif($img, $fichier) {
 	$tmp = $fichier . '.tmp';
 	$ret = imagegif($img, $tmp);
 	if (file_exists($tmp)) {
-		$taille_test = getimagesize($tmp);
-		if ($taille_test[0] < 1) {
+		$taille_test = @getimagesize($tmp);
+		if ($taille_test and ($taille_test[0] < 1)) {
 			return false;
 		}
 
@@ -890,8 +890,8 @@ function _image_imagejpg($img, $fichier, $qualite = _IMG_GD_QUALITE) {
 	$ret = imagejpeg($img, $tmp, $qualite);
 
 	if (file_exists($tmp)) {
-		$taille_test = getimagesize($tmp);
-		if ($taille_test[0] < 1) {
+		$taille_test = @getimagesize($tmp);
+		if ($taille_test and ($taille_test[0] < 1)) {
 			return false;
 		}
 
@@ -946,8 +946,8 @@ function _image_imagewebp($img, $fichier, $qualite = _IMG_GD_QUALITE) {
 	$tmp = $fichier . '.tmp';
 	$ret = imagewebp($img, $tmp, $qualite);
 	if (file_exists($tmp)) {
-		$taille_test = getimagesize($tmp);
-		if ($taille_test[0] < 1) {
+		$taille_test = @getimagesize($tmp);
+		if ($taille_test and ($taille_test[0] < 1)) {
 			return false;
 		}
 
