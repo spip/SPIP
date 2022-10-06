@@ -40,6 +40,7 @@ function genie_maintenance_dist($t) {
 	include_spip('inc/acces');
 	verifier_htaccess(_DIR_ETC);
 	verifier_htaccess(_DIR_TMP);
+	verifier_htaccess(_DIR_VENDOR);
 
 	// Verifier qu'aucune table n'est crashee
 	if (!_request('reinstall')) {

@@ -2514,6 +2514,11 @@ function spip_initialisation_core($pi = null, $pa = null, $ti = null, $ta = null
 		define('_DIR_LIB', _DIR_RACINE . 'lib/');
 	}
 
+	// répertoire des libs via Composer
+	if (!defined('_DIR_VENDOR')) {
+		define('_DIR_VENDOR', _DIR_RACINE . 'vendor/');
+	}
+
 	if (!defined('_DIR_IMG')) {
 		define('_DIR_IMG', $pa);
 	}

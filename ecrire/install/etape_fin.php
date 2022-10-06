@@ -65,6 +65,7 @@ function install_verifier_htaccess() {
 	if (
 		verifier_htaccess(_DIR_TMP, true)
 		and verifier_htaccess(_DIR_CONNECT, true)
+		and verifier_htaccess(_DIR_VENDOR, true)
 	) {
 		return '';
 	}
