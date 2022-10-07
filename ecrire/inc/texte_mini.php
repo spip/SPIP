@@ -69,11 +69,12 @@ function spip_balisage_code(string $corps, bool $bloc = false, string $attributs
 
 	$echap = spip_htmlspecialchars($corps); // il ne faut pas passer dans entites_html, ne pas transformer les &#xxx; du code !
 	$class = "spip_code " . ($bloc ? 'spip_code_block' : 'spip_code_inline');
-	if ($langage) {
-		$class .= " language-$langage";
-	}
 	if ($attributs) {
 		$attributs = " " . trim($attributs);
+	}
+	if ($langage) {
+		$class .= " language-$langage";
+		$attributs .= ' data-language="'. $langage .'"';
 	}
 	if ($bloc) {
 		$html = "<div class=\"precode\">"
