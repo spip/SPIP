@@ -2154,11 +2154,11 @@ function strize($f, $a, $b) {
  * @param int $b
  * @return int $a+$b
  **/
-function plus($a, $b) {
+function plus($a, $b=1) {
 	return $a + $b;
 }
 
-function strplus($a, $b) {
+function strplus($a, $b=1) {
 	return strize('plus', $a, $b);
 }
 
@@ -2177,11 +2177,11 @@ function strplus($a, $b) {
  * @param int $b
  * @return int $a-$b
  **/
-function moins($a, $b) {
+function moins($a, $b=1) {
 	return $a - $b;
 }
 
-function strmoins($a, $b) {
+function strmoins($a, $b=1) {
 	return strize('moins', $a, $b);
 }
 
