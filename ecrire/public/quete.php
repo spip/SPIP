@@ -386,6 +386,11 @@ function quete_logo($cle_objet, $onoff, $id, $id_rubrique, $flag) {
 				$res['logo_off'] = $res[1];
 				$res['width'] = ($taille ? $taille[0] : '');
 				$res['height'] = ($taille ? $taille[1] : '');
+				$res['titre'] = appliquer_traitement_champ($on['titre'] ?? '', 'titre', 'document');
+				$res['descriptif'] = appliquer_traitement_champ($on['descriptif'] ?? '', 'descriptif', 'document');
+				$res['credits'] = appliquer_traitement_champ($on['credits'] ?? '', 'credits', 'document');
+				$res['alt'] = appliquer_traitement_champ($on['alt'] ?? '', 'alt', 'document');
+				$res['id'] = ($on['id_document'] ?? 0);
 
 				return $res;
 			}
@@ -428,11 +433,17 @@ function quete_logo_objet($id_objet, $objet, $mode) {
 
 	// On cherche pas la méthode classique
 	$infos_logo = $chercher_logo($id_objet, $cle_objet, $mode);
+
 	// Si la méthode classique a trouvé quelque chose, on utilise le nouveau format
 	if (!empty($infos_logo)) {
 		$infos_logo = [
 			'chemin' => $infos_logo[0],
 			'timestamp' => $infos_logo[4],
+			'titre' => appliquer_traitement_champ($infos_logo[5]['titre'] ?? '', 'titre', 'document'),
+			'descriptif' => appliquer_traitement_champ($infos_logo[5]['descriptif'] ?? '', 'descriptif', 'document'),
+			'credits' => appliquer_traitement_champ($infos_logo[5]['credits'] ?? '', 'credits', 'document'),
+			'alt' => appliquer_traitement_champ($infos_logo[5]['alt'] ?? '', 'alt', 'document'),
+			'id_document' => ($infos_logo[5]['id_document'] ?? ''),
 		];
 	}
 
@@ -547,6 +558,20 @@ function quete_html_logo($logo, $align, $lien) {
 	$contexte['align'] = $align;
 	$contexte['lien'] = $lien;
 	return recuperer_fond('modeles/logo', $contexte);
+}
+
+/**
+ * Recuperer le TITRE du logo d'apres ses infos
+ * @param array $logo
+ * @return string
+ */
+function quete_string_logo($logo, $string) {
+
+	if (!is_array($logo)) {
+		return '';
+	}
+
+	return $logo[$string] ?? '';
 }
 
 /**

@@ -65,7 +65,7 @@ function generer_generer_url($type, $p) {
  *
  * @param string $type
  *     Type d'objet
- * @param Champ $p
+ * @param Spip\Compilateur\Noeud\Champ $p
  *     Pile au niveau de la balise
  * @param string $_id
  *     Code compilé permettant d'obtenir l'identifiant de l'objet
