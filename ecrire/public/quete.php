@@ -340,13 +340,13 @@ function quete_meta($nom, $serveur) {
  * @param int $id_rubrique
  *     Identifiant de la rubrique parente si l'on veut aller chercher son logo
  *     dans le cas où l'objet demandé n'en a pas.
- * @param bool $flag
+ * @deprecated @param bool $flag
  *     Lorsque le drapeau est évalué comme "true", la fonction ne renvoie
  *     que le chemin du fichier, sinon elle renvoie le tableau plus complet.
  * @return array|string
  *     Retourne soit un tableau, soit le chemin du fichier.
  */
-function quete_logo($cle_objet, $onoff, $id, $id_rubrique, $flag) {
+function quete_logo($cle_objet, $onoff, $id, $id_rubrique, $flag = false) {
 	include_spip('base/objets');
 	$nom = strtolower($onoff);
 
@@ -359,7 +359,7 @@ function quete_logo($cle_objet, $onoff, $id, $id_rubrique, $flag) {
 
 		if ($on) {
 			if ($flag) {
-				return basename($on['chemin']);
+				return $on['fichier'];
 			} else {
 				$taille = @spip_getimagesize($on['chemin']);
 
@@ -386,6 +386,12 @@ function quete_logo($cle_objet, $onoff, $id, $id_rubrique, $flag) {
 				$res['logo_off'] = $res[1];
 				$res['width'] = ($taille ? $taille[0] : '');
 				$res['height'] = ($taille ? $taille[1] : '');
+				$res['fichier'] = $on['fichier'];
+				$res['titre'] = ($on['titre'] ?? '');
+				$res['descriptif'] = ($on['descriptif'] ?? '');
+				$res['credits'] = ($on['credits'] ?? '');
+				$res['alt'] = ($on['alt'] ?? '');
+				$res['id'] = ($on['id_document'] ?? 0);
 
 				return $res;
 			}
@@ -418,6 +424,7 @@ function quete_logo($cle_objet, $onoff, $id, $id_rubrique, $flag) {
  * 		Type de l'objet dont on cherche le logo
  * @param string $mode
  * 		"on" ou "off" suivant le logo normal ou survol
+ * @return bool|array
  **/
 function quete_logo_objet($id_objet, $objet, $mode) {
 	static $chercher_logo;
@@ -428,12 +435,18 @@ function quete_logo_objet($id_objet, $objet, $mode) {
 
 	// On cherche pas la méthode classique
 	$infos_logo = $chercher_logo($id_objet, $cle_objet, $mode);
+
 	// Si la méthode classique a trouvé quelque chose, on utilise le nouveau format
 	if (!empty($infos_logo)) {
-		$infos_logo = [
+		$infos = [
 			'chemin' => $infos_logo[0],
 			'timestamp' => $infos_logo[4],
+			'id_document' => ($infos_logo[5]['id_document'] ?? ''),
 		];
+		foreach (['fichier', 'titre', 'descriptif', 'credits', 'alt'] as $champ) {
+			$infos[$champ] = ($infos_logo[5][$champ] ?? '');
+		}
+		$infos_logo = $infos;
 	}
 
 	// On passe cette recherche de logo dans un pipeline
@@ -544,6 +557,13 @@ function quete_html_logo($logo, $align, $lien) {
 			$contexte[$k] = $v;
 		}
 	}
+
+	foreach (['titre', 'descriptif', 'credits', 'alt'] as $champ) {
+		if (!empty($contexte[$champ])) {
+			$contexte[$champ] = appliquer_traitement_champ($contexte[$champ] , $champ, 'document');
+		}
+	}
+
 	$contexte['align'] = $align;
 	$contexte['lien'] = $lien;
 	return recuperer_fond('modeles/logo', $contexte);

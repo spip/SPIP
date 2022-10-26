@@ -40,16 +40,18 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * - `LOGO_DOCUMENT{icone}`. Valeurs possibles : auto icone apercu vignette
  * - `LOGO_ARTICLE{200, 0}`. Redimensionnement indiqué
  *
+ * Pour récupérer l’identifiant du document sous-jacent voir la balise `ID_LOGO_...`
+ *
  * @balise
- * @uses logo_survol()
+ * @uses generer_code_logo()
  * @example
  *     ```
  *     #LOGO_ARTICLE
  *     ```
  *
- * @param Champ $p
+ * @param Spip\Compilateur\Noeud\Champ $p
  *     Pile au niveau de la balise
- * @return Champ
+ * @return Spip\Compilateur\Noeud\Champ
  *     Pile complétée par le code à générer
  */
 function balise_LOGO__dist($p) {
@@ -120,7 +122,13 @@ function balise_LOGO__dist($p) {
 		$code = "''";
 		spip_log('Les logos distants ne sont pas prevus');
 	} else {
-		$code = logo_survol($id_objet, $_id_objet, $type, $align, $fichier, $lien, $p, $suite_logo);
+		// pour generer_code_logo
+		include_spip('balise/id_logo_');
+		$champ_logo = '';
+		if ($fichier) {
+			$champ_logo = 'fichier';
+		}
+		$code = generer_code_logo($id_objet, $_id_objet, $type, $align, $lien, $p, $suite_logo, $champ_logo);
 	}
 
 	// demande de reduction sur logo avec ecriture spip 2.1 : #LOGO_xxx{200, 0}
@@ -132,46 +140,4 @@ function balise_LOGO__dist($p) {
 	$p->interdire_scripts = false;
 
 	return $p;
-}
-
-/**
- * Calcule le code HTML pour l'image d'un logo
- *
- * @param string $id_objet
- *     Nom de la clé primaire de l'objet (id_article, ...)
- * @param string $_id_objet
- *     Code pour la compilation permettant de récupérer la valeur de l'identifiant
- * @param string $type
- *     Type d'objet
- * @param string $align
- *     Alignement demandé du logo
- * @param int $fichier
- *     - -1 pour retourner juste le chemin de l'image
- *     - 0 pour retourner le code HTML de l'image
- * @param string $lien
- *     Lien pour encadrer l'image avec si présent
- * @param Champ $p
- *     Pile au niveau de la balise
- * @param string $suite
- *     Suite éventuelle de la balise logo, telle que `_SURVOL`, `_NORMAL` ou `_RUBRIQUE`.
- * @return string
- *     Code compilé retournant le chemin du logo ou le code HTML du logo.
- **/
-function logo_survol($id_objet, $_id_objet, $type, $align, $fichier, $_lien, $p, $suite) {
-	$code = "quete_logo('$id_objet', '" .
-		(($suite == '_SURVOL') ? 'off' :
-			(($suite == '_NORMAL') ? 'on' : 'ON')) .
-		"', $_id_objet," .
-		(($suite == '_RUBRIQUE') ?
-			champ_sql('id_rubrique', $p) :
-			(($type == 'rubrique') ? "quete_parent($_id_objet)" : "''")) .
-		', ' . intval($fichier) . ')';
-
-	if ($fichier) {
-		return $code;
-	}
-
-	$align = preg_replace(',\W,', '', $align);
-
-	return "quete_html_logo($code, '$align', " . ($_lien ?: "''") . ')';
 }
