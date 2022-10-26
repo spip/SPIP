@@ -45,7 +45,7 @@ $GLOBALS['logo_libelles']['racine'] = _T('logo_standard_rubrique');
  * @param int $id_objet Identifiant de l'objet
  * @param string $retour Url de redirection apres traitement
  * @param array $options Tableau d'option (exemple : image_reduire => 50)
- * @return array               Variables d'environnement pour le fond
+ * @return array|false Variables d'environnement pour le fond
  */
 function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $options = []) {
 	// pas dans une boucle ? formulaire pour le logo du site
@@ -114,6 +114,7 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 		$logo = $chercher_logo($id_objet, $_id_objet, $etat);
 		if ($logo) {
 			$res['logo_' . $etat] = $logo[0];
+			$res['logo_id_' . $etat] = $logo[5]['id_document'] ?? '';
 		}
 	}
 	// pas de logo_on -> pas de formulaire pour le survol
