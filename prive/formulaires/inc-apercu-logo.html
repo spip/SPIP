@@ -2,9 +2,17 @@
 	[<div class="spip_logo"><a href="[(#ENV{logo}|timestamp)]" class="mediabox">(#ENV{logo}|image_reduire{[(#ENV{_options}|table_valeur{image_reduire}|sinon{320})]}|inserer_attribut{alt,#ENV{quoi,logo_on}})</a></div>]
 	#SET{largeur,#ENV{logo}|largeur}
 	#SET{hauteur,#ENV{logo}|hauteur}
-	[<div class="titre">(#ENV{titre,''})</div>]
+	<BOUCLE_DocLogo(DOCUMENTS){id_document=#ENV{id_logo}}{tous}>
+	[<div class="titre #EDIT{titre}">(#TITRE)</div>]
+	</BOUCLE_DocLogo>
 	<div class="taille"><:info_largeur_vignette{largeur_vignette=#GET{largeur},hauteur_vignette=#GET{hauteur}}:>[ - (#ENV{logo}|poids_image|taille_en_octets)]</div>
+
 	[(#ENV{editable}|oui)
-		<input type="submit" class="btn submit supprimer" id="supprimer_#ENV{quoi,logo_on}_#ENV{objet}_#ENV{id_objet}" name="supprimer_#ENV{quoi,logo_on}" value="<:lien_supprimer|ucfirst|attribut_html:>" />
+		<div class="groupe-btns">
+			[(#AUTORISER{modifier,document,#ENV{id_logo}}|oui)
+				<a href="#URL_ECRIRE{document_edit,id_document=#ENV{id_logo}}" target="_blank" class="editbox btn" tabindex="0" role="button"><:medias:bouton_modifier_document:></a>
+			]
+			<input type="submit" class="btn submit supprimer" id="supprimer_#ENV{quoi,logo_on}_#ENV{objet}_#ENV{id_objet}" name="supprimer_#ENV{quoi,logo_on}" value="<:lien_supprimer|ucfirst|attribut_html:>" />
+		</div>
 	]
 </div>

@@ -6,7 +6,7 @@
 	[(#ENV{editable})
 	#SET{valider,#ENV{valider,''}}
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
-		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE
 		[(#REM) un submit pour attraper la touche entree]
@@ -15,7 +15,7 @@
 		<div class="editer-groupe">
 			<div class="editer editer_logo_on[ (#ENV{logo_on}|non)logo_upload][ (#ENV**{erreurs}|table_valeur{logo_on}|oui)erreur]">
 				[(#ENV{logo_on}|oui)
-					[(#INCLURE{fond=formulaires/inc-apercu-logo,env,logo=#ENV{logo_on},quoi=logo_on,editable=#ENV{logo_off}|non|et{#ENV{editable}}})]
+					[(#INCLURE{fond=formulaires/inc-apercu-logo,env,id_logo=#ENV{logo_id_on},logo=#ENV{logo_on},quoi=logo_on,editable=#ENV{logo_off}|non|et{#ENV{editable}}})]
 				][(#ENV{editable})
 					[(#ENV{logo_on}|non)
 						<label for="logo_on_#ENV{objet}_#ENV{id_objet}">[(#ENV{_options}|table_valeur{label}|sinon{<:info_telecharger_nouveau_logo:>})]</label>[
@@ -28,7 +28,7 @@
 			[(#ENV{logo_survol}|ou{#ENV{logo_off}}|oui)
 			<div class="editer editer_logo_off[ (#ENV{logo_off}|non)logo_upload][(#ENV{_show_upload_off}|oui)open][ (#ENV**{erreurs}|table_valeur{logo_off}|oui)erreur]">
 				[(#ENV{logo_off}|oui)
-					[(#INCLURE{fond=formulaires/inc-apercu-logo,env,logo=#ENV{logo_off},quoi=logo_off,editable=#ENV{editable}})]
+					[(#INCLURE{fond=formulaires/inc-apercu-logo,env,id_logo=#ENV{logo_id_off},logo=#ENV{logo_off},quoi=logo_off,editable=#ENV{editable}})]
 				][(#ENV{editable})
 					[(#ENV{logo_off}|non)
 						<div [(#ENV**{erreurs}|table_valeur{logo_off}|non)
