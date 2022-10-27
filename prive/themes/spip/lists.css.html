@@ -113,8 +113,9 @@
 	margin: 0;
 	text-align: inherit;
 	font-weight: normal;
-	background-color: transparent;
+	background-color: inherit;
 }
+.liste-objets tr,
 .liste-objets tbody tr,
 .liste-objets tbody tr.row_odd,
 .liste-objets tbody tr.row_even,
@@ -124,7 +125,7 @@
 .liste-objets tbody tr:nth-child(even):not(:hover) > th,
 .liste-objets tbody tr.even:not(:hover) > td,
 .liste-objets tbody tr.even:not(:hover) > th {
-	background-color: transparent;
+	background-color: inherit;
 }
 .liste-objets tfoot {
 	font-style: normal;
@@ -168,6 +169,7 @@
 	max-width: none;
 	margin: 0;
 	border-radius: inherit;
+	background-color: inherit;
 }
 
 /* Caption  */
@@ -217,18 +219,17 @@
 }
 .liste-objets tr th:first-child,
 .liste-objets tr td:first-child {
-	padding-#LEFT: var(--spip-list-spacing-x);
+	padding-inline-start: var(--spip-list-spacing-x);
 }
 .liste-objets tr th:last-child,
 .liste-objets tr td:last-child {
-	padding-#RIGHT: var(--spip-list-spacing-x);
+	padding-inline-end: var(--spip-list-spacing-x);
 }
 
 /* Entête <thead>
-   Nb : attention il peut y avoir plusieurs <tr> en cas de double pagination */
+   Nb : attention il peut y avoir plusieurs <tr> */
 .liste-objets table thead {
-	/* background-color: var(--spip-color-gray-lightest); */
-	background-color: var(--spip-list-color-lightest)
+	background-color: var(--spip-list-color-lightest);
 }
 .liste-objets thead tr:first-child > * {
 	border-top: 0;
@@ -250,6 +251,9 @@
 }
 
 /* Corps <tbody> */
+.liste-objets table tbody {
+	background-color: inherit;
+}
 .liste-objets tbody tr:first-child td,
 .liste-objets tbody tr:first-child th {
 	border-top: 0;
@@ -261,6 +265,12 @@
 .liste-objets tbody tr:hover td,
 .liste-objets tbody tr:hover th {
 	background-color: hsl(0, 0%, 98%); /* --spip-color-gray-lightest un poil trop foncé */
+}
+
+/* Pied : tfoot */
+
+.liste-objets table tfoot {
+	background-color: var(--spip-list-color-lightest);
 }
 
 /* Gestion des arrondis selon les cas */

@@ -83,6 +83,7 @@
 }
 
 #page {
+	overflow: initial !important; /* Sinon aucun élément en position sticky ne fonctionne */
 	text-align: center;
 }
 

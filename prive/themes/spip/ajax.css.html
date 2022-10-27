@@ -1,0 +1,45 @@
+[(#REM)
+
+	Ce squelette définit les styles des boutons de l'espace privé.
+
+	Règles propres aux éléments en ajax.
+
+]#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
+#HTTP_HEADER{Vary: Accept-Encoding}
+[(#REM)<style>]
+
+/**
+ * Conteneurs ajax
+ * Ils sont ajoutés autour des éléments ajaxés
+ */
+div.ajaxbloc,
+div.ajax,
+div.ajax-form-container {
+	position: relative;
+}
+
+/* Ajustements des conteneurs dans certains contextes pour les rendre plus "transparents" */
+#contenu > .ajaxbloc,
+#navigation > .ajaxbloc,
+#extra > .ajaxbloc {
+	height: 100%;
+}
+
+/* Picto de chargement */
+.image_loading {
+	float: inset-inline-end;
+}
+div.ajaxbloc > .image_loading,
+div.ajax > .image_loading,
+.formulaire_spip > .image_loading,
+div.ajax-form-container > .image_loading {
+	position: absolute;
+	right: 0;
+	float: none;
+}
+
+/* Bug IE/Win lol */
+.bugajaxie {
+	display: none;
+}
