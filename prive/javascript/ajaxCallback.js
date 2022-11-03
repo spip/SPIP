@@ -1108,6 +1108,9 @@ function spip_logo_survol_out() {
 }
 
 function disableClickAfterFormSubmit(){
+	if (jQuery(this).is('.processing-submitted-form')) {
+		return false;
+	}
 	jQuery(this)
 		.addClass('processing-submitted-form')
 		.find('button[type="submit"]')
