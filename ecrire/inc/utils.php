@@ -567,7 +567,7 @@ function tester_url_absolue($url) {
  * @param string $c Nom du paramètre
  * @param string|array|null $v Valeur du paramètre
  * @param string $sep Séparateur entre les paramètres
- * @return string URL
+ * @return string|array|null URL
  */
 function parametre_url($url, $c, $v = null, $sep = '&amp;') {
 	// requete erronnee : plusieurs variable dans $c et aucun $v
@@ -1170,7 +1170,7 @@ function job_queue_remove($id_job) {
 function job_queue_link($id_job, $objets) {
 	include_spip('inc/queue');
 
-	return queue_link_job($id_job, $objets);
+	queue_link_job($id_job, $objets);
 }
 
 
@@ -1438,7 +1438,7 @@ function creer_chemin() {
 }
 
 
-function lister_themes_prives() {
+function lister_themes_prives(): array {
 	static $themes = null;
 	if (is_null($themes)) {
 		// si pas encore definie
@@ -1447,9 +1447,13 @@ function lister_themes_prives() {
 		}
 		$themes = [_SPIP_THEME_PRIVE];
 		// lors d'une installation neuve, prefs n'est pas definie.
-		if (isset($GLOBALS['visiteur_session']['prefs'])) {
-			$prefs = $GLOBALS['visiteur_session']['prefs'];
-		} else {
+		$prefs = $GLOBALS['visiteur_session']['prefs'] ?? [];
+		// Aussitôt après la demande d'inscription, $prefs vaut une chaine statut_tmp  @see inscription_nouveau()
+		// Sinon, c'est un tableau sérialisé
+		if (is_string($prefs) and (stripos($prefs, 'a:')===0)) {
+			$prefs = unserialize($GLOBALS['visiteur_session']['prefs']);
+		}
+		else {
 			$prefs = [];
 		}
 		if (is_string($prefs)) {
@@ -2033,6 +2037,7 @@ function test_valeur_serveur($truc) {
 //
 // Fonctions de fabrication des URL des scripts de Spip
 //
+
 /**
  * Calcule l'url de base du site
  *
@@ -2046,7 +2051,7 @@ function test_valeur_serveur($truc) {
  *     racine de SPIP : par exemple, sur ecrire/ elle vaut 1, sur sedna/ 1, et à
  *     la racine 0. Sur url/perso/ elle vaut 2
  *
- * @param int|boo|array $profondeur
+ * @param int|bool|array $profondeur
  *    - si non renseignée : retourne l'url pour la profondeur $GLOBALS['profondeur_url']
  *    - si int : indique que l'on veut l'url pour la profondeur indiquée
  *    - si bool : retourne le tableau static complet
