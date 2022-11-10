@@ -399,7 +399,7 @@ function spip_log($message = null, $name = null) {
  * Enregistrement des journaux
  *
  * @uses inc_journal_dist()
- * @param string $phrase Texte du journal
+ * @param string $phrase texte du journal
  * @param array $opt Tableau d'options
  **/
 function journal($phrase, $opt = []) {
@@ -837,7 +837,7 @@ function test_plugin_actif($plugin) {
  *     - bool force : forcer un retour meme si la chaine n'a pas de traduction
  *     - bool sanitize : nettoyer le html suspect dans les arguments
  * @return string
- *     Texte
+ *     texte
  */
 function _T($texte, $args = [], $options = []) {
 	static $traduire = false;
@@ -902,14 +902,14 @@ function _T($texte, $args = [], $options = []) {
  *     ```
  *
  * @param string $text
- *     Texte
+ *     texte
  * @param array $args
  *     Couples (variable => valeur) à transformer dans le texte
  * @param array $options
  *     - string class : nom d'une classe a ajouter sur un span pour encapsuler la chaine
  *     - bool sanitize : nettoyer le html suspect dans les arguments
  * @return string
- *     Texte
+ *     texte
  */
 function _L($text, $args = [], $options = []) {
 	$f = $text;
@@ -1308,9 +1308,9 @@ function http_script($script, $src = '', $noscript = '') {
  *
  * @filtre
  * @param string $texte
- *     Texte à échapper
+ *     texte à échapper
  * @return string
- *     Texte échappé
+ *     texte échappé
  **/
 function texte_script(string $texte): string {
 	return str_replace('\'', '\\\'', str_replace('\\', '\\\\', $texte));
@@ -2514,6 +2514,11 @@ function spip_initialisation_core($pi = null, $pa = null, $ti = null, $ta = null
 		define('_DIR_LIB', _DIR_RACINE . 'lib/');
 	}
 
+	// répertoire des libs via Composer
+	if (!defined('_DIR_VENDOR')) {
+		define('_DIR_VENDOR', _DIR_RACINE . 'vendor/');
+	}
+
 	if (!defined('_DIR_IMG')) {
 		define('_DIR_IMG', $pa);
 	}
@@ -2672,7 +2677,7 @@ function spip_initialisation_core($pi = null, $pa = null, $ti = null, $ta = null
 
 	// Sommes-nous dans l'empire du Mal ?
 	// (ou sous le signe du Pingouin, ascendant GNU ?)
-	if (isset($_SERVER['SERVER_SOFTWARE']) and strpos($_SERVER['SERVER_SOFTWARE'], '(Win') !== false) {
+	if (isset($_SERVER['SERVER_SOFTWARE']) and str_contains($_SERVER['SERVER_SOFTWARE'], '(Win')) {
 		if (!defined('_OS_SERVEUR')) {
 			define('_OS_SERVEUR', 'windows');
 		}

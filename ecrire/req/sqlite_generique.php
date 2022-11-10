@@ -10,6 +10,8 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+use Spip\Sql\Sqlite;
+
 /**
  * Ce fichier contient les fonctions gérant
  * les instructions SQL pour Sqlite
@@ -22,7 +24,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 // TODO: get/set_caracteres ?
-
 
 /*
  * regroupe le maximum de fonctions qui peuvent cohabiter
@@ -41,7 +42,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param string $sqlite_version
  * @return array|bool
  */
-function req_sqlite_dist($addr, $port, $login, $pass, $db = '', $prefixe = '', $sqlite_version = '') {
+function req_sqlite_dist($addr, $port, $login, $pass, $db = '', $prefixe = '', $sqlite_version = '')
+{
 	static $last_connect = [];
 
 	// si provient de selectdb
@@ -63,7 +65,7 @@ function req_sqlite_dist($addr, $port, $login, $pass, $db = '', $prefixe = '', $
 
 	// determiner le dossier de la base : $addr ou _DIR_DB
 	$f = _DIR_DB;
-	if ($addr and strpos($addr, '/') !== false) {
+	if ($addr and str_contains($addr, '/')) {
 		$f = rtrim($addr, '/') . '/';
 	}
 
@@ -144,15 +146,16 @@ function req_sqlite_dist($addr, $port, $login, $pass, $db = '', $prefixe = '', $
  * @return PDOStatement|bool|string|array
  *    Resultat de la requete
  */
-function spip_sqlite_query($query, $serveur = '', $requeter = true) {
+function spip_sqlite_query($query, $serveur = '', $requeter = true)
+{
 	#spip_log("spip_sqlite_query() > $query",'sqlite.'._LOG_DEBUG);
 	#_sqlite_init(); // fait la premiere fois dans spip_sqlite
-	$query = spip_sqlite::traduire_requete($query, $serveur);
+	$query = Sqlite::traduire_requete($query, $serveur);
 	if (!$requeter) {
 		return $query;
 	}
 
-	return spip_sqlite::executer_requete($query, $serveur);
+	return Sqlite::executer_requete($query, $serveur);
 }
 
 
@@ -167,11 +170,12 @@ function spip_sqlite_query($query, $serveur = '', $requeter = true) {
  * @return bool
  *     False si erreur dans l'exécution, true sinon
  */
-function spip_sqlite_alter($query, $serveur = '', $requeter = true) {
+function spip_sqlite_alter($query, $serveur = '', $requeter = true)
+{
 
 	$query = spip_sqlite_query("ALTER $query", $serveur, false);
 	// traduire la requete pour recuperer les bons noms de table
-	$query = spip_sqlite::traduire_requete($query, $serveur);
+	$query = Sqlite::traduire_requete($query, $serveur);
 
 	/*
 		 * la il faut faire les transformations
@@ -206,8 +210,8 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true) {
 	$ouverte = false;
 	while ($do = array_shift($todo)) {
 		$todo2[$i] = isset($todo2[$i]) ? $todo2[$i] . ',' . $do : $do;
-		$o = (false !== strpos($do, '('));
-		$f = (false !== strpos($do, ')'));
+		$o = (str_contains($do, '('));
+		$f = (str_contains($do, ')'));
 		if ($o and !$f) {
 			$ouverte = true;
 		} elseif ($f) {
@@ -224,10 +228,10 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true) {
 		$do = trim($do);
 		if (
 			!preg_match('/(DROP PRIMARY KEY|DROP KEY|DROP INDEX|DROP COLUMN|DROP'
-			. '|CHANGE COLUMN|CHANGE|MODIFY|RENAME TO|RENAME'
-			. '|ADD PRIMARY KEY|ADD KEY|ADD INDEX|ADD UNIQUE KEY|ADD UNIQUE'
-			. '|ADD COLUMN|ADD'
-			. ')\s*([^\s]*)\s*(.*)?/i', $do, $matches)
+				. '|CHANGE COLUMN|CHANGE|MODIFY|RENAME TO|RENAME'
+				. '|ADD PRIMARY KEY|ADD KEY|ADD INDEX|ADD UNIQUE KEY|ADD UNIQUE'
+				. '|ADD COLUMN|ADD'
+				. ')\s*([^\s]*)\s*(.*)?/i', $do, $matches)
 		) {
 			spip_log(
 				"SQLite : Probleme de ALTER TABLE, utilisation non reconnue dans : $do \n(requete d'origine : $query)",
@@ -254,14 +258,14 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true) {
 		$def = $defr;
 
 		switch ($cle) {
-			// suppression d'un index
+				// suppression d'un index
 			case 'DROP KEY':
 			case 'DROP INDEX':
 				$nom_index = $colonne_origine;
 				spip_sqlite_drop_index($nom_index, $table, $serveur);
 				break;
 
-			// suppression d'une pk
+				// suppression d'une pk
 			case 'DROP PRIMARY KEY':
 				if (
 					!_sqlite_modifier_table(
@@ -274,7 +278,7 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true) {
 					return false;
 				}
 				break;
-			// suppression d'une colonne
+				// suppression d'une colonne
 			case 'DROP COLUMN':
 			case 'DROP':
 				if (
@@ -325,18 +329,18 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true) {
 				}
 				break;
 
-			// pas geres en sqlite2
+				// pas geres en sqlite2
 			case 'RENAME':
 				$do = 'RENAME TO' . substr($do, 6);
 			case 'RENAME TO':
-				if (!spip_sqlite::executer_requete("$debut $do", $serveur)) {
+				if (!Sqlite::executer_requete("$debut $do", $serveur)) {
 					spip_log("SQLite : Erreur ALTER TABLE / RENAME : $query", 'sqlite.' . _LOG_ERREUR);
 
 					return false;
 				}
 				break;
 
-			// ajout d'une pk
+				// ajout d'une pk
 			case 'ADD PRIMARY KEY':
 				$pk = trim(substr($do, 16));
 				$pk = ($pk[0] == '(') ? substr($pk, 1, -1) : $pk;
@@ -351,7 +355,7 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true) {
 					return false;
 				}
 				break;
-			// ajout d'un index
+				// ajout d'un index
 			case 'ADD UNIQUE KEY':
 			case 'ADD UNIQUE':
 				$unique = true;
@@ -371,7 +375,7 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true) {
 					// (colonne)
 					if ($colonne_origine[0] == '(') {
 						$colonnes = substr($colonne_origine, 1, -1);
-						if (false !== strpos(',', $colonnes)) {
+						if (str_contains(',', $colonnes)) {
 							spip_log('SQLite : Erreur, impossible de creer un index sur plusieurs colonnes'
 								. " sans qu'il ait de nom ($table, ($colonnes))", 'sqlite.' . _LOG_ERREUR);
 							break;
@@ -386,13 +390,13 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true) {
 				spip_sqlite_create_index($nom_index, $table, $colonnes, $unique, $serveur);
 				break;
 
-			// pas geres en sqlite2
+				// pas geres en sqlite2
 			case 'ADD COLUMN':
 				$do = 'ADD' . substr($do, 10);
 			case 'ADD':
 			default:
 				if (!preg_match(',primary\s+key,i', $do)) {
-					if (!spip_sqlite::executer_requete("$debut $do", $serveur)) {
+					if (!Sqlite::executer_requete("$debut $do", $serveur)) {
 						spip_log("SQLite : Erreur ALTER TABLE / ADD : $query", 'sqlite.' . _LOG_ERREUR);
 
 						return false;
@@ -429,7 +433,6 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true) {
 	return true;
 }
 
-
 /**
  * Crée une table SQL
  *
@@ -445,7 +448,7 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true) {
  * @param string $serveur Nom de la connexion
  * @param bool $requeter Exécuter la requête, sinon la retourner
  * @return array|null|resource|string
- *     - string Texte de la requête si demandée
+ *     - string texte de la requête si demandée
  *     - true si la requête réussie, false sinon.
  */
 function spip_sqlite_create(
@@ -492,7 +495,8 @@ function spip_sqlite_create(
  *
  * @return bool true si la base est créee.
  **/
-function spip_sqlite_create_base($nom, $serveur = '', $option = true) {
+function spip_sqlite_create_base($nom, $serveur = '', $option = true)
+{
 	$f = $nom . '.sqlite';
 	if (strpos($nom, '/') === false) {
 		$f = _DIR_DB . $f;
@@ -517,7 +521,7 @@ function spip_sqlite_create_base($nom, $serveur = '', $option = true) {
  * @param string $nom
  *    Nom de la vue a creer
  * @param string $query_select
- *     Texte de la requête de sélection servant de base à la vue
+ *     texte de la requête de sélection servant de base à la vue
  * @param string $serveur
  *     Nom du connecteur
  * @param bool $requeter
@@ -527,7 +531,8 @@ function spip_sqlite_create_base($nom, $serveur = '', $option = true) {
  *     - false si erreur ou si la vue existe déja
  *     - string texte de la requête si $requeter vaut false
  */
-function spip_sqlite_create_view($nom, $query_select, $serveur = '', $requeter = true) {
+function spip_sqlite_create_view($nom, $query_select, $serveur = '', $requeter = true)
+{
 	if (!$query_select) {
 		return false;
 	}
@@ -564,7 +569,8 @@ function spip_sqlite_create_view($nom, $query_select, $serveur = '', $requeter =
  * @return bool|string
  *    string : requête, false si erreur, true sinon.
  */
-function spip_sqlite_create_index($nom, $table, $champs, $unique = '', $serveur = '', $requeter = true) {
+function spip_sqlite_create_index($nom, $table, $champs, $unique = '', $serveur = '', $requeter = true)
+{
 	if (!($nom or $table or $champs)) {
 		spip_log(
 			"Champ manquant pour creer un index sqlite ($nom, $table, (" . join(',', $champs) . '))',
@@ -628,7 +634,8 @@ function spip_sqlite_create_index($nom, $table, $champs, $unique = '', $serveur 
  * @param bool $requeter Inutilisé
  * @return int                 Nombre de lignes
  */
-function spip_sqlite_count($r, $serveur = '', $requeter = true) {
+function spip_sqlite_count($r, $serveur = '', $requeter = true)
+{
 	if (!$r) {
 		return 0;
 	}
@@ -667,7 +674,7 @@ function spip_sqlite_count($r, $serveur = '', $requeter = true) {
  * @param string $serveur Nom de la connexion
  * @param bool $requeter Exécuter la requête, sinon la retourner
  * @return int|bool|string
- *     - String Texte de la requête si demandé
+ *     - string texte de la requête si demandé
  *     - int Nombre de lignes
  *     - false si la requête a échouée
  **/
@@ -708,13 +715,14 @@ function spip_sqlite_countsel(
  * @param bool $requeter Exécuter la requête, sinon la retourner
  * @return bool|string
  *     - int : nombre de suppressions réalisées,
- *     - Texte de la requête si demandé,
- *     - False en cas d'erreur.
+ *     - texte de la requête si demandé,
+ *     - false en cas d'erreur.
  **/
-function spip_sqlite_delete($table, $where = '', $serveur = '', $requeter = true) {
+function spip_sqlite_delete($table, $where = '', $serveur = '', $requeter = true)
+{
 	$res = spip_sqlite_query(
 		_sqlite_calculer_expression('DELETE FROM', $table, ',')
-		. _sqlite_calculer_expression('WHERE', $where),
+			. _sqlite_calculer_expression('WHERE', $where),
 		$serveur,
 		$requeter
 	);
@@ -741,10 +749,11 @@ function spip_sqlite_delete($table, $where = '', $serveur = '', $requeter = true
  * @param string $serveur Nom de la connexion
  * @param bool $requeter Exécuter la requête, sinon la retourner
  * @return bool|string
- *     - string Texte de la requête si demandé
+ *     - string texte de la requête si demandé
  *     - true si la requête a réussie, false sinon
  */
-function spip_sqlite_drop_table($table, $exist = '', $serveur = '', $requeter = true) {
+function spip_sqlite_drop_table($table, $exist = '', $serveur = '', $requeter = true)
+{
 	if ($exist) {
 		$exist = ' IF EXISTS';
 	}
@@ -765,10 +774,11 @@ function spip_sqlite_drop_table($table, $exist = '', $serveur = '', $requeter = 
  * @param string $serveur Nom de la connexion
  * @param bool $requeter Exécuter la requête, sinon la retourner
  * @return bool|string
- *     - string Texte de la requête si demandé
+ *     - string texte de la requête si demandé
  *     - true si la requête a réussie, false sinon
  */
-function spip_sqlite_drop_view($view, $exist = '', $serveur = '', $requeter = true) {
+function spip_sqlite_drop_view($view, $exist = '', $serveur = '', $requeter = true)
+{
 	if ($exist) {
 		$exist = ' IF EXISTS';
 	}
@@ -786,7 +796,8 @@ function spip_sqlite_drop_view($view, $exist = '', $serveur = '', $requeter = tr
  *
  * @return bool ou requete
  */
-function spip_sqlite_drop_index($nom, $table, $serveur = '', $requeter = true) {
+function spip_sqlite_drop_index($nom, $table, $serveur = '', $requeter = true)
+{
 	if (!($nom or $table)) {
 		spip_log("Champ manquant pour supprimer un index sqlite ($nom, $table)", 'sqlite.' . _LOG_ERREUR);
 
@@ -815,7 +826,8 @@ function spip_sqlite_drop_index($nom, $table, $serveur = '', $requeter = true) {
  * @return string
  *     Erreur eventuelle
  **/
-function spip_sqlite_error($query = '', $serveur = '') {
+function spip_sqlite_error($query = '', $serveur = '')
+{
 	$link = _sqlite_link($serveur);
 
 	if ($link) {
@@ -834,7 +846,8 @@ function spip_sqlite_error($query = '', $serveur = '') {
 	return $s;
 }
 
-function _sqlite_last_error_from_link($link) {
+function _sqlite_last_error_from_link($link)
+{
 	if ($link) {
 		$errs = $link->errorInfo();
 		/*
@@ -867,7 +880,8 @@ function _sqlite_last_error_from_link($link) {
  *    1 ou autre erreur (en sqlite 2)
  *    'HY000/1' : numéro de l'erreur SQLState / numéro d'erreur interne SQLite (en sqlite 3)
  **/
-function spip_sqlite_errno($serveur = '') {
+function spip_sqlite_errno($serveur = '')
+{
 	$link = _sqlite_link($serveur);
 
 	if ($link) {
@@ -891,7 +905,7 @@ function spip_sqlite_errno($serveur = '') {
 /**
  * Retourne une explication de requête (Explain) SQLite
  *
- * @param string $query Texte de la requête
+ * @param string $query texte de la requête
  * @param string $serveur Nom de la connexion
  * @param bool $requeter Exécuter la requête, sinon la retourner
  * @return array|string|bool
@@ -899,18 +913,19 @@ function spip_sqlite_errno($serveur = '') {
  *     - string si on retourne le texte de la requête
  *     - false si on a pas pu avoir d'explication
  */
-function spip_sqlite_explain($query, $serveur = '', $requeter = true) {
+function spip_sqlite_explain($query, $serveur = '', $requeter = true)
+{
 	if (strpos(ltrim($query), 'SELECT') !== 0) {
 		return [];
 	}
 
-	$query = spip_sqlite::traduire_requete($query, $serveur);
+	$query = Sqlite::traduire_requete($query, $serveur);
 	$query = 'EXPLAIN ' . $query;
 	if (!$requeter) {
 		return $query;
 	}
 	// on ne trace pas ces requetes, sinon on obtient un tracage sans fin...
-	$r = spip_sqlite::executer_requete($query, $serveur, false);
+	$r = Sqlite::executer_requete($query, $serveur, false);
 
 	return $r ? spip_sqlite_fetch($r, null, $serveur) : false; // hum ? etrange ca... a verifier
 }
@@ -930,7 +945,8 @@ function spip_sqlite_explain($query, $serveur = '', $requeter = true) {
  *     - null Pas de résultat
  *     - false Erreur
  */
-function spip_sqlite_fetch($r, $t = '', $serveur = '', $requeter = true) {
+function spip_sqlite_fetch($r, $t = '', $serveur = '', $requeter = true)
+{
 
 	$link = _sqlite_link($serveur);
 	$t = $t ? $t : SPIP_SQLITE3_ASSOC;
@@ -951,7 +967,7 @@ function spip_sqlite_fetch($r, $t = '', $serveur = '', $requeter = true) {
 	// Renvoie des 'table.titre' au lieu de 'titre' tout court ! pff !
 	// suppression de 'table.' pour toutes les cles (c'est un peu violent !)
 	// c'est couteux : on ne verifie que la premiere ligne pour voir si on le fait ou non
-	if (strpos(implode('', array_keys($retour)), '.') !== false) {
+	if (str_contains(implode('', array_keys($retour)), '.')) {
 		foreach ($retour as $cle => $val) {
 			if (($pos = strpos($cle, '.')) !== false) {
 				$retour[substr($cle, $pos + 1)] = &$retour[$cle];
@@ -972,7 +988,8 @@ function spip_sqlite_fetch($r, $t = '', $serveur = '', $requeter = true) {
  * @param bool $requeter Inutilisé
  * @return bool True si déplacement réussi, false sinon.
  **/
-function spip_sqlite_seek($r, $row_number, $serveur = '', $requeter = true) {
+function spip_sqlite_seek($r, $row_number, $serveur = '', $requeter = true)
+{
 	// encore un truc de bien fichu : PDO ne PEUT PAS faire de seek ou de rewind...
 	return false;
 }
@@ -989,7 +1006,8 @@ function spip_sqlite_seek($r, $row_number, $serveur = '', $requeter = true) {
  * @param bool $requeter Inutilisé
  * @return bool                True si réussi
  */
-function spip_sqlite_free(&$r, $serveur = '', $requeter = true) {
+function spip_sqlite_free(&$r, $serveur = '', $requeter = true)
+{
 	unset($r);
 
 	return true;
@@ -1007,7 +1025,8 @@ function spip_sqlite_free(&$r, $serveur = '', $requeter = true) {
  * @param bool $requeter inutilisé
  * @return void
  */
-function spip_sqlite_get_charset($charset = [], $serveur = '', $requeter = true) {
+function spip_sqlite_get_charset($charset = [], $serveur = '', $requeter = true)
+{
 	//$c = !$charset ? '' : (" LIKE "._q($charset['charset']));
 	//return spip_sqlite_fetch(sqlite_query(_sqlite_link($serveur), "SHOW CHARACTER SET$c"), NULL, $serveur);
 }
@@ -1023,7 +1042,8 @@ function spip_sqlite_get_charset($charset = [], $serveur = '', $requeter = true)
  * @return string
  *     Valeur hexadécimale pour SQLite
  **/
-function spip_sqlite_hex($v) {
+function spip_sqlite_hex($v)
+{
 	return hexdec($v);
 }
 
@@ -1045,7 +1065,8 @@ function spip_sqlite_hex($v) {
  * @return string
  *     Expression de requête SQL
  **/
-function spip_sqlite_in($val, $valeurs, $not = '', $serveur = '', $requeter = true) {
+function spip_sqlite_in($val, $valeurs, $not = '', $serveur = '', $requeter = true)
+{
 	return "($val $not IN ($valeurs))";
 }
 
@@ -1068,18 +1089,19 @@ function spip_sqlite_in($val, $valeurs, $not = '', $serveur = '', $requeter = tr
  *     Exécuter la requête, sinon la retourner
  * @return bool|string|int|array
  *     - int|true identifiant de l'élément inséré (si possible), ou true, si réussite
- *     - Texte de la requête si demandé,
- *     - False en cas d'erreur,
+ *     - texte de la requête si demandé,
+ *     - false en cas d'erreur,
  *     - Tableau de description de la requête et du temps d'exécution, si var_profile activé
  **/
-function spip_sqlite_insert($table, $champs, $valeurs, $desc = [], $serveur = '', $requeter = true) {
+function spip_sqlite_insert($table, $champs, $valeurs, $desc = [], $serveur = '', $requeter = true)
+{
 
 	$query = "INSERT INTO $table " . ($champs ? "$champs VALUES $valeurs" : 'DEFAULT VALUES');
 	if ($r = spip_sqlite_query($query, $serveur, $requeter)) {
 		if (!$requeter) {
 			return $r;
 		}
-		$nb = spip_sqlite::last_insert_id($serveur);
+		$nb = Sqlite::last_insert_id($serveur);
 	} else {
 		$nb = false;
 	}
@@ -1107,11 +1129,12 @@ function spip_sqlite_insert($table, $champs, $valeurs, $desc = [], $serveur = ''
  *     Exécuter la requête, sinon la retourner
  * @return bool|string|int|array
  *     - int|true identifiant de l'élément inséré (si possible), ou true, si réussite
- *     - Texte de la requête si demandé,
- *     - False en cas d'erreur,
+ *     - texte de la requête si demandé,
+ *     - false en cas d'erreur,
  *     - Tableau de description de la requête et du temps d'exécution, si var_profile activé
  **/
-function spip_sqlite_insertq($table, $couples = [], $desc = [], $serveur = '', $requeter = true) {
+function spip_sqlite_insertq($table, $couples = [], $desc = [], $serveur = '', $requeter = true)
+{
 	if (!$desc) {
 		$desc = description_table($table, $serveur);
 	}
@@ -1152,11 +1175,12 @@ function spip_sqlite_insertq($table, $couples = [], $desc = [], $serveur = '', $
  * @param bool $requeter
  *     Exécuter la requête, sinon la retourner
  * @return bool|string
- *     - True en cas de succès,
- *     - Texte de la requête si demandé,
- *     - False en cas d'erreur.
+ *     - true en cas de succès,
+ *     - texte de la requête si demandé,
+ *     - false en cas d'erreur.
  **/
-function spip_sqlite_insertq_multi($table, $tab_couples = [], $desc = [], $serveur = '', $requeter = true) {
+function spip_sqlite_insertq_multi($table, $tab_couples = [], $desc = [], $serveur = '', $requeter = true)
+{
 	if (!$desc) {
 		$desc = description_table($table, $serveur);
 	}
@@ -1173,11 +1197,11 @@ function spip_sqlite_insertq_multi($table, $tab_couples = [], $desc = [], $serve
 	// seul le nom de la table est a traduire ici :
 	// le faire une seule fois au debut
 	$query_start = "INSERT INTO $table ";
-	$query_start = spip_sqlite::traduire_requete($query_start, $serveur);
+	$query_start = Sqlite::traduire_requete($query_start, $serveur);
 
 	// ouvrir une transaction
 	if ($requeter) {
-		spip_sqlite::demarrer_transaction($serveur);
+		Sqlite::demarrer_transaction($serveur);
 	}
 
 	while ($couples = array_shift($tab_couples)) {
@@ -1198,14 +1222,14 @@ function spip_sqlite_insertq_multi($table, $tab_couples = [], $desc = [], $serve
 		}
 
 		if ($requeter) {
-			$retour = spip_sqlite::executer_requete($query, $serveur);
+			$retour = Sqlite::executer_requete($query, $serveur);
 		}
 
 		// sur le dernier couple uniquement
 		if (!count($tab_couples)) {
 			$nb = 0;
 			if ($requeter) {
-				$nb = spip_sqlite::last_insert_id($serveur);
+				$nb = Sqlite::last_insert_id($serveur);
 			} else {
 				return $query;
 			}
@@ -1215,7 +1239,7 @@ function spip_sqlite_insertq_multi($table, $tab_couples = [], $desc = [], $serve
 	}
 
 	if ($requeter) {
-		spip_sqlite::finir_transaction($serveur);
+		Sqlite::finir_transaction($serveur);
 	}
 
 	// renvoie le dernier id d'autoincrement ajoute
@@ -1234,7 +1258,8 @@ function spip_sqlite_insertq_multi($table, $tab_couples = [], $desc = [], $serve
  * @return bool
  *     Toujours true.
  **/
-function spip_sqlite_preferer_transaction($serveur = '', $requeter = true) {
+function spip_sqlite_preferer_transaction($serveur = '', $requeter = true)
+{
 	return true;
 }
 
@@ -1251,11 +1276,12 @@ function spip_sqlite_preferer_transaction($serveur = '', $requeter = true) {
  * @return bool|string
  *     string si texte de la requête demandé, true sinon
  **/
-function spip_sqlite_demarrer_transaction($serveur = '', $requeter = true) {
+function spip_sqlite_demarrer_transaction($serveur = '', $requeter = true)
+{
 	if (!$requeter) {
 		return 'BEGIN TRANSACTION';
 	}
-	spip_sqlite::demarrer_transaction($serveur);
+	Sqlite::demarrer_transaction($serveur);
 
 	return true;
 }
@@ -1270,11 +1296,12 @@ function spip_sqlite_demarrer_transaction($serveur = '', $requeter = true) {
  * @return bool|string
  *     string si texte de la requête demandé, true sinon
  **/
-function spip_sqlite_terminer_transaction($serveur = '', $requeter = true) {
+function spip_sqlite_terminer_transaction($serveur = '', $requeter = true)
+{
 	if (!$requeter) {
 		return 'COMMIT';
 	}
-	spip_sqlite::finir_transaction($serveur);
+	Sqlite::finir_transaction($serveur);
 
 	return true;
 }
@@ -1290,7 +1317,8 @@ function spip_sqlite_terminer_transaction($serveur = '', $requeter = true) {
  * @return array
  *     Liste des noms de bases
  **/
-function spip_sqlite_listdbs($serveur = '', $requeter = true) {
+function spip_sqlite_listdbs($serveur = '', $requeter = true)
+{
 	_sqlite_init();
 
 	if (!is_dir($d = substr(_DIR_DB, 0, -1))) {
@@ -1323,9 +1351,10 @@ function spip_sqlite_listdbs($serveur = '', $requeter = true) {
  *
  * @param string $objet Colonne ayant le texte
  * @param string $lang Langue à extraire
- * @return string       Texte de sélection pour la requête
+ * @return string       texte de sélection pour la requête
  */
-function spip_sqlite_multi($objet, $lang) {
+function spip_sqlite_multi($objet, $lang)
+{
 	$r = 'EXTRAIRE_MULTI(' . $objet . ", '" . $lang . "') AS multi";
 
 	return $r;
@@ -1344,7 +1373,8 @@ function spip_sqlite_multi($objet, $lang) {
  * @param bool $requeter effectuer la requete ? sinon retourner son code
  * @return bool|string true / false / requete
  **/
-function spip_sqlite_optimize($table, $serveur = '', $requeter = true) {
+function spip_sqlite_optimize($table, $serveur = '', $requeter = true)
+{
 	static $do = false;
 	if ($requeter and $do) {
 		return true;
@@ -1362,14 +1392,15 @@ function spip_sqlite_optimize($table, $serveur = '', $requeter = true) {
  * mais pour SQLite avec ses spécificités
  *
  * @param string|array|number $v
- *     Texte, nombre ou tableau à échapper
+ *     texte, nombre ou tableau à échapper
  * @param string $type
  *     Description du type attendu
  *    (par exemple description SQL de la colonne recevant la donnée)
  * @return string|number
  *    Donnée prête à être utilisée par le gestionnaire SQL
  */
-function spip_sqlite_quote($v, $type = '') {
+function spip_sqlite_quote($v, $type = '')
+{
 	if (!is_array($v)) {
 		return _sqlite_calculer_cite($v, $type);
 	}
@@ -1394,7 +1425,8 @@ function spip_sqlite_quote($v, $type = '') {
  * @return string
  *     Expression SQL
  **/
-function spip_sqlite_date_proche($champ, $interval, $unite) {
+function spip_sqlite_date_proche($champ, $interval, $unite)
+{
 	$op = (($interval <= 0) ? '>' : '<');
 
 	return "($champ $op datetime('" . date('Y-m-d H:i:s') . "', '$interval $unite'))";
@@ -1414,7 +1446,8 @@ function spip_sqlite_date_proche($champ, $interval, $unite) {
  *     Tableau avec clé 0 pouvant avoir " OK " ou " ERROR " indiquant
  *     l'état de la table après la réparation
  */
-function spip_sqlite_repair($table, $serveur = '', $requeter = true) {
+function spip_sqlite_repair($table, $serveur = '', $requeter = true)
+{
 	if (
 		$desc = spip_sqlite_showtable($table, $serveur)
 		and isset($desc['field'])
@@ -1481,10 +1514,11 @@ function spip_sqlite_repair($table, $serveur = '', $requeter = true) {
  *     Exécuter la requête, sinon la retourner
  * @return bool|string
  *     - true si réussite
- *     - Texte de la requête si demandé,
- *     - False en cas d'erreur.
+ *     - texte de la requête si demandé,
+ *     - false en cas d'erreur.
  **/
-function spip_sqlite_replace($table, $couples, $desc = [], $serveur = '', $requeter = true) {
+function spip_sqlite_replace($table, $couples, $desc = [], $serveur = '', $requeter = true)
+{
 	if (!$desc) {
 		$desc = description_table($table, $serveur);
 	}
@@ -1528,10 +1562,11 @@ function spip_sqlite_replace($table, $couples, $desc = [], $serveur = '', $reque
  *     Exécuter la requête, sinon la retourner
  * @return bool|string
  *     - true si réussite
- *     - Texte de la requête si demandé,
- *     - False en cas d'erreur.
+ *     - texte de la requête si demandé,
+ *     - false en cas d'erreur.
  **/
-function spip_sqlite_replace_multi($table, $tab_couples, $desc = [], $serveur = '', $requeter = true) {
+function spip_sqlite_replace_multi($table, $tab_couples, $desc = [], $serveur = '', $requeter = true)
+{
 
 	// boucler pour trainter chaque requete independemment
 	foreach ($tab_couples as $couples) {
@@ -1560,7 +1595,7 @@ function spip_sqlite_replace_multi($table, $tab_couples, $desc = [], $serveur = 
  * @param string $serveur Nom de la connexion
  * @param bool $requeter Exécuter la requête, sinon la retourner
  * @return array|bool|resource|string
- *     - string : Texte de la requête si on ne l'exécute pas
+ *     - string : texte de la requête si on ne l'exécute pas
  *     - ressource si requête exécutée, ressource pour fetch()
  *     - false si la requête exécutée a ratée
  *     - array  : Tableau décrivant requête et temps d'exécution si var_profile actif pour tracer.
@@ -1600,7 +1635,7 @@ function spip_sqlite_select(
 	}
 	// erreur survenue ?
 	if ($res === false) {
-		return spip_sqlite::traduire_requete($query, $serveur);
+		return Sqlite::traduire_requete($query, $serveur);
 	}
 
 	return $res;
@@ -1621,7 +1656,8 @@ function spip_sqlite_select(
  *     - Nom de la base en cas de success.
  *     - False en cas d'erreur.
  **/
-function spip_sqlite_selectdb($db, $serveur = '', $requeter = true) {
+function spip_sqlite_selectdb($db, $serveur = '', $requeter = true)
+{
 	_sqlite_init();
 
 	// interdire la creation d'une nouvelle base,
@@ -1661,7 +1697,8 @@ function spip_sqlite_selectdb($db, $serveur = '', $requeter = true) {
  * @param bool $requeter inutilisé
  * @return void
  */
-function spip_sqlite_set_charset($charset, $serveur = '', $requeter = true) {
+function spip_sqlite_set_charset($charset, $serveur = '', $requeter = true)
+{
 	# spip_log("Gestion charset sql a ecrire : "."SET NAMES "._q($charset), 'sqlite.'._LOG_ERREUR);
 	# return spip_sqlite_query("SET NAMES ". spip_sqlite_quote($charset), $serveur); //<-- Passe pas !
 }
@@ -1680,7 +1717,8 @@ function spip_sqlite_set_charset($charset, $serveur = '', $requeter = true) {
  * @return PDOStatement|bool|string|array
  *     Ressource à utiliser avec sql_fetch()
  **/
-function spip_sqlite_showbase($match, $serveur = '', $requeter = true) {
+function spip_sqlite_showbase($match, $serveur = '', $requeter = true)
+{
 	// type est le type d'entrée : table / index / view
 	// on ne retourne que les tables (?) et non les vues...
 	# ESCAPE non supporte par les versions sqlite <3
@@ -1715,12 +1753,13 @@ function spip_sqlite_showbase($match, $serveur = '', $requeter = true) {
  *     - true si la table existe, false sinon
  *     - string : requete sql, si $requeter = true
  **/
-function spip_sqlite_table_exists(string $table, $serveur = '', $requeter = true) {
+function spip_sqlite_table_exists(string $table, $serveur = '', $requeter = true)
+{
 	$r = spip_sqlite_query(
 		'SELECT name FROM sqlite_master WHERE'
-		. ' type=\'table\''
-		. ' AND name=' . spip_sqlite_quote($table, 'string')
-		. ' AND name NOT LIKE \'sqlite_%\'',
+			. ' type=\'table\''
+			. ' AND name=' . spip_sqlite_quote($table, 'string')
+			. ' AND name NOT LIKE \'sqlite_%\'',
 		$serveur,
 		$requeter
 	);
@@ -1747,10 +1786,11 @@ define('_SQLITE_RE_SHOW_TABLE', '/^[^(),]*\(((?:[^()]*\((?:[^()]*\([^()]*\))?[^(
  * @param bool $requeter Exécuter la requête, sinon la retourner
  * @return array|string
  *     - chaîne vide si pas de description obtenue
- *     - string Texte de la requête si demandé
+ *     - string texte de la requête si demandé
  *     - array description de la table sinon
  */
-function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true) {
+function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true)
+{
 	$query =
 		'SELECT sql, type FROM'
 		. ' (SELECT * FROM sqlite_master UNION ALL'
@@ -1815,7 +1855,7 @@ function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true) {
 				// rustine pour DECIMAL(10,2)
 				// s'il y a une parenthèse fermante dans la clé
 				// ou dans la définition sans qu'il n'y ait une ouverture avant
-				if (false !== strpos($k, ')') or preg_match('/^[^\(]*\)/', $def)) {
+				if (str_contains($k, ')') or preg_match('/^[^\(]*\)/', $def)) {
 					$fields[$k_precedent] .= ',' . $k . ' ' . $def;
 					continue;
 				}
@@ -1898,7 +1938,8 @@ function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true) {
  *     - true si la requête a réussie, false sinon
  *     - array Tableau décrivant la requête et son temps d'exécution si var_profile est actif
  */
-function spip_sqlite_update($table, $champs, $where = '', $desc = '', $serveur = '', $requeter = true) {
+function spip_sqlite_update($table, $champs, $where = '', $desc = '', $serveur = '', $requeter = true)
+{
 	// recherche de champs 'timestamp' pour mise a jour auto de ceux-ci
 	$champs = _sqlite_ajouter_champs_timestamp($table, $champs, $desc, $serveur);
 
@@ -1909,8 +1950,8 @@ function spip_sqlite_update($table, $champs, $where = '', $desc = '', $serveur =
 	if (!empty($set)) {
 		return spip_sqlite_query(
 			_sqlite_calculer_expression('UPDATE', $table, ',')
-			. _sqlite_calculer_expression('SET', $set, ',')
-			. _sqlite_calculer_expression('WHERE', $where),
+				. _sqlite_calculer_expression('SET', $set, ',')
+				. _sqlite_calculer_expression('WHERE', $where),
 			$serveur,
 			$requeter
 		);
@@ -1942,7 +1983,8 @@ function spip_sqlite_update($table, $champs, $where = '', $desc = '', $serveur =
  *     - true si la requête a réussie, false sinon
  *     - array Tableau décrivant la requête et son temps d'exécution si var_profile est actif
  */
-function spip_sqlite_updateq($table, $champs, $where = '', $desc = [], $serveur = '', $requeter = true) {
+function spip_sqlite_updateq($table, $champs, $where = '', $desc = [], $serveur = '', $requeter = true)
+{
 
 	if (!$champs) {
 		return;
@@ -1971,8 +2013,8 @@ function spip_sqlite_updateq($table, $champs, $where = '', $desc = [], $serveur 
 
 	return spip_sqlite_query(
 		_sqlite_calculer_expression('UPDATE', $table, ',')
-		. _sqlite_calculer_expression('SET', $set, ',')
-		. _sqlite_calculer_expression('WHERE', $where),
+			. _sqlite_calculer_expression('SET', $set, ',')
+			. _sqlite_calculer_expression('WHERE', $where),
 		$serveur,
 		$requeter
 	);
@@ -1992,7 +2034,8 @@ function spip_sqlite_updateq($table, $champs, $where = '', $desc = [], $serveur 
  *
  * @return void
  */
-function _sqlite_init() {
+function _sqlite_init()
+{
 	if (!defined('_DIR_DB')) {
 		define('_DIR_DB', _DIR_ETC . 'bases/');
 	}
@@ -2016,7 +2059,8 @@ function _sqlite_init() {
  * @param bool $requeter
  * @return bool|int
  */
-function _sqlite_is_version($version = '', $link = '', $serveur = '', $requeter = true) {
+function _sqlite_is_version($version = '', $link = '', $serveur = '', $requeter = true)
+{
 	if ($link === '') {
 		$link = _sqlite_link($serveur);
 	}
@@ -2040,7 +2084,8 @@ function _sqlite_is_version($version = '', $link = '', $serveur = '', $requeter 
  * @param string $serveur Nom du serveur
  * @return PDO Information de connexion pour SQLite
  */
-function _sqlite_link($serveur = '') {
+function _sqlite_link($serveur = '')
+{
 	$link = &$GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
 
 	return $link;
@@ -2053,11 +2098,12 @@ function _sqlite_link($serveur = '') {
 /**
  * Renvoie les bons echappements (mais pas sur les fonctions comme NOW())
  *
- * @param string|number $v Texte ou nombre à échapper
+ * @param string|number $v texte ou nombre à échapper
  * @param string $type Type de donnée attendue, description SQL de la colonne de destination
- * @return string|number     Texte ou nombre échappé
+ * @return string|number     texte ou nombre échappé
  */
-function _sqlite_calculer_cite($v, $type) {
+function _sqlite_calculer_cite($v, $type)
+{
 	if ($type) {
 		if (
 			is_null($v)
@@ -2085,8 +2131,7 @@ function _sqlite_calculer_cite($v, $type) {
 		// si on ne connait pas le type on le deduit de $v autant que possible
 		if (is_bool($v)) {
 			return strval(intval($v));
-		}
-		elseif (is_numeric($v)) {
+		} elseif (is_numeric($v)) {
 			return strval($v);
 		}
 	}
@@ -2119,9 +2164,10 @@ function _sqlite_calculer_cite($v, $type) {
  * @param string $expression Mot clé de l'expression, tel que "WHERE" ou "ORDER BY"
  * @param array|string $v Données de l'expression
  * @param string $join Si les données sont un tableau, elles seront groupées par cette jointure
- * @return string            Texte de l'expression, une partie donc, du texte la requête.
+ * @return string            texte de l'expression, une partie donc, du texte la requête.
  */
-function _sqlite_calculer_expression($expression, $v, $join = 'AND') {
+function _sqlite_calculer_expression($expression, $v, $join = 'AND')
+{
 	if (empty($v)) {
 		return '';
 	}
@@ -2148,10 +2194,11 @@ function _sqlite_calculer_expression($expression, $v, $join = 'AND') {
  * @note
  *   Pas besoin de conversion pour 0+x comme il faudrait pour mysql.
  *
- * @param string|array $orderby Texte du orderby à préparer
- * @return string Texte du orderby préparé
+ * @param string|array $orderby texte du orderby à préparer
+ * @return string texte du orderby préparé
  */
-function _sqlite_calculer_order($orderby) {
+function _sqlite_calculer_order($orderby)
+{
 	return (is_array($orderby)) ? join(', ', $orderby) : $orderby;
 }
 
@@ -2162,7 +2209,8 @@ function _sqlite_calculer_order($orderby) {
  * @param array $args
  * @return string Sélection de colonnes pour une clause SELECT
  */
-function _sqlite_calculer_select_as($args) {
+function _sqlite_calculer_select_as($args)
+{
 	$res = '';
 	foreach ($args as $k => $v) {
 		if (substr($k, -1) == '@') {
@@ -2194,7 +2242,7 @@ function _sqlite_calculer_select_as($args) {
  *
  * @param array|string $v
  *     Description des contraintes
- *     - string : Texte du where
+ *     - string : texte du where
  *     - sinon tableau : A et B peuvent être de type string ou array,
  *       OP et C sont de type string :
  *       - array(A) : A est le texte du where
@@ -2204,7 +2252,8 @@ function _sqlite_calculer_select_as($args) {
  * @return string
  *     Contrainte pour clause WHERE
  */
-function _sqlite_calculer_where($v) {
+function _sqlite_calculer_where($v)
+{
 	if (!is_array($v)) {
 		return $v;
 	}
@@ -2238,7 +2287,8 @@ function _sqlite_calculer_where($v) {
  * @param string $version
  * @return array|bool
  */
-function _sqlite_charger_version($version = '') {
+function _sqlite_charger_version($version = '')
+{
 	$versions = [];
 
 	// version 3
@@ -2287,7 +2337,8 @@ function _sqlite_charger_version($version = '') {
  * @return bool
  *     true si OK, false sinon.
  */
-function _sqlite_modifier_table($table, $colonne, $opt = [], $serveur = '') {
+function _sqlite_modifier_table($table, $colonne, $opt = [], $serveur = '')
+{
 
 	if (is_array($table)) {
 		$table_destination = reset($table);
@@ -2415,18 +2466,18 @@ function _sqlite_modifier_table($table, $colonne, $opt = [], $serveur = '') {
 
 
 	if (count($queries)) {
-		spip_sqlite::demarrer_transaction($serveur);
+		Sqlite::demarrer_transaction($serveur);
 		// il faut les faire une par une car $query = join('; ', $queries).";"; ne fonctionne pas
 		foreach ($queries as $q) {
-			if (!spip_sqlite::executer_requete($q, $serveur)) {
+			if (!Sqlite::executer_requete($q, $serveur)) {
 				spip_log('SQLite : ALTER TABLE table :'
 					. " Erreur a l'execution de la requete : $q", 'sqlite.' . _LOG_ERREUR);
-				spip_sqlite::annuler_transaction($serveur);
+				Sqlite::annuler_transaction($serveur);
 
 				return false;
 			}
 		}
-		spip_sqlite::finir_transaction($serveur);
+		Sqlite::finir_transaction($serveur);
 	}
 
 	return true;
@@ -2438,7 +2489,8 @@ function _sqlite_modifier_table($table, $colonne, $opt = [], $serveur = '') {
  *
  * @return array
  */
-function _sqlite_ref_fonctions() {
+function _sqlite_ref_fonctions()
+{
 	$fonctions = [
 		'alter' => 'spip_sqlite_alter',
 		'count' => 'spip_sqlite_count',
@@ -2504,7 +2556,8 @@ function _sqlite_ref_fonctions() {
  * @param bool $autoinc
  * @return mixed
  */
-function _sqlite_remplacements_definitions_table($query, $autoinc = false) {
+function _sqlite_remplacements_definitions_table($query, $autoinc = false)
+{
 	// quelques remplacements
 	$num = '(\s*\([0-9]*\))?';
 	$enum = '(\s*\([^\)]*\))?';
@@ -2564,7 +2617,8 @@ function _sqlite_remplacements_definitions_table($query, $autoinc = false) {
  * @param string $champ
  * @return string
  */
-function _sqlite_collate_ci($champ) {
+function _sqlite_collate_ci($champ)
+{
 	if (stripos($champ, 'COLLATE') !== false) {
 		return $champ;
 	}
@@ -2689,7 +2743,8 @@ function _sqlite_requete_create(
  * @param string $serveur
  * @return
  */
-function _sqlite_ajouter_champs_timestamp($table, $couples, $desc = '', $serveur = '') {
+function _sqlite_ajouter_champs_timestamp($table, $couples, $desc = '', $serveur = '')
+{
 	static $tables = [];
 
 	if (!isset($tables[$table])) {
@@ -2715,8 +2770,7 @@ function _sqlite_ajouter_champs_timestamp($table, $couples, $desc = '', $serveur
 				$tables[$table]['valeur'][$k] = _sqlite_calculer_cite($now, $tables[$table]['desc'][$k]);
 			}
 		}
-	}
-	else {
+	} else {
 		$now = _sqlite_func_now(true);
 		foreach (array_keys($tables[$table]['desc']) as $k) {
 			$tables[$table]['valeur'][$k] = _sqlite_calculer_cite($now, $tables[$table]['desc'][$k]);
@@ -2734,459 +2788,7 @@ function _sqlite_ajouter_champs_timestamp($table, $couples, $desc = '', $serveur
  *
  * @return array|bool
  */
-function spip_versions_sqlite() {
+function spip_versions_sqlite()
+{
 	return _sqlite_charger_version();
-}
-
-/**
- * Gère l'envoi et la réception de requêtes à SQLite, qui peuvent être
- * encadrées de transactions.
- **/
-class spip_sqlite {
-	/** @var sqlite_requeteur[] Liste des instances de requêteurs créés */
-	public static $requeteurs = [];
-	/** @var bool[] Pour chaque connexion, flag pour savoir si une transaction est en cours */
-	public static $transaction_en_cours = [];
-
-
-	/**
-	 * Retourne une unique instance du requêteur
-	 *
-	 * Retourne une instance unique du requêteur pour une connexion SQLite
-	 * donnée
-	 *
-	 * @param string $serveur
-	 *    Nom du connecteur
-	 * @return sqlite_requeteur
-	 *    Instance unique du requêteur
-	 **/
-	public static function requeteur($serveur) {
-		if (!isset(spip_sqlite::$requeteurs[$serveur])) {
-			spip_sqlite::$requeteurs[$serveur] = new sqlite_requeteur($serveur);
-		}
-
-		return spip_sqlite::$requeteurs[$serveur];
-	}
-
-	/**
-	 * Prépare le texte d'une requête avant son exécution
-	 *
-	 * Adapte la requête au format plus ou moins MySQL par un format
-	 * compris de SQLite.
-	 *
-	 * Change les préfixes de tables SPIP par ceux véritables
-	 *
-	 * @param string $query Requête à préparer
-	 * @param string $serveur Nom de la connexion
-	 * @return string           Requête préparée
-	 */
-	public static function traduire_requete($query, $serveur) {
-		$requeteur = spip_sqlite::requeteur($serveur);
-		$traducteur = new sqlite_traducteur($query, $requeteur->prefixe, $requeteur->sqlite_version);
-
-		return $traducteur->traduire_requete();
-	}
-
-	/**
-	 * Démarre une transaction
-	 *
-	 * @param string $serveur Nom de la connexion
-	 **/
-	public static function demarrer_transaction($serveur) {
-		spip_sqlite::executer_requete('BEGIN TRANSACTION', $serveur);
-		spip_sqlite::$transaction_en_cours[$serveur] = true;
-	}
-
-	/**
-	 * Exécute la requête donnée
-	 *
-	 * @param string $query Requête
-	 * @param string $serveur Nom de la connexion
-	 * @param null|bool $tracer Demander des statistiques (temps) ?
-	 **/
-	public static function executer_requete($query, $serveur, $tracer = null) {
-		$requeteur = spip_sqlite::requeteur($serveur);
-
-		return $requeteur->executer_requete($query, $tracer);
-	}
-
-	/**
-	 * Obtient l'identifiant de la dernière ligne insérée ou modifiée
-	 *
-	 * @param string $serveur Nom de la connexion
-	 * return int                Identifiant
-	 **/
-	public static function last_insert_id($serveur) {
-		$requeteur = spip_sqlite::requeteur($serveur);
-
-		return $requeteur->last_insert_id($serveur);
-	}
-
-	/**
-	 * Annule une transaction
-	 *
-	 * @param string $serveur Nom de la connexion
-	 **/
-	public static function annuler_transaction($serveur) {
-		spip_sqlite::executer_requete('ROLLBACK', $serveur);
-		spip_sqlite::$transaction_en_cours[$serveur] = false;
-	}
-
-	/**
-	 * Termine une transaction
-	 *
-	 * @param string $serveur Nom de la connexion
-	 **/
-	public static function finir_transaction($serveur) {
-		// si pas de transaction en cours, ne rien faire et le dire
-		if (
-			!isset(spip_sqlite::$transaction_en_cours[$serveur])
-			or spip_sqlite::$transaction_en_cours[$serveur] == false
-		) {
-			return false;
-		}
-		// sinon fermer la transaction et retourner true
-		spip_sqlite::executer_requete('COMMIT', $serveur);
-		spip_sqlite::$transaction_en_cours[$serveur] = false;
-
-		return true;
-	}
-}
-
-/*
- * Classe pour partager les lancements de requête
- *
- * Instanciée une fois par `$serveur` :
- *
- * - peut corriger la syntaxe des requêtes pour la conformité à SQLite
- * - peut tracer les requêtes
- */
-
-class sqlite_requeteur {
-	/** @var string Texte de la requête */
-	public $query = ''; // la requete
-	/** @var string Nom de la connexion */
-	public $serveur = '';
-	/** @var PDO Identifiant de la connexion SQLite */
-	public $link = '';
-	/** @var string Prefixe des tables SPIP */
-	public $prefixe = '';
-	/** @var string Nom de la base de donnée */
-	public $db = '';
-	/** @var bool Doit-on tracer les requetes (var_profile) ? */
-	public $tracer = false; // doit-on tracer les requetes (var_profile)
-
-	/** @var string Version de SQLite (2 ou 3) */
-	public $sqlite_version = '';
-
-	/**
-	 * Constructeur
-	 *
-	 * @param string $serveur
-	 * @return bool
-	 */
-	public function __construct($serveur = '') {
-		_sqlite_init();
-		$this->serveur = strtolower($serveur);
-
-		if (!($this->link = _sqlite_link($this->serveur)) && (!defined('_ECRIRE_INSTALL') || !_ECRIRE_INSTALL)) {
-			spip_log('Aucune connexion sqlite (link)', 'sqlite.' . _LOG_ERREUR);
-
-			return false;
-		}
-
-		$this->sqlite_version = _sqlite_is_version('', $this->link);
-
-		$this->prefixe = $GLOBALS['connexions'][$this->serveur ? $this->serveur : 0]['prefixe'];
-		$this->db = $GLOBALS['connexions'][$this->serveur ? $this->serveur : 0]['db'];
-
-		// tracage des requetes ?
-		$this->tracer = (isset($_GET['var_profile']) && $_GET['var_profile']);
-	}
-
-	/**
-	 * Lancer la requête transmise et faire le tracage si demandé
-	 *
-	 * @param string $query
-	 *     Requête à exécuter
-	 * @param bool|null $tracer
-	 *     true pour tracer la requête
-	 * @return bool|PDOStatement|array
-	 */
-	public function executer_requete($query, $tracer = null) {
-		if (is_null($tracer)) {
-			$tracer = $this->tracer;
-		}
-		$err = '';
-		$t = 0;
-		if ($tracer or (defined('_DEBUG_TRACE_QUERIES') and _DEBUG_TRACE_QUERIES)) {
-			include_spip('public/tracer');
-			$t = trace_query_start();
-		}
-
-		# spip_log("requete: $this->serveur >> $query",'sqlite.'._LOG_DEBUG); // boum ? pourquoi ?
-		if ($this->link) {
-			// memoriser la derniere erreur PHP vue
-			$last_error = (function_exists('error_get_last') ? error_get_last() : '');
-			$e = null;
-			// sauver la derniere requete
-			$GLOBALS['connexions'][$this->serveur ? $this->serveur : 0]['last'] = $query;
-			$GLOBALS['connexions'][$this->serveur ? $this->serveur : 0]['total_requetes']++;
-
-			try {
-				$r = $this->link->query($query);
-			} catch (\PDOException $e) {
-				spip_log('PDOException: ' . $e->getMessage(), 'sqlite.' . _LOG_DEBUG);
-				$r = false;
-			}
-
-			// comptage : oblige de compter le nombre d'entrees retournees
-			// par une requete SELECT
-			// aucune autre solution ne donne le nombre attendu :( !
-			// particulierement s'il y a des LIMIT dans la requete.
-			if ($r and strtoupper(substr(ltrim($query), 0, 6)) === 'SELECT') {
-				// noter le link et la query pour faire le comptage *si* on en a besoin
-				$r->spipSqliteRowCount = [$this->link, $query];
-			}
-
-			// loger les warnings/erreurs eventuels de sqlite remontant dans PHP
-			if ($e and $e instanceof \PDOException) {
-				$err = strip_tags($e->getMessage()) . ' in ' . $e->getFile() . ' line ' . $e->getLine();
-				spip_log("$err - " . $query, 'sqlite.' . _LOG_ERREUR);
-			} elseif ($err = (function_exists('error_get_last') ? error_get_last() : '') and $err != $last_error) {
-				$err = strip_tags($err['message']) . ' in ' . $err['file'] . ' line ' . $err['line'];
-				spip_log("$err - " . $query, 'sqlite.' . _LOG_ERREUR);
-			} else {
-				$err = '';
-			}
-		} else {
-			$r = false;
-		}
-
-		if (spip_sqlite_errno($this->serveur)) {
-			$err .= spip_sqlite_error($query, $this->serveur);
-		}
-
-		return $t ? trace_query_end($query, $t, $r, $err, $this->serveur) : $r;
-	}
-
-	/**
-	 * Obtient l'identifiant de la dernière ligne insérée ou modifiée
-	 *
-	 * @return string|false
-	 **/
-	public function last_insert_id() {
-		return $this->link->lastInsertId();
-	}
-}
-
-
-/**
- * Cette classe est presente essentiellement pour un preg_replace_callback
- * avec des parametres dans la fonction appelee que l'on souhaite incrementer
- * (fonction pour proteger les textes)
- */
-class sqlite_traducteur {
-	/** @var string $query Texte de la requête */
-	public $query = '';
-	/** @var string $prefixe Préfixe des tables */
-	public $prefixe = '';
-	/** @var string $sqlite_version Version de sqlite (2 ou 3) */
-	public $sqlite_version = '';
-
-	/** Pour les corrections à effectuer sur les requêtes : array(code=>'texte') trouvé
-	 *
-	 * @var array
-	 */
-	public $textes = [];
-
-	/**
-	 * Constructeur
-	 *
-	 * @param string $query Requête à préparer
-	 * @param string $prefixe Prefixe des tables à utiliser
-	 * @param string $sqlite_version Version SQLite (2 ou 3)
-	 */
-	public function __construct($query, $prefixe, $sqlite_version) {
-		$this->query = $query;
-		$this->prefixe = $prefixe;
-		$this->sqlite_version = $sqlite_version;
-	}
-
-	/**
-	 * Transformer la requete pour SQLite
-	 *
-	 * Enlève les textes, transforme la requête pour quelle soit
-	 * bien interprétée par SQLite, puis remet les textes
-	 * la fonction affecte `$this->query`
-	 */
-	public function traduire_requete() {
-		//
-		// 1) Protection des textes en les remplacant par des codes
-		//
-		// enlever les 'textes' et initialiser avec
-		list($this->query, $textes) = query_echappe_textes($this->query);
-
-		//
-		// 2) Corrections de la requete
-		//
-		// Correction Create Database
-		// Create Database -> requete ignoree
-		if (strpos($this->query, 'CREATE DATABASE') === 0) {
-			spip_log("Sqlite : requete non executee -> $this->query", 'sqlite.' . _LOG_AVERTISSEMENT);
-			$this->query = 'SELECT 1';
-		}
-
-		// Correction Insert Ignore
-		// INSERT IGNORE -> insert (tout court et pas 'insert or replace')
-		if (strpos($this->query, 'INSERT IGNORE') === 0) {
-			spip_log("Sqlite : requete transformee -> $this->query", 'sqlite.' . _LOG_DEBUG);
-			$this->query = 'INSERT ' . substr($this->query, '13');
-		}
-
-		// Correction des dates avec INTERVAL
-		// utiliser sql_date_proche() de preference
-		if (strpos($this->query, 'INTERVAL') !== false) {
-			$this->query = preg_replace_callback(
-				'/DATE_(ADD|SUB)(.*)INTERVAL\s+(\d+)\s+([a-zA-Z]+)\)/U',
-				[&$this, '_remplacerDateParTime'],
-				$this->query
-			);
-		}
-
-		if (strpos($this->query, 'LEFT(') !== false) {
-			$this->query = str_replace('LEFT(', '_LEFT(', $this->query);
-		}
-
-		if (strpos($this->query, 'TIMESTAMPDIFF(') !== false) {
-			$this->query = preg_replace('/TIMESTAMPDIFF\(\s*([^,]*)\s*,/Uims', "TIMESTAMPDIFF('\\1',", $this->query);
-		}
-
-
-		// Correction Using
-		// USING (non reconnu en sqlite2)
-		// problematique car la jointure ne se fait pas du coup.
-		if (($this->sqlite_version == 2) && (strpos($this->query, 'USING') !== false)) {
-			spip_log(
-				"'USING (champ)' n'est pas reconnu en SQLite 2. Utilisez 'ON table1.champ = table2.champ'",
-				'sqlite.' . _LOG_ERREUR
-			);
-			$this->query = preg_replace('/USING\s*\([^\)]*\)/', '', $this->query);
-		}
-
-		// Correction Field
-		// remplace FIELD(table,i,j,k...) par CASE WHEN table=i THEN n ... ELSE 0 END
-		if (strpos($this->query, 'FIELD') !== false) {
-			$this->query = preg_replace_callback(
-				'/FIELD\s*\(([^\)]*)\)/',
-				[&$this, '_remplacerFieldParCase'],
-				$this->query
-			);
-		}
-
-		// Correction des noms de tables FROM
-		// mettre les bons noms de table dans from, update, insert, replace...
-		if (preg_match('/\s(SET|VALUES|WHERE|DATABASE)\s/iS', $this->query, $regs)) {
-			$suite = strstr($this->query, $regs[0]);
-			$this->query = substr($this->query, 0, -strlen($suite));
-		} else {
-			$suite = '';
-		}
-		$pref = ($this->prefixe) ? $this->prefixe . '_' : '';
-		$this->query = preg_replace('/([,\s])spip_/S', '\1' . $pref, $this->query) . $suite;
-
-		// Correction zero AS x
-		// pg n'aime pas 0+x AS alias, sqlite, dans le meme style,
-		// n'apprecie pas du tout SELECT 0 as x ... ORDER BY x
-		// il dit que x ne doit pas être un integer dans le order by !
-		// on remplace du coup x par vide() dans ce cas uniquement
-		//
-		// apparait dans public/vertebrer.php et dans le plugin menu aussi qui genere aussi ce genre de requete via un {par num #GET{tri_num}}
-		// mais est-ce encore un soucis pour sqlite en 2021 ? (ie commenter le preg_replace marche très bien en sqlite 3.28)
-		if ((strpos($this->query, '0 AS') !== false)) {
-			// on ne remplace que dans ORDER BY ou GROUP BY
-			if (preg_match('/\s(ORDER|GROUP) BY\s/i', $this->query, $regs)) {
-				$suite = strstr($this->query, $regs[0]);
-				$this->query = substr($this->query, 0, -strlen($suite));
-
-				// on cherche les noms des x dans 0 AS x
-				// on remplace dans $suite le nom par vide()
-				preg_match_all('/\b0 AS\s*([^\s,]+)/', $this->query, $matches, PREG_PATTERN_ORDER);
-				foreach ($matches[1] as $m) {
-					if (strpos($suite, $m) !== false) {
-						$suite = preg_replace(",\b$m\b,", 'VIDE()', $suite);
-					}
-				}
-				$this->query .= $suite;
-			}
-		}
-
-		// Correction possible des divisions entieres
-		// Le standard SQL (lequel? ou?) semble indiquer que
-		// a/b=c doit donner c entier si a et b sont entiers 4/3=1.
-		// C'est ce que retournent effectivement SQL Server et SQLite
-		// Ce n'est pas ce qu'applique MySQL qui retourne un reel : 4/3=1.333...
-		//
-		// On peut forcer la conversion en multipliant par 1.0 avant la division
-		// /!\ SQLite 3.5.9 Debian/Ubuntu est victime d'un bug en plus !
-		// cf. https://bugs.launchpad.net/ubuntu/+source/sqlite3/+bug/254228
-		//     http://www.sqlite.org/cvstrac/tktview?tn=3202
-		// (4*1.0/3) n'est pas rendu dans ce cas !
-		# $this->query = str_replace('/','* 1.00 / ',$this->query);
-
-
-		// Correction critere REGEXP, non reconnu en sqlite2
-		if (($this->sqlite_version == 2) && (strpos($this->query, 'REGEXP') !== false)) {
-			$this->query = preg_replace('/([^\s\(]*)(\s*)REGEXP(\s*)([^\s\)]*)/', 'REGEXP($4, $1)', $this->query);
-		}
-
-		//
-		// 3) Remise en place des textes d'origine
-		//
-		// Correction Antiquotes et echappements
-		// ` => rien
-		if (strpos($this->query, '`') !== false) {
-			$this->query = str_replace('`', '', $this->query);
-		}
-
-		$this->query = query_reinjecte_textes($this->query, $textes);
-
-		return $this->query;
-	}
-
-
-	/**
-	 * Callback pour remplacer `DATE_` / `INTERVAL`
-	 * par `DATE ... strtotime`
-	 *
-	 * @param array $matches Captures
-	 * @return string Texte de date compris par SQLite
-	 */
-	public function _remplacerDateParTime($matches) {
-		$op = strtoupper($matches[1] == 'ADD') ? '+' : '-';
-
-		return "datetime$matches[2] '$op$matches[3] $matches[4]')";
-	}
-
-	/**
-	 * Callback pour remplacer `FIELD(table,i,j,k...)`
-	 * par `CASE WHEN table=i THEN n ... ELSE 0 END`
-	 *
-	 * @param array $matches Captures
-	 * @return string Texte de liste ordonnée compris par SQLite
-	 */
-	public function _remplacerFieldParCase($matches) {
-		$fields = substr($matches[0], 6, -1); // ne recuperer que l'interieur X de field(X)
-		$t = explode(',', $fields);
-		$index = array_shift($t);
-
-		$res = '';
-		$n = 0;
-		foreach ($t as $v) {
-			$n++;
-			$res .= "\nWHEN $index=$v THEN $n";
-		}
-
-		return "CASE $res ELSE 0 END ";
-	}
 }

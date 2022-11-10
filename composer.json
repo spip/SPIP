@@ -1,35 +1,51 @@
 {
+    "license": "GPL-3.0-only",
     "require": {
         "php": "^7.4 || ^8.0",
         "ext-sodium": "*",
         "ext-xml": "*",
-        "ext-zip": "*"
+        "ext-zip": "*",
+        "algo26-matthias/idna-convert": "^3.0",
+        "symfony/polyfill-mbstring": "^1.26",
+        "symfony/polyfill-php80": "^1.26",
+        "symfony/polyfill-php81": "^1.26",
+        "symfony/polyfill-php82": "^1.26"
     },
     "require-dev": {
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
-        "phpstan/phpstan": "^1.4",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2",
+        "phpstan/phpstan": "^1.8",
         "spip/coding-standards": "^1.2"
     },
     "suggest": {
         "ext-curl": "*",
-        "ext-gd": "^2",
+        "ext-gd": "For image processing",
+        "ext-mbstring": "Faster than the polyfill for string actions",
         "ext-mysqli": "*",
         "ext-pdo": "*",
         "ext-pdo_sqlite": "*"
     },
+    "autoload": {
+        "psr-4": {
+            "Spip\\": "ecrire/src/"
+        }
+    },
     "archive": {
         "exclude": [
-            "composer.json",
+            "!vendor",
             "phpcs.xml.dist",
             "phpstan.neon.dist",
             "phpstan-baseline.neon",
             "!plugins-dist",
             "!squelettes-dist",
+            "config/",
             "!config/ecran_securite.php",
             "!config/remove.txt",
+            "IMG/",
             "!IMG/remove.txt",
+            "local/",
             "!local/remove.txt",
             "!local/CACHEDIR.TAG",
+            "tmp/",
             "!tmp/remove.txt",
             "!tmp/CACHEDIR.TAG"
         ]
@@ -39,7 +55,12 @@
             "dealerdirect/phpcodesniffer-composer-installer": true
         },
         "platform": {
-            "php": "7.4.27"
+            "php": "7.4.29"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "4.2.x-dev"
         }
     }
 }

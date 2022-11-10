@@ -545,7 +545,7 @@ le site "@nom_site_spip@" (@adresse_login@) :',
 	'login_retoursitepublic' => 'retour au site public',
 	'login_sans_cookie' => 'Identification sans cookie',
 	'login_securise' => 'Login sécurisé',
-	'login_sinscrire' => 's’inscrire', # MODIF
+	'login_sinscrire' => 'S’inscrire',
 	'login_test_navigateur' => 'test navigateur/reconnexion',
 	'login_verifiez_navigateur' => '(Vérifie toutefois que ton navigateur n’a pas mémorisé ton mot de passe...)',
 

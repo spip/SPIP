@@ -1,5 +1,8 @@
 <?php
 
+use Spip\Compilateur\Noeud\Champ;
+use Spip\Compilateur\Noeud\Texte;
+
 /***************************************************************************\
  *  SPIP, Système de publication pour l'internet                           *
  *                                                                         *

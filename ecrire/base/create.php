@@ -40,8 +40,8 @@ function base_determine_autoinc($table, $desc = []) {
 	} else {
 		// essayer de faire au mieux !
 		$autoinc = (isset($desc['key']['PRIMARY KEY'])
-			and strpos($desc['key']['PRIMARY KEY'], ',') === false
-			and strpos($desc['field'][$desc['key']['PRIMARY KEY']], 'default') === false);
+			and !str_contains($desc['key']['PRIMARY KEY'], ',')
+			and !str_contains($desc['field'][$desc['key']['PRIMARY KEY']], 'default'));
 	}
 
 	return $autoinc;

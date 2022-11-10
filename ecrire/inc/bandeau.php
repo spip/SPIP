@@ -10,6 +10,8 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+use Spip\Admin\Bouton;
+
 /**
  * Ce fichier gère le bandeau supérieur de l'espace privé
  *
@@ -31,10 +33,10 @@ include_spip('inc/boutons');
  * l'ajoute au contexte.
  *
  * @param null|array $contexte
- *     Contexte connu.
+ *     contexte connu.
  *     S'il n'est pas transmis, on prend `$_GET`
  * @return array
- *     Contexte
+ *     contexte
  **/
 function definir_barre_contexte($contexte = null) {
 	if (is_null($contexte)) {

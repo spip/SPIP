@@ -10,6 +10,8 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+use Spip\Compilateur\Noeud\Boucle;
+
 /**
  * Fonctions relatives aux objets éditoriaux et SQL
  *

@@ -10,6 +10,8 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+use Spip\Compilateur\Noeud\Boucle;
+
 /**
  * Gestion de l'itérateur CONDITION
  *
@@ -41,20 +43,4 @@ function iterateur_CONDITION_dist($b) {
 	];
 
 	return $b;
-}
-
-/**
- * Iterateur CONDITION pour itérer sur des données
- *
- * La boucle condition n'a toujours qu'un seul élément.
- */
-class IterateurCONDITION extends IterateurData {
-	/**
-	 * Obtenir les données de la boucle CONDITION
-	 *
-	 * @param array $command
-	 **/
-	protected function select($command) {
-		$this->tableau = [0 => 1];
-	}
 }

@@ -1,0 +1,60 @@
+[(#REM)
+
+	Ce squelette définit les styles des blocs de code de l'espace privé.
+
+	- spip_code (balise code, backtick simples et triples)
+	- spip_cadre (balise cadre : textarea)
+
+]#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
+#HTTP_HEADER{Vary: Accept-Encoding}
+[(#REM)<style>]
+
+.spip_code,
+.spip_cadre {
+	border: 1px solid hsl(var(--spip-color-theme--h), 10%, 85%);
+	background-color: hsla(var(--spip-color-theme--h), 10%, 95%, .75);
+	color: hsl(var(--spip-color-theme--h), 10%, 20%);
+}
+
+.spip_code {
+	font-size:0.85em;
+	border-radius: 0.125em;
+	text-shadow: 0 1px 0 hsl(var(--spip-color-theme--h), 10%, 80%);
+}
+
+.spip_cadre {
+	font-size: 1em;
+	border-radius: 0.25em;
+}
+
+.spip_code.spip_code_inline {
+	margin: 0 0.125em;
+	padding: 0 0.125em;
+}
+
+.spip_code.spip_code_block,
+.spip_cadre.spip_cadre_block {
+	margin-bottom: var(--spip-margin-bottom);
+	width: 100%;
+	box-sizing:border-box;
+	padding:0.75em;
+}
+
+.spip_code.spip_code_block[data-language],
+.spip_cadre.spip_cadre_block[data-language] {
+	position:relative;
+}
+.spip_code.spip_code_block[data-language]::before,
+.spip_cadre.spip_cadre_block[data-language]::before {
+	position: absolute;
+	top: 5px;
+	right: 6px;
+	content: attr(data-language);
+	text-transform: lowercase;
+	font-family: monospace;
+	line-height: 1;
+	font-size: 0.8rem;
+	color: hsl(var(--spip-color-theme--h), 20%, 50%);
+	text-shadow: none;
+}

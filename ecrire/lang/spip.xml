@@ -41,7 +41,7 @@
 	</langue>
 	<langue code="cs" url="https://trad.spip.net/tradlang_module/spip?lang_cible=cs" total="651" traduits="487" relire="0" modifs="43" nouveaux="121" pourcent="74.81" />
 	<langue code="da" url="https://trad.spip.net/tradlang_module/spip?lang_cible=da" total="651" traduits="441" relire="0" modifs="58" nouveaux="152" pourcent="67.74" />
-	<langue code="de" url="https://trad.spip.net/tradlang_module/spip?lang_cible=de" total="651" traduits="650" relire="0" modifs="1" nouveaux="0" pourcent="99.85">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/spip?lang_cible=de" total="651" traduits="651" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Andras" lien="https://trad.spip.net/auteur/andras" />
 		<traducteur nom="Benjamin Tricault" lien="https://trad.spip.net/auteur/benjamin-tricault" />
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
@@ -103,7 +103,7 @@
 		<traducteur nom="Franck" lien="https://trad.spip.net/auteur/franck" />
 		<traducteur nom="touti" lien="https://trad.spip.net/auteur/touti" />
 	</langue>
-	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/spip?lang_cible=fr_tu" total="651" traduits="650" relire="0" modifs="1" nouveaux="0" pourcent="99.85">
+	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/spip?lang_cible=fr_tu" total="651" traduits="651" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="beatnick" lien="https://trad.spip.net/auteur/beatnick" />
 		<traducteur nom="Cerf" lien="https://trad.spip.net/auteur/cerf" />
 		<traducteur nom="Matthieu Marcillaud" lien="https://trad.spip.net/auteur/matthieu-marcillaud" />

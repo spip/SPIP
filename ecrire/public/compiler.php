@@ -10,6 +10,10 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+use Spip\Compilateur\Noeud\Boucle;
+use Spip\Compilateur\Noeud\Contexte;
+use Spip\Compilateur\Noeud\Texte;
+
 /**
  * Fichier principal du compilateur de squelettes
  *
@@ -96,7 +100,7 @@ function argumenter_inclure(
 				$m = array_pad($m, 3, null);
 				$var = $m[1];
 				$auto = false;
-;
+
 				if ($m[2]) {
 					$v = $m[3];
 					if (preg_match(',^[\'"](.*)[\'"]$,', $v, $m)) {
@@ -285,7 +289,7 @@ function instituer_boucle(&$boucle, $echapper = true, $ignore_previsu = false) {
 
 	champstatut est alors le champ statut sur la tablen
 	dans les jointures, clen peut etre un tableau pour une jointure complexe : array('id_objet','id_article','objet','article')
-*/
+	*/
 	$id_table = $boucle->id_table;
 	$show = $boucle->show;
 	if (isset($show['statut']) and $show['statut']) {
@@ -446,7 +450,7 @@ define('CODE_CORPS_BOUCLE', '%s
 	if (defined("_BOUCLE_PROFILER")) $timer = time()+(float)microtime();
 	$t0 = "";
 	// REQUETE
-	$iter = IterFactory::create(
+	$iter = Spip\\Compilateur\\Iterateur\\Factory::create(
 		"%s",
 		%s,
 		array(%s)
@@ -644,7 +648,6 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 		'BOUCLE' . $id_boucle . ' @ ' . ($boucle->descr['sourcefile'])
 	);
 
-#	var_dump($a);exit;
 	return $a;
 }
 
@@ -787,12 +790,12 @@ function calculer_dec($nom, $val) {
 	// si une variable apparait dans le calcul de la clause
 	// il faut la re-evaluer a chaque passage
 	if (
-		strpos($val, '$') !== false
+		str_contains($val, '$')
 		/*
-		OR strpos($val, 'sql_') !== false
+		OR str_contains($val, 'sql_')
 		OR (
 			$test = str_replace(array("array(",'\"',"\'"),array("","",""),$val) // supprimer les array( et les echappements de guillemets
-			AND strpos($test,"(")!==FALSE // si pas de parenthese ouvrante, pas de fonction, on peut sortir
+			AND str_contains($test,"(") // si pas de parenthese ouvrante, pas de fonction, on peut sortir
 			AND $test = preg_replace(",'[^']*',UimsS","",$test) // supprimer les chaines qui peuvent contenir des fonctions SQL qui ne genent pas
 			AND preg_match(",\w+\s*\(,UimsS",$test,$regs) // tester la presence de fonctions restantes
 		)*/
@@ -1160,7 +1163,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 				if (
 					($avant != "''" or $apres != "''")
 					and $code[0] != "'"
-#			AND (strpos($code,'interdire_scripts') !== 0)
+					# AND (strpos($code,'interdire_scripts') !== 0)
 					and !preg_match(_REGEXP_COND_VIDE_NONVIDE, $code)
 					and !preg_match(_REGEXP_COND_NONVIDE_VIDE, $code)
 					and !preg_match(_REGEXP_CONCAT_NON_VIDE, $code)
@@ -1302,7 +1305,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, string $conn
 
 	// rendre inertes les echappements de #[](){}<>
 	$i = 0;
-	while (false !== strpos($squelette, $inerte = '-INERTE' . $i)) {
+	while (str_contains($squelette, $inerte = '-INERTE' . $i)) {
 		$i++;
 	}
 	$squelette = preg_replace_callback(

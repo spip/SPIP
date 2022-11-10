@@ -10,6 +10,8 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+use Spip\Compilateur\Noeud\Boucle;
+
 /**
  * Gestion de l'itérateur POUR
  *
@@ -19,9 +21,6 @@
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
-
-include_spip('iterateur/data');
-
 
 /**
  * Créer une boucle sur un itérateur POUR

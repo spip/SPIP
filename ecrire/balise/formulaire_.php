@@ -175,7 +175,7 @@ function balise_FORMULAIRE__dyn($form, ...$args) {
  * @param array $args
  *     Arguments envoyés à l'appel du formulaire
  * @return array|string
- *     array: Contexte d'environnement à envoyer au squelette
+ *     array: contexte d'environnement à envoyer au squelette
  *     string: Formulaire non applicable (message d’explication)
  **/
 function balise_FORMULAIRE__contexte($form, $args) {

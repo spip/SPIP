@@ -1,5 +1,7 @@
 <?php
 
+use Spip\Compilateur\Noeud\Boucle;
+
 /***************************************************************************\
  *  SPIP, Système de publication pour l'internet                           *
  *                                                                         *

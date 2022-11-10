@@ -10,6 +10,8 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+require_once __DIR__ . '/../vendor/autoload.php';
+
 /**
  * Initialisation de SPIP
  *
@@ -127,7 +129,7 @@ if (!defined('MODULES_IDIOMES')) {
 // *** Fin des define *** //
 
 
-// Inclure l'ecran de securite
+// inclure l'ecran de securite
 if (
 	!defined('_ECRAN_SECURITE')
 	and @file_exists($f = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . 'ecran_securite.php')
@@ -450,7 +452,7 @@ define('_SPIP_EXTRA_VERSION', '-dev');
 # define('_DEV_VERSION_SPIP_COMPAT', '4.1.99');
 // version des signatures de fonctions PHP
 // (= date de leur derniere modif cassant la compatibilite et/ou necessitant un recalcul des squelettes)
-$spip_version_code = 2022_08_23;
+$spip_version_code = 2022_10_03;
 // version de la base SQL (= Date + numero incremental a 2 chiffres YYYYMMDDXX)
 $spip_version_base = 2022_02_23_03;
 

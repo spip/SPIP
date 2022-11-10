@@ -10,6 +10,10 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+use Spip\Compilateur\Noeud\Boucle;
+use Spip\Compilateur\Noeud\Critere;
+use Spip\Compilateur\Noeud\Texte;
+
 /**
  * Définition des {criteres} d'une boucle
  *
@@ -868,7 +872,7 @@ function calculer_critere_par_hasard($idb, &$boucles, $crit) {
  * @param array $boucles AST du squelette
  * @param Critere $crit Paramètres du critère dans cette boucle
  * @param array $tri Paramètre en cours du critère
- * @param string $champ Texte suivant l'expression ('titre' dans {par num titre})
+ * @param string $champ texte suivant l'expression ('titre' dans {par num titre})
  * @return string|array Clause pour le Order by (array si erreur)
  */
 function calculer_critere_par_expression_num($idb, &$boucles, $crit, $tri, $champ) {
@@ -906,7 +910,7 @@ function calculer_critere_par_expression_num($idb, &$boucles, $crit, $tri, $cham
  * @param array $boucles AST du squelette
  * @param Critere $crit Paramètres du critère dans cette boucle
  * @param array $tri Paramètre en cours du critère
- * @param string $champ Texte suivant l'expression ('titre' dans {par sinum titre})
+ * @param string $champ texte suivant l'expression ('titre' dans {par sinum titre})
  * @return string|array Clause pour le Order by (array si erreur)
  */
 function calculer_critere_par_expression_sinum($idb, &$boucles, $crit, $tri, $champ) {
@@ -954,7 +958,7 @@ function calculer_critere_par_expression_sinum($idb, &$boucles, $crit, $tri, $ch
  * @param array $boucles AST du squelette
  * @param Critere $crit Paramètres du critère dans cette boucle
  * @param array $tri Paramètre en cours du critère
- * @param string $champ Texte suivant l'expression ('titre' dans {par multi titre})
+ * @param string $champ texte suivant l'expression ('titre' dans {par multi titre})
  * @return string|array Clause pour le Order by (array si erreur)
  */
 function calculer_critere_par_expression_multi($idb, &$boucles, $crit, $tri, $champ) {
@@ -1855,7 +1859,7 @@ function critere_tri_dist($idb, &$boucles, $crit) {
 	$boucle->order[] = "tri_champ_order(\$tri,\$command['from'],\$senstri)";
 }
 
-# Criteres de comparaison
+# criteres de comparaison
 
 /**
  * Compile un critère non déclaré explicitement

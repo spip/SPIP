@@ -73,7 +73,7 @@ if (!defined('_SPIP_XML_TAG_SPLIT')) {
  * @see spip_xml_aplatit() pour l'inverse
  *
  * @param string $texte
- *     Texte XML
+ *     texte XML
  * @param bool $strict
  *     true pour râler si une balise n'est pas correctement fermée, false sinon.
  * @param bool $clean ?
@@ -159,7 +159,7 @@ function spip_xml_parse(&$texte, $strict = true, $clean = true, $profondeur = -1
 			}
 			$content = substr($txt, 0, $p);
 			$txt = substr($txt, $p + $ncclos);
-			if ($profondeur == 0 or strpos($content, '<') === false) { // eviter une recursion si pas utile
+			if ($profondeur == 0 or !str_contains($content, '<')) { // eviter une recursion si pas utile
 			$out[$tag][] = importer_charset($content, $charset);
 			}//$content;
 			else {

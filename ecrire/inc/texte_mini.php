@@ -69,11 +69,12 @@ function spip_balisage_code(string $corps, bool $bloc = false, string $attributs
 
 	$echap = spip_htmlspecialchars($corps); // il ne faut pas passer dans entites_html, ne pas transformer les &#xxx; du code !
 	$class = "spip_code " . ($bloc ? 'spip_code_block' : 'spip_code_inline');
-	if ($langage) {
-		$class .= " language-$langage";
-	}
 	if ($attributs) {
 		$attributs = " " . trim($attributs);
+	}
+	if ($langage) {
+		$class .= " language-$langage";
+		$attributs .= ' data-language="'. $langage .'"';
 	}
 	if ($bloc) {
 		$html = "<div class=\"precode\">"
@@ -240,7 +241,7 @@ function echappe_html(
 	}
 
 	if (
-		($preg or strpos($letexte, '<') !== false)
+		($preg or str_contains($letexte, '<'))
 		and preg_match_all($preg ?: _PROTEGE_BLOCS, $letexte, $matches, PREG_SET_ORDER)
 	) {
 		foreach ($matches as $regs) {
@@ -371,13 +372,13 @@ function echappe_retour_modeles($letexte, $interdire_scripts = false) {
  * @link https://www.spip.net/4275
  *
  * @param string $texte
- *     Texte à couper
+ *     texte à couper
  * @param int $taille
  *     Taille de la coupe
  * @param string $suite
  *     Points de suite ajoutés.
  * @return string
- *     Texte coupé
+ *     texte coupé
  **/
 function couper($texte, $taille = 50, $suite = null) {
 	if (!($length = strlen($texte)) or $taille <= 0) {
@@ -553,7 +554,7 @@ function echapper_html_suspect($texte, $options = [], $connect = null, $env = []
 	// pas de balise html ou pas d'attribut sur les balises ? c'est OK
 	if (
 		strpos($texte, '<') === false
-		or strpos($texte, '=') === false
+		or !str_contains($texte, '=')
 	) {
 		return $texte;
 	}
@@ -648,9 +649,9 @@ function echapper_html_suspect($texte, $options = [], $connect = null, $env = []
  * @link https://www.spip.net/4310
  *
  * @param string $t
- *      Texte à sécuriser
+ *      texte à sécuriser
  * @return string
- *      Texte sécurisé
+ *      texte sécurisé
  **/
 function safehtml($t) {
 	static $safehtml;
@@ -738,11 +739,11 @@ function is_html_safe(string $texte): bool {
  *     gérer les autres modèles ?
  *
  * @param string $letexte
- *     Texte à nettoyer
+ *     texte à nettoyer
  * @param string|null $message
  *     Message de remplacement pour chaque image enlevée
  * @return string
- *     Texte sans les modèles d'image
+ *     texte sans les modèles d'image
  **/
 function supprime_img($letexte, $message = null) {
 	if ($message === null) {

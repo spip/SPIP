@@ -10,6 +10,8 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+use Algo26\IdnaConvert\ToIdn;
+
 /**
  * Ce fichier gère l'obtention de données distantes
  *
@@ -381,9 +383,6 @@ function prepare_donnees_post($donnees, $boundary = '') {
 
 /**
  * Convertir une URL dont le host est en utf8 en ascii
- * Utilise la librairie https://github.com/phlylabs/idna-convert/tree/v0.9.1
- * dans sa derniere version compatible toutes version PHP 5
- * La fonction PHP idn_to_ascii depend d'un package php5-intl et est rarement disponible
  *
  * @param string $url_idn
  * @return array|string
@@ -393,9 +392,8 @@ function url_to_ascii($url_idn) {
 	if ($parts = parse_url($url_idn)) {
 		$host = $parts['host'];
 		if (!preg_match(',^[a-z0-9_\.\-]+$,i', $host)) {
-			include_spip('inc/idna_convert.class');
-			$IDN = new idna_convert();
-			$host_ascii = $IDN->encode($host);
+			$converter = new ToIdn();
+			$host_ascii = $converter->convert($host);
 			$url_idn = explode($host, $url_idn, 2);
 			$url_idn = implode($host_ascii, $url_idn);
 		}

@@ -540,7 +540,7 @@ wird Ihre Adresse beibehalten):
 	'login_retoursitepublic' => 'Zurück zur öffentlichen Website',
 	'login_sans_cookie' => 'Login ohne Cookie',
 	'login_securise' => 'Sicheres Login',
-	'login_sinscrire' => 'anmelden', # MODIF
+	'login_sinscrire' => 'Anmelden',
 	'login_test_navigateur' => 'Test Webbrowser/Verbindung',
 	'login_verifiez_navigateur' => '(Überprüfen Sie, dass Ihr Webbrowser Ihr Passwort nicht gespeichert hat ...)',
 

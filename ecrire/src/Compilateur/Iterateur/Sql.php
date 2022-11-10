@@ -1,71 +1,180 @@
 <?php
 
-/***************************************************************************\
- *  SPIP, Système de publication pour l'internet                           *
- *                                                                         *
- *  Copyright © avec tendresse depuis 2001                                 *
- *  Arnaud Martin, Antoine Pitrou, Philippe Rivière, Emmanuel Saint-James  *
- *                                                                         *
- *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
- *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
-\***************************************************************************/
+namespace Spip\Compilateur\Iterateur;
+
+use Iterator;
 
 /**
- * Gestion de l'itérateur SQL
- *
- * @package SPIP\Core\Iterateur\SQL
- **/
-
-if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
-}
-
-
-/**
- * Itérateur SQL
+ * Itérateur SQL.
  *
  * Permet d'itérer sur des données en base de données
  */
-class IterateurSQL implements Iterator {
+class Sql extends AbstractIterateur implements Iterator
+{
+
 	/**
-	 * Ressource sql
+	 * Ressource sql.
 	 *
-	 * @var Object|bool
+	 * @var bool|object
 	 */
 	protected $sqlresult = false;
 
 	/**
-	 * row sql courante
+	 * row sql courante.
 	 *
-	 * @var array|null
+	 * @var null|array
 	 */
-	protected $row = null;
+	protected $row;
 
 	protected bool $firstseek = false;
 
 	protected int $pos = -1;
 
-	protected string $type = 'SQL';
+	/*
+	 * array command: les commandes d'initialisation
+	 * array info: les infos sur le squelette
+	 */
+	public function __construct(array $command, array $info = []) {
+		$this->type = 'SQL';
+		parent::__construct($command, $info);
 
-	protected array $command = [];
-
-	protected array $info = [];
-
-
-	/** Erreur presente ? **/
-	public bool $err = false;
-
-	/**
-	 * Calcul du total des elements
-	 *
-	 * @var int|null
-	 **/
-	public $total = null;
+		$this->select();
+	}
 
 	/**
-	 * selectionner les donnees, ie faire la requete SQL
+	 * Rembobiner.
 	 *
-	 * @return void
+	 * @return bool
+	 */
+	public function rewind(): void {
+		if ($this->pos > 0) {
+			$this->seek(0);
+		}
+	}
+
+	/**
+	 * Verifier l'etat de l'iterateur.
+	 */
+	public function valid(): bool {
+		if ($this->err) {
+			return false;
+		}
+		if (!$this->firstseek) {
+			$this->next();
+		}
+
+		return is_array($this->row);
+	}
+
+	/**
+	 * Valeurs sur la position courante.
+	 *
+	 * @return array
+	 */
+	#[\ReturnTypeWillChange]
+	public function current() {
+		return $this->row;
+	}
+
+	#[\ReturnTypeWillChange]
+	public function key() {
+		return $this->pos;
+	}
+
+	/**
+	 * Sauter a une position absolue.
+	 *
+	 * @param int         $n
+	 * @param null|string $continue
+	 *
+	 * @return bool
+	 */
+	public function seek($n = 0, $continue = null) {
+		if (!sql_seek($this->sqlresult, $n, $this->command['connect'], $continue)) {
+			// SQLite ne sait pas seek(), il faut relancer la query
+			// si la position courante est apres la position visee
+			// il faut relancer la requete
+			if ($this->pos > $n) {
+				$this->free();
+				$this->select();
+				$this->valid();
+			}
+			// et utiliser la methode par defaut pour se deplacer au bon endroit
+			// (sera fait en cas d'echec de cette fonction)
+			return false;
+		}
+		$this->row = sql_fetch($this->sqlresult, $this->command['connect']);
+		$this->pos = min($n, $this->count());
+
+		return true;
+	}
+
+	/**
+	 * Avancer d'un cran.
+	 */
+	public function next(): void {
+		$this->row = sql_fetch($this->sqlresult, $this->command['connect']);
+		++$this->pos;
+		$this->firstseek |= true;
+	}
+
+	/**
+	 * Avancer et retourner les donnees pour le nouvel element.
+	 *
+	 * @return null|array|bool
+	 */
+	public function fetch() {
+		if ($this->valid()) {
+			$r = $this->current();
+			$this->next();
+		} else {
+			$r = false;
+		}
+
+		return $r;
+	}
+
+	/**
+	 * liberer les ressources.
+	 *
+	 * @return bool
+	 */
+	public function free() {
+		if (!$this->sqlresult) {
+			return true;
+		}
+		$a = sql_free($this->sqlresult, $this->command['connect']);
+		$this->sqlresult = null;
+
+		return $a;
+	}
+
+	/**
+	 * Compter le nombre de resultats.
+	 *
+	 * @return int
+	 */
+	public function count() {
+		if (is_null($this->total)) {
+			if (!$this->sqlresult) {
+				$this->total = 0;
+			} else {
+				// cas count(*)
+				if (in_array('count(*)', $this->command['select'])) {
+					$this->valid();
+					$s = $this->current();
+					$this->total = $s['count(*)'];
+				} else {
+					$this->total = sql_count($this->sqlresult, $this->command['connect']);
+				}
+			}
+		}
+
+		return $this->total;
+	}
+
+	/**
+	 * selectionner les donnees, ie faire la requete SQL.
 	 */
 	protected function select() {
 		$this->row = null;
@@ -91,151 +200,5 @@ class IterateurSQL implements Iterator {
 
 		// pas d'init a priori, le calcul ne sera fait qu'en cas de besoin (provoque une double requete souvent inutile en sqlite)
 		//$this->total = $this->count();
-	}
-
-	/*
-	 * array command: les commandes d'initialisation
-	 * array info: les infos sur le squelette
-	 */
-	public function __construct($command, $info = []) {
-		$this->type = 'SQL';
-		$this->command = $command;
-		$this->info = $info;
-		$this->select();
-	}
-
-	/**
-	 * Rembobiner
-	 *
-	 * @return bool
-	 */
-	public function rewind(): void {
-		if ($this->pos > 0) {
-			$this->seek(0);
-		}
-	}
-
-	/**
-	 * Verifier l'etat de l'iterateur
-	 *
-	 * @return bool
-	 */
-	public function valid(): bool {
-		if ($this->err) {
-			return false;
-		}
-		if (!$this->firstseek) {
-			$this->next();
-		}
-
-		return is_array($this->row);
-	}
-
-	/**
-	 * Valeurs sur la position courante
-	 *
-	 * @return array
-	 */
-	#[\ReturnTypeWillChange]
-	public function current() {
-		return $this->row;
-	}
-
-	#[\ReturnTypeWillChange]
-	public function key() {
-		return $this->pos;
-	}
-
-	/**
-	 * Sauter a une position absolue
-	 *
-	 * @param int $n
-	 * @param null|string $continue
-	 * @return bool
-	 */
-	public function seek($n = 0, $continue = null) {
-		if (!sql_seek($this->sqlresult, $n, $this->command['connect'], $continue)) {
-			// SQLite ne sait pas seek(), il faut relancer la query
-			// si la position courante est apres la position visee
-			// il faut relancer la requete
-			if ($this->pos > $n) {
-				$this->free();
-				$this->select();
-				$this->valid();
-			}
-			// et utiliser la methode par defaut pour se deplacer au bon endroit
-			// (sera fait en cas d'echec de cette fonction)
-			return false;
-		}
-		$this->row = sql_fetch($this->sqlresult, $this->command['connect']);
-		$this->pos = min($n, $this->count());
-
-		return true;
-	}
-
-	/**
-	 * Avancer d'un cran
-	 *
-	 * @return void
-	 */
-	public function next(): void {
-		$this->row = sql_fetch($this->sqlresult, $this->command['connect']);
-		$this->pos++;
-		$this->firstseek |= true;
-	}
-
-	/**
-	 * Avancer et retourner les donnees pour le nouvel element
-	 *
-	 * @return array|bool|null
-	 */
-	public function fetch() {
-		if ($this->valid()) {
-			$r = $this->current();
-			$this->next();
-		} else {
-			$r = false;
-		}
-
-		return $r;
-	}
-
-	/**
-	 * liberer les ressources
-	 *
-	 * @return bool
-	 */
-	public function free() {
-		if (!$this->sqlresult) {
-			return true;
-		}
-		$a = sql_free($this->sqlresult, $this->command['connect']);
-		$this->sqlresult = null;
-
-		return $a;
-	}
-
-	/**
-	 * Compter le nombre de resultats
-	 *
-	 * @return int
-	 */
-	public function count() {
-		if (is_null($this->total)) {
-			if (!$this->sqlresult) {
-				$this->total = 0;
-			} else {
-				# cas count(*)
-				if (in_array('count(*)', $this->command['select'])) {
-					$this->valid();
-					$s = $this->current();
-					$this->total = $s['count(*)'];
-				} else {
-					$this->total = sql_count($this->sqlresult, $this->command['connect']);
-				}
-			}
-		}
-
-		return $this->total;
 	}
 }

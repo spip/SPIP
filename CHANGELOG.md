@@ -9,6 +9,8 @@
 
 ### Added
 
+- #5056 Chargement de l’autoloader de Composer aux points d’entrées de SPIP
+- #5056 Intégration de dépendances à des librairies PHP via composer.json (notamment les polyfill PHP 8.0 8.1 et 8.2 ainsi que le polyfill mbstring)
 - #5323 Ajout de liens de retour vers le site public + déconnexion dans un des écrans d'erreur d'accès à l'espace privé
 - #5302 Afficher la langue des utilisateurs sur leur page et permettre aussi de l'éditer
 - #5271 Fonction `is_html_safe()`
@@ -16,6 +18,8 @@
 
 ### Changed
 
+- #5056 SPIP nécessite certaines dépendances via Composer (son archive zip contiendra le nécessaire)
+- #5056 Les (quelques) classes PHP de SPIP sont déplacées dans `ecrire/src` sous le namespace `Spip`
 - #5361 Image `loader.svg` dans un style plus moderne
 - #5351 Balisage html généré par la balise raccourci `<code>`
 - #5321 Refactoring de la collecte et echappement des liens
@@ -36,10 +40,12 @@
 
 ### Fixed
 
+- #5366 Afficher le langage (si précisé) des blocs de code, dans l’espace privé
 - #5362 Agrandir le formulaire de recherche des listes dans l’espace privé
 - #5357 Utiliser le terme "Se connecter" valider le formulaire de login
 - #5355 Correction d'un Warning si le débogueur est appelé sans être connecté
 - #5316 Les PDF envoyés avec un CSP Sandbox ne sont pas visibles dans Safari ou Chrome, on fait donc une exception pour ces fichiers
+- #5328 #5368 Réparer le lien vers la licence GPL dans le pied des pages du privé
 - #5326 Utilisation de PHP_AUTH avec d'autres méthodes d'identification que LDAP
 - #5284 Éviter que les titres longs dépassent de leur bloc dans l'espace privé
 - #5329 Rétablir la collecte des doublons par la fonction `traiter_modeles()`
@@ -55,6 +61,10 @@
 - #5283 Loger les erreurs de squelettes lorsqu’elles ne sont pas affichées sur la page
 - #5016 Collecte des arguments sur les formulaires dans un modèle
 - #5274 Homogénéiser les labels des listes
+
+### Deprecated
+
+- #5056 Les classes de nœud du compilateur (Champ, Boucle, Critere...) sont déplacées dans le namespace `Spip\Compilateur\Noeud\` (l’appel sans namespace est déprécié)
 
 ### Removed
 

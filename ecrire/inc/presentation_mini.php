@@ -100,7 +100,7 @@ function debut_droite() {
  * @param string $exec
  *     Nom de la page exec en cours
  * @param array $contexte
- *     Contexte de la page
+ *     contexte de la page
  * @param array|null $auteur
  *     Session de l'auteur. Sera prise sur l'auteur connecté si non indiquée.
  * @return string
@@ -195,7 +195,7 @@ function html_tests_js() {
 /**
  * Retourne la liste des mises à jour de SPIP possibles
  *
- * @return string Texte présentant la liste des mises à jour existantes
+ * @return string texte présentant la liste des mises à jour existantes
  **/
 function info_maj_spip() {
 
@@ -261,7 +261,7 @@ function info_copyright() {
 		'info_copyright',
 		[
 			'spip' => "<b>SPIP $version</b> ",
-			'lien_gpl' => '<a href="https://www.gnu.org/licenses/gpl-3.0.html" class="aide popin">' . _T('info_copyright_gpl') . '</a>'
+			'lien_gpl' => '<a href="https://www.gnu.org/licenses/gpl-3.0.html">' . _T('info_copyright_gpl') . '</a>'
 		]
 	)
 	. $secu;

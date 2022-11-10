@@ -87,7 +87,6 @@ function install_etape_3b_dist() {
 		}
 
 		// il faut avoir une cle des auth valide pour creer un nouvel auteur webmestre
-		include_spip('inc/chiffrer');
 		$cles = \Spip\Chiffrer\SpipCles::instance();
 		$secret = $cles->getSecretAuth();
 
