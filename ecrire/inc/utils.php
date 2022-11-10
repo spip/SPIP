@@ -1447,8 +1447,11 @@ function lister_themes_prives() {
 		}
 		$themes = [_SPIP_THEME_PRIVE];
 		// lors d'une installation neuve, prefs n'est pas definie.
-		if (isset($GLOBALS['visiteur_session']['prefs'])) {
-			$prefs = $GLOBALS['visiteur_session']['prefs'];
+		$prefs = $GLOBALS['visiteur_session']['prefs'] ?? [];
+		// Aussitôt après une demande d'inscription, $prefs vaut une chaine statut_tmp  @see inscription_nouveau()
+		// Sinon, c'est un tableau sérialisé
+		if (is_string($prefs) and (stripos($prefs, 'a:')===0)) {
+			$prefs = unserialize($prefs);
 		} else {
 			$prefs = [];
 		}
