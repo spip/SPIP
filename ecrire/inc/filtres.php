@@ -1329,6 +1329,51 @@ function taille_en_octets($taille) {
 	return $taille;
 }
 
+/**
+ * Renvoie une taille de dossier ou de fichier humainement lisible en ajustant le format et l'unité.
+ *
+ * La fonction renvoie la valeur et l'unité en fonction du système utilisé (binaire ou décimal).
+ * Elle corrige ainsi la confusion de la fonction taille_en_octets() qui calcul en binaire mais affiche l'unité en décimal.
+ *
+ * @param int    $octets  Taille d'un dossier ou fichier en octets
+ * @param string $systeme Système d'unité dans lequel calculer et afficher la taille lisble. Vaut `BI` (défaut) ou `SI`.
+ *
+ * @return string Taille affichée de manière humainement lisible
+ */
+function taille_en_octets_normalisee($octets, $systeme = 'BI') {
+
+	// Texte à afficher pour la taille
+	$affichage = '';
+
+	static $unites = ['octets', 'ko', 'mo', 'go'];
+	static $precisions = [0, 1, 1, 2];
+
+	if ($octets >= 1) {
+		// Déterminer le nombre d'octets représentant le kilo en fonction du système choisi
+		$systeme = strtolower($systeme);
+		if ($systeme === 'bi') {
+			$kilo = 1024;
+			$suffixe_item = "_$systeme";
+		} else {
+			$kilo = 1000;
+			$suffixe_item = '';
+		}
+
+		// Identification de la puissance en "kilo" correspondant à l'unité la plus appropriée
+		$puissance = floor(log($octets, $kilo));
+
+		// Calcul de la taille et choix de l'unité
+		$affichage = _T(
+			'spip:taille_' . $unites[$puissance] . $suffixe_item,
+			[
+				'taille' => round($octets / pow($kilo, $puissance), $precisions[$puissance])
+			]
+		);
+	}
+
+	return $affichage;
+}
+
 
 /**
  * Rend une chaine utilisable sans dommage comme attribut HTML
