@@ -1290,43 +1290,55 @@ function majuscules($texte) {
 }
 
 /**
- * Retourne une taille en octets humainement lisible
+ * Renvoie une taille de dossier ou de fichier humainement lisible en ajustant le format et l'unité.
  *
- * Tel que "127.4 ko" ou "3.1 Mo"
+ * La fonction renvoie la valeur et l'unité en fonction du système utilisé (binaire ou décimal).
  *
  * @example
- *     - `[(#TAILLE|taille_en_octets)]`
- *     - `[(#VAL{123456789}|taille_en_octets)]` affiche `117.7 Mo`
+ *     - `[(#TAILLE|taille_en_octets)]` affiche xxx.x Mio
+ *     - `[(#VAL{123456789}|taille_en_octets{SI})]` affiche `117.7 Mo`
  *
  * @filtre
- * @link https://www.spip.net/4316
- * @param int $taille
- * @return string
- **/
-function taille_en_octets($taille) {
-	if (!defined('_KILOBYTE')) {
-		/**
-		 * Définit le nombre d'octets dans un Kilobyte
-		 *
-		 * @var int
-		 **/
-		define('_KILOBYTE', 1024);
+ *
+ * @param int    $octets  Taille d'un dossier ou fichier en octets
+ * @param string $systeme Système d'unité dans lequel calculer et afficher la taille lisble. Vaut `BI` (défaut) ou `SI`.
+ *
+ * @return string Taille affichée de manière humainement lisible
+ */
+function taille_en_octets($octets, $systeme = 'BI') {
+
+	// Texte à afficher pour la taille
+	$affichage = '';
+
+	static $unites = ['octets', 'ko', 'mo', 'go'];
+	static $precisions = [0, 1, 1, 2];
+
+	if ($octets >= 1) {
+		// Déterminer le nombre d'octets représentant le kilo en fonction du système choisi
+		$systeme = strtolower($systeme);
+		if ($systeme === 'bi') {
+			$kilo = 1024;
+			$suffixe_item = "_$systeme";
+		} elseif ($systeme === 'si') {
+			$kilo = 1000;
+			$suffixe_item = '';
+		} else {
+			return $affichage;
+		}
+
+		// Identification de la puissance en "kilo" correspondant à l'unité la plus appropriée
+		$puissance = floor(log($octets, $kilo));
+
+		// Calcul de la taille et choix de l'unité
+		$affichage = _T(
+			'spip:taille_' . $unites[$puissance] . $suffixe_item,
+			[
+				'taille' => round($octets / pow($kilo, $puissance), $precisions[$puissance])
+			]
+		);
 	}
 
-	if ($taille < 1) {
-		return '';
-	}
-	if ($taille < _KILOBYTE) {
-		$taille = _T('taille_octets', ['taille' => $taille]);
-	} elseif ($taille < _KILOBYTE * _KILOBYTE) {
-		$taille = _T('taille_ko', ['taille' => round($taille / _KILOBYTE, 1)]);
-	} elseif ($taille < _KILOBYTE * _KILOBYTE * _KILOBYTE) {
-		$taille = _T('taille_mo', ['taille' => round($taille / _KILOBYTE / _KILOBYTE, 1)]);
-	} else {
-		$taille = _T('taille_go', ['taille' => round($taille / _KILOBYTE / _KILOBYTE / _KILOBYTE, 2)]);
-	}
-
-	return $taille;
+	return $affichage;
 }
 
 
