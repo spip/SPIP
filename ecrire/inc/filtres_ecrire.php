@@ -589,17 +589,15 @@ function lister_objets_lies($objet_source, $objet, $id_objet, $objet_lien) {
 		return [];
 	}
 	$r = reset($res);
+	$colonne_id = ($objet_source == $objet_lien ? id_table_objet($objet_source) : 'id_objet');
 	if (isset($r['rang_lien'])) {
-		$l = array_column($res, 'rang_lien', $objet_source);
+		$l = array_column($res, 'rang_lien', $colonne_id);
 		asort($l);
 		$l = array_keys($l);
 	} else {
 		// Si les liens qu'on cherche sont ceux de la table de lien, l'info est dans la clé de l'objet
 		// Sinon c'est dans "id_objet"
-		$l = array_column(
-			$res,
-			$objet_source == $objet_lien ? id_table_objet($objet_source) : 'id_objet'
-		);
+		$l = array_column($res, $colonne_id);
 	}
 	return $l;
 }
