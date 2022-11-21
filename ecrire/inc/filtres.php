@@ -577,6 +577,9 @@ function infos_image($img, $force_refresh = false) {
 	} else {
 		$srcWidth = extraire_attribut($img, 'width');
 		$srcHeight = extraire_attribut($img, 'height');
+		if (!ctype_digit(strval($srcWidth)) or !ctype_digit(strval($srcHeight))) {
+			$srcWidth = $srcHeight = 0;
+		}
 	}
 
 	// ne jamais operer directement sur une image distante pour des raisons de perfo

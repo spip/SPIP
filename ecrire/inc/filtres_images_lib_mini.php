@@ -410,8 +410,12 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 		return false;
 	}
 
-	// pas de taille mesurable
-	if (!($ret['hauteur'] or $ret['largeur'])) {
+	// pas de taille mesurable ?
+	if (!$ret['hauteur']
+		or !($ret['hauteur'] = intval(round($ret['hauteur'])))
+		or !$ret['largeur']
+		or !($ret['largeur'] = intval(round($ret['largeur'])))
+	) {
 		return false;
 	}
 
