@@ -35,6 +35,7 @@ include_spip('inc/filtres');
  *     ```
  *     #FORMULAIRE_INSCRIPTION
  *     #FORMULAIRE_INSCRIPTION{nom_inscription, #ID_RUBRIQUE}
+ *     [(#FORMULAIRE_INSCRIPTION{1comite,#ARRAY{id,#ID_RUBRIQUE}})]
  *     ```
  *
  * @param Champ $p
@@ -60,6 +61,7 @@ function balise_FORMULAIRE_INSCRIPTION($p) {
  *     ```
  *     #FORMULAIRE_INSCRIPTION
  *     [(#FORMULAIRE_INSCRIPTION{mode_inscription, #ID_RUBRIQUE})]
+ *     [(#FORMULAIRE_INSCRIPTION{1comite,#ARRAY{id,#ID_RUBRIQUE}})]
  *     ```
  *
  * @param array $args
@@ -72,9 +74,19 @@ function balise_FORMULAIRE_INSCRIPTION($p) {
  *   - chaîne vide sinon.
  */
 function balise_FORMULAIRE_INSCRIPTION_stat($args, $context_compil) {
-	[$mode, $id, $retour] = array_pad($args, 3, null);
-	include_spip('action/inscrire_auteur');
-	$mode = tester_statut_inscription($mode, $id ?? 0);
+	[$mode, $id_ou_options, $retour] = array_pad($args, 3, null);
 
-	return $mode ? [$mode, $id, $retour] : '';
+	// Compatibilité avec l'ancien param "id" dans les deux sens
+	if (!is_array($id_ou_options)) {
+		$options = ['id' => intval($id_ou_options)];
+		$id = $options['id'];
+	}else {
+		$options = $id_ou_options;
+		$id = (int) ($id_ou_options['id'] ?? 0);
+	}
+
+	include_spip('action/inscrire_auteur');
+	$mode = tester_statut_inscription($mode, $id);
+
+	return $mode ? [$mode, $options, $retour] : '';
 }

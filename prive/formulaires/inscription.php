@@ -34,14 +34,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  *
  * @param string $mode
- * @param int $id_ou_options
+ * @param array $options
  * @param string $retour
  * @return array|false
  */
-function formulaires_inscription_charger_dist($mode = '', $id_ou_options = 0, $retour = '') {
+function formulaires_inscription_charger_dist($mode = '', $options = [], $retour = '') {
 
-	// Compatibilité avec l'ancien param "id" dans les deux sens
-	[$options, $id] = formulaires_inscription_arguments_id_options($id_ou_options);
+	$id = ($options['id'] ?? 0);
 
 	// fournir le mode de la config ou tester si l'argument du formulaire est un mode accepte par celle-ci
 	// pas de formulaire si le mode est interdit
@@ -61,34 +60,21 @@ function formulaires_inscription_charger_dist($mode = '', $id_ou_options = 0, $r
 	return $valeurs;
 }
 
+
 /**
- * Gerer l'argument $id_ou_options
+ * Si inscriptions pas autorisees, retourner une chaine d'avertissement
  *
- * @param int|array $id_ou_options
- * @return list{array<string, mixed>, int}
+ * @param string $mode
+ * @param array $options
+ * @param string $retour
+ * @return array
  */
-function formulaires_inscription_arguments_id_options($id_ou_options): array {
-	// Compatibilité avec l'ancien param "id" dans les deux sens
-	if (!is_array($id_ou_options)) {
-		$options = ['id' => intval($id_ou_options)];
-		$id = $options['id'];
-	}else {
-		$options = $id_ou_options;
-		$id = (int) ($id_ou_options['id'] ?? 0);
-	}
-
-	return [$options, $id];
-}
-
-
-// Si inscriptions pas autorisees, retourner une chaine d'avertissement
-function formulaires_inscription_verifier_dist($mode = '', $id_ou_options = 0, $retour = '') {
+function formulaires_inscription_verifier_dist($mode = '', $options = [], $retour = '') {
 	set_request('_upgrade_auteur'); // securite
 	include_spip('inc/filtres');
 	$erreurs = array();
 
-	// Compatibilité avec l'ancien param "id" dans les deux sens
-	[$options, $id] = formulaires_inscription_arguments_id_options($id_ou_options);
+	$id = ($options['id'] ?? 0);
 
 	include_spip('inc/autoriser');
 	if (!autoriser('inscrireauteur', $mode, $id)
@@ -149,7 +135,15 @@ function formulaires_inscription_verifier_dist($mode = '', $id_ou_options = 0, $
 	return $erreurs;
 }
 
-function formulaires_inscription_traiter_dist($mode = '', $id_ou_options = 0, $retour = '') {
+/**
+ * Si inscriptions pas autorisees, retourner une chaine d'avertissement
+ *
+ * @param string $mode
+ * @param array $options
+ * @param string $retour
+ * @return array
+ */
+function formulaires_inscription_traiter_dist($mode = '', array $options = [], $retour = '') {
 	if ($retour) {
 		refuser_traiter_formulaire_ajax();
 	}
@@ -157,8 +151,7 @@ function formulaires_inscription_traiter_dist($mode = '', $id_ou_options = 0, $r
 	include_spip('inc/filtres');
 	include_spip('inc/autoriser');
 
-	// Compatibilité avec l'ancien param "id" dans les deux sens
-	[$options, $id] = formulaires_inscription_arguments_id_options($id_ou_options);
+	$id = ($options['id'] ?? 0);
 
 	if (!autoriser('inscrireauteur', $mode, $id)) {
 		$desc = 'rien a faire ici';
