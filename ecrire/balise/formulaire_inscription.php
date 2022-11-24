@@ -72,9 +72,12 @@ function balise_FORMULAIRE_INSCRIPTION($p) {
  *   - chaîne vide sinon.
  */
 function balise_FORMULAIRE_INSCRIPTION_stat($args, $context_compil) {
-	[$mode, $id, $retour] = array_pad($args, 3, null);
-	include_spip('action/inscrire_auteur');
-	$mode = tester_statut_inscription($mode, $id ?? 0);
+	[$mode, $id_ou_options, $retour] = array_pad($args, 3, null);
+	include_spip('formulaires/inscription');
+	list($options, $id) = formulaires_inscription_arguments_id_options($id_ou_options);
 
-	return $mode ? [$mode, $id, $retour] : '';
+	include_spip('action/inscrire_auteur');
+	$mode = tester_statut_inscription($mode, $id);
+
+	return $mode ? [$mode, $id_ou_options, $retour] : '';
 }
