@@ -5,6 +5,7 @@
         "ext-sodium": "*",
         "ext-xml": "*",
         "ext-zip": "*",
+        "ext-json": "*",
         "algo26-matthias/idna-convert": "^3.0",
         "symfony/polyfill-mbstring": "^1.27",
         "symfony/polyfill-php80": "^1.27",
