@@ -350,7 +350,7 @@ function retrouver_rang_lien($objet_source, $ids, $objet_lie, $idl, $objet_lien)
 
 /**
  * Lister les liens en le memoizant dans une static
- * pour utilisation commune par lister_objets_lies et retrouver_rang_lien dans un formuluaire d'edition de liens
+ * pour utilisation commune par lister_objets_lies et retrouver_rang_lien dans un formulaire d'edition de liens
  * (evite de multiplier les requetes)
  *
  * @param $objet_source
