@@ -112,11 +112,15 @@ function chercher_rubrique(
 
 	$confirm = '';
 	if ($objet == 'rubrique') {
+		// FIXME: Migration plus adapté vers le plugin Brèves ?
 		// si c'est une rubrique-secteur contenant des breves, demander la
 		// confirmation du deplacement
-		$contient_breves = sql_countsel('spip_breves', 'id_rubrique=' . intval($id_objet));
-
-		if ($contient_breves > 0) {
+		if (
+			sql_table_exists('spip_breves')
+			and ($contient_breves = sql_countsel('spip_breves', 'id_rubrique=' . intval($id_objet)))
+			and ($contient_breves > 0)
+		) {
+			// FIXME: utiliser singulier_ou_pluriel, migrer dans plugin Brèves
 			$scb = ($contient_breves > 1 ? 's' : '');
 			$scb = _T(
 				'avis_deplacement_rubrique',

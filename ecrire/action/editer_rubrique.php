@@ -193,6 +193,10 @@ function rubrique_modifier($id_rubrique, $set = null) {
  *     false si la confirmation du déplacement n'est pas présente
  */
 function editer_rubrique_breves($id_rubrique, $id_parent, $c = []) {
+	if (!sql_table_exists('spip_breves')) {
+		return true;
+	}
+
 	if (!sql_countsel('spip_breves', "id_rubrique=$id_rubrique")) {
 		return true;
 	}
