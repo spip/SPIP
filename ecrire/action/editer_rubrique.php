@@ -193,22 +193,24 @@ function rubrique_modifier($id_rubrique, $set = null) {
  *     false si la confirmation du déplacement n'est pas présente
  */
 function editer_rubrique_breves($id_rubrique, $id_parent, $c = []) {
-	if (!sql_countsel('spip_breves', "id_rubrique=$id_rubrique")) {
-		return true;
-	}
+	if (sql_table_exists('spip_breves')) {
+		if (!sql_countsel('spip_breves', "id_rubrique=$id_rubrique")) {
+			return true;
+		}
 
-	if (empty($c['confirme_deplace']) or $c['confirme_deplace'] != 'oui') {
-		return false;
-	}
+		if (empty($c['confirme_deplace']) or $c['confirme_deplace'] != 'oui') {
+			return false;
+		}
 
-	if (
-		$id_secteur = sql_getfetsel(
-			'id_secteur',
-			'spip_rubriques',
-			"id_rubrique=$id_parent"
-		)
-	) {
-		sql_updateq('spip_breves', ['id_rubrique' => $id_secteur], "id_rubrique=$id_rubrique");
+		if (
+			$id_secteur = sql_getfetsel(
+				'id_secteur',
+				'spip_rubriques',
+				"id_rubrique=$id_parent"
+			)
+		) {
+			sql_updateq('spip_breves', ['id_rubrique' => $id_secteur], "id_rubrique=$id_rubrique");
+		}
 	}
 
 	return true;

@@ -111,7 +111,7 @@ function chercher_rubrique(
 	}
 
 	$confirm = '';
-	if ($objet == 'rubrique') {
+	if ($objet == 'rubrique' and sql_table_exists('spip_breves')) {
 		// si c'est une rubrique-secteur contenant des breves, demander la
 		// confirmation du deplacement
 		$contient_breves = sql_countsel('spip_breves', 'id_rubrique=' . intval($id_objet));
