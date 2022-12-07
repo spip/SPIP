@@ -1462,7 +1462,6 @@ function filtre_securiser_acces_dist($id_auteur, $cle, $dir, $op = '', $args = '
  * le premier est considere vide, sinon retourne le premier paramètre.
  *
  * En php `sinon($a, 'rien')` retourne `$a`, ou `'rien'` si `$a` est vide.
- * En filtre SPIP `|sinon{#TEXTE, rien}` : affiche `#TEXTE` ou `rien` si `#TEXTE` est vide,
  *
  * @filtre
  * @see filtre_logique() pour la compilation du filtre dans un squelette
