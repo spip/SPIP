@@ -1240,6 +1240,11 @@ function PtoBR($texte) {
  * @return string texte encadré du style CSS
  */
 function lignes_longues($texte) {
+	trigger_error(
+		sprintf('Usage of function or filter \'%s\' is deprecated. Use CSS instead.', __FUNCTION__),
+		\E_USER_DEPRECATED
+	);
+
 	if (!strlen(trim($texte))) {
 		return $texte;
 	}
