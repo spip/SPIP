@@ -42,6 +42,7 @@
 
 ### Fixed
 
+- #5404 Déplacement de rubrique (en SQLite, sans le plugin Brèves)
 - #5405 Nécessiter l’extension PHP json.
 - #5366 Afficher le langage (si précisé) des blocs de code, dans l’espace privé
 - #5362 Agrandir le formulaire de recherche des listes dans l’espace privé
