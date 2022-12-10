@@ -3178,17 +3178,21 @@ function filtre_match_dist(?string $texte, $expression, $modif = 'UuimsS', $capt
  *     ```
  *
  * @param string $texte
- *     texte
+ *     Texte dans lequel faire le remplacement
  * @param string $expression
  *     Expression régulière
  * @param string $replace
- *     texte de substitution des éléments trouvés
+ *     Texte de substitution des éléments trouvés
  * @param string $modif
  *     Modificateurs pour l'expression régulière.
  * @return string
- *     texte
+ *     Texte
  **/
 function replace($texte, $expression, $replace = '', $modif = 'UimsS') {
+	if (null === $texte) {
+		return '';
+	}
+
 	$expression = str_replace('\/', '/', $expression);
 	$expression = str_replace('/', '\/', $expression);
 
