@@ -101,7 +101,8 @@ function admin_repair_tables() {
 		}
 
 		if (
-			$result_repair
+			$repair
+			and $result_repair
 			and $msg = join(
 				' ',
 				(is_resource($result_repair) or is_object($result_repair)) ? sql_fetch($result_repair) : $result_repair
