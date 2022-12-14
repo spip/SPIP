@@ -2061,7 +2061,7 @@ function modifier_class($balise, $class, $operation = 'ajouter') {
 	}
 
 	// si la ou les classes ont des caracteres invalides on ne fait rien
-	if (preg_match(',[^\w-],', implode('', $class))) {
+	if (preg_match(',[^:\w-],', implode('', $class))) {
 		return $balise;
 	}
 
