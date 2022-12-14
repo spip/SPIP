@@ -2060,11 +2060,6 @@ function modifier_class($balise, $class, $operation = 'ajouter') {
 		return $balise;
 	}
 
-	// si la ou les classes ont des caracteres invalides on ne fait rien
-	if (preg_match(',[^\w-],', implode('', $class))) {
-		return $balise;
-	}
-
 	$class_courante = extraire_attribut($balise, 'class');
 	$class_new = $class_courante;
 	foreach ($class as $c) {
@@ -2072,7 +2067,7 @@ function modifier_class($balise, $class, $operation = 'ajouter') {
 		if (
 			$class_courante
 			and str_contains($class_courante, (string) $c)
-			and preg_match('/(^|\s)' . preg_quote($c) . '($|\s)/', $class_courante)
+			and in_array($c, preg_split(",\s+,", $class_courante))
 		) {
 			$is_class_presente = true;
 		}
@@ -2085,7 +2080,9 @@ function modifier_class($balise, $class, $operation = 'ajouter') {
 			in_array($operation, ['supprimer', 'commuter'])
 			and $is_class_presente
 		) {
-			$class_new = trim(preg_replace('/(^|\s)' . preg_quote($c) . '($|\s)/', "\\1", $class_new));
+			$class_new = preg_split(",\s+,", $class_new);
+			$class_new = array_diff($class_new, [$c]);
+			$class_new = implode(' ', $class_new);
 		}
 	}
 
