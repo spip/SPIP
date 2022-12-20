@@ -419,16 +419,6 @@ function couper($texte, $taille = 50, $suite = null) {
 	$texte = trim(str_replace("\n", ' ', $texte));
 	$texte .= "\n";  // marquer la fin
 
-	// corriger la longueur de coupe
-	// en fonction de la presence de caracteres utf
-	if ($GLOBALS['meta']['charset'] == 'utf-8') {
-		$long = charset2unicode($texte);
-		$long = spip_substr($long, 0, max($taille, 1));
-		$nbcharutf = preg_match_all('/(&#[0-9]{3,6};)/S', $long, $matches);
-		$taille += $nbcharutf;
-	}
-
-
 	// couper au mot precedent
 	$long = spip_substr($texte, 0, max($taille - 4, 1));
 	$u = $GLOBALS['meta']['pcre_u'];
