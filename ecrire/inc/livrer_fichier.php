@@ -74,6 +74,13 @@ function spip_livrer_fichier_entetes($fichier, $content_type = 'application/octe
 	header('Accept-Ranges: bytes');
 	header('Content-Type: ' . $content_type);
 
+	if ($fs = stat($fichier)
+	  and !empty($fs['size'])
+	  and !empty($fs['mtime'])) {
+		header("Last-Modified: " . gmdate("D, d M Y H:i:s", $fs['mtime']) . " GMT");
+		header(sprintf('Etag: "%x-%x"', $fs['size'], str_pad($fs['mtime'], 16, "0")));
+	}
+
 	if ($attachment) {
 		$f = basename($fichier);
 		// ce content-type est necessaire pour eviter des corruptions de zip dans ie6
