@@ -408,11 +408,11 @@ function couper($texte, $taille = 50, $suite = null) {
 	$texte = nettoyer_raccourcis_typo($texte);
 
 	// balises de sauts de ligne et paragraphe
-	$texte = preg_replace('/<p( [^>]*)?' . '>/', "\r", $texte);
+	$texte = preg_replace('/<p( [^>]*)?' . '>/', "\r\r", $texte);
 	$texte = preg_replace('/<br( [^>]*)?' . '>/', "\n", $texte);
 
 	// on repasse les doubles \n en \r que nettoyer_raccourcis_typo() a pu modifier
-	$texte = str_replace("\n\n", "\r", $texte);
+	$texte = str_replace("\n\n", "\r\r", $texte);
 
 	// supprimer les tags
 	$texte = supprimer_tags($texte);
@@ -452,7 +452,7 @@ function couper($texte, $taille = 50, $suite = null) {
 	}
 
 	// remettre les paragraphes
-	$texte = preg_replace("/\r+/", "\n\n", $texte);
+	$texte = preg_replace("/\r\r+/", "\n\n", $texte);
 
 	// supprimer l'eventuelle entite finale mal coupee
 	$texte = preg_replace('/&#?[a-z0-9]*$/S', '', $texte);
