@@ -419,10 +419,10 @@ function couper($texte, $taille = 50, $suite = null) {
 	$texte = trim(str_replace("\n", ' ', $texte));
 	$texte .= "\n";  // marquer la fin
 
-	// couper au mot precedent
+	// couper au mot precedent (ou au début de la chaîne si c'est le premier mot)
 	$long = spip_substr($texte, 0, max($taille - 4, 1));
 	$u = $GLOBALS['meta']['pcre_u'];
-	$court = preg_replace("/([^\s][\s]+)[^\s]*\n?$/" . $u, "\\1", $long);
+	$court = preg_replace("/(^|[^\s][\s]+)[^\s]*\n?$/" . $u, "\\1", $long);
 	if (is_null($suite)) {
 		$suite = (defined('_COUPER_SUITE') ? _COUPER_SUITE : '&nbsp;(...)');
 	}
@@ -432,7 +432,7 @@ function couper($texte, $taille = 50, $suite = null) {
 	if (spip_strlen($court) < max(0.75 * $taille, 2)) {
 		$points = '';
 		$long = spip_substr($texte, 0, $taille);
-		$texte = preg_replace("/([^\s][\s]+)[^\s]*\n?$/" . $u, "\\1", $long);
+		$texte = preg_replace("/(^|[^\s][\s]+)[^\s]*\n?$/" . $u, "\\1", $long);
 		// encore trop court ? couper au caractere
 		if (spip_strlen($texte) < 0.75 * $taille) {
 			$texte = $long;
