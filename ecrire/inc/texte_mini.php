@@ -417,38 +417,38 @@ function couper($texte, $taille = 50, $suite = null) {
 	// supprimer les tags
 	$texte = supprimer_tags($texte);
 	$texte = trim(str_replace("\n", ' ', $texte));
-	$texte .= "\n";  // marquer la fin
 
-	// points de suite
-	if (is_null($suite)) {
-		$suite = (defined('_COUPER_SUITE') ? _COUPER_SUITE : '&nbsp;(...)');
-	}
-	$taille_suite = spip_strlen(filtrer_entites($suite));
-
-	// couper au mot precedent (ou au début de la chaîne si c'est le premier mot)
-	// on coupe avec un caractère de plus que la taille demandée afin de pouvoir
-	// détecter si le dernier mot du texte coupé est complet ou non. ce caractère
-	// excédentaire est ensuite supprimé par l'appel à preg_replace()
-	$long = spip_substr($texte, 0, max($taille + 1 - $taille_suite, 1));
-	$u = $GLOBALS['meta']['pcre_u'];
-	$court = preg_replace('/(^|[^\s][\s]+)([\s]|[^\s]+)$/D' . $u, "\\1", $long);
-	$points = $suite;
-
-	// trop court ? ne pas faire de (...)
-	if (spip_strlen($court) < max(0.75 * $taille, 2)) {
+	// tester s'il est nécessaire de couper le texte
+	if (spip_strlen($texte) <= $taille) {
 		$points = '';
-		$long = spip_substr($texte, 0, $taille + 1);
-		$texte = preg_replace('/(^|[^\s][\s]+)([\s]|[^\s]+)$/D' . $u, "\\1", $long);
-		// encore trop court ? couper au caractere
-		if (spip_strlen($texte) < 0.75 * $taille) {
-			$texte = spip_substr($long, 0, $taille);
-		}
 	} else {
-		$texte = $court;
-	}
+		// points de suite
+		if (is_null($suite)) {
+			$suite = (defined('_COUPER_SUITE') ? _COUPER_SUITE : '&nbsp;(...)');
+		}
+		$taille_suite = spip_strlen(filtrer_entites($suite));
 
-	if (strpos($texte, "\n")) {  // la fin est encore la : c'est qu'on n'a pas de texte de suite
-	$points = '';
+		// couper au mot precedent (ou au début de la chaîne si c'est le premier mot)
+		// on coupe avec un caractère de plus que la taille demandée afin de pouvoir
+		// détecter si le dernier mot du texte coupé est complet ou non. ce caractère
+		// excédentaire est ensuite supprimé par l'appel à preg_replace()
+		$long = spip_substr($texte, 0, max($taille + 1 - $taille_suite, 1));
+		$u = $GLOBALS['meta']['pcre_u'];
+		$court = preg_replace('/(^|[^\s][\s]+)([\s]|[^\s]+)$/D' . $u, "\\1", $long);
+		$points = $suite;
+
+		// trop court ? ne pas faire de (...)
+		if (spip_strlen($court) < max(0.75 * $taille, 2)) {
+			$points = '';
+			$long = spip_substr($texte, 0, $taille + 1);
+			$texte = preg_replace('/(^|[^\s][\s]+)([\s]|[^\s]+)$/D' . $u, "\\1", $long);
+			// encore trop court ? couper au caractere
+			if (spip_strlen($texte) < 0.75 * $taille) {
+				$texte = spip_substr($long, 0, $taille);
+			}
+		} else {
+			$texte = $court;
+		}
 	}
 
 	// remettre les paragraphes
