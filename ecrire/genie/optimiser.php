@@ -53,7 +53,7 @@ function optimiser_caches_contextes() {
 	sous_repertoire(_DIR_CACHE, 'contextes');
 	if (is_dir($d = _DIR_CACHE . 'contextes')) {
 		include_spip('inc/invalideur');
-		purger_repertoire($d, ['mtime' => time() - 48 * 24 * 3600, 'limit' => 10000]);
+		purger_repertoire($d, ['mtime' => time() - 48 * 3600, 'limit' => 10000]);
 	}
 }
 
