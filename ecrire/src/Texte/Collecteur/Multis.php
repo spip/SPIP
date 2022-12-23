@@ -82,7 +82,7 @@ class Multis extends AbstractCollecteur {
 	 * @return array [code de langue => texte]
 	 *     Peut retourner un code de langue vide, lorsqu'un texte par défaut est indiqué.
 	 **/
-	protected function extraire_trads($bloc) {
+	public function extraire_trads($bloc) {
 		$trads = [];
 
 		$langs = $this->collecteur($bloc, ']', '[', '@[\[]([a-z]{2,3}(_[a-z]{2,3})?(_[a-z]{2,3})?)[\]]@siS');

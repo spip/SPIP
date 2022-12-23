@@ -1763,6 +1763,27 @@ function extraire_multi($letexte, $lang = null, $options = []) {
 }
 
 /**
+ * Convertit le contenu d'une balise `<multi>` en un tableau
+ *
+ * Exemple de blocs.
+ * - `texte par défaut [fr] en français [en] en anglais`
+ * - `[fr] en français [en] en anglais`
+ *
+ * @deprecated 4.2
+ * @param string $bloc
+ *     Le contenu intérieur d'un bloc multi
+ * @return array [code de langue => texte]
+ *     Peut retourner un code de langue vide, lorsqu'un texte par défaut est indiqué.
+ **/
+function extraire_trads($bloc) {
+	include_spip("src/Texte/Collecteur/AbstractCollecteur");
+	include_spip("src/Texte/Collecteur/Multis");
+	$collecteurMultis = new Spip\Texte\Collecteur\Multis();
+	$trads = $collecteurMultis->extraire_trads($bloc);
+	return $trads;
+}
+
+/**
  * Calculer l'initiale d'un nom
  *
  * @param string $nom
