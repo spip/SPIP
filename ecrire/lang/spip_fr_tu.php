@@ -633,9 +633,13 @@ et te reconnecter au site.
 
 	// T
 	'taille_go' => '@taille@ Go',
+	'taille_go_bi' => '@taille@ Gio',
 	'taille_ko' => '@taille@ ko',
+	'taille_ko_bi' => '@taille@ kio',
 	'taille_mo' => '@taille@ Mo',
+	'taille_mo_bi' => '@taille@ Mio',
 	'taille_octets' => '@taille@ octets',
+	'taille_octets_bi' => '@taille@ octets',
 	'texte_actualite_site_1' => 'Quand tu seras familiarisé(e) avec l’interface, tu pourras cliquer sur « ',
 	'texte_actualite_site_2' => 'interface complète',
 	'texte_actualite_site_3' => ' » pour ouvrir plus de possibilités.',
