@@ -85,18 +85,20 @@ class Multis extends AbstractCollecteur {
 	protected function extraire_trads($bloc) {
 		$trads = [];
 
-		$langs = $this->collecteur($bloc, ']', '[', '@[\[]([a-z]{2,3}(_[a-z]{2,3})?(_[a-z]{2,3})?)[\]]@siS');
-		$lang = '';
-		$pos_prev = 0;
-		foreach ($langs as $l) {
-			$pos = $l['pos'];
-			if ($lang or $pos > $pos_prev) {
-				$trads[$lang] = substr($bloc, $pos_prev, $pos - $pos_prev);
+		if (strlen($bloc)) {
+			$langs = $this->collecteur($bloc, ']', '[', '@[\[]([a-z]{2,3}(_[a-z]{2,3})?(_[a-z]{2,3})?)[\]]@siS');
+			$lang = '';
+			$pos_prev = 0;
+			foreach ($langs as $l) {
+				$pos = $l['pos'];
+				if ($lang or $pos > $pos_prev) {
+					$trads[$lang] = substr($bloc, $pos_prev, $pos - $pos_prev);
+				}
+				$lang = $l['match'][1];
+				$pos_prev = $pos + $l['length'];
 			}
-			$lang = $l['match'][1];
-			$pos_prev = $pos + $l['length'];
+			$trads[$lang] = substr($bloc, $pos_prev);
 		}
-		$trads[$lang] = substr($bloc, $pos_prev);
 
 		return $trads;
 	}
@@ -133,14 +135,10 @@ class Multis extends AbstractCollecteur {
 
 		// si on veut seulement detecter la présence, on peut retourner tel quel
 		if (empty($options['detecter_presence'])) {
-
-			$pos_prev = 0;
 			foreach ($multis as $k => &$multi) {
-
 				$multi['texte'] = $multi['match'][1];
 				// extraire les trads du texte
-				$trads = $this->extraire_trads($multi['match'][1]);
-				$multi['trads'] = $trads;
+				$multi['trads'] = $this->extraire_trads($multi['texte']);
 			}
 		}
 
@@ -185,7 +183,10 @@ class Multis extends AbstractCollecteur {
 
 					// chercher la version de la langue courante
 					$trads = $m['trads'];
-					if ($l = approcher_langue($trads, $lang)) {
+					if (empty($trads)) {
+						$trad = '';
+					}
+					elseif ($l = approcher_langue($trads, $lang)) {
 						$trad = $trads[$l];
 					} else {
 						if ($lang_defaut == 'aucune') {
