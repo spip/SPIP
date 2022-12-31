@@ -143,6 +143,9 @@ function balise_LOGO__dist($p) {
 /**
  * Calcule le code HTML pour l'image d'un logo
  *
+ * @uses quete_logo()
+ * @uses quete_html_logo()
+ *
  * @param string $id_objet
  *     Nom de la clé primaire de l'objet (id_article, ...)
  * @param string $_id_objet
@@ -188,7 +191,7 @@ function logo_survol($id_objet, $_id_objet, $type, $align, $fichier, $_lien, $p,
 	}
 
 	if ($champ) {
-		return "quete_string_logo($code, '$champ')";
+		return "table_valeur($code, '".addslashes($champ)."')";
 	}
 
 	$align = preg_replace(',\W,', '', $align);
