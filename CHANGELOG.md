@@ -9,6 +9,8 @@
 
 ### Added
 
+- #3719 Permettre l’édition d’un logo (comme un document) dans l’interface privé
+- #3719 Balise `#ID_LOGO_` (tel que `#ID_LOGO_ARTICLE`) retourne l’identifiant du document utilisé pour le logo d’un objet
 - #4874 Normaliser et appeler l'API de notifications systématiquement sur la modification des contenus éditoriaux
 - #5380 Classes CSS utilitaires pour placer des éléments en sticky dans l'espace privé
 - #5056 Chargement de l’autoloader de Composer aux points d’entrées de SPIP
