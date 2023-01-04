@@ -1,0 +1,27 @@
+<div class="formulaire_spip formulaire_oubli">
+[<p class="reponse_formulaire reponse_formulaire_erreur" role="alert">(#ENV*{message_erreur})</p>]
+[<p class="reponse_formulaire reponse_formulaire_ok" role="status">(#ENV*{message_ok})</p>]
+[(#ENV*{editable}|?{' '})
+<form id="oubli_form" action="[(#ENV{action})]" method="post">
+	[(#REM) activer le traitement auto et dispatch sur charger/verifier/traiter]
+	#ACTION_FORMULAIRE
+	<fieldset>
+		<legend><:pass_nouveau_pass:></legend>
+		<p><:pass_procedure_changer:></p>
+		<div class="editer-groupe">
+			<div class="editer saisie_oubli obligatoire[ (#ENV*{erreurs}|table_valeur{oubli}|oui)erreur]">
+				<label for="oubli"><:entree_adresse_email:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{oubli})</span>]
+				<input[ (#HTML5|?{type="email" class="text email" autofocus="autofocus" required="required",type="text" class="text"})] name='oubli' id='oubli' value="#ENV**{oubli}" autocapitalize="off" autocorrect="off" />
+			</div>
+		</div>
+	</fieldset>
+	[(#REM) Piege a robots spammeurs ]
+	<p style="display: none;">
+		<label for="nobot"><:antispam_champ_vide:></label>
+		<input type="text" class="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" />
+	</p>
+	<p class="boutons"><input type="submit" class="btn submit" value="<:pass_ok:>" /></p>
+</form>
+]
+</div>
