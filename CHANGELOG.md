@@ -46,6 +46,7 @@
 
 ### Fixed
 
+- #5423 Ajouter les headers `Last-Modified` et `Etag` quand on livre un fichier
 - #5424 Utiliser un délai de 48 h et non pas de 48 jours pour vider les contextes Ajax
 - #5379 spip/medias#4873 Pouvoir soumettre le formulaire de recherche privé avec la touche entrée.
 - #5035 Éviter une erreur unserialize dans `lister_themes_prives()`
