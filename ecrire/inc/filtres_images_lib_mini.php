@@ -1395,6 +1395,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process = 'AUTO
 	}
 
 	elseif ($valeurs['format_source'] === 'svg') {
+		include_spip('inc/svg');
 		if ($svg = svg_redimensionner($valeurs['fichier'], $destWidth, $destHeight)) {
 			$format_sortie = 'svg';
 			$vignette = $destination . '.' . $format_sortie;
