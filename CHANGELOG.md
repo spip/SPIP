@@ -48,6 +48,7 @@
 
 ### Fixed
 
+- #5418 Le filtre `modifier_class` accèpte tous les caractères
 - #5357 Intitulé plus explicite du formulaire d’inscription
 - #5398 Inclusion manquante lors de certains traitements d’image SVG
 - #5423 Ajouter les headers `Last-Modified` et `Etag` quand on livre un fichier
