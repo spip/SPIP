@@ -22,6 +22,7 @@
 
 ### Changed
 
+- #5433 Déplacement des 2 formulaires oubli et mot_de_passe dans le core
 - #5402 Déplacement du `#FORMULAIRE_INSCRIPTION` directement dans le core
 - #5086 Le filtre de date `recup_heure()` sait extraire `hh:mm` en plus de `hh:mm:ss`
 - #5046 Le filtre `taille_en_octets()` retourne par défaut des unités cohérentes (en kio, Mio… )
