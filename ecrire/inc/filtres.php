@@ -3188,7 +3188,7 @@ function filtre_match_dist(?string $texte, $expression, $modif = 'UuimsS', $capt
  * @return string
  *     Texte
  **/
-function replace($texte, $expression, $replace = '', $modif = 'UimsS') {
+function replace(?string $texte, string $expression, string $replace = '', string $modif = 'UimsS'): string {
 	if (null === $texte) {
 		return '';
 	}
@@ -3196,7 +3196,7 @@ function replace($texte, $expression, $replace = '', $modif = 'UimsS') {
 	$expression = str_replace('\/', '/', $expression);
 	$expression = str_replace('/', '\/', $expression);
 
-	return preg_replace('/' . $expression . '/' . $modif, $replace, $texte);
+	return (string) preg_replace('/' . $expression . '/' . $modif, $replace, $texte);
 }
 
 
