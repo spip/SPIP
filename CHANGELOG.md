@@ -22,6 +22,7 @@
 
 ### Changed
 
+- #5402 Déplacement du `#FORMULAIRE_INSCRIPTION` directement dans le core
 - #5086 Le filtre de date `recup_heure()` sait extraire `hh:mm` en plus de `hh:mm:ss`
 - #5046 Le filtre `taille_en_octets()` retourne par défaut des unités cohérentes (en kio, Mio… )
 - #5056 SPIP nécessite certaines dépendances via Composer (son archive zip contiendra le nécessaire)
@@ -46,6 +47,7 @@
 
 ### Fixed
 
+- #5357 Intitulé plus explicite du formulaire d’inscription
 - #5398 Inclusion manquante lors de certains traitements d’image SVG
 - #5423 Ajouter les headers `Last-Modified` et `Etag` quand on livre un fichier
 - #5424 Utiliser un délai de 48 h et non pas de 48 jours pour vider les contextes Ajax
