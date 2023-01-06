@@ -1,6 +1,6 @@
 <?php
 
-namespace Spip\Sql;
+namespace Spip\Sql\Sqlite;
 
 /*
  * Classe pour partager les lancements de requête
@@ -11,14 +11,14 @@ namespace Spip\Sql;
  * - peut tracer les requêtes
  */
 
-class SqliteRequeteur
+class Requeteur
 {
 	/** @var string texte de la requête */
 	public $query = ''; // la requete
 	/** @var string Nom de la connexion */
 	public $serveur = '';
-	/** @var PDO Identifiant de la connexion SQLite */
-	public $link = '';
+	/** @var \PDO|null Identifiant de la connexion SQLite */
+	public $link = null;
 	/** @var string Prefixe des tables SPIP */
 	public $prefixe = '';
 	/** @var string Nom de la base de donnée */
@@ -33,7 +33,6 @@ class SqliteRequeteur
 	 * Constructeur
 	 *
 	 * @param string $serveur
-	 * @return bool
 	 */
 	public function __construct($serveur = '')
 	{
@@ -43,7 +42,7 @@ class SqliteRequeteur
 		if (!($this->link = _sqlite_link($this->serveur)) && (!defined('_ECRIRE_INSTALL') || !_ECRIRE_INSTALL)) {
 			spip_log('Aucune connexion sqlite (link)', 'sqlite.' . _LOG_ERREUR);
 
-			return false;
+			return;
 		}
 
 		$this->sqlite_version = _sqlite_is_version('', $this->link);
@@ -62,7 +61,7 @@ class SqliteRequeteur
 	 *     Requête à exécuter
 	 * @param bool|null $tracer
 	 *     true pour tracer la requête
-	 * @return bool|PDOStatement|array
+	 * @return bool|\PDOStatement|array
 	 */
 	public function executer_requete($query, $tracer = null)
 	{
@@ -90,15 +89,6 @@ class SqliteRequeteur
 			} catch (\PDOException $e) {
 				spip_log('PDOException: ' . $e->getMessage(), 'sqlite.' . _LOG_DEBUG);
 				$r = false;
-			}
-
-			// comptage : oblige de compter le nombre d'entrees retournees
-			// par une requete SELECT
-			// aucune autre solution ne donne le nombre attendu :( !
-			// particulierement s'il y a des LIMIT dans la requete.
-			if ($r and strtoupper(substr(ltrim($query), 0, 6)) === 'SELECT') {
-				// noter le link et la query pour faire le comptage *si* on en a besoin
-				$r->spipSqliteRowCount = [$this->link, $query];
 			}
 
 			// loger les warnings/erreurs eventuels de sqlite remontant dans PHP

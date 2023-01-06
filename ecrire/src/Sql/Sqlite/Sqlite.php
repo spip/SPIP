@@ -1,6 +1,6 @@
 <?php
 
-namespace Spip\Sql;
+namespace Spip\Sql\Sqlite;
 
 /**
  * Gère l'envoi et la réception de requêtes à SQLite, qui peuvent être
@@ -8,7 +8,7 @@ namespace Spip\Sql;
  **/
 class Sqlite
 {
-	/** @var SqliteRequeteur[] Liste des instances de requêteurs créés */
+	/** @var Requeteur[] Liste des instances de requêteurs créés */
 	public static $requeteurs = [];
 	/** @var bool[] Pour chaque connexion, flag pour savoir si une transaction est en cours */
 	public static $transaction_en_cours = [];
@@ -28,7 +28,7 @@ class Sqlite
 	public static function requeteur($serveur)
 	{
 		if (!isset(static::$requeteurs[$serveur])) {
-			static::$requeteurs[$serveur] = new SqliteRequeteur($serveur);
+			static::$requeteurs[$serveur] = new Requeteur($serveur);
 		}
 
 		return static::$requeteurs[$serveur];
@@ -49,7 +49,7 @@ class Sqlite
 	public static function traduire_requete($query, $serveur)
 	{
 		$requeteur = static::requeteur($serveur);
-		$traducteur = new SqliteTraducteur($query, $requeteur->prefixe, $requeteur->sqlite_version);
+		$traducteur = new Traducteur($query, $requeteur->prefixe, $requeteur->sqlite_version);
 
 		return $traducteur->traduire_requete();
 	}
