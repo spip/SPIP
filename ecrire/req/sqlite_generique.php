@@ -10,7 +10,8 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-use Spip\Sql\Sqlite;
+use Spip\Sql\Sqlite\Sqlite;
+use Spip\Sql\Sqlite\PDOStatement;
 
 /**
  * Ce fichier contient les fonctions gérant
@@ -89,39 +90,36 @@ function req_sqlite_dist($addr, $port, $login, $pass, $db = '', $prefixe = '', $
 	$define = 'spip_sqlite' . $sqlite_version . '_constantes';
 	$define();
 
-	$ok = false;
 	if (!$db) {
 		// si pas de db ->
 		// base temporaire tant qu'on ne connait pas son vrai nom
 		// pour tester la connexion
 		$db = '_sqlite' . $sqlite_version . '_install';
 		$tmp = _DIR_DB . $db . '.sqlite';
-		$ok = $link = new \PDO("sqlite:$tmp");
+		$link = spip_sqlite_open($tmp);
 	} else {
 		// Ouvrir (eventuellement creer la base)
-		$ok = $link = new \PDO("sqlite:$f");
+		$link = spip_sqlite_open($f);
 	}
 
-	if (!$ok) {
-		$e = _sqlite_last_error_from_link($link);
-		spip_log("Impossible d'ouvrir la base SQLite($sqlite_version) $f : $e", 'sqlite.' . _LOG_HS);
+	if (!$link) {
+		spip_log("Impossible d'ouvrir la base SQLite($sqlite_version) $f", 'sqlite.' . _LOG_HS);
 
 		return false;
 	}
 
-	if ($link) {
-		$last_connect = [
-			'addr' => $addr,
-			'port' => $port,
-			'login' => $login,
-			'pass' => $pass,
-			'db' => $db,
-			'prefixe' => $prefixe,
-		];
-		// etre sur qu'on definit bien les fonctions a chaque nouvelle connexion
-		include_spip('req/sqlite_fonctions');
-		_sqlite_init_functions($link);
-	}
+	$last_connect = [
+		'addr' => $addr,
+		'port' => $port,
+		'login' => $login,
+		'pass' => $pass,
+		'db' => $db,
+		'prefixe' => $prefixe,
+	];
+
+	// etre sur qu'on definit bien les fonctions a chaque nouvelle connexion
+	include_spip('req/sqlite_fonctions');
+	_sqlite_init_functions($link);
 
 	return [
 		'db' => $db,
@@ -129,6 +127,19 @@ function req_sqlite_dist($addr, $port, $login, $pass, $db = '', $prefixe = '', $
 		'link' => $link,
 		'total_requetes' => 0,
 	];
+}
+
+/**
+ * Ouvre une base SQLite avec PDO en spécifiant une classe spécifique pour les résultats
+ *
+ * @see \Spip\Sql\Sqlite\PDOStatement
+ * @param string $file
+ * @return PDO
+ */
+function spip_sqlite_open(string $file): \PDO {
+	$PDO = new \PDO("sqlite:$file");
+	$PDO->setAttribute(\PDO::ATTR_STATEMENT_CLASS , [\Spip\Sql\Sqlite\PDOStatement::class, [&$PDO]]);
+	return $PDO;
 }
 
 
@@ -626,8 +637,7 @@ function spip_sqlite_create_index($nom, $table, $champs, $unique = '', $serveur 
  * avec `sql_select()`
  *
  * En PDO/sqlite3, il faut calculer le count par une requete count(*)
- * pour les resultats de SELECT
- * cela est fait sans spip_sqlite_query()
+ * pour les resultats de SELECT.
  *
  * @param PDOStatement $r Jeu de résultats
  * @param string $serveur Nom de la connexion
@@ -642,25 +652,18 @@ function spip_sqlite_count($r, $serveur = '', $requeter = true)
 
 	// select ou autre (insert, update,...) ?
 	// (link,requete) a compter
-	if (is_array($r->spipSqliteRowCount)) {
-		list($link, $query) = $r->spipSqliteRowCount;
-		// amelioration possible a tester intensivement : pas de order by pour compter !
-		// $query = preg_replace(",ORDER BY .+(LIMIT\s|HAVING\s|GROUP BY\s|$),Uims","\\1",$query);
-		$query = "SELECT count(*) as zzzzsqlitecount FROM ($query)";
+	if (strtoupper(substr(ltrim($r->queryString), 0, 6)) === 'SELECT') {
+		$link = $r->getPDO();
+		$query = "SELECT count(*) as zzzzsqlitecount FROM ({$r->queryString})";
 		$l = $link->query($query);
 		$i = 0;
 		if ($l and $z = $l->fetch()) {
 			$i = (int) $z['zzzzsqlitecount'];
 		}
-		$r->spipSqliteRowCount = $i;
+		return $i;
 	}
-	if (isset($r->spipSqliteRowCount)) {
-		// Ce compte est faux s'il y a des limit dans la requete :(
-		// il retourne le nombre d'enregistrements sans le limit
-		return $r->spipSqliteRowCount;
-	} else {
-		return $r->rowCount();
-	}
+
+	return $r->rowCount();
 }
 
 
@@ -2085,9 +2088,9 @@ function _sqlite_is_version($version = '', $link = '', $serveur = '', $requeter 
  * Retrouver un link d'une connexion SQLite
  *
  * @param string $serveur Nom du serveur
- * @return PDO Information de connexion pour SQLite
+ * @return \PDO|null Information de connexion pour SQLite
  */
-function _sqlite_link($serveur = '')
+function _sqlite_link($serveur = ''): ?\PDO
 {
 	$link = &$GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
 

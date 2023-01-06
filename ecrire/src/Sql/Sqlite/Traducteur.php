@@ -1,13 +1,13 @@
 <?php
 
-namespace Spip\Sql;
+namespace Spip\Sql\Sqlite;
 
 /**
  * Cette classe est presente essentiellement pour un preg_replace_callback
  * avec des parametres dans la fonction appelee que l'on souhaite incrementer
  * (fonction pour proteger les textes)
  */
-class SqliteTraducteur
+class Traducteur
 {
 	/** @var string $query texte de la requête */
 	public $query = '';
