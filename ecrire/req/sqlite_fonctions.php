@@ -349,7 +349,7 @@ function _sqlite_func_preg_replace($quoi, $cherche, $remplace) {
  * @return string, l'extrait trouve.
  **/
 function _sqlite_func_extraire_multi($quoi, $lang) {
-	if (strpos($quoi, '<')) {
+	if (strpos($quoi, '<') !== false) {
 		include_spip("src/Texte/Collecteur/AbstractCollecteur");
 		include_spip("src/Texte/Collecteur/Multis");
 		$collecteurMultis = new Spip\Texte\Collecteur\Multis();
