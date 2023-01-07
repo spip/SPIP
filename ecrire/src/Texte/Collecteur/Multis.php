@@ -132,7 +132,6 @@ class Multis extends AbstractCollecteur {
 
 		// collecter les matchs de la preg
 		$multis = $this->collecteur($texte, '', '<multi', $this->preg_multi, empty($options['detecter_presence']) ? 0 : 1);
-
 		// si on veut seulement detecter la présence, on peut retourner tel quel
 		if (empty($options['detecter_presence'])) {
 			foreach ($multis as $k => &$multi) {
@@ -194,15 +193,15 @@ class Multis extends AbstractCollecteur {
 						} else {
 							// langue absente, prendre le fr ou une langue précisée (meme comportement que inc/traduire.php)
 							// ou la premiere dispo
-							if (!$l = approcher_langue($trads, $options['lang_defaut'])) {
+							if (!$l = approcher_langue($trads, $lang_defaut)) {
 								$l = array_keys($trads);
 								$l = reset($l);
 							}
+							$trad = $trads[$l];
 
 							// mais typographier le texte selon les regles de celle-ci
 							// Attention aux blocs multi sur plusieurs lignes
 							if ($appliquer_typo) {
-								$trad = $trads[$l];
 								$typographie = charger_fonction(lang_typo($l), 'typographie');
 								$trad = $typographie($trad);
 
