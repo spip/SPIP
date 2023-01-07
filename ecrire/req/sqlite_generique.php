@@ -650,7 +650,7 @@ function spip_sqlite_count($r, $serveur = '', $requeter = true)
 		$l = $link->query($query);
 		$i = 0;
 		if ($l and $z = $l->fetch()) {
-			$i = $z['zzzzsqlitecount'];
+			$i = (int) $z['zzzzsqlitecount'];
 		}
 		$r->spipSqliteRowCount = $i;
 	}
@@ -699,7 +699,8 @@ function spip_sqlite_countsel(
 		$requeter
 	);
 	if ((is_resource($r) or is_object($r)) && $requeter) { // ressource : sqlite2, object : sqlite3
-		list($r) = spip_sqlite_fetch($r, SPIP_SQLITE3_NUM, $serveur);
+		[$r] = spip_sqlite_fetch($r, SPIP_SQLITE3_NUM, $serveur);
+		$r = (int) $r;
 	}
 
 	return $r;
