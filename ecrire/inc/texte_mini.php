@@ -434,14 +434,15 @@ function couper($texte, $taille = 50, $suite = null) {
 		// excédentaire est ensuite supprimé par l'appel à preg_replace()
 		$long = spip_substr($texte, 0, max($taille + 1 - $taille_suite, 1));
 		$u = $GLOBALS['meta']['pcre_u'];
-		$court = preg_replace('/(^|[^\s][\s]+)([\s]|[^\s]+)$/D' . $u, "\\1", $long);
+		$court = preg_replace('/(^|([^\s ])[\s ]+)([\s ]|[^\s ]+)?$/D' . $u, "\\2", $long);
 		$points = $suite;
 
 		// trop court ? ne pas faire de (...)
 		if (spip_strlen($court) < max(0.75 * $taille, 2)) {
 			$points = '';
 			$long = spip_substr($texte, 0, $taille + 1);
-			$texte = preg_replace('/(^|[^\s][\s]+)([\s]|[^\s]+)$/D' . $u, "\\1", $long);
+			preg_match('/(^|([^\s ])[\s ]+)([\s ]|[^\s ]+)?$/D' . $u, $long, $m);
+			$texte = preg_replace('/(^|([^\s ])[\s ]+)([\s ]|[^\s ]+)?$/D' . $u, "\\2", $long);
 			// encore trop court ? couper au caractere
 			if (spip_strlen($texte) < 0.75 * $taille) {
 				$texte = spip_substr($long, 0, $taille);
