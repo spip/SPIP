@@ -48,6 +48,7 @@
 
 ### Fixed
 
+- #5422 correction du filtre `|couper` dans les cas aux limites
 - #5366 spip/dist#4857 Les blocs de code avec des lignes trop longues retournent à la ligne dans l’espace privé (comme dans le public)
 - #5418 Le filtre `modifier_class` accèpte tous les caractères
 - #5357 Intitulé plus explicite du formulaire d’inscription
