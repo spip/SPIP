@@ -42,10 +42,10 @@ class Data extends AbstractIterateur implements Iterator
 	 * @param array $info
 	 */
 	public function __construct(array $command, array $info = []) {
+		include_spip('iterateur/data');
 		$this->type = 'DATA';
 		$this->command = $command;
 		$this->info = $info;
-
 		$this->select($command);
 	}
 
@@ -270,7 +270,6 @@ class Data extends AbstractIterateur implements Iterator
 							$ttl = 10;
 						}
 					}
-
 					if (
 						!$this->err
 						and $data_to_array = charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true)
