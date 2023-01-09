@@ -55,37 +55,47 @@ function spip_connect($serveur = '', $version = '') {
 
 	// Premiere connexion ?
 	if (!($old = isset($GLOBALS['connexions'][$index]))) {
-		$f = (!preg_match('/^[\w\.]*$/', $serveur))
-			? '' // nom de serveur mal ecrit
-			: ($serveur ?
-				(_DIR_CONNECT . $serveur . '.php') // serveur externe
-				: (_FILE_CONNECT ?: ($install ? _FILE_CONNECT_TMP // init du serveur principal
-						: ''))); // installation pas faite
+		$f = '';
+		if ($serveur) {
+			// serveur externe et nom de serveur bien ecrit ?
+			if (defined('_DIR_CONNECT')
+				and preg_match('/^[\w\.]*$/', $serveur)) {
+				$f = _DIR_CONNECT . $serveur . '.php';
+				if (!is_readable($f) and !$install) {
+					// chercher une declaration de serveur dans le path
+					// qui peut servir à des plugins à declarer des connexions à une base sqlite
+					// Ex: sert aux boucles POUR et au plugin-dist dump pour se connecter sur le sqlite du dump
+					$f = find_in_path("$serveur.php", 'connect/');
+				}
+			}
+		}
+		else {
+			if (defined('_FILE_CONNECT') and _FILE_CONNECT) {
+				// init du serveur principal
+				$f = _FILE_CONNECT;
+			}
+			elseif ($install and defined('_FILE_CONNECT_TMP')) {
+				// installation en cours
+				$f = _FILE_CONNECT_TMP;
+			}
+		}
 
 		unset($GLOBALS['db_ok']);
 		unset($GLOBALS['spip_connect_version']);
-		if ($f) {
-			if (is_readable($f)) {
-				include($f);
-			} elseif ($serveur and !$install) {
-				// chercher une declaration de serveur dans le path
-				// qui pourra un jour servir a declarer des bases sqlite
-				// par des plugins. Et sert aussi aux boucles POUR.
-				find_in_path("$serveur.php", 'connect/', true);
+		if ($f and is_readable($f)) {
+			include($f);
+			if (!isset($GLOBALS['db_ok'])) {
+				spip_log("spip_connect: fichier de connexion '$f' OK mais echec connexion au serveur", _LOG_HS);
 			}
+		}
+		else {
+			spip_log("spip_connect: fichier de connexion '$f' non trouve, pas de connexion serveur", _LOG_HS);
 		}
 		if (!isset($GLOBALS['db_ok'])) {
 			// fera mieux la prochaine fois
 			if ($install) {
 				return false;
 			}
-			if ($f and is_readable($f)) {
-				spip_log("spip_connect: fichier de connexion '$f' OK.", _LOG_INFO_IMPORTANTE);
-			} else {
-				spip_log("spip_connect: fichier de connexion '$f' non trouve", _LOG_INFO_IMPORTANTE);
-			}
-			spip_log("spip_connect: echec connexion ou serveur $index mal defini dans '$f'.", _LOG_HS);
-
 			// ne plus reessayer si ce n'est pas l'install
 			return $GLOBALS['connexions'][$index] = false;
 		}
