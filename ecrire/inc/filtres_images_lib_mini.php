@@ -1409,7 +1409,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process = 'AUTO
 			define('_CONVERT_COMMAND', 'convert');
 		} // Securite : mes_options.php peut preciser le chemin absolu
 		if (!defined('_RESIZE_COMMAND')) {
-			define('_RESIZE_COMMAND', _CONVERT_COMMAND . ' -quality ' . _IMG_CONVERT_QUALITE . ' -resize %xx%y! %src %dest');
+			define('_RESIZE_COMMAND', _CONVERT_COMMAND . ' -quality ' . _IMG_CONVERT_QUALITE . ' -orient Undefined -resize %xx%y! %src %dest');
 		}
 		$vignette = $destination . '.' . $format_sortie;
 		$commande = str_replace(
