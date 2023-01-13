@@ -47,6 +47,7 @@
 - #5108 `id_table_objet()` typé comme `objet_type()` que la fonction appelle
 
 ### Fixed
+- spip/dump#4721 Correction de la sauvegarde Mysql
 - #5445 Permettre d'insérer plusieurs adresses séparées par des virgules dans le formulaire de configuration des annonces de nouveautés
 - #5430 Correction du chargement des boucles DATA.
 - #5422 correction du filtre `|couper` dans les cas aux limites
