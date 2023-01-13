@@ -1,0 +1,202 @@
+/* Voir minipublic.vars.css pour la définition des variables */
+
+h1 {font-size: 1.5em; line-height: 1.1; font-weight: bold}
+h2 {font-size: 1.25em; line-height: 1}
+b, strong { font-weight: bold}
+i, em {font-style: italic}
+a { text-decoration: underline; color:var(--minipublic-color-theme-dark);}
+a:hover, a:focus, a:active {text-decoration: none; background: var(--minipublic-color-theme-dark); color:#fff;}
+
+.btn,
+input.submit,
+input.reset,
+button {
+	position: relative;
+	box-sizing: border-box;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	vertical-align: middle;
+	padding: var(--minipublic-btn-padding-y) var(--minipublic-btn-padding-x);
+	margin-bottom: var(--minipublic-btn-margin);
+	background-color: var(--minipublic-btn-color-main-bg);
+	color: var(--minipublic-btn-color-main-text);
+	border: 1px solid var(--minipublic-btn-color-main-border);
+	border-bottom-color: var(--minipublic-btn-color-border-accent);
+	border-radius: var(--minipublic-btn-border-radius);
+	text-decoration: none;
+	font-size: var(--minipublic-btn-font-size);
+	font-family: inherit;
+	font-weight: 400;
+	line-height: var(--minipublic-line-height);
+	user-select: none;
+	transition: all 0.1s;
+}
+a.btn,
+#wysiwyg a.btn, #wysiwyg a.btn:hover,
+input.submit,
+input.reset,
+button {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+/* Survol */
+.btn:hover,
+.btn:focus,
+input.submit:hover,
+input.submit:focus,
+input.reset:hover,
+input.reset:focus,
+button:hover {
+	background-color: var(--minipublic-btn-color-main-hover-bg);
+	border-color: var(--minipublic-btn-color-main-hover-border);
+	border-bottom-color: var(--minipublic-btn-color-border-accent);
+	color: var(--minipublic-btn-color-main-hover-text);
+	text-decoration: none;
+	transition: all 0.2s;
+}
+/* Focus : outline */
+.btn:focus,
+input.submit:focus,
+input.reset:focus,
+button:focus {
+	box-shadow: 0 0 0 0.2rem var(--minipublic-btn-color-focus);
+}
+/* Actif */
+.btn:active,
+input.submit:active,
+input.reset:active,
+button:active {
+	background-color: var(--minipublic-btn-color-main-active-bg);
+	border-color: var(--minipublic-btn-color-main-active-border);
+	border-bottom-color: var(--minipublic-btn-color-border-accent);
+	color: var(--minipublic-btn-color-main-active-text);
+}
+
+
+/* Alertes */
+.msg-alert,
+.msg-alert * {
+box-sizing: border-box;
+}
+.msg-alert,
+.notice, .error, .success,
+.formulaire_spip .reponse_formulaire {
+	position: relative;
+	padding: var(--minipublic-alert-spacing-y) var(--minipublic-alert-spacing-x);
+	/* gouttière + taille icone + espacement arbitraire avec le texte */
+	padding-left: calc(var(--minipublic-alert-spacing-x) + var(--minipublic-alert-iconsize) + 0.75rem);
+	margin: calc(var(--minipublic-margin-bottom) * 1.5) 0; /* Idem boîtes */
+	background-repeat: no-repeat;
+	/* Aligner icône au niveau de la 1ère ligne de texte */
+	background-position: left var(--minipublic-alert-spacing-x) top calc(var(--minipublic-alert-spacing-y) - ((var(--minipublic-alert-iconsize) - var(--minipublic-line-height)) / 2));
+	background-size: var(--minipublic-alert-iconsize);
+	font-weight: normal;
+	border-radius: var(--minipublic-border-radius);
+	box-shadow: inset 0 0 1.5em hsla(0, 0%, 0%, 0.02);
+	background-color: var(--minipublic-color-gray-lighter);
+	border-left: 0.5rem solid var(--minipublic-color-gray-light);
+}
+.msg-alert a {
+	color: var(--minipublic-color-black);
+	text-decoration: underline;
+}
+
+/* Code */
+.msg-alert tt,
+.msg-alert code {
+	color: var(--minipublic-color-black);
+}
+
+/* Notice */
+.msg-alert.notice,
+.notice {
+	color:            hsl(var(--minipublic-color-notice--h), var(--minipublic-color-notice--s), 18%);
+	background-color: hsl(var(--minipublic-color-notice--h), 90%, 88%);
+	border-color:     hsl(var(--minipublic-color-notice--h), 100%, 48%);
+}
+
+/* Erreur */
+.msg-alert.error,
+.formulaire_spip .reponse_formulaire_erreur,
+.error {
+	color:            hsl(var(--minipublic-color-error--h), var(--minipublic-color-error--s), 18%);
+	background-color: hsl(var(--minipublic-color-error--h), 60%, 95%);
+	border-color:     hsl(var(--minipublic-color-error--h), var(--minipublic-color-error--s), 50%);
+}
+
+/* Succès */
+.msg-alert.success,
+.formulaire_spip .reponse_formulaire_ok,
+.success {
+	color:            hsl(var(--minipublic-color-success--h), var(--minipublic-color-success--s), 15%);
+	background-color: hsl(var(--minipublic-color-success--h), 55%, 90%);
+	border-color:     hsl(var(--minipublic-color-success--h), var(--minipublic-color-success--s), 45%);
+}
+
+/* Information */
+.msg-alert.info,
+.information {
+	color:            hsl(var(--minipublic-color-info--h), var(--minipublic-color-info--s), 25%);
+	background-color: hsl(var(--minipublic-color-info--h), 45%, 93%);
+	border-color:     hsl(var(--minipublic-color-info--h), var(--minipublic-color-info--s), 60%);
+}
+
+.minipublic  {
+	margin:0;
+	font-size: 1em;
+	color: #333;
+	border:0;
+	padding: 0;
+	font-family: arial, helvetica, sans-serif;
+	line-height: var(--minipublic-line-height);
+	background-size: cover;
+	background-position: center;
+	background: var(--minipublic-color-theme);
+	background: radial-gradient(circle, var(--minipublic-color-theme) 20%, var(--minipublic-color-theme-dark) 100%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+}
+
+.minipublic-bloc {
+	border: 1px solid var(--minipublic-color-gray-light);
+	border-radius: var(--minipublic-border-radius);
+	margin: 5rem auto;
+	width: 30em;
+	max-width: 100vw;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	text-align: center;
+	min-height: 20em;
+}
+
+.minipublic-bloc header {
+	background: rgba(255,255,255,85%);
+	padding: 1.5em;
+	text-align: center;
+	border-top-left-radius: var(--minipublic-border-radius);
+	border-top-right-radius: var(--minipublic-border-radius);
+}
+.minipublic-bloc header h1+h2 {
+	margin-top: 0.75rem;
+}
+
+.minipublic-bloc .corps {
+	background: rgba(255,255,255,95%);
+	padding: 1.5em;
+	overflow: auto;
+	flex-grow: 1;
+}
+
+.minipublic-bloc footer {
+	background: rgba(255,255,255,85%);
+	padding: 1.5em;
+	text-align: center;
+	border-bottom-left-radius: var(--minipublic-border-radius);
+	border-bottom-right-radius: var(--minipublic-border-radius);
+}
