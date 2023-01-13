@@ -1,0 +1,66 @@
+:root {
+	/*
+	Définie par défaut par minipublic() d'après la config couleur_login
+	Mais vous pouvez forcer une valeur ici
+	--minipublic-color-theme--h: 337;
+	--minipublic-color-theme--s: 81%;
+	--minipublic-color-theme--l: 47%;
+	 */
+	--minipublic-color-theme--hs: var(--minipublic-color-theme--h), var(--minipublic-color-theme--s);
+
+	--minipublic-color-theme: hsl(var(--minipublic-color-theme--hs), var(--minipublic-color-theme--l));
+	--minipublic-color-theme-light: hsl(var(--minipublic-color-theme--hs), calc(var(--minipublic-color-theme--l) + 25%));
+	--minipublic-color-theme-dark: hsl(var(--minipublic-color-theme--hs), calc(var(--minipublic-color-theme--l) - 25%));
+
+	--minipublic-color-gray-lighter: rgba(255, 255, 255, 0.7);
+	--minipublic-color-gray-light: rgba(255, 255, 255, 0.5);
+	--minipublic-color-gray-dark: rgba(0, 0, 0, 0.5);
+	--minipublic-color-black: #333;
+
+
+	--minipublic-line-height: 1.5em;
+	--minipublic-border-radius: 0.25rem;
+	--minipublic-margin-bottom: 1.5em;
+
+	/* couleurs partagées */
+	--minipublic-btn-color-white:                #fff;
+	--minipublic-btn-color-black:                #333;
+	--minipublic-btn-color-border-accent:        hsla(0, 0%, 0%, 0.2);
+	--minipublic-btn-color-focus:                hsla(var(--minipublic-color-theme--h), calc(var(--minipublic-color-theme--s) * 3), var(--minipublic-color-theme--l), 0.5);
+
+	--minipublic-btn-color-main-bg:              hsl(var(--minipublic-color-theme--hs), calc(var(--minipublic-color-theme--l) * 0.9));
+	--minipublic-btn-color-main-border:          var(--minipublic-btn-color-main-bg);
+	--minipublic-btn-color-main-text:            var(--minipublic-btn-color-white);
+	--minipublic-btn-color-main-hover-bg:        hsl(var(--minipublic-color-theme--hs), calc(var(--minipublic-color-theme--l) * 0.75));
+	--minipublic-btn-color-main-hover-border:    var(--minipublic-btn-color-main-hover-bg);
+	--minipublic-btn-color-main-hover-text:      var(--minipublic-btn-color-main-text);
+	--minipublic-btn-color-main-active-bg:       hsl(var(--minipublic-color-theme--hs), calc(var(--minipublic-color-theme--l) * 0.6));
+	--minipublic-btn-color-main-active-border:   var(--minipublic-btn-color-main-active-bg);
+	--minipublic-btn-color-main-active-text:     var(--minipublic-btn-color-main-text);
+
+	/* taille normale */
+	--minipublic-btn-font-size:           1em;
+	--minipublic-btn-padding-x:           1rem;
+	--minipublic-btn-padding-y:           0.5rem;
+	--minipublic-btn-margin:              0.25em;
+	--minipublic-btn-border-radius:       0.25em;
+	--minipublic-btn-gutter:              0.5em;
+
+	--minipublic-color-success--h: 72;
+	--minipublic-color-success--s: 66%;
+	--minipublic-color-success--l: 62%;
+	--minipublic-color-error--h: 356;
+	--minipublic-color-error--s: 70%;
+	--minipublic-color-error--l: 57%;
+	--minipublic-color-notice--h: 47;
+	--minipublic-color-notice--s: 100%;
+	--minipublic-color-notice--l: 62%;
+	--minipublic-color-info--h: 197;
+	--minipublic-color-info--s: 56%;
+	--minipublic-color-info--l: 27%;
+
+	--minipublic-alert-spacing-x: 1.25rem;
+	--minipublic-alert-spacing-y: 1.25rem;
+	--minipublic-alert-iconsize: 0.0rem;
+	--minipublic-alert-closesize: 1.25em;
+}
