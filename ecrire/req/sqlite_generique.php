@@ -1769,7 +1769,7 @@ function spip_sqlite_table_exists(string $table, $serveur = '', $requeter = true
 	if (!$requeter) {
 		return $r;
 	}
-	$res = spip_sqlite_fetch($r);
+	$res = spip_sqlite_fetch($r, '', $serveur);
 	return (bool) $res;
 }
 
