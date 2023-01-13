@@ -1,48 +1,30 @@
-/* Correction des styles par defaut
----------------------------------------------- */
-html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ */
-body { font: .75em/1.5em Verdana, Geneva, sans-serif; color: #222; }
-*, *:before, *:after { box-sizing: border-box; }
-input, textarea, select { font-size: 100%; font-family: inherit; }
-
-h1 { margin: 0 auto 1.5em auto; font-size: 1.3em; font-weight: bold; color: #db1762; text-align: center; }
-h2 { margin: 0 0 1.5em 0; font-size: 1.2em; font-weight: normal; }
-h3 { margin: 0 auto 1.5em auto; font-size: 1em; font-weight: bold; }
-p  { display: block; margin: 0 0 1.5em 0; }
-
-img, .spip_logo { margin: 0; padding: 0; border: 0; }
-strong, b { font-weight: bold; }
-em, i { font-style: italic; }
-small,.small { font-size: .9em; }
-ul.spip { list-style: square; margin-bottom:1.5em;}
-ul.spip ul { list-style: circle; }
-ol.spip { list-style: decimal; margin-bottom:1.5em;}
-ul.spip li, ol.spip li {margin-left:50px;}
-ul.spip li li, ol.spip li li {margin-left:25px}
-
-
+.minipublic-bloc {text-align: left}
+.minipublic-bloc header h1 {display: none}
 
 /* LAYOUT / Disposition a l'ecran
 ---------------------------------------------- */
-html, body { height: 100%; }
-#minipres { position: relative; margin: 0 auto; background: #fff repeat; }
+.minipublic { position: relative; margin: 0 auto; }
 .quitter_fenetre { position: absolute; right: 1.5em; top: 1.5em; }
 .quitter_fenetre a { display: block; width: 1.5em; height: 1.5em; background: url(images/fermer-16.png) no-repeat right center; color: #fff; text-indent: -999em; }
 
-@media (min-width: 640px) {
-	body { display: flex; padding: 2em; flex-direction: column; justify-content: center; align-items: center; height: auto; min-height: 100%; }
-	#minipres { margin: 6em auto; width: 580px;border: 1px solid #DB1762;border-radius: 8px;padding: 2em 2em 1.5em 2em;overflow: hidden;}
-	#minipres h1 {margin-top: -2em;margin-left: -2em;margin-right: -2em;padding: 0.8em;font-size: 1.1em;color: white;background: #DB1762;}
+.minipublic-bloc header {color: white;background: #DB1762;padding: 0.75em 2em;}
+@media (min-width: 680px) {
+	.minipublic-bloc { width: 650px;border: 2px solid #DB1762;}
+	.minipublic-bloc .corps { padding: 1.5em 2em;overflow: hidden;}
+	.minipublic-bloc header {padding: 0.75em 2em;}
+	.minipublic-bloc h2 {font-size: 1.1em;color: white;margin: 0 !important;}
 }
-@media (max-width: 640px) {
+@media (max-width: 680px) {
 	body {padding: 1.5em;}
-	#minipres {width: auto;max-width: 25em;background: transparent;}
+	.minipublic-bloc {width: auto;max-width: 25em;min-width: 15em; background: transparent;border: 0}
+	.minipublic-bloc header {padding: 0.75em 0;}
 	#etapes, #infos_etapes {display: none;}
 }
 
-@media screen and (max-width:640px) and (orientation: landscape) {
+@media screen and (max-width:680px) and (orientation: landscape) {
 	body { -webkit-text-size-adjust: 70%; }
 }
+
 
 /* Formulaires
 ---------------------------------------------- */
@@ -83,6 +65,8 @@ input[type=radio],input[type=checkbox] {display: inline-block; margin-right: 0.7
 .erreur_message { font-weight: bold; color: red; }
 .reponse_formulaire.reponse_formulaire_ok {border: 2px solid #C6D880;font-weight: normal;padding: 0.8em;margin-bottom: 1.5em;color: #264409;background-color: #E6EFC2;}
 
+
+
 /* Habillage (en vrac)
 ---------------------------------------------- */
 
@@ -114,12 +98,6 @@ input[type=radio],input[type=checkbox] {display: inline-block; margin-right: 0.7
 #infos_etapes li.prochains .fond { background-color: #dbdbdb;background-image: url(images/degrade-etapes-clair-left.gif); }
 
 /* installation des plugins */
-.error,
-.success,
-.notice {border:2px solid; font-weight: normal;padding:0.8em;margin-bottom:1.5em;}
-.success {color: #264409;border-color: #c6d880;background-color:#e6efc2;}
-.error {color: #8a1f11;border-color: #fbc2c4;background-color:#fbe3e4;}
-.notice {color: #514721;border-color: #ffd324;background-color:#fff6bf;}
 
 .install-plugins {position:relative;margin-bottom: 0;}
 .install-plugins.success + .install-plugins.success {margin-top: 0;border-top: 0;}

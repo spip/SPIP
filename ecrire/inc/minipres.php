@@ -20,6 +20,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 include_spip('inc/headers');
 include_spip('inc/texte'); //inclue inc/lang et inc/filtres
+include_spip('inc/minipublic');
 
 
 /**
@@ -45,62 +46,34 @@ include_spip('inc/texte'); //inclue inc/lang et inc/filtres
  */
 function install_debut_html($titre = 'AUTO', $onLoad = '', $all_inline = false) {
 
-	utiliser_langue_visiteur();
-
-	http_no_cache();
-
+	if ($onLoad) {
+		$onLoad = extraire_attribut("<body $onLoad>", "onload");
+	}
 	if ($titre == 'AUTO') {
 		$titre = _T('info_installation_systeme_publication');
 	}
 
-	# le charset est en utf-8, pour recuperer le nom comme il faut
-	# lors de l'installation
-	if (!headers_sent()) {
-		header('Content-Type: text/html; charset=utf-8');
-	}
+	$options = [
+		'all_inline' => $all_inline,
+		'onload' => $onLoad,
+		'page_title' => $titre,
+	];
+	$options['couleur_fond'] = '#aaa';
+	$options['css_files'] = [
+		find_in_theme('minipres.css')
+	];
 
-	$css = '';
-	$files = ['reset.css', 'clear.css', 'minipres.css'];
-	if ($all_inline) {
-		// inliner les CSS (optimisation de la page minipres qui passe en un seul hit a la demande)
-		foreach ($files as $name) {
-			$file = direction_css(find_in_theme($name));
-			if (function_exists('minifier')) {
-				$file = minifier($file);
-			} else {
-				$file = url_absolue_css($file); // precaution
-			}
-			lire_fichier($file, $c);
-			$css .= $c;
-		}
-		$css = "<style type='text/css'>" . $css . '</style>';
-	} else {
-		foreach ($files as $name) {
-			$file = direction_css(find_in_theme($name));
-			$css .= "<link rel='stylesheet' href='$file' type='text/css' />\n";
-		}
-	}
 
-	// au cas ou minipres() est appele avant spip_initialisation_suite()
-	if (!defined('_DOCTYPE_ECRIRE')) {
-		define('_DOCTYPE_ECRIRE', '');
-	}
+	$header = "<header>\n";
 
-	return _DOCTYPE_ECRIRE .
-	html_lang_attributes() .
-	"<head>\n" .
-	'<title>' .
-	textebrut($titre) .
-	"</title>\n" .
-	"<meta name='viewport' content='width=device-width' />\n" .
-	$css .
-	'</head>
-<body' . $onLoad . " class='minipres'>
-	<div id='minipres'>
-	<h1>" .
-	$titre .
-	"</h1>
-	<div>\n";
+	if ($titre){
+		$header .= "<h2>".interdire_scripts($titre)."</h2>";
+	}
+	$header .= "</header>";
+
+	return minipublic_install_debut_html($options)
+		. $header
+		. "<div class='corps'>\n";
 }
 
 /**
@@ -109,7 +82,7 @@ function install_debut_html($titre = 'AUTO', $onLoad = '', $all_inline = false) 
  * @return string Code HTML
  */
 function install_fin_html() {
-	return "\n\t</div>\n\t</div>\n</body>\n</html>";
+	return "</div>" . minipublic_install_fin_html();
 }
 
 
@@ -162,9 +135,9 @@ function minipres($titre = '', $corps = '', $options = []) {
 		'all_inline' => false,
 	], $options);
 
-	if (!defined('_AJAX')) {
-		define('_AJAX', false);
-	} // par securite
+
+	$footer = '';
+
 	if (!$titre) {
 		if (!isset($options['status'])) {
 			$options['status'] = 403;
@@ -191,37 +164,29 @@ function minipres($titre = '', $corps = '', $options = []) {
 		}
 
 		if ($statut and test_espace_prive()) {
-			$corps = bouton_action(_T('public:accueil_site'), generer_url_ecrire('accueil'));
+			$footer = bouton_action(_T('public:accueil_site'), generer_url_ecrire('accueil'));
 		}
 		elseif (!empty($_COOKIE['spip_admin'])) {
-			$corps = bouton_action(_T('public:lien_connecter'), generer_url_public('login'));
+			$footer = bouton_action(_T('public:lien_connecter'), generer_url_public('login'));
 		}
 		else {
-			$corps = bouton_action(_T('public:accueil_site'), $GLOBALS['meta']['adresse_site']);
+			$footer = bouton_action(_T('public:accueil_site'), $GLOBALS['meta']['adresse_site']);
 		}
-		$corps = "<div class='boutons'>$corps</div>";
+
+		$corps = "";
 		spip_log($nom . " $titre " . $_SERVER['REQUEST_URI']);
 	}
 
+	$options['footer'] = $footer;
+	$options['page_title'] = $titre;
+	$options['titre'] = $titre;
+	$options['couleur_fond'] = '#aaa';
+	$options['css_files'] = [
+		find_in_theme('minipres.css')
+	];
+
 	if (!_AJAX) {
-		if (isset($options['status'])) {
-			http_response_code($options['status']);
-		}
-
-		$html = install_debut_html($titre, $options['onload'], $options['all_inline'])
-				. $corps
-				. install_fin_html();
-
-		if (
-			$GLOBALS['profondeur_url'] >= (_DIR_RESTREINT ? 1 : 2)
-			and empty($options['all_inline'])
-		) {
-			define('_SET_HTML_BASE', true);
-			include_spip('public/assembler');
-			$GLOBALS['html'] = true;
-			page_base_href($html);
-		}
-		return $html;
+		return minipublic($corps, $options);
 	} else {
 		include_spip('inc/headers');
 		include_spip('inc/actions');
