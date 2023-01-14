@@ -81,21 +81,25 @@ function exporter_csv_ligne($ligne, $delim = ',', $importer_charset = null) {
  * Exporte une ressource sous forme de fichier CSV
  *
  * La ressource peut etre un tableau ou une resource SQL issue d'une requete
- * L'extension est choisie en fonction du delimiteur :
+ * Le nom du fichier est défini en fonction du titre s'il n'est pas indiqué dans les options.
+ * L'extension est choisie en fonction du délimiteur si elle n'est pas indiquée dans les options :
  * - si on utilise ',' c'est un vrai csv avec extension csv
  * - si on utilise ';' ou tabulation c'est pour E*cel, et on exporte en iso-truc, avec une extension .xls
  *
  * @uses exporter_csv_ligne()
  *
  * @param string $titre
- *   titre utilise pour nommer le fichier
+ *    Titre utilisé pour nommer le fichier si celui-ci n'est pas indiqué dans les options
+ *    Il peut s'agir d'un texte contenant de la syntaxe SPIP
  * @param array|resource $resource
  * @param array $options
- *   string $delim : delimiteur
- *   array $entetes : tableau d'en-tetes pour nommer les colonnes (genere la premiere ligne)
- *   bool $envoyer : pour envoyer le fichier exporte (permet le telechargement)
- *   string $charset : charset de l'export si different de celui du site
- *   callable callback : fonction callback a appeler sur chaque ligne pour mettre en forme/completer les donnees
+ *   - (string)   fichier   : nom du fichier, par défaut défini en fonction du $titre
+ *   - (string)   extension : `csv` | `xls`, par défaut choisie en fonction du délimiteur
+ *   - (string)   delim     : `,` | `;` | `\t` | `TAB`
+ *   - (array)    entetes   : tableau d'en-tetes pour nommer les colonnes (genere la premiere ligne)
+ *   - (bool)     envoyer   : pour envoyer le fichier exporte (permet le telechargement)
+ *   - (string)   charset   : charset de l'export si different de celui du site
+ *   - (callable) callback  : fonction callback a appeler sur chaque ligne pour mettre en forme/completer les donnees
  * @return string
  */
 function inc_exporter_csv_dist($titre, $resource, $options = []) {
@@ -113,7 +117,9 @@ function inc_exporter_csv_dist($titre, $resource, $options = []) {
 	}
 
 	$default_options = [
-		'delim' => ', ',
+		'fichier' => null, // par défaut = $titre
+		'extension' => null, // par défaut = choix auto
+		'delim' => ',',
 		'entetes' => null,
 		'envoyer' => true,
 		'charset' => null,
@@ -121,8 +127,7 @@ function inc_exporter_csv_dist($titre, $resource, $options = []) {
 	];
 	$options = array_merge($default_options, $options);
 
-	$filename = preg_replace(',[^-_\w]+,', '_', translitteration(textebrut(typo($titre))));
-
+	// Délimiteur
 	if ($options['delim'] == 'TAB') {
 		$options['delim'] = "\t";
 	}
@@ -130,23 +135,28 @@ function inc_exporter_csv_dist($titre, $resource, $options = []) {
 		$options['delim'] = ',';
 	}
 
-	$charset = $GLOBALS['meta']['charset'];
-	$importer_charset = null;
-	if ($options['delim'] == ',') {
-		$extension = 'csv';
-	} else {
-		$extension = 'xls';
-		# Excel n'accepte pas l'utf-8 ni les entites html... on transcode tout ce qu'on peut
-		$charset = 'iso-8859-1';
-	}
-	// mais si une option charset est explicite, elle a la priorite
-	if (!empty($options['charset'])) {
-		$charset = $options['charset'];
-	}
+	// Nom du fichier : celui indiqué dans les options, sinon le titre
+	// Normalisation : uniquement les caractères non spéciaux, tirets, underscore et point + remplacer espaces par underscores
+	$filename = $options['fichier'] ?? translitteration(textebrut(typo($titre)));
+	$filename = preg_replace([',[^\w\-_\.\s]+,', ',\s+,'], ['', '_'], trim($filename));
+	$filename = rtrim($filename, '.');
 
-	$importer_charset = (($charset === $GLOBALS['meta']['charset']) ? null : $charset);
+	// Extension : celle indiquée en option, sinon choisie selon le délimiteur
+	// Normalisation : uniquement les charactères non spéciaux
+	if (!empty($options['extension'])) {
+		$options['extension'] = preg_replace(',[^\w]+,', '', trim($options['extension']));
+	}
+	$extension = $options['extension'] ?? ($options['delim'] === ',' ? 'csv' : 'xls');
 
-	$filename = "$filename.$extension";
+	// Fichier
+	$basename = "$filename.$extension";
+
+	// Charset : celui indiqué en option, sinon celui compatible excel si nécessaire, sinon celui du site
+	// Excel n'accepte pas l'utf-8 ni les entites html... on transcode tout ce qu'on peut
+	$charset_site = $GLOBALS['meta']['charset'];
+	$charset_excel = ($extension === 'xls' ? 'iso-8859-1' : null);
+	$charset = $options['charset'] ?? $charset_excel ?? $charset_site;
+	$importer_charset = (($charset === $charset_site) ? null : $charset);
 
 	$output = '';
 	$nb = 0;
@@ -159,7 +169,7 @@ function inc_exporter_csv_dist($titre, $resource, $options = []) {
 	if ($options['envoyer']) {
 		$disposition = ($options['envoyer'] === 'attachment' ? 'attachment' : 'inline');
 		header("Content-Type: text/comma-separated-values; charset=$charset");
-		header("Content-Disposition: $disposition; filename=$filename");
+		header("Content-Disposition: $disposition; filename=$basename");
 
 		// Vider tous les tampons
 		$level = @ob_get_level();
@@ -174,7 +184,7 @@ function inc_exporter_csv_dist($titre, $resource, $options = []) {
 		$fichier = 'php://output';
 	}
 	else {
-	$fichier = sous_repertoire(_DIR_CACHE, 'export') . $filename;
+		$fichier = sous_repertoire(_DIR_CACHE, 'export') . $basename;
 	}
 
 	$fp = fopen($fichier, 'w');
