@@ -81,7 +81,7 @@ function exporter_csv_ligne($ligne, $delim = ',', $importer_charset = null) {
  * Exporte une ressource sous forme de fichier CSV
  *
  * La ressource peut etre un tableau ou une resource SQL issue d'une requete
- * L'extension est choisie en fonction du delimiteur :
+ * Si elle n'est pas précisée dans les options, l'extension est choisie en fonction du délimiteur :
  * - si on utilise ',' c'est un vrai csv avec extension csv
  * - si on utilise ';' ou tabulation c'est pour E*cel, et on exporte en iso-truc, avec une extension .xls
  *
@@ -91,7 +91,8 @@ function exporter_csv_ligne($ligne, $delim = ',', $importer_charset = null) {
  *   titre utilise pour nommer le fichier
  * @param array|resource $resource
  * @param array $options
- *   string $delim : delimiteur
+ *   string $extension : `csv` | `xls`, choisie par défaut en fonction du délimiteur
+ *   string $delim : delimiteur : `,` | `;` | `\t` | `TAB`
  *   array $entetes : tableau d'en-tetes pour nommer les colonnes (genere la premiere ligne)
  *   bool $envoyer : pour envoyer le fichier exporte (permet le telechargement)
  *   string $charset : charset de l'export si different de celui du site
@@ -113,7 +114,8 @@ function inc_exporter_csv_dist($titre, $resource, $options = []) {
 	}
 
 	$default_options = [
-		'delim' => ', ',
+		'extension' => null, // choix auto par défaut
+		'delim' => ',',
 		'entetes' => null,
 		'envoyer' => true,
 		'charset' => null,
@@ -123,6 +125,7 @@ function inc_exporter_csv_dist($titre, $resource, $options = []) {
 
 	$filename = preg_replace(',[^-_\w]+,', '_', translitteration(textebrut(typo($titre))));
 
+	// Délimiteur : normaliser
 	if ($options['delim'] == 'TAB') {
 		$options['delim'] = "\t";
 	}
@@ -130,21 +133,16 @@ function inc_exporter_csv_dist($titre, $resource, $options = []) {
 		$options['delim'] = ',';
 	}
 
-	$charset = $GLOBALS['meta']['charset'];
-	$importer_charset = null;
-	if ($options['delim'] == ',') {
-		$extension = 'csv';
-	} else {
-		$extension = 'xls';
-		# Excel n'accepte pas l'utf-8 ni les entites html... on transcode tout ce qu'on peut
-		$charset = 'iso-8859-1';
-	}
-	// mais si une option charset est explicite, elle a la priorite
-	if (!empty($options['charset'])) {
-		$charset = $options['charset'];
-	}
+	// Extension : celle indiquée en option, sinon choisie selon le délimiteur
+	$options['extension'] = (in_array($options['extension'], ['csv', 'xls']) ? $options['extension'] : null);
+	$extension = $options['extension'] ?? ($options['delim'] === ',' ? 'csv' : 'xls');
 
-	$importer_charset = (($charset === $GLOBALS['meta']['charset']) ? null : $charset);
+	// Charset : celui indiqué en option, sinon celui compatible excel si nécessaire, sinon celui du site
+	// Excel n'accepte pas l'utf-8 ni les entites html... on transcode tout ce qu'on peut
+	$charset_site = $GLOBALS['meta']['charset'];
+	$charset_excel = ($extension === 'xls' ? 'iso-8859-1' : null);
+	$charset = $options['charset'] ?? $charset_excel ?? $charset_site;
+	$importer_charset = (($charset === $charset_site) ? null : $charset);
 
 	$filename = "$filename.$extension";
 
