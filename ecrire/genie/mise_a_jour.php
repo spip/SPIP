@@ -27,7 +27,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function genie_mise_a_jour_dist($t) {
 	include_spip('inc/meta');
-	$maj = info_maj('spip', 'SPIP', $GLOBALS['spip_version_branche']);
+	$maj = info_maj($GLOBALS['spip_version_branche']);
 	ecrire_meta('info_maj_spip', $maj ? ($GLOBALS['spip_version_branche'] . "|$maj") : '', 'non');
 
 	mise_a_jour_ecran_securite();
@@ -40,8 +40,8 @@ function genie_mise_a_jour_dist($t) {
 // TODO : fournir une URL sur spip.net pour maitriser la diffusion d'une nouvelle version de l'ecran via l'update auto
 // ex : https://www.spip.net/auto-update/ecran_securite.php
 define('_URL_ECRAN_SECURITE', 'https://git.spip.net/spip-contrib-outils/securite/raw/branch/master/ecran_securite.php');
-define('_VERSIONS_SERVEUR', 'https://files.spip.net/');
-define('_VERSIONS_LISTE', 'archives.xml');
+define('_VERSIONS_SERVEUR', 'https://www.spip.net/spip_loader.api');
+define('_VERSIONS_LISTE', 'spip_versions_list.json');
 
 /**
  * Mise a jour automatisee de l'ecran de securite
@@ -98,8 +98,6 @@ function mise_a_jour_ecran_securite() {
  *
  * Repérer aussi si cette version est une version majeure de SPIP.
  *
- * @param string $dir
- * @param string $file
  * @param string $version
  *      La version reçue ici est sous la forme x.y.z
  *      On la transforme par la suite pour avoir des integer ($maj, $min, $rev)
@@ -107,62 +105,55 @@ function mise_a_jour_ecran_securite() {
  *
  * @return string
  */
-function info_maj($dir, $file, $version) {
+function info_maj($version) {
 	include_spip('inc/plugin');
 
-	[$maj, $min, $rev] = preg_split('/\D+/', $version);
+	$nom = _DIR_CACHE . _VERSIONS_LISTE;
+	$contenu = !file_exists($nom) ? '' : file_get_contents($nom);
+	$contenu = info_maj_cache($nom, $contenu);
+	$contenu = json_decode($contenu, true);
 
-	$nom = _DIR_CACHE_XML . _VERSIONS_LISTE;
-	$page = !file_exists($nom) ? '' : file_get_contents($nom);
-	$page = info_maj_cache($nom, $dir, $page);
-
-	// reperer toutes les versions de numero majeur superieur ou egal
-	// (a revoir quand on arrivera a SPIP V10 ...)
-	$p = substr('0123456789', intval($maj));
-	$p = ',/' . $file . '\D+([' . $p . ']+)\D+(\d+)(\D+(\d+))?.*?[.]zip",i';
-	preg_match_all($p, $page, $m, PREG_SET_ORDER);
-	$page = $page_majeure = '';
+	$liste = $liste_majeure = '';
 
 	// branche en cours d'utilisation
 	$branche = implode('.', array_slice(explode('.', $version, 3), 0, 2));
 
-	foreach ($m as $v) {
-		$v = array_pad($v, 5, 0);
-		[, $maj2, $min2, , $rev2] = $v;
+	foreach ($contenu['versions'] as $v => $path) {
+		$v = explode('.', $v);
+		[$maj2, $min2, $rev2] = $v;
 		$branche_maj = $maj2 . '.' . $min2;
 		$version_maj = $maj2 . '.' . $min2 . '.' . $rev2;
 		// d'abord les mises à jour de la même branche
 		if (
 			(spip_version_compare($version, $version_maj, '<'))
-			and (spip_version_compare($page, $version_maj, '<'))
+			and (spip_version_compare($liste, $version_maj, '<'))
 			and spip_version_compare($branche, $branche_maj, '=')
 		) {
-			$page = $version_maj;
+			$liste = $version_maj;
 		}
 		// puis les mises à jours majeures
 		if (
 			(spip_version_compare($version, $version_maj, '<'))
-			and (spip_version_compare($page, $version_maj, '<'))
+			and (spip_version_compare($liste, $version_maj, '<'))
 			and spip_version_compare($branche, $branche_maj, '<')
 		) {
-			$page_majeure = $version_maj;
+			$liste_majeure = $version_maj;
 		}
 	}
-	if (!$page and !$page_majeure) {
+	if (!$liste and !$liste_majeure) {
 		return '';
 	}
 
-	$message = $page ? _T('nouvelle_version_spip', ['version' => $page]) . ($page_majeure ? ' | ' : '') : '';
-	$message .= $page_majeure ? _T('nouvelle_version_spip_majeure', ['version' => $page_majeure]) : '';
+	$message = $liste ? _T('nouvelle_version_spip', ['version' => $liste]) . ($liste_majeure ? ' | ' : '') : '';
+	$message .= $liste_majeure ? _T('nouvelle_version_spip_majeure', ['version' => $liste_majeure]) : '';
 
-	return "<a class='info_maj_spip' href='https://www.spip.net/fr_update' title='$page'>" . $message . '</a>';
+	return "<a class='info_maj_spip' href='https://www.spip.net/fr_update' title='$liste'>" . $message . '</a>';
 }
 
 /**
- * Vérifie que la liste $page des versions dans le fichier $nom est à jour.
+ * Vérifie que la liste $liste des versions dans le fichier $nom est à jour.
  *
- * Ce fichier rajoute dans ce fichier l'aléa éphémère courant;
- * on teste la nouveauté par If-Modified-Since,
+ * On teste la nouveauté par If-Modified-Since,
  * et seulement quand celui-ci a changé pour limiter les accès HTTP.
  * Si le fichier n'a pas été modifié, on garde l'ancienne version.
  *
@@ -171,30 +162,19 @@ function info_maj($dir, $file, $version) {
  * @param string $nom
  *     Nom du fichier contenant les infos de mise à jour.
  * @param string $dir
- * @param string $page
+ * @param string $contenu
  * @return string
  *     Contenu du fichier de cache de l'info de maj de SPIP.
  */
-function info_maj_cache($nom, $dir, $page = '') {
-	include_spip('inc/acces');
-	$alea_ephemere = charger_aleas();
-	$re = '<archives id="a' . $alea_ephemere . '">';
-	if (preg_match("/$re/", $page)) {
-		return $page;
-	}
-
-	$url = _VERSIONS_SERVEUR . $dir . '/' . _VERSIONS_LISTE;
+function info_maj_cache($nom, $contenu = '') {
 	$a = file_exists($nom) ? filemtime($nom) : '';
 	include_spip('inc/distant');
-	$res = recuperer_url_cache($url, ['if_modified_since' => $a]);
+	$res = recuperer_url_cache(_VERSIONS_SERVEUR, ['if_modified_since' => $a]);
 	// Si rien de neuf (ou inaccessible), garder l'ancienne
 	if ($res) {
-		$page = $res['page'] ?: $page;
+		$contenu = $res['page'] ?: $contenu;
 	}
-	// Placer l'indicateur de fraicheur
-	$page = preg_replace('/^<archives.*?>/', $re, $page);
-	sous_repertoire(_DIR_CACHE_XML);
-	ecrire_fichier($nom, $page);
+	ecrire_fichier($nom, $contenu);
 
-	return $page;
+	return $contenu;
 }
