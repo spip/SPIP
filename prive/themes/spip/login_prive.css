@@ -13,7 +13,6 @@
 	--spip-login-color-gray-lighter: rgba(255, 255, 255, 0.7);
 	--spip-login-color-gray-light: rgba(255, 255, 255, 0.5);
 	--spip-login-color-gray-dark: rgba(0, 0, 0, 0.5);
-	
 }
 .page_login  {
 	margin:0;
@@ -25,6 +24,7 @@
 	background-color: rgb(233, 233, 242);
 	background-size: cover;
 	background-position: center;
+	height: 100vh;
 }
 .page_login.sans_fond {
 	background: var(--spip-login-color-theme);
@@ -226,7 +226,7 @@ input.text:focus{
 	color: var(--spip-login-color-theme);
 	transition: .2s color;
 }
-.page_login p.generator a:hover, 
+.page_login p.generator a:hover,
 .page_login p.generator a:focus {
 	color: var(--spip-login-color-theme-light);
 }
