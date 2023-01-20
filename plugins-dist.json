@@ -2,27 +2,27 @@
     "aide": {
         "path": "plugins-dist/aide",
         "source": "https://git.spip.net/spip/aide.git",
-        "branch": "3.1"
+        "branch": "master"
     },
     "archiviste": {
         "path": "plugins-dist/archiviste",
         "source": "https://git.spip.net/spip/archiviste.git",
-        "branch": "2.2"
+        "branch": "master"
     },
     "bigup": {
         "path": "plugins-dist/bigup",
         "source": "https://git.spip.net/spip/bigup.git",
-        "branch": "3.2"
+        "branch": "master"
     },
     "compagnon": {
         "path": "plugins-dist/compagnon",
         "source": "https://git.spip.net/spip/compagnon.git",
-        "branch": "3.1"
+        "branch": "master"
     },
     "compresseur": {
         "path": "plugins-dist/compresseur",
         "source": "https://git.spip.net/spip/compresseur.git",
-        "branch": "2.1"
+        "branch": "master"
     },
     "dump": {
         "path": "plugins-dist/dump",
