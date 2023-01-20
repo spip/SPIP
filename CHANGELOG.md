@@ -9,6 +9,7 @@
 
 ### Added
 
+- #5452 Classes `Spip\Afficher\Minipublic` et `Spip\Afficher\Minipres` pour l’affichage des mini pages
 - #3719 Permettre l’édition d’un logo (comme un document) dans l’interface privé
 - #3719 Balise `#ID_LOGO_` (tel que `#ID_LOGO_ARTICLE`) retourne l’identifiant du document utilisé pour le logo d’un objet
 - #4874 Normaliser et appeler l'API de notifications systématiquement sur la modification des contenus éditoriaux
@@ -47,6 +48,7 @@
 - #5108 `id_table_objet()` typé comme `objet_type()` que la fonction appelle
 
 ### Fixed
+
 - spip/dump#4721 Correction de la sauvegarde Mysql
 - #5445 Permettre d'insérer plusieurs adresses séparées par des virgules dans le formulaire de configuration des annonces de nouveautés
 - #5430 Correction du chargement des boucles DATA.
@@ -87,6 +89,7 @@
 
 ### Deprecated
 
+- #5452 Fonction `minipres()` au profit de `Spip\Afficher\Minipres`
 - #5056 Les classes de nœud du compilateur (Champ, Boucle, Critere...) sont déplacées dans le namespace `Spip\Compilateur\Noeud\` (l’appel sans namespace est déprécié)
 
 ### Removed
