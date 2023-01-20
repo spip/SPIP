@@ -47,6 +47,7 @@
 
 ### Fixed
 
+- #5449 Aligner le comportement du filtre `|image_reduire` sur celui de GD quand on utilse convert
 - #5430 Correction du chargement des boucles DATA.
 - #5422 correction du filtre `|couper` dans les cas aux limites
 - #5366 spip/dist#4857 Les blocs de code avec des lignes trop longues retournent à la ligne dans l’espace privé (comme dans le public)
