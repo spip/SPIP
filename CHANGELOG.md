@@ -23,6 +23,7 @@
 
 ### Changed
 
+- #5456 Brancher `info_maj()` sur les données de supported-versions
 - #5433 Déplacement des 2 formulaires oubli et mot_de_passe dans le core
 - #5402 Déplacement du `#FORMULAIRE_INSCRIPTION` directement dans le core
 - #5086 Le filtre de date `recup_heure()` sait extraire `hh:mm` en plus de `hh:mm:ss`
