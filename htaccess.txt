@@ -101,7 +101,8 @@ RewriteRule ^[^\.]+(\.html)?$		spip.php [QSA,E=url_propre:$0,L]
 # Divers
 
 # bloquer les acces aux fichiers caches (.svn, .git, etc)
-RedirectMatch 404 (?i)/\..+
+RewriteCond %{REQUEST_URI} !^/.well-known/
+RewriteRule "(^|/)\." - [R=404,NC,L]
 # bloquer les informations Composer
 RedirectMatch 404 ^/composer\.(json|lock|phar)$
 
