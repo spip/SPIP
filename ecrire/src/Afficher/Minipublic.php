@@ -56,7 +56,7 @@ class Minipublic {
 	protected function ouvreBody($options = []) {
 		if (empty($options['lang'])) {
 			// on se limite sur une langue de $GLOBALS['meta']['langues_multilingue'] car on est dans le public
-			utiliser_langue_visiteur($GLOBALS['meta']['langues_multilingue']);
+			utiliser_langue_visiteur($GLOBALS['meta']['langues_multilingue'] ?? null);
 		} else {
 			changer_langue($options['lang']);
 		}
@@ -158,7 +158,7 @@ class Minipublic {
 	protected function ouvreCorps($options = []) {
 		$url_site = url_de_base();
 		$header = "<header>\n" .
-			"<h1><a href=\"" . attribut_html($url_site) . "\">" . interdire_scripts($GLOBALS['meta']['nom_site']) . "</a></h1>\n";
+			"<h1><a href=\"" . attribut_html($url_site) . "\">" . interdire_scripts($GLOBALS['meta']['nom_site'] ?? '') . "</a></h1>\n";
 
 		$titre = (isset($options['titre']) ? $options['titre'] : '');
 		if ($titre) {
@@ -229,8 +229,7 @@ class Minipublic {
 			define('_AJAX', false);
 		}
 
-		$status = (isset($options['status']) ? intval($options['status']) : 200);
-		$status = ($status ?: 200);
+		$status = ((int) ($options['status'] ?? 200)) ?: 200;
 
 		http_response_code($status);
 

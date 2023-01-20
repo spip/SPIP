@@ -90,7 +90,8 @@ class Minipres extends Minipublic {
 
 		$footer = '';
 
-		if (empty($options['titre'])) {
+		$titre = $options['titre'] ?? '';
+		if (!$titre) {
 			if (empty($corps) and !isset($options['status'])) {
 				$options['status'] = 403;
 			}

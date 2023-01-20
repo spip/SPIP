@@ -552,8 +552,9 @@ if (
 		redirige_url_ecrire('install');
 	} else {
 		// Si on est dans le site public, dire que qq s'en occupe
-		include_spip('inc/minipres');
+		include_spip('inc/lang');
 		utiliser_langue_visiteur();
+		include_spip('inc/minipres');
 		echo minipres(_T('info_travaux_titre'), "<p style='text-align: center;'>" . _T('info_travaux_texte') . '</p>', ['status' => 503]);
 		exit;
 	}
