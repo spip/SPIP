@@ -48,6 +48,7 @@
 
 ### Fixed
 
+- #5432 Rétablir l'accès à `.well-known/` dans certaines configurations serveur
 - #5449 Aligner le comportement du filtre `|image_reduire` sur celui de GD quand on utilse convert
 - #5430 Correction du chargement des boucles DATA.
 - #5422 correction du filtre `|couper` dans les cas aux limites
