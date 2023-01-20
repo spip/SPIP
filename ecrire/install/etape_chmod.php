@@ -18,6 +18,7 @@ if (defined('_TEST_DIRS')) {
 }
 define('_TEST_DIRS', '1');
 
+include_spip('inc/headers');
 include_spip('inc/minipres');
 utiliser_langue_visiteur();
 

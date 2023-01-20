@@ -268,6 +268,7 @@ function info_progression_etape($en_cours, $phase, $dir, $erreur = false) {
 	$last = count($liste);
 //	$texte_etat = array('ok'=>'OK','encours'=>_T('en_cours'),'todo'=>_T('todo'));
 
+	include_spip('inc/texte');
 	$intitule_etat['etape_'][1] = typo(_T('info_connexion_base_donnee'));
 	$intitule_etat['etape_'][2] = typo(_T('menu_aide_installation_choix_base'));
 	$intitule_etat['etape_'][3] = typo(_T('info_informations_personnelles'));
