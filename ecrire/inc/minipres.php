@@ -20,7 +20,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Retourne le début d'une page HTML minimale (de type installation ou erreur)
- * @deprecated
+ *
+ * @deprecated 4.2 Utiliser `Spip\Afficher\Minipres`
+ * @uses \Spip\Afficher\Minipres
  *
  * @param string $titre
  *    Titre. `AUTO`, indique que l'on est dans le processus d'installation de SPIP
@@ -50,7 +52,9 @@ function install_debut_html($titre = 'AUTO', $onLoad = '', $all_inline = false) 
 
 /**
  * Retourne la fin d'une page HTML minimale (de type installation ou erreur)
- * @deprecated
+ *
+ * @deprecated 4.2 Utiliser `Spip\Afficher\Minipres`
+ * @uses \Spip\Afficher\Minipres
  *
  * @return string Code HTML
  */
@@ -63,12 +67,15 @@ function install_fin_html() {
 /**
  * Retourne une page HTML contenant, dans une présentation minimale,
  * le contenu transmis dans `$titre` et `$corps`.
- * @deprecated
+ *
  * Appelée pour afficher un message d’erreur (l’utilisateur n’a pas
  * accès à cette page par exemple).
  *
  * Lorsqu’aucun argument n’est transmis, un header 403 est renvoyé,
  * ainsi qu’un message indiquant une interdiction d’accès.
+ *
+ * @deprecated 4.2 Utiliser `Spip\Afficher\Minipres`
+ * @uses \Spip\Afficher\Minipres
  *
  * @example
  *   ```
@@ -78,8 +85,6 @@ function install_fin_html() {
  *      exit;
  *   }
  *   ```
- * @uses install_debut_html()
- * @uses install_fin_html()
  *
  * @param string $titre
  *   Titre de la page
