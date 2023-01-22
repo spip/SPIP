@@ -1,5 +1,6 @@
 /* Voir minipublic.vars.css pour la définition des variables */
 
+*, *:after, *:before { box-sizing: border-box; }
 h1 {font-size: 1.5em; line-height: 1.1; font-weight: bold}
 h2 {font-size: 1.25em; line-height: 1}
 b, strong { font-weight: bold}
@@ -12,7 +13,6 @@ input.submit,
 input.reset,
 button {
 	position: relative;
-	box-sizing: border-box;
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
@@ -77,10 +77,6 @@ button:active {
 
 
 /* Alertes */
-.msg-alert,
-.msg-alert * {
-box-sizing: border-box;
-}
 .msg-alert,
 .notice, .error, .success,
 .formulaire_spip .reponse_formulaire {

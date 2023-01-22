@@ -301,16 +301,13 @@ function info_progression_etape($en_cours, $phase, $dir, $erreur = false) {
 			}
 
 			$aff_etapes .= "<li class='$class'><div class='fond'>";
-			$aff_etapes .= ($debut == $en_cours) ? '<strong>' : '';
 			$aff_etapes .= '<em>' . _T('etape') . " </em><span class='numero_etape'>$debut</span><em>&nbsp;: </em>";
-			$aff_etapes .= $intitule_etat["$phase"][$debut];
-			$aff_etapes .= ($debut == $en_cours) ? '</strong>' : '';
+			$aff_etapes .= '<'.(($debut == $en_cours) ? 'strong' : 'span').' class="label_etape">' . $intitule_etat["$phase"][$debut] . '</'.(($debut == $en_cours) ? 'strong' : 'span').'>';
 			$aff_etapes .= '</div></li>';
 		}
 		$debut++;
 	}
 	$aff_etapes .= '</ul>';
-	$aff_etapes .= "<br class='nettoyeur' />\n";
 
 	return $aff_etapes;
 }

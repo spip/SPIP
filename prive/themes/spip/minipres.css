@@ -1,3 +1,12 @@
+/**
+ * Styles pour certaines pages "autonomes" : installation, etc.
+ *
+ * Ces styles viennent en complément/surcharge de minipublic.css et minipublic.vars.css
+ *
+ * Inutile de redéclarer ici les styles déjà présents dans minipublic.ss,
+ * à moins qu'il faille les surcharger pour des cas précis.
+ */
+
 .minipublic-bloc {text-align: left}
 .minipublic-bloc header h1 {display: none}
 
@@ -8,11 +17,16 @@
 .quitter_fenetre a { display: block; width: 1.5em; height: 1.5em; background: url(images/fermer-16.png) no-repeat right center; color: #fff; text-indent: -999em; }
 
 .minipublic-bloc header {color: white;background: #DB1762;padding: 0.75em 2em;}
+.minipublic-bloc h2 {
+	font-size: 1.1em;
+}
 @media (min-width: 680px) {
 	.minipublic-bloc { width: 650px;border: 2px solid #DB1762;}
 	.minipublic-bloc .corps { padding: 1.5em 2em;overflow: hidden;}
 	.minipublic-bloc header {padding: 0.75em 2em;}
-	.minipublic-bloc h2 {font-size: 1.1em;color: white;margin: 0 !important;}
+	.minipublic-bloc header h2 {
+		margin: 0 !important;
+	}
 }
 @media (max-width: 680px) {
 	body {padding: 1.5em;}
@@ -23,6 +37,17 @@
 
 @media screen and (max-width:680px) and (orientation: landscape) {
 	body { -webkit-text-size-adjust: 70%; }
+}
+
+
+/* Typographie et rythme vertical
+---------------------------------------------- */
+
+h1, h2, h3 {
+	margin-block-end: var(--minipublic-margin-bottom);
+}
+p, ul, table {
+	margin-block-end: calc(var(--minipublic-margin-bottom) * 0.75);
 }
 
 
@@ -66,6 +91,133 @@ input[type=radio],input[type=checkbox] {display: inline-block; margin-right: 0.7
 .reponse_formulaire.reponse_formulaire_ok {border: 2px solid #C6D880;font-weight: normal;padding: 0.8em;margin-bottom: 1.5em;color: #264409;background-color: #E6EFC2;}
 
 
+/* Menu des étapes
+---------------------------------------------- */
+:root {
+	--minipres-install-menu-color-base: hsl(0, 0%, 90%);
+	--minipres-install-menu-color-active: hsl(0, 0%, 33%);
+	--minipres-install-menu-color-done: hsl(var(--minipublic-color-success--h), var(--minipublic-color-success--s), 33%);
+	--minipres-install-menu-color-error: hsl(var(--minipublic-color-error--h), var(--minipublic-color-error--s), var(--minipublic-color-error--l));
+	--minipres-install-menu-arrow-width: 1em;
+	--minipres-install-menu-padding: 0.75em;
+}
+
+/* Conteneur des étapes <ul> */
+#infos_etapes {
+	display: flex;
+	flex-flow: column wrap;
+	gap: 1px;
+	padding: 0;
+	margin-block-end: var(--minipublic-margin-bottom);
+	text-align: start;
+	list-style: none;
+	color: hsl(0, 0%, 33%);
+	font-size: 0.9em;
+	line-height: 1.2;
+}
+#infos_etapes.infos_etape_4 {
+	background-color: var(--minipres-install-menu-color-active);
+}
+/* Étape <li> */
+#infos_etapes li {
+	position: relative;
+	display: flex;
+	padding: var(--minipres-install-menu-padding);
+	background-color: var(--minipres-install-menu-color-base);
+}
+/* Conteneur texte interne */
+#infos_etapes li .fond {
+	display: flex;
+	column-gap: 0.5em;
+	align-items: center;
+}
+/* Label invisible */
+#infos_etapes li em {
+	float: inline-start;
+	position: absolute;
+	top: -1000px;
+}
+#infos_etapes li .numero_etape {
+	display: none;
+	font-weight: bold;
+	font-size: 2.8em; /* = à peu près 2 lignes */
+}
+/* Étapes pas faites */
+#infos_etapes li.prochains {}
+/* Étape actuelle */
+#infos_etapes li.on {
+	color: white;
+	font-weight: bold;
+}
+#infos_etapes li.on {
+	background-color: var(--minipres-install-menu-color-active);
+}
+/* Étapes faites */
+#infos_etapes li.valides {
+	color: white;
+}
+#infos_etapes li.valides {
+	background-color: var(--minipres-install-menu-color-done);
+}
+/* Étape en erreur */
+#infos_etapes li.erreur {
+	color: white;
+}
+#infos_etapes li.erreur {
+	background-color: var(--minipres-install-menu-color-error);
+}
+/* Responsive : écrans moyens et plus */
+@media (min-width: 680px) {
+	#infos_etapes {
+		display: grid; /* Pour avoir des colonnes de même largeur */
+		grid-template-columns: repeat(4, 1fr); /* Le nb ne change pas tous les 4 matins à priori */
+		gap: 1.5px; /* 1px trop petit avec les formes en flèche */
+	}
+	#infos_etapes li .numero_etape {
+		display: inline-block;
+		margin-inline-end: 0.1em;
+	}
+	/* Étape en forme de flèche */
+	#infos_etapes li {
+		padding-inline: calc(var(--minipres-install-menu-padding) + var(--minipres-install-menu-arrow-width));
+		margin-inline-start: calc(var(--minipres-install-menu-arrow-width) * -1);
+		clip-path: polygon(
+			calc(100% - var(--minipres-install-menu-arrow-width)) 0%,
+			100% 50%,
+			calc(100% - var(--minipres-install-menu-arrow-width)) 100%,
+			0% 100%,
+			var(--minipres-install-menu-arrow-width) 50%,
+			0% 0%
+		);
+		box-shadow: inset 0 0 1em hsla(0, 0%, 0%, 0.025);
+	}
+	#infos_etapes li:first-child {
+		padding-inline-start: var(--minipres-install-menu-padding);
+		margin-inline-start: 0;
+		clip-path: polygon(
+			0% 0%,
+			calc(100% - var(--minipres-install-menu-arrow-width)) 0%,
+			100% 50%,
+			calc(100% - var(--minipres-install-menu-arrow-width)) 100%,
+			0% 100%
+		);
+		border-top-left-radius: var(--minipublic-border-radius);
+		border-bottom-left-radius: var(--minipublic-border-radius);
+	}
+	#infos_etapes li:last-child {
+		padding-inline-end: var(--minipres-install-menu-padding);
+		clip-path: polygon(
+			100% 0%,
+			100% 100%,
+			0% 100%,
+			var(--minipres-install-menu-arrow-width) 50%,
+			0% 0%
+		);
+		border-top-right-radius: var(--minipublic-border-radius);
+		border-bottom-right-radius: var(--minipublic-border-radius);
+	}
+}
+
 
 /* Habillage (en vrac)
 ---------------------------------------------- */
@@ -83,19 +235,6 @@ input[type=radio],input[type=checkbox] {display: inline-block; margin-right: 0.7
 #etapes span.encours { background: url(images/etape-encours.gif) center no-repeat; }
 #etapes span.todo { background: url(images/etape-todo.gif) center no-repeat; }
 
-#infos_etapes { display: flex; height: 63px; overflow: hidden; margin: 0; padding: 0; padding-left: 10px; background: #8c8c8c url(images/degrade-etapes-clair-left.gif) no-repeat right top; text-align: left; list-style: none; }
-#infos_etapes.infos_etape_4 { background-image: url(images/degrade-etapes-rose-left.gif); background-color: #db1762; }
-#infos_etapes li { max-width: 160px; margin-left: -28px; padding-left: 29px; background: url(images/degrade-etapes-fonce-left.gif) no-repeat left top; color: #555; text-align: left; font-size: .9em; line-height: 1.05em; }
-#infos_etapes li .fond { height: 69px; padding-right: 25px; padding-top: 10px; background: url(images/degrade-etapes-fonce-left.gif) no-repeat -2em top; }
-#infos_etapes li em {float:left;position:absolute;top:-1000px;}
-#infos_etapes li span.numero_etape { float: left; display: block; height: 50px; margin-left: -10px; padding: 7px 3px 0 3px; font-weight: bold; font-size: 3em; }
-#infos_etapes li.on { background-image: url(images/degrade-etapes-rose-left.gif); color: #fff; font-weight: bold; }
-#infos_etapes li.on .fond { background-color: #db1762; background-image:  url(images/degrade-etapes-rose-left.gif); }
-#infos_etapes li.erreur { background-image: url(images/degrade-etapes-rouge-left.gif); }
-#infos_etapes li.erreur .fond { background-color: #ff6868; background-image: url(images/degrade-etapes-rouge-left.gif); }
-#infos_etapes li.valides { color: white; }
-#infos_etapes li.prochains { background-image: url(images/degrade-etapes-clair-left.gif); }
-#infos_etapes li.prochains .fond { background-color: #dbdbdb;background-image: url(images/degrade-etapes-clair-left.gif); }
 
 /* installation des plugins */
 
@@ -104,11 +243,6 @@ input[type=radio],input[type=checkbox] {display: inline-block; margin-right: 0.7
 .install-plugins.error + .install-plugins.error {margin-top: 0;border-top: 0;}
 .install-plugins .result {display:block;position:absolute;top:0.8em;right:0.8em;font-weight:bold;}
 .install-plugins .success {display: none;} /* ne pas afficher les installations ok mais seulement les echecs */
-/* Couleurs des liens
----------------------------------------------- */
-a { color: #db1762; text-decoration: none; }
-a:focus,
-a:hover { color: #922149; text-decoration: underline; }
-a:active { color: #922149; }
+
 
 /* end */
