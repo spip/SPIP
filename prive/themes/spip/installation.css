@@ -12,12 +12,12 @@
 ---------------------------------------------- */
 
 :root {
-	--minipres-install-menu-color-base: hsl(0, 0%, 90%);
-	--minipres-install-menu-color-active: hsl(0, 0%, 33%);
-	--minipres-install-menu-color-done: hsl(var(--minipage-color-success--h), var(--minipage-color-success--s), 33%);
-	--minipres-install-menu-color-error: hsl(var(--minipage-color-error--h), var(--minipage-color-error--s), var(--minipage-color-error--l));
-	--minipres-install-menu-arrow-width: 1em;
-	--minipres-install-menu-padding: 0.75em;
+	--minipage-install-menu-color-base: hsl(0, 0%, 90%);
+	--minipage-install-menu-color-active: hsl(0, 0%, 33%);
+	--minipage-install-menu-color-done: hsl(var(--minipage-color-success--h), var(--minipage-color-success--s), 33%);
+	--minipage-install-menu-color-error: hsl(var(--minipage-color-error--h), var(--minipage-color-error--s), var(--minipage-color-error--l));
+	--minipage-install-menu-arrow-width: 1em;
+	--minipage-install-menu-padding: 0.75em;
 }
 
 /* Conteneur des étapes <ul> */
@@ -34,14 +34,14 @@
 	line-height: 1.2;
 }
 #infos_etapes.infos_etape_4 {
-	background-color: var(--minipres-install-menu-color-active);
+	background-color: var(--minipage-install-menu-color-active);
 }
 /* Étape <li> */
 #infos_etapes li {
 	position: relative;
 	display: flex;
-	padding: var(--minipres-install-menu-padding);
-	background-color: var(--minipres-install-menu-color-base);
+	padding: var(--minipage-install-menu-padding);
+	background-color: var(--minipage-install-menu-color-base);
 }
 /* Conteneur texte interne */
 #infos_etapes li .fond {
@@ -68,21 +68,21 @@
 	font-weight: bold;
 }
 #infos_etapes li.on {
-	background-color: var(--minipres-install-menu-color-active);
+	background-color: var(--minipage-install-menu-color-active);
 }
 /* Étapes faites */
 #infos_etapes li.valides {
 	color: white;
 }
 #infos_etapes li.valides {
-	background-color: var(--minipres-install-menu-color-done);
+	background-color: var(--minipage-install-menu-color-done);
 }
 /* Étape en erreur */
 #infos_etapes li.erreur {
 	color: white;
 }
 #infos_etapes li.erreur {
-	background-color: var(--minipres-install-menu-color-error);
+	background-color: var(--minipage-install-menu-color-error);
 }
 /* Responsive : écrans moyens et plus */
 @media (min-width: 680px) {
@@ -97,38 +97,38 @@
 	}
 	/* Étape en forme de flèche */
 	#infos_etapes li {
-		padding-inline: calc(var(--minipres-install-menu-padding) + var(--minipres-install-menu-arrow-width));
-		margin-inline-start: calc(var(--minipres-install-menu-arrow-width) * -1);
+		padding-inline: calc(var(--minipage-install-menu-padding) + var(--minipage-install-menu-arrow-width));
+		margin-inline-start: calc(var(--minipage-install-menu-arrow-width) * -1);
 		clip-path: polygon(
-			calc(100% - var(--minipres-install-menu-arrow-width)) 0%,
+			calc(100% - var(--minipage-install-menu-arrow-width)) 0%,
 			100% 50%,
-			calc(100% - var(--minipres-install-menu-arrow-width)) 100%,
+			calc(100% - var(--minipage-install-menu-arrow-width)) 100%,
 			0% 100%,
-			var(--minipres-install-menu-arrow-width) 50%,
+			var(--minipage-install-menu-arrow-width) 50%,
 			0% 0%
 		);
 		box-shadow: inset 0 0 1em hsla(0, 0%, 0%, 0.025);
 	}
 	#infos_etapes li:first-child {
-		padding-inline-start: var(--minipres-install-menu-padding);
+		padding-inline-start: var(--minipage-install-menu-padding);
 		margin-inline-start: 0;
 		clip-path: polygon(
 			0% 0%,
-			calc(100% - var(--minipres-install-menu-arrow-width)) 0%,
+			calc(100% - var(--minipage-install-menu-arrow-width)) 0%,
 			100% 50%,
-			calc(100% - var(--minipres-install-menu-arrow-width)) 100%,
+			calc(100% - var(--minipage-install-menu-arrow-width)) 100%,
 			0% 100%
 		);
 		border-top-left-radius: var(--minipage-border-radius);
 		border-bottom-left-radius: var(--minipage-border-radius);
 	}
 	#infos_etapes li:last-child {
-		padding-inline-end: var(--minipres-install-menu-padding);
+		padding-inline-end: var(--minipage-install-menu-padding);
 		clip-path: polygon(
 			100% 0%,
 			100% 100%,
 			0% 100%,
-			var(--minipres-install-menu-arrow-width) 50%,
+			var(--minipage-install-menu-arrow-width) 50%,
 			0% 0%
 		);
 		border-top-right-radius: var(--minipage-border-radius);
