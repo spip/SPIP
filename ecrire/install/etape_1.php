@@ -30,11 +30,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @uses tester_compatibilite_hebergement()
  * @uses analyse_fichier_connection()
- * @uses login_hebergeur()
  *
  */
 function install_etape_1_dist() {
-	echo install_debut_html();
+
+	$minipage = new Spip\Afficher\Minipage\Installation();
+	echo $minipage->installDebutPage();
 
 	// stopper en cas de grosse incompatibilite de l'hebergement
 	tester_compatibilite_hebergement();
@@ -43,7 +44,7 @@ function install_etape_1_dist() {
 	$s = !@is_readable(_FILE_CONNECT_TMP) ? ''
 		: analyse_fichier_connection(_FILE_CONNECT_TMP);
 
-	[$adresse_db, $login_db] = $s ?: login_hebergeur();
+	[$adresse_db, $login_db] = $s ?: ['localhost', ''];
 
 	$chmod = (isset($_GET['chmod']) and preg_match(',^[0-9]+$,', $_GET['chmod'])) ?
 		sprintf('%04o', $_GET['chmod']) : '0777';
@@ -74,5 +75,5 @@ function install_etape_1_dist() {
 #	echo info_etape(_T('info_connexion_mysql'), _T('texte_connexion_mysql').aide ("install1", true));
 	echo info_etape(_T('info_connexion_base_donnee'));
 	echo install_connexion_form($db, $login, $pass, $predef, "\n<input type='hidden' name='chmod' value='$chmod' />", 2);
-	echo install_fin_html();
+	echo $minipage->installFinPage();
 }

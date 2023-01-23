@@ -26,7 +26,8 @@ function install_etape_ldap4_dist() {
 		$base_ldap = $base_ldap_text;
 	}
 
-	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
+	$minipage = new Spip\Afficher\Minipage\Installation();
+	echo $minipage->installDebutPage(['onload' => 'document.getElementById(\'suivant\').focus();return false;']);
 
 	$ldap_link = ldap_connect($adresse_ldap, $port_ldap);
 	@ldap_bind($ldap_link, $login_ldap, $pass_ldap);
@@ -69,7 +70,7 @@ function install_etape_ldap4_dist() {
 		echo generer_form_ecrire('install', $res);
 	}
 
-	echo install_fin_html();
+	echo $minipage->installFinPage();
 }
 
 function liste_statuts_ldap() {

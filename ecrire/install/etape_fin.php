@@ -53,7 +53,8 @@ function install_etape_fin_dist() {
 	if ($msg) {
 		$cible = _T('public:accueil_site');
 		$cible = generer_form_ecrire('accueil', '', '', $cible);
-		echo minipres('AUTO', $msg . $cible);
+		$minipage = new Spip\Afficher\Minipage\Installation();
+		echo $minipage->page($msg . $cible);
 		// ok, deboucher dans l'espace prive
 	} else {
 		redirige_url_ecrire('accueil');

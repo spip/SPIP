@@ -23,8 +23,9 @@ function install_etape_4_dist() {
 		$rep = sous_repertoire(_DIR_TMP, $rep, true, true);
 	}
 
+	$minipage = new Spip\Afficher\Minipage\Installation();
+	echo $minipage->installDebutPage(['onload' => 'document.getElementById(\'suivant\').focus();return false;']);
 
-	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
 	echo info_progression_etape(4, 'etape_', 'install/');
 
 	echo "<div class='success'><b>"
@@ -74,5 +75,5 @@ function install_etape_4_dist() {
 		. bouton_suivant(_T('login_espace_prive'));
 
 	echo generer_form_ecrire('install', $suite);
-	echo install_fin_html();
+	echo $minipage->installFinPage();
 }

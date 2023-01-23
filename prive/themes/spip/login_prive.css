@@ -2,7 +2,6 @@
 /* Page de login
 ---------------------------------------------- */
 :root {
-
 	--spip-login-color-theme--hs: 337, 81%;
 	--spip-login-color-theme--l: 47%;
 
@@ -14,6 +13,7 @@
 	--spip-login-color-gray-light: rgba(255, 255, 255, 0.5);
 	--spip-login-color-gray-dark: rgba(0, 0, 0, 0.5);
 }
+
 .page_login  {
 	margin:0;
 	font-size: 16px;

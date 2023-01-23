@@ -24,7 +24,8 @@ function install_etape_ldap3_dist() {
 		? _INSTALL_BASE_LDAP
 		: 'ou=users, dc=mon-domaine, dc=com';
 
-	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
+	$minipage = new Spip\Afficher\Minipage\Installation();
+	echo $minipage->installDebutPage(['onload' => 'document.getElementById(\'suivant\').focus();return false;']);
 
 	echo info_etape(
 		_T('info_chemin_acces_1'),
@@ -81,5 +82,5 @@ function install_etape_ldap3_dist() {
 
 	echo generer_form_ecrire('install', $res);
 
-	echo install_fin_html();
+	echo $minipage->installFinPage();
 }

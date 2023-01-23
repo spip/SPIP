@@ -191,7 +191,6 @@ function tester_compatibilite_hebergement() {
 	if (!$serveurs) {
 		$err[] = _T('install_extension_php_obligatoire')
 			. " <a href='http://www.php.net/mysql'>MYSQL</a>"
-			. "| <a href='http://www.php.net/pgsql'>PostgreSQL</a>"
 			. "| <a href='http://www.php.net/sqlite'>SQLite</a>";
 	}
 
@@ -212,26 +211,6 @@ function tester_compatibilite_hebergement() {
 		# de forcer malgre tout (pour tester, ou si bug de detection)
 		echo "</ul></div>\n";
 	}
-}
-
-
-/**
- * Faciliter la recherche du login d'installation en fonction de certains hébergeurs connus
- *
- * @note superflu ??
- */
-function login_hebergeur() {
-	$base_hebergeur = 'localhost'; # par defaut
-
-	// Free
-	if (preg_match(',(.*)\.free\.fr$,', $_SERVER['SERVER_NAME'], $regs)) {
-		$base_hebergeur = 'sql.free.fr';
-		$login_hebergeur = $regs[1];
-	} else {
-		$login_hebergeur = '';
-	}
-
-	return [$base_hebergeur, $login_hebergeur];
 }
 
 
@@ -261,12 +240,10 @@ function bouton_suivant($code = '') {
 
 function info_progression_etape($en_cours, $phase, $dir, $erreur = false) {
 	$intitule_etat = [];
-	//$en_cours = _request('etape')?_request('etape'):"";
+
 	$liste = find_all_in_path($dir, $phase . '(([0-9])+|fin)[.]php$');
 	$debut = 1;
-	$etat = 'ok';
 	$last = count($liste);
-//	$texte_etat = array('ok'=>'OK','encours'=>_T('en_cours'),'todo'=>_T('todo'));
 
 	include_spip('inc/texte');
 	$intitule_etat['etape_'][1] = typo(_T('info_connexion_base_donnee'));
@@ -279,8 +256,6 @@ function info_progression_etape($en_cours, $phase, $dir, $erreur = false) {
 	$intitule_etat['etape_ldap'][3] = typo(_T('info_chemin_acces_1'));
 	$intitule_etat['etape_ldap'][4] = typo(_T('info_reglage_ldap'));
 	$intitule_etat['etape_ldap'][5] = typo(_T('info_ldap_ok'));
-
-//	$aff_etapes = "<span id='etapes'>";
 
 	$aff_etapes = "<ul id='infos_etapes' class='infos_$phase$en_cours'>";
 

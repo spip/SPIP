@@ -37,6 +37,8 @@ function install_etape__dist() {
 			'<p>' . _T('install_select_langue') . '</p>' .
 			'<div>' . $menu_langues . "</div>\n" .
 			generer_form_ecrire('install', "<input type='hidden' name='etape' value='chmod' />" . bouton_suivant());
-		echo minipres('AUTO', $res);
+
+		$minipage = new Spip\Afficher\Minipage\Installation();
+		echo $minipage->page($res);
 	}
 }

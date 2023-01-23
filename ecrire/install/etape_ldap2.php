@@ -14,7 +14,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function install_etape_ldap2_dist() {
-	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
+	$minipage = new Spip\Afficher\Minipage\Installation();
+	echo $minipage->installDebutPage(['onload' => 'document.getElementById(\'suivant\').focus();return false;']);
 
 	$adresse_ldap = _request('adresse_ldap');
 
@@ -94,5 +95,5 @@ function install_etape_ldap2_dist() {
 			'<br /><br />' . $erreur . '<b> ?</b></p></div>';
 	}
 
-	echo install_fin_html();
+	echo $minipage->installFinPage();
 }
