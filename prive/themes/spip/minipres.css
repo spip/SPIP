@@ -1,38 +1,36 @@
 /**
  * Styles pour certaines pages "autonomes" : installation, etc.
  *
- * Ces styles viennent en complément/surcharge de minipublic.css et minipublic.vars.css
+ * Ces styles viennent en complément/surcharge de minipage.css et minipage.vars.css
  *
- * Inutile de redéclarer ici les styles déjà présents dans minipublic.ss,
+ * Inutile de redéclarer ici les styles déjà présents dans minipage.ss,
  * à moins qu'il faille les surcharger pour des cas précis.
  */
 
-.minipublic-bloc {text-align: left}
-.minipublic-bloc header h1 {display: none}
+.minipage-bloc {text-align: left}
+.minipage-bloc header h1 {display: none}
 
 /* LAYOUT / Disposition a l'ecran
 ---------------------------------------------- */
-.minipublic { position: relative; margin: 0 auto; }
-.quitter_fenetre { position: absolute; right: 1.5em; top: 1.5em; }
-.quitter_fenetre a { display: block; width: 1.5em; height: 1.5em; background: url(images/fermer-16.png) no-repeat right center; color: #fff; text-indent: -999em; }
+.minipage { position: relative; margin: 0 auto; }
 
-.minipublic-bloc header {color: white;background: #DB1762;padding: 0.75em 2em;}
-.minipublic-bloc h2 {
+.minipage-bloc header {color: white;background: #DB1762;padding: 0.75em 2em;}
+.minipage-bloc h2 {
 	font-size: 1.1em;
 }
 @media (min-width: 680px) {
-	.minipublic-bloc { width: 650px;border: 2px solid #DB1762;}
-	.minipublic-bloc .corps { padding: 1.5em 2em;overflow: hidden;}
-	.minipublic-bloc header {padding: 0.75em 2em;}
-	.minipublic-bloc header h2 {
+	.minipage-bloc { width: 650px;border: 2px solid #DB1762;}
+	.minipage-bloc .corps { padding: 1.5em 2em;overflow: hidden;}
+	.minipage-bloc header {padding: 0.75em 2em;}
+	.minipage-bloc header h2 {
 		margin: 0 !important;
 	}
 }
 @media (max-width: 680px) {
 	body {padding: 1.5em;}
-	.minipublic-bloc {width: auto;max-width: 25em;min-width: 15em; background: transparent;border: 0}
-	.minipublic-bloc header {padding: 0.75em 0;}
-	#etapes, #infos_etapes {display: none;}
+	.minipage-bloc {width: auto;max-width: 25em;min-width: 15em; background: transparent;border: 0}
+	.minipage-bloc header {padding: 0.75em 0;}
+	#infos_etapes {display: none;}
 }
 
 @media screen and (max-width:680px) and (orientation: landscape) {
@@ -44,10 +42,10 @@
 ---------------------------------------------- */
 
 h1, h2, h3 {
-	margin-block-end: var(--minipublic-margin-bottom);
+	margin-block-end: var(--minipage-margin-bottom);
 }
 p, ul, table {
-	margin-block-end: calc(var(--minipublic-margin-bottom) * 0.75);
+	margin-block-end: calc(var(--minipage-margin-bottom) * 0.75);
 }
 
 
@@ -90,159 +88,8 @@ input[type=radio],input[type=checkbox] {display: inline-block; margin-right: 0.7
 .erreur_message { font-weight: bold; color: red; }
 .reponse_formulaire.reponse_formulaire_ok {border: 2px solid #C6D880;font-weight: normal;padding: 0.8em;margin-bottom: 1.5em;color: #264409;background-color: #E6EFC2;}
 
-
-/* Menu des étapes
----------------------------------------------- */
-:root {
-	--minipres-install-menu-color-base: hsl(0, 0%, 90%);
-	--minipres-install-menu-color-active: hsl(0, 0%, 33%);
-	--minipres-install-menu-color-done: hsl(var(--minipublic-color-success--h), var(--minipublic-color-success--s), 33%);
-	--minipres-install-menu-color-error: hsl(var(--minipublic-color-error--h), var(--minipublic-color-error--s), var(--minipublic-color-error--l));
-	--minipres-install-menu-arrow-width: 1em;
-	--minipres-install-menu-padding: 0.75em;
-}
-
-/* Conteneur des étapes <ul> */
-#infos_etapes {
-	display: flex;
-	flex-flow: column wrap;
-	gap: 1px;
-	padding: 0;
-	margin-block-end: var(--minipublic-margin-bottom);
-	text-align: start;
-	list-style: none;
-	color: hsl(0, 0%, 33%);
-	font-size: 0.9em;
-	line-height: 1.2;
-}
-#infos_etapes.infos_etape_4 {
-	background-color: var(--minipres-install-menu-color-active);
-}
-/* Étape <li> */
-#infos_etapes li {
-	position: relative;
-	display: flex;
-	padding: var(--minipres-install-menu-padding);
-	background-color: var(--minipres-install-menu-color-base);
-}
-/* Conteneur texte interne */
-#infos_etapes li .fond {
-	display: flex;
-	column-gap: 0.5em;
-	align-items: center;
-}
-/* Label invisible */
-#infos_etapes li em {
-	float: inline-start;
-	position: absolute;
-	top: -1000px;
-}
-#infos_etapes li .numero_etape {
-	display: none;
-	font-weight: bold;
-	font-size: 2.8em; /* = à peu près 2 lignes */
-}
-/* Étapes pas faites */
-#infos_etapes li.prochains {}
-/* Étape actuelle */
-#infos_etapes li.on {
-	color: white;
-	font-weight: bold;
-}
-#infos_etapes li.on {
-	background-color: var(--minipres-install-menu-color-active);
-}
-/* Étapes faites */
-#infos_etapes li.valides {
-	color: white;
-}
-#infos_etapes li.valides {
-	background-color: var(--minipres-install-menu-color-done);
-}
-/* Étape en erreur */
-#infos_etapes li.erreur {
-	color: white;
-}
-#infos_etapes li.erreur {
-	background-color: var(--minipres-install-menu-color-error);
-}
-/* Responsive : écrans moyens et plus */
-@media (min-width: 680px) {
-	#infos_etapes {
-		display: grid; /* Pour avoir des colonnes de même largeur */
-		grid-template-columns: repeat(4, 1fr); /* Le nb ne change pas tous les 4 matins à priori */
-		gap: 1.5px; /* 1px trop petit avec les formes en flèche */
-	}
-	#infos_etapes li .numero_etape {
-		display: inline-block;
-		margin-inline-end: 0.1em;
-	}
-	/* Étape en forme de flèche */
-	#infos_etapes li {
-		padding-inline: calc(var(--minipres-install-menu-padding) + var(--minipres-install-menu-arrow-width));
-		margin-inline-start: calc(var(--minipres-install-menu-arrow-width) * -1);
-		clip-path: polygon(
-			calc(100% - var(--minipres-install-menu-arrow-width)) 0%,
-			100% 50%,
-			calc(100% - var(--minipres-install-menu-arrow-width)) 100%,
-			0% 100%,
-			var(--minipres-install-menu-arrow-width) 50%,
-			0% 0%
-		);
-		box-shadow: inset 0 0 1em hsla(0, 0%, 0%, 0.025);
-	}
-	#infos_etapes li:first-child {
-		padding-inline-start: var(--minipres-install-menu-padding);
-		margin-inline-start: 0;
-		clip-path: polygon(
-			0% 0%,
-			calc(100% - var(--minipres-install-menu-arrow-width)) 0%,
-			100% 50%,
-			calc(100% - var(--minipres-install-menu-arrow-width)) 100%,
-			0% 100%
-		);
-		border-top-left-radius: var(--minipublic-border-radius);
-		border-bottom-left-radius: var(--minipublic-border-radius);
-	}
-	#infos_etapes li:last-child {
-		padding-inline-end: var(--minipres-install-menu-padding);
-		clip-path: polygon(
-			100% 0%,
-			100% 100%,
-			0% 100%,
-			var(--minipres-install-menu-arrow-width) 50%,
-			0% 0%
-		);
-		border-top-right-radius: var(--minipublic-border-radius);
-		border-bottom-right-radius: var(--minipublic-border-radius);
-	}
-}
-
-
-/* Habillage (en vrac)
----------------------------------------------- */
-
-.petit-centre { width: 300px; margin: auto; margin-bottom: 1.5em; text-align: center; }
-.petit-centre .logo { margin-bottom: 1.5em; }
-
-.toile_foncee { background: #777; }
-
-#etapes { display: block; position: absolute; top: 10px; left: 10px; }
-#etapes span { display: block; margin-top: -0.50em; padding: 12px 14px; margin-bottom: 5px; }
-#etapes span em { font-size: 2em; font-weight: bold; }
-#etapes span span { position: absolute; top: -100px; left: -100px; }
-#etapes span.ok { background: url(images/etape-ok.gif) center no-repeat; }
-#etapes span.encours { background: url(images/etape-encours.gif) center no-repeat; }
-#etapes span.todo { background: url(images/etape-todo.gif) center no-repeat; }
-
-
-/* installation des plugins */
-
-.install-plugins {position:relative;margin-bottom: 0;}
-.install-plugins.success + .install-plugins.success {margin-top: 0;border-top: 0;}
-.install-plugins.error + .install-plugins.error {margin-top: 0;border-top: 0;}
-.install-plugins .result {display:block;position:absolute;top:0.8em;right:0.8em;font-weight:bold;}
-.install-plugins .success {display: none;} /* ne pas afficher les installations ok mais seulement les echecs */
-
+/* inscription + spip-pass */
+.quitter_fenetre { position: absolute; right: 1.5em; top: 1.5em; }
+.quitter_fenetre a { display: block; width: 1.5em; height: 1.5em; background: url(images/fermer-16.png) no-repeat right center; color: #fff; text-indent: -999em; }
 
 /* end */

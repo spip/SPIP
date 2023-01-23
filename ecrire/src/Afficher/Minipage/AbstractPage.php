@@ -9,15 +9,14 @@
  *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
  * \***************************************************************************/
 
-namespace Spip\Afficher;
+namespace Spip\Afficher\Minipage;
 
 
 /**
- * Présentation des pages simplifiées publiques pour envoyer un message à un utilisateur
- *
- * @package SPIP\Afficher\Minipublic
+ * Présentation des pages simplifiées
  **/
-class Minipublic {
+abstract class AbstractPage {
+	public const TYPE = '';
 
 	public function __construct() {
 		include_fichiers_fonctions();
@@ -29,7 +28,7 @@ class Minipublic {
 	/**
 	 * Retourne le début d'une page HTML minimale
 	 *
-	 * Le contenu de CSS minimales (reset.css, clear.css, minipublic.css) est inséré
+	 * Le contenu de CSS minimales (reset.css, clear.css, minipage.css) est inséré
 	 * dans une balise script inline (compactée si possible)
 	 *
 	 * @param array $options
@@ -91,10 +90,10 @@ class Minipublic {
 		}
 
 		$inline = ":root {"
-			. "--minipublic-color-theme--h: $h;"
-			. "--minipublic-color-theme--s: $s;"
-			. "--minipublic-color-theme--l: $l;}";
-		$vars = file_get_contents(find_in_theme('minipublic.vars.css'));
+			. "--minipage-color-theme--h: $h;"
+			. "--minipage-color-theme--s: $s;"
+			. "--minipage-color-theme--l: $l;}";
+		$vars = file_get_contents(find_in_theme('minipage.vars.css'));
 		$inline .= "\n" . trim($vars);
 		if (function_exists('minifier')) {
 			$inline = minifier($inline, 'css');
@@ -102,7 +101,7 @@ class Minipublic {
 		$files = [
 			find_in_theme('reset.css'),
 			find_in_theme('clear.css'),
-			find_in_theme('minipublic.css'),
+			find_in_theme('minipage.css'),
 		];
 		if (!empty($options['css_files'])) {
 			foreach ($options['css_files'] as $css_file) {
@@ -110,7 +109,7 @@ class Minipublic {
 			}
 		}
 		if ($all_inline) {
-			// inliner les CSS (optimisation de la page minipublic qui passe en un seul hit a la demande)
+			// inliner les CSS (optimisation de la page minipage qui passe en un seul hit a la demande)
 			foreach ($files as $name) {
 				$file = direction_css($name);
 				if (function_exists('minifier')) {
@@ -146,8 +145,8 @@ class Minipublic {
 			$css .
 			(empty($options['head']) ? "" : $options['head']) .
 			"</head>\n" .
-			"<body{$onLoad} class=\"minipublic\">\n" .
-			"\t<div class=\"minipublic-bloc\">\n";
+			"<body{$onLoad} class=\"minipage" . ($this::TYPE ? ' minipage--' . $this::TYPE : '') . "\">\n" .
+			"\t<div class=\"minipage-bloc\">\n";
 	}
 
 	/**

@@ -77,7 +77,8 @@ function etape_ldap5_save() {
 }
 
 function etape_ldap5_suite() {
-	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
+	$minipage = new Spip\Afficher\Minipage\Installation();
+	echo $minipage->installDebutPage(['onload' => 'document.getElementById(\'suivant\').focus();return false;']);
 
 	echo info_etape(
 		_T('info_ldap_ok'),
@@ -89,5 +90,5 @@ function etape_ldap5_suite() {
 		"<input type='hidden' name='ldap_present' value='true' />"
 		. bouton_suivant()));
 
-	echo install_fin_html();
+	echo $minipage->installFinPage();
 }

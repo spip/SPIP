@@ -50,7 +50,9 @@ function install_etape_2_dist() {
 	$GLOBALS['connexions'][$server_db][$GLOBALS['spip_sql_version']]
 		= $GLOBALS['spip_' . $server_db . '_functions_' . $GLOBALS['spip_sql_version']];
 
-	echo install_debut_html();
+	$minipage = new Spip\Afficher\Minipage\Installation();
+	echo $minipage->installDebutPage();
+
 
 // prenons toutes les dispositions possibles pour que rien ne s'affiche !
 
@@ -93,7 +95,7 @@ function install_etape_2_dist() {
 		'</p></div>';
 	}
 
-	echo install_fin_html();
+	echo $minipage->installFinPage();
 }
 
 // Liste les bases accessibles,

@@ -9,25 +9,20 @@
  *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
  * \***************************************************************************/
 
-namespace Spip\Afficher;
+namespace Spip\Afficher\Minipage;
 
 
 /**
- * Présentation des pages simplifiées publiques pour envoyer un message à un utilisateur
- *
- * @package SPIP\Afficher\Minipublic
+ * Présentation des pages simplifiées d’admin pour envoyer un message à un utilisateur
  **/
-class Minipres extends Minipublic {
-
+class Admin extends Page {
+	public const TYPE = 'admin';
 	protected function setOptions(array $options) {
-		$options['couleur_fond'] = '#aaa';
+		$options['couleur_fond'] = '#222';
 		$options['css_files'] = [
 			find_in_theme('minipres.css')
 		];
 
-		if (!empty($options['titre']) and $options['titre'] === 'AUTO') {
-			$options['titre'] = _T('info_installation_systeme_publication');
-		}
 		$options['page_title'] = ($options['titre'] ?? '');
 
 		return $options;
@@ -124,7 +119,7 @@ class Minipres extends Minipublic {
 				$footer = bouton_action(_T('public:lien_connecter'), generer_url_public('login'));
 			}
 			else {
-				$footer = bouton_action(_T('public:accueil_site'), $GLOBALS['meta']['adresse_site']);
+				$footer = bouton_action(_T('public:accueil_site'), $GLOBALS['meta']['adresse_site'] ?? '');
 			}
 
 			$corps = "";

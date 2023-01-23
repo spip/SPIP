@@ -38,7 +38,8 @@ function install_etape_ldap1_dist() {
 		? _INSTALL_PASS_LDAP
 		: '';
 
-	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
+	$minipage = new Spip\Afficher\Minipage\Installation();
+	echo $minipage->installDebutPage(['onload' => 'document.getElementById(\'suivant\').focus();return false;']);
 
 	echo info_etape(
 		_T('titre_connexion_ldap'),
@@ -93,5 +94,5 @@ function install_etape_ldap1_dist() {
 		)
 		. bouton_suivant()));
 
-	echo install_fin_html();
+	echo $minipage->installFinPage();
 }

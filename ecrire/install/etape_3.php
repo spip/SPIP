@@ -384,7 +384,7 @@ function install_etape_3_dist() {
 				? '' : install_propose_ldap());
 	}
 
-	echo install_debut_html();
-	echo $res;
-	echo install_fin_html();
+
+	$minipage = new Spip\Afficher\Minipage\Installation();
+	echo $minipage->page($res);
 }

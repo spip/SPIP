@@ -1,0 +1,66 @@
+:root {
+	/*
+	Définie par défaut par minipage() d'après la config couleur_login
+	Mais vous pouvez forcer une valeur ici
+	--minipage-color-theme--h: 337;
+	--minipage-color-theme--s: 81%;
+	--minipage-color-theme--l: 47%;
+	 */
+	--minipage-color-theme--hs: var(--minipage-color-theme--h), var(--minipage-color-theme--s);
+
+	--minipage-color-theme: hsl(var(--minipage-color-theme--hs), var(--minipage-color-theme--l));
+	--minipage-color-theme-light: hsl(var(--minipage-color-theme--hs), calc(var(--minipage-color-theme--l) + 25%));
+	--minipage-color-theme-dark: hsl(var(--minipage-color-theme--hs), calc(var(--minipage-color-theme--l) - 25%));
+
+	--minipage-color-gray-lighter: rgba(255, 255, 255, 0.7);
+	--minipage-color-gray-light: rgba(255, 255, 255, 0.5);
+	--minipage-color-gray-dark: rgba(0, 0, 0, 0.5);
+	--minipage-color-black: #333;
+
+
+	--minipage-line-height: 1.5em;
+	--minipage-border-radius: 0.25rem;
+	--minipage-margin-bottom: 1.5em;
+
+	/* couleurs partagées */
+	--minipage-btn-color-white:                #fff;
+	--minipage-btn-color-black:                #333;
+	--minipage-btn-color-border-accent:        hsla(0, 0%, 0%, 0.2);
+	--minipage-btn-color-focus:                hsla(var(--minipage-color-theme--h), calc(var(--minipage-color-theme--s) * 3), var(--minipage-color-theme--l), 0.5);
+
+	--minipage-btn-color-main-bg:              hsl(var(--minipage-color-theme--hs), calc(var(--minipage-color-theme--l) * 0.9));
+	--minipage-btn-color-main-border:          var(--minipage-btn-color-main-bg);
+	--minipage-btn-color-main-text:            var(--minipage-btn-color-white);
+	--minipage-btn-color-main-hover-bg:        hsl(var(--minipage-color-theme--hs), calc(var(--minipage-color-theme--l) * 0.75));
+	--minipage-btn-color-main-hover-border:    var(--minipage-btn-color-main-hover-bg);
+	--minipage-btn-color-main-hover-text:      var(--minipage-btn-color-main-text);
+	--minipage-btn-color-main-active-bg:       hsl(var(--minipage-color-theme--hs), calc(var(--minipage-color-theme--l) * 0.6));
+	--minipage-btn-color-main-active-border:   var(--minipage-btn-color-main-active-bg);
+	--minipage-btn-color-main-active-text:     var(--minipage-btn-color-main-text);
+
+	/* taille normale */
+	--minipage-btn-font-size:           1em;
+	--minipage-btn-padding-x:           1rem;
+	--minipage-btn-padding-y:           0.5rem;
+	--minipage-btn-margin:              0.25em;
+	--minipage-btn-border-radius:       0.25em;
+	--minipage-btn-gutter:              0.5em;
+
+	--minipage-color-success--h: 72;
+	--minipage-color-success--s: 66%;
+	--minipage-color-success--l: 62%;
+	--minipage-color-error--h: 356;
+	--minipage-color-error--s: 70%;
+	--minipage-color-error--l: 57%;
+	--minipage-color-notice--h: 47;
+	--minipage-color-notice--s: 100%;
+	--minipage-color-notice--l: 62%;
+	--minipage-color-info--h: 197;
+	--minipage-color-info--s: 56%;
+	--minipage-color-info--l: 27%;
+
+	--minipage-alert-spacing-x: 1.25rem;
+	--minipage-alert-spacing-y: 1.25rem;
+	--minipage-alert-iconsize: 0.0rem;
+	--minipage-alert-closesize: 1.25em;
+}

@@ -19,10 +19,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
- * Retourne le début d'une page HTML minimale (de type installation ou erreur)
+ * Retourne le début d'une page HTML minimale (de type installation)
  *
- * @deprecated 4.2 Utiliser `Spip\Afficher\Minipres`
- * @uses \Spip\Afficher\Minipres
+ * @deprecated 4.2 Utiliser `Spip\Afficher\Minipage\Installation`
+ * @uses \Spip\Afficher\Minipage\Installation
  *
  * @param string $titre
  *    Titre. `AUTO`, indique que l'on est dans le processus d'installation de SPIP
@@ -46,21 +46,21 @@ function install_debut_html($titre = 'AUTO', $onLoad = '', $all_inline = false) 
 		'titre' => $titre,
 	];
 
-	$minipres = new Spip\Afficher\Minipres();
-	return $minipres->installDebutPage($options);
+	$minipage = new Spip\Afficher\Minipage\Installation();
+	return $minipage->installDebutPage($options);
 }
 
 /**
  * Retourne la fin d'une page HTML minimale (de type installation ou erreur)
  *
- * @deprecated 4.2 Utiliser `Spip\Afficher\Minipres`
- * @uses \Spip\Afficher\Minipres
+ * @deprecated 4.2 Utiliser `Spip\Afficher\Minipage\Installation`
+ * @uses \Spip\Afficher\Minipage\Installation
  *
  * @return string Code HTML
  */
 function install_fin_html() {
-	$minipres = new Spip\Afficher\Minipres();
-	return $minipres->installFinPage();
+	$minipage = new Spip\Afficher\Minipage\Installation();
+	return $minipage->installFinPage();
 }
 
 
@@ -74,8 +74,8 @@ function install_fin_html() {
  * Lorsqu’aucun argument n’est transmis, un header 403 est renvoyé,
  * ainsi qu’un message indiquant une interdiction d’accès.
  *
- * @deprecated 4.2 Utiliser `Spip\Afficher\Minipres`
- * @uses \Spip\Afficher\Minipres
+ * @deprecated 4.2 Utiliser `Spip\Afficher\Minipage\Admin`
+ * @uses \Spip\Afficher\Minipage\Admin
  *
  * @example
  *   ```
@@ -116,6 +116,6 @@ function minipres($titre = '', $corps = '', $options = []) {
 
 	$options['titre'] = $titre;
 
-	$minipres = new Spip\Afficher\Minipres();
-	return $minipres->page($corps, $options);
+	$minipage = new Spip\Afficher\Minipage\Admin();
+	return $minipage->page($corps, $options);
 }
