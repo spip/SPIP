@@ -206,7 +206,7 @@ function low_sec($id_auteur) {
  *
  * @filtre
  */
-function securiser_acces_low_sec($id_auteur, $cle, $dir, $op = '', $args = '') {
+function securiser_acces_low_sec($id_auteur, #[\SensitiveParameter] $cle, $dir, $op = '', $args = '') {
 	if ($op) {
 		$dir .= " $op $args";
 	}
@@ -301,7 +301,7 @@ function afficher_low_sec($id_auteur, $action = '') {
  * @return bool
  *     true si les clés corresponde, false sinon
  **/
-function verifier_low_sec($id_auteur, $cle, $action = '') {
+function verifier_low_sec($id_auteur, #[\SensitiveParameter] $cle, $action = '') {
 	return ($cle == afficher_low_sec($id_auteur, $action));
 }
 
@@ -401,7 +401,7 @@ function generer_htpasswd_files($htpasswd, $htpasswd_admin) {
  * @return void|string
  *  La chaîne hachée si fonction crypt présente, rien sinon.
  */
-function generer_htpass($pass) {
+function generer_htpass(#[\SensitiveParameter] $pass) {
 	if ($generer_htpass = charger_fonction('generer_htpass', 'inc', true)) {
 		return $generer_htpass($pass);
 	}
