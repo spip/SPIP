@@ -31,7 +31,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param bool $phpauth
  * @return array|bool
  */
-function auth_spip_dist($login, $pass, $serveur = '', $phpauth = false) {
+function auth_spip_dist($login, #[\SensitiveParameter] $pass, $serveur = '', $phpauth = false) {
 
 	// retrouver le login
 	$login = auth_spip_retrouver_login($login);
@@ -439,7 +439,7 @@ function auth_spip_autoriser_modifier_pass(string $serveur = ''): bool {
  * @return string
  *  message d'erreur si login non valide, chaine vide sinon
  */
-function auth_spip_verifier_pass($login, $new_pass, $id_auteur = 0, $serveur = '') {
+function auth_spip_verifier_pass($login, #[\SensitiveParameter] $new_pass, $id_auteur = 0, $serveur = '') {
 	// login et mot de passe
 	if (strlen($new_pass) < _PASS_LONGUEUR_MINI) {
 		return _T('info_passe_trop_court_car_pluriel', ['nb' => _PASS_LONGUEUR_MINI]);
@@ -458,7 +458,7 @@ function auth_spip_verifier_pass($login, $new_pass, $id_auteur = 0, $serveur = '
  * @param string $serveur
  * @return bool
  */
-function auth_spip_modifier_pass($login, $new_pass, $id_auteur, $serveur = '') {
+function auth_spip_modifier_pass($login, #[\SensitiveParameter] $new_pass, $id_auteur, $serveur = '') {
 	if (is_null($new_pass) or auth_spip_verifier_pass($login, $new_pass, $id_auteur, $serveur) != '') {
 		return false;
 	}

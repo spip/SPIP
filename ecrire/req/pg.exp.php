@@ -29,7 +29,7 @@ define('_DEFAULT_DB', 'spip');
 // et si ca marche toujours pas, avec "spip" (constante ci-dessus)
 // si ca ne marche toujours pas, echec.
 
-function req_pg_dist($addr, $port, $login, $pass, $db = '', $prefixe = '') {
+function req_pg_dist($addr, $port, $login, #[\SensitiveParameter] $pass, $db = '', $prefixe = '') {
 	static $last_connect = [];
 	if (!extension_loaded('pgsql')) {
 		return false;

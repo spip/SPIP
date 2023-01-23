@@ -243,7 +243,7 @@ function spip_connect_db(
 	$host,
 	$port,
 	$login,
-	$pass,
+	#[\SensitiveParameter] $pass,
 	$db = '',
 	$type = 'mysql',
 	$prefixe = '',

@@ -244,7 +244,7 @@ function install_propose_ldap() {
 }
 
 
-function install_premier_auteur($email, $login, $nom, $pass, $hidden, $auteur_obligatoire) {
+function install_premier_auteur($email, $login, $nom, #[\SensitiveParameter] $pass, $hidden, $auteur_obligatoire) {
 	return info_progression_etape(3, 'etape_', 'install/') .
 	info_etape(
 		_T('info_informations_personnelles'),

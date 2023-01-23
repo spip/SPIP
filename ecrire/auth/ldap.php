@@ -53,7 +53,7 @@ if (!isset($GLOBALS['ldap_attributes']) or !is_array($GLOBALS['ldap_attributes']
  * @param bool $phpauth
  * @return array|bool
  */
-function auth_ldap_dist($login, $pass, $serveur = '', $phpauth = false) {
+function auth_ldap_dist($login, #[\SensitiveParameter] $pass, $serveur = '', $phpauth = false) {
 
 	#spip_log("ldap $login " . ($pass ? "mdp fourni" : "mdp absent"));
 
@@ -154,7 +154,7 @@ function auth_ldap_connect($serveur = '') {
  * @return string
  *    Le login trouvé ou chaine vide si non trouvé
  */
-function auth_ldap_search($login, $pass, $checkpass = true, $serveur = '') {
+function auth_ldap_search($login, #[\SensitiveParameter] $pass, $checkpass = true, $serveur = '') {
 	// Securite anti-injection et contre un serveur LDAP laxiste
 	$login_search = preg_replace('/[^-@._\s\d\w]/', '', $login);
 	if (!strlen($login_search) or ($checkpass and !strlen($pass))) {
@@ -276,7 +276,7 @@ function auth_ldap_retrouver_login($login, $serveur = '') {
  * @return string
  *   Message d'erreur si login non valide, chaîne vide sinon
  */
-function auth_ldap_verifier_pass($login, $new_pass, $id_auteur = 0, $serveur = '') {
+function auth_ldap_verifier_pass($login, #[\SensitiveParameter] $new_pass, $id_auteur = 0, $serveur = '') {
 	include_spip('auth/spip');
 
 	return auth_spip_verifier_pass($login, $new_pass, $id_auteur, $serveur);
@@ -317,7 +317,7 @@ function auth_ldap_autoriser_modifier_pass($serveur = '') {
  * @return bool
  *    Informe du succès ou de l'echec du changement du mot de passe
  */
-function auth_ldap_modifier_pass($login, $new_pass, $id_auteur, $serveur = '') {
+function auth_ldap_modifier_pass($login, #[\SensitiveParameter] $new_pass, $id_auteur, $serveur = '') {
 	if (is_null($new_pass) or auth_ldap_verifier_pass($login, $new_pass, $id_auteur, $serveur) != '') {
 		return false;
 	}

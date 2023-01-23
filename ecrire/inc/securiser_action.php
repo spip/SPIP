@@ -227,7 +227,7 @@ function caracteriser_auteur($id_auteur = null) {
  * @param string $alea
  * @return string
  */
-function _action_auteur(string $action, int $id_auteur, ?string $pass, string $alea): string {
+function _action_auteur(string $action, int $id_auteur, #[\SensitiveParameter] ?string $pass, string $alea): string {
 	static $sha = [];
 	$pass = $pass ?? '';
 	$entry = "$action:$id_auteur:$pass:$alea";
@@ -320,7 +320,7 @@ function calculer_cle_action($action) {
  * @param string $cle
  * @return bool
  */
-function verifier_cle_action($action, $cle) {
+function verifier_cle_action($action, #[\SensitiveParameter] $cle) {
 	return hash_equals($cle, calculer_cle_action($action));
 }
 
@@ -367,7 +367,7 @@ function calculer_token_previsu($url, $id_auteur = null, $alea = 'alea_ephemere'
  *     - `False` si echec,
  *     + Tableau (id auteur, type d’objet, id_objet) sinon.
  */
-function verifier_token_previsu($token) {
+function verifier_token_previsu(#[\SensitiveParameter] $token) {
 	// retrouver auteur / hash
 	$e = explode('-', $token, 2);
 	if (count($e) == 2 and is_numeric(reset($e))) {

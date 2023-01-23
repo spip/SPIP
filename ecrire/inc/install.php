@@ -74,7 +74,7 @@ function install_fichier_connexion($nom, $texte) {
  *     texte du fichier de connexion
  *
  **/
-function install_connexion($adr, $port, $login, $pass, $base, $type, $pref, $ldap = '', $charset = '') {
+function install_connexion($adr, $port, $login, #[\SensitiveParameter] $pass, $base, $type, $pref, $ldap = '', $charset = '') {
 	$adr = addcslashes($adr, "'\\");
 	$port = addcslashes($port, "'\\");
 	$login = addcslashes($login, "'\\");
@@ -380,7 +380,7 @@ function install_select_serveur() {
 	return $options;
 }
 
-function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape, $jquery = true) {
+function install_connexion_form($db, $login, #[\SensitiveParameter] $pass, $predef, $hidden, $etape, $jquery = true) {
 	$server_db = (is_string($predef[0])) ? $predef[0] : '';
 
 	return generer_form_ecrire('install', (

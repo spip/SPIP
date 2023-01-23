@@ -5378,7 +5378,7 @@ function filtre_compacte_dist($source, $format = null) {
  * @param int|null $portion_pourcent
  * @return string
  */
-function spip_affiche_mot_de_passe_masque(?string $passe, bool $afficher_partiellement = false, ?int $portion_pourcent = null): string {
+function spip_affiche_mot_de_passe_masque(#[\SensitiveParameter] ?string $passe, bool $afficher_partiellement = false, ?int $portion_pourcent = null): string {
 	$passe ??= '';
 	$l = strlen($passe);
 
