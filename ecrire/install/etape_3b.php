@@ -73,9 +73,6 @@ function install_etape_3b_dist() {
 		$nom = (importer_charset($nom, _DEFAULT_CHARSET));
 		$login = (importer_charset($login, _DEFAULT_CHARSET));
 		$email = (importer_charset($email, _DEFAULT_CHARSET));
-		# pour le passwd, bizarrement il faut le convertir comme s'il avait
-		# ete tape en iso-8859-1 ; car c'est en fait ce que voit md5.js
-		$pass = unicode2charset(utf_8_to_unicode($pass), 'iso-8859-1');
 
 		include_spip('auth/spip');
 		// prelablement, creer le champ webmestre si il n'existe pas (install neuve
