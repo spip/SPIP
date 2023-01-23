@@ -150,8 +150,7 @@ button:active {
 	line-height: var(--minipublic-line-height);
 	background-size: cover;
 	background-position: center;
-	background: var(--minipublic-color-theme);
-	background: radial-gradient(circle, var(--minipublic-color-theme) 20%, var(--minipublic-color-theme-dark) 100%);
+	background: #f8f7f3;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -175,15 +174,15 @@ button:active {
 	background: rgba(255,255,255,85%);
 	padding: 1.5em;
 	text-align: center;
-	border-top-left-radius: var(--minipublic-border-radius);
-	border-top-right-radius: var(--minipublic-border-radius);
+	border-top-left-radius: calc(var(--minipublic-border-radius) - 2px);
+	border-top-right-radius: calc(var(--minipublic-border-radius) - 2px);
 }
 .minipublic-bloc header h1+h2 {
 	margin-top: 0.75rem;
 }
 
 .minipublic-bloc .corps {
-	background: rgba(255,255,255,95%);
+	background: rgba(255,255,255,100%);
 	padding: 1.5em;
 	overflow: auto;
 	flex-grow: 1;
