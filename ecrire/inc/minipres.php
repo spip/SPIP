@@ -21,8 +21,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 /**
  * Retourne le début d'une page HTML minimale (de type installation)
  *
- * @deprecated 4.2 Utiliser `Spip\Afficher\Minipage\Installation`
- * @uses \Spip\Afficher\Minipage\Installation
+ * @deprecated 4.2 Utiliser `Spip\Afficher\Minipage\Admin`
+ * @uses \Spip\Afficher\Minipage\Admin
  *
  * @param string $titre
  *    Titre. `AUTO`, indique que l'on est dans le processus d'installation de SPIP
@@ -46,20 +46,20 @@ function install_debut_html($titre = 'AUTO', $onLoad = '', $all_inline = false) 
 		'titre' => $titre,
 	];
 
-	$minipage = new Spip\Afficher\Minipage\Installation();
+	$minipage = new Spip\Afficher\Minipage\Admin();
 	return $minipage->installDebutPage($options);
 }
 
 /**
  * Retourne la fin d'une page HTML minimale (de type installation ou erreur)
  *
- * @deprecated 4.2 Utiliser `Spip\Afficher\Minipage\Installation`
- * @uses \Spip\Afficher\Minipage\Installation
+ * @deprecated 4.2 Utiliser `Spip\Afficher\Minipage\Admin`
+ * @uses \Spip\Afficher\Minipage\Admin
  *
  * @return string Code HTML
  */
 function install_fin_html() {
-	$minipage = new Spip\Afficher\Minipage\Installation();
+	$minipage = new Spip\Afficher\Minipage\Admin();
 	return $minipage->installFinPage();
 }
 
