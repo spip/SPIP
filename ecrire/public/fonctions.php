@@ -646,3 +646,38 @@ function appliquer_filtre_sinon($arg, $filtre, $args, $defaut = '') {
 	array_shift($args); // enlever $filtre
 	return $f($arg, ...$args);
 }
+
+/**
+ * generer le style dynamique inline pour la page de login et spip_pass
+ * @param array $Pile Pile de données
+ * @param ...$dummy
+ * @return string
+ */
+function filtre_styles_inline_page_login_pass_dist(&$Pile,...$dummy) {
+	$styles = '';
+	include_spip('inc/config');
+	if ($couleur = lire_config('couleur_login')) {
+		include_spip('inc/filtres_images_mini');
+		$hs = couleur_hex_to_hsl($couleur, 'h, s');
+		$l = couleur_hex_to_hsl($couleur, 'l');
+		$styles .= ":root {--spip-login-color-theme--hs: {$hs};--spip-login-color-theme--l: {$l};}\n";
+	}
+	$logo_bg = _DIR_IMG . "spip_fond_login.jpg";
+	if (file_exists($logo_bg)) {
+		include_spip('inc/filtres_images_mini');
+		$logo_mini = image_reduire($logo_bg, 64, 64);
+		$logo_mini = extraire_attribut($logo_mini, 'src');
+		$embarque_fichier = charger_filtre('embarque_fichier');
+		$logo_mini = $embarque_fichier($logo_mini);
+		$logo_bg = timestamp($logo_bg);
+		$styles .= ".page_login, .page_spip_pass {background-image:url($logo_bg), url($logo_mini);}\n";
+		$Pile[0]['body_class'] = 'fond_image';
+	}
+	else {
+		$Pile[0]['body_class'] = 'sans_fond';
+	}
+	if ($styles) {
+		$styles = "<style type='text/css'>$styles</style>";
+	}
+	return $styles;
+}

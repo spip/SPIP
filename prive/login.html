@@ -12,32 +12,12 @@
 #INSERT_HEAD_CSS
 <link rel="stylesheet" href="[(#VAL{reset.css}|find_in_theme|direction_css)]" type="text/css" />
 <link rel="stylesheet" href="[(#VAL{clear.css}|find_in_theme|direction_css)]" type="text/css" />
-<link rel="stylesheet" href="[(#VAL{minipres.css}|find_in_theme|direction_css)]" type="text/css" />
 <link rel="stylesheet" href="[(#VAL{login_prive.css}|find_in_theme|direction_css)]" type="text/css" />
-#INSERT_HEAD
-<script type='text/javascript'>
-jQuery(function(){jQuery('a#spip_pass').click(function(){window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=380'); return false;});});
-</script>[
+#INSERT_HEAD[
 <meta name="generator" content="SPIP (#SPIP_VERSION|header_silencieux)" />]
-#SET{logo,#CHEMIN_IMAGE{#CONST{_DIR_IMG}|concat{spip_fond_login.jpg}}}
-[(#CONFIG{couleur_login}|oui)
-	#SET{hs,#CONFIG{couleur_login}|couleur_hex_to_hsl{"h, s"}}
-	#SET{l,#CONFIG{couleur_login}|couleur_hex_to_hsl{l}}
-]
-<style type="text/css">[(#GET{logo}|oui)
-#SET{logo_mini,#GET{logo}|image_reduire{64,64}|extraire_attribut{src}}
-.page_login {
-	background-image:url([(#GET{logo}|timestamp)]),url([(#GET{logo_mini}|embarque_fichier)]);
-}]
-[(#CONFIG{couleur_login}|oui)
-:root {
-		--spip-login-color-theme--hs: #GET{hs};
-		--spip-login-color-theme--l: #GET{l};
-}
-]
-</style>
+[(#REM|styles_inline_page_login_pass)]
 </head>
-<body class="page_login[(#GET{logo}|non) sans_fond]">
+<body class="page_login[ (#ENV{body_class})]">
 
 	<h1>#NOM_SITE_SPIP</h1>
 	[(#REM)
