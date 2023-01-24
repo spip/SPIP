@@ -159,8 +159,8 @@ button:active {
 }
 
 .minipage-bloc {
-	border: 1px solid var(--minipage-color-gray-light);
 	border-radius: var(--minipage-border-radius);
+	box-shadow: var(--minipage-box-shadow);
 	margin: 5rem auto;
 	width: 30em;
 	max-width: 100vw;
@@ -175,15 +175,15 @@ button:active {
 	background: rgba(255,255,255,85%);
 	padding: 1.5em;
 	text-align: center;
-	border-top-left-radius: calc(var(--minipage-border-radius) - 2px);
-	border-top-right-radius: calc(var(--minipage-border-radius) - 2px);
+	border-top-left-radius: var(--minipage-border-radius);
+	border-top-right-radius: var(--minipage-border-radius);
 }
 .minipage-bloc header h1+h2 {
 	margin-top: 0.75rem;
 }
 
 .minipage-bloc .corps {
-	background: rgba(255,255,255,95%);
+	background: rgba(255,255,255,100%);
 	padding: 1.5em;
 	overflow: auto;
 	flex-grow: 1;

@@ -12,6 +12,8 @@
 }
 .minipage-bloc {text-align: left}
 .minipage-bloc header h1 {display: none}
+.minipage-bloc header h2 {font-weight: bold;}
+.minipage-bloc .corps:last-child { border-bottom-left-radius: var(--minipage-border-radius); border-bottom-right-radius: var(--minipage-border-radius); }
 
 /* LAYOUT / Disposition a l'ecran
 ---------------------------------------------- */
@@ -22,7 +24,7 @@
 	font-size: 1.1em;
 }
 @media (min-width: 680px) {
-	.minipage-bloc { width: 650px;border: 2px solid var(--minipres-color-theme);}
+	.minipage-bloc { width: 650px;}
 	.minipage-bloc .corps { padding: 1.5em 2em;overflow: hidden;}
 	.minipage-bloc header {padding: 0.75em 2em;}
 	.minipage-bloc header h2 {
