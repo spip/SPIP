@@ -18,10 +18,11 @@ namespace Spip\Afficher\Minipage;
 class Admin extends Page {
 	public const TYPE = 'admin';
 	protected function setOptions(array $options) {
-		$options['couleur_fond'] = '#222';
-		$options['css_files'] = [
-			find_in_theme('minipres.css')
-		];
+		$options['couleur_fond'] = '#666';
+		if (empty($options['css_files'])) {
+			$options['css_files'] = [];
+		}
+		array_unshift($options['css_files'], find_in_theme('minipres.css'));
 
 		$options['page_title'] = ($options['titre'] ?? '');
 
@@ -122,13 +123,23 @@ class Admin extends Page {
 				$footer = bouton_action(_T('public:accueil_site'), $GLOBALS['meta']['adresse_site'] ?? '');
 			}
 
-			$corps = "";
 			spip_log($nom . " $titre " . $_SERVER['REQUEST_URI'], 'minipres');
-		}
 
-		$options['footer'] = $footer;
+			$options['footer'] = $footer;
+			if (empty($corps)) {
+				$corps = "<div class='msg-alert error'>"
+					. $titre
+					. "</div>";
+				$options['titre'] = '';
+			}
+			else {
+				$options['titre'] = $titre;
+			}
+		}
+		else {
+			$options['titre'] = $titre;
+		}
 		$options['page_title'] = $titre;
-		$options['titre'] = $titre;
 
 		$options = $this->setOptions($options);
 
