@@ -21,6 +21,7 @@
 	--minipage-line-height: 1.5em;
 	--minipage-border-radius: 0.25rem;
 	--minipage-margin-bottom: 1.5em;
+	--minipage-box-shadow: 0 .05em .15em hsla(0,0%,0%,0.1),0 .2em .5em hsla(0,0%,0%,0.1),0 .2em 1em hsla(0,0%,0%,0.075);
 
 	/* couleurs partagées */
 	--minipage-btn-color-white:                #fff;
