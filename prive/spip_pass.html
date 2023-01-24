@@ -9,18 +9,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
 <meta name="robots" content="none" />
 <meta name="viewport" content="width=device-width" />
+#INSERT_HEAD_CSS
 <link rel="stylesheet" href="[(#VAL{reset.css}|find_in_theme|direction_css)]" type="text/css" />
 <link rel="stylesheet" href="[(#VAL{clear.css}|find_in_theme|direction_css)]" type="text/css" />
-<link rel="stylesheet" href="[(#VAL{minipres.css}|find_in_theme|direction_css)]" type="text/css" />
+<link rel="stylesheet" href="[(#VAL{login_prive.css}|find_in_theme|direction_css)]" type="text/css" />
 #INSERT_HEAD[
 <meta name="generator" content="SPIP (#SPIP_VERSION|header_silencieux)" />]
+[(#REM|styles_inline_page_login_pass)]
 </head>
-<body>
-
-<div id='minipres'>
+<body class="page_login page_spip_pass[ (#ENV{body_class})]">
 
 	<h1>#NOM_SITE_SPIP</h1>
-		
+
 	<div class="formulaire_spip pass">
 		[(#ENV{p}|non)
 		  #FORMULAIRE_OUBLI
@@ -29,19 +29,8 @@
 		  #FORMULAIRE_MOT_DE_PASSE
 		]
 	</div>
-	<div class="quitter_fenetre">
-	<script type='text/javascript'>/*<!\[CDATA\[*/
-	document.write("<a href='")
-	document.write((window.opener) ? "javascript:close()" : "#URL_PAGE{login}")
-	document.write("' title='<:pass_quitter_fenetre:>'><:pass_quitter_fenetre:><" + "/a>");
-	document.getElementById('oubli').focus()
-	/*\]\]>*/</script>
-	<noscript>
-		<a href='[(#URL_PAGE{login}|parametre_url{lang, #LANG})]' title='<:lien_connecter:>'><:lien_connecter:></a>
-	</noscript>
-	</div>
-	
-</div><!--#minipres-->
-
+	<p class="retour">
+		<a href="[(#URL_PAGE{login}|parametre_url{lang, #LANG})]" class="btn"><:lien_connecter:></a>
+	</p>
 </body>
 </html>
