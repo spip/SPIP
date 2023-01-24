@@ -61,7 +61,7 @@ function surligner_mots($page, $surcharge_surligne = '') {
 		if ($GLOBALS['meta']['charset'] == 'utf-8') {
 			include_spip('inc/charsets');
 			if (!is_utf8($surcharge_surligne)) {
-				$surcharge_surligne = utf8_encode($surcharge_surligne);
+				$surcharge_surligne = mb_convert_encoding($surcharge_surligne, 'UTF-8', 'ISO-8859-1');
 			}
 		}
 		$surcharge_surligne = preg_replace(',\*$,', '', trim($surcharge_surligne)); # supprimer un * final
