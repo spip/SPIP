@@ -10,7 +10,7 @@
 
 ### Added
 
-- #5452 Classes `Spip\Afficher\Minipublic` et `Spip\Afficher\Minipres` pour l’affichage des mini pages
+- #5452 #5469 Classes `Spip\Afficher\Minipage\Page` et `Spip\Afficher\Minipage\Admin` pour l’affichage des mini pages
 - #3719 Permettre l’édition d’un logo (comme un document) dans l’interface privé
 - #3719 Balise `#ID_LOGO_` (tel que `#ID_LOGO_ARTICLE`) retourne l’identifiant du document utilisé pour le logo d’un objet
 - #4874 Normaliser et appeler l'API de notifications systématiquement sur la modification des contenus éditoriaux
@@ -24,6 +24,7 @@
 
 ### Changed
 
+- #5452 #5469 Styles CSS et balisage HTML des mini pages (minipres) et de l’installation
 - #5456 Brancher `info_maj()` sur les données de supported-versions
 - #5433 Déplacement des 2 formulaires oubli et mot_de_passe dans le core
 - #5402 Déplacement du `#FORMULAIRE_INSCRIPTION` directement dans le core
@@ -75,7 +76,7 @@
 
 ### Deprecated
 
-- #5452 Fonction `minipres()` au profit de `Spip\Afficher\Minipres`
+- #5452 Fonction `minipres()` au profit de `Spip\Afficher\Minipage\Admin` ou `Spip\Afficher\Minipage\Page`
 - #5056 Les classes de nœud du compilateur (Champ, Boucle, Critere...) sont déplacées dans le namespace `Spip\Compilateur\Noeud\` (l’appel sans namespace est déprécié)
 
 ### Removed
