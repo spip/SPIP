@@ -1711,10 +1711,10 @@ function save_path_cache() {
 
 
 /**
- * Trouve tous les fichiers du path correspondants à un pattern
+ * Trouve tous les fichiers du path correspondants à un pattern.
  *
  * Pour un nom de fichier donné, ne retourne que le premier qui sera trouvé
- * par un `find_in_path()`
+ * par un `find_in_path()` sauf si l'option `all_files` est demandée.
  *
  * @api
  * @uses creer_chemin()
@@ -1722,10 +1722,11 @@ function save_path_cache() {
  *
  * @param string $dir
  * @param string $pattern
- * @param bool $recurs
+ * @param bool   $recurs
+ * @param bool   $all_files
  * @return array
  */
-function find_all_in_path($dir, $pattern, $recurs = false) {
+function find_all_in_path($dir, $pattern, $recurs = false, $all_files = false) {
 	$liste_fichiers = [];
 	$maxfiles = 10000;
 
@@ -1742,11 +1743,16 @@ function find_all_in_path($dir, $pattern, $recurs = false) {
 			$liste = preg_files($f, $pattern, $maxfiles - count($liste_fichiers), $recurs === true ? [] : $recurs);
 			foreach ($liste as $chemin) {
 				$nom = basename($chemin);
-				// ne prendre que les fichiers pas deja trouves
-				// car find_in_path prend le premier qu'il trouve,
-				// les autres sont donc masques
-				if (!isset($liste_fichiers[$nom])) {
-					$liste_fichiers[$nom] = $chemin;
+				if ($all_files) {
+					// On accumule tous les fichiers de même nom
+					$liste_fichiers[$nom][] = $chemin;
+				} else {
+					// ne prendre que les fichiers pas deja trouves
+					// car find_in_path prend le premier qu'il trouve,
+					// les autres sont donc masques
+					if (!isset($liste_fichiers[$nom])) {
+						$liste_fichiers[$nom] = $chemin;
+					}
 				}
 			}
 		}
