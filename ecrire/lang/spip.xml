@@ -5,7 +5,7 @@
 	url="https://trad.spip.net"
 	source="https://git.spip.net/spip/spip.git"
 	reference="fr">
-	<langue code="ar" url="https://trad.spip.net/tradlang_module/spip?lang_cible=ar" total="655" traduits="651" relire="0" modifs="1" nouveaux="3" pourcent="99.39">
+	<langue code="ar" url="https://trad.spip.net/tradlang_module/spip?lang_cible=ar" total="655" traduits="655" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
 	<langue code="ast" url="https://trad.spip.net/tradlang_module/spip?lang_cible=ast" total="655" traduits="581" relire="0" modifs="14" nouveaux="60" pourcent="88.70">
@@ -54,7 +54,7 @@
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Yannick Bailly" lien="https://trad.spip.net/auteur/yannick-bailly" />
 	</langue>
-	<langue code="en" url="https://trad.spip.net/tradlang_module/spip?lang_cible=en" total="655" traduits="651" relire="1" modifs="0" nouveaux="3" pourcent="99.39">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/spip?lang_cible=en" total="655" traduits="655" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Alberto" lien="https://trad.spip.net/auteur/alberto" />
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="cedric" lien="https://trad.spip.net/auteur/fil" />

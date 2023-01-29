@@ -545,7 +545,7 @@ the site "@nom_site_spip@" (@adresse_login@):',
 	'login_retoursitepublic' => 'back to the public site',
 	'login_sans_cookie' => 'Identification without cookie',
 	'login_securise' => 'Secure login',
-	'login_sinscrire' => 'Sign up', # RELIRE
+	'login_sinscrire' => 'Sign up',
 	'login_test_navigateur' => 'testing browser/reconnection',
 	'login_verifiez_navigateur' => '(However, check that your browser did not memorise your password...)',
 
@@ -633,8 +633,11 @@ and log in to the site.
 
 	// T
 	'taille_go' => '@taille@ Gb',
+	'taille_go_bi' => '@taille@ GiB',
 	'taille_ko' => '@taille@ kb',
+	'taille_ko_bi' => '@taille@ KiB',
 	'taille_mo' => '@taille@ Mb',
+	'taille_mo_bi' => '@taille@ MiB',
 	'taille_octets' => '@taille@ bytes',
 	'taille_octets_bi' => '@taille@ bytes',
 	'texte_actualite_site_1' => 'When you are more familiar with the interface, click on "',

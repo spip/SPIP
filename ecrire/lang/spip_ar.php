@@ -544,7 +544,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_retoursitepublic' => 'عودة إلى الموقع العام',
 	'login_sans_cookie' => 'تعريف بدون الكعكة',
 	'login_securise' => 'تعريف مؤمّن',
-	'login_sinscrire' => 'تسجيل', # MODIF
+	'login_sinscrire' => 'تسجيل',
 	'login_test_navigateur' => 'تجربة المتصفح/إعادة الاتصال',
 	'login_verifiez_navigateur' => '(على أي حال، تأكد من أن المتصفح لم يقم بحفظ كلمة سرك...)',
 
@@ -633,8 +633,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'taille_go' => '@taille@ غيغابايت',
+	'taille_go_bi' => '@taille@ غيغيبايت',
 	'taille_ko' => '@taille@ كيلوبايت',
+	'taille_ko_bi' => '@taille@ كيليبايت',
 	'taille_mo' => '@taille@ ميغابايت',
+	'taille_mo_bi' => '@taille@ ميغيبايت',
 	'taille_octets' => '@taille@ بايت',
 	'taille_octets_bi' => '@taille@ بايت',
 	'texte_actualite_site_1' => 'عندما تتأقلم مع واجهة النظام انقر على «',
