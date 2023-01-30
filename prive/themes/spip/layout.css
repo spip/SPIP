@@ -112,6 +112,7 @@
 	float: right;
 }
 
+
 /* Les pages qui demandent à être en pleine largeur (sans #nav ni #extra) */
 .pleine_largeur #contenu {
 	width: 100%;
@@ -166,6 +167,18 @@
 			grid-area: extra;
 			width: initial;
 		}
+	}
+
+	/**
+	 * Fix ajax + sticky
+	 * On veut pouvoir placer des éléments en sticky dans les 3 blocs principaux.
+	 * En principe tout leur contenu est inclus en ajax, le .ajaxbloc doit prendre toute la hauteur du parent.
+	 * Mais attention aux exceptions de markup : le faire uniquement lorsqu'il n'y a qu'un seul .ajabloc
+	 */
+	#contenu > .ajaxbloc:only-child,
+	#navigation > .ajaxbloc:only-child,
+	#extra > .ajaxbloc:only-child {
+		height: 100%;
 	}
 }
 @media (min-width: 960px) {
