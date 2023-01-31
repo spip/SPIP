@@ -35,8 +35,10 @@ class Champ
 	 *
 	 * - '*' annule les filtres automatiques
 	 * - '**' annule en plus les protections de scripts
+	 *
+	 * FIXME: type unique.
 	 */
-	public ?string $etoile;
+	public ?string $etoile = '';
 
 	/**
 	 * Arguments et filtres explicites sur la balise
