@@ -1351,12 +1351,13 @@ function lance_requete(
 		}
 		$t2 = @parse_url($http_proxy);
 		$first_host = $t2['host'];
-		$port = ($t2['port'] ?? null) ?: 80;
+		$first_port = ($t2['port'] ?? null) ?: 80;
 		if ($t2['user'] ?? null) {
 			$proxy_user = base64_encode($t2['user'] . ':' . $t2['pass']);
 		}
 	} else {
 		$first_host = $noproxy . $host;
+		$first_port = $port;
 	}
 
 	if ($connect) {
@@ -1369,14 +1370,14 @@ function lance_requete(
 			]
 		]);
 		$f = @stream_socket_client(
-			"tcp://$first_host:$port",
+			"tcp://$first_host:$first_port",
 			$errno,
 			$errstr,
 			_INC_DISTANT_CONNECT_TIMEOUT,
 			STREAM_CLIENT_CONNECT,
 			$streamContext
 		);
-		spip_log("Recuperer $path sur $first_host:$port par $f (via CONNECT)", 'connect');
+		spip_log("Recuperer $path sur $first_host:$first_port par $f (via CONNECT)", 'connect');
 		if (!$f) {
 			spip_log("Erreur connexion $errno $errstr", 'distant' . _LOG_ERREUR);
 			return $errno;
@@ -1391,7 +1392,7 @@ function lance_requete(
 			or !count($res = explode(' ', $res))
 			or $res[1] !== '200'
 		) {
-			spip_log("Echec CONNECT sur $first_host:$port", 'connect' . _LOG_INFO_IMPORTANTE);
+			spip_log("Echec CONNECT sur $first_host:$first_port", 'connect' . _LOG_INFO_IMPORTANTE);
 			fclose($f);
 
 			return false;
@@ -1400,13 +1401,13 @@ function lance_requete(
 		stream_set_blocking($f, true);
 		// envoyer le handshake
 		stream_socket_enable_crypto($f, true, STREAM_CRYPTO_METHOD_SSLv23_CLIENT);
-		spip_log("OK CONNECT sur $first_host:$port", 'connect');
+		spip_log("OK CONNECT sur $first_host:$first_port", 'connect');
 	} else {
 		$ntry = 3;
 		do {
-			$f = @fsockopen($first_host, $port, $errno, $errstr, _INC_DISTANT_CONNECT_TIMEOUT);
+			$f = @fsockopen($first_host, $first_port, $errno, $errstr, _INC_DISTANT_CONNECT_TIMEOUT);
 		} while (!$f and $ntry-- and $errno !== 110 and sleep(1));
-		spip_log("Recuperer $path sur $first_host:$port par $f");
+		spip_log("Recuperer $path sur $first_host:$first_port par $f");
 		if (!$f) {
 			spip_log("Erreur connexion $errno $errstr", 'distant' . _LOG_ERREUR);
 
