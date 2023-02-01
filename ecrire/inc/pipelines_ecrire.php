@@ -48,7 +48,11 @@ function f_jQuery_prive($texte) {
 		]
 	);
 	foreach (array_unique($jquery_plugins) as $script) {
-		if ($script = find_in_path(supprimer_timestamp($script))) {
+		$script = supprimer_timestamp($script);
+		if (
+			(str_starts_with($script, _DIR_VAR) and file_exists($script))
+			or $script = find_in_path($script)
+		) {
 			$script = timestamp($script);
 			$x .= "\n<script src=\"$script\" type=\"text/javascript\"></script>\n";
 		}
