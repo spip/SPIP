@@ -420,6 +420,7 @@ function propre($t, $connect = null, $env = []) {
 	// ou il faut passer interdire_script explicitement
 	// les appels dans les squelettes (de l'espace prive) fournissant un $connect
 	// ne seront pas perturbes
+	// FIXME: Trouver une solution pour avoir un type (string) unique sur $connect.
 	$interdire_script = false;
 	if (is_null($connect)) {
 		$connect = '';
@@ -445,7 +446,7 @@ function propre($t, $connect = null, $env = []) {
 		$t = echapper_html_suspect($t, ['strict' => false], $connect, $env);
 	}
 	$t = echappe_html($t);
-	$t = expanser_liens($t, $connect, $env);
+	$t = expanser_liens($t, $connect ?? '', $env);
 	$t = traiter_raccourcis($t);
 	$t = echappe_retour_modeles($t, $interdire_script);
 
