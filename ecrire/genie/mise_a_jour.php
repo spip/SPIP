@@ -105,81 +105,119 @@ function mise_a_jour_ecran_securite() {
  *
  * @return string
  */
-function info_maj($version) {
+function info_maj(string $version): string {
 	include_spip('inc/plugin');
 
-	$nom = _DIR_CACHE . _VERSIONS_LISTE;
-	$contenu = !file_exists($nom) ? '' : file_get_contents($nom);
-	$contenu = info_maj_cache($nom, $contenu);
-	try {
-		$contenu = json_decode($contenu, true, 512, JSON_THROW_ON_ERROR);
-	} catch (JsonException $e) {
-		spip_log('Failed to parse Json data : ' . $e->getMessage(), 'verifie_maj');
+	// API V1
+	$contenu = info_maj_cache();
+	if (!$contenu) {
 		return '';
 	}
 
-	$liste = $liste_majeure = '';
-
-	// branche en cours d'utilisation
-	$branche = implode('.', array_slice(explode('.', $version, 3), 0, 2));
-
-	foreach ($contenu['versions'] as $v => $path) {
-		$v = explode('.', $v);
-		[$maj2, $min2, $rev2] = $v;
-		$branche_maj = $maj2 . '.' . $min2;
-		$version_maj = $maj2 . '.' . $min2 . '.' . $rev2;
-		// d'abord les mises à jour de la même branche
-		if (
-			(spip_version_compare($version, $version_maj, '<'))
-			and (spip_version_compare($liste, $version_maj, '<'))
-			and spip_version_compare($branche, $branche_maj, '=')
-		) {
-			$liste = $version_maj;
-		}
-		// puis les mises à jours majeures
-		if (
-			(spip_version_compare($version, $version_maj, '<'))
-			and (spip_version_compare($liste, $version_maj, '<'))
-			and spip_version_compare($branche, $branche_maj, '<')
-		) {
-			$liste_majeure = $version_maj;
-		}
-	}
-	if (!$liste and !$liste_majeure) {
+	$maj = info_maj_versions($version, array_keys($contenu['versions'] ?? []));
+	if (!$maj['mineure'] and !$maj['majeure']) {
 		return '';
 	}
 
-	$message = $liste ? _T('nouvelle_version_spip', ['version' => $liste]) . ($liste_majeure ? ' | ' : '') : '';
-	$message .= $liste_majeure ? _T('nouvelle_version_spip_majeure', ['version' => $liste_majeure]) : '';
+	$message = [];
+	if ($maj['mineure']) {
+		$message[] = _T('nouvelle_version_spip', ['version' => $maj['mineure']]);
+	}
+	if ($maj['majeure']) {
+		$message[] = _T('nouvelle_version_spip_majeure', ['version' => $maj['majeure']]);
+	}
 
-	return "<a class='info_maj_spip' href='https://www.spip.net/fr_update' title='$liste'>" . $message . '</a>';
+	return '<a class="info_maj_spip" href="https://www.spip.net/fr_update" title="' . $maj['mineure'] . '">' . implode(' | ', $message) . '</a>';
 }
 
 /**
- * Vérifie que la liste $liste des versions dans le fichier $nom est à jour.
+ * Retourne (et sauvegarde) la liste des mises à jour de SPIP
  *
  * On teste la nouveauté par If-Modified-Since,
  * et seulement quand celui-ci a changé pour limiter les accès HTTP.
  * Si le fichier n'a pas été modifié, on garde l'ancienne version.
  *
  * @see info_maj()
- *
- * @param string $nom
- *     Nom du fichier contenant les infos de mise à jour.
- * @param string $dir
- * @param string $contenu
- * @return string
- *     Contenu du fichier de cache de l'info de maj de SPIP.
+ * @internal
+ * @return array|null Contenu du fichier de cache de l'info de maj de SPIP.
  */
-function info_maj_cache($nom, $contenu = '') {
-	$a = file_exists($nom) ? filemtime($nom) : '';
-	include_spip('inc/distant');
-	$res = recuperer_url_cache(_VERSIONS_SERVEUR, ['if_modified_since' => $a]);
-	// Si rien de neuf (ou inaccessible), garder l'ancienne
-	if ($res) {
-		$contenu = $res['page'] ?: $contenu;
+function info_maj_cache(): ?array {
+	$contenu = '';
+	$options = [];
+	$nom = _DIR_CACHE . _VERSIONS_LISTE;
+	if (file_exists($nom)) {
+		$contenu = file_get_contents($nom);
+		$options['if_modified_since'] = filemtime($nom);
 	}
-	ecrire_fichier($nom, $contenu);
+	include_spip('inc/distant');
+	$res = recuperer_url_cache(_VERSIONS_SERVEUR, $options);
 
-	return $contenu;
+	// Si rien de neuf (ou inaccessible), garder l'ancienne
+	if ($res and $res['page']) {
+		$contenu = $res['page'];
+		ecrire_fichier($nom, $contenu);
+	}
+
+	if (!$contenu) {
+		return null;
+	}
+
+	try {
+		$json = json_decode($contenu, true, 512, JSON_THROW_ON_ERROR);
+	} catch (JsonException $e) {
+		spip_log('Failed to parse Json data : ' . $e->getMessage(), 'verifie_maj');
+		return null;
+	}
+
+	return $json;
+}
+
+/**
+ * Vérifier si on doit proposer une mise à jour pour les versions dont on dispose
+ *
+ * - version mineure, quelque soit notre état actuel
+ * - version majeure, seulement si la majeure est stable (pas alpha, beta, rc, ...)
+ *
+ * @internal
+ * @param string $version Notre version
+ * @param string[] $versions Les dernières versions distantes
+ * @return array<string, string> Version mineure supérieure, version majeure supérieure
+ */
+function info_maj_versions(string $version, array $versions): array {
+	$maj = ['mineure' => '', 'majeure' => ''];
+	if (!$version) {
+		return $maj;
+	}
+
+	// pas de version dev
+	$versions = array_diff($versions, ['dev']);
+
+	// branche en cours d'utilisation
+	$branche = implode('.', array_slice(explode('.', $version, 3), 0, 2));
+
+	foreach ($versions as $v) {
+		[$maj2, $min2, $rev2] = explode('.', $v);
+		$branche_maj = $maj2 . '.' . $min2;
+		$version_maj = $maj2 . '.' . $min2 . '.' . $rev2;
+		$is_version_stable = is_numeric($rev2);
+		// d'abord les mises à jour de la même branche (version mineure)
+		if (
+			spip_version_compare($version, $version_maj, '<')
+			and spip_version_compare($maj['mineure'], $version_maj, '<')
+			and spip_version_compare($branche, $branche_maj, '=')
+		) {
+			$maj['mineure'] = $version_maj;
+		}
+		// puis les mises à jours majeures
+		if (
+			$is_version_stable
+			and spip_version_compare($version, $version_maj, '<')
+			and spip_version_compare($maj['majeure'], $version_maj, '<')
+			and spip_version_compare($branche, $branche_maj, '<')
+		) {
+			$maj['majeure'] = $version_maj;
+		}
+	}
+
+	return $maj;
 }
