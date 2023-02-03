@@ -704,7 +704,7 @@ if (
 			and $load = floatval($load))
 	)
 	and $load > _ECRAN_SECURITE_LOAD // eviter l'evaluation suivante si de toute facon le load est inferieur a la limite
-	and rand(0, $load * $load) > _ECRAN_SECURITE_LOAD * _ECRAN_SECURITE_LOAD
+	and rand(0, (int) ($load * $load)) > _ECRAN_SECURITE_LOAD * _ECRAN_SECURITE_LOAD
 ) {
 	//https://webmasters.stackexchange.com/questions/65674/should-i-return-a-429-or-503-status-code-to-a-bot
 	header("HTTP/1.0 429 Too Many Requests");
