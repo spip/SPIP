@@ -240,7 +240,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'etape' => 'Étape',
 
 	// F
-	'fichier_introuvable' => 'Fichier @fichier@ introuvable', # MODIF
+	'fichier_introuvable' => 'Fichier @fichier@ introuvable.',
+	'fonction_introuvable' => 'Fonction @fonction@() introuvable.',
 	'form_auteur_confirmation' => 'Confirmez votre adresse email',
 	'form_auteur_email_modifie' => 'Votre adresse email a été modifiée.',
 	'form_auteur_envoi_mail_confirmation' => 'Un courrier électronique de confirmation vient d’être envoyé à @email@. Vous devrez visiter l’adresse Web mentionnée dans ce courrier pour valider votre adresse mail.',
@@ -544,7 +545,7 @@ le site "@nom_site_spip@" (@adresse_login@) :',
 	'login_retoursitepublic' => 'retour au site public',
 	'login_sans_cookie' => 'Identification sans cookie',
 	'login_securise' => 'Login sécurisé',
-	'login_sinscrire' => 's’inscrire', # MODIF
+	'login_sinscrire' => 'S’inscrire',
 	'login_test_navigateur' => 'test navigateur/reconnexion',
 	'login_verifiez_navigateur' => '(Vérifiez toutefois que votre navigateur n’a pas mémorisé votre mot de passe...)',
 
@@ -633,9 +634,13 @@ et vous reconnecter au site.
 
 	// T
 	'taille_go' => '@taille@ Go',
+	'taille_go_bi' => '@taille@ Gio',
 	'taille_ko' => '@taille@ ko',
+	'taille_ko_bi' => '@taille@ kio',
 	'taille_mo' => '@taille@ Mo',
+	'taille_mo_bi' => '@taille@ Mio',
 	'taille_octets' => '@taille@ octets',
+	'taille_octets_bi' => '@taille@ octets',
 	'texte_actualite_site_1' => 'Quand vous serez familiarisée avec l’interface, vous pourrez cliquer sur « ',
 	'texte_actualite_site_2' => 'interface complète',
 	'texte_actualite_site_3' => ' » pour ouvrir plus de possibilités.',
