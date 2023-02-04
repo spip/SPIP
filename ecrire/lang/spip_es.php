@@ -239,7 +239,8 @@ de las carpetas mencionadas. El procedimiento se explica detalladamente en la gu
 	'etape' => 'Etapa',
 
 	// F
-	'fichier_introuvable' => 'No se encuentra el archivo @fichier@', # MODIF
+	'fichier_introuvable' => 'No se encuentra el archivo @fichier@',
+	'fonction_introuvable' => 'Función @fonction@() no encontrada.',
 	'form_auteur_confirmation' => 'Confirma tu dirección de correo',
 	'form_auteur_email_modifie' => 'Tu dirección de correo fue modificada',
 	'form_auteur_envoi_mail_confirmation' => 'Se te acaba de enviar un mensaje de confirmación a @email@. Tienes que visitar la página web indicada en ese mensaje para validar tu dirección de correo.',
@@ -490,7 +491,7 @@ en el sitio "@nom_site_spip@" (@adresse_login@):',
 	// L
 	'label_ajout_id_rapide' => 'Agregado rápido',
 	'label_poids_fichier' => 'Tamaño',
-	'label_ponctuer' => '@label@ :', # MODIF
+	'label_ponctuer' => '@label@ :',
 	'lien_afficher_icones_seuls' => 'Mostrar sólo los iconos',
 	'lien_afficher_texte_icones' => 'Mostrar iconos y texto',
 	'lien_afficher_texte_seul' => 'Mostrar sólo el texto',
@@ -541,7 +542,7 @@ en el sitio "@nom_site_spip@" (@adresse_login@):',
 	'login_retoursitepublic' => 'volver al sitio público',
 	'login_sans_cookie' => 'Identificación sin "cookie"',
 	'login_securise' => 'Conexión segura',
-	'login_sinscrire' => 'inscribirse', # MODIF
+	'login_sinscrire' => 'Inscribirse',
 	'login_test_navigateur' => 'prueba de navegador/reconexión',
 	'login_verifiez_navigateur' => '(No obstante, comprueba que tu navegador no memorizó tu contraseña...)',
 
@@ -624,8 +625,11 @@ volver a conectarte al sitio.
 
 	// T
 	'taille_go' => '@taille@ GB',
+	'taille_go_bi' => '@taille@ Gio',
 	'taille_ko' => '@taille@ KB',
+	'taille_ko_bi' => '@taille@ kio',
 	'taille_mo' => '@taille@ MB',
+	'taille_mo_bi' => '@taille@ Mio',
 	'taille_octets' => '@taille@ bytes',
 	'taille_octets_bi' => '@taille@ bytes',
 	'texte_actualite_site_1' => 'Una vez que te hayas familiarizado con la interfaz, pincha en «',
