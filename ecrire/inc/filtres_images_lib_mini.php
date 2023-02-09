@@ -390,9 +390,9 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 		($find_in_path and $f = find_in_path($fichier) and $fichier = $f)
 		or @file_exists($f = $fichier)
 	) {
-		// on passe la balise img a taille image qui exraira les attributs si possible
-		// au lieu de faire un acces disque sur le fichier
-		[$ret['hauteur'], $ret['largeur']] = taille_image($find_in_path ? $f : $img);
+		// on ne passe jamais la balise img qui est peut-être en x2 et à laquelle on ne peut pas faire confiance
+		// on lit directement les infos du fichier
+		[$ret['hauteur'], $ret['largeur']] = taille_image($f);
 		$date_src = @filemtime($f);
 	} elseif (
 		@file_exists($f = "$fichier.src")
