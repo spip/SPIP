@@ -1980,7 +1980,7 @@ function extraire_attribut($balise, $attribut, $complet = false) {
  *     Code html de la balise (ou contenant une balise)
  * @param string $attribut
  *     Nom de l'attribut html à modifier
- * @param string $val
+ * @param ?string $val
  *     Valeur de l'attribut à appliquer
  * @param bool $proteger
  *     Prépare la valeur en tant qu'attribut de balise (mais conserve les balises html).
@@ -1989,7 +1989,7 @@ function extraire_attribut($balise, $attribut, $complet = false) {
  * @return string
  *     Code html modifié
  **/
-function inserer_attribut(?string $balise, string $attribut, string $val, bool $proteger = true, bool $vider = false): string {
+function inserer_attribut(?string $balise, string $attribut, ?string $val, bool $proteger = true, bool $vider = false): string {
 
 	if ($balise === null or $balise === '') {
 		return '';
@@ -2003,7 +2003,7 @@ function inserer_attribut(?string $balise, string $attribut, string $val, bool $
 	}
 
 	// echapper les ' pour eviter tout bug
-	$val = str_replace("'", '&#039;', $val);
+	$val = str_replace("'", '&#039;', $val ?? '');
 	if ($vider and strlen($val) === 0) {
 		$insert = '';
 	} else {
