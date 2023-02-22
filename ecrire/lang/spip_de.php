@@ -620,8 +620,11 @@ Sie können auf dieser Seite ein neues Passwort eingeben und sich wieder bei der
 
 	// T
 	'taille_go' => '@taille@ Start',
+	'taille_go_bi' => '@taille@ GiB',
 	'taille_ko' => '@taille@ kB',
+	'taille_ko_bi' => '@taille@ kiB',
 	'taille_mo' => '@taille@ MB',
+	'taille_mo_bi' => '@taille@ MiB',
 	'taille_octets' => '@taille@ Byte',
 	'taille_octets_bi' => '@taille@ Byte',
 	'texte_actualite_site_1' => 'Wenn Sie sich mit der Oberfläche des Redaktionssystems vertraut gemacht haben, können Sie „',
