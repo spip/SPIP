@@ -4,6 +4,7 @@
 
 ### Fixed
 
+- #5483 Ne pas appliquer `find_in_path` si le script du pipeline jquery_plugins pointe vers `_DIR_VAR`
 - #5492 Ne pas être trompé par le width et le height d'une image haute densité quand on veut la retailler/reduire
 - #5479 Ne pas injecter le port du proxy dans le http_host du site demandé
 - #5487 Meilleure gestion de l’affichage des mises à jour
