@@ -16,6 +16,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('inc/install');
 
 function formulaires_declarer_bases_charger_dist() {
+
+	if (!autoriser('detruire')) {
+		return false;
+	}
+
 	[$adresse_db, $login_db, $pass_db, $sel, $server_db] = analyse_fichier_connection(_FILE_CONNECT);
 
 	$deja = bases_referencees(_FILE_CONNECT);
