@@ -209,7 +209,7 @@ class Data extends AbstractIterateur implements Iterator
 		}
 
 		# le premier argument peut etre un array, une URL etc.
-		$src = $this->command['source'][0];
+		$src = $this->command['source'][0] ?? null;
 
 		# avons-nous un cache dispo ?
 		$cle = null;
