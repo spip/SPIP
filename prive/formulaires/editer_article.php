@@ -68,9 +68,6 @@ function formulaires_editer_article_charger_dist(
 		$valeurs['editable'] = '';
 	}
 
-	// il faut enlever l'id_rubrique car la saisie se fait sur id_parent
-	// et id_rubrique peut etre passe dans l'url comme rubrique parent initiale
-	// et sera perdue si elle est supposee saisie
 	return $valeurs;
 }
 
