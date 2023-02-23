@@ -244,11 +244,12 @@ function echappe_html(
 		and preg_match_all($preg ?: _PROTEGE_BLOCS, $letexte, $matches, PREG_SET_ORDER)
 	) {
 		foreach ($matches as $regs) {
+			$echap = '';
 			// echappements tels quels ?
 			if ($no_transform) {
 				$echap = $regs[0];
-			} // sinon les traiter selon le cas
-			else {
+			} else {
+				// sinon les traiter selon le cas
 				$callback_secure_prefix = ($callback_options['secure_prefix'] ?? '');
 				if (
 					function_exists($f = $callback_prefix . $callback_secure_prefix . 'traiter_echap_' . strtolower($regs[1]))
