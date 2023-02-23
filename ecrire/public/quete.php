@@ -123,13 +123,13 @@ function quete_parent($id_rubrique, string $connect = '') {
  * @uses quete_parent_lang()
  *
  * @param int $id_article
- * @param $serveur
+ * @param string $serveur
  * @return int
  */
 function quete_rubrique($id_article, $serveur) {
 	$id_parent = quete_parent_lang('spip_articles', $id_article, $serveur);
 
-	return $id_parent['id_rubrique'];
+	return $id_parent['id_rubrique'] ?? 0;
 }
 
 
