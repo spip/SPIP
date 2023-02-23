@@ -62,15 +62,15 @@ function action_confirmer_inscription_dist() {
 		}
 	} else {
 		// lien perime :
-		if ($GLOBALS['visiteur_session']['id_auteur']) {
+		if (!empty($GLOBALS['visiteur_session']['id_auteur'])) {
 			// on passe id_auteur explicite pour forcer une lecture en base de toutes les infos
 			if (autoriser('ecrire', '', '', $GLOBALS['visiteur_session']['id_auteur'])) {
 				$GLOBALS['redirect'] = _DIR_RESTREINT_ABS;
 			} else {
 				$GLOBALS['redirect'] = $GLOBALS['meta']['adresse_site'];
 			}
-		} else // rediriger vers la page de login si pas encore loge
-		{
+		} else {
+			// rediriger vers la page de login si pas encore loge
 			$GLOBALS['redirect'] = parametre_url(generer_url_public('login', '', false), 'url', _request('redirect'));
 		}
 	}
