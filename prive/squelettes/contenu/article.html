@@ -2,9 +2,9 @@
 <BOUCLE_article(ARTICLES){id_article}{statut==.*}{si #ENV{exec}|=={article}}>
 [(#LANG|changer_typo)]
 [(#BOITE_OUVRIR{[
-				
+
 	[(#AUTORISER{modifier,article,#ID_ARTICLE})
-				
+
 		[(#ID_ARTICLE|afficher_qui_edite{article}|non)
 			[(#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE}|icone_verticale{<:icone_modifier_article:>,article,edit,right ajax preload})]
 		]
@@ -41,9 +41,9 @@
 #BOITE_FERMER
 </BOUCLE_proposer>
 [(#STATUT|=={prop}|oui)
-#BOITE_OUVRIR{'',note center pop}
+#ALERTE_OUVRIR{'',info}
 <p><:text_article_propose_publication:></p>
-#BOITE_FERMER
+#ALERTE_FERMER
 ]
 
 <div id="wysiwyg">
