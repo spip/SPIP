@@ -477,7 +477,7 @@ function init_langues() {
  **/
 function html_lang_attributes() {
 	$lang = $GLOBALS['spip_lang'];
-	$dir = ($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr');
+	$dir = lang_dir($lang);
 
 	return "<html class='$dir $lang no-js' xmlns='http://www.w3.org/1999/xhtml' lang='$lang' dir='$dir'>\n";
 }
