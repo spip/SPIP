@@ -1193,7 +1193,10 @@ function date_ical($date, $addminutes = 0): string {
  *     La date formatée
  **/
 function date_iso($date_heure): string {
-	[$annee, $mois, $jour] = recup_date($date_heure);
+	$date = recup_date($date_heure);
+	$annee = $date[0] ?? null;
+	$mois = $date[1] ?? null;
+	$jour = $date[2] ?? null;
 	[$heures, $minutes, $secondes] = recup_heure($date_heure);
 	$time = @mktime($heures, $minutes, $secondes, $mois, $jour, $annee);
 
