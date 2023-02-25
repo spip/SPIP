@@ -96,6 +96,14 @@ function bouton_block_depliable($texte, $deplie, $ids = '') {
 //
 function verif_butineur() {
 
+	if (!isset($_SERVER['HTTP_USER_AGENT'])) {
+		$GLOBALS['browser_name'] = 'Mozilla';
+		$GLOBALS['browser_version'] = '1.4';
+		$GLOBALS['browser_layer'] = ' ';
+		$GLOBALS['browser_barre'] = '';
+		return;
+	}
+
 	preg_match(',^([A-Za-z]+)/([0-9]+\.[0-9]+) (.*)$,', $_SERVER['HTTP_USER_AGENT'], $match);
 	$GLOBALS['browser_name'] = $match[1];
 	$GLOBALS['browser_version'] = $match[2];
