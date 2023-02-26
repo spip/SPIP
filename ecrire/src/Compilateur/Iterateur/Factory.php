@@ -40,7 +40,7 @@ class Factory
 				// sinon, on cree un iterateur du type donne
 				// arguments de creation de l'iterateur...
 				try {
-					$iter = $iterateur(...$a);
+					$iter = new $iterateur(...$a);
 				} catch (Exception $e) {
 					spip_log("Erreur de chargement de l'iterateur {$iterateur}");
 					spip_log($e->getMessage());
