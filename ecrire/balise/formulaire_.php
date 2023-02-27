@@ -41,10 +41,7 @@ function protege_champ($texte) {
 	} elseif (is_bool($texte)) {
 		return $texte ? '1' : '';
 	} elseif (is_string($texte) and $texte) {
-		if (preg_match(',^[abis]:\d+[:;],', $texte) and @unserialize($texte) !== false) {
-			// ne pas corrompre une valeur serialize
-			return $texte;
-		} elseif (strpbrk($texte, "&\"'<>") !== false) {
+		if (strpbrk($texte, "&\"'<>") !== false) {
 			return spip_htmlspecialchars($texte, ENT_QUOTES);
 		}
 	}
