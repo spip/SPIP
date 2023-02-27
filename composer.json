@@ -13,8 +13,8 @@
         "symfony/polyfill-php82": "^1.27"
     },
     "require-dev": {
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2",
-        "phpstan/phpstan": "^1.9",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+        "phpstan/phpstan": "^1.10",
         "spip/coding-standards": "^1.2"
     },
     "suggest": {
