@@ -5,7 +5,7 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '1.4.2'); // 2022-07-12
+define('_ECRAN_SECURITE', '1.5.0'); // 2023-02-27
 
 /*
  * Documentation : https://www.spip.net/fr_article4200.html
@@ -647,6 +647,22 @@ if (
 	isset($_REQUEST['_oups'])
 	and base64_decode($_REQUEST['_oups'], true) === false) {
 	$ecran_securite_raison = "malformed _oups argument";
+}
+
+if (
+	isset($_REQUEST['formulaire_action_args'])
+) {
+	foreach ($_REQUEST as $k => $v) {
+		if (is_string($v)
+		  and strpos($v, ':') !== false
+		  and strpos($v, '"') !==false
+		  and preg_match(',[bidsaO]:,', $v)
+		  and @unserialize($v)) {
+			$_REQUEST[$k] = htmlentities($v);
+			if (isset($_POST[$k])) $_POST[$k] = $_REQUEST[$k];
+			if (isset($_GET[$k])) $_GET[$k] = $_REQUEST[$k];
+		}
+	}
 }
 
 
