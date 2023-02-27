@@ -96,6 +96,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'repondre_breve' => 'このニュースに返信する',
 	'resultats_recherche' => '検索結果',
 	'retour_debut_forums' => 'フォーラムの最初のページに戻る',
+	'rss_abonnement' => '以下のURLをアグリゲーターにコピーしてください。',
+	'rss_abonnement_titre' => '購読してください。',
+	'rss_abonnement_titre_page' => '購読してください。',
+	'rss_explication' => 'RSSフィードは、サイトの更新情報を収集するものです。投稿やコメントの内容やその抜粋、全文へのリンクなどの情報を提供します。このフィードは、RSSアグリゲーターで読み込むことを想定しています。',
+	'rss_explication_titre' => 'RSSフィードとは？',
 	'rubrique' => 'セクション',
 	'rubriques' => 'セクション',
 

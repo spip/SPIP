@@ -101,7 +101,7 @@
 	<langue code="iu" url="https://trad.spip.net/tradlang_module/public?lang_cible=iu" total="83" traduits="38" relire="23" modifs="3" nouveaux="19" pourcent="45.78">
 		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="ja" url="https://trad.spip.net/tradlang_module/public?lang_cible=ja" total="83" traduits="78" relire="0" modifs="0" nouveaux="5" pourcent="93.98">
+	<langue code="ja" url="https://trad.spip.net/tradlang_module/public?lang_cible=ja" total="83" traduits="83" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="origenius" lien="https://trad.spip.net/auteur/origenius" />
 	</langue>
 	<langue code="km" url="https://trad.spip.net/tradlang_module/public?lang_cible=km" total="83" traduits="71" relire="0" modifs="3" nouveaux="9" pourcent="85.54" />
