@@ -26,6 +26,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_connexion_echec_2' => '前のページに戻って、入力された情報を確認してください。',
 	'avis_connexion_echec_3' => '<b>注意</b>多くのサーバーには、データーベースにアクセス権を要求していただいた上でご利用になります。接続が出来なければ、アクセス権を確認してください。',
 	'avis_connexion_erreur_creer_base' => 'データーベース作成は失敗です。',
+	'avis_connexion_erreur_fichier_cle_manquant_1' => 'インストールは、ウェブマスターがキーとパスワードのバックアップをとって行う必要があります。',
+	'avis_connexion_erreur_fichier_cle_manquant_2' => 'インストールはウェブマスターがキーのバックアップをとって行う必要があります',
 	'avis_connexion_erreur_nom_base' => 'データーベース名には、文字、数字、およびハイフンのみ使ってください。',
 	'avis_connexion_ldap_echec_1' => 'LDAPサーバへの接続は失敗しました。',
 	'avis_connexion_ldap_echec_2' => '前のページに戻って、与えられている情報を確認してください。',
@@ -33,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_deplacement_rubrique' => '注意！このセクションには、ニュースが@contient_breves@件入っています。移す場合
 は、確認ボックスをチェックしてください。',
 	'avis_erreur_connexion_mysql' => 'SQL接続のエラー',
+	'avis_erreur_creation_compte' => 'アカウント初期化失敗',
 	'avis_espace_interdit' => '<b>禁止エリア</b><div>SPIPが既にインストールされています。</div>',
 	'avis_lecture_noms_bases_1' => 'インストールプログラムは、データベースの名を読むことが出来ませんでした。',
 	'avis_lecture_noms_bases_2' => 'データベースが有効ではないか、データーベースのリストを表示する機能が有効されていないかのことです。これはプロバイダーのセキュリティ上の理由によります。',
@@ -98,6 +101,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_mot_heures' => '時',
 
 	// E
+	'ecran_connexion_couleur_principale' => '主なカラー',
+	'ecran_connexion_image_fond' => '背景画像',
 	'ecran_securite' => '+安全スクリーン@version@',
 	'email' => 'メール',
 	'email_2' => 'メール：',
@@ -302,7 +307,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_etape_suivante_2' => '次のステップに移ることが出来ます。',
 	'info_exceptions_proxy' => 'プロキシの例外',
 	'info_exportation_base' => '@archive@へデータベースを移す。',
-	'info_facilite_suivi_activite' => 'サイトの管理を容易にするために、SPIPは、著者のメーリングリストへ「記事の確認と記事の公開」を依頼するメールを送信することができます。', # MODIF
+	'info_facilite_suivi_activite' => 'サイトの管理を容易にするために、SPIPは、著者のメーリングリストへ「記事の確認と記事の公開」を依頼するメールを送信することができます。一つまたは複数のアドレスをカンマで区切って入力します。',
 	'info_fichiers_authent' => '認証ファイル「.htpasswd」',
 	'info_forums_abo_invites' => 'サイトは購読者用の掲示板を持っています。参加するために、訪問者は公開サイトで、購読するように招かれています。',
 	'info_gauche_admin_tech' => '<p>技術的な整備のこのページには<b>管理者しかアクセスが出来ません。</b>特別な認証プロセスがあるので、WebサイトへのFTPアクセスが必要です。</p>',
