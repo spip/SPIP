@@ -830,7 +830,7 @@ function balise_INTRODUCTION_dist($p) {
 		$_suite = $v2;
 	}
 
-	$p->code = "generer_objet_introduction($_id_objet, '$type_objet', $_ligne, $_introduction_longueur, $_longueur_ou_suite, $_suite, \$connect)";
+	$p->code = "generer_objet_introduction((int)$_id_objet, '$type_objet', $_ligne, $_introduction_longueur, $_longueur_ou_suite, $_suite, \$connect)";
 
 	#$p->interdire_scripts = true;
 	$p->etoile = '*'; // propre est deja fait dans le calcul de l'intro
