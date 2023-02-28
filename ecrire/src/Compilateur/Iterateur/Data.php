@@ -367,8 +367,10 @@ class Data extends AbstractIterateur implements Iterator
 	protected function select_datapath() {
 		$base = reset($this->command['datapath']);
 		if (strlen($base = ltrim(trim($base), '/'))) {
-			$this->tableau = table_valeur($this->tableau, $base);
-			if (!is_array($this->tableau)) {
+			$results = table_valeur($this->tableau, $base);
+			if (is_array($results)) {
+				$this->tableau = $results;
+			} else {
 				$this->tableau = [];
 				$this->err = true;
 				spip_log("datapath '$base' absent");
