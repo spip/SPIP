@@ -17,7 +17,7 @@
 				<label for="#GET{name}_jour" id="#GET{name}_jour_#GET{id}">[(#ENV{_label_date})] #AIDER{artdate}</label>[
 				<span class='erreur_message' id="erreur_#GET{id}">(#GET{erreurs})</span>
 				]
-				<span class="affiche"[(#ENV{_saisie_en_cours}|et{#ENV{_editer_date}}|oui)style="display:none;"]>[(#ENV*{afficher_#GET{name}}|affdate)]</span>
+				<span class="affiche"[(#ENV{_saisie_en_cours}|et{#ENV{_editer_date}}|oui)style="display:none;"]>[(#ENV*{afficher_#GET{name}}|affdate_heure)]</span>
 				<BOUCLE_editable(CONDITION){si #ENV{editable}}>
 				<span class="toggle_box_link"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]><button
 					  class="btn_mini btn_secondaire"
