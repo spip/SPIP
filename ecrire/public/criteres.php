@@ -1679,7 +1679,7 @@ function critere_id__dist($idb, &$boucles, $crit) {
 	foreach ($champs as $champ) {
 		$critere_id_table = new Critere();
 		$critere_id_table->op = $champ;
-		$critere_id_table->cond = '?';
+		$critere_id_table->cond = true;
 		$critere_id_table->ligne = $crit->ligne;
 		calculer_critere_DEFAUT_dist($idb, $boucles, $critere_id_table);
 	}

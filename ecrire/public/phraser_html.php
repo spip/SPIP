@@ -616,7 +616,7 @@ function phraser_criteres($params, &$result) {
 				preg_match('/^([!]?)([a-zA-Z][a-zA-Z0-9_]*)[[:space:]]*(\??)[[:space:]]*(.*)$/ms', $param, $m);
 				$op = $m[2];
 				$not = (bool) $m[1];
-				$cond = $m[3];
+				$cond = (bool) $m[3];
 				// virer le premier argument,
 				// et mettre son reliquat eventuel
 				// Recopier pour ne pas alterer le texte source
@@ -743,7 +743,7 @@ function phraser_criteres($params, &$result) {
 						$crit->op = $m[2];
 						$crit->param = $v;
 						$crit->not = (bool) $m[1];
-						$crit->cond = $m[5];
+						$crit->cond = (bool) $m[5];
 					} else {
 						$err_ci = [
 							'zbug_critere_inconnu',
