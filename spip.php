@@ -10,8 +10,6 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-require_once __DIR__ . '/vendor/autoload.php';
-
 # ou est l'espace prive ?
 if (!defined('_DIR_RESTREINT_ABS')) {
 	define('_DIR_RESTREINT_ABS', 'ecrire/');
