@@ -33,9 +33,19 @@ include_spip('inc/texte');
  * @return string|array|null
  *     Saisie protégée
  **/
-function protege_champ($texte) {
+function protege_champ($texte, $max_prof = 128) {
 	if (is_array($texte)) {
-		return array_map('protege_champ', $texte);
+		// si on dépasse la prof max on tronque
+		if ($max_prof > 0) {
+			return array_map(
+				function($v) use ($max_prof) {
+					return protege_champ($v, $max_prof-1);
+				},
+				$texte
+			);
+		}
+		// si on dépasse la prof max on tronque
+		return [];
 	} elseif ($texte === null) {
 		return $texte;
 	} elseif (is_bool($texte)) {
