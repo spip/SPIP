@@ -237,7 +237,7 @@ function formulaires_dater_identifier_dist($objet, $id_objet, $retour = '', $opt
  *     URL de redirection après le traitement
  * @param array|string $options
  *     Options.
- * @return Array
+ * @return array
  *     Tableau des erreurs
  */
 function formulaires_dater_verifier_dist($objet, $id_objet, $retour = '', $options = []) {
@@ -278,7 +278,7 @@ function formulaires_dater_verifier_dist($objet, $id_objet, $retour = '', $optio
  *     URL de redirection après le traitement
  * @param array|string $options
  *     Options.
- * @return Array
+ * @return array
  *     Retours des traitements
  */
 function formulaires_dater_traiter_dist($objet, $id_objet, $retour = '', $options = []) {
