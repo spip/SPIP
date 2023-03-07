@@ -9,8 +9,6 @@
  *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
 \***************************************************************************/
 
-require_once __DIR__ . '/../vendor/autoload.php';
-
 /**
  * Initialisation de SPIP
  *
@@ -59,6 +57,37 @@ define('_ROOT_CWD', getcwd() . '/');
 /** chemin absolu vers ecrire */
 define('_ROOT_RESTREINT', _ROOT_CWD . _DIR_RESTREINT);
 
+# Le nom des 4 repertoires modifiables par les scripts lances par httpd
+# Par defaut ces 4 noms seront suffixes par _DIR_RACINE (cf plus bas)
+# mais on peut les mettre ailleurs et changer completement les noms
+if (!defined('_NOM_TEMPORAIRES_INACCESSIBLES')) {
+	/** Nom du repertoire des fichiers Temporaires Inaccessibles par http:// */
+	define('_NOM_TEMPORAIRES_INACCESSIBLES', 'tmp/');
+}
+if (!defined('_NOM_TEMPORAIRES_ACCESSIBLES')) {
+	/** Nom du repertoire des fichiers Temporaires Accessibles par http:// */
+	define('_NOM_TEMPORAIRES_ACCESSIBLES', 'local/');
+}
+if (!defined('_NOM_PERMANENTS_INACCESSIBLES')) {
+	/** Nom du repertoire des fichiers Permanents Inaccessibles par http:// */
+	define('_NOM_PERMANENTS_INACCESSIBLES', 'config/');
+}
+if (!defined('_NOM_PERMANENTS_ACCESSIBLES')) {
+	/** Nom du repertoire des fichiers Permanents Accessibles par http:// */
+	define('_NOM_PERMANENTS_ACCESSIBLES', 'IMG/');
+}
+
+// inclure l'ecran de securite si il n'a pas été inclus en prepend php
+if (
+	!defined('_ECRAN_SECURITE')
+	and @file_exists($f = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . 'ecran_securite.php')
+) {
+	include $f;
+}
+
+// et on peut lancer l'autoloader
+require_once __DIR__ . '/../vendor/autoload.php';
+
 // Icones
 if (!defined('_NOM_IMG_PACK')) {
 	/** Nom du dossier images */
@@ -76,27 +105,6 @@ if (!defined('_JAVASCRIPT')) {
 } // utilisable avec #CHEMIN et find_in_path
 /** le nom du repertoire des  bibliotheques JavaScript du prive */
 define('_DIR_JAVASCRIPT', (_DIR_RACINE . 'prive/' . _JAVASCRIPT));
-
-# Le nom des 4 repertoires modifiables par les scripts lances par httpd
-# Par defaut ces 4 noms seront suffixes par _DIR_RACINE (cf plus bas)
-# mais on peut les mettre ailleurs et changer completement les noms
-
-if (!defined('_NOM_TEMPORAIRES_INACCESSIBLES')) {
-	/** Nom du repertoire des fichiers Temporaires Inaccessibles par http:// */
-	define('_NOM_TEMPORAIRES_INACCESSIBLES', 'tmp/');
-}
-if (!defined('_NOM_TEMPORAIRES_ACCESSIBLES')) {
-	/** Nom du repertoire des fichiers Temporaires Accessibles par http:// */
-	define('_NOM_TEMPORAIRES_ACCESSIBLES', 'local/');
-}
-if (!defined('_NOM_PERMANENTS_INACCESSIBLES')) {
-	/** Nom du repertoire des fichiers Permanents Inaccessibles par http:// */
-	define('_NOM_PERMANENTS_INACCESSIBLES', 'config/');
-}
-if (!defined('_NOM_PERMANENTS_ACCESSIBLES')) {
-	/** Nom du repertoire des fichiers Permanents Accessibles par http:// */
-	define('_NOM_PERMANENTS_ACCESSIBLES', 'IMG/');
-}
 
 
 /** Le nom du fichier de personnalisation */
@@ -126,15 +134,6 @@ if (!defined('MODULES_IDIOMES')) {
 }
 
 // *** Fin des define *** //
-
-
-// inclure l'ecran de securite
-if (
-	!defined('_ECRAN_SECURITE')
-	and @file_exists($f = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . 'ecran_securite.php')
-) {
-	include $f;
-}
 
 
 /*
