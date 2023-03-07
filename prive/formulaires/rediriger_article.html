@@ -1,5 +1,5 @@
 <div class="formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id}" id="formulaire_#FORM-#ENV{id}">
-	[<h3 class="titrem">[(#CHEMIN_IMAGE{site-24.png}|balise_img{'','cadre-icone'})]<:texte_article_virtuel:><br />(#ENV**{_afficher_url}|PtoBR)</h3>]
+	[<h3 class="titrem">[(#CHEMIN_IMAGE{site-24.png}|balise_img{'','cadre-icone'})]<:texte_article_virtuel:><br />(#ENV*{_afficher_url}|PtoBR)</h3>]
 	[<p class="reponse_formulaire reponse_formulaire_ok" role="status">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur" role="alert">(#ENV**{message_erreur})</p>]
 	[(#ENV{editable})
@@ -15,7 +15,7 @@
 				]<p class="explication"><:texte_reference_mais_redirige:></p>
 				<input type="text" class="text" name="#GET{name}" id="#GET{name}-#ENV{id}" value="#ENV{#GET{name},'http://'}"
 				onfocus="jQuery(this).parents('.editer-groupe').siblings('.boutons:hidden').show('fast');"/>
-				
+
 			</div>
 		</div>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]

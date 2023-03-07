@@ -12,7 +12,7 @@
 			<div class="editer saisie_oubli obligatoire[ (#ENV*{erreurs}|table_valeur{oubli}|oui)erreur]">
 				<label for="oubli"><:entree_adresse_email:></label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{oubli})</span>]
-				<input[ (#HTML5|?{type="email" class="text email" autofocus="autofocus" required="required",type="text" class="text"})] name='oubli' id='oubli' value="#ENV**{oubli}" autocapitalize="off" autocorrect="off" />
+				<input[ (#HTML5|?{type="email" class="text email" autofocus="autofocus" required="required",type="text" class="text"})] name='oubli' id='oubli' value="#ENV{oubli}" autocapitalize="off" autocorrect="off" />
 			</div>
 		</div>
 	</fieldset>
