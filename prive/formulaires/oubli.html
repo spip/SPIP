@@ -9,9 +9,9 @@
 		<legend><:pass_nouveau_pass:></legend>
 		<p><:pass_procedure_changer:></p>
 		<div class="editer-groupe">
-			<div class="editer saisie_oubli obligatoire[ (#ENV*{erreurs}|table_valeur{oubli}|oui)erreur]">
+			<div class="editer saisie_oubli obligatoire[ (#ENV*{erreurs/oubli}|oui)erreur]">
 				<label for="oubli"><:entree_adresse_email:></label>
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{oubli})</span>]
+				[<span class='erreur_message'>(#ENV*{erreurs/oubli})</span>]
 				<input[ (#HTML5|?{type="email" class="text email" autofocus="autofocus" required="required",type="text" class="text"})] name='oubli' id='oubli' value="#ENV{oubli}" autocapitalize="off" autocorrect="off" />
 			</div>
 		</div>

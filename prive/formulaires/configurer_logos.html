@@ -8,7 +8,7 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE
 		<div class="editer-groupe">
-			#SET{name,activer_logos}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			#SET{name,activer_logos}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
 			<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}"><:config_info_logos:>#AIDER{logoart}</label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
@@ -21,7 +21,7 @@
 						[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:config_info_logos_utiliser_non:></label>
 					</div>
 			</div>
-			#SET{name,activer_logos_survol}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			#SET{name,activer_logos_survol}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
 			<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				[
 				<span class='erreur_message'>(#GET{erreurs})</span>

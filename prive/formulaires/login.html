@@ -21,14 +21,14 @@
 		<div class="editer-groupe">
 			<div class="editer editer_login obligatoire[(#ENV**{erreurs/var_login}|oui)erreur]">
 				<label for="var_login"><:login_login2:> <span class="etoile" title="<:info_obligatoire_02|attribut_html:>" aria-label="<:info_obligatoire_02|attribut_html:>">*</span></label>[
-				<span class="erreur_message">(#ENV**{erreurs/var_login,''}|trim)</span>
-				]<input type='text' class='text' name='var_login' id='var_login' value="[(#ENV{var_login})]" size='40'[(#HTML5) required='required' [(#ENV{_autofocus}|et{#ENV**{erreurs}|table_valeur{password}|non})autofocus='autofocus']] autocapitalize="off" autocorrect="off" />
+				<span class="erreur_message">(#ENV*{erreurs/var_login,''}|trim)</span>
+				]<input type='text' class='text' name='var_login' id='var_login' value="[(#ENV{var_login})]" size='40'[(#HTML5) required='required' [(#ENV{_autofocus}|et{#ENV**{erreurs/password}|non})autofocus='autofocus']] autocapitalize="off" autocorrect="off" />
 				<span id="spip_logo_auteur">[(#ENV*{_logo,''})]</span>
 			</div>
 			<div class="editer editer_password obligatoire[(#ENV**{erreurs/password}|oui)erreur]">
 				<label for="password"><:login_pass2:>  <span class="etoile" title="<:info_obligatoire_02|attribut_html:>" aria-label="<:info_obligatoire_02|attribut_html:>">*</span></label>[
-				<span class="erreur_message">(#ENV**{erreurs/password,''}|trim)</span>
-				]<input type='password' class='text password' name='password' id='password' value="" size='40' autocapitalize="off" autocorrect="off" [(#HTML5) [(#ENV{_autofocus}|et{#ENV**{erreurs}|table_valeur{password}|oui})autofocus='autofocus']]/>
+				<span class="erreur_message">(#ENV*{erreurs/password,''}|trim)</span>
+				]<input type='password' class='text password' name='password' id='password' value="" size='40' autocapitalize="off" autocorrect="off" [(#HTML5) [(#ENV{_autofocus}|et{#ENV**{erreurs/password}|oui})autofocus='autofocus']]/>
 				<p class='details'><a href="[(#URL_PAGE{spip_pass}|parametre_url{lang,#LANG})]" id='spip_pass'><:login_motpasseoublie:></a></p>
 			</div>
 			[(#ENV{rester_connecte})

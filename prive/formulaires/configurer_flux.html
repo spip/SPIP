@@ -10,7 +10,7 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE
 		<div class="editer-groupe">
-			#SET{name,syndication_integrale}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			#SET{name,syndication_integrale}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
 			<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}"><:info_syndication_integrale_2:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>

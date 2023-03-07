@@ -9,7 +9,7 @@
 		#ACTION_FORMULAIRE
 		<input type='submit' class='btn submit' value='<:bouton_enregistrer:>' style="display:none;"/>
 		<div class="editer-groupe">
-			#SET{name,image_process}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			#SET{name,image_process}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
 			<div class="editer haut editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}"><:info_image_process:>#AIDER{logoart}</label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
@@ -59,7 +59,7 @@
 				<p class="explication"><:info_image_process2:></p>
 			</div>
 			[(#ENV{image_process}|match{^(gd1|gd2)$}|oui)
-			#SET{name,max_taille_vignettes}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			#SET{name,max_taille_vignettes}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
 			<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}"><:info_taille_maximale_images:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
@@ -70,7 +70,7 @@
 				<fieldset><legend><:info_generation_miniatures_images:></legend>
 					<p><:info_ajout_image:></p>
 					<div class="editer-groupe">
-						#SET{name,creer_preview}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						#SET{name,creer_preview}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
 						<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 							[
 							<span class='erreur_message'>(#GET{erreurs})</span>
@@ -89,7 +89,7 @@
 								/><label for="#GET{name}_oui"><:item_choix_generation_miniature:></label>
 							</div>
 						</div>
-						#SET{name,taille_preview}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						#SET{name,taille_preview}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
 						<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]"[(#ENV{creer_preview}|=={oui}|non)style='display:none;']>
 							<label for="#GET{name}"><:info_taille_maximale_vignette:></label>[
 							<span class='erreur_message'>(#GET{erreurs})</span>
