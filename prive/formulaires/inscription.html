@@ -9,14 +9,14 @@
 		<legend><:form_forum_identifiants:></legend>
 		<p class='explication'><:form_forum_indiquer_nom_email:></p>
 		<div class="editer-groupe">
-			<div class='editer saisie_nom_inscription obligatoire[ (#ENV*{erreurs}|table_valeur{nom_inscription}|oui)erreur]'>
+			<div class='editer saisie_nom_inscription obligatoire[ (#ENV*{erreurs/nom_inscription}|oui)erreur]'>
 				<label for="nom_inscription"><:entree_nom_pseudo:> <em class="obligatoire"><:info_obligatoire_02:></em></label>
-				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{nom_inscription})</span>]
+				[<span class="erreur_message">(#ENV*{erreurs/nom_inscription})</span>]
 				<input type="text" class="text" name="nom_inscription" id="nom_inscription" value="#ENV{nom_inscription}" size="30" [(#HTML5) [(#ENV{focus}|=={nom_inscription}|oui)autofocus="autofocus" ]required="required"] autocapitalize="off" autocorrect="off" />
 			</div>
-			<div class='editer saisie_mail_inscription obligatoire[ (#ENV*{erreurs}|table_valeur{mail_inscription}|oui)erreur]'>
+			<div class='editer saisie_mail_inscription obligatoire[ (#ENV*{erreurs/mail_inscription}|oui)erreur]'>
 				<label for="mail_inscription"><:entree_adresse_email:> <em class="obligatoire"><:info_obligatoire_02:></em></label>
-				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{mail_inscription})</span>]
+				[<span class="erreur_message">(#ENV*{erreurs/mail_inscription})</span>]
 				<input[ (#HTML5|?{required="required" type="email" class="text email",type="text" class="text"})] name="mail_inscription" id="mail_inscription" value="#ENV{mail_inscription}" size="30"[(#ENV{focus}|=={mail_inscription}|et{#HTML5}|oui) autofocus="autofocus"] autocapitalize="off" autocorrect="off" />
 			</div>
 		</div>

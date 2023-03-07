@@ -11,7 +11,7 @@
 			<div class="explication">
 			<:texte_selection_langue_principale|inserer_attribut{class,spip}:>
 			</div>
-	  	#SET{name,changer_langue_site}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	  	#SET{name,changer_langue_site}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
 	    <div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="#GET{name}"><:info_langue_principale:></label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]

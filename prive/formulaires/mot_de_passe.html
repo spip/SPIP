@@ -13,14 +13,14 @@
 	<fieldset>
 		<legend><:pass_nouveau_pass:></legend>
 		<div class="editer-groupe">
-			<div class="editer saisie_oubli obligatoire[ (#ENV*{erreurs}|table_valeur{oubli}|oui)erreur]">
+			<div class="editer saisie_oubli obligatoire[ (#ENV*{erreurs/oubli}|oui)erreur]">
 				<label for="oubli"><:pass_choix_pass:></label>
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{oubli})</span>]
+				[<span class='erreur_message'>(#ENV*{erreurs/oubli})</span>]
 				<input type='password' class='text' name='oubli' id='oubli' value="#ENV{oubli}" autocapitalize="off" autocorrect="off" />
 			</div>
-			<div class="editer saisie_oubli_confirm obligatoire[ (#ENV*{erreurs}|table_valeur{oubli_confirm}|oui)erreur]">
+			<div class="editer saisie_oubli_confirm obligatoire[ (#ENV*{erreurs/oubli_confirm}|oui)erreur]">
 				<label for="oubli_confirm"><:info_confirmer_passe:></label>
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{oubli_confirm})</span>]
+				[<span class='erreur_message'>(#ENV*{erreurs/oubli_confirm})</span>]
 				<input type='password' class='text' name='oubli_confirm' id='oubli_confirm' value="#ENV{oubli_confirm}" autocapitalize="off" autocorrect="off" />
 			</div>
 		</div>

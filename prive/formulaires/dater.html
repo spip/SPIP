@@ -12,7 +12,7 @@
 		#ACTION_FORMULAIRE
 	]
 		<div class="editer-groupe">
-			#SET{name,date}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			#SET{name,date}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
 			<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}_jour" id="#GET{name}_jour_#GET{id}">[(#ENV{_label_date})] #AIDER{artdate}</label>[
 				<span class='erreur_message' id="erreur_#GET{id}">(#GET{erreurs})</span>
@@ -31,7 +31,7 @@
 				</BOUCLE_editable>
 			</div>
 			<BOUCLE_editer_date_anterieure(CONDITION){si #ENV{_editer_date_anterieure}|oui}>
-				#SET{name,date_redac}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				#SET{name,date_redac}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
 				<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}_jour" id="#GET{name}_jour_#GET{id}">[(#ENV{_label_date_redac,<:texte_date_publication_anterieure:>})] #AIDER{artdate_redac}</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
