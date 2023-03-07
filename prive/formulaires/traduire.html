@@ -26,7 +26,7 @@
 						><:bouton_changer:><i class="over"> \([(#ENV{_langue}|?{[(#ENV{_objet}|objet_info{texte_langue_objet}|_T)],#ENV{_objet}|objet_T{info_traductions}})]\)</i></a></span>
 					[(#ENV{editable}|oui)
 					[<span class="input[(#ENV{_saisie_en_cours}|non)none-js]">
-					<select name="changer_lang" id="changer_lang">(#INCLURE{fond=formulaires/inc-options-langues,name=changer_lang,default=#ENV**{_langue},herit=#ENV**{langue_parent}})</select>
+					<select name="changer_lang" id="changer_lang">(#INCLURE{fond=formulaires/inc-options-langues,name=changer_lang,default=#ENV{_langue},herit=#ENV{langue_parent}})</select>
 					</span>]]]
 			</div>
 

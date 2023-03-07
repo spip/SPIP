@@ -6,45 +6,45 @@
 		#ACTION_FORMULAIRE
 		<input type='hidden' name='id_article' value='#ENV{id_article}' />
 		<div class="editer-groupe">
-			[(#CONFIG{articles_surtitre}|=={non}|?{#ENV**{surtitre,''},' '}|oui)
+			[(#CONFIG{articles_surtitre}|=={non}|?{#ENV{surtitre,''},' '}|oui)
 			<div class="editer editer_surtitre[ (#ENV**{erreurs/surtitre}|oui)erreur]">
 				<label for="surtitre"><:texte_sur_titre:><em class="aide">#AIDER{surtitre}</em></label>[
 				<span class='erreur_message'>(#ENV**{erreurs/surtitre})</span>
-				]<input type='text' class='text' name='surtitre' id='surtitre'[ lang='(#LANGUE)'] value="[(#ENV**{surtitre})]" />
+				]<input type='text' class='text' name='surtitre' id='surtitre'[ lang='(#LANGUE)'] value="[(#ENV{surtitre})]" />
 			</div>]
 			<div class="editer editer_titre obligatoire[ (#ENV**{erreurs/titre}|oui)erreur]">
 				<label for="titre"><:info_titre|label_nettoyer:><em class="aide">#AIDER{titre}</em></label>[
 				<span class='erreur_message'>(#ENV**{erreurs/titre})</span>
-				]<input type='text' class='text' name='titre' id='titre'[ lang='(#LANGUE)'] value="[(#ENV**{titre,''})]"
+				]<input type='text' class='text' name='titre' id='titre'[ lang='(#LANGUE)'] value="[(#ENV{titre,''})]"
 				placeholder="<:info_nouvel_article|attribut_html:>" />
 			</div>
-			[(#CONFIG{articles_soustitre}|=={non}|?{#ENV**{soustitre,''},' '}|oui)
+			[(#CONFIG{articles_soustitre}|=={non}|?{#ENV{soustitre,''},' '}|oui)
 			<div class="editer editer_soustitre[ (#ENV**{erreurs/soustitre}|oui)erreur]">
 				<label for="soustitre"><:texte_sous_titre:><em class="aide">#AIDER{soustitre}</em></label>[
 				<span class='erreur_message'>(#ENV**{erreurs/soustitre})</span>
-				]<input type='text' class='text' name='soustitre' id='soustitre'[ lang='(#LANGUE)'] value="[(#ENV**{soustitre})]" />
+				]<input type='text' class='text' name='soustitre' id='soustitre'[ lang='(#LANGUE)'] value="[(#ENV{soustitre})]" />
 			</div>]
 			[<div class="editer editer_parent[ (#ENV**{erreurs/id_parent}|oui)erreur]">
 				<label for="id_parent"><:titre_cadre_interieur_rubrique:><em class="aide">#AIDER{id_parent}</em></label>[
 				<span class='erreur_message'>(#ENV**{erreurs/id_parent})</span>
 				]
-				(#VAL|chercher_rubrique{#ENV{id_article},#ENV{id_parent},'article',#ENV{id_secteur},#ENV**{config/restreint},0,form_simple})
+				(#VAL|chercher_rubrique{#ENV{id_article},#ENV{id_parent},'article',#ENV{id_secteur},#ENV{config/restreint},0,form_simple})
 			</div>]
 
-			[(#CONFIG{articles_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|oui)
+			[(#CONFIG{articles_descriptif}|=={non}|?{#ENV{descriptif,''},' '}|oui)
 			<div class="editer editer_descriptif[ (#ENV**{erreurs/descriptif}|oui)erreur]">
 				<label for="descriptif"><:texte_descriptif_rapide:><em class="aide">#AIDER{descriptif}</em></label>[
 				<span class='erreur_message'>(#ENV**{erreurs/descriptif})</span>
-				]<textarea name='descriptif' id='descriptif'[ lang='(#LANGUE)'] rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
+				]<textarea name='descriptif' id='descriptif'[ lang='(#LANGUE)'] rows='2' cols='40'>[(#ENV{descriptif})]</textarea>
 			</div>]
-			[(#CONFIG{articles_chapeau}|=={non}|?{#ENV**{chapo,''},' '}|oui)
+			[(#CONFIG{articles_chapeau}|=={non}|?{#ENV{chapo,''},' '}|oui)
 			<div class="editer editer_chapo[ (#ENV**{erreurs/chapo}|oui)erreur]">
 				<label for="chapo"><:info_chapeau:><em class="aide">#AIDER{chapo}</em></label>[
 				<span class='erreur_message'>(#ENV**{erreurs/chapo})</span>
-				]<textarea name='chapo' id='chapo'[ lang='(#LANGUE)'][ rows='(#ENV**{config/lignes})'] cols='40'>[(#ENV**{chapo})]</textarea>
+				]<textarea name='chapo' id='chapo'[ lang='(#LANGUE)'][ rows='(#ENV{config/lignes})'] cols='40'>[(#ENV{chapo})]</textarea>
 			</div>]
 
-			[(#CONFIG{articles_urlref}|=={non}|?{#ENV**{url_site,#ENV**{nom_site,''}},' '}|oui)
+			[(#CONFIG{articles_urlref}|=={non}|?{#ENV{url_site,#ENV{nom_site,''}},' '}|oui)
 			<div class="editer editer_liens_sites fieldset">
 				<fieldset>
 					<h3 class="legend"><:entree_liens_sites:></h3>
@@ -52,29 +52,29 @@
 						<div class="editer editer_nom_site[ (#ENV**{erreurs/nom_site}|oui)erreur]">
 							<label for="nom_site"><:info_titre:></label>[
 							<span class='erreur_message'>(#ENV**{erreurs/nom_site})</span>
-							]<input type='text' class='text' name='nom_site' id='nom_site'[ lang='(#LANGUE)'] value="[(#ENV**{nom_site})]" />
+							]<input type='text' class='text' name='nom_site' id='nom_site'[ lang='(#LANGUE)'] value="[(#ENV{nom_site})]" />
 						</div>
 						<div class="editer editer_url_site[ (#ENV**{erreurs/url_site}|oui)erreur]">
 							<label for="url_site"><:info_url:></label>[
 							<span class='erreur_message'>(#ENV**{erreurs/url_site})</span>
-							]<input type='text' class='text' name='url_site' id='url_site' value="[(#ENV**{url_site})]" />
+							]<input type='text' class='text' name='url_site' id='url_site' value="[(#ENV{url_site})]" />
 						</div>
 					</div>
 				</fieldset>
 			</div>]
 
-			[(#CONFIG{articles_texte}|=={non}|?{#ENV**{texte,''},' '}|oui)
+			[(#CONFIG{articles_texte}|=={non}|?{#ENV{texte,''},' '}|oui)
 			<div class="editer editer_texte obligatoire[ (#ENV**{erreurs/texte}|oui)erreur]">
 				<label for="text_area"><:info_texte:><em class="aide">#AIDER{text_area}</em></label>[
 				<span class='erreur_message'>(#ENV**{erreurs/texte})</span>
-				][(#ENV**{_texte_trop_long,''})]
-				<textarea name='texte' id='text_area'[ lang='(#LANGUE)'] rows='[(#ENV**{config/lignes}|plus{2})]' cols='40'>[(#ENV**{texte})]</textarea>
+				][(#ENV{_texte_trop_long,''})]
+				<textarea name='texte' id='text_area'[ lang='(#LANGUE)'] rows='[(#ENV{config/lignes}|plus{2})]' cols='40'>[(#ENV{texte})]</textarea>
 			</div>]
-			[(#CONFIG{articles_ps}|=={non}|?{#ENV**{ps,''},' '}|oui)
+			[(#CONFIG{articles_ps}|=={non}|?{#ENV{ps,''},' '}|oui)
 			<div class="editer editer_ps[ (#ENV**{erreurs/ps}|oui)erreur]">
 				<label for="ps"><:info_post_scriptum:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs/ps})</span>
-				]<textarea name='ps' id='ps'[ lang='(#LANGUE)'] rows='5' cols='40'>[(#ENV**{ps})]</textarea>
+				]<textarea name='ps' id='ps'[ lang='(#LANGUE)'] rows='5' cols='40'>[(#ENV{ps})]</textarea>
 			</div>]
 		</div>
 
