@@ -9,8 +9,6 @@
  *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
 \***************************************************************************/
 
-require_once __DIR__ . '/../vendor/autoload.php';
-
 /**
  * Initialisation de SPIP
  *
@@ -58,6 +56,17 @@ define('_ROOT_RACINE', dirname(__DIR__) . '/');
 define('_ROOT_CWD', getcwd() . '/');
 /** chemin absolu vers ecrire */
 define('_ROOT_RESTREINT', _ROOT_CWD . _DIR_RESTREINT);
+
+// inclure l'ecran de securite si il n'a pas été inclus en prepend php
+if (
+	!defined('_ECRAN_SECURITE')
+	and @file_exists($f = _ROOT_RACINE . 'config/ecran_securite.php')
+) {
+	include $f;
+}
+
+// et on peut lancer l'autoloader
+require_once __DIR__ . '/../vendor/autoload.php';
 
 // Icones
 if (!defined('_NOM_IMG_PACK')) {
@@ -126,15 +135,6 @@ if (!defined('MODULES_IDIOMES')) {
 }
 
 // *** Fin des define *** //
-
-
-// inclure l'ecran de securite
-if (
-	!defined('_ECRAN_SECURITE')
-	and @file_exists($f = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . 'ecran_securite.php')
-) {
-	include $f;
-}
 
 
 /*
