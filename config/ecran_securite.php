@@ -654,17 +654,41 @@ if (
 ) {
 	foreach ($_REQUEST as $k => $v) {
 		if (is_string($v)
-		  and strpos($v, ':') !== false
-		  and strpos($v, '"') !==false
-		  and preg_match(',[bidsaO]:,', $v)
-		  and @unserialize($v)) {
-			$_REQUEST[$k] = htmlentities($v);
+		  and strpbrk($v, "&\"'<>") !== false
+		  and preg_match(',^[abis]:\d+[:;],', $v)
+		  and __ecran_test_if_serialized($v)
+		) {
+			$_REQUEST[$k] = htmlspecialchars($v, ENT_QUOTES);
 			if (isset($_POST[$k])) $_POST[$k] = $_REQUEST[$k];
 			if (isset($_GET[$k])) $_GET[$k] = $_REQUEST[$k];
 		}
 	}
 }
-
+/**
+ * Version simplifiée de https://developer.wordpress.org/reference/functions/is_serialized/
+ */
+function __ecran_test_if_serialized($data) {
+	$data = trim($data);
+	if ('N;' === $data) {return true;}
+	if (strlen($data) < 4) {return false;}
+	if (':' !== $data[1]) {return false;}
+	$semicolon = strpos($data, ';');
+	$brace = strpos($data, '}');
+	// Either ; or } must exist.
+	if (false === $semicolon && false === $brace) {return false;}
+	// But neither must be in the first X characters.
+	if (false !== $semicolon && $semicolon < 3) {return false;}
+	if (false !== $brace && $brace < 4) {return false;}
+	$token = $data[0];
+	if (in_array($token, array('s', 'S'))) {
+		if (false === strpos($data, '"')) {return false;}
+	} elseif (in_array($token, array('a', 'O', 'C', 'o', 'E'))) {
+		return (bool)preg_match("/^{$token}:[0-9]+:/s", $data);
+	} elseif (in_array($token, array('b', 'i', 'd'))) {
+		return (bool)preg_match("/^{$token}:[0-9.E+-]+;/", $data);
+	}
+	return false;
+}
 
 /*
  * S'il y a une raison de mourir, mourons
