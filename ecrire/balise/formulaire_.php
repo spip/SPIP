@@ -27,36 +27,36 @@ include_spip('inc/texte');
  * Proteger les ' et les " dans les champs que l'on va injecter,
  * sans toucher aux valeurs sérialisées
  *
- * @see entites_html()
- * @param mixed $texte
+ * @param mixed $valeur
  *     Saisie à protéger
  * @return string|array|null
  *     Saisie protégée
- **/
-function protege_champ($texte, $max_prof = 128) {
-	if (is_array($texte)) {
+ * @see spip_htmlspecialchars()
+ */
+function protege_champ($valeur, $max_prof = 128) {
+	if (is_array($valeur)) {
 		// si on dépasse la prof max on tronque
 		if ($max_prof > 0) {
 			return array_map(
 				function($v) use ($max_prof) {
 					return protege_champ($v, $max_prof-1);
 				},
-				$texte
+				$valeur
 			);
 		}
 		// si on dépasse la prof max on tronque
 		return [];
-	} elseif ($texte === null) {
-		return $texte;
-	} elseif (is_bool($texte)) {
-		return $texte ? '1' : '';
-	} elseif (is_string($texte) and $texte) {
-		if (strpbrk($texte, "&\"'<>") !== false) {
-			return spip_htmlspecialchars($texte, ENT_QUOTES);
+	} elseif ($valeur === null) {
+		return $valeur;
+	} elseif (is_bool($valeur)) {
+		return $valeur ? '1' : '';
+	} elseif (is_string($valeur) and $valeur) {
+		if (strpbrk($valeur, "&\"'<>") !== false) {
+			return spip_htmlspecialchars($valeur, ENT_QUOTES);
 		}
 	}
 
-	return $texte;
+	return $valeur;
 }
 
 /**
