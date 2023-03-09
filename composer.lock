@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fe59a5f2be1aa5fcf1096fbab437aeeb",
+    "content-hash": "da74af70418fcd9b5ffff34232b4b7dc",
     "packages": [
         {
             "name": "algo26-matthias/idna-convert",
@@ -483,6 +483,64 @@
                 }
             ],
             "time": "2022-11-10T10:10:54+00:00"
+        },
+        {
+            "name": "zumba/json-serializer",
+            "version": "3.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zumba/json-serializer.git",
+                "reference": "421dcdd53d4b333303d984e9ebec557d3e37783b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zumba/json-serializer/zipball/421dcdd53d4b333303d984e9ebec557d3e37783b",
+                "reference": "421dcdd53d4b333303d984e9ebec557d3e37783b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": "^7.0 || ^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=6.0 <10.0"
+            },
+            "suggest": {
+                "jeremeamia/superclosure": "Allow to serialize PHP closures"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Zumba\\": "src/",
+                    "Zumba\\JsonSerializer\\Test\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Zumba Fitness, LLC",
+                    "email": "engineering@zumba.com"
+                },
+                {
+                    "name": "Juan Basso",
+                    "email": "juan.basso@zumba.com"
+                }
+            ],
+            "description": "Serialize PHP variables, including objects, in JSON format. Support to unserialize it too.",
+            "homepage": "http://tech.zumba.com",
+            "keywords": [
+                "json",
+                "serialize",
+                "serializer"
+            ],
+            "support": {
+                "issues": "https://github.com/zumba/json-serializer/issues",
+                "source": "https://github.com/zumba/json-serializer/tree/3.0.2"
+            },
+            "time": "2022-12-07T14:14:45+00:00"
         }
     ],
     "packages-dev": [
