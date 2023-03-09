@@ -10,7 +10,8 @@
         "symfony/polyfill-mbstring": "^1.27",
         "symfony/polyfill-php80": "^1.27",
         "symfony/polyfill-php81": "^1.27",
-        "symfony/polyfill-php82": "^1.27"
+        "symfony/polyfill-php82": "^1.27",
+        "zumba/json-serializer": "^3.0"
     },
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
