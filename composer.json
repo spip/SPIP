@@ -10,7 +10,8 @@
         "spip/composer-installer": "^0.5.0",
         "spip/security": "^1.5",
         "symfony/polyfill-mbstring": "^1.27",
-        "symfony/polyfill-php82": "^1.27"
+        "symfony/polyfill-php82": "^1.27",
+        "zumba/json-serializer": "^3.0"
     },
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
