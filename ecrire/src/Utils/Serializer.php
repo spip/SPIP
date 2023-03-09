@@ -17,7 +17,7 @@ class Serializer {
 	public static function serialize($valeur): string {
 		try {
 			$serializer = new JsonSerializer();
-			$json = $serializer->serialize([$valeur]);
+			$json = "[" . $serializer->serialize($valeur)."]";
 			return $json;
 		} catch (\Exception $e) {
 			// Fallback, mais on devrait jamais arriver là...
