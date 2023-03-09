@@ -40,7 +40,7 @@ class Serializer {
 	 */
 	public static function unserialize(string $valeur, array $options = []) {
 		$accept_legacy = ($options['accept_legacy'] ?? true);
-		$allowed_classes = ($options['allowed_class'] ?? self::$default_allowed_classes);
+		$allowed_classes = ($options['allowed_classes'] ?? self::$default_allowed_classes);
 		// cas par defaut attendu : c'est une serialization par nous même, via supercharged json_encode
 		if (strpos($valeur,'[') === 0) {
 			$serializer = new JsonSerializer();
