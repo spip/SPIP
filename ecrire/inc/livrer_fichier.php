@@ -28,7 +28,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param string $fichier
  * @param string $content_type
  * @param array $options
- *   bool $attachment
+ *   bool|string $attachment
  *   int $expires
  *   int|null range
  * @throws Exception
@@ -38,7 +38,7 @@ function spip_livrer_fichier($fichier, $content_type = 'application/octet-stream
 	$defaut = [
 		'attachment' => false,
 		'expires' => 3600,
-		'range' => null
+		'range' => null,
 	];
 	$options = array_merge($defaut, $options);
 	if (is_numeric($options['expires']) and $options['expires'] > 0) {
@@ -49,7 +49,7 @@ function spip_livrer_fichier($fichier, $content_type = 'application/octet-stream
 		$options['range'] = $_SERVER['HTTP_RANGE'];
 	}
 
-	spip_livrer_fichier_entetes($fichier, $content_type, $options['attachment'] && !$options['range'], $options['expires']);
+	spip_livrer_fichier_entetes($fichier, $content_type, ($options['attachment'] && !$options['range']) ? $options['attachment'] : false, $options['expires']);
 
 	if (!is_null($options['range'])) {
 		spip_livrer_fichier_partie($fichier, $options['range']);
@@ -65,7 +65,7 @@ function spip_livrer_fichier($fichier, $content_type = 'application/octet-stream
  * @see spip_livrer_fichier()
  * @param string $fichier
  * @param string $content_type
- * @param false $attachment
+ * @param bool|string $attachment
  * @param int|string $expires
  */
 function spip_livrer_fichier_entetes($fichier, $content_type = 'application/octet-stream', $attachment = false, $expires = 0) {
@@ -81,7 +81,7 @@ function spip_livrer_fichier_entetes($fichier, $content_type = 'application/octe
 	}
 
 	if ($attachment) {
-		$f = basename($fichier);
+		$f = (is_string($attachment) ? $attachment : basename($fichier));
 		// ce content-type est necessaire pour eviter des corruptions de zip dans ie6
 		header('Content-Type: application/octet-stream');
 
@@ -94,7 +94,7 @@ function spip_livrer_fichier_entetes($fichier, $content_type = 'application/octe
 		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 	}
 	else {
-		$f = basename($fichier);
+		$f = (is_string($attachment) ? $attachment : basename($fichier));
 		header("Content-Disposition: inline; filename=\"$f\";");
 		header('Expires: ' . $expires); // set expiration time
 	}
