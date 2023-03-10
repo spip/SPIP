@@ -317,8 +317,14 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 
 	$source = trim(extraire_attribut($img, 'src') ?? '');
 	if (strlen($source) < 1) {
-		$source = $img;
-		$img = "<img src='$source' />";
+		if (strpos($img, '<img ') !== 0) {
+			$source = $img;
+			$img = "<img src='$source' />";
+		}
+		else {
+			// pas d'attribut src sur cette balise <img../>
+			return false;
+		}
 	} elseif (
 		preg_match('@^data:image/([^;]*);base64,(.*)$@isS', $source, $regs)
 		and $extension = _image_trouver_extension_depuis_mime('image/' . $regs[1])
@@ -484,7 +490,7 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 	if ($creer) {
 		if (!@file_exists($fichier)) {
 			if (!@file_exists("$fichier.src")) {
-				spip_log("Image absente : $fichier");
+				spip_log("Image absente : $fichier", 'images' . _LOG_ERREUR);
 
 				return false;
 			}
@@ -1162,24 +1168,28 @@ function image_graver($img) {
 	// des traitements auto a la fin d'une serie de filtres
 	$img = pipeline('post_image_filtrer', $img);
 
-	$fichier_ori = $fichier = extraire_attribut($img, 'src');
+	$fichier_ori = $fichier = (extraire_attribut($img, 'src') ?? '');
 	if (($p = strpos($fichier, '?')) !== false) {
 		$fichier = substr($fichier, 0, $p);
 	}
 	if (strlen($fichier) < 1) {
-		$fichier = $img;
+		if (strpos($img, '<img ') !== 0) {
+			$fichier = $img;
+		}
 	}
-	# si jamais le fichier final n'a pas ete calcule car suppose temporaire
-	# et qu'il ne s'agit pas d'une URL
-	if (strpos($fichier, '://') === false and !@file_exists($fichier)) {
-		reconstruire_image_intermediaire($fichier);
-	}
-	ramasse_miettes($fichier);
+	if (strlen($fichier)) {
+		# si jamais le fichier final n'a pas ete calcule car suppose temporaire
+		# et qu'il ne s'agit pas d'une URL
+		if (strpos($fichier, '://') === false and !@file_exists($fichier)) {
+			reconstruire_image_intermediaire($fichier);
+		}
+		ramasse_miettes($fichier);
 
-	// ajouter le timestamp si besoin
-	if (strpos($fichier_ori, '?') === false) {
-		// on utilise str_replace pour attraper le onmouseover des logo si besoin
-		$img = str_replace($fichier_ori, timestamp($fichier_ori), $img);
+		// ajouter le timestamp si besoin
+		if (strpos($fichier_ori, '?') === false) {
+			// on utilise str_replace pour attraper le onmouseover des logo si besoin
+			$img = str_replace($fichier_ori, timestamp($fichier_ori), $img);
+		}
 	}
 
 	return $img;
