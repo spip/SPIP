@@ -68,7 +68,7 @@ class Serializer {
 		}
 		elseif($accept_legacy and self::is_serialized($valeur)) {
 			spip_log("Serializer:unserialize utilisation de unserialize() sur des données legacy, mettez à jour vos données", 'serialize' . _LOG_INFO_IMPORTANTE);
-			$decode = \unserialize($decode, ['allowed_classes' => $allowed_classes]);
+			$decode = \unserialize($valeur, ['allowed_classes' => $allowed_classes]);
 			if ($decode === false) {
 				spip_log("Serializer:unserialize echec de unserialize() sur des données legacy" . var_export($valeur, true), 'serialize' . _LOG_ERREUR);
 			}
