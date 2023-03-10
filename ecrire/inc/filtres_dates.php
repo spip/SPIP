@@ -670,7 +670,8 @@ function affdate_base($numdate, $vue, $options = []): string {
 		// de date propose par http://www.php.net/date
 		default:
 			[$annee, $mois, $jour, $heures, $minutes, $secondes] = $date_array;
-			if (!$time = mktime($heures, $minutes, $secondes, $mois, (int) $jour, $annee)) {
+			// il faut envoyer jour = 1 si jour pas défini, c'est le comportement qu'on avait historiquement en envoyant ''
+			if (!$time = mktime($heures, $minutes, $secondes, $mois, is_numeric($jour) ? $jour : 1 , $annee)) {
 				$time = strtotime($numdate);
 			}
 			return date($vue, $time);
