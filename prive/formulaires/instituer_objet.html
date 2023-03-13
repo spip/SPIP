@@ -11,7 +11,7 @@
 			parametre : url d'action ]
 			#ACTION_FORMULAIRE
 		]
-			#SET{name,statut}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+			#SET{name,statut}#SET{obli,'obligatoire'}#SET{erreurs,#ENV*{erreurs/#GET{name}}}
 			<div class="editer-groupe">
 				<div class="editer editer_[(#GET{name})] statut_#ENV{#GET{name}}[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="formulaire_#FORM-#ENV{_objet}-#ENV{_id_objet}-#GET{name}">[(#ENV{_label}|_T)][(#ENV{_aide}|oui)#AIDER{#ENV{_aide}}]</label>[

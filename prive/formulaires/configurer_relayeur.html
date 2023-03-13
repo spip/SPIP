@@ -11,7 +11,7 @@
 		#ACTION_FORMULAIRE
 		<input type='submit' class='btn submit' value='<:bouton_enregistrer:>' style="display:none;"/>
 		<div class="editer-groupe">
-			#SET{name,http_proxy}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+			#SET{name,http_proxy}#SET{erreurs,#ENV*{erreurs/#GET{name}}}
 			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}"><:info_url_proxy:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
@@ -21,14 +21,14 @@
 				/>
 			</div>
 			#SET{exemple,#VAL{<b><tt>}|concat{'127.0.0.1 .mondomaine.net','</tt></b>'}}
-			#SET{name,http_noproxy}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+			#SET{name,http_noproxy}#SET{erreurs,#ENV*{erreurs/#GET{name}}}
 			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}"><:info_exceptions_proxy:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<p class="explication"><:pas_de_proxy_pour{exemple=#GET{exemple}}:></p>
 				<input type="text" class="text" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}" />
 			</div>
-			#SET{name,test_proxy}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+			#SET{name,test_proxy}#SET{erreurs,#ENV*{erreurs/#GET{name}}}
 			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]"[(#ENV{http_proxy}|strlen|non)style='display:none;']>
 				<label for="#GET{name}"><:info_url_test_proxy:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>

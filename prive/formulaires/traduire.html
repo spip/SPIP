@@ -9,9 +9,9 @@
 		#ACTION_FORMULAIRE
 		]
 		<div class="editer-groupe">
-			<div class="editer editer_changer_lang long_label obligatoire[(#ENV**{erreurs/changer_lang}|oui)erreur]">
+			<div class="editer editer_changer_lang long_label obligatoire[(#ENV*{erreurs/changer_lang}|oui)erreur]">
 				<label for="changer_lang">[(#ENV{_objet}|objet_info{texte_langue_objet}|_T)]</label>[
-				<span class='erreur_message'>(#ENV**{erreurs/changer_lang})</span>
+				<span class='erreur_message'>(#ENV*{erreurs/changer_lang})</span>
 			]<span class="affiche"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]>
 				[(#ENV{langue}|?{[(#ENV{langue}|traduire_nom_langue)],[((#ENV{langue_parent}|traduire_nom_langue))]})]
 				[(#ENV{langue_choisie}|=={oui}|non)([(#ENV{_objet}|objet_T{info_multi_herit})])]
@@ -42,9 +42,9 @@
 				</div>
 				]
 				[(#ENV{_lister_id_trad}|non)
-				<div class="editer editer_id_trad long_label[(#ENV**{erreurs/id_trad}|oui)erreur][(#ENV{_saisie_en_cours}|non)none-js]">
+				<div class="editer editer_id_trad long_label[(#ENV*{erreurs/id_trad}|oui)erreur][(#ENV{_saisie_en_cours}|non)none-js]">
 					<label for="id_trad">[(#ENV{_objet}|objet_info{texte_definir_comme_traduction_objet}|_T)]</label>[
-					<span class='erreur_message'>(#ENV**{erreurs/id_trad})</span>
+					<span class='erreur_message'>(#ENV*{erreurs/id_trad})</span>
 					]<input type="text" class="text" name="id_trad" id="id_trad" value="[(#ENV{id_trad}|?{#ENV{id_trad}})]"
 						onkeypress="$(this).parents('form').find('.boutons').slideDown();"/>
 				</div>

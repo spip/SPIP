@@ -8,31 +8,31 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE
 	  <div class="editer-groupe">
-	  	#SET{name,nom_site}#SET{erreurs,#ENV**{erreurs/#GET{name}}}#SET{obli,obligatoire}
+	  	#SET{name,nom_site}#SET{erreurs,#ENV*{erreurs/#GET{name}}}#SET{obli,obligatoire}
 	    <div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="#GET{name}"><:info_nom_site:></label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
 	    </div>
-	  	#SET{name,slogan_site}#SET{erreurs,#ENV**{erreurs/#GET{name}}}#SET{obli,''}
+	  	#SET{name,slogan_site}#SET{erreurs,#ENV*{erreurs/#GET{name}}}#SET{obli,''}
 	    <div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="#GET{name}"><:label_slogan_site:></label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
 	    </div>
-	  	#SET{name,adresse_site}#SET{erreurs,#ENV**{erreurs/#GET{name}}}#SET{obli,obligatoire}
+	  	#SET{name,adresse_site}#SET{erreurs,#ENV*{erreurs/#GET{name}}}#SET{obli,obligatoire}
 	    <div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="#GET{name}"><:info_adresse_url:></label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
 	    </div>
-	  	#SET{name,descriptif_site}#SET{erreurs,#ENV**{erreurs/#GET{name}}}#SET{obli,''}
+	  	#SET{name,descriptif_site}#SET{erreurs,#ENV*{erreurs/#GET{name}}}#SET{obli,''}
 	    <div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="#GET{name}"><:texte_descriptif_rapide:></label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<textarea name='#GET{name}' id='#GET{name}' rows='7'>#ENV{#GET{name}}</textarea>
 	    </div>
-	  	#SET{name,email_webmaster}#SET{erreurs,#ENV**{erreurs/#GET{name}}}#SET{obli,''}
+	  	#SET{name,email_webmaster}#SET{erreurs,#ENV*{erreurs/#GET{name}}}#SET{obli,''}
 	    <div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="#GET{name}"><:info_email_webmestre:></label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]

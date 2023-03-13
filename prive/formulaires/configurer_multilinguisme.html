@@ -16,7 +16,7 @@
 				<fieldset><div class="editer-groupe">
 					#SET{objets,#VAL{rubrique}|objet_info{texte_objets}|_T}
 					#SET{val,spip_rubriques}
-						#SET{name,multi_objets}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+						#SET{name,multi_objets}#SET{erreurs,#ENV*{erreurs/#GET{name}}}
 						<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 							<label>#GET{objets}</label>[
 							<span class='erreur_message'>(#GET{erreurs})</span>
@@ -26,7 +26,7 @@
 							</div>
 						</div>
 						[(#GET{val}|in_any{#ENV{multi_objets}}|oui)
-						#SET{name,multi_secteurs}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+						#SET{name,multi_secteurs}#SET{erreurs,#ENV*{erreurs/#GET{name}}}
 						<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]<div class="choix">
@@ -37,7 +37,7 @@
 						</div>
 						]
 						[(#VAL{spip_rubriques}|table_supporte_trad|oui)
-						#SET{name,gerer_trad_objets}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+						#SET{name,gerer_trad_objets}#SET{erreurs,#ENV*{erreurs/#GET{name}}}
 						<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]<div class="choix">
@@ -56,7 +56,7 @@
 				<fieldset>
 					#SET{objets,#VALEUR{texte_objets}|_T}
 					<div class="editer-groupe">
-						#SET{name,multi_objets}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+						#SET{name,multi_objets}#SET{erreurs,#ENV*{erreurs/#GET{name}}}
 						<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 							<label>#GET{objets}</label>[
 							<span class='erreur_message'>(#GET{erreurs})</span>
@@ -66,7 +66,7 @@
 							</div>
 						</div>
 						[(#CLE|table_supporte_trad|oui)
-						#SET{name,gerer_trad_objets}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+						#SET{name,gerer_trad_objets}#SET{erreurs,#ENV*{erreurs/#GET{name}}}
 						<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]<div class="choix">

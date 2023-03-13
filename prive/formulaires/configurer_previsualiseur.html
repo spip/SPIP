@@ -9,7 +9,7 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE
 		<div class="editer-groupe">
-			#SET{name,preview}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+			#SET{name,preview}#SET{erreurs,#ENV*{erreurs/#GET{name}}}
 			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				[
 				<span class='erreur_message'>(#GET{erreurs})</span>
