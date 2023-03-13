@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Security
+
+- spip-team/securite#4841 Limiter l’usage de `#ENV**` dans les formulaires.
+
 ### Added
 
 - #5301 Permettre de fournir le nom de l’attachement à `spip_livrer_fichier()`
