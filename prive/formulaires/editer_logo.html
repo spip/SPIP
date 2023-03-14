@@ -1,6 +1,6 @@
 #CACHE{0}
 [(#CONFIG{activer_logos}|=={oui}|oui)<div class='formulaire_spip formulaire_editer formulaire_editer_logo formulaire_editer_logo_#ENV{objet}'>
-	[<h3 class="titrem">(#ENV{_options/titre})</h3>]
+	[<h3 class="titrem">(#ENV*{_options/titre})</h3>]
 	[<p class="reponse_formulaire reponse_formulaire_ok" role="status">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur" role="alert">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
