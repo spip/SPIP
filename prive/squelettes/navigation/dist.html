@@ -3,6 +3,6 @@
 ]
 #SET{objet_exec,#ENV{exec}|trouver_objet_exec}
 [(#GET{objet_exec}|oui)
-	#SET{f,#GET{objet_exec}|table_valeur{edition}|?{objet_edit,objet}}
-	<INCLURE{fond=prive/echafaudage/navigation/#GET{f},objet=#GET{objet_exec}|table_valeur{type},id_objet=#ENV{#GET{objet_exec}|table_valeur{id_table_objet}},env} />
+	#SET{f,#GET{objet_exec/edition}|?{objet_edit,objet}}
+	<INCLURE{fond=prive/echafaudage/navigation/#GET{f},objet=#GET{objet_exec/type},id_objet=#ENV{#GET{objet_exec/id_table_objet}},env} />
 ]

@@ -1,5 +1,5 @@
 <div class="apercu">
-	[<div class="spip_logo"><a href="[(#ENV{logo}|timestamp)]" class="mediabox">(#ENV{logo}|image_reduire{[(#ENV{_options}|table_valeur{image_reduire}|sinon{320})]}|inserer_attribut{alt,#ENV{quoi,logo_on}})</a></div>]
+	[<div class="spip_logo"><a href="[(#ENV{logo}|timestamp)]" class="mediabox">(#ENV{logo}|image_reduire{[(#ENV{_options/image_reduire}|sinon{320})]}|inserer_attribut{alt,#ENV{quoi,logo_on}})</a></div>]
 	#SET{largeur,#ENV{logo}|largeur}
 	#SET{hauteur,#ENV{logo}|hauteur}
 	<BOUCLE_DocLogo(DOCUMENTS){id_document=#ENV{id_logo}}{tous}>

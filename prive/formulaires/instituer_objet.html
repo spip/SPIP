@@ -19,7 +19,7 @@
 					]<span class="show">
 					[(#ENV{editable})
 						<select class="select statut" name="#GET{name}" id="formulaire_#FORM-#ENV{_objet}-#ENV{_id_objet}-#GET{name}">
-						[(#ENV{_statuts}|table_valeur{#ENV{#GET{name}}}|non)
+						[(#ENV{_statuts/#ENV{#GET{name}}}|non)
 							<option value="#ENV{#GET{name}}">&nbsp;&nbsp;&nbsp;#ENV{#GET{name}}</option>
 						]
 					]
@@ -31,7 +31,7 @@
 					</select>
 					]
 					[(#ENV{editable}|non)
-						<span class="statut">[(#ENV{#GET{name}}|puce_statut{#ENV{_objet}})] [(#ENV{_statuts}|table_valeur{#ENV{#GET{name}}}|_T)]</span>
+						<span class="statut">[(#ENV{#GET{name}}|puce_statut{#ENV{_objet}})] [(#ENV{_statuts/#ENV{#GET{name}}}|_T)]</span>
 					]
 				</span>
 				</div>

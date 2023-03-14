@@ -20,7 +20,7 @@
 			|icone_horizontale{<:icone_voir_en_ligne:>,voir-ligne})]
 	]
 	[(#PUBLIE{#ENV{type}, #ENV{id}}|non)
-		#SET{champ_statut,#ENV{type}|objet_info{statut}|table_valeur{0/champ}}
+		#SET{champ_statut,#ENV{type}|objet_info{statut/0/champ}}
 		[(#GET{champ_statut}|oui|et{#AUTORISER{previsualiser,#ENV{type},#ENV{id},'',#ARRAY{#GET{champ_statut},#ENV{id}|generer_info_entite{#ENV{type},#GET{champ_statut}}}}})
 			[(#VAL{redirect}
 				|generer_url_action{type=#ENV{type}&id=#ENV{id}}

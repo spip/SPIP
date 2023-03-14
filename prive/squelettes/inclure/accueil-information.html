@@ -5,7 +5,7 @@
 	<ul class="liste-items">
 		<BOUCLE_cpt(DATA){liste prepa,prop,publie}><BOUCLE_arts(ARTICLES){statut=#VALEUR}{pagination 1}>
 			<li class="item[(#STATUT|=={publie}|oui)on]">
-				[(#GET{titre}|table_valeur{#VALEUR})]&nbsp;:
+				[(#GET{titre/#VALEUR})]&nbsp;:
 				#SET{restreints,0}
 				<BOUCLE_restreints(RUBRIQUES){id_auteur=#SESSION{id_auteur}}{si #SESSION{statut}|=={0minirezo}}>
 				<BOUCLE_artsr(ARTICLES){statut=#VALEUR}{branche} />#SET{restreints,#GET{restreints}|plus{#TOTAL_BOUCLE}}<//B_artsr>
