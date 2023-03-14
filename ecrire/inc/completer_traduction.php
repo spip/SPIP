@@ -39,7 +39,7 @@ function inc_completer_traduction_dist($objet, $id_objet, $id_trad) {
 	include_spip('action/editer_logo');
 	foreach (['on', 'off'] as $etat) {
 		$logo = $chercher_logo($id_trad, $_id_table, $etat);
-		if ($logo and $file = reset($logo)) {
+		if ($logo && ($file = reset($logo))) {
 			logo_modifier($objet, $id_objet, $etat, $file);
 		}
 	}
@@ -54,7 +54,7 @@ function inc_completer_traduction_dist($objet, $id_objet, $id_trad) {
 		$champs[] = 'virtuel';
 	}
 
-	$data = sql_fetsel('*', $desc['table'], $_id_table . '=' . intval($id_trad));
+	$data = sql_fetsel('*', $desc['table'], $_id_table . '=' . (int) $id_trad);
 
 	foreach ($champs as $c) {
 		$set[$c] = $data[$c];

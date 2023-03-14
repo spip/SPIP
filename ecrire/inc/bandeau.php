@@ -43,15 +43,15 @@ function definir_barre_contexte($contexte = null) {
 	} elseif (is_string($contexte)) {
 		$contexte = unserialize($contexte);
 	}
-	if (!isset($contexte['id_rubrique']) and isset($contexte['exec'])) {
+	if (!isset($contexte['id_rubrique']) && isset($contexte['exec'])) {
 		if (!function_exists('trouver_objet_exec')) {
 			include_spip('inc/pipelines_ecrire');
 		}
 		if ($e = trouver_objet_exec($contexte['exec'])) {
 			$_id = $e['id_table_objet'];
-			if (isset($contexte[$_id]) and $id = intval($contexte[$_id])) {
+			if (isset($contexte[$_id]) && ($id = (int) $contexte[$_id])) {
 				$table = $e['table_objet_sql'];
-				$row = sql_fetsel('*', $table, "$_id=" . intval($id));
+				$row = sql_fetsel('*', $table, "$_id=" . (int) $id);
 				if (isset($row['id_rubrique'])) {
 					$contexte['id_rubrique'] = $row['id_rubrique'];
 					if (isset($row['id_secteur'])) {
@@ -89,7 +89,7 @@ function definir_barre_boutons($contexte = [], $icones = true, $autorise = true)
 	// ajouter les boutons issus des plugin via paquet.xml
 	if (
 		function_exists('boutons_plugins')
-		and is_array($liste_boutons_plugins = boutons_plugins())
+		&& is_array($liste_boutons_plugins = boutons_plugins())
 	) {
 		$liste_boutons = &$liste_boutons_plugins;
 	}
@@ -99,26 +99,26 @@ function definir_barre_boutons($contexte = [], $icones = true, $autorise = true)
 		// les boutons principaux ne sont pas soumis a autorisation
 		if (
 			!isset($infos['parent'])
-			or !($parent = $infos['parent'])
-			or !$autorise
-			or autoriser('menu', "_$id", 0, null, ['contexte' => $contexte])
+			|| !($parent = $infos['parent'])
+			|| !$autorise
+			|| autoriser('menu', "_$id", 0, null, ['contexte' => $contexte])
 		) {
 			if (
 				$parent
-				and $parent = preg_replace(',^bando_,', 'menu_', $parent)
-				and isset($boutons_admin[$parent])
+				&& ($parent = preg_replace(',^bando_,', 'menu_', $parent))
+				&& isset($boutons_admin[$parent])
 			) {
-				$position = (isset($infos['position']) and strlen($infos['position'])) ? intval($infos['position']) : count($boutons_admin[$parent]->sousmenu);
+				$position = (isset($infos['position']) && strlen($infos['position'])) ? (int) $infos['position'] : count($boutons_admin[$parent]->sousmenu);
 				if ($position < 0) {
 					$position = count($boutons_admin[$parent]->sousmenu) + 1 + $position;
 				}
 				$boutons_admin[$parent]->sousmenu = array_slice($boutons_admin[$parent]->sousmenu, 0, $position)
 					+ [
 						$id => new Bouton(
-							($icones and !empty($infos['icone'])) ? find_in_theme($infos['icone']) : '',  // icone
+							($icones && !empty($infos['icone'])) ? find_in_theme($infos['icone']) : '',  // icone
 							$infos['titre'],  // titre
-							(isset($infos['action']) and $infos['action']) ? $infos['action'] : null,
-							(isset($infos['parametres']) and $infos['parametres']) ? $infos['parametres'] : null
+							(isset($infos['action']) && $infos['action']) ? $infos['action'] : null,
+							(isset($infos['parametres']) && $infos['parametres']) ? $infos['parametres'] : null
 						)
 					]
 					+ array_slice($boutons_admin[$parent]->sousmenu, $position, 100);
@@ -126,17 +126,17 @@ function definir_barre_boutons($contexte = [], $icones = true, $autorise = true)
 			if (
 				!$parent
 				// provisoire, eviter les vieux boutons
-				and (!in_array($id, ['forum', 'statistiques_visites']))
-				and (!$autorise or autoriser('menugrandeentree', "_$id", 0, null, ['contexte' => $contexte]))
+				&& !in_array($id, ['forum', 'statistiques_visites'])
+				&& (!$autorise || autoriser('menugrandeentree', "_$id", 0, null, ['contexte' => $contexte]))
 			) {
-				$position = (isset($infos['position']) and $infos['position']) ? $infos['position'] : count($boutons_admin);
+				$position = (isset($infos['position']) && $infos['position']) ? $infos['position'] : count($boutons_admin);
 				$boutons_admin = array_slice($boutons_admin, 0, $position)
 					+ [
 						$id => new Bouton(
-							($icones and isset($infos['icone']) and $infos['icone']) ? find_in_theme($infos['icone']) : '',  // icone
+							($icones && isset($infos['icone']) && $infos['icone']) ? find_in_theme($infos['icone']) : '',  // icone
 							$infos['titre'],  // titre
-							(isset($infos['action']) and $infos['action']) ? $infos['action'] : null,
-							(isset($infos['parametres']) and $infos['parametres']) ? $infos['parametres'] : null
+							(isset($infos['action']) && $infos['action']) ? $infos['action'] : null,
+							(isset($infos['parametres']) && $infos['parametres']) ? $infos['parametres'] : null
 						)
 					]
 					+ array_slice($boutons_admin, $position, 100);
@@ -220,8 +220,8 @@ function bandeau_creer_url($url, $args = '', $contexte = null) {
 		// @machin@ etant remplace par _request('machin')
 		$url = str_replace('&amp;', '&', $url);
 		while (preg_match(',[&?]([a-z_]+)=@([a-z_]+)@,i', $url, $matches)) {
-			if ($matches[2] == 'id_secteur' and !isset($contexte['id_secteur']) and isset($contexte['id_rubrique'])) {
-				$contexte['id_secteur'] = sql_getfetsel('id_secteur', 'spip_rubriques', 'id_rubrique=' . intval($contexte['id_rubrique']));
+			if ($matches[2] == 'id_secteur' && !isset($contexte['id_secteur']) && isset($contexte['id_rubrique'])) {
+				$contexte['id_secteur'] = sql_getfetsel('id_secteur', 'spip_rubriques', 'id_rubrique=' . (int) $contexte['id_rubrique']);
 			}
 			$val = _request($matches[2], $contexte);
 			$url = parametre_url($url, $matches[1], $val ?: '', '&');
@@ -250,8 +250,8 @@ function inc_bandeau_dist() {
 function obtenir_menus_favoris() {
 	if (
 		isset($GLOBALS['visiteur_session']['prefs']['menus_favoris'])
-		and is_array($GLOBALS['visiteur_session']['prefs']['menus_favoris'])
-		and $GLOBALS['visiteur_session']['prefs']['menus_favoris']
+		&& is_array($GLOBALS['visiteur_session']['prefs']['menus_favoris'])
+		&& $GLOBALS['visiteur_session']['prefs']['menus_favoris']
 	) {
 		return $GLOBALS['visiteur_session']['prefs']['menus_favoris'];
 	}

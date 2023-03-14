@@ -52,7 +52,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  **/
 function spip_setcookie($name = '', $value = '', $options = []) {
 	static $to_secure_list = ['spip_session'];
-	if (defined('_COOKIE_SECURE_LIST') and is_array(_COOKIE_SECURE_LIST)) {
+	if (defined('_COOKIE_SECURE_LIST') && is_array(_COOKIE_SECURE_LIST)) {
 		$to_secure_list = array_merge($to_secure_list, _COOKIE_SECURE_LIST);
 	}
 
@@ -80,18 +80,14 @@ function spip_setcookie($name = '', $value = '', $options = []) {
 	if (!isset($options['expires'])) {
 		$options['expires'] = 0;
 	}
-	if (!isset($options['path']) or $options['path'] === 'AUTO') {
-		if (defined('_COOKIE_PATH')) {
-			$options['path'] = _COOKIE_PATH;
-		} else {
-			$options['path'] = preg_replace(',^\w+://[^/]*,', '', url_de_base());
-		}
+	if (!isset($options['path']) || $options['path'] === 'AUTO') {
+		$options['path'] = defined('_COOKIE_PATH') ? _COOKIE_PATH : preg_replace(',^\w+://[^/]*,', '', url_de_base());
 	}
-	if (empty($options['domain']) and defined('_COOKIE_DOMAIN') and _COOKIE_DOMAIN) {
+	if (empty($options['domain']) && defined('_COOKIE_DOMAIN') && _COOKIE_DOMAIN) {
 		$options['domain'] = _COOKIE_DOMAIN;
 	}
 	if (in_array($name, $to_secure_list)) {
-		if (empty($options['secure']) and defined('_COOKIE_SECURE') and _COOKIE_SECURE) {
+		if (empty($options['secure']) && defined('_COOKIE_SECURE') && _COOKIE_SECURE) {
 			$options['secure'] = true;
 		}
 		if (empty($options['httponly'])) {
@@ -103,7 +99,7 @@ function spip_setcookie($name = '', $value = '', $options = []) {
 	}
 
 	// in fine renommer le prefixe si besoin
-	if (strpos($name, 'spip_') === 0) {
+	if (str_starts_with($name, 'spip_')) {
 		$name = $GLOBALS['cookie_prefix'] . '_' . substr($name, 5);
 	}
 
@@ -154,8 +150,8 @@ function spip_cookie_envoye($set = '') {
 function recuperer_cookies_spip($cookie_prefix) {
 	$prefix_long = strlen($cookie_prefix);
 
-	foreach ($_COOKIE as $name => $value) {
-		if (substr($name, 0, 5) == 'spip_' && substr($name, 0, $prefix_long) != $cookie_prefix) {
+	foreach (array_keys($_COOKIE) as $name) {
+		if (str_starts_with($name, 'spip_') && substr($name, 0, $prefix_long) != $cookie_prefix) {
 			unset($_COOKIE[$name]);
 			unset($GLOBALS[$name]);
 		}

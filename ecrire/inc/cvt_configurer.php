@@ -32,8 +32,8 @@ include_spip('inc/config');
  */
 function cvtconf_formulaire_charger($flux) {
 	if (
-		$form = $flux['args']['form']
-		and strncmp($form, 'configurer_', 11) == 0 // un #FORMULAIRE_CONFIGURER_XXX
+		($form = $flux['args']['form'])
+		&& str_starts_with($form, 'configurer_') // un #FORMULAIRE_CONFIGURER_XXX
 	) {
 		// Pour tous les formulaires CONFIGURER, ayant une fonction charger ou pas, on teste si autorisé
 		include_spip('inc/autoriser');
@@ -45,7 +45,7 @@ function cvtconf_formulaire_charger($flux) {
 		if (!charger_fonction('charger', "formulaires/$form/", true)) {
 			$flux['data'] = cvtconf_formulaires_configurer_recense($form);
 			$flux['data']['editable'] = true;
-			if (_request('var_mode') == 'configurer' and autoriser('webmestre')) {
+			if (_request('var_mode') == 'configurer' && autoriser('webmestre')) {
 				if (!_AJAX) {
 					var_dump($flux['data']);
 				}
@@ -66,9 +66,9 @@ function cvtconf_formulaire_charger($flux) {
  */
 function cvtconf_formulaire_traiter($flux) {
 	if (
-		$form = $flux['args']['form']
-		and strncmp($form, 'configurer_', 11) == 0 // un #FORMULAIRE_CONFIGURER_XXX
-		and !charger_fonction('traiter', "formulaires/$form/", true) // sans fonction traiter()
+		($form = $flux['args']['form'])
+		&& str_starts_with($form, 'configurer_') // un #FORMULAIRE_CONFIGURER_XXX
+		&& !charger_fonction('traiter', "formulaires/$form/", true) // sans fonction traiter()
 	) {
 		$trace = cvtconf_formulaires_configurer_enregistre($form, $flux['args']['args']);
 		$flux['data'] = ['message_ok' => _T('config_info_enregistree') . $trace, 'editable' => true];
@@ -110,7 +110,7 @@ function cvtconf_formulaires_configurer_enregistre($form, $args) {
 	// recuperer les valeurs postees
 	$store = [];
 	foreach ($valeurs as $k => $v) {
-		if (substr($k, 0, 1) !== '_') {
+		if (!str_starts_with($k, '_')) {
 			$store[$k] = _request($k);
 		}
 	}
@@ -166,12 +166,13 @@ function cvtconf_definir_configurer_conteneur($form, $valeurs) {
  * @return array
  */
 function cvtconf_formulaires_configurer_recense($form) {
+	$contenu = null;
 	$valeurs = ['editable' => ' '];
 
 	// sinon cas analyse du squelette
 	if (
-		$f = find_in_path($form . '.' . _EXTENSION_SQUELETTES, 'formulaires/')
-		and lire_fichier($f, $contenu)
+		($f = find_in_path($form . '.' . _EXTENSION_SQUELETTES, 'formulaires/'))
+		&& lire_fichier($f, $contenu)
 	) {
 		for ($i = 0; $i < 2; $i++) {
 			// a la seconde iteration, evaluer le fond avec les valeurs deja trouvees
@@ -188,15 +189,15 @@ function cvtconf_formulaires_configurer_recense($form) {
 
 			foreach ($balises as $b) {
 				if (
-					$n = extraire_attribut($b, 'name')
-					and preg_match(',^([\w\-]+)(\[\w*\])?$,', $n, $r)
-					and !in_array($n, ['formulaire_action', 'formulaire_action_args', 'formulaire_action_sign'])
-					and extraire_attribut($b, 'type') !== 'submit'
+					($n = extraire_attribut($b, 'name'))
+					&& preg_match(',^([\w\-]+)(\[\w*\])?$,', $n, $r)
+					&& !in_array($n, ['formulaire_action', 'formulaire_action_args', 'formulaire_action_sign'])
+					&& extraire_attribut($b, 'type') !== 'submit'
 				) {
 					$valeurs[$r[1]] = '';
 					// recuperer les valeurs _meta_xx qui peuvent etre fournies
 					// en input hidden dans le squelette
-					if (strncmp($r[1], '_meta_', 6) == 0) {
+					if (str_starts_with($r[1], '_meta_')) {
 						$valeurs[$r[1]] = extraire_attribut($b, 'value');
 					}
 				}
@@ -233,7 +234,7 @@ function cvtconf_configurer_stocker($form, $valeurs, $store) {
 
 	foreach ($store as $k => $v) {
 		ecrire_config("$stockage$table$prefixe$casier$k", $v);
-		if (_request('var_mode') == 'configurer' and autoriser('webmestre')) {
+		if (_request('var_mode') == 'configurer' && autoriser('webmestre')) {
 			$trace .= "<br />table $table : " . $prefixe . $k . " = $v;";
 		}
 	}
@@ -260,8 +261,8 @@ function cvtconf_configurer_lire_meta($form, &$valeurs) {
 		$meta = lire_config("$stockage$table");
 	}
 
-	foreach ($valeurs as $k => $v) {
-		if (substr($k, 0, 1) !== '_') {
+	foreach (array_keys($valeurs) as $k) {
+		if (!str_starts_with($k, '_')) {
 			$valeurs[$k] = ($meta[$prefixe . $k] ?? null);
 		}
 	}

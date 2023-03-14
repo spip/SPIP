@@ -166,10 +166,10 @@ function init_body_class() {
 
 	$prefs = $GLOBALS['visiteur_session']['prefs'] ?? [];
 
-	$display_mode = $display_modes[intval($prefs['display'] ?? 0)] ?? $display_modes[0];
+	$display_mode = $display_modes[(int) ($prefs['display'] ?? 0)] ?? $display_modes[0];
 	$spip_display_navigation = isset($prefs['display_navigation']) ? spip_sanitize_classname($prefs['display_navigation']) : 'navigation_avec_icones';
 
-	$couleur = intval($prefs['couleur'] ?? 2);
+	$couleur = (int) ($prefs['couleur'] ?? 2);
 
 	$classes = "spip-theme-colors-$couleur $spip_display_navigation $display_mode";
 	return spip_sanitize_classname($classes);

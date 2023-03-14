@@ -63,8 +63,8 @@ function inc_chercher_rubrique_dist($id_rubrique, $type, $restreint, $idem = 0, 
 	// - soit parce qu'il y a peu de rubriques
 	if (
 		_SPIP_AJAX < 1
-		or $type == 'breve'
-		or sql_countsel('spip_rubriques') < _SPIP_SELECT_RUBRIQUES
+		|| $type == 'breve'
+		|| sql_countsel('spip_rubriques') < _SPIP_SELECT_RUBRIQUES
 	) {
 		return selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem);
 	} else {
@@ -123,10 +123,7 @@ function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $excl
 	static $decalage_secteur;
 
 	// Si on a demande l'exclusion ne pas descendre dans la rubrique courante
-	if (
-		$exclus > 0
-		and $root == $exclus
-	) {
+	if ($exclus > 0 && $root == $exclus) {
 		return '';
 	}
 
@@ -168,7 +165,7 @@ function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $excl
 	}
 
 	// si l'objet a deplacer est publie, verifier qu'on a acces aux rubriques
-	if ($restreint and $root != $id_rubrique and !autoriser('publierdans', 'rubrique', $root)) {
+	if ($restreint && $root != $id_rubrique && !autoriser('publierdans', 'rubrique', $root)) {
 		return $sous;
 	}
 
@@ -196,13 +193,13 @@ function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $excl
 function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem = 0) {
 	$enfants = [];
 	$data = [];
-	if ($type == 'rubrique' and autoriser('publierdans', 'rubrique', 0)) {
+	if ($type == 'rubrique' && autoriser('publierdans', 'rubrique', 0)) {
 		$data[0] = _T('info_racine_site');
 	}
 	# premier choix = neant
 	# si auteur (rubriques restreintes)
 	# ou si creation avec id_rubrique=0
-	elseif ($type == 'auteur' or !$id_rubrique) {
+	elseif ($type == 'auteur' || !$id_rubrique) {
 		$data[0] = '&nbsp;';
 	}
 
@@ -224,7 +221,7 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem = 0) {
 			$titre = couper(supprimer_tags(typo($r['titre'])) . ' ', 50);
 			if (
 				$GLOBALS['meta']['multi_rubriques'] == 'oui'
-				and ($r['langue_choisie'] == 'oui' or $r['id_parent'] == 0)
+				&& ($r['langue_choisie'] == 'oui' || $r['id_parent'] == 0)
 			) {
 				$titre .= ' [' . traduire_nom_langue($r['lang']) . ']';
 			}
@@ -241,9 +238,9 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem = 0) {
 	// sauf si le selecteur s'adresse a une rubrique puisque on peut la mettre a la racine dans ce cas
 	if (
 		count($data) == 2
-		and isset($data[0])
-		and !in_array($type, ['auteur', 'rubrique'])
-		and !$id_rubrique
+		&& isset($data[0])
+		&& !in_array($type, ['auteur', 'rubrique'])
+		&& !$id_rubrique
 	) {
 		unset($data[0]);
 	}
@@ -297,20 +294,16 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem = 0) {
 function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem = 0, $do = 'aff') {
 
 	if ($id_rubrique) {
-		$titre = sql_getfetsel('titre', 'spip_rubriques', 'id_rubrique=' . intval($id_rubrique));
+		$titre = sql_getfetsel('titre', 'spip_rubriques', 'id_rubrique=' . (int) $id_rubrique);
 	} else {
-		if ($type == 'auteur') {
-			$titre = '&nbsp;';
-		} else {
-			$titre = _T('info_racine_site');
-		}
+		$titre = $type == 'auteur' ? '&nbsp;' : _T('info_racine_site');
 	}
 
 	$titre = str_replace('&amp;', '&', entites_html(textebrut(typo($titre))));
 	$init = " disabled='disabled' type='text' value=\"" . $titre . "\"\nstyle='width:300px;'";
 
 	$url = generer_url_ecrire('selectionner', "id=$id_rubrique&type=$type&do=$do"
-		. (!$idem ? '' : "&exclus=$idem")
+		. ($idem ? "&exclus=$idem" : '')
 		. ($restreint ? '' : '&racine=oui')
 		. (isset($GLOBALS['var_profile']) ? '&var_profile=1' : ''));
 
@@ -345,7 +338,7 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem = 0, $do
  *     Code HTML du sélecteur de rubrique AJAX
  **/
 function construire_selecteur($url, $js, $idom, $name, $init = '', $id = 0) {
-	$icone = (strpos($idom, 'auteur') !== false) ? 'auteur-24.png' : 'rechercher-20.png';
+	$icone = (str_contains($idom, 'auteur')) ? 'auteur-24.png' : 'rechercher-20.png';
 	// si icone de recherche on embed le svg
 	$balise = ($icone === 'rechercher-20.png' ? chercher_filtre('balise_svg') : chercher_filtre('balise_img'));
 	$img_icone = $balise(chemin_image($icone), _T('titre_image_selecteur'));

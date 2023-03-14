@@ -81,7 +81,7 @@ function analyse_csv($t) {
 	[$entete, $corps] = explode("\n", $t, 2);
 	$caption = '';
 	// sauter la ligne de tete formee seulement de separateurs
-	if (substr_count($entete, $sep) == strlen($entete)) {
+	if (substr_count($entete, $sep) === strlen($entete)) {
 		[$entete, $corps] = explode("\n", $corps, 2);
 	}
 	// si une seule colonne, en faire le titre
@@ -98,8 +98,7 @@ function analyse_csv($t) {
 
 	// retrait des lignes vides finales
 	while (
-		count($lignes) > 0
-		and preg_match("/^$sep*$/", $lignes[count($lignes) - 1])
+		$lignes !== [] && preg_match("/^$sep*$/", $lignes[count($lignes) - 1])
 	) {
 		unset($lignes[count($lignes) - 1]);
 	}
@@ -107,7 +106,7 @@ function analyse_csv($t) {
 	$nbcols = [];
 	$max = $mil = substr_count($entete, $sep);
 	foreach ($lignes as $k => $v) {
-		if ($max <> ($nbcols[$k] = substr_count($v, $sep))) {
+		if ($max !== ($nbcols[$k] = substr_count($v, $sep))) {
 			if ($max > $nbcols[$k]) {
 				$mil = $nbcols[$k];
 			} else {
@@ -117,7 +116,7 @@ function analyse_csv($t) {
 		}
 	}
 	// Si pas le meme nombre, cadrer au nombre max
-	if ($mil <> $max) {
+	if ($mil !== $max) {
 		foreach ($nbcols as $k => $v) {
 			if ($v < $max) {
 				$lignes[$k] .= str_repeat($sep, $max - $v);

@@ -39,8 +39,8 @@ function autosave_clean_value($val) {
 function cvtautosave_formulaire_charger($flux) {
 	if (
 		is_array($flux['data'])
-		and isset($flux['data']['_autosave_id'])
-		and $cle_autosave = $flux['data']['_autosave_id']
+		&& isset($flux['data']['_autosave_id'])
+		&& ($cle_autosave = $flux['data']['_autosave_id'])
 	) {
 		$form = $flux['args']['form'];
 		$je_suis_poste = $flux['args']['je_suis_poste'];
@@ -52,7 +52,7 @@ function cvtautosave_formulaire_charger($flux) {
 		// on restitue les donnees
 		if (
 			isset($GLOBALS['visiteur_session']['session_autosave_' . $cle_autosave])
-			and !$je_suis_poste
+			&& !$je_suis_poste
 		) {
 			parse_str($GLOBALS['visiteur_session']['session_autosave_' . $cle_autosave], $vars);
 			foreach ($vars as $key => $val) {
@@ -67,7 +67,7 @@ function cvtautosave_formulaire_charger($flux) {
 
 		// si on est dans le charger() qui suit le traiter(), l'autosave a normalement ete vide
 		// mais si il y a plusieurs sessions il peut y avoir concurrence et un retour de l'autosave
-		if ($je_suis_poste and _request('autosave') === $cle_autosave and function_exists('terminer_actualiser_sessions')) {
+		if ($je_suis_poste && _request('autosave') === $cle_autosave && function_exists('terminer_actualiser_sessions')) {
 			terminer_actualiser_sessions();
 			// et verifions si jamais l'autosave a fait un come back, dans ce cas on le revide
 			if (isset($GLOBALS['visiteur_session']['session_autosave_' . $cle_autosave])) {
@@ -109,7 +109,7 @@ function cvtautosave_formulaire_traiter($flux) {
 		session_set('session_autosave_' . $cle_autosave, null);
 	}
 
-	if (isset($GLOBALS['visiteur_session']) and $GLOBALS['visiteur_session']) {
+	if (isset($GLOBALS['visiteur_session']) && $GLOBALS['visiteur_session']) {
 		// delai par defaut avant purge d'un backup de form : 72H
 		if (!defined('_AUTOSAVE_GB_DELAY')) {
 			define('_AUTOSAVE_GB_DELAY', 72 * 3600);
@@ -118,10 +118,10 @@ function cvtautosave_formulaire_traiter($flux) {
 		// purger aussi toutes les vieilles autosave
 		$session = $GLOBALS['visiteur_session'];
 		foreach ($session as $k => $v) {
-			if (strncmp($k, 'session_autosave_', 17) == 0) {
+			if (str_starts_with($k, 'session_autosave_')) {
 				$timestamp = 0;
 				if (preg_match(',&__timestamp=(\d+)$,', $v, $m)) {
-					$timestamp = intval($m[1]);
+					$timestamp = (int) $m[1];
 				}
 				if ($timestamp < $time_too_old) {
 					session_set($k, null);
