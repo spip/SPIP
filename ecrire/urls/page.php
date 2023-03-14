@@ -24,15 +24,8 @@ define('_separateur_urls_page', '');
 # on peut indiquer '' si on a installe le .htaccess
 define('_debut_urls_page', get_spip_script('./') . '?');
 #######
-
-
 /**
  * Generer l'url d'un objet SPIP
- * @param int $id
- * @param string $objet
- * @param string $args
- * @param string $ancre
- * @return string
  */
 function urls_page_generer_url_objet_dist(int $id, string $objet, string $args = '', string $ancre = ''): string {
 
@@ -69,7 +62,7 @@ function urls_page_generer_url_objet_dist(int $id, string $objet, string $args =
 function urls_page_decoder_url_dist(string $url, string $entite, array $contexte = []): array {
 
 	// traiter les injections du type domaine.org/spip.php/cestnimportequoi/ou/encore/plus/rubrique23
-	if ($GLOBALS['profondeur_url'] > 0 and $entite == 'sommaire') {
+	if ($GLOBALS['profondeur_url'] > 0 && $entite == 'sommaire') {
 		return [[], '404'];
 	}
 
