@@ -167,7 +167,7 @@ function inc_csv_to_array_dist($data) {
 		if (trim($v) == '') {
 			$v = 'col' . $i;
 		} // reperer des eventuelles cases vides
-		if (is_numeric($v) and $v < 0) {
+		if (is_numeric($v) && $v < 0) {
 			$v = '__' . $v;
 		} // ne pas risquer d'ecraser une cle numerique
 		if (is_numeric($v)) {
@@ -273,7 +273,7 @@ function inc_ls_to_array_dist($data) {
 	$a = $glob_to_array($data);
 	foreach ($a as &$v) {
 		$b = (array)@stat($v);
-		foreach ($b as $k => $ignore) {
+		foreach (array_keys($b) as $k) {
 			if (is_numeric($k)) {
 				unset($b[$k]);
 			}
@@ -306,13 +306,9 @@ function XMLObjectToArray($object) {
 				$xml_array[$key][$k] = $v;
 			}
 		}
-		if ($object->hasChildren()) {
-			$xml_array[$key][] = XMLObjectToArray(
-				$object->current()
-			);
-		} else {
-			$xml_array[$key][] = strval($object->current());
-		}
+		$xml_array[$key][] = $object->hasChildren()
+			? XMLObjectToArray($object->current())
+			: (string) $object->current();
 	}
 
 	return $xml_array;
