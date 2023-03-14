@@ -77,7 +77,6 @@ function typographie_fr_dist($letexte) {
 		'\1\3\4',
 		'&nbsp;'
 	];
-	$letexte = preg_replace($cherche2, $remplace2, $letexte);
 
-	return $letexte;
+	return preg_replace($cherche2, $remplace2, $letexte);
 }

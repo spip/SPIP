@@ -40,7 +40,5 @@ function typographie_en_dist($letexte) {
 		'&nbsp;'
 	];
 
-	$letexte = preg_replace($cherche2, $remplace2, $letexte);
-
-	return $letexte;
+	return preg_replace($cherche2, $remplace2, $letexte);
 }
