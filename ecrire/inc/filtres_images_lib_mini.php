@@ -301,7 +301,7 @@ function statut_effacer_images_temporaires($stat) {
  */
 function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_creation = null, $find_in_path = false, $support_svg = false) {
 	$valeurs = [];
- $ret = [];
+	$ret = [];
 	$f = null;
 	static $images_recalcul = [];
 	if (strlen($img) == 0) {
@@ -480,14 +480,14 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 		}
 	}
 	if ($creer && !@file_exists($fichier)) {
-     if (!@file_exists("$fichier.src")) {
-  				spip_log("Image absente : $fichier", 'images' . _LOG_ERREUR);
+    	if (!@file_exists("$fichier.src")) {
+			spip_log("Image absente : $fichier", 'images' . _LOG_ERREUR);
 
-  				return false;
-  			}
-     # on reconstruit l'image source absente a partir de la chaine des .src
-     reconstruire_image_intermediaire($fichier);
- }
+			return false;
+		}
+		# on reconstruit l'image source absente a partir de la chaine des .src
+		reconstruire_image_intermediaire($fichier);
+	}
 
 	if ($creer) {
 		spip_log(
@@ -655,13 +655,13 @@ function _image_trouver_extension_pertinente($path) {
  */
 function _image_trouver_extension_depuis_mime($mime) {
 	return match (strtolower($mime)) {
-     'image/png', 'image/x-png' => 'png',
-     'image/jpg', 'image/jpeg', 'image/pjpeg' => 'jpeg',
-     'image/gif' => 'gif',
-     'image/webp', 'image/x-webp' => 'webp',
-     'image/svg+xml' => 'svg',
-     default => '',
- };
+		'image/png', 'image/x-png' => 'png',
+		'image/jpg', 'image/jpeg', 'image/pjpeg' => 'jpeg',
+		'image/gif' => 'gif',
+		'image/webp', 'image/x-webp' => 'webp',
+		'image/svg+xml' => 'svg',
+		default => '',
+	};
 }
 
 
@@ -1014,16 +1014,18 @@ function _image_gd_output($img, $valeurs, $qualite = _IMG_GD_QUALITE, $fonction 
 		|| @file_exists($valeurs['fichier_dest'])
 		&& !@file_exists($valeurs['fichier_dest'] . '.src')
 	);
-	if (function_exists($fonction)
+	if (
+		function_exists($fonction)
 		&& ($ret = $fonction($img, $valeurs['fichier_dest'], $qualite)) # on a reussi a creer l'image
 		&& isset($valeurs['reconstruction']) # et on sait comment la resonctruire le cas echeant
-		&& !$lock && @file_exists($valeurs['fichier_dest'])) {
-     // dans tous les cas mettre a jour la taille de l'image finale
-     [$valeurs['hauteur_dest'], $valeurs['largeur_dest']] = taille_image($valeurs['fichier_dest']);
-     $valeurs['date'] = @filemtime($valeurs['fichier_dest']);
-     // pour la retrouver apres disparition
-     ecrire_fichier($valeurs['fichier_dest'] . '.src', serialize($valeurs), true);
- }
+		&& !$lock && @file_exists($valeurs['fichier_dest'])
+	) {
+		// dans tous les cas mettre a jour la taille de l'image finale
+		[$valeurs['hauteur_dest'], $valeurs['largeur_dest']] = taille_image($valeurs['fichier_dest']);
+		$valeurs['date'] = @filemtime($valeurs['fichier_dest']);
+		// pour la retrouver apres disparition
+		ecrire_fichier($valeurs['fichier_dest'] . '.src', serialize($valeurs), true);
+	}
 
 	return $ret;
 }
@@ -1039,7 +1041,7 @@ function _image_gd_output($img, $valeurs, $qualite = _IMG_GD_QUALITE, $fonction 
  **/
 function reconstruire_image_intermediaire($fichier_manquant) {
 	$source = null;
- $reconstruire = [];
+ 	$reconstruire = [];
 	$fichier = $fichier_manquant;
 	while (
 		!str_contains($fichier, '://')
@@ -1080,7 +1082,7 @@ function reconstruire_image_intermediaire($fichier_manquant) {
  **/
 function ramasse_miettes($fichier) {
 	$source = null;
- if (
+	if (
 		str_contains($fichier, '://')
 		|| !lire_fichier($src = "$fichier.src", $source)
 		|| !$valeurs = unserialize($source)
@@ -1091,10 +1093,7 @@ function ramasse_miettes($fichier) {
 	while (
 		($fichier = $valeurs['fichier'])
 		&& str_starts_with($fichier, _DIR_VAR)
-		&& lire_fichier(
-			$src = "$fichier.src",
-			$source
-		)
+		&& lire_fichier($src = "$fichier.src", $source)
 		&& ($valeurs = unserialize($source))  # et valide
 	) {
 		# on efface le fichier

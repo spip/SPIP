@@ -64,16 +64,16 @@ function enfant_rub($collection, $debut = 0, $limite = 500) {
 			$descriptif = propre($row['descriptif']);
 
 			if ($voir_logo && ($logo = $chercher_logo($id_rubrique, 'id_rubrique', 'on'))) {
-       [$fid, $dir, $nom, $format] = $logo;
-       $logo = image_recadre_avec_fallback("<img src='$fid' alt='' />", 70, 70);
-       if ($logo) {
-  						$logo = wrap(inserer_attribut($logo, 'class', 'logo'), '<span class="logo-carre">');
-  					}
-   }
+				[$fid, $dir, $nom, $format] = $logo;
+				$logo = image_recadre_avec_fallback("<img src='$fid' alt='' />", 70, 70);
+				if ($logo) {
+					$logo = wrap(inserer_attribut($logo, 'class', 'logo'), '<span class="logo-carre">');
+				}
+			}
 
 			$lib_bouton = (acces_restreint_rubrique($id_rubrique)
-					? http_img_pack('auteur-0minirezo-16.png', '', " width='16' height='16'", _T('image_administrer_rubrique'))
-					: '') .
+				? http_img_pack('auteur-0minirezo-16.png', '', " width='16' height='16'", _T('image_administrer_rubrique'))
+				: '') .
 				" <a class='titremlien' dir='$lang_dir'" .
 				($row['lang'] !== $GLOBALS['spip_lang'] ? " hreflang='" . $row['lang'] . "'" : '') .
 				" href='" .

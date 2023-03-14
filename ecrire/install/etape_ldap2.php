@@ -56,11 +56,11 @@ function install_etape_ldap2_dist() {
 			ldap_set_option($ldap_link, LDAP_OPT_PROTOCOL_VERSION, $protocole_ldap);
 		}
 		if ($tls && !ldap_start_tls($ldap_link)) {
-      $erreur = 'ldap_start_tls(' . spip_htmlspecialchars($ldap_link)
-  					. ' ' . spip_htmlspecialchars($adresse_ldap)
-  					. ', ' . spip_htmlspecialchars($port_ldap) . ')';
-      $ldap_link = false;
-  }
+			$erreur = 'ldap_start_tls(' . spip_htmlspecialchars($ldap_link)
+				. ' ' . spip_htmlspecialchars($adresse_ldap)
+				. ', ' . spip_htmlspecialchars($port_ldap) . ')';
+			$ldap_link = false;
+		}
 		if ($ldap_link) {
 			$ldap_link = ldap_bind($ldap_link, $login_ldap, $pass_ldap);
 			$erreur = "ldap_bind('" . spip_htmlspecialchars($ldap_link)
