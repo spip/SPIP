@@ -146,8 +146,8 @@ function install_bases($adresse_db, $login_db, $pass_db, $server_db, $choix_db, 
 		if ($r) {
 			$r = sql_fetch($r, $server_db);
 		}
-		$version_installee = !$r ? 0 : (double)$r['valeur'];
-		if (!$version_installee or ($GLOBALS['spip_version_base'] < $version_installee)) {
+		$version_installee = $r ? (double)$r['valeur'] : 0;
+		if (!$version_installee || $GLOBALS['spip_version_base'] < $version_installee) {
 			$fupdateq(
 				'spip_meta',
 				['valeur' => $GLOBALS['spip_version_base'], 'impt' => 'non'],
@@ -190,7 +190,7 @@ function install_bases($adresse_db, $login_db, $pass_db, $server_db, $choix_db, 
 	// d'une installation qui ne l'a pas cree correctement.
 	// Le supprimer pour que _FILE_CONNECT_TMP prime.
 
-	if (_FILE_CONNECT and file_exists(_FILE_CONNECT)) {
+	if (_FILE_CONNECT && file_exists(_FILE_CONNECT)) {
 		spip_unlink(_FILE_CONNECT);
 	}
 
@@ -225,7 +225,7 @@ function install_bases($adresse_db, $login_db, $pass_db, $server_db, $choix_db, 
  * @return string Le préfixe corrigé
  */
 function preparer_prefixe_tables($prefixe) {
-	return trim(preg_replace(',^[0-9]+,', '', preg_replace(',[^a-z0-9],', '', strtolower($prefixe))));
+	return trim(preg_replace(',^\d+,', '', preg_replace(',[^a-z0-9],', '', strtolower($prefixe))));
 }
 
 function install_propose_ldap() {
@@ -380,7 +380,7 @@ function install_etape_3_dist() {
 				$hidden,
 				$auteur_obligatoire
 			)
-			. (($ldap_present or !function_exists('ldap_connect'))
+			. (($ldap_present || !function_exists('ldap_connect'))
 				? '' : install_propose_ldap());
 	}
 

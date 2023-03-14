@@ -94,13 +94,12 @@ function install_ldap_correspondances() {
 	$champs = [];
 	foreach (is_array($GLOBALS['ldap_attributes']) ? $GLOBALS['ldap_attributes'] : [] as $champ => $v) {
 		$nom = 'ldap_' . $champ;
-		$val = is_array($v) ? join(',', $v) : strval($v);
+		$val = is_array($v) ? implode(',', $v) : (string) $v;
 		$champs[$nom] = [
 			'label' => _T('ldap_correspondance', ['champ' => "<tt>$champ</tt>"]) . '<br />',
 			'valeur' => $val
 		];
 	}
 
-	return !$champs ?
-		'' : fieldset(_T('ldap_correspondance_1'), $champs, '', _T('ldap_correspondance_2') . '<br /><br />');
+	return $champs ? fieldset(_T('ldap_correspondance_1'), $champs, '', _T('ldap_correspondance_2') . '<br /><br />') : '';
 }

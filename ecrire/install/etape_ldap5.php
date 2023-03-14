@@ -57,7 +57,7 @@ function etape_ldap5_save() {
 
 	$champs = is_array($GLOBALS['ldap_attributes']) ? $GLOBALS['ldap_attributes'] : [];
 	$res = '';
-	foreach ($champs as $champ => $v) {
+	foreach (array_keys($champs) as $champ) {
 		$nom = 'ldap_' . $champ;
 		$val = trim(_request($nom));
 		if (preg_match('/^\w*$/', $val)) {

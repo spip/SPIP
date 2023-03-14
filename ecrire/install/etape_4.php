@@ -60,7 +60,7 @@ function install_etape_4_dist() {
 	// et procede alors a l'installation
 	if (
 		!isset($GLOBALS['meta']['version_installee'])
-		or ($GLOBALS['spip_version_base'] == (str_replace(',', '.', $GLOBALS['meta']['version_installee'])))
+		|| $GLOBALS['spip_version_base'] == (str_replace(',', '.', $GLOBALS['meta']['version_installee']))
 	) {
 		plugin_installes_meta();
 	}

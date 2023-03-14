@@ -41,16 +41,15 @@ function install_etape_1_dist() {
 	tester_compatibilite_hebergement();
 
 	// Recuperer les anciennes donnees pour plus de facilite (si presentes)
-	$s = !@is_readable(_FILE_CONNECT_TMP) ? ''
-		: analyse_fichier_connection(_FILE_CONNECT_TMP);
+	$s = @is_readable(_FILE_CONNECT_TMP) ? analyse_fichier_connection(_FILE_CONNECT_TMP) : '';
 
 	[$adresse_db, $login_db] = $s ?: ['localhost', ''];
 
-	$chmod = (isset($_GET['chmod']) and preg_match(',^[0-9]+$,', $_GET['chmod'])) ?
+	$chmod = (isset($_GET['chmod']) && preg_match(',^\d+$,', $_GET['chmod'])) ?
 		sprintf('%04o', $_GET['chmod']) : '0777';
 
 	if (@is_readable(_FILE_CHMOD_TMP)) {
-		$s = @join('', @file(_FILE_CHMOD_TMP));
+		$s = @implode('', @file(_FILE_CHMOD_TMP));
 		if (preg_match("#define\('_SPIP_CHMOD', (.*)\)#", $s, $regs)) {
 			$chmod = $regs[1];
 		}

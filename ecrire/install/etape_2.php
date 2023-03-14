@@ -114,7 +114,7 @@ function install_etape_2_bases($login_db, $server_db) {
 			. _T('texte_choix_base_3')
 			. '</label>'
 			. "<ul>\n<li>"
-			. join("</li>\n<li>", $bases)
+			. implode("</li>\n<li>", $bases)
 			. "</li>\n</ul><p>"
 			. _T('info_ou')
 			. ' '
@@ -163,8 +163,7 @@ function install_etape_2_form($hidden, $checked, $res, $etape) {
 			. "\n<input type='text' name='table_new' class='text' value=\"spip\" size='20' /></p></fieldset>\n"
 		)
 
-		. ((defined('_INSTALL_TABLE_PREFIX')
-			or $GLOBALS['table_prefix'] != 'spip')
+		. ((defined('_INSTALL_TABLE_PREFIX') || $GLOBALS['table_prefix'] != 'spip')
 			? '<h3>' . _T('install_table_prefix_hebergeur') . '  <tt>' . $GLOBALS['table_prefix'] . '</tt>' . '</h3>'
 			: '<fieldset><legend>' . _T('texte_choix_table_prefix') . "</legend>\n"
 			. "<p><label for='table_prefix'>" . _T('info_table_prefix') . '</label></p><p>'

@@ -43,7 +43,7 @@ function install_etape_ldap3_dist() {
 
 	$checked = false;
 	$res = '';
-	if (is_array($info) and $info['count'] > 0) {
+	if (is_array($info) && $info['count'] > 0) {
 		$res .= '<p>' . _T('info_selection_chemin_acces') . '</p>';
 		$res .= '<ul>';
 		$n = 0;

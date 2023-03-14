@@ -22,21 +22,17 @@ function install_etape_fin_dist() {
 	ecrire_acces();
 
 	$f = str_replace(_FILE_TMP_SUFFIX, '.php', _FILE_CHMOD_TMP);
-	if (file_exists(_FILE_CHMOD_TMP)) {
-		if (!@rename(_FILE_CHMOD_TMP, $f)) {
-			if (@copy(_FILE_CHMOD_TMP, $f)) {
+	if (file_exists(_FILE_CHMOD_TMP) && !@rename(_FILE_CHMOD_TMP, $f)) {
+		if (@copy(_FILE_CHMOD_TMP, $f)) {
 				spip_unlink(_FILE_CHMOD_TMP);
 			}
-		}
 	}
 
 	$f = str_replace(_FILE_TMP_SUFFIX, '.php', _FILE_CONNECT_TMP);
 	if (file_exists(_FILE_CONNECT_TMP)) {
 		spip_log("renomme $f");
-		if (!@rename(_FILE_CONNECT_TMP, $f)) {
-			if (@copy(_FILE_CONNECT_TMP, $f)) {
-				@spip_unlink(_FILE_CONNECT_TMP);
-			}
+		if (!@rename(_FILE_CONNECT_TMP, $f) && @copy(_FILE_CONNECT_TMP, $f)) {
+			@spip_unlink(_FILE_CONNECT_TMP);
 		}
 	}
 
@@ -64,8 +60,8 @@ function install_etape_fin_dist() {
 function install_verifier_htaccess() {
 	if (
 		verifier_htaccess(_DIR_TMP, true)
-		and verifier_htaccess(_DIR_CONNECT, true)
-		and verifier_htaccess(_DIR_VENDOR, true)
+		&& verifier_htaccess(_DIR_CONNECT, true)
+		&& verifier_htaccess(_DIR_VENDOR, true)
 	) {
 		return '';
 	}

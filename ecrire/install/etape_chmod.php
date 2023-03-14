@@ -46,11 +46,7 @@ function test_ecrire($my_dir) {
 		if ($uid > 0 && $uid == $uid2 && @fileowner('test') == $uid) {
 			$chmod = 0700;
 		} else {
-			if ($gid > 0 && $gid == $gid2 && @filegroup('test') == $gid) {
-				$chmod = 0770;
-			} else {
-				$chmod = 0777;
-			}
+			$chmod = $gid > 0 && $gid == $gid2 && @filegroup('test') == $gid ? 0770 : 0777;
 		}
 		// Appliquer de plus les droits d'acces du script
 		if ($perms > 0) {
@@ -75,8 +71,8 @@ function install_etape_chmod_dist() {
 	$test_dir = _request('test_dir');
 	$chmod = 0;
 
-	if ($test_dir and strpos($test_dir, '..') === false) {
-		if (substr($test_dir, -1) !== '/') {
+	if ($test_dir && !str_contains($test_dir, '..')) {
+		if (!str_ends_with($test_dir, '/')) {
 			$test_dir .= '/';
 		}
 		if (!in_array($test_dir, $GLOBALS['test_dirs'])) {
@@ -106,7 +102,7 @@ function install_etape_chmod_dist() {
 		}
 	}
 
-	if ($bad_dirs or $absent_dirs) {
+	if ($bad_dirs || $absent_dirs) {
 		if (!_FILE_CONNECT) {
 			$titre = _T('dirs_preliminaire');
 			$continuer = ' ' . _T('dirs_commencer') . '.';
@@ -121,7 +117,7 @@ function install_etape_chmod_dist() {
 			$res .=
 				_T(
 					'dirs_repertoires_suivants',
-					['bad_dirs' => join("\n", array_keys($bad_dirs))]
+					['bad_dirs' => implode("\n", array_keys($bad_dirs))]
 				) .
 				'<b>' . _T('login_recharger') . '</b>.';
 		}
@@ -130,21 +126,21 @@ function install_etape_chmod_dist() {
 			$res .=
 				_T(
 					'dirs_repertoires_absents',
-					['bad_dirs' => join("\n", array_keys($absent_dirs))]
+					['bad_dirs' => implode("\n", array_keys($absent_dirs))]
 				) .
 				'<b>' . _T('login_recharger') . '</b>.';
 		}
 		$res = '<p>' . $continuer . $res . aider('install0', true) . '</p>';
 
 		$t = _T('login_recharger');
-		$t = (!$test_dir ? '' :
-				"<input type='hidden' name='test_dir' value='" . spip_htmlspecialchars($test_dir, ENT_QUOTES) . "' />")
+		$t = ($test_dir ? "<input type='hidden' name='test_dir' value='" . spip_htmlspecialchars($test_dir, ENT_QUOTES) . "' />" :
+				'')
 			. "<input type='hidden' name='etape' value='chmod' />"
 			. "<div style='text-align: right'><input type='submit' value='" . attribut_html($t) . "' /></div>";
 
 		echo minipres($titre, $res . generer_form_ecrire('install', $t));
 	} else {
-		$deja = (_FILE_CONNECT and analyse_fichier_connection(_FILE_CONNECT));
+		$deja = (_FILE_CONNECT && analyse_fichier_connection(_FILE_CONNECT));
 		if (!$deja) {
 			redirige_url_ecrire('install', 'etape=1&chmod=' . $chmod);
 		} else {

@@ -44,7 +44,7 @@ function install_etape_3b_dist() {
 					_T('info_login_trop_court')
 					: ''));
 		include_spip('inc/filtres');
-		if (!$echec and $email and !email_valide($email)) {
+		if (!$echec && $email && !email_valide($email)) {
 			$echec = _T('form_email_non_valide');
 		}
 		if ($echec) {
@@ -90,9 +90,9 @@ function install_etape_3b_dist() {
 		if ($id_auteur !== null) {
 			// c'est un auteur connu : si on a pas de secret il faut absolument qu'il se reconnecte avec le meme mot de passe
 			// pour restaurer la copie des cles
-			if (!$secret and !auth_spip_initialiser_secret()) {
-				$row = sql_fetsel('backup_cles, pass', 'spip_auteurs', 'id_auteur=' . intval($id_auteur));
-				if (empty($row['backup_cles']) or !$cles->restore($row['backup_cles'], $pass, $row['pass'], $id_auteur)) {
+			if (!$secret && !auth_spip_initialiser_secret()) {
+				$row = sql_fetsel('backup_cles, pass', 'spip_auteurs', 'id_auteur=' . (int) $id_auteur);
+				if (empty($row['backup_cles']) || !$cles->restore($row['backup_cles'], $pass, $row['pass'], $id_auteur)) {
 					$echec = _T('avis_connexion_erreur_fichier_cle_manquant_1');
 					echouer_etape_3b($echec);
 				}
@@ -105,7 +105,7 @@ function install_etape_3b_dist() {
 				'email' => $email,
 				'login' => $login,
 				'statut' => '0minirezo'
-			], 'id_auteur=' . intval($id_auteur));
+			], 'id_auteur=' . (int) $id_auteur);
 			// le passer webmestre separement du reste, au cas ou l'alter n'aurait pas fonctionne
 			@sql_updateq('spip_auteurs', ['webmestre' => 'oui'], "id_auteur=$id_auteur");
 			if (!auth_spip_modifier_pass($login, $pass, $id_auteur)) {
@@ -115,7 +115,7 @@ function install_etape_3b_dist() {
 		} else {
 			// Si on a pas de cle et qu'on ne sait pas la creer, on ne peut pas creer de nouveau compte :
 			// il faut qu'un webmestre avec un backup fasse l'install
-			if (!$secret and !auth_spip_initialiser_secret()) {
+			if (!$secret && !auth_spip_initialiser_secret()) {
 				$echec = _T('avis_connexion_erreur_fichier_cle_manquant_2');
 				echouer_etape_3b($echec);
 			}
@@ -145,7 +145,7 @@ function install_etape_3b_dist() {
 		include_spip('inc/auth');
 		if (
 			!$auteur = auth_identifier_login($login, $pass)
-			or !auth_loger($auteur)
+			|| !auth_loger($auteur)
 		) {
 			spip_log("login automatique impossible $auth_spip $session" . (is_countable($row) ? count($row) : 0));
 		}
