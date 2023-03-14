@@ -33,21 +33,20 @@ $GLOBALS['maj'][21676] = [
 function ranger_cache_gd2() {
 	spip_log('ranger_cache_gd2');
 	$base = _DIR_VAR . 'cache-gd2/';
-	if (is_dir($base) and is_readable($base)) {
-		if ($dir = opendir($base)) {
-			while (($f = readdir($dir)) !== false) {
-				if (
-					!is_dir($base . $f) and strncmp($f, '.', 1) !== 0
-					and preg_match(',[0-9a-f]{32}\.\w+,', $f)
-				) {
-					$sub = substr($f, 0, 2);
-					$sub = sous_repertoire($base, $sub);
-					@rename($base . $f, $sub . substr($f, 2));
-					@unlink($base . $f); // au cas ou le rename a foire (collision)
-				}
-				if (time() >= _TIME_OUT) {
-					return;
-				}
+	if (is_dir($base) && is_readable($base) && ($dir = opendir($base))) {
+		while (($f = readdir($dir)) !== false) {
+			if (
+				!is_dir($base . $f)
+				&& !str_starts_with($f, '.')
+				&& preg_match(',[0-9a-f]{32}\.\w+,', $f)
+			) {
+				$sub = substr($f, 0, 2);
+				$sub = sous_repertoire($base, $sub);
+				@rename($base . $f, $sub . substr($f, 2));
+				@unlink($base . $f); // au cas ou le rename a foire (collision)
+			}
+			if (time() >= _TIME_OUT) {
+				return;
 			}
 		}
 	}

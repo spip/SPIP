@@ -110,8 +110,8 @@ function maj_liens($pivot, $l = '') {
 		while ($ids = array_map('reset', sql_allfetsel("$primary", $ancienne_table, '', '', '', "0,$sub_pool"))) {
 			$insert = [];
 			foreach ($ids as $id) {
-				$n = sql_countsel($liens, "objet='$objet' AND id_objet=" . intval($id));
-				while ($t = sql_allfetsel($champs, $ancienne_table, "$primary=" . intval($id), '', $id_pivot, "$n,$pool")) {
+				$n = sql_countsel($liens, "objet='$objet' AND id_objet=" . (int) $id);
+				while ($t = sql_allfetsel($champs, $ancienne_table, "$primary=" . (int) $id, '', $id_pivot, "$n,$pool")) {
 					$n += is_countable($t) ? count($t) : 0;
 					// empiler en s'assurant a minima de l'unicite
 					while ($r = array_shift($t)) {
@@ -131,7 +131,7 @@ function maj_liens($pivot, $l = '') {
 					return;
 				}
 			}
-			if (count($insert)) {
+			if ($insert !== []) {
 				maj_liens_insertq_multi_check($liens, $insert, $tables_auxiliaires[$liens]);
 			}
 			sql_delete($ancienne_table, sql_in($primary, $ids));
@@ -171,9 +171,9 @@ $GLOBALS['maj'][17311] = [
 			',',
 			array_diff(
 				[
-					(isset($GLOBALS['meta']['multi_rubriques']) and $GLOBALS['meta']['multi_rubriques'] == 'oui')
+					(isset($GLOBALS['meta']['multi_rubriques']) && $GLOBALS['meta']['multi_rubriques'] == 'oui')
 						? 'spip_rubriques' : '',
-					(isset($GLOBALS['meta']['multi_articles']) and $GLOBALS['meta']['multi_articles'] == 'oui')
+					(isset($GLOBALS['meta']['multi_articles']) && $GLOBALS['meta']['multi_articles'] == 'oui')
 						? 'spip_articles' : ''
 				],
 				['']
@@ -187,7 +187,7 @@ $GLOBALS['maj'][17311] = [
 			',',
 			array_diff(
 				[
-					(isset($GLOBALS['meta']['gerer_trad']) and $GLOBALS['meta']['gerer_trad'] == 'oui')
+					(isset($GLOBALS['meta']['gerer_trad']) && $GLOBALS['meta']['gerer_trad'] == 'oui')
 						? 'spip_articles' : ''
 				],
 				['']
@@ -256,7 +256,7 @@ function maj_collation_sqlite() {
 	$tables = base_lister_toutes_tables();
 
 	// rien a faire si base non sqlite
-	if (strncmp($GLOBALS['connexions'][0]['type'], 'sqlite', 6) !== 0) {
+	if (!str_starts_with($GLOBALS['connexions'][0]['type'], 'sqlite')) {
 		return;
 	}
 
