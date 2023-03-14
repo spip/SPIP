@@ -87,21 +87,14 @@ function afficher_initiale($url, $initiale, $compteur, $debut, $pas) {
 	static $memo = null;
 	static $res = [];
 	$out = '';
-	if (
-		!$memo
-		or (!$initiale and !$url)
-		or ($initiale !== $memo['initiale'])
-	) {
-		$newcompt = intval(floor(($compteur - 1) / $pas) * $pas);
+	if (!$memo || !$initiale && !$url || $initiale !== $memo['initiale']) {
+		$newcompt = (int) (floor(($compteur - 1) / $pas) * $pas);
 		// si fin de la pagination et une seule entree, ne pas l'afficher, ca ne sert a rien
-		if (!$initiale and !$url and !$memo['compteur']) {
+		if (!$initiale && !$url && !$memo['compteur']) {
 			$memo = null;
 		}
 		if ($memo) {
-			$on = (($memo['compteur'] <= $debut)
-				and (
-					$newcompt > $debut or ($newcompt == $debut and $newcompt == $memo['compteur'])
-				));
+			$on = ($memo['compteur'] <= $debut && ($newcompt > $debut || $newcompt == $debut && $newcompt == $memo['compteur']));
 			$res[] = "<li class='pagination-item'>" . lien_ou_expose($memo['url'], $memo['initiale'], $on ? 'span.pagination-item-label' : '', 'pagination-item-label lien_pagination') . '</li>';
 		}
 		if ($initiale) {
@@ -113,7 +106,7 @@ function afficher_initiale($url, $initiale, $compteur, $debut, $pas) {
 			];
 		}
 	}
-	if (!$initiale and !$url) {
+	if (!$initiale && !$url) {
 		if ((is_countable($res) ? count($res) : 0) > 1) {
 			$out = "<ul class='pagination-items'>" . implode(' ', $res) . '</ul>';
 		}
@@ -151,11 +144,11 @@ function auteur_lien_messagerie($id_auteur, $en_ligne, $statut, $imessage, $emai
 	$parti = (($time - strtotime($en_ligne)) > 15 * 60);
 
 	if (
-		$imessage != 'non' and !$parti // historique : est-ce que ca a encore un sens de limiter vu qu'on a la notification par email ?
-		and $GLOBALS['meta']['messagerie_agenda'] != 'non'
+		$imessage != 'non' && !$parti // historique : est-ce que ca a encore un sens de limiter vu qu'on a la notification par email ?
+		&& $GLOBALS['meta']['messagerie_agenda'] != 'non'
 	) {
 		return parametre_url(parametre_url(generer_url_ecrire('message_edit', 'new=oui'), 'to', $id_auteur), 'redirect', self());
-	} elseif (strlen($email) and autoriser('voir', 'auteur', $id_auteur)) {
+	} elseif (strlen($email) && autoriser('voir', 'auteur', $id_auteur)) {
 		return 'mailto:' . $email;
 	} else {
 		return '';

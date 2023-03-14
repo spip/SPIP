@@ -16,13 +16,11 @@ include_spip('inc/presentation');
 include_spip('inc/config');
 
 function formulaires_configurer_relayeur_charger_dist() {
-	$valeurs = [
+	return [
 		'http_proxy' => no_password_proxy_url(lire_config('http_proxy', '')),
 		'http_noproxy' => lire_config('http_noproxy', ''),
 		'test_proxy' => 'https://www.spip.net/',
 	];
-
-	return $valeurs;
 }
 
 function formulaires_configurer_relayeur_verifier_dist() {
@@ -30,11 +28,11 @@ function formulaires_configurer_relayeur_verifier_dist() {
 	$http_proxy = relayeur_saisie_ou_config(_request('http_proxy'), lire_config('http_proxy', ''));
 	$http_noproxy = _request('http_noproxy');
 
-	if ($http_proxy and !tester_url_absolue($http_proxy)) {
+	if ($http_proxy && !tester_url_absolue($http_proxy)) {
 		$erreurs['http_proxy'] = _T('info_url_proxy_pas_conforme');
 	}
 
-	if (!isset($erreurs['http_proxy']) and _request('tester_proxy')) {
+	if (!isset($erreurs['http_proxy']) && _request('tester_proxy')) {
 		if (!$http_proxy) {
 			$erreurs['http_proxy'] = _T('info_obligatoire');
 		} else {
@@ -110,7 +108,7 @@ function glue_url($url) {
 		return false;
 	}
 	// scheme
-	$uri = (!empty($url['scheme'])) ? $url['scheme'] . '://' : '';
+	$uri = (empty($url['scheme'])) ? '' : $url['scheme'] . '://';
 	// user & pass
 	if (!empty($url['user'])) {
 		$uri .= $url['user'] . ':' . $url['pass'] . '@';
@@ -118,7 +116,7 @@ function glue_url($url) {
 	// host
 	$uri .= $url['host'];
 	// port
-	$port = (!empty($url['port'])) ? ':' . $url['port'] : '';
+	$port = (empty($url['port'])) ? '' : ':' . $url['port'];
 	$uri .= $port;
 	// path
 	$uri .= $url['path'];
@@ -137,9 +135,9 @@ function glue_url($url) {
 function no_password_proxy_url($http_proxy) {
 	if (
 		$http_proxy
-		and $p = @parse_url($http_proxy)
-		and isset($p['pass'])
-		and $p['pass']
+		&& ($p = @parse_url($http_proxy))
+		&& isset($p['pass'])
+		&& $p['pass']
 	) {
 		$p['pass'] = '****';
 		$http_proxy = glue_url($p);

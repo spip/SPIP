@@ -14,11 +14,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function formulaires_configurer_transcodeur_charger_dist() {
-	$valeurs = [
+	return [
 		'charset' => $GLOBALS['meta']['charset'],
 	];
-
-	return $valeurs;
 }
 
 function formulaires_configurer_transcodeur_verifier_dist() {
@@ -27,7 +25,7 @@ function formulaires_configurer_transcodeur_verifier_dist() {
 	$erreurs = [];
 	if (!$charset = _request('charset')) {
 		$erreurs['charset'] = _T('info_obligatoire');
-	} elseif ($charset != 'utf-8' and !load_charset($charset)) {
+	} elseif ($charset != 'utf-8' && !load_charset($charset)) {
 		$erreurs['charset'] = _T('utf8_convert_erreur_orig', ['charset' => entites_html($charset)]);
 	}
 

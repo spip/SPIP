@@ -38,7 +38,7 @@ include_spip('inc/editer');
  *     Contexte à transmettre au squelette du formulaire sinon
  */
 function formulaires_traduire_charger_dist($objet, $id_objet, $retour = '', $traduire = true) {
-	if (!intval($id_objet)) {
+	if (!(int) $id_objet) {
 		return false;
 	}
 	$valeurs = formulaires_editer_objet_charger($objet, $id_objet, null, 0, $retour, '');
@@ -59,7 +59,7 @@ function formulaires_traduire_charger_dist($objet, $id_objet, $retour = '', $tra
 		$id_parent = $valeurs['id_parent'];
 	}
 	if ($id_parent) {
-		$langue_parent = sql_getfetsel('lang', 'spip_rubriques', 'id_rubrique=' . intval($id_parent));
+		$langue_parent = sql_getfetsel('lang', 'spip_rubriques', 'id_rubrique=' . (int) $id_parent);
 	}
 
 	if (!$langue_parent) {
@@ -67,7 +67,7 @@ function formulaires_traduire_charger_dist($objet, $id_objet, $retour = '', $tra
 	}
 	if (
 		$valeurs['editable']
-		and in_array(table_objet_sql($objet), explode(',', $GLOBALS['meta']['multi_objets']))
+		&& in_array(table_objet_sql($objet), explode(',', $GLOBALS['meta']['multi_objets']))
 	) {
 		$valeurs['_langue'] = $valeurs['langue'];
 	}
@@ -92,8 +92,8 @@ function formulaires_traduire_charger_dist($objet, $id_objet, $retour = '', $tra
 		$valeurs['_id_parent'] = $id_parent;
 	}
 
-	$valeurs['_saisie_en_cours'] = (!_request('annuler') and (_request('changer_lang') !== null
-		or _request('changer_id_trad') !== null));
+	$valeurs['_saisie_en_cours'] = (!_request('annuler') && (_request('changer_lang') !== null
+		|| _request('changer_id_trad') !== null));
 	$valeurs['_pipeline'] = ['traduire', ['type' => $objet, 'id' => $id_objet]];
 
 	return $valeurs;
@@ -129,12 +129,12 @@ function formulaires_traduire_verifier_dist($objet, $id_objet, $retour = '', $tr
 			sql_getfetsel(
 				'id_trad',
 				$table_objet_sql,
-				"$_id_table_objet=" . intval($id_objet)
+				"$_id_table_objet=" . (int) $id_objet
 			)
 		) {
 			// ne devrait jamais arriver sauf concurence de saisie
 			$erreurs['id_trad'] = _L('Une traduction est deja referencee');
-		} elseif (!sql_getfetsel($_id_table_objet, $table_objet_sql, "$_id_table_objet=" . intval($id_trad))) {
+		} elseif (!sql_getfetsel($_id_table_objet, $table_objet_sql, "$_id_table_objet=" . (int) $id_trad)) {
 			$erreurs['id_trad'] = _L('Indiquez un contenu existant');
 		}
 	}
@@ -159,22 +159,20 @@ function formulaires_traduire_verifier_dist($objet, $id_objet, $retour = '', $tr
  */
 function formulaires_traduire_traiter_dist($objet, $id_objet, $retour = '', $traduire = true) {
 	$res = [];
-	if (!_request('annuler') and autoriser('changerlangue', $objet, $id_objet)) {
+	if (!_request('annuler') && autoriser('changerlangue', $objet, $id_objet)) {
 		// action/editer_xxx doit traiter la modif de changer_lang
 		$res = formulaires_editer_objet_traiter($objet, $id_objet, 0, 0, $retour);
 	}
-	if (!_request('annuler') and autoriser('changertraduction', $objet, $id_objet)) {
-		if ($id_trad = _request('id_trad') or _request('supprimer_trad')) {
+	if (!_request('annuler') && autoriser('changertraduction', $objet, $id_objet)) {
+		if (($id_trad = _request('id_trad')) || _request('supprimer_trad')) {
 			$referencer_traduction = charger_fonction('referencer_traduction', 'action');
-			$referencer_traduction($objet, $id_objet, intval($id_trad)); // 0 si supprimer_trad
+			$referencer_traduction($objet, $id_objet, (int) $id_trad); // 0 si supprimer_trad
 		} elseif (
-			$new_id_trad = _request('changer_reference_trad')
-			and $new_id_trad = array_keys($new_id_trad)
-			and $new_id_trad = reset($new_id_trad)
+			($new_id_trad = _request('changer_reference_trad')) && ($new_id_trad = array_keys($new_id_trad)) && ($new_id_trad = reset($new_id_trad))
 		) {
 			$table_objet_sql = table_objet_sql($objet);
 			$_id_table_objet = id_table_objet($objet);
-			if ($id_trad = sql_getfetsel('id_trad', $table_objet_sql, "$_id_table_objet=" . intval($id_objet))) {
+			if ($id_trad = sql_getfetsel('id_trad', $table_objet_sql, "$_id_table_objet=" . (int) $id_objet)) {
 				$referencer_traduction = charger_fonction('referencer_traduction', 'action');
 				$referencer_traduction($objet, $id_trad, $new_id_trad);
 			}

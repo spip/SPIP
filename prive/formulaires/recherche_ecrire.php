@@ -32,11 +32,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return array Environnement du formulaire
  **/
 function formulaires_recherche_ecrire_charger_dist($action = '', $class = '') {
-	if ($GLOBALS['spip_lang'] != $GLOBALS['meta']['langue_site']) {
-		$lang = $GLOBALS['spip_lang'];
-	} else {
-		$lang = '';
-	}
+	$lang = $GLOBALS['spip_lang'] != $GLOBALS['meta']['langue_site'] ? $GLOBALS['spip_lang'] : '';
 
 	return
 		[

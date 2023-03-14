@@ -33,13 +33,11 @@ function formulaires_configurer_langue_charger_dist() {
 			. '>' . traduire_nom_langue($l) . "</option>\n";
 	}
 
-	$valeurs = [
+	return [
 		'_langues' => $res,
 		'_langue_site' => $langue_site,
 		'changer_langue_site' => '',
 	];
-
-	return $valeurs;
 }
 
 

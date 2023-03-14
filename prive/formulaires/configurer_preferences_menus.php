@@ -59,14 +59,14 @@ function formulaires_configurer_preferences_menus_traiter_dist() {
 	// si le menu dev change, ou les menus favoris, on recharge toute la page.
 	if (
 		table_valeur($GLOBALS['visiteur_session'], 'prefs/activer_menudev') != $activer_menudev
-		or $menus_favoris != obtenir_menus_favoris()
+		|| $menus_favoris != obtenir_menus_favoris()
 	) {
 		refuser_traiter_formulaire_ajax();
 
 		$GLOBALS['visiteur_session']['prefs']['activer_menudev'] = $activer_menudev;
 		$GLOBALS['visiteur_session']['prefs']['menus_favoris'] = $menus_favoris;
 
-		if (intval($GLOBALS['visiteur_session']['id_auteur'])) {
+		if ((int) $GLOBALS['visiteur_session']['id_auteur']) {
 			include_spip('action/editer_auteur');
 			$c = ['prefs' => serialize($GLOBALS['visiteur_session']['prefs'])];
 			auteur_modifier($GLOBALS['visiteur_session']['id_auteur'], $c);

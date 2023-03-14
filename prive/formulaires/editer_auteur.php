@@ -47,11 +47,11 @@ function formulaires_editer_auteur_charger_dist(
 ) {
 	$valeurs = formulaires_editer_objet_charger('auteur', $id_auteur, 0, 0, $retour, $config_fonc, $row, $hidden);
 	$valeurs['new_login'] = $valeurs['login'];
-	
+
 	// S'il n'y a pas la langue, on prend la langue du site
 	$valeurs['langue'] = $valeurs['langue'] ?: $GLOBALS['meta']['langue_site'];
 
-	if (!autoriser('modifier', 'auteur', intval($id_auteur))) {
+	if (!autoriser('modifier', 'auteur', (int) $id_auteur)) {
 		$valeurs['editable'] = '';
 	}
 
@@ -86,7 +86,7 @@ function formulaires_editer_auteur_identifier_dist(
 	$row = [],
 	$hidden = ''
 ) {
-	return serialize([intval($id_auteur), $associer_objet]);
+	return serialize([(int) $id_auteur, $associer_objet]);
 }
 
 
@@ -110,15 +110,15 @@ function auteurs_edit_config(array $row): array {
 	//$config['restreint'] = ($row['statut'] == 'publie');
 	$auth_methode = $row['source'];
 	include_spip('inc/auth');
-	$config['edit_login'] =
-		(auth_autoriser_modifier_login($auth_methode)
-			and autoriser('modifier', 'auteur', $row['id_auteur'], null, ['login' => true])
-			// legacy : ne pas risquer d'autoriser la modif login si fonction d'autorisation pas mise a jour et ne teste que l'option email
-			and autoriser('modifier', 'auteur', $row['id_auteur'], null, ['email' => true])
-		);
-	$config['edit_pass'] =
-		(auth_autoriser_modifier_pass($auth_methode)
-			and autoriser('modifier', 'auteur', $row['id_auteur']));
+	$config['edit_login'] = (
+		auth_autoriser_modifier_login($auth_methode)
+		&& autoriser('modifier', 'auteur', $row['id_auteur'], null, ['login' => true])
+		&& autoriser('modifier', 'auteur', $row['id_auteur'], null, ['email' => true])
+	);
+	$config['edit_pass'] = (
+			auth_autoriser_modifier_pass($auth_methode)
+			&& autoriser('modifier', 'auteur', $row['id_auteur'])
+	);
 
 	return $config;
 }
@@ -173,7 +173,7 @@ function formulaires_editer_auteur_verifier_dist(
 		unset($erreurs['new_login']);
 	}
 
-	$auth_methode = sql_getfetsel('source', 'spip_auteurs', 'id_auteur=' . intval($id_auteur));
+	$auth_methode = sql_getfetsel('source', 'spip_auteurs', 'id_auteur=' . (int) $id_auteur);
 	$auth_methode = ($auth_methode ?: 'spip');
 	include_spip('inc/auth');
 
@@ -187,9 +187,9 @@ function formulaires_editer_auteur_verifier_dist(
 		// un redacteur qui modifie son email n'a pas le droit de le vider si il y en avait un
 		if (
 			!autoriser('modifier', 'auteur', $id_auteur, null, ['email' => '?'])
-			and $GLOBALS['visiteur_session']['id_auteur'] == $id_auteur
-			and !strlen(trim($email))
-			and $email != ($email_ancien = sql_getfetsel('email', 'spip_auteurs', 'id_auteur=' . intval($id_auteur)))
+			&& $GLOBALS['visiteur_session']['id_auteur'] == $id_auteur
+			&& !strlen(trim($email))
+			&& $email != ($email_ancien = sql_getfetsel('email', 'spip_auteurs', 'id_auteur=' . (int) $id_auteur))
 		) {
 			$erreurs['email'] = (($id_auteur == $GLOBALS['visiteur_session']['id_auteur']) ? _T('form_email_non_valide') : _T('form_prop_indiquer_email'));
 		} else {
@@ -202,7 +202,7 @@ function formulaires_editer_auteur_verifier_dist(
 		# doublon sur la requête select email,count(*) from spip_auteurs group by email ;
 		if (defined('_INTERDIRE_AUTEUR_MEME_EMAIL')) {
 			#Nouvel auteur
-			if (intval($id_auteur) == 0) {
+			if ((int) $id_auteur == 0) {
 				#Un auteur existe deja avec cette adresse ?
 				if (sql_countsel('spip_auteurs', 'email=' . sql_quote($email)) > 0) {
 					$erreurs['email'] = _T('erreur_email_deja_existant');
@@ -210,14 +210,15 @@ function formulaires_editer_auteur_verifier_dist(
 			} else {
 				#Un auteur existe deja avec cette adresse ? et n'est pas le user courant.
 				if (
-					(sql_countsel(
+					sql_countsel(
 						'spip_auteurs',
 						'email=' . sql_quote($email)
-					) > 0) and ($id_auteur != ($id_auteur_ancien = sql_getfetsel(
+					) > 0
+					&& $id_auteur != ($id_auteur_ancien = sql_getfetsel(
 						'id_auteur',
 						'spip_auteurs',
 						'email=' . sql_quote($email)
-					)))
+					))
 				) {
 					$erreurs['email'] = _T('erreur_email_deja_existant');
 				}
@@ -226,21 +227,23 @@ function formulaires_editer_auteur_verifier_dist(
 	}
 
 	// quand c'est un auteur existant on fait le reset password ici
-	if (!(is_countable($erreurs) ? count($erreurs) : 0) and _request('reset_password') and intval($id_auteur)) {
-		$erreurs = auteur_reset_password($id_auteur, $erreurs);
-		return $erreurs;
+	if (!(is_countable($erreurs) ? count($erreurs) : 0) && _request('reset_password') && (int) $id_auteur) {
+		return auteur_reset_password($id_auteur, $erreurs);
 	}
 
 	// corriger un cas si frequent : www.example.org sans le http:// qui precede
-	if ($url = _request('url_site') and !tester_url_absolue($url)) {
-		if (strpos($url, ':') === false and strncasecmp($url, 'www.', 4) === 0) {
-			$url = 'http://' . $url;
-			set_request('url_site', $url);
-		}
+	if (
+		($url = _request('url_site'))
+		&& !tester_url_absolue($url)
+		&& (!str_contains($url, ':')
+		&& strncasecmp($url, 'www.', 4) === 0)
+	) {
+		$url = 'http://' . $url;
+		set_request('url_site', $url);
 	}
 	// traiter les liens implicites avant de tester l'url
 	include_spip('inc/lien');
-	if ($url = calculer_url(_request('url_site')) and !tester_url_absolue($url)) {
+	if (($url = calculer_url(_request('url_site'))) && !tester_url_absolue($url)) {
 		$erreurs['url_site'] = _T('info_url_site_pas_conforme');
 	}
 
@@ -250,15 +253,14 @@ function formulaires_editer_auteur_verifier_dist(
 		$erreurs['login'] = _T('info_non_modifiable');
 	}
 	elseif (
-		($login = _request('new_login')) and
-		$login !== sql_getfetsel('login', 'spip_auteurs', 'id_auteur=' . intval($id_auteur))
+		($login = _request('new_login')) && $login !== sql_getfetsel('login', 'spip_auteurs', 'id_auteur=' . (int) $id_auteur)
 	) {
 		// on verifie la meme chose que dans auteurs_edit_config()
 		if (
 			! auth_autoriser_modifier_login($auth_methode)
-			or !autoriser('modifier', 'auteur', intval($id_auteur), null, ['login' => true])
+			|| !autoriser('modifier', 'auteur', (int) $id_auteur, null, ['login' => true])
 			// legacy : ne pas risquer d'autoriser la modif login si fonction d'autorisation pas mise a jour et ne teste que l'option email
-			or !autoriser('modifier', 'auteur', intval($id_auteur), null, ['email' => true])
+			|| !autoriser('modifier', 'auteur', (int) $id_auteur, null, ['email' => true])
 		) {
 			$erreurs['login'] = _T('info_non_modifiable');
 		}
@@ -330,7 +332,7 @@ function formulaires_editer_auteur_traiter_dist(
 	$row = [],
 	$hidden = ''
 ) {
-	if (_request('saisie_webmestre') or _request('webmestre')) {
+	if (_request('saisie_webmestre') || _request('webmestre')) {
 		set_request('webmestre', _request('webmestre') ?: 'non');
 	}
 
@@ -339,15 +341,15 @@ function formulaires_editer_auteur_traiter_dist(
 	$prev = formulaires_editer_objet_charger('auteur', $id_auteur, 0, 0, $retour, $config_fonc, $row, $hidden);
 	if (
 		_request('new_pass') // nouveau mot de passe
-		or empty($prev['statut']) // creation auteur
-		or (_request('email') and $prev['email'] !== _request('email')) // modification email
-		or (_request('statut') === '0minirezo' and $prev['statut'] !== '0minirezo') // promotion 0minirezo
-		or (_request('statut') and intval(_request('statut')) < intval($prev['statut'])) // promotion de statut
-		or (_request('webmestre') and _request('webmestre') !== 'non' and $prev['webmestre'] !== 'oui') // promotion webmestre
+		|| empty($prev['statut']) // creation auteur
+		|| _request('email') && $prev['email'] !== _request('email') // modification email
+		|| _request('statut') === '0minirezo' && $prev['statut'] !== '0minirezo' // promotion 0minirezo
+		|| _request('statut') && (int) _request('statut') < (int) $prev['statut'] // promotion de statut
+		|| _request('webmestre') && _request('webmestre') !== 'non' && $prev['webmestre'] !== 'oui' // promotion webmestre
 	) {
 		refuser_traiter_formulaire_ajax();
 		// si on arrive là encore en ajax c'est pas OK, on genere une erreur
-		if (_AJAX or !empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+		if (_AJAX || !empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {
 			return [
 				'message_erreur' => _T('erreur_technique_ajaxform')
 			];
@@ -359,7 +361,7 @@ function formulaires_editer_auteur_traiter_dist(
 
 	if ($restreintes = _request('restreintes')) {
 		foreach ($restreintes as $k => $v) {
-			if (strpos($v, 'rubrique|') === 0) {
+			if (str_starts_with($v, 'rubrique|')) {
 				$restreintes[$k] = substr($v, 9);
 			}
 		}
@@ -382,8 +384,7 @@ function formulaires_editer_auteur_traiter_dist(
 		// et de revenir sur son profil
 		if (
 			$GLOBALS['visiteur_session']['id_auteur'] == $id_auteur
-			and $email_nouveau !=
-				($email_ancien = sql_getfetsel('email', 'spip_auteurs', 'id_auteur=' . intval($id_auteur)))
+			&& $email_nouveau != ($email_ancien = sql_getfetsel('email', 'spip_auteurs', 'id_auteur=' . (int) $id_auteur))
 		) {
 			$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 			$texte = _T(
@@ -408,15 +409,15 @@ function formulaires_editer_auteur_traiter_dist(
 			$retour = parametre_url($retour, 'email_confirm', $email_nouveau);
 		}
 	}
-	
+
 	// Trafic de langue pour enregistrer la bonne
 	if ($langue = _request('langue')) {
 		set_request('lang', $langue);
 	}
-	
+
 	$res = formulaires_editer_objet_traiter('auteur', $id_auteur, 0, 0, $retour, $config_fonc, $row, $hidden);
 
-	if (_request('reset_password') and !intval($id_auteur) and intval($res['id_auteur'])) {
+	if (_request('reset_password') && !(int) $id_auteur && (int) $res['id_auteur']) {
 		$erreurs = [];
 		$erreurs = auteur_reset_password($res['id_auteur'], $erreurs);
 		if (isset($erreurs['message_ok'])) {
@@ -424,7 +425,7 @@ function formulaires_editer_auteur_traiter_dist(
 			}
 			$res['message_ok'] = trim($res['message_ok'] . ' ' . $erreurs['message_ok']);
 		}
-		if (isset($erreurs['message_erreur']) and $erreurs['message_erreur']) {
+		if (isset($erreurs['message_erreur']) && $erreurs['message_erreur']) {
 			if (!isset($res['message_erreur'])) { $res['message_erreur'] = '';
 			}
 			$res['message_erreur'] = trim($res['message_erreur'] . ' ' . $erreurs['message_erreur']);
@@ -432,15 +433,15 @@ function formulaires_editer_auteur_traiter_dist(
 	}
 
 	// Un lien auteur a prendre en compte ?
-	if ($associer_objet and $id_auteur = $res['id_auteur']) {
+	if ($associer_objet && ($id_auteur = $res['id_auteur'])) {
 		$objet = '';
-		if (intval($associer_objet)) {
+		if ((int) $associer_objet) {
 			$objet = 'article';
-			$id_objet = intval($associer_objet);
-		} elseif (preg_match(',^\w+\|[0-9]+$,', $associer_objet)) {
+			$id_objet = (int) $associer_objet;
+		} elseif (preg_match(',^\w+\|\d+$,', $associer_objet)) {
 			[$objet, $id_objet] = explode('|', $associer_objet);
 		}
-		if ($objet and $id_objet and autoriser('modifier', $objet, $id_objet)) {
+		if ($objet && $id_objet && autoriser('modifier', $objet, $id_objet)) {
 			include_spip('action/editer_auteur');
 			auteur_associer($id_auteur, [$objet => $id_objet]);
 			if (isset($res['redirect'])) {
@@ -454,7 +455,7 @@ function formulaires_editer_auteur_traiter_dist(
 
 
 function auteur_reset_password($id_auteur, $erreurs = []) {
-	$auteur = sql_fetsel('*', 'spip_auteurs', 'id_auteur=' . intval($id_auteur));
+	$auteur = sql_fetsel('*', 'spip_auteurs', 'id_auteur=' . (int) $id_auteur);
 	$config = auteurs_edit_config($auteur);
 
 	if ($config['edit_pass']) {
@@ -489,13 +490,13 @@ function auteur_regenerer_identifiants($id_auteur, $notifier = true, $contexte =
 		include_spip('action/editer_auteur');
 		auteur_modifier($id_auteur, $set);
 
-		$row = sql_fetsel('*', 'spip_auteurs', 'id_auteur=' . intval($id_auteur));
+		$row = sql_fetsel('*', 'spip_auteurs', 'id_auteur=' . (int) $id_auteur);
 		include_spip('inc/filtres');
 		if (
 			$notifier
-			and $row['email']
-			and email_valide($row['email'])
-			and trouver_fond($fond = 'modeles/mail_nouveaux_identifiants')
+			&& $row['email']
+			&& email_valide($row['email'])
+			&& trouver_fond($fond = 'modeles/mail_nouveaux_identifiants')
 		) {
 			// envoyer l'email avec login/pass
 			$c = [
@@ -509,13 +510,10 @@ function auteur_regenerer_identifiants($id_auteur, $notifier = true, $contexte =
 			$contexte = array_merge($contexte, $c);
 			// si pas de langue explicitement demandee, prendre celle de l'auteur si on la connait, ou a defaut celle du site
 			// plutot que celle de l'admin qui vient de cliquer sur le bouton
-			if (!isset($contexte['lang']) or !$contexte['lang']) {
-				if (isset($row['lang']) and $row['lang']) {
-					$contexte['lang'] = $row['lang'];
-				}
-				else {
-					$contexte['lang'] = $GLOBALS['meta']['langue_site'];
-				}
+			if (!isset($contexte['lang']) || !$contexte['lang']) {
+				$contexte['lang'] = isset($row['lang']) && $row['lang']
+					? $row['lang']
+					: $GLOBALS['meta']['langue_site'];
 			}
 			lang_select($contexte['lang']);
 			$message = recuperer_fond($fond, $contexte);

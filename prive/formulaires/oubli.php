@@ -15,16 +15,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 // chargement des valeurs par defaut des champs du formulaire
 function formulaires_oubli_charger_dist() {
-	$valeurs = array('oubli' => '', 'nobot' => '');
-
-	return $valeurs;
+	return ['oubli' => '', 'nobot' => ''];
 }
 
 // https://code.spip.net/@message_oubli
 function message_oubli($email, $param) {
 	$r = formulaires_oubli_mail($email);
 
-	if (is_array($r) and $r[1] and $r[1]['statut'] !== '5poubelle' and $r[1]['pass'] !== '') {
+	if (is_array($r) && $r[1] && $r[1]['statut'] !== '5poubelle' && $r[1]['pass'] !== '') {
 		include_spip('inc/texte'); # pour corriger_typo
 
 		include_spip('action/inscrire_auteur');
@@ -34,12 +32,12 @@ function message_oubli($email, $param) {
 		include_spip('inc/filtres');
 		$msg = recuperer_fond(
 			'modeles/mail_oubli',
-			array(
+			[
 				'url_reset' => url_absolue(
 					generer_url_public('spip_pass', "$param=$cookie"),
 					$GLOBALS['meta']['adresse_site'] . '/'
 				)
-			)
+			]
 		);
 		include_spip('inc/notifications');
 		notifications_envoyer_mails($email, $msg);
@@ -53,7 +51,7 @@ function formulaires_oubli_traiter_dist() {
 
 	$message = message_oubli(_request('oubli'), 'p');
 
-	return array('message_ok' => $message);
+	return ['message_ok' => $message];
 }
 
 
@@ -62,16 +60,16 @@ function formulaires_oubli_traiter_dist() {
 function test_oubli_dist($email) {
 	include_spip('inc/filtres'); # pour email_valide()
 	if (!email_valide($email)) {
-		return _T('pass_erreur_non_valide', array('email_oubli' => spip_htmlspecialchars($email)));
+		return _T('pass_erreur_non_valide', ['email_oubli' => spip_htmlspecialchars($email)]);
 	}
 
-	return array('mail' => $email);
+	return ['mail' => $email];
 }
 
 function formulaires_oubli_verifier_dist() {
-	$erreurs = array();
+	$erreurs = [];
 
-	$email = strval(_request('oubli'));
+	$email = (string) _request('oubli');
 
 	$r = formulaires_oubli_mail($email);
 
@@ -80,7 +78,7 @@ function formulaires_oubli_verifier_dist() {
 	} else {
 		if (!$r[1]) {
 			spip_log("demande de reinitialisation de mot de passe pour $email non enregistre sur le site", "oubli");
-		} elseif ($r[1]['statut'] == '5poubelle' or $r[1]['pass'] == '') {
+		} elseif ($r[1]['statut'] == '5poubelle' || $r[1]['pass'] == '') {
 			spip_log("demande de reinitialisation de mot de passe pour $email sans acces (poubelle ou pass vide)", "oubli");
 		}
 	}
@@ -93,11 +91,7 @@ function formulaires_oubli_verifier_dist() {
 }
 
 function formulaires_oubli_mail($email) {
-	if (function_exists('test_oubli')) {
-		$f = 'test_oubli';
-	} else {
-		$f = 'test_oubli_dist';
-	}
+	$f = function_exists('test_oubli') ? 'test_oubli' : 'test_oubli_dist';
 	$declaration = $f($email);
 
 	if (!is_array($declaration)) {
@@ -105,9 +99,9 @@ function formulaires_oubli_mail($email) {
 	} else {
 		include_spip('base/abstract_sql');
 
-		return array(
+		return [
 			$declaration,
 			sql_fetsel('id_auteur,statut,pass', 'spip_auteurs', "login<>'' AND email =" . sql_quote($declaration['mail']))
-		);
+		];
 	}
 }

@@ -14,18 +14,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 include_spip('inc/presentation');
 
-function formulaires_configurer_previsualiseur_charger_dist() {
-	$valeurs = [];
-	$valeurs['preview'] = explode(',', $GLOBALS['meta']['preview']);
-
-	return $valeurs;
+function formulaires_configurer_previsualiseur_charger_dist()
+{
+    return ['preview' => explode(',', $GLOBALS['meta']['preview'])];
 }
 
 
 function formulaires_configurer_previsualiseur_traiter_dist() {
 	$res = ['editable' => true];
 
-	if ($i = _request('preview') and is_array($i)) {
+	if (($i = _request('preview')) && is_array($i)) {
 		$i = ',' . implode(',', $i) . ',';
 	}
 

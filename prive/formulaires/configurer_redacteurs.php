@@ -32,8 +32,8 @@ function formulaires_configurer_redacteurs_traiter_dist() {
 	// Modification du reglage accepter_inscriptions => vider le cache
 	// (pour repercuter la modif sur le panneau de login)
 	if (
-		($i = _request('accepter_inscriptions')
-		and $i != $GLOBALS['meta']['accepter_inscriptions'])
+		(($i = _request('accepter_inscriptions'))
+		&& $i != $GLOBALS['meta']['accepter_inscriptions'])
 	) {
 		include_spip('inc/invalideur');
 		suivre_invalideur('1'); # tout effacer

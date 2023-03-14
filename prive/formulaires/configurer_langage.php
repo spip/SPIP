@@ -20,13 +20,10 @@ function formulaires_configurer_langage_charger_dist() {
 	init_langues();
 	$langues = explode(',', $GLOBALS['meta']['langues_proposees']);
 
-
-	$valeurs = [
+	return [
 		'var_lang_ecrire' => $GLOBALS['spip_lang'],
 		'_langues' => $langues
 	];
-
-	return $valeurs;
 }
 
 

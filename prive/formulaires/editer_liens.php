@@ -38,7 +38,7 @@ function determine_source_lien_objet($a, $b, $c) {
 	$table_source = $objet_lien = $objet = $id_objet = null;
 	// auteurs, article, 23 :
 	// associer des auteurs à l'article 23, sur la table pivot spip_auteurs_liens
-	if (is_numeric($c) and !is_numeric($b)) {
+	if (is_numeric($c) && !is_numeric($b)) {
 		$table_source = table_objet($a);
 		$objet_lien = objet_type($a);
 		$objet = objet_type($b);
@@ -46,7 +46,7 @@ function determine_source_lien_objet($a, $b, $c) {
 	}
 	// article, 23, auteurs
 	// associer des auteurs à l'article 23, sur la table pivot spip_articles_liens
-	if (is_numeric($b) and !is_numeric($c)) {
+	if (is_numeric($b) && !is_numeric($c)) {
 		$table_source = table_objet($c);
 		$objet_lien = objet_type($a);
 		$objet = objet_type($a);
@@ -75,7 +75,7 @@ function determine_source_lien_objet($a, $b, $c) {
  *    - Si array, tableau d'options
  *    - Si bool : valeur de l'option 'editable' uniquement
  *
- * @return array
+ * @return array|false
  */
 function formulaires_editer_liens_charger_dist($a, $b, $c, $options = []) {
 
@@ -89,7 +89,7 @@ function formulaires_editer_liens_charger_dist($a, $b, $c, $options = []) {
 	$editable = $options['editable'];
 
 	[$table_source, $objet, $id_objet, $objet_lien] = determine_source_lien_objet($a, $b, $c);
-	if (!$table_source or !$objet or !$objet_lien or !$id_objet) {
+	if (!$table_source || !$objet || !$objet_lien || !$id_objet) {
 		return false;
 	}
 
@@ -104,11 +104,12 @@ function formulaires_editer_liens_charger_dist($a, $b, $c, $options = []) {
 
 	// L'éditabilité :) est définie par un test permanent (par exemple "associermots") ET le 4ème argument
 	include_spip('inc/autoriser');
-	$editable = ($editable and autoriser('associer' . $table_source, $objet, $id_objet)
-		and autoriser('modifier', $objet, $id_objet));
+	$editable = ($editable
+		&& autoriser('associer' . $table_source, $objet, $id_objet)
+		&& autoriser('modifier', $objet, $id_objet));
 
 	if (
-		!$editable and !count(objet_trouver_liens(
+		!$editable && !count(objet_trouver_liens(
 			[$objet_lien => '*'],
 			[($objet_lien == $objet_source ? $objet : $objet_source) => $id_objet]
 		))
@@ -211,9 +212,9 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = []) {
 
 	$editable = $options['editable'];
 
-	$res = ['editable' => $editable ? true : false];
+	$res = ['editable' => (bool) $editable];
 	[$table_source, $objet, $id_objet, $objet_lien] = determine_source_lien_objet($a, $b, $c);
-	if (!$table_source or !$objet or !$objet_lien) {
+	if (!$table_source || !$objet || !$objet_lien) {
 		return $res;
 	}
 
@@ -230,7 +231,7 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = []) {
 		// annuler les suppressions du coup d'avant ?
 		if (
 			_request('annuler_oups')
-			and $oups = lien_gerer__oups('editer_liens','get')
+			&& ($oups = lien_gerer__oups('editer_liens','get'))
 		) {
 			if ($oups_objets = charger_fonction("editer_liens_oups_{$table_source}_{$objet}_{$objet_lien}", 'action', true)) {
 				$oups_objets($oups);
@@ -291,7 +292,7 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = []) {
 						$lien = explode('-', $lien);
 						[$objet_source, $ids, $objet_lie, $idl, $role] = array_pad($lien, 5, null);
 						// appliquer une condition sur le rôle si défini ('*' pour tous les roles)
-						$cond = (!is_null($role) ? ['role' => $role] : []);
+						$cond = (is_null($role) ? [] : ['role' => $role]);
 						if ($objet_lien == $objet_source) {
 							$oups = array_merge(
 								$oups,
@@ -401,7 +402,7 @@ function lien_verifier_action($k, $v) {
 		}
 	}
 	// ajout un role null fictif (plus pratique) si pas défini
-	if ($action and count(explode('-', $action)) == 4) {
+	if ($action && count(explode('-', $action)) == 4) {
 		$action .= '-';
 	}
 
@@ -424,11 +425,7 @@ function lien_retrouver_qualif($objet_lien, $lien) {
 	// un role est défini dans la liaison
 	$defs = explode('-', $lien);
 	[$objet1, , $objet2, , $role] = array_pad($defs, 5, null);
-	if ($objet_lien == $objet1) {
-		$colonne_role = roles_colonne($objet1, $objet2);
-	} else {
-		$colonne_role = roles_colonne($objet2, $objet1);
-	}
+	$colonne_role = $objet_lien == $objet1 ? roles_colonne($objet1, $objet2) : roles_colonne($objet2, $objet1);
 
 	// cas ou le role est defini en 5e argument de l'action sur le lien (suppression, ajout rapide sans autre attribut)
 	if ($role) {
@@ -440,20 +437,20 @@ function lien_retrouver_qualif($objet_lien, $lien) {
 
 	// retrouver les rôles postés pour cette liaison, s'il y en a.
 	$qualifier_lien = _request('qualifier_lien');
-	if (!$qualifier_lien or !is_array($qualifier_lien)) {
+	if (!$qualifier_lien || !is_array($qualifier_lien)) {
 		return [];
 	}
 
 	// pas avec l'action complete (incluant le role)
 	$qualif = [];
 	if (
-		(!isset($qualifier_lien[$lien]) or !$qualif = $qualifier_lien[$lien])
-		and count($defs) == 5
+		(!isset($qualifier_lien[$lien]) || !$qualif = $qualifier_lien[$lien])
+		&& count($defs) == 5
 	) {
 		// on tente avec l'action sans le role
 		array_pop($defs);
 		$lien = implode('-', $defs);
-		if (!isset($qualifier_lien[$lien]) or !$qualif = $qualifier_lien[$lien]) {
+		if (!isset($qualifier_lien[$lien]) || !$qualif = $qualifier_lien[$lien]) {
 			$qualif = [];
 		}
 	}
@@ -475,7 +472,7 @@ function lien_retrouver_qualif($objet_lien, $lien) {
 			}
 		}
 		// pas de rôle vide
-		if (!$colonne_role or !isset($q[$colonne_role]) or $q[$colonne_role]) {
+		if (!$colonne_role || !isset($q[$colonne_role]) || $q[$colonne_role]) {
 			$qualifs[] = $q;
 		}
 	}
@@ -500,7 +497,7 @@ function lien_retrouver_qualif($objet_lien, $lien) {
 function lien_ajouter_liaisons($objet_source, $ids, $objet_lien, $idl, $qualifs) {
 
 	// retrouver la colonne de roles s'il y en a a lier
-	if (is_array($qualifs) and count($qualifs)) {
+	if (is_array($qualifs) && count($qualifs)) {
 		foreach ($qualifs as $qualif) {
 			objet_associer([$objet_source => $ids], [$objet_lien => $idl], $qualif);
 		}
@@ -513,8 +510,6 @@ function lien_ajouter_liaisons($objet_source, $ids, $objet_lien, $idl, $qualifs)
 
 /**
  * Fonction de regroupement pour gerer le _oups de façon sécurisée sans passer par une globale ni par une _request
- * @param string $action
- * @param array|null $valeur
  * @return array|string|null
  */
 function lien_gerer__oups(string $form, string $action, ?array $valeur = null) {
@@ -522,7 +517,7 @@ function lien_gerer__oups(string $form, string $action, ?array $valeur = null) {
 
 	switch ($action) {
 		case 'reset':
-			$res = (empty($_oups_value) ? false : true);
+			$res = !empty($_oups_value);
 			$_oups_value = null;
 			return $res;
 
@@ -539,14 +534,16 @@ function lien_gerer__oups(string $form, string $action, ?array $valeur = null) {
 				include_spip('inc/filtres');
 				// on accepte uniquement une valeur signée
 				if ($oups = decoder_contexte_ajax($oups, $form)) {
-					if (!is_array($oups)
-						or empty($oups['id_auteur'])
-						or $oups['id_auteur'] !== $GLOBALS['visiteur_session']['id_auteur']
-						or empty($oups['time'])
-						or $oups['time'] < $_SERVER['REQUEST_TIME'] - 86400
-						or empty($oups['args'])
-						or $oups['args'] !== lien_gerer__oups_collecter_args($form, debug_backtrace(0, 5))
-						or empty($oups['oups_value'])) {
+					if (
+						!is_array($oups)
+						|| empty($oups['id_auteur'])
+						|| $oups['id_auteur'] !== $GLOBALS['visiteur_session']['id_auteur']
+						|| empty($oups['time'])
+						|| $oups['time'] < $_SERVER['REQUEST_TIME'] - 86400
+						|| empty($oups['args'])
+						|| $oups['args'] !== lien_gerer__oups_collecter_args($form, debug_backtrace(0, 5))
+						|| empty($oups['oups_value'])
+					) {
 						$oups = null;
 					}
 					else {
@@ -555,13 +552,9 @@ function lien_gerer__oups(string $form, string $action, ?array $valeur = null) {
 						foreach ($oups as $k => $oup) {
 							if (!is_array($oup)) {
 								unset($oups[$k]);
-							}
-							else {
+							} else {
 								foreach ($oup as $champ => $valeur) {
-									if (!is_scalar($champ)
-										or !is_scalar($valeur)
-										or preg_match(',\W,', $champ)
-									) {
+									if (!is_scalar($champ) || !is_scalar($valeur) || preg_match(',\W,', $champ)) {
 										unset($oups[$k][$champ]);
 									}
 								}
@@ -605,7 +598,7 @@ function lien_gerer__oups_collecter_args($form, $trace) {
 		do {
 			$t = array_shift($trace);
 			$function = $t['function'] ?? '';
-			if (strpos($function, 'formulaires_'. $form) === 0) {
+			if (str_starts_with($function, 'formulaires_'. $form)) {
 				if (isset($t['args'])) {
 					$args = json_encode($t['args']);
 				}

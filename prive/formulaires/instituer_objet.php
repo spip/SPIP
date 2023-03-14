@@ -63,7 +63,7 @@ function lister_statuts_proposes($desc, $publiable = true) {
  *     Environnement du formulaire ou false si aucun affichage à faire.
  */
 function formulaires_instituer_objet_charger_dist($objet, $id_objet, $retour = '', $editable = true) {
-	$editable = ($editable ? true : false);
+	$editable = (bool) $editable;
 
 	$table = table_objet_sql($objet);
 	$desc = lister_tables_objets_sql($table);
@@ -83,21 +83,23 @@ function formulaires_instituer_objet_charger_dist($objet, $id_objet, $retour = '
 	$publiable = true;
 	$statuts = lister_statuts_proposes($desc);
 	// tester si on a le droit de publier, si un statut publie existe
-	if (isset($statuts['publie'])) {
-		if (!autoriser('instituer', $objet, $id_objet, null, ['statut' => 'publie'])) {
-			if ($v['statut'] == 'publie') {
-				$editable = false;
-			} else {
-				$publiable = false;
-			}
+	if (
+		isset($statuts['publie'])
+		&& !autoriser('instituer', $objet, $id_objet, null, ['statut' => 'publie'])
+	) {
+		if ($v['statut'] == 'publie') {
+			$editable = false;
+		} else {
+			$publiable = false;
 		}
 	}
 	$statuts = lister_statuts_proposes($desc, $editable ? $publiable : true);
-	if (count($statuts) == 1 and isset($statuts[$v['statut']])) {
+	if (count($statuts) == 1 && isset($statuts[$v['statut']])) {
 		$editable = false;
 	}
 
-	$valeurs = [
+	#if (!count($valeurs['statuts']))
+	return [
 		'editable' => $editable,
 		'statut' => $v['statut'],
 		'_objet' => $objet,
@@ -108,9 +110,6 @@ function formulaires_instituer_objet_charger_dist($objet, $id_objet, $retour = '
 		'_aide' => $desc['aide_changer_statut'] ?? '',
 		'_hidden' => "<input type='hidden' name='statut_old' value='" . $v['statut'] . "' />",
 	];
-
-	#if (!count($valeurs['statuts']))
-	return $valeurs;
 }
 
 /**
@@ -144,7 +143,7 @@ function formulaires_instituer_objet_verifier_dist($objet, $id_objet, $retour = 
 		$publiable = true;
 		if (
 			isset($v['id_rubrique'])
-			and !autoriser('publierdans', 'rubrique', $v['id_rubrique'])
+			&& !autoriser('publierdans', 'rubrique', $v['id_rubrique'])
 		) {
 			$publiable = false;
 		}
@@ -152,7 +151,7 @@ function formulaires_instituer_objet_verifier_dist($objet, $id_objet, $retour = 
 		$statut = _request('statut');
 		if (
 			!isset($l[$statut])
-			or !autoriser('instituer', $objet, $id_objet, '', ['statut' => $statut])
+			|| !autoriser('instituer', $objet, $id_objet, '', ['statut' => $statut])
 		) {
 			$erreurs['statut'] = _T('instituer_erreur_statut_non_autorise');
 		}

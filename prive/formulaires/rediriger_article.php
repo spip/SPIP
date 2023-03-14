@@ -20,7 +20,7 @@ function formulaires_rediriger_article_charger_dist($id_article, $retour = '') {
 		return false;
 	}
 
-	$row = sql_fetsel('id_article,virtuel', 'spip_articles', 'id_article=' . intval($id_article));
+	$row = sql_fetsel('id_article,virtuel', 'spip_articles', 'id_article=' . (int) $id_article);
 	if (!$row['id_article']) {
 		return false;
 	}
@@ -29,20 +29,19 @@ function formulaires_rediriger_article_charger_dist($id_article, $retour = '') {
 
 	if (
 		!$redirection
-		and $GLOBALS['meta']['articles_redirection'] != 'oui'
+		&& $GLOBALS['meta']['articles_redirection'] != 'oui'
 	) {
 		return false;
 	}
 
 
 	include_spip('inc/texte');
-	$valeurs = [
+
+	return [
 		'redirection' => $redirection,
 		'id' => $id_article,
 		'_afficher_url' => ($redirection ? propre("[->$redirection]") : ''),
 	];
-
-	return $valeurs;
 }
 
 function formulaires_rediriger_article_verifier_dist($id_article, $retour = '') {

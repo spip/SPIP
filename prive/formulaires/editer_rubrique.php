@@ -65,7 +65,7 @@ function formulaires_editer_rubrique_charger_dist(
 		$hidden
 	);
 
-	if (intval($id_rubrique) and !autoriser('modifier', 'rubrique', intval($id_rubrique))) {
+	if ((int) $id_rubrique && !autoriser('modifier', 'rubrique', (int) $id_rubrique)) {
 		$valeurs['editable'] = '';
 	}
 
@@ -80,14 +80,13 @@ function formulaires_editer_rubrique_charger_dist(
  * return array
  *     Configuration pour le formulaire
  */
-function rubriques_edit_config(array $row): array {
-
-	$config = [];
-	$config['lignes'] = 8;
-	$config['langue'] = $GLOBALS['spip_lang'];
-	$config['restreint'] = (!$GLOBALS['connect_toutes_rubriques']);
-
-	return $config;
+function rubriques_edit_config(array $row) : array
+{
+    return [
+		'lignes' => 8,
+		'langue' => $GLOBALS['spip_lang'],
+		'restreint' => !$GLOBALS['connect_toutes_rubriques']
+	];
 }
 
 /**
@@ -120,7 +119,7 @@ function formulaires_editer_rubrique_identifier_dist(
 	$row = [],
 	$hidden = ''
 ) {
-	return serialize([intval($id_rubrique), $lier_trad]);
+	return serialize([(int) $id_rubrique, $lier_trad]);
 }
 
 /**
@@ -161,9 +160,9 @@ function formulaires_editer_rubrique_verifier_dist(
 
 	// s'assurer qu'on ne s'auto-designe pas comme parent !
 	if (
-		intval($id_rubrique)
-		and empty($erreurs['id_parent'])
-		and $id_parent = _request('id_parent')
+		(int) $id_rubrique
+		&& empty($erreurs['id_parent'])
+		&& ($id_parent = _request('id_parent'))
 	) {
 		include_spip('inc/rubriques');
 		$branche = calcul_branche_in($id_rubrique);

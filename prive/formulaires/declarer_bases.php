@@ -32,14 +32,14 @@ function formulaires_declarer_bases_charger_dist() {
 		while (in_array($nom_connect . $n, $deja)) {
 			$n = ($n ? $n + 1 : 1);
 		}
-		$nom_connect = $nom_connect . $n;
+		$nom_connect .= $n;
 	}
 
-	$valeurs = [
+	return [
 		'_etapes' => 3,
 		'_bases_deja' => $deja,
 		'_bases_prop' => defined('_DECLARER_SERVEUR_DB') ? liste_bases(_DECLARER_SERVEUR_DB) : '',
-		'_tables' => (defined('_DECLARER_SERVEUR_DB') and defined('_DECLARER_CHOIX_DB')) ?
+		'_tables' => (defined('_DECLARER_SERVEUR_DB') && defined('_DECLARER_CHOIX_DB')) ?
 			$tables = sql_alltable('%', _DECLARER_SERVEUR_DB)
 			:
 			[],
@@ -53,8 +53,6 @@ function formulaires_declarer_bases_charger_dist() {
 		'table_new' => '',
 		'nom_connect' => $nom_connect,
 	];
-
-	return $valeurs;
 }
 
 function liste_serveurs() {
@@ -66,13 +64,13 @@ function liste_serveurs() {
 	}
 	while ($f = readdir($d)) {
 		if (
-			(preg_match('/^(.*)[.]php$/', $f, $s))
-			and is_readable($f = $dir . $f)
+			preg_match('/^(.*)[.]php$/', $f, $s)
+			&& is_readable($f = $dir . $f)
 		) {
 			require_once($f);
 			$s = $s[1];
 			$v = 'spip_versions_' . $s;
-			if (function_exists($v) and $v()) {
+			if (function_exists($v) && $v()) {
 				$options[$s] = "install_select_type_$s";
 			} else {
 				spip_log("$s: portage indisponible");
@@ -87,7 +85,7 @@ function liste_serveurs() {
 function liste_bases($server_db) {
 	if (
 		is_null($server_db)
-		or !$result = sql_listdbs($server_db)
+		|| !$result = sql_listdbs($server_db)
 	) {
 		return '';
 	}
@@ -111,35 +109,19 @@ function formulaires_declarer_bases_verifier_1_dist() {
 	[$def_adresse_db, $def_login_db, $def_pass_db, $sel_db, $def_serveur_db] = analyse_fichier_connection(_FILE_CONNECT);
 
 	if (!$adresse_db = _request('adresse_db')) {
-		if (defined('_INSTALL_HOST_DB')) {
-			$adresse_db = _INSTALL_HOST_DB;
-		} else {
-			$adresse_db = $def_adresse_db;
-		}
+		$adresse_db = defined('_INSTALL_HOST_DB') ? _INSTALL_HOST_DB : $def_adresse_db;
 	}
 	if (!$serveur_db = _request('sql_serveur_db')) {
-		if (defined('_INSTALL_SERVER_DB')) {
-			$serveur_db = _INSTALL_SERVER_DB;
-		} else {
-			$serveur_db = $def_serveur_db;
-		}
+		$serveur_db = defined('_INSTALL_SERVER_DB') ? _INSTALL_SERVER_DB : $def_serveur_db;
 	}
 
 	$login_db = $pass_db = '';
 	if (!preg_match(',^sqlite,i', $serveur_db)) {
 		if (!$login_db = _request('login_db')) {
-			if (defined('_INSTALL_USER_DB')) {
-				$login_db = _INSTALL_USER_DB;
-			} else {
-				$login_db = $def_login_db;
-			}
+			$login_db = defined('_INSTALL_USER_DB') ? _INSTALL_USER_DB : $def_login_db;
 		}
 		if (!$pass_db = _request('pass_db')) {
-			if (defined('_INSTALL_PASS_DB')) {
-				$pass_db = _INSTALL_PASS_DB;
-			} else {
-				$pass_db = $def_pass_db;
-			}
+			$pass_db = defined('_INSTALL_PASS_DB') ? _INSTALL_PASS_DB : $def_pass_db;
 		}
 	}
 
@@ -153,7 +135,7 @@ function formulaires_declarer_bases_verifier_1_dist() {
 		define('_DECLARER_PASS_DB', $pass_db);
 		// si on est sur le meme serveur que connect.php
 		// indiquer quelle est la db utilisee pour l'exclure des choix possibles
-		if ($serveur_db == $def_serveur_db and $adresse_db == $def_adresse_db) {
+		if ($serveur_db == $def_serveur_db && $adresse_db == $def_adresse_db) {
 			set_request('main_db', $sel_db);
 		} else {
 			set_request('main_db', '');

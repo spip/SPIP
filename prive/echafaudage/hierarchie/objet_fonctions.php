@@ -23,20 +23,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function deplacement_restreint($objet, $statut) {
 
-	switch ($objet) {
-		case 'rubrique':
-			return (!$GLOBALS['connect_toutes_rubriques']);
-			break;
-		case 'article':
-		case 'site':
-		case 'syndic':
-		case 'breve':
-			return ($statut == 'publie');
-			break;
-		default:
-			return ($statut ? $statut == 'publie' : false);
-			break;
-	}
-
-	return false;
+	return match ($objet) {
+		'rubrique' => !$GLOBALS['connect_toutes_rubriques'],
+		'article', 'site', 'syndic', 'breve' => $statut == 'publie',
+		default => $statut ? $statut == 'publie' : false,
+	};
 }

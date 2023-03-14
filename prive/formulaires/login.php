@@ -34,7 +34,7 @@ function is_url_prive($cible) {
 	$path = parse_url(tester_url_absolue($cible) ? $cible : url_absolue($cible));
 	$path = ($path['path'] ?? '');
 
-	return strncmp(substr($path, -strlen(_DIR_RESTREINT_ABS)), _DIR_RESTREINT_ABS, strlen(_DIR_RESTREINT_ABS)) == 0;
+	return str_starts_with(substr($path, -strlen(_DIR_RESTREINT_ABS)), _DIR_RESTREINT_ABS);
 }
 
 /**
@@ -59,7 +59,7 @@ function is_url_prive($cible) {
  *     Environnement du formulaire
  **/
 function formulaires_login_charger_dist($cible = '', $options = [], $deprecated = null) {
-	$erreur = _request('var_erreur');
+ 	$erreur = _request('var_erreur');
 
 	if (!is_array($options)) {
 		$options = [
@@ -76,23 +76,22 @@ function formulaires_login_charger_dist($cible = '', $options = [], $deprecated 
 	}
 
 	if (!$login) {
-		$login = strval(_request('var_login'));
+		$login = (string) _request('var_login');
 	}
 	// si on est deja identifie
-	if (!$login and isset($GLOBALS['visiteur_session']['email'])) {
+	if (!$login && isset($GLOBALS['visiteur_session']['email'])) {
 		$login = $GLOBALS['visiteur_session']['email'];
 	}
-	if (!$login and isset($GLOBALS['visiteur_session']['login'])) {
+	if (!$login && isset($GLOBALS['visiteur_session']['login'])) {
 		$login = $GLOBALS['visiteur_session']['login'];
 	}
 	// ou si on a un cookie admin
-	if (!$login) {
-		if (
-			isset($_COOKIE['spip_admin'])
-			and preg_match(',^@(.*)$,', $_COOKIE['spip_admin'], $regs)
-		) {
-			$login = $regs[1];
-		}
+	if (
+		!$login
+		&& isset($_COOKIE['spip_admin'])
+		&& preg_match(',^@(.*)$,', $_COOKIE['spip_admin'], $regs)
+	) {
+		$login = $regs[1];
 	}
 
 	$lang = $GLOBALS['spip_lang'];
@@ -100,7 +99,7 @@ function formulaires_login_charger_dist($cible = '', $options = [], $deprecated 
 	$row = auth_informer_login($login);
 
 	// retablir la langue de l'URL si forcee (on ignore la langue de l'auteur dans ce cas)
-	if (_request('lang') === $lang and $GLOBALS['spip_lang'] !== $lang) {
+	if (_request('lang') === $lang && $GLOBALS['spip_lang'] !== $lang) {
 		changer_langue($lang);
 	}
 
@@ -118,10 +117,10 @@ function formulaires_login_charger_dist($cible = '', $options = [], $deprecated 
 		'_alea_actuel' => $row['alea_actuel'] ?? '',
 		'_alea_futur' => $row['alea_futur'] ?? '',
 		'_pipeline' => 'affiche_formulaire_login', // faire passer le formulaire dans un pipe dedie pour les methodes auth
-		'_autofocus' => ($options['autofocus'] and $options['autofocus'] !== 'non') ? ' ' : '',
+		'_autofocus' => ($options['autofocus'] && $options['autofocus'] !== 'non') ? ' ' : '',
 	];
 
-	if ($erreur or !isset($GLOBALS['visiteur_session']['id_auteur']) or !$GLOBALS['visiteur_session']['id_auteur']) {
+	if ($erreur || !isset($GLOBALS['visiteur_session']['id_auteur']) || !$GLOBALS['visiteur_session']['id_auteur']) {
 		$valeurs['editable'] = true;
 	}
 
@@ -129,17 +128,17 @@ function formulaires_login_charger_dist($cible = '', $options = [], $deprecated 
 		include_spip('inc/autoriser');
 		$loge = autoriser('ecrire');
 	} else {
-		$loge = (isset($GLOBALS['visiteur_session']['auth']) and $GLOBALS['visiteur_session']['auth'] != '');
+		$loge = (isset($GLOBALS['visiteur_session']['auth']) && $GLOBALS['visiteur_session']['auth'] != '');
 	}
 
 	// Si on est connecte, appeler traiter()
 	// et lancer la redirection si besoin
-	if (!$valeurs['editable'] and $loge and _request('formulaire_action') !== 'login') {
+	if (!$valeurs['editable'] && $loge && _request('formulaire_action') !== 'login') {
 		$traiter = charger_fonction('traiter', 'formulaires/login');
 		$res = $traiter($cible, $login, $prive);
 		$valeurs = array_merge($valeurs, $res);
 
-		if (isset($res['redirect']) and $res['redirect']) {
+		if (isset($res['redirect']) && $res['redirect']) {
 			include_spip('inc/headers');
 			# preparer un lien pour quand redirige_formulaire ne fonctionne pas
 			$m = redirige_formulaire($res['redirect']);
@@ -180,13 +179,12 @@ function formulaires_login_charger_dist($cible = '', $options = [], $deprecated 
 function login_auth_http() {
 	if (
 		!$GLOBALS['ignore_auth_http']
-		and _request('var_erreur') == 'cookie'
-		and (!isset($_COOKIE['spip_session']) or $_COOKIE['spip_session'] != 'test_echec_cookie')
-		and (preg_match(',apache,', \PHP_SAPI)
-			or preg_match(',^Apache.* PHP,', $_SERVER['SERVER_SOFTWARE']))
+		&& _request('var_erreur') == 'cookie'
+		&& (!isset($_COOKIE['spip_session']) || $_COOKIE['spip_session'] != 'test_echec_cookie')
+		&& (preg_match(',apache,', \PHP_SAPI) || preg_match(',^Apache.* PHP,', $_SERVER['SERVER_SOFTWARE']))
 		// Attention dans le cas 'intranet' la proposition de se loger
 		// par auth_http peut conduire a l'echec.
-		and !(isset($_SERVER['PHP_AUTH_USER']) and isset($_SERVER['PHP_AUTH_PW']))
+		&& !(isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW']))
 	) {
 		return generer_url_action('cookie', '', false, true);
 	} else {
@@ -245,7 +243,7 @@ function formulaires_login_verifier_dist($cible = '', $options = [], $deprecated
 	// on arrive ici si on ne s'est pas identifie avec un SSO
 	if (!is_array($auteur)) {
 		$erreurs = [];
-		if (is_string($auteur) and strlen($auteur)) {
+		if (is_string($auteur) && strlen($auteur)) {
 			$erreurs['var_login'] = $auteur;
 		}
 		include_spip('inc/cookie');
@@ -353,7 +351,7 @@ function formulaires_login_traiter_dist($cible = '', $options = [], $deprecated 
 		// pour pas echouer quand la meta adresse_site est foireuse
 		if (strncmp($cible, $u = url_de_base(), strlen($u)) == 0) {
 			$cible = './' . substr($cible, strlen($u));
-		} elseif (tester_url_absolue($cible) and !defined('_AUTORISER_LOGIN_ABS_REDIRECT')) {
+		} elseif (tester_url_absolue($cible) && !defined('_AUTORISER_LOGIN_ABS_REDIRECT')) {
 			// si c'est une url absolue, refuser la redirection
 			// sauf si cette securite est levee volontairement par le webmestre
 			$cible = '';
@@ -361,7 +359,7 @@ function formulaires_login_traiter_dist($cible = '', $options = [], $deprecated 
 	}
 
 	// Si on est connecte, envoyer vers la destination
-	if ($cible and ($cible != self('&')) and ($cible != self())) {
+	if ($cible && $cible != self('&') && $cible != self()) {
 		$res['redirect'] = $cible;
 		$res['message_ok'] = inserer_attribut(
 			'<a>' . _T('login_par_ici') . '</a>',

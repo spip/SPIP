@@ -39,7 +39,7 @@ function formulaires_configurer_reducteur_charger_dist() {
 		$valeurs[$m] = $GLOBALS['meta'][$m] ?? null;
 	}
 
-	$valeurs['taille_preview'] = intval($valeurs['taille_preview']);
+	$valeurs['taille_preview'] = (int) $valeurs['taille_preview'];
 	if ($valeurs['taille_preview'] < 10) {
 		$valeurs['taille_preview'] = 120;
 	}
@@ -96,7 +96,7 @@ function formulaires_configurer_reducteur_traiter_dist() {
 		}
 	}
 	if (!is_null($v = _request('taille_preview'))) {
-		ecrire_meta('taille_preview', intval($v));
+		ecrire_meta('taille_preview', (int) $v);
 	}
 
 	$res['message_ok'] = _T('config_info_enregistree');
@@ -121,16 +121,12 @@ function url_vignette_choix($process) {
 			}
 			break;
 		case 'gd1':
-			if (
-				!function_exists('ImageGif')
-				and !function_exists('ImageJpeg')
-				and !function_exists('ImagePng')
-			) {
+			if (!function_exists('ImageGif') && !function_exists('ImageJpeg') && !function_exists('ImagePng')) {
 				return '';
 			}
 			break;
 		case 'netpbm':
-			if (defined('_PNMSCALE_COMMAND') and _PNMSCALE_COMMAND == '') {
+			if (defined('_PNMSCALE_COMMAND') && _PNMSCALE_COMMAND == '') {
 				return '';
 			}
 			break;
@@ -140,7 +136,7 @@ function url_vignette_choix($process) {
 			}
 			break;
 		case 'convert':
-			if (defined('_CONVERT_COMMAND') and _CONVERT_COMMAND == '') {
+			if (defined('_CONVERT_COMMAND') && _CONVERT_COMMAND == '') {
 				return '';
 			}
 			break;

@@ -39,7 +39,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     - label_date_redac : label optionnel pour la saisie du champ date_redac
  *     - texte_sans_date_redac : texte optionnel affiche pour vider la date_redac
  *     - class : une classe ajoutable au formulaire pour le distinguer si on a plusieurs occurences
- * @return array
+ * @return array|false
  *     Environnement du formulaire
  **/
 function formulaires_dater_charger_dist($objet, $id_objet, $retour = '', $options = []) {
@@ -50,7 +50,7 @@ function formulaires_dater_charger_dist($objet, $id_objet, $retour = '', $option
 	$heure = null;
 	$minute = null;
 	$objet = objet_type($objet);
-	if (!$objet or !intval($id_objet)) {
+	if (!$objet || !(int) $id_objet) {
 		return false;
 	}
 
@@ -68,7 +68,7 @@ function formulaires_dater_charger_dist($objet, $id_objet, $retour = '', $option
 	}
 
 	$champ_date = $desc['date'] ?: 'date';
-	if (isset($options['champ_date']) and $options['champ_date']) {
+	if (isset($options['champ_date']) && $options['champ_date']) {
 		$champ_date = $options['champ_date'];
 	}
 	if (!isset($desc['field'][$champ_date])) {
@@ -84,7 +84,7 @@ function formulaires_dater_charger_dist($objet, $id_objet, $retour = '', $option
 
 	$select = "$champ_date as date";
 	$champ_date_redac = 'date_redac';
-	if (isset($options['champ_date_redac']) and $options['champ_date_redac']) {
+	if (isset($options['champ_date_redac']) && $options['champ_date_redac']) {
 		$champ_date_redac = $options['champ_date_redac'];
 	}
 	if (isset($desc['field'][$champ_date_redac])) {
@@ -95,7 +95,7 @@ function formulaires_dater_charger_dist($objet, $id_objet, $retour = '', $option
 	}
 
 
-	$row = sql_fetsel($select, $desc['table'], "$_id_objet=" . intval($id_objet));
+	$row = sql_fetsel($select, $desc['table'], "$_id_objet=" . (int) $id_objet);
 	$statut = $row['statut'] ?? 'publie'; // pas de statut => publie
 
 	$valeurs['editable'] = autoriser('dater', $objet, $id_objet, null, ['statut' => $statut]);
@@ -103,8 +103,8 @@ function formulaires_dater_charger_dist($objet, $id_objet, $retour = '', $option
 	$possedeDateRedac = false;
 
 	if (
-		isset($row['date_redac']) and
-		$regs = recup_date($row['date_redac'], false)
+		isset($row['date_redac'])
+		&& ($regs = recup_date($row['date_redac'], false))
 	) {
 		$annee_redac = $regs[0];
 		$mois_redac = $regs[1];
@@ -117,7 +117,7 @@ function formulaires_dater_charger_dist($objet, $id_objet, $retour = '', $option
 		// on verifie donc que le intval($row['date_redac']) qui ressort l'annee
 		// est bien lui aussi <=1 : dans ce cas c'est une date sql 'nulle' ou presque, selon
 		// le gestionnnaire sql utilise (0001-01-01 pour PG par exemple)
-		if (intval($row['date_redac']) <= 1 and ($annee_redac <= 1) and ($mois_redac <= 1) and ($jour_redac <= 1)) {
+		if ((int) $row['date_redac'] <= 1 && $annee_redac <= 1 && $mois_redac <= 1 && $jour_redac <= 1) {
 			$possedeDateRedac = false;
 		}
 	} else {
@@ -147,29 +147,29 @@ function formulaires_dater_charger_dist($objet, $id_objet, $retour = '', $option
 	if (isset($options['date_redac'])) {
 		$valeurs['_editer_date_anterieure'] = $options['date_redac'];
 	} else {
-		$valeurs['_editer_date_anterieure'] = ($objet == 'article' and ($GLOBALS['meta']['articles_redac'] != 'non' or $possedeDateRedac));
+		$valeurs['_editer_date_anterieure'] = ($objet == 'article' && ($GLOBALS['meta']['articles_redac'] != 'non' || $possedeDateRedac));
 	}
 	$valeurs['_label_date'] = (($statut == 'publie') ?
 		_T('texte_date_publication_objet') : _T('texte_date_creation_objet'));
-	if (isset($options['label_date']) and $options['label_date']) {
+	if (isset($options['label_date']) && $options['label_date']) {
 		$valeurs['_label_date'] = $options['label_date'];
 	}
-	if (isset($options['label_date_redac']) and $options['label_date_redac']) {
+	if (isset($options['label_date_redac']) && $options['label_date_redac']) {
 		$valeurs['_label_date_redac'] = $options['label_date_redac'];
 	}
-	if (isset($options['texte_sans_date_redac']) and $options['texte_sans_date_redac']) {
+	if (isset($options['texte_sans_date_redac']) && $options['texte_sans_date_redac']) {
 		$valeurs['_texte_sans_date_redac'] = $options['texte_sans_date_redac'];
 	}
-	if (isset($options['class']) and $options['class']) {
+	if (isset($options['class']) && $options['class']) {
 		$valeurs['_class'] = $options['class'];
 	}
 
-	$valeurs['_saisie_en_cours'] = (_request('_saisie_en_cours') !== null or _request('date_jour') !== null);
+	$valeurs['_saisie_en_cours'] = (_request('_saisie_en_cours') !== null || _request('date_jour') !== null);
 
 	// cas ou l'on ne peut pas dater mais on peut modifier la date de redac anterieure
 	// https://core.spip.net/issues/3494
 	$valeurs['_editer_date'] = $valeurs['editable'];
-	if ($valeurs['_editer_date_anterieure'] and !$valeurs['editable']) {
+	if ($valeurs['_editer_date_anterieure'] && !$valeurs['editable']) {
 		$valeurs['editable'] = autoriser('modifier', $objet, $id_objet);
 	}
 
@@ -192,13 +192,13 @@ function formulaires_dater_charger_dist($objet, $id_objet, $retour = '', $option
  **/
 function dater_formater_saisie_jour($jour, $mois, $annee, $sep = '/') {
 	$annee = str_pad($annee, 4, '0', STR_PAD_LEFT);
-	if (intval($jour)) {
+	if ((int) $jour) {
 		$jour = str_pad($jour, 2, '0', STR_PAD_LEFT);
 		$mois = str_pad($mois, 2, '0', STR_PAD_LEFT);
 
 		return "$jour$sep$mois$sep$annee";
 	}
-	if (intval($mois)) {
+	if ((int) $mois) {
 		$mois = str_pad($mois, 2, '0', STR_PAD_LEFT);
 
 		return "$mois$sep$annee";
@@ -252,9 +252,9 @@ function formulaires_dater_verifier_dist($objet, $id_objet, $retour = '', $optio
 
 	if (_request('changer')) {
 		foreach (['date', 'date_redac'] as $k) {
-			if ($v = _request($k . '_jour') and !dater_recuperer_date_saisie($v, $k)) {
+			if (($v = _request($k . '_jour')) && !dater_recuperer_date_saisie($v, $k)) {
 				$erreurs[$k] = _T('format_date_incorrecte');
-			} elseif ($v = _request($k . '_heure') and !dater_recuperer_heure_saisie($v)) {
+			} elseif (($v = _request($k . '_heure')) && !dater_recuperer_heure_saisie($v)) {
 				$erreurs[$k] = _T('format_heure_incorrecte');
 			}
 		}
@@ -294,7 +294,7 @@ function formulaires_dater_traiter_dist($objet, $id_objet, $retour = '', $option
 		} #impossible en principe
 
 		$champ_date = $desc['date'] ?: 'date';
-		if (isset($options['champ_date']) and $options['champ_date']) {
+		if (isset($options['champ_date']) && $options['champ_date']) {
 			$champ_date = $options['champ_date'];
 		}
 
@@ -315,11 +315,11 @@ function formulaires_dater_traiter_dist($objet, $id_objet, $retour = '', $option
 		}
 
 		$champ_date_redac = 'date_redac';
-		if (isset($options['champ_date_redac']) and $options['champ_date_redac']) {
+		if (isset($options['champ_date_redac']) && $options['champ_date_redac']) {
 			$champ_date_redac = $options['champ_date_redac'];
 		}
-		if (isset($desc['field'][$champ_date_redac]) and $v['_editer_date_anterieure']) {
-			if (!_request('date_redac_jour') or _request('sans_redac')) {
+		if (isset($desc['field'][$champ_date_redac]) && $v['_editer_date_anterieure']) {
+			if (!_request('date_redac_jour') || _request('sans_redac')) {
 				$set[$champ_date_redac] = sql_format_date(0, 0, 0, 0, 0, 0);
 			} else {
 				if (!$d = dater_recuperer_date_saisie(_request('date_redac_jour'), 'date_redac')) {
@@ -332,7 +332,7 @@ function formulaires_dater_traiter_dist($objet, $id_objet, $retour = '', $option
 			}
 		}
 
-		if (count($set)) {
+		if ($set !== []) {
 			$publie_avant = objet_test_si_publie($objet, $id_objet);
 			include_spip('action/editer_objet');
 			objet_modifier($objet, $id_objet, $set);
@@ -365,19 +365,19 @@ function formulaires_dater_traiter_dist($objet, $id_objet, $retour = '', $option
  * @return array|string Chaîne vide si date invalide, tableau (année, mois, jour) sinon.
  */
 function dater_recuperer_date_saisie($post, $quoi = 'date') {
-	if (!preg_match('#^(?:(?:([0-9]{1,2})[/-])?([0-9]{1,2})[/-])?([0-9]{4}|[0-9]{1,2})#', $post, $regs)) {
+	if (!preg_match('#^(?:(?:(\d{1,2})[/-])?(\d{1,2})[/-])?(\d{4}|\d{1,2})#', $post, $regs)) {
 		return '';
 	}
 	if ($quoi == 'date_redac') {
-		if ($regs[3] <> '' and $regs[3] < 1001) {
+		if ($regs[3] != '' && $regs[3] < 1001) {
 			$regs[3] += 9000;
 		}
 
 		return [$regs[3], $regs[2], $regs[1]];
 	} else {
 		if (
-			checkdate(intval($regs[2]), intval($regs[1]), intval($regs[3]))
-			and $t = mktime(0, 0, 0, $regs[2], $regs[1], $regs[3])
+			checkdate((int) $regs[2], (int) $regs[1], (int) $regs[3])
+			&& ($t = mktime(0, 0, 0, $regs[2], $regs[1], $regs[3]))
 		) {
 			return [date('Y', $t), date('m', $t), date('d', $t)];
 		}
@@ -392,10 +392,10 @@ function dater_recuperer_date_saisie($post, $quoi = 'date') {
  * @return array
  */
 function dater_recuperer_heure_saisie($post) {
-	if (!preg_match('#([0-9]{1,2})(?:[h:](?:([0-9]{1,2}))?)?#', $post, $regs)) {
+	if (!preg_match('#(\d{1,2})(?:[h:](?:(\d{1,2}))?)?#', $post, $regs)) {
 		return '';
 	}
-	if ($regs[1] > 23 or $regs[2] > 59) {
+	if ($regs[1] > 23 || $regs[2] > 59) {
 		return '';
 	}
 

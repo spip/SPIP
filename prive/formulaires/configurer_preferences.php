@@ -36,8 +36,8 @@ function formulaires_configurer_preferences_charger_dist() {
 
 	$valeurs = [];
 	$valeurs['display_navigation'] = $GLOBALS['visiteur_session']['prefs']['display_navigation'] ?? 'navigation_avec_icones';
-	$valeurs['display'] = (isset($GLOBALS['visiteur_session']['prefs']['display']) and $GLOBALS['visiteur_session']['prefs']['display'] > 0) ? $GLOBALS['visiteur_session']['prefs']['display'] : 2;
-	$valeurs['couleur'] = (isset($GLOBALS['visiteur_session']['prefs']['couleur']) and $GLOBALS['visiteur_session']['prefs']['couleur'] > 0) ? $GLOBALS['visiteur_session']['prefs']['couleur'] : 1;
+	$valeurs['display'] = (isset($GLOBALS['visiteur_session']['prefs']['display']) && $GLOBALS['visiteur_session']['prefs']['display'] > 0) ? $GLOBALS['visiteur_session']['prefs']['display'] : 2;
+	$valeurs['couleur'] = (isset($GLOBALS['visiteur_session']['prefs']['couleur']) && $GLOBALS['visiteur_session']['prefs']['couleur'] > 0) ? $GLOBALS['visiteur_session']['prefs']['couleur'] : 1;
 
 	$couleurs = charger_fonction('couleurs', 'inc');
 	$les_couleurs = $couleurs();
@@ -68,21 +68,21 @@ function formulaires_configurer_preferences_traiter_dist() {
 			$GLOBALS['visiteur_session']['prefs']['couleur'] = $couleur;
 		}
 	}
-	if ($display = intval(_request('display'))) {
+	if ($display = (int) _request('display')) {
 		$GLOBALS['visiteur_session']['prefs']['display'] = $display;
 	}
 	if (
-		$display_navigation = _request('display_navigation')
-		and in_array($display_navigation, ['navigation_sans_icone', 'navigation_avec_icones'])
+		($display_navigation = _request('display_navigation'))
+		&& in_array($display_navigation, ['navigation_sans_icone', 'navigation_avec_icones'])
 	) {
 		$GLOBALS['visiteur_session']['prefs']['display_navigation'] = $display_navigation;
 	}
 
-	if (intval($GLOBALS['visiteur_session']['id_auteur'])) {
+	if ((int) $GLOBALS['visiteur_session']['id_auteur']) {
 		include_spip('action/editer_auteur');
 		$c = ['prefs' => serialize($GLOBALS['visiteur_session']['prefs'])];
 
-		if ($imessage = _request('imessage') and in_array($imessage, ['oui', 'non'])) {
+		if (($imessage = _request('imessage')) && in_array($imessage, ['oui', 'non'])) {
 			$c['imessage'] = $imessage;
 		}
 

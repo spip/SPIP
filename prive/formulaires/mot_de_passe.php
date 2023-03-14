@@ -16,18 +16,19 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('base/abstract_sql');
 
 function retrouve_auteur($id_auteur, $jeton = '') {
-	if ($id_auteur = intval($id_auteur)) {
+	if ($id_auteur = (int) $id_auteur) {
 		return sql_fetsel(
 			'*',
 			'spip_auteurs',
-			array('id_auteur=' . intval($id_auteur), "statut<>'5poubelle'", "pass<>''", "login<>''")
+			['id_auteur=' . (int) $id_auteur, "statut<>'5poubelle'", "pass<>''", "login<>''"]
 		);
 	} elseif ($jeton) {
 		include_spip('action/inscrire_auteur');
-		if ($auteur = auteur_verifier_jeton($jeton)
-			and $auteur['statut'] <> '5poubelle'
-			and $auteur['pass'] <> ''
-			and $auteur['login'] <> ''
+		if (
+			($auteur = auteur_verifier_jeton($jeton))
+			&& $auteur['statut'] != '5poubelle'
+			&& $auteur['pass'] != ''
+			&& $auteur['login'] != ''
 		) {
 			return $auteur;
 		}
@@ -48,7 +49,7 @@ function retrouve_auteur($id_auteur, $jeton = '') {
  */
 function formulaires_mot_de_passe_charger_dist($id_auteur = null, $jeton = null) {
 
-	$valeurs = array();
+	$valeurs = [];
 	// compatibilite anciens appels du formulaire
 	if (is_null($jeton)) {
 		$jeton = _request('p');
@@ -82,12 +83,12 @@ function formulaires_mot_de_passe_charger_dist($id_auteur = null, $jeton = null)
  * @param int $id_auteur
  */
 function formulaires_mot_de_passe_verifier_dist($id_auteur = null, $jeton = null) {
-	$erreurs = array();
+	$erreurs = [];
 	if (!_request('oubli')) {
 		$erreurs['oubli'] = _T('info_obligatoire');
 	} else {
 		if (strlen($p = _request('oubli')) < _PASS_LONGUEUR_MINI) {
-			$erreurs['oubli'] = _T('info_passe_trop_court_car_pluriel', array('nb' => _PASS_LONGUEUR_MINI));
+			$erreurs['oubli'] = _T('info_passe_trop_court_car_pluriel', ['nb' => _PASS_LONGUEUR_MINI]);
 		} else {
 			if (!is_null($c = _request('oubli_confirm'))) {
 				if (!$c) {
@@ -121,7 +122,7 @@ function formulaires_mot_de_passe_verifier_dist($id_auteur = null, $jeton = null
  * @param int $id_auteur
  */
 function formulaires_mot_de_passe_traiter_dist($id_auteur = null, $jeton = null) {
-	$res = array('message_ok' => '');
+	$res = ['message_ok' => ''];
 	refuser_traiter_formulaire_ajax(); // puisqu'on va loger l'auteur a la volee (c'est bonus)
 
 	// compatibilite anciens appels du formulaire
@@ -136,22 +137,21 @@ function formulaires_mot_de_passe_traiter_dist($id_auteur = null, $jeton = null)
 	) {
 		include_spip('action/editer_auteur');
 		include_spip('action/inscrire_auteur');
-		if ($err = auteur_modifier($id_auteur, array('pass' => $oubli))) {
-			$res = array('message_erreur' => $err);
+		if ($err = auteur_modifier($id_auteur, ['pass' => $oubli])) {
+			$res = ['message_erreur' => $err];
 		} else {
 			auteur_effacer_jeton($id_auteur);
 
 			// Par défaut, on rappelle de s'identifier avec son email s'il existe
 			// et qu'il n'est PAS utilisé par quelqu'un d'autre
 			if (
-				$row['email']
-				and !sql_fetsel(
+				$row['email'] && !sql_fetsel(
 					'id_auteur',
 					'spip_auteurs',
-					array(
+					[
 						'(email='.sql_quote($row['email']).' or login='.sql_quote($row['email']).')',
 						'id_auteur != '.$id_auteur
-					),
+					],
 					'', '', '0,1'
 				)
 			) {
@@ -162,7 +162,7 @@ function formulaires_mot_de_passe_traiter_dist($id_auteur = null, $jeton = null)
 				$identifiant = $row['login'];
 			}
 			$res['message_ok'] = '<b>' . _T('pass_nouveau_enregistre') . '</b>' .
-				'<br />' . _T('pass_rappel_login', array('login' => $identifiant));
+				'<br />' . _T('pass_rappel_login', ['login' => $identifiant]);
 
 			include_spip('inc/auth');
 			$auth = auth_identifier_login($row['login'], $oubli);

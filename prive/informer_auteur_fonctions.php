@@ -36,9 +36,9 @@ function informer_auteur($bof) {
 	include_spip('inc/json');
 	include_spip('formulaires/login');
 	include_spip('inc/auth');
-	$login = strval(_request('var_login'));
+	$login = (string) _request('var_login');
 	$row = auth_informer_login($login);
-	if ($row and is_array($row) and isset($row['id_auteur'])) {
+	if ($row && is_array($row) && isset($row['id_auteur'])) {
 		unset($row['id_auteur']);
 	}
 

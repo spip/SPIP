@@ -18,7 +18,7 @@ function lister_traductions($id_trad, $objet) {
 	$primary = id_table_objet($objet);
 
 	$select = "$primary as id,lang";
-	$where = 'id_trad=' . intval($id_trad);
+	$where = 'id_trad=' . (int) $id_trad;
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table($table_objet_sql);
 	if (isset($desc['field']['statut'])) {

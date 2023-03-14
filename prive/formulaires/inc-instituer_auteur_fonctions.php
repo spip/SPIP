@@ -33,8 +33,8 @@ function choisir_rubriques_admin_restreint(
 	$res = '';
 	// Ajouter une rubrique a un administrateur restreint
 	if (
-		$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc')
-		and $a = $chercher_rubrique(0, 'auteur', false)
+		($chercher_rubrique = charger_fonction('chercher_rubrique', 'inc'))
+		&& ($a = $chercher_rubrique(0, 'auteur', false))
 	) {
 		if ($img_remove) {
 			$img_remove = addslashes("<a href=\"#\" onclick=\"jQuery(this).parent().remove();return false;\" class=\"removelink\">$img_remove</a>");

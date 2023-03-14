@@ -49,14 +49,16 @@ function formulaires_inscription_charger_dist($mode = '', $options = [], $retour
 	}
 
 	// pas de formulaire si on a déjà une session avec un statut égal ou meilleur au mode
-	if (isset($GLOBALS['visiteur_session']['statut']) and ($GLOBALS['visiteur_session']['statut'] <= $mode)) {
+	if (isset($GLOBALS['visiteur_session']['statut']) && $GLOBALS['visiteur_session']['statut'] <= $mode) {
 		return false;
 	}
 
-
-	$valeurs = array('nom_inscription' => '', 'mail_inscription' => '', 'id' => $id, '_mode' => $mode);
-
-	return $valeurs;
+	return [
+		'nom_inscription' => '',
+		'mail_inscription' => '',
+		'id' => $id,
+		'_mode' => $mode
+	];
 }
 
 
@@ -71,14 +73,12 @@ function formulaires_inscription_charger_dist($mode = '', $options = [], $retour
 function formulaires_inscription_verifier_dist($mode = '', $options = [], $retour = '') {
 	set_request('_upgrade_auteur'); // securite
 	include_spip('inc/filtres');
-	$erreurs = array();
+	$erreurs = [];
 
 	$id = ($options['id'] ?? 0);
 
 	include_spip('inc/autoriser');
-	if (!autoriser('inscrireauteur', $mode, $id)
-		or (strlen(_request('nobot')) > 0)
-	) {
+	if (!autoriser('inscrireauteur', $mode, $id) || strlen(_request('nobot')) > 0) {
 		$erreurs['message_erreur'] = _T('pass_rien_a_faire_ici');
 	}
 
@@ -87,22 +87,18 @@ function formulaires_inscription_verifier_dist($mode = '', $options = [], $retou
 	} elseif (!nom_acceptable(_request('nom_inscription'))) {
 		$erreurs['nom_inscription'] = _T('ecrire:info_nom_pas_conforme');
 	}
-	if (!$mail = strval(_request('mail_inscription'))) {
+	if (!$mail = (string) _request('mail_inscription')) {
 		$erreurs['mail_inscription'] = _T('info_obligatoire');
 	}
 
 	// compatibilite avec anciennes fonction surchargeables
 	// plus de definition par defaut
-	if (!count($erreurs)) {
+	if ($erreurs === []) {
 		include_spip('action/inscrire_auteur');
-		if (function_exists('test_inscription')) {
-			$f = 'test_inscription';
-		} else {
-			$f = 'test_inscription_dist';
-		}
+		$f = function_exists('test_inscription') ? 'test_inscription' : 'test_inscription_dist';
 		$declaration = $f($mode, $mail, $nom, $options);
 		if (is_string($declaration)) {
-			$k = (strpos($declaration, 'mail') !== false) ?
+			$k = (str_contains($declaration, 'mail')) ?
 				'mail_inscription' : 'nom_inscription';
 			$erreurs[$k] = _T($declaration);
 		} else {
@@ -113,12 +109,12 @@ function formulaires_inscription_verifier_dist($mode = '', $options = [], $retou
 				'spip_auteurs',
 				'email=' . sql_quote($declaration['email'])
 			)) {
-				if (($row['statut'] == '5poubelle') and empty($declaration['pass'])) {
+				if ($row['statut'] == '5poubelle' && empty($declaration['pass'])) {
 					// irrecuperable
 					$erreurs['message_erreur'] = _T('form_forum_access_refuse');
 				} else {
-					if (($row['statut'] != 'nouveau') and empty($declaration['pass'])) {
-						if (intval($row['statut']) > intval($mode)) {
+					if ($row['statut'] != 'nouveau' && empty($declaration['pass'])) {
+						if ((int) $row['statut'] > (int) $mode) {
 							set_request('_upgrade_auteur', $row['id_auteur']);
 						} else {
 							// deja inscrit
@@ -138,7 +134,6 @@ function formulaires_inscription_verifier_dist($mode = '', $options = [], $retou
  * Si inscriptions pas autorisees, retourner une chaine d'avertissement
  *
  * @param string $mode
- * @param array $options
  * @param string $retour
  * @return array
  */
@@ -159,11 +154,11 @@ function formulaires_inscription_traiter_dist($mode = '', array $options = [], $
 			include_spip('action/editer_auteur');
 			autoriser_exception('modifier', 'auteur', $id_auteur);
 			autoriser_exception('instituer', 'auteur', $id_auteur);
-			auteur_modifier($id_auteur, array('statut' => $mode));
+			auteur_modifier($id_auteur, ['statut' => $mode]);
 			autoriser_exception('modifier', 'auteur', $id_auteur, false);
 			autoriser_exception('instituer', 'auteur', $id_auteur, false);
 
-			return array('message_ok' => _T('form_forum_email_deja_enregistre'), 'id_auteur' => $id_auteur);
+			return ['message_ok' => _T('form_forum_email_deja_enregistre'), 'id_auteur' => $id_auteur];
 		}
 
 		$nom = _request('nom_inscription');
@@ -175,13 +170,13 @@ function formulaires_inscription_traiter_dist($mode = '', array $options = [], $
 
 	// erreur ?
 	if (is_string($desc)) {
-		return array('message_erreur' => $desc);
+		return ['message_erreur' => $desc];
 	} // OK
 	else {
-		$retours = array(
+		$retours = [
 			'message_ok' => _T('form_forum_identifiant_mail'),
-			'id_auteur' => $desc['id_auteur'],
-		);
+			'id_auteur' => $desc['id_auteur']
+		];
 
 		// Si on demande à rediriger juste après validation du formulaire
 		if ($retour) {

@@ -64,7 +64,7 @@ function formulaires_editer_article_charger_dist(
 		$hidden
 	);
 
-	if (intval($id_article) and !autoriser('modifier', 'article', intval($id_article))) {
+	if ((int) $id_article && !autoriser('modifier', 'article', (int) $id_article)) {
 		$valeurs['editable'] = '';
 	}
 
@@ -101,7 +101,7 @@ function formulaires_editer_article_identifier_dist(
 	$row = [],
 	$hidden = ''
 ) {
-	return serialize([intval($id_article), $lier_trad]);
+	return serialize([(int) $id_article, $lier_trad]);
 }
 
 /**
@@ -112,14 +112,13 @@ function formulaires_editer_article_identifier_dist(
  * return array
  *     Configuration pour le formulaire
  */
-function articles_edit_config(array $row): array {
-
-	$config = [];
-	$config['lignes'] = 8;
-	$config['langue'] = $GLOBALS['spip_lang'];
-	$config['restreint'] = ($row['statut'] === 'publie');
-
-	return $config;
+function articles_edit_config(array $row) : array
+{
+    return [
+		'lignes' => 8,
+		'langue' => $GLOBALS['spip_lang'],
+		'restreint' => $row['statut'] === 'publie'
+	];
 }
 
 /**
@@ -155,7 +154,7 @@ function formulaires_editer_article_verifier_dist(
 ) {
 	// auto-renseigner le titre si il n'existe pas
 	titre_automatique('titre', ['descriptif', 'chapo', 'texte']);
-	if (!_request('id_parent') and !intval($id_article)) {
+	if (!_request('id_parent') && !(int) $id_article) {
 		$valeurs = formulaires_editer_objet_charger(
 			'article',
 			$id_article,
@@ -176,7 +175,7 @@ function formulaires_editer_article_verifier_dist(
 	}
 	if (
 		!isset($erreurs['id_parent'])
-		and !autoriser('creerarticledans', 'rubrique', _request('id_parent'))
+		&& !autoriser('creerarticledans', 'rubrique', _request('id_parent'))
 	) {
 		$erreurs['id_parent'] = _T('info_creerdansrubrique_non_autorise');
 	}

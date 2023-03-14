@@ -36,7 +36,7 @@ function formulaires_configurer_identite_verifier_dist() {
 		}
 	}
 
-	if ($email = _request('email_webmaster') and !email_valide($email)) {
+	if (($email = _request('email_webmaster')) && !email_valide($email)) {
 		$erreurs['email_webmaster'] = _T('info_email_invalide');
 	}
 
