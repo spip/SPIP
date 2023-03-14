@@ -41,11 +41,11 @@ function spip_livrer_fichier($fichier, $content_type = 'application/octet-stream
 		'range' => null,
 	];
 	$options = array_merge($defaut, $options);
-	if (is_numeric($options['expires']) and $options['expires'] > 0) {
+	if (is_numeric($options['expires']) && $options['expires'] > 0) {
 		$options['expires'] = gmdate('D, d M Y H:i:s', time() + $options['expires']) . ' GMT';
 	}
 
-	if (is_null($options) and isset($_SERVER['HTTP_RANGE'])) {
+	if (is_null($options) && isset($_SERVER['HTTP_RANGE'])) {
 		$options['range'] = $_SERVER['HTTP_RANGE'];
 	}
 
@@ -73,9 +73,7 @@ function spip_livrer_fichier_entetes($fichier, $content_type = 'application/octe
 	header('Accept-Ranges: bytes');
 	header('Content-Type: ' . $content_type);
 
-	if ($fs = stat($fichier)
-	  and !empty($fs['size'])
-	  and !empty($fs['mtime'])) {
+	if (($fs = stat($fichier)) && !empty($fs['size']) && !empty($fs['mtime'])) {
 		header("Last-Modified: " . gmdate("D, d M Y H:i:s", $fs['mtime']) . " GMT");
 		header(sprintf('Etag: "%x-%x"', $fs['size'], str_pad($fs['mtime'], 16, "0")));
 	}
@@ -146,7 +144,7 @@ function spip_livrer_fichier_partie($fichier, $range = null) {
 
 
 	// Parse Content-Range header for byte offsets, looks like "bytes=11525-" OR "bytes=11525-12451"
-	if ($range and preg_match('%bytes=(\d+)-(\d+)?%i', $range, $match)) {
+	if ($range && preg_match('%bytes=(\d+)-(\d+)?%i', $range, $match)) {
 		### Offset signifies where we should begin to read the file
 		$byteOffset = (int)$match[1];
 

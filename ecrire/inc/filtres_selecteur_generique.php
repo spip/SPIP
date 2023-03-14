@@ -67,12 +67,10 @@ function selecteur_lister_objets($includelist = [], $excludelist = []) {
 		}
 	}
 
-	$objets = [
+	return [
 		'selectionner' => array_unique($objets_selectionner),
 		'afficher' => array_unique($objets_afficher),
 	];
-
-	return $objets;
 }
 
 /**
@@ -102,21 +100,21 @@ function picker_selected($selected, $type = '') {
 	$select = [];
 	$type = preg_replace(',\W,', '', $type);
 
-	if ($selected and !is_array($selected)) {
+	if ($selected && !is_array($selected)) {
 		$selected = explode(',', $selected);
 	}
 
 	if (is_array($selected)) {
 		foreach ($selected as $value) {
 			// Si c'est le bon format déjà
-			if (preg_match('/^([\w]+)[|]([0-9]+)$/', $value, $captures)) {
+			if (preg_match('/^([\w]+)[|](\d+)$/', $value, $captures)) {
 				$objet = $captures[1];
-				$id_objet = intval($captures[2]);
+				$id_objet = (int) $captures[2];
 
 				// Si on cherche un type et que c'est le bon, on renvoit un tableau que d'identifiants
-				if (is_string($type) and $type == $objet and ($id_objet or in_array($objet, ['racine', 'rubrique']))) {
+				if (is_string($type) && $type == $objet && ($id_objet || in_array($objet, ['racine', 'rubrique']))) {
 					$select[] = $id_objet;
-				} elseif (!$type and ($id_objet or in_array($objet, ['racine', 'rubrique']))) {
+				} elseif (!$type && ($id_objet || in_array($objet, ['racine', 'rubrique']))) {
 					$select[] = ['objet' => $objet, 'id_objet' => $id_objet];
 				}
 			}
@@ -133,7 +131,7 @@ function picker_selected($selected, $type = '') {
  *
  * @param string|int $ref
  *     Référence de l'objet à chercher sous forme raccourcie rub123 art123 ou meme 123 si pas d'ambiguité ou si un article
- * @param mixed $rubriques_ou_objets
+ * @param array|bool $rubriques_ou_objets
  *     Soit un booléen (pouvant être une chaîne vide aussi) indiquant que les rubriques sont sélectionnables
  *     soit un tableau complet des objets sélectionnables.
  * @param bool $articles
@@ -145,7 +143,7 @@ function picker_identifie_id_rapide($ref, $rubriques_ou_objets = false, $article
 
 	// On construit un tableau des objets sélectionnables suivant les paramètres
 	$objets = [];
-	if ($rubriques_ou_objets and is_array($rubriques_ou_objets)) {
+	if ($rubriques_ou_objets && is_array($rubriques_ou_objets)) {
 		$objets = $rubriques_ou_objets;
 	} else {
 		if ($rubriques_ou_objets) {
@@ -157,10 +155,10 @@ function picker_identifie_id_rapide($ref, $rubriques_ou_objets = false, $article
 	}
 
 	// si id numerique et un seul objet possible, pas d'ambiguite
-	if (is_numeric($ref) and count($objets) === 1) {
+	if (is_numeric($ref) && count($objets) === 1) {
 		$type = reset($objets);
 		$type = objet_type($type);
-		$id = intval($ref);
+		$id = (int) $ref;
 		$ref = $type . $ref;
 	}
 	else {
@@ -215,26 +213,26 @@ function test_enfants_rubrique($id_rubrique, $types = []) {
 		$types = (is_array($types) ? array_filter($types) : []);
 
 		// recuperer tous les freres et soeurs de la rubrique visee
-		$id_parent = sql_getfetsel('id_parent', 'spip_rubriques', 'id_rubrique=' . intval($id_rubrique));
-		$fratrie = sql_allfetsel('id_rubrique', 'spip_rubriques', 'id_parent=' . intval($id_parent));
+		$id_parent = sql_getfetsel('id_parent', 'spip_rubriques', 'id_rubrique=' . (int) $id_rubrique);
+		$fratrie = sql_allfetsel('id_rubrique', 'spip_rubriques', 'id_parent=' . (int) $id_parent);
 		$fratrie = array_column($fratrie, 'id_rubrique');
 		$has = sql_allfetsel('DISTINCT id_parent', 'spip_rubriques', sql_in('id_parent', $fratrie));
 		$has = array_column($has, 'id_parent');
 		$fratrie = array_diff($fratrie, $has);
 
-		while (count($fratrie) and is_array($types) and count($types)) {
+		while (count($fratrie) && is_array($types) && count($types)) {
 			$type = array_shift($types);
 			$h = sql_allfetsel('DISTINCT id_rubrique', table_objet_sql($type), sql_in('id_rubrique', $fratrie));
 			$h = array_column($h, 'id_rubrique');
-			$has = array_merge($has, $h);
+			$has = [...$has, ...$h];
 			$fratrie = array_diff($fratrie, $h);
 		}
 
-		if (count($has)) {
-			$has_child = $has_child + array_combine($has, array_pad([], count($has), true));
+		if ($has !== []) {
+			$has_child += array_combine($has, array_pad([], count($has), true));
 		}
-		if (count($fratrie)) {
-			$has_child = $has_child + array_combine($fratrie, array_pad([], count($fratrie), false));
+		if ($fratrie !== []) {
+			$has_child += array_combine($fratrie, array_pad([], count($fratrie), false));
 		}
 	}
 

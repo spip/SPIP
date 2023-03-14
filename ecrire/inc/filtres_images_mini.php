@@ -257,9 +257,7 @@ function couleur_foncer($couleur, $coeff = 0.5) {
 	$green = $couleurs['green'] - round(($couleurs['green']) * $coeff);
 	$blue = $couleurs['blue'] - round(($couleurs['blue']) * $coeff);
 
-	$couleur = _couleur_dec_to_hex($red, $green, $blue);
-
-	return $couleur;
+	return _couleur_dec_to_hex($red, $green, $blue);
 }
 
 /**
@@ -281,9 +279,7 @@ function couleur_eclaircir($couleur, $coeff = 0.5) {
 	$green = $couleurs['green'] + round((255 - $couleurs['green']) * $coeff);
 	$blue = $couleurs['blue'] + round((255 - $couleurs['blue']) * $coeff);
 
-	$couleur = _couleur_dec_to_hex($red, $green, $blue);
-
-	return $couleur;
+	return _couleur_dec_to_hex($red, $green, $blue);
 }
 
 /**
@@ -311,17 +307,17 @@ function image_select($img, $width_min = 0, $height_min = 0, $width_max = 10000,
 	}
 	[$h, $l] = taille_image($img);
 	$select = true;
-	if ($l < $width_min or $l > $width_max or $h < $height_min or $h > $height_max) {
+	if ($l < $width_min || $l > $width_max || $h < $height_min || $h > $height_max) {
 		$select = false;
 	}
 
 	$class = extraire_attribut($img, 'class');
 	$p = strpos($class, 'filtre_inactif');
-	if (($select == false) and ($p === false)) {
+	if ($select == false && $p === false) {
 		$class .= ' filtre_inactif';
 		$img = inserer_attribut($img, 'class', $class);
 	}
-	if (($select == true) and ($p !== false)) {
+	if ($select == true && $p !== false) {
 		// no_image_filtrer : historique, a virer
 		$class = preg_replace(',\s*(filtre_inactif|no_image_filtrer),', '', $class);
 		$img = inserer_attribut($img, 'class', $class);
@@ -400,13 +396,13 @@ function image_passe_partout(
 		$taille_y = $taille_x;
 	}
 
-	if ($taille_x === 0 and $taille_y > 0) {
+	if ($taille_x === 0 && $taille_y > 0) {
 		$taille_x = 1;
 	} # {0,300} -> c'est 300 qui compte
-	elseif ($taille_x > 0 and $taille_y === 0) {
+	elseif ($taille_x > 0 && $taille_y === 0) {
 		$taille_y = 1;
 	} # {300,0} -> c'est 300 qui compte
-	elseif ($taille_x == 0 and $taille_y === 0) {
+	elseif ($taille_x == 0 && $taille_y === 0) {
 		return '';
 	}
 
@@ -473,21 +469,21 @@ function image_reduire(
 	// Determiner la taille x,y maxi
 	// prendre le reglage de previsu par defaut
 	if ($taille === -1) {
-		$taille = (isset($GLOBALS['meta']['taille_preview']) and intval($GLOBALS['meta']['taille_preview']))
-			? intval($GLOBALS['meta']['taille_preview'])
+		$taille = (isset($GLOBALS['meta']['taille_preview']) && (int) $GLOBALS['meta']['taille_preview'])
+			? (int) $GLOBALS['meta']['taille_preview']
 			: 150;
 	}
 	if ($taille_y === -1) {
 		$taille_y = $taille;
 	}
 
-	if ($taille === 0 and $taille_y > 0) {
+	if ($taille === 0 && $taille_y > 0) {
 		$taille = 10000;
 	} # {0,300} -> c'est 300 qui compte
-	elseif ($taille > 0 and $taille_y === 0) {
+	elseif ($taille > 0 && $taille_y === 0) {
 		$taille_y = 10000;
 	} # {300,0} -> c'est 300 qui compte
-	elseif ($taille == 0 and $taille_y === 0) {
+	elseif ($taille == 0 && $taille_y === 0) {
 		return '';
 	}
 
@@ -547,9 +543,7 @@ function image_reduire_par($img, $val = 1, $force = false) {
 		$l = 0;
 	}
 
-	$img = image_reduire($img, $l, $h, $force);
-
-	return $img;
+	return image_reduire($img, $l, $h, $force);
 }
 
 /**

@@ -18,7 +18,7 @@ function inc_log_dist($message, $logname = null, $logdir = null, $logsuf = null)
 	static $compteur = [];
 	static $debugverb = ''; // pour ne pas le recalculer au reappel
 
-	if (is_null($logname) or !is_string($logname)) {
+	if (is_null($logname) || !is_string($logname)) {
 		$logname = defined('_FILE_LOG') ? _FILE_LOG : 'spip';
 	}
 	if (!isset($compteur[$logname])) {
@@ -26,12 +26,8 @@ function inc_log_dist($message, $logname = null, $logdir = null, $logsuf = null)
 	}
 	if (
 		$logname != 'maj'
-		and defined('_MAX_LOG')
-		and (
-			$compteur[$logname]++ > _MAX_LOG
-			or !$GLOBALS['nombre_de_logs']
-			or !$GLOBALS['taille_des_logs']
-		)
+		&& defined('_MAX_LOG')
+		&& ($compteur[$logname]++ > _MAX_LOG || !$GLOBALS['nombre_de_logs'] || !$GLOBALS['taille_des_logs'])
 	) {
 		return;
 	}
@@ -65,11 +61,11 @@ function inc_log_dist($message, $logname = null, $logdir = null, $logsuf = null)
 		$message = var_export($message, true);
 	}
 
-	if (!$debugverb and defined('_LOG_FILELINE') and _LOG_FILELINE) {
+	if (!$debugverb && defined('_LOG_FILELINE') && _LOG_FILELINE) {
 		$debug = debug_backtrace();
 		$l = $debug[1]['line'];
 		$fi = $debug[1]['file'];
-		if (strncmp($fi, _ROOT_RACINE, strlen(_ROOT_RACINE)) == 0) {
+		if (str_starts_with($fi, _ROOT_RACINE)) {
 			$fi = substr($fi, strlen(_ROOT_RACINE));
 		}
 		$fu = $debug[2]['function'] ?? '';
@@ -85,7 +81,7 @@ function inc_log_dist($message, $logname = null, $logdir = null, $logsuf = null)
 
 	if (
 		@is_readable($logfile)
-		and (!$s = @filesize($logfile) or $s > $GLOBALS['taille_des_logs'] * 1024)
+		&& ((!$s = @filesize($logfile)) || $s > $GLOBALS['taille_des_logs'] * 1024)
 	) {
 		$rotate = $GLOBALS['nombre_de_logs'];
 		$m .= "[-- rotate --]\n";
@@ -93,13 +89,12 @@ function inc_log_dist($message, $logname = null, $logdir = null, $logsuf = null)
 
 	$f = @fopen($logfile, 'ab');
 	if ($f) {
-		fputs($f, (defined('_LOG_BRUT') and _LOG_BRUT) ? $m : str_replace('<', '&lt;', $m));
+		fwrite($f, (defined('_LOG_BRUT') && _LOG_BRUT) ? $m : str_replace('<', '&lt;', $m));
 		fclose($f);
 	}
 
 	if (
-		$rotate-- > 0
-		and function_exists('spip_unlink')
+		$rotate-- > 0 && function_exists('spip_unlink')
 	) {
 		spip_unlink($logfile . '.' . $rotate);
 		while ($rotate--) {
@@ -108,10 +103,7 @@ function inc_log_dist($message, $logname = null, $logdir = null, $logsuf = null)
 	}
 
 	// Dupliquer les erreurs specifiques dans le log general
-	if (
-		defined('_FILE_LOG')
-		and ($logname !== _FILE_LOG)
-	) {
+	if (defined('_FILE_LOG') && $logname !== _FILE_LOG) {
 		inc_log_dist($logname == 'maj' ? 'cf maj.log' : $message);
 	}
 	$debugverb = '';

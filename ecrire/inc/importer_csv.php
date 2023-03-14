@@ -33,7 +33,7 @@ include_spip('inc/charsets');
  * Importe un texte de CSV dans un charset et le passe dans le charset du site (utf8 probablement)
  * Les CSV peuvent sous ms@@@ avoir le charset 'iso-8859-1', mais pasfois aussi 'windows-1252' :/
  *
- * @param mixed $texte
+ * @param string $texte
  * @param bool|string $definir_charset_source
  *     false : ne fait rien
  *     string : utilisera pour les prochains imports le charset indiqué
@@ -44,18 +44,10 @@ function importer_csv_importcharset($texte, $definir_charset_source = false) {
 	// le plus frequent, en particulier avec les trucs de ms@@@
 	static $charset_source = 'iso-8859-1';
 	if ($definir_charset_source) {
-		if ($definir_charset_source === true) {
-			$charset_source = 'iso-8859-1';
-		} else {
-			$charset_source = $definir_charset_source;
-		}
+		$charset_source = $definir_charset_source === true ? 'iso-8859-1' : $definir_charset_source;
 	}
 	// mais open-office sait faire mieux, donc mefiance !
-	if (is_utf8($texte)) {
-		$charset = 'utf-8';
-	} else {
-		$charset = $charset_source;
-	}
+	$charset = is_utf8($texte) ? 'utf-8' : $charset_source;
 	return importer_charset($texte, $charset);
 }
 
@@ -108,11 +100,8 @@ function inc_importer_csv_dist($file, $options = []) {
 	$options = array_merge($default_options, $options);
 
 
-	$return = false;
-	if (
-		@file_exists($file)
-		and $handle = fopen($file, 'r')
-	) {
+	$return = [];
+	if (@file_exists($file) && ($handle = fopen($file, 'r'))) {
 		if ($options['charset_source']) {
 			importer_csv_importcharset('', $options['charset_source']);
 		}
@@ -123,25 +112,21 @@ function inc_importer_csv_dist($file, $options = []) {
 				$header = array_map('importer_csv_nettoie_key', $header);
 				$header_type = [];
 				foreach ($header as $heading) {
-					if (!isset($header_type[$heading])) {
-						$header_type[$heading] = 'scalar';
-					} else {
-						$header_type[$heading] = 'array';
-					}
+					$header_type[$heading] = isset($header_type[$heading]) ? 'array' : 'scalar';
 				}
 			}
 		}
 
 		while (($data = fgetcsv($handle, $options['len'], $options['delim'], $options['enclos'])) !== false) {
 			$data = array_map('importer_csv_importcharset', $data);
-			if ($options['head'] and isset($header)) {
+			if ($options['head'] && isset($header)) {
 				$row = [];
 				foreach ($header as $key => $heading) {
 					if ($header_type[$heading] == 'array') {
 						if (!isset($row[$heading])) {
 							$row[$heading] = [];
 						}
-						if (isset($data[$key]) and strlen($data[$key])) {
+						if (isset($data[$key]) && strlen($data[$key])) {
 							$row[$heading][] = $data[$key];
 						}
 					} else {
@@ -158,5 +143,5 @@ function inc_importer_csv_dist($file, $options = []) {
 		}
 	}
 
-	return $return;
+	return $return ?: false;
 }

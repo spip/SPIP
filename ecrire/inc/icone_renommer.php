@@ -19,14 +19,14 @@ include_spip('base/objets');
 function inc_icone_renommer_dist($fond, $fonction) {
 	$size = 24;
 	if (
-		preg_match('/(?:-([0-9]{1,3}))?([.](gif|png|svg))?$/i', $fond, $match)
-		and ((isset($match[0]) and $match[0]) or (isset($match[1]) and $match[1]))
+		preg_match('/(?:-(\d{1,3}))?([.](gif|png|svg))?$/i', $fond, $match)
+		&& (isset($match[0]) && $match[0] || isset($match[1]) && $match[1])
 	) {
-		if (isset($match[1]) and $match[1]) {
+		if (isset($match[1]) && $match[1]) {
 			$size = $match[1];
 		}
 		$type = substr($fond, 0, -strlen($match[0]));
-		if (!isset($match[2]) or !$match[2]) {
+		if (!isset($match[2]) || !$match[2]) {
 			$fond .= '.png';
 		}
 	} else {
@@ -52,8 +52,8 @@ function inc_icone_renommer_dist($fond, $fonction) {
 
 		if (
 			$rtl
-			and $fr = $dir . '/' . str_replace("$type-", "$type-rtl-", basename($icone))
-			and file_exists($fr)
+			&& ($fr = $dir . '/' . str_replace("$type-", "$type-rtl-", basename($icone)))
+			&& file_exists($fr)
 		) {
 			$fond = $fr;
 		}

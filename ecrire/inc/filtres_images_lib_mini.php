@@ -137,23 +137,19 @@ function _couleur_rgb_to_hsl($R, $G, $B) {
 		$S = 0;
 	} else {
 		// Chromatic data...
-		if ($L < 0.5) {
-			$S = $del_Max / ($var_Max + $var_Min);
-		} else {
-			$S = $del_Max / (2 - $var_Max - $var_Min);
-		}
+		$S = $L < 0.5 ? $del_Max / ($var_Max + $var_Min) : $del_Max / (2 - $var_Max - $var_Min);
 
 		$del_R = ((($var_Max - $var_R) / 6) + ($del_Max / 2)) / $del_Max;
 		$del_G = ((($var_Max - $var_G) / 6) + ($del_Max / 2)) / $del_Max;
 		$del_B = ((($var_Max - $var_B) / 6) + ($del_Max / 2)) / $del_Max;
 
-		if ($var_R == $var_Max) {
+		if ($var_R === $var_Max) {
 			$H = $del_B - $del_G;
 		} else {
-			if ($var_G == $var_Max) {
+			if ($var_G === $var_Max) {
 				$H = (1 / 3) + $del_R - $del_B;
 			} else {
-				if ($var_B == $var_Max) {
+				if ($var_B === $var_Max) {
 					$H = (2 / 3) + $del_G - $del_R;
 				}
 			}
@@ -215,11 +211,7 @@ function _couleur_hsl_to_rgb($H, $S, $L) {
 		$G = $L * 255;
 		$B = $L * 255;
 	} else {
-		if ($L < 0.5) {
-			$var_2 = $L * (1 + $S);
-		} else {
-			$var_2 = ($L + $S) - ($S * $L);
-		}
+		$var_2 = $L < 0.5 ? $L * (1 + $S) : ($L + $S) - ($S * $L);
 
 		$var_1 = 2 * $L - $var_2;
 
@@ -255,7 +247,7 @@ function statut_effacer_images_temporaires($stat) {
 	if ($stat === 'get') {
 		return $statut;
 	}
-	$statut = $stat ? true : false;
+	$statut = (bool) $stat;
 }
 
 
@@ -308,7 +300,8 @@ function statut_effacer_images_temporaires($stat) {
  *     - array : tableau décrivant de l'image
  */
 function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_creation = null, $find_in_path = false, $support_svg = false) {
-	$ret = [];
+	$valeurs = [];
+ $ret = [];
 	$f = null;
 	static $images_recalcul = [];
 	if (strlen($img) == 0) {
@@ -317,18 +310,17 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 
 	$source = trim(extraire_attribut($img, 'src') ?? '');
 	if (strlen($source) < 1) {
-		if (strpos($img, '<img ') !== 0) {
+		if (!str_starts_with($img, '<img ')) {
 			$source = $img;
 			$img = "<img src='$source' />";
-		}
-		else {
+		} else {
 			// pas d'attribut src sur cette balise <img../>
 			return false;
 		}
 	} elseif (
 		preg_match('@^data:image/([^;]*);base64,(.*)$@isS', $source, $regs)
-		and $extension = _image_trouver_extension_depuis_mime('image/' . $regs[1])
-		and in_array($extension, _image_extensions_acceptees_en_entree())
+		&& ($extension = _image_trouver_extension_depuis_mime('image/' . $regs[1]))
+		&& in_array($extension, _image_extensions_acceptees_en_entree())
 	) {
 		# gerer img src="data:....base64"
 		$local = sous_repertoire(_DIR_VAR, 'image-data') . md5($regs[2]) . '.' . _image_extension_normalisee($extension);
@@ -353,20 +345,20 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 			return '';
 		}
 		if (
-			$extension = _image_trouver_extension($fichier)
-			and $sanitizer = charger_fonction($extension, 'sanitizer', true)
+			($extension = _image_trouver_extension($fichier))
+			&& ($sanitizer = charger_fonction($extension, 'sanitizer', true))
 		) {
 			$sanitizer($fichier);
 		}
 	} else {
 		// enlever le timestamp eventuel
-		if (strpos($source, '?') !== false) {
-			$source = preg_replace(',[?][0-9]+$,', '', $source);
+		if (str_contains($source, '?')) {
+			$source = preg_replace(',[?]\d+$,', '', $source);
 		}
 		if (
-			strpos($source, '?') !== false
-			and strncmp($source, _DIR_IMG, strlen(_DIR_IMG)) == 0
-			and file_exists($f = preg_replace(',[?].*$,', '', $source))
+			str_contains($source, '?')
+			&& str_starts_with($source, _DIR_IMG)
+			&& file_exists($f = preg_replace(',[?].*$,', '', $source))
 		) {
 			$source = $f;
 		}
@@ -380,8 +372,7 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 
 	if (
 		$forcer_format !== false
-		// ignorer forcer_format si on a une image svg, que le filtre appelant ne supporte pas SVG, et que le forcage est un autre format image
-		and ($terminaison_dest !== 'svg' or $support_svg or !in_array($forcer_format, _image_extensions_acceptees_en_sortie()))
+		&& ($terminaison_dest !== 'svg' || $support_svg || !in_array($forcer_format, _image_extensions_acceptees_en_sortie()))
 	) {
 		$terminaison_dest = $forcer_format;
 	}
@@ -393,8 +384,8 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 	$nom_fichier = substr($fichier, 0, strlen($fichier) - (strlen($terminaison) + 1));
 	$fichier_dest = $nom_fichier;
 	if (
-		($find_in_path and $f = find_in_path($fichier) and $fichier = $f)
-		or @file_exists($f = $fichier)
+		$find_in_path && ($f = find_in_path($fichier)) && ($fichier = $f)
+		|| @file_exists($f = $fichier)
 	) {
 		// on ne passe jamais la balise img qui est peut-être en x2 et à laquelle on ne peut pas faire confiance
 		// on lit directement les infos du fichier
@@ -402,10 +393,10 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 		$date_src = @filemtime($f);
 	} elseif (
 		@file_exists($f = "$fichier.src")
-		and lire_fichier($f, $valeurs)
-		and $valeurs = unserialize($valeurs)
-		and isset($valeurs['hauteur_dest'])
-		and isset($valeurs['largeur_dest'])
+		&& lire_fichier($f, $valeurs)
+		&& ($valeurs = unserialize($valeurs))
+		&& isset($valeurs['hauteur_dest'])
+		&& isset($valeurs['largeur_dest'])
 	) {
 		$ret['hauteur'] = $valeurs['hauteur_dest'];
 		$ret['largeur'] = $valeurs['largeur_dest'];
@@ -416,10 +407,11 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 	}
 
 	// pas de taille mesurable ?
-	if (!$ret['hauteur']
-		or !($ret['hauteur'] = intval(round($ret['hauteur'])))
-		or !$ret['largeur']
-		or !($ret['largeur'] = intval(round($ret['largeur'])))
+	if (
+		!$ret['hauteur']
+		|| !($ret['hauteur'] = (int) round($ret['hauteur']))
+		|| !$ret['largeur']
+		|| !($ret['largeur'] = (int) round($ret['largeur']))
 	) {
 		return false;
 	}
@@ -438,7 +430,7 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 	// cas particulier de reduire :
 	// un cache par dimension, et le nom de fichier est conserve, suffixe par la dimension aussi
 	$cache = 'cache-gd2';
-	if (substr($effet, 0, 7) == 'reduire') {
+	if (str_starts_with($effet, 'reduire')) {
 		[, $maxWidth, $maxHeight] = explode('-', $effet);
 		[$destWidth, $destHeight] = _image_ratio($ret['largeur'], $ret['hauteur'], $maxWidth, $maxHeight);
 		$ret['largeur_dest'] = $destWidth;
@@ -469,7 +461,7 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 
 	$creer = true;
 	// si recalcul des images demande, recalculer chaque image une fois
-	if (defined('_VAR_IMAGES') and _VAR_IMAGES and !isset($images_recalcul[$fichier_dest])) {
+	if (defined('_VAR_IMAGES') && _VAR_IMAGES && !isset($images_recalcul[$fichier_dest])) {
 		$images_recalcul[$fichier_dest] = true;
 	} else {
 		if (@file_exists($f = $fichier_dest)) {
@@ -479,25 +471,23 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 		} else {
 			if (
 				@file_exists($f = "$fichier_dest.src")
-				and lire_fichier($f, $valeurs)
-				and $valeurs = unserialize($valeurs)
-				and $valeurs['date'] >= $date_src
+				&& lire_fichier($f, $valeurs)
+				&& ($valeurs = unserialize($valeurs))
+				&& $valeurs['date'] >= $date_src
 			) {
 				$creer = false;
 			}
 		}
 	}
-	if ($creer) {
-		if (!@file_exists($fichier)) {
-			if (!@file_exists("$fichier.src")) {
-				spip_log("Image absente : $fichier", 'images' . _LOG_ERREUR);
+	if ($creer && !@file_exists($fichier)) {
+     if (!@file_exists("$fichier.src")) {
+  				spip_log("Image absente : $fichier", 'images' . _LOG_ERREUR);
 
-				return false;
-			}
-			# on reconstruit l'image source absente a partir de la chaine des .src
-			reconstruire_image_intermediaire($fichier);
-		}
-	}
+  				return false;
+  			}
+     # on reconstruit l'image source absente a partir de la chaine des .src
+     reconstruire_image_intermediaire($fichier);
+ }
 
 	if ($creer) {
 		spip_log(
@@ -543,7 +533,7 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 
 	// traiter le cas particulier des SVG : si le filtre n'a pas annonce explicitement qu'il savait faire, on delegue
 	if ($term_fonction === 'svg') {
-		if ($creer and !$support_svg) {
+		if ($creer && !$support_svg) {
 			process_image_svg_identite($ret);
 			$ret['creer'] = false;
 		}
@@ -590,10 +580,10 @@ function _image_extensions_acceptees_en_sortie() {
 	if (empty($extensions)) {
 		$extensions = _image_extensions_acceptees_en_entree();
 		$extensions = array_diff($extensions, ['jpeg']);
-		if (in_array('gif', $extensions) and !function_exists('imagegif')) {
+		if (in_array('gif', $extensions) && !function_exists('imagegif')) {
 			$extensions = array_diff($extensions, ['gif']);
 		}
-		if (in_array('webp', $extensions) and !function_exists('imagewebp')) {
+		if (in_array('webp', $extensions) && !function_exists('imagewebp')) {
 			$extensions = array_diff($extensions, ['webp']);
 		}
 	}
@@ -622,8 +612,7 @@ function _image_extensions_conservent_transparence() {
 function _image_trouver_extension($path) {
 	$preg_extensions = implode('|', _image_extensions_acceptees_en_entree());
 	if (preg_match(",\.($preg_extensions)($|[?]),i", $path, $regs)) {
-		$terminaison = strtolower($regs[1]);
-		return $terminaison;
+		return strtolower($regs[1]);
 	}
 	return '';
 }
@@ -650,15 +639,10 @@ function _image_trouver_extension_pertinente($path) {
 		return $terminaison;
 	}
 
-	if (isset($info['mime'])) {
-		$mime = $info['mime'];
-	}
-	else {
-		$mime = image_type_to_mime_type($info[2]);
-	}
+	$mime = $info['mime'] ?? image_type_to_mime_type($info[2]);
 
 	$_terminaison = _image_trouver_extension_depuis_mime($mime);
-	if ($_terminaison and $_terminaison !== $terminaison) {
+	if ($_terminaison && $_terminaison !== $terminaison) {
 		spip_log("Mauvaise extension du fichier : $path . Son type mime est : $mime", 'images.' . _LOG_INFO_IMPORTANTE);
 		$terminaison = $_terminaison;
 	}
@@ -670,36 +654,14 @@ function _image_trouver_extension_pertinente($path) {
  * @return string
  */
 function _image_trouver_extension_depuis_mime($mime) {
-	switch (strtolower($mime)) {
-		case 'image/png':
-		case 'image/x-png':
-			$terminaison = 'png';
-			break;
-
-		case 'image/jpg':
-		case 'image/jpeg':
-		case 'image/pjpeg':
-			$terminaison = 'jpeg';
-			break;
-
-		case 'image/gif':
-			$terminaison = 'gif';
-			break;
-
-		case 'image/webp':
-		case 'image/x-webp':
-			$terminaison = 'webp';
-			break;
-
-		case 'image/svg+xml':
-			$terminaison = 'svg';
-			break;
-
-		default:
-			$terminaison = '';
-	}
-
-	return $terminaison;
+	return match (strtolower($mime)) {
+     'image/png', 'image/x-png' => 'png',
+     'image/jpg', 'image/jpeg', 'image/pjpeg' => 'jpeg',
+     'image/gif' => 'gif',
+     'image/webp', 'image/x-webp' => 'webp',
+     'image/svg+xml' => 'svg',
+     default => '',
+ };
 }
 
 
@@ -987,13 +949,13 @@ function _image_imagewebp($img, $fichier, $qualite = _IMG_GD_QUALITE) {
 function _image_imagesvg($img, $fichier) {
 
 	$tmp = $fichier . '.tmp';
-	if (strpos($img, '<') === false) {
+	if (!str_contains($img, '<')) {
 		$img = supprimer_timestamp($img);
 		if (!file_exists($img)) {
 			return false;
 		}
 		@copy($img, $tmp);
-		if (filesize($tmp) == filesize($img)) {
+		if (filesize($tmp) === filesize($img)) {
 			spip_unlink($fichier); // le fichier peut deja exister
 			@rename($tmp, $fichier);
 			return true;
@@ -1048,22 +1010,20 @@ function _image_gd_output($img, $valeurs, $qualite = _IMG_GD_QUALITE, $fonction 
 	$ret = false;
 	#un flag pour reperer les images gravees
 	$lock = (
-		!statut_effacer_images_temporaires('get') // si la fonction n'a pas ete activee, on grave tout
-		or (@file_exists($valeurs['fichier_dest']) and !@file_exists($valeurs['fichier_dest'] . '.src'))
+		!statut_effacer_images_temporaires('get')
+		|| @file_exists($valeurs['fichier_dest'])
+		&& !@file_exists($valeurs['fichier_dest'] . '.src')
 	);
-	if (
-		function_exists($fonction)
+	if (function_exists($fonction)
 		&& ($ret = $fonction($img, $valeurs['fichier_dest'], $qualite)) # on a reussi a creer l'image
 		&& isset($valeurs['reconstruction']) # et on sait comment la resonctruire le cas echeant
-		&& !$lock
-	) {
-		if (@file_exists($valeurs['fichier_dest'])) {
-			// dans tous les cas mettre a jour la taille de l'image finale
-			[$valeurs['hauteur_dest'], $valeurs['largeur_dest']] = taille_image($valeurs['fichier_dest']);
-			$valeurs['date'] = @filemtime($valeurs['fichier_dest']); // pour la retrouver apres disparition
-			ecrire_fichier($valeurs['fichier_dest'] . '.src', serialize($valeurs), true);
-		}
-	}
+		&& !$lock && @file_exists($valeurs['fichier_dest'])) {
+     // dans tous les cas mettre a jour la taille de l'image finale
+     [$valeurs['hauteur_dest'], $valeurs['largeur_dest']] = taille_image($valeurs['fichier_dest']);
+     $valeurs['date'] = @filemtime($valeurs['fichier_dest']);
+     // pour la retrouver apres disparition
+     ecrire_fichier($valeurs['fichier_dest'] . '.src', serialize($valeurs), true);
+ }
 
 	return $ret;
 }
@@ -1078,14 +1038,15 @@ function _image_gd_output($img, $valeurs, $qualite = _IMG_GD_QUALITE, $fonction 
  *     Chemin vers le fichier manquant
  **/
 function reconstruire_image_intermediaire($fichier_manquant) {
-	$reconstruire = [];
+	$source = null;
+ $reconstruire = [];
 	$fichier = $fichier_manquant;
 	while (
-		strpos($fichier, '://') === false
-		and !@file_exists($fichier)
-		and lire_fichier($src = "$fichier.src", $source)
-		and $valeurs = unserialize($source)
-		and ($fichier = $valeurs['fichier']) # l'origine est connue (on ne verifie pas son existence, qu'importe ...)
+		!str_contains($fichier, '://')
+		&& !@file_exists($fichier)
+		&& lire_fichier($src = "$fichier.src", $source)
+		&& ($valeurs = unserialize($source))
+		&& ($fichier = $valeurs['fichier']) # l'origine est connue (on ne verifie pas son existence, qu'importe ...)
 	) {
 		spip_unlink($src); // si jamais on a un timeout pendant la reconstruction, elle se fera naturellement au hit suivant
 		$reconstruire[] = $valeurs['reconstruction'];
@@ -1118,22 +1079,23 @@ function reconstruire_image_intermediaire($fichier_manquant) {
  *     Chemin du fichier d'image calculé
  **/
 function ramasse_miettes($fichier) {
-	if (
-		strpos($fichier, '://') !== false
-		or !lire_fichier($src = "$fichier.src", $source)
-		or !$valeurs = unserialize($source)
+	$source = null;
+ if (
+		str_contains($fichier, '://')
+		|| !lire_fichier($src = "$fichier.src", $source)
+		|| !$valeurs = unserialize($source)
 	) {
 		return;
 	}
 	spip_unlink($src); # on supprime la reference a sa source pour marquer cette image comme non intermediaire
 	while (
-		($fichier = $valeurs['fichier']) # l'origine est connue (on ne verifie pas son existence, qu'importe ...)
-		and (substr($fichier, 0, strlen(_DIR_VAR)) == _DIR_VAR) # et est dans local
-		and (lire_fichier(
+		($fichier = $valeurs['fichier'])
+		&& str_starts_with($fichier, _DIR_VAR)
+		&& lire_fichier(
 			$src = "$fichier.src",
 			$source
-		)) # le fichier a une source connue (c'est donc une image calculee intermediaire)
-		and ($valeurs = unserialize($source))  # et valide
+		)
+		&& ($valeurs = unserialize($source))  # et valide
 	) {
 		# on efface le fichier
 		spip_unlink($fichier);
@@ -1172,21 +1134,19 @@ function image_graver($img) {
 	if (($p = strpos($fichier, '?')) !== false) {
 		$fichier = substr($fichier, 0, $p);
 	}
-	if (strlen($fichier) < 1) {
-		if (strpos($img, '<img ') !== 0) {
-			$fichier = $img;
-		}
+	if (strlen($fichier) < 1 && !str_starts_with($img, '<img ')) {
+		$fichier = $img;
 	}
 	if (strlen($fichier)) {
 		# si jamais le fichier final n'a pas ete calcule car suppose temporaire
 		# et qu'il ne s'agit pas d'une URL
-		if (strpos($fichier, '://') === false and !@file_exists($fichier)) {
+		if (!str_contains($fichier, '://') && !@file_exists($fichier)) {
 			reconstruire_image_intermediaire($fichier);
 		}
 		ramasse_miettes($fichier);
 
 		// ajouter le timestamp si besoin
-		if (strpos($fichier_ori, '?') === false) {
+		if (!str_contains($fichier_ori, '?')) {
 			// on utilise str_replace pour attraper le onmouseover des logo si besoin
 			$img = str_replace($fichier_ori, timestamp($fichier_ori), $img);
 		}
@@ -1227,7 +1187,7 @@ function _image_tag_changer_taille($tag, $width, $height, $style = false) {
 	if ($style) {
 		$style = preg_replace(',(^|;)\s*(width|height)\s*:\s*[^;]+,ims', '', $style);
 	}
-	if ($style and $style[0] === ';') {
+	if ($style && $style[0] === ';') {
 		$style = substr($style, 1);
 	}
 
@@ -1244,9 +1204,7 @@ function _image_tag_changer_taille($tag, $width, $height, $style = false) {
 		$tag = inserer_attribut($tag, 'hspace', '');
 	}
 
-	$tag = inserer_attribut($tag, 'style', (string) $style, true, $style ? false : true);
-
-	return $tag;
+	return inserer_attribut($tag, 'style', (string) $style, true, !(bool) $style);
 }
 
 
@@ -1304,7 +1262,7 @@ function _image_ecrire_tag($valeurs, $surcharge = []) {
 		$tag = str_replace($src, $surcharge['src'], $tag);
 		// si il y a des & dans src, alors ils peuvent provenir d'un &amp
 		// pas garanti comme methode, mais mieux que rien
-		if (strpos($src, '&') !== false) {
+		if (str_contains($src, '&')) {
 			$tag = str_replace(str_replace('&', '&amp;', $src), $surcharge['src'], $tag);
 		}
 		$src = $surcharge['src'];
@@ -1320,13 +1278,13 @@ function _image_ecrire_tag($valeurs, $surcharge = []) {
 		$tag = inserer_attribut($tag, 'class', $class);
 	}
 
-	if (count($surcharge)) {
+	if ($surcharge !== []) {
 		foreach ($surcharge as $attribut => $valeur) {
 			$tag = inserer_attribut($tag, $attribut, $valeur);
 		}
 	}
 
-	$tag = pipeline(
+	return pipeline(
 		'image_ecrire_tag_finir',
 		[
 			'args' => [
@@ -1336,8 +1294,6 @@ function _image_ecrire_tag($valeurs, $surcharge = []) {
 			'data' => $tag
 		]
 	);
-
-	return $tag;
 }
 
 /**
@@ -1371,12 +1327,12 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process = 'AUTO
 
 	$format_sortie = $valeurs['format_dest'];
 
-	if (($process == 'AUTO') and isset($GLOBALS['meta']['image_process'])) {
+	if ($process == 'AUTO' && isset($GLOBALS['meta']['image_process'])) {
 		$process = $GLOBALS['meta']['image_process'];
 	}
 
 	// si le doc n'est pas une image dans un format accetpable, refuser
-	if (!$force and !in_array($format, formats_image_acceptables(in_array($process, ['gd1', 'gd2'])))) {
+	if (!$force && !in_array($format, formats_image_acceptables(in_array($process, ['gd1', 'gd2'])))) {
 		return;
 	}
 	$destination = "$destdir/$destfile";
@@ -1386,7 +1342,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process = 'AUTO
 		if (!($destWidth = $valeurs['largeur_dest']) || !($destHeight = $valeurs['hauteur_dest'])) {
 			[$destWidth, $destHeight] = _image_ratio($srcWidth, $srcHeight, $maxWidth, $maxHeight);
 		}
-	} elseif ($process == 'convert' or $process == 'imagick') {
+	} elseif ($process == 'convert' || $process == 'imagick') {
 		$destWidth = $maxWidth;
 		$destHeight = $maxHeight;
 	} else {
@@ -1398,7 +1354,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process = 'AUTO
 	$vignette = '';
 
 	// Si l'image est de la taille demandee (ou plus petite), simplement la retourner
-	if ($srcWidth and $srcWidth <= $maxWidth and $srcHeight <= $maxHeight) {
+	if ($srcWidth && $srcWidth <= $maxWidth && $srcHeight <= $maxHeight) {
 		$vignette = $destination . '.' . $format;
 		@copy($image, $vignette);
 	}
@@ -1526,7 +1482,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process = 'AUTO
 	}
 
 	// gd ou gd2
-	elseif ($process == 'gd1' or $process == 'gd2') {
+	elseif ($process == 'gd1' || $process == 'gd2') {
 		if (!function_exists('gd_info')) {
 			spip_log('Librairie GD absente !', _LOG_ERREUR);
 
@@ -1557,7 +1513,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process = 'AUTO
 
 		// Initialisation de l'image destination
 		$destImage = null;
-		if ($process == 'gd2' and $destFormat != 'gif') {
+		if ($process == 'gd2' && $destFormat != 'gif') {
 			$destImage = ImageCreateTrueColor($destWidth, $destHeight);
 		}
 		if (!$destImage) {
@@ -1566,7 +1522,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process = 'AUTO
 
 		// Recopie de l'image d'origine avec adaptation de la taille
 		$ok = false;
-		if (($process == 'gd2') and function_exists('ImageCopyResampled')) {
+		if ($process == 'gd2' && function_exists('ImageCopyResampled')) {
 			if ($format == 'gif') {
 				// Si un GIF est transparent,
 				// fabriquer un PNG transparent
@@ -1600,7 +1556,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process = 'AUTO
 		ImageDestroy($destImage);
 	}
 
-	if (!$vignette or !$size = @spip_getimagesize($vignette)) {
+	if (!$vignette || !$size = @spip_getimagesize($vignette)) {
 		$size = [$destWidth, $destHeight];
 	}
 
@@ -1644,7 +1600,7 @@ function _image_ratio(int $srcWidth, int $srcHeight, int $maxWidth, int $maxHeig
 	$ratioWidth = $srcWidth / $maxWidth;
 	$ratioHeight = $srcHeight / $maxHeight;
 
-	if ($srcWidth <= $maxWidth and $srcHeight <= $maxHeight) {
+	if ($srcWidth <= $maxWidth && $srcHeight <= $maxHeight) {
 		$destWidth = $srcWidth;
 		$destHeight = $srcHeight;
 	} elseif ($ratioWidth < $ratioHeight) {
@@ -1656,8 +1612,8 @@ function _image_ratio(int $srcWidth, int $srcHeight, int $maxWidth, int $maxHeig
 	}
 
 	return [
-		intval(round($destWidth)),
-		intval(round($destHeight)),
+		(int) round($destWidth),
+		(int) round($destHeight),
 		max($ratioWidth, $ratioHeight)
 	];
 }
@@ -1682,7 +1638,7 @@ function ratio_passe_partout(int $srcWidth, int $srcHeight, int $maxWidth, int $
 	$ratioWidth = $srcWidth / $maxWidth;
 	$ratioHeight = $srcHeight / $maxHeight;
 
-	if ($srcWidth <= $maxWidth and $srcHeight <= $maxHeight) {
+	if ($srcWidth <= $maxWidth && $srcHeight <= $maxHeight) {
 		$destWidth = $srcWidth;
 		$destHeight = $srcHeight;
 	} elseif ($ratioWidth > $ratioHeight) {
@@ -1694,8 +1650,8 @@ function ratio_passe_partout(int $srcWidth, int $srcHeight, int $maxWidth, int $
 	}
 
 	return [
-		intval(round($destWidth)),
-		intval(round($destHeight)),
+		(int) round($destWidth),
+		(int) round($destHeight),
 		min($ratioWidth, $ratioHeight)
 	];
 }
@@ -1749,29 +1705,21 @@ function process_image_svg_identite($image) {
  **/
 function process_image_reduire($fonction, $img, $taille, $taille_y, $force, $process = 'AUTO') {
 	$image = false;
-	if (($process == 'AUTO') and isset($GLOBALS['meta']['image_process'])) {
+	if ($process == 'AUTO' && isset($GLOBALS['meta']['image_process'])) {
 		$process = $GLOBALS['meta']['image_process'];
 	}
 	# determiner le format de sortie
 	$format_sortie = false; // le choix par defaut sera bon
 	if ($process == 'netpbm') {
 		$format_sortie = 'jpg';
-	} elseif ($process == 'gd1' or $process == 'gd2') {
+	} elseif ($process == 'gd1' || $process == 'gd2') {
 		$image = _image_valeurs_trans($img, "reduire-{$taille}-{$taille_y}", $format_sortie, $fonction, false, _SVG_SUPPORTED);
 		// on verifie que l'extension choisie est bonne (en principe oui)
 		$gd_formats = formats_image_acceptables(true);
 		if (
-			is_array($image)
-			and (!in_array($image['format_dest'], $gd_formats)
-				or (!in_array($image['format_dest'], _image_extensions_acceptees_en_sortie()))
-			)
+			is_array($image) && (!in_array($image['format_dest'], $gd_formats) || !in_array($image['format_dest'], _image_extensions_acceptees_en_sortie()))
 		) {
-			if ($image['format_source'] == 'jpg') {
-				$formats_sortie = ['jpg', 'png', 'gif'];
-			} else // les gif sont passes en png preferentiellement pour etre homogene aux autres filtres images
-			{
-				$formats_sortie = ['png', 'jpg', 'gif'];
-			}
+			$formats_sortie = $image['format_source'] == 'jpg' ? ['jpg', 'png', 'gif'] : ['png', 'jpg', 'gif'];
 			// Choisir le format destination
 			// - on sauve de preference en JPEG (meilleure compression)
 			// - pour le GIF : les GD recentes peuvent le lire mais pas l'ecrire
@@ -1779,7 +1727,7 @@ function process_image_reduire($fonction, $img, $taille, $taille_y, $force, $pro
 			# pas *ecrire*
 			$format_sortie = '';
 			foreach ($formats_sortie as $fmt) {
-				if (in_array($fmt, $gd_formats) and in_array($fmt, _image_extensions_acceptees_en_sortie())) {
+				if (in_array($fmt, $gd_formats) && in_array($fmt, _image_extensions_acceptees_en_sortie())) {
 					$format_sortie = $fmt;
 					break;
 				}
@@ -1792,11 +1740,11 @@ function process_image_reduire($fonction, $img, $taille, $taille_y, $force, $pro
 		$image = _image_valeurs_trans($img, "reduire-{$taille}-{$taille_y}", $format_sortie, $fonction, false, _SVG_SUPPORTED);
 	}
 
-	if (!is_array($image) or !$image['largeur'] or !$image['hauteur']) {
+	if (!is_array($image) || !$image['largeur'] || !$image['hauteur']) {
 		spip_log("image_reduire_src:pas de version locale de $img ou extension non prise en charge");
 		// on peut resizer en mode html si on dispose des elements
 		[$srcw, $srch] = taille_image($img);
-		if ($srcw and $srch) {
+		if ($srcw && $srch) {
 			[$w, $h] = _image_ratio($srcw, $srch, $taille, $taille_y);
 
 			return _image_tag_changer_taille($img, $w, $h);
@@ -1889,7 +1837,7 @@ class phpthumb_functions {
 	public static function LittleEndian2String($number, $minbytes = 1) {
 		$intstring = '';
 		while ($number > 0) {
-			$intstring = $intstring . chr($number & 255);
+			$intstring .= chr($number & 255);
 			$number >>= 8;
 		}
 
@@ -1922,7 +1870,7 @@ class phpthumb_functions {
 
 					if ($bpp[$key] == 32) {
 						$icXOR[$key] .= chr($b) . chr($g) . chr($r) . chr($a);
-					} elseif ($bpp[$key] == 24) {
+					} elseif ($bpp[$key] === 24) {
 						$icXOR[$key] .= chr($b) . chr($g) . chr($r);
 					}
 
@@ -1945,7 +1893,7 @@ class phpthumb_functions {
 			}
 		}
 
-		foreach ($gd_image_array as $key => $gd_image) {
+		foreach (array_keys($gd_image_array) as $key) {
 			$biSizeImage = $ImageWidths[$key] * $ImageHeights[$key] * ($bpp[$key] / 8);
 
 			// BITMAPINFOHEADER - 40 bytes
@@ -1971,7 +1919,7 @@ class phpthumb_functions {
 		$icondata .= phpthumb_functions::LittleEndian2String(count($gd_image_array), 2);  // idCount;	  // How many images?
 
 		$dwImageOffset = 6 + (count($gd_image_array) * 16);
-		foreach ($gd_image_array as $key => $gd_image) {
+		foreach (array_keys($gd_image_array) as $key) {
 			// ICONDIRENTRY   idEntries[1]; // An entry for each image (idCount of 'em)
 
 			$icondata .= chr($ImageWidths[$key]);           // bWidth;		  // Width, in pixels, of the image
@@ -1997,7 +1945,7 @@ class phpthumb_functions {
 			$dwImageOffset += strlen($icAND[$key]);
 		}
 
-		foreach ($gd_image_array as $key => $gd_image) {
+		foreach (array_keys($gd_image_array) as $key) {
 			$icondata .= $BitmapInfoHeader[$key];
 			$icondata .= $icXOR[$key];
 			$icondata .= $icAND[$key];

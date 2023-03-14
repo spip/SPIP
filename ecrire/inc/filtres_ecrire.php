@@ -54,7 +54,7 @@ function parametres_css_prive() {
 	parse_str($couleurs($c), $c);
 	$args = array_merge($args, $c);
 
-	if (_request('var_mode') == 'recalcul' or (defined('_VAR_MODE') and _VAR_MODE == 'recalcul')) {
+	if (_request('var_mode') == 'recalcul' || defined('_VAR_MODE') && _VAR_MODE == 'recalcul') {
 		$args['var_mode'] = 'recalcul';
 	}
 
@@ -92,7 +92,7 @@ function chercher_rubrique(
 ) {
 
 	include_spip('inc/autoriser');
-	if (intval($id_objet) && !autoriser('modifier', $objet, $id_objet)) {
+	if ((int) $id_objet && !autoriser('modifier', $objet, $id_objet)) {
 		return '';
 	}
 	if (!sql_countsel('spip_rubriques')) {
@@ -116,8 +116,8 @@ function chercher_rubrique(
 		// confirmation du deplacement
 		if (
 			sql_table_exists('spip_breves')
-			and ($contient_breves = sql_countsel('spip_breves', 'id_rubrique=' . intval($id_objet)))
-			and ($contient_breves > 0)
+			&& ($contient_breves = sql_countsel('spip_breves', 'id_rubrique=' . (int) $id_objet))
+			&& $contient_breves > 0
 		) {
 			// FIXME: utiliser singulier_ou_pluriel, migrer dans plugin Brèves
 			$scb = ($contient_breves > 1 ? 's' : '');
@@ -138,7 +138,7 @@ function chercher_rubrique(
 	}
 	$form .= $confirm;
 	if ($actionable) {
-		if (strpos($form, '<select') !== false) {
+		if (str_contains($form, '<select')) {
 			$form .= "<div style='text-align: " . $GLOBALS['spip_lang_right'] . ";'>"
 				. '<input class="fondo submit btn" type="submit" value="' . _T('bouton_choisir') . '"/>'
 				. '</div>';
@@ -186,7 +186,7 @@ function avoir_visiteurs($past = false, $accepter = true) {
 	if ($GLOBALS['meta']['forums_publics'] == 'abo') {
 		return true;
 	}
-	if ($accepter and $GLOBALS['meta']['accepter_visiteurs'] <> 'non') {
+	if ($accepter && $GLOBALS['meta']['accepter_visiteurs'] != 'non') {
 		return true;
 	}
 	if (sql_countsel('spip_articles', "accepter_forum='abo'")) {
@@ -352,7 +352,7 @@ function auteurs_lister_statuts($quoi = 'tous', $en_base = true): array {
 				'statut'
 			);
 
-			return array_unique(array_merge($statut, $s_complement));
+			return array_unique([...$statut, ...$s_complement]);
 
 		default:
 		case 'tous':
@@ -361,7 +361,7 @@ function auteurs_lister_statuts($quoi = 'tous', $en_base = true): array {
 				sql_allfetsel('DISTINCT statut', 'spip_auteurs', sql_in('statut', $statut, 'NOT')),
 				'statut'
 			);
-			$statut = array_merge($statut, $s_complement);
+			$statut = [...$statut, ...$s_complement];
 			if ($en_base) {
 				$check = array_column(sql_allfetsel('DISTINCT statut', 'spip_auteurs', sql_in('statut', $statut)), 'statut');
 				$retire = array_diff($statut, $check);
@@ -385,10 +385,10 @@ function auteurs_lister_statuts($quoi = 'tous', $en_base = true): array {
  */
 function trouver_rubrique_creer_objet($id_rubrique, $objet) {
 
-	if (!$id_rubrique and defined('_CHOIX_RUBRIQUE_PAR_DEFAUT') and _CHOIX_RUBRIQUE_PAR_DEFAUT) {
-		$in = !(is_countable($GLOBALS['connect_id_rubrique']) ? count($GLOBALS['connect_id_rubrique']) : 0)
-			? ''
-			: (' AND ' . sql_in('id_rubrique', $GLOBALS['connect_id_rubrique']));
+	if (!$id_rubrique && defined('_CHOIX_RUBRIQUE_PAR_DEFAUT') && _CHOIX_RUBRIQUE_PAR_DEFAUT) {
+		$in = (is_countable($GLOBALS['connect_id_rubrique']) ? count($GLOBALS['connect_id_rubrique']) : 0)
+			? ' AND ' . sql_in('id_rubrique', $GLOBALS['connect_id_rubrique'])
+			: '';
 
 		// on tente d'abord l'ecriture a la racine dans le cas des rubriques uniquement
 		if ($objet == 'rubrique') {
@@ -465,7 +465,7 @@ function alertes_auteur($id_auteur): string {
 
 	if (
 		isset($GLOBALS['meta']['message_crash_tables'])
-		and autoriser('detruire', null, null, $id_auteur)
+		&& autoriser('detruire', null, null, $id_auteur)
 	) {
 		include_spip('genie/maintenance');
 		if ($msg = message_crash_tables()) {
@@ -475,20 +475,16 @@ function alertes_auteur($id_auteur): string {
 
 	if (
 		isset($GLOBALS['meta']['message_crash_plugins'])
-		and $GLOBALS['meta']['message_crash_plugins']
-		and autoriser('configurer', '_plugins', null, $id_auteur)
-		and is_array($msg = unserialize($GLOBALS['meta']['message_crash_plugins']))
+		&& $GLOBALS['meta']['message_crash_plugins']
+		&& autoriser('configurer', '_plugins', null, $id_auteur)
+		&& is_array($msg = unserialize($GLOBALS['meta']['message_crash_plugins']))
 	) {
 		$msg = implode(', ', array_map('joli_repertoire', array_keys($msg)));
 		$alertes[] = _T('plugins_erreur', ['plugins' => $msg]);
 	}
 
 	$a = $GLOBALS['meta']['message_alertes_auteurs'] ?? '';
-	if (
-		$a
-		and is_array($a = unserialize($a))
-		and count($a)
-	) {
+	if ($a && is_array($a = unserialize($a)) && count($a)) {
 		$update = false;
 		if (isset($a[$GLOBALS['visiteur_session']['statut']])) {
 			$alertes = array_merge($alertes, $a[$GLOBALS['visiteur_session']['statut']]);
@@ -507,7 +503,7 @@ function alertes_auteur($id_auteur): string {
 
 	if (
 		isset($GLOBALS['meta']['plugin_erreur_activation'])
-		and autoriser('configurer', '_plugins', null, $id_auteur)
+		&& autoriser('configurer', '_plugins', null, $id_auteur)
 	) {
 		include_spip('inc/plugin');
 		$alertes[] = plugin_donne_erreurs();
@@ -526,7 +522,7 @@ function alertes_auteur($id_auteur): string {
 
 	if ($alertes = array_filter($alertes)) {
 		return "<div class='wrap-messages-alertes'><div class='messages-alertes'>" .
-		join(' | ', $alertes)
+		implode(' | ', $alertes)
 		. '</div></div>';
 	}
 
@@ -542,7 +538,7 @@ function alertes_auteur($id_auteur): string {
 function filtre_afficher_enfant_rub_dist($id_rubrique) {
 	include_spip('inc/presenter_enfants');
 
-	return afficher_enfant_rub(intval($id_rubrique));
+	return afficher_enfant_rub((int) $id_rubrique);
 }
 
 /**

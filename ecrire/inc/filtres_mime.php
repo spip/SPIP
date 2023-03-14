@@ -137,12 +137,12 @@ function filtre_text_csv_dist($t) {
 	include_spip('inc/csv');
 	[$entete, $lignes, $caption] = analyse_csv($t);
 	foreach ($lignes as &$l) {
-		$l = join('|', $l);
+		$l = implode('|', $l);
 	}
-	$corps = join("\n", $lignes) . "\n";
+	$corps = implode("\n", $lignes) . "\n";
 	$corps = $caption .
 		"\n|{{" .
-		join('}}|{{', $entete) .
+		implode('}}|{{', $entete) .
 		'}}|' .
 		"\n|" .
 		str_replace("\n", "|\n|", $corps);
@@ -171,7 +171,7 @@ function filtre_text_html_dist($t) {
 	$style = '';
 	// recuperer les styles internes
 	if (preg_match_all(',<style>(.*?)</style>,is', $h, $r, PREG_PATTERN_ORDER)) {
-		$style = join("\n", $r[1]);
+		$style = implode("\n", $r[1]);
 	}
 	// ... et externes
 
@@ -186,9 +186,9 @@ function filtre_text_html_dist($t) {
 		}
 	}
 	// Pourquoi SafeHtml transforme-t-il en texte les scripts dans Body ?
-	$t = safehtml(preg_replace(',<script' . '.*?</script>,is', '', $t));
+	$t = safehtml(preg_replace(',<script.*?</script>,is', '', $t));
 
-	return (!$style ? '' : "\n<style>" . $style . '</style>') . $t;
+	return ($style ? "\n<style>" . $style . '</style>' : '') . $t;
 }
 
 /**
