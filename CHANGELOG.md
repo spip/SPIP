@@ -17,6 +17,10 @@
 
 - Nécessite PHP 8.0 minimum
 
+### Removed
+
+- #5258 Retrait de toute mention à GD1 dans la configuration des vignettes
+
 ### Fixed
 
 - #5485 Correction d’erreurs des traitements d’image si la balise `img` n’a pas d’attribut `src`
