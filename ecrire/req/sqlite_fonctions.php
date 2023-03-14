@@ -168,7 +168,7 @@ function _sqlite_func_ceil($a) {
  * @return string
  */
 function _sqlite_func_concat(...$args) {
-	return join('', $args);
+	return implode('', $args);
 }
 
 
@@ -219,8 +219,8 @@ function _sqlite_func_floor($a) {
  * Mapping de `IF` pour SQLite
  *
  * @param bool $bool
- * @param mixed $oui
- * @param mixed $non
+ * @param string|int|float $oui
+ * @param string|int|float $non
  * @return mixed
  */
 function _sqlite_func_if($bool, $oui, $non) {
@@ -301,7 +301,7 @@ function _sqlite_func_left($s, $lenght) {
  */
 function _sqlite_func_now($force_refresh = false) {
 	static $now = null;
-	if (is_null($now) or $force_refresh) {
+	if (is_null($now) || $force_refresh) {
 		$now = date('Y-m-d H:i:s');
 	}
 
@@ -332,10 +332,8 @@ function _sqlite_func_month($d) {
  * @return string
  */
 function _sqlite_func_preg_replace($quoi, $cherche, $remplace) {
-	$return = preg_replace('%' . $cherche . '%', $remplace, $quoi);
-
 	#spip_log("preg_replace : $quoi, $cherche, $remplace, $return",'sqlite.'._LOG_DEBUG);
-	return $return;
+	return preg_replace('%' . $cherche . '%', $remplace, $quoi);
 }
 
 /**
@@ -348,7 +346,7 @@ function _sqlite_func_preg_replace($quoi, $cherche, $remplace) {
  * @return string, l'extrait trouve.
  **/
 function _sqlite_func_extraire_multi($quoi, $lang) {
-	if (strpos($quoi, '<') !== false) {
+	if (str_contains($quoi, '<')) {
 		include_spip("src/Texte/Collecteur/AbstractCollecteur");
 		include_spip("src/Texte/Collecteur/Multis");
 		$collecteurMultis = new Spip\Texte\Collecteur\Multis();
@@ -389,16 +387,15 @@ function _sqlite_func_right($s, $length) {
  */
 function _sqlite_func_regexp_match($cherche, $quoi) {
 	// optimiser un cas tres courant avec les requetes en base
-	if (!$quoi and !strlen($quoi)) {
+	if (!$quoi && !strlen($quoi)) {
 		return false;
 	}
 	// il faut enlever un niveau d'echappement pour être homogène à mysql
 	$cherche = str_replace('\\\\', '\\', $cherche);
 	$u = $GLOBALS['meta']['pcre_u'] ?? 'u';
-	$return = preg_match('%' . $cherche . '%imsS' . $u, $quoi);
 
 	#spip_log("regexp_replace : $quoi, $cherche, $remplace, $return",'sqlite.'._LOG_DEBUG);
-	return $return;
+	return preg_match('%' . $cherche . '%imsS' . $u, $quoi);
 }
 
 
@@ -507,29 +504,18 @@ function _sqlite_timestampdiff($unit, $date1, $date2) {
 	$d2 = date_create($date2);
 	$diff = date_diff($d1, $d2);
 	$inv = $diff->invert ? -1 : 1;
-	switch ($unit) {
-		case 'YEAR':
-			return $inv * $diff->y;
-		case 'QUARTER':
-			return $inv * (4 * $diff->y + intval(floor($diff->m / 3)));
-		case 'MONTH':
-			return $inv * (12 * $diff->y + $diff->m);
-		case 'WEEK':
-			return $inv * intval(floor($diff->days / 7));
-		case 'DAY':
-			#var_dump($inv*$diff->days);
-			return $inv * $diff->days;
-		case 'HOUR':
-			return $inv * (24 * $diff->days + $diff->h);
-		case 'MINUTE':
-			return $inv * ((24 * $diff->days + $diff->h) * 60 + $diff->i);
-		case 'SECOND':
-			return $inv * (((24 * $diff->days + $diff->h) * 60 + $diff->i) * 60 + $diff->s);
-		case 'MICROSECOND':
-			return $inv * (((24 * $diff->days + $diff->h) * 60 + $diff->i) * 60 + $diff->s) * 1_000_000;
-	}
-
-	return 0;
+	return match ($unit) {
+		'YEAR' => $inv * $diff->y,
+		'QUARTER' => $inv * (4 * $diff->y + (int) floor($diff->m / 3)),
+		'MONTH' => $inv * (12 * $diff->y + $diff->m),
+		'WEEK' => $inv * (int) floor($diff->days / 7),
+		'DAY' => $inv * $diff->days,
+		'HOUR' => $inv * (24 * $diff->days + $diff->h),
+		'MINUTE' => $inv * ((24 * $diff->days + $diff->h) * 60 + $diff->i),
+		'SECOND' => $inv * (((24 * $diff->days + $diff->h) * 60 + $diff->i) * 60 + $diff->s),
+		'MICROSECOND' => $inv * (((24 * $diff->days + $diff->h) * 60 + $diff->i) * 60 + $diff->s) * 1_000_000,
+		default => 0,
+	};
 }
 
 /**
