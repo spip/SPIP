@@ -60,7 +60,7 @@ class Idiomes extends AbstractCollecteur {
 		}
 
 		// collecter les matchs de la preg
-		$idiomes = $this->collecteur($texte, '', '<:', $this->preg_idiome, empty($options['detecter_presence']) ? 0 : 1);
+		$idiomes = static::collecteur($texte, '', '<:', $this->preg_idiome, empty($options['detecter_presence']) ? 0 : 1);
 
 		// si on veut seulement detecter la présence, on peut retourner tel quel
 		if (empty($options['detecter_presence'])) {
@@ -94,7 +94,7 @@ class Idiomes extends AbstractCollecteur {
 		if ($texte) {
 
 			$idiomes = $this->collecter($texte);
-			if (!empty($idiomes)) {
+			if ($idiomes !== []) {
 				$lang = $options['lang'] ?? $GLOBALS['spip_lang'];
 				$echappe_span = $options['echappe_span'] ?? false;
 

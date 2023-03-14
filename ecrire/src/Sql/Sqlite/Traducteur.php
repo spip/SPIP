@@ -9,15 +9,6 @@ namespace Spip\Sql\Sqlite;
  */
 class Traducteur
 {
-	/** @var string $query texte de la requête */
-	public $query = '';
-
-	/** @var string $prefixe Préfixe des tables */
-	public $prefixe = '';
-
-	/** @var string $sqlite_version Version de sqlite (2 ou 3) */
-	public $sqlite_version = '';
-
 	/** Pour les corrections à effectuer sur les requêtes : array(code=>'texte') trouvé
 	 *
 	 * @var array
@@ -26,16 +17,16 @@ class Traducteur
 
 	/**
 	 * Constructeur
-	 *
-	 * @param string $query Requête à préparer
-	 * @param string $prefixe Prefixe des tables à utiliser
-	 * @param string $sqlite_version Version SQLite (2 ou 3)
 	 */
-	public function __construct($query, $prefixe, $sqlite_version)
+	public function __construct(
+		/** Requête à préparer */
+		public string $query,
+		/** Prefixe des tables à utiliser */
+		public string $prefixe,
+		/** Version SQLite (2 ou 3) */
+		public string $sqlite_version
+	)
 	{
-		$this->query = $query;
-		$this->prefixe = $prefixe;
-		$this->sqlite_version = $sqlite_version;
 	}
 
 	/**
@@ -51,40 +42,40 @@ class Traducteur
 		// 1) Protection des textes en les remplacant par des codes
 		//
 		// enlever les 'textes' et initialiser avec
-		list($this->query, $textes) = query_echappe_textes($this->query);
+		[$this->query, $textes] = query_echappe_textes($this->query);
 
 		//
 		// 2) Corrections de la requete
 		//
 		// Correction Create Database
 		// Create Database -> requete ignoree
-		if (strpos($this->query, 'CREATE DATABASE') === 0) {
+		if (str_starts_with($this->query, 'CREATE DATABASE')) {
 			spip_log("Sqlite : requete non executee -> $this->query", 'sqlite.' . _LOG_AVERTISSEMENT);
 			$this->query = 'SELECT 1';
 		}
 
 		// Correction Insert Ignore
 		// INSERT IGNORE -> insert (tout court et pas 'insert or replace')
-		if (strpos($this->query, 'INSERT IGNORE') === 0) {
+		if (str_starts_with($this->query, 'INSERT IGNORE')) {
 			spip_log("Sqlite : requete transformee -> $this->query", 'sqlite.' . _LOG_DEBUG);
 			$this->query = 'INSERT ' . substr($this->query, '13');
 		}
 
 		// Correction des dates avec INTERVAL
 		// utiliser sql_date_proche() de preference
-		if (strpos($this->query, 'INTERVAL') !== false) {
+		if (str_contains($this->query, 'INTERVAL')) {
 			$this->query = preg_replace_callback(
 				'/DATE_(ADD|SUB)(.*)INTERVAL\s+(\d+)\s+([a-zA-Z]+)\)/U',
-				[&$this, '_remplacerDateParTime'],
+				fn(array $matches): string => $this->_remplacerDateParTime($matches),
 				$this->query
 			);
 		}
 
-		if (strpos($this->query, 'LEFT(') !== false) {
+		if (str_contains($this->query, 'LEFT(')) {
 			$this->query = str_replace('LEFT(', '_LEFT(', $this->query);
 		}
 
-		if (strpos($this->query, 'TIMESTAMPDIFF(') !== false) {
+		if (str_contains($this->query, 'TIMESTAMPDIFF(')) {
 			$this->query = preg_replace('/TIMESTAMPDIFF\(\s*([^,]*)\s*,/Uims', "TIMESTAMPDIFF('\\1',", $this->query);
 		}
 
@@ -92,7 +83,7 @@ class Traducteur
 		// Correction Using
 		// USING (non reconnu en sqlite2)
 		// problematique car la jointure ne se fait pas du coup.
-		if (($this->sqlite_version == 2) && (strpos($this->query, 'USING') !== false)) {
+		if (($this->sqlite_version == 2) && (str_contains($this->query, 'USING'))) {
 			spip_log(
 				"'USING (champ)' n'est pas reconnu en SQLite 2. Utilisez 'ON table1.champ = table2.champ'",
 				'sqlite.' . _LOG_ERREUR
@@ -102,10 +93,10 @@ class Traducteur
 
 		// Correction Field
 		// remplace FIELD(table,i,j,k...) par CASE WHEN table=i THEN n ... ELSE 0 END
-		if (strpos($this->query, 'FIELD') !== false) {
+		if (str_contains($this->query, 'FIELD')) {
 			$this->query = preg_replace_callback(
 				'/FIELD\s*\(([^\)]*)\)/',
-				[&$this, '_remplacerFieldParCase'],
+				fn(array $matches): string => $this->_remplacerFieldParCase($matches),
 				$this->query
 			);
 		}
@@ -129,22 +120,19 @@ class Traducteur
 		//
 		// apparait dans public/vertebrer.php et dans le plugin menu aussi qui genere aussi ce genre de requete via un {par num #GET{tri_num}}
 		// mais est-ce encore un soucis pour sqlite en 2021 ? (ie commenter le preg_replace marche très bien en sqlite 3.28)
-		if ((strpos($this->query, '0 AS') !== false)) {
-			// on ne remplace que dans ORDER BY ou GROUP BY
-			if (preg_match('/\s(ORDER|GROUP) BY\s/i', $this->query, $regs)) {
-				$suite = strstr($this->query, $regs[0]);
-				$this->query = substr($this->query, 0, -strlen($suite));
-
-				// on cherche les noms des x dans 0 AS x
-				// on remplace dans $suite le nom par vide()
-				preg_match_all('/\b0 AS\s*([^\s,]+)/', $this->query, $matches, PREG_PATTERN_ORDER);
-				foreach ($matches[1] as $m) {
-					if (strpos($suite, $m) !== false) {
-						$suite = preg_replace(",\b$m\b,", 'VIDE()', $suite);
-					}
+		// on ne remplace que dans ORDER BY ou GROUP BY
+		if (str_contains($this->query, '0 AS') && preg_match('/\s(ORDER|GROUP) BY\s/i', $this->query, $regs)) {
+			$suite = strstr($this->query, $regs[0]);
+			$this->query = substr($this->query, 0, -strlen($suite));
+			// on cherche les noms des x dans 0 AS x
+			// on remplace dans $suite le nom par vide()
+			preg_match_all('/\b0 AS\s*([^\s,]+)/', $this->query, $matches, PREG_PATTERN_ORDER);
+			foreach ($matches[1] as $m) {
+				if (str_contains($suite, $m)) {
+					$suite = preg_replace(",\b$m\b,", 'VIDE()', $suite);
 				}
-				$this->query .= $suite;
 			}
+			$this->query .= $suite;
 		}
 
 		// Correction possible des divisions entieres
@@ -162,7 +150,7 @@ class Traducteur
 
 
 		// Correction critere REGEXP, non reconnu en sqlite2
-		if (($this->sqlite_version == 2) && (strpos($this->query, 'REGEXP') !== false)) {
+		if (($this->sqlite_version == 2) && (str_contains($this->query, 'REGEXP'))) {
 			$this->query = preg_replace('/([^\s\(]*)(\s*)REGEXP(\s*)([^\s\)]*)/', 'REGEXP($4, $1)', $this->query);
 		}
 
@@ -171,7 +159,7 @@ class Traducteur
 		//
 		// Correction Antiquotes et echappements
 		// ` => rien
-		if (strpos($this->query, '`') !== false) {
+		if (str_contains($this->query, '`')) {
 			$this->query = str_replace('`', '', $this->query);
 		}
 

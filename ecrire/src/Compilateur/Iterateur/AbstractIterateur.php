@@ -16,12 +16,10 @@ abstract class AbstractIterateur
 	/** Erreur presente ? **/
 	public bool $err = false;
 
-	protected array $command = [];
-
-	protected array $info = [];
-
-	public function __construct(array $command, array $info = []) {
-		$this->command = $command;
-		$this->info = $info;
+	public function __construct(
+		protected array $command,
+		protected array $info = []
+	)
+	{
 	}
 }

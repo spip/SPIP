@@ -88,14 +88,14 @@ class Admin extends Page {
 
 		$titre = $options['titre'] ?? '';
 		if (!$titre) {
-			if (empty($corps) and !isset($options['status'])) {
+			if (empty($corps) && !isset($options['status'])) {
 				$options['status'] = 403;
 			}
 
 			if (
 				!$titre = _request('action')
-				and !$titre = _request('exec')
-				and !$titre = _request('page')
+				&& !$titre = _request('exec')
+				&& !$titre = _request('page')
 			) {
 				$titre = '?';
 			}
@@ -113,7 +113,7 @@ class Admin extends Page {
 				$titre = _T('info_acces_interdit');
 			}
 
-			if ($statut and test_espace_prive()) {
+			if ($statut && test_espace_prive()) {
 				$footer = bouton_action(_T('public:accueil_site'), generer_url_ecrire('accueil'));
 			}
 			elseif (!empty($_COOKIE['spip_admin'])) {

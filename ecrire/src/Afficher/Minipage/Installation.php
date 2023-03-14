@@ -20,7 +20,7 @@ class Installation extends Admin {
 
 	protected function setOptions(array $options) {
 		$options['titre'] ??= '';
-		if (!$options['titre'] or $options['titre'] === 'AUTO') {
+		if (!$options['titre'] || $options['titre'] === 'AUTO') {
 			$options['titre'] = _T('info_installation_systeme_publication');
 		}
 		$options = parent::setOptions($options);

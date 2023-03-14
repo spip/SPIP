@@ -134,7 +134,7 @@ class Data extends AbstractIterateur implements Iterator
 		// le type se retrouve dans la commande 'from'
 		// dans ce cas la le critere {source}, si present, n'a pas besoin du 1er argument
 		if (isset($this->command['from'][0])) {
-			if (isset($this->command['source']) and is_array($this->command['source'])) {
+			if (isset($this->command['source']) && is_array($this->command['source'])) {
 				array_unshift($this->command['source'], $this->command['sourcemode']);
 			}
 			$this->command['sourcemode'] = $this->command['from'][0];
@@ -147,7 +147,7 @@ class Data extends AbstractIterateur implements Iterator
 		// {source format, [URL], [arg2]...}
 		if (
 			isset($this->command['source'])
-			and isset($this->command['sourcemode'])
+			&& isset($this->command['sourcemode'])
 		) {
 			$this->select_source();
 		}
@@ -170,8 +170,8 @@ class Data extends AbstractIterateur implements Iterator
 		// extraire le chemin "query.results" du tableau de donnees
 		if (
 			!$this->err
-			and isset($this->command['datapath'])
-			and is_array($this->command['datapath'])
+			&& isset($this->command['datapath'])
+			&& is_array($this->command['datapath'])
 		) {
 			$this->select_datapath();
 		}
@@ -203,7 +203,7 @@ class Data extends AbstractIterateur implements Iterator
 		# perf : pas de fonction table_to_array ! (table est deja un array)
 		if (
 			isset($this->command['sourcemode'])
-			and !in_array($this->command['sourcemode'], ['table', 'array', 'tableau'])
+			&& !in_array($this->command['sourcemode'], ['table', 'array', 'tableau'])
 		) {
 			charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true);
 		}
@@ -219,32 +219,26 @@ class Data extends AbstractIterateur implements Iterator
 
 		$cache = $this->cache_get($cle);
 		if (isset($this->command['datacache'])) {
-			$ttl = intval($this->command['datacache']);
+			$ttl = (int) $this->command['datacache'];
 		}
 		if (
 			$cache
-			and ($cache['time'] + ($ttl ?? $cache['ttl'])
-				> time())
-			and !(_request('var_mode') === 'recalcul'
-				and include_spip('inc/autoriser')
-				and autoriser('recalcul')
-			)
+			&& $cache['time'] + ($ttl ?? $cache['ttl']) > time()
+			&& !(_request('var_mode') === 'recalcul' && include_spip('inc/autoriser') && autoriser('recalcul'))
 		) {
 			$this->tableau = $cache['data'];
 		} else {
 			try {
 				if (
 					isset($this->command['sourcemode'])
-					and in_array(
+					&& in_array(
 						$this->command['sourcemode'],
 						['table', 'array', 'tableau']
 					)
 				) {
 					if (
 						is_array($a = $src)
-						or (is_string($a)
-							and $a = str_replace('&quot;', '"', $a) # fragile!
-							and is_array($a = @unserialize($a)))
+						|| is_string($a) && ($a = str_replace('&quot;', '"', $a)) && is_array($a = @unserialize($a))
 					) {
 						$this->tableau = $a;
 					}
@@ -272,7 +266,7 @@ class Data extends AbstractIterateur implements Iterator
 					}
 					if (
 						!$this->err
-						and $data_to_array = charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true)
+						&& ($data_to_array = charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true))
 					) {
 						$args = $this->command['source'];
 						$args[0] = $data;
@@ -286,7 +280,7 @@ class Data extends AbstractIterateur implements Iterator
 					$this->err = true;
 				}
 
-				if (!$this->err and isset($ttl) and $ttl > 0) {
+				if (!$this->err && isset($ttl) && $ttl > 0) {
 					$this->cache_set($cle, $ttl);
 				}
 			} catch (Exception $e) {
@@ -302,10 +296,7 @@ class Data extends AbstractIterateur implements Iterator
 		}
 
 		# en cas d'erreur, utiliser le cache si encore dispo
-		if (
-			$this->err
-			and $cache
-		) {
+		if ($this->err && $cache) {
 			$this->tableau = $cache['data'];
 			$this->err = false;
 		}
@@ -393,7 +384,7 @@ class Data extends AbstractIterateur implements Iterator
 
 				// tri par cle
 				if ($r[1] == 'cle') {
-					if (isset($r[2]) and $r[2]) {
+					if (isset($r[2]) && $r[2]) {
 						krsort($this->tableau);
 					} else {
 						ksort($this->tableau);
@@ -409,18 +400,13 @@ class Data extends AbstractIterateur implements Iterator
 						}
 						$this->tableau = $v;
 					} else {
-						# {par valeur}
-						if ($r[1] == 'valeur') {
-							$tv = '%s';
-						} # {par valeur/xx/yy} ??
-						else {
-							$tv = 'table_valeur(%s, ' . var_export($r[1], true) . ')';
-						}
+						# {par valeur} ou {par valeur/xx/yy} 
+						$tv = $r[1] == 'valeur' ? '%s' : 'table_valeur(%s, ' . var_export($r[1], true) . ')';
 						$sortfunc .= '
 					$a = ' . sprintf($tv, '$aa') . ';
 					$b = ' . sprintf($tv, '$bb') . ';
 					if ($a <> $b)
-						return ($a ' . (!empty($r[2]) ? '>' : '<') . ' $b) ? -1 : 1;';
+						return ($a ' . (empty($r[2]) ? '<' : '>') . ' $b) ? -1 : 1;';
 					}
 				}
 			}

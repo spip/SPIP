@@ -70,17 +70,17 @@ class Liens extends AbstractCollecteur {
 		}
 
 		$liens = [];
-		if (strpos($texte, '->') !== false) {
+		if (str_contains($texte, '->')) {
 
 			$desechappe_crochets = false;
 			// si il y a un crochet ouvrant échappé ou un crochet fermant échappé, les substituer pour les ignorer
-			if (strpos($texte, '\[') !== false or strpos($texte, '\]') !== false) {
+			if (str_contains($texte, '\[') || str_contains($texte, '\]')) {
 				$texte = str_replace(['\[', '\]'], ["\x1\x5", "\x1\x6"], $texte);
 				$desechappe_crochets = true;
 			}
 
 			// collecter les matchs de la preg
-			$liens = $this->collecteur($texte, '->', '[', $this->preg_lien, empty($options['detecter_presence']) ? 0 : 1);
+			$liens = static::collecteur($texte, '->', '[', $this->preg_lien, empty($options['detecter_presence']) ? 0 : 1);
 
 			// si on veut seulement detecter la présence, on peut retourner tel quel
 			if (empty($options['detecter_presence'])) {
@@ -93,7 +93,7 @@ class Liens extends AbstractCollecteur {
 
 					// la mise en lien automatique est passee par la a tort !
 					// corrigeons pour eviter d'avoir un <a...> dans un href...
-					if (strncmp($lien['href'], '<a', 2) == 0) {
+					if (str_starts_with($lien['href'], '<a')) {
 						$href = extraire_attribut($lien['href'], 'href');
 						// remplacons dans la source qui peut etre reinjectee dans les arguments
 						// d'un modele
@@ -102,7 +102,7 @@ class Liens extends AbstractCollecteur {
 						$lien['href'] = $href;
 					}
 
-					if ($desechappe_crochets and strpos($lien['raw'], "\x1") !== false) {
+					if ($desechappe_crochets && str_contains($lien['raw'], "\x1")) {
 						$lien['raw'] = str_replace(["\x1\x5", "\x1\x6"], ['[', ']'], $lien['raw']);
 						$lien['texte'] = str_replace(["\x1\x5", "\x1\x6"], ['[', ']'], $lien['texte']);
 						$lien['href'] = str_replace(["\x1\x5", "\x1\x6"], ['[', ']'], $lien['href']);

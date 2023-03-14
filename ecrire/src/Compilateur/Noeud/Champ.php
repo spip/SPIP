@@ -11,7 +11,7 @@ class Champ
 	public string $type = 'champ';
 
 	/** Nom du champ demandé. Exemple 'ID_ARTICLE' */
-	public ?string $nom_champ;
+	public ?string $nom_champ = null;
 
 	/** Identifiant de la boucle parente si explicité */
 	public ?string $nom_boucle = '';
@@ -70,7 +70,7 @@ class Champ
 	public array $boucles;
 
 	/** Alias de table d'application de la requête ou nom complet de la table SQL */
-	public ?string $type_requete;
+	public ?string $type_requete = null;
 
 	/** Résultat de la compilation: toujours une expression PHP */
 	public string $code = '';

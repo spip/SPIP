@@ -12,7 +12,7 @@ class Critere {
 	public string $type = 'critere';
 
 	/** Opérateur (>, <, >=, IN, ...) */
-	public ?string $op;
+	public ?string $op = null;
 
 	/** Présence d'une négation (truc !op valeur) */
 	public bool $not = false;

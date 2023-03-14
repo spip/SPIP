@@ -7,24 +7,6 @@ namespace Spip\Admin;
  * privée ou dans un de ses sous menus
  */
 class Bouton {
-	/** L'icone à mettre dans le bouton */
-	public string $icone;
-
-	/** Le nom de l'entrée d'i18n associé */
-	public string $libelle;
-
-	/** @var null|string L'URL de la page (null => ?exec=nom) */
-	public $url = null;
-
-	/** @var null|string|array Arguments supplementaires de l'URL */
-	public $urlArg = null;
-
-	/** @var null|string URL du javascript */
-	public $url2 = null;
-
-	/** @var null|string Pour ouvrir dans une fenetre a part */
-	public $target = null;
-
 	/** Sous-barre de boutons / onglets */
 	public array $sousmenu = [];
 
@@ -37,27 +19,22 @@ class Bouton {
 
 	/**
 	 * Définit un bouton
-	 *
-	 * @param string $icone
-	 *    L'icone à mettre dans le bouton
-	 * @param string $libelle
-	 *    Le nom de l'entrée i18n associé
-	 * @param null|string $url
-	 *    L'URL de la page
-	 * @param null|string|array $urlArg
-	 *    Arguments supplémentaires de l'URL
-	 * @param null|string $url2
-	 *    URL du javascript
-	 * @param null|mixed $target
-	 *    Pour ouvrir une fenêtre à part
 	 */
-	public function __construct($icone, $libelle, $url = null, $urlArg = null, $url2 = null, $target = null) {
-		$this->icone = $icone;
-		$this->libelle = $libelle;
-		$this->url = $url;
-		$this->urlArg = $urlArg;
-		$this->url2 = $url2;
-		$this->target = $target;
+	public function __construct(
+		/** L'icone à mettre dans le bouton */
+		public string $icone,
+		/** Le nom de l'entrée d'i18n associé */
+		public string $libelle,
+		/** L'URL de la page (null => ?exec=nom) */
+		public ?string $url = null,
+		/** Arguments supplémentaires de l'URL */
+		public string|array|null $urlArg = null,
+		/** URL du javascript */
+		public ?string $url2 = null,
+		/** Pour ouvrir une fenêtre à part */
+		public ?string $target = null
+	)
+ 	{
 	}
 }
 

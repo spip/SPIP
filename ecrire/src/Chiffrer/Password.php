@@ -17,11 +17,6 @@ class Password {
 	 * verifier qu'un mot de passe en clair est correct a l'aide de son hash
 	 *
 	 * Le mot de passe est poivre via la cle secret_des_auth
-	 *
-	 * @param string $password_clair
-	 * @param string $password_hash
-	 * @param string $key
-	 * @return bool
 	 */
 	public static function verifier(
 		#[\SensitiveParameter]
@@ -42,9 +37,6 @@ class Password {
 
 	/**
 	 * Calculer un hash salé du mot de passe
-	 * @param string $password_clair
-	 * @param string $salt
-	 * @return string
 	 */
 	public static function hacher(
 		#[\SensitiveParameter]

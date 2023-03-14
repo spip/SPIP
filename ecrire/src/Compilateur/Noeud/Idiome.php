@@ -57,7 +57,7 @@ class Idiome
 	public array $boucles;
 
 	/** Alias de table d'application de la requête ou nom complet de la table SQL */
-	public ?string $type_requete;
+	public ?string $type_requete = null;
 
 	/** Résultat de la compilation: toujours une expression PHP */
 	public string $code = '';

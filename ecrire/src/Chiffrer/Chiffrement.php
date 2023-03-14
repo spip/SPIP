@@ -57,9 +57,7 @@ class Chiffrement {
 			spip_log("dechiffrer() chiffre corrompu `$encoded`", 'chiffrer' . _LOG_DEBUG);
 			return null;
 		}
-		$message = sodium_unpad($padded_message, 16);
-		#spip_log("dechiffrer($encoded)=$message", 'chiffrer' . _LOG_DEBUG);
-		return $message;
+		return sodium_unpad($padded_message, 16);
 	}
 
 	/** Génère une clé de la taille attendue pour le chiffrement */

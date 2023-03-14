@@ -47,8 +47,8 @@ class Requeteur
 
 		$this->sqlite_version = _sqlite_is_version('', $this->link);
 
-		$this->prefixe = $GLOBALS['connexions'][$this->serveur ? $this->serveur : 0]['prefixe'];
-		$this->db = $GLOBALS['connexions'][$this->serveur ? $this->serveur : 0]['db'];
+		$this->prefixe = $GLOBALS['connexions'][$this->serveur ?: 0]['prefixe'];
+		$this->db = $GLOBALS['connexions'][$this->serveur ?: 0]['db'];
 
 		// tracage des requetes ?
 		$this->tracer = (isset($_GET['var_profile']) && $_GET['var_profile']);
@@ -70,7 +70,7 @@ class Requeteur
 		}
 		$err = '';
 		$t = 0;
-		if ($tracer or (defined('_DEBUG_TRACE_QUERIES') and _DEBUG_TRACE_QUERIES)) {
+		if ($tracer || defined('_DEBUG_TRACE_QUERIES') && _DEBUG_TRACE_QUERIES) {
 			include_spip('public/tracer');
 			$t = trace_query_start();
 		}
@@ -81,8 +81,8 @@ class Requeteur
 			$last_error = (function_exists('error_get_last') ? error_get_last() : '');
 			$e = null;
 			// sauver la derniere requete
-			$GLOBALS['connexions'][$this->serveur ? $this->serveur : 0]['last'] = $query;
-			$GLOBALS['connexions'][$this->serveur ? $this->serveur : 0]['total_requetes']++;
+			$GLOBALS['connexions'][$this->serveur ?: 0]['last'] = $query;
+			$GLOBALS['connexions'][$this->serveur ?: 0]['total_requetes']++;
 
 			try {
 				$r = $this->link->query($query);
@@ -92,10 +92,10 @@ class Requeteur
 			}
 
 			// loger les warnings/erreurs eventuels de sqlite remontant dans PHP
-			if ($e and $e instanceof \PDOException) {
+			if ($e && $e instanceof \PDOException) {
 				$err = strip_tags($e->getMessage()) . ' in ' . $e->getFile() . ' line ' . $e->getLine();
 				spip_log("$err - " . $query, 'sqlite.' . _LOG_ERREUR);
-			} elseif ($err = (function_exists('error_get_last') ? error_get_last() : '') and $err != $last_error) {
+			} elseif (($err = (function_exists('error_get_last') ? error_get_last() : '')) && $err != $last_error) {
 				$err = strip_tags($err['message']) . ' in ' . $err['file'] . ' line ' . $err['line'];
 				spip_log("$err - " . $query, 'sqlite.' . _LOG_ERREUR);
 			} else {

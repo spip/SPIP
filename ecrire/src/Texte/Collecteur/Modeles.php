@@ -63,7 +63,7 @@ class Modeles extends AbstractCollecteur {
 		}
 
 		// collecter les matchs de la preg
-		$modeles = $this->collecteur($texte, '', '<', $this->preg_modele);
+		$modeles = static::collecteur($texte, '', '<', $this->preg_modele);
 
 		$pos_prev = 0;
 		foreach ($modeles as $k => &$modele) {
@@ -76,7 +76,7 @@ class Modeles extends AbstractCollecteur {
 			$end = $pos + $longueur;
 
 			// il faut avoir un id ou des params commençant par un | sinon c'est une simple balise html
-			if (empty($modele['id']) and empty($modele['params'])) {
+			if (empty($modele['id']) && empty($modele['params'])) {
 				unset($modeles[$k]);
 				continue;
 			}
@@ -87,14 +87,17 @@ class Modeles extends AbstractCollecteur {
 			}
 
 			$modele['lien'] = false;
-			if (!empty($options['collecter_liens'])
-				and $pos_fermeture_lien = stripos($texte, '</a>', $end)
-				and !strlen(trim(substr($texte, $end, $pos_fermeture_lien - $end)))) {
+			if (
+				!empty($options['collecter_liens'])
+				&& ($pos_fermeture_lien = stripos($texte, '</a>', $end))
+				&& !strlen(trim(substr($texte, $end, $pos_fermeture_lien - $end)))
+			) {
 
 				$pos_lien_ouvrant = stripos($texte, '<a', $pos_prev);
-				if ($pos_lien_ouvrant !== false
-					and $pos_lien_ouvrant < $pos
-					and preg_match('/<a\s[^<>]*>\s*$/i', substr($texte, $pos_prev, $pos - $pos_prev), $r)
+				if (
+					$pos_lien_ouvrant !== false
+					&& $pos_lien_ouvrant < $pos
+					&& preg_match('/<a\s[^<>]*>\s*$/i', substr($texte, $pos_prev, $pos - $pos_prev), $r)
 				) {
 					$modele['lien'] = [
 						'href' => extraire_attribut($r[0], 'href'),
@@ -144,7 +147,7 @@ class Modeles extends AbstractCollecteur {
 			}
 
 			$modeles = $this->collecter($texte, ['collecter_liens' => true]);
-			if (!empty($modeles)) {
+			if ($modeles !== []) {
 				include_spip('public/assembler');
 				$wrap_embed_html = charger_fonction('wrap_embed_html', 'inc', true);
 
@@ -204,7 +207,7 @@ class Modeles extends AbstractCollecteur {
 					}
 
 					// hack pour tout l'espace prive
-					if ((test_espace_prive() or ($doublons)) and !empty($m['id'])) {
+					if ((test_espace_prive() || $doublons) && !empty($m['id'])) {
 						$type = strtolower($m['type']);
 						foreach ($doublons ?: ['documents' => ['doc', 'emb', 'img']] as $quoi => $type_modeles) {
 							if (in_array($type, $type_modeles)) {

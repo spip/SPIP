@@ -22,7 +22,7 @@ class Sqlite
 	 *
 	 * @param string $serveur
 	 *    Nom du connecteur
-	 * @return SqliteRequeteur
+	 * @return Requeteur
 	 *    Instance unique du requêteur
 	 **/
 	public static function requeteur($serveur)
@@ -113,7 +113,7 @@ class Sqlite
 		// si pas de transaction en cours, ne rien faire et le dire
 		if (
 			!isset(Sqlite::$transaction_en_cours[$serveur])
-			or Sqlite::$transaction_en_cours[$serveur] == false
+			|| Sqlite::$transaction_en_cours[$serveur] == false
 		) {
 			return false;
 		}

@@ -56,25 +56,11 @@ class Decorator extends FilterIterator
 	protected $type;
 
 	/**
-	 * parametres de l'iterateur.
-	 *
-	 * @var array
-	 */
-	protected $command;
-
-	/**
-	 * infos de compilateur.
-	 *
-	 * @var array
-	 */
-	protected $info;
-
-	/**
 	 * position courante de l'iterateur.
 	 *
 	 * @var int
 	 */
-	protected $pos;
+	protected $pos = 0;
 
 	/**
 	 * nombre total resultats dans l'iterateur.
@@ -94,18 +80,20 @@ class Decorator extends FilterIterator
 	 * retournes par ->fetch().
 	 */
 	protected $select = [];
-	private $iter;
+	private Iterator $iter;
 
-	public function __construct(Iterator $iter, $command, $info) {
+	public function __construct(
+		Iterator $iter,
+		/** Parametres de l'iterateur */
+		protected array $command,
+		/** Infos du compilateur */
+		protected array $info
+	) {
 		parent::__construct($iter);
 		parent::rewind(); // remettre a la premiere position (bug? connu de FilterIterator)
 
 		// recuperer l'iterateur transmis
 		$this->iter = $this->getInnerIterator();
-		$this->command = $command;
-		$this->info = $info;
-		$this->pos = 0;
-		$this->fetched = 0;
 
 		// chercher la liste des champs a retourner par
 		// fetch si l'objet ne les calcule pas tout seul
@@ -115,7 +103,7 @@ class Decorator extends FilterIterator
 		}
 
 		// emptyIterator critere {si} faux n'a pas d'erreur !
-		if (isset($this->iter->err)) {
+		if (property_exists($this->iter, 'err') && $this->iter->err !== null) {
 			$this->err = $this->iter->err;
 		}
 
@@ -142,15 +130,12 @@ class Decorator extends FilterIterator
 	// en fonction des methodes
 	// et proprietes disponibles
 	public function get_select($nom) {
-		if (
-			is_object($this->iter)
-			and method_exists($this->iter, $nom)
-		) {
+		if (is_object($this->iter) && method_exists($this->iter, $nom)) {
 			try {
 				return $this->iter->{$nom}();
-			} catch (Exception $e) {
+			} catch (Exception) {
 				// #GETCHILDREN sur un fichier de DirectoryIterator ...
-				spip_log("Methode {$nom} en echec sur " . get_class($this->iter));
+				spip_log("Methode {$nom} en echec sur " . $this->iter::class);
 				spip_log("Cela peut être normal : retour d'une ligne de resultat ne pouvant pas calculer cette methode");
 
 				return '';
@@ -164,7 +149,7 @@ class Decorator extends FilterIterator
 		// ICI PLANTAGE SI ON NE CONTROLE PAS $nom
 		if (
 			in_array($nom, ['cle', 'valeur'])
-			and method_exists($this, $nom)
+			&& method_exists($this, $nom)
 		) {
 			return $this->{$nom}();
 		}
@@ -200,7 +185,7 @@ class Decorator extends FilterIterator
 	 *              success or fail if not implemented
 	 */
 	public function seek($n = 0, $continue = null) {
-		if ($this->func_filtre or !method_exists($this->iter, 'seek') or !$this->iter->seek($n)) {
+		if ($this->func_filtre || !method_exists($this->iter, 'seek') || !$this->iter->seek($n)) {
 			$this->seek_loop($n);
 		}
 		$this->pos = $n;
@@ -219,7 +204,7 @@ class Decorator extends FilterIterator
 	 */
 	public function skip($saut, $max = null) {
 		// pas de saut en arriere autorise pour cette fonction
-		if (($saut = intval($saut)) <= 0) {
+		if (($saut = (int) $saut) <= 0) {
 			return $this->pos;
 		}
 		$seek = $this->pos + $saut;
@@ -229,7 +214,7 @@ class Decorator extends FilterIterator
 			$max = $this->count();
 		}
 
-		if ($seek >= $max or $seek >= $this->count()) {
+		if ($seek >= $max || $seek >= $this->count()) {
 			// sortie plus rapide que de faire next() jusqu'a la fin !
 			$this->free();
 
@@ -255,10 +240,7 @@ class Decorator extends FilterIterator
 		}
 		while (
 				$this->valid()
-				and (
-					!$this->accept()
-					or (isset($this->offset) and $this->fetched++ < $this->offset)
-				)
+				&& (!$this->accept() || $this->offset !== null && $this->fetched++ < $this->offset)
 		) {
 			$this->next();
 		}
@@ -268,8 +250,8 @@ class Decorator extends FilterIterator
 		}
 
 		if (
-				isset($this->limit)
-				and $this->fetched > $this->offset + $this->limit
+				$this->limit !== null
+				&& $this->fetched > $this->offset + $this->limit
 		) {
 			return false;
 		}
@@ -329,7 +311,7 @@ class Decorator extends FilterIterator
 		if (is_null($this->total)) {
 			if (
 				method_exists($this->iter, 'count')
-				and !$this->func_filtre
+				&& !$this->func_filtre
 			) {
 				return $this->total = $this->iter->count();
 			}
@@ -337,7 +319,7 @@ class Decorator extends FilterIterator
 			$total = 0;
 			$pos = $this->pos; // sauver la position
 			$this->rewind();
-			while ($this->fetch() and $total < $this->max) {
+			while ($this->fetch() && $total < $this->max) {
 				++$total;
 			}
 			$this->seek($pos);
@@ -360,17 +342,17 @@ class Decorator extends FilterIterator
 		$filtres_string = [];
 		foreach ($filtres as $k => $v) {
 			// si c'est un tableau de OR/AND + 2 sous-filtres, on recurse pour transformer en chaine
-			if (is_array($v) and in_array(reset($v), ['OR', 'AND'])) {
+			if (is_array($v) && in_array(reset($v), ['OR', 'AND'])) {
 				$op = array_shift($v);
 				$v = $this->assembler_filtres($v, $op);
 			}
-			if (is_null($v) or !is_string($v) or empty($v)) {
+			if (is_null($v) || !is_string($v) || empty($v)) {
 				continue;
 			}
 			$filtres_string[] = $v;
 		}
 
-		if (!count($filtres_string)) {
+		if ($filtres_string === []) {
 			return null;
 		}
 
@@ -396,7 +378,7 @@ class Decorator extends FilterIterator
 		} else {
 			$op = $v;
 		}
-		if ((!$op) or (1 == $op) or ('0=0' == $op)) {
+		if (!$op || 1 == $op || '0=0' == $op) {
 			return 'true';
 		}
 		if ('0=1' === $op) {
@@ -413,10 +395,10 @@ class Decorator extends FilterIterator
 		// * 3 : {x op y} ; on recoit $v[0] = 'op', $v[1] = x, $v[2] = y
 
 		// 1 : forcement traite par un critere, on passe
-		if (!$v or !is_array($v) or 1 == count($v)) {
+		if (!$v || !is_array($v) || 1 == count($v)) {
 			return null; // sera ignore
 		}
-		if (2 == count($v) and is_array($v[1])) {
+		if (2 == count($v) && is_array($v[1])) {
 			return $this->composer_filtre($v[1][1], $v[1][0], $v[1][2], 'NOT');
 		}
 		if (3 == count($v)) {
@@ -443,7 +425,7 @@ class Decorator extends FilterIterator
 						}
 					}
 				}
-				if (!count($v)) {
+				if ($v === []) {
 					return null;
 				}
 				if (1 === count($v)) {
@@ -471,10 +453,11 @@ class Decorator extends FilterIterator
 	 * @return null|string
 	 */
 	protected function composer_filtre($cle, $op, $valeur, $not = false) {
-		if (method_exists($this->iter, 'exception_des_criteres')) {
-			if (in_array($cle, $this->iter->exception_des_criteres())) {
-				return null;
-			}
+		if (
+			method_exists($this->iter, 'exception_des_criteres')
+			&& in_array($cle, $this->iter->exception_des_criteres())
+		) {
+			return null;
 		}
 		// TODO: analyser le filtre pour refuser ce qu'on ne sait pas traiter ?
 		// mais c'est normalement deja opere par calculer_critere_infixe()
@@ -555,7 +538,7 @@ class Decorator extends FilterIterator
 		}
 
 		// critere {2,7}
-		if (isset($this->command['limit']) and $this->command['limit']) {
+		if (isset($this->command['limit']) && $this->command['limit']) {
 			$limit = explode(',', $this->command['limit']);
 			$this->offset = $limit[0];
 			$this->limit = $limit[1];
@@ -581,7 +564,7 @@ class Decorator extends FilterIterator
 			$this->rewind();
 		}
 
-		while ($this->pos < $n and $this->valid()) {
+		while ($this->pos < $n && $this->valid()) {
 			$this->next();
 		}
 

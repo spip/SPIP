@@ -35,9 +35,10 @@ abstract class AbstractCollecteur {
 		$collection = [];
 		$pos = 0;
 		while (
-			(!$if_chars || strpos($texte, $if_chars, $pos) !== false)
-			and ($next = ($start_with ? strpos($texte, $start_with, $pos) : $pos)) !== false
-			and preg_match($preg, $texte, $r, PREG_OFFSET_CAPTURE, $next)) {
+			(!$if_chars || str_contains($texte, $if_chars))
+			&& ($next = ($start_with ? strpos($texte, $start_with, $pos) : $pos)) !== false
+			&& preg_match($preg, $texte, $r, PREG_OFFSET_CAPTURE, $next)
+		) {
 
 			$found_pos = $r[0][1];
 			$found_length = strlen($r[0][0]);
@@ -50,7 +51,7 @@ abstract class AbstractCollecteur {
 
 			$collection[] = $match;
 
-			if ($max_items and count($collection) === $max_items) {
+			if ($max_items && count($collection) === $max_items) {
 				break;
 			}
 
@@ -62,10 +63,6 @@ abstract class AbstractCollecteur {
 
 	/**
 	 * Sanitizer une collection d'occurences
-	 *
-	 * @param array $collection
-	 * @param string $sanitize_callback
-	 * @return array
 	 */
 	protected function sanitizer_collection(array $collection, string $sanitize_callback): array {
 		foreach ($collection as &$c) {
@@ -76,17 +73,14 @@ abstract class AbstractCollecteur {
 	}
 
 	/**
-	 * @param string $texte
-	 * @param array $options
-	 * @return array
-	 */
-	public function collecter(string $texte, array $options = []): array {
-		$collection = [];
-		return $collection;
+  * @return array
+  */
+ public function collecter(string $texte, array $options = []): array {
+		return [];
 	}
 
 	public function detecter($texte): bool {
-		if (!empty($this->markId) and strpos($texte, $this->markId) !== false) {
+		if (!empty($this->markId) && str_contains($texte, $this->markId)) {
 			return true;
 		}
 		return !empty($this->collecter($texte, ['detecter_presence' => true]));
@@ -108,17 +102,17 @@ abstract class AbstractCollecteur {
 		}
 
 		$collection = $this->collecter($texte, $options);
-		if (!empty($options['sanitize_callback']) and is_callable($options['sanitize_callback'])) {
+		if (!empty($options['sanitize_callback']) && is_callable($options['sanitize_callback'])) {
 			$collection = $this->sanitizer_collection($collection, $options['sanitize_callback']);
 		}
 
-		if (!empty($collection)) {
+		if ($collection !== []) {
 			if (empty($this->markId)) {
 				// generer un marqueur qui n'existe pas dans le texte
 				do {
 					$this->markId = substr(md5(uniqid(static::class, 1)), 0, 7);
 					$this->markId = "@|".static::$markPrefix . $this->markId . "|";
-				} while (strpos($texte, $this->markId) !== false);
+				} while (str_contains($texte, $this->markId));
 			}
 
 			$offset_pos = 0;
@@ -137,8 +131,6 @@ abstract class AbstractCollecteur {
 	 * Retablir les occurences échappées précédemment
 	 *
 	 * @see echapper()
-	 * @param string $texte
-	 * @return string
 	 */
 	function retablir(string $texte): string {
 
@@ -147,7 +139,7 @@ abstract class AbstractCollecteur {
 			$pos = 0;
 			while (
 				($p = strpos($texte, $this->markId, $pos)) !== false
-				and $end = strpos($texte, '|@', $p + $lm)
+				&& ($end = strpos($texte, '|@', $p + $lm))
 			) {
 				$base64 = substr($texte, $p + $lm, $end - ($p + $lm));
 				if ($c = base64_decode($base64, true)) {

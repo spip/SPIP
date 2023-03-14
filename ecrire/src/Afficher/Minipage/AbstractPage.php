@@ -53,6 +53,9 @@ abstract class AbstractPage {
 	 * @uses http_no_cache()
 	 */
 	protected function ouvreBody($options = []) {
+		$h = null;
+		$s = null;
+		$l = null;
 		if (empty($options['lang'])) {
 			// on se limite sur une langue de $GLOBALS['meta']['langues_multilingue'] car on est dans le public
 			utiliser_langue_visiteur($GLOBALS['meta']['langues_multilingue'] ?? null);
@@ -61,12 +64,12 @@ abstract class AbstractPage {
 		}
 		http_no_cache();
 
-		$page_title = (isset($options['page_title']) ? $options['page_title'] : $GLOBALS['meta']['nom_site']);
-		$doctype = (isset($options['doctype']) ? $options['doctype'] : "<!DOCTYPE html>");
+		$page_title = ($options['page_title'] ?? $GLOBALS['meta']['nom_site']);
+		$doctype = ($options['doctype'] ?? "<!DOCTYPE html>");
 		$doctype = trim($doctype) . "\n";
-		$charset = (isset($options['charset']) ? $options['charset'] : "utf-8");
-		$all_inline = (isset($options['all_inline']) ? $options['all_inline'] : true);
-		$onLoad = (isset($options['onLoad']) ? $options['onLoad'] : '');
+		$charset = ($options['charset'] ?? "utf-8");
+		$all_inline = ($options['all_inline'] ?? true);
+		$onLoad = ($options['onLoad'] ?? '');
 		if ($onLoad) {
 			$onLoad = ' onload="' . attribut_html($onLoad) . '"';
 		}
@@ -79,11 +82,9 @@ abstract class AbstractPage {
 		$css = '';
 
 		if (function_exists('couleur_hex_to_hsl')) {
-			if (!empty($options['couleur_fond'])) {
-				$couleur_fond = $options['couleur_fond'];
-			} else {
-				$couleur_fond = lire_config("couleur_login", "#db1762");
-			}
+			$couleur_fond = empty($options['couleur_fond'])
+				? lire_config("couleur_login", "#db1762")
+				: $options['couleur_fond'];
 			$h = couleur_hex_to_hsl($couleur_fond, "h");
 			$s = couleur_hex_to_hsl($couleur_fond, "s");
 			$l = couleur_hex_to_hsl($couleur_fond, "l");
@@ -159,7 +160,7 @@ abstract class AbstractPage {
 		$header = "<header>\n" .
 			"<h1><a href=\"" . attribut_html($url_site) . "\">" . interdire_scripts($GLOBALS['meta']['nom_site'] ?? '') . "</a></h1>\n";
 
-		$titre = (isset($options['titre']) ? $options['titre'] : '');
+		$titre = ($options['titre'] ?? '');
 		if ($titre) {
 			$header .= "<h2>" . interdire_scripts($titre) . "</h2>";
 		}
@@ -240,7 +241,7 @@ abstract class AbstractPage {
 
 		if (
 			$GLOBALS['profondeur_url'] >= (_DIR_RESTREINT ? 1 : 2)
-			and empty($options['all_inline'])
+			&& empty($options['all_inline'])
 		) {
 			define('_SET_HTML_BASE', true);
 			include_spip('public/assembler');

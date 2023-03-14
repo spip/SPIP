@@ -85,12 +85,12 @@ class Multis extends AbstractCollecteur {
 		$trads = [];
 
 		if (strlen($bloc)) {
-			$langs = $this->collecteur($bloc, ']', '[', '@[\[]([a-z]{2,3}(_[a-z]{2,3})?(_[a-z]{2,3})?)[\]]@siS');
+			$langs = static::collecteur($bloc, ']', '[', '@[\[]([a-z]{2,3}(_[a-z]{2,3})?(_[a-z]{2,3})?)[\]]@siS');
 			$lang = '';
 			$pos_prev = 0;
 			foreach ($langs as $l) {
 				$pos = $l['pos'];
-				if ($lang or $pos > $pos_prev) {
+				if ($lang || $pos > $pos_prev) {
 					$trads[$lang] = substr($bloc, $pos_prev, $pos - $pos_prev);
 				}
 				$lang = $l['match'][1];
@@ -110,7 +110,7 @@ class Multis extends AbstractCollecteur {
 	protected function agglomerer_trads($trads) {
 		$texte = '';
 		foreach ($trads as $lang => $trad) {
-			if ($texte or $lang) {
+			if ($texte || $lang) {
 				$texte .= "[$lang]";
 			}
 			$texte .= $trad;
@@ -130,7 +130,7 @@ class Multis extends AbstractCollecteur {
 		}
 
 		// collecter les matchs de la preg
-		$multis = $this->collecteur($texte, '', '<multi', $this->preg_multi, empty($options['detecter_presence']) ? 0 : 1);
+		$multis = static::collecteur($texte, '', '<multi', $this->preg_multi, empty($options['detecter_presence']) ? 0 : 1);
 		// si on veut seulement detecter la présence, on peut retourner tel quel
 		if (empty($options['detecter_presence'])) {
 			foreach ($multis as $k => &$multi) {
@@ -163,7 +163,7 @@ class Multis extends AbstractCollecteur {
 		if ($texte) {
 
 			$multis = $this->collecter($texte);
-			if (!empty($multis)) {
+			if ($multis !== []) {
 				$lang = $options['lang'] ?? $GLOBALS['spip_lang'];
 				$lang_defaut = $options['lang_defaut'] ?? _LANGUE_PAR_DEFAUT;
 				$echappe_span = $options['echappe_span'] ?? false;

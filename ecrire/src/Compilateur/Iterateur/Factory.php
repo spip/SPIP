@@ -34,7 +34,7 @@ class Factory
 
 			// permettre de passer un Iterateur directement {args #ITERATEUR} :
 			// si on recoit deja un iterateur en argument, on l'utilise
-			if ((is_countable($a) ? count($a) : 0) == 1 and is_object($a[0]) and is_subclass_of($a[0], \Iterator::class)) {
+			if ((is_countable($a) ? count($a) : 0) == 1 && is_object($a[0]) && is_subclass_of($a[0], \Iterator::class)) {
 				$iter = $a[0];
 			} else {
 				// sinon, on cree un iterateur du type donne
