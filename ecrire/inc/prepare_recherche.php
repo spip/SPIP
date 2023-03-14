@@ -65,12 +65,12 @@ function inc_prepare_recherche_dist(
 
 	// si recherche n'est pas dans le contexte, on va prendre en globals
 	// ca permet de faire des inclure simple.
-	if (!isset($recherche) and isset($GLOBALS['recherche'])) {
+	if (!isset($recherche) && isset($GLOBALS['recherche'])) {
 		$recherche = $GLOBALS['recherche'];
 	}
 
 	// traiter le cas {recherche?}
-	if ($cond and !strlen($recherche)) {
+	if ($cond && !strlen($recherche)) {
 		return [
 			'0 as points' /* as points */, /* where */
 			''
@@ -93,10 +93,7 @@ function inc_prepare_recherche_dist(
 			'',
 			'0,1'
 		);
-		if (
-			!$row
-			or (defined('_VAR_MODE') and _VAR_MODE == 'recalcul')
-		) {
+		if (!$row || (defined('_VAR_MODE') && _VAR_MODE == 'recalcul')) {
 			$rechercher = true;
 		}
 	}
@@ -187,7 +184,7 @@ function inc_prepare_recherche_dist(
  */
 function generer_select_where_explicites($table, $primary, $rows, $serveur) {
 	# calculer le {id_article IN()} et le {... as points}
-	if (!count($rows)) {
+	if ($rows === []) {
 		return ["''", '0=1'];
 	} else {
 		$listes_ids = [];

@@ -29,7 +29,7 @@ include_spip('inc/presentation');
  *  Un tableau des sous rubriques
  */
 function enfant_rub($collection, $debut = 0, $limite = 500) {
-	$voir_logo = (isset($GLOBALS['meta']['image_process']) and $GLOBALS['meta']['image_process'] != 'non');
+	$voir_logo = (isset($GLOBALS['meta']['image_process']) && $GLOBALS['meta']['image_process'] != 'non');
 	$logo = '';
 
 	if ($voir_logo) {
@@ -42,7 +42,7 @@ function enfant_rub($collection, $debut = 0, $limite = 500) {
 	$result = sql_select(
 		'id_rubrique, id_parent, titre, descriptif, lang',
 		'spip_rubriques',
-		'id_parent=' . intval($collection),
+		'id_parent=' . (int) $collection,
 		'',
 		'0+titre,titre',
 		$debut == -1 ? '' : "$debut,$limite"
@@ -63,23 +63,17 @@ function enfant_rub($collection, $debut = 0, $limite = 500) {
 			$lang_dir = lang_dir($row['lang']);
 			$descriptif = propre($row['descriptif']);
 
-			if ($voir_logo) {
-				if ($logo = $chercher_logo($id_rubrique, 'id_rubrique', 'on')) {
-					[$fid, $dir, $nom, $format] = $logo;
-					$logo = image_recadre_avec_fallback("<img src='$fid' alt='' />", 70, 70);
-					if ($logo) {
-						$logo = wrap(inserer_attribut($logo, 'class', 'logo'), '<span class="logo-carre">');
-					}
-				}
-			}
+			if ($voir_logo && ($logo = $chercher_logo($id_rubrique, 'id_rubrique', 'on'))) {
+       [$fid, $dir, $nom, $format] = $logo;
+       $logo = image_recadre_avec_fallback("<img src='$fid' alt='' />", 70, 70);
+       if ($logo) {
+  						$logo = wrap(inserer_attribut($logo, 'class', 'logo'), '<span class="logo-carre">');
+  					}
+   }
 
-			$lib_bouton = (!acces_restreint_rubrique($id_rubrique) ? '' :
-					http_img_pack(
-						'auteur-0minirezo-16.png',
-						'',
-						" width='16' height='16'",
-						_T('image_administrer_rubrique')
-					)) .
+			$lib_bouton = (acces_restreint_rubrique($id_rubrique)
+					? http_img_pack('auteur-0minirezo-16.png', '', " width='16' height='16'", _T('image_administrer_rubrique'))
+					: '') .
 				" <a class='titremlien' dir='$lang_dir'" .
 				($row['lang'] !== $GLOBALS['spip_lang'] ? " hreflang='" . $row['lang'] . "'" : '') .
 				" href='" .
@@ -91,7 +85,7 @@ function enfant_rub($collection, $debut = 0, $limite = 500) {
 				. '</a>';
 
 			$titre = bouton_block_depliable($lib_bouton, $les_sous_enfants ? false : -1, "enfants$id_rubrique")
-				. (!$descriptif ? '' : "\n<div class='descriptif'>$descriptif</div>")
+				. ($descriptif ? "\n<div class='descriptif'>$descriptif</div>" : '')
 				;
 
 			$res[] =
@@ -115,7 +109,7 @@ function enfant_rub($collection, $debut = 0, $limite = 500) {
  *  Le contenu du bloc dépliable
  */
 function sous_enfant_rub($collection2) {
-	$nb = sql_countsel('spip_rubriques', 'id_parent=' . intval($collection2));
+	$nb = sql_countsel('spip_rubriques', 'id_parent=' . (int) $collection2);
 
 	$retour = '';
 	$pagination = '';
@@ -143,7 +137,7 @@ function sous_enfant_rub($collection2) {
 	$result = sql_select(
 		'id_rubrique, id_parent, titre, lang',
 		'spip_rubriques',
-		'id_parent=' . intval($collection2),
+		'id_parent=' . (int) $collection2,
 		'',
 		'0+titre,titre',
 		$debut == -1 ? '' : "$debut,$limite"
@@ -176,7 +170,7 @@ function sous_enfant_rub($collection2) {
 		return '';
 	}
 
-	return debut_block_depliable($debut > 0 ? true : false, "enfants$collection2")
+	return debut_block_depliable($debut > 0, "enfants$collection2")
 	. "\n<ul class='liste-items sous-sous-rub'>\n"
 	. $retour
 	. "</ul>\n" . fin_block() . "\n\n";
@@ -198,7 +192,7 @@ function afficher_enfant_rub($id_rubrique = 0) {
 	$debut = 0;
 	$limite = 500;
 
-	$nb = sql_countsel('spip_rubriques', 'id_parent=' . intval($id_rubrique));
+	$nb = sql_countsel('spip_rubriques', 'id_parent=' . (int) $id_rubrique);
 
 	if ($nb > $limite) {
 		$debut = _request('debut_rubrique' . $id_rubrique) ?: $debut;
@@ -223,8 +217,7 @@ function afficher_enfant_rub($id_rubrique = 0) {
 		$les_enfants = implode('', array_slice($les_enfants, 0, $n));
 	}
 
-	$res =
-		$pagination
+	return $pagination
 		. "<div class='gauche'>"
 		. $les_enfants
 		. '</div>'
@@ -232,6 +225,4 @@ function afficher_enfant_rub($id_rubrique = 0) {
 		. $les_enfants2
 		. '</div>'
 		. $pagination;
-
-	return $res;
 }

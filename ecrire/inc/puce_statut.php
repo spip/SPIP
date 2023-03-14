@@ -66,7 +66,7 @@ function inc_puce_statut_dist(
 	static $f_puce_statut = [];
 	$type = objet_type($type);
 	// cas prioritaire : fonction perso, qui permet aussi de gerer les cas historiques
-	if (!isset($f_puce_statut[$type]) or is_null($f_puce_statut[$type])) {
+	if (!isset($f_puce_statut[$type]) || is_null($f_puce_statut[$type])) {
 		$f_puce_statut[$type] = charger_fonction($type, 'puce_statut', true);
 	}
 	if ($f_puce_statut[$type]) {
@@ -334,15 +334,7 @@ function puce_statut_changement_rapide(
 		return $src;
 	}
 
-	if (
-		!$id
-		or !_SPIP_AJAX
-		or !$menu_rapide
-	) {
-		$ajax_node = '';
-	} else {
-		$ajax_node = " class='imgstatut$type$id'";
-	}
+	$ajax_node = (!$id || !_SPIP_AJAX || !$menu_rapide) ? '' : " class='imgstatut$type$id'";
 
 
 	$t = statut_titre($type, $statut);
@@ -396,9 +388,8 @@ function puce_statut_changement_rapide(
 		foreach ($desc['statut_textes_instituer'] as $s => $t) {
 			$out .= afficher_script_statut($id, $type, -$zero - $i++ * $unit, statut_image($type, $s), $s, _T($t));
 		}
-		$out .= '</span>';
 
-		return $out;
+		return $out . '</span>';
 	} else {
 		$nom = 'puce_statut_';
 		$action = generer_url_ecrire('puce_statut', '', true);

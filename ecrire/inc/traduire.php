@@ -45,10 +45,8 @@ function find_langs_in_path($file, $dirname = 'lang') {
 		if (!isset($dirs[$a = $dir . $dirname])) {
 			$dirs[$a] = (is_dir($a) || !$a);
 		}
-		if ($dirs[$a]) {
-			if (is_readable($a .= $file)) {
-				$liste[] = $a;
-			}
+		if ($dirs[$a] && is_readable($a .= $file)) {
+			$liste[] = $a;
 		}
 	}
 
@@ -81,7 +79,7 @@ function chercher_module_lang($module, $lang = '') {
 	}
 
 	// 2) directement dans le chemin (old style, uniquement pour local)
-	return (($module == 'local') or strpos($module, '/'))
+	return ($module == 'local' || strpos($module, '/'))
 		? (($f = find_in_path($module . $lang . '.php')) ? [$f] : false)
 		: false;
 }
@@ -111,7 +109,7 @@ function charger_langue($lang, $module = 'spip') {
 		$langs[$lang] = [];
 		if ($lang) {
 			$langs[$lang][] = $lang;
-			if (strpos($lang, '_') !== false) {
+			if (str_contains($lang, '_')) {
 				$l = explode('_', $lang);
 				$langs[$lang][] = reset($l);
 			}
@@ -150,7 +148,7 @@ function lire_fichier_langue(string $fichier): array {
 	$idx_lang = include $fichier;
 	$GLOBALS['idx_lang'] = $idx_lang_before;
 	if (!is_array($idx_lang)) {
-		if (isset($GLOBALS[$idx_lang_tmp]) and is_array($GLOBALS[$idx_lang_tmp])) {
+		if (isset($GLOBALS[$idx_lang_tmp]) && is_array($GLOBALS[$idx_lang_tmp])) {
 			$idx_lang = $GLOBALS[$idx_lang_tmp];
 		} else {
 			$idx_lang = [];
@@ -186,7 +184,7 @@ function surcharger_langue($fichiers) {
 	if (!is_array($fichiers)) {
 		$fichiers = [$fichiers];
 	}
-	if (!count($fichiers)) {
+	if ($fichiers === []) {
 		return;
 	}
 	foreach ($fichiers as $fichier) {
@@ -244,7 +242,7 @@ function inc_traduire_dist($ori, $lang, $raw = false) {
 	static $deja_vu = [];
 	static $local = [];
 
-	if (isset($deja_vu[$lang][$ori]) and (_request('var_mode') != 'traduction')) {
+	if (isset($deja_vu[$lang][$ori]) && _request('var_mode') != 'traduction') {
 		return $raw ? $deja_vu[$lang][$ori] : $deja_vu[$lang][$ori]->texte;
 	}
 
@@ -302,7 +300,7 @@ function inc_traduire_dist($ori, $lang, $raw = false) {
 		// on essaie d'abord la langue du site, puis a defaut la langue fr
 		if (
 			($desc->texte === null || !strlen($desc->texte))
-			and $lang !== _LANGUE_PAR_DEFAUT
+			&& $lang !== _LANGUE_PAR_DEFAUT
 		) {
 			if ($lang !== $GLOBALS['meta']['langue_site']) {
 				$desc = inc_traduire_dist($ori, $GLOBALS['meta']['langue_site'], true);
@@ -312,15 +310,15 @@ function inc_traduire_dist($ori, $lang, $raw = false) {
 		}
 
 		// Supprimer la mention <NEW> ou <MODIF>
-		if ($desc->texte && substr($desc->texte, 0, 1) === '<') {
+		if ($desc->texte && str_starts_with($desc->texte, '<')) {
 			$desc->texte = str_replace(['<NEW>', '<MODIF>'], [], $desc->texte);
 		}
 
 		// Si on n'est pas en utf-8, la chaine peut l'etre...
 		// le cas echeant on la convertit en entites html &#xxx;
 		if (
-			(!isset($GLOBALS['meta']['charset']) or $GLOBALS['meta']['charset'] !== 'utf-8')
-			and preg_match(',[\x7f-\xff],S', $desc->texte)
+			(!isset($GLOBALS['meta']['charset']) || $GLOBALS['meta']['charset'] !== 'utf-8')
+			&& preg_match(',[\x7f-\xff],S', $desc->texte)
 		) {
 			include_spip('inc/charsets');
 			$desc->texte = charset2unicode($desc->texte, 'utf-8');
@@ -345,7 +343,7 @@ function inc_traduire_dist($ori, $lang, $raw = false) {
  * @return Description
  */
 function definir_details_traduction($desc, $modules) {
-	if (!$desc->mode and $desc->texte) {
+	if (!$desc->mode && $desc->texte) {
 		// ne pas modifier 2 fois l'affichage
 		$desc->mode = 'traduction';
 		$classe = 'debug-traduction' . ($desc->module == 'ecrire' ? '-prive' : '');

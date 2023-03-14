@@ -38,20 +38,20 @@ if (!defined('IMG_SVG')) {
  *   false si on a pas pu charger l'image
  */
 function svg_charger($fichier, $maxlen = null) {
-	if (strpos($fichier, 'data:image/svg+xml') === 0) {
+	if (str_starts_with($fichier, 'data:image/svg+xml')) {
 		$image = explode(';', $fichier, 2);
 		$image = end($image);
-		if (strpos($image, 'base64,') === 0) {
+		if (str_starts_with($image, 'base64,')) {
 			$image = base64_decode(substr($image, 7));
 		}
-		if (strpos($image, '<svg') !== false) {
+		if (str_contains($image, '<svg')) {
 			return $image;
 		}
 		// encodage inconnu ou autre format d'image ?
 		return false;
 	}
 	// c'est peut etre deja une image svg ?
-	if (strpos($fichier, '<svg') !== false) {
+	if (str_contains($fichier, '<svg')) {
 		return $fichier;
 	}
 	if (!file_exists($fichier)) {
@@ -60,14 +60,9 @@ function svg_charger($fichier, $maxlen = null) {
 			return false;
 		}
 	}
-	if (is_null($maxlen)) {
-		$image = file_get_contents($fichier);
-	}
-	else {
-		$image = file_get_contents($fichier, false, null, 0, $maxlen);
-	}
+	$image = is_null($maxlen) ? file_get_contents($fichier) : file_get_contents($fichier, false, null, 0, $maxlen);
 	// est-ce bien une image svg ?
-	if (strpos($image, '<svg') !== false) {
+	if (str_contains($image, '<svg')) {
 		return $image;
 	}
 	return false;
@@ -126,35 +121,16 @@ function svg_lire_attributs($img) {
  */
 function svg_dimension_to_pixels($dimension, $precision = 2) {
 	if (preg_match(',^(-?\d+(\.\d+)?)([^\d]*),i', trim($dimension), $m)) {
-		switch (strtolower($m[2])) {
-			case '%':
-				// on ne sait pas faire :(
-				return false;
-				break;
-			case 'em':
-				return round($m[1] * 16, $precision); // 16px font-size par defaut
-				break;
-			case 'ex':
-				return round($m[1] * 16, $precision); // 16px font-size par defaut
-				break;
-			case 'pc':
-				return round($m[1] * 16, $precision); // 1/6 inch = 96px/6 in CSS
-				break;
-			case 'cm':
-				return round($m[1] * 96 / 2.54, $precision); // 96px / 2.54cm;
-				break;
-			case 'mm':
-				return round($m[1] * 96 / 25.4, $precision); // 96px / 25.4mm;
-				break;
-			case 'in':
-				return round($m[1] * 96, $precision); // 1 inch = 96px in CSS
-				break;
-			case 'px':
-			case 'pt':
-			default:
-				return $m[1];
-				break;
-		}
+		return match (strtolower($m[2])) {
+			'%' => false,
+			'em' => round($m[1] * 16, $precision),
+			'ex' => round($m[1] * 16, $precision),
+			'pc' => round($m[1] * 16, $precision),
+			'cm' => round($m[1] * 96 / 2.54, $precision),
+			'mm' => round($m[1] * 96 / 25.4, $precision),
+			'in' => round($m[1] * 96, $precision),
+			default => $m[1],
+  		};
 	}
 	return false;
 }
@@ -174,8 +150,7 @@ function svg_change_balise_svg($svg, $old_balise_svg, $attributs) {
 	$new_balise_svg .= '>';
 
 	$p = strpos($svg, $old_balise_svg);
-	$svg = substr_replace($svg, $new_balise_svg, $p, strlen($old_balise_svg));
-	return $svg;
+	return substr_replace($svg, $new_balise_svg, $p, strlen($old_balise_svg));
 }
 
 /**
@@ -187,7 +162,7 @@ function svg_change_balise_svg($svg, $old_balise_svg, $attributs) {
  */
 function svg_insert_shapes($svg, $shapes, $start = true) {
 
-	if ($start === false or $start === 'end') {
+	if ($start === false || $start === 'end') {
 		$svg = str_replace('</svg>', $shapes . '</svg>', $svg);
 	}
 	else {
@@ -213,8 +188,7 @@ function svg_clip_in_box($svg, $x, $y, $width, $height) {
 	$clippath = "<clipPath id=\"$id\">$rect</clipPath>";
 	$g = "<g clip-path=\"url(#$id)\">";
 	$svg = svg_insert_shapes($svg, $clippath . $g);
-	$svg = svg_insert_shapes($svg, '</g>', false);
-	return $svg;
+	return svg_insert_shapes($svg, '</g>', false);
 }
 
 /**
@@ -226,18 +200,16 @@ function svg_clip_in_box($svg, $x, $y, $width, $height) {
  */
 function svg_redimensionner($img, $new_width, $new_height) {
 	if (
-		$svg = svg_charger($img)
-		and $svg_infos = svg_lire_balise_svg($svg)
+		($svg = svg_charger($img))
+		&& ($svg_infos = svg_lire_balise_svg($svg))
 	) {
 		[$balise_svg, $attributs] = $svg_infos;
 		if (!isset($attributs['viewBox'])) {
 			$attributs['viewBox'] = '0 0 ' . $attributs['width'] . ' ' . $attributs['height'];
 		}
-		$attributs['width'] = strval($new_width);
-		$attributs['height'] = strval($new_height);
-
-		$svg = svg_change_balise_svg($svg, $balise_svg, $attributs);
-		return $svg;
+		$attributs['width'] = (string) $new_width;
+		$attributs['height'] = (string) $new_height;
+		return svg_change_balise_svg($svg, $balise_svg, $attributs);
 	}
 
 	return $img;
@@ -249,15 +221,14 @@ function svg_redimensionner($img, $new_width, $new_height) {
  * @return string
  */
 function svg_couleur_to_hexa($couleur) {
-	if (strpos($couleur, 'rgb(') === 0) {
+	if (str_starts_with($couleur, 'rgb(')) {
 		$c = explode(',', substr($couleur, 4));
-		$couleur = _couleur_dec_to_hex(intval($c[0]), intval($c[1]), intval($c[2]));
+		$couleur = _couleur_dec_to_hex((int) $c[0], (int) $c[1], (int) $c[2]);
 	}
 	else {
 		$couleur = couleur_html_to_hex($couleur);
 	}
-	$couleur = '#' . ltrim($couleur, '#');
-	return $couleur;
+	return '#' . ltrim($couleur, '#');
 }
 
 /**
@@ -266,9 +237,9 @@ function svg_couleur_to_hexa($couleur) {
  * @return array
  */
 function svg_couleur_to_rgb($couleur) {
-	if (strpos($couleur, 'rgb(') === 0) {
+	if (str_starts_with($couleur, 'rgb(')) {
 		$c = explode(',', substr($couleur, 4));
-		return ['red' => intval($c[0]),'green' => intval($c[1]),'blue' => intval($c[2])];
+		return ['red' => (int) $c[0],'green' => (int) $c[1],'blue' => (int) $c[2]];
 	}
 	return _couleur_hex_to_dec($couleur);
 }
@@ -301,7 +272,7 @@ function svg_getimagesize_from_attr($attributs) {
 	$coeff = 1;
 	if (
 		isset($attributs['width'])
-		and $w = svg_dimension_to_pixels($attributs['width'])
+		&& ($w = svg_dimension_to_pixels($attributs['width']))
 	) {
 		$width = $w;
 		// si on avait pas de viewBox, la construire a partir de ce width
@@ -326,7 +297,7 @@ function svg_getimagesize_from_attr($attributs) {
 	}
 	if (
 		isset($attributs['height'])
-		and $h = svg_dimension_to_pixels($attributs['height'])
+		&& ($h = svg_dimension_to_pixels($attributs['height']))
 	) {
 		$height = $h;
 		// si on avait pas de viewBox, la construire a partir de ce height
@@ -370,8 +341,8 @@ function svg_getimagesize_from_attr($attributs) {
  */
 function svg_force_viewBox_px($img, $force_width_and_height = false) {
 	if (
-		$svg = svg_charger($img)
-		and $svg_infos = svg_lire_balise_svg($svg)
+		($svg = svg_charger($img))
+		&& ($svg_infos = svg_lire_balise_svg($svg))
 	) {
 		[$balise_svg, $attributs] = $svg_infos;
 
@@ -383,9 +354,7 @@ function svg_force_viewBox_px($img, $force_width_and_height = false) {
 		}
 
 		$attributs['viewBox'] = $viewBox;
-
-		$svg = svg_change_balise_svg($svg, $balise_svg, $attributs);
-		return $svg;
+		return svg_change_balise_svg($svg, $balise_svg, $attributs);
 	}
 	return $img;
 }
@@ -396,10 +365,11 @@ function svg_force_viewBox_px($img, $force_width_and_height = false) {
  * @return array|mixed
  */
 function svg_extract_couleurs($img) {
-	if ($svg = svg_charger($img)) {
-		if (preg_match_all('/(#[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f])|(rgb\([\s\d]+,[\s\d]+,[\s\d]+\))|(#[0-9a-f][0-9a-f][0-9a-f])/imS', $svg, $matches)) {
-			return $matches[0];
-		}
+	if (
+		($svg = svg_charger($img))
+		&& preg_match_all('/(#[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f])|(rgb\([\s\d]+,[\s\d]+,[\s\d]+\))|(#[0-9a-f][0-9a-f][0-9a-f])/imS', $svg, $matches)
+	) {
+		return $matches[0];
 	}
 	return [];
 }
@@ -413,8 +383,8 @@ function svg_extract_couleurs($img) {
  */
 function svg_recadrer($img, $new_width, $new_height, $offset_width, $offset_height, $background_color = '') {
 	if (
-		$svg = svg_force_viewBox_px($img)
-		and $svg_infos = svg_lire_balise_svg($svg)
+		($svg = svg_force_viewBox_px($img))
+		&& ($svg_infos = svg_lire_balise_svg($svg))
 	) {
 		[$balise_svg, $attributs] = $svg_infos;
 		$viewBox = explode(' ', $attributs['viewBox']);
@@ -427,9 +397,9 @@ function svg_recadrer($img, $new_width, $new_height, $offset_width, $offset_heig
 		// si on a un width/height qui rescale, il faut rescaler
 		if (
 			isset($attributs['width'])
-			and $w = svg_dimension_to_pixels($attributs['width'])
-			and isset($attributs['height'])
-			and $h = svg_dimension_to_pixels($attributs['height'])
+			&& ($w = svg_dimension_to_pixels($attributs['width']))
+			&& isset($attributs['height'])
+			&& ($h = svg_dimension_to_pixels($attributs['height']))
 		) {
 			$xscale = $viewBox[2] / $w;
 			$viewport_w = round($viewport_w * $xscale, 2);
@@ -439,7 +409,7 @@ function svg_recadrer($img, $new_width, $new_height, $offset_width, $offset_heig
 			$viewport_oy = round($viewport_oy * $yscale, 2);
 		}
 
-		if ($viewport_w > $viewBox[2] or $viewport_h > $viewBox[3]) {
+		if ($viewport_w > $viewBox[2] || $viewport_h > $viewBox[3]) {
 			$svg = svg_clip_in_box($svg, $viewBox[0], $viewBox[1], $viewBox[2], $viewBox[3]);
 		}
 
@@ -450,13 +420,13 @@ function svg_recadrer($img, $new_width, $new_height, $offset_width, $offset_heig
 		$viewBox[3] = $viewport_h;
 
 		$attributs['viewBox'] = implode(' ', $viewBox);
-		$attributs['width'] = strval($new_width);
-		$attributs['height'] = strval($new_height);
+		$attributs['width'] = (string) $new_width;
+		$attributs['height'] = (string) $new_height;
 
 		$svg = svg_change_balise_svg($svg, $balise_svg, $attributs);
 
 		// ajouter un background
-		if ($background_color and $background_color !== 'transparent') {
+		if ($background_color && $background_color !== 'transparent') {
 			$svg = svg_ajouter_background($svg, $background_color);
 		}
 
@@ -474,10 +444,10 @@ function svg_recadrer($img, $new_width, $new_height, $offset_width, $offset_heig
  */
 function svg_ajouter_background($img, $background_color) {
 	if (
-		$svg = svg_charger($img)
-		and $svg_infos = svg_lire_balise_svg($svg)
+		($svg = svg_charger($img))
+		&& ($svg_infos = svg_lire_balise_svg($svg))
 	) {
-		if ($background_color and $background_color !== 'transparent') {
+		if ($background_color && $background_color !== 'transparent') {
 			[$balise_svg, $attributs] = $svg_infos;
 
 			$background_color = svg_couleur_to_hexa($background_color);
@@ -504,10 +474,10 @@ function svg_ajouter_background($img, $background_color) {
  */
 function svg_ajouter_voile($img, $background_color, $opacity) {
 	if (
-		$svg = svg_charger($img)
-		and $svg_infos = svg_lire_balise_svg($svg)
+		($svg = svg_charger($img))
+		&& ($svg_infos = svg_lire_balise_svg($svg))
 	) {
-		if ($background_color and $background_color !== 'transparent') {
+		if ($background_color && $background_color !== 'transparent') {
 			[$balise_svg, $attributs] = $svg_infos;
 
 			$background_color = svg_couleur_to_hexa($background_color);
@@ -534,8 +504,8 @@ function svg_ajouter_voile($img, $background_color, $opacity) {
  */
 function svg_transformer($img, $attributs) {
 	if (
-		$svg = svg_charger($img)
-		and $svg_infos = svg_lire_balise_svg($svg)
+		($svg = svg_charger($img))
+		&& ($svg_infos = svg_lire_balise_svg($svg))
 	) {
 		if ($attributs) {
 			[$balise_svg, ] = $svg_infos;
@@ -565,8 +535,8 @@ function svg_transformer($img, $attributs) {
  */
 function svg_apply_filter($img, $filter_def) {
 	if (
-		$svg = svg_charger($img)
-		and $svg_infos = svg_lire_balise_svg($svg)
+		($svg = svg_charger($img))
+		&& ($svg_infos = svg_lire_balise_svg($svg))
 	) {
 		if ($filter_def) {
 			[$balise_svg, ] = $svg_infos;
@@ -588,7 +558,7 @@ function svg_apply_filter($img, $filter_def) {
  * @return string
  */
 function svg_filter_blur($img, $blur_width) {
-	$blur_width = intval($blur_width);
+	$blur_width = (int) $blur_width;
 	return svg_apply_filter($img, "<feGaussianBlur stdDeviation=\"$blur_width\"/>");
 }
 
@@ -624,8 +594,8 @@ function svg_filter_sepia($img, $intensity) {
  */
 function svg_flip($img, $HorV) {
 	if (
-		$svg = svg_force_viewBox_px($img)
-		and $svg_infos = svg_lire_balise_svg($svg)
+		($svg = svg_force_viewBox_px($img))
+		&& ($svg_infos = svg_lire_balise_svg($svg))
 	) {
 		[$balise_svg, $atts] = $svg_infos;
 		$viewBox = explode(' ', $atts['viewBox']);
@@ -633,19 +603,18 @@ function svg_flip($img, $HorV) {
 		if (!in_array($HorV, ['h', 'H'])) {
 			$transform = 'scale(-1,1)';
 
-			$x = intval($viewBox[0]) + intval($viewBox[2] / 2);
+			$x = (int) $viewBox[0] + (int) ($viewBox[2] / 2);
 			$mx = -$x;
 			$transform = "translate($x, 0) $transform translate($mx, 0)";
 		}
 		else {
 			$transform = 'scale(1,-1)';
 
-			$y = intval($viewBox[1]) + intval($viewBox[3] / 2);
+			$y = (int) $viewBox[1] + (int) ($viewBox[3] / 2);
 			$my = -$y;
 			$transform = "translate(0, $y) $transform translate(0, $my)";
 		}
-		$svg = svg_transformer($svg, ['transform' => $transform]);
-		return $svg;
+		return svg_transformer($svg, ['transform' => $transform]);
 	}
 	return $img;
 }
@@ -662,17 +631,16 @@ function svg_flip($img, $HorV) {
  */
 function svg_rotate($img, $angle, $center_x, $center_y) {
 	if (
-		$svg = svg_force_viewBox_px($img)
-		and $svg_infos = svg_lire_balise_svg($svg)
+		($svg = svg_force_viewBox_px($img))
+		&& ($svg_infos = svg_lire_balise_svg($svg))
 	) {
 		[$balise_svg, $atts] = $svg_infos;
 		$viewBox = explode(' ', $atts['viewBox']);
 
 		$center_x = round($viewBox[0] + $center_x * $viewBox[2]);
 		$center_y = round($viewBox[1] + $center_y * $viewBox[3]);
-		$svg = svg_transformer($svg, ['transform' => "rotate($angle $center_x $center_y)"]);
 
-		return $svg;
+		return svg_transformer($svg, ['transform' => "rotate($angle $center_x $center_y)"]);
 	}
 	return $img;
 }
@@ -687,8 +655,8 @@ function svg_rotate($img, $angle, $center_x, $center_y) {
  */
 function svg_filtrer_couleurs($img, $callback_filter) {
 	if (
-		$svg = svg_force_viewBox_px($img)
-		and $colors = svg_extract_couleurs($svg)
+		($svg = svg_force_viewBox_px($img))
+		&& ($colors = svg_extract_couleurs($svg))
 	) {
 		$colors = array_unique($colors);
 
@@ -718,9 +686,8 @@ function svg_filtrer_couleurs($img, $callback_filter) {
 		}
 
 		$svg = str_replace(array_keys($colors), array_values($colors), $svg);
-		$svg = str_replace(array_keys($new_colors), array_values($new_colors), $svg);
 
-		return $svg;
+		return str_replace(array_keys($new_colors), array_values($new_colors), $svg);
 	}
 	return $img;
 }

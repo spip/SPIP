@@ -102,7 +102,7 @@ function minipres($titre = '', $corps = '', $options = []) {
 	// compat signature old
 	// minipres($titre='', $corps="", $onload='', $all_inline = false)
 	$args = func_get_args();
-	if (isset($args[2]) and is_string($args[2])) {
+	if (isset($args[2]) && is_string($args[2])) {
 		$options = ['onload' => $args[2]];
 	}
 	if (isset($args[3])) {

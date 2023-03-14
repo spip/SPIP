@@ -50,7 +50,7 @@ function roles_presents($objet, $objet_destination = '') {
 	$desc = lister_tables_objets_sql(table_objet_sql($objet));
 
 	// pas de liste de roles, on sort
-	if (!isset($desc['roles_titres']) or !($titres = $desc['roles_titres'])) {
+	if (!isset($desc['roles_titres']) || !($titres = $desc['roles_titres'])) {
 		return false;
 	}
 
@@ -142,10 +142,7 @@ function roles_trouver_dans_qualif($objet, $objet_destination, $qualif = []) {
 	if ($roles = roles_presents($objet, $objet_destination)) {
 		$colonne_role = $roles['colonne'];
 		// qu'il n'est pas défini
-		if (
-			!isset($qualif[$colonne_role])
-			or !($role = $qualif[$colonne_role])
-		) {
+		if (!isset($qualif[$colonne_role]) || !($role = $qualif[$colonne_role])) {
 			$role = $roles['roles']['defaut'];
 		}
 		// where
@@ -180,12 +177,9 @@ function roles_creer_condition_role($objet_source, $objet, $cond, $tous_si_absen
 	// chercher d'eventuels rôles transmis
 	$role = ($cond['role'] ?? ($tous_si_absent ? '*' : $role_defaut));
 	unset($cond['role']); // cette condition est particuliere...
-
-	if ($colonne_role) {
-		// on ajoute la condition du role aux autres conditions.
-		if ($role != '*') {
-			$cond[] = "$colonne_role=" . sql_quote($role);
-		}
+	// on ajoute la condition du role aux autres conditions.
+	if ($colonne_role && $role != '*') {
+		$cond[] = "$colonne_role=" . sql_quote($role);
 	}
 
 	return [$cond, $colonne_role, $role];

@@ -61,7 +61,7 @@ function inc_recherche_to_array_dist($recherche, $options = []) {
 
 	// c'est un pis-aller : ca a peu de chance de marcher, mais mieux quand meme que en conservant la ','
 	// (aka ca marche au moins dans certains cas comme avec spip_formulaires_reponses_champs)
-	if (strpos($_id_table, ',') !== false) {
+	if (str_contains($_id_table, ',')) {
 		$_id_table = explode(',', $_id_table);
 		$_id_table = reset($_id_table);
 	}
@@ -73,7 +73,7 @@ function inc_recherche_to_array_dist($recherche, $options = []) {
 		if (is_array($champ)) {
 			spip_log('requetes imbriquees interdites');
 		} else {
-			if (strpos($champ, '.') === false) {
+			if (!str_contains($champ, '.')) {
 				$champ = "t.$champ";
 			}
 			$requete['SELECT'][] = $champ;
@@ -81,7 +81,7 @@ function inc_recherche_to_array_dist($recherche, $options = []) {
 		}
 	}
 	if ($a) {
-		$requete['WHERE'][] = join(' OR ', $a);
+		$requete['WHERE'][] = implode(' OR ', $a);
 	}
 	$requete['FROM'][] = table_objet_sql($table) . ' AS t';
 
@@ -99,15 +99,12 @@ function inc_recherche_to_array_dist($recherche, $options = []) {
 	);
 
 	while (
-		$t = sql_fetch($s, $serveur)
-		and (!isset($t['score']) or $t['score'] > 0)
+		($t = sql_fetch($s, $serveur))
+		&& (!isset($t['score']) || $t['score'] > 0)
 	) {
-		$id = intval($t[$_id_table]);
+		$id = (int) $t[$_id_table];
 
-		if (
-			$options['toutvoir']
-			or autoriser('voir', $table, $id)
-		) {
+		if ($options['toutvoir'] || autoriser('voir', $table, $id)) {
 			// indiquer les champs concernes
 			$champs_vus = [];
 			$score = 0;
@@ -139,11 +136,7 @@ function inc_recherche_to_array_dist($recherche, $options = []) {
 						$matches[$champ] = $regs;
 					}
 
-					if (
-						!$options['champs']
-						and !$options['score']
-						and !$options['matches']
-					) {
+					if (!$options['champs'] && !$options['score'] && !$options['matches']) {
 						break;
 					}
 				}
@@ -173,11 +166,11 @@ function inc_recherche_to_array_dist($recherche, $options = []) {
 	// on ne sait passer que par table de laison en 1 coup
 	if (
 		isset($jointures[$table])
-		and $joints = recherche_en_base(
+		&& ($joints = recherche_en_base(
 			$recherche,
 			$jointures[$table],
 			array_merge($options, ['jointures' => false])
-		)
+		))
 	) {
 		include_spip('action/editer_liens');
 		$trouver_table = charger_fonction('trouver_table', 'base');
@@ -189,9 +182,9 @@ function inc_recherche_to_array_dist($recherche, $options = []) {
 			// on peut definir une fonction de recherche jointe pour regler les cas particuliers
 			if (
 				!(
-				$rechercher_joints = charger_fonction("rechercher_joints_{$table}_{$table_liee}", 'inc', true)
-				or $rechercher_joints = charger_fonction("rechercher_joints_objet_{$table_liee}", 'inc', true)
-				or $rechercher_joints = charger_fonction("rechercher_joints_{$table}_objet_lie", 'inc', true)
+				($rechercher_joints = charger_fonction("rechercher_joints_{$table}_{$table_liee}", 'inc', true))
+				|| ($rechercher_joints = charger_fonction("rechercher_joints_objet_{$table_liee}", 'inc', true))
+				|| ($rechercher_joints = charger_fonction("rechercher_joints_{$table}_objet_lie", 'inc', true))
 				)
 			) {
 				$cle_arrivee = id_table_objet($table_liee);
@@ -251,8 +244,8 @@ function inc_recherche_to_array_dist($recherche, $options = []) {
 					);
 				} // cas table de liaison generique spip_xxx_yyy
 				elseif (
-					$t = $trouver_table($table_arrivee . '_' . $table_depart, $serveur)
-					or $t = $trouver_table($table_depart . '_' . $table_arrivee, $serveur)
+					($t = $trouver_table($table_arrivee . '_' . $table_depart, $serveur))
+					|| ($t = $trouver_table($table_depart . '_' . $table_arrivee, $serveur))
 				) {
 					$s = sql_select(
 						"$cle_depart,$cle_arrivee",
@@ -283,18 +276,18 @@ function inc_recherche_to_array_dist($recherche, $options = []) {
 				if (!isset($results[$id])) {
 					$results[$id] = [];
 				}
-				if (isset($joint['score']) and $joint['score']) {
+				if (isset($joint['score']) && $joint['score']) {
 					if (!isset($results[$id]['score'])) {
 						$results[$id]['score'] = 0;
 					}
 					$results[$id]['score'] += $joint['score'];
 				}
-				if (isset($joint['champs']) and $joint['champs']) {
+				if (isset($joint['champs']) && $joint['champs']) {
 					foreach ($joint['champs'] as $c => $val) {
 						$results[$id]['champs'][$table_liee . '.' . $c] = $val;
 					}
 				}
-				if (isset($joint['matches']) and $joint['matches']) {
+				if (isset($joint['matches']) && $joint['matches']) {
 					foreach ($joint['matches'] as $c => $val) {
 						$results[$id]['matches'][$table_liee . '.' . $c] = $val;
 					}

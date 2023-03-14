@@ -41,13 +41,11 @@ function produire_image_math($tex) {
 	$fichier = $dir_tex . md5(trim($tex)) . $ext;
 
 
-	if (!@file_exists($fichier)) {
-		// Aller chercher l'image sur le serveur
-		if ($server) {
-			spip_log($url = $server . '?' . rawurlencode($tex));
-			include_spip('inc/distant');
-			recuperer_url($url, ['file' => $fichier]);
-		}
+	// Aller chercher l'image sur le serveur
+	if (!@file_exists($fichier) && $server) {
+		spip_log($url = $server . '?' . rawurlencode($tex));
+		include_spip('inc/distant');
+		recuperer_url($url, ['file' => $fichier]);
 	}
 
 

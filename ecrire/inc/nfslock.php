@@ -155,7 +155,7 @@ function spip_nfslock($fichier, $max_age = 0) {
 		 */
 
 		$old_stat = lstat($lock_file);
-		if (@fputs($tmpfd, 'zz', 2) != 2 || !$our_tmp = fstat($tmpfd)) {
+		if (@fwrite($tmpfd, 'zz', 2) != 2 || !$our_tmp = fstat($tmpfd)) {
 			break;
 		} /* something bogus is going on */
 
@@ -243,11 +243,7 @@ function spip_nfsunlock($fichier, $birth, $max_age = 0, $test = false) {
 
 	$tpath = _DIR_TMP . "stime.$id";
 	$tmpfd = @fopen($tpath, 'w');
-	if (
-		(!$tmpfd)
-		or (@fputs($tmpfd, 'zz', 2) != 2)
-		or !($our_tmp = fstat($tmpfd))
-	) {
+	if (!$tmpfd || @fwrite($tmpfd, 'zz', 2) != 2 || !($our_tmp = fstat($tmpfd))) {
 		/* The open failed, or we can't write the file, or we can't stat it */
 		@fclose($tmpfd);
 		spip_unlink($tpath);

@@ -67,7 +67,7 @@ function xmlObjToArr($obj, $utiliser_namespace = false) {
 		$attributes = [];
 
 		// get info for all namespaces
-		foreach ($namespace as $ns => $nsUrl) {
+		foreach (array_keys($namespace) as $ns) {
 			// attributes
 			$objAttributes = $obj->attributes($ns, true);
 			foreach ($objAttributes as $attributeName => $attributeValue) {
