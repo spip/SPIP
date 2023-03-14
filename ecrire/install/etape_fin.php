@@ -22,10 +22,8 @@ function install_etape_fin_dist() {
 	ecrire_acces();
 
 	$f = str_replace(_FILE_TMP_SUFFIX, '.php', _FILE_CHMOD_TMP);
-	if (file_exists(_FILE_CHMOD_TMP) && !@rename(_FILE_CHMOD_TMP, $f)) {
-		if (@copy(_FILE_CHMOD_TMP, $f)) {
-				spip_unlink(_FILE_CHMOD_TMP);
-			}
+	if (file_exists(_FILE_CHMOD_TMP) && !@rename(_FILE_CHMOD_TMP, $f) && @copy(_FILE_CHMOD_TMP, $f)) {
+		spip_unlink(_FILE_CHMOD_TMP);
 	}
 
 	$f = str_replace(_FILE_TMP_SUFFIX, '.php', _FILE_CONNECT_TMP);

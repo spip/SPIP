@@ -19,7 +19,7 @@
 // (cette distinction est obsolete a present, on la garde provisoirement
 // par souci de compatiilite).
 
-if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
+if (isset($GLOBALS['_INC_PUBLIC']) && $GLOBALS['_INC_PUBLIC']) {
 	echo recuperer_fond($fond, $contexte_inclus, [], _request('connect') ?? '');
 } else {
 	$GLOBALS['_INC_PUBLIC'] = 1;
@@ -29,7 +29,7 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 	if (!defined('_DIR_RESTREINT_ABS')) {
 		if (
 			defined('_DIR_RESTREINT')
-			and @file_exists(_ROOT_RESTREINT . 'inc_version.php')
+			&& @file_exists(_ROOT_RESTREINT . 'inc_version.php')
 		) {
 			include_once _ROOT_RESTREINT . 'inc_version.php';
 		} else {
@@ -38,7 +38,7 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 	} // $fond defini dans le fichier d'appel ?
 
 	else {
-		if (isset($fond) and !_request('fond')) {
+		if (isset($fond) && !_request('fond')) {
 		} // fond demande dans l'url par page=xxxx ?
 		else {
 			if (isset($_GET[_SPIP_PAGE])) {
@@ -47,10 +47,7 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 				// Securite
 				if (
 					strstr($fond, '/')
-					and !(
-						isset($GLOBALS['visiteur_session']) // pour eviter d'evaluer la suite pour les anonymes
-						and include_spip('inc/autoriser')
-						and autoriser('webmestre'))
+					&& !(isset($GLOBALS['visiteur_session']) && include_spip('inc/autoriser') && autoriser('webmestre'))
 				) {
 					include_spip('inc/minipres');
 					echo minipres();
@@ -60,7 +57,7 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 				// le cas se presente a cause des RewriteRule d'Apache
 				// qui permettent d'ajouter un argument dans la QueryString
 				// mais pas d'en retirer un en conservant les autres.
-				if (isset($_GET['action']) and $_GET['action'] === $fond) {
+				if (isset($_GET['action']) && $_GET['action'] === $fond) {
 					unset($_GET['action']);
 				}
 				# sinon, fond par defaut
@@ -79,29 +76,27 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 	}
 
 	if (
-		isset($forcer_lang) and $forcer_lang and ($forcer_lang !== 'non')
-		and !_request('action')
-		and $_SERVER['REQUEST_METHOD'] != 'POST'
+		isset($forcer_lang) && $forcer_lang && $forcer_lang !== 'non'
+		&& !_request('action')
+		&& $_SERVER['REQUEST_METHOD'] != 'POST'
 	) {
 		include_spip('inc/lang');
 		verifier_lang_url();
 	}
 
-	$lang = !isset($_GET['lang']) ? '' : lang_select($_GET['lang']);
+	$lang = isset($_GET['lang']) ? lang_select($_GET['lang']) : '';
 
 	// Charger l'aiguilleur des traitements derogatoires
 	// (action en base SQL, formulaires CVT, AJax)
-	if (_request('action') or _request('var_ajax') or _request('formulaire_action')) {
+	if (_request('action') || _request('var_ajax') || _request('formulaire_action')) {
 		include_spip('public/aiguiller');
 		if (
 			// cas des appels actions ?action=xxx
 			traiter_appels_actions()
-			or
 			// cas des hits ajax sur les inclusions ajax
-			traiter_appels_inclusions_ajax()
-			or
+			|| traiter_appels_inclusions_ajax()
 			// cas des formulaires charger/verifier/traiter
-			traiter_formulaires_dynamiques()
+			|| traiter_formulaires_dynamiques()
 		) {
 			// lancer les taches sur affichage final, comme le cron
 			// mais sans rien afficher
@@ -131,14 +126,14 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 
 	// Tester si on est admin et il y a des choses supplementaires a dire
 	// type tableau pour y mettre des choses au besoin.
-	$debug = ((_request('var_mode') == 'debug') or $tableau_des_temps) ? [1] : [];
+	$debug = (_request('var_mode') == 'debug' || $tableau_des_temps) ? [1] : [];
 
 	// affiche-t-on les boutons d'administration ? voir f_admin()
-	$affiche_boutons_admin = ($html and (
-			(isset($_COOKIE['spip_admin']) and (!isset($flag_preserver) or !$flag_preserver))
-			or ($debug and include_spip('inc/autoriser') and autoriser('debug'))
-			or (defined('_VAR_PREVIEW') and _VAR_PREVIEW)
-		));
+	$affiche_boutons_admin = ($html && (
+		isset($_COOKIE['spip_admin']) && (!isset($flag_preserver) || !$flag_preserver)
+		|| $debug && include_spip('inc/autoriser') && autoriser('debug')
+		|| defined('_VAR_PREVIEW') && _VAR_PREVIEW)
+	);
 
 	if ($affiche_boutons_admin) {
 		include_spip('balise/formulaire_admin');
@@ -179,13 +174,13 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 	}
 	// l'affichage de la page a pu lever des erreurs (inclusion manquante)
 	// il faut tester a nouveau
-	$debug = ((_request('var_mode') == 'debug') or $tableau_des_temps) ? [1] : [];
+	$debug = (_request('var_mode') == 'debug' || $tableau_des_temps) ? [1] : [];
 
 	// Appel au debusqueur en cas d'erreurs ou de demande de trace
 	// at last
 	if ($debug) {
 		// en cas d'erreur, retester l'affichage
-		if ($html and ($affiche_boutons_admin or $debug)) {
+		if ($html && ($affiche_boutons_admin || $debug)) {
 			$var_mode_affiche = _request('var_mode_affiche');
 			$var_mode_objet = _request('var_mode_objet');
 			$GLOBALS['debug_objets'][$var_mode_affiche][$var_mode_objet . 'tout'] = ($var_mode_affiche == 'validation' ? $page['texte'] : '');
@@ -194,7 +189,7 @@ if (isset($GLOBALS['_INC_PUBLIC']) and $GLOBALS['_INC_PUBLIC']) {
 	} else {
 		if (
 			isset($GLOBALS['meta']['date_prochain_postdate'])
-			and $GLOBALS['meta']['date_prochain_postdate'] <= time()
+			&& $GLOBALS['meta']['date_prochain_postdate'] <= time()
 		) {
 			include_spip('inc/rubriques');
 			calculer_prochain_postdate(true);

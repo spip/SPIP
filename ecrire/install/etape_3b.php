@@ -143,10 +143,8 @@ function install_etape_3b_dist() {
 		// Connecter directement celui qui vient de (re)donner son login
 		// mais sans cookie d'admin ni connexion longue
 		include_spip('inc/auth');
-		if (
-			!$auteur = auth_identifier_login($login, $pass)
-			|| !auth_loger($auteur)
-		) {
+		$auteur = auth_identifier_login($login, $pass);
+		if (!$auteur || !auth_loger($auteur)) {
 			spip_log("login automatique impossible $auth_spip $session" . (is_countable($row) ? count($row) : 0));
 		}
 	}

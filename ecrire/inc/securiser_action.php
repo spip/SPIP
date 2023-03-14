@@ -240,7 +240,8 @@ function _action_auteur(string $action, int $id_auteur, #[\SensitiveParameter] ?
 
 function _action_get_alea(string $alea): string {
 	if (!isset($GLOBALS['meta'][$alea])) {
-		if (!$exec = _request('exec') or !autoriser_sans_cookie($exec)) {
+		$exec = _request('exec');
+		if (!$exec || !autoriser_sans_cookie($exec)) {
 			include_spip('inc/acces');
 			charger_aleas();
 			if (empty($GLOBALS['meta'][$alea])) {
