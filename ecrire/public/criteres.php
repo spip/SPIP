@@ -658,8 +658,8 @@ function critere_collecte_dist($idb, &$boucles, $crit) {
 			// l'instruction COLLATE doit être placée avant ASC ou DESC
 			// notamment lors de l'utilisation `{!par xxx}{collate yyy}`
 			if (
-				false !== $i = strpos($boucle->order[$n - 1], 'ASC')
-				|| false !== $i = strpos($boucle->order[$n - 1], 'DESC')
+				(false !== $i = strpos($boucle->order[$n - 1], 'ASC'))
+				|| (false !== $i = strpos($boucle->order[$n - 1], 'DESC'))
 			) {
 				$boucle->order[$n - 1] = substr_replace($boucle->order[$n - 1], "' . " . $boucle->modificateur['collate'] . " . ' ", $i, 0);
 			} else {

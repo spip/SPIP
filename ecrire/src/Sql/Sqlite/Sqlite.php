@@ -89,7 +89,7 @@ class Sqlite
 	{
 		$requeteur = Sqlite::requeteur($serveur);
 
-		return $requeteur->last_insert_id($serveur);
+		return $requeteur->last_insert_id();
 	}
 
 	/**

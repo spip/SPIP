@@ -407,12 +407,12 @@ function prive_echafauder_dist($exec, $table, $table_sql, $desc_exec, $ext) {
  * @return bool|string
  */
 function z_sanitize_var_zajax() {
-	$z_ajax = _request('var_zajax');
+ 	$z_ajax = _request('var_zajax');
 	if (!$z_ajax) {
 		return false;
 	}
 	if (
-		!$z_blocs = z_blocs(test_espace_prive())
+		!($z_blocs = z_blocs(test_espace_prive()))
 		|| !in_array($z_ajax, $z_blocs)
 	) {
 		set_request('var_zajax'); // enlever cette demande incongrue

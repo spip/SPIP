@@ -94,8 +94,8 @@ function format_liste_html($fonc, $args, $prof) {
 
 // Concatenation sans separateur: verifier qu'on ne cree pas de faux lexemes
 function format_suite_html($args) {
-	$argsCount = count($args);
-	for ($i = 0; $i < (is_countable($args) ? $argsCount : 0) - 1; $i++) {
+	$argsCount = is_countable($args) ? count($args) : 0;
+	for ($i = 0; $i < $argsCount - 1; $i++) {
 		[$texte, $type] = $args[$i];
 		[$texte2, $type2] = $args[$i + 1];
 		if (!$texte || !$texte2) {

@@ -56,16 +56,14 @@ function quete_virtuel($id_article, $connect) {
  * @return array
  */
 function quete_parent_lang($table, $id, string $connect = '') {
-	static $cache_quete = [];
+ 	static $cache_quete = [];
 
 	if (!isset($cache_quete[$connect][$table][$id])) {
 		if (!isset($cache_quete[$connect][$table]['_select'])) {
 			$trouver_table = charger_fonction('trouver_table', 'base');
 			if (
-				!$desc = $trouver_table(
-					$table,
-					$connect
-				) || !isset($desc['field']['id_rubrique'])
+				!($desc = $trouver_table($table, $connect))
+				|| !isset($desc['field']['id_rubrique'])
 			) {
 				// pas de parent rubrique, on passe
 				$cache_quete[$connect][$table]['_select'] = false;
@@ -694,7 +692,7 @@ function calcul_exposer($id, $prim, $reference, $parent, $type, string $connect 
  * @param string $primary
  * @param int|string $valeur
  * @param int $pas
- * @param objetc $iter
+ * @param object $iter
  * @return int
  */
 function quete_debut_pagination($primary, $valeur, $pas, $iter) {

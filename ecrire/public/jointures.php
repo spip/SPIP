@@ -539,7 +539,7 @@ function chercher_champ_dans_tables($cle, $tables, $connect, $checkarrivee = fal
 	foreach ($tables as $k => $table) {
 		if (
 			$table
-			&& $desc = $trouver_table($table, $connect)
+			&& ($desc = $trouver_table($table, $connect))
 			&& (
 				isset($desc['field'])
 				&& count(array_intersect($cle, array_keys($desc['field']))) === count($cle)

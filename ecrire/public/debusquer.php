@@ -424,10 +424,13 @@ function trouve_squelette_inclus($script) {
 	// si le script X.php n'est pas ecrire/public.php
 	// on suppose qu'il prend le squelette X.html (pas sur, mais y a pas mieux)
 	// si c'est bien ecrire/public on cherche le param 'fond'
-	if ($reg[1] == 'ecrire/public' && !preg_match("/'fond' => '([^']*)'/", $script, $reg)) { // a defaut on cherche le param 'page'
-		if (!preg_match("/'param' => '([^']*)'/", $script, $reg)) {
-				$reg[1] = 'inconnu';
-		}
+	// a defaut on cherche le param 'page'
+	if (
+		$reg[1] == 'ecrire/public'
+		&& !preg_match("/'fond' => '([^']*)'/", $script, $reg)
+		&& !preg_match("/'param' => '([^']*)'/", $script, $reg)
+	) {
+		$reg[1] = 'inconnu';
 	}
 	$incl = ',' . $reg[1] . '[.]\w$,';
 

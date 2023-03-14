@@ -145,7 +145,7 @@ function securiser_action_auteur($action, $arg, $redirect = '', $mode = false, $
 		} else {
 			return generer_url_action(
 				$action,
-				'arg=' . rawurlencode($arg) . "&hash=$hash" . (!$r ? '' : "&redirect=$r"),
+				'arg=' . rawurlencode($arg) . "&hash=$hash" . ($r ? "&redirect=$r" : ''),
 				$mode,
 				$public
 			);
@@ -174,13 +174,13 @@ function securiser_action_auteur($action, $arg, $redirect = '', $mode = false, $
 function caracteriser_auteur($id_auteur = null) {
 	static $caracterisation = [];
 
-	if (is_null($id_auteur) and !isset($GLOBALS['visiteur_session']['id_auteur'])) {
+	if (is_null($id_auteur) && !isset($GLOBALS['visiteur_session']['id_auteur'])) {
 		// si l'auteur courant n'est pas connu alors qu'il peut demander une action
 		// c'est une connexion par php_auth ou 1 instal, on se rabat sur le cookie.
 		// S'il n'avait pas le droit de realiser cette action, le hash sera faux.
 		if (
 			isset($_COOKIE['spip_session'])
-			and (preg_match('/^(\d+)/', $_COOKIE['spip_session'], $r))
+			&& preg_match('/^(\d+)/', $_COOKIE['spip_session'], $r)
 		) {
 			return [$r[1], ''];
 			// Necessaire aux forums anonymes.
@@ -192,7 +192,7 @@ function caracteriser_auteur($id_auteur = null) {
 	// Eviter l'acces SQL si le pass est connu de PHP
 	if (is_null($id_auteur)) {
 		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'] ?? 0;
-		if (isset($GLOBALS['visiteur_session']['pass']) and $GLOBALS['visiteur_session']['pass']) {
+		if (isset($GLOBALS['visiteur_session']['pass']) && $GLOBALS['visiteur_session']['pass']) {
 			return $caracterisation[$id_auteur] = [$id_auteur, $GLOBALS['visiteur_session']['pass']];
 		}
 	}
@@ -220,16 +220,10 @@ function caracteriser_auteur($id_auteur = null) {
  * Calcule une cle securisee pour une action et un auteur donnes
  * utilisee pour generer des urls personelles pour executer une action qui modifie la base
  * et verifier la legitimite de l'appel a l'action
- *
- * @param string $action
- * @param int $id_auteur
- * @param string $pass
- * @param string $alea
- * @return string
  */
 function _action_auteur(string $action, int $id_auteur, #[\SensitiveParameter] ?string $pass, string $alea): string {
 	static $sha = [];
-	$pass = $pass ?? '';
+	$pass ??= '';
 	$entry = "$action:$id_auteur:$pass:$alea";
 	if (!isset($sha[$entry])) {
 		$sha[$entry] = hash_hmac('sha256', "$action::$id_auteur", "$pass::" . _action_get_alea($alea));
@@ -279,14 +273,8 @@ function calculer_action_auteur($action, $id_auteur = null) {
  */
 function verifier_action_auteur($action, $hash) {
 	[$id_auteur, $pass] = caracteriser_auteur();
-	if (
-		hash_equals($hash, _action_auteur($action, $id_auteur, $pass, 'alea_ephemere'))
-		or hash_equals($hash, _action_auteur($action, $id_auteur, $pass, 'alea_ephemere_ancien'))
-	) {
-		return true;
-	}
-
-	return false;
+ 	return hash_equals($hash, _action_auteur($action, $id_auteur, $pass, 'alea_ephemere'))
+		|| hash_equals($hash, _action_auteur($action, $id_auteur, $pass, 'alea_ephemere_ancien'));
 }
 
 //
@@ -339,12 +327,10 @@ function verifier_cle_action($action, #[\SensitiveParameter] $cle) {
  * @return string Token, de la forme "{id}*{hash}"
  */
 function calculer_token_previsu($url, $id_auteur = null, $alea = 'alea_ephemere') {
-	if (is_null($id_auteur)) {
-		if (!empty($GLOBALS['visiteur_session']['id_auteur'])) {
-			$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
-		}
+	if (is_null($id_auteur) && !empty($GLOBALS['visiteur_session']['id_auteur'])) {
+		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
 	}
-	if (!$id_auteur = intval($id_auteur)) {
+	if (!$id_auteur = (int) $id_auteur) {
 		return '';
 	}
 	// On nettoie l’URL de tous les var_.
@@ -371,8 +357,8 @@ function calculer_token_previsu($url, $id_auteur = null, $alea = 'alea_ephemere'
 function verifier_token_previsu(#[\SensitiveParameter] $token) {
 	// retrouver auteur / hash
 	$e = explode('-', $token, 2);
-	if (count($e) == 2 and is_numeric(reset($e))) {
-		$id_auteur = intval(reset($e));
+	if (count($e) == 2 && is_numeric(reset($e))) {
+		$id_auteur = (int) reset($e);
 	} else {
 		return false;
 	}
@@ -384,9 +370,9 @@ function verifier_token_previsu(#[\SensitiveParameter] $token) {
 
 	// verifier le token
 	$_token = calculer_token_previsu($url, $id_auteur, 'alea_ephemere');
-	if (!$_token or !hash_equals($token, $_token)) {
+	if (!$_token || !hash_equals($token, $_token)) {
 		$_token = calculer_token_previsu($url, $id_auteur, 'alea_ephemere_ancien');
-		if (!$_token or !hash_equals($token, $_token)) {
+		if (!$_token || !hash_equals($token, $_token)) {
 			return false;
 		}
 	}
@@ -404,11 +390,7 @@ function verifier_token_previsu(#[\SensitiveParameter] $token) {
 function decrire_token_previsu() {
 	static $desc = null;
 	if (is_null($desc)) {
-		if ($token = _request('var_previewtoken')) {
-			$desc = verifier_token_previsu($token);
-		} else {
-			$desc = false;
-		}
+		$desc = ($token = _request('var_previewtoken')) ? verifier_token_previsu($token) : false;
 	}
 	return $desc;
 }
