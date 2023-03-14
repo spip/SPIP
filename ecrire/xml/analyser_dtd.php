@@ -33,7 +33,7 @@ function charger_dtd($grammaire, $avail, $rotlvl) {
 		if (!$grammaire) {
 			return [];
 		}
-		if (($avail == 'SYSTEM') and filemtime($file) < filemtime($grammaire)) {
+		if ($avail == 'SYSTEM' && filemtime($file) < filemtime($grammaire)) {
 			$r = false;
 		}
 	}
@@ -73,7 +73,7 @@ function charger_dtd($grammaire, $avail, $rotlvl) {
 // et parentheser le tout pour que  | + * ? s'applique dessus.
 
 function compilerRegle($val) {
-	$x = str_replace(
+	return str_replace(
 		'()',
 		'',
 		preg_replace(
@@ -94,8 +94,6 @@ function compilerRegle($val) {
 			)
 		)
 	);
-
-	return $x;
 }
 
 
@@ -106,7 +104,7 @@ function analyser_dtd($loc, $avail, &$dtc) {
 	// si DTD locale, ignorer ce repertoire pour le moment
 	if ($avail == 'SYSTEM') {
 		$file = $loc;
-		if (_DIR_RACINE and strncmp($file, _DIR_RACINE, strlen(_DIR_RACINE)) == 0) {
+		if (_DIR_RACINE && str_starts_with($file, _DIR_RACINE)) {
 			$file = substr($file, strlen(_DIR_RACINE));
 		}
 		$file = find_in_path($file);
@@ -145,28 +143,15 @@ function analyser_dtd($loc, $avail, &$dtc) {
 		} elseif ($dtd[2] == '[') {
 			$r = analyser_dtd_data($dtd, $dtc, $loc);
 		} else {
-			switch ($dtd[3]) {
-				case '%':
-					$r = analyser_dtd_data($dtd, $dtc, $loc);
-					break;
-				case 'T':
-					$r = analyser_dtd_attlist($dtd, $dtc, $loc);
-					break;
-				case 'L':
-					$r = analyser_dtd_element($dtd, $dtc, $loc);
-					break;
-				case 'N':
-					$r = analyser_dtd_entity($dtd, $dtc, $loc);
-					break;
-				case 'O':
-					$r = analyser_dtd_notation($dtd, $dtc, $loc);
-					break;
-				case '-':
-					$r = analyser_dtd_comment($dtd, $dtc, $loc);
-					break;
-				default:
-					$r = -1;
-			}
+			$r = match ($dtd[3]) {
+				'%' => analyser_dtd_data($dtd, $dtc, $loc),
+				'T' => analyser_dtd_attlist($dtd, $dtc, $loc),
+				'L' => analyser_dtd_element($dtd, $dtc, $loc),
+				'N' => analyser_dtd_entity($dtd, $dtc, $loc),
+				'O' => analyser_dtd_notation($dtd, $dtc, $loc),
+				'-' => analyser_dtd_comment($dtd, $dtc, $loc),
+				default => -1,
+			};
 		}
 		if (!is_string($r)) {
 			spip_log("erreur $r dans la DTD  " . substr($dtd, 0, 80) . '.....');
@@ -211,8 +196,7 @@ function analyser_dtd_lexeme($dtd, &$dtc, $grammaire) {
 		// en cas d'inclusion, l'espace de nom est le meme
 		// mais gaffe aux DTD dont l'URL est relative a l'engloblante
 		if (
-			($n[0] == 'PUBLIC')
-			and !tester_url_absolue($n[1])
+			$n[0] == 'PUBLIC' && !tester_url_absolue($n[1])
 		) {
 			$n[1] = substr($grammaire, 0, strrpos($grammaire, '/') + 1) . $n[1];
 		}
@@ -240,13 +224,9 @@ function analyser_dtd_data($dtd, &$dtc, $grammaire) {
 		return -12;
 	}
 
-	if ($dtc->macros[$m[1]] == 'INCLUDE') {
-		$retour = $r[1] . substr($m[2], strlen($r[0]));
-	} else {
-		$retour = substr($m[2], strlen($r[0]));
-	}
-
-	return $retour;
+	return $dtc->macros[$m[1]] == 'INCLUDE'
+		? $r[1] . substr($m[2], strlen($r[0]))
+		: substr($m[2], strlen($r[0]));
 }
 
 function analyser_dtd_notation($dtd, &$dtc, $grammaire) {
@@ -265,7 +245,7 @@ function analyser_dtd_entity($dtd, &$dtc, $grammaire) {
 
 	[$t, $term, $nom, $type, $k1, $k2, $k3, $k4, $k5, $k6, $c, $q, $alt, $dtd] = $m;
 
-	if (isset($dtc->macros[$nom]) and $dtc->macros[$nom]) {
+	if (isset($dtc->macros[$nom]) && $dtc->macros[$nom]) {
 		return $dtd;
 	}
 	if (isset($dtc->entites[$nom])) {
@@ -286,15 +266,14 @@ function analyser_dtd_entity($dtd, &$dtc, $grammaire) {
 	} elseif (!$type) {
 		$dtc->macros[$nom] = $val;
 	} else {
-		if (($type == 'SYSTEM') and !$alt) {
+		if ($type == 'SYSTEM' && !$alt) {
 			$alt = $val;
 		}
 		if (!$alt) {
 			$dtc->macros[$nom] = $val;
 		} else {
 			if (
-				($type == 'PUBLIC')
-				and (strpos($alt, '/') === false)
+				$type == 'PUBLIC' && !str_contains($alt, '/')
 			) {
 				$alt = preg_replace(',/[^/]+$,', '/', $grammaire)
 					. $alt;
@@ -337,14 +316,9 @@ function analyser_dtd_element($dtd, &$dtc, $grammaire) {
 		$dtc->regles[$nom] = 'ANY';
 	} else {
 		$last = substr($val, -1);
-		if (
-			preg_match('/ \w/', $val)
-			or (!empty($last) and !str_contains('*+?', $last))
-		) {
-			$dtc->regles[$nom] = "/^$val$/";
-		} else {
-			$dtc->regles[$nom] = $last;
-		}
+		$dtc->regles[$nom] = preg_match('/ \w/', $val) || (!empty($last) && !str_contains('*+?', $last))
+			? "/^$val$/"
+			: $last;
 		$filles = array_values(preg_split('/\W+/', $val, -1, PREG_SPLIT_NO_EMPTY));
 
 		foreach ($filles as $k) {
@@ -356,7 +330,7 @@ function analyser_dtd_element($dtd, &$dtc, $grammaire) {
 			}
 		}
 	}
-	$dtc->pcdata[$nom] = (strpos($contenu, '#PCDATA') === false);
+	$dtc->pcdata[$nom] = (!str_contains($contenu, '#PCDATA'));
 	$dtc->elements[$nom] = $filles;
 
 	return $dtd;

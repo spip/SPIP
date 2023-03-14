@@ -23,19 +23,15 @@ include_spip('xml/interfaces');
  * @return string
  */
 function xml_entites_html($texte) {
-	if (
-		!is_string($texte) or !$texte
-		or strpbrk($texte, "&\"'<>") == false
-	) {
+	if (!is_string($texte) || !$texte || strpbrk($texte, "&\"'<>") == false) {
 		return $texte;
 	}
 
 	if (!function_exists('spip_htmlspecialchars')) {
 		include_spip('inc/filtres_mini');
 	}
-	$texte = spip_htmlspecialchars($texte, ENT_QUOTES);
 
-	return $texte;
+	return spip_htmlspecialchars($texte, ENT_QUOTES);
 }
 
 function xml_debutElement($phraseur, $name, $attrs) {
@@ -54,7 +50,7 @@ function xml_debutElement($phraseur, $name, $attrs) {
 	$att = '';
 	$sep = ' ';
 	foreach ($attrs as $k => $v) {
-		$delim = !str_contains($v, "'") ? "'" : '"';
+		$delim = str_contains($v, "'") ? '"' : "'";
 		$val = xml_entites_html($v);
 		$att .= $sep . $k . '=' . $delim
 			. ($delim !== '"' ? str_replace('&quot;', '"', $val) : $val)
@@ -85,7 +81,7 @@ function xml_finElement($phraseur, $name, $fusion_bal = false) {
 	// en presence d'attributs ne le faire que si la DTD est dispo et d'accord
 	// (param fusion_bal)
 
-	if ($t || (($ouv != $name) and !$fusion_bal)) {
+	if ($t || ($ouv != $name && !$fusion_bal)) {
 		$phraseur->res .= ($ouv ? ('<' . $ouv . '>') : '') . $t . '</' . $name . '>';
 	} else {
 		$phraseur->res .= ($ouv ? ('<' . $ouv . ' />') : ('</' . $name . '>'));
@@ -131,8 +127,8 @@ function xml_parsestring($phraseur, $data) {
 			$phraseur,
 			xml_error_string(xml_get_error_code($phraseur->sax))
 			. "<br />\n" .
-			(!$phraseur->depth ? '' :
-				('(' .
+			($phraseur->depth
+				? '(' .
 					_T('erreur_balise_non_fermee') .
 					' <tt>' .
 					$phraseur->ouvrant[$phraseur->depth] .
@@ -140,7 +136,8 @@ function xml_parsestring($phraseur, $data) {
 					_T('ligne') .
 					' ' .
 					$phraseur->reperes[$phraseur->depth] .
-			") <br />\n"))
+					") <br />\n"
+				: '')
 		);
 	}
 }
@@ -160,11 +157,7 @@ function xml_sax_dist($page, $apply = false, $phraseur = null, $doctype = '', $c
 	}
 	if ($apply) {
 		ob_start();
-		if (is_array($apply)) {
-			$r = $page(...$apply);
-		} else {
-			$r = $page();
-		}
+		$r = is_array($apply) ? $page(...$apply) : $page();
 		$page = ob_get_contents();
 		ob_end_clean();
 		// fonction sans aucun "echo", ca doit etre le resultat
@@ -300,10 +293,8 @@ function analyser_doctype($data) {
 	}
 	[$entete, , $topelement, $avail, $suite] = $page;
 
-	if (!preg_match('/^"([^"]*)"\s*(.*)$/', $suite, $r)) {
-		if (!preg_match("/^'([^']*)'\s*(.*)$/", $suite, $r)) {
-			return [];
-		}
+	if (!preg_match('/^"([^"]*)"\s*(.*)$/', $suite, $r) && !preg_match("/^'([^']*)'\s*(.*)$/", $suite, $r)) {
+		return [];
 	}
 	[, $rotlvl, $suite] = $r;
 
@@ -314,10 +305,8 @@ function analyser_doctype($data) {
 		$grammaire = $rotlvl;
 		$rotlvl = '';
 	} else {
-		if (!preg_match('/^"([^"]*)"\s*$/', $suite, $r)) {
-			if (!preg_match("/^'([^']*)'\s*$/", $suite, $r)) {
-				return [];
-			}
+		if (!preg_match('/^"([^"]*)"\s*$/', $suite, $r) && !preg_match("/^'([^']*)'\s*$/", $suite, $r)) {
+			return [];
 		}
 
 		$grammaire = $r[1];

@@ -39,45 +39,40 @@ class ValidateurXML
 		$depth = $this->depth;
 		$ouvrant = $this->ouvrant;
 		#spip_log("trouve $name apres " . $ouvrant[$depth]);
-		if (isset($ouvrant[$depth])) {
-			if (preg_match('/^\s*(\w+)/', $ouvrant[$depth], $r)) {
-				$pere = $r[1];
-				#spip_log("pere $pere");
-				if (isset($this->dtc->elements[$pere])) {
-					$fils = $this->dtc->elements[$pere];
-					#spip_log("rejeton $name fils " . @join(',',$fils));
-					if (!($p = @in_array($name, $fils))) {
-						if ($p = strpos($name, ':')) {
-							$p = substr($name, $p + 1);
-							$p = @in_array($p, $fils);
-						}
+		if (isset($ouvrant[$depth]) && preg_match('/^\s*(\w+)/', $ouvrant[$depth], $r)) {
+			$pere = $r[1];
+			#spip_log("pere $pere");
+			if (isset($this->dtc->elements[$pere])) {
+				$fils = $this->dtc->elements[$pere];
+				#spip_log("rejeton $name fils " . @join(',',$fils));
+				if (!($p = @in_array($name, $fils)) && ($p = strpos($name, ':'))) {
+					$p = substr($name, $p + 1);
+					$p = @in_array($p, $fils);
+				}
+				if (!$p) {
+					$bons_peres = @implode('</b>, <b>', $this->dtc->peres[$name]);
+					coordonnees_erreur($this, " <b>$name</b> "
+						. _T('zxml_non_fils')
+						. ' <b>'
+						. $pere
+						. '</b>'
+						. ($bons_peres ? '<p style="font-size: 80%"> ' . _T('zxml_mais_de') . ' <b>' . $bons_peres . '</b></p>' : ''));
+				} elseif ($this->dtc->regles[$pere][0] == '/') {
+					$frat = substr($depth, 2);
+					if (!isset($this->fratrie[$frat])) {
+						$this->fratrie[$frat] = '';
 					}
-					if (!$p) {
-						$bons_peres = @join('</b>, <b>', $this->dtc->peres[$name]);
-						coordonnees_erreur($this, " <b>$name</b> "
-							. _T('zxml_non_fils')
-							. ' <b>'
-							. $pere
-							. '</b>'
-							. (!$bons_peres ? ''
-								: ('<p style="font-size: 80%"> ' . _T('zxml_mais_de') . ' <b>' . $bons_peres . '</b></p>')));
-					} elseif ($this->dtc->regles[$pere][0] == '/') {
-						$frat = substr($depth, 2);
-						if (!isset($this->fratrie[$frat])) {
-							$this->fratrie[$frat] = '';
-						}
-						$this->fratrie[$frat] .= "$name ";
-					}
+					$this->fratrie[$frat] .= "$name ";
 				}
 			}
-		}
+ 		}
 		// Init de la suite des balises a memoriser si regle difficile
-		if ($this->dtc->regles[$name] and $this->dtc->regles[$name][0] == '/') {
+		if ($this->dtc->regles[$name] && $this->dtc->regles[$name][0] == '/') {
 			$this->fratrie[$depth] = '';
 		}
 		if (isset($this->dtc->attributs[$name])) {
 			foreach ($this->dtc->attributs[$name] as $n => $v) {
-				if (($v[1] == '#REQUIRED') and (!isset($attrs[$n]))) {
+				if ($v[1] == '#REQUIRED' && !isset($attrs[$n])) {
 					coordonnees_erreur($this, " <b>$n</b>"
 						. '&nbsp;:&nbsp;'
 						. _T('zxml_obligatoire_attribut')
@@ -95,7 +90,7 @@ class ValidateurXML
 
 		$a = $this->dtc->attributs[$bal];
 		if (!isset($a[$name])) {
-			$bons = join(', ', array_keys($a));
+			$bons = implode(', ', array_keys($a));
 			if ($bons) {
 				$bons = " title=' " .
 					_T('zxml_connus_attributs') .
@@ -215,11 +210,11 @@ class ValidateurXML
 		$vide = ($regle == 'EMPTY');
 		// controler que les balises devant etre vides le sont
 		if ($vide) {
-			if ($n <> ($k + $c)) {
+			if ($n != $k + $c) {
 				coordonnees_erreur($this, " <p><b>$name</b> " . _T('zxml_nonvide_balise'));
 			}
 			// pour les regles PCDATA ou iteration de disjonction, tout est fait
-		} elseif ($regle and ($regle != '*')) {
+		} elseif ($regle && $regle != '*') {
 			if ($regle == '+') {
 				// iteration de disjonction non vide: 1 balise au -
 				if ($n == $k) {
@@ -228,7 +223,7 @@ class ValidateurXML
 				}
 			} else {
 				$f = $this->fratrie[substr($depth, 2)] ?? null;
-				if (is_null($f) or !preg_match($regle, $f)) {
+				if (is_null($f) || !preg_match($regle, $f)) {
 					coordonnees_erreur(
 						$this,
 						" <p>\n<b>$name</b> "
@@ -250,7 +245,7 @@ class ValidateurXML
 			$d = $this->depth;
 			$d = $this->ouvrant[$d];
 			preg_match('/^\s*(\S+)/', $d, $m);
-			if (isset($this->dtc->pcdata[$m[1]]) and ($this->dtc->pcdata[$m[1]])) {
+			if (isset($this->dtc->pcdata[$m[1]]) && $this->dtc->pcdata[$m[1]]) {
 				coordonnees_erreur($this, ' <p><b>' . $m[1] . '</b> '
 					. _T('zxml_nonvide_balise')); // message a affiner
 			}
@@ -276,7 +271,7 @@ class ValidateurXML
 	public function defaultElement($phraseur, $data) {
 		if (
 			!preg_match('/^<!--/', $data)
-			and (preg_match_all('/&([^;]*)?/', $data, $r, PREG_SET_ORDER))
+			&& preg_match_all('/&([^;]*)?/', $data, $r, PREG_SET_ORDER)
 		) {
 			foreach ($r as $m) {
 				[$t, $e] = $m;
@@ -287,7 +282,7 @@ class ValidateurXML
 				}
 			}
 		}
-		if (isset($this->process['default']) and ($f = $this->process['default'])) {
+		if (isset($this->process['default']) && ($f = $this->process['default'])) {
 			$f($this, $data);
 		}
 	}
@@ -295,7 +290,7 @@ class ValidateurXML
 	public function phraserTout($phraseur, $data) {
 		xml_parsestring($this, $data);
 
-		if (!$this->dtc or preg_match(',^' . _MESSAGE_DOCTYPE . ',', $data)) {
+		if (!$this->dtc || preg_match(',^' . _MESSAGE_DOCTYPE . ',', $data)) {
 			$this->err[] = ['DOCTYPE ?', 0, 0];
 		} else {
 			$this->valider_passe2();
