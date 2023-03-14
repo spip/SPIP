@@ -545,7 +545,7 @@ function lien_gerer__oups(string $form, string $action, ?array $valeur = null) {
 						or empty($oups['time'])
 						or $oups['time'] < $_SERVER['REQUEST_TIME'] - 86400
 						or empty($oups['args'])
-						or $oups['args'] !== lien_gerer__oups_collecter_args($form, debug_backtrace(null, 5))
+						or $oups['args'] !== lien_gerer__oups_collecter_args($form, debug_backtrace(0, 5))
 						or empty($oups['oups_value'])) {
 						$oups = null;
 					}
@@ -586,7 +586,7 @@ function lien_gerer__oups(string $form, string $action, ?array $valeur = null) {
 			$oups = [
 				'id_auteur' => $GLOBALS['visiteur_session']['id_auteur'] ?? 0,
 				'time' => strtotime(date('Y-m-d H:00:00')),
-				'args' => lien_gerer__oups_collecter_args($form, debug_backtrace(null, 5)),
+				'args' => lien_gerer__oups_collecter_args($form, debug_backtrace(0, 5)),
 				'oups_value' => $_oups_value,
 			];
 			return encoder_contexte_ajax($oups, $form);
@@ -595,8 +595,9 @@ function lien_gerer__oups(string $form, string $action, ?array $valeur = null) {
 
 /**
  * Collecter les args du form utilisant la fonction lien_gerer__oups()
- * @param $trace
- * @return false|float|int|mixed|Services_JSON_Error|string
+ * @param string $form
+ * @param array $trace
+ * @return string
  */
 function lien_gerer__oups_collecter_args($form, $trace) {
 	$args = '';
