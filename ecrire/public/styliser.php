@@ -42,11 +42,11 @@ function public_styliser_dist($fond, $contexte, $lang = '', string $connect = ''
 
 	// s'assurer que le fond est licite
 	// car il peut etre construit a partir d'une variable d'environnement
-	if (strpos($fond, '../') !== false or strncmp($fond, '/', 1) == 0) {
+	if (str_contains($fond, '../') || str_starts_with($fond, '/')) {
 		$fond = '404';
 	}
 
-	if (strncmp($fond, 'modeles/', 8) == 0) {
+	if (str_starts_with($fond, 'modeles/')) {
 		$modele = substr($fond, 8);
 		$modele = styliser_modele($modele, null, $contexte);
 		$fond = "modeles/$modele";
@@ -78,7 +78,7 @@ function public_styliser_dist($fond, $contexte, $lang = '', string $connect = ''
 		'data' => $squelette['fond'],
 	];
 
-	if (test_espace_prive() or defined('_ZPIP')) {
+	if (test_espace_prive() || defined('_ZPIP')) {
 		if (!$styliser_par_z) {
 			$styliser_par_z = charger_fonction('styliser_par_z', 'public');
 		}
@@ -111,11 +111,11 @@ function public_styliser_dist($fond, $contexte, $lang = '', string $connect = ''
 function styliser_par_objets($flux) {
 	if (
 		test_espace_prive()
-		and !$squelette = $flux['data']
-		and strncmp($flux['args']['fond'], 'prive/objets/', 13) == 0
-		and $echafauder = charger_fonction('echafauder', 'prive', true)
+		&& !($squelette = $flux['data'])
+		&& str_starts_with($flux['args']['fond'], 'prive/objets/')
+		&& ($echafauder = charger_fonction('echafauder', 'prive', true))
 	) {
-		if (strncmp($flux['args']['fond'], 'prive/objets/liste/', 19) == 0) {
+		if (str_starts_with($flux['args']['fond'], 'prive/objets/liste/')) {
 			$table = table_objet(substr($flux['args']['fond'], 19));
 			$table_sql = table_objet_sql($table);
 			$objets = lister_tables_objets_sql();
@@ -123,7 +123,7 @@ function styliser_par_objets($flux) {
 				$flux['data'] = $echafauder($table, $table, $table_sql, 'prive/objets/liste/objets', $flux['args']['ext']);
 			}
 		}
-		if (strncmp($flux['args']['fond'], 'prive/objets/contenu/', 21) == 0) {
+		if (str_starts_with($flux['args']['fond'], 'prive/objets/contenu/')) {
 			$type = substr($flux['args']['fond'], 21);
 			$table = table_objet($type);
 			$table_sql = table_objet_sql($table);
@@ -147,7 +147,7 @@ function styliser_par_objets($flux) {
  *
  * @staticvar array $liste_objets
  * @param array $contexte
- * @return array
+ * @return array|false
  */
 function quete_rubrique_fond($contexte) {
 	static $liste_objets = null;
@@ -168,7 +168,7 @@ function quete_rubrique_fond($contexte) {
 		}
 	}
 	$c = array_intersect_key($contexte, $liste_objets);
-	if (!count($c)) {
+	if ($c === []) {
 		return false;
 	}
 
@@ -178,18 +178,15 @@ function quete_rubrique_fond($contexte) {
 		return $quete[$s];
 	}
 
-	if (isset($c['id_rubrique']) and $r = $c['id_rubrique']) {
+	if (isset($c['id_rubrique']) && ($r = $c['id_rubrique'])) {
 		unset($c['id_rubrique']);
 		$c = ['id_rubrique' => $r] + $c;
 	}
 
 	foreach ($c as $_id => $id) {
-		if (
-			$id
-			and $row = quete_parent_lang(table_objet_sql($liste_objets[$_id]), $id)
-		) {
+		if ($id && ($row = quete_parent_lang(table_objet_sql($liste_objets[$_id]), $id))) {
 			$lang = $row['lang'] ?? '';
-			if ($_id == 'id_rubrique' or (isset($row['id_rubrique']) and $id = $row['id_rubrique'])) {
+			if ($_id == 'id_rubrique' || isset($row['id_rubrique']) && ($id = $row['id_rubrique'])) {
 				return $quete[$s] = [$id, $lang];
 			}
 		}

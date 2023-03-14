@@ -34,7 +34,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Chaine sinon : le nom du champ (non décomposable donc)
  */
 function decompose_champ_id_objet($champ) {
-	if (($champ !== 'id_objet') and preg_match(',^id_([a-z_]+)$,', $champ, $regs)) {
+	if ($champ !== 'id_objet' && preg_match(',^id_([a-z_]+)$,', $champ, $regs)) {
 		return ['id_objet', 'objet', objet_type($champ)];
 	}
 
@@ -58,15 +58,15 @@ function decompose_champ_id_objet($champ) {
  */
 function trouver_champs_decomposes($champ, $desc) {
 	if (
-		!is_array($desc) // on ne se risque pas en conjectures si on ne connait pas la table
-		or array_key_exists($champ, $desc['field'])
+		!is_array($desc)
+		|| array_key_exists($champ, $desc['field'])
 	) {
 		return [$champ];
 	}
 	// si le champ se décompose, tester que les colonnes décomposées sont présentes
 	if (is_array($decompose = decompose_champ_id_objet($champ))) {
 		array_pop($decompose);
-		if (count(array_intersect($decompose, array_keys($desc['field']))) == count($decompose)) {
+		if (count(array_intersect($decompose, array_keys($desc['field']))) === count($decompose)) {
 			return $decompose;
 		}
 	}
@@ -107,7 +107,7 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col = '', $cond = false
 	$max = 1;
 	$res = false;
 	$milieu_exclus = ($col ?: []);
-	while ($max <= $max_liens and !$res) {
+	while ($max <= $max_liens && !$res) {
 		$res = calculer_chaine_jointures($boucle, $depart, $arrivee, [], $milieu_exclus, $max);
 		$max++;
 	}
@@ -171,11 +171,7 @@ function fabrique_jointures(&$boucle, $res, $cond = false, $desc = [], $nom = ''
 		if (is_array($j)) { // c'est un lien sur un champ du type id_objet,objet,'article'
 			[$j1, $j2, $obj, $type] = $j;
 			// trouver de quel cote est (id_objet,objet)
-			if ($j1 == "id_$obj") {
-				$obj = "$id_table.$obj";
-			} else {
-				$obj = "L$n.$obj";
-			}
+			$obj = $j1 == "id_$obj" ? "$id_table.$obj" : "L$n.$obj";
 			// le where complementaire est envoye dans la jointure et dans le where
 			// on utilise une clé qui le relie a la jointure pour que l'optimiseur
 			// sache qu'il peut enlever ce where si il enleve la jointure
@@ -211,9 +207,9 @@ function fabrique_jointures(&$boucle, $res, $cond = false, $desc = [], $nom = ''
 	// et si l'index de jointure est une primary key a l'arrivee !
 	if (
 		!$pk
-		and (count($boucle->from) == 2)
-		and isset($a[1]['key']['PRIMARY KEY'])
-		and ($j == $a[1]['key']['PRIMARY KEY'])
+		&& count($boucle->from) == 2
+		&& isset($a[1]['key']['PRIMARY KEY'])
+		&& $j == $a[1]['key']['PRIMARY KEY']
 	) {
 		$pk = true;
 	}
@@ -248,8 +244,8 @@ function fabrique_jointures(&$boucle, $res, $cond = false, $desc = [], $nom = ''
 function nogroupby_if($depart, $arrivee, $col) {
 	if (
 		empty($arrivee['key']['PRIMARY KEY'])
-		or !($pk = $arrivee['key']['PRIMARY KEY'])
-		or empty($depart['key']['PRIMARY KEY'])
+		|| !($pk = $arrivee['key']['PRIMARY KEY'])
+		|| empty($depart['key']['PRIMARY KEY'])
 	) {
 		return false;
 	}
@@ -257,8 +253,7 @@ function nogroupby_if($depart, $arrivee, $col) {
 	if (is_array($col)) {
 		$col = implode(', *', $col);
 	} // cas id_objet, objet
-	return (preg_match("/^$id_primary, *$col$/", $pk) or
-		preg_match("/^$col, *$id_primary$/", $pk));
+	return (preg_match("/^$id_primary, *$col$/", $pk) || preg_match("/^$col, *$id_primary$/", $pk));
 }
 
 /**
@@ -327,7 +322,7 @@ function liste_champs_jointures($nom, $desc, $primary = false) {
  */
 function split_key($v, $join = []) {
 	foreach (preg_split('/,\s*/', $v) as $k) {
-		if (strpos($k, '(') !== false) {
+		if (str_contains($k, '(')) {
 			$k = explode('(', $k);
 			$k = trim(reset($k));
 		}
@@ -373,13 +368,13 @@ function calculer_chaine_jointures(
 	}
 	// quand on a exclus id_objet comme cle de jointure, il faut aussi exclure objet
 	// faire une jointure sur objet tout seul n'a pas de sens
-	if (in_array('id_objet', $milieu_exclus) and !in_array('objet', $milieu_exclus)) {
+	if (in_array('id_objet', $milieu_exclus) && !in_array('objet', $milieu_exclus)) {
 		$milieu_exclus[] = 'objet';
 	}
 
 	[$dnom, $ddesc] = $depart;
 	[$anom, $adesc] = $arrivee;
-	if (!count($vu)) {
+	if ($vu === []) {
 		$vu[] = $dnom; // ne pas oublier la table de depart
 		$vu[] = $anom; // ne pas oublier la table d'arrivee
 	}
@@ -398,7 +393,7 @@ function calculer_chaine_jointures(
 	// enlever les cles dde depart exclues par l'appel
 	$keys = array_diff($keys, $milieu_exclus);
 
-	$v = !$keys ? false : array_intersect(array_values($keys), $akeys);
+	$v = $keys ? array_intersect(array_values($keys), $akeys) : false;
 
 	if ($v) {
 		return [[$dnom, [$adesc['table'], $adesc], array_shift($v)]];
@@ -423,12 +418,12 @@ function calculer_chaine_jointures(
 		// id_objet,objet a l'arrivee
 		// si oui on la prend
 		foreach ($keys as $key) {
-			if (count($v = trouver_champs_decomposes($key, $adesc)) > 1) {
-				if (count($v) == count(array_intersect($v, $akeys))) {
-					$v = decompose_champ_id_objet($key); // id_objet,objet,'article'
-					array_unshift($v, $key); // id_article,id_objet,objet,'article'
-					return [[$dnom, [$adesc['table'], $adesc], $v]];
-				}
+			if (count($v = trouver_champs_decomposes($key, $adesc)) > 1 && count($v) == count(array_intersect($v, $akeys))) {
+				$v = decompose_champ_id_objet($key);
+				// id_objet,objet,'article'
+				array_unshift($v, $key);
+				// id_article,id_objet,objet,'article'
+				return [[$dnom, [$adesc['table'], $adesc], $v]];
 			}
 		}
 	}
@@ -442,9 +437,9 @@ function calculer_chaine_jointures(
 	foreach ($boucle->jointures as $v) {
 		if (
 			$v
-			and !in_array($v, $vu)
-			and $def = $trouver_table($v, $boucle->sql_serveur)
-			and !in_array($def['table_sql'], $vu)
+			&& !in_array($v, $vu)
+			&& ($def = $trouver_table($v, $boucle->sql_serveur))
+			&& !in_array($def['table_sql'], $vu)
 		) {
 			// ne pas tester les cles qui sont exclues a l'appel
 			// ie la cle de la jointure precedente
@@ -459,8 +454,7 @@ function calculer_chaine_jointures(
 					$vu,
 					$test_cles,
 					1
-				))
-				and $max_iter--
+				)) && $max_iter--
 			) {
 				$jointure_directe_possible = reset($jointure_directe_possible);
 				$milieu = end($jointure_directe_possible);
@@ -543,20 +537,20 @@ function chercher_champ_dans_tables($cle, $tables, $connect, $checkarrivee = fal
 	}
 
 	foreach ($tables as $k => $table) {
-		if ($table && $desc = $trouver_table($table, $connect)) {
-			if (
+		if (
+			$table
+			&& $desc = $trouver_table($table, $connect)
+			&& (
 				isset($desc['field'])
-				// verifier que toutes les cles cherchees sont la
-				and (count(array_intersect($cle, array_keys($desc['field']))) == count($cle))
-				// si on sait ou on veut arriver, il faut que ca colle
-				and ($checkarrivee == false || $checkarrivee == $desc['table'])
-			) {
-				return [
-					'desc' => $desc,
-					'table' => $desc['table'],
-					'alias' => $k,
-				];
-			}
+				&& count(array_intersect($cle, array_keys($desc['field']))) === count($cle)
+				&& ($checkarrivee == false || $checkarrivee == $desc['table'])
+			)
+		) {
+			return [
+				'desc' => $desc,
+				'table' => $desc['table'],
+				'alias' => $k,
+			];
 		}
 	}
 
@@ -601,8 +595,8 @@ function trouver_champ_exterieur($cle, $joints, &$boucle, $checkarrivee = false)
 	// au premier coup, on essaye de decomposer, si possible
 	if (
 		count($cle) == 1
-		and $c = reset($cle)
-		and is_array($decompose = decompose_champ_id_objet($c))
+		&& ($c = reset($cle))
+		&& is_array($decompose = decompose_champ_id_objet($c))
 	) {
 		$desc = $boucle->show;
 

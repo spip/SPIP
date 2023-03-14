@@ -27,11 +27,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 // -> https://www.spip.net/fr_article901.html
 
 function phraser_vieux_logos(&$p) {
-	if ($p->param[0][0]) {
-		$args = [''];
-	} else {
-		$args = array_shift($p->param);
-	}
+	$args = $p->param[0][0] ? [''] : array_shift($p->param);
 
 	foreach ($p->param as $couple) {
 		$nom = trim($couple[0]);
@@ -75,20 +71,12 @@ function phraser_vieux_logos(&$p) {
 
 
 function phraser_logo_faux_filtres($nom) {
-	switch ($nom) {
-		case 'top':
-		case 'left':
-		case 'right':
-		case 'center':
-		case 'bottom':
-			return 0;
-		case 'lien':
-			return 1;
-		case 'fichier':
-			return 2;
-		default:
-			return $nom;
-	}
+	return match ($nom) {
+		'top', 'left', 'right', 'center', 'bottom' => 0,
+		'lien' => 1,
+		'fichier' => 2,
+		default => $nom,
+	};
 }
 
 
@@ -105,7 +93,8 @@ function phraser_vieux_emb(&$p) {
 	$param = ['', [$texte]];
 
 	// Transformer les filtres en arguments
-	for ($i = 0; $i < (is_countable($p->param) ? count($p->param) : 0); $i++) {
+	$paramCount = is_countable($p->param) ? count($p->param) : 0;
+	for ($i = 0; $i < $paramCount; $i++) {
 		if ($p->param[$i][0]) {
 			if (!strstr($p->param[$i][0], '=')) {
 				break;
@@ -187,16 +176,16 @@ function normaliser_args_inclumodel($p) {
 function normaliser_inclure($champ) {
 	normaliser_args_inclumodel($champ);
 	$l = $champ->param[0];
-	if (is_array($l) and !$l[0]) {
+	if (is_array($l) && !$l[0]) {
 		foreach ($l as $k => $p) {
-			if ($p and $p[0]->type == 'texte' and !strpos($p[0]->texte, '=')) {
+			if ($p && $p[0]->type == 'texte' && !strpos($p[0]->texte, '=')) {
 				$p[0]->texte = trim($p[0]->texte);
 			}
 		}
 		foreach ($l as $k => $p) {
 			if (
-				!$p or $p[0]->type != 'texte' or
-				!preg_match('/^fond\s*=\s*(.*)$/', $p[0]->texte, $r)
+				!$p || $p[0]->type != 'texte'
+				|| !preg_match('/^fond\s*=\s*(.*)$/', $p[0]->texte, $r)
 			) {
 				continue;
 			}

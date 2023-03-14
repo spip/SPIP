@@ -38,7 +38,7 @@ function decompiler_boucle($struct, $fmt = '', $prof = 0) {
 	// Revoir le cas de la boucle recursive
 
 	$crit = $struct->param;
-	if ($crit and !is_array($crit[0])) {
+	if ($crit && !is_array($crit[0])) {
 		$type = strtolower($type) . array_shift($crit);
 	}
 	$crit = decompiler_criteres($struct, $fmt, $prof);
@@ -119,17 +119,17 @@ function decompiler_liste($sources, $fmt = '', $prof = 0) {
 		foreach ($arg as $v) {
 			// cas des arguments entoures de ' ou "
 			if (
-				((is_countable($v) ? count($v) : 0) == 1)
-				and $v[0]->type == 'texte'
-				and (strlen($v[0]->apres) == 1)
-				and $v[0]->apres == $v[0]->avant
+				(is_countable($v) ? count($v) : 0) == 1
+				&& $v[0]->type == 'texte'
+				&& strlen($v[0]->apres) == 1
+				&& $v[0]->apres == $v[0]->avant
 			) {
 				$args[] = $v[0]->avant . $v[0]->texte . $v[0]->apres;
 			} else {
 				$args[] = decompiler_($v, $fmt, 0 - $prof);
 			}
 		}
-		if (($r !== '') or $args) {
+		if ($r !== '' || $args) {
 			$res .= $f($r, $args, $prof);
 		}
 	}
@@ -156,9 +156,9 @@ function decompiler_criteres($boucle, $fmt = '', $prof = 0) {
 		$args = [];
 		foreach ($crit as $i => $v) {
 			if (
-				((is_countable($v) ? count($v) : 0) == 1)
-				and $v[0]->type == 'texte'
-				and $v[0]->apres
+				(is_countable($v) ? count($v) : 0) == 1
+				&& $v[0]->type == 'texte'
+				&& $v[0]->apres
 			) {
 				$args[] = [['texte', ($v[0]->apres . $v[0]->texte . $v[0]->apres)]];
 			} else {
@@ -166,7 +166,7 @@ function decompiler_criteres($boucle, $fmt = '', $prof = 0) {
 				foreach ($v as $k => $p) {
 					if (
 						isset($p->type)
-						and function_exists($d = 'decompiler_' . $p->type)
+						&& function_exists($d = 'decompiler_' . $p->type)
 					) {
 						$r = $d($p, $fmt, (0 - $prof));
 						$res2[] = [$p->type, $r];
@@ -202,11 +202,11 @@ function decompiler_($liste, $fmt = '', $prof = 0) {
 
 		if (
 			$next
-			and ($next->type == 'texte')
-			and $p->type == 'champ'
-			and !$p->apres
-			and !$p->avant
-			and $p->fonctions
+			&& $next->type == 'texte'
+			&& $p->type == 'champ'
+			&& !$p->apres
+			&& !$p->avant
+			&& $p->fonctions
 		) {
 			$n = strlen($next->texte) - strlen(ltrim($next->texte));
 			if ($n) {

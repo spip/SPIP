@@ -35,7 +35,7 @@ function quete_virtuel($id_article, $connect) {
 	return sql_getfetsel(
 		'virtuel',
 		'spip_articles',
-		['id_article=' . intval($id_article), "statut='publie'"],
+		['id_article=' . (int) $id_article, "statut='publie'"],
 		'',
 		'',
 		'',
@@ -65,7 +65,7 @@ function quete_parent_lang($table, $id, string $connect = '') {
 				!$desc = $trouver_table(
 					$table,
 					$connect
-				) or !isset($desc['field']['id_rubrique'])
+				) || !isset($desc['field']['id_rubrique'])
 			) {
 				// pas de parent rubrique, on passe
 				$cache_quete[$connect][$table]['_select'] = false;
@@ -80,7 +80,7 @@ function quete_parent_lang($table, $id, string $connect = '') {
 			$cache_quete[$connect][$table][$id] = sql_fetsel(
 				$cache_quete[$connect][$table]['_select'],
 				$table,
-				$cache_quete[$connect][$table]['_id'] . '=' . intval($id),
+				$cache_quete[$connect][$table]['_id'] . '=' . (int) $id,
 				'',
 				'',
 				'',
@@ -107,7 +107,7 @@ function quete_parent_lang($table, $id, string $connect = '') {
  * @return int
  */
 function quete_parent($id_rubrique, string $connect = '') {
-	if (!$id_rubrique = intval($id_rubrique)) {
+	if (!$id_rubrique = (int) $id_rubrique) {
 		return 0;
 	}
 	$id_parent = quete_parent_lang('spip_rubriques', $id_rubrique, $connect);
@@ -139,7 +139,6 @@ function quete_rubrique($id_article, $serveur) {
  * @uses quete_parent()
  *
  * @param int $id
- * @param string $connect
  * @return int
  */
 function quete_profondeur($id, string $connect = '') {
@@ -165,13 +164,13 @@ function quete_profondeur($id, string $connect = '') {
  *     Morceau de la requête SQL testant la date
  */
 function quete_condition_postdates($champ_date, $serveur = '', $ignore_previsu = false) {
-	if (defined('_VAR_PREVIEW') and _VAR_PREVIEW and !$ignore_previsu) {
+	if (defined('_VAR_PREVIEW') && _VAR_PREVIEW && !$ignore_previsu) {
 		return '1=1';
 	}
 
 	return
 		(isset($GLOBALS['meta']['date_prochain_postdate'])
-			and $GLOBALS['meta']['date_prochain_postdate'] > time())
+			&& $GLOBALS['meta']['date_prochain_postdate'] > time())
 			? "$champ_date<" . sql_quote(date('Y-m-d H:i:s', $GLOBALS['meta']['date_prochain_postdate']), $serveur)
 			: '1=1';
 }
@@ -201,11 +200,11 @@ function quete_condition_statut($mstatut, $previsu, $publie, $serveur = '', $ign
 	}
 
 	$liste_statuts = $publie;
-	if (defined('_VAR_PREVIEW') and _VAR_PREVIEW and !$ignore_previsu) {
+	if (defined('_VAR_PREVIEW') && _VAR_PREVIEW && !$ignore_previsu) {
 		$liste_statuts = $previsu;
 	}
 	$not = false;
-	if (strncmp($liste_statuts, '!', 1) == 0) {
+	if (str_starts_with($liste_statuts, '!')) {
 		$not = true;
 		$liste_statuts = substr($liste_statuts, 1);
 	}
@@ -219,17 +218,17 @@ function quete_condition_statut($mstatut, $previsu, $publie, $serveur = '', $ign
 	foreach ($liste_statuts as $k => $v) {
 		// filtrage /auteur pour limiter les objets d'un statut (prepa en general)
 		// a ceux de l'auteur identifie
-		if (strpos($v, '/') !== false) {
+		if (str_contains($v, '/')) {
 			$v = explode('/', $v);
 			$filtre = end($v);
 			$v = reset($v);
 			$v = preg_replace(',\W,', '', $v);
 			if (
 				$filtre == 'auteur'
-				and (strpos($mstatut, '.') !== false)
-				and $objet = explode('.', $mstatut)
-				and $id_table = reset($objet)
-				and $objet = objet_type($id_table)
+				&& str_contains($mstatut, '.')
+				&& ($objet = explode('.', $mstatut))
+				&& ($id_table = reset($objet))
+				&& ($objet = objet_type($id_table))
 			) {
 				$w = "$mstatut<>" . sql_quote($v);
 
@@ -239,7 +238,7 @@ function quete_condition_statut($mstatut, $previsu, $publie, $serveur = '', $ign
 				if ($desc = decrire_token_previsu()) {
 					$id_auteur = $desc['id_auteur'];
 				} elseif (isset($GLOBALS['visiteur_session']['id_auteur'])) {
-					$id_auteur = intval($GLOBALS['visiteur_session']['id_auteur']);
+					$id_auteur = (int) $GLOBALS['visiteur_session']['id_auteur'];
 				} else {
 					$id_auteur = null;
 				}
@@ -254,7 +253,7 @@ function quete_condition_statut($mstatut, $previsu, $publie, $serveur = '', $ign
 						$where[] = "($w OR $id_table.$primary IN (" . sql_get_select(
 							'ssss.id_objet',
 							'spip_auteurs_liens AS ssss',
-							'ssss.objet=' . sql_quote($objet) . ' AND ssss.id_auteur=' . intval($id_auteur),
+							'ssss.objet=' . sql_quote($objet) . ' AND ssss.id_auteur=' . (int) $id_auteur,
 							'',
 							'',
 							'',
@@ -298,7 +297,7 @@ function quete_condition_statut($mstatut, $previsu, $publie, $serveur = '', $ign
  * @return array|bool|null
  */
 function quete_fichier($id_document, $serveur = '') {
-	return sql_getfetsel('fichier', 'spip_documents', ('id_document=' . intval($id_document)), '', [], '', '', $serveur);
+	return sql_getfetsel('fichier', 'spip_documents', ('id_document=' . (int) $id_document), '', [], '', '', $serveur);
 }
 
 /**
@@ -309,7 +308,7 @@ function quete_fichier($id_document, $serveur = '') {
  * @return array|bool
  */
 function quete_document($id_document, $serveur = '') {
-	return sql_fetsel('*', 'spip_documents', ('id_document=' . intval($id_document)), '', [], '', '', $serveur);
+	return sql_fetsel('*', 'spip_documents', ('id_document=' . (int) $id_document), '', [], '', '', $serveur);
 }
 
 /**
@@ -365,12 +364,7 @@ function quete_logo($cle_objet, $onoff, $id, $id_rubrique, $flag = false) {
 				// Si on a déjà demandé un survol directement ($onoff = off)
 				// ou qu'on a demandé uniquement le normal ($onoff = on)
 				// alors on ne cherche pas du tout le survol ici
-				if ($onoff != 'ON') {
-					$off = '';
-				} else {
-					// Sinon, c'est qu'on demande normal ET survol à la fois, donc on cherche maintenant le survol
-					$off = quete_logo_objet($id, $objet, 'off');
-				}
+				$off = $onoff != 'ON' ? '' : quete_logo_objet($id, $objet, 'off');
 
 				// on retourne une url du type IMG/artonXX?timestamp
 				// qui permet de distinguer le changement de logo
@@ -378,7 +372,7 @@ function quete_logo($cle_objet, $onoff, $id, $id_rubrique, $flag = false) {
 				$res = [
 					$on['chemin'] . ($on['timestamp'] ? "?{$on['timestamp']}" : ''),
 					($off ? $off['chemin'] . ($off['timestamp'] ? "?{$off['timestamp']}" : '') : ''),
-					(!$taille ? '' : (' ' . $taille[3]))
+					($taille ? ' ' . $taille[3] : (''))
 				];
 				$res['src'] = $res[0];
 				$res['logo_on'] = $res[0];
@@ -403,7 +397,7 @@ function quete_logo($cle_objet, $onoff, $id, $id_rubrique, $flag = false) {
 					$id = $id_rubrique;
 					$id_rubrique = 0;
 				} else {
-					if ($id and $cle_objet == 'id_rubrique') {
+					if ($id && $cle_objet == 'id_rubrique') {
 						$id = quete_parent($id);
 					} else {
 						return '';
@@ -487,8 +481,8 @@ function quete_logo_file($row, $connect = null) {
 	// si c'est une vignette type doc, la renvoyer direct
 	if (
 		strcmp($logo, _DIR_PLUGINS) == 0
-		or strcmp($logo, _DIR_PLUGINS_DIST) == 0
-		or strcmp($logo, _DIR_RACINE . 'prive/') == 0
+		|| strcmp($logo, _DIR_PLUGINS_DIST) == 0
+		|| strcmp($logo, _DIR_RACINE . 'prive/') == 0
 	) {
 		return $logo;
 	}
@@ -527,7 +521,7 @@ function quete_logo_document($row, $lien, $align, $mode_logo, $x, $y, string $co
 		$logo = vignette_logo_document($row, $connect);
 	}
 	// si on veut explicitement la vignette, ne rien renvoyer si il n'y en a pas
-	if ($mode_logo == 'vignette' and !$logo) {
+	if ($mode_logo == 'vignette' && !$logo) {
 		return '';
 	}
 	if ($mode_logo == 'icone') {
@@ -595,12 +589,11 @@ function document_spip_externe($fichier, $connect) {
  * ou vide si pas de vignette
  *
  * @param array $row
- * @param string $connect
  * @return string
  */
 function vignette_logo_document($row, string $connect = '') {
 
-	if (!$row or empty($row['id_vignette'])) {
+	if (!$row || empty($row['id_vignette'])) {
 		return '';
 	}
 	$fichier = quete_fichier($row['id_vignette'], $connect);
@@ -609,7 +602,7 @@ function vignette_logo_document($row, string $connect = '') {
 	}
 
 	$f = get_spip_doc($fichier);
-	if ($f and @file_exists($f)) {
+	if ($f && @file_exists($f)) {
 		return $f;
 	}
 	if ($row['mode'] !== 'vignette') {
@@ -628,7 +621,6 @@ function vignette_logo_document($row, string $connect = '') {
  * @param array $reference
  * @param int $parent
  * @param string $type
- * @param string $connect
  * @return bool|string
  */
 function calcul_exposer($id, $prim, $reference, $parent, $type, string $connect = '') {
@@ -650,7 +642,7 @@ function calcul_exposer($id, $prim, $reference, $parent, $type, string $connect 
 					if (
 						isset($reference[$t])
 						// cas de la reference donnee dynamiquement par la pagination
-						or isset($reference["@$t"])
+						|| isset($reference["@$t"])
 					) {
 						$type = $t;
 						$principal = $reference[$type] ?? $reference["@$type"];
@@ -666,7 +658,7 @@ function calcul_exposer($id, $prim, $reference, $parent, $type, string $connect 
 				$exposer[$m][$type][$principal] = true;
 				if ($type == 'id_mot') {
 					if (!$parent) {
-						$parent = sql_getfetsel('id_groupe', 'spip_mots', 'id_mot=' . intval($principal), '', '', '', '', $connect);
+						$parent = sql_getfetsel('id_groupe', 'spip_mots', 'id_mot=' . (int) $principal, '', '', '', '', $connect);
 					}
 					if ($parent) {
 						$exposer[$m]['id_groupe'][$parent] = true;
@@ -708,16 +700,16 @@ function calcul_exposer($id, $prim, $reference, $parent, $type, string $connect 
 function quete_debut_pagination($primary, $valeur, $pas, $iter) {
 	// on ne devrait pas arriver ici si la cle primaire est inexistante
 	// ou composee, mais verifions
-	if (!$primary or preg_match('/[,\s]/', $primary)) {
+	if (!$primary || preg_match('/[,\s]/', $primary)) {
 		return 0;
 	}
 
 	$pos = 0;
-	while ($row = $iter->fetch() and $row[$primary] != $valeur) {
+	while (($row = $iter->fetch()) && $row[$primary] != $valeur) {
 		$pos++;
 	}
 	// si on a pas trouve
-	if (!$row or $row[$primary] != $valeur) {
+	if (!$row || $row[$primary] != $valeur) {
 		return 0;
 	}
 
@@ -729,15 +721,11 @@ function quete_debut_pagination($primary, $valeur, $pas, $iter) {
  * Retourne true si ce where doit être appliqué,
  * dans le cas des critères avec ? tel que `{id_article ?}`
  *
- * @param mixed $value
  * @return boolean
  */
-function is_whereable($value): bool {
+function is_whereable(mixed $value): bool {
 	if (is_array($value) && count($value)) {
 		return true;
 	}
-	if (is_scalar($value) && strlen($value)) {
-		return true;
-	}
-	return false;
+ 	return is_scalar($value) && strlen($value);
 }

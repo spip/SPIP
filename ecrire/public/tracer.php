@@ -15,8 +15,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 function trace_query_start() {
 	static $trace = '?';
-	if ($trace === '?' or defined('_DEBUG_TRACE_QUERIES')) {
-		if (defined('_DEBUG_TRACE_QUERIES') and _DEBUG_TRACE_QUERIES) {
+	if ($trace === '?' || defined('_DEBUG_TRACE_QUERIES')) {
+		if (defined('_DEBUG_TRACE_QUERIES') && _DEBUG_TRACE_QUERIES) {
 			$trace = true;
 		}
 		else {
@@ -24,14 +24,14 @@ function trace_query_start() {
 				// si un anonyme fait un var_profile on est oblige de remplir le tableau des temps en attendant de savoir
 				// car ici on ne sait pas si c'est un hit anonyme
 				// ou une requete SQL faite avant chargement de la session
-				$trace = (!empty($_GET['var_profile']) ? '?' : false);
+				$trace = (empty($_GET['var_profile']) ? false : '?');
 			}
 			else {
 				include_spip('inc/autoriser');
 				// gare au bouclage sur calcul de droits au premier appel
 				// A fortiori quand on demande une trace
 				$trace = false; // on ne trace pas la requete provoquee par autoriser('debug')
-				$trace = (!empty($_GET['var_profile']) and autoriser('debug'));
+				$trace = (!empty($_GET['var_profile']) && autoriser('debug'));
 			}
 		}
 	}
@@ -46,14 +46,14 @@ function trace_query_end($query, $start, $result, $erreur, $serveur = '') {
 			// si un anonyme fait un var_profile on est oblige de remplir le tableau des temps en attendant de savoir
 			// car ici on ne sait pas si c'est un hit anonyme
 			// ou une requete SQL faite avant chargement de la session
-			$trace = (!empty($_GET['var_profile']) ? '?' : false);
+			$trace = (empty($_GET['var_profile']) ? false : '?');
 		}
 		else {
 			include_spip('inc/autoriser');
 			// gare au bouclage sur calcul de droits au premier appel
 			// A fortiori quand on demande une trace
 			$trace = false; // on ne trace pas la requete provoquee par autoriser('debug')
-			$trace = (!empty($_GET['var_profile']) and autoriser('debug'));
+			$trace = (!empty($_GET['var_profile']) && autoriser('debug'));
 		}
 	}
 	if ($start) {
@@ -67,7 +67,7 @@ function trace_query_end($query, $start, $result, $erreur, $serveur = '') {
 		}
 	}
 	// tracer les erreurs, sauf pour select, c'est fait dans abstract_sql
-	if ($trace and $erreur and !preg_match('/^select\b/i', $query)) {
+	if ($trace && $erreur && !preg_match('/^select\b/i', $query)) {
 		erreur_squelette([sql_errno($serveur), $erreur, $query]);
 	}
 
@@ -81,7 +81,7 @@ function trace_query_chrono($dt, $query, $result, $serveur = '') {
 	$x = _request('var_mode_objet');
 	if (isset($GLOBALS['debug']['aucasou'])) {
 		[, $boucle, $serveur, $contexte] = $GLOBALS['debug']['aucasou'];
-		if ($x and !preg_match("/$boucle\$/", $x)) {
+		if ($x && !preg_match("/$boucle\$/", $x)) {
 			return;
 		}
 		if ($serveur) {
@@ -100,7 +100,7 @@ function trace_query_chrono($dt, $query, $result, $serveur = '') {
 
 	$q = preg_replace('/([a-z)`])\s+([A-Z])/', "$1\n<br />$2", spip_htmlentities($query));
 	$e = sql_explain($query, $serveur);
-	$r = str_replace('Resource id ', '', (is_object($result) ? get_class($result) : $result));
+	$r = str_replace('Resource id ', '', (is_object($result) ? $result::class : $result));
 	$GLOBALS['tableau_des_temps'][] = [$dt, $nb, $boucle, $q, $e, $r, $contexte];
 }
 
@@ -145,7 +145,7 @@ function chrono_requete($temps) {
 			. "<tr><th>Time</th><td>$dt</td></tr>"
 			. "<tr><th>Order</th><td>$nb</td></tr>"
 			. "<tr><th>Res</th><td>$res</td></tr>"
-			. join('', $explain)
+			. implode('', $explain)
 			. '</table>';
 
 		$temps[$key] = [$e, $env, $k];
@@ -180,13 +180,13 @@ function chrono_requete($temps) {
 	// Fabriquer le tableau des liens de navigation dans le grand tableau
 	foreach ($d as $k => $v) {
 		$d[$k] = $n[$k] . "</td><td>$k</td><td class='time'>$v</td><td class='liste-reqs'>"
-			. join('', $t[$k]);
+			. implode('', $t[$k]);
 	}
 
 	$navigation = [
 		_T('zbug_statistiques'),
 		'<tr><td>'
-		. join("</td></tr>\n<tr><td>", $d)
+		. implode("</td></tr>\n<tr><td>", $d)
 		. "</td></tr>\n"
 		. (# _request('var_mode_objet') ? '' :
 		('<tr><td>' . (is_countable($temps) ? count($temps) : 0) . '</td><td>' . _T('info_total') . '</td><td class="time">' . $total . '</td><td></td></tr>'))

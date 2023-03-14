@@ -72,7 +72,7 @@ function critere_exclus_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$id = $boucle->primary;
 
-	if ($not or !$id) {
+	if ($not || !$id) {
 		return ['zbug_critere_inconnu', ['critere' => $not . $crit->op]];
 	}
 	$arg = kwote(calculer_argument_precedent($idb, $id, $boucles));
@@ -100,7 +100,7 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
 	$primary = $boucle->primary;
 
 	// la table nécessite une clé primaire, non composée
-	if (!$primary or strpos($primary, ',')) {
+	if (!$primary || strpos($primary, ',')) {
 		return ['zbug_doublon_sur_table_sans_cle_primaire'];
 	}
 
@@ -127,7 +127,7 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
 	$debut_in = "sql_in('" . $boucle->id_table . '.' . $primary . "', ";
 	// lecture des données du doublon "$doublons[$doublon_index[] = "
 	// Attention : boucle->doublons désigne une variable qu'on affecte
-	$debut_doub = '$doublons[' . (!$not ? '' : ($boucle->doublons . '[]= '));
+	$debut_doub = '$doublons[' . ($not ? $boucle->doublons . '[]= ' : (''));
 
 	// le debut complet du code des doublons
 	$debut_doub = $debut_in . $debut_doub;
@@ -138,7 +138,7 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
 	// si on trouve un autre critère doublon,
 	// on fusionne pour avoir un seul IN, et on s'en va !
 	foreach ($boucle->where as $k => $w) {
-		if (strpos($w[0], $debut_doub) === 0) {
+		if (str_starts_with($w[0], $debut_doub)) {
 			// fusionner le sql_in (du where)
 			$boucle->where[$k][0] = $debut_doub . $fin_doub . ' . ' . substr($w[0], strlen($debut_in));
 			// fusionner l'initialisation (du hash) pour faire plus joli
@@ -183,7 +183,7 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
  * @return void
  **/
 function critere_lang_select_dist($idb, &$boucles, $crit) {
-	if (!isset($crit->param[1][0]) or !($param = $crit->param[1][0]->texte)) {
+	if (!isset($crit->param[1][0]) || !($param = $crit->param[1][0]->texte)) {
 		$param = 'oui';
 	}
 	if ($crit->not) {
@@ -256,14 +256,15 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 
 	$boucle = &$boucles[$idb];
 	// definition de la taille de la page
-	$pas = !isset($crit->param[0][0]) ? "''"
-		: calculer_liste([$crit->param[0][0]], $idb, $boucles, $boucle->id_parent);
+	$pas = isset($crit->param[0][0])
+		? calculer_liste([$crit->param[0][0]], $idb, $boucles, $boucle->id_parent)
+		: "''";
 
 	if (!preg_match(_CODE_QUOTE, $pas, $r)) {
 		$pas = "((\$a = intval($pas)) ? \$a : 10)";
 	} else {
-		$r = intval($r[2]);
-		$pas = strval($r ?: 10);
+		$r = (int) $r[2];
+		$pas = (string) ($r ?: 10);
 	}
 
 	// Calcul du nommage de la pagination si il existe.
@@ -301,8 +302,8 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 	$t = $boucle->id_table . '.' . $boucle->primary;
 	if (
 		$boucle->primary
-		and !preg_match('/[,\s]/', $boucle->primary)
-		and !in_array($t, $boucle->select)
+		&& !preg_match('/[,\s]/', $boucle->primary)
+		&& !in_array($t, $boucle->select)
 	) {
 		$boucle->select[] = $t;
 	}
@@ -329,7 +330,7 @@ function critere_recherche_dist($idb, &$boucles, $crit) {
 
 	$boucle = &$boucles[$idb];
 
-	if (!$boucle->primary or strpos($boucle->primary, ',')) {
+	if (!$boucle->primary || strpos($boucle->primary, ',')) {
 		erreur_squelette(_T('zbug_critere_sur_table_sans_cle_primaire', ['critere' => 'recherche']), $boucle);
 
 		return;
@@ -454,7 +455,7 @@ function critere_meme_parent_dist($idb, &$boucles, $crit) {
 	$id_parent = $GLOBALS['exceptions_des_tables'][$boucle->id_table]['id_parent'] ?? 'id_parent';
 	$mparent = $boucle->id_table . '.' . $id_parent;
 
-	if ($boucle->type_requete == 'rubriques' or isset($GLOBALS['exceptions_des_tables'][$boucle->id_table]['id_parent'])) {
+	if ($boucle->type_requete == 'rubriques' || isset($GLOBALS['exceptions_des_tables'][$boucle->id_table]['id_parent'])) {
 		$boucle->where[] = ["'='", "'$mparent'", $arg];
 	} // le cas FORUMS est gere dans le plugin forum, dans la fonction critere_FORUMS_meme_parent_dist()
 	else {
@@ -519,8 +520,9 @@ function critere_branche_dist($idb, &$boucles, $crit) {
 
 	$c = "sql_in('$cle" . ".$champ', calcul_branche_in($arg)"
 		. ($not ? ", 'NOT'" : '') . ')';
-	$boucle->where[] = !$crit->cond ? $c :
-		("($arg ? $c : " . ($not ? "'0=1'" : "'1=1'") . ')');
+	$boucle->where[] = $crit->cond
+		? "($arg ? $c : " . ($not ? "'0=1'" : "'1=1'") . ')'
+		: $c;
 }
 
 /**
@@ -652,12 +654,12 @@ function critere_collecte_dist($idb, &$boucles, $crit) {
 		$boucle = $boucles[$idb];
 		$boucle->modificateur['collate'] = "($_coll ?' COLLATE '.$_coll:'')";
 		$n = is_countable($boucle->order) ? count($boucle->order) : 0;
-		if ($n && (strpos($boucle->order[$n - 1], 'COLLATE') === false)) {
+		if ($n && (!str_contains($boucle->order[$n - 1], 'COLLATE'))) {
 			// l'instruction COLLATE doit être placée avant ASC ou DESC
 			// notamment lors de l'utilisation `{!par xxx}{collate yyy}`
 			if (
-				(false !== $i = strpos($boucle->order[$n - 1], 'ASC'))
-				or (false !== $i = strpos($boucle->order[$n - 1], 'DESC'))
+				false !== $i = strpos($boucle->order[$n - 1], 'ASC')
+				|| false !== $i = strpos($boucle->order[$n - 1], 'DESC')
 			) {
 				$boucle->order[$n - 1] = substr_replace($boucle->order[$n - 1], "' . " . $boucle->modificateur['collate'] . " . ' ", $i, 0);
 			} else {
@@ -673,7 +675,7 @@ function calculer_critere_arg_dynamique($idb, &$boucles, $crit, $suffix = '') {
 	$boucle = $boucles[$idb];
 	$alt = "('" . $boucle->id_table . '.\' . $x' . $suffix . ')';
 	$var = '$champs_' . $idb;
-	$desc = (strpos($boucle->in, (string) "static $var =") !== false);
+	$desc = (str_contains($boucle->in, (string) "static $var ="));
 	if (!$desc) {
 		$desc = $boucle->show['field'];
 		$desc = implode(',', array_map('_q', array_keys($desc)));
@@ -781,16 +783,16 @@ function critere_parinverse($idb, &$boucles, $crit) {
 				}
 
 			// tris de la forme {par champ} ou {par FONCTION(champ)}
-			} elseif ($boucle->type_requete == 'DATA' or preg_match(',^' . CHAMP_SQL_PLUS_FONC . '$,is', $par, $match)) {
+			} elseif ($boucle->type_requete == 'DATA' || preg_match(',^' . CHAMP_SQL_PLUS_FONC . '$,is', $par, $match)) {
 				// {par FONCTION(champ)}
-				if (isset($match) and count($match) > 2) {
+				if (isset($match) && count($match) > 2) {
 					$par = substr($match[2], 1, -1);
 					$fct = $match[1];
 				}
 				// quelques cas spécifiques {par hasard}, {par date}
 				if ($par == 'hasard') {
 					$order = calculer_critere_par_hasard($idb, $boucles, $crit);
-				} elseif ($par == 'date' and !empty($boucle->show['date'])) {
+				} elseif ($par == 'date' && !empty($boucle->show['date'])) {
 					$order = "'" . $boucle->id_table . '.' . $boucle->show['date'] . "'";
 				} else {
 					// cas général {par champ}, {par table.champ}, ...
@@ -811,7 +813,7 @@ function critere_parinverse($idb, &$boucles, $crit) {
 
 		if (preg_match('/^\'([^"]*)\'$/', $order, $m)) {
 			$t = $m[1];
-			if (strpos($t, '.') and !in_array($t, $boucle->select)) {
+			if (strpos($t, '.') && !in_array($t, $boucle->select)) {
 				$boucle->select[] = $t;
 			}
 		} else {
@@ -819,11 +821,9 @@ function critere_parinverse($idb, &$boucles, $crit) {
 		}
 
 		if ($fct) {
-			if (preg_match("/^\s*'(.*)'\s*$/", $order, $r)) {
-				$order = "'$fct(" . $r[1] . ")'";
-			} else {
-				$order = "'$fct(' . $order . ')'";
-			}
+			$order = preg_match("/^\s*'(.*)'\s*$/", $order, $r)
+				? "'$fct(" . $r[1] . ")'"
+				: "'$fct(' . $order . ')'";
 		}
 		$t = $order . $collecte . $sens;
 		if (preg_match("/^(.*)'\s*\.\s*'([^']*')$/", $t, $r)) {
@@ -890,9 +890,7 @@ function calculer_critere_par_expression_num($idb, &$boucles, $crit, $tri, $cham
 
 	$orderassinum = calculer_critere_par_expression_sinum($idb, $boucles, $crit, $tri, $champ);
 	$orderassinum = trim($orderassinum, "'");
-
-	$order = "'$orderassinum, $asnum'";
-	return $order;
+	return "'$orderassinum, $asnum'";
 }
 
 /**
@@ -927,7 +925,7 @@ function calculer_critere_par_expression_sinum($idb, &$boucles, $crit, $tri, $ch
 	$as = false;
 	$select = "CASE ( $texte ) WHEN 0 THEN 1 ELSE 0 END AS ";
 	foreach ($boucle->select as $s) {
-		if (strpos($s, $select) === 0) {
+		if (str_starts_with($s, $select)) {
 			$as = trim(substr($s, strlen($select)));
 			if (!preg_match(',\W,', $as)) {
 				break;
@@ -940,8 +938,7 @@ function calculer_critere_par_expression_sinum($idb, &$boucles, $crit, $tri, $ch
 		$as = 'sinum' . ($boucle->order ? count($boucle->order) : '');
 		$boucle->select[] = $select . $as;
 	}
-	$order = "'$as'";
-	return $order;
+	return "'$as'";
 }
 
 
@@ -967,8 +964,7 @@ function calculer_critere_par_expression_multi($idb, &$boucles, $crit, $tri, $ch
 	}
 	$boucle = &$boucles[$idb];
 	$boucle->select[] = "\".sql_multi('" . $_champ . "', \$GLOBALS['spip_lang']).\"";
-	$order = "'multi'";
-	return $order;
+	return "'multi'";
 }
 
 /**
@@ -1016,7 +1012,7 @@ function calculer_critere_par_champ($idb, &$boucles, $crit, $par, $raw = false) 
 			$par = $infos['alias'] . '.' . $champ;
 		} elseif (
 			$boucle->jointures_explicites
-			and $alias = trouver_jointure_champ($champ, $boucle, explode(' ', $boucle->jointures_explicites), false, $table)
+			&& ($alias = trouver_jointure_champ($champ, $boucle, explode(' ', $boucle->jointures_explicites), false, $table))
 		) {
 			$par = $alias . '.' . $champ;
 		} elseif ($alias = trouver_jointure_champ($champ, $boucle, $boucle->jointures, false, $table)) {
@@ -1024,8 +1020,8 @@ function calculer_critere_par_champ($idb, &$boucles, $crit, $par, $raw = false) 
 		// en spécifiant directement l'alias {par L2.titre} (situation hasardeuse tout de même)
 		} elseif (
 			$table_alias
-			and isset($boucle->from[$table_alias])
-			and $infos = chercher_champ_dans_tables($champ, $boucle->from, $boucle->sql_serveur, $boucle->from[$table_alias])
+			&& isset($boucle->from[$table_alias])
+			&& ($infos = chercher_champ_dans_tables($champ, $boucle->from, $boucle->sql_serveur, $boucle->from[$table_alias]))
 		) {
 			$par = $infos['alias'] . '.' . $champ;
 		} elseif ($table) {
@@ -1054,7 +1050,7 @@ function critere_par_joint($table, $champ, &$boucle) {
 	if (!$t) {
 		$t = trouver_jointure_champ($champ, $boucle);
 	}
-	return !$t ? '' : ("'" . $t . '.' . $champ . "'");
+	return $t ? "'" . $t . '.' . $champ . "'" : '';
 }
 
 /**
@@ -1165,7 +1161,7 @@ function critere_agenda_dist($idb, &$boucles, $crit) {
 	// Si c'est un litteral unique dans le source, verifier a la compil,
 	// sinon synthetiser le test de verif pour execution ulterieure
 	// On prendra arbitrairement le premier champ si test negatif.
-	if (((is_countable($date) ? count($date) : 0) == 1) and ($date[0]->type == 'texte')) {
+	if ((is_countable($date) ? count($date) : 0) == 1 && $date[0]->type == 'texte') {
 		$date = $date[0]->texte;
 		if (!isset($fields[$date])) {
 			return ['zbug_critere_inconnu', ['critere' => $crit->op . ' ' . $date]];
@@ -1174,7 +1170,7 @@ function critere_agenda_dist($idb, &$boucles, $crit) {
 		$a = calculer_liste($date, $idb, $boucles, $parent);
 		$noms = array_keys($fields);
 		$defaut = $noms[0];
-		$noms = join(' ', $noms);
+		$noms = implode(' ', $noms);
 		# bien laisser 2 espaces avant $nom pour que strpos<>0
 		$cond = "(\$a=strval($a))AND\nstrpos(\"  $noms \",\" \$a \")";
 		$date = "'.(($cond)\n?\$a:\"$defaut\").'";
@@ -1292,7 +1288,7 @@ function calculer_critere_parties($idb, &$boucles, $crit) {
 		$mode = (($op == '/') ? '/' :
 			(($a11 == 'n') ? '-' : '+') . (($a21 == 'n') ? '-' : '+'));
 		// cas simple {0,#ENV{truc}} compilons le en LIMIT :
-		if ($a11 !== 'n' and $a21 !== 'n' and $mode == '++' and $op == ',') {
+		if ($a11 !== 'n' && $a21 !== 'n' && $mode == '++' && $op == ',') {
 			$boucle->limit =
 				(is_numeric($a11) ? "'$a11'" : $a11)
 				. ".','."
@@ -1339,7 +1335,7 @@ function calculer_parties(&$boucles, $id_boucle, $debut, $mode) {
 		$totpos = is_numeric($total_parties) ? ($total_parties) :
 			"($total_parties ? $total_parties : 1)";
 		$fin = "ceil(($nombre_boucle * $debut )/$totpos) - 1";
-		$debut = !$pmoins1 ? 0 : "ceil(($nombre_boucle * $pmoins1)/$totpos);";
+		$debut = $pmoins1 ? "ceil(($nombre_boucle * $pmoins1)/$totpos);" : 0;
 	} else {
 		// cas {n-1,x}
 		if ($op1 == '-') {
@@ -1404,14 +1400,14 @@ function calculer_critere_parties_aux($idb, &$boucles, $param) {
 	if ($param[0]->type != 'texte') {
 		$a1 = calculer_liste([$param[0]], $idb, $boucles, $boucles[$idb]->id_parent);
 		if (isset($param[1]->texte)) {
-			preg_match(',^\s*(-([0-9]+))?\s*$,', $param[1]->texte, $m);
+			preg_match(',^\s*(-(\d+))?\s*$,', $param[1]->texte, $m);
 
-			return ["intval($a1)", ((isset($m[2]) and $m[2]) ? $m[2] : 0)];
+			return ["intval($a1)", ((isset($m[2]) && $m[2]) ? $m[2] : 0)];
 		} else {
 			return ["intval($a1)", 0];
 		}
 	} else {
-		preg_match(',^\s*(([0-9]+)|n)\s*(-\s*([0-9]+)?\s*)?$,', $param[0]->texte, $m);
+		preg_match(',^\s*((\d+)|n)\s*(-\s*(\d+)?\s*)?$,', $param[0]->texte, $m);
 		$a1 = $m[1];
 		if (empty($m[3])) {
 			return [$a1, 0];
@@ -1462,17 +1458,16 @@ function calculer_criteres($idb, &$boucles) {
 		$critere = $crit->op;
 		// critere personnalise ?
 		if (
-			(!$serveur or
-				((!function_exists($f = 'critere_' . $serveur . '_' . $table . '_' . $critere))
-					and (!function_exists($f = $f . '_dist'))
-					and (!function_exists($f = 'critere_' . $serveur . '_' . $critere))
-					and (!function_exists($f = $f . '_dist'))
-				)
+			(!$serveur ||
+				!function_exists($f = 'critere_' . $serveur . '_' . $table . '_' . $critere)
+				&& !function_exists($f .= '_dist')
+				&& !function_exists($f = 'critere_' . $serveur . '_' . $critere)
+				&& !function_exists($f .= '_dist')
 			)
-			and (!function_exists($f = 'critere_' . $table . '_' . $critere))
-			and (!function_exists($f = $f . '_dist'))
-			and (!function_exists($f = 'critere_' . $critere))
-			and (!function_exists($f = $f . '_dist'))
+			&& !function_exists($f = 'critere_' . $table . '_' . $critere)
+			&& !function_exists($f .= '_dist')
+			&& !function_exists($f = 'critere_' . $critere)
+			&& !function_exists($f .= '_dist')
 		) {
 			// fonction critere standard
 			$f = $defaut;
@@ -1543,7 +1538,7 @@ function critere_IN_dist($idb, &$boucles, $crit) {
 		}
 	}
 	if ($crit->exclus) {
-		if (!preg_match(',^L[0-9]+[.],', $arg)) {
+		if (!preg_match(',^L\d+[.],', $arg)) {
 			$where = ["'NOT'", $where];
 		} else // un not sur un critere de jointure se traduit comme un NOT IN avec une sous requete
 			// c'est une sous requete identique a la requete principale sous la forme (SELF,$select,$where) avec $select et $where qui surchargent
@@ -1713,13 +1708,13 @@ function lister_champs_id_conditionnel($table, $desc = null, $serveur = '') {
 	// Les champs id_xx de la table demandée
 	$champs = array_filter(
 		array_keys($desc['field']),
-		fn($champ) => strpos($champ, 'id_') === 0 or (in_array($champ, ['objet']))
+		fn($champ) => str_starts_with($champ, 'id_') || $champ == 'objet'
 	);
 
 	// Si le champ id_rubrique appartient à la liste et si id_secteur n'est pas inclus on le rajoute.
 	if (
 		in_array('id_rubrique', $champs)
-		and !in_array('id_secteur', $champs)
+		&& !in_array('id_secteur', $champs)
 	) {
 		$champs[] = 'id_secteur';
 	}
@@ -1737,7 +1732,7 @@ function lister_champs_id_conditionnel($table, $desc = null, $serveur = '') {
 		$primary = id_table_objet($desc['type']);
 		$associable = objet_associable($desc['type']);
 	}
-	if (isset($desc['field']['id_objet']) and isset($desc['field']['objet'])) {
+	if (isset($desc['field']['id_objet']) && isset($desc['field']['objet'])) {
 		$associable = true;
 	}
 
@@ -1748,8 +1743,8 @@ function lister_champs_id_conditionnel($table, $desc = null, $serveur = '') {
 	foreach ($tables as $_table => $_desc) {
 		if (
 			$associable
-			or ($primary and in_array($primary, array_keys($_desc['field'])))
-			or objet_associable($_desc['type'])
+			|| $primary && array_key_exists($primary, $_desc['field'])
+			|| objet_associable($_desc['type'])
 		) {
 			$champs[] = id_table_objet($_table);
 		}
@@ -1768,9 +1763,8 @@ function lister_champs_id_conditionnel($table, $desc = null, $serveur = '') {
 			'data' => [],
 		]
 	);
-	$champs = array_diff($champs, $exclusions);
 
-	return $champs;
+	return array_diff($champs, $exclusions);
 }
 
 /**
@@ -1828,12 +1822,15 @@ function critere_tri_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 
 	// definition du champ par defaut
-	$_champ_defaut = !isset($crit->param[0][0]) ? "''"
-		: calculer_liste([$crit->param[0][0]], $idb, $boucles, $boucle->id_parent);
-	$_liste_sens_defaut = !isset($crit->param[1][0]) ? '1'
-		: calculer_liste([$crit->param[1][0]], $idb, $boucles, $boucle->id_parent);
-	$_variable = !isset($crit->param[2][0]) ? "'$idb'"
-		: calculer_liste([$crit->param[2][0]], $idb, $boucles, $boucle->id_parent);
+	$_champ_defaut = isset($crit->param[0][0])
+		? calculer_liste([$crit->param[0][0]], $idb, $boucles, $boucle->id_parent)
+		: "''";
+	$_liste_sens_defaut = isset($crit->param[1][0])
+		? calculer_liste([$crit->param[1][0]], $idb, $boucles, $boucle->id_parent)
+		: '1';
+	$_variable = isset($crit->param[2][0])
+		? calculer_liste([$crit->param[2][0]], $idb, $boucles, $boucle->id_parent)
+		: "'$idb'";
 
 	$_tri = "((\$t=(isset(\$Pile[0]['tri'.$_variable]))?\$Pile[0]['tri'.$_variable]:((strncmp($_variable,'session',7)==0 AND session_get('tri'.$_variable))?session_get('tri'.$_variable):$_champ_defaut))?tri_protege_champ(\$t):'')";
 
@@ -1873,7 +1870,7 @@ function critere_tri_dist($idb, &$boucles, $crit) {
  **/
 function calculer_critere_DEFAUT_dist($idb, &$boucles, $crit) {
 	// double cas particulier {0,1} et {1/2} repere a l'analyse lexicale
-	if (($crit->op == ',') or ($crit->op == '/')) {
+	if ($crit->op == ',' || $crit->op == '/') {
 		calculer_critere_parties($idb, $boucles, $crit);
 		return;
 	}
@@ -1916,7 +1913,7 @@ function calculer_critere_DEFAUT_args($idb, &$boucles, $crit, $args) {
 		$where = ["'NOT'", $where];
 	}
 	if ($crit->exclus) {
-		if (!preg_match(',^L[0-9]+[.],', $arg)) {
+		if (!preg_match(',^L\d+[.],', $arg)) {
 			$where = ["'NOT'", $where];
 		} else {
 			// un not sur un critere de jointure se traduit comme un NOT IN avec une sous requete
@@ -1936,13 +1933,11 @@ function calculer_critere_DEFAUT_args($idb, &$boucles, $crit, $args) {
 	// traiter a part la date, elle est mise d'office par SPIP,
 	if ($crit->cond) {
 		$pred = calculer_argument_precedent($idb, $col, $boucles);
-		if ($col === 'date' or $col === 'date_redac') {
-			if ($pred === "\$Pile[0]['" . $col . "']") {
-				$pred = "(\$Pile[0]['{$col}_default']?'':$pred)";
-			}
+		if (($col === 'date' || $col === 'date_redac') && $pred === "\$Pile[0]['" . $col . "']") {
+			$pred = "(\$Pile[0]['{$col}_default']?'':$pred)";
 		}
 
-		if ($op === '=' and !$crit->not) {
+		if ($op === '=' && !$crit->not) {
 			$where = [
 				"'?'",
 				"(is_array($pred))",
@@ -2021,13 +2016,13 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 
 	// Cas particulier : id_parent => verifier les exceptions de tables
 	if (
-		(in_array($col, ['id_parent', 'id_secteur']) and isset($GLOBALS['exceptions_des_tables'][$table][$col]))
-		or (isset($GLOBALS['exceptions_des_tables'][$table][$col]) and is_string($GLOBALS['exceptions_des_tables'][$table][$col]))
+		in_array($col, ['id_parent', 'id_secteur'])
+		&& isset($GLOBALS['exceptions_des_tables'][$table][$col]) || isset($GLOBALS['exceptions_des_tables'][$table][$col]) && is_string($GLOBALS['exceptions_des_tables'][$table][$col])
 	) {
 		$col = $GLOBALS['exceptions_des_tables'][$table][$col];
 	} // et possibilite de gerer un critere secteur sur des tables de plugins (ie forums)
 	else {
-		if (($col == 'id_secteur') and ($critere_secteur = charger_fonction("critere_secteur_$type", 'public', true))) {
+		if ($col == 'id_secteur' && ($critere_secteur = charger_fonction("critere_secteur_$type", 'public', true))) {
 			$table = $critere_secteur($idb, $boucles, $val, $crit);
 		}
 
@@ -2036,8 +2031,8 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 		else {
 			if (
 				!isset($GLOBALS['exceptions_des_jointures'][table_objet_sql($table)][$col])
-				and !isset($GLOBALS['exceptions_des_jointures'][$col])
-				and count(trouver_champs_decomposes($col, $desc)) > 1
+				&& !isset($GLOBALS['exceptions_des_jointures'][$col])
+				&& count(trouver_champs_decomposes($col, $desc)) > 1
 			) {
 				$e = decompose_champ_id_objet($col);
 				$col = array_shift($e);
@@ -2055,13 +2050,13 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 
 						$trouver_table = charger_fonction('trouver_table', 'base');
 						if (
-							$desc = $trouver_table($table, $boucle->sql_serveur)
-							and isset($desc['field'][$col])
-							and $cle = array_search($desc['table'], $boucle->from)
+							($desc = $trouver_table($table, $boucle->sql_serveur))
+							&& isset($desc['field'][$col])
+							&& ($cle = array_search($desc['table'], $boucle->from))
 						) {
 							$table = $cle;
 						} else {
-							$table = trouver_jointure_champ($col, $boucle, [$table], ($crit->cond or $op != '='));
+							$table = trouver_jointure_champ($col, $boucle, [$table], ($crit->cond || $op != '='));
 						}
 						#$table = calculer_critere_externe_init($boucle, array($table), $col, $desc, ($crit->cond OR $op!='='), true);
 						if (!$table) {
@@ -2095,7 +2090,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	// et int sinon si la valeur est numerique
 	// sinon introduire le vrai type du champ si connu dans le sql_quote (ou int NOT NULL sinon)
 	// Ne pas utiliser intval, PHP tronquant les Bigint de SQL
-	if ($op == '=' or in_array($op, $GLOBALS['table_criteres_infixes'])) {
+	if ($op == '=' || in_array($op, $GLOBALS['table_criteres_infixes'])) {
 		$type_cast_quote = ($desc['field'][$col_vraie] ?? 'int NOT NULL');
 		// defaire le quote des int et les passer dans sql_quote avec le bon type de champ si on le connait, int sinon
 		// prendre en compte le debug ou la valeur arrive avec un commentaire PHP en debut
@@ -2111,25 +2106,24 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 		// sql_quote(truc,'','varchar')
 		elseif (
 			preg_match('/\Asql_quote[(](.*?)(,[^)]*?)?(,[^)]*(?:\(\d+\)[^)]*)?)?[)]\s*\z/ms', $val[0], $r)
-			// si pas deja un type
-			and (!isset($r[3]) or !$r[3] or !trim($r[3], ", '"))
+			&& (!isset($r[3]) || !$r[3] || !trim($r[3], ", '"))
 		) {
 			$r = $r[1]
-				. ((isset($r[2]) and $r[2]) ? $r[2] : ",''")
+				. ((isset($r[2]) && $r[2]) ? $r[2] : ",''")
 				. ",'" . addslashes($type_cast_quote) . "'";
 			$val[0] = "sql_quote($r)";
 		}
 		elseif (
-			strpos($val[0], '@@defaultcast@@') !== false
-			and preg_match("/'@@defaultcast@@'\s*\)\s*\z/ms", $val[0], $r)
+			str_contains($val[0], '@@defaultcast@@')
+			&& preg_match("/'@@defaultcast@@'\s*\)\s*\z/ms", $val[0], $r)
 		) {
 			$val[0] = substr($val[0], 0, -strlen($r[0])) . "'" . addslashes($type_cast_quote) . "')";
 		}
 	}
 
 	if (
-		strpos($val[0], '@@defaultcast@@') !== false
-		and preg_match("/'@@defaultcast@@'\s*\)\s*\z/ms", $val[0], $r)
+		str_contains($val[0], '@@defaultcast@@')
+		&& preg_match("/'@@defaultcast@@'\s*\)\s*\z/ms", $val[0], $r)
 	) {
 		$val[0] = substr($val[0], 0, -strlen($r[0])) . "'char')";
 	}
@@ -2146,11 +2140,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 
 	// inserer le nom de la table SQL devant le nom du champ
 	if ($table) {
-		if ($col[0] == '`') {
-			$arg = "$table." . substr($col, 1, -1);
-		} else {
-			$arg = "$table.$col";
-		}
+		$arg = $col[0] == '`' ? "$table." . substr($col, 1, -1) : "$table.$col";
 	} else {
 		$arg = $col;
 	}
@@ -2197,12 +2187,10 @@ function calculer_critere_infixe_externe($boucle, $crit, $op, $desc, $col, $col_
 	$table_sql = table_objet_sql($table);
 	if (
 		isset($GLOBALS['exceptions_des_jointures'][$table_sql])
-		and is_array($GLOBALS['exceptions_des_jointures'][$table_sql])
-		and
-		(
+		&& is_array($GLOBALS['exceptions_des_jointures'][$table_sql])
+		&& (
 			isset($GLOBALS['exceptions_des_jointures'][$table_sql][$col])
-			or
-			isset($GLOBALS['exceptions_des_jointures'][$table_sql][''])
+			|| isset($GLOBALS['exceptions_des_jointures'][$table_sql][''])
 		)
 	) {
 		$t = $GLOBALS['exceptions_des_jointures'][$table_sql];
@@ -2233,12 +2221,12 @@ function calculer_critere_infixe_externe($boucle, $crit, $op, $desc, $col, $col_
 	$table = '';
 	if ($boucle->jointures_explicites) {
 		$jointures_explicites = explode(' ', $boucle->jointures_explicites);
-		$table = $calculer_critere_externe($boucle, $jointures_explicites, $col, $desc, ($crit->cond or $op != '='), $t);
+		$table = $calculer_critere_externe($boucle, $jointures_explicites, $col, $desc, ($crit->cond || $op != '='), $t);
 	}
 
 	// et sinon on cherche parmi toutes les jointures declarees
 	if (!$table) {
-		$table = $calculer_critere_externe($boucle, $boucle->jointures, $col, $desc, ($crit->cond or $op != '='), $t);
+		$table = $calculer_critere_externe($boucle, $boucle->jointures, $col, $desc, ($crit->cond || $op != '='), $t);
 	}
 
 	if (!$table) {
@@ -2248,9 +2236,9 @@ function calculer_critere_infixe_externe($boucle, $crit, $op, $desc, $col, $col_
 	// il ne reste plus qu'a trouver le champ dans les from
 	[$nom, $desc, $cle] = trouver_champ_exterieur($col, $boucle->from, $boucle);
 
-	if ((is_countable($cle) ? count($cle) : 0) > 1 or reset($cle) !== $col) {
+	if ((is_countable($cle) ? count($cle) : 0) > 1 || reset($cle) !== $col) {
 		$col_alias = $col; // id_article devient juste le nom d'origine
-		if ((is_countable($cle) ? count($cle) : 0) > 1 and reset($cle) == 'id_objet') {
+		if ((is_countable($cle) ? count($cle) : 0) > 1 && reset($cle) == 'id_objet') {
 			$e = decompose_champ_id_objet($col);
 			$col = array_shift($e);
 			$where = primary_doublee($e, $table);
@@ -2320,13 +2308,12 @@ function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $cond, $c
 	// il faut privilegier la jointure directe en 2 etapes spip_mots_liens, spip_mots
 	if (
 		$checkarrivee
-		and is_string($checkarrivee)
-		and $a = table_objet($checkarrivee)
-		and in_array($a . '_liens', $joints)
+		&& is_string($checkarrivee)
+		&& ($a = table_objet($checkarrivee))
+		&& in_array($a . '_liens', $joints)
+		&& ($res = calculer_lien_externe_init($boucle, $joints, $col, $desc, $cond, $checkarrivee))
 	) {
-		if ($res = calculer_lien_externe_init($boucle, $joints, $col, $desc, $cond, $checkarrivee)) {
-			return $res;
-		}
+		return $res;
 	}
 	foreach ($joints as $joint) {
 		if ($arrivee = trouver_champ_exterieur($col, [$joint], $boucle, $checkarrivee)) {
@@ -2396,7 +2383,7 @@ function calculer_lien_externe_init(&$boucle, $joints, $col, $desc, $cond, $chec
 	$intermediaire = trouver_champ_exterieur($primary_arrivee, $joints, $boucle, $checkarrivee . '_liens');
 	$arrivee = trouver_champ_exterieur($col, $joints, $boucle, $checkarrivee);
 
-	if (!$intermediaire or !$arrivee) {
+	if (!$intermediaire || !$arrivee) {
 		return '';
 	}
 	array_pop($intermediaire); // enlever la cle en 3eme argument
@@ -2472,7 +2459,7 @@ function trouver_champ($champ, $where) {
  **/
 function calculer_critere_infixe_ops($idb, &$boucles, $crit) {
 	// cas d'une valeur comparee a elle-meme ou son referent
-	if (count($crit->param) == 0) {
+	if ((is_countable($crit->param) ? count($crit->param) : 0) == 0) {
 		$op = '=';
 		$col = $val = $crit->op;
 		if (preg_match('/^(.*)\.(.*)$/', $col, $r)) {
@@ -2494,7 +2481,7 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit) {
 				// Si id_enfant, comparer l'id_objet avec l'id_parent
 				// de la boucle superieure
 				$val = 'id_parent';
-			} elseif ($crit->cond and ($col == 'date' or $col == 'date_redac')) {
+			} elseif ($crit->cond && ($col == 'date' || $col == 'date_redac')) {
 				// un critere conditionnel sur date est traite a part
 				// car la date est mise d'office par SPIP,
 				$defaut = "(\$Pile[0]['{$col}_default']?'':\$Pile[0]['" . $col . "'])";
@@ -2521,23 +2508,22 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit) {
 		// celui ne sachant pas ce qu'est un critere infixe
 		// et a fortiori son 2e operande qu'entoure " ou '
 		if (
-			count($params) == 1
-			and (is_countable($params[0]) ? count($params[0]) : 0) == 3
-			and $params[0][0]->type == 'texte'
-			and $params[0][2]->type == 'texte'
-			and ($p = $params[0][0]->texte) == $params[0][2]->texte
-			and (($p == "'") or ($p == '"'))
-			and $params[0][1]->type == 'champ'
+			(is_countable($params) ? count($params) : 0) == 1
+			&& (is_countable($params[0]) ? count($params[0]) : 0) == 3
+			&& $params[0][0]->type == 'texte'
+			&& $params[0][2]->type == 'texte'
+			&& ($p = $params[0][0]->texte) == $params[0][2]->texte
+			&& ($p == "'" || $p == '"')
+			&& $params[0][1]->type == 'champ'
 		) {
 			$val[] = "$p\\$p#" . $params[0][1]->nom_champ . "\\$p$p";
 		} else {
 			foreach ((($op != 'IN') ? $params : calculer_vieux_in($params)) as $p) {
 				$a = calculer_liste($p, $idb, $boucles, $parent);
-				if (strcasecmp($op, 'IN') == 0) {
-					$val[] = $a;
-				} else {
-					$val[] = kwote($a, $boucles[$idb]->sql_serveur, '@@defaultcast@@');
-				} // toujours quoter en char ici
+				$val[] = strcasecmp($op, 'IN') == 0
+					? $a
+					// toujours quoter en char ici
+					: kwote($a, $boucles[$idb]->sql_serveur, '@@defaultcast@@');
 			}
 		}
 	}
@@ -2570,8 +2556,8 @@ function calculer_vieux_in($params) {
 	$n = isset($last->texte) ? strlen($last->texte) : 0;
 
 	if (
-		!((isset($deb->texte[0]) and $deb->texte[0] == '(')
-		&& (isset($last->texte[$n - 1]) and $last->texte[$n - 1] == ')'))
+		!((isset($deb->texte[0]) && $deb->texte[0] == '(')
+		&& (isset($last->texte[$n - 1]) && $last->texte[$n - 1] == ')'))
 	) {
 		return $params;
 	}
@@ -2628,14 +2614,10 @@ function calculer_critere_infixe_date($idb, &$boucles, $col) {
 	$col = $regs[1];
 
 	// Si on trouve un nom de champ date précis, on l'utilise, pas besoin de déclaration dans l'API objet
-	if (isset($regs[3]) and $suite = $regs[3]) {
+	if (isset($regs[3]) && ($suite = $regs[3])) {
 		# Recherche de l'existence du champ date_xxxx,
 		# si oui choisir ce champ, sinon choisir xxxx
-		if (isset($table['field']["date$suite"])) {
-			$date_orig = 'date' . $suite;
-		} else {
-			$date_orig = substr($suite, 1);
-		}
+		$date_orig = isset($table['field']["date$suite"]) ? 'date' . $suite : substr($suite, 1);
 
 		$pred = $date_orig;
 	} else { // Sinon il FAUT avoir déclaré le champ date officiel dans l'API objet
@@ -2647,7 +2629,7 @@ function calculer_critere_infixe_date($idb, &$boucles, $col) {
 		$pred = $date_orig = $GLOBALS['table_date'][$table['id_table']] ?? $table['date'];
 
 		// Si c'est pour du relatif
-		if (isset($regs[2]) and $rel = $regs[2]) {
+		if (isset($regs[2]) && ($rel = $regs[2])) {
 			$pred = 'date';
 		}
 	}
@@ -2750,17 +2732,14 @@ function critere_DATA_source_dist($idb, &$boucles, $crit) {
 
 	$args = [];
 	foreach ($crit->param as &$param) {
-		array_push(
-			$args,
-			calculer_liste($param, $idb, $boucles, $boucles[$idb]->id_parent)
-		);
+		$args[] = calculer_liste($param, $idb, $boucles, $boucles[$idb]->id_parent);
 	}
 
 	$boucle->hash .= '
 	$command[\'sourcemode\'] = ' . array_shift($args) . ";\n";
 
 	$boucle->hash .= '
-	$command[\'source\'] = array(' . join(', ', $args) . ");\n";
+	$command[\'source\'] = array(' . implode(', ', $args) . ");\n";
 }
 
 /**
@@ -2966,7 +2945,7 @@ function critere_noeud_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$primary = $boucle->primary;
 
-	if (!$primary or strpos($primary, ',')) {
+	if (!$primary || strpos($primary, ',')) {
 		erreur_squelette(_T('zbug_doublon_sur_table_sans_cle_primaire'), $boucle);
 
 		return;
@@ -2999,7 +2978,7 @@ function critere_noeud_dist($idb, &$boucles, $crit) {
  */
 function critere_feuille_dist($idb, &$boucles, $crit) {
 	$not = $crit->not;
-	$crit->not = $not ? false : true;
+	$crit->not = !$not;
 	critere_noeud_dist($idb, $boucles, $crit);
 	$crit->not = $not;
 }

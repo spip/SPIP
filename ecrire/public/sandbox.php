@@ -40,9 +40,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     texte
  */
 function sandbox_composer_texte($texte, &$p) {
-	$code = "'" . str_replace(['\\', "'"], ['\\\\', "\\'"], $texte) . "'";
-
-	return $code;
+	return "'" . str_replace(['\\', "'"], ['\\\\', "\\'"], $texte) . "'";
 }
 
 
@@ -67,13 +65,9 @@ function sandbox_composer_filtre($fonc, $code, $arglist, &$p, $nb_arg_droite = 1
 	elseif ($f = chercher_filtre($fonc)) {
 		// cas particulier : le filtre |set doit acceder a la $Pile
 		// proto: filtre_set(&$Pile, $val, $args...)
-		if (strpbrk($f, ':')) { // Class::method
-			$refl = new ReflectionMethod($f);
-		} else {
-			$refl = new ReflectionFunction($f);
-		}
+		$refl = strpbrk($f, ':') ? new ReflectionMethod($f) : new ReflectionFunction($f);
 		$refs = $refl->getParameters();
-		if (isset($refs[0]) and $refs[0]->name == 'Pile') {
+		if (isset($refs[0]) && $refs[0]->name == 'Pile') {
 			$code = "$f(\$Pile,$code$arglist)";
 			$nb_arg_gauche = 2; // la balise à laquelle s'applique le filtre + $Pile
 		} else {
@@ -118,11 +112,7 @@ else {
 function sandbox_composer_inclure_php($fichier, &$p, $_contexte) {
 	$compil = texte_script(memoriser_contexte_compil($p));
 	// si inexistant, on essaiera a l'execution
-	if ($path = find_in_path($fichier)) {
-		$path = "\"$path\"";
-	} else {
-		$path = "find_in_path(\"$fichier\")";
-	}
+	$path = ($path = find_in_path($fichier)) ? "\"$path\"" : "find_in_path(\"$fichier\")";
 
 	return sprintf(CODE_INCLURE_SCRIPT, $path, $fichier, $compil, $_contexte);
 }
@@ -139,7 +129,7 @@ function sandbox_composer_interdire_scripts($code, &$p) {
 	// Securite
 	if (
 		$p->interdire_scripts
-		and $p->etoile != '**'
+		&& $p->etoile != '**'
 	) {
 		if (!preg_match("/^sinon[(](.*),'([^']*)'[)]$/", $code, $r)) {
 			$code = "interdire_scripts($code)";
@@ -183,7 +173,7 @@ function sandbox_filtrer_squelette($skel, $corps, $filtres) {
 	foreach ($series_filtres as $filtres) {
 		if (is_countable($filtres) ? count($filtres) : 0) {
 			foreach ($filtres as $filtre) {
-				if ($filtre and $f = chercher_filtre($filtre)) {
+				if ($filtre && ($f = chercher_filtre($filtre))) {
 					$corps = $f($corps);
 				}
 			}

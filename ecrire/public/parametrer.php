@@ -41,7 +41,7 @@ function public_parametrer_dist($fond, $contexte = '', $cache = '', string $conn
 		$lang = $GLOBALS['meta']['langue_site'];
 	}
 
-	$select = ((!isset($GLOBALS['forcer_lang']) or !$GLOBALS['forcer_lang']) and $lang <> $GLOBALS['spip_lang']);
+	$select = ((!isset($GLOBALS['forcer_lang']) || !$GLOBALS['forcer_lang']) && $lang != $GLOBALS['spip_lang']);
 	if ($select) {
 		$select = lang_select($lang);
 	}
@@ -144,7 +144,7 @@ function public_parametrer_dist($fond, $contexte = '', $cache = '', string $conn
 		spip_log("calcul ($profile) [$skel] $infos"
 			. ' (' . strlen($page['texte']) . ' octets)');
 
-		if (defined('_CALCUL_PROFILER') and intval($profile) > _CALCUL_PROFILER) {
+		if (defined('_CALCUL_PROFILER') && (int) $profile > _CALCUL_PROFILER) {
 			spip_log("calcul ($profile) [$skel] $infos"
 				. ' (' . strlen($page['texte']) . ' octets) | ' . $_SERVER['REQUEST_URI'], 'profiler' . _LOG_AVERTISSEMENT);
 		}
@@ -157,8 +157,8 @@ function public_parametrer_dist($fond, $contexte = '', $cache = '', string $conn
 			$GLOBALS['debug_objets']['profile'][$sourcefile] = $profile;
 			if (
 				$GLOBALS['debug_objets']['sourcefile']
-				and (_request('var_mode_objet') == $fonc)
-				and (_request('var_mode_affiche') == 'resultat')
+				&& _request('var_mode_objet') == $fonc
+				&& _request('var_mode_affiche') == 'resultat'
 			) {
 				erreur_squelette();
 			}
@@ -169,7 +169,7 @@ function public_parametrer_dist($fond, $contexte = '', $cache = '', string $conn
 			// si aucun #CACHE{} spécifié
 			// le contexte implicite qui conditionne le cache assure qu'on retombe pas sur le meme
 			// entre public et prive
-			if (test_espace_prive() or strncmp($fond, 'modeles/', 8) == 0) {
+			if (test_espace_prive() || str_starts_with($fond, 'modeles/')) {
 				$page['entetes']['X-Spip-Cache'] = 0;
 			} else {
 				$page['entetes']['X-Spip-Cache'] = $GLOBALS['delais'] ?? 36000;
@@ -180,7 +180,7 @@ function public_parametrer_dist($fond, $contexte = '', $cache = '', string $conn
 
 		// faire remonter le fichier source
 		static $js_inclus = false;
-		if (defined('_VAR_INCLURE') and _VAR_INCLURE) {
+		if (defined('_VAR_INCLURE') && _VAR_INCLURE) {
 			$page['sourcefile'] = $sourcefile;
 			$page['texte'] =
 				"<div class='inclure_blocs'><h6>" . $page['sourcefile'] . '</h6>' . $page['texte'] . '</div>'
@@ -212,7 +212,7 @@ function presenter_contexte($contexte, $profondeur_max = 1, $max_lines = 0) {
 	$line = 0;
 	foreach ($contexte as $var => $val) {
 		$line++;
-		if ($max_lines and $max_lines < $line) {
+		if ($max_lines && $max_lines < $line) {
 			$infos[] = '…';
 			break;
 		}
@@ -225,7 +225,7 @@ function presenter_contexte($contexte, $profondeur_max = 1, $max_lines = 0) {
 				$val = 'array:' . count($val);
 			}
 		} elseif (is_object($val)) {
-			$val = get_class($val);
+			$val = $val::class;
 		} elseif (strlen("$val") > 30) {
 			$val = substr("$val", 0, 29) . '…';
 			if (strstr($val, ' ')) {
@@ -238,7 +238,7 @@ function presenter_contexte($contexte, $profondeur_max = 1, $max_lines = 0) {
 		}
 		$infos[] = $var . '=' . $val;
 	}
-	return join(', ', $infos);
+	return implode(', ', $infos);
 }
 
 
@@ -277,8 +277,8 @@ function tester_redirection($fond, $contexte, $connect) {
 function public_tester_redirection_dist($fond, $contexte, $connect) {
 	if (
 		$fond == 'article'
-		and !empty($contexte['id_article'])
-		and $id_article = intval($contexte['id_article'])
+		&& !empty($contexte['id_article'])
+		&& ($id_article = (int) $contexte['id_article'])
 	) {
 		include_spip('public/quete'); // pour quete_virtuel et ses dependances
 		$m = quete_virtuel($id_article, $connect) ?? '';

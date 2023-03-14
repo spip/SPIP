@@ -32,20 +32,20 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $res = true;
 
 // Cas d'une page contenant du PHP :
-if (empty($page['process_ins']) or $page['process_ins'] != 'html') {
+if (empty($page['process_ins']) || $page['process_ins'] != 'html') {
 	include_spip('inc/lang');
 
 	// restaurer l'etat des notes avant calcul
 	if (
 		isset($page['notes'])
-		and $page['notes']
-		and $notes = charger_fonction('notes', 'inc', true)
+		&& $page['notes']
+		&& ($notes = charger_fonction('notes', 'inc', true))
 	) {
 		$notes($page['notes'], 'restaurer_etat');
 	}
 	ob_start();
-	if (strpos($page['texte'], '?xml') !== false) {
-		$page['texte'] = str_replace('<' . '?xml', "<\1?xml", $page['texte']);
+	if (str_contains($page['texte'], '?xml')) {
+		$page['texte'] = str_replace('<?xml', "<\1?xml", $page['texte']);
 	}
 
 	try {
@@ -69,11 +69,11 @@ if (empty($page['process_ins']) or $page['process_ins'] != 'html') {
 
 	$page['process_ins'] = 'html';
 
-	if (strpos($page['texte'], '?xml') !== false) {
-		$page['texte'] = str_replace("<\1?xml", '<' . '?xml', $page['texte']);
+	if (str_contains($page['texte'], '?xml')) {
+		$page['texte'] = str_replace("<\1?xml", '<?xml', $page['texte']);
 	}
 }
 
 // le résultat de calcul d'un squelette est toujours de type string
-$page['texte'] = strval($page['texte']);
+$page['texte'] = (string) $page['texte'];
 page_base_href($page['texte']);

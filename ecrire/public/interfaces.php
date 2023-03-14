@@ -27,13 +27,13 @@ global $exception_des_connect;
 $exception_des_connect[] = ''; // ne pas transmettre le connect='' par les inclure
 
 /** @deprecated 4.2 Uses nampespaced classes */
-class_alias('Spip\\Compilateur\\Noeud\\Boucle', 'Boucle');
-class_alias('Spip\\Compilateur\\Noeud\\Champ', 'Champ');
-class_alias('Spip\\Compilateur\\Noeud\\Contexte', 'Contexte');
-class_alias('Spip\\Compilateur\\Noeud\\Critere', 'Critere');
-class_alias('Spip\\Compilateur\\Noeud\\Idiome', 'Idiome');
-class_alias('Spip\\Compilateur\\Noeud\\Polyglotte', 'Polyglotte');
-class_alias('Spip\\Compilateur\\Noeud\\Texte', 'Texte');
+class_alias(\Spip\Compilateur\Noeud\Boucle::class, 'Boucle');
+class_alias(\Spip\Compilateur\Noeud\Champ::class, 'Champ');
+class_alias(\Spip\Compilateur\Noeud\Contexte::class, 'Contexte');
+class_alias(\Spip\Compilateur\Noeud\Critere::class, 'Critere');
+class_alias(\Spip\Compilateur\Noeud\Idiome::class, 'Idiome');
+class_alias(\Spip\Compilateur\Noeud\Polyglotte::class, 'Polyglotte');
+class_alias(\Spip\Compilateur\Noeud\Texte::class, 'Texte');
 
 /**
  * Déclarer les interfaces de la base pour le compilateur

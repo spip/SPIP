@@ -99,7 +99,7 @@ function boucle_HIERARCHIE_dist($id_boucle, &$boucles) {
 	$boucle->where[] = ["'IN'", "'$id_table'", '"($hierarchie)"'];
 
 	$order = "FIELD($id_table, \$hierarchie)";
-	if (!isset($boucle->default_order[0]) or $boucle->default_order[0] != ' DESC') {
+	if (!isset($boucle->default_order[0]) || $boucle->default_order[0] != ' DESC') {
 		$boucle->default_order[] = "\"$order\"";
 	} else {
 		$boucle->default_order[0] = "\"$order DESC\"";

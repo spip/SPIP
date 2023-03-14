@@ -65,7 +65,7 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect, $sui
 	while ($fin = strpos($texte, '</intro>')) {
 		$zone = substr($texte, 0, $fin);
 		$texte = substr($texte, $fin + strlen('</intro>'));
-		if ($deb = strpos($zone, '<intro>') or substr($zone, 0, 7) == '<intro>') {
+		if (($deb = strpos($zone, '<intro>')) || str_starts_with($zone, '<intro>')) {
 			$zone = substr($zone, $deb + 7);
 		}
 		$intro .= $zone;
@@ -86,10 +86,10 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect, $sui
 		$texte = $intro;
 	} else {
 		if (
-			strpos("\n" . $texte, "\n|") === false
-			and strlen($texte) > 2.5 * $longueur
+			!str_contains("\n" . $texte, "\n|")
+			&& strlen($texte) > 2.5 * $longueur
 		) {
-			if (strpos($texte, '<multi') !== false) {
+			if (str_contains($texte, '<multi')) {
 				$texte = extraire_multi($texte);
 			}
 			$texte = couper($texte, 2 * $longueur);
@@ -109,7 +109,7 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect, $sui
 		$notes('', 'depiler');
 	}
 
-	if (is_null($suite) and defined('_INTRODUCTION_SUITE')) {
+	if (is_null($suite) && defined('_INTRODUCTION_SUITE')) {
 		$suite = _INTRODUCTION_SUITE;
 	}
 	$texte = couper($texte, $longueur, $suite);
@@ -174,11 +174,7 @@ function filtre_pagination_dist(
 	$debut = 'debut' . $nom; // 'debut_articles'
 
 	// n'afficher l'ancre qu'une fois
-	if (!isset($ancres[$ancre])) {
-		$bloc_ancre = $ancres[$ancre] = "<a id='" . $ancre . "' class='pagination_ancre'></a>";
-	} else {
-		$bloc_ancre = '';
-	}
+	$bloc_ancre = isset($ancres[$ancre]) ? '' : ($ancres[$ancre] = "<a id='" . $ancre . "' class='pagination_ancre'></a>");
 	// liste = false : on ne veut que l'ancre
 	if (!$liste) {
 		return $ancres[$ancre];
@@ -189,10 +185,10 @@ function filtre_pagination_dist(
 		'debut' => $debut,
 		'url' => parametre_url($self, 'fragment', ''), // nettoyer l'id ahah eventuel
 		'total' => $total,
-		'position' => intval($position),
+		'position' => (int) $position,
 		'pas' => $pas,
 		'nombre_pages' => floor(($total - 1) / $pas) + 1,
-		'page_courante' => floor(intval($position) / $pas) + 1,
+		'page_courante' => floor((int) $position / $pas) + 1,
 		'ancre' => $ancre,
 		'bloc_ancre' => $bloc_ancre
 	];
@@ -207,12 +203,7 @@ function filtre_pagination_dist(
 
 	if ($modele) {
 		$pagination['type_pagination'] = $modele;
-		if (trouver_fond('pagination_' . $modele, 'modeles')) {
-			$modele = '_' . $modele;
-		}
-		else {
-			$modele = '';
-		}
+		$modele = trouver_fond('pagination_' . $modele, 'modeles') ? '_' . $modele : '';
 	}
 
 	if (!defined('_PAGINATION_NOMBRE_LIENS_MAX')) {
@@ -242,7 +233,7 @@ function filtre_pagination_dist(
  *     Liste (première page, dernière page).
  **/
 function filtre_bornes_pagination_dist($courante, $nombre, $max = 10) {
-	if ($max <= 0 or $max >= $nombre) {
+	if ($max <= 0 || $max >= $nombre) {
 		return [1, $nombre];
 	}
 	if ($max <= 1) {
@@ -267,19 +258,13 @@ function filtre_pagination_affiche_texte_lien_page_dist($type_pagination, $numer
 		return '&gt;';
 	}
 
-	switch ($type_pagination) {
-		case 'resultats':
-			return $rang_item + 1; // 1 11 21 31...
-		case 'naturel':
-			return $rang_item ?: 1; // 1 10 20 30...
-		case 'rang':
-			return $rang_item; // 0 10 20 30...
-
-		case 'page':
-		case 'prive':
-		default:
-			return $numero_page; // 1 2 3 4 5...
-	}
+	return match ($type_pagination) {
+		'resultats' => $rang_item + 1, // 1 11 21 31...
+		'naturel' => $rang_item ?: 1, // 1 10 20 30...
+		'rang' => $rang_item, // 0 10 20 30...
+		'page', 'prive' => $numero_page, // 1 2 3 4 5...
+		default => $numero_page, // 1 2 3 4 5...
+	};
 }
 
 /**
@@ -364,7 +349,7 @@ function lister_objets_liens($objet_source, $objet, $id_objet, $objet_lien) {
 	if (!isset($liens["$objet_source-$objet-$id_objet-$objet_lien"])) {
 		include_spip('action/editer_liens');
 		// quand $objet == $objet_lien == $objet_source on reste sur le cas par defaut de $objet_lien == $objet_source
-		if ($objet_lien == $objet and $objet_lien !== $objet_source) {
+		if ($objet_lien == $objet && $objet_lien !== $objet_source) {
 			$res = objet_trouver_liens([$objet => $id_objet], [$objet_source => '*']);
 		} else {
 			$res = objet_trouver_liens([$objet_source => '*'], [$objet => $id_objet]);
@@ -389,16 +374,16 @@ function calculer_rang_smart($titre, $objet_source, $id, $env) {
 	// Cas du #RANG utilisé dans #FORMULAIRE_EDITER_LIENS -> attraper le rang du lien
 	// permet de voir le rang du lien si il y en a un en base, meme avant un squelette xxxx-lies.html ne gerant pas les liens
 	if (
-		isset($env['form']) and $env['form']
-		and isset($env['_objet_lien']) and $env['_objet_lien']
-		and (function_exists('lien_triables') or include_spip('action/editer_liens'))
-		and $r = objet_associable($env['_objet_lien'])
-		and [$p, $table_lien] = $r
-		and lien_triables($table_lien)
-		and isset($env['objet']) and $env['objet']
-		and isset($env['id_objet']) and $env['id_objet']
-		and $objet_source
-		and $id = intval($id)
+		isset($env['form']) && $env['form']
+		&& isset($env['_objet_lien']) && $env['_objet_lien']
+		&& (function_exists('lien_triables') || include_spip('action/editer_liens'))
+		&& ($r = objet_associable($env['_objet_lien']))
+		&& ([$p, $table_lien] = $r)
+		&& lien_triables($table_lien)
+		&& isset($env['objet']) && $env['objet']
+		&& isset($env['id_objet']) && $env['id_objet']
+		&& $objet_source
+		&& ($id = (int) $id)
 	) {
 		$rang = retrouver_rang_lien($objet_source, $id, $env['objet'], $env['id_objet'], $env['_objet_lien']);
 		return ($rang ?: '');
@@ -481,8 +466,8 @@ function calculer_balise_tri(string $champ_ou_sens, string $libelle, string $cla
 	}
 
 	// Drapeau pour garder en session ?
-	$param_memo = (!$is_sens_fixe ? $param_tri : $param_sens);
-	$url = parametre_url($url, 'var_memotri', strncmp($tri_nom, 'session', 7) == 0 ? $param_memo : '');
+	$param_memo = ($is_sens_fixe ? $param_sens : $param_tri);
+	$url = parametre_url($url, 'var_memotri', str_starts_with($tri_nom, 'session') ? $param_memo : '');
 
 	// Classes : on indique le sens de tri et l'item exposé
 	if (!$is_sens_fixe) {
@@ -524,7 +509,7 @@ function tri_protege_champ($t) {
  * @return string
  */
 function tri_champ_order($t, $from = null, $senstri = '') {
-	if (strncmp($t, 'multi ', 6) == 0) {
+	if (str_starts_with($t, 'multi ')) {
 		return 'multi' . $senstri;
 	}
 
@@ -532,7 +517,7 @@ function tri_champ_order($t, $from = null, $senstri = '') {
 
 	$prefixe = '';
 	foreach (['num ', 'sinum '] as $p) {
-		if (strpos($t, $p) === 0) {
+		if (str_starts_with($t, $p)) {
 			$champ = substr($t, strlen($p));
 			$prefixe = $p;
 		}
@@ -545,22 +530,18 @@ function tri_champ_order($t, $from = null, $senstri = '') {
 		$trouver_table = charger_fonction('trouver_table', 'base');
 		foreach ($from as $idt => $table_sql) {
 			if (
-				$desc = $trouver_table($table_sql)
-				and isset($desc['field'][$champ])
+				($desc = $trouver_table($table_sql)) && isset($desc['field'][$champ])
 			) {
 				$champ = "$idt.$champ";
 				break;
 			}
 		}
 	}
-	switch ($prefixe) {
-		case 'num ':
-			return "CASE( 0+$champ ) WHEN 0 THEN 1 ELSE 0 END{$senstri}, 0+$champ{$senstri}";
-		case 'sinum ':
-			return "CASE( 0+$champ ) WHEN 0 THEN 1 ELSE 0 END{$senstri}";
-		default:
-			return $champ . $senstri;
-	}
+	return match ($prefixe) {
+		'num ' => "CASE( 0+$champ ) WHEN 0 THEN 1 ELSE 0 END{$senstri}, 0+$champ{$senstri}",
+		'sinum ' => "CASE( 0+$champ ) WHEN 0 THEN 1 ELSE 0 END{$senstri}",
+		default => $champ . $senstri,
+ 	};
 }
 
 /**
@@ -574,12 +555,11 @@ function tri_champ_order($t, $from = null, $senstri = '') {
  * @return string
  */
 function tri_champ_select($t) {
-	if (strncmp($t, 'multi ', 6) == 0) {
+	if (str_starts_with($t, 'multi ')) {
 		$t = substr($t, 6);
 		$t = preg_replace(',\s,', '', $t);
-		$t = sql_multi($t, $GLOBALS['spip_lang']);
 
-		return $t;
+		return sql_multi($t, $GLOBALS['spip_lang']);
 	}
 	if (trim($t) == 'hasard') {
 		return 'rand() AS hasard';
@@ -601,12 +581,11 @@ function formate_liste_critere_par_ordre_liste($valeurs, $serveur = '') {
 		return '';
 	}
 	$f = sql_serveur('quote', $serveur, true);
-	if (!is_string($f) or !$f) {
+	if (!is_string($f) || !$f) {
 		return '';
 	}
-	$valeurs = implode(',', array_map($f, array_unique($valeurs)));
 
-	return $valeurs;
+	return implode(',', array_map($f, array_unique($valeurs)));
 }
 
 /**
@@ -631,7 +610,7 @@ function formate_liste_critere_par_ordre_liste($valeurs, $serveur = '') {
 function appliquer_filtre_sinon($arg, $filtre, $args, $defaut = '') {
 	// Si c'est un filtre d'image, on utilise image_filtrer()
 	// Attention : les 2 premiers arguments sont inversés dans ce cas
-	if (trouver_filtre_matrice($filtre) and substr($filtre, 0, 6) == 'image_') {
+	if (trouver_filtre_matrice($filtre) && str_starts_with($filtre, 'image_')) {
 		include_spip('inc/filtres_images_lib_mini');
 		$args[1] = $args[0];
 		$args[0] = $filtre;
