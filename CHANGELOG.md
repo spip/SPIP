@@ -10,6 +10,10 @@
 
 - #5301 Permettre de fournir le nom de l’attachement à `spip_livrer_fichier()`
 
+### Changed
+
+- Nécessite PHP 8.0 minimum
+
 ### Fixed
 
 - #5485 Correction d’erreurs des traitements d’image si la balise `img` n’a pas d’attribut `src`
