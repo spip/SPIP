@@ -77,7 +77,7 @@ function balise_FORMULAIRE_INSCRIPTION_stat($args, $context_compil) {
 
 	// Compatibilité avec l'ancien param "id" dans les deux sens
 	if (!is_array($id_ou_options)) {
-		$options = ['id' => intval($id_ou_options)];
+		$options = ['id' => (int) $id_ou_options];
 		$id = $options['id'];
 	}else {
 		$options = $id_ou_options;

@@ -42,7 +42,7 @@ function balise_INFO__dist($p) {
 	$info = $p->nom_champ;
 	$type_objet = interprete_argument_balise(1, $p);
 	$id_objet = interprete_argument_balise(2, $p);
-	if ($info === 'INFO_' or !$type_objet or !$id_objet) {
+	if ($info === 'INFO_' || !$type_objet || !$id_objet) {
 		$msg = _T('zbug_balise_sans_argument', ['balise' => ' INFO_']);
 		erreur_squelette($msg, $p);
 		$p->interdire_scripts = true;
