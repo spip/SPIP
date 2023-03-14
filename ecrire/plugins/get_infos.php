@@ -48,7 +48,7 @@ function plugins_get_infos_dist($plug = false, $reload = false, $dir = _DIR_PLUG
 		}
 	}
 
-	if (defined('_VAR_MODE') and _VAR_MODE == 'recalcul') {
+	if (defined('_VAR_MODE') && _VAR_MODE == 'recalcul') {
 		$reload = true;
 	}
 
@@ -68,7 +68,7 @@ function plugins_get_infos_dist($plug = false, $reload = false, $dir = _DIR_PLUG
 		}
 
 		// Nettoyer le cache des vieux plugins qui ne sont plus la
-		if ($clean_old and isset($cache[$dir]) and is_countable($cache[$dir]) ? count($cache[$dir]) : 0) {
+		if ($clean_old && isset($cache[$dir]) && (is_countable($cache[$dir]) ? count($cache[$dir]) : 0)) {
 			foreach (array_keys($cache[$dir]) as $p) {
 				if (!in_array($p, $plug)) {
 					unset($cache[$dir][$p]);
@@ -94,7 +94,7 @@ function plugins_get_infos_un($plug, $reload, $dir, &$cache) {
 	if (!is_readable($file = "$dir$plug/paquet.xml")) {
 		return false;
 	}
-	$time = intval(@filemtime($file));
+	$time = (int) @filemtime($file);
 	if ($time < 0) {
 		return false;
 	}
@@ -104,10 +104,10 @@ function plugins_get_infos_un($plug, $reload, $dir, &$cache) {
 
 	// si le cache est valide
 	if (
-		(intval($reload) <= 0)
-		and ($time > 0)
-		and ($time <= $pcache['filemtime'])
-		and $md5 == $pcache['md5_file']
+		(int) $reload <= 0
+		&& $time > 0
+		&& $time <= $pcache['filemtime']
+		&& $md5 == $pcache['md5_file']
 	) {
 		return false;
 	}
@@ -124,7 +124,7 @@ function plugins_get_infos_un($plug, $reload, $dir, &$cache) {
 	// Si on lit le paquet.xml de SPIP, on rajoute un procure php afin que les plugins puissent
 	// utiliser un necessite php. SPIP procure donc la version php courante du serveur.
 	// chaque librairie php est aussi procurée, par exemple 'php:curl'.
-	if (isset($ret['prefix']) and $ret['prefix'] == 'spip') {
+	if (isset($ret['prefix']) && $ret['prefix'] == 'spip') {
 		$ret['procure']['php'] = ['nom' => 'php', 'version' => phpversion()];
 		foreach (get_loaded_extensions() as $ext) {
 			$ret['procure']['php:' . $ext] = ['nom' => 'php:' . $ext, 'version' => phpversion($ext)];

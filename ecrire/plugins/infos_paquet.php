@@ -42,7 +42,7 @@ function plugins_infos_paquet($desc, $plug = '', $dir_plugins = _DIR_PLUGINS) {
 		$tree = $vxml->versions['0'];
 
 		// l'arbre renvoie parfois un tag vide... etrange. Pas la peine de garder ca.
-		if (isset($tree['']) and !strlen($tree[''])) {
+		if (isset($tree['']) && !strlen($tree[''])) {
 			unset($tree['']);
 		}
 
@@ -59,13 +59,13 @@ function plugins_infos_paquet($desc, $plug = '', $dir_plugins = _DIR_PLUGINS) {
 			$vspip = $GLOBALS['spip_version_branche'];
 			foreach ($vxml->versions as $_compatibilite => $_version) {
 				if (
-					($_version['balise'] == 'spip')
-					and (plugin_version_compatible($_compatibilite, $vspip, 'spip'))
+					$_version['balise'] == 'spip'
+					&& plugin_version_compatible($_compatibilite, $vspip, 'spip')
 				) {
 					// on merge les sous-balises de la balise spip compatible avec celles de la
 					// balise paquet
 					foreach ($_version as $_index => $_balise) {
-						if ($_index and $_index != 'balise') {
+						if ($_index && $_index != 'balise') {
 							$tree[$_index] = array_merge($tree[$_index], $_balise);
 						}
 					}
@@ -118,7 +118,7 @@ function paquet_debutElement($phraseur, $name, $attrs) {
 	if ($phraseur->err) {
 		return;
 	}
-	if (($name == 'paquet') or ($name == 'spip')) {
+	if ($name == 'paquet' || $name == 'spip') {
 		if ($name == 'spip') {
 			$n = $attrs['compatibilite'];
 			$attrs = [];
@@ -155,7 +155,7 @@ function paquet_debutElement($phraseur, $name, $attrs) {
  */
 function paquet_textElement($phraseur, $data) {
 	xml_textElement($phraseur, $data);
-	if ($phraseur->err or !(trim($data))) {
+	if ($phraseur->err || !(trim($data))) {
 		return;
 	}
 	$phraseur->versions[$phraseur->contenu['compatible']][''] .= $data;
@@ -175,7 +175,7 @@ function paquet_finElement($phraseur, $name) {
 	}
 	$n = $phraseur->contenu['compatible'];
 
-	if (isset($phraseur->versions[$n][$name][0]) and is_array($phraseur->versions[$n][$name][0])) {
+	if (isset($phraseur->versions[$n][$name][0]) && is_array($phraseur->versions[$n][$name][0])) {
 		$attrs = $phraseur->versions[$n][$name][0];
 		unset($phraseur->versions[$n][$name][0]);
 	} else {
@@ -207,11 +207,7 @@ function paquet_finElement($phraseur, $name) {
  * @param string $texte
  */
 function info_paquet_licence($phraseur, $attrs, $texte) {
-	if (isset($attrs['lien'])) {
-		$lien = $attrs['lien'];
-	} else {
-		$lien = '';
-	}
+	$lien = $attrs['lien'] ?? '';
 	$n = $phraseur->contenu['compatible'];
 	$phraseur->versions[$n]['licence'][] = ['nom' => $texte, 'url' => $lien];
 }
@@ -256,11 +252,7 @@ function info_paquet_auteur($phraseur, $attrs, $texte) {
 		$mail = '';
 	}
 
-	if (isset($attrs['lien'])) {
-		$lien = $attrs['lien'];
-	} else {
-		$lien = '';
-	}
+	$lien = $attrs['lien'] ?? '';
 
 	$n = $phraseur->contenu['compatible'];
 	$phraseur->versions[$n]['auteur'][] = ['nom' => $texte, 'url' => $lien, 'mail' => $mail];
@@ -276,11 +268,7 @@ function info_paquet_auteur($phraseur, $attrs, $texte) {
  */
 function info_paquet_credit($phraseur, $attrs, $texte) {
 
-	if (isset($attrs['lien'])) {
-		$lien = $attrs['lien'];
-	} else {
-		$lien = '';
-	}
+	$lien = $attrs['lien'] ?? '';
 
 	$n = $phraseur->contenu['compatible'];
 	$phraseur->versions[$n]['credit'][] = ['nom' => $texte, 'url' => $lien];

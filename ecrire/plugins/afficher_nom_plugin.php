@@ -61,10 +61,8 @@ function plugins_afficher_nom_plugin_dist(
 	$s .= '</div>';
 
 	if ($erreur) {
-		$s .= "<div class='erreur'>" . join('<br >', $info['erreur']) . '</div>';
+		$s .= "<div class='erreur'>" . implode('<br >', $info['erreur']) . '</div>';
 	}
 
-	$s .= '</li>';
-
-	return $s;
+	return $s . '</li>';
 }

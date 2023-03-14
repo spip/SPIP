@@ -26,7 +26,7 @@ function plugins_afficher_repertoires_dist($url_page, $liste_plugins, $liste_plu
 		$fast_liste_plugins_actifs[$chemin_plug] = true;
 		$dir = dirname($chemin_plug);
 		$maxiter = 100;
-		while (strlen($dir) && !isset($deplie[$dir]) && $dir != $racine && $maxiter-- > 0) {
+		while (strlen($dir) && !isset($deplie[$dir]) && $dir !== $racine && $maxiter-- > 0) {
 			$deplie[$dir] = true;
 			$dir = dirname($dir);
 		}
@@ -89,7 +89,7 @@ function tree_open_close_dir(&$current, $target, $deplie = []) {
 	$tcom = [];
 	$output = '';
 	// la partie commune
-	while (reset($tcur) == reset($ttarg)) {
+	while (reset($tcur) === reset($ttarg)) {
 		$tcom[] = array_shift($tcur);
 		array_shift($ttarg);
 	}
@@ -100,7 +100,7 @@ function tree_open_close_dir(&$current, $target, $deplie = []) {
 		$output .= "</li>\n";
 	}
 	$chemin = '';
-	if (count($tcom)) {
+	if ($tcom !== []) {
 		$chemin .= implode('/', $tcom) . '/';
 	}
 	// ouvrir les repertoires jusqu'a la cible

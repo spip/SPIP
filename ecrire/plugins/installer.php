@@ -56,7 +56,7 @@ function plugins_installer_dist($plug, $action, $dir_type = '_DIR_PLUGINS') {
 	// Charger les informations du XML du plugin et vérification de l'existence d'une installation
 	$get_infos = charger_fonction('get_infos', 'plugins');
 	$infos = $get_infos($plug, false, constant($dir_type));
-	if (!isset($infos['install']) or !$infos['install']) {
+	if (!isset($infos['install']) || !$infos['install']) {
 		return false;
 	}
 
@@ -75,7 +75,7 @@ function plugins_installer_dist($plug, $action, $dir_type = '_DIR_PLUGINS') {
 
 	// Détermination de la table meta et du nom de la meta plugin
 	$table = 'meta';
-	if (isset($infos['meta']) and ($infos['meta'] !== 'meta')) {
+	if (isset($infos['meta']) && $infos['meta'] !== 'meta') {
 		$table = $infos['meta'];
 		// S'assurer que les metas de la table spécifique sont bien accessibles dans la globale
 		lire_metas($table);
@@ -134,11 +134,7 @@ function plugins_installer_dist($plug, $action, $dir_type = '_DIR_PLUGINS') {
 	// Si la table meta n'est pas spip_meta et qu'on est dans la première installation du plugin
 	// on force la création du fichier cache à la date du moment.
 	// On relit les metas de la table pour être sur que la globale soit à jour pour touch_meta.
-	if (
-		($table !== 'meta')
-		and ($action == 'install')
-		and empty($infos['upgrade'])
-	) {
+	if ($table !== 'meta' && $action == 'install' && empty($infos['upgrade'])) {
 		touch_meta(false, $table);
 	}
 
@@ -163,9 +159,8 @@ function spip_plugin_install($action, $infos, $version_cible) {
 	switch ($action) {
 		case 'test':
 			return (isset($GLOBALS[$table])
-				and isset($GLOBALS[$table][$nom_meta])
-				and spip_version_compare($GLOBALS[$table][$nom_meta], $version_cible, '>='));
-			break;
+				&& isset($GLOBALS[$table][$nom_meta])
+				&& spip_version_compare($GLOBALS[$table][$nom_meta], $version_cible, '>='));
 		case 'install':
 			if (function_exists($upgrade = $infos['prefix'] . '_upgrade')) {
 				$upgrade($nom_meta, $version_cible, $table);
