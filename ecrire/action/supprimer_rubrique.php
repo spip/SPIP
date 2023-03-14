@@ -34,20 +34,20 @@ function action_supprimer_rubrique_dist($id_rubrique = null) {
 		$id_rubrique = $securiser_action();
 	}
 
-	if (intval($id_rubrique)) {
-		sql_delete('spip_rubriques', 'id_rubrique=' . intval($id_rubrique));
+	if ((int) $id_rubrique) {
+		sql_delete('spip_rubriques', 'id_rubrique=' . (int) $id_rubrique);
 		// Les admin restreints qui n'administraient que cette rubrique
 		// deviennent redacteurs
 		// (il y a sans doute moyen de faire ca avec un having)
 
-		$q = sql_select('id_auteur', 'spip_auteurs_liens', "objet='rubrique' AND id_objet=" . intval($id_rubrique));
+		$q = sql_select('id_auteur', 'spip_auteurs_liens', "objet='rubrique' AND id_objet=" . (int) $id_rubrique);
 		while ($r = sql_fetch($q)) {
 			$id_auteur = $r['id_auteur'];
 			// degrader avant de supprimer la restriction d'admin
 			// section critique sur les droits
 			$n = sql_countsel(
 				'spip_auteurs_liens',
-				"objet='rubrique' AND id_objet!=" . intval($id_rubrique) . ' AND id_auteur=' . intval($id_auteur)
+				"objet='rubrique' AND id_objet!=" . (int) $id_rubrique . ' AND id_auteur=' . (int) $id_auteur
 			);
 			if (!$n) {
 				include_spip('action/editer_auteur');
@@ -55,7 +55,7 @@ function action_supprimer_rubrique_dist($id_rubrique = null) {
 			}
 			sql_delete(
 				'spip_auteurs_liens',
-				"objet='rubrique' AND id_objet=" . intval($id_rubrique) . ' AND id_auteur=' . intval($id_auteur)
+				"objet='rubrique' AND id_objet=" . (int) $id_rubrique . ' AND id_auteur=' . (int) $id_auteur
 			);
 		}
 		// menu_rubriques devra recalculer

@@ -32,14 +32,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  **/
 function action_session_dist() {
 	if (
-		$var = _request('var')
-		and preg_match(',^[a-z_0-9-]+$,i', $var)
+		($var = _request('var'))
+		&& preg_match(',^[a-z_0-9-]+$,i', $var)
+		&& $_SERVER['REQUEST_METHOD'] == 'POST'
 	) {
-		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-			include_spip('inc/session');
-			session_set('session_' . $var, $val = _request('val'));
-			#spip_log("autosave:$var:$val",'autosave');
-		}
+		include_spip('inc/session');
+		session_set('session_' . $var, $val = _request('val'));
+		#spip_log("autosave:$var:$val",'autosave');
 	}
 
 	# TODO: mode lecture de session ; n'afficher que ce qu'il faut

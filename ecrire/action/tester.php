@@ -96,7 +96,7 @@ function action_tester_dist() {
 		}
 
 		if (! empty($gd_formats)) {
-			$gd_formats = join(',', $gd_formats);
+			$gd_formats = implode(',', $gd_formats);
 		}
 		ecrire_meta('gd_formats_read', $gd_formats . $gd_formats_read_gif);
 		ecrire_meta('gd_formats', $gd_formats);
@@ -127,10 +127,8 @@ function action_tester_dist() {
 			$commande = "$jpegtopnm_command $vignette | " . _PNMSCALE_COMMAND . " -width 10 | $pnmtojpeg_command > $dest";
 			spip_log($commande);
 			exec($commande);
-			if ($taille = @getimagesize($dest)) {
-				if ($taille[1] == 10) {
-					$netpbm_formats[] = 'jpg';
-				}
+			if (($taille = @getimagesize($dest)) && $taille[1] == 10) {
+				$netpbm_formats[] = 'jpg';
 			}
 			$giftopnm_command = str_replace('pnmscale', 'giftopnm', _PNMSCALE_COMMAND);
 			$pnmtojpeg_command = str_replace('pnmscale', 'pnmtojpeg', _PNMSCALE_COMMAND);
@@ -139,10 +137,8 @@ function action_tester_dist() {
 			$commande = "$giftopnm_command $vignette | " . _PNMSCALE_COMMAND . " -width 10 | $pnmtojpeg_command > $dest";
 			spip_log($commande);
 			exec($commande);
-			if ($taille = @getimagesize($dest)) {
-				if ($taille[1] == 10) {
-					$netpbm_formats[] = 'gif';
-				}
+			if (($taille = @getimagesize($dest)) && $taille[1] == 10) {
+				$netpbm_formats[] = 'gif';
 			}
 
 			$pngtopnm_command = str_replace('pnmscale', 'pngtopnm', _PNMSCALE_COMMAND);
@@ -151,13 +147,11 @@ function action_tester_dist() {
 			$commande = "$pngtopnm_command $vignette | " . _PNMSCALE_COMMAND . " -width 10 | $pnmtojpeg_command > $dest";
 			spip_log($commande);
 			exec($commande);
-			if ($taille = @getimagesize($dest)) {
-				if ($taille[1] == 10) {
-					$netpbm_formats[] = 'png';
-				}
+			if (($taille = @getimagesize($dest)) && $taille[1] == 10) {
+				$netpbm_formats[] = 'png';
 			}
 
-			ecrire_meta('netpbm_formats', join(',', $netpbm_formats ?: []));
+			ecrire_meta('netpbm_formats', implode(',', $netpbm_formats ?: []));
 		}
 	}
 
@@ -171,8 +165,7 @@ function action_tester_dist() {
 		$image['fichier_dest'] = _DIR_VAR . "test_$arg";
 
 		if (
-			$preview = _image_creer_vignette($image, $taille_preview, $taille_preview, $arg, true)
-			and ($preview['width'] * $preview['height'] > 0)
+			($preview = _image_creer_vignette($image, $taille_preview, $taille_preview, $arg, true)) && $preview['width'] * $preview['height'] > 0
 		) {
 			redirige_par_entete($preview['fichier']);
 		}

@@ -55,7 +55,7 @@ function action_referencer_traduction_dist($objet, $id_objet, $id_trad) {
 		$id_lier = sql_getfetsel(
 			'id_trad',
 			$table_objet_sql,
-			"$id_table_objet=" . intval($id_trad) . " AND NOT($id_table_objet=" . intval($id_objet) . ')'
+			"$id_table_objet=" . (int) $id_trad . " AND NOT($id_table_objet=" . (int) $id_objet . ')'
 		);
 		if ($id_lier === null) {
 			spip_log("echec lien de trad vers objet $objet/$id_objet incorrect ($id_trad)");
@@ -74,18 +74,18 @@ function action_referencer_traduction_dist($objet, $id_objet, $id_trad) {
 			sql_updateq($table_objet_sql, ['id_trad' => $id_trad], "id_trad = $id_lier");
 		} // sinon ajouter notre objet dans le groupe
 		else {
-			sql_updateq($table_objet_sql, ['id_trad' => $id_lier], "$id_table_objet=" . intval($id_objet));
+			sql_updateq($table_objet_sql, ['id_trad' => $id_lier], "$id_table_objet=" . (int) $id_objet);
 		}
 	} // on a fourni un id_trad nul : sortir id_objet du groupe de trad
 	else {
-		$old_id_trad = sql_getfetsel('id_trad', $table_objet_sql, "$id_table_objet=" . intval($id_objet));
+		$old_id_trad = sql_getfetsel('id_trad', $table_objet_sql, "$id_table_objet=" . (int) $id_objet);
 		// supprimer le lien de traduction
-		sql_updateq($table_objet_sql, ['id_trad' => 0], "$id_table_objet=" . intval($id_objet));
+		sql_updateq($table_objet_sql, ['id_trad' => 0], "$id_table_objet=" . (int) $id_objet);
 
 		// Verifier si l'ancien groupe ne comporte plus qu'un seul objet. Alors mettre a zero.
-		$cpt = sql_countsel($table_objet_sql, 'id_trad=' . intval($old_id_trad));
+		$cpt = sql_countsel($table_objet_sql, 'id_trad=' . (int) $old_id_trad);
 		if ($cpt == 1) {
-			sql_updateq($table_objet_sql, ['id_trad' => 0], 'id_trad=' . intval($old_id_trad));
+			sql_updateq($table_objet_sql, ['id_trad' => 0], 'id_trad=' . (int) $old_id_trad);
 		}
 	}
 

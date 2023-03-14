@@ -74,7 +74,7 @@ function action_tester_taille_dist() {
 	if ($GLOBALS['taille_max'] * $GLOBALS['taille_max'] - $GLOBALS['taille_min'] * $GLOBALS['taille_min'] < 50000) {
 		$t = ($GLOBALS['taille_min'] * $GLOBALS['taille_min']);
 		if ($GLOBALS['taille_min'] !== $GLOBALS['taille_max']) {
-			$t = $t * 0.9; // marge de securite
+			$t *= 0.9; // marge de securite
 			echo round($t / 1_000_000, 3) . ' Mpx';
 		} else {
 			// c'est un cas "on a reussi la borne max initiale, donc on a pas de limite connue"
