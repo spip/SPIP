@@ -41,7 +41,7 @@ require_once _ROOT_RESTREINT . 'base/objets.php';
  **/
 function spip_connect($serveur = '', $version = '') {
 
-	$serveur = !is_string($serveur) ? '' : strtolower($serveur);
+	$serveur = is_string($serveur) ? strtolower($serveur) : '';
 	$index = $serveur ?: 0;
 	if (!$version) {
 		$version = $GLOBALS['spip_sql_version'];
@@ -58,23 +58,23 @@ function spip_connect($serveur = '', $version = '') {
 		$f = '';
 		if ($serveur) {
 			// serveur externe et nom de serveur bien ecrit ?
-			if (defined('_DIR_CONNECT')
-				and preg_match('/^[\w\.]*$/', $serveur)) {
+			if (
+				defined('_DIR_CONNECT')
+				&& preg_match('/^[\w\.]*$/', $serveur)
+			) {
 				$f = _DIR_CONNECT . $serveur . '.php';
-				if (!is_readable($f) and !$install) {
+				if (!is_readable($f) && !$install) {
 					// chercher une declaration de serveur dans le path
 					// qui peut servir à des plugins à declarer des connexions à une base sqlite
 					// Ex: sert aux boucles POUR et au plugin-dist dump pour se connecter sur le sqlite du dump
 					$f = find_in_path("$serveur.php", 'connect/');
 				}
 			}
-		}
-		else {
-			if (defined('_FILE_CONNECT') and _FILE_CONNECT) {
+		} else {
+			if (defined('_FILE_CONNECT') && _FILE_CONNECT) {
 				// init du serveur principal
 				$f = _FILE_CONNECT;
-			}
-			elseif ($install and defined('_FILE_CONNECT_TMP')) {
+			} elseif ($install && defined('_FILE_CONNECT_TMP')) {
 				// installation en cours
 				$f = _FILE_CONNECT_TMP;
 			}
@@ -82,7 +82,7 @@ function spip_connect($serveur = '', $version = '') {
 
 		unset($GLOBALS['db_ok']);
 		unset($GLOBALS['spip_connect_version']);
-		if ($f and is_readable($f)) {
+		if ($f && is_readable($f)) {
 			include($f);
 			if (!isset($GLOBALS['db_ok'])) {
 				spip_log("spip_connect: fichier de connexion '$f' OK mais echec connexion au serveur", _LOG_HS);
@@ -111,13 +111,10 @@ function spip_connect($serveur = '', $version = '') {
 	// si pas dans le fichier par defaut
 	$type = $GLOBALS['db_ok']['type'];
 	$jeu = 'spip_' . $type . '_functions_' . $version;
-	if (!isset($GLOBALS[$jeu])) {
-		if (!find_in_path($type . '_' . $version . '.php', 'req/', true)) {
-			spip_log("spip_connect: serveur $index version '$version' non defini pour '$type'", _LOG_HS);
-
-			// ne plus reessayer
-			return $GLOBALS['connexions'][$index][$version] = [];
-		}
+	if (!isset($GLOBALS[$jeu]) && !find_in_path($type . '_' . $version . '.php', 'req/', true)) {
+		spip_log("spip_connect: serveur $index version '$version' non defini pour '$type'", _LOG_HS);
+		// ne plus reessayer
+		return $GLOBALS['connexions'][$index][$version] = [];
 	}
 	$GLOBALS['connexions'][$index][$version] = $GLOBALS[$jeu];
 	if ($old) {
@@ -147,8 +144,8 @@ function spip_connect($serveur = '', $version = '') {
 		// C'est le cas d'un dump sqlite par exemple
 		elseif (
 			$GLOBALS['connexions'][$index]['spip_connect_version']
-			and sql_showtable('spip_meta', true, $serveur)
-			and $r = sql_getfetsel('valeur', 'spip_meta', "nom='charset_sql_connexion'", '', '', '', '', $serveur)
+			&& sql_showtable('spip_meta', true, $serveur)
+			&& ($r = sql_getfetsel('valeur', 'spip_meta', "nom='charset_sql_connexion'", '', '', '', '', $serveur))
 		) {
 			$charset = $r;
 		} else {
@@ -201,8 +198,8 @@ function spip_connect_sql($version, $ins = '', $serveur = '', $continue = false)
 	$desc = spip_connect($serveur, $version);
 	if (
 		$desc
-		and $f = ($desc[$version][$ins] ?? '')
-		and function_exists($f)
+		&& ($f = ($desc[$version][$ins] ?? ''))
+		&& function_exists($f)
 	) {
 		return $f;
 	}
@@ -261,7 +258,7 @@ function spip_connect_db(
 	// pour ne pas declarer tout indisponible d'un coup
 	// si en cours d'installation ou si db=@test@ on ne pose rien
 	// car c'est un test de connexion
-	if (!defined('_ECRIRE_INSTALL') and $db !== '@test@') {
+	if (!defined('_ECRIRE_INSTALL') && $db !== '@test@') {
 		$f = _DIR_TMP . $type . '.' . substr(md5($host . $port . $db), 0, 8) . '.out';
 	} elseif ($db == '@test@') {
 		$db = '';
@@ -269,8 +266,8 @@ function spip_connect_db(
 
 	if (
 		$f
-		and @file_exists($f)
-		and (time() - @filemtime($f) < _CONNECT_RETRY_DELAY)
+		&& @file_exists($f)
+		&& (time() - @filemtime($f) < _CONNECT_RETRY_DELAY)
 	) {
 		spip_log("Echec : $f recent. Pas de tentative de connexion", _LOG_HS);
 
@@ -335,7 +332,7 @@ function spip_connect_db(
  *     - nom du charset sinon
  **/
 function spip_connect_main($connexion, $charset_sql_connexion = '') {
-	if ($GLOBALS['spip_connect_version'] < 0.1 and _DIR_RESTREINT) {
+	if ($GLOBALS['spip_connect_version'] < 0.1 && _DIR_RESTREINT) {
 		include_spip('inc/headers');
 		redirige_url_ecrire('upgrade', 'reinstall=oui');
 	}
@@ -350,8 +347,8 @@ function spip_connect_main($connexion, $charset_sql_connexion = '') {
 	// sinon on regarde la table spip_meta
 	// en cas d'erreur select retourne la requette (is_string=true donc)
 	if (
-		!$r = $f('valeur', 'spip_meta', "nom='charset_sql_connexion'")
-		or is_string($r)
+		!($r = $f('valeur', 'spip_meta', "nom='charset_sql_connexion'"))
+		|| is_string($r)
 	) {
 		return false;
 	}
@@ -394,9 +391,9 @@ function spip_connect_ldap($serveur = '') {
  **/
 function _q($a): string {
 	if (is_numeric($a)) {
-		return strval($a);
+		return (string) $a;
 	} elseif (is_array($a)) {
-		return join(',', array_map('_q', $a));
+		return implode(',', array_map('_q', $a));
 	} elseif (is_scalar($a)) {
 		return ("'" . addslashes($a) . "'");
 	} elseif ($a === null) {
@@ -419,7 +416,7 @@ function _q($a): string {
  */
 function query_echappe_textes($query, $uniqid = null) {
 	static $codeEchappements = null;
-	if (is_null($codeEchappements) or $uniqid) {
+	if (is_null($codeEchappements) || $uniqid) {
 		if (is_null($uniqid)) {
 			$uniqid = uniqid();
 		}
@@ -433,7 +430,7 @@ function query_echappe_textes($query, $uniqid = null) {
 	// si la query contient deja des codes d'echappement on va s'emmeler les pinceaux et donc on ne touche a rien
 	// ce n'est pas un cas legitime
 	foreach ($codeEchappements as $codeEchappement) {
-		if (strpos($query, (string) $codeEchappement) !== false) {
+		if (str_contains($query, (string) $codeEchappement)) {
 			return [$query, []];
 		}
 	}
@@ -447,13 +444,13 @@ function query_echappe_textes($query, $uniqid = null) {
 		$k = 0;
 		while (count($textes)) {
 			$part = array_shift($textes);
-			$nextpos = strpos($query_echappees, $part, $currentpos);
+			$nextpos = strpos($query_echappees, (string) $part, $currentpos);
 			// si besoin recoller ensemble les doubles '' de sqlite (echappement des ')
-			while (count($textes) and substr($part, -1) === "'") {
+			while (count($textes) && str_ends_with($part, "'")) {
 				$next = reset($textes);
 				if (
-					strpos($next, "'") === 0
-					and strpos($query_echappees, $part . $next, $currentpos) === $nextpos
+					str_starts_with($next, "'")
+					&& strpos($query_echappees, $part . $next, $currentpos) === $nextpos
 				) {
 					$part .= array_shift($textes);
 				}
@@ -507,9 +504,7 @@ function query_reinjecte_textes($query, $textes) {
 		$query = sprintf($query, ...$textes);
 	}
 
-	$query = str_replace(array_values($codeEchappements), array_keys($codeEchappements), $query);
-
-	return $query;
+	return str_replace(array_values($codeEchappements), array_keys($codeEchappements), $query);
 }
 
 
