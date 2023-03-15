@@ -671,7 +671,7 @@ function affdate_base($numdate, $vue, $options = []): string {
 		default:
 			[$annee, $mois, $jour, $heures, $minutes, $secondes] = $date_array;
 			// il faut envoyer jour = 1 si jour pas défini, c'est le comportement qu'on avait historiquement en envoyant ''
-			if (!$time = mktime($heures, $minutes, $secondes, $mois, is_numeric($jour) ? $jour : 1 , $annee)) {
+			if (!$time = mktime($heures, $minutes, $secondes, $mois, is_numeric($jour) ? $jour : 1, $annee)) {
 				$time = strtotime($numdate);
 			}
 			return date($vue, $time);

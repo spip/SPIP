@@ -382,7 +382,7 @@ function executer_balise_dynamique_dans_un_modele(...$args) {
 	}
 	else {
 		$str_args = base64_encode(serialize($args));
-		return "<?" . "php \$_zargs=unserialize(base64_decode('$str_args'));echo executer_balise_dynamique(...\$_zargs); ?".">\n";
+		return '<?' . "php \$_zargs=unserialize(base64_decode('$str_args'));echo executer_balise_dynamique(...\$_zargs); ?" . ">\n";
 	}
 }
 

@@ -258,7 +258,7 @@ function article_inserer($id_rubrique, $set = null) {
 			'data' => $champs
 		]
 	);
-	
+
 	// Appeler une notification
 	if ($notifications = charger_fonction('notifications', 'inc')) {
 		$notifications(
@@ -446,7 +446,7 @@ function article_instituer($id_article, $c, $calcul_rub = true) {
 				'champs' => $champs,
 			]
 		);
-		
+
 		// Rétro-compat
 		$notifications(
 			'instituerarticle',

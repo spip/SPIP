@@ -1458,8 +1458,8 @@ function calculer_criteres($idb, &$boucles) {
 		$critere = $crit->op;
 		// critere personnalise ?
 		if (
-			(!$serveur ||
-				!function_exists($f = 'critere_' . $serveur . '_' . $table . '_' . $critere)
+			(!$serveur
+				|| !function_exists($f = 'critere_' . $serveur . '_' . $table . '_' . $critere)
 				&& !function_exists($f .= '_dist')
 				&& !function_exists($f = 'critere_' . $serveur . '_' . $critere)
 				&& !function_exists($f .= '_dist')

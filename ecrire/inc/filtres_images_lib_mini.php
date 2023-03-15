@@ -480,7 +480,7 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 		}
 	}
 	if ($creer && !@file_exists($fichier)) {
-    	if (!@file_exists("$fichier.src")) {
+		if (!@file_exists("$fichier.src")) {
 			spip_log("Image absente : $fichier", 'images' . _LOG_ERREUR);
 
 			return false;
@@ -1041,7 +1041,7 @@ function _image_gd_output($img, $valeurs, $qualite = _IMG_GD_QUALITE, $fonction 
  **/
 function reconstruire_image_intermediaire($fichier_manquant) {
 	$source = null;
- 	$reconstruire = [];
+	$reconstruire = [];
 	$fichier = $fichier_manquant;
 	while (
 		!str_contains($fichier, '://')

@@ -74,8 +74,8 @@ function spip_livrer_fichier_entetes($fichier, $content_type = 'application/octe
 	header('Content-Type: ' . $content_type);
 
 	if (($fs = stat($fichier)) && !empty($fs['size']) && !empty($fs['mtime'])) {
-		header("Last-Modified: " . gmdate("D, d M Y H:i:s", $fs['mtime']) . " GMT");
-		header(sprintf('Etag: "%x-%x"', $fs['size'], str_pad($fs['mtime'], 16, "0")));
+		header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $fs['mtime']) . ' GMT');
+		header(sprintf('Etag: "%x-%x"', $fs['size'], str_pad($fs['mtime'], 16, '0')));
 	}
 
 	if ($attachment) {

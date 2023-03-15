@@ -1606,8 +1606,8 @@ function post_autobr($texte, $delim = "\n_ ") {
 	// echapper les modeles
 	$collecteurModeles = null;
 	if (strpos($texte, '<') !== false) {
-		include_spip("src/Texte/Collecteur/AbstractCollecteur");
-		include_spip("src/Texte/Collecteur/Modeles");
+		include_spip('src/Texte/Collecteur/AbstractCollecteur');
+		include_spip('src/Texte/Collecteur/Modeles');
 		$collecteurModeles = new Spip\Texte\Collecteur\Modeles();
 		$texte = $collecteurModeles->echapper($texte);
 	}
@@ -1691,12 +1691,11 @@ function extraire_idiome($letexte, $lang = null, $options = []) {
 		}
 		$options['lang'] = $lang;
 
-		include_spip("src/Texte/Collecteur/AbstractCollecteur");
-		include_spip("src/Texte/Collecteur/Idiomes");
+		include_spip('src/Texte/Collecteur/AbstractCollecteur');
+		include_spip('src/Texte/Collecteur/Idiomes');
 		$collecteurIdiomes = new Spip\Texte\Collecteur\Idiomes();
 
 		$letexte = $collecteurIdiomes->traiter($letexte, $options);
-
 	}
 	return $letexte;
 }
@@ -1756,8 +1755,8 @@ function extraire_multi($letexte, $lang = null, $options = []) {
 		}
 		$options['lang'] = $lang;
 
-		include_spip("src/Texte/Collecteur/AbstractCollecteur");
-		include_spip("src/Texte/Collecteur/Multis");
+		include_spip('src/Texte/Collecteur/AbstractCollecteur');
+		include_spip('src/Texte/Collecteur/Multis');
 		$collecteurMultis = new Spip\Texte\Collecteur\Multis();
 
 		$letexte = $collecteurMultis->traiter($letexte, $options);
@@ -2071,7 +2070,7 @@ function modifier_class($balise, $class, $operation = 'ajouter') {
 		if (
 			$class_courante
 			and str_contains($class_courante, (string) $c)
-			and in_array($c, preg_split(",\s+,", $class_courante))
+			and in_array($c, preg_split(',\s+,', $class_courante))
 		) {
 			$is_class_presente = true;
 		}
@@ -2084,7 +2083,7 @@ function modifier_class($balise, $class, $operation = 'ajouter') {
 			in_array($operation, ['supprimer', 'commuter'])
 			and $is_class_presente
 		) {
-			$class_new = preg_split(",\s+,", $class_new);
+			$class_new = preg_split(',\s+,', $class_new);
 			$class_new = array_diff($class_new, [$c]);
 			$class_new = implode(' ', $class_new);
 		}

@@ -135,7 +135,7 @@ function rubrique_inserer($id_parent, $set = null) {
 			]
 		);
 	}
-	
+
 	return $id_rubrique;
 }
 
@@ -299,7 +299,7 @@ function rubrique_instituer($id_rubrique, $c) {
 				}
 
 				calculer_langues_rubriques();
-				
+
 				// Appeler une notification
 				if ($notifications = charger_fonction('notifications', 'inc')) {
 					$notifications(

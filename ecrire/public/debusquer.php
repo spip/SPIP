@@ -109,7 +109,7 @@ function public_debusquer_dist($message = '', $lieu = '', $opt = []) {
 		}
 	}
 	// espace public ?
- 	if (empty($GLOBALS['debug_objets']['principal']) && isset($GLOBALS['fond'])) {
+	if (empty($GLOBALS['debug_objets']['principal']) && isset($GLOBALS['fond'])) {
 		$GLOBALS['debug_objets']['principal'] = $GLOBALS['fond'];
 	}
 
@@ -253,7 +253,7 @@ function debusquer_loger_erreur($msg, $lieu) {
 	if ($ligne) {
 		$msg .= " L$ligne";
 	}
-	spip_log($msg, "debusquer" . _LOG_ERREUR);
+	spip_log($msg, 'debusquer' . _LOG_ERREUR);
 }
 
 

@@ -294,7 +294,7 @@ function objet_inserer($objet, $id_parent = null, $set = null) {
 			]
 		);
 	}
-	
+
 	// Appeler une notification
 	if ($notifications = charger_fonction('notifications', 'inc')) {
 		$notifications(
@@ -518,7 +518,7 @@ function objet_instituer($objet, $id, $c, $calcul_rub = true) {
 				'champs' => $champs,
 			]
 		);
-		
+
 		// Rétro-compat
 		$notifications(
 			"instituer$objet",

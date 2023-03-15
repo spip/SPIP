@@ -126,7 +126,7 @@ function generer_code_logo($id_objet, $_id_objet, $type, $align, $_lien, $p, $su
 	$code = "quete_logo('$id_objet', '$onoff', $_id_objet, $_id_rubrique)";
 
 	if ($champ) {
-		return "table_valeur($code, '".addslashes($champ)."')";
+		return "table_valeur($code, '" . addslashes($champ) . "')";
 	}
 
 	$align = preg_replace(',\W,', '', $align);

@@ -541,7 +541,7 @@ function tri_champ_order($t, $from = null, $senstri = '') {
 		'num ' => "CASE( 0+$champ ) WHEN 0 THEN 1 ELSE 0 END{$senstri}, 0+$champ{$senstri}",
 		'sinum ' => "CASE( 0+$champ ) WHEN 0 THEN 1 ELSE 0 END{$senstri}",
 		default => $champ . $senstri,
- 	};
+	};
 }
 
 /**
@@ -632,7 +632,7 @@ function appliquer_filtre_sinon($arg, $filtre, $args, $defaut = '') {
  * @param ...$dummy
  * @return string
  */
-function filtre_styles_inline_page_login_pass_dist(&$Pile,...$dummy) {
+function filtre_styles_inline_page_login_pass_dist(&$Pile, ...$dummy) {
 	$styles = '';
 	include_spip('inc/config');
 	if ($couleur = lire_config('couleur_login')) {
@@ -641,7 +641,7 @@ function filtre_styles_inline_page_login_pass_dist(&$Pile,...$dummy) {
 		$l = couleur_hex_to_hsl($couleur, 'l');
 		$styles .= ":root {--spip-login-color-theme--hs: {$hs};--spip-login-color-theme--l: {$l};}\n";
 	}
-	$logo_bg = _DIR_IMG . "spip_fond_login.jpg";
+	$logo_bg = _DIR_IMG . 'spip_fond_login.jpg';
 	if (file_exists($logo_bg)) {
 		include_spip('inc/filtres_images_mini');
 		$logo_mini = image_reduire($logo_bg, 64, 64);

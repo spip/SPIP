@@ -56,7 +56,7 @@ function quete_virtuel($id_article, $connect) {
  * @return array
  */
 function quete_parent_lang($table, $id, string $connect = '') {
- 	static $cache_quete = [];
+	static $cache_quete = [];
 
 	if (!isset($cache_quete[$connect][$table][$id])) {
 		if (!isset($cache_quete[$connect][$table]['_select'])) {
@@ -551,7 +551,7 @@ function quete_html_logo($logo, $align, $lien) {
 
 	foreach (['titre', 'descriptif', 'credits', 'alt'] as $champ) {
 		if (!empty($contexte[$champ])) {
-			$contexte[$champ] = appliquer_traitement_champ($contexte[$champ] , $champ, 'document');
+			$contexte[$champ] = appliquer_traitement_champ($contexte[$champ], $champ, 'document');
 		}
 	}
 
@@ -725,5 +725,5 @@ function is_whereable(mixed $value): bool {
 	if (is_array($value) && count($value)) {
 		return true;
 	}
- 	return is_scalar($value) && strlen($value);
+	return is_scalar($value) && strlen($value);
 }

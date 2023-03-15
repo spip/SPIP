@@ -273,7 +273,7 @@ function calculer_action_auteur($action, $id_auteur = null) {
  */
 function verifier_action_auteur($action, $hash) {
 	[$id_auteur, $pass] = caracteriser_auteur();
- 	return hash_equals($hash, _action_auteur($action, $id_auteur, $pass, 'alea_ephemere'))
+	return hash_equals($hash, _action_auteur($action, $id_auteur, $pass, 'alea_ephemere'))
 		|| hash_equals($hash, _action_auteur($action, $id_auteur, $pass, 'alea_ephemere_ancien'));
 }
 

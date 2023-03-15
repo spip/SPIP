@@ -130,7 +130,7 @@ function svg_dimension_to_pixels($dimension, $precision = 2) {
 			'mm' => round($m[1] * 96 / 25.4, $precision),
 			'in' => round($m[1] * 96, $precision),
 			default => $m[1],
-  		};
+		};
 	}
 	return false;
 }

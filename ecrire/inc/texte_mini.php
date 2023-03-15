@@ -67,26 +67,26 @@ function definir_puce() {
 function spip_balisage_code(string $corps, bool $bloc = false, string $attributs = '', string $langage = '') {
 
 	$echap = spip_htmlspecialchars($corps); // il ne faut pas passer dans entites_html, ne pas transformer les &#xxx; du code !
-	$class = "spip_code " . ($bloc ? 'spip_code_block' : 'spip_code_inline');
+	$class = 'spip_code ' . ($bloc ? 'spip_code_block' : 'spip_code_inline');
 	if ($attributs) {
-		$attributs = " " . trim($attributs);
+		$attributs = ' ' . trim($attributs);
 	}
 	if ($langage) {
 		$class .= " language-$langage";
-		$attributs .= ' data-language="'. $langage .'"';
+		$attributs .= ' data-language="' . $langage . '"';
 	}
 	if ($bloc) {
-		$html = "<div class=\"precode\">"
+		$html = '<div class="precode">'
 		  . "<pre class=\"$class\" dir=\"ltr\" style=\"text-align: left;\"$attributs>"
-		  . "<code>"
+		  . '<code>'
 		  . $echap
 		  . '</code>'
 		  . '</pre>'
 		  . '</div>';
 	}
 	else {
-		$echap = str_replace("\t", "&nbsp; &nbsp; &nbsp; &nbsp; ", $echap);
-		$echap = str_replace("  ", " &nbsp;", $echap);
+		$echap = str_replace("\t", '&nbsp; &nbsp; &nbsp; &nbsp; ', $echap);
+		$echap = str_replace('  ', ' &nbsp;', $echap);
 		$html = "<code class=\"$class\" dir=\"ltr\"$attributs>" . $echap . '</code>';
 	}
 
@@ -562,7 +562,6 @@ function echapper_html_suspect($texte, $options = [], $connect = null, $env = []
 		$env['espace_prive'] = test_espace_prive();
 	}
 	if (!empty($env['espace_prive']) or !empty($env['wysiwyg'])) {
-
 		// quand c'est du texte qui passe par propre on est plus coulant tant qu'il y a pas d'attribut du type onxxx=
 		// car sinon on declenche sur les modeles ou ressources
 		if (
@@ -572,8 +571,8 @@ function echapper_html_suspect($texte, $options = [], $connect = null, $env = []
 			return $texte;
 		}
 
-		include_spip("src/Texte/Collecteur/AbstractCollecteur");
-		include_spip("src/Texte/Collecteur/Modeles");
+		include_spip('src/Texte/Collecteur/AbstractCollecteur');
+		include_spip('src/Texte/Collecteur/Modeles');
 		$collecteurModeles = new Spip\Texte\Collecteur\Modeles();
 		$texte = $collecteurModeles->echapper($texte);
 		$texte = echappe_js($texte);
@@ -611,9 +610,9 @@ function echapper_html_suspect($texte, $options = [], $connect = null, $env = []
 			$texte = expanser_liens($texte, $env['connect'] ?? '', $env['env'] ?? []);
 		}
 		else {
-			include_spip("src/Texte/Collecteur/AbstractCollecteur");
-			include_spip("src/Texte/Collecteur/Liens");
-			include_spip("src/Texte/Collecteur/Modeles");
+			include_spip('src/Texte/Collecteur/AbstractCollecteur');
+			include_spip('src/Texte/Collecteur/Liens');
+			include_spip('src/Texte/Collecteur/Modeles');
 
 			$collecteurLiens = new Spip\Texte\Collecteur\Liens();
 			$texte = $collecteurLiens->echapper($texte, ['sanitize_callback' => 'safehtml']);
@@ -663,15 +662,15 @@ function safehtml($t) {
 
 	$collecteurIdiomes = null;
 	if (stripos($t, '<:') !== false) {
-		include_spip("src/Texte/Collecteur/AbstractCollecteur");
-		include_spip("src/Texte/Collecteur/Idiomes");
+		include_spip('src/Texte/Collecteur/AbstractCollecteur');
+		include_spip('src/Texte/Collecteur/Idiomes');
 		$collecteurIdiomes = new Spip\Texte\Collecteur\Idiomes();
 		$t = $collecteurIdiomes->echapper($t);
 	}
 	$collecteurMultis = null;
 	if (stripos($t, '<multi') !== false) {
-		include_spip("src/Texte/Collecteur/AbstractCollecteur");
-		include_spip("src/Texte/Collecteur/Multis");
+		include_spip('src/Texte/Collecteur/AbstractCollecteur');
+		include_spip('src/Texte/Collecteur/Multis');
 		$collecteurMultis = new Spip\Texte\Collecteur\Multis();
 		$t = $collecteurMultis->echapper($t, ['sanitize_callback' => 'safehtml']);
 	}
@@ -711,7 +710,7 @@ function is_html_safe(string $texte): bool {
 	// simplifier les retour ligne pour etre certain de ce que l'on compare
 	$texte = str_replace("\r\n", "\n", $texte);
 	// safehtml reduit aussi potentiellement les &nbsp;
-	$texte = str_replace("&nbsp;", " ", $texte);
+	$texte = str_replace('&nbsp;', ' ', $texte);
 	// safehtml remplace les entités numériques
 	if (strpos($texte, '&#') !== false) {
 		$texte = unicode2charset($texte);

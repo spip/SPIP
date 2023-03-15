@@ -123,7 +123,7 @@ function auteur_inserer($source = null, $set = null) {
 			'data' => $champs
 		]
 	);
-	
+
 	// Appeler une notification
 	if ($notifications = charger_fonction('notifications', 'inc')) {
 		$notifications(
@@ -464,7 +464,7 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 				'champs' => $champs,
 			]
 		);
-		
+
 		// Rétro-compat
 		$notifications(
 			'instituerauteur',

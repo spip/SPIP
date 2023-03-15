@@ -37,7 +37,7 @@ function install_debut_html($titre = 'AUTO', $onLoad = '', $all_inline = false) 
 
 	if ($onLoad) {
 		include_spip('inc/filtres');
-		$onLoad = extraire_attribut("<body $onLoad>", "onload");
+		$onLoad = extraire_attribut("<body $onLoad>", 'onload');
 	}
 
 	$options = [

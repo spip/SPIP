@@ -570,8 +570,7 @@ function calculer_balise_DEFAUT_dist($nom, $p) {
 /** Code PHP d'exécution d'une balise dynamique */
 define('CODE_EXECUTER_BALISE', "executer_balise_dynamique('%s',
 	array(%s%s),
-	array(%s%s))"
-);
+	array(%s%s))");
 
 define('CODE_EXECUTER_BALISE_MODELE', "executer_balise_dynamique_dans_un_modele('%s',
 	array(%s%s),
@@ -634,9 +633,10 @@ function calculer_balise_dynamique($p, $nom, $l, $supp = []) {
 	$collecte = collecter_balise_dynamique($l, $p, $nom);
 
 	$dans_un_modele = false;
-	if (!empty($p->descr['sourcefile'])
-	  and $f = $p->descr['sourcefile']
-	  and basename(dirname($f)) === 'modeles'
+	if (
+		!empty($p->descr['sourcefile'])
+		and $f = $p->descr['sourcefile']
+		and basename(dirname($f)) === 'modeles'
 	) {
 		$dans_un_modele = true;
 	}

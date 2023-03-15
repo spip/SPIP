@@ -104,7 +104,7 @@ function load_charset($charset = 'AUTO') {
  * Vérifier qu'on peut utiliser mb_string avec notre charset
  *
  * Les fonctions mb_* sont tout le temps présentes avec symfony/polyfill-mbstring
- * 
+ *
  * @return bool
  *     true si notre charset est utilisable par mb_strsing
  **/
