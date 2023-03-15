@@ -11,11 +11,6 @@ parameters:
 			path: ecrire/inc/filtres.php
 
 		-
-			message: "#^Class GdImage not found\\.$#"
-			count: 1
-			path: ecrire/inc/filtres_images_lib_mini.php
-
-		-
 			message: "#^Function sous_repertoire\\(\\) should return string but return statement is missing\\.$#"
 			count: 1
 			path: ecrire/inc/flock.php
