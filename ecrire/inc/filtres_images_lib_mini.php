@@ -1814,13 +1814,13 @@ class phpthumb_functions {
 	/**
 	 * Retourne la couleur d'un pixel dans une image
 	 *
-	 * @param resource|GdImage $img
+	 * @param GdImage $img
 	 * @param int $x
 	 * @param int $y
 	 * @return array|bool
 	 */
 	public static function GetPixelColor(&$img, $x, $y) {
-		if (is_resource($img) || (is_object($img) && $img instanceof \GdImage)) {
+		if ($img instanceof \GdImage) {
 			return @ImageColorsForIndex($img, @ImageColorAt($img, $x, $y));
 		}
 		return false;
