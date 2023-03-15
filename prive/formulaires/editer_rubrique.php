@@ -80,9 +80,8 @@ function formulaires_editer_rubrique_charger_dist(
  * return array
  *     Configuration pour le formulaire
  */
-function rubriques_edit_config(array $row) : array
-{
-    return [
+function rubriques_edit_config(array $row): array {
+	return [
 		'lignes' => 8,
 		'langue' => $GLOBALS['spip_lang'],
 		'restreint' => !$GLOBALS['connect_toutes_rubriques']

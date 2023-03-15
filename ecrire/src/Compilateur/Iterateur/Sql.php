@@ -11,7 +11,6 @@ use Iterator;
  */
 class Sql extends AbstractIterateur implements Iterator
 {
-
 	/**
 	 * Ressource sql.
 	 *

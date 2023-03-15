@@ -85,7 +85,7 @@ final class SpipCles {
 	 * Restaurer les cles manquantes depuis une sauvegarde chiffree des cles
 	 * (si la sauvegarde est bien valide)
 	 */
- 	public function restore(
+	public function restore(
 		/** Sauvegarde chiffrée (générée par backup()) */
 		string $backup,
 		#[\SensitiveParameter]
@@ -168,7 +168,7 @@ final class SpipCles {
 
 	private function read(): array {
 		$json = null;
-  		lire_fichier_securise($this->file, $json);
+		lire_fichier_securise($this->file, $json);
 		if (
 			$json
 			&& ($json = \json_decode($json, true))

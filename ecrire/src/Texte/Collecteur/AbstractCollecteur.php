@@ -12,7 +12,6 @@
 namespace Spip\Texte\Collecteur;
 
 abstract class AbstractCollecteur {
-
 	protected static string $markPrefix = 'COLLECT';
 	protected string $markId;
 
@@ -39,7 +38,6 @@ abstract class AbstractCollecteur {
 			&& ($next = ($start_with ? strpos($texte, $start_with, $pos) : $pos)) !== false
 			&& preg_match($preg, $texte, $r, PREG_OFFSET_CAPTURE, $next)
 		) {
-
 			$found_pos = $r[0][1];
 			$found_length = strlen($r[0][0]);
 			$match = [
@@ -73,9 +71,9 @@ abstract class AbstractCollecteur {
 	}
 
 	/**
-  * @return array
-  */
- public function collecter(string $texte, array $options = []): array {
+	 * @return array
+	 */
+	public function collecter(string $texte, array $options = []): array {
 		return [];
 	}
 
@@ -111,7 +109,7 @@ abstract class AbstractCollecteur {
 				// generer un marqueur qui n'existe pas dans le texte
 				do {
 					$this->markId = substr(md5(uniqid(static::class, 1)), 0, 7);
-					$this->markId = "@|".static::$markPrefix . $this->markId . "|";
+					$this->markId = '@|' . static::$markPrefix . $this->markId . '|';
 				} while (str_contains($texte, $this->markId));
 			}
 
@@ -154,5 +152,4 @@ abstract class AbstractCollecteur {
 
 		return $texte;
 	}
-
 }

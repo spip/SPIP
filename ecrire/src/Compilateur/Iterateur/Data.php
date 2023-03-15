@@ -400,7 +400,7 @@ class Data extends AbstractIterateur implements Iterator
 						}
 						$this->tableau = $v;
 					} else {
-						# {par valeur} ou {par valeur/xx/yy} 
+						# {par valeur} ou {par valeur/xx/yy}
 						$tv = $r[1] == 'valeur' ? '%s' : 'table_valeur(%s, ' . var_export($r[1], true) . ')';
 						$sortfunc .= '
 					$a = ' . sprintf($tv, '$aa') . ';

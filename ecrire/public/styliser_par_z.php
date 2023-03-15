@@ -262,9 +262,8 @@ function z_contenu_disponible($prefix_path, $z_contenu, $type, $ext, $echafauder
  * @return bool
  *   `true` si on peut l'utiliser, `false` sinon.
  **/
-function z_fond_valide($squelette)
-{
-    return !_ZCORE_EXCLURE_PATH || !preg_match(',(' . _ZCORE_EXCLURE_PATH . ')/,', $squelette);
+function z_fond_valide($squelette) {
+	return !_ZCORE_EXCLURE_PATH || !preg_match(',(' . _ZCORE_EXCLURE_PATH . ')/,', $squelette);
 }
 
 /**
@@ -407,7 +406,7 @@ function prive_echafauder_dist($exec, $table, $table_sql, $desc_exec, $ext) {
  * @return bool|string
  */
 function z_sanitize_var_zajax() {
- 	$z_ajax = _request('var_zajax');
+	$z_ajax = _request('var_zajax');
 	if (!$z_ajax) {
 		return false;
 	}

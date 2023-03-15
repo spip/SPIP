@@ -15,7 +15,6 @@ namespace Spip\Afficher\Minipage;
  * Présentation des pages simplifiées pour installer SPIP
  **/
 class Installation extends Admin {
-
 	public const TYPE = 'installation';
 
 	protected function setOptions(array $options) {
@@ -34,5 +33,4 @@ class Installation extends Admin {
 		$options['titre'] ??= 'AUTO';
 		return parent::page($corps, $options);
 	}
-
 }

@@ -11,7 +11,6 @@
 
 namespace Spip\Afficher\Minipage;
 
-
 /**
  * Présentation des pages simplifiées publiques pour envoyer un message à un utilisateur
  **/

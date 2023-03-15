@@ -13,8 +13,7 @@ namespace Spip\Chiffrer;
 
 /** Conteneur de clés (chiffrement, authentification) */
 class Cles implements \Countable /* , ContainerInterface */ {
-	public function __construct(private array $keys)
-	{
+	public function __construct(private array $keys) {
 	}
 
 	public function has(string $name): bool {

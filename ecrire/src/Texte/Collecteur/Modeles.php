@@ -20,7 +20,6 @@ namespace Spip\Texte\Collecteur;
  *    mais on renvoie les params (pour l'indexation par le moteur de recherche)
  */
 class Modeles extends AbstractCollecteur {
-
 	protected static string $markPrefix = 'MODELE';
 
 	/**
@@ -92,7 +91,6 @@ class Modeles extends AbstractCollecteur {
 				&& ($pos_fermeture_lien = stripos($texte, '</a>', $end))
 				&& !strlen(trim(substr($texte, $end, $pos_fermeture_lien - $end)))
 			) {
-
 				$pos_lien_ouvrant = stripos($texte, '<a', $pos_prev);
 				if (
 					$pos_lien_ouvrant !== false
@@ -221,5 +219,4 @@ class Modeles extends AbstractCollecteur {
 
 		return $texte;
 	}
-
 }

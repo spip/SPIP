@@ -65,7 +65,7 @@ class ValidateurXML
 					$this->fratrie[$frat] .= "$name ";
 				}
 			}
- 		}
+		}
 		// Init de la suite des balises a memoriser si regle difficile
 		if ($this->dtc->regles[$name] && $this->dtc->regles[$name][0] == '/') {
 			$this->fratrie[$depth] = '';

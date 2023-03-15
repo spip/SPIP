@@ -34,8 +34,7 @@ class Requeteur
 	 *
 	 * @param string $serveur
 	 */
-	public function __construct($serveur = '')
-	{
+	public function __construct($serveur = '') {
 		_sqlite_init();
 		$this->serveur = strtolower($serveur);
 
@@ -63,8 +62,7 @@ class Requeteur
 	 *     true pour tracer la requête
 	 * @return bool|\PDOStatement|array
 	 */
-	public function executer_requete($query, $tracer = null)
-	{
+	public function executer_requete($query, $tracer = null) {
 		if (is_null($tracer)) {
 			$tracer = $this->tracer;
 		}
@@ -117,8 +115,7 @@ class Requeteur
 	 *
 	 * @return string|false
 	 **/
-	public function last_insert_id()
-	{
+	public function last_insert_id() {
 		return $this->link->lastInsertId();
 	}
 }

@@ -226,12 +226,12 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = []) {
 	include_spip('inc/autoriser');
 	if (autoriser('modifier', $objet, $id_objet)) {
 		// recuperer le oups du coup d'avant pour le propager à charger() si on ne fait rien par exemple
-		lien_gerer__oups('editer_liens','request');
+		lien_gerer__oups('editer_liens', 'request');
 
 		// annuler les suppressions du coup d'avant ?
 		if (
 			_request('annuler_oups')
-			&& ($oups = lien_gerer__oups('editer_liens','get'))
+			&& ($oups = lien_gerer__oups('editer_liens', 'get'))
 		) {
 			if ($oups_objets = charger_fonction("editer_liens_oups_{$table_source}_{$objet}_{$objet_lien}", 'action', true)) {
 				$oups_objets($oups);
@@ -247,7 +247,7 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = []) {
 				}
 			}
 			# oups ne persiste que pour la derniere action, si suppression
-			lien_gerer__oups('editer_liens','reset');
+			lien_gerer__oups('editer_liens', 'reset');
 		}
 
 		$supprimer = _request('supprimer_lien');
@@ -310,9 +310,9 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = []) {
 				}
 			}
 			if (!empty($oups)) {
-				lien_gerer__oups('editer_liens','set', $oups);
+				lien_gerer__oups('editer_liens', 'set', $oups);
 			} else {
-				lien_gerer__oups('editer_liens','reset');
+				lien_gerer__oups('editer_liens', 'reset');
 			}
 		}
 
@@ -342,7 +342,7 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = []) {
 			# une suppression suivie d'un ajout dans le meme hit est un remplacement
 			# non annulable !
 			if ($ajout_ok) {
-				lien_gerer__oups('editer_liens','reset');
+				lien_gerer__oups('editer_liens', 'reset');
 			}
 		}
 
@@ -359,7 +359,7 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = []) {
 						objet_qualifier_liens([$objet2 => $idl], [$objet1 => $ids], $qualif);
 					}
 					set_request('id_lien_ajoute', $ids);
-					lien_gerer__oups('editer_liens','reset');
+					lien_gerer__oups('editer_liens', 'reset');
 				}
 			}
 		}
@@ -598,7 +598,7 @@ function lien_gerer__oups_collecter_args($form, $trace) {
 		do {
 			$t = array_shift($trace);
 			$function = $t['function'] ?? '';
-			if (str_starts_with($function, 'formulaires_'. $form)) {
+			if (str_starts_with($function, 'formulaires_' . $form)) {
 				if (isset($t['args'])) {
 					$args = json_encode($t['args']);
 				}

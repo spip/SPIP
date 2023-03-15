@@ -25,8 +25,7 @@ class Traducteur
 		public string $prefixe,
 		/** Version SQLite (2 ou 3) */
 		public string $sqlite_version
-	)
-	{
+	) {
 	}
 
 	/**
@@ -36,8 +35,7 @@ class Traducteur
 	 * bien interprétée par SQLite, puis remet les textes
 	 * la fonction affecte `$this->query`
 	 */
-	public function traduire_requete()
-	{
+	public function traduire_requete() {
 		//
 		// 1) Protection des textes en les remplacant par des codes
 		//
@@ -175,8 +173,7 @@ class Traducteur
 	 * @param array $matches Captures
 	 * @return string texte de date compris par SQLite
 	 */
-	public function _remplacerDateParTime($matches)
-	{
+	public function _remplacerDateParTime($matches) {
 		$op = strtoupper($matches[1] == 'ADD') ? '+' : '-';
 
 		return "datetime$matches[2] '$op$matches[3] $matches[4]')";
@@ -189,8 +186,7 @@ class Traducteur
 	 * @param array $matches Captures
 	 * @return string texte de liste ordonnée compris par SQLite
 	 */
-	public function _remplacerFieldParCase($matches)
-	{
+	public function _remplacerFieldParCase($matches) {
 		$fields = substr($matches[0], 6, -1); // ne recuperer que l'interieur X de field(X)
 		$t = explode(',', $fields);
 		$index = array_shift($t);

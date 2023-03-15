@@ -59,7 +59,7 @@ function is_url_prive($cible) {
  *     Environnement du formulaire
  **/
 function formulaires_login_charger_dist($cible = '', $options = [], $deprecated = null) {
- 	$erreur = _request('var_erreur');
+	$erreur = _request('var_erreur');
 
 	if (!is_array($options)) {
 		$options = [

@@ -27,7 +27,6 @@ namespace Spip\Texte\Collecteur;
  * Ne pas mettre de span@lang=fr si on est déjà en fr.
  */
 class Multis extends AbstractCollecteur {
-
 	protected static string $markPrefix = 'MULTI';
 
 	/**
@@ -161,7 +160,6 @@ class Multis extends AbstractCollecteur {
 	 */
 	public function traiter(string $texte, array $options) {
 		if ($texte) {
-
 			$multis = $this->collecter($texte);
 			if ($multis !== []) {
 				$lang = $options['lang'] ?? $GLOBALS['spip_lang'];
@@ -178,7 +176,6 @@ class Multis extends AbstractCollecteur {
 
 				$offset_pos = 0;
 				foreach ($multis as $m) {
-
 					// chercher la version de la langue courante
 					$trads = $m['trads'];
 					if (empty($trads)) {
@@ -232,5 +229,4 @@ class Multis extends AbstractCollecteur {
 
 		return $texte;
 	}
-
 }

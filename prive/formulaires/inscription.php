@@ -104,11 +104,13 @@ function formulaires_inscription_verifier_dist($mode = '', $options = [], $retou
 		} else {
 			include_spip('base/abstract_sql');
 
-			if ($row = sql_fetsel(
-				'statut, id_auteur, login, email',
-				'spip_auteurs',
-				'email=' . sql_quote($declaration['email'])
-			)) {
+			if (
+				$row = sql_fetsel(
+					'statut, id_auteur, login, email',
+					'spip_auteurs',
+					'email=' . sql_quote($declaration['email'])
+				)
+			) {
 				if ($row['statut'] == '5poubelle' && empty($declaration['pass'])) {
 					// irrecuperable
 					$erreurs['message_erreur'] = _T('form_forum_access_refuse');

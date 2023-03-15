@@ -131,7 +131,8 @@ function formulaires_mot_de_passe_traiter_dist($id_auteur = null, $jeton = null)
 	}
 	$row = retrouve_auteur($id_auteur, $jeton);
 
-	if ($row
+	if (
+		$row
 		&& ($id_auteur = $row['id_auteur'])
 		&& ($oubli = _request('oubli'))
 	) {
@@ -149,10 +150,12 @@ function formulaires_mot_de_passe_traiter_dist($id_auteur = null, $jeton = null)
 					'id_auteur',
 					'spip_auteurs',
 					[
-						'(email='.sql_quote($row['email']).' or login='.sql_quote($row['email']).')',
-						'id_auteur != '.$id_auteur
+						'(email=' . sql_quote($row['email']) . ' or login=' . sql_quote($row['email']) . ')',
+						'id_auteur != ' . $id_auteur
 					],
-					'', '', '0,1'
+					'',
+					'',
+					'0,1'
 				)
 			) {
 				$identifiant = $row['email'];
@@ -167,7 +170,7 @@ function formulaires_mot_de_passe_traiter_dist($id_auteur = null, $jeton = null)
 			include_spip('inc/auth');
 			$auth = auth_identifier_login($row['login'], $oubli);
 			if (!is_array($auth)) {
-				spip_log("Erreur identification ".$row['login']." après changement de mot de passe: $auth", _LOG_ERREUR);
+				spip_log('Erreur identification ' . $row['login'] . " après changement de mot de passe: $auth", _LOG_ERREUR);
 			}
 			elseif ($auth['id_auteur'] == $id_auteur) {
 				auth_loger($auth);

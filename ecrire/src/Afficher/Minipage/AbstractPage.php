@@ -11,7 +11,6 @@
 
 namespace Spip\Afficher\Minipage;
 
-
 /**
  * Présentation des pages simplifiées
  **/
@@ -65,9 +64,9 @@ abstract class AbstractPage {
 		http_no_cache();
 
 		$page_title = ($options['page_title'] ?? $GLOBALS['meta']['nom_site']);
-		$doctype = ($options['doctype'] ?? "<!DOCTYPE html>");
+		$doctype = ($options['doctype'] ?? '<!DOCTYPE html>');
 		$doctype = trim($doctype) . "\n";
-		$charset = ($options['charset'] ?? "utf-8");
+		$charset = ($options['charset'] ?? 'utf-8');
 		$all_inline = ($options['all_inline'] ?? true);
 		$onLoad = ($options['onLoad'] ?? '');
 		if ($onLoad) {
@@ -83,14 +82,14 @@ abstract class AbstractPage {
 
 		if (function_exists('couleur_hex_to_hsl')) {
 			$couleur_fond = empty($options['couleur_fond'])
-				? lire_config("couleur_login", "#db1762")
+				? lire_config('couleur_login', '#db1762')
 				: $options['couleur_fond'];
-			$h = couleur_hex_to_hsl($couleur_fond, "h");
-			$s = couleur_hex_to_hsl($couleur_fond, "s");
-			$l = couleur_hex_to_hsl($couleur_fond, "l");
+			$h = couleur_hex_to_hsl($couleur_fond, 'h');
+			$s = couleur_hex_to_hsl($couleur_fond, 's');
+			$l = couleur_hex_to_hsl($couleur_fond, 'l');
 		}
 
-		$inline = ":root {"
+		$inline = ':root {'
 			. "--minipage-color-theme--h: $h;"
 			. "--minipage-color-theme--s: $s;"
 			. "--minipage-color-theme--l: $l;}";
@@ -132,7 +131,7 @@ abstract class AbstractPage {
 				$css .= "<link rel='stylesheet' href='" . attribut_html($file) . "' type='text/css' />\n";
 			}
 			if (!empty($options['css'])) {
-				$css .= "<style type='text/css'>" . $options['css'] . "</style>";
+				$css .= "<style type='text/css'>" . $options['css'] . '</style>';
 			}
 		}
 
@@ -144,7 +143,7 @@ abstract class AbstractPage {
 			"</title>\n" .
 			"<meta name=\"viewport\" content=\"width=device-width\" />\n" .
 			$css .
-			(empty($options['head']) ? "" : $options['head']) .
+			(empty($options['head']) ? '' : $options['head']) .
 			"</head>\n" .
 			"<body{$onLoad} class=\"minipage" . ($this::TYPE ? ' minipage--' . $this::TYPE : '') . "\">\n" .
 			"\t<div class=\"minipage-bloc\">\n";
@@ -158,13 +157,13 @@ abstract class AbstractPage {
 	protected function ouvreCorps($options = []) {
 		$url_site = url_de_base();
 		$header = "<header>\n" .
-			"<h1><a href=\"" . attribut_html($url_site) . "\">" . interdire_scripts($GLOBALS['meta']['nom_site'] ?? '') . "</a></h1>\n";
+			'<h1><a href="' . attribut_html($url_site) . '">' . interdire_scripts($GLOBALS['meta']['nom_site'] ?? '') . "</a></h1>\n";
 
 		$titre = ($options['titre'] ?? '');
 		if ($titre) {
-			$header .= "<h2>" . interdire_scripts($titre) . "</h2>";
+			$header .= '<h2>' . interdire_scripts($titre) . '</h2>';
 		}
-		$header .= "</header>";
+		$header .= '</header>';
 
 		return $header . "<div class='corps'>\n";
 	}
@@ -180,7 +179,7 @@ abstract class AbstractPage {
 		if (isset($options['footer'])) {
 			$footer = $options['footer'];
 		} else {
-			$footer = "<a href=\"" . attribut_html($url_site) . "\">" . _T('retour') . "</a>\n";
+			$footer = '<a href="' . attribut_html($url_site) . '">' . _T('retour') . "</a>\n";
 		}
 		if (!empty($footer)) {
 			$footer = "<footer>\n{$footer}</footer>";
@@ -271,7 +270,7 @@ abstract class AbstractPage {
 		}
 		$corps = "<div class='msg-alert error'>"
 			. $message_erreur
-			. "</div>";
+			. '</div>';
 		if (empty($options['status'])) {
 			$options['status'] = 403;
 		}

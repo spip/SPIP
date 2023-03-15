@@ -21,7 +21,6 @@ namespace Spip\Texte\Collecteur;
  * Ne pas mettre de span@lang=fr si on est déjà en fr.
  */
 class Idiomes extends AbstractCollecteur {
-
 	protected static string $markPrefix = 'IDIOME';
 
 	/**
@@ -64,10 +63,8 @@ class Idiomes extends AbstractCollecteur {
 
 		// si on veut seulement detecter la présence, on peut retourner tel quel
 		if (empty($options['detecter_presence'])) {
-
 			$pos_prev = 0;
 			foreach ($idiomes as $k => &$idiome) {
-
 				$idiome['module'] = $idiome['match'][1];
 				$idiome['chaine'] = $idiome['match'][2];
 			}
@@ -92,7 +89,6 @@ class Idiomes extends AbstractCollecteur {
 	public function traiter(string $texte, array $options) {
 		static $traduire;
 		if ($texte) {
-
 			$idiomes = $this->collecter($texte);
 			if ($idiomes !== []) {
 				$lang = $options['lang'] ?? $GLOBALS['spip_lang'];
@@ -105,7 +101,6 @@ class Idiomes extends AbstractCollecteur {
 
 				$offset_pos = 0;
 				foreach ($idiomes as $idiome) {
-
 					$cle = ($idiome['module'] ? $idiome['module'] . ':' : '') . $idiome['chaine'];
 					$desc = $traduire($cle, $lang, true);
 					$l = $desc->langue;
@@ -125,12 +120,10 @@ class Idiomes extends AbstractCollecteur {
 						$texte = substr_replace($texte, $trad, $idiome['pos'] + $offset_pos, $idiome['length']);
 						$offset_pos += strlen($trad) - $idiome['length'];
 					}
-
 				}
 			}
 		}
 
 		return $texte;
 	}
-
 }

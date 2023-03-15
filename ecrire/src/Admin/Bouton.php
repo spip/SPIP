@@ -33,8 +33,6 @@ class Bouton {
 		public ?string $url2 = null,
 		/** Pour ouvrir une fenêtre à part */
 		public ?string $target = null
-	)
- 	{
+	) {
 	}
 }
-

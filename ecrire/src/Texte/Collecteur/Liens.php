@@ -15,7 +15,6 @@ namespace Spip\Texte\Collecteur;
  *    Collecte les raccourcis liens [titre->url] de SPIP
  */
 class Liens extends AbstractCollecteur {
-
 	protected static string $markPrefix = 'LIEN';
 
 	/**
@@ -71,7 +70,6 @@ class Liens extends AbstractCollecteur {
 
 		$liens = [];
 		if (str_contains($texte, '->')) {
-
 			$desechappe_crochets = false;
 			// si il y a un crochet ouvrant échappé ou un crochet fermant échappé, les substituer pour les ignorer
 			if (str_contains($texte, '\[') || str_contains($texte, '\]')) {
@@ -84,9 +82,7 @@ class Liens extends AbstractCollecteur {
 
 			// si on veut seulement detecter la présence, on peut retourner tel quel
 			if (empty($options['detecter_presence'])) {
-
 				foreach ($liens as $k => &$lien) {
-
 					$lien['href'] = end($lien['match']);
 					$lien['texte'] = $lien['match'][1];
 					$lien['ouvrant'] = $lien['match'][3] ?? '';
@@ -107,12 +103,10 @@ class Liens extends AbstractCollecteur {
 						$lien['texte'] = str_replace(["\x1\x5", "\x1\x6"], ['[', ']'], $lien['texte']);
 						$lien['href'] = str_replace(["\x1\x5", "\x1\x6"], ['[', ']'], $lien['href']);
 					}
-
 				}
 			}
 		}
 
 		return $liens;
 	}
-
 }

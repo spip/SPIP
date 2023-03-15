@@ -112,9 +112,8 @@ function formulaires_editer_article_identifier_dist(
  * return array
  *     Configuration pour le formulaire
  */
-function articles_edit_config(array $row) : array
-{
-    return [
+function articles_edit_config(array $row): array {
+	return [
 		'lignes' => 8,
 		'langue' => $GLOBALS['spip_lang'],
 		'restreint' => $row['statut'] === 'publie'

@@ -19,7 +19,6 @@ abstract class AbstractIterateur
 	public function __construct(
 		protected array $command,
 		protected array $info = []
-	)
-	{
+	) {
 	}
 }

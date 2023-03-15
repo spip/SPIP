@@ -11,7 +11,6 @@
 
 namespace Spip\Afficher\Minipage;
 
-
 /**
  * Présentation des pages simplifiées d’admin pour envoyer un message à un utilisateur
  **/
@@ -129,7 +128,7 @@ class Admin extends Page {
 			if (empty($corps)) {
 				$corps = "<div class='msg-alert error'>"
 					. $titre
-					. "</div>";
+					. '</div>';
 				$options['titre'] = '';
 			}
 			else {
@@ -158,5 +157,4 @@ class Admin extends Page {
 			return '';
 		}
 	}
-
 }
