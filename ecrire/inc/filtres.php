@@ -87,7 +87,7 @@ function chercher_filtre($fonc, $default = null) {
 		$f = chercher_filtre($nom);
 		// cas du sous-type MIME sans filtre associe, passer au type:
 		// si filtre_text_plain pas defini, passe a filtre_text
-		if (!$f and $nom !== $fonc) {
+		if (!$f && $nom !== $fonc) {
 			$f = chercher_filtre(preg_replace(',\W.*$,', '', $fonc));
 		}
 
@@ -145,7 +145,7 @@ function chercher_filtre($fonc, $default = null) {
  *     texte traité par le filtre si le filtre existe,
  *     Chaîne vide sinon.
  **/
-function appliquer_filtre($arg, $filtre) {
+function appliquer_filtre(mixed $arg, $filtre) {
 	$args = func_get_args();
 	return appliquer_filtre_sinon($arg, $filtre, $args, '');
 }
@@ -171,7 +171,7 @@ function appliquer_filtre($arg, $filtre) {
  *     texte traité par le filtre si le filtre existe,
  *     texte d'origine sinon
  **/
-function appliquer_si_filtre($arg, $filtre) {
+function appliquer_si_filtre(mixed $arg, $filtre) {
 	$args = func_get_args();
 	return appliquer_filtre_sinon($arg, $filtre, $args, $arg);
 }
@@ -224,7 +224,7 @@ function header_silencieux($version): string {
  */
 function version_vcs_courante($dir, $raw = false) {
 	$desc = decrire_version_git($dir);
-	if ($desc === null or $raw) {
+	if ($desc === null || $raw) {
 		return $desc;
 	}
 	// affichage "GIT [master: abcdef]"
@@ -244,7 +244,9 @@ function version_vcs_courante($dir, $raw = false) {
  *      array ['branch' => xx, 'commit' => yy] sinon.
  **/
 function decrire_version_git($dir) {
-	if (!$dir) {
+	$c = null;
+ 	$hash = null;
+ 	if (!$dir) {
 		$dir = '.';
 	}
 
@@ -309,7 +311,7 @@ $GLOBALS['spip_matrice']['filtre_audio_x_pn_realaudio'] = 'inc/filtres_mime.php'
  **/
 function filtrer($filtre) {
 	$tous = func_get_args();
-	if (trouver_filtre_matrice($filtre) and substr($filtre, 0, 6) == 'image_') {
+	if (trouver_filtre_matrice($filtre) && str_starts_with($filtre, 'image_')) {
 		return image_filtrer($tous);
 	} elseif ($f = chercher_filtre($filtre)) {
 		array_shift($tous);
@@ -336,7 +338,7 @@ function filtrer($filtre) {
  * @return bool true si on trouve le filtre dans la matrice, false sinon.
  */
 function trouver_filtre_matrice($filtre) {
-	if (isset($GLOBALS['spip_matrice'][$filtre]) and is_string($f = $GLOBALS['spip_matrice'][$filtre])) {
+	if (isset($GLOBALS['spip_matrice'][$filtre]) && is_string($f = $GLOBALS['spip_matrice'][$filtre])) {
 		find_in_path($f, '', true);
 		$GLOBALS['spip_matrice'][$filtre] = true;
 	}
@@ -394,7 +396,7 @@ function filtre_set(&$Pile, $val, $key, $continue = null) {
  * @param null|mixed $continue Si présent, retourne la valeur en sortie
  * @return string|mixed Retourne `$val` si `$continue` présent, sinon ''.
  */
-function filtre_setenv(&$Pile, $val, $key, $continue = null) {
+function filtre_setenv(&$Pile, $val, mixed $key, $continue = null) {
 	$Pile[0][$key] = $val;
 	return $continue ? $val : '';
 }
@@ -480,22 +482,22 @@ function image_filtrer($args) {
 	// Cas du nom de fichier local
 	$is_file = trim($texte);
 	if (
-		strpos(substr($is_file, strlen(_DIR_RACINE)), '..') !== false
-		  or strpbrk($is_file, "<>\n\r\t") !== false
-		  or strpos($is_file, '/') === 0
+		str_contains(substr($is_file, strlen(_DIR_RACINE)), '..')
+		|| strpbrk($is_file, "<>\n\r\t") !== false
+		|| str_starts_with($is_file, '/')
 	) {
 		$is_file = false;
 	}
 	if ($is_file) {
 		$is_local_file = function ($path) {
-			if (strpos($path, '?') !== false) {
+			if (str_contains($path, '?')) {
 				$path = supprimer_timestamp($path);
 				// remove ?24px added by find_in_theme on .svg files
 				$path = preg_replace(',\?[[:digit:]]+(px)$,', '', $path);
 			}
 			return file_exists($path);
 		};
-		if ($is_local_file($is_file) or tester_url_absolue($is_file)) {
+		if ($is_local_file($is_file) || tester_url_absolue($is_file)) {
 			$res = $filtre("<img src='$is_file' />", ...$args);
 			statut_effacer_images_temporaires(false); // desactiver pour les appels hors compilo
 			return $res;
@@ -514,35 +516,32 @@ function image_filtrer($args) {
 		foreach ($tags as $tag) {
 			$class = extraire_attribut($tag[3], 'class');
 			if (
-				!$class or
-				(strpos($class, 'filtre_inactif') === false
-					// compat historique a virer en 3.2
-					and !str_contains($class, 'no_image_filtrer'))
+				(!$class || !str_contains($class, 'filtre_inactif')
+				&& !str_contains($class, 'no_image_filtrer')) && ($reduit = $filtre($tag[3], ...$args))
 			) {
-				if ($reduit = $filtre($tag[3], ...$args)) {
-					// En cas de span spip_documents, modifier le style=...width:
-					if ($tag[1]) {
-						$w = extraire_attribut($reduit, 'width');
-						if (!$w and preg_match(',width:\s*(\d+)px,S', extraire_attribut($reduit, 'style'), $regs)) {
-							$w = $regs[1];
-						}
-						if ($w and ($style = extraire_attribut($tag[1], 'style'))) {
-							$style = preg_replace(',width:\s*\d+px,S', "width:{$w}px", $style);
-							$replace = inserer_attribut($tag[1], 'style', $style);
-							$texte = str_replace($tag[1], $replace, $texte);
-						}
+				// En cas de span spip_documents, modifier le style=...width:
+				if ($tag[1]) {
+					$w = extraire_attribut($reduit, 'width');
+					if (!$w && preg_match(',width:\s*(\d+)px,S', extraire_attribut($reduit, 'style'), $regs)) {
+						$w = $regs[1];
 					}
-					// traiter aussi un eventuel mouseover
-					if ($mouseover = extraire_attribut($reduit, 'onmouseover')) {
-						if (preg_match(",this[.]src=['\"]([^'\"]+)['\"],ims", $mouseover, $match)) {
-							$srcover = $match[1];
-							$srcover_filter = $filtre("<img src='" . $match[1] . "' />", ...$args);
-							$srcover_filter = extraire_attribut($srcover_filter, 'src');
-							$reduit = str_replace($srcover, $srcover_filter, $reduit);
-						}
+					if ($w && ($style = extraire_attribut($tag[1], 'style'))) {
+						$style = preg_replace(',width:\s*\d+px,S', "width:{$w}px", $style);
+						$replace = inserer_attribut($tag[1], 'style', $style);
+						$texte = str_replace($tag[1], $replace, $texte);
 					}
-					$texte = str_replace($tag[3], $reduit, $texte);
 				}
+				// traiter aussi un eventuel mouseover
+				if (
+					($mouseover = extraire_attribut($reduit, 'onmouseover'))
+					&& preg_match(",this[.]src=['\"]([^'\"]+)['\"],ims", $mouseover, $match)
+				) {
+					$srcover = $match[1];
+					$srcover_filter = $filtre("<img src='" . $match[1] . "' />", ...$args);
+					$srcover_filter = extraire_attribut($srcover_filter, 'src');
+					$reduit = str_replace($srcover, $srcover_filter, $reduit);
+				}
+				$texte = str_replace($tag[3], $reduit, $texte);
 			}
 		}
 	}
@@ -564,10 +563,11 @@ function image_filtrer($args) {
  **/
 function infos_image($img, $force_refresh = false) {
 
-	static $largeur_img = [], $hauteur_img = [], $poids_img = [];
+ 	static $largeur_img = [], $hauteur_img = [], $poids_img = [];
 	$srcWidth = 0;
 	$srcHeight = 0;
 	$srcSize = null;
+	$valeurs = null;
 
 	$src = extraire_attribut($img, 'src');
 
@@ -576,7 +576,7 @@ function infos_image($img, $force_refresh = false) {
 	} else {
 		$srcWidth = extraire_attribut($img, 'width');
 		$srcHeight = extraire_attribut($img, 'height');
-		if (!ctype_digit(strval($srcWidth)) or !ctype_digit(strval($srcHeight))) {
+		if (!ctype_digit((string) $srcWidth) || !ctype_digit((string) $srcHeight)) {
 			$srcWidth = $srcHeight = 0;
 		}
 	}
@@ -593,19 +593,18 @@ function infos_image($img, $force_refresh = false) {
 	}
 
 	$imagesize = false;
-	if (isset($largeur_img[$src]) and !$force_refresh) {
+	if (isset($largeur_img[$src]) && !$force_refresh) {
 		$srcWidth = $largeur_img[$src];
 	}
-	if (isset($hauteur_img[$src]) and !$force_refresh) {
+	if (isset($hauteur_img[$src]) && !$force_refresh) {
 		$srcHeight = $hauteur_img[$src];
 	}
-	if (isset($poids_img[$src]) and !$force_refresh) {
+	if (isset($poids_img[$src]) && !$force_refresh) {
 		$srcSize = $poids_img[$src];
 	}
-	if (!$srcWidth or !$srcHeight or is_null($srcSize)) {
+	if (!$srcWidth || !$srcHeight || is_null($srcSize)) {
 		if (
-			file_exists($src)
-			and $imagesize = spip_getimagesize($src)
+			file_exists($src) && ($imagesize = spip_getimagesize($src))
 		) {
 			if (!$srcWidth) {
 				$largeur_img[$src] = $srcWidth = $imagesize[0];
@@ -617,7 +616,7 @@ function infos_image($img, $force_refresh = false) {
 				$poids_img[$src] = filesize($src);
 			}
 		}
-		elseif (strpos($src, '<svg') !== false) {
+		elseif (str_contains($src, '<svg')) {
 			include_spip('inc/svg');
 			if ($attrs = svg_lire_attributs($src)) {
 				[$width, $height, $viewbox] = svg_getimagesize_from_attr($attrs);
@@ -636,8 +635,8 @@ function infos_image($img, $force_refresh = false) {
 		// on s'y refere, l'image sera reconstruite en temps utile si necessaire
 		elseif (
 			@file_exists($f = "$src.src")
-			and lire_fichier($f, $valeurs)
-			and $valeurs = unserialize($valeurs)
+			&& lire_fichier($f, $valeurs)
+			&& ($valeurs = unserialize($valeurs))
 		) {
 			if (!$srcWidth) {
 				$largeur_img[$src] = $srcWidth = $valeurs['largeur_dest'];
@@ -737,11 +736,11 @@ function hauteur($img) {
  * @return string
  **/
 function corriger_entites_html($texte) {
-	if (strpos($texte, '&amp;') === false) {
+	if (!str_contains($texte, '&amp;')) {
 		return $texte;
 	}
 
-	return preg_replace(',&amp;(#[0-9][0-9][0-9]+;|amp;),iS', '&\1', $texte);
+	return preg_replace(',&amp;(#\d\d\d+;|amp;),iS', '&\1', $texte);
 }
 
 /**
@@ -756,7 +755,7 @@ function corriger_entites_html($texte) {
  * @return string
  **/
 function corriger_toutes_entites_html($texte) {
-	if (strpos($texte, '&amp;') === false) {
+	if (!str_contains($texte, '&amp;')) {
 		return $texte;
 	}
 
@@ -801,10 +800,7 @@ function proteger_amp($texte) {
  * @return mixed|string
  */
 function entites_html($texte, $tout = false, $quote = true) {
-	if (
-		!is_string($texte) or !$texte
-		or strpbrk($texte, "&\"'<>") == false
-	) {
+	if (!is_string($texte) || !$texte || strpbrk($texte, "&\"'<>") == false) {
 		return $texte;
 	}
 	include_spip('inc/texte');
@@ -835,7 +831,7 @@ function entites_html($texte, $tout = false, $quote = true) {
  **/
 function filtrer_entites(?string $texte): string {
 	$texte ??= '';
-	if (strpos($texte, '&') === false) {
+	if (!str_contains($texte, '&')) {
 		return $texte;
 	}
 	// filtrer
@@ -844,7 +840,7 @@ function filtrer_entites(?string $texte): string {
 	$texte = unicode2charset($texte);
 	// cas particulier des " et ' qu'il faut filtrer aussi
 	// (on le faisait deja avec un &quot;)
-	if (strpos($texte, '&#') !== false) {
+	if (str_contains($texte, '&#')) {
 		$texte = str_replace(['&#039;', '&#39;', '&#034;', '&#34;'], ["'", "'", '"', '"'], $texte);
 	}
 
@@ -904,9 +900,8 @@ function supprimer_caracteres_illegaux($texte) {
  **/
 function corriger_caracteres($texte) {
 	$texte = corriger_caracteres_windows($texte);
-	$texte = supprimer_caracteres_illegaux($texte);
 
-	return $texte;
+	return supprimer_caracteres_illegaux($texte);
 }
 
 /**
@@ -951,7 +946,7 @@ function texte_backend(string $texte): string {
 	$texte = charset2unicode($texte);
 
 	// Caracteres problematiques en iso-latin 1
-	if (isset($GLOBALS['meta']['charset']) and $GLOBALS['meta']['charset'] == 'iso-8859-1') {
+	if (isset($GLOBALS['meta']['charset']) && $GLOBALS['meta']['charset'] == 'iso-8859-1') {
 		$texte = str_replace(chr(156), '&#156;', $texte);
 		$texte = str_replace(chr(140), '&#140;', $texte);
 		$texte = str_replace(chr(159), '&#159;', $texte);
@@ -1030,14 +1025,14 @@ function supprimer_numero(?string $texte): string {
  **/
 function recuperer_numero(?string $texte): string {
 	if (
-		$texte and
-		preg_match(
+		$texte
+		&& preg_match(
 			',^[[:space:]]*([0-9]+)([.)]|' . chr(194) . '?' . chr(176) . ')[[:space:]]+,S',
 			$texte,
 			$regs
 		)
 	) {
-		return strval($regs[1]);
+		return (string) $regs[1];
 	} else {
 		return '';
 	}
@@ -1099,9 +1094,7 @@ function supprimer_tags($texte, $rempl = '') {
  *     texte converti
  **/
 function echapper_tags($texte, $rempl = '') {
-	$texte = preg_replace('/<([^>]*)>/', "&lt;\\1&gt;", $texte);
-
-	return $texte;
+	return preg_replace('/<([^>]*)>/', "&lt;\\1&gt;", $texte);
 }
 
 /**
@@ -1124,7 +1117,7 @@ function echapper_tags($texte, $rempl = '') {
 function textebrut($texte) {
 	$u = $GLOBALS['meta']['pcre_u'];
 	$texte = preg_replace('/\s+/S' . $u, ' ', $texte);
-	$texte = preg_replace('/<(p|br)( [^>]*)?' . '>/iS', "\n\n", $texte);
+	$texte = preg_replace('/<(p|br)( [^>]*)?>/iS', "\n\n", $texte);
 	$texte = preg_replace("/^\n+/", '', $texte);
 	$texte = preg_replace("/\n+$/", '', $texte);
 	$texte = preg_replace("/\n +/", "\n", $texte);
@@ -1182,7 +1175,7 @@ function liens_nofollow($texte) {
 	if (preg_match_all(",<a\b[^>]*>,UimsS", $texte, $regs, PREG_PATTERN_ORDER)) {
 		foreach ($regs[0] as $a) {
 			$rel = extraire_attribut($a, 'rel') ?? '';
-			if (strpos($rel, 'nofollow') === false) {
+			if (!str_contains($rel, 'nofollow')) {
 				$rel = 'nofollow' . ($rel ? " $rel" : '');
 				$anofollow = inserer_attribut($a, 'rel', $rel);
 				$texte = str_replace($a, $anofollow, $texte);
@@ -1212,9 +1205,8 @@ function PtoBR($texte) {
 	$u = $GLOBALS['meta']['pcre_u'];
 	$texte = preg_replace('@</p>@iS', "\n", $texte);
 	$texte = preg_replace("@<p\b.*>@UiS", '<br />', $texte);
-	$texte = preg_replace('@^\s*<br />@S' . $u, '', $texte);
 
-	return $texte;
+	return preg_replace('@^\s*<br />@S' . $u, '', $texte);
 }
 
 
@@ -1341,7 +1333,7 @@ function taille_en_octets($octets, $systeme = 'BI') {
 		$affichage = _T(
 			'spip:taille_' . $unites[$puissance] . $suffixe_item,
 			[
-				'taille' => round($octets / pow($kilo, $puissance), $precisions[$puissance])
+				'taille' => round($octets / $kilo ** $puissance, $precisions[$puissance])
 			]
 		);
 	}
@@ -1487,7 +1479,7 @@ function filtre_securiser_acces_dist($id_auteur, $cle, $dir, $op = '', $args = '
 function sinon($texte, $sinon = '') {
 	if ($texte) {
 		return $texte;
-	} elseif (is_scalar($texte) and strlen($texte)) {
+	} elseif (is_scalar($texte) && strlen($texte)) {
 		return $texte;
 	} else {
 		return $sinon;
@@ -1562,9 +1554,8 @@ function filtrer_ical($texte) {
 	$texte = html2unicode($texte);
 	$texte = unicode2charset(charset2unicode($texte, $GLOBALS['meta']['charset']), 'utf-8');
 	$texte = preg_replace("/\n/", ' ', $texte);
-	$texte = preg_replace('/,/', '\,', $texte);
 
-	return $texte;
+	return preg_replace('/,/', '\,', $texte);
 }
 
 
@@ -1605,7 +1596,7 @@ function post_autobr($texte, $delim = "\n_ ") {
 
 	// echapper les modeles
 	$collecteurModeles = null;
-	if (strpos($texte, '<') !== false) {
+	if (str_contains($texte, '<')) {
 		include_spip('src/Texte/Collecteur/AbstractCollecteur');
 		include_spip('src/Texte/Collecteur/Modeles');
 		$collecteurModeles = new Spip\Texte\Collecteur\Modeles();
@@ -1619,9 +1610,9 @@ function post_autobr($texte, $delim = "\n_ ") {
 		$suite = substr($suite, $t);
 		$car = substr($suite, 0, 1);
 		if (
-			($car <> '-') and ($car <> '_') and ($car <> "\n") and ($car <> '|') and ($car <> '}')
-			and !preg_match(',^\s*(\n|</?(quote|div|dl|dt|dd)|$),S', ($suite))
-			and !preg_match(',</?(quote|div|dl|dt|dd)> *$,iS', $debut)
+			$car != '-' && $car != '_' && $car != "\n" && $car != '|' && $car != '}'
+			&& !preg_match(',^\s*(\n|</?(quote|div|dl|dt|dd)|$),S', ($suite))
+			&& !preg_match(',</?(quote|div|dl|dt|dd)> *$,iS', $debut)
 		) {
 			$debut .= $delim;
 		} else {
@@ -1675,10 +1666,7 @@ function post_autobr($texte, $delim = "\n_ ") {
  **/
 function extraire_idiome($letexte, $lang = null, $options = []) {
 
-	if (
-		$letexte
-		and strpos($letexte, '<:') !== false
-	) {
+	if ($letexte && str_contains($letexte, '<:')) {
 		if (!$lang) {
 			$lang = $GLOBALS['spip_lang'];
 		}
@@ -1735,10 +1723,7 @@ function extraire_idiome($letexte, $lang = null, $options = []) {
  **/
 function extraire_multi($letexte, $lang = null, $options = []) {
 
-	if (
-		$letexte
-		and stripos($letexte, '<multi') !== false
-	) {
+	if ($letexte && stripos($letexte, '<multi') !== false) {
 		if (!$lang) {
 			$lang = $GLOBALS['spip_lang'];
 		}
@@ -1883,7 +1868,7 @@ function alterner($i, ...$args) {
 	}
 
 	// un index compris entre 0 et num exclus
-	$i = ((intval($i) - 1) % $num); // dans ]-$num;$num[
+	$i = (((int) $i - 1) % $num); // dans ]-$num;$num[
 	$i = ($i + $num) % $num; // dans [0;$num[
 	// renvoyer le i-ieme argument, modulo le nombre d'arguments
 	return $args[$i];
@@ -1934,7 +1919,7 @@ function extraire_attribut($balise, $attribut, $complet = false) {
 			$r
 		)
 	) {
-		if (isset($r[3][0]) and ($r[3][0] == '"' || $r[3][0] == "'")) {
+		if (isset($r[3][0]) && ($r[3][0] == '"' || $r[3][0] == "'")) {
 			$r[4] = substr($r[3], 1, -1);
 			$r[3] = $r[3][0];
 		} elseif ($r[3] !== '') {
@@ -1944,7 +1929,7 @@ function extraire_attribut($balise, $attribut, $complet = false) {
 			$r[4] = trim($r[2]);
 		}
 		$att = $r[4];
-		if (strpos($att, '&#') !== false) {
+		if (str_contains($att, '&#')) {
 			$att = str_replace(['&#039;', '&#39;', '&#034;', '&#34;'], ["'", "'", '"', '"'], $att);
 		}
 		$att = filtrer_entites($att);
@@ -1990,7 +1975,7 @@ function extraire_attribut($balise, $attribut, $complet = false) {
  **/
 function inserer_attribut(?string $balise, string $attribut, ?string $val, bool $proteger = true, bool $vider = false): string {
 
-	if ($balise === null or $balise === '') {
+	if ($balise === null || $balise === '') {
 		return '';
 	}
 
@@ -2003,11 +1988,7 @@ function inserer_attribut(?string $balise, string $attribut, ?string $val, bool 
 
 	// echapper les ' pour eviter tout bug
 	$val = str_replace("'", '&#039;', $val ?? '');
-	if ($vider and strlen($val) === 0) {
-		$insert = '';
-	} else {
-		$insert = " $attribut='$val'";
-	}
+	$insert = $vider && (string) $val === '' ? '' : " $attribut='$val'";
 
 	[$old, $r] = extraire_attribut($balise, $attribut, true);
 
@@ -2069,19 +2050,19 @@ function modifier_class($balise, $class, $operation = 'ajouter') {
 		$is_class_presente = false;
 		if (
 			$class_courante
-			and str_contains($class_courante, (string) $c)
-			and in_array($c, preg_split(',\s+,', $class_courante))
+			&& str_contains($class_courante, (string) $c)
+			&& in_array($c, preg_split(',\s+,', $class_courante))
 		) {
 			$is_class_presente = true;
 		}
 		if (
 			in_array($operation, ['ajouter', 'commuter'])
-			and !$is_class_presente
+			&& !$is_class_presente
 		) {
 			$class_new = ltrim(rtrim($class_new ?? '') . ' ' . $c);
 		} elseif (
 			in_array($operation, ['supprimer', 'commuter'])
-			and $is_class_presente
+			&& $is_class_presente
 		) {
 			$class_new = preg_split(',\s+,', $class_new);
 			$class_new = array_diff($class_new, [$c]);
@@ -2148,10 +2129,10 @@ function tester_config($id, $mode = '') {
 // Quelques fonctions de calcul arithmetique
 //
 function floatstr($a) {
- return str_replace(',', '.', (string)floatval($a));
+	return str_replace(',', '.', (string)(float) $a);
 }
 function strize($f, $a, $b) {
- return floatstr($f(floatstr($a), floatstr($b)));
+	return floatstr($f(floatstr($a), floatstr($b)));
 }
 
 /**
@@ -2318,8 +2299,7 @@ function nom_acceptable($nom) {
 function email_valide($adresses) {
 	if (is_array($adresses)) {
 		$adresses = array_map('email_valide', $adresses);
-		$adresses = array_filter($adresses);
-		return $adresses;
+		return array_filter($adresses);
 	}
 
 	$email_valide = charger_fonction('email_valide', 'inc');
@@ -2341,7 +2321,7 @@ function afficher_enclosures($tags) {
 	foreach (extraire_balises($tags, 'a') as $tag) {
 		if (
 			extraire_attribut($tag, 'rel') == 'enclosure'
-			and $t = extraire_attribut($tag, 'href')
+			&& ($t = extraire_attribut($tag, 'href'))
 		) {
 			$s[] = preg_replace(
 				',>[^<]+</a>,S',
@@ -2359,7 +2339,7 @@ function afficher_enclosures($tags) {
 		}
 	}
 
-	return join('&nbsp;', $s);
+	return implode('&nbsp;', $s);
 }
 
 /**
@@ -2382,7 +2362,7 @@ function afficher_tags($tags, $rels = 'tag,directory') {
 		}
 	}
 
-	return join(', ', $s);
+	return implode(', ', $s);
 }
 
 
@@ -2441,8 +2421,8 @@ function microformat2enclosure($tags) {
 		if (extraire_attribut($e, 'rel') == 'enclosure') {
 			$url = filtrer_entites(extraire_attribut($e, 'href'));
 			$type = extraire_attribut($e, 'type');
-			if (!$length = intval(extraire_attribut($e, 'title'))) {
-				$length = intval(extraire_attribut($e, 'length'));
+			if (!$length = (int) extraire_attribut($e, 'title')) {
+				$length = (int) extraire_attribut($e, 'length');
 			} # vieux data
 			$fichier = basename($url);
 			$enclosures[] = '<enclosure'
@@ -2453,7 +2433,7 @@ function microformat2enclosure($tags) {
 		}
 	}
 
-	return join("\n", $enclosures);
+	return implode("\n", $enclosures);
 }
 
 
@@ -2607,11 +2587,11 @@ function extraire_balises($texte, $tag = 'a') {
  *     - `$def` si on n'a pas transmis de tableau
  **/
 function in_any($val, $vals, $def = '') {
-	if (!is_array($vals) and $vals and $v = unserialize($vals)) {
+	if (!is_array($vals) && $vals && ($v = unserialize($vals))) {
 		$vals = $v;
 	}
 
-	return (!is_array($vals) ? $def : (in_array($val, $vals) ? ' ' : ''));
+	return (is_array($vals) ? (in_array($val, $vals) ? ' ' : '') : ($def));
 }
 
 
@@ -2633,11 +2613,11 @@ function in_any($val, $vals, $def = '') {
  **/
 function valeur_numerique($expr) {
 	$a = 0;
-	if (preg_match(',^[0-9]+(\s*[+*-]\s*[0-9]+)*$,S', trim($expr))) {
+	if (preg_match(',^\d+(\s*[+*-]\s*\d+)*$,S', trim($expr))) {
 		eval("\$a = $expr;");
 	}
 
-	return intval($a);
+	return (int) $a;
 }
 
 /**
@@ -2684,21 +2664,21 @@ function form_hidden(?string $action = ''): string {
 	$contexte = [];
 	include_spip('inc/urls');
 	if (
-		$p = urls_decoder_url($action, '')
-		and reset($p)
+		($p = urls_decoder_url($action, ''))
+		&& reset($p)
 	) {
 		$fond = array_shift($p);
 		if ($fond != '404') {
 			$contexte = array_shift($p);
 			$contexte['page'] = $fond;
-			$action = preg_replace('/([?]' . preg_quote($fond) . '[^&=]*[0-9]+)(&|$)/', '?&', $action);
+			$action = preg_replace('/([?]' . preg_quote($fond, '/') . '[^&=]*[0-9]+)(&|$)/', '?&', $action);
 		}
 	}
 	// defaire ce qu'a injecte urls_decoder_url : a revoir en modifiant la signature de urls_decoder_url
-	if (defined('_DEFINIR_CONTEXTE_TYPE') and _DEFINIR_CONTEXTE_TYPE) {
+	if (defined('_DEFINIR_CONTEXTE_TYPE') && _DEFINIR_CONTEXTE_TYPE) {
 		unset($contexte['type']);
 	}
-	if (!defined('_DEFINIR_CONTEXTE_TYPE_PAGE') or _DEFINIR_CONTEXTE_TYPE_PAGE) {
+	if (!defined('_DEFINIR_CONTEXTE_TYPE_PAGE') || _DEFINIR_CONTEXTE_TYPE_PAGE) {
 		unset($contexte['type-page']);
 	}
 
@@ -2751,7 +2731,7 @@ function form_hidden(?string $action = ''): string {
 			. ' type="hidden"' . "\n/>";
 	}
 
-	return join('', $hidden);
+	return implode('', $hidden);
 }
 
 
@@ -2773,7 +2753,7 @@ function form_hidden(?string $action = ''): string {
  *    - la première valeur du tableau sinon.
  **/
 function filtre_reset($array) {
-	return !is_array($array) ? null : reset($array);
+	return is_array($array) ? reset($array) : null;
 }
 
 /**
@@ -2794,7 +2774,7 @@ function filtre_reset($array) {
  *    - la dernière valeur du tableau sinon.
  **/
 function filtre_end($array) {
-	return !is_array($array) ? null : end($array);
+	return is_array($array) ? end($array) : null;
 }
 
 /**
@@ -2813,8 +2793,8 @@ function filtre_end($array) {
  *     - le tableau complété de la valeur sinon.
  *
  **/
-function filtre_push($array, $val) {
-	if (!is_array($array) or !array_push($array, $val)) {
+function filtre_push($array, mixed $val) {
+	if (!is_array($array) || !array_push($array, $val)) {
 		return '';
 	}
 
@@ -2836,8 +2816,8 @@ function filtre_push($array, $val) {
  *     - `false` si `$array` n'est pas un tableau
  *     - `true` si la valeur existe dans le tableau, `false` sinon.
  **/
-function filtre_find($array, $val) {
-	return (is_array($array) and in_array($val, $array));
+function filtre_find($array, mixed $val) {
+	return (is_array($array) && in_array($val, $array));
 }
 
 
@@ -2895,7 +2875,7 @@ function direction_css($css, $voulue = '') {
 	include_spip('inc/lang');
 	// si on a precise le sens voulu en argument, le prendre en compte
 	if ($voulue = strtolower($voulue)) {
-		if ($voulue != 'rtl' and $voulue != 'ltr') {
+		if ($voulue != 'rtl' && $voulue != 'ltr') {
 			$voulue = lang_dir($voulue);
 		}
 	} else {
@@ -2915,7 +2895,7 @@ function direction_css($css, $voulue = '') {
 		// url absolue
 		preg_match(',^https?:,i', $css)
 		// ou qui contient un ?
-		or (($p = strpos($css, '?')) !== false)
+		|| ($p = strpos($css, '?')) !== false
 	) {
 		$distant = true;
 		$cssf = parse_url($css);
@@ -2939,16 +2919,17 @@ function direction_css($css, $voulue = '') {
 		. '.' . substr(md5($cssf), 0, 4) . '_' . $ndir . '.css';
 
 	// la css peut etre distante (url absolue !)
+	$contenu = null;
 	if ($distant) {
 		include_spip('inc/distant');
 		$res = recuperer_url($css);
-		if (!$res or !$contenu = $res['page']) {
+		if (!$res || !($contenu = $res['page'])) {
 			return $css;
 		}
 	} else {
 		if (
-			(@filemtime($f) > @filemtime($css))
-			and (_VAR_MODE != 'recalcul')
+			@filemtime($f) > @filemtime($css)
+			&& _VAR_MODE != 'recalcul'
 		) {
 			return $f;
 		}
@@ -2980,7 +2961,7 @@ function direction_css($css, $voulue = '') {
 		if (substr($css_direction, 0, strlen($d) + 1) == "$d/") {
 			$css_direction = substr($css_direction, strlen($d) + 1);
 		} // si la css_direction commence par $dir_var on la fait passer pour une absolue
-		elseif (substr($css_direction, 0, strlen($dir_var)) == $dir_var) {
+		elseif (str_starts_with($css_direction, $dir_var)) {
 			$css_direction = substr($css_direction, strlen($dir_var));
 			$src_faux_abs['/@@@@@@/' . $css_direction] = $css_direction;
 			$css_direction = '/@@@@@@/' . $css_direction;
@@ -2993,7 +2974,7 @@ function direction_css($css, $voulue = '') {
 	$contenu = urls_absolues_css($contenu, $css);
 
 	// virer les fausses url absolues que l'on a mis dans les import
-	if (count($src_faux_abs)) {
+	if ($src_faux_abs !== []) {
 		$contenu = str_replace(array_keys($src_faux_abs), $src_faux_abs, $contenu);
 	}
 
@@ -3024,7 +3005,7 @@ function direction_css($css, $voulue = '') {
  *     - Chemin ou URL du fichier CSS source sinon.
  **/
 function url_absolue_css($css) {
-	if (!preg_match(',\.css$,i', $css, $r)) {
+ 	if (!preg_match(',\.css$,i', $css, $r)) {
 		return $css;
 	}
 
@@ -3035,14 +3016,15 @@ function url_absolue_css($css) {
 		. preg_replace(',(.*?)(_rtl|_ltr)?$,', "\\1-urlabs-" . substr(md5("$css-urlabs"), 0, 4) . "\\2", $f)
 		. '.css';
 
-	if ((@filemtime($f) > @filemtime($css)) and (_VAR_MODE != 'recalcul')) {
+	if (@filemtime($f) > @filemtime($css) && _VAR_MODE != 'recalcul') {
 		return $f;
 	}
 
+	$contenu = null;
 	if ($url_absolue_css == $css) {
 		if (
 			strncmp($GLOBALS['meta']['adresse_site'], $css, $l = strlen($GLOBALS['meta']['adresse_site'])) != 0
-			or !lire_fichier(_DIR_RACINE . substr($css, $l), $contenu)
+			|| !lire_fichier(_DIR_RACINE . substr($css, $l), $contenu)
 		) {
 			include_spip('inc/distant');
 			$contenu = recuperer_url($css);
@@ -3101,7 +3083,7 @@ function table_valeur($table, $cle, $defaut = '', $conserver_null = false) {
 		$table = (is_string($table) ? @unserialize($table) : $table);
 
 		if (is_object($table)) {
-			$table = (($k !== '') and isset($table->$k)) ? $table->$k : $defaut;
+			$table = ($k !== '' && isset($table->$k)) ? $table->$k : $defaut;
 		} elseif (is_array($table)) {
 			if ($conserver_null) {
 				$table = array_key_exists($k, $table) ? $table[$k] : $defaut;
@@ -3147,7 +3129,7 @@ function table_valeur($table, $cle, $defaut = '', $conserver_null = false) {
  *     - string : expression trouvée.
  **/
 function filtre_match_dist(?string $texte, $expression, $modif = 'UuimsS', $capte = 0) {
-	if (intval($modif) and $capte == 0) {
+	if ((int) $modif && $capte == 0) {
 		$capte = $modif;
 		$modif = 'UuimsS';
 	}
@@ -3218,9 +3200,9 @@ function traiter_doublons_documents(&$doublons, $letexte) {
 	$t = $letexte . $GLOBALS['les_notes'];
 
 	if (
-		strstr($t, 'spip_document_') // evite le preg_match_all si inutile
-		and preg_match_all(
-			',<[^>]+\sclass=["\']spip_document_([0-9]+)[\s"\'],imsS',
+		strstr($t, 'spip_document_')
+		&& preg_match_all(
+			',<[^>]+\sclass=["\']spip_document_(\d+)[\s"\'],imsS',
 			$t,
 			$matches,
 			PREG_PATTERN_ORDER
@@ -3229,7 +3211,7 @@ function traiter_doublons_documents(&$doublons, $letexte) {
 		if (!isset($doublons['documents'])) {
 			$doublons['documents'] = '';
 		}
-		$doublons['documents'] .= ',' . join(',', $matches[1]);
+		$doublons['documents'] .= ',' . implode(',', $matches[1]);
 	}
 
 	return $letexte;
@@ -3245,7 +3227,7 @@ function traiter_doublons_documents(&$doublons, $letexte) {
  * @param mixed $texte
  * @return string Chaîne vide
  **/
-function vide($texte) {
+function vide(mixed $texte) {
 	return '';
 }
 
@@ -3285,7 +3267,7 @@ function env_to_params($env, $ignore_params = []) {
 	$texte = '';
 	if ($env) {
 		foreach ($env as $i => $j) {
-			if (is_string($j) and !in_array($i, $ignore_params)) {
+			if (is_string($j) && !in_array($i, $ignore_params)) {
 				$texte .= "<param name='" . attribut_html($i) . "'\n\tvalue='" . attribut_html($j) . "' />";
 			}
 		}
@@ -3324,7 +3306,7 @@ function env_to_attributs($env, $ignore_params = []) {
 	$texte = '';
 	if ($env) {
 		foreach ($env as $i => $j) {
-			if (is_string($j) and !in_array($i, $ignore_params)) {
+			if (is_string($j) && !in_array($i, $ignore_params)) {
 				$texte .= attribut_html($i) . "='" . attribut_html($j) . "' ";
 			}
 		}
@@ -3348,7 +3330,7 @@ function env_to_attributs($env, $ignore_params = []) {
  * @return string Chaînes concaténés
  **/
 function concat(...$args): string {
-	return join('', $args);
+	return implode('', $args);
 }
 
 
@@ -3399,13 +3381,14 @@ function http_img_variante_svg_si_possible($img_file) {
 	// si il y a un .svg a la bonne taille (-16.svg) a cote, on l'utilise en remplacement du -16.png
 	if (
 		preg_match(',-(\d+)[.](png|gif|svg)$,', $img_file, $m)
-		and $variante_svg_generique = substr($img_file, 0, -strlen($m[0])) . '-xx.svg'
-		and file_exists($variante_svg_generique)
+		&& ($variante_svg_generique = substr($img_file, 0, -strlen($m[0])) . '-xx.svg')
+		&& file_exists($variante_svg_generique)
 	) {
-		if ($variante_svg_size = substr($variante_svg_generique, 0, -6) . $m[1] . '.svg' and file_exists($variante_svg_size)) {
+		if (
+			($variante_svg_size = substr($variante_svg_generique, 0, -6) . $m[1] . '.svg')
+			&& file_exists($variante_svg_size)) {
 			$img_file = $variante_svg_size;
-		}
-		else {
+		} else {
 			$img_file = $variante_svg_generique;
 		}
 	}
@@ -3435,28 +3418,25 @@ function http_img_pack($img, $alt, $atts = '', $title = '', $options = []) {
 	if ($p = strpos($img_file, '?')) {
 		$img_file = substr($img_file, 0, $p);
 	}
-	if (!isset($options['chemin_image']) or $options['chemin_image'] == true) {
+	if (!isset($options['chemin_image']) || $options['chemin_image'] == true) {
 		$img_file = chemin_image($img);
 	}
 	else {
-		if (!isset($options['variante_svg_si_possible']) or $options['variante_svg_si_possible'] == true) {
+		if (!isset($options['variante_svg_si_possible']) || $options['variante_svg_si_possible'] == true) {
 			$img_file = http_img_variante_svg_si_possible($img_file);
 		}
 	}
 	if (stripos($atts, 'width') === false) {
 		// utiliser directement l'info de taille presente dans le nom
 		if (
-			(!isset($options['utiliser_suffixe_size'])
-				or $options['utiliser_suffixe_size'] == true
-				or str_contains($img_file, '-xx.svg'))
-			and (preg_match(',-([0-9]+)[.](png|gif|svg)$,', $img, $regs)
-					 or preg_match(',\?([0-9]+)px$,', $img, $regs))
+			(!isset($options['utiliser_suffixe_size']) || $options['utiliser_suffixe_size'] == true || str_contains($img_file, '-xx.svg'))
+			&& (preg_match(',-(\d+)[.](png|gif|svg)$,', $img, $regs) || preg_match(',\?(\d+)px$,', $img, $regs))
 		) {
-			$largeur = $hauteur = intval($regs[1]);
+			$largeur = $hauteur = (int) $regs[1];
 		} else {
 			$taille = taille_image($img_file);
 			[$hauteur, $largeur] = $taille;
-			if (!$hauteur or !$largeur) {
+			if (!$hauteur || !$largeur) {
 				return '';
 			}
 		}
@@ -3469,7 +3449,7 @@ function http_img_pack($img, $alt, $atts = '', $title = '', $options = []) {
 	if ($alt === false) {
 		$alt = '';
 	}
-	elseif ($alt or $alt === '') {
+	elseif ($alt || $alt === '') {
 		$alt = " alt='" . attribut_html($alt) . "'";
 	}
 	else {
@@ -3490,7 +3470,7 @@ function http_img_pack($img, $alt, $atts = '', $title = '', $options = []) {
  * @return string
  */
 function http_style_background($img, $att = '', $size = null) {
-	if ($size and is_numeric($size)) {
+	if ($size && is_numeric($size)) {
 		$size = trim($size) . 'px';
 	}
 	return " style='background" .
@@ -3502,10 +3482,10 @@ function http_style_background($img, $att = '', $size = null) {
 
 function helper_filtre_balise_img_svg_arguments($alt_or_size, $class_or_size, $size) {
 	$args = [$alt_or_size, $class_or_size, $size];
-	while (is_null(end($args)) and count($args)) {
+	while (is_null(end($args)) && count($args)) {
 		array_pop($args);
 	}
-	if (!count($args)) {
+	if ($args === []) {
 		return [null, null, null];
 	}
 	if (count($args) < 3) {
@@ -3517,7 +3497,7 @@ function helper_filtre_balise_img_svg_arguments($alt_or_size, $class_or_size, $s
 		// 512x300
 		if (
 			!strlen($maybe_size)
-			or !preg_match(',^(@\d+(\.\d+)?x|\d+(x\*)?|\d+x\d+)$,', trim($maybe_size))
+			|| !preg_match(',^(@\d+(\.\d+)?x|\d+(x\*)?|\d+x\d+)$,', trim($maybe_size))
 		) {
 			$args[] = $maybe_size;
 			$maybe_size = null;
@@ -3532,23 +3512,23 @@ function helper_filtre_balise_img_svg_arguments($alt_or_size, $class_or_size, $s
 
 function helper_filtre_balise_img_svg_size($img, $size) {
 	// si size est de la forme '@2x' c'est un coeff multiplicateur sur la densite
-	if (strpos($size, '@') === 0 and substr($size, -1) === 'x') {
-		$coef = floatval(substr($size, 1, -1));
+	if (str_starts_with($size, '@') && str_ends_with($size, 'x')) {
+		$coef = (float) substr($size, 1, -1);
 		[$h, $w] = taille_image($img);
-		$height = intval(round($h / $coef));
-		$width = intval(round($w / $coef));
+		$height = (int) round($h / $coef);
+		$width = (int) round($w / $coef);
 	}
 	// sinon c'est une valeur seule si image caree ou largeurxhauteur
 	else {
 		$size = explode('x', $size, 2);
 		$size = array_map('trim', $size);
-		$height = $width = intval(array_shift($size));
+		$height = $width = (int) array_shift($size);
 
-		if (count($size) and reset($size)) {
+		if (count($size) && reset($size)) {
 			$height = array_shift($size);
 			if ($height === '*') {
 				[$h, $w] = taille_image($img);
-				$height = intval(round($h * $width / $w));
+				$height = (int) round($h * $width / $w);
 			}
 		}
 	}
@@ -3592,17 +3572,12 @@ function filtre_balise_img_dist($img, $alt = '', $class = null, $size = null) {
 	[$alt, $class, $size] = helper_filtre_balise_img_svg_arguments($alt, $class, $size);
 
 	$img = trim((string) $img);
-	if (strpos($img, '<img') === 0) {
+	if (str_starts_with($img, '<img')) {
 		if (!is_null($alt)) {
 			$img = inserer_attribut($img, 'alt', $alt);
 		}
 		if (!is_null($class)) {
-			if (strlen($class)) {
-				$img = inserer_attribut($img, 'class', $class);
-			}
-			else {
-				$img = vider_attribut($img, 'class');
-			}
+			$img = strlen($class) ? inserer_attribut($img, 'class', $class) : vider_attribut($img, 'class');
 		}
 	}
 	else {
@@ -3618,7 +3593,7 @@ function filtre_balise_img_dist($img, $alt = '', $class = null, $size = null) {
 		}
 	}
 
-	if ($img and !is_null($size) and strlen($size = trim($size))) {
+	if ($img && !is_null($size) && strlen($size = trim($size))) {
 		[$width, $height] = helper_filtre_balise_img_svg_size($img, $size);
 
 		$img = inserer_attribut($img, 'width', $width);
@@ -3662,7 +3637,7 @@ function filtre_balise_svg_dist($img, $alt = '', $class = null, $size = null) {
 	$svg = null;
 	$img = trim($img);
 	$img_file = $img;
-	if (strpos($img, '<svg') === false) {
+	if (!str_contains($img, '<svg')) {
 		if ($p = strpos($img_file, '?')) {
 			$img_file = substr($img_file, 0, $p);
 		}
@@ -3677,8 +3652,8 @@ function filtre_balise_svg_dist($img, $alt = '', $class = null, $size = null) {
 
 		if (
 			!$img_file
-			or !file_exists($img_file)
-			or !$svg = file_get_contents($img_file)
+			|| !file_exists($img_file)
+			|| !$svg = file_get_contents($img_file)
 		) {
 			return '';
 		}
@@ -3694,19 +3669,16 @@ function filtre_balise_svg_dist($img, $alt = '', $class = null, $size = null) {
 	$balise_svg_source = $balise_svg;
 
 	// entete XML à supprimer
-	$svg = preg_replace(',^\s*<\?xml[^>]*\?' . '>,', '', $svg);
+	$svg = preg_replace(',^\s*<\?xml[^>]*\?>,', '', $svg);
 
 	// IE est toujours mon ami
 	$balise_svg = inserer_attribut($balise_svg, 'focusable', 'false');
 
 	// regler la classe
 	if (!is_null($class)) {
-		if (strlen($class)) {
-			$balise_svg = inserer_attribut($balise_svg, 'class', $class);
-		}
-		else {
-			$balise_svg = vider_attribut($balise_svg, 'class');
-		}
+		$balise_svg = strlen($class)
+			? inserer_attribut($balise_svg, 'class', $class)
+			: vider_attribut($balise_svg, 'class');
 	}
 
 	// regler le alt
@@ -3723,7 +3695,7 @@ function filtre_balise_svg_dist($img, $alt = '', $class = null, $size = null) {
 
 	$svg = str_replace($balise_svg_source, $balise_svg, $svg);
 
-	if (!is_null($size) and strlen($size = trim($size))) {
+	if (!is_null($size) && strlen($size = trim($size))) {
 		[$width, $height] = helper_filtre_balise_img_svg_size($svg, $size);
 
 		if (!function_exists('svg_redimensionner')) {
@@ -3800,11 +3772,11 @@ function filtre_info_plugin_dist($plugin, $type_info, $reload = false) {
 
 	if (!$plugin) {
 		return serialize(array_keys($plugins_actifs));
-	} elseif (empty($plugins_actifs[$plugin]) and !$reload) {
+	} elseif (empty($plugins_actifs[$plugin]) && !$reload) {
 		return '';
-	} elseif (($type_info == 'est_actif') and !$reload) {
+	} elseif ($type_info == 'est_actif' && !$reload) {
 		return $plugins_actifs[$plugin] ? 1 : 0;
-	} elseif (isset($plugins_actifs[$plugin][$type_info]) and !$reload) {
+	} elseif (isset($plugins_actifs[$plugin][$type_info]) && !$reload) {
 		return $plugins_actifs[$plugin][$type_info];
 	} else {
 		$get_infos = charger_fonction('get_infos', 'plugins');
@@ -3822,7 +3794,7 @@ function filtre_info_plugin_dist($plugin, $type_info, $reload = false) {
 		} elseif ($type_info == 'est_actif') {
 			return $infos ? 1 : 0;
 		} else {
-			return strval($infos[$type_info]);
+			return (string) $infos[$type_info];
 		}
 	}
 }
@@ -3923,10 +3895,7 @@ function filtre_puce_statut_dist($statut, $objet, $id_objet = 0, $id_parent = 0)
  */
 function encoder_contexte_ajax($c, $form = '', $emboite = null, $ajaxid = '') {
 	$env = null;
-	if (
-		is_string($c)
-		and @unserialize($c) !== false
-	) {
+	if (is_string($c) && @unserialize($c) !== false) {
 		$c = unserialize($c);
 	}
 
@@ -3935,8 +3904,8 @@ function encoder_contexte_ajax($c, $form = '', $emboite = null, $ajaxid = '') {
 	// si on charge la page &debut_x=1 : car alors en cliquant sur l'item 0,
 	// le debut_x=0 n'existe pas, et on resterait sur 1
 	if (is_array($c)) {
-		foreach ($c as $k => $v) {
-			if (strpos($k, 'debut_') === 0) {
+		foreach (array_keys($c) as $k) {
+			if (str_starts_with($k, 'debut_')) {
 				unset($c[$k]);
 			}
 		}
@@ -3954,7 +3923,7 @@ function encoder_contexte_ajax($c, $form = '', $emboite = null, $ajaxid = '') {
 	// par defaut, sauf si cette configuration a été forcée
 	// OU que la longueur de l’argument géneré est plus long
 	// que ce qui est toléré.
-	$cache_contextes_ajax = (defined('_CACHE_CONTEXTES_AJAX') and _CACHE_CONTEXTES_AJAX);
+	$cache_contextes_ajax = (defined('_CACHE_CONTEXTES_AJAX') && _CACHE_CONTEXTES_AJAX);
 	if (!$cache_contextes_ajax) {
 		$env = $c;
 		if (function_exists('gzdeflate') && function_exists('gzinflate')) {
@@ -3976,8 +3945,8 @@ function encoder_contexte_ajax($c, $form = '', $emboite = null, $ajaxid = '') {
 		}
 		// Sinon si Suhosin est actif et a une la valeur maximale des variables en GET...
 		elseif (
-			$max_len = @ini_get('suhosin.get.max_value_length')
-			and $max_len < $len
+			($max_len = @ini_get('suhosin.get.max_value_length'))
+			&& $max_len < $len
 		) {
 			$cache_contextes_ajax = true;
 			spip_log('Contextes AJAX forces en fichiers !'
@@ -4007,7 +3976,7 @@ function encoder_contexte_ajax($c, $form = '', $emboite = null, $ajaxid = '') {
 	$r = self();
 	$r = ' data-origin="' . $r . '"';
 	$class = 'ajaxbloc';
-	if ($ajaxid and is_string($ajaxid)) {
+	if ($ajaxid && is_string($ajaxid)) {
 		// ajaxid est normalement conforme a un nom de classe css
 		// on ne verifie pas la conformite, mais on passe entites_html par dessus par precaution
 		$class .= ' ajax-id-' . entites_html($ajaxid);
@@ -4033,13 +4002,14 @@ function encoder_contexte_ajax($c, $form = '', $emboite = null, $ajaxid = '') {
  *   - false : erreur de décodage
  */
 function decoder_contexte_ajax($c, $form = '') {
-	if (!function_exists('calculer_cle_action')) {
+	$contexte = null;
+ 	if (!function_exists('calculer_cle_action')) {
 		include_spip('inc/securiser_action');
 	}
 	if (
-		((defined('_CACHE_CONTEXTES_AJAX') and _CACHE_CONTEXTES_AJAX) or strlen($c) == 32)
-		and $dir = sous_repertoire(_DIR_CACHE, 'contextes')
-		and lire_fichier("$dir/c$c", $contexte)
+		(defined('_CACHE_CONTEXTES_AJAX') && _CACHE_CONTEXTES_AJAX || strlen($c) == 32)
+		&& ($dir = sous_repertoire(_DIR_CACHE, 'contextes'))
+		&& lire_fichier("$dir/c$c", $contexte)
 	) {
 		$c = $contexte;
 	} else {
@@ -4058,8 +4028,7 @@ function decoder_contexte_ajax($c, $form = '') {
 		$c = substr($c, $p + 1);
 
 		if ($cle == calculer_cle_action($form . $c)) {
-			$env = @unserialize($c);
-			return $env;
+			return @unserialize($c);
 		}
 	}
 
@@ -4167,7 +4136,7 @@ function lien_ou_expose($url, $libelle = null, $on = false, $class = '', $title 
 		$att = '';
 		// si $on passe la balise et optionnelement une ou ++classe
 		// a.active span.selected.active etc....
-		if (is_string($on) and (strncmp($on, 'a', 1) == 0 or strncmp($on, 'span', 4) == 0 or strncmp($on, 'strong', 6) == 0)) {
+		if (is_string($on) && (str_starts_with($on, 'a') || str_starts_with($on, 'span') || str_starts_with($on, 'strong'))) {
 			$on = explode('.', $on);
 			// on verifie que c'est exactement une des 3 balises a, span ou strong
 			if (in_array(reset($on), ['a', 'span', 'strong'])) {
@@ -4211,7 +4180,7 @@ function singulier_ou_pluriel($nb, $chaine_un, $chaine_plusieurs, $var = 'nb', $
 	static $local_singulier_ou_pluriel = [];
 
 	// si nb=0 ou pas de $vars valide on retourne une chaine vide, a traiter par un |sinon
-	if (!is_numeric($nb) or $nb == 0) {
+	if (!is_numeric($nb) || $nb == 0) {
 		return '';
 	}
 	if (!is_array($vars)) {
@@ -4222,8 +4191,8 @@ function singulier_ou_pluriel($nb, $chaine_un, $chaine_plusieurs, $var = 'nb', $
 	if (!isset($local_singulier_ou_pluriel[$langue])) {
 		$local_singulier_ou_pluriel[$langue] = false;
 		if (
-			$f = charger_fonction("singulier_ou_pluriel_{$langue}", 'inc', true)
-			or $f = charger_fonction('singulier_ou_pluriel', 'inc', true)
+			($f = charger_fonction("singulier_ou_pluriel_{$langue}", 'inc', true))
+			|| ($f = charger_fonction('singulier_ou_pluriel', 'inc', true))
 		) {
 			$local_singulier_ou_pluriel[$langue] = $f;
 		}
@@ -4297,24 +4266,22 @@ function prepare_icone_base($type, $lien, $texte, $fond, $fonction = '', $class 
 
 	// Liens : préparer les classes ajax
 	$ajax = '';
-	if ($type === 'lien') {
-		if (strpos($class_lien, 'ajax') !== false) {
-			$ajax = 'ajax';
-			if (strpos($class_lien, 'preload') !== false) {
-				$ajax .= ' preload';
-			}
-			if (strpos($class_lien, 'nocache') !== false) {
-				$ajax .= ' nocache';
-			}
-			$ajax = " class='$ajax'";
+	if ($type === 'lien' && str_contains($class_lien, 'ajax')) {
+		$ajax = 'ajax';
+		if (str_contains($class_lien, 'preload')) {
+			$ajax .= ' preload';
 		}
+		if (str_contains($class_lien, 'nocache')) {
+			$ajax .= ' nocache';
+		}
+		$ajax = " class='$ajax'";
 	}
 
 	// Repérer la taille et l'ajouter dans la classe
 	$size = 24;
 	if (
-		preg_match('/-([0-9]{1,3})[.](gif|png|svg)$/i', $fond, $match)
-		or preg_match('/-([0-9]{1,3})([.](gif|png|svg))?$/i', $fond_origine, $match)
+		preg_match('/-(\d{1,3})[.](gif|png|svg)$/i', $fond, $match)
+		|| preg_match('/-(\d{1,3})([.](gif|png|svg))?$/i', $fond_origine, $match)
 	) {
 		$size = $match[1];
 	}
@@ -4560,7 +4527,7 @@ function bando_images_background() {
 	foreach ($boutons as $page => $detail) {
 		$selecteur = (in_array($page, ['outils_rapides', 'outils_collaboratifs']) ? '' : '.navigation_avec_icones ');
 		foreach ($detail->sousmenu as $souspage => $sousdetail) {
-			if ($sousdetail->icone and strlen(trim($sousdetail->icone))) {
+			if ($sousdetail->icone && strlen(trim($sousdetail->icone))) {
 				$img = http_img_variante_svg_si_possible($sousdetail->icone);
 				$res .= "\n$selecteur.bando2_$souspage {background-image:url($img);}";
 			}
@@ -4594,7 +4561,7 @@ function bouton_action($libelle, $url, $class = '', $confirm = '', $title = '', 
 
 	// Classes : dispatcher `ajax` sur le formulaire
 	$class_form = '';
-	if (strpos($class, 'ajax') !== false) {
+	if (str_contains($class, 'ajax')) {
 		$class_form = 'ajax';
 		$class = str_replace('ajax', '', $class);
 	}
@@ -4602,11 +4569,7 @@ function bouton_action($libelle, $url, $class = '', $confirm = '', $title = '', 
 
 	if ($confirm) {
 		$confirm = 'confirm("' . attribut_html($confirm) . '")';
-		if ($callback) {
-			$callback = "$confirm?($callback):false";
-		} else {
-			$callback = $confirm;
-		}
+		$callback = $callback ? "$confirm?($callback):false" : $confirm;
 	}
 	$onclick = $callback ? " onclick='return " . addcslashes($callback, "'") . "'" : '';
 	$title = $title ? " title='$title'" : '';
@@ -4639,13 +4602,13 @@ function generer_objet_info($id_objet, string $type_objet, string $info, string 
 	static $objets;
 
 	// On verifie qu'on a tout ce qu'il faut
-	$id_objet = intval($id_objet);
-	if (!($id_objet and $type_objet and $info)) {
+	$id_objet = (int) $id_objet;
+	if (!($id_objet && $type_objet && $info)) {
 		return '';
 	}
 
 	// si on a deja note que l'objet n'existe pas, ne pas aller plus loin
-	if (isset($objets[$type_objet]) and $objets[$type_objet] === false) {
+	if (isset($objets[$type_objet]) && $objets[$type_objet] === false) {
 		return '';
 	}
 
@@ -4661,8 +4624,7 @@ function generer_objet_info($id_objet, string $type_objet, string $info, string 
 	// On ne fait la requete que si on a pas deja l'objet ou si on demande le titre mais qu'on ne l'a pas encore
 	if (
 		!isset($objets[$type_objet][$id_objet])
-		or
-		($demande_titre and !isset($objets[$type_objet][$id_objet]['titre']))
+		|| $demande_titre && !isset($objets[$type_objet][$id_objet]['titre'])
 	) {
 		if (!$trouver_table) {
 			$trouver_table = charger_fonction('trouver_table', 'base');
@@ -4676,14 +4638,14 @@ function generer_objet_info($id_objet, string $type_objet, string $info, string 
 		$champ_titre = '';
 		if ($demande_titre) {
 			// si pas de titre declare mais champ titre, il sera peuple par le select *
-			$champ_titre = (!empty($desc['titre'])) ? ', ' . $desc['titre'] : '';
+			$champ_titre = (empty($desc['titre'])) ? '' : ', ' . $desc['titre'];
 		}
 		include_spip('base/abstract_sql');
 		include_spip('base/connect_sql');
 		$objets[$type_objet][$id_objet] = sql_fetsel(
 			'*' . $champ_titre,
 			$desc['table_sql'],
-			id_table_objet($type_objet) . ' = ' . intval($id_objet)
+			id_table_objet($type_objet) . ' = ' . (int) $id_objet
 		);
 
 		// Toujours noter la longueur d'introduction, même si pas demandé cette fois-ci
@@ -4699,17 +4661,15 @@ function generer_objet_info($id_objet, string $type_objet, string $info, string 
 
 	// Si la fonction generer_TYPE_TRUC existe, on l'utilise pour formater $info_generee
 	if (
-		$generer = charger_fonction("generer_{$type_objet}_{$info}", '', true)
-		// @deprecated 4.1 generer_TRUC_TYPE
-		or $generer = charger_fonction("generer_{$info}_{$type_objet}", '', true)
+		($generer = charger_fonction("generer_{$type_objet}_{$info}", '', true))
+		|| ($generer = charger_fonction("generer_{$info}_{$type_objet}", '', true))
 	) {
 		$info_generee = $generer($id_objet, $objets[$type_objet][$id_objet], ...$params);
 	}
 	// Si la fonction generer_objet_TRUC existe, on l'utilise pour formater $info_generee
 	elseif (
-		$generer = charger_fonction("generer_objet_{$info}", '', true)
-		// @deprecated 4.1 generer_TRUC_entite
-		or $generer = charger_fonction("generer_{$info}_entite", '', true)
+		($generer = charger_fonction("generer_objet_{$info}", '', true))
+		|| ($generer = charger_fonction("generer_{$info}_entite", '', true))
 	) {
 		$info_generee = $generer($id_objet, $type_objet, $objets[$type_objet][$id_objet], ...$params);
 	} // Sinon on prend directement le champ SQL tel quel
@@ -4737,7 +4697,7 @@ function generer_objet_info($id_objet, string $type_objet, string $info, string 
  * @see generer_objet_info
  */
 function generer_info_entite($id_objet, $type_objet, $info, $etoile = '', $params = []) {
-	return generer_objet_info(intval($id_objet), $type_objet, $info, $etoile, $params);
+	return generer_objet_info((int) $id_objet, $type_objet, $info, $etoile, $params);
 }
 
 /**
@@ -4781,25 +4741,23 @@ function generer_objet_introduction(int $id_objet, string $type_objet, array $li
 	}
 
 	// Longueur en paramètre, sinon celle renseignée dans la description de l'objet, sinon valeur en dur
-	if (!intval($longueur_ou_suite)) {
-		$longueur = intval($introduction_longueur ?: 600);
+	if (!(int) $longueur_ou_suite) {
+		$longueur = (int) ($introduction_longueur ?: 600);
 	} else {
-		$longueur = intval($longueur_ou_suite);
+		$longueur = (int) $longueur_ou_suite;
 	}
 
 	// On peut optionnellement passer la suite en 1er paramètre de la balise
 	// Ex : #INTRODUCTION{...}
 	if (
-		is_null($suite)
-		and !intval($longueur_ou_suite)
+		is_null($suite) && !(int) $longueur_ou_suite
 	) {
 		$suite = $longueur_ou_suite;
 	}
 
 	$f = chercher_filtre('introduction');
-	$introduction = $f($descriptif, $texte, $longueur, $connect, $suite);
 
-	return $introduction;
+	return $f($descriptif, $texte, $longueur, $connect, $suite);
 }
 
 /**
@@ -4807,7 +4765,7 @@ function generer_objet_introduction(int $id_objet, string $type_objet, array $li
  * @see generer_objet_introduction
  */
 function generer_introduction_entite($id_objet, $type_objet, $ligne_sql, $introduction_longueur = null, $longueur_ou_suite = null, $suite = null, string $connect = '') {
-	return generer_objet_introduction(intval($id_objet), $type_objet, $ligne_sql, $introduction_longueur, $longueur_ou_suite, $suite, $connect);
+	return generer_objet_introduction((int) $id_objet, $type_objet, $ligne_sql, $introduction_longueur, $longueur_ou_suite, $suite, $connect);
 }
 
 /**
@@ -4817,7 +4775,6 @@ function generer_introduction_entite($id_objet, $type_objet, $ligne_sql, $introd
  * @param string $champ
  * @param string $table_objet
  * @param array $env
- * @param string $connect
  * @return string
  */
 function appliquer_traitement_champ($texte, $champ, $table_objet = '', $env = [], string $connect = '') {
@@ -4831,19 +4788,19 @@ function appliquer_traitement_champ($texte, $champ, $table_objet = '', $env = []
 
 	$champ = strtoupper($champ);
 	$traitements = $GLOBALS['table_des_traitements'][$champ] ?? false;
-	if (!$traitements or !is_array($traitements)) {
+	if (!$traitements || !is_array($traitements)) {
 		return $texte;
 	}
 
 	$traitement = '';
-	if ($table_objet and (!isset($traitements[0]) or count($traitements) > 1)) {
+	if ($table_objet && (!isset($traitements[0]) || count($traitements) > 1)) {
 		// necessaire pour prendre en charge les vieux appels avec un table_objet_sql en 3e arg
 		$table_objet = table_objet($table_objet);
 		if (isset($traitements[$table_objet])) {
 			$traitement = $traitements[$table_objet];
 		}
 	}
-	if (!$traitement and isset($traitements[0])) {
+	if (!$traitement && isset($traitements[0])) {
 		$traitement = $traitements[0];
 	}
 	// (sinon prendre le premier de la liste par defaut ?)
@@ -4870,9 +4827,6 @@ function appliquer_traitement_champ($texte, $champ, $table_objet = '', $env = []
 /**
  * Generer un lien (titre clicable vers url) vers un objet
  *
- * @param int $id_objet
- * @param string $objet
- * @param int $longueur
  * @param null|string $connect
  * @return string
  */
@@ -4883,7 +4837,7 @@ function generer_objet_lien(int $id_objet, string $objet, int $longueur = 80, st
 	// le raccourcis n'est plus valide
 	$titre = typo($titre['titre'] ?? '');
 	// on essaye avec generer_info_entite ?
-	if (!strlen($titre) and !$connect) {
+	if (!strlen($titre) && !$connect) {
 		$titre = generer_objet_info($id_objet, $objet, 'titre');
 	}
 	if (!strlen($titre)) {
@@ -4899,7 +4853,7 @@ function generer_objet_lien(int $id_objet, string $objet, int $longueur = 80, st
  * @see generer_objet_lien
  */
 function generer_lien_entite($id_objet, $objet, $longueur = 80, $connect = null) {
-	return generer_objet_lien(intval($id_objet), $objet, $longueur, $connect ?? '');
+	return generer_objet_lien((int) $id_objet, $objet, $longueur, $connect ?? '');
 }
 
 /**
@@ -4920,7 +4874,7 @@ function wrap($texte, $wrap) {
 		$texte = $wrap . $texte;
 		$regs = array_reverse($regs[1]);
 		$wrap = '</' . implode('></', $regs) . '>';
-		$texte = $texte . $wrap;
+		$texte .= $wrap;
 	}
 
 	return $texte;
@@ -4944,9 +4898,7 @@ function wrap($texte, $wrap) {
  */
 function filtre_print_dist($u, $join = '<br />', $indent = 0) {
 	if (is_string($u)) {
-		$u = typo($u);
-
-		return $u;
+		return typo($u);
 	}
 
 	// caster $u en array si besoin
@@ -4964,10 +4916,10 @@ function filtre_print_dist($u, $join = '<br />', $indent = 0) {
 		$object_values = array_map('is_object', $u);
 		if (
 			array_sum($numeric_keys) == count($numeric_keys)
-			and !array_sum($array_values)
-			and !array_sum($object_values)
+			&& !array_sum($array_values)
+			&& !array_sum($object_values)
 		) {
-			return join(', ', array_map('filtre_print_dist', $u));
+			return implode(', ', array_map('filtre_print_dist', $u));
 		}
 
 		// sinon on passe a la ligne et on indente
@@ -5072,11 +5024,11 @@ function objet_T($objet, $chaine, $args = [], $options = []) {
  */
 function insert_head_css_conditionnel($flux) {
 	if (
-		strpos($flux, '<!-- insert_head_css -->') === false
-		and $p = strpos($flux, '<!-- insert_head -->')
+		!str_contains($flux, '<!-- insert_head_css -->')
+		&& ($p = strpos($flux, '<!-- insert_head -->'))
 	) {
 		// plutot avant le premier js externe (jquery) pour etre non bloquant
-		if ($p1 = stripos($flux, '<script src=') and $p1 < $p) {
+		if (($p1 = stripos($flux, '<script src=')) && $p1 < $p) {
 			$p = $p1;
 		}
 		$flux = substr_replace($flux, pipeline('insert_head_css', '<!-- insert_head_css -->'), $p, 0);
@@ -5126,7 +5078,7 @@ function produire_fond_statique($fond, $contexte = [], $options = [], string $co
 	// par defaut on hash selon les contextes qui sont a priori moins variables
 	// mais on peut hasher selon le contenu a la demande, si plusieurs contextes produisent un meme contenu
 	// reduit la variabilite du nom et donc le nombre de css concatenees possibles in fine
-	if (isset($options['hash_on_content']) and $options['hash_on_content']) {
+	if (isset($options['hash_on_content']) && $options['hash_on_content']) {
 		$hash = md5($contexte_implicite['host'] . '::' . $cache);
 	}
 	else {
@@ -5142,9 +5094,9 @@ function produire_fond_statique($fond, $contexte = [], $options = [], string $co
 	// et recopie sur le fichier cible uniquement si il change
 	if (
 		!file_exists($filename)
-		or !file_exists($filename . '.last')
-		or (isset($cache['lastmodified']) and $cache['lastmodified'] and filemtime($filename . '.last') < $cache['lastmodified'])
-		or (defined('_VAR_MODE') and _VAR_MODE == 'recalcul')
+		|| !file_exists($filename . '.last')
+		|| isset($cache['lastmodified']) && $cache['lastmodified'] && filemtime($filename . '.last') < $cache['lastmodified']
+		|| defined('_VAR_MODE') && _VAR_MODE == 'recalcul'
 	) {
 		$contenu = $cache['texte'];
 		// passer les urls en absolu si c'est une css
@@ -5186,11 +5138,7 @@ function produire_fond_statique($fond, $contexte = [], $options = [], string $co
  *    $fichier auquel on a ajouté le timestamp
  */
 function timestamp($fichier) {
-	if (
-		!$fichier
-		or !file_exists($fichier)
-		or !$m = filemtime($fichier)
-	) {
+	if (!$fichier || !file_exists($fichier) || !$m = filemtime($fichier)) {
 		return $fichier;
 	}
 
@@ -5204,7 +5152,7 @@ function timestamp($fichier) {
  * @return string
  */
 function supprimer_timestamp($url) {
-	if (strpos($url, '?') === false) {
+	if (!str_contains($url, '?')) {
 		return $url;
 	}
 
@@ -5227,7 +5175,7 @@ function filtre_nettoyer_titre_email_dist($titre) {
 
 	$titre = nettoyer_titre_email($titre);
 	// on est dans un squelette : securiser le retour
-	if (strpos($titre, '<') !== false) {
+	if (str_contains($titre, '<')) {
 		$titre = interdire_scripts($titre);
 	}
 
@@ -5320,18 +5268,18 @@ function sinon_interdire_acces($ok = false, $url = '', $statut = 0, $message = n
 	}
 
 	// ecriture simplifiee avec message en 3eme argument (= statut 403)
-	if (!is_numeric($statut) and is_null($message)) {
+	if (!is_numeric($statut) && is_null($message)) {
 		$message = $statut;
 		$statut = 0;
 	}
 	if (!$message) {
 		$message = '';
 	}
-	$statut = intval($statut);
+	$statut = (int) $statut;
 
 	// Si on est dans l'espace privé, on génère du 403 Forbidden par defaut ou du 404
 	if (test_espace_prive()) {
-		if (!$statut or !in_array($statut, [404, 403])) {
+		if (!$statut || !in_array($statut, [404, 403])) {
 			$statut = 403;
 		}
 		http_response_code(403);
@@ -5373,15 +5321,13 @@ function filtre_compacte_dist($source, $format = null) {
 /**
  * Afficher partiellement un mot de passe que l'on ne veut pas rendre lisible par un champ hidden
  * @param string $passe
- * @param bool $afficher_partiellement
- * @param int|null $portion_pourcent
  * @return string
  */
 function spip_affiche_mot_de_passe_masque(#[\SensitiveParameter] ?string $passe, bool $afficher_partiellement = false, ?int $portion_pourcent = null): string {
 	$passe ??= '';
 	$l = strlen($passe);
 
-	if ($l <= 8 or !$afficher_partiellement) {
+	if ($l <= 8 || !$afficher_partiellement) {
 		if (!$l) {
 			return ''; // montrer qu'il y a pas de mot de passe si il y en a pas
 		}
@@ -5397,10 +5343,10 @@ function spip_affiche_mot_de_passe_masque(#[\SensitiveParameter] ?string $passe,
 	if ($portion_pourcent >= 100) {
 		return $passe;
 	}
-	$e = intval(ceil($l * $portion_pourcent / 100 / 2));
+	$e = (int) ceil($l * $portion_pourcent / 100 / 2);
 	$e = max($e, 0);
 	$mid = str_pad('', $l - 2 * $e, '*');
-	if ($e > 0 and strlen($mid) > 8) {
+	if ($e > 0 && strlen($mid) > 8) {
 		$mid = '***...***';
 	}
 	return substr($passe, 0, $e) . $mid . ($e > 0 ? substr($passe, -$e) : '');
@@ -5434,10 +5380,10 @@ function identifiant_slug($texte, $type = '', $options = []) {
 	}
 
 	// pas de balise html
-	if (strpos($texte, '<') !== false) {
+	if (str_contains($texte, '<')) {
 		$texte = strip_tags($texte);
 	}
-	if (strpos($texte, '&') !== false) {
+	if (str_contains($texte, '&')) {
 		$texte = unicode2charset($texte);
 	}
 	// On enlève les espaces indésirables
@@ -5450,7 +5396,7 @@ function identifiant_slug($texte, $type = '', $options = []) {
 	$texte = preg_replace(',[\W_]+,ms', $separateur, $texte);
 
 	// nettoyer les doubles occurences du separateur si besoin
-	while (strpos($texte, (string) "$separateur$separateur") !== false) {
+	while (str_contains($texte, (string) "$separateur$separateur")) {
 		$texte = str_replace("$separateur$separateur", $separateur, $texte);
 	}
 
@@ -5473,7 +5419,7 @@ function identifiant_slug($texte, $type = '', $options = []) {
 		$texte = substr($texte, 0, $longueur_maxi);
 	}
 
-	if (strlen($texte) < $longueur_mini and $longueur_mini < $longueur_maxi) {
+	if (strlen($texte) < $longueur_mini && $longueur_mini < $longueur_maxi) {
 		if (preg_match(',^\d,', $texte)) {
 			$texte = ($type ? substr($type, 0, 1) : 's') . $texte;
 		}
@@ -5538,7 +5484,7 @@ function helper_filtre_objet_lister_enfants_ou_parents($objet, $id_objet, $fonct
 	}
 
 	// compatibilite signature inversee
-	if (is_numeric($objet) and !is_numeric($id_objet)) {
+	if (is_numeric($objet) && !is_numeric($id_objet)) {
 		[$objet, $id_objet] = [$id_objet, $objet];
 	}
 

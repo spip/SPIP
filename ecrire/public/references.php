@@ -154,7 +154,7 @@ function index_pile(
 		// $c = le nom du champ demandé
 		[$t, $c] = index_tables_en_pile($idb, $nom_champ, $boucles, $joker);
 		if ($t) {
-			if ($select and !in_array($t, $boucles[$idb]->select)) {
+			if ($select && !in_array($t, $boucles[$idb]->select)) {
 				$boucles[$idb]->select[] = $t;
 			}
 			// renseigner la boucle source de ce champ pour les traitements
@@ -306,15 +306,16 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles, &$joker) {
 
 	// regarder si le champ est deja dans une jointure existante
 	// sinon, si il y a des joitures explicites, la construire
-	if (!$t = trouver_champ_exterieur($nom_champ, $boucles[$idb]->from, $boucles[$idb])) {
-		if ($boucles[$idb]->jointures_explicites) {
-			// [todo] Ne pas lancer que lorsque il y a des jointures explicites !!!!
-			// fonctionnel, il suffit d'utiliser $boucles[$idb]->jointures au lieu de jointures_explicites
-			// mais est-ce ce qu'on veut ?
-			$jointures = preg_split('/\s+/', $boucles[$idb]->jointures_explicites);
-			if ($cle = trouver_jointure_champ($nom_champ, $boucles[$idb], $jointures)) {
-				$t = trouver_champ_exterieur($nom_champ, $boucles[$idb]->from, $boucles[$idb]);
-			}
+	if (
+		!($t = trouver_champ_exterieur($nom_champ, $boucles[$idb]->from, $boucles[$idb]))
+		&& $boucles[$idb]->jointures_explicites
+	) {
+		// [todo] Ne pas lancer que lorsque il y a des jointures explicites !!!!
+		// fonctionnel, il suffit d'utiliser $boucles[$idb]->jointures au lieu de jointures_explicites
+		// mais est-ce ce qu'on veut ?
+		$jointures = preg_split('/\s+/', $boucles[$idb]->jointures_explicites);
+		if ($cle = trouver_jointure_champ($nom_champ, $boucles[$idb], $jointures)) {
+			$t = trouver_champ_exterieur($nom_champ, $boucles[$idb]->from, $boucles[$idb]);
 		}
 	}
 
@@ -383,7 +384,7 @@ function index_exception(&$boucle, $desc, $nom_champ, $excep) {
 					$l = (preg_split('/\s*,\s*/', $k));
 					$k = $desc['key']['PRIMARY KEY'];
 					if (!in_array($k, $l)) {
-						spip_log("jointure impossible $e " . join(',', $l));
+						spip_log("jointure impossible $e " . implode(',', $l));
 
 						return ['', ''];
 					}
@@ -490,7 +491,7 @@ function calculer_balise(string $nom, Champ $p): Champ {
 	if ($f = charger_fonction($nom, 'balise', true)) {
 		$p->balise_calculee = true;
 		$res = $f($p);
-		if ($res !== null and is_object($res)) {
+		if ($res !== null && is_object($res)) {
 			return $res;
 		}
 	}
@@ -498,7 +499,7 @@ function calculer_balise(string $nom, Champ $p): Champ {
 	// Certaines des balises comportant un _ sont generiques
 	if ($balise_generique = chercher_balise_generique($nom)) {
 		$res = $balise_generique['fonction_generique']($p);
-		if ($res !== null and is_object($res)) {
+		if ($res !== null && is_object($res)) {
 			return $res;
 		}
 	}
@@ -538,13 +539,13 @@ function calculer_balise_DEFAUT_dist($nom, $p) {
 
 	// compatibilite: depuis qu'on accepte #BALISE{ses_args} sans [(...)] autour
 	// il faut recracher {...} quand ce n'est finalement pas des args
-	if ($p->fonctions and (!$p->fonctions[0][0]) and $p->fonctions[0][1]) {
+	if ($p->fonctions && !$p->fonctions[0][0] && $p->fonctions[0][1]) {
 		$code = addslashes($p->fonctions[0][1]);
 		$p->code .= " . '$code'";
 	}
 
 	// ne pas passer le filtre securite sur les id_xxx
-	if (strpos($nom, 'ID_') === 0) {
+	if (str_starts_with($nom, 'ID_')) {
 		$p->interdire_scripts = false;
 	}
 
@@ -554,11 +555,7 @@ function calculer_balise_DEFAUT_dist($nom, $p) {
 	// ET s'il n'y a ni filtre ni etoile
 	// ALORS retourner la couleur.
 	// Ca permet si l'on veut vraiment de recuperer [(#ACCEDE*)]
-	if (
-		preg_match('/^[A-F]{1,6}$/i', $nom)
-		and !$p->etoile
-		and !$p->fonctions
-	) {
+	if (preg_match('/^[A-F]{1,6}$/i', $nom) && !$p->etoile && !$p->fonctions) {
 		$p->code = "'#$nom'";
 		$p->interdire_scripts = false;
 	}
@@ -618,11 +615,11 @@ function calculer_balise_dynamique($p, $nom, $l, $supp = []) {
 	}
 	// compatibilite: depuis qu'on accepte #BALISE{ses_args} sans [(...)] autour
 	// il faut recracher {...} quand ce n'est finalement pas des args
-	if ($p->fonctions and (!$p->fonctions[0][0]) and $p->fonctions[0][1]) {
+	if ($p->fonctions && !$p->fonctions[0][0] && $p->fonctions[0][1]) {
 		$p->fonctions = [];
 	}
 
-	if ($p->param and ($c = $p->param[0])) {
+	if ($p->param && ($c = $p->param[0])) {
 		// liste d'arguments commence toujours par la chaine vide
 		array_shift($c);
 		// construire la liste d'arguments comme pour un filtre
@@ -634,9 +631,7 @@ function calculer_balise_dynamique($p, $nom, $l, $supp = []) {
 
 	$dans_un_modele = false;
 	if (
-		!empty($p->descr['sourcefile'])
-		and $f = $p->descr['sourcefile']
-		and basename(dirname($f)) === 'modeles'
+		!empty($p->descr['sourcefile']) && ($f = $p->descr['sourcefile']) && basename(dirname($f)) === 'modeles'
 	) {
 		$dans_un_modele = true;
 	}
@@ -650,10 +645,10 @@ function calculer_balise_dynamique($p, $nom, $l, $supp = []) {
 	$p->code = sprintf(
 		$dans_un_modele ? CODE_EXECUTER_BALISE_MODELE : CODE_EXECUTER_BALISE,
 		$nom,
-		join(',', $collecte),
+		implode(',', $collecte),
 		($collecte ? $param : substr($param, 1)), # virer la virgule
 		memoriser_contexte_compil($p),
-		(!$supp ? '' : (', ' . join(',', $supp)))
+		($supp ? ', ' . implode(',', $supp) : (''))
 	);
 
 	$p->interdire_scripts = false;
@@ -715,14 +710,11 @@ function collecter_balise_dynamique(array $l, Champ &$p, string $nom): array {
 function trouver_nom_serveur_distant($p) {
 	$nom = $p->id_boucle;
 	if (
-		$nom
-		and isset($p->boucles[$nom])
+		$nom && isset($p->boucles[$nom])
 	) {
 		$s = $p->boucles[$nom]->sql_serveur;
 		if (
-			strlen($s)
-			and strlen($serveur = strtolower($s))
-			and !in_array($serveur, $GLOBALS['exception_des_connect'])
+			strlen($s) && strlen($serveur = strtolower($s)) && !in_array($serveur, $GLOBALS['exception_des_connect'])
 		) {
 			return $serveur;
 		}
@@ -754,7 +746,7 @@ function trouver_nom_serveur_distant($p) {
 function balise_distante_interdite($p) {
 	$nom = $p->id_boucle;
 
-	if ($nom and trouver_nom_serveur_distant($p)) {
+	if ($nom && trouver_nom_serveur_distant($p)) {
 		spip_log($nom . ':' . $p->nom_champ . ' ' . _T('zbug_distant_interdit'));
 
 		return false;
@@ -776,11 +768,7 @@ function champs_traitements($p) {
 		// quand on utilise un traitement catch-all *
 		// celui-ci ne s'applique pas sur les balises calculees qui peuvent gerer
 		// leur propre securite
-		if (!$p->balise_calculee) {
-			$ps = $GLOBALS['table_des_traitements']['*'];
-		} else {
-			$ps = false;
-		}
+		$ps = $p->balise_calculee ? false : $GLOBALS['table_des_traitements']['*'];
 	}
 
 	if (is_array($ps)) {
@@ -796,7 +784,7 @@ function champs_traitements($p) {
 		$table_sql = $p->boucles[$idb]->show['table_sql'] ?? false;
 
 		// bien prendre en compte les alias de boucles (hierarchie => rubrique, syndication => syncdic, etc.)
-		if ($type_requete and isset($GLOBALS['table_des_tables'][$type_requete])) {
+		if ($type_requete && isset($GLOBALS['table_des_tables'][$type_requete])) {
 			$type_alias = $type_requete;
 			$type_requete = $GLOBALS['table_des_tables'][$type_requete];
 		} else {
@@ -804,13 +792,13 @@ function champs_traitements($p) {
 		}
 
 		// le traitement peut n'etre defini que pour une table en particulier "spip_articles"
-		if ($table_sql and isset($ps[$table_sql])) {
+		if ($table_sql && isset($ps[$table_sql])) {
 			$ps = $ps[$table_sql];
 		} // ou pour une boucle en particulier "DATA","articles"
-		elseif ($type_requete and isset($ps[$type_requete])) {
+		elseif ($type_requete && isset($ps[$type_requete])) {
 			$ps = $ps[$type_requete];
 		} // ou pour une boucle utilisant un alias ("hierarchie")
-		elseif ($type_alias and isset($ps[$type_alias])) {
+		elseif ($type_alias && isset($ps[$type_alias])) {
 			$ps = $ps[$type_alias];
 		} // ou pour indifféremment quelle que soit la boucle
 		elseif (isset($ps[0])) {
@@ -832,13 +820,8 @@ function champs_traitements($p) {
 
 	if (
 		isset($p->descr['documents'])
-		and
-		$p->descr['documents']
-		and (
-			(strpos($ps, 'propre') !== false)
-			or
-			(strpos($ps, 'typo') !== false)
-		)
+		&& $p->descr['documents']
+		&& (str_contains($ps, 'propre') || str_contains($ps, 'typo'))
 	) {
 		$ps = 'traiter_doublons_documents($doublons, ' . $ps . ')';
 	}
@@ -860,11 +843,7 @@ function champs_traitements($p) {
 function applique_filtres($p) {
 
 	// Traitements standards (cf. supra)
-	if ($p->etoile == '') {
-		$code = champs_traitements($p);
-	} else {
-		$code = $p->code;
-	}
+	$code = $p->etoile == '' ? champs_traitements($p) : $p->code;
 
 	// Appliquer les filtres perso
 	if ($p->param) {
@@ -877,9 +856,7 @@ function applique_filtres($p) {
 		$code = "invalideur_session(\$Cache, $code)";
 	}
 
-	$code = sandbox_composer_interdire_scripts($code, $p);
-
-	return $code;
+	return sandbox_composer_interdire_scripts($code, $p);
 }
 
 // Cf. function pipeline dans ecrire/inc_utils.php
@@ -891,8 +868,8 @@ function compose_filtres(&$p, $code) {
 		if (!$fonc) {
 			continue;
 		} // normalement qu'au premier tour.
-		$is_filtre_image = ((substr($fonc, 0, 6) == 'image_') and $fonc != 'image_graver');
-		if ($image_miette and !$is_filtre_image) {
+		$is_filtre_image = (str_starts_with($fonc, 'image_') && $fonc != 'image_graver');
+		if ($image_miette && !$is_filtre_image) {
 			// il faut graver maintenant car apres le filtre en cours
 			// on est pas sur d'avoir encore le nom du fichier dans le pipe
 			$code = "filtrer('image_graver', $code)";
@@ -933,26 +910,18 @@ function compose_filtres(&$p, $code) {
 
 // Filtres et,ou,oui,non,sinon,xou,xor,and,or,not,yes
 // et comparateurs
-function filtre_logique($fonc, $code, $arg) {
-
-	switch (true) {
-		case in_array($fonc, $GLOBALS['table_criteres_infixes']):
-			return "($code $fonc $arg)";
-		case ($fonc == 'and') or ($fonc == 'et'):
-			return "((($code) AND ($arg)) ?' ' :'')";
-		case ($fonc == 'or') or ($fonc == 'ou'):
-			return "((($code) OR ($arg)) ?' ' :'')";
-		case ($fonc == 'xor') or ($fonc == 'xou'):
-			return "((($code) XOR ($arg)) ?' ' :'')";
-		case ($fonc == 'sinon'):
-			return "(((\$a = $code) OR (is_string(\$a) AND strlen(\$a))) ? \$a : $arg)";
-		case ($fonc == 'not') or ($fonc == 'non'):
-			return "(($code) ?'' :' ')";
-		case ($fonc == 'yes') or ($fonc == 'oui'):
-			return "(($code) ?' ' :'')";
-	}
-
-	return '';
+function filtre_logique($fonc, $code, $arg)
+{
+	return match (true) {
+		in_array($fonc, $GLOBALS['table_criteres_infixes']) => "($code $fonc $arg)",
+		$fonc == 'and' || $fonc == 'et' => "((($code) AND ($arg)) ?' ' :'')",
+		$fonc == 'or' || $fonc == 'ou' => "((($code) OR ($arg)) ?' ' :'')",
+		$fonc == 'xor' || $fonc == 'xou' => "((($code) XOR ($arg)) ?' ' :'')",
+		$fonc == 'sinon' => "(((\$a = $code) OR (is_string(\$a) AND strlen(\$a))) ? \$a : $arg)",
+		$fonc == 'not' || $fonc == 'non' => "(($code) ?'' :' ')",
+		$fonc == 'yes' || $fonc == 'oui' => "(($code) ?' ' :'')",
+		default => '',
+	};
 }
 
 function compose_filtres_args($p, $args, $sep) {
