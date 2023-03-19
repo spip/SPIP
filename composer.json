@@ -7,6 +7,9 @@
         "ext-xml": "*",
         "ext-zip": "*",
         "algo26-matthias/idna-convert": "^3.0",
+        "spip/archiviste": "^2.3@dev",
+        "spip/composer-installer": "^0.5.0",
+        "spip/security": "^1.5@dev",
         "symfony/polyfill-mbstring": "^1.27",
         "symfony/polyfill-php80": "^1.27",
         "symfony/polyfill-php81": "^1.27",
@@ -24,6 +27,12 @@
         "ext-mysqli": "*",
         "ext-pdo": "*",
         "ext-pdo_sqlite": "*"
+    },
+    "repositories": {
+        "spip": {
+            "type": "composer",
+            "url": "https://get.spip.net/composer"
+        }
     },
     "autoload": {
         "psr-4": {
@@ -53,7 +62,8 @@
     },
     "config": {
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "spip/composer-installer": true
         },
         "platform": {
             "php": "7.4.33"
@@ -61,7 +71,20 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "4.2.x-dev"
+            "dev-master": "4.3.x-dev"
+        },
+        "spip": {
+            "extensions": [
+                "spip/archiviste"
+            ]
         }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "Spip\\Composer\\Security::postInstall"
+        ],
+        "post-update-cmd": [
+            "Spip\\Composer\\Security::postUpdate"
+        ]
     }
 }
