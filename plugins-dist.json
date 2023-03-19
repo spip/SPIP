@@ -4,11 +4,6 @@
         "source": "https://git.spip.net/spip/aide.git",
         "branch": "master"
     },
-    "archiviste": {
-        "path": "plugins-dist/archiviste",
-        "source": "https://git.spip.net/spip/archiviste.git",
-        "branch": "master"
-    },
     "bigup": {
         "path": "plugins-dist/bigup",
         "source": "https://git.spip.net/spip/bigup.git",
