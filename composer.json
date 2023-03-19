@@ -24,6 +24,12 @@
         "ext-pdo": "*",
         "ext-pdo_sqlite": "*"
     },
+    "repositories": {
+        "spip": {
+            "type": "composer",
+            "url": "https://get.spip.net/composer"
+        }
+    },
     "autoload": {
         "psr-4": {
             "Spip\\": "ecrire/src/"
@@ -52,7 +58,8 @@
     },
     "config": {
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "spip/composer-installer": true
         },
         "platform": {
             "php": "8.0.28"
@@ -60,7 +67,20 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "4.2.x-dev"
+            "dev-master": "4.3.x-dev"
+        },
+        "spip": {
+            "extensions": [
+                "spip/archiviste"
+            ]
         }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "Spip\\Composer\\Security::postInstall"
+        ],
+        "post-update-cmd": [
+            "Spip\\Composer\\Security::postUpdate"
+        ]
     }
 }
