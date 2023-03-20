@@ -6,7 +6,7 @@
         "ext-sodium": "*",
         "ext-xml": "*",
         "ext-zip": "*",
-        "algo26-matthias/idna-convert": "^3.1",
+        "algo26-matthias/idna-convert": "^4.0",
         "spip/archiviste": "^2.3@dev",
         "spip/composer-installer": "^0.5.0",
         "spip/security": "^1.5",
@@ -65,12 +65,12 @@
             "spip/composer-installer": true
         },
         "platform": {
-            "php": "8.0.28"
+            "php": "8.1.17"
         }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "4.3.x-dev"
+            "dev-master": "5.0.x-dev"
         },
         "spip": {
             "extensions": [
