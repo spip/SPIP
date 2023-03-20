@@ -48,14 +48,21 @@
 				[(#GET{process}|strtoupper)]
 				</button>]
 				</div>
-				<p class="explication"><:info_image_process2:></p>
 			</div>
 			[(#ENV{image_process}|=={gd2}|oui)
 			#SET{name,max_taille_vignettes}#SET{erreurs,#ENV*{erreurs/#GET{name}}}
-			<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<div class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}"><:info_taille_maximale_images:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
-				]<iframe style='border:0;height:3em;overflow:hidden;' src='[(#SELF|parametre_url{action,tester_taille}|parametre_url{arg,6000}||parametre_url{time,#EVAL{time()}})]'></iframe>
+				]
+				[(#ALERTE_MESSAGE{[(#CHEMIN_IMAGE{loader.svg}|image_reduire{16})],'',info})]
+				<script>
+					fetch('[(#VAL{tester_taille}|generer_url_action{arg=6000&time=#EVAL{time()},1})]')
+					.then(response => response.text())
+					.then(function(value) {
+						document.querySelector('.editer_max_taille_vignettes .msg-alert__text').innerHTML = value;
+					})
+				</script>
 			</div>
 			][(#ENV{formats_graphiques}|oui)
 			<div class="editer fieldset">
