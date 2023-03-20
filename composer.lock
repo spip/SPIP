@@ -167,14 +167,14 @@
             "version": "0.5.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/spipremix/composer-installer.git",
+                "url": "https://git.spip.net/spip/composer-installer.git",
                 "reference": "779ab95dbed3a25168165cd12756a069e55813fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spipremix/composer-installer/zipball/779ab95dbed3a25168165cd12756a069e55813fa",
+                "url": "https://get.spip.net/composer/dist/spip/composer-installer/spip-composer-installer-0.5.0-ce8663.zip",
                 "reference": "779ab95dbed3a25168165cd12756a069e55813fa",
-                "shasum": ""
+                "shasum": "eee111b0fc245e16130f8b154c9553996034eea0"
             },
             "require": {
                 "composer-plugin-api": "^2.3"
@@ -195,7 +195,11 @@
                     "Spip\\Composer\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Spip\\Test\\Composer\\": "tests/"
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -206,10 +210,6 @@
                 }
             ],
             "description": "SPIP Composer Installer Plugin",
-            "support": {
-                "issues": "https://github.com/spipremix/composer-installer/issues",
-                "source": "https://github.com/spipremix/composer-installer/tree/0.5.0"
-            },
             "time": "2023-03-19T05:15:05+00:00"
         },
         {
