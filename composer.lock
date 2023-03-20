@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6ad8da883733475f729c3c34fb4a6826",
+    "content-hash": "5e8c09cd2efb60b81ff54a66be15bb44",
     "packages": [
         {
             "name": "algo26-matthias/idna-convert",
@@ -105,13 +105,13 @@
             "source": {
                 "type": "git",
                 "url": "https://git.spip.net/spip/archiviste.git",
-                "reference": "1bc21d88007b9111912c3554de6dcb94d1f45704"
+                "reference": "c01dcc1c0512ff09309147322595bab0bbb8493b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://get.spip.net/composer/dist/spip/archiviste/spip-archiviste-dev-master-32fab1.zip",
-                "reference": "1bc21d88007b9111912c3554de6dcb94d1f45704",
-                "shasum": "8b1cc7763a537cb38b790246daa9ca538e45a27b"
+                "url": "https://get.spip.net/composer/dist/spip/archiviste/spip-archiviste-dev-master-750327.zip",
+                "reference": "c01dcc1c0512ff09309147322595bab0bbb8493b",
+                "shasum": "c547ccace649295050d8e23e8eacf3f43a8b4b3b"
             },
             "require": {
                 "ext-phar": "*",
@@ -160,21 +160,21 @@
                 "tar",
                 "zip"
             ],
-            "time": "2023-03-18T14:08:52+00:00"
+            "time": "2023-03-20T15:57:24+00:00"
         },
         {
             "name": "spip/composer-installer",
             "version": "0.5.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/spipremix/composer-installer.git",
+                "url": "https://git.spip.net/spip/composer-installer.git",
                 "reference": "779ab95dbed3a25168165cd12756a069e55813fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spipremix/composer-installer/zipball/779ab95dbed3a25168165cd12756a069e55813fa",
+                "url": "https://get.spip.net/composer/dist/spip/composer-installer/spip-composer-installer-0.5.0-ce8663.zip",
                 "reference": "779ab95dbed3a25168165cd12756a069e55813fa",
-                "shasum": ""
+                "shasum": "eee111b0fc245e16130f8b154c9553996034eea0"
             },
             "require": {
                 "composer-plugin-api": "^2.3"
@@ -195,7 +195,11 @@
                     "Spip\\Composer\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Spip\\Test\\Composer\\": "tests/"
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -206,10 +210,6 @@
                 }
             ],
             "description": "SPIP Composer Installer Plugin",
-            "support": {
-                "issues": "https://github.com/spipremix/composer-installer/issues",
-                "source": "https://github.com/spipremix/composer-installer/tree/0.5.0"
-            },
             "time": "2023-03-19T05:15:05+00:00"
         },
         {
@@ -218,22 +218,22 @@
             "source": {
                 "type": "git",
                 "url": "https://git.spip.net/spip-contrib-outils/securite.git",
-                "reference": "0f5cfc7864f9759c1f6577e5a17512de0eeed55e"
+                "reference": "27720b49f0480f41bc2f3f90edfc8dd90f741c1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://get.spip.net/composer/dist/spip/security/spip-security-dev-composer-135c34.zip",
-                "reference": "0f5cfc7864f9759c1f6577e5a17512de0eeed55e",
-                "shasum": "61e6cad6971444ca00935b087f1fea6c658c71af"
+                "url": "https://get.spip.net/composer/dist/spip/security/spip-security-dev-composer-4704ac.zip",
+                "reference": "27720b49f0480f41bc2f3f90edfc8dd90f741c1e",
+                "shasum": "ee1e81da7fdb61b0a7525757e9ad26f2376ffc09"
             },
-            "type": "spip-security",
+            "type": "library",
             "extra": {
                 "branch-alias": {
                     "dev-composer": "1.5.x-dev"
                 }
             },
             "license": [
-                "MIT"
+                "GPL-3.0-only"
             ],
             "authors": [
                 {
@@ -241,7 +241,7 @@
                 }
             ],
             "description": "Protection du site par blocage de certaines attaques",
-            "time": "2023-03-19T21:34:53+00:00"
+            "time": "2023-03-20T14:29:48+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -628,16 +628,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.6",
+            "version": "1.10.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "50d089a3e0904b0fe7e2cf2d4fd37d427d64235a"
+                "reference": "b10ceb526d9607903c5b2673f1fc8775dbe48975"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/50d089a3e0904b0fe7e2cf2d4fd37d427d64235a",
-                "reference": "50d089a3e0904b0fe7e2cf2d4fd37d427d64235a",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/b10ceb526d9607903c5b2673f1fc8775dbe48975",
+                "reference": "b10ceb526d9607903c5b2673f1fc8775dbe48975",
                 "shasum": ""
             },
             "require": {
@@ -669,7 +669,8 @@
                 "docs": "https://phpstan.org/user-guide/getting-started",
                 "forum": "https://github.com/phpstan/phpstan/discussions",
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/1.10.6"
+                "security": "https://github.com/phpstan/phpstan/security/policy",
+                "source": "https://github.com/phpstan/phpstan-src"
             },
             "funding": [
                 {
@@ -685,7 +686,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-03-09T16:55:12+00:00"
+            "time": "2023-03-16T15:24:20+00:00"
         },
         {
             "name": "spip/coding-standards",
