@@ -10,7 +10,6 @@
 /IMG/
 !/IMG/remove.txt
 /config/
-!/config/ecran_securite.php
 !/config/remove.txt
 /local/
 !/local/CACHEDIR.TAG
