@@ -15,7 +15,7 @@
 
 ### Changed
 
-- Nécessite PHP 8.0 minimum
+- Nécessite PHP 8.1 minimum
 
 ### Removed
 

@@ -1,17 +1,15 @@
 {
     "license": "GPL-3.0-only",
     "require": {
-        "php": "^8.0",
-        "ext-json": "*",
+        "php": "^8.1",
         "ext-sodium": "*",
         "ext-xml": "*",
         "ext-zip": "*",
-        "algo26-matthias/idna-convert": "^3.1",
+        "algo26-matthias/idna-convert": "^4.0",
         "spip/archiviste": "^2.3@dev",
         "spip/composer-installer": "^0.5.0",
         "spip/security": "^1.5",
         "symfony/polyfill-mbstring": "^1.27",
-        "symfony/polyfill-php81": "^1.27",
         "symfony/polyfill-php82": "^1.27"
     },
     "require-dev": {
@@ -65,12 +63,12 @@
             "spip/composer-installer": true
         },
         "platform": {
-            "php": "8.0.28"
+            "php": "8.1.17"
         }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "4.3.x-dev"
+            "dev-master": "5.0.x-dev"
         },
         "spip": {
             "extensions": [
