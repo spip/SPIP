@@ -112,28 +112,17 @@ function formulaires_configurer_reducteur_traiter_dist() {
  * @return string
  *     URL d'action pour tester la librairie graphique en créant une vignette
  **/
-function url_vignette_choix($process) {
-	switch ($process) {
-		case 'gd2':
-			if (!function_exists('ImageCreateTrueColor')) {
-				return '';
-			}
-			break;
-		case 'netpbm':
-			if (defined('_PNMSCALE_COMMAND') && _PNMSCALE_COMMAND == '') {
-				return '';
-			}
-			break;
-		case 'imagick':
-			if (!method_exists(\Imagick::class, 'readImage')) {
-				return '';
-			}
-			break;
-		case 'convert':
-			if (defined('_CONVERT_COMMAND') && _CONVERT_COMMAND == '') {
-				return '';
-			}
-			break;
+function url_vignette_choix(string $process): string {
+	$ok = match ($process) {
+		'gd2' => function_exists('ImageCreateTrueColor'),
+		'netpbm' => !(defined('_PNMSCALE_COMMAND') && _PNMSCALE_COMMAND == ''),
+		'imagick' => method_exists(\Imagick::class, 'readImage'),
+		'convert' => !(defined('_CONVERT_COMMAND') && _CONVERT_COMMAND == ''),
+		default => false,
+	};
+
+	if (!$ok) {
+		return '';
 	}
 
 	return generer_url_action('tester', "arg=$process&time=" . time());

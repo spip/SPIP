@@ -3597,11 +3597,8 @@ function html5_permis() {
 
 /**
  * Lister les formats image acceptes par les lib et fonctions images
- * @param bool $gd
- * @param bool $svg_allowed
- * @return array
  */
-function formats_image_acceptables($gd = null, $svg_allowed = true) {
+function formats_image_acceptables(?bool $gd = null, bool $svg_allowed = true): array {
 	$formats = null;
 	if (!is_null($gd)) {
 		$config = ($gd ? 'gd_formats' : 'formats_graphiques');
@@ -3621,8 +3618,7 @@ function formats_image_acceptables($gd = null, $svg_allowed = true) {
 		if (!in_array('svg', $formats)) {
 			$formats[] = 'svg';
 		}
-	}
-	else {
+	} else {
 		$formats = array_diff($formats, ['svg']);
 	}
 	return $formats;

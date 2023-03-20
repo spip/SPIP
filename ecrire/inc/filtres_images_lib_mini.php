@@ -549,10 +549,9 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 
 
 /**
- * @param string $quoi
- * @return array
+ * Extensions d’images acceptées en entrée
  */
-function _image_extensions_acceptees_en_entree() {
+function _image_extensions_acceptees_en_entree(): array {
 	static $extensions = null;
 	if (empty($extensions)) {
 		$extensions = ['png', 'gif', 'jpg', 'jpeg'];
@@ -573,9 +572,9 @@ function _image_extensions_acceptees_en_entree() {
 }
 
 /**
- * @return array|string[]|null
+ * Extensions d’images acceptées en sortie
  */
-function _image_extensions_acceptees_en_sortie() {
+function _image_extensions_acceptees_en_sortie(): array {
 	static $extensions = null;
 	if (empty($extensions)) {
 		$extensions = _image_extensions_acceptees_en_entree();
@@ -1331,7 +1330,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process = 'AUTO
 	}
 
 	// si le doc n'est pas une image dans un format accetpable, refuser
-	if (!$force && !in_array($format, formats_image_acceptables(in_array($process, ['gd1', 'gd2'])))) {
+	if (!$force && !in_array($format, formats_image_acceptables($process === 'gd2'))) {
 		return;
 	}
 	$destination = "$destdir/$destfile";
@@ -1481,14 +1480,14 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process = 'AUTO
 	}
 
 	// gd ou gd2
-	elseif ($process == 'gd1' || $process == 'gd2') {
+	elseif ($process === 'gd2') {
 		if (!function_exists('gd_info')) {
 			spip_log('Librairie GD absente !', _LOG_ERREUR);
 
 			return;
 		}
 		if (_IMG_GD_MAX_PIXELS && $srcWidth * $srcHeight > _IMG_GD_MAX_PIXELS) {
-			spip_log('vignette gd1/gd2 impossible : ' . $srcWidth * $srcHeight . 'pixels');
+			spip_log('vignette gd2 impossible : ' . $srcWidth * $srcHeight . 'pixels');
 
 			return;
 		}
@@ -1505,7 +1504,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process = 'AUTO
 		}
 		$srcImage = @$fonction_imagecreatefrom($image);
 		if (!$srcImage) {
-			spip_log('echec gd1/gd2');
+			spip_log('echec gd2');
 
 			return;
 		}
@@ -1697,7 +1696,7 @@ function process_image_svg_identite($image) {
  *     Hauteur désirée
  * @param bool $force
  * @param string $process
- *     Librairie graphique à utiliser (gd1, gd2, netpbm, convert, imagick).
+ *     Librairie graphique à utiliser (gd2, netpbm, convert, imagick).
  *     AUTO utilise la librairie sélectionnée dans la configuration.
  * @return string
  *     Code HTML de la balise img produite
@@ -1709,14 +1708,15 @@ function process_image_reduire($fonction, $img, $taille, $taille_y, $force, $pro
 	}
 	# determiner le format de sortie
 	$format_sortie = false; // le choix par defaut sera bon
-	if ($process == 'netpbm') {
+	if ($process === 'netpbm') {
 		$format_sortie = 'jpg';
-	} elseif ($process == 'gd1' || $process == 'gd2') {
+	} elseif ($process === 'gd2') {
 		$image = _image_valeurs_trans($img, "reduire-{$taille}-{$taille_y}", $format_sortie, $fonction, false, _SVG_SUPPORTED);
 		// on verifie que l'extension choisie est bonne (en principe oui)
 		$gd_formats = formats_image_acceptables(true);
 		if (
-			is_array($image) && (!in_array($image['format_dest'], $gd_formats) || !in_array($image['format_dest'], _image_extensions_acceptees_en_sortie()))
+			is_array($image)
+			&& (!in_array($image['format_dest'], $gd_formats) || !in_array($image['format_dest'], _image_extensions_acceptees_en_sortie()))
 		) {
 			$formats_sortie = $image['format_source'] == 'jpg' ? ['jpg', 'png', 'gif'] : ['png', 'jpg', 'gif'];
 			// Choisir le format destination
