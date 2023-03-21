@@ -9,7 +9,7 @@
         "algo26-matthias/idna-convert": "^3.1",
         "spip/archiviste": "^2.3@dev",
         "spip/composer-installer": "^0.5.0",
-        "spip/security": "^1.5@dev",
+        "spip/security": "^1.5",
         "symfony/polyfill-mbstring": "^1.27",
         "symfony/polyfill-php81": "^1.27",
         "symfony/polyfill-php82": "^1.27"
