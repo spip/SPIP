@@ -30,7 +30,7 @@ function phraser_vieux_logos(&$p) {
 	$args = $p->param[0][0] ? [''] : array_shift($p->param);
 
 	foreach ($p->param as $couple) {
-		$nom = trim($couple[0]);
+		$nom = trim((string) $couple[0]);
 		if ($nom == '') {
 			array_shift($p->param);
 			break;
@@ -96,7 +96,7 @@ function phraser_vieux_emb(&$p) {
 	$paramCount = is_countable($p->param) ? count($p->param) : 0;
 	for ($i = 0; $i < $paramCount; $i++) {
 		if ($p->param[$i][0]) {
-			if (!strstr($p->param[$i][0], '=')) {
+			if (!strstr((string) $p->param[$i][0], '=')) {
 				break;
 			}# on a rencontre un vrai filtre, c'est fini
 			$texte = new Texte();
@@ -126,7 +126,7 @@ function phraser_vieux_recherche($p) {
 // Gerer la notation [(#EXPOSER|on,off)]
 function phraser_vieux_exposer($p) {
 	if ($a = $p->fonctions) {
-		preg_match('#([^,]*)(,(.*))?#', $a[0][0], $regs);
+		preg_match('#([^,]*)(,(.*))?#', (string) $a[0][0], $regs);
 		$args = [];
 		if ($regs[1]) {
 			$a = new Texte();
@@ -178,14 +178,14 @@ function normaliser_inclure($champ) {
 	$l = $champ->param[0];
 	if (is_array($l) && !$l[0]) {
 		foreach ($l as $k => $p) {
-			if ($p && $p[0]->type == 'texte' && !strpos($p[0]->texte, '=')) {
-				$p[0]->texte = trim($p[0]->texte);
+			if ($p && $p[0]->type == 'texte' && !strpos((string) $p[0]->texte, '=')) {
+				$p[0]->texte = trim((string) $p[0]->texte);
 			}
 		}
 		foreach ($l as $k => $p) {
 			if (
 				!$p || $p[0]->type != 'texte'
-				|| !preg_match('/^fond\s*=\s*(.*)$/', $p[0]->texte, $r)
+				|| !preg_match('/^fond\s*=\s*(.*)$/', (string) $p[0]->texte, $r)
 			) {
 				continue;
 			}

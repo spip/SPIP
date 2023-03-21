@@ -19,7 +19,7 @@ function install_etape_4_dist() {
 
 	// creer le repertoire cache, qui sert partout !
 	if (!@file_exists(_DIR_CACHE)) {
-		$rep = preg_replace(',' . _DIR_TMP . ',', '', _DIR_CACHE);
+		$rep = preg_replace(',' . _DIR_TMP . ',', '', (string) _DIR_CACHE);
 		$rep = sous_repertoire(_DIR_TMP, $rep, true, true);
 	}
 
@@ -60,7 +60,7 @@ function install_etape_4_dist() {
 	// et procede alors a l'installation
 	if (
 		!isset($GLOBALS['meta']['version_installee'])
-		|| $GLOBALS['spip_version_base'] == (str_replace(',', '.', $GLOBALS['meta']['version_installee']))
+		|| $GLOBALS['spip_version_base'] == (str_replace(',', '.', (string) $GLOBALS['meta']['version_installee']))
 	) {
 		plugin_installes_meta();
 	}

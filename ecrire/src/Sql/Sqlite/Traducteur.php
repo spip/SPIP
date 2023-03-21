@@ -47,68 +47,68 @@ class Traducteur
 		//
 		// Correction Create Database
 		// Create Database -> requete ignoree
-		if (str_starts_with($this->query, 'CREATE DATABASE')) {
+		if (str_starts_with((string) $this->query, 'CREATE DATABASE')) {
 			spip_log("Sqlite : requete non executee -> $this->query", 'sqlite.' . _LOG_AVERTISSEMENT);
 			$this->query = 'SELECT 1';
 		}
 
 		// Correction Insert Ignore
 		// INSERT IGNORE -> insert (tout court et pas 'insert or replace')
-		if (str_starts_with($this->query, 'INSERT IGNORE')) {
+		if (str_starts_with((string) $this->query, 'INSERT IGNORE')) {
 			spip_log("Sqlite : requete transformee -> $this->query", 'sqlite.' . _LOG_DEBUG);
-			$this->query = 'INSERT ' . substr($this->query, '13');
+			$this->query = 'INSERT ' . substr((string) $this->query, '13');
 		}
 
 		// Correction des dates avec INTERVAL
 		// utiliser sql_date_proche() de preference
-		if (str_contains($this->query, 'INTERVAL')) {
+		if (str_contains((string) $this->query, 'INTERVAL')) {
 			$this->query = preg_replace_callback(
 				'/DATE_(ADD|SUB)(.*)INTERVAL\s+(\d+)\s+([a-zA-Z]+)\)/U',
 				fn(array $matches): string => $this->_remplacerDateParTime($matches),
-				$this->query
+				(string) $this->query
 			);
 		}
 
-		if (str_contains($this->query, 'LEFT(')) {
-			$this->query = str_replace('LEFT(', '_LEFT(', $this->query);
+		if (str_contains((string) $this->query, 'LEFT(')) {
+			$this->query = str_replace('LEFT(', '_LEFT(', (string) $this->query);
 		}
 
-		if (str_contains($this->query, 'TIMESTAMPDIFF(')) {
-			$this->query = preg_replace('/TIMESTAMPDIFF\(\s*([^,]*)\s*,/Uims', "TIMESTAMPDIFF('\\1',", $this->query);
+		if (str_contains((string) $this->query, 'TIMESTAMPDIFF(')) {
+			$this->query = preg_replace('/TIMESTAMPDIFF\(\s*([^,]*)\s*,/Uims', "TIMESTAMPDIFF('\\1',", (string) $this->query);
 		}
 
 
 		// Correction Using
 		// USING (non reconnu en sqlite2)
 		// problematique car la jointure ne se fait pas du coup.
-		if (($this->sqlite_version == 2) && (str_contains($this->query, 'USING'))) {
+		if (($this->sqlite_version == 2) && (str_contains((string) $this->query, 'USING'))) {
 			spip_log(
 				"'USING (champ)' n'est pas reconnu en SQLite 2. Utilisez 'ON table1.champ = table2.champ'",
 				'sqlite.' . _LOG_ERREUR
 			);
-			$this->query = preg_replace('/USING\s*\([^\)]*\)/', '', $this->query);
+			$this->query = preg_replace('/USING\s*\([^\)]*\)/', '', (string) $this->query);
 		}
 
 		// Correction Field
 		// remplace FIELD(table,i,j,k...) par CASE WHEN table=i THEN n ... ELSE 0 END
-		if (str_contains($this->query, 'FIELD')) {
+		if (str_contains((string) $this->query, 'FIELD')) {
 			$this->query = preg_replace_callback(
 				'/FIELD\s*\(([^\)]*)\)/',
 				fn(array $matches): string => $this->_remplacerFieldParCase($matches),
-				$this->query
+				(string) $this->query
 			);
 		}
 
 		// Correction des noms de tables FROM
 		// mettre les bons noms de table dans from, update, insert, replace...
-		if (preg_match('/\s(SET|VALUES|WHERE|DATABASE)\s/iS', $this->query, $regs)) {
-			$suite = strstr($this->query, $regs[0]);
-			$this->query = substr($this->query, 0, -strlen($suite));
+		if (preg_match('/\s(SET|VALUES|WHERE|DATABASE)\s/iS', (string) $this->query, $regs)) {
+			$suite = strstr((string) $this->query, $regs[0]);
+			$this->query = substr((string) $this->query, 0, -strlen($suite));
 		} else {
 			$suite = '';
 		}
 		$pref = ($this->prefixe) ? $this->prefixe . '_' : '';
-		$this->query = preg_replace('/([,\s])spip_/S', '\1' . $pref, $this->query) . $suite;
+		$this->query = preg_replace('/([,\s])spip_/S', '\1' . $pref, (string) $this->query) . $suite;
 
 		// Correction zero AS x
 		// pg n'aime pas 0+x AS alias, sqlite, dans le meme style,
@@ -187,7 +187,7 @@ class Traducteur
 	 * @return string texte de liste ordonnée compris par SQLite
 	 */
 	public function _remplacerFieldParCase($matches) {
-		$fields = substr($matches[0], 6, -1); // ne recuperer que l'interieur X de field(X)
+		$fields = substr((string) $matches[0], 6, -1); // ne recuperer que l'interieur X de field(X)
 		$t = explode(',', $fields);
 		$index = array_shift($t);
 

@@ -66,7 +66,7 @@ function decompiler_include($struct, $fmt = '', $prof = 0) {
 function decompiler_texte($struct, $fmt = '', $prof = 0) {
 	$f = 'format_texte_' . $fmt;
 
-	return strlen($struct->texte) ? $f($struct->texte, $prof) : '';
+	return strlen((string) $struct->texte) ? $f($struct->texte, $prof) : '';
 }
 
 function decompiler_polyglotte($struct, $fmt = '', $prof = 0) {
@@ -121,7 +121,7 @@ function decompiler_liste($sources, $fmt = '', $prof = 0) {
 			if (
 				(is_countable($v) ? count($v) : 0) == 1
 				&& $v[0]->type == 'texte'
-				&& strlen($v[0]->apres) == 1
+				&& strlen((string) $v[0]->apres) == 1
 				&& $v[0]->apres == $v[0]->avant
 			) {
 				$args[] = $v[0]->avant . $v[0]->texte . $v[0]->apres;
@@ -208,13 +208,13 @@ function decompiler_($liste, $fmt = '', $prof = 0) {
 			&& !$p->avant
 			&& $p->fonctions
 		) {
-			$n = strlen($next->texte) - strlen(ltrim($next->texte));
+			$n = strlen((string) $next->texte) - strlen(ltrim((string) $next->texte));
 			if ($n) {
 				$champ = new Texte();
-				$champ->texte = substr($next->texte, 0, $n);
+				$champ->texte = substr((string) $next->texte, 0, $n);
 				$champ->ligne = $p->ligne;
 				$p->apres = [$champ];
-				$next->texte = substr($next->texte, $n);
+				$next->texte = substr((string) $next->texte, $n);
 			}
 		}
 		$contenu[] = [$d($p, $fmt, $prof2), $p->type];

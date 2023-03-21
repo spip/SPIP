@@ -97,7 +97,7 @@ function optimiser_base_une_table() {
 
 	spip_log('optimiser_base_une_table ' . json_encode($tables, JSON_THROW_ON_ERROR), 'genie' . _LOG_DEBUG);
 	if ($tables) {
-		$table_op = intval(lire_config('optimiser_table', 0) + 1) % sizeof($tables);
+		$table_op = (int) (lire_config('optimiser_table', 0) + 1) % count($tables);
 		ecrire_config('optimiser_table', $table_op);
 		$q = $tables[$table_op];
 		spip_log("optimiser_base_une_table : debut d'optimisation de la table $q", 'genie' . _LOG_DEBUG);
@@ -220,7 +220,7 @@ function optimiser_base_disparus($attente = 86400) {
 	if (!defined('_AUTEURS_DELAI_REJET_NOUVEAU')) {
 		define('_AUTEURS_DELAI_REJET_NOUVEAU', 45 * 24 * 3600);
 	}
-	sql_delete('spip_auteurs', "statut='nouveau' AND maj < " . sql_quote(date('Y-m-d', time() - intval(_AUTEURS_DELAI_REJET_NOUVEAU))));
+	sql_delete('spip_auteurs', "statut='nouveau' AND maj < " . sql_quote(date('Y-m-d', time() - (int) _AUTEURS_DELAI_REJET_NOUVEAU)));
 
 	/**
 	 * Permet aux plugins de compléter l'optimisation suite aux éléments disparus

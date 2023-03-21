@@ -20,7 +20,7 @@ function install_etape_2_dist() {
 		? _INSTALL_HOST_DB
 		: _request('adresse_db');
 
-	if (preg_match(',(.*):(.*),', $adresse_db, $r)) {
+	if (preg_match(',(.*):(.*),', (string) $adresse_db, $r)) {
 		[, $adresse_db, $port] = $r;
 	} else {
 		$port = '';
@@ -129,7 +129,7 @@ function install_etape_2_bases($login_db, $server_db) {
 		// probablement le login sans le point -- testons pour savoir
 		$test_base = $login_db;
 		$ok = sql_selectdb($test_base, $server_db);
-		$test_base2 = str_replace('.', '_', $test_base);
+		$test_base2 = str_replace('.', '_', (string) $test_base);
 		if (sql_selectdb($test_base2, $server_db)) {
 			$test_base = $test_base2;
 			$ok = true;

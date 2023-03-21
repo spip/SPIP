@@ -44,8 +44,8 @@ if (empty($page['process_ins']) || $page['process_ins'] != 'html') {
 		$notes($page['notes'], 'restaurer_etat');
 	}
 	ob_start();
-	if (str_contains($page['texte'], '?xml')) {
-		$page['texte'] = str_replace('<?xml', "<\1?xml", $page['texte']);
+	if (str_contains((string) $page['texte'], '?xml')) {
+		$page['texte'] = str_replace('<?xml', "<\1?xml", (string) $page['texte']);
 	}
 
 	try {
@@ -60,7 +60,7 @@ if (empty($page['process_ins']) || $page['process_ins'] != 'html') {
 				return "\n/*" . str_pad($GLOBALS['numero_ligne_php'], 3, '0', STR_PAD_LEFT) . '*/';
 			}
 		}
-		$code = '/*001*/' . preg_replace_callback(",\n,", 'numerote_ligne_php', $code);
+		$code = '/*001*/' . preg_replace_callback(",\n,", 'numerote_ligne_php', (string) $code);
 		$code = trim(highlight_string($code, true));
 		erreur_squelette('L' . $e->getLine() . ': ' . $e->getMessage() . '<br />' . $code, [$page['source'],'',$e->getFile(),'',$GLOBALS['spip_lang']]);
 		$page['texte'] = '<!-- Erreur -->';
@@ -69,8 +69,8 @@ if (empty($page['process_ins']) || $page['process_ins'] != 'html') {
 
 	$page['process_ins'] = 'html';
 
-	if (str_contains($page['texte'], '?xml')) {
-		$page['texte'] = str_replace("<\1?xml", '<?xml', $page['texte']);
+	if (str_contains((string) $page['texte'], '?xml')) {
+		$page['texte'] = str_replace("<\1?xml", '<?xml', (string) $page['texte']);
 	}
 }
 

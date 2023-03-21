@@ -47,11 +47,9 @@ function action_inscrire_auteur_dist($statut, $mail_complet, $nom, $options = []
 		$options = ['id' => $options];
 	}
 
-	if (function_exists('test_inscription')) {
-		$f = 'test_inscription';
-	} else {
-		$f = 'test_inscription_dist';
-	}
+	$f = function_exists('test_inscription')
+		? 'test_inscription'
+		: 'test_inscription_dist';
 	$desc = $f($statut, $mail_complet, $nom, $options);
 
 	// erreur ?
@@ -69,7 +67,7 @@ function action_inscrire_auteur_dist($statut, $mail_complet, $nom, $options = []
 	$row = sql_fetch($res);
 	sql_free($res);
 	if ($row) {
-		if (isset($options['force_nouveau']) and $options['force_nouveau'] == true) {
+		if (isset($options['force_nouveau']) && $options['force_nouveau'] == true) {
 			$desc['id_auteur'] = $row['id_auteur'];
 			$desc = inscription_nouveau($desc);
 		} else {
@@ -133,15 +131,15 @@ function test_inscription_dist($statut, $mail, $nom, $options) {
 	if (!$r = email_valide($mail)) {
 		return 'info_email_invalide';
 	}
-	$nom = trim(corriger_caracteres($nom));
+	$nom = trim((string) corriger_caracteres($nom));
 	$res = ['email' => $r, 'nom' => $nom, 'prefs' => $statut];
 	if (isset($options['login'])) {
-		$login = trim(corriger_caracteres($options['login']));
-		if ((strlen($login) >= _LOGIN_TROP_COURT) and (strlen($nom) <= 64)) {
+		$login = trim((string) corriger_caracteres($options['login']));
+		if (strlen($login) >= _LOGIN_TROP_COURT && strlen($nom) <= 64) {
 			$res['login'] = $login;
 		}
 	}
-	if (!isset($res['login']) and ((strlen($nom) < _LOGIN_TROP_COURT) or (strlen($nom) > 64))) {
+	if (!isset($res['login']) && (strlen($nom) < _LOGIN_TROP_COURT || strlen($nom) > 64)) {
 		return 'ecrire:info_login_trop_court';
 	}
 
@@ -158,17 +156,13 @@ function test_inscription_dist($statut, $mail, $nom, $options) {
  * @return mixed|string
  */
 function inscription_nouveau($desc) {
-	if (!isset($desc['login']) or !strlen($desc['login'])) {
+	if (!isset($desc['login']) || !strlen((string) $desc['login'])) {
 		$desc['login'] = test_login($desc['nom'], $desc['email']);
 	}
 
 	$desc['statut'] = 'nouveau';
 	include_spip('action/editer_auteur');
-	if (isset($desc['id_auteur'])) {
-		$id_auteur = $desc['id_auteur'];
-	} else {
-		$id_auteur = auteur_inserer();
-	}
+	$id_auteur = $desc['id_auteur'] ?? auteur_inserer();
 
 	if (!$id_auteur) {
 		return _T('titre_probleme_technique');
@@ -202,12 +196,12 @@ function inscription_nouveau($desc) {
  */
 function test_login($nom, $mail) {
 	include_spip('inc/charsets');
-	$nom = strtolower(translitteration($nom));
+	$nom = strtolower((string) translitteration($nom));
 	$login_base = preg_replace('/[^\w\d_]/', '_', $nom);
 
 	// il faut eviter que le login soit vraiment trop court
 	if (strlen($login_base) < 3) {
-		$mail = strtolower(translitteration(preg_replace('/@.*/', '', $mail)));
+		$mail = strtolower((string) translitteration(preg_replace('/@.*/', '', $mail)));
 		$login_base = preg_replace('/[^\w\d]/', '_', $mail);
 	}
 	if (strlen($login_base) < 3) {
@@ -251,7 +245,7 @@ function envoyer_inscription_dist($desc, $nom, $mode, $options = []) {
 	}
 
 	$modele_mail = 'modeles/mail_inscription';
-	if (isset($options['modele_mail']) and $options['modele_mail']) {
+	if (isset($options['modele_mail']) && $options['modele_mail']) {
 		$modele_mail = $options['modele_mail'];
 	}
 	$message = recuperer_fond($modele_mail, $contexte);
@@ -292,7 +286,7 @@ function tester_statut_inscription($statut_tmp, $id) {
 		return autoriser('inscrireauteur', $statut_tmp, $id) ? $statut_tmp : '';
 	} elseif (
 		autoriser('inscrireauteur', $statut_tmp = '1comite', $id)
-		or autoriser('inscrireauteur', $statut_tmp = '6forum', $id)
+		|| autoriser('inscrireauteur', $statut_tmp = '6forum', $id)
 	) {
 		return $statut_tmp;
 	}
@@ -318,7 +312,7 @@ function confirmer_statut_inscription($auteur) {
 
 	$s = $auteur['prefs'];
 	// securite, au cas ou prefs aurait ete corrompu (ou deja ecrase par un tableau serialize)
-	if (!preg_match(',^\w+$,', $s)) {
+	if (!preg_match(',^\w+$,', (string) $s)) {
 		$s = '6forum';
 	}
 	include_spip('inc/autoriser');
@@ -360,10 +354,10 @@ function auteur_attribuer_jeton($id_auteur): string {
 	do {
 		// Un morceau du jeton est lisible en bdd pour éviter de devoir déchiffrer
 		// tous les jetons connus pour vérifier le jeton d’un auteur.
-		$public = substr(creer_uniqid(), 0, 7) . '.';
+		$public = substr((string) creer_uniqid(), 0, 7) . '.';
 		$jeton = $public . creer_uniqid();
 		$jeton_chiffre_prefixe = $public . Chiffrement::chiffrer($jeton, SpipCles::secret_du_site());
-		sql_updateq('spip_auteurs', ['cookie_oubli' => $jeton_chiffre_prefixe], 'id_auteur=' . intval($id_auteur));
+		sql_updateq('spip_auteurs', ['cookie_oubli' => $jeton_chiffre_prefixe], 'id_auteur=' . (int) $id_auteur);
 	} while (sql_countsel('spip_auteurs', 'cookie_oubli=' . sql_quote($jeton_chiffre_prefixe, '', 'string')) > 1);
 
 	return $jeton;
@@ -383,7 +377,7 @@ function auteur_lire_jeton(int $id_auteur, bool $autoInit = false): ?string {
 	include_spip('base/abstract_sql');
 	$jeton_chiffre_prefixe = sql_getfetsel('cookie_oubli', 'spip_auteurs', 'id_auteur=' . $id_auteur);
 	if ($jeton_chiffre_prefixe) {
-		$jeton_chiffre = substr($jeton_chiffre_prefixe, 8);
+		$jeton_chiffre = substr((string) $jeton_chiffre_prefixe, 8);
 		$jeton = Chiffrement::dechiffrer($jeton_chiffre, SpipCles::secret_du_site());
 		if ($jeton) {
 			return $jeton;
@@ -413,9 +407,9 @@ function auteur_verifier_jeton($jeton) {
 	// Les auteurs qui ont un jetons ressemblant
 	$auteurs = sql_allfetsel('*', 'spip_auteurs', 'cookie_oubli LIKE ' . sql_quote($public . '%'));
 	foreach ($auteurs as $auteur) {
-		$jeton_chiffre = substr($auteur['cookie_oubli'], 8);
+		$jeton_chiffre = substr((string) $auteur['cookie_oubli'], 8);
 		$_jeton = Chiffrement::dechiffrer($jeton_chiffre, SpipCles::secret_du_site());
-		if ($_jeton and hash_equals($jeton, $_jeton)) {
+		if ($_jeton && hash_equals($jeton, $_jeton)) {
 			return $auteur;
 		}
 	}
@@ -430,5 +424,5 @@ function auteur_verifier_jeton($jeton) {
  */
 function auteur_effacer_jeton($id_auteur) {
 	include_spip('base/abstract_sql');
-	return sql_updateq('spip_auteurs', ['cookie_oubli' => ''], 'id_auteur=' . intval($id_auteur));
+	return sql_updateq('spip_auteurs', ['cookie_oubli' => ''], 'id_auteur=' . (int) $id_auteur);
 }

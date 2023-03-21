@@ -62,7 +62,7 @@ function action_tester_taille_dist() {
 	}
 
 	$taille = _request('arg');
-	$taille = explode('-', $taille);
+	$taille = explode('-', (string) $taille);
 
 	$GLOBALS['taille_max'] = end($taille);
 	$GLOBALS['taille_min'] = 0;

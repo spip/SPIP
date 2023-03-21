@@ -256,7 +256,7 @@ function maj_collation_sqlite() {
 	$tables = base_lister_toutes_tables();
 
 	// rien a faire si base non sqlite
-	if (!str_starts_with($GLOBALS['connexions'][0]['type'], 'sqlite')) {
+	if (!str_starts_with((string) $GLOBALS['connexions'][0]['type'], 'sqlite')) {
 		return;
 	}
 
@@ -267,7 +267,7 @@ function maj_collation_sqlite() {
 	// cas particulier spip_auteurs : retablir le collate binary sur le login
 	$desc = $trouver_table('spip_auteurs');
 	spip_log('spip_auteurs : ' . var_export($desc['field'], true), 'maj.' . _LOG_INFO_IMPORTANTE);
-	if (stripos($desc['field']['login'], 'BINARY') === false) {
+	if (stripos((string) $desc['field']['login'], 'BINARY') === false) {
 		spip_log('Retablir champ login BINARY sur table spip_auteurs', 'maj');
 		sql_alter('table spip_auteurs change login login VARCHAR(255) BINARY');
 		$trouver_table('');
@@ -291,7 +291,7 @@ function maj_collation_sqlite() {
 					$data = sql_allfetsel('*', 'spip_urls', '', '', 'date DESC');
 					$urls = [];
 					foreach ($data as $d) {
-						$key = $d['id_parent'] . '::' . strtolower($d['url']);
+						$key = $d['id_parent'] . '::' . strtolower((string) $d['url']);
 						if (!isset($urls[$key])) {
 							$urls[$key] = true;
 						} else {

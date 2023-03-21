@@ -112,19 +112,19 @@ function styliser_par_objets($flux) {
 	if (
 		test_espace_prive()
 		&& !($squelette = $flux['data'])
-		&& str_starts_with($flux['args']['fond'], 'prive/objets/')
+		&& str_starts_with((string) $flux['args']['fond'], 'prive/objets/')
 		&& ($echafauder = charger_fonction('echafauder', 'prive', true))
 	) {
-		if (str_starts_with($flux['args']['fond'], 'prive/objets/liste/')) {
-			$table = table_objet(substr($flux['args']['fond'], 19));
+		if (str_starts_with((string) $flux['args']['fond'], 'prive/objets/liste/')) {
+			$table = table_objet(substr((string) $flux['args']['fond'], 19));
 			$table_sql = table_objet_sql($table);
 			$objets = lister_tables_objets_sql();
 			if (isset($objets[$table_sql])) {
 				$flux['data'] = $echafauder($table, $table, $table_sql, 'prive/objets/liste/objets', $flux['args']['ext']);
 			}
 		}
-		if (str_starts_with($flux['args']['fond'], 'prive/objets/contenu/')) {
-			$type = substr($flux['args']['fond'], 21);
+		if (str_starts_with((string) $flux['args']['fond'], 'prive/objets/contenu/')) {
+			$type = substr((string) $flux['args']['fond'], 21);
 			$table = table_objet($type);
 			$table_sql = table_objet_sql($table);
 			$objets = lister_tables_objets_sql();

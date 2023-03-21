@@ -67,7 +67,7 @@ function plugins_installer_dist($plug, $action, $dir_type = '_DIR_PLUGINS') {
 	}
 	$dir = constant($dir);
 	foreach ($infos['install'] as $file) {
-		$file = $dir . $plug . '/' . trim($file);
+		$file = $dir . $plug . '/' . trim((string) $file);
 		if (file_exists($file)) {
 			include_once($file);
 		}
@@ -198,7 +198,7 @@ function liste_plugin_actifs() {
 		// compatibilite pre 1.9.2, mettre a jour la meta
 		spip_log("MAJ meta plugin vieille version : $liste", 'plugin');
 		$new = true;
-		[, $liste] = liste_plugin_valides(explode(',', $liste));
+		[, $liste] = liste_plugin_valides(explode(',', (string) $liste));
 	} else {
 		$new = false;
 		// compat au moment d'une migration depuis version anterieure

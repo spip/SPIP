@@ -64,7 +64,7 @@ function inc_selectionner_dist($sel, $idom = '', $exclus = 0, $aff_racine = fals
 				str_replace(
 					'"',
 					'&#34;',
-					textebrut(_T('info_racine_site'))
+					(string) textebrut(_T('info_racine_site'))
 				)
 			),
 			"\n\r",

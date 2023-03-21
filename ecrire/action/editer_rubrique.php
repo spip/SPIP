@@ -42,7 +42,7 @@ function action_editer_rubrique_dist($arg = null) {
 		$arg = $securiser_action();
 	}
 
-	if (!$id_rubrique = intval($arg)) {
+	if (!$id_rubrique = (int) $arg) {
 		if ($arg != 'oui') {
 			include_spip('inc/headers');
 			redirige_url_ecrire();
@@ -54,7 +54,7 @@ function action_editer_rubrique_dist($arg = null) {
 
 	if (_request('redirect')) {
 		$redirect = parametre_url(
-			urldecode(_request('redirect')),
+			urldecode((string) _request('redirect')),
 			'id_rubrique',
 			$id_rubrique,
 			'&'
@@ -81,7 +81,7 @@ function action_editer_rubrique_dist($arg = null) {
 function rubrique_inserer($id_parent, $set = null) {
 	$champs = [
 		'titre' => _T('item_nouvelle_rubrique'),
-		'id_parent' => intval($id_parent),
+		'id_parent' => (int) $id_parent,
 		'statut' => 'prepa'
 	];
 
@@ -222,7 +222,7 @@ function editer_rubrique_breves($id_rubrique, $id_parent, $c = []) {
 		return true;
 	}
 
-	if (empty($c['confirme_deplace']) or $c['confirme_deplace'] != 'oui') {
+	if (empty($c['confirme_deplace']) || $c['confirme_deplace'] != 'oui') {
 		return false;
 	}
 
@@ -263,9 +263,9 @@ function rubrique_instituer($id_rubrique, $c) {
 	// qu'on n'administre pas.
 
 	if (null !== ($id_parent = $c['id_parent'])) {
-		$id_parent = intval($id_parent);
+		$id_parent = (int) $id_parent;
 		$filles = calcul_branche_in($id_rubrique);
-		if (strpos(",$id_parent,", (string) ",$filles,") !== false) {
+		if (str_contains(",$id_parent,", (string) ",$filles,")) {
 			spip_log("La rubrique $id_rubrique ne peut etre fille de sa descendante $id_parent");
 		} else {
 			$s = sql_fetsel('id_parent, statut', 'spip_rubriques', "id_rubrique=$id_rubrique");
@@ -273,9 +273,9 @@ function rubrique_instituer($id_rubrique, $c) {
 
 			if (
 				!($id_parent != $old_parent
-				and autoriser('publierdans', 'rubrique', $id_parent)
-				and autoriser('creerrubriquedans', 'rubrique', $id_parent)
-				and autoriser('publierdans', 'rubrique', $old_parent)
+				&& autoriser('publierdans', 'rubrique', $id_parent)
+				&& autoriser('creerrubriquedans', 'rubrique', $id_parent)
+				&& autoriser('publierdans', 'rubrique', $old_parent)
 				)
 			) {
 				if ($s['statut'] != 'prepa') {

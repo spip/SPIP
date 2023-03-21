@@ -50,5 +50,5 @@ function base_delete_all_dist($titre) {
 	}
 	$d = is_countable($delete) ? count($delete) : 0;
 	$r = count($res);
-	spip_log("Tables detruites: $r sur $d: " . join(', ', $res), _LOG_INFO_IMPORTANTE);
+	spip_log("Tables detruites: $r sur $d: " . implode(', ', $res), _LOG_INFO_IMPORTANTE);
 }

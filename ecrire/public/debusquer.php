@@ -124,7 +124,7 @@ function public_debusquer_dist($message = '', $lieu = '', $opt = []) {
 	$fonc = preg_replace(',\W,', '_', _request('var_mode_objet') ?? '');
 	$mode = preg_replace(',\W,', '_', _request('var_mode_affiche') ?? '');
 
-	$self = str_replace("\\'", '&#39;', self());
+	$self = str_replace("\\'", '&#39;', (string) self());
 	$self = parametre_url($self, 'var_mode', 'debug');
 
 	$res = debusquer_bandeau($tableau_des_erreurs)
@@ -345,11 +345,11 @@ function debusquer_requete($message) {
 
 	// FIXME: ces écritures mélangent divers syntaxe des moteurs SQL
 	// il serait plus prudent certainement d'avoir une fonction d'analyse par moteur
-	if (preg_match(',err(no|code):?[[:space:]]*(\d+),i', $msg, $regs)) {
+	if (preg_match(',err(no|code):?[[:space:]]*(\d+),i', (string) $msg, $regs)) {
 		$errno = $regs[2];
 	} elseif (
 		is_numeric($errno) && ($errno == 1030 || $errno <= 1026)
-		&& preg_match(',[^[:alnum:]](\d+)[^[:alnum:]],', $msg, $regs)
+		&& preg_match(',[^[:alnum:]](\d+)[^[:alnum:]],', (string) $msg, $regs)
 	) {
 		$errno = $regs[1];
 	}
@@ -387,8 +387,8 @@ function trouve_boucle_debug($n, $nom, $debut = 0, $boucle = '') {
 	$id = $nom . $boucle;
 	if (is_array($GLOBALS['debug_objets']['sequence'][$id])) {
 		foreach ($GLOBALS['debug_objets']['sequence'][$id] as $v) {
-			if (!preg_match('/^(.*)(<\?.*\?>)(.*)$/s', $v[0], $r)) {
-				$y = substr_count($v[0], "\n");
+			if (!preg_match('/^(.*)(<\?.*\?>)(.*)$/s', (string) $v[0], $r)) {
+				$y = substr_count((string) $v[0], "\n");
 			} else {
 				if ($v[1][0] == '#') { // balise dynamique
 				$incl = $GLOBALS['debug_objets']['resultat'][$v[2]];
@@ -396,13 +396,13 @@ function trouve_boucle_debug($n, $nom, $debut = 0, $boucle = '') {
 				{
 					$incl = $GLOBALS['debug_objets']['squelette'][trouve_squelette_inclus($v[0])];
 				}
-				$y = substr_count($incl, "\n")
+				$y = substr_count((string) $incl, "\n")
 					+ substr_count($r[1], "\n")
 					+ substr_count($r[3], "\n");
 			}
 			if ($n <= ($y + $debut)) {
 				if ($v[1][0] == '?') {
-					return trouve_boucle_debug($n, $nom, $debut, substr($v[1], 1));
+					return trouve_boucle_debug($n, $nom, $debut, substr((string) $v[1], 1));
 				} elseif ($v[1][0] == '!') {
 					if ($incl = trouve_squelette_inclus($v[1])) {
 						return trouve_boucle_debug($n, $incl, $debut);
@@ -420,22 +420,22 @@ function trouve_boucle_debug($n, $nom, $debut = 0, $boucle = '') {
 
 function trouve_squelette_inclus($script) {
 
-	preg_match('/include\(.(.*).php3?.\);/', $script, $reg);
+	preg_match('/include\(.(.*).php3?.\);/', (string) $script, $reg);
 	// si le script X.php n'est pas ecrire/public.php
 	// on suppose qu'il prend le squelette X.html (pas sur, mais y a pas mieux)
 	// si c'est bien ecrire/public on cherche le param 'fond'
 	// a defaut on cherche le param 'page'
 	if (
 		$reg[1] == 'ecrire/public'
-		&& !preg_match("/'fond' => '([^']*)'/", $script, $reg)
-		&& !preg_match("/'param' => '([^']*)'/", $script, $reg)
+		&& !preg_match("/'fond' => '([^']*)'/", (string) $script, $reg)
+		&& !preg_match("/'param' => '([^']*)'/", (string) $script, $reg)
 	) {
 		$reg[1] = 'inconnu';
 	}
 	$incl = ',' . $reg[1] . '[.]\w$,';
 
 	foreach ($GLOBALS['debug_objets']['sourcefile'] as $k => $v) {
-		if (preg_match($incl, $v)) {
+		if (preg_match($incl, (string) $v)) {
 			return $k;
 		}
 	}
@@ -502,7 +502,7 @@ function ancre_texte($texte, $fautifs = [], $nocpt = false) {
 		}
 	}
 
-	$ancre = md5($texte);
+	$ancre = md5((string) $texte);
 	foreach ($tableau as $ligne) {
 		if (isset($flignes[$i])) {
 			$ligne = str_replace('&nbsp;', ' ', $ligne);
@@ -582,10 +582,10 @@ function debusquer_squelette($fonc, $mode, $self) {
 		$res = $id = '';
 	}
 
-	return trim($texte)
+	return trim((string) $texte)
 		? "<img src='" . chemin_image('debug-xx.svg') . "' alt='afficher-masquer le debug' id='spip-debug-toggle' onclick=\"var x = document.getElementById('spip-debug'); (x.style.display == '' ? x.style.display = 'none' : x.style.display = '');\" /><div id='spip-debug'>$res"
 			. "<div id='debug_boucle'><fieldset$id><legend>"
-			. "<a href='" . $self . '#f_' . substr($fonc, 0, 37) . "'> &#8593; "
+			. "<a href='" . $self . '#f_' . substr((string) $fonc, 0, 37) . "'> &#8593; "
 			. ($legend ?: $mode)
 			. '</a></legend>'
 			. $texte
@@ -709,7 +709,7 @@ function debusquer_navigation_squelettes($self) {
 			. "</a>\n<a href='$self2&amp;var_mode_affiche=code#f_$nom'>"
 			. _T('zbug_code')
 			. "</a>\n<a href='"
-			. str_replace('var_mode=debug', 'var_profile=1&amp;var_mode=recalcul', $self)
+			. str_replace('var_mode=debug', 'var_profile=1&amp;var_mode=recalcul', (string) $self)
 			. "'>"
 			. _T('zbug_calcul')
 			. '</a></legend>'
@@ -726,10 +726,10 @@ function debusquer_navigation_boucles($boucles, $nom_skel, $self, $nom_source) {
 	$i = 0;
 	$res = '';
 	$var_mode_objet = _request('var_mode_objet');
-	$gram = preg_match('/[.](\w+)$/', $nom_source, $r) ? $r[1] : '';
+	$gram = preg_match('/[.](\w+)$/', (string) $nom_source, $r) ? $r[1] : '';
 
 	foreach ($boucles as $objet => $boucle) {
-		if (str_starts_with($objet, $nom_skel)) {
+		if (str_starts_with((string) $objet, (string) $nom_skel)) {
 			$i++;
 			$nom = $boucle->id_boucle;
 			$req = $boucle->type_requete;
@@ -787,7 +787,7 @@ function debusquer_source($objet, $affiche) {
 		}
 		//  permettre le copier/coller facile
 		// $res = ancre_texte($req, array(), true);
-		$res = "<div id='T" . md5($req) . "'>\n<pre>\n" . $req . "</pre>\n</div>\n";
+		$res = "<div id='T" . md5((string) $req) . "'>\n<pre>\n" . $req . "</pre>\n</div>\n";
 		//  formatage et affichage des resultats bruts de la requete
 		$ress_req = spip_query($req);
 		$brut_sql = '';
@@ -809,7 +809,7 @@ function debusquer_source($objet, $affiche) {
 		$res2 = interdire_scripts($brut_sql);
 		foreach ($quoi as $view) {
 			//  ne pas afficher les $contexte_inclus
-			$view = preg_replace(',<\?php.+\?[>],Uims', '', $view);
+			$view = preg_replace(',<\?php.+\?[>],Uims', '', (string) $view);
 			if ($view) {
 				$res2 .= "\n<br /><fieldset>" . interdire_scripts($view) . '</fieldset>';
 			}
@@ -820,7 +820,7 @@ function debusquer_source($objet, $affiche) {
 	} elseif ($affiche == 'boucle') {
 		$legend = _T('zbug_boucle') . ' ' . $nom;
 		// Le compilateur prefixe le nom des boucles par l'extension du fichier source.
-		$gram = preg_match('/^([^_]+)_/', $objet, $r) ? $r[1] : '';
+		$gram = preg_match('/^([^_]+)_/', (string) $objet, $r) ? $r[1] : '';
 		$res = ancre_texte(public_decompiler($quoi, $gram, 0, 'boucle'));
 	} elseif ($affiche == 'squelette') {
 		$legend = $GLOBALS['debug_objets']['sourcefile'][$objet];

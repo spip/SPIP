@@ -44,7 +44,7 @@ function inc_plonger_dist($id_rubrique, $idom = '', $list = [], $col = 1, $exclu
 		if (autoriser('voir', 'rubrique', $row['id_rubrique'])) {
 			$rub[$row['id_rubrique']]['enfants'] = $row['id_enfant'];
 			if ($row['id_parent'] == $id_rubrique) {
-				$t = trim(typo(supprimer_numero($row['titre'])));
+				$t = trim((string) typo(supprimer_numero($row['titre'])));
 				if ($row['langue_choisie'] != 'oui') {
 					$t .= ' <small title="'
 						. traduire_nom_langue($row['lang'])
@@ -74,8 +74,7 @@ function inc_plonger_dist($id_rubrique, $idom = '', $list = [], $col = 1, $exclu
 
 			$js_func = $do . '_selection_titre';
 			$click = "\nonclick=\"changerhighlight(this.parentNode.parentNode.parentNode);\nreturn "
-				. (!is_array($list) ? ' false'
-					: "aff_selection_provisoire($id,$args)")
+				. (is_array($list) ? "aff_selection_provisoire($id,$args)" : ' false')
 # ce lien provoque la selection (directe) de la rubrique cliquee
 # et l'affichage de son titre dans le bandeau
 				. "\"\nondblclick=\""

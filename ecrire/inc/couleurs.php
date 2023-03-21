@@ -72,10 +72,10 @@ function inc_couleurs_dist($choix = null, $ajouter = false) {
 		$c['couleur_claire'] = '#' . couleur_eclaircir($c['couleur_theme'], .5);
 
 		return
-			'couleur_theme=' . substr($c['couleur_theme'], 1)
+			'couleur_theme=' . substr((string) $c['couleur_theme'], 1)
 			// compat < SPIP 3.3
 			. '&couleur_claire=' . substr($c['couleur_claire'], 1)
-			. '&couleur_foncee=' . substr($c['couleur_foncee'], 1);
+			. '&couleur_foncee=' . substr((string) $c['couleur_foncee'], 1);
 	} else {
 		if (is_array($choix)) {
 			// compat < SPIP 3.3

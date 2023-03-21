@@ -33,7 +33,7 @@ function action_instituer_objet_dist($arg = null) {
 		$arg = $securiser_action();
 	}
 
-	[$objet, $id_objet, $statut] = preg_split('/\W/', $arg);
+	[$objet, $id_objet, $statut] = preg_split('/\W/', (string) $arg);
 	if (!$statut) {
 		$statut = _request('statut_nouv');
 	} // cas POST
@@ -42,8 +42,8 @@ function action_instituer_objet_dist($arg = null) {
 	} // impossible mais sait-on jamais
 
 	if (
-		$id_objet = intval($id_objet)
-		and autoriser('instituer', $objet, $id_objet, '', ['statut' => $statut])
+		($id_objet = (int) $id_objet)
+		&& autoriser('instituer', $objet, $id_objet, '', ['statut' => $statut])
 	) {
 		include_spip('action/editer_objet');
 		objet_modifier($objet, $id_objet, ['statut' => $statut]);

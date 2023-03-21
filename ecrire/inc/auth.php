@@ -57,7 +57,7 @@ function inc_auth_dist() {
 		];
 	}
 
-	$n = intval(sql_errno());
+	$n = (int) sql_errno();
 	spip_log("Erreur base de donnees $n " . sql_error());
 
 	return $n ?: 1;
@@ -65,27 +65,19 @@ function inc_auth_dist() {
 
 /**
  * Vérifier qu'un mot de passe saisi pour confirmer une action est bien celui de l'auteur connecté
- * @param string $password
  * @return bool
  */
 function auth_controler_password_auteur_connecte(#[\SensitiveParameter] string $password): bool {
 
 	if (
 		empty($GLOBALS['visiteur_session']['id_auteur'])
-		or empty($GLOBALS['visiteur_session']['login'])
+		|| empty($GLOBALS['visiteur_session']['login'])
 	) {
 		return false;
 	}
 
 	$auth = auth_identifier_login($GLOBALS['visiteur_session']['login'], $password, '', true);
-	if (
-		is_array($auth)
-		and $auth['id_auteur'] == $GLOBALS['visiteur_session']['id_auteur']
-	) {
-		return true;
-	}
-
-	return false;
+	return is_array($auth) && $auth['id_auteur'] == $GLOBALS['visiteur_session']['id_auteur'];
 }
 
 /**
@@ -114,7 +106,7 @@ function auth_echec($raison) {
 	} elseif (@$raison['statut']) {
 		// un simple visiteur n'a pas acces a l'espace prive
 		spip_log('connexion refusee a ' . @$raison['id_auteur']);
-		$est_connecte = (!empty($GLOBALS['visiteur_session']['login']) and !empty($GLOBALS['visiteur_session']['statut'])); // idem test balise #URL_LOGOUT
+		$est_connecte = (!empty($GLOBALS['visiteur_session']['login']) && !empty($GLOBALS['visiteur_session']['statut'])); // idem test balise #URL_LOGOUT
 		$raison = minipres(
 			_T('avis_erreur_connexion'),
 			_T('avis_erreur_visiteur')
@@ -162,8 +154,7 @@ function auth_mode() {
 	if (isset($_COOKIE['spip_session'])) {
 		$session = charger_fonction('session', 'inc');
 		if (
-			$id_auteur = $session()
-			or $id_auteur === 0 // reprise sur restauration
+			($id_auteur = $session()) || $id_auteur === 0 // reprise sur restauration
 		) {
 			$GLOBALS['auth_can_disconnect'] = true;
 			$GLOBALS['connect_login'] = session_get('login');
@@ -176,14 +167,13 @@ function auth_mode() {
 	// (ignorer les login d'intranet independants de spip)
 	if (!$GLOBALS['ignore_auth_http']) {
 		if (
-			(isset($_SERVER['PHP_AUTH_USER']) and isset($_SERVER['PHP_AUTH_PW'])
-				and $r = lire_php_auth($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']))
-			or
+			isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])
+				&& ($r = lire_php_auth($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']))
 			// Si auth http differtente de basic, PHP_AUTH_PW
 			// est indisponible mais tentons quand meme pour
 			// autocreation via LDAP
-			(isset($_SERVER['REMOTE_USER'])
-				and $r = lire_php_auth($_SERVER['PHP_AUTH_USER'] = $_SERVER['REMOTE_USER'], ''))
+			|| isset($_SERVER['REMOTE_USER'])
+				&& ($r = lire_php_auth($_SERVER['PHP_AUTH_USER'] = $_SERVER['REMOTE_USER'], ''))
 		) {
 			if (!$id_auteur) {
 				$_SERVER['PHP_AUTH_PW'] = '';
@@ -212,7 +202,7 @@ function auth_mode() {
 		/*AND $id_auteur>0*/ // reprise lors des restaurations
 	) ?
 		"id_auteur=$id_auteur" :
-		(!strlen($GLOBALS['connect_login']) ? '' : 'login=' . sql_quote($GLOBALS['connect_login'], '', 'text'));
+		(strlen((string) $GLOBALS['connect_login']) ? 'login=' . sql_quote($GLOBALS['connect_login'], '', 'text') : '');
 
 	if (!$where) {
 		return '';
@@ -306,7 +296,7 @@ function auth_init_droits($row) {
 	if (in_array($GLOBALS['connect_statut'], explode(',', _STATUT_AUTEUR_RUBRIQUE))) {
 		if (
 			isset($GLOBALS['visiteur_session']['restreint'])
-			and is_array($GLOBALS['visiteur_session']['restreint'])
+			&& is_array($GLOBALS['visiteur_session']['restreint'])
 		) {
 			$GLOBALS['connect_id_rubrique'] = $GLOBALS['visiteur_session']['restreint'];
 		}
@@ -326,7 +316,7 @@ function auth_init_droits($row) {
  * @return string
  */
 function auth_a_loger() {
-	$redirect = generer_url_public('login', 'url=' . rawurlencode(self('&', true)), true);
+	$redirect = generer_url_public('login', 'url=' . rawurlencode((string) self('&', true)), true);
 
 	// un echec au "bonjour" (login initial) quand le statut est
 	// inconnu signale sans doute un probleme de cookies
@@ -334,9 +324,9 @@ function auth_a_loger() {
 		$redirect = parametre_url(
 			$redirect,
 			'var_erreur',
-			(!isset($GLOBALS['visiteur_session']['statut'])
-				? 'cookie'
-				: 'statut'
+			(isset($GLOBALS['visiteur_session']['statut'])
+				? 'statut'
+				: 'cookie'
 			),
 			'&'
 		);
@@ -356,13 +346,13 @@ function auth_a_loger() {
 function auth_trace($row, $date = null) {
 	// Indiquer la connexion. A la minute pres ca suffit.
 	if (!is_numeric($connect_quand = $row['quand'] ?? '')) {
-		$connect_quand = strtotime($connect_quand);
+		$connect_quand = strtotime((string) $connect_quand);
 	}
 
 	$date ??= date('Y-m-d H:i:s');
 
 	if (abs(strtotime($date) - $connect_quand) >= 60) {
-		sql_updateq('spip_auteurs', ['en_ligne' => $date], 'id_auteur=' . intval($row['id_auteur']));
+		sql_updateq('spip_auteurs', ['en_ligne' => $date], 'id_auteur=' . (int) $row['id_auteur']);
 		$row['en_ligne'] = $date;
 	}
 
@@ -391,18 +381,18 @@ function auth_trace($row, $date = null) {
  * @param mixed $defaut
  * @return mixed
  */
-function auth_administrer($fonction, $args, $defaut = false) {
+function auth_administrer($fonction, $args, mixed $defaut = false) {
 	$auth_methode = array_shift($args);
 	$auth_methode = $auth_methode ?: 'spip'; // valeur par defaut au cas ou
 	if (
-		$auth = charger_fonction($auth_methode, 'auth', true)
-		and function_exists($f = "auth_{$auth_methode}_$fonction")
+		($auth = charger_fonction($auth_methode, 'auth', true))
+		&& function_exists($f = "auth_{$auth_methode}_$fonction")
 	) {
 		$res = $f(...$args);
 	} else {
 		$res = $defaut;
 	}
-	$res = pipeline(
+	return pipeline(
 		'auth_administrer',
 		[
 			'args' => [
@@ -413,7 +403,6 @@ function auth_administrer($fonction, $args, $defaut = false) {
 			'data' => $res
 		]
 	);
-	return $res;
 }
 
 /**
@@ -470,8 +459,8 @@ function auth_retrouver_login($login, $serveur = '') {
 function auth_informer_login($login, $serveur = '') {
 	if (
 		!$login
-		or !$login_base = auth_retrouver_login($login, $serveur)
-		or !$row = sql_fetsel('*', 'spip_auteurs', 'login=' . sql_quote($login_base, $serveur, 'text'), '', '', '', '', $serveur)
+		|| !($login_base = auth_retrouver_login($login, $serveur))
+		|| !($row = sql_fetsel('*', 'spip_auteurs', 'login=' . sql_quote($login_base, $serveur, 'text'), '', '', '', '', $serveur))
 	) {
 		// generer de fausses infos, mais credibles, pour eviter une attaque
 		// https://core.spip.net/issues/1758 + https://core.spip.net/issues/3691
@@ -489,7 +478,7 @@ function auth_informer_login($login, $serveur = '') {
 	$infos = [
 		'id_auteur' => $row['id_auteur'],
 		'login' => $row['login'],
-		'cnx' => (isset($prefs['cnx']) and $prefs['cnx'] === 'perma') ? '1' : '0',
+		'cnx' => (isset($prefs['cnx']) && $prefs['cnx'] === 'perma') ? '1' : '0',
 		'logo' => recuperer_fond('formulaires/inc-logo_auteur', $row),
 	];
 
@@ -513,7 +502,7 @@ function auth_identifier_login($login, #[\SensitiveParameter] $password, $serveu
 	foreach ($GLOBALS['liste_des_authentifications'] as $methode) {
 		if ($auth = charger_fonction($methode, 'auth', true)) {
 			$auteur = $auth($login, $password, $serveur, $phpauth);
-			if (is_array($auteur) and count($auteur)) {
+			if (is_array($auteur) && count($auteur)) {
 				spip_log("connexion de $login par methode $methode");
 				$auteur['auth'] = $methode;
 				return $auteur;
@@ -553,8 +542,7 @@ function auth_url_retour_login($auth_methode, $login, $redirect = '', $serveur =
  */
 function auth_terminer_identifier_login($auth_methode, $login, $serveur = '') {
 	$args = func_get_args();
-	$auteur = auth_administrer('terminer_identifier_login', $args);
-	return $auteur;
+	return auth_administrer('terminer_identifier_login', $args);
 }
 
 /**
@@ -564,7 +552,7 @@ function auth_terminer_identifier_login($auth_methode, $login, $serveur = '') {
  * @return bool
  */
 function auth_loger($auteur) {
-	if (!is_array($auteur) or !count($auteur)) {
+	if (!is_array($auteur) || $auteur === []) {
 		return false;
 	}
 
@@ -576,12 +564,12 @@ function auth_loger($auteur) {
 
 	// initialiser les prefs
 	$p = $GLOBALS['visiteur_session']['prefs'];
-	$p['cnx'] = (isset($auteur['cookie']) and $auteur['cookie'] == 'oui') ? 'perma' : '';
+	$p['cnx'] = (isset($auteur['cookie']) && $auteur['cookie'] == 'oui') ? 'perma' : '';
 
 	sql_updateq(
 		'spip_auteurs',
 		['prefs' => serialize($p)],
-		'id_auteur=' . intval($auteur['id_auteur'])
+		'id_auteur=' . (int) $auteur['id_auteur']
 	);
 
 	//  bloquer ici le visiteur qui tente d'abuser de ses droits
@@ -715,7 +703,7 @@ function auth_synchroniser_distant(
 	$serveur = ''
 ) {
 	$args = func_get_args();
-	if ($auth_methode === true or (isset($options['all']) and $options['all'] == true)) {
+	if ($auth_methode === true || isset($options['all']) && $options['all'] == true) {
 		$options['all'] = true; // ajouter une option all=>true pour chaque auth
 		$args = [true, $id_auteur, $champs, $options, $serveur];
 		foreach ($GLOBALS['liste_des_authentifications'] as $methode) {
@@ -740,7 +728,7 @@ function auth_synchroniser_distant(
 function lire_php_auth($login, #[\SensitiveParameter] $pw, $serveur = '') {
 	if (
 		!$login
-		or !$login_base = auth_retrouver_login($login, $serveur)
+		|| !$login_base = auth_retrouver_login($login, $serveur)
 	) {
 		return false;
 	}
@@ -750,8 +738,8 @@ function lire_php_auth($login, #[\SensitiveParameter] $pw, $serveur = '') {
 	if (!$row) {
 		if (
 			include_spip('inc/auth')
-			and auth_ldap_connect($serveur)
-			and $auth_ldap = charger_fonction('ldap', 'auth', true)
+			&& auth_ldap_connect($serveur)
+			&& ($auth_ldap = charger_fonction('ldap', 'auth', true))
 		) {
 			return $auth_ldap($login_base, $pw, $serveur, true);
 		}
@@ -762,8 +750,8 @@ function lire_php_auth($login, #[\SensitiveParameter] $pw, $serveur = '') {
 	// si pas de source definie
 	// ou auth/xxx introuvable, utiliser 'spip' ou autre et avec le login passé par PHP_AUTH_USER
 	if (
-		!$auth_methode = $row['source']
-		or !$auth = charger_fonction($auth_methode, 'auth', true)
+		!($auth_methode = $row['source'])
+		|| !($auth = charger_fonction($auth_methode, 'auth', true))
 	) {
 		$auth = charger_fonction('spip', 'auth', true);
 	}
@@ -773,7 +761,7 @@ function lire_php_auth($login, #[\SensitiveParameter] $pw, $serveur = '') {
 		$auteur = $auth($login, $pw, $serveur, true);
 	}
 	// verifier que ce n'est pas un message d'erreur
-	if (is_array($auteur) and count($auteur)) {
+	if (is_array($auteur) && count($auteur)) {
 		return $auteur;
 	}
 

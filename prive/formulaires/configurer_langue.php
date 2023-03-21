@@ -20,7 +20,7 @@ function formulaires_configurer_langue_charger_dist() {
 	$l_site = $GLOBALS['meta']['langue_site'];
 	$langue_site = traduire_nom_langue($l_site);
 
-	$langues = explode(',', $GLOBALS['meta']['langues_proposees']);
+	$langues = explode(',', (string) $GLOBALS['meta']['langues_proposees']);
 	if (!in_array($l_site, $langues)) {
 		$langues[] = $l_site;
 	}

@@ -33,7 +33,7 @@ function plugins_extraire_pipelines_dist(&$arbre) {
 					$att = [];
 					if (is_array($pipe)) {
 						foreach ($pipe as $k => $t) {
-							$att[$k] = trim(end($t));
+							$att[$k] = trim((string) end($t));
 						}
 					}
 					$pipeline[] = $att;

@@ -63,9 +63,7 @@ function f_jQuery($texte) {
 		}
 	}
 
-	$texte = $x . $texte;
-
-	return $texte;
+	return $x . $texte;
 }
 
 
@@ -90,19 +88,17 @@ function f_surligne($texte) {
 	$rech = _request('var_recherche');
 	if (
 		!$rech
-		and (!defined('_SURLIGNE_RECHERCHE_REFERERS')
-			or !_SURLIGNE_RECHERCHE_REFERERS
-			or !isset($_SERVER['HTTP_REFERER']))
+		&& (!defined('_SURLIGNE_RECHERCHE_REFERERS') || !_SURLIGNE_RECHERCHE_REFERERS || !isset($_SERVER['HTTP_REFERER']))
 	) {
 		return $texte;
 	}
 	include_spip('inc/surligne');
 
 	if (isset($_SERVER['HTTP_REFERER'])) {
-		$_SERVER['HTTP_REFERER'] = preg_replace(',[^\w\,/#&;:-]+,', ' ', $_SERVER['HTTP_REFERER']);
+		$_SERVER['HTTP_REFERER'] = preg_replace(',[^\w\,/#&;:-]+,', ' ', (string) $_SERVER['HTTP_REFERER']);
 	}
 	if ($rech) {
-		$rech = preg_replace(',[^\w\,/#&;:-]+,', ' ', $rech);
+		$rech = preg_replace(',[^\w\,/#&;:-]+,', ' ', (string) $rech);
 	}
 
 	return surligner_mots($texte, $rech);
@@ -130,10 +126,10 @@ function f_tidy($texte) {
 	 */
 
 	if (
-		$GLOBALS['xhtml'] # tidy demande
-		and $GLOBALS['html'] # verifie que la page avait l'entete text/html
-		and strlen($texte)
-		and !headers_sent()
+		$GLOBALS['xhtml']
+		&& $GLOBALS['html']
+		&& strlen($texte)
+		&& !headers_sent()
 	) {
 		# Compatibilite ascendante
 		if (!is_string($GLOBALS['xhtml'])) {
@@ -172,9 +168,12 @@ function f_insert_head($texte) {
 	}
 	include_spip('public/admin'); // pour strripos
 
-	($pos = stripos($texte, '</head>'))
-	|| ($pos = stripos($texte, '<body>'))
-	|| ($pos = 0);
+	if (
+		!($pos = stripos($texte, '</head>'))
+		&& !($pos = stripos($texte, '<body>'))
+	) {
+		$pos = 0;
+	}
 
 	if (!str_contains(substr($texte, 0, $pos), '<!-- insert_head -->')) {
 		$insert = "\n" . pipeline('insert_head', '<!-- f_insert_head -->') . "\n";
@@ -197,7 +196,7 @@ function f_insert_head($texte) {
  * @return string         Contenu de la page envoyée au navigateur
  **/
 function f_admin($texte) {
-	if (defined('_VAR_PREVIEW') and _VAR_PREVIEW and $GLOBALS['html']) {
+	if (defined('_VAR_PREVIEW') && _VAR_PREVIEW && $GLOBALS['html']) {
 		include_spip('inc/filtres'); // pour http_img_pack
 		$x = "<div class='spip-previsu' "
 			. http_style_background('preview-32.png', '', 32)
@@ -209,14 +208,14 @@ function f_admin($texte) {
 		}
 		$texte = substr_replace($texte, $x, $pos, 0);
 		// pas de preview en fenetre enfant
-		$x = "<script type='text/javascript'>const frameEl = window.frameElement;if (frameEl) {frameEl.sandbox='sandbox';window.location.href='" . addslashes($GLOBALS['meta']['adresse_site']) . "';}</script>";
-		if (!$pos = stripos($texte, '<head') or !$pos = strpos($texte, '>', $pos)) {
+		$x = "<script type='text/javascript'>const frameEl = window.frameElement;if (frameEl) {frameEl.sandbox='sandbox';window.location.href='" . addslashes((string) $GLOBALS['meta']['adresse_site']) . "';}</script>";
+		if (!$pos = stripos($texte, '<head') || !$pos = strpos($texte, '>', $pos)) {
 			$pos = -1;
 		}
 		$texte = substr_replace($texte, $x, $pos + 1, 0);
 	}
 
-	if (isset($GLOBALS['affiche_boutons_admin']) and $GLOBALS['affiche_boutons_admin']) {
+	if (isset($GLOBALS['affiche_boutons_admin']) && $GLOBALS['affiche_boutons_admin']) {
 		include_spip('public/admin');
 		$texte = affiche_boutons_admin($texte);
 	}
@@ -263,8 +262,8 @@ function f_queue($texte) {
 	// eviter une inclusion si rien a faire
 	if (
 		_request('action') == 'cron'
-		or queue_sleep_time_to_next_job() > 0
-		or defined('_DEBUG_BLOCK_QUEUE')
+		|| queue_sleep_time_to_next_job() > 0
+		|| defined('_DEBUG_BLOCK_QUEUE')
 	) {
 		return $texte;
 	}
@@ -274,7 +273,7 @@ function f_queue($texte) {
 
 	// si rien a afficher
 	// ou si on est pas dans une page html, on ne sait rien faire de mieux
-	if (!$code or !isset($GLOBALS['html']) or !$GLOBALS['html']) {
+	if (!$code || !isset($GLOBALS['html']) || !$GLOBALS['html']) {
 		return $texte;
 	}
 

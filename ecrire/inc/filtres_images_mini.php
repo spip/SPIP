@@ -312,14 +312,14 @@ function image_select($img, $width_min = 0, $height_min = 0, $width_max = 10000,
 	}
 
 	$class = extraire_attribut($img, 'class');
-	$p = strpos($class, 'filtre_inactif');
+	$p = strpos((string) $class, 'filtre_inactif');
 	if ($select == false && $p === false) {
 		$class .= ' filtre_inactif';
 		$img = inserer_attribut($img, 'class', $class);
 	}
 	if ($select == true && $p !== false) {
 		// no_image_filtrer : historique, a virer
-		$class = preg_replace(',\s*(filtre_inactif|no_image_filtrer),', '', $class);
+		$class = preg_replace(',\s*(filtre_inactif|no_image_filtrer),', '', (string) $class);
 		$img = inserer_attribut($img, 'class', $class);
 	}
 

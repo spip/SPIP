@@ -24,8 +24,8 @@ function inc_lien_court($url) {
 	$long_url = defined('_MAX_LONG_URL') ? _MAX_LONG_URL : 40;
 	$coupe_url = defined('_MAX_COUPE_URL') ? _MAX_COUPE_URL : 35;
 
-	if (strlen($url) > $long_url) {
-		$url = substr($url, 0, $coupe_url) . '...';
+	if (strlen((string) $url) > $long_url) {
+		$url = substr((string) $url, 0, $coupe_url) . '...';
 	}
 
 	return $url;

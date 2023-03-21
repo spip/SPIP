@@ -52,7 +52,7 @@ function action_calculer_taille_cache_dist($arg = null) {
 			+ calculer_taille_dossier(_DIR_CACHE . 'skel/')
 			+ calculer_taille_dossier(_DIR_CACHE . 'wheels/')
 			+ calculer_taille_dossier(_DIR_CACHE . 'contextes/');
-		$taille += intval(taille_du_cache());
+		$taille += (int) taille_du_cache();
 		if ($taille <= 150000) {
 			$res = _T('taille_cache_vide');
 		} elseif ($taille <= 1024 * 1024) {
@@ -75,7 +75,7 @@ function action_calculer_taille_cache_dist($arg = null) {
  * @return int Taille en octets
  */
 function calculer_taille_dossier($dir) {
-	if (!is_dir($dir) or !is_readable($dir)) {
+	if (!is_dir($dir) || !is_readable($dir)) {
 		return 0;
 	}
 	$handle = opendir($dir);

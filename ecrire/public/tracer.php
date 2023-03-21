@@ -58,7 +58,7 @@ function trace_query_end($query, $start, $result, $erreur, $serveur = '') {
 	}
 	if ($start) {
 		$end = microtime();
-		[$usec, $sec] = explode(' ', $start);
+		[$usec, $sec] = explode(' ', (string) $start);
 		[$usec2, $sec2] = explode(' ', $end);
 		$dt = $sec2 + $usec2 - $sec - $usec;
 		pipeline('trig_trace_query', ['query' => $query, 'start' => $start, 'end' => $end, 'time' => $dt, 'result' => $result, 'erreur' => $erreur, 'serveur' => $serveur]);
@@ -67,7 +67,7 @@ function trace_query_end($query, $start, $result, $erreur, $serveur = '') {
 		}
 	}
 	// tracer les erreurs, sauf pour select, c'est fait dans abstract_sql
-	if ($trace && $erreur && !preg_match('/^select\b/i', $query)) {
+	if ($trace && $erreur && !preg_match('/^select\b/i', (string) $query)) {
 		erreur_squelette([sql_errno($serveur), $erreur, $query]);
 	}
 
@@ -81,7 +81,7 @@ function trace_query_chrono($dt, $query, $result, $serveur = '') {
 	$x = _request('var_mode_objet');
 	if (isset($GLOBALS['debug']['aucasou'])) {
 		[, $boucle, $serveur, $contexte] = $GLOBALS['debug']['aucasou'];
-		if ($x && !preg_match("/$boucle\$/", $x)) {
+		if ($x && !preg_match("/$boucle\$/", (string) $x)) {
 			return;
 		}
 		if ($serveur) {
@@ -135,7 +135,7 @@ function chrono_requete($temps) {
 		}
 		foreach ($explain as $j => $v) {
 			$explain[$j] = "<tr><th>$j</th><td>"
-				. str_replace(';', '<br />', $v)
+				. str_replace(';', '<br />', (string) $v)
 				. '</td></tr>';
 		}
 		$e = "<table class='explain'>"
@@ -157,7 +157,7 @@ function chrono_requete($temps) {
 	$t = [];
 	// Fabriquer les liens de navigations dans le tableau des temps
 	foreach ($temps as $k => $v) {
-		$titre = strip_tags($v[2]);
+		$titre = strip_tags((string) $v[2]);
 		$href = quote_amp($GLOBALS['REQUEST_URI']) . "#req$i";
 		$href = str_replace("\\'", '&#39;', $href);
 

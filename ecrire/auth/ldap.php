@@ -23,7 +23,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 // Attributs LDAP correspondants a ceux de SPIP, notamment pour le login
 // ne pas ecraser une definition perso dans mes_options
-if (!isset($GLOBALS['ldap_attributes']) or !is_array($GLOBALS['ldap_attributes'])) {
+if (!isset($GLOBALS['ldap_attributes']) || !is_array($GLOBALS['ldap_attributes'])) {
 	$GLOBALS['ldap_attributes'] = [
 		'login' => ['sAMAccountName', 'uid', 'login', 'userid', 'cn', 'sn'],
 		'nom' => 'cn',
@@ -60,7 +60,7 @@ function auth_ldap_dist($login, #[\SensitiveParameter] $pass, $serveur = '', $ph
 	// Utilisateur connu ?
 	// si http auth, inutile de reauthentifier: cela
 	// ne marchera pas avec auth http autre que basic.
-	$checkpass = isset($_SERVER['REMOTE_USER']) ? false : true;
+	$checkpass = !isset($_SERVER['REMOTE_USER']);
 	if (!($dn = auth_ldap_search($login, $pass, $checkpass, $serveur))) {
 		return [];
 	}
@@ -76,8 +76,7 @@ function auth_ldap_dist($login, #[\SensitiveParameter] $pass, $serveur = '', $ph
 	// sinon importer les infos depuis LDAP,
 
 	if (
-		$GLOBALS['meta']['ldap_statut_import']
-		and $desc = auth_ldap_retrouver($dn, [], $serveur)
+		$GLOBALS['meta']['ldap_statut_import'] && ($desc = auth_ldap_retrouver($dn, [], $serveur))
 	) {
 		// rajouter le statut indique  a l'install
 		$desc['statut'] = $GLOBALS['meta']['ldap_statut_import'];
@@ -91,7 +90,7 @@ function auth_ldap_dist($login, #[\SensitiveParameter] $pass, $serveur = '', $ph
 	if ($r) {
 		return array_merge(
 			$credentials_ldap,
-			sql_fetsel('*', 'spip_auteurs', 'id_auteur=' . intval($r), '', '', '', '', $serveur)
+			sql_fetsel('*', 'spip_auteurs', 'id_auteur=' . (int) $r, '', '', '', '', $serveur)
 		);
 	}
 
@@ -157,7 +156,7 @@ function auth_ldap_connect($serveur = '') {
 function auth_ldap_search($login, #[\SensitiveParameter] $pass, $checkpass = true, $serveur = '') {
 	// Securite anti-injection et contre un serveur LDAP laxiste
 	$login_search = preg_replace('/[^-@._\s\d\w]/', '', $login);
-	if (!strlen($login_search) or ($checkpass and !strlen($pass))) {
+	if (!strlen($login_search) || $checkpass && !strlen($pass)) {
 		return '';
 	}
 
@@ -168,7 +167,7 @@ function auth_ldap_search($login, #[\SensitiveParameter] $pass, $checkpass = tru
 
 	$ldap_link = $ldap['link'] ?? null;
 	$ldap_base = $ldap['base'] ?? null;
-	$desc = !empty($ldap['attributes']) ? $ldap['attributes'] : $GLOBALS['ldap_attributes'];
+	$desc = empty($ldap['attributes']) ? $GLOBALS['ldap_attributes'] : $ldap['attributes'];
 
 	$logins = is_array($desc['login']) ? $desc['login'] : [$desc['login']];
 
@@ -179,7 +178,7 @@ function auth_ldap_search($login, #[\SensitiveParameter] $pass, $checkpass = tru
 		// Ne pas accepter les resultats si plus d'une entree
 		// (on veut un attribut unique)
 
-		if (is_array($info) and $info['count'] == 1) {
+		if (is_array($info) && $info['count'] == 1) {
 			$dn = $info[0]['dn'];
 			if (!$checkpass) {
 				return $dn;
@@ -190,7 +189,7 @@ function auth_ldap_search($login, #[\SensitiveParameter] $pass, $checkpass = tru
 		}
 	}
 
-	if ($checkpass and !isset($dn)) {
+	if ($checkpass && !isset($dn)) {
 		// Si echec, essayer de deviner le DN
 		foreach ($logins as $att) {
 			$dn = "$att=$login_search, $ldap_base";
@@ -233,7 +232,7 @@ function auth_ldap_retrouver($dn, $desc = [], $serveur = '') {
 
 	// Recuperer les donnees du premier (unique?) compte de l'auteur
 	$val = @ldap_get_entries($ldap_link, $result);
-	if (!is_array($val) or !is_array($val[0])) {
+	if (!is_array($val) || !is_array($val[0])) {
 		return [];
 	}
 	$val = $val[0];
@@ -242,7 +241,7 @@ function auth_ldap_retrouver($dn, $desc = [], $serveur = '') {
 	include_spip('inc/charsets');
 
 	foreach ($desc as $k => $v) {
-		$desc[$k] = importer_charset($val[strtolower($v)][0], 'utf-8');
+		$desc[$k] = importer_charset($val[strtolower((string) $v)][0], 'utf-8');
 	}
 
 	return $desc;
@@ -318,7 +317,7 @@ function auth_ldap_autoriser_modifier_pass($serveur = '') {
  *    Informe du succès ou de l'echec du changement du mot de passe
  */
 function auth_ldap_modifier_pass($login, #[\SensitiveParameter] $new_pass, $id_auteur, $serveur = '') {
-	if (is_null($new_pass) or auth_ldap_verifier_pass($login, $new_pass, $id_auteur, $serveur) != '') {
+	if (is_null($new_pass) || auth_ldap_verifier_pass($login, $new_pass, $id_auteur, $serveur) != '') {
 		return false;
 	}
 	if (!$ldap = auth_ldap_connect($serveur)) {
@@ -333,8 +332,7 @@ function auth_ldap_modifier_pass($login, #[\SensitiveParameter] $new_pass, $id_a
 	if (!ldap_bind($link, $dn, session_get('ldap_password'))) {
 		return false;
 	}
-	$encoded_pass = '{MD5}' . base64_encode(pack('H*', md5($new_pass)));
-	$success = ldap_mod_replace($link, $dn, ['userPassword' => $encoded_pass]);
+	$encoded_pass = '{MD5}' . base64_encode(pack('H*', md5((string) $new_pass)));
 
-	return $success;
+	return ldap_mod_replace($link, $dn, ['userPassword' => $encoded_pass]);
 }

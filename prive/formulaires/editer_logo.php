@@ -171,7 +171,7 @@ function formulaires_editer_logo_verifier_dist($objet, $id_objet, $retour = '', 
 		if ($file && $file['error'] == 0) {
 			if (
 				!in_array(
-					strtolower(pathinfo($file['name'], PATHINFO_EXTENSION)),
+					strtolower(pathinfo((string) $file['name'], PATHINFO_EXTENSION)),
 					$extensions_possibles
 				)
 			) {

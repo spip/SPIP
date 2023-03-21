@@ -33,13 +33,11 @@ include_spip('inc/texte');
  *     Saisie protégée
  * @see spip_htmlspecialchars()
  */
-function protege_champ($valeur, $max_prof = 128) {
+function protege_champ(mixed $valeur, $max_prof = 128) {
 	if (is_array($valeur)) {
 		if ($max_prof > 0) {
 			return array_map(
-				function($v) use ($max_prof) {
-					return protege_champ($v, $max_prof-1);
-				},
+				fn($v) => protege_champ($v, $max_prof-1),
 				$valeur
 			);
 		}
@@ -49,7 +47,7 @@ function protege_champ($valeur, $max_prof = 128) {
 		return $valeur;
 	} elseif (is_bool($valeur)) {
 		return $valeur ? '1' : '';
-	} elseif (is_string($valeur) and $valeur) {
+	} elseif (is_string($valeur) && $valeur) {
 		if (strpbrk($valeur, "&\"'<>") !== false) {
 			return spip_htmlspecialchars($valeur, ENT_QUOTES);
 		}
@@ -69,11 +67,7 @@ function protege_champ($valeur, $max_prof = 128) {
  *     - false : pas de squelette trouvé
  **/
 function existe_formulaire($form) {
-	if (substr($form, 0, 11) == 'FORMULAIRE_') {
-		$form = strtolower(substr($form, 11));
-	} else {
-		$form = strtolower($form);
-	}
+	$form = str_starts_with($form, 'FORMULAIRE_') ? strtolower(substr($form, 11)) : strtolower($form);
 
 	if (!$form) {
 		return '';
@@ -95,19 +89,18 @@ function test_formulaire_inclus_par_modele() {
 	// regarder si un flag a ete leve juste avant l'appel de balise_FORMULAIRE_dyn
 	if (
 		function_exists('arguments_balise_dyn_depuis_modele')
-		and $form = arguments_balise_dyn_depuis_modele(null, 'read')
+		&& ($form = arguments_balise_dyn_depuis_modele(null, 'read'))
+		&& in_array('balise_formulaire__dyn', $trace_fonctions)
 	) {
-		if (in_array('balise_formulaire__dyn', $trace_fonctions)) {
-			$k = array_search('balise_formulaire__dyn', $trace_fonctions);
-			if ($trace[$k]['args'][0] === $form) {
-				return $trace[$k]['args'];
-			}
-		}
-	}
+    	$k = array_search('balise_formulaire__dyn', $trace_fonctions);
+    	if ($trace[$k]['args'][0] === $form) {
+  			return $trace[$k]['args'];
+  		}
+ }
 
 	// fallback qui ne repose pas sur le flag lie a l'analyse de contexte_compil,
 	// mais ne marche pas si executer_balise_dynamique est appelee via du php dans le squelette
-	if (in_array('eval', $trace_fonctions) and in_array('inclure_modele', $trace_fonctions)) {
+	if (in_array('eval', $trace_fonctions) && in_array('inclure_modele', $trace_fonctions)) {
 		$k = array_search('inclure_modele', $trace_fonctions);
 		// les arguments de recuperer_fond() passes par inclure_modele()
 		return $trace[$k - 1]['args'][1]['args'];
@@ -190,10 +183,10 @@ function balise_FORMULAIRE__contexte($form, $args) {
 
 	$je_suis_poste = false;
 	if (
-		$post_form = _request('formulaire_action')
-		and $post_form == $form
-		and $p = _request('formulaire_action_args')
-		and is_array($p = decoder_contexte_ajax($p, $post_form))
+		($post_form = _request('formulaire_action'))
+		&& $post_form == $form
+		&& ($p = _request('formulaire_action_args'))
+		&& is_array($p = decoder_contexte_ajax($p, $post_form))
 	) {
 		// enlever le faux attribut de langue masque
 		array_shift($p);
@@ -228,7 +221,7 @@ function balise_FORMULAIRE__contexte($form, $args) {
 	$action = $valeurs['action'] ?? self('&amp;', true);
 	// bug IEx : si action finit par /
 	// IE croit que le <form ... action=../ > est autoferme
-	if (substr($action, -1) == '/') {
+	if (str_ends_with((string) $action, '/')) {
 		// on ajoute une ancre pour feinter IE, au pire ca tue l'ancre qui finit par un /
 		$action .= '#';
 	}
@@ -238,8 +231,8 @@ function balise_FORMULAIRE__contexte($form, $args) {
 	// ou si on le demande explicitement par le parametre _forcer_request = true
 	$dispo = ($je_suis_poste || (isset($valeurs['_forcer_request']) && $valeurs['_forcer_request']));
 	foreach (array_keys($valeurs) as $champ) {
-		if ($champ[0] !== '_' and !in_array($champ, ['message_ok', 'message_erreur', 'editable'])) {
-			if ($dispo and (($v = _request($champ)) !== null)) {
+		if ($champ[0] !== '_' && !in_array($champ, ['message_ok', 'message_erreur', 'editable'])) {
+			if ($dispo && ($v = _request($champ)) !== null) {
 				$valeurs[$champ] = $v;
 			}
 			// nettoyer l'url des champs qui vont etre saisis
@@ -316,7 +309,7 @@ function balise_FORMULAIRE__contexte($form, $args) {
 		// et si $k ne commence pas par un _ (c'est bien une vrai erreur sur un vrai champ)
 		if (html5_permis()) {
 			foreach ($erreurs as $k => $v) {
-				if (is_string($v) and strlen(trim($v)) and strpos($k, '_') !== 0) {
+				if (is_string($v) && strlen(trim($v)) && !str_starts_with((string) $k, '_')) {
 					// on encapsule dans un span car ces messages sont en general simple, juste du texte, et deja dans un span dans le form
 					$valeurs['erreurs'][$k] = "<span role='alert'>" . $erreurs[$k] . '</span>';
 				}
@@ -351,7 +344,7 @@ function formulaire__charger($form, $args, $poste) {
 	);
 
 	// prise en charge CVT multi etape
-	if (is_array($valeurs) and isset($valeurs['_etapes'])) {
+	if (is_array($valeurs) && isset($valeurs['_etapes'])) {
 		include_spip('inc/cvt_multietapes');
 		$valeurs = cvtmulti_formulaire_charger_etapes(
 			['form' => $form, 'args' => $args, 'je_suis_poste' => $poste],

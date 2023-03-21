@@ -161,12 +161,10 @@ function message_alerte(string $texte, ?string $titre = null, ?string $class = n
 
 	$message_alerte_ouvrir = chercher_filtre('message_alerte_ouvrir');
 	$message_alerte_fermer = chercher_filtre('message_alerte_fermer');
-	$message =
-		$message_alerte_ouvrir($titre, $class, $role, $id) .
+
+	return $message_alerte_ouvrir($titre, $class, $role, $id) .
 		$texte .
 		$message_alerte_fermer();
-
-	return $message;
 }
 
 /**
@@ -229,7 +227,7 @@ function message_alerte_ouvrir(?string $titre = null, ?string $class = null, ?st
 		// Si besoin on encapsule le titre : un h3 dans le privé, un simple div sinon.
 		$cherche_tag = ($prive ? '<h' : '<');
 		$wrap_tag    = ($prive ? '<h3>' : '<div>');
-		if (strpos($titre, $cherche_tag) !== 0) {
+		if (!str_starts_with($titre, $cherche_tag)) {
 			$titre = wrap($titre, $wrap_tag);
 		}
 		// puis on ajoute la classe
@@ -241,12 +239,9 @@ function message_alerte_ouvrir(?string $titre = null, ?string $class = null, ?st
 	$attr_id   = ($id   ? "id=\"$id\"" : '');
 	$attr_data = ($type ? "data-alert=\"$type\"" : '');
 
-	$message =
-		"<div class=\"$class_alerte\" $attr_role $attr_id $attr_data>"
+	return "<div class=\"$class_alerte\" $attr_role $attr_id $attr_data>"
 			. $titre
 			. "<div class=\"$class_texte\">";
-
-	return $message;
 }
 
 /**

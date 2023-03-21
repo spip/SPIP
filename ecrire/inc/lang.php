@@ -55,9 +55,8 @@ function changer_langue($lang, $liste_langues = null) {
 	}
 
 	if (
-		strpos($liste_langues, (string) ",$lang,") !== false
-		or ($lang = preg_replace(',_.*,', '', $lang)
-			and str_contains($liste_langues, (string) ",$lang,"))
+		str_contains($liste_langues, (string) ",$lang,")
+		|| ($lang = preg_replace(',_.*,', '', $lang)) && str_contains($liste_langues, (string) ",$lang,")
 	) {
 		$GLOBALS['spip_lang_rtl'] = lang_dir($lang, '', '_rtl');
 		$GLOBALS['spip_lang_right'] = $GLOBALS['spip_lang_rtl'] ? 'left' : 'right';
@@ -97,7 +96,7 @@ function approcher_langue($trads, $lang = '') {
 		return $lang;
 	} // cas des langues xx_yy
 	else {
-		$r = explode('_', $lang);
+		$r = explode('_', (string) $lang);
 		if (isset($trads[$r[0]])) {
 			return $r[0];
 		}
@@ -151,9 +150,9 @@ function lang_typo($lang = '') {
 	}
 	if (
 		$lang == 'eo'
-		or $lang == 'fr'
-		or strncmp($lang, 'fr_', 3) == 0
-		or $lang == 'cpf'
+		|| $lang == 'fr'
+		|| str_starts_with((string) $lang, 'fr_')
+		|| $lang == 'cpf'
 	) {
 		return 'fr';
 	} else {
@@ -182,7 +181,7 @@ function menu_langues($nom_select, $default = '') {
 
 	$langues = liste_options_langues($nom_select);
 	$ret = '';
-	if (!count($langues)) {
+	if ($langues === []) {
 		return '';
 	}
 
@@ -221,11 +220,9 @@ function select_langues($nom_select, $change, $options, $label = '') {
 	return
 		"<label for='$id'>" . ($label ?: _T('info_langues')) . '</label> ' .
 		"<select name='$nom_select' id='$id' "
-		. ((!test_espace_prive()) ?
-			("class='forml menu_langues'") :
-			(($nom_select == 'var_lang_ecrire') ?
-				("class='lang_ecrire'") :
-				"class='fondl'"))
+		. ((test_espace_prive()) ?
+			(($nom_select == 'var_lang_ecrire' ? "class='lang_ecrire'" : "class='fondl'")) :
+			("class='forml menu_langues'"))
 		. $change
 		. ">\n"
 		. $options
@@ -257,7 +254,7 @@ function liste_options_langues($nom_select) {
 			# menu de changement de la langue d'un article
 			# les langues selectionnees dans la configuration "multilinguisme"
 		case 'changer_lang':
-			$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
+			$langues = explode(',', (string) $GLOBALS['meta']['langues_multilingue']);
 			break;
 		# menu de l'interface (privee, installation et panneau de login)
 		# les langues presentes sous forme de fichiers de langue
@@ -298,7 +295,7 @@ function verifier_lang_url() {
 	if (isset($_COOKIE['spip_lang_ecrire'])) {
 		$lang_demandee = $_COOKIE['spip_lang_ecrire'];
 	}
-	if (!test_espace_prive() and isset($_COOKIE['spip_lang'])) {
+	if (!test_espace_prive() && isset($_COOKIE['spip_lang'])) {
 		$lang_demandee = $_COOKIE['spip_lang'];
 	}
 	if (isset($_GET['lang'])) {
@@ -308,8 +305,8 @@ function verifier_lang_url() {
 	// Renvoyer si besoin (et si la langue demandee existe)
 	if (
 		$GLOBALS['spip_lang'] != $lang_demandee
-		and changer_langue($lang_demandee)
-		and $lang_demandee != @$_GET['lang']
+		&& changer_langue($lang_demandee)
+		&& $lang_demandee != @$_GET['lang']
 	) {
 		$destination = parametre_url(self(), 'lang', $lang_demandee, '&');
 		// ici on a besoin des var_truc
@@ -346,10 +343,7 @@ function utiliser_langue_site($liste_langues = null) {
 	// s'il existe une langue du site (en gros tout le temps en théorie)
 	if (
 		isset($GLOBALS['meta']['langue_site'])
-		// et si spip_langue est pas encore définie (ce que va faire changer_langue())
-		// ou qu'elle n'est pas identique à la langue du site
-		and (!isset($GLOBALS['spip_lang'])
-			or $GLOBALS['spip_lang'] != $GLOBALS['meta']['langue_site'])
+		&& (!isset($GLOBALS['spip_lang']) || $GLOBALS['spip_lang'] != $GLOBALS['meta']['langue_site'])
 	) {
 		return changer_langue($GLOBALS['meta']['langue_site'], $liste_langues);//@:install
 	}
@@ -378,29 +372,32 @@ function utiliser_langue_site($liste_langues = null) {
 function utiliser_langue_visiteur($liste_langues = null) {
 
 	// si on est dans l'espace public et pas de $liste_langues : se limiter a la config langues_multilingue si définie
-	if (is_null($liste_langues) and !test_espace_prive() and !empty($GLOBALS['meta']['langues_multilingue'])) {
+	if (is_null($liste_langues) && !test_espace_prive() && !empty($GLOBALS['meta']['langues_multilingue'])) {
 		$liste_langues = $GLOBALS['meta']['langues_multilingue'];
 	}
 
-	$l = (!test_espace_prive() ? 'spip_lang' : 'spip_lang_ecrire');
-	if (isset($_COOKIE[$l])) {
-		if (changer_langue($l = $_COOKIE[$l], $liste_langues)) {
-			return $l;
-		}
+	$l = (test_espace_prive() ? 'spip_lang_ecrire' : 'spip_lang');
+	if (
+		isset($_COOKIE[$l])
+		&& changer_langue($l = $_COOKIE[$l], $liste_langues)
+	) {
+		return $l;
 	}
 
-	if (isset($GLOBALS['visiteur_session']['lang'])) {
-		if (changer_langue($l = $GLOBALS['visiteur_session']['lang'], $liste_langues)) {
-			return $l;
-		}
+	if (
+		isset($GLOBALS['visiteur_session']['lang'])
+		&& changer_langue($l = $GLOBALS['visiteur_session']['lang'], $liste_langues)
+	) {
+		return $l;
 	}
 
 	if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-		foreach (explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']) as $s) {
-			if (preg_match('#^([a-z]{2,3})(-[a-z]{2,3})?(;q=[0-9.]+)?$#i', trim($s), $r)) {
-				if (changer_langue($l = strtolower($r[1]), $liste_langues)) {
-					return $l;
-				}
+		foreach (explode(',', (string) $_SERVER['HTTP_ACCEPT_LANGUAGE']) as $s) {
+			if (
+				preg_match('#^([a-z]{2,3})(-[a-z]{2,3})?(;q=[0-9.]+)?$#i', trim($s), $r)
+				&& changer_langue($l = strtolower($r[1]), $liste_langues)
+			) {
+				return $l;
 			}
 		}
 	}
@@ -440,15 +437,16 @@ function init_langues() {
 	if (!$all_langs) {
 		// trouver tous les modules lang/spip_xx.php
 		$modules = find_all_in_path('lang/', '/spip_([a-z_]+)\.php$');
-		foreach ($modules as $name => $path) {
-			if (preg_match(',^spip_([a-z_]+)\.php$,', $name, $regs)) {
-				if (match_langue($regs[1])) {
-					$tout[] = $regs[1];
-				}
+		foreach (array_keys($modules) as $name) {
+			if (
+				preg_match(',^spip_([a-z_]+)\.php$,', $name, $regs)
+				&& match_langue($regs[1])
+			) {
+				$tout[] = $regs[1];
 			}
 		}
 		sort($tout);
-		$tout = join(',', $tout);
+		$tout = implode(',', $tout);
 		// Si les langues n'ont pas change, ne rien faire
 		if ($tout != $all_langs) {
 			$GLOBALS['meta']['langues_proposees'] = $tout;
@@ -459,8 +457,9 @@ function init_langues() {
 	if (!isset($GLOBALS['meta']['langue_site'])) {
 		// Initialisation : le francais si dispo, sinon la premiere langue trouvee
 		$GLOBALS['meta']['langue_site'] = $tout =
-			(!$all_langs or (strpos(',' . _LANGUE_PAR_DEFAUT . ',', (string) ",$all_langs,") !== false))
-				? _LANGUE_PAR_DEFAUT : substr($all_langs, 0, strpos($all_langs, ','));
+			(!$all_langs || str_contains(',' . _LANGUE_PAR_DEFAUT . ',', (string) ",$all_langs,"))
+				? _LANGUE_PAR_DEFAUT
+				: substr((string) $all_langs, 0, strpos((string) $all_langs, ','));
 		ecrire_meta('langue_site', $tout);
 	}
 }
@@ -493,7 +492,7 @@ function html_lang_attributes() {
  * @return string
  */
 function aide_lang_dir($spip_lang, $spip_lang_rtl) {
-	return ($spip_lang <> 'he') ? $spip_lang_rtl : '';
+	return ($spip_lang != 'he') ? $spip_lang_rtl : '';
 }
 
 

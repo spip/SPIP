@@ -165,7 +165,7 @@ function formulaires_editer_rubrique_verifier_dist(
 	) {
 		include_spip('inc/rubriques');
 		$branche = calcul_branche_in($id_rubrique);
-		$branche = explode(',', $branche);
+		$branche = explode(',', (string) $branche);
 		if (in_array($id_parent, $branche)) {
 			$erreurs['id_parent'] = _L('Impossible de déplacer une rubrique dans sa propre branche, on tourne en rond !');
 		}

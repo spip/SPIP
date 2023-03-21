@@ -30,7 +30,7 @@ function test_ecrire($my_dir) {
 
 	$ok = false;
 	$script = @file_exists('spip_loader.php') ? 'spip_loader.php' : $_SERVER['PHP_SELF'];
-	$self = basename($script);
+	$self = basename((string) $script);
 	$uid = @fileowner('.');
 	$uid2 = @fileowner($self);
 	$gid = @filegroup('.');
@@ -71,8 +71,8 @@ function install_etape_chmod_dist() {
 	$test_dir = _request('test_dir');
 	$chmod = 0;
 
-	if ($test_dir && !str_contains($test_dir, '..')) {
-		if (!str_ends_with($test_dir, '/')) {
+	if ($test_dir && !str_contains((string) $test_dir, '..')) {
+		if (!str_ends_with((string) $test_dir, '/')) {
 			$test_dir .= '/';
 		}
 		if (!in_array($test_dir, $GLOBALS['test_dirs'])) {
@@ -91,7 +91,7 @@ function install_etape_chmod_dist() {
 	foreach ($GLOBALS['test_dirs'] as $i => $my_dir) {
 		$test = test_ecrire($my_dir);
 		if (!$test) {
-			$m = preg_replace(',^' . _DIR_RACINE . ',', '', $my_dir);
+			$m = preg_replace(',^' . _DIR_RACINE . ',', '', (string) $my_dir);
 			if (@file_exists($my_dir)) {
 				$bad_dirs['<li>' . $m . '</li>'] = 1;
 			} else {

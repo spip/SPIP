@@ -53,7 +53,7 @@ function public_styliser_par_z_dist($flux) {
 			$page = _SPIP_PAGE;
 			$echafauder = charger_fonction('echafauder', 'public', true);
 			define('_ZCORE_EXCLURE_PATH', '\bprive|\bsquelettes-dist' . (defined('_DIR_PLUGIN_DIST') ? '|\b' . rtrim(
-				_DIR_PLUGIN_DIST,
+				(string) _DIR_PLUGIN_DIST,
 				'/'
 			) : ''));
 		}
@@ -63,8 +63,8 @@ function public_styliser_par_z_dist($flux) {
 
 	$fond = $flux['args']['fond'];
 
-	if ($prepend || strncmp($fond, $prefix_path, $prefix_length) == 0) {
-		$fond = substr($fond, $prefix_length);
+	if ($prepend || strncmp((string) $fond, (string) $prefix_path, $prefix_length) == 0) {
+		$fond = substr((string) $fond, $prefix_length);
 		$squelette = $flux['data'];
 		$ext = $flux['args']['ext'];
 		// Ajax Parallel loading : ne pas calculer le bloc, mais renvoyer un js qui le loadera en ajax
@@ -75,7 +75,7 @@ function public_styliser_par_z_dist($flux) {
 			&& ($dir = reset($dir))
 			&& in_array($dir, $z_blocs) // verifier deja qu'on est dans un bloc Z
 			&& defined($apl_constant)
-			&& in_array($dir, explode(',', constant($apl_constant))) // et dans un demande en APL
+			&& in_array($dir, explode(',', (string) constant($apl_constant))) // et dans un demande en APL
 			&& ($pipe = z_trouver_bloc($prefix_path . $prepend, $dir, 'z_apl', $ext)) // et qui contient le squelette APL
 		) {
 			$flux['data'] = $pipe;
@@ -89,7 +89,7 @@ function public_styliser_par_z_dist($flux) {
 			$echafauder = '';
 		}
 		if ($prepend) {
-			$squelette = substr(find_in_path($prefix_path . $prepend . "$fond.$ext"), 0, -strlen(".$ext"));
+			$squelette = substr((string) find_in_path($prefix_path . $prepend . "$fond.$ext"), 0, -strlen(".$ext"));
 			if ($squelette) {
 				$flux['data'] = $squelette;
 			}
@@ -113,15 +113,15 @@ function public_styliser_par_z_dist($flux) {
 				}
 
 				if ($disponible[$fond]) {
-					$flux['data'] = substr(find_in_path($prefix_path . "page.$ext"), 0, -strlen(".$ext"));
+					$flux['data'] = substr((string) find_in_path($prefix_path . "page.$ext"), 0, -strlen(".$ext"));
 				}
 			}
 
 			// echafaudage :
 			// si c'est un fond de contenu d'un objet en base
 			// generer un fond automatique a la volee pour les webmestres
-			elseif (strncmp($fond, "$z_contenu/", strlen($z_contenu) + 1) == 0) {
-				$type = substr($fond, strlen($z_contenu) + 1);
+			elseif (strncmp($fond, "$z_contenu/", strlen((string) $z_contenu) + 1) == 0) {
+				$type = substr($fond, strlen((string) $z_contenu) + 1);
 				if ($type == 'page' && isset($flux['args']['contexte'][$page])) {
 					$type = $flux['args']['contexte'][$page];
 				}
@@ -179,7 +179,7 @@ function public_styliser_par_z_dist($flux) {
 		// body-sommaire.html
 		// pour des raisons de perfo, les declinaisons doivent etre dans le
 		// meme dossier que body.html
-		if ($fond == 'body' && str_ends_with($squelette, $fond)) {
+		if ($fond == 'body' && str_ends_with((string) $squelette, $fond)) {
 			if (
 				isset($flux['args']['contexte']['type-page'])
 				&& (
@@ -194,18 +194,18 @@ function public_styliser_par_z_dist($flux) {
 			&& z_sanitize_var_zajax()
 			&& ($f = find_in_path($prefix_path . $prepend . 'ajax' . ".$ext"))
 		) {
-			$flux['data'] = substr($f, 0, -strlen(".$ext"));
+			$flux['data'] = substr((string) $f, 0, -strlen(".$ext"));
 		} // chercher le fond correspondant a la composition
 		elseif (
 			isset($flux['args']['contexte']['composition'])
-			&& (basename($fond) == 'page' || $squelette && str_ends_with($squelette, $fond))
+			&& (basename($fond) == 'page' || $squelette && str_ends_with((string) $squelette, $fond))
 			&& ($dir = substr($fond, $prefix_length))
 			&& ($dir = explode('/', $dir))
 			&& ($dir = reset($dir))
 			&& in_array($dir, $z_blocs)
 			&& ($f = find_in_path($prefix_path . $prepend . $fond . '-' . $flux['args']['contexte']['composition'] . ".$ext"))
 		) {
-			$flux['data'] = substr($f, 0, -strlen(".$ext"));
+			$flux['data'] = substr((string) $f, 0, -strlen(".$ext"));
 		}
 	}
 
@@ -285,7 +285,7 @@ function z_trouver_bloc($prefix_path, $bloc, $fond, $ext) {
 		defined('_ZCORE_BLOC_PREFIX_SKEL') && ($f = find_in_path("$prefix_path$bloc/$bloc.$fond.$ext")) && z_fond_valide($f)
 		|| ($f = find_in_path("$prefix_path$bloc/$fond.$ext")) && z_fond_valide($f)
 	) {
-		return substr($f, 0, -strlen(".$ext"));
+		return substr((string) $f, 0, -strlen(".$ext"));
 	}
 
 	return '';
@@ -378,7 +378,7 @@ function prive_echafauder_dist($exec, $table, $table_sql, $desc_exec, $ext) {
 		}
 		$dir = z_blocs(test_espace_prive());
 		$dir = reset($dir);
-		$scaffold = "<INCLURE{fond=prive/echafaudage/$dir/" . $fond . ',objet=' . $type . ',id_objet=#' . strtoupper($primary) . ',env}>';
+		$scaffold = "<INCLURE{fond=prive/echafaudage/$dir/" . $fond . ',objet=' . $type . ',id_objet=#' . strtoupper((string) $primary) . ',env}>';
 	} // page objets
 	elseif (($type = $desc_exec) && !str_contains($type, '/')) {
 		$dir = z_blocs(test_espace_prive());

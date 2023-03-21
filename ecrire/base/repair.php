@@ -101,12 +101,12 @@ function admin_repair_tables() {
 
 		if (
 			$repair
-			and $result_repair
-			and $msg = join(
+			&& $result_repair
+			&& ($msg = implode(
 				' ',
-				(is_resource($result_repair) or is_object($result_repair)) ? sql_fetch($result_repair) : $result_repair
-			) . ' '
-			and !str_contains($msg, ' OK ')
+				(is_resource($result_repair) || is_object($result_repair)) ? sql_fetch($result_repair) : $result_repair
+			) . ' ')
+			&& !str_contains($msg, ' OK ')
 		) {
 			$class = " class='notice'";
 			$m .= '<br /><tt>' . spip_htmlentities($msg) . "</tt>\n";

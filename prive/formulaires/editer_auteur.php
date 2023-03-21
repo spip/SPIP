@@ -188,7 +188,7 @@ function formulaires_editer_auteur_verifier_dist(
 		if (
 			!autoriser('modifier', 'auteur', $id_auteur, null, ['email' => '?'])
 			&& $GLOBALS['visiteur_session']['id_auteur'] == $id_auteur
-			&& !strlen(trim($email))
+			&& !strlen(trim((string) $email))
 			&& $email != ($email_ancien = sql_getfetsel('email', 'spip_auteurs', 'id_auteur=' . (int) $id_auteur))
 		) {
 			$erreurs['email'] = (($id_auteur == $GLOBALS['visiteur_session']['id_auteur']) ? _T('form_email_non_valide') : _T('form_prop_indiquer_email'));
@@ -235,8 +235,8 @@ function formulaires_editer_auteur_verifier_dist(
 	if (
 		($url = _request('url_site'))
 		&& !tester_url_absolue($url)
-		&& (!str_contains($url, ':')
-		&& strncasecmp($url, 'www.', 4) === 0)
+		&& (!str_contains((string) $url, ':')
+		&& strncasecmp((string) $url, 'www.', 4) === 0)
 	) {
 		$url = 'http://' . $url;
 		set_request('url_site', $url);
@@ -361,8 +361,8 @@ function formulaires_editer_auteur_traiter_dist(
 
 	if ($restreintes = _request('restreintes')) {
 		foreach ($restreintes as $k => $v) {
-			if (str_starts_with($v, 'rubrique|')) {
-				$restreintes[$k] = substr($v, 9);
+			if (str_starts_with((string) $v, 'rubrique|')) {
+				$restreintes[$k] = substr((string) $v, 9);
 			}
 		}
 		set_request('restreintes', $restreintes);

@@ -68,9 +68,9 @@ function balise_URL_LOGOUT_stat($args, $context_compil) {
  **/
 function balise_URL_LOGOUT_dyn($cible) {
 
-	if (empty($GLOBALS['visiteur_session']['login']) and empty($GLOBALS['visiteur_session']['statut'])) {
+	if (empty($GLOBALS['visiteur_session']['login']) && empty($GLOBALS['visiteur_session']['statut'])) {
 		return '';
 	}
 
-	return generer_url_action('logout', 'logout=public&url=' . rawurlencode($cible ?: self('&')));
+	return generer_url_action('logout', 'logout=public&url=' . rawurlencode((string) ($cible ?: self('&'))));
 }

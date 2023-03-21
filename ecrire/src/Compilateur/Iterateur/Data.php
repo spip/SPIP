@@ -315,7 +315,7 @@ class Data extends AbstractIterateur implements Iterator
 		# s'il n'y a qu'une valeur dans la liste, sans doute une #BALISE
 		if (!isset($this->command['liste'][1])) {
 			if (!is_array($this->command['liste'][0])) {
-				$this->command['liste'] = explode(',', $this->command['liste'][0]);
+				$this->command['liste'] = explode(',', (string) $this->command['liste'][0]);
 			} else {
 				$this->command['liste'] = $this->command['liste'][0];
 			}
@@ -332,7 +332,7 @@ class Data extends AbstractIterateur implements Iterator
 		# s'il n'y a qu'une valeur dans la liste, sans doute une #BALISE
 		if (!isset($this->command['enum'][1])) {
 			if (!is_array($this->command['enum'][0])) {
-				$this->command['enum'] = explode(',', $this->command['enum'][0]);
+				$this->command['enum'] = explode(',', (string) $this->command['enum'][0]);
 			} else {
 				$this->command['enum'] = $this->command['enum'][0];
 			}
@@ -357,7 +357,7 @@ class Data extends AbstractIterateur implements Iterator
 	 **/
 	protected function select_datapath() {
 		$base = reset($this->command['datapath']);
-		if (strlen($base = ltrim(trim($base), '/'))) {
+		if (strlen($base = ltrim(trim((string) $base), '/'))) {
 			$results = table_valeur($this->tableau, $base);
 			if (is_array($results)) {
 				$this->tableau = $results;
@@ -379,7 +379,7 @@ class Data extends AbstractIterateur implements Iterator
 		$aleas = 0;
 		foreach ($this->command['orderby'] as $tri) {
 			// virer le / initial pour les criteres de la forme {par /xx}
-			if (preg_match(',^\.?([/\w:_-]+)( DESC)?$,iS', ltrim($tri, '/'), $r)) {
+			if (preg_match(',^\.?([/\w:_-]+)( DESC)?$,iS', ltrim((string) $tri, '/'), $r)) {
 				$r = array_pad($r, 3, null);
 
 				// tri par cle
@@ -426,7 +426,7 @@ class Data extends AbstractIterateur implements Iterator
 	 **/
 	protected function select_groupby() {
 		// virer le / initial pour les criteres de la forme {fusion /xx}
-		if (strlen($fusion = ltrim($this->command['groupby'][0], '/'))) {
+		if (strlen($fusion = ltrim((string) $this->command['groupby'][0], '/'))) {
 			$vu = [];
 			foreach ($this->tableau as $k => $v) {
 				$val = table_valeur($v, $fusion);

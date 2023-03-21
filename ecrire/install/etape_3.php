@@ -33,7 +33,7 @@ function install_bases($adresse_db, $login_db, $pass_db, $server_db, $choix_db, 
 		$table_prefix = _INSTALL_TABLE_PREFIX;
 	}
 
-	if (preg_match(',(.*):(.*),', $adresse_db, $r)) {
+	if (preg_match(',(.*):(.*),', (string) $adresse_db, $r)) {
 		[, $adresse_db, $port] = $r;
 	} else {
 		$port = '';
@@ -48,7 +48,7 @@ function install_bases($adresse_db, $login_db, $pass_db, $server_db, $choix_db, 
 	$fquery = sql_serveur('query', $server_db);
 	if ($choix_db == 'new_spip') {
 		$re = ',^[a-z_][a-z_0-9-]*$,i';
-		if (preg_match($re, $sel_db)) {
+		if (preg_match($re, (string) $sel_db)) {
 			$ok = sql_create_base($sel_db, $server_db);
 			if (!$ok) {
 				$re = "Impossible de creer la base $re";

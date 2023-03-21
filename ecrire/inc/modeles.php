@@ -9,6 +9,9 @@
  *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
 \***************************************************************************/
 
+use Spip\Texte\Collecteur\Liens;
+use Spip\Texte\Collecteur\Modeles;
+
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -18,16 +21,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param string $texte
  * @param bool|array $doublons
  * @param string $echap
- * @param string $connect
- * @param ?Spip\Texte\Collecteur\Liens $collecteurLiens
  * @param array $env
  * @return string
  */
-function traiter_modeles($texte, $doublons = false, $echap = '', string $connect = '', ?Spip\Texte\Collecteur\Liens $collecteurLiens = null, $env = []) {
+function traiter_modeles($texte, $doublons = false, $echap = '', string $connect = '', ?Liens $collecteurLiens = null, $env = []) {
 
 	include_spip('src/Texte/Collecteur/AbstractCollecteur');
 	include_spip('src/Texte/Collecteur/Modeles');
-	$collecteurModeles = new Spip\Texte\Collecteur\Modeles();
+	$collecteurModeles = new Modeles();
 
 	$options = [
 		'doublons' => $doublons,

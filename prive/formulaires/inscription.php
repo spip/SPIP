@@ -78,7 +78,7 @@ function formulaires_inscription_verifier_dist($mode = '', $options = [], $retou
 	$id = ($options['id'] ?? 0);
 
 	include_spip('inc/autoriser');
-	if (!autoriser('inscrireauteur', $mode, $id) || strlen(_request('nobot')) > 0) {
+	if (!autoriser('inscrireauteur', $mode, $id) || strlen((string) _request('nobot')) > 0) {
 		$erreurs['message_erreur'] = _T('pass_rien_a_faire_ici');
 	}
 

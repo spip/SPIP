@@ -99,10 +99,8 @@ function balise_FORMULAIRE_ADMIN_dyn($float = '', $debug = '') {
 				return '';
 			}
 			foreach ($debug['sourcefile'] as $k => $v) {
-				if (strpos($v, 'administration.') !== false) {
-					if (isset($debug['resultat'][$k . 'tout'])) {
-						return $debug['resultat'][$k . 'tout'];
-					}
+				if (str_contains((string) $v, 'administration.') && isset($debug['resultat'][$k . 'tout'])) {
+					return $debug['resultat'][$k . 'tout'];
 				}
 			}
 
@@ -128,9 +126,9 @@ function balise_FORMULAIRE_ADMIN_dyn($float = '', $debug = '') {
 	$env['divclass'] = $float;
 	$env['lang'] = admin_lang();
 	$env['calcul'] = (_request('var_mode') ? 'recalcul' : 'calcul');
-	$env['debug'] = ((defined('_VAR_PREVIEW') and _VAR_PREVIEW) ? '' : admin_debug());
-	$env['analyser'] = (!$env['debug'] and !$GLOBALS['xhtml']) ? '' : admin_valider();
-	$env['inclure'] = ((defined('_VAR_INCLURE') and _VAR_INCLURE) ? 'inclure' : '');
+	$env['debug'] = ((defined('_VAR_PREVIEW') && _VAR_PREVIEW) ? '' : admin_debug());
+	$env['analyser'] = (!$env['debug'] && !$GLOBALS['xhtml']) ? '' : admin_valider();
+	$env['inclure'] = ((defined('_VAR_INCLURE') && _VAR_INCLURE) ? 'inclure' : '');
 
 	if (empty($GLOBALS['use_cache'])) {
 		$env['use_cache'] = ' *';
@@ -172,23 +170,22 @@ function admin_objet() {
 		$type = $obj;
 		if (
 			$type == objet_type($type, false)
-			and $_id_type = id_table_objet($type)
-			and isset($GLOBALS['contexte'][$_id_type])
-			and $id = $GLOBALS['contexte'][$_id_type]
-			and !is_array($id)
-			and $id = intval($id)
-			and $desc = $trouver_table(table_objet_sql($type))
+			&& ($_id_type = id_table_objet($type))
+			&& isset($GLOBALS['contexte'][$_id_type])
+			&& ($id = $GLOBALS['contexte'][$_id_type])
+			&& !is_array($id)
+			&& ($id = (int) $id)
+			&& ($desc = $trouver_table(table_objet_sql($type)))
 		) {
-			$id = sql_getfetsel($_id_type, table_objet_sql($type), "$_id_type=" . intval($id));
+			$id = sql_getfetsel($_id_type, table_objet_sql($type), "$_id_type=" . (int) $id);
 			if ($id) {
 				$env[$_id_type] = $id;
 				$env['objet'] = $type;
 				$env['id_objet'] = $id;
-				$env['voir_' . $obj] =
-					str_replace('&amp;', '&', generer_objet_url($id, $obj, '', '', false));
+				$env['voir_' . $obj] = str_replace('&amp;', '&', (string) generer_objet_url($id, $obj, '', '', false));
 				if (
 					isset($desc['field']['id_rubrique'])
-					and $type != 'rubrique'
+					&& $type != 'rubrique'
 				) {
 					unset($env['id_rubrique']);
 					unset($env['voir_rubrique']);
@@ -218,7 +215,7 @@ function admin_objet() {
  *     - Tableau d'un élément sinon.
  **/
 function admin_preview($type, $id, $desc = null) {
-	if (defined('_VAR_PREVIEW') and _VAR_PREVIEW) {
+	if (defined('_VAR_PREVIEW') && _VAR_PREVIEW) {
 		return '';
 	}
 
@@ -226,7 +223,7 @@ function admin_preview($type, $id, $desc = null) {
 		$trouver_table = charger_fonction('trouver_table', 'base');
 		$desc = $trouver_table(table_objet_sql($type));
 	}
-	if (!$desc or !isset($desc['field']['statut'])) {
+	if (!$desc || !isset($desc['field']['statut'])) {
 		return '';
 	}
 
@@ -237,7 +234,7 @@ function admin_preview($type, $id, $desc = null) {
 
 	$notpub = sql_in('statut', ['prop', 'prive']);
 
-	if ($type == 'article' and $GLOBALS['meta']['post_dates'] != 'oui') {
+	if ($type == 'article' && $GLOBALS['meta']['post_dates'] != 'oui') {
 		$notpub .= " OR (statut='publie' AND date>" . sql_quote(date('Y-m-d H:i:s')) . ')';
 	}
 
@@ -254,7 +251,7 @@ function admin_preview($type, $id, $desc = null) {
 function admin_lang() {
 	$alang = '';
 	if (!empty($_COOKIE['spip_admin'])) {
-		$email_or_login = preg_replace(',^@,', '', $_COOKIE['spip_admin']);
+		$email_or_login = preg_replace(',^@,', '', (string) $_COOKIE['spip_admin']);
 		$alang = sql_getfetsel('lang', 'spip_auteurs', 'email=' . sql_quote($email_or_login));
 		if (!$alang) {
 			$alang = sql_getfetsel('lang', 'spip_auteurs', 'login=' . sql_quote($email_or_login));
@@ -280,7 +277,7 @@ function admin_lang() {
  **/
 function admin_valider() {
 
-	return ((!isset($GLOBALS['xhtml']) or $GLOBALS['xhtml'] !== 'true') ?
+	return ((!isset($GLOBALS['xhtml']) || $GLOBALS['xhtml'] !== 'true') ?
 		(parametre_url(self(), 'var_mode', 'debug', '&')
 			. '&var_mode_affiche=validation') :
 		('http://validator.w3.org/check?uri='
@@ -293,14 +290,10 @@ function admin_valider() {
  * @return string
  **/
 function admin_debug() {
-	return ((
-			(isset($GLOBALS['forcer_debug']) and $GLOBALS['forcer_debug'])
-			or (isset($GLOBALS['bouton_admin_debug']) and $GLOBALS['bouton_admin_debug'])
-			or (
-				defined('_VAR_MODE') and _VAR_MODE == 'debug'
-				and isset($_COOKIE['spip_debug']) and $_COOKIE['spip_debug']
-			)
-		) and autoriser('debug')
+	return (
+		(isset($GLOBALS['forcer_debug']) && $GLOBALS['forcer_debug']
+		|| isset($GLOBALS['bouton_admin_debug']) && $GLOBALS['bouton_admin_debug']
+		|| defined('_VAR_MODE') && _VAR_MODE == 'debug' && isset($_COOKIE['spip_debug']) && $_COOKIE['spip_debug']) && autoriser('debug')
 	)
 		? parametre_url(self(), 'var_mode', 'debug', '&') : '';
 }

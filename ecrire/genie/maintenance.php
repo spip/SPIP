@@ -71,7 +71,7 @@ function verifier_crash_tables() {
 			foreach ($GLOBALS[$com] as $table => $desc) {
 				if (
 					!sql_select('*', $table, '', '', '', 1)
-					and !defined('spip_interdire_cache')
+					&& !defined('spip_interdire_cache')
 				) { # cas "LOST CONNECTION"
 				$crash[] = $table;
 				}
@@ -108,7 +108,7 @@ function message_crash_tables() {
 	if ($crash = verifier_crash_tables()) {
 		return
 			'<strong>' . _T('texte_recuperer_base') . '</strong><br />'
-			. ' <tt>' . join(', ', $crash) . '</tt><br />'
+			. ' <tt>' . implode(', ', $crash) . '</tt><br />'
 			. generer_form_ecrire(
 				'base_repair',
 				_T('texte_crash_base'),

@@ -124,24 +124,24 @@ function redirige_action_post($action, $arg, $ret, $gra, $corps, $att = '') {
  */
 function ajax_retour($corps, $content_type = null): void {
 	$xml = false;
-	if (is_null($content_type) or $content_type === true) {
+	if (is_null($content_type) || $content_type === true) {
 		$xml = true;
 		$content_type = 'text/html';
-	} elseif (!$content_type or !is_string($content_type) or !str_contains($content_type, '/')) {
+	} elseif (!$content_type || !is_string($content_type) || !str_contains($content_type, '/')) {
 		$content_type = 'text/html';
 	}
 
 	$e = '';
 	if (
 		isset($_COOKIE['spip_admin'])
-		and ((_request('var_mode') == 'debug') or !empty($GLOBALS['tableau_des_temps']))
+		&& (_request('var_mode') == 'debug' || !empty($GLOBALS['tableau_des_temps']))
 	) {
 		$e = erreur_squelette();
 	}
 
 	$c = $GLOBALS['meta']['charset'];
 	header('Content-Type: ' . $content_type . '; charset=' . $c);
-	$debut = (($xml and strlen(trim($corps))) ? '<' . "?xml version='1.0' encoding='" . $c . "'?" . ">\n" : '');
+	$debut = (($xml && strlen(trim($corps))) ? '<' . "?xml version='1.0' encoding='" . $c . "'?" . ">\n" : '');
 	$fin = '';
 
 	echo $debut, $corps, $fin, $e;

@@ -57,10 +57,10 @@ function mise_a_jour_ecran_securite() {
 	// si l'ecran n'est pas deja present ou pas updatable, sortir
 	if (
 		!_URL_ECRAN_SECURITE
-		or !file_exists($filename = _DIR_ETC . 'ecran_securite.php')
-		or !is_writable($filename)
-		or !$last_modified = filemtime($filename)
-		or !$md5 = md5_file($filename)
+		|| !file_exists($filename = _DIR_ETC . 'ecran_securite.php')
+		|| !is_writable($filename)
+		|| !($last_modified = filemtime($filename))
+		|| !($md5 = md5_file($filename))
 	) {
 		return false;
 	}
@@ -77,8 +77,8 @@ function mise_a_jour_ecran_securite() {
 	// si il y a une version plus recente que l'on a recu correctement
 	if (
 		$res['status'] == 200
-		and $res['length']
-		and $tmp_file = $res['file']
+		&& $res['length']
+		&& ($tmp_file = $res['file'])
 	) {
 		if ($md5 !== md5_file($tmp_file)) {
 			// on essaye de l'inclure pour verifier que ca ne fait pas erreur fatale
@@ -115,7 +115,7 @@ function info_maj(string $version): string {
 	}
 
 	$maj = info_maj_versions($version, array_keys($contenu['versions'] ?? []));
-	if (!$maj['mineure'] and !$maj['majeure']) {
+	if (!$maj['mineure'] && !$maj['majeure']) {
 		return '';
 	}
 
@@ -153,7 +153,7 @@ function info_maj_cache(): ?array {
 	$res = recuperer_url_cache(_VERSIONS_SERVEUR, $options);
 
 	// Si rien de neuf (ou inaccessible), garder l'ancienne
-	if ($res and $res['page']) {
+	if ($res && $res['page']) {
 		$contenu = $res['page'];
 		ecrire_fichier($nom, $contenu);
 	}
@@ -163,7 +163,7 @@ function info_maj_cache(): ?array {
 	}
 
 	try {
-		$json = json_decode($contenu, true, 512, JSON_THROW_ON_ERROR);
+		$json = json_decode((string) $contenu, true, 512, JSON_THROW_ON_ERROR);
 	} catch (JsonException $e) {
 		spip_log('Failed to parse Json data : ' . $e->getMessage(), 'verifie_maj');
 		return null;
@@ -203,17 +203,17 @@ function info_maj_versions(string $version, array $versions): array {
 		// d'abord les mises à jour de la même branche (version mineure)
 		if (
 			spip_version_compare($version, $version_maj, '<')
-			and spip_version_compare($maj['mineure'], $version_maj, '<')
-			and spip_version_compare($branche, $branche_maj, '=')
+			&& spip_version_compare($maj['mineure'], $version_maj, '<')
+			&& spip_version_compare($branche, $branche_maj, '=')
 		) {
 			$maj['mineure'] = $version_maj;
 		}
 		// puis les mises à jours majeures
 		if (
 			$is_version_stable
-			and spip_version_compare($version, $version_maj, '<')
-			and spip_version_compare($maj['majeure'], $version_maj, '<')
-			and spip_version_compare($branche, $branche_maj, '<')
+			&& spip_version_compare($version, $version_maj, '<')
+			&& spip_version_compare($maj['majeure'], $version_maj, '<')
+			&& spip_version_compare($branche, $branche_maj, '<')
 		) {
 			$maj['majeure'] = $version_maj;
 		}

@@ -42,14 +42,14 @@ define('_FILE_TMP', '_install');
  **/
 function exec_install_dist() {
 	$etape = _request('etape');
-	$deja = (_FILE_CONNECT and analyse_fichier_connection(_FILE_CONNECT));
+	$deja = (_FILE_CONNECT && analyse_fichier_connection(_FILE_CONNECT));
 
 	// Si deja installe, on n'a plus le droit qu'a l'etape chmod
 	// pour chgt post-install ou aux etapes supplementaires
 	// de declaration de base externes.
 	// Mais alors il faut authentifier car ecrire/index.php l'a omis
 
-	if ($deja and in_array($etape, ['chmod', 'sup1', 'sup2'])) {
+	if ($deja && in_array($etape, ['chmod', 'sup1', 'sup2'])) {
 		$auth = charger_fonction('auth', 'inc');
 		if (!$auth()) {
 			verifier_visiteur();
