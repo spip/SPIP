@@ -44,12 +44,12 @@ class Liens extends AbstractCollecteur {
 		foreach ($collection as &$lien) {
 			$t = $sanitize_callback($lien['texte']);
 			if ($t !== $lien['texte']) {
-				$lien['raw'] = str_replace($lien['texte'], $t, $lien['raw']);
+				$lien['raw'] = str_replace($lien['texte'], $t, (string) $lien['raw']);
 				$lien['texte'] = $t;
 			}
 			$href = $sanitize_callback($lien['href']);
 			if ($href !== $lien['href']) {
-				$lien['raw'] = str_replace($lien['href'], $href, $lien['raw']);
+				$lien['raw'] = str_replace($lien['href'], $href, (string) $lien['raw']);
 				$lien['href'] = $href;
 			}
 		}
@@ -89,19 +89,19 @@ class Liens extends AbstractCollecteur {
 
 					// la mise en lien automatique est passee par la a tort !
 					// corrigeons pour eviter d'avoir un <a...> dans un href...
-					if (str_starts_with($lien['href'], '<a')) {
+					if (str_starts_with((string) $lien['href'], '<a')) {
 						$href = extraire_attribut($lien['href'], 'href');
 						// remplacons dans la source qui peut etre reinjectee dans les arguments
 						// d'un modele
-						$lien['raw'] = str_replace($lien['href'], $href, $lien['raw']);
+						$lien['raw'] = str_replace($lien['href'], $href, (string) $lien['raw']);
 						// et prenons le href comme la vraie url a linker
 						$lien['href'] = $href;
 					}
 
-					if ($desechappe_crochets && str_contains($lien['raw'], "\x1")) {
-						$lien['raw'] = str_replace(["\x1\x5", "\x1\x6"], ['[', ']'], $lien['raw']);
-						$lien['texte'] = str_replace(["\x1\x5", "\x1\x6"], ['[', ']'], $lien['texte']);
-						$lien['href'] = str_replace(["\x1\x5", "\x1\x6"], ['[', ']'], $lien['href']);
+					if ($desechappe_crochets && str_contains((string) $lien['raw'], "\x1")) {
+						$lien['raw'] = str_replace(["\x1\x5", "\x1\x6"], ['[', ']'], (string) $lien['raw']);
+						$lien['texte'] = str_replace(["\x1\x5", "\x1\x6"], ['[', ']'], (string) $lien['texte']);
+						$lien['href'] = str_replace(["\x1\x5", "\x1\x6"], ['[', ']'], (string) $lien['href']);
 					}
 				}
 			}

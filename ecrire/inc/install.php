@@ -117,7 +117,7 @@ function analyse_fichier_connection(string $file): array {
 		$r = '\s*,' . $ar;
 		$r = "#spip_connect_db[(]$ar$r$r$r$r(?:$r(?:$r(?:$r(?:$r)?)?)?)?#";
 		if (preg_match($r, $s, $regs)) {
-			$regs[2] = $regs[1] . (!$regs[2] ? '' : ':' . $regs[2] . ';');
+			$regs[2] = $regs[1] . ($regs[2] ? ':' . $regs[2] . ';' : '');
 			array_shift($regs);
 			array_shift($regs);
 
@@ -145,8 +145,8 @@ function analyse_fichier_connection(string $file): array {
 function bases_referencees($exclu = '') {
 	$tables = [];
 	foreach (preg_files(_DIR_CONNECT, '.php$') as $f) {
-		if ($f != $exclu and analyse_fichier_connection($f)) {
-			$tables[] = basename($f, '.php');
+		if ($f != $exclu && analyse_fichier_connection($f)) {
+			$tables[] = basename((string) $f, '.php');
 		}
 	}
 
@@ -175,7 +175,7 @@ function tester_compatibilite_hebergement() {
 	}
 
 	$diff = array_diff(['sodium', 'xml', 'zip'], get_loaded_extensions());
-	if (!empty($diff)) {
+	if ($diff !== []) {
 		$err[] = _T('install_php_extension', ['extensions' => implode(',', $diff)]);
 	}
 
@@ -230,7 +230,7 @@ function bouton_suivant($code = '') {
 		$code = _T('bouton_suivant');
 	}
 	static $suivant = 0;
-	$id = 'suivant' . (($suivant > 0) ? strval($suivant) : '');
+	$id = 'suivant' . (($suivant > 0) ? (string) $suivant : '');
 	$suivant += 1;
 
 	return "\n<p class='boutons suivant'><input id='" . $id . "' type='submit'\nvalue=\"" .
@@ -243,7 +243,7 @@ function info_progression_etape($en_cours, $phase, $dir, $erreur = false) {
 
 	$liste = find_all_in_path($dir, $phase . '(([0-9])+|fin)[.]php$');
 	$debut = 1;
-	$last = count($liste);
+	$last = is_countable($liste) ? count($liste) : 0;
 
 	include_spip('inc/texte');
 	$intitule_etat['etape_'][1] = typo(_T('info_connexion_base_donnee'));
@@ -259,7 +259,7 @@ function info_progression_etape($en_cours, $phase, $dir, $erreur = false) {
 
 	$aff_etapes = "<ul id='infos_etapes' class='infos_$phase$en_cours'>";
 
-	foreach ($liste as $etape => $fichier) {
+	foreach (array_keys($liste) as $etape) {
 		if ($debut < $last) {
 			if ($debut == $en_cours && $erreur) {
 				$class = 'on erreur';
@@ -267,11 +267,7 @@ function info_progression_etape($en_cours, $phase, $dir, $erreur = false) {
 				if ($debut == $en_cours) {
 					$class = 'on';
 				} else {
-					if ($debut > $en_cours) {
-						$class = 'prochains';
-					} else {
-						$class = 'valides';
-					}
+					$class = $debut > $en_cours ? 'prochains' : 'valides';
 				}
 			}
 
@@ -282,9 +278,8 @@ function info_progression_etape($en_cours, $phase, $dir, $erreur = false) {
 		}
 		$debut++;
 	}
-	$aff_etapes .= '</ul>';
 
-	return $aff_etapes;
+	return $aff_etapes . '</ul>';
 }
 
 
@@ -300,7 +295,7 @@ function fieldset($legend, $champs = [], $apres = '', $avant = '') {
 function fieldset_champs($champs = []) {
 	$fieldset = '';
 	foreach ($champs as $nom => $contenu) {
-		$type = isset($contenu['hidden']) ? 'hidden' : (preg_match(',^pass,', $nom) ? 'password' : 'text');
+		$type = isset($contenu['hidden']) ? 'hidden' : (preg_match(',^pass,', (string) $nom) ? 'password' : 'text');
 		$class = isset($contenu['hidden']) ? '' : "class='formo' size='40' ";
 		if (isset($contenu['alternatives'])) {
 			$fieldset .= $contenu['label'] . "\n";
@@ -315,8 +310,8 @@ function fieldset_champs($champs = []) {
 		} else {
 			$fieldset .= "<label for='" . $nom . "'>" . $contenu['label'] . "</label>\n";
 			$fieldset .= '<input ' . $class . "type='" . $type . "' id='" . $nom . "' name='" . $nom . "'\nvalue='" . $contenu['valeur'] . "'"
-				. (preg_match(',^(pass|login),', $nom) ? " autocomplete='off'" : '')
-				. ((isset($contenu['required']) and $contenu['required']) ? " required='required'" : '')
+				. (preg_match(',^(pass|login),', (string) $nom) ? " autocomplete='off'" : '')
+				. ((isset($contenu['required']) && $contenu['required']) ? " required='required'" : '')
 				. " />\n";
 		}
 	}
@@ -333,13 +328,13 @@ function install_select_serveur() {
 	}
 	while (($f = readdir($d)) !== false) {
 		if (
-			(preg_match('/^(.*)[.]php$/', $f, $s))
-			and is_readable($f = $dir . $f)
+			preg_match('/^(.*)[.]php$/', $f, $s)
+			&& is_readable($f = $dir . $f)
 		) {
 			require_once($f);
 			$s = $s[1];
 			$v = 'spip_versions_' . $s;
-			if (function_exists($v) and $v()) {
+			if (function_exists($v) && $v()) {
 				$titre = _T("install_select_type_$s");
 				// proposer mysql par defaut si dispo
 				$checked = ($s == 'mysql' ? " checked='checked'" : '');
@@ -414,7 +409,7 @@ function install_connexion_form($db, $login, #[\SensitiveParameter] $pass, $pred
 				// . "<br /><small>(". _T('install_types_db_connus_avertissement') .')</small>'
 				. '</p>'
 				. "\n<div class='p'>\n<ul>\n"
-				. join("\n", install_select_serveur())
+				. implode("\n", install_select_serveur())
 				. "\n</ul>\n</div></fieldset>")
 		)
 		. '<div id="install_adresse_base_hebergeur">'
@@ -511,9 +506,9 @@ function install_etape_liste_bases($server_db, $login_db, $disabled = []) {
 			. '</label>';
 
 		if (
-			!$checked and !$dis and
-			(($nom == $login_db) or
-				($GLOBALS['table_prefix'] == $nom))
+			!$checked
+			&& !$dis
+			&& ($nom == $login_db || $GLOBALS['table_prefix'] == $nom)
 		) {
 			$checked = "<input$base checked='checked' />\n$label";
 		} else {

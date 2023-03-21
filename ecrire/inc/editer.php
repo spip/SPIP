@@ -79,7 +79,7 @@ function formulaires_editer_objet_traiter(
 	}
 	$id_table_objet = id_table_objet($type);
 	$res[$id_table_objet] = $id;
-	if ($err or !$id) {
+	if ($err || !$id) {
 		$res['message_erreur'] = ($err ?: _T('erreur'));
 	} else {
 		// Un lien de trad a prendre en compte
@@ -98,7 +98,7 @@ function formulaires_editer_objet_traiter(
 
 		$res['message_ok'] = _T('info_modification_enregistree');
 		if ($retour) {
-			if (strncmp($retour, 'javascript:', 11) == 0) {
+			if (str_starts_with($retour, 'javascript:')) {
 				$res['message_ok'] .= '<script type="text/javascript">/*<![CDATA[*/' . substr($retour, 11) . '/*]]>*/</script>';
 				$res['editable'] = true;
 			} else {
@@ -132,9 +132,9 @@ function formulaires_editer_objet_traiter(
  **/
 function formulaires_editer_objet_verifier($type, $id = 'new', $oblis = []) {
 	$erreurs = [];
-	if (intval($id)) {
+	if ((int) $id) {
 		$conflits = controler_contenu($type, $id);
-		if ($conflits and is_countable($conflits) ? count($conflits) : 0) {
+		if ($conflits && (is_countable($conflits) ? count($conflits) : 0)) {
 			foreach ($conflits as $champ => $conflit) {
 				if (!isset($erreurs[$champ])) {
 					$erreurs[$champ] = '';
@@ -145,7 +145,7 @@ function formulaires_editer_objet_verifier($type, $id = 'new', $oblis = []) {
 	}
 	foreach ($oblis as $obli) {
 		$value = _request($obli);
-		if (is_null($value) or !(is_array($value) ? count($value) : strlen($value))) {
+		if (is_null($value) || !(is_array($value) ? count($value) : strlen((string) $value))) {
 			if (!isset($erreurs[$obli])) {
 				$erreurs[$obli] = '';
 			}
@@ -218,28 +218,25 @@ function formulaires_editer_objet_charger(
 	// on accepte pas une fonction de config inconnue si elle vient d'un modele
 	if (
 		$config_fonc
-		and !in_array($config_fonc, ['articles_edit_config', 'rubriques_edit_config', 'auteurs_edit_config'])
-		and $config_fonc !== $table_objet . '_edit_config'
+		&& !in_array($config_fonc, ['articles_edit_config', 'rubriques_edit_config', 'auteurs_edit_config'])
+		&& $config_fonc !== $table_objet . '_edit_config'
+		&& ($args = test_formulaire_inclus_par_modele())
+		&& in_array($config_fonc, $args)
 	) {
-		if (
-			$args = test_formulaire_inclus_par_modele()
-			and in_array($config_fonc, $args)
-		) {
-			$config_fonc = '';
-		}
+		$config_fonc = '';
 	}
 
 	$new = !is_numeric($id);
 	$lang_default = '';
 	// Appel direct dans un squelette
 	if (!$row) {
-		if (!$new or $lier_trad) {
+		if (!$new || $lier_trad) {
 			if ($select = charger_fonction('precharger_' . $type, 'inc', true)) {
 				$row = $select($id, $id_parent, $lier_trad);
 				// si on a une fonction precharger, elle pu faire un reglage de langue
-				$lang_default = (!empty($row['lang']) ? $row['lang'] : null);
+				$lang_default = (empty($row['lang']) ? null : $row['lang']);
 			} else {
-				$row = sql_fetsel('*', $table_objet_sql, $id_table_objet . '=' . intval($id));
+				$row = sql_fetsel('*', $table_objet_sql, $id_table_objet . '=' . (int) $id);
 			}
 			if (!$new) {
 				$md5 = controles_md5($row ?: []);
@@ -258,13 +255,13 @@ function formulaires_editer_objet_charger(
 
 	// Gaffe: sans ceci, on ecrase systematiquement l'article d'origine
 	// (et donc: pas de lien de traduction)
-	$id = ($new or $lier_trad)
+	$id = ($new || $lier_trad)
 		? 'oui'
 		: $row[$id_table_objet];
 	$row[$id_table_objet] = $id;
 
 	$contexte = $row;
-	if (is_numeric($id_parent) && strlen($id_parent) && (!isset($contexte['id_parent']) or $new)) {
+	if (is_numeric($id_parent) && strlen($id_parent) && (!isset($contexte['id_parent']) || $new)) {
 		if (!isset($contexte['id_parent'])) {
 			unset($contexte['id_rubrique']);
 		}
@@ -279,7 +276,7 @@ function formulaires_editer_objet_charger(
 		}
 		if (
 			!$contexte['id_parent']
-			and $preselectionner_parent_nouvel_objet = charger_fonction('preselectionner_parent_nouvel_objet', 'inc', true)
+			&& ($preselectionner_parent_nouvel_objet = charger_fonction('preselectionner_parent_nouvel_objet', 'inc', true))
 		) {
 			$contexte['id_parent'] = $preselectionner_parent_nouvel_objet($type, $row);
 		}
@@ -292,7 +289,7 @@ function formulaires_editer_objet_charger(
 			$lang_default = $config['langue'] ?? session_get('lang') ;
 		}
 	}
-	$config = $config + [
+	$config += [
 		'lignes' => 0,
 		'langue' => '',
 	];
@@ -314,13 +311,14 @@ function formulaires_editer_objet_charger(
 	}
 
 	$contexte['_hidden'] = "<input type='hidden' name='editer_$type' value='oui' />\n" .
-		(!$lier_trad ? '' :
-			("\n<input type='hidden' name='lier_trad' value='" .
+		($lier_trad
+			 ? "\n<input type='hidden' name='lier_trad' value='" .
 				$lier_trad .
 				"' />" .
 				"\n<input type='hidden' name='changer_lang' value='" .
 				$lang_default .
-				"' />"))
+				"' />"
+			: '')
 		. $hidden
 		. ($md5 ?? '');
 
@@ -334,8 +332,8 @@ function formulaires_editer_objet_charger(
 
 	// et in fine placer l'autorisation
 	include_spip('inc/autoriser');
-	if (intval($id)) {
-		if (!autoriser('modifier', $type, intval($id))) {
+	if ((int) $id) {
+		if (!autoriser('modifier', $type, (int) $id)) {
 			$contexte['editable'] = '';
 		}
 	}
@@ -360,12 +358,12 @@ function coupe_trop_long($texte) {
 	if (strlen($texte) > 28 * 1024) {
 		$texte = str_replace("\r\n", "\n", $texte);
 		$pos = strpos($texte, "\n\n", 28 * 1024);  // coupe para > 28 ko
-		if ($pos > 0 and $pos < 32 * 1024) {
+		if ($pos > 0 && $pos < 32 * 1024) {
 			$debut = substr($texte, 0, $pos) . "\n\n<!--SPIP-->\n";
 			$suite = substr($texte, $pos + 2);
 		} else {
 			$pos = strpos($texte, ' ', 28 * 1024);  // sinon coupe espace
-			if (!($pos > 0 and $pos < 32 * 1024)) {
+			if (!($pos > 0 && $pos < 32 * 1024)) {
 				$pos = 28 * 1024;  // au pire (pas d'espace trouv'e)
 				$decalage = 0; // si y'a pas d'espace, il ne faut pas perdre le caract`ere
 			} else {
@@ -390,8 +388,8 @@ function coupe_trop_long($texte) {
  */
 function editer_texte_recolle($texte, $att_text) {
 	if (
-		(strlen($texte) < 29 * 1024)
-		or (include_spip('inc/layer') and ($GLOBALS['browser_name'] != 'MSIE'))
+		strlen($texte) < 29 * 1024
+		|| include_spip('inc/layer') && $GLOBALS['browser_name'] != 'MSIE'
 	) {
 		return [$texte, ''];
 	}
@@ -400,7 +398,7 @@ function editer_texte_recolle($texte, $att_text) {
 	$textes_supplement = "<br /><span style='color: red'>" . _T('info_texte_long') . "</span>\n";
 	$nombre = 0;
 
-	while (strlen($texte) > 29 * 1024) {
+	while (strlen((string) $texte) > 29 * 1024) {
 		$nombre++;
 		[$texte1, $texte] = coupe_trop_long($texte);
 		$textes_supplement .= '<br />' .
@@ -420,11 +418,7 @@ function editer_texte_recolle($texte, $att_text) {
 function titre_automatique($champ_titre, $champs_contenu, $longueur = null) {
 	if (!_request($champ_titre)) {
 		$titrer_contenu = charger_fonction('titrer_contenu', 'inc');
-		if (!is_null($longueur)) {
-			$t = $titrer_contenu($champs_contenu, null, $longueur);
-		} else {
-			$t = $titrer_contenu($champs_contenu);
-		}
+		$t = is_null($longueur) ? $titrer_contenu($champs_contenu) : $titrer_contenu($champs_contenu, null, $longueur);
 		if ($t) {
 			set_request($champ_titre, $t);
 		}
@@ -488,18 +482,14 @@ function controles_md5(array $data, string $prefixe = 'ctr_', string $format = '
 		$m = md5($val ?? '');
 		$k = $prefixe . $key;
 
-		switch ($format) {
-			case 'html':
-				$ctr[$k] = "<input type='hidden' value='$m' name='$k' />";
-				break;
-			default:
-				$ctr[$k] = $m;
-				break;
-		}
+		$ctr[$k] = match ($format) {
+			'html' => "<input type='hidden' value='$m' name='$k' />",
+			default => $m,
+		};
 	}
 
 	if ($format === 'html') {
-		return "\n\n<!-- controles md5 -->\n" . join("\n", $ctr) . "\n\n";
+		return "\n\n<!-- controles md5 -->\n" . implode("\n", $ctr) . "\n\n";
 	} else {
 		return $ctr;
 	}
@@ -569,7 +559,7 @@ function controler_contenu($type, $id, $options = [], $c = false, $serveur = '')
 	unset($c['id_secteur']);
 
 	// Gerer les champs non vides
-	if (isset($options['nonvide']) and is_array($options['nonvide'])) {
+	if (isset($options['nonvide']) && is_array($options['nonvide'])) {
 		foreach ($options['nonvide'] as $champ => $sinon) {
 			if ($c[$champ] === '') {
 				$c[$champ] = $sinon;
@@ -651,10 +641,12 @@ function controler_md5(&$champs, $ctr, $type, $id, $serveur, $prefix = 'ctr_') {
 	// On elimine les donnees non modifiees par le formulaire (mais
 	// potentiellement modifiees entre temps par un autre utilisateur)
 	foreach ($champs as $key => $val) {
-		if (isset($ctr[$prefix . $key]) and $m = $ctr[$prefix . $key]) {
-			if (is_scalar($val) and $m == md5($val)) {
-				unset($champs[$key]);
-			}
+		if (
+			isset($ctr[$prefix . $key])
+			&& ($m = $ctr[$prefix . $key])
+			&& (is_scalar($val) && $m == md5($val))
+		) {
+			unset($champs[$key]);
 		}
 	}
 	if (!$champs) {
@@ -680,7 +672,7 @@ function controler_md5(&$champs, $ctr, $type, $id, $serveur, $prefix = 'ctr_') {
 	// de conflit.
 	$ctrh = $ctrq = $conflits = [];
 	foreach (array_keys($champs) as $key) {
-		if (isset($ctr[$prefix . $key]) and $m = $ctr[$prefix . $key]) {
+		if (isset($ctr[$prefix . $key]) && ($m = $ctr[$prefix . $key])) {
 			$ctrh[$key] = $m;
 			$ctrq[] = $key;
 		}
@@ -689,8 +681,8 @@ function controler_md5(&$champs, $ctr, $type, $id, $serveur, $prefix = 'ctr_') {
 		$ctrq = sql_fetsel($ctrq, $spip_table_objet, "$id_table_objet=$id", $serveur);
 		foreach ($ctrh as $key => $m) {
 			if (
-				$m != md5($ctrq[$key])
-				and $champs[$key] !== $ctrq[$key]
+				$m != md5((string) $ctrq[$key])
+				&& $champs[$key] !== $ctrq[$key]
 			) {
 				$conflits[$key] = [
 					'base' => $ctrq[$key],
@@ -713,7 +705,7 @@ function controler_md5(&$champs, $ctr, $type, $id, $serveur, $prefix = 'ctr_') {
  * @return string
  */
 function display_conflit_champ($x) {
-	if (strstr($x, "\n") or strlen($x) > 80) {
+	if (strstr($x, "\n") || strlen($x) > 80) {
 		return "<textarea style='width:99%; height:10em;'>" . entites_html($x) . "</textarea>\n";
 	} else {
 		return "<input type='text' size='40' style='width:99%' value=\"" . entites_html($x) . "\" />\n";

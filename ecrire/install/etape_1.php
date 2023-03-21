@@ -45,7 +45,7 @@ function install_etape_1_dist() {
 
 	[$adresse_db, $login_db] = $s ?: ['localhost', ''];
 
-	$chmod = (isset($_GET['chmod']) && preg_match(',^\d+$,', $_GET['chmod'])) ?
+	$chmod = (isset($_GET['chmod']) && preg_match(',^\d+$,', (string) $_GET['chmod'])) ?
 		sprintf('%04o', $_GET['chmod']) : '0777';
 
 	if (@is_readable(_FILE_CHMOD_TMP)) {

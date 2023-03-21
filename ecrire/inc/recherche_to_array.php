@@ -61,8 +61,8 @@ function inc_recherche_to_array_dist($recherche, $options = []) {
 
 	// c'est un pis-aller : ca a peu de chance de marcher, mais mieux quand meme que en conservant la ','
 	// (aka ca marche au moins dans certains cas comme avec spip_formulaires_reponses_champs)
-	if (str_contains($_id_table, ',')) {
-		$_id_table = explode(',', $_id_table);
+	if (str_contains((string) $_id_table, ',')) {
+		$_id_table = explode(',', (string) $_id_table);
 		$_id_table = reset($_id_table);
 	}
 
@@ -73,7 +73,7 @@ function inc_recherche_to_array_dist($recherche, $options = []) {
 		if (is_array($champ)) {
 			spip_log('requetes imbriquees interdites');
 		} else {
-			if (!str_contains($champ, '.')) {
+			if (!str_contains((string) $champ, '.')) {
 				$champ = "t.$champ";
 			}
 			$requete['SELECT'][] = $champ;
@@ -112,15 +112,15 @@ function inc_recherche_to_array_dist($recherche, $options = []) {
 
 			$vu = false;
 			foreach ($champs as $champ => $poids) {
-				$champ = explode('.', $champ);
+				$champ = explode('.', (string) $champ);
 				$champ = end($champ);
 				// translitteration_rapide uniquement si on est deja en utf-8
 				$value = ($GLOBALS['meta']['charset'] == 'utf-8' ? translitteration_rapide($t[$champ]) : translitteration($t[$champ]));
 				if (
 					$n =
 					($options['score'] || $options['matches'])
-						? preg_match_all($preg, $value, $regs, PREG_SET_ORDER)
-						: preg_match($preg, $value)
+						? preg_match_all($preg, (string) $value, $regs, PREG_SET_ORDER)
+						: preg_match($preg, (string) $value)
 				) {
 					$vu = true;
 

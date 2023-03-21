@@ -48,8 +48,8 @@ function cache_chemin_fichier($nom_cache, $ecrire = false) {
 		$l1 = (int) floor($length / 2);
 		$l2 = $length - $l1;
 	}
-	$d = substr($nom_cache, 0, $l1);
-	$u = substr($nom_cache, $l1, $l2);
+	$d = substr((string) $nom_cache, 0, $l1);
+	$u = substr((string) $nom_cache, $l1, $l2);
 
 	if ($ecrire) {
 		$rep = sous_repertoire(_DIR_CACHE, '', false, true);
@@ -126,9 +126,9 @@ function cache_signature(&$page) {
  * @return array
  */
 function gzip_page($page) {
-	if (function_exists('gzcompress') && strlen($page['texte']) > 16 * 1024) {
+	if (function_exists('gzcompress') && strlen((string) $page['texte']) > 16 * 1024) {
 		$page['gz'] = true;
-		$page['texte'] = gzcompress($page['texte']);
+		$page['texte'] = gzcompress((string) $page['texte']);
 	} else {
 		$page['gz'] = false;
 	}

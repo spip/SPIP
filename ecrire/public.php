@@ -121,7 +121,7 @@ if (isset($GLOBALS['_INC_PUBLIC']) && $GLOBALS['_INC_PUBLIC']) {
 		$page['entetes']['Content-Type'] = 'text/html; charset=' . $charset;
 		$html = true;
 	} else {
-		$html = preg_match(',^\s*text/html,', $page['entetes']['Content-Type']);
+		$html = preg_match(',^\s*text/html,', (string) $page['entetes']['Content-Type']);
 	}
 
 	// Tester si on est admin et il y a des choses supplementaires a dire

@@ -36,29 +36,26 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  **/
 function action_redirect_dist() {
 	$type = _request('type');
-	$id = intval(_request('id'));
+	$id = (int) _request('id');
 	$page = false;
 
 	// verifier le type ou page transmis
-	if (!preg_match('/^\w+$/', $type)) {
+	if (!preg_match('/^\w+$/', (string) $type)) {
 		$page = _request('page');
-		if (!preg_match('/^\w+$/', $page)) {
+		if (!preg_match('/^\w+$/', (string) $page)) {
 			return;
 		}
 	}
 
-	if ($var_mode = _request('var_mode')) {
-		// forcer la mise a jour de l'url de cet objet !
-		if (!defined('_VAR_URLS')) {
-			define('_VAR_URLS', true);
-		}
+	$var_mode = _request('var_mode');
+	// forcer la mise a jour de l'url de cet objet !
+	if ($var_mode && !defined('_VAR_URLS')) {
+		define('_VAR_URLS', true);
 	}
 
-	if ($page) {
-		$url = generer_url_public($page, '', true);
-	} else {
-		$url = calculer_url_redirect_entite($type, $id, $var_mode);
-	}
+	$url = $page
+		? generer_url_public($page, '', true)
+		: calculer_url_redirect_entite($type, $id, $var_mode);
 
 	$status = '302';
 	if ($url) {
@@ -68,23 +65,23 @@ function action_redirect_dist() {
 
 		if (
 			$var_mode == 'preview'
-			and defined('_PREVIEW_TOKEN')
-			and _PREVIEW_TOKEN
-			and autoriser('previsualiser')
+			&& defined('_PREVIEW_TOKEN')
+			&& _PREVIEW_TOKEN
+			&& autoriser('previsualiser')
 		) {
 			include_spip('inc/securiser_action');
 			$token = calculer_token_previsu($url);
 			$url = parametre_url($url, 'var_previewtoken', $token);
 		}
 
-		if (_request('status') and _request('status') == '301') {
+		if (_request('status') && _request('status') == '301') {
 			$status = '301';
 		}
 	} else {
 		$url = generer_url_public('404', '', true);
 	}
 
-	redirige_par_entete(str_replace('&amp;', '&', $url), '', $status);
+	redirige_par_entete(str_replace('&amp;', '&', (string) $url), '', $status);
 }
 
 /**
@@ -110,11 +107,11 @@ function calculer_url_redirect_entite($type, $id, $var_mode) {
 	$key = "url-$date-$type-$id";
 
 	// Obtenir l’url et si elle est publié du cache memoization
-	if (function_exists('cache_get') and $desc = cache_get($key)) {
+	if (function_exists('cache_get') && ($desc = cache_get($key))) {
 		[$url, $publie] = $desc;
 	}
 	// Si on ne l’a pas trouvé, ou si var mode, on calcule l’url et son état publie
-	if (empty($desc) or $var_mode) {
+	if (empty($desc) || $var_mode) {
 		$publie = objet_test_si_publie($type, $id);
 		$url = generer_objet_url_absolue($id, $type, '', '', true);
 		if (function_exists('cache_set')) {
@@ -125,7 +122,7 @@ function calculer_url_redirect_entite($type, $id, $var_mode) {
 	// On valide l’url si elle est publiee ; sinon si preview on teste l’autorisation
 	if ($publie) {
 		return $url;
-	} elseif (defined('_VAR_PREVIEW') and _VAR_PREVIEW and autoriser('voir', $type, $id)) {
+	} elseif (defined('_VAR_PREVIEW') && _VAR_PREVIEW && autoriser('voir', $type, $id)) {
 		return $url;
 	}
 

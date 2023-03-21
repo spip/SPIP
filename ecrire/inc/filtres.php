@@ -252,13 +252,13 @@ function decrire_version_git($dir) {
 
 	// version installee par GIT
 	if (lire_fichier($dir . '/.git/HEAD', $c)) {
-		$currentHead = trim(substr($c, 4));
+		$currentHead = trim(substr((string) $c, 4));
 		if (lire_fichier($dir . '/.git/' . $currentHead, $hash)) {
 			return [
 				'vcs' => 'GIT',
 				'branch' => basename($currentHead),
-				'commit' => trim($hash),
-				'commit_short' => substr(trim($hash), 0, 8),
+				'commit' => trim((string) $hash),
+				'commit_short' => substr(trim((string) $hash), 0, 8),
 			];
 		}
 	}
@@ -369,7 +369,7 @@ function trouver_filtre_matrice($filtre) {
  * @param bool $continue True pour retourner la valeur
  * @return mixed
  */
-function filtre_set(&$Pile, $val, $key, $continue = null) {
+function filtre_set(&$Pile, mixed $val, $key, $continue = null) {
 	$Pile['vars'][$key] = $val;
 	return $continue ? $val : '';
 }
@@ -396,7 +396,7 @@ function filtre_set(&$Pile, $val, $key, $continue = null) {
  * @param null|mixed $continue Si présent, retourne la valeur en sortie
  * @return string|mixed Retourne `$val` si `$continue` présent, sinon ''.
  */
-function filtre_setenv(&$Pile, $val, mixed $key, $continue = null) {
+function filtre_setenv(&$Pile, mixed $val, mixed $key, $continue = null) {
 	$Pile[0][$key] = $val;
 	return $continue ? $val : '';
 }
@@ -430,7 +430,7 @@ function filtre_sanitize_env(&$Pile, $keys) {
  * @param mixed|null $key Clé pour s'y retrouver
  * @return mixed Retourne la valeur (sans la modifier).
  */
-function filtre_debug($val, $key = null) {
+function filtre_debug(mixed $val, $key = null) {
 	$debug = (
 		is_null($key) ? '' : (var_export($key, true) . ' = ')
 		) . var_export($val, true);
@@ -474,13 +474,13 @@ function filtre_debug($val, $key = null) {
 function image_filtrer($args) {
 	$filtre = array_shift($args); # enlever $filtre
 	$texte = array_shift($args);
-	if ($texte === null || !strlen($texte)) {
+	if ($texte === null || !strlen((string) $texte)) {
 		return '';
 	}
 	find_in_path('filtres_images_mini.php', 'inc/', true);
 	statut_effacer_images_temporaires(true); // activer la suppression des images temporaires car le compilo finit la chaine par un image_graver
 	// Cas du nom de fichier local
-	$is_file = trim($texte);
+	$is_file = trim((string) $texte);
 	if (
 		str_contains(substr($is_file, strlen(_DIR_RACINE)), '..')
 		|| strpbrk($is_file, "<>\n\r\t") !== false
@@ -508,7 +508,7 @@ function image_filtrer($args) {
 	if (
 		preg_match_all(
 			',(<([a-z]+) [^<>]*spip_documents[^<>]*>)?\s*(<img\s.*>),UimsS',
-			$texte,
+			(string) $texte,
 			$tags,
 			PREG_SET_ORDER
 		)
@@ -528,7 +528,7 @@ function image_filtrer($args) {
 					if ($w && ($style = extraire_attribut($tag[1], 'style'))) {
 						$style = preg_replace(',width:\s*\d+px,S', "width:{$w}px", $style);
 						$replace = inserer_attribut($tag[1], 'style', $style);
-						$texte = str_replace($tag[1], $replace, $texte);
+						$texte = str_replace($tag[1], $replace, (string) $texte);
 					}
 				}
 				// traiter aussi un eventuel mouseover
@@ -539,9 +539,9 @@ function image_filtrer($args) {
 					$srcover = $match[1];
 					$srcover_filter = $filtre("<img src='" . $match[1] . "' />", ...$args);
 					$srcover_filter = extraire_attribut($srcover_filter, 'src');
-					$reduit = str_replace($srcover, $srcover_filter, $reduit);
+					$reduit = str_replace($srcover, $srcover_filter, (string) $reduit);
 				}
-				$texte = str_replace($tag[3], $reduit, $texte);
+				$texte = str_replace($tag[3], $reduit, (string) $texte);
 			}
 		}
 	}
@@ -884,7 +884,7 @@ function supprimer_caracteres_illegaux($texte) {
 	}
 
 	if (!$to) {
-		$to = str_repeat('-', strlen($from));
+		$to = str_repeat('-', strlen((string) $from));
 	}
 
 	return strtr($texte, $from, $to);
@@ -940,7 +940,7 @@ function texte_backend(string $texte): string {
 	// ne pas echapper les sinqle quotes car certains outils de syndication gerent mal
 	$texte = entites_html($texte, false, false);
 	// mais bien echapper les double quotes !
-	$texte = str_replace('"', '&#034;', $texte);
+	$texte = str_replace('"', '&#034;', (string) $texte);
 
 	// verifier le charset
 	$texte = charset2unicode($texte);
@@ -1476,7 +1476,7 @@ function filtre_securiser_acces_dist($id_auteur, $cle, $dir, $op = '', $args = '
  * @return mixed
  *     Retourne $texte, sinon $sinon.
  **/
-function sinon($texte, $sinon = '') {
+function sinon(mixed $texte, mixed $sinon = '') {
 	if ($texte) {
 		return $texte;
 	} elseif (is_scalar($texte) && strlen($texte)) {
@@ -1506,7 +1506,7 @@ function sinon($texte, $sinon = '') {
  *     Ce qui est retourné sinon
  * @return mixed
  **/
-function choixsivide($a, $vide, $pasvide) {
+function choixsivide(mixed $a, mixed $vide, mixed $pasvide) {
 	return $a ? $pasvide : $vide;
 }
 
@@ -1530,7 +1530,7 @@ function choixsivide($a, $vide, $pasvide) {
  *     Ce qui est retourné sinon
  * @return mixed
  **/
-function choixsiegal($a1, $a2, $v, $f) {
+function choixsiegal(mixed $a1, mixed $a2, mixed $v, mixed $f) {
 	return ($a1 == $a2) ? $v : $f;
 }
 
@@ -1605,7 +1605,7 @@ function post_autobr($texte, $delim = "\n_ ") {
 
 	$debut = '';
 	$suite = $texte;
-	while ($t = strpos('-' . $suite, "\n", 1)) {
+	while ($t = strpos((string) ('-' . $suite), "\n", 1)) {
 		$debut .= substr($suite, 0, $t - 1);
 		$suite = substr($suite, $t);
 		$car = substr($suite, 0, 1);
@@ -2334,7 +2334,7 @@ function afficher_enclosures($tags) {
 					['utiliser_suffixe_size' => true]
 				)
 				. '</a>',
-				$tag
+				(string) $tag
 			);
 		}
 	}
@@ -2671,7 +2671,7 @@ function form_hidden(?string $action = ''): string {
 		if ($fond != '404') {
 			$contexte = array_shift($p);
 			$contexte['page'] = $fond;
-			$action = preg_replace('/([?]' . preg_quote($fond, '/') . '[^&=]*[0-9]+)(&|$)/', '?&', $action);
+			$action = preg_replace('/([?]' . preg_quote((string) $fond, '/') . '[^&=]*[0-9]+)(&|$)/', '?&', $action);
 		}
 	}
 	// defaire ce qu'a injecte urls_decoder_url : a revoir en modifiant la signature de urls_decoder_url
@@ -2689,7 +2689,7 @@ function form_hidden(?string $action = ''): string {
 	// d'abord avec celles de l'url
 	if (false !== ($p = strpos($action, '?'))) {
 		foreach (preg_split('/&(amp;)?/S', substr($action, $p + 1)) as $c) {
-			$c = explode('=', $c, 2);
+			$c = explode('=', (string) $c, 2);
 			$var = array_shift($c);
 			$val = array_shift($c) ?? '';
 			if ($var) {
@@ -2708,7 +2708,7 @@ function form_hidden(?string $action = ''): string {
 
 	// ensuite avec celles du contexte, sans doublonner !
 	foreach ($contexte as $var => $val) {
-		if (preg_match(',\[\]$,S', $var)) {
+		if (preg_match(',\[\]$,S', (string) $var)) {
 			$values[] = [$var, $val];
 		} else {
 			if (!isset($values[$var])) {
@@ -2950,7 +2950,7 @@ function direction_css($css, $voulue = '') {
 
 
 	// reperer les @import auxquels il faut propager le direction_css
-	preg_match_all(",\@import\s*url\s*\(\s*['\"]?([^'\"/][^:]*)['\"]?\s*\),Uims", $contenu, $regs);
+	preg_match_all(",\@import\s*url\s*\(\s*['\"]?([^'\"/][^:]*)['\"]?\s*\),Uims", (string) $contenu, $regs);
 	$src = [];
 	$src_direction_css = [];
 	$src_faux_abs = [];
@@ -2967,9 +2967,9 @@ function direction_css($css, $voulue = '') {
 			$css_direction = '/@@@@@@/' . $css_direction;
 		}
 		$src[] = $regs[0][$k];
-		$src_direction_css[] = str_replace($import_css, $css_direction, $regs[0][$k]);
+		$src_direction_css[] = str_replace($import_css, $css_direction, (string) $regs[0][$k]);
 	}
-	$contenu = str_replace($src, $src_direction_css, $contenu);
+	$contenu = str_replace($src, $src_direction_css, (string) $contenu);
 
 	$contenu = urls_absolues_css($contenu, $css);
 
@@ -3023,7 +3023,7 @@ function url_absolue_css($css) {
 	$contenu = null;
 	if ($url_absolue_css == $css) {
 		if (
-			strncmp($GLOBALS['meta']['adresse_site'], $css, $l = strlen($GLOBALS['meta']['adresse_site'])) != 0
+			strncmp((string) $GLOBALS['meta']['adresse_site'], $css, $l = strlen((string) $GLOBALS['meta']['adresse_site'])) != 0
 			|| !lire_fichier(_DIR_RACINE . substr($css, $l), $contenu)
 		) {
 			include_spip('inc/distant');
@@ -3078,7 +3078,7 @@ function url_absolue_css($css) {
  * @return mixed
  *     Valeur trouvée ou valeur par défaut.
  **/
-function table_valeur($table, $cle, $defaut = '', $conserver_null = false) {
+function table_valeur(mixed $table, $cle, mixed $defaut = '', $conserver_null = false) {
 	foreach (explode('/', $cle) as $k) {
 		$table = (is_string($table) ? @unserialize($table) : $table);
 
@@ -3496,8 +3496,8 @@ function helper_filtre_balise_img_svg_arguments($alt_or_size, $class_or_size, $s
 		// 512x*
 		// 512x300
 		if (
-			!strlen($maybe_size)
-			|| !preg_match(',^(@\d+(\.\d+)?x|\d+(x\*)?|\d+x\d+)$,', trim($maybe_size))
+			!strlen((string) $maybe_size)
+			|| !preg_match(',^(@\d+(\.\d+)?x|\d+(x\*)?|\d+x\d+)$,', trim((string) $maybe_size))
 		) {
 			$args[] = $maybe_size;
 			$maybe_size = null;
@@ -3512,15 +3512,15 @@ function helper_filtre_balise_img_svg_arguments($alt_or_size, $class_or_size, $s
 
 function helper_filtre_balise_img_svg_size($img, $size) {
 	// si size est de la forme '@2x' c'est un coeff multiplicateur sur la densite
-	if (str_starts_with($size, '@') && str_ends_with($size, 'x')) {
-		$coef = (float) substr($size, 1, -1);
+	if (str_starts_with((string) $size, '@') && str_ends_with((string) $size, 'x')) {
+		$coef = (float) substr((string) $size, 1, -1);
 		[$h, $w] = taille_image($img);
 		$height = (int) round($h / $coef);
 		$width = (int) round($w / $coef);
 	}
 	// sinon c'est une valeur seule si image caree ou largeurxhauteur
 	else {
-		$size = explode('x', $size, 2);
+		$size = explode('x', (string) $size, 2);
 		$size = array_map('trim', $size);
 		$height = $width = (int) array_shift($size);
 
@@ -3577,7 +3577,7 @@ function filtre_balise_img_dist($img, $alt = '', $class = null, $size = null) {
 			$img = inserer_attribut($img, 'alt', $alt);
 		}
 		if (!is_null($class)) {
-			$img = strlen($class) ? inserer_attribut($img, 'class', $class) : vider_attribut($img, 'class');
+			$img = strlen((string) $class) ? inserer_attribut($img, 'class', $class) : vider_attribut($img, 'class');
 		}
 	}
 	else {
@@ -3593,7 +3593,7 @@ function filtre_balise_img_dist($img, $alt = '', $class = null, $size = null) {
 		}
 	}
 
-	if ($img && !is_null($size) && strlen($size = trim($size))) {
+	if ($img && !is_null($size) && strlen($size = trim((string) $size))) {
 		[$width, $height] = helper_filtre_balise_img_svg_size($img, $size);
 
 		$img = inserer_attribut($img, 'width', $width);
@@ -3676,7 +3676,7 @@ function filtre_balise_svg_dist($img, $alt = '', $class = null, $size = null) {
 
 	// regler la classe
 	if (!is_null($class)) {
-		$balise_svg = strlen($class)
+		$balise_svg = strlen((string) $class)
 			? inserer_attribut($balise_svg, 'class', $class)
 			: vider_attribut($balise_svg, 'class');
 	}
@@ -3695,7 +3695,7 @@ function filtre_balise_svg_dist($img, $alt = '', $class = null, $size = null) {
 
 	$svg = str_replace($balise_svg_source, $balise_svg, $svg);
 
-	if (!is_null($size) && strlen($size = trim($size))) {
+	if (!is_null($size) && strlen($size = trim((string) $size))) {
 		[$width, $height] = helper_filtre_balise_img_svg_size($svg, $size);
 
 		if (!function_exists('svg_redimensionner')) {
@@ -4023,11 +4023,11 @@ function decoder_contexte_ajax($c, $form = '') {
 	// extraire la signature en debut de contexte
 	// et la verifier avant de deserializer
 	// format : signature:donneesserializees
-	if ($p = strpos($c, ':')) {
-		$cle = substr($c, 0, $p);
-		$c = substr($c, $p + 1);
+	if ($p = strpos((string) $c, ':')) {
+		$cle = substr((string) $c, 0, $p);
+		$c = substr((string) $c, $p + 1);
 
-		if ($cle == calculer_cle_action($form . $c)) {
+		if ($cle === calculer_cle_action($form . $c)) {
 			return @unserialize($c);
 		}
 	}
@@ -4256,7 +4256,7 @@ function prepare_icone_base($type, $lien, $texte, $fond, $fonction = '', $class 
 	}
 
 	// Ajouter le type d'objet dans la classe
-	$objet_type = substr(basename($fond), 0, -4);
+	$objet_type = substr(basename((string) $fond), 0, -4);
 	$class_lien .= " $objet_type";
 	$class_bouton .= " $objet_type";
 
@@ -4280,7 +4280,7 @@ function prepare_icone_base($type, $lien, $texte, $fond, $fonction = '', $class 
 	// Repérer la taille et l'ajouter dans la classe
 	$size = 24;
 	if (
-		preg_match('/-(\d{1,3})[.](gif|png|svg)$/i', $fond, $match)
+		preg_match('/-(\d{1,3})[.](gif|png|svg)$/i', (string) $fond, $match)
 		|| preg_match('/-(\d{1,3})([.](gif|png|svg))?$/i', $fond_origine, $match)
 	) {
 		$size = $match[1];
@@ -4527,7 +4527,7 @@ function bando_images_background() {
 	foreach ($boutons as $page => $detail) {
 		$selecteur = (in_array($page, ['outils_rapides', 'outils_collaboratifs']) ? '' : '.navigation_avec_icones ');
 		foreach ($detail->sousmenu as $souspage => $sousdetail) {
-			if ($sousdetail->icone && strlen(trim($sousdetail->icone))) {
+			if ($sousdetail->icone && strlen(trim((string) $sousdetail->icone))) {
 				$img = http_img_variante_svg_si_possible($sousdetail->icone);
 				$res .= "\n$selecteur.bando2_$souspage {background-image:url($img);}";
 			}
@@ -4735,7 +4735,7 @@ function generer_objet_introduction(int $id_objet, string $type_objet, array $li
 	// En absence de descriptif, on se rabat sur chapo + texte
 	if (isset($ligne_sql['chapo'])) {
 		$chapo = $ligne_sql['chapo'];
-		$texte = strlen($descriptif) ?
+		$texte = strlen((string) $descriptif) ?
 			'' :
 			"$chapo \n\n $texte";
 	}
@@ -4809,7 +4809,7 @@ function appliquer_traitement_champ($texte, $champ, $table_objet = '', $env = []
 		return $texte;
 	}
 
-	$traitement = str_replace('%s', "'" . texte_script($texte) . "'", $traitement);
+	$traitement = str_replace('%s', "'" . texte_script($texte) . "'", (string) $traitement);
 
 	// signaler qu'on est dans l'espace prive pour les filtres qui se servent de ce flag
 	if (test_espace_prive()) {
@@ -5031,7 +5031,7 @@ function insert_head_css_conditionnel($flux) {
 		if (($p1 = stripos($flux, '<script src=')) && $p1 < $p) {
 			$p = $p1;
 		}
-		$flux = substr_replace($flux, pipeline('insert_head_css', '<!-- insert_head_css -->'), $p, 0);
+		$flux = substr_replace($flux, (string) pipeline('insert_head_css', '<!-- insert_head_css -->'), $p, 0);
 	}
 
 	return $flux;
@@ -5079,7 +5079,7 @@ function produire_fond_statique($fond, $contexte = [], $options = [], string $co
 	// mais on peut hasher selon le contenu a la demande, si plusieurs contextes produisent un meme contenu
 	// reduit la variabilite du nom et donc le nombre de css concatenees possibles in fine
 	if (isset($options['hash_on_content']) && $options['hash_on_content']) {
-		$hash = md5($contexte_implicite['host'] . '::' . $cache);
+		$hash = md5((string) ($contexte_implicite['host'] . '::' . $cache));
 	}
 	else {
 		unset($contexte_implicite['notes']); // pas pertinent pour signaler un changeemnt de contenu pour des css/js
@@ -5119,7 +5119,7 @@ function produire_fond_statique($fond, $contexte = [], $options = [], string $co
 			}
 			// pas de date dans le commentaire car sinon ca invalide le md5 et force la maj
 			// mais on peut mettre un md5 du contenu, ce qui donne un aperu rapide si la feuille a change ou non
-			$comment .= "}\n   md5:" . md5($contenu) . " */\n";
+			$comment .= "}\n   md5:" . md5((string) $contenu) . " */\n";
 		}
 		// et ecrire le fichier si il change
 		ecrire_fichier_calcule_si_modifie($filename, $comment . $contenu, false, true);
@@ -5393,7 +5393,7 @@ function identifiant_slug($texte, $type = '', $options = []) {
 	$texte = translitteration($texte);
 
 	// On remplace tout ce qui n'est pas un mot par un séparateur
-	$texte = preg_replace(',[\W_]+,ms', $separateur, $texte);
+	$texte = preg_replace(',[\W_]+,ms', (string) $separateur, $texte);
 
 	// nettoyer les doubles occurences du separateur si besoin
 	while (str_contains($texte, (string) "$separateur$separateur")) {

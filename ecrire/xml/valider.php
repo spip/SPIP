@@ -24,8 +24,8 @@ class ValidateurXML
 {
 	public function validerElement($phraseur, $name, $attrs) {
 		if (!($p = isset($this->dtc->elements[$name]))) {
-			if ($p = strpos($name, ':')) {
-				$name = substr($name, $p + 1);
+			if ($p = strpos((string) $name, ':')) {
+				$name = substr((string) $name, $p + 1);
 				$p = isset($this->dtc->elements[$name]);
 			}
 			if (!$p) {
@@ -39,14 +39,14 @@ class ValidateurXML
 		$depth = $this->depth;
 		$ouvrant = $this->ouvrant;
 		#spip_log("trouve $name apres " . $ouvrant[$depth]);
-		if (isset($ouvrant[$depth]) && preg_match('/^\s*(\w+)/', $ouvrant[$depth], $r)) {
+		if (isset($ouvrant[$depth]) && preg_match('/^\s*(\w+)/', (string) $ouvrant[$depth], $r)) {
 			$pere = $r[1];
 			#spip_log("pere $pere");
 			if (isset($this->dtc->elements[$pere])) {
 				$fils = $this->dtc->elements[$pere];
 				#spip_log("rejeton $name fils " . @join(',',$fils));
-				if (!($p = @in_array($name, $fils)) && ($p = strpos($name, ':'))) {
-					$p = substr($name, $p + 1);
+				if (!($p = @in_array($name, $fils)) && ($p = strpos((string) $name, ':'))) {
+					$p = substr((string) $name, $p + 1);
 					$p = @in_array($p, $fils);
 				}
 				if (!$p) {
@@ -58,7 +58,7 @@ class ValidateurXML
 						. '</b>'
 						. ($bons_peres ? '<p style="font-size: 80%"> ' . _T('zxml_mais_de') . ' <b>' . $bons_peres . '</b></p>' : ''));
 				} elseif ($this->dtc->regles[$pere][0] == '/') {
-					$frat = substr($depth, 2);
+					$frat = substr((string) $depth, 2);
 					if (!isset($this->fratrie[$frat])) {
 						$this->fratrie[$frat] = '';
 					}
@@ -106,7 +106,7 @@ class ValidateurXML
 				. ')');
 		} else {
 			$type = $a[$name][0];
-			if (!preg_match('/^\w+$/', $type)) {
+			if (!preg_match('/^\w+$/', (string) $type)) {
 				$this->valider_motif($phraseur, $name, $val, $bal, $type);
 			} else {
 				if (method_exists($this, $f = 'validerAttribut_' . $type)) {
@@ -150,7 +150,7 @@ class ValidateurXML
 	}
 
 	public function valider_motif($phraseur, $name, $val, $bal, $motif) {
-		if (!preg_match($motif, $val)) {
+		if (!preg_match($motif, (string) $val)) {
 			coordonnees_erreur($this, "<b>$val</b> "
 				. _T('zxml_valeur_attribut')
 				. " <b>$name</b> "
@@ -176,7 +176,7 @@ class ValidateurXML
 			}
 			foreach ($this->idrefss as $idref) {
 				[$noms, $ligne, $col] = $idref;
-				foreach (preg_split('/\s+/', $noms) as $nom) {
+				foreach (preg_split('/\s+/', (string) $noms) as $nom) {
 					$this->valider_idref($nom, $ligne, $col);
 				}
 			}
@@ -192,7 +192,7 @@ class ValidateurXML
 			$f($this, $name, $attrs);
 		}
 		$depth = $this->depth;
-		$this->debuts[$depth] = strlen($this->res);
+		$this->debuts[$depth] = strlen((string) $this->res);
 		foreach ($attrs as $k => $v) {
 			$this->validerAttribut($phraseur, $k, $v, $name);
 		}
@@ -202,8 +202,8 @@ class ValidateurXML
 		$depth = $this->depth;
 		$contenu = $this->contenu;
 
-		$n = strlen($this->res);
-		$c = strlen(trim($contenu[$depth]));
+		$n = strlen((string) $this->res);
+		$c = strlen(trim((string) $contenu[$depth]));
 		$k = $this->debuts[$depth];
 
 		$regle = $this->dtc->regles[$name] ?? false;
@@ -222,8 +222,8 @@ class ValidateurXML
 						. _T('zxml_vide_balise'));
 				}
 			} else {
-				$f = $this->fratrie[substr($depth, 2)] ?? null;
-				if (is_null($f) || !preg_match($regle, $f)) {
+				$f = $this->fratrie[substr((string) $depth, 2)] ?? null;
+				if (is_null($f) || !preg_match($regle, (string) $f)) {
 					coordonnees_erreur(
 						$this,
 						" <p>\n<b>$name</b> "
@@ -241,10 +241,10 @@ class ValidateurXML
 	}
 
 	public function textElement($phraseur, $data) {
-		if (trim($data)) {
+		if (trim((string) $data)) {
 			$d = $this->depth;
 			$d = $this->ouvrant[$d];
-			preg_match('/^\s*(\S+)/', $d, $m);
+			preg_match('/^\s*(\S+)/', (string) $d, $m);
 			if (isset($this->dtc->pcdata[$m[1]]) && $this->dtc->pcdata[$m[1]]) {
 				coordonnees_erreur($this, ' <p><b>' . $m[1] . '</b> '
 					. _T('zxml_nonvide_balise')); // message a affiner
@@ -270,8 +270,8 @@ class ValidateurXML
 
 	public function defaultElement($phraseur, $data) {
 		if (
-			!preg_match('/^<!--/', $data)
-			&& preg_match_all('/&([^;]*)?/', $data, $r, PREG_SET_ORDER)
+			!preg_match('/^<!--/', (string) $data)
+			&& preg_match_all('/&([^;]*)?/', (string) $data, $r, PREG_SET_ORDER)
 		) {
 			foreach ($r as $m) {
 				[$t, $e] = $m;
@@ -290,7 +290,7 @@ class ValidateurXML
 	public function phraserTout($phraseur, $data) {
 		xml_parsestring($this, $data);
 
-		if (!$this->dtc || preg_match(',^' . _MESSAGE_DOCTYPE . ',', $data)) {
+		if (!$this->dtc || preg_match(',^' . _MESSAGE_DOCTYPE . ',', (string) $data)) {
 			$this->err[] = ['DOCTYPE ?', 0, 0];
 		} else {
 			$this->valider_passe2();

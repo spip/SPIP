@@ -36,21 +36,20 @@ function action_logout_dist() {
 	$logout = _request('logout');
 	$url = securiser_redirect_action(_request('url'));
 	// cas particulier, logout dans l'espace public
-	if ($logout == 'public' and !$url) {
+	if ($logout == 'public' && !$url) {
 		$url = url_de_base();
 	}
 
 	// seul le loge peut se deloger (mais id_auteur peut valoir 0 apres une restauration avortee)
 	if (
 		isset($GLOBALS['visiteur_session']['id_auteur'])
-		and is_numeric($GLOBALS['visiteur_session']['id_auteur'])
-		// des sessions anonymes avec id_auteur=0 existent, mais elle n'ont pas de statut : double check
-		and isset($GLOBALS['visiteur_session']['statut'])
+		&& is_numeric($GLOBALS['visiteur_session']['id_auteur'])
+		&& isset($GLOBALS['visiteur_session']['statut'])
 	) {
 		// il faut un jeton pour fermer la session (eviter les CSRF)
 		if (
-			!$jeton = _request('jeton')
-			or !verifier_jeton_logout($jeton, $GLOBALS['visiteur_session'])
+			!($jeton = _request('jeton'))
+			|| !verifier_jeton_logout($jeton, $GLOBALS['visiteur_session'])
 		) {
 			$jeton = generer_jeton_logout($GLOBALS['visiteur_session']);
 			$action = generer_url_action('logout', "jeton=$jeton");
@@ -81,8 +80,8 @@ function action_logout_dist() {
 		// pour se deconnecter, il faut proposer un nouveau formulaire de connexion http
 		if (
 			isset($_SERVER['PHP_AUTH_USER'])
-			and !$GLOBALS['ignore_auth_http']
-			and $GLOBALS['auth_can_disconnect']
+			&& !$GLOBALS['ignore_auth_http']
+			&& $GLOBALS['auth_can_disconnect']
 		) {
 			ask_php_auth(
 				_T('login_deconnexion_ok'),
@@ -115,12 +114,10 @@ function generer_jeton_logout($session, $alea = null) {
 		$alea = charger_aleas();
 	}
 
-	$jeton = md5($session['date_session']
+	return md5($session['date_session']
 		. $session['id_auteur']
 		. $session['statut']
 		. $alea);
-
-	return $jeton;
 }
 
 /**
@@ -137,10 +134,5 @@ function verifier_jeton_logout($jeton, $session) {
 	if (generer_jeton_logout($session) === $jeton) {
 		return true;
 	}
-
-	if (generer_jeton_logout($session, $GLOBALS['meta']['alea_ephemere_ancien']) === $jeton) {
-		return true;
-	}
-
-	return false;
+	return generer_jeton_logout($session, $GLOBALS['meta']['alea_ephemere_ancien']) === $jeton;
 }

@@ -29,8 +29,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return string
  */
 function set_spip_doc(?string $fichier): string {
-	if ($fichier and strpos($fichier, (string) _DIR_IMG) === 0) {
-		return substr($fichier, strlen(_DIR_IMG));
+	if ($fichier && str_starts_with($fichier, (string) _DIR_IMG)) {
+		return substr($fichier, strlen((string) _DIR_IMG));
 	} else {
 		// ex: fichier distant
 		return $fichier ?? '';
@@ -60,7 +60,7 @@ function get_spip_doc(?string $fichier) {
 		return false;
 	}
 
-	if (strncmp($fichier, _DIR_IMG, strlen(_DIR_IMG)) !== 0) {
+	if (!str_starts_with($fichier, (string) _DIR_IMG)) {
 		$fichier = _DIR_IMG . $fichier;
 	}
 
@@ -81,7 +81,7 @@ function get_spip_doc(?string $fichier) {
 function creer_repertoire_documents($ext) {
 	$rep = sous_repertoire(_DIR_IMG, $ext);
 
-	if (!$ext or !$rep) {
+	if (!$ext || !$rep) {
 		spip_log("creer_repertoire_documents '$rep' interdit");
 		exit;
 	}
@@ -91,8 +91,8 @@ function creer_repertoire_documents($ext) {
 	// sauf pour logo/ utilise pour stocker les logoon et logooff
 	if (
 		isset($GLOBALS['meta']['creer_htaccess'])
-		and $GLOBALS['meta']['creer_htaccess'] == 'oui'
-		and $ext !== 'logo'
+		&& $GLOBALS['meta']['creer_htaccess'] == 'oui'
+		&& $ext !== 'logo'
 	) {
 		include_spip('inc/acces');
 		verifier_htaccess($rep);
@@ -112,10 +112,7 @@ function effacer_repertoire_temporaire($nom) {
 			if (is_file("$nom/$f")) {
 				spip_unlink("$nom/$f");
 			} else {
-				if (
-					$f <> '.' and $f <> '..'
-					and is_dir("$nom/$f")
-				) {
+				if ($f != '.' && $f != '..' && is_dir("$nom/$f")) {
 					effacer_repertoire_temporaire("$nom/$f");
 				}
 			}
@@ -145,7 +142,7 @@ function copier_document($ext, $orig, $source, $subdir = null) {
 	$dest = preg_replace('/<[^>]*>/', '', basename($orig));
 	$dest = preg_replace('/\.([^.]+)$/', '', $dest);
 	$dest = translitteration($dest);
-	$dest = preg_replace('/[^.=\w-]+/', '_', $dest);
+	$dest = preg_replace('/[^.=\w-]+/', '_', (string) $dest);
 
 	// ne pas accepter de noms de la forme -r90.jpg qui sont reserves
 	// pour les images transformees par rotation (action/documenter)
@@ -154,13 +151,12 @@ function copier_document($ext, $orig, $source, $subdir = null) {
 	while (preg_match(',\.(\w+)$,', $dest, $m)) {
 		if (
 			!function_exists('verifier_upload_autorise')
-			or !$r = verifier_upload_autorise($dest)
-			or (!empty($r['autozip']))
+			|| !($r = verifier_upload_autorise($dest))
+			|| !empty($r['autozip'])
 		) {
 			$dest = substr($dest, 0, -strlen($m[0])) . '_' . $m[1];
 			break;
-		}
-		else {
+		} else {
 			$dest = substr($dest, 0, -strlen($m[0]));
 			$ext = $m[1] . '.' . $ext;
 		}
@@ -198,14 +194,14 @@ function determine_upload($type = '') {
 
 	if (
 		!autoriser('chargerftp')
-		or $type == 'logos'
+		|| $type == 'logos'
 	) { # on ne le permet pas pour les logos
 	return false;
 	}
 
 	$repertoire = _DIR_TRANSFERT;
 	if (!@is_dir($repertoire)) {
-		$repertoire = str_replace(_DIR_TMP, '', $repertoire);
+		$repertoire = str_replace(_DIR_TMP, '', (string) $repertoire);
 		$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
 	}
 
@@ -233,17 +229,13 @@ function determine_upload($type = '') {
  */
 function deplacer_fichier_upload($source, $dest, $move = false) {
 	// Securite
-	if (substr($dest, 0, strlen(_DIR_RACINE)) == _DIR_RACINE) {
-		$dest = _DIR_RACINE . preg_replace(',\.\.+,', '.', substr($dest, strlen(_DIR_RACINE)));
+	if (str_starts_with($dest, (string) _DIR_RACINE)) {
+		$dest = _DIR_RACINE . preg_replace(',\.\.+,', '.', substr($dest, strlen((string) _DIR_RACINE)));
 	} else {
 		$dest = preg_replace(',\.\.+,', '.', $dest);
 	}
 
-	if ($move) {
-		$ok = @rename($source, $dest);
-	} else {
-		$ok = @copy($source, $dest);
-	}
+	$ok = $move ? @rename($source, $dest) : @copy($source, $dest);
 	if (!$ok) {
 		$ok = @move_uploaded_file($source, $dest);
 	}
@@ -335,7 +327,7 @@ function check_upload_error($error, $msg = '', $return = false) {
 	include_spip('inc/minipres');
 	echo minipres(
 		$msg,
-		"<div style='text-align: " . $GLOBALS['spip_lang_right'] . "'><a href='" . rawurldecode($GLOBALS['redirect']) . "'><button type='button'>" . _T('ecrire:bouton_suivant') . '</button></a></div>'
+		"<div style='text-align: " . $GLOBALS['spip_lang_right'] . "'><a href='" . rawurldecode((string) $GLOBALS['redirect']) . "'><button type='button'>" . _T('ecrire:bouton_suivant') . '</button></a></div>'
 	);
 	exit;
 }
@@ -355,23 +347,13 @@ function check_upload_error($error, $msg = '', $return = false) {
  */
 function corriger_extension($ext) {
 	$ext = preg_replace(',[^a-z0-9],i', '', $ext);
-	switch ($ext) {
-		case 'htm':
-			$ext = 'html';
-			break;
-		case 'jpeg':
-			$ext = 'jpg';
-			break;
-		case 'tiff':
-			$ext = 'tif';
-			break;
-		case 'aif':
-			$ext = 'aiff';
-			break;
-		case 'mpeg':
-			$ext = 'mpg';
-			break;
-	}
 
-	return $ext;
+	return match ($ext) {
+		'htm' => 'html',
+		'jpeg' => 'jpg',
+		'tiff' => 'tif',
+		'aif' => 'aiff',
+		'mpeg' => 'mpg',
+		default => $ext,
+	};
 }

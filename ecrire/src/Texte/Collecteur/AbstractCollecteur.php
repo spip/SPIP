@@ -78,7 +78,7 @@ abstract class AbstractCollecteur {
 	}
 
 	public function detecter($texte): bool {
-		if (!empty($this->markId) && str_contains($texte, $this->markId)) {
+		if (!empty($this->markId) && str_contains((string) $texte, $this->markId)) {
 			return true;
 		}
 		return !empty($this->collecter($texte, ['detecter_presence' => true]));
@@ -115,7 +115,7 @@ abstract class AbstractCollecteur {
 
 			$offset_pos = 0;
 			foreach ($collection as $c) {
-				$rempl = $this->markId . base64_encode($c['raw']) . '|@';
+				$rempl = $this->markId . base64_encode((string) $c['raw']) . '|@';
 				$texte = substr_replace($texte, $rempl, $c['pos'] + $offset_pos, $c['length']);
 				$offset_pos += strlen($rempl) - $c['length'];
 			}

@@ -598,7 +598,7 @@ function lien_gerer__oups_collecter_args($form, $trace) {
 		do {
 			$t = array_shift($trace);
 			$function = $t['function'] ?? '';
-			if (str_starts_with($function, 'formulaires_' . $form)) {
+			if (str_starts_with((string) $function, 'formulaires_' . $form)) {
 				if (isset($t['args'])) {
 					$args = json_encode($t['args']);
 				}

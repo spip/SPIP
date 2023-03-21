@@ -105,10 +105,10 @@ function definir_barre_boutons($contexte = [], $icones = true, $autorise = true)
 		) {
 			if (
 				$parent
-				&& ($parent = preg_replace(',^bando_,', 'menu_', $parent))
+				&& ($parent = preg_replace(',^bando_,', 'menu_', (string) $parent))
 				&& isset($boutons_admin[$parent])
 			) {
-				$position = (isset($infos['position']) && strlen($infos['position'])) ? (int) $infos['position'] : count($boutons_admin[$parent]->sousmenu);
+				$position = (isset($infos['position']) && strlen((string) $infos['position'])) ? (int) $infos['position'] : count($boutons_admin[$parent]->sousmenu);
 				if ($position < 0) {
 					$position = count($boutons_admin[$parent]->sousmenu) + 1 + $position;
 				}

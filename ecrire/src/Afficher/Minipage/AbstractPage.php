@@ -65,7 +65,7 @@ abstract class AbstractPage {
 
 		$page_title = ($options['page_title'] ?? $GLOBALS['meta']['nom_site']);
 		$doctype = ($options['doctype'] ?? '<!DOCTYPE html>');
-		$doctype = trim($doctype) . "\n";
+		$doctype = trim((string) $doctype) . "\n";
 		$charset = ($options['charset'] ?? 'utf-8');
 		$all_inline = ($options['all_inline'] ?? true);
 		$onLoad = ($options['onLoad'] ?? '');

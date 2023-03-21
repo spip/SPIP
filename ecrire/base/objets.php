@@ -33,11 +33,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return void
  **/
 function array_set_merge(&$table, $index, $valeur) {
-	if (!isset($table[$index])) {
-		$table[$index] = $valeur;
-	} else {
-		$table[$index] = array_merge($table[$index], $valeur);
-	}
+	$table[$index] = isset($table[$index]) ? array_merge($table[$index], $valeur) : $valeur;
 }
 
 /**
@@ -65,7 +61,7 @@ function lister_tables_objets_sql(?string $table_sql = null, $desc = []) {
 	$_PLUGINS_HASH = defined('_PLUGINS_HASH') ? _PLUGINS_HASH : '!_CACHE_PLUGINS_OPT';
 
 	// prealablement recuperer les tables_principales
-	if (is_null($infos_tables) or $plugin_hash !== $_PLUGINS_HASH) {
+	if (is_null($infos_tables) || $plugin_hash !== $_PLUGINS_HASH) {
 		// pas de reentrance (cas base/serial)
 		if ($deja_la) {
 			spip_log('Re-entrance anormale sur lister_tables_objets_sql : '
@@ -404,17 +400,17 @@ function lister_tables_objets_sql(?string $table_sql = null, $desc = []) {
 
 		// repercuter les proprietes generales communes a tous les objets
 		foreach (array_keys($infos_tables) as $t) {
-			foreach ($all as $i => $v) {
+			foreach (array_keys($all) as $i) {
 				if (in_array($i, ['tables_jointures', 'champs_versionnes'])) {
 					$add = $all[$i];
 					// eviter les doublons de declaration de table jointure (ex des mots sur auteurs)
 					// pour les declarations generiques avec cles numeriques
-					if ($i == 'tables_jointures' and isset($infos_tables[$t][$i]) and is_countable($infos_tables[$t][$i]) ? count($infos_tables[$t][$i]) : 0) {
+					if ($i == 'tables_jointures' && isset($infos_tables[$t][$i]) && (is_countable($infos_tables[$t][$i]) ? count($infos_tables[$t][$i]) : 0)) {
 						$doublons = array_intersect($infos_tables[$t][$i], $add);
 						foreach ($doublons as $d) {
 							if (
 								is_numeric(array_search($d, $infos_tables[$t][$i]))
-								and is_numeric($k = array_search($d, $add))
+								&& is_numeric($k = array_search($d, $add))
 							) {
 								unset($add[$k]);
 							}
@@ -440,7 +436,7 @@ function lister_tables_objets_sql(?string $table_sql = null, $desc = []) {
 			$mem = ($GLOBALS[$principale_ou_auxiliaire][$table] ?? []);
 			// l'ajouter au tableau
 			$GLOBALS[$principale_ou_auxiliaire][$table] = [];
-			if (isset($infos['field']) and isset($infos['key'])) {
+			if (isset($infos['field']) && isset($infos['key'])) {
 				foreach (['field', 'key', 'join'] as $k) {
 					if (isset($infos_tables[$table][$k])) {
 						$GLOBALS[$principale_ou_auxiliaire][$table][$k] = &$infos_tables[$table][$k];
@@ -480,7 +476,7 @@ function lister_tables_objets_sql(?string $table_sql = null, $desc = []) {
 	if ($table_sql === '::md5') {
 		return $md5;
 	}
-	if ($table_sql and !isset($infos_tables[$table_sql])) {
+	if ($table_sql && !isset($infos_tables[$table_sql])) {
 		#$desc = renseigner_table_objet_sql($table_sql,$desc);
 		$desc = renseigner_table_objet_interfaces($table_sql, $desc);
 
@@ -663,7 +659,7 @@ function renseigner_table_objet_sql($table_sql, &$infos) {
 		// s'en servir pour extrapoler le type
 		if (isset($infos['key']['PRIMARY KEY'])) {
 			$primary = $infos['key']['PRIMARY KEY'];
-			$primary = explode(',', $primary);
+			$primary = explode(',', (string) $primary);
 			$primary = reset($primary);
 			$infos['type'] = preg_replace(',^spip_|^id_|s$,', '', $primary);
 		} else {
@@ -687,7 +683,7 @@ function renseigner_table_objet_sql($table_sql, &$infos) {
 
 	// normaliser pour pouvoir tester en php $infos['principale']?
 	// et dans une boucle {principale=oui}
-	$infos['principale'] = (($infos['principale'] and $infos['principale'] != 'non') ? 'oui' : false);
+	$infos['principale'] = (($infos['principale'] && $infos['principale'] != 'non') ? 'oui' : false);
 
 	// declarer et normaliser pour pouvoir tester en php $infos['editable']?
 	// et dans une boucle {editable=oui}
@@ -695,7 +691,7 @@ function renseigner_table_objet_sql($table_sql, &$infos) {
 		$infos['editable'] = 'oui';
 	}
 
-	$infos['editable'] = (($infos['editable'] and $infos['editable'] != 'non') ? 'oui' : false);
+	$infos['editable'] = (($infos['editable'] && $infos['editable'] != 'non') ? 'oui' : false);
 
 	// les urls publiques sont par defaut page=type pour les tables principales, et rien pour les autres
 	// seules les exceptions sont donc a declarer
@@ -798,7 +794,7 @@ function renseigner_table_objet_sql($table_sql, &$infos) {
  */
 function renseigner_table_objet_interfaces($table_sql, &$infos) {
 	if (!isset($infos['titre'])) {
-		if (isset($infos['table_objet']) and isset($GLOBALS['table_titre'][$infos['table_objet']])) {
+		if (isset($infos['table_objet']) && isset($GLOBALS['table_titre'][$infos['table_objet']])) {
 			$infos['titre'] = $GLOBALS['table_titre'][$infos['table_objet']];
 		} else {
 			$infos['titre'] = ((isset($infos['field']['titre'])) ? 'titre,' : "'' as titre,");
@@ -806,7 +802,7 @@ function renseigner_table_objet_interfaces($table_sql, &$infos) {
 		}
 	}
 	if (!isset($infos['date'])) {
-		if (isset($infos['table_objet']) and isset($GLOBALS['table_date'][$infos['table_objet']])) {
+		if (isset($infos['table_objet']) && isset($GLOBALS['table_date'][$infos['table_objet']])) {
 			$infos['date'] = $GLOBALS['table_date'][$infos['table_objet']];
 		} else {
 			$infos['date'] = ((isset($infos['field']['date'])) ? 'date' : '');
@@ -832,7 +828,7 @@ function renseigner_table_objet_interfaces($table_sql, &$infos) {
  **/
 function lister_tables_principales() {
 	static $done = false;
-	if (!$done or !(is_countable($GLOBALS['tables_principales']) ? count($GLOBALS['tables_principales']) : 0)) {
+	if (!$done || !(is_countable($GLOBALS['tables_principales']) ? count($GLOBALS['tables_principales']) : 0)) {
 		lister_tables_objets_sql();
 		$done = true;
 	}
@@ -849,7 +845,7 @@ function lister_tables_principales() {
  **/
 function lister_tables_auxiliaires() {
 	static $done = false;
-	if (!$done or !(is_countable($GLOBALS['tables_auxiliaires']) ? count($GLOBALS['tables_auxiliaires']) : 0)) {
+	if (!$done || !(is_countable($GLOBALS['tables_auxiliaires']) ? count($GLOBALS['tables_auxiliaires']) : 0)) {
 		lister_tables_objets_sql();
 		$done = true;
 	}
@@ -866,8 +862,7 @@ function lister_tables_objets_surnoms() {
 	static $surnoms = null;
 	static $md5 = null;
 	if (
-		!$surnoms
-		or $md5 != lister_tables_objets_sql('::md5')
+		!$surnoms || $md5 != lister_tables_objets_sql('::md5')
 	) {
 		// passer dans un pipeline qui permet aux plugins de declarer leurs exceptions
 		// pour compatibilite, car il faut dorenavent utiliser
@@ -889,9 +884,9 @@ function lister_tables_objets_surnoms() {
 			if ($infos['table_objet']) { // securite, si la fonction est appelee trop tot, c'est vide
 				// optimisations pour table_objet
 				//$surnoms[$infos['type']] = $infos['table_objet'];
-				$surnoms[preg_replace(',^spip_|^id_|s$,', '', $infos['table_objet'])] = $infos['table_objet'];
-				$surnoms[preg_replace(',^spip_|^id_|s$,', '', $infos['type'])] = $infos['table_objet'];
-				if (is_array($infos['table_objet_surnoms']) and count($infos['table_objet_surnoms'])) {
+				$surnoms[preg_replace(',^spip_|^id_|s$,', '', (string) $infos['table_objet'])] = $infos['table_objet'];
+				$surnoms[preg_replace(',^spip_|^id_|s$,', '', (string) $infos['type'])] = $infos['table_objet'];
+				if (is_array($infos['table_objet_surnoms']) && count($infos['table_objet_surnoms'])) {
 					foreach ($infos['table_objet_surnoms'] as $surnom) {
 						$surnoms[$surnom] = $infos['table_objet'];
 					}
@@ -913,8 +908,7 @@ function lister_types_surnoms() {
 	static $surnoms = null;
 	static $md5 = null;
 	if (
-		!$surnoms
-		or $md5 != lister_tables_objets_sql('::md5')
+		!$surnoms || $md5 != lister_tables_objets_sql('::md5')
 	) {
 		// passer dans un pipeline qui permet aux plugins de declarer leurs exceptions
 		// pour compatibilite, car il faut dorenavent utiliser
@@ -925,10 +919,10 @@ function lister_types_surnoms() {
 			if ($infos['type']) { // securite, si la fonction est appelee trop tot, c'est vide
 				// optimisations pour objet_type
 				//$surnoms[$infos['type']] = $infos['type'];
-				$surnoms[preg_replace(',^spip_|^id_|s$,', '', $infos['table_objet'])] = $infos['type'];
-				$surnoms[preg_replace(',^spip_|^id_|s$,', '', $infos['type'])] = $infos['type'];
+				$surnoms[preg_replace(',^spip_|^id_|s$,', '', (string) $infos['table_objet'])] = $infos['type'];
+				$surnoms[preg_replace(',^spip_|^id_|s$,', '', (string) $infos['type'])] = $infos['type'];
 				// surnoms declares
-				if (is_array($infos['type_surnoms']) and count($infos['type_surnoms'])) {
+				if (is_array($infos['type_surnoms']) && count($infos['type_surnoms'])) {
 					foreach ($infos['type_surnoms'] as $surnom) {
 						$surnoms[$surnom] = $infos['type'];
 					}
@@ -962,7 +956,7 @@ function lister_tables_spip($serveur = '') {
 		$connexion = $GLOBALS['connexions'][$serveur ?: 0];
 		$spip = $connexion['prefixe'] . '_';
 		foreach ($ts as $t) {
-			$t = substr($t, strlen($spip));
+			$t = substr((string) $t, strlen($spip));
 			$tables[$serveur]["spip_$t"] = $t;
 		}
 	}
@@ -1031,13 +1025,11 @@ function table_objet(string $type, string $serveur = ''): string {
 		$trouver_table = charger_fonction('trouver_table', 'base');
 		$typetrim = rtrim($type, 's') . 's';
 		if (
-			(isset($t[$typetrim]) or in_array($typetrim, $t))
-			and ($desc = $trouver_table(rtrim($type, 's') . 's', $serveur))
+			(isset($t[$typetrim]) || in_array($typetrim, $t)) && ($desc = $trouver_table(rtrim($type, 's') . 's', $serveur))
 		) {
 			return $desc['id_table'];
 		} elseif (
-			(isset($t[$type]) or in_array($type, $t))
-			and ($desc = $trouver_table($type, $serveur))
+			(isset($t[$type]) || in_array($type, $t)) && ($desc = $trouver_table($type, $serveur))
 		) {
 			return $desc['id_table'];
 		}
@@ -1084,7 +1076,7 @@ function table_objet_sql(string $type, string $serveur = ''): string {
 			$nom = "spip_$nom";
 		} elseif ($serveur !== false) {
 			$t = lister_tables_spip($serveur);
-			if (isset($t[$nom]) or in_array($nom, $t)) {
+			if (isset($t[$nom]) || in_array($nom, $t)) {
 				$trouver_table = charger_fonction('trouver_table', 'base');
 				if ($desc = $trouver_table($nom, $serveur)) {
 					return $desc['table_sql'];
@@ -1124,14 +1116,13 @@ function id_table_objet(string $type, string $serveur = ''): ?string {
 
 	$ts = lister_tables_spip($serveur);
 	if (
-		in_array($t, $ts)
-		or in_array($t, lister_toutes_tables($serveur))
+		in_array($t, $ts) || in_array($t, lister_toutes_tables($serveur))
 	) {
 		$desc = $trouver_table($t, $serveur);
 		if (isset($desc['key']['PRIMARY KEY'])) {
 			return $desc['key']['PRIMARY KEY'];
 		}
-		if (!$desc or isset($desc['field']["id_$type"])) {
+		if (!$desc || isset($desc['field']["id_$type"])) {
 			return "id_$type";
 		}
 		// sinon renvoyer le premier champ de la table...
@@ -1180,8 +1171,8 @@ function objet_type(string $table_objet, string $serveur = ''): ?string {
 	// oui si table_objet ressemblait deja a un type
 	if (
 		$type == $table_objet
-		or (table_objet($type, $serveur) == $table_objet)
-		or (table_objet_sql($type, $serveur) == $table_objet)
+		|| table_objet($type, $serveur) === $table_objet
+		|| table_objet_sql($type, $serveur) === $table_objet
 	) {
 		return $type;
 	}
@@ -1203,11 +1194,11 @@ function objet_type(string $table_objet, string $serveur = ''): ?string {
 	if (in_array($table_objet, $ts)) {
 		$desc = $trouver_table($table_objet);
 	}
-	if (!$desc and in_array($table_objet = table_objet($type, $serveur), $ts)) {
+	if (!$desc && in_array($table_objet = table_objet($type, $serveur), $ts)) {
 		$desc = $trouver_table($table_objet, $serveur);
 	}
 	// si le type est declare : bingo !
-	if ($desc and isset($desc['type'])) {
+	if ($desc && isset($desc['type'])) {
 		return $desc['type'];
 	}
 
@@ -1239,9 +1230,9 @@ function objet_test_si_publie($objet, $id_objet, $serveur = '') {
 	$id_table_objet = id_table_objet($objet, $serveur);
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	if (
-		$desc = $trouver_table($table_objet, $serveur)
-		and isset($desc['statut'])
-		and $desc['statut']
+		($desc = $trouver_table($table_objet, $serveur))
+		&& isset($desc['statut'])
+		&& $desc['statut']
 	) {
 		$boucle = new Boucle();
 		$boucle->show = $desc;
@@ -1252,7 +1243,7 @@ function objet_test_si_publie($objet, $id_objet, $serveur = '') {
 		$boucle->sql_serveur = $serveur;
 		$boucle->select[] = $id_table_objet;
 		$boucle->from[$table_objet] = table_objet_sql($objet, $serveur);
-		$boucle->where[] = $id_table . '.' . $id_table_objet . '=' . intval($id_objet);
+		$boucle->where[] = $id_table . '.' . $id_table_objet . '=' . (int) $id_objet;
 
 		$boucle->descr['nom'] = 'objet_test_si_publie'; // eviter notice php
 		$boucle->descr['sourcefile'] = 'internal';
@@ -1275,11 +1266,7 @@ function objet_test_si_publie($objet, $id_objet, $serveur = '') {
 			$id_table,
 			$serveur
 		);
-		if (sql_fetch($res)) {
-			return true;
-		}
-
-		return false;
+  		return (bool) sql_fetch($res);
 	}
 
 	// si pas d'info statut ni de fonction : l'objet est publie
@@ -1326,7 +1313,7 @@ function objet_lister_parents($objet, $id_objet, $parent_direct_seulement = fals
 		include_spip('base/abstract_sql');
 		$table_objet = table_objet_sql($objet);
 		$cle_objet = id_table_objet($objet);
-		$id_objet = intval($id_objet);
+		$id_objet = (int) $id_objet;
 
 		// On teste chacun méthode dans l'ordre, et dès qu'on a trouvé un parent on s'arrête
 		foreach ($parent_methodes as $parent_methode) {
@@ -1389,18 +1376,18 @@ function objet_lister_parents($objet, $id_objet, $parent_direct_seulement = fals
 			}
 
 			// On lance la requête de récupération du parent
-			$is_table_lien = (strpos($table, '_liens') !== false and substr($table, -6) === '_liens');
+			$is_table_lien = (str_contains((string) $table, '_liens') && str_ends_with((string) $table, '_liens'));
 			if (
 				!$condition_objet_invalide
-				and $where
-				and ($lignes = sql_allfetsel($is_table_lien ? '*' : $select, $table, $where))
+				&& $where
+				&& ($lignes = sql_allfetsel($is_table_lien ? '*' : $select, $table, $where))
 			) {
 				foreach ($lignes as $ligne) {
 					// Si le type est fixe
 					if (isset($parent_methode['type'])) {
 						$parent = [
 							'objet' 	=> $parent_methode['type'],
-							'id_objet'	=> intval($ligne[$parent_methode['champ']]),
+							'id_objet'	=> (int) $ligne[$parent_methode['champ']],
 							'champ' 	=> $parent_methode['champ'],
 							'table'    => $table,
 						];
@@ -1408,7 +1395,7 @@ function objet_lister_parents($objet, $id_objet, $parent_direct_seulement = fals
 					elseif (isset($parent_methode['champ_type'])) {
 						$parent = [
 							'objet' 	 => $ligne[$parent_methode['champ_type']],
-							'id_objet' 	 => intval($ligne[$parent_methode['champ']]),
+							'id_objet' 	 => (int) $ligne[$parent_methode['champ']],
 							'champ' 	 => $parent_methode['champ'],
 							'champ_type' => $parent_methode['champ_type'],
 							'table'    => $table,
@@ -1495,7 +1482,7 @@ function objet_lister_enfants($objet, $id_objet) {
 	// Si on trouve des types d'enfants et leurs méthodes
 	if ($enfants_methodes = objet_type_decrire_infos_enfants($objet)) {
 		include_spip('base/abstract_sql');
-		$id_objet = intval($id_objet);
+		$id_objet = (int) $id_objet;
 
 		// On parcourt tous les types d'enfants trouvés
 		foreach ($enfants_methodes as $objet_enfant => $_methode_parent) {
@@ -1532,7 +1519,7 @@ function objet_lister_enfants($objet, $id_objet) {
 			}
 
 			// On lance la requête
-			$is_table_lien = (strpos($table_enfant, '_liens') !== false and substr($table_enfant, -6) === '_liens');
+			$is_table_lien = (str_contains((string) $table_enfant, '_liens') && str_ends_with((string) $table_enfant, '_liens'));
 			if ($rows = sql_allfetsel($is_table_lien ? '*' : $cle_objet_enfant, $table_enfant, $where)) {
 				$enfant = [
 					'objet' => $objet_enfant,
@@ -1546,7 +1533,7 @@ function objet_lister_enfants($objet, $id_objet) {
 					$enfant['champ_type'] = $_methode_parent['champ_type'];
 				}
 				foreach ($rows as $row) {
-					$enfant['id_objet'] = intval($row[$cle_objet_enfant]);
+					$enfant['id_objet'] = (int) $row[$cle_objet_enfant];
 					if ($is_table_lien) {
 						$enfant['lien'] = $row;
 					}
@@ -1611,15 +1598,11 @@ function objet_type_decrire_infos_parents($objet) {
 
 		// Si on trouve bien la description de cet objet
 		if ($infos = lister_tables_objets_sql($table)) {
-			if (isset($infos['parent']) and is_array($infos['parent'])) {
+			if (isset($infos['parent']) && is_array($infos['parent'])) {
 				// S'il y a une description explicite de parent, c'est prioritaire
 				// -- on traite les cas où il y a une ou plusieurs description mais on renvoie toujours un tableau
 				//    de description
-				if (!isset($infos['parent'][0])) {
-					$parents[$objet] = [$infos['parent']];
-				} else {
-					$parents[$objet] = $infos['parent'];
-				}
+				$parents[$objet] = isset($infos['parent'][0]) ? $infos['parent'] : [$infos['parent']];
 			} elseif (isset($infos['field']['id_rubrique'])) {
 				// Sinon on cherche des cas courants connus magiquement, à commencer par id_rubrique
 				$parents[$objet] = [['type' => 'rubrique', 'champ' => 'id_rubrique']];
@@ -1658,13 +1641,13 @@ function objet_type_decrire_infos_enfants($objet) {
 				// On parcourt les différents cas possible, si certains peuvent concerner l'objet demandé
 				foreach ($parent_methodes as $parent_methode) {
 					// Si la méthode qu'on teste n'exclut pas le parent demandé
-					if (!isset($parent_methode['exclus']) or !in_array($objet, $parent_methode['exclus'])) {
+					if (!isset($parent_methode['exclus']) || !in_array($objet, $parent_methode['exclus'])) {
 						// Si le type du parent est fixe et directement l'objet demandé
-						if (isset($parent_methode['type']) and isset($parent_methode['champ']) and $parent_methode['type'] == $objet) {
+						if (isset($parent_methode['type']) && isset($parent_methode['champ']) && $parent_methode['type'] == $objet) {
 							$enfants[$objet][$objet_enfant] = $parent_methode;
 						}
 						// Si le type est variable, alors l'objet demandé peut forcément être parent
-						elseif (isset($parent_methode['champ_type']) and isset($parent_methode['champ'])) {
+						elseif (isset($parent_methode['champ_type']) && isset($parent_methode['champ'])) {
 							$enfants[$objet][$objet_enfant] = $parent_methode;
 						}
 					}

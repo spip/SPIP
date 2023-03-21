@@ -57,7 +57,7 @@ function exporter_csv_ligne_numerotee($nb, $ligne, $delim = ',', $importer_chars
 	if ($callback) {
 		$ligne = $callback($nb, $ligne, $delim, $importer_charset);
 	}
-	$output = join($delim, array_map('exporter_csv_champ', $ligne)) . "\r\n";
+	$output = implode($delim, array_map('exporter_csv_champ', $ligne)) . "\r\n";
 	if ($importer_charset) {
 		$output = str_replace('’', '\'', $output);
 		$output = unicode2charset(html2unicode(charset2unicode($output)), $importer_charset);
@@ -138,13 +138,13 @@ function inc_exporter_csv_dist($titre, $resource, $options = []) {
 	// Nom du fichier : celui indiqué dans les options, sinon le titre
 	// Normalisation : uniquement les caractères non spéciaux, tirets, underscore et point + remplacer espaces par underscores
 	$filename = $options['fichier'] ?? translitteration(textebrut(typo($titre)));
-	$filename = preg_replace([',[^\w\-_\.\s]+,', ',\s+,'], ['', '_'], trim($filename));
+	$filename = preg_replace([',[^\w\-_\.\s]+,', ',\s+,'], ['', '_'], trim((string) $filename));
 	$filename = rtrim($filename, '.');
 
 	// Extension : celle indiquée en option, sinon choisie selon le délimiteur
 	// Normalisation : uniquement les charactères non spéciaux
 	if (!empty($options['extension'])) {
-		$options['extension'] = preg_replace(',[^\w]+,', '', trim($options['extension']));
+		$options['extension'] = preg_replace(',[^\w]+,', '', trim((string) $options['extension']));
 	}
 	$extension = $options['extension'] ?? ($options['delim'] === ',' ? 'csv' : 'xls');
 
@@ -160,7 +160,7 @@ function inc_exporter_csv_dist($titre, $resource, $options = []) {
 
 	$output = '';
 	$nb = 0;
-	if (!empty($options['entetes']) and is_array($options['entetes'])) {
+	if (!empty($options['entetes']) && is_array($options['entetes'])) {
 		$output = exporter_csv_ligne_numerotee($nb, $options['entetes'], $options['delim'], $importer_charset, $options['callback']);
 	}
 	// les donnees commencent toujours a la ligne 1, qu'il y ait ou non des entetes
@@ -180,7 +180,7 @@ function inc_exporter_csv_dist($titre, $resource, $options = []) {
 
 	// si envoyer=='attachment' on passe par un fichier temporaire
 	// sinon on ecrit directement sur stdout
-	if ($options['envoyer'] and $options['envoyer'] !== 'attachment') {
+	if ($options['envoyer'] && $options['envoyer'] !== 'attachment') {
 		$fichier = 'php://output';
 	}
 	else {

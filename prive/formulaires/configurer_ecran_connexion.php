@@ -41,9 +41,9 @@ function formulaires_configurer_ecran_connexion_verifier_dist() {
 	elseif (!empty($_FILES['upload_image_fond_login'])) {
 		$file = $_FILES['upload_image_fond_login'];
 		include_spip('inc/documents');
-		$extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+		$extension = pathinfo((string) $file['name'], PATHINFO_EXTENSION);
 		$extension = corriger_extension(strtolower($extension));
-		if (!in_array($extension, ['jpg'])) {
+		if ($extension != 'jpg') {
 			$erreurs['upload_image_fond_login'] = _T('erreur_type_fichier');
 		}
 	}

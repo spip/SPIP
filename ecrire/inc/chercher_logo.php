@@ -41,7 +41,7 @@ function inc_chercher_logo_dist($id, $_id_objet, $mode = 'on', $compat_old_logos
 		// chercher dans la base
 		$mode_document = 'logo' . $mode;
 		$objet = objet_type($_id_objet);
-		$doc = sql_fetsel('D.*', 'spip_documents AS D JOIN spip_documents_liens AS L ON L.id_document=D.id_document', 'D.mode=' . sql_quote($mode_document) . ' AND L.objet=' . sql_quote($objet) . ' AND id_objet=' . intval($id));
+		$doc = sql_fetsel('D.*', 'spip_documents AS D JOIN spip_documents_liens AS L ON L.id_document=D.id_document', 'D.mode=' . sql_quote($mode_document) . ' AND L.objet=' . sql_quote($objet) . ' AND id_objet=' . (int) $id);
 		if ($doc) {
 			include_spip('inc/documents');
 			$d = get_spip_doc($doc['fichier']);
@@ -52,7 +52,7 @@ function inc_chercher_logo_dist($id, $_id_objet, $mode = 'on', $compat_old_logos
 		if ($compat_old_logos) {
 			# attention au cas $id = '0' pour LOGO_SITE_SPIP : utiliser intval()
 			$type = type_du_logo($_id_objet);
-			$nom = $type . $mode . intval($id);
+			$nom = $type . $mode . (int) $id;
 
 			foreach ($GLOBALS['formats_logos'] as $format) {
 				if (@file_exists($d = (_DIR_LOGOS . $nom . '.' . $format))) {

@@ -41,7 +41,7 @@ function exec_base_delete_all_dist() {
 			$res = base_saisie_tables('delete', $res);
 			include_spip('inc/headers');
 			$res = "\n<ol style='text-align:left'><li>\n" .
-				join("</li>\n<li>", $res) .
+				implode("</li>\n<li>", $res) .
 				'</li></ol>';
 			$admin = charger_fonction('admin', 'inc');
 			$res = $admin('delete_all', _T('titre_page_delete_all'), $res);

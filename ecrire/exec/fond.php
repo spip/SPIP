@@ -27,10 +27,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $fond = _request('exec');
 $GLOBALS['delais'] = 0;// pas de cache !
 // Securite
-if (strstr($fond, '/')) {
+if (strstr((string) $fond, '/')) {
 	if (
 		!include_spip('inc/autoriser')
-		or !autoriser('webmestre')
+		|| !autoriser('webmestre')
 	) {
 		include_spip('inc/minipres');
 		echo minipres();

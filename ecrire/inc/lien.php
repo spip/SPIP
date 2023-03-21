@@ -71,7 +71,7 @@ function traiter_raccourci_lien_atts($texte) {
 	$bulle = '';
 	$hlang = '';
 
-	return [trim($texte), $bulle, $hlang];
+	return [trim((string) $texte), $bulle, $hlang];
 }
 
 define('_RACCOURCI_CHAPO', '/^(\W*)(\W*)(\w*\d+([?#].*)?)$/');
@@ -108,15 +108,15 @@ function calculer_url($ref, $texte = '', $pour = 'url', string $connect = '', $e
 define('_EXTRAIRE_LIEN', ',^\s*(?:' . _PROTOCOLES_STD . '):?/?/?\s*$,iS');
 
 function traiter_lien_explicite($ref, $texte = '', $pour = 'url', string $connect = '', $echappe_typo = true) {
-	if (preg_match(_EXTRAIRE_LIEN, $ref)) {
+	if (preg_match(_EXTRAIRE_LIEN, (string) $ref)) {
 		return ($pour != 'tout') ? '' : ['', '', '', ''];
 	}
 
-	$lien = entites_html(trim($ref));
+	$lien = entites_html(trim((string) $ref));
 
 	// Liens explicites
 	if (!$texte) {
-		$texte = str_replace('"', '', $lien);
+		$texte = str_replace('"', '', (string) $lien);
 		// evite l'affichage de trops longues urls.
 		$lien_court = charger_fonction('lien_court', 'inc');
 		$texte = $lien_court($texte);
@@ -126,10 +126,10 @@ function traiter_lien_explicite($ref, $texte = '', $pour = 'url', string $connec
 	}
 
 	// petites corrections d'URL
-	if (preg_match('/^www\.[^@]+$/S', $lien)) {
+	if (preg_match('/^www\.[^@]+$/S', (string) $lien)) {
 		$lien = 'http://' . $lien;
 	} else {
-		if (strpos($lien, '@') && email_valide($lien)) {
+		if (strpos((string) $lien, '@') && email_valide($lien)) {
 			if (!$texte) {
 				$texte = $lien;
 			}
@@ -149,13 +149,7 @@ function traiter_lien_explicite($ref, $texte = '', $pour = 'url', string $connec
 }
 
 function liens_implicite_glose_dist($texte, $id, $type, $args, $ancre, string $connect = '') {
-	if (function_exists($f = 'glossaire_' . $ancre)) {
-		$url = $f($texte, $id);
-	} else {
-		$url = glossaire_std($texte);
-	}
-
-	return $url;
+	return function_exists($f = 'glossaire_' . $ancre) ? $f($texte, $id) : glossaire_std($texte);
 }
 
 /**
@@ -229,8 +223,7 @@ function traiter_lien_implicite($ref, $texte = '', $pour = 'url', $connect = '')
 
 	// dans le cas d'un lien vers un doc, ajouter le type='mime/type'
 	if (
-		$type == 'document'
-		and $mime = sql_getfetsel(
+		$type == 'document' && ($mime = sql_getfetsel(
 			'mime_type',
 			'spip_types_documents',
 			'extension IN (' . sql_get_select('extension', 'spip_documents', 'id_document=' . sql_quote($id)) . ')',
@@ -239,7 +232,7 @@ function traiter_lien_implicite($ref, $texte = '', $pour = 'url', $connect = '')
 			'',
 			'',
 			$connect
-		)
+		))
 	) {
 		$r['mime'] = $mime;
 	}
@@ -252,7 +245,7 @@ function traiter_lien_implicite($ref, $texte = '', $pour = 'url', $connect = '')
 define('_RACCOURCI_URL', '/^\s*(\w*?)\s*(\d+)(\?(.*?))?(#([^\s]*))?\s*$/S');
 
 function typer_raccourci($lien) {
-	if (!preg_match(_RACCOURCI_URL, $lien, $match)) {
+	if (!preg_match(_RACCOURCI_URL, (string) $lien, $match)) {
 		return [];
 	}
 
@@ -273,7 +266,7 @@ function typer_raccourci($lien) {
 					if ($f == 'aut') {
 						$f = 'auteur';
 					} else {
-						if ($f == 'doc' or $f == 'im' or $f == 'img' or $f == 'image' or $f == 'emb') {
+						if ($f == 'doc' || $f == 'im' || $f == 'img' || $f == 'image' || $f == 'emb') {
 							$f = 'document';
 						} else {
 							if (preg_match('/^br..?ve$/S', $f)) {
@@ -306,7 +299,7 @@ function traiter_raccourci_titre($id, $type, $connect = null) {
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table(table_objet($type));
 
-	if (!($desc and $s = $desc['titre'])) {
+	if (!($desc && ($s = $desc['titre']))) {
 		return [];
 	}
 
@@ -319,7 +312,7 @@ function traiter_raccourci_titre($id, $type, $connect = null) {
 
 	$r['titre'] = supprimer_numero($r['titre']);
 
-	if (!$r['titre'] and !empty($r['surnom'])) {
+	if (!$r['titre'] && !empty($r['surnom'])) {
 		$r['titre'] = $r['surnom'];
 	}
 

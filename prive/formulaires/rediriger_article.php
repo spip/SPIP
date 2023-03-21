@@ -56,7 +56,7 @@ function formulaires_rediriger_article_verifier_dist($id_article, $retour = '') 
 
 function formulaires_rediriger_article_traiter_dist($id_article, $retour = '') {
 
-	$url = preg_replace(',^\s*https?://$,i', '', rtrim(_request('redirection')));
+	$url = preg_replace(',^\s*https?://$,i', '', rtrim((string) _request('redirection')));
 	if ($url) {
 		$url = corriger_caracteres($url);
 	}

@@ -77,19 +77,19 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 		}
 		$arbre['prefix'] = [''];
 	} else {
-		$prefix = trim(end($arbre['prefix']));
+		$prefix = trim((string) end($arbre['prefix']));
 		if (strtoupper($prefix) == 'SPIP' && $plug != './') {
 			$arbre['erreur'][] = _T('erreur_plugin_prefix_interdit');
 		}
 		if (isset($arbre['etat'])) {
-			$etat = trim(end($arbre['etat']));
+			$etat = trim((string) end($arbre['etat']));
 			if (!in_array($etat, $etats)) {
 				$arbre['erreur'][] = _T('erreur_plugin_etat_inconnu') . " : '$etat'";
 			}
 		}
 		if (isset($arbre['options'])) {
 			foreach ($arbre['options'] as $optfile) {
-				$optfile = trim($optfile);
+				$optfile = trim((string) $optfile);
 				if (!@is_readable($dir_plugins . "$plug/$optfile") && !$silence) {
 					$arbre['erreur'][] = _T('erreur_plugin_fichier_absent') . " : $optfile";
 				}
@@ -97,7 +97,7 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 		}
 		if (isset($arbre['fonctions'])) {
 			foreach ($arbre['fonctions'] as $optfile) {
-				$optfile = trim($optfile);
+				$optfile = trim((string) $optfile);
 				if (!@is_readable($dir_plugins . "$plug/$optfile") && !$silence) {
 					$arbre['erreur'][] = _T('erreur_plugin_fichier_absent') . " : $optfile";
 				}
@@ -124,7 +124,7 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 			}
 			$action = $pipe['action'] ?? $pipe['nom'];
 			// verif que la methode a un nom autorise
-			if (in_array(strtolower($action), $liste_methodes_reservees) && !$silence) {
+			if (in_array(strtolower((string) $action), $liste_methodes_reservees) && !$silence) {
 				$arbre['erreur'][] = _T('erreur_plugin_nom_fonction_interdit') . " : $action";
 			}
 			if (isset($pipe['inclure'])) {
@@ -149,7 +149,7 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 				} else {
 					$necessite[] = $att;
 				}
-				if (strtolower($att['id']) == 'spip') {
+				if (strtolower((string) $att['id']) == 'spip') {
 					$spip_trouve = true;
 				}
 			}
@@ -197,7 +197,7 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 		// exposer les noisettes
 		if (isset($arbre['noisette'])) {
 			foreach ($arbre['noisette'] as $k => $nut) {
-				$nut = preg_replace(',[.]html$,uims', '', trim($nut));
+				$nut = preg_replace(',[.]html$,uims', '', trim((string) $nut));
 				$arbre['noisette'][$k] = $nut;
 				if (!@is_readable($dir_plugins . "$plug/$nut.html") && !$silence) {
 					$arbre['erreur'][] = _T('erreur_plugin_fichier_absent') . " : $nut";

@@ -28,12 +28,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function exec_plonger_dist() {
 	include_spip('inc/actions');
 
-	$rac = preg_replace(',[^\w\,/#&;-]+,', ' ', _request('rac'));
-	$id = intval(_request('id'));
-	$exclus = intval(_request('exclus'));
-	$col = intval(_request('col'));
+	$rac = preg_replace(',[^\w\,/#&;-]+,', ' ', (string) _request('rac'));
+	$id = (int) _request('id');
+	$exclus = (int) _request('exclus');
+	$col = (int) _request('col');
 	$do = _request('do');
-	if (preg_match('/^\w*$/', $do)) {
+	if (preg_match('/^\w*$/', (string) $do)) {
 		if (!$do) {
 			$do = 'aff';
 		}

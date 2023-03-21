@@ -27,12 +27,12 @@ include_spip('inc/actions');
  * @uses ajax_retour()
  **/
 function exec_selectionner_dist() {
-	$id = intval(_request('id'));
-	$exclus = intval(_request('exclus'));
+	$id = (int) _request('id');
+	$exclus = (int) _request('exclus');
 	$type = _request('type');
 	$rac = _request('racine');
 	$do = _request('do');
-	if (preg_match('/^\w*$/', $do)) {
+	if (preg_match('/^\w*$/', (string) $do)) {
 		if (!$do) {
 			$do = 'aff';
 		}

@@ -43,9 +43,9 @@ function logo_supprimer($objet, $id_objet, $etat) {
 			spip_unlink($logo[0]);
 		}
 		elseif (
-			$doc = $logo[5]
-			and isset($doc['id_document'])
-			and $id_document = $doc['id_document']
+			($doc = $logo[5])
+			&& isset($doc['id_document'])
+			&& ($id_document = $doc['id_document'])
 		) {
 			include_spip('action/editer_liens');
 			// supprimer le lien dans la base
@@ -53,7 +53,7 @@ function logo_supprimer($objet, $id_objet, $etat) {
 
 			// verifier si il reste des liens avec d'autres objets et sinon supprimer
 			$liens = objet_trouver_liens(['document' => $id_document], '*');
-			if (!count($liens)) {
+			if ($liens === []) {
 				$supprimer_document = charger_fonction('supprimer_document', 'action');
 				$supprimer_document($doc['id_document']);
 			}
@@ -83,9 +83,8 @@ function logo_modifier($objet, $id_objet, $etat, $source) {
 	$mode = preg_replace(',\W,', '', $etat);
 	if (!$mode) {
 		spip_log("logo_modifier : etat $etat invalide", 'logo');
-		$erreur = 'etat invalide';
 
-		return $erreur;
+		return 'etat invalide';
 	}
 	// chercher dans la base
 	$mode_document = 'logo' . $mode;
@@ -95,9 +94,8 @@ function logo_modifier($objet, $id_objet, $etat, $source) {
 
 	if (!$source) {
 		spip_log('spip_image_ajouter : source inconnue', 'logo');
-		$erreur = 'source inconnue';
 
-		return $erreur;
+		return 'source inconnue';
 	}
 
 	// fichier dans upload/
@@ -110,9 +108,8 @@ function logo_modifier($objet, $id_objet, $etat, $source) {
 		}
 		if (!$tmp_name) {
 			spip_log('spip_image_ajouter : source inconnue', 'logo');
-			$erreur = 'source inconnue';
 
-			return $erreur;
+			return 'source inconnue';
 		}
 		$source = [
 			'tmp_name' => $tmp_name,
@@ -186,7 +183,7 @@ function logo_migrer_en_base($objet, $time_limit) {
 				// mais il faut verifier si ils ont pas deja ete migres pour tout ou partie
 				$filescheck = [];
 				foreach ($files as $file) {
-					$short = basename(dirname($file)) . DIRECTORY_SEPARATOR . basename($file);
+					$short = basename(dirname((string) $file)) . DIRECTORY_SEPARATOR . basename((string) $file);
 					$filescheck[$short] = $file;
 				}
 				// trouver ceux deja migres
@@ -195,7 +192,7 @@ function logo_migrer_en_base($objet, $time_limit) {
 					$deja = array_column($deja, 'fichier');
 					$restant = array_diff(array_keys($filescheck), $deja);
 					$files = [];
-					if (count($restant)) {
+					if ($restant !== []) {
 						foreach ($restant as $r) {
 							$files[] = $filescheck[$r];
 						}
@@ -214,43 +211,42 @@ function logo_migrer_en_base($objet, $time_limit) {
 
 		$deja = [];
 		foreach ($files as $file) {
-			$logo = substr($file, strlen($dir . $nom_base));
+			$logo = substr((string) $file, strlen($dir . $nom_base));
 			$logo = explode('.', $logo);
 			if (
 				is_numeric($logo[0])
-				and ($id_objet = intval($logo[0]) or in_array($objet, ['site', 'rubrique']))
+				&& (($id_objet = (int) $logo[0]) || in_array($objet, ['site', 'rubrique']))
+				&& !isset($deja[$id_objet])
 			) {
-				if (!isset($deja[$id_objet])) {
-					$logo = $chercher_logo($id_objet, $_id_objet, $mode);
-					// if no logo in base
-					if (!$logo or (is_countable($logo) ? count($logo) : 0) < 6) {
-						foreach ($formats_logos as $format) {
-							if (@file_exists($d = ($dir . ($nom = $nom_base . intval($id_objet) . '.' . $format)))) {
-								if (isset($desc['field']['date_modif'])) {
-									$date_modif = sql_getfetsel('date_modif', $table, "$_id_objet=$id_objet");
-								} else {
-									$date_modif = null;
-								}
-								// s'assurer que le logo a les bon droits au passage (evite un echec en cas de sanitization d'un svg)
-								@chmod($d, _SPIP_CHMOD & 0666);
-								// logo_modifier commence par supprimer le logo existant, donc on le deplace pour pas le perdre
-								@rename($d, $dir_logos . $nom);
-								// et on le declare comme nouveau logo
-								logo_modifier($objet, $id_objet, $mode, $dir_logos . $nom);
-								if ($date_modif) {
-									sql_updateq($table, ['date_modif' => $date_modif], "$_id_objet=$id_objet");
-								}
-								break;
+				$logo = $chercher_logo($id_objet, $_id_objet, $mode);
+				// if no logo in base
+				if (!$logo || (is_countable($logo) ? count($logo) : 0) < 6) {
+					foreach ($formats_logos as $format) {
+						if (@file_exists($d = ($dir . ($nom = $nom_base . (int) $id_objet . '.' . $format)))) {
+							if (isset($desc['field']['date_modif'])) {
+								$date_modif = sql_getfetsel('date_modif', $table, "$_id_objet=$id_objet");
+							} else {
+								$date_modif = null;
 							}
+							// s'assurer que le logo a les bon droits au passage (evite un echec en cas de sanitization d'un svg)
+							@chmod($d, _SPIP_CHMOD & 0666);
+							// logo_modifier commence par supprimer le logo existant, donc on le deplace pour pas le perdre
+							@rename($d, $dir_logos . $nom);
+							// et on le declare comme nouveau logo
+							logo_modifier($objet, $id_objet, $mode, $dir_logos . $nom);
+							if ($date_modif) {
+								sql_updateq($table, ['date_modif' => $date_modif], "$_id_objet=$id_objet");
+							}
+							break;
 						}
 					}
-					$deja[$id_objet] = true;
 				}
-			}
+       			$deja[$id_objet] = true;
+   			}
 			// si le fichier est encore la on le move : rien a faire ici
 			// (sauf si c'est une re-migration : il est deja dans logo/ donc il bouge pas)
-			if ($dir !== $dir_logos and file_exists($file)) {
-				@rename($file, $dir_logos_erreurs . basename($file));
+			if ($dir !== $dir_logos && file_exists($file)) {
+				@rename($file, $dir_logos_erreurs . basename((string) $file));
 			}
 
 			$count--;
@@ -258,7 +254,7 @@ function logo_migrer_en_base($objet, $time_limit) {
 				spip_log("logo_migrer_en_base $objet $mode : " . $count . ' logos restant', 'maj' . _LOG_INFO_IMPORTANTE);
 			}
 
-			if ($time_limit and time() > $time_limit) {
+			if ($time_limit && time() > $time_limit) {
 				effacer_meta('drapeau_edition');
 				return;
 			}

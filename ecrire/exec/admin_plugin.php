@@ -45,7 +45,7 @@ function exec_admin_plugin_dist($retour = '') {
 		// si jamais la liste des plugins actifs change, il faut faire un refresh du hit
 		// pour etre sur que les bons fichiers seront charges lors de l'install
 		$new = actualise_plugins_actifs();
-		if ($new and _request('actualise') < 2) {
+		if ($new && _request('actualise') < 2) {
 			include_spip('inc/headers');
 			if (isset($GLOBALS['fichier_php_compile_recent'])) {
 				// attendre eventuellement l'invalidation du cache opcode
@@ -166,7 +166,7 @@ function admin_plug_args($quoi, $erreur, $format) {
 		}
 	}
 
-	if ($quoi == 'actifs' or $lpf) {
+	if ($quoi == 'actifs' || $lpf) {
 		$nb = is_countable($lcpa) ? count($lcpa) : 0;
 		if (defined('_DIR_PLUGINS_SUPPL')) {
 			$nb += is_countable($lcpas) ? count($lcpas) : 0;
@@ -291,9 +291,8 @@ function afficher_librairies() {
 		$res .= "<dt>$lib</dt><dd>" . joli_repertoire($rep) . "</dd>\n";
 	}
 	$res .= '</dl>';
-	$res .= fin_cadre_enfonce();
 
-	return $res;
+	return $res . fin_cadre_enfonce();
 }
 
 
@@ -308,12 +307,12 @@ function liste_librairies() {
 	foreach (array_reverse(creer_chemin()) as $d) {
 		if (
 			is_dir($dir = $d . 'lib/')
-			and $t = opendir($dir)
+			&& ($t = opendir($dir))
 		) {
 			while (($f = readdir($t)) !== false) {
 				if (
 					$f[0] != '.'
-					and is_dir("$dir/$f")
+					&& is_dir("$dir/$f")
 				) {
 					$libs[$f] = $dir;
 				}

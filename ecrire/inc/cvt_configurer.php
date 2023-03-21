@@ -33,11 +33,11 @@ include_spip('inc/config');
 function cvtconf_formulaire_charger($flux) {
 	if (
 		($form = $flux['args']['form'])
-		&& str_starts_with($form, 'configurer_') // un #FORMULAIRE_CONFIGURER_XXX
+		&& str_starts_with((string) $form, 'configurer_') // un #FORMULAIRE_CONFIGURER_XXX
 	) {
 		// Pour tous les formulaires CONFIGURER, ayant une fonction charger ou pas, on teste si autorisé
 		include_spip('inc/autoriser');
-		if (!autoriser('configurer', '_' . substr($form, 11))) {
+		if (!autoriser('configurer', '_' . substr((string) $form, 11))) {
 			return false;
 		}
 
@@ -67,7 +67,7 @@ function cvtconf_formulaire_charger($flux) {
 function cvtconf_formulaire_traiter($flux) {
 	if (
 		($form = $flux['args']['form'])
-		&& str_starts_with($form, 'configurer_') // un #FORMULAIRE_CONFIGURER_XXX
+		&& str_starts_with((string) $form, 'configurer_') // un #FORMULAIRE_CONFIGURER_XXX
 		&& !charger_fonction('traiter', "formulaires/$form/", true) // sans fonction traiter()
 	) {
 		$trace = cvtconf_formulaires_configurer_enregistre($form, $flux['args']['args']);
@@ -110,7 +110,7 @@ function cvtconf_formulaires_configurer_enregistre($form, $args) {
 	// recuperer les valeurs postees
 	$store = [];
 	foreach ($valeurs as $k => $v) {
-		if (!str_starts_with($k, '_')) {
+		if (!str_starts_with((string) $k, '_')) {
 			$store[$k] = _request($k);
 		}
 	}
@@ -190,7 +190,7 @@ function cvtconf_formulaires_configurer_recense($form) {
 			foreach ($balises as $b) {
 				if (
 					($n = extraire_attribut($b, 'name'))
-					&& preg_match(',^([\w\-]+)(\[\w*\])?$,', $n, $r)
+					&& preg_match(',^([\w\-]+)(\[\w*\])?$,', (string) $n, $r)
 					&& !in_array($n, ['formulaire_action', 'formulaire_action_args', 'formulaire_action_sign'])
 					&& extraire_attribut($b, 'type') !== 'submit'
 				) {
@@ -230,7 +230,7 @@ function cvtconf_configurer_stocker($form, $valeurs, $store) {
 
 	$prefixe = ($prefixe ? $prefixe . '_' : '');
 	$table = ($table) ? "/$table/" : '';
-	$casier = ($casier) ? rtrim($casier, '/') . '/' : ''; // slash final, sinon rien
+	$casier = ($casier) ? rtrim((string) $casier, '/') . '/' : ''; // slash final, sinon rien
 
 	foreach ($store as $k => $v) {
 		ecrire_config("$stockage$table$prefixe$casier$k", $v);

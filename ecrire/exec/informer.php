@@ -28,12 +28,12 @@ include_spip('inc/actions');
  * @uses ajax_retour()
  **/
 function exec_informer_dist() {
-	$id = intval(_request('id'));
-	$col = intval(_request('col'));
-	$exclus = intval(_request('exclus'));
+	$id = (int) _request('id');
+	$col = (int) _request('col');
+	$exclus = (int) _request('exclus');
 	$do = _request('do');
 
-	if (preg_match('/^\w*$/', $do)) {
+	if (preg_match('/^\w*$/', (string) $do)) {
 		if (!$do) {
 			$do = 'aff';
 		}

@@ -44,7 +44,7 @@ function maj_timestamp_mysql($tables = null) {
 	}
 
 	// rien a faire si base non mysql
-	if (!str_starts_with($GLOBALS['connexions'][0]['type'], 'mysql')) {
+	if (!str_starts_with((string) $GLOBALS['connexions'][0]['type'], 'mysql')) {
 		return;
 	}
 

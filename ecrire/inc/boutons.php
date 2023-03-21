@@ -52,10 +52,10 @@ function definir_barre_onglets($script) {
 			$onglets[$id] = new Bouton(
 				isset($infos['icone']) ? find_in_theme($infos['icone']) : '',  // icone
 				$infos['titre'],  // titre
-				(isset($infos['action']) and $infos['action'])
+				(isset($infos['action']) && $infos['action'])
 					? generer_url_ecrire(
 						$infos['action'],
-						(isset($infos['parametres']) and $infos['parametres']) ? $infos['parametres'] : ''
+						(isset($infos['parametres']) && $infos['parametres']) ? $infos['parametres'] : ''
 					)
 					: null
 			);
@@ -89,5 +89,5 @@ function barre_onglets($rubrique, $ongletCourant, $class = 'barre_onglet') {
 		$res .= onglet(_T($onglet->libelle), $url, $exec, $ongletCourant, $onglet->icone);
 	}
 
-	return !$res ? '' : (debut_onglet($class) . $res . fin_onglet());
+	return $res ? debut_onglet($class) . $res . fin_onglet() : ('');
 }

@@ -38,7 +38,7 @@ function formulaires_configurer_relayeur_verifier_dist() {
 		} else {
 			include_spip('inc/distant');
 			$test_proxy = _request('test_proxy');
-			$t = parse_url($test_proxy);
+			$t = parse_url((string) $test_proxy);
 			if (!@$t['host']) {
 				$erreurs['test_proxy'] = _T('info_adresse_non_indiquee');
 			} else {
@@ -95,7 +95,7 @@ function formulaires_configurer_relayeur_traiter_dist() {
 
 function relayeur_saisie_ou_config($http_proxy, $default) {
 	// http_proxy : ne pas prendre en compte la modif si le password est '****'
-	if (preg_match(',:\*\*\*\*@,', $http_proxy)) {
+	if (preg_match(',:\*\*\*\*@,', (string) $http_proxy)) {
 		$http_proxy = $default;
 	}
 
@@ -135,7 +135,7 @@ function glue_url($url) {
 function no_password_proxy_url($http_proxy) {
 	if (
 		$http_proxy
-		&& ($p = @parse_url($http_proxy))
+		&& ($p = @parse_url((string) $http_proxy))
 		&& isset($p['pass'])
 		&& $p['pass']
 	) {

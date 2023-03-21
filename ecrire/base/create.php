@@ -32,15 +32,15 @@ include_spip('base/abstract_sql');
  * @return bool
  */
 function base_determine_autoinc($table, $desc = []) {
-	if ($t = lister_tables_principales() and isset($t[$table])) {
+	if (($t = lister_tables_principales()) && isset($t[$table])) {
 		$autoinc = true;
-	} elseif ($t = lister_tables_auxiliaires() and isset($t[$table])) {
+	} elseif (($t = lister_tables_auxiliaires()) && isset($t[$table])) {
 		$autoinc = false;
 	} else {
 		// essayer de faire au mieux !
 		$autoinc = (isset($desc['key']['PRIMARY KEY'])
-			and !str_contains($desc['key']['PRIMARY KEY'], ',')
-			and !str_contains($desc['field'][$desc['key']['PRIMARY KEY']], 'default'));
+			&& !str_contains((string) $desc['key']['PRIMARY KEY'], ',')
+			&& !str_contains((string) $desc['field'][$desc['key']['PRIMARY KEY']], 'default'));
 	}
 
 	return $autoinc;
@@ -69,7 +69,7 @@ function creer_ou_upgrader_table($table, $desc, $autoinc, $upgrade = false, $ser
 			$autoinc = base_determine_autoinc($table, $desc);
 		}
 		#spip_log("sql_create $table autoinc=$autoinc","dbinstall"._LOG_INFO_IMPORTANTE);
-		if (isset($desc['field']) and isset($desc['key'])) {
+		if (isset($desc['field']) && isset($desc['key'])) {
 			sql_create($table, $desc['field'], $desc['key'], $autoinc, false, $serveur);
 		}
 		// verifier la bonne installation de la table (php-fpm es-tu la ?)
@@ -105,7 +105,7 @@ function creer_ou_upgrader_table($table, $desc, $autoinc, $upgrade = false, $ser
 			foreach ($desc['key'] as $key => $type) {
 				// Ne pas oublier les cas des cles non nommees dans la declaration et qui sont retournees
 				// par le showtable sous la forme d'un index de tableau "KEY $type" et non "KEY"
-				if (!isset($sql_desc['key'][$key]) and !isset($sql_desc['key']["$key $type"])) {
+				if (!isset($sql_desc['key'][$key]) && !isset($sql_desc['key']["$key $type"])) {
 					sql_alter("TABLE $table ADD $key ($type)", $serveur);
 				}
 				$last = $field;
@@ -143,13 +143,13 @@ function alterer_base($tables_inc, $tables_noinc, $up = false, $serveur = '') {
 		}
 	}
 	foreach ($tables_inc as $k => $v) {
-		if (!$old or in_array($k, $up)) {
+		if (!$old || in_array($k, $up)) {
 			creer_ou_upgrader_table($k, $v, true, $old, $serveur);
 		}
 	}
 
 	foreach ($tables_noinc as $k => $v) {
-		if (!$old or in_array($k, $up)) {
+		if (!$old || in_array($k, $up)) {
 			creer_ou_upgrader_table($k, $v, false, $old, $serveur);
 		}
 	}

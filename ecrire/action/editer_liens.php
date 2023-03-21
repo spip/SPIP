@@ -51,10 +51,10 @@ function objet_associable($objet) {
 
 	$l = '';
 	if (
-		$primary = id_table_objet($objet)
-		and $trouver_table($l = $table_sql . '_liens', '', true, ['log_missing' => false])
-		and !preg_match(',[^\w],', $primary)
-		and !preg_match(',[^\w],', $l)
+		($primary = id_table_objet($objet))
+		&& $trouver_table($l = $table_sql . '_liens', '', true, ['log_missing' => false])
+		&& !preg_match(',[^\w],', $primary)
+		&& !preg_match(',[^\w],', $l)
 	) {
 		return [$primary, $l];
 	}
@@ -236,30 +236,24 @@ function objet_dupliquer_liens($objet, $id_source, $id_cible, $types = null, $ex
 	$tables = lister_tables_objets_sql();
 	$n = 0;
 	foreach ($tables as $table_sql => $infos) {
-		if (
-			(is_null($types) or in_array($infos['type'], $types))
-			and (is_null($exclure_types) or !in_array($infos['type'], $exclure_types))
-		) {
-			if (objet_associable($infos['type'])) {
-				$liens = (($infos['type'] == $objet) ?
-					objet_trouver_liens([$objet => $id_source], '*')
-					:
-					objet_trouver_liens([$infos['type'] => '*'], [$objet => $id_source]));
-				foreach ($liens as $lien) {
-					$n++;
-					if ($infos['type'] == $objet) {
-						if (
-							(is_null($types) or in_array($lien['objet'], $types))
-							and (is_null($exclure_types) or !in_array($lien['objet'], $exclure_types))
-						) {
-							objet_associer([$objet => $id_cible], [$lien['objet'] => $lien[$lien['objet']]], $lien);
-						}
-					} else {
-						objet_associer([$infos['type'] => $lien[$infos['type']]], [$objet => $id_cible], $lien);
-					}
-				}
-			}
-		}
+		if ((is_null($types) || in_array($infos['type'], $types)) && (is_null($exclure_types) || !in_array($infos['type'], $exclure_types)) && objet_associable($infos['type'])) {
+      $liens = (($infos['type'] == $objet) ?
+  					objet_trouver_liens([$objet => $id_source], '*')
+  					:
+  					objet_trouver_liens([$infos['type'] => '*'], [$objet => $id_source]));
+      foreach ($liens as $lien) {
+  					$n++;
+  					if ($infos['type'] == $objet) {
+  						if (
+  							(is_null($types) || in_array($lien['objet'], $types)) && (is_null($exclure_types) || !in_array($lien['objet'], $exclure_types))
+  						) {
+  							objet_associer([$objet => $id_cible], [$lien['objet'] => $lien[$lien['objet']]], $lien);
+  						}
+  					} else {
+  						objet_associer([$infos['type'] => $lien[$infos['type']]], [$objet => $id_cible], $lien);
+  					}
+  				}
+  }
 	}
 
 	return $n;
@@ -401,12 +395,12 @@ function lien_insert($objet_source, $primary, $table_lien, $id, $objets, $qualif
 				else {
 					$where = lien_where($primary, $id, $objet, $id_objet);
 					// si il y a deja un lien pour ce couple (avec un autre role?) on reprend le meme rang si non nul
-					if (!$rang = intval(sql_getfetsel('rang_lien', $table_lien, $where))) {
+					if (!$rang = (int) sql_getfetsel('rang_lien', $table_lien, $where)) {
 						$where = lien_rang_where($table_lien, $primary, $id, $objet, $id_objet);
-						$rang = intval(sql_getfetsel('max(rang_lien)', $table_lien, $where));
+						$rang = (int) sql_getfetsel('max(rang_lien)', $table_lien, $where);
 						// si aucun lien n'a de rang, on en introduit pas, on garde zero
 						if ($rang > 0) {
-							$rang = intval($rang) + 1;
+							$rang = (int) $rang + 1;
 						}
 					}
 				}
@@ -437,15 +431,14 @@ function lien_insert($objet_source, $primary, $table_lien, $id, $objets, $qualif
 			$where = lien_where($primary, $id, $objet, $id_objet, $cond);
 
 			if (
-				($id_objet = intval($insertions['id_objet']) or in_array($objet, ['site', 'rubrique']))
-				and !sql_getfetsel($primary, $table_lien, $where)
+				(($id_objet = (int) $insertions['id_objet']) || in_array($objet, ['site', 'rubrique'])) && !sql_getfetsel($primary, $table_lien, $where)
 			) {
-				if (lien_triables($table_lien) and isset($insertions['rang_lien']) and intval($insertions['rang_lien'])) {
+				if (lien_triables($table_lien) && isset($insertions['rang_lien']) && (int) $insertions['rang_lien']) {
 					$where_meme_lien = lien_where($primary, $id, $objet, $id_objet);
 					$where_meme_lien = implode(' AND ', $where_meme_lien);
 					// on decale les liens de rang_lien>=la valeur inseree pour faire la place
 					// sauf sur le meme lien avec un role eventuellement different
-					$w = lien_rang_where($table_lien, $primary, $id, $objet, $id_objet, ['rang_lien>=' . intval($insertions['rang_lien']), "NOT($where_meme_lien)"]);
+					$w = lien_rang_where($table_lien, $primary, $id, $objet, $id_objet, ['rang_lien>=' . (int) $insertions['rang_lien'], "NOT($where_meme_lien)"]);
 					sql_update($table_lien, ['rang_lien' => 'rang_lien+1'], $w);
 				}
 
@@ -470,7 +463,7 @@ function lien_insert($objet_source, $primary, $table_lien, $id, $objets, $qualif
 	}
 	// si on a fait des insertions, on reordonne les liens concernes
 	// pas la peine si $qualif['rang_lien'] etait fournie, on va passer dans lien_set a suivre et donc finir le recomptage
-	if ($ins > 0 and empty($qualif['rang_lien'])) {
+	if ($ins > 0 && empty($qualif['rang_lien'])) {
 		lien_ordonner($objet_source, $primary, $table_lien, $id, $objets);
 	}
 
@@ -506,11 +499,11 @@ function lien_ordonner($objet_source, $primary, $table_lien, $id, $objets) {
 				$liens = sql_allfetsel("$primary, id_objet, objet, rang_lien", $table_lien, $where, '', 'rang_lien');
 
 				$rangs = array_column($liens, 'rang_lien');
-				if (count($rangs) and (max($rangs) > 0 or min($rangs) < 0)) {
+				if (count($rangs) && (max($rangs) > 0 || min($rangs) < 0)) {
 					$rang = 1;
 					foreach ($liens as $lien) {
 						if (empty($deja_reordonne[$lien[$primary]][$lien['objet']][$lien['id_objet']])) {
-							$where = lien_where($primary, $lien[$primary], $lien['objet'], $lien['id_objet'], ['rang_lien!=' . intval($rang)]);
+							$where = lien_where($primary, $lien[$primary], $lien['objet'], $lien['id_objet'], ['rang_lien!=' . (int) $rang]);
 							sql_updateq($table_lien, ['rang_lien' => $rang], $where);
 
 							if (empty($deja_reordonne[$lien[$primary]])) {
@@ -542,12 +535,7 @@ function lien_triables($table_lien) {
 	if (!isset($triables[$table_lien])) {
 		$trouver_table = charger_fonction('trouver_table', 'base');
 		$desc = $trouver_table($table_lien);
-		if ($desc and isset($desc['field']['rang_lien'])) {
-			$triables[$table_lien] = true;
-		}
-		else {
-			$triables[$table_lien] = false;
-		}
+		$triables[$table_lien] = $desc && isset($desc['field']['rang_lien']);
 	}
 	return $triables[$table_lien];
 }
@@ -566,15 +554,13 @@ function lien_triables($table_lien) {
  */
 function lien_where($primary, $id_source, $objet, $id_objet, $cond = []) {
 	if (
-		(!is_array($id_source) and !strlen($id_source))
-		or !strlen($objet)
-		or (!is_array($id_objet) and !strlen($id_objet))
+		!is_array($id_source) && !strlen($id_source) || !strlen($objet) || !is_array($id_objet) && !strlen($id_objet)
 	) {
 		return ['0=1'];
 	} // securite
 
 	$not = '';
-	if (is_array($id_source) and reset($id_source) == 'NOT') {
+	if (is_array($id_source) && reset($id_source) == 'NOT') {
 		$not = array_shift($id_source);
 		$id_source = reset($id_source);
 	}
@@ -586,13 +572,13 @@ function lien_where($primary, $id_source, $objet, $id_objet, $cond = []) {
 			addslashes($primary),
 			array_map('intval', $id_source),
 			$not
-		) : addslashes($primary) . ($not ? '<>' : '=') . intval($id_source));
+		) : addslashes($primary) . ($not ? '<>' : '=') . (int) $id_source);
 	} elseif ($not) {
 		$where[] = '0=1';
 	} // idiot mais quand meme
 
 	$not = '';
-	if (is_array($id_objet) and reset($id_objet) == 'NOT') {
+	if (is_array($id_objet) && reset($id_objet) == 'NOT') {
 		$not = array_shift($id_objet);
 		$id_objet = reset($id_objet);
 	}
@@ -605,7 +591,7 @@ function lien_where($primary, $id_source, $objet, $id_objet, $cond = []) {
 			'id_objet',
 			array_map('intval', $id_objet),
 			$not
-		) : 'id_objet' . ($not ? '<>' : '=') . intval($id_objet));
+		) : 'id_objet' . ($not ? '<>' : '=') . (int) $id_objet);
 	} elseif ($not) {
 		$where[] = '0=1';
 	} // idiot mais quand meme
@@ -671,7 +657,7 @@ function lien_delete($objet_source, $primary, $table_lien, $id, $objets, $cond =
 
 	foreach ($objets as $objet => $id_objets) {
 		$objet = ($objet == '*') ? $objet : objet_type($objet); # securite
-		if (!is_array($id_objets) or reset($id_objets) == 'NOT') {
+		if (!is_array($id_objets) || reset($id_objets) == 'NOT') {
 			$id_objets = [$id_objets];
 		}
 		foreach ($id_objets as $id_objet) {
@@ -709,7 +695,7 @@ function lien_delete($objet_source, $primary, $table_lien, $id, $objets, $cond =
 				);
 				$args['id_objet'] = $id_o = $l['id_objet'];
 
-				if ($id_o = intval($l['id_objet']) or in_array($l['objet'], ['site', 'rubrique'])) {
+				if (($id_o = (int) $l['id_objet']) || in_array($l['objet'], ['site', 'rubrique'])) {
 					$where = lien_where($primary, $l[$primary], $l['objet'], $id_o, $cond);
 					$e = sql_delete($table_lien, $where);
 					if ($e !== false) {
@@ -773,7 +759,7 @@ function lien_optimise($objet_source, $primary, $table_lien, $id, $objets) {
 	$dels = 0;
 	foreach ($objets as $objet => $id_objets) {
 		$objet = ($objet == '*') ? $objet : objet_type($objet); # securite
-		if (!is_array($id_objets) or reset($id_objets) == 'NOT') {
+		if (!is_array($id_objets) || reset($id_objets) == 'NOT') {
 			$id_objets = [$id_objets];
 		}
 		foreach ($id_objets as $id_objet) {
@@ -796,7 +782,7 @@ function lien_optimise($objet_source, $primary, $table_lien, $id, $objets) {
 				);
 				// sur une cle primaire composee, pas d'autres solutions que de virer un a un
 				while ($row = sql_fetch($res)) {
-					if ($primary === 'id_document' and in_array($type, ['site', 'rubrique']) and !intval($row['id_objet'])) {
+					if ($primary === 'id_document' && in_array($type, ['site', 'rubrique']) && !(int) $row['id_objet']) {
 						continue; // gaffe, c'est le logo du site ou des rubriques!
 					}
 					$e = sql_delete(
@@ -880,7 +866,7 @@ function lien_set($objet_source, $primary, $table_lien, $id, $objets, $qualif) {
 			roles_trouver_dans_qualif($objet_source, $objet, $qualif);
 
 		$objet = ($objet == '*') ? $objet : objet_type($objet); # securite
-		if (!is_array($id_objets) or reset($id_objets) == 'NOT') {
+		if (!is_array($id_objets) || reset($id_objets) == 'NOT') {
 			$id_objets = [$id_objets];
 		}
 		foreach ($id_objets as $id_objet) {
@@ -905,19 +891,19 @@ function lien_set($objet_source, $primary, $table_lien, $id, $objets, $qualif) {
 			);
 			$args['id_objet'] = $id_objet;
 
-			if (lien_triables($table_lien) and isset($qualif['rang_lien'])) {
-				if (intval($qualif['rang_lien'])) {
+			if (lien_triables($table_lien) && isset($qualif['rang_lien'])) {
+				if ((int) $qualif['rang_lien']) {
 					// on decale les liens de rang_lien>=la valeur inseree pour faire la place
 					// sauf sur le meme lien avec un role eventuellement different
 					$where_meme_lien = lien_where($primary, $id, $objet, $id_objet);
 					$where_meme_lien = implode(' AND ', $where_meme_lien);
-					$w = lien_rang_where($table_lien, $primary, $id, $objet, $id_objet, ['rang_lien>=' . intval($qualif['rang_lien']), "NOT($where_meme_lien)"]);
+					$w = lien_rang_where($table_lien, $primary, $id, $objet, $id_objet, ['rang_lien>=' . (int) $qualif['rang_lien'], "NOT($where_meme_lien)"]);
 					sql_update($table_lien, ['rang_lien' => 'rang_lien+1'], $w);
 				}
 				// tous les liens de même rôle recoivent le rang indiqué aussi
 				if (roles_colonne($objet_source, $objet)) {
 					$w = lien_where($primary, $id, $objet, $id_objet);
-					sql_updateq($table_lien, ['rang_lien' => intval($qualif['rang_lien'])], $w);
+					sql_updateq($table_lien, ['rang_lien' => (int) $qualif['rang_lien']], $w);
 				}
 				$reordonner = true;
 			}
@@ -1015,11 +1001,10 @@ function lien_propage_date_modif($objet, $ids) {
 
 	$table = table_objet_sql($objet);
 	if (
-		$desc = $trouver_table($table)
-		and isset($desc['field']['date_modif'])
+		($desc = $trouver_table($table)) && isset($desc['field']['date_modif'])
 	) {
 		$primary = id_table_objet($objet);
-		$where = (is_array($ids) ? sql_in($primary, array_map('intval', $ids)) : "$primary=" . intval($ids));
+		$where = (is_array($ids) ? sql_in($primary, array_map('intval', $ids)) : "$primary=" . (int) $ids);
 		sql_updateq($table, ['date_modif' => date('Y-m-d H:i:s')], $where);
 	}
 

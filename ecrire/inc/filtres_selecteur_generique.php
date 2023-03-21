@@ -35,7 +35,7 @@ function selecteur_lister_objets($includelist = [], $excludelist = []) {
 	}
 	$objets_selectionner = [];
 	foreach ($liste_selecteurs as $fichier => $chemin) {
-		$objets_selectionner[] = preg_replace('/^hierarchie-([\w]+)[.]html$/', '$1', $fichier);
+		$objets_selectionner[] = preg_replace('/^hierarchie-([\w]+)[.]html$/', '$1', (string) $fichier);
 	}
 
 	// S'il y a une whitelist on ne garde que ce qui est dedans
@@ -58,7 +58,7 @@ function selecteur_lister_objets($includelist = [], $excludelist = []) {
 		$liste_parents = find_all_in_path('formulaires/selecteur/', 'lister-[\w]+-[\w]+[.]html$');
 	}
 	foreach ($liste_parents as $fichier => $chemin) {
-		preg_match('/^lister-([\w]+)-([\w]+)[.]html$/', $fichier, $captures);
+		preg_match('/^lister-([\w]+)-([\w]+)[.]html$/', (string) $fichier, $captures);
 		$parent = $captures[1];
 		$type = $captures[2];
 		// Si le type fait partie de ce qu'on doit afficher alors on ajoute aussi le parent à l'affichage
@@ -107,7 +107,7 @@ function picker_selected($selected, $type = '') {
 	if (is_array($selected)) {
 		foreach ($selected as $value) {
 			// Si c'est le bon format déjà
-			if (preg_match('/^([\w]+)[|](\d+)$/', $value, $captures)) {
+			if (preg_match('/^([\w]+)[|](\d+)$/', (string) $value, $captures)) {
 				$objet = $captures[1];
 				$id_objet = (int) $captures[2];
 

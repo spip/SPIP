@@ -56,7 +56,7 @@ function decompose_champ_id_objet($champ) {
  *     - array($champ), si le champ existe dans la table ou si on ne peut décomposer.
  *     - array(id_objet, objet), si le champ n'existe pas mais qu'on peut décomposer
  */
-function trouver_champs_decomposes($champ, $desc) {
+function trouver_champs_decomposes($champ, $desc): array {
 	if (
 		!is_array($desc)
 		|| array_key_exists($champ, $desc['field'])
@@ -253,7 +253,7 @@ function nogroupby_if($depart, $arrivee, $col) {
 	if (is_array($col)) {
 		$col = implode(', *', $col);
 	} // cas id_objet, objet
-	return (preg_match("/^$id_primary, *$col$/", $pk) || preg_match("/^$col, *$id_primary$/", $pk));
+	return (preg_match("/^$id_primary, *$col$/", (string) $pk) || preg_match("/^$col, *$id_primary$/", (string) $pk));
 }
 
 /**
@@ -322,8 +322,8 @@ function liste_champs_jointures($nom, $desc, $primary = false) {
  */
 function split_key($v, $join = []) {
 	foreach (preg_split('/,\s*/', $v) as $k) {
-		if (str_contains($k, '(')) {
-			$k = explode('(', $k);
+		if (str_contains((string) $k, '(')) {
+			$k = explode('(', (string) $k);
 			$k = trim(reset($k));
 		}
 		$join[$k] = $k;
@@ -382,7 +382,7 @@ function calculer_chaine_jointures(
 	$akeys = [];
 	foreach ($adesc['key'] as $k) {
 		// respecter l'ordre de $adesc['key'] pour ne pas avoir id_trad en premier entre autres...
-		$akeys = array_merge($akeys, preg_split('/,\s*/', $k));
+		$akeys = array_merge($akeys, preg_split('/,\s*/', (string) $k));
 	}
 
 	// enlever les cles d'arrivee exclues par l'appel
@@ -491,10 +491,10 @@ function calculer_chaine_jointures(
 function trouver_cles_table($keys) {
 	$res = [];
 	foreach ($keys as $v) {
-		if (!strpos($v, ',')) {
+		if (!strpos((string) $v, ',')) {
 			$res[$v] = 1;
 		} else {
-			foreach (preg_split('/\s*,\s*/', $v) as $k) {
+			foreach (preg_split('/\s*,\s*/', (string) $v) as $k) {
 				$res[$k] = 1;
 			}
 		}

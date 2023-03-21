@@ -65,7 +65,7 @@ function sandbox_composer_filtre($fonc, $code, $arglist, &$p, $nb_arg_droite = 1
 	elseif ($f = chercher_filtre($fonc)) {
 		// cas particulier : le filtre |set doit acceder a la $Pile
 		// proto: filtre_set(&$Pile, $val, $args...)
-		$refl = strpbrk($f, ':') ? new ReflectionMethod($f) : new ReflectionFunction($f);
+		$refl = strpbrk((string) $f, ':') ? new ReflectionMethod($f) : new ReflectionFunction($f);
 		$refs = $refl->getParameters();
 		if (isset($refs[0]) && $refs[0]->name == 'Pile') {
 			$code = "$f(\$Pile,$code$arglist)";
@@ -181,7 +181,7 @@ function sandbox_filtrer_squelette($skel, $corps, $filtres) {
 	}
 
 	// restaurer les echappements
-	return str_replace($replace[0], $replace[1], $corps);
+	return str_replace($replace[0], $replace[1], (string) $corps);
 }
 
 
@@ -208,7 +208,7 @@ function echapper_php_callback($r = null) {
 	if (is_array($r)) {
 		$dst[] = $r[0];
 
-		return $src[] = '___' . md5($r[0]) . '___';
+		return $src[] = '___' . md5((string) $r[0]) . '___';
 	}
 
 	// si on recoit pas un tableau, on renvoit les couples de substitution

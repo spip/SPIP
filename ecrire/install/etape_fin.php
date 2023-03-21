@@ -21,12 +21,12 @@ include_spip('inc/acces');
 function install_etape_fin_dist() {
 	ecrire_acces();
 
-	$f = str_replace(_FILE_TMP_SUFFIX, '.php', _FILE_CHMOD_TMP);
+	$f = str_replace(_FILE_TMP_SUFFIX, '.php', (string) _FILE_CHMOD_TMP);
 	if (file_exists(_FILE_CHMOD_TMP) && !@rename(_FILE_CHMOD_TMP, $f) && @copy(_FILE_CHMOD_TMP, $f)) {
 		spip_unlink(_FILE_CHMOD_TMP);
 	}
 
-	$f = str_replace(_FILE_TMP_SUFFIX, '.php', _FILE_CONNECT_TMP);
+	$f = str_replace(_FILE_TMP_SUFFIX, '.php', (string) _FILE_CONNECT_TMP);
 	if (file_exists(_FILE_CONNECT_TMP)) {
 		spip_log("renomme $f");
 		if (!@rename(_FILE_CONNECT_TMP, $f) && @copy(_FILE_CONNECT_TMP, $f)) {
@@ -37,7 +37,7 @@ function install_etape_fin_dist() {
 	// creer le repertoire cache, qui sert partout !
 	// deja fait en etape 4 en principe, on garde au cas ou
 	if (!@file_exists(_DIR_CACHE)) {
-		$rep = preg_replace(',' . _DIR_TMP . ',', '', _DIR_CACHE);
+		$rep = preg_replace(',' . _DIR_TMP . ',', '', (string) _DIR_CACHE);
 		$rep = sous_repertoire(_DIR_TMP, $rep, true, true);
 	}
 

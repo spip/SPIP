@@ -171,7 +171,7 @@ function spip_sql_erreur($serveur = '') {
 	$connexion = spip_connect($serveur);
 	$e = sql_errno($serveur);
 	$t = ($connexion['type'] ?? 'sql');
-	$m = "Erreur $e de $t: " . sql_error($serveur) . "\nin " . sql_error_backtrace() . "\n" . trim($connexion['last']);
+	$m = "Erreur $e de $t: " . sql_error($serveur) . "\nin " . sql_error_backtrace() . "\n" . trim((string) $connexion['last']);
 	$f = $t . $serveur;
 	spip_log($m, $f . '.' . _LOG_ERREUR);
 }
@@ -420,7 +420,7 @@ function query_echappe_textes($query, $uniqid = null) {
 		if (is_null($uniqid)) {
 			$uniqid = uniqid();
 		}
-		$uniqid = substr(md5($uniqid), 0, 4);
+		$uniqid = substr(md5((string) $uniqid), 0, 4);
 		$codeEchappements = ['\\\\' => "\x1@#{$uniqid}#@\x1", "\\'" => "\x2@#{$uniqid}#@\x2", '\\"' => "\x3@#{$uniqid}#@\x3", '%' => "\x4@#{$uniqid}#@\x4"];
 	}
 	if ($query === null) {
@@ -446,10 +446,10 @@ function query_echappe_textes($query, $uniqid = null) {
 			$part = array_shift($textes);
 			$nextpos = strpos($query_echappees, (string) $part, $currentpos);
 			// si besoin recoller ensemble les doubles '' de sqlite (echappement des ')
-			while (count($textes) && str_ends_with($part, "'")) {
+			while (count($textes) && str_ends_with((string) $part, "'")) {
 				$next = reset($textes);
 				if (
-					str_starts_with($next, "'")
+					str_starts_with((string) $next, "'")
 					&& strpos($query_echappees, $part . $next, $currentpos) === $nextpos
 				) {
 					$part .= array_shift($textes);
@@ -464,12 +464,12 @@ function query_echappe_textes($query, $uniqid = null) {
 				'position' => $nextpos,
 				'placeholder' => '%' . $k . '$s',
 			];
-			$currentpos = $nextpos + strlen($part);
+			$currentpos = $nextpos + strlen((string) $part);
 		}
 
 		// et on replace les parts une par une en commencant par la fin
 		while ($k > 0) {
-			$query_echappees = substr_replace($query_echappees, $parts[$k]['placeholder'], $parts[$k]['position'], strlen($parts[$k]['texte']));
+			$query_echappees = substr_replace($query_echappees, $parts[$k]['placeholder'], $parts[$k]['position'], strlen((string) $parts[$k]['texte']));
 			$k--;
 		}
 		$textes = array_column($parts, 'texte');
