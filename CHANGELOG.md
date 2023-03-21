@@ -19,6 +19,7 @@
 
 ### Removed
 
+- Suppression de l’usage de la classe `no_image_filtrer` (utiliser la classe `filtre_inactif` qui l’a remplacé)
 - #5258 Retrait de toute mention à GD1 dans la configuration des vignettes
 
 ### Fixed
