@@ -516,8 +516,8 @@ function image_filtrer($args) {
 		foreach ($tags as $tag) {
 			$class = extraire_attribut($tag[3], 'class');
 			if (
-				(!$class || !str_contains($class, 'filtre_inactif')
-				&& !str_contains($class, 'no_image_filtrer')) && ($reduit = $filtre($tag[3], ...$args))
+				(!$class || !str_contains($class, 'filtre_inactif'))
+				&& ($reduit = $filtre($tag[3], ...$args))
 			) {
 				// En cas de span spip_documents, modifier le style=...width:
 				if ($tag[1]) {
