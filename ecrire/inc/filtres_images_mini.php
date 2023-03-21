@@ -318,8 +318,7 @@ function image_select($img, $width_min = 0, $height_min = 0, $width_max = 10000,
 		$img = inserer_attribut($img, 'class', $class);
 	}
 	if ($select == true && $p !== false) {
-		// no_image_filtrer : historique, a virer
-		$class = preg_replace(',\s*(filtre_inactif|no_image_filtrer),', '', (string) $class);
+		$class = preg_replace(',\s*(filtre_inactif),', '', $class);
 		$img = inserer_attribut($img, 'class', $class);
 	}
 
