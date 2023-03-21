@@ -299,7 +299,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_hier' => 'gëschter:',
 	'info_identification_publique' => 'Är ëffentlech Identitéit...',
 	'info_image_process' => 'Wielt déi bescht Method fir Vignetten ze maachen an deem dier op d’Bild klickt.',
-	'info_image_process2' => 'Wa kee Bild kënnt, dann ass äre Server net fir dës Funktionalitéit ageriicht. Wann dir se wëllt benotzen, kontaktéiert den technesche Responsabelen a frot no der Extensiounen "GD" oder "Imagick".',
 	'info_images_auto' => 'Automatesch gerechent Biller',
 	'info_informations_personnelles' => 'Perséinlech Informatiounen',
 	'info_inscription_automatique' => 'Nei Redakteren automatesch aschreiwen',

@@ -211,7 +211,6 @@ L’administrator dau sistema o de la ret vos deu poder fornir
 	'info_hier' => 'ier:',
 	'info_identification_publique' => 'Vòstra identitat publica...',
 	'info_image_process' => 'Volhatz seleccionar lo melhor metòde de fabricacion de las vinhetas en clicar sus l’imatge correspondent.',
-	'info_image_process2' => '<b>N.B.</b> <i>Se brisa d’imatge apareis, laidonc lo servidor qu’auberja vòstre sit l’an pas configurat per utilizar de taus gatges. Se desiratz d’utilirar quelas foncions, contactatz lo responsable tecnic e demandatz las extensions «GD» o «Imagick».</i>', # MODIF
 	'info_images_auto' => 'Imatges calculats automaticament',
 	'info_informations_personnelles' => 'Cinquesma estapa: <b>Informacions personalas</b>',
 	'info_inscription_automatique' => 'Inscripcion automatica de redactors noveus',

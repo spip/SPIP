@@ -307,8 +307,6 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 	'info_hier' => 'eri :',
 	'info_identification_publique' => 'A vostra identità pùbblica...',
 	'info_image_process' => 'Sceglite puru u mètudu preferitu per a creazione di e figurette clicchendu nant’à l’imàgine currispundente.',
-	'info_image_process2' => '<b>N.B.</b> <i>S’ella ùn vene nisun’imàgine, vole dì chì a cunfigurazione di u vostru servore ùn permette l’usu di tale 
-	funzioni gràfiche. Sè vo vulete aduprà le quantunque, cuntattate u rispunsèvule tècnicu, dumandendu li di stallà l’estensioni "GD" o "Imagick".</i>', # MODIF
 	'info_images_auto' => 'Imàgini create in autumàticu',
 	'info_informations_personnelles' => 'Infurmazioni persunale',
 	'info_inscription_automatique' => 'Iscrizzione autumàtica di nuvelli scrittori',

@@ -230,7 +230,6 @@ SPIP anba-la, i sava pa marsé.',
 	'info_hier' => 'Yèr :',
 	'info_identification_publique' => 'Out lidantité piblik...',
 	'info_image_process' => 'Mersi swazi lo méyèr manyir pou fabrik out bann vinyèt sam apiyé si limaz i korespon.',
-	'info_image_process2' => '<b>Pangar</b> <i>Si néna okinn zimaz sat i pé vwar an liny, i pé dir lo sèrvèr li ébèrz out sitwèb lé pa kofigiré po akèy bann zouti-la. Ifo zot i koz èk lo résponsab po domann ali tout bann zekstansyon « GD » ou « Imagick ».</i>', # MODIF
 	'info_images_auto' => 'Ban zimaz-la lé kalkilé otomatikman',
 	'info_informations_personnelles' => 'Sinkyèm étap : <b>Bann zinformasyon personèl</b>',
 	'info_inscription_automatique' => 'Pou inskri otomatikman tout bann nouvo lotèr',

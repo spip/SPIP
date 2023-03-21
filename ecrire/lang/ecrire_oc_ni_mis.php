@@ -319,7 +319,6 @@ Aqueli informacioun vi devon poudé estre prouvedi da l’aministratour dóu sis
 	'info_hier' => 'ièr :',
 	'info_identification_publique' => 'La vouòstra identità pùblica...',
 	'info_image_process' => 'Vourguès seleciounà lou milhou mètodou de fabricacioun dei vigneta en clicant sus l’image courrespoundenta.',
-	'info_image_process2' => 'Se minga d’image parèisse, aloura lou servidou qu’auberga lou vouòstre sit noun es estat configurat da utilisà aquelu óutis. Se vourguès utilisà aqueli founcioun, contatas lou respounsable tècnicou e demandas li estensioun « GD » o « Imagick ».',
 	'info_images_auto' => 'Image carculadi automaticamen',
 	'info_informations_personnelles' => 'Infourmacioun persounali',
 	'info_inscription' => 'Inscricioun lou',

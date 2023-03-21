@@ -209,7 +209,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_hier' => 'i går:',
 	'info_identification_publique' => 'Din offentlige identitet...',
 	'info_image_process' => 'Vælg den bedste metode til at skabe miniaturebilleder ved at klikke på det korresponderende billede.',
-	'info_image_process2' => '<b>N.B.</b> <i>If you can’t see any image, then your server is not configured to use such tools. If you want to use these features, contact your provider’s technical support and ask for the «GD» or «Imagick» extensions to be installed.</i>', # MODIF
 	'info_informations_personnelles' => 'Femte trin: <b>Personlig information</b>',
 	'info_inscription_automatique' => 'Automatisk registrering af nye redaktører',
 	'info_jeu_caractere' => 'Webstedets tegnsæt',

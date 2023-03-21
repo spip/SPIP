@@ -206,7 +206,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_hier' => 'Jucer:',
 	'info_identification_publique' => 'Vas javni identitet...',
 	'info_image_process' => 'Izaberite najbolju metodu pravljenja vinjeta tako sto cete kliknuti na odgovarajucu sliku.',
-	'info_image_process2' => '<b>N.B.</b> <i>Ako se ne pojavljuje nijedna slika, onda vas server nije konfigurisan za koristenje tih funkcija. Ako zelite koristiti te funkcije, kontaktirajte ososbu odgovornu za tehnicko odrzavanje i pitajte za extenzije «GD» ili  «Imagick».</i>', # MODIF
 	'info_images_auto' => 'Automatski izracunate slike',
 	'info_informations_personnelles' => 'Peta etapa: <b>Licne informacije</b>', # MODIF
 	'info_inscription_automatique' => 'Automatsko upisivanje novih urednika',

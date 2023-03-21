@@ -292,7 +292,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_hier' => 'ieri :',
 	'info_identification_publique' => 'Identitatea dumneavoastră publică...',
 	'info_image_process' => 'Vă rugăm să selecţionaţi cea mai bună metodă de generare a viniételor făcând click pe imaginea corespunzătoare.',
-	'info_image_process2' => '<b>Nota Bene</b> <i> Dacă nici o imagine nu este afişată, înseamnă ca server-ul care găzduieşte site-ul dumneavoastră nu a fost configurat să folosească unelte de acest tip. Dacă doriţi să folosiţi aceste funcţii, vă rugăm să-l contactaţi pe responsabilul tehnic şi să îi cereţi instalarea extensiilor «GD» sau «Imagick».</i>', # MODIF
 	'info_images_auto' => 'Imagini calculate automat',
 	'info_informations_personnelles' => 'Informaţii personale',
 	'info_inscription_automatique' => 'Înscrierea automatică a noi redactori',

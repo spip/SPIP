@@ -211,7 +211,6 @@ L’administrator deu sistèma o de l’arret que’vs deu poder hornir
 	'info_hier' => 'gèr:',
 	'info_identification_publique' => 'La vòsta identitat publica...',
 	'info_image_process' => 'Volhatz seleccionar lo melhor metòde de fabricacion de las vinhetas en clicar sus l’imatge correspondent.',
-	'info_image_process2' => '<b>N.B.</b> <i>Se nat imatge n’apareish pas, alavetz lo servider qu’aubèrga lo vòste sit non l’an pas configurat entà utilizar aisinas taus. Se desiratz d’utilizar aqueras foncions, contactatz lo responsable tecnic e demandatz las extensions «GD» o «Imagick».</i>', # MODIF
 	'info_images_auto' => 'Imatges calculats automaticament',
 	'info_informations_personnelles' => 'Cincau estapa: <b>Informacions personaus</b>',
 	'info_inscription_automatique' => 'Inscripcion automatica de redactors navèths',

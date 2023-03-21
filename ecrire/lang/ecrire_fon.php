@@ -205,7 +205,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_hier' => 'sɔ tó fí:',
 	'info_identification_publique' => 'Nyíkɔ mi tɔn tòbítùn...',
 	'info_image_process' => 'Mi cyán wàlɔ ɖàgbè lɛ.',
-	'info_image_process2' => 'Mi cyán wàlɔ ɖàgbè lɛ', # MODIF
 	'info_informations_personnelles' => 'Tɛnnɔtɛn àtɔ̂n gɔ̂',
 	'info_inscription_automatique' => 'nyíkɔníná nyɔwlántɔ lɛ tɔn',
 	'info_jeu_caractere' => 'Wékwín àjì gblogbloji',

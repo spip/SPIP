@@ -223,7 +223,6 @@ a törölt szerzők pedig kukával vannak jelölve.', # MODIF
 	'info_hier' => 'Tegnap :',
 	'info_identification_publique' => 'Az Ön nyilvános azonosítása...',
 	'info_image_process' => 'Válasszon a bélyegképek legjobb készítesi modszerét azzal, hogy kattintson a megfelelő képre.',
-	'info_image_process2' => '<b>Megjegyzés</b> <i>Ha egyetlen kép sem jelenik meg, akkor ez azt jelenti, hogy a honlapját tároló szervert nem konfigurálták olyan eszkőzök használására. Ha mégis akarja használni ezeket a funkciókat, keresse a rendszergazdát, és a «GD» vagy «Imagick» kiegészítéseket kérje.</i>', # MODIF
 	'info_images_auto' => 'Automatikusan kalkulált képek',
 	'info_informations_personnelles' => 'Ötödik lépés : <b>Személyes adatok</b>', # MODIF
 	'info_inscription_automatique' => 'Új szerzők automatikus beiratkozása',

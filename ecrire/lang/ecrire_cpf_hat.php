@@ -231,7 +231,6 @@ Koulè imaj rannkont stati yo (komandè = vèr; redaktè = jon).',
 	'info_hier' => 'yèr :',
 	'info_identification_publique' => 'Ou lidantité piblik...',
 	'info_image_process' => 'Tanpri chwazi mèyè métod pou lakreyasyon viyèt yo. Pou sa-a mèsi klike sou imaj la ki koresponn.',
-	'info_image_process2' => '<b>N.B.</b> <i>Si oken imaj ki parèt, pètèt se sèvè ki ebèj sit ou ki pa konfigire pou itilize outiy sa-yo. Fòk w kontak responsab teknik sèvè an pou domann tout ektansyon «GD» ou «Imagick» sa-yo.</i>', # MODIF
 	'info_images_auto' => 'Imaj kalkilé otomatikman',
 	'info_informations_personnelles' => 'Sinkyèm etap : <b>Enfòmasyon pèsonel yo</b>', # MODIF
 	'info_inscription_automatique' => 'Enskrisyon otomatik pou nouvo redaktè yo',

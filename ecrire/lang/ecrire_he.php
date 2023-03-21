@@ -241,7 +241,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_generation_miniatures_images' => 'יוצר תמונות ממוזערות',
 	'info_hier' => ':אתמול',
 	'info_identification_publique' => '...הזהות הציבורית שלך',
-	'info_image_process2' => 'Si aucune image n’apparaît, alors le serveur qui héberge votre site n’a pas été configuré pour utiliser de tels outils. Si vous souhaitez utiliser ces fonctions, contactez le responsable technique et demandez les extensions « GD » ou « Imagick ».',
 	'info_informations_personnelles' => 'נתונים אישיים',
 	'info_inscription_automatique' => 'הרשמה אוטומטית של עורכים חדשים',
 	'info_jeu_caractere' => 'מערך תווים של האתר',

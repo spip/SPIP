@@ -284,7 +284,6 @@ dai loro server. In questo caso, le funzionalità di SPIP di seguito riportate n
 	'info_hier' => 'ieri:',
 	'info_identification_publique' => 'La tua identità pubblica...',
 	'info_image_process' => 'Seleziona il metodo migliore per la creazione delle anteprime cliccando sull’immagine corrispondente.',
-	'info_image_process2' => 'Se non appare alcuna immagine, ciò significa che la configurazione del server non permette l’uso di tali funzioni. Se si desidera utilizzarle, contattate la responsabile tecnica chiedendo delle estensioni "GD" o "Imagick".', # RELIRE
 	'info_images_auto' => 'Immagini elaborate automaticamente',
 	'info_informations_personnelles' => 'Informazioni personali',
 	'info_inscription_automatique' => 'Iscrizione automatica di nuove redattrici',

@@ -278,7 +278,6 @@ Aqueli informacions vos devon poder èstre provesidi per l’administrator dau s
 	'info_hier' => 'ièr :',
 	'info_identification_publique' => 'La voastra identitat publica...',
 	'info_image_process' => 'Vorgatz seleccionar lo melhor metòde de fabricacion dei vinhetas en clicar sus l’imatge correspondent.',
-	'info_image_process2' => 'Se minga d’imatge apareisse, alora lo servidor qu’auberga lo voastre site es pas estat configurat per utilisar de tau autis. Se desiratz utilisar aqueli foncions, contactatz lo responsable tecnic e demandatz li extensions «GD» ò «Imagick».',
 	'info_images_auto' => 'Imagtes calculats automaticament',
 	'info_informations_personnelles' => 'Informacions personali',
 	'info_inscription_automatique' => 'Inscripcion automatica de redactors novèus',

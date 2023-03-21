@@ -234,7 +234,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 	'info_hier' => 'včera:',
 	'info_identification_publique' => 'Vaše veřejná identita...',
 	'info_image_process' => 'Nejlepší metodu tvorby náhledů zvolíte klepnutím na příslušný obrázek.',
-	'info_image_process2' => '<b>Pozn.:</b> <i>Neobjeví-li se žádný obrázek, není hostitelský server vašeho webu nastaven k používání těchto nástrojů. Chcete-li je používat, spojete se s příslušnou technickou podporou a požádejte o rozšíření "GD" nebo "Imagick".</i>', # MODIF
 	'info_images_auto' => 'Automaticky vypočtěné obrázky',
 	'info_informations_personnelles' => 'Pátý krok: <b>Osobní údaje</b>', # MODIF
 	'info_inscription_automatique' => 'Automatický zápis nových redaktorů',

@@ -240,7 +240,6 @@ funktioner hos SPIP inte användas.',
 	'info_hier' => 'I går:',
 	'info_identification_publique' => 'Din publika identitet...',
 	'info_image_process' => 'Välj den bästa metoden för att skapa miniatyrer genom att klicka på motsvarande bild.',
-	'info_image_process2' => '<b>OBS!.</b> <i>Om du inte kan se någon bild, så är din server inte konfigurerad för att använda sådana verktyg. Om du vill använda dessa finesser så kontakta din leverantörs tekniska support och be dem installera utökningarna för «GD» eller «Imagick».</i>', # MODIF
 	'info_informations_personnelles' => 'Personlig information',
 	'info_inscription_automatique' => 'Automatisk registreing av nya redaktörer',
 	'info_jeu_caractere' => 'Sajtens teckenuppsättning',

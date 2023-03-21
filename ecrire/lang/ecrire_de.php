@@ -327,7 +327,6 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 	'info_hier' => 'Gestern:',
 	'info_identification_publique' => 'Ihre öffentliche Identität ...',
 	'info_image_process' => 'Bitte wählen Sie das beste Verfahren zum Generieren der Miniaturbilder, indem Sie auf ein Bild klicken.',
-	'info_image_process2' => 'Wenn kein Bild angezeigt wird, ist der Server ihrer Website nicht für die Verwendung solcher Werkzeuge eingerichtet. Wenn Sie diese Funktionen nutzen möchten, wenden Sie sich bitte an den verantwortlichen Techniker und bitten ihn, die Erweiterungen «GD» oder «Imagick» einzurichten.',
 	'info_images_auto' => 'automatisch berechnete Bilder',
 	'info_informations_personnelles' => 'Persönliche Informationen',
 	'info_inscription' => 'Angemeldet am',

@@ -206,7 +206,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_hier' => 'hôm qua: ',
 	'info_identification_publique' => 'Danh tánh công cộng của bạn...',
 	'info_image_process' => 'Xin chọn cách tạo ra hình trang trí bằng bấm trên hình đẹp nhất.',
-	'info_image_process2' => '<b>N.B.</b> <i>Nếu bạn không thấy hình nào cả có nghĩa là máy chủ chưa được thiết trí để sử dụng hình. Nếu bạn muốn dùng hình, liên lạc với nhóm phụ trách kỹ thuật của công ty cung cấp dịch vụ để yêu cầu có extension «GD» hay «Imagick».</i>', # MODIF
 	'info_images_auto' => 'Hình được tự tính',
 	'info_informations_personnelles' => 'Bước thứ năm: <b>Dữ kiện cá nhân</b>',
 	'info_inscription_automatique' => 'Tự động ghi danh các chủ bút mới',

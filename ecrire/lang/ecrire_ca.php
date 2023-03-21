@@ -315,7 +315,6 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d’hostatg
 	'info_hier' => 'ahir:',
 	'info_identification_publique' => 'La vostra identitat pública...',
 	'info_image_process' => 'Vulgueu seleccionar el millor mètode de fabricació de vinyetes fent un clic damunt de la imatge corresponent. ',
-	'info_image_process2' => '<b>N.B.</b> <i>Si no apareix cap imatge, aleshores és que el servidor que allotja el vostre lloc web no ha estat configurat per utilitzar aquestes eines. Si desitgeu emprar aquestes funcions, poseu-vos en contacte amb el responsable tècnic i demaneu les extensions «GD» o «Imagick».</i>',
 	'info_images_auto' => 'Imatges calculades automàticament',
 	'info_informations_personnelles' => 'Informacions personals',
 	'info_inscription' => 'Inscripció le',

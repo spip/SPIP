@@ -298,7 +298,6 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 	'info_hier' => 'ayeri:',
 	'info_identification_publique' => 'La to identidá pública...',
 	'info_image_process' => 'Has d’escoyer el meyor métodu de fabricación de les viñetes calcando enriba de la imaxe correspondiente.',
-	'info_image_process2' => '<b>N.B.</b> <i>Si nun apaez imaxe dala, el sirvidor que agospia el to sitiu nun ta configuráu pa mandase d’estes ferramientes. Si quiés utilizar estes funciones, contauta col responsable téunicu y pide-y les estensiones «GD» o «Imagick».</i>', # MODIF
 	'info_images_auto' => 'Imaxes calculáes automáticamente',
 	'info_informations_personnelles' => 'Información personal',
 	'info_inscription_automatique' => 'Inscripción automática de redactores nuevos',

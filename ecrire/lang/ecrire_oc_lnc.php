@@ -235,7 +235,6 @@ L’administrator del sistèma o de la ret vos deu poder fornir
 	'info_hier' => 'ièr:',
 	'info_identification_publique' => 'Vòstra identitat publica...',
 	'info_image_process' => 'Volgatz seleccionar lo melhor metòde de fabricacion de las vinhetas en clicar sus l’imatge correspondent.',
-	'info_image_process2' => '<b>N.B.</b> <i>Se cap d’imatge apareis pas, aladonc lo servidor qu’albèrga vòstre sit l’an pas configurat per utilizar d’aisinas talas. Se desiratz d’utilizar aquelas foncions, contactatz lo responsable tecnic e demandatz las extensions «GD» o «Imagick».</i>', # MODIF
 	'info_images_auto' => 'Imatges calculats automaticament',
 	'info_informations_personnelles' => 'Informacions personalas',
 	'info_inscription_automatique' => 'Inscripcion automatica de redactors novèls',

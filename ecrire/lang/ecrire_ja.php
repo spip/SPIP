@@ -324,7 +324,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_hier' => '昨日：',
 	'info_identification_publique' => '公開ＩＤ…',
 	'info_image_process' => 'サムネイルを作る最も良い方法を、対応する写真の上を、クリックして選んでください。',
-	'info_image_process2' => '<b>付記</b> 画像が表れなければ、サーバーではソフトが使えるように設定してありません。この機能を使いたい場合、プロバイダの技術サポートに「GD」か「Imagick」拡張をインストールしてもらって下さい。',
 	'info_images_auto' => '画像の自動制作',
 	'info_informations_personnelles' => '５番目のステップ：<b>個人情報</b>',
 	'info_inscription' => '登録された日付：',

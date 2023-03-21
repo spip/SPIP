@@ -299,7 +299,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_hier' => 'onte:',
 	'info_identification_publique' => 'A súa identidade pública...',
 	'info_image_process' => 'Probe a seleccionar o mellor método de fabricación de viñetas premendo sobre a imaxe correspondente.',
-	'info_image_process2' => '<b>N.B.</b> <i>Se non aparece ningunha imaxe, significa que o servidor que aloxa o web non foi configurado para para usar tales utilidades. Se desexa empregar estas funcións, contacte co responsable técnico e solicítelle as extensións «GD» ou «Imagick».</i>', # MODIF
 	'info_images_auto' => 'Imaxes calculadas automaticamente',
 	'info_informations_personnelles' => 'Datos persoais',
 	'info_inscription_automatique' => 'Rexistro automático de novos redactores',

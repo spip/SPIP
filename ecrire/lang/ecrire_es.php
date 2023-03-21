@@ -326,7 +326,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_hier' => 'ayer:',
 	'info_identification_publique' => 'Su identidad pública...',
 	'info_image_process' => 'Por favor seleccione el mejor método de fabricación de viñetas pinchando en la imágen correspondiente. ',
-	'info_image_process2' => 'Si no aparece ninguna imagen, es que el servidor que alberga su sitio web no está configurado para usar estas herramientas. Si quiere utilizarlas, contacte al responsable técnico y solicite las extensiones «GD» o «Imagick».',
 	'info_images_auto' => 'Imágenes calculadas automáticamente',
 	'info_informations_personnelles' => 'Información personal',
 	'info_inscription' => 'Inscripción el',

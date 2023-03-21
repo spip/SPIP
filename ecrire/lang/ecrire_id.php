@@ -231,7 +231,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_hier' => 'kemarin:',
 	'info_identification_publique' => 'Identitas umum anda...',
 	'info_image_process' => 'Pilih metode terbaik untuk membuat gambar kecil dengan mengklik gambar yang terkait.',
-	'info_image_process2' => '<b>Catatan:</b> <i>Jika anda tidak dapat melihat gambar, berarti server anda tidak dikonfigurasi untuk menggunakan peralatan yang ada. Jika anda ingin menggunakan fitur-fitur ini, hubungi bagian teknis penyedia hosting anda dan minta ekstensi «GD» atau «Imagick» diinstal.</i>', # MODIF
 	'info_images_auto' => 'Gambar secara otomatis dikalkulasi',
 	'info_informations_personnelles' => 'Langkah kelima: <b>Informasi pribadi</B>',
 	'info_inscription_automatique' => 'Registrasi otomatis editor-editor baru',

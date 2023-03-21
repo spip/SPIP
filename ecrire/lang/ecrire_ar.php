@@ -343,7 +343,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_hier' => 'البارحة:',
 	'info_identification_publique' => 'هويتك العمومية...',
 	'info_image_process' => 'الرجاء اختيار افضل طريقة لإنشاء المصغرات بالنقر على الصورة المناسبة.',
-	'info_image_process2' => 'اذا لم تظهر اية صورة يكون جهاز الخدمة الذي يستضيف موقعك غير معدّ لاستخدام هذه الأدوات. اذا رغبت في استخدام هذه الوظائف، اتصل بالمسؤول التقني واطلب تثبيت أحد الملحقين «GD» او «Imagick».',
 	'info_images_auto' => 'يتم حساب هذه الصور آلياً',
 	'info_informations_personnelles' => 'المعلومات الشخصية',
 	'info_inscription' => 'التسجيل في',

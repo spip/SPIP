@@ -220,7 +220,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_hier' => '昨天:',
 	'info_identification_publique' => '你的公开标识...',
 	'info_image_process' => '点击相关图片选取最佳的标志制作方法.',
-	'info_image_process2' => '<b>注意</b> <i>如果没有任何图片显示，那么储存您的网站的服务器不支持该工具。如果您希望使用这些功能，请联系您的服务器的技术支持，请他们安装《GD》或者《Imagick》扩展。</i>', # MODIF
 	'info_informations_personnelles' => '第五步: <b>个人信息</b>', # MODIF
 	'info_inscription_automatique' => '新编辑自动注册系统',
 	'info_jeu_caractere' => '站点的字符集',

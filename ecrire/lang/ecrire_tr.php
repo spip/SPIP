@@ -270,7 +270,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_hier' => 'Dün :',
 	'info_identification_publique' => 'Kamu kimliğiniz ...',
 	'info_image_process' => 'Lütfen, uygun resme tıklayarak en iyi ikon üretim yöntemini seçiniz. ',
-	'info_image_process2' => 'Hiç resim çıkmıyorsa, sitenizi yayınlayan sunucu bu tür araçlar kullanmak için konfigüre edilmemiş demektir. Eğer bu işlevleri kullanmak istiyorsanız teknik yetkiliye başvurun ve «GD» ya da «Imagick» aksesuarlarını isteyin.',
 	'info_images_auto' => 'Otomatik olarak hesaplanan resimler',
 	'info_informations_personnelles' => 'Kişisel bilgiler',
 	'info_inscription' => 'Kayıt tarihi', # RELIRE

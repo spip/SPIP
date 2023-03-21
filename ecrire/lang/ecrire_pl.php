@@ -324,7 +324,6 @@ Daje dostęp do różnych funkcje konserwacji technicznej. Niektóre spośród n
 	'info_hier' => 'wczoraj:',
 	'info_identification_publique' => 'Twoja nazwa publiczna',
 	'info_image_process' => 'Wybierz najlepsza metode przygotowania miniaturek kilkając na odpowiednim obrazku.',
-	'info_image_process2' => 'Jeśli nie wyświetlił się żaden obrazek, to twój serwer nie został skonfugurowany tak, aby skorzystać z tego narzędzia. Jeśli jednak chcesz skorzystać z tych funkcji, skontaktuj się z osobą odpowiedzialną za sprawy techniczne twojego serwisu i poproś o włączenie rozszerzeń "GD" lub "Imagick".',
 	'info_images_auto' => 'Automatycznie obliczane rozmiary obrazka',
 	'info_informations_personnelles' => 'Informacje o użytkowniku',
 	'info_inscription' => 'Zarejestrowany dnia :', # RELIRE
