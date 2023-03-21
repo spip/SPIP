@@ -36,18 +36,18 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function resolve_path($url) {
 	[$url, $query] = array_pad(explode('?', $url, 2), 2, null);
 	while (
-		preg_match(',/\.?/,', $url, $regs)    # supprime // et /./
-		or preg_match(',/[^/]*/\.\./,S', $url, $regs)  # supprime /toto/../
-		or preg_match(',^/\.\./,S', $url, $regs) # supprime les /../ du haut
+		preg_match(',/\.?/,', (string) $url, $regs) # supprime // et /./
+		|| preg_match(',/[^/]*/\.\./,S', (string) $url, $regs)  # supprime /toto/../
+		|| preg_match(',^/\.\./,S', (string) $url, $regs) # supprime les /../ du haut
 	) {
-		$url = str_replace($regs[0], '/', $url);
+		$url = str_replace($regs[0], '/', (string) $url);
 	}
 
 	if ($query) {
 		$url .= '?' . $query;
 	}
 
-	return '/' . preg_replace(',^/,S', '', $url);
+	return '/' . preg_replace(',^/,S', '', (string) $url);
 }
 
 
@@ -81,7 +81,7 @@ function suivre_lien($url, $lien) {
 	}
 
 	# L'url site spip est un lien absolu aussi
-	if (isset($GLOBALS['meta']['adresse_site']) and $lien == $GLOBALS['meta']['adresse_site']) {
+	if (isset($GLOBALS['meta']['adresse_site']) && $lien == $GLOBALS['meta']['adresse_site']) {
 		return $lien;
 	}
 
@@ -91,21 +91,17 @@ function suivre_lien($url, $lien) {
 	$debut = '';
 	if (preg_match(';^((?:[a-z]{3,7}:)?//[^/]+)(/.*?/?)?([^/#?]*)([?][^#]*)?(#.*)?$;S', $url, $regs)) {
 		$debut = $regs[1];
-		$dir = !strlen($regs[2]) ? '/' : $regs[2];
+		$dir = strlen($regs[2]) ? $regs[2] : '/';
 		$mot = $regs[3];
 		$get = $regs[4] ?? '';
 		$hash = $regs[5] ?? '';
 	}
-	switch (substr($lien, 0, 1)) {
-		case '/':
-			return $debut . resolve_path($lien);
-		case '#':
-			return $debut . resolve_path($dir . $mot . $get . $lien);
-		case '':
-			return $debut . resolve_path($dir . $mot . $get . $hash);
-		default:
-			return $debut . resolve_path($dir . $lien);
-	}
+	return match (substr($lien, 0, 1)) {
+		'/' => $debut . resolve_path($lien),
+		'#' => $debut . resolve_path($dir . $mot . $get . $lien),
+		'' => $debut . resolve_path($dir . $mot . $get . $hash),
+		default => $debut . resolve_path($dir . $lien),
+	};
 }
 
 
@@ -162,7 +158,7 @@ function protocole_verifier($url_absolue, $protocoles_autorises = ['http','https
 		$protocole = $m[1];
 		if (
 			in_array($protocole, $protocoles_autorises)
-			or in_array(strtolower($protocole), array_map('strtolower', $protocoles_autorises))
+			|| in_array(strtolower($protocole), array_map('strtolower', $protocoles_autorises))
 		) {
 			return true;
 		}
@@ -191,15 +187,16 @@ function liens_absolus($texte, $base = '') {
 		foreach ($liens as $lien) {
 			foreach (['href', 'src'] as $attr) {
 				$href = extraire_attribut($lien[0], $attr) ?? '';
-				if (strlen($href) > 0) {
-					if (!preg_match(';^((?:[a-z]{3,7}:)?//);iS', $href)) {
-						$abs = url_absolue($href, $base);
-						if (rtrim($href, '/') !== rtrim($abs, '/') and !preg_match('/^#/', $href)) {
-							$texte_lien = inserer_attribut($lien[0], $attr, $abs);
-							$texte = str_replace($lien[0], $texte_lien, $texte);
-						}
-					}
-				}
+				if (
+					strlen((string) $href) > 0
+					&& !preg_match(';^((?:[a-z]{3,7}:)?//);iS', (string) $href)
+				) {
+        			$abs = url_absolue($href, $base);
+       				if (rtrim((string) $href, '/') !== rtrim($abs, '/') && !preg_match('/^#/', (string) $href)) {
+  						$texte_lien = inserer_attribut($lien[0], $attr, $abs);
+  						$texte = str_replace($lien[0], $texte_lien, $texte);
+  					}
+    			}
 			}
 		}
 	}

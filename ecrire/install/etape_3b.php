@@ -38,9 +38,9 @@ function install_etape_3b_dist() {
 	if ($login) {
 		$echec = ($pass != $pass_verif) ?
 			_T('info_passes_identiques')
-			: ((strlen($pass) < _PASS_LONGUEUR_MINI) ?
+			: ((strlen((string) $pass) < _PASS_LONGUEUR_MINI) ?
 				_T('info_passe_trop_court_car_pluriel', ['nb' => _PASS_LONGUEUR_MINI])
-				: ((strlen($login) < _LOGIN_TROP_COURT) ?
+				: ((strlen((string) $login) < _LOGIN_TROP_COURT) ?
 					_T('info_login_trop_court')
 					: ''));
 		include_spip('inc/filtres');
@@ -164,7 +164,7 @@ function install_etape_3b_dist() {
 	redirige_par_entete(parametre_url(self(), 'etape', '4', '&'));
 }
 
-function echouer_etape_3b($echec) {
+function echouer_etape_3b($echec): never {
 	echo minipres(
 		'AUTO',
 		info_progression_etape(3, 'etape_', 'install/', true) .

@@ -37,10 +37,10 @@ function plugins_extraire_boutons_dist($arbre) {
 				if (is_array($val)) {
 					$ret[$type][$id]['parent'] = $bouton['parent'] ?? '';
 					$ret[$type][$id]['position'] = $bouton['position'] ?? '';
-					$ret[$type][$id]['titre'] = isset($val['titre']) ? trim(spip_xml_aplatit($val['titre'])) : '';
-					$ret[$type][$id]['icone'] = isset($val['icone']) ? trim(end($val['icone'])) : '';
-					$ret[$type][$id]['action'] = isset($val['url']) ? trim(end($val['url'])) : '';
-					$ret[$type][$id]['parametres'] = isset($val['args']) ? trim(end($val['args'])) : '';
+					$ret[$type][$id]['titre'] = isset($val['titre']) ? trim((string) spip_xml_aplatit($val['titre'])) : '';
+					$ret[$type][$id]['icone'] = isset($val['icone']) ? trim((string) end($val['icone'])) : '';
+					$ret[$type][$id]['action'] = isset($val['url']) ? trim((string) end($val['url'])) : '';
+					$ret[$type][$id]['parametres'] = isset($val['args']) ? trim((string) end($val['args'])) : '';
 				}
 			}
 		}

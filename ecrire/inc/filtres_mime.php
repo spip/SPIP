@@ -182,7 +182,7 @@ function filtre_text_html_dist($t) {
 			$page = recuperer_url($m[1]);
 			$page = $page['page'] ?? '';
 			$style .= "\n/* $l */\n"
-				. str_replace('<', '', $page);
+				. str_replace('<', '', (string) $page);
 		}
 	}
 	// Pourquoi SafeHtml transforme-t-il en texte les scripts dans Body ?

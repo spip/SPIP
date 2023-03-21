@@ -47,7 +47,7 @@ function enregistre_modif_plugin() {
 		}
 	}
 
-	spip_log("Changement des plugins actifs par l'auteur " . $GLOBALS['visiteur_session']['id_auteur'] . ': ' . join(
+	spip_log("Changement des plugins actifs par l'auteur " . $GLOBALS['visiteur_session']['id_auteur'] . ': ' . implode(
 		',',
 		$plugin
 	));

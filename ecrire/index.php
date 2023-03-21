@@ -18,7 +18,7 @@
 /** Drapeau indiquant que l'on est dans l'espace privé */
 define('_ESPACE_PRIVE', true);
 if (!defined('_ECRIRE_INC_VERSION')) {
-	include 'inc_version.php';
+	include __DIR__ . '/inc_version.php';
 }
 
 include_spip('inc/cookie');
@@ -28,7 +28,7 @@ include_spip('inc/cookie');
 //
 
 $exec = (string)_request('exec');
-$reinstall = (!is_null(_request('reinstall'))) ? _request('reinstall') : ($exec == 'install' ? 'oui' : null);
+$reinstall = (is_null(_request('reinstall'))) ? ($exec == 'install' ? 'oui' : null) : _request('reinstall');
 //
 // Les scripts d'insallation n'authentifient pas, forcement,
 // alors il faut blinder les variables d'URL
@@ -55,22 +55,22 @@ utiliser_langue_visiteur();
 $forcer_lang = true;
 
 
-if (_request('action') or _request('var_ajax') or _request('formulaire_action')) {
-	if (!autoriser_sans_cookie($exec)) {
-		// Charger l'aiguilleur qui va mettre sur la bonne voie les traitements derogatoires
-		include_spip('public/aiguiller');
-		if (
-			// cas des appels actions ?action=xxx
-			traiter_appels_actions()
-			or
-			// cas des hits ajax sur les inclusions ajax
-			traiter_appels_inclusions_ajax()
-			or
-			// cas des formulaires charger/verifier/traiter
-			traiter_formulaires_dynamiques()
-		) {
-			exit;
-		} // le hit est fini !
+if (
+	(_request('action') || _request('var_ajax') || _request('formulaire_action'))
+	&& !autoriser_sans_cookie($exec)
+) {
+    // Charger l'aiguilleur qui va mettre sur la bonne voie les traitements derogatoires
+    include_spip('public/aiguiller');
+    if (
+		// cas des appels actions ?action=xxx
+		traiter_appels_actions()
+		// cas des hits ajax sur les inclusions ajax
+		|| traiter_appels_inclusions_ajax()
+		// cas des formulaires charger/verifier/traiter
+		|| traiter_formulaires_dynamiques()
+	) {
+		// le hit est fini !
+		exit;
 	}
 }
 // securiser les redirect du back-office
@@ -89,9 +89,9 @@ if (_request('redirect')) {
 // Controle de la version, sauf si on est deja en train de s'en occuper
 if (
 	!$reinstall == 'oui'
-	and !_AJAX
-	and isset($GLOBALS['meta']['version_installee'])
-	and ($GLOBALS['spip_version_base'] != (str_replace(',', '.', $GLOBALS['meta']['version_installee'])))
+	&& !_AJAX
+	&& isset($GLOBALS['meta']['version_installee'])
+	&& $GLOBALS['spip_version_base'] != str_replace(',', '.', (string) $GLOBALS['meta']['version_installee'])
 ) {
 	$exec = 'demande_mise_a_jour';
 }
@@ -103,15 +103,14 @@ if (
 // sinon c'est qu'elle a ete interrompue et il faut la reprendre
 
 elseif (isset($GLOBALS['meta']['admin'])) {
-	if (preg_match('/^(.*)_(\d+)_/', $GLOBALS['meta']['admin'], $l)) {
+	if (preg_match('/^(.*)_(\d+)_/', (string) $GLOBALS['meta']['admin'], $l)) {
 		[, $var_f, $n] = $l;
 	}
 	if (
 		_AJAX
-		or !(
-			isset($_COOKIE['spip_admin'])
-			or (isset($GLOBALS['visiteur_session']) and $GLOBALS['visiteur_session']['statut'] == '0minirezo')
-		)
+		|| !isset($_COOKIE['spip_admin'])
+			&& !(isset($GLOBALS['visiteur_session'])
+			&& $GLOBALS['visiteur_session']['statut'] == '0minirezo')
 	) {
 		spip_log('Quand la meta admin vaut ' .
 			$GLOBALS['meta']['admin'] .
@@ -124,7 +123,7 @@ elseif (isset($GLOBALS['meta']['admin'])) {
 		if (tester_url_ecrire("base_$var_f")) {
 			$var_f = "base_$var_f";
 		}
-		if ($var_f != $exec) {
+		if ($var_f !== $exec) {
 			spip_log("Le script $var_f lance par auteur$n se substitue a l'exec $exec");
 			$exec = $var_f;
 			set_request('exec', $exec);
@@ -143,8 +142,9 @@ elseif (!preg_match(',^[a-z4_][0-9a-z_-]*$,i', $exec)) {
 // on appelle directement la fonction, car un appel d'action peut conduire a une boucle infinie
 // si le cookie n'est pas pose correctement dans l'action
 if (
-	!$var_auth and isset($_COOKIE['spip_lang_ecrire'])
-	and $_COOKIE['spip_lang_ecrire'] <> $GLOBALS['visiteur_session']['lang']
+	!$var_auth
+	&& isset($_COOKIE['spip_lang_ecrire'])
+	&& $_COOKIE['spip_lang_ecrire'] != $GLOBALS['visiteur_session']['lang']
 ) {
 	include_spip('action/converser');
 	action_converser_post($GLOBALS['visiteur_session']['lang'], true);

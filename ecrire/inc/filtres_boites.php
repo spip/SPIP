@@ -130,7 +130,7 @@ function boite_ouvrir($titre, $class = '', $head_class = '', $id = '') {
 	$class = "box $class";
 	$head_class = "box__header $head_class clearfix";
 	// dans l'espace prive, titrer en h3 si pas de balise <hn>
-	if (test_espace_prive() and strlen($titre) and !str_contains($titre, '<h')) {
+	if (test_espace_prive() && strlen($titre) && !str_contains($titre, '<h')) {
 		$titre = "<h3>$titre</h3>";
 	}
 
@@ -171,6 +171,5 @@ function boite_pied($class = 'act') {
  *     HTML de fin de la boîte
  */
 function boite_fermer() {
-	return '</div>'
-	. '</div>';
+	return '</div></div>';
 }

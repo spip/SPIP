@@ -43,22 +43,21 @@ function action_editer_auteur_dist($arg = null) {
 
 
 	// si id_auteur n'est pas un nombre, c'est une creation
-	if (!$id_auteur = intval($arg)) {
-		if (($id_auteur = auteur_inserer()) > 0) {
-			# cf. GROS HACK
-			# recuperer l'eventuel logo charge avant la creation
-			# ils ont un id = 0-id_auteur de la session
-			$id_hack = 0 - $GLOBALS['visiteur_session']['id_auteur'];
-			$chercher_logo = charger_fonction('chercher_logo', 'inc');
-			foreach (['on', 'off'] as $type) {
-				if ($logo = $chercher_logo($id_hack, 'id_auteur', $type)) {
-					if ($logo = reset($logo)) {
-						rename($logo, str_replace($id_hack, $id_auteur, $logo));
-					}
-				}
+	if (
+		!($id_auteur = (int) $arg)
+		&& ($id_auteur = auteur_inserer()) > 0
+	) {
+		# cf. GROS HACK
+		# recuperer l'eventuel logo charge avant la creation
+		# ils ont un id = 0-id_auteur de la session
+		$id_hack = 0 - $GLOBALS['visiteur_session']['id_auteur'];
+		$chercher_logo = charger_fonction('chercher_logo', 'inc');
+		foreach (['on', 'off'] as $type) {
+			if (($logo = $chercher_logo($id_hack, 'id_auteur', $type)) && ($logo = reset($logo))) {
+				rename($logo, str_replace($id_hack, $id_auteur, (string) $logo));
 			}
 		}
-	}
+ }
 
 	// Enregistre l'envoi dans la BD
 	$err = '';
@@ -215,10 +214,10 @@ function auteur_modifier($id_auteur, $set = null, $force_update = false) {
 			// donnees eventuellement fournies
 			$set
 		);
-		if (isset($c['new_login']) and !isset($c['login'])) {
+		if (isset($c['new_login']) && !isset($c['login'])) {
 			$c['login'] = $c['new_login'];
 		}
-		if (isset($c['new_pass']) and !isset($c['pass'])) {
+		if (isset($c['new_pass']) && !isset($c['pass'])) {
 			$c['pass'] = $c['new_pass'];
 		}
 		$err = auteur_instituer($id_auteur, $c);
@@ -318,32 +317,31 @@ function auteur_qualifier($id_auteur, $objets, $qualif) {
  * @return bool|string
  */
 function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
-	if (!$id_auteur = intval($id_auteur)) {
+	if (!$id_auteur = (int) $id_auteur) {
 		return false;
 	}
 	$erreurs = []; // contiendra les differentes erreurs a traduire par _T()
 	$champs = [];
 
 	// les memoriser pour les faire passer dans le pipeline pre_edition
-	if (isset($c['login']) and strlen($c['login'])) {
+	if (isset($c['login']) && strlen((string) $c['login'])) {
 		$champs['login'] = $c['login'];
 	}
-	if (isset($c['pass']) and strlen($c['pass'])) {
+	if (isset($c['pass']) && strlen((string) $c['pass'])) {
 		$champs['pass'] = $c['pass'];
 	}
 
-	$statut = $statut_ancien = sql_getfetsel('statut', 'spip_auteurs', 'id_auteur=' . intval($id_auteur));
+	$statut = $statut_ancien = sql_getfetsel('statut', 'spip_auteurs', 'id_auteur=' . (int) $id_auteur);
 
 	if (
-		isset($c['statut'])
-		and (autoriser('modifier', 'auteur', $id_auteur, null, ['statut' => $c['statut']]))
+		isset($c['statut']) && autoriser('modifier', 'auteur', $id_auteur, null, ['statut' => $c['statut']])
 	) {
 		$statut = $champs['statut'] = $c['statut'];
 	}
 
 	// Restreindre avant de declarer l'auteur
 	// (section critique sur les droits)
-	if (isset($c['id_parent']) and $c['id_parent']) {
+	if (isset($c['id_parent']) && $c['id_parent']) {
 		if (is_array($c['restreintes'])) {
 			$c['restreintes'][] = $c['id_parent'];
 		} else {
@@ -353,13 +351,13 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 
 	if (
 		isset($c['webmestre'])
-		and ($force_webmestre or autoriser('modifier', 'auteur', $id_auteur, null, ['webmestre' => '?']))
+		&& ($force_webmestre || autoriser('modifier', 'auteur', $id_auteur, null, ['webmestre' => '?']))
 	) {
 		$champs['webmestre'] = $c['webmestre'] == 'oui' ? 'oui' : 'non';
 	}
 
 	// si statut change et n'est pas 0minirezo, on force webmestre a non
-	if (isset($c['statut']) and $c['statut'] !== '0minirezo') {
+	if (isset($c['statut']) && $c['statut'] !== '0minirezo') {
 		$champs['webmestre'] = $c['webmestre'] = 'non';
 	}
 
@@ -378,8 +376,8 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 	);
 
 	if (
-		isset($c['restreintes']) and is_array($c['restreintes'])
-		and autoriser('modifier', 'auteur', $id_auteur, null, ['restreint' => $c['restreintes']])
+		isset($c['restreintes']) && is_array($c['restreintes'])
+		&& autoriser('modifier', 'auteur', $id_auteur, null, ['restreint' => $c['restreintes']])
 	) {
 		$rubriques = array_map('intval', $c['restreintes']);
 		$rubriques = array_unique($rubriques);
@@ -391,16 +389,18 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 	$flag_ecrire_acces = false;
 	// commencer par traiter les cas particuliers des logins et pass
 	// avant les autres ecritures en base
-	if (isset($champs['login']) or isset($champs['pass'])) {
-		$auth_methode = sql_getfetsel('source', 'spip_auteurs', 'id_auteur=' . intval($id_auteur));
+	if (isset($champs['login']) || isset($champs['pass'])) {
+		$auth_methode = sql_getfetsel('source', 'spip_auteurs', 'id_auteur=' . (int) $id_auteur);
 		include_spip('inc/auth');
-		if (isset($champs['login']) and strlen($champs['login'])) {
-			if (!auth_modifier_login($auth_methode, $champs['login'], $id_auteur)) {
-				$erreurs[] = 'ecrire:impossible_modifier_login_auteur';
-			}
+		if (
+			isset($champs['login'])
+			&& strlen((string) $champs['login'])
+			&& !auth_modifier_login($auth_methode, $champs['login'], $id_auteur)
+		) {
+			$erreurs[] = 'ecrire:impossible_modifier_login_auteur';
 		}
-		if (isset($champs['pass']) and strlen($champs['pass'])) {
-			$champs['login'] = sql_getfetsel('login', 'spip_auteurs', 'id_auteur=' . intval($id_auteur));
+		if (isset($champs['pass']) && strlen((string) $champs['pass'])) {
+			$champs['login'] = sql_getfetsel('login', 'spip_auteurs', 'id_auteur=' . (int) $id_auteur);
 			if (!auth_modifier_pass($auth_methode, $champs['login'], $champs['pass'], $id_auteur)) {
 				$erreurs[] = 'ecrire:impossible_modifier_pass_auteur';
 			}
@@ -416,10 +416,7 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 	sql_updateq('spip_auteurs', $champs, 'id_auteur=' . $id_auteur);
 
 	// .. mettre a jour les fichiers .htpasswd et .htpasswd-admin
-	if (
-		$flag_ecrire_acces
-		or isset($champs['statut'])
-	) {
+	if ($flag_ecrire_acces || isset($champs['statut'])) {
 		include_spip('inc/acces');
 		ecrire_acces();
 	}

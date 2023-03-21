@@ -28,13 +28,13 @@ function action_instituer_langue_rubrique_dist() {
 	$arg = $securiser_action();
 	$changer_lang = _request('changer_lang');
 
-	[$id_rubrique, $id_parent] = preg_split('/\W/', $arg);
+	[$id_rubrique, $id_parent] = preg_split('/\W/', (string) $arg);
 
 	if (
 		$changer_lang
-		and $id_rubrique > 0
-		and $GLOBALS['meta']['multi_rubriques'] == 'oui'
-		and ($GLOBALS['meta']['multi_secteurs'] == 'non' or $id_parent == 0)
+		&& $id_rubrique > 0
+		&& $GLOBALS['meta']['multi_rubriques'] == 'oui'
+		&& ($GLOBALS['meta']['multi_secteurs'] == 'non' || $id_parent == 0)
 	) {
 		if ($changer_lang != 'herit') {
 			sql_updateq(

@@ -154,7 +154,7 @@ class Modeles extends AbstractCollecteur {
 					// calculer le modele
 					# hack indexation
 					if ($doublons) {
-						$texte .= preg_replace(',[|][^|=]*,s', ' ', $m['params']);
+						$texte .= preg_replace(',[|][^|=]*,s', ' ', (string) $m['params']);
 					} # version normale
 					else {
 						// si un tableau de liens a ete passe, reinjecter le contenu d'origine
@@ -180,7 +180,7 @@ class Modeles extends AbstractCollecteur {
 
 							if (!empty($m['lien'])) {
 								# un eventuel guillemet (") sera reechappe par #ENV
-								$contexte['lien'] = str_replace('&quot;', '"', $m['lien']['href']);
+								$contexte['lien'] = str_replace('&quot;', '"', (string) $m['lien']['href']);
 								$contexte['lien_class'] = $m['lien']['class'];
 								$contexte['lien_mime'] = $m['lien']['mime'];
 								$contexte['lien_title'] = $m['lien']['title'];
@@ -199,14 +199,14 @@ class Modeles extends AbstractCollecteur {
 							}
 
 							$rempl = code_echappement($modele, $echap);
-							$texte = substr_replace($texte, $rempl, $m['pos'] + $offset_pos, $m['length']);
-							$offset_pos += strlen($rempl) - $m['length'];
+							$texte = substr_replace($texte, (string) $rempl, $m['pos'] + $offset_pos, $m['length']);
+							$offset_pos += strlen((string) $rempl) - $m['length'];
 						}
 					}
 
 					// hack pour tout l'espace prive
 					if ((test_espace_prive() || $doublons) && !empty($m['id'])) {
-						$type = strtolower($m['type']);
+						$type = strtolower((string) $m['type']);
 						foreach ($doublons ?: ['documents' => ['doc', 'emb', 'img']] as $quoi => $type_modeles) {
 							if (in_array($type, $type_modeles)) {
 								$GLOBALS["doublons_{$quoi}_inclus"][] = $m['id'];

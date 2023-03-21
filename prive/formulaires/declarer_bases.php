@@ -116,7 +116,7 @@ function formulaires_declarer_bases_verifier_1_dist() {
 	}
 
 	$login_db = $pass_db = '';
-	if (!preg_match(',^sqlite,i', $serveur_db)) {
+	if (!preg_match(',^sqlite,i', (string) $serveur_db)) {
 		if (!$login_db = _request('login_db')) {
 			$login_db = defined('_INSTALL_USER_DB') ? _INSTALL_USER_DB : $def_login_db;
 		}
@@ -174,7 +174,7 @@ function formulaires_declarer_bases_verifier_3_dist() {
 		$erreurs['nom_connect'] = _T('info_obligatoire');
 	} else {
 		// securite : le nom doit etre un mot sans caracteres speciaux
-		$f = preg_replace(',[^\w],', '', $nom_connect);
+		$f = preg_replace(',[^\w],', '', (string) $nom_connect);
 		if ($f !== $nom_connect) {
 			$erreurs['nom_connect'] = _T('erreur_nom_connect_incorrect');
 		} elseif (file_exists(_DIR_CONNECT . $nom_connect . '.php')) {
@@ -190,13 +190,13 @@ function formulaires_declarer_bases_verifier_3_dist() {
 function formulaires_declarer_bases_traiter_dist() {
 
 	$adresse_db = _DECLARER_ADRESSE_DB;
-	if (preg_match(',(.*):(.*),', $adresse_db, $r)) {
+	if (preg_match(',(.*):(.*),', (string) $adresse_db, $r)) {
 		[, $adresse_db, $port] = $r;
 	} else {
 		$port = '';
 	}
 
-	$server_db = addcslashes(_DECLARER_SERVEUR_DB, "'\\");
+	$server_db = addcslashes((string) _DECLARER_SERVEUR_DB, "'\\");
 
 	$conn = install_mode_appel($server_db)
 		. install_connexion(

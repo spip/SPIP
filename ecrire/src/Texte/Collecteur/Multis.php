@@ -60,7 +60,7 @@ class Multis extends AbstractCollecteur {
 			}
 			if ($changed) {
 				$texte = $this->agglomerer_trads($multi['trads']);
-				$multi['raw'] = str_replace($multi['texte'], $texte, $multi['raw']);
+				$multi['raw'] = str_replace($multi['texte'], $texte, (string) $multi['raw']);
 				$multi['texte'] = $texte;
 			}
 		}
@@ -204,15 +204,15 @@ class Multis extends AbstractCollecteur {
 								// Tester si on echappe en span ou en div
 								// il ne faut pas echapper en div si propre produit un seul paragraphe
 								include_spip('inc/texte');
-								$trad_propre = preg_replace(',(^<p[^>]*>|</p>$),Uims', '', propre($trad));
+								$trad_propre = preg_replace(',(^<p[^>]*>|</p>$),Uims', '', (string) propre($trad));
 								$mode = preg_match(',</?(' . _BALISES_BLOCS . ')[>[:space:]],iS', $trad_propre) ? 'div' : 'span';
 								if ($mode === 'div') {
-									$trad = rtrim($trad) . "\n\n";
+									$trad = rtrim((string) $trad) . "\n\n";
 								}
 								$trad = code_echappement($trad, 'multi', false, $mode);
-								$trad = str_replace("'", '"', inserer_attribut($trad, 'lang', $l));
+								$trad = str_replace("'", '"', (string) inserer_attribut($trad, 'lang', $l));
 								if (lang_dir($l) !== lang_dir($lang)) {
-									$trad = str_replace("'", '"', inserer_attribut($trad, 'dir', lang_dir($l)));
+									$trad = str_replace("'", '"', (string) inserer_attribut($trad, 'dir', lang_dir($l)));
 								}
 								if (!$echappe_span) {
 									$trad = echappe_retour($trad, 'multi');
@@ -221,8 +221,8 @@ class Multis extends AbstractCollecteur {
 						}
 					}
 
-					$texte = substr_replace($texte, $trad, $m['pos'] + $offset_pos, $m['length']);
-					$offset_pos += strlen($trad) - $m['length'];
+					$texte = substr_replace($texte, (string) $trad, $m['pos'] + $offset_pos, $m['length']);
+					$offset_pos += strlen((string) $trad) - $m['length'];
 				}
 			}
 		}

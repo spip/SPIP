@@ -45,12 +45,12 @@ function genie_mail_dist($t) {
 		['raw' => true]
 	);
 
-	if (strlen(trim($page['texte']))) {
+	if (strlen(trim((string) $page['texte']))) {
 		// recuperer les entetes envoyes par #HTTP_HEADER
 		$headers = '';
-		if (isset($page['entetes']) and is_countable($page['entetes']) ? count($page['entetes']) : 0) {
+		if (isset($page['entetes']) && (is_countable($page['entetes']) ? count($page['entetes']) : 0)) {
 			foreach ($page['entetes'] as $k => $v) {
-				$headers .= (strlen($v) ? "$k: $v" : $k) . "\n";
+				$headers .= (strlen((string) $v) ? "$k: $v" : $k) . "\n";
 			}
 		}
 

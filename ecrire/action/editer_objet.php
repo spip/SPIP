@@ -33,14 +33,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function action_editer_objet_dist($id = null, $objet = null, $set = null) {
 
 	// appel direct depuis une url avec arg = "objet/id"
-	if (is_null($id) or is_null($objet)) {
+	if (is_null($id) || is_null($objet)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
-		[$objet, $id] = array_pad(explode('/', $arg, 2), 2, null);
+		[$objet, $id] = array_pad(explode('/', (string) $arg, 2), 2, null);
 	}
 
 	// appel incorrect ou depuis une url erronnée interdit
-	if (is_null($id) or is_null($objet)) {
+	if (is_null($id) || is_null($objet)) {
 		include_spip('inc/minipres');
 		echo minipres(_T('info_acces_interdit'));
 		die();
@@ -48,13 +48,13 @@ function action_editer_objet_dist($id = null, $objet = null, $set = null) {
 
 	// si id n'est pas un nombre, c'est une creation
 	// mais on verifie qu'on a toutes les donnees qu'il faut.
-	if (!$id = intval($id)) {
+	if (!$id = (int) $id) {
 		// on ne sait pas si un parent existe mais on essaye
 		$id_parent = _request('id_parent');
 		$id = objet_inserer($objet, $id_parent);
 	}
 
-	if (!($id = intval($id)) > 0) {
+	if (!($id = (int) $id) > 0) {
 		return [$id, _L('echec enregistrement en base')];
 	}
 
@@ -79,8 +79,7 @@ function objet_modifier($objet, $id, $set = null) {
 		$objet = $t;
 	}
 	if (
-		include_spip('action/editer_' . $objet)
-		and function_exists($modifier = $objet . '_modifier')
+		include_spip('action/editer_' . $objet) && function_exists($modifier = $objet . '_modifier')
 	) {
 		return $modifier($id, $set);
 	}
@@ -88,7 +87,7 @@ function objet_modifier($objet, $id, $set = null) {
 	$table_sql = table_objet_sql($objet);
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table($table_sql);
-	if (!$desc or !isset($desc['field'])) {
+	if (!$desc || !isset($desc['field'])) {
 		spip_log("Objet $objet inconnu dans objet_modifier", 'editer' . _LOG_ERREUR);
 
 		return _L("Erreur objet $objet inconnu");
@@ -96,7 +95,7 @@ function objet_modifier($objet, $id, $set = null) {
 	include_spip('inc/modifier');
 
 	$champ_date = '';
-	if (isset($desc['date']) and $desc['date']) {
+	if (isset($desc['date']) && $desc['date']) {
 		$champ_date = $desc['date'];
 	} elseif (isset($desc['field']['date'])) {
 		$champ_date = 'date';
@@ -107,7 +106,7 @@ function objet_modifier($objet, $id, $set = null) {
 	// sur une creation, id_x vaut 'oui', et serait enregistre en id_x=0 dans la base
 	$include_list = array_diff($include_list, [$desc['key']['PRIMARY KEY']]);
 
-	if (isset($desc['champs_editables']) and is_array($desc['champs_editables'])) {
+	if (isset($desc['champs_editables']) && is_array($desc['champs_editables'])) {
 		$include_list = $desc['champs_editables'];
 	}
 	$c = collecter_requests(
@@ -150,9 +149,8 @@ function objet_modifier($objet, $id, $set = null) {
 	// FIXME: Ici lorsqu'un $set est passé, la fonction collecter_requests() retourne tout
 	//         le tableau $set hors liste d’exclusion, mais du coup on a possiblement des champs en trop.
 	$c = collecter_requests([$champ_date, 'statut', 'id_parent'], [], $set);
-	$err = objet_instituer($objet, $id, $c);
 
-	return $err;
+	return objet_instituer($objet, $id, $c);
 }
 
 /**
@@ -174,7 +172,7 @@ function objet_inserer($objet, $id_parent = null, $set = null) {
 	}
 	if (
 		include_spip('action/editer_' . $objet)
-		and function_exists($inserer = $objet . '_inserer')
+		&& function_exists($inserer = $objet . '_inserer')
 	) {
 		return $inserer($id_parent, $set);
 	}
@@ -182,7 +180,7 @@ function objet_inserer($objet, $id_parent = null, $set = null) {
 	$table_sql = table_objet_sql($objet);
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table($table_sql);
-	if (!$desc or !isset($desc['field'])) {
+	if (!$desc || !isset($desc['field'])) {
 		return 0;
 	}
 
@@ -191,11 +189,11 @@ function objet_inserer($objet, $id_parent = null, $set = null) {
 	if (isset($desc['field']['id_rubrique'])) {
 		// Si id_rubrique vaut 0 ou n'est pas definie, creer l'objet
 		// dans la premiere rubrique racine
-		if (!$id_rubrique = intval($id_parent)) {
+		if (!$id_rubrique = (int) $id_parent) {
 			$row = sql_fetsel('id_rubrique, id_secteur, lang', 'spip_rubriques', 'id_parent=0', '', '0+titre,titre', '1');
 			$id_rubrique = $row['id_rubrique'];
 		} else {
-			$row = sql_fetsel('lang, id_secteur', 'spip_rubriques', 'id_rubrique=' . intval($id_rubrique));
+			$row = sql_fetsel('lang, id_secteur', 'spip_rubriques', 'id_rubrique=' . (int) $id_rubrique);
 		}
 
 		$champs['id_rubrique'] = $id_rubrique;
@@ -210,16 +208,16 @@ function objet_inserer($objet, $id_parent = null, $set = null) {
 	// ou a defaut celle de la rubrique
 	// Sinon c'est la langue de la rubrique qui est choisie + heritee
 	if (
-		isset($desc['field']['lang']) and !empty($GLOBALS['meta']['multi_objets']) and in_array(
+		isset($desc['field']['lang']) && !empty($GLOBALS['meta']['multi_objets']) && in_array(
 			$table_sql,
-			explode(',', $GLOBALS['meta']['multi_objets'])
+			explode(',', (string) $GLOBALS['meta']['multi_objets'])
 		)
 	) {
 		lang_select($GLOBALS['visiteur_session']['lang']);
 		if (
 			in_array(
 				$GLOBALS['spip_lang'],
-				explode(',', $GLOBALS['meta']['langues_multilingue'])
+				explode(',', (string) $GLOBALS['meta']['langues_multilingue'])
 			)
 		) {
 			$champs['lang'] = $GLOBALS['spip_lang'];
@@ -227,7 +225,7 @@ function objet_inserer($objet, $id_parent = null, $set = null) {
 				$champs['langue_choisie'] = 'oui';
 			}
 		}
-	} elseif (isset($desc['field']['lang']) and isset($desc['field']['langue_choisie'])) {
+	} elseif (isset($desc['field']['lang']) && isset($desc['field']['langue_choisie'])) {
 		$champs['lang'] = ($lang_rub ?: $GLOBALS['meta']['langue_site']);
 		$champs['langue_choisie'] = 'non';
 	}
@@ -242,7 +240,7 @@ function objet_inserer($objet, $id_parent = null, $set = null) {
 	}
 
 
-	if ((isset($desc['date']) and $d = $desc['date']) or isset($desc['field'][$d = 'date'])) {
+	if (isset($desc['date']) && ($d = $desc['date']) || isset($desc['field'][$d = 'date'])) {
 		$champs[$d] = date('Y-m-d H:i:s');
 	}
 
@@ -269,12 +267,9 @@ function objet_inserer($objet, $id_parent = null, $set = null) {
 		// et associer l'auteur sinon
 		// si la table n'a pas deja un champ id_auteur
 		// et si le form n'a pas poste un id_auteur (meme vide, ce qui sert a annuler cette auto association)
-		if (
-			$id > 0
-			and !isset($desc['field']['id_auteur'])
-		) {
-			$id_auteur = ((is_null(_request('id_auteur')) and isset($GLOBALS['visiteur_session']['id_auteur'])) ?
-				$GLOBALS['visiteur_session']['id_auteur']
+		if ($id > 0 && !isset($desc['field']['id_auteur'])) {
+			$id_auteur = ((is_null(_request('id_auteur')) && isset($GLOBALS['visiteur_session']['id_auteur']))
+				? $GLOBALS['visiteur_session']['id_auteur']
 				: _request('id_auteur'));
 			if ($id_auteur) {
 				include_spip('action/editer_auteur');
@@ -339,8 +334,7 @@ function objet_instituer($objet, $id, $c, $calcul_rub = true) {
 		$objet = $t;
 	}
 	if (
-		include_spip('action/editer_' . $objet)
-		and function_exists($instituer = $objet . '_instituer')
+		include_spip('action/editer_' . $objet) && function_exists($instituer = $objet . '_instituer')
 	) {
 		return $instituer($id, $c, $calcul_rub);
 	}
@@ -348,7 +342,7 @@ function objet_instituer($objet, $id, $c, $calcul_rub = true) {
 	$table_sql = table_objet_sql($objet);
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table($table_sql);
-	if (!$desc or !isset($desc['field'])) {
+	if (!$desc || !isset($desc['field'])) {
 		return _L("Impossible d'instituer $objet : non connu en base");
 	}
 
@@ -360,7 +354,7 @@ function objet_instituer($objet, $id, $c, $calcul_rub = true) {
 	$sel[] = (isset($desc['field']['statut']) ? 'statut' : "'' as statut");
 
 	$champ_date = '';
-	if (isset($desc['date']) and $desc['date']) {
+	if (isset($desc['date']) && $desc['date']) {
 		$champ_date = $desc['date'];
 	} elseif (isset($desc['field']['date'])) {
 		$champ_date = 'date';
@@ -369,18 +363,18 @@ function objet_instituer($objet, $id, $c, $calcul_rub = true) {
 	$sel[] = ($champ_date ? "$champ_date as date" : "'' as date");
 	$sel[] = (isset($desc['field']['id_rubrique']) ? 'id_rubrique' : '0 as id_rubrique');
 
-	$row = sql_fetsel($sel, $table_sql, id_table_objet($objet) . '=' . intval($id));
+	$row = sql_fetsel($sel, $table_sql, id_table_objet($objet) . '=' . (int) $id);
 
 	$id_rubrique = $row['id_rubrique'];
 	$statut_ancien = $statut = $row['statut'];
 	$date_ancienne = $date = $row['date'];
 	$champs = [];
 
-	$d = ($date and isset($c[$champ_date])) ? $c[$champ_date] : null;
-	$s = (isset($desc['field']['statut']) and isset($c['statut'])) ? $c['statut'] : $statut;
+	$d = ($date && isset($c[$champ_date])) ? $c[$champ_date] : null;
+	$s = (isset($desc['field']['statut']) && isset($c['statut'])) ? $c['statut'] : $statut;
 
 	// cf autorisations dans inc/instituer_objet
-	if ($s != $statut or ($d and $d != $date)) {
+	if ($s != $statut || $d && $d != $date) {
 		if (
 			$id_rubrique ?
 			autoriser('publierdans', 'rubrique', $id_rubrique)
@@ -389,7 +383,7 @@ function objet_instituer($objet, $id, $c, $calcul_rub = true) {
 		) {
 			$statut = $champs['statut'] = $s;
 		} else {
-			if ($s != 'publie' and autoriser('modifier', $objet, $id)) {
+			if ($s != 'publie' && autoriser('modifier', $objet, $id)) {
 				$statut = $champs['statut'] = $s;
 			} else {
 				spip_log("editer_objet $objet #$id refus " . json_encode($c, JSON_THROW_ON_ERROR), 'editer' . _LOG_INFO_IMPORTANTE);
@@ -400,18 +394,16 @@ function objet_instituer($objet, $id, $c, $calcul_rub = true) {
 		// sauf si $c commande autre chose
 		// ou si l'objet est deja date dans le futur
 		// En cas de proposition d'un objet (mais pas depublication), idem
-		if ($champ_date) {
-			if (
+		if (
+			$champ_date
+			&& (
 				$champs['statut'] == 'publie'
-				or ($champs['statut'] == 'prop' and !in_array($statut_ancien, ['publie', 'prop']))
-				or $d
-			) {
-				if ($d or strtotime($d = $date) > time()) {
-					$champs[$champ_date] = $date = $d;
-				} else {
-					$champs[$champ_date] = $date = date('Y-m-d H:i:s');
-				}
-			}
+				|| $champs['statut'] == 'prop' && !in_array($statut_ancien, ['publie', 'prop'])
+				|| $d
+			)
+		) {
+			$date = ($d || strtotime((string) ($d = $date)) > time()) ? $d : date('Y-m-d H:i:s');
+			$champs[$champ_date] = $date;
 		}
 	}
 
@@ -419,10 +411,10 @@ function objet_instituer($objet, $id, $c, $calcul_rub = true) {
 	// de la rubrique actuelle
 	if (
 		$id_rubrique
-		and isset($c['id_parent'])
-		and $id_parent = $c['id_parent']
-		and $id_parent != $id_rubrique
-		and (sql_fetsel('1', 'spip_rubriques', 'id_rubrique=' . intval($id_parent)))
+		&& isset($c['id_parent'])
+		&& ($id_parent = $c['id_parent'])
+		&& $id_parent != $id_rubrique
+		&& sql_fetsel('1', 'spip_rubriques', 'id_rubrique=' . (int) $id_parent)
 	) {
 		$champs['id_rubrique'] = $id_parent;
 
@@ -431,7 +423,7 @@ function objet_instituer($objet, $id, $c, $calcul_rub = true) {
 		// repasser l'objet en statut 'propose'.
 		if (
 			$statut == 'publie'
-			and !autoriser('publierdans', 'rubrique', $id_rubrique)
+			&& !autoriser('publierdans', 'rubrique', $id_rubrique)
 		) {
 			$champs['statut'] = 'prop';
 		}
@@ -556,23 +548,23 @@ function objet_editer_heritage($objet, $id, $id_rubrique, $statut, $champs, $con
 			$champs['id_secteur'] = $row_rub['id_secteur'];
 		}
 
-		if (isset($desc['field']['lang']) and isset($desc['field']['langue_choisie'])) {
-			if (
-				sql_fetsel(
-					'1',
-					$table_sql,
-					id_table_objet($objet) . '=' . intval($id) . " AND langue_choisie<>'oui' AND lang<>" . sql_quote($langue)
-				)
-			) {
-				$champs['lang'] = $langue;
-			}
+		if (
+			isset($desc['field']['lang'])
+			&& isset($desc['field']['langue_choisie'])
+			&& sql_fetsel(
+				'1',
+				$table_sql,
+				id_table_objet($objet) . '=' . (int) $id . " AND langue_choisie<>'oui' AND lang<>" . sql_quote($langue)
+			)
+		) {
+			$champs['lang'] = $langue;
 		}
 	}
 
 	if (!$champs) {
 		return;
 	}
-	sql_updateq($table_sql, $champs, id_table_objet($objet) . '=' . intval($id));
+	sql_updateq($table_sql, $champs, id_table_objet($objet) . '=' . (int) $id);
 
 	// Changer le statut des rubriques concernees
 	if ($cond) {
@@ -629,17 +621,17 @@ function objet_lire($objet, $valeur_id, $options = []) {
 	$primary = id_table_objet($objet);
 
 	// On détermine l'id à utiliser.
-	$champ_id = (!empty($options['champ_id']) ? $options['champ_id'] : $primary);
+	$champ_id = (empty($options['champ_id']) ? $primary : $options['champ_id']);
 
 	// Si l'objet n'a pas encore été stocké, il faut récupérer sa description complète.
 	if (
 		!isset($descriptions[$objet][$champ_id][$valeur_id])
-		or (isset($options['force']) and $options['force'])
+		|| isset($options['force']) && $options['force']
 	) {
 		// Il est possible pour un type d'objet de fournir une fonction de lecture de tous les champs d'un objet.
 		if (
 			include_spip('action/editer_' . $objet)
-			and function_exists($lire = "{$objet}_lire_champs")
+			&& function_exists($lire = "{$objet}_lire_champs")
 		) {
 			$valeurs = $lire($objet, $valeur_id, $champ_id);
 		} else {
@@ -661,7 +653,7 @@ function objet_lire($objet, $valeur_id, $options = []) {
 
 		$descriptions[$objet][$champ_id][$valeur_id] = $valeurs;
 
-		if ($champ_id !== $primary and isset($valeurs[$primary])) {
+		if ($champ_id !== $primary && isset($valeurs[$primary])) {
 			$descriptions[$objet][$primary][$valeurs[$primary]] = $valeurs;
 			$descriptions[$objet][$champ_id][$valeur_id] = &$descriptions[$objet][$primary][$valeurs[$primary]];
 		}
@@ -671,18 +663,14 @@ function objet_lire($objet, $valeur_id, $options = []) {
 
 	// On ne retourne maintenant que les champs demandés.
 	// - on détermine les informations à renvoyer.
-	if ($retour and !empty($options['champs'])) {
+	if ($retour && !empty($options['champs'])) {
 		$champs = $options['champs'];
 		// Extraction des seules informations demandées.
 		// -- si on demande une information unique on renvoie la valeur simple, sinon on renvoie un tableau.
 		// -- si une information n'est pas un champ valide elle n'est pas renvoyée sans renvoyer d'erreur.
-		if (is_array($champs)) {
-			// Tableau des informations valides
-			$retour = array_intersect_key($retour, array_flip($champs));
-		} else {
-			// Valeur unique demandée.
-			$retour = ($retour[$champs] ?? false);
-		}
+		$retour = is_array($champs)
+			? array_intersect_key($retour, array_flip($champs))
+			: $retour[$champs] ?? false;
 	}
 
 	return $retour;

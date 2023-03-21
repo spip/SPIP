@@ -44,7 +44,7 @@ if (!defined('_DIR_RESTREINT_ABS')) {
  *  vide si on est dans ecrire, 'ecrire/' sinon */
 define(
 	'_DIR_RESTREINT',
-	(!is_dir(_DIR_RESTREINT_ABS) ? '' : _DIR_RESTREINT_ABS)
+	(is_dir(_DIR_RESTREINT_ABS) ? _DIR_RESTREINT_ABS : '')
 );
 
 /** Chemin relatif pour aller à la racine */
@@ -80,7 +80,7 @@ if (!defined('_NOM_PERMANENTS_ACCESSIBLES')) {
 // inclure l'ecran de securite si il n'a pas été inclus en prepend php
 if (
 	!defined('_ECRAN_SECURITE')
-	and @file_exists($f = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . 'ecran_securite.php')
+	&& @file_exists($f = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . 'ecran_securite.php')
 ) {
 	include $f;
 }
@@ -115,7 +115,7 @@ if (!defined('_NOM_CONFIG')) {
 // Son emplacement absolu si on le trouve
 if (
 	@file_exists($f = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . _NOM_CONFIG . '.php')
-	or (@file_exists($f = _ROOT_RESTREINT . _NOM_CONFIG . '.php'))
+	|| @file_exists($f = _ROOT_RESTREINT . _NOM_CONFIG . '.php')
 ) {
 	/** Emplacement absolu du fichier d'option */
 	define('_FILE_OPTIONS', $f);
@@ -143,7 +143,7 @@ if (!defined('_IS_BOT')) {
 	define(
 		'_IS_BOT',
 		isset($_SERVER['HTTP_USER_AGENT'])
-		and preg_match(
+		&& preg_match(
 			// mots generiques
 			',bot|slurp|crawler|spider|webvac|yandex|'
 			// MSIE 6.0 est un botnet 99,9% du temps, on traite donc ce USER_AGENT comme un bot
@@ -160,9 +160,9 @@ if (!defined('_IS_CLI')) {
 	define(
 		'_IS_CLI',
 		!isset($_SERVER['HTTP_HOST'])
-		and !strlen($_SERVER['DOCUMENT_ROOT'])
-		and !empty($_SERVER['argv'])
-		and empty($_SERVER['REQUEST_METHOD'])
+		&& !strlen((string) $_SERVER['DOCUMENT_ROOT'])
+		&& !empty($_SERVER['argv'])
+		&& empty($_SERVER['REQUEST_METHOD'])
 	);
 }
 
@@ -283,7 +283,7 @@ $debut_date_publication = null;
 //
 // Prendre en compte les entetes HTTP_X_FORWARDED_XX
 //
-if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) and $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
 	if (empty($_SERVER['HTTP_X_FORWARDED_HOST'])) {
 		$_SERVER['HTTP_X_FORWARDED_HOST'] = $_SERVER['HTTP_HOST'];
 	}
@@ -292,9 +292,9 @@ if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) and $_SERVER['HTTP_X_FORWARDED_PRO
 	}
 }
 if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
-	if (isset($_SERVER['HTTP_X_FORWARDED_PORT']) and is_numeric($_SERVER['HTTP_X_FORWARDED_PORT'])) {
+	if (isset($_SERVER['HTTP_X_FORWARDED_PORT']) && is_numeric($_SERVER['HTTP_X_FORWARDED_PORT'])) {
 		$_SERVER['SERVER_PORT'] = $_SERVER['HTTP_X_FORWARDED_PORT'];
-		if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) and $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+		if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
 			$_SERVER['HTTPS'] = 'on';
 			if (isset($_SERVER['REQUEST_SCHEME'])) {
 				$_SERVER['REQUEST_SCHEME'] = 'https';
@@ -302,8 +302,8 @@ if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
 		}
 	}
 	$host = $_SERVER['HTTP_X_FORWARDED_HOST'];
-	if (strpos($host, ',') !== false) {
-		$h = explode(',', $host);
+	if (str_contains((string) $host, ',')) {
+		$h = explode(',', (string) $host);
 		$host = trim(reset($h));
 	}
 	// securite sur le contenu de l'entete
@@ -315,12 +315,12 @@ if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
 //
 if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
 	$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-	if (strpos($ip, ',') !== false) {
-		$ip = explode(',', $ip);
+	if (str_contains((string) $ip, ',')) {
+		$ip = explode(',', (string) $ip);
 		$ip = reset($ip);
 	}
 	// ecraser $_SERVER['REMOTE_ADDR'] si elle est en localhost
-	if (isset($_SERVER['REMOTE_ADDR']) and $_SERVER['REMOTE_ADDR'] === '127.0.0.1') {
+	if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] === '127.0.0.1') {
 		$_SERVER['REMOTE_ADDR'] = $ip;
 	}
 }
@@ -507,7 +507,7 @@ spip_initialisation_core(
 // qui ne sera pas execute car _ECRIRE_INC_VERSION est defini
 // donc il faut avoir tout fini ici avant de charger les plugins
 
-if (@is_readable(_CACHE_PLUGINS_OPT) and @is_readable(_CACHE_PLUGINS_PATH)) {
+if (@is_readable(_CACHE_PLUGINS_OPT) && @is_readable(_CACHE_PLUGINS_PATH)) {
 	// chargement optimise precompile
 	include_once(_CACHE_PLUGINS_OPT);
 } else {
@@ -540,10 +540,10 @@ if (test_espace_prive()) {
 //
 if (
 	!(_FILE_CONNECT
-	or autoriser_sans_cookie(_request('exec'))
-	or _request('action') == 'cookie'
-	or _request('action') == 'converser'
-	or _request('action') == 'test_dirs')
+	|| autoriser_sans_cookie(_request('exec'))
+	|| _request('action') == 'cookie'
+	|| _request('action') == 'converser'
+	|| _request('action') == 'test_dirs')
 ) {
 	// Si on peut installer, on lance illico
 	if (test_espace_prive()) {
@@ -563,13 +563,13 @@ if (
 // memoriser un tri sessionne eventuel
 if (
 	isset($_REQUEST['var_memotri'])
-	and $t = $_REQUEST['var_memotri']
-	and (strncmp($t, 'trisession', 10) == 0 or strncmp($t, 'senssession', 11) == 0)
+	&& ($t = $_REQUEST['var_memotri'])
+	&& (str_starts_with((string) $t, 'trisession') || str_starts_with((string) $t, 'senssession'))
 ) {
 	if (!function_exists('session_set')) {
 		include_spip('inc/session');
 	}
-	$t = preg_replace(',\W,', '_', $t);
+	$t = preg_replace(',\W,', '_', (string) $t);
 	if ($v = _request($t)) {
 		session_set($t, $v);
 	}
@@ -584,14 +584,14 @@ if (
 if (!defined('_HEADER_COMPOSED_BY')) {
 	define('_HEADER_COMPOSED_BY', 'Composed-By: SPIP');
 }
-if (!headers_sent() and _HEADER_COMPOSED_BY) {
+if (!headers_sent() && _HEADER_COMPOSED_BY) {
 	if (!defined('_HEADER_VARY')) {
 		define('_HEADER_VARY', 'Vary: Cookie, Accept-Encoding');
 	}
 	if (_HEADER_VARY) {
 		header(_HEADER_VARY);
 	}
-	if (!isset($GLOBALS['spip_header_silencieux']) or !$GLOBALS['spip_header_silencieux']) {
+	if (!isset($GLOBALS['spip_header_silencieux']) || !$GLOBALS['spip_header_silencieux']) {
 		include_spip('inc/filtres_mini');
 		header(_HEADER_COMPOSED_BY . " $spip_version_affichee @ www.spip.net + " . url_absolue(_DIR_VAR . 'config.txt'));
 	} else {

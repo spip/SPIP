@@ -31,17 +31,17 @@ function action_confirmer_email_dist() {
 	$arg = $securiser_action();
 
 	include_spip('inc/filtres');
-	if ($GLOBALS['visiteur_session']['id_auteur'] and email_valide($arg)) {
+	if ($GLOBALS['visiteur_session']['id_auteur'] && email_valide($arg)) {
 		include_spip('action/editer_auteur');
 		auteur_modifier($GLOBALS['visiteur_session']['id_auteur'], ['email' => $arg]);
 	}
 	// verifier avant de rediriger pour invalider le message de confirmation
 	// si ca n'a pas marche
 	if (
-		$redirect = _request('redirect') and !$arg == sql_getfetsel(
+		($redirect = _request('redirect')) && !$arg == sql_getfetsel(
 			'email',
 			'spip_auteurs',
-			'id_auteur=' . intval($GLOBALS['visiteur_session'])
+			'id_auteur=' . (int) $GLOBALS['visiteur_session']
 		)
 	) {
 		$GLOBALS['redirect'] = parametre_url($redirect, 'email_modif', '');

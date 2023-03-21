@@ -66,14 +66,14 @@ function bouton_block_depliable($texte, $deplie, $ids = '') {
 	$bouton_id = 'b' . substr(md5($texte . microtime()), 0, 8);
 
 	$class = ($deplie === true) ? ' deplie' : (($deplie == -1) ? ' impliable' : ' replie');
-	if (strlen($ids)) {
-		$cible = explode(',', $ids);
+	if (strlen((string) $ids)) {
+		$cible = explode(',', (string) $ids);
 		$cible = '#' . implode(',#', $cible);
 	} else {
 		$cible = "#$bouton_id + div.bloc_depliable";
 	}
 
-	$b = (strpos($texte, '<h') === false ? 'h3' : 'div');
+	$b = (str_contains((string) $texte, '<h') ? 'div' : 'h3');
 
 	return "<$b "
 	. ($bouton_id ? "id='$bouton_id' " : '')
@@ -96,47 +96,47 @@ function bouton_block_depliable($texte, $deplie, $ids = '') {
 //
 function verif_butineur() {
 
-	preg_match(',^([A-Za-z]+)/([0-9]+\.[0-9]+) (.*)$,', $_SERVER['HTTP_USER_AGENT'], $match);
+	preg_match(',^([A-Za-z]+)/(\d+\.\d+) (.*)$,', (string) $_SERVER['HTTP_USER_AGENT'], $match);
 	$GLOBALS['browser_name'] = $match[1];
 	$GLOBALS['browser_version'] = $match[2];
 	$GLOBALS['browser_description'] = $match[3];
 	$GLOBALS['browser_layer'] = ' '; // compat avec vieux scripts qui testent la valeur
 	$GLOBALS['browser_barre'] = '';
 
-	if (!preg_match(',opera,i', $GLOBALS['browser_description']) && preg_match(',opera,i', $GLOBALS['browser_name'])) {
+	if (!preg_match(',opera,i', (string) $GLOBALS['browser_description']) && preg_match(',opera,i', (string) $GLOBALS['browser_name'])) {
 		$GLOBALS['browser_name'] = 'Opera';
 		$GLOBALS['browser_version'] = $match[2];
 		$GLOBALS['browser_barre'] = ($GLOBALS['browser_version'] >= 8.5);
 	} else {
-		if (preg_match(',opera,i', $GLOBALS['browser_description'])) {
-			preg_match(',Opera ([^\ ]*),i', $GLOBALS['browser_description'], $match);
+		if (preg_match(',opera,i', (string) $GLOBALS['browser_description'])) {
+			preg_match(',Opera ([^\ ]*),i', (string) $GLOBALS['browser_description'], $match);
 			$GLOBALS['browser_name'] = 'Opera';
 			$GLOBALS['browser_version'] = $match[1];
 			$GLOBALS['browser_barre'] = ($GLOBALS['browser_version'] >= 8.5);
 		} else {
-			if (preg_match(',msie,i', $GLOBALS['browser_description'])) {
-				preg_match(',MSIE ([^;]*),i', $GLOBALS['browser_description'], $match);
+			if (preg_match(',msie,i', (string) $GLOBALS['browser_description'])) {
+				preg_match(',MSIE ([^;]*),i', (string) $GLOBALS['browser_description'], $match);
 				$GLOBALS['browser_name'] = 'MSIE';
 				$GLOBALS['browser_version'] = $match[1];
 				$GLOBALS['browser_barre'] = ($GLOBALS['browser_version'] >= 5.5);
 			} else {
 				if (
-					preg_match(',KHTML,i', $GLOBALS['browser_description']) &&
-					preg_match(',Safari/([^;]*),', $GLOBALS['browser_description'], $match)
+					preg_match(',KHTML,i', (string) $GLOBALS['browser_description']) &&
+					preg_match(',Safari/([^;]*),', (string) $GLOBALS['browser_description'], $match)
 				) {
 					$GLOBALS['browser_name'] = 'Safari';
 					$GLOBALS['browser_version'] = $match[1];
 					$GLOBALS['browser_barre'] = ($GLOBALS['browser_version'] >= 5.0);
 				} else {
-					if (preg_match(',mozilla,i', $GLOBALS['browser_name']) and $GLOBALS['browser_version'] >= 5) {
+					if (preg_match(',mozilla,i', (string) $GLOBALS['browser_name']) && $GLOBALS['browser_version'] >= 5) {
 						// Numero de version pour Mozilla "authentique"
-						if (preg_match(',rv:([0-9]+\.[0-9]+),', $GLOBALS['browser_description'], $match)) {
-							$GLOBALS['browser_rev'] = doubleval($match[1]);
+						if (preg_match(',rv:(\d+\.\d+),', (string) $GLOBALS['browser_description'], $match)) {
+							$GLOBALS['browser_rev'] = (float) $match[1];
 						} // Autres Gecko => equivalents 1.4 par defaut (Galeon, etc.)
 						else {
 							if (
-								strpos($GLOBALS['browser_description'], 'Gecko') and !strpos(
-									$GLOBALS['browser_description'],
+								strpos((string) $GLOBALS['browser_description'], 'Gecko') && !strpos(
+									(string) $GLOBALS['browser_description'],
 									'KHTML'
 								)
 							) {

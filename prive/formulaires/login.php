@@ -34,7 +34,7 @@ function is_url_prive($cible) {
 	$path = parse_url(tester_url_absolue($cible) ? $cible : url_absolue($cible));
 	$path = ($path['path'] ?? '');
 
-	return str_starts_with(substr($path, -strlen(_DIR_RESTREINT_ABS)), _DIR_RESTREINT_ABS);
+	return str_starts_with(substr($path, -strlen((string) _DIR_RESTREINT_ABS)), (string) _DIR_RESTREINT_ABS);
 }
 
 /**
@@ -89,7 +89,7 @@ function formulaires_login_charger_dist($cible = '', $options = [], $deprecated 
 	if (
 		!$login
 		&& isset($_COOKIE['spip_admin'])
-		&& preg_match(',^@(.*)$,', $_COOKIE['spip_admin'], $regs)
+		&& preg_match(',^@(.*)$,', (string) $_COOKIE['spip_admin'], $regs)
 	) {
 		$login = $regs[1];
 	}
@@ -181,7 +181,7 @@ function login_auth_http() {
 		!$GLOBALS['ignore_auth_http']
 		&& _request('var_erreur') == 'cookie'
 		&& (!isset($_COOKIE['spip_session']) || $_COOKIE['spip_session'] != 'test_echec_cookie')
-		&& (preg_match(',apache,', \PHP_SAPI) || preg_match(',^Apache.* PHP,', $_SERVER['SERVER_SOFTWARE']))
+		&& (preg_match(',apache,', \PHP_SAPI) || preg_match(',^Apache.* PHP,', (string) $_SERVER['SERVER_SOFTWARE']))
 		// Attention dans le cas 'intranet' la proposition de se loger
 		// par auth_http peut conduire a l'echec.
 		&& !(isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW']))
@@ -248,7 +248,7 @@ function formulaires_login_verifier_dist($cible = '', $options = [], $deprecated
 		}
 		include_spip('inc/cookie');
 		spip_setcookie('spip_admin', '', time() - 3600);
-		if (strlen($session_password)) {
+		if (strlen((string) $session_password)) {
 			$erreurs['password'] = _T('login_erreur_pass');
 		} else {
 			// sinon c'est un login en deux passe old style (ou js en panne)
@@ -290,7 +290,7 @@ function formulaires_login_verifier_dist($cible = '', $options = [], $deprecated
 function login_autoriser() {
 	include_spip('inc/autoriser');
 	if (!autoriser('ecrire')) {
-		$h = generer_url_action('logout', 'logout=prive&url=' . urlencode(self()));
+		$h = generer_url_action('logout', 'logout=prive&url=' . urlencode((string) self()));
 
 		return [
 			'message_erreur' => '<h1>'
@@ -349,8 +349,8 @@ function formulaires_login_traiter_dist($cible = '', $options = [], $deprecated 
 
 		// transformer la cible absolue en cible relative
 		// pour pas echouer quand la meta adresse_site est foireuse
-		if (strncmp($cible, $u = url_de_base(), strlen($u)) == 0) {
-			$cible = './' . substr($cible, strlen($u));
+		if (strncmp((string) $cible, (string) ($u = url_de_base()), strlen((string) $u)) == 0) {
+			$cible = './' . substr((string) $cible, strlen((string) $u));
 		} elseif (tester_url_absolue($cible) && !defined('_AUTORISER_LOGIN_ABS_REDIRECT')) {
 			// si c'est une url absolue, refuser la redirection
 			// sauf si cette securite est levee volontairement par le webmestre

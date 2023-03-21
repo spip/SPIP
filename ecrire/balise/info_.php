@@ -57,7 +57,7 @@ function balise_INFO__dist($p) {
 		}
 		$_params .= ']';
 
-		$info_sql = strtolower(substr($info, 5));
+		$info_sql = strtolower(substr((string) $info, 5));
 		$code = "generer_objet_info($id_objet, $type_objet, '$info_sql', " . ($p->etoile ? _q($p->etoile) : "''") . ", $_params)";
 		$p->code = champ_sql($info, $p, $code);
 		$p->interdire_scripts = true;

@@ -39,7 +39,7 @@ $GLOBALS['maj'][13904] = [
 		['webmestre' => "'oui'"],
 		sql_in('id_auteur', defined('_ID_WEBMESTRES') ? explode(
 			':',
-			_ID_WEBMESTRES
+			(string) _ID_WEBMESTRES
 		) : (autoriser('configurer') ? [$GLOBALS['visiteur_session']['id_auteur']] : [0]))
 	] // le webmestre est celui qui fait l'upgrade si rien de defini
 ];

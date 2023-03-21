@@ -27,7 +27,7 @@ function charger_dtd($grammaire, $avail, $rotlvl) {
 		$grammaire = find_in_path($grammaire);
 	}
 
-	$file = _DIR_CACHE_XML . preg_replace('/[^\w.]/', '_', $rotlvl) . '.gz';
+	$file = _DIR_CACHE_XML . preg_replace('/[^\w.]/', '_', (string) $rotlvl) . '.gz';
 
 	if (lire_fichier($file, $r)) {
 		if (!$grammaire) {
@@ -88,7 +88,7 @@ function compilerRegle($val) {
 					preg_replace(
 						'/\s*([(+*|?])\s*/',
 						'\1',
-						preg_replace('/\s*#\w+\s*[,|]?\s*/', '', $val)
+						preg_replace('/\s*#\w+\s*[,|]?\s*/', '', (string) $val)
 					)
 				)
 			)
@@ -104,12 +104,12 @@ function analyser_dtd($loc, $avail, &$dtc) {
 	// si DTD locale, ignorer ce repertoire pour le moment
 	if ($avail == 'SYSTEM') {
 		$file = $loc;
-		if (_DIR_RACINE && str_starts_with($file, _DIR_RACINE)) {
-			$file = substr($file, strlen(_DIR_RACINE));
+		if (_DIR_RACINE && str_starts_with((string) $file, (string) _DIR_RACINE)) {
+			$file = substr((string) $file, strlen((string) _DIR_RACINE));
 		}
 		$file = find_in_path($file);
 	} else {
-		$file .= preg_replace('/[^\w.]/', '_', $loc);
+		$file .= preg_replace('/[^\w.]/', '_', (string) $loc);
 	}
 
 	$dtd = '';
@@ -168,7 +168,7 @@ function analyser_dtd_comment($dtd, &$dtc, $grammaire) {
 	// ejecter les commentaires, surtout quand ils contiennent du code.
 	// Option /s car sur plusieurs lignes parfois
 
-	if (!preg_match('/^<!--.*?-->\s*(.*)$/s', $dtd, $m)) {
+	if (!preg_match('/^<!--.*?-->\s*(.*)$/s', (string) $dtd, $m)) {
 		return -6;
 	}
 
@@ -176,7 +176,7 @@ function analyser_dtd_comment($dtd, &$dtc, $grammaire) {
 }
 
 function analyser_dtd_pi($dtd, &$dtc, $grammaire) {
-	if (!preg_match('/^<\?.*?>\s*(.*)$/s', $dtd, $m)) {
+	if (!preg_match('/^<\?.*?>\s*(.*)$/s', (string) $dtd, $m)) {
 		return -10;
 	}
 
@@ -185,7 +185,7 @@ function analyser_dtd_pi($dtd, &$dtc, $grammaire) {
 
 function analyser_dtd_lexeme($dtd, &$dtc, $grammaire) {
 
-	if (!preg_match(_REGEXP_ENTITY_DEF, $dtd, $m)) {
+	if (!preg_match(_REGEXP_ENTITY_DEF, (string) $dtd, $m)) {
 		return -9;
 	}
 
@@ -198,12 +198,12 @@ function analyser_dtd_lexeme($dtd, &$dtc, $grammaire) {
 		if (
 			$n[0] == 'PUBLIC' && !tester_url_absolue($n[1])
 		) {
-			$n[1] = substr($grammaire, 0, strrpos($grammaire, '/') + 1) . $n[1];
+			$n[1] = substr((string) $grammaire, 0, strrpos((string) $grammaire, '/') + 1) . $n[1];
 		}
 		analyser_dtd($n[1], $n[0], $dtc);
 	}
 
-	return ltrim(substr($dtd, strlen($m[0])));
+	return ltrim(substr((string) $dtd, strlen($m[0])));
 }
 
 // il faudrait gerer plus proprement les niveaux d'inclusion:
@@ -211,7 +211,7 @@ function analyser_dtd_lexeme($dtd, &$dtc, $grammaire) {
 
 function analyser_dtd_data($dtd, &$dtc, $grammaire) {
 
-	if (!preg_match(_REGEXP_INCLUDE_USE, $dtd, $m)) {
+	if (!preg_match(_REGEXP_INCLUDE_USE, (string) $dtd, $m)) {
 		return -11;
 	}
 	if (
@@ -230,7 +230,7 @@ function analyser_dtd_data($dtd, &$dtc, $grammaire) {
 }
 
 function analyser_dtd_notation($dtd, &$dtc, $grammaire) {
-	if (!preg_match('/^<!NOTATION.*?>\s*(.*)$/s', $dtd, $m)) {
+	if (!preg_match('/^<!NOTATION.*?>\s*(.*)$/s', (string) $dtd, $m)) {
 		return -8;
 	}
 	spip_log('analyser_dtd_notation a ecrire');
@@ -239,7 +239,7 @@ function analyser_dtd_notation($dtd, &$dtc, $grammaire) {
 }
 
 function analyser_dtd_entity($dtd, &$dtc, $grammaire) {
-	if (!preg_match(_REGEXP_ENTITY_DECL, $dtd, $m)) {
+	if (!preg_match(_REGEXP_ENTITY_DECL, (string) $dtd, $m)) {
 		return -2;
 	}
 
@@ -275,7 +275,7 @@ function analyser_dtd_entity($dtd, &$dtc, $grammaire) {
 			if (
 				$type == 'PUBLIC' && !str_contains($alt, '/')
 			) {
-				$alt = preg_replace(',/[^/]+$,', '/', $grammaire)
+				$alt = preg_replace(',/[^/]+$,', '/', (string) $grammaire)
 					. $alt;
 			}
 			$dtc->macros[$nom] = [$type, $alt];
@@ -295,7 +295,7 @@ function analyser_dtd_entity($dtd, &$dtc, $grammaire) {
 // Fin du controle en finElement
 
 function analyser_dtd_element($dtd, &$dtc, $grammaire) {
-	if (!preg_match('/^<!ELEMENT\s+([^>\s]+)([^>]*)>\s*(.*)$/s', $dtd, $m)) {
+	if (!preg_match('/^<!ELEMENT\s+([^>\s]+)([^>]*)>\s*(.*)$/s', (string) $dtd, $m)) {
 		return -3;
 	}
 
@@ -315,11 +315,11 @@ function analyser_dtd_element($dtd, &$dtc, $grammaire) {
 	} elseif ($val == '(?:ANY )') {
 		$dtc->regles[$nom] = 'ANY';
 	} else {
-		$last = substr($val, -1);
-		$dtc->regles[$nom] = preg_match('/ \w/', $val) || (!empty($last) && !str_contains('*+?', $last))
+		$last = substr((string) $val, -1);
+		$dtc->regles[$nom] = preg_match('/ \w/', (string) $val) || (!empty($last) && !str_contains('*+?', $last))
 			? "/^$val$/"
 			: $last;
-		$filles = array_values(preg_split('/\W+/', $val, -1, PREG_SPLIT_NO_EMPTY));
+		$filles = array_values(preg_split('/\W+/', (string) $val, -1, PREG_SPLIT_NO_EMPTY));
 
 		foreach ($filles as $k) {
 			if (!isset($dtc->peres[$k])) {
@@ -338,7 +338,7 @@ function analyser_dtd_element($dtd, &$dtc, $grammaire) {
 
 
 function analyser_dtd_attlist($dtd, &$dtc, $grammaire) {
-	if (!preg_match('/^<!ATTLIST\s+(\S+)\s+([^>]*)>\s*(.*)/s', $dtd, $m)) {
+	if (!preg_match('/^<!ATTLIST\s+(\S+)\s+([^>]*)>\s*(.*)/s', (string) $dtd, $m)) {
 		return -5;
 	}
 

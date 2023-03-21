@@ -114,11 +114,11 @@ function liste_objets_bloques($exec, $contexte = [], $auteur = null): string {
 			$auteur = $GLOBALS['visiteur_session'];
 		}
 		if (
-			$en_cours = trouver_objet_exec($exec)
-			and $en_cours['edition']
-			and $type = $en_cours['type']
-			and ((isset($contexte[$en_cours['id_table_objet']]) and $id = $contexte[$en_cours['id_table_objet']])
-				or $id = _request($en_cours['id_table_objet']))
+			($en_cours = trouver_objet_exec($exec))
+			&& $en_cours['edition']
+			&& ($type = $en_cours['type'])
+			&& (isset($contexte[$en_cours['id_table_objet']])
+			&& ($id = $contexte[$en_cours['id_table_objet']]) || ($id = _request($en_cours['id_table_objet'])))
 		) {
 			// marquer le fait que l'objet est ouvert en edition par toto
 			// a telle date ; une alerte sera donnee aux autres redacteurs
@@ -126,7 +126,7 @@ function liste_objets_bloques($exec, $contexte = [], $auteur = null): string {
 		}
 
 		$objets_ouverts = liste_drapeau_edition($auteur['id_auteur']);
-		if (count($objets_ouverts)) {
+		if ($objets_ouverts !== []) {
 			$res .= recuperer_fond('prive/objets/liste/objets-en-edition', [], ['ajax' => true]);
 		}
 	}
@@ -147,10 +147,13 @@ function liste_objets_bloques($exec, $contexte = [], $auteur = null): string {
 function fin_page() {
 	include_spip('inc/pipelines');
 	// avec &var_profile=1 on a le tableau de mesures SQL
-	$debug = ((_request('exec') !== 'valider_xml')
-		and ((_request('var_mode') == 'debug')
-			or (isset($GLOBALS['tableau_des_temps']) and $GLOBALS['tableau_des_temps'])
-			and isset($_COOKIE['spip_admin'])));
+	$debug = (_request('exec') !== 'valider_xml'
+		&& (
+			_request('var_mode') == 'debug'
+			|| isset($GLOBALS['tableau_des_temps']) && $GLOBALS['tableau_des_temps']
+			&& isset($_COOKIE['spip_admin'])
+		)
+	);
 	$t = '</div><div id="pied"><div class="largeur">'
 		. recuperer_fond('prive/squelettes/inclure/pied')
 		. '</div>'
@@ -173,7 +176,7 @@ function fin_page() {
  * @return string Code HTML
  **/
 function html_tests_js() {
-	if (_SPIP_AJAX and !defined('_TESTER_NOSCRIPT')) {
+	if (_SPIP_AJAX && !defined('_TESTER_NOSCRIPT')) {
 		// pour le pied de page (deja defini si on est validation XML)
 		define(
 			'_TESTER_NOSCRIPT',
@@ -203,7 +206,7 @@ function info_maj_spip() {
 		return '';
 	}
 
-	$maj = explode('|', $maj);
+	$maj = explode('|', (string) $maj);
 	// c'est une ancienne notif, on a fait la maj depuis !
 	if ($GLOBALS['spip_version_branche'] !== reset($maj)) {
 		return '';
@@ -280,7 +283,7 @@ function info_copyright() {
 function formulaire_recherche($page, $complement = '') {
 	$recherche = _request('recherche');
 	$recherche_aff = entites_html($recherche);
-	if (!strlen($recherche)) {
+	if (!strlen((string) $recherche)) {
 		$recherche_aff = _T('info_rechercher');
 		$onfocus = " onfocus=\"this.value='';\"";
 	} else {

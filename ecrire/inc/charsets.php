@@ -39,7 +39,7 @@ function init_charset(): void {
 	// en utf-8 chr(195).chr(160) = a` alors qu'en iso-latin chr(160) = nbsp
 	if (
 		!isset($GLOBALS['meta']['pcre_u'])
-		or (isset($_GET['var_mode']) and !isset($_GET['var_profile']))
+		|| isset($_GET['var_mode']) && !isset($_GET['var_profile'])
 	) {
 		include_spip('inc/meta');
 		ecrire_meta('pcre_u', (lire_config('charset', _DEFAULT_CHARSET) === 'utf-8') ? 'u' : '');
@@ -67,7 +67,7 @@ function load_charset($charset = 'AUTO') {
 	if ($charset == 'AUTO') {
 		$charset = $GLOBALS['meta']['charset'];
 	}
-	$charset = trim(strtolower($charset));
+	$charset = trim(strtolower((string) $charset));
 	if (isset($GLOBALS['CHARSET'][$charset])) {
 		return $charset;
 	}
@@ -142,11 +142,7 @@ function test_iconv(): bool {
 		if (!function_exists('iconv')) {
 			$iconv_ok = -1;
 		} else {
-			if (utf_32_to_unicode(@iconv('utf-8', 'utf-32', 'chaine de test')) === 'chaine de test') {
-				$iconv_ok = 1;
-			} else {
-				$iconv_ok = -1;
-			}
+			$iconv_ok = utf_32_to_unicode(@iconv('utf-8', 'utf-32', 'chaine de test')) === 'chaine de test' ? 1 : -1;
 		}
 	}
 
@@ -181,7 +177,7 @@ function corriger_caracteres_windows($texte, $charset = 'AUTO', $charset_cible =
 	}
 	if ($charset == 'utf-8') {
 		$p = chr(194);
-		if (strpos($texte, $p) == false) {
+		if (!str_contains($texte, $p)) {
 			return $texte;
 		}
 	} else {
@@ -255,7 +251,7 @@ function corriger_caracteres_windows($texte, $charset = 'AUTO', $charset_cible =
  *     texte converti
  **/
 function html2unicode($texte, $secure = false) {
-	if (strpos($texte, '&') === false) {
+	if (!str_contains($texte, '&')) {
 		return $texte;
 	}
 	static $trans = [];
@@ -329,7 +325,7 @@ function charset2unicode($texte, $charset = 'AUTO' /* $forcer: obsolete*/) {
 	if ($charset === '') {
 		$charset = 'iso-8859-1';
 	}
-	$charset = strtolower($charset);
+	$charset = strtolower((string) $charset);
 
 	switch ($charset) {
 		case 'utf-8':
@@ -346,13 +342,13 @@ function charset2unicode($texte, $charset = 'AUTO' /* $forcer: obsolete*/) {
 				$order = mb_detect_order();
 				try {
 					# mb_string connait-il $charset?
-					if ($order and mb_detect_order($charset)) {
+					if ($order && mb_detect_order($charset)) {
 						$s = mb_convert_encoding($texte, 'utf-8', $charset);
 						if ($s && $s != $texte) {
 							return utf_8_to_unicode($s);
 						}
 					}
-				} catch (\Error $e) {
+				} catch (\Error) {
 					// Le charset n'existe probablement pas
 				} finally {
 					mb_detect_order($order); # remettre comme precedemment
@@ -360,17 +356,12 @@ function charset2unicode($texte, $charset = 'AUTO' /* $forcer: obsolete*/) {
 			}
 
 			// Sinon, peut-etre connaissons-nous ce charset ?
-			if (!isset($trans[$charset])) {
-				if (
-					$cset = load_charset($charset)
-					and is_array($GLOBALS['CHARSET'][$cset])
-				) {
-					foreach ($GLOBALS['CHARSET'][$cset] as $key => $val) {
+			if (!isset($trans[$charset]) && (($cset = load_charset($charset)) && is_array($GLOBALS['CHARSET'][$cset]))) {
+				foreach ($GLOBALS['CHARSET'][$cset] as $key => $val) {
 						$trans[$charset][chr($key)] = '&#' . $val . ';';
 					}
-				}
 			}
-			if (isset($trans[$charset]) and is_countable($trans[$charset]) ? count($trans[$charset]) : 0) {
+			if (isset($trans[$charset]) && (is_countable($trans[$charset]) ? count($trans[$charset]) : 0)) {
 				return str_replace(array_keys($trans[$charset]), array_values($trans[$charset]), $texte);
 			}
 
@@ -440,9 +431,8 @@ function unicode2charset($texte, $charset = 'AUTO') {
 					}
 				}
 			}
-			$texte = str_replace(array_keys($trans[$charset]), array_values($trans[$charset]), $texte);
 
-			return $texte;
+			return str_replace(array_keys($trans[$charset]), array_values($trans[$charset]), $texte);
 	}
 }
 
@@ -468,8 +458,8 @@ function importer_charset($texte, $charset = 'AUTO') {
 		$texte = corriger_caracteres_windows($texte, 'iso-8859-1', $GLOBALS['meta']['charset']);
 		if (init_mb_string()) {
 			if (
-				$order = mb_detect_order() # mb_string connait-il $charset?
-				and mb_detect_order($charset)
+				($order = mb_detect_order())
+				&& mb_detect_order($charset)
 			) {
 				$s = mb_convert_encoding($texte, 'utf-8', $charset);
 			}
@@ -477,14 +467,13 @@ function importer_charset($texte, $charset = 'AUTO') {
 			return $s;
 		}
 		// Sinon, peut-etre connaissons-nous ce charset ?
-		if (!isset($trans[$charset])) {
-			if (
-				$cset = load_charset($charset)
-				and is_array($GLOBALS['CHARSET'][$cset])
-			) {
-				foreach ($GLOBALS['CHARSET'][$cset] as $key => $val) {
-					$trans[$charset][chr($key)] = unicode2charset('&#' . $val . ';');
-				}
+		if (
+			!isset($trans[$charset])
+			&& (($cset = load_charset($charset))
+			&& is_array($GLOBALS['CHARSET'][$cset]))
+		) {
+			foreach ($GLOBALS['CHARSET'][$cset] as $key => $val) {
+				$trans[$charset][chr($key)] = unicode2charset('&#' . $val . ';');
 			}
 		}
 		if (is_countable($trans[$charset]) ? count($trans[$charset]) : 0) {
@@ -582,10 +571,10 @@ function utf_8_to_unicode($source) {
 			while ($thisPos < $thisLen) {
 				$thisCharOrd = ord(substr($thisLetter, $thisPos, 1));
 				if ($thisPos == 0) {
-					$charNum = intval($thisCharOrd - $decrement[$thisLen]);
+					$charNum = (int) ($thisCharOrd - $decrement[$thisLen]);
 					$decimalCode += ($charNum << $shift[$thisLen][$thisPos]);
 				} else {
-					$charNum = intval($thisCharOrd - 128);
+					$charNum = (int) ($thisCharOrd - 128);
 					$decimalCode += ($charNum << $shift[$thisLen][$thisPos]);
 				}
 				$thisPos++;
@@ -656,7 +645,7 @@ function utf_32_to_unicode($source) {
  *    Caractère utf8 si trouvé, '' sinon
  **/
 function caractere_utf_8($num) {
-	$num = intval($num);
+	$num = (int) $num;
 	if ($num < 128) {
 		return chr($num);
 	}
@@ -687,14 +676,14 @@ function unicode_to_utf_8($texte) {
 	$vu = [];
 	if (
 		preg_match_all(
-			',&#0*([1-9][0-9][0-9]+);,S',
+			',&#0*([1-9]\d\d+);,S',
 			$texte,
 			$regs,
 			PREG_SET_ORDER
 		)
 	) {
 		foreach ($regs as $reg) {
-			if ($reg[1] > 127 and !isset($vu[$reg[0]])) {
+			if ($reg[1] > 127 && !isset($vu[$reg[0]])) {
 				$vu[$reg[0]] = caractere_utf_8($reg[1]);
 			}
 		}
@@ -731,7 +720,7 @@ function unicode_to_utf_8($texte) {
  **/
 function unicode_to_javascript($texte) {
 	$vu = [];
-	while (preg_match(',&#0*([0-9]+);,S', $texte, $regs) and !isset($vu[$regs[1]])) {
+	while (preg_match(',&#0*(\d+);,S', $texte, $regs) && !isset($vu[$regs[1]])) {
 		$num = $regs[1];
 		$vu[$num] = true;
 		$s = '\u' . sprintf('%04x', $num);
@@ -972,8 +961,9 @@ function transcoder_page($texte, $headers = ''): string {
 		// charset precise par le contenu (html)
 		preg_match(',<(meta|html|body)[^>]*charset[^>]*=[^>]*([#-_a-z0-9]+?),UimsS', $texte, $regs)
 		# eviter toute balise SPIP tel que #CHARSET ou #CONFIG d'un squelette
-		and !str_contains($regs[2], '#')
-		and $tmp = trim(strtolower($regs[2]))
+
+		&& !str_contains($regs[2], '#')
+		&& ($tmp = trim(strtolower($regs[2])))
 	) {
 		$charset = $tmp;
 	} elseif (preg_match(',charset=([-_a-z0-9]+),i', $headers, $regs)) {
@@ -993,11 +983,7 @@ function transcoder_page($texte, $headers = ''): string {
 		spip_log("charset: $charset");
 	} else {
 		// valeur par defaut
-		if (is_utf8($texte)) {
-			$charset = 'utf-8';
-		} else {
-			$charset = 'iso-8859-1';
-		}
+		$charset = is_utf8($texte) ? 'utf-8' : 'iso-8859-1';
 		spip_log("charset probable: $charset");
 	}
 

@@ -375,7 +375,7 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true) {
 				//
 				// nom_index (colonnes)
 				if ($def) {
-					$colonnes = substr($def, 1, -1);
+					$colonnes = substr((string) $def, 1, -1);
 					$nom_index = $colonne_origine;
 				} else {
 					// (colonne)
@@ -849,7 +849,7 @@ function _sqlite_last_error_from_link($link) {
 			$errs[2]
 				Le texte du message d'erreur
 		*/
-		if (ltrim($errs[0], '0')) { // 00000 si pas d'erreur
+		if (ltrim((string) $errs[0], '0')) { // 00000 si pas d'erreur
 			return "$errs[2]";
 		}
 	}
@@ -874,7 +874,7 @@ function spip_sqlite_errno($serveur = '') {
 
 	if ($link) {
 		$t = $link->errorInfo();
-		$s = ltrim($t[0], '0'); // 00000 si pas d'erreur
+		$s = ltrim((string) $t[0], '0'); // 00000 si pas d'erreur
 		if ($s) {
 			$s .= ' / ' . $t[1];
 		} // ajoute l'erreur du moteur SQLite
@@ -955,8 +955,8 @@ function spip_sqlite_fetch($r, $t = '', $serveur = '', $requeter = true) {
 	// c'est couteux : on ne verifie que la premiere ligne pour voir si on le fait ou non
 	if (str_contains(implode('', array_keys($retour)), '.')) {
 		foreach ($retour as $cle => $val) {
-			if (($pos = strpos($cle, '.')) !== false) {
-				$retour[substr($cle, $pos + 1)] = &$retour[$cle];
+			if (($pos = strpos((string) $cle, '.')) !== false) {
+				$retour[substr((string) $cle, $pos + 1)] = &$retour[$cle];
 				unset($retour[$cle]);
 			}
 		}
@@ -1297,7 +1297,7 @@ function spip_sqlite_terminer_transaction($serveur = '', $requeter = true) {
 function spip_sqlite_listdbs($serveur = '', $requeter = true) {
 	_sqlite_init();
 
-	if (!is_dir($d = substr(_DIR_DB, 0, -1))) {
+	if (!is_dir($d = substr((string) _DIR_DB, 0, -1))) {
 		return [];
 	}
 
@@ -1309,10 +1309,10 @@ function spip_sqlite_listdbs($serveur = '', $requeter = true) {
 		// pas de bases commencant pas sqlite
 		// (on s'en sert pour l'installation pour simuler la presence d'un serveur)
 		// les bases sont de la forme _sqliteX_tmp_spip_install.sqlite
-		if (strpos($b, '_sqlite')) {
+		if (strpos((string) $b, '_sqlite')) {
 			continue;
 		}
-		$bds[] = preg_replace(";.*/$pattern;iS", '$1', $b);
+		$bds[] = preg_replace(";.*/$pattern;iS", '$1', (string) $b);
 	}
 
 	return $bds;
@@ -1424,9 +1424,9 @@ function spip_sqlite_repair($table, $serveur = '', $requeter = true) {
 	) {
 		foreach ($desc['field'] as $c => $d) {
 			if (
-				preg_match(',^(tinytext|mediumtext|text|longtext|varchar|char),i', $d)
-				&& stripos($d, 'NOT NULL') !== false
-				&& stripos($d, 'DEFAULT') === false
+				preg_match(',^(tinytext|mediumtext|text|longtext|varchar|char),i', (string) $d)
+				&& stripos((string) $d, 'NOT NULL') !== false
+				&& stripos((string) $d, 'DEFAULT') === false
 				/* pas touche aux cles primaires */
 				&& (!isset($desc['key']['PRIMARY KEY']) || $desc['key']['PRIMARY KEY'] !== $c)
 			) {
@@ -1434,9 +1434,9 @@ function spip_sqlite_repair($table, $serveur = '', $requeter = true) {
 				spip_log("ALTER $q", 'repair' . _LOG_INFO_IMPORTANTE);
 			}
 			if (
-				preg_match(',^(INTEGER),i', $d)
-				&& stripos($d, 'NOT NULL') !== false
-				&& stripos($d, 'DEFAULT') === false
+				preg_match(',^(INTEGER),i', (string) $d)
+				&& stripos((string) $d, 'NOT NULL') !== false
+				&& stripos((string) $d, 'DEFAULT') === false
 				/* pas touche aux cles primaires */
 				&& (!isset($desc['key']['PRIMARY KEY']) || $desc['key']['PRIMARY KEY'] !== $c)
 			) {
@@ -1444,9 +1444,9 @@ function spip_sqlite_repair($table, $serveur = '', $requeter = true) {
 				spip_log("ALTER $q", 'repair' . _LOG_INFO_IMPORTANTE);
 			}
 			if (
-				preg_match(',^(datetime),i', $d)
-				&& stripos($d, 'NOT NULL') !== false
-				&& stripos($d, 'DEFAULT') === false
+				preg_match(',^(datetime),i', (string) $d)
+				&& stripos((string) $d, 'NOT NULL') !== false
+				&& stripos((string) $d, 'DEFAULT') === false
 				/* pas touche aux cles primaires */
 				&& (!isset($desc['key']['PRIMARY KEY']) || $desc['key']['PRIMARY KEY'] !== $c)
 			) {
@@ -1777,7 +1777,7 @@ function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true) {
 	// c'est une table
 	// il faut parser le create
 	if (!$vue) {
-		if (!preg_match(_SQLITE_RE_SHOW_TABLE, array_shift($a), $r)) {
+		if (!preg_match(_SQLITE_RE_SHOW_TABLE, (string) array_shift($a), $r)) {
 			return '';
 		} else {
 			$desc = $r[1];
@@ -1801,12 +1801,12 @@ function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true) {
 			// separer toutes les descriptions de champs, separes par des virgules
 			# /!\ explode peut exploser aussi DECIMAL(10,2) !
 			$k_precedent = null;
-			foreach (explode(',', $desc) as $v) {
+			foreach (explode(',', (string) $desc) as $v) {
 				preg_match('/^\s*([^\s]+)\s+(.*)/', $v, $r);
 				// Les cles de champs peuvent etre entourees
 				// de guillements doubles " , simples ', graves ` ou de crochets [ ],  ou rien.
 				// http://www.sqlite.org/lang_keywords.html
-				$k = strtolower(query_reinjecte_textes($r[1], $echaps)); // champ, "champ", [champ]...
+				$k = strtolower((string) query_reinjecte_textes($r[1], $echaps)); // champ, "champ", [champ]...
 				if ($char = strpbrk($k[0], '\'"[`')) {
 					$k = trim($k, $char);
 					if ($char == '[') {
@@ -1818,7 +1818,7 @@ function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true) {
 				// rustine pour DECIMAL(10,2)
 				// s'il y a une parenthèse fermante dans la clé
 				// ou dans la définition sans qu'il n'y ait une ouverture avant
-				if (str_contains($k, ')') || preg_match('/^[^\(]*\)/', $def)) {
+				if (str_contains($k, ')') || preg_match('/^[^\(]*\)/', (string) $def)) {
 					$fields[$k_precedent] .= ',' . $k . ' ' . $def;
 					continue;
 				}
@@ -1834,7 +1834,7 @@ function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true) {
 			}
 			// key inclues dans la requete
 			foreach (preg_split('/\)\s*(,|$)/', $namedkeys) as $v) {
-				if (preg_match('/^\s*([^(]*)\(([^(]*(\(\d+\))?)$/', $v, $r)) {
+				if (preg_match('/^\s*([^(]*)\(([^(]*(\(\d+\))?)$/', (string) $v, $r)) {
 					$k = str_replace('`', '', trim($r[1]));
 					$t = trim(strtolower(str_replace('`', '', $r[2])), '"');
 					if ($k && !isset($keys[$k])) {
@@ -1854,12 +1854,12 @@ function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true) {
 				. 'ORDER BY substr(type,2,1), name';
 			$a = spip_sqlite_query($query, $serveur, $requeter);
 			while ($r = spip_sqlite_fetch($a, null, $serveur)) {
-				$key = str_replace($nom_table . '_', '', $r['name']); // enlever le nom de la table ajoute a l'index
+				$key = str_replace($nom_table . '_', '', (string) $r['name']); // enlever le nom de la table ajoute a l'index
 				$keytype = 'KEY';
-				if (str_contains($r['sql'], 'UNIQUE INDEX')) {
+				if (str_contains((string) $r['sql'], 'UNIQUE INDEX')) {
 					$keytype = 'UNIQUE KEY';
 				}
-				$colonnes = preg_replace(',.*\((.*)\).*,', '$1', $r['sql']);
+				$colonnes = preg_replace(',.*\((.*)\).*,', '$1', (string) $r['sql']);
 				$keys[$keytype . ' ' . $key] = $colonnes;
 			}
 		}
@@ -2172,9 +2172,9 @@ function _sqlite_calculer_select_as($args) {
 			$res .= '  ' . $v;
 		} else {
 			if (!is_numeric($k)) {
-				$p = strpos($v, ' ');
+				$p = strpos((string) $v, ' ');
 				if ($p) {
-					$v = substr($v, 0, $p) . " AS '$k'" . substr($v, $p);
+					$v = substr((string) $v, 0, $p) . " AS '$k'" . substr((string) $v, $p);
 				} else {
 					$v .= " AS '$k'";
 				}
@@ -2353,8 +2353,8 @@ function _sqlite_modifier_table($table, $colonne, $opt = [], $serveur = '') {
 	// key...
 	$keys = [];
 	foreach ($def_origine['key'] as $c => $d) {
-		$c = str_replace($colonne_origine, $colonne_destination, $c);
-		$d = str_replace($colonne_origine, $colonne_destination, $d);
+		$c = str_replace($colonne_origine, $colonne_destination, (string) $c);
+		$d = str_replace($colonne_origine, $colonne_destination, (string) $d);
 		// seulement si on ne supprime pas la colonne !
 		if ($d) {
 			$keys[$c] = $d;
@@ -2369,8 +2369,8 @@ function _sqlite_modifier_table($table, $colonne, $opt = [], $serveur = '') {
 	$table_copie = ($meme_table) ? $table_tmp : $table_destination;
 	$autoinc = (isset($keys['PRIMARY KEY'])
 		&& $keys['PRIMARY KEY']
-		&& stripos($keys['PRIMARY KEY'], ',') === false
-		&& stripos($fields[$keys['PRIMARY KEY']], 'default') === false);
+		&& stripos((string) $keys['PRIMARY KEY'], ',') === false
+		&& stripos((string) $fields[$keys['PRIMARY KEY']], 'default') === false);
 
 	if (
 		$q = _sqlite_requete_create(
@@ -2542,8 +2542,8 @@ function _sqlite_remplacements_definitions_table($query, $autoinc = false) {
 		}
 	} elseif (is_array($query)) {
 		foreach ($query as $k => $q) {
-			$ai = ($autoinc ? $k == $autoinc : preg_match(',AUTO_INCREMENT,is', $q));
-			$query[$k] = preg_replace(array_keys($remplace), $remplace, $query[$k]);
+			$ai = ($autoinc ? $k == $autoinc : preg_match(',AUTO_INCREMENT,is', (string) $q));
+			$query[$k] = preg_replace(array_keys($remplace), $remplace, (string) $query[$k]);
 			if ($ai) {
 				$query[$k] = preg_replace(array_keys($remplace_autocinc), $remplace_autocinc, $query[$k]);
 			} else {
@@ -2620,10 +2620,10 @@ function _sqlite_requete_create(
 	$champ_pk = empty($cles[$pk]) ? '' : $cles[$pk];
 
 	foreach ($champs as $k => $v) {
-		if (false !== stripos($v, $pk)) {
+		if (false !== stripos((string) $v, $pk)) {
 			$champ_pk = $k;
 			// on n'en a plus besoin dans field, vu que defini dans key
-			$champs[$k] = preg_replace("/$pk/is", '', $champs[$k]);
+			$champs[$k] = preg_replace("/$pk/is", '', (string) $champs[$k]);
 			break;
 		}
 	}
@@ -2634,9 +2634,9 @@ function _sqlite_requete_create(
 	// Pas de DEFAULT 0 sur les cles primaires en auto-increment
 	if (
 		isset($champs[$champ_pk])
-		&& stripos($champs[$champ_pk], 'default 0') !== false
+		&& stripos((string) $champs[$champ_pk], 'default 0') !== false
 	) {
-		$champs[$champ_pk] = trim(str_ireplace('default 0', '', $champs[$champ_pk]));
+		$champs[$champ_pk] = trim(str_ireplace('default 0', '', (string) $champs[$champ_pk]));
 	}
 
 	$champs = _sqlite_remplacements_definitions_table($champs, $autoinc ? $champ_pk : false);
@@ -2708,7 +2708,7 @@ function _sqlite_ajouter_champs_timestamp($table, $couples, $desc = '', $serveur
 
 		$now = _sqlite_func_now(true);
 		foreach ($desc['field'] as $k => $v) {
-			if (str_starts_with(strtolower(ltrim($v)), 'timestamp')) {
+			if (str_starts_with(strtolower(ltrim((string) $v)), 'timestamp')) {
 				$tables[$table]['desc'][$k] = $v;
 				$tables[$table]['valeur'][$k] = _sqlite_calculer_cite($now, $tables[$table]['desc'][$k]);
 			}

@@ -49,7 +49,7 @@ function nettoyer_caracteres_mail($t) {
 
 	$t = filtrer_entites($t);
 
-	if ($GLOBALS['meta']['charset'] <> 'utf-8') {
+	if ($GLOBALS['meta']['charset'] != 'utf-8') {
 		$t = str_replace(
 			['&#8217;', '&#8220;', '&#8221;'],
 			["'", '"', '"'],
@@ -57,13 +57,11 @@ function nettoyer_caracteres_mail($t) {
 		);
 	}
 
-	$t = str_replace(
+	return str_replace(
 		['&mdash;', '&endash;'],
 		['--', '-'],
 		$t
 	);
-
-	return $t;
 }
 
 /**
@@ -120,7 +118,7 @@ function inc_envoyer_mail_dist($destinataire, $sujet, $corps, $from = '', $heade
 		if (is_array($headers)) {
 			$headers = implode("\n", $headers);
 		}
-		if (isset($corps['pieces_jointes']) and function_exists('mail_embarquer_pieces_jointes')) {
+		if (isset($corps['pieces_jointes']) && function_exists('mail_embarquer_pieces_jointes')) {
 			$parts = mail_embarquer_pieces_jointes($corps['pieces_jointes']);
 		}
 	} else {
@@ -132,8 +130,8 @@ function inc_envoyer_mail_dist($destinataire, $sujet, $corps, $from = '', $heade
 	}
 
 	// ceci est la RegExp NO_REAL_NAME faisant hurler SpamAssassin
-	if (preg_match('/^["\s]*\<?\S+\@\S+\>?\s*$/', $from)) {
-		$from .= ' (' . str_replace(')', '', translitteration(str_replace('@', ' at ', $from))) . ')';
+	if (preg_match('/^["\s]*\<?\S+\@\S+\>?\s*$/', (string) $from)) {
+		$from .= ' (' . str_replace(')', '', translitteration(str_replace('@', ' at ', (string) $from))) . ')';
 	}
 
 	// nettoyer les &eacute; &#8217, &emdash; etc...
@@ -152,16 +150,16 @@ function inc_envoyer_mail_dist($destinataire, $sujet, $corps, $from = '', $heade
 		mb_internal_encoding('utf-8');
 	}
 
-	$headers = $headers ?? '';
-	if (function_exists('wordwrap') && (preg_match(',multipart/mixed,', $headers) == 0)) {
+	$headers ??= '';
+	if (function_exists('wordwrap') && (preg_match(',multipart/mixed,', (string) $headers) == 0)) {
 		$texte = wordwrap($texte);
 	}
 
 	[$headers, $texte] = mail_normaliser_headers($headers, $from, $destinataire, $texte, $parts);
 
 	if (_OS_SERVEUR == 'windows') {
-		$texte = preg_replace("@\r*\n@", "\r\n", $texte);
-		$headers = preg_replace("@\r*\n@", "\r\n", $headers);
+		$texte = preg_replace("@\r*\n@", "\r\n", (string) $texte);
+		$headers = preg_replace("@\r*\n@", "\r\n", (string) $headers);
 		$sujet = preg_replace("@\r*\n@", "\r\n", $sujet);
 	}
 
@@ -176,7 +174,7 @@ function inc_envoyer_mail_dist($destinataire, $sujet, $corps, $from = '', $heade
 		}
 	}
 
-	return @mail($destinataire, $sujet, $texte, $headers);
+	return @mail((string) $destinataire, $sujet, (string) $texte, $headers);
 }
 
 /**
@@ -193,7 +191,7 @@ function mail_normaliser_headers($headers, $from, $to, $texte, $parts = '') {
 	$charset = $GLOBALS['meta']['charset'];
 
 	// Ajouter le Content-Type et consort s'il n'y est pas deja
-	if (strpos($headers, 'Content-Type: ') === false) {
+	if (!str_contains($headers, 'Content-Type: ')) {
 		$type =
 			"Content-Type: text/plain;charset=\"$charset\";\n" .
 			"Content-Transfer-Encoding: 8bit\n";
@@ -203,20 +201,15 @@ function mail_normaliser_headers($headers, $from, $to, $texte, $parts = '') {
 
 	// calculer un identifiant unique
 	// Marie Toto <Marie@toto.com> => @toto.com
-	if (preg_match('/@[^\s>]+/', $from, $domain)) {
-		$domain = $domain[0];
-	}
-	else {
-		$domain = '@unknown-' . md5($from) . '.org';
-	}
+	$domain = preg_match('/@[^\s>]+/', $from, $domain) ? $domain[0] : '@unknown-' . md5($from) . '.org';
 	$uniq = random_int(0, mt_getrandmax()) . '_' . md5($to . $texte) . $domain;
 
 	// Si multi-part, s'en servir comme borne ...
 	if ($parts) {
 		$texte = "--$uniq\n$type\n" . $texte . "\n";
 		foreach ($parts as $part) {
-			$n = strlen($part[1]) . ($part[0] ? "\n" : '');
-			$e = join("\n", $part[0]);
+			$n = strlen((string) $part[1]) . ($part[0] ? "\n" : '');
+			$e = implode("\n", $part[0]);
 			$texte .= "\n--$uniq\nContent-Length: $n$e\n\n" . $part[1];
 		}
 		$texte .= "\n\n--$uniq--\n";
@@ -231,7 +224,7 @@ function mail_normaliser_headers($headers, $from, $to, $texte, $parts = '') {
 
 	// indispensable pour les sites qui collent d'office From: serveur-http
 	// sauf si deja mis par l'envoyeur
-	$rep = (strpos($headers, 'Reply-To:') !== false) ? '' : "Reply-To: $from\n";
+	$rep = (str_contains($headers, 'Reply-To:')) ? '' : "Reply-To: $from\n";
 
 	// Nettoyer les en-tetes envoyees
 	// Ajouter le \n final

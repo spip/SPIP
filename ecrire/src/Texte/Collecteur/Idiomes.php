@@ -109,16 +109,16 @@ class Idiomes extends AbstractCollecteur {
 					if (strlen($desc->texte ?? '')) {
 						$trad = code_echappement($desc->texte, 'idiome', false);
 						if ($l !== $lang) {
-							$trad = str_replace("'", '"', inserer_attribut($trad, 'lang', $l));
+							$trad = str_replace("'", '"', (string) inserer_attribut($trad, 'lang', $l));
 						}
 						if (lang_dir($l) !== lang_dir($lang)) {
-							$trad = str_replace("'", '"', inserer_attribut($trad, 'dir', lang_dir($l)));
+							$trad = str_replace("'", '"', (string) inserer_attribut($trad, 'dir', lang_dir($l)));
 						}
 						if (!$echappe_span) {
 							$trad = echappe_retour($trad, 'idiome');
 						}
-						$texte = substr_replace($texte, $trad, $idiome['pos'] + $offset_pos, $idiome['length']);
-						$offset_pos += strlen($trad) - $idiome['length'];
+						$texte = substr_replace($texte, (string) $trad, $idiome['pos'] + $offset_pos, $idiome['length']);
+						$offset_pos += strlen((string) $trad) - $idiome['length'];
 					}
 				}
 			}

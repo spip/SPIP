@@ -31,16 +31,12 @@ include_spip('inc/texte');
  * @uses ajax_retour()
  **/
 function exec_rechercher_dist() {
-	$id = intval(_request('id'));
-	$exclus = intval(_request('exclus'));
+	$id = (int) _request('id');
+	$exclus = (int) _request('exclus');
 	$rac = spip_htmlentities(_request('rac'));
 	$type = _request('type');
 	$do = _request('do');
-	if (preg_match('/^\w*$/', $do)) {
-		$r = exec_rechercher_args($id, $type, $exclus, $rac, $do);
-	} else {
-		$r = '';
-	}
+	$r = preg_match('/^\w*$/', (string) $do) ? exec_rechercher_args($id, $type, $exclus, $rac, $do) : '';
 	ajax_retour($r);
 }
 
@@ -69,9 +65,9 @@ function exec_rechercher_args($id, $type, $exclus, $rac, $do) {
 		foreach ($where as $k => $v) {
 			$where[$k] = "'%" . substr(str_replace('%', '\%', sql_quote($v, '', 'string')), 1, -1) . "%'";
 		}
-		$where_titre = ('(titre LIKE ' . join(' AND titre LIKE ', $where) . ')');
-		$where_desc = ('(descriptif LIKE ' . join(' AND descriptif LIKE ', $where) . ')');
-		$where_id = ('(id_rubrique = ' . intval($type) . ')');
+		$where_titre = ('(titre LIKE ' . implode(' AND titre LIKE ', $where) . ')');
+		$where_desc = ('(descriptif LIKE ' . implode(' AND descriptif LIKE ', $where) . ')');
+		$where_id = ('(id_rubrique = ' . (int) $type . ')');
 
 		if ($exclus) {
 			include_spip('inc/rubriques');
@@ -98,7 +94,7 @@ function exec_rechercher_args($id, $type, $exclus, $rac, $do) {
 				if (!isset($points[$id_rubrique])) {
 					$points[$id_rubrique] = 0;
 				}
-				$points[$id_rubrique] = $points[$id_rubrique] + $point;
+				$points[$id_rubrique] += $point;
 			}
 		}
 	}
@@ -148,9 +144,9 @@ function proposer_item($ids, $titles, $rac, $type, $do) {
 
 	$ondbClick = "$do(this.firstChild.firstChild.nodeValue,this.firstChild.title,'selection_rubrique', 'id_parent');";
 
-	foreach ($ids as $id => $bof) {
+	foreach (array_keys($ids) as $id) {
 		$titre = strtr(
-			str_replace("'", '&#8217;', str_replace('"', '&#34;', textebrut($titles[$id]['titre']))),
+			str_replace("'", '&#8217;', str_replace('"', '&#34;', (string) textebrut($titles[$id]['titre']))),
 			"\n\r",
 			'  '
 		);

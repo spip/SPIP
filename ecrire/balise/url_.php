@@ -77,7 +77,7 @@ function generer_generer_url_arg($type, $p, $_id) {
 		if (function_exists($f = 'generer_generer_url_' . $s)) {
 			return $f($type, $_id, $s);
 		}
-		if (!$GLOBALS['connexions'][strtolower($s)]['spip_connect_version']) {
+		if (!$GLOBALS['connexions'][strtolower((string) $s)]['spip_connect_version']) {
 			return null;
 		}
 		$s = _q($s);
@@ -128,7 +128,7 @@ function balise_URL__dist($p) {
 	} elseif ($f = charger_fonction($nom, 'balise', true)) {
 		return $f($p);
 	} else {
-		$nom = strtolower($nom);
+		$nom = strtolower((string) $nom);
 		$code = generer_generer_url(substr($nom, 4), $p);
 		$code = champ_sql($nom, $p, $code);
 		$p->code = $code;
@@ -163,11 +163,7 @@ function balise_URL__dist($p) {
 function balise_URL_ARTICLE_dist($p) {
 
 	// Cas particulier des boucles (SYNDIC_ARTICLES)
-	if ($p->type_requete == 'syndic_articles') {
-		$code = champ_sql('url', $p);
-	} else {
-		$code = generer_generer_url('article', $p);
-	}
+	$code = $p->type_requete == 'syndic_articles' ? champ_sql('url', $p) : generer_generer_url('article', $p);
 
 	$p->code = $code;
 	if (!$p->etoile) {
@@ -271,15 +267,15 @@ function balise_URL_PAGE_dist($p) {
 		// si une fonction de generation des url a ete definie pour ce connect l'utiliser
 		// elle devra aussi traiter le cas derogatoire type=page
 		if (function_exists($f = 'generer_generer_url_' . $s)) {
-			if ($args and $args !== "''") {
+			if ($args && $args !== "''") {
 				$code .= ", $args";
 			}
 			$code = $f('page', $code, $s);
 			$p->code = $code;
 			return $p;
 		}
-		$s = 'connect=' . addslashes($s);
-		$args = (($args and $args !== "''") ? "$args . '&$s'" : "'$s'");
+		$s = 'connect=' . addslashes((string) $s);
+		$args = (($args && $args !== "''") ? "$args . '&$s'" : "'$s'");
 	}
 
 	if (!$code) {
@@ -333,7 +329,7 @@ function balise_URL_ECRIRE_dist($p) {
 			$args = "''";
 		}
 		$noentities = $p->etoile ? ', true' : '';
-		if (($args != "''") or $noentities) {
+		if ($args != "''" || $noentities) {
 			$fonc .= ",$args$noentities";
 		}
 	}

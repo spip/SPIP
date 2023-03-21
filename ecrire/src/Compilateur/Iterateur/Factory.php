@@ -51,7 +51,7 @@ class Factory
 			// chercher la classe d'iterateur Iterateur/XXX
 			// definie dans le fichier src/Compilateur/Iterateur/xxx.php
 			// FIXME: déclarer quelque part les iterateurs supplémentaires
-			$class = __NAMESPACE__ . '\\' . ucfirst(strtolower($iterateur));
+			$class = __NAMESPACE__ . '\\' . ucfirst(strtolower((string) $iterateur));
 			if (!class_exists($class)) {
 				// historique
 				// Chercher IterateurXXX

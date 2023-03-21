@@ -127,7 +127,7 @@ function signale_edition($id, $auteur, $type = 'article') {
 	$nom = $auteur['nom'] ?? $GLOBALS['ip'];
 	$id_a = $auteur['id_auteur'] ?? $GLOBALS['ip'];
 
-	if (!isset($edition[$type][$id]) or !is_array($edition[$type][$id])) {
+	if (!isset($edition[$type][$id]) || !is_array($edition[$type][$id])) {
 		$edition[$type][$id] = [];
 	}
 	$edition[$type][$id][$id_a][$nom] = time();
@@ -176,7 +176,7 @@ function mention_qui_edite($id, $type = 'article'): array {
 
 		// format lie a la chaine de langue 'avis_article_modifie'
 		return [
-			'nom_auteur_modif' => join(' | ', $auteurs),
+			'nom_auteur_modif' => implode(' | ', $auteurs),
 			'date_diff' => ceil((time() - $quand) / 60)
 		];
 	}
@@ -201,8 +201,8 @@ function liste_drapeau_edition($id_auteur) {
 		foreach ($data as $id => $auteurs) {
 			if (
 				isset($auteurs[$id_auteur])
-				and is_array($auteurs[$id_auteur]) // precaution
-				and (array_pop($auteurs[$id_auteur]) > time() - 3600)
+				&& is_array($auteurs[$id_auteur])
+				&& array_pop($auteurs[$id_auteur]) > time() - 3600
 			) {
 				$objets_ouverts[] = [
 					'objet' => $objet,
@@ -258,7 +258,7 @@ function debloquer_edition($id_auteur, $id_objet, $type = 'article') {
 			foreach ($data as $id => $auteurs) {
 				if (
 					$id == $id_objet
-					and isset($auteurs[$id_auteur])
+					&& isset($auteurs[$id_auteur])
 				) {
 					unset($edition[$objet][$id][$id_auteur]);
 					ecrire_tableau_edition($edition);

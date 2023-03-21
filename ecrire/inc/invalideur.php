@@ -45,9 +45,9 @@ function taille_du_cache() {
 	$time = $GLOBALS['meta']['cache_mark'] ?? 0;
 	for ($i = 0; $i < 256; $i++) {
 		$dir = _DIR_CACHE . sprintf('%02s', dechex($i));
-		if (@is_dir($dir) and is_readable($dir) and $d = opendir($dir)) {
+		if (@is_dir($dir) && is_readable($dir) && ($d = opendir($dir))) {
 			while (($f = readdir($d)) !== false) {
-				if (preg_match(',^[[0-9a-f]+\.cache$,S', $f) and $a = stat("$dir/$f")) {
+				if (preg_match(',^[[0-9a-f]+\.cache$,S', $f) && ($a = stat("$dir/$f"))) {
 					$n++;
 					if ($a['mtime'] >= $time) {
 						if ($a['blocks'] > 0) {
@@ -60,7 +60,7 @@ function taille_du_cache() {
 			}
 		}
 		if ($n > 500) {
-			return intval(256 * $t / (1 + $i));
+			return (int) (256 * $t / (1 + $i));
 		}
 	}
 	return $t;
@@ -138,7 +138,7 @@ function inc_suivre_invalideur_dist($cond, $modif = true) {
  *     Nombre de fichiers supprimés
  **/
 function purger_repertoire($dir, $options = []) {
-	if (!is_dir($dir) or !is_readable($dir)) {
+	if (!is_dir($dir) || !is_readable($dir)) {
 		return 0;
 	}
 
@@ -157,14 +157,13 @@ function purger_repertoire($dir, $options = []) {
 
 	while (($fichier = @readdir($handle)) !== false) {
 		// Eviter ".", "..", ".htaccess", ".svn" etc & CACHEDIR.TAG
-		if ($fichier[0] == '.' or $fichier == 'CACHEDIR.TAG') {
+		if ($fichier[0] == '.' || $fichier == 'CACHEDIR.TAG') {
 			continue;
 		}
 		$chemin = "$dir/$fichier";
 		if (is_file($chemin)) {
 			if (
-				(!isset($options['atime']) or (@fileatime($chemin) < $options['atime']))
-				and (!isset($options['mtime']) or (@filemtime($chemin) < $options['mtime']))
+				(!isset($options['atime']) || @fileatime($chemin) < $options['atime']) && (!isset($options['mtime']) || @filemtime($chemin) < $options['mtime'])
 			) {
 				supprimer_fichier($chemin);
 				$total++;
@@ -182,7 +181,7 @@ function purger_repertoire($dir, $options = []) {
 			}
 		}
 
-		if (isset($options['limit']) and $total >= $options['limit']) {
+		if (isset($options['limit']) && $total >= $options['limit']) {
 			break;
 		}
 	}
@@ -201,8 +200,8 @@ function retire_cache($cache) {
 
 	if (
 		preg_match(
-			',^([0-9a-f]/)?([0-9]+/)?[0-9a-f]+\.cache(\.gz)?$,i',
-			$cache
+			',^([0-9a-f]/)?(\d+/)?[0-9a-f]+\.cache(\.gz)?$,i',
+			(string) $cache
 		)
 	) {
 		// supprimer le fichier (de facon propre)

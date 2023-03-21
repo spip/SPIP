@@ -23,11 +23,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param array $opt
  */
 function inc_journal_dist($phrase, $opt = []) {
-	if (!strlen($phrase)) {
+	if (!strlen((string) $phrase)) {
 		return;
 	}
 	if ($opt) {
-		$phrase .= ' :: ' . str_replace("\n", ' ', join(', ', $opt));
+		$phrase .= ' :: ' . str_replace("\n", ' ', implode(', ', $opt));
 	}
 	spip_log($phrase, 'journal');
 }

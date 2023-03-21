@@ -64,7 +64,7 @@ function exec_upgrade_dist() {
 			$GLOBALS['meta']['version_installee'] = 0.0;
 		} else {
 			$GLOBALS['meta']['version_installee'] =
-				(double)str_replace(',', '.', $GLOBALS['meta']['version_installee']);
+				(double) str_replace(',', '.', (string) $GLOBALS['meta']['version_installee']);
 		}
 		# NB: str_replace car, sur club-internet, il semble que version_installe soit
 		# enregistree au format '1,812' et non '1.812'

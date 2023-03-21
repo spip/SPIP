@@ -33,14 +33,14 @@ function action_desinstaller_plugin_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
-	[$dir_plugins, $plugin] = explode('::', $arg);
+	[$dir_plugins, $plugin] = explode('::', (string) $arg);
 	$dir_type = '_DIR_PLUGINS';
-	if (defined('_DIR_PLUGINS_SUPPL') and $dir_plugins == _DIR_PLUGINS_SUPPL) {
+	if (defined('_DIR_PLUGINS_SUPPL') && $dir_plugins == _DIR_PLUGINS_SUPPL) {
 		$dir_type = '_DIR_PLUGINS_SUPPL';
 	}
 	$installer_plugins = charger_fonction('installer', 'plugins');
 	$infos = $installer_plugins($plugin, 'uninstall', $dir_type);
-	if ($infos and !$infos['install_test'][0]) {
+	if ($infos && !$infos['install_test'][0]) {
 		include_spip('inc/plugin');
 		ecrire_plugin_actifs([$plugin], false, 'enleve');
 		$erreur = '';
@@ -52,7 +52,7 @@ function action_desinstaller_plugin_dist() {
 		if ($erreur) {
 			$redirect = parametre_url($redirect, 'erreur', $erreur);
 		}
-		$redirect = str_replace('&amp;', '&', $redirect);
+		$redirect = str_replace('&amp;', '&', (string) $redirect);
 		redirige_par_entete($redirect);
 	}
 }

@@ -75,7 +75,7 @@ function balise_LOGO__dist($p) {
 	$align = $lien = '';
 	$mode_logo = '';
 
-	if ($p->param and !$p->param[0][0]) {
+	if ($p->param && !$p->param[0][0]) {
 		$params = $p->param[0];
 		array_shift($params);
 		foreach ($params as $a) {
@@ -94,8 +94,8 @@ function balise_LOGO__dist($p) {
 		}
 	}
 
-	$coord_x = !$coord ? 0 : intval(array_shift($coord));
-	$coord_y = !$coord ? 0 : intval(array_shift($coord));
+	$coord_x = $coord ? (int) array_shift($coord) : 0;
+	$coord_y = $coord ? (int) array_shift($coord) : 0;
 
 	if ($p->etoile === '*') {
 		include_spip('balise/url_');
@@ -131,7 +131,7 @@ function balise_LOGO__dist($p) {
 	}
 
 	// demande de reduction sur logo avec ecriture spip 2.1 : #LOGO_xxx{200, 0}
-	if ($coord_x or $coord_y) {
+	if ($coord_x || $coord_y) {
 		$code = "filtrer('image_graver',filtrer('image_reduire'," . $code . ", '$coord_x', '$coord_y'))";
 	}
 

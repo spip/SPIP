@@ -33,8 +33,8 @@ function action_etre_webmestre_dist() {
 
 	if (
 		time() - $time < 15 * 60
-		and $GLOBALS['visiteur_session']['statut'] == '0minirezo'
-		and $GLOBALS['visiteur_session']['webmestre'] !== 'oui'
+		&& $GLOBALS['visiteur_session']['statut'] == '0minirezo'
+		&& $GLOBALS['visiteur_session']['webmestre'] !== 'oui'
 	) {
 		$action = _T('info_admin_etre_webmestre');
 		$admin = charger_fonction('admin', 'inc');
@@ -53,7 +53,7 @@ function action_etre_webmestre_dist() {
  * @return void
  */
 function base_etre_webmestre_dist() {
-	if ($GLOBALS['visiteur_session']['statut'] == '0minirezo' and $GLOBALS['visiteur_session']['webmestre'] !== 'oui') {
+	if ($GLOBALS['visiteur_session']['statut'] == '0minirezo' && $GLOBALS['visiteur_session']['webmestre'] !== 'oui') {
 		include_spip('action/editer_auteur');
 		auteur_instituer($GLOBALS['visiteur_session']['id_auteur'], ['webmestre' => 'oui'], true);
 	}

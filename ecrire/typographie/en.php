@@ -18,7 +18,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function typographie_en_dist($letexte) {
 
 	// zouli apostrophe
-	$letexte = str_replace("'", '&#8217;', $letexte);
+	$letexte = str_replace("'", '&#8217;', (string) $letexte);
 
 	$cherche1 = [
 		'/ --?,/S'

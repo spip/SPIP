@@ -478,9 +478,9 @@ function quete_logo_file($row, $connect = null) {
 	}
 	// si c'est une vignette type doc, la renvoyer direct
 	if (
-		strcmp($logo, _DIR_PLUGINS) == 0
-		|| strcmp($logo, _DIR_PLUGINS_DIST) == 0
-		|| strcmp($logo, _DIR_RACINE . 'prive/') == 0
+		strcmp((string) $logo, (string) _DIR_PLUGINS) == 0
+		|| strcmp((string) $logo, (string) _DIR_PLUGINS_DIST) == 0
+		|| strcmp((string) $logo, _DIR_RACINE . 'prive/') == 0
 	) {
 		return $logo;
 	}

@@ -39,7 +39,7 @@ function action_supprimer_lien_dist($arg = null) {
 		$arg = $securiser_action();
 	}
 
-	$arg = explode('-', $arg);
+	$arg = explode('-', (string) $arg);
 	[$objet_source, $ids, $objet_lie, $idl] = $arg;
 
 	include_spip('action/editer_liens');

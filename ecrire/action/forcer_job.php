@@ -29,8 +29,8 @@ function action_forcer_job_dist() {
 	$id_job = $securiser_action();
 
 	if (
-		$id_job = intval($id_job)
-		and autoriser('forcer', 'job', $id_job)
+		($id_job = (int) $id_job)
+		&& autoriser('forcer', 'job', $id_job)
 	) {
 		include_spip('inc/queue');
 		include_spip('inc/genie');

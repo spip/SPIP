@@ -299,7 +299,7 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem = 0, $do
 		$titre = $type == 'auteur' ? '&nbsp;' : _T('info_racine_site');
 	}
 
-	$titre = str_replace('&amp;', '&', entites_html(textebrut(typo($titre))));
+	$titre = str_replace('&amp;', '&', (string) entites_html(textebrut(typo($titre))));
 	$init = " disabled='disabled' type='text' value=\"" . $titre . "\"\nstyle='width:300px;'";
 
 	$url = generer_url_ecrire('selectionner', "id=$id_rubrique&type=$type&do=$do"

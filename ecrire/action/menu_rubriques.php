@@ -50,15 +50,15 @@ function action_menu_rubriques_dist() {
 		exit;
 	}
 
-	if ($date = intval(_request('date'))) {
+	if ($date = (int) _request('date')) {
 		header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $date) . ' GMT');
 	}
 
 	$r = gen_liste_rubriques();
 	if (
 		!$r
-		and isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
-		and !strstr($_SERVER['SERVER_SOFTWARE'], 'IIS/')
+		&& isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
+		&& !strstr((string) $_SERVER['SERVER_SOFTWARE'], 'IIS/')
 	) {
 		include_spip('inc/headers');
 		header('Content-Type: text/html; charset=' . $GLOBALS['meta']['charset']);
@@ -98,7 +98,7 @@ function menu_rubriques($complet = true) {
 	}
 	$arr_low = extraire_article(0, $GLOBALS['db_art_cache']);
 
-	$total_lignes = $i = sizeof($arr_low);
+	$total_lignes = $i = count($arr_low);
 
 	if ($i > 0) {
 		$nb_col = min(8, ceil($total_lignes / 30));
@@ -156,7 +156,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $profondeur = 
 	}
 
 	$arr_rub = extraire_article($id_rubrique, $GLOBALS['db_art_cache']);
-	$i = sizeof($arr_rub);
+	$i = count($arr_rub);
 	if (!$i) {
 		$zmax++;
 
@@ -179,10 +179,9 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $profondeur = 
 			$i++;
 		}
 	}
-	$ret .= "</ul></li>\n";
 	$zmax++;
 
-	return $ret;
+	return $ret . "</ul></li>\n";
 }
 
 
