@@ -82,26 +82,26 @@ function precharger_objet($type, $id_objet, $id_rubrique = 0, $lier_trad = 0, $c
 	// admin restreint ==> sa premiere rubrique
 	// autre ==> la derniere rubrique cree
 	if ($is_rubrique && !$row['id_rubrique']) {
-    	if ($GLOBALS['connect_id_rubrique']) {
-  			$row['id_rubrique'] = $id_rubrique = current($GLOBALS['connect_id_rubrique']);
-  		} else {
-  			$row_rub = sql_fetsel('id_rubrique', 'spip_rubriques', '', '', 'id_rubrique DESC', 1);
-  			$row['id_rubrique'] = $id_rubrique = $row_rub['id_rubrique'];
-  		}
-    	if (!autoriser('creerarticledans', 'rubrique', $row['id_rubrique'])) {
+		if ($GLOBALS['connect_id_rubrique']) {
+			$row['id_rubrique'] = $id_rubrique = current($GLOBALS['connect_id_rubrique']);
+		} else {
+			$row_rub = sql_fetsel('id_rubrique', 'spip_rubriques', '', '', 'id_rubrique DESC', 1);
+			$row['id_rubrique'] = $id_rubrique = $row_rub['id_rubrique'];
+		}
+		if (!autoriser('creerarticledans', 'rubrique', $row['id_rubrique'])) {
 			// manque de chance, la rubrique n'est pas autorisee, on cherche un des secteurs autorises
 			$res = sql_select('id_rubrique', 'spip_rubriques', 'id_parent=0');
 			while (!autoriser('creerarticledans', 'rubrique', $row['id_rubrique']) && $row_rub = sql_fetch($res)) {
 				$row['id_rubrique'] = $row_rub['id_rubrique'];
 			}
 		}
- 	}
+	}
 
 	// recuperer le secteur, pour affecter les bons champs extras
 	if ($id_rubrique && $is_secteur && !$row['id_secteur']) {
-    	$row_rub = sql_getfetsel('id_secteur', 'spip_rubriques', 'id_rubrique=' . sql_quote($id_rubrique));
-    	$row['id_secteur'] = $row_rub;
- 	}
+		$row_rub = sql_getfetsel('id_secteur', 'spip_rubriques', 'id_rubrique=' . sql_quote($id_rubrique));
+		$row['id_secteur'] = $row_rub;
+	}
 
 	return $row;
 }

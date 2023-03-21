@@ -59,9 +59,9 @@ if (
 	(_request('action') || _request('var_ajax') || _request('formulaire_action'))
 	&& !autoriser_sans_cookie($exec)
 ) {
-    // Charger l'aiguilleur qui va mettre sur la bonne voie les traitements derogatoires
-    include_spip('public/aiguiller');
-    if (
+	// Charger l'aiguilleur qui va mettre sur la bonne voie les traitements derogatoires
+	include_spip('public/aiguiller');
+	if (
 		// cas des appels actions ?action=xxx
 		traiter_appels_actions()
 		// cas des hits ajax sur les inclusions ajax

@@ -910,8 +910,7 @@ function compose_filtres(&$p, $code) {
 
 // Filtres et,ou,oui,non,sinon,xou,xor,and,or,not,yes
 // et comparateurs
-function filtre_logique($fonc, $code, $arg)
-{
+function filtre_logique($fonc, $code, $arg) {
 	return match (true) {
 		in_array($fonc, $GLOBALS['table_criteres_infixes']) => "($code $fonc $arg)",
 		$fonc == 'and' || $fonc == 'et' => "((($code) AND ($arg)) ?' ' :'')",

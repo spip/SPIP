@@ -312,9 +312,8 @@ function autoriser_defaut_dist(string $faire, string $type, $id, array $qui, arr
  * @param array $opt Options de cette autorisation
  * @return bool true s'il a le droit, false sinon
  */
-function autoriser_loger_dist(string $faire, string $type, $id, array $qui, array $opt) : bool
-{
-    return $qui['statut'] !== '5poubelle';
+function autoriser_loger_dist(string $faire, string $type, $id, array $qui, array $opt): bool {
+	return $qui['statut'] !== '5poubelle';
 }
 
 /**
@@ -1349,9 +1348,8 @@ function autoriser_niet_dist(string $faire, string $type, $id, array $qui, array
  * @param array $opt Options de cette autorisation
  * @return bool true s'il a le droit, false sinon
  **/
-function autoriser_base_reparer_dist(string $faire, string $type, $id, array $qui, array $opt) : bool
-{
-    return autoriser('detruire') && !_request('reinstall');
+function autoriser_base_reparer_dist(string $faire, string $type, $id, array $qui, array $opt): bool {
+	return autoriser('detruire') && !_request('reinstall');
 }
 
 /**
