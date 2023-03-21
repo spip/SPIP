@@ -72,12 +72,12 @@ function base_trouver_table_dist($nom, $serveur = '', $table_spip = true, array 
 
 	if (
 		!spip_connect($serveur)
-		or !preg_match('/^[a-zA-Z0-9._-]*/', $nom)
+		|| !preg_match('/^[a-zA-Z0-9._-]*/', $nom)
 	) {
 		return null;
 	}
 
-	$options = $options + [
+	$options += [
 		// si false, baissera le niveau de log si une table demandée n’existe pas
 		'log_missing' => true,
 	];
@@ -107,21 +107,19 @@ function base_trouver_table_dist($nom, $serveur = '', $table_spip = true, array 
 	}
 
 	$nom_sql = $nom;
-	if (preg_match('/\.(.*)$/', $nom, $s)) {
-		$nom_sql = $s[1];
-	} else {
-		$nom_sql = $nom;
-	}
+	$nom_sql = preg_match('/\.(.*)$/', $nom, $s) ? $s[1] : $nom;
 
 	$fdesc = $desc = '';
 	$connexion = &$GLOBALS['connexions'][$serveur ?: 0];
 
 	// base sous SPIP: gerer les abreviations explicites des noms de table
-	if ($connexion['spip_connect_version']) {
-		if ($table_spip and isset($GLOBALS['table_des_tables'][$nom])) {
-			$nom = $GLOBALS['table_des_tables'][$nom];
-			$nom_sql = 'spip_' . $nom;
-		}
+	if (
+		$connexion['spip_connect_version']
+		&& $table_spip
+		&& isset($GLOBALS['table_des_tables'][$nom])
+	) {
+		$nom = $GLOBALS['table_des_tables'][$nom];
+		$nom_sql = 'spip_' . $nom;
 	}
 
 	// si c'est la premiere table qu'on cherche
@@ -130,29 +128,27 @@ function base_trouver_table_dist($nom, $serveur = '', $table_spip = true, array 
 	// dans le fichier cache
 	if (
 		!isset($connexion['tables'][$nom_sql])
-		and defined('_VAR_MODE') and _VAR_MODE !== 'recalcul'
-		and (!isset($connexion['tables']) or !$connexion['tables'])
+		&& defined('_VAR_MODE')
+		&& _VAR_MODE !== 'recalcul'
+		&& (!isset($connexion['tables']) || !$connexion['tables'])
+		&& lire_fichier($nom_cache_desc_sql[$serveur][$objets_sql], $desc_cache)
+		&& ($desc_cache = unserialize($desc_cache))
 	) {
-		if (
-			lire_fichier($nom_cache_desc_sql[$serveur][$objets_sql], $desc_cache)
-			and $desc_cache = unserialize($desc_cache)
-		) {
-			$connexion['tables'] = $desc_cache;
-		}
+		$connexion['tables'] = $desc_cache;
 	}
-	if ($table_spip and !isset($connexion['tables'][$nom_sql])) {
+	if ($table_spip && !isset($connexion['tables'][$nom_sql])) {
 		if (isset($GLOBALS['tables_principales'][$nom_sql])) {
 			$fdesc = $GLOBALS['tables_principales'][$nom_sql];
 		}
 		// meme si pas d'abreviation declaree, trouver la table spip_$nom
 		// si c'est une table principale,
 		// puisqu'on le fait aussi pour les tables auxiliaires
-		elseif ($nom_sql == $nom and isset($GLOBALS['tables_principales']['spip_' . $nom])) {
+		elseif ($nom_sql == $nom && isset($GLOBALS['tables_principales']['spip_' . $nom])) {
 			$nom_sql = 'spip_' . $nom;
 			$fdesc = &$GLOBALS['tables_principales'][$nom_sql];
 		} elseif (
 			isset($GLOBALS['tables_auxiliaires'][$n = $nom])
-			or isset($GLOBALS['tables_auxiliaires'][$n = 'spip_' . $nom])
+			|| isset($GLOBALS['tables_auxiliaires'][$n = 'spip_' . $nom])
 		) {
 			$nom_sql = $n;
 			$fdesc = &$GLOBALS['tables_auxiliaires'][$n];
@@ -163,8 +159,8 @@ function base_trouver_table_dist($nom, $serveur = '', $table_spip = true, array 
 		$exists = sql_table_exists($nom_sql, $table_spip, $serveur);
 		if (
 			!$exists
-			or !$desc = sql_showtable($nom_sql, $table_spip, $serveur)
-			or !$desc['field']
+			|| !$desc = sql_showtable($nom_sql, $table_spip, $serveur)
+			|| !$desc['field']
 		) {
 			if (!$fdesc) {
 				$log_level = $options['log_missing'] ? _LOG_INFO_IMPORTANTE : _LOG_DEBUG;
@@ -206,7 +202,7 @@ function base_trouver_table_dist($nom, $serveur = '', $table_spip = true, array 
 		$res = &$connexion['tables'][$nom_sql];
 		// une nouvelle table a ete decrite
 		// mettons donc a jour le cache des descriptions de ce serveur
-		if (is_writeable(_DIR_CACHE)) {
+		if (is_writable(_DIR_CACHE)) {
 			ecrire_fichier($nom_cache_desc_sql[$serveur][$objets_sql], serialize($connexion['tables']), true);
 		}
 	} else {

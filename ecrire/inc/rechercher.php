@@ -84,11 +84,11 @@ function expression_recherche($recherche, $options) {
 	}
 
 	$u = $GLOBALS['meta']['pcre_u'];
-	if ($u && !str_contains($options['preg_flags'], (string) $u)) {
+	if ($u && !str_contains((string) $options['preg_flags'], (string) $u)) {
 		$options['preg_flags'] .= $u;
 	}
 	include_spip('inc/charsets');
-	$recherche = trim($recherche);
+	$recherche = trim((string) $recherche);
 
 	// retirer les + de +truc et les * de truc*
 	$recherche = preg_replace(',(^|\s)\+(\w),Uims', '$1$2', $recherche);
@@ -143,7 +143,7 @@ function expression_recherche($recherche, $options) {
 			$recherche_trans = translitteration($recherche);
 		}
 
-		$preg = '/' . str_replace('/', '\\/', $recherche_trans) . '/' . $options['preg_flags'];
+		$preg = '/' . str_replace('/', '\\/', (string) $recherche_trans) . '/' . $options['preg_flags'];
 	}
 
 	// Si la chaine est inactive, on va utiliser LIKE pour aller plus vite
@@ -171,11 +171,11 @@ function expression_recherche($recherche, $options) {
 			}
 		}
 		// corriger la regexp
-		if (preg_match(',["][^"]+["],Uims', $recherche_mod, $matches)) {
+		if (preg_match(',["][^"]+["],Uims', (string) $recherche_mod, $matches)) {
 			foreach ($matches as $match) {
 				$word = preg_replace(',\s+,Uims', '[\s]', $match);
 				$word = trim($word, '"');
-				$recherche_mod = str_replace($match, $word, $recherche_mod);
+				$recherche_mod = str_replace($match, $word, (string) $recherche_mod);
 			}
 		}
 		$q = sql_quote(
@@ -184,7 +184,7 @@ function expression_recherche($recherche, $options) {
 			. '%'
 		);
 
-		$preg = '/' . preg_replace(',\s+,' . $u, '.+', trim($recherche_mod)) . '/' . $options['preg_flags'];
+		$preg = '/' . preg_replace(',\s+,' . $u, '.+', trim((string) $recherche_mod)) . '/' . $options['preg_flags'];
 	} else {
 		$methode = 'REGEXP';
 		$q = sql_quote(trim($recherche, '/'));
@@ -202,7 +202,7 @@ function expression_recherche($recherche, $options) {
 		) {
 			// on utilise ..?.? car le char utf peut etre encode sur 1, 2 ou 3 bytes
 			// mais c'est un pis aller cf #4354
-			$q_t = str_replace($char, $is_preg ? '..?.?' : '_', $q_t);
+			$q_t = str_replace($char, $is_preg ? '..?.?' : '_', (string) $q_t);
 		}
 	}
 
@@ -213,7 +213,7 @@ function expression_recherche($recherche, $options) {
 	// (oui c'est tres dicustable...)
 	if (
 		isset($GLOBALS['connexions'][$options['serveur'] ?: 0]['type'])
-		&& str_starts_with($GLOBALS['connexions'][$options['serveur'] ?: 0]['type'], 'sqlite')
+		&& str_starts_with((string) $GLOBALS['connexions'][$options['serveur'] ?: 0]['type'], 'sqlite')
 	) {
 		$q_t = strtr($q, 'aeuioc', $is_preg ? '......' : '______');
 		// si il reste au moins un char significatif...
@@ -352,7 +352,7 @@ function remplace_en_base($recherche = '', $remplace = null, $tables = null, $op
 
 	$results = recherche_en_base($recherche, $tables, $options);
 
-	$preg = '/' . str_replace('/', '\\/', $recherche) . '/' . $options['preg_flags'];
+	$preg = '/' . str_replace('/', '\\/', (string) $recherche) . '/' . $options['preg_flags'];
 
 	foreach ($results as $table => $r) {
 		$_id_table = id_table_objet($table);
@@ -363,7 +363,7 @@ function remplace_en_base($recherche = '', $remplace = null, $tables = null, $op
 					if ($key == $_id_table) {
 						continue;
 					}
-					$repl = preg_replace($preg, $remplace, $val);
+					$repl = preg_replace($preg, (string) $remplace, (string) $val);
 					if ($repl != $val) {
 						$modifs[$key] = $repl;
 					}

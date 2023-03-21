@@ -385,7 +385,7 @@ class Decorator extends FilterIterator
 			return 'false';
 		}
 		// traiter {cle IN a,b} ou {valeur !IN a,b}
-		if (preg_match(',^\(([\w/]+)(\s+NOT)?\s+IN\s+(\(.*\))\)$,', $op, $regs)) {
+		if (preg_match(',^\(([\w/]+)(\s+NOT)?\s+IN\s+(\(.*\))\)$,', (string) $op, $regs)) {
 			return $this->composer_filtre($regs[1], 'IN', $regs[3], $regs[2]);
 		}
 
@@ -473,11 +473,11 @@ class Decorator extends FilterIterator
 		$filtre = '';
 
 		if ('REGEXP' == $op) {
-			$filtre = 'filtrer("match", ' . $a . ', ' . str_replace('\"', '"', $valeur) . ')';
+			$filtre = 'filtrer("match", ' . $a . ', ' . str_replace('\"', '"', (string) $valeur) . ')';
 			$op = '';
 		} else {
 			if ('LIKE' == $op) {
-				$valeur = str_replace(['\"', '_', '%'], ['"', '.', '.*'], preg_quote($valeur));
+				$valeur = str_replace(['\"', '_', '%'], ['"', '.', '.*'], preg_quote((string) $valeur));
 				$filtre = 'filtrer("match", ' . $a . ', ' . $valeur . ')';
 				$op = '';
 			} else {
@@ -498,7 +498,7 @@ class Decorator extends FilterIterator
 		}
 
 		if ($op) {
-			$filtre = $a . $op . str_replace('\"', '"', $valeur);
+			$filtre = $a . $op . str_replace('\"', '"', (string) $valeur);
 		}
 
 		if ($not) {
@@ -516,7 +516,7 @@ class Decorator extends FilterIterator
 			foreach ($select as $s) {
 				// /!\ $s = '.nom'
 				if ('.' == $s[0]) {
-					$s = substr($s, 1);
+					$s = substr((string) $s, 1);
 				}
 				$this->select[] = $s;
 			}
@@ -539,7 +539,7 @@ class Decorator extends FilterIterator
 
 		// critere {2,7}
 		if (isset($this->command['limit']) && $this->command['limit']) {
-			$limit = explode(',', $this->command['limit']);
+			$limit = explode(',', (string) $this->command['limit']);
 			$this->offset = $limit[0];
 			$this->limit = $limit[1];
 		}

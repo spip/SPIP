@@ -36,7 +36,7 @@ function typographie_fr_dist($letexte) {
 		$chars = array_values($chars);
 		$chars_trans = implode(' ', array_map('chr', $chars_trans));
 		$chars_trans = unicode2charset(charset2unicode($chars_trans, 'iso-8859-1', 'forcer'));
-		$chars_trans = explode(' ', $chars_trans);
+		$chars_trans = explode(' ', (string) $chars_trans);
 		foreach ($chars as $k => $r) {
 			$trans[$chars_trans[$k]] = $r;
 		}

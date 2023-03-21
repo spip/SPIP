@@ -26,7 +26,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return string
  */
 function autosave_clean_value($val) {
-	return stripslashes(urldecode($val));
+	return stripslashes(urldecode((string) $val));
 }
 
 /**
@@ -54,7 +54,7 @@ function cvtautosave_formulaire_charger($flux) {
 			isset($GLOBALS['visiteur_session']['session_autosave_' . $cle_autosave])
 			&& !$je_suis_poste
 		) {
-			parse_str($GLOBALS['visiteur_session']['session_autosave_' . $cle_autosave], $vars);
+			parse_str((string) $GLOBALS['visiteur_session']['session_autosave_' . $cle_autosave], $vars);
 			foreach ($vars as $key => $val) {
 				if (isset($flux['data'][$key])) {
 					$flux['data'][$key] = (is_string($val) ? autosave_clean_value($val) : array_map(
@@ -118,9 +118,9 @@ function cvtautosave_formulaire_traiter($flux) {
 		// purger aussi toutes les vieilles autosave
 		$session = $GLOBALS['visiteur_session'];
 		foreach ($session as $k => $v) {
-			if (str_starts_with($k, 'session_autosave_')) {
+			if (str_starts_with((string) $k, 'session_autosave_')) {
 				$timestamp = 0;
-				if (preg_match(',&__timestamp=(\d+)$,', $v, $m)) {
+				if (preg_match(',&__timestamp=(\d+)$,', (string) $v, $m)) {
 					$timestamp = (int) $m[1];
 				}
 				if ($timestamp < $time_too_old) {

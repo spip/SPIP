@@ -51,7 +51,7 @@ function expliquer_config($cfg) {
 	$cfg = explode('/', $cfg);
 
 	// si le premier argument est vide, c'est une syntaxe /table/ ou un appel vide ''
-	if (!reset($cfg) and count($cfg) > 1) {
+	if (!reset($cfg) && count($cfg) > 1) {
 		array_shift($cfg);
 		$table = array_shift($cfg);
 		if (!isset($GLOBALS[$table])) {
@@ -60,14 +60,12 @@ function expliquer_config($cfg) {
 	}
 
 	// si on a demande #CONFIG{/meta,'',0}
-	if (count($cfg)) {
-		// pas sur un appel vide ''
-		if ('' !== ($c = array_shift($cfg))) {
-			$casier = $c;
-		}
+ 	// pas sur un appel vide ''
+ 	if (count($cfg) && '' !== ($c = array_shift($cfg))) {
+		$casier = $c;
 	}
 
-	if (count($cfg)) {
+	if ($cfg !== []) {
 		$sous_casier = $cfg;
 	}
 
@@ -98,28 +96,26 @@ function expliquer_config($cfg) {
  * @return mixed
  *    Contenu de la configuration obtenue
  */
-function lire_config($cfg = '', $def = null, $unserialize = true) {
+function lire_config($cfg = '', mixed $def = null, $unserialize = true) {
 	// lire le stockage sous la forme /table/valeur
 	// ou valeur qui est en fait implicitement /meta/valeur
 	// ou casier/valeur qui est en fait implicitement /meta/casier/valeur
 
 	// traiter en priorite le cas simple et frequent
 	// de lecture direct $GLOBALS['meta']['truc'], si $cfg ne contient ni / ni :
-	if ($cfg and strpbrk($cfg, '/:') === false) {
-		$r = isset($GLOBALS['meta'][$cfg]) ?
-			((!$unserialize
+	if ($cfg && strpbrk($cfg, '/:') === false) {
+		return isset($GLOBALS['meta'][$cfg])
+			? (!$unserialize
 				// ne pas essayer de deserialiser autre chose qu'une chaine
-				or !is_string($GLOBALS['meta'][$cfg])
+				|| !is_string($GLOBALS['meta'][$cfg])
 				// ne pas essayer de deserialiser si ce n'est visiblement pas une chaine serializee
-				or !str_contains($GLOBALS['meta'][$cfg], ':')
-				or ($t = @unserialize($GLOBALS['meta'][$cfg])) === false) ? $GLOBALS['meta'][$cfg] : $t)
+				|| !str_contains($GLOBALS['meta'][$cfg], ':')
+				|| ($t = @unserialize($GLOBALS['meta'][$cfg])) === false ? $GLOBALS['meta'][$cfg] : $t)
 			: $def;
-
-		return $r;
 	}
 
 	// Brancher sur methodes externes si besoin
-	if ($cfg and $p = strpos($cfg, '::')) {
+	if ($cfg && ($p = strpos($cfg, '::'))) {
 		$methode = substr($cfg, 0, $p);
 		$lire_config = charger_fonction($methode, 'lire_config');
 
@@ -144,12 +140,12 @@ function lire_config($cfg = '', $def = null, $unserialize = true) {
 	// ou si on a besoin
 	// d'un sous casier
 	$r = $r[$casier] ?? null;
-	if (($unserialize or is_countable($sous_casier) ? count($sous_casier) : 0) and $r and is_string($r)) {
+	if (($unserialize || (is_countable($sous_casier) ? count($sous_casier) : 0)) && $r && is_string($r)) {
 		$r = (($t = @unserialize($r)) === false ? $r : $t);
 	}
 
 	// aller chercher le sous_casier
-	while (!is_null($r) and $casier = array_shift($sous_casier)) {
+	while (!is_null($r) && ($casier = array_shift($sous_casier))) {
 		$r = $r[$casier] ?? null;
 	}
 
@@ -166,11 +162,10 @@ function lire_config($cfg = '', $def = null, $unserialize = true) {
  * On renvoie simplement sur lire_config
  *
  * @param string $cfg
- * @param mixed $def
  * @param bool $unserialize
  * @return mixed
  */
-function lire_config_metapack_dist($cfg = '', $def = null, $unserialize = true) {
+function lire_config_metapack_dist($cfg = '', mixed $def = null, $unserialize = true) {
 	return lire_config($cfg, $def, $unserialize);
 }
 
@@ -179,12 +174,11 @@ function lire_config_metapack_dist($cfg = '', $def = null, $unserialize = true) 
  * Ecrire une configuration
  *
  * @param string $cfg
- * @param mixed $store
  * @return bool
  */
-function ecrire_config($cfg, $store) {
+function ecrire_config($cfg, mixed $store) {
 	// Brancher sur methodes externes si besoin
-	if ($cfg and $p = strpos($cfg, '::')) {
+	if ($cfg && ($p = strpos($cfg, '::'))) {
 		$methode = substr($cfg, 0, $p);
 		$ecrire_config = charger_fonction($methode, 'ecrire_config');
 
@@ -199,7 +193,7 @@ function ecrire_config($cfg, $store) {
 
 	// trouvons ou creons le pointeur sur le casier
 	$st = $GLOBALS[$table][$casier] ?? null;
-	if (!is_array($st) and ($sous_casier or is_array($store))) {
+	if (!is_array($st) && ($sous_casier || is_array($store))) {
 		if ($st === null) {
 			// ne rien creer si c'est une demande d'effacement
 			if ($store === null) {
@@ -224,7 +218,7 @@ function ecrire_config($cfg, $store) {
 	if ($c = $sous_casier) {
 		$sc = &$st;
 		$pointeurs = [];
-		while (is_countable($c) ? count($c) : 0 and $cc = array_shift($c)) {
+		while ((is_countable($c) ? count($c) : 0) && ($cc = array_shift($c))) {
 			// creer l'entree si elle n'existe pas
 			if (!isset($sc[$cc])) {
 				// si on essaye d'effacer une config qui n'existe pas
@@ -245,21 +239,21 @@ function ecrire_config($cfg, $store) {
 			// effacer, et remonter pour effacer les parents vides
 			do {
 				unset($pointeurs[$sous][$sous]);
-			} while ($sous = array_pop($c) and !(is_countable($pointeurs[$sous][$sous]) ? count($pointeurs[$sous][$sous]) : 0));
+			} while (($sous = array_pop($c)) && !(is_countable($pointeurs[$sous][$sous]) ? count($pointeurs[$sous][$sous]) : 0));
 
 			// si on a vide tous les sous casiers,
 			// et que le casier est vide
 			// vider aussi la meta
-			if (!$sous and !(is_countable($st) ? count($st) : 0)) {
+			if (!$sous && !(is_countable($st) ? count($st) : 0)) {
 				$st = null;
 			}
 		} // dans tous les autres cas, on ecrase
 		else {
 			if (
-					defined('_MYSQL_NOPLANES')
-				and _MYSQL_NOPLANES
-				and !empty($GLOBALS['meta']['charset_sql_connexion'])
-				and $GLOBALS['meta']['charset_sql_connexion'] == 'utf8'
+				defined('_MYSQL_NOPLANES')
+				&& _MYSQL_NOPLANES
+				&& !empty($GLOBALS['meta']['charset_sql_connexion'])
+				&& $GLOBALS['meta']['charset_sql_connexion'] == 'utf8'
 			) {
 				// detecter si la valeur qu'on veut ecrire a des planes
 				// @see utf8_noplanes
@@ -284,7 +278,7 @@ function ecrire_config($cfg, $store) {
 	}
 
 	if (is_null($store)) {
-		if (is_null($st) and !$sous_casier) {
+		if (is_null($st) && !$sous_casier) {
 			return false;
 		} // la config n'existait deja pas !
 		effacer_meta($casier, $table);
@@ -330,14 +324,13 @@ function ecrire_config($cfg, $store) {
  * On renvoie simplement sur ecrire_config
  *
  * @param string $cfg
- * @param mixed $store
  * @return bool
  */
-function ecrire_config_metapack_dist($cfg, $store) {
+function ecrire_config_metapack_dist($cfg, mixed $store) {
 	// cas particulier en metapack::
 	// si on ecrit une chaine deja serializee, il faut la reserializer pour la rendre
 	// intacte en sortie ...
-	if (is_string($store) and strpos($store, ':') and unserialize($store)) {
+	if (is_string($store) && strpos($store, ':') && unserialize($store)) {
 		$store = serialize($store);
 	}
 
@@ -373,7 +366,7 @@ function liste_metas() {
 	return pipeline('configurer_liste_metas', [
 		'nom_site' => _T('info_mon_site_spip'),
 		'slogan_site' => '',
-		'adresse_site' => preg_replace(',/$,', '', url_de_base()),
+		'adresse_site' => preg_replace(',/$,', '', (string) url_de_base()),
 		'descriptif_site' => '',
 		'activer_logos' => 'oui',
 		'activer_logos_survol' => 'non',
@@ -407,7 +400,7 @@ function liste_metas() {
 
 		'syndication_integrale' => 'oui',
 		'charset' => _DEFAULT_CHARSET,
-		'dir_img' => substr(_DIR_IMG, strlen(_DIR_RACINE)),
+		'dir_img' => substr((string) _DIR_IMG, strlen(_DIR_RACINE)),
 
 		'multi_rubriques' => 'non',
 		'multi_secteurs' => 'non',
@@ -517,7 +510,7 @@ function appliquer_adresse_site($adresse_site) {
 			$GLOBALS['profondeur_url'] = _DIR_RESTREINT ? 0 : 1;
 			$adresse_site = url_de_base();
 		}
-		$adresse_site = preg_replace(',/?\s*$,', '', $adresse_site);
+		$adresse_site = preg_replace(',/?\s*$,', '', (string) $adresse_site);
 
 		if (!tester_url_absolue($adresse_site)) {
 			$adresse_site = "http://$adresse_site";

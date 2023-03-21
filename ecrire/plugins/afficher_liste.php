@@ -55,7 +55,7 @@ function plugins_afficher_liste_dist(
 	foreach (array_keys($liste_plugins) as $chemin) {
 		// des plugins ont pu etre enleves de la liste par le pipeline. On en tient compte.
 		if (isset($all_infos[$chemin])) {
-			$liste_plugins[$chemin] = strtoupper(trim(typo(translitteration(unicode2charset(html2unicode($all_infos[$chemin]['nom']))))));
+			$liste_plugins[$chemin] = strtoupper(trim((string) typo(translitteration(unicode2charset(html2unicode($all_infos[$chemin]['nom']))))));
 		} else {
 			unset($liste_plugins[$chemin]);
 		}
@@ -102,7 +102,7 @@ function plugins_afficher_liste_dist(
 
 
 function affiche_block_initiale($initiale, $block, $block_actif) {
-	if (strlen($block)) {
+	if (strlen((string) $block)) {
 		return "<li class='item'>"
 		. bouton_block_depliable($initiale, (bool) $block_actif)
 		. debut_block_depliable($block_actif)

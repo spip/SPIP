@@ -47,7 +47,7 @@ function inc_admin_dist($script, $titre, $comment = '', $anonymous = false) {
 	$reprise = true;
 	if (
 		!isset($GLOBALS['meta'][$script])
-		or !isset($GLOBALS['meta']['admin'])
+		|| !isset($GLOBALS['meta']['admin'])
 	) {
 		$reprise = false;
 		$res = debut_admin($script, $titre, $comment);
@@ -104,16 +104,17 @@ function admin_verifie_session($script, $anonymous = false) {
 	if ($valeur === null) {
 		ecrire_meta('admin', $signal, 'non');
 	} else {
-		if (!$anonymous and ($valeur != $signal)) {
-			if (
-				!preg_match('/^(.*)_(\d+)_/', $GLOBALS['meta']['admin'], $l)
-				or intval($l[2]) != $GLOBALS['visiteur_session']['id_auteur']
-			) {
-				include_spip('inc/minipres');
-				spip_log("refus de lancer $script, priorite a $valeur");
-
-				return minipres(_T('info_travaux_texte'), '', ['status' => 503]);
-			}
+		if (
+			!$anonymous
+			&& $valeur != $signal
+			&& (
+				!preg_match('/^(.*)_(\d+)_/', (string) $GLOBALS['meta']['admin'], $l)
+				|| (int) $l[2] != $GLOBALS['visiteur_session']['id_auteur']
+			)
+		) {
+			include_spip('inc/minipres');
+			spip_log("refus de lancer $script, priorite a $valeur");
+			return minipres(_T('info_travaux_texte'), '', ['status' => 503]);
 		}
 	}
 	$journal = 'spip';
@@ -186,7 +187,10 @@ function fichier_admin($action, $pref = 'admin_') {
  *     sinon chaîne vide si déjà fait.
  **/
 function debut_admin($script, $action = '', $corps = '') {
-	if ((!$action) || !(autoriser('webmestre') or autoriser('chargerftp'))) {
+	if (
+		!$action
+		|| !autoriser('webmestre') && !autoriser('chargerftp')
+	) {
 		include_spip('inc/minipres');
 
 		return minipres();
@@ -203,8 +207,8 @@ function debut_admin($script, $action = '', $corps = '') {
 		// Si on est un super-admin, un bouton de validation suffit
 		// sauf dans les cas destroy
 		if (
-			(autoriser('webmestre') or $script === 'repair')
-			and $script != 'delete_all'
+			(autoriser('webmestre') || $script === 'repair')
+			&& $script != 'delete_all'
 		) {
 			if (_request('validation_admin') == $signal) {
 				spip_log("Action super-admin: $action");
@@ -289,8 +293,8 @@ function fin_admin($action) {
  **/
 function copy_request($script, $suite, $submit = '') {
 	include_spip('inc/filtres');
-	foreach (array_merge($_POST, $_GET) as $n => $c) {
-		if (!in_array($n, ['fichier', 'exec', 'validation_admin']) and !is_array($c)) {
+	foreach ([...$_POST, ...$_GET] as $n => $c) {
+		if (!in_array($n, ['fichier', 'exec', 'validation_admin']) && !is_array($c)) {
 			$suite .= "\n<input type='hidden' name='" . spip_htmlspecialchars($n) . "' value='" .
 				entites_html($c) .
 				"'  />";

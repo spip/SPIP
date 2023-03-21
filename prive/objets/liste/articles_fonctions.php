@@ -19,7 +19,7 @@ function defaut_tri_defined($defaut) {
 	}
 
 	$sens = 1;
-	$tri = trim(_TRI_ARTICLES_RUBRIQUE);
+	$tri = trim((string) _TRI_ARTICLES_RUBRIQUE);
 	$tri = explode(' ', $tri);
 	if (strncasecmp(end($tri), 'DESC', 4) == 0) {
 		$sens = -1;

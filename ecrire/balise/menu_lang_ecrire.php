@@ -56,7 +56,7 @@ function balise_MENU_LANG_ECRIRE($p) {
  */
 function balise_MENU_LANG_ECRIRE_stat($args, $context_compil) {
 	include_spip('inc/lang');
-	if (strpos($GLOBALS['meta']['langues_proposees'], ',') === false) {
+	if (!str_contains((string) $GLOBALS['meta']['langues_proposees'], ',')) {
 		return '';
 	}
 
@@ -98,9 +98,9 @@ function balise_MENU_LANG_ECRIRE_dyn($opt) {
 function menu_lang_pour_tous($nom, $default) {
 	include_spip('inc/lang');
 
-	if ($GLOBALS['spip_lang'] <> $default) {
+	if ($GLOBALS['spip_lang'] != $default) {
 		$opt = lang_select($default);  # et remplace
-		if ($GLOBALS['spip_lang'] <> $default) {
+		if ($GLOBALS['spip_lang'] != $default) {
 			$default = '';  # annule tout choix par defaut
 			if ($opt) {
 				lang_select();
@@ -110,7 +110,7 @@ function menu_lang_pour_tous($nom, $default) {
 
 	# lien a partir de /
 	$cible = parametre_url(self(), 'lang', '', '&');
-	$post = generer_url_action('converser', 'redirect=' . rawurlencode($cible), true);
+	$post = generer_url_action('converser', 'redirect=' . rawurlencode((string) $cible), true);
 
 	return [
 		'formulaires/menu_lang',

@@ -42,7 +42,7 @@ function parametres_css_prive() {
 
 	$args = [];
 	$args['v'] = $GLOBALS['spip_version_code'];
-	$args['p'] = substr(md5($GLOBALS['meta']['plugin']), 0, 4);
+	$args['p'] = substr(md5((string) $GLOBALS['meta']['plugin']), 0, 4);
 	$args['themes'] = implode(',', lister_themes_prives());
 	$args['ltr'] = $GLOBALS['spip_lang_left'];
 	// un md5 des menus : si un menu change il faut maj la css
@@ -51,7 +51,7 @@ function parametres_css_prive() {
 	$c = $GLOBALS['visiteur_session']['prefs']['couleur'] ?? 2;
 
 	$couleurs = charger_fonction('couleurs', 'inc');
-	parse_str($couleurs($c), $c);
+	parse_str((string) $couleurs($c), $c);
 	$args = array_merge($args, $c);
 
 	if (_request('var_mode') == 'recalcul' || defined('_VAR_MODE') && _VAR_MODE == 'recalcul') {
@@ -330,7 +330,7 @@ function auteurs_lister_statuts($quoi = 'tous', $en_base = true): array {
 	switch ($quoi) {
 		case 'redacteurs':
 			$statut = AUTEURS_MIN_REDAC;
-			$statut = explode(',', $statut);
+			$statut = explode(',', (string) $statut);
 			if ($en_base) {
 				$check = array_column(sql_allfetsel('DISTINCT statut', 'spip_auteurs', sql_in('statut', $statut)), 'statut');
 				$retire = array_diff($statut, $check);
@@ -342,7 +342,7 @@ function auteurs_lister_statuts($quoi = 'tous', $en_base = true): array {
 		case 'visiteurs':
 			$statut = [];
 			$exclus = AUTEURS_MIN_REDAC;
-			$exclus = explode(',', $exclus);
+			$exclus = explode(',', (string) $exclus);
 			if (!$en_base) {
 				// prendre aussi les statuts de la table des status qui ne sont pas dans le define
 				$statut = array_diff(array_values($GLOBALS['liste_des_statuts']), $exclus);

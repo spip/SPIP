@@ -29,7 +29,7 @@ function notifications_instituerarticle_dist($quoi, $id_article, $options) {
 	if ($options['statut'] == 'publie') {
 		if (
 			$GLOBALS['meta']['post_dates'] == 'non'
-			&& strtotime($options['date']) > time()
+			&& strtotime((string) $options['date']) > time()
 		) {
 			$modele = 'notifications/article_valide';
 		} else {
@@ -44,7 +44,7 @@ function notifications_instituerarticle_dist($quoi, $id_article, $options) {
 	if ($modele) {
 		$destinataires = [];
 		if ($GLOBALS['meta']['suivi_edito'] == 'oui') {
-			$destinataires = explode(',', $GLOBALS['meta']['adresse_suivi']);
+			$destinataires = explode(',', (string) $GLOBALS['meta']['adresse_suivi']);
 		}
 
 

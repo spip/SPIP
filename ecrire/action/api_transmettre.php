@@ -27,14 +27,14 @@ function action_api_transmettre_dist($arg = null) {
 		$arg = _request('arg');
 	}
 
-	$args = explode('/', $arg);
+	$args = explode('/', (string) $arg);
 
 	if (count($args) !== 4) {
 		action_api_transmettre_fail($arg);
 	}
 
 	[$id_auteur, $cle, $format, $fond] = $args;
-	$id_auteur = intval($id_auteur);
+	$id_auteur = (int) $id_auteur;
 
 	if (preg_match(',[^\w\\.-],', $format)) {
 		action_api_transmettre_fail("format $format ??");
@@ -50,23 +50,23 @@ function action_api_transmettre_dist($arg = null) {
 	$qs = $_SERVER['QUERY_STRING'];
 	// retirer action et arg de la qs
 	$contexte = [];
-	parse_str($qs, $contexte);
-	foreach ($contexte as $k => $v) {
+	parse_str((string) $qs, $contexte);
+	foreach (array_keys($contexte) as $k) {
 		if (in_array($k, ['action', 'arg', 'var_mode'])) {
 			unset($contexte[$k]);
 		}
 	}
 	$qs = http_build_query($contexte);
 	include_spip('inc/acces');
-	if (!securiser_acces_low_sec(intval($id_auteur), $cle, "transmettre/$format", $fond, $qs)) {
+	if (!securiser_acces_low_sec((int) $id_auteur, $cle, "transmettre/$format", $fond, $qs)) {
 		// si le autoriser low_sec n'est pas bon, on peut valider l'appel si l'auteur est identifie
 		include_spip('inc/autoriser');
 		$autoriser_type = preg_replace(',\W+,', '', "_{$format}{$fond}");
 		if (
 			!$id_auteur
-			or empty($GLOBALS['visiteur_session']['id_auteur'])
-			or $GLOBALS['visiteur_session']['id_auteur'] != $id_auteur
-			or !autoriser('transmettre', $autoriser_type, $id_auteur)
+			|| empty($GLOBALS['visiteur_session']['id_auteur'])
+			|| $GLOBALS['visiteur_session']['id_auteur'] != $id_auteur
+			|| !autoriser('transmettre', $autoriser_type, $id_auteur)
 		) {
 			action_api_transmettre_fail("auth QS $qs ??");
 		}
@@ -91,7 +91,7 @@ function action_api_transmettre_dist($arg = null) {
 		}
 	}
 
-	$res = ltrim($res['texte']);
+	$res = ltrim((string) $res['texte']);
 	if (empty($res)) {
 		spip_log("$arg $qs resultat vide", 'transmettre' . _LOG_INFO_IMPORTANTE);
 	}
@@ -100,7 +100,7 @@ function action_api_transmettre_dist($arg = null) {
 	exit();
 }
 
-function action_api_transmettre_fail($arg) {
+function action_api_transmettre_fail($arg): never {
 	include_spip('inc/minipres');
 	echo minipres(_T('info_acces_interdit'), $arg);
 	exit;

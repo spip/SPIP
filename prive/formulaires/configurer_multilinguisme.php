@@ -22,10 +22,10 @@ function formulaires_configurer_multilinguisme_charger_dist() {
 
 	if (
 		(is_countable($valeurs['multi_objets']) ? count($valeurs['multi_objets']) : 0)
-		|| count(explode(',', $GLOBALS['meta']['langues_utilisees'])) > 1
+		|| count(explode(',', (string) $GLOBALS['meta']['langues_utilisees'])) > 1
 	) {
 		$selection = (is_null(_request('multi_objets')) ?
-			explode(',', $GLOBALS['meta']['langues_multilingue']) : _request('langues_auth'));
+			explode(',', (string) $GLOBALS['meta']['langues_multilingue']) : _request('langues_auth'));
 		$valeurs['_langues'] = saisie_langues_utiles('langues_auth', $selection ?: []);
 		$valeurs['_nb_langues_selection'] = is_countable($selection) ? count($selection) : 0;
 	}
@@ -51,7 +51,7 @@ function formulaires_configurer_multilinguisme_traiter_dist() {
 	}
 
 	if (($i = _request('langues_auth')) && is_array($i)) {
-		$i = array_unique(array_merge($i, explode(',', $GLOBALS['meta']['langues_utilisees'])));
+		$i = array_unique(array_merge($i, explode(',', (string) $GLOBALS['meta']['langues_utilisees'])));
 		ecrire_meta('langues_multilingue', implode(',', $i));
 	}
 	$res['message_ok'] = _T('config_info_enregistree');
@@ -96,10 +96,10 @@ function saisie_langues_utiles($name, $selection) {
 	include_spip('inc/lang_liste');
 	$langues = $GLOBALS['codes_langues'];
 
-	$langues_installees = explode(',', $GLOBALS['meta']['langues_proposees']);
+	$langues_installees = explode(',', (string) $GLOBALS['meta']['langues_proposees']);
 	$langues_trad = array_flip($langues_installees);
 
-	$langues_bloquees = explode(',', $GLOBALS['meta']['langues_utilisees']);
+	$langues_bloquees = explode(',', (string) $GLOBALS['meta']['langues_utilisees']);
 
 	$res = '';
 

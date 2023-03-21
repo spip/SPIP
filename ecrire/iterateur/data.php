@@ -164,7 +164,7 @@ function inc_csv_to_array_dist($data) {
 	include_spip('inc/charsets');
 	$i = 1;
 	foreach ($entete as $k => $v) {
-		if (trim($v) == '') {
+		if (trim((string) $v) == '') {
 			$v = 'col' . $i;
 		} // reperer des eventuelles cases vides
 		if (is_numeric($v) && $v < 0) {
@@ -173,7 +173,7 @@ function inc_csv_to_array_dist($data) {
 		if (is_numeric($v)) {
 			$v = '_' . $v;
 		} // ne pas risquer d'ecraser une cle numerique
-		$v = strtolower(preg_replace(',\W+,', '_', translitteration($v)));
+		$v = strtolower(preg_replace(',\W+,', '_', (string) translitteration($v)));
 		foreach ($csv as &$item) {
 			$item[$v] = &$item[$k];
 		}
@@ -278,9 +278,9 @@ function inc_ls_to_array_dist($data) {
 				unset($b[$k]);
 			}
 		}
-		$b['file'] = preg_replace('`/$`', '', $v) ;
+		$b['file'] = preg_replace('`/$`', '', (string) $v) ;
 		$v = array_merge(
-			pathinfo($v),
+			pathinfo((string) $v),
 			$b
 		);
 	}

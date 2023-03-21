@@ -142,16 +142,16 @@ function public_parametrer_dist($fond, $contexte = '', $cache = '', string $conn
 
 		$profile = spip_timer($a);
 		spip_log("calcul ($profile) [$skel] $infos"
-			. ' (' . strlen($page['texte']) . ' octets)');
+			. ' (' . strlen((string) $page['texte']) . ' octets)');
 
 		if (defined('_CALCUL_PROFILER') && (int) $profile > _CALCUL_PROFILER) {
 			spip_log("calcul ($profile) [$skel] $infos"
-				. ' (' . strlen($page['texte']) . ' octets) | ' . $_SERVER['REQUEST_URI'], 'profiler' . _LOG_AVERTISSEMENT);
+				. ' (' . strlen((string) $page['texte']) . ' octets) | ' . $_SERVER['REQUEST_URI'], 'profiler' . _LOG_AVERTISSEMENT);
 		}
 
 		if ($debug) {
 			// si c'est ce que demande le debusqueur, lui passer la main
-			$t = strlen($page['texte']) ? $page['texte'] : ' ';
+			$t = strlen((string) $page['texte']) ? $page['texte'] : ' ';
 			$GLOBALS['debug_objets']['resultat'][$fonc . 'tout'] = $t;
 			$GLOBALS['debug_objets']['courant'] = $courant;
 			$GLOBALS['debug_objets']['profile'][$sourcefile] = $profile;
@@ -169,7 +169,7 @@ function public_parametrer_dist($fond, $contexte = '', $cache = '', string $conn
 			// si aucun #CACHE{} spécifié
 			// le contexte implicite qui conditionne le cache assure qu'on retombe pas sur le meme
 			// entre public et prive
-			if (test_espace_prive() || str_starts_with($fond, 'modeles/')) {
+			if (test_espace_prive() || str_starts_with((string) $fond, 'modeles/')) {
 				$page['entetes']['X-Spip-Cache'] = 0;
 			} else {
 				$page['entetes']['X-Spip-Cache'] = $GLOBALS['delais'] ?? 36000;
@@ -231,9 +231,9 @@ function presenter_contexte($contexte, $profondeur_max = 1, $max_lines = 0) {
 			if (strstr($val, ' ')) {
 				$val = "'$val'";
 			}
-		} elseif (strstr($val, ' ')) {
+		} elseif (strstr((string) $val, ' ')) {
 			$val = "'$val'";
-		} elseif (!strlen($val)) {
+		} elseif (!strlen((string) $val)) {
 			$val = "''";
 		}
 		$infos[] = $var . '=' . $val;
@@ -293,11 +293,11 @@ function public_tester_redirection_dist($fond, $contexte, $connect) {
 				if (defined('_STATUS_REDIRECTION_VIRTUEL')) {
 					$status = _STATUS_REDIRECTION_VIRTUEL;
 				}
-				if (!preg_match(',^\w+:,', $url)) {
+				if (!preg_match(',^\w+:,', (string) $url)) {
 					include_spip('inc/filtres_mini');
 					$url = url_absolue($url);
 				}
-				$url = str_replace('&amp;', '&', $url);
+				$url = str_replace('&amp;', '&', (string) $url);
 
 				return [
 					'texte' => '<'

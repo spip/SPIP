@@ -43,9 +43,12 @@ function affiche_boutons_admin($contenu) {
 			. url_absolue(direction_css($f)) . "' type='text/css' />\n";
 	}
 
-	($pos = stripos($contenu, '</head>'))
-	|| ($pos = stripos($contenu, '<body>'))
-	|| ($pos = 0);
+	if (
+		!($pos = stripos($contenu, '</head>'))
+		&& !($pos = stripos($contenu, '<body>'))
+	) {
+    	$pos = 0;
+ 	}
 	$contenu = substr_replace($contenu, $css, $pos, 0);
 
 
@@ -54,12 +57,13 @@ function affiche_boutons_admin($contenu) {
 		balise_FORMULAIRE_ADMIN_dyn('spip-admin-float'),
 		false
 	);
+ 	if (
+		!($pos = strripos($contenu, '</body>'))
+		&& !($pos = strripos($contenu, '</html>'))
+	) {
+    	$pos = strlen($contenu);
+ 	}
 
-	($pos = strripos($contenu, '</body>'))
-	|| ($pos = strripos($contenu, '</html>'))
-	|| ($pos = strlen($contenu));
-	$contenu = substr_replace($contenu, $boutons_admin, $pos, 0);
 
-
-	return $contenu;
+	return substr_replace($contenu, (string) $boutons_admin, $pos, 0);
 }

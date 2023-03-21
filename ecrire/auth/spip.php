@@ -33,6 +33,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function auth_spip_dist($login, #[\SensitiveParameter] $pass, $serveur = '', $phpauth = false) {
 
+	$methode = null;
 	// retrouver le login
 	$login = auth_spip_retrouver_login($login);
 	// login inconnu, n'allons pas plus loin
@@ -57,13 +58,13 @@ function auth_spip_dist($login, #[\SensitiveParameter] $pass, $serveur = '', $ph
 		);
 
 		// lever un flag si cet auteur peut sauver les cles
-		if ($row['statut'] === '0minirezo' and $row['webmestre'] === 'oui' and isset($row['backup_cles'])) {
+		if ($row['statut'] === '0minirezo' && $row['webmestre'] === 'oui' && isset($row['backup_cles'])) {
 			$auteur_peut_sauver_cles = true;
 		}
 	}
 
 	// login inexistant ou mot de passe vide
-	if (!$pass or !$row) {
+	if (!$pass || !$row) {
 		return [];
 	}
 
@@ -71,7 +72,7 @@ function auth_spip_dist($login, #[\SensitiveParameter] $pass, $serveur = '', $ph
 	$secret = $cles->getSecretAuth();
 
 	$hash = null;
-	switch (strlen($row['pass'])) {
+	switch (strlen((string) $row['pass'])) {
 		// legacy = md5 ou sha256
 		case 32:
 			// tres anciens mots de passe encodes en md5(alea.pass)
@@ -88,7 +89,7 @@ function auth_spip_dist($login, #[\SensitiveParameter] $pass, $serveur = '', $ph
 				spip_log("validation du mot de passe pour l'auteur #" . $row['id_auteur'] . " $login via $methode", 'auth' . _LOG_DEBUG);
 				// ce n'est pas cense arriver, mais si jamais c'est un backup inutilisable, il faut le nettoyer pour ne pas bloquer la creation d'une nouvelle cle d'auth
 				if (!empty($row['backup_cles'])) {
-					sql_updateq('spip_auteurs', ['backup_cles' => ''], 'id_auteur=' . intval($row['id_auteur']));
+					sql_updateq('spip_auteurs', ['backup_cles' => ''], 'id_auteur=' . (int) $row['id_auteur']);
 				}
 				break;
 			}
@@ -102,8 +103,8 @@ function auth_spip_dist($login, #[\SensitiveParameter] $pass, $serveur = '', $ph
 			// si on a le bon pass on peut decoder le backup, retrouver la cle, et du coup valider le pass
 			if (
 				!$secret
-				and $auteur_peut_sauver_cles
-				and !empty($row['backup_cles'])
+				&& $auteur_peut_sauver_cles
+				&& !empty($row['backup_cles'])
 			) {
 				if ($cles->restore($row['backup_cles'], $pass, $row['pass'], $row['id_auteur'])) {
 					spip_log('Les cles secretes ont ete restaurées avec le backup du webmestre #' . $row['id_auteur'], 'auth' . _LOG_INFO_IMPORTANTE);
@@ -118,11 +119,11 @@ function auth_spip_dist($login, #[\SensitiveParameter] $pass, $serveur = '', $ph
 				}
 				else {
 					spip_log('Pas de cle secrete disponible (fichier config/cle.php absent ?) mais le backup du webmestre #' . $row['id_auteur'] . " n'est pas valide", 'auth' . _LOG_ERREUR);
-					sql_updateq('spip_auteurs', ['backup_cles' => ''], 'id_auteur=' . intval($row['id_auteur']));
+					sql_updateq('spip_auteurs', ['backup_cles' => ''], 'id_auteur=' . (int) $row['id_auteur']);
 				}
 			}
 
-			if (!$secret or !Password::verifier($pass, $row['pass'], $secret)) {
+			if (!$secret || !Password::verifier($pass, $row['pass'], $secret)) {
 				unset($row);
 			}
 			else {
@@ -135,10 +136,8 @@ function auth_spip_dist($login, #[\SensitiveParameter] $pass, $serveur = '', $ph
 	// ET si c'est le login d'un auteur qui peut sauver la cle
 	// créer la clé (en s'assurant bien que personne n'a de backup d'un precedent fichier cle.php)
 	// si c'est un auteur normal, on ne fait rien, il garde son ancien pass hashé en sha256 en attendant le login d'un webmestre
-	if (!$secret and $auteur_peut_sauver_cles) {
-		if (auth_spip_initialiser_secret()) {
-			$secret = $cles->getSecretAuth();
-		}
+	if (!$secret && $auteur_peut_sauver_cles && auth_spip_initialiser_secret()) {
+		$secret = $cles->getSecretAuth();
 	}
 
 	// login/mot de passe incorrect
@@ -148,7 +147,7 @@ function auth_spip_dist($login, #[\SensitiveParameter] $pass, $serveur = '', $ph
 
 	// fait tourner le codage du pass dans la base
 	// sauf si phpauth : cela reviendrait a changer l'alea a chaque hit, et aucune action verifiable par securiser_action()
-	if (!$phpauth and $secret) {
+	if (!$phpauth && $secret) {
 		include_spip('inc/acces'); // pour creer_uniqid et verifier_htaccess
 		$pass_hash_next = Password::hacher($pass, $secret);
 		if ($pass_hash_next) {
@@ -161,7 +160,7 @@ function auth_spip_dist($login, #[\SensitiveParameter] $pass, $serveur = '', $ph
 			// regenerer un htpass si on a active/desactive le plugin htpasswd
 			// et/ou que l'algo a change - pour etre certain de toujours utiliser le bon algo
 			$htpass = generer_htpass($pass);
-			if (strlen($htpass) !== strlen($row['htpass'])) {
+			if (strlen((string) $htpass) !== strlen((string) $row['htpass'])) {
 				$set['htpass'] = sql_quote($htpass, $serveur, 'text');
 			}
 
@@ -173,7 +172,7 @@ function auth_spip_dist($login, #[\SensitiveParameter] $pass, $serveur = '', $ph
 			@sql_update(
 				'spip_auteurs',
 				$set,
-				'id_auteur=' . intval($row['id_auteur']) . ' AND pass=' . sql_quote(
+				'id_auteur=' . (int) $row['id_auteur'] . ' AND pass=' . sql_quote(
 					$row['pass'],
 					$serveur,
 					'text'
@@ -190,7 +189,7 @@ function auth_spip_dist($login, #[\SensitiveParameter] $pass, $serveur = '', $ph
 
 		// En profiter pour verifier la securite de tmp/
 		// Si elle ne fonctionne pas a l'installation, prevenir
-		if (!verifier_htaccess(_DIR_TMP) and defined('_ECRIRE_INSTALL')) {
+		if (!verifier_htaccess(_DIR_TMP) && defined('_ECRIRE_INSTALL')) {
 			return false;
 		}
 	}
@@ -227,7 +226,7 @@ function auth_spip_initialiser_secret(bool $force = false): bool {
 
 	$has_backup = sql_allfetsel('id_auteur', 'spip_auteurs', 'statut=' . sql_quote('0minirezo') . ' AND webmestre=' . sql_quote('oui') . " AND backup_cles!=''");
 	$has_backup = array_column($has_backup, 'id_auteur');
-	if (empty($has_backup)) {
+	if ($has_backup === []) {
 		spip_log("Pas de cle secrete disponible, et aucun webmestre n'a de backup, on regenere une nouvelle cle - tous les mots de passe sont invalides", 'auth' . _LOG_INFO_IMPORTANTE);
 		if ($secret = $cles->getSecretAuth(true)) {
 			return true;
@@ -274,10 +273,7 @@ function auth_spip_formulaire_login($flux) {
  */
 function auth_spip_autoriser_modifier_login(string $serveur = ''): bool {
 	// les fonctions d'ecriture sur base distante sont encore incompletes
-	if (strlen($serveur)) {
-		return false;
-	}
-	return true;
+	return !strlen($serveur);
 }
 
 /**
@@ -298,7 +294,7 @@ function auth_spip_verifier_login($new_login, $id_auteur = 0, $serveur = '') {
 		} else {
 			$n = sql_countsel(
 				'spip_auteurs',
-				'login=' . sql_quote($new_login) . ' AND id_auteur!=' . intval($id_auteur) . " AND statut!='5poubelle'",
+				'login=' . sql_quote($new_login) . ' AND id_auteur!=' . (int) $id_auteur . " AND statut!='5poubelle'",
 				'',
 				'',
 				$serveur
@@ -321,12 +317,12 @@ function auth_spip_verifier_login($new_login, $id_auteur = 0, $serveur = '') {
  * @return bool
  */
 function auth_spip_modifier_login($new_login, $id_auteur, $serveur = '') {
-	if (is_null($new_login) or auth_spip_verifier_login($new_login, $id_auteur, $serveur) != '') {
+	if (is_null($new_login) || auth_spip_verifier_login($new_login, $id_auteur, $serveur) != '') {
 		return false;
 	}
 	if (
-		!$id_auteur = intval($id_auteur)
-		or !$auteur = sql_fetsel('login', 'spip_auteurs', 'id_auteur=' . intval($id_auteur), '', '', '', '', $serveur)
+		!($id_auteur = (int) $id_auteur)
+		|| !$auteur = sql_fetsel('login', 'spip_auteurs', 'id_auteur=' . (int) $id_auteur, '', '', '', '', $serveur)
 	) {
 		return false;
 	}
@@ -416,10 +412,7 @@ function auth_spip_retrouver_login($login, $serveur = '') {
  */
 function auth_spip_autoriser_modifier_pass(string $serveur = ''): bool {
 	// les fonctions d'ecriture sur base distante sont encore incompletes
-	if (strlen($serveur)) {
-		return false;
-	}
-	return true;
+	return !strlen($serveur);
 }
 
 
@@ -459,13 +452,13 @@ function auth_spip_verifier_pass($login, #[\SensitiveParameter] $new_pass, $id_a
  * @return bool
  */
 function auth_spip_modifier_pass($login, #[\SensitiveParameter] $new_pass, $id_auteur, $serveur = '') {
-	if (is_null($new_pass) or auth_spip_verifier_pass($login, $new_pass, $id_auteur, $serveur) != '') {
+	if (is_null($new_pass) || auth_spip_verifier_pass($login, $new_pass, $id_auteur, $serveur) != '') {
 		return false;
 	}
 
 	if (
-		!$id_auteur = intval($id_auteur)
-		or !$auteur = sql_fetsel('login, statut, webmestre', 'spip_auteurs', 'id_auteur=' . intval($id_auteur), '', '', '', '', $serveur)
+		!($id_auteur = (int) $id_auteur)
+		|| !($auteur = sql_fetsel('login, statut, webmestre', 'spip_auteurs', 'id_auteur=' . (int) $id_auteur, '', '', '', '', $serveur))
 	) {
 		return false;
 	}
@@ -492,7 +485,7 @@ function auth_spip_modifier_pass($login, #[\SensitiveParameter] $new_pass, $id_a
 	];
 
 	// si c'est un webmestre, on met a jour son backup des cles
-	if ($auteur['statut'] === '0minirezo' and $auteur['webmestre'] === 'oui') {
+	if ($auteur['statut'] === '0minirezo' && $auteur['webmestre'] === 'oui') {
 		$set['backup_cles'] = $cles->backup($new_pass);
 	}
 
@@ -520,10 +513,7 @@ function auth_spip_synchroniser_distant($id_auteur, $champs, $options = [], stri
 	// si un login, pass ou statut a ete modifie
 	// regenerer les fichier htpass
 	if (
-		isset($champs['login'])
-		or isset($champs['pass'])
-		or isset($champs['statut'])
-		or (isset($options['all']) and $options['all'])
+		isset($champs['login']) || isset($champs['pass']) || isset($champs['statut']) || isset($options['all']) && $options['all']
 	) {
 		$htaccess = _DIR_RESTREINT . _ACCESS_FILE_NAME;
 		$htpasswd = _DIR_TMP . _AUTH_USER_FILE;
@@ -532,8 +522,7 @@ function auth_spip_synchroniser_distant($id_auteur, $champs, $options = [], stri
 		// par exemple acces_restreint ;
 		// si .htaccess existe, outrepasser spip_meta
 		if (
-			(!isset($GLOBALS['meta']['creer_htpasswd']) or ($GLOBALS['meta']['creer_htpasswd'] != 'oui'))
-			and !@file_exists($htaccess)
+			(!isset($GLOBALS['meta']['creer_htpasswd']) || $GLOBALS['meta']['creer_htpasswd'] != 'oui') && !@file_exists($htaccess)
 		) {
 			spip_unlink($htpasswd);
 			spip_unlink($htpasswd . '-admin');
@@ -553,7 +542,7 @@ function auth_spip_synchroniser_distant($id_auteur, $champs, $options = [], stri
 			sql_in('statut', ['1comite', '0minirezo', 'nouveau'])
 		);
 		while ($t = sql_fetch($s)) {
-			if (strlen($t['login']) and strlen($t['htpass'])) {
+			if (strlen((string) $t['login']) && strlen((string) $t['htpass'])) {
 				$p1 .= $t['login'] . ':' . $t['htpass'] . "\n";
 				if ($t['statut'] == '0minirezo') {
 					$p2 .= $t['login'] . ':' . $t['htpass'] . "\n";

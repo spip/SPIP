@@ -43,7 +43,7 @@ function action_instituer_langue_objet_dist($objet, $id, $id_rubrique, $changer_
 
 		if ($changer_lang != 'herit') {
 			$set['lang'] = $changer_lang;
-			sql_updateq($table_objet_sql, $set, "$id_table_objet=" . intval($id), [], $serveur);
+			sql_updateq($table_objet_sql, $set, "$id_table_objet=" . (int) $id, [], $serveur);
 			include_spip('inc/rubriques'); // pour calculer_langues_rubriques et calculer_langues_utilisees
 			if ($table_objet_sql == 'spip_rubriques') {
 				calculer_langues_rubriques();
@@ -51,7 +51,7 @@ function action_instituer_langue_objet_dist($objet, $id, $id_rubrique, $changer_
 			$langues = calculer_langues_utilisees($serveur);
 			ecrire_meta('langues_utilisees', $langues);
 		} else {
-			$langue_parent = sql_getfetsel('lang', 'spip_rubriques', 'id_rubrique=' . intval($id_rubrique));
+			$langue_parent = sql_getfetsel('lang', 'spip_rubriques', 'id_rubrique=' . (int) $id_rubrique);
 			if (!$langue_parent) {
 				$langue_parent = $GLOBALS['meta']['langue_site'];
 			}
@@ -60,7 +60,7 @@ function action_instituer_langue_objet_dist($objet, $id, $id_rubrique, $changer_
 			if (isset($set['langue_choisie'])) {
 				$set['langue_choisie'] = 'non';
 			}
-			sql_updateq($table_objet_sql, $set, "$id_table_objet=" . intval($id), [], $serveur);
+			sql_updateq($table_objet_sql, $set, "$id_table_objet=" . (int) $id, [], $serveur);
 			if ($table_objet_sql == 'spip_rubriques') {
 				include_spip('inc/rubriques');
 				calculer_langues_rubriques();

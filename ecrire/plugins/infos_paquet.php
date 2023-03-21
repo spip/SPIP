@@ -42,7 +42,7 @@ function plugins_infos_paquet($desc, $plug = '', $dir_plugins = _DIR_PLUGINS) {
 		$tree = $vxml->versions['0'];
 
 		// l'arbre renvoie parfois un tag vide... etrange. Pas la peine de garder ca.
-		if (isset($tree['']) && !strlen($tree[''])) {
+		if (isset($tree['']) && !strlen((string) $tree[''])) {
 			unset($tree['']);
 		}
 
@@ -93,7 +93,7 @@ function plugins_infos_paquet($desc, $plug = '', $dir_plugins = _DIR_PLUGINS) {
  * @return void
  */
 function paquet_readable_files(&$tree, $dir) {
-	$prefix = strtolower($tree['prefix']);
+	$prefix = strtolower((string) $tree['prefix']);
 
 	$tree['options'] = (is_readable($dir . $f = ($prefix . '_options.php'))) ? [$f] : [];
 	$tree['fonctions'] = (is_readable($dir . $f = ($prefix . '_fonctions.php'))) ? [$f] : [];
@@ -182,7 +182,7 @@ function paquet_finElement($phraseur, $name) {
 		$attrs = [];
 	}
 
-	$texte = trim($phraseur->versions[$n]['']);
+	$texte = trim((string) $phraseur->versions[$n]['']);
 	$phraseur->versions[$n][''] = '';
 
 	$f = 'info_paquet_' . $name;
@@ -244,8 +244,8 @@ function info_paquet_chemin($phraseur, $attrs, $texte) {
 function info_paquet_auteur($phraseur, $attrs, $texte) {
 	#  echo 'auteur ', $texte;  var_dump($attrs);
 	if (isset($attrs['mail'])) {
-		if (strpos($attrs['mail'], '@')) {
-			$attrs['mail'] = str_replace('@', ' AT ', $attrs['mail']);
+		if (strpos((string) $attrs['mail'], '@')) {
+			$attrs['mail'] = str_replace('@', ' AT ', (string) $attrs['mail']);
 		}
 		$mail = $attrs['mail'];
 	} else {

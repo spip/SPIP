@@ -357,7 +357,7 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 		}
 		if (
 			str_contains($source, '?')
-			&& str_starts_with($source, _DIR_IMG)
+			&& str_starts_with($source, (string) _DIR_IMG)
 			&& file_exists($f = preg_replace(',[?].*$,', '', $source))
 		) {
 			$source = $f;
@@ -557,7 +557,7 @@ function _image_extensions_acceptees_en_entree(): array {
 		$extensions = ['png', 'gif', 'jpg', 'jpeg'];
 		if (!empty($GLOBALS['meta']['gd_formats'])) {
 			// action=tester renseigne gd_formats et detecte le support de webp
-			$extensions = array_merge(explode(',', $GLOBALS['meta']['gd_formats']));
+			$extensions = array_merge(explode(',', (string) $GLOBALS['meta']['gd_formats']));
 			$extensions = array_map('trim', $extensions);
 			$extensions = array_filter($extensions);
 			if (in_array('jpg', $extensions)) {
@@ -591,7 +591,7 @@ function _image_extensions_acceptees_en_sortie(): array {
 }
 
 function _image_extension_normalisee($extension) {
-	$extension = strtolower($extension);
+	$extension = strtolower((string) $extension);
 	if ($extension === 'jpeg') {
 		$extension = 'jpg';
 	}
@@ -1043,7 +1043,7 @@ function reconstruire_image_intermediaire($fichier_manquant) {
 	$reconstruire = [];
 	$fichier = $fichier_manquant;
 	while (
-		!str_contains($fichier, '://')
+		!str_contains((string) $fichier, '://')
 		&& !@file_exists($fichier)
 		&& lire_fichier($src = "$fichier.src", $source)
 		&& ($valeurs = unserialize($source))
@@ -1091,7 +1091,7 @@ function ramasse_miettes($fichier) {
 	spip_unlink($src); # on supprime la reference a sa source pour marquer cette image comme non intermediaire
 	while (
 		($fichier = $valeurs['fichier'])
-		&& str_starts_with($fichier, _DIR_VAR)
+		&& str_starts_with((string) $fichier, (string) _DIR_VAR)
 		&& lire_fichier($src = "$fichier.src", $source)
 		&& ($valeurs = unserialize($source))  # et valide
 	) {
@@ -1132,13 +1132,13 @@ function image_graver($img) {
 	if (($p = strpos($fichier, '?')) !== false) {
 		$fichier = substr($fichier, 0, $p);
 	}
-	if (strlen($fichier) < 1 && !str_starts_with($img, '<img ')) {
+	if (strlen($fichier) < 1 && !str_starts_with((string) $img, '<img ')) {
 		$fichier = $img;
 	}
-	if (strlen($fichier)) {
+	if (strlen((string) $fichier)) {
 		# si jamais le fichier final n'a pas ete calcule car suppose temporaire
 		# et qu'il ne s'agit pas d'une URL
-		if (!str_contains($fichier, '://') && !@file_exists($fichier)) {
+		if (!str_contains((string) $fichier, '://') && !@file_exists($fichier)) {
 			reconstruire_image_intermediaire($fichier);
 		}
 		ramasse_miettes($fichier);
@@ -1146,7 +1146,7 @@ function image_graver($img) {
 		// ajouter le timestamp si besoin
 		if (!str_contains($fichier_ori, '?')) {
 			// on utilise str_replace pour attraper le onmouseover des logo si besoin
-			$img = str_replace($fichier_ori, timestamp($fichier_ori), $img);
+			$img = str_replace($fichier_ori, timestamp($fichier_ori), (string) $img);
 		}
 	}
 
@@ -1231,7 +1231,7 @@ function _image_ecrire_tag($valeurs, $surcharge = []) {
 	$valeurs = pipeline('image_ecrire_tag_preparer', $valeurs);
 
 	// fermer les tags img pas bien fermes;
-	$tag = str_replace('>', '/>', str_replace('/>', '>', $valeurs['tag']));
+	$tag = str_replace('>', '/>', str_replace('/>', '>', (string) $valeurs['tag']));
 
 	// le style
 	$style = $valeurs['style'];
@@ -1320,8 +1320,8 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process = 'AUTO
 	// le premier format disponible, selon la methode demandee, est utilise
 	$image = $valeurs['fichier'];
 	$format = $valeurs['format_source'];
-	$destdir = dirname($valeurs['fichier_dest']);
-	$destfile = basename($valeurs['fichier_dest'], '.' . $valeurs['format_dest']);
+	$destdir = dirname((string) $valeurs['fichier_dest']);
+	$destfile = basename((string) $valeurs['fichier_dest'], '.' . $valeurs['format_dest']);
 
 	$format_sortie = $valeurs['format_dest'];
 
@@ -1384,7 +1384,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process = 'AUTO
 				escapeshellcmd($image),
 				escapeshellcmd($vignette)
 			],
-			_RESIZE_COMMAND
+			(string) _RESIZE_COMMAND
 		);
 		spip_log($commande);
 		exec($commande);
@@ -1438,9 +1438,9 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process = 'AUTO
 			return;
 		}
 		$vignette = $destination . '.' . $format_sortie;
-		$pnmtojpeg_command = str_replace('pnmscale', 'pnmtojpeg', _PNMSCALE_COMMAND);
+		$pnmtojpeg_command = str_replace('pnmscale', 'pnmtojpeg', (string) _PNMSCALE_COMMAND);
 		if ($format == 'jpg') {
-			$jpegtopnm_command = str_replace('pnmscale', 'jpegtopnm', _PNMSCALE_COMMAND);
+			$jpegtopnm_command = str_replace('pnmscale', 'jpegtopnm', (string) _PNMSCALE_COMMAND);
 			exec("$jpegtopnm_command $image | " . _PNMSCALE_COMMAND . " -width $destWidth | $pnmtojpeg_command > $vignette");
 			if (!($s = @filesize($vignette))) {
 				spip_unlink($vignette);
@@ -1452,7 +1452,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process = 'AUTO
 			}
 		} else {
 			if ($format == 'gif') {
-				$giftopnm_command = str_replace('pnmscale', 'giftopnm', _PNMSCALE_COMMAND);
+				$giftopnm_command = str_replace('pnmscale', 'giftopnm', (string) _PNMSCALE_COMMAND);
 				exec("$giftopnm_command $image | " . _PNMSCALE_COMMAND . " -width $destWidth | $pnmtojpeg_command > $vignette");
 				if (!($s = @filesize($vignette))) {
 					spip_unlink($vignette);
@@ -1464,7 +1464,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process = 'AUTO
 				}
 			} else {
 				if ($format == 'png') {
-					$pngtopnm_command = str_replace('pnmscale', 'pngtopnm', _PNMSCALE_COMMAND);
+					$pngtopnm_command = str_replace('pnmscale', 'pngtopnm', (string) _PNMSCALE_COMMAND);
 					exec("$pngtopnm_command $image | " . _PNMSCALE_COMMAND . " -width $destWidth | $pnmtojpeg_command > $vignette");
 					if (!($s = @filesize($vignette))) {
 						spip_unlink($vignette);

@@ -55,7 +55,7 @@ function balise_MENU_LANG($p) {
  *   string: (vide) si pas de multilinguisme
  */
 function balise_MENU_LANG_stat($args, $context_compil) {
-	if (strpos($GLOBALS['meta']['langues_multilingue'], ',') === false) {
+	if (!str_contains((string) $GLOBALS['meta']['langues_multilingue'], ',')) {
 		return '';
 	}
 

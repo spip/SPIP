@@ -85,7 +85,7 @@ function spip_xml_parse(&$texte, $strict = true, $clean = true, $profondeur = -1
 	$out = [];
 	// enlever les commentaires
 	$charset = 'AUTO';
-	if ($clean === true) {
+	if ($clean) {
 		if (preg_match(",<\?xml\s(.*?)encoding=['\"]?(.*?)['\"]?(\s(.*))?\?>,im", $texte, $regs)) {
 			$charset = $regs[2];
 		}
@@ -116,10 +116,10 @@ function spip_xml_parse(&$texte, $strict = true, $clean = true, $profondeur = -1
 		$tag = rtrim($chars[1]);
 		$txt = $chars[2];
 
-		if (strncmp($tag, '![CDATA[', 8) == 0) {
+		if (str_starts_with($tag, '![CDATA[')) {
 			return importer_charset($texte, $charset);
 		}//$texte;
-		if (substr($tag, -1) == '/') { // self closing tag
+		if (str_ends_with($tag, '/')) { // self closing tag
 			$tag = rtrim(substr($tag, 0, strlen($tag) - 1));
 			$out[$tag][] = '';
 		} else {
@@ -128,19 +128,19 @@ function spip_xml_parse(&$texte, $strict = true, $clean = true, $profondeur = -1
 			// tag fermant
 			$ncclos = strlen("</$closing_tag>");
 			$p = strpos($txt, (string) "</$closing_tag>");
-			if ($p !== false and (strpos($txt, '<') < $p)) {
+			if ($p !== false && strpos($txt, '<') < $p) {
 				$nclose = 0;
 				$nopen = 0;
 				$d = 0;
 				while (
 					$p !== false
-					and ($morceau = substr($txt, $d, $p - $d))
-					and (($nopen += preg_match_all(
-						'{<' . preg_quote($closing_tag) . '(\s*>|\s[^>]*[^/>]>)}is',
+					&& ($morceau = substr($txt, $d, $p - $d))
+					&& ($nopen += preg_match_all(
+						'{<' . preg_quote((string) $closing_tag) . '(\s*>|\s[^>]*[^/>]>)}is',
 						$morceau,
 						$matches,
 						PREG_SET_ORDER
-					)) > $nclose)
+					)) > $nclose
 				) {
 					$nclose++;
 					$d = $p + $ncclos;
@@ -158,7 +158,7 @@ function spip_xml_parse(&$texte, $strict = true, $clean = true, $profondeur = -1
 			}
 			$content = substr($txt, 0, $p);
 			$txt = substr($txt, $p + $ncclos);
-			if ($profondeur == 0 or !str_contains($content, '<')) { // eviter une recursion si pas utile
+			if ($profondeur == 0 || !str_contains($content, '<')) { // eviter une recursion si pas utile
 			$out[$tag][] = importer_charset($content, $charset);
 			}//$content;
 			else {
@@ -179,9 +179,9 @@ function spip_xml_aplatit($arbre, $separateur = ' ') {
 	if (is_array($arbre)) {
 		foreach ($arbre as $tag => $feuille) {
 			if (is_array($feuille)) {
-				if ($tag !== intval($tag)) {
+				if ($tag !== (int) $tag) {
 					$f = spip_xml_aplatit($feuille, $separateur);
-					if (strlen($f)) {
+					if (strlen((string) $f)) {
 						$tagf = explode(' ', $tag);
 						$tagf = $tagf[0];
 						$s .= "<$tag>$f</$tagf>";
@@ -198,11 +198,11 @@ function spip_xml_aplatit($arbre, $separateur = ' ') {
 		}
 	}
 
-	return strlen($separateur) ? substr($s, 0, -strlen($separateur)) : $s;
+	return strlen((string) $separateur) ? substr($s, 0, -strlen((string) $separateur)) : $s;
 }
 
 function spip_xml_tagname($tag) {
-	if (preg_match(',^([a-z][\w:]*),i', $tag, $reg)) {
+	if (preg_match(',^([a-z][\w:]*),i', (string) $tag, $reg)) {
 		return $reg[1];
 	}
 
@@ -212,7 +212,7 @@ function spip_xml_tagname($tag) {
 function spip_xml_decompose_tag($tag) {
 	$tagname = spip_xml_tagname($tag);
 	$liste = [];
-	$tag = ltrim(strpbrk($tag, " \n\t"));
+	$tag = ltrim(strpbrk((string) $tag, " \n\t"));
 	$p = strpos($tag, '=');
 	while ($p !== false) {
 		$attr = trim(substr($tag, 0, $p));

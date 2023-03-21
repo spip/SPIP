@@ -30,23 +30,23 @@ function etape_ldap5_save() {
 
 	lire_fichier(_FILE_CONNECT_TMP, $conn);
 
-	if ($p = strpos($conn, "'');")) {
+	if ($p = strpos((string) $conn, "'');")) {
 		ecrire_fichier(
 			_FILE_CONNECT_TMP,
-			substr($conn, 0, $p + 1)
+			substr((string) $conn, 0, $p + 1)
 			. _FILE_LDAP
-			. substr($conn, $p + 1)
+			. substr((string) $conn, $p + 1)
 		);
 	}
 
-	$adresse_ldap = addcslashes(_request('adresse_ldap'), "'\\");
-	$login_ldap = addcslashes(_request('login_ldap'), "'\\");
-	$pass_ldap = addcslashes(_request('pass_ldap'), "'\\");
-	$port_ldap = addcslashes(_request('port_ldap'), "'\\");
-	$tls_ldap = addcslashes(_request('tls_ldap'), "'\\");
-	$protocole_ldap = addcslashes(_request('protocole_ldap'), "'\\");
-	$base_ldap = addcslashes(_request('base_ldap'), "'\\");
-	$base_ldap_text = addcslashes(_request('base_ldap_text'), "'\\");
+	$adresse_ldap = addcslashes((string) _request('adresse_ldap'), "'\\");
+	$login_ldap = addcslashes((string) _request('login_ldap'), "'\\");
+	$pass_ldap = addcslashes((string) _request('pass_ldap'), "'\\");
+	$port_ldap = addcslashes((string) _request('port_ldap'), "'\\");
+	$tls_ldap = addcslashes((string) _request('tls_ldap'), "'\\");
+	$protocole_ldap = addcslashes((string) _request('protocole_ldap'), "'\\");
+	$base_ldap = addcslashes((string) _request('base_ldap'), "'\\");
+	$base_ldap_text = addcslashes((string) _request('base_ldap_text'), "'\\");
 
 	$conn = "\$GLOBALS['ldap_base'] = '$base_ldap';\n"
 		. "\$GLOBALS['ldap_link'] = @ldap_connect('$adresse_ldap','$port_ldap');\n"
@@ -59,7 +59,7 @@ function etape_ldap5_save() {
 	$res = '';
 	foreach (array_keys($champs) as $champ) {
 		$nom = 'ldap_' . $champ;
-		$val = trim(_request($nom));
+		$val = trim((string) _request($nom));
 		if (preg_match('/^\w*$/', $val)) {
 			if ($val) {
 				$val = _q($val);

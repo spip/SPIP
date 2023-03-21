@@ -45,7 +45,7 @@ function action_cookie_dist($set_cookie_admin = null, $change_session = null) {
 		$redirect = $url ?: generer_url_ecrire('accueil');
 		$redirect_echec = _request('url_echec');
 		if (!isset($redirect_echec)) {
-			if (strpos($redirect, (string) _DIR_RESTREINT_ABS) !== false) {
+			if (str_contains((string) $redirect, (string) _DIR_RESTREINT_ABS)) {
 				$redirect_echec = generer_url_public('login', '', true);
 			} else {
 				$redirect_echec = $redirect;
@@ -64,12 +64,12 @@ function action_cookie_dist($set_cookie_admin = null, $change_session = null) {
 	}
 
 	// tentative de connexion en auth_http
-	if (_request('essai_auth_http') and !$GLOBALS['ignore_auth_http']) {
+	if (_request('essai_auth_http') && !$GLOBALS['ignore_auth_http']) {
 		include_spip('inc/auth');
 		if (
 			@$_SERVER['PHP_AUTH_USER']
-			and @$_SERVER['PHP_AUTH_PW']
-			and $auteur = lire_php_auth($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])
+			&& @$_SERVER['PHP_AUTH_PW']
+			&& ($auteur = lire_php_auth($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']))
 		) {
 			auth_loger($auteur);
 			redirige_par_entete(parametre_url($redirect, 't', time(), '&'));
@@ -78,9 +78,9 @@ function action_cookie_dist($set_cookie_admin = null, $change_session = null) {
 				_T('info_connexion_refusee'),
 				_T('login_login_pass_incorrect'),
 				_T('login_retour_site'),
-				'url=' . rawurlencode($redirect),
+				'url=' . rawurlencode((string) $redirect),
 				_T('login_nouvelle_tentative'),
-				(strpos($url, (string) _DIR_RESTREINT_ABS) !== false)
+				(str_contains((string) $url, (string) _DIR_RESTREINT_ABS))
 			);
 		}
 	} else {
@@ -93,7 +93,7 @@ function action_cookie_dist($set_cookie_admin = null, $change_session = null) {
 				$redirect = parametre_url(
 					parametre_url($redirect_echec, 'var_echec_cookie', 'oui', '&'),
 					'url',
-					rawurlencode($redirect),
+					rawurlencode((string) $redirect),
 					'&'
 				);
 			}
@@ -108,7 +108,7 @@ function action_cookie_dist($set_cookie_admin = null, $change_session = null) {
 				}
 			} // Ajout de cookie d'admin
 			else {
-				if ($set_cookie_admin and _DUREE_COOKIE_ADMIN) {
+				if ($set_cookie_admin && _DUREE_COOKIE_ADMIN) {
 					spip_setcookie('spip_admin', $set_cookie_admin, [
 						'expires' => time() + max(_DUREE_COOKIE_ADMIN, 2 * _RENOUVELLE_ALEA)
 					]);

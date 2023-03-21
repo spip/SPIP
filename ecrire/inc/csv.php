@@ -65,7 +65,7 @@ function analyse_csv($t) {
 				str_replace(
 					"\n",
 					'``**``', // échapper les saut de lignes, on les remettra après.
-					substr($cell, 1, -1)
+					substr((string) $cell, 1, -1)
 				)
 			),
 			$t

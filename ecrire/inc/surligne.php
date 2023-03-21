@@ -36,7 +36,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function surligner_mots($page, $surcharge_surligne = '') {
 	$surlignejs_engines = [
 		[
-			',' . str_replace(['/', '.'], ['\/', '\.'], $GLOBALS['meta']['adresse_site']) . ',i',
+			',' . str_replace(['/', '.'], ['\/', '\.'], (string) $GLOBALS['meta']['adresse_site']) . ',i',
 			',recherche=([^&]+),i'
 		], //SPIP
 		[',^http://(www\.)?google\.,i', ',q=([^&]+),i'], // Google
@@ -67,7 +67,7 @@ function surligner_mots($page, $surcharge_surligne = '') {
 		$surcharge_surligne = preg_replace(',\*$,', '', trim($surcharge_surligne)); # supprimer un * final
 	}
 	foreach ($surlignejs_engines as $engine) {
-		if ($surcharge_surligne || (preg_match($engine[0], $ref) && preg_match($engine[1], $ref))) {
+		if ($surcharge_surligne || (preg_match($engine[0], (string) $ref) && preg_match($engine[1], (string) $ref))) {
 			//good referrer found or var_recherche is not null
 			include_spip('inc/filtres');
 			$script = "
@@ -79,7 +79,7 @@ function surligner_mots($page, $surcharge_surligne = '') {
             style_name:'spip_surligne',
             exact:'whole',
             style_name_suffix:false,
-            engines:[/^" . str_replace(['/', '.'], ['\/', '\.'], $GLOBALS['meta']['adresse_site']) . "/i,/recherche=([^&]+)/i],
+            engines:[/^" . str_replace(['/', '.'], ['\/', '\.'], (string) $GLOBALS['meta']['adresse_site']) . "/i,/recherche=([^&]+)/i],
             highlight:'.surlignable',
             nohighlight:'.pas_surlignable'" .
 				($surcharge_surligne ? ",
