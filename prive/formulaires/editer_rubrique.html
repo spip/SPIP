@@ -29,7 +29,6 @@
 	    <div class="editer editer_texte[ (#ENV*{erreurs/texte}|oui)erreur]">
 				<label for="text_area"><:info_texte_explicatif:><em class="aide">#AIDER{text_area}</em></label>[
 				<span class='erreur_message'>(#ENV*{erreurs/texte})</span>
-				][(#ENV{_texte_trop_long,''})
 				]<textarea name='texte' id='text_area' rows='[(#ENV{config/lignes}|plus{2})]' cols='40'>[(#ENV{texte})]</textarea>
 	    </div>]
 	  </div>

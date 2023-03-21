@@ -301,9 +301,7 @@ function formulaires_editer_objet_charger(
 		. " rows='"
 		. ($config['lignes'] + 15)
 		. "' cols='40'";
-	if (isset($contexte['texte'])) {
-		[$contexte['texte'], $contexte['_texte_trop_long']] = editer_texte_recolle($contexte['texte'], $att_text);
-	}
+
 
 	// on veut conserver la langue de l'interface ;
 	// on passe cette donnee sous un autre nom, au cas ou le squelette
@@ -379,35 +377,6 @@ function coupe_trop_long($texte) {
 	} else {
 		return ([$texte, '']);
 	}
-}
-
-/**
- * Formater un `$texte` dans `textarea`
- *
- * @param string $texte
- * @param string $att_text
- * @return array
- */
-function editer_texte_recolle($texte, $att_text) {
-	if (
-		(strlen($texte) < 29 * 1024)
-		or (include_spip('inc/layer') and ($GLOBALS['browser_name'] != 'MSIE'))
-	) {
-		return [$texte, ''];
-	}
-
-	include_spip('inc/barre');
-	$textes_supplement = "<br /><span style='color: red'>" . _T('info_texte_long') . "</span>\n";
-	$nombre = 0;
-
-	while (strlen($texte) > 29 * 1024) {
-		$nombre++;
-		[$texte1, $texte] = coupe_trop_long($texte);
-		$textes_supplement .= '<br />' .
-			"<textarea id='texte$nombre' name='texte_plus[$nombre]'$att_text>$texte1</textarea>\n";
-	}
-
-	return [$texte, $textes_supplement];
 }
 
 /**
