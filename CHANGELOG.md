@@ -26,14 +26,16 @@
 
 ### Removed
 
+- Suppression de l’usage de la classe `no_image_filtrer` (utiliser la classe `filtre_inactif` qui l’a remplacé)
 - Boucle `POUR` (utiliser une boucle DATA tel que `<BOUCLE_x(DATA){source tableau, ...}>`)
+- Filtre `foreach` (utiliser une boucle `<BOUCLE_x(DATA){source table, #GET{tableau}}>...`)
+- Action `super_cron` (utiliser l’action `cron`, tel que `spip.php?action=cron`)
 - Fonction `critere_par_joint` (utiliser `calculer_critere_par_champ` si besoin)
 - Fonction `http_status` (utiliser `http_response_code`)
 - Fonction `generer_url_ecrire_objet` (utiliser `generer_objet_url_ecrire`)
 - Fonction `generer_lien_entite` (utiliser `generer_objet_lien`)
 - Fonction `generer_introduction_entite` (utiliser `generer_objet_introduction`)
 - Fonction `generer_info_entite` (utiliser `generer_objet_info`)
-- Filtre `foreach` (utiliser une boucle `<BOUCLE_x(DATA){source table, #GET{tableau}}>...`)
 - Fonction `lignes_longues` (utiliser un style CSS tel que `word-wrap:break-word;`)
 - Fonction `extraire_date`
 - Fonction `exporter_csv_ligne` (utiliser `exporter_csv_ligne_numerotee`)
@@ -42,7 +44,6 @@
 - Fonction `param_low_sec` (utiliser `generer_url_api_low_sec`)
 - Fonction `spip_connect_ldap` (utiliser `auth_ldap_connect`)
 - Fonction `_nano_sha256` (utiliser `hash('sha256', $str)`)
-- Action `super_cron` (utiliser l’action `cron`, tel que `spip.php?action=cron`)
 - #5505 Fonctions `verif_butineur()`, `editer_texte_recolle()` et environnement `_texte_trop_long` des formulaires (Inutilisé — servait pour IE !)
 - #5258 Retrait de toute mention à GD1 dans la configuration des vignettes
 
