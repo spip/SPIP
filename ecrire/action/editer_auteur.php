@@ -57,7 +57,7 @@ function action_editer_auteur_dist($arg = null) {
 				rename($logo, str_replace($id_hack, $id_auteur, (string) $logo));
 			}
 		}
- }
+	}
 
 	// Enregistre l'envoi dans la BD
 	$err = '';

@@ -37,7 +37,7 @@ function protege_champ(mixed $valeur, $max_prof = 128) {
 	if (is_array($valeur)) {
 		if ($max_prof > 0) {
 			return array_map(
-				fn($v) => protege_champ($v, $max_prof-1),
+				fn($v) => protege_champ($v, $max_prof - 1),
 				$valeur
 			);
 		}
@@ -92,11 +92,11 @@ function test_formulaire_inclus_par_modele() {
 		&& ($form = arguments_balise_dyn_depuis_modele(null, 'read'))
 		&& in_array('balise_formulaire__dyn', $trace_fonctions)
 	) {
-    	$k = array_search('balise_formulaire__dyn', $trace_fonctions);
-    	if ($trace[$k]['args'][0] === $form) {
-  			return $trace[$k]['args'];
-  		}
- }
+		$k = array_search('balise_formulaire__dyn', $trace_fonctions);
+		if ($trace[$k]['args'][0] === $form) {
+			return $trace[$k]['args'];
+		}
+	}
 
 	// fallback qui ne repose pas sur le flag lie a l'analyse de contexte_compil,
 	// mais ne marche pas si executer_balise_dynamique est appelee via du php dans le squelette

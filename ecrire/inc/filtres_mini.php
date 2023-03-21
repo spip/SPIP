@@ -191,12 +191,12 @@ function liens_absolus($texte, $base = '') {
 					strlen((string) $href) > 0
 					&& !preg_match(';^((?:[a-z]{3,7}:)?//);iS', (string) $href)
 				) {
-        			$abs = url_absolue($href, $base);
-       				if (rtrim((string) $href, '/') !== rtrim($abs, '/') && !preg_match('/^#/', (string) $href)) {
-  						$texte_lien = inserer_attribut($lien[0], $attr, $abs);
-  						$texte = str_replace($lien[0], $texte_lien, $texte);
-  					}
-    			}
+					$abs = url_absolue($href, $base);
+					if (rtrim((string) $href, '/') !== rtrim($abs, '/') && !preg_match('/^#/', (string) $href)) {
+						$texte_lien = inserer_attribut($lien[0], $attr, $abs);
+						$texte = str_replace($lien[0], $texte_lien, $texte);
+					}
+				}
 			}
 		}
 	}

@@ -53,7 +53,6 @@ function action_tester_dist() {
 		$gd_formats = implode(',', $gd_formats);
 		ecrire_meta('gd_formats_read', $gd_formats);
 		ecrire_meta('gd_formats', $gd_formats);
-
 	} elseif ($arg == 'netpbm') {
 		// verifier les formats netpbm
 		if (!defined('_PNMSCALE_COMMAND')) {
