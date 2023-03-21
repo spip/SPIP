@@ -60,8 +60,8 @@ function expliquer_config($cfg) {
 	}
 
 	// si on a demande #CONFIG{/meta,'',0}
- 	// pas sur un appel vide ''
- 	if (count($cfg) && '' !== ($c = array_shift($cfg))) {
+	// pas sur un appel vide ''
+	if (count($cfg) && '' !== ($c = array_shift($cfg))) {
 		$casier = $c;
 	}
 

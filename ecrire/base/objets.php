@@ -1266,7 +1266,7 @@ function objet_test_si_publie($objet, $id_objet, $serveur = '') {
 			$id_table,
 			$serveur
 		);
-  		return (bool) sql_fetch($res);
+		return (bool) sql_fetch($res);
 	}
 
 	// si pas d'info statut ni de fonction : l'objet est publie

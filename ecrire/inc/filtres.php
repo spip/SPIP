@@ -245,8 +245,8 @@ function version_vcs_courante($dir, $raw = false) {
  **/
 function decrire_version_git($dir) {
 	$c = null;
- 	$hash = null;
- 	if (!$dir) {
+	$hash = null;
+	if (!$dir) {
 		$dir = '.';
 	}
 
@@ -563,7 +563,7 @@ function image_filtrer($args) {
  **/
 function infos_image($img, $force_refresh = false) {
 
- 	static $largeur_img = [], $hauteur_img = [], $poids_img = [];
+	static $largeur_img = [], $hauteur_img = [], $poids_img = [];
 	$srcWidth = 0;
 	$srcHeight = 0;
 	$srcSize = null;
@@ -3005,7 +3005,7 @@ function direction_css($css, $voulue = '') {
  *     - Chemin ou URL du fichier CSS source sinon.
  **/
 function url_absolue_css($css) {
- 	if (!preg_match(',\.css$,i', $css, $r)) {
+	if (!preg_match(',\.css$,i', $css, $r)) {
 		return $css;
 	}
 
@@ -3386,7 +3386,8 @@ function http_img_variante_svg_si_possible($img_file) {
 	) {
 		if (
 			($variante_svg_size = substr($variante_svg_generique, 0, -6) . $m[1] . '.svg')
-			&& file_exists($variante_svg_size)) {
+			&& file_exists($variante_svg_size)
+		) {
 			$img_file = $variante_svg_size;
 		} else {
 			$img_file = $variante_svg_generique;
@@ -4003,7 +4004,7 @@ function encoder_contexte_ajax($c, $form = '', $emboite = null, $ajaxid = '') {
  */
 function decoder_contexte_ajax($c, $form = '') {
 	$contexte = null;
- 	if (!function_exists('calculer_cle_action')) {
+	if (!function_exists('calculer_cle_action')) {
 		include_spip('inc/securiser_action');
 	}
 	if (

@@ -241,8 +241,8 @@ function logo_migrer_en_base($objet, $time_limit) {
 						}
 					}
 				}
-       			$deja[$id_objet] = true;
-   			}
+				$deja[$id_objet] = true;
+			}
 			// si le fichier est encore la on le move : rien a faire ici
 			// (sauf si c'est une re-migration : il est deja dans logo/ donc il bouge pas)
 			if ($dir !== $dir_logos && file_exists($file)) {

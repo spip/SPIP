@@ -237,23 +237,22 @@ function objet_dupliquer_liens($objet, $id_source, $id_cible, $types = null, $ex
 	$n = 0;
 	foreach ($tables as $table_sql => $infos) {
 		if ((is_null($types) || in_array($infos['type'], $types)) && (is_null($exclure_types) || !in_array($infos['type'], $exclure_types)) && objet_associable($infos['type'])) {
-      $liens = (($infos['type'] == $objet) ?
-  					objet_trouver_liens([$objet => $id_source], '*')
-  					:
-  					objet_trouver_liens([$infos['type'] => '*'], [$objet => $id_source]));
-      foreach ($liens as $lien) {
-  					$n++;
-  					if ($infos['type'] == $objet) {
-  						if (
-  							(is_null($types) || in_array($lien['objet'], $types)) && (is_null($exclure_types) || !in_array($lien['objet'], $exclure_types))
-  						) {
-  							objet_associer([$objet => $id_cible], [$lien['objet'] => $lien[$lien['objet']]], $lien);
-  						}
-  					} else {
-  						objet_associer([$infos['type'] => $lien[$infos['type']]], [$objet => $id_cible], $lien);
-  					}
-  				}
-  }
+			$liens = (($infos['type'] == $objet)
+				? objet_trouver_liens([$objet => $id_source], '*')
+				: objet_trouver_liens([$infos['type'] => '*'], [$objet => $id_source]));
+			foreach ($liens as $lien) {
+				$n++;
+				if ($infos['type'] == $objet) {
+					if (
+						(is_null($types) || in_array($lien['objet'], $types)) && (is_null($exclure_types) || !in_array($lien['objet'], $exclure_types))
+					) {
+						objet_associer([$objet => $id_cible], [$lien['objet'] => $lien[$lien['objet']]], $lien);
+					}
+				} else {
+					objet_associer([$infos['type'] => $lien[$infos['type']]], [$objet => $id_cible], $lien);
+				}
+			}
+		}
 	}
 
 	return $n;
