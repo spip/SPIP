@@ -358,8 +358,8 @@ function charset2unicode($texte, $charset = 'AUTO' /* $forcer: obsolete*/) {
 			// Sinon, peut-etre connaissons-nous ce charset ?
 			if (!isset($trans[$charset]) && (($cset = load_charset($charset)) && is_array($GLOBALS['CHARSET'][$cset]))) {
 				foreach ($GLOBALS['CHARSET'][$cset] as $key => $val) {
-						$trans[$charset][chr($key)] = '&#' . $val . ';';
-					}
+					$trans[$charset][chr($key)] = '&#' . $val . ';';
+				}
 			}
 			if (isset($trans[$charset]) && (is_countable($trans[$charset]) ? count($trans[$charset]) : 0)) {
 				return str_replace(array_keys($trans[$charset]), array_values($trans[$charset]), $texte);
