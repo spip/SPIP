@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5e8c09cd2efb60b81ff54a66be15bb44",
+    "content-hash": "fe59a5f2be1aa5fcf1096fbab437aeeb",
     "packages": [
         {
             "name": "algo26-matthias/idna-convert",
@@ -214,22 +214,22 @@
         },
         {
             "name": "spip/security",
-            "version": "dev-composer",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://git.spip.net/spip-contrib-outils/securite.git",
-                "reference": "27720b49f0480f41bc2f3f90edfc8dd90f741c1e"
+                "reference": "97d3110947fe39e5cc4a3af057d06929c4ec7fb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://get.spip.net/composer/dist/spip/security/spip-security-dev-composer-4704ac.zip",
-                "reference": "27720b49f0480f41bc2f3f90edfc8dd90f741c1e",
-                "shasum": "ee1e81da7fdb61b0a7525757e9ad26f2376ffc09"
+                "url": "https://get.spip.net/composer/dist/spip/security/spip-security-1.5.1-98aa2e.zip",
+                "reference": "97d3110947fe39e5cc4a3af057d06929c4ec7fb7",
+                "shasum": "67e2ef4813df7261acd61b9faf98703d50601c95"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-composer": "1.5.x-dev"
+                    "dev-master": "1.5.x-dev"
                 }
             },
             "license": [
@@ -241,7 +241,7 @@
                 }
             ],
             "description": "Protection du site par blocage de certaines attaques",
-            "time": "2023-03-20T14:29:48+00:00"
+            "time": "2023-03-21T00:24:40+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -807,8 +807,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "spip/archiviste": 20,
-        "spip/security": 20
+        "spip/archiviste": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
