@@ -1,8 +1,7 @@
 {
     "license": "GPL-3.0-only",
     "require": {
-        "php": "^8.0",
-        "ext-json": "*",
+        "php": "^8.1",
         "ext-sodium": "*",
         "ext-xml": "*",
         "ext-zip": "*",
@@ -11,7 +10,6 @@
         "spip/composer-installer": "^0.5.0",
         "spip/security": "^1.5",
         "symfony/polyfill-mbstring": "^1.27",
-        "symfony/polyfill-php81": "^1.27",
         "symfony/polyfill-php82": "^1.27"
     },
     "require-dev": {
