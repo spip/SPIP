@@ -24,6 +24,7 @@
 
 ### Removed
 
+- Fonction `lignes_longues` (utiliser un style CSS tel que `word-wrap:break-word;`)
 - Fonction `extraire_date`
 - Fonction `exporter_csv_ligne` (utiliser `exporter_csv_ligne_numerotee`)
 - Fonctions `cvtmulti_formulaire_charger` et  `cvtmulti_formulaire_verifier` (voir `cvtmulti_formulaire_charger_etapes` et `cvtmulti_formulaire_verifier_etapes`)
