@@ -221,44 +221,6 @@ function generer_url_api_low_sec(string $script, string $format, string $fond, s
 	return generer_url_api($script, $path, $args, $no_entities = false, $public);
 }
 
-
-/**
- * inclure les arguments significatifs pour le hachage
- *
- * Cas particulier du statut pour compatibilité ancien rss/suivi_revisions
- *
- * @param string $op
- * @param array $args
- * @param string $lang
- * @param string $mime
- *     Par défaut 'rss'.
- * @return string
- * @deprecated 4.1
- */
-function param_low_sec($op, $args = [], $lang = '', $mime = 'rss') {
-	$a = $b = '';
-	foreach ($args as $val => $var) {
-		if ($var) {
-			if ($val != 'statut') {
-				$a .= ':' . $val . '-' . $var;
-			}
-			$b .= $val . '=' . $var . '&';
-		}
-	}
-	$a = substr($a, 1);
-	$id = (int) @$GLOBALS['connect_id_auteur'];
-
-	return $b
-	. 'op='
-	. $op
-	. '&id='
-	. $id
-	. '&cle='
-	. afficher_low_sec($id, "$mime $op $a")
-	. ($a ? "&args=$a" : '')
-	. ($lang ? "&lang=$lang" : '');
-}
-
 /**
  * Retourne une clé basée sur le low_sec de l'auteur et l'action demandé
  *
