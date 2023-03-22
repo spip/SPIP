@@ -3671,44 +3671,6 @@ function filtre_balise_svg_dist($img, $alt = '', $class = null, $size = null) {
 	return $svg;
 }
 
-
-
-/**
- * Affiche chaque valeur d'un tableau associatif en utilisant un modèle
- *
- * @deprecated 4.0
- * @see Utiliser `<BOUCLE_x(DATA){source table, #GET{tableau}}>`
- *
- * @example
- *     - `[(#ENV*|unserialize|foreach)]`
- *     - `[(#ARRAY{a,un,b,deux}|foreach)]`
- *
- * @filtre
- * @link https://www.spip.net/4248
- *
- * @param array $tableau
- *     Tableau de données à afficher
- * @param string $modele
- *     Nom du modèle à utiliser
- * @return string
- *     Code HTML résultant
- **/
-function filtre_foreach_dist($tableau, $modele = 'foreach') {
-	$texte = '';
-	if (is_array($tableau)) {
-		foreach ($tableau as $k => $v) {
-			$res = recuperer_fond(
-				'modeles/' . $modele,
-				array_merge(['cle' => $k], (is_array($v) ? $v : ['valeur' => $v]))
-			);
-			$texte .= $res;
-		}
-	}
-
-	return $texte;
-}
-
-
 /**
  * Obtient des informations sur les plugins actifs
  *
