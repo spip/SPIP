@@ -24,6 +24,7 @@
 
 ### Removed
 
+- Fonction `auteurs_article` (utiliser `auteurs_objets`)
 - Fonction `param_low_sec` (utiliser `generer_url_api_low_sec`)
 - Fonction `spip_connect_ldap` (utiliser `auth_ldap_connect`)
 - Fonction `_nano_sha256` (utiliser `hash('sha256', $str)`)
