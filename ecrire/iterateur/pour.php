@@ -37,6 +37,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Description de la boucle complétée des champs
  */
 function iterateur_POUR_dist($b) {
+	trigger_deprecation('spip', '4.0', 'Using "%s" BOUCLE type is deprecated, use "%s" instead', 'POUR', '<BOUCLE_x(DATA){source tableau,#XX}>');
+
 	$b->iterateur = 'DATA'; # designe la classe d'iterateur
 	$b->show = [
 		'field' => [

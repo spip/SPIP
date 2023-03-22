@@ -1050,6 +1050,7 @@ function calculer_critere_par_champ($idb, &$boucles, $crit, $par, $raw = false) 
  * @return string Champ pour le compilateur si trouvé, tel que "'alias.champ'", sinon vide.
  */
 function critere_par_joint($table, $champ, &$boucle) {
+	trigger_deprecation('spip', '3.2', 'Using "%s" Critere is deprecated', __FUNCTION__);
 	$t = array_search($table, $boucle->from);
 	if (!$t) {
 		$t = trouver_jointure_champ($champ, $boucle);
@@ -2940,6 +2941,7 @@ function critere_si_dist($idb, &$boucles, $crit) {
  * @param Critere $crit Paramètres du critère dans cette boucle
  */
 function critere_POUR_tableau_dist($idb, &$boucles, $crit) {
+	trigger_deprecation('spip', '4.0', 'Using "%s" Critere is deprecated, use "%s" instead', __FUNCTION__, "<BOUCLE_x(DATA){source tableau,#XX}>");
 	$boucle = &$boucles[$idb];
 	$boucle->hash .= '
 	$command[\'source\'] = array(' . calculer_liste($crit->param[0], $idb, $boucles, $boucles[$idb]->id_parent) . ');

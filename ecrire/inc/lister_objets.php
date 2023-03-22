@@ -39,6 +39,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Code HTML de la liste
  */
 function inc_lister_objets_dist($vue, $contexte = [], $force = false) {
+	trigger_deprecation('spip', '3.1', 'Using "%s" is deprecated, use or create "%s" skeleton instead', __FUNCTION__, 'prive/objets/liste/');
+
 	$res = ''; // debug
 	if (!is_array($contexte)) {
 		return _L('$contexte doit etre un tableau dans inc/lister_objets');

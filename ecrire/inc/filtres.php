@@ -4740,6 +4740,7 @@ function generer_objet_info($id_objet, string $type_objet, string $info, string 
  * @see generer_objet_info
  */
 function generer_info_entite($id_objet, $type_objet, $info, $etoile = '', $params = []) {
+	trigger_deprecation('spip', '4.1', 'Using "%s" is deprecated, use "%s" instead', __FUNCTION__, 'generer_objet_info');
 	return generer_objet_info(intval($id_objet), $type_objet, $info, $etoile, $params);
 }
 
@@ -4810,6 +4811,7 @@ function generer_objet_introduction(int $id_objet, string $type_objet, array $li
  * @see generer_objet_introduction
  */
 function generer_introduction_entite($id_objet, $type_objet, $ligne_sql, $introduction_longueur = null, $longueur_ou_suite = null, $suite = null, string $connect = '') {
+	trigger_deprecation('spip', '4.1', 'Using "%s" is deprecated, use "%s" instead', __FUNCTION__, 'generer_objet_introduction');
 	return generer_objet_introduction(intval($id_objet), $type_objet, $ligne_sql, $introduction_longueur, $longueur_ou_suite, $suite, $connect);
 }
 
@@ -4902,6 +4904,7 @@ function generer_objet_lien(int $id_objet, string $objet, int $longueur = 80, st
  * @see generer_objet_lien
  */
 function generer_lien_entite($id_objet, $objet, $longueur = 80, $connect = null) {
+	trigger_deprecation('spip', '4.1', 'Using "%s" is deprecated, use "%s" instead', __FUNCTION__, 'generer_objet_lien');
 	return generer_objet_lien(intval($id_objet), $objet, $longueur, $connect ?? '');
 }
 

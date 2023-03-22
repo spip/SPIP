@@ -348,5 +348,6 @@ function generer_objet_url_ecrire($id, string $objet, string $args = '', string 
  * @see generer_objet_url_ecrire
  */
 function generer_url_ecrire_objet($objet, $id, $args = '', $ancre = '', $public = null, string $connect = '') {
+	trigger_deprecation('spip', '4.1', 'Using "%s" is deprecated, use "%s" instead', __FUNCTION__, 'generer_objet_url_ecrire');
 	return generer_objet_url_ecrire($id, $objet, $args, $ancre, $public, $connect);
 }

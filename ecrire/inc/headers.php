@@ -199,6 +199,7 @@ function redirige_url_ecrire($script = '', $args = '', $equiv = '') {
  *     Code d'erreur
  **/
 function http_status($status) {
+	trigger_deprecation('spip', '4.1', 'Using "%s" is deprecated, use "%s" instead', __FUNCTION__, 'http_response_code');
 	http_response_code($status);
 }
 

@@ -34,6 +34,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *    Code HTML
  */
 function install_debut_html($titre = 'AUTO', $onLoad = '', $all_inline = false) {
+	trigger_deprecation('spip', '4.2', 'Using "%s" is deprecated, use "%s" instead', __FUNCTION__, 'Spip\Afficher\Minipage\Admin::installDebutPage');
 
 	if ($onLoad) {
 		include_spip('inc/filtres');
@@ -59,6 +60,8 @@ function install_debut_html($titre = 'AUTO', $onLoad = '', $all_inline = false) 
  * @return string Code HTML
  */
 function install_fin_html() {
+	trigger_deprecation('spip', '4.2', 'Using "%s" is deprecated, use "%s" instead', __FUNCTION__, 'Spip\Afficher\Minipage\Admin::installFinPage');
+
 	$minipage = new Spip\Afficher\Minipage\Admin();
 	return $minipage->installFinPage();
 }
