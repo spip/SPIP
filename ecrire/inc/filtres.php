@@ -1231,10 +1231,7 @@ function PtoBR($texte) {
  * @return string texte encadré du style CSS
  */
 function lignes_longues($texte) {
-	trigger_error(
-		sprintf('Usage of function or filter \'%s\' is deprecated. Use CSS instead.', __FUNCTION__),
-		\E_USER_DEPRECATED
-	);
+	trigger_deprecation('spip', '4.2', 'Using function or filter "%s" is deprecated, use CSS instead');
 
 	if (!strlen(trim($texte))) {
 		return $texte;
