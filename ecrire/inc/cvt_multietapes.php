@@ -152,24 +152,6 @@ function cvtmulti_sauver_post($form, $je_suis_poste, &$valeurs) {
 	return $valeurs;
 }
 
-
-/**
- * Reperer une demande de formulaire CVT multi page
- * et la reformater
- *
- * @deprecated 3.2
- * @see cvtmulti_formulaire_charger_etapes()
- * @param array $flux
- * @return array
- */
-function cvtmulti_formulaire_charger($flux) {
-	if (is_array($flux['data']) && isset($flux['data']['_etapes'])) {
-		$flux['data'] = cvtmulti_formulaire_charger_etapes($flux['args'], $flux['data']);
-	}
-
-	return $flux;
-}
-
 /**
  * Charger une etape du cvt multi
  * @param $args
@@ -190,20 +172,6 @@ function cvtmulti_formulaire_charger_etapes($args, $valeurs) {
 		$valeurs = cvtmulti_sauver_post($form, $je_suis_poste, $valeurs);
 	}
 	return $valeurs;
-}
-
-
-/**
- * Verifier les etapes de saisie
- *
- * @deprecated 3.2
- * @see cvtmulti_formulaire_verifier_etapes()
- * @param array $flux
- * @return array
- */
-function cvtmulti_formulaire_verifier($flux) {
-	$flux['data'] = cvtmulti_formulaire_verifier_etapes($flux['args'], $flux['data']);
-	return $flux;
 }
 
 /**
