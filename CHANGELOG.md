@@ -24,6 +24,7 @@
 
 ### Removed
 
+- Fonctions `cvtmulti_formulaire_charger` et  `cvtmulti_formulaire_verifier` (voir `cvtmulti_formulaire_charger_etapes` et `cvtmulti_formulaire_verifier_etapes`)
 - Fonction `auteurs_article` (utiliser `auteurs_objets`)
 - Fonction `param_low_sec` (utiliser `generer_url_api_low_sec`)
 - Fonction `spip_connect_ldap` (utiliser `auth_ldap_connect`)
