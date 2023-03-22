@@ -36,6 +36,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *    Date au format SQL tel que `2008-04-01` sinon ''
  **/
 function extraire_date($texte): string {
+	trigger_deprecation('spip', '4.2', 'Using "%s" is deprecated,', __FUNCTION__);
 	// format = 2001-08
 	if (preg_match(',([1-2][0-9]{3})[^0-9]*(1[0-2]|0?[1-9]),', $texte, $regs)) {
 		return $regs[1] . '-' . sprintf('%02d', $regs[2]) . '-01';

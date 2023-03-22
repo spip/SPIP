@@ -255,6 +255,8 @@ function generer_url_api_low_sec(string $script, string $format, string $fond, s
  * @deprecated 4.1
  */
 function param_low_sec($op, $args = [], $lang = '', $mime = 'rss') {
+	trigger_deprecation('spip', '4.1', 'Using "%s" is deprecated, use "%s" instead', __FUNCTION__, 'generer_url_api_low_sec');
+
 	$a = $b = '';
 	foreach ($args as $val => $var) {
 		if ($var) {

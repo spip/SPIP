@@ -377,6 +377,7 @@ function spip_connect_main($connexion, $charset_sql_connexion = '') {
  * @return array
  */
 function spip_connect_ldap($serveur = '') {
+	trigger_deprecation('spip', '3.1', 'Using "%s" is deprecated, use "%s" instead', __FUNCTION__, 'auth_ldap_connect');
 	include_spip('auth/ldap');
 	return auth_ldap_connect($serveur);
 }

@@ -3756,6 +3756,7 @@ function filtre_balise_svg_dist($img, $alt = '', $class = null, $size = null) {
  *     Code HTML résultant
  **/
 function filtre_foreach_dist($tableau, $modele = 'foreach') {
+	trigger_deprecation('spip', '4.0', 'Using "%s" filter is deprecated, use "%s" instead', 'foreach', '<BOUCLE_x(DATA){source table, #GET{tableau}}>');
 	$texte = '';
 	if (is_array($tableau)) {
 		foreach ($tableau as $k => $v) {
@@ -4498,6 +4499,7 @@ function filtre_bouton_action_horizontal_dist($lien, $texte, $fond, $fonction = 
  *     Code HTML du lien
  */
 function filtre_icone_dist($lien, $texte, $fond, $align = '', $fonction = '', $class = '', $javascript = '') {
+	trigger_deprecation('spip', '3.1', 'Using "%s" filter is deprecated, use "%s" instead', 'icone', 'icone_verticale');
 	return icone_base($lien, $texte, $fond, $fonction, "verticale $align $class", $javascript);
 }
 

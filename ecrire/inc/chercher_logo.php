@@ -82,6 +82,7 @@ function inc_chercher_logo_dist($id, $_id_objet, $mode = 'on', $compat_old_logos
  * @deprecated 4.0 MAIS NE PAS SUPPRIMER CAR SERT POUR L'UPGRADE des logos et leur mise en base
  **/
 function type_du_logo($_id_objet) {
+	trigger_deprecation('spip', '4.0', 'Using "%s" is deprecated', __FUNCTION__);
 	return $GLOBALS['table_logos'][$_id_objet] ?? objet_type(preg_replace(',^id_,', '', $_id_objet));
 }
 

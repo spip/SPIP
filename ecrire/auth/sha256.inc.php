@@ -22,5 +22,6 @@ function spip_sha256($str) {
  * @see spip_sha256()
  */
 function _nano_sha256($str, $ig_func = true) {
+	trigger_deprecation('spip', '4.0', 'Using "%s" is deprecated, use "%s" instead', __FUNCTION__, "hash('sha256', ...)");
 	return spip_sha256($str);
 }

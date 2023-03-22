@@ -1943,6 +1943,7 @@ function auteurs_objet($objet, $id_objet, $cond = '') {
  *     - false : serveur SQL indisponible
  */
 function auteurs_article($id_article, $cond = '') {
+	trigger_deprecation('spip', '3.2', 'Using "%s" is deprecated, use "%s" instead', __FUNCTION__, 'auteurs_objets');
 	return sql_allfetsel(
 		'id_auteur',
 		'spip_auteurs_liens',

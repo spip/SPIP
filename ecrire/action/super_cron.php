@@ -38,6 +38,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @uses queue_lancer_url_http_async()
  */
 function action_super_cron_dist() {
+	trigger_deprecation('spip', '4.0', 'Using "%s" is deprecated, use "%s" instead', 'action super_cron', 'action cron');
 	$url_cron = generer_url_action('cron');
 	include_spip('inc/queue');
 	queue_lancer_url_http_async($url_cron);

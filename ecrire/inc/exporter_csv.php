@@ -74,6 +74,7 @@ function exporter_csv_ligne_numerotee($nb, $ligne, $delim = ',', $importer_chars
  * @return string
  */
 function exporter_csv_ligne($ligne, $delim = ',', $importer_charset = null) {
+	trigger_deprecation('spip', '3.2', 'Using "%s" is deprecated, use "%s" instead', __FUNCTION__, 'exporter_csv_ligne_numerotee');
 	return exporter_csv_ligne_numerotee(null, $ligne, $delim, $importer_charset);
 }
 

@@ -163,6 +163,7 @@ function cvtmulti_sauver_post($form, $je_suis_poste, &$valeurs) {
  * @return array
  */
 function cvtmulti_formulaire_charger($flux) {
+	trigger_deprecation('spip', '3.2', 'Using "%s" is deprecated, use "%s" instead', __FUNCTION__, 'cvtmulti_formulaire_charger_etapes');
 	if (
 		is_array($flux['data'])
 		and isset($flux['data']['_etapes'])
@@ -205,6 +206,7 @@ function cvtmulti_formulaire_charger_etapes($args, $valeurs) {
  * @return array
  */
 function cvtmulti_formulaire_verifier($flux) {
+	trigger_deprecation('spip', '3.2', 'Using "%s" is deprecated, use "%s" instead', __FUNCTION__, 'cvtmulti_formulaire_verifier_etapes');
 	$flux['data'] = cvtmulti_formulaire_verifier_etapes($flux['args'], $flux['data']);
 	return $flux;
 }
