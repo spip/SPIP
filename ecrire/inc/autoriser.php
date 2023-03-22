@@ -1888,26 +1888,6 @@ function auteurs_objet($objet, $id_objet, $cond = '') {
 }
 
 /**
- * Lister les auteurs d'un article
- *
- * @deprecated 3.2
- * @see auteurs_objets()
- * @param int $id_article Identifiant de l'article
- * @param string $cond Condition en plus dans le where de la requête
- * @return array|bool
- *     - array : liste des id_auteur trouvés
- *     - false : serveur SQL indisponible
- */
-function auteurs_article($id_article, $cond = '') {
-	return sql_allfetsel(
-		'id_auteur',
-		'spip_auteurs_liens',
-		"objet='article' AND id_objet=" . (int) $id_article . ($cond ? " AND $cond" : '')
-	);
-}
-
-
-/**
  * Tester si on est admin restreint sur une rubrique donnée
  *
  * Fonction générique utilisee dans des autorisations ou assimilée
