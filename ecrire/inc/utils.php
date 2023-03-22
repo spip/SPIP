@@ -394,6 +394,7 @@ function spip_log($message = null, $name = null) {
 	}
 }
 
+
 /**
  * Enregistrement des journaux
  *
