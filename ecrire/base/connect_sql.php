@@ -361,23 +361,6 @@ function spip_connect_main($connexion, $charset_sql_connexion = '') {
 }
 
 /**
- * Connection à LDAP
- *
- * Fonction présente pour compatibilité
- *
- * @deprecated 3.1
- * @see Utiliser l'authentification LDAP de auth/ldap
- * @uses auth_ldap_connect()
- *
- * @param string $serveur Nom du connecteur
- * @return array
- */
-function spip_connect_ldap($serveur = '') {
-	include_spip('auth/ldap');
-	return auth_ldap_connect($serveur);
-}
-
-/**
  * Échappement d'une valeur sous forme de chaîne PHP
  *
  * Échappe une valeur (num, string, array) pour en faire une chaîne pour PHP.
