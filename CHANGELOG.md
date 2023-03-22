@@ -24,6 +24,7 @@
 
 ### Removed
 
+- Filtre `foreach` (utiliser une boucle `<BOUCLE_x(DATA){source table, #GET{tableau}}>...`)
 - Fonction `lignes_longues` (utiliser un style CSS tel que `word-wrap:break-word;`)
 - Fonction `extraire_date`
 - Fonction `exporter_csv_ligne` (utiliser `exporter_csv_ligne_numerotee`)
