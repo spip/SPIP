@@ -251,20 +251,6 @@ function balise_FORMULAIRE__contexte($form, $args) {
 		$action = parametre_url($action, 'formulaire_action_sign', '');
 	}
 
-	/**
-	 * @deprecated 4.0
-	 * servait pour poster sur les actions de type editer_xxx() qui ne prenaient pas d'argument autrement que par _request('arg') et pour lesquelles il fallait donc passer un hash valide
-	 */
-	/*
-	if (isset($valeurs['_action'])) {
-		$securiser_action = charger_fonction('securiser_action', 'inc');
-		$secu = $securiser_action(reset($valeurs['_action']), end($valeurs['_action']), '', -1);
-		$valeurs['_hidden'] = (isset($valeurs['_hidden']) ? $valeurs['_hidden'] : '') .
-			"<input type='hidden' name='arg' value='" . $secu['arg'] . "' />"
-			. "<input type='hidden' name='hash' value='" . $secu['hash'] . "' />";
-	}
-	*/
-
 	// empiler la lang en tant que premier argument implicite du CVT
 	// pour permettre de la restaurer au moment du Verifier et du Traiter
 	array_unshift($args, $GLOBALS['spip_lang']);
