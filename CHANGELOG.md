@@ -24,6 +24,7 @@
 
 ### Removed
 
+- Fonction `spip_connect_ldap` (utiliser `auth_ldap_connect`)
 - Fonction `_nano_sha256` (utiliser `hash('sha256', $str)`)
 - Action `super_cron` (utiliser l’action `cron`, tel que `spip.php?action=cron`)
 - #5505 Fonctions `verif_butineur()`, `editer_texte_recolle()` et environnement `_texte_trop_long` des formulaires (Inutilisé — servait pour IE !)
