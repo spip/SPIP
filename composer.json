@@ -6,7 +6,7 @@
         "ext-xml": "*",
         "ext-zip": "*",
         "algo26-matthias/idna-convert": "^4.0",
-        "spip/archiviste": "^2.3@dev",
+        "spip/archiviste": "^3.0@dev",
         "spip/composer-installer": "^0.5.0",
         "spip/security": "^1.5",
         "symfony/polyfill-mbstring": "^1.27",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5b19cba75d218fa7bab7c82f065d33d8",
+    "content-hash": "ba0d05c6997ff9504c742ff5ddeaf80a",
     "packages": [
         {
             "name": "algo26-matthias/idna-convert",
@@ -105,32 +105,32 @@
             "source": {
                 "type": "git",
                 "url": "https://git.spip.net/spip/archiviste.git",
-                "reference": "c01dcc1c0512ff09309147322595bab0bbb8493b"
+                "reference": "9e29530e706de2334d2aca3d23a0c3480459260c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://get.spip.net/composer/dist/spip/archiviste/spip-archiviste-dev-master-750327.zip",
-                "reference": "c01dcc1c0512ff09309147322595bab0bbb8493b",
-                "shasum": "c547ccace649295050d8e23e8eacf3f43a8b4b3b"
+                "url": "https://get.spip.net/composer/dist/spip/archiviste/spip-archiviste-dev-master-362c35.zip",
+                "reference": "9e29530e706de2334d2aca3d23a0c3480459260c",
+                "shasum": "a2e82c8124949ff5cba6fc78c232d778412fc837"
             },
             "require": {
                 "ext-phar": "*",
                 "ext-zip": "*",
                 "ext-zlib": "*",
-                "php": "^7.4 || ^8.0"
+                "php": "^8.1"
             },
             "require-dev": {
                 "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
                 "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^9.6",
-                "rector/rector": "^0.12.23",
+                "phpunit/phpunit": "^10.0",
+                "rector/rector": "^0.15.23",
                 "spip/coding-standards": "^1.2"
             },
             "default-branch": true,
             "type": "spip-plugin",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3.x-dev"
+                    "dev-master": "3.0.x-dev"
                 }
             },
             "autoload": {
@@ -160,7 +160,7 @@
                 "tar",
                 "zip"
             ],
-            "time": "2023-03-20T15:57:24+00:00"
+            "time": "2023-03-22T20:13:44+00:00"
         },
         {
             "name": "spip/composer-installer",
