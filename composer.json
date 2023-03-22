@@ -15,7 +15,8 @@
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
         "phpstan/phpstan": "^1.10",
-        "spip/coding-standards": "^1.2"
+        "spip/coding-standards": "^1.3",
+        "phpcompatibility/php-compatibility": "dev-develop@dev"
     },
     "suggest": {
         "ext-curl": "*",

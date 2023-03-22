@@ -4,7 +4,7 @@
     <file>./prive</file>
     <exclude-pattern>ecrire/lang/*</exclude-pattern>
 
-    <rule ref="SPIP41"/>
+    <rule ref="SPIP50"/>
 
     <config name="ignore_warnings_on_exit" value="1"/>
     <arg name="cache" value="tmp/php_cs.cache"/>
