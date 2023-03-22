@@ -9,6 +9,8 @@
  *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
 \***************************************************************************/
 
+use Spip\ErrorHandler;
+
 /**
  * Initialisation de SPIP
  *
@@ -484,7 +486,8 @@ if (!defined('SPIP_ERREUR_REPORT')) {
 	/** Masquer les warning */
 	define('SPIP_ERREUR_REPORT', E_ALL ^ E_NOTICE ^ E_DEPRECATED);
 }
-error_reporting(SPIP_ERREUR_REPORT);
+
+ErrorHandler::setup(SPIP_ERREUR_REPORT);
 
 // Initialisations critiques non surchargeables par les plugins
 // INITIALISER LES REPERTOIRES NON PARTAGEABLES ET LES CONSTANTES
