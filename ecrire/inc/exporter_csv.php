@@ -66,18 +66,6 @@ function exporter_csv_ligne_numerotee($nb, $ligne, $delim = ',', $importer_chars
 }
 
 /**
- * @deprecated 4.0
- *
- * @param $ligne
- * @param string $delim
- * @param null $importer_charset
- * @return string
- */
-function exporter_csv_ligne($ligne, $delim = ',', $importer_charset = null) {
-	return exporter_csv_ligne_numerotee(null, $ligne, $delim, $importer_charset);
-}
-
-/**
  * Exporte une ressource sous forme de fichier CSV
  *
  * La ressource peut etre un tableau ou une resource SQL issue d'une requete
@@ -85,8 +73,6 @@ function exporter_csv_ligne($ligne, $delim = ',', $importer_charset = null) {
  * L'extension est choisie en fonction du délimiteur si elle n'est pas indiquée dans les options :
  * - si on utilise ',' c'est un vrai csv avec extension csv
  * - si on utilise ';' ou tabulation c'est pour E*cel, et on exporte en iso-truc, avec une extension .xls
- *
- * @uses exporter_csv_ligne()
  *
  * @param string $titre
  *    Titre utilisé pour nommer le fichier si celui-ci n'est pas indiqué dans les options
