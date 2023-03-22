@@ -101,14 +101,9 @@ function lire_cache($nom_cache) {
 function cache_signature(&$page) {
 	if (!isset($GLOBALS['meta']['cache_signature'])) {
 		include_spip('inc/acces');
-		include_spip('auth/sha256.inc');
 		ecrire_meta(
 			'cache_signature',
-			spip_sha256(
-				$_SERVER['DOCUMENT_ROOT']
-				. ($_SERVER['SERVER_SIGNATURE'] ?? '')
-				. creer_uniqid()
-			),
+			hash('sha256', $_SERVER['DOCUMENT_ROOT'] . ($_SERVER['SERVER_SIGNATURE'] ?? '') . creer_uniqid()),
 			'non'
 		);
 	}

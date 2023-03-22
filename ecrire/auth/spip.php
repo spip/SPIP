@@ -81,8 +81,7 @@ function auth_spip_dist($login, #[\SensitiveParameter] $pass, $serveur = '', $ph
 		case 64:
 			if (empty($hash)) {
 				// anciens mots de passe encodes en sha256(alea.pass)
-				include_spip('auth/sha256.inc');
-				$hash = spip_sha256($row['alea_actuel'] . $pass);
+				$hash =  hash('sha256', $row['alea_actuel'] . $pass);
 				$methode = 'sha256';
 			}
 			if ($row['pass'] === $hash) {
