@@ -11,6 +11,7 @@
 
 ### Added
 
+- Log des dépréciations, via la fonction `trigger_deprecation` (de symfony/deprecations-contracts).
 - #5301 Permettre de fournir le nom de l’attachement à `spip_livrer_fichier()`
 
 ### Changed
