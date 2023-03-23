@@ -342,11 +342,3 @@ function generer_objet_url_ecrire($id, string $objet, string $args = '', string 
 
 	return generer_url_ecrire(objet_info($objet, 'url_voir'), $a . ($args ? "&$args" : '')) . ($ancre ? "#$ancre" : '');
 }
-
-/**
- * @deprecated 4.1
- * @see generer_objet_url_ecrire
- */
-function generer_url_ecrire_objet($objet, $id, $args = '', $ancre = '', $public = null, string $connect = '') {
-	return generer_objet_url_ecrire($id, $objet, $args, $ancre, $public, $connect);
-}
