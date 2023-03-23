@@ -425,7 +425,7 @@ function quete_logo_objet($id_objet, $objet, $mode) {
 	$cle_objet = id_table_objet($objet);
 
 	// On cherche pas la méthode classique
-	$infos_logo = $chercher_logo($id_objet, $cle_objet, $mode);
+	$infos_logo = $chercher_logo((int) $id_objet, $cle_objet, $mode);
 
 	// Si la méthode classique a trouvé quelque chose, on utilise le nouveau format
 	if (!empty($infos_logo)) {
