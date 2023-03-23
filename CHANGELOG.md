@@ -26,6 +26,9 @@
 
 ### Removed
 
+- Fonction `generer_lien_entite` (utiliser `generer_objet_lien`)
+- Fonction `generer_introduction_entite` (utiliser `generer_objet_introduction`)
+- Fonction `generer_info_entite` (utiliser `generer_objet_info`)
 - Filtre `foreach` (utiliser une boucle `<BOUCLE_x(DATA){source table, #GET{tableau}}>...`)
 - Fonction `lignes_longues` (utiliser un style CSS tel que `word-wrap:break-word;`)
 - Fonction `extraire_date`
