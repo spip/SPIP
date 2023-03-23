@@ -119,9 +119,11 @@ function logo_modifier($objet, $id_objet, $etat, $source) {
 		return $erreur;
 	}
 
-	// supprimer le logo eventueel existant
-	// TODO : si un logo existe, le modifier plutot que supprimer + reinserer (mais il faut gerer le cas ou il est utilise par plusieurs objets, donc pas si simple)
+	// supprimer le logo éventuel existant
+	// TODO : si un logo existe, le modifier plutot que supprimer + reinserer
+	// (mais il faut gerer le cas ou il est utilise par plusieurs objets, donc pas si simple)
 	// mais de toute facon l'interface actuelle oblige a supprimer + reinserer
+	// @see medias_upgrade_logo_objet()
 	if (empty($GLOBALS['logo_migrer_en_base'])) {
 		logo_supprimer($objet, $id_objet, $etat);
 	}
@@ -145,6 +147,21 @@ function logo_modifier($objet, $id_objet, $etat, $source) {
 	return ''; // tout est bon, pas d'erreur
 }
 
+/**
+ * Migration des logos en documents.
+ *
+ * - avant dans IMG/artonXX.png
+ * - après dans IMG/logo/... + enregistrés en document dans spip_documents
+ *
+ * Cette migration est effectuée à partir de SPIP 4.0
+ * et la fonction doit être appelée pour chaque plugin qui aurait utilisé des logos
+ * sur des objets éditoriaux.
+ *
+ * @since 4.0
+ * @deprecated 5.0 Migrer le site & les logos / tables dans un SPIP 4.x ou 5.x
+ * @param string $objet Type d’objet spip, tel que 'article'
+ * @param int $time_limit
+ */
 function logo_migrer_en_base($objet, $time_limit) {
 
 	$dir_logos_erreurs = sous_repertoire(_DIR_IMG, 'logo_erreurs');
@@ -267,4 +284,31 @@ function logo_migrer_en_base($objet, $time_limit) {
 	$GLOBALS['meta']['articles_modif'] = $articles_modif;
 
 	effacer_meta('drapeau_edition');
+}
+
+
+/**
+ * Retourne le type de logo tel que `art` depuis le nom de clé primaire
+ * de l'objet
+ *
+ * C'est par défaut le type d'objet, mais il existe des exceptions historiques
+ * déclarées par la globale `$table_logos`
+ *
+ * @see logo_migrer_en_base()
+ * @see medias_upgrade_logo_objet()
+ *
+ * @param string $_id_objet
+ *     Nom de la clé primaire de l'objet
+ * @return string
+ *     Type du logo
+ * @deprecated 4.0 MAIS NE PAS SUPPRIMER CAR SERT POUR L'UPGRADE des logos et leur mise en base
+ **/
+function type_du_logo($_id_objet) {
+	$legacy_tables_logos = [
+		'id_article' => 'art',
+		'id_auteur' => 'aut',
+		'id_rubrique' => 'rub',
+		'id_groupe' => 'groupe',
+	];
+	return $legacy_tables_logos[$_id_objet] ?? objet_type(preg_replace(',^id_,', '', $_id_objet));
 }
