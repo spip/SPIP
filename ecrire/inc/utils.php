@@ -1913,6 +1913,7 @@ function generer_objet_url($id, string $entite, string $args = '', string $ancre
  * @see generer_objet_url
  */
 function generer_url_entite($id = 0, $entite = '', $args = '', $ancre = '', $public = null, $type = null) {
+	trigger_deprecation('spip', '4.1', 'Using "%s" is deprecated, use "%s" instead', __FUNCTION__, 'generer_objet_url');
 	if ($public and is_string($public)) {
 		return generer_objet_url(intval($id), $entite, $args ?: '', $ancre ?: '', true, $type ?? '', $public);
 	}
@@ -1948,6 +1949,7 @@ function generer_objet_url_ecrire_edit($id, string $entite, string $args = '', s
  * @see generer_objet_url_ecrire_edit
  */
 function generer_url_ecrire_entite_edit($id, $entite, $args = '', $ancre = '') {
+	trigger_deprecation('spip', '4.1', 'Using "%s" is deprecated, use "%s" instead', __FUNCTION__, 'generer_objet_url_ecrire_edit');
 	return generer_objet_url_ecrire_edit(intval($id), $entite, $args, $ancre);
 }
 
@@ -2012,6 +2014,7 @@ function generer_objet_url_absolue($id = 0, string $entite = '', string $args = 
  * @see  generer_objet_url_absolue
  */
 function generer_url_entite_absolue($id = 0, $entite = '', $args = '', $ancre = '', $connect = null) {
+	trigger_deprecation('spip', '4.1', 'Using "%s" is deprecated, use "%s" instead', __FUNCTION__, 'generer_objet_url_absolue');
 	return generer_objet_url_absolue(intval($id), $entite, $args, $ancre, true, '', $connect ?? '');
 }
 
