@@ -1,6 +1,6 @@
 <div class='infos'>
 #SET{texte_objet,#ENV{type}|objet_info{texte_objet}|_T}
-<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>[(#ENV{id}|generer_info_entite{#ENV{type},[(#ENV{type}|id_table_objet)],'**'})]</p></div>
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>[(#ENV{id}|generer_objet_info{#ENV{type},[(#ENV{type}|id_table_objet)],'**'})]</p></div>
 
 
 [(#FORMULAIRE_INSTITUER_OBJET{#ENV{type},#ENV{id},'',#ENV{type}|objet_info{editable}})]
@@ -21,7 +21,7 @@
 	]
 	[(#PUBLIE{#ENV{type}, #ENV{id}}|non)
 		#SET{champ_statut,#ENV{type}|objet_info{statut/0/champ}}
-		[(#GET{champ_statut}|oui|et{#AUTORISER{previsualiser,#ENV{type},#ENV{id},'',#ARRAY{#GET{champ_statut},#ENV{id}|generer_info_entite{#ENV{type},#GET{champ_statut}}}}})
+		[(#GET{champ_statut}|oui|et{#AUTORISER{previsualiser,#ENV{type},#ENV{id},'',#ARRAY{#GET{champ_statut},#ENV{id}|generer_objet_info{#ENV{type},#GET{champ_statut}}}}})
 			[(#VAL{redirect}
 				|generer_url_action{type=#ENV{type}&id=#ENV{id}}
 				|parametre_url{var_mode,preview}

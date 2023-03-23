@@ -1,5 +1,5 @@
 <BOUCLE_champs(DATA){source table, #ENV{objet}|objet_info{champs_contenu}}>
-#SET{value,#ENV{id}|generer_info_entite{#ENV{objet},#VALEUR}}
+#SET{value,#ENV{id}|generer_objet_info{#ENV{objet},#VALEUR}}
 <div class="champ contenu_#VALEUR[ (#GET{value}|strlen|?{'',vide})]">
 <div class='label'>[(#ENV{objet}|concat{':info_',#VALEUR}|_T)]</div>
 <div class='#VALEUR'>#GET{value}</div>

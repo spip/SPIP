@@ -4619,14 +4619,6 @@ function generer_objet_info($id_objet, string $type_objet, string $info, string 
 }
 
 /**
- * @deprecated 4.1
- * @see generer_objet_info
- */
-function generer_info_entite($id_objet, $type_objet, $info, $etoile = '', $params = []) {
-	return generer_objet_info((int) $id_objet, $type_objet, $info, $etoile, $params);
-}
-
-/**
  * Fonction privée pour donner l'introduction d'un objet de manière générique.
  *
  * Cette fonction est mutualisée entre les balises #INTRODUCTION et #INFO_INTRODUCTION.
@@ -4684,14 +4676,6 @@ function generer_objet_introduction(int $id_objet, string $type_objet, array $li
 	$f = chercher_filtre('introduction');
 
 	return $f($descriptif, $texte, $longueur, $connect, $suite);
-}
-
-/**
- * @deprecated 4.1
- * @see generer_objet_introduction
- */
-function generer_introduction_entite($id_objet, $type_objet, $ligne_sql, $introduction_longueur = null, $longueur_ou_suite = null, $suite = null, string $connect = '') {
-	return generer_objet_introduction((int) $id_objet, $type_objet, $ligne_sql, $introduction_longueur, $longueur_ou_suite, $suite, $connect);
 }
 
 /**
@@ -4762,7 +4746,7 @@ function generer_objet_lien(int $id_objet, string $objet, int $longueur = 80, st
 	// lorsque l'objet n'est plus declare (plugin desactive par exemple)
 	// le raccourcis n'est plus valide
 	$titre = typo($titre['titre'] ?? '');
-	// on essaye avec generer_info_entite ?
+	// on essaye avec generer_objet_info ?
 	if (!strlen($titre) && !$connect) {
 		$titre = generer_objet_info($id_objet, $objet, 'titre');
 	}
@@ -4772,14 +4756,6 @@ function generer_objet_lien(int $id_objet, string $objet, int $longueur = 80, st
 	$url = generer_objet_url($id_objet, $objet, '', '', null, '', $connect);
 
 	return "<a href='$url' class='$objet'>" . couper($titre, $longueur) . '</a>';
-}
-
-/**
- * @deprecated 4.1
- * @see generer_objet_lien
- */
-function generer_lien_entite($id_objet, $objet, $longueur = 80, $connect = null) {
-	return generer_objet_lien((int) $id_objet, $objet, $longueur, $connect ?? '');
 }
 
 /**
