@@ -861,7 +861,7 @@ function nom_fichier_copie_locale($source, $extension) {
 
 	return $d
 	. substr(preg_replace(',[^\w-],', '', basename($source)) . '-' . $m, 0, 12)
-	. substr($m, 0, 4)
+	. $m
 	. ".$extension";
 }
 
