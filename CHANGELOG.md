@@ -11,6 +11,7 @@
 
 ### Added
 
+- Les plugins-dist et le squelettes-dist s'intallent avec composer
 - #5301 Permettre de fournir le nom de l’attachement à `spip_livrer_fichier()`
 
 ### Changed
@@ -19,6 +20,7 @@
 
 ### Removed
 
+- `plugins-dist.json`
 - #5505 Fonctions `verif_butineur()`, `editer_texte_recolle()` et environnement `_texte_trop_long` des formulaires (Inutilisé — servait pour IE !)
 - #5258 Retrait de toute mention à GD1 dans la configuration des vignettes
 
