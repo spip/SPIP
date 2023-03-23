@@ -2906,27 +2906,6 @@ function critere_si_dist($idb, &$boucles, $crit) {
 }
 
 /**
- * Compile le critère {tableau} d'une boucle POUR
- *
- * {tableau #XX} pour compatibilite ascendante boucle POUR
- * ... préférer la notation (DATA){source tableau,#XX}
- *
- * @deprecated 4.0
- * @see Utiliser une boucle (DATA){source tableau,#XX}
- *
- * @param string $idb Identifiant de la boucle
- * @param array $boucles AST du squelette
- * @param Critere $crit Paramètres du critère dans cette boucle
- */
-function critere_POUR_tableau_dist($idb, &$boucles, $crit) {
-	$boucle = &$boucles[$idb];
-	$boucle->hash .= '
-	$command[\'source\'] = array(' . calculer_liste($crit->param[0], $idb, $boucles, $boucles[$idb]->id_parent) . ');
-	$command[\'sourcemode\'] = \'table\';';
-}
-
-
-/**
  * Compile le critère {noeud}
  *
  * Trouver tous les objets qui ont des enfants (les noeuds de l'arbre)
