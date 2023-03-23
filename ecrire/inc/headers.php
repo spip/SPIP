@@ -186,21 +186,6 @@ function redirige_formulaire($url, $equiv = '', $format = 'message') {
 function redirige_url_ecrire($script = '', $args = '', $equiv = '') {
 	return redirige_par_entete(generer_url_ecrire($script, $args, true), $equiv);
 }
-/**
- * Renvoie au client le header HTTP avec le message correspondant au code indiqué.
- *
- * Ainsi `http_status(301)` enverra le message `301 Moved Permanently`.
- *
- * @link https://www.php.net/manual/fr/function.http-response-code.php
- * @uses http_response_code()
- * @deprecated 4.1 Utiliser http_response_code()
- *
- * @param int $status
- *     Code d'erreur
- **/
-function http_status($status) {
-	http_response_code($status);
-}
 
 // Retourne ce qui va bien pour que le navigateur ne mette pas la page en cache
 function http_no_cache() {
