@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b18f7bdd2b5c24f1aaac9c1eb69ccda9",
+    "content-hash": "ae90b9769658eb749eb003e3cfc4380c",
     "packages": [
         {
             "name": "algo26-matthias/idna-convert",
@@ -100,18 +100,62 @@
             "time": "2017-05-01T15:36:40+00:00"
         },
         {
+            "name": "spip/aide",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://git.spip.net/spip/aide.git",
+                "reference": "804ed8d4836a3c42064ffa42812f9d20def79e13"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://get.spip.net/composer/dist/spip/aide/spip-aide-dev-master-11eebf.zip",
+                "reference": "804ed8d4836a3c42064ffa42812f9d20def79e13",
+                "shasum": "e2ee4154c4971e2f96f5fac17bf04cd826e78b96"
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "phpcompatibility/php-compatibility": "dev-develop",
+                "phpstan/phpstan": "^1.10",
+                "rector/rector": "^0.15.23",
+                "spip/coding-standards": "^1.3"
+            },
+            "default-branch": true,
+            "type": "spip-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2.x-dev"
+                }
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Collectif SPIP",
+                    "homepage": "https://discuter.spip.net/c/spip-dev/5",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Aide en ligne de SPIP",
+            "time": "2023-03-23T17:38:19+00:00"
+        },
+        {
             "name": "spip/archiviste",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://git.spip.net/spip/archiviste.git",
-                "reference": "9e29530e706de2334d2aca3d23a0c3480459260c"
+                "reference": "93493137798eaaf0bd2204e3af3220eb4f9ab7a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://get.spip.net/composer/dist/spip/archiviste/spip-archiviste-dev-master-362c35.zip",
-                "reference": "9e29530e706de2334d2aca3d23a0c3480459260c",
-                "shasum": "a2e82c8124949ff5cba6fc78c232d778412fc837"
+                "url": "https://get.spip.net/composer/dist/spip/archiviste/spip-archiviste-dev-master-85fff9.zip",
+                "reference": "93493137798eaaf0bd2204e3af3220eb4f9ab7a0",
+                "shasum": "807a305c6b77df2d968d2f3ac955cf0a354fe1f3"
             },
             "require": {
                 "ext-phar": "*",
@@ -149,8 +193,8 @@
             "authors": [
                 {
                     "name": "SPIP Team",
-                    "role": "Maintainer",
-                    "homepage": "https://discuter.spip.net/c/spip-dev/5"
+                    "homepage": "https://discuter.spip.net/c/spip-dev/5",
+                    "role": "Maintainer"
                 }
             ],
             "description": "Gérer des archives de fichiers Zip, Tar, ...",
@@ -160,7 +204,95 @@
                 "tar",
                 "zip"
             ],
-            "time": "2023-03-22T20:13:44+00:00"
+            "time": "2023-03-23T17:37:40+00:00"
+        },
+        {
+            "name": "spip/bigup",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://git.spip.net/spip/bigup.git",
+                "reference": "31ae00dd99eb9c5c1285eff0f39b1d0b938bb40c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://get.spip.net/composer/dist/spip/bigup/spip-bigup-dev-master-08d53f.zip",
+                "reference": "31ae00dd99eb9c5c1285eff0f39b1d0b938bb40c",
+                "shasum": "1671d2bf5cdd25deae3a4a3c11a48e54df9a175e"
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "phpcompatibility/php-compatibility": "dev-develop",
+                "phpstan/phpstan": "^1.10",
+                "rector/rector": "^0.15.23",
+                "spip/coding-standards": "^1.3"
+            },
+            "default-branch": true,
+            "type": "spip-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.3.x-dev"
+                }
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Matthieu Marcillaud",
+                    "homepage": "https://discuter.spip.net/c/spip-dev/5",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Téléverser des gros fichiers",
+            "time": "2023-03-23T17:38:54+00:00"
+        },
+        {
+            "name": "spip/compagnon",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://git.spip.net/spip/compagnon.git",
+                "reference": "3a502f2e79453adc0ff029351092d2978ad2f0d8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://get.spip.net/composer/dist/spip/compagnon/spip-compagnon-dev-master-f1e7ef.zip",
+                "reference": "3a502f2e79453adc0ff029351092d2978ad2f0d8",
+                "shasum": "8087d9258c7b57b4021e8207027cd7bb8e6c22c4"
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "phpcompatibility/php-compatibility": "dev-develop",
+                "phpstan/phpstan": "^1.10",
+                "rector/rector": "^0.15.23",
+                "spip/coding-standards": "^1.3"
+            },
+            "default-branch": true,
+            "type": "spip-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2.x-dev"
+                }
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Matthieu Marcillaud",
+                    "homepage": "https://discuter.spip.net/c/spip-dev/5",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Compagnon",
+            "time": "2023-03-23T17:39:08+00:00"
         },
         {
             "name": "spip/composer-installer",
@@ -213,8 +345,526 @@
             "time": "2023-03-19T05:15:05+00:00"
         },
         {
+            "name": "spip/compresseur",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://git.spip.net/spip/compresseur.git",
+                "reference": "4ba488547db95f4da0bfd0139d3cfbdbb06771cd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://get.spip.net/composer/dist/spip/compresseur/spip-compresseur-dev-master-5f6437.zip",
+                "reference": "4ba488547db95f4da0bfd0139d3cfbdbb06771cd",
+                "shasum": "dcfc906a2f65f3171e45c0b5c88755cc9d77d4c4"
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "phpcompatibility/php-compatibility": "dev-develop",
+                "phpstan/phpstan": "^1.10",
+                "rector/rector": "^0.15.23",
+                "spip/coding-standards": "^1.3"
+            },
+            "default-branch": true,
+            "type": "spip-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2.x-dev"
+                }
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Collectif SPIP",
+                    "homepage": "https://discuter.spip.net/c/spip-dev/5",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Compression des css et javascript",
+            "time": "2023-03-23T17:40:19+00:00"
+        },
+        {
+            "name": "spip/dist",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://git.spip.net/spip/dist.git",
+                "reference": "d57b72e6addd48aa1ac188f8f6f6f0e678006fbc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://get.spip.net/composer/dist/spip/dist/spip-dist-dev-master-f53554.zip",
+                "reference": "d57b72e6addd48aa1ac188f8f6f6f0e678006fbc",
+                "shasum": "ec3d775bb57f63e39230a26f1d5cb4c08dc41c3b"
+            },
+            "default-branch": true,
+            "type": "spip-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.3.x-dev"
+                }
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Collectif SPIP",
+                    "homepage": "https://discuter.spip.net/c/spip-dev/5",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Squelettes par défaut de SPIP 4.0",
+            "time": "2023-03-23T17:02:34+00:00"
+        },
+        {
+            "name": "spip/dump",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://git.spip.net/spip/dump.git",
+                "reference": "fd85f76b632e24735c21f5f623be223f6579dd59"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://get.spip.net/composer/dist/spip/dump/spip-dump-dev-master-c423e7.zip",
+                "reference": "fd85f76b632e24735c21f5f623be223f6579dd59",
+                "shasum": "d215c1da4cacbbeb7018cf27daa7994746b08511"
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "phpcompatibility/php-compatibility": "dev-develop",
+                "phpstan/phpstan": "^1.10",
+                "rector/rector": "^0.15.23",
+                "spip/coding-standards": "^1.3"
+            },
+            "default-branch": true,
+            "type": "spip-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2.x-dev"
+                }
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Collectif SPIP",
+                    "homepage": "https://discuter.spip.net/c/spip-dev/5",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Sauvegarde et restauration de la base SPIP",
+            "time": "2023-03-23T17:39:34+00:00"
+        },
+        {
+            "name": "spip/forum",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://git.spip.net/spip/forum.git",
+                "reference": "9f651c1db37e9ff33def205ae07c84201b48678f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://get.spip.net/composer/dist/spip/forum/spip-forum-dev-master-913e00.zip",
+                "reference": "9f651c1db37e9ff33def205ae07c84201b48678f",
+                "shasum": "e0d8e616d297fdf1321c04cca6796b5a0cfcc765"
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "phpcompatibility/php-compatibility": "dev-develop",
+                "phpstan/phpstan": "^1.10",
+                "rector/rector": "^0.15.23",
+                "spip/coding-standards": "^1.3"
+            },
+            "default-branch": true,
+            "type": "spip-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2.x-dev"
+                }
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Collectif SPIP",
+                    "homepage": "https://discuter.spip.net/c/spip-dev/5",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Gestion des forums privés et publics dans SPIP",
+            "time": "2023-03-23T17:59:23+00:00"
+        },
+        {
+            "name": "spip/images",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://git.spip.net/spip/filtres_images.git",
+                "reference": "f1a32e161f585fe729b8dba78c5a089b1ca4cb73"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://get.spip.net/composer/dist/spip/images/spip-images-dev-master-5f65e7.zip",
+                "reference": "f1a32e161f585fe729b8dba78c5a089b1ca4cb73",
+                "shasum": "a14e3b5d1735be4a18ad1392e41e4b0a1a7b6c2e"
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "phpcompatibility/php-compatibility": "dev-develop",
+                "phpstan/phpstan": "^1.10",
+                "rector/rector": "^0.15.23",
+                "spip/coding-standards": "^1.3"
+            },
+            "default-branch": true,
+            "type": "spip-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.2.x-dev"
+                }
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Collectif SPIP",
+                    "homepage": "https://discuter.spip.net/c/spip-dev/5",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Filtres de transformation d'image et de couleurs",
+            "time": "2023-03-23T17:39:50+00:00"
+        },
+        {
+            "name": "spip/mediabox",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://git.spip.net/spip/mediabox.git",
+                "reference": "acbae3c3b040988941f37fc530412febd82e04c6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://get.spip.net/composer/dist/spip/mediabox/spip-mediabox-dev-master-136bd7.zip",
+                "reference": "acbae3c3b040988941f37fc530412febd82e04c6",
+                "shasum": "cece657f3c396506867f749a9fb888b7b2cfa7b9"
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "phpcompatibility/php-compatibility": "dev-develop",
+                "phpstan/phpstan": "^1.10",
+                "rector/rector": "^0.15.23",
+                "spip/coding-standards": "^1.3"
+            },
+            "default-branch": true,
+            "type": "spip-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2.x-dev"
+                }
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Collectif SPIP",
+                    "homepage": "https://discuter.spip.net/c/spip-dev/5",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Boîte multimédia",
+            "time": "2023-03-23T17:57:35+00:00"
+        },
+        {
+            "name": "spip/medias",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://git.spip.net/spip/medias.git",
+                "reference": "768415a44968554fb224035831b6496cdfdc75e4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://get.spip.net/composer/dist/spip/medias/spip-medias-dev-master-23ec4a.zip",
+                "reference": "768415a44968554fb224035831b6496cdfdc75e4",
+                "shasum": "b6921be1329546fcf3d5f763ecaba1586e877dd7"
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "phpcompatibility/php-compatibility": "dev-develop",
+                "phpstan/phpstan": "^1.10",
+                "rector/rector": "^0.15.23",
+                "spip/coding-standards": "^1.3"
+            },
+            "default-branch": true,
+            "type": "spip-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.2.x-dev"
+                }
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Collectif SPIP",
+                    "homepage": "https://discuter.spip.net/c/spip-dev/5",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Gestion des medias dans SPIP",
+            "time": "2023-03-23T15:45:27+00:00"
+        },
+        {
+            "name": "spip/mots",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://git.spip.net/spip/mots.git",
+                "reference": "d81395a7f06241fcaa3f8a160ef3dbee142793a5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://get.spip.net/composer/dist/spip/mots/spip-mots-dev-master-407193.zip",
+                "reference": "d81395a7f06241fcaa3f8a160ef3dbee142793a5",
+                "shasum": "554756076f03e224b5f4d5599d1bfb4109387766"
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "phpcompatibility/php-compatibility": "dev-develop",
+                "phpstan/phpstan": "^1.10",
+                "rector/rector": "^0.15.23",
+                "spip/coding-standards": "^1.3"
+            },
+            "default-branch": true,
+            "type": "spip-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.2.x-dev"
+                }
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Collectif SPIP",
+                    "homepage": "https://discuter.spip.net/c/spip-dev/5",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Gestion des mots et groupes de mots dans SPIP",
+            "time": "2023-03-23T15:50:48+00:00"
+        },
+        {
+            "name": "spip/plan",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://git.spip.net/spip/plan.git",
+                "reference": "fc452228f93af9e35d21649db875a612692b2917"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://get.spip.net/composer/dist/spip/plan/spip-plan-dev-master-507ecf.zip",
+                "reference": "fc452228f93af9e35d21649db875a612692b2917",
+                "shasum": "d22e86c378fcfa293dcc87d430651b5cd5cba75e"
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "phpcompatibility/php-compatibility": "dev-develop",
+                "phpstan/phpstan": "^1.10",
+                "rector/rector": "^0.15.23",
+                "spip/coding-standards": "^1.3"
+            },
+            "default-branch": true,
+            "type": "spip-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.2.x-dev"
+                }
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Matthieu Marcillaud",
+                    "homepage": "https://discuter.spip.net/c/spip-dev/5",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Améliore la page plan du site de l'espace privé",
+            "time": "2023-03-23T15:56:39+00:00"
+        },
+        {
+            "name": "spip/porte-plume",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://git.spip.net/spip/porte_plume.git",
+                "reference": "8b9bdbab7c967e816e2a23c918d23c6ec23f46fe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://get.spip.net/composer/dist/spip/porte-plume/spip-porte-plume-dev-master-79372b.zip",
+                "reference": "8b9bdbab7c967e816e2a23c918d23c6ec23f46fe",
+                "shasum": "34084bf411dbf8c0999a4695b7625450b5a65819"
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "phpcompatibility/php-compatibility": "dev-develop",
+                "phpstan/phpstan": "^1.10",
+                "rector/rector": "^0.15.23",
+                "spip/coding-standards": "^1.3"
+            },
+            "default-branch": true,
+            "type": "spip-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2.x-dev"
+                }
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Matthieu Marcillaud",
+                    "homepage": "https://discuter.spip.net/c/spip-dev/5",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Une barre d'outil pour bien écrire",
+            "time": "2023-03-23T16:01:59+00:00"
+        },
+        {
+            "name": "spip/revisions",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://git.spip.net/spip/revisions.git",
+                "reference": "f0b5181ff87b87d42306e7f7adc2613f1b59068f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://get.spip.net/composer/dist/spip/revisions/spip-revisions-dev-master-78d95e.zip",
+                "reference": "f0b5181ff87b87d42306e7f7adc2613f1b59068f",
+                "shasum": "e409d43944a11df197baaea293dfedb64f597c69"
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "phpcompatibility/php-compatibility": "dev-develop",
+                "phpstan/phpstan": "^1.10",
+                "rector/rector": "^0.15.23",
+                "spip/coding-standards": "^1.3"
+            },
+            "default-branch": true,
+            "type": "spip-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2.x-dev"
+                }
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Matthieu Marcillaud",
+                    "homepage": "https://discuter.spip.net/c/spip-dev/5",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Suivi des modifications des objets éditoriaux",
+            "time": "2023-03-23T16:08:46+00:00"
+        },
+        {
+            "name": "spip/safehtml",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://git.spip.net/spip/safehtml.git",
+                "reference": "e1b1864edf13127ea3af2b236982601ee417f2dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://get.spip.net/composer/dist/spip/safehtml/spip-safehtml-dev-master-3ba78d.zip",
+                "reference": "e1b1864edf13127ea3af2b236982601ee417f2dc",
+                "shasum": "9129163de62c864f5f1b89dc889ab60ef85a34b4"
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "phpcompatibility/php-compatibility": "dev-develop",
+                "phpstan/phpstan": "^1.10",
+                "rector/rector": "^0.15.23",
+                "spip/coding-standards": "^1.3"
+            },
+            "default-branch": true,
+            "type": "spip-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2.x-dev"
+                }
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Collectif SPIP",
+                    "homepage": "https://discuter.spip.net/c/spip-dev/5",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Protection des forums contre le cross-site scripting",
+            "time": "2023-03-23T16:21:26+00:00"
+        },
+        {
             "name": "spip/security",
-            "version": "1.5.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://git.spip.net/spip-contrib-outils/securite.git",
@@ -222,10 +872,11 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://get.spip.net/composer/dist/spip/security/spip-security-1.5.1-98aa2e.zip",
+                "url": "https://get.spip.net/composer/dist/spip/security/spip-security-dev-master-98aa2e.zip",
                 "reference": "97d3110947fe39e5cc4a3af057d06929c4ec7fb7",
                 "shasum": "67e2ef4813df7261acd61b9faf98703d50601c95"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -244,8 +895,233 @@
             "time": "2023-03-21T00:24:40+00:00"
         },
         {
+            "name": "spip/sites",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://git.spip.net/spip/sites.git",
+                "reference": "fa2a5191fc23d6696d0ffcd1698eb3a4db186837"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://get.spip.net/composer/dist/spip/sites/spip-sites-dev-master-647d45.zip",
+                "reference": "fa2a5191fc23d6696d0ffcd1698eb3a4db186837",
+                "shasum": "9d420d6b835dc65436fb53b11bf0a1b8c0d4b2c5"
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "phpcompatibility/php-compatibility": "dev-develop",
+                "phpstan/phpstan": "^1.10",
+                "rector/rector": "^0.15.23",
+                "spip/coding-standards": "^1.3"
+            },
+            "default-branch": true,
+            "type": "spip-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.2.x-dev"
+                }
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Collectif SPIP",
+                    "homepage": "https://discuter.spip.net/c/spip-dev/5",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Gestion des sites et de la syndication dans SPIP",
+            "time": "2023-03-23T16:28:52+00:00"
+        },
+        {
+            "name": "spip/stats",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://git.spip.net/spip/statistiques.git",
+                "reference": "08b393a3618247d129dfda077b23f1e3245033e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://get.spip.net/composer/dist/spip/stats/spip-stats-dev-master-bcdc8b.zip",
+                "reference": "08b393a3618247d129dfda077b23f1e3245033e6",
+                "shasum": "282cde357222c485644c0641eadfd6ea22db6e3f"
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "phpcompatibility/php-compatibility": "dev-develop",
+                "phpstan/phpstan": "^1.10",
+                "rector/rector": "^0.15.23",
+                "spip/coding-standards": "^1.3"
+            },
+            "default-branch": true,
+            "type": "spip-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2.x-dev"
+                }
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Collectif SPIP",
+                    "homepage": "https://discuter.spip.net/c/spip-dev/5",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Gestion des statistiques dans SPIP",
+            "time": "2023-03-23T16:35:58+00:00"
+        },
+        {
+            "name": "spip/svp",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://git.spip.net/spip/svp.git",
+                "reference": "634168cadc216f73e0c441f235b416a8f2e97f68"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://get.spip.net/composer/dist/spip/svp/spip-svp-dev-master-318cdb.zip",
+                "reference": "634168cadc216f73e0c441f235b416a8f2e97f68",
+                "shasum": "b6a24716f9f7bf1bde0a268e0e860702a15d735c"
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "phpcompatibility/php-compatibility": "dev-develop",
+                "phpstan/phpstan": "^1.10",
+                "rector/rector": "^0.15.23",
+                "spip/coding-standards": "^1.3"
+            },
+            "default-branch": true,
+            "type": "spip-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2.x-dev"
+                }
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Collectif SPIP",
+                    "homepage": "https://discuter.spip.net/c/spip-dev/5",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Eric Lupinacci",
+                    "homepage": "https://blog.smellup.net/",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "SerVeur d'information et de téléchargement des Plugins",
+            "time": "2023-03-23T16:43:39+00:00"
+        },
+        {
+            "name": "spip/tw",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://git.spip.net/spip/textwheel.git",
+                "reference": "f7358af313725756a24b8e26e97ecbc87b628a02"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://get.spip.net/composer/dist/spip/tw/spip-tw-dev-master-01efc7.zip",
+                "reference": "f7358af313725756a24b8e26e97ecbc87b628a02",
+                "shasum": "2061f60eb5bc18708844fa71fd68fefe232d40e6"
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "phpcompatibility/php-compatibility": "dev-develop",
+                "phpstan/phpstan": "^1.10",
+                "rector/rector": "^0.15.23",
+                "spip/coding-standards": "^1.3"
+            },
+            "default-branch": true,
+            "type": "spip-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2.x-dev"
+                }
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Collectif SPIP",
+                    "homepage": "https://discuter.spip.net/c/spip-dev/5",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Gestion de la typographie SPIP avec TextWheel",
+            "time": "2023-03-23T16:49:08+00:00"
+        },
+        {
+            "name": "spip/urls",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://git.spip.net/spip/urls_etendues.git",
+                "reference": "d347742b8ab6154057edb5a590bbc6b4ceca8091"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://get.spip.net/composer/dist/spip/urls/spip-urls-dev-master-0f50c2.zip",
+                "reference": "d347742b8ab6154057edb5a590bbc6b4ceca8091",
+                "shasum": "db24edbc65d177933ae76aaf7d840cfc52876262"
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "phpcompatibility/php-compatibility": "dev-develop",
+                "phpstan/phpstan": "^1.10",
+                "rector/rector": "^0.15.23",
+                "spip/coding-standards": "^1.3"
+            },
+            "default-branch": true,
+            "type": "spip-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.2.x-dev"
+                }
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Collectif SPIP",
+                    "homepage": "https://discuter.spip.net/c/spip-dev/5",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Gestion des variantes d'URL signifiantes ou non",
+            "time": "2023-03-23T16:55:36+00:00"
+        },
+        {
             "name": "symfony/deprecation-contracts",
-            "version": "v3.2.1",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/deprecation-contracts.git",
@@ -260,6 +1136,7 @@
             "require": {
                 "php": ">=8.1"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -312,16 +1189,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.27.0",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "8ad114f6b39e2c98a8b0e3bd907732c207c2b534"
+                "reference": "f9c7affe77a00ae32ca127ca6833d034e6d33f25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/8ad114f6b39e2c98a8b0e3bd907732c207c2b534",
-                "reference": "8ad114f6b39e2c98a8b0e3bd907732c207c2b534",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/f9c7affe77a00ae32ca127ca6833d034e6d33f25",
+                "reference": "f9c7affe77a00ae32ca127ca6833d034e6d33f25",
                 "shasum": ""
             },
             "require": {
@@ -333,10 +1210,11 @@
             "suggest": {
                 "ext-mbstring": "For best performance"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.27-dev"
+                    "dev-main": "1.28-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -375,7 +1253,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.27.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/main"
             },
             "funding": [
                 {
@@ -391,29 +1269,30 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-11-03T14:55:06+00:00"
+            "time": "2023-01-30T17:25:47+00:00"
         },
         {
             "name": "symfony/polyfill-php82",
-            "version": "v1.27.0",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php82.git",
-                "reference": "80ddf7bfa17ef7b06db4e6d007a95bf584e07b44"
+                "reference": "a2b9e955680ad91faa73b66c34265d013113e524"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php82/zipball/80ddf7bfa17ef7b06db4e6d007a95bf584e07b44",
-                "reference": "80ddf7bfa17ef7b06db4e6d007a95bf584e07b44",
+                "url": "https://api.github.com/repos/symfony/polyfill-php82/zipball/a2b9e955680ad91faa73b66c34265d013113e524",
+                "reference": "a2b9e955680ad91faa73b66c34265d013113e524",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.1"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.27-dev"
+                    "dev-main": "1.28-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -454,7 +1333,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php82/tree/v1.27.0"
+                "source": "https://github.com/symfony/polyfill-php82/tree/main"
             },
             "funding": [
                 {
@@ -470,7 +1349,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-11-10T10:10:54+00:00"
+            "time": "2023-01-26T09:26:14+00:00"
         }
     ],
     "packages-dev": [
@@ -629,16 +1508,16 @@
         },
         {
             "name": "phpcsstandards/phpcsutils",
-            "version": "1.0.1",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHPCSUtils.git",
-                "reference": "4fd2e30c7465112ca2e3646037bfb9e6f0f4d4f3"
+                "reference": "321702124ed85acf9e836ef059635c06df738208"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSUtils/zipball/4fd2e30c7465112ca2e3646037bfb9e6f0f4d4f3",
-                "reference": "4fd2e30c7465112ca2e3646037bfb9e6f0f4d4f3",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSUtils/zipball/321702124ed85acf9e836ef059635c06df738208",
+                "reference": "321702124ed85acf9e836ef059635c06df738208",
                 "shasum": ""
             },
             "require": {
@@ -654,6 +1533,7 @@
                 "phpunit/phpunit": "^4.8.36 || ^5.7.21 || ^6.0 || ^7.0 || ^8.0 || ^9.3",
                 "yoast/phpunit-polyfills": "^1.0.1"
             },
+            "default-branch": true,
             "type": "phpcodesniffer-standard",
             "extra": {
                 "branch-alias": {
@@ -699,20 +1579,20 @@
                 "issues": "https://github.com/PHPCSStandards/PHPCSUtils/issues",
                 "source": "https://github.com/PHPCSStandards/PHPCSUtils"
             },
-            "time": "2023-01-05T12:08:37+00:00"
+            "time": "2023-03-20T08:20:45+00:00"
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.7",
+            "version": "1.10.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "b10ceb526d9607903c5b2673f1fc8775dbe48975"
+                "reference": "37a2c4ecd0f9f8aab1d8682eb8ab976ebca0a572"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/b10ceb526d9607903c5b2673f1fc8775dbe48975",
-                "reference": "b10ceb526d9607903c5b2673f1fc8775dbe48975",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/37a2c4ecd0f9f8aab1d8682eb8ab976ebca0a572",
+                "reference": "37a2c4ecd0f9f8aab1d8682eb8ab976ebca0a572",
                 "shasum": ""
             },
             "require": {
@@ -721,6 +1601,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
+            "default-branch": true,
             "bin": [
                 "phpstan",
                 "phpstan.phar"
@@ -761,11 +1642,11 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-03-16T15:24:20+00:00"
+            "time": "2023-03-23T08:19:33+00:00"
         },
         {
             "name": "spip/coding-standards",
-            "version": "1.3.0",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JamesRezo/spip-coding-standards.git",
@@ -789,6 +1670,7 @@
             "suggest": {
                 "dealerdirect/phpcodesniffer-composer-installer": "^1.0 || This Composer plugin will sort out the PHPCS 'installed_paths' automatically."
             },
+            "default-branch": true,
             "type": "phpcodesniffer-standard",
             "extra": {
                 "branch-alias": {
@@ -824,7 +1706,7 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.7.2",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
@@ -845,6 +1727,7 @@
             "require-dev": {
                 "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0"
             },
+            "default-branch": true,
             "bin": [
                 "bin/phpcs",
                 "bin/phpcbf"
@@ -881,9 +1764,26 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {
+        "spip/aide": 20,
         "spip/archiviste": 20,
+        "spip/bigup": 20,
+        "spip/compagnon": 20,
+        "spip/compresseur": 20,
+        "spip/dist": 20,
+        "spip/dump": 20,
+        "spip/forum": 20,
+        "spip/images": 20,
+        "spip/mediabox": 20,
+        "spip/medias": 20,
+        "spip/mots": 20,
+        "spip/plan": 20,
+        "spip/sites": 20,
+        "spip/stats": 20,
+        "spip/svp": 20,
+        "spip/tw": 20,
+        "spip/urls": 20,
         "phpcompatibility/php-compatibility": 20
     },
     "prefer-stable": false,

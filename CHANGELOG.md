@@ -12,6 +12,7 @@
 ### Added
 
 - Log des dépréciations, via la fonction `trigger_deprecation` (de symfony/deprecations-contracts).
+- Les plugins-dist et le squelettes-dist s'intallent avec composer
 - #5301 Permettre de fournir le nom de l’attachement à `spip_livrer_fichier()`
 
 ### Changed
@@ -26,6 +27,7 @@
 
 ### Removed
 
+- `plugins-dist.json`
 - Boucle `POUR` (utiliser une boucle DATA tel que `<BOUCLE_x(DATA){source tableau, ...}>`)
 - Fonction `critere_par_joint` (utiliser `calculer_critere_par_champ` si besoin)
 - Fonction `http_status` (utiliser `http_response_code`)

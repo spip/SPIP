@@ -6,9 +6,29 @@
         "ext-xml": "*",
         "ext-zip": "*",
         "algo26-matthias/idna-convert": "^4.0",
+        "spip/aide": "^3.2@dev",
         "spip/archiviste": "^3.0@dev",
+        "spip/bigup": "^3.3@dev",
+        "spip/compagnon": "^3.2@dev",
         "spip/composer-installer": "^0.5.0",
+        "spip/compresseur": "^2.2@dev",
+        "spip/dist": "^4.3@dev",
+        "spip/dump": "^2.2@dev",
+        "spip/forum": "^3.2@dev",
+        "spip/images": "^4.2@dev",
+        "spip/mediabox": "^3.2@dev",
+        "spip/medias": "^4.2@dev",
+        "spip/mots": "^4.2@dev",
+        "spip/plan": "^4.2@dev",
+        "spip/porte-plume": "^3.1",
+        "spip/revisions": "^3.1",
+        "spip/safehtml": "^3.1",
         "spip/security": "^1.5",
+        "spip/sites": "^4.2@dev",
+        "spip/stats": "^3.2@dev",
+        "spip/svp": "^3.2@dev",
+        "spip/tw": "^3.2@dev",
+        "spip/urls": "^4.2@dev",
         "symfony/deprecation-contracts": "^3.2",
         "symfony/polyfill-mbstring": "^1.27",
         "symfony/polyfill-php82": "^1.27"
@@ -33,6 +53,7 @@
             "url": "https://get.spip.net/composer"
         }
     },
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "Spip\\": "ecrire/src/"
@@ -74,8 +95,28 @@
         },
         "spip": {
             "extensions": [
-                "spip/archiviste"
-            ]
+                "spip/aide",
+                "spip/archiviste",
+                "spip/bigup",
+                "spip/compagnon",
+                "spip/compresseur",
+                "spip/dump",
+                "spip/images",
+                "spip/forum",
+                "spip/mediabox",
+                "spip/medias",
+                "spip/mots",
+                "spip/plan",
+                "spip/porte-plume",
+                "spip/revisions",
+                "spip/safehtml",
+                "spip/sites",
+                "spip/stats",
+                "spip/svp",
+                "spip/tw",
+                "spip/urls"
+            ],
+            "template": "spip/dist"
         }
     },
     "scripts": {
