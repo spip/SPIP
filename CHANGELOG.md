@@ -27,6 +27,7 @@
 ### Removed
 
 - Boucle `POUR` (utiliser une boucle DATA tel que `<BOUCLE_x(DATA){source tableau, ...}>`)
+- Fonction `critere_par_joint` (utiliser `calculer_critere_par_champ` si besoin)
 - Fonction `http_status` (utiliser `http_response_code`)
 - Fonction `generer_url_ecrire_objet` (utiliser `generer_objet_url_ecrire`)
 - Fonction `generer_lien_entite` (utiliser `generer_objet_lien`)
