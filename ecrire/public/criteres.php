@@ -1036,24 +1036,6 @@ function calculer_critere_par_champ($idb, &$boucles, $crit, $par, $raw = false) 
 }
 
 /**
- * Retourne un champ de tri en créant une jointure
- * si la table n'est pas présente dans le from de la boucle.
- *
- * @deprecated 3.2
- * @param string $table Table du champ désiré
- * @param string $champ Champ désiré
- * @param Boucle $boucle Boucle en cours de compilation
- * @return string Champ pour le compilateur si trouvé, tel que "'alias.champ'", sinon vide.
- */
-function critere_par_joint($table, $champ, &$boucle) {
-	$t = array_search($table, $boucle->from);
-	if (!$t) {
-		$t = trouver_jointure_champ($champ, $boucle);
-	}
-	return $t ? "'" . $t . '.' . $champ . "'" : '';
-}
-
-/**
  * Compile le critère `{inverse}` qui inverse l'ordre utilisé par le précédent critère `{par}`
  *
  * Accèpte un paramètre pour déterminer le sens : `{inverse #X}` utilisera un tri croissant (ASC)
