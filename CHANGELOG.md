@@ -27,6 +27,7 @@
 ### Removed
 
 - Fonction `http_status` (utiliser `http_response_code`)
+- Fonction `generer_url_ecrire_objet` (utiliser `generer_objet_url_ecrire`)
 - Fonction `generer_lien_entite` (utiliser `generer_objet_lien`)
 - Fonction `generer_introduction_entite` (utiliser `generer_objet_introduction`)
 - Fonction `generer_info_entite` (utiliser `generer_objet_info`)
