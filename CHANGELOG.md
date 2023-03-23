@@ -16,10 +16,12 @@
 
 ### Changed
 
+- Les logos historiques (migrés en documents à partir de SPIP 4.0) ne sont plus utilisés s’il en restait.
 - Nécessite PHP 8.1 minimum
 
 ### Deprecated
 
+- Fonction `logo_migrer_en_base()` (utilisable jusqu’en SPIP 5.y pour migrer les logos en documents)
 - Fonction `spip_sha256` (utiliser `hash('sha256', $str)`)
 
 ### Removed
