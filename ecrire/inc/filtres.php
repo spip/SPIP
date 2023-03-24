@@ -2450,29 +2450,12 @@ function tags2dcsubject($tags) {
  *     - Tableau de résultats, si tableau en entrée.
  **/
 function extraire_balise($texte, $tag = 'a') {
+	$balises = extraire_balises($texte, $tag);
 	if (is_array($texte)) {
-		array_walk(
-			$texte,
-			function (&$a, $key, $t) {
-				$a = extraire_balise($a, $t);
-			},
-			$tag
-		);
-
-		return $texte;
+		return array_map(function(array $a) {return (empty($a) ? '' : reset($a));}, $balises);
 	}
 
-	if (
-		preg_match(
-			",<$tag\b[^>]*(/>|>.*</$tag\b[^>]*>|>),UimsS",
-			$texte,
-			$regs
-		)
-	) {
-		return $regs[0];
-	}
-	
-	return '';
+	return (empty($balises) ? '' : reset($balises));
 }
 
 /**
