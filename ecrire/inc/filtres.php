@@ -2450,7 +2450,7 @@ function tags2dcsubject($tags) {
  *     - Tableau de résultats, si tableau en entrée.
  **/
 function extraire_balise($texte, $tag = 'a') {
-	$balises = extraire_balises($texte, $tag);
+	$balises = extraire_balises($texte, $tag, ['nb_max' => 1]);
 	if (is_array($texte)) {
 		return array_map(function(array $a) {return (empty($a) ? '' : reset($a));}, $balises);
 	}
@@ -2478,11 +2478,13 @@ function extraire_balise($texte, $tag = 'a') {
  *     texte(s) dont on souhaite extraire une balise html
  * @param string $tag
  *     Nom de la balise html à extraire
+ * @param array $options
+ *     int @nb_max : nombre d'occurence maxi à extraire
  * @return array
  *     - Liste des codes html des occurrences de la balise, sinon tableau vide
  *     - Tableau de résultats, si tableau en entrée.
  **/
-function extraire_balises($texte, $tag = 'a') {
+function extraire_balises($texte, $tag = 'a', $options = []) {
 	if (is_array($texte)) {
 		array_walk(
 			$texte,
@@ -2496,7 +2498,7 @@ function extraire_balises($texte, $tag = 'a') {
 	}
 
 	$htmlTagCollecteur = new \Spip\Texte\Collecteur\HtmlTag($tag);
-	$collection = $htmlTagCollecteur->collecter($texte);
+	$collection = $htmlTagCollecteur->collecter($texte, $options);
 	if (!empty($collection)) {
 		return array_column($collection, 'raw');
 	}

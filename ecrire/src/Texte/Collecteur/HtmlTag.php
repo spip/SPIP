@@ -49,6 +49,7 @@ class HtmlTag extends AbstractCollecteur {
 	 * @param string $texte
 	 * @param array $options
 	 *   bool $detecter_presence
+	 *   bool $nb_max
 	 * @return array
 	 */
 	public function collecter(string $texte, array $options = []): array {
@@ -130,7 +131,10 @@ class HtmlTag extends AbstractCollecteur {
 					$tags[] = $tag;
 				}
 			}
-			if (!empty($options['detecter_presence']) and count($tags)) {
+			if (
+				   (!empty($options['detecter_presence']) and count($tags))
+				or (!empty($options['nb_max'])  and count($tags) >= $options['nb_max'])
+			) {
 				return $tags;
 			}
 		}
