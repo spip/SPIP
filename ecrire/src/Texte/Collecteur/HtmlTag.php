@@ -80,6 +80,7 @@ class HtmlTag extends AbstractCollecteur {
 			array_shift($closing);
 		}
 
+		$profondeur = ($options['profondeur'] ?? 1);
 		$tags = [];
 		while (!empty($opening)) {
 			$first_opening = array_shift($opening);
@@ -131,11 +132,32 @@ class HtmlTag extends AbstractCollecteur {
 					$tags[] = $tag;
 				}
 			}
-			if (
-				   (!empty($options['detecter_presence']) and count($tags))
-				or (!empty($options['nb_max'])  and count($tags) >= $options['nb_max'])
-			) {
+			if ((!empty($options['detecter_presence']) and count($tags))) {
 				return $tags;
+			}
+			if (($profondeur == 1 and !empty($options['nb_max'])  and count($tags) >= $options['nb_max'])) {
+				break;
+			}
+		}
+
+		while (--$profondeur > 0) {
+			$outerTags = $tags;
+			$tags = [];
+			$options['profondeur'] = 1;
+			foreach ($outerTags as $outerTag) {
+				if (!empty($outerTag['innerHtml'])) {
+					$offsetPos = $outerTag['pos'] + strlen($outerTag['opening']);
+					$innerTags = $this->collecter($outerTag['innerHtml'], $options);
+					if (!empty($innerTags)) {
+						foreach ($innerTags as $tag) {
+							$tag['pos'] += $offsetPos;
+							$tags[] = $tag;
+						}
+						if (($profondeur == 1 and !empty($options['nb_max'])  and count($tags) >= $options['nb_max'])) {
+							return $tags;
+						}
+					}
+				}
 			}
 		}
 

@@ -2427,8 +2427,8 @@ function tags2dcsubject($tags) {
 /**
  * Retourne la premiere balise html du type demandé
  *
- * Retourne le contenu d'une balise jusqu'à la première fermeture rencontrée
- * du même type.
+ * Retourne dans un tableau le contenu de chaque balise jusqu'à sa
+ * fermeture correspondante.
  * Si on a passe un tableau de textes, retourne un tableau de resultats.
  *
  * @example `[(#DESCRIPTIF|extraire_balise{img})]`
@@ -2445,12 +2445,12 @@ function tags2dcsubject($tags) {
  *     texte(s) dont on souhaite extraire une balise html
  * @param string $tag
  *     Nom de la balise html à extraire
- * @return void|string|array
- *     - Code html de la balise, sinon rien
+ * @return string|array
+ *     - Code html de la première occurence de la balise trouvée, sinon chaine vide
  *     - Tableau de résultats, si tableau en entrée.
  **/
-function extraire_balise($texte, $tag = 'a') {
-	$balises = extraire_balises($texte, $tag, ['nb_max' => 1]);
+function extraire_balise($texte, $tag = 'a', $profondeur = 1) {
+	$balises = extraire_balises($texte, $tag, ['nb_max' => 1, 'profondeur' => $profondeur]);
 	if (is_array($texte)) {
 		return array_map(function(array $a) {return (empty($a) ? '' : reset($a));}, $balises);
 	}
@@ -2461,8 +2461,8 @@ function extraire_balise($texte, $tag = 'a') {
 /**
  * Extrait toutes les balises html du type demandé
  *
- * Retourne dans un tableau le contenu de chaque balise jusqu'à la première
- * fermeture rencontrée du même type.
+ * Retourne dans un tableau le contenu de chaque balise jusqu'à sa
+ * fermeture correspondante.
  * Si on a passe un tableau de textes, retourne un tableau de resultats.
  *
  * @example `[(#TEXTE|extraire_balises{img}|implode{" - "})]`
@@ -2470,16 +2470,14 @@ function extraire_balise($texte, $tag = 'a') {
  * @filtre
  * @link https://www.spip.net/5618
  * @see extraire_balise()
- * @note
- *     Attention : les résultats peuvent être incohérents sur des balises imbricables,
- *     tel que demander à extraire `div` dans un texte.
  *
  * @param string|array $texte
  *     texte(s) dont on souhaite extraire une balise html
  * @param string $tag
  *     Nom de la balise html à extraire
  * @param array $options
- *     int @nb_max : nombre d'occurence maxi à extraire
+ *     int nb_max : nombre d'occurence maxi à extraire
+ *     int profondeur : niveau de profondeur d'extraction en cas d'intrication de balises identiques
  * @return array
  *     - Liste des codes html des occurrences de la balise, sinon tableau vide
  *     - Tableau de résultats, si tableau en entrée.
