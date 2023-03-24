@@ -2471,6 +2471,8 @@ function extraire_balise($texte, $tag = 'a') {
 	) {
 		return $regs[0];
 	}
+	
+	return '';
 }
 
 /**
