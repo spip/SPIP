@@ -2495,18 +2495,13 @@ function extraire_balises($texte, $tag = 'a') {
 		return $texte;
 	}
 
-	if (
-		preg_match_all(
-			",<{$tag}\b[^>]*(/>|>.*</{$tag}\b[^>]*>|>),UimsS",
-			$texte,
-			$regs,
-			PREG_PATTERN_ORDER
-		)
-	) {
-		return $regs[0];
-	} else {
-		return [];
+	$htmlTagCollecteur = new \Spip\Texte\Collecteur\HtmlTag($tag);
+	$collection = $htmlTagCollecteur->collecter($texte);
+	if (!empty($collection)) {
+		return array_column($collection, 'raw');
 	}
+
+	return [];
 }
 
 /**
