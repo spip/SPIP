@@ -12,7 +12,7 @@
 				<li class="item[ (#STATUS|?{'scheduled','pending'})]">
 					<div class="date">[(#DATE|date_relative|spip_ucfirst)][ (#STATUS|non)(en cours)] [(#PRIORITE|oui)\[<:queue_priorite_tache:> : #PRIORITE\]]</div>
 					[<strong class="description">(#DESCRIPTIF|PtoBR)</strong>]
-					[<span class="small">| #FONCTION((#ARGS|unserialize|implode{','}))</span>]
+					[<span class="small">| (#FONCTION|job_queue_display_call{#ARGS})</span>]
 					[(#AUTORISER{'annuler','job',#ID_JOB}|oui)
 					<div class="actions">
 						[(#BOUTON_ACTION{<:annuler:>,#URL_ACTION_AUTEUR{annuler_job,#ID_JOB,#SELF},ajax})]
