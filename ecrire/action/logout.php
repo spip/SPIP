@@ -73,7 +73,8 @@ function action_logout_dist() {
 			$session = charger_fonction('session', 'inc');
 			$session($GLOBALS['visiteur_session']['id_auteur']);
 			spip_setcookie('spip_session', $_COOKIE['spip_session'], [
-				'expires' => time() - 3600
+				'expires' => time() - 3600,
+				'httponly' => true,
 			]);
 		}
 		// si authentification http, et que la personne est loge,
