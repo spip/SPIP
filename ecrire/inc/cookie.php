@@ -30,7 +30,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Nom du cookie
  * @param string $value
  *     Valeur à stocker
- * @param array $options
+ * @param array{expires: int, path: string, domain: string, secure: bool, samesite: string} $options
  *     Tableau clé => valeur de l’option
  *     - expires = 0 : Date d'expiration du cookie (timestamp)
  *     - path = 'AUTO' : Chemin sur lequel le cookie sera disponible
@@ -51,51 +51,52 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     cookie sécurisé ou non ?
  **/
 function spip_setcookie($name = '', $value = '', $options = []) {
-	static $to_secure_list = ['spip_session'];
-	if (defined('_COOKIE_SECURE_LIST') && is_array(_COOKIE_SECURE_LIST)) {
-		$to_secure_list = array_merge($to_secure_list, _COOKIE_SECURE_LIST);
-	}
-
+	/** @deprecated 4.0 Anciens appels à spip_setcookie() */
 	if (!is_array($options)) {
+		trigger_deprecation('spip', '4.0', 'Using expires as 3rd parameter is deprecated, use array option "%s" when call "%s(\'%s\', ...)" instead.', '\'expires\' => X', __FUNCTION__, $name);
 		// anciens paramètres :
 		# spip_setcookie($name = '', $value = '', $expire = 0, $path = 'AUTO', $domain = '', $secure = '')
 		$opt = func_get_args();
 		$opt = array_slice($opt, 2);
 		$options = []; # /!\ après le func_get_args (sinon $opt[0] référence la nouvelle valeur de $options !);
 		if (isset($opt[0])) {
-			$options['expires'] = $opt[0];
+			$options['expires'] = (int) $opt[0];
 		}
 		if (isset($opt[1])) {
-			$options['path'] = $opt[1];
+			$options['path'] = (string) $opt[1];
 		}
 		if (isset($opt[2])) {
-			$options['domain'] = $opt[2];
+			$options['domain'] = (string) $opt[2];
 		}
 		if (isset($opt[3])) {
-			$options['secure'] = $opt[3];
+			$options['secure'] = (bool) $opt[3];
 		}
 	}
 
 	// expires
-	if (!isset($options['expires'])) {
-		$options['expires'] = 0;
-	}
+	$options['expires'] ??= 0;
 	if (!isset($options['path']) || $options['path'] === 'AUTO') {
-		$options['path'] = defined('_COOKIE_PATH') ? _COOKIE_PATH : preg_replace(',^\w+://[^/]*,', '', url_de_base());
+		$options['path'] = defined('_COOKIE_PATH') ? constant('_COOKIE_PATH') : preg_replace(',^\w+://[^/]*,', '', url_de_base());
 	}
-	if (empty($options['domain']) && defined('_COOKIE_DOMAIN') && _COOKIE_DOMAIN) {
-		$options['domain'] = _COOKIE_DOMAIN;
+	if (empty($options['domain']) && defined('_COOKIE_DOMAIN') && constant('_COOKIE_DOMAIN')) {
+		$options['domain'] = constant('_COOKIE_DOMAIN');
 	}
-	if (in_array($name, $to_secure_list)) {
-		if (empty($options['secure']) && defined('_COOKIE_SECURE') && _COOKIE_SECURE) {
-			$options['secure'] = true;
-		}
-		if (empty($options['httponly'])) {
+	$options['secure'] ??= (bool) ($_SERVER['HTTPS'] ?? false);
+	if (defined('_COOKIE_SECURE') && constant('_COOKIE_SECURE')) {
+		$options['secure'] = true;
+	}
+	$options['httponly'] ??= false;
+	$options['samesite'] = ($options['samesite'] ?? 'Lax') ?: 'Lax';
+
+	/** @deprecated 5.0 Use option `'httponly' => true` */
+	if (defined('_COOKIE_SECURE_LIST')) {
+		trigger_deprecation('spip', '5.0', 'Using "%s" constant is deprecated, use option "%s" when call "%s" instead.', '_COOKIE_SECURE_LIST', '\'httponly\' => true', __FUNCTION__);
+		if (
+			is_array(constant('_COOKIE_SECURE_LIST'))
+			&& in_array($name, constant('_COOKIE_SECURE_LIST'))
+		) {
 			$options['httponly'] = true;
 		}
-	}
-	if (empty($options['samesite'])) {
-		$options['samesite'] = 'Lax';
 	}
 
 	// in fine renommer le prefixe si besoin

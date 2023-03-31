@@ -219,7 +219,8 @@ function ajouter_session($auteur) {
 	include_spip('inc/cookie');
 	$duree = definir_duree_cookie_session($auteur);
 	spip_setcookie('spip_session', $_COOKIE['spip_session'], [
-		'expires' => time() + $duree
+		'expires' => time() + $duree,
+		'httponly' => true,
 	]);
 	spip_log("ajoute session $fichier_session cookie $duree", 'session');
 
@@ -229,12 +230,14 @@ function ajouter_session($auteur) {
 	}
 	if (autoriser('ecrire', '', '', $auteur) and _DUREE_COOKIE_ADMIN) {
 		spip_setcookie('spip_admin', '@' . ($auteur['email'] ?: $auteur['login']), [
-			'expires' => time() + max(_DUREE_COOKIE_ADMIN, $duree)
+			'expires' => time() + max(_DUREE_COOKIE_ADMIN, $duree),
+			'httponly' => true,
 		]);
 	} // sinon le supprimer ...
 	else {
 		spip_setcookie('spip_admin', '', [
-			'expires' => 1
+			'expires' => 1,
+			'httponly' => true,
 		]);
 	}
 
