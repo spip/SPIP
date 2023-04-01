@@ -20,6 +20,7 @@
 - #5540 Les fonctions `extraire_balise` et `extraire_balises` peuvent gérer des balises imbriquées
 - Les logos historiques (migrés en documents à partir de SPIP 4.0) ne sont plus utilisés s’il en restait.
 - Nécessite PHP 8.1 minimum
+- Refacto page de contrôle et boîtes des tâches de fond
 
 ### Fixed
 
