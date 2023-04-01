@@ -1,17 +1,24 @@
 <B_jobs>
+	[(#ALERTE_OUVRIR{<:queue_titre:>,info})]
 	<div class="jobs_liste jobs_liste_#ENV{objet}">
 	#ANCRE_PAGINATION
-	<ul class="liste_items jobs">
+	<ul class="liste_items jobs mini">
 		<BOUCLE_jobs(jobs){par date}{pagination 5}{objet}{id_objet}>
 			<li class="item">
-				<div class="date">[(#DATE|date_relative)]</div>
-				[<strong class="description">(#DESCRIPTIF|PtoBR)</strong>]
+				<div class="content">
+					<abbr class="date" title="[(#DATE|affdate_heure|attribut_html)]">[(#DATE|date_relative|spip_ucfirst)]</abbr>
+					[<div class="description">(#DESCRIPTIF|PtoBR)</div>]
+				</div>
 				[(#AUTORISER{'annuler','job',#ID_JOB}|oui)
-				<div class="actions">[(#BOUTON_ACTION{<:annuler:>,#URL_ACTION_AUTEUR{annuler_job,#ID_JOB,#SELF},ajax})]</div>
+					<div class="actions">
+						[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{symbol-play-16.svg}|balise_svg)]<span class="visually-hidden"><:queue_executer_maintenant:></span>,#URL_ACTION_AUTEUR{forcer_job,#ID_JOB,#SELF}, btn btn_icone})]
+						[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{supprimer-16.svg}|balise_img)]<span class="visually-hidden"><:annuler:></span>,#URL_ACTION_AUTEUR{annuler_job,#ID_JOB,#SELF},ajax btn btn_link btn_icone})]
+					</div>
 				]
 			</li>
 		</BOUCLE_jobs>
 	</ul>
 	[<nav class="pagination">(#PAGINATION)</nav>]
 	</div>
+	#ALERTE_FERMER
 </B_jobs>
