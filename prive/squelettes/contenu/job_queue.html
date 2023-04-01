@@ -2,44 +2,10 @@
 [(#AUTORISER{administrer,queue}|sinon_interdire_acces)]
 [(#REM|job_queue_block_and_watch)]
 <h1 class="grostitre"><:queue_titre:></h1>
-<B_jobs>
-	<div class="liste">
-		<h3>[(#GRAND_TOTAL|singulier_ou_pluriel{queue_one_job_in_queue,queue_nb_jobs_in_queue})]</h3>
-		<p>#SET{nb,#REM|queue_sleep_time_to_next_job}<:queue_next_job_in_nb_sec{nb=#GET{nb}}:></p>
-		[<nav class='pagination'>(#PAGINATION{prive})</nav>]
-		<ul class="liste-items">
-			<BOUCLE_jobs(jobs){par date}{pagination 20}>
-				<li class="item[ (#STATUS|?{'scheduled','pending'})]">
-					<div class="date">[(#DATE|date_relative|spip_ucfirst)][ (#STATUS|non)(en cours)] [(#PRIORITE|oui)\[<:queue_priorite_tache:> : #PRIORITE\]]</div>
-					[<strong class="description">(#DESCRIPTIF|PtoBR)</strong>]
-					[<span class="small">| (#FONCTION|job_queue_display_call{#ARGS})</span>]
-					[(#AUTORISER{'annuler','job',#ID_JOB}|oui)
-					<div class="actions">
-						[(#BOUTON_ACTION{<:annuler:>,#URL_ACTION_AUTEUR{annuler_job,#ID_JOB,#SELF},ajax})]
-						[(#BOUTON_ACTION{<:queue_executer_maintenant:>,#URL_ACTION_AUTEUR{forcer_job,#ID_JOB,#SELF}})]
-					</div>
-					]
-				</li>
-			</BOUCLE_jobs>
-		</ul>
-		[<nav class='pagination'>(#PAGINATION{prive})</nav>]
-		[(#AUTORISER{'purger','queue'}|oui)
-		<p><:queue_info_purger:></p>
-		<div class="actions">
-			[(#BOUTON_ACTION{<:queue_purger_queue:>,#URL_ACTION_AUTEUR{purger_queue,'x',#SELF},ajax})]
-		</div>
-		]
-		</div>
-</B_jobs>
-	<h3><:queue_no_job_in_queue:></h3>
-	[(#AUTORISER{'purger','queue'}|oui)
-	<p><:queue_info_purger:></p>
-	<div class="actions">
-		[(#BOUTON_ACTION{<:queue_purger_queue:>,#URL_ACTION_AUTEUR{purger_queue,'x',#SELF},ajax})]
-	</div>
-	]
-<//B_jobs>
+
+<INCLURE{fond=prive/objets/liste/jobs, ajax, env} />
+
 <script type="text/javascript">/*<![CDATA[*/
-function queue_reload(){jQuery('h1').ajaxReload();}
+function queue_reload(){jQuery('.liste-objets.jobs').ajaxReload();}
 if (window.jQuery) setTimeout(queue_reload,60000);
 /*]]>*/</script>

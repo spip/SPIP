@@ -575,6 +575,32 @@
 	background-position: var(--spip-left) var(--spip-list-spacing-x) center;
 }
 
+/* Tâches */
+.liste-objets.jobs th.date,
+.liste-objets.jobs td.date {
+	text-align: start;
+}
+.liste-objets.jobs tr.is-late td {
+	background-color: hsla(var(--spip-color-notice--h),var(--spip-color-notice--s),var(--spip-color-notice--l),0.2) !important;
+}
+.liste-objets.jobs tr.is-pending td,
+.liste-objets.jobs tr.is-late.is-pending td {
+	background-color: var(--spip-color-theme-lightest) !important;
+	font-weight: 500;
+}
+.liste-objets.jobs .etiquette {
+	background-color: var(--spip-color-gray-dark);
+	color: var(--spip-color-white);
+	border-radius: var(--spip-border-radius-mini);
+	padding: 0 0.2em;
+}
+.liste-objets.jobs .btns {
+	display: flex;
+}
+.liste-objets.jobs .btns > * {
+	flex: 1 0 auto;
+}
+
 
 /* Dans boîtes */
 .box.highlight .liste-objets {
@@ -880,6 +906,15 @@
 	text-align: var(--spip-right);
 }
 
+/* Liste de jobs */
+.jobs_liste {
+	margin: 0;
+}
+.liste_items.jobs .item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
 
 /**
  * ================================

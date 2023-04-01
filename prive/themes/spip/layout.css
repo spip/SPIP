@@ -267,6 +267,24 @@
 	}
 }
 
+
+/**
+ * Pages qui restent en 2 colonnes en écran large
+ * TODO : faire des classes génériques
+ */
+@media (min-width: 1200px) {
+	@supports (display: grid) {
+		.job_queue #conteneur:not(.pleine_largeur) {
+			grid-template-areas:
+				"navigation contenu"
+				"extra      contenu";
+			grid-template-columns: 25% 72%;
+		}
+	}
+}
+
+
+
 /**
  * =====================================
  * 2. Contenus textes limités en largeur
