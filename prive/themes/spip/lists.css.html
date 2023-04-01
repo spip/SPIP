@@ -907,13 +907,19 @@
 }
 
 /* Liste de jobs */
-.jobs_liste {
-	margin: 0;
-}
 .liste_items.jobs .item {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+}
+.jobs_liste {
+	margin: 0;
+}
+.jobs_liste .btn.btn_icone {
+	padding-inline: 0;
+}
+.jobs_liste .btn.btn_executer:not(:hover):not(:focus) {
+	color: var(--spip-color-theme);
 }
 
 /**
