@@ -1,0 +1,6 @@
+[(#AUTORISER{purger,queue}|oui)
+	#BOITE_OUVRIR{'',raccourcis}
+		<p><:queue_info_purger:></p>
+		[(#BOUTON_ACTION{<:queue_purger_queue:>,#URL_ACTION_AUTEUR{purger_queue,'x',#SELF},ajax})]
+	#BOITE_FERMER
+]

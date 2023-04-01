@@ -1,0 +1,74 @@
+[(#SET{defaut_tri,#ARRAY{
+	date,#ENV{date_sens,-1},
+	statut,1,
+	fonction,1,
+	descriptif,1,
+	id_job,1,
+	points,-1
+}})
+]<B_liste_jobs>
+#ANCRE_PAGINATION
+#SET{nb,#REM|queue_sleep_time_to_next_job}
+#SET{date_next,#VAL{Y-m-d H:i:s}|date{#ENV{date}|concat{' +',#GET{nb},' seconds'}|strtotime}|date_relative}
+<div class="liste-objets jobs mini">
+<table class="spip liste">
+[<caption><strong class="caption">
+	(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{queue_one_job_in_queue,queue_nb_jobs_in_queue}})
+	<span class="next-job float-end"><:queue_next_job_scheduled|label_ponctuer:> [<abbr title="[(#GET{nb})s]">(#GET{date_next})</abbr>]</span>
+</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="date principale" scope="col">[(#TRI{date,<:date:>,ajax})]</th>
+			<th class="fonction principale" scope="col">[(#TRI{fonction,<:queue_fonction_label:>,ajax})]</th>
+			<th class="descriptif secondaire" scope="col">[(#TRI{descriptif,<:info_descriptif|label_nettoyer:>,ajax})]</th>
+			<th class="action" scope="col"></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_jobs(jobs) {id_job?} {where?} {status?} {recherche?} {tri #ENV{par,date}} {pagination #ENV{nb,20}}>
+		[(#LANG|changer_typo)]
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#STATUS|?{is-scheduled,is-pending})][ (#DATE|<{#ENV{date}}|oui)is-late]">
+			<td class="date principale">
+				[<abbr title="[(#DATE|affdate_heure|attribut_html)]">(#DATE|date_relative|spip_ucfirst)</abbr>]
+				[(#STATUS|non)<br /><small class="etiquette etiquette_pending"><:queue_statut_en_cours:></small>]
+				[(#PRIORITE|oui)<br /><small class="etiquette etiquette_priorite"><:queue_priorite_tache|label_ponctuer:>&nbsp;#PRIORITE</small>]
+			</td>
+			<td class="fonction principale">
+				#SET{id_args,#VAL{job}|concat{#ID_JOB,_args}}
+				[(#AUTORISER{administrer,queue}|oui)<a class="mediabox" href="##GET{id_args}" title="<:queue_args_voir|attribut_html:>">]
+					<span class="fonction__nom">#FONCTION</span>
+				[(#AUTORISER{administrer,queue}|oui)
+					</a>
+					<div class="hidden" hidden>
+						[(#BOITE_OUVRIR{<:queue_args_fonction_label{fonction=#FONCTION}:>}|inserer_attribut{id,#GET{id_args}})]
+						<pre><code class="language-php">[(#ARGS*|unserialize|sinon{#ARRAY}|var_export{#EVAL{true}}|htmlspecialchars)]</code></pre>
+						#BOITE_FERMER
+					</div>
+				]
+			</td>
+			<td class="descriptif secondaire">
+				[(#DESCRIPTIF|ptobr)]
+				<B_liens><br /><:queue_liens_label|label_ponctuer:>
+				<BOUCLE_liens(jobs_liens) {id_job} {", "}>
+				<a href="[(#ID_OBJET|generer_objet_url_ecrire{#OBJET})]">[(#OBJET|objet_info{texte_objet}|_T)] <:info_numero_abbreviation:>#ID_OBJET</a>
+				</BOUCLE_liens>
+			</td>
+			<td class="action">
+				[(#AUTORISER{annuler,job,#ID_JOB}|oui)
+					<div class="btns">
+						[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{symbol-play-16.svg}|balise_svg)]<span class="visually-hidden"><:queue_executer_maintenant:></span>,#URL_ACTION_AUTEUR{forcer_job,#ID_JOB,#SELF}, btn btn_icone btn_executer})]
+						[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{supprimer-16.svg}|balise_img)]<span class="visually-hidden"><:annuler:></span>,#URL_ACTION_AUTEUR{annuler_job,#ID_JOB,#SELF},ajax btn btn_link btn_icone btn_annuler})]
+					</div>
+				]
+			</td>
+		</tr>
+	</BOUCLE_liste_jobs>
+	[(#REM|changer_typo)]
+	</tbody>
+</table>
+[<nav class="pagination">(#PAGINATION{#ENV{pagination,prive}})</nav>]
+</div>
+</B_liste_jobs>
+
+[<div class="liste-objets jobs caption-wrap"><strong class="caption">(#ENV*{sinon,<:queue_no_job_in_queue:>})</strong></div>]
+<//B_liste_jobs>
