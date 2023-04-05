@@ -687,8 +687,8 @@ function _imagecreatefrom_func(string $func, string $filename) {
 	}
 	$img = @$func($filename);
 	if (!$img) {
-		spip_log("Erreur lecture imagecreatefromjpeg $filename", _LOG_CRITIQUE);
-		erreur_squelette("Erreur lecture imagecreatefromjpeg $filename");
+		spip_log("Erreur lecture $func $filename", _LOG_CRITIQUE);
+		erreur_squelette("Erreur lecture $func $filename");
 		$img = imagecreate(10, 10);
 	}
 	return $img;
