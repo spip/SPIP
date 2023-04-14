@@ -11,6 +11,7 @@
 
 ### Added
 
+- #5565 Critère `{having}`
 - Log des dépréciations, via la fonction `trigger_deprecation` (de symfony/deprecations-contracts).
 - Les plugins-dist et le squelettes-dist s'intallent avec composer
 - #5301 Permettre de fournir le nom de l’attachement à `spip_livrer_fichier()`
