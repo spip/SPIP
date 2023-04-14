@@ -11,6 +11,7 @@
 
 ### Added
 
+- #5565 Critères `{groupby}` et `{groupby_supprimer}`
 - #5565 Critère `{having}`
 - Log des dépréciations, via la fonction `trigger_deprecation` (de symfony/deprecations-contracts).
 - Les plugins-dist et le squelettes-dist s'intallent avec composer
@@ -33,6 +34,7 @@
 
 ### Deprecated
 
+- #5565 Critères `{fusion}` et `{fusion_supprimer}`
 - Fonction `logo_migrer_en_base()` (utilisable jusqu’en SPIP 5.y pour migrer les logos en documents)
 - Fonction `spip_sha256` (utiliser `hash('sha256', $str)`)
 
