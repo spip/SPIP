@@ -650,7 +650,7 @@ function critere_fusion_supprimer_dist(...$args) {
 }
 
 /**
- * Compile le critère `{collecte}` qui permet de spécifier l'interclassement
+ * Compile le critère `{collate}` qui permet de spécifier l'interclassement
  * à utiliser pour les tris de la boucle.
  *
  * Cela permet avec le critère `{par}` de trier un texte selon
@@ -662,15 +662,15 @@ function critere_fusion_supprimer_dist(...$args) {
  * (elle peut être appliquée sur les order by, group by, where, like ...)
  *
  * @example
- *     - `{par titre}{collecte utf8_spanish_ci}` ou `{collecte utf8_spanish_ci}{par titre}`
- *     - `{par titre}{par surtitre}{collecte utf8_spanish_ci}` :
+ *     - `{par titre}{collate utf8_spanish_ci}` ou `{collate utf8_spanish_ci}{par titre}`
+ *     - `{par titre}{par surtitre}{collate utf8_spanish_ci}` :
  *        Seul 'surtitre' (`par` précédent) utilisera l'interclassement
- *     - `{collecte utf8_spanish_ci}{par titre}{par surtitre}` :
+ *     - `{collate utf8_spanish_ci}{par titre}{par surtitre}` :
  *        'titre' et 'surtitre' utiliseront l'interclassement (tous les `par` suivants)
  *
  * @note
  *     Piège sur une éventuelle écriture peu probable :
- *     `{par a}{collecte c1}{par b}{collecte c2}` : le tri `{par b}`
+ *     `{par a}{collate c1}{par b}{collate c2}` : le tri `{par b}`
  *     utiliserait l'interclassement c1 (et non c2 qui ne s'applique pas
  *     au `par` précédent s'il a déjà un interclassement demandé).
  *
@@ -682,7 +682,7 @@ function critere_fusion_supprimer_dist(...$args) {
  * @param array $boucles AST du squelette
  * @param Critere $crit Paramètres du critère dans cette boucle
  */
-function critere_collecte_dist($idb, &$boucles, $crit) {
+function critere_collate_dist($idb, &$boucles, $crit) {
 	if (isset($crit->param[0])) {
 		$_coll = calculer_liste($crit->param[0], $idb, $boucles, $boucles[$idb]->id_parent);
 		$boucle = $boucles[$idb];
@@ -703,6 +703,21 @@ function critere_collecte_dist($idb, &$boucles, $crit) {
 	} else {
 		return (['zbug_critere_inconnu', ['critere' => $crit->op . ' ' . (is_countable($boucles[$idb]->order) ? count($boucles[$idb]->order) : 0)]]);
 	}
+}
+
+/**
+ * Compile le critère `{collecte}` qui permet de spécifier l'interclassement
+ * à utiliser pour les tris de la boucle.
+ *
+ * @deprecated 5.0 Utiliser `{collate}`
+ *
+ * @param string $idb Identifiant de la boucle
+ * @param array $boucles AST du squelette
+ * @param Critere $crit Paramètres du critère dans cette boucle
+ */
+function critere_collecte_dist(...$args) {
+	trigger_deprecation('spip', '5.0', 'Using "%s" criteria is deprecated, use "%s" criteria instead', 'collecte', 'collate');
+	return critere_collate_dist(...$args);
 }
 
 function calculer_critere_arg_dynamique($idb, &$boucles, $crit, $suffix = '') {
