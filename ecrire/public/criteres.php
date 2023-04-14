@@ -1596,18 +1596,49 @@ function critere_where_dist($idb, &$boucles, $crit) {
 	if (isset($crit->param[0])) {
 		$_where = calculer_liste($crit->param[0], $idb, $boucles, $boucle->id_parent);
 	} else {
-		$_where = 'spip_sanitize_from_request(@$Pile[0]["where"],"where","vide")';
+		$_where = "spip_sanitize_from_request(\$Pile[0]['where'] ?? null, 'where', 'vide')";
 	}
 
 	if ($crit->cond) {
-		$_where = "((\$zzw = $_where) ? \$zzw : '')";
+		$_where = "$_where ?: ''";
 	}
 
 	if ($crit->not) {
-		$_where = "array('NOT',$_where)";
+		$_where = "['NOT', $_where]";
 	}
 
 	$boucle->where[] = $_where;
+}
+
+/**
+ * Compile le critère {having}
+ *
+ * Ajoute une contrainte sql HAVING, pour faire le pont
+ * entre php et squelettes, en utilisant la syntaxe attendue par
+ * la propriété $having d'une Boucle.
+ *
+ * @param string $idb Identifiant de la boucle
+ * @param array $boucles AST du squelette
+ * @param Critere $crit Paramètres du critère dans cette boucle
+ * @return void
+ */
+function critere_having_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	if (isset($crit->param[0])) {
+		$_having = calculer_liste($crit->param[0], $idb, $boucles, $boucle->id_parent);
+	} else {
+		$_having = "spip_sanitize_from_request(\$Pile[0]['having'] ?? null, 'having', 'vide')";
+	}
+
+	if ($crit->cond) {
+		$_having = "$_having ?: ''";
+	}
+
+	if ($crit->not) {
+		$_having = "['NOT', $_having]";
+	}
+
+	$boucle->having[] = $_having;
 }
 
 /**
