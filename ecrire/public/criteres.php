@@ -1611,6 +1611,37 @@ function critere_where_dist($idb, &$boucles, $crit) {
 }
 
 /**
+ * Compile le critère {having}
+ *
+ * Ajoute une contrainte sql HAVING, pour faire le pont
+ * entre php et squelettes, en utilisant la syntaxe attendue par
+ * la propriété $having d'une Boucle.
+ *
+ * @param string $idb Identifiant de la boucle
+ * @param array $boucles AST du squelette
+ * @param Critere $crit Paramètres du critère dans cette boucle
+ * @return void
+ */
+function critere_having_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	if (isset($crit->param[0])) {
+		$_having = calculer_liste($crit->param[0], $idb, $boucles, $boucle->id_parent);
+	} else {
+		$_having = "spip_sanitize_from_request(\$Pile[0]['having'] ?? null, 'having', 'vide')";
+	}
+
+	if ($crit->cond) {
+		$_having = "((\$zzw = $_having) ? \$zzw : '')";
+	}
+
+	if ($crit->not) {
+		$_having = "['NOT', $_having]";
+	}
+
+	$boucle->having[] = $_having;
+}
+
+/**
  * Compile le critère `{id_?}`
  *
  * Ajoute automatiquement à la boucle des contraintes (nommées sélections conditionnelles)
