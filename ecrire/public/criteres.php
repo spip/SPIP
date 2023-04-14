@@ -549,9 +549,8 @@ function critere_logo_dist($idb, &$boucles, $crit) {
 	$boucle->where[] = $c;
 }
 
-
 /**
- * Compile le critère `fusion` qui regroupe les éléments selon une colonne.
+ * Compile le critère `groupby` qui regroupe les éléments selon une colonne.
  *
  * C'est la commande SQL «GROUP BY»
  *
@@ -559,15 +558,17 @@ function critere_logo_dist($idb, &$boucles, $crit) {
  * @link https://www.spip.net/5166
  * @example
  *     ```
- *      <BOUCLE_a(articles){fusion lang}>
+ *      <BOUCLE_a(articles){groupby lang}>
  *     ```
+ *
+ * @note Remplace `{fusion}`.
  *
  * @param string $idb Identifiant de la boucle
  * @param array $boucles AST du squelette
  * @param Critere $crit Paramètres du critère dans cette boucle
  * @return void|array
- **/
-function critere_fusion_dist($idb, &$boucles, $crit) {
+ */
+function critere_groupby_dist($idb, &$boucles, $crit) {
 	if ($t = isset($crit->param[0])) {
 		$t = $crit->param[0];
 		if ($t[0]->type == 'texte') {
@@ -596,23 +597,56 @@ function critere_fusion_dist($idb, &$boucles, $crit) {
 }
 
 /**
- * Compile le critère `fusion_supprimer` qui supprime toutes les fusions qui le précèdent
+ * Compile le critère `groupby_supprimer` qui supprime toutes les fusions qui le précèdent
  *
- * Ce critère retire toutes les définitions de "group by" qui le précèdent. Par exemple pour en ajouter d'autres ensuite.
+ * Ce critère retire toutes les définitions de «GROUP BY» qui le précèdent.
+ * Par exemple pour en ajouter d'autres ensuite.
  *
  * @critere
  * @example
  *     ```
- *      <BOUCLE_a(ARTICLES){gis}{fusion_supprimer}{fusion ville}
+ *      <BOUCLE_a(ARTICLES){gis}{groupby_supprimer}{groupby ville}
  *     ```
+ *
+ * @note Remplace `{fusion_supprimer}`.
  *
  * @param string $idb Identifiant de la boucle
  * @param array $boucles AST du squelette
  * @param Critere $crit Paramètres du critère dans cette boucle
  * @return void
- **/
-function critere_fusion_supprimer_dist($idb, &$boucles, $crit) {
+ */
+function critere_groupby_supprimer_dist($idb, &$boucles, $crit) {
 	$boucles[$idb]->group = [];
+}
+
+/**
+ * Compile le critère `fusion` qui regroupe les éléments selon une colonne.
+ *
+ * @deprecated 5.0 Utiliser {groupby}
+ *
+ * @param string $idb Identifiant de la boucle
+ * @param array $boucles AST du squelette
+ * @param Critere $crit Paramètres du critère dans cette boucle
+ * @return void|array
+ */
+function critere_fusion_dist(...$args) {
+	trigger_deprecation('spip', '5.0', 'Using "%s" criteria is deprecated, use "%s" criteria instead', 'fusion', 'groupby');
+	return critere_groupby_dist(...$args);
+}
+
+/**
+ * Compile le critère `fusion_supprimer` qui supprime toutes les fusions qui le précèdent
+ *
+ * @deprecated 5.0 Utiliser {groupby_supprimer}
+ *
+ * @param string $idb Identifiant de la boucle
+ * @param array $boucles AST du squelette
+ * @param Critere $crit Paramètres du critère dans cette boucle
+ * @return void|array
+ */
+function critere_fusion_supprimer_dist(...$args) {
+	trigger_deprecation('spip', '5.0', 'Using "%s" criteria is deprecated, use "%s" criteria instead', 'fusion_supprimer', 'groupby_supprimer');
+	return critere_groupby_supprimer_dist(...$args);
 }
 
 /**
