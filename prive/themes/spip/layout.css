@@ -6,28 +6,28 @@
  * Organisation :
  *
  * 1. Layout général de la page
- * 2. Contenus textes limités en largeur
- * 3. Divers
- * 4. Grenier
+ *    1.1. Disposition par défaut
+ *    1.x. Autres dispositions : pleine largeur, etc.
+ * 2. Utilitaires
+ * 3. Grenier / à ranger
  *
- * Breakpoints : 780px / 1200px
+ * Breakpoints : 780px / 960px / 1200px
  *
  * Markup :
  *
  * body
- * |--#bando_haut
- * |  |--#bando_xxx (x4)
- * |     |--.largeur
- * |--#page
- * |  |--.largeur
- * |  |  |--#haut
- * |  |     |--#chemin
- * |  |--#conteneur(.pleine_largeur)
- * |     |--#navigation
- * |     |--#extra
- * |     |--#contenu
- * |--#pied
- *    |--.largeur
+ *   #bando_haut
+ *     #bando_xxx (x4)
+ *       .largeur
+ *   #page
+ *     .largeur
+ *       #haut
+ *       #conteneur[.<disposition>]
+ *         #navigation
+ *         #extra
+ *         #contenu
+ *   #pied
+ *     .largeur
  */
 
 
@@ -38,19 +38,29 @@
  */
 
 
-/* Variable utilitaire pour donner la largeur disponible, tient compte des gouttières de .largeur
-   Utile pour les éléments positionnés en absolute par ex. */
 :root {
-	--spip-vw: 100vw - calc(10px * 2);
+	/* Gouttière horizontale */
+	--spip-layout-gap: 10px; /* clamp(10px, 2vw, 25px); */
+	/* Largeur max de la page, */
+	--spip-layout-page-width: 1480px;
+	/* Largeur des colonnes */
+	--spip-layout-column-width: 25%;
+	/* Largeur limitée afin que les textes fassent environ 70 caractères max par ligne */
+	--spip-layout-text-width: 75ch;
+	/* Largeur limitée de certains formulaires */
+	--spip-layout-form-width: 50em;
+	/* Largeur réellement disponible, en tenant compte des gouttières */
+	--spip-vw: calc(var(--spip-layout-page-width) - (var(--spip-layout-gap) * 2));
 }
-@media (min-width: 960px) {
+@media (min-width: 720px) {
 	:root {
-		--spip-vw: 100vw - calc(20px * 2);
+		--spip-layout-gap: 20px;
 	}
 }
-@media (min-width: 1440px) {
+@media (min-width: 1200px) {
 	:root {
-		--spip-vw: 1440px - calc(20px * 2);
+		--spip-layout-gap: 25px;
+		--spip-layout-column-width: 20%; /* 3 colonnes donc plus petit */
 	}
 }
 
@@ -61,285 +71,188 @@
  * ============================
  */
 
-/*
- * Par defaut les vieux navigateurs qui ne supportent rien : direct en 3 colonnes et basta.
- * on met des min-width et des max-width
- */
 
-.largeur,
-.table_page,
-.messages-alertes {
-	max-width: 1440px;
-	min-width: 960px;
+html, body {
+	width: 100vw;
+	min-height: 100vh;
+	box-sizing: border-box;
 }
-
 .largeur {
-	margin: auto;
-	text-align: left;
-	padding: 0 10px;
+	box-sizing: border-box;
+	width: 100%;
+	max-width: var(--spip-layout-page-width);
+	margin-inline: auto;
+	padding-inline: var(--spip-layout-gap);
 }
 #haut {
-	margin-top: 10px;
+	margin-block-start: var(--spip-spacing-y);
 }
-
+/* Coller le footer en bas */
+body {
+	display: flex;
+	flex-flow: column;
+}
 #page {
 	overflow: initial !important; /* Sinon aucun élément en position sticky ne fonctionne */
-	text-align: center;
+	flex-grow: 1;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-between;
 }
 
-/* Navigateurs napthaline : par defaut */
+
+/**
+ * 1.1. Contenu central : disposition par défaut
+ * =============================================
+ */
+
+/**
+ * Mobiles : 1 seule colonne
+ */
 #conteneur {
-	text-align: center;
+	display: flex;
+	flex-flow: column;
 }
 #contenu {
-	text-align: left;
-	display: inline-block;
-	width: 61%;
-	margin-left: auto;
-	margin-right: auto;
-	min-height: 50vh;
+	order: 2;
+	overflow-x: scroll; /* Tableaux qui dépassent : ne pas faire scroller toute la page */
+	min-width: 0; /* Fix grid avec tableaux qui dépassent */
 }
 #navigation {
+	order: 1;
 	overflow-wrap: break-word;
-	text-align: left;
-	width: 18%;
-	float: left;
 }
 #extra {
+	order: 3;
 	overflow-wrap: break-word;
-	text-align: left;
-	width: 18%;
-	float: right;
+}
+/* Safeguard pour placer des éléments en sticky dans les 3 blocs principaux : .ajaxbloc doit prendre toute la hauteur du parent */
+#contenu > .ajaxbloc:only-child,
+#navigation > .ajaxbloc:only-child,
+#extra > .ajaxbloc:only-child {
+	height: 100%;
+}
+
+/**
+ * Écrans moyens : 2 colonnes
+ */
+@media (min-width: 720px) {
+	#conteneur {
+		display: grid;
+		column-gap: var(--spip-layout-gap);
+		grid-template-rows: auto 1fr;
+		grid-template-columns:
+			var(--spip-layout-column-width) /* navigation & extra */
+			1fr;                            /* contenu */
+		grid-template-areas:
+			"navigation contenu"
+			"extra      contenu";
+	}
+	#contenu {
+		grid-area: contenu;
+		overflow-x: initial;
+	}
+	#navigation {
+		grid-area: navigation;
+	}
+	#extra {
+		grid-area: extra;
+	}
+}
+
+/**
+ * Écrans larges : 3 colonnes
+ */
+@media (min-width: 1200px) {
+	#conteneur {
+		grid-template-columns:
+			var(--spip-layout-column-width)  /* navigation */
+			1fr                              /* contenu */
+			var(--spip-layout-column-width); /* extra */
+		grid-template-areas:
+			"navigation contenu extra"
+			"navigation contenu extra";
+	}
 }
 
 
-/* Les pages qui demandent à être en pleine largeur (sans #nav ni #extra) */
-.pleine_largeur #contenu {
-	width: 100%;
+/**
+ * 1.2. Disposition : pleine_largeur
+ * =================================
+ */
+#conteneur.pleine_largeur {
+	display: block !important;
 }
 .pleine_largeur #navigation,
 .pleine_largeur #extra {
 	display: none;
 }
-
+/* Limiter la largeur de certains contenus */
+.pleine_largeur .formulaire_spip {
+	max-width: var(--spip-layout-form-width);
+	margin-inline: auto;
+}
 
 /**
- * Écrans moyens : on passe en 2 colonnes.
- * Fallback vieux navigateurs : direct en 3 colonnes et basta.
- */
-@media (min-width: 720px) {
-	.largeur,
-	.table_page,
-	.messages-alertes {
-		min-width: 0;
-	}
-
-	/* Navigateurs récents */
-	@supports (display: grid) {
-		/* Les pages "normales" */
-		#conteneur:not(.pleine_largeur) {
-			text-align: left;
-			display: grid;
-			grid-column-gap: 2%;
-			/*grid-template-columns:
-				min-content
-				minmax(auto, calc(100% - (8em + 8vw)));*/
-			grid-template-rows: auto 1fr; /* la 1ère ligne doit se collapser */
-			grid-template-columns:
-				25%  /* navigation & extra */
-				73%; /* contenu */
-			grid-template-areas:
-				"navigation contenu "
-				"extra      contenu ";
-			justify-content: center;
-		}
-		#contenu {
-			grid-area: contenu;
-			width: initial;
-			margin: 0;
-		}
-		#navigation {
-			grid-area: navigation;
-			width: initial;
-			margin-right: 0;
-		}
-		#extra {
-			grid-area: extra;
-			width: initial;
-		}
-	}
-
-	/**
-	 * Fix ajax + sticky
-	 * On veut pouvoir placer des éléments en sticky dans les 3 blocs principaux.
-	 * En principe tout leur contenu est inclus en ajax, le .ajaxbloc doit prendre toute la hauteur du parent.
-	 * Mais attention aux exceptions de markup : le faire uniquement lorsqu'il n'y a qu'un seul .ajabloc
-	 */
-	#contenu > .ajaxbloc:only-child,
-	#navigation > .ajaxbloc:only-child,
-	#extra > .ajaxbloc:only-child {
-		height: 100%;
-	}
-}
-@media (min-width: 960px) {
-	.largeur {
-		padding: 0 20px;
-	}
-	@supports (display: grid) {
-		#conteneur:not(.pleine_largeur) {
-			grid-template-columns:
-				25%  /* navigation & extra */
-				73%; /* contenu */
-		}
-	}
-}
-
-
-/**
- * Sur écrans larges : 3 colonnes.
- */
-@media (min-width: 1200px) {
-	@supports (display: grid) {
-		#conteneur:not(.pleine_largeur) {
-			grid-column-gap: 3%;
-			grid-template-columns:
-				20%  /* navigation */
-				56%  /* contenu */
-				18%; /* extra */
-			grid-template-areas:
-				"navigation contenu extra"
-				"navigation contenu extra";
-		}
-	}
-}
-
-/* petit ecrans : flex pour reordonner */
-@media (max-width: 719.999px) {
-	.largeur,
-	.table_page,
-	.messages-alertes {
-		min-width: 0;
-	}
-
-	#page {
-		margin: auto;
-	}
-
-	#haut {
-		text-align: center;
-		margin-top: 10px;
-	}
-
-	#contenu {
-		float:none;
-		width: 100%;
-	}
-
-	#navigation {
-		float:none;
-		width: auto;
-		max-width: 100%;
-	}
-
-	#extra {
-		float:none;
-		width: auto;
-		max-width: 100%;
-	}
-
-	#pied {}
-
-	@supports (display: flex) {
-		#conteneur {
-			display: flex;
-			flex-direction: column;
-		}
-		#navigation {
-			order:1;
-		}
-		#contenu {
-			order:2;
-		}
-		#extra {
-			order:3;
-		}
-	}
-}
-
-
-/**
- * Pages qui restent en 2 colonnes en écran large
+ * 1.3. Disposition : nav et extra à gauche
+ * ========================================
  * TODO : faire des classes génériques
  */
 @media (min-width: 1200px) {
-	@supports (display: grid) {
-		.job_queue #conteneur:not(.pleine_largeur) {
-			grid-template-areas:
-				"navigation contenu"
-				"extra      contenu";
-			grid-template-columns: 25% 72%;
-		}
+	.job_queue #conteneur {
+		grid-template-areas:
+			"navigation contenu"
+			"extra      contenu";
+		grid-template-columns: var(--spip-layout-column-width) 1fr;
 	}
 }
 
 
-
 /**
- * =====================================
- * 2. Contenus textes limités en largeur
- * =====================================
- * On essaie d'obtenir environ 60 charactères max par ligne.
+ * ==============
+ * 2. Utilitaires
+ * ==============
+ * Classes utilitaires applicables à n'importe quel élément
  */
 
-.pleine_largeur .formulaire_spip {
-	max-width: 60em;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-/**
- * =========
- * 3. Divers
- * =========
- */
 
 .centered {
 	margin: 0 auto;
-	text-align: center;
+	text-align: center; /* Vraiment nécessaire ? */
 }
 
+
+/**
+ * =====================
+ * 3. Grenier + à ranger
+ * =====================
+ */
+
+
+/* ??? */
+.table_page {
+	max-width: var(--spip-layout-page-width);
+	/* min-width: 960px; */ /* pour > 720px  */
+	margin-inline: auto;
+	margin-block-start: 1em;
+	clear: both;
+	text-align: start;
+}
+
+/* Messages alertes old school, ex. : crash de la bdd */
 .wrap-messages-alertes {
 	padding: 5px 10px;
-	background: #eee;
+	background-color: var(--spip-color-gray-lighter);
 }
 @media (min-width: 960px) {
 	.wrap-messages-alertes {
 		padding: 5px 20px;
 	}
 }
-div.messages-alertes {
-	text-align: right;
+.messages-alertes {
+	max-width: var(--spip-layout-page-width);
+	/* min-width: 960px; */ /* pour > 720px  */
+	margin-inline: auto;
+	text-align: end;
 	clear: both;
-	margin-right: auto;
-	margin-left: auto;
-}
-
-
-/**
- * ==========
- * 4. Grenier
- * ==========
- */
-
-.table_page {
-	margin: auto;
-	text-align: left;
-	clear: both;
-	margin-right: auto;
-	margin-left: auto;
-	margin-top: 0.5em;
-}
-
-div.table_page {
-	margin-top: 1em;
 }
