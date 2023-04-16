@@ -55,7 +55,7 @@ class Factory
 			if (!class_exists($class)) {
 				// historique
 				// Chercher IterateurXXX
-				include_spip('iterateur/' . $iterateur);
+				include_spip('iterateur/' . strtolower($iterateur));
 				$class = 'Iterateur' . $iterateur;
 				if (!class_exists($class)) {
 					exit("Iterateur {$iterateur} non trouv&#233;");
