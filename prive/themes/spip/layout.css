@@ -177,33 +177,96 @@ body {
 
 
 /**
- * 1.2. Disposition : pleine_largeur
+ * 1.2. Disposition 1 : pleine_largeur
  * =================================
+ * Pas de contenus complémentaires #nav ni #extra
  */
-#conteneur.pleine_largeur {
+#conteneur.layout-1,
+#conteneur.layout-pleine_largeur {
 	display: block !important;
 }
-.pleine_largeur #navigation,
-.pleine_largeur #extra {
+.layout-1 #navigation,
+.layout-pleine_largeur #navigation,
+.layout-1 #extra,
+.layout-pleine_largeur #extra {
 	display: none;
 }
-/* Limiter la largeur de certains contenus */
-.pleine_largeur .formulaire_spip {
+/* Limiter la largeur de certains éléments */
+.layout-1 .formulaire_spip,
+.layout-pleine_largeur .formulaire_spip {
 	max-width: var(--spip-layout-form-width);
 	margin-inline: auto;
 }
 
 /**
- * 1.3. Disposition : nav et extra à gauche
- * ========================================
- * TODO : faire des classes génériques
+ * 1.3. Disposition 2 : complements_gauche
+ * =======================================
+ * Contenus complémentaires #nav et #extra à gauche
  */
 @media (min-width: 1200px) {
-	.job_queue #conteneur {
+	#conteneur.layout-2,
+	#conteneur.layout-complements_gauche {
 		grid-template-areas:
 			"navigation contenu"
 			"extra      contenu";
 		grid-template-columns: var(--spip-layout-column-width) 1fr;
+	}
+}
+
+/**
+ * 1.4. Disposition 3 : complements_droite
+ * =======================================
+ * Contenus complémentaires #nav et #extra à droite
+ */
+@media (min-width: 1200px) {
+	#conteneur.layout-3,
+	#conteneur.layout-complements_droite {
+		grid-template-areas:
+			"contenu navigation"
+			"contenu extra";
+		grid-template-columns: 1fr var(--spip-layout-column-width);
+	}
+}
+
+/**
+ * 1.5. Disposition 4 : complements_bas
+ * ====================================
+ * Contenus complémentaires #nav et #extra sous le contenu principal
+ */
+ @media (min-width: 1200px) {
+	#conteneur.layout-4,
+	#conteneur.layout-complements_bas {
+		grid-template-areas:
+			"contenu contenu"
+			"navigation extra";
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+/**
+ * 1.5. Disposition 5 : complements_bas_inverse
+ * ============================================
+ * Contenus complémentaires #nav et #extra sous le contenu principal
+ */
+ @media (min-width: 1200px) {
+	#conteneur.layout-5,
+	#conteneur.layout-complements_bas_inverse {
+		grid-template-areas:
+			"contenu contenu"
+			"extra navigation";
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+/**
+ * 1.6. Disposition 6 : fluide
+ * ===========================
+ * Idem disposition de base, sauf que le contenu principal prend tout l'espace dispo
+ */
+ @media (min-width: 1200px) {
+	#conteneur.layout-6,
+	#conteneur.layout-fluide {
+		grid-template-columns: auto 1fr auto;
 	}
 }
 
