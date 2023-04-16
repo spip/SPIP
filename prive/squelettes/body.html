@@ -9,11 +9,11 @@
 					<INCLURE{fond=prive/squelettes/hierarchie/#ENV{type-page},ajax=hierarchie,env}>
 				</div>
 				[(#REM)<!--
-				Ici, # INCLURE car top/xx peut affecter la globale 'pleine_largeur'
+				Ici, # INCLURE car top/xx peut affecter la globale 'layout_prive'
 				-->]
 				#INCLURE{fond=prive/squelettes/top/#ENV{type-page},ajax=top,env}
 			</div>
-			<div id="conteneur" class="[(#LARGEUR_ECRAN)]">
+			<div id="conteneur" class="[(#LAYOUT_PRIVE)]">
 				<div id="navigation" class='lat' role='contentinfo'>
 					<INCLURE{fond=prive/squelettes/navigation/#ENV{type-page},ajax=navigation,env}>
 				</div>
