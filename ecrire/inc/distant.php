@@ -636,7 +636,12 @@ function recuperer_url($url, $options = []) {
 		$result['page'] = transcoder_page($result['page'], $result['headers']);
 	}
 
-	$trace = json_decode(json_encode($result, JSON_THROW_ON_ERROR), true, 512, JSON_THROW_ON_ERROR);
+	try {
+		$trace = json_decode(json_encode($result, JSON_THROW_ON_ERROR), true, 512, JSON_THROW_ON_ERROR);
+	} catch (JsonException $e) {
+		$trace = [];
+		spip_log('Failed to parse Json data : ' . $e->getMessage(), _LOG_ERREUR);
+	}
 	$trace['page'] = '...';
 	spip_log('RESULTAT recuperer_url ' . $options['methode'] . " sur $url : " . json_encode($trace, JSON_THROW_ON_ERROR), 'distant' . _LOG_DEBUG);
 
