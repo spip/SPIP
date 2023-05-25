@@ -2451,7 +2451,7 @@ function generer_url_action($script, $args = '', $no_entities = false, $public =
  */
 function generer_url_api(string $script, string $path, string $args, bool $no_entities = false, ?bool $public = null) {
 	if (is_null($public)) {
-		$public = (_DIR_RACINE ? false : '');
+		$public = (_DIR_RACINE ? false : true);
 	}
 	if (substr($script, -4) !== '.api') {
 		$script .= '.api';
