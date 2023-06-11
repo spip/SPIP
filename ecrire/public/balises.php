@@ -2032,6 +2032,57 @@ function balise_INCLURE_dist($p) {
 	return $p;
 }
 
+/**
+ * Balise
+ * ```
+ * #TRAD{ecrire:acces_interdit}
+ * ```
+ *
+ * @uses _T()
+ * @param $p
+ * @return mixed
+ */
+function balise_TRAD_dist($p) {
+	$id_boucle = $p->id_boucle;
+	$_contexte = argumenter_inclure($p->param, true, $p, $p->boucles, $id_boucle, false, false);
+
+	// erreur de syntaxe = fond absent
+	// (2 messages d'erreur SPIP pour le prix d'un, mais pas d'erreur PHP
+	if (!$_contexte) {
+		$_contexte = [];
+	}
+
+	if (!isset($_contexte[1])) {
+		$msg = ['zbug_balise_sans_argument', ['balise' => ' TRAD']];
+		erreur_squelette($msg, $p);
+	} else {
+
+		$_chaine = $_contexte[1];
+		unset($_contexte[1]);
+		// cas de la chaine de langue dynamique issue de <:module:{=#VAL{truc}}:>
+		if (!empty($_contexte) && isset($_contexte[''])) {
+			$keys = array_keys($_contexte);
+			// uniquement si c'est bien la première clé
+			if (reset($keys) === '') {
+				$first_arg = explode('=>', array_shift($_contexte), 2);
+				$first_arg = end($first_arg);
+				$_chaine .= " . " . $first_arg;
+			}
+		}
+
+		$args = '';
+		if (!empty($_contexte)) {
+			$args = ', [' . join(",\n\t", $_contexte) . ']';
+		}
+
+		$p->code = "_T({$_chaine}{$args})";
+	}
+
+
+
+	$p->interdire_scripts = false; // la securite est assuree par _T
+	return $p;
+}
 
 /**
  * Compile la balise `#MODELE` qui inclut un résultat de squelette de modèle

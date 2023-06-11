@@ -85,7 +85,7 @@ function phraser_inclure(string $texte, int $ligne, array $result): array {
 		$p = $poss[0];
 		$debut = substr($texte, 0, $p);
 		if ($p) {
-			$result = phraser_idiomes($debut, $ligne, $result);
+			$result = phraser_champs($debut, $ligne, $result);
 		}
 		$ligne += public_compte_ligne($debut);
 
@@ -118,7 +118,7 @@ function phraser_inclure(string $texte, int $ligne, array $result): array {
 	}
 
 	if ($texte != '') {
-		$result = phraser_idiomes($texte, $ligne, $result);
+		$result = phraser_champs($texte, $ligne, $result);
 	}
 
 	return $result;
@@ -175,6 +175,14 @@ function phraser_polyglotte(string $texte, int $ligne, array $result): array {
  * - `<:chaine:>`
  * - `<:module:chaine:>`
  * - `<:module:chaine{arg1=texte1,arg2=#BALISE}|filtre1{texte2,#BALISE}|filtre2:>`
+ * - `<:module:chaine{arg1=texte1,arg2=[(#BALISE)]}|filtre1{texte2,#BALISE}|filtre2:>`
+ * - `<:module:{=#VAL{chaine},arg1=texte1,arg2=[(#BALISE)]}|filtre1{texte2,#BALISE}|filtre2:>`
+ * - `<:{=#VAL{module:chaine},arg1=texte1,arg2=[(#BALISE)]}|filtre1{texte2,#BALISE}|filtre2:>`
+ *
+ * Pour permettre une syntaxe complète dans les arguments, on transforme la syntaxe <:..:> en une syntaxe standard de balises
+ * `[(#TRAD{module:chaine,arg1=texte1,arg2=[(#BALISE)]}|filtre1{texte2,#BALISE}|filtre2)]`
+ *
+ * qui est ensuite parsée comme une balise standard
  *
  * @note
  *    `chaine` peut etre vide si `=texte1` est present et `arg1` est vide
@@ -185,66 +193,47 @@ function phraser_polyglotte(string $texte, int $ligne, array $result): array {
  * @param array $result
  * @return array
  **/
-function phraser_idiomes(string $texte, int $ligne, array $result): array {
+function phraser_preparer_idiomes(string $texte, int $ligne, array $result) {
 
-	while (
-		(($p = strpos($texte, '<:')) !== false)
-		&& preg_match(BALISE_IDIOMES, $texte, $match, PREG_OFFSET_CAPTURE, $p)
-	) {
+	$search_pos = 0;
+	while ((($p = strpos($texte, '<:', $search_pos)) !== false)
+		&& preg_match(BALISE_IDIOMES, $texte, $match, PREG_OFFSET_CAPTURE, $p)) {
+
 		$poss = array_column($match, 1);
 		$match = array_column($match, 0);
-		$match = array_pad($match, 8, null);
-		$p = $poss[0];
 
-		$idiome = (string) $match[0];
-		// faux idiome ?
-		if (!$match[3] && (empty($match[5]) || $match[5][0] !== '=')) {
-			$debut = substr($texte, 0, $p + strlen($idiome));
-			$result = phraser_champs($debut, $ligne, $result);
-			$ligne += public_compte_ligne($debut);
+		$module = $match[2];
+		$chaine = $match[3];
+		$idiome = $match[1] . $match[3];
+		$args = $match[5];
+		$filtres = $match[7];
+
+		// faux idiome de la forme <:module:{xxx=..}:> ou <:module::>
+		if (!$chaine && (empty($args) || !str_starts_with($args, '='))) {
+			// neutraliser le faux idiome pour eviter de revenir là encore et encore
+			$texte = substr_replace($texte, '#VAL{<}', $poss[0], 1);
+			$search_pos = $poss[0] + 7;
 			continue;
 		}
 
-		$debut = substr($texte, 0, $p);
-		$result = phraser_champs($debut, $ligne, $result);
-		$ligne += public_compte_ligne($debut);
-
-		$texte = substr($texte, $p + strlen($idiome));
-
-		$champ = new Idiome();
-		$champ->ligne = $ligne;
-		$ligne += public_compte_ligne($idiome);
-		// Stocker les arguments de la balise de traduction
-		$args = [];
-		$largs = (string) $match[5];
-		while (
-			str_contains($largs, '=')
-			&& preg_match(BALISE_IDIOMES_ARGS, $largs, $r)
-		) {
-			$args[$r[1]] = phraser_champs($r[2], 0, []);
-			$largs = substr($largs, strlen($r[0]));
+		// gerer les cas implicites :
+		// si pas de module défini, injecter le par défaut, sauf si c'est une chaine de langue dynamique
+		if (!$module and $chaine) {
+			$idiome = "'" . MODULES_IDIOMES . "':" . $idiome;
 		}
-		$champ->arg = $args;
 
-		// TODO : supprimer ce strtolower cf https://git.spip.net/spip/spip/issues/2536
-		$champ->nom_champ = strtolower((string) $match[3]);
-		$champ->module = $match[2];
-
-		// pas d'imbrication pour les filtres sur langue
-		$champ->apres = '';
-		if (!is_null($match[7])) {
-			$pos_apres = 0;
-			phraser_args($match[7], ':', '', [], $champ, $pos_apres);
-			$champ->apres = substr($match[7], $pos_apres);
+		// si possible injecter une version légère de la balise pour faciliter le parsing
+		if (empty($filtres) and (empty($args) || strpbrk($args, '[]') === false)) {
+			$replace = '#TRAD{' . ($idiome ?: "''") . ($args ? "," . $args : '') . '}';
 		}
-		$result[] = $champ;
-	}
+		else {
+			$replace = '[(#TRAD{' . ($idiome ?: "''") . ($args ? "," . $args : '') . '}'.$filtres.')]';
+		}
 
-	if ($texte !== '') {
-		$result = phraser_champs($texte, $ligne, $result);
+		$texte = substr_replace($texte, $replace, $poss[0], strlen($match[0]));
+		$search_pos = $poss[0] + 1;
 	}
-
-	return $result;
+	return $texte;
 }
 
 /**
@@ -327,6 +316,9 @@ function phraser_champs_etendus(string $texte, int $ligne, array $result): array
 	if ($texte === '') {
 		return $result;
 	}
+
+	// avant de commencer on convertit les idiomes historiques <:xxx:xxxx{...}:> en [(#TRAD{...})]
+	$texte = phraser_preparer_idiomes($texte, $ligne, $result);
 
 	$sep = '##';
 	while (str_contains($texte, $sep)) {
