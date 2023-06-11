@@ -31,7 +31,6 @@ class_alias(\Spip\Compilateur\Noeud\Boucle::class, 'Boucle');
 class_alias(\Spip\Compilateur\Noeud\Champ::class, 'Champ');
 class_alias(\Spip\Compilateur\Noeud\Contexte::class, 'Contexte');
 class_alias(\Spip\Compilateur\Noeud\Critere::class, 'Critere');
-class_alias(\Spip\Compilateur\Noeud\Idiome::class, 'Idiome');
 class_alias(\Spip\Compilateur\Noeud\Polyglotte::class, 'Polyglotte');
 class_alias(\Spip\Compilateur\Noeud\Texte::class, 'Texte');
 

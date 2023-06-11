@@ -12,7 +12,6 @@
 use Spip\Compilateur\Noeud\Boucle;
 use Spip\Compilateur\Noeud\Champ;
 use Spip\Compilateur\Noeud\Critere;
-use Spip\Compilateur\Noeud\Idiome;
 use Spip\Compilateur\Noeud\Inclure;
 use Spip\Compilateur\Noeud\Polyglotte;
 use Spip\Compilateur\Noeud\Texte;
