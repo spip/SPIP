@@ -470,13 +470,13 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 				$champ->etoile = $r[5];
 				$next = $r[6];
 				while ($next == '{') {
-					phraser_arg($rec, $sep, [], $champ);
+					phraser_arg($rec, $sep, $result, $champ);
 					$args = ltrim((string) $rec);
 					$next = $args[0] ?? '';
 				}
 				while ($next == '|') {
 					$pos_apres = 0;
-					phraser_args($rec, $par, $sep, [], $champ, $pos_apres);
+					phraser_args($rec, $par, $sep, $result, $champ, $pos_apres);
 					$args = substr((string) $rec, $pos_apres);
 					$next = $args[0] ?? '';
 				}
