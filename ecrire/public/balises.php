@@ -2033,14 +2033,20 @@ function balise_INCLURE_dist($p) {
 }
 
 /**
- * Balise
- * ```
- * #TRAD{ecrire:acces_interdit}
- * ```
+ * Compile la balise `#TRAD` qui traduit une clé de langue
  *
+ * Signature: `#TRAD{module:cle, args = []}`
+ *
+ * @balise
+ *
+ * @example
+ *     ```
+ *     #TRAD{voir_en_ligne}
+ *     [(#TRAD{forum:message, lang=en})]
+ *     ```
  * @uses _T()
- * @param $p
- * @return mixed
+ * @param Champ $p
+ * @return Champ
  */
 function balise_TRAD_dist($p) {
 	$id_boucle = $p->id_boucle;
