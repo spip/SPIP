@@ -1,1 +1,16 @@
-[<link rel="shortcut icon" href="(#CHEMIN{spip.ico}|timestamp|url_absolue)" type="image/x-icon" />]
+[(#REM) Un favicon ]
+[(#CONFIG{image_process}|oui)
+	[(#SET{fichier,#ENV*{favicon}|sinon{#CHEMIN{images/favicon-spip.png}}})]
+
+	[(#REM) D’une certaine couleur désirée ]
+	[(#ENV{couleur}|oui)[(#SET{fichier,#GET{fichier}|appliquer_filtre{image_sepia,#ENV{couleur}}})]]
+
+	[(#REM) D’une certaine dimension ]
+	[(#SET{fichier-32,#GET{fichier}|image_passe_partout{32,32}|image_recadre{32,32,center}})]
+
+	[<link rel="shortcut icon" href="(#GET{fichier-32}|image_format{ico}|timestamp|extraire_attribut{src}|url_absolue)" type="image/x-icon" />]
+]
+[(#CONFIG{image_process}|non)
+	[<link rel="shortcut icon" href="(#CHEMIN{spip.ico}|timestamp|url_absolue)" type="image/x-icon" />]
+]
+#FILTRE{trim}
