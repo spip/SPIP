@@ -229,7 +229,7 @@ function phraser_preparer_idiomes(string $texte, int $ligne, string $sep, array 
 		// gerer les cas implicites :
 		// si pas de module défini, injecter le par défaut, sauf si c'est une chaine de langue dynamique
 		if (!$module and $chaine) {
-			$idiome = "'" . MODULES_IDIOMES . "':" . $idiome;
+			$idiome = "'" . MODULES_IDIOMES . ":" . $idiome . "'";
 		}
 
 		// si possible injecter une version légère de la balise pour faciliter le parsing
