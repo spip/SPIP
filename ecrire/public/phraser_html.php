@@ -589,8 +589,8 @@ function phraser_champs_interieurs(string $texte, int $no_ligne, string $sep): a
 			}
 			$champ->apres = phraser_champs_exterieurs($apres, $nbl + $nbl_debut_champ, $sep, $champs_trouves);
 
-			// reinjecter la boucle si c'en est une
-			phraser_boucle_placeholder($champ);
+			// reinjecter la boucle ou la chaine de langie si c'est un placeholder
+			phraser_memoriser_ou_reinjecter_placeholder($champ);
 
 			$champs_trouves[] = $champ;
 			$j = count($champs_trouves) - 1;
@@ -1042,21 +1042,24 @@ function public_trouver_fin_boucle(string $texte, string $id_parent, array $bouc
 
 /**
  * @param object|string $champ
- * @param null|object $boucle
+ * @param null|object $boucle_ou_champ
  */
-function phraser_boucle_placeholder(&$champ, ?string $boucle_placeholder = null, $boucle = null) {
-	static $boucles_connues = [];
+function phraser_memoriser_ou_reinjecter_placeholder(&$champ, ?string $nom_champ_placeholder = null, $boucle_ou_champ = null) {
+	static $placeholder_connus = [];
 	// si c'est un appel pour memoriser une boucle, memorisons la
-	if (is_string($champ) && !empty($boucle_placeholder) && !empty($boucle)) {
-		$boucles_connues[$boucle_placeholder][$champ] = &$boucle;
+	if (is_string($champ) && !empty($nom_champ_placeholder) && !empty($boucle_ou_champ)) {
+		$placeholder_connus[$nom_champ_placeholder][$champ] = &$boucle_ou_champ;
 	}
 	else {
-		if (!empty($champ->nom_champ) && !empty($boucles_connues[$champ->nom_champ])) {
-			$placeholder = $champ->nom_champ;
-			$id = reset($champ->param[0][1]);
-			$id = $id->texte;
-			if (!empty($boucles_connues[$placeholder][$id])) {
-				$champ = $boucles_connues[$placeholder][$id];
+		if (!empty($champ->nom_champ) && !empty($placeholder_connus[$champ->nom_champ])) {
+			$nom_champ_placeholder = $champ->nom_champ;
+			$id = '';
+			if(!empty($champ->param[0][1])) {
+				$id = reset($champ->param[0][1]);
+				$id = $id->texte;
+			}
+			if (!empty($placeholder_connus[$nom_champ_placeholder][$id])) {
+				$champ = $placeholder_connus[$nom_champ_placeholder][$id];
 			}
 		}
 	}
@@ -1065,14 +1068,24 @@ function phraser_boucle_placeholder(&$champ, ?string $boucle_placeholder = null,
 
 /**
  * Generer une balise placeholder qui prend la place de la boucle pour continuer le parsing des balises
- * @param Boucle $boucle
+ * @param Boucle|Champ $boucle_ou_champ
  * @return string
  */
-function public_generer_boucle_placeholder(string $id_boucle, &$boucle, string $boucle_placeholder, int $nb_lignes): string {
-	$placeholder = "[(#{$boucle_placeholder}{" . $id_boucle . '})' . str_pad('', $nb_lignes, "\n") . ']';
-	//memoriser la boucle a reinjecter
-	$id_boucle = "$id_boucle";
-	phraser_boucle_placeholder($id_boucle, $boucle_placeholder, $boucle);
+function public_generer_placeholder(string $nom_structure, &$boucle_ou_champ, string $placeholder_pattern, int $nb_lignes, bool $force_balise_etendue = false): string {
+	if ($nb_lignes or $force_balise_etendue) {
+		$nom_champ = $placeholder_pattern;
+		$placeholder = "[(#{$nom_champ}{" . $nom_structure . '})' . str_pad('', $nb_lignes, "\n") . ']';
+		//memoriser la boucle a reinjecter
+		phraser_memoriser_ou_reinjecter_placeholder($nom_structure, $nom_champ, $boucle_ou_champ);
+	}
+	else {
+		$placeholder_suite = "_" . strtoupper(md5($nom_structure));
+		$nom_champ = "{$placeholder_pattern}{$placeholder_suite}";
+		$placeholder = "#{$nom_champ}";
+		$nom_structure = '';
+		//memoriser e champ a reinjecter
+		phraser_memoriser_ou_reinjecter_placeholder($nom_structure, $nom_champ, $boucle_ou_champ);
+	}
 	return $placeholder;
 }
 
@@ -1090,7 +1103,7 @@ function public_phraser_html_dist(string $texte, string $id_parent, array &$bouc
 	// definir un placholder pour les boucles dont on est sur d'avoir aucune occurence dans le squelette
 	if (is_null($boucle_placeholder)) {
 		do {
-			$boucle_placeholder = 'BOUCLE_PLACEHOLDER_' . strtoupper(md5(uniqid()));
+			$boucle_placeholder = 'PLACEHOLDER_BOUCLE_' . strtoupper(substr(md5(uniqid()),0,8));
 		} while (str_contains((string) $texte, $boucle_placeholder));
 	}
 
@@ -1332,7 +1345,7 @@ function public_phraser_html_dist(string $texte, string $id_parent, array &$bouc
 		}
 
 		// remplacer la boucle par un placeholder qui compte le meme nombre de lignes
-		$placeholder = public_generer_boucle_placeholder($id_boucle, $boucles[$id_boucle], $boucle_placeholder, $ligne_suite - $ligne_debut_texte);
+		$placeholder = public_generer_placeholder($id_boucle, $boucles[$id_boucle], $boucle_placeholder, $ligne_suite - $ligne_debut_texte, true);
 		$longueur_boucle = $pos_courante - $boucle['debut_boucle'];
 		$texte = substr_replace((string) $texte, $placeholder, $boucle['debut_boucle'], $longueur_boucle);
 		$pos_courante = $pos_courante - $longueur_boucle + strlen($placeholder);
