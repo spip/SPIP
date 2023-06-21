@@ -191,11 +191,21 @@ function phraser_polyglotte(string $texte, int $ligne, array $result): array {
  * @param string $texte
  * @param int $ligne
  * @param array $result
- * @return array
+ * @return string
  **/
-function phraser_preparer_idiomes(string $texte, int $ligne, array $result) {
+function phraser_preparer_idiomes(string $texte, int $ligne, string $sep, array $result) {
+	if (empty($texte) or !str_contains($texte, '<:')) {
+		return $texte;
+	}
+
+	// definir un placholder pour les idiomes dont on est certain d'avoir aucune occurence dans le squelette
+	do {
+		$idiomes_placeholder = 'PLACEHOLDER_IDIOME_' . strtoupper(substr(md5(uniqid()),0,8));
+	} while (str_contains((string) $texte, $idiomes_placeholder));
+
 
 	$search_pos = 0;
+	$nbl = $ligne;
 	while ((($p = strpos($texte, '<:', $search_pos)) !== false)
 		&& preg_match(BALISE_IDIOMES, $texte, $match, PREG_OFFSET_CAPTURE, $p)) {
 
@@ -224,13 +234,29 @@ function phraser_preparer_idiomes(string $texte, int $ligne, array $result) {
 
 		// si possible injecter une version légère de la balise pour faciliter le parsing
 		if (empty($filtres) and (empty($args) || strpbrk($args, '[]') === false)) {
-			$replace = '#TRAD{' . ($idiome ?: "''") . ($args ? "," . $args : '') . '}';
+			$texte_idiome = '#TRAD{' . ($idiome ?: "''") . ($args ? "," . $args : '') . '}';
 		}
 		else {
-			$replace = '[(#TRAD{' . ($idiome ?: "''") . ($args ? "," . $args : '') . '}'.$filtres.')]';
+			$texte_idiome = '[(#TRAD{' . ($idiome ?: "''") . ($args ? "," . $args : '') . '}'.$filtres.')]';
 		}
 
-		$texte = substr_replace($texte, $replace, $poss[0], strlen($match[0]));
+		// parser le $texte_idiome pour en déduire le $champ qui correspond
+		$nbl += public_compte_ligne($texte, $search_pos, $poss[0]);
+		$champs = phraser_champs_interieurs($texte_idiome, $nbl, $sep);
+
+		// on doit trouver un et un seul champ, celui de notre balise #TRAD
+		if (count($champs) !== 1) {
+			erreur_squelette("Echec analyse idiome ".htmlentities($match[0]. " / " . $texte_idiome));
+			// fallback, on insere le texte_idiome plutot que le placeholder...
+			$texte = substr_replace($texte, $texte_idiome, $poss[0], strlen($match[0]));
+		}
+		else {
+			$champ = reset($champs);
+			$placeholder = public_generer_placeholder($match[0], $champ, $idiomes_placeholder, 0);
+
+			$texte = substr_replace($texte, $placeholder, $poss[0], strlen($match[0]));
+		}
+
 		$search_pos = $poss[0] + 1;
 	}
 	return $texte;
@@ -291,6 +317,10 @@ function phraser_champs(string $texte, int $ligne, array $result): array {
 		} else {
 			$texte = $suite;
 		}
+
+		// reinjecter la chaine de langue si c'est un placeholder
+		phraser_memoriser_ou_reinjecter_placeholder($champ);
+
 		phraser_vieux($champ);
 		$result[] = $champ;
 	}
@@ -317,13 +347,14 @@ function phraser_champs_etendus(string $texte, int $ligne, array $result): array
 		return $result;
 	}
 
-	// avant de commencer on convertit les idiomes historiques <:xxx:xxxx{...}:> en [(#TRAD{...})]
-	$texte = phraser_preparer_idiomes($texte, $ligne, $result);
-
 	$sep = '##';
 	while (str_contains($texte, $sep)) {
 		$sep .= '#';
 	}
+
+	// avant de commencer on repere et convertit les idiomes historiques <:xxx:xxxx{...}:> en #PLACEHOLDER_IDIOME_xxx
+	$texte = phraser_preparer_idiomes($texte, $ligne, $sep, $result);
+
 
 	$champs = phraser_champs_interieurs($texte, $ligne, $sep);
 	return array_merge($result, $champs);
