@@ -2035,7 +2035,7 @@ function balise_INCLURE_dist($p) {
 /**
  * Compile la balise `#TRAD` qui traduit une clé de langue
  *
- * Signature: `#TRAD{module:cle, args = []}`
+ * Signature: `#TRAD{module:cle, args = []}` ou `#TRAD{module:cle, #ARRAY{arg,val,..}}`
  *
  * @balise
  *
@@ -2043,6 +2043,7 @@ function balise_INCLURE_dist($p) {
  *     ```
  *     #TRAD{voir_en_ligne}
  *     [(#TRAD{forum:message, lang=en})]
+ *     [(#TRAD{forum:message, #ARRAY{lang,en}})]
  *     ```
  * @uses _T()
  * @param Champ $p
@@ -2050,21 +2051,24 @@ function balise_INCLURE_dist($p) {
  */
 function balise_TRAD_dist($p) {
 	$id_boucle = $p->id_boucle;
-	$_contexte = argumenter_inclure($p->param, true, $p, $p->boucles, $id_boucle, false, false);
 
-	// erreur de syntaxe = fond absent
-	// (2 messages d'erreur SPIP pour le prix d'un, mais pas d'erreur PHP
-	if (!$_contexte) {
-		$_contexte = [];
+	$args = '';
+	// un seul argument ou syntaxe #ARRAY{} en second argument ?
+	if (empty($p->param[0][2])
+		or ($arg_start_with = reset($p->param[0][2]) and $arg_start_with->type !== 'texte') ) {
+		$_chaine = interprete_argument_balise(1, $p);
+		$_contexte = interprete_argument_balise(2, $p);
+		if (!empty($_contexte)) {
+			$args = ',' . $_contexte;
+		}
 	}
-
-	if (!isset($_contexte[1])) {
-		$msg = ['zbug_balise_sans_argument', ['balise' => ' TRAD']];
-		erreur_squelette($msg, $p);
-	} else {
-
+	// syntaxe inclure
+	else {
+		$_contexte = argumenter_inclure($p->param, true, $p, $p->boucles, $id_boucle, false, false);
+		// $_contexte[1] est la chaine
 		$_chaine = $_contexte[1];
 		unset($_contexte[1]);
+
 		// cas de la chaine de langue dynamique issue de <:module:{=#VAL{truc}}:>
 		if (!empty($_contexte) && isset($_contexte[''])) {
 			$keys = array_keys($_contexte);
@@ -2076,14 +2080,18 @@ function balise_TRAD_dist($p) {
 			}
 		}
 
-		$args = '';
 		if (!empty($_contexte)) {
 			$args = ', [' . join(",\n\t", $_contexte) . ']';
 		}
-
-		$p->code = "_T({$_chaine}{$args})";
 	}
 
+	if ($_chaine === null or $_chaine === "''") {
+		$msg = ['zbug_balise_sans_argument', ['balise' => ' TRAD']];
+		erreur_squelette($msg, $p);
+	}
+	else {
+		$p->code = "_T({$_chaine}{$args})";
+	}
 
 
 	$p->interdire_scripts = false; // la securite est assuree par _T
