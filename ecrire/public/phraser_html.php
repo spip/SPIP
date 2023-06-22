@@ -215,7 +215,7 @@ function phraser_preparer_idiomes(string $texte, int $ligne, string $sep, array 
 		$chaine = $match[3];
 		$idiome = $match[1] . $match[3];
 		$args = $match[5];
-		$filtres = $match[7];
+		$filtres = $match[7] ?? '';
 
 		// faux idiome de la forme <:module:{xxx=..}:> ou <:module::>
 		if (!$chaine && (empty($args) || !str_starts_with($args, '='))) {
