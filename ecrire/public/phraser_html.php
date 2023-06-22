@@ -231,30 +231,38 @@ function phraser_preparer_idiomes(string $texte, int $ligne, string $sep, array 
 			$idiome = "'" . MODULES_IDIOMES . ":" . $idiome . "'";
 		}
 
-		// si possible injecter une version légère de la balise pour faciliter le parsing
-		if (empty($filtres) and (empty($args) || strpbrk($args, '[]') === false)) {
-			$texte_idiome = '#TRAD{' . ($idiome ?: "''") . ($args ? "," . $args : '') . '}';
-		}
-		else {
-			$texte_idiome = '[(#TRAD{' . ($idiome ?: "''") . ($args ? "," . $args : '') . '}'.$filtres.')]';
-		}
-
-		// parser le $texte_idiome pour en déduire le $champ qui correspond
 		$nbl += public_compte_ligne($texte, $search_pos, $poss[0]);
-		$champs = phraser_champs_interieurs($texte_idiome, $nbl, $sep);
 
-		// on doit trouver un et un seul champ, celui de notre balise #TRAD
-		if (count($champs) !== 1) {
-			erreur_squelette("Echec analyse idiome ".htmlentities($match[0]. " / " . $texte_idiome));
-			// fallback, on insere le texte_idiome plutot que le placeholder...
-			$texte = substr_replace($texte, $texte_idiome, $poss[0], strlen($match[0]));
+		$placeholder = '';
+		if (!empty($idiome) and empty($filtres) and (empty($args) || strpbrk($args, '[]') === false)) {
+			// cas simple, on gere directement ici pour aller vite
+			$champ = new Champ();
+			$champ->ligne = $nbl;
+			$champ->nom_champ = 'TRAD';
+
+			// arguments de la balise
+			$suite = '{' . $idiome . ($args ? "," . $args : '') . '}';
+			phraser_arg($suite, '', [], $champ);
 		}
 		else {
-			$champ = reset($champs);
-			$placeholder = public_generer_placeholder($match[0], $champ, $idiomes_placeholder, 0);
-
-			$texte = substr_replace($texte, $placeholder, $poss[0], strlen($match[0]));
+			// sinon on fait un parsing propre de la balise pour en déduire le $champ qui correspond
+			$texte_idiome = '[(#TRAD{' . ($idiome ?: "''") . ($args ? "," . $args : '') . '}'.$filtres.')]';
+			$champs = phraser_champs_interieurs($texte_idiome, $nbl, $sep);
+			// on doit trouver un et un seul champ, celui de notre balise #IDIOME
+			if (count($champs) !== 1) {
+				erreur_squelette("Echec analyse idiome " . htmlentities($match[0] . " / " . $texte_idiome));
+				// fallback, on insere le texte_idiome plutot que le placeholder, il sera parsé plus tard, en contexte
+				$placeholder = $texte_idiome;
+			}
+			else {
+				$champ = reset($champs);
+			}
 		}
+
+		if (!$placeholder) {
+			$placeholder = public_generer_placeholder($match[0], $champ, $idiomes_placeholder, 0);
+		}
+		$texte = substr_replace($texte, $placeholder, $poss[0], strlen($match[0]));
 
 		$search_pos = $poss[0] + 1;
 	}
