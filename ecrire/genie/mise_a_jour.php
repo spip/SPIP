@@ -120,8 +120,24 @@ function info_maj(string $version): string {
 	}
 
 	$message = [];
-	if ($maj['mineure']) {
+	if ($maj['mineure'] && ($GLOBALS['meta']['derniere_maj_notifiee'] != $maj['mineure'])) {
 		$message[] = _T('nouvelle_version_spip', ['version' => $maj['mineure']]);
+		$texte = recuperer_fond(
+			'notifications/mise_a_jour',
+			['raw' => true]
+		);
+		$destinataires = defined('_MAJ_NOTIF_EMAILS') ? _MAJ_NOTIF_EMAILS : array_column(sql_allfetsel('email', 'spip_auteurs', "statut='0minirezo' AND webmestre='oui'"), 'email');
+		if ($destinataires) {
+			include_spip('inc/notifications');
+			$destinataires = is_string($destinataires) ? array_map('trim', explode(',', $destinataires)) : $destinataires;
+			notifications_envoyer_mails(
+				$destinataires,
+				$texte,
+				'['. $GLOBALS['meta']['nom_site'] .'] '. _T('nouvelle_version_spip', ['version' => $maj['mineure']])
+			);
+		}
+		include_spip('inc/meta');
+		ecrire_meta('derniere_maj_notifiee', $maj['mineure'], 'non');
 	}
 	if ($maj['majeure']) {
 		$message[] = _T('nouvelle_version_spip_majeure', ['version' => $maj['majeure']]);
