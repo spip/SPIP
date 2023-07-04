@@ -9,6 +9,8 @@
  *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
 \***************************************************************************/
 
+use Spip\Auth\SessionCookie;
+
 /**
  * Action pour déconnecter une personne authentifiée
  *
@@ -69,10 +71,11 @@ function action_logout_dist() {
 		include_spip('inc/auth');
 		auth_trace($GLOBALS['visiteur_session'], '0000-00-00 00:00:00');
 		// le logout explicite vaut destruction de toutes les sessions
-		if (isset($_COOKIE['spip_session'])) {
+		$session_cookie = new SessionCookie();
+		if ($session_cookie->exists()) {
 			$session = charger_fonction('session', 'inc');
 			$session($GLOBALS['visiteur_session']['id_auteur']);
-			effacer_cookie_session();
+			$session_cookie->remove();
 		}
 		// si authentification http, et que la personne est loge,
 		// pour se deconnecter, il faut proposer un nouveau formulaire de connexion http

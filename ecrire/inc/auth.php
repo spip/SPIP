@@ -9,6 +9,8 @@
  *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
 \***************************************************************************/
 
+use Spip\Auth\SessionCookie;
+
 /**
  * Gestion des authentifications
  *
@@ -139,27 +141,24 @@ function auth_echec($raison) {
  * @return array|bool|string
  */
 function auth_mode() {
-	//
 	// Initialiser variables (eviter hacks par URL)
-	//
 	$GLOBALS['connect_login'] = '';
 	$id_auteur = null;
 	$GLOBALS['auth_can_disconnect'] = false;
 
-	//
 	// Recuperer les donnees d'identification
-	//
-	include_spip('inc/session');
 	// Session valide en cours ?
-	if ($cookie = lire_cookie_session()) {
+	$session_cookie = new SessionCookie();
+	if ($session_cookie->isValid()) {
 		$session = charger_fonction('session', 'inc');
 		if (
-			($id_auteur = $session()) || $id_auteur === 0 // reprise sur restauration
+			($id_auteur = $session())
+			|| $id_auteur === 0 // reprise sur restauration
 		) {
 			$GLOBALS['auth_can_disconnect'] = true;
 			$GLOBALS['connect_login'] = session_get('login');
 		} else {
-			unset($_COOKIE['spip_session']);
+			$session_cookie->remove();
 		}
 	}
 
@@ -250,10 +249,10 @@ function auth_init_droits($row) {
 	$GLOBALS['visiteur_session'] = auth_desensibiliser_session($GLOBALS['visiteur_session']);
 
 	// creer la session au besoin
-	include_spip('inc/session');
-	if (!lire_cookie_session()) {
+	$session_cookie = new SessionCookie();
+	if (!$session_cookie->isValid()) {
 		$session = charger_fonction('session', 'inc');
-		$spip_session = $session($row);
+		$session($row);
 	}
 
 	// reinjecter les preferences_auteur apres le reset de spip_session

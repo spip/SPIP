@@ -9,6 +9,8 @@
  *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
 \***************************************************************************/
 
+use Spip\Auth\SessionCookie;
+
 /**
  * Utilitaires indispensables autour du serveur Http.
  *
@@ -3274,9 +3276,8 @@ function spip_session($force = false) {
 	if ($force || !isset($session)) {
 		$s = '';
 		if (!empty($GLOBALS['visiteur_session'])) {
-			include_spip('inc/session');
-			$cookie = lire_cookie_session();
-			$s = serialize($GLOBALS['visiteur_session']) . '_' . ($cookie ?: '');
+			$cookie = (string) (new SessionCookie())->get();
+			$s = serialize($GLOBALS['visiteur_session']) . '_' . $cookie;
 		}
 		$s = pipeline('definir_session', $s);
 		$session = ($s ? substr(md5($s), 0, 8) : '');

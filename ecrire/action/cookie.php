@@ -9,6 +9,8 @@
  *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
 \***************************************************************************/
 
+use Spip\Auth\SessionCookie;
+
 /**
  * Gestion de l'action cookie
  *
@@ -87,8 +89,8 @@ function action_cookie_dist($set_cookie_admin = null, $change_session = null) {
 		// en cas de login sur bonjour=oui, on tente de poser un cookie
 		// puis de passer au login qui diagnostiquera l'echec de cookie
 		// le cas echeant.
-		if ($test_echec_cookie == 'oui') {
-			spip_setcookie('spip_session', 'test_echec_cookie', httponly: true);
+		if ($test_echec_cookie === 'oui') {
+			(new SessionCookie())->setTestContent();
 			if ($redirect) {
 				$redirect = parametre_url(
 					parametre_url($redirect_echec, 'var_echec_cookie', 'oui', '&'),

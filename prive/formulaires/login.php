@@ -9,6 +9,8 @@
  *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
 \***************************************************************************/
 
+use Spip\Auth\SessionCookie;
+
 /**
  * Gestion du formulaire d'identification / de connexion à SPIP
  *
@@ -177,14 +179,14 @@ function formulaires_login_charger_dist($cible = '', $options = [], $deprecated 
  *     - chaîne vide sinon.
  **/
 function login_auth_http() {
-	if (!$GLOBALS['ignore_auth_http'] && _request('var_erreur') == 'cookie') {
-		include_spip('inc/session');
-		$cookie = lire_cookie_session(true);
-		if ($cookie !== 'test_echec_cookie'
-		  && (preg_match(',apache,', \PHP_SAPI) || preg_match(',^Apache.* PHP,', (string) $_SERVER['SERVER_SOFTWARE']))
-		  // Attention dans le cas 'intranet' la proposition de se loger
-		  // par auth_http peut conduire a l'echec.
-		  && !(isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW']))
+	if (!$GLOBALS['ignore_auth_http'] && _request('var_erreur') === 'cookie') {
+		$session_cookie = new SessionCookie();
+		if (
+			!$session_cookie->isTestContent()
+			&& (preg_match(',apache,', \PHP_SAPI) || preg_match(',^Apache.* PHP,', (string) $_SERVER['SERVER_SOFTWARE']))
+			// Attention dans le cas 'intranet' la proposition de se loger
+			// par auth_http peut conduire a l'echec.
+			&& !(isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW']))
 		) {
 			return generer_url_action('cookie', '', false, true);
 		}

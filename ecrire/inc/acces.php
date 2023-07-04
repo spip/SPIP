@@ -9,6 +9,8 @@
  *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
 \***************************************************************************/
 
+use Spip\Auth\Aleas;
+
 /**
  * Gestion des nombres aléatoires et de certains accès au site
  *
@@ -90,52 +92,22 @@ function creer_uniqid() {
 }
 
 /**
- * Charge les aléas ehpémères s'il ne sont pas encore dans la globale
- *
- * Si les métas 'alea_ephemere' et 'alea_ephemere_ancien' se sont pas encore chargées
- * en méta (car elles ne sont pas stockées, pour sécurité, dans le fichier cache des métas),
- * alors on les récupère en base. Et on les ajoute à nos métas globales.
+ * Charger les aléas ehpémères
  *
  * @see touch_meta()
+ * @see Aleas::load()
  * @return string Retourne l'alea éphemère actuel au passage
  */
 function charger_aleas() {
-	if (!isset($GLOBALS['meta']['alea_ephemere'])) {
-		include_spip('base/abstract_sql');
-		$aleas = sql_allfetsel(
-			['nom', 'valeur'],
-			'spip_meta',
-			sql_in('nom', ['alea_ephemere', 'alea_ephemere_ancien']),
-			'',
-			'',
-			'',
-			'',
-			'',
-			'continue'
-		);
-		if ($aleas) {
-			foreach ($aleas as $a) {
-				$GLOBALS['meta'][$a['nom']] = $a['valeur'];
-			}
-			return $GLOBALS['meta']['alea_ephemere'];
-		} else {
-			spip_log('aleas indisponibles', 'session');
-			return '';
-		}
-	}
-	return $GLOBALS['meta']['alea_ephemere'];
+	return (new Aleas())->current();
 }
 
 /**
- * Renouveller l'alea (utilisé pour sécuriser les scripts du répertoire `action/`)
+ * Renouveller l'alea
+ * @see Aleas::rotate()
  **/
 function renouvelle_alea() {
-	charger_aleas();
-	ecrire_meta('alea_ephemere_ancien', @$GLOBALS['meta']['alea_ephemere'], 'non');
-	$GLOBALS['meta']['alea_ephemere'] = md5(creer_uniqid());
-	ecrire_meta('alea_ephemere', $GLOBALS['meta']['alea_ephemere'], 'non');
-	ecrire_meta('alea_ephemere_date', time(), 'non');
-	spip_log("renouvellement de l'alea_ephemere");
+	(new Aleas())->rotate();
 }
 
 

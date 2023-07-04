@@ -9,6 +9,8 @@
  *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
 \***************************************************************************/
 
+use Spip\Auth\SessionCookie;
+
 // Script pour appeler un squelette apres s'etre authentifie
 
 include_once __DIR__ . '/inc_version.php';
@@ -25,9 +27,8 @@ if ($var_auth !== '' && !is_int($var_auth)) {
 	// autrement on insiste
 	if (is_array($var_auth)) {
 		$var_auth = '../?' . $_SERVER['QUERY_STRING'];
-		include_spip('inc/session');
 		// on prolonge le cookie
-		set_cookie_session(null, time() + 3600 * 24 * 14);
+		(new SessionCookie())->expires(time() + 3600 * 24 * 14);
 	}
 	include_spip('inc/headers');
 	redirige_formulaire($var_auth);

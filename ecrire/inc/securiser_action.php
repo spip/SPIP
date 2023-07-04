@@ -15,6 +15,7 @@
  * @package SPIP\Core\Actions
  **/
 
+ use Spip\Auth\SessionCookie;
  use Spip\Chiffrer\SpipCles;
 
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -174,21 +175,22 @@ function securiser_action_auteur($action, $arg, $redirect = '', $mode = false, $
 function caracteriser_auteur($id_auteur = null) {
 	static $caracterisation = [];
 
-	if (is_null($id_auteur) && !isset($GLOBALS['visiteur_session']['id_auteur'])) {
-		include_spip('inc/session');
+	if ($id_auteur === null && !isset($GLOBALS['visiteur_session']['id_auteur'])) {
 		// si l'auteur courant n'est pas connu alors qu'il peut demander une action
 		// c'est une connexion par php_auth ou 1 instal, on se rabat sur le cookie.
 		// S'il n'avait pas le droit de realiser cette action, le hash sera faux.
-		if ($cookie = lire_cookie_session()) {
-			return [intval($cookie), ''];
+		$session_cookie = new SessionCookie();
+
+		if ($session_cookie->isValid()) {
+			return [$session_cookie->getUserId(), ''];
+		} else {
 			// Necessaire aux forums anonymes.
 			// Pour le reste, ca echouera.
-		} else {
 			return ['0', ''];
 		}
 	}
 	// Eviter l'acces SQL si le pass est connu de PHP
-	if (is_null($id_auteur)) {
+	if ($id_auteur === null) {
 		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'] ?? 0;
 		if (isset($GLOBALS['visiteur_session']['pass']) && $GLOBALS['visiteur_session']['pass']) {
 			return $caracterisation[$id_auteur] = [$id_auteur, $GLOBALS['visiteur_session']['pass']];

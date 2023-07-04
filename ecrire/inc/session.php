@@ -9,6 +9,10 @@
  *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
 \***************************************************************************/
 
+use Spip\Auth\Alea;
+use Spip\Auth\SessionCookie;
+use Spip\Auth\SessionFile;
+
 /**
  * Gestion de l'authentification par sessions
  * à utiliser pour valider l'accès (bloquant)
@@ -63,7 +67,6 @@ function inc_session_dist($auteur = false) {
  * Attention : id_auteur peut etre negatif (cas des auteurs temporaires pendant le dump)
  *
  * @uses verifier_session()
- * @uses chemin_fichier_session()
  * @uses spip_session()
  *
  * @param int $id_auteur
@@ -101,9 +104,7 @@ function supprimer_sessions($id_auteur, $toutes = true, $actives = true) {
 		}
 	} else {
 		verifier_session();
-		if ($cookie = lire_cookie_session()) {
-			spip_unlink(chemin_fichier_session('alea_ephemere', $cookie, true));
-		}
+		(new SessionFile())->remove();
 	}
 
 	// forcer le recalcul de la session courante
@@ -116,7 +117,6 @@ function supprimer_sessions($id_auteur, $toutes = true, $actives = true) {
  * @uses spip_php_session_start() Lorsque session anonyme
  * @uses hash_env()
  * @uses preparer_ecriture_session()
- * @uses chemin_fichier_session()
  * @uses ecrire_fichier_session()
  *
  * @param array $auteur
@@ -130,7 +130,8 @@ function ajouter_session($auteur) {
 
 	// Attention un visiteur peut avoir une session et un id=0,
 	// => ne pas melanger les sessions des differents visiteurs
-	$id_auteur = isset($auteur['id_auteur']) ? intval($auteur['id_auteur']) : 0;
+	$id_auteur = intval($auteur['id_auteur'] ?? 0);
+	$session_cookie = new SessionCookie();
 
 	// Si ce n'est pas un inscrit (les inscrits ont toujours des choses en session)
 	// on va vérifier s'il y a vraiment des choses à écrire
@@ -159,7 +160,7 @@ function ajouter_session($auteur) {
 
 		// Si après ça la session est vide alors on supprime l'éventuel fichier et on arrête là
 		if (!$auteur_verif) {
-			if ($cookie = lire_cookie_session()) {
+			if ($cookie = $session_cookie->get()) {
 				if (isset($_SESSION[$cookie])) {
 					unset($_SESSION[$cookie]);
 				}
@@ -170,11 +171,10 @@ function ajouter_session($auteur) {
 		}
 	}
 
-	if (
-		(!$cookie = lire_cookie_session())
-		|| intval($cookie) !== $id_auteur
-	) {
-		$cookie = $id_auteur . '_' . md5(uniqid(random_int(0, mt_getrandmax()), true));
+	if ($session_cookie->getUserId() !== $id_auteur) {
+		$cookie = $session_cookie->generateValue($id_auteur);
+	} else {
+		$cookie = $session_cookie->get();
 	}
 
 	// Maintenant on sait qu'on a des choses à écrire
@@ -205,13 +205,7 @@ function ajouter_session($auteur) {
 		spip_php_session_start();
 		$_SESSION[$cookie] = preparer_ecriture_session($auteur);
 	} else {
-		$fichier_session = chemin_fichier_session('alea_ephemere', $cookie);
-		if (!ecrire_fichier_session($fichier_session, $auteur)) {
-			spip_log('Echec ecriture fichier session ' . $fichier_session, 'session' . _LOG_HS);
-			include_spip('inc/minipres');
-			echo minipres();
-			exit;
-		}
+		$fichier_session = (new SessionFile($session_cookie))->write($auteur);
 		// verifier et limiter le nombre maxi de sessions
 		// https://core.spip.net/issues/3807
 		lister_sessions_auteur($id_auteur);
@@ -220,7 +214,7 @@ function ajouter_session($auteur) {
 	// poser le cookie de session SPIP
 	include_spip('inc/cookie');
 	$duree = definir_duree_cookie_session($auteur);
-	$cookie = set_cookie_session($cookie, time() + $duree);
+	$session_cookie->set($cookie,  time() + $duree);
 	spip_log("ajoute session $fichier_session cookie $duree", 'session');
 
 	// Si on est admin, poser le cookie de correspondance
@@ -276,40 +270,13 @@ function definir_duree_cookie_session($auteur) {
 /**
  * Lire le cookie de session et le valider de façon centralisée
  */
-function lire_cookie_session(bool $accepter_test = false): ?string {
-	static $cookie_valide = [];
-	// pas de cookie ?
-	if (!isset($_COOKIE['spip_session'])) {
-		return null;
-	}
-
-	if (array_key_exists($_COOKIE['spip_session'], $cookie_valide)) {
-		return $cookie_valide[$_COOKIE['spip_session']];
-	}
-
-	if ($accepter_test && $_COOKIE['spip_session'] === 'test_echec_cookie') {
-		return 'test_echec_cookie';
-	}
-
-	if (!preg_match(",^\d+_[0-9a-f]{32}$,", $_COOKIE['spip_session'])) {
-		// cookie invalide ?
-		effacer_cookie_session();
-		return null;
-	}
-
-	// ok
-	$cookie_valide[$_COOKIE['spip_session']] = $_COOKIE['spip_session'];
-
-	return $_COOKIE['spip_session'];
+function lire_cookie_session(): ?string {
+	return (new SessionCookie())->get();
 }
 
 /** Annuler le cookie de session */
 function effacer_cookie_session(): void {
-	// supprimer le cookie
-	if (isset($_COOKIE['spip_session'])) {
-		spip_setcookie('spip_session', '', time() - 24 * 3600, httponly: true);
-		unset($_COOKIE['spip_session']);
-	}
+	(new SessionCookie())->remove();
 }
 
 /**
@@ -321,20 +288,14 @@ function effacer_cookie_session(): void {
  *   timestamp d'expiration
  */
 function set_cookie_session(?string $valeur_cookie = null, int $expires = 0): ?string {
-	if ($valeur_cookie !== null) {
-		// vérifié par lire_cookie_session()
-		$_COOKIE['spip_session'] = $valeur_cookie;
-	}
-
-	$valeur_cookie = lire_cookie_session();
-
+	$session_cookie = new SessionCookie();
 	if ($valeur_cookie === null) {
-		effacer_cookie_session();
+		$session_cookie->expires($expires);
 	} else {
-		spip_setcookie('spip_session', $valeur_cookie, $expires, httponly: true);
+		$session_cookie->set($valeur_cookie, $expires);
 	}
 
-	return $valeur_cookie;
+	return $session_cookie->get();
 }
 
 /**
@@ -346,7 +307,6 @@ function set_cookie_session(?string $valeur_cookie = null, int $expires = 0): ?s
  * Retourne false en cas d'echec, l'id_auteur de la session si defini, null sinon
  *
  * @uses spip_php_session_start() Si session anonyme
- * @uses chemin_fichier_session()
  * @uses ajouter_session()
  * @uses hash_env()
  *
@@ -355,14 +315,17 @@ function set_cookie_session(?string $valeur_cookie = null, int $expires = 0): ?s
  */
 function verifier_session($change = false) {
 	// si pas de cookie, c'est fichu
-	if (!$cookie = lire_cookie_session()) {
+	$session_file = new SessionFile();
+	$cookie = $session_file->cookie->get();
+	if (!$cookie) {
 		return false;
 	}
 
 	$fichier_session = '';
+	$id_auteur = $session_file->cookie->getUserId();
 
 	// est-ce une session anonyme ?
-	if (!intval($cookie)) {
+	if (!$id_auteur) {
 		spip_php_session_start();
 		if (!isset($_SESSION[$cookie]) || !is_array($_SESSION[$cookie])) {
 			return false;
@@ -370,12 +333,12 @@ function verifier_session($change = false) {
 		$GLOBALS['visiteur_session'] = $_SESSION[$cookie];
 	} else {
 		// Tester avec alea courant
-		$fichier_session = chemin_fichier_session('alea_ephemere', $cookie, true);
+		$fichier_session = $session_file->getPath(Alea::CURRENT);
 		if ($fichier_session && @file_exists($fichier_session)) {
 			include($fichier_session);
 		} else {
 			// Sinon, tester avec alea precedent
-			$fichier_session = chemin_fichier_session('alea_ephemere_ancien', $cookie, true);
+			$fichier_session = $session_file->getPath(Alea::PREVIOUS);
 			if (!$fichier_session || !@file_exists($fichier_session)) {
 				return false;
 			}
@@ -419,7 +382,7 @@ function verifier_session($change = false) {
 				spip_unlink($fichier_session);
 			}
 			$GLOBALS['visiteur_session']['ip_change'] = false;
-			unset($_COOKIE['spip_session']);
+			$session_file->cookie->remove();
 			ajouter_session($GLOBALS['visiteur_session']);
 		}
 	}
@@ -522,7 +485,6 @@ function terminer_actualiser_sessions() {
  * Ne concerne que les sessions des auteurs loges (id_auteur connu)
  *
  * @uses ajouter_session()
- * @uses chemin_fichier_session()
  * @uses preg_files()
  * @uses preparer_ecriture_session()
  * @uses ecrire_fichier_session()
@@ -541,8 +503,8 @@ function actualiser_sessions($auteur, $supprimer_cles = []) {
 	if ($id_auteur == $id_auteur_courant) {
 		$auteur = array_merge($GLOBALS['visiteur_session'], $auteur);
 		ajouter_session($auteur);
-		if ($id_auteur && ($cookie = lire_cookie_session())) {
-			$fichier_session_courante = chemin_fichier_session('alea_ephemere', $cookie);
+		if ($id_auteur) {
+			$fichier_session_courante = (new SessionFile())->getPath(Alea::CURRENT);
 		}
 	}
 
@@ -720,36 +682,25 @@ function ecrire_fichier_session($fichier, $auteur) {
 }
 
 /**
- * Calculer le chemin vers le fichier de session
+ * Calculer le chemin du fichier de session
  */
 function chemin_fichier_session(string $alea, string $cookie_session, bool $tantpis = false): string {
-	include_spip('inc/acces');
-	charger_aleas();
-
-	if (empty($GLOBALS['meta'][$alea])) {
-		if (!$tantpis) {
-			spip_log("fichier session ($tantpis): $alea indisponible", 'session');
-			include_spip('inc/minipres');
-			echo minipres();
-		}
-
-		return ''; // echec mais $tanpis
-	}
-
-	$repertoire = sous_repertoire(_DIR_SESSIONS, '', false, $tantpis);
-	$id_auteur = intval($cookie_session);
-	return $repertoire . $id_auteur . '_' . md5($cookie_session . ' ' . $GLOBALS['meta'][$alea]) . '.php';
+	return (new SessionFile())->getPathForName(Alea::from($alea), $cookie_session, $tantpis);
 }
 
 /**
- * Calculer le nom du fichier session
+ * Calculer chemin du fichier session
  *
- * @deprecated 5.0 Use `chemin_fichier_session()` with `lire_cookie_session()` as 2nd parameter
+ * @deprecated 5.0 Use `(new SessionFile())->getPath(Alea::CURRENT)` or `(new SessionFile())->getPathOrFail(Alea::CURRENT)`
  * @param string $alea
  * @param bool $tantpis
  */
 function fichier_session($alea, $tantpis = false): string {
-	return chemin_fichier_session((string) $alea, lire_cookie_session(), (bool) $tantpis);
+	$session_file = new SessionFile();
+	if ($tantpis) {
+		return $session_file->getPath(Alea::from($alea));
+	}
+	return $session_file->getPathOrFail(Alea::from($alea));
 }
 
 
