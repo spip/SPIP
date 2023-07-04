@@ -65,7 +65,7 @@ function formulaires_rediriger_article_traiter_dist($id_article, $retour = '') {
 	include_spip('action/editer_article');
 	article_modifier($id_article, ['virtuel' => $url]);
 
-	$js = _AJAX ? '<script type="text/javascript">if (window.ajaxReload) ajaxReload("wysiwyg");</script>' : '';
+	$js = _AJAX ? '<script>if (window.ajaxReload) ajaxReload("wysiwyg");</script>' : '';
 
 	return [
 		'message_ok' => ($url ? _T('info_redirection_activee') : _T('info_redirection_desactivee')) . $js,

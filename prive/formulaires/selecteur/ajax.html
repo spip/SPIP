@@ -25,7 +25,7 @@
 		<label for="picker_rapide_#ENV{name}"><:label_ajout_id_rapide:></label>
 		<input type="text" value="" id="picker_rapide_#ENV{name}" size="10" />
 		<a id="bouton_picker_rapide_#ENV{name}" href="#">#GET{bouton_modif}</a>
-		<script type="text/javascript" language="javascript" charset="utf-8">
+		<script language="javascript" charset="utf-8">
 			jQuery(function(){
 				jQuery('#bouton_picker_rapide_#ENV{name}').click(function(){
 					jQuery.ajax({

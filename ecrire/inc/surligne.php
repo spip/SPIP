@@ -71,8 +71,8 @@ function surligner_mots($page, $surcharge_surligne = '') {
 			//good referrer found or var_recherche is not null
 			include_spip('inc/filtres');
 			$script = "
-      <script type='text/javascript' src='" . url_absolue(find_in_path('javascript/SearchHighlight.js')) . "'></script>
-      <script type='text/javascript'>
+      <script src='" . url_absolue(find_in_path('javascript/SearchHighlight.js')) . "'></script>
+      <script>
        var highlighter = function() {
 		  jQuery(this).SearchHighlight({
             tag_name:'" . (html5_permis() ? 'mark' : 'span') . "',

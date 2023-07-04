@@ -1270,7 +1270,7 @@ function balise_SELF_dist($p) {
  * @see find_in_path() Recherche de chemin
  * @example
  *     ```
- *     [<script type="text/javascript" src="(#CHEMIN{javascript/jquery.flot.js})"></script>]
+ *     [<script src="(#CHEMIN{javascript/jquery.flot.js})"></script>]
  *     [<link rel="stylesheet" href="(#CHEMIN{css/perso.css}|direction_css)" type="text/css" />]
  *     ```
  *

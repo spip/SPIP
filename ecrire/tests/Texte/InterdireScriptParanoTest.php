@@ -37,15 +37,15 @@ class InterdireScriptParanoTest extends TestCase
 	public static function providerTexteInterdireScriptParano(): array {
 		return [
 			[
-				"<code class=\"echappe-js\">&lt;script type='text/javascript' src='toto.js'&gt;&lt;/script&gt;</code>", "<script type='text/javascript' src='toto.js'></script>",
+				"<code class=\"echappe-js\">&lt;script src='toto.js'&gt;&lt;/script&gt;</code>", "<script src='toto.js'></script>",
 			],
 			[
-				"<code class=\"echappe-js\">&lt;script type='text/javascript' src='spip.php?page=toto'&gt;&lt;/script&gt;</code>",
-				"<script type='text/javascript' src='spip.php?page=toto'></script>",
+				"<code class=\"echappe-js\">&lt;script src='spip.php?page=toto'&gt;&lt;/script&gt;</code>",
+				"<script src='spip.php?page=toto'></script>",
 			],
 			[
-				"<code class=\"echappe-js\">&lt;script type='text/javascript'&gt;var php=5;&lt;/script&gt;</code>",
-				"<script type='text/javascript'>var php=5;</script>",
+				"<code class=\"echappe-js\">&lt;script&gt;var php=5;&lt;/script&gt;</code>",
+				"<script>var php=5;</script>",
 			],
 			[
 				"<code class=\"echappe-js\">&lt;script language='javascript' src='spip.php?page=toto'&gt;&lt;/script&gt;</code>",

@@ -22,7 +22,7 @@
 	#FORMULAIRE_EDITER_AUTEUR{#ENV{id_auteur,oui},#GET{redirect},#ENV{associer_objet}}
 	[(#ENV{retourajax,''}|oui)
 		</div>
-		<script type="text/javascript">
+		<script>
 			reloadExecPage('#ENV{exec}','#navigation,#extra');
 		</script>
 	]

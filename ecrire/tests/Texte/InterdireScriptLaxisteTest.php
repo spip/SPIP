@@ -37,13 +37,13 @@ class InterdireScriptLaxisteTest extends TestCase
 	public static function providerTexteInterdireScriptLaxiste(): array {
 		return [
 			[
-				"<script type='text/javascript' src='toto.js'></script>", "<script type='text/javascript' src='toto.js'></script>",
+				"<script src='toto.js'></script>", "<script src='toto.js'></script>",
 			],
 			[
-				"<script type='text/javascript' src='spip.php?page=toto'></script>",
-				"<script type='text/javascript' src='spip.php?page=toto'></script>",
+				"<script src='spip.php?page=toto'></script>",
+				"<script src='spip.php?page=toto'></script>",
 			],
-			["<script type='text/javascript'>var php=5;</script>", "<script type='text/javascript'>var php=5;</script>"],
+			["<script>var php=5;</script>", "<script>var php=5;</script>"],
 			[
 				"<script language='javascript' src='spip.php?page=toto'></script>",
 				"<script language='javascript' src='spip.php?page=toto'></script>",

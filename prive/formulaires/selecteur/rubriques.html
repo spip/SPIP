@@ -1,4 +1,4 @@
-<script type='text/javascript'>var img_unpick='#CHEMIN_IMAGE{supprimer-12.png}';
+<script>var img_unpick='#CHEMIN_IMAGE{supprimer-12.png}';
 jQuery.getScript('[(#CHEMIN{formulaires/selecteur/jquery.picker.js}|timestamp)]');
 </script>
 [(#REM)
@@ -27,7 +27,7 @@ afficher la selection dans un ul class item_picked
 <INCLURE{fond=formulaires/selecteur/picker-ajax}{id_rubrique=#GET{id_rubrique}}{id_article}{rubriques=1}{articles=0}{ajax}{env}>
 </div>
 [(#ENV{sortable,non}|=={oui}|oui)
-<script type='text/javascript'>
+<script>
 (function(){
 	const picked_sorter = () => { 
 		new Sortable(document.querySelector("ul.item_picked"));

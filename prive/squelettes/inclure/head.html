@@ -3,8 +3,8 @@ Appel au script php en attendant de reecrire le head ici
 ]
 [<title>(#ENV{titre,''})</title>
 ]
-<meta http-equiv="Content-Type" content="text/html[; charset=(#CONFIG{charset})]" />
-<script type='text/javascript'>
+<meta charset="#CHARSET" />
+<script>
 var url_menu_rubrique="[(#CONST{_DIR_RACINE}|sinon{./}|concat{#CONST{_SPIP_SCRIPT}})]?action=menu_rubriques\x26date=#CONFIG{date_calcul_rubriques}";
 (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);
 [(#EVAL{$_COOKIE}|table_valeur{spip_accepte_ajax}|>={1}|non)
@@ -54,8 +54,8 @@ spipConfig.core = {
 <link rel="alternate" type="application/rss+xml" title="<:info_breves_03|attribut_html:>" href="#URL_PAGE{backend-breves}" />
 ]
 
-[<script type="text/javascript" src="(#CHEMIN{prive/javascript/layer_old.js}|timestamp)"></script>]
-[<script type="text/javascript" src="(#CHEMIN{prive/javascript/layer.js}|timestamp)"></script>]
-[<script type="text/javascript" src="(#CHEMIN{prive/javascript/presentation.js}|timestamp)"></script>]
-[<script type="text/javascript" src="(#CHEMIN{prive/javascript/gadgets.js}|timestamp)"></script>]
-[<script type="text/javascript" src="(#CHEMIN{prive/javascript/prefixfree.js}|timestamp)"></script>]
+[<script src="(#CHEMIN{prive/javascript/layer_old.js}|timestamp)"></script>]
+[<script src="(#CHEMIN{prive/javascript/layer.js}|timestamp)"></script>]
+[<script src="(#CHEMIN{prive/javascript/presentation.js}|timestamp)"></script>]
+[<script src="(#CHEMIN{prive/javascript/gadgets.js}|timestamp)"></script>]
+[<script src="(#CHEMIN{prive/javascript/prefixfree.js}|timestamp)"></script>]

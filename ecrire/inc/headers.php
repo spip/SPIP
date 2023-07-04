@@ -158,7 +158,7 @@ function redirige_formulaire($url, $equiv = '', $format = 'message') {
 		{
 			return
 				// ie poste les formulaires dans une iframe, il faut donc rediriger son parent
-				"<script type='text/javascript'>if (parent.window){parent.window.document.location.replace(\"$url\");} else {document.location.replace(\"$url\");}</script>"
+				"<script>if (parent.window){parent.window.document.location.replace(\"$url\");} else {document.location.replace(\"$url\");}</script>"
 				. http_img_pack('loader.svg', '', " class='loader'")
 				. '<br />'
 				. '<a href="' . quote_amp($url) . '">' . _T('navigateur_pas_redirige') . '</a>';

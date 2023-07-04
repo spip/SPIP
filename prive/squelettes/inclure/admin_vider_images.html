@@ -3,7 +3,7 @@
 #BOITE_OUVRIR{#CHEMIN_IMAGE{image-24.png}|balise_img{'',cadre-icone}|concat{#VAL{info_images_auto}|_T}|wrap{'<h3>'},'simple','titrem'}
 
 	<div id="placehoder_taille_cache_images"><p>&nbsp;<br />&nbsp;<br />&nbsp;<br /></p></div>
-	<script type="text/javascript">
+	<script>
 		jQuery(function($){
 			$('#placehoder_taille_cache_images').animateLoading().load('[(#URL_ACTION_AUTEUR{calculer_taille_cache,images}|replace{&amp;,&})]');
 		});

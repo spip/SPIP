@@ -208,7 +208,7 @@ function f_admin($texte) {
 		}
 		$texte = substr_replace($texte, $x, $pos, 0);
 		// pas de preview en fenetre enfant
-		$x = "<script type='text/javascript'>const frameEl = window.frameElement;if (frameEl) {frameEl.sandbox='sandbox';window.location.href='" . addslashes((string) $GLOBALS['meta']['adresse_site']) . "';}</script>";
+		$x = "<script>const frameEl = window.frameElement;if (frameEl) {frameEl.sandbox='sandbox';window.location.href='" . addslashes((string) $GLOBALS['meta']['adresse_site']) . "';}</script>";
 		if ((!$pos = stripos($texte, '<head')) || (!$pos = strpos($texte, '>', $pos))) {
 			$pos = -1;
 		}

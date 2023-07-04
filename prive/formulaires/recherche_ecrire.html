@@ -32,7 +32,7 @@
 	</button>
 	<a class="none[ (#ENV{class,''})] refresh" href="[(#ENV{action}|parametre_url{'recherche',''})]"><:info_rechercher:></a>
 </div></form>
-<script type="text/javascript">
+<script>
 function recherche_submit_#ENV{_id_champ,recherche}() {
 const a = $(this).siblings('a.refresh');
 a.attr('href',parametre_url(a.attr('href'),'recherche',$(this).siblings('input.text').val())).followLink();

@@ -28,14 +28,14 @@
 	</p>
 	<p class="boutons"><input type="submit" class="btn submit" value="<:login_sinscrire|spip_ucfirst|attribut_html:>" /></p>
  </form>
-[<script type="text/javascript"><!--
+[<script><!--
 document.getElementById('(#ENV{focus})').focus();
 --></script>]
 ]
 </div>
 [(#ENV{focus,''}|?{' '})
 <div style="text-align: #LANG_RIGHT;">
-<script type="text/javascript">
+<script>
 document.write("<a style='color: #e86519' href='")
 document.write((window.opener) ? "javascript:close()" : "./")
 document.write("'><:pass_quitter_fenetre:><" + "/a>");

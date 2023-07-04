@@ -185,7 +185,7 @@ function public_parametrer_dist($fond, $contexte = '', $cache = '', string $conn
 			$page['sourcefile'] = $sourcefile;
 			$page['texte'] =
 				"<div class='inclure_blocs'><h6>" . $page['sourcefile'] . '</h6>' . $page['texte'] . '</div>'
-				. ($js_inclus ? '' : "<script type='text/javascript'>jQuery(function(){jQuery('.inclure_blocs > h6:first-child').hover(function(){jQuery(this).parent().addClass('hover')},function(){jQuery(this).parent().removeClass('hover')})});</script>");
+				. ($js_inclus ? '' : "<script>jQuery(function(){jQuery('.inclure_blocs > h6:first-child').hover(function(){jQuery(this).parent().addClass('hover')},function(){jQuery(this).parent().removeClass('hover')})});</script>");
 			$js_inclus = true;
 		}
 

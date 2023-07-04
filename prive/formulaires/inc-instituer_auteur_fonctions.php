@@ -49,7 +49,7 @@ function choisir_rubriques_admin_restreint(
 
 			// onchange = pour le menu
 			// l'evenement doit etre provoque a la main par le selecteur ajax
-			. "<script type='text/javascript'>
+			. "<script>
 jQuery(function($){
 	$('#id_parent').on('change', function(){
 		var id_parent = parseInt(this.value);

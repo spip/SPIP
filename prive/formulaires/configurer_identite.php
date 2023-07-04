@@ -59,7 +59,7 @@ function formulaires_configurer_identite_traiter_dist() {
 
 	include_spip('inc/texte_mini');
 	$reload = texte_script(couper(_request('nom_site'), 35));
-	$reload = "<script type='text/javascript'>if (window.jQuery) jQuery('#bando_identite .nom_site_spip .nom').html('$reload');</script>";
+	$reload = "<script>if (window.jQuery) jQuery('#bando_identite .nom_site_spip .nom').html('$reload');</script>";
 
 	return ['message_ok' => _T('config_info_enregistree') . $reload, 'editable' => true];
 }
