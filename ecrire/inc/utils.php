@@ -1269,9 +1269,7 @@ function http_script($script, $src = '', $noscript = '') {
 		$src = '';
 	}
 	if ($script) {
-		$script = ("/*<![CDATA[*/\n" .
-			preg_replace(',</([^>]*)>,', '<\/\1>', $script) .
-			'/*]]>*/');
+		$script = preg_replace(',</([^>]*)>,', '<\/\1>', $script);
 	}
 	if ($noscript) {
 		$noscript = "<noscript>\n\t$noscript\n</noscript>\n";

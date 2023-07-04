@@ -25,6 +25,8 @@
 		[(#FORMULAIRE_{[editer_(#OBJET)],#ENV{id_objet,oui},#GET{id_rubrique},#GET{redirect},#ENV{lier_trad}})]
 [(#ENV{retourajax,''}|oui)
 	</div>
-	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+	<script type="text/javascript">
+		reloadExecPage('#ENV{exec}');
+	</script>
 ]
 </div>

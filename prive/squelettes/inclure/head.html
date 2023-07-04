@@ -4,7 +4,7 @@ Appel au script php en attendant de reecrire le head ici
 [<title>(#ENV{titre,''})</title>
 ]
 <meta http-equiv="Content-Type" content="text/html[; charset=(#CONFIG{charset})]" />
-<script type='text/javascript'>/*<![CDATA[*/
+<script type='text/javascript'>
 var url_menu_rubrique="[(#CONST{_DIR_RACINE}|sinon{./}|concat{#CONST{_SPIP_SCRIPT}})]?action=menu_rubriques\x26date=#CONFIG{date_calcul_rubriques}";
 (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);
 [(#EVAL{$_COOKIE}|table_valeur{spip_accepte_ajax}|>={1}|non)
@@ -27,7 +27,7 @@ spipConfig.core = {
 	confirm_changer_statut: confirm_changer_statut,
 	error_on_ajaxform: error_on_ajaxform
 };
-/*]]>*/</script>
+</script>
 <meta name="viewport" content="width=device-width" />
 [<link rel="stylesheet" type="text/css" href="(#VAL{reset.css}|find_in_theme|timestamp|url_absolue)" id="csspriveereset" />]
 #PIPELINE{header_prive_css,''}

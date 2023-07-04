@@ -42,7 +42,7 @@
 [(#REM)
 Masquer/afficher le selecteur de rubriques restreintes, ou le choix webmestre
 ]
-<script type="text/javascript">/*<![CDATA[*/
+<script type="text/javascript">
 function update_saisie_statut_auteur(node,value){
 	var statut_auteur_rubrique="[(#GET{statuts_auteurs}|implode{|})]";
 	var reg = new RegExp("^("+statut_auteur_rubrique+")$");
@@ -56,4 +56,4 @@ function update_saisie_statut_auteur(node,value){
 	else
 		jQuery(node).next('.choix-webmestre:visible').slideUp();
 }
-/*]]>*/</script>
+</script>

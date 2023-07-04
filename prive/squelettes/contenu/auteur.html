@@ -44,7 +44,9 @@
 ]
 
 [(#CONST{_AJAX}|oui)
-	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#extra');/*\]\]>*/</script>
+	<script type="text/javascript">
+		reloadExecPage('#ENV{exec}','#navigation,#extra');
+	</script>
 ]
 </BOUCLE_auteur>
 [(#ENV**{exec}|=={auteur_edit}|?{#INCLURE{fond=prive/squelettes/contenu/auteur_edit,env,retourajax=oui},#REM|sinon_interdire_acces{'',<:info_aucun_auteur:>}})]

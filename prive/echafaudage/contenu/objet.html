@@ -53,7 +53,9 @@
 	[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,#ENV**{exec},objet,#OBJET,id_objet,#ID_OBJET},data,#GET{enfants}})]})]
 
 	[(#CONST{_AJAX}|oui)
-	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('[(#OBJET|objet_info{url_voir})]','#navigation,#chemin,#extra');/*\]\]>*/</script>
+	<script type="text/javascript">
+		reloadExecPage('[(#OBJET|objet_info{url_voir})]','#navigation,#chemin,#extra');
+	</script>
 	]
 	#SET{ok,' '}
 ][

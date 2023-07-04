@@ -29,7 +29,9 @@
 #PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,rubrique,id,#ID_RUBRIQUE},data,'<div class="nettoyeur"></div>'}}
 
 [(#CONST{_AJAX}|oui)
-	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\]\]>*/</script>
+	<script type="text/javascript">
+		reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');
+	</script>
 ]
 </BOUCLE_rubrique>
 [(#ENV**{exec}|=={rubrique_edit}|?{#INCLURE{fond=prive/squelettes/contenu/rubrique_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces{'',<:info_aucun_rubrique:>}})]

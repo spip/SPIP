@@ -250,14 +250,14 @@ function auth_spip_formulaire_login($flux) {
 	// javascript qui gere la securite du login en evitant de faire circuler le pass en clair
 	$js = file_get_contents(find_in_path('prive/javascript/login.js'));
 	$flux['data'] .=
-		  '<script type="text/javascript">/*<![CDATA[*/'
+		  '<script type="text/javascript">
 		. "$js\n"
 		. "var login_info={'login':'" . $flux['args']['contexte']['var_login'] . "',"
 		. "'page_auteur': '" . generer_url_public('informer_auteur') . "',"
 		. "'informe_auteur_en_cours':false,"
 		. "'attente_informe':0};"
 		. "jQuery(function(){jQuery('#var_login').change(actualise_auteur);});"
-		. '/*]]>*/</script>';
+		. '</script>';
 
 	return $flux;
 }
