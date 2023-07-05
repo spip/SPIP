@@ -650,11 +650,7 @@ function preparer_ecriture_session(array $auteur): array {
 	$auteur = pipeline('preparer_fichier_session', ['args' => ['row' => $row], 'data' => $auteur]);
 
 	// ne pas enregistrer les valeurs vraiment nulle dans le fichier
-	foreach ($auteur as $variable => $valeur) {
-		if ($valeur === null) {
-			unset($auteur[$variable]);
-		}
-	}
+	$auteur = array_filter($auteur, fn ($valeur) => $valeur !== null);
 
 	return $auteur;
 }
