@@ -213,7 +213,7 @@ function lire_fichier($fichier, &$contenu, $options = []) {
  * @return bool
  *     - true si l’écriture s’est déroulée sans problème.
  **/
-function ecrire_fichier($fichier, $contenu, $ignorer_echec = false, $truncate = true) {
+function ecrire_fichier($fichier, $contenu, $ignorer_echec = false, $truncate = true): bool {
 
 	#spip_timer('ecrire_fichier');
 

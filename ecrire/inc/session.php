@@ -117,7 +117,6 @@ function supprimer_sessions($id_auteur, $toutes = true, $actives = true) {
  * @uses spip_php_session_start() Lorsque session anonyme
  * @uses hash_env()
  * @uses preparer_ecriture_session()
- * @uses ecrire_fichier_session()
  *
  * @param array $auteur
  *     Description de la session de l'auteur. Peut contenir (par exemple)
@@ -335,7 +334,7 @@ function verifier_session($change = false) {
 		// Tester avec alea courant
 		$fichier_session = $session_file->getPath(Alea::CURRENT);
 		if ($fichier_session && @file_exists($fichier_session)) {
-			include($fichier_session);
+			$GLOBALS['visiteur_session'] = include($fichier_session);
 		} else {
 			// Sinon, tester avec alea precedent
 			$fichier_session = $session_file->getPath(Alea::PREVIOUS);
@@ -344,7 +343,7 @@ function verifier_session($change = false) {
 			}
 
 			// Renouveler la session avec l'alea courant
-			include($fichier_session);
+			$GLOBALS['visiteur_session'] = include($fichier_session);
 			spip_log('renouvelle session ' . $GLOBALS['visiteur_session']['id_auteur'], 'session');
 			spip_unlink($fichier_session);
 			ajouter_session($GLOBALS['visiteur_session']);
@@ -495,13 +494,13 @@ function terminer_actualiser_sessions() {
  */
 function actualiser_sessions($auteur, $supprimer_cles = []) {
 
-	$id_auteur = isset($auteur['id_auteur']) ? intval($auteur['id_auteur']) : 0;
-	$id_auteur_courant = isset($GLOBALS['visiteur_session']['id_auteur']) ? intval($GLOBALS['visiteur_session']['id_auteur']) : 0;
+	$id_auteur = intval($auteur['id_auteur'] ?? 0);
+	$id_auteur_courant = intval($GLOBALS['visiteur_session']['id_auteur'] ?? 0);
 
 	// si l'auteur est celui de la session courante, verifier/creer la session si besoin
 	$fichier_session_courante = '';
-	if ($id_auteur == $id_auteur_courant) {
-		$auteur = array_merge($GLOBALS['visiteur_session'], $auteur);
+	if ($id_auteur === $id_auteur_courant) {
+		$auteur = [...$GLOBALS['visiteur_session'], ...$auteur];
 		ajouter_session($auteur);
 		if ($id_auteur) {
 			$fichier_session_courante = (new SessionFile())->getPath(Alea::CURRENT);
@@ -522,9 +521,6 @@ function actualiser_sessions($auteur, $supprimer_cles = []) {
 		}
 	}
 
-	// memoriser l'auteur courant (celui qui modifie la fiche)
-	$sauve = $GLOBALS['visiteur_session'];
-
 	// .. mettre a jour les sessions de l'auteur cible
 	// attention au $ final pour ne pas risquer d'embarquer un .php.jeton temporaire
 	// cree par une ecriture concurente d'une session (fichier atomique temporaire)
@@ -532,15 +528,13 @@ function actualiser_sessions($auteur, $supprimer_cles = []) {
 
 	// 1ere passe : lire et fusionner les sessions
 	foreach ($sessions as $session) {
-		$GLOBALS['visiteur_session'] = [];
 		// a pu etre supprime entre le preg initial et le moment ou l'on arrive la (concurrence)
 		if (
 			$session !== $fichier_session_courante
 			&& @file_exists($session)
 		) {
-			include $session; # $GLOBALS['visiteur_session'] est alors l'auteur cible
-
-			$auteur = array_merge($GLOBALS['visiteur_session'], $auteur);
+			$auteur_fichier_session = include $session;
+			$auteur = [...$auteur_fichier_session, ...$auteur];
 		}
 	}
 
@@ -553,24 +547,20 @@ function actualiser_sessions($auteur, $supprimer_cles = []) {
 
 	// seconde passe : ecrire les sessions qui ne sont pas a jour
 	foreach ($sessions as $session) {
-		$GLOBALS['visiteur_session'] = [];
 		// a pu etre supprime entre le preg initial et le moment ou l'on arrive la (concurrence)
 		if (@file_exists($session)) {
-			include $session; # $GLOBALS['visiteur_session'] est alors l'auteur cible
+			$auteur_fichier_session = include $session;
 
 			// est-ce que cette session est a mettre a jour ?
-			if ($auteur_session != $GLOBALS['visiteur_session']) {
+			if ($auteur_session != $auteur_fichier_session) {
 				ecrire_fichier_session($session, $auteur);
 			}
 		}
 	}
 
-	if ($id_auteur == $id_auteur_courant) {
+	if ($id_auteur === $id_auteur_courant) {
 		$GLOBALS['visiteur_session'] = $auteur;
 		$GLOBALS['auteur_session'] = &$GLOBALS['visiteur_session'];
-	} else {
-		// restaurer l'auteur courant
-		$GLOBALS['visiteur_session'] = $sauve;
 	}
 }
 
@@ -657,24 +647,11 @@ function preparer_ecriture_session(array $auteur): array {
 
 /**
  * Ecrire le fichier d'une session
- *
- * @param string $fichier
- * @param array $auteur
- * @return bool
  */
-function ecrire_fichier_session($fichier, $auteur) {
-
+function ecrire_fichier_session(string $fichier, array $auteur): bool {
 	$auteur = preparer_ecriture_session($auteur);
-
-	// enregistrer les autres donnees du visiteur
-	$texte = '<' . "?php\n";
-	foreach ($auteur as $var => $val) {
-		$texte .= '$GLOBALS[\'visiteur_session\'][' . var_export($var, true) . '] = '
-			. var_export($val, true) . ";\n";
-	}
-	$texte .= '?' . ">\n";
-
-	return ecrire_fichier($fichier, $texte);
+	$auteur = var_export($auteur, true);
+	return ecrire_fichier($fichier, "<?php\nreturn $auteur;\n");
 }
 
 /**
