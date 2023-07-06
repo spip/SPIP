@@ -104,7 +104,7 @@ function redirige_par_entete($url, $equiv = '', $status = 302) {
 <head>',
 	$equiv, '
 <title>HTTP ' . $status . '</title>
-' . ((isset($GLOBALS['meta']['charset'])) ? '<meta http-equiv="Content-Type" content="text/html;charset=' . $GLOBALS['meta']['charset'] . '">' : '') . '
+' . ((isset($GLOBALS['meta']['charset'])) ? '<meta charset="' . $GLOBALS['meta']['charset'] . '">' : '') . '
 </head>
 <body>
 <h1>HTTP ' . $status . '</h1>

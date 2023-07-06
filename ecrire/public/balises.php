@@ -129,7 +129,7 @@ function balise_DESCRIPTIF_SITE_SPIP_dist($p) {
  * @link https://www.spip.net/4331
  * @example
  *     ```
- *     <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+ *     <meta charset="#CHARSET" />
  *     ```
  *
  * @param Champ $p

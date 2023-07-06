@@ -843,9 +843,7 @@ function debusquer_entete($titre, $corps) {
 		_T('admin_debug') . ' ' . spip_htmlspecialchars($titre) . ' (' .
 		supprimer_tags(corriger_typo($GLOBALS['meta']['nom_site']))) .
 	")</title>\n" .
-	"<meta http-equiv='Content-Type' content='text/html" .
-	(($c = $GLOBALS['meta']['charset']) ? "; charset=$c" : '') .
-	"' />\n" .
+	($c = $GLOBALS['meta']['charset']) ? "<meta charset='$c' />\n" : '' .
 	http_script('', 'jquery.js')
 	. "<link rel='stylesheet' href='" . url_absolue(find_in_path('spip_admin.css'))
 	. "' type='text/css' />" .
