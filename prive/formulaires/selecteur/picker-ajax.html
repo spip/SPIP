@@ -18,7 +18,7 @@ style='display:none;'>#GET{bouton_modif}</a>&#93;</div>
 <div class='browser'>
 	<div class="choix_rapide">
 		<label for="[(#GET{picker_id})]"><:label_ajout_id_rapide:></label>
-		<input type="text" value="" id="[(#GET{picker_id})]" size="10" />
+		<input type="text" value="" id="[(#GET{picker_id})]" size="10">
 		<a href="#"
 			 onclick="jQuery.ajax({'url':'[(#URL_PAGE{ajax_item_pick,rubriques=[(#ENV{rubriques})]&articles=[(#ENV{articles})]&ref=})]'+jQuery('[#(#GET{picker_id})]').val(),
 			 'dataType':'text',

@@ -22,7 +22,7 @@
 			<div class="editer editer_login obligatoire[(#ENV*{erreurs/var_login}|oui)erreur]">
 				<label for="var_login"><:login_login2:> <span class="etoile" title="<:info_obligatoire_02|attribut_html:>" aria-label="<:info_obligatoire_02|attribut_html:>">*</span></label>[
 				<span class="erreur_message">(#ENV*{erreurs/var_login,''}|trim)</span>
-				]<input type='text' class='text' name='var_login' id='var_login' value="[(#ENV{var_login})]" size='40'[(#HTML5) required='required' [(#ENV{_autofocus}|et{#ENV*{erreurs/password}|non})autofocus='autofocus']] autocapitalize="off" autocorrect="off" />
+				]<input type='text' class='text' name='var_login' id='var_login' value="[(#ENV{var_login})]" size='40'[(#HTML5) required='required' [(#ENV{_autofocus}|et{#ENV*{erreurs/password}|non})autofocus='autofocus']] autocapitalize="off" autocorrect="off">
 				<span id="spip_logo_auteur">[(#ENV*{_logo,''})]</span>
 			</div>
 			<div class="editer editer_password obligatoire[(#ENV*{erreurs/password}|oui)erreur]">
@@ -33,12 +33,12 @@
 			</div>
 			[(#ENV{rester_connecte})
 			<div class="editer editer_session"><div class='choix'>
-				<input type="checkbox" class="checkbox" name="session_remember" id="session_remember" value="oui" [(#ENV{cnx}|?{' '})checked="checked"] onchange="jQuery(this).addClass('modifie');" />
+				<input type="checkbox" class="checkbox" name="session_remember" id="session_remember" value="oui" [(#ENV{cnx}|?{' '})checked="checked"] onchange="jQuery(this).addClass('modifie');">
 				<label class='nofx' for="session_remember"><:login_rester_identifie:></label>
 			</div></div>]
 		</div>
 	</fieldset>
-	<p class="boutons"><input type="submit" class="btn submit" value="<:lien_connecter|attribut_html:>" /></p>
+	<p class="boutons"><input type="submit" class="btn submit" value="<:lien_connecter|attribut_html:>"></p>
 	</form>
 	]
 	[(#REM) en cas d'absence de cookie, on represente le formulaire alternatif ]

@@ -3,14 +3,14 @@ Appel au script php en attendant de reecrire le head ici
 ]
 [<title>(#ENV{titre,''})</title>
 ]
-<meta charset="#CHARSET" />
+<meta charset="#CHARSET">
 <script>
 var url_menu_rubrique="[(#CONST{_DIR_RACINE}|sinon{./}|concat{#CONST{_SPIP_SCRIPT}})]?action=menu_rubriques\x26date=#CONFIG{date_calcul_rubriques}";
 (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);
 [(#EVAL{$_COOKIE}|table_valeur{spip_accepte_ajax}|>={1}|non)
 function test_accepte_ajax(){jQuery.ajax({"url":"[(#URL_ECRIRE{test_ajax,js=1}|replace{'&amp;','\x26'})]"});}
 ][(#CONST{_OUTILS_DEVELOPPEURS}|oui)var _OUTILS_DEVELOPPEURS=true;
-]var ajax_image_searching = '<img src="#CHEMIN_IMAGE{loader.svg}" class="loader" alt="" />';
+]var ajax_image_searching = '<img src="#CHEMIN_IMAGE{loader.svg}" class="loader" alt="">';
 var stat = [(#CONFIG{activer_statistiques}|=={non}|?{0,1})];
 var confirm_changer_statut = '<:confirm_changer_statut|html2unicode|addslashes|unicode_to_javascript:>';
 var error_on_ajaxform='<:erreur_technique_ajaxform|html2unicode|addslashes|unicode_to_javascript:>';
@@ -28,30 +28,30 @@ spipConfig.core = {
 	error_on_ajaxform: error_on_ajaxform
 };
 </script>
-<meta name="viewport" content="width=device-width" />
-[<link rel="stylesheet" type="text/css" href="(#VAL{reset.css}|find_in_theme|timestamp|url_absolue)" id="csspriveereset" />]
+<meta name="viewport" content="width=device-width">
+[<link rel="stylesheet" type="text/css" href="(#VAL{reset.css}|find_in_theme|timestamp|url_absolue)" id="csspriveereset">]
 #PIPELINE{header_prive_css,''}
 [<!--
 (#REM) CSS de secours en cas de non fonct de la suivante
--->][<link rel="stylesheet" type="text/css" href="(#VAL{style_prive_defaut.css}|find_in_theme|timestamp|url_absolue)" id="csspriveedef" />]
+-->][<link rel="stylesheet" type="text/css" href="(#VAL{style_prive_defaut.css}|find_in_theme|timestamp|url_absolue)" id="csspriveedef">]
 [<!--
 (#REM) spip-admin pour le debug
 -->][<link rel="stylesheet" type="text/css" href="(#CHEMIN{spip_admin.css}|timestamp|url_absolue)"/>]
 [<!--
 (#REM) CSS espace prive : la vraie
--->]<link rel="stylesheet" type="text/css" href="#URL_PAGE{style_prive.css,#ENV{paramcss}}" />
+-->]<link rel="stylesheet" type="text/css" href="#URL_PAGE{style_prive.css,#ENV{paramcss}}">
 [<!--
 (#REM) CSS optionelle minipres
 -->][(#ENV{minipres,''}|oui)
-[<link rel="stylesheet" type="text/css" href="(#CHEMIN{minipres.css}|timestamp|url_absolue)" />]
+[<link rel="stylesheet" type="text/css" href="(#CHEMIN{minipres.css}|timestamp|url_absolue)">]
 ][<!--
 (#REM) Favicon
 -->]<INCLURE{fond=prive/squelettes/inclure/favicon-head, couleur=#ENV{paramcss}|parametre_url{couleur_foncee}} />
 
-<link rel="alternate" type="application/rss+xml" title="[(#NOM_SITE_SPIP|attribut_html)]" href="#URL_PAGE{backend}" />
-<link rel="help" type="text/html" title="<:icone_aide_ligne|attribut_html:>" href="#URL_PAGE{aide,var_lang=#LANG}" />
+<link rel="alternate" type="application/rss+xml" title="[(#NOM_SITE_SPIP|attribut_html)]" href="#URL_PAGE{backend}">
+<link rel="help" type="text/html" title="<:icone_aide_ligne|attribut_html:>" href="#URL_PAGE{aide,var_lang=#LANG}">
 [(#CONFIG{activer_breves}|=={non}|non)
-<link rel="alternate" type="application/rss+xml" title="<:info_breves_03|attribut_html:>" href="#URL_PAGE{backend-breves}" />
+<link rel="alternate" type="application/rss+xml" title="<:info_breves_03|attribut_html:>" href="#URL_PAGE{backend-breves}">
 ]
 
 [<script src="(#CHEMIN{prive/javascript/layer_old.js}|timestamp)"></script>]

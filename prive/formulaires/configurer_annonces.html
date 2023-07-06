@@ -1,5 +1,5 @@
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
-<h3 class='titrem'><img src="#CHEMIN_IMAGE{annonce-24.png}" class="cadre-icone" /><:info_envoi_email_automatique:>#AIDER{confmails}</h3>
+<h3 class='titrem'><img src="#CHEMIN_IMAGE{annonce-24.png}" class="cadre-icone"><:info_envoi_email_automatique:>#AIDER{confmails}</h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok" role="status">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur" role="alert">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
@@ -34,7 +34,7 @@
 						<div class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 							<label for="#GET{name}"><:info_adresse:></label>[
 							<span class='erreur_message'>(#GET{erreurs})</span>
-							]<input type="text" class="text email" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}" />[(#REM)<!-- texte et pas email, car peut être une liste séparée par virgule-->]
+							]<input type="text" class="text email" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}">[(#REM)<!-- texte et pas email, car peut être une liste séparée par virgule-->]
 						</div>
 						#SET{name,adresse_suivi_inscription}#SET{erreurs,#ENV*{erreurs/#GET{name}}}
 						<div class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
@@ -42,7 +42,7 @@
 							<label for="#GET{name}"><:info_adresse_inscription:></label>[
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]<p class="explication"><:info_config_suivi{adresse_suivi=#GET{adresse_suivi}}:></p>
-							<input type="text" class="text email" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}" />
+							<input type="text" class="text email" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}">
 						</div>
 					</div>
 				</fieldset>
@@ -73,16 +73,16 @@
 						<div class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 							<label for="#GET{name}"><:info_adresse:></label>[
 							<span class='erreur_message'>(#GET{erreurs})</span>
-							]<input type="text" class="text email" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}" />
+							]<input type="text" class="text email" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}">
 						</div>
 						#SET{name,jours_neuf}#SET{erreurs,#ENV*{erreurs/#GET{name}}}
 						<div class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 							#SET{adresse_suivi,#ENV{adresse_suivi}|sinon{mailing@monsite.net}}
 							<label for="#GET{name}"><:info_tous_les:></label>[
 							<span class='erreur_message'>(#GET{erreurs})</span>
-							]<input type="text" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}" />
+							]<input type="text" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}">
 							<:info_jours:>
-							<input type='submit' class="btn submit" name='envoi_now' id='envoi_now' value='<:info_envoyer_maintenant:>' />
+							<input type='submit' class="btn submit" name='envoi_now' id='envoi_now' value='<:info_envoyer_maintenant:>'>
 						</div>
 					</div>
 				</fieldset>
@@ -93,13 +93,13 @@
 				<label for="#GET{name}"><:info_email_envoi:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<p class="explication"><:info_email_envoi_txt:></p>
-				<input type="email" class="text email" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}" />
+				<input type="email" class="text email" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}">
 			</div>
 
 		</div>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
-	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='btn submit' value='<:bouton_enregistrer:>' /></p>
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='btn submit' value='<:bouton_enregistrer:>'></p>
 	</div></form>
 	]
 </div>

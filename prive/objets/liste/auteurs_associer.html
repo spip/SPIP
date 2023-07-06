@@ -7,7 +7,7 @@
 ]
 #SET{exclus,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
 #SET{debut,#ENV{debutauta,#EVAL{_request("debutauta");}}}
-<input type="hidden" name="debutauta" value="#GET{debut}" />
+<input type="hidden" name="debutauta" value="#GET{debut}">
 <B_liste_aut>
 [(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
 a mis a jour la valeur avec la page reelle]
@@ -20,8 +20,8 @@ a mis a jour la valeur avec la page reelle]
 [<caption><span class="caption"><strong>(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_auteur,info_nb_auteurs}})</strong>
 <span class="recherche">
 	<label for="recherche-#ENV{id}" class="offscreen"><:info_rechercher_02:></label>
-	<input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" placeholder="<:info_rechercher|attribut_html:>" />
-	<input type="submit" class="tout_voir offscreen" name="tout_voir" value="<:info_tout_afficher|attribut_html:>" />
+	<input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" placeholder="<:info_rechercher|attribut_html:>">
+	<input type="submit" class="tout_voir offscreen" name="tout_voir" value="<:info_tout_afficher|attribut_html:>">
 </span>
 </span>
 </caption>]
@@ -67,8 +67,8 @@ a mis a jour la valeur avec la page reelle]
 <span class="caption"><strong>[(#VAL{info_recherche_auteur_zero}|_T{#ARRAY{cherche_auteur,#ENV{recherche}}})]</strong>
 <span class="recherche">
 	<label for="recherche-#ENV{id}"><:info_rechercher_02:></label>
-	<input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" />
-	<input type="submit" class="tout_voir" name="tout_voir" value="<:info_tout_afficher:>" />
+	<input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}">
+	<input type="submit" class="tout_voir" name="tout_voir" value="<:info_tout_afficher:>">
 </span>
 </span>
 </div>

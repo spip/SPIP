@@ -65,7 +65,7 @@ function enfant_rub($collection, $debut = 0, $limite = 500) {
 
 			if ($voir_logo && ($logo = $chercher_logo($id_rubrique, 'id_rubrique', 'on'))) {
 				[$fid, $dir, $nom, $format] = $logo;
-				$logo = image_recadre_avec_fallback("<img src='$fid' alt='' />", 70, 70);
+				$logo = image_recadre_avec_fallback("<img src='$fid' alt=''>", 70, 70);
 				if ($logo) {
 					$logo = wrap(inserer_attribut($logo, 'class', 'logo'), '<span class="logo-carre">');
 				}

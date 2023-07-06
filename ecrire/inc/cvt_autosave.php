@@ -82,7 +82,7 @@ function cvtautosave_formulaire_charger($flux) {
 		/**
 		 * Envoyer le input hidden et le bout de js qui l'utilisera
 		 */
-		$flux['data']['_hidden'] .= "<input type='hidden' name='autosave' class='autosaveactive' value='$cle_autosave' />"
+		$flux['data']['_hidden'] .= "<input type='hidden' name='autosave' class='autosaveactive' value='$cle_autosave'>"
 			. '<script>if (window.jQuery) jQuery(function(){
 		  $("input.autosaveactive").closest("form:not(.autosaveon)").autosave({url:"' . $GLOBALS['meta']['adresse_site'] . '/"}).addClass("autosaveon");
 			});</script>';

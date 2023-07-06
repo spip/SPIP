@@ -39,7 +39,7 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type, $do = 'aff') {
 		if ($res = $chercher_logo($id, 'id_rubrique', 'on')) {
 			[$fid, $dir, $nom, $format] = $res;
 			include_spip('inc/filtres_images_mini');
-			$res = image_reduire("<img src='$fid' alt='' />", 100, 48);
+			$res = image_reduire("<img src='$fid' alt=''>", 100, 48);
 			if ($res) {
 				$res = "<div class='informer__media' style='float: " . $GLOBALS['spip_lang_right'] . '; margin-' . $GLOBALS['spip_lang_right'] . ": -5px; margin-top: -5px;'>$res</div>";
 			}
@@ -65,10 +65,10 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type, $do = 'aff') {
 	$js_func = $do . '_selection_titre';
 
 	return "<div style='display: none;'>"
-	. "<input type='text' id='" . $rac . "_sel' value='$id' />"
+	. "<input type='text' id='" . $rac . "_sel' value='$id'>"
 	. "<input type='text' id='" . $rac . "_sel2' value=\""
 	. entites_html($titre)
-	. '" />'
+	. '">'
 	. '</div>'
 	. "<div class='informer' style='padding: 5px; border-top: 0px;'>"
 	. '<div class="informer__item">'
@@ -79,7 +79,7 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type, $do = 'aff') {
 	. "<div class='informer__action' style='clear:both; text-align: " . $GLOBALS['spip_lang_right'] . ";'>"
 	. "<input type='submit' class='fondo btn submit' value='"
 	. _T('bouton_choisir')
-	. "'\nonclick=\"$js_func('$titre',$id,'selection_rubrique','id_parent'); return false;\" />"
+	. "'\nonclick=\"$js_func('$titre',$id,'selection_rubrique','id_parent'); return false;\">"
 	. '</div>'
 	. '</div>';
 }

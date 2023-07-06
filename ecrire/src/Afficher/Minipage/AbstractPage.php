@@ -128,7 +128,7 @@ abstract class AbstractPage {
 			$css = "<style type='text/css'>$inline</style>";
 			foreach ($files as $name) {
 				$file = timestamp(direction_css($name));
-				$css .= "<link rel='stylesheet' href='" . attribut_html($file) . "' type='text/css' />\n";
+				$css .= "<link rel='stylesheet' href='" . attribut_html($file) . "' type='text/css'>\n";
 			}
 			if (!empty($options['css'])) {
 				$css .= "<style type='text/css'>" . $options['css'] . '</style>';
@@ -141,7 +141,7 @@ abstract class AbstractPage {
 			'<title>' .
 			textebrut($page_title) .
 			"</title>\n" .
-			"<meta name=\"viewport\" content=\"width=device-width\" />\n" .
+			"<meta name=\"viewport\" content=\"width=device-width\">\n" .
 			$css .
 			(empty($options['head']) ? '' : $options['head']) .
 			"</head>\n" .

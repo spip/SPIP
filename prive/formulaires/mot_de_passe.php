@@ -59,7 +59,7 @@ function formulaires_mot_de_passe_charger_dist($id_auteur = null, $jeton = null)
 	if ($auteur) {
 		$valeurs['id_auteur'] = $id_auteur; // a toutes fins utiles pour le formulaire
 		if ($jeton) {
-			$valeurs['_hidden'] = '<input type="hidden" name="p" value="' . $jeton . '" />';
+			$valeurs['_hidden'] = '<input type="hidden" name="p" value="' . $jeton . '">';
 		}
 	} else {
 		$valeurs['message_erreur'] = _T('pass_erreur_code_inconnu');

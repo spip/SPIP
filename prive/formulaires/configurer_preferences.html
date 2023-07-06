@@ -62,13 +62,13 @@
 				]<BOUCLE_couleurs(DATA){source table, #ENV{couleurs}}>
 				<div class="choix" data-spip-theme-colors="#CLE">
 					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_#CLE'[(#ENV{#GET{name}}|=={#CLE}|oui)checked="checked" ]value="#CLE"
-					onchange="if (this.checked) { jQuery('head>link#csspriveedef').clone().removeAttr('id').appendTo(jQuery('head')).attr('href', '[(#ENV{_couleurs_url/#CLE})]'); jQuery('body').removeClass(function(i, c){ return (c.match (/(^|\s)spip-theme-colors-\S+/g) || []).join(' ');}).addClass('spip-theme-colors-#CLE')}" />
+					onchange="if (this.checked) { jQuery('head>link#csspriveedef').clone().removeAttr('id').appendTo(jQuery('head')).attr('href', '[(#ENV{_couleurs_url/#CLE})]'); jQuery('body').removeClass(function(i, c){ return (c.match (/(^|\s)spip-theme-colors-\S+/g) || []).join(' ');}).addClass('spip-theme-colors-#CLE')}">
 					<label for="[(#GET{name})]_#CLE">
-						<img src="#CHEMIN{rien.gif}" alt="" width="16" height="16" style="background-color: var(--spip-color-theme-dark);" />
-						<img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> #CLE" width="16" height="16" style="background-color: var(--spip-color-theme);" />
-						<img src="#CHEMIN{rien.gif}" alt="" width="16" height="16" style="background-color: var(--spip-color-theme-light);" />
-						<img src="#CHEMIN{rien.gif}" alt="" width="16" height="16" style="background-color: var(--spip-color-theme-lighter);" />
-						<img src="#CHEMIN{rien.gif}" alt="" width="16" height="16" style="background-color: var(--spip-color-theme-lightest);" />
+						<img src="#CHEMIN{rien.gif}" alt="" width="16" height="16" style="background-color: var(--spip-color-theme-dark);">
+						<img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> #CLE" width="16" height="16" style="background-color: var(--spip-color-theme);">
+						<img src="#CHEMIN{rien.gif}" alt="" width="16" height="16" style="background-color: var(--spip-color-theme-light);">
+						<img src="#CHEMIN{rien.gif}" alt="" width="16" height="16" style="background-color: var(--spip-color-theme-lighter);">
+						<img src="#CHEMIN{rien.gif}" alt="" width="16" height="16" style="background-color: var(--spip-color-theme-lightest);">
 					</label>
 				</div>
 				</BOUCLE_couleurs>
@@ -88,7 +88,7 @@
 		</div>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
-		<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='btn submit' value='<:bouton_enregistrer:>' /></p>
+		<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='btn submit' value='<:bouton_enregistrer:>'></p>
 	</div></form>
 	<script>
 		jQuery(function($){

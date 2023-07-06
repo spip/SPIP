@@ -1,5 +1,5 @@
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
-<h3 class='titrem'><img src="#CHEMIN_IMAGE{identite-xx.svg}" class="cadre-icone" /><:titre_identite_site:></h3>
+<h3 class='titrem'><img src="#CHEMIN_IMAGE{identite-xx.svg}" class="cadre-icone"><:titre_identite_site:></h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok" role="status">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur" role="alert">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
@@ -12,19 +12,19 @@
 	    <div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="#GET{name}"><:info_nom_site:></label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}">
 	    </div>
 	  	#SET{name,slogan_site}#SET{erreurs,#ENV*{erreurs/#GET{name}}}#SET{obli,''}
 	    <div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="#GET{name}"><:label_slogan_site:></label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}">
 	    </div>
 	  	#SET{name,adresse_site}#SET{erreurs,#ENV*{erreurs/#GET{name}}}#SET{obli,obligatoire}
 	    <div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="#GET{name}"><:info_adresse_url:></label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}">
 	    </div>
 	  	#SET{name,descriptif_site}#SET{erreurs,#ENV*{erreurs/#GET{name}}}#SET{obli,''}
 	    <div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
@@ -36,12 +36,12 @@
 	    <div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="#GET{name}"><:info_email_webmestre:></label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				<input type='email' class='text email' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+				<input type='email' class='text email' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}">
 	    </div>
 	  </div>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
-	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='btn submit' value='<:bouton_enregistrer:>' /></p>
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='btn submit' value='<:bouton_enregistrer:>'></p>
 	</div></form>
 	]
 </div>

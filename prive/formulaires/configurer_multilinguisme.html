@@ -1,5 +1,5 @@
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
-<h3 class='titrem'><img src="#CHEMIN_IMAGE{traduction-24.png}" class="cadre-icone" /><:info_multilinguisme:>&nbsp;:&nbsp;#ENV{_langue_site}</h3>
+<h3 class='titrem'><img src="#CHEMIN_IMAGE{traduction-24.png}" class="cadre-icone"><:info_multilinguisme:>&nbsp;:&nbsp;#ENV{_langue_site}</h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok" role="status">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur" role="alert">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
@@ -7,8 +7,8 @@
 	<p><:texte_multilinguisme_trad:></p>
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE
-		<input type="hidden" name="multi_objets\[\]" value="" />
-		<input type="hidden" name="gerer_trad_objets\[\]" value="" />
+		<input type="hidden" name="multi_objets\[\]" value="">
+		<input type="hidden" name="gerer_trad_objets\[\]" value="">
 		<div class="editer-groupe">
 			<div class="fieldset">
 				<fieldset><div class="editer-groupe">
@@ -28,7 +28,7 @@
 						<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]<div class="choix">
-								<input type="hidden" name="#GET{name}_check" value="1" />
+								<input type="hidden" name="#GET{name}_check" value="1">
 								<input type="checkbox" name="#GET{name}" id="#GET{name}_oui" value="oui"
 								[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:info_multi_secteurs:></label>
 							</div>
@@ -78,7 +78,7 @@
 			</div>]</BOUCLE_objets>
 	[(#ENV{editable})
 		</div>
-		<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='btn submit' value='<:bouton_enregistrer:>' /></p>
+		<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='btn submit' value='<:bouton_enregistrer:>'></p>
 		<div class="editer-groupe">
 			[<div class="fieldset">
 				<fieldset>
@@ -96,7 +96,7 @@
 		</div>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
-	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='btn submit' value='<:bouton_enregistrer:>' /></p>
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='btn submit' value='<:bouton_enregistrer:>'></p>
 	</div></form>
 	]
 </div>

@@ -4,14 +4,14 @@
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE
-		<input type='hidden' name='id_auteur' value='#ENV{id_auteur}' />
-		[<input type='hidden' name='redirect' value='(#ENV*{redirect})' />]
+		<input type='hidden' name='id_auteur' value='#ENV{id_auteur}'>
+		[<input type='hidden' name='redirect' value='(#ENV*{redirect})'>]
 		<div class="editer-groupe">
 			<div class="editer editer_nom obligatoire[ (#ENV*{erreurs/nom}|oui)erreur]">
 				<label for="nom"><:titre_cadre_signature_obligatoire:></label>[
 				<span class='erreur_message'>(#ENV*{erreurs/nom})</span>
 				][<p class='explication'>(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:entree_nom_pseudo:>,<:entree_nom_pseudo_2:>})</p>]
-				<input type='text' class='text' name='nom' id='nom' placeholder="<:ecrire:item_nouvel_auteur|attribut_html:>" value="[(#ENV{nom})]" />
+				<input type='text' class='text' name='nom' id='nom' placeholder="<:ecrire:item_nouvel_auteur|attribut_html:>" value="[(#ENV{nom})]">
 			</div>
 			[(#REM)
 				Modification de l'email
@@ -20,7 +20,7 @@
 			<div class="editer editer_email[ (#ENV*{erreurs/email}|oui)erreur]">
 				[<label for="email">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:entree_adresse_email:>,<:entree_adresse_email_2:>})</label>][
 				<span class='erreur_message'>(#ENV*{erreurs/email})</span>
-				]<input type='email' autocomplete="new-password" class='text email' name='email' id='email' value="[(#ENV{email})]" />
+				]<input type='email' autocomplete="new-password" class='text email' name='email' id='email' value="[(#ENV{email})]">
 			</div>
 			[(#REM)
 				Édition de la langue
@@ -63,12 +63,12 @@
 						<div class="editer editer_nom_site[ (#ENV*{erreurs/nom_site_auteur}|oui)erreur]">
 							[<label for="nom_site">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:entree_nom_site:>,<:entree_nom_site_2:>})</label>][
 							<span class='erreur_message'>(#ENV*{erreurs/nom_site_auteur})</span>
-							]<input type='text' class='text' name='nom_site' id='nom_site' value="[(#ENV{nom_site})]" />
+							]<input type='text' class='text' name='nom_site' id='nom_site' value="[(#ENV{nom_site})]">
 						</div>
 						<div class="editer editer_url_site[ (#ENV*{erreurs/url_site}|oui)erreur]">
 							[<label for="url_site">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:entree_url:>,<:entree_url_2:>})</label>][
 							<span class='erreur_message'>(#ENV*{erreurs/url_site})</span>
-							]<input type='text' class='text' name='url_site' id='url_site' value="[(#ENV{url_site})]" />
+							]<input type='text' class='text' name='url_site' id='url_site' value="[(#ENV{url_site})]">
 						</div>
 					</div>
 				</fieldset>
@@ -92,12 +92,12 @@
 								<label for='new_login'><:item_login:></label>[
 								<span class='erreur_message'>(#ENV*{erreurs/login})</span>
 								]<p class='explication'>(<:info_login_trop_court_car_pluriel{nb=#CONST{_LOGIN_TROP_COURT}}:>)</p>
-								<input autocomplete="new-password" type='text' class='text' name='new_login' id='new_login' value="[(#ENV{new_login})]" />
+								<input autocomplete="new-password" type='text' class='text' name='new_login' id='new_login' value="[(#ENV{new_login})]">
 							]
 							[(#ENV{config/edit_login}|non)
 								<label for='login'><:item_login:>
 								</label><p class='explication'>(<:info_non_modifiable:>)</p>
-								<input type='text' class='text' disabled='disabled' name='login' id='login' value="[(#ENV{login})]" />
+								<input type='text' class='text' disabled='disabled' name='login' id='login' value="[(#ENV{login})]">
 							]
 						</div>
 						[(#ENV{config/edit_pass}|oui)
@@ -105,14 +105,14 @@
 							<label for='new_pass'><:entree_nouveau_passe:></label>[
 							<span class='erreur_message'>(#ENV*{erreurs/new_pass})</span>
 							]<p class='explication'>(<:info_passe_trop_court_car_pluriel{nb=#CONST{_PASS_LONGUEUR_MINI}}:>)</p>
-							<input type='password' autocomplete="new-password" class='password' name='new_pass' id='new_pass' value="" />
+							<input type='password' autocomplete="new-password" class='password' name='new_pass' id='new_pass' value="">
 						</div>
 						<div class='editer editer_new_pass2'>
 							<label for='new_pass2'><:info_confirmer_passe:></label>[
 							<span class='erreur_message'>(#ENV*{erreurs/new_pass2})</span>
-							]<input type='password' autocomplete="new-password" class='password' name='new_pass2' id='new_pass2' value="" />
+							]<input type='password' autocomplete="new-password" class='password' name='new_pass2' id='new_pass2' value="">
 							[(#ENV{config/edit_pass}|oui)
-							<input type="submit" class="over offscreen" name="submit" value="submit" />
+							<input type="submit" class="over offscreen" name="submit" value="submit">
 							<button class="btn submit reset_password" type="submit" name="reset_password" value="1"><:bouton_reset_password:></button>
 							]
 						</div>]
@@ -122,7 +122,7 @@
 		</div>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
-		<p class='boutons'><input type='submit' class='btn submit' value='<:bouton_enregistrer:>' /></p>
+		<p class='boutons'><input type='submit' class='btn submit' value='<:bouton_enregistrer:>'></p>
 	</div></form>
 	]
 </div>

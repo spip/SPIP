@@ -309,14 +309,14 @@ function formulaires_editer_objet_charger(
 		unset($contexte['lang']);
 	}
 
-	$contexte['_hidden'] = "<input type='hidden' name='editer_$type' value='oui' />\n" .
+	$contexte['_hidden'] = "<input type='hidden' name='editer_$type' value='oui'>\n" .
 		($lier_trad
 			 ? "\n<input type='hidden' name='lier_trad' value='" .
 				$lier_trad .
-				"' />" .
+				"'>" .
 				"\n<input type='hidden' name='changer_lang' value='" .
 				$lang_default .
-				"' />"
+				"'>"
 			: '')
 		. $hidden
 		. ($md5 ?? '');
@@ -453,7 +453,7 @@ function controles_md5(array $data, string $prefixe = 'ctr_', string $format = '
 		$k = $prefixe . $key;
 
 		$ctr[$k] = match ($format) {
-			'html' => "<input type='hidden' value='$m' name='$k' />",
+			'html' => "<input type='hidden' value='$m' name='$k'>",
 			default => $m,
 		};
 	}
@@ -678,6 +678,6 @@ function display_conflit_champ($x) {
 	if (strstr($x, "\n") || strlen($x) > 80) {
 		return "<textarea style='width:99%; height:10em;'>" . entites_html($x) . "</textarea>\n";
 	} else {
-		return "<input type='text' size='40' style='width:99%' value=\"" . entites_html($x) . "\" />\n";
+		return "<input type='text' size='40' style='width:99%' value=\"" . entites_html($x) . "\">\n";
 	}
 }

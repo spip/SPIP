@@ -73,7 +73,7 @@ function install_etape_4_dist() {
 	appliquer_adresse_site('');
 
 	// aller a la derniere etape qui clos l'install et redirige
-	$suite = "\n<input type='hidden' name='etape' value='fin' />"
+	$suite = "\n<input type='hidden' name='etape' value='fin'>"
 		. bouton_suivant(_T('login_espace_prive'));
 
 	echo generer_form_ecrire('install', $suite);

@@ -129,7 +129,7 @@ function balise_DESCRIPTIF_SITE_SPIP_dist($p) {
  * @link https://www.spip.net/4331
  * @example
  *     ```
- *     <meta charset="#CHARSET" />
+ *     <meta charset="#CHARSET">
  *     ```
  *
  * @param Champ $p
@@ -389,7 +389,7 @@ function balise_SQUELETTE_dist($p) {
  * @see spip_version()
  * @example
  *     ```
- *     [<meta name="generator" content="SPIP (#SPIP_VERSION|header_silencieux)" />]
+ *     [<meta name="generator" content="SPIP (#SPIP_VERSION|header_silencieux)">]
  *     ```
  *
  * @param Champ $p
@@ -1271,7 +1271,7 @@ function balise_SELF_dist($p) {
  * @example
  *     ```
  *     [<script src="(#CHEMIN{javascript/jquery.flot.js})"></script>]
- *     [<link rel="stylesheet" href="(#CHEMIN{css/perso.css}|direction_css)" type="text/css" />]
+ *     [<link rel="stylesheet" href="(#CHEMIN{css/perso.css}|direction_css)" type="text/css">]
  *     ```
  *
  * @param Champ $p
@@ -2522,11 +2522,11 @@ function balise_ACTION_FORMULAIRE($p) {
 	$p->code = "	'<span class=\"form-hidden\">' .
 	form_hidden($_url) .
 	'<input name=\'formulaire_action\' type=\'hidden\'
-		value=\'' . $_form . '\' />' .
+		value=\'' . $_form . '\'>' .
 	'<input name=\'formulaire_action_args\' type=\'hidden\'
-		value=\'' . (\$Pile[0]['formulaire_args'] ?? '') . '\' />' .
+		value=\'' . (\$Pile[0]['formulaire_args'] ?? '') . '\'>' .
 	'<input name=\'formulaire_action_sign\' type=\'hidden\'
-		value=\'' . (\$Pile[0]['formulaire_sign'] ?? '') . '\' />' .
+		value=\'' . (\$Pile[0]['formulaire_sign'] ?? '') . '\'>' .
 	(\$Pile[0]['_hidden'] ?? '') .
 	'</span>'";
 
@@ -2809,7 +2809,7 @@ function balise_PUBLIE_dist($p) {
  * @link https://www.spip.net/5505
  * @example
  *     ```
- *     <link rel="stylesheet" type="text/css" href="#PRODUIRE{fond=css/macss.css,couleur=ffffff}" />
+ *     <link rel="stylesheet" type="text/css" href="#PRODUIRE{fond=css/macss.css,couleur=ffffff}">
  *     ```
  *
  * @param Champ $p

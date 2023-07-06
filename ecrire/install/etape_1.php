@@ -75,6 +75,6 @@ function install_etape_1_dist() {
 	// ces deux chaines de langues doivent etre reecrites
 #	echo info_etape(_T('info_connexion_mysql'), _T('texte_connexion_mysql').aide ("install1", true));
 	echo info_etape(_T('info_connexion_base_donnee'));
-	echo install_connexion_form($db, $login, $pass, $predef, "\n<input type='hidden' name='chmod' value='$chmod' />", 2);
+	echo install_connexion_form($db, $login, $pass, $predef, "\n<input type='hidden' name='chmod' value='$chmod'>", 2);
 	echo $minipage->installFinPage();
 }

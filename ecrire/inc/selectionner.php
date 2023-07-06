@@ -155,7 +155,7 @@ function construire_selectionner_hierarchie($idom, $liste, $racine, $url, $name,
 	// noeud invisible memorisant l'URL initiale (pour re-initialisation)
 	. $idom6
 	. "')\""
-	. ' />'
+	. '>'
 	. "\n</div>"
 	. ($racine ? "<div>$racine</div>" : '')
 	. "<div id='"

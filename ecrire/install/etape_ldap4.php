@@ -54,8 +54,8 @@ function install_etape_ldap4_dist() {
 
 
 		$res = install_propager(['adresse_ldap', 'port_ldap', 'login_ldap', 'pass_ldap', 'protocole_ldap', 'tls_ldap'])
-			. "<input type='hidden' name='etape' value='ldap5' />"
-			. "<input type='hidden' name='base_ldap' value='" . spip_htmlentities($base_ldap) . "' />"
+			. "<input type='hidden' name='etape' value='ldap5'>"
+			. "<input type='hidden' name='base_ldap' value='" . spip_htmlentities($base_ldap) . "'>"
 			. fieldset(
 				_T('info_statut_utilisateurs_1'),
 				[

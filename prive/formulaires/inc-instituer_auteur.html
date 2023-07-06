@@ -15,7 +15,7 @@
 	<div class="choix choix-webmestre[(#STATUT|=={0minirezo}|non)none-js]">
 		<input type="checkbox" name="webmestre" id="webmestre" value="oui"[(#ENV{webmestre}|=={oui}|oui)checked="checked"]/>
 		<label for="webmestre"><:info_admin_statuer_webmestre:></label>
-		<input type='hidden' name='saisie_webmestre' value='1' />
+		<input type='hidden' name='saisie_webmestre' value='1'>
 	</div>
 ]
 <div class="rubriques_restreintes[(#STATUT|in_array{#GET{statuts_auteurs}}|non)none-js]">
@@ -25,7 +25,7 @@
 			<BOUCLE_restreint(RUBRIQUES){id_auteur}{statut==.*}{si #ENV{statut}|in_array{#GET{statuts_auteurs}}}>
 			#SET{selected,#GET{selected}|push{rubrique|#ID_RUBRIQUE}}
 			</BOUCLE_restreint>
-			<input type='hidden' name='restreintes[]' value='rubrique|0' />
+			<input type='hidden' name='restreintes[]' value='rubrique|0'>
 			[(#SET{label,<:info_ajouter_rubrique:>})]
 	</B_restreint>
 	[<p>(#GET{selected}|count|non|et{#STATUT|=={0minirezo}}|?{<:info_auteur_gere_toutes_rubriques:>})</p>]

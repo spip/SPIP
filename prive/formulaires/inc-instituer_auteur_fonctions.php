@@ -43,7 +43,7 @@ function choisir_rubriques_admin_restreint(
 		$res =
 			"\n<div id='ajax_rubrique'>\n"
 			. "<label>$label</label>\n"
-			. "<input name='id_auteur' value='$id_auteur' type='hidden' />\n"
+			. "<input name='id_auteur' value='$id_auteur' type='hidden'>\n"
 			. $a
 			. "</div>\n"
 
@@ -58,7 +58,7 @@ jQuery(function($){
 			titre=titre.replace(/^\\s+/,'');
 			// Ajouter la rubrique selectionnee au formulaire,
 			// sous la forme d'un input name='rubriques[]'
-			var el = '<input type=\'checkbox\' class=\'checkbox\' checked=\'checked\' name=\'restreintes[]\' value=\''+id_parent+'\' /> ' + '<label><a href=\'?exec=rubrique&amp;id_rubrique='+id_parent+'\' target=\'_blank\'>'+titre+'</a></label>';
+			var el = '<input type=\'checkbox\' class=\'checkbox\' checked=\'checked\' name=\'restreintes[]\' value=\''+id_parent+'\'> ' + '<label><a href=\'?exec=rubrique&amp;id_rubrique='+id_parent+'\' target=\'_blank\'>'+titre+'</a></label>';
 			el = el + '$img_remove';
 			if (!$('$sel_css input[value='+id_parent+']').length) {
 				$('$sel_css').append('<li class=\"rubrique\">'+el+'</li>');

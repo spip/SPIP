@@ -202,9 +202,9 @@ function filtre_text_html_dist($t) {
  **/
 function filtre_audio_x_pn_realaudio($id) {
 	return "
-	<param name='controls' value='PositionSlider' />
-	<param name='controls' value='ImageWindow' />
-	<param name='controls' value='PlayButton' />
-	<param name='console' value='Console$id' />
-	<param name='nojava' value='true' />";
+	<param name='controls' value='PositionSlider'>
+	<param name='controls' value='ImageWindow'>
+	<param name='controls' value='PlayButton'>
+	<param name='console' value='Console$id'>
+	<param name='nojava' value='true'>";
 }

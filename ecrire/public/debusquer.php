@@ -559,7 +559,7 @@ function debusquer_squelette($fonc, $mode, $self) {
 			}
 		} else {
 			if (strlen(trim($res))) {
-				return "<img src='" . chemin_image('debug-xx.svg') . "' alt='afficher-masquer le debug' id='spip-debug-toggle' onclick=\"var x = document.getElementById('spip-debug'); (x.style.display == '' ? x.style.display = 'none' : x.style.display = '');\" /><div id='spip-debug'>$res</div>";
+				return "<img src='" . chemin_image('debug-xx.svg') . "' alt='afficher-masquer le debug' id='spip-debug-toggle' onclick=\"var x = document.getElementById('spip-debug'); (x.style.display == '' ? x.style.display = 'none' : x.style.display = '');\"><div id='spip-debug'>$res</div>";
 			} else {
 				// cas de l'appel sur erreur: montre la page
 				return $GLOBALS['debug_objets']['resultat']['tout'] ?? '';
@@ -583,7 +583,7 @@ function debusquer_squelette($fonc, $mode, $self) {
 	}
 
 	return trim((string) $texte)
-		? "<img src='" . chemin_image('debug-xx.svg') . "' alt='afficher-masquer le debug' id='spip-debug-toggle' onclick=\"var x = document.getElementById('spip-debug'); (x.style.display == '' ? x.style.display = 'none' : x.style.display = '');\" /><div id='spip-debug'>$res"
+		? "<img src='" . chemin_image('debug-xx.svg') . "' alt='afficher-masquer le debug' id='spip-debug-toggle' onclick=\"var x = document.getElementById('spip-debug'); (x.style.display == '' ? x.style.display = 'none' : x.style.display = '');\"><div id='spip-debug'>$res"
 			. "<div id='debug_boucle'><fieldset$id><legend>"
 			. "<a href='" . $self . '#f_' . substr((string) $fonc, 0, 37) . "'> &#8593; "
 			. ($legend ?: $mode)
@@ -843,10 +843,10 @@ function debusquer_entete($titre, $corps) {
 		_T('admin_debug') . ' ' . spip_htmlspecialchars($titre) . ' (' .
 		supprimer_tags(corriger_typo($GLOBALS['meta']['nom_site']))) .
 	")</title>\n" .
-	($c = $GLOBALS['meta']['charset']) ? "<meta charset='$c' />\n" : '' .
+	($c = $GLOBALS['meta']['charset']) ? "<meta charset='$c'>\n" : '' .
 	http_script('', 'jquery.js')
 	. "<link rel='stylesheet' href='" . url_absolue(find_in_path('spip_admin.css'))
-	. "' type='text/css' />" .
+	. "' type='text/css'>" .
 	"</head>\n" .
 	"<body style='margin:0 10px;'>\n" .
 	"<div id='spip-debug-header'>" .

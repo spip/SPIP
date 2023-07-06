@@ -10,7 +10,7 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE
 		[(#REM) un submit pour attraper la touche entree]
-		<div style="display:none;"><input type='submit' class='btn submit' value='<:bouton_upload:>' /></div>
+		<div style="display:none;"><input type='submit' class='btn submit' value='<:bouton_upload:>'></div>
 	]
 		<div class="editer-groupe">
 			<div class="editer editer_logo_on[ (#ENV{logo_on}|non)logo_upload][ (#ENV*{erreurs/logo_on}|oui)erreur]">
@@ -20,7 +20,7 @@
 					[(#ENV{logo_on}|non)
 						<label for="logo_on_#ENV{objet}_#ENV{id_objet}">[(#ENV{_options/label}|sinon{<:info_telecharger_nouveau_logo:>})]</label>[
 						<span class='erreur_message'>(#ENV*{erreurs/logo_on})</span>
-						]<input type='file' class='file' name='logo_on' size="[(#ENV{_options/size_input}|sinon{12})]" id='logo_on_#ENV{objet}_#ENV{id_objet}' value="" />
+						]<input type='file' class='file' name='logo_on' size="[(#ENV{_options/size_input}|sinon{12})]" id='logo_on_#ENV{objet}_#ENV{id_objet}' value="">
 						#SET{valider,' '}
 					]
 				]
@@ -36,7 +36,7 @@
 						<div [(#ENV{_show_upload_off}|non)style="display:none;" #SET{hide,' '}]]>
 						<label for="logo_off"><:info_telecharger_nouveau_logo:></label>[
 						<span class='erreur_message'>(#ENV*{erreurs/logo_off})</span>
-						]<input type='file' class='file' name='logo_off' size="[(#ENV{_options/size_input}|sinon{12})]" id='logo_off_#ENV{objet}_#ENV{id_objet}' value="" />
+						]<input type='file' class='file' name='logo_off' size="[(#ENV{_options/size_input}|sinon{12})]" id='logo_off_#ENV{objet}_#ENV{id_objet}' value="">
 						#SET{valider,' '}
 						</div>
 					]

@@ -2350,10 +2350,10 @@ function generer_form_ecrire($script, $corps, $atts = '', $submit = '') {
 	. "' "
 	. ($atts ?: " method='post'")
 	. "><div>\n"
-	. "<input type='hidden' name='exec' value='$script1' />"
+	. "<input type='hidden' name='exec' value='$script1'>"
 	. $corps
 	. (!$submit ? '' :
-		("<div style='text-align: " . $GLOBALS['spip_lang_right'] . "'><input class='fondo submit btn' type='submit' value=\"" . entites_html($submit) . '" /></div>'))
+		("<div style='text-align: " . $GLOBALS['spip_lang_right'] . "'><input class='fondo submit btn' type='submit' value=\"" . entites_html($submit) . '"></div>'))
 	. "</div></form>\n";
 }
 
@@ -2384,7 +2384,7 @@ function generer_form_action($script, $corps, $atts = '', $public = false) {
 	$atts .
 	">\n" .
 	'<div>' .
-	"\n<input type='hidden' name='action' value='$script' />" .
+	"\n<input type='hidden' name='action' value='$script'>" .
 	$corps .
 	'</div></form>';
 }

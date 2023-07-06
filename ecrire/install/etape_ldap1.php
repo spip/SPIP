@@ -49,7 +49,7 @@ function install_etape_ldap1_dist() {
 	);
 
 	echo generer_form_ecrire('install', (
-		"\n<input type='hidden' name='etape' value='ldap2' />"
+		"\n<input type='hidden' name='etape' value='ldap2'>"
 		. fieldset(
 			_T('entree_adresse_annuaire'),
 			[

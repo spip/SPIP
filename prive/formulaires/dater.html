@@ -6,7 +6,7 @@
 	<p hidden id="format_heure_#GET{id}"><:format_heure_attendu:></p>
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
-		<input type='submit' class='over' name='changer' value='<:bouton_changer:>' />
+		<input type='submit' class='over' name='changer' value='<:bouton_changer:>'>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE
@@ -61,8 +61,8 @@
 		<div class='boutons'[(#ENV{_saisie_en_cours}|non)style="display:none;"]>
 			<span class='image_loading'>&nbsp;</span>
 			<div class="groupe-btns">
-				<input type='submit' class='btn submit btn_secondaire' name='annuler' value='<:bouton_annuler:>' />
-				<input type='submit' class='btn submit' name='changer' value='<:bouton_changer:>' />
+				<input type='submit' class='btn submit btn_secondaire' name='annuler' value='<:bouton_annuler:>'>
+				<input type='submit' class='btn submit' name='changer' value='<:bouton_changer:>'>
 			</div>
 		</div>
 	</div></form>

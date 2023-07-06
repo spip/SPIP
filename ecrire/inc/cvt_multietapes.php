@@ -144,7 +144,7 @@ function cvtmulti_sauver_post($form, $je_suis_poste, &$valeurs) {
 		if (!isset($valeurs['_hidden'])) {
 			$valeurs['_hidden'] = '';
 		}
-		$valeurs['_hidden'] .= "<input type='hidden' name='cvtm_prev_post' value='$c' />";
+		$valeurs['_hidden'] .= "<input type='hidden' name='cvtm_prev_post' value='$c'>";
 		// marquer comme fait, pour eviter double encodage (unipotence)
 		$valeurs['_cvtm_prev_post'] = true;
 	}

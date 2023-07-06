@@ -9,7 +9,7 @@
 				<label for="titre"><:info_titre|label_nettoyer:><em class="aide">#AIDER{titre}</em></label>[
 				<span class='erreur_message'>(#ENV*{erreurs/titre})</span>
 				]<input type='text' class='text' name='titre' id='titre' value="[(#ENV{titre,''})]"
-				placeholder="<:titre_nouvelle_rubrique|attribut_html:>" />
+				placeholder="<:titre_nouvelle_rubrique|attribut_html:>">
 	    </div>
 
 	 	[<div class="editer editer_parent[ (#ENV*{erreurs/id_parent}|oui)erreur]">
@@ -34,7 +34,7 @@
 	  </div>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
-	  <p class="boutons"><input type='submit' class='btn submit' value='<:bouton_enregistrer:>' /></p>
+	  <p class="boutons"><input type='submit' class='btn submit' value='<:bouton_enregistrer:>'></p>
 	</div></form>
 	]
 </div>

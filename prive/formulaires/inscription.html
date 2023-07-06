@@ -12,21 +12,21 @@
 			<div class='editer saisie_nom_inscription obligatoire[ (#ENV*{erreurs/nom_inscription}|oui)erreur]'>
 				<label for="nom_inscription"><:entree_nom_pseudo:> <em class="obligatoire"><:info_obligatoire_02:></em></label>
 				[<span class="erreur_message">(#ENV*{erreurs/nom_inscription})</span>]
-				<input type="text" class="text" name="nom_inscription" id="nom_inscription" value="#ENV{nom_inscription}" size="30" [(#HTML5) [(#ENV{focus}|=={nom_inscription}|oui)autofocus="autofocus" ]required="required"] autocapitalize="off" autocorrect="off" />
+				<input type="text" class="text" name="nom_inscription" id="nom_inscription" value="#ENV{nom_inscription}" size="30" [(#HTML5) [(#ENV{focus}|=={nom_inscription}|oui)autofocus="autofocus" ]required="required"] autocapitalize="off" autocorrect="off">
 			</div>
 			<div class='editer saisie_mail_inscription obligatoire[ (#ENV*{erreurs/mail_inscription}|oui)erreur]'>
 				<label for="mail_inscription"><:entree_adresse_email:> <em class="obligatoire"><:info_obligatoire_02:></em></label>
 				[<span class="erreur_message">(#ENV*{erreurs/mail_inscription})</span>]
-				<input[ (#HTML5|?{required="required" type="email" class="text email",type="text" class="text"})] name="mail_inscription" id="mail_inscription" value="#ENV{mail_inscription}" size="30"[(#ENV{focus}|=={mail_inscription}|et{#HTML5}|oui) autofocus="autofocus"] autocapitalize="off" autocorrect="off" />
+				<input[ (#HTML5|?{required="required" type="email" class="text email",type="text" class="text"})] name="mail_inscription" id="mail_inscription" value="#ENV{mail_inscription}" size="30"[(#ENV{focus}|=={mail_inscription}|et{#HTML5}|oui) autofocus="autofocus"] autocapitalize="off" autocorrect="off">
 			</div>
 		</div>
 	</fieldset>
 	[(#REM) Piege a robots spammeurs ]
 	<p style="display: none;">
 		<label for="nobot"><:antispam_champ_vide:></label>
-		<input type="text" class="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" />
+		<input type="text" class="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10">
 	</p>
-	<p class="boutons"><input type="submit" class="btn submit" value="<:login_sinscrire|spip_ucfirst|attribut_html:>" /></p>
+	<p class="boutons"><input type="submit" class="btn submit" value="<:login_sinscrire|spip_ucfirst|attribut_html:>"></p>
  </form>
 [<script><!--
 document.getElementById('(#ENV{focus})').focus();

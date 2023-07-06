@@ -224,7 +224,7 @@ jQuery.fn.positionner = function(force, setfocus) {
 jQuery.spip.virtualbuffer_id='spip_virtualbufferupdate';
 jQuery.spip.initReaderBuffer = function(){
 	if (jQuery('#'+jQuery.spip.virtualbuffer_id).length) return;
-	jQuery('body').append('<div style="float:left;width:0;height:0;position:absolute;left:-5000px;top:-5000px;"><input type="hidden" name="'+jQuery.spip.virtualbuffer_id+'" id="'+jQuery.spip.virtualbuffer_id+'" value="0" /></div>');
+	jQuery('body').append('<div style="float:left;width:0;height:0;position:absolute;left:-5000px;top:-5000px;"><input type="hidden" name="'+jQuery.spip.virtualbuffer_id+'" id="'+jQuery.spip.virtualbuffer_id+'" value="0"></div>');
 }
 jQuery.spip.updateReaderBuffer = function(){
 	var i = jQuery('#'+jQuery.spip.virtualbuffer_id);
@@ -278,7 +278,7 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 			jQuery(leform).prepend("<p class='error ajax-error none'>"+msg+"</p>").find('.ajax-error').show('fast');
 			jQuery(cible).closest('.ajax-form-container').endLoading(true);
 		}
-		jQuery(this).prepend("<input type='hidden' name='var_ajax' value='form' />")
+		jQuery(this).prepend("<input type='hidden' name='var_ajax' value='form'>")
 		.ajaxForm({
 			beforeSubmit: function(){
 				// memoriser le bouton clique, en cas de repost non ajax
@@ -311,10 +311,10 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 					if (leclk){
 						var n = leclk.name;
 						if (n && !leclk.disabled) {
-							jQuery(leform).prepend("<input type='hidden' name='"+n+"' value='"+leclk.value+"' />");
+							jQuery(leform).prepend("<input type='hidden' name='"+n+"' value='"+leclk.value+"'>");
 							if (leclk.type === "image") {
-								jQuery(leform).prepend("<input type='hidden' name='"+n+".x' value='"+leform.clk_x+"' />");
-								jQuery(leform).prepend("<input type='hidden' name='"+n+".y' value='"+leform.clk_y+"' />");
+								jQuery(leform).prepend("<input type='hidden' name='"+n+".x' value='"+leform.clk_x+"'>");
+								jQuery(leform).prepend("<input type='hidden' name='"+n+".y' value='"+leform.clk_y+"'>");
 							}
 						}
 					}
@@ -813,7 +813,7 @@ jQuery.fn.ajaxbloc = function() {
 			var url = jQuery(this).attr('action').split('#');
 			var scrollwhensubmit = (!jQuery(this).is('.noscroll') && !jQuery('.submit',this).is('.noscroll'));
 			jQuery(this)
-			.prepend("<input type='hidden' name='var_ajax' value='1' /><input type='hidden' name='var_ajax_env' value='"+(ajax_env)+"' />"+(url[1]?"<input type='hidden' name='var_ajax_ancre' value='"+url[1]+"' />":""))
+			.prepend("<input type='hidden' name='var_ajax' value='1'><input type='hidden' name='var_ajax_env' value='"+(ajax_env)+"'>"+(url[1]?"<input type='hidden' name='var_ajax_ancre' value='"+url[1]+"'>":""))
 			.ajaxForm({
 				beforeSubmit: function(){
 					jQuery(blocfrag).animateLoading();

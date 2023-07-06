@@ -37,10 +37,10 @@ function affiche_boutons_admin($contenu) {
 
 	// Inserer le css d'admin
 	$css = "<link rel='stylesheet' href='" . url_absolue(direction_css(find_in_path('spip_admin.css')))
-		. "' type='text/css' />\n";
+		. "' type='text/css'>\n";
 	if ($f = find_in_path('spip_admin_perso.css')) {
 		$css .= "<link rel='stylesheet' href='"
-			. url_absolue(direction_css($f)) . "' type='text/css' />\n";
+			. url_absolue(direction_css($f)) . "' type='text/css'>\n";
 	}
 
 	if (

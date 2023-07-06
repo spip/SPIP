@@ -312,7 +312,7 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 	if (strlen($source) < 1) {
 		if (!str_starts_with($img, '<img ')) {
 			$source = $img;
-			$img = "<img src='$source' />";
+			$img = "<img src='$source'>";
 		} else {
 			// pas d'attribut src sur cette balise <img../>
 			return false;

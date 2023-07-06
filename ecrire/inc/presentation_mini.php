@@ -57,7 +57,7 @@ function debut_gauche() {
  * @return string Code HTML
  */
 function fin_gauche() {
- return "</div></div><br class = 'nettoyeur' />";
+ return "</div></div><br class = 'nettoyeur'>";
 }
 
 /**
@@ -182,7 +182,7 @@ function html_tests_js() {
 			'_TESTER_NOSCRIPT',
 			"<noscript>\n<div style='display:none;'><img src='"
 			. generer_url_ecrire('test_ajax', 'js=-1')
-			. "' width='1' height='1' alt='' /></div></noscript>\n"
+			. "' width='1' height='1' alt=''></div></noscript>\n"
 		);
 	}
 
@@ -290,8 +290,8 @@ function formulaire_recherche($page, $complement = '') {
 		$onfocus = '';
 	}
 
-	$form = '<input type="text" size="10" value="' . $recherche_aff . '" name="recherche" class="recherche" accesskey="r"' . $onfocus . ' />';
-	$form .= "<input type='image' src='" . chemin_image('rechercher-20.png') . "' name='submit' class='submit' alt='" . _T('info_rechercher') . "' />";
+	$form = '<input type="text" size="10" value="' . $recherche_aff . '" name="recherche" class="recherche" accesskey="r"' . $onfocus . '>';
+	$form .= "<input type='image' src='" . chemin_image('rechercher-20.png') . "' name='submit' class='submit' alt='" . _T('info_rechercher') . "'>";
 
 	return "<div class='spip_recherche'>" . generer_form_ecrire($page, $form . $complement, " method='get'") . '</div>';
 }

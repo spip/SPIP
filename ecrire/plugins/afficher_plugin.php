@@ -142,7 +142,7 @@ function plugin_checkbox($id_input, $file, $actif) {
 	return "<div class='check'>\n"
 	. "<input type='checkbox' name='s$name' id='label_$id_input'"
 	. ($actif ? " checked='checked'" : '')
-	. " class='checkbox'  value='O' />"
+	. " class='checkbox'  value='O'>"
 	. "\n<label for='label_$id_input'>" . _T('activer_plugin') . '</label>'
 	. '</div>';
 }

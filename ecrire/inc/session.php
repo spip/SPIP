@@ -695,7 +695,7 @@ function fichier_session($alea, $tantpis = false) {
  * @return string
  */
 function rejouer_session() {
-	return '<img src="' . generer_url_action('cookie', 'change_session=oui', true) . '" width="0" height="0" alt="" />';
+	return '<img src="' . generer_url_action('cookie', 'change_session=oui', true) . '" width="0" height="0" alt="">';
 }
 
 

@@ -111,7 +111,7 @@ function saisie_langues_utiles($name, $selection) {
 			. (isset($langues_trad[$code_langue]) ? ' traduite' : '')
 			. "'>"
 			. "<input type='hidden' name='{$name}[]' value='$code_langue'>" // necessaire ...
-			. "<input type='checkbox' name='{$name}[]' id='{$name}_$code_langue' value='$code_langue' checked='checked' disabled='disabled' />"
+			. "<input type='checkbox' name='{$name}[]' id='{$name}_$code_langue' value='$code_langue' checked='checked' disabled='disabled'>"
 			. "<label for='{$name}_$code_langue'>" . $nom_langue . "&nbsp;&nbsp; <span class='code_langue'>[$code_langue]</span></label>"
 			. '</li>';
 	}

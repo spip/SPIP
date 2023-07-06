@@ -1,5 +1,5 @@
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
-<h3 class='titrem'><img src="#CHEMIN_IMAGE{reseau-xx.svg}" class="cadre-icone" /><:info_sites_proxy:>#AIDER{confhttpproxy}</h3>
+<h3 class='titrem'><img src="#CHEMIN_IMAGE{reseau-xx.svg}" class="cadre-icone"><:info_sites_proxy:>#AIDER{confhttpproxy}</h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok" role="status">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur" role="alert">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
@@ -26,20 +26,20 @@
 				<label for="#GET{name}"><:info_exceptions_proxy:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<p class="explication"><:pas_de_proxy_pour{exemple=#GET{exemple}}:></p>
-				<input type="text" class="text" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}" />
+				<input type="text" class="text" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}">
 			</div>
 			#SET{name,test_proxy}#SET{erreurs,#ENV*{erreurs/#GET{name}}}
 			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]"[(#ENV{http_proxy}|strlen|non)style='display:none;']>
 				<label for="#GET{name}"><:info_url_test_proxy:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<p class="explication"><:texte_test_proxy:></p>
-				<input type="text" class="text" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}" />
-				<input type='submit' class='btn submit' name="tester_proxy" value='<:bouton_test_proxy:>' />
+				<input type="text" class="text" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}">
+				<input type='submit' class='btn submit' name="tester_proxy" value='<:bouton_test_proxy:>'>
 			</div>
 		</div>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
-	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='btn submit' value='<:bouton_enregistrer:>' /></p>
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='btn submit' value='<:bouton_enregistrer:>'></p>
 	</div></form>
 	]
 </div>

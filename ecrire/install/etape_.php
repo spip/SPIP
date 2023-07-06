@@ -34,11 +34,11 @@ function install_etape__dist() {
 	} else {
 		include_spip('inc/presentation'); // pour info_copyright
 
-		$res = "<div class='petit-centre'><img alt='SPIP' class='logo' src='" . chemin_image('logo-spip.png') . "' />\n" .
+		$res = "<div class='petit-centre'><img alt='SPIP' class='logo' src='" . chemin_image('logo-spip.png') . "'>\n" .
 			"<p class='small'>" . info_copyright() . "</p></div>\n" .
 			'<p>' . _T('install_select_langue') . '</p>' .
 			'<div>' . $menu_langues . "</div>\n" .
-			generer_form_ecrire('install', "<input type='hidden' name='etape' value='chmod' />" . bouton_suivant());
+			generer_form_ecrire('install', "<input type='hidden' name='etape' value='chmod'>" . bouton_suivant());
 
 		$minipage = new Installation();
 		echo $minipage->page($res);

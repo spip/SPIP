@@ -250,7 +250,7 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem = 0) {
 	$att = " id='id_parent' name='id_parent'\nclass='selecteur_parent verdana1'";
 
 	if (preg_match(',^<option[^<>]*value=.(\d*).[^<>]*>([^<]*)</option>$,', $opt, $r)) {
-		$r = "<input$att type='hidden' value='" . $r[1] . "' />" . $r[2];
+		$r = "<input$att type='hidden' value='" . $r[1] . "'>" . $r[2];
 	} else {
 		$r = '<select' . $att . " size='1'>\n$opt</select>\n";
 	}
@@ -355,13 +355,13 @@ function construire_selecteur($url, $js, $idom, $name, $init = '', $id = 0) {
 		. chemin_image('loader.svg')
 		. "' class='loader' id='img_"
 		. $idom
-		. "'\nstyle='visibility: hidden;' alt='*' />"
+		. "'\nstyle='visibility: hidden;' alt='*'>"
 		. "<input id='titreparent' name='titreparent' class='text'"
 		. $init
-		. ' />'
+		. '>'
 		. "<input type='hidden' id='$name' name='$name' value='"
 		. $id
-		. "' /><div class='nettoyeur'></div></div><div id='"
+		. "'><div class='nettoyeur'></div></div><div id='"
 		. $idom
 		. "'\nstyle='display: none;'></div>";
 }

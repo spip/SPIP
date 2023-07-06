@@ -88,8 +88,8 @@ function etape_ldap5_suite() {
 	);
 
 	echo generer_form_ecrire('install', (
-		"<input type='hidden' name='etape' value='3' />" .
-		"<input type='hidden' name='ldap_present' value='true' />"
+		"<input type='hidden' name='etape' value='3'>" .
+		"<input type='hidden' name='ldap_present' value='true'>"
 		. bouton_suivant()));
 
 	echo $minipage->installFinPage();

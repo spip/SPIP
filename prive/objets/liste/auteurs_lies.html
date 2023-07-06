@@ -8,7 +8,7 @@
 
 #SET{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
 #SET{debut,#ENV{debutautl,#EVAL{_request("debutautl");}}}
-<input type="hidden" name="debutautl" value="#GET{debut}" />
+<input type="hidden" name="debutautl" value="#GET{debut}">
 <B_liste_aut>
 [(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
 a mis a jour la valeur avec la page reelle]

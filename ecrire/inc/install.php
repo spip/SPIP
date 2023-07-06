@@ -229,7 +229,7 @@ function bouton_suivant($code = '') {
 
 	return "\n<p class='boutons suivant'><input id='" . $id . "' type='submit'\nvalue=\"" .
 	$code .
-	" >>\" /></p>\n";
+	" >>\"></p>\n";
 }
 
 function info_progression_etape($en_cours, $phase, $dir, $erreur = false) {
@@ -306,7 +306,7 @@ function fieldset_champs($champs = []) {
 			$fieldset .= '<input ' . $class . "type='" . $type . "' id='" . $nom . "' name='" . $nom . "'\nvalue='" . $contenu['valeur'] . "'"
 				. (preg_match(',^(pass|login),', (string) $nom) ? " autocomplete='off'" : '')
 				. ((isset($contenu['required']) && $contenu['required']) ? " required='required'" : '')
-				. " />\n";
+				. ">\n";
 		}
 	}
 
@@ -348,7 +348,7 @@ function install_connexion_form($db, $login, #[\SensitiveParameter] $pass, $pred
 	$server_db = (is_string($predef[0])) ? $predef[0] : '';
 
 	return generer_form_ecrire('install', (
-		"\n<input type='hidden' name='etape' value='$etape' />"
+		"\n<input type='hidden' name='etape' value='$etape'>"
 		. $hidden
 		. (_request('echec') ?
 			('<p><b>' . _T('avis_connexion_echec_1') .
@@ -390,7 +390,7 @@ function install_connexion_form($db, $login, #[\SensitiveParameter] $pass, $pred
 		});')
 
 		. ($server_db
-			? '<input type="hidden" name="server_db" value="' . $server_db . '" />'
+			? '<input type="hidden" name="server_db" value="' . $server_db . '">'
 			. (($predef[0])
 				? ('<h3>' . _T('install_serveur_hebergeur') . '</h3>')
 				: '')
@@ -461,20 +461,20 @@ function install_connexion_form($db, $login, #[\SensitiveParameter] $pass, $pred
 function predef_ou_cache($adresse_db, $login_db, $pass_db, $server_db) {
 	return ((defined('_INSTALL_HOST_DB'))
 		? ''
-		: "\n<input type='hidden' name='adresse_db'  value=\"" . spip_htmlspecialchars($adresse_db) . '" />'
+		: "\n<input type='hidden' name='adresse_db'  value=\"" . spip_htmlspecialchars($adresse_db) . '">'
 	)
 	. ((defined('_INSTALL_USER_DB'))
 		? ''
-		: "\n<input type='hidden' name='login_db' value=\"" . spip_htmlspecialchars($login_db) . '" />'
+		: "\n<input type='hidden' name='login_db' value=\"" . spip_htmlspecialchars($login_db) . '">'
 	)
 	. ((defined('_INSTALL_PASS_DB'))
 		? ''
-		: "\n<input type='hidden' name='pass_db' value=\"" . spip_htmlspecialchars($pass_db) . '" />'
+		: "\n<input type='hidden' name='pass_db' value=\"" . spip_htmlspecialchars($pass_db) . '">'
 	)
 
 	. ((defined('_INSTALL_SERVER_DB'))
 		? ''
-		: "\n<input type='hidden' name='server_db' value=\"" . spip_htmlspecialchars($server_db) . '" />'
+		: "\n<input type='hidden' name='server_db' value=\"" . spip_htmlspecialchars($server_db) . '">'
 	);
 }
 
@@ -504,7 +504,7 @@ function install_etape_liste_bases($server_db, $login_db, $disabled = []) {
 			&& !$dis
 			&& ($nom == $login_db || $GLOBALS['table_prefix'] == $nom)
 		) {
-			$checked = "<input$base checked='checked' />\n$label";
+			$checked = "<input$base checked='checked'>\n$label";
 		} else {
 			$bases[] = "<input$base />\n$label";
 		}
@@ -526,7 +526,7 @@ function install_propager($hidden) {
 	$res = '';
 	foreach ($hidden as $k) {
 		$v = spip_htmlentities(_request($k));
-		$res .= "<input type='hidden' name='$k' value='$v' />";
+		$res .= "<input type='hidden' name='$k' value='$v'>";
 	}
 
 	return $res;

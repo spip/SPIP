@@ -108,7 +108,7 @@ function formulaires_instituer_objet_charger_dist($objet, $id_objet, $retour = '
 		'_publiable' => $publiable,
 		'_label' => $desc['texte_changer_statut'] ?? 'texte_article_statut',
 		'_aide' => $desc['aide_changer_statut'] ?? '',
-		'_hidden' => "<input type='hidden' name='statut_old' value='" . $v['statut'] . "' />",
+		'_hidden' => "<input type='hidden' name='statut_old' value='" . $v['statut'] . "'>",
 	];
 }
 

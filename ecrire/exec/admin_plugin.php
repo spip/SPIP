@@ -192,7 +192,7 @@ function admin_plug_args($quoi, $erreur, $format) {
 	if ($corps) {
 		$corps .= "\n<div class='boutons' style='display:none;'>"
 			. "<input type='submit' class='submit save' value='" . _T('bouton_enregistrer')
-			. "' />"
+			. "'>"
 			. '</div>';
 	}
 

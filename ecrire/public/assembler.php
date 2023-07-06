@@ -773,7 +773,7 @@ function page_base_href(&$texte) {
 			include_spip('inc/filtres_mini');
 			// ajouter un base qui reglera tous les liens relatifs
 			$href_base = url_absolue('./');
-			$base = "\n<base href=\"$href_base\" />";
+			$base = "\n<base href=\"$href_base\">";
 			if (($pos = strpos($head, '<head>')) !== false) {
 				$head = substr_replace($head, $base, $pos + 6, 0);
 			} elseif (preg_match(',<head[^>]*>,i', $head, $r)) {

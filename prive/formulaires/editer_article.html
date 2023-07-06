@@ -4,25 +4,25 @@
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE
-		<input type='hidden' name='id_article' value='#ENV{id_article}' />
+		<input type='hidden' name='id_article' value='#ENV{id_article}'>
 		<div class="editer-groupe">
 			[(#CONFIG{articles_surtitre}|=={non}|?{#ENV{surtitre,''},' '}|oui)
 			<div class="editer editer_surtitre[ (#ENV*{erreurs/surtitre}|oui)erreur]">
 				<label for="surtitre"><:texte_sur_titre:><em class="aide">#AIDER{surtitre}</em></label>[
 				<span class='erreur_message'>(#ENV*{erreurs/surtitre})</span>
-				]<input type='text' class='text' name='surtitre' id='surtitre'[ lang='(#LANGUE)'] value="[(#ENV{surtitre})]" />
+				]<input type='text' class='text' name='surtitre' id='surtitre'[ lang='(#LANGUE)'] value="[(#ENV{surtitre})]">
 			</div>]
 			<div class="editer editer_titre obligatoire[ (#ENV*{erreurs/titre}|oui)erreur]">
 				<label for="titre"><:info_titre|label_nettoyer:><em class="aide">#AIDER{titre}</em></label>[
 				<span class='erreur_message'>(#ENV*{erreurs/titre})</span>
 				]<input type='text' class='text' name='titre' id='titre'[ lang='(#LANGUE)'] value="[(#ENV{titre,''})]"
-				placeholder="<:info_nouvel_article|attribut_html:>" />
+				placeholder="<:info_nouvel_article|attribut_html:>">
 			</div>
 			[(#CONFIG{articles_soustitre}|=={non}|?{#ENV{soustitre,''},' '}|oui)
 			<div class="editer editer_soustitre[ (#ENV*{erreurs/soustitre}|oui)erreur]">
 				<label for="soustitre"><:texte_sous_titre:><em class="aide">#AIDER{soustitre}</em></label>[
 				<span class='erreur_message'>(#ENV*{erreurs/soustitre})</span>
-				]<input type='text' class='text' name='soustitre' id='soustitre'[ lang='(#LANGUE)'] value="[(#ENV{soustitre})]" />
+				]<input type='text' class='text' name='soustitre' id='soustitre'[ lang='(#LANGUE)'] value="[(#ENV{soustitre})]">
 			</div>]
 			[<div class="editer editer_parent[ (#ENV*{erreurs/id_parent}|oui)erreur]">
 				<label for="id_parent"><:titre_cadre_interieur_rubrique:><em class="aide">#AIDER{id_parent}</em></label>[
@@ -52,12 +52,12 @@
 						<div class="editer editer_nom_site[ (#ENV*{erreurs/nom_site}|oui)erreur]">
 							<label for="nom_site"><:info_titre:></label>[
 							<span class='erreur_message'>(#ENV*{erreurs/nom_site})</span>
-							]<input type='text' class='text' name='nom_site' id='nom_site'[ lang='(#LANGUE)'] value="[(#ENV{nom_site})]" />
+							]<input type='text' class='text' name='nom_site' id='nom_site'[ lang='(#LANGUE)'] value="[(#ENV{nom_site})]">
 						</div>
 						<div class="editer editer_url_site[ (#ENV*{erreurs/url_site}|oui)erreur]">
 							<label for="url_site"><:info_url:></label>[
 							<span class='erreur_message'>(#ENV*{erreurs/url_site})</span>
-							]<input type='text' class='text' name='url_site' id='url_site' value="[(#ENV{url_site})]" />
+							]<input type='text' class='text' name='url_site' id='url_site' value="[(#ENV{url_site})]">
 						</div>
 					</div>
 				</fieldset>
@@ -80,7 +80,7 @@
 
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
-		<p class='boutons'><input type='submit' name="save" class='btn submit' value='<:bouton_enregistrer:>' /></p>
+		<p class='boutons'><input type='submit' name="save" class='btn submit' value='<:bouton_enregistrer:>'></p>
 	</div></form>
 	]
 </div>

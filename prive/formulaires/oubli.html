@@ -12,16 +12,16 @@
 			<div class="editer saisie_oubli obligatoire[ (#ENV*{erreurs/oubli}|oui)erreur]">
 				<label for="oubli"><:entree_adresse_email:></label>
 				[<span class='erreur_message'>(#ENV*{erreurs/oubli})</span>]
-				<input[ (#HTML5|?{type="email" class="text email" autofocus="autofocus" required="required",type="text" class="text"})] name='oubli' id='oubli' value="#ENV{oubli}" autocapitalize="off" autocorrect="off" />
+				<input[ (#HTML5|?{type="email" class="text email" autofocus="autofocus" required="required",type="text" class="text"})] name='oubli' id='oubli' value="#ENV{oubli}" autocapitalize="off" autocorrect="off">
 			</div>
 		</div>
 	</fieldset>
 	[(#REM) Piege a robots spammeurs ]
 	<p style="display: none;">
 		<label for="nobot"><:antispam_champ_vide:></label>
-		<input type="text" class="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" />
+		<input type="text" class="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10">
 	</p>
-	<p class="boutons"><input type="submit" class="btn submit" value="<:pass_ok:>" /></p>
+	<p class="boutons"><input type="submit" class="btn submit" value="<:pass_ok:>"></p>
 </form>
 ]
 </div>

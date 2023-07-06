@@ -19,7 +19,7 @@
 	<div id="chercher_rubrique">
 	[(#BOITE_OUVRIR{<:titre_cadre_interieur_rubrique:>,'simple'})]
 	[(#VAL|chercher_rubrique{#ENV{id_objet},#ENV{id_parent},#ENV{objet},#ENV{id_secteur,#GET{id_secteur}},#ENV{restreint,#ENV{objet}|deplacement_restreint{#INFO_STATUT{#ENV{objet},#ENV{id_objet}}}},true,form_simple})]
-	<br class="nettoyeur" />
+	<br class="nettoyeur">
 	#BOITE_FERMER
 	</div>
 	]

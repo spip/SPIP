@@ -50,7 +50,7 @@ function cvtconf_formulaire_charger($flux) {
 					var_dump($flux['data']);
 				}
 				// reinjecter pour la trace au traitement
-				$flux['data']['_hidden'] = "<input type='hidden' name='var_mode' value='configurer' />";
+				$flux['data']['_hidden'] = "<input type='hidden' name='var_mode' value='configurer'>";
 			}
 		}
 	}

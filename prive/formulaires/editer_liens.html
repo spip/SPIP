@@ -9,11 +9,11 @@
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE
 		<input type="hidden" name="visible" value="#ENV{visible,0}" id="visible-#ENV{id}"/>
-		<div class="over"><span class='image_loading'>&nbsp;</span><input type='submit' class='btn submit' value='<:bouton_changer:>' /></div>
+		<div class="over"><span class='image_loading'>&nbsp;</span><input type='submit' class='btn submit' value='<:bouton_changer:>'></div>
 	]
 
 		<INCLURE{fond=prive/objets/liste/#ENV{_vue_liee},action='',env,ajax}>
-		[<div class="action"><input type="hidden" name="_oups" value='(#ENV{_oups})' /><input type="submit" class="submit btn_mini btn_secondaire" name="annuler_oups" value="Ooops" /></div>]
+		[<div class="action"><input type="hidden" name="_oups" value='(#ENV{_oups})'><input type="submit" class="submit btn_mini btn_secondaire" name="annuler_oups" value="Ooops"></div>]
 
 		[(#ENV{visible,0}|et{#ENV{editable}}|oui)
 			<div class="selecteur[(#ENV{recherche}|oui)filtre]">
@@ -31,7 +31,7 @@
 						><:bouton_fermer:></a>
 				</div>
 				<p class="boutons">
-					<input type="submit" class="btn btn_mini submit fermer" name="fermer" value="<:bouton_fermer:>"	onclick="jQuery(this).parents('div.selecteur').hide('fast').siblings('.toggle_box_link').show();jQuery('#visible-#ENV{id}').attr('value',0);return false;" />
+					<input type="submit" class="btn btn_mini submit fermer" name="fermer" value="<:bouton_fermer:>"	onclick="jQuery(this).parents('div.selecteur').hide('fast').siblings('.toggle_box_link').show();jQuery('#visible-#ENV{id}').attr('value',0);return false;">
 				</p>
 			</div>
 			<div class="toggle_box_link" style="display:none;">

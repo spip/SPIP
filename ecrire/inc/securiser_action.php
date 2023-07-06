@@ -156,11 +156,11 @@ function securiser_action_auteur($action, $arg, $redirect = '', $mode = false, $
 	$hash = calculer_action_auteur("$action-$arg");
 	$att .= " style='margin: 0px; border: 0px'";
 	if ($redirect) {
-		$redirect = "\n\t\t<input name='redirect' type='hidden' value='" . str_replace("'", '&#39;', $redirect) . "' />";
+		$redirect = "\n\t\t<input name='redirect' type='hidden' value='" . str_replace("'", '&#39;', $redirect) . "'>";
 	}
 	$mode .= $redirect . "
-<input name='hash' type='hidden' value='$hash' />
-<input name='arg' type='hidden' value='$arg' />";
+<input name='hash' type='hidden' value='$hash'>
+<input name='arg' type='hidden' value='$arg'>";
 
 	return generer_form_action($action, $mode, $att, $public);
 }

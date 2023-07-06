@@ -209,7 +209,7 @@ function menu_langues($nom_select, $default = '') {
 		$base,
 		$cible,
 		(select_langues($nom_select, $change, $ret)
-			. "<noscript><div style='display:inline'><input type='submit' class='fondo' value='" . _T('bouton_changer') . "' /></div></noscript>"),
+			. "<noscript><div style='display:inline'><input type='submit' class='fondo' value='" . _T('bouton_changer') . "'></div></noscript>"),
 		" method='post'"
 	);
 }

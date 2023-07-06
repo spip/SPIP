@@ -10,7 +10,7 @@
 		<div class='editer editer_activer_menudev[ (#ENV{erreurs/activer_menudev}|oui)erreur]'>
 			[<span class='erreur_message'>(#ENV{erreurs/activer_menudev})</span>]
 			<div class='choix'>
-				<input type="hidden" name="activer_menudev" value="non" />
+				<input type="hidden" name="activer_menudev" value="non">
 				<input class='checkbox' type="checkbox" name="activer_menudev" value='oui' [checked="(#ENV{activer_menudev,non}|=={oui}|?{checked})"] id="activer_menudev"/>
 				<label for="activer_menudev"><:info_activer_menu_developpement:></label>
 			</div>
@@ -43,9 +43,9 @@
 		<!--extra-->
 		<p class='boutons'>
 			<span class='image_loading'>&nbsp;</span>
-			<input type='submit' class='hidden' value='<:bouton_enregistrer|attribut_html:>' aria-hidden='true' />
-			<input type='submit' name="reset" class='btn submit secondaire' value='<:bouton_reinitialiser_aux_valeurs_par_defaut|attribut_html:>' />
-			<input type='submit' class='btn submit principal' value='<:bouton_enregistrer|attribut_html:>' />
+			<input type='submit' class='hidden' value='<:bouton_enregistrer|attribut_html:>' aria-hidden='true'>
+			<input type='submit' name="reset" class='btn submit secondaire' value='<:bouton_reinitialiser_aux_valeurs_par_defaut|attribut_html:>'>
+			<input type='submit' class='btn submit principal' value='<:bouton_enregistrer|attribut_html:>'>
 		</p>
 	</div></form>
 </div>

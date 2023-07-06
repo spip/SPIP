@@ -47,7 +47,7 @@ function exec_upgrade_dist() {
 			)
 			. generer_form_ecrire(
 				'upgrade',
-				"<input type='hidden' name='reinstall' value='non' />",
+				"<input type='hidden' name='reinstall' value='non'>",
 				'',
 				_T('bouton_relancer_installation')
 			)

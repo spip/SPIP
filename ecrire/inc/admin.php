@@ -215,7 +215,7 @@ function debut_admin($script, $action = '', $corps = '') {
 
 				return '';
 			}
-			$corps .= '<input type="hidden" name="validation_admin" value="' . $signal . '" />';
+			$corps .= '<input type="hidden" name="validation_admin" value="' . $signal . '">';
 			$suivant = _T('bouton_valider');
 			$js = '';
 		} else {
@@ -233,7 +233,7 @@ function debut_admin($script, $action = '', $corps = '') {
 				. "<span id='signal' class='formo'>" . $signal . '</span>'
 				. "<input type='hidden' id='fichier' name='fichier' value='"
 				. $signal
-				. "' />"
+				. "'>"
 				. _T('info_creer_repertoire_2', ['repertoire' => joli_repertoire($dir)])
 				. '</fieldset>';
 

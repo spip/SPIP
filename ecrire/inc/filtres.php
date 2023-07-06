@@ -503,7 +503,7 @@ function image_filtrer($args) {
 			return file_exists($path);
 		};
 		if ($is_local_file($is_file) || tester_url_absolue($is_file)) {
-			$res = $filtre("<img src='$is_file' />", ...$args);
+			$res = $filtre("<img src='$is_file'>", ...$args);
 			statut_effacer_images_temporaires(false); // desactiver pour les appels hors compilo
 			return $res;
 		}
@@ -542,7 +542,7 @@ function image_filtrer($args) {
 					&& preg_match(",this[.]src=['\"]([^'\"]+)['\"],ims", $mouseover, $match)
 				) {
 					$srcover = $match[1];
-					$srcover_filter = $filtre("<img src='" . $match[1] . "' />", ...$args);
+					$srcover_filter = $filtre("<img src='" . $match[1] . "'>", ...$args);
 					$srcover_filter = extraire_attribut($srcover_filter, 'src');
 					$reduit = str_replace($srcover, $srcover_filter, (string) $reduit);
 				}
@@ -1960,7 +1960,7 @@ function inserer_attribut(?string $balise, string $attribut, ?string $val, bool 
 	} else {
 		// preferer une balise " />" (comme <img />)
 		if (preg_match(',/>,', $balise)) {
-			$balise = preg_replace(',\s?/>,S', $insert . ' />', $balise, 1);
+			$balise = preg_replace(',\s?/>,S', $insert . '>', $balise, 1);
 		} // sinon une balise <a ...> ... </a>
 		else {
 			$balise = preg_replace(',\s?>,S', $insert . '>', $balise, 1);
@@ -2391,7 +2391,7 @@ function microformat2enclosure($tags) {
 				. ($url ? ' url="' . spip_htmlspecialchars($url) . '"' : '')
 				. ($type ? ' type="' . spip_htmlspecialchars($type) . '"' : '')
 				. ($length ? ' length="' . $length . '"' : '')
-				. ' />';
+				. '>';
 		}
 	}
 
@@ -2799,7 +2799,7 @@ function urls_absolues_css($contenu, $source) {
  * @filtre
  * @example
  *     ```
- *     [<link rel="stylesheet" href="(#CHEMIN{css/perso.css}|direction_css)" type="text/css" />]
+ *     [<link rel="stylesheet" href="(#CHEMIN{css/perso.css}|direction_css)" type="text/css">]
  *     ```
  * @param string $css
  *     Chemin vers le fichier CSS
@@ -3213,7 +3213,7 @@ function env_to_params($env, $ignore_params = []) {
 	if ($env) {
 		foreach ($env as $i => $j) {
 			if (is_string($j) && !in_array($i, $ignore_params)) {
-				$texte .= "<param name='" . attribut_html($i) . "'\n\tvalue='" . attribut_html($j) . "' />";
+				$texte .= "<param name='" . attribut_html($i) . "'\n\tvalue='" . attribut_html($j) . "'>";
 			}
 		}
 	}
@@ -3404,7 +3404,7 @@ function http_img_pack($img, $alt, $atts = '', $title = '', $options = []) {
 	return "<img src='" . attribut_html($img_file) . "'$alt"
 	. ($title ? ' title="' . attribut_html($title) . '"' : '')
 	. ' ' . ltrim($atts)
-	. ' />';
+	. '>';
 }
 
 /**
@@ -3499,7 +3499,7 @@ function helper_filtre_balise_img_svg_size($img, $size) {
  * @uses http_img_pack()
  *
  * @param string $img
- *   chemin vers un fichier ou balise `<img src='...' />` (generee par un filtre image par exemple)
+ *   chemin vers un fichier ou balise `<img src='...'>` (generee par un filtre image par exemple)
  * @param string $alt
  *   texte alternatif ; une valeur nulle pour explicitement ne pas avoir de balise alt sur l'image (au lieu d'un alt vide)
  * @param string $class

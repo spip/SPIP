@@ -129,11 +129,11 @@ function chercher_rubrique(
 				]
 			);
 			$confirm .= "\n<div class='confirmer_deplacement verdana2'>"
-				. "<div class='choix'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace' /><label for='confirme-deplace'>"
+				. "<div class='choix'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace'><label for='confirme-deplace'>"
 				. $scb .
 				"</label></div></div>\n";
 		} else {
-			$confirm .= "<input type='hidden' name='confirme_deplace' value='oui' />\n";
+			$confirm .= "<input type='hidden' name='confirme_deplace' value='oui'>\n";
 		}
 	}
 	$form .= $confirm;
@@ -143,7 +143,7 @@ function chercher_rubrique(
 				. '<input class="fondo submit btn" type="submit" value="' . _T('bouton_choisir') . '"/>'
 				. '</div>';
 		}
-		$form = "<input type='hidden' name='editer_$objet' value='oui' />\n" . $form;
+		$form = "<input type='hidden' name='editer_$objet' value='oui'>\n" . $form;
 		if ($action = charger_fonction("editer_$objet", 'action', true)) {
 			$form = generer_action_auteur(
 				"editer_$objet",
