@@ -310,6 +310,26 @@ function f_queue_affiche_milieu($flux) {
 }
 
 /**
+ * Afficher le message de mise à jour dans toutes les pages du privé pour les webmestres
+ *
+ * @pipeline affiche_milieu
+ * @param string $flux
+ * @return string
+ */
+function mise_a_jour_affiche_milieu($flux) {
+	if (
+		$GLOBALS['meta']['info_maj_spip']
+		&& autoriser('webmestre')
+	) {
+		$notice = recuperer_fond('prive/squelettes/inclure/mise_a_jour', []);
+		if (strlen(trim($notice))) {
+			$flux['data'] =  $notice . $flux['data'];
+		}
+	}
+	return $flux;
+}
+
+/**
  * Trouver l'objet qui correspond à l'exec de l'espace privé passé en argument
  *
  * renvoie false si pas d'objet en cours, ou un tableau associatif

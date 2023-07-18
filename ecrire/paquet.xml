@@ -42,6 +42,7 @@
 	<pipeline nom="affiche_droite" action="" />
 	<pipeline nom="affiche_gauche" action="" />
 	<pipeline nom="affiche_milieu" action="f_queue_affiche_milieu" />
+	<pipeline nom="affiche_milieu" action="mise_a_jour_affiche_milieu" />
 	<pipeline nom="affiche_pied" action="" />
 	<pipeline nom="affiche_enfants" action="" />
 	<pipeline nom="affiche_hierarchie" action="" />

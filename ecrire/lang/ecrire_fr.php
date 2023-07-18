@@ -52,6 +52,7 @@ return [
 	'bouton_effacer_tout' => 'Effacer TOUT',
 	'bouton_envoyer_message' => 'Message définitif : envoyer',
 	'bouton_fermer' => 'Fermer',
+	'bouton_mettre_a_jour' => 'Mettre à jour',
 	'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données',
 	'bouton_modifier' => 'Modifier',
 	'bouton_radio_afficher' => 'Afficher',
