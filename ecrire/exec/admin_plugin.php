@@ -106,6 +106,13 @@ function admin_plug_args($quoi, $erreur, $format) {
 	);
 
 	echo debut_droite();
+	echo pipeline(
+		'affiche_milieu',
+		[
+			'args' => ['exec' => 'admin_plugin'],
+			'data' => ''
+		]
+	);
 	echo gros_titre(_T('icone_admin_plugin'), '');
 
 	// Barre d'onglets de premier niveau
@@ -231,13 +238,6 @@ function admin_plug_args($quoi, $erreur, $format) {
 	});
 	");
 
-	echo pipeline(
-		'affiche_milieu',
-		[
-			'args' => ['exec' => 'admin_plugin'],
-			'data' => ''
-		]
-	);
 
 	echo fin_gauche(), fin_page();
 }
