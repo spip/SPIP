@@ -23,6 +23,7 @@
 - #5681 Reset la pagination quand on change de mode ou de sens de tri
 - #5528 Éviter des collisions avec les noms de cache des fichiers distants
 - #5669 Contenu principal toujours en pleine largeur sur petits écrans
+- Sur la page d'admin des plugins, mettre le pipeline `affiche_milieu` au début de page et pas en fin
 
 ### Deprecated
 
