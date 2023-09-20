@@ -29,10 +29,16 @@ function genie_mise_a_jour_dist($t) {
 	include_spip('inc/meta');
 	$maj = info_maj($GLOBALS['spip_version_branche']);
 	ecrire_meta('info_maj_spip', $maj ? ($GLOBALS['spip_version_branche'] . "|$maj") : '', 'non');
+	spip_log('Verification version SPIP : ' . ($maj ?: 'version a jour'), 'verifie_maj');
+
+	// notifier les webmestres d’une mise à jour mineure
+	$maj = info_maj_exists($GLOBALS['spip_version_branche']);
+	if ($maj['mineure'] && ($GLOBALS['meta']['derniere_maj_notifiee'] ?? '') !== $maj['mineure']) {
+		info_maj_notifier($maj['mineure']);
+		ecrire_meta('derniere_maj_notifiee', $maj['mineure'], 'non');
+	}
 
 	mise_a_jour_ecran_securite();
-
-	spip_log('Verification version SPIP : ' . ($maj ?: 'version a jour'), 'verifie_maj');
 
 	return 1;
 }
@@ -94,50 +100,35 @@ function mise_a_jour_ecran_securite() {
 }
 
 /**
+ * Indique les mises à jour majeures et mineures pour une version de SPIP
+ *
+ * @param string $version Version du SPIP à comparer
+ * @return array{mineure: string, majeure: string}
+ */
+function info_maj_exists(string $version): array {
+	// API V1
+	$contenu = info_maj_cache() ?? [];
+	return info_maj_versions($version, array_keys($contenu['versions'] ?? []));
+}
+
+/**
  * Vérifier si une nouvelle version de SPIP est disponible
  *
  * Repérer aussi si cette version est une version majeure de SPIP.
  *
- * @param string $version
- *      La version reçue ici est sous la forme x.y.z
- *      On la transforme par la suite pour avoir des integer ($maj, $min, $rev)
- *      et ainsi pouvoir mieux les comparer
- *
- * @return string
+ * @param string $version Version du SPIP à comparer
+ * @return string HTML présentant les mises à jour disponibles, s’il y en a
  */
 function info_maj(string $version): string {
-	include_spip('inc/plugin');
+	$maj = info_maj_exists($version);
 
-	// API V1
-	$contenu = info_maj_cache();
-	if (!$contenu) {
-		return '';
-	}
-
-	$maj = info_maj_versions($version, array_keys($contenu['versions'] ?? []));
 	if (!$maj['mineure'] && !$maj['majeure']) {
 		return '';
 	}
 
 	$message = [];
-	if ($maj['mineure'] && ($GLOBALS['meta']['derniere_maj_notifiee'] != $maj['mineure'])) {
+	if ($maj['mineure']) {
 		$message[] = _T('nouvelle_version_spip', ['version' => $maj['mineure']]);
-		$texte = recuperer_fond(
-			'notifications/mise_a_jour',
-			['raw' => true]
-		);
-		$destinataires = defined('_MAJ_NOTIF_EMAILS') ? _MAJ_NOTIF_EMAILS : array_column(sql_allfetsel('email', 'spip_auteurs', "statut='0minirezo' AND webmestre='oui'"), 'email');
-		if ($destinataires) {
-			include_spip('inc/notifications');
-			$destinataires = is_string($destinataires) ? array_map('trim', explode(',', $destinataires)) : $destinataires;
-			notifications_envoyer_mails(
-				$destinataires,
-				$texte,
-				'['. $GLOBALS['meta']['nom_site'] .'] '. _T('nouvelle_version_spip', ['version' => $maj['mineure']])
-			);
-		}
-		include_spip('inc/meta');
-		ecrire_meta('derniere_maj_notifiee', $maj['mineure'], 'non');
 	}
 	if ($maj['majeure']) {
 		$message[] = _T('nouvelle_version_spip_majeure', ['version' => $maj['majeure']]);
@@ -194,10 +185,15 @@ function info_maj_cache(): ?array {
  * - version mineure, quelque soit notre état actuel
  * - version majeure, seulement si la majeure est stable (pas alpha, beta, rc, ...)
  *
+ * @note
+ *   La version reçue ici est sous la forme x.y.z
+ *   On la transforme par la suite pour avoir des integer ($maj, $min, $rev)
+ *   et ainsi pouvoir mieux les comparer
+ *
  * @internal
  * @param string $version Notre version
  * @param string[] $versions Les dernières versions distantes
- * @return array<string, string> Version mineure supérieure, version majeure supérieure
+ * @return array{mineure: string, majeure: string} Version mineure supérieure, version majeure supérieure
  */
 function info_maj_versions(string $version, array $versions): array {
 	$maj = ['mineure' => '', 'majeure' => ''];
@@ -236,4 +232,36 @@ function info_maj_versions(string $version, array $versions): array {
 	}
 
 	return $maj;
+}
+
+
+/**
+ * Notifier les webmestre d’une nouvelle version existante (pour mettre à jour)
+ *
+ * La constante si définie `_MAJ_NOTIF_EMAILS` peut servir
+ * - soit à indiquer les emails à notifier à la place des webmestres du site
+ * - soit (falsy) pour empêcher cette notification
+ */
+function info_maj_notifier(string $version) {
+	$texte = recuperer_fond(
+		'notifications/mise_a_jour',
+		['raw' => true]
+	);
+	if (defined('_MAJ_NOTIF_EMAILS')) {
+		$destinataires = constant('_MAJ_NOTIF_EMAILS');
+	} else {
+		$destinataires = array_column(sql_allfetsel('email', 'spip_auteurs', "statut='0minirezo' AND webmestre='oui'"), 'email');
+	}
+	if ($destinataires) {
+		if (is_string($destinataires)) {
+			$destinataires = explode(',', $destinataires);
+		}
+		$destinataires = array_map('trim', $destinataires);
+		include_spip('inc/notifications');
+		notifications_envoyer_mails(
+			$destinataires,
+			$texte,
+			'['. $GLOBALS['meta']['nom_site'] .'] '. _T('nouvelle_version_spip', ['version' => $version])
+		);
+	}
 }
