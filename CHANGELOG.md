@@ -4,6 +4,7 @@
 
 ### Added
 
+- #3432 Notifier par email les webmestres du site lorsque SPIP dispose d’une mise à jour
 - #5807 Cache des squelettes réécrit en utilisant une librairie `spip/cache` (PSR-16)
 - #5806 Gestion des chemins (path) & leur cache réécrit en utilisant une librairie `spip/path`
 - #5565 Critère `{collate}` (remplace `{collecte}`)
