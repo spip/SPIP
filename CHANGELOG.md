@@ -24,6 +24,8 @@
 
 ### Fixed
 
+- #5761 Appeler les pipelines `pre_edition` et `post_edition` lorsqu'on modifie le statut d'une rubrique
+
 ### Deprecated
 
 - Fichiers de langue peuplant une variable globale. Retourner directement un array (valide à partir de SPIP 4.1)
