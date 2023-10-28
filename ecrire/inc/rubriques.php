@@ -56,6 +56,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function calculer_rubriques_if($id_rubrique, $modifs, $infos = [], $postdate = false) {
 	$statuts_publies = null;
 	$neuf = false;
+	$date_ancienne = sql_getfetsel('date', 'spip_rubriques', "id_rubrique=$id_rubrique");
 
 	// Compat avec l'ancienne signature
 	if (is_string($infos)) {
@@ -64,6 +65,24 @@ function calculer_rubriques_if($id_rubrique, $modifs, $infos = [], $postdate = f
 	if (!isset($infos['statut_ancien'])) {
 		$infos['statut_ancien'] = '';
 	}
+
+	// Pipeline pre_edition
+	$modifs = pipeline(
+		'pre_edition',
+		[
+			'args' => [
+				'table' => 'spip_rubriques',
+				'table_objet' => 'rubriques',
+				'spip_table_objet' => 'spip_rubriques',
+				'objet' => 'rubrique',
+				'id_objet' => $id_rubrique,
+				'action' => 'instituer',
+				'statut_ancien' => $infos['statut_ancien'],
+				'date_ancienne' => $date_ancienne,
+			],
+			'data' => $modifs
+		]
+	);
 
 	// On recherche quels statuts tester
 	if (
@@ -113,6 +132,25 @@ function calculer_rubriques_if($id_rubrique, $modifs, $infos = [], $postdate = f
 
 	$langues = calculer_langues_utilisees();
 	ecrire_meta('langues_utilisees', $langues);
+
+
+	// Pipeline post_edition
+	pipeline(
+		'post_edition',
+		[
+			'args' => [
+				'table' => 'spip_rubriques',
+				'table_objet' => 'rubriques',
+				'spip_table_objet' => 'spip_rubriques',
+				'objet' => 'rubrique',
+				'id_objet' => $id_rubrique,
+				'action' => 'instituer',
+				'statut_ancien' => $infos['statut_ancien'],
+				'date_ancienne' => $date_ancienne,
+			],
+			'data' => $modifs
+		]
+	);
 }
 
 
@@ -137,6 +175,7 @@ function publier_branche_rubrique($id_rubrique) {
 			['statut' => 'publie', 'date' => date('Y-m-d H:i:s')],
 			'id_rubrique=' . intval($id_rubrique)
 		);
+
 		$id_parent = sql_getfetsel('id_parent', 'spip_rubriques AS R', 'R.id_rubrique=' . intval($id_rubrique));
 		if (!$id_parent) {
 			break;
