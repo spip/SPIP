@@ -101,9 +101,6 @@ button:focus, input[type=submit]:focus { background: #881644; }
 .page_login .formulaire_spip fieldset p {
 	margin-bottom: 1em;
 }
-.page_login h1, .page_login h3 {
-	display: none;
-}
 .page_login .formulaire_spip fieldset .editer {
 	margin-bottom: 0.5em;
 }
@@ -169,9 +166,12 @@ input.text:focus{
 		margin-top: 50px;
 	}
 }
+.page_login h1, .page_login h3 {
+	margin: 1rem;
+	text-align: center;
+}
 .page_login h1 {
-	font-size: 1.4em;
-	margin-bottom: 1em;
+	font-size: 3em;
 }
 
 .page_login p.details {
@@ -180,7 +180,7 @@ input.text:focus{
 	padding-top: 0.3em;
 }
 
-.page_login h1, .page_login p.details a {
+.page_login h1, .page_login h3, .page_login p.details a {
 	color: white;
 	text-shadow: 0 0 3px var(--spip-login-color-gray-dark);
 	opacity: 0.7;
