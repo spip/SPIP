@@ -24,6 +24,8 @@
 
 ### Fixed
 
+- #5766 Pipeline `ajouter_menus`: transmettre les arguments de `definir_barre_boutons()`
+
 ### Deprecated
 
 - Fichiers de langue peuplant une variable globale. Retourner directement un array (valide à partir de SPIP 4.1)
