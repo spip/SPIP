@@ -143,7 +143,18 @@ function definir_barre_boutons($contexte = [], $icones = true, $autorise = true)
 			}
 		}
 	}
-	$boutons_admin = pipeline('ajouter_menus', $boutons_admin);
+
+	$boutons_admin = pipeline(
+		'ajouter_menus',
+		[
+			'args' => [
+				'contexte' => $contexte,
+				'icones' => $icones,
+				'autorise' => $autorise
+			],
+			'data' => $boutons_admin
+		]
+	);
 
 	// définir les favoris et positions d’origine
 	if ($boutons_admin) {
