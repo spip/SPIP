@@ -25,7 +25,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     il faut aller le chercher à la main
  *
  * @uses auth_informer_login()
- * @uses json_export()
  *
  * @param string $bof
  *     Date de la demande
