@@ -82,11 +82,11 @@ button:focus, input[type=submit]:focus { background: #881644; }
 .page_login .formulaire_login, .page_login .formulaire_spip.pass {
 	width: 90%;
 	max-width: 400px;
-	position: absolute;
+	position: relative;
 	left: 50%;
-	top: 50%;
-	margin-top: 30px;
-	transform: translate(-50%, -50%);
+	margin-top: 100px;
+	margin-bottom: 1.5em;
+	transform: translateX(-50%);
 }
 .page_login .formulaire_spip fieldset {
 	background: var(--spip-login-color-gray-dark);
@@ -149,23 +149,6 @@ input.text:focus{
 .page_login .boutons {
 	margin-top: 0.5em;
 }
-@media (min-height: 600px) {
-	.page_login #spip_logo_auteur {
-		top: -130px;
-		margin-left: -50px;
-		width: 100px;
-		height: 100px;
-	}
-	.page_login .formulaire_spip fieldset {
-		padding: 20px;
-	}
-	.page_login .boutons {
-		margin-top: 1.5em;
-	}
-	.page_login .formulaire_login {
-		margin-top: 50px;
-	}
-}
 .page_login h1, .page_login h3 {
 	margin: 1rem;
 	text-align: center;
@@ -215,7 +198,9 @@ input.text:focus{
 	object-fit: cover;
 }
 .page_login p.retour {
-	position: absolute;
+	position: relative;
+	float: left;
+	width: fit-content;
 	left: 20px;
 	bottom: 10px;
 	background: var(--spip-login-color-gray-lighter);
@@ -230,7 +215,8 @@ input.text:focus{
 	content: "⬅︎ ";
 }
 .page_login p.generator {
-	position: absolute;
+	position: relative;
+	float: right;
 	right: 10px;
 	bottom: 10px;
 }
@@ -262,3 +248,36 @@ input.text:focus{
 	background: rgba(0,0,0, 0.5);
 }
 */
+
+/* Portrait mobile */
+@media (min-height: 600px) {
+	.page_login #spip_logo_auteur {
+		top: -130px;
+		margin-left: -50px;
+		width: 100px;
+		height: 100px;
+	}
+	.page_login .formulaire_spip fieldset {
+		padding: 20px;
+	}
+	.page_login .boutons {
+		margin-top: 1.5em;
+	}
+	.page_login .formulaire_login {
+		margin-top: 150px;
+	}
+	.page_login p.retour, .page_login p.generator {
+		position: absolute;
+		float: none;
+	}
+}
+
+/* Vraiment plus grand écran, là on centre tout */
+@media (min-width: 800px) and (min-height: 600px) {
+	.page_login .formulaire_login {
+		position: absolute;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		margin-top: 50px;
+	}
+}
