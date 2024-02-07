@@ -82,6 +82,7 @@
 	<pipeline nom="formulaire_traiter" action="cvtautosave_formulaire_traiter" inclure="inc/cvt_autosave.php" />
 	<pipeline nom="formulaire_fond" action="" />
 	<pipeline nom="formulaire_admin" action="" />
+	<pipeline nom="get_spip_doc" action="" />
 	<pipeline nom="header_prive" action="" />
 	<pipeline nom="header_prive_css" action="" />
 	<pipeline nom="image_preparer_filtre" action="" />
