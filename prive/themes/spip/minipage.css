@@ -153,6 +153,7 @@ button:active {
 	background: var(--minipage-color-theme);
 	background: radial-gradient(circle, var(--minipage-color-theme) 20%, var(--minipage-color-theme-dark) 100%);
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	min-height: 100vh;
