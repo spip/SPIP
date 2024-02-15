@@ -4526,6 +4526,12 @@ function generer_objet_info($id_objet, string $type_objet, string $info, string 
 		if (!$desc) {
 			return $objets[$type_objet] = false;
 		}
+		// eviter les fuites memoires en cas d'appel répété par un cli...
+		if (!empty($objets[$type_objet]) and count($objets[$type_objet]) > 1000) {
+			$oldest = array_keys($objets[$type_objet]);
+			$oldest = reset($oldest);
+			unset($objets[$type_objet][$oldest]);
+		}
 
 		// Si on demande le titre, on le gere en interne
 		$champ_titre = '';
